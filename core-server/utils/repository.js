@@ -16,8 +16,7 @@ ignoreEnvironmentVariables: defaults to false
 */
 exports.getAllPlugins = function(options) {
 	options = options || {};
-	var fs = require("fs"),
-		path = require("path"),
+	var path = require("path"),
 		tiddlers = {};
 	// Collect up the library plugins
 	var collectPlugins = function(folder) {

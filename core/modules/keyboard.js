@@ -187,8 +187,7 @@ KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor,options) {
 			metaKey: false
 		};
 	for(var t=0; t<components.length; t++) {
-		var s = components[t].toLowerCase(),
-			c = s.charCodeAt(0);
+		var s = components[t].toLowerCase();
 		// Look for modifier keys
 		if(s === "ctrl") {
 			info.ctrlKey = true;

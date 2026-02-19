@@ -24,8 +24,7 @@ exports.params = [
 Run the macro
 */
 exports.run = function(filter,format) {
-	var self = this,
-		tiddlers = this.wiki.filterTiddlers(filter),
+	var tiddlers = this.wiki.filterTiddlers(filter),
 		tiddler,
 		fields = [],
 		t,f;

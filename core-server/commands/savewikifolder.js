@@ -183,7 +183,7 @@ WikiFolderMaker.prototype.saveCustomPlugin = function(pluginTiddler) {
 };
 
 WikiFolderMaker.prototype.saveTiddler = function(directory,tiddler) {
-	var title = tiddler.fields.title, fileInfo, pathFilters, extFilters;
+	var fileInfo, pathFilters, extFilters;
 	if(this.wiki.tiddlerExists("$:/config/FileSystemPaths")) {
 		pathFilters = this.wiki.getTiddlerText("$:/config/FileSystemPaths","").split("\n");
 	}

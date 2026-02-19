@@ -355,7 +355,7 @@ Dispay a password prompt
 */
 Syncer.prototype.displayLoginPrompt = function() {
 	var self = this;
-	var promptInfo = $tw.passwordPrompt.createPrompt({
+	$tw.passwordPrompt.createPrompt({
 		serviceName: $tw.language.getString("LoginToTiddlySpace"),
 		callback: function(data) {
 			self.login(data.username,data.password,function(err,isLoggedIn) {

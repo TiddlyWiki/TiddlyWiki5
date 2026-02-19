@@ -9,8 +9,6 @@ Render individual tiddlers and save the results to the specified files
 
 "use strict";
 	
-var widget = require("$:/core/modules/widgets/widget.js");
-	
 exports.info = {
 	name: "render",
 	synchronous: true

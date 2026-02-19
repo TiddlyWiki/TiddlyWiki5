@@ -12,8 +12,6 @@ On the server this file is executed directly to boot TiddlyWiki. In the browser,
 
 var _boot = (function($tw) {
 
-/*jslint node: true, browser: true */
-/*global modules: false, $tw: false */
 "use strict";
 
 // Include bootprefix if we're not given module data
@@ -727,7 +725,7 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	var self = this;
 	form.addEventListener("submit",function(event) {
 		// Collect the form data
-		var data = {},t;
+		var data = {};
 		$tw.utils.each(form.elements,function(element) {
 			if(element.name && element.value) {
 				data[element.name] = element.value;
@@ -891,7 +889,6 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 	if(!moduleInfo) {
 		// We could not find the module on this path
 		// Try to defer to browserify etc, or node
-		var deferredModule;
 		if($tw.browser) {
 			if(window.require) {
 				try {
@@ -1146,8 +1143,7 @@ enableIndexers - Array of indexer names to enable, or null to use all available 
 */
 $tw.Wiki = function(options) {
 	options = options || {};
-	var self = this,
-		tiddlers = Object.create(null), // Hashmap of tiddlers
+	var tiddlers = Object.create(null), // Hashmap of tiddlers
 		tiddlerTitles = null, // Array of tiddler titles
 		getTiddlerTitles = function() {
 			if(!tiddlerTitles) {
@@ -1439,8 +1435,7 @@ $tw.Wiki = function(options) {
 
 	// Unregister the plugin tiddlers of a particular type, or null/undefined for any type, optionally restricting unregistering to an array of tiddler titles. Returns an array of the titles affected
 	this.unregisterPluginTiddlers = function(pluginType,titles) {
-		var self = this,
-			unregisteredTitles = [];
+		var unregisteredTitles = [];
 		// Remove any previous registered plugins of this type
 		for(var t=pluginTiddlers.length-1; t>=0; t--) {
 			var tiddler = pluginTiddlers[t];
@@ -1454,7 +1449,6 @@ $tw.Wiki = function(options) {
 
 	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers
 	this.unpackPluginTiddlers = function() {
-		var self = this;
 		// Sort the plugin titles by the `plugin-priority` field, if this field is missing, default to 1
 		pluginTiddlers.sort(function(a, b) {
 			var priorityA = "plugin-priority" in a.fields ? a.fields["plugin-priority"] : 1;

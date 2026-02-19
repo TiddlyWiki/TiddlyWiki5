@@ -9,7 +9,6 @@ Modal message mechanism
 
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
 var navigator = require("$:/core/modules/widgets/navigator.js");
 
 var Modal = function(wiki) {

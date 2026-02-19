@@ -18,8 +18,7 @@ var GitLabSaver = function(wiki) {
 
 GitLabSaver.prototype.save = function(text,method,callback) {
 	/* See https://docs.gitlab.com/ee/api/repository_files.html */
-	var self = this,
-		username = this.wiki.getTiddlerText("$:/GitLab/Username"),
+	var username = this.wiki.getTiddlerText("$:/GitLab/Username"),
 		password = $tw.utils.getPassword("gitlab"),
 		repo = this.wiki.getTiddlerText("$:/GitLab/Repo"),
 		path = this.wiki.getTiddlerText("$:/GitLab/Path",""),
@@ -79,7 +78,6 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 					if(err) {
 						return callback(err);
 					}
-					var putResponseData = $tw.utils.parseJSONSafe(putResponseDataJson);
 					callback(null);
 				}
 			});

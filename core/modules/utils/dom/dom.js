@@ -144,7 +144,7 @@ exports.getPassword = function(name) {
 Force layout of a dom node and its descendents
 */
 exports.forceLayout = function(element) {
-	var dummy = element.offsetWidth;
+	void element.offsetWidth;
 };
 
 /*

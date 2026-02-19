@@ -46,8 +46,7 @@ exports.copyDirectory = function(srcPath,dstPath) {
 	}
 	// Function to copy a folder full of files
 	var copy = function(srcPath,dstPath) {
-		var srcStats = fs.lstatSync(srcPath),
-			dstExists = fs.existsSync(dstPath);
+		var srcStats = fs.lstatSync(srcPath);
 		if(srcStats.isFile()) {
 			$tw.utils.copyFile(srcPath,dstPath);
 		} else if(srcStats.isDirectory()) {

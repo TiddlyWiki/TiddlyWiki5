@@ -101,7 +101,6 @@ GiteaSaver.prototype.upload = function(uri,method,headers,data,callback) {
 			if(err) {
 				return callback(err);
 			}
-			var putResponseData = $tw.utils.parseJSONSafe(putResponseDataJson);
 			callback(null);
 		}
 	});

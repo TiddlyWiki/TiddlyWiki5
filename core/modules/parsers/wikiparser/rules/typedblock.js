@@ -25,8 +25,6 @@ $$$
 
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
-
 exports.name = "typedblock";
 exports.types = {block: true};
 

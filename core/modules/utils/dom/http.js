@@ -61,7 +61,6 @@ HttpClient.prototype.initiateHttpRequest = function(options) {
 };
 
 HttpClient.prototype.cancelAllHttpRequests = function() {
-	var self = this;
 	if(this.requests.length > 0) {
 		for(var t=this.requests.length - 1; t--; t>=0) {
 			var requestInfo = this.requests[t];
@@ -276,7 +275,7 @@ exports.httpRequest = function(options) {
 		returnProp = options.returnProp || "responseText",
 		request = new XMLHttpRequest(),
 		data = "",
-		f,results;
+		results;
 	// Massage the data hashmap into a string
 	if(options.data) {
 		if(typeof options.data === "string") { // Already a string

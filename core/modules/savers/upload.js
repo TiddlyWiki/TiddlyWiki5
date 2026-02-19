@@ -48,7 +48,6 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	}
 	// Assemble the header
 	var boundary = "---------------------------" + "AaB03x";
-	var uploadFormName = "UploadPlugin";
 	var head = [];
 	head.push("--" + boundary + "\r\nContent-disposition: form-data; name=\"UploadPlugin\"\r\n");
 	head.push("backupDir=" + backupDir + ";user=" + username + ";password=" + password + ";uploaddir=" + uploadDir + ";;"); 

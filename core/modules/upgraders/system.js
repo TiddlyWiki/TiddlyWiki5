@@ -14,8 +14,7 @@ var DONT_IMPORT_LIST = ["$:/Import", "$:/build"],
 	WARN_IMPORT_PREFIX_LIST = ["$:/core/modules/"];
 
 exports.upgrade = function(wiki,titles,tiddlers) {
-	var self = this,
-		messages = {},
+	var messages = {},
 		showAlert = false;
 	// Check for tiddlers on our list
 	$tw.utils.each(titles,function(title) {

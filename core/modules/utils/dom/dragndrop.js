@@ -38,8 +38,7 @@ exports.makeDraggable = function(options) {
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
 				titles = dragTiddler ? [dragTiddler] : [],
 				startActions = options.startActions,
-				variables,
-				domNodeRect;
+				variables;
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}

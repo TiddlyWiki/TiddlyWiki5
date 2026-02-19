@@ -25,7 +25,6 @@ Command.prototype.execute = function() {
 		return "Missing filename filter";
 	}
 	var self = this,
-		fs = require("fs"),
 		path = require("path"),
 		result = null,
 		wiki = this.commander.wiki,

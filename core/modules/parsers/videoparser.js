@@ -17,8 +17,7 @@ var VideoParser = function(type,text,options) {
 				controls: {type: "string", value: "controls"},
 				style: {type: "string", value: "width: 100%; object-fit: contain"}
 			}
-		},
-		src;
+		};
 	if(options._canonical_uri) {
 		element.attributes.src = {type: "string", value: options._canonical_uri};
 	} else if(text) {

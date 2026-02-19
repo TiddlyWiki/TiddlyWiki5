@@ -10,7 +10,6 @@ Serve tiddlers over http
 "use strict";
 
 if($tw.node) {
-	var util = require("util"),
 		fs = require("fs"),
 		url = require("url"),
 		path = require("path"),
@@ -211,7 +210,6 @@ Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 Server.prototype.findMatchingRoute = function(request,state) {
 	for(var t=0; t<this.routes.length; t++) {
 		var potentialRoute = this.routes[t],
-			pathRegExp = potentialRoute.path,
 			pathname = state.urlInfo.pathname,
 			match;
 		if(state.pathPrefix) {

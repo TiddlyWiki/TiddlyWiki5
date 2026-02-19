@@ -26,8 +26,6 @@ exports.init = function(parser) {
 Parse the most recent match
 */
 exports.parse = function() {
-	// Get all the details of the match
-	var entityString = this.match[1];
 	// Move past the macro call
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Return the entity

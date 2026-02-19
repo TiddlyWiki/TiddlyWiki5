@@ -63,7 +63,6 @@ var TW_Style = function(el) {
 		},
 		// Method to set styles using a string (e.g. "color:red; background-color:blue;")
 		set: function(str) {
-			var self = this;
 			str = str || "";
 			$tw.utils.each(str.split(";"),function(declaration) {
 				var parts = declaration.split(":"),
