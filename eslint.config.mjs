@@ -311,5 +311,14 @@ js.configs.recommended,
 
 },
     es2017rules,
-    es2023rules
+    es2023rules,
+    {
+        files: ["tiddlywiki.js"],
+        plugins:  {
+		    "es-x": esx
+	    },
+        rules: {
+   	    	"es-x/no-hashbang": "off"         
+        }
+    }
 ]);
