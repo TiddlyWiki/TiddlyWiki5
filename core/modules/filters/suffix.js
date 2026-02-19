@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/suffix.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for checking if a title ends with a suffix
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.suffix = function(source,operator,options) {
 	var results = [],
 		suffixes = (operator.suffixes || [])[0] || [];

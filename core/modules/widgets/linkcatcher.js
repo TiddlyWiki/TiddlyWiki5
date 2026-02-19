@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/linkcatcher.js
 type: application/javascript
 module-type: widget
-
-Linkcatcher widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var LinkCatcherWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 LinkCatcherWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 LinkCatcherWidget.prototype.render = function(parent,nextSibling) {
 	this.addEventListeners([
 		{type: "tm-navigate", handler: "handleNavigateEvent"}
@@ -33,9 +24,6 @@ LinkCatcherWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 LinkCatcherWidget.prototype.execute = function() {
 	// Get our parameters
 	this.catchTo = this.getAttribute("to");

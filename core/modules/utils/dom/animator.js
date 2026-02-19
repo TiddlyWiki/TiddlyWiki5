@@ -2,9 +2,6 @@
 title: $:/core/modules/utils/dom/animator.js
 type: application/javascript
 module-type: utils
-
-Orchestrates animations and transitions
-
 \*/
 
 "use strict";
@@ -31,7 +28,7 @@ Animator.prototype.perform = function(type,domNode,options) {
 			}
 		};
 	}
-	// Call the animation
+
 	chosenAnimation(domNode,options);
 };
 

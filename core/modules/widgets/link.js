@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/link.js
 type: application/javascript
 module-type: widget
-
-Link widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var LinkWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 LinkWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 LinkWidget.prototype.render = function(parent,nextSibling) {
 	// Save the parent dom node
 	this.parentDomNode = parent;
@@ -55,9 +46,6 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 	}
 };
 
-/*
-Render this widget into the DOM
-*/
 LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	var self = this;
 	// Sanitise the specified tag
@@ -65,7 +53,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
 		tag = "a";
 	}
-	// Create our element
+
 	var namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"}),
 		domNode = this.document.createElementNS(namespace,tag);
 	// Assign classes
@@ -91,7 +79,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	if(classes.length > 0) {
 		domNode.setAttribute("class",classes.join(" "));
 	}
-	// Set an href
+
 	var wikilinkTransformFilter = this.getVariable("tv-filter-export-link"),
 		wikiLinkText;
 	if(wikilinkTransformFilter) {
@@ -106,17 +94,17 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		wikiLinkText = $tw.utils.replaceString(wikiLinkTemplate,"$uri_encoded$",$tw.utils.encodeURIComponentExtended(this.to));
 		wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$uri_doubleencoded$",$tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(this.to)));
 	}
-	// Override with the value of tv-get-export-link if defined
+
 	wikiLinkText = this.getVariable("tv-get-export-link",{params: [{name: "to",value: this.to}],defaultValue: wikiLinkText});
 	if(tag === "a") {
 		var namespaceHref = (namespace === "http://www.w3.org/2000/svg") ? "http://www.w3.org/1999/xlink" : undefined;
 		domNode.setAttributeNS(namespaceHref,"href",wikiLinkText);
 	}
-	// Set the tabindex
+
 	if(this.tabIndex) {
 		domNode.setAttribute("tabindex",this.tabIndex);
 	}
-	// Set the tooltip
+
 	// HACK: Performance issues with re-parsing the tooltip prevent us defaulting the tooltip to "<$transclude field='tooltip'><$transclude field='title'/></$transclude>"
 	var tooltipWikiText = this.tooltip || this.getVariable("tv-wikilink-tooltip");
 	if(tooltipWikiText) {
@@ -152,7 +140,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	} else if(this.draggable === "no") {
 		domNode.setAttribute("draggable","false");
 	}
-	// Assign data- attributes
+
 	this.assignAttributes(domNode,{
 		sourcePrefix: "data-",
 		destPrefix: "data-"
@@ -193,9 +181,6 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 	return false;
 };
 
-/*
-Compute the internal state of the widget
-*/
 LinkWidget.prototype.execute = function() {
 	// Pick up our attributes
 	this.to = this.getAttribute("to",this.getVariable("currentTiddler"));
@@ -223,9 +208,6 @@ LinkWidget.prototype.execute = function() {
 	this.makeChildWidgets(templateTree);
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 LinkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0 || changedTiddlers[this.to]) {

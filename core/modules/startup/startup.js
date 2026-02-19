@@ -2,9 +2,6 @@
 title: $:/core/modules/startup.js
 type: application/javascript
 module-type: startup
-
-Miscellaneous startup logic for both the client and server.
-
 \*/
 
 "use strict";
@@ -20,12 +17,12 @@ exports.startup = function() {
 		$tw.browser.isIE = (/msie|trident/i.test(navigator.userAgent));
 		$tw.browser.isFirefox = !!document.mozFullScreenEnabled;
 		// 2023-07-21 Edge returns UA below. So we use "isChromeLike"
-		//'mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/114.0.0.0 safari/537.36 edg/114.0.1823.82'
+
 		$tw.browser.isChromeLike = navigator.userAgent.toLowerCase().indexOf("chrome") > -1;
 		$tw.browser.hasTouch = !!window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
 		$tw.browser.isMobileChrome = $tw.browser.isChromeLike && $tw.browser.hasTouch;
 	}
-	// Platform detection
+
 	$tw.platform = {};
 	if($tw.browser) {
 		$tw.platform.isMac = /Mac/.test(navigator.platform);
@@ -47,7 +44,7 @@ exports.startup = function() {
 				break;
 		}
 	}
-	// Initialise version
+
 	$tw.version = $tw.utils.extractVersionInfo();
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
@@ -91,7 +88,7 @@ exports.startup = function() {
 			handlerMethod: "handleKeydownEvent"
 		}]);
 	}
-	// Execute any startup actions
+
 	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
 	if($tw.browser) {
 		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");
@@ -99,7 +96,7 @@ exports.startup = function() {
 	if($tw.node) {
 		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
 	}
-	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
+
 	$tw.wiki.clearTiddlerEventQueue();
 	// Find a working syncadaptor
 	$tw.syncadaptor = undefined;

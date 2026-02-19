@@ -2,9 +2,6 @@
 title: $:/core/modules/editor/engines/simple.js
 type: application/javascript
 module-type: library
-
-Text editor engine based on a simple input or textarea tag
-
 \*/
 
 "use strict";
@@ -30,7 +27,7 @@ function SimpleEngine(options) {
 	} else {
 		this.domNode.value = this.value;
 	}
-	// Set the attributes
+
 	if(this.widget.editType && this.widget.editTag !== "textarea") {
 		this.domNode.setAttribute("type",this.widget.editType);
 	}
@@ -55,7 +52,7 @@ function SimpleEngine(options) {
 	if(this.widget.isDisabled === "yes") {
 		this.domNode.setAttribute("disabled",true);
 	}
-	// Add an input event handler
+
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
 		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
@@ -65,22 +62,16 @@ function SimpleEngine(options) {
 	this.widget.domNodes.push(this.domNode);
 }
 
-/*
-Set the text of the engine if it doesn't currently have focus
-*/
 SimpleEngine.prototype.setText = function(text,type) {
 	if(!this.domNode.isTiddlyWikiFakeDom) {
 		if(this.domNode.ownerDocument.activeElement !== this.domNode || text === "") {
 			this.updateDomNodeText(text);
 		}
-		// Fix the height if needed
+
 		this.fixHeight();
 	}
 };
 
-/*
-Update the DomNode with the new text
-*/
 SimpleEngine.prototype.updateDomNodeText = function(text) {
 	try {
 		this.domNode.value = text;
@@ -89,16 +80,10 @@ SimpleEngine.prototype.updateDomNodeText = function(text) {
 	}
 };
 
-/*
-Get the text of the engine
-*/
 SimpleEngine.prototype.getText = function() {
 	return this.domNode.value;
 };
 
-/*
-Fix the height of textarea to fit content
-*/
 SimpleEngine.prototype.fixHeight = function() {
 	// If .editRows is initialised, it takes precedence
 	if((this.widget.editTag === "textarea") && !this.widget.editRows) {
@@ -114,9 +99,6 @@ SimpleEngine.prototype.fixHeight = function() {
 	}
 };
 
-/*
-Focus the engine node
-*/
 SimpleEngine.prototype.focus = function() {
 	if(this.domNode.focus) {
 		this.domNode.focus();
@@ -126,9 +108,6 @@ SimpleEngine.prototype.focus = function() {
 	}
 };
 
-/*
-Handle a dom "input" event which occurs when the text has changed
-*/
 SimpleEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
@@ -138,9 +117,6 @@ SimpleEngine.prototype.handleInputEvent = function(event) {
 	return true;
 };
 
-/*
-Handle a dom "focus" event
-*/
 SimpleEngine.prototype.handleFocusEvent = function(event) {
 	if(this.widget.editCancelPopups) {
 		$tw.popup.cancel(0);
@@ -156,16 +132,10 @@ SimpleEngine.prototype.handleFocusEvent = function(event) {
 	return true;
 };
 
-/*
-Create a blank structure representing a text operation
-*/
 SimpleEngine.prototype.createTextOperation = function() {
 	return null;
 };
 
-/*
-Execute a text operation
-*/
 SimpleEngine.prototype.executeTextOperation = function(operation) {
 };
 

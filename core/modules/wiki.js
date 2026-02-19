@@ -2,19 +2,6 @@
 title: $:/core/modules/wiki.js
 type: application/javascript
 module-type: wikimethod
-
-Extension methods for the $tw.Wiki object
-
-Adds the following properties to the wiki object:
-
-* `eventListeners` is a hashmap by type of arrays of listener functions
-* `changedTiddlers` is a hashmap describing changes to named tiddlers since wiki change events were last dispatched. Each entry is a hashmap containing two fields:
-	modified: true/false
-	deleted: true/false
-* `changeCount` is a hashmap by tiddler title containing a numerical index that starts at zero and is incremented each time a tiddler is created changed or deleted
-* `caches` is a hashmap by tiddler title containing a further hashmap of named cache objects. Caches are automatically cleared when a tiddler is modified or deleted
-* `globalCache` is a hashmap by cache name of cache objects that are cleared whenever any tiddler change occurs
-
 \*/
 
 "use strict";
@@ -24,9 +11,6 @@ var widget = require("$:/core/modules/widgets/widget.js");
 var USER_NAME_TITLE = "$:/status/UserName",
 	TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
 
-/*
-Add available indexers to this wiki
-*/
 exports.addIndexersToWiki = function() {
 	var self = this;
 	$tw.utils.each($tw.modules.applyMethods("indexer"),function(Indexer,name) {
@@ -34,13 +18,6 @@ exports.addIndexersToWiki = function() {
 	});
 };
 
-/*
-Get the value of a text reference. Text references can have any of these forms:
-	<tiddlertitle>
-	<tiddlertitle>!!<fieldname>
-	!!<fieldname> - specifies a field of the current tiddlers
-	<tiddlertitle>##<index>
-*/
 exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 	var tr = $tw.utils.parseTextReference(textRef),
 		title = tr.title || currTiddlerTitle;
@@ -121,7 +98,7 @@ exports.removeEventListener = function(type,listener) {
 	}
 };
 
-exports.dispatchEvent = function(type /*, args */) {
+exports.dispatchEvent = function(type) {
 	var args = Array.prototype.slice.call(arguments,1),
 		listeners = this.eventListeners[type];
 	if(listeners) {
@@ -132,15 +109,6 @@ exports.dispatchEvent = function(type /*, args */) {
 	}
 };
 
-/*
-Causes a tiddler to be marked as changed, incrementing the change count, and triggers event handlers.
-This method should be called after the changes it describes have been made to the wiki.tiddlers[] array.
-	title: Title of tiddler
-	isDeleted: defaults to false (meaning the tiddler has been created or modified),
-		true if the tiddler has been deleted
-	isShadow: defaults to false (meaning the change applies to the normal tiddler),
-		true if the tiddler being changed is a shadow tiddler
-*/
 exports.enqueueTiddlerEvent = function(title,isDeleted,isShadow) {
 	// Record the touch in the list of changed tiddlers
 	this.changedTiddlers = this.changedTiddlers || Object.create(null);
@@ -154,7 +122,7 @@ exports.enqueueTiddlerEvent = function(title,isDeleted,isShadow) {
 	} else {
 		this.changeCount[title] = 1;
 	}
-	// Trigger events
+
 	this.eventListeners = this.eventListeners || {};
 	if(!this.eventsTriggered) {
 		var self = this;
@@ -188,10 +156,6 @@ exports.getChangeCount = function(title) {
 	}
 };
 
-/*
-Generate an unused title from the specified base
-options.prefix must be a string
-*/
 exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
 	var title = baseTitle,
@@ -251,9 +215,6 @@ exports.isBinaryTiddler = function(title) {
 	}
 };
 
-/*
-Like addTiddler() except it will silently reject any plugin tiddlers that are older than the currently loaded version. Returns true if the tiddler was imported
-*/
 exports.importTiddler = function(tiddler) {
 	var existingTiddler = this.getTiddler(tiddler.fields.title);
 	// Check if we're dealing with a plugin
@@ -378,7 +339,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 				titles.sort((a,b) => sorter.compare(b, a));
 			} else {
 				titles.sort((a,b) => sorter.compare(a, b));
-			}	
+			}
 		} else {
 			titles.sort(function(a,b) {
 				var x,y;
@@ -508,9 +469,6 @@ exports.getTiddlerLinks = function(title) {
 	}).slice(0);
 };
 
-/*
-Return an array of tiddler titles that link to the specified tiddler
-*/
 exports.getTiddlerBacklinks = function(targetTitle) {
 	var self = this,
 		backIndexer = this.getIndexer("BackIndexer"),
@@ -529,10 +487,6 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 	return backlinks.slice(0);
 };
 
-
-/*
-Return an array of tiddler titles that are directly transcluded within the given parse tree. `title` is the tiddler being parsed, we will ignore its self-referential transclusions, only return
- */
 exports.extractTranscludes = function(parseTreeRoot, title) {
 	// Count up the transcludes
 	var transcludes = [],
@@ -557,13 +511,13 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 							value = parseTreeNode.attributes.tiddler.value;
 						}
 					} else if(parseTreeNode.attributes.$field && parseTreeNode.attributes.$field.type === "string") {
-						// Empty value (like `<$transclude $field='created'/>`) means self-referential transclusion. 
+						// Empty value (like `<$transclude $field='created'/>`) means self-referential transclusion.
 						value = title;
 					} else if(parseTreeNode.attributes.field && parseTreeNode.attributes.field.type === "string") {
 						// Old usage with Empty value (like `<$transclude field='created'/>`)
 						value = title;
 					}
-					// Deduplicate the result.
+
 					if(value && transcludes.indexOf(value) === -1) {
 						$tw.utils.pushTop(transcludes,value);
 					}
@@ -577,10 +531,6 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 	return transcludes;
 };
 
-
-/*
-Return an array of tiddler titles that are transcluded from the specified tiddler
-*/
 exports.getTiddlerTranscludes = function(title) {
 	var self = this;
 	// We'll cache the transcludes so they only get computed if the tiddler changes
@@ -758,9 +708,9 @@ exports.sortByList = function(array,listTitle) {
 				// If a new position is specified, let's move it
 				if(newPos !== -1) {
 					// get its current Pos, and make sure
-					// sure that it's _actually_ in the list
+
 					// and that it would _actually_ move
-					// (#4275) We don't bother calling
+
 					//         indexOf unless we have a new
 					//         position to work with
 					var currPos = titles.indexOf(title);
@@ -788,14 +738,14 @@ exports.sortByList = function(array,listTitle) {
 				titles.push(title);
 			}
 		}
-		// Then place any remaining entries
+
 		for(t=0; t<array.length; t++) {
 			title = array[t];
 			if(list.indexOf(title) === -1) {
 				titles.push(title);
 			}
 		}
-		// Finally obey the list-before and list-after fields of each tiddler in turn
+
 		var sortedTitles = titles.slice(0);
 		for(t=0; t<sortedTitles.length; t++) {
 			title = sortedTitles[t];
@@ -816,9 +766,6 @@ exports.getSubTiddler = function(title,subTiddlerTitle) {
 	return null;
 };
 
-/*
-Retrieve a tiddler as a JSON string of the fields
-*/
 exports.getTiddlerAsJson = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {
@@ -849,19 +796,6 @@ exports.getTiddlersAsJson = function(filter,spaces) {
 	return JSON.stringify(data,null,spaces);
 };
 
-/*
-Get the content of a tiddler as a JavaScript object. How this is done depends on the type of the tiddler:
-
-application/json: the tiddler JSON is parsed into an object
-application/x-tiddler-dictionary: the tiddler is parsed as sequence of name:value pairs
-
-Other types currently just return null.
-
-titleOrTiddler: string tiddler title or a tiddler object
-defaultData: default data to be returned if the tiddler is missing or doesn't contain data
-
-Note that the same value is returned for repeated calls for the same tiddler data. The value is frozen to prevent modification; otherwise modifications would be visible to all callers
-*/
 exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 	var self = this,
 		tiddler = titleOrTiddler;
@@ -880,9 +814,6 @@ exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 	}
 };
 
-/*
-Alternative, uncached version of getTiddlerDataCached(). The return value can be mutated freely and reused
-*/
 exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 	var tiddler = titleOrTiddler,
 		data;
@@ -901,9 +832,6 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 	return defaultData;
 };
 
-/*
-Extract an indexed field from within a data tiddler
-*/
 exports.extractTiddlerDataItem = function(titleOrTiddler,index,defaultText) {
 	var data = this.getTiddlerDataCached(titleOrTiddler,Object.create(null)),
 		text;
@@ -917,14 +845,6 @@ exports.extractTiddlerDataItem = function(titleOrTiddler,index,defaultText) {
 	}
 };
 
-/*
-Set a tiddlers content to a JavaScript object. Currently this is done by setting the tiddler's type to "application/json" and setting the text to the JSON text of the data.
-title: title of tiddler
-data: object that can be serialised to JSON
-fields: optional hashmap of additional tiddler fields to be set
-options: optional hashmap of options including:
-	suppressTimestamp: if true, don't set the creation/modification timestamps
-*/
 exports.setTiddlerData = function(title,data,fields,options) {
 	options = options || {};
 	var existingTiddler = this.getTiddler(title),
@@ -942,9 +862,6 @@ exports.setTiddlerData = function(title,data,fields,options) {
 	this.addTiddler(new $tw.Tiddler(creationFields,existingTiddler,fields,newFields,modificationFields));
 };
 
-/*
-Return the content of a tiddler as an array containing each line
-*/
 exports.getTiddlerList = function(title,field,index) {
 	if(index) {
 		return $tw.utils.parseStringArray(this.extractTiddlerDataItem(title,index,""));
@@ -1069,7 +986,7 @@ exports.parseTextReference = function(title,field,index,options) {
 			this.getTiddlerText(title); // Force the tiddler to be lazily loaded
 			return this.parseTiddler(title,options);
 		}
-	} 
+	}
 	parserInfo = this.getTextReferenceParserInfo(title,field,index,options);
 	if(parserInfo.sourceText !== null) {
 		return this.parseText(parserInfo.parserType,parserInfo.sourceText,options);
@@ -1303,7 +1220,7 @@ Options available:
 		literal: searches for literal string
 		whitespace: same as literal except runs of whitespace are treated as a single space
 		regexp: treats the search term as a regular expression
-		words: (default) treats search string as a list of tokens, and matches if all tokens are found, 
+		words: (default) treats search string as a list of tokens, and matches if all tokens are found,
 			regardless of adjacency or ordering
 		some: treats search string as a list of tokens, and matches if at least ONE token is found
 */
@@ -1379,7 +1296,7 @@ exports.search = function(text,options) {
 		fields.push("tags");
 		fields.push("text");
 	}
-	// Function to check a given tiddler for the search term
+
 	var searchTiddler = function(title) {
 		if(!searchTermsRegExps) {
 			return true;
@@ -1459,9 +1376,6 @@ exports.search = function(text,options) {
 	return results;
 };
 
-/*
-Trigger a load for a tiddler if it is skinny. Returns the text, or undefined if the tiddler is missing, null if the tiddler is being lazily loaded.
-*/
 exports.getTiddlerText = function(title,defaultText) {
 	var tiddler = this.getTiddler(title);
 	// Return undefined if the tiddler isn't found
@@ -1479,9 +1393,6 @@ exports.getTiddlerText = function(title,defaultText) {
 	}
 };
 
-/*
-Check whether the text of a tiddler matches a given value. By default, the comparison is case insensitive, and any spaces at either end of the tiddler text is trimmed
-*/
 exports.checkTiddlerText = function(title,targetText,options) {
 	options = options || {};
 	var text = this.getTiddlerText(title,"");
@@ -1495,17 +1406,11 @@ exports.checkTiddlerText = function(title,targetText,options) {
 	return text === targetText;
 };
 
-/*
-Execute an action string without an associated context widget
-*/
 exports.invokeActionString = function(actions,event,variables,options) {
 	var widget = this.makeWidget(null,{parentWidget: options.parentWidget});
 	widget.invokeActionString(actions,null,event,variables);
 };
 
-/*
-Read an array of browser File objects, invoking callback(tiddlerFieldsArray) once they're all read
-*/
 exports.readFiles = function(files,options) {
 	var callback;
 	if(typeof options === "function") {
@@ -1528,9 +1433,6 @@ exports.readFiles = function(files,options) {
 	return files.length;
 };
 
-/*
-Read a browser File object, invoking callback(tiddlerFieldsArray) with an array of tiddler fields objects
-*/
 exports.readFile = function(file,options) {
 	var callback;
 	if(typeof options === "function") {
@@ -1539,7 +1441,7 @@ exports.readFile = function(file,options) {
 	} else {
 		callback = options.callback;
 	}
-	// Get the type, falling back to the filename extension
+
 	var self = this,
 		type = file.type;
 	if(type === "" || !type) {
@@ -1551,14 +1453,14 @@ exports.readFile = function(file,options) {
 			}
 		}
 	}
-	// Figure out if we're reading a binary file
+
 	var contentTypeInfo = $tw.config.contentTypeInfo[type],
 		isBinary = contentTypeInfo ? contentTypeInfo.encoding === "base64" : false;
 	// Log some debugging information
 	if($tw.log.IMPORT) {
 		console.log("Importing file '" + file.name + "', type: '" + type + "', isBinary: " + isBinary);
 	}
-	// Give the hook a chance to process the drag
+
 	if($tw.hooks.invokeHook("th-importing-file",{
 		file: file,
 		type: type,
@@ -1569,9 +1471,6 @@ exports.readFile = function(file,options) {
 	}
 };
 
-/*
-Lower level utility to read the content of a browser File object, invoking callback(tiddlerFieldsArray) with an array of tiddler fields objects
-*/
 exports.readFileContent = function(file,type,isBinary,deserializer,callback) {
 	var self = this;
 	// Create the FileReader
@@ -1586,7 +1485,7 @@ exports.readFileContent = function(file,type,isBinary,deserializer,callback) {
 				text = text.substr(commaPos + 1);
 			}
 		}
-		// Check whether this is an encrypted TiddlyWiki file
+
 		var encryptedJson = $tw.utils.extractEncryptedStoreArea(text);
 		if(encryptedJson) {
 			// If so, attempt to decrypt it with the current password
@@ -1606,9 +1505,6 @@ exports.readFileContent = function(file,type,isBinary,deserializer,callback) {
 	}
 };
 
-/*
-Find any existing draft of a specified tiddler
-*/
 exports.findDraft = function(targetTitle) {
 	var draftTitle = undefined;
 	this.forEachTiddler({includeSystem: true},function(title,tiddler) {
@@ -1619,11 +1515,6 @@ exports.findDraft = function(targetTitle) {
 	return draftTitle;
 };
 
-/*
-Check whether the specified draft tiddler has been modified.
-If the original tiddler doesn't exist, create  a vanilla tiddler variable,
-to check if additional fields have been added.
-*/
 exports.isDraftModified = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(!tiddler.isDraft()) {
@@ -1635,34 +1526,18 @@ exports.isDraftModified = function(title) {
 	return titleModified || !tiddler.isEqual(origTiddler,ignoredFields);
 };
 
-/*
-Add a new record to the top of the history stack
-title: a title string or an array of title strings
-fromPageRect: page coordinates of the origin of the navigation
-historyTitle: title of history tiddler (defaults to $:/HistoryList)
-*/
 exports.addToHistory = function(title,fromPageRect,historyTitle) {
 	var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
 	story.addToHistory(title,fromPageRect);
 	console.log("$tw.wiki.addToHistory() is deprecated since V5.1.23! Use the this.story.addToHistory() from the story-object!");
 };
 
-/*
-Add a new tiddler to the story river
-title: a title string or an array of title strings
-fromTitle: the title of the tiddler from which the navigation originated
-storyTitle: title of story tiddler (defaults to $:/StoryList)
-options: see story.js
-*/
 exports.addToStory = function(title,fromTitle,storyTitle,options) {
 	var story = new $tw.Story({wiki: this, storyTitle: storyTitle});
 	story.addToStory(title,fromTitle,options);
 	console.log("$tw.wiki.addToStory() is deprecated since V5.1.23! Use the this.story.addToStory() from the story-object!");
 };
 
-/*
-Generate a title for the draft of a given tiddler
-*/
 exports.generateDraftTitle = function(title) {
 	let c = 0,
 		draftTitle;
@@ -1677,12 +1552,6 @@ exports.generateDraftTitle = function(title) {
 	return draftTitle;
 };
 
-/*
-Invoke the available upgrader modules
-titles: array of tiddler titles to be processed
-tiddlers: hashmap by title of tiddler fields of pending import tiddlers. These can be modified by the upgraders. An entry with no fields indicates a tiddler that was pending import has been suppressed. When entries are added to the pending import the tiddlers hashmap may have entries that are not present in the titles array
-Returns a hashmap of messages keyed by tiddler title.
-*/
 exports.invokeUpgraders = function(titles,tiddlers) {
 	// Collect up the available upgrader modules
 	var self = this;
@@ -1694,7 +1563,7 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 			}
 		});
 	}
-	// Invoke each upgrader in turn
+
 	var messages = {};
 	for(var t=0; t<this.upgraderModules.length; t++) {
 		var upgrader = this.upgraderModules[t],
@@ -1737,14 +1606,14 @@ exports.slugify = function(title,options) {
 	if(tiddler && tiddler.fields.slug) {
 		slug = tiddler.fields.slug;
 	} else {
-		slug = $tw.utils.transliterate(title.toString().toLowerCase()) // Replace diacritics with basic lowercase ASCII
-			.replace(/\s+/g,"-")                                       // Replace spaces with -
-			.replace(/[^\w\-\.]+/g,"")                                 // Remove all non-word chars except dash and dot
-			.replace(/\-\-+/g,"-")                                     // Replace multiple - with single -
-			.replace(/^-+/,"")                                         // Trim - from start of text
+		slug = $tw.utils.transliterate(title.toString().toLowerCase())
+			.replace(/\s+/g,"-")
+			.replace(/[^\w\-\.]+/g,"")
+			.replace(/\-\-+/g,"-")
+			.replace(/^-+/,"")
 			.replace(/-+$/,"");                                        // Trim - from end of text
 	}
-	// If the resulting slug is blank (eg because the title is just punctuation characters)
+
 	if(!slug) {
 		// ...then just use the character codes of the title
 		var result = [];

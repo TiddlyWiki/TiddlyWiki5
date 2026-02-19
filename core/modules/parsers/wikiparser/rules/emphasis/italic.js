@@ -2,20 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/emphasis/italic.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for emphasis - italic. For example:
-
-```
-	This is //italic// text
-```
-
-This wikiparser can be modified using the rules eg:
-
-```
-\rules except italic
-\rules only italic
-```
-
 \*/
 
 "use strict";

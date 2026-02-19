@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/droppable.js
 type: application/javascript
 module-type: widget
-
-Droppable widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var DroppableWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 DroppableWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 DroppableWidget.prototype.render = function(parent,nextSibling) {
 	var self = this,
 		tag = this.parseTreeNode.isBlock ? "div" : "span",
@@ -35,7 +26,7 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	if(this.droppableTag && $tw.config.htmlUnsafeElements.indexOf(this.droppableTag) === -1) {
 		tag = this.droppableTag;
 	}
-	// Create element and assign classes
+
 	domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	this.assignDomNodeClasses();
@@ -55,7 +46,7 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	} else {
 		$tw.utils.addClass(this.domNode,this.disabledClass);
 	}
-	// Insert element
+
 	parent.insertBefore(domNode,nextSibling);
 	this.domNodes.push(domNode);
 	this.renderChildren(domNode,null);
@@ -67,7 +58,7 @@ DroppableWidget.prototype.enterDrag = function(event) {
 	if(this.currentlyEntered.indexOf(event.target) === -1) {
 		this.currentlyEntered.push(event.target);
 	}
-	// If we're entering for the first time we need to apply highlighting
+
 	$tw.utils.addClass(this.domNodes[0],"tc-dragover");
 };
 
@@ -76,7 +67,7 @@ DroppableWidget.prototype.leaveDrag = function(event) {
 	if(pos !== -1) {
 		this.currentlyEntered.splice(pos,1);
 	}
-	// Remove highlighting if we're leaving externally. The hacky second condition is to resolve a problem with Firefox whereby there is an erroneous dragenter event if the node being dragged is within the dropzone
+
 	if(this.currentlyEntered.length === 0 || (this.currentlyEntered.length === 1 && this.currentlyEntered[0] === $tw.dragInProgress)) {
 		this.currentlyEntered = [];
 		if(this.domNodes[0]) {
@@ -129,7 +120,7 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 			});
 		});
 	}
-	// Send a TitleList to performListActions
+
 	if(this.droppableListActions) {
 		$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
 			var titleList = [];
@@ -139,7 +130,7 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 			self.performListActions($tw.utils.stringifyList(titleList),event);
 		});
 	}
-	// Tell the browser that we handled the drop
+
 	event.preventDefault();
 	// Stop the drop ripple up to any parent handlers
 	event.stopPropagation();
@@ -160,9 +151,6 @@ DroppableWidget.prototype.performActions = function(title,event) {
 	}
 };
 
-/*
-Compute the internal state of the widget
-*/
 DroppableWidget.prototype.execute = function() {
 	this.droppableActions = this.getAttribute("actions");
 	this.droppableListActions = this.getAttribute("listActions");
@@ -180,9 +168,6 @@ DroppableWidget.prototype.assignDomNodeClasses = function() {
 	this.domNode.className = classes.join(" ").trim();
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 DroppableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.tag || changedAttributes.enable || changedAttributes.disabledClass ||

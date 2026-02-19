@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/radio.js
 type: application/javascript
 module-type: widget
-
-Set a field or index at a given tiddler via radio buttons
-
 \*/
 
 "use strict";
@@ -14,14 +11,8 @@ var RadioWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 RadioWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 RadioWidget.prototype.render = function(parent,nextSibling) {
 	// Save the parent dom node
 	this.parentDomNode = parent;
@@ -93,15 +84,12 @@ RadioWidget.prototype.handleChangeEvent = function(event) {
 	if(this.inputDomNode.checked) {
 		this.setValue();
 	}
-	// Trigger actions
+
 	if(this.radioActions) {
 		this.invokeActionString(this.radioActions,this,event,{"actionValue": this.radioValue});
 	}
 };
 
-/*
-Compute the internal state of the widget
-*/
 RadioWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.radioTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
@@ -117,9 +105,6 @@ RadioWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 RadioWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(($tw.utils.count(changedAttributes) > 0)) {

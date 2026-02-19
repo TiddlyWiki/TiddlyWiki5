@@ -2,19 +2,10 @@
 title: $:/core/modules/savers/put.js
 type: application/javascript
 module-type: saver
-
-Saves wiki by performing a PUT request to the server
-
-Works with any server which accepts a PUT request
-to the current URL, such as a WebDAV server.
-
 \*/
 
 "use strict";
 
-/*
-Retrieve ETag if available
-*/
 var retrieveETag = function(self) {
 	var headers = {
 		Accept: "*/*"
@@ -36,16 +27,12 @@ var retrieveETag = function(self) {
 	});
 };
 
-
-/*
-Select the appropriate saver module and set it up
-*/
 var PutSaver = function(wiki) {
 	this.wiki = wiki;
 	var self = this;
 	var uri = this.uri();
 	// Async server probe. Until probe finishes, save will fail fast
-	// See also https://github.com/TiddlyWiki/TiddlyWiki5/issues/2276
+
 	$tw.utils.httpRequest({
 		url: uri,
 		type: "OPTIONS",
@@ -64,7 +51,7 @@ PutSaver.prototype.uri = function() {
 };
 
 // TODO: in case of edit conflict
-// Prompt: Do you want to save over this? Y/N
+
 // Merging would be ideal, and may be possible using future generic merge flow
 PutSaver.prototype.save = function(text,method,callback) {
 	if(!this.serverAcceptsPuts) {
@@ -111,25 +98,16 @@ PutSaver.prototype.save = function(text,method,callback) {
 	return true;
 };
 
-/*
-Information about this saver
-*/
 PutSaver.prototype.info = {
 	name: "put",
 	priority: 2000,
 	capabilities: ["save","autosave"]
 };
 
-/*
-Static method that returns true if this saver is capable of working
-*/
 exports.canSave = function(wiki) {
 	return /^https?:/.test(location.protocol);
 };
 
-/*
-Create an instance of this saver
-*/
 exports.create = function(wiki) {
 	return new PutSaver(wiki);
 };

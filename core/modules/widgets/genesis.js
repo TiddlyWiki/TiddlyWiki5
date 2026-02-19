@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/genesis.js
 type: application/javascript
 module-type: widget
-
-Genesis widget for dynamically creating widgets
-
 \*/
 
 "use strict";
@@ -15,9 +12,6 @@ var GenesisWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 GenesisWidget.prototype = new Widget();
 
 GenesisWidget.prototype.computeAttributes = function(options) {
@@ -29,9 +23,6 @@ GenesisWidget.prototype.computeAttributes = function(options) {
 	return Widget.prototype.computeAttributes.call(this,options);
 };
 
-/*
-Render this widget into the DOM
-*/
 GenesisWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -39,9 +30,6 @@ GenesisWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 GenesisWidget.prototype.execute = function() {
 	var self = this;
 	// Collect attributes
@@ -55,7 +43,7 @@ GenesisWidget.prototype.execute = function() {
 		this.makeChildWidgets(this.parseTreeNode.children);
 		return;
 	}
-	// Construct parse tree
+
 	var isElementWidget = this.genesisType.charAt(0) !== "$",
 		nodeType = isElementWidget ? "element" : this.genesisType.substr(1),
 		nodeTag = isElementWidget ? this.genesisType : undefined;
@@ -78,7 +66,7 @@ GenesisWidget.prototype.execute = function() {
 			$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],varname,self.attributeValues[index] || "");
 		});
 	}
-	// Apply explicit attributes
+
 	$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(this.parseTreeNode),function(attribute) {
 		var name = attribute.name;
 		if(name.charAt(0) === "$") {
@@ -96,9 +84,6 @@ GenesisWidget.prototype.execute = function() {
 	this.makeChildWidgets(parseTreeNodes);
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 GenesisWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes(),
 		filterNames = this.getAttribute("$names",""),

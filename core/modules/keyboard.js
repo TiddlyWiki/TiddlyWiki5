@@ -2,9 +2,6 @@
 title: $:/core/modules/keyboard.js
 type: application/javascript
 module-type: global
-
-Keyboard handling utilities
-
 \*/
 
 "use strict";
@@ -149,9 +146,6 @@ function KeyboardManager(options) {
 	});
 }
 
-/*
-Return an array of keycodes for the modifier keys ctrl, shift, alt, meta
-*/
 KeyboardManager.prototype.getModifierKeys = function() {
 	return [
 		16, // Shift
@@ -160,23 +154,10 @@ KeyboardManager.prototype.getModifierKeys = function() {
 		20, // CAPS LOCK
 		91, // Meta (left)
 		93, // Meta (right)
-		224 // Meta (Firefox)
+		224
 	]
 };
 
-/*
-Parses a key descriptor into the structure:
-{
-	keyCode: numeric keycode
-	shiftKey: boolean
-	altKey: boolean
-	ctrlKey: boolean
-	metaKey: boolean
-}
-Key descriptors have the following format:
-	ctrl+enter
-	ctrl+shift+alt+A
-*/
 KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor,options) {
 	var components = keyDescriptor.split(/\+|\-/),
 		info = {
@@ -199,7 +180,7 @@ KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor,options) {
 		} else if(s === "meta" || s === "cmd" || s === "win") {
 			info.metaKey = true;
 		}
-		// Replace named keys with their code
+
 		if(this.namedKeys[s]) {
 			info.keyCode = this.namedKeys[s];
 		}
@@ -214,9 +195,6 @@ KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor,options) {
 	}
 };
 
-/*
-Parse a list of key descriptors into an array of keyInfo objects. The key descriptors can be passed as an array of strings or a space separated string
-*/
 KeyboardManager.prototype.parseKeyDescriptors = function(keyDescriptors,options) {
 	var self = this;
 	options = options || {};
@@ -258,10 +236,10 @@ KeyboardManager.prototype.getPrintableShortcuts = function(keyInfoArray) {
 		result = [];
 	$tw.utils.each(keyInfoArray,function(keyInfo) {
 		if(keyInfo) {
-			result.push((keyInfo.ctrlKey ? "ctrl-" : "") + 
-				   (keyInfo.shiftKey ? "shift-" : "") + 
-				   (keyInfo.altKey ? "alt-" : "") + 
-				   (keyInfo.metaKey ? self.metaKeyName : "") + 
+			result.push((keyInfo.ctrlKey ? "ctrl-" : "") +
+				   (keyInfo.shiftKey ? "shift-" : "") +
+				   (keyInfo.altKey ? "alt-" : "") +
+				   (keyInfo.metaKey ? self.metaKeyName : "") +
 				   (self.keyNames[keyInfo.keyCode]));
 		}
 	});
@@ -270,10 +248,10 @@ KeyboardManager.prototype.getPrintableShortcuts = function(keyInfoArray) {
 
 KeyboardManager.prototype.checkKeyDescriptor = function(event,keyInfo) {
 	return keyInfo &&
-			event.keyCode === keyInfo.keyCode && 
-			event.shiftKey === keyInfo.shiftKey && 
-			event.altKey === keyInfo.altKey && 
-			event.ctrlKey === keyInfo.ctrlKey && 
+			event.keyCode === keyInfo.keyCode &&
+			event.shiftKey === keyInfo.shiftKey &&
+			event.altKey === keyInfo.altKey &&
+			event.ctrlKey === keyInfo.ctrlKey &&
 			event.metaKey === keyInfo.metaKey;
 };
 
@@ -291,14 +269,14 @@ KeyboardManager.prototype.getMatchingKeyDescriptor = function(event,keyInfoArray
 };
 
 KeyboardManager.prototype.getEventModifierKeyDescriptor = function(event) {
-	return event.ctrlKey && !event.shiftKey	&& !event.altKey && !event.metaKey ? "ctrl" : 
-		event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey ? "shift" : 
-		event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey ? "ctrl-shift" : 
-		event.altKey && !event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt" : 
-		event.altKey && event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt-shift" : 
-		event.altKey && event.ctrlKey && !event.shiftKey && !event.metaKey ? "ctrl-alt" : 
-		event.altKey && event.shiftKey && event.ctrlKey && !event.metaKey ? "ctrl-alt-shift" : 
-		event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey ? "meta" : 
+	return event.ctrlKey && !event.shiftKey	&& !event.altKey && !event.metaKey ? "ctrl" :
+		event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey ? "shift" :
+		event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey ? "ctrl-shift" :
+		event.altKey && !event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt" :
+		event.altKey && event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt-shift" :
+		event.altKey && event.ctrlKey && !event.shiftKey && !event.metaKey ? "ctrl-alt" :
+		event.altKey && event.shiftKey && event.ctrlKey && !event.metaKey ? "ctrl-alt-shift" :
+		event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey ? "meta" :
 		event.metaKey && event.ctrlKey && !event.shiftKey && !event.altKey ? "meta-ctrl" :
 		event.metaKey && event.ctrlKey && event.shiftKey && !event.altKey ? "meta-ctrl-shift" :
 		event.metaKey && event.ctrlKey && event.shiftKey && event.altKey ? "meta-ctrl-alt-shift" : "normal";
@@ -320,11 +298,6 @@ KeyboardManager.prototype.updateShortcutLists = function(tiddlerList) {
 	}
 };
 
-/*
-event: the keyboard event object
-options:
-	onlyPriority: true if only priority global shortcuts should be invoked
-*/
 KeyboardManager.prototype.handleKeydownEvent = function(event, options) {
 	options = options || {};
 	var key, action;

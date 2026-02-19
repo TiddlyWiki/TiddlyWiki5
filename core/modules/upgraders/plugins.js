@@ -2,9 +2,6 @@
 title: $:/core/modules/upgraders/plugins.js
 type: application/javascript
 module-type: upgrader
-
-Upgrader module that checks that plugins are newer than any already installed version
-
 \*/
 
 "use strict";

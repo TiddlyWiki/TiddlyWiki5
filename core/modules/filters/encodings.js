@@ -2,16 +2,9 @@
 title: $:/core/modules/filters/decodeuricomponent.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for applying decodeURIComponent() to each item.
-
 \*/
 
 "use strict";
-
-/*
-Export our filter functions
-*/
 
 exports.decodebase64 = function(source,operator,options) {
 	var results = [];

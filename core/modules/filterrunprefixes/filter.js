@@ -2,14 +2,10 @@
 title: $:/core/modules/filterrunprefixes/filter.js
 type: application/javascript
 module-type: filterrunprefix
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.filter = function(operationSubFunction,options) {
 	return function(results,source,widget) {
 		if(results.length > 0) {

@@ -2,16 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/styleinline.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for assigning styles and classes to inline runs. For example:
-
-```
-@@.myClass This is some text with a class@@
-@@background-color:red;This is some text with a background colour@@
-@@width:100px;.myClass This is some text with a class and a width@@
-```
-
-
 \*/
 
 "use strict";

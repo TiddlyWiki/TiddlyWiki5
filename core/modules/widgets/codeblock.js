@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/codeblock.js
 type: application/javascript
 module-type: widget
-
-Code block node widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var CodeBlockWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 CodeBlockWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 CodeBlockWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -38,16 +29,10 @@ CodeBlockWidget.prototype.render = function(parent,nextSibling) {
 	}
 };
 
-/*
-Compute the internal state of the widget
-*/
 CodeBlockWidget.prototype.execute = function() {
 	this.language = this.getAttribute("language");
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 CodeBlockWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.code || changedAttributes.language) {

@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/match.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for checking if a title matches a string
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.match = function(source,operator,options) {
 	var results = [],
 		suffixes = (operator.suffixes || [])[0] || [];

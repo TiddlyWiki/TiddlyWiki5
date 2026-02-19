@@ -2,9 +2,6 @@
 title: $:/core/modules/browser-messaging.js
 type: application/javascript
 module-type: startup
-
-Browser message handling
-
 \*/
 
 "use strict";
@@ -15,9 +12,6 @@ exports.platforms = ["browser"];
 exports.after = ["startup"];
 exports.synchronous = true;
 
-/*
-Load a specified url as an iframe and call the callback when it is loaded. If the url is already loaded then the existing iframe instance is used
-*/
 function loadIFrame(url,callback) {
 	// Check if iframe already exists
 	var iframeInfo = $tw.browserMessaging.iframeInfoMap[url];
@@ -81,7 +75,7 @@ function saveIFrameInfoTiddler(iframeInfo) {
 exports.startup = function() {
 	// Initialise the store of iframes we've created
 	$tw.browserMessaging = {
-		iframeInfoMap: {} // Hashmap by URL of {url:,status:"loading/loaded",domNode:}
+		iframeInfoMap: {}
 	};
 	// Listen for widget messages to control loading the plugin library
 	$tw.rootWidget.addEventListener("tm-load-plugin-library",function(event) {
@@ -144,7 +138,7 @@ exports.startup = function() {
 	// Listen for window messages from other windows
 	window.addEventListener("message",function listener(event){
 		// console.log("browser-messaging: ",document.location.toString())
-		// console.log("browser-messaging: Received message from",event.origin);
+
 		// console.log("browser-messaging: Message content",event.data);
 		switch(event.data.verb) {
 			case "GET-RESPONSE":

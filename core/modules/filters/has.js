@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/has.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for checking if a tiddler has the specified field or index
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.has = function(source,operator,options) {
 	var results = [],
 		invert = operator.prefix === "!";

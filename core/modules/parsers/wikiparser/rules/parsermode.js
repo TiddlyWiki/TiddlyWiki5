@@ -2,14 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/parsermode.js
 type: application/javascript
 module-type: wikirule
-
-Wiki pragma rule for parser mode specifications
-
-```
-\parsermode block
-\parsermode inline
-```
-
 \*/
 
 "use strict";
@@ -17,18 +9,12 @@ Wiki pragma rule for parser mode specifications
 exports.name = "parsermode";
 exports.types = {pragma: true};
 
-/*
-Instantiate parse rule
-*/
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /\\parsermode[^\S\n]/mg;
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	// Move past the pragma invocation
 	var start = this.parser.pos;

@@ -2,9 +2,6 @@
 title: $:/core/modules/tiddler.js
 type: application/javascript
 module-type: tiddlermethod
-
-Extension methods for the $tw.Tiddler object (constructor and methods required at boot time are in boot/boot.js)
-
 \*/
 
 "use strict";
@@ -27,7 +24,7 @@ exports.getFieldString = function(field,defaultValue) {
 	if(value === undefined || value === null) {
 		return defaultValue || "";
 	}
-	// Stringify the field with the associated tiddler field module (if any)
+
 	var fieldModule = $tw.Tiddler.fieldModules[field];
 	if(fieldModule && fieldModule.stringify) {
 		return fieldModule.stringify.call(this,value);
@@ -36,9 +33,6 @@ exports.getFieldString = function(field,defaultValue) {
 	}
 };
 
-/*
-Get the value of a field as an array / list
-*/
 exports.getFieldList = function(field) {
 	var value = this.getFieldString(field,null);
 	// Check for a missing field
@@ -48,10 +42,6 @@ exports.getFieldList = function(field) {
 	return $tw.utils.parseStringArray(value);
 };
 
-/*
-Get all the fields as a hashmap of strings. Options:
-	exclude: an array of field names to exclude
-*/
 exports.getFieldStrings = function(options) {
 	options = options || {};
 	var exclude = options.exclude || [];
@@ -66,10 +56,6 @@ exports.getFieldStrings = function(options) {
 	return fields;
 };
 
-/*
-Get all the fields as a name:value block. Options:
-	exclude: an array of field names to exclude
-*/
 exports.getFieldStringBlock = function(options) {
 	options = options || {};
 	var exclude = options.exclude || [],

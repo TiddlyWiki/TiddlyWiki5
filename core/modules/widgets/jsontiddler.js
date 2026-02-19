@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/jsontiddler.js
 type: application/javascript
 module-type: widget
-
-Render a tiddler as JSON text
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var JSONTiddlerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 JSONTiddlerWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 JSONTiddlerWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
 	this.parentDomNode = parent;
@@ -42,24 +33,18 @@ JSONTiddlerWidget.prototype.render = function(parent,nextSibling) {
 	if(this.attEscapeUnsafeScriptChars) {
 		json = json.replace(/</g,"\\u003C");
 	}
-	// Update the DOM
+
 	var textNode = this.document.createTextNode(json);
 	parent.insertBefore(textNode,nextSibling);
 	this.domNodes.push(textNode);
 };
 
-/*
-Compute the internal state of the widget
-*/
 JSONTiddlerWidget.prototype.execute = function() {
 	this.attTiddler = this.getAttribute("tiddler");
 	this.attExclude = this.getAttribute("exclude","");
 	this.attEscapeUnsafeScriptChars = this.getAttribute("escapeUnsafeScriptChars","no") === "yes";
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 JSONTiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0 || (this.attTiddler && changedTiddlers[this.attTiddler])) {

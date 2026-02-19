@@ -2,9 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/quoteblock.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text rule for quote blocks.
-
 \*/
 
 "use strict";
@@ -44,7 +41,7 @@ exports.parse = function() {
 			end: citeEnd
 		});
 	}
-	// Parse any optional cite
+
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	citeStart = this.parser.pos;
 	cite = this.parser.parseInlineRun(/(\r?\n)/mg);
@@ -59,7 +56,7 @@ exports.parse = function() {
 			end: citeEnd
 		});
 	}
-	// Return the blockquote element
+
 	return [{
 		type: "element",
 		tag: "blockquote",

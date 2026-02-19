@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/diff-text.js
 type: application/javascript
 module-type: widget
-
-Widget to display a diff between two texts
-
 \*/
 
 "use strict";
@@ -16,9 +13,6 @@ var DiffTextWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 DiffTextWidget.prototype = new Widget();
 
 DiffTextWidget.prototype.invisibleCharacters = {
@@ -27,9 +21,6 @@ DiffTextWidget.prototype.invisibleCharacters = {
 	"\t": "⇥\t"
 };
 
-/*
-Render this widget into the DOM
-*/
 DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -43,7 +34,7 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	} else {
 		diffs = dmp.diffMain(this.getAttribute("source",""),this.getAttribute("dest",""),{diffEditCost: editCost});
 	}
-	// Apply required cleanup
+
 	switch(this.getAttribute("cleanup","semantic")) {
 		case "none":
 			// No cleanup
@@ -55,8 +46,8 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 			dmp.diffCleanupSemantic(diffs);
 			break;
 	}
-	// Create the elements
-	var domContainer = this.document.createElement("div"), 
+
+	var domContainer = this.document.createElement("div"),
 		domDiff = this.createDiffDom(diffs);
 	parent.insertBefore(domContainer,nextSibling);
 	// Save our container
@@ -74,9 +65,6 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	domContainer.appendChild(domDiff);
 };
 
-/*
-Create DOM elements representing a list of diffs
-*/
 DiffTextWidget.prototype.createDiffDom = function(diffs) {
 	var self = this;
 	// Create the element and assign the attributes
@@ -114,9 +102,6 @@ DiffTextWidget.prototype.createDiffDom = function(diffs) {
 	return domPre;
 };
 
-/*
-Compute the internal state of the widget
-*/
 DiffTextWidget.prototype.execute = function() {
 	// Make child widgets
 	var parseTreeNodes;
@@ -133,9 +118,6 @@ DiffTextWidget.prototype.execute = function() {
 	this.makeChildWidgets(parseTreeNodes);
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 DiffTextWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.source || changedAttributes.dest || changedAttributes.cleanup || changedAttributes.mode || changedAttributes.editcost) {

@@ -2,20 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/image.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for embedding images. For example:
-
-```
-[img[https://tiddlywiki.com/fractalveg.jpg]]
-[img width=23 height=24 [https://tiddlywiki.com/fractalveg.jpg]]
-[img width={{!!width}} height={{!!height}} [https://tiddlywiki.com/fractalveg.jpg]]
-[img[Description of image|https://tiddlywiki.com/fractalveg.jpg]]
-[img[TiddlerTitle]]
-[img[Description of image|TiddlerTitle]]
-```
-
-Generates the `<$image>` widget.
-
 \*/
 
 "use strict";
@@ -43,9 +29,6 @@ exports.parse = function() {
 	return [node];
 };
 
-/*
-Find the next image from the current position
-*/
 exports.findNextImage = function(source,pos) {
 	// A regexp for finding candidate HTML tags
 	var reLookahead = /(\[img)/g;
@@ -59,17 +42,14 @@ exports.findNextImage = function(source,pos) {
 		if(tag) {
 			return tag;
 		}
-		// Look for the next match
+
 		reLookahead.lastIndex = match.index + 1;
 		match = reLookahead.exec(source);
 	}
-	// Failed
+
 	return null;
 };
 
-/*
-Look for an image at the specified position. Returns null if not found, otherwise returns {type: "image", attributes: [], isSelfClosing:, start:, end:,}
-*/
 exports.parseImage = function(source,pos) {
 	var token,
 		node = {
@@ -102,7 +82,7 @@ exports.parseImage = function(source,pos) {
 			}
 		}
 	}
-	// Skip whitespace
+
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for the `[` after the attributes
 	token = $tw.utils.parseTokenString(source,pos,"[");

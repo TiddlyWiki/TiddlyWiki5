@@ -2,16 +2,10 @@
 title: $:/core/modules/utils/crypto.js
 type: application/javascript
 module-type: utils
-
-Utility functions related to crypto.
-
 \*/
 
 "use strict";
 
-/*
-Look for an encrypted store area in the text of a TiddlyWiki file
-*/
 exports.extractEncryptedStoreArea = function(text) {
 	var encryptedStoreAreaStartMarker = "<pre id=\"encryptedStoreArea\" type=\"text/plain\" style=\"display:none;\">",
 		encryptedStoreAreaStart = text.indexOf(encryptedStoreAreaStartMarker);
@@ -24,9 +18,6 @@ exports.extractEncryptedStoreArea = function(text) {
 	return null;
 };
 
-/*
-Attempt to extract the tiddlers from an encrypted store area using the current password. If the password is not provided then the password in the password store will be used
-*/
 exports.decryptStoreArea = function(encryptedStoreArea,password) {
 	var decryptedText = $tw.crypto.decrypt(encryptedStoreArea,password);
 	if(decryptedText) {
@@ -43,16 +34,6 @@ exports.decryptStoreArea = function(encryptedStoreArea,password) {
 	}
 };
 
-
-/*
-Attempt to extract the tiddlers from an encrypted store area using the current password. If that fails, the user is prompted for a password.
-encryptedStoreArea: text of the TiddlyWiki encrypted store area
-callback: function(tiddlers) called with the array of decrypted tiddlers
-
-The following configuration settings are supported:
-
-$tw.config.usePasswordVault: causes any password entered by the user to also be put into the system password vault
-*/
 exports.decryptStoreAreaInteractive = function(encryptedStoreArea,callback,options) {
 	// Try to decrypt with the current password
 	var tiddlers = $tw.utils.decryptStoreArea(encryptedStoreArea);
@@ -70,7 +51,7 @@ exports.decryptStoreAreaInteractive = function(encryptedStoreArea,callback,optio
 				if(!data) {
 					return false;
 				}
-				// Attempt to decrypt the tiddlers
+
 				var tiddlers = $tw.utils.decryptStoreArea(encryptedStoreArea,data.password);
 				if(tiddlers) {
 					if($tw.config.usePasswordVault) {

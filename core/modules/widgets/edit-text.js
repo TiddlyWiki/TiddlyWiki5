@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/edit-text.js
 type: application/javascript
 module-type: widget
-
-Edit-text widget
-
 \*/
 
 "use strict";

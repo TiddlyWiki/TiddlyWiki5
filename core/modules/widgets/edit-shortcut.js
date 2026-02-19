@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/edit-shortcut.js
 type: application/javascript
 module-type: widget
-
-Widget to display an editable keyboard shortcut
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var EditShortcutWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 EditShortcutWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 EditShortcutWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -32,7 +23,7 @@ EditShortcutWidget.prototype.render = function(parent,nextSibling) {
 	if(this.shortcutClass) {
 		this.inputNode.className = this.shortcutClass;
 	}
-	// Assign other attributes
+
 	if(this.shortcutStyle) {
 		this.inputNode.setAttribute("style",this.shortcutStyle);
 	}
@@ -48,7 +39,7 @@ EditShortcutWidget.prototype.render = function(parent,nextSibling) {
 	if(this.isDisabled === "yes") {
 		this.inputNode.setAttribute("disabled", true);
 	}
-	// Assign the current shortcut
+
 	this.updateInputNode();
 	// Add event handlers
 	$tw.utils.addEventListeners(this.inputNode,[
@@ -63,9 +54,6 @@ EditShortcutWidget.prototype.render = function(parent,nextSibling) {
 	}
 };
 
-/*
-Compute the internal state of the widget
-*/
 EditShortcutWidget.prototype.execute = function() {
 	this.shortcutTiddler = this.getAttribute("tiddler");
 	this.shortcutField = this.getAttribute("field");
@@ -80,9 +68,6 @@ EditShortcutWidget.prototype.execute = function() {
 	this.isDisabled = this.getAttribute("disabled", "no");
 };
 
-/*
-Update the value of the input node
-*/
 EditShortcutWidget.prototype.updateInputNode = function() {
 	if(this.shortcutField) {
 		var tiddler = this.wiki.getTiddler(this.shortcutTiddler);
@@ -98,9 +83,6 @@ EditShortcutWidget.prototype.updateInputNode = function() {
 	}
 };
 
-/*
-Handle a dom "keydown" event
-*/
 EditShortcutWidget.prototype.handleKeydownEvent = function(event) {
 	// Ignore shift, ctrl, meta, alt
 	if(event.keyCode && $tw.keyboardManager.getModifierKeys().indexOf(event.keyCode) === -1) {
@@ -115,7 +97,7 @@ EditShortcutWidget.prototype.handleKeydownEvent = function(event) {
 		if(value.length > 0) {
 			this.wiki.setText(this.shortcutTiddler,this.shortcutField,this.shortcutIndex,value[0]);
 		}
-		// Ignore the keydown if it was already handled
+
 		event.preventDefault();
 		event.stopPropagation();
 		return true;
@@ -124,9 +106,6 @@ EditShortcutWidget.prototype.handleKeydownEvent = function(event) {
 	}
 };
 
-/*
-focus the input node
-*/
 EditShortcutWidget.prototype.focus = function() {
 	if(this.inputNode.focus && this.inputNode.select) {
 		this.inputNode.focus();
@@ -134,9 +113,6 @@ EditShortcutWidget.prototype.focus = function() {
 	}
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget needed re-rendering
-*/
 EditShortcutWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.placeholder || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.style || changedAttributes.tooltip || changedAttributes["aria-label"] || changedAttributes.focus || changedAttributes.disabled) {

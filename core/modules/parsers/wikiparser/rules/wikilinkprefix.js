@@ -2,13 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/wikilinkprefix.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for suppressed wiki links. For example:
-
-```
-~SuppressedLink
-```
-
 \*/
 
 "use strict";
@@ -22,9 +15,6 @@ exports.init = function(parser) {
 	this.matchRegExp = new RegExp($tw.config.textPrimitives.unWikiLink + $tw.config.textPrimitives.wikiLink,"mg");
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	// Get the details of the match
 	var linkText = this.match[0];

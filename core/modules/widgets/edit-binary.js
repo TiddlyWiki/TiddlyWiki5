@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/edit-binary.js
 type: application/javascript
 module-type: widget
-
-Edit-binary widget; placeholder for editing binary tiddlers
-
 \*/
 
 "use strict";
@@ -18,14 +15,8 @@ var EditBinaryWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 EditBinaryWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 EditBinaryWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
 	// Save the parent dom node
@@ -37,9 +28,6 @@ EditBinaryWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 EditBinaryWidget.prototype.execute = function() {
 	// Get our parameters
 	var editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
@@ -75,11 +63,11 @@ EditBinaryWidget.prototype.execute = function() {
 	// Set the link href to internal data URI (no external)
 	if(text) {
 		link.attributes.href = {
-			type: "string", 
+			type: "string",
 			value: "data:" + type + ";base64," + text
 		};
 	}
-	// Combine warning message and download link in a div
+
 	var element = {
 		type: "element",
 		tag: "div",
@@ -88,13 +76,10 @@ EditBinaryWidget.prototype.execute = function() {
 		},
 		children: [warn, link]
 	}
-	// Construct the child widgets
+
 	this.makeChildWidgets([element]);
 };
 
-/*
-Refresh by refreshing our child widget
-*/
 EditBinaryWidget.prototype.refresh = function(changedTiddlers) {
 	return this.refreshChildren(changedTiddlers);
 };

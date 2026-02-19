@@ -2,15 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/dash.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for dashes. For example:
-
-```
-This is an en-dash: --
-
-This is an em-dash: ---
-```
-
 \*/
 
 "use strict";

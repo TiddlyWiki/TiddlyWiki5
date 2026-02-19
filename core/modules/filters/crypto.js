@@ -2,9 +2,6 @@
 title: $:/core/modules/filters/crypto.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operators for cryptography, using the Stanford JavaScript library
-
 \*/
 
 "use strict";

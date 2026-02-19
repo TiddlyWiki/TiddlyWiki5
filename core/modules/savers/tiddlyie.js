@@ -2,16 +2,10 @@
 title: $:/core/modules/savers/tiddlyie.js
 type: application/javascript
 module-type: saver
-
-Handles saving changes via Internet Explorer BHO extenion (TiddlyIE)
-
 \*/
 
 "use strict";
 
-/*
-Select the appropriate saver module and set it up
-*/
 var TiddlyIESaver = function(wiki) {
 };
 
@@ -22,7 +16,7 @@ TiddlyIESaver.prototype.save = function(text,method,callback) {
 		var pathname = unescape(document.location.pathname);
 		// Test for a Windows path of the form /x:/blah...
 		if(/^\/[A-Z]\:\/[^\/]+/i.test(pathname)) {	// ie: ^/[a-z]:/[^/]+ (is this better?: ^/[a-z]:/[^/]+(/[^/]+)*\.[^/]+ )
-			// Remove the leading slash
+
 			pathname = pathname.substr(1);
 			// Convert slashes to backslashes
 			pathname = pathname.replace(/\//g,"\\");
@@ -42,25 +36,16 @@ TiddlyIESaver.prototype.save = function(text,method,callback) {
 	}
 };
 
-/*
-Information about this saver
-*/
 TiddlyIESaver.prototype.info = {
 	name: "tiddlyiesaver",
 	priority: 1500,
 	capabilities: ["save"]
 };
 
-/*
-Static method that returns true if this saver is capable of working
-*/
 exports.canSave = function(wiki) {
 	return (window.location.protocol === "file:");
 };
 
-/*
-Create an instance of this saver
-*/
 exports.create = function(wiki) {
 	return new TiddlyIESaver(wiki);
 };

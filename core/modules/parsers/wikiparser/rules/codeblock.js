@@ -2,15 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/codeblock.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text rule for code blocks. For example:
-
-```
-	```
-	This text will not be //wikified//
-	```
-```
-
 \*/
 
 "use strict";
@@ -44,7 +35,7 @@ exports.parse = function() {
 		text = this.parser.source.substr(this.parser.pos);
 		this.parser.pos = this.parser.sourceLength;
 	}
-	// Return the $codeblock widget
+
 	return [{
 			type: "codeblock",
 			attributes: {

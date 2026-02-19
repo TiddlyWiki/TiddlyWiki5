@@ -2,16 +2,10 @@
 title: $:/core/modules/filterrunprefixes/then.js
 type: application/javascript
 module-type: filterrunprefix
-
-Replace results of previous runs unless empty
-
 \*/
 
 "use strict";
 
-/*
-Export our filter prefix function
-*/
 exports.then = function(operationSubFunction) {
 	return function(results,source,widget) {
 		if(results.length !== 0) {

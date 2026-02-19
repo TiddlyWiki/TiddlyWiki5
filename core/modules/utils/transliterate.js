@@ -2,18 +2,10 @@
 title: $:/core/modules/utils/transliterate.js
 type: application/javascript
 module-type: utils
-
-Transliteration static utility functions.
-
 \*/
 
 "use strict";
 
-/*
-Transliterate string to ASCII
-
-(Some pairs taken from http://semplicewebsites.com/removing-accents-javascript)
-*/
 exports.transliterationPairs = {
 	"Á":"A",
 	"Ă":"A",

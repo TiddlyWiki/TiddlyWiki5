@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/insertafter.js
 type: application/javascript
 module-type: filteroperator
-
-Insert an item after another item in a list
-
 \*/
 
 "use strict";
 
-/*
-Order a list
-*/
 exports.insertafter = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
@@ -24,7 +18,7 @@ exports.insertafter = function(source,operator,options) {
 		if(pos !== -1) {
 			results.splice(pos,1);
 		}
-		// Insert the entry after the target marker
+
 		pos = results.indexOf(target);
 		if(pos !== -1) {
 			results.splice(pos+1,0,operator.operand);

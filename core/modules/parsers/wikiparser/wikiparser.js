@@ -2,35 +2,10 @@
 title: $:/core/modules/parsers/wikiparser/wikiparser.js
 type: application/javascript
 module-type: parser
-
-The wiki text parser processes blocks of source text into a parse tree.
-
-The parse tree is made up of nested arrays of these JavaScript objects:
-
-	{type: "element", tag: <string>, attributes: {}, children: []} - an HTML element
-	{type: "text", text: <string>} - a text node
-	{type: "entity", value: <string>} - an entity
-	{type: "raw", html: <string>} - raw HTML
-
-Attributes are stored as hashmaps of the following objects:
-
-	{type: "string", value: <string>} - literal string
-	{type: "indirect", textReference: <textReference>} - indirect through a text reference
-	{type: "macro", macro: <TBD>} - indirect through a macro invocation
-
 \*/
 
 "use strict";
 
-/*
-type: content type of text
-text: text to be parsed
-options: see below:
-	parseAsInline: true to parse text as inline instead of block
-	wiki: reference to wiki to use
-	_canonical_uri: optional URI of content if text is missing or empty
-	configTrimWhiteSpace: true to trim whitespace
-*/
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
 	var self = this;
@@ -39,7 +14,7 @@ var WikiParser = function(type,text,options) {
 		this.loadRemoteTiddler(options._canonical_uri);
 		text = $tw.language.getRawString("LazyLoadingWarning");
 	}
-	// Save the parse text
+
 	this.type = type || "text/vnd.tiddlywiki";
 	this.source = text || "";
 	this.sourceLength = this.source.length;
@@ -75,7 +50,7 @@ var WikiParser = function(type,text,options) {
 		}
 		inlineRuleClasses = this.inlineRuleClasses;
 	}
-	// Instantiate the pragma parse rules
+
 	this.pragmaRules = this.instantiateRules(pragmaRuleClasses,"pragma",0);
 	// Instantiate the parser block and inline rules
 	this.blockRules = this.instantiateRules(blockRuleClasses,"block",0);
@@ -88,7 +63,7 @@ var WikiParser = function(type,text,options) {
 	} else {
 		topBranch.push.apply(topBranch,this.parseBlocks());
 	}
-	// Build rules' name map
+
 	this.usingRuleMap = {};
 	$tw.utils.each(this.pragmaRules, function (ruleInfo) { self.usingRuleMap[ruleInfo.rule.name] = Object.getPrototypeOf(ruleInfo.rule); });
 	$tw.utils.each(this.blockRules, function (ruleInfo) { self.usingRuleMap[ruleInfo.rule.name] = Object.getPrototypeOf(ruleInfo.rule); });
@@ -96,8 +71,6 @@ var WikiParser = function(type,text,options) {
 	// Return the parse tree
 };
 
-/*
-*/
 WikiParser.prototype.loadRemoteTiddler = function(url) {
 	var self = this;
 	$tw.utils.httpRequest({
@@ -117,8 +90,6 @@ WikiParser.prototype.loadRemoteTiddler = function(url) {
 	});
 };
 
-/*
-*/
 WikiParser.prototype.setupRules = function(proto,configPrefix) {
 	var self = this;
 	if(!$tw.safeMode) {
@@ -130,9 +101,6 @@ WikiParser.prototype.setupRules = function(proto,configPrefix) {
 	}
 };
 
-/*
-Instantiate an array of parse rules
-*/
 WikiParser.prototype.instantiateRules = function(classes,type,startPos) {
 	var rulesInfo = [],
 		self = this;
@@ -153,10 +121,6 @@ WikiParser.prototype.instantiateRules = function(classes,type,startPos) {
 	return rulesInfo;
 };
 
-/*
-Skip any whitespace at the current position. Options are:
-	treatNewlinesAsNonWhitespace: true if newlines are NOT to be treated as whitespace
-*/
 WikiParser.prototype.skipWhitespace = function(options) {
 	options = options || {};
 	var whitespaceRegExp = options.treatNewlinesAsNonWhitespace ? /([^\S\n]+)/mg : /(\s+)/mg;
@@ -167,9 +131,6 @@ WikiParser.prototype.skipWhitespace = function(options) {
 	}
 };
 
-/*
-Get the next match out of an array of parse rule instances
-*/
 WikiParser.prototype.findNextMatch = function(rules,startPos) {
 	// Find the best matching rule by finding the closest match position
 	var matchingRule,
@@ -190,9 +151,6 @@ WikiParser.prototype.findNextMatch = function(rules,startPos) {
 	return matchingRule;
 };
 
-/*
-Parse any pragmas at the beginning of a block of parse text
-*/
 WikiParser.prototype.parsePragmas = function() {
 	var currentTreeBranch = this.tree;
 	while(true) {
@@ -203,14 +161,14 @@ WikiParser.prototype.parsePragmas = function() {
 		if(this.pos >= this.sourceLength) {
 			break;
 		}
-		// Check if we've arrived at a pragma rule match
+
 		var nextMatch = this.findNextMatch(this.pragmaRules,this.pos);
 		// If not, just exit
 		if(!nextMatch || nextMatch.matchIndex !== this.pos) {
 			this.pos = savedPos;
 			break;
 		}
-		// Process the pragma rule
+
 		var start = this.pos;
 		var subTree = nextMatch.rule.parse();
 		if(subTree.length > 0) {
@@ -223,23 +181,19 @@ WikiParser.prototype.parsePragmas = function() {
 			subTree[0].children = [];
 			currentTreeBranch = subTree[0].children;
 		}
-		// Skip whitespace after the pragma
+
 		this.skipWhitespace();
 	}
 	return currentTreeBranch;
 };
 
-/*
-Parse a block from the current position
-	terminatorRegExpString: optional regular expression string that identifies the end of plain paragraphs. Must not include capturing parenthesis
-*/
 WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	var terminatorRegExp = terminatorRegExpString ? new RegExp(terminatorRegExpString + "|\\r?\\n\\r?\\n","mg") : /(\r?\n\r?\n)/mg;
 	this.skipWhitespace();
 	if(this.pos >= this.sourceLength) {
 		return [];
 	}
-	// Look for a block rule that applies at the current position
+
 	var nextMatch = this.findNextMatch(this.blockRules,this.pos);
 	if(nextMatch && nextMatch.matchIndex === this.pos) {
 		var start = this.pos;
@@ -259,10 +213,6 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	return [{type: "element", tag: "p", children: children, start: start, end: end, rule: "parseblock" }];
 };
 
-/*
-Parse a series of blocks of text until a terminating regexp is encountered or the end of the text
-	terminatorRegExpString: terminating regular expression
-*/
 WikiParser.prototype.parseBlocks = function(terminatorRegExpString) {
 	if(terminatorRegExpString) {
 		return this.parseBlocksTerminated(terminatorRegExpString);
@@ -271,9 +221,6 @@ WikiParser.prototype.parseBlocks = function(terminatorRegExpString) {
 	}
 };
 
-/*
-Parse a block from the current position to the end of the text
-*/
 WikiParser.prototype.parseBlocksUnterminated = function() {
 	var tree = [];
 	while(this.pos < this.sourceLength) {
@@ -282,17 +229,11 @@ WikiParser.prototype.parseBlocksUnterminated = function() {
 	return tree;
 };
 
-/*
-Parse blocks of text until a terminating regexp is encountered. Wrapper for parseBlocksTerminatedExtended that just returns the parse tree
-*/
 WikiParser.prototype.parseBlocksTerminated = function(terminatorRegExpString) {
 	var ex = this.parseBlocksTerminatedExtended(terminatorRegExpString);
 	return ex.tree;
 };
 
-/*
-Parse blocks of text until a terminating regexp is encountered
-*/
 WikiParser.prototype.parseBlocksTerminatedExtended = function(terminatorRegExpString) {
 	var terminatorRegExp = new RegExp(terminatorRegExpString,"mg"),
 		result = {
@@ -320,13 +261,6 @@ WikiParser.prototype.parseBlocksTerminatedExtended = function(terminatorRegExpSt
 	return result;
 };
 
-/*
-Parse a run of text at the current position
-	terminatorRegExp: a regexp at which to stop the run
-	options: see below
-Options available:
-	eatTerminator: move the parse position past any encountered terminator (default false)
-*/
 WikiParser.prototype.parseInlineRun = function(terminatorRegExp,options) {
 	if(terminatorRegExp) {
 		return this.parseInlineRunTerminated(terminatorRegExp,options);
@@ -423,7 +357,7 @@ WikiParser.prototype.parseInlineRunTerminatedExtended = function(terminatorRegEx
 			terminatorMatch = terminatorRegExp.exec(this.source);
 		}
 	}
-	// Process the remaining text
+
 	if(this.pos < this.sourceLength) {
 		this.pushTextWidget(tree,this.source.substr(this.pos),this.pos,this.sourceLength);
 	}
@@ -433,9 +367,6 @@ WikiParser.prototype.parseInlineRunTerminatedExtended = function(terminatorRegEx
 	};
 };
 
-/*
-Push a text widget onto an array, respecting the configTrimWhiteSpace setting
-*/
 WikiParser.prototype.pushTextWidget = function(array,text,start,end) {
 	if(this.configTrimWhiteSpace) {
 		text = $tw.utils.trim(text);
@@ -445,9 +376,6 @@ WikiParser.prototype.pushTextWidget = function(array,text,start,end) {
 	}
 };
 
-/*
-Parse zero or more class specifiers `.classname`
-*/
 WikiParser.prototype.parseClasses = function() {
 	var classRegExp = /\.([^\s\.]+)/mg,
 		classNames = [];
@@ -461,11 +389,6 @@ WikiParser.prototype.parseClasses = function() {
 	return classNames;
 };
 
-/*
-Amend the rules used by this instance of the parser
-	type: `only` keeps just the named rules, `except` keeps all but the named rules
-	names: array of rule names
-*/
 WikiParser.prototype.amendRules = function(type,names) {
 	names = names || [];
 	// Define the filter function
@@ -477,7 +400,7 @@ WikiParser.prototype.amendRules = function(type,names) {
 	} else {
 		return;
 	}
-	// Define a function to process each of our rule arrays
+
 	var processRuleArray = function(ruleArray) {
 		for(var t=ruleArray.length-1; t>=0; t--) {
 			if((names.indexOf(ruleArray[t].rule.name) === -1) === target) {

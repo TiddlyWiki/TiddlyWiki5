@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/is/system.js
 type: application/javascript
 module-type: isfilteroperator
-
-Filter function for [is[system]]
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.system = function(source,prefix,options) {
 	var results = [];
 	if(prefix === "!") {

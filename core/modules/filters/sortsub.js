@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/sortsub.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for sorting by a subfilter
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.sortsub = function(source,operator,options) {
 	// Compile the subfilter
 	var filterFn = options.wiki.compileFilter(operator.operand);

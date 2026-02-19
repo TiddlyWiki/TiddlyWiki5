@@ -2,27 +2,17 @@
 title: $:/core/modules/widgets/list.js
 type: application/javascript
 module-type: widget
-
-List and list item widgets
-
 \*/
 
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-/*
-The list widget creates list element sub-widgets that reach back into the list widget for their configuration
-*/
-
 var ListWidget = function(parseTreeNode,options) {
 	// Main initialisation inherited from widget.js
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 ListWidget.prototype = new Widget();
 
 ListWidget.prototype.initialise = function(parseTreeNode,options) {
@@ -30,16 +20,13 @@ ListWidget.prototype.initialise = function(parseTreeNode,options) {
 	if(parseTreeNode === undefined) {
 		return;
 	}
-	// First call parent constructor to set everything else up
+
 	Widget.prototype.initialise.call(this,parseTreeNode,options);
 	// Now look for <$list-template> and <$list-empty> widgets as immediate child widgets
-	// This is safe to do during initialization because parse trees never change after creation
+
 	this.findExplicitTemplates();
 }
 
-/*
-Render this widget into the DOM
-*/
 ListWidget.prototype.render = function(parent,nextSibling) {
 	// Initialise the storyviews if they've not been done already
 	if(!this.storyViews) {
@@ -177,9 +164,6 @@ ListWidget.prototype.makeJoinTemplate = function() {
 	}
 };
 
-/*
-Compose the template for a list item
-*/
 ListWidget.prototype.makeItemTemplate = function(title,index) {
 	// Check if the tiddler is a draft
 	var tiddler = this.wiki.getTiddler(title),
@@ -190,7 +174,7 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 	if(isDraft && this.editTemplate) {
 		template = this.editTemplate;
 	}
-	// Compose the transclusion of the template
+
 	if(template) {
 		templateTree = [{type: "transclude", attributes: {tiddler: {type: "string", value: template}}}];
 	} else {
@@ -210,7 +194,7 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 			]}]}];
 		}
 	}
-	// Return the list item
+
 	var parseTreeNode = {type: "listitem", itemTitle: title, variableName: this.variableName, children: templateTree, join: join};
 	parseTreeNode.isLast = index === this.list.length - 1;
 	if(this.counterName) {
@@ -221,9 +205,6 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 	return parseTreeNode;
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 ListWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes(),
 		result;
@@ -231,7 +212,7 @@ ListWidget.prototype.refresh = function(changedTiddlers) {
 	if(this.storyview && this.storyview.refreshStart) {
 		this.storyview.refreshStart(changedTiddlers,changedAttributes);
 	}
-	// Completely refresh if any of our attributes have changed
+
 	if(changedAttributes.filter || changedAttributes.variable || changedAttributes.counter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.join || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
 		this.refreshSelf();
 		result = true;
@@ -243,16 +224,13 @@ ListWidget.prototype.refresh = function(changedTiddlers) {
 			this.handleHistoryChanges();
 		}
 	}
-	// Call the storyview
+
 	if(this.storyview && this.storyview.refreshEnd) {
 		this.storyview.refreshEnd(changedTiddlers,changedAttributes);
 	}
 	return result;
 };
 
-/*
-Handle any changes to the history list
-*/
 ListWidget.prototype.handleHistoryChanges = function() {
 	// Get the history data
 	var newHistory = this.wiki.getTiddlerDataCached(this.historyTitle,[]);
@@ -261,20 +239,17 @@ ListWidget.prototype.handleHistoryChanges = function() {
 	while(entry < newHistory.length && entry < this.history.length && newHistory[entry].title === this.history[entry].title) {
 		entry++;
 	}
-	// Navigate forwards to each of the new tiddlers
+
 	while(entry < newHistory.length) {
 		if(this.storyview && this.storyview.navigateTo) {
 			this.storyview.navigateTo(newHistory[entry]);
 		}
 		entry++;
 	}
-	// Update the history
+
 	this.history = newHistory;
 };
 
-/*
-Process any changes to the list
-*/
 ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 	// Get the new list
 	var prevList = this.list;
@@ -301,7 +276,7 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			this.removeChildDomNodes();
 			this.children = [];
 		}
-		// If we are providing an counter variable then we must refresh the items, otherwise we can rearrange them
+
 		var hasRefreshed = false,t;
 		if(this.counterName) {
 			var mustRefreshOldLast = false;
@@ -379,7 +354,7 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 				}
 			}
 		}
-		// Remove any left over items
+
 		for(t=this.children.length-1; t>=this.list.length; t--) {
 			this.removeListItem(t);
 			hasRefreshed = true;
@@ -388,9 +363,6 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 	}
 };
 
-/*
-Find the list item with a given title, starting from a specified position
-*/
 ListWidget.prototype.findListItem = function(startIndex,title) {
 	while(startIndex < this.children.length) {
 		if(this.children[startIndex].parseTreeNode.itemTitle === title) {
@@ -401,9 +373,6 @@ ListWidget.prototype.findListItem = function(startIndex,title) {
 	return undefined;
 };
 
-/*
-Insert a new list item at the specified index
-*/
 ListWidget.prototype.insertListItem = function(index,title) {
 	// Create, insert and render the new child widgets
 	var widget = this.makeChildWidget(this.makeItemTemplate(title,index));
@@ -418,9 +387,6 @@ ListWidget.prototype.insertListItem = function(index,title) {
 	return true;
 };
 
-/*
-Remove the specified list item
-*/
 ListWidget.prototype.removeListItem = function(index) {
 	var widget = this.children[index];
 	// Animate the removal if required
@@ -429,7 +395,7 @@ ListWidget.prototype.removeListItem = function(index) {
 	} else {
 		widget.removeChildDomNodes();
 	}
-	// Remove the child widget
+
 	this.children.splice(index,1);
 };
 
@@ -439,14 +405,8 @@ var ListItemWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 ListItemWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 ListItemWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -454,9 +414,6 @@ ListItemWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 ListItemWidget.prototype.execute = function() {
 	// Set the current list item title
 	this.setVariable(this.parseTreeNode.variableName,this.parseTreeNode.itemTitle);
@@ -465,7 +422,7 @@ ListItemWidget.prototype.execute = function() {
 		this.setVariable(this.parseTreeNode.counterName + "-first",this.parseTreeNode.isFirst ? "yes" : "no");
 		this.setVariable(this.parseTreeNode.counterName + "-last",this.parseTreeNode.isLast ? "yes" : "no");
 	}
-	// Add join if needed
+
 	var children = this.parseTreeNode.children,
 		join = this.parseTreeNode.join;
 	if(join && join.length && !this.parseTreeNode.isLast) {
@@ -474,22 +431,16 @@ ListItemWidget.prototype.execute = function() {
 			children.push(joinNode);
 		})
 	}
-	// Construct the child widgets
+
 	this.makeChildWidgets(children);
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 ListItemWidget.prototype.refresh = function(changedTiddlers) {
 	return this.refreshChildren(changedTiddlers);
 };
 
 exports.listitem = ListItemWidget;
 
-/*
-Make <$list-template> and <$list-empty> widgets that do nothing
-*/
 var ListTemplateWidget = function(parseTreeNode,options) {
 	// Main initialisation inherited from widget.js
 	this.initialise(parseTreeNode,options);

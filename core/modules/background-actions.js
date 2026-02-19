@@ -2,9 +2,6 @@
 title: $:/core/modules/background-actions.js
 type: application/javascript
 module-type: global
-
-Class to dispatch actions when filters change
-
 \*/
 
 "use strict";
@@ -15,7 +12,7 @@ class BackgroundActionDispatcher {
 		this.wiki = wiki;
 		this.nextTrackedFilterId = 1;
 		this.trackedFilters = new Map(); // Use Map for better key management
-		// Track the filter for the background actions
+
 		this.filterTracker.track({
 			filterString: "[all[tiddlers+shadows]tag[$:/tags/BackgroundAction]!is[draft]]",
 			fnEnter: title => this.trackFilter(title),
@@ -56,13 +53,6 @@ class BackgroundActionDispatcher {
 	}
 }
 
-/*
-Represents an individual tracked filter. Options include:
-wiki: wiki to use
-title: title of the tiddler being tracked
-trackFilter: filter string to track changes
-actions: actions to be executed when the filter changes
-*/
 class BackgroundActionTracker {
 	constructor({wiki, title, trackFilter, actions}) {
 		this.wiki = wiki;

@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/setmultiplevariables.js
 type: application/javascript
 module-type: widget
-
-Widget to set multiple variables at once from a list of names and a list of values
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var SetMultipleVariablesWidget = function(parseTreeNode,options) {
     this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 SetMultipleVariablesWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 SetMultipleVariablesWidget.prototype.render = function(parent,nextSibling) {
     this.parentDomNode = parent;
     this.computeAttributes();
@@ -30,16 +21,12 @@ SetMultipleVariablesWidget.prototype.render = function(parent,nextSibling) {
     this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 SetMultipleVariablesWidget.prototype.execute = function() {
     // Setup our variables
     this.setVariables();
     // Construct the child widgets
     this.makeChildWidgets();
 };
-
 
 SetMultipleVariablesWidget.prototype.setVariables = function() {
     // Set the variables
@@ -57,9 +44,6 @@ SetMultipleVariablesWidget.prototype.setVariables = function() {
     }
 };
 
-/*
-Refresh the widget by ensuring our attributes are up to date
-*/
 SetMultipleVariablesWidget.prototype.refresh = function(changedTiddlers) {
     var filterNames = this.getAttribute("$names",""),
         filterValues = this.getAttribute("$values",""),

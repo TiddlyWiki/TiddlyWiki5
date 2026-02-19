@@ -2,19 +2,12 @@
 title: $:/core/modules/utils/dom.js
 type: application/javascript
 module-type: utils
-
-Various static DOM-related utility functions.
-
 \*/
 
 "use strict";
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
-
-/*
-Select text in a an input or textarea (setSelectionRange crashes on certain input types)
-*/
 exports.setSelectionRangeSafe = function(node,start,end,direction) {
 	try {
 		node.setSelectionRange(start,end,direction);
@@ -23,9 +16,6 @@ exports.setSelectionRangeSafe = function(node,start,end,direction) {
 	}
 };
 
-/*
-Select the text in an input or textarea by position
-*/
 exports.setSelectionByPosition = function(node,selectFromStart,selectFromEnd) {
 	$tw.utils.setSelectionRangeSafe(node,selectFromStart,node.value.length - selectFromEnd);
 };
@@ -36,9 +26,6 @@ exports.removeChildren = function(node) {
 	}
 };
 
-/*
-Get the first parent element that has scrollbars or use the body as fallback.
-*/
 exports.getScrollContainer = function(el) {
 	var doc = el.ownerDocument;
 	while(el.parentNode) {
@@ -50,14 +37,6 @@ exports.getScrollContainer = function(el) {
 	return doc.body;
 };
 
-/*
-Get the scroll position of the viewport
-Returns:
-	{
-		x: horizontal scroll position in pixels,
-		y: vertical scroll position in pixels
-	}
-*/
 exports.getScrollPosition = function(srcWindow) {
 	var scrollWindow = srcWindow || window;
 	if("scrollX" in scrollWindow) {
@@ -67,9 +46,6 @@ exports.getScrollPosition = function(srcWindow) {
 	}
 };
 
-/*
-Adjust the height of a textarea to fit its content, preserving scroll position, and return the height
-*/
 exports.resizeTextAreaToFit = function(domNode,minHeight) {
 	// Get the scroll container and register the current scroll position
 	var container = $tw.utils.getScrollContainer(domNode),
@@ -92,9 +68,6 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 	return newHeight;
 };
 
-/*
-Gets the bounding rectangle of an element in absolute page coordinates
-*/
 exports.getBoundingPageRect = function(element) {
 	var scrollPos = $tw.utils.getScrollPosition(element.ownerDocument.defaultView),
 		clientRect = element.getBoundingClientRect();
@@ -108,9 +81,6 @@ exports.getBoundingPageRect = function(element) {
 	};
 };
 
-/*
-Saves a named password in the browser
-*/
 exports.savePassword = function(name,password) {
 	var done = false;
 	try {
@@ -124,9 +94,6 @@ exports.savePassword = function(name,password) {
 	}
 };
 
-/*
-Retrieve a named password from the browser
-*/
 exports.getPassword = function(name) {
 	var value;
 	try {
@@ -140,16 +107,10 @@ exports.getPassword = function(name) {
 	}
 };
 
-/*
-Force layout of a dom node and its descendents
-*/
 exports.forceLayout = function(element) {
 	var dummy = element.offsetWidth;
 };
 
-/*
-Pulse an element for debugging purposes
-*/
 exports.pulseElement = function(element) {
 	// Event handler to remove the class at the end
 	element.addEventListener($tw.browser.animationEnd,function handler(event) {
@@ -162,15 +123,6 @@ exports.pulseElement = function(element) {
 	$tw.utils.addClass(element,"pulse");
 };
 
-/*
-Attach specified event handlers to a DOM node
-domNode: where to attach the event handlers
-events: array of event handlers to be added (see below)
-Each entry in the events array is an object with these properties:
-handlerFunction: optional event handler function
-handlerObject: optional event handler object
-handlerMethod: optionally specifies object handler method name (defaults to `handleEvent`)
-*/
 exports.addEventListeners = function(domNode,events) {
 	$tw.utils.each(events,function(eventInfo) {
 		var handler;
@@ -189,9 +141,6 @@ exports.addEventListeners = function(domNode,events) {
 	});
 };
 
-/*
-Get the computed styles applied to an element as an array of strings of individual CSS properties
-*/
 exports.getComputedStyles = function(domNode) {
 	var textAreaStyles = window.getComputedStyle(domNode,null),
 		styleDefs = [],
@@ -203,23 +152,14 @@ exports.getComputedStyles = function(domNode) {
 	return styleDefs;
 };
 
-/*
-Apply a set of styles passed as an array of strings of individual CSS properties
-*/
 exports.setStyles = function(domNode,styleDefs) {
 	domNode.style.cssText = styleDefs.join("");
 };
 
-/*
-Copy the computed styles from a source element to a destination element
-*/
 exports.copyStyles = function(srcDomNode,dstDomNode) {
 	$tw.utils.setStyles(dstDomNode,$tw.utils.getComputedStyles(srcDomNode));
 };
 
-/*
-Copy plain text to the clipboard on browsers that support it
-*/
 exports.copyToClipboard = function(text,options) {
 	options = options || {};
 	text = text || "";
@@ -252,9 +192,6 @@ exports.copyToClipboard = function(text,options) {
 	document.body.removeChild(textArea);
 };
 
-/*
-Collect DOM variables
-*/
 exports.collectDOMVariables = function(selectedNode,domNode,event) {
 	var variables = {},
 	    selectedNodeRect,
@@ -263,7 +200,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
-		
+
 		if("offsetLeft" in selectedNode) {
 			// Add variables with a (relative and absolute) popup coordinate string for the selected node
 			var nodeRect = {
@@ -288,7 +225,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
 		}
 	}
-	
+
 	if(domNode && ("offsetWidth" in domNode)) {
 		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
 		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
@@ -301,7 +238,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
 			variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
 		}
-		
+
 		if(domNode) {
 			// Add variables for event X and Y position relative to event catcher node
 			domNodeRect = domNode.getBoundingClientRect();
@@ -309,16 +246,12 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["event-fromcatcher-posy"] = (event.clientY - domNodeRect.top).toString();
 		}
 
-		// Add variables for event X and Y position relative to the viewport
 		variables["event-fromviewport-posx"] = event.clientX.toString();
 		variables["event-fromviewport-posy"] = event.clientY.toString();
 	}
 	return variables;
 };
 
-/*
-Make sure the CSS selector is not invalid
-*/
 exports.querySelectorSafe = function(selector,baseElement) {
 	baseElement = baseElement || document;
 	try {

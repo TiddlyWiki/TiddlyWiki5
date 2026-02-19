@@ -2,9 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/heading.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text block rule for headings
-
 \*/
 
 "use strict";
@@ -18,9 +15,6 @@ exports.init = function(parser) {
 	this.matchRegExp = /(!{1,6})/mg;
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	// Get all the details of the match
 	var headingLevel = this.match[1].length;

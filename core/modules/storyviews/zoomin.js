@@ -2,9 +2,6 @@
 title: $:/core/modules/storyviews/zoomin.js
 type: application/javascript
 module-type: storyview
-
-Zooms between individual tiddlers
-
 \*/
 
 "use strict";
@@ -24,7 +21,7 @@ var ZoominListView = function(listWidget) {
 	if(history.length > 0) {
 		targetTiddler = history[history.length-1].title;
 	}
-	// Make all the tiddlers position absolute, and hide all but the top (or first) one
+
 	$tw.utils.each(this.listWidget.children,function(itemWidget,index) {
 		var domNode = itemWidget.findFirstDomNode();
 		// Abandon if the list entry isn't a DOM element (it might be a text node)
@@ -55,7 +52,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		this.logTextNodeRoot(targetElement);
 		return;
 	}
-	// Make the new tiddler be position absolute and visible so that we can measure it
+
 	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[
 		{display: "block"},
@@ -118,13 +115,10 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 			}
 		},duration);
 	}
-	// Scroll the target into view
+
 //	$tw.pageScroller.scrollIntoView(targetElement);
 };
 
-/*
-Find the first child DOM node of a widget that has the class "tc-title"
-*/
 function findTitleDomNode(widget,targetClass) {
 	targetClass = targetClass || "tc-title";
 	var domNode = widget.findFirstDomNode();
@@ -161,12 +155,12 @@ ZoominListView.prototype.remove = function(widget) {
 		removeElement();
 		return;
 	}
-	// Abandon if hidden
+
 	if(targetElement.style.display != "block" ) {
 		removeElement();
 		return;
 	}
-	// Set up the tiddler that is being closed
+
 	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[
 		{display: "block"},
@@ -199,7 +193,7 @@ ZoominListView.prototype.remove = function(widget) {
 			this.currentTiddlerDomNode = toWidgetDomNode;
 		}
 	}
-	// Animate them both
+
 	// Force layout
 	$tw.utils.forceLayout(this.listWidget.parentDomNode);
 	// First, the tiddler we're closing
@@ -212,7 +206,7 @@ ZoominListView.prototype.remove = function(widget) {
 	]);
 	setTimeout(function() {
 		$tw.utils.removeStyles(toWidgetDomNode, ["transformOrigin", "transform", "transition", "opacity", "zIndex"]);
-	}, duration);	
+	}, duration);
 	setTimeout(removeElement,duration);
 	// Now the tiddler we're going back to
 	if(toWidgetDomNode) {

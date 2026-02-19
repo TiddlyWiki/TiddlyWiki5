@@ -2,9 +2,6 @@
 title: $:/core/modules/filters/slugify.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for slugifying a tiddler title
-
 \*/
 
 "use strict";

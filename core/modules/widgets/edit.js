@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/edit.js
 type: application/javascript
 module-type: widget
-
-Edit widget is a meta-widget chooses the appropriate actual editting widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var EditWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 EditWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 EditWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -33,9 +24,6 @@ EditWidget.prototype.render = function(parent,nextSibling) {
 // Mappings from content type to editor type are stored in tiddlers with this prefix
 var EDITOR_MAPPING_PREFIX = "$:/config/EditorTypeMappings/";
 
-/*
-Compute the internal state of the widget
-*/
 EditWidget.prototype.execute = function() {
 	// Get our parameters
 	this.editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));

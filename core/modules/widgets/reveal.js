@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/reveal.js
 type: application/javascript
 module-type: widget
-
-Reveal widget
-
 \*/
 
 "use strict";
@@ -17,14 +14,8 @@ var RevealWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 RevealWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 RevealWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();

@@ -2,9 +2,6 @@
 title: $:/core/modules/storyviews/classic.js
 type: application/javascript
 module-type: storyview
-
-Views the story as a linear sequence
-
 \*/
 
 "use strict";
@@ -39,7 +36,7 @@ ClassicStoryView.prototype.insert = function(widget) {
 		if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 			return;
 		}
-		// Get the current height of the tiddler
+
 		var computedStyle = window.getComputedStyle(targetElement),
 			currMarginBottom = parseInt(computedStyle.marginBottom,10),
 			currMarginTop = parseInt(computedStyle.marginTop,10),
@@ -79,12 +76,12 @@ ClassicStoryView.prototype.remove = function(widget) {
 		if($tw.utils.domContains(targetElement,targetElement.ownerDocument.activeElement)) {
 			targetElement.ownerDocument.activeElement.blur();
 		}
-		// Abandon if the list entry isn't a DOM element (it might be a text node)
+
 		if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 			removeElement();
 			return;
 		}
-		// Get the current height of the tiddler
+
 		var currWidth = targetElement.offsetWidth,
 			computedStyle = window.getComputedStyle(targetElement),
 			currMarginBottom = parseInt(computedStyle.marginBottom,10),

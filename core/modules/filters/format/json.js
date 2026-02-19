@@ -6,9 +6,6 @@ module-type: formatfilteroperator
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.json = function(source,operand,options) {
 	var results = [],
 		spaces = null;

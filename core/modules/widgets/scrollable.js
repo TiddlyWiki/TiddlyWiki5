@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/scrollable.js
 type: application/javascript
 module-type: widget
-
-Scrollable widget
-
 \*/
 
 "use strict";
@@ -17,9 +14,6 @@ var ScrollableWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 ScrollableWidget.prototype = new Widget();
 
 ScrollableWidget.prototype.cancelScroll = function() {
@@ -29,9 +23,6 @@ ScrollableWidget.prototype.cancelScroll = function() {
 	}
 };
 
-/*
-Handle a scroll event
-*/
 ScrollableWidget.prototype.handleScrollEvent = function(event) {
 	// Pass the scroll event through if our offsetsize is larger than our scrollsize
 	if(this.outerDomNode.scrollWidth <= this.outerDomNode.offsetWidth && this.outerDomNode.scrollHeight <= this.outerDomNode.offsetHeight && this.fallthrough === "yes") {
@@ -49,9 +40,6 @@ ScrollableWidget.prototype.handleScrollEvent = function(event) {
 	return false; // Handled event
 };
 
-/*
-Scroll an element into view
-*/
 ScrollableWidget.prototype.scrollIntoView = function(element,callback,options) {
 	var duration = $tw.utils.hop(options,"animationDuration") ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
 		srcWindow = element ? element.ownerDocument.defaultView : window;
@@ -219,9 +207,6 @@ ScrollableWidget.prototype.updateScrollPositionFromBoundTiddler = function() {
 	}
 };
 
-/*
-Compute the internal state of the widget
-*/
 ScrollableWidget.prototype.execute = function() {
 	// Get attributes
 	this.scrollableBind = this.getAttribute("bind");
@@ -231,16 +216,13 @@ ScrollableWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 ScrollableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
 	}
-	// If the bound tiddler has changed, update the eventListener and update scroll position
+
 	if(changedAttributes["bind"]) {
 		if(this.currentListener) {
 			this.outerDomNode.removeEventListener("scroll", this.currentListener, false);
@@ -249,7 +231,7 @@ ScrollableWidget.prototype.refresh = function(changedTiddlers) {
 		this.currentListener = this.listenerFunction.bind(this);
 		this.outerDomNode.addEventListener("scroll", this.currentListener);
 	}
-	// Refresh children
+
 	var result = this.refreshChildren(changedTiddlers);
 	// If the bound tiddler has changed, update scroll position
 	if(changedAttributes["bind"] || changedTiddlers[this.getAttribute("bind")]) {

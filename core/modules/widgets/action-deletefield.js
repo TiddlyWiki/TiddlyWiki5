@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/action-deletefield.js
 type: application/javascript
 module-type: widget
-
-Action widget to delete fields of a tiddler.
-
 \*/
 
 "use strict";
@@ -15,31 +12,19 @@ var DeleteFieldWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 DeleteFieldWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 DeleteFieldWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 };
 
-/*
-Compute the internal state of the widget
-*/
 DeleteFieldWidget.prototype.execute = function() {
 	this.actionTiddler = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
 	this.actionField = this.getAttribute("$field",null);
 	this.actionTimestamp = this.getAttribute("$timestamp","yes") === "yes";
 };
 
-/*
-Refresh the widget by ensuring our attributes are up to date
-*/
 DeleteFieldWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes["$tiddler"]) {
@@ -49,9 +34,6 @@ DeleteFieldWidget.prototype.refresh = function(changedTiddlers) {
 	return this.refreshChildren(changedTiddlers);
 };
 
-/*
-Invoke the action associated with this widget
-*/
 DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var self = this,
 		tiddler = this.wiki.getTiddler(self.actionTiddler),

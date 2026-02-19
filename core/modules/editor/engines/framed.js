@@ -2,9 +2,6 @@
 title: $:/core/modules/editor/engines/framed.js
 type: application/javascript
 module-type: library
-
-Text editor engine based on a simple input or textarea within an iframe. This is done so that the selection is preserved even when clicking away from the textarea
-
 \*/
 
 "use strict";
@@ -56,7 +53,7 @@ function FramedEngine(options) {
 	} else {
 		this.domNode.value = this.value;
 	}
-	// Set the attributes
+
 	if(this.widget.editType && this.widget.editTag !== "textarea") {
 		this.domNode.setAttribute("type",this.widget.editType);
 	}
@@ -78,7 +75,7 @@ function FramedEngine(options) {
 	if(this.widget.isDisabled === "yes") {
 		this.domNode.setAttribute("disabled",true);
 	}
-	// Copy the styles from the dummy textarea
+
 	this.copyStyles();
 	// Add event listeners
 	$tw.utils.addEventListeners(this.domNode,[
@@ -99,13 +96,10 @@ function FramedEngine(options) {
 			{name: "click",handlerObject: this.widget,handlerMethod: "handleClickEvent"}
 		]);
 	}
-	// Insert the element into the DOM
+
 	this.iframeDoc.body.appendChild(this.domNode);
 }
 
-/*
-Copy styles from the dummy text area to the textarea in the iframe
-*/
 FramedEngine.prototype.copyStyles = function() {
 	// Copy all styles
 	$tw.utils.copyStyles(this.dummyTextArea,this.domNode);
@@ -127,14 +121,11 @@ FramedEngine.prototype.setText = function(text,type) {
 		if(this.domNode.ownerDocument.activeElement !== this.domNode) {
 			this.updateDomNodeText(text);
 		}
-		// Fix the height if needed
+
 		this.fixHeight();
 	}
 };
 
-/*
-Update the DomNode with the new text
-*/
 FramedEngine.prototype.updateDomNodeText = function(text) {
 	try {
 		this.domNode.value = text;
@@ -143,16 +134,10 @@ FramedEngine.prototype.updateDomNodeText = function(text) {
 	}
 };
 
-/*
-Get the text of the engine
-*/
 FramedEngine.prototype.getText = function() {
 	return this.domNode.value;
 };
 
-/*
-Fix the height of textarea to fit content
-*/
 FramedEngine.prototype.fixHeight = function() {
 	// Make sure styles are updated
 	this.copyStyles();
@@ -172,9 +157,6 @@ FramedEngine.prototype.fixHeight = function() {
 	}
 };
 
-/*
-Focus the engine node
-*/
 FramedEngine.prototype.focus  = function() {
 	if(this.domNode.focus) {
 		this.domNode.focus();
@@ -184,18 +166,12 @@ FramedEngine.prototype.focus  = function() {
 	}
 };
 
-/*
-Handle a focus event
-*/
 FramedEngine.prototype.handleFocusEvent = function(event) {
 	if(this.widget.editCancelPopups) {
 		$tw.popup.cancel(0);
 	}
 };
 
-/*
-Handle a keydown event
- */
 FramedEngine.prototype.handleKeydownEvent = function(event) {
 	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
 		return true;
@@ -204,17 +180,11 @@ FramedEngine.prototype.handleKeydownEvent = function(event) {
 	return this.widget.handleKeydownEvent(event);
 };
 
-/*
-Handle a click
-*/
 FramedEngine.prototype.handleClickEvent = function(event) {
 	this.fixHeight();
 	return true;
 };
 
-/*
-Handle a dom "input" event which occurs when the text has changed
-*/
 FramedEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
@@ -224,9 +194,6 @@ FramedEngine.prototype.handleInputEvent = function(event) {
 	return true;
 };
 
-/*
-Create a blank structure representing a text operation
-*/
 FramedEngine.prototype.createTextOperation = function() {
 	var operation = {
 		text: this.domNode.value,
@@ -242,9 +209,6 @@ FramedEngine.prototype.createTextOperation = function() {
 	return operation;
 };
 
-/*
-Execute a text operation
-*/
 FramedEngine.prototype.executeTextOperation = function(operation) {
 	// Perform the required changes to the text area and the underlying tiddler
 	var newText = operation.text;

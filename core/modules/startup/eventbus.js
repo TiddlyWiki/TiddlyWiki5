@@ -2,8 +2,6 @@
 title: $:/core/modules/startup/eventbus.js
 type: application/javascript
 module-type: startup
-
-Event bus for cross module communication
 \*/
 
 exports.name = "eventbus";

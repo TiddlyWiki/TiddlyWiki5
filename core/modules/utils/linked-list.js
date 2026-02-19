@@ -2,10 +2,6 @@
 module-type: utils
 title: $:/core/modules/utils/linkedlist.js
 type: application/javascript
-
-This is a doubly-linked indexed list intended for manipulation, particularly
-pushTop, which it does with significantly better performance than an array.
-
 \*/
 
 "use strict";
@@ -38,11 +34,7 @@ LinkedList.prototype.remove = function(value) {
 	}
 };
 
-/*
-Push behaves like array.push and accepts multiple string arguments. But it also
-accepts a single array argument too, to be consistent with its other methods.
-*/
-LinkedList.prototype.push = function(/* values */) {
+LinkedList.prototype.push = function() {
 	var i, values = arguments;
 	if($tw.utils.isArray(values[0])) {
 		values = values[0];
@@ -120,7 +112,7 @@ function _removeOne(list,value) {
 		next = nextEntry[0];
 		prev = prevEntry[0];
 	}
-	// Relink preceding element.
+
 	ref = list.next.get(prev);
 	if(Array.isArray(ref)) {
 		var i = ref.indexOf(value);
@@ -129,7 +121,6 @@ function _removeOne(list,value) {
 		list.next.set(prev,next);
 	}
 
-	// Now relink following element
 	ref = list.prev.get(next);
 	if(Array.isArray(ref)) {
 		var i = ref.indexOf(value);
@@ -138,7 +129,6 @@ function _removeOne(list,value) {
 		list.prev.set(next,prev);
 	}
 
-	// Delink actual value. If it uses arrays, just remove first entries.
 	if(Array.isArray(nextEntry) && nextEntry.length > 1) {
 		nextEntry.shift();
 		prevEntry.shift();
@@ -166,7 +156,7 @@ function _linkToEnd(list,value) {
 		list.next.set(value,null);
 		list.prev.set(value,last);
 	}
-	// Make the old last point to this new one.
+
 	if(value !== last) {
 		var array = list.next.get(last);
 		if(Array.isArray(array)) {
@@ -177,7 +167,7 @@ function _linkToEnd(list,value) {
 		list.prev.set(null,value);
 	} else {
 		// Edge case, the pushed value was already the last value.
-		// The second-to-last nextPtr for that value must point to itself now.
+
 		var array = list.next.get(last);
 		array[array.length-2] = value;
 	}

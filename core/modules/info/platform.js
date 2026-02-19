@@ -2,9 +2,6 @@
 title: $:/core/modules/info/platform.js
 type: application/javascript
 module-type: info
-
-Initialise basic platform $:/info/ tiddlers
-
 \*/
 
 "use strict";

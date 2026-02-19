@@ -2,9 +2,6 @@
 title: $:/core/modules/parsers/videoparser.js
 type: application/javascript
 module-type: parser
-
-The video parser parses a video tiddler into an embeddable HTML element
-
 \*/
 
 "use strict";

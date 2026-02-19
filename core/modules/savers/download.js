@@ -2,16 +2,10 @@
 title: $:/core/modules/savers/download.js
 type: application/javascript
 module-type: saver
-
-Handles saving changes via HTML5's download APIs
-
 \*/
 
 "use strict";
 
-/*
-Select the appropriate saver module and set it up
-*/
 var DownloadSaver = function(wiki) {
 };
 
@@ -33,10 +27,10 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 	if(!type) {
 		type = "text/html";
 	}
-	// Set up the link
+
 	var link = document.createElement("a");
 	// We prefer Blobs if they're available, unless we're dealing with a tiddler type declaring itself full of base64 encoded content.
-	// Then we use data urls, because browsers will know to decode the stream and download the actual binary file as intended.
+
 	if(Blob !== undefined && !type.includes(";base64")) {
 		var blob = new Blob([text], {type: type});
 		link.setAttribute("href", URL.createObjectURL(blob));
@@ -52,9 +46,6 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 	return true;
 };
 
-/*
-Information about this saver
-*/
 DownloadSaver.prototype.info = {
 	name: "download",
 	priority: 100
@@ -70,16 +61,10 @@ Object.defineProperty(DownloadSaver.prototype.info, "capabilities", {
 	}
 });
 
-/*
-Static method that returns true if this saver is capable of working
-*/
 exports.canSave = function(wiki) {
 	return document.createElement("a").download !== undefined;
 };
 
-/*
-Create an instance of this saver
-*/
 exports.create = function(wiki) {
 	return new DownloadSaver(wiki);
 };

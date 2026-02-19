@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/reduce.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator evaluates a subfilter for each item, making the running total available in the variable `accumulator`, and the current index available in the variable `index`
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.reduce = function(source,operator,options) {
 	// Accumulate the list
 	var results = [];

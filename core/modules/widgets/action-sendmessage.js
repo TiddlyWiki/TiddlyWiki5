@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/action-sendmessage.js
 type: application/javascript
 module-type: widget
-
-Action widget to send a message
-
 \*/
 
 "use strict";
@@ -15,22 +12,13 @@ var SendMessageWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 SendMessageWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 SendMessageWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 };
 
-/*
-Compute the internal state of the widget
-*/
 SendMessageWidget.prototype.execute = function() {
 	this.actionMessage = this.getAttribute("$message");
 	this.actionParam = this.getAttribute("$param");
@@ -40,9 +28,6 @@ SendMessageWidget.prototype.execute = function() {
 	this.actionValues = this.getAttribute("$values");
 };
 
-/*
-Refresh the widget by ensuring our attributes are up to date
-*/
 SendMessageWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(Object.keys(changedAttributes).length) {
@@ -52,9 +37,6 @@ SendMessageWidget.prototype.refresh = function(changedTiddlers) {
 	return this.refreshChildren(changedTiddlers);
 };
 
-/*
-Invoke the action associated with this widget
-*/
 SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	// Get the string parameter
 	var param = this.actionParam;
@@ -68,7 +50,7 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 			paramObject[name] = values[index] || "";
 		});
 	}
-	// Add raw parameters
+
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) !== "$") {
 			paramObject[name] = attribute;
@@ -78,7 +60,7 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	if(this.actionName) {
 		paramObject[this.actionName] = this.actionValue;
 	}
-	// Dispatch the message
+
 	var params = {
 		type: this.actionMessage,
 		param: param,

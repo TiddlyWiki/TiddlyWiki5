@@ -2,14 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/mvvdisplayinline.js
 type: application/javascript
 module-type: wikirule
-
-Wiki rule for inline display of multi-valued variables and filter results.
-
-Variable display: ((varname)) or ((varname||separator))
-Filter display: (((filter))) or (((filter||separator)))
-
-The default separator is ", " (comma space).
-
 \*/
 
 "use strict";
@@ -70,9 +62,6 @@ exports.findNextMatch = function(startPos) {
 	return undefined;
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	var match = this.nextMatch;
 	this.nextMatch = null;

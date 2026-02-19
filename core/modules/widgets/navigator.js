@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/navigator.js
 type: application/javascript
 module-type: widget
-
-Navigator widget
-
 \*/
 
 "use strict";
@@ -17,14 +14,8 @@ var NavigatorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 NavigatorWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 NavigatorWidget.prototype.render = function(parent,nextSibling) {
 	this.addEventListeners([
 		{type: "tm-navigate", handler: "handleNavigateEvent"},
@@ -49,9 +40,6 @@ NavigatorWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 NavigatorWidget.prototype.execute = function() {
 	// Get our parameters
 	this.storyTitle = this.getAttribute("story");
@@ -67,9 +55,6 @@ NavigatorWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 NavigatorWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.story || changedAttributes.history) {
@@ -131,18 +116,10 @@ NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
 	}
 };
 
-/*
-Add a new record to the top of the history stack
-title: a title string or an array of title strings
-fromPageRect: page coordinates of the origin of the navigation
-*/
 NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
 	this.story.addToHistory(title,fromPageRect,this.historyTitle);
 };
 
-/*
-Handle a tm-navigate event
-*/
 NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 	event = $tw.hooks.invokeHook("th-navigating",event);
 	if(event.navigateTo) {
@@ -201,7 +178,7 @@ NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 	if(isUnmodifiedShadow(title) && !confirmEditShadow(title)) {
 		return false;
 	}
-	// Replace the specified tiddler with a draft in edit mode
+
 	var draftTiddler = this.makeDraftTiddler(title);
 	// Update the story and history if required
 	if(!event.paramObject || event.paramObject.suppressNavigation !== "yes") {
@@ -253,7 +230,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	// Invoke the hook function and delete this tiddler
 	if(tiddler) {
 		$tw.hooks.invokeHook("th-deleting-tiddler",tiddler);
-		this.wiki.deleteTiddler(title);	
+		this.wiki.deleteTiddler(title);
 	}
 	// Remove the closed tiddler from the story
 	this.removeTitleFromStory(storyList,title);
@@ -294,9 +271,6 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 	return draftTiddler;
 };
 
-/*
-Generate a title for the draft of a given tiddler
-*/
 NavigatorWidget.prototype.generateDraftTitle = function(title) {
 	return this.wiki.generateDraftTitle(title);
 };
@@ -336,7 +310,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				if(isRename && shouldRelink && this.wiki.tiddlerExists(draftOf)) {
 					this.wiki.relinkTiddler(draftOf,draftTitle);
 				}
-				// Remove the draft tiddler
+
 				this.wiki.deleteTiddler(title);
 				// Remove the original tiddler if we're renaming it
 				if(isRename) {
@@ -449,7 +423,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		draftTitle = this.generateDraftTitle(title);
 		existingTiddler = this.wiki.getTiddler(title);
 	}
-	// Merge the tags
+
 	var mergedTags = [];
 	if(existingTiddler && existingTiddler.fields.tags) {
 		$tw.utils.pushTop(mergedTags,existingTiddler.fields.tags);
@@ -464,7 +438,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		templateHasTags = true;
 		mergedTags = $tw.utils.pushTop(mergedTags,templateTiddler.fields.tags);
 	}
-	// Save the draft tiddler
+
 	var draftTiddler = new $tw.Tiddler({
 			text: "",
 			"draft.title": title
@@ -581,7 +555,7 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 				var tiddler = new $tw.Tiddler(tiddlerFields);
 			}
 			// th-importing-tiddler doesn't allow user interaction by default
-			// If you want to use the default UI then use: $:/core/modules/upgraders/ instead
+
 			tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
 			// Add the tiddlers to the store
 			self.wiki.addTiddler(tiddler);

@@ -17,9 +17,6 @@ function getFormatFilterOperators() {
 	return formatFilterOperators;
 }
 
-/*
-Export our filter function
-*/
 exports.format = function(source,operator,options) {
 	// Dispatch to the correct formatfilteroperator
 	var formatFilterOperators = getFormatFilterOperators();

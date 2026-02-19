@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/next.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator returning the tiddler whose title occurs next in the list supplied in the operand tiddler
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.next = function(source,operator,options) {
 	var results = [],
 		list = options.wiki.getTiddlerList(operator.operand);

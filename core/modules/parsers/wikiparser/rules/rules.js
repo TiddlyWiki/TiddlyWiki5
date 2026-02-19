@@ -2,14 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/rules.js
 type: application/javascript
 module-type: wikirule
-
-Wiki pragma rule for rules specifications
-
-```
-\rules except ruleone ruletwo rulethree
-\rules only ruleone ruletwo rulethree
-```
-
 \*/
 
 "use strict";
@@ -17,18 +9,12 @@ Wiki pragma rule for rules specifications
 exports.name = "rules";
 exports.types = {pragma: true};
 
-/*
-Instantiate parse rule
-*/
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /\\rules[^\S\n]/mg;
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	// Move past the pragma invocation
 	this.parser.pos = this.matchRegExp.lastIndex;

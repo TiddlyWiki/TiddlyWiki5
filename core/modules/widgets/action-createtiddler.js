@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/action-createtiddler.js
 type: application/javascript
 module-type: widget
-
-Action widget to create a new tiddler with a unique name and specified fields.
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var CreateTiddlerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 CreateTiddlerWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 CreateTiddlerWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -31,9 +22,6 @@ CreateTiddlerWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 CreateTiddlerWidget.prototype.execute = function() {
 	this.actionBaseTitle = this.getAttribute("$basetitle");
 	this.hasBase = !!this.actionBaseTitle;
@@ -48,9 +36,6 @@ CreateTiddlerWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Refresh the widget by ensuring our attributes are up to date
-*/
 CreateTiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {
@@ -60,9 +45,6 @@ CreateTiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	return this.refreshChildren(changedTiddlers);
 };
 
-/*
-Invoke the action associated with this widget
-*/
 CreateTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var title = this.wiki.getTiddlerText("$:/language/DefaultNewTiddlerTitle"), // Get the initial new-tiddler title
 		fields = {},
@@ -82,7 +64,7 @@ CreateTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	} else if (this.hasBase && this.actionOverwrite === "yes") {
 		title = this.actionBaseTitle
 	}
-	// NO $basetitle BUT $template parameter is available
+
 	// the title MUST be unique, otherwise the template would be overwritten
 	if (!this.hasBase && this.useTemplate) {
 		title = this.wiki.generateNewTitle(this.actionTemplate);

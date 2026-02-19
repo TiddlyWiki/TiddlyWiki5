@@ -2,20 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/emphasis/strikethrough.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for emphasis - strikethrough. For example:
-
-```
-	This is ~~strikethrough~~ text
-```
-
-This wikiparser can be modified using the rules eg:
-
-```
-\rules except strikethrough 
-\rules only strikethrough 
-```
-
 \*/
 
 "use strict";

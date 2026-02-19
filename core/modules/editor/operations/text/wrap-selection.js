@@ -2,9 +2,6 @@
 title: $:/core/modules/editor/operations/text/wrap-selection.js
 type: application/javascript
 module-type: texteditoroperation
-
-Text editor operation to wrap the selection with the specified prefix and suffix
-
 \*/
 
 "use strict";
@@ -17,11 +14,11 @@ exports["wrap-selection"] = function(event,operation) {
 		selLength = o.selEnd - o.selStart;
 
 	// This function detects, if trailing spaces are part of the selection __and__ if the user wants to handle them
-	// Returns "yes", "start", "end", "no" (default)
+
 	//	yes .. there are trailing spaces at both ends
-	//	start .. there are trailing spaces at the start
+
 	//	end .. there are trailing spaces at the end
-	//	no .. no trailing spaces are taken into account
+
 	var trailingSpaceAt = function(sel) {
 		var _start,
 			_end,
@@ -64,7 +61,6 @@ exports["wrap-selection"] = function(event,operation) {
 		}
 	}
 
-	// options: lenPrefix, lenSuffix
 	function removePrefixSuffix(options) {
 		options = options || {};
 		var _lenPrefix = options.lenPrefix || 0;

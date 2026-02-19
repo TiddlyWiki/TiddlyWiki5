@@ -2,9 +2,6 @@
 title: $:/core/modules/parsers/htmlparser.js
 type: application/javascript
 module-type: parser
-
-The HTML parser displays text as raw HTML
-
 \*/
 
 "use strict";

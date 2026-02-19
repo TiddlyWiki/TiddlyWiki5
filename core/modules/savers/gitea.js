@@ -2,16 +2,10 @@
 title: $:/core/modules/savers/gitea.js
 type: application/javascript
 module-type: saver
-
-Saves wiki by pushing a commit to the gitea
-
 \*/
 
 "use strict";
 
-/*
-Select the appropriate saver module and set it up
-*/
 var GiteaSaver = function(wiki) {
 	this.wiki = wiki;
 };

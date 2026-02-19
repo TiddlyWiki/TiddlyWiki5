@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/parameters.js
 type: application/javascript
 module-type: widget
-
-Widget for definition of transclusion parameters
-
 \*/
 
 "use strict";
@@ -17,14 +14,8 @@ var ParametersWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 ParametersWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 ParametersWidget.prototype.render = function(parent,nextSibling) {
 	// Call the constructor
 	Widget.call(this);
@@ -34,9 +25,6 @@ ParametersWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 ParametersWidget.prototype.execute = function() {
 	var self = this;
 	this.parametersDepth = Math.max(parseInt(this.getAttribute("$depth","1"),10) || 1,1);
@@ -52,7 +40,7 @@ ParametersWidget.prototype.execute = function() {
 		}
 		pointer = pointer.parentWidget;
 	}
-	// Process each parameter
+
 	if(pointer instanceof TranscludeWidget) {
 		// Get the value for each defined parameter
 		$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(self.parseTreeNode),function(attr,index) {
@@ -75,7 +63,7 @@ ParametersWidget.prototype.execute = function() {
 		});
 	} else {
 		// There is no parent transclude. i.e. direct rendering.
-		// We use default values only.
+
 		$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(self.parseTreeNode),function(attr,index) {
 			var name = attr.name;
 			// If the attribute name starts with $$ then reduce to a single dollar
@@ -87,13 +75,10 @@ ParametersWidget.prototype.execute = function() {
 			self.setVariable(name,value);
 		});
 	}
-	// Construct the child widgets
+
 	this.makeChildWidgets();
 };
 
-/*
-Refresh the widget by ensuring our attributes are up to date
-*/
 ParametersWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(Object.keys(changedAttributes).length) {

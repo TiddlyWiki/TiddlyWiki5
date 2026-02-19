@@ -2,9 +2,6 @@
 title: $:/core/modules/info/mediaquerytracker.js
 type: application/javascript
 module-type: info
-
-Initialise $:/info/ tiddlers derived from media queries via 
-
 \*/
 
 "use strict";
@@ -45,7 +42,7 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 				enterValue.mqList.removeEventListener("change",enterValue.handler);
 			}
 		}
-		// Track media query tracker tiddlers
+
 		function fnEnter(title) {
 			return track(title);
 		}

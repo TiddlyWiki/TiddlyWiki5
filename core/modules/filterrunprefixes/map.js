@@ -6,9 +6,6 @@ module-type: filterrunprefix
 
 "use strict";
 
-/*
-Export our filter prefix function
-*/
 exports.map = function(operationSubFunction,options) {
 	return function(results,source,widget) {
 		if(results.length > 0) {

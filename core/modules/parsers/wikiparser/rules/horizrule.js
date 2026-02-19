@@ -2,13 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/horizrule.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text block rule for rules. For example:
-
-```
----
-```
-
 \*/
 
 "use strict";

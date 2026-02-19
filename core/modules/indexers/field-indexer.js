@@ -2,9 +2,6 @@
 title: $:/core/modules/indexers/field-indexer.js
 type: application/javascript
 module-type: indexer
-
-Indexes the tiddlers with each field value
-
 \*/
 
 "use strict";
@@ -21,7 +18,6 @@ FieldIndexer.prototype.init = function() {
 	this.addIndexMethods();
 }
 
-// Provided for testing
 FieldIndexer.prototype.setMaxIndexedValueLength = function(length) {
 	this.index = null;
 	this.maxIndexedValueLength = length;
@@ -53,17 +49,11 @@ FieldIndexer.prototype.addIndexMethods = function() {
 	};
 };
 
-/*
-Tear down and then rebuild the index as if all tiddlers have changed
-*/
 FieldIndexer.prototype.rebuild = function() {
 	// Invalidate the index so that it will be rebuilt when it is next used
 	this.index = null;
 };
 
-/*
-Build the index for a particular field
-*/
 FieldIndexer.prototype.buildIndexForField = function(name) {
 	var self = this;
 	// Hashmap by field name of hashmap by field value of array of tiddler titles
@@ -83,17 +73,13 @@ FieldIndexer.prototype.buildIndexForField = function(name) {
 	});
 };
 
-/*
-Update the index in the light of a tiddler value changing; note that the title must be identical. (Renames are handled as a separate delete and create)
-updateDescriptor: {old: {tiddler: <tiddler>, shadow: <boolean>, exists: <boolean>},new: {tiddler: <tiddler>, shadow: <boolean>, exists: <boolean>}}
-*/
 FieldIndexer.prototype.update = function(updateDescriptor) {
 	var self = this;
 	// Don't do anything if the index hasn't been built yet
 	if(this.index === null) {
 		return;
 	}
-	// Remove the old tiddler from the index
+
 	if(updateDescriptor.old.tiddler) {
 		$tw.utils.each(this.index,function(indexEntry,name) {
 			if(name in updateDescriptor.old.tiddler.fields) {
@@ -108,7 +94,7 @@ FieldIndexer.prototype.update = function(updateDescriptor) {
 			}
 		});
 	}
-	// Add the new tiddler to the index
+
 	if(updateDescriptor["new"].tiddler) {
 		$tw.utils.each(this.index,function(indexEntry,name) {
 			if(name in updateDescriptor["new"].tiddler.fields) {
@@ -128,7 +114,7 @@ FieldIndexer.prototype.lookup = function(name,value) {
 	if(value.length >= this.maxIndexedValueLength) {
 		return null;
 	}
-	// Update the index if it has yet to be built
+
 	if(this.index === null || !this.index[name]) {
 		this.buildIndexForField(name);
 	}

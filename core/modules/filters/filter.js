@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/filter.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator returning those input titles that pass a subfilter
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.filter = function(source,operator,options) {
 	var filterFn = options.wiki.compileFilter(operator.operand),
 		results = [],

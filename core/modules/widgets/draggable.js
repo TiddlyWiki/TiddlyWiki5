@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/draggable.js
 type: application/javascript
 module-type: widget
-
-Draggable widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var DraggableWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 DraggableWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 DraggableWidget.prototype.render = function(parent,nextSibling) {
 	var self = this,
 		tag,
@@ -39,7 +30,7 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
 		tag = "div";
 	}
-	// Create our element
+
 	domNode = this.document.createElement(tag);
 	// Assign classes
 	if(this.draggableClasses) {
@@ -73,9 +64,6 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	}
 };
 
-/*
-Compute the internal state of the widget
-*/
 DraggableWidget.prototype.execute = function() {
 	// Pick up our attributes
 	this.draggableTag = this.getAttribute("tag","div");
@@ -88,7 +76,6 @@ DraggableWidget.prototype.execute = function() {
 	// Make the child widgets
 	this.makeChildWidgets();
 };
-
 
 DraggableWidget.prototype.updateDomNodeClasses = function() {
 	var domNodeClasses = this.domNodes[0].className.split(" "),
@@ -106,9 +93,6 @@ DraggableWidget.prototype.updateDomNodeClasses = function() {
 	this.domNodes[0].setAttribute("class",domNodeClasses.join(" "))
 }
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 DraggableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.tag || changedAttributes.selector || changedAttributes.dragimagetype || changedAttributes.enable || changedAttributes.startactions || changedAttributes.endactions) {

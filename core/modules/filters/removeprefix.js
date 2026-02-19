@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/removeprefix.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for removing a prefix from each title in the list. Titles that do not start with the prefix are removed.
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.removeprefix = function(source,operator,options) {
 	var results = [],
 		suffixes = (operator.suffixes || [])[0] || [];

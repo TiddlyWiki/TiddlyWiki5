@@ -2,18 +2,6 @@
 title: $:/core/modules/upgraders/themetweaks.js
 type: application/javascript
 module-type: upgrader
-
-Upgrader module that handles the change in theme tweak storage introduced in 5.0.14-beta.
-
-Previously, theme tweaks were stored in two data tiddlers:
-
-* $:/themes/tiddlywiki/vanilla/metrics
-* $:/themes/tiddlywiki/vanilla/settings
-
-Now, each tweak is stored in its own separate tiddler.
-
-This upgrader copies any values from the old format to the new. The old data tiddlers are not deleted in case they have been used to store additional indexes.
-
 \*/
 
 "use strict";

@@ -2,9 +2,6 @@
 title: $:/core/modules/editor/operations/text/excise.js
 type: application/javascript
 module-type: texteditoroperation
-
-Text editor operation to excise the selection to a new tiddler
-
 \*/
 
 "use strict";

@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/raw.js
 type: application/javascript
 module-type: widget
-
-Raw widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var RawWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 RawWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 RawWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.execute();
@@ -32,15 +23,9 @@ RawWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(div);
 };
 
-/*
-Compute the internal state of the widget
-*/
 RawWidget.prototype.execute = function() {
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 RawWidget.prototype.refresh = function(changedTiddlers) {
 	return false;
 };

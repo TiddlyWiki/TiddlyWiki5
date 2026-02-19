@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/log.js
 type: application/javascript
 module-type: widget-subclass
-
-Widget to log debug messages
-
 \*/
 
 "use strict";

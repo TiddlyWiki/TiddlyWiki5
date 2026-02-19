@@ -2,15 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/macrodef.js
 type: application/javascript
 module-type: wikirule
-
-Wiki pragma rule for macro definitions
-
-```
-\define name(param:defaultvalue,param2:defaultvalue)
-definition text, including $param$ markers
-\end
-```
-
 \*/
 
 "use strict";
@@ -18,18 +9,12 @@ definition text, including $param$ markers
 exports.name = "macrodef";
 exports.types = {pragma: true};
 
-/*
-Instantiate parse rule
-*/
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /\\define\s+([^(\s]+)\(\s*([^)]*)\)(\s*\r?\n)?/mg;
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	// Move past the macro name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;
@@ -51,7 +36,7 @@ exports.parse = function() {
 			paramMatch = reParam.exec(paramString);
 		}
 	}
-	// Is the remainder of the \define line blank after the parameter close paren?
+
 	var reEnd,isBlock = true;
 	if(this.match[3]) {
 		// If so, it is a multiline definition and the end of the body is marked with \end
@@ -63,7 +48,7 @@ exports.parse = function() {
 		// Move past any whitespace
 		this.parser.pos = $tw.utils.skipWhiteSpace(this.parser.source,this.parser.pos);
 	}
-	// Find the end of the definition
+
 	reEnd.lastIndex = this.parser.pos;
 	var text,
 		endMatch = reEnd.exec(this.parser.source);
@@ -74,7 +59,7 @@ exports.parse = function() {
 		// We didn't find the end of the definition, so we'll make it blank
 		text = "";
 	}
-	// Save the macro definition
+
 	var parseTreeNodes = [{
 		type: "set",
 		attributes: {},

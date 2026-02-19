@@ -2,16 +2,6 @@
 title: $:/core/modules/widgets/let.js
 type: application/javascript
 module-type: widget
-
-This widget allows defining multiple variables at once, while allowing
-the later variables to depend upon the earlier ones.
-
-```
-<$let currentTiddler="target" value={{!!value}} currentTiddler="different">
-  {{!!value}} will be different from <<value>>
-</$let>
-```
-
 \*/
 
 "use strict";
@@ -23,14 +13,8 @@ var LetWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 LetWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 LetWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -40,7 +24,7 @@ LetWidget.prototype.render = function(parent,nextSibling) {
 
 LetWidget.prototype.computeAttributes = function() {
 	// Before computing attributes, we must make clear that none of the
-	// existing attributes are staged for lookup, even on a refresh
+
 	var changedAttributes = {},
 		self = this;
 	this.currentValueFor = Object.create(null);
@@ -48,7 +32,7 @@ LetWidget.prototype.computeAttributes = function() {
 		var value = self.computeAttribute(attribute,{asList: true}),
 			name = attribute.name;
 		// Now that it's prepped, we're allowed to look this variable up
-		// when defining later variables
+
 		if(value !== undefined) {
 			self.currentValueFor[name] = value;
 		}
@@ -66,7 +50,7 @@ LetWidget.prototype.computeAttributes = function() {
 
 LetWidget.prototype.getVariableInfo = function(name,options) {
 	// Special handling: If this variable exists in this very $let, we can
-	// use it, but only if it's been staged.
+
 	if($tw.utils.hop(this.currentValueFor,name)) {
 		var value = this.currentValueFor[name];
 		return {
@@ -77,9 +61,6 @@ LetWidget.prototype.getVariableInfo = function(name,options) {
 	return Widget.prototype.getVariableInfo.call(this,name,options);
 };
 
-/*
-Refresh the widget by ensuring our attributes are up to date
-*/
 LetWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {

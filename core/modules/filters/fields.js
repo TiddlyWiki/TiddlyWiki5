@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/fields.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for returning the names of the fields on the selected tiddlers
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.fields = function(source,operator,options) {
 	var results = [],
 		fieldName,
@@ -28,13 +22,13 @@ exports.fields = function(source,operator,options) {
 				for(fieldName in tiddler.fields) {
 					(operand.indexOf(fieldName) !== -1) ? "" : $tw.utils.pushTop(results,fieldName);
 				}
-			} // else if
+			}
 			else {
 				for(fieldName in tiddler.fields) {
 					$tw.utils.pushTop(results,fieldName);
 				}
-			} // else
-		} // if (tiddler)
+			}
+		}
 	});
 	return results;
 };

@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/backlinks.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for returning all the backlinks from a tiddler
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.backlinks = function(source,operator,options) {
 	var results = new $tw.utils.LinkedList();
 	source(function(tiddler,title) {

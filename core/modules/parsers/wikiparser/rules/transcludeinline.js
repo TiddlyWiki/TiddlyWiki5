@@ -2,14 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/transcludeinline.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text rule for inline-level transclusion. For example:
-
-```
-{{MyTiddler}}
-{{MyTiddler||TemplateTitle}}
-```
-
 \*/
 
 "use strict";

@@ -2,18 +2,10 @@
 title: $:/core/modules/savers/upload.js
 type: application/javascript
 module-type: saver
-
-Handles saving changes via upload to a server.
-
-Designed to be compatible with BidiX's UploadPlugin at http://tiddlywiki.bidix.info/#UploadPlugin
-
 \*/
 
 "use strict";
 
-/*
-Select the appropriate saver module and set it up
-*/
 var UploadSaver = function(wiki) {
 	this.wiki = wiki;
 };
@@ -51,7 +43,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	var uploadFormName = "UploadPlugin";
 	var head = [];
 	head.push("--" + boundary + "\r\nContent-disposition: form-data; name=\"UploadPlugin\"\r\n");
-	head.push("backupDir=" + backupDir + ";user=" + username + ";password=" + password + ";uploaddir=" + uploadDir + ";;"); 
+	head.push("backupDir=" + backupDir + ";user=" + username + ";password=" + password + ";uploaddir=" + uploadDir + ";;");
 	head.push("\r\n" + "--" + boundary);
 	head.push("Content-disposition: form-data; name=\"userfile\"; filename=\"" + uploadFilename + "\"");
 	head.push("Content-Type: text/html;charset=UTF-8");

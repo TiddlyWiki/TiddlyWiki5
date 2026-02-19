@@ -2,20 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/emphasis/underscore.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for emphasis - underscore. For example:
-
-```
-	This is __underscore__ text
-```
-
-This wikiparser can be modified using the rules eg:
-
-```
-\rules except underscore 
-\rules only underscore
-```
-
 \*/
 
 "use strict";

@@ -2,13 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/macrocallinline.js
 type: application/javascript
 module-type: wikirule
-
-Wiki rule for macro calls
-
-```
-<<name value value2>>
-```
-
 \*/
 
 "use strict";
@@ -33,14 +26,9 @@ exports.findNextMatch = function(startPos) {
 	return undefined;
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	var call = this.nextCall;
 	this.nextCall = null;
 	this.parser.pos = call.end;
 	return [call];
 };
-
-

@@ -2,17 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/wikilink.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for wiki links. For example:
-
-```
-AWikiLink
-AnotherLink
-~SuppressedLink
-```
-
-Precede a camel case word with `~` to prevent it from being recognised as a link.
-
 \*/
 
 "use strict";
@@ -26,9 +15,6 @@ exports.init = function(parser) {
 	this.matchRegExp = new RegExp($tw.config.textPrimitives.unWikiLink + "?" + $tw.config.textPrimitives.wikiLink,"mg");
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	// Get the details of the match
 	var linkText = this.match[0];
@@ -39,7 +25,7 @@ exports.parse = function() {
 	if(linkText.substr(0,1) === $tw.config.textPrimitives.unWikiLink) {
 		return [{type: "text", text: linkText.substr(1)}];
 	}
-	// If the link has been preceded with a blocked letter then don't treat it as a link
+
 	if(this.match.index > 0) {
 		var preRegExp = new RegExp($tw.config.textPrimitives.blockPrefixLetters,"mg");
 		preRegExp.lastIndex = this.match.index-1;

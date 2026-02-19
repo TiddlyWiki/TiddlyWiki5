@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/button.js
 type: application/javascript
 module-type: widget
-
-Button widget
-
 \*/
 
 "use strict";
@@ -19,14 +16,8 @@ var ButtonWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 ButtonWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 ButtonWidget.prototype.render = function(parent,nextSibling) {
 	var self = this,
 		tag = "button",
@@ -85,14 +76,14 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this.popup || this.popupTitle) {
 		domNode.setAttribute("aria-expanded",isPoppedUp ? "true" : "false");
 	}
-	// Set the tabindex
+
 	if(this.tabIndex) {
 		domNode.setAttribute("tabindex",this.tabIndex);
 	}
 	if(this.isDisabled === "yes") {
 		domNode.setAttribute("disabled",true);
 	}
-	// Add a click event handler
+
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
 		if(self.invokeActions(self,event)) {
@@ -133,15 +124,12 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 			widget: this
 		});
 	}
-	// Insert element
+
 	parent.insertBefore(domNode,nextSibling);
 	this.domNodes.push(domNode);
 	this.renderChildren(domNode,null);
 };
 
-/*
-We don't allow actions to propagate because we trigger actions ourselves
-*/
 ButtonWidget.prototype.allowActionPropagation = function() {
 	return false;
 };
@@ -210,9 +198,6 @@ ButtonWidget.prototype.setTiddler = function() {
 	}
 };
 
-/*
-Compute the internal state of the widget
-*/
 ButtonWidget.prototype.execute = function() {
 	// Get attributes
 	this.actions = this.getAttribute("actions");
@@ -262,9 +247,6 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 	this.domNode.className = domNodeClasses.join(" ");
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.tooltip || changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {

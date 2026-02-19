@@ -2,16 +2,9 @@
 title: $:/core/modules/macros/csvtiddlers.js
 type: application/javascript
 module-type: macro
-
-Macro to output tiddlers matching a filter to CSV
-
 \*/
 
 "use strict";
-
-/*
-Information about this macro
-*/
 
 exports.name = "csvtiddlers";
 
@@ -20,9 +13,6 @@ exports.params = [
 	{name: "format"},
 ];
 
-/*
-Run the macro
-*/
 exports.run = function(filter,format) {
 	var self = this,
 		tiddlers = this.wiki.filterTiddlers(filter),
@@ -40,7 +30,7 @@ exports.run = function(filter,format) {
 			}
 		}
 	}
-	// Sort the fields and bring the standard ones to the front
+
 	fields.sort();
 	"title text modified modifier created creator".split(" ").reverse().forEach(function(value,index) {
 		var p = fields.indexOf(value);
@@ -62,7 +52,7 @@ exports.run = function(filter,format) {
 			if(tiddler) {
 				for(f=0; f<fields.length; f++) {
 					row.push(quoteAndEscape(tiddler ? tiddler.getFieldString(fields[f]) || "" : ""));
-				}	
+				}
 			}
 		output.push(row.join(","));
 	}

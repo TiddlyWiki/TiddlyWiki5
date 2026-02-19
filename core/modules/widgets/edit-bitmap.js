@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/edit-bitmap.js
 type: application/javascript
 module-type: widget
-
-Edit-bitmap widget
-
 \*/
 
 "use strict";
@@ -25,14 +22,8 @@ var EditBitmapWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 EditBitmapWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
 	// Initialise the editor operations if they've not been done already

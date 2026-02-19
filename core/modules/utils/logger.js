@@ -2,18 +2,12 @@
 title: $:/core/modules/utils/logger.js
 type: application/javascript
 module-type: utils
-
-A basic logging implementation
-
 \*/
 
 "use strict";
 
 var ALERT_TAG = "$:/tags/Alert";
 
-/*
-Make a new logger
-*/
 function Logger(componentName,options) {
 	options = options || {};
 	this.componentName = componentName || "";
@@ -30,10 +24,7 @@ Logger.prototype.setSaveBuffer = function(logger) {
 	this.saveBufferLogger = logger;
 };
 
-/*
-Log a message
-*/
-Logger.prototype.log = function(/* args */) {
+Logger.prototype.log = function() {
 	var self = this;
 	if(this.enable) {
 		if(this.saveBufferLogger.save) {
@@ -49,27 +40,18 @@ Logger.prototype.log = function(/* args */) {
 			logMessage[logMessage.length-1] += $tw.utils.terminalColour();
 			return Function.apply.call(console.log, console, logMessage);
 		}
-	} 
+	}
 };
 
-/*
-Read the message buffer
-*/
 Logger.prototype.getBuffer = function() {
 	return this.saveBufferLogger.buffer;
 };
 
-/*
-Log a structure as a table
-*/
 Logger.prototype.table = function(value) {
 	(console.table || console.log)(value);
 };
 
-/*
-Alert a message
-*/
-Logger.prototype.alert = function(/* args */) {
+Logger.prototype.alert = function() {
 	if(this.enable) {
 		// Prepare the text of the alert
 		var text = Array.prototype.join.call(arguments," ");
@@ -114,9 +96,6 @@ Logger.prototype.alert = function(/* args */) {
 	}
 };
 
-/*
-Clear outstanding alerts
-*/
 Logger.prototype.clearAlerts = function() {
 	var self = this;
 	if($tw.browser && this.alertCount > 0) {

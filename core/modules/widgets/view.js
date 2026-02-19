@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/view.js
 type: application/javascript
 module-type: widget
-
-View widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var ViewWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 ViewWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 ViewWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -37,9 +28,6 @@ ViewWidget.prototype.render = function(parent,nextSibling) {
 	}
 };
 
-/*
-Compute the internal state of the widget
-*/
 ViewWidget.prototype.execute = function() {
 	// Get parameters from our attributes
 	this.viewTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
@@ -89,14 +77,6 @@ ViewWidget.prototype.execute = function() {
 	}
 };
 
-/*
-The various formatter functions are baked into this widget for the moment. Eventually they will be replaced by macro functions
-*/
-
-/*
-Retrieve the value of the widget. Options are:
-asString: Optionally return the value as a string
-*/
 ViewWidget.prototype.getValue = function(options) {
 	options = options || {};
 	var value = options.asString ? "" : undefined;
@@ -207,9 +187,6 @@ ViewWidget.prototype.getValueAsJsEncoded = function() {
 	return $tw.utils.stringify(this.getValueAsText());
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 ViewWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.template || changedAttributes.format || changedTiddlers[this.viewTitle]) {

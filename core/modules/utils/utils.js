@@ -2,16 +2,10 @@
 title: $:/core/modules/utils/utils.js
 type: application/javascript
 module-type: utils
-
-Various static utility functions.
-
 \*/
 
 "use strict";
 
-/*
-Display a message, in colour if we're on a terminal
-*/
 exports.log = function(text,colour) {
 	console.log($tw.node ? exports.terminalColour(colour) + text + exports.terminalColour() : text);
 };
@@ -41,25 +35,15 @@ exports.terminalColourLookup = {
 	"light gray": "0;37"
 };
 
-/*
-Display a warning, in colour if we're on a terminal
-*/
 exports.warning = function(text) {
 	exports.log(text,"brown/orange");
 };
 
-/*
-Return the integer represented by the str (string).
-Return the dflt (default) parameter if str is not a base-10 number.
-*/
 exports.getInt = function(str,deflt) {
 	var i = parseInt(str,10);
 	return isNaN(i) ? deflt : i;
 };
 
-/*
-Repeatedly replaces a substring within a string. Like String.prototype.replace, but without any of the default special handling of $ sequences in the replace string
-*/
 exports.replaceString = function(text,search,replace) {
 	return text.replace(search,function() {
 		return replace;
@@ -96,24 +80,14 @@ exports.trimSuffix = function(str,unwanted) {
 	}
 };
 
-/*
-Convert a string to sentence case (ie capitalise first letter)
-*/
 exports.toSentenceCase = function(str) {
 	return (str || "").replace(/^\S/, function(c) {return c.toUpperCase();});
 };
 
-/*
-Convert a string to title case (ie capitalise each initial letter)
-*/
 exports.toTitleCase = function(str) {
 	return (str || "").replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
 };
 
-/*
-Find the line break preceding a given position in a string
-Returns position immediately after that line break, or the start of the string
-*/
 exports.findPrecedingLineBreak = function(text,pos) {
 	var result = text.lastIndexOf("\n",pos - 1);
 	if(result === -1) {
@@ -127,9 +101,6 @@ exports.findPrecedingLineBreak = function(text,pos) {
 	return result;
 };
 
-/*
-Find the line break following a given position in a string
-*/
 exports.findFollowingLineBreak = function(text,pos) {
 	// Cut to just past the following line break, or to the end of the text
 	var result = text.indexOf("\n",pos);
@@ -143,18 +114,10 @@ exports.findFollowingLineBreak = function(text,pos) {
 	return result;
 };
 
-/*
-Return the number of keys in an object
-*/
 exports.count = function(object) {
 	return Object.keys(object || {}).length;
 };
 
-/*
-Remove entries from an array
-	array: array to modify
-	value: a single value to remove, or an array of values to remove
-*/
 exports.removeArrayEntries = function(array,value) {
 	var t,p;
 	if($tw.utils.isArray(value)) {
@@ -173,9 +136,6 @@ exports.removeArrayEntries = function(array,value) {
 	return array;
 };
 
-/*
-Check whether any members of a hashmap are present in another hashmap
-*/
 exports.checkDependencies = function(dependencies,changes) {
 	var hit = false;
 	$tw.utils.each(changes,function(change,title) {
@@ -186,7 +146,7 @@ exports.checkDependencies = function(dependencies,changes) {
 	return hit;
 };
 
-exports.extend = function(object /* [, src] */) {
+exports.extend = function(object) {
 	$tw.utils.each(Array.prototype.slice.call(arguments, 1), function(source) {
 		if(source) {
 			for(var property in source) {
@@ -251,15 +211,15 @@ exports.copyObjectPropertiesSafe = function(object) {
 		if(seen.has(obj)) {
 			return undefined;
 		}
-		// primitives and null are safe
+
 		if(typeof obj !== "object" || obj === null) {
 			return obj;
 		}
-		// skip DOM elements
+
 		if(isDOMElement(obj)) {
 			return undefined;
 		}
-		// copy arrays, preserving positions
+
 		if(Array.isArray(obj)) {
 			return obj.map(item => {
 				const value = safeCopy(item);
@@ -443,7 +403,7 @@ exports.formatDateString = function(date,template) {
 			}]
 		];
 	// If the user wants everything in UTC, shift the datestamp
-	// Optimize for format string that essentially means
+
 	// 'return raw UTC (tiddlywiki style) date string.'
 	if(t.indexOf("[UTC]") == 0 ) {
 		if(t == "[UTC]YYYY0MM0DD0hh0mm0ssXXX")
@@ -508,13 +468,6 @@ exports.getHours12 = function(date) {
 	return h > 12 ? h-12 : ( h > 0 ? h : 12 );
 };
 
-/*
-Convert a date delta in milliseconds into a string representation of "23 seconds ago", "27 minutes ago" etc.
-	delta: delta in milliseconds
-Returns an object with these members:
-	description: string describing the delta period
-	updatePeriod: time in millisecond until the string will be inaccurate
-*/
 exports.getRelativeDate = function(delta) {
 	var futurep = false;
 	if(delta < 0) {
@@ -635,42 +588,35 @@ exports.stringify = function(s, rawUnicode) {
 	var regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
 	return (s || "")
 		.replace(/\\/g, "\\\\")            // backslash
-		.replace(/"/g, '\\"')              // double quote character
-		.replace(/'/g, "\\'")              // single quote character
-		.replace(/\r/g, "\\r")             // carriage return
-		.replace(/\n/g, "\\n")             // line feed
+		.replace(/"/g, '\\"')
+		.replace(/'/g, "\\'")
+		.replace(/\r/g, "\\r")
+		.replace(/\n/g, "\\n")
 		.replace(regex, exports.escape);   // non-ASCII characters
 };
 
 // Turns a string into a legal JSON string
-// Derived from peg.js, thanks to David Majda
+
 exports.jsonStringify = function(s, rawUnicode) {
 	// See http://www.json.org/
 	var regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
 	return (s || "")
-		.replace(/\\/g, "\\\\")            // backslash
-		.replace(/"/g, '\\"')              // double quote character
-		.replace(/\r/g, "\\r")             // carriage return
-		.replace(/\n/g, "\\n")             // line feed
-		.replace(/\x08/g, "\\b")           // backspace
-		.replace(/\x0c/g, "\\f")           // formfeed
-		.replace(/\t/g, "\\t")             // tab
+		.replace(/\\/g, "\\\\")
+		.replace(/"/g, '\\"')
+		.replace(/\r/g, "\\r")
+		.replace(/\n/g, "\\n")
+		.replace(/\x08/g, "\\b")
+		.replace(/\x0c/g, "\\f")
+		.replace(/\t/g, "\\t")
 		.replace(regex,function(s) {
 			return "\\u" + $tw.utils.pad(s.charCodeAt(0).toString(16).toUpperCase(),4);
 		}); // non-ASCII characters
 };
 
-/*
-Escape the RegExp special characters with a preceding backslash
-*/
 exports.escapeRegExp = function(s) {
 	return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, "\\$&");
 };
 
-/*
-Extended version of encodeURIComponent that encodes additional characters including
-those that are illegal within filepaths on various platforms including Windows
-*/
 exports.encodeURIComponentExtended = function(s) {
 	return encodeURIComponent(s).replace(/[!'()*]/g,function(c) {
 		return "%" + c.charCodeAt(0).toString(16).toUpperCase();
@@ -684,7 +630,6 @@ exports.isLinkExternal = function(to) {
 };
 
 exports.nextTick = function(fn) {
-/*global window: false */
 	if(typeof process === "undefined") {
 		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
 		window.setTimeout(fn,0);
@@ -693,36 +638,18 @@ exports.nextTick = function(fn) {
 	}
 };
 
-/*
-Convert a hyphenated CSS property name into a camel case one
-*/
 exports.unHyphenateCss = function(propName) {
 	return propName.replace(/-([a-z])/gi, function(match0,match1) {
 		return match1.toUpperCase();
 	});
 };
 
-/*
-Convert a camelcase CSS property name into a dashed one ("backgroundColor" --> "background-color")
-*/
 exports.hyphenateCss = function(propName) {
 	return propName.replace(/([A-Z])/g, function(match0,match1) {
 		return "-" + match1.toLowerCase();
 	});
 };
 
-/*
-Parse a text reference of one of these forms:
-* title
-* !!field
-* title!!field
-* title##index
-* etc
-Returns an object with the following fields, all optional:
-* title: tiddler title
-* field: tiddler field name
-* index: JSON property index
-*/
 exports.parseTextReference = function(textRef) {
 	// Separate out the title, field name and/or JSON indices
 	var reTextRef = /(?:(.*?)!!(.+))|(?:(.*?)##(.+))|(.*)/mg,

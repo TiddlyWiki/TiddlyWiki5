@@ -2,22 +2,15 @@
 title: $:/core/modules/savers/gitlab.js
 type: application/javascript
 module-type: saver
-
-Saves wiki by pushing a commit to the GitLab REST API
-
 \*/
 
 "use strict";
 
-/*
-Select the appropriate saver module and set it up
-*/
 var GitLabSaver = function(wiki) {
 	this.wiki = wiki;
 };
 
 GitLabSaver.prototype.save = function(text,method,callback) {
-	/* See https://docs.gitlab.com/ee/api/repository_files.html */
 	var self = this,
 		username = this.wiki.getTiddlerText("$:/GitLab/Username"),
 		password = $tw.utils.getPassword("gitlab"),

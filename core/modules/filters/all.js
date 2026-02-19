@@ -2,11 +2,6 @@
 title: $:/core/modules/filters/all.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for selecting tiddlers
-
-[all[shadows+tiddlers]]
-
 \*/
 
 "use strict";
@@ -21,9 +16,6 @@ function getAllFilterOperators() {
 	return allFilterOperators;
 }
 
-/*
-Export our filter function
-*/
 exports.all = function(source,operator,options) {
 	// Check for common optimisations
 	var subops = operator.operand.split("+");
@@ -38,7 +30,7 @@ exports.all = function(source,operator,options) {
 	} else if(subops.length === 2 && subops[0] === "shadows" && subops[1] === "tiddlers") {
 		return options.wiki.eachShadowPlusTiddlers;
 	}
-	// Do it the hard way
+
 	// Get our suboperators
 	var allFilterOperators = getAllFilterOperators();
 	// Cycle through the suboperators accumulating their results

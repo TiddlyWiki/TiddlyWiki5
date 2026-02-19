@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/action-setfield.js
 type: application/javascript
 module-type: widget
-
-Action widget to set a single field or index on a tiddler.
-
 \*/
 
 "use strict";
@@ -15,22 +12,13 @@ var SetFieldWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 SetFieldWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 SetFieldWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 };
 
-/*
-Compute the internal state of the widget
-*/
 SetFieldWidget.prototype.execute = function() {
 	this.actionTiddler = this.getAttribute("$tiddler") || (!this.hasParseTreeNodeAttribute("$tiddler") && this.getVariable("currentTiddler"));
 	this.actionField = this.getAttribute("$field");
@@ -39,17 +27,11 @@ SetFieldWidget.prototype.execute = function() {
 	this.actionTimestamp = this.getAttribute("$timestamp","yes") === "yes";
 };
 
-/*
-Refresh the widget by ensuring our attributes are up to date
-*/
 SetFieldWidget.prototype.refresh = function(changedTiddlers) {
 	// Nothing to refresh
 	return this.refreshChildren(changedTiddlers);
 };
 
-/*
-Invoke the action associated with this widget
-*/
 SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var self = this,
 		options = {};

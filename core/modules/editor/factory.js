@@ -2,16 +2,12 @@
 title: $:/core/modules/editor/factory.js
 type: application/javascript
 module-type: library
-
-Factory for constructing text editor widgets with specified engines for the toolbar and non-toolbar cases
-
 \*/
 
 "use strict";
 
 var DEFAULT_MIN_TEXT_AREA_HEIGHT = "100px"; // Minimum height of textareas in pixels
 
-// Configuration tiddlers
 var HEIGHT_MODE_TITLE = "$:/config/TextEditor/EditorHeight/Mode";
 var ENABLE_TOOLBAR_TITLE = "$:/config/TextEditor/EnableToolbar";
 
@@ -141,9 +137,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		return {value: value || "", type: type, update: update};
 	};
 
-	/*
-	Handle an edit text operation message from the toolbar
-	*/
 	EditTextWidget.prototype.handleEditTextOperationMessage = function(event) {
 		// Prepare information about the operation
 		var operation = this.engine.createTextOperation();
@@ -152,16 +145,13 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		if(handler) {
 			handler.call(this,event,operation);
 		}
-		// Execute the operation via the engine
+
 		var newText = this.engine.executeTextOperation(operation);
 		// Fix the tiddler height and save changes
 		this.engine.fixHeight();
 		this.saveChanges(newText);
 	};
 
-	/*
-	Compute the internal state of the widget
-	*/
 	EditTextWidget.prototype.execute = function() {
 		// Get our parameters
 		this.editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
@@ -201,7 +191,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			}
 			type = type || "text";
 		}
-		// Get the rest of our parameters
+
 		this.editTag = this.getAttribute("tag",tag) || "input";
 		this.editType = this.getAttribute("type",type);
 		// Make the child widgets
@@ -211,9 +201,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0) && (!this.document.isTiddlyWikiFakeDom);
 	};
 
-	/*
-	Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-	*/
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
@@ -234,24 +221,14 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		}
 	};
 
-	/*
-	Update the editor with new text. This method is separate from updateEditorDomNode()
-	so that subclasses can override updateEditor() and still use updateEditorDomNode()
-	*/
 	EditTextWidget.prototype.updateEditor = function(text,type) {
 		this.updateEditorDomNode(text,type);
 	};
 
-	/*
-	Update the editor dom node with new text
-	*/
 	EditTextWidget.prototype.updateEditorDomNode = function(text,type) {
 		this.engine.setText(text,type);
 	};
 
-	/*
-	Save changes back to the tiddler store
-	*/
 	EditTextWidget.prototype.saveChanges = function(text) {
 		var editInfo = this.getEditInfo();
 		if(text !== editInfo.value) {
@@ -259,9 +236,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		}
 	};
 
-	/*
-	Handle a dom "keydown" event, which we'll bubble up to our container for the keyboard widgets benefit
-	*/
 	EditTextWidget.prototype.handleKeydownEvent = function(event) {
 		// Check for a keyboard shortcut
 		if(this.toolbarNode) {
@@ -282,20 +256,17 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 				}
 			}
 		}
-		// Propogate the event to the container
+
 		if(this.propogateKeydownEvent(event)) {
 			// Ignore the keydown if it was already handled
 			event.preventDefault();
 			event.stopPropagation();
 			return true;
 		}
-		// Otherwise, process the keydown normally
+
 		return false;
 	};
 
-	/*
-	Propogate keydown events to our container for the keyboard widgets benefit
-	*/
 	EditTextWidget.prototype.propogateKeydownEvent = function(event) {
 		var newEvent = this.cloneEvent(event,["keyCode","code","which","key","metaKey","ctrlKey","altKey","shiftKey"]);
 		return !this.parentDomNode.dispatchEvent(newEvent);
@@ -318,16 +289,12 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		return dispatchNode.dispatchEvent(newEvent);
 	};
 
-	/*
-	Propogate drag and drop events with File data to our container for the dropzone widgets benefit.
-	If there are no Files, let the browser handle it.
-	*/
 	EditTextWidget.prototype.handleDropEvent = function(event) {
 		if($tw.utils.dragEventContainsFiles(event)) {
 			event.preventDefault();
 			event.stopPropagation();
 			this.dispatchDOMEvent(this.cloneEvent(event,["dataTransfer"]));
-		} 
+		}
 	};
 
 	EditTextWidget.prototype.handlePasteEvent = function(event) {

@@ -2,9 +2,6 @@
 title: $:/core/modules/savers/twedit.js
 type: application/javascript
 module-type: saver
-
-Handles saving changes via the TWEdit iOS app
-
 \*/
 
 "use strict";

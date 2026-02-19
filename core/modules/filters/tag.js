@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/tag.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for checking for the presence of a tag
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.tag = function(source,operator,options) {
 	var results = [],indexedResults;
 	if((operator.suffix || "").toLowerCase() === "strict" && !operator.operand) {

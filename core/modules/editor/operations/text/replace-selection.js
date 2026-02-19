@@ -2,9 +2,6 @@
 title: $:/core/modules/editor/operations/text/replace-selection.js
 type: application/javascript
 module-type: texteditoroperation
-
-Text editor operation to replace the selection
-
 \*/
 
 "use strict";

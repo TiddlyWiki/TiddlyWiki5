@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/search.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for searching for the text in the operand tiddler
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.search = function(source,operator,options) {
 	var invert = operator.prefix === "!";
 	if(operator.suffixes) {
@@ -20,7 +14,7 @@ exports.search = function(source,operator,options) {
 			},
 			excludeFields = false,
 			fieldList = operator.suffixes[0] || [],
-			firstField = fieldList[0] || "", 
+			firstField = fieldList[0] || "",
 			firstChar = firstField.charAt(0),
 			fields;
 		if(firstChar === "-") {

@@ -2,20 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/html.js
 type: application/javascript
 module-type: wikirule
-
-Wiki rule for HTML elements and widgets. For example:
-
-{{{
-<aside>
-This is an HTML5 aside element
-</aside>
-
-<$slider target="MyTiddler">
-This is a widget invocation
-</$slider>
-
-}}}
-
 \*/
 
 "use strict";
@@ -35,9 +21,6 @@ exports.findNextMatch = function(startPos) {
 	return this.nextTag ? this.nextTag.start : undefined;
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	// Retrieve the most recent match so that recursive calls don't overwrite it
 	var tag = this.nextTag;
@@ -83,13 +66,10 @@ exports.parse = function() {
 			}
 		}
 	}
-	// Return the tag
+
 	return [tag];
 };
 
-/*
-Look for an HTML tag. Returns null if not found, otherwise returns {type: "element", name:, attributes: {}, orderedAttributes: [], isSelfClosing:, start:, end:,}
-*/
 exports.parseTag = function(source,pos,options) {
 	options = options || {};
 	var token,
@@ -123,7 +103,7 @@ exports.parseTag = function(source,pos,options) {
 	if(!$tw.utils.parseWhiteSpace(source,pos) && !(source.charAt(pos) === "/") && !(source.charAt(pos) === ">") ) {
 		return null;
 	}
-	// Process attributes
+
 	var attribute = $tw.utils.parseAttribute(source,pos);
 	while(attribute) {
 		node.orderedAttributes.push(attribute);
@@ -132,7 +112,7 @@ exports.parseTag = function(source,pos,options) {
 		// Get the next attribute
 		attribute = $tw.utils.parseAttribute(source,pos);
 	}
-	// Skip whitespace
+
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a closing slash
 	token = $tw.utils.parseTokenString(source,pos,"/");
@@ -140,7 +120,7 @@ exports.parseTag = function(source,pos,options) {
 		pos = token.end;
 		node.isSelfClosing = true;
 	}
-	// Look for a greater than sign
+
 	token = $tw.utils.parseTokenString(source,pos,">");
 	if(!token) {
 		return null;
@@ -153,7 +133,7 @@ exports.parseTag = function(source,pos,options) {
 			return null;
 		}
 	}
-	// Update the end position
+
 	node.end = pos;
 	return node;
 };
@@ -171,11 +151,11 @@ exports.findNextTag = function(source,pos,options) {
 		if(tag && this.isLegalTag(tag)) {
 			return tag;
 		}
-		// Look for the next match
+
 		reLookahead.lastIndex = match.index + 1;
 		match = reLookahead.exec(source);
 	}
-	// Failed
+
 	return null;
 };
 

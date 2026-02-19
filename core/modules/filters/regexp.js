@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/regexp.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for regexp matching
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.regexp = function(source,operator,options) {
 	var results = [],
 		fieldname = operator.suffix || "title",
@@ -43,7 +37,7 @@ exports.regexp = function(source,operator,options) {
 	} catch(e) {
 		return ["" + e];
 	}
-	// Process the incoming tiddlers
+
 	if(operator.prefix === "!") {
 		source(function(tiddler,title) {
 			var text = getFieldString(tiddler,title);
