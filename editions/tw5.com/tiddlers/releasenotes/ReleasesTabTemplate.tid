@@ -1,0 +1,14 @@
+title: $:/tw5.com/releases/tab-template
+type: text/vnd.tiddlywiki
+
+<%if [<currentTab>match[Summary]] %>
+	<<summary-tab>>
+<%elseif [<currentTab>match[Change Types]] %>
+	<<change-types-tab>>
+<%elseif [<currentTab>match[Change Categories]] %>
+	<<change-categories-tab>>
+<%elseif [<currentTab>match[Impacts]] %>
+	<<impacts-tab>>
+<%elseif [<currentTab>match[Credits]] %>
+	<<credits-tab>>
+<%endif%>

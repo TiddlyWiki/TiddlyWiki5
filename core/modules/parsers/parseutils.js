@@ -143,7 +143,14 @@ exports.parseParameterDefinition = function(paramString,options) {
 		var paramInfo = {name: paramMatch[1]},
 			defaultValue = paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5];
 		if(defaultValue !== undefined) {
-			paramInfo["default"] = defaultValue;
+			// Check for an MVV reference ((varname))
+			var mvvDefaultMatch = /^\(\(([^)|]+)\)\)$/.exec(defaultValue);
+			if(mvvDefaultMatch) {
+				paramInfo.defaultType = "multivalue-variable";
+				paramInfo.defaultVariable = mvvDefaultMatch[1];
+			} else {
+				paramInfo["default"] = defaultValue;
+			}
 		}
 		params.push(paramInfo);
 		// Look for the next parameter
@@ -248,6 +255,46 @@ exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 };
 
 /*
+Look for an MVV (multi-valued variable) reference as a transclusion, i.e. ((varname)) or ((varname params))
+Returns null if not found, or a parse tree node of type "transclude" with isMVV: true
+*/
+exports.parseMVVReferenceAsTransclusion = function(source,pos) {
+	var node = {
+		type: "transclude",
+		isMVV: true,
+		start: pos,
+		attributes: {},
+		orderedAttributes: []
+	};
+	// Define our regexps
+	var reVarName = /([^\s>"'=:)]+)/g;
+	// Skip whitespace
+	pos = $tw.utils.skipWhiteSpace(source,pos);
+	// Look for a double opening parenthesis
+	var token = $tw.utils.parseTokenString(source,pos,"((");
+	if(!token) {
+		return null;
+	}
+	pos = token.end;
+	// Get the variable name
+	token = $tw.utils.parseTokenRegExp(source,pos,reVarName);
+	if(!token) {
+		return null;
+	}
+	$tw.utils.addAttributeToParseTreeNode(node,"$variable",token.match[1]);
+	pos = token.end;
+	// Skip whitespace
+	pos = $tw.utils.skipWhiteSpace(source,pos);
+	// Look for a double closing parenthesis
+	token = $tw.utils.parseTokenString(source,pos,"))");
+	if(!token) {
+		return null;
+	}
+	node.end = token.end;
+	return node;
+};
+
+/*
 Parse macro parameters as attributes. Returns the position after the last attribute
 */
 exports.parseMacroParametersAsAttributes = function(node,source,pos) {
@@ -321,19 +368,20 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 				node.type = "indirect";
 				node.textReference = indirectValue.match[1];
 			} else {
-				// Look for a unquoted value
-				var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
-				if(unquotedValue) {
-					pos = unquotedValue.end;
-					node.type = "string";
-					node.value = unquotedValue.match[1];
+				// Look for a macro invocation value
+				var macroInvocation = $tw.utils.parseMacroInvocationAsTransclusion(source,pos);
+				if(macroInvocation && isNewStyleSeparator) {
+					pos = macroInvocation.end;
+					node.type = "macro";
+					node.value = macroInvocation;
 				} else {
-					// Look for a macro invocation value
-					var macroInvocation = $tw.utils.parseMacroInvocationAsTransclusion(source,pos);
-					if(macroInvocation && isNewStyleSeparator) {
-						pos = macroInvocation.end;
+					// Look for an MVV reference value
+					var mvvReference = $tw.utils.parseMVVReferenceAsTransclusion(source,pos);
+					if(mvvReference && isNewStyleSeparator) {
+						pos = mvvReference.end;
 						node.type = "macro";
-						node.value = macroInvocation;
+						node.value = mvvReference;
+						node.isMVV = true;
 					} else {
 						var substitutedValue = $tw.utils.parseTokenRegExp(source,pos,reSubstitutedValue);
 						if(substitutedValue && isNewStyleSeparator) {
@@ -341,6 +389,14 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 							node.type = "substituted";
 							node.rawValue = substitutedValue.match[1] || substitutedValue.match[2];
 						} else {
+							// Look for a unquoted value
+							var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
+							if(unquotedValue) {
+								pos = unquotedValue.end;
+								node.type = "string";
+								node.value = unquotedValue.match[1];
+							} else {
+							}
 						}
 					}
 				}
@@ -471,19 +527,20 @@ exports.parseAttribute = function(source,pos) {
 					node.type = "indirect";
 					node.textReference = indirectValue.match[1];
 				} else {
-					// Look for a unquoted value
-					var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
-					if(unquotedValue) {
-						pos = unquotedValue.end;
-						node.type = "string";
-						node.value = unquotedValue.match[1];
+					// Look for a macro invocation value
+					var macroInvocation = $tw.utils.parseMacroInvocationAsTransclusion(source,pos);
+					if(macroInvocation) {
+						pos = macroInvocation.end;
+						node.type = "macro";
+						node.value = macroInvocation;
 					} else {
-						// Look for a macro invocation value
-						var macroInvocation = $tw.utils.parseMacroInvocationAsTransclusion(source,pos);
-						if(macroInvocation) {
-							pos = macroInvocation.end;
+						// Look for an MVV reference value
+						var mvvReference = $tw.utils.parseMVVReferenceAsTransclusion(source,pos);
+						if(mvvReference) {
+							pos = mvvReference.end;
 							node.type = "macro";
-							node.value = macroInvocation;
+							node.value = mvvReference;
+							node.isMVV = true;
 						} else {
 							var substitutedValue = $tw.utils.parseTokenRegExp(source,pos,reSubstitutedValue);
 							if(substitutedValue) {
@@ -491,8 +548,16 @@ exports.parseAttribute = function(source,pos) {
 								node.type = "substituted";
 								node.rawValue = substitutedValue.match[1] || substitutedValue.match[2];
 							} else {
-								node.type = "string";
-								node.value = "true";
+								// Look for a unquoted value
+								var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
+								if(unquotedValue) {
+									pos = unquotedValue.end;
+									node.type = "string";
+									node.value = unquotedValue.match[1];
+								} else {
+									node.type = "string";
+									node.value = "true";
+								}
 							}
 						}
 					}

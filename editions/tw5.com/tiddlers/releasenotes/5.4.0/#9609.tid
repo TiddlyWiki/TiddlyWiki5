@@ -1,7 +1,7 @@
 change-category: widget
 change-type: enhancement
 created: 20260125124838970
-description: adds support for pointer capture and enabling/disabling the widget
+description: Adds support for pointer capture and enabling/disabling to the EventCatcherWidget.
 github-contributors: saqimtiaz
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9609
 modified: 20260125202924515
