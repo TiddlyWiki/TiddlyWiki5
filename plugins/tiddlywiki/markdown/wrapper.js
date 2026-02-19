@@ -57,16 +57,16 @@ function setupWikiRules(pluginOptions) {
 	var WikiParser = require("$:/core/modules/parsers/wikiparser/wikiparser.js")["text/vnd.tiddlywiki"];
 
 	// first pass: get all rule classes
-	var wikiParser = new WikiParser(null, '', {parseAsInline: true, wiki: $tw.wiki});
+	var wikiParser = new WikiParser(null, "", {parseAsInline: true, wiki: $tw.wiki});
 
 	// restore all possible rules from each rule class
-	wikiParser.pragmaRules = collectAllRules(wikiParser.pragmaRuleClasses,'pragma');
-	wikiParser.blockRules = collectAllRules(wikiParser.blockRuleClasses,'block');
-	wikiParser.inlineRules = collectAllRules(wikiParser.inlineRuleClasses,'inline');
+	wikiParser.pragmaRules = collectAllRules(wikiParser.pragmaRuleClasses,"pragma");
+	wikiParser.blockRules = collectAllRules(wikiParser.blockRuleClasses,"block");
+	wikiParser.inlineRules = collectAllRules(wikiParser.inlineRuleClasses,"inline");
 
 	var pragma = pluginOptions.renderWikiText
-			? "\\rules except latex-parser extlink\n" + pluginOptions.renderWikiTextPragma
-			: "\\rules only html entity commentinline commentblock";
+		? "\\rules except latex-parser extlink\n" + pluginOptions.renderWikiTextPragma
+		: "\\rules only html entity commentinline commentblock";
 
 	wikiParser.pos = 0;
 	wikiParser.source = pragma;
@@ -76,7 +76,7 @@ function setupWikiRules(pluginOptions) {
 	wikiParser.parsePragmas();
 
 	results.blockRules = {};
-	results.inlineRules = {}
+	results.inlineRules = {};
 	results.blockRuleClasses = {};
 	results.inlineRuleClasses = {};
 
@@ -95,12 +95,12 @@ function setupWikiRules(pluginOptions) {
 // Creates markdown-it parser
 function createMarkdownEngine(markdownItOptions, pluginOptions) {
 	var md = new MarkdownIt(markdownItOptions)
-				.use(require("./markdown-it-sub"))
-				.use(require("./markdown-it-sup"))
-				.use(require("./markdown-it-ins"))
-				.use(require("./markdown-it-mark"))
-				.use(require("./markdown-it-footnote"))
-				.use(require("./markdown-it-deflist"));
+		.use(require("./markdown-it-sub"))
+		.use(require("./markdown-it-sup"))
+		.use(require("./markdown-it-ins"))
+		.use(require("./markdown-it-mark"))
+		.use(require("./markdown-it-footnote"))
+		.use(require("./markdown-it-deflist"));
 
 	var results = setupWikiRules(pluginOptions);
 
@@ -115,12 +115,12 @@ function createMarkdownEngine(markdownItOptions, pluginOptions) {
 	}
 
 	md.use(require("./markdown-it-tiddlywiki"),{
-			renderWikiText: pluginOptions.renderWikiText,
-			blockRules: results.blockRules,
-			inlineRules: results.inlineRules
-		});
+		renderWikiText: pluginOptions.renderWikiText,
+		blockRules: results.blockRules,
+		inlineRules: results.inlineRules
+	});
 
-	$tw.utils.each(['image','prettylink','prettyextlink'], function(rule) {
+	$tw.utils.each(["image","prettylink","prettyextlink"], function(rule) {
 		if(MarkdownParser.prototype.inlineRules[rule]) {
 			// delegate to md; ignore the rule class in WikiParser
 			delete MarkdownParser.prototype.inlineRuleClasses[rule];
@@ -211,16 +211,16 @@ function processWikiTree(tree,hasWikiLinkRule) {
 MarkdownParser.prototype.md = createMarkdownEngine(markdownOpts,pluginOpts);
 
 function MarkdownParser(type,text,options) {
-	var env = {}
+	var env = {};
 	var md = this.md;
 	var mdTree, textToParse;
 
 	if(options.parseAsInline) {
 		mdTree = md.parseInline(text,env);
-		textToParse = '<span class="markdown">' + md.renderer.render(mdTree,md.options,env) + '</span>';
+		textToParse = '<span class="markdown">' + md.renderer.render(mdTree,md.options,env) + "</span>";
 	} else {
 		mdTree = md.parse(text,env);
-		textToParse = '<div class="markdown">\n' + md.renderer.render(mdTree,md.options,env) + '</div>';
+		textToParse = '<div class="markdown">\n' + md.renderer.render(mdTree,md.options,env) + "</div>";
 	}
 
 	if($tw.log.MARKDOWN) {

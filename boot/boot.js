@@ -37,7 +37,7 @@ if($tw.node) {
 $tw.boot.log = function(str) {
 	$tw.boot.logMessages = $tw.boot.logMessages || [];
 	$tw.boot.logMessages.push(str);
-}
+};
 
 /*
 Check if an object has a property
@@ -47,7 +47,7 @@ $tw.utils.hop = function(object,property) {
 };
 
 /** @deprecated Use Array.isArray instead  */
-$tw.utils.isArray = value => Array.isArray(value);
+$tw.utils.isArray = (value) => Array.isArray(value);
 
 /*
 Check if an array is equal by value and by reference.
@@ -127,7 +127,7 @@ $tw.utils.pushTop = function(array,value) {
 };
 
 /** @deprecated Use instanceof Date instead */
-$tw.utils.isDate = value => value instanceof Date;
+$tw.utils.isDate = (value) => value instanceof Date;
 
 /** @deprecated Use array iterative methods instead */
 $tw.utils.each = function(object,callback) {
@@ -138,7 +138,7 @@ $tw.utils.each = function(object,callback) {
 				return next !== false;
 			});
 		} else {
-			Object.entries(object).every(entry => {
+			Object.entries(object).every((entry) => {
 				const next = callback(entry[1], entry[0], object);
 				return next !== false;
 			});
@@ -565,7 +565,7 @@ using a lowercase extension only.
 */
 $tw.utils.getFileExtensionInfo = function(ext) {
 	return ext ? $tw.config.fileExtensionInfo[ext.toLowerCase()] : null;
-}
+};
 
 /*
 Given an extension, get the correct encoding for that file.
@@ -588,7 +588,7 @@ var globalCheck =[
 	"    delete Object.prototype.__temp__;",
 	"  }",
 	"  delete Object.prototype.__temp__;",
-].join('\n');
+].join("\n");
 
 /*
 Run code globally with specified context variables in scope
@@ -616,7 +616,7 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 		fn = Function("return " + code + "\n\n//# sourceURL=" + filename)(); // See https://github.com/TiddlyWiki/TiddlyWiki5/issues/6839
 	} else {
 		if(sandbox){
-			fn = vm.runInContext(code,sandbox,filename)
+			fn = vm.runInContext(code,sandbox,filename);
 		} else {
 			fn = vm.runInThisContext(code,filename);
 		}
@@ -773,7 +773,7 @@ $tw.utils.PasswordPrompt.prototype.removePrompt = function(promptInfo) {
 		promptInfo.form.parentNode.removeChild(promptInfo.form);
 		this.setWrapperDisplay();
 	}
-}
+};
 
 /*
 Crypto helper object for encrypted content. It maintains the password text in a closure, and provides methods to change
@@ -812,7 +812,7 @@ $tw.utils.Crypto = function() {
 	};
 	this.hasPassword = function() {
 		return !!currentPassword;
-	}
+	};
 	this.encrypt = function(text,password) {
 		// set default ks:256 -- see: http://bitwiseshiftleft.github.io/sjcl/doc/convenience.js.html
 		return callSjcl("encrypt",text,password,{v:1,iter:10000,ks:256,ts:64,mode:"ccm",adata:"",cipher:"aes"});
@@ -830,7 +830,7 @@ Execute the module named 'moduleName'. The name can optionally be relative to th
 $tw.modules.execute = function(moduleName,moduleRoot) {
 	var name = moduleName;
 	if(moduleName.charAt(0) === ".") {
-		name = $tw.utils.resolvePath(moduleName,moduleRoot)
+		name = $tw.utils.resolvePath(moduleName,moduleRoot);
 	}
 	if(!$tw.modules.titles[name]) {
 		if($tw.modules.titles[name + ".js"]) {
@@ -1201,7 +1201,7 @@ $tw.Wiki = function(options) {
 						shadow: this.isShadowTiddler(title),
 						exists: this.tiddlerExists(title)
 					}
-				}
+				};
 				// Save the new tiddler
 				tiddlers[title] = tiddler;
 				// Check we've got the title
@@ -1211,7 +1211,7 @@ $tw.Wiki = function(options) {
 					tiddler: tiddler,
 					shadow: this.isShadowTiddler(title),
 					exists: this.tiddlerExists(title)
-				}
+				};
 				// Update indexes
 				this.clearCache(title);
 				this.clearGlobalCache();
@@ -1236,7 +1236,7 @@ $tw.Wiki = function(options) {
 					shadow: this.isShadowTiddler(title),
 					exists: this.tiddlerExists(title)
 				}
-			}
+			};
 			// Delete the tiddler
 			delete tiddlers[title];
 			// Delete it from the list of titles
@@ -1251,7 +1251,7 @@ $tw.Wiki = function(options) {
 				tiddler: this.getTiddler(title),
 				shadow: this.isShadowTiddler(title),
 				exists: this.tiddlerExists(title)
-			}
+			};
 			// Update indexes
 			this.clearCache(title);
 			this.clearGlobalCache();
@@ -1459,11 +1459,11 @@ $tw.Wiki = function(options) {
 		pluginTiddlers.sort(function(a, b) {
 			var priorityA = "plugin-priority" in a.fields ? a.fields["plugin-priority"] : 1;
 			var priorityB = "plugin-priority" in b.fields ? b.fields["plugin-priority"] : 1;
-			if (priorityA !== priorityB) {
+			if(priorityA !== priorityB) {
 				return priorityA - priorityB;
-			} else if (a.fields.title < b.fields.title) {
+			} else if(a.fields.title < b.fields.title) {
 				return -1;
-			} else if (a.fields.title === b.fields.title) {
+			} else if(a.fields.title === b.fields.title) {
 				return 0;
 			} else {
 				return +1;
@@ -1570,7 +1570,7 @@ $tw.Wiki.prototype.processSafeMode = function() {
 	// Assemble a report tiddler
 	var titleReportTiddler = "TiddlyWiki Safe Mode",
 		report = [];
-	report.push("TiddlyWiki has been started in [[safe mode|https://tiddlywiki.com/static/SafeMode.html]]. All plugins are temporarily disabled. Most customisations have been disabled by renaming the following tiddlers:")
+	report.push("TiddlyWiki has been started in [[safe mode|https://tiddlywiki.com/static/SafeMode.html]]. All plugins are temporarily disabled. Most customisations have been disabled by renaming the following tiddlers:");
 	// Delete the overrides
 	overrides.forEach(function(title) {
 		var tiddler = self.getTiddler(title),
@@ -1579,7 +1579,7 @@ $tw.Wiki.prototype.processSafeMode = function() {
 		self.addTiddler(new $tw.Tiddler(tiddler, {title: newTitle}));
 		report.push("* [[" + title + "|" + newTitle + "]]");
 	});
-	report.push()
+	report.push();
 	this.addTiddler(new $tw.Tiddler({title: titleReportTiddler, text: report.join("\n\n")}));
 	// Set $:/DefaultTiddlers to point to our report
 	this.addTiddler(new $tw.Tiddler({title: "$:/DefaultTiddlers", text: "[[" + titleReportTiddler + "]]"}));
@@ -2013,7 +2013,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 							value = $tw.utils.stringifyList(path.relative(rootPath, filename).split(path.sep).slice(0, -1));
 							break;
 						case "filepath":
-							value = path.relative(rootPath, filename).split(path.sep).join('/');
+							value = path.relative(rootPath, filename).split(path.sep).join("/");
 							break;
 						case "filename":
 							value = path.basename(filename);
@@ -2066,7 +2066,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			}
 		});
 		return arrayOfFiles;
-	}
+	};
 	// Process the listed tiddlers
 	$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 		if(tidInfo.prefix && tidInfo.suffix) {
@@ -2175,7 +2175,7 @@ Returns the path of the plugin folder
 $tw.findLibraryItem = function(name,paths) {
 	var pathIndex = 0;
 	do {
-		var pluginPath = path.resolve(paths[pathIndex],"./" + name)
+		var pluginPath = path.resolve(paths[pathIndex],"./" + name);
 		if(fs.existsSync(pluginPath) && fs.statSync(pluginPath).isDirectory()) {
 			return pluginPath;
 		}
@@ -2534,7 +2534,7 @@ $tw.boot.initStartup = function(options) {
 				}
 			});
 			return result;
-		}
+		};
 	}
 };
 $tw.boot.loadStartup = function(options){
@@ -2551,7 +2551,7 @@ $tw.boot.loadStartup = function(options){
 	}
 	// Give hooks a chance to modify the store
 	$tw.hooks.invokeHook("th-boot-tiddlers-loaded");
-}
+};
 $tw.boot.execStartup = function(options){
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
@@ -2581,7 +2581,7 @@ $tw.boot.execStartup = function(options){
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
 	$tw.boot.executeNextStartupTask(options.callback);
-}
+};
 /*
 Startup TiddlyWiki
 */
@@ -2600,7 +2600,7 @@ $tw.addUnloadTask = function(task) {
 	if($tw.unloadTasks.indexOf(task) === -1) {
 		$tw.unloadTasks.push(task);
 	}
-}
+};
 
 /*
 Execute the remaining eligible startup tasks
@@ -2647,7 +2647,7 @@ $tw.boot.executeNextStartupTask = function(callback) {
 		}
 		taskIndex++;
 	}
-	if(typeof callback === 'function') {
+	if(typeof callback === "function") {
 		callback();
 	}
 	return false;

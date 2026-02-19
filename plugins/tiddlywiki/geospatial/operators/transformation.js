@@ -25,7 +25,7 @@ function makeTransformation(methodName) {
 		source(function(tiddler,title) {
 			var jsonObject = $tw.utils.parseJSONSafe(title,null);
 			if(jsonObject) {
-				jsonObjects.push(jsonObject)
+				jsonObjects.push(jsonObject);
 			}
 		});
 		// Perform the transformation

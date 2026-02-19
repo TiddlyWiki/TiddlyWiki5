@@ -22,13 +22,13 @@ var TW_Node = function (){
 	throw TypeError("Illegal constructor");
 };
 
-Object.defineProperty(TW_Node.prototype, 'ELEMENT_NODE', {
+Object.defineProperty(TW_Node.prototype, "ELEMENT_NODE", {
 	get: function() {
 		return 1;
 	}
 });
 
-Object.defineProperty(TW_Node.prototype, 'TEXT_NODE', {
+Object.defineProperty(TW_Node.prototype, "TEXT_NODE", {
 	get: function() {
 		return 3;
 	}
@@ -84,7 +84,7 @@ var TW_Style = function(el) {
 	return new Proxy(styleObject, {
 		get: function(target, property) {
 			// If the property exists on styleObject, return it (get, set, setProperty methods)
-			if (property in target) {
+			if(property in target) {
 				return target[property];
 			}
 			// Otherwise, return the corresponding property from _style

@@ -31,5 +31,5 @@ exports.reduce = function(operationSubFunction,options) {
 			results.clear();
 			results.push(accumulator);
 		}
-	}
+	};
 };

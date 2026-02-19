@@ -30,7 +30,7 @@ Modal.prototype.display = function(title,options) {
 	options = options || {};
 	this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
 				options.variables.rootwindow === "yes") ? document :
-				(options.event && options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
+		(options.event && options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
 	this.srcWindow = this.srcDocument.defaultView;
 	var self = this,
 		refreshHandler,
@@ -42,10 +42,10 @@ Modal.prototype.display = function(title,options) {
 	}
 	// Create the variables
 	var variables = $tw.utils.extend({
-			currentTiddler: title,
-			"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
-			"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "")
-		},options.variables);
+		currentTiddler: title,
+		"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
+		"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "")
+	},options.variables);
 
 	// Create the wrapper divs
 	var wrapper = this.srcDocument.createElement("div"),
@@ -115,7 +115,7 @@ Modal.prototype.display = function(title,options) {
 				text: {
 					type: "string",
 					value: title
-		}}}],
+				}}}],
 		parentWidget: navigatorWidgetNode,
 		document: this.srcDocument,
 		variables: variables,
@@ -165,8 +165,8 @@ Modal.prototype.display = function(title,options) {
 					text: {
 						type: "string",
 						value: $tw.language.getString("Buttons/Close/Caption")
-			}}}
-		]}],
+					}}}
+			]}],
 		parentWidget: navigatorWidgetNode,
 		document: this.srcDocument,
 		variables: variables,

@@ -374,7 +374,7 @@ describe("WikiText parser tests", function() {
 
 	});
 
-        it("should parse tables", function() {
+	it("should parse tables", function() {
 		let wikitext = `
 |!Cell1 |!Cell2 |
 |Cell3 |Cell4 |`.trim();
@@ -467,6 +467,6 @@ describe("WikiText parser tests", function() {
 		}];
 
 		expect(parse(wikitext)).toEqual(expectedParseTree);
-        });
+	});
 });
 

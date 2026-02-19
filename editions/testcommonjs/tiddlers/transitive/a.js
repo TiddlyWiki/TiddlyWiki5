@@ -7,5 +7,5 @@ Transitive test A
 
 \*/
 
-exports.foo = require('./b').foo;
+exports.foo = require("./b").foo;
 

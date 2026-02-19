@@ -194,7 +194,7 @@ ScrollableWidget.prototype.listenerFunction = function(event) {
 			self.wiki.addTiddler(new $tw.Tiddler(existingTiddler,newTiddlerFields));
 		}
 	}, DEBOUNCE_INTERVAL);
-}
+};
 
 ScrollableWidget.prototype.updateScrollPositionFromBoundTiddler = function() {
 	// Bail if we're running on the fakedom
@@ -215,7 +215,7 @@ ScrollableWidget.prototype.updateScrollPositionFromBoundTiddler = function() {
 			top: scrollTopTo,
 			left: scrollLeftTo,
 			behavior: "instant"
-		})
+		});
 	}
 };
 

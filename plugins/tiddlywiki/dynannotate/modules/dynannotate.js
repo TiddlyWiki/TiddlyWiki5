@@ -57,7 +57,7 @@ DynannotateWidget.prototype.render = function(parent,nextSibling) {
 		"class": "tc-dynannotation-wrapper",
 		children: [this.domContent,this.domAnnotations,this.domSnippets,this.domSearches],
 		document: this.document
-	})
+	});
 	parent.insertBefore(this.domWrapper,nextSibling);
 	this.domNodes.push(this.domWrapper);
 	// Apply the selection tracker data to the DOM
@@ -93,7 +93,7 @@ DynannotateWidget.prototype.execute = function() {
 
 DynannotateWidget.prototype.isSnippetMode = function() {
 	return this.getAttribute("searchDisplay") === "snippet";
-}
+};
 
 /*
 Save the data attributes required by the selection tracker
@@ -202,8 +202,8 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 			if(self.hasAttribute("popup")) {
 				$tw.popup.triggerPopup({
 					domNode: domOverlay,
-                    title: self.getAttribute("popup"),
-                    floating: self.getAttribute("floating"),
+					title: self.getAttribute("popup"),
+					floating: self.getAttribute("floating"),
 					wiki: self.wiki
 				});
 			}

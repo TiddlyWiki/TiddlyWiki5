@@ -31,7 +31,7 @@ Command.prototype.execute = function() {
 		subCommand = this.params[0],
 		fn = this.subCommands[subCommand];
 	if(!fn) {
-		return this.callback("AWS: Unknown subcommand")
+		return this.callback("AWS: Unknown subcommand");
 	}
 	fn.bind(this)();
 	return null;

@@ -28,12 +28,12 @@ exports.map = function(operationSubFunction,options) {
 				if(filtered.length && flatten) {
 					$tw.utils.each(filtered,function(value) {
 						results.push(value);
-					})
+					});
 				} else {
 					results.push(filtered[0]||"");
 				}
 				++index;
 			});
 		}
-	}
+	};
 };

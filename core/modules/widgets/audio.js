@@ -40,7 +40,7 @@ AudioWidget.prototype.render = function(parent,nextSibling) {
 	
 	// Set source
 	if(this.audioSource) {
-		if (this.audioSource.indexOf("data:") === 0) {
+		if(this.audioSource.indexOf("data:") === 0) {
 			audioElement.setAttribute("src", this.audioSource);
 		} else {
 			var sourceElement = this.document.createElement("source");

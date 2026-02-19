@@ -281,7 +281,7 @@ InnerWikiWidget.prototype.refresh = function(changedTiddlers) {
 			this.deleteAnchors();
 			this.createAnchors();
 		}
-		return childrenRefreshed
+		return childrenRefreshed;
 	}
 };
 
@@ -308,7 +308,7 @@ InnerWikiWidget.prototype.saveScreenshot = function(options,callback) {
 		throw "Google Puppeteer not found";
 	}
 	// Take screenshots
-	puppeteer.launch().then(async browser => {
+	puppeteer.launch().then(async (browser) => {
 		// NOTE: Copying Google's sample code by using new fangled promises "await"
 		const page = await browser.newPage();
 		await page.setContent(self.createInnerHTML(),{

@@ -20,7 +20,7 @@ exports.geolookup = function(source,operator,options) {
 		source(function(tiddler,title) {
 			var point = geotools.parsePoint(title),
 				result = getPolygonsContainingPoint(jsonObject,point);
-			output.push(JSON.stringify(result))
+			output.push(JSON.stringify(result));
 		});
 	}
 	// Perform the transformation

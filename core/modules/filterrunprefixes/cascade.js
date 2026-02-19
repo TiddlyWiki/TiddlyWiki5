@@ -34,5 +34,5 @@ exports.cascade = function(operationSubFunction,options) {
 				results.push(result);
 			});
 		}
-	}
+	};
 };

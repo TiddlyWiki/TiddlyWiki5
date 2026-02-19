@@ -30,5 +30,5 @@ exports.filter = function(operationSubFunction,options) {
 			});
 			results.remove(resultsToRemove);
 		}
-	}
+	};
 };

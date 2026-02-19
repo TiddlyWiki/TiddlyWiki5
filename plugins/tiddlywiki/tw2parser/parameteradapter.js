@@ -65,7 +65,7 @@ var parserparams = function(paramString) {
 		paramMatch = reParam.exec(paramString);
 	}
 	return params;
-}
+};
 var tabshandler = function(paramstring) {
 	var params = parserparams(paramstring);
 	var cookie = params[0].value;
@@ -73,7 +73,7 @@ var tabshandler = function(paramstring) {
 	var t;
 	var tabslist = "";
 	var labelarray = {};
-    var promptarray = {};
+	var promptarray = {};
 	for(t=0; t<numTabs; t++) {
 		var contentName = params[t*3+3].value;
 		tabslist = tabslist+" " + contentName;
@@ -84,10 +84,10 @@ var tabshandler = function(paramstring) {
 	//Use json to implement maps 
 	return '"""'+tabslist +'""" """'+JSON.stringify(promptarray)+'""" """'+JSON.stringify(labelarray)+'""" """'+cookie+'"""';
 };
-var namedapter = {tabs:'__system_tabs'};
+var namedapter = {tabs:"__system_tabs"};
 var paramadapter = {
 	tabs: tabshandler
-}
-exports.name = 'macroadapter';
+};
+exports.name = "macroadapter";
 exports.namedapter = namedapter;
 exports.paramadapter = paramadapter;
