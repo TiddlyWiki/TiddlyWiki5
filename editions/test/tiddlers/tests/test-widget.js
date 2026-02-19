@@ -669,8 +669,6 @@ describe("Widget module", function() {
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
 		expect(wrapper.innerHTML).toBe("<p>TiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
-		// Check the next siblings of each of the list elements
-		var listWidget = widgetNode.children[0].children[0];
 		// Add another tiddler
 		wiki.addTiddler({title: "TiddlerFive", text: "Jalapeno Peppers"});
 		// Refresh

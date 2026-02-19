@@ -8,7 +8,7 @@ Monkeys test
 \*/
 
 
-var a = require("./a");
+void require("./a");
 var test = require("test");
 test.assert(exports.monkey == 10, "monkeys permitted");
 test.print("DONE", "info");

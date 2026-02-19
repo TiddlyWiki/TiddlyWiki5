@@ -7,8 +7,8 @@ OwnProperty test
 
 \*/
 
-var hasOwnProperty = require("hasOwnProperty");
-var toString = require("toString");
+void require("hasOwnProperty");
+void require("toString");
 var test = require("test");
 test.print("DONE", "info");
 

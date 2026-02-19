@@ -9,13 +9,15 @@ Serve tiddlers over http
 
 "use strict";
 
+let fs, url, path, querystring, crypto, zlib;
+
 if($tw.node) {
-		fs = require("fs"),
-		url = require("url"),
-		path = require("path"),
-		querystring = require("querystring"),
-		crypto = require("crypto"),
-		zlib = require("zlib");
+	fs = require("fs"),
+	url = require("url"),
+	path = require("path"),
+	querystring = require("querystring"),
+	crypto = require("crypto"),
+	zlib = require("zlib");
 }
 
 /*

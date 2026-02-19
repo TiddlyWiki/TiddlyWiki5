@@ -26,7 +26,6 @@ DropZoneWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DropZoneWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state

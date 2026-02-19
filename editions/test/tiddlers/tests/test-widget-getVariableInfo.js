@@ -32,17 +32,6 @@ describe("Widget module", function() {
 		return wrapper;
 	}
 
-	function refreshWidgetNode(widgetNode,wrapper,changes) {
-		var changedTiddlers = {};
-		if(changes) {
-			$tw.utils.each(changes,function(title) {
-				changedTiddlers[title] = true;
-			});
-		}
-		widgetNode.refresh(changedTiddlers,wrapper,null);
-		// console.log(require("util").inspect(wrapper,{depth: 8}));
-	}
-
 	it("should make sure that getVariableInfo returns all expected parameters", function() {
 		var wiki = new  $tw.Wiki();
 		wiki.addTiddlers([

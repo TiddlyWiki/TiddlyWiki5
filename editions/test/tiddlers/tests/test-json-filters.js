@@ -7,11 +7,8 @@ Tests the JSON filters and the format:json operator
 
 \*/
 
-
-/* jslint node: true, browser: true */
 /* eslint-env node, browser, jasmine */
 /* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"]*/
-/* global $tw, require */
 "use strict";
 
 describe("json filter tests", function() {

@@ -27,7 +27,6 @@ EditBinaryWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 EditBinaryWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes

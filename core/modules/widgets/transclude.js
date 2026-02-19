@@ -214,7 +214,6 @@ TranscludeWidget.prototype.collectSlotFillParameters = function() {
 Get transcluded details as an object {text:,type:}
 */
 TranscludeWidget.prototype.getTransclusionTarget = function() {
-	var self = this;
 	var text;
 	// Return the text and type of the target
 	if(this.hasAttribute("$variable")) {
@@ -251,7 +250,6 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 Get transcluded parse tree nodes as an object {text:,type:,parseTreeNodes:,parseAsInline:}
 */
 TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
-	var self = this;
 	var parser;
 	// Get the parse tree
 	if(this.hasAttribute("$variable")) {

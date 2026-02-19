@@ -129,7 +129,6 @@ ScrollableWidget.prototype.scrollSelectorIntoView = function(baseElement,selecto
 Render this widget into the DOM
 */
 ScrollableWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	this.scaleFactor = 1;
 	this.addEventListeners([
 		{type: "tm-scroll", handler: "handleScrollEvent"}

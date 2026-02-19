@@ -599,8 +599,7 @@ exports.getTiddlerTranscludes = function(title) {
 Return an array of tiddler titles that transclude to the specified tiddler
 */
 exports.getTiddlerBacktranscludes = function(targetTitle) {
-	var self = this,
-		backIndexer = this.getIndexer("BackIndexer"),
+	var backIndexer = this.getIndexer("BackIndexer"),
 		backtranscludes = backIndexer && backIndexer.subIndexers.transclude.lookup(targetTitle);
 
 	if(!backtranscludes) {
@@ -678,8 +677,7 @@ exports.getTagMap = function() {
 						}
 					}
 				}
-			},
-			title, tiddler;
+			};
 		// Collect up all the tags
 		self.eachShadow(function(tiddler,title) {
 			if(!self.tiddlerExists(title)) {
@@ -884,8 +882,7 @@ exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 Alternative, uncached version of getTiddlerDataCached(). The return value can be mutated freely and reused
 */
 exports.getTiddlerData = function(titleOrTiddler,defaultData) {
-	var tiddler = titleOrTiddler,
-		data;
+	var tiddler = titleOrTiddler;
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = this.getTiddler(tiddler);
 	}
@@ -1003,7 +1000,6 @@ exports.clearCache = function(title) {
 exports.initParsers = function(moduleType) {
 	// Install the parser modules
 	$tw.Wiki.parsers = {};
-	var self = this;
 	$tw.modules.forEachModuleOfType("parser",function(title,module) {
 		for(var f in module) {
 			if($tw.utils.hop(module,f)) {
@@ -1060,11 +1056,8 @@ exports.parseTiddler = function(title,options) {
 };
 
 exports.parseTextReference = function(title,field,index,options) {
-	var tiddler,
-		text,
-		parserInfo;
+	var parserInfo;
 	if(!options.subTiddler) {
-		tiddler = this.getTiddler(title);
 		if(field === "text" || (!field && !index)) {
 			this.getTiddlerText(title); // Force the tiddler to be lazily loaded
 			return this.parseTiddler(title,options);
@@ -1540,8 +1533,7 @@ exports.readFile = function(file,options) {
 		callback = options.callback;
 	}
 	// Get the type, falling back to the filename extension
-	var self = this,
-		type = file.type;
+	var type = file.type;
 	if(type === "" || !type) {
 		var dotPos = file.name.lastIndexOf(".");
 		if(dotPos !== -1) {

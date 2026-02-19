@@ -537,7 +537,7 @@ describe("Checkbox widget", function() {
 			var wiki = new $tw.Wiki();
 			wiki.addTiddlers(data.tiddlers);
 			var widgetNode = createWidgetNode(parseText(data.widgetText,wiki),wiki);
-			var wrapper = renderWidgetNode(widgetNode);
+			renderWidgetNode(widgetNode);
     
 			// Check initial state
     
