@@ -2,9 +2,6 @@
 title: $:/core/modules/startup/rootwidget.js
 type: application/javascript
 module-type: startup
-
-Setup the root widget and the core root widget handlers
-
 \*/
 
 "use strict";

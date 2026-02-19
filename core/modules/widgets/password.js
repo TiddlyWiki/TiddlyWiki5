@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/password.js
 type: application/javascript
 module-type: widget
-
-Password widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var PasswordWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 PasswordWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 PasswordWidget.prototype.render = function(parent,nextSibling) {
 	// Save the parent dom node
 	this.parentDomNode = parent;
@@ -51,9 +42,6 @@ PasswordWidget.prototype.handleChangeEvent = function(event) {
 	return $tw.utils.savePassword(this.passwordName,password);
 };
 
-/*
-Compute the internal state of the widget
-*/
 PasswordWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.passwordName = this.getAttribute("name","");
@@ -61,9 +49,6 @@ PasswordWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 PasswordWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.name) {

@@ -2,11 +2,7 @@
 title: $:/core/modules/savers/andtidwiki.js
 type: application/javascript
 module-type: saver
-
-Handles saving changes via the AndTidWiki Android app
-
 \*/
-
 
 "use strict";
 
@@ -45,7 +41,7 @@ AndTidWiki.prototype.save = function(text,method,callback,options) {
 		if(pathname.indexOf("file://") === 0) {
 			pathname = pathname.substr(7);
 		}
-		// Strip any query or location part
+
 		var p = pathname.indexOf("?");
 		if(p !== -1) {
 			pathname = pathname.substr(0,p);
@@ -54,33 +50,24 @@ AndTidWiki.prototype.save = function(text,method,callback,options) {
 		if(p !== -1) {
 			pathname = pathname.substr(0,p);
 		}
-		// Save the file
+
 		window.twi.saveFile(pathname,text);
 	}
-	// Call the callback
+
 	callback(null);
 	return true;
 };
 
-/*
-Information about this saver
-*/
 AndTidWiki.prototype.info = {
 	name: "andtidwiki",
 	priority: 1600,
 	capabilities: ["save", "autosave", "download"]
 };
 
-/*
-Static method that returns true if this saver is capable of working
-*/
 exports.canSave = function(wiki) {
 	return !!window.twi && !!window.twi.saveFile;
 };
 
-/*
-Create an instance of this saver
-*/
 exports.create = function(wiki) {
 	return new AndTidWiki(wiki);
 };

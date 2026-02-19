@@ -2,29 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/styleblock.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text block rule for assigning styles and classes to paragraphs and other blocks. For example:
-
-```
-@@.myClass
-@@background-color:red;
-This paragraph will have the CSS class `myClass`.
-
-* The `<ul>` around this list will also have the class `myClass`
-* List item 2
-
-@@
-```
-
-Note that classes and styles can be mixed subject to the rule that styles must precede classes. For example
-
-```
-@@.myFirstClass.mySecondClass
-@@width:100px;.myThirdClass
-This is a paragraph
-@@
-```
-
 \*/
 
 "use strict";
@@ -49,7 +26,7 @@ exports.parse = function() {
 		if(this.match[2]) {
 			classes.push(this.match[2].split(".").join(" "));
 		}
-		// Move past the match
+
 		this.parser.pos = this.matchRegExp.lastIndex;
 		// Look for another line of classes and styles
 		this.match = this.matchRegExp.exec(this.parser.source);

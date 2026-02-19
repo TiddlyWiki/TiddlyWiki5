@@ -2,17 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/filteredtranscludeblock.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text rule for block-level filtered transclusion. For example:
-
-```
-{{{ [tag[docs]] }}}
-{{{ [tag[docs]] |tooltip}}}
-{{{ [tag[docs]] ||TemplateTitle}}}
-{{{ [tag[docs]] |tooltip||TemplateTitle}}}
-{{{ [tag[docs]] }}width:40;height:50;}.class.class
-```
-
 \*/
 
 "use strict";

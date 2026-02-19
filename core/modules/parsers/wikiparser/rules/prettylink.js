@@ -2,15 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/prettylink.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for pretty links. For example:
-
-```
-[[Introduction]]
-
-[[Link description|TiddlerTitle]]
-```
-
 \*/
 
 "use strict";

@@ -2,9 +2,6 @@
 title: $:/core/modules/editor/operations/text/insert-text.js
 type: application/javascript
 module-type: texteditoroperation
-
-Text editor operation insert text at the caret position. If there is a selection it is replaced.
-
 \*/
 
 "use strict";

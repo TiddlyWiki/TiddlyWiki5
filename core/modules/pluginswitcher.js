@@ -2,21 +2,10 @@
 title: $:/core/modules/pluginswitcher.js
 type: application/javascript
 module-type: global
-
-Manages switching plugins for themes and languages.
-
 \*/
 
 "use strict";
 
-/*
-options:
-wiki: wiki store to be used
-pluginType: type of plugin to be switched
-controllerTitle: title of tiddler used to control switching of this resource
-defaultPlugins: array of default plugins to be used if nominated plugin isn't found
-onSwitch: callback when plugin is switched (single parameter is array of plugin titles)
-*/
 function PluginSwitcher(options) {
 	this.wiki = options.wiki;
 	this.pluginType = options.pluginType;

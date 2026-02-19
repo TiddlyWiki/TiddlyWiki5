@@ -2,9 +2,6 @@
 title: $:/core/modules/config.js
 type: application/javascript
 module-type: config
-
-Core configuration constants
-
 \*/
 
 "use strict";

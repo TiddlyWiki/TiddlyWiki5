@@ -2,17 +2,10 @@
 title: $:/core/modules/utils/parsetree.js
 type: application/javascript
 module-type: utils
-
-Parse tree utility functions.
-
 \*/
 
 "use strict";
 
-/*
-Add attribute to parse tree node
-Can be invoked as (node,name,value) or (node,attr)
-*/
 exports.addAttributeToParseTreeNode = function(node,name,value) {
 	var attribute = typeof name === "object" ? name : {name: name, type: "string", value: value};
 	name = attribute.name;
@@ -100,9 +93,6 @@ exports.findParseTreeNode = function(nodeArray,search) {
 	return undefined;
 };
 
-/*
-Helper to get the text of a parse tree node or array of nodes
-*/
 exports.getParseTreeText = function getParseTreeText(tree) {
 	var output = [];
 	if($tw.utils.isArray(tree)) {

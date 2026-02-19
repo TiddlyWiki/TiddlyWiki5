@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/field.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for comparing fields for equality
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.field = function(source,operator,options) {
 	var results = [],indexedResults,
 		fieldname = operator.suffix || operator.operator || "title";

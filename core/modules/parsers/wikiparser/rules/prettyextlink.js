@@ -2,14 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/prettyextlink.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for external links. For example:
-
-```
-[ext[https://tiddlywiki.com/fractalveg.jpg]]
-[ext[Tooltip|https://tiddlywiki.com/fractalveg.jpg]]
-```
-
 \*/
 
 "use strict";
@@ -33,9 +25,6 @@ exports.parse = function() {
 	return [this.nextLink];
 };
 
-/*
-Find the next link from the current position
-*/
 exports.findNextLink = function(source,pos) {
 	// A regexp for finding candidate links
 	var reLookahead = /(\[ext\[)/g;
@@ -49,17 +38,14 @@ exports.findNextLink = function(source,pos) {
 		if(link) {
 			return link;
 		}
-		// Look for the next match
+
 		reLookahead.lastIndex = match.index + 1;
 		match = reLookahead.exec(source);
 	}
-	// Failed
+
 	return null;
 };
 
-/*
-Look for an link at the specified position. Returns null if not found, otherwise returns {type: "element", tag: "a", attributes: [], isSelfClosing:, start:, end:,}
-*/
 exports.parseLink = function(source,pos) {
 	var token,
 		textNode = {
@@ -87,12 +73,12 @@ exports.parseLink = function(source,pos) {
 	if(closePos === -1) {
 		return null;
 	}
-	// Look for a `|` separating the tooltip
+
 	var splitPos = source.indexOf("|",pos);
 	if(splitPos === -1 || splitPos > closePos) {
 		splitPos = null;
 	}
-	// Pull out the tooltip and URL
+
 	var tooltip, URL, urlStart;
 	textNode.start = pos;
 	if(splitPos) {
@@ -113,5 +99,3 @@ exports.parseLink = function(source,pos) {
 	node.end = closePos + 2;
 	return node;
 };
-
-

@@ -2,32 +2,10 @@
 title: $:/core/modules/utils/parseutils.js
 type: application/javascript
 module-type: utils
-
-Utility functions concerned with parsing text into tokens.
-
-Most functions have the following pattern:
-
-* The parameters are:
-** `source`: the source string being parsed
-** `pos`: the current parse position within the string
-** Any further parameters are used to identify the token that is being parsed
-* The return value is:
-** null if the token was not found at the specified position
-** an object representing the token with the following standard fields:
-*** `type`: string indicating the type of the token
-*** `start`: start position of the token in the source string
-*** `end`: end position of the token in the source string
-*** Any further fields required to describe the token
-
-The exception is `skipWhiteSpace`, which just returns the position after the whitespace.
-
 \*/
 
 "use strict";
 
-/*
-Look for a whitespace token. Returns null if not found, otherwise returns {type: "whitespace", start:, end:,}
-*/
 exports.parseWhiteSpace = function(source,pos) {
 	var p = pos,c;
 	while(true) {
@@ -49,9 +27,6 @@ exports.parseWhiteSpace = function(source,pos) {
 	}
 };
 
-/*
-Convenience wrapper for parseWhiteSpace. Returns the position after the whitespace
-*/
 exports.skipWhiteSpace = function(source,pos) {
 	var c;
 	while(true) {
@@ -64,9 +39,6 @@ exports.skipWhiteSpace = function(source,pos) {
 	}
 };
 
-/*
-Look for a given string token. Returns null if not found, otherwise returns {type: "token", value:, start:, end:,}
-*/
 exports.parseTokenString = function(source,pos,token) {
 	var match = source.indexOf(token,pos) === pos;
 	if(match) {
@@ -80,10 +52,6 @@ exports.parseTokenString = function(source,pos,token) {
 	return null;
 };
 
-/*
-Look for a token matching a regex. Returns null if not found, otherwise returns {type: "regexp", match:, start:, end:,}
-Use the "Y" (sticky) flag to avoid searching the entire rest of the string
-*/
 exports.parseTokenRegExp = function(source,pos,reToken) {
 	var node = {
 		type: "regexp",
@@ -99,9 +67,6 @@ exports.parseTokenRegExp = function(source,pos,reToken) {
 	}
 };
 
-/*
-Look for a string literal. Returns null if not found, otherwise returns {type: "string", value:, start:, end:,}
-*/
 exports.parseStringLiteral = function(source,pos) {
 	var node = {
 		type: "string",
@@ -122,10 +87,6 @@ exports.parseStringLiteral = function(source,pos) {
 	}
 };
 
-/*
-Returns an array of {name:} with an optional "default" property. Options include:
-requireParenthesis: require the parameter definition to be wrapped in parenthesis
-*/
 exports.parseParameterDefinition = function(paramString,options) {
 	options = options || {};
 	if(options.requireParenthesis) {
@@ -172,9 +133,6 @@ exports.parseMacroParameters = function(node,source,pos) {
 	return node;
 }
 
-/*
-Look for a macro invocation parameter. Returns null if not found, or {type: "macro-parameter", name:, value:, start:, end:}
-*/
 exports.parseMacroParameter = function(source,pos) {
 	var node = {
 		type: "macro-parameter",
@@ -205,14 +163,11 @@ exports.parseMacroParameter = function(source,pos) {
 	if(token.match[1]) {
 		node.name = token.match[1];
 	}
-	// Update the end position
+
 	node.end = pos;
 	return node;
 };
 
-/*
-Look for a macro invocation. Returns null if not found, or {type: "transclude", attributes:, start:, end:}
-*/
 exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 	var node = {
 		type: "transclude",
@@ -241,7 +196,7 @@ exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 	if(!$tw.utils.parseWhiteSpace(source,pos) && !(source.charAt(pos) === ">" && source.charAt(pos + 1) === ">") ) {
 		return null;
 	}
-	// Process attributes
+
 	pos = $tw.utils.parseMacroParametersAsAttributes(node,source,pos);
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
@@ -254,10 +209,6 @@ exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 	return node;
 };
 
-/*
-Look for an MVV (multi-valued variable) reference as a transclusion, i.e. ((varname)) or ((varname params))
-Returns null if not found, or a parse tree node of type "transclude" with isMVV: true
-*/
 exports.parseMVVReferenceAsTransclusion = function(source,pos) {
 	var node = {
 		type: "transclude",
@@ -294,9 +245,6 @@ exports.parseMVVReferenceAsTransclusion = function(source,pos) {
 	return node;
 };
 
-/*
-Parse macro parameters as attributes. Returns the position after the last attribute
-*/
 exports.parseMacroParametersAsAttributes = function(node,source,pos) {
 	var position = 0,
 		attribute = $tw.utils.parseMacroParameterAsAttribute(source,pos);
@@ -315,9 +263,6 @@ exports.parseMacroParametersAsAttributes = function(node,source,pos) {
 	return pos;
 };
 
-/*
-Parse a macro parameter as an attribute. Returns null if not found, otherwise returns {name:, type: "filtered|string|indirect|macro", value|filter|textReference:, start:, end:,}, with the name being optional
-*/
 exports.parseMacroParameterAsAttribute = function(source,pos) {
 	var node = {
 		start: pos
@@ -407,14 +352,11 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 	if(!node.type) {
 		return null;
 	}
-	// Update the end position
+
 	node.end = pos;
 	return node;
 };
 
-/*
-Look for a macro invocation. Returns null if not found, or {type: "macrocall", name:, params:, start:, end:}
-*/
 exports.parseMacroInvocation = function(source,pos) {
 	var node = {
 		type: "macrocall",
@@ -465,7 +407,7 @@ exports.parseFilterVariable = function(source) {
 		node.name = source;
 		return node;
 	}
-	// Get the variable name
+
 	var nameMatch = $tw.utils.parseTokenRegExp(source,pos,reName);
 	if(nameMatch) {
 		node.name = nameMatch.match[1];
@@ -476,9 +418,6 @@ exports.parseFilterVariable = function(source) {
 	return node;
 };
 
-/*
-Look for an HTML attribute definition. Returns null if not found, otherwise returns {name:, type: "filtered|string|indirect|macro", value|filter|textReference:, start:, end:,}
-*/
 exports.parseAttribute = function(source,pos) {
 	var node = {
 		start: pos
@@ -569,7 +508,7 @@ exports.parseAttribute = function(source,pos) {
 		node.type = "string";
 		node.value = "true";
 	}
-	// Update the end position
+
 	node.end = pos;
 	return node;
 };

@@ -2,9 +2,6 @@
 title: $:/core/modules/filters/compare.js
 type: application/javascript
 module-type: filteroperator
-
-General purpose comparison operator
-
 \*/
 
 "use strict";

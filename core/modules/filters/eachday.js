@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/eachday.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator that selects one tiddler for each unique day covered by the specified date field
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.eachday = function(source,operator,options) {
 	var results = [],
 		values = [],

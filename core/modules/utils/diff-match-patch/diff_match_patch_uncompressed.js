@@ -16,7 +16,7 @@ var __spreadValues$1 = (a, b) => {
     }
   return a;
 };
-const defaultOptions = /* @__PURE__ */ Object.freeze({
+const defaultOptions = Object.freeze({
   diffTimeout: 1,
   diffEditCost: 4,
   matchThreshold: 0.5,
@@ -45,7 +45,7 @@ function diffMain(text1, text2, options, opt_checklines = true, opt_deadline) {
     if (resolved.diffTimeout <= 0)
       opt_deadline = Number.MAX_VALUE;
     else
-      opt_deadline = (/* @__PURE__ */ new Date()).getTime() + resolved.diffTimeout * 1e3;
+      opt_deadline = ( new Date()).getTime() + resolved.diffTimeout * 1e3;
   }
   const deadline = opt_deadline;
   if (text1 == null || text2 == null)
@@ -172,7 +172,7 @@ function diffBisect(text1, text2, options, deadline) {
   let k2start = 0;
   let k2end = 0;
   for (let d = 0; d < max_d; d++) {
-    if ((/* @__PURE__ */ new Date()).getTime() > deadline)
+    if (( new Date()).getTime() > deadline)
       break;
     for (let k1 = -d + k1start; k1 <= d - k1end; k1 += 2) {
       const k1_offset = v_offset + k1;
@@ -985,18 +985,18 @@ function patchMake(a, opt_b, opt_c, options = {}) {
       diffCleanupEfficiency(diffs);
     }
   } else if (a && typeof a == "object" && typeof opt_b == "undefined" && typeof opt_c == "undefined") {
-    diffs = /** @type {Diff[]} */
+    diffs =
     a;
     text1 = diffText1(diffs);
   } else if (typeof a == "string" && opt_b && typeof opt_b == "object" && typeof opt_c == "undefined") {
-    text1 = /** @type {string} */
+    text1 =
     a;
-    diffs = /** @type {Diff[]} */
+    diffs =
     opt_b;
   } else if (typeof a == "string" && typeof opt_b == "string" && opt_c && typeof opt_c == "object") {
-    text1 = /** @type {string} */
+    text1 =
     a;
-    diffs = /** @type {Diff[]} */
+    diffs =
     opt_c;
   } else {
     throw new Error("Unknown call format to patch_make.");

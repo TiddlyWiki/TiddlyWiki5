@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/storyviews.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for returning the names of the story views in this wiki
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.storyviews = function(source,operator,options) {
 	var results = [],
 		storyviews = {};

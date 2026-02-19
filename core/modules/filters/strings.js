@@ -2,11 +2,6 @@
 title: $:/core/modules/filters/strings.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operators for strings. Unary/binary operators work on each item in turn, and return a new item list.
-
-Sum/product/maxall/minall operate on the entire list, returning a single item.
-
 \*/
 
 "use strict";
@@ -94,7 +89,7 @@ function diffLineWordMode(text1,text2,mode) {
 exports.makepatches = function(source,operator,options) {
 	var suffix = operator.suffix || "",
 		result = [];
-		
+
 	source(function(tiddler,title) {
 		let diffs, patches;
 		if(suffix === "lines" || suffix === "words") {

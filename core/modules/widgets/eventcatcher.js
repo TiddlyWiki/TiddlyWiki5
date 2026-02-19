@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/eventcatcher.js
 type: application/javascript
 module-type: widget
-
-Event handler widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var EventWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 EventWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 EventWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
 	// Remember parent
@@ -47,9 +38,6 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(domNode,null);
 };
 
-/*
-Compute the internal state of the widget
-*/
 EventWidget.prototype.execute = function() {
 	var self = this;
 	// Get attributes that require a refresh on change
@@ -65,9 +53,6 @@ EventWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Cache and pre-create all event listeners, called when first needed
-*/
 EventWidget.prototype.cacheEventListeners = function() {
 	if(this._eventListeners) {
 		return;
@@ -100,7 +85,7 @@ EventWidget.prototype.cacheEventListeners = function() {
 				if(selectedNode) {
 					clearPointerCapture(event);
 				}
-				// Remove dynamic-only listeners
+
 				this.cleanupDynamicListeners();
 				return this.handleEvent(event, type, selectedNode);
 			};
@@ -110,7 +95,6 @@ EventWidget.prototype.cacheEventListeners = function() {
 		}
 	}
 
-	// Create any listeners not already defined above
 	this.types.forEach(type => {
 		if(!this._eventListeners[type]) {
 			this._eventListeners[type] = event => {
@@ -118,7 +102,7 @@ EventWidget.prototype.cacheEventListeners = function() {
 				if(!selectedNode) {
 					return false;
 				}
-				// Handle pointer capture for pointerdown
+
 				if(type === "pointerdown") {
 					if(this.pointerCaptureMode !== "no") {
 						this.startPointerCapture(event.pointerId, event.target);
@@ -136,9 +120,6 @@ EventWidget.prototype.cacheEventListeners = function() {
 	});
 };
 
-/*
-Check if an event qualifies and return the matching selected node
-*/
 EventWidget.prototype.checkEvent = function(event, type) {
 	const domNode = this.domNode;
 	let node = event.target;
@@ -177,9 +158,6 @@ EventWidget.prototype.checkEvent = function(event, type) {
 	return node;
 };
 
-/*
-Handle the event and execute actions
-*/
 EventWidget.prototype.handleEvent = function(event, type, selectedNode) {
 	if(!selectedNode) {
 		return false;
@@ -214,7 +192,7 @@ EventWidget.prototype.handleEvent = function(event, type, selectedNode) {
 };
 
 EventWidget.prototype.startPointerCapture = function(pointerId, captureTarget) {
-	// Start capture only if none active; pointerId can be 0 
+	// Start capture only if none active; pointerId can be 0
 	if(!Number.isInteger(this._capturePointerId) && this.domNode && this.domNode.setPointerCapture) {
 		this.domNode.setPointerCapture(pointerId);
 		this._capturePointerId = pointerId;
@@ -230,9 +208,6 @@ EventWidget.prototype.stopPointerCapture = function(pointerId) {
 	this._captureTarget = undefined;
 };
 
-/*
-Attach all relevant listeners
-*/
 EventWidget.prototype.attachListeners = function() {
 	this.cacheEventListeners();
 	const domNode = this.domNode;
@@ -244,9 +219,6 @@ EventWidget.prototype.attachListeners = function() {
 	});
 };
 
-/*
-Remove dynamic active listeners
-*/
 EventWidget.prototype.cleanupDynamicListeners = function() {
 	const domNode = this.domNode;
 	Object.keys(this._captureActiveListeners || {}).forEach(type => {
@@ -255,9 +227,6 @@ EventWidget.prototype.cleanupDynamicListeners = function() {
 	this._captureActiveListeners = Object.create(null);
 };
 
-/*
-Remove all listeners
-*/
 EventWidget.prototype.removeAllListeners = function() {
 	if(Number.isInteger(this._capturePointerId)) {
 		this.stopPointerCapture(this._capturePointerId);
@@ -270,9 +239,6 @@ EventWidget.prototype.removeAllListeners = function() {
 	this._captureTarget = null;
 };
 
-/*
-Enable or disable listeners
-*/
 EventWidget.prototype.toggleListeners = function() {
 	let disabled = this.getAttribute("disabled","no") === "yes";
 	if(disabled) {
@@ -282,18 +248,12 @@ EventWidget.prototype.toggleListeners = function() {
 	}
 };
 
-/*
-Assign DOM node classes
-*/
 EventWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-eventcatcher");
 	this.domNode.className = classes.join(" ").trim();
 };
 
-/*
-Refresh widget
-*/
 EventWidget.prototype.refresh = function(changedTiddlers) {
 	const changedAttributes = this.computeAttributes(),
 		changedKeys = Object.keys(changedAttributes),

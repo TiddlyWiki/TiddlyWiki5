@@ -2,9 +2,6 @@
 title: $:/core/modules/filters/is.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for checking tiddler properties
-
 \*/
 
 "use strict";
@@ -19,9 +16,6 @@ function getIsFilterOperators() {
 	return isFilterOperators;
 }
 
-/*
-Export our filter function
-*/
 exports.is = function(source,operator,options) {
 	// Dispatch to the correct isfilteroperator
 	var isFilterOperators = getIsFilterOperators();

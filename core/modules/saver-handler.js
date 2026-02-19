@@ -2,18 +2,10 @@
 title: $:/core/modules/saver-handler.js
 type: application/javascript
 module-type: global
-
-The saver handler tracks changes to the store and handles saving the entire wiki via saver modules.
-
 \*/
 
 "use strict";
 
-/*
-Instantiate the saver handler with the following options:
-wiki: wiki to be synced
-dirtyTracking: true if dirty tracking should be performed
-*/
 function SaverHandler(options) {
 	var self = this;
 	this.wiki = options.wiki;
@@ -26,7 +18,7 @@ function SaverHandler(options) {
 	if($tw.browser) {
 		this.initSavers();
 	}
-	// Only do dirty tracking if required
+
 	if($tw.browser && this.dirtyTracking) {
 		// Compile the dirty tiddler filter
 		this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
@@ -160,7 +152,7 @@ SaverHandler.prototype.saveWiki = function(options) {
 		return false;
 	}
 	var	variables = options.variables || {},
-		template = (options.template || 
+		template = (options.template ||
 		           wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain",
 		text = wiki.renderTiddler(downloadType,template,options),
@@ -190,16 +182,10 @@ SaverHandler.prototype.saveWiki = function(options) {
 	return false;
 };
 
-/*
-Checks whether the wiki is dirty (ie the window shouldn't be closed)
-*/
 SaverHandler.prototype.isDirty = function() {
 	return this.numChanges > 0;
 };
 
-/*
-Update the document body with the class "tc-dirty" if the wiki has unsaved/unsynced changes
-*/
 SaverHandler.prototype.updateDirtyStatus = function() {
 	var self = this;
 	if($tw.browser) {

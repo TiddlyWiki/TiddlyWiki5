@@ -2,9 +2,6 @@
 title: $:/core/modules/utils/deprecated.js
 type: application/javascript
 module-type: utils
-
-Deprecated util functions
-
 \*/
 
 exports.logTable = data => console.table(data);

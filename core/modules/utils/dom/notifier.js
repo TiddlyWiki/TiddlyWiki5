@@ -2,9 +2,6 @@
 title: $:/core/modules/utils/dom/notifier.js
 type: application/javascript
 module-type: utils
-
-Notifier mechanism
-
 \*/
 
 "use strict";
@@ -15,12 +12,6 @@ var Notifier = function(wiki) {
 	this.wiki = wiki;
 };
 
-/*
-Display a notification
-	title: Title of tiddler containing the notification text
-	options: see below
-Options include:
-*/
 Notifier.prototype.display = function(title,options) {
 	options = options || {};
 	// Create the wrapper divs
@@ -33,7 +24,7 @@ Notifier.prototype.display = function(title,options) {
 	if(!tiddler) {
 		return;
 	}
-	// Add classes and roles
+
 	$tw.utils.addClass(notification,"tc-notification");
 	notification.setAttribute("role","alert");
 	// Create the variables

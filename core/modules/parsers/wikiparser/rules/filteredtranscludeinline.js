@@ -2,17 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/filteredtranscludeinline.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text rule for inline filtered transclusion. For example:
-
-```
-{{{ [tag[docs]] }}}
-{{{ [tag[docs]] |tooltip}}}
-{{{ [tag[docs]] ||TemplateTitle}}}
-{{{ [tag[docs]] |tooltip||TemplateTitle}}}
-{{{ [tag[docs]] }}width:40;height:50;}.class.class
-```
-
 \*/
 
 "use strict";

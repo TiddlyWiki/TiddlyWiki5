@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/transclude.js
 type: application/javascript
 module-type: widget
-
-Transclude widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var TranscludeWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 TranscludeWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 TranscludeWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes({asList: true});
@@ -32,24 +23,24 @@ TranscludeWidget.prototype.render = function(parent,nextSibling) {
 	} catch(error) {
 		if(error instanceof $tw.utils.TranscludeRecursionError) {
 			// We were infinite looping.
-			// We need to try and abort as much of the loop as we
+
 			// can, so we will keep "throwing" upward until we find
-			// a transclusion that has a different signature.
+
 			// Hopefully that will land us just outside where the
-			// loop began. That's where we want to issue an error.
+
 			// Rendering widgets beneath this point may result in a
-			// freezing browser if they explode exponentially.
+
 			var transcludeSignature = this.getVariable("transclusion");
 			if(this.getAncestorCount() > $tw.utils.TranscludeRecursionError.MAX_WIDGET_TREE_DEPTH - 50) {
 				// For the first fifty transcludes we climb up,
 				// we simply collect signatures.
-				// We're assuming those first 50 will likely
+
 				// include all transcludes involved in the loop.
 				error.signatures[transcludeSignature] = true;
 			} else if(!error.signatures[transcludeSignature]) {
 				// Now that we're past the first 50, look for
 				// the first signature that wasn't in that loop.
-				// That's where we print the error and resume
+
 				// rendering.
 				this.removeChildDomNodes();
 				this.children = [this.makeChildWidget({type: "error", attributes: {
@@ -63,9 +54,6 @@ TranscludeWidget.prototype.render = function(parent,nextSibling) {
 	}
 };
 
-/*
-Compute the internal state of the widget
-*/
 TranscludeWidget.prototype.execute = function() {
 	// Get our attributes, string parameters, and slot values into properties of the widget object
 	this.collectAttributes();
@@ -114,13 +102,10 @@ TranscludeWidget.prototype.execute = function() {
 		var recursionMarker = this.makeRecursionMarker();
 		this.setVariable("transclusion",recursionMarker);
 	}
-	// Construct the child widgets
+
 	this.makeChildWidgets(parseTreeNodes);
 };
 
-/*
-Collect the attributes we need, in the process determining whether we're being used in legacy mode
-*/
 TranscludeWidget.prototype.collectAttributes = function() {
 	var self = this;
 	// Detect legacy mode
@@ -152,9 +137,6 @@ TranscludeWidget.prototype.collectAttributes = function() {
 	}
 };
 
-/*
-Collect string parameters
-*/
 TranscludeWidget.prototype.collectStringParameters = function() {
 	var self = this;
 	this.stringParametersByName = Object.create(null);
@@ -179,9 +161,6 @@ TranscludeWidget.prototype.collectStringParameters = function() {
 	}
 };
 
-/*
-Collect slot value parameters
-*/
 TranscludeWidget.prototype.collectSlotFillParameters = function() {
 	var self = this;
 	this.slotFillParseTrees = Object.create(null);
@@ -210,9 +189,6 @@ TranscludeWidget.prototype.collectSlotFillParameters = function() {
 	}
 };
 
-/*
-Get transcluded details as an object {text:,type:}
-*/
 TranscludeWidget.prototype.getTransclusionTarget = function() {
 	var self = this;
 	var text;
@@ -247,9 +223,6 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	}
 };
 
-/*
-Get transcluded parse tree nodes as an object {text:,type:,parseTreeNodes:,parseAsInline:}
-*/
 TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 	var self = this;
 	var parser;
@@ -360,7 +333,7 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 							defaultType: this.transcludeType
 						});
 	}
-	// Return the parse tree
+
 	return {
 		parser: parser,
 		parseTreeNodes: parser ? parser.tree : (this.slotFillParseTrees["ts-missing"] || []),
@@ -370,9 +343,6 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 	};
 };
 
-/*
-Fetch all the string parameters as an ordered array of {name:, value:} where the name is optional
-*/
 TranscludeWidget.prototype.getOrderedTransclusionParameters = function() {
 	var result = [];
 	// Collect the parameters
@@ -384,7 +354,7 @@ TranscludeWidget.prototype.getOrderedTransclusionParameters = function() {
 		}
 		result.push(param);
 	}
-	// Sort numerical parameter names first
+
 	result.sort(function(a,b) {
 		var aIsNumeric = !isNaN(a.name),
 			bIsNumeric = !isNaN(b.name);
@@ -407,9 +377,6 @@ TranscludeWidget.prototype.getOrderedTransclusionParameters = function() {
 	return result;
 };
 
-/*
-Fetch the value of a parameter
-*/
 TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaultValue) {
 	if(name in this.stringParametersByName) {
 		if(this.multiValuedParametersByName[name]) {
@@ -428,9 +395,6 @@ TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaul
 	return defaultValue;
 };
 
-/*
-Get one of the special parameters to be provided by the parameters widget
-*/
 TranscludeWidget.prototype.getTransclusionMetaParameters = function() {
 	var self = this;
 	return {
@@ -449,9 +413,6 @@ TranscludeWidget.prototype.getTransclusionMetaParameters = function() {
 	};
 };
 
-/*
-Fetch the value of a slot
-*/
 TranscludeWidget.prototype.getTransclusionSlotFill = function(name,defaultParseTreeNodes) {
 	if(name && this.slotFillParseTrees[name] && this.slotFillParseTrees[name].length > 0) {
 		return this.slotFillParseTrees[name];
@@ -460,16 +421,10 @@ TranscludeWidget.prototype.getTransclusionSlotFill = function(name,defaultParseT
 	}
 };
 
-/*
-Return whether this transclusion should be visible to the slot widget
-*/
 TranscludeWidget.prototype.hasVisibleSlots = function() {
 	return this.getAttribute("$fillignore","no") === "no";
 }
 
-/*
-Compose a string comprising the title, field and/or index to identify this transclusion for recursion detection
-*/
 TranscludeWidget.prototype.makeRecursionMarker = function() {
 	var output = [];
 	output.push("{");
@@ -502,9 +457,6 @@ TranscludeWidget.prototype.functionNeedsRefresh = function() {
 	return oldResult !== newResult;
 }
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(($tw.utils.count(changedAttributes) > 0) || (this.transcludeVariableIsFunction && this.functionNeedsRefresh()) || (!this.transcludeVariable && changedTiddlers[this.transcludeTitle] && this.parserNeedsRefresh())) {

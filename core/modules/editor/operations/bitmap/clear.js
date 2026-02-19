@@ -2,9 +2,6 @@
 title: $:/core/modules/editor/operations/bitmap/clear.js
 type: application/javascript
 module-type: bitmapeditoroperation
-
-Bitmap editor operation to clear the image
-
 \*/
 
 "use strict";

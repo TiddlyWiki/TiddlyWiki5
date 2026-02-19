@@ -2,25 +2,12 @@
 title: $:/core/modules/utils/messaging.js
 type: application/javascript
 module-type: utils-browser
-
-Messaging utilities for use with window.postMessage() etc.
-
-This module intentionally has no dependencies so that it can be included in non-TiddlyWiki projects
-
 \*/
 
 "use strict";
 
 var RESPONSE_TIMEOUT = 2 * 1000;
 
-/*
-Class to handle subscribing to publishers
-
-target: Target window (eg iframe.contentWindow)
-type: String indicating type of item for which subscriptions are being provided (eg "SAVING")
-onsubscribe: Function to be invoked with err parameter when the subscription is established, or there is a timeout
-onmessage: Function to be invoked when a new message arrives, invoked with (data,callback). The callback is invoked with the argument (response)
-*/
 function BrowserMessagingSubscriber(options) {
 	var self = this;
 	this.target = options.target;
@@ -32,7 +19,7 @@ function BrowserMessagingSubscriber(options) {
 	this.channel.port1.addEventListener("message",function(event) {
 		if(this.timerID) {
 			clearTimeout(this.timerID);
-			this.timerID = null;		
+			this.timerID = null;
 		}
 		if(event.data) {
 			if(event.data.verb === "SUBSCRIBED") {
@@ -50,7 +37,7 @@ function BrowserMessagingSubscriber(options) {
 	// Set a timer so that if we don't hear from the iframe before a timeout we alert the user
 	this.timerID = setTimeout(function() {
 		if(!self.hasConfirmed) {
-			self.onsubscribe("NO_RESPONSE");				
+			self.onsubscribe("NO_RESPONSE");
 		}
 	},RESPONSE_TIMEOUT);
 	this.channel.port1.start();
@@ -95,7 +82,7 @@ BrowserMessagingPublisher.prototype.send = function(data,callback) {
 	if(!this.hostIsListening || !this.port) {
 		return false;
 	}
-	// Create a channel for the confirmation
+
 	var channel = new MessageChannel();
 	channel.port1.addEventListener("message",function(event) {
 		if(event.data && event.data.verb === "OK") {
@@ -114,7 +101,7 @@ BrowserMessagingPublisher.prototype.close = function() {
 	if(this.port) {
 		this.port.close();
 		this.hostIsListening = false;
-		this.port = null;		
+		this.port = null;
 	}
 };
 

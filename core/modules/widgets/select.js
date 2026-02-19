@@ -2,19 +2,6 @@
 title: $:/core/modules/widgets/select.js
 type: application/javascript
 module-type: widget
-
-Select widget:
-
-```
-<$select tiddler="MyTiddler" field="text">
-<$list filter="[tag[chapter]]">
-<option value=<<currentTiddler>>>
-<$view field="description"/>
-</option>
-</$list>
-</$select>
-```
-
 \*/
 
 "use strict";
@@ -25,14 +12,8 @@ var SelectWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 SelectWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 SelectWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -42,7 +23,7 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 	if(this.selectClass) {
 		domNode.className = this.selectClass;
 	}
-	// Assign data- attributes
+
 	this.assignAttributes(domNode,{
 		sourcePrefix: "data-",
 		destPrefix: "data-"
@@ -74,9 +55,6 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 	]);
 };
 
-/*
-Handle a change event
-*/
 SelectWidget.prototype.handleChangeEvent = function(event) {
 	// Get the new value and assign it to the tiddler
 	if(this.selectMultiple == false) {
@@ -92,9 +70,6 @@ SelectWidget.prototype.handleChangeEvent = function(event) {
 	}
 };
 
-/*
-If necessary, set the value of the select element to the current value
-*/
 SelectWidget.prototype.setSelectValue = function() {
 	var value = this.selectDefault;
 	// Get the value
@@ -117,7 +92,7 @@ SelectWidget.prototype.setSelectValue = function() {
 			}
 		}
 	}
-	// Assign it to the select element if it's different than the current value
+
 	if(this.selectMultiple) {
 		value = value === undefined ? "" : value;
 		var select = this.getSelectDomNode();
@@ -142,15 +117,12 @@ SelectWidget.prototype.setSelectValue = function() {
 	}
 };
 
-/*
-Get the DOM node of the select element
-*/
 SelectWidget.prototype.getSelectDomNode = function() {
 	return this.domNodes[0];
 };
 
 // Return an array of the selected opion values
-// select is an HTML select element
+
 SelectWidget.prototype.getSelectValues = function() {
 	var select, result, options, opt;
 	select = this.getSelectDomNode();
@@ -165,9 +137,6 @@ SelectWidget.prototype.getSelectValues = function() {
 	return result;
 };
 
-/*
-Compute the internal state of the widget
-*/
 SelectWidget.prototype.execute = function() {
 	// Get our parameters
 	this.selectActions = this.getAttribute("actions");
@@ -186,9 +155,6 @@ SelectWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 SelectWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// If we're using a different tiddler/field/index then completely refresh ourselves
@@ -198,7 +164,7 @@ SelectWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		if(changedAttributes.class) {
 			this.selectClass = this.getAttribute("class");
-			this.getSelectDomNode().setAttribute("class",this.selectClass); 
+			this.getSelectDomNode().setAttribute("class",this.selectClass);
 		}
 		this.assignAttributes(this.getSelectDomNode(),{
 			changedAttributes: changedAttributes,
@@ -209,7 +175,7 @@ SelectWidget.prototype.refresh = function(changedTiddlers) {
 		// If the target tiddler value has changed, just update setting and refresh the children
 		if(changedTiddlers[this.selectTitle] || childrenRefreshed) {
 			this.setSelectValue();
-		} 
+		}
 		return childrenRefreshed;
 	}
 };

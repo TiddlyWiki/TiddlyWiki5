@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/limit.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for chopping the results to a specified maximum number of entries
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.limit = function(source,operator,options) {
 	var results = [];
 	// Convert to an array

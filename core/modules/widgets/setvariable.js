@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/set.js
 type: application/javascript
 module-type: widget
-
-Set variable widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var SetWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 SetWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 SetWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -30,9 +21,6 @@ SetWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 SetWidget.prototype.execute = function() {
 	// Get our parameters
 	this.setName = this.getAttribute("name","currentTiddler");
@@ -56,13 +44,10 @@ SetWidget.prototype.execute = function() {
 	} else {
 		this.setVariable(this.setName,this.getValue());
 	}
-	// Construct the child widgets
+
 	this.makeChildWidgets();
 };
 
-/*
-Get the value to be assigned
-*/
 SetWidget.prototype.getValue = function() {
 	var value = this.setValue;
 	if(this.setTiddler) {
@@ -103,9 +88,6 @@ SetWidget.prototype.getValue = function() {
 	return value || "";
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 SetWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.name || changedAttributes.filter || changedAttributes.select || changedAttributes.tiddler || (this.setTiddler && changedTiddlers[this.setTiddler]) || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes.emptyValue ||

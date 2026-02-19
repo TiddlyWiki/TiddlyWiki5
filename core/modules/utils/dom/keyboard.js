@@ -2,9 +2,6 @@
 title: $:/core/modules/utils/dom/keyboard.js
 type: application/javascript
 module-type: utils
-
-Keyboard utilities; now deprecated. Instead, use $tw.keyboardManager
-
 \*/
 
 "use strict";

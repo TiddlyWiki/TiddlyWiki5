@@ -2,9 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/syslink.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for system tiddler links.
-Can be suppressed preceding them with `~`.
 \*/
 
 "use strict";

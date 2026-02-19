@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/messagecatcher.js
 type: application/javascript
 module-type: widget
-
-Message catcher widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var MessageCatcherWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 MessageCatcherWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
 	// Remember parent

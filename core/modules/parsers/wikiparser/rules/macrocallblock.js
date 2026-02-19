@@ -2,13 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/macrocallblock.js
 type: application/javascript
 module-type: wikirule
-
-Wiki rule for block macro calls
-
-```
-<<name value value2>>
-```
-
 \*/
 
 "use strict";
@@ -28,7 +21,7 @@ exports.findNextMatch = function(startPos) {
 		if(nextCall) {
 			var c = this.parser.source.charAt(nextCall.end);
 			// Ensure EOL after parsed macro
-			// If we didn't need to support IE, we'd just use /(?:\r?\n|$)/ym
+
 			if((c === "") || (c === "\n") || ((c === "\r") && this.parser.source.charAt(nextCall.end+1) === "\n")) {
 				this.nextCall = nextCall;
 				return nextStart;
@@ -39,9 +32,6 @@ exports.findNextMatch = function(startPos) {
 	return undefined;
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	var call = this.nextCall;
 	call.isBlock = true;

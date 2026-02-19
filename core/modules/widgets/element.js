@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/element.js
 type: application/javascript
 module-type: widget
-
-Element widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var ElementWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 ElementWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -31,7 +22,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	if($tw.config.htmlUnsafeElements.indexOf(this.tag) !== -1) {
 		this.tag = "safe-" + this.tag;
 	}
-	// Restrict tag name to digits, letts and dashes
+
 	this.tag = this.tag.replace(/[^0-9a-zA-Z\-]/mg,"");
 	// Default to a span
 	this.tag = this.tag || "span";
@@ -42,7 +33,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 		headingLevel = Math.min(Math.max(headingLevel + 1 + baseLevel,1),6);
 		this.tag = "h" + headingLevel;
 	}
-	// Select the namespace for the tag
+
 	var XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml",
 		tagNamespaces = {
 			svg: "http://www.w3.org/2000/svg",
@@ -60,7 +51,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 			this.namespace = this.getVariable("namespace",{defaultValue: XHTML_NAMESPACE});
 		}
 	}
-	// Invoke the th-rendering-element hook
+
 	var parseTreeNodes = $tw.hooks.invokeHook("th-rendering-element",null,this);
 	this.isReplaced = !!parseTreeNodes;
 	if(parseTreeNodes) {
@@ -69,7 +60,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 		this.renderChildren(this.parentDomNode,null);
 		return;
 	}
-	// Make the child widgets
+
 	this.makeChildWidgets();
 	// Create the DOM node and render children
 	var domNode = this.document.createElementNS(this.namespace,this.tag);
@@ -81,9 +72,6 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(domNode,null);
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 ElementWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes(),
 		hasChangedAttributes = $tw.utils.count(changedAttributes) > 0;

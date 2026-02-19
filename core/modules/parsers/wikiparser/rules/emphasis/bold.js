@@ -2,20 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/emphasis/bold.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for emphasis - bold. For example:
-
-```
-	This is ''bold'' text
-```
-
-This wikiparser can be modified using the rules eg:
-
-```
-\rules except bold 
-\rules only bold 
-```
-
 \*/
 
 "use strict";

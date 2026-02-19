@@ -2,9 +2,6 @@
 title: $:/core/modules/editor/operations/text/replace-all.js
 type: application/javascript
 module-type: texteditoroperation
-
-Text editor operation to replace the entire text
-
 \*/
 
 "use strict";

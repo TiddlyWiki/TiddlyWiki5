@@ -2,16 +2,9 @@
 title: $:/core/modules/utils/base64.js
 type: application/javascript
 module-type: utils-browser
-
-Base64 utility functions
-
 \*/
 
 "use strict";
-
-/*
-Base64 utility functions that work in either browser or Node.js
-*/
 
 exports.btoa = binstr => window.btoa(binstr);
 exports.atob = b64 => window.atob(b64);

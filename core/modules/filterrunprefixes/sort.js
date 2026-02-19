@@ -2,14 +2,10 @@
 title: $:/core/modules/filterrunprefixes/sort.js
 type: application/javascript
 module-type: filterrunprefix
-
 \*/
 
 "use strict";
 
-/*
-Export our filter prefix function
-*/
 exports.sort = function(operationSubFunction,options) {
 	return function(results,source,widget) {
 		if(results.length > 0) {
@@ -33,7 +29,7 @@ exports.sort = function(operationSubFunction,options) {
 			for(var t=0; t<inputTitles.length; t++) {
 				indexes[t] = t;
 			}
-			// Sort the indexes
+
 			compareFn = $tw.utils.makeCompareFunction(sortType,{defaultType: "string", invert:invert, isCaseSensitive:isCaseSensitive});
 			indexes = indexes.sort(function(a,b) {
 					return compareFn(sortKeys[a],sortKeys[b]);

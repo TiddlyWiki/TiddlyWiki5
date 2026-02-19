@@ -2,9 +2,6 @@
 title: $:/core/modules/startup/favicon.js
 type: application/javascript
 module-type: startup
-
-Favicon handling
-
 \*/
 
 "use strict";

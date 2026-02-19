@@ -2,9 +2,6 @@
 title: $:/core/modules/startup/plugins.js
 type: application/javascript
 module-type: startup
-
-Startup logic concerned with managing plugins
-
 \*/
 
 "use strict";
@@ -41,7 +38,7 @@ exports.startup = function() {
 		if(requireReloadDueToPluginChange) {
 			$tw.wiki.addTiddler({title: TITLE_REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE,text: "yes"});
 		}
-		// Read or delete the plugin info of the changed tiddlers
+
 		if(changesToProcess.length > 0) {
 			var changes = $tw.wiki.readPluginInfo(changesToProcess);
 			if(changes.modifiedPlugins.length > 0 || changes.deletedPlugins.length > 0) {
@@ -78,4 +75,3 @@ exports.startup = function() {
 		}
 	});
 };
-

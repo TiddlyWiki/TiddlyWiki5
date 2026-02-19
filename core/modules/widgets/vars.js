@@ -2,16 +2,6 @@
 title: $:/core/modules/widgets/vars.js
 type: application/javascript
 module-type: widget
-
-This widget allows multiple variables to be set in one go:
-
-```
-\define helloworld() Hello world!
-<$vars greeting="Hi" me={{!!title}} sentence=<<helloworld>>>
-  <<greeting>>! I am <<me>> and I say: <<sentence>>
-</$vars>
-```
-
 \*/
 
 "use strict";
@@ -23,14 +13,8 @@ var VarsWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 VarsWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 VarsWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -38,9 +22,6 @@ VarsWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 VarsWidget.prototype.execute = function() {
 	// Parse variables
 	var self = this;
@@ -53,9 +34,6 @@ VarsWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Refresh the widget by ensuring our attributes are up to date
-*/
 VarsWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {

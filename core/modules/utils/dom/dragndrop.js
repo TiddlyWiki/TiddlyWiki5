@@ -2,23 +2,10 @@
 title: $:/core/modules/utils/dom/dragndrop.js
 type: application/javascript
 module-type: utils
-
-Browser data transfer utilities, used with the clipboard and drag and drop
-
 \*/
 
 "use strict";
 
-/*
-Options:
-
-domNode: dom node to make draggable
-selector: CSS selector to identify element within domNode to be used as drag handle (optional)
-dragImageType: "pill", "blank" or "dom" (the default)
-dragTiddlerFn: optional function to retrieve the title of tiddler to drag
-dragFilterFn: optional function to retreive the filter defining a list of tiddlers to drag
-widget: widget to use as the context for the filter
-*/
 exports.makeDraggable = function(options) {
 	var dragImageType = options.dragImageType || "dom",
 		dragImage,
@@ -27,13 +14,13 @@ exports.makeDraggable = function(options) {
 	if(!options.selector && ((domNode.tagName || "").toLowerCase() !== "a")) {
 		domNode.setAttribute("draggable","true");
 	}
-	// Add event handlers
+
 	$tw.utils.addEventListeners(domNode,[
 		{name: "dragstart", handlerFunction: function(event) {
 			if(event.dataTransfer === undefined) {
 				return false;
 			}
-			// Collect the tiddlers being dragged
+
 			var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
 				titles = dragTiddler ? [dragTiddler] : [],
@@ -64,7 +51,7 @@ exports.makeDraggable = function(options) {
 				var inner = options.widget.document.createElement("div");
 				inner.className = "tc-tiddler-dragger-inner";
 				inner.appendChild(options.widget.document.createTextNode(
-					titles.length === 1 ? 
+					titles.length === 1 ?
 						titles[0] :
 						titles.length + " tiddlers"
 				));
@@ -104,7 +91,7 @@ exports.makeDraggable = function(options) {
 					dataTransfer.setData("text/plain",titleString);
 					dataTransfer.setData("text/x-moz-url","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
 				}
-				// If browser is Chrome-like and has a touch-input device do NOT .setData
+
 				if(!($tw.browser.isMobileChrome)) {
 					dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
 				}
@@ -133,7 +120,7 @@ exports.makeDraggable = function(options) {
 					variables["actionTiddler"] = titleString;
 					options.widget.invokeActionString(endActions,options.widget,event,variables);
 				}
-				// Remove the dragging class on the element being dragged
+
 				$tw.utils.removeClass(domNode,"tc-dragging");
 				// Delete the drag image element
 				if(dragImage) {

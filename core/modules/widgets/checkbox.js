@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/checkbox.js
 type: application/javascript
 module-type: widget
-
-Checkbox widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var CheckboxWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 CheckboxWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	var isChecked;
 	// Save the parent dom node
@@ -96,7 +87,7 @@ CheckboxWidget.prototype.getValue = function() {
 			if(value === this.checkboxUnchecked) {
 				return false;
 			}
-			// Neither value found: were both specified?
+
 			if(this.checkboxChecked && !this.checkboxUnchecked) {
 				return false; // Absence of checked value
 			}
@@ -132,7 +123,7 @@ CheckboxWidget.prototype.getValue = function() {
 			if(list.indexOf(this.checkboxUnchecked) !== -1) {
 				return false;
 			}
-			// Neither one present
+
 			if(this.checkboxChecked && !this.checkboxUnchecked) {
 				return false; // Absence of checked value
 			}
@@ -147,7 +138,7 @@ CheckboxWidget.prototype.getValue = function() {
 					return false;
 				}
 			}
-			// Neither specified, so empty list is false, non-empty is true
+
 			return !!list.length;
 		}
 	} else {
@@ -181,7 +172,7 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	} else {
 		tagCheck = hasTag !== checked;
 	}
-	// Set the tag if specified
+
 	if(this.checkboxTag && (!tiddler || tagCheck)) {
 		newFields.tags = tiddler ? (tiddler.fields.tags || []).slice(0) : [];
 		var pos = newFields.tags.indexOf(this.checkboxTag);
@@ -195,21 +186,21 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		}
 		hasChanged = true;
 	}
-	// Set the field if specified
+
 	if(this.checkboxField) {
 		if(!tiddler || tiddler.fields[this.checkboxField] !== value) {
 			newFields[this.checkboxField] = value;
 			hasChanged = true;
 		}
 	}
-	// Set the index if specified
+
 	if(this.checkboxIndex) {
 		var indexValue = this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxIndex);
 		if(!tiddler || indexValue !== value) {
 			hasChanged = true;
 		}
 	}
-	// Set the list field (or index) if specified
+
 	if(this.checkboxListField || this.checkboxListIndex) {
 		var fieldContents, listContents, oldPos, newPos;
 		if(this.checkboxListField) {

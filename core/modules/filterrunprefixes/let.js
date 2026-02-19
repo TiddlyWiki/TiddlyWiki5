@@ -2,18 +2,10 @@
 title: $:/core/modules/filterrunprefixes/let.js
 type: application/javascript
 module-type: filterrunprefix
-
-Assign a value to a variable
-
 \*/
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
-/*
-Export our filter prefix function
-*/
 exports.let = function(operationSubFunction,options) {
 	// Return the filter run prefix function
 	return function(results,source,widget) {
@@ -30,7 +22,7 @@ exports.let = function(operationSubFunction,options) {
 		if(typeof name !== "string" || name.length === 0) {
 			return;
 		}
-		// Assign the result of the subfunction to the variable
+
 		var variables = {};
 		variables[name] = resultList;
 		// Return the variables

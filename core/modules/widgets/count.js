@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/count.js
 type: application/javascript
 module-type: widget
-
-Count widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var CountWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 CountWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 CountWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -32,9 +23,6 @@ CountWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(textNode);
 };
 
-/*
-Compute the internal state of the widget
-*/
 CountWidget.prototype.execute = function() {
 	// Get parameters from our attributes
 	this.filter = this.getAttribute("filter");
@@ -46,9 +34,6 @@ CountWidget.prototype.execute = function() {
 	}
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 CountWidget.prototype.refresh = function(changedTiddlers) {
 	// Re-execute the filter to get the count
 	this.computeAttributes();

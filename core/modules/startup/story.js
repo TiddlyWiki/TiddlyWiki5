@@ -2,9 +2,6 @@
 title: $:/core/modules/startup/story.js
 type: application/javascript
 module-type: startup
-
-Load core modules
-
 \*/
 
 "use strict";
@@ -27,8 +24,6 @@ var CONFIG_UPDATE_HISTORY = "$:/config/Navigation/UpdateHistory"; // Can be "yes
 var CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD = "$:/config/Navigation/Permalinkview/CopyToClipboard"; // Can be "yes" (default) or "no"
 var CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR = "$:/config/Navigation/Permalinkview/UpdateAddressBar"; // Can be "yes" (default) or "no"
 
-
-// Links to help, if there is no param
 var HELP_OPEN_EXTERNAL_WINDOW = "http://tiddlywiki.com/#WidgetMessage%3A%20tm-open-external-window";
 
 exports.startup = function() {
@@ -109,11 +104,6 @@ exports.startup = function() {
 	}
 };
 
-/*
-Process the location hash to open the specified tiddlers. Options:
-disableHistory: if true $:/History is NOT updated
-defaultToCurrentStory: If true, the current story is retained as the default, instead of opening the default tiddlers
-*/
 function openStartupTiddlers(options) {
 	options = options || {};
 	// Work out the target tiddler and the story filter. "null" means "unspecified"
@@ -129,7 +119,7 @@ function openStartupTiddlers(options) {
 			storyFilter = $tw.utils.decodeURIComponentSafe(hash.substr(split + 1).trim());
 		}
 	}
-	// If the story wasn't specified use the current tiddlers or a blank story
+
 	if(storyFilter === null) {
 		if(options.defaultToCurrentStory) {
 			var currStoryList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE);
@@ -142,7 +132,7 @@ function openStartupTiddlers(options) {
 			}
 		}
 	}
-	// Process the story filter to get the story list
+
 	var storyList = $tw.wiki.filterTiddlers(storyFilter);
 	// Invoke any hooks that want to change the default story list
 	storyList = $tw.hooks.invokeHook("th-opening-default-tiddlers-list",storyList);
@@ -172,15 +162,6 @@ function openStartupTiddlers(options) {
 	}
 }
 
-/*
-options: See below
-options.updateAddressBar: "permalink", "permaview" or "no" (defaults to "permaview")
-options.updateHistory: "yes" or "no" (defaults to "no")
-options.copyToClipboard: "permalink", "permaview" or "no" (defaults to "no")
-options.targetTiddler: optional title of target tiddler for permalink
-options.successNotification: optional title of tiddler to use as the notification in case of success
-options.failureNotification: optional title of tiddler to use as the notification in case of failure
-*/
 function updateLocationHash(options) {
 	// Get the story and the history stack
 	var storyList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE),
@@ -193,12 +174,12 @@ function updateLocationHash(options) {
 		if(historyList.length > 0) {
 			targetTiddler = historyList[historyList.length-1].title;
 		}
-		// Blank the target tiddler if it isn't present in the story
+
 		if(storyList.indexOf(targetTiddler) === -1) {
 			targetTiddler = "";
 		}
 	}
-	// Assemble the location hash
+
 	switch(options.updateAddressBar) {
 		case "permalink":
 			$tw.locationHash = "#" + encodeURIComponent(targetTiddler);
@@ -207,7 +188,7 @@ function updateLocationHash(options) {
 			$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
 			break;
 	}
-	// Copy URL to the clipboard
+
 	var url = "";
 	switch(options.copyToClipboard) {
 		case "permalink":
@@ -220,7 +201,7 @@ function updateLocationHash(options) {
 	if(url) {
 		$tw.utils.copyToClipboard(url,{successNotification: options.successNotification, failureNotification: options.failureNotification});
 	}
-	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
+
 	if($tw.utils.getLocationHash() !== $tw.locationHash) {
 		if(options.updateHistory === "yes") {
 			// Assign the location hash so that history is updated

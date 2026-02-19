@@ -2,25 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/typedblock.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text rule for typed blocks. For example:
-
-```
-$$$.js
-This will be rendered as JavaScript
-$$$
-
-$$$.svg
-<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
-  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
-</svg>
-$$$
-
-$$$text/vnd.tiddlywiki>text/html
-This will be rendered as an //HTML representation// of WikiText
-$$$
-```
-
 \*/
 
 "use strict";
@@ -56,7 +37,7 @@ exports.parse = function() {
 		text = this.parser.source.substr(this.parser.pos);
 		this.parser.pos = this.parser.sourceLength;
 	}
-	// Parse the block according to the specified type
+
 	var parser = this.parser.wiki.parseText(parseType,text,{defaultType: "text/plain"});
 	// If there's no render type, just return the parse tree
 	if(!renderType) {

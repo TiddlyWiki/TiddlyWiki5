@@ -2,9 +2,6 @@
 title: $:/core/modules/startup/load-modules.js
 type: application/javascript
 module-type: startup
-
-Load core modules
-
 \*/
 
 "use strict";
@@ -38,7 +35,7 @@ exports.startup = function() {
 	$tw.wiki.initParsers();
 	// --------------------------
 	// The rest of the startup process here is not strictly to do with loading modules, but are needed before other startup
-	// modules are executed. It is easier to put them here than to introduce a new startup module
+
 	// --------------------------
 	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
 	$tw.rootWidget = new widget.widget({

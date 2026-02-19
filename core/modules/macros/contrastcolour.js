@@ -2,16 +2,9 @@
 title: $:/core/modules/macros/contrastcolour.js
 type: application/javascript
 module-type: macro
-
-Macro to choose which of two colours has the highest contrast with a base colour
-
 \*/
 
 "use strict";
-
-/*
-Information about this macro
-*/
 
 exports.name = "contrastcolour";
 
@@ -22,9 +15,6 @@ exports.params = [
 	{name: "colourB"}
 ];
 
-/*
-Run the macro
-*/
 exports.run = function(target,fallbackTarget,colourA,colourB) {
 	var rgbTarget = $tw.utils.parseCSSColor(target) || $tw.utils.parseCSSColor(fallbackTarget);
 	if(!rgbTarget) {
@@ -42,7 +32,7 @@ exports.run = function(target,fallbackTarget,colourA,colourB) {
 		// If neither colour is readable, return a crude inverse of the target
 		return [255 - rgbTarget[0],255 - rgbTarget[1],255 - rgbTarget[2],rgbTarget[3]];
 	}
-	// Colour brightness formula derived from http://www.w3.org/WAI/ER/WD-AERT/#color-contrast
+
 	var brightnessTarget = rgbTarget[0] * 0.299 + rgbTarget[1] * 0.587 + rgbTarget[2] * 0.114,
 		brightnessA = rgbColourA[0] * 0.299 + rgbColourA[1] * 0.587 + rgbColourA[2] * 0.114,
 		brightnessB = rgbColourB[0] * 0.299 + rgbColourB[1] * 0.587 + rgbColourB[2] * 0.114;

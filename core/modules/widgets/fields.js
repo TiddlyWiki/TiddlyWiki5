@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/fields.js
 type: application/javascript
 module-type: widget
-
-Fields widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var FieldsWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 FieldsWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 FieldsWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -32,9 +23,6 @@ FieldsWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(textNode);
 };
 
-/*
-Compute the internal state of the widget
-*/
 FieldsWidget.prototype.execute = function() {
 	// Get parameters from our attributes
 	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
@@ -91,9 +79,6 @@ FieldsWidget.prototype.execute = function() {
 	this.text = text.join("");
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 FieldsWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if( changedAttributes.tiddler || changedAttributes.template || changedAttributes.exclude ||

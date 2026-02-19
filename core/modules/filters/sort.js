@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/sort.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for sorting
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.sort = function(source,operator,options) {
 	var results = prepare_results(source);
 	options.wiki.sortTiddlers(results,operator.operands[0] || "title",operator.prefix === "!",false,false,undefined,operator.operands[1]);

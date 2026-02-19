@@ -2,20 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/hardlinebreaks.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for marking areas with hard line breaks. For example:
-
-```
-"""
-This is some text
-That is set like
-It is a Poem
-When it is
-Clearly
-Not
-"""
-```
-
 \*/
 
 "use strict";

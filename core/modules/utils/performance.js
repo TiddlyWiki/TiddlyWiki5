@@ -2,9 +2,6 @@
 title: $:/core/modules/utils/performance.js
 type: application/javascript
 module-type: global
-
-Performance measurement.
-
 \*/
 
 "use strict";
@@ -22,9 +19,6 @@ Performance.prototype.showGreeting = function() {
 	}
 };
 
-/*
-Wrap performance reporting around a top level function
-*/
 Performance.prototype.report = function(name,fn) {
 	var self = this;
 	if(this.enabled) {
@@ -62,9 +56,6 @@ Performance.prototype.log = function() {
 	self.logger.table(results);
 };
 
-/*
-Wrap performance measurements around a subfunction
-*/
 Performance.prototype.measure = function(name,fn) {
 	var self = this;
 	if(this.enabled) {

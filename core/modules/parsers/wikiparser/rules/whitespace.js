@@ -2,14 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/whitespace.js
 type: application/javascript
 module-type: wikirule
-
-Wiki pragma rule for whitespace specifications
-
-```
-\whitespace trim
-\whitespace notrim
-```
-
 \*/
 
 "use strict";
@@ -17,18 +9,12 @@ Wiki pragma rule for whitespace specifications
 exports.name = "whitespace";
 exports.types = {pragma: true};
 
-/*
-Instantiate parse rule
-*/
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /\\whitespace[^\S\n]/mg;
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	var self = this;
 	// Move past the pragma invocation

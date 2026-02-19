@@ -2,16 +2,10 @@
 title: $:/core/modules/wiki-bulkops.js
 type: application/javascript
 module-type: wikimethod
-
-Bulk tiddler operations such as rename.
-
 \*/
 
 "use strict";
 
-/*
-Rename a tiddler, and relink any tags or lists that reference it.
-*/
 function renameTiddler(fromTitle,toTitle,options) {
 	fromTitle = (fromTitle || "").trim();
 	toTitle = (toTitle || "").trim();
@@ -28,9 +22,6 @@ function renameTiddler(fromTitle,toTitle,options) {
 	}
 }
 
-/*
-Relink any tags or lists that reference a given tiddler
-*/
 function relinkTiddler(fromTitle,toTitle,options) {
 	var self = this;
 	fromTitle = (fromTitle || "").trim();

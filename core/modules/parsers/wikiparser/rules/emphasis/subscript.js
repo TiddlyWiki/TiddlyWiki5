@@ -2,20 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/emphasis/subscript.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for emphasis - subscript. For example:
-
-```
-	This is ,,subscript,, text
-```
-
-This wikiparser can be modified using the rules eg:
-
-```
-\rules except subscript 
-\rules only subscript 
-```
-
 \*/
 
 "use strict";

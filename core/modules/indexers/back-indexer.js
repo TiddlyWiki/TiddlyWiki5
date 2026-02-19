@@ -2,9 +2,6 @@
 title: $:/core/modules/indexers/back-indexer.js
 type: application/javascript
 module-type: indexer
-
-By parsing the tiddler text, indexes the tiddlers' back links, back transclusions, block level back links.
-
 \*/
 function BackIndexer(wiki) {
 	this.wiki = wiki;
@@ -32,14 +29,6 @@ function BackSubIndexer(indexer,extractor) {
 	this.wiki = indexer.wiki;
 	this.indexer = indexer;
 	this.extractor = extractor;
-	/**
-	 * {
-	 *   [target title, e.g. tiddler title being linked to]:
-	 *     {
-	 * 		   [source title, e.g. tiddler title that has link syntax in its text]: true
-	 * 	   }
-	 * }
-	 */
 	this.index = null;
 }
 
@@ -66,9 +55,6 @@ BackSubIndexer.prototype.rebuild = function() {
 	this.index = null;
 }
 
-/*
-* Get things that is being referenced in the text, e.g. tiddler names in the link syntax.
-*/
 BackSubIndexer.prototype._getTarget = function(tiddler) {
 	if(this.wiki.isBinaryTiddler(tiddler.fields.text)) {
 		return [];

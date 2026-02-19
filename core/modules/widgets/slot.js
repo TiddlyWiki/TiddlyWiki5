@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/slot.js
 type: application/javascript
 module-type: widget
-
-Widget for definition of slots within transcluded content. The values provided by the translusion are passed to the slot.
-
 \*/
 
 "use strict";
@@ -17,14 +14,8 @@ var SlotWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 SlotWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 SlotWidget.prototype.render = function(parent,nextSibling) {
 	// Call the constructor
 	Widget.call(this);
@@ -34,9 +25,6 @@ SlotWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 SlotWidget.prototype.execute = function() {
 	var self = this;
 	this.slotName = this.getAttribute("$name");
@@ -58,13 +46,10 @@ SlotWidget.prototype.execute = function() {
 		// Get the parse tree nodes comprising the slot contents
 		parseTreeNodes = pointer.getTransclusionSlotFill(this.slotName,this.parseTreeNode.children);
 	}
-	// Construct the child widgets
+
 	this.makeChildWidgets(parseTreeNodes);
 };
 
-/*
-Refresh the widget by ensuring our attributes are up to date
-*/
 SlotWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes["$name"] || changedAttributes["$depth"]) {

@@ -2,17 +2,10 @@
 title: $:/core/modules/filters/each.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator that selects one tiddler for each unique value of the specified field.
-With suffix "list", selects all tiddlers that are values in a specified list field.
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.each = function(source,operator,options) {
 	var results =[] ,
 	value,values = {},

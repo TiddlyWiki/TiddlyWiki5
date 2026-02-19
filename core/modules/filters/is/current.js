@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/is/current.js
 type: application/javascript
 module-type: isfilteroperator
-
-Filter function for [is[current]]
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.current = function(source,prefix,options) {
 	var results = [],
 		currTiddlerTitle = options.widget && options.widget.getVariable("currentTiddler");

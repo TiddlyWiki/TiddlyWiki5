@@ -2,9 +2,6 @@
 title: $:/core/modules/startup/windows.js
 type: application/javascript
 module-type: startup
-
-Setup root widget handlers for the messages concerned with opening external browser windows
-
 \*/
 
 "use strict";
@@ -52,7 +49,7 @@ exports.startup = function() {
 			srcWindow.focus();
 			return;
 		}
-		// Initialise the document
+
 		srcDocument.write("<!DOCTYPE html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
 		srcDocument.close();
 		srcDocument.title = windowTitle;

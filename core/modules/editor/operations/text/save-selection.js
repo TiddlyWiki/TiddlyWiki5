@@ -2,9 +2,6 @@
 title: $:/core/modules/editor/operations/text/save-selection.js
 type: application/javascript
 module-type: texteditoroperation
-
-Text editor operation to save the current selection in a specified tiddler
-
 \*/
 
 "use strict";

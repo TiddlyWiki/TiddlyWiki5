@@ -2,9 +2,6 @@
 title: $:/core/modules/utils/dom/animations/slide.js
 type: application/javascript
 module-type: animation
-
-A simple slide animation that varies the height of the element
-
 \*/
 
 "use strict";

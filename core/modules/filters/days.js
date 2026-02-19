@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/days.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator that selects tiddlers with a specified date field within a specified date interval.
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.days = function(source,operator,options) {
 	var results = [],
 		fieldName = operator.suffix || "modified",

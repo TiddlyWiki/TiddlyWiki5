@@ -2,20 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/emphasis/superscript.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for emphasis - superscript. For example:
-
-```
-	This is ^^superscript^^ text
-```
-
-This wikiparser can be modified using the rules eg:
-
-```
-\rules except superscript 
-\rules only superscript 
-```
-
 \*/
 
 "use strict";

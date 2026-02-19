@@ -2,14 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/codeinline.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for code runs. For example:
-
-```
-	This is a `code run`.
-	This is another ``code run``
-```
-
 \*/
 
 "use strict";

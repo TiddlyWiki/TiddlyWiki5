@@ -2,9 +2,6 @@
 title: $:/core/modules/startup/info.js
 type: application/javascript
 module-type: startup
-
-Initialise $:/info tiddlers via $:/temp/info-plugin pseudo-plugin
-
 \*/
 
 "use strict";
@@ -19,7 +16,7 @@ var TITLE_INFO_PLUGIN = "$:/temp/info-plugin";
 
 exports.startup = function() {
 	// Function to bake the info plugin with new tiddlers
-	// additions: array of tiddler field objects
+
 	// removals: array of titles to remove
 	var updateInfoPlugin = function(additions = [], removals = []) {
 		// Get the existing tiddlers

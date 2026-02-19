@@ -2,14 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/parameters.js
 type: application/javascript
 module-type: wikirule
-
-Wiki pragma rule for parameter definitions
-
-```
-\parameters(param:defaultvalue,param2:defaultvalue)
-definition text
-```
-
 \*/
 
 "use strict";
@@ -17,18 +9,12 @@ definition text
 exports.name = "parameters";
 exports.types = {pragma: true};
 
-/*
-Instantiate parse rule
-*/
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /\\parameters\s*\(([^)]*)\)(\s*\r?\n)?/mg;
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	// Move past the macro name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;

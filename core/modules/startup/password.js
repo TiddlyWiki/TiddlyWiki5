@@ -2,9 +2,6 @@
 title: $:/core/modules/startup/password.js
 type: application/javascript
 module-type: startup
-
-Password handling
-
 \*/
 
 "use strict";

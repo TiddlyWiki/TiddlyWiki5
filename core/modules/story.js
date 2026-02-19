@@ -2,19 +2,10 @@
 title: $:/core/modules/story.js
 type: application/javascript
 module-type: global
-
-Lightweight object for managing interactions with the story and history lists.
-
 \*/
 
 "use strict";
 
-/*
-Construct Story object with options:
-wiki: reference to wiki object to use to resolve tiddler titles
-storyTitle: title of story list tiddler
-historyTitle: title of history list tiddler
-*/
 function Story(options) {
 	options = options || {};
 	this.wiki = options.wiki || $tw.wiki;
@@ -40,11 +31,11 @@ Story.prototype.addToStory = function(navigateTo,navigateFromTitle,options) {
 	if(slot >= 0) {
 		return;
 	}
-	// First we try to find the position of the story element we navigated from
+
 	var fromIndex = storyList.indexOf(navigateFromTitle);
 	if(fromIndex >= 0) {
 		// The tiddler is added from inside the river
-		// Determine where to insert the tiddler; Fallback is "below"
+
 		switch(options.openLinkFromInsideRiver) {
 			case "top":
 				slot = 0;
@@ -70,7 +61,7 @@ Story.prototype.addToStory = function(navigateTo,navigateFromTitle,options) {
 			slot = 0;
 		}
 	}
-	// Add the tiddler
+
 	storyList.splice(slot,0,navigateTo);
 	// Save the story
 	this.saveStoryList(storyList);

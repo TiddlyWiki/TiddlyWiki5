@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/macrocall.js
 type: application/javascript
 module-type: widget
-
-Macrocall widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var MacroCallWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 MacroCallWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 MacroCallWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -30,9 +21,6 @@ MacroCallWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 MacroCallWidget.prototype.execute = function() {
 	this.macroName = this.parseTreeNode.name || this.getAttribute("$name"),
 	this.parseType = this.getAttribute("$type","text/vnd.tiddlywiki");
@@ -69,9 +57,6 @@ MacroCallWidget.prototype.execute = function() {
 	this.makeChildWidgets(parseTreeNodes);
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 MacroCallWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {

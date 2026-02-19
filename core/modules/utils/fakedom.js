@@ -2,9 +2,6 @@
 title: $:/core/modules/utils/fakedom.js
 type: application/javascript
 module-type: global
-
-A barebones implementation of DOM interfaces needed by the rendering mechanism.
-
 \*/
 
 "use strict";
@@ -87,7 +84,7 @@ var TW_Style = function(el) {
 			if (property in target) {
 				return target[property];
 			}
-			// Otherwise, return the corresponding property from _style
+
 			return el._style[$tw.utils.convertStyleNameToPropertyName(property)] || "";
 		},
 		set: function(target, property, value) {
@@ -109,7 +106,6 @@ var TW_Element = function(tag, namespace) {
 	this.style = new TW_Style(this); // Proxy for style management
 	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
 };
-
 
 Object.setPrototypeOf(TW_Element.prototype,TW_Node.prototype);
 

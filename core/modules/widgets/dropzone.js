@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/dropzone.js
 type: application/javascript
 module-type: widget
-
-Dropzone widget
-
 \*/
 
 "use strict";
@@ -17,14 +14,8 @@ var DropZoneWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 DropZoneWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 DropZoneWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
 	// Remember parent
@@ -47,7 +38,7 @@ DropZoneWidget.prototype.render = function(parent,nextSibling) {
 			{name: "dragend", handlerObject: this, handlerMethod: "handleDragEndEvent"}
 		]);
 	}
-	// Insert element
+
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
@@ -185,7 +176,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
 		return false;
 	}
-	// Check for this window being the source of the drag
+
 	if($tw.dragInProgress) {
 		return false;
 	}
@@ -202,7 +193,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 			deserializer: this.dropzoneDeserializer
 		});
 	}
-	// Try to import the various data types we understand
+
 	if(numFiles === 0) {
 		var fallbackTitle = self.wiki.generateNewTitle("Untitled");
 		//Use the deserializer specified if any
@@ -222,7 +213,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 			$tw.utils.importDataTransfer(dataTransfer,fallbackTitle,readFileCallback);
 		}
 	}
-	// Tell the browser that we handled the drop
+
 	event.preventDefault();
 	// Stop the drop ripple up to any parent handlers
 	event.stopPropagation();
@@ -286,19 +277,16 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 				// Create tiddlers from string items
 				var tiddlerFields;
 				// It's important to give getAsString a closure with the right type
-				// So it can be added to the import queue
+
 				item.getAsString(getItem(item.type));
 			}
 		}
-		// Tell the browser that we've handled the paste
+
 		event.stopPropagation();
 		event.preventDefault();
 	}
 };
 
-/*
-Compute the internal state of the widget
-*/
 DropZoneWidget.prototype.execute = function() {
 	this.dropzoneClass = this.getAttribute("class");
 	this.dropzoneDeserializer = this.getAttribute("deserializer");
@@ -312,9 +300,6 @@ DropZoneWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 DropZoneWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {

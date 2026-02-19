@@ -2,9 +2,6 @@
 title: $:/core/modules/parsers/pdfparser.js
 type: application/javascript
 module-type: parser
-
-The PDF parser embeds a PDF viewer
-
 \*/
 
 "use strict";

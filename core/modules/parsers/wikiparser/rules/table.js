@@ -2,9 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/table.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text block rule for tables.
-
 \*/
 
 "use strict";
@@ -43,7 +40,7 @@ var processRow = function(prevColumns) {
 					colSpanCount = 1;
 				}
 			}
-			// Move to just before the `|` terminating the cell
+
 			this.parser.pos = cellRegExp.lastIndex - 1;
 		} else if(cellMatch[1] === ">") {
 			// Colspan
@@ -88,7 +85,7 @@ var processRow = function(prevColumns) {
 				this.parser.pos++;
 				chr = this.parser.source.substr(this.parser.pos,1);
 			}
-			// Check whether this is a heading cell
+
 			var cell;
 			var start = this.parser.pos;
 			if(chr === "!") {
@@ -106,7 +103,7 @@ var processRow = function(prevColumns) {
 				$tw.utils.addAttributeToParseTreeNode(cell,"colspan",colSpanCount);
 				colSpanCount = 1;
 			}
-			// Parse the cell
+
 			cell.children = this.parser.parseInlineRun(cellTermRegExp,{eatTerminator: true});
 			// Set the alignment for the cell
 			if(vAlign) {
@@ -117,7 +114,7 @@ var processRow = function(prevColumns) {
 			} else if(spaceLeft) {
 				$tw.utils.addAttributeToParseTreeNode(cell,"align","right");
 			}
-			// Move back to the closing `|`
+
 			this.parser.pos--;
 			cell.end = this.parser.pos;
 		}
@@ -153,7 +150,7 @@ exports.parse = function() {
 				table.children.push(rowContainer);
 				currRowType = rowType;
 			}
-			// Is this a caption row?
+
 			if(currRowType === "c") {
 				// If so, move past the opening `|` of the row
 				this.parser.pos++;

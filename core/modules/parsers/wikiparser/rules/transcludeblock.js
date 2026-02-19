@@ -2,14 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/transcludeblock.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text rule for block-level transclusion. For example:
-
-```
-{{MyTiddler}}
-{{MyTiddler||TemplateTitle}}
-```
-
 \*/
 
 "use strict";

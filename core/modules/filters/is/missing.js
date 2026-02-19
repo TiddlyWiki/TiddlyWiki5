@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/is/missing.js
 type: application/javascript
 module-type: isfilteroperator
-
-Filter function for [is[missing]]
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.missing = function(source,prefix,options) {
 	var results = [];
 	if(prefix === "!") {

@@ -2,13 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/entity.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for HTML entities. For example:
-
-```
-	This is a copyright symbol: &copy;
-```
-
 \*/
 
 "use strict";
@@ -22,9 +15,6 @@ exports.init = function(parser) {
 	this.matchRegExp = /(&#?[a-zA-Z0-9]{2,8};)/mg;
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	// Get all the details of the match
 	var entityString = this.match[1];

@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/keyboard.js
 type: application/javascript
 module-type: widget
-
-Keyboard shortcut widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var KeyboardWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 KeyboardWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
 	// Remember parent
@@ -34,7 +25,7 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	if(this.tag && $tw.config.htmlUnsafeElements.indexOf(this.tag) === -1) {
 		tag = this.tag;
 	}
-	// Create element
+
 	var domNode = this.document.createElement(tag);
 	// Assign classes
 	this.domNode = domNode;
@@ -82,9 +73,6 @@ KeyboardWidget.prototype.dispatchMessage = function(event) {
 	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler")});
 };
 
-/*
-Compute the internal state of the widget
-*/
 KeyboardWidget.prototype.execute = function() {
 	var self = this;
 	// Get attributes
@@ -101,9 +89,9 @@ KeyboardWidget.prototype.execute = function() {
 			$tw.utils.each($tw.keyboardManager.lookupNames,function(platformDescriptor) {
 				self.shortcutTiddlers.push("$:/config/" + platformDescriptor + "/" + name);
 			});
-		}	
+		}
 	}
-	// Make child widgets
+
 	this.makeChildWidgets();
 };
 
@@ -113,9 +101,6 @@ KeyboardWidget.prototype.assignDomNodeClasses = function() {
 	this.domNode.className = classes.join(" ").trim();
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes.tag) {
@@ -124,7 +109,7 @@ KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 	} else if(changedAttributes["class"]) {
 		this.assignDomNodeClasses();
 	}
-	// Update the keyInfoArray if one of its shortcut-config-tiddlers has changed
+
 	if(this.shortcutTiddlers && $tw.utils.hopArray(changedTiddlers,this.shortcutTiddlers) && $tw.keyboardManager) {
 		this.keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
 	}

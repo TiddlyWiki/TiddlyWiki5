@@ -2,15 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/commentinline.js
 type: application/javascript
 module-type: wikirule
-
-Wiki text inline rule for HTML comments. For example:
-
-```
-<!-- This is a comment -->
-```
-
-Note that the syntax for comments is simplified to an opening "<!--" sequence and a closing "-->" sequence -- HTML itself implements a more complex format (see http://ostermiller.org/findhtmlcomment.html)
-
 \*/
 
 "use strict";

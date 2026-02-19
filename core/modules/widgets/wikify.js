@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/wikify.js
 type: application/javascript
 module-type: widget
-
-Widget to wikify text into a variable
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var WikifyWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 WikifyWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 WikifyWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -30,9 +21,6 @@ WikifyWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 WikifyWidget.prototype.execute = function() {
 	// Get our parameters
 	this.wikifyName = this.getAttribute("name");
@@ -44,7 +32,7 @@ WikifyWidget.prototype.execute = function() {
 	this.wikifyParser = this.wiki.parseText(this.wikifyType,this.wikifyText,{
 			parseAsInline: this.wikifyMode === "inline"
 		});
-	// Create the widget tree 
+	// Create the widget tree
 	this.wikifyWidgetNode = this.wiki.makeWidget(this.wikifyParser,{
 			document: $tw.fakeDocument,
 			parentWidget: this
@@ -59,9 +47,6 @@ WikifyWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Return the result string
-*/
 WikifyWidget.prototype.getResult = function() {
 	var result;
 	switch(this.wikifyOutput) {
@@ -84,9 +69,6 @@ WikifyWidget.prototype.getResult = function() {
 	return result;
 };
 
-/*
-Return a string of the widget tree
-*/
 WikifyWidget.prototype.getWidgetTree = function() {
 	var copyNode = function(widgetNode,resultNode) {
 			var type = widgetNode.parseTreeNode.type;
@@ -119,9 +101,6 @@ WikifyWidget.prototype.getWidgetTree = function() {
 	return results;
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 WikifyWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// Refresh ourselves entirely if any of our attributes have changed
@@ -144,7 +123,7 @@ WikifyWidget.prototype.refresh = function(changedTiddlers) {
 				return true;
 			}
 		}
-		// Just refresh the children
+
 		return this.refreshChildren(changedTiddlers);
 	}
 };

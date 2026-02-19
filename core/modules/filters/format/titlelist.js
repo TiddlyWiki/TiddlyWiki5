@@ -6,9 +6,6 @@ module-type: formatfilteroperator
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.titlelist = function(source,operand,options) {
 	var results = [];
 	source(function(tiddler,title) {

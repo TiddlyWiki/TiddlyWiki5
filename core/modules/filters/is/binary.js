@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/is/binary.js
 type: application/javascript
 module-type: isfilteroperator
-
-Filter function for [is[binary]]
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.binary = function(source,prefix,options) {
 	var results = [];
 	if(prefix === "!") {

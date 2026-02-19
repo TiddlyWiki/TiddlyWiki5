@@ -2,9 +2,6 @@
 title: $:/core/modules/startup/render.js
 type: application/javascript
 module-type: startup
-
-Title, stylesheet and page rendering
-
 \*/
 
 "use strict";
@@ -99,7 +96,7 @@ exports.startup = function() {
 				onlyThrottledTiddlersHaveChanged = false;
 			}
 		}
-		// Defer the change if only drafts have changed
+
 		if(timerId) {
 			clearTimeout(timerId);
 		}

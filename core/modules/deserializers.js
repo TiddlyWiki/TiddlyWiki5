@@ -2,9 +2,6 @@
 title: $:/core/modules/deserializers.js
 type: application/javascript
 module-type: tiddlerdeserializer
-
-Functions to deserialise tiddlers from a block of text
-
 \*/
 
 "use strict";
@@ -37,12 +34,6 @@ exports["application/json"] = function(text,fields) {
 	return results;
 };
 
-/*
-Parse an HTML file into tiddlers. There are three possibilities:
-# A TiddlyWiki classic HTML file containing `text/x-tiddlywiki` tiddlers
-# A TiddlyWiki5 HTML file containing `text/vnd.tiddlywiki` tiddlers
-# An ordinary HTML file
-*/
 exports["text/html"] = function(text,fields) {
 	var results = [];
 	// Check if we've got an old-style store area
@@ -60,11 +51,11 @@ exports["text/html"] = function(text,fields) {
 		results.push.apply(results,deserializeNewStoreArea(text,newStoreAreaMarkerRegExp.lastIndex,newStoreAreaMatch[1],fields));
 		newStoreAreaMatch = newStoreAreaMarkerRegExp.exec(text);
 	}
-	// Return if we had either an old-style or a new-style store area
+
 	if(storeAreaMatch || haveHadNewStoreArea) {
 		return results;
 	}
-	// Otherwise, check whether we've got an encrypted file
+
 	var encryptedStoreArea = $tw.utils.extractEncryptedStoreArea(text);
 	if(encryptedStoreArea) {
 		// If so, attempt to decrypt it using the current password
@@ -124,30 +115,18 @@ function deserializeStoreArea(text,storeAreaEnd,isTiddlyWiki5,fields) {
 	return results;
 }
 
-/*
-Utility function to parse an old-style tiddler DIV in a *.tid file. It looks like this:
-
-<div title="Title" creator="JoeBloggs" modifier="JoeBloggs" created="201102111106" modified="201102111310" tags="myTag [[my long tag]]">
-<pre>The text of the tiddler (without the expected HTML encoding).
-</pre>
-</div>
-
-Note that the field attributes are HTML encoded, but that the body of the <PRE> tag is not encoded.
-
-When these tiddler DIVs are encountered within a TiddlyWiki HTML file then the body is encoded in the usual way.
-*/
-var deserializeTiddlerDiv = function(text /* [,fields] */) {
+var deserializeTiddlerDiv = function(text) {
 	// Slot together the default results
 	var result = {};
 	if(arguments.length > 1) {
 		for(var f=1; f<arguments.length; f++) {
 			var fields = arguments[f];
 			for(var t in fields) {
-				result[t] = fields[t];		
+				result[t] = fields[t];
 			}
 		}
 	}
-	// Parse the DIV body
+
 	var startRegExp = /^\s*<div\s+([^>]*)>(\s*<pre>)?/gi,
 		endRegExp,
 		match = startRegExp.exec(text);

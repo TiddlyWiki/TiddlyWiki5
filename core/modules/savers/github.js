@@ -2,16 +2,10 @@
 title: $:/core/modules/savers/github.js
 type: application/javascript
 module-type: saver
-
-Saves wiki by pushing a commit to the GitHub v3 REST API
-
 \*/
 
 "use strict";
 
-/*
-Select the appropriate saver module and set it up
-*/
 var GitHubSaver = function(wiki) {
 	this.wiki = wiki;
 };

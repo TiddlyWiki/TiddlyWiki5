@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/testcase.js
 type: application/javascript
 module-type: widget
-
-Widget to display a test case
-
 \*/
 "use strict";
 
@@ -14,14 +11,8 @@ var TestCaseWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 TestCaseWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
 	this.parentDomNode = parent;
@@ -79,7 +70,7 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	if(this.testcaseTestOutput && this.testcaseWiki.tiddlerExists(this.testcaseTestOutput) && this.testcaseTestExpectedResult && this.testcaseWiki.tiddlerExists(this.testcaseTestExpectedResult)) {
 		shouldRunTests = true;
 	}
-	// Render the test rendering if required
+
 	if(shouldRunTests) {
 		var testcaseOutputContainer = $tw.fakeDocument.createElement("div");
 		var testcaseOutputWidget = this.testcaseWiki.makeTranscludeWidget(this.testcaseTestOutput,{
@@ -92,14 +83,14 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 		});
 		testcaseOutputWidget.render(testcaseOutputContainer);
 	}
-	// Clear changes queue
+
 	this.testcaseWiki.clearTiddlerEventQueue();
 	// Run the actions if provided
 	if(this.testcaseWiki.tiddlerExists(this.testcaseTestActions)) {
 		testcaseOutputWidget.invokeActionString(this.testcaseWiki.getTiddlerText(this.testcaseTestActions));
 		testcaseOutputWidget.refresh(this.testcaseWiki.changedTiddlers,testcaseOutputContainer);
 	}
-	// Set up the test result variables
+
 	var testResult = "",
 		outputHTML = "",
 		expectedHTML = "";
@@ -116,11 +107,11 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 		this.setVariable("testResult",testResult);
 		this.setVariable("currentTiddler",this.testcaseTestOutput);
 	}
-	// Don't display anything if testHideIfPass is "yes" and the tests have passed
+
 	if(this.testcaseHideIfPass === "yes" && testResult !== "fail") {
 		return;
 	}
-	// Render the page root template of the subwiki
+
 	var rootWidget = this.testcaseWiki.makeTranscludeWidget(this.testcaseTemplate,{
 		document: this.document,
 		parseAsInline: false,
@@ -133,9 +124,6 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	});
 };
 
-/*
-Compute the internal state of the widget
-*/
 TestCaseWidget.prototype.execute = function() {
 	this.testcaseTemplate = this.getAttribute("template","$:/core/ui/testcases/DefaultTemplate");
 	this.testcaseTestOutput = this.getAttribute("testOutput");
@@ -145,9 +133,6 @@ TestCaseWidget.prototype.execute = function() {
 	this.testcaseClass = this.getAttribute("class","");
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 TestCaseWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {

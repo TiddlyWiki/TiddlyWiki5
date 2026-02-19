@@ -2,9 +2,6 @@
 title: $:/core/modules/editor/operations/text/prefix-lines.js
 type: application/javascript
 module-type: texteditoroperation
-
-Text editor operation to add a prefix to the selected lines
-
 \*/
 
 "use strict";
@@ -26,16 +23,16 @@ exports["prefix-lines"] = function(event,operation) {
 			line = line.substring(event.paramObject.character.length);
 			count++;
 		}
-		// Remove any whitespace
+
 		while(line.charAt(0) === " ") {
 			line = line.substring(1);
 		}
-		// We're done if we removed the exact required prefix, otherwise add it
+
 		if(count !== targetCount) {
 			// Apply the prefix
 			line =  prefix + " " + line;
 		}
-		// Save the modified line
+
 		lines[index] = line;
 	});
 	// Stitch the replacement text together and set the selection

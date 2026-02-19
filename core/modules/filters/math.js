@@ -2,16 +2,6 @@
 title: $:/core/modules/filters/math.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operators for math. Unary/binary operators work on each item in turn, and return a new item list.
-
-Sum/product/maxall/minall operate on the entire list, returning a single item.
-
-Note that strings are converted to numbers automatically. Trailing non-digits are ignored.
-
-* "" converts to 0
-* "12kk" converts to 12
-
 \*/
 
 "use strict";
@@ -104,29 +94,29 @@ exports.log = makeNumericBinaryOperator(
 
 exports.sum = makeNumericReducingOperator(
 	function(accumulator,value) {return accumulator + value},
-	0 // Initial value
+	0
 );
 
 exports.product = makeNumericReducingOperator(
 	function(accumulator,value) {return accumulator * value},
-	1 // Initial value
+	1
 );
 
 exports.maxall = makeNumericReducingOperator(
 	function(accumulator,value) {return Math.max(accumulator,value)},
-	-Infinity // Initial value
+	-Infinity
 );
 
 exports.minall = makeNumericReducingOperator(
 	function(accumulator,value) {return Math.min(accumulator,value)},
-	Infinity // Initial value
+	Infinity
 );
 
 exports.median = makeNumericArrayOperator(
 	function(values) {
 		var len = values.length, median;
 		values.sort(function(a,b) {return a-b});
-		if(len % 2) { 
+		if(len % 2) {
 			// Odd, return the middle number
 			median = values[(len - 1) / 2];
 		} else {

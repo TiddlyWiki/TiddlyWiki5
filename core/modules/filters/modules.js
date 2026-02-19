@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/modules.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for returning the titles of the modules of a given type in this wiki
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.modules = function(source,operator,options) {
 	var results = [];
 	if(operator.operands.length >= 2) {
@@ -19,7 +13,7 @@ exports.modules = function(source,operator,options) {
 		source(function(tiddler,title) {
 			$tw.utils.each($tw.modules.types[title],function(moduleInfo,moduleName) {
 				if(require(moduleName)[operator.operands[0]] === operator.operands[1]) {
-					results.push(moduleName);					
+					results.push(moduleName);
 				}
 			});
 		});

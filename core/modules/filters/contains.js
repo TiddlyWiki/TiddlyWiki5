@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/contains.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for finding values in array fields
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.contains = function(source,operator,options) {
 	var results = [],
 		fieldname = operator.suffix || "list";

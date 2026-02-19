@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/range.js
 type: application/javascript
 module-type: widget
-
-Range widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var RangeWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 RangeWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 RangeWidget.prototype.render = function(parent,nextSibling) {
 	// Save the parent dom node
 	this.parentDomNode = parent;
@@ -88,21 +79,19 @@ RangeWidget.prototype.getActionVariables = function(options) {
 	options = options || {};
 	var hasChanged = (this.startValue !== this.inputDomNode.value) ? "yes" : "no";
 	// Trigger actions. Use variables = {key:value, key:value ...}
-	// the "value" is needed.
+
 	return $tw.utils.extend({"actionValue": this.inputDomNode.value, "actionValueHasChanged": hasChanged}, options);
 }
 
-// actionsStart
 RangeWidget.prototype.handleMouseDownEvent = function(event) {
 	this.handleEvent(event);
 	// Trigger actions
 	if(this.actionsMouseDown) {
-		var variables = this.getActionVariables() // TODO this line will go into the function call below.
+		var variables = this.getActionVariables()
 		this.invokeActionString(this.actionsMouseDown,this,event,variables);
 	}
 }
 
-// actionsStop
 RangeWidget.prototype.handleMouseUpEvent = function(event) {
 	this.handleEvent(event);
 	// Trigger actions
@@ -121,7 +110,7 @@ RangeWidget.prototype.handleInputEvent = function(event) {
 	// Trigger actions
 	if(this.actionsInput) {
 		// "tiddler" parameter may be missing. See .execute() below
-		var variables = this.getActionVariables({"actionValueHasChanged": "yes"}) // TODO this line will go into the function call below.
+		var variables = this.getActionVariables({"actionValueHasChanged": "yes"})
 		this.invokeActionString(this.actionsInput,this,event,variables);
 	}
 };
@@ -136,9 +125,6 @@ RangeWidget.prototype.handleEvent = function(event) {
 	}
 };
 
-/*
-Compute the internal state of the widget
-*/
 RangeWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
@@ -152,7 +138,7 @@ RangeWidget.prototype.execute = function() {
 	this.isDisabled = this.getAttribute("disabled","no");
 	this.tabIndex = this.getAttribute("tabindex");
 	// Actions since 5.1.23
-	// Next 2 only fire once!
+
 	this.actionsMouseDown = this.getAttribute("actionsStart","");
 	this.actionsMouseUp = this.getAttribute("actionsStop","");
 	// Input fires very often!
@@ -161,9 +147,6 @@ RangeWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 RangeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {

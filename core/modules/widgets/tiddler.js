@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/tiddler.js
 type: application/javascript
 module-type: widget
-
-Tiddler widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var TiddlerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 TiddlerWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 TiddlerWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -30,9 +21,6 @@ TiddlerWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 TiddlerWidget.prototype.execute = function() {
 	this.tiddlerState = this.computeTiddlerState();
 	this.setVariable("currentTiddler",this.tiddlerState.currentTiddler);
@@ -44,9 +32,6 @@ TiddlerWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Compute the tiddler state flags
-*/
 TiddlerWidget.prototype.computeTiddlerState = function() {
 	// Get our parameters
 	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
@@ -63,9 +48,6 @@ TiddlerWidget.prototype.computeTiddlerState = function() {
 	return state;
 };
 
-/*
-Create a string of CSS classes derived from the tags of the current tiddler
-*/
 TiddlerWidget.prototype.getTagClasses = function() {
 	var tiddler = this.wiki.getTiddler(this.tiddlerTitle);
 	if(tiddler) {
@@ -79,9 +61,6 @@ TiddlerWidget.prototype.getTagClasses = function() {
 	}
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes(),
 		newTiddlerState = this.computeTiddlerState();

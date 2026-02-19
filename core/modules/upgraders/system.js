@@ -2,9 +2,6 @@
 title: $:/core/modules/upgraders/system.js
 type: application/javascript
 module-type: upgrader
-
-Upgrader module that suppresses certain system tiddlers that shouldn't be imported
-
 \*/
 
 "use strict";

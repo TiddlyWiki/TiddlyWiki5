@@ -2,9 +2,6 @@
 title: $:/core/modules/widgets/fieldmangler.js
 type: application/javascript
 module-type: widget
-
-Field mangler widget
-
 \*/
 
 "use strict";
@@ -15,14 +12,8 @@ var FieldManglerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 FieldManglerWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 FieldManglerWidget.prototype.render = function(parent,nextSibling) {
 	this.addEventListeners([
 		{type: "tm-remove-field", handler: "handleRemoveFieldEvent"},
@@ -36,9 +27,6 @@ FieldManglerWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 FieldManglerWidget.prototype.execute = function() {
 	// Get our parameters
 	this.mangleTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
@@ -46,9 +34,6 @@ FieldManglerWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 FieldManglerWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.tiddler) {

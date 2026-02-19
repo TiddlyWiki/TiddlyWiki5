@@ -2,16 +2,10 @@
 title: $:/core/modules/savers/postmessage.js
 type: application/javascript
 module-type: saver
-
-Handles saving changes via window.postMessage() to the window.parent
-
 \*/
 
 "use strict";
 
-/*
-Select the appropriate saver module and set it up
-*/
 var PostMessageSaver = function(wiki) {
 	this.publisher = new $tw.utils.BrowserMessagingPublisher({type: "SAVE"});
 };
@@ -59,4 +53,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new PostMessageSaver(wiki);
 };
-

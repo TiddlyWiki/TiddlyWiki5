@@ -2,39 +2,28 @@
 title: $:/core/modules/filters.js
 type: application/javascript
 module-type: wikimethod
-
-Adds tiddler filtering methods to the $tw.Wiki object.
-
 \*/
 
 "use strict";
 
 var widgetClass = require("$:/core/modules/widgets/widget.js").widget;
 
-/* Maximum permitted filter recursion depth */
 var MAX_FILTER_DEPTH = 300;
 
-/*
-Parses an operation (i.e. a run) within a filter string
-	operators: Array of array of operator nodes into which results should be inserted
-	filterString: filter string
-	p: start position within the string
-Returns the new start position, after the parsed operation
-*/
 function parseFilterOperation(operators,filterString,p) {
 	var nextBracketPos, operator;
 	// Skip the starting square bracket
 	if(filterString.charAt(p++) !== "[") {
 		throw "Missing [ in filter expression";
 	}
-	// Process each operator in turn
+
 	do {
 		operator = {};
 		// Check for an operator prefix
 		if(filterString.charAt(p) === "!") {
 			operator.prefix = filterString.charAt(p++);
 		}
-		// Get the operator name
+
 		nextBracketPos = filterString.substring(p).search(/[\[\{<\/\(]/);
 		if(nextBracketPos === -1) {
 			throw "Missing [ in filter expression";
@@ -55,12 +44,12 @@ function parseFilterOperation(operators,filterString,p) {
 				$tw.utils.each(subsuffix.split(","),function(entry) {
 					entry = $tw.utils.trim(entry);
 					if(entry) {
-						operator.suffixes[operator.suffixes.length - 1].push(entry); 
+						operator.suffixes[operator.suffixes.length - 1].push(entry);
 					}
 				});
 			});
 		}
-		// Empty operator means: title
+
 		else if(operator.operator === "") {
 			operator.operator = "title";
 		}
@@ -125,20 +114,16 @@ function parseFilterOperation(operators,filterString,p) {
 			}
 		}
 
-		// Push this operator
 		operators.push(operator);
 	} while(filterString.charAt(p) !== "]");
 	// Skip the ending square bracket
 	if(filterString.charAt(p++) !== "]") {
 		throw "Missing ] in filter expression";
 	}
-	// Return the parsing position
+
 	return p;
 }
 
-/*
-Parse a filter string
-*/
 exports.parseFilter = function(filterString) {
 	filterString = filterString || "";
 	var results = [], // Array of arrays of operator nodes {operator:,operand:}
@@ -147,11 +132,11 @@ exports.parseFilter = function(filterString) {
 	var whitespaceRegExp = /(\s+)/mg,
 		// Groups:
 		// 1 - entire filter run prefix
-		// 2 - filter run prefix itself
+
 		// 3 - filter run prefix suffixes
-		// 4 - opening square bracket following filter run prefix
+
 		// 5 - double quoted string following filter run prefix
-		// 6 - single quoted string following filter run prefix
+
 		// 7 - anything except for whitespace and square brackets
 		operandRegExp = /((?:\+|\-|~|(?:=>?)|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
@@ -161,7 +146,7 @@ exports.parseFilter = function(filterString) {
 		if(match && match.index === p) {
 			p = p + match[0].length;
 		}
-		// Match the start of the operation
+
 		if(p < filterString.length) {
 			operandRegExp.lastIndex = p;
 			var operation = {
@@ -178,7 +163,7 @@ exports.parseFilter = function(filterString) {
 					if(match[2]) {
 						operation.namedPrefix = match[2];
 					}
-					// Suffixes for filter run prefix
+
 					if(match[3]) {
 						operation.suffixes = [];
 						$tw.utils.each(match[3].split(":"),function(subsuffix) {
@@ -192,7 +177,7 @@ exports.parseFilter = function(filterString) {
 						});
 					}
 				}
-				// Opening square bracket
+
 				if(match[4]) {
 					p = parseFilterOperation(operation.operators,filterString,p);
 				} else {
@@ -202,7 +187,7 @@ exports.parseFilter = function(filterString) {
 				// No filter run prefix
 				p = parseFilterOperation(operation.operators,filterString,p);
 			}
-			// Quoted strings and unquoted title
+
 			if(match[5] || match[6] || match[7]) { // Double quoted string, single quoted string or unquoted title
 				operation.operators.push(
 					{operator: "title", operands: [{text: match[5] || match[6] || match[7]}]}
@@ -235,11 +220,6 @@ exports.filterTiddlers = function(filterString,widget,source) {
 	return fn.call(this,source,widget);
 };
 
-/*
-Compile a filter into a function with the signature fn(source,widget) where:
-source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
-widget: an optional widget node for retrieving the current tiddler etc.
-*/
 exports.compileFilter = function(filterString) {
 	if(!this.filterCache) {
 		this.filterCache = Object.create(null);
@@ -257,7 +237,7 @@ exports.compileFilter = function(filterString) {
 			return [$tw.language.getString("Error/Filter") + ": " + e];
 		};
 	}
-	// Get the hashmap of filter operator functions
+
 	var filterOperators = this.getFilterOperators();
 	// Assemble array of functions, one for each operation
 	var operationFunctions = [];
@@ -302,7 +282,7 @@ exports.compileFilter = function(filterString) {
 							operand.value = "";
 							operand.multiValue = [];
 						}
-						operand.isMultiValueOperand = true;	
+						operand.isMultiValueOperand = true;
 					} else {
 						operand.value = operand.text;
 						operand.multiValue = [operand.value];
@@ -360,7 +340,7 @@ exports.compileFilter = function(filterString) {
 					return filterRunPrefixes["else"](operationSubFunction, options);
 				case "=>": // This operation is applied to the main results so far, and the results are assigned to a variable
 					return filterRunPrefixes["let"](operationSubFunction, options);
-				default: 
+				default:
 					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
 						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
 					} else {
@@ -402,7 +382,7 @@ exports.compileFilter = function(filterString) {
 	});
 	if(this.filterCacheCount >= 2000) {
 		// To prevent memory leak, we maintain an upper limit for cache size.
-		// Reset if exceeded. This should give us 95% of the benefit
+
 		// that no cache limit would give us.
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;

@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/range.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator for generating a numeric range.
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.range = function(source,operator,options) {
 	var results = [];
 	// For backwards compatibility, if there is only one operand, try to split it using one of the delimiters
@@ -19,14 +13,14 @@ exports.range = function(source,operator,options) {
 	if(parts.length === 1) {
 		parts = operator.operand.split(/[,:;]/g);
 	}
-	// Process the parts
+
 	var beg, end, inc, i, fixed = 0;
 	for (i=0; i<parts.length; i++) {
 		// Validate real number
 		if(!/^\s*[+-]?((\d+(\.\d*)?)|(\.\d+))\s*$/.test(parts[i])) {
 			return ["range: bad number \"" + parts[i] + "\""];
 		}
-		// Count digits; the most precise number determines decimal places in output.
+
 		var frac = /\.\d+/.exec(parts[i]);
 		if(frac) {
 			fixed = Math.max(fixed,frac[0].length-1);
@@ -61,14 +55,14 @@ exports.range = function(source,operator,options) {
 	if(inc === 0) {
 		return ["range: increment 0 causes infinite loop"];
 	}
-	// May need to count backwards
+
 	var direction = ((end < beg) ? -1 : 1);
 	inc *= direction;
 	// Estimate number of resulting elements
 	if((end - beg) / inc > 10000) {
 		return ["range: too many steps (over 10K)"];
 	}
-	// Avoid rounding error on last step
+
 	end += direction * 0.5 * Math.pow(0.1,fixed);
 	var safety = 10010;
 	// Enumerate the range
@@ -90,7 +84,7 @@ exports.range = function(source,operator,options) {
 	if(safety<0) {
 		return ["range: unexpectedly large output"];
 	}
-	// Reverse?
+
 	if(operator.prefix === "!") {
 		results.reverse();
 	}

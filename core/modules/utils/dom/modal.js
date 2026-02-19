@@ -2,9 +2,6 @@
 title: $:/core/modules/utils/dom/modal.js
 type: application/javascript
 module-type: utils
-
-Modal message mechanism
-
 \*/
 
 "use strict";
@@ -17,15 +14,6 @@ var Modal = function(wiki) {
 	this.modalCount = 0;
 };
 
-/*
-Display a modal dialogue
-	title: Title of tiddler to display
-	options: see below
-Options include:
-	downloadLink: Text of a big download link to include
-	event: widget event
-	variables: from event.paramObject
-*/
 Modal.prototype.display = function(title,options) {
 	options = options || {};
 	this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
@@ -40,7 +28,7 @@ Modal.prototype.display = function(title,options) {
 	if(!tiddler) {
 		return;
 	}
-	// Create the variables
+
 	var variables = $tw.utils.extend({
 			currentTiddler: title,
 			"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
@@ -137,7 +125,7 @@ Modal.prototype.display = function(title,options) {
 		modalLink.appendChild(this.srcDocument.createTextNode("Right-click to save changes"));
 		modalBody.appendChild(modalLink);
 	}
-	// Render the footer of the message
+
 	if(tiddler.fields && tiddler.fields.help) {
 		var link = this.srcDocument.createElement("a");
 		link.setAttribute("href",tiddler.fields.help);

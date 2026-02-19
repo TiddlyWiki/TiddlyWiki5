@@ -2,18 +2,10 @@
 title: $:/core/modules/utils/dom/browser.js
 type: application/javascript
 module-type: utils
-
-Browser feature detection
-
 \*/
 
 "use strict";
 
-/*
-Set style properties of an element
-	element: dom node
-	styles: ordered array of {name: value} pairs
-*/
 exports.setStyle = function(element,styles) {
 	if(element.nodeType === 1) { // Element.ELEMENT_NODE
 		for(var t=0; t<styles.length; t++) {
@@ -24,31 +16,15 @@ exports.setStyle = function(element,styles) {
 	}
 };
 
-/*
-Remove style properties of an element
-  element: dom node
-	styleProperties: ordered array of string property names
-*/
 exports.removeStyles = function(element, styleProperties) {
 	for (var i=0; i<styleProperties.length; i++) {
 		element.style.removeProperty($tw.utils.convertStyleNameToPropertyName(styleProperties[i]));
 	}
 }
 
-/*
-Remove single style property of an element
-  element: dom node
-	styleProperty: string property name
-*/
 exports.removeStyle = function(element, styleProperty) {
 	$tw.utils.removeStyles(element, [styleProperty])
 }
-
-/*
-Converts a standard CSS property name into the local browser-specific equivalent. For example:
-	"background-color" --> "backgroundColor"
-	"transition" --> "webkitTransition"
-*/
 
 var styleNameCache = {}; // We'll cache the style name conversions
 
@@ -92,18 +68,9 @@ exports.convertPropertyNameToStyleName = function(propertyName) {
 	return styleName;
 };
 
-/*
-Round trip a stylename to a property name and back again. For example:
-	"transform" --> "webkitTransform" --> "-webkit-transform"
-*/
 exports.roundTripPropertyName = function(propertyName) {
 	return $tw.utils.convertPropertyNameToStyleName($tw.utils.convertStyleNameToPropertyName(propertyName));
 };
-
-/*
-Converts a standard event name into the local browser specific equivalent. For example:
-	"animationEnd" --> "webkitAnimationEnd"
-*/
 
 var eventNameCache = {}; // We'll cache the conversions
 

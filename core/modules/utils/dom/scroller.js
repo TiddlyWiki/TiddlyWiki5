@@ -2,16 +2,10 @@
 title: $:/core/modules/utils/dom/scroller.js
 type: application/javascript
 module-type: utils
-
-Module that creates a $tw.utils.Scroller object prototype that manages scrolling in the browser
-
 \*/
 
 "use strict";
 
-/*
-Event handler for when the `tm-scroll` event hits the document body
-*/
 var PageScroller = function() {
 	this.idRequestFrame = null;
 	this.requestAnimationFrame = window.requestAnimationFrame ||
@@ -41,9 +35,6 @@ PageScroller.prototype.cancelScroll = function(srcWindow) {
 	}
 };
 
-/*
-Handle an event
-*/
 PageScroller.prototype.handleEvent = function(event) {
 	if(event.type === "tm-scroll") {
 		var options = {};
@@ -60,9 +51,6 @@ PageScroller.prototype.handleEvent = function(event) {
 	return true;
 };
 
-/*
-Handle a scroll event hitting the page document
-*/
 PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	var self = this,
 		duration = $tw.utils.hop(options,"animationDuration") ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
@@ -76,7 +64,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	if(toolbar) {
 		offset = toolbar.offsetHeight;
 	}
-	// Get the client bounds of the element and adjust by the scroll position
+
 	var getBounds = function() {
 			var clientBounds = typeof callback === 'function' ? callback() : element.getBoundingClientRect(),
 				scrollPosition = $tw.utils.getScrollPosition(srcWindow);

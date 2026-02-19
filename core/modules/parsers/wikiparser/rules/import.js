@@ -2,13 +2,6 @@
 title: $:/core/modules/parsers/wikiparser/rules/import.js
 type: application/javascript
 module-type: wikirule
-
-Wiki pragma rule for importing variable definitions
-
-```
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
-```
-
 \*/
 
 "use strict";
@@ -16,18 +9,12 @@ Wiki pragma rule for importing variable definitions
 exports.name = "import";
 exports.types = {pragma: true};
 
-/*
-Instantiate parse rule
-*/
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /\\import[^\S\n]/mg;
 };
 
-/*
-Parse the most recent match
-*/
 exports.parse = function() {
 	var self = this;
 	// Move past the pragma invocation

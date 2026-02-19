@@ -2,18 +2,10 @@
 title: $:/core/modules/utils/dom/http.js
 type: application/javascript
 module-type: utils
-
-HTTP support
-
 \*/
 
 "use strict";
 
-/*
-Manage tm-http-request events. Options include:
-wiki: Reference to the wiki to be used for state tiddler tracking
-stateTrackerTitle: Title of tiddler to be used for state tiddler tracking
-*/
 function HttpClient(options) {
 	options = options || {};
 	this.nextId = 1;
@@ -23,9 +15,6 @@ function HttpClient(options) {
 	this.updateRequestTracker();
 }
 
-/*
-Return the index into this.requests[] corresponding to a given ID. Returns null if not found
-*/
 HttpClient.prototype.getRequestIndex = function(targetId) {
 	var targetIndex = null;
 	$tw.utils.each(this.requests,function(requestInfo,index) {
@@ -36,9 +25,6 @@ HttpClient.prototype.getRequestIndex = function(targetId) {
 	return targetIndex;
 };
 
-/*
-Update the state tiddler that is tracking the outstanding requests
-*/
 HttpClient.prototype.updateRequestTracker = function() {
 	this.wiki.addTiddler({title: this.stateTrackerTitle, text: "" + this.requests.length});
 };
@@ -81,29 +67,6 @@ HttpClient.prototype.cancelHttpRequest = function(targetId) {
 	}
 };
 
-/*
-Initiate an HTTP request. Options:
-wiki: wiki to be used for executing action strings
-url: URL for request
-method: method eg GET, POST
-body: text of request body
-binary: set to "yes" to force binary processing of response payload
-oncompletion: action string to be invoked on completion
-onprogress: action string to be invoked on progress updates
-bindStatus: optional title of tiddler to which status ("pending", "complete", "error") should be written
-bindProgress: optional title of tiddler to which the progress of the request (0 to 100) should be bound
-variables: hashmap of variable name to string value passed to action strings
-headers: hashmap of header name to header value to be sent with the request
-passwordHeaders: hashmap of header name to password store name to be sent with the request
-queryStrings: hashmap of query string parameter name to parameter value to be sent with the request
-passwordQueryStrings: hashmap of query string parameter name to password store name to be sent with the request
-basicAuthUsername: plain username for basic authentication
-basicAuthUsernameFromStore: name of password store entry containing username
-basicAuthPassword: plain password for basic authentication
-basicAuthPasswordFromStore: name of password store entry containing password
-bearerAuthToken: plain text token for bearer authentication
-bearerAuthTokenFromStore: name of password store entry contain bear authorization token
-*/
 function HttpClientRequest(options) {
 	var self = this;
 	console.log("Initiating an HTTP request",options)
@@ -192,7 +155,6 @@ HttpClientRequest.prototype.send = function(callback) {
 					data: (data || "").toString(),
 					headers: JSON.stringify(headers)
 				};
-				/* Convert data from binary to base64 */
 				if (xhr.responseType === "arraybuffer") {
 					var binary = "",
 						bytes = new Uint8Array(data),
@@ -231,16 +193,6 @@ HttpClientRequest.prototype.cancel = function() {
 
 exports.HttpClient = HttpClient;
 
-/*
-Make an HTTP request. Options are:
-	url: URL to retrieve
-	headers: hashmap of headers to send
-	type: GET, PUT, POST etc
-	callback: function invoked with (err,data,xhr)
-	progress: optional function invoked with (lengthComputable,loaded,total)
-	returnProp: string name of the property to return as first argument of callback
-	responseType: "text" or "arraybuffer"
-*/
 exports.httpRequest = function(options) {
 	var type = options.type || "GET",
 		url = options.url,
@@ -302,7 +254,7 @@ exports.httpRequest = function(options) {
 				options.callback(null,this[returnProp],this);
 				return;
 			}
-		// Something went wrong
+
 		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,this[returnProp],this);
 		}
 	};
@@ -313,7 +265,7 @@ exports.httpRequest = function(options) {
 			options.progress(event.lengthComputable,event.loaded,event.total);
 		};
 	}
-	// Make the request
+
 	request.open(type,url,true);
 	// Headers
 	if(headers) {
@@ -327,7 +279,7 @@ exports.httpRequest = function(options) {
 	if(!hasHeader("X-Requested-With") && !isSimpleRequest(type,headers) && useDefaultHeaders) {
 		request.setRequestHeader("X-Requested-With","TiddlyWiki");
 	}
-	// Send data
+
 	try {
 		request.send(data);
 	} catch(e) {

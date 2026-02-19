@@ -2,9 +2,6 @@
 title: $:/core/modules/parsers/binaryparser.js
 type: application/javascript
 module-type: parser
-
-The binary parser parses a binary tiddler into a warning message and download link
-
 \*/
 
 "use strict";
@@ -42,16 +39,16 @@ var BinaryParser = function(type,text,options) {
 	// Set the link href to external or internal data URI
 	if(options._canonical_uri) {
 		link.attributes.href = {
-			type: "string", 
+			type: "string",
 			value: options._canonical_uri
 		};
 	} else if(text) {
 		link.attributes.href = {
-			type: "string", 
+			type: "string",
 			value: "data:" + type + ";base64," + text
 		};
 	}
-	// Combine warning message and download link in a div
+
 	var element = {
 		type: "element",
 		tag: "div",

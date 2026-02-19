@@ -2,16 +2,10 @@
 title: $:/core/modules/filters/tags.js
 type: application/javascript
 module-type: filteroperator
-
-Filter operator returning all the tags of the selected tiddlers
-
 \*/
 
 "use strict";
 
-/*
-Export our filter function
-*/
 exports.tags = function(source,operator,options) {
 	var tags = {};
 	source(function(tiddler,title) {

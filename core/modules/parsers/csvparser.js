@@ -2,9 +2,6 @@
 title: $:/core/modules/parsers/csvparser.js
 type: application/javascript
 module-type: parser
-
-The CSV text parser processes CSV files into a table wrapped in a scrollable widget
-
 \*/
 
 "use strict";
@@ -18,7 +15,6 @@ var CsvParser = function(type,text,options) {
 		options.separator = "\t";
 	}
 
-	// Table framework
 	this.tree = [{
 		"type": "scrollable", "children": [{
 			"type": "element", "tag": "table", "children": [{

@@ -2,9 +2,6 @@
 title: $:/core/modules/indexers/tag-indexer.js
 type: application/javascript
 module-type: indexer
-
-Indexes the tiddlers with each tag
-
 \*/
 
 "use strict";
@@ -88,6 +85,5 @@ TagSubIndexer.prototype.lookup = function(tag) {
 		return [];
 	}
 };
-
 
 exports.TagIndexer = TagIndexer;
