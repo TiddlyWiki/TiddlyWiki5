@@ -9,8 +9,6 @@ Read tiddlers from an unzipped Twitter archive
 
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
-
 exports.info = {
 	name: "loadtwitterarchive",
 	synchronous: false

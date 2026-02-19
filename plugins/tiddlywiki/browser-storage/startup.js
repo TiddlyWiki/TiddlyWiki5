@@ -22,8 +22,6 @@ var ENABLED_TITLE = "$:/config/BrowserStorage/Enabled",
 var BrowserStorageUtil = require("$:/plugins/tiddlywiki/browser-storage/util.js").BrowserStorageUtil;
 
 exports.startup = function() {
-	var self = this;
-
 	// Compute our prefix for local storage keys
 	var prefix = "tw5#" + window.location.pathname + "#";
 	// Make a logger

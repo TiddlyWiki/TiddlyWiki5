@@ -11,8 +11,6 @@ Tests the wiki based tests
 
 var TEST_WIKI_TIDDLER_FILTER = "[all[tiddlers+shadows]type[text/vnd.tiddlywiki-multiple]tag[$:/tags/wiki-test-spec]]";
 
-var widget = require("$:/core/modules/widgets/widget.js");
-
 describe("Wiki-based tests", function() {
 
 	// Step through the test tiddlers

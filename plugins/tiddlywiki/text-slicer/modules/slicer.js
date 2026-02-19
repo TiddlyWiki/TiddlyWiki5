@@ -127,39 +127,39 @@ Slicer.prototype.getMatchingSlicerRuleActions = function(name) {
 
 Slicer.prototype.testSlicerRuleMatching = function() {
 	var tests = [
-			{
-				test: this.searchSlicerRules("title",[
-					{selector: "title,head,body", rules: true},
-					{selector: "body", rules: true}
-				],[
-					{tag:"head"}
-				]),
-				result: "title,head,body"
-			},
-			{
-				test: this.searchSlicerRules("body",[
-					{selector: "title,head,body", rules: true},
-					{selector: "body", rules: true}
-				],[
-					{tag:"head"}
-				]),
-				result: "title,head,body"
-			},
-			{	
-				test: this.searchSlicerRules("title",[
-					{selector: "head > title", rules: true},
-					{selector: "title", rules: true}
-				],[
-					{tag:"head"}
-				]),
-				result: "head > title"
-			}
-		],
-		results = tests.forEach(function(test,index) {
-			if(test.test.selector !== test.result) {
-				throw "Failing test " + index + ", returns " + test.test.selector + " instead of " + test.result;
-			}
-		});
+		{
+			test: this.searchSlicerRules("title",[
+				{selector: "title,head,body", rules: true},
+				{selector: "body", rules: true}
+			],[
+				{tag:"head"}
+			]),
+			result: "title,head,body"
+		},
+		{
+			test: this.searchSlicerRules("body",[
+				{selector: "title,head,body", rules: true},
+				{selector: "body", rules: true}
+			],[
+				{tag:"head"}
+			]),
+			result: "title,head,body"
+		},
+		{	
+			test: this.searchSlicerRules("title",[
+				{selector: "head > title", rules: true},
+				{selector: "title", rules: true}
+			],[
+				{tag:"head"}
+			]),
+			result: "head > title"
+		}
+	];
+	tests.forEach(function(test,index) {
+		if(test.test.selector !== test.result) {
+			throw "Failing test " + index + ", returns " + test.test.selector + " instead of " + test.result;
+		}
+	});
 };
 
 Slicer.prototype.searchSlicerRules = function(name,rules,elementStack) {
@@ -383,7 +383,6 @@ Slicer.prototype.onCloseTag = function(name) {
 };
 
 Slicer.prototype.onText = function(text) {
-	var self = this;
 	// Discard the text if we're inside an element with actions.discard set true
 	if(this.elementStack.some(function(e) {return e.actions.discard;})) {
 		return;

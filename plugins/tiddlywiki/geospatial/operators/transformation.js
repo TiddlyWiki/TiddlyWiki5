@@ -9,8 +9,7 @@ Filter operators for geospatial transformation
 
 "use strict";
 
-var turf = require("$:/plugins/tiddlywiki/geospatial/turf.js"),
-	geotools = require("$:/plugins/tiddlywiki/geospatial/geotools.js");
+var turf = require("$:/plugins/tiddlywiki/geospatial/turf.js");
 
 exports.geounion = makeTransformation("union");
 

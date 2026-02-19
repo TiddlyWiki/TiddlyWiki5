@@ -194,7 +194,7 @@ function tw_filteredtranscludeinline(state,silent) {
 // based on markdown-it html_block()
 var WidgetTagRegEx = [/^<\/?\$[a-zA-Z0-9\-\$\.]+(?=(\s|\/?>|$))/, /^$/];
 function tw_block(state,startLine,endLine,silent) {
-	var i, nextLine, token, lineText,
+	var nextLine, token, lineText,
 		pos = state.bMarks[startLine] + state.tShift[startLine],
 		max = state.eMarks[startLine];
 
@@ -405,7 +405,7 @@ function extendParseLinkLabel(origFunc) {
 // reset each tw inline rule to initial inline state
 function extendInlineParse(thisArg,origFunc,twInlineRules) {
 	return function(str,md,env,outTokens) {
-		var i, ruleinfo, key;
+		var ruleinfo, key;
 		for(key in twInlineRules) {
 			ruleinfo = twInlineRules[key];
 			ruleinfo.rule.parser.source = str;
@@ -420,7 +420,7 @@ function extendInlineParse(thisArg,origFunc,twInlineRules) {
 /// post processing ///
 
 function wikify(state) {
-	var href, title, src, alt;
+	var href, title, src;
 	var tagStack = [];
 
 	state.tokens.forEach(function(blockToken) {

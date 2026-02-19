@@ -31,7 +31,6 @@ BrowserStorageUtil.prototype.cachePreloadTiddlers = function() {
 };
 
 BrowserStorageUtil.prototype.addCachedTiddlers = function() {
-	var self = this;
 	if(this.cachedTiddlers.length > 0) {
 		$tw.utils.each(this.cachedTiddlers, function(item){
 			$tw.wiki.addTiddler(item);
@@ -89,8 +88,7 @@ BrowserStorageUtil.prototype.saveTiddlerToLocalStorage = function(title) {
 };
 
 BrowserStorageUtil.prototype.clearLocalStorage = function() {
-	var url = window.location.pathname,
-		log = [];
+	var url = window.location.pathname;
 	// Step through each browser storage item
 	if(window.localStorage) {
 		for(var index=window.localStorage.length - 1; index>=0; index--) {

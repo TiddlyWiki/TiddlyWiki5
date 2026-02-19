@@ -91,7 +91,6 @@ var enclosedTextHelper = function(w) {
 	this.lookaheadRegExp.lastIndex = w.matchStart;
 	var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 	if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-		var text = lookaheadMatch[1];
 		w.output.push({type:"element",tag:this.element,
 			children:[{type: "text",text: lookaheadMatch[1]}]});
 		w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
@@ -442,7 +441,6 @@ var rules = [
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 			// The wikitext parsing infrastructure is horribly unre-entrant
 				var parseType = lookaheadMatch[1],
-					renderType ,//= this.match[2],
 					text = lookaheadMatch[2],
 					oldOutput = w.output,
 					oldSource = w.source,
@@ -484,7 +482,7 @@ var rules = [
 				name;
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 				name = lookaheadMatch[1] || lookaheadMatch[2];
-				var params = lookaheadMatch[3], nameold =name;
+				var params = lookaheadMatch[3];
 				if(name) {
 					if(!!macroadapter.paramadapter[name]) {
 						params=macroadapter.paramadapter[name](params);
@@ -613,9 +611,7 @@ var rules = [
 				attributes: {}
 			};
 			this.lookaheadRegExp.lastIndex = w.matchStart;
-			var lookaheadMatch = this.lookaheadRegExp.exec(w.source),
-				imageParams = {},
-				linkParams = {};
+			var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 				if(lookaheadMatch[1]) {
 					node.attributes.class = {type: "string", value: "classic-image-left"};

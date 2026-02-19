@@ -53,7 +53,7 @@ function isValidDelim(state, pos) {
 }
 
 function math_inline(state, silent) {
-	var start, match, token, res, pos, esc_count;
+	var start, match, token, res, pos;
 
 	if(state.src[state.pos] !== "$") { return false; }
 
@@ -116,7 +116,7 @@ function math_inline(state, silent) {
 
 /*! https://github.com/iktakahiro/markdown-it-katex/pull/2 by @shinhermit */
 function math_inline_block(state, silent) {
-	var start, match, token, res, pos, esc_count;
+	var start, match, token, pos;
 
 	if(state.src.slice(state.pos, state.pos+2) !== "$$") { return false; }
 

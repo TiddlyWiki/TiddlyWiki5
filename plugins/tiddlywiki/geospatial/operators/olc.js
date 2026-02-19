@@ -10,8 +10,7 @@ Filter operators for open location code conversions
 "use strict";
 
 var openlocationcode = require("$:/plugins/tiddlywiki/geospatial/openlocationcode.js"),
-	turf = require("$:/plugins/tiddlywiki/geospatial/turf.js"),
-	geotools = require("$:/plugins/tiddlywiki/geospatial/geotools.js");
+	turf = require("$:/plugins/tiddlywiki/geospatial/turf.js");
 
 exports["olc-decode"] = function(source,operator,options) {
 	var olc;

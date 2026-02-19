@@ -9,8 +9,6 @@ Commands to render tiddlers identified by a filter and save any screenshots iden
 
 "use strict";
 
-var InnerWikiWidget = require("$:/plugins/tiddlywiki/innerwiki/innerwiki.js").innerwiki;
-
 exports.info = {
 	name: "screenshot",
 	synchronous: false

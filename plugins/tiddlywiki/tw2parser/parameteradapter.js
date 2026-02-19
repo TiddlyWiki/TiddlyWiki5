@@ -5,6 +5,7 @@ module-type: module
 \*/
 
 "use strict";
+/* eslint-disable */
 /*
 Information about this module:
 rename macros and

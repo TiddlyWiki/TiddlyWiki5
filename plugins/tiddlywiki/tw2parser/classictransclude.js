@@ -151,7 +151,6 @@ TranscludeWidget.prototype.getTextSlice = function(text,sliceName)
 
 TranscludeWidget.prototype.refineTiddlerText = function(text,section,slice)
 {
-	var textsection = null;
 	if(slice) {
 		var textslice = this.getTextSlice(text,slice);
 		if(textslice)

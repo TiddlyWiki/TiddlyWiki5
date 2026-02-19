@@ -12,7 +12,6 @@ Widget to display an innerwiki in an iframe
 var DEFAULT_INNERWIKI_TEMPLATE = "$:/plugins/tiddlywiki/innerwiki/template";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	DataWidget = require("$:/core/modules/widgets/data.js").data,
 	dm = $tw.utils.domMaker;
 
 var InnerWikiWidget = function(parseTreeNode,options) {

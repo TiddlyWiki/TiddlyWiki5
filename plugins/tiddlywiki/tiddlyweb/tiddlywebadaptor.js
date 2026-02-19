@@ -258,7 +258,6 @@ options include:
 tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 */
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
-	var self = this;
 	if(this.isReadOnly) {
 		return callback(null);
 	}
@@ -314,8 +313,7 @@ TiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {
 Convert a field set in TiddlyWeb format into ordinary TiddlyWiki5 format
 */
 TiddlyWebAdaptor.prototype.convertTiddlerFromTiddlyWebFormat = function(tiddlerFields) {
-	var self = this,
-		result = {};
+	var result = {};
 	// Transfer the fields, pulling down the `fields` hashmap
 	$tw.utils.each(tiddlerFields,function(element,title,object) {
 		if(title === "fields") {

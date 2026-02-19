@@ -12,8 +12,7 @@ Wraps up the remarkable parser for use as a Parser in TiddlyWiki
 var r = require("$:/plugins/tiddlywiki/markdown-legacy/remarkable.js");
 
 var Remarkable = r.Remarkable,
-	linkify = r.linkify,
-	utils = r.utils;
+	linkify = r.linkify;
 
 ///// Set up configuration options /////
 function parseAsBoolean(tiddlerName) {

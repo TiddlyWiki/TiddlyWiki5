@@ -9,8 +9,7 @@ Text editor engine based on a CodeMirror instance
 
 "use strict";
 
-var CODEMIRROR_OPTIONS = "$:/config/CodeMirror",
-	HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height",
+var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height",
 	CONFIG_FILTER = "[all[shadows+tiddlers]prefix[$:/config/codemirror/]]";
 	
 // Install CodeMirror
