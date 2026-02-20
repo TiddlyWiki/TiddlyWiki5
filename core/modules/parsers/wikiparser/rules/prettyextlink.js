@@ -70,7 +70,7 @@ exports.parseLink = function(source,pos) {
 			tag: "a",
 			start: pos,
 			attributes: {
-				"class": {type: "string", value: "tc-tiddlylink-external"},
+				class: {type: "string", value: "tc-tiddlylink-external"}
 			},
 			children: [textNode]
 		};
@@ -113,5 +113,3 @@ exports.parseLink = function(source,pos) {
 	node.end = closePos + 2;
 	return node;
 };
-
-

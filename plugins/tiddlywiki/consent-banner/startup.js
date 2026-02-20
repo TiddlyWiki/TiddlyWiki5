@@ -23,7 +23,7 @@ var CHECK_CONSENT_INTERVAL = 1000, // Milliseconds between checking local storag
 	CONFIG_BLOCK_EMBEDDED_CONTENT_TITLE = "$:/config/plugins/tiddlywiki/consent-banner/block-embedded-content",
 	EMBEDDED_MESSAGE_WRAPPER_TITLE = "$:/plugins/tiddlywiki/consent-banner/blocked-embed-message-wrapper";
 
-exports.startup = function() { 
+exports.startup = function() {
 	var consentState = "",
 		setConsentStatus = function(state) {
 			if(consentState !== state) {

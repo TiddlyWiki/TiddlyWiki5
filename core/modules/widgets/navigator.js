@@ -253,7 +253,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	// Invoke the hook function and delete this tiddler
 	if(tiddler) {
 		$tw.hooks.invokeHook("th-deleting-tiddler",tiddler);
-		this.wiki.deleteTiddler(title);	
+		this.wiki.deleteTiddler(title);
 	}
 	// Remove the closed tiddler from the story
 	this.removeTitleFromStory(storyList,title);
@@ -275,11 +275,11 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 	// Get the current value of the tiddler we're editing
 	var tiddler = this.wiki.getTiddler(targetTitle);
 	var defaultType = this.wiki.getTiddlerText("$:/config/DefaultMissingType", "").trim();
-	var defaultFields = { type: defaultType };
+	var defaultFields = {type: defaultType};
 	// Save the initial value of the draft tiddler
 	draftTitle = this.generateDraftTitle(targetTitle);
 	var draftTiddler = new $tw.Tiddler({
-		text: "",
+		text: ""
 	},
 	tiddler,
 	{
@@ -511,7 +511,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 			title: importTitle,
 			type: "application/json",
 			"plugin-type": "import",
-			"status": "pending"
+			status: "pending"
 		}),
 		incomingTiddlers = [];
 	// Process each tiddler
@@ -592,7 +592,7 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	this.wiki.addTiddler(new $tw.Tiddler({
 		title: event.param,
 		text: importReport.join("\n"),
-		"status": "complete"
+		status: "complete"
 	}));
 	// Navigate to the $:/Import tiddler
 	this.addToHistory([event.param]);

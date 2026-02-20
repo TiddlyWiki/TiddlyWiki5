@@ -63,17 +63,16 @@ var WikiTextParser = function(type,text,options) {
 		tag: "div",
 		children:this.children
 	}];
-	// clone the output of parser 
+	// clone the output of parser
 	var root = JSON.parse(JSON.stringify(parser.tree));
-	// macros are defined in a linear tree; walk down the tree and append the source's parsed content 
+	// macros are defined in a linear tree; walk down the tree and append the source's parsed content
 	var baseroot = root;
-	while(root[0] && root[0].children && root[0].children.length !== 0 ){ 
+	while(root[0] && root[0].children && root[0].children.length !== 0 ){
 		root = root[0].children;
 	}
 	root[0].children[0] = this.tree[0];
 	this.tree = baseroot;
 };
-
 
 WikiTextParser.prototype.installRules = function() {
 	var rules = require("./wikitextrules.js").rules,
@@ -84,7 +83,6 @@ WikiTextParser.prototype.installRules = function() {
 	this.rules = rules;
 	this.rulesRegExp = new RegExp(pattern.join("|"),"mg");
 };
-
 
 WikiTextParser.prototype.outputText = function(place,startPos,endPos) {
 	if(startPos < endPos) {

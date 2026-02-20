@@ -30,8 +30,7 @@ exports.has = function(source,operator,options) {
 				}
 			});
 		}
-	}
-	else if(operator.suffix === "index") {
+	} else if(operator.suffix === "index") {
 		if(invert) {
 			source(function(tiddler,title) {
 				if(!tiddler || (tiddler && (!$tw.utils.hop(options.wiki.getTiddlerDataCached(tiddler,Object.create(null)),operator.operand)))) {
@@ -45,8 +44,7 @@ exports.has = function(source,operator,options) {
 				}
 			});
 		}
-	}
-	else {
+	} else {
 		if(invert) {
 			source(function(tiddler,title) {
 				if(!tiddler || !$tw.utils.hop(tiddler.fields,operator.operand) || (tiddler.fields[operator.operand].length === 0)) {

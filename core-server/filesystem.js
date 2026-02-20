@@ -226,7 +226,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 		}
 		hasUnsafeFields = hasUnsafeFields || /:|#/mg.test(fieldName);
 	});
-	// Check for field values 
+	// Check for field values
 	if(hasUnsafeFields) {
 		// Save as a JSON file
 		fileInfo.type = "application/json";
@@ -290,7 +290,7 @@ Options include:
 exports.generateTiddlerExtension = function(title,options) {
 	var extension;
 	// Check if any of the extFilters applies
-	if(options.extFilters && options.wiki) { 
+	if(options.extFilters && options.wiki) {
 		$tw.utils.each(options.extFilters,function(filter) {
 			if(!extension) {
 				var source = options.wiki.makeTiddlerIterator([title]),
@@ -344,18 +344,24 @@ exports.generateTiddlerFilepath = function(title,options) {
 	// Replace any Windows control codes
 	filepath = filepath.replace(/^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/i,"_$1_");
 	// Replace any leading spaces with the same number of underscores
-	filepath = filepath.replace(/^ +/,function (u) { return u.replace(/ /g, "_");});
+	filepath = filepath.replace(/^ +/,function (u) {
+		return u.replace(/ /g, "_");
+	});
 	//If the path does not start with "." or ".." && a path seperator, then
 	if(!/^\.{1,2}[/\\]/g.test(filepath)) {
 		// Don't let the filename start with any dots because such files are invisible on *nix
-		filepath = filepath.replace(/^\.+/g,function (u) { return u.replace(/\./g, "_");});
+		filepath = filepath.replace(/^\.+/g,function (u) {
+			return u.replace(/\./g, "_");
+		});
 	}
 	// Replace any Unicode control codes
 	filepath = filepath.replace(/[\x00-\x1f\x80-\x9f]/g,"_");
 	// Replace any characters that can't be used in cross-platform filenames
 	filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^/g,"_"));
 	// Replace any dots or spaces at the end of the extension with the same number of underscores
-	extension = extension.replace(/[\. ]+$/, function (u) { return u.replace(/[\. ]/g, "_");});
+	extension = extension.replace(/[\. ]+$/, function (u) {
+		return u.replace(/[\. ]/g, "_");
+	});
 	// Truncate the extension if it is too long
 	if(extension.length > 32) {
 		extension = extension.substr(0,32);
@@ -391,7 +397,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 		} while(fs.existsSync(fullPath));
 	}
 	// If the last write failed with an error, or if path does not start with:
-	//	the resolved options.directory, the resolved wikiPath directory, the wikiTiddlersPath directory, 
+	//	the resolved options.directory, the resolved wikiPath directory, the wikiTiddlersPath directory,
 	//	or the 'originalpath' directory, then $tw.utils.encodeURIComponentExtended() and resolve to options.directory.
 	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath,fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;

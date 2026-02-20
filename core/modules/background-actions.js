@@ -73,8 +73,12 @@ class BackgroundActionTracker {
 		this.hasChanged = false;
 		this.trackerID = this.filterTracker.track({
 			filterString: this.trackFilter,
-			fnEnter: () => { this.hasChanged = true; },
-			fnLeave: () => { this.hasChanged = true; },
+			fnEnter: () => {
+				this.hasChanged = true;
+			},
+			fnLeave: () => {
+				this.hasChanged = true;
+			},
 			fnProcess: (changes) => {
 				if(this.hasChanged) {
 					this.hasChanged = false;

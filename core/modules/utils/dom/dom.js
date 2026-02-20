@@ -11,7 +11,6 @@ Various static DOM-related utility functions.
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
-
 /*
 Select text in a an input or textarea (setSelectionRange crashes on certain input types)
 */
@@ -263,7 +262,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
-		
+
 		if("offsetLeft" in selectedNode) {
 			// Add variables with a (relative and absolute) popup coordinate string for the selected node
 			var nodeRect = {
@@ -288,7 +287,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
 		}
 	}
-	
+
 	if(domNode && ("offsetWidth" in domNode)) {
 		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
 		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
@@ -301,7 +300,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
 			variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
 		}
-		
+
 		if(domNode) {
 			// Add variables for event X and Y position relative to event catcher node
 			domNodeRect = domNode.getBoundingClientRect();

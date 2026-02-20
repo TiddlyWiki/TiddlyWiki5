@@ -38,11 +38,9 @@ exports.range = function(source,operator,options) {
 			end = parts[0];
 			if(end >= 1) {
 				beg = 1;
-			}
-			else if(end <= -1) {
+			} else if(end <= -1) {
 				beg = -1;
-			}
-			else {
+			} else {
 				return [];
 			}
 			inc = 1;

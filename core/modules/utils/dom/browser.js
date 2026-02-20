@@ -108,7 +108,7 @@ Converts a standard event name into the local browser specific equivalent. For e
 var eventNameCache = {}; // We'll cache the conversions
 
 var eventNameMappings = {
-	"transitionEnd": {
+	transitionEnd: {
 		correspondingCssProperty: "transition",
 		mappings: {
 			transition: "transitionend",
@@ -116,7 +116,7 @@ var eventNameMappings = {
 			webkitTransition: "webkitTransitionEnd"
 		}
 	},
-	"animationEnd": {
+	animationEnd: {
 		correspondingCssProperty: "animation",
 		mappings: {
 			animation: "animationend",
@@ -150,16 +150,16 @@ exports.getFullScreenApis = function() {
 	var d = document,
 		db = d.body,
 		result = {
-			"_requestFullscreen": db.webkitRequestFullscreen !== undefined ? "webkitRequestFullscreen" :
+			_requestFullscreen: db.webkitRequestFullscreen !== undefined ? "webkitRequestFullscreen" :
 				db.mozRequestFullScreen !== undefined ? "mozRequestFullScreen" :
 					db.requestFullscreen !== undefined ? "requestFullscreen" : "",
-			"_exitFullscreen": d.webkitExitFullscreen !== undefined ? "webkitExitFullscreen" :
+			_exitFullscreen: d.webkitExitFullscreen !== undefined ? "webkitExitFullscreen" :
 				d.mozCancelFullScreen !== undefined ? "mozCancelFullScreen" :
 					d.exitFullscreen !== undefined ? "exitFullscreen" : "",
-			"_fullscreenElement": d.webkitFullscreenElement !== undefined ? "webkitFullscreenElement" :
+			_fullscreenElement: d.webkitFullscreenElement !== undefined ? "webkitFullscreenElement" :
 				d.mozFullScreenElement !== undefined ? "mozFullScreenElement" :
 					d.fullscreenElement !== undefined ? "fullscreenElement" : "",
-			"_fullscreenChange": d.webkitFullscreenElement !== undefined ? "webkitfullscreenchange" :
+			_fullscreenChange: d.webkitFullscreenElement !== undefined ? "webkitfullscreenchange" :
 				d.mozFullScreenElement !== undefined ? "mozfullscreenchange" :
 					d.fullscreenElement !== undefined ? "fullscreenchange" : ""
 		};

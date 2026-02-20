@@ -34,7 +34,7 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 	// Create wrapper
 	this.domWrapper = dm("div",{
 		document: this.document,
-		"class": (this.innerWikiClass || "").split(" ").concat(["tc-innerwiki-wrapper"]).join(" "),
+		class: (this.innerWikiClass || "").split(" ").concat(["tc-innerwiki-wrapper"]).join(" "),
 		style: {
 			overflow: "hidden",
 			position: "relative",
@@ -52,7 +52,7 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 			pointerEvents: "none"
 		},
 		attributes: {
-			"viewBox": "0 0 " + this.innerWikiClipWidth + " " + this.innerWikiClipHeight
+			viewBox: "0 0 " + this.innerWikiClipWidth + " " + this.innerWikiClipHeight
 		}
 	});
 	this.domWrapper.appendChild(this.domSVG);
@@ -62,7 +62,7 @@ InnerWikiWidget.prototype.render = function(parent,nextSibling) {
 		// Create iframe
 		this.domIFrame = dm("iframe",{
 			document: this.document,
-			"class": "tc-innerwiki-iframe",
+			class: "tc-innerwiki-iframe",
 			style: {
 				position: "absolute",
 				maxWidth: "none",

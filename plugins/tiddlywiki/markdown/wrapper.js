@@ -50,7 +50,7 @@ function setupWikiRules(pluginOptions) {
 				rule: rule,
 				matchIndex: -1
 			});
-		};
+		}
 		return rulesInfo;
 	}
 
@@ -237,15 +237,13 @@ function MarkdownParser(type,text,options) {
 		wikiParser = new $tw.Wiki.parsers["text/vnd.tiddlywiki"](null,textToParse,{
 			parseAsInline: true,
 			wiki: options.wiki,
-			rules: { pragma: {}, block: this.blockRuleClasses, inline: this.inlineRuleClasses }
+			rules: {pragma: {}, block: this.blockRuleClasses, inline: this.inlineRuleClasses}
 		});
-	}
-	catch(err) {
+	} catch(err) {
 		wikiParser = $tw.wiki.parseText("text/vnd.tiddlywiki",
 			"<strong>Error encountered while parsing the tiddler:</strong><p>" + err.message + "</p>",
 			{parseAsInline: false, wiki: options.wiki});
-	}
-	finally{
+	} finally{
 		$tw.utils.parseStringLiteral = origParseStringLiteral;
 	}
 	if(wikiParser.tree.length > 0) {

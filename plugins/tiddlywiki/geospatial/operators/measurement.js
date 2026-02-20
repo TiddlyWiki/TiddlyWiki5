@@ -28,8 +28,8 @@ exports.geodistance = function(source,operator,options) {
 exports.geonearestpoint = function(source,operator,options) {
 	var target = geotools.parsePoint(operator.operands[0]),
 		featureCollection = {
-			"type": "FeatureCollection",
-			"features": []
+			type: "FeatureCollection",
+			features: []
 		};
 	source(function(tiddler,title) {
 		var fc = $tw.utils.parseJSONSafe(title);

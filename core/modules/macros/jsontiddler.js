@@ -33,4 +33,3 @@ exports.run = function(title) {
 	}
 	return JSON.stringify(fields,null,$tw.config.preferences.jsonSpaces);
 };
-

@@ -128,7 +128,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 			var variables = $tw.utils.collectDOMVariables(domNode,null,event);
 			variables["img-natural-width"] = domNode.naturalWidth.toString();
 			variables["img-natural-height"] = domNode.naturalHeight.toString();
-			self.invokeActionString(self.loadedActions,self,event,variables);		
+			self.invokeActionString(self.loadedActions,self,event,variables);
 		}
 	},false);
 	domNode.addEventListener("error",function() {
@@ -176,8 +176,7 @@ ImageWidget.prototype.refresh = function(changedTiddlers) {
 		if(changedAttributes.height) {
 			this.domNodes[0].setAttribute("height",this.getAttribute("height"));
 		}
-	}
-	else {
+	} else {
 		return false;
 	}
 };

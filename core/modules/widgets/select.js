@@ -198,7 +198,7 @@ SelectWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		if(changedAttributes.class) {
 			this.selectClass = this.getAttribute("class");
-			this.getSelectDomNode().setAttribute("class",this.selectClass); 
+			this.getSelectDomNode().setAttribute("class",this.selectClass);
 		}
 		this.assignAttributes(this.getSelectDomNode(),{
 			changedAttributes: changedAttributes,
@@ -209,7 +209,7 @@ SelectWidget.prototype.refresh = function(changedTiddlers) {
 		// If the target tiddler value has changed, just update setting and refresh the children
 		if(changedTiddlers[this.selectTitle] || childrenRefreshed) {
 			this.setSelectValue();
-		} 
+		}
 		return childrenRefreshed;
 	}
 };

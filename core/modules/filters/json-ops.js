@@ -97,7 +97,9 @@ exports["jsonset"] = function(source,operator,options) {
 			value = null;
 			break;
 		case "json":
-			value = $tw.utils.parseJSONSafe(value,function() {return undefined;});
+			value = $tw.utils.parseJSONSafe(value,function() {
+				return undefined;
+			});
 			break;
 		default:
 			// Use value unchanged
@@ -231,7 +233,9 @@ function getItemAtIndex(item,index) {
 		return item[index];
 	} else if(Array.isArray(item)) {
 		index = $tw.utils.parseInt(index);
-		if(index < 0) { index = index + item.length; };
+		if(index < 0) {
+			index = index + item.length;
+		}
 		return item[index]; // Will be undefined if index was out-of-bounds
 	} else {
 		return undefined;
@@ -289,7 +293,9 @@ function setDataItem(data,indexes,value) {
 	var lastIndex = indexes[indexes.length - 1];
 	if(Array.isArray(current)) {
 		lastIndex = $tw.utils.parseInt(lastIndex);
-		if(lastIndex < 0) { lastIndex = lastIndex + current.length; };
+		if(lastIndex < 0) {
+			lastIndex = lastIndex + current.length;
+		}
 	}
 	// Only set indexes on objects and arrays
 	if(typeof current === "object") {
@@ -316,7 +322,9 @@ function deleteDataItem(data,indexes) {
 	var lastIndex = indexes[indexes.length - 1];
 	if(Array.isArray(current) && current !== null) {
 		lastIndex = $tw.utils.parseInt(lastIndex);
-		if(lastIndex < 0) { lastIndex = lastIndex + current.length; };
+		if(lastIndex < 0) {
+			lastIndex = lastIndex + current.length;
+		}
 		// Check if index is valid before splicing
 		if(lastIndex >= 0 && lastIndex < current.length) {
 			current.splice(lastIndex,1);

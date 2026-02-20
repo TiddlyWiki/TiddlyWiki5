@@ -29,7 +29,7 @@ exports.function = function(source,operator,options) {
 		results = [];
 		source(function(tiddler,title) {
 			results.push(title);
-		});	
+		});
 	}
 	// console.log(`function ${functionName} with params ${JSON.stringify(params)} results: ${JSON.stringify(results)}`);
 	return results;

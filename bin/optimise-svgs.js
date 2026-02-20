@@ -12,7 +12,7 @@ npm install svgo@2.3.0
 
 var fs = require("fs"),
 	path = require("path"),
-	{ optimize } = require("svgo"),
+	{optimize} = require("svgo"),
 	config = {
 		plugins: [
 			"cleanupAttrs",
@@ -48,7 +48,7 @@ var fs = require("fs"),
 			"convertShapeToPath",
 			"sortAttrs",
 			//'removeDimensions',
-			{name: "removeAttrs", params: { attrs: "(stroke|fill)" } }
+			{name: "removeAttrs", params: {attrs: "(stroke|fill)"}}
 		]
 	};
 
@@ -74,6 +74,6 @@ files.forEach(function(filename) {
 		} else {
 			console.log("Error " + err + " with " + filename);
 			process.exit();
-		};
+		}
 	}
 });

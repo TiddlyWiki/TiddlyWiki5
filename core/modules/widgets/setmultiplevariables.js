@@ -40,7 +40,6 @@ SetMultipleVariablesWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-
 SetMultipleVariablesWidget.prototype.setVariables = function() {
 	// Set the variables
 	var self = this,

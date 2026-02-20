@@ -23,7 +23,7 @@ var XLSXImporter = function(options) {
 	this.results = [];
 	this.nextAutoTitle = 1;
 	if(JSZip) {
-		this.processWorkbook();		
+		this.processWorkbook();
 	}
 };
 
@@ -34,7 +34,7 @@ XLSXImporter.prototype.getResults = function() {
 XLSXImporter.prototype.processWorkbook = function() {
 	// Read the workbook
 	if(this.filename) {
-		this.workbook = XLSX.readFile(this.filename);	
+		this.workbook = XLSX.readFile(this.filename);
 	} else if(this.text) {
 		this.workbook = XLSX.read(this.text,{type:"base64"});
 	}
@@ -67,7 +67,7 @@ XLSXImporter.prototype.processSheet = function(sheetImportSpecTitle) {
 			if(startRow < endRow) {
 				for(this.row=startRow; this.row<=endRow; this.row++) {
 					// Iterate through the row import specifiers
-					$tw.utils.each(this.sheetImportSpec.fields.list || [],this.processRow.bind(this));					
+					$tw.utils.each(this.sheetImportSpec.fields.list || [],this.processRow.bind(this));
 				}
 			}
 		}
@@ -114,7 +114,7 @@ XLSXImporter.prototype.processRowByColumn = function() {
 		var cell = self.sheet[XLSX.utils.encode_cell({c: self.columnsByName[name], r: self.row})];
 		name = name.toLowerCase();
 		if(cell && cell.w && $tw.utils.isValidFieldName(name)) {
-			self.tiddlerFields[name] = cell.w;		
+			self.tiddlerFields[name] = cell.w;
 		}
 	});
 };

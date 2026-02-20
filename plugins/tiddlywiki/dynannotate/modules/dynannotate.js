@@ -34,26 +34,26 @@ DynannotateWidget.prototype.render = function(parent,nextSibling) {
 	// Create our DOM nodes
 	var isSnippetMode = this.isSnippetMode();
 	this.domContent = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-selection-container",
+		class: "tc-dynannotation-selection-container",
 		document: this.document
 	});
 	if(isSnippetMode) {
 		this.domContent.setAttribute("hidden","hidden");
 	}
 	this.domAnnotations = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-annotation-wrapper",
+		class: "tc-dynannotation-annotation-wrapper",
 		document: this.document
 	});
 	this.domSnippets = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-snippet-wrapper",
+		class: "tc-dynannotation-snippet-wrapper",
 		document: this.document
 	});
 	this.domSearches = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-search-wrapper",
+		class: "tc-dynannotation-search-wrapper",
 		document: this.document
 	});
 	this.domWrapper = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-wrapper",
+		class: "tc-dynannotation-wrapper",
 		children: [this.domContent,this.domAnnotations,this.domSnippets,this.domSearches],
 		document: this.document
 	});
@@ -314,7 +314,7 @@ DynannotateWidget.prototype.applySnippets = function() {
 			// Create a container if we're not reusing it
 			if(!container) {
 				container = $tw.utils.domMaker("div",{
-					"class": "tc-dynannotate-snippet"
+					class: "tc-dynannotate-snippet"
 				});
 				self.domSnippets.appendChild(container);
 			}
@@ -323,13 +323,13 @@ DynannotateWidget.prototype.applySnippets = function() {
 				container.appendChild($tw.utils.domMaker("span",{
 					text: (match.startPos < contextLength ? "" : ellipsis) +
 						textMap.string.slice(Math.max(match.startPos - contextLength,0),match.startPos),
-					"class": "tc-dynannotate-snippet-context"
+					class: "tc-dynannotate-snippet-context"
 				}));
 			}
 			// Output the match
 			container.appendChild($tw.utils.domMaker("span",{
 				text: textMap.string.slice(match.startPos,match.endPos),
-				"class": "tc-dynannotate-snippet-highlight " + self.getAttribute("searchClass","")
+				class: "tc-dynannotate-snippet-highlight " + self.getAttribute("searchClass","")
 			}));
 			// Does the context of this match merge into the next?
 			merged = index < matches.length - 1 && matches[index + 1].startPos - match.endPos <= 2 * contextLength;
@@ -337,14 +337,14 @@ DynannotateWidget.prototype.applySnippets = function() {
 				// If they're merged, use the context up until the next match
 				container.appendChild($tw.utils.domMaker("span",{
 					text: textMap.string.slice(match.endPos,matches[index + 1].startPos),
-					"class": "tc-dynannotate-snippet-context"
+					class: "tc-dynannotate-snippet-context"
 				}));
 			} else {
 				// If they're not merged, use the context up to the end
 				container.appendChild($tw.utils.domMaker("span",{
 					text: textMap.string.slice(match.endPos,match.endPos + contextLength) +
 						((match.endPos + contextLength) >= textMap.string.length ? "" : ellipsis),
-					"class": "tc-dynannotate-snippet-context"
+					class: "tc-dynannotate-snippet-context"
 				}));
 			}
 			// Reuse the next container if we're merged

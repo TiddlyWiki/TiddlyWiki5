@@ -94,7 +94,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", opacity " + duration + "ms " + easing},
 		{opacity: "1.0"},
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
-		{zIndex: "500"},
+		{zIndex: "500"}
 	]);
 	setTimeout(function() {
 		$tw.utils.removeStyles(targetElement, ["transition", "opacity", "transform", "zIndex"]);
@@ -212,7 +212,7 @@ ZoominListView.prototype.remove = function(widget) {
 	]);
 	setTimeout(function() {
 		$tw.utils.removeStyles(toWidgetDomNode, ["transformOrigin", "transform", "transition", "opacity", "zIndex"]);
-	}, duration);	
+	}, duration);
 	setTimeout(removeElement,duration);
 	// Now the tiddler we're going back to
 	if(toWidgetDomNode) {

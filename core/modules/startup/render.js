@@ -29,7 +29,7 @@ exports.startup = function() {
 	$tw.titleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TITLE_TITLE, {
 		document: $tw.fakeDocument,
 		parseAsInline: true,
-		importPageMacros: true,
+		importPageMacros: true
 	});
 	$tw.titleContainer = $tw.fakeDocument.createElement("div");
 	$tw.titleWidgetNode.render($tw.titleContainer,null);

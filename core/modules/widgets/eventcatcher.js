@@ -191,8 +191,8 @@ EventWidget.prototype.handleEvent = function(event, type, selectedNode) {
 			{},
 			$tw.utils.collectDOMVariables(selectedNode, this.domNode, event),
 			{
-				"eventJSON": JSON.stringify($tw.utils.copyObjectPropertiesSafe(event)),
-				"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event),
+				eventJSON: JSON.stringify($tw.utils.copyObjectPropertiesSafe(event)),
+				modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event),
 				"event-type": event.type.toString()
 			}
 		);
@@ -213,7 +213,7 @@ EventWidget.prototype.handleEvent = function(event, type, selectedNode) {
 };
 
 EventWidget.prototype.startPointerCapture = function(pointerId, captureTarget) {
-	// Start capture only if none active; pointerId can be 0 
+	// Start capture only if none active; pointerId can be 0
 	if(!Number.isInteger(this._capturePointerId) && this.domNode && this.domNode.setPointerCapture) {
 		this.domNode.setPointerCapture(pointerId);
 		this._capturePointerId = pointerId;
