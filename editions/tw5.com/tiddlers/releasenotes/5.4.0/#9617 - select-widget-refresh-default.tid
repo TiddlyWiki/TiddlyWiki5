@@ -1,4 +1,4 @@
-change-category: usability
+change-category: widget
 change-type: bugfix
 created: 20260125195754439
 description: Refresh widget if "default" parameter input value is changed
