@@ -171,6 +171,13 @@ These are significant improvements that will benefit a broad range of users, and
 </$let>
 \end summary-tab
 
+\procedure release-tab-search(stateTiddler)
+\whitespace trim
+<div class="doc-release-tab-search">
+	<$edit-text tiddler=<<stateTiddler>> tag="input" placeholder="Search..." default=""/>
+</div>
+\end release-tab-search
+
 \procedure change-type-section()
 \whitespace trim
 <$let changeTypeState={{{ [<release>addprefix[$:/state/release/change-type/]addsuffix[/]addsuffix<change-type>] }}}>
@@ -195,10 +202,24 @@ These are significant improvements that will benefit a broad range of users, and
 
 \procedure change-types-tab()
 \whitespace trim
-<$let show-type-badge="no" show-category-badge="yes" show-change-impacts="yes" show-tiddler-link="yes">
-<$list filter="[enlist{$:/tw5.com/releases/info/change-type-order}]" variable="change-type">
-	<<change-type-section>>
-</$list>
+<$let show-type-badge="no" show-category-badge="yes" show-change-impacts="yes" show-tiddler-link="yes"
+	searchState={{{ [<release>addprefix[$:/state/release/search/change-types/]] }}}
+>
+<$macrocall $name="release-tab-search" stateTiddler=<<searchState>>/>
+<$let searchText={{{ [<searchState>get[text]] }}}>
+<%if [<searchText>!match[]] %>
+	<div class="doc-release-search-count">
+		<$let count={{{ [tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] +[search:title,description,text,github-contributors,github-links<searchText>] +[count[]] }}}>
+			<$text text={{{ [<count>addsuffix[ ]] }}}/>result<$text text={{{ [<count>!match[1]then[s]] }}}/>
+		</$let>
+	</div>
+	<$macrocall $name="change-note-list" filter="[tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] +[search:title,description,text,github-contributors,github-links<searchText>] +[sort[description]]"/>
+<%else%>
+	<$list filter="[enlist{$:/tw5.com/releases/info/change-type-order}]" variable="change-type">
+		<<change-type-section>>
+	</$list>
+<%endif%>
+</$let>
 </$let>
 \end change-types-tab
 
@@ -226,10 +247,23 @@ These are significant improvements that will benefit a broad range of users, and
 
 \procedure change-categories-tab()
 \whitespace trim
-<$let show-type-badge="yes" show-category-badge="no" show-change-impacts="yes" show-tiddler-link="yes">
-<$list filter="[enlist{$:/tw5.com/releases/info/category-order}]" variable="category">
-	<<change-category-section>>
-</$list>
+<$let show-type-badge="yes" show-category-badge="no" show-change-impacts="yes" show-tiddler-link="yes"
+	searchState={{{ [<release>addprefix[$:/state/release/search/change-categories/]] }}}
+>
+<$macrocall $name="release-tab-search" stateTiddler=<<searchState>>/>
+<$let searchText={{{ [<searchState>get[text]] }}}>
+<%if [<searchText>!match[]] %>
+	<div class="doc-release-search-count">
+		<$let count={{{ [tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] +[search:title,description,text,github-contributors,github-links<searchText>] +[count[]] }}}>
+			<$text text={{{ [<count>addsuffix[ ]] }}}/>result<$text text={{{ [<count>!match[1]then[s]] }}}/>
+		</$let>
+	<$macrocall $name="change-note-list" filter="[tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] +[search:title,description,text,github-contributors,github-links<searchText>] +[sort[description]]"/>
+<%else%>
+	<$list filter="[enlist{$:/tw5.com/releases/info/category-order}]" variable="category">
+		<<change-category-section>>
+	</$list>
+<%endif%>
+</$let>
 </$let>
 \end change-categories-tab
 
@@ -284,10 +318,26 @@ These are significant improvements that will benefit a broad range of users, and
 
 \procedure impacts-tab()
 \whitespace trim
-<$let show-tiddler-link="yes">
-<$list filter="[enlist{$:/tw5.com/releases/info/impact-type-order}]" variable="impact-type">
-	<<impact-type-section>>
-</$list>
+<$let show-tiddler-link="yes"
+	searchState={{{ [<release>addprefix[$:/state/release/search/impacts/]] }}}
+>
+<$macrocall $name="release-tab-search" stateTiddler=<<searchState>>/>
+<$let searchText={{{ [<searchState>get[text]] }}}>
+<%if [<searchText>!match[]] %>
+	<div class="doc-release-search-count">
+		<$let count={{{ [tag[$:/tags/ImpactNote]] :filter[{!!changenote}get[release]match<release>]  +[search:title,description,text<searchText>] +[count[]] }}}>
+			<$text text={{{ [<count>addsuffix[ ]] }}}/>result<$text text={{{ [<count>!match[1]then[s]] }}}/>
+		</$let>
+	</div>
+	<$list filter="[tag[$:/tags/ImpactNote]] :filter[{!!changenote}get[release]match<release>] +[search:title,description,text<searchText>] +[sort[description]]" variable="impact">
+		<<impact-note-item>>
+	</$list>
+<%else%>
+	<$list filter="[enlist{$:/tw5.com/releases/info/impact-type-order}]" variable="impact-type">
+		<<impact-type-section>>
+	</$list>
+<%endif%>
+</$let>
 </$let>
 \end impacts-tab
 
