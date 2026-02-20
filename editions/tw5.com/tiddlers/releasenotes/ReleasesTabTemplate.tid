@@ -3,9 +3,9 @@ type: text/vnd.tiddlywiki
 
 <%if [<currentTab>match[Summary]] %>
 	<<summary-tab>>
-<%elseif [<currentTab>match[Change Types]] %>
+<%elseif [<currentTab>match[By Type]] %>
 	<<change-types-tab>>
-<%elseif [<currentTab>match[Change Categories]] %>
+<%elseif [<currentTab>match[By Category]] %>
 	<<change-categories-tab>>
 <%elseif [<currentTab>match[Impacts]] %>
 	<<impacts-tab>>
