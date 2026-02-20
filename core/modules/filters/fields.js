@@ -28,8 +28,7 @@ exports.fields = function(source,operator,options) {
 				for(fieldName in tiddler.fields) {
 					(operand.indexOf(fieldName) !== -1) ? "" : $tw.utils.pushTop(results,fieldName);
 				}
-			} // else if
-			else {
+			} else {
 				for(fieldName in tiddler.fields) {
 					$tw.utils.pushTop(results,fieldName);
 				}

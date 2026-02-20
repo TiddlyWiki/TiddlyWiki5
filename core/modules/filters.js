@@ -59,9 +59,8 @@ function parseFilterOperation(operators,filterString,p) {
 					}
 				});
 			});
-		}
-		// Empty operator means: title
-		else if(operator.operator === "") {
+		} else if(operator.operator === "") {
+			// Empty operator means: title
 			operator.operator = "title";
 		}
 		operator.operands = [];
