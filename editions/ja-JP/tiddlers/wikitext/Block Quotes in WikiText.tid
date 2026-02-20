@@ -14,8 +14,8 @@ TiddlyWiki5でHTMLブロック引用を生成する方法は2つあります。1
 複数行ブロック引用(<<.icon $:/core/images/quote>>)の構文は次のとおりです: 
 
 <<wikitext-example src:"<<<
-This is a block quoted paragraph
-written in English
+これは日本語で書かれた
+ブロック引用の段落です
 <<<
 ">>
 
@@ -24,8 +24,9 @@ written in English
 次のように引用できます:
 
 <<wikitext-example src:"<<<
-Computers are like a bicycle for our minds
-<<< Steve Jobs
+コンピューターは私たちにとって自転車のようなもの
+
+<<< スティーブジョブズ
 ">>
 
 !! CSSクラス
@@ -33,75 +34,73 @@ Computers are like a bicycle for our minds
 ブロック引用に CSS クラスを追加できます:
 
 <<wikitext-example src:"<<<.myClass.another-class
-Operating systems are like a brick wall for our minds
-<<< Nobody
+オペレーティングシステムは私たちにとってレンガの壁のようなものだ
+<<< 出典不明
 ">>
 
 特大二重引用符を含むブロック引用をレンダリングするクラス`tc-big-quote`がコアに含まれています: 
 
 <<wikitext-example src:"<<<.tc-big-quote
-A dramatic quote
-<<< Somebody Important
+劇的な引用
+<<< 大切な人
 ">>
 
 ! 単一行ブロック引用
 
 ブロック引用の単一行構文は、実際には[[Wikiテストでのリスト|Lists in WikiText]]構文の拡張です。例えば：
 
-<<wikitext-example src:"> Quoted text
-> Another line of quoted text
+<<wikitext-example src:"> 引用文
+> 引用文の別の行
 ">>
 
 次のように引用をネストすることもできます: 
 
 ```
-> A top quote
->> A subquote
-> Another top quote
+> トップの引用
+>> サブの引用
+> 別のトップの引用
 ```
 
-Which renders as:
+次のように表示されます:
 
-> A top quote
->> A subquote
-> Another top quote
+> トップの引用
+>> サブの引用
+> 別のトップの引用
 
 ブロック引用を他のリスト項目と組み合わせることもできます。例:
 
-<<wikitext-example src:"* List One
-** List Two
-**> A quote
-**> Another quote
-* List Three
+<<wikitext-example src:"* リスト 1
+** リスト 2
+**> 引用
+**> 別の引用
+* リスト 3
 ">>
 
 ! 高度なWikiテキストとブロック引用
 ブロック引用を段落やその他のブロックWikiテキストと混在させることもできます。ブロックモードに注意してください。段落の後に引用文が続く場合は、空行で終了させて​​ください。引用文の最後の段落は空行で終わる必要はありません。インデントを使用する場合は、__空行をインデントしないでください__。パーサーはこれを追加のインラインコンテンツと解釈し、ブロックモードに戻りません。例:
 
-<<wikitext-example src:'<<< Mixing Block Quotes with Inline Wikitext
-A paragraph appears before other //wikitext//, which needs to end with a blank line.
+<<wikitext-example src:'<<< ブロック引用とインラインWikiテキストの併用
+他の//Wikiテキスト//の前の段落は、空行で終わる必要があります。
 
-    * List One
-    ** List Two
-    **> A quote
+    * リスト 1
+    ** リスト 2
+    **> 引用
 """
-A poem
-with line beaks
-needs to have
-a blank line after
-the final quotes
-if followed
-by other content
+行間のある
+ポエムは
+最後の引用の後に
+他の内容が続く場合
+空行が必要です
 """
 
-    <<<< Deep Block Quote
-        A paragraph before other //wikitext//, which ends with a blank line.
+    <<<< 深いブロック引用
+        他の//Wikiテキスト//の前の段落は、空行で終わる必要があります。
 
-        ! A Header
-        Another paragraph, which needs to end with a blank line.
+        ! 見出し
+        別の段落も、空行で終わる必要があります。
 
-            !! Sub Header
-            A final paragraph, which __does not__ need to end with a blank line as the Block Quote ends.
+            !! サブ見出し
+            最後の段落は、ブロック引用と同様に、空行で終わる必要は__ありません__。
     <<<<
 <<<
 '>>
