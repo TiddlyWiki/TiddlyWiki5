@@ -7,36 +7,19 @@ change-category: hackability
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9055
 github-contributors: Jermolene
 
-This PR extends the handling of macro/procedure/function made via the `<<..>>` syntax to allow parameters to be specified dynamically instead of just as static strings. To indicate the new syntax the colon that usually separates a parameter name from its value is replaced by an equals sign.
-
-For example, by  it is now possible to do things like this:
+This PR extends the handling of macro/procedure/function invocationsmade via the `<<..>>` shortcut syntax to allow dynamic parameters instead of just static strings. To indicate the new syntax the colon that usually separates a parameter name from its value is replaced by an equals sign. For example:
 
 ```
 <<mymacro param={{Something}}>>
-```
-
-Or even this:
-
-```
 <div class=<<mymacro param={{Something}}>>>
-```
-
-Or this:
-
-```
 <div class=<<mymacro param={{{ [<myvar>addprefix[https:] }}}>>>
-```
-
-Parameters can also be specified for the inner call:
-
-```
 <div class=<<mymacro param={{{ [<innermacro p={{Something}}>addprefix[https:] }}}>>>
 ```
 
-The extended syntax can be used in three different settings:
+The extended syntax allows parameter values to be passed as transclusions, filter expressions or nested invocations in three settings:
 
 * As a standalone construction
 * As a widget attribute value
 * As a filter operand value
 
-In all cases, it is now possible to use an equals sign instead of a colon to allow parameter values to be passed as a transclusion, filter expression or nested call.
+See [[Calls]] for more details and examples.
