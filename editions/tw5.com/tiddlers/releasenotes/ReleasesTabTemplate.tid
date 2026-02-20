@@ -9,6 +9,4 @@ type: text/vnd.tiddlywiki
 	<<change-categories-tab>>
 <%elseif [<currentTab>match[Impacts]] %>
 	<<impacts-tab>>
-<%elseif [<currentTab>match[Credits]] %>
-	<<credits-tab>>
 <%endif%>

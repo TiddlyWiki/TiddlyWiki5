@@ -161,41 +161,13 @@ tags: $:/tags/Global
 </$list>
 \end change-note-list
 
-\procedure summary-section()
-\whitespace trim
-<$let
-	summaryState={{{ [<release>addprefix[$:/state/release/summary/]addsuffix[/]addsuffix<summary-key>] }}}
-	summaryDefault={{{ [[$:/tw5.com/releases/info/summary-sections/]addsuffix<summary-key>addsuffix[/default-state]get[text]] }}}
-	summaryListTiddler="$:/tw5.com/releases/info/summary-lists"
-	summaryListField={{{ [<summary-key>addsuffix[/]addsuffix<release>] }}}
->
-	<$let summaryFilter="[<summaryListTiddler>get<summaryListField>enlist-input[]]">
-	<div class="doc-release-section">
-		<$button class="tc-btn-invisible doc-release-section-summary">
-			<$macrocall $name="release-section-toggle" state=<<summaryState>> default=<<summaryDefault>>/>
-			<span class="doc-release-section-summary-text">
-				<$text text={{{ [[$:/tw5.com/releases/info/summary-sections/]addsuffix<summary-key>addsuffix[/plural]get[text]] }}} />
-				<$text text=" "/><span class="doc-release-section-count">(<$text text={{{ [<summaryListTiddler>get<summaryListField>enlist-input[]] +[count[]] }}}/>)</span>
-			</span>
-		</$button>
-		<$reveal type="match" state=<<summaryState>> text="open" default=<<summaryDefault>> tag="div" class="doc-release-section-body">
-			<$macrocall $name="change-note-list" filter=<<summaryFilter>>/>
-		</$reveal>
-	</div>
-	</$let>
-</$let>
-\end summary-section
-
 \procedure summary-tab()
 \whitespace trim
-<$let show-type-badge="yes" show-category-badge="yes" show-change-impacts="yes" show-tiddler-link="yes">
-<div class="doc-release-summary">
-	<$list filter="[enlist{$:/tw5.com/releases/info/summary-section-order}]" variable="summary-key">
-		<div class="doc-release-summary-section">
-			<$macrocall $name="summary-section"/>
-		</div>
-	</$list>
-</div>
+These are significant improvements that will benefit a broad range of users, and are recommended for everyone to explore.
+<$let show-type-badge="yes" show-category-badge="yes" show-change-impacts="yes" show-tiddler-link="yes"
+	summaryListField={{{ [<release>addprefix[highlights/]] }}}
+>
+<$macrocall $name="change-note-list" filter="[[$:/tw5.com/releases/info/summary-lists]get<summaryListField>enlist-input[]]"/>
 </$let>
 \end summary-tab
 

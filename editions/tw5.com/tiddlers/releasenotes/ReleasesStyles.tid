@@ -9,10 +9,6 @@ type: text/vnd.tiddlywiki
 	margin-top: 1rem;
 }
 
-.doc-release-summary-section {
-	margin-bottom: 0.75em;
-}
-
 .doc-release-section {
 	border: 1px solid #e8e8e8;
 	border-radius: 0.5em;

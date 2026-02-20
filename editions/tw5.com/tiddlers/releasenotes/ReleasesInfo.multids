@@ -1,7 +1,6 @@
 title: $:/tw5.com/releases/info/
 
 category-order: translation usability hackability widget filters plugin theme nodejs developer internal
-summary-section-order: highlights clearing-the-decks
 change-type-order: feature enhancement performance bugfix deprecation security
 impact-type-order: compatibility-break deprecation pluginisation
 tab-order: [[Summary]] [[By Type]] [[By Category]] [[Impacts]]
@@ -55,9 +54,6 @@ impact-types/pluginisation/singular: Pluginisation
 impact-types/pluginisation/colour/background: #ddddff
 impact-types/pluginisation/colour/foreground: #222288
 impact-types/pluginisation/plural: Pluginisations
-summary-sections/clearing-the-decks/plural: Clearing the Decks
-summary-sections/highlights/plural: Highlights
-summary-sections/highlights/default-state: open
 categories/translation/colour: #7ec8e3
 categories/usability/colour: #f4a261
 categories/hackability/colour: #9b8ec4
