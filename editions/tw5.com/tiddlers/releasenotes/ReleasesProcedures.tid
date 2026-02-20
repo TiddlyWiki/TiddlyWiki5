@@ -257,6 +257,7 @@ These are significant improvements that will benefit a broad range of users, and
 		<$let count={{{ [tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] +[search:title,description,text,github-contributors,github-links<searchText>] +[count[]] }}}>
 			<$text text={{{ [<count>addsuffix[ ]] }}}/>result<$text text={{{ [<count>!match[1]then[s]] }}}/>
 		</$let>
+	</div>
 	<$macrocall $name="change-note-list" filter="[tag[$:/tags/ChangeNote]] :filter[{!!release}match<release>] +[search:title,description,text,github-contributors,github-links<searchText>] +[sort[description]]"/>
 <%else%>
 	<$list filter="[enlist{$:/tw5.com/releases/info/category-order}]" variable="category">
