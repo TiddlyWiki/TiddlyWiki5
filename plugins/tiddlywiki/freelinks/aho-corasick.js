@@ -221,6 +221,7 @@ AhoCorasick.prototype.clear = function() {
 
 AhoCorasick.prototype.getStats = function() {
 	var nodeCount = 0;
+	// eslint-disable-next-line no-unused-vars
 	var patternCount = 0;
 	var failureCount = 0;
 	
@@ -239,9 +240,7 @@ AhoCorasick.prototype.getStats = function() {
 	
 	countNodes(this.trie);
 	
-	for(var key in this.failure) {
-		failureCount++;
-	}
+	failureCount += Object.keys(this.failure).length;
 	
 	return {
 		nodeCount: nodeCount,

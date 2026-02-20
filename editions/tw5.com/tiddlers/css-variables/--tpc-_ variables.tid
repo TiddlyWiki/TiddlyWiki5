@@ -1,0 +1,16 @@
+caption: --tpc-*
+created: 20260122104142525
+modified: 20260122104847331
+tags: [[Core CSS Variables]]
+title: --tpc-* CSS Variables
+type: text/vnd.tiddlywiki
+
+`--tpc-*` variables are CSS variables of palette colors. They can be accessed via appending the palette color names to the bottom. For example:
+
+```css
+.code {
+	background-color: var(--tpc-code-background);
+	color: var(--tpc-code-foreground);
+}
+```
+

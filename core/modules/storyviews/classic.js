@@ -16,7 +16,6 @@ var ClassicStoryView = function(listWidget) {
 };
 
 ClassicStoryView.prototype.navigateTo = function(historyInfo) {
-	var duration = $tw.utils.getAnimationDuration()
 	var listElementIndex = this.listWidget.findListItem(0,historyInfo.title);
 	if(listElementIndex === undefined) {
 		return;

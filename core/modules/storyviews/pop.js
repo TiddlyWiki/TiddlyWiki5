@@ -62,7 +62,7 @@ PopStoryView.prototype.insert = function(widget) {
 	]);
 	setTimeout(function() {
 		$tw.utils.removeStyles(targetElement, ["transition", "transform", "opactity"]);
-	}, duration)
+	}, duration);
 };
 
 PopStoryView.prototype.remove = function(widget) {

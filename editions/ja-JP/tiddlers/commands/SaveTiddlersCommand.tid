@@ -1,0 +1,10 @@
+caption: savetiddlers
+created: 20140609121606089
+tags: Commands $:/deprecated
+title: SaveTiddlersCommand
+ja-title: SaveTiddlersコマンド
+type: text/vnd.tiddlywiki
+
+<<.deprecated-since "5.1.15" "SaveCommand">>.
+
+{{$:/language/Help/savetiddlers}}

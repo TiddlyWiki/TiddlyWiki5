@@ -852,6 +852,7 @@ button.tc-untagged-label {
 .tc-edit-tags button.tc-remove-tag-button svg {
 	font-size: 0.7em;
 	vertical-align: middle;
+	color: var(--tp-remove-tag-button-color);
 }
 
 .tc-tag-manager-table .tc-tag-label {
@@ -1107,7 +1108,6 @@ button.tc-btn-invisible.tc-remove-tag-button {
 {{$:/themes/tiddlywiki/vanilla/sticky}}
 
 .tc-tiddler-info {
-	overflow: hidden;
 	padding: 14px 42px 14px 42px;
 	background-color: <<colour tiddler-info-background>>;
 	border-top: 1px solid <<colour tiddler-info-border>>;
@@ -2753,6 +2753,10 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	color: white;
 	border-radius: 4px;
 	padding: 3px;
+}
+
+.tc-install-plugin > svg {
+	color: white;
 }
 
 .tc-install-plugin.tc-reinstall-downgrade {

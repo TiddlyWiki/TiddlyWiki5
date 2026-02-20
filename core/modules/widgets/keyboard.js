@@ -42,8 +42,8 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	]);
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 };
 
 KeyboardWidget.prototype.handleChangeEvent = function(event) {

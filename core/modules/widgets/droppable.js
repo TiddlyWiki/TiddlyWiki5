@@ -54,8 +54,8 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 	// Stack of outstanding enter/leave events
 	this.currentlyEntered = [];
 };

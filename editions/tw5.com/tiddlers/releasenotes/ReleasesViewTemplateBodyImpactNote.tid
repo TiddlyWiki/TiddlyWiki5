@@ -1,0 +1,6 @@
+title: $:/tw5.com/releases/ViewTemplate/body/impactnote
+
+\whitespace trim
+<$let impact=<<currentTiddler>> show-tiddler-link="yes">
+	<<impact-note-item>>
+</$let>

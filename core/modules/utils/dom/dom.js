@@ -75,6 +75,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 	var container = $tw.utils.getScrollContainer(domNode),
 		scrollTop = container.scrollTop;
 	// Measure the specified minimum height
+	// Measure the specified minimum height
 	domNode.style.height = minHeight;
 	var measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
 	// Set its height to auto so that it snaps to the correct height
@@ -144,7 +145,7 @@ exports.getPassword = function(name) {
 Reading element.offsetWidth, forces layout reflow of a dom node and its descendents
 */
 exports.forceLayout = function(element) {
-	var dummy = element.offsetWidth; // eslint-disable-line
+	void element.offsetWidth;
 };
 
 /*

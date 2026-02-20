@@ -1,6 +1,6 @@
 caption: image
 created: 20140416160234142
-modified: 20231121114351165
+modified: 20260126114209242
 tags: Widgets
 title: ImageWidget
 type: text/vnd.tiddlywiki
@@ -22,8 +22,25 @@ Any content of the `<$image>` widget is ignored.
 |class |CSS classes to be assigned to the `<img>` element |
 |loading|<<.from-version "5.2.3">>Optional. Set to `lazy` to enable lazy loading of images loaded from an external URI |
 |usemap|<<.from-version "5.3.2">>Optional usemap attribute to be assigned to the `<img>` element for use with HTML image maps |
+|loadActions|<<.from-version "5.4.0">>Optional actions invoked when the image has completed loading. See below for variables passed to the actions.|
 
 The width and the height can be specified as pixel values (eg "23" or "23px") or percentages (eg "23%"). They are both optional; if not provided the browser will use CSS rules to size the image.
+
+
+'' The following variables are accessible in the //loadActions//:''
+<<.from-version 5.4.0>>
+
+|!Variables |!Description |
+|`dom-*` |All DOM attributes of the image are made available as variables, with the prefix `dom-` |
+|`tv-popup-coords` |A relative co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the image|
+|`tv-popup-abs-coords` |<<.from-version "5.2.4">> An absolute co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the image (see [[Coordinate Systems]] for more information) |
+|`tv-selectednode-posx` |`x` offset position of the image DOM node |
+|`tv-selectednode-posy` |`y` offset position of the image DOM node  |
+|`tv-selectednode-width` |`offsetWidth` of the image DOM node |
+|`tv-selectednode-height` |`offsetHeight` of the image DOM node |
+|`img-natural-width` |Original intrinsic width of the image |
+|`img-natural-height` |Original intrinsic height of the image |
+
 
 ! Responsive images and `<map>`
 

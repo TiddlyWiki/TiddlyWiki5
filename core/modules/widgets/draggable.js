@@ -53,6 +53,7 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	});
 	// Insert the node into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
+	this.domNodes.push(domNode);
 	this.renderChildren(domNode,null);
 	// Add event handlers
 	if(this.dragEnable) {
@@ -67,7 +68,6 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 			selector: self.dragHandleSelector
 		});
 	}
-	this.domNodes.push(domNode);
 };
 
 /*

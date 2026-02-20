@@ -7,7 +7,7 @@ Deprecated util functions
 
 \*/
 
-exports.logTable = data => console.table(data);
+exports.logTable = (data) => console.table(data);
 
 exports.repeat = (str,count) => str.repeat(count);
 
@@ -23,13 +23,13 @@ exports.trim = function(str) {
 	}
 };
 
-exports.hopArray = (object,array) => array.some(element => $tw.utils.hop(object,element));
+exports.hopArray = (object,array) => array.some((element) => $tw.utils.hop(object,element));
 
 exports.sign = Math.sign;
 
 exports.strEndsWith = (str,ending,position) => str.endsWith(ending,position);
 
-exports.stringifyNumber = num => num.toString();
+exports.stringifyNumber = (num) => num.toString();
 
 exports.tagToCssSelector = function(tagName) {
 	return "tc-tagged-" + encodeURIComponent(tagName).replace(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^`{\|}~,]/mg,function(c) {

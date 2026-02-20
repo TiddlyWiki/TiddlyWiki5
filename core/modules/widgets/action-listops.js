@@ -53,17 +53,15 @@ ActionListopsWidget.prototype.invokeAction = function(triggeringWidget,
 	event) {
 	//Apply the specified filters to the lists
 	var field = this.listField,
-		index,
-		list = this.listField;
+		index;
 	if(this.listIndex) {
 		field = undefined;
 		index = this.listIndex;
-		list = this.listIndex;
 	}
 	if(this.filter) {
 		this.wiki.setText(this.target, field, index, $tw.utils.stringifyList(
 			this.wiki
-			.filterTiddlers(this.filter, this)));
+				.filterTiddlers(this.filter, this)));
 	}
 	if(this.subfilter) {
 		var inputList = this.wiki.getTiddlerList(this.target,field,index),

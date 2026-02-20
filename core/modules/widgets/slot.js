@@ -38,7 +38,6 @@ SlotWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 SlotWidget.prototype.execute = function() {
-	var self = this;
 	this.slotName = this.getAttribute("$name");
 	this.slotDepth = parseInt(this.getAttribute("$depth","1"),10) || 1;
 	// Find the parent transclusions

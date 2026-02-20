@@ -242,6 +242,53 @@ exports.slowInSlowOut = function(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 };
 
+exports.copyObjectPropertiesSafe = function(object) {
+	const seen = new Set(),
+		isDOMElement = (value) => value instanceof Node || value instanceof Window;
+
+	function safeCopy(obj) {
+		// skip circular references
+		if(seen.has(obj)) {
+			return undefined;
+		}
+		// primitives and null are safe
+		if(typeof obj !== "object" || obj === null) {
+			return obj;
+		}
+		// skip DOM elements
+		if(isDOMElement(obj)) {
+			return undefined;
+		}
+		// copy arrays, preserving positions
+		if(Array.isArray(obj)) {
+			return obj.map((item) => {
+				const value = safeCopy(item);
+				return value === undefined ? null : value;
+			});
+		}
+
+		seen.add(obj);
+		const copy = {};
+		let key,
+			value;
+		for(key in obj) {
+			try {
+				value = safeCopy(obj[key]);
+				if(value !== undefined) {
+					copy[key] = value;
+				}
+			} catch(e) {
+				// silently skip unserializable properties
+			}
+		}
+		return copy;
+	}
+
+	const result = safeCopy(object);
+	seen.clear();
+	return result;
+};
+
 exports.formatTitleString = function(template,options) {
 	var base = options.base || "",
 		separator = options.separator || "",

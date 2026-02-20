@@ -4,7 +4,7 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: theme
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9316
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9316 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9568
 github-contributors: Leilei332
 
 Replaces hardcoded `fill` attributes with one `fill: currentColor` rule to solve the compatibility issues of migrating to lucide icons.

@@ -1,6 +1,6 @@
 caption: link
 created: 20131024141900000
-modified: 20250720025154474
+modified: 20260206131722044
 tags: Widgets
 title: LinkWidget
 type: text/vnd.tiddlywiki
@@ -27,6 +27,8 @@ The content of the link widget is rendered within the `<a>` tag representing the
 |data-* |<<.from-version "5.3.2">> Optional [[data attributes|https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes]] to be assigned to the HTML element |
 |style.* |<<.from-version "5.3.2">> Optional [[CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference]] to be assigned to the HTML element |
 |aria-* |<<.from-version "5.4.0">> Optional [[ARIA attributes|https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes]] to be assigned to the HTML element |
+|startactions |<<.from-version "5.4.0">> Optional action string that gets invoked when ''dragging starts''. The <<.var actionTiddler>> variable is available in this action.|
+|endactions |<<.from-version "5.4.0">> Optional action string that gets invoked when ''dragging ends''. The <<.var actionTiddler>> variable is available in this action. |
 
 The draggable functionality is equivalent to using the DraggableWidget with the ''tiddler'' attribute set to the link target.
 
@@ -67,6 +69,19 @@ A useful convention is to set the tooltip like this:
 
 This causes the tooltip to be the ''tooltip'' field of the target tiddler. If the field isn't present, then the title is used instead.
 
+! Action Variables
+
+<<.from-version "5.4.0">> The <<.var actionTiddler>> variable is available to <<.param startaction>> and <<.param endaction>>.
+
+To see all variables available to an action you can use this code and see the variables in the browser dev-console (F12)
+
+<<wikitext-example-without-html """\procedure endActions()
+<$action-log/>
+\end
+
+<$link to=HelloThere endactions=<<endActions>>>drag me!</$link>
+""">>
+
 ! CSS Classes
 
 The link widget automatically determines and applies the following classes to links:
@@ -95,7 +110,7 @@ The following process is used to generate the `href` attribute of the generated 
 # If <<.vlink tv-wikilink-template>> is defined it is treated as a specialised macro body that can perform limited conversion of the target tiddler title to the `href` value
 # Otherwise, the target tiddler title is URI encoded to create the `href`
 
-! Configuration variables
+! Configuration Variables
 
 * <<.vlink tv-wikilinks>>
 * <<.vlink tv-filter-export-link>>

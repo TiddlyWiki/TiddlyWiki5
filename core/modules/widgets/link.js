@@ -50,8 +50,8 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 			destPrefix: "aria-"
 		});
 		parent.insertBefore(domNode,nextSibling);
-		this.renderChildren(domNode,null);
 		this.domNodes.push(domNode);
+		this.renderChildren(domNode,null);
 	}
 };
 
@@ -143,6 +143,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		$tw.utils.makeDraggable({
 			domNode: domNode,
 			dragTiddlerFn: function() {return self.to;},
+			startActions: self.startActions,
+			endActions: self.endActions,
 			widget: this
 		});
 	} else if(this.draggable === "no") {
@@ -155,8 +157,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	});
 	// Insert the link into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 };
 
 LinkWidget.prototype.handleClickEvent = function(event) {
@@ -201,6 +203,8 @@ LinkWidget.prototype.execute = function() {
 	this.overrideClasses = this.getAttribute("overrideClass");
 	this.tabIndex = this.getAttribute("tabindex");
 	this.draggable = this.getAttribute("draggable","yes");
+	this.startActions = this.getAttribute("startactions");
+	this.endActions = this.getAttribute("endactions");
 	this.linkTag = this.getAttribute("tag","a");
 	// Determine the link characteristics
 	this.isMissing = !this.wiki.tiddlerExists(this.to);

@@ -19,7 +19,6 @@ exports.info = {
 };
 
 var Command = function(params,commander,callback) {
-	var self = this;
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;

@@ -68,6 +68,6 @@ tags: $:/tags/Stylesheet
 
 .tc-thumbnail-tabs .tc-btn-pushed {
 	background-color: <<colour foreground>>;
-	fill: <<color background>>;
+	color: <<color background>>;
 }
 

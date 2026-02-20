@@ -100,9 +100,9 @@ describe("Utility tests", function() {
 		expect(fds(d,"MM0\\D\\D")).toBe("110DD");
 		expect(fds(d,"TIMESTAMP")).toBe(d.getTime().toString());
 		const day = d.getUTCDate();
-		const dayStr = ("" + day).padStart(2, '0');
+		const dayStr = ("" + day).padStart(2, "0");
 		const hours = d.getUTCHours();
-		const hoursStr = ("" + hours).padStart(2, '0');
+		const hoursStr = ("" + hours).padStart(2, "0");
 		const expectedUtcStr = `201411${dayStr}${hoursStr}4128542`;
 		expect(fds(d,"[UTC]YYYY0MM0DD0hh0mm0ssXXX")).toBe(expectedUtcStr);
 
@@ -149,25 +149,25 @@ describe("Utility tests", function() {
 	it("should parse text references", function() {
 		var ptr = $tw.utils.parseTextReference;
 		expect(ptr("title")).toEqual(
-			{ title : 'title' }
+			{ title : "title" }
 		);
 		expect(ptr("ti#tle")).toEqual(
-			{ title : 'ti#tle' }
+			{ title : "ti#tle" }
 		);
 		expect(ptr("ti!tle")).toEqual(
-			{ title : 'ti!tle' }
+			{ title : "ti!tle" }
 		);
 		expect(ptr("ti#tle##index")).toEqual(
-			{ title : 'ti#tle', index : 'index' }
+			{ title : "ti#tle", index : "index" }
 		);
 		expect(ptr("ti!tle!!field")).toEqual(
-			{ title : 'ti!tle', field : 'field' }
+			{ title : "ti!tle", field : "field" }
 		);
 		expect(ptr("title##index!!field")).toEqual(
-			{ title : 'title##index', field : 'field' }
+			{ title : "title##index", field : "field" }
 		);
 		expect(ptr("title!!field##index")).toEqual(
-			{ title : 'title', field : 'field##index' }
+			{ title : "title", field : "field##index" }
 		);
 
 	});

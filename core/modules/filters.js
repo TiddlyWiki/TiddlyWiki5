@@ -43,7 +43,7 @@ function parseFilterOperation(operators,filterString,p) {
 		var bracket = filterString.charAt(nextBracketPos);
 		operator.operator = filterString.substring(p,nextBracketPos);
 		// Any suffix?
-		var colon = operator.operator.indexOf(':');
+		var colon = operator.operator.indexOf(":");
 		if(colon > -1) {
 			// The raw suffix for older filters
 			operator.suffix = operator.operator.substring(colon + 1);
@@ -67,7 +67,7 @@ function parseFilterOperation(operators,filterString,p) {
 		operator.operands = [];
 		var parseOperand = function(bracketType) {
 			var operand = {};
-			switch (bracketType) {
+			switch(bracketType) {
 				case "{": // Curly brackets
 					operand.indirect = true;
 					nextBracketPos = filterString.indexOf("}",p);
@@ -108,7 +108,7 @@ function parseFilterOperation(operators,filterString,p) {
 			}
 			operator.operands.push(operand);
 			p = nextBracketPos + 1;
-		}
+		};
 
 		p = nextBracketPos + 1;
 		parseOperand(bracket);
@@ -228,16 +228,11 @@ exports.getFilterRunPrefixes = function() {
 		$tw.modules.applyMethods("filterrunprefix",this.filterRunPrefixes);
 	}
 	return this.filterRunPrefixes;
-}
+};
 
 exports.filterTiddlers = function(filterString,widget,source) {
 	var fn = this.compileFilter(filterString);
-	try {
-		const fnResult = fn.call(this,source,widget);
-		return fnResult;
-	} catch(e) {
-		return [`${$tw.language.getString("Error/Filter")}: ${e}`];
-	}
+	return fn.call(this,source,widget);
 };
 
 /*
