@@ -3,16 +3,17 @@ title: $:/core/modules/utils/aho-corasick.js
 type: application/javascript
 module-type: utils
 
-Optimized Aho-Corasick string matching algorithm implementation with enhanced performance and error handling for TiddlyWiki freelinking functionality.
+Optimized Aho-Corasick string matching algorithm implementation with enhanced performance
+and error handling for TiddlyWiki freelinking functionality.
 
-Useage:
+Usage:
 
 Initialization:
  Create an AhoCorasick instance: var ac = new AhoCorasick();
  After initialization, the trie and failure structures are automatically created to store patterns and failure links.
 
 Adding Patterns:
- Call addPattern(pattern, index) to add a pattern, e.g., ac.addPattern("[[Link]]", 0);.
+ Call addPattern(pattern, index) to add a pattern, e.g., ac.addPattern("hello", 0);
  pattern is the string to match, and index is an identifier for tracking results.
  Multiple patterns can be added, stored in the trie structure.
 
@@ -23,22 +24,18 @@ Building Failure Links:
 Performing Search:
  Use search(text, useWordBoundary) to find pattern matches in the text.
  text is the input string, and useWordBoundary (boolean) controls whether to enforce word boundary checks.
- Returns an array of match results, each containing pattern (matched pattern), index (start position), length (pattern length), and titleIndex (pattern identifier).
+ Returns an array of match results, each containing pattern (matched pattern), index (start position),
+ length (pattern length), and titleIndex (pattern identifier).
 
 Word Boundary Check:
- If useWordBoundary is true, only matches surrounded by non-word characters (letters, digits, or underscores) are returned.
+ If useWordBoundary is true, only matches surrounded by non-Latin-word characters are returned.
+ CJK characters have no word boundary concept and are always treated as valid matches regardless of context.
 
 Cleanup and Statistics:
  Use clear() to reset the trie and failure links, freeing memory.
- Use getStats() to retrieve statistics, including node count (nodeCount), pattern count (patternCount), and failure link count (failureLinks).
+ Use getStats() to retrieve statistics, including node count (nodeCount), pattern count (patternCount),
+ and failure link count (failureLinks).
 
-Notes
- Performance Considerations: The Aho-Corasick trie may consume significant memory with a large number of patterns. Limit the number of patterns (e.g., <10,000) for optimal performance.
- Error Handling: The module includes maximum node and failure depth limits (maxFailureDepth) to prevent infinite loops or memory overflow.
- Word Boundary: Enabling useWordBoundary ensures more precise matches, ideal for link detection scenarios.
- Compatibility: Ensure compatibility with other TiddlyWiki modules (e.g., wikiparser.js) when processing WikiText.
- Debugging: Use getStats() to inspect the trie structure's size and ensure it does not overload browser memory.
- 
 \*/
 
 "use strict";
@@ -54,26 +51,26 @@ AhoCorasick.prototype.addPattern = function(pattern, index) {
 	if(!pattern || typeof pattern !== "string" || pattern.length === 0) {
 		return;
 	}
-	
+
 	var node = this.trie;
-	
+
 	for(var i = 0; i < pattern.length; i++) {
-		var char = pattern[i];
-		if(!node[char]) {
-			node[char] = {};
+		var ch = pattern[i];
+		if(!node[ch]) {
+			node[ch] = {};
 		}
-		node = node[char];
+		node = node[ch];
 	}
-	
+
 	if(!node.$) {
 		node.$ = [];
 	}
-	node.$.push({ 
-		pattern: pattern, 
+	node.$.push({
+		pattern: pattern,
 		index: index,
 		length: pattern.length
 	});
-	
+
 	this.patternCount++;
 };
 
@@ -81,43 +78,41 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 	var queue = [];
 	var root = this.trie;
 	this.failure[root] = root;
-	
-	for(var char in root) {
-		if(root[char] && char !== "$") {
-			this.failure[root[char]] = root;
-			queue.push(root[char]);
+
+	for(var ch in root) {
+		if(root[ch] && typeof root[ch] === "object" && ch !== "$") {
+			this.failure[root[ch]] = root;
+			queue.push(root[ch]);
 		}
 	}
-	
+
 	var processedNodes = 0;
 	var maxNodes = Math.max(100000, this.patternCount * 15);
-	
+
 	while(queue.length > 0 && processedNodes < maxNodes) {
 		var node = queue.shift();
 		processedNodes++;
-		
-		for(var char in node) {
-			if(node[char] && char !== "$") {
-				var child = node[char];
-				var fail = this.failure[node];
-				var failureDepth = 0;
-				
-				while(fail && !fail[char] && failureDepth < this.maxFailureDepth) {
-					fail = this.failure[fail];
-					failureDepth++;
-				}
-				
-				var failureLink = (fail && fail[char]) ? fail[char] : root;
-				this.failure[child] = failureLink;
-				
-				// Do not merge outputs from failure links during build
-				// Instead, collect matches dynamically by traversing failure links during search				
 
-				queue.push(child);
+		for(var ch in node) {
+			if(!node[ch] || typeof node[ch] !== "object" || ch === "$") {
+				continue;
 			}
+
+			var child = node[ch];
+			var fail = this.failure[node];
+			var failureDepth = 0;
+
+			while(fail !== root && !fail[ch] && failureDepth < this.maxFailureDepth) {
+				fail = this.failure[fail];
+				failureDepth++;
+			}
+
+			this.failure[child] = (fail[ch] && fail[ch] !== child) ? fail[ch] : root;
+
+			queue.push(child);
 		}
 	}
-	
+
 	if(processedNodes >= maxNodes) {
 		throw new Error("Aho-Corasick: buildFailureLinks exceeded maximum nodes (" + maxNodes + ")");
 	}
@@ -127,60 +122,40 @@ AhoCorasick.prototype.search = function(text, useWordBoundary) {
 	if(!text || typeof text !== "string" || text.length === 0) {
 		return [];
 	}
-	
+
 	var matches = [];
 	var node = this.trie;
+	var root = this.trie;
 	var textLength = text.length;
 	var maxMatches = Math.min(textLength * 2, 10000);
-	
+
 	for(var i = 0; i < textLength; i++) {
-		var char = text[i];
-		var transitionCount = 0;
-		
-		// Follow failure links to find a valid transition
-		while(node && !node[char] && node !== this.trie && transitionCount < this.maxFailureDepth) {
-			node = this.failure[node] || this.trie;
-			transitionCount++;
+		var ch = text[i];
+
+		while(node !== root && !node[ch]) {
+			node = this.failure[node];
 		}
-		
-		if(node && node[char]) {
-			node = node[char];
-		} else {
-			node = this.trie;
-			if(this.trie[char]) {
-				node = this.trie[char];
-			}
+		if(node[ch]) {
+			node = node[ch];
 		}
-		
-		// Traverse the current node and its failure link chain to gather all patterns
-		var currentNode = node;
-		var collectCount = 0;
-		var visitedNodes = new Set();
-		
-		while(currentNode && collectCount < 10) {
-			// Prevent infinite loops
-			if(visitedNodes.has(currentNode)) {
-				break;
-			}
-			visitedNodes.add(currentNode);
-			
-			// Only collect outputs from the current node (not merged ones)
-			if(currentNode.$) {
-				var outputs = currentNode.$;
+
+		var cur = node;
+		while(cur) {
+			if(cur.$) {
+				var outputs = cur.$;
 				for(var j = 0; j < outputs.length && matches.length < maxMatches; j++) {
 					var output = outputs[j];
 					var matchStart = i - output.length + 1;
 					var matchEnd = i + 1;
-					
-					var matchedText = text.substring(matchStart, matchEnd);
-					if(matchedText !== output.pattern) {
+
+					if(matchStart < 0) {
 						continue;
 					}
-					
+
 					if(useWordBoundary && !this.isWordBoundaryMatch(text, matchStart, matchEnd)) {
 						continue;
 					}
-					
+
 					matches.push({
 						pattern: output.pattern,
 						index: matchStart,
@@ -189,28 +164,31 @@ AhoCorasick.prototype.search = function(text, useWordBoundary) {
 					});
 				}
 			}
-			
-			currentNode = this.failure[currentNode];
-			if(currentNode === this.trie) break;
-			collectCount++;
+
+			if(cur === root) {
+				break;
+			}
+			cur = this.failure[cur];
 		}
 	}
-	
+
 	return matches;
 };
 
 AhoCorasick.prototype.isWordBoundaryMatch = function(text, start, end) {
 	var beforeChar = start > 0 ? text[start - 1] : "";
 	var afterChar = end < text.length ? text[end] : "";
-	
-	var isWordChar = function(char) {
+
+	var matchedText = text.substring(start, end);
+	if(/[\u3400-\u9FFF\uF900-\uFAFF]/.test(matchedText)) {
+		return true;
+	}
+
+	var isLatinWordChar = function(char) {
 		return /[a-zA-Z0-9_\u00C0-\u00FF]/.test(char);
 	};
-	
-	var beforeIsWord = beforeChar && isWordChar(beforeChar);
-	var afterIsWord = afterChar && isWordChar(afterChar);
-	
-	return !beforeIsWord && !afterIsWord;
+
+	return !isLatinWordChar(beforeChar) && !isLatinWordChar(afterChar);
 };
 
 AhoCorasick.prototype.clear = function() {
@@ -221,27 +199,23 @@ AhoCorasick.prototype.clear = function() {
 
 AhoCorasick.prototype.getStats = function() {
 	var nodeCount = 0;
-	// eslint-disable-next-line no-unused-vars
-	var patternCount = 0;
 	var failureCount = 0;
-	
+
 	function countNodes(node) {
-		if(!node) return;
-		nodeCount++;
-		if(node.$) {
-			patternCount += node.$.length;
+		if(!node) {
+			return;
 		}
+		nodeCount++;
 		for(var key in node) {
 			if(node[key] && typeof node[key] === "object" && key !== "$") {
 				countNodes(node[key]);
 			}
 		}
 	}
-	
+
 	countNodes(this.trie);
-	
-	failureCount += Object.keys(this.failure).length;
-	
+	failureCount = Object.keys(this.failure).length;
+
 	return {
 		nodeCount: nodeCount,
 		patternCount: this.patternCount,
