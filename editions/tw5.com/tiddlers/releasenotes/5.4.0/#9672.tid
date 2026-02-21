@@ -1,0 +1,21 @@
+title: $:/changenotes/5.4.0/#9672
+description:  Improve Aho-Corasick search correctness and longest-match priority in Freelinks
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: bugfix
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9084 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9397 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9672
+github-contributors: s793016
+
+This note addresses remaining correctness issues in the Freelinks plugin following #9084 and #9397.
+
+Fixes:
+* Incorrect State Transition: The Aho-Corasick search loop contained a duplicated root-node check that could cause a character to be processed twice, producing false matches. Replaced with the standard single transition pattern.
+* Incomplete Output Collection: A hard limit of 10 on failure-link traversal could silently drop valid matches. The root node's outputs were also skipped by an early break. Replaced with a complete failure-chain walk.
+* Longest-Match Not Honoured: A shorter title match could occupy positions needed by a longer overlapping title, causing the longer match to be incorrectly rejected (e.g. "雪狼" blocking "雪狼湖"). Replaced position-marking with greedy left-to-right selection, always preferring the longest match at each position.
+* Dead Code in getStats(): A local patternCount variable was computed but never returned; this.patternCount was returned instead. Removed the unused variable.
+* CJK Word Boundary Intent: CJK titles were passing word boundary checks by accident rather than by design. Added an explicit early return for CJK matches, reflecting that CJK scripts have no word boundary concept.
+
+Impact:
+* More reliable longest-match linking for multilingual wikis, particularly for Chinese titles containing shared substrings.
+* Eliminated a class of false matches caused by incorrect Aho-Corasick traversal.
