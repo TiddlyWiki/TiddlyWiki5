@@ -10,14 +10,14 @@ type: text/vnd.tiddlywiki
 コードブロック(<<.icon $:/core/images/mono-block>>)をマークするには、3つのバッククォート<code>&#96;&#96;&#96;</code>を使用します: 
 
 <pre>&#96;&#96;&#96;
-This will be monospaced
+これは等幅です
 &#96;&#96;&#96;
 </pre>
 
 次のように表示されます:
 
 ```
-This will be monospaced
+これは等幅です
 ```
 
 正しく解釈されるためには、3つのバッククォートが行の先頭にあり、その直後に改行が続く必要があります。
@@ -26,16 +26,16 @@ This will be monospaced
 
 <pre>This is an ordinary paragraph
 &#96;&#96;&#96;
-This will be monospaced
+これは等幅です
 &#96;&#96;&#96;
 </pre>
 
 正しくは次のとおりです:
 
-<pre>This is an ordinary paragraph
+<pre>これは普通の段落です
 
 &#96;&#96;&#96;
-This will be monospaced
+これは等幅です
 &#96;&#96;&#96;
 </pre>
 
