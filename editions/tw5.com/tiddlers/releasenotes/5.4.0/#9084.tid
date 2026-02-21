@@ -2,18 +2,16 @@ title: $:/changenotes/5.4.0/#9084
 description: Optimize Freelinks plugin with Aho-Corasick for large wikis and non-Latin languages
 release: 5.4.0
 tags: $:/tags/ChangeNote
-change-type: bugfix
+change-type: performance
 change-category: plugin
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9084
 github-contributors: s793016
 
-This change introduces a fully optimized override of the core text widget, integrating an enhanced 'Aho-Corasick algorithm' for automatic linkification (Freelinks). The new engine drastically improves performance for large wikis and ensures correct support for non-Latin scripts (e.g., Chinese).
+This change introduces an optimized override of the core text widget, integrating the Aho-Corasick algorithm for automatic linkification in the Freelinks plugin.
 
 Highlights:
-- Full switch from regex to Aho-Corasick for rapid, multi-pattern title detection, reducing linkification time from 1–5s to 100–500ms on wikis with ~12,000 tiddlers.
-- Gracefully handles large title sets using a chunked insertion process and an optional persistent cache (`$:/config/Freelinks/PersistAhoCorasickCache`).
-- Improved support for CJK and non-Latin text, correctly linking titles containing full-width symbols ('：').
-- Smart prioritization: Longer titles are matched before shorter, ambiguous ones, preventing partial or incorrect linking.
-- Skips self-linking and prevents overlapping matches for clean, deterministic linkification.
-- End users with large or multilingual wikis will see a massive performance boost and 100% accurate linking.
-- New configuration options available for persistent cache and word boundary checking (`$:/config/Freelinks/WordBoundary`).
+* Performance: Replaced regex-based matching with Aho-Corasick, reducing linkification time from 1-5s to 100-500ms on wikis with ~12,000 tiddlers.
+* Non-Latin support: Correctly links titles containing CJK characters and full-width symbols (e.g. "：").
+* Longest-match priority: Longer titles are matched before shorter overlapping ones, preventing partial or incorrect linking.
+* Self-link prevention: The current tiddler's title is excluded from linkification within its own content.
+* New configuration options: Word boundary checking via `$:/config/Freelinks/WordBoundary`.
