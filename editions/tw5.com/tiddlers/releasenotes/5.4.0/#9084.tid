@@ -2,7 +2,7 @@ title: $:/changenotes/5.4.0/#9084
 description: Optimize Freelinks plugin with Aho-Corasick for large wikis and non-Latin languages
 release: 5.4.0
 tags: $:/tags/ChangeNote
-change-type: enhancement
+change-type: bugfix
 change-category: plugin
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9084
 github-contributors: s793016
