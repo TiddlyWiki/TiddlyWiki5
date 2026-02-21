@@ -3,7 +3,7 @@ description: Add the prevailing mimetype for CSV parser
 release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
-change-category: internal
+change-category: developer
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9445
 github-contributors: EvidentlyCube
 

@@ -220,7 +220,7 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 		for(var m=0; m<actualParams.length; m++) {
 			if(typeof actualParams[m] !== "string" && actualParams[m].name === paramInfo.name) {
 				paramValue = actualParams[m].value;
-				paramMultiValue = actualParams[m].multiValue || [paramValue]
+				paramMultiValue = actualParams[m].multiValue || [paramValue];
 			}
 		}
 		// If not, use the next available anonymous macro call parameter
@@ -329,71 +329,79 @@ Widget.prototype.getStateQualifier = function(name) {
 /*
 Make a fake widget with specified variables, suitable for variable lookup in filters. Each variable can be a string or an array of strings
 */
-Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
-	var self = this,
-		variables = variables || {};
-	return {
-		getVariable: function(name,opts) {
-			if($tw.utils.hop(variables,name)) {
-				var value = variables[name];
-				if($tw.utils.isArray(value)) {
-					return value[0];
-				} else {
-					return value;
-				}
-			} else {
-				opts = opts || {};
-				opts.variables = $tw.utils.extend({},variables,opts.variables);
-				return self.getVariable(name,opts);
-			};
+Widget.prototype.makeFakeWidgetWithVariables = function(vars = {}) {
+	const self = this;
+
+	const fakeWidget = {
+		getVariableInfo(name,opts = {}) {
+			if(name in vars) {
+				const value = vars[name];
+				return Array.isArray(value)
+					? { text: value[0], resultList: value }
+					: { text: value, resultList: [value] };
+			}
+			opts = opts || {};
+			opts.variables = Object.assign({}, vars, opts.variables || {});
+			return self.getVariableInfo(name, opts);
 		},
-		getVariableInfo: function(name,opts) {
-			if($tw.utils.hop(variables,name)) {
-				var value = variables[name];
-				if($tw.utils.isArray(value)) {
-					return {
-						text: value[0],
-						resultList: value
-					};
-				} else {
-					return {
-						text: value,
-						resultList: [value]
-					};
-				}
-			} else {
-				opts = opts || {};
-				opts.variables = $tw.utils.extend({},variables,opts.variables);
-				return self.getVariableInfo(name,opts);
-			};
+
+
+		getVariable(name,opts) {
+			return this.getVariableInfo(name, opts).text;
 		},
-		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables,
+
 		resolveVariableParameters: self.resolveVariableParameters,
-		wiki: self.wiki
+		wiki: self.wiki,
+		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables,
+
+		get variables() {
+			// Merge parent vars via prototype-like delegation
+			return Object.create(self.variables || {}, 
+				Object.keys(vars).reduce((acc, key) => {
+					acc[key] = { value: vars[key], enumerable: true, configurable: true };
+					return acc;
+				}, {})
+			);
+		}
 	};
+
+	return fakeWidget;
 };
 
 /*
 Compute the current values of the attributes of the widget. Returns a hashmap of the names of the attributes that have changed.
 Options include:
 filterFn: only include attributes where filterFn(name) returns true
+asList: boolean if true returns results as an array instead of a single value
 */
 Widget.prototype.computeAttributes = function(options) {
 	options = options || {};
 	var changedAttributes = {},
-		self = this;
+		self = this,
+		newMultiValuedAttributes = Object.create(null);
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		if(options.filterFn) {
 			if(!options.filterFn(name)) {
 				return;
 			}
 		}
-		var value = self.computeAttribute(attribute);
-		if(self.attributes[name] !== value) {
+		var value = self.computeAttribute(attribute,options),
+			multiValue = null;
+		if($tw.utils.isArray(value)) {
+			multiValue = value;
+			newMultiValuedAttributes[name] = multiValue;
+			value = value[0] || "";
+		}
+		var changed = (self.attributes[name] !== value);
+		if(!changed && multiValue && self.multiValuedAttributes) {
+			changed = !$tw.utils.isArrayEqual(self.multiValuedAttributes[name] || [], multiValue);
+		}
+		if(changed) {
 			self.attributes[name] = value;
 			changedAttributes[name] = true;
 		}
 	});
+	this.multiValuedAttributes = newMultiValuedAttributes;
 	return changedAttributes;
 };
 
@@ -431,7 +439,7 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 		});
 		// Invoke the macro
 		var variableInfo = this.getVariableInfo(macroName,{params: params});
-		if(options.asList) {
+		if(options.asList || attribute.isMVV) {
 			value = variableInfo.resultList;
 		} else {
 			value = variableInfo.text;
@@ -600,9 +608,9 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	var variableDefinitionName = "$" + parseTreeNode.type;
 	if(this.variables[variableDefinitionName]) {
 		var isOverrideable = function() {
-				// Widget is overrideable if its name contains a period, or if it is an existing JS widget and we're not in safe mode
-				return parseTreeNode.type.indexOf(".") !== -1 || (!!self.widgetClasses[parseTreeNode.type] && !$tw.safeMode);
-			};
+			// Widget is overrideable if its name contains a period, or if it is an existing JS widget and we're not in safe mode
+			return parseTreeNode.type.indexOf(".") !== -1 || (!!self.widgetClasses[parseTreeNode.type] && !$tw.safeMode);
+		};
 		if(!parseTreeNode.isNotRemappable && isOverrideable()) { 
 			var variableInfo = this.getVariableInfo(variableDefinitionName,{allowSelfAssigned: true});
 			if(variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.value && variableInfo.srcVariable.isWidgetDefinition) {
@@ -731,7 +739,7 @@ Widget.prototype.dispatchEvent = function(event) {
 		$tw.utils.each(listeners,function(handler) {
 			var propagate;
 			if(typeof handler === "string") {
-				 // If handler is a string, call it as a method on the widget
+				// If handler is a string, call it as a method on the widget
 				propagate = self[handler].call(self,event);
 			} else {
 				// Otherwise call the function handler directly
@@ -774,7 +782,7 @@ Refresh all the children of a widget
 Widget.prototype.refreshChildren = function(changedTiddlers) {
 	var children = this.children,
 		refreshed = false;
-	for (var i = 0; i < children.length; i++) {
+	for(var i = 0; i < children.length; i++) {
 		refreshed = children[i].refresh(changedTiddlers) || refreshed;
 	}
 	return refreshed;

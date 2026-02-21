@@ -1,5 +1,5 @@
 title: $:/changenotes/5.4.0/#9626
-description: Bump katex to latest version
+description: Bump Katex to latest version
 release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
@@ -7,4 +7,4 @@ change-category: plugin
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9626
 github-contributors: Leilei332
 
-Bump latex to latest version and use woff2 fonts to reduce plugin size.
+Bump Katex to latest version and use woff2 fonts to reduce plugin size.

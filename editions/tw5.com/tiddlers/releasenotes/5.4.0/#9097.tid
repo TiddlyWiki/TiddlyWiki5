@@ -1,4 +1,4 @@
-change-category: internal
+change-category: developer
 change-type: enhancement
 created: 20260120153052332
 description: Adds a destroy method for widgets allowing for clean up of resources when a widget is removed.

@@ -74,7 +74,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 	// Get the scroll container and register the current scroll position
 	var container = $tw.utils.getScrollContainer(domNode),
 		scrollTop = container.scrollTop;
-    // Measure the specified minimum height
+	// Measure the specified minimum height
 	domNode.style.height = minHeight;
 	var measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
 	// Set its height to auto so that it snaps to the correct height
@@ -144,7 +144,7 @@ exports.getPassword = function(name) {
 Force layout of a dom node and its descendents
 */
 exports.forceLayout = function(element) {
-	var dummy = element.offsetWidth;
+	void element.offsetWidth;
 };
 
 /*
@@ -246,7 +246,7 @@ exports.copyToClipboard = function(text,options) {
 	}
 	if(!options.doNotNotify) {
 		var successNotification = options.successNotification || "$:/language/Notifications/CopiedToClipboard/Succeeded",
-			failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed"
+			failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed";
 		$tw.notifier.display(succeeded ? successNotification : failureNotification);
 	}
 	document.body.removeChild(textArea);
@@ -257,8 +257,8 @@ Collect DOM variables
 */
 exports.collectDOMVariables = function(selectedNode,domNode,event) {
 	var variables = {},
-	    selectedNodeRect,
-	    domNodeRect;
+		selectedNodeRect,
+		domNodeRect;
 	if(selectedNode) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();

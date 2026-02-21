@@ -7,9 +7,9 @@ type: text/vnd.tiddlywiki
 description: Under development
 
 \procedure release-introduction()
-Release v5.4.0 is an important release because it deliberately and forensically loosens backwards compatibility where needed to allow significant new features and fundamental improvements to be made.
+Release v5.4.0 deliberately and forensically loosens backwards compatibility to clear the path for significant new features and fundamental improvements to be made in the future.
 
-''Please note that this release note is not yet fully completed, please see the change history on ~GitHub for the full list of changes included in this release.''
+''Please note that there are some changes that do not yet change notes, please see the change history on ~GitHub for the full list of changes.''
 
 See the [[project plan|https://github.com/orgs/TiddlyWiki/projects/4]] for full details.
 \end release-introduction

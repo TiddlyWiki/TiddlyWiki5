@@ -49,26 +49,22 @@ title: $:/core/ui/ImportListing
 \end
 
 \whitespace trim
-<$let importJson={{{ [{$:/Import}] }}}>
-	<$let importTitles={{{ [<importJson>jsonindexes[tiddlers]] }}}>
-		<$let importTypes={{{ [(importTitles)] :map[<importJson>jsonget[tiddlers],<currentTiddler>,[type]] }}}>
-			<$let anyMatch={{{ [all[shadows+tiddlers]tag[$:/tags/ImportOptions]get[condition]] :map[(importTypes)subfilter<currentTiddler>] +[!is[blank]limit[1]] }}}>
-				<%if [<anyMatch>!is[blank]] %>
-					<div class="tc-import-option">
-						<$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportOptions]]" variable="importOption">
-							<$let condition={{{ [<importOption>get[condition]] }}}>
-								<$let hasMatch={{{ [(importTypes)subfilter<condition>limit[1]] }}}>
-									<%if [<hasMatch>!is[blank]] %>
-										<$transclude tiddler=<<importOption>>/>
-									<%endif%>
-								</$let>
-							</$let>
-						</$list>
-					</div>
-				<%endif%>
-			</$let>
-		</$let>
-	</$let>
+<$let importJson={{{ [{$:/Import}] }}}
+	importTitles={{{ [<importJson>jsonindexes[tiddlers]] }}}
+	importTypes={{{ [(importTitles)] :map[<importJson>jsonget[tiddlers],<currentTiddler>,[type]] }}}
+	anyMatch={{{ [all[shadows+tiddlers]tag[$:/tags/ImportOptions]get[condition]] :map[(importTypes)subfilter<currentTiddler>] +[!is[blank]limit[1]] }}}>
+	<%if [<anyMatch>!is[blank]] %>
+		<div class="tc-import-option">
+			<$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportOptions]]" variable="importOption">
+				<$let condition={{{ [<importOption>get[condition]] }}}
+					hasMatch={{{ [(importTypes)subfilter<condition>limit[1]] }}}>
+					<%if [<hasMatch>!is[blank]] %>
+						<$transclude tiddler=<<importOption>>/>
+					<%endif%>
+				</$let>
+			</$list>
+		</div>
+	<%endif%>
 </$let>
 <div class="tc-table-wrapper">
 <table class="tc-import-table">

@@ -7,11 +7,8 @@ Tests the JSON filters and the format:json operator
 
 \*/
 
-
-/* jslint node: true, browser: true */
 /* eslint-env node, browser, jasmine */
 /* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"]*/
-/* global $tw, require */
 "use strict";
 
 describe("json filter tests", function() {
@@ -127,7 +124,7 @@ describe("json filter tests", function() {
 		expect(wiki.filterTiddlers("[jsonset[a],[aa]]")).toEqual(['"First"','"Second"','"Third"']);
 		expect(wiki.filterTiddlers("[{First}jsonset[]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
 		expect(wiki.filterTiddlers("[{First}jsonset[],[Antelope]]")).toEqual(['"Antelope"']);
-		expect(wiki.filterTiddlers("[{First}jsonset:number[],[not a number]]")).toEqual(['0']);
+		expect(wiki.filterTiddlers("[{First}jsonset:number[],[not a number]]")).toEqual(["0"]);
 		expect(wiki.filterTiddlers("[{First}jsonset[id],[Antelope]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":"Antelope"}']);
 		expect(wiki.filterTiddlers("[{First}jsonset:notatype[id],[Antelope]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":"Antelope"}']);
 		expect(wiki.filterTiddlers("[{First}jsonset:boolean[id],[false]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":false}']);

@@ -244,7 +244,7 @@ exports.slowInSlowOut = function(t) {
 
 exports.copyObjectPropertiesSafe = function(object) {
 	const seen = new Set(),
-		isDOMElement = value => value instanceof Node || value instanceof Window;
+		isDOMElement = (value) => value instanceof Node || value instanceof Window;
 
 	function safeCopy(obj) {
 		// skip circular references
@@ -261,7 +261,7 @@ exports.copyObjectPropertiesSafe = function(object) {
 		}
 		// copy arrays, preserving positions
 		if(Array.isArray(obj)) {
-			return obj.map(item => {
+			return obj.map((item) => {
 				const value = safeCopy(item);
 				return value === undefined ? null : value;
 			});
