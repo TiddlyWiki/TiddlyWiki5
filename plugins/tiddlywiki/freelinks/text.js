@@ -95,7 +95,6 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 		(currentTiddlerTitle ? currentTiddlerTitle.toLowerCase() : "") :
 		currentTiddlerTitle;
 
-	// Global: prefer longer matches; if tie, earlier start first
 	matches.sort(function(a,b) {
 		if(b.length !== a.length) return b.length - a.length;
 		return a.index - b.index;
@@ -132,7 +131,6 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 		return [{type: "plain-text", text: text}];
 	}
 
-	// Render left-to-right
 	validMatches.sort(function(a,b){ return a.index - b.index; });
 
 	var newParseTree = [];
@@ -182,7 +180,6 @@ function computeTiddlerTitleInfo(self,ignoreCase) {
 		return { titles: [], ac: new AhoCorasick() };
 	}
 
-	// Filter out system tiddlers, drafts etc. (draft handled in refresh)
 	var validTitles = [];
 	for(var i = 0; i < titles.length; i++) {
 		var t = titles[i];
@@ -191,7 +188,6 @@ function computeTiddlerTitleInfo(self,ignoreCase) {
 		}
 	}
 
-	// Sort longest first so indices align with titleIndex usage
 	validTitles.sort(function(a,b) {
 		var d = b.length - a.length;
 		if(d !== 0) return d;
@@ -236,32 +232,27 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 		$tw.utils.each(changedTiddlers,function(change,title) {
 			if(titlesHaveChanged) return;
 
-			// Config changes must invalidate
 			if(title === WORD_BOUNDARY_TIDDLER || title === TITLE_TARGET_FILTER) {
 				titlesHaveChanged = true;
 				return;
 			}
 
-			// Ignore ALL system/state tiddlers to avoid UI interactions invalidating cache
 			if(title.substring(0,3) === \"$:/\") {
 				return;
 			}
 
 			if(change && change.isDeleted) {
-				// Only rebuild if a previously-indexed title was deleted
 				if(self.tiddlerTitleInfo && self.tiddlerTitleInfo.titles && self.tiddlerTitleInfo.titles.indexOf(title) !== -1) {
 					titlesHaveChanged = true;
 				}
 				return;
 			}
 
-			// New or modified tiddler: ignore drafts
 			var tiddler = self.wiki.getTiddler(title);
 			if(tiddler && tiddler.hasField(\"draft.of\")) {
 				return;
 			}
 
-			// If we don't have cached title list, or this title wasn't indexed before, rebuild
 			if(!self.tiddlerTitleInfo || !self.tiddlerTitleInfo.titles || self.tiddlerTitleInfo.titles.indexOf(title) === -1) {
 				titlesHaveChanged = true;
 			}
