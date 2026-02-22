@@ -1,10 +1,10 @@
-title: $:/changenotes/5.4.0/#9672
+title: $:/changenotes/5.4.0/#9676
 description: Architectural optimization for Freelinks Aho-Corasick: Cache invalidation, global longest-match, and Unicode safety
 tags: $:/tags/ChangeNote
 release: 5.4.0
 change-type: bugfix
 change-category: plugin
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9084 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9397 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9672
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9084 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9397 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9676
 github-contributors: s793016
 
 Fixes and optimizations to the Freelinks plugin's Aho-Corasick implementation following #9397.
