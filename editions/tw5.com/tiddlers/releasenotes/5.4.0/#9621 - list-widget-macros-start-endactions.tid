@@ -10,3 +10,7 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#9621
 type: text/vnd.tiddlywiki
 
+* [[LinkWidget]] new Attributes and Action Variables section
+* [[list-links-draggable Macro]] new Attributes
+* [[list-tagged-draggable Macro]] new Attributes
+
