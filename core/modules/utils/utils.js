@@ -986,11 +986,6 @@ exports.makeCompareFunction = function(type,options) {
 const dateValidator = new RegExp("^(\\d{4}(-\\d{2}){0,2})?((^|T)\\d{2}:\\d{2}(:\\d{2}(\\.\\d{3})?)?(Z|([+-]\\d{2}:\\d{2}))?)?$");
 exports.parseECMAScriptDate = function(input) {
 	if(dateValidator.test(input)) {
-		// This code makes ECMAScript 2015 (ES6) behave like ES7 when parsing
-		// a date.
-		if((input.length < 11) && (input.indexOf("T") === -1)) {
-			input += "T00:00:00Z";
-		}
 		return new Date(input);
 	} else {
 		return false;

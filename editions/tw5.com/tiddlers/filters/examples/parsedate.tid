@@ -1,13 +1,13 @@
-created: 20220110203115000
-modified: 20220110203115000
+created: 20260222000000000
+modified: 20260222000000000
 tags: [[Operator Examples]] [[parsedate Operator]]
 title: parsedate Operator (Examples)
-isodate: 2022-01-01T12:15:00
+isodate: 2025-06-15T14:30:00
 type: text/vnd.tiddlywiki
 
 \define utc-datetime() [UTC]MMM the DD. YYYY 0hh:0mm UTC
 
-<<.operator-example 1 "[[2011-01-01T12:15:21]parsedate[]]">>
+<<.operator-example 1 "[[2025-12-25T12:30:45Z]parsedate[]]">>
 
 This example uses the `isodate` field of this tiddler containing "<$view field="isodate"/>":
 
@@ -22,18 +22,18 @@ eg="""<$edit-text field="isodate" type="datetime-local"/><br/><$text text={{{[ge
 
 The following examples use the predefined variable `utc-datetime` that outputs the date and time in UTC for illustration.
 
-Values that contain date and time but no time zone information are interpreted within the local timezone. This date is midnight on January the 1st, 2011 in the local timezone. Observe how it is converted to UTC.
+Values that contain date and time but no time zone information are interpreted within the local timezone. This date is midnight on March the 15th, 2025 in the local timezone. Observe how it is converted to UTC.
 
-<<.operator-example 4 "[[2011-01-01T00:00:00]parsedate[JS]format:date<utc-datetime>]">>
+<<.operator-example 4 "[[2025-03-15T00:00:00]parsedate[JS]format:date<utc-datetime>]">>
 
-Values that contain only a date are interpreted as UTC. This makes sure that the date is not changed by the conversion. If your time zone is ahead of UTC in the above example, the date will change to December the 31st, 2010. In this example, the date will be correctly represented.
+Values that contain only a date are interpreted as UTC. This makes sure that the date is not changed by the conversion. If your time zone is ahead of UTC in the above example, the date will change to March the 14th, 2025. In this example, the date will be correctly represented.
 
-<<.operator-example 5 "[[2011-01-01]parsedate[JS]format:date<utc-datetime>]">>
+<<.operator-example 5 "[[2025-03-15]parsedate[JS]format:date<utc-datetime>]">>
 
 Appending a `Z` to the Date and Time information makes sure it is always interpreted as UTC. The local time zone is ignored.
 
-<<.operator-example 6 "[[2011-01-01T00:00:00Z]parsedate[JS]format:date<utc-datetime>]">>
+<<.operator-example 6 "[[2025-03-15T00:00:00Z]parsedate[JS]format:date<utc-datetime>]">>
 
 Instead of `Z` a time zone offset can be specified. This offset will be used to interpret the date and time information. The local time zone is ignored.
 
-<<.operator-example 7 "[[2011-01-01T00:00:00+05:00]parsedate[JS]format:date<utc-datetime>]">>
+<<.operator-example 7 "[[2025-03-15T00:00:00+05:00]parsedate[JS]format:date<utc-datetime>]">>

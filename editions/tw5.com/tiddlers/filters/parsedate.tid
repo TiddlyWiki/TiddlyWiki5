@@ -1,6 +1,6 @@
 caption: parsedate
-created: 20220110203115000
-modified: 20220110203115000
+created: 20260222000000000
+modified: 20260222000000000
 op-input: a [[selection of titles|Title Selection]]
 op-output: the date stored within the input string converted to the default [[date format|DateFormat]] <<.place B>>
 op-parameter: source format
