@@ -26,3 +26,5 @@ This prefix has an optional [[shortcut syntax|Shortcut Filter Run Prefix]] symbo
 ```
 
 The `:let` filter run prefix always clears the current result list.
+
+[[Let Filter Run Prefix (Examples)]]
