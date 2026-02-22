@@ -3,9 +3,9 @@ change-type: feature
 description: Add parsedate filter operator for parsing ECMAScript date format
 github-contributors: FlashSystems
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9484
-release: 5.4.0
+release: 5.5.0
 tags: $:/tags/ChangeNote
-title: $:/changenotes/5.4.0/#9484
+title: $:/changenotes/5.5.0/#9484
 type: text/vnd.tiddlywiki
 
 Added the `parsedate` filter operator for converting date strings in ECMAScript format into TiddlyWiki's default date format.
