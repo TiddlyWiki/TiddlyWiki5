@@ -390,7 +390,7 @@ Widget.prototype.computeAttributes = function(options) {
 		if($tw.utils.isArray(value)) {
 			multiValue = value;
 			newMultiValuedAttributes[name] = multiValue;
-			value = value[0] || "";
+			value = value[0];
 		}
 		var changed = (self.attributes[name] !== value);
 		if(!changed && multiValue && self.multiValuedAttributes) {

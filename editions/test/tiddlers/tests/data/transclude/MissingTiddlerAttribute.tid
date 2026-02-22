@@ -1,0 +1,39 @@
+title: Transclude/MissingTiddlerAttribute
+description: Missing Tiddler Attribute
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure testproc()
+This is ''wikitext''
+\end
+
+
+<$tiddler tiddler="Data">
+<$transclude $index="testindex"/>
+-
+{{##testindex}}
+-
+<$transclude $field="custom"/>
+-
+{{!!custom}}
+</$tiddler>
++
+title: Data
+type: application/x-tiddler-dictionary
+custom: This is ''wikitext''
+
+testindex: This is ''wikitext''
++
+title: ExpectedResult
+
+<p>
+This is <strong>wikitext</strong>
+-
+This is <strong>wikitext</strong>
+-
+This is <strong>wikitext</strong>
+-
+This is <strong>wikitext</strong>
+</p>

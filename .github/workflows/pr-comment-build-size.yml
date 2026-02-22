@@ -25,7 +25,7 @@ jobs:
 
     steps:
     - name: Build and check size
-      uses: TiddlyWiki/cerebrus@v6
+      uses: TiddlyWiki/cerebrus@v7
       with:
         pr_number: ${{ inputs.pr_number }}
         repo: ${{ github.repository }}
