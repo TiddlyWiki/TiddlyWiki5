@@ -53,7 +53,6 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 	this.failure = new WeakMap();
 	this.failure.set(root, root);
 
-	// Init depth-1 nodes
 	for(var ch in root) {
 		if(ch === "$") continue;
 		if(root[ch] && typeof root[ch] === "object") {
@@ -87,7 +86,6 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 			var nextFail = (fail[edge] && fail[edge] !== child) ? fail[edge] : root;
 			self.failure.set(child, nextFail);
 
-			// Merge outputs (classic AC optimization)
 			if(nextFail.$) {
 				if(!child.$) child.$ = [];
 				child.$ = child.$.concat(nextFail.$);
@@ -108,11 +106,9 @@ AhoCorasick.prototype.search = function(text, useWordBoundary, ignoreCase) {
 	var root = this.trie;
 	var textLength = text.length;
 
-	// Safety cap for pathological cases
 	var maxMatches = Math.min(textLength * 2, 10000);
 
 	for(var i = 0; i < textLength; i++) {
-		// Per-character case conversion avoids Unicode index desync (e.g. İ)
 		var ch = ignoreCase ? text[i].toLowerCase() : text[i];
 
 		while(node !== root && !node[ch]) {
@@ -150,7 +146,6 @@ AhoCorasick.prototype.search = function(text, useWordBoundary, ignoreCase) {
 AhoCorasick.prototype.isWordBoundaryMatch = function(text, start, end) {
 	var matchedText = text.substring(start, end);
 
-	// CJK (and similar) — no word boundary concept; always allow
 	if(/[\u3400-\u9FFF\uF900-\uFAFF]/.test(matchedText)) {
 		return true;
 	}
