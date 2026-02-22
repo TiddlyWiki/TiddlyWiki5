@@ -237,7 +237,7 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 				return;
 			}
 
-			if(title.substring(0,3) === \"$:/\") {
+			if(title.substring(0,3) === "$:/") {
 				return;
 			}
 
@@ -249,7 +249,7 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 			}
 
 			var tiddler = self.wiki.getTiddler(title);
-			if(tiddler && tiddler.hasField(\"draft.of\")) {
+			if(tiddler && tiddler.hasField("draft.of")) {
 				return;
 			}
 
@@ -263,8 +263,8 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 
 	if(changedAttributes.text || titlesHaveChanged || wordBoundaryChanged) {
 		if(titlesHaveChanged) {
-			self.wiki.clearCache(\"tiddler-title-info-insensitive\");
-			self.wiki.clearCache(\"tiddler-title-info-sensitive\");
+			self.wiki.clearCache("tiddler-title-info-insensitive");
+			self.wiki.clearCache("tiddler-title-info-sensitive");
 		}
 		this.refreshSelf();
 		return true;
