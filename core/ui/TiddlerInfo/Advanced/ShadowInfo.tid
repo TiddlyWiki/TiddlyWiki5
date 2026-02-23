@@ -127,21 +127,26 @@ $(diffs.output)$
 
 \function format.hunk()
 	[diff.hunk-parts[]nth[1]]=>hunk-header
-	[diff.hunk-parts[]nth[2]]=>hunk-content
-	[<hunk-content>splitregexp[\n]]:map[format.line[]]+[join[]]=>formatted-hunk-content
+	[diff.hunk-parts[]nth[2]]=>raw-hunk-content
 	[<patches>function[diff.hunk-boundary]nth<index>diff.hunk-parts[]nth[1]]=>previous-hunk-header
 	[<hunk-header>function[destination.start]]=>current-hunk-header-start
 	[<previous-hunk-header>function[destination.start]]=>previous-hunk-header-start
 	[<previous-hunk-header>function[destination.length]]=>previous-hunk-header-length
 	[<previous-hunk-header-start>add<previous-hunk-header-length>]=>previous-hunk-header-end
-	[<current-hunk-header-start>subtract<previous-hunk-header-end>]=>gap-hunk-length
+	[<index>match[0]then[1]else<previous-hunk-header-end>]=>safe-previous-hunk-end
+	[<current-hunk-header-start>subtract<safe-previous-hunk-end>max[0]]=>gap-hunk-length
+	[<current-hunk-header-start>subtract<safe-previous-hunk-end>compare:number:lt[0]abs[]else[0]]=>overlap
+	[<raw-hunk-content>split[]butfirst[]join[]]=>clean-hunk-content
+	[<clean-hunk-content>split[]first[]]=>current-hunk-prefix
+	[<clean-hunk-content>split[]butfirst[]butfirst<overlap>join[]addprefix<current-hunk-prefix>]=>current-hunk-safe-content
+	[<current-hunk-safe-content>splitregexp[\n]]:map[format.line[]]+[join[]]=>formatted-hunk-content
 	[<current-hunk-header-start>subtract<gap-hunk-length>compare:number:gt[0]else[1]]=>gap-hunk-start
 	[<gap-hunk-start>add[-1]compare:number:gt[0]else[0]]=>gap-hunk-start-index
 	[<gap-hunk-length>compare:number:gt[0]else[0]]=>gap-hunk-length-index
-	[<get.destination>split[]butfirst<gap-hunk-start-index>limit<gap-hunk-length-index>join[]addprefix[ ]]=>gap-hunk-content
+	[<get.destination>split[]butfirst<gap-hunk-start-index>limit<gap-hunk-length-index>join[]addprefix[ ]]:filter[<gap-hunk-length>compare:number:gt[0]]=>gap-hunk-content
 	[<gap-hunk-content>search-replace:gim[
-	],[%0A]]=>gap-hunk-formatted
-	[<gap-hunk-formatted>split[%0A]splitregexp[\n]count[]]=>gap-hunk-lines-count
+],[%0A]]=>gap-hunk-formatted
+	[<gap-hunk-length>match[0]then[0]] :else[<gap-hunk-formatted>split[%0A]splitregexp[\n]count[]]=>gap-hunk-lines-count
 	[<gap-hunk-lines-count>subtract[2]]=>count-expand-unchanged-lines
 	[<gap-hunk-formatted>split[%0A]splitregexp[\n]first[]addsuffix[%0A]format.line[]]=>gap-expandable-top
 	="<details style='background-color: rgba(0,0,0,0.05);'><summary class='tc-btn-invisible tc-muted' style='text-align: center; list-style: none;'>... Expand $(count-expand-unchanged-lines)$ unchanged lines ...</summary><pre style='margin-block:0;white-space: pre-wrap;'>"
@@ -150,7 +155,6 @@ $(diffs.output)$
 	[<gap-hunk-formatted>split[%0A]splitregexp[\n]last[]addprefix[ ]format.line[]]=>gap-expandable-bottom
 	=[<gap-expandable-top>]=[<gap-expandable-middle>]=[<gap-expandable-bottom>]+[join[]]=>gap-expandable
 	[<gap-hunk-formatted>format.line[]]=>gap-normal
-
 	[<gap-hunk-lines-count>add[-1]compare:number:gt[2]then<gap-expandable>else<gap-normal>]
 	:filter[<gap-hunk-content>!is[blank]]
 	=[<formatted-hunk-content>]
