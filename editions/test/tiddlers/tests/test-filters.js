@@ -1097,7 +1097,7 @@ describe("Filter tests", function() {
 			expect(wiki.filterTiddlers("[[2015-03-25]parsedate[INVALID]]")).toEqual([$tw.language.getString("Error/ParseDateFilterOperator")]);
 			// Validate that a date in the local timezone is correctly parsed and represented as UTC
 			// This is tricky because we can not set the used timezone.
-			expect(wiki.filterTiddlers("[[2015-03-25T15:40]parsedate[JS]]").join(" ").substr(8, 2)).toBe(("0" + (new Date("2015-03-15T15:40:32")).getUTCHours()).slice(-2));
+			expect(wiki.filterTiddlers("[[2015-03-25T15:40]parsedate[JS]]").join(" ").substr(8, 2)).toBe(("0" + (new Date("2015-03-25T15:40:32")).getUTCHours()).slice(-2));
 			expect(wiki.filterTiddlers("[[2015]] [[2020]] +[parsedate[JS]]").join(" ")).toBe("20150101000000000 20200101000000000");
 			expect(wiki.filterTiddlers("[[25th Dec, 2025 12:30:45 GMT]parsedate[AUTO]]").join(" ")).toBe("20251225123045000");
 			expect(wiki.filterTiddlers("[[1603188514443]parsedate[UNIXTIME]]").join(" ")).toBe("20201020100834443");

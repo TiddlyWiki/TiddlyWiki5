@@ -56,4 +56,4 @@ Use suffix `NUMBER` (or `UNIXTIME`) to return unix timestamp milliseconds.
 
 Use the second parameter for custom [[output formats|DateFormat]].
 
-<<.operator-example 11 "[[2025-12-25T12:30:45Z]parsedate[JS],[YYYY0MM0DD0hh0mm0ss]">>
+<<.operator-example 11 "[[2025-12-25T12:30:45Z]parsedate[JS],[YYYY0MM0DD0hh0mm0ss]]">>

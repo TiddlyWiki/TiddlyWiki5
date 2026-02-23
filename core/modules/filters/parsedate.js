@@ -35,12 +35,17 @@ const parseInputDate = (title, inputFormat) => {
 			if(INTEGER_INPUT_REGEX.test(sanitizedTitle)) {
 				return new Date(Number(sanitizedTitle));
 			}
-			return new Date(sanitizedTitle);
+			return null;
 		case "AUTO": {
 			// Try ECMAScript/ISO date format first
 			const parsedDate = $tw.utils.parseECMAScriptDate(title);
 			if(isValidDate(parsedDate)) {
 				return parsedDate;
+			}
+			// Next, try native TiddlyWiki date parsing (eg, 17-digit TW timestamps)
+			const twParsedDate = $tw.utils.parseDate(title);
+			if(isValidDate(twParsedDate)) {
+				return twParsedDate;
 			}
 			// Sanitize loose date text (strips ordinal suffixes and commas),
 			// then treat pure-integer result as unix timestamp, otherwise

@@ -18,7 +18,7 @@ The optional parameter <<.place B>> specifies the input date format. If omitted,
 |^`JS` |The input string is interpreted as a date in [[ECMAScript date format|https://tc39.es/ecma262/#sec-date-time-string-format]]. This format is a subset of ISO 8601. It is used for example by the HTML5 date/time input fields. Expanded years are ''not supported''.|
 |^`TW` |The input string is interpreted as a native TiddlyWiki date string (17-digit UTC format).|
 |^`UNIXTIME` or `NUMBER` |The input string is interpreted as a signed integer unix timestamp in milliseconds.|
-|^`AUTO` |Automatically tries `JS`, then native TiddlyWiki date parsing, then loose date parsing with ordinal suffix and comma cleanup (for example `1st`, `2nd`, `3rd`, `4th`, and embedded commas).|
+|^`AUTO` |Automatically first tries `JS`. If that fails and the input is a signed integer, it is interpreted as a `UNIXTIME`/`NUMBER` timestamp. Finally, it falls back to loose date parsing with ordinal suffix and comma cleanup (for example `1st`, `2nd`, `3rd`, `4th`, and embedded commas).|
 
 The optional second parameter <<.place C>> specifies the output format. If omitted, output defaults to the standard 17-digit UTC TiddlyWiki date format.
 
