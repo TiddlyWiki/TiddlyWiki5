@@ -44,12 +44,12 @@ title: $:/core/ui/TiddlerInfo/Advanced/ShadowInfo
 
 \function diff.hunk-boundary()
 	"(?=^@@ -\d+(?:,\d+) \+\d+(?:,\d+) @@)"=>regex
-	[is[]splitregexp:m<regex>]
+	[splitregexp:m<regex>]
 \end
 
 \function diff.hunk-parts()
 	"(^@@ -\d+(?:,\d+)? \+\d+(?:,\d+)? @@)"=>regex
-	[is[]splitregexp:m<regex>!is[blank]]
+	[splitregexp:m<regex>!is[blank]]
 \end
 
 \function format.line()
