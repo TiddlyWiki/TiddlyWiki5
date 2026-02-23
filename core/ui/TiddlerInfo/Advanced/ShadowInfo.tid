@@ -116,9 +116,10 @@ title: $:/core/ui/TiddlerInfo/Advanced/ShadowInfo
 	[<get.destination>length[]add[1]]=>end-length
 	"@@ -$(end-length)$,0 +$(end-length)$,0 @@"+[substitute[]]=>end-hunk
 	[<get.source>makepatches<get.destination>]=>patches
+	[<patches>function[diff.hunk-boundary]][<end-hunk>]=>all-hunks
+	[(all-hunks)function[diff.hunk-parts]nth[1]]=>all-headers
 
-	[<patches>function[diff.hunk-boundary]][<end-hunk>] :map[function[format.hunk]]
-	+[join[]]
+	[(all-hunks)] :map[function[format.hunk]]+[join[]]
 \end
 
 \define diffs.view()
@@ -128,7 +129,7 @@ $(diffs.output)$
 \function format.hunk()
 	[diff.hunk-parts[]nth[1]]=>hunk-header
 	[diff.hunk-parts[]nth[2]]=>raw-hunk-content
-	[<patches>function[diff.hunk-boundary]nth<index>diff.hunk-parts[]nth[1]]=>previous-hunk-header
+	[(all-headers)nth<index>]=>previous-hunk-header
 	[<hunk-header>function[destination.start]]=>current-hunk-header-start
 	[<previous-hunk-header>function[destination.start]]=>previous-hunk-header-start
 	[<previous-hunk-header>function[destination.length]]=>previous-hunk-header-length
