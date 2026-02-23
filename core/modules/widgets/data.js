@@ -67,7 +67,7 @@ DataWidget.prototype.computeDataTiddlerValues = function() {
 	var item = Object.create(null);
 	$tw.utils.each(this.attributes,function(value,name) {
 		if(name.charAt(0) !== "$") {
-			item[name] = value;	
+			item[name] = value;
 		}
 	});
 	// Deal with $tiddler, $filter or $compound-tiddler attributes

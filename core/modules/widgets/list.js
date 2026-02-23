@@ -496,7 +496,9 @@ var ListTemplateWidget = function(parseTreeNode,options) {
 };
 ListTemplateWidget.prototype = new Widget();
 ListTemplateWidget.prototype.render = function() {};
-ListTemplateWidget.prototype.refresh = function() { return false; };
+ListTemplateWidget.prototype.refresh = function() {
+	return false;
+};
 
 exports["list-template"] = ListTemplateWidget;
 
@@ -506,7 +508,9 @@ var ListEmptyWidget = function(parseTreeNode,options) {
 };
 ListEmptyWidget.prototype = new Widget();
 ListEmptyWidget.prototype.render = function() {};
-ListEmptyWidget.prototype.refresh = function() { return false; };
+ListEmptyWidget.prototype.refresh = function() {
+	return false;
+};
 
 exports["list-empty"] = ListEmptyWidget;
 
@@ -516,6 +520,8 @@ var ListJoinWidget = function(parseTreeNode,options) {
 };
 ListJoinWidget.prototype = new Widget();
 ListJoinWidget.prototype.render = function() {};
-ListJoinWidget.prototype.refresh = function() { return false; };
+ListJoinWidget.prototype.refresh = function() {
+	return false;
+};
 
 exports["list-join"] = ListJoinWidget;

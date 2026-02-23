@@ -89,5 +89,4 @@ TagSubIndexer.prototype.lookup = function(tag) {
 	}
 };
 
-
 exports.TagIndexer = TagIndexer;

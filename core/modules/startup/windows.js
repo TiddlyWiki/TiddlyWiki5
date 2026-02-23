@@ -42,8 +42,7 @@ exports.startup = function() {
 		try {
 			srcWindow = window.open("","external-" + windowID,"scrollbars,width=" + width + ",height=" + height + (top ? ",top=" + top : "" ) + (left ? ",left=" + left : "" )),
 			srcDocument = srcWindow.document;
-		}
-		catch(e) {
+		} catch(e) {
 			return;
 		}
 		$tw.windows[windowID] = srcWindow;

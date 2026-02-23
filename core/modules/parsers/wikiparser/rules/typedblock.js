@@ -81,7 +81,7 @@ exports.parse = function() {
 				tag: "pre",
 				children: [{
 					type: "text",
-					text: renderResult,
+					text: renderResult
 				}]
 			}],
 			parseType: parseType,

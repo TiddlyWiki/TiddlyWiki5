@@ -95,7 +95,7 @@ RadioWidget.prototype.handleChangeEvent = function(event) {
 	}
 	// Trigger actions
 	if(this.radioActions) {
-		this.invokeActionString(this.radioActions,this,event,{"actionValue": this.radioValue});
+		this.invokeActionString(this.radioActions,this,event,{actionValue: this.radioValue});
 	}
 };
 

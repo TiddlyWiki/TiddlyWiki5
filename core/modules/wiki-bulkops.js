@@ -77,7 +77,7 @@ function relinkTiddler(fromTitle,toTitle,options) {
 			}
 		});
 	}
-};
+}
 
 exports.renameTiddler = renameTiddler;
 exports.relinkTiddler = relinkTiddler;

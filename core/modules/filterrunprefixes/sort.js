@@ -23,7 +23,7 @@ exports.sort = function(operationSubFunction,options) {
 				compareFn;
 			results.each(function(title) {
 				var key = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
-					"currentTiddler": "" + title,
+					currentTiddler: "" + title,
 					"..currentTiddler": widget.getVariable("currentTiddler",{defaultValue:""})
 				}));
 				sortKeys.push(key[0] || "");

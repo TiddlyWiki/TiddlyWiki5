@@ -12,7 +12,6 @@ Implements the Dropbox URL converter macro.
 
 \*/
 
-
 "use strict";
 
 exports.name = "dropbox-url";
@@ -25,4 +24,3 @@ exports.run = function(url) {
 	url = url.replace("www.dropbox.com","dl.dropboxusercontent.com");
 	return "`" + url + "` <small>([[open|" + url + "]])</small>";
 };
-

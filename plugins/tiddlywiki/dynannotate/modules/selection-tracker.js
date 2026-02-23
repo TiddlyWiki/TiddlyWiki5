@@ -92,8 +92,8 @@ SelectionTracker.prototype.handleSelectionChange = function() {
 		if(anchor && focus && anchor.container.parentNode === focus.container.parentNode) {
 			// Make sure that the anchor is before the focus
 			if((anchor.childNodeIndex > focus.childNodeIndex) || (anchor.container === focus.container && anchor.beforeText.length > focus.beforeText.length)) {
-				var temp = anchor; 
-				anchor = focus; 
+				var temp = anchor;
+				anchor = focus;
 				focus = temp;
 			}
 			var chunks = [];
@@ -122,7 +122,7 @@ SelectionTracker.prototype.handleSelectionChange = function() {
 							text: domNode.textContent
 						});
 						domNode = domNode.nextElementSibling;
-					}					
+					}
 				}
 				chunks.push({
 					id: getIdOfContainer(focus.container),

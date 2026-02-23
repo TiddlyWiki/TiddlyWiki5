@@ -49,7 +49,7 @@ Logger.prototype.log = function(/* args */) {
 			logMessage[logMessage.length-1] += $tw.utils.terminalColour();
 			return Function.apply.call(console.log, console, logMessage);
 		}
-	} 
+	}
 };
 
 /*

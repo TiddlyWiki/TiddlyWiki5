@@ -38,7 +38,7 @@ exports.serialize = function(tree,serialize) {
 	}
 	function handleTiddler(tiddlerNode) {
 		// Check for tiddler attribute
-		if(tree.attributes.tiddler.value) { 
+		if(tree.attributes.tiddler.value) {
 			result += tree.attributes.tiddler.value;
 		}
 		$tw.utils.each(tree.children, function(child) {

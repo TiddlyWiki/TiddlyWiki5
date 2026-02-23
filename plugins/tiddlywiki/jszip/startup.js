@@ -71,7 +71,7 @@ function loadZipTiddler(title) {
 				console.log("JSZip error: " + e);
 			}
 		}
-		return zip;		
+		return zip;
 	});
 }
 

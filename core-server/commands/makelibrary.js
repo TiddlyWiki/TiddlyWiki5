@@ -31,7 +31,7 @@ Command.prototype.execute = function() {
 		title: upgradeLibraryTitle,
 		type: "application/json",
 		"plugin-type": "library",
-		"text": JSON.stringify({tiddlers: tiddlers})
+		text: JSON.stringify({tiddlers: tiddlers})
 	};
 	wiki.addTiddler(new $tw.Tiddler(pluginFields));
 	return null;

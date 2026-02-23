@@ -68,15 +68,15 @@ dom-to-image initialisation
 								$tw.wiki.addTiddler(new $tw.Tiddler({
 									title: params["save-title"],
 									type: "image/svg+xml",
-									"text": decodeURIComponent(dataUrl.substring(commaIndex + 1))
-								}));	
+									text: decodeURIComponent(dataUrl.substring(commaIndex + 1))
+								}));
 							} else {
 								var parts = dataUrl.split(";base64,");
 								$tw.wiki.addTiddler(new $tw.Tiddler({
 									title: params["save-title"],
 									type: parts[0].split(":")[1],
-									"text": parts[1]
-								}));	
+									text: parts[1]
+								}));
 							}
 						}
 						self.wiki.invokeActionString(oncompletion,self,variables,{parentWidget: $tw.rootWidget});
@@ -89,4 +89,3 @@ dom-to-image initialisation
 	};
 
 })();
-	

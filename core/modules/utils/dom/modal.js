@@ -80,22 +80,22 @@ Modal.prototype.display = function(title,options) {
 	modalFooter.appendChild(modalFooterButtons);
 	modalWrapper.appendChild(modalFooter);
 	var navigatorTree = {
-		"type": "navigator",
-		"attributes": {
-			"story": {
-				"name": "story",
-				"type": "string",
-				"value": variables["tv-story-list"]
+		type: "navigator",
+		attributes: {
+			story: {
+				name: "story",
+				type: "string",
+				value: variables["tv-story-list"]
 			},
-			"history": {
-				"name": "history",
-				"type": "string",
-				"value": variables["tv-history-list"]
+			history: {
+				name: "history",
+				type: "string",
+				value: variables["tv-history-list"]
 			}
 		},
-		"tag": "$navigator",
-		"isBlock": true,
-		"children": []
+		tag: "$navigator",
+		isBlock: true,
+		children: []
 	};
 	var navigatorWidgetNode = new navigator.navigator(navigatorTree, {
 		wiki: this.wiki,

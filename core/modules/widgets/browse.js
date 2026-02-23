@@ -108,7 +108,7 @@ BrowseWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
-		return true;	
+		return true;
 	}
 	return false;
 };

@@ -91,7 +91,7 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 				}
 				parseTreeNode = parseTreeNode.children && parseTreeNode.children[0];
 			}
-		} 
+		}
 	});
 
 	if(widgetPointer != this) {

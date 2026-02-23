@@ -60,7 +60,7 @@ GeomapWidget.prototype.renderMap = function() {
 	var self = this;
 	// Create the map
 	var options = {
-		
+
 	};
 	if(this.geomapMaxZoom) {
 		options.maxZoom = $tw.utils.parseInt(this.geomapMaxZoom);
@@ -125,7 +125,7 @@ GeomapWidget.prototype.refreshMap = function() {
 				layerInfo.name = layerInfo.name || tiddler.fields["caption"];
 				layerInfo.tilesUrl = layerInfo.tilesUrl || tiddler.fields["tiles-url"];
 				layerInfo.maxZoom = layerInfo.maxZoom || tiddler.fields["max-zoom"];
-				layerInfo.attribution = layerInfo.attribution || tiddler.fields.text;	
+				layerInfo.attribution = layerInfo.attribution || tiddler.fields.text;
 			}
 		}
 		var baseLayer = $tw.Leaflet.tileLayer(layerInfo.tilesUrl, {
@@ -144,7 +144,7 @@ GeomapWidget.prototype.refreshMap = function() {
 			title: widget.getAttribute("title"),
 			tilesUrl: widget.getAttribute("tiles-url"),
 			maxZoom: widget.getAttribute("max-zoom"),
-			attribution: widget.getAttribute("attribution"),
+			attribution: widget.getAttribute("attribution")
 		});
 	});
 	// Create the default base map if none was specified
@@ -180,13 +180,13 @@ GeomapWidget.prototype.refreshMap = function() {
 				alt = $tw.utils.parseNumber(widget.getAttribute("alt","0")),
 				properties = widget.getAttribute("properties");
 			geoJson = {
-				"type": "FeatureCollection",
-				"features": [
+				type: "FeatureCollection",
+				features: [
 					{
-						"type": "Feature",
-						"geometry": {
-							"type": "Point",
-							"coordinates": [long,lat,alt]
+						type: "Feature",
+						geometry: {
+							type: "Point",
+							coordinates: [long,lat,alt]
 						}
 					}
 				]

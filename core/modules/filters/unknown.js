@@ -22,7 +22,7 @@ exports["[unknown]"] = function(source,operator,options) {
 		var params = [];
 		$tw.utils.each(operator.multiValueOperands,function(paramList) {
 			params.push({value: paramList[0] || "",multiValue: paramList});
-		});	
+		});
 		var variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(operator.operator,{params: params, source: source});
 		if(variableInfo && variableInfo.srcVariable) {
 			var list = variableInfo.resultList ? variableInfo.resultList : [variableInfo.text];

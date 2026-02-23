@@ -202,7 +202,7 @@ HttpClientRequest.prototype.send = function(callback) {
 					resultVariables.data = $tw.utils.base64Encode(binary,true);
 				}
 				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(requestTrackerTitle),{
-					status: completionCode,
+					status: completionCode
 				}));
 				self.wiki.invokeActionString(self.completionActions,undefined,$tw.utils.extend({},self.variables,resultVariables),{parentWidget: $tw.rootWidget});
 				callback(hasSucceeded ? null : xhr.statusText);

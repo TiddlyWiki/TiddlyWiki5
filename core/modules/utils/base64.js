@@ -19,12 +19,12 @@ exports.atob = (b64) => window.atob(b64);
 function base64ToBytes(base64) {
 	const binString = exports.atob(base64);
 	return Uint8Array.from(binString, (m) => m.codePointAt(0));
-};
+}
 
 function bytesToBase64(bytes) {
 	const binString = Array.from(bytes, (byte) => String.fromCodePoint(byte)).join("");
 	return exports.btoa(binString);
-};
+}
 
 exports.base64EncodeUtf8 = (str) => bytesToBase64(new TextEncoder().encode(str));
 

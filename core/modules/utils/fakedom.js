@@ -109,7 +109,6 @@ var TW_Element = function(tag, namespace) {
 	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
 };
 
-
 Object.setPrototypeOf(TW_Element.prototype,TW_Node.prototype);
 
 Object.defineProperty(TW_Element.prototype, "nodeType", {

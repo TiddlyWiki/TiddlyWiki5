@@ -55,11 +55,15 @@ function isValidDelim(state, pos) {
 function math_inline(state, silent) {
 	var start, match, token, res, pos;
 
-	if(state.src[state.pos] !== "$") { return false; }
+	if(state.src[state.pos] !== "$") {
+		return false;
+	}
 
 	res = isValidDelim(state, state.pos);
 	if(!res.can_open) {
-		if(!silent) { state.pending += "$"; }
+		if(!silent) {
+			state.pending += "$";
+		}
 		state.pos += 1;
 		return true;
 	}
@@ -74,23 +78,31 @@ function math_inline(state, silent) {
 		// Found potential $, look for escapes, pos will point to
 		// first non escape when complete
 		pos = match - 1;
-		while(state.src[pos] === "\\") { pos -= 1; }
+		while(state.src[pos] === "\\") {
+			pos -= 1;
+		}
 
 		// Even number of escapes, potential closing delimiter found
-		if( ((match - pos) % 2) == 1 ) { break; }
+		if( ((match - pos) % 2) == 1 ) {
+			break;
+		}
 		match += 1;
 	}
 
 	// No closing delimter found.  Consume $ and continue.
 	if(match === -1) {
-		if(!silent) { state.pending += "$"; }
+		if(!silent) {
+			state.pending += "$";
+		}
 		state.pos = start;
 		return true;
 	}
 
 	// Check if we have empty content, ie: $$.  Do not parse.
 	if(match - start === 0) {
-		if(!silent) { state.pending += "$$"; }
+		if(!silent) {
+			state.pending += "$$";
+		}
 		state.pos = start + 1;
 		return true;
 	}
@@ -98,7 +110,9 @@ function math_inline(state, silent) {
 	// Check for valid closing delimiter
 	res = isValidDelim(state, match);
 	if(!res.can_close) {
-		if(!silent) { state.pending += "$"; }
+		if(!silent) {
+			state.pending += "$";
+		}
 		state.pos = start;
 		return true;
 	}
@@ -118,7 +132,9 @@ function math_inline(state, silent) {
 function math_inline_block(state, silent) {
 	var start, match, token, pos;
 
-	if(state.src.slice(state.pos, state.pos+2) !== "$$") { return false; }
+	if(state.src.slice(state.pos, state.pos+2) !== "$$") {
+		return false;
+	}
 
 	// First check for and bypass all properly escaped delimieters
 	// This loop will assume that the first leading backtick can not
@@ -130,23 +146,31 @@ function math_inline_block(state, silent) {
 		// Found potential $$, look for escapes, pos will point to
 		// first non escape when complete
 		pos = match - 1;
-		while(state.src[pos] === "\\") { pos -= 1; }
+		while(state.src[pos] === "\\") {
+			pos -= 1;
+		}
 
 		// Even number of escapes, potential closing delimiter found
-		if( ((match - pos) % 2) == 1 ) { break; }
+		if( ((match - pos) % 2) == 1 ) {
+			break;
+		}
 		match += 2;
 	}
 
 	// No closing delimter found.  Consume $$ and continue.
 	if(match === -1) {
-		if(!silent) { state.pending += "$$"; }
+		if(!silent) {
+			state.pending += "$$";
+		}
 		state.pos = start;
 		return true;
 	}
 
 	// Check if we have empty content, ie: $$$$.  Do not parse.
 	if(match - start === 0) {
-		if(!silent) { state.pending += "$$$$"; }
+		if(!silent) {
+			state.pending += "$$$$";
+		}
 		state.pos = start + 2;
 		return true;
 	}

@@ -36,7 +36,7 @@ exports.startup = function() {
 		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
 			var oldTiddler = $tw.wiki.getTiddler(tiddler.fields.title);
 			if(oldTiddler) {
-				saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+				saveTiddlerFile(oldTiddler,{reason: "overwritten"});
 			}
 			saveTiddlerFile(tiddler,{reason: "saved"});
 		}
@@ -45,7 +45,7 @@ exports.startup = function() {
 	$tw.hooks.addHook("th-renaming-tiddler",function(newTiddler,oldTiddler) {
 		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
 			if(oldTiddler) {
-				saveTiddlerFile(oldTiddler,{reason: "deleted"});			
+				saveTiddlerFile(oldTiddler,{reason: "deleted"});
 			}
 			saveTiddlerFile(newTiddler,{reason: "renamed"});
 		}
@@ -54,7 +54,7 @@ exports.startup = function() {
 	$tw.hooks.addHook("th-relinking-tiddler",function(newTiddler,oldTiddler) {
 		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
 			if(oldTiddler) {
-				saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+				saveTiddlerFile(oldTiddler,{reason: "overwritten"});
 			}
 			saveTiddlerFile(newTiddler,{reason: "relinked"});
 		}
@@ -64,7 +64,7 @@ exports.startup = function() {
 		if($tw.wiki.checkTiddlerText(ENABLE_TIDDLER_TITLE,"yes")) {
 			var oldTiddler = $tw.wiki.getTiddler(tiddler.fields.title);
 			if(oldTiddler) {
-				saveTiddlerFile(oldTiddler,{reason: "overwritten"});			
+				saveTiddlerFile(oldTiddler,{reason: "overwritten"});
 			}
 			saveTiddlerFile(tiddler,{reason: "imported"});
 		}

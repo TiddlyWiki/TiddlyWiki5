@@ -53,7 +53,7 @@ function LegacySelectionTracker(wiki,options) {
 							floating: true,
 							title: self.selectionPopupTitle,
 							wiki: self.wiki
-						});						
+						});
 					}
 					// Write the selection text to the specified tiddler
 					if(self.selectionSaveTitle) {

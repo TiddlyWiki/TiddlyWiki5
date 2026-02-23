@@ -125,7 +125,7 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 				fnTransform: function(text) {
 					return "<$link to=\"" + title + "\">" +
 						"#" + $tw.utils.htmlEncode(hashtag.text) +
-						"</$link>";	
+						"</$link>";
 				}
 			});
 		});
@@ -238,7 +238,7 @@ TwitterArchivistSourceBrowser.prototype.processFiles = async function(dirPath,en
 			contents: encoding === "base64" ? arrayBufferToBase64(await contents.arrayBuffer()) : await contents.text()
 		});
 	});
-	
+
 	// for await (const [filename, fileHandle] of dirHandle.entries()) {
 	// 	const contents = await fileHandle.getFile();
 	// 	callback({
@@ -320,14 +320,13 @@ function arrayBufferToBase64(arrayBuffer) {
 	return base64;
 }
 
-
 async function AsyncIteratorForEach(iter, callback) {
 
 	// Start the iteration
 	try {
 		while(true) {
 			// Await the next result object
-			const { value, done } = await iter.next();
+			const {value, done} = await iter.next();
 			if(done) break;
 			await callback(value);
 		}
@@ -338,7 +337,6 @@ async function AsyncIteratorForEach(iter, callback) {
 		}
 	}
 }
-
 
 exports.TwitterArchivist = TwitterArchivist;
 exports.TwitterArchivistSourceNodeJs = TwitterArchivistSourceNodeJs;

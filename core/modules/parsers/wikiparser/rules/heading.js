@@ -37,7 +37,7 @@ exports.parse = function() {
 		type: "element",
 		tag: "h" + headingLevel,
 		attributes: {
-			"class": {type: "string", value: classes.join(" "), start: classStart, end: classEnd}
+			class: {type: "string", value: classes.join(" "), start: classStart, end: classEnd}
 		},
 		children: tree
 	}];

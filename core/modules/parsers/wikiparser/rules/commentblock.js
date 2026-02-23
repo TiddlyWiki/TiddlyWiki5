@@ -43,7 +43,6 @@ exports.findNextMatch = function(startPos) {
 	return undefined;
 };
 
-
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.endMatchRegExp.lastIndex;

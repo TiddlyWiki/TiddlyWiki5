@@ -44,7 +44,7 @@ WikifyWidget.prototype.execute = function() {
 	this.wikifyParser = this.wiki.parseText(this.wikifyType,this.wikifyText,{
 		parseAsInline: this.wikifyMode === "inline"
 	});
-	// Create the widget tree 
+	// Create the widget tree
 	this.wikifyWidgetNode = this.wiki.makeWidget(this.wikifyParser,{
 		document: $tw.fakeDocument,
 		parentWidget: this

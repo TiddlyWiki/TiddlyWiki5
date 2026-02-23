@@ -102,11 +102,11 @@ exports.parse = function() {
 							tag: listInfo.itemTag,
 							children: [],
 							start: start,
-							end: this.parser.pos,
+							end: this.parser.pos
 						}
 					],
 					start: start,
-					end: this.parser.pos,
+					end: this.parser.pos
 				};
 				// Link this list element into the last child item of the parent list item
 				if(t) {
@@ -121,7 +121,7 @@ exports.parse = function() {
 					tag: listInfo.itemTag,
 					children: [],
 					start: start,
-					end: this.parser.pos,
+					end: this.parser.pos
 				});
 			}
 		}

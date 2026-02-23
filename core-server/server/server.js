@@ -147,7 +147,7 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 		}
 	} else {
 		// RFC 7231, 6.1. Overview of Status Codes:
-		// Browser clients may cache 200, 203, 204, 206, 300, 301, 
+		// Browser clients may cache 200, 203, 204, 206, 300, 301,
 		// 404, 405, 410, 414, and 501 unless given explicit cache controls
 		headers["Cache-Control"] = headers["Cache-Control"] || "no-store";
 	}
@@ -185,7 +185,7 @@ Server.prototype.defaultVariables = {
 	"system-tiddler-render-type": "text/plain",
 	"system-tiddler-render-template": "$:/core/templates/wikified-tiddler",
 	"debug-level": "none",
-	"gzip": "no",
+	gzip: "no",
 	"use-browser-cache": "no"
 };
 
@@ -236,12 +236,12 @@ Server.prototype.findMatchingRoute = function(request,state) {
 };
 
 Server.prototype.methodMappings = {
-	"GET": "readers",
-	"OPTIONS": "readers",
-	"HEAD": "readers",
-	"PUT": "writers",
-	"POST": "writers",
-	"DELETE": "writers"
+	GET: "readers",
+	OPTIONS: "readers",
+	HEAD: "readers",
+	PUT: "writers",
+	POST: "writers",
+	DELETE: "writers"
 };
 
 /*

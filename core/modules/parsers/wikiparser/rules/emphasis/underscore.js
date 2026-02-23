@@ -12,7 +12,7 @@ Wiki text inline rule for emphasis - underscore. For example:
 This wikiparser can be modified using the rules eg:
 
 ```
-\rules except underscore 
+\rules except underscore
 \rules only underscore
 ```
 
