@@ -42,11 +42,6 @@ const parseInputDate = (title, inputFormat) => {
 			if(isValidDate(parsedDate)) {
 				return parsedDate;
 			}
-			// Next, try native TiddlyWiki date parsing (eg, 17-digit TW timestamps)
-			const twParsedDate = $tw.utils.parseDate(title);
-			if(isValidDate(twParsedDate)) {
-				return twParsedDate;
-			}
 			// Sanitize loose date text (strips ordinal suffixes and commas),
 			// then treat pure-integer result as unix timestamp, otherwise
 			// fall back to native Date parsing
