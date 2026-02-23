@@ -1099,6 +1099,16 @@ describe("Filter tests", function() {
 			// This is tricky because we can not set the used timezone.
 			expect(wiki.filterTiddlers("[[2015-03-25T15:40]parsedate[JS]]").join(" ").substr(8, 2)).toBe(("0" + (new Date("2015-03-15T15:40:32")).getUTCHours()).slice(-2));
 			expect(wiki.filterTiddlers("[[2015]] [[2020]] +[parsedate[JS]]").join(" ")).toBe("20150101000000000 20200101000000000");
+			expect(wiki.filterTiddlers("[[25th Dec, 2025 12:30:45 GMT]parsedate[AUTO]]").join(" ")).toBe("20251225123045000");
+			expect(wiki.filterTiddlers("[[1603188514443]parsedate[UNIXTIME]]").join(" ")).toBe("20201020100834443");
+			expect(wiki.filterTiddlers("[[1,603,188,514,443]parsedate[UNIXTIME]]").join(" ")).toBe("20201020100834443");
+			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate:UTC[JS]]").join(" ")).toBe("20251225123045000");
+			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate:LOCAL[JS]]").join(" ")).toBe($tw.utils.formatDateString(new Date("2025-12-25T12:30:45Z"),"YYYY0MM0DD0hh0mm0ss0XXX"));
+			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate:NUMBER[JS]]").join(" ")).toBe("1766665845000");
+			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate:UNIXTIME[JS]]").join(" ")).toBe("1766665845000");
+			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate[JS],[UNIXTIME]]").join(" ")).toBe("1766665845000");
+			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate[JS],[YYYY0MM0DD0hh0mm0ss]]").join(" ")).toBe($tw.utils.formatDateString(new Date("2025-12-25T12:30:45Z"),"YYYY0MM0DD0hh0mm0ss"));
+			expect(wiki.filterTiddlers("[[not-a-date]parsedate[JS],[YYYY]]").join(" ")).toBe("");
 		});
 
 		it("should handle the deserializers operator", function() {

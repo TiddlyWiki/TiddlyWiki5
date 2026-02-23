@@ -1,6 +1,6 @@
 change-category: filters
 change-type: feature
-description: Add parsedate filter operator for parsing ECMAScript date format
+description: Add parsedate filter operator with ECMAScript, unix timestamp and configurable output support
 github-contributors: FlashSystems
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9484
 release: 5.5.0
@@ -8,6 +8,10 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.5.0/#9484
 type: text/vnd.tiddlywiki
 
-Added the `parsedate` filter operator for converting date strings in ECMAScript format into TiddlyWiki's default date format.
+Added the `parsedate` filter operator for converting date strings into TiddlyWiki-compatible output.
 
-This is particularly useful when working with HTML5 date/time input elements.
+The operator supports multiple input modes including ECMAScript (`JS`), native TiddlyWiki date strings (`TW`), signed integer unix timestamps (`UNIXTIME`/`NUMBER`), and automatic detection (`AUTO`).
+
+It also supports multiple output modes: UTC 17-digit strings (default), local 17-digit strings (`LOCAL`), unix timestamps (`UNIXTIME`/`NUMBER`), and custom [[DateFormat]] strings.
+
+`AUTO` mode additionally handles loose date text with ordinal day suffixes (`1st`, `2nd`, `3rd`, `4th`, etc.) and embedded commas.
