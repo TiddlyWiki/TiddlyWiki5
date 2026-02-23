@@ -116,10 +116,9 @@ title: $:/core/ui/TiddlerInfo/Advanced/ShadowInfo
 	[<get.destination>length[]add[1]]=>end-length
 	"@@ -$(end-length)$,0 +$(end-length)$,0 @@"+[substitute[]]=>end-hunk
 	[<get.source>makepatches<get.destination>]=>patches
-	[<patches>function[diff.hunk-boundary]][<end-hunk>]=>all-hunks
-	[(all-hunks)function[diff.hunk-parts]nth[1]]=>all-headers
 
-	[(all-hunks)] :map[function[format.hunk]]+[join[]]
+	[<patches>function[diff.hunk-boundary]][<end-hunk>] :map[function[format.hunk]]
+	+[join[]]
 \end
 
 \define diffs.view()
@@ -129,18 +128,22 @@ $(diffs.output)$
 \function format.hunk()
 	[diff.hunk-parts[]nth[1]]=>hunk-header
 	[diff.hunk-parts[]nth[2]]=>raw-hunk-content
-	[(all-headers)nth<index>]=>previous-hunk-header
+
+	[<patches>function[diff.hunk-boundary]nth<index>diff.hunk-parts[]nth[1]]=>previous-hunk-header
 	[<hunk-header>function[destination.start]]=>current-hunk-header-start
 	[<previous-hunk-header>function[destination.start]]=>previous-hunk-header-start
 	[<previous-hunk-header>function[destination.length]]=>previous-hunk-header-length
 	[<previous-hunk-header-start>add<previous-hunk-header-length>]=>previous-hunk-header-end
+
 	[<index>match[0]then[1]else<previous-hunk-header-end>]=>safe-previous-hunk-end
 	[<current-hunk-header-start>subtract<safe-previous-hunk-end>max[0]]=>gap-hunk-length
+
 	[<current-hunk-header-start>subtract<safe-previous-hunk-end>compare:number:lt[0]abs[]else[0]]=>overlap
 	[<raw-hunk-content>split[]butfirst[]join[]]=>clean-hunk-content
 	[<clean-hunk-content>split[]first[]]=>current-hunk-prefix
 	[<clean-hunk-content>split[]butfirst[]butfirst<overlap>join[]addprefix<current-hunk-prefix>]=>current-hunk-safe-content
 	[<current-hunk-safe-content>splitregexp[\n]]:map[format.line[]]+[join[]]=>formatted-hunk-content
+
 	[<current-hunk-header-start>subtract<gap-hunk-length>compare:number:gt[0]else[1]]=>gap-hunk-start
 	[<gap-hunk-start>add[-1]compare:number:gt[0]else[0]]=>gap-hunk-start-index
 	[<gap-hunk-length>compare:number:gt[0]else[0]]=>gap-hunk-length-index
@@ -156,6 +159,7 @@ $(diffs.output)$
 	[<gap-hunk-formatted>split[%0A]splitregexp[\n]last[]addprefix[ ]format.line[]]=>gap-expandable-bottom
 	=[<gap-expandable-top>]=[<gap-expandable-middle>]=[<gap-expandable-bottom>]+[join[]]=>gap-expandable
 	[<gap-hunk-formatted>format.line[]]=>gap-normal
+
 	[<gap-hunk-lines-count>add[-1]compare:number:gt[2]then<gap-expandable>else<gap-normal>]
 	:filter[<gap-hunk-content>!is[blank]]
 	=[<formatted-hunk-content>]
