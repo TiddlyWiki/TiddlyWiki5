@@ -6,6 +6,7 @@ title: $:/core/ui/TiddlerInfo/Advanced/ShadowInfo
 	[<currentTiddler>shadowsource[]]
 \end pluginTiddler
 
+
 \function is.overriden()
 	[<currentTiddler>is[shadow]is[tiddler]]
 \end is.overriden
@@ -153,7 +154,9 @@ $(diffs.output)$
 	[<gap-hunk-length>match[0]then[0]] :else[<gap-hunk-formatted>split[%0A]splitregexp[\n]count[]]=>gap-hunk-lines-count
 	[<gap-hunk-lines-count>subtract[2]]=>count-expand-unchanged-lines
 	[<gap-hunk-formatted>split[%0A]splitregexp[\n]first[]addsuffix[%0A]format.line[]]=>gap-expandable-top
-	="<details style='background-color: rgba(0,0,0,0.05);'><summary class='tc-btn-invisible tc-muted' style='text-align: center; list-style: none;'>... Expand $(count-expand-unchanged-lines)$ unchanged lines ...</summary><pre style='margin-block:0;white-space: pre-wrap;'>"
+	[{$:/language/TiddlerInfo/Advanced/ShadowInfo/UnchangedLineCount}substitute[]]=>unchanged-line-count-message
+
+	="<details style='background-color: rgba(0,0,0,0.05);'><summary class='tc-btn-invisible tc-muted' style='text-align: center; list-style: none;'>$(unchanged-line-count-message)$</summary><pre style='margin-block:0;white-space: pre-wrap;'>"
 	=[<gap-hunk-formatted>split[%0A]splitregexp[\n]butfirst[]butlast[]join[%0A]addprefix[ ]addsuffix[%0A]format.line[]]
 	="</pre></details>"+[substitute[]join[]]=>gap-expandable-middle
 	[<gap-hunk-formatted>split[%0A]splitregexp[\n]last[]addprefix[ ]format.line[]]=>gap-expandable-bottom
