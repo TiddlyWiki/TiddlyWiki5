@@ -818,13 +818,9 @@ exports.getSubTiddler = function(title,subTiddlerTitle) {
 Retrieve a tiddler as a JSON string of the fields
 */
 exports.getTiddlerAsJson = function(title) {
-	var tiddler = this.getTiddler(title);
+	const tiddler = this.getTiddler(title);
 	if(tiddler) {
-		var fields = Object.create(null);
-		$tw.utils.each(tiddler.fields,function(value,name) {
-			fields[name] = tiddler.getFieldString(name);
-		});
-		return JSON.stringify(fields);
+		return JSON.stringify(tiddler);
 	} else {
 		return JSON.stringify({title: title});
 	}
