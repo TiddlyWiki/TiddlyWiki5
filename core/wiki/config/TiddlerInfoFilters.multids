@@ -1,4 +1,0 @@
-title: $:/config/TiddlerInfoFilters/
-tags: $:/tags/TiddlerInfoFilter
-
-plugin-info: [<currentTiddler>!match[$:/core/ui/TiddlerInfo/Advanced/PluginInfo]]:else[<..currentTiddler>has[plugin-type]then[$:/core/ui/TiddlerInfo/Advanced/PluginInfo]]
