@@ -158,8 +158,6 @@ $(diffs.output)$
 	+[join[]]
 \end
 
-<$tiddler tiddler="$:/ControlPanel">
-
 <$let 
 	lingo-base="$:/language/TiddlerInfo/Advanced/ShadowInfo/"
 	infoTiddler=<<currentTiddler>>
