@@ -1,8 +1,10 @@
-title: $:/core/ui/TiddlerInfo/Advanced/ShadowInfo
-tags: $:/tags/TiddlerInfo/Advanced
 caption: {{$:/language/TiddlerInfo/Advanced/ShadowInfo/Heading}}
+tags: $:/tags/TiddlerInfo/Advanced
+title: $:/core/ui/TiddlerInfo/Advanced/ShadowInfo
 
-\function pluginTiddler() [<currentTiddler>shadowsource[]]
+\function pluginTiddler()
+	[<currentTiddler>shadowsource[]]
+\end pluginTiddler
 
 \function is.overriden()
 	[<currentTiddler>is[shadow]is[tiddler]]
@@ -32,6 +34,132 @@ caption: {{$:/language/TiddlerInfo/Advanced/ShadowInfo/Heading}}
 	:filter[has.diff<subTiddler>,{!!title}]
 \end diff.fields
 
+\define fold-treshold() 2
+
+\function destination.start()
+	[split[+]last[]trim[ @@]split[,]first[]!is[blank]else[1]]
+\end destination.start
+
+\function destination.length()
+	[split[+]last[]trim[ @@]split[,]last[]!is[blank]else[0]]
+\end
+
+\function diff.hunk-boundary()
+	"(?=^@@ -\d+(?:,\d+) \+\d+(?:,\d+) @@)"=>regex
+	[is[]splitregexp:m<regex>]
+\end
+
+\function diff.hunk-parts()
+	"(^@@ -\d+(?:,\d+)? \+\d+(?:,\d+)? @@)"=>regex
+	[is[]splitregexp:m<regex>!is[blank]]
+\end
+
+\function format.line()
+	[split[]first[]]=>marker
+	[split[]butfirst[]join[]]=>raw-content
+
+	"["=>left-bracket
+	"]"=>right-bracket
+	"{"=>left-brace
+	"}"=>right-brace
+
+	[<raw-content>search-replace:gim[&],[&amp;]]
+	+[search-replace:gim[#],[&#35;]]
+	+[search-replace:gim[@],[&#64;]]
+	+[search-replace:gim[~],[&#126;]]
+	+[search-replace:gim[/],[&#47;]]
+	+[search-replace:gim['],[&#39;]]
+	+[search-replace:gim[_],[&#95;]]
+	+[search-replace:gim[$],[&#36;]]
+	+[search-replace:gim[*],[&#42;]]
+	+[search-replace:gim[-],[&#45;]]
+	+[search-replace:gim[:],[&#58;]]
+	+[search-replace:gim[^],[&#94;]]
+	+[search-replace:gim[`],[&#96;]]
+	+[search-replace:gim[<],[&lt;]]
+	+[search-replace:gim[>],[&gt;]]
+	+[search-replace:gim<left-bracket>,[&#91;]]
+	+[search-replace:gim<right-bracket>,[&#93;]]
+	+[search-replace:gim<left-brace>,[&#123;]]
+	+[search-replace:gim<right-brace>,[&#125;]]
+
+	+[search-replace:gim[%22],[&quot;]]
+	+[search-replace:gim[%3C],[&lt;]]
+	+[search-replace:gim[%3E],[&gt;]]
+	+[search-replace:gim[%5B],[&#91;]]
+	+[search-replace:gim[%5C],[&#92;]]
+	+[search-replace:gim[%5D],[&#93;]]
+	+[search-replace:gim[%60],[&#96;]]
+	+[search-replace:gim[%7B],[&#123;]]
+	+[search-replace:gim[%7D],[&#125;]]
+	+[search-replace:gim[%7C],[&#124;]]
+	+[search-replace:gim[%5E],[&#94;]]
+	+[search-replace:gim[%25],[&#37;]]
+	=>content
+
+	[<marker>match[ ]then<wrap equal>]
+	[<marker>match[+]then<wrap insert ins>]
+	[<marker>match[-]then<wrap delete del>]
+	=>element
+
+	[[↩︎<br>]]=>content
+	[<element>search-replace:gim[%0A],<wrap invisible>]=>element
+
+	[[⇥	]]=>content
+	[<element>search-replace:gim[%09],<wrap invisible>search-replace:gim[	],<wrap invisible>]
+\end
+
+\define wrap(class,tag:span)
+<$tag$ class="tc-diff-$class$">$(content)$</$tag$>
+\end
+
+\function diffs.output()
+	[<get.destination>length[]add[1]]=>end-length
+	"@@ -$(end-length)$,0 +$(end-length)$,0 @@"+[substitute[]]=>end-hunk
+	[<get.source>makepatches<get.destination>]=>patches
+
+	[<patches>function[diff.hunk-boundary]][<end-hunk>] :map[function[format.hunk]]
+	+[join[]]
+\end
+
+\define diffs.view()
+$(diffs.output)$
+\end
+
+\function format.hunk()
+	[diff.hunk-parts[]nth[1]]=>hunk-header
+	[diff.hunk-parts[]nth[2]]=>hunk-content
+	[<hunk-content>splitregexp[\n]]:map[format.line[]]+[join[]]=>formatted-hunk-content
+	[<patches>function[diff.hunk-boundary]nth<index>diff.hunk-parts[]nth[1]]=>previous-hunk-header
+	[<hunk-header>function[destination.start]]=>current-hunk-header-start
+	[<previous-hunk-header>function[destination.start]]=>previous-hunk-header-start
+	[<previous-hunk-header>function[destination.length]]=>previous-hunk-header-length
+	[<previous-hunk-header-start>add<previous-hunk-header-length>]=>previous-hunk-header-end
+	[<current-hunk-header-start>subtract<previous-hunk-header-end>]=>gap-hunk-length
+	[<current-hunk-header-start>subtract<gap-hunk-length>compare:number:gt[0]else[1]]=>gap-hunk-start
+	[<gap-hunk-start>add[-1]compare:number:gt[0]else[0]]=>gap-hunk-start-index
+	[<gap-hunk-length>compare:number:gt[0]else[0]]=>gap-hunk-length-index
+	[<get.destination>split[]butfirst<gap-hunk-start-index>limit<gap-hunk-length-index>join[]addprefix[ ]]=>gap-hunk-content
+	[<gap-hunk-content>search-replace:gim[
+	],[%0A]]=>gap-hunk-formatted
+	[<gap-hunk-formatted>split[%0A]count[]]=>gap-hunk-lines-count
+	[<gap-hunk-lines-count>subtract[2]]=>count-expand-unchanged-lines
+	[<gap-hunk-formatted>split[%0A]first[]addsuffix[%0A]format.line[]]=>gap-expandable-top
+	="<details style='background-color: rgba(0,0,0,0.05);'><summary class='tc-btn-invisible tc-muted' style='text-align: center; list-style: none;'>... Expand $(count-expand-unchanged-lines)$ unchanged lines ...</summary><pre style='margin-block:0;white-space: pre-wrap;'>"
+	=[<gap-hunk-formatted>split[%0A]butfirst[]butlast[]join[%0A]addprefix[ ]addsuffix[%0A]format.line[]]
+	="</pre></details>"+[substitute[]join[]]=>gap-expandable-middle
+	[<gap-hunk-formatted>split[%0A]last[]addprefix[ ]format.line[]]=>gap-expandable-bottom
+	=[<gap-expandable-top>]=[<gap-expandable-middle>]=[<gap-expandable-bottom>]+[join[]]=>gap-expandable
+	[<gap-hunk-formatted>format.line[]]=>gap-normal
+
+	[<gap-hunk-lines-count>add[-1]compare:number:gt<fold-treshold>then<gap-expandable>else<gap-normal>]
+	:filter[<gap-hunk-content>!is[blank]]
+	=[<formatted-hunk-content>]
+	+[join[]]
+\end
+
+<$tiddler tiddler="$:/ControlPanel">
+
 <$let 
 	lingo-base="$:/language/TiddlerInfo/Advanced/ShadowInfo/"
 	infoTiddler=<<currentTiddler>>
@@ -51,25 +179,29 @@ caption: {{$:/language/TiddlerInfo/Advanced/ShadowInfo/Heading}}
 			<tbody>
 				<$list filter="[diff.fields<infoTiddler>]" variable=field>
 					<tr>
-						<th><$text text=<<field>> /></th>
+						<th>
+							<$text text=<<field>> />
+						</th>
 						<td>
-							<$diff-text
-								source={{{ [get.sourceField<infoTiddler>,<field>] }}}
-								dest={{{ [get.destField<infoTiddler>,<field>] }}}
-								mode="words"			
-							/>
+							<$let
+								tv-wikilinks="no"
+								get.destination={{{ [get.destField<infoTiddler>,<field>] }}}
+								get.source={{{ [get.sourceField<infoTiddler>,<field>] }}}
+							>
+								<pre><code><<diffs.view>></code></pre>
+							</$let>
 						</td>
 					</tr>
 				</$list>
-			</tbody>
-		</table>
+				</tbody>
+			</table>
 
-	<%endif%>
+		<%endif%>
 
 	<%else%>
 
-			<<lingo NotShadow/Hint>>
+		<<lingo NotShadow/Hint>>
 
 	<%endif%>
-
+	
 </$let>
