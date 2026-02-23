@@ -34,8 +34,6 @@ title: $:/core/ui/TiddlerInfo/Advanced/ShadowInfo
 	:filter[has.diff<subTiddler>,{!!title}]
 \end diff.fields
 
-\define fold-treshold() 2
-
 \function destination.start()
 	[split[+]last[]trim[ @@]split[,]first[]!is[blank]else[1]]
 \end destination.start
@@ -103,7 +101,8 @@ title: $:/core/ui/TiddlerInfo/Advanced/ShadowInfo
 	=>element
 
 	[[↩︎<br>]]=>content
-	[<element>search-replace:gim[%0A],<wrap invisible>]=>element
+	[<element>search-replace:gim[%0A],<wrap invisible>search-replace:gim[
+],<wrap invisible>]=>element
 
 	[[⇥	]]=>content
 	[<element>search-replace:gim[%09],<wrap invisible>search-replace:gim[	],<wrap invisible>]
@@ -142,17 +141,17 @@ $(diffs.output)$
 	[<get.destination>split[]butfirst<gap-hunk-start-index>limit<gap-hunk-length-index>join[]addprefix[ ]]=>gap-hunk-content
 	[<gap-hunk-content>search-replace:gim[
 	],[%0A]]=>gap-hunk-formatted
-	[<gap-hunk-formatted>split[%0A]count[]]=>gap-hunk-lines-count
+	[<gap-hunk-formatted>split[%0A]splitregexp[\n]count[]]=>gap-hunk-lines-count
 	[<gap-hunk-lines-count>subtract[2]]=>count-expand-unchanged-lines
-	[<gap-hunk-formatted>split[%0A]first[]addsuffix[%0A]format.line[]]=>gap-expandable-top
+	[<gap-hunk-formatted>split[%0A]splitregexp[\n]first[]addsuffix[%0A]format.line[]]=>gap-expandable-top
 	="<details style='background-color: rgba(0,0,0,0.05);'><summary class='tc-btn-invisible tc-muted' style='text-align: center; list-style: none;'>... Expand $(count-expand-unchanged-lines)$ unchanged lines ...</summary><pre style='margin-block:0;white-space: pre-wrap;'>"
-	=[<gap-hunk-formatted>split[%0A]butfirst[]butlast[]join[%0A]addprefix[ ]addsuffix[%0A]format.line[]]
+	=[<gap-hunk-formatted>split[%0A]splitregexp[\n]butfirst[]butlast[]join[%0A]addprefix[ ]addsuffix[%0A]format.line[]]
 	="</pre></details>"+[substitute[]join[]]=>gap-expandable-middle
-	[<gap-hunk-formatted>split[%0A]last[]addprefix[ ]format.line[]]=>gap-expandable-bottom
+	[<gap-hunk-formatted>split[%0A]splitregexp[\n]last[]addprefix[ ]format.line[]]=>gap-expandable-bottom
 	=[<gap-expandable-top>]=[<gap-expandable-middle>]=[<gap-expandable-bottom>]+[join[]]=>gap-expandable
 	[<gap-hunk-formatted>format.line[]]=>gap-normal
 
-	[<gap-hunk-lines-count>add[-1]compare:number:gt<fold-treshold>then<gap-expandable>else<gap-normal>]
+	[<gap-hunk-lines-count>add[-1]compare:number:gt[2]then<gap-expandable>else<gap-normal>]
 	:filter[<gap-hunk-content>!is[blank]]
 	=[<formatted-hunk-content>]
 	+[join[]]
