@@ -10,7 +10,7 @@ tags: [[Filter Operators]] [[Date Operators]]
 title: parsedate Operator
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.4.0">>
+<<.from-version "5.5.0">>
 
 The optional parameter <<.place B>> specifies the input date format. If omitted, it defaults to `JS`. The parameter can be one of the following supported input formats:
 
