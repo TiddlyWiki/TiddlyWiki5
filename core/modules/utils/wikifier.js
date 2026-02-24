@@ -6,7 +6,6 @@ module-type: utils
 A high level helper class for parsing and wikification
 
 \*/
-(function(){
 
 /*
 Options include:
@@ -104,5 +103,3 @@ Wikifier.prototype.getWidgetTree = function() {
 };
 
 exports.Wikifier = Wikifier;
-
-})();
