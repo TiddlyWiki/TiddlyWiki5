@@ -6,7 +6,6 @@ module-type: filteroperator
 Filter operator wikifying each string in the input list and returning the result as a list of strings
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -33,5 +32,3 @@ exports.wikify = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();
