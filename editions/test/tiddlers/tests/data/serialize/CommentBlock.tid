@@ -1,0 +1,11 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/CommentBlock
+type: text/vnd.tiddlywiki
+
+<!-- This is a comment -->
+
+Some text
+
+<!-- Another comment -->
+
+More text

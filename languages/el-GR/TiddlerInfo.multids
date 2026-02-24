@@ -7,7 +7,7 @@ Advanced/PluginInfo/Hint: Αυτό το πρόσθετο περιέχει τα �
 Advanced/ShadowInfo/Heading: Κατάσταση Σκιώδους
 Advanced/ShadowInfo/NotShadow/Hint: Το tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> δεν είναι σκιώδης tiddler
 Advanced/ShadowInfo/OverriddenShadow/Hint: Έχει παρακαμφθεί από ένα κανονικό tiddler
-Advanced/ShadowInfo/Shadow/Hint: Το tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> είναι ένα σκιώδης tiddler
+Advanced/ShadowInfo/Shadow/Hint: Το tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> είναι σκιώδης tiddler
 Advanced/ShadowInfo/Shadow/Source: Έχει οριστεί στο πρόσθετο <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
 Fields/Caption: Πεδία
 List/Caption: Λίστα
@@ -15,7 +15,7 @@ List/Empty: Αυτό το tiddler δεν περιέχει λίστα
 Listed/Caption: Σε λίστα
 Listed/Empty: Αυτό το tiddler δεν εμφανίζεται σε λίστα οποιουδήποτε άλλου tiddler
 References/Caption: Αναφορές
-References/Empty: Δεν υπάρχουν δεσμοί από tiddlers σε αυτό
+References/Empty: Δεν υπάρχουν δεσμοί από άλλα tiddlers σε αυτό
 Tagging/Caption: Ετικέτες
-Tagging/Empty: Δεν υπάρχουν tiddlers που να έχουν ετικέτα το παρόν
+Tagging/Empty: Δεν υπάρχουν tiddlers που να έχουν ετικέτα με τον τίτλο αυτού του tiddler
 Tools/Caption: Εργαλεία

@@ -59,7 +59,7 @@ function loadIFrame(url,callback) {
 Unload library iframe for given url
 */
 function unloadIFrame(url){
-	var iframes = document.getElementsByTagName('iframe');
+	var iframes = document.getElementsByTagName("iframe");
 	for(var t=iframes.length-1; t--; t>=0) {
 		var iframe = iframes[t];
 		if(iframe.getAttribute("library") === "true" &&

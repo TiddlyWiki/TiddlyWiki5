@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/wikitext-serialize",
+	"name": "WikitextSerialize",
+	"description": "Serialize wikitext abstract syntax tree back to wikitext format",
+	"list": "readme",
+	"stability": "STABILITY_1_EXPERIMENTAL"
+}

@@ -22,13 +22,13 @@ var TW_Node = function (){
 	throw TypeError("Illegal constructor");
 };
 
-Object.defineProperty(TW_Node.prototype, 'ELEMENT_NODE', {
+Object.defineProperty(TW_Node.prototype, "ELEMENT_NODE", {
 	get: function() {
 		return 1;
 	}
 });
 
-Object.defineProperty(TW_Node.prototype, 'TEXT_NODE', {
+Object.defineProperty(TW_Node.prototype, "TEXT_NODE", {
 	get: function() {
 		return 3;
 	}
@@ -37,6 +37,7 @@ Object.defineProperty(TW_Node.prototype, 'TEXT_NODE', {
 var TW_TextNode = function(text) {
 	bumpSequenceNumber(this);
 	this.textContent = text + "";
+	this.children = [];
 };
 
 Object.setPrototypeOf(TW_TextNode.prototype,TW_Node.prototype);
@@ -62,7 +63,6 @@ var TW_Style = function(el) {
 		},
 		// Method to set styles using a string (e.g. "color:red; background-color:blue;")
 		set: function(str) {
-			var self = this;
 			str = str || "";
 			$tw.utils.each(str.split(";"),function(declaration) {
 				var parts = declaration.split(":"),
@@ -83,7 +83,7 @@ var TW_Style = function(el) {
 	return new Proxy(styleObject, {
 		get: function(target, property) {
 			// If the property exists on styleObject, return it (get, set, setProperty methods)
-			if (property in target) {
+			if(property in target) {
 				return target[property];
 			}
 			// Otherwise, return the corresponding property from _style

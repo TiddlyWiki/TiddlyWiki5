@@ -11,8 +11,6 @@ Tests the wiki based tests
 
 var TEST_WIKI_TIDDLER_FILTER = "[all[tiddlers+shadows]type[text/vnd.tiddlywiki-multiple]tag[$:/tags/wiki-test-spec]]";
 
-var widget = require("$:/core/modules/widgets/widget.js");
-
 describe("Wiki-based tests", function() {
 
 	// Step through the test tiddlers
@@ -86,13 +84,13 @@ describe("Wiki-based tests", function() {
 		$tw.fakeDocument.setSequenceNumber(0);
 		var wrapper = $tw.fakeDocument.createElement("div");
 		widgetNode.render(wrapper,null);
-// console.log(require("util").inspect(wrapper,{depth: 8}));
+		// console.log(require("util").inspect(wrapper,{depth: 8}));
 		return wrapper;
 	}
 
 	function refreshWidgetNode(widgetNode,wrapper) {
 		widgetNode.refresh(widgetNode.wiki.changedTiddlers,wrapper);
-// console.log(require("util").inspect(wrapper,{depth: 8}));
+		// console.log(require("util").inspect(wrapper,{depth: 8}));
 	}
 
 });

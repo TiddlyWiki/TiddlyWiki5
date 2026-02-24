@@ -1,0 +1,59 @@
+created: 20250115120000000
+modified: 20250115120000000
+tags: [[Operator Examples]] [[jsondelete Operator]]
+title: jsondelete Operator (Examples)
+
+<$let object-a="""{
+    "a": "one",
+    "b": "",
+    "c": "three",
+    "d": {
+        "e": "four",
+        "f": [
+            "five",
+            "six",
+            true,
+            false,
+            null
+        ],
+        "g": {
+            "x": "max",
+            "y": "may",
+            "z": "maize"
+        }
+    }
+}
+"""
+object-b="""{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}"""
+array-a="""["une","deux","trois",["quatre","cinq"]]""">
+
+The examples below assume the following JSON object is contained in the variable `object-a`:
+
+<pre><<object-a>></pre>
+
+<<.operator-example 1 "[<object-a>jsondelete[a]]" "Delete a top-level object property">>
+<<.operator-example 2 "[<object-a>jsondelete[d],[e]]" "Delete a nested object property">>
+<<.operator-example 3 "[<object-a>jsondelete[d],[f],[0]]" "Delete the first element from an array">>
+<<.operator-example 4 "[<object-a>jsondelete[d],[f],[-1]]" "Delete the last element from an array using negative index">>
+<<.operator-example 5 "[<object-a>jsondelete[d],[f],[-2]]" "Delete the second-to-last element from an array using negative index">>
+<<.operator-example 6 "[<object-a>jsondelete[d],[g],[x]]" "Delete a deeply nested object property">>
+<<.operator-example 7 "[<object-a>jsondelete[]]" "If no parameters are specified, the JSON object is returned unchanged">>
+<<.operator-example 8 "[<object-a>jsondelete[missing]]" "If the property does not exist, the JSON object is returned unchanged">>
+
+The examples below assume the following JSON object is contained in the variable `object-b`:
+
+<pre><<object-b>></pre>
+
+<<.operator-example 9 "[<object-b>jsondelete[b]]" "Delete an empty string property">>
+<<.operator-example 10 "[<object-b>jsondelete[d],[f],[1]]" "Delete a middle element from an array">>
+
+The examples below assume the following JSON array is contained in the variable `array-a`:
+
+<pre><<array-a>></pre>
+
+<<.operator-example 11 "[<array-a>jsondelete[0]]" "Delete the first element from a top-level array">>
+<<.operator-example 12 "[<array-a>jsondelete[-1]]" "Delete the last element from a top-level array using negative index">>
+<<.operator-example 13 "[<array-a>jsondelete[3],[0]]" "Delete an element from a nested array">>
+
+<<.operator-example 14 "[<object-a>] [<object-b>] :and[jsondelete[a]]" "If the input consists of multiple JSON objects with matching properties, the property is deleted from all of them">>
+

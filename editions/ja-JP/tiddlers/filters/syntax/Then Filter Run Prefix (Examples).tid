@@ -1,0 +1,53 @@
+created: 20230617183745774
+modified: 20250504103912315
+original-modified: 20230617183745774
+tags: [[Then Filter Run Prefix]]
+title: Then Filter Run Prefix (Examples)
+ja-title: thenフィルタランプレフィックス(例)
+type: text/vnd.tiddlywiki
+
+
+!! 条件実行
+
+<<.op :then>>フィルタランプレフィックスを使用すると、ネストした[[ListWidget]]や[[WikiText内のマクロ定義|Macro Definitions in WikiText]]の必要性を回避できます。
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$edit-text field="search" placeholder="Search title"/>
+
+<$let searchTerm={{!!search}}>
+<$list filter="[<searchTerm>minlength[3]] :then[!is[system]search:title<searchTerm>]" template="$:/core/ui/ListItemTemplate"/>
+</$let>"""/>
+
+
+!! 条件(サブ)フィルタ
+
+<<.op :then>>フィルターランプレフィックスを<<.op :else>>プレフィックスと組み合わせて条件フィルタを作成できます。この例では、<<.var searchSubfilter>>内の検索に使用されるフィールドは[[$:/temp/searchFields]]の値に依存し、<<.var sortSubfilter>>による並べ替え順序は[[$:/temp/searchSort]]の値に依存します。これらのTiddlerの値を設定するには、チェックボックスを使用します。
+
+<<.tip "サブフィルタ内の各フィルタランは、<<.olink subfilter>>オペレータのインプットをインプットとして受け取ることに注意してください">>
+
+<<.olink then>>と<<.olink else>>オペレータはサブフィルタを呼び出したり追加のフィルタステップを実行できないため、このようなアプリケーションには使用できません。
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$checkbox tiddler="$:/temp/searchSort"
+      field="text"
+      checked="chrono" unchecked="alpha" default="alpha">
+  時系列順に並べ替え(新しい順)
+</$checkbox><br/>
+<$checkbox tiddler="$:/temp/searchFields"
+      field="text"
+      checked="title" unchecked="default" default="title">
+  <<.field title>>のみを検索
+</$checkbox><p/>
+<$let searchSubfilter="[{$:/temp/searchFields}match[default]] :then[search[prefix]] :else[search:title[prefix]]"
+      sortSubfilter="[{$:/temp/searchSort}match[chrono]] :then[!nsort[modified]] :else[sort[title]]"
+      limit=10 >
+  <$list filter="[all[tiddlers]!is[system]subfilter<searchSubfilter>subfilter<sortSubfilter>first<limit>]">
+    <$link/> (<$text text={{{ [{!!modified}format:date[YYYY-0MM-0DD]] }}} />)<br/>
+  </$list>
+  <$list filter="[all[tiddlers]!is[system]subfilter<searchSubfilter>rest<limit>count[]]">
+    ... and <<currentTiddler>> more.
+  </$list>
+</$let>"""/>
+
+時系列順に並べ替える（新しい順）
+検索titleのみ

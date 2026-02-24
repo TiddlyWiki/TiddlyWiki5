@@ -1,0 +1,8 @@
+caption: Import Community Survey 2025 Results Spreadsheet
+created: 20250711121107617
+import-spec-role: workbook
+list: [[$:/_importspec/Community Survey 2025/Content]]
+modified: 20250711121107617
+tags: 
+title: $:/_importspec/Community Survey 2025/
+type: text/vnd.tiddlywiki

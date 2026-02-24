@@ -9,6 +9,8 @@ Button widget
 
 "use strict";
 
+const ALLOWED_SELECTED_ARIA_ATTR = ["aria-checked", "aria-selected", "aria-pressed"];
+
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
@@ -44,9 +46,14 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	var classes = this["class"].split(" ") || [],
 		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
 	if(this.selectedClass) {
-		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
-			$tw.utils.pushTop(classes, this.selectedClass.split(" "));
-			domNode.setAttribute("aria-checked", "true");
+		if((this.set || this.setTitle) && this.setTo) {
+			const selectedAria = ALLOWED_SELECTED_ARIA_ATTR.includes(this.selectedAria) ? this.selectedAria : "aria-checked";
+			if(this.isSelected()) {
+				$tw.utils.pushTop(classes, this.selectedClass.split(" "));
+				domNode.setAttribute(selectedAria, "true");
+			} else {
+				domNode.setAttribute(selectedAria, "false");
+			}
 		}
 		if(isPoppedUp) {
 			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
@@ -61,6 +68,10 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		sourcePrefix: "data-",
 		destPrefix: "data-"
 	});
+	this.assignAttributes(domNode,{
+		sourcePrefix: "aria-",
+		destPrefix: "aria-"
+	});
 	// Assign other attributes
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
@@ -68,10 +79,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this.tooltip) {
 		domNode.setAttribute("title",this.tooltip);
 	}
-	if(this["aria-label"]) {
-		domNode.setAttribute("aria-label",this["aria-label"]);
-	}
-	if (this.role) {
+	if(this.role) {
 		domNode.setAttribute("role", this.role);
 	}
 	if(this.popup || this.popupTitle) {
@@ -127,8 +135,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 };
 
 /*
@@ -143,7 +151,7 @@ ButtonWidget.prototype.getBoundingClientRect = function() {
 };
 
 ButtonWidget.prototype.isSelected = function() {
-    return this.setTitle ? (this.setField ? this.wiki.getTiddler(this.setTitle).getFieldString(this.setField) === this.setTo :
+	return this.setTitle ? (this.setField ? this.wiki.getTiddler(this.setTitle).getFieldString(this.setField) === this.setTo :
 		(this.setIndex ? this.wiki.extractTiddlerDataItem(this.setTitle,this.setIndex) === this.setTo :
 			this.wiki.getTiddlerText(this.setTitle))) || this.defaultSetValue || this.getVariable("currentTiddler") :
 		this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler")) === this.setTo;
@@ -195,7 +203,7 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 ButtonWidget.prototype.setTiddler = function() {
 	if(this.setTitle) {
 		this.setField ? this.wiki.setText(this.setTitle,this.setField,undefined,this.setTo) :
-				(this.setIndex ? this.wiki.setText(this.setTitle,undefined,this.setIndex,this.setTo) :
+			(this.setIndex ? this.wiki.setText(this.setTitle,undefined,this.setIndex,this.setTo) :
 				this.wiki.setText(this.setTitle,"text",undefined,this.setTo));
 	} else {
 		this.wiki.setTextReference(this.set,this.setTo,this.getVariable("currentTiddler"));
@@ -215,12 +223,12 @@ ButtonWidget.prototype.execute = function() {
 	this.setTo = this.getAttribute("setTo");
 	this.popup = this.getAttribute("popup");
 	this.hover = this.getAttribute("hover");
-	this["aria-label"] = this.getAttribute("aria-label");
 	this.role = this.getAttribute("role");
 	this.tooltip = this.getAttribute("tooltip");
 	this.style = this.getAttribute("style");
 	this["class"] = this.getAttribute("class","");
 	this.selectedClass = this.getAttribute("selectedClass");
+	this.selectedAria = this.getAttribute("selectedAria");
 	this.defaultSetValue = this.getAttribute("default","");
 	this.buttonTag = this.getAttribute("tag");
 	this.dragTiddler = this.getAttribute("dragTiddler");
@@ -270,6 +278,10 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 			changedAttributes: changedAttributes,
 			sourcePrefix: "data-",
 			destPrefix: "data-"
+		});
+		this.assignAttributes(this.domNodes[0],{
+			sourcePrefix: "aria-",
+			destPrefix: "aria-"
 		});
 	}
 	return this.refreshChildren(changedTiddlers);

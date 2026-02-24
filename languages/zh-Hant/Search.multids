@@ -6,6 +6,8 @@ Filter/Hint: 以[[篩選表達式|https://tiddlywiki.com/static/Filters.html]]�
 Filter/Matches: //<small><<resultCount>> 個條目符合條件</small>//
 Matches: //<small><<resultCount>> 個條目符合條件</small>//
 Matches/All: 所有匹配：
+Matches/NoMatch: //無匹配//
+Matches/NoResult: //找不到//
 Matches/Title: 條目名稱匹配：
 Search: 搜尋
 Search/TooShort: 搜尋文字太短

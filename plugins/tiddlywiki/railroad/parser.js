@@ -246,7 +246,7 @@ Parser.prototype.parseTerminal = function() {
 	var component = new components.Terminal(this.token.value);
 	// Consume the string literal
 	this.advance();
-    return component;
+	return component;
 };
 
 Parser.prototype.parseTransclusion = function() {
@@ -289,18 +289,18 @@ Parser.prototype.parsePragma = function() {
 
 Parser.prototype.parseYesNo = function(pragma) {
 	return this.parseSetting(["yes","no"],pragma) === "yes";
-}
+};
 
 Parser.prototype.parseTerminusStyle = function(pragma) {
 	return this.parseSetting(["single","double","none"],pragma);
-}
+};
 
 Parser.prototype.parseSetting = function(options,pragma) {
 	if(this.at("name") && options.indexOf(this.token.value) !== -1) {
 		return this.tokenValueEaten();		
 	}
 	throw options.join(" or ") + " expected after \\" + pragma;
-}
+};
 
 /////////////////////////// Token manipulation
 

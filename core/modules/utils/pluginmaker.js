@@ -47,10 +47,10 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 	});
 	// Retrieve and bump the version number
 	var pluginVersion = $tw.utils.parseVersion(pluginTiddler.getFieldString("version") || "0.0.0") || {
-			major: "0",
-			minor: "0",
-			patch: "0"
-		};
+		major: "0",
+		minor: "0",
+		patch: "0"
+	};
 	pluginVersion.patch++;
 	var version = pluginVersion.major + "." + pluginVersion.minor + "." + pluginVersion.patch;
 	if(pluginVersion.prerelease) {
@@ -60,7 +60,7 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 		version += "+" + pluginVersion.build;
 	}
 	// Save the tiddler
-	$tw.wiki.addTiddler(new $tw.Tiddler(pluginTiddler,{text: JSON.stringify({tiddlers: plugins},null,4), version: version}));
+	$tw.wiki.addTiddler(new $tw.Tiddler(pluginTiddler,{text: JSON.stringify({tiddlers: plugins},null,4), version: version},$tw.wiki.getModificationFields()));
 	// Delete any non-shadow constituent tiddlers
 	$tw.utils.each(tiddlers,function(title) {
 		if($tw.wiki.tiddlerExists(title)) {

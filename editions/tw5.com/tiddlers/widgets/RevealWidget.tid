@@ -1,49 +1,66 @@
 caption: reveal
 created: 20131024141900000
 jeremy: tiddlywiki
-modified: 20250211091937860
+modified: 20251212091659847
 tags: Widgets
 title: RevealWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The reveal widget hides or shows its content depending upon the value of a [[state tiddler|StateTiddler]]. The type of the widget determines the condition for the content being displayed:
-
-* type=''match'': the content is displayed if the state tiddler matches the text attribute value
-* type=''nomatch'': the content is displayed if the state tiddler doesn't match the text attribute value
-* type=''popup'': the content is displayed as a popup as described in the PopupMechanism
-* type=''lt'': the content is displayed if the state tiddler contains an integer with a value ''less than'' the text attribute value
-* type=''gt'': the content is displayed if the state tiddler contains an integer with a value ''greater than'' the text attribute value
-* type=''lteq'': the content is displayed if the state tiddler contains an integer with a value ''less than or equal to'' the text attribute value
-* type=''gteq'': the content is displayed if the state tiddler contains an integer with a value ''greater than or equal to'' the text attribute value
-
+The reveal widget hides or shows its content depending upon the value of a [[state tiddler|StateMechanism]].
 
 ! Content and Attributes
 
 The content of the `<$reveal>` widget is displayed according to the rules given above.
 
 |!Attribute |!Description |
-|state |A TextReference containing the state |
-|stateTitle |A title containing the state, ''without'' TextReference. Gets preferred over the <<.attr state>> attribute |
-|stateField |A ''field name'' which is used to look for the state, if the attribute <<.attr stateTitle>> is present |
-|stateIndex |An ''index'' which is used to look for the state, if the attribute <<.attr stateTitle>> is present |
-|tag |Overrides the default [[HTML Tags]] (`<div>` in block mode or `<span>` in inline mode) |
-|type |The type of matching performed: ''match'', ''nomatch'', ''popup'', ''lt'', ''gt'', ''lteq'' or ''gteq'' |
-|text |The text to match when the type is ''match'', ''nomatch'', ''lt'', ''gt'', ''lteq'' or ''gteq'' |
-|class |An optional CSS class name to be assigned to the HTML element<br/>&raquo; Set to `tc-popup-keep` to make a popup "sticky", so it won't close when you click inside of it|
-|style |An optional CSS style attribute to be assigned to the HTML element |
-|position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveleft'', ''aboveright'', ''right'', ''belowleft'', ''belowright'' or ''below'' |
-|positionAllowNegative |Set to "yes" to prevent computed popup positions from being clamped to be above zero |
-|default |Default value to use when the state tiddler is missing |
-|animate |Set to "yes" to animate opening and closure (defaults to "no"; requires "retain" to be set to "yes") |
-|retain |Set to "yes" to force the content to be retained even when hidden (defaults to "no") |
-|updatePopupPosition|<<.from-version "5.1.23">>Set to "yes" to update the popup position when the state tiddler is updated (defaults to "no")|
+|<<.attr state>> |A TextReference containing the state |
+|<<.attr stateTitle>> |A title containing the state, without TextReference. Gets preferred over the <<.attr state>> attribute if both are set |
+|<<.attr stateField>> |A field name which is used to look for the state, if the attribute <<.attr stateTitle>> is present |
+|<<.attr stateIndex>> |An index which is used to look for the state, if the attribute <<.attr stateTitle>> is present |
+|<<.attr default>> |Default value to use when the state tiddler is missing |
+|<<.attr tag>> |Overrides the default [[HTML tag|HTML Tags]] (`<div>` in block mode or `<span>` in inline mode) |
+|<<.attr type>> |The type of matching performed, see below |
+|<<.attr text>> |The text to match when the type is <<.value match>>, <<.value nomatch>>, <<.value lt>>, <<.value gt>>, <<.value lteq>> or <<.value gteq>> |
+|<<.attr class>> |An optional CSS class name to be assigned to the HTML element|
+|<<.attr style>> |An optional CSS style attribute to be assigned to the HTML element |
+|<<.attr position>> |The position used for the popup when the type is <<.value popup>>.<br> Can be <<.value left>>, <<.value above>>, <<.value aboveleft>>, <<.value aboveright>>, <<.value right>>, <<.value belowleft>>, <<.value belowright>> or <<.value below>>. Also see [[Popup Clamping Example|RevealWidget (Popup Clamping Example)]] |
+|<<.attr positionAllowNegative>> |Set to <<.value yes>> to allow computed popup positions to be negative relative to their container or the document window (for absolutely positioned popups). Defaults to <<.value no>> |
+|<<.attr clamp>> |Set to <<.value right>>, <<.value bottom>> or <<.value both>> to prevent a popup to overflow its container, see below |
+|<<.attr animate>> |Set to <<.value yes>> to animate opening and closing. Defaults to <<.value no>> |
+|<<.attr retain>> |Set to <<.value yes>> to force the content to be retained even when hidden. Defaults to <<.value no>> |
+|<<.attr updatePopupPosition>> |<<.from-version "5.1.23">>Set to <<.value yes>> to update the popup position when the state tiddler is updated. Defaults to <<.value no>> |
 
-<<.tip """<$macrocall $name=".from-version" version="5.1.18"/> <$macrocall $name=".attr" _="stateTitle"/>, <$macrocall $name=".attr" _="stateField"/> and <$macrocall $name=".attr" _="stateIndex"/> attributes allow specifying Tiddler states ''directly'', without interpreting them as [[TextReferences|TextReference]].
+<<.tip """<$macrocall $name=".from-version" version="5.1.18"/> <<.attr stateTitle>>, <<.attr stateField>> and <<.attr stateIndex>> attributes allow specifying Tiddler states directly, without interpreting them as [[TextReferences|TextReference]].
 This is useful for edge-cases where titles may contain characters that are used to denote Tiddler fields or indices (`!!`, `##`)""">>
 
-<<.tip """Retaining the content when hidden can give poor performance since the hidden content requires refresh processing even though it is not displayed. On the other hand, the content can be revealed much more quickly. Note that setting ''animate="yes"'' will also require ''retain="yes"''""">>
+<<.tip """Retaining the content when hidden can give poor performance since the hidden content requires refresh processing even though it is not displayed. On the other hand, the content can be revealed much more quickly. Note that setting `animate="yes"` will also require `retain="yes"`""">>
+
+<<.tip """Set the <<.attr class>> attribute to <<.value tc-popup-keep>> to make a popup "sticky" so it will not close when you click inside of it""">>
+
+!! <<.attr type>> Attribute
+
+The <<.attr type>> of the widget determines the condition for the content being displayed:
+
+* <<.value match>>: the content is displayed if the state tiddler matches the text attribute value
+* <<.value nomatch>>: the content is displayed if the state tiddler doesn't match the text attribute value
+* <<.value popup>>: the content is displayed as a popup as described in the PopupMechanism
+* <<.value lt>>: the content is displayed if the state tiddler contains an integer with a value ''less than'' the text attribute value
+* <<.value gt>>: the content is displayed if the state tiddler contains an integer with a value ''greater than'' the text attribute value
+* <<.value lteq>>: the content is displayed if the state tiddler contains an integer with a value ''less than or equal to'' the text attribute value
+* <<.value gteq>>: the content is displayed if the state tiddler contains an integer with a value ''greater than or equal to'' the text attribute value
+
+!! Popup Clamping
+
+Popups can be forced not to overflow their container (when relatively positioned) or the document window (when absolutely positioned). The popup's ''container'' is the nearest ancestor element with CSS positioning (<<.attr position>>: <<.value relative>>, <<.value absolute>>, <<.value fixed>>, or <<.value sticky>>).
+
+Overflow to the left or top is prevented by setting <<.attr positionAllowNegative>> to <<.value no>> (the default). Clamping to the right and bottom is achieved by setting <<.attr clamp>> to <<.value right>>, <<.value bottom>> or <<.value both>>.
+
+See [[Popup Clamping Example|RevealWidget (Popup Clamping Example)]]
+
+
+<<.tip """Refer to [[ButtonWidget]] and [[Coordinate Systems]] for information on relative and absolute positioning""">>
 
 ! Examples
 

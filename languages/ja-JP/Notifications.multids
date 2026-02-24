@@ -1,4 +1,6 @@
 title: $:/language/Notifications/
 
+CopiedToClipboard/Failed: クリップボードのコピーに失敗しました
+CopiedToClipboard/Succeeded: クリップボードへコピーしました
 Save/Done: Wiki を保存しました
 Save/Starting: Wiki を保存します

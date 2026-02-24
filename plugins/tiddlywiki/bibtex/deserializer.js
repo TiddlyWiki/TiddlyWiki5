@@ -19,7 +19,7 @@ exports["application/x-bibtex"] = function(text,fields) {
 		results = [];
 	// Parse the text
 	try {
-		data = bibtexParse.toJSON(text)
+		data = bibtexParse.toJSON(text);
 	} catch(ex) {
 		data = ex.toString();
 	}

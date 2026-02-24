@@ -1,0 +1,33 @@
+are-you-a-dev: No, I would not
+backup-method: DIY (any other solution)
+diy-backup-info: I make 100 backup copies of my wikis using a bash file (on Linux) and have already been able to recover some data this way. When I reach 100, the oldest wiki is automatically deleted. I also regularly back up everything to external storage devices.
+first-heard-survey: tiddlywiki.com
+first-used-tw: 2015
+joined-tw-community: Yes
+main-use-cases: Note-taking;Journalling;As a knowledge base (including technical, non-fiction and encyclopaedic content);Narrative fiction writing (either supporting its creation or directly writing in TiddlyWiki);Programming
+ok-to-publish: Yes, I am happy for my responses to be published
+other-survey-source: 
+other-use-cases: 
+positive-about-future: Yes
+project-decision-trust: Yes
+project-strengths: that everything is discussed openly and many decisions are made by voting or together.
+project-weaknesses: I'm very happy with the work and the future of TW. Perhaps I'll have more time to contribute next year, since I'll probably be retiring then.
+publish-to-intranet: 
+publish-to-web: 
+published-plugin: No
+save-method: Single-file wiki with custom saver (e.g. TiddlyPWA, Timimi, tw5-browser-nativesaver)
+share-wikis: No, my TiddlyWiki is for personal use only
+started-tw-community: 2019
+tags: [[Community Survey 2025]]
+title: Community Survey 2025 Answer 00016
+tw-ability-level: I am comfortable using WikiText widgets (e.g. <$transclude>, <$list>...);I am comfortable writing filter expressions;I have written custom HTML;I have written custom CSS styles
+tw-customisations: 
+tw-future-confidence: Yes
+use-discord: I do not engage with this community
+use-for-work-or-study: No
+use-github-discuss: I read/lurk, but do not post
+use-mailing-list: I read and post in this community
+use-reddit: I do not engage with this community
+use-ttw: I read and post in this community
+value-of-tw: I've tried many tools. TW is the best. Tiddlywiki runs across all systems, and you always have everything important in one file, even encrypted (if you want).
+wiki-setup-info: 

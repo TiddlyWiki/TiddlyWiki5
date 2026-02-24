@@ -19,11 +19,17 @@ var TITLE_INFO_PLUGIN = "$:/temp/info-plugin";
 
 exports.startup = function() {
 	// Function to bake the info plugin with new tiddlers
-	var updateInfoPlugin = function(tiddlerFieldsArray) {
+	// additions: array of tiddler field objects
+	// removals: array of titles to remove
+	var updateInfoPlugin = function(additions = [], removals = []) {
 		// Get the existing tiddlers
 		var json = $tw.wiki.getTiddlerData(TITLE_INFO_PLUGIN,{tiddlers: {}});
-		// Add the new ones
-		$tw.utils.each(tiddlerFieldsArray,function(fields) {
+		$tw.utils.each(removals,function(title) {
+			if(json.tiddlers[title]) {
+				delete json.tiddlers[title];
+			}
+		});
+		$tw.utils.each(additions,function(fields) {
 			if(fields && fields.title) {
 				json.tiddlers[fields.title] = fields;
 			}
@@ -47,7 +53,7 @@ exports.startup = function() {
 		}
 	});
 	updateInfoPlugin(tiddlerFieldsArray);
-	var changes = $tw.wiki.readPluginInfo([TITLE_INFO_PLUGIN]);
+	$tw.wiki.readPluginInfo([TITLE_INFO_PLUGIN]);
 	$tw.wiki.registerPluginTiddlers("info",[TITLE_INFO_PLUGIN]);
 	$tw.wiki.unpackPluginTiddlers();
 };

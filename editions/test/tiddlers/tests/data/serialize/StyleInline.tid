@@ -1,0 +1,7 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/StyleInline
+type: text/vnd.tiddlywiki
+
+@@.myClass This is some text with a class@@
+@@background-color:red; This is some text with a background colour@@
+@@width:100px;.myClass This is some text with a class and a width@@

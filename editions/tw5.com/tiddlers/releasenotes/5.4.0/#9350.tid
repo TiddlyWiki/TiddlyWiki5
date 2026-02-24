@@ -1,0 +1,20 @@
+title: $:/changenotes/5.4.0/#9350
+description: Purge deprecated plugins and editions
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: deprecation
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9350
+github-contributors: Leilei332
+
+Remove deprecated plugins and editions and some legacy plugins, including:
+
+* Blog
+* Cecily
+* [[D3 Plugin]] and its demo
+* HammerJS
+* Highlight (Legacy)
+* Markdown (Legacy)
+* [[Mobile Drag And Drop Shim Plugin]]
+* nw.js Saver
+* TahoeLAFS and its demo

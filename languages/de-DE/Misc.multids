@@ -1,5 +1,6 @@
 title: $:/language/
 
+Alerts: Hinweis
 AboveStory/ClassicPlugin/Warning: Es scheint, Sie möchten ein Plugin verwenden, dass für [[TiddlyWiki Classic|https://tiddlywiki.com/#TiddlyWikiClassic]] entwickelt wurde. Diese Plugins können jedoch mit ~TiddlyWiki Version 5 nicht verwendet werden. ~TiddlyWiki Classic plugin erkannt:
 BinaryWarning/Prompt: Dieser Tiddler enthält binäre Daten.
 ClassicWarning/Hint: Dieser Tiddler wurde im TiddlyWiki Classic Format erstellt. Dieses Format ist nur teilweise kompatibel mit TiddlyWiki Version 5. Mehr Info finden Sie unter: https://tiddlywiki.com/static/Upgrading.html

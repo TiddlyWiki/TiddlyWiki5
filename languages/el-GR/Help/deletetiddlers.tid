@@ -1,0 +1,8 @@
+title: $:/language/Help/deletetiddlers
+description: Διαγράφει μια ομάδα tiddlers
+
+<<.from-version "5.1.20">> Διαγράφει μια ομάδα tiddlers που αναγνωρίζονται από φίλτρο.
+
+```
+--deletetiddlers <φίλτρο>
+```

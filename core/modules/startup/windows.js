@@ -56,9 +56,11 @@ exports.startup = function() {
 		srcDocument.write("<!DOCTYPE html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
 		srcDocument.close();
 		srcDocument.title = windowTitle;
+		$tw.eventBus.emit("window:opened",{windowID, window: srcWindow});
 		srcWindow.addEventListener("beforeunload",function(event) {
 			delete $tw.windows[windowID];
 			$tw.wiki.removeEventListener("change",refreshHandler);
+			$tw.eventBus.emit("window:closed",{windowID});
 		},false);
 		// Set up the styles
 		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
@@ -94,15 +96,15 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-close-window",function(event) {
 		var windowID = event.param,
 			win = $tw.windows[windowID];
-			if(win) {
-				win.close();
-			}
+		if(win) {
+			win.close();
+		}
 	});
 	var closeAllWindows = function() {
 		$tw.utils.each($tw.windows,function(win) {
 			win.close();
 		});
-	}
+	};
 	$tw.rootWidget.addEventListener("tm-close-all-windows",closeAllWindows);
 	// Close open windows when unloading main window
 	$tw.addUnloadTask(closeAllWindows);

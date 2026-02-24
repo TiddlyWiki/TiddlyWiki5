@@ -3,20 +3,16 @@
 	"plugins": [
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/help",
-		"tiddlywiki/stacked-view",
 		"tiddlywiki/powered-by-tiddlywiki",
 		"tiddlywiki/internals",
 		"tiddlywiki/highlight",
 		"tiddlywiki/bibtex",
-		"tiddlywiki/savetrail",
-		"tiddlywiki/external-attachments",
 		"tiddlywiki/dynaview",
 		"tiddlywiki/dynannotate",
 		"tiddlywiki/codemirror",
 		"tiddlywiki/menubar",
 		"tiddlywiki/jszip",
 		"tiddlywiki/confetti",
-		"tiddlywiki/dynannotate",
 		"tiddlywiki/tour"
 	],
 	"themes": [

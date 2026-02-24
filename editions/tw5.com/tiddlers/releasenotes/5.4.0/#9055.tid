@@ -1,0 +1,27 @@
+title: $:/changenotes/5.4.0/#9055
+description: Dynamic parameters for macro/procedure/function calls
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9055
+github-contributors: Jermolene
+
+This PR extends the handling of macro/procedure/function invocationsmade via the `<<..>>` shortcut syntax to allow dynamic parameters instead of just static strings. To indicate the new syntax the colon that usually separates a parameter name from its value is replaced by an equals sign. For example:
+
+```
+<<mymacro param={{Something}}>>
+<div class=<<mymacro param={{Something}}>>>
+<div class=<<mymacro param={{{ [<myvar>addprefix[https:] }}}>>>
+<div class=<<mymacro param={{{ [<innermacro p={{Something}}>addprefix[https:] }}}>>>
+```
+
+Note that the new syntax obviates the need for `<$transclude $variable=...>` constructions in many cases.
+
+The extended syntax allows parameter values to be passed as transclusions, filter expressions or nested invocations in three settings:
+
+* As a standalone construction
+* As a widget attribute value
+* As a filter operand value
+
+See [[Calls]] for more details and examples.

@@ -3,11 +3,9 @@ tags: $:/tags/Macro
 
 \whitespace trim
 
-\procedure copy-to-clipboard(src,class:"tc-btn-invisible",style,type:"text/plain",plain)
-\procedure copy-to-clipboard-actions()
-<$action-sendmessage $message="tm-copy-to-clipboard" $param=<<src>> type=<<type>> plainText=<<plain>>/>
-\end copy-to-clipboard-actions
-<$button actions=<<copy-to-clipboard-actions>>
+\procedure copy-to-clipboard(src,class:"tc-btn-invisible",style)
+<$button message="tm-copy-to-clipboard"
+	param=<<src>>
 	class=<<class>>
 	style=<<style>>
 	tooltip={{$:/language/Buttons/CopyToClipboard/Hint}}
@@ -17,12 +15,12 @@ tags: $:/tags/Macro
 		<$text text={{$:/language/Buttons/CopyToClipboard/Caption}}/>
 	</span>
 </$button>
-\end copy-to-clipboard
+\end
 
-\procedure copy-to-clipboard-above-right(src,class:"tc-btn-invisible",style,type:"text/plain")
-<div style.position="relative">
-	<div style.position="absolute" style.bottom="0" style.right="0">
-		<$transclude $variable="copy-to-clipboard" src=<<src>> class=<<class>> style=<<style>> type=<<type>> plain=<<plain>>/>
+\procedure copy-to-clipboard-above-right(src,class:"tc-btn-invisible",style)
+<div style="position: relative;">
+	<div style="position: absolute; bottom: 0; right: 0;">
+		<$macrocall $name="copy-to-clipboard" src=<<src>> class=<<class>> style=<<style>>/>
 	</div>
 </div>
 \end

@@ -1,0 +1,41 @@
+created: 20210618133745003
+from-version: 5.3.0
+modified: 20250423104147235
+original-modified: 20230710074225410
+rp-input: <<.olink すべて>>のTiddlerタイトル
+rp-output: フィルタランのアウトプットは、空のリストでない限り、前回までのランのアウトプットを置き換えます(以下を参照)。
+rp-purpose: フィルタランへのインプットをそのアウトプットで置き換え、インプットがある場合にのみランを評価
+search: 
+tags: [[Named Filter Run Prefix]]
+title: Then Filter Run Prefix
+ja-title: thenフィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+":then"
+[["ラン"|"Filter Run"]]
+"""/>
+
+<<.op :then>>フィルターランプレフィックスは、前回までのすべてのフィルタランの結果をそのアウトプットに置き換えるために使用されます。
+
+前回までのすべてのランの結果が空のリストの場合、<<.op :then>>プレフィックス付きフィルタランは評価されません。
+
+<<.op :then>>プレフィックス付きフィルタランのアウトプット自体が空のリストである場合、前回までのすべてのフィルタランの結果は変更されずに渡されます。
+
+<<.tip "空の文字列項目が1つ含まれるリストは空のリストではないことに注意してください。">>
+
+!! <<.op :then>>ランプレフィックスと<<.olink then>>オペレータの比較
+
+<<.op then>>オペレータと<<.op :then>>プレフィックス付きフィルタランの主な違いは、オペレータはインプット[[タイトルリスト|Title List]]の//各項目//をそのパラメータで置き換えるのに対し、<<.op :then>>オペレータは//インプットリスト全体//をそのラン結果で置き換える点です。
+
+|doc-op-comparison tc-center|k
+| !<<.op :then>>フィルタランプレフィックス | !<<.op then>>オペレータ |
+|^<<.operator-example m1-1 "[tag[WikiText]] :then[[true]]">>|^<<.operator-example m1-2 "[tag[WikiText]then[true]]">><p>これらを同等にするには、追加のフィルタステップを追加します:</p> <<.operator-example m1-3 "[tag[WikiText]count[]compare:number:gt[0]then[true]]">>|
+
+
+[[thenフィルタランプレフィックス(例)|Then Filter Run Prefix (Examples)]]
+
+参照: [[elseフィルタランプレフィックス|Else Filter Run Prefix]] | [[thenオペレータ|then Operator]] と [[elseオペレータ|else Operator]]
+

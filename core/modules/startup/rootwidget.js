@@ -74,15 +74,14 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-copy-to-clipboard",function(event) {
 		$tw.utils.copyToClipboard(event.param,{
 			successNotification: event.paramObject && event.paramObject.successNotification,
-			failureNotification: event.paramObject && event.paramObject.failureNotification,
-			plainText: event.paramObject && event.paramObject.plainText
-		},event.paramObject && event.paramObject.type);
+			failureNotification: event.paramObject && event.paramObject.failureNotification
+		});
 	});
 	// Install the tm-focus-selector message
 	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
 		var selector = event.param || "",
 			element,
-		    	baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
+			baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
 		element = $tw.utils.querySelectorSafe(selector,baseElement);
 		if(element && element.focus) {
 			element.focus(event.paramObject);

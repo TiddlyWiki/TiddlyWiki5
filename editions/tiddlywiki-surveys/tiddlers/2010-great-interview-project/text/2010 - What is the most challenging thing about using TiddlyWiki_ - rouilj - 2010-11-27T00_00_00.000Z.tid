@@ -1,0 +1,7 @@
+icon: $:/avatars/rouilj
+modified: 20101127000000000
+modifier: rouilj
+tags: [[2010 - What is the most challenging thing about using TiddlyWiki?]] [[2010 - Interview Answer]]
+title: 2010 - What is the most challenging thing about using TiddlyWiki? - rouilj - 2010-11-27T00:00:00.000Z
+
+The horrible debugging environment. I have been trying to fix the Quiz plugin for a while but the debugging environment compared to other tools (perl, python, C) is primitive.<br>
