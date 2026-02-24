@@ -5,11 +5,6 @@ tags: [[$:/tags/wiki-test-spec]]
 
 title: Output
 
-\procedure testproc()
-This is ''wikitext''
-\end
-
-
 <$tiddler tiddler="Data">
 <$transclude $index="testindex"/>
 -

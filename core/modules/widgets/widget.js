@@ -390,7 +390,7 @@ Widget.prototype.computeAttributes = function(options) {
 		if($tw.utils.isArray(value)) {
 			multiValue = value;
 			newMultiValuedAttributes[name] = multiValue;
-			value = value[0];
+			value = value[0] || "";
 		}
 		var changed = (self.attributes[name] !== value);
 		if(!changed && multiValue && self.multiValuedAttributes) {
@@ -452,9 +452,7 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 	} else { // String attribute
 		value = attribute.value;
 		if(options.asList) {
-			if(value === undefined) {
-				value = [];
-			} else {
+			if(value !== undefined) {
 				value = [value];
 			}
 		}
