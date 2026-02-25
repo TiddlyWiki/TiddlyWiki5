@@ -1,4 +1,5 @@
 title: $:/core/images/storyview-zoomin
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-storyview-zoomin tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M8.007 0A8.01 8.01 0 000 8.007v111.986A8.01 8.01 0 008.007 128h111.986a8.01 8.01 0 008.007-8.007V8.007A8.01 8.01 0 00119.993 0H8.007zm15.992 16A8 8 0 0016 24.009V71.99C16 76.414 19.588 80 24 80h80a8 8 0 008-8.009V24.01c0-4.423-3.588-8.009-8-8.009H24z"/></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-storyview-zoomin tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M8.007 0A8.01 8.01 0 000 8.007v111.986A8.01 8.01 0 008.007 128h111.986a8.01 8.01 0 008.007-8.007V8.007A8.01 8.01 0 00119.993 0H8.007zm15.992 16A8 8 0 0016 24.009V71.99C16 76.414 19.588 80 24 80h80a8 8 0 008-8.009V24.01c0-4.423-3.588-8.009-8-8.009H24z"/></svg>

@@ -1,0 +1,8 @@
+title: $:/core/ui/KeyboardShortcuts/open-control-panel
+tags: $:/tags/KeyboardShortcut
+key: ((open-control-panel))
+
+\whitespace trim
+<$navigator story="$:/StoryList" history="$:/HistoryList">
+<$action-navigate $to="$:/ControlPanel" $scroll="yes"/>
+</$navigator>

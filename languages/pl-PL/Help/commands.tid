@@ -10,7 +10,7 @@ Uruchamia komendy zwrócone przez filtr.
 Dla przykładu:
 
 ```
---commands "[enlist{$:/build-commands-as-text}]"
+--commands "[enlist:raw{$:/build-commands-as-text}]"
 ```
 
 ```

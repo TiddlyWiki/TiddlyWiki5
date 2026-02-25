@@ -1,0 +1,24 @@
+created: 20180626122427188
+modified: 20241228111603066
+original-modified: 20211117234223960
+tags: [[TiddlyWiki on Node.js]]
+title: NamedCommandParameters
+ja-title: 名前付きコマンドパラメータ
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.18">> ほとんどのTiddlyWiki[[コマンド|Commands]]は、パラメータに位置に基づくシステムを使用しており、各パラメータはコマンドで定義された正確な順序でリストされる必要があります。より複雑なコマンドの中には、名前付きコマンドパラメータの代替スキームを提供するものもあります。たとえば、ここでは"port"と"host"という2つのパラメータを提供します:
+
+```
+--listen port=8090 host=0.0.0.0
+```
+
+パラメータの順序は重要ではないことに注意してください。
+
+パラメータ内で特殊文字を使用するには引用符が必要です。Unix、Linux、Macではシングルクォートが使用され、Windowsではダブルクォートが使用されます: 
+
+```
+--listen port=8090 username=joe 'password=s3cret(!'
+--listen port=8090 username=joe "password=s3cret(!"
+```
+
+引用符は値の部分だけでなく、名前=値のペア全体を括ることに注意してください。

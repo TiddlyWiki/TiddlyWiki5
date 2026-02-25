@@ -1,0 +1,8 @@
+title: $:/changenotes/5.4.0/#9251/impacts/deprecation
+changenote: $:/changenotes/5.4.0/#9251
+created: 20251129130610944
+modified: 20251129130610953
+tags: $:/tags/ImpactNote
+description: Some utility functions are deprecated and are discouraged to be used
+impact-type: deprecation
+

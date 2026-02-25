@@ -1,0 +1,11 @@
+title: $:/changenotes/5.4.0/#7898
+description: Add clamp attribute to RevealWidget
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/7898
+github-contributors: yaisog
+
+The attribute `clamp` is added to the RevealWidget to force the popup to be displayed inside its container without overflowing. The value can be `right`, `bottom` or `both`.
+Clamping to left and top can be accomplished via the `positionAllowNegative` attribute.

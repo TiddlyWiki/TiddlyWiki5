@@ -6,10 +6,7 @@ module-type: widget
 Message catcher widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -72,7 +69,7 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 				}
 			);
 		}
-	}
+	};
 	// Add the main event handler
 	addEventHandler(this.getAttribute("type"),this.getAttribute("actions"));
 	// Add any other event handlers
@@ -106,5 +103,3 @@ MessageCatcherWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.messagecatcher = MessageCatcherWidget;
-
-})();

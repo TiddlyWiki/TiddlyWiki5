@@ -1,0 +1,11 @@
+created: 20210519155910219
+modified: 20210519160221219
+tags: [[Hidden Settings]]
+title: Hidden Setting: Import Content Types for Editor
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.0">>
+
+$:/config/Editor/ImportContentTypesFilter
+
+This filter determines which `contentTypes` can be imported by dragging and dropping into the editor. It used by a DropzoneWidget wrapped around the editor, for the `contentTypesFilter` attribute.

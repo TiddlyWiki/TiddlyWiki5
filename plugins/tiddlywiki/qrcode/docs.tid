@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/qrcode/docs
+
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/QRCodeDocs]!has[draft.of]]" "$:/plugins/tiddlywiki/qrcode/docs/barcodereader">>

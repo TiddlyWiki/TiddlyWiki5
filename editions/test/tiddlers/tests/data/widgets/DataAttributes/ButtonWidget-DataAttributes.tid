@@ -1,0 +1,27 @@
+title: Widgets/DataAttributes/ButtonWidget
+description: Data Attributes for ButtonWidget
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$button tag="div" class="myclass" data-title="mytiddler" style.color="red" onclick="clicked">
+my tiddler
+</$button>
+<$button tag="div" class="myclass" data-title={{Temp}} style.color={{{ [[Temp]get[color]] }}}>
+hello
+</$button>
++
+title: Actions
+
+<$action-setfield $tiddler="Temp" $field="text" $value="Title2" color="red"/>
++
+title: Temp
+color: black
+
+Title1
++
+title: ExpectedResult
+
+<p><div class="myclass" data-title="mytiddler" style="color:red;">my tiddler</div><div class="myclass" data-title="Title2" style="color:red;">hello</div></p>

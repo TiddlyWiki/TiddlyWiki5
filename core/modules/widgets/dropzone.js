@@ -6,10 +6,7 @@ module-type: widget
 Dropzone widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var IMPORT_TITLE = "$:/Import";
@@ -29,7 +26,6 @@ DropZoneWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DropZoneWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
@@ -218,7 +214,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 						if(tiddlerFields && tiddlerFields.length) {
 							readFileCallback(tiddlerFields);
 						}
-					})
+					});
 				}
 			}
 		} else {
@@ -234,30 +230,30 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 	var self = this;
 	var	readFileCallback = function(tiddlerFieldsArray) {
-			self.readFileCallback(tiddlerFieldsArray);
-		};
+		self.readFileCallback(tiddlerFieldsArray);
+	};
 	var getItem = function(type) {
-			type = type || "text/plain";
-			return function(str) {
-				// Use the deserializer specified if any
-				if(self.dropzoneDeserializer) {
-					tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: self.wiki.generateNewTitle("Untitled " + type)},{deserializer:self.dropzoneDeserializer});
-					if(tiddlerFields && tiddlerFields.length) {
-						readFileCallback(tiddlerFields);
-					}
-				} else {
-					tiddlerFields = {
-						title: self.wiki.generateNewTitle("Untitled " + type),
-						text: str,
-						type: type
-					};
-					if($tw.log.IMPORT) {
-						console.log("Importing string '" + str + "', type: '" + type + "'");
-					}
-					readFileCallback([tiddlerFields]);
+		type = type || "text/plain";
+		return function(str) {
+			// Use the deserializer specified if any
+			if(self.dropzoneDeserializer) {
+				tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: self.wiki.generateNewTitle("Untitled " + type)},{deserializer:self.dropzoneDeserializer});
+				if(tiddlerFields && tiddlerFields.length) {
+					readFileCallback(tiddlerFields);
 				}
+			} else {
+				tiddlerFields = {
+					title: self.wiki.generateNewTitle("Untitled " + type),
+					text: str,
+					type: type
+				};
+				if($tw.log.IMPORT) {
+					console.log("Importing string '" + str + "', type: '" + type + "'");
+				}
+				readFileCallback([tiddlerFields]);
 			}
 		};
+	};
 	// Let the browser handle it if we're in a textarea or input box
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1 && !event.target.isContentEditable && !event.twEditor) {
 		var self = this,
@@ -271,6 +267,20 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 					callback: readFileCallback,
 					deserializer: this.dropzoneDeserializer
 				});
+			} else if(item.kind === "string" && !["text/html", "text/plain", "Text"].includes(item.type) && $tw.utils.itemHasValidDataType(item)) {
+				// Try to import the various data types we understand
+				var fallbackTitle = self.wiki.generateNewTitle("Untitled");
+				//Use the deserializer specified if any
+				if(this.dropzoneDeserializer) {
+					item.getAsString(function(str){
+						var tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: fallbackTitle},{deserializer:self.dropzoneDeserializer});
+						if(tiddlerFields && tiddlerFields.length) {
+							readFileCallback(tiddlerFields);
+						}
+					});
+				} else {
+					$tw.utils.importPaste(item,fallbackTitle,readFileCallback);
+				}
 			} else if(item.kind === "string") {
 				// Create tiddlers from string items
 				var tiddlerFields;
@@ -314,5 +324,3 @@ DropZoneWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.dropzone = DropZoneWidget;
-
-})();

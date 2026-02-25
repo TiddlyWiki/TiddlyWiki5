@@ -1,0 +1,37 @@
+created: 20230318160840043
+modified: 20230325162525198
+tags: [[Reference Tiddlers]]
+title: Widget Documentation Style Guide
+
+Widget documentation generally consists of
+
+* an introductory summary of the widget's function
+* an overview of attributes and how the widget content is handled
+* more detailed attribute explanation when required
+* examples
+
+The //Content and Attributes// section should describe how the content of the widget is used, followed by a table of the possible attributes, each with a short description of a single sentence. The attribute names in the table and elsewhere in the tiddler should be rendered with the <<.var .attr>> macro. The <<.var .from-version>> macro should be used as first item in the description to designate the version at which a parameter became available.
+
+A subsection should be used for parameters that need an //extended description//, possibly with separate examples. When there are more than 2 such subsection necessary, the subsections should be split into their own tiddlers, and the <<.var .doc-tabs>> macro should be used to transclude them into the widget documentation tiddler as tabs.
+
+* The <<.var .doc-tabs>> macro is used without parameters
+* The <<.var .doc-tabs>> macro must not be used more than once within a single documentation tiddler
+* The tiddlers to be included in the tab group should be tagged with the respective widget documentation tiddler and have a <<.field description>> field set to <<.value tab>>
+* The <<.field caption>> contains the tab button text. It should be as short as possible. For the attribute name, the <<.var .attr>> macro should be used in the <<.field caption>>
+* The tab tiddlers should start with a level-2-heading that links to itself, so that they may be opened from within the tabs
+* They can contain examples if these are specific to the topic of the subsection
+
+In the attribute table, the <<.var .widget-attr-link>> macro can be used to turn attributes into a button that activates the respective tab. The <<.var .widget-attr-link>> macro is used like this
+
+```
+<<.widget-attr-link text:<display text> target:<title of corresponding tiddler> >>
+```
+
+Elsewhere, the <<.var .doc-tab-link>> macro can be used to activate the respective tab
+
+```
+<<.doc-tab-link text:<display text> target:<title of corresponding tiddler> tooltip:<tooltip to show when hovering over the button> class:<additional classes> >>
+```
+The parameters <<.param tooltip>> and <<.param class>> are optional.
+
+Both link macros scroll to the tab group additionally to setting the selected tab. They can also be used within the tab contents tiddlers themselves. If a tab tiddler is opened outside the tab group, <<.var doc-tab-link>> will open the tiddler containing the tab group if it is not yet open, and scroll to its tab group if it is.

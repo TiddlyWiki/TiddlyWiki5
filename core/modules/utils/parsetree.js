@@ -6,10 +6,7 @@ module-type: utils
 Parse tree utility functions.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -123,4 +120,18 @@ exports.getParseTreeText = function getParseTreeText(tree) {
 	return output.join("");
 };
 
-})();
+exports.getParser = function(type,options) {
+	options = options || {};
+	// Select a parser
+	var Parser = $tw.Wiki.parsers[type];
+	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
+		Parser = $tw.Wiki.parsers[$tw.utils.getFileExtensionInfo(type).type];
+	}
+	if(!Parser) {
+		Parser = $tw.Wiki.parsers[options.defaultType || "text/vnd.tiddlywiki"];
+	}
+	if(!Parser) {
+		return null;
+	}
+	return Parser;
+};

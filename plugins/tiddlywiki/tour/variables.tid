@@ -1,0 +1,104 @@
+title: $:/plugins/tiddlywiki/tour/variables
+
+\whitespace trim
+
+<!--
+
+The following state tiddlers control the tour. They should not be directly modified, but rather use the appropriate procedure to ensure that all the associated actions are performed.
+
+* $:/config/CurrentTour: title of current tour definition tiddler
+* $:/state/tour/step: title of current step of the tour
+
+These config tiddlers may be changed directly as required:
+
+* $:/config/ShowTour: "show" (default) or "hide"
+* $:/config/AutoStartTour: "no" (default) or "yes"
+
+-->
+
+\function tour-current-tag()
+[{$:/config/CurrentTour}get[tour-tag]]
+\end
+
+\procedure tour-filter-steps-by-condition()
+[<currentTiddler>has[condition]subfilter{!!condition}limit[1]] :else[<currentTiddler>!has[condition]then[true]]
+\end
+
+\function tour-all-steps-filtered-by-condition()
+[all[shadows+tiddlers]tag<tour-current-tag>filter<tour-filter-steps-by-condition>]
+\end
+
+\function tour-is-not-first-step()
+[function[tour-all-steps-filtered-by-condition]allbefore{$:/state/tour/step}count[]compare:number:gt[0]]
+\end
+
+\function tour-is-last-step()
+[function[tour-all-steps-filtered-by-condition]allafter{$:/state/tour/step}count[]compare:number:eq[0]]
+\end
+
+\function tour-is-not-last-step()
+[function[tour-all-steps-filtered-by-condition]allafter{$:/state/tour/step}count[]compare:number:gt[0]]
+\end
+
+
+\procedure tour-initialise-current-tour-step()
+\procedure tv-action-refresh-policy() always
+<$transclude $tiddler={{$:/state/tour/step}} $field="enter-actions"/>
+\end
+
+\procedure tour-chooser(filter:"[all[shadows+tiddlers]tag[$:/tags/Tour]]")
+\procedure choose-tour-actions()
+<$transclude $variable="tour-start" title=<<currentTiddler>>/>
+\end choose-tour-actions
+<div class="tc-tour-panel-chooser-wrapper">
+	<$list filter=<<filter>>>
+		<div class="tc-tour-panel-chooser-item">
+			<div class="tc-tour-panel-chooser-item-text">
+				<$transclude $field="description">
+					<$text text=<<currentTiddler>>/>
+				</$transclude>
+			</div>
+			<$button class="tc-btn-invisible tc-tour-panel-chooser-start-button" actions=<<choose-tour-actions>>>
+				start&nbsp;{{$:/core/images/chevron-right}}
+			</$button>
+		</div>
+	</$list>
+</div>
+\end tour-chooser
+
+\procedure tour-start(title,step)
+\procedure tv-action-refresh-policy() always
+<$action-setfield $tiddler="$:/config/CurrentTour" text=<<title>>/>
+<$transclude $variable="tour-restart" step=<<step>>/>
+\end
+
+\procedure tour-restart(step)
+\procedure tv-action-refresh-policy() always
+<$action-setfield $tiddler="$:/config/ShowTour" text="show"/>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [<step>!is[blank]] :else[function[tour-all-steps-filtered-by-condition]first[]] }}}/>
+<<tour-initialise-current-tour-step>>
+\end
+
+\procedure tour-next-step()
+\procedure tv-action-refresh-policy() always
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [function[tour-all-steps-filtered-by-condition]allafter{$:/state/tour/step}else[$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/finished]] }}}/>
+<<tour-initialise-current-tour-step>>
+\end
+
+\procedure tour-previous-step()
+\procedure tv-action-refresh-policy() always
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [function[tour-all-steps-filtered-by-condition]allbefore{$:/state/tour/step}last[]] :else[all[shadows+tiddlers]tag<tour-current-tag>first[]] }}}/>
+<<tour-initialise-current-tour-step>>
+\end
+
+\procedure tour-display-current-tour()
+<$transclude $tiddler={{$:/config/CurrentTour}} $field="description">
+	<$text text={{$:/config/CurrentTour}}/>
+</$transclude>
+\end
+
+\procedure tour-task(text)
+<div class="tc-tour-task">
+{{$:/core/images/help}} <$transclude $variable="text" $mode="inline"/>
+</div>
+\end

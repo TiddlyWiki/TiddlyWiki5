@@ -1,0 +1,26 @@
+title: Transclude/CustomWidget/Fail
+description: Custom widget failed definition
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<!-- Attempt to define the <$non-existent-widget> widget by defining a transcludable variable with that name -->
+\widget $non-existent-widget(one:'Jaguar')
+\whitespace trim
+<$text text=<<one>>/>
+<$slot $name="ts-raw">
+	Whale
+</$slot>
+\end
+<$non-existent-widget one="Dingo">
+	Crocodile
+</$non-existent-widget>
+<$non-existent-widget one="BumbleBee">
+	Squirrel
+</$non-existent-widget>
++
+title: ExpectedResult
+
+<p>Undefined widget 'non-existent-widget'Undefined widget 'non-existent-widget'</p>

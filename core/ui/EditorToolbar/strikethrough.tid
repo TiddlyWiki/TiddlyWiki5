@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/strikethrough
 caption: {{$:/language/Buttons/Strikethrough/Caption}}
 description: {{$:/language/Buttons/Strikethrough/Hint}}
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 shortcuts: ((strikethrough))
 
 <$action-sendmessage
@@ -11,4 +11,5 @@ shortcuts: ((strikethrough))
 	$param="wrap-selection"
 	prefix="~~"
 	suffix="~~"
+	trimSelection="yes"
 />

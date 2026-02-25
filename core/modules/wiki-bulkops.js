@@ -6,10 +6,7 @@ module-type: wikimethod
 Bulk tiddler operations such as rename.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -27,7 +24,7 @@ function renameTiddler(fromTitle,toTitle,options) {
 		this.addTiddler(newTiddler);
 		this.deleteTiddler(fromTitle);
 		// Rename any tags or lists that reference it
-		this.relinkTiddler(fromTitle,toTitle,options)
+		this.relinkTiddler(fromTitle,toTitle,options);
 	}
 }
 
@@ -73,7 +70,7 @@ function relinkTiddler(fromTitle,toTitle,options) {
 					processList(list);
 				}
 				if(isModified) {
-					var newTiddler = new $tw.Tiddler(tiddler,{tags: tags, list: list},self.getModificationFields())
+					var newTiddler = new $tw.Tiddler(tiddler,{tags: tags, list: list},self.getModificationFields());
 					newTiddler = $tw.hooks.invokeHook("th-relinking-tiddler",newTiddler,tiddler);
 					self.addTiddler(newTiddler);
 				}
@@ -84,5 +81,3 @@ function relinkTiddler(fromTitle,toTitle,options) {
 
 exports.renameTiddler = renameTiddler;
 exports.relinkTiddler = relinkTiddler;
-
-})();

@@ -3,14 +3,22 @@ tags: $:/tags/ControlPanel/Saving
 caption: {{$:/language/ControlPanel/Saving/General/Caption}}
 list-before:
 
+\whitespace trim
 \define lingo-base() $:/language/ControlPanel/Settings/
+
+<div class="tc-control-panel-saving" data-setting-title=<<currentTab>>>
 
 {{$:/language/ControlPanel/Saving/General/Hint}}
 
-!! <$link to="$:/config/AutoSave"><<lingo AutoSave/Caption>></$link>
+!!.tc-control-panel-accent <$link to="$:/config/AutoSave"><<lingo AutoSave/Caption>></$link>
 
 <<lingo AutoSave/Hint>>
 
-<$radio tiddler="$:/config/AutoSave" value="yes"> <<lingo AutoSave/Enabled/Description>> </$radio>
+<$radio tiddler="$:/config/AutoSave" value="yes">
+	<span class="tc-tiny-gap-left"><<lingo AutoSave/Enabled/Description>></span>
+</$radio>
 
-<$radio tiddler="$:/config/AutoSave" value="no"> <<lingo AutoSave/Disabled/Description>> </$radio>
+<$radio tiddler="$:/config/AutoSave" value="no">
+	<span class="tc-tiny-gap-left"><<lingo AutoSave/Disabled/Description>></span>
+</$radio>
+</div>

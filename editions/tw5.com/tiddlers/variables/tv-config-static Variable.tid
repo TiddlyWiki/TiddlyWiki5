@@ -1,0 +1,10 @@
+created: 20230617085524754
+modified: 20230617085524754
+title: tv-config-static Variable
+tags: Variables [[Core Variables]] [[Configuration Variables]]
+type: text/vnd.tiddlywiki
+caption: tv-config-static
+
+<<.from-version "5.3.0">> The <<.def tv-config-static>> [[variable|Variables]] is set to `yes` within static rendering templates, and is unset in other contexts.
+
+It is useful for selectively hiding or showing content depending on whether a rendering is static or interactive.

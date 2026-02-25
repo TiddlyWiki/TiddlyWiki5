@@ -1,0 +1,16 @@
+created: 20130825103300000
+modified: 20241018105028003
+original-modified: 20140912150136251
+tags: Learning
+title: Adopt a Titles Policy
+ja-title: タイトルポリシーを採用する
+type: text/vnd.tiddlywiki
+
+
+TiddlyWikiドキュメント内の構造が複雑になるにつれて、Tiddlerのタイトルの一貫性を保つのが難しくなることがあります。例えば、用語は複数形で定義すべきでしょうか、それとも単数形で定義すべきでしょうか?キャメルケースか、スペース区切りか?
+
+正式にタイトル設定ポリシーを定めると、混乱を減らすことができます。例えば、このWikiのタイトルポリシーは、[[ドキュメントスタイルガイド|Documentation Style Guide]]に記録されています
+
+! [[システムTiddler|SystemTiddler]] のタイトル
+
+役にたつ規則は、作成するシステムTiddlerにはプレフィックス`$:/_`を使用することです。そうするとサイドバーのシステムTiddlerリストの先頭付近に表示されるようにできます

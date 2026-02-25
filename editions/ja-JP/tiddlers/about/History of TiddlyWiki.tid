@@ -1,0 +1,14 @@
+created: 20140908114400000
+modified: 20251208115007037
+original-modified: 20251122174540932
+tags: About
+title: History of TiddlyWiki
+ja-title: TiddlyWikiの歴史
+type: text/vnd.tiddlywiki
+
+~TiddlyWikiの歴史をまとめています。このプロジェクトは現在進行中です。寄稿や思い出話など、ぜひお寄せください。
+
+* [[TiddlyWiki物語|The Story of TiddlyWiki]] – [[@Jermolene]]によるTiddlyWikiの物語、その起源と進化に関する個人的な記録
+* https://github.com/TiddlyWiki/LaunchArchive – 2004年のTiddlyWiki立ち上げ時からのブログとツイート
+* [[TiddlyWiki記念日|TiddlyWiki Anniversaries]] – TiddlyWikiの主要な記念日のお祝いイベントの記録
+* [[フィルタシンタックスの歴史|Filter Syntax History]] – TiddlyWiki5におけるフィルタシンタックスの進化の簡単な歴史

@@ -1,0 +1,17 @@
+title: MultiValuedVariables/TranscludeParameterFunction
+description: Multi-valued variable passed as function parameter via ((var)) in $transclude
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function showItems(itemList) [(itemList)sort[]join[-]]
+<$let items={{{ [all[tiddlers]] }}}>
+<$transclude $variable="showItems" itemList=((items))/>
+</$let>
++
+title: ExpectedResult
+
+<p>$:/core-ExpectedResult-Output</p>
++

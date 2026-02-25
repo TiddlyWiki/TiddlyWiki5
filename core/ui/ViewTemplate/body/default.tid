@@ -1,4 +1,5 @@
 title: $:/core/ui/ViewTemplate/body/default
+code-body: yes
 
 <$transclude>
 

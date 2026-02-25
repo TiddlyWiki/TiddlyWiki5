@@ -4,5 +4,6 @@
 	"description": "HTML mixed highlighting mode for CodeMirror",
 	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
 	"dependents": ["$:/plugins/tiddlywiki/codemirror-mode-xml","$:/plugins/tiddlywiki/codemirror-mode-javascript","$:/plugins/tiddlywiki/codemirror-mode-css"],
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
 }

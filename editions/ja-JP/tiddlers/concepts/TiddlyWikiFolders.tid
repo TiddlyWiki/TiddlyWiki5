@@ -1,0 +1,42 @@
+created: 20130825214200000
+modified: 20250203103623306
+original-modified: 20161015134454785
+tags: [[TiddlyWiki on Node.js]]
+title: TiddlyWikiFolders
+ja-title: TiddlyWikiフォルダ
+type: text/vnd.tiddlywiki
+
+[[Node.js上のTiddlyWiki|TiddlyWiki on Node.js]]は、従来の単一ファイルWikiと同様に、フォルダーに保存される個々のTiddlerファイルのWikiもサポートします。
+
+! Wikiフォルダ構造
+
+Wikiフォルダーには、次のファイルとフォルダーを含めることができます: 
+
+* ''tiddlywiki.info'' - Wikiのメタデータを含むJSONファイル -- [[tiddlywiki.infoファイル|tiddlywiki.info Files]]を参照
+* ''\tiddlers'' - Wikiを構成するTiddlerファイルを含むフォルダ
+* ''\plugins'' - Wikiに含める[[プラグインフォルダ|PluginFolders]]を含むフォルダ
+* ''\languages'' - Wikiに含める言語プラグインの[[プラグインフォルダ|PluginFolders]]を含むフォルダ
+* ''\themes'' - Wikiに含めるテーマプラグインの[[プラグインフォルダ|PluginFolders]]を含むフォルダ
+
+''tiddlywiki.info''ファイルのみが必須で、その他はすべてオプションです。上記にリストされていないファイルとフォルダーは無視されます。
+
+!! プラグイン処理
+
+ブラウザで使用できるようにするには、プラグインをWikiに含める必要があります。サーバー上で生成されるWikiの場合、[[TiddlyWikiフォルダ|TiddlyWikiFolders]]には、このWikiに含めるプラグインの識別を[[tiddlywiki.infoファイル|tiddlywiki.info Files]]に含めることができます:
+
+```
+{
+	"plugins": [
+		"tiddlywiki/slider",
+		"tiddlytools/chooser"
+	]
+}
+```
+
+プラグイン名は、TiddlyWiki5のルート`plugins`フォルダーにリストされているプラ​​グインフォルダーを参照します。プラグインは、Wikiの`plugins`サブフォルダーにコピーして手動で含めることもできます。
+
+!! `tiddlers`フォルダの処理
+
+`tiddlers`フォルダー内のすべての[[Tiddlerファイル|TiddlerFiles]]は、起動時にWikiに読み込まれます。サブフォルダーは[[Tiddlerファイル|TiddlerFiles]]の再帰スキャンの対象となります。新しく作成されたTiddlerは、[[特に設定されて|Customising Tiddler File Naming]]いない限り、`tiddlers`フォルダーの直下の[[Tiddlerファイル|TiddlerFiles]]に保存されます。
+
+`tiddlers`フォルダー内のサブフォルダーのデフォルトの処理は、`tiddlywiki.files`と呼ばれるJSONファイルを提供することで上書きできます -- [[tiddlywiki.filesファイル|tiddlywiki.files Files]]を参照。

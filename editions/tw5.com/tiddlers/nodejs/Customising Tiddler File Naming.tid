@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 By default, a [[TiddlyWiki on Node.js]] instance using a [[wiki folder|TiddlyWikiFolders]] will create new tiddler files by using the sanitised and disambiguated title as filename. All filepath operations are relative to a `default-tiddler-location` which defaults to the wiki folder's `tiddlers/` directory. This can be overridden by mapping a path in the wiki's tiddlywiki.info file, by using a `default-tiddler-location` property in the `config` object.
 
-The default file extension of `.tid` is used for tiddlers that are missing the `type` field, or for tiddlers of type "text/vnd.tiddlywiki". Tidders of other types are saved according to their MIME types (defined at boot startup).
+The default file extension of `.tid` is used for tiddlers that are missing the `type` field, or for tiddlers of type "text/vnd.tiddlywiki". Tiddlers of other types are saved according to their MIME types (defined at boot startup).
 
 Both the logical path (directory and file name) and the file extension can be customised independently by creating optional tiddlers [[$:/config/FileSystemPaths]] and [[$:/config/FileSystemExtensions]].
 
@@ -29,7 +29,7 @@ Logical paths do not include the file-on-disk's extension (see below), and they 
 
 <<.note "All paths are relative to the wiki's `default-tiddler-location`.">>
 
-This will store newly created system tiddlers that are not drafts of other tiddlers in `./_system/` (after stripping the `$:/` prefix). Next, all drafts have the path separator characters in their titles replaced by "_" and are stored in `./drafts/`. Then tiddlers tagged [[task]] are stored in a subdirectory `./mytasks/`. Finally, all tidders not tagged with "externalnote" will match the final `[!tag[externalnote]addprefix[wiki/]]` storing these in `./wiki/`. In this example, tiddlers tagged with "externalnote" have been imported using [[tiddlywiki.files Files]] with an "isEditableFile" flag set to true, causing the server to remember their original file path in the $:/config/OriginalTiddlerPaths tiddler.
+This will store newly created system tiddlers that are not drafts of other tiddlers in `./_system/` (after stripping the `$:/` prefix). Next, all drafts have the path separator characters in their titles replaced by "_" and are stored in `./drafts/`. Then tiddlers tagged [[task]] are stored in a subdirectory `./mytasks/`. Finally, all tiddlers not tagged with "externalnote" will match the final `[!tag[externalnote]addprefix[wiki/]]` storing these in `./wiki/`. In this example, tiddlers tagged with "externalnote" have been imported using [[tiddlywiki.files Files]] with an "isEditableFile" flag set to true, causing the server to remember their original file path in the $:/config/OriginalTiddlerPaths tiddler.
 
 Whenever a tiddler generates a $:/config/FileSystemPaths filter match, any `/` or `\` in the tiddler title is mapped to a path separator. With the above filters, the non-system, non-draft tiddler titled `some/thing/entirely/new` (with no tags) will be saved to `./wiki/some/thing/entirely/new.tid` (ie, the file `new.tid` in a directory called `entirely/`). Thus, $:/config/FileSystemPaths itself will end up in `./_system/config/FileSystemPaths.tid` or `.\_system\config\FileSystemPaths.tid`, depending on the platform.
 
@@ -39,7 +39,7 @@ Normally, the file system extension of a tiddler on disk is determined by the pr
 
 If the tiddler does not have such field values, then the `type` field is referenced to find a matching file-type, with `.tid` used for tiddlers without a type value. The boot engine defines a set of these tiddler-type to file-type relationships in the [[$:/boot/boot.js]] tiddler. Search for `// Add file extension information` to find the section of code that defines these relationships.
 
-The file extension of individual tidders can be customised by creating a tiddler [[$:/config/FileSystemExtensions]] containing one or more [[filter expressions|Filter Syntax]], each on a line of its own. Every time a tiddler is saved to disk it is tested against these filters, and the first output of the first filter to produce any output is taken as the file extension to be used for the tiddler file. Extensions should always start with a leading dot (see example).  If no filter matches, the default extension is used. If the extension has changed a new file is created and the old file is deleted.
+The file extension of individual tiddlers can be customised by creating a tiddler [[$:/config/FileSystemExtensions]] containing one or more [[filter expressions|Filter Syntax]], each on a line of its own. Every time a tiddler is saved to disk it is tested against these filters, and the first output of the first filter to produce any output is taken as the file extension to be used for the tiddler file. Extensions should always start with a leading dot (see example).  If no filter matches, the default extension is used. If the extension has changed a new file is created and the old file is deleted.
 
 <<.note """A result of ".tid" will force the tiddler to be written to disk as a single-file text tiddler. A result of ".json" will force the tiddler to be written to disk as a single file tiddler in json-format (a single tiddler fields object in an array), NOT as a tiddler of type "application/json". All other recognised file-types will be saved using their defined extension along with an accompanying *.meta file of the same name which describes all fields but the "text" field.""">>
 
@@ -51,6 +51,6 @@ The file extension of individual tidders can be customised by creating a tiddler
 [tag[.tid]then[.tid]]
 ```
 
-This will cause all tidders that have the tag ".txt" to be saved at the filepath determined by the File System Paths filters, but with their text field saved as a *.txt file, and all other fields saved as a *.txt.meta file.
+This will cause all tiddlers that have the tag ".txt" to be saved at the filepath determined by the File System Paths filters, but with their text field saved as a *.txt file, and all other fields saved as a *.txt.meta file.
 
 Next, all tiddlers that have the ".json" tag are saved as *.json files. Finally, all tiddlers that have tag ".tid" are saved as single files. If a tiddler matches none of the filters, the default extension determined by the tiddlers `type` field would be used.

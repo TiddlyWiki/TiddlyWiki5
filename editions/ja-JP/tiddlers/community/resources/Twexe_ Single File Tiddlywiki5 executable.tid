@@ -1,0 +1,32 @@
+caption: Twexe
+color: #ff8a65
+community-author: ihm4u
+created: 20200507214737998
+delivery: App
+description: 単一のTiddlywiki5実行ファイル
+method: save
+modified: 20241011112716588
+original-modified: 20210106151027674
+tags: Firefox [[Internet Explorer]] Opera [[Other Resources]] Safari Saving Windows Edge Linux
+title: Twexe: Single File Tiddlywiki5 executable
+ja-title: Twexe: 単一のTiddlywiki5実行ファイル
+type: text/vnd.tiddlywiki
+url: https://ihm4u.github.io/twexe/
+
+{{!!description}}
+{{!!url}}
+
+!! 特徴
+
+* 自動バックアップ
+* 自動保存
+* ブラウザのアドオンは必要なし!!
+* LinuxとWindowsで動作
+* 単一の実行可能ファイル。移動、コピーなどができます。
+* Wikiは圧縮されており、ディスク上のスペース占有が少ない(場合によっては、3分の1のスペースで済みます!)
+* //どんな//Tiddlywiki5ファイルも単一の実行可能ファイル<<twexe>>に変換します。特別なTiddlywikiプラグインは必要ありません。
+* コントロールパネルの保存タブを自動的に使用します(デフォルトが気に入らない場合は、バックアップディレクトリを指定できます)
+* 実行可能ファイルtwexeからHTML Wikiファイルを簡単に取り出せます(何らかの理由で必要な場合)
+* Wikiから外部実行可能ファイルを実行するという可能性が広がります(グラフの描画など) - 乞うご期待!!
+* 外部画像をサポートします(_canonical_uriフィールドを使用)
+

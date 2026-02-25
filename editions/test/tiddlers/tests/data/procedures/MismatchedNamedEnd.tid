@@ -1,0 +1,16 @@
+title: Procedures/MismatchedNamedEnd
+description: Mismatched named end is part of the body
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure hello()
+ \end goodbye
+\end
+
+Out: <<hello>>
++
+title: ExpectedResult
+
+<p>Out:  \end goodbye</p>

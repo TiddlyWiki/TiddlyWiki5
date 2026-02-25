@@ -6,6 +6,8 @@ type: text/vnd.tiddlywiki
 
 The tiddler icon cascade is a [[cascade|Cascades]] used to choose which icon should be used for a particular tiddler.
 
+The core tiddler icon cascade can be found in $:/core/ui/TiddlerIcon
+
 The default tiddler icon cascade consists of:
 
 # If the tiddler has an ''icon'' field, use the value as the title of the icon tiddler

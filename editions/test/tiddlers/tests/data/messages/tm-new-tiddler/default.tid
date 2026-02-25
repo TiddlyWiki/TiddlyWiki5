@@ -1,0 +1,39 @@
+title: Message/tm-new-tiddler/default
+description: tm-new-tiddler message will create a new draft tiddler
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<pre>{{Draft of 'New Tiddler'||output-template}}</pre>
++
+title: Actions
+
+<$navigator story="$:/StoryList">
+
+New in TW v5.3.6
+	Create a draft tiddler which should have __no__ tags field
+
+<$action-sendmessage $message="tm-new-tiddler"
+	text="some text"
+	z-field="a"
+/>
+
+</$navigator>
+
++
+title: output-template
+
+<!-- This template is used for saving tiddlers in TiddlyWeb *.tid format -->
+<$fields exclude='text bag created modified' template='$name$: $value$
+'></$fields>
+<$view field="text" format="text" />
++
+title: ExpectedResult
+
+<p><pre>draft.of: New Tiddler
+draft.title: New Tiddler
+title: Draft of 'New Tiddler'
+z-field: a
+
+some text</pre></p>

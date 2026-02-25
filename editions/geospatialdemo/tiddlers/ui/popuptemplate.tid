@@ -1,0 +1,9 @@
+title: ui/PopupTemplate
+
+<div width="300px">
+	<$let currentTiddler={{{ [<feature>jsonget[properties],[title]] }}}>
+		<$link><$text text=<<currentTiddler>>/></$link>
+		<!-- <$codeblock code={{{ [<feature>] }}}/> -->
+		<$transclude $tiddler=<<currentTiddler>> $mode="block"/>
+	</$let>
+</div>

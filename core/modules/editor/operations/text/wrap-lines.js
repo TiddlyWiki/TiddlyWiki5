@@ -6,10 +6,7 @@ module-type: texteditoroperation
 Text editor operation to wrap the selected lines with a prefix and suffix
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["wrap-lines"] = function(event,operation) {
@@ -22,7 +19,7 @@ exports["wrap-lines"] = function(event,operation) {
 		operation.cutStart = operation.selStart - (prefix.length + 1);
 		operation.cutEnd = operation.selEnd + suffix.length + 1;
 		// Also cut the following newline (if there is any)
-		if (operation.text[operation.cutEnd] === "\n") {
+		if(operation.text[operation.cutEnd] === "\n") {
 			operation.cutEnd++;
 		}
 		// Replace with selection
@@ -43,5 +40,3 @@ exports["wrap-lines"] = function(event,operation) {
 		operation.newSelEnd = operation.newSelStart + (operation.cutEnd - operation.cutStart);
 	}
 };
-
-})();

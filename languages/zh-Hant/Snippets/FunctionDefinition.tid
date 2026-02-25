@@ -1,0 +1,7 @@
+title: $:/language/Snippets/FunctionDefinition
+tags: $:/tags/TextEditor/Snippet
+caption: 函數定義
+
+\function f.name(param1,param2:"預設值") [<param1>!is[blank]else<param2>]
+
+<<f.name>>

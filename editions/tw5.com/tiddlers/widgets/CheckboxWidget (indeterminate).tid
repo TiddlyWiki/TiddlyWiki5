@@ -1,0 +1,31 @@
+caption: <<.attr indeterminate>>
+created: 20230315173145042
+description: tab
+modified: 20230317160908743
+tags: CheckboxWidget
+title: CheckboxWidget (indeterminate)
+
+!!<<.link "<<.attr indeterminate>> Checkboxes" "CheckboxWidget (indeterminate)">>
+
+If both the <<.attr checked>> and <<.attr unchecked>> attributes are specified, but neither one is found in the specified field (or index), the result can be ambiguous. Should the checkbox be checked or unchecked? Normally in such cases the checkbox will be unchecked, but if the <<.attr indeterminate>> attribute is set to <<.value yes>> (default is <<.value no>>), the checkbox will instead be in an "indeterminate" state. An indeterminate checkbox counts as false for most purposes &mdash; if you click it, the checkbox will become checked and the <<.attr checkactions>>, if any, will be triggered &mdash; but indeterminate checkboxes are displayed differently in the browser.
+
+This example shows indeterminate checkboxes being used for categories in a shopping list (which could also be sub-tasks in a todo list, or many other things). If only some items in a category are selected, the category checkbox is indeterminate. You can click on the category checkboxes to see how indeterminate states are treated the same as the unchecked state, and clicking the box checks it and applies its check actions (in this case, checking all the boxes in that category). Try editing the <<.field fruits>> and <<.field vegetables>> fields on this tiddler and see what happens to the example when you do.
+
+<<wikitext-example-without-html """\define check-all(field-name:"items") <$action-listops $field="selected-$field-name$" $filter="[list[!!$field-name$]]" />
+\define uncheck-all(field-name:"items") <$action-listops $field="selected-$field-name$" $filter="[[]]" />
+
+<$checkbox filter="[list[!!selected-fruits]count[]]" checked={{{ [list[!!fruits]count[]] }}} unchecked="0" checkactions=<<check-all fruits>> uncheckactions=<<uncheck-all fruits>> indeterminate="yes"> fruits</$checkbox>
+<ul style="list-style: none">
+<$list variable="fruit" filter="[list[!!fruits]]">
+<li><$checkbox listField="selected-fruits" checked=<<fruit>>> <<fruit>></$checkbox></li>
+</$list>
+</ul>
+<$checkbox filter="[list[!!selected-vegetables]count[]]" checked={{{ [list[!!vegetables]count[]] }}} unchecked="0" checkactions=<<check-all vegetables>> uncheckactions=<<uncheck-all vegetables>> indeterminate="yes"> veggies</$checkbox>
+<ul style="list-style: none">
+<$list variable="veggie" filter="[list[!!vegetables]]">
+<li><$checkbox listField="selected-vegetables" checked=<<veggie>>> <<veggie>></$checkbox></li>
+</$list>
+</ul>
+
+<p>Selected veggies: {{!!selected-vegetables}}<br/>
+Selected fruits: {{!!selected-fruits}}</p>""">>

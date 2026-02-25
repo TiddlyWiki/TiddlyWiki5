@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.23">>
 
-<<.tip " Compare with [[enlist|enlist Operator]] operator that interprets its operand as a title list">>
+<<.tip " Compare with [[enlist|enlist Operator]] operator that interprets its parameter as a title list">>
 
 ```
 <$vars days={{{ [[Days of the Week]get[list]] }}}>

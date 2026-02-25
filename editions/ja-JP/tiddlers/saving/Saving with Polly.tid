@@ -1,0 +1,31 @@
+caption: Polly
+color: #29B6F6
+community-author: TiddlyTweeter
+created: 20220223153410510
+delivery: Service
+description: ダウンロードしたTiddlyWikiファイルを保存するためのバッチスクリプト
+method: save
+modified: 20241007112840543
+original-modified: 20220223160414274
+tags: Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows Edge
+title: Saving with Polly
+ja-title: Pollyでの保存
+type: text/vnd.tiddlywiki
+
+[[Polly|https://github.com/Marxsal/polly]]は、Windows //~PowerShell//を使用して、指定したダウンロードディレクトリから~TiddlyWikiファイルを元のホームディレクトリに復元するバッチファイルシステムです。
+
+これは実質的にファイルを保存する新しい方法になりますが、次のような機能があります: 
+
+* バイナリ実行ファイルは使いません
+* 人間が読めるバッチスクリプトです
+* ~TiddlyWikiファイルに特別なプラグインは必要ありません
+* 特別なブラウザは必要ありません
+* ブラウザ拡張機能は必要ありません。
+* バックグラウンドでnode.exeを実行する必要はありません
+* パッケージの合計サイズは100kのみです
+* 指定したディレクトリに通常のファイルまたはzip形式でバックアップします
+* ターゲットディレクトリ(例えば、Dropboxフォルダなど)に追加のコピーを"パロット"する機能があります
+
+Windows、Linux、Macなど、//~PowerShell//が実行できる環境であればどこでも実行できます。
+
+https://github.com/Marxsal/polly

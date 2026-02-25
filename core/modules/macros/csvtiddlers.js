@@ -6,10 +6,7 @@ module-type: macro
 Macro to output tiddlers matching a filter to CSV
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -27,17 +24,18 @@ exports.params = [
 Run the macro
 */
 exports.run = function(filter,format) {
-	var self = this,
-		tiddlers = this.wiki.filterTiddlers(filter),
+	var tiddlers = this.wiki.filterTiddlers(filter),
 		tiddler,
 		fields = [],
 		t,f;
 	// Collect all the fields
 	for(t=0;t<tiddlers.length; t++) {
 		tiddler = this.wiki.getTiddler(tiddlers[t]);
-		for(f in tiddler.fields) {
-			if(fields.indexOf(f) === -1) {
-				fields.push(f);
+		if(tiddler) {
+			for(f in tiddler.fields) {
+				if(fields.indexOf(f) === -1) {
+					fields.push(f);
+				}
 			}
 		}
 	}
@@ -47,22 +45,24 @@ exports.run = function(filter,format) {
 		var p = fields.indexOf(value);
 		if(p !== -1) {
 			fields.splice(p,1);
-			fields.unshift(value)
+			fields.unshift(value);
 		}
 	});
 	// Output the column headings
 	var output = [], row = [];
 	fields.forEach(function(value) {
-		row.push(quoteAndEscape(value))
+		row.push(quoteAndEscape(value));
 	});
 	output.push(row.join(","));
 	// Output each tiddler
 	for(var t=0;t<tiddlers.length; t++) {
 		row = [];
 		tiddler = this.wiki.getTiddler(tiddlers[t]);
+		if(tiddler) {
 			for(f=0; f<fields.length; f++) {
 				row.push(quoteAndEscape(tiddler ? tiddler.getFieldString(fields[f]) || "" : ""));
-			}
+			}	
+		}
 		output.push(row.join(","));
 	}
 	return output.join("\n");
@@ -71,5 +71,3 @@ exports.run = function(filter,format) {
 function quoteAndEscape(value) {
 	return "\"" + value.replace(/"/mg,"\"\"") + "\"";
 }
-
-})();

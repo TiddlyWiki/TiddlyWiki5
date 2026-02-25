@@ -1,0 +1,15 @@
+title: $:/config/DefaultColourMappings/
+
+community-card-background: #ffffee
+community-card-foreground: #441111
+community-card-dark-shadow: rgba(188, 189, 189, 0.5)
+community-card-shadow: rgba(212, 212, 213, 0.5)
+community-card-header-background: #9e3060
+community-card-header-foreground: #ddddee
+community-card-team-header-background: #306090
+community-card-team-header-foreground: #ddeedd
+community-card-vacancy-header-background: #609030
+community-card-vacancy-header-foreground: #eedddd
+community-card-info-background: #f3f38b
+community-card-info-foreground: #444411
+community-card-field-name-foreground: #888844

@@ -1,4 +1,5 @@
 title: $:/core/images/italic
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-italic tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M66.711 0h22.41L62.408 128H40z"/></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-italic tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M66.711 0h22.41L62.408 128H40z"/></svg>

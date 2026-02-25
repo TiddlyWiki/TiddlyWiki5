@@ -1,0 +1,29 @@
+title: Transclude/Parameterised/Mode
+description: Parameterised transclusion using the $parseMode attribute
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
+
+This is a block
+
+</$transclude>
+
+<$transclude $tiddler='TiddlerOne'>
+This is inline
+</$transclude>
++
+title: TiddlerOne
+
+\whitespace trim
+<$parameters $parseMode="@parseMode">
+	<$text text=<<@parseMode>>/>
+</$parameters>
++
+title: ExpectedResult
+
+<p>block</p><p>inline</p>

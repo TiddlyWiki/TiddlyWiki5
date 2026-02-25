@@ -1,0 +1,9 @@
+caption: $:/tags/Global/View
+created: 20230419103154329
+description: marks global definitions only active in View template
+modified: 20230419103154329
+tags: SystemTags
+title: SystemTag: $:/tags/Global/View
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]] `$:/tags/Global/View` marks definitions that are only made available within the main view templates and the preview panel.

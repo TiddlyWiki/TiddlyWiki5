@@ -1,0 +1,25 @@
+created: 20131219100444289
+modified: 20250206103847601
+original-modified: 20140920134404247
+tags: [[TiddlyWiki on Node.js]]
+title: Working with the TiddlyWiki5 repository
+ja-title: TiddlyWiki5リポジトリの操作
+type: text/vnd.tiddlywiki
+
+! 紹介
+
+TiddlyWikiの開発に[[貢献|Contributing]]したい場合は、[[通常の方法でTiddlyWikiをインストールする|Installing TiddlyWiki on Node.js]]のではなく、GitHubリポジトリを直接動かすことができます。
+
+Mario Pietschが[[短い紹介動画|Working with the TiddlyWiki5 repository video]]を作成しました。
+
+! セットアップ
+
+# GitHubのアカウントをお持ちでない場合は、アカウントを作成してください
+# https://github.com/TiddlyWiki/TiddlyWiki5 からTiddlyWiki5 GitHubリポジトリをフォークします
+# フォークのローカルコピーをクローンします
+# コマンドラインターミナルを開き、現在の作業ディレクトリをリポジトリのルートに変更します
+# `npm link` (Windows)か`sudo npm link` (Mac/Linux)と入力して、[[npm]]にこのリポジトリのコピーをグローバルにインストールされたものとして使用するように指示します
+
+この手順を実行すると、`npm install -g tiddlywiki`による通常の方法でインストールした場合と同じように、[[npm]]経由でTiddlyWiki5を操作できるようになります。
+
+[[Node.js上のTiddlyWiki用スクリプト|Scripts for TiddlyWiki on Node.js]]も参照してください。

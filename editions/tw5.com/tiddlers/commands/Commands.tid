@@ -1,9 +1,15 @@
 created: 20150117174359000
-modified: 20180626122309578
+modified: 20241018094151786
 tags: Concepts Reference
 title: Commands
 type: text/vnd.tiddlywiki
 
 A <<.def command>> is one of the following words, written with a `--` prefix and used as a command-line option under Node.js, indicating which action is desired. See [[Using TiddlyWiki on Node.js]] for details of how to use them.
 
-<<list-links "[tag[Commands]]">>
+''Commands''
+
+<<list-links "[tag[Commands]] -[tag[$:/deprecated]]" class:"multi-columns">>
+
+''Deprecated Commands''
+
+<<list-links "[tag[Commands]] :and[tag[$:/deprecated]]" class:"multi-columns">>

@@ -45,7 +45,7 @@ Special tags assign special behaviour or appearance to all of the tiddlers to wh
 
 For example:
 
-* $:/tags/Macro causes the macros defined in a tiddler to be available globally
+* $:/tags/Global causes the definitions in a tiddler to be available globally
 * $:/tags/Stylesheet causes the tiddler to be interpreted as a CSS stylesheet
 * $:/tags/SideBar causes the tiddler to be displayed as a sidebar tab
 

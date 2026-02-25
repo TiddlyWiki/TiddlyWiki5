@@ -1,0 +1,21 @@
+{
+	"tiddlers": [
+		{
+			"file": "openlocationcode.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/geospatial/openlocationcode.js",
+				"module-type": "library"
+			},
+			"prefix": "(function(require){",
+			"suffix": "})(function(){});"
+		},
+		{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/geospatial/openlocationcode/LICENSE"
+			}
+		}
+	]
+}

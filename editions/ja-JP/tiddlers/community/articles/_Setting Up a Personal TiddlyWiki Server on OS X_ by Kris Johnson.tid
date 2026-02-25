@@ -1,0 +1,24 @@
+created: 20150403104015626
+modified: 20260214104828249
+original-modified: 20150403104206017
+tags: Articles
+title: "Setting Up a Personal TiddlyWiki Server on OS X" by Kris Johnson
+ja-title: Kris Johnsonによる"OS Xで個人用TiddlyWikiサーバーを構築する"
+type: text/vnd.tiddlywiki
+url: http://undefinedvalue.com/2015/04/02/setting-personal-tiddlywiki-server-os-x
+
+OS Xの[[Node.js上のTiddlyWiki|TiddlyWiki on Node.js]]を設定する詳細な説明。
+
+{{!!url}}
+
+<<<
+新しい仕事のために、メモを取るための個人用Wikiを作成することにしました。次の要件を満たすシンプルなものにしたいと考えました: 
+
+* すべてのデータをDropboxフォルダに保存する(マシン間で自動的に同期できる)
+* Markdown構文をサポートしている
+
+選択肢を検討した結果、TiddlyWikiに落ち着きました。以前"クラシックTiddlyWiki"を使ったことがあり、そのシンプルさは気に入っていましたが、変更を保存するために面倒な手順を踏まなければならないのが少し億劫でした。新しいバージョンのTiddlyWikiには、HTTPサーバーとして実行するためのサポートが含まれているため、オンラインWikiのように使用できます。
+
+しかし、設定方法を理解するのに数時間かかりました。TiddlyWikiのドキュメントは分かりにくい("分かりにくい"というのは"ひどい"という意味の婉曲表現です)。そこで、私が経験したようなフラストレーションを他の誰かが経験しないように、この手順書を書きました。
+<<<
+

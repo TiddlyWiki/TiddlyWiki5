@@ -1,0 +1,17 @@
+title: Transclude/Macro/Plain
+description: Transcluding a macro as plain text
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$let currentTab="Jeremy">
+<$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/>
+|
+<$transclude $variable="currentTab" $type="text/plain" $output="text/plain"/>
+</$let>
++
+title: ExpectedResult
+
+<p>Jeremy|Jeremy</p>

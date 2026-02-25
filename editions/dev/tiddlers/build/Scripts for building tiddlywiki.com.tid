@@ -6,7 +6,7 @@ Nonetheless, you may find techniques that are useful for your own scripts.
 
 ! Hosting
 
-https://tiddlywiki.com is served by [[GitHub Pages|https://pages.github.com]] from the repository https://github.com/Jermolene/jermolene.github.io
+https://tiddlywiki.com is served by [[GitHub Pages|https://pages.github.com]] from the repository https://github.com/TiddlyWiki/tiddlywiki.com-gh-pages
 
 The scripts live in the repository https://github.com/Jermolene/build.jermolene.github.io
 
@@ -15,8 +15,8 @@ The scripts live in the repository https://github.com/Jermolene/build.jermolene.
 These scripts require the following directories to be siblings:
 
 * `build.jermolene.github.io` - a local copy of https://github.com/Jermolene/build.jermolene.github.io
-* `jermolene.github.io` - a local copy of the repo https://github.com/Jermolene/jermolene.github.io
-* `TiddlyWiki5` - a local copy of the repo https://github.com/Jermolene/TiddlyWiki5
+* `jermolene.github.io` - a local copy of the repo https://github.com/TiddlyWiki/tiddlywiki.com-gh-pages
+* `TiddlyWiki5` - a local copy of the repo https://github.com/TiddlyWiki/TiddlyWiki5
 
 The scripts are designed to be executed with the current directory being the `TiddlyWiki5` directory.
 

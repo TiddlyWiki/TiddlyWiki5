@@ -6,10 +6,7 @@ module-type: saver
 Saves wiki by pushing a commit to the GitHub v3 REST API
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -20,8 +17,7 @@ var GitHubSaver = function(wiki) {
 };
 
 GitHubSaver.prototype.save = function(text,method,callback) {
-	var self = this,
-		username = this.wiki.getTiddlerText("$:/GitHub/Username"),
+	var username = this.wiki.getTiddlerText("$:/GitHub/Username"),
 		password = $tw.utils.getPassword("github"),
 		repo = this.wiki.getTiddlerText("$:/GitHub/Repo"),
 		path = this.wiki.getTiddlerText("$:/GitHub/Path",""),
@@ -31,7 +27,7 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		headers = {
 			"Accept": "application/vnd.github.v3+json",
 			"Content-Type": "application/json;charset=UTF-8",
-			"Authorization": "Basic " + window.btoa(username + ":" + password),
+			"Authorization": "Basic " + $tw.utils.base64Encode(username + ":" + password),
 			"If-None-Match": ""
 		};
 	// Bail if we don't have everything we need
@@ -84,7 +80,6 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 					if(err) {
 						return callback(err);
 					}
-					var putResponseData = $tw.utils.parseJSONSafe(putResponseDataJson);
 					callback(null);
 				}
 			});
@@ -115,5 +110,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new GitHubSaver(wiki);
 };
-
-})();

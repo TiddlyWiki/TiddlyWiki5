@@ -1,38 +1,20 @@
 created: 20220122153235162
-modified: 20220122180508134
+modified: 20240713165558596
 tags: [[WikiText parser mode transitions]]
 title: WikiText parser mode: HTML examples
 type: text/vnd.tiddlywiki
 
-<<wikitext-example-without-html "<div>
-
-* blank line after open tag allows
-* block mode punctuation (i.e. this list) to
-* be recognised
-</div>
-">>
+<<testcase TestCases/HTML/OpenTagBlankLine>>
 
 ---
 
 The open tag blank line "trick" also works inside of punctuation only recognised in inline mode (such as [[Formatting in WikiText]]):
 
-<<wikitext-example-without-html "''<div>
-
-* list item one
-* list item two
-</div>''">>
+<<testcase TestCases/HTML/OpenTagBlankLineInBoldSyntax>>
 
 ---
 
-<<wikitext-example-without-html "<div>
-* Open tag without a blank line means
-* block mode punctuation (i.e. this list) will
-* NOT be recognised.
-
-Paragraphs are only recognised in block mode. Even with blank lines, new paragraphs are not recognised.
-
-This also is not a new paragraph.
-</div>">>
+<<testcase TestCases/HTML/OpenTagNoBlankLine>>
 
 ---
 
@@ -42,11 +24,7 @@ Adding a blank link after an open tag within a table cell causes the row to span
 
 <<wikitext-example-without-html "|table row|all on|one line|is recognised|">>
 
-<<wikitext-example-without-html "|For a blank line after open tag|<div>
-
-* list is recognised
-* but the surrounding table row is not
-</div>|">>
+<<testcase TestCases/HTML/OpenTagBlankLineInTableSyntax>>
 
 ---
 
@@ -58,15 +36,4 @@ Note that <<.wlink MacroCallWidget>> does not have a similar <<.attr mode>> attr
 
 ---
 
-The less convenient `<table>`, `<tr>`, `<td>` html tags can be used as a foolproof way to get [[block mode|Block Mode WikiText]] punctuation recognised inside of table cells.
-
-<<wikitext-example-without-html "<table>
-<tr><td>
-
-* list item one
-* list item two
-</td><td>
-
-|nested|table|
-</td></tr>
-</table>">>
+<<testcase TestCases/HTML/BlockModeInHTMLTable>>

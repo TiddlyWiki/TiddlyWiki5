@@ -1,5 +1,5 @@
 created: 20161209172820513
-modified: 20170204191306382
+modified: 20240923161828376
 tags: [[Customise TiddlyWiki]] Learning
 title: How to turn off camel case linking
 type: text/vnd.tiddlywiki
@@ -8,10 +8,16 @@ CamelCase is used in most Wikis, but it can interfere with text presentation in 
 
 !! Turning off Camel Case locally
 
-To turn off a particular instance of a CamelCase text, simply put a tilde (~)  in front of the word, like this:
+To prevent a particular CamelCase word from being linked, simply put a tilde (~) in front of the word, like this:
 
 ```
 ~CamelCase
+```
+
+If you need to disable CamelCase for just an entire tiddler, you can use the [[\rules pragma|Pragma: \rules]]:
+
+```
+\rules except wikilink
 ```
 
 !! Turning off Camel Case globally

@@ -1,0 +1,9 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/DynamicMacroParams
+type: text/vnd.tiddlywiki
+
+<<mymacro param={{Something}}>>
+
+<<mymacro param={{{ [<myvar>addprefix[https:]] }}}>>
+
+<$macrocall $name="outermacro" inner=<<innermacro arg="value">>/>

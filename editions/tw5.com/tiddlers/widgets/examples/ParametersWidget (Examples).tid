@@ -1,0 +1,39 @@
+created: 20230518124403282
+modified: 20230518135109977
+tags: ParametersWidget
+title: ParametersWidget (Examples)
+
+''Example i'': Shows transclusion of [[Sample Tiddler Template]]. The template tiddler has two parameters `name` and `age` and here their default values are used.
+
+<$macrocall $name=".example" n="1" eg="""<$transclude $tiddler="Sample Tiddler Template" />"""/>
+
+''Example ii'': Shows, another transclusion of [[Sample Tiddler Template]], here the value of `age` is passed, but `name` uses its default value.
+
+<$macrocall $name=".example" n="2" eg="""<$transclude $tiddler="Sample Tiddler Template" age=33/>"""/>
+
+''Example iii'': Shows, another transclusion of [[Sample Tiddler Template]], here the value of both `name` and `age` are passed.
+
+<$macrocall $name=".example" n="3" eg="""<$transclude $tiddler="Sample Tiddler Template" age=45 name="Jeremy Ruston" />"""/>
+
+In the simple form the above transclusion is equivalent to
+
+<$macrocall $name=".example" n="3.1" eg="""{{Sample Tiddler Template|Jeremy Ruston|45}}"""/>
+
+In this simple form, parameters passed by position not by name. So the first value is passed to the first parameter, here `name` and the second value is passed to the second parameter, here `age`.
+
+''Remarks''
+
+# Passing parameter by name is good practice and is recommended for clarity. So for parameterized transclusions, the use of <<.wid transclude>> is recommended over simple form transclusion.
+# When passing parameters value by position, you cannot pass the second parameter while the first one has not been passed.
+
+
+''Example iv'': Here the <<.wlink ParametersWidget>> widget is used to declare a parameter whose default value is transcluded from another tiddler.
+
+<$macrocall $name=".example" n="4" eg="""\procedure myproc()
+<$parameters name={{$:/SiteTitle}} age="21">
+My name is <<name>> and my age is <<age>>.
+</$parameters>
+\end
+
+<$transclude $variable="myproc" age="19"/>
+"""/>

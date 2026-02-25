@@ -6,10 +6,7 @@ module-type: saver
 Saves wiki by pushing a commit to the GitLab REST API
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: true */
 "use strict";
 
 /*
@@ -21,8 +18,7 @@ var GitLabSaver = function(wiki) {
 
 GitLabSaver.prototype.save = function(text,method,callback) {
 	/* See https://docs.gitlab.com/ee/api/repository_files.html */
-	var self = this,
-		username = this.wiki.getTiddlerText("$:/GitLab/Username"),
+	var username = this.wiki.getTiddlerText("$:/GitLab/Username"),
 		password = $tw.utils.getPassword("gitlab"),
 		repo = this.wiki.getTiddlerText("$:/GitLab/Repo"),
 		path = this.wiki.getTiddlerText("$:/GitLab/Path",""),
@@ -48,7 +44,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 	var uri = endpoint + "/projects/" + encodeURIComponent(repo) + "/repository/";
 	// Perform a get request to get the details (inc shas) of files in the same path as our file
 	$tw.utils.httpRequest({
-		url: uri + "tree/?path=" + encodeURIComponent(path.replace(/^\/+|\/$/g, '')) + "&branch=" + encodeURIComponent(branch.replace(/^\/+|\/$/g, '')),
+		url: uri + "tree/?path=" + encodeURIComponent(path.replace(/^\/+|\/$/g, "")) + "&branch=" + encodeURIComponent(branch.replace(/^\/+|\/$/g, "")),
 		type: "GET",
 		headers: headers,
 		callback: function(err,getResponseDataJson,xhr) {
@@ -74,7 +70,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 			};
 			// Perform a request to save the file
 			$tw.utils.httpRequest({
-				url: uri + "files/" + encodeURIComponent(path.replace(/^\/+/, '') + filename),
+				url: uri + "files/" + encodeURIComponent(path.replace(/^\/+/, "") + filename),
 				type: requestType,
 				headers: headers,
 				data: JSON.stringify(data),
@@ -82,7 +78,6 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 					if(err) {
 						return callback(err);
 					}
-					var putResponseData = $tw.utils.parseJSONSafe(putResponseDataJson);
 					callback(null);
 				}
 			});
@@ -113,5 +108,3 @@ Create an instance of this saver
 exports.create = function(wiki) {
 	return new GitLabSaver(wiki);
 };
-
-})();

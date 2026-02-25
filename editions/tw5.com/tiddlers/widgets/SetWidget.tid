@@ -1,6 +1,6 @@
 caption: set
 created: 20131115182700000
-modified: 20220523075522407
+modified: 20230720174707977
 tags: Widgets
 title: SetWidget
 type: text/vnd.tiddlywiki
@@ -119,4 +119,20 @@ src='<$set name="myTiddler" value="HelloThere">
   </$set>
 </$set>'/>
 
+<<<
+
+!! Using the Set Widget to Create Global Variables
+
+There are times when it makes sense to use the features of the [[SetWidget]] rather than procedures or functions to create global variables.  This can be accomplished by placing the set variable widget in a tiddler that is tagged [[$:/tags/Global|SystemTag: $:/tags/Global]].  If multiple variables are required, the set variable widget can be nested as shown here:
+
+<<<
+<div class="doc-example">
+
+```
+<$set name="myGlobalVariable" value="I am global">
+    <$set name="myOtherGlobalVariable" value="I am also a global variable.">
+    </$set>
+</$set>
+```
+</div>
 <<<

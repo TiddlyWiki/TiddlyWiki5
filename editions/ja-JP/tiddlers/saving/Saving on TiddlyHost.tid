@@ -1,0 +1,21 @@
+caption: ~TiddlyHost
+color: #29B6F6
+community-author: Simon Baird
+created: 20210422191232572
+delivery: Service
+description: ~TiddlyWikiの作成・ホストのためのオンラインサービス
+method: save
+modified: 20241005120439193
+original-modified: 20210423003921468
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
+title: Saving on TiddlyHost
+ja-title: TiddlyHostでの保存
+type: text/vnd.tiddlywiki
+
+[img width=140 [https://github.com/simonbaird/tiddlyhost/raw/main/rails/app/assets/images/logo-800.png]]
+
+[[TiddlyHost.com|https://tiddlyhost.com/]]は、Simon Bairdが作成したTiddlyWikiのホスティングサービスです。サインアップしてメールアドレスを確認すると、オンライン保存をサポートする"サイト"(すなわち~TiddlyWiki)を作成できます。サイトは非公開・公開の切替えができ、オプションでタグ付けや検索が可能な[[TiddlyHostハブ|https://tiddlyhost.com/hub]]のリストに掲載して、他のユーザーが見つけられるようにすることができます。
+
+[[TiddlySpot|Saving on TiddlySpot]]とは異なり、[[TiddlyHost|https://tiddlyhost.com]]は安全で、オープンソースであり、TiddlyWiki5を適切にサポートしています。また、既存の~TiddlyWikiファイルのアップロードが可能で、TiddlyWikiClassicをサポートし、~TiddlySpotサイトの所有権を主張できます。詳細については、[[FAQ|https://github.com/simonbaird/tiddlyhost/wiki/FAQ]]や[[About|https://tiddlyhost.com/about]]ページを参照してください。
+
+Tiddlyhostがあなたの役に立ったら、[[寄付かスポンサーシップ|https://tiddlyhost.com/donate]]をご検討ください。

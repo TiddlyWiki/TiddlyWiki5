@@ -1,0 +1,22 @@
+title: Procedures/TrailingNewlines
+description: Trailing newlines in procedures must not be dropped
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure inner()
+Paragraph 1
+
+Paragraph 2
+\end
+\procedure outer()
+<$macrocall $name=inner />
+
+\end
+<<outer>>
+
++
+title: ExpectedResult
+
+<p>Paragraph 1</p><p>Paragraph 2</p>

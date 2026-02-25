@@ -1,14 +1,24 @@
 created: 20161020153426686
-modified: 20211113011019510
+modified: 20240602160452171
 tags: ActionCreateTiddlerWidget
 title: ActionCreateTiddlerWidget Example
 type: text/vnd.tiddlywiki
 
+<$testcase>
+<$data title=Description text="Create a new page control button"/>
+<$data title=Narrative text="""Use the $action-createtiddler widget to create and open a new, non-functional page control button tiddler"""/>
+<$data title=Output text="""\procedure testCreate()
+<$action-createtiddler $basetitle="Homemade Button" tags="$:/tags/PageControls" text={{$:/state/new-button-caption}}>
+	<$action-navigate $to=<<createTiddler-title>>/>
+</$action-createtiddler>
+\end
+
+{{$:/core/ui/SideBarSegments/page-controls}}
+
 Caption for new button: <$edit-text tiddler="$:/state/new-button-caption" tag="input" default=""/>
 
-<$button>
-<$action-createtiddler $basetitle="Homemade Button" tags="$:/tags/PageControls" text={{$:/state/new-button-caption}}>
-<$action-navigate $to=<<createTiddler-title>>/>
-</$action-createtiddler>
-Create a new non-functional page control button and open the tiddler
-</$button>
+<$button actions=<<testCreate>> >
+Create Tiddler
+</$button>"""/>
+<$data title="$:/state/new-button-caption" text="button text "/>
+</$testcase>

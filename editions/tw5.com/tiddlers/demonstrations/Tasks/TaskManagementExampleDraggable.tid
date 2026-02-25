@@ -4,20 +4,24 @@ tags: Learning
 title: TaskManagementExample (Draggable)
 type: text/vnd.tiddlywiki
 
-This is a version of the TaskManagementExample enhanced with the ability to drag and drop the task list to re-order them.
+This is a version of the TaskManagementExample enhanced with the ability to drag and drop the task list to re-order them.<br>The list uses a the itemTemplate [[TaskManagementExampleDraggableTemplate]] tiddler, which you will also need to experiment yourself.
 
 ! Outstanding tasks
 
-//Drag the tasks to re-order them//
+<$macrocall $name='wikitext-example-without-html'
+src="""//Drag the tasks to re-order them//
 
 <<list-tagged-draggable tag:"task" subFilter:"!has[draft.of]!tag[done]" itemTemplate:"TaskManagementExampleDraggableTemplate" emptyMessage:"You don't have any active tasks">>
+"""/>
 
 ! Completed tasks
 
-//(Listed in reverse order of completion)//
+<$macrocall $name='wikitext-example-without-html'
+src="""//(Listed in reverse order of completion)//
 
 <$list filter="[!has[draft.of]tag[task]tag[done]sort[modified]]">
 <div>
 <$checkbox tag="done"> ~~<$link/>~~</$checkbox>
 </div>
 </$list>
+"""/>

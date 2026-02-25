@@ -1,0 +1,32 @@
+created: 20140206214608586
+modified: 20241214111529899
+original-modified: 20211009145417525
+tags: Features
+title: LazyLoading
+ja-title: 遅延読み込み
+type: text/vnd.tiddlywiki
+
+通常、TiddlyWikiでは、すべてのTiddlerの完全なコンテンツがメインのHTMLファイルに埋め込まれます。遅延読み込みとは、Tiddlerに関するメタデータ(言い換えると、''テキスト''フィールド以外のすべてのフィールド)のみを埋め込み、必要なときにサーバーから本文を要求する手法を指します。
+
+遅延読み込みは次の2つの構成で使用できます: 
+
+* [[Node.js上でのTiddlerWiki|TiddlyWiki on Node.js]]を実行する場合、画像Tiddlerのみ、またはシステム以外のすべてのTiddlerが遅延読み込みの対象にできます
+* [[TiddlyWebのためのSkyでのTiddlyWiki|TiddlyWiki in the Sky for TiddlyWeb]]を実行する場合、すべてのTiddlerは遅延読み込みの対象になります
+
+遅延読み込みの実装方法の詳細については、[[遅延読み込みメカニズム|https://tiddlywiki.com/dev/#LazyLoadingMechanism]]を参照してください。
+
+! Node.jsでの遅延読み込み
+
+画像Tiddlerの遅延読み込みでTiddlyWikiを起動するには、次のコマンドを使用します: 
+
+
+```
+tiddlywiki --listen root-tiddler=$:/core/save/lazy-images
+```
+
+非システムTiddlerすべてに遅延読み込みを適用するには、次のコマンドを使用します:
+
+
+```
+tiddlywiki --listen root-tiddler=$:/core/save/lazy-all
+```

@@ -7,14 +7,14 @@ op-neg-output: those input titles that are <<.em not>> returned from the subfilt
 op-output: the [[selection of titles|Title Selection]] returned from the subfilter <<.place S>>
 op-parameter: a [[filter expression|Filter Expression]]
 op-parameter-name: S
-op-purpose: select titles from the operand interpreted as a [[filter expression|Filter Expression]]
+op-purpose: select titles from the parameter interpreted as a [[filter expression|Filter Expression]]
 tags: [[Filter Operators]] [[Field Operators]] [[Selection Constructors]] [[Negatable Operators]] [[Selection Constructors: Conditional]]
 title: subfilter Operator
 type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.18">> Note that the <<.op subfilter>> operator was introduced in version 5.1.18 and is not available in earlier versions.
 
-<<.tip " Literal filter operands cannot contain square brackets but you can work around the issue by using a variable:">>
+<<.tip " Literal filter parameters cannot contain square brackets but you can work around the issue by using a variable:">>
 
 ```
 <$set name="myFilter" value="[tag[one]]">
@@ -24,6 +24,6 @@ type: text/vnd.tiddlywiki
 
 <<.tip "Compare with the similar [[filter|filter Operator]] operator which runs a subfilter against each title, returning those titles that return a non-empty list (and discards the results of the subfilter)">>
 
-The <<.op subfilter>> operator will act as a [[constructor|Selection Constructors]] whenever the filter defined by its operand is a [[constructor|Selection Constructors]]. Otherwise, it will act as a [[modifier|Selection Constructors]].
+The <<.op subfilter>> operator will act as a [[constructor|Selection Constructors]] whenever the filter defined by its parameter is a [[constructor|Selection Constructors]]. Otherwise, it will act as a [[modifier|Selection Constructors]].
 
 <<.operator-examples "subfilter">>

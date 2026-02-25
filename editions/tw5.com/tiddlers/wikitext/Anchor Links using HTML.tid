@@ -46,7 +46,7 @@ That's it.
 <a id="#Bottom_of_tiddler"></a>
 ```
 
-*Add an <<.attr id>> attribute to any HTML5 tag and place a single `#` before the 'address' value. <a href="##Suggestions%0">Here are some suggestions of tags you can use.</a>
+*Add an <<.attr id>> attribute to any HTML5 tag and place a single `#` before the 'address' value. <a href=<<qualify "##Suggestions-for-elements">>>Here are some suggestions of tags you can use.</a>
 * Place this code at the target location. E.g. at the bottom of the tiddler.
 
 ''Step 2: Create a link to the target anchor''

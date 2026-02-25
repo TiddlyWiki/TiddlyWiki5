@@ -1,0 +1,7 @@
+title: $:/language/Snippets/FunctionDefinition
+tags: $:/tags/TextEditor/Snippet
+caption: Définition de fonction
+
+\function nom.fonction(param1,param2:"valeur par défaut") [<param1>!is[blank]else<param2>]
+
+<<nom.fonction>>

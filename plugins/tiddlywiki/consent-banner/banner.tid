@@ -3,6 +3,8 @@ tags: $:/tags/PageTemplate
 
 \whitespace trim
 
+<%if [<tv-config-static>!match[yes]] %>
+
 <$reveal state="$:/state/consent-banner/accepted" type="match" text="" tag="div">
 
 <div class="tc-consent-backdrop">
@@ -26,3 +28,5 @@ tags: $:/tags/PageTemplate
 </div>
 
 </$reveal>
+
+<%endif%>

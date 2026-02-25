@@ -1,0 +1,24 @@
+title: Functions/FunctionOperator
+description: Calling a function via the function operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function .dividebysomething(factor:0.5)
+[divide<factor>]
+\end
+
+\function multiplebysomething(first:ignored,factor:2)
+[multiply<factor>multiply[2].dividebysomething[0.25]]
+\end
+
+<$text text={{{ [[4]function[multiplebysomething]] }}}/>
+|
+<$text text={{{ [[6]function[multiplebysomething],[ignored],[4]] }}}/>
+
++
+title: ExpectedResult
+
+<p>64|192</p>

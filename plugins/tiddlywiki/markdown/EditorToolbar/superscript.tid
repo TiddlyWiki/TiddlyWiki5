@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/superscript
+list-after: $:/core/ui/EditorToolbar/superscript
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/superscript
+caption: {{$:/language/Buttons/Superscript/Caption}} (Markdown)
+description: {{$:/language/Buttons/Superscript/Hint}}
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
+shortcuts: ((superscript))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="^"
+	suffix="^"
+/>

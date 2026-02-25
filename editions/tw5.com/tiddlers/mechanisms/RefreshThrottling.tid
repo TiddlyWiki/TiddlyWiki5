@@ -12,6 +12,6 @@ The rules governing refresh throttling are:
 ** Has the field `draft.of`
 ** Has the field `throttle.refresh`
 ** Has a title prefixed with `$:/temp/volatile/`
-* If the refresh cycle is to be throttled, a timer is set for the internal specified in [[$:/config/Drafts/TypingTimeout|Hidden Setting: Typing Refresh Delay]] (cancelling any preciously set timer)
+* If the refresh cycle is to be throttled, a timer is set for the internal specified in [[$:/config/Drafts/TypingTimeout|Hidden Setting: Typing Refresh Delay]] (cancelling any previously set timer)
 ** When the timer fires, the refresh cycle is triggered, passing the aggregated titles of all the deferred refresh cycles
 

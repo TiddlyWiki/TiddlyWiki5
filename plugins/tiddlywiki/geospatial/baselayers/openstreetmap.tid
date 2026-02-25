@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/geospatial/baselayers/openstreetmap
+caption: OpenStreetMap
+tags: $:/tags/GeoBaseLayer
+tiles-url: https://tile.openstreetmap.org/{z}/{x}/{y}.png
+max-zoom: 19
+
+&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>

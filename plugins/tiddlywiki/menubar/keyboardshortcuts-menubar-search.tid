@@ -1,0 +1,5 @@
+key: ((menubar-search))
+tags: $:/tags/KeyboardShortcut
+title: $:/core/ui/KeyboardShortcuts/menubar-search
+
+<$action-sendmessage $message="tm-focus-selector" $param=".tc-menubar input"/>

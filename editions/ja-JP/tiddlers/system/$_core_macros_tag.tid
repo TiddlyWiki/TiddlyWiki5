@@ -1,0 +1,41 @@
+created: 20220830190922373
+modified: 20240929114148311
+original-modified: 20220830191056761
+tags: $:/tags/Macro
+title: $:/core/macros/tag
+ja-title: $:/core/macros/tag
+
+\define tag-pill-styles()
+background-color:$(backgroundColor)$;
+fill:$(foregroundColor)$;
+color:$(foregroundColor)$;
+\end
+
+<!-- This has no whitespace trim to avoid modifying $actions$. Closing tags omitted for brevity. -->
+\define tag-pill-inner(tag,icon,colour,fallbackTarget,colourA,colourB,element-tag,element-attributes,actions)
+<$vars
+	foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">>
+	backgroundColor="""$colour$"""
+><$element-tag$
+	$element-attributes$
+	class="tc-tag-label tc-btn-invisible"
+	style=<<tag-pill-styles>>
+>$actions$<$transclude tiddler="""$icon$"""/><$view tiddler=<<__tag__>> field="ja-title" format="text"><$view tiddler=<<__tag__>> field="title" format="text" /></$view></$element-tag$>
+\end
+
+\define tag-pill-body(tag,icon,colour,palette,element-tag,element-attributes,actions)
+<$macrocall $name="tag-pill-inner" tag=<<__tag__>> icon="""$icon$""" colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
+\end
+
+\define tag-pill(tag,element-tag:"span",element-attributes:"",actions:"")
+\whitespace trim
+<span class="tc-tag-list-item" data-tag-title=<<__tag__>>>
+<$let currentTiddler=<<__tag__>>>
+<$macrocall $name="tag-pill-body" tag=<<__tag__>> icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}} colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}} palette={{$:/palette}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
+</$let>
+</span>
+\end
+
+\define tag(tag)
+{{$tag$||$:/core/ui/TagTemplate}}
+\end

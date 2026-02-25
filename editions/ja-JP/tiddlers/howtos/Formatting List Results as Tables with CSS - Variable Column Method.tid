@@ -1,0 +1,85 @@
+created: 20161209172820513
+modified: 20241020105248614
+original-modified: 20161220162845058
+tags: Learning
+title: Formatting List Results as Tables with CSS - Variable Column Method
+ja-title: CSSを使用してリスト結果を表フォーマットで出力する - 可変列メソッド
+type: text/vnd.tiddlywiki
+
+``<$list>``ウィジェットの結果を単純な1つのリストではなく、複数列の形式でフォーマットしたい場合があります。この方法では、CSSを使用してリストを列として設定します。応答性が高く、ウィンドウが小さすぎる場合は、表示する列の数を減らすために改行位置を変更します
+
+固定の列数を直接指定するのではなく、リストの最大幅(Tiddlerの幅をトランスクルージョンする可能性があります)と各項目の幅を指定します。左から右にリストされ、新しい行に折り返されます
+
+他のテーブル作成テクニックについては、以下も参照してください: 
+
+* [[CSSを使用してリスト結果を表フォーマットで出力する - 固定列メソッド|Formatting List Results as Tables with CSS - Specified Columns Methods]]
+* [[リスト結果を表フォーマットで出力する(CSS無し)|Formatting List Results as Tables (no CSS)]]
+
+!! 既存の~TiddlyWikiタグ50個を使用したリストの例
+
+```
+<div class="dynamic-table">
+  <$list filter="[has[tags]tags[]sort[title]first[50]]">
+    <span class="item">
+      <$transclude tiddler="$:/core/ui/TagTemplate"/>
+    </span>
+  </$list>
+</div>
+```
+
+!! リストで使用するスタイルシートの例
+
+```
+<style>
+.dynamic-table {
+  max-width:700px; /* could transclude tiddler width instead */
+  -ms-box-orient: vertical; /* might be unnecessary */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: inline-flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.item {
+  max-width:160px; min-width:160px;
+  flex: 0 0 2em; /* -grow, -shrink, -basis */
+}
+</style>
+```
+
+!! 結果
+
+<div class="dynamic-table">
+  <$list filter="[has[tags]tags[]sort[title]first[50]]">
+    <span class="item">
+      <$transclude tiddler="$:/core/ui/TagTemplate"/>
+    </span>
+  </$list>
+</div>
+
+<style>
+.dynamic-table {
+  max-width:700px; /* could transclude tiddler width instead */
+  -ms-box-orient: vertical;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: inline-flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.item {
+  max-width:160px; min-width:160px;
+  flex: 0 0 2em; /* -grow, -shrink, -basis */
+}
+</style>
+

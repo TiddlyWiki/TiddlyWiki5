@@ -1,0 +1,29 @@
+created: 20180305174809089
+modified: 20241112113136035
+original-modified: 20180306161405033
+tags: [[Customise TiddlyWiki]]
+title: Configuring startup tiddlers
+ja-title: スタートアップTiddlerを構成する
+type: text/vnd.tiddlywiki
+
+[[デフォルトTiddler|DefaultTiddlers]]メカニズムを使用して、一つ、もしくは、複数のTiddlerを起動時に表示するように、~TiddlyWikiを設定できます。
+
+コントロールパネルの情報タブの下には、「このファイルを開いたときに初期表示されるTiddlerを設定してください」という説明のある入力フィールドがあります。起動時に表示したいTiddlerを列挙します。スペースを含むタイトルには二重角括弧を使用します。例えば: 
+
+```
+FirstTiddler
+SecondTiddler
+[[Third Tiddler]]
+```
+
+[[フィルター式|Filter Expression]]を使用して、複数のTiddlerを開くこともできます。例えば: 
+
+```
+[tag[HelloThere]]
+```
+
+は、<<tag HelloThere>>でタグ付けされたすべてのTiddlerを表示します。
+
+[[開いているtiddlerを起動時に保持する|Preserving open tiddlers at startup]]のテクニックを使用することもできます。
+
+起動時の動作をより高度に制御するには、[[起動時アクション|StartupActions]]も参照してください。

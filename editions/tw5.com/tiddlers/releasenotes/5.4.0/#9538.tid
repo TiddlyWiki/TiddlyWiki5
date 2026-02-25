@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9538
+description: Fix browser storage plugin making wiki dirty
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9538
+github-contributors: Jermolene
+
+Fixed issue where the browser storage plugin caused the wiki to be marked as dirty every time it starts up. The problem was due to the use of a log tiddler titled `$:/info/browser/storage/persisted`, the fix is to rename it to `$:/state/browser/storage/persisted`.

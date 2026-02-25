@@ -1,0 +1,13 @@
+created: 20230723072527781
+modified: 20230723073955715
+tags: Definitions
+title: GitLab
+type: text/vnd.tiddlywiki
+
+>GitLab Inc. is an open-core company that operates ~GitLab, a ~DevOps software package which can develop, secure, and operate software. The open source software project was created by Ukrainian developer Dmytro Zaporozhets and Dutch developer Sytse Sijbrandij
+>
+>https://en.wikipedia.org/wiki/GitLab
+
+Both GitLab and GitHub use [[Git]] a distributed version control system, that can be used to store, view and edit TiddlyWiki wikis using [[GitLab Pages|https://docs.gitlab.com/ee/user/project/pages/]]
+
+Learn more at:  [[Saving to a Git service]]

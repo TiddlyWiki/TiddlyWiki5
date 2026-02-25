@@ -1,0 +1,112 @@
+created: 20130825150000000
+modified: 20250125105846987 
+original-modified: 20210714130751701
+tags: [[TiddlyWiki on Node.js]]
+title: TiddlerFiles
+ja-title: Tiddlerファイル
+type: text/vnd.tiddlywiki
+
+Tiddlerは、さまざまな形式でテキストファイルに保存できます。単一のTiddlerを含むファイルには、名前:値のペアのシーケンスとしてフォーマットされた`.meta`補助ファイルを持つこともできます。
+
+```
+title: TheTitle
+modifier: someone
+```
+
+!! ~TiddlyWebスタイルの.tidファイル
+
+これらのファイルは、名前:値のペア、空白行、そしてTiddlerのテキストを含む一連の行で構成されます。例:
+
+```
+title: MyTiddler
+modifier: Jeremy
+
+This is the text of my tiddler.
+```
+
+多くのテキストエディターでは、ファイルに終了改行が含まれている必要があることに注意してください。Tiddlerのテキストに終了改行を含めたくない場合は、次の代替構文を使用できます:
+
+```
+title: MyTiddler
+modifier: Jeremy
+text: This is the text of my tiddler.
+```
+
+//`application/x-tiddler` ContentTypeはこれらのファイルの内部で使用されます//
+
+!! TiddlyWiki `<DIV>`  .tiddlerファイル
+
+TiddlyWiki 5では、`*.tiddler`ファイルは次のようになります。
+
+```
+<div title="AnotherExampleStyleSheet" modifier="blaine" created="201102111106" modified="201102111310" tags="examples" creator="psd">
+<pre>Note that there is an embedded <pre> tag, and line feeds are not escaped.
+
+And, weirdly, there is no HTML encoding of the body.</pre>
+</div>
+```
+
+これらの`*.tiddler`ファイルは、HTML エンコードされたTiddlyWiki HTMLファイル内のTiddlerとまったく同じではありません。
+
+Older `*.tiddler` files more closely matched the store format used by TiddlyWiki at the time:
+古い`*.tiddler`ファイルは、当時TiddlyWikiで使用されていたストア形式に似ています:
+
+```
+<div tiddler="AnotherExampleStyleSheet" modifier="JeremyRuston" modified="200508181432" created="200508181432" tags="examples">This is an old-school .tiddler file, without an embedded &lt;pre&gt; tag.\nNote how the body is &quot;HTML encoded&quot; and new lines are escaped to \\n</div>
+```
+
+//`application/x-tiddler-html-div` ContentTypeはこれらのファイルの内部で使用されます//
+
+!! ~TiddlyWebスタイルのJSONファイル
+
+これらのファイルは、`name:value`プロパティのハッシュマップの単純な配列です。すべてのフィールド値は文字列として指定する必要があります。
+
+例:
+
+```
+[
+	{
+		"title": "First Tiddler",
+		"text": "Text of first tiddler",
+		"tags": "one two [[t h r e e]]"
+	},{
+		"title": "Second Tiddler",
+		"text": "Text of second tiddler",
+		"modified": "20150216171751154"
+	}
+]
+```
+
+`application/json` ContentTypeはこれらのファイルに対して内部で使用されます。
+
+Tiddler構造に準拠していないJSONファイルは、代わりにJSONデータを含む単一のTiddlerとしてインポートされることに注意してください。
+
+!! TiddlyWiki HTMLファイル用の新しいJSONベースの形式
+
+TiddlyWiki HTMLファイルの新しい形式では、スクリプトタグ内にJSON形式のTiddlerが埋め込まれます:
+
+```json
+<script class="tiddlywiki-tiddler-store" type="application/json">[
+{"title": "A","text": "One"},
+{"title": "B","text": "Two"}
+]</script>
+```
+
+!! TiddlyWiki HTMLファイル用の古いDIVベースの形式
+
+TiddlyWikiクラシックおよびバージョンv5.2.0より前のTiddlyWiki 5では、Tiddlerは`<DIV>`形式でエンコードされて保存されていました。
+
+TiddlyWikiが暗号化されていないDIVベースのHTMLファイルをインポートするには、上で説明したようにTiddler DIVを含んだ`<div id="storeArea">`が必要です。例:
+
+```
+<div id="storeArea">
+<div created="20130302085406905" modified="20130302084548184" tags="Examples" title="A tiddler title">
+<pre>HTML encoded text of tiddler
+</pre>
+</div>
+<div created="20140315085406905" modified="20140321084548184" tags="One Two [[Three with Space]]" title="Another title" customfield="field value">
+<pre>Text of this tiddler
+</pre>
+</div>
+</div>
+```

@@ -1,0 +1,10 @@
+title: $:/core/ui/ControlPanel/TestCases
+tags: $:/tags/ControlPanel/Advanced
+caption: {{$:/language/ControlPanel/TestCases/Caption}}
+
+\whitespace trim
+{{$:/language/ControlPanel/TestCases/Hint}}
+
+<div class="tc-control-panel">
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/TestCases]!has[draft.of]]" default="$:/core/ui/ControlPanel/TestCases/All"/>
+</div>

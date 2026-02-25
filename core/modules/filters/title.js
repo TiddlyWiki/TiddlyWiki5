@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for comparing title fields for equality
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -19,14 +16,13 @@ exports.title = function(source,operator,options) {
 	var results = [];
 	if(operator.prefix === "!") {
 		source(function(tiddler,title) {
-			if(tiddler && tiddler.fields.title !== operator.operand) {
+			var titleList = operator.multiValueOperands[0] || [];
+			if(tiddler && titleList.indexOf(tiddler.fields.title) === -1) {
 				results.push(title);
 			}
 		});
 	} else {
-		results.push(operator.operand);
+		Array.prototype.push.apply(results,operator.multiValueOperands[0]);
 	}
 	return results;
 };
-
-})();

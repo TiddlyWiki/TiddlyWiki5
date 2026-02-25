@@ -1,0 +1,36 @@
+caption: Timimi
+color: #4db6ac
+community-author: Riz
+created: 20180830194141190
+delivery: Browser Extension & Native host
+description: Browser拡張機能 & デスクトップ向けネイティブホスト
+method: save
+modified: 20241011114227953
+original-modified: 20210106151027637
+tags: Windows Linux Chrome Firefox Saving [[Other Resources]] plugins Mac Opera Edge
+title: Timimi: WebExtension and Native Host by Riz
+ja-title: Timimi: RizによるWebExtensionとネイティブホスト
+type: text/vnd.tiddlywiki
+url: https://ibnishak.github.io/Timimi/
+
+TimimiはスタンドアロンのHTML tiddlywikiファイルを''ハードドライブの任意の場所''に保存してバックアップできるネイティブホストを備えたWeb拡張機能です。インストールすると、オリジナルのTiddlyfoxアドオンのように、追加の手順なしでtiddlywikiファイルを保存できます。
+
+* ネイティブホストでは、ブラウザー外部のホストコンピューターにコンポーネントがインストールされている必要があります。
+
+{{!!url}}
+
+バージョン2.1以降、Timimiは次のブラウザをサポートしています
+
+* Chrome/Chromium
+* Firefox
+* Opera
+* Microsoft Edge (Chromium)
+
+また、BraveやVivaldiなどのChromeベースのブラウザでもシームレスに動作すると報告されています。
+
+Timimiはユーザーに次の4つのバックアップ戦略も提供します: 
+
+* N回保存ごとにバックアップする
+* N分ごとにバックアップする
+* カスタマイズされたハノイの塔
+* 先入れ先出し

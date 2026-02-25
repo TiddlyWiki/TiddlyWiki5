@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator returning all tiddlers that are tagged with the selected tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -22,5 +19,3 @@ exports.tagging = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

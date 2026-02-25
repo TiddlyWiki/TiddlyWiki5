@@ -1,0 +1,17 @@
+caption: 5.4.0
+created: 20250901000000000
+modified: 20250901000000000
+tags: ReleaseNotes
+title: Release 5.4.0
+type: text/vnd.tiddlywiki
+description: Under development
+
+\procedure release-introduction()
+Release v5.4.0 deliberately and forensically loosens backwards compatibility to clear the path for significant new features and fundamental improvements to be made in the future.
+
+''Please note that there are some changes that do not yet change notes, please see the change history on ~GitHub for the full list of changes.''
+
+See the [[project plan|https://github.com/orgs/TiddlyWiki/projects/4]] for full details.
+\end release-introduction
+
+<<releasenote 5.4.0>>

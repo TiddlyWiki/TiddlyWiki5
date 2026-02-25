@@ -1,0 +1,48 @@
+caption: tw5server
+color: #70c9a0
+community-author: hffqyd
+created: 20230302011710789
+delivery: Server-side Script
+description: 保存とアップロード用のWebサーバー
+method: save
+modified: 20241008110250386
+original-modified: 20230302055929311
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows iOS Edge
+title: Saving via a Minimal Web Server
+ja-title: 最小Webサーバー経由の保存
+type: text/vnd.tiddlywiki
+
+[[tw5-server.rb | https://gist.github.com/jimfoltz/ee791c1bdd30ce137bc23cce826096da]]
+にインスパイアーされた、TiddlyWikiのWikiを保存、バックアップし、ファイルをアップロードするTiddlyWiki5用のローカルミニバイナリサーバーです。
+
+tw5serverは以下の機能を提供します:
+
+* TiddlyWiki5およびその他のファイル(例: TW5で使用される画像`[img[images/*.png]]`)用のサーバー。
+* ブラウザ経由で簡単にWikiを保存できます。
+* ディスク容量削減のため、Wikiを圧縮形式(.gz)でバックアップします。
+* 自動クリーンバックアップ: 前月までは最新の月に1つのバックアップを保持し、当月はすべてのバックアップを保持します。
+* ボタンを押すかドラッグアンドドロップしてファイル/画像をサーバーにアップロードし、tiddlywikiで外部リンクとして使用します。
+* Linux、macOS、Android、Windows用のバイナリ実行ファイルを提供します。
+
+github.com [[tw5-server|https://github.com/hffqyd/tw5-server]]から実行可能バイナリをダウンロードします。
+
+! 使用法
+
+```bash
+tw5server -a:192.168.0.10 -p:8000 -d:./ -b:backup
+
+-h 使用法のヘルプ
+-a アドレス、デフォルトはlocalhost
+-p ポート番号, デフォルトは8000
+-d 提供するディレクトリ、デフォルトは`カレントディレクトリ`
+-b バックアップディレクトリ名、デフォルトは`backup`
+-l stdoutにログメッセージを出力
+
+バックアップの自動クリーン戦略:
+当月のすべてのバックアップを保持し、前月までのバックアップは毎月最新の1つのみを保持します。
+```
+
+Unix/Linuxでは、最初にchmod +x tw5serverを実施し、そして実行します。
+Androidバージョンの場合は、Termuxやその他のターミナルで実行します。
+
+次に、Webブラウザーで http://localhost:8000 (またはコマンドで指定された他のaddress:port)にアクセスし、Wikiのhtmlファイルをクリックします。

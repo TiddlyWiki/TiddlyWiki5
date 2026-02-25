@@ -1,0 +1,16 @@
+title: Macros/IndentedEnd
+description: \end line starting with whitespace ends a macro body
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define hello()
+ hello \end
+  \end
+
+Out: <<hello>>
++
+title: ExpectedResult
+
+<p>Out:  hello \end</p>

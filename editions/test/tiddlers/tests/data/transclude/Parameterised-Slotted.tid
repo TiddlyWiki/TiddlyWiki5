@@ -1,0 +1,27 @@
+title: Transclude/Parameterised/Slotted
+description: Parameterised transclusion with slotted values
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
+	<$fill $name="content">
+		Hippopotamus
+	</$fill>
+</$transclude>
++
+title: TiddlerOne
+
+\whitespace trim
+<$parameters one='Jaguar'>
+	<$text text=<<one>>/>
+	<$slot $name="content">
+		Whale
+	</$slot>
+</$parameters>
++
+title: ExpectedResult
+
+<p>FerretHippopotamus</p>

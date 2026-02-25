@@ -10,7 +10,7 @@ Sequentially run the command tokens returned from a filter
 Examples
 
 ```
---commands "[enlist{$:/build-commands-as-text}]"
+--commands "[enlist:raw{$:/build-commands-as-text}]"
 ```
 
 ```

@@ -20,11 +20,11 @@ tags: $:/tags/Stylesheet
 .tc-upgrade-wizard svg.tc-image-download-button {
 	width: 14em;
 	height: 14em;
-	fill: <<colour muted-foreground>>;
+	color: <<colour muted-foreground>>;
 }
 
 .tc-upgrade-wizard:hover svg.tc-image-download-button {
-	fill: <<colour foreground>>;
+	color: <<colour foreground>>;
 }
 
 .tc-upgrade-wizard svg .tc-image-download-button-ring {

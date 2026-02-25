@@ -2,7 +2,7 @@ title: Welcome to tw5.com-docs
 
 This edition of TiddlyWiki is a tool to help people make and submit improvements to the main documentation on https://tiddlywiki.com/
 
-In this wiki, all the tiddlers from https://tiddlywiki.com (to be precise, all the tiddlers [[from here|https://github.com/Jermolene/TiddlyWiki5/tree/master/editions/tw5.com/tiddlers]]) are packed into a plugin:
+In this wiki, all the tiddlers from https://tiddlywiki.com (to be precise, all the tiddlers [[from here|https://github.com/TiddlyWiki/TiddlyWiki5/tree/master/editions/tw5.com/tiddlers]]) are packed into a plugin:
 
 [[$:/plugins/tiddlywiki/tw5.com-docs]]
 

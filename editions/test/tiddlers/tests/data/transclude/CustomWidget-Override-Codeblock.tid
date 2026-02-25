@@ -1,0 +1,29 @@
+title: CustomWidget-Override-Codeblock
+description: Usage of genesis widget with attributes starting with dollar signs
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\import Definition
+<$codeblock code="Kangaroo"/>
+<$codeblock code={{Subject}}/>
+<$let test="Tiger">
+<$codeblock code=<<test>>/>
+</$let>
++
+title: Definition
+
+\whitespace trim
+\widget $codeblock(code)
+<$genesis $type="$codeblock" $remappable="no" code={{{ [<code>addprefix[£]addsuffix[@]] }}}/>
+\end
++
+title: Subject
+
+Python
++
+title: ExpectedResult
+
+<p><pre><code>£Kangaroo@</code></pre><pre><code>£Python@</code></pre><pre><code>£Tiger@</code></pre></p>

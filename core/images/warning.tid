@@ -1,4 +1,5 @@
 title: $:/core/images/warning
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-warning tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M57.072 11c3.079-5.333 10.777-5.333 13.856 0l55.426 96c3.079 5.333-.77 12-6.928 12H8.574c-6.158 0-10.007-6.667-6.928-12l55.426-96zM64 37c-4.418 0-8 3.582-8 7.994v28.012C56 77.421 59.59 81 64 81c4.418 0 8-3.582 8-7.994V44.994C72 40.579 68.41 37 64 37zm0 67a8 8 0 100-16 8 8 0 000 16z"/></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-warning tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M57.072 11c3.079-5.333 10.777-5.333 13.856 0l55.426 96c3.079 5.333-.77 12-6.928 12H8.574c-6.158 0-10.007-6.667-6.928-12l55.426-96zM64 37c-4.418 0-8 3.582-8 7.994v28.012C56 77.421 59.59 81 64 81c4.418 0 8-3.582 8-7.994V44.994C72 40.579 68.41 37 64 37zm0 67a8 8 0 100-16 8 8 0 000 16z"/></svg>

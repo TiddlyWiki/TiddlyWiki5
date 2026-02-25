@@ -1,0 +1,18 @@
+title: Macros/WhitespaceOnlyWithEnd
+description: The /end should be detected when macro definition contains only whitespace
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define max()
+\end
+Nothing
+\end
+
+Out: <<max>>
++
+title: ExpectedResult
+
+<p>Nothing
+\end</p><p>Out: </p>

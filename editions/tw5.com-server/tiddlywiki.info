@@ -4,7 +4,6 @@
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
 		"tiddlywiki/highlight",
-		"tiddlywiki/mobiledragdrop",
 		"tiddlywiki/internals"
 	],
 	"themes": [

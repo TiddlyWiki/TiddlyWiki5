@@ -1,0 +1,15 @@
+title: $:/language/
+
+ConfirmAction: Do you confirm you want to continue?
+ConfirmCancelTiddler: Do you want to discard the changes to the tiddler "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Do you want to delete the tiddler "<$text text=<<title>>/>"?
+ConfirmDeleteTiddlers: Do you want to delete <<resultCount>> tiddler(s)?
+ConfirmOverwriteTiddler: Do you want to overwrite the tiddler "<$text text=<<title>>/>"?
+Encryption/ConfirmClearPassword: Do you want to clear the password? This will remove the encryption applied when saving this wiki
+Error/NetworkErrorAlert: `<h2>''Network Error''</h2>It looks like the connection to the server has been lost. This may indicate a problem with your network connection. Please restore your network connectivity before continuing.<br><br>''Any unsaved changes will be automatically synchronized when connectivity is restored''.`
+Error/ZoominTextNode: Story View Error: It appears that you tried to interact with a tiddler which displays a custom container. This is most likely caused by using `$:/tags/StoryTiddlerTemplateFilter` with a template that contains text or whitespace at the beginning. Please use the pragma `\whitespace trim` and ensure the whole contents of the tiddler is wrapped in a single HTML element. The text that caused this issue:
+Manager/Item/Colour: Color
+MissingTiddler/Hint: Missing tiddler "<$text text=<<currentTiddler>>/>"—click {{||$:/core/ui/Buttons/edit}} to create
+RecentChanges/DateFormat: DDD, MMM DD, YYYY
+TagManager/Colour/Heading: Color
+Tiddler/DateFormat: DDD, MMM DD, YYYY at hh12:0mm am

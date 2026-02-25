@@ -1,0 +1,10 @@
+created: 20240831025944330
+modified: 20240831041423075
+tags: [[decodebase64 Operator]] [[Operator Examples]]
+title: decodebase64 Operator (Examples)
+
+<<.operator-example 1 "[[dGVzdA==]decodebase64[]]">>
+
+<<.operator-example 2 "[[8J+Yjg==]decodebase64[]]">>
+
+<<.operator-example 3 "[[8J-Yjg==]decodebase64:urlsafe[]]">>

@@ -14,7 +14,7 @@ SyncAdaptorModules encapsulate storage mechanisms that can be used by the SyncMe
 
 SyncAdaptorModules are represented as JavaScript tiddlers with the field `module-type` set to `syncadaptor`.
 
-See [[this pull request|https://github.com/Jermolene/TiddlyWiki5/pull/4373]] for background on the evolution of this API.
+See [[this pull request|https://github.com/TiddlyWiki/TiddlyWiki5/pull/4373]] for background on the evolution of this API.
 
 ! Exports
 

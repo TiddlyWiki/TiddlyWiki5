@@ -33,6 +33,7 @@ external-link-background: transparent
 external-link-foreground-hover: 
 external-link-foreground-visited: 
 external-link-foreground: 
+footnote-target-background: #ececec
 foreground: rgba(0, 0, 0, 0.87)
 highlight-background: #ffff00
 highlight-foreground: #000000

@@ -1,0 +1,20 @@
+title: Functions/FunctionFilterrunVariables2
+description: Functions in filter runs that set variables
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Apple
+cost: 5
+
++
+title: Output
+
+\whitespace trim
+\function .doublecost() [<currentTiddler>get[cost]multiply[2]]
+
+<$text text={{{ [[Apple]] :map[.doublecost[]] }}}/>
+
++
+title: ExpectedResult
+
+10

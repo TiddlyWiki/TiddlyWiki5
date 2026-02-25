@@ -1,5 +1,5 @@
 created: 20170406083917224
-modified: 20190118084621046
+modified: 20240612115232524
 tags: Variables [[Core Variables]]
 title: actionTiddler Variable
 type: text/vnd.tiddlywiki
@@ -7,4 +7,4 @@ type: text/vnd.tiddlywiki
 The variable `actionTiddler` is used in subtly different ways by different widgets:
 
 * Within the ''actions'' string of the DroppableWidget, the <<.def actionTiddler>> [[variable|Variables]] contains the title of the tiddler being dropped.
-* Within the ''startactions'' and ''endactions'' string of the DroppableWidget, the <<.def actionTiddler>> [[variable|Variables]] contains a quoted [[Title List]] of all of the titles being dragged.
+* Within the ''startactions'' and ''endactions'' string of the DraggableWidget, the <<.def actionTiddler>> [[variable|Variables]] contains a quoted [[Title List]] of all of the titles being dragged.

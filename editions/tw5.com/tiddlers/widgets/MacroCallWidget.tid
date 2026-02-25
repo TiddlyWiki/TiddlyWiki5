@@ -1,48 +1,31 @@
 caption: macrocall
 created: 20131024141900000
-modified: 20220122193731433
-tags: Widgets
+modified: 20230419103154328
+tags: Widgets $:/deprecated
 title: MacroCallWidget
 type: text/vnd.tiddlywiki
 
-! Introduction
+<<.deprecated-since "5.3.0" "TranscludeWidget">>
 
-The macro call widget provides a more flexible alternative syntax for invoking macros compared to the usual `<<macroname>>` syntax documented in [[Macros in WikiText]].
+The <<.wlink MacroCallWidget>> widget is deprecated. While it will continue to work, users are now advised to use the <<.wlink TranscludeWidget>> widget, converting the `$name` attribute to `$variable`.
 
-For example, a macro called `italicise` that takes a single parameter called `text` would usually be invoked like this:
-
-```
-<<italicise "Text to be made into italics">>
-<<italicise text:"Text to be made into italics">>
-```
-
-The same macro can be invoked using the macro call widget like this:
+For example,
 
 ```
-<$macrocall $name="italicise" text="Text to be made into italics"/>
-<$macrocall $name="italicise" text={{Title of tiddler containing text to be italicised}}/>
-<$macrocall $name="italicise" text=<<textMaker "Another macro to generate the text to be italicised">>/>
+<$macrocall $name="my-macro" my-parameter="Elephant"/>
 ```
 
-The advantages of the widget formulation are:
+should be changed to:
 
-* Macro parameters are specified as widget attributes, thus allowing indirection via `{{title!!field}}`, `<<macroname>>` or `{{{filter}}}`
-* The output format can be chosen from several options:
-** `text/html` wikifies the result of the macro
-** `text/plain` wikifies the result of the macro and then extracts the plain text characters (ie. ignoring HTML tags)
-** <<.from-version "5.1.23">> `text/raw` returns the result of the macro, without wikification
+```
+<$transclude $variable="my-macro" my-parameter="Elephant"/>
+```
 
-You can see several examples of the macro call widget within the core:
-
-* Listing module information: [[$:/snippets/modules]]
-* Listing field information: [[$:/snippets/allfields]]
-* Generating `data:` URIs: [[$:/themes/tiddlywiki/starlight/styles.tid]]
-
-See also [[WikiText parser mode: macro examples]]
+Internally, the <<.wlink MacroCallWidget>> widget is implemented via the <<.wlink TranscludeWidget>> widget.
 
 ! Content and Attributes
 
-The content of the `<$macrocall>` widget is ignored.
+The content of the <<.wlink MacroCallWidget>> widget is ignored.
 
 |!Attribute |!Description |
 |$name |Name of the macro to invoke |

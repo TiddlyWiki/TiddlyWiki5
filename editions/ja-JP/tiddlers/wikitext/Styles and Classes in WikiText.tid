@@ -1,0 +1,75 @@
+caption: スタイルとクラス
+created: 20131205160532119
+modified: 20241123111135825 
+original-modified: 20230726105744098
+tags: WikiText [[How to apply custom styles]]
+title: Styles and Classes in WikiText
+ja-title: WikiTextでのスタイルとクラス
+type: text/vnd.tiddlywiki
+
+CSSスタイルとクラスは、`@@二重のアットマーク@@`で囲まれたインラインコンテンツまたはブロックコンテンツに適用できます。クラスは、特定のブロックWikiText要素に適用できます。
+
+スタイルやクラスを指定せずに`@@二重のアットマーク@@`でラップされた//インラインコンテンツ//には、`tc-inline-style`クラスが割り当てられ、ハイライトされたテキストとして表示されます。ハイライトされたテキストの前景色と背景色は、現在のパレットで`highlight-background`と`highlight-foreground`として定義されている色が使われます。
+
+<<wikitext-example src:"@@ハイライトされたテキスト@@">>
+
+!! スタイル
+
+複数のスタイル属性(例: `color`)は、各属性の後にセミコロン`;`をつけ、開始の`@@`の直後に、スペースを入れずに、記述します。
+
+<<wikitext-example src:"@@color:steelblue;background-color:lightcyan;カスタムスタイルのテキスト@@">>
+
+同様に、//ブロックコンテンツ//にもスタイルを適用できます。スタイルやクラスを指定せずに`@@`内にブロック コンテンツをラップしても効果はありません。
+
+<<wikitext-example src:"@@background-color:lightcyan;
+* アイテム 1
+* アイテム 2
+@@
+">>
+
+!! クラス
+
+次のTiddlerでは、デモンストレーションの目的で`coloured-text`クラスと`coloured-bg`クラスが定義されています: 
+
+
+```
+.coloured-text {color: darkkhaki;}
+.coloured-bg {background-color: cornsilk;}
+```
+
+<style>
+.coloured-text {color: darkkhaki;}
+.coloured-bg {background-color: cornsilk;}
+</style>
+
+複数のクラス(それぞれ`.`のプレフィックス付き)は、開始の`@@`の直後にスペース` `を空けて記述します。これは、インラインコンテンツとブロックコンテンツの両方で機能します: 
+
+<<wikitext-example src:"@@.coloured-text.coloured-bg 2つのクラスが割り当てられたインラインコンテンツ@@">>
+
+<<wikitext-example src:"@@.coloured-bg
+* ブロックコンテンツ
+* 1つのクラスを割り当て
+@@">>
+
+複数のクラスとスタイルを同時に適用できます。インラインコンテンツの場合は、最初にスタイルを定義し、その後にクラスを定義する必要があります。
+
+<<wikitext-example src:"@@font-size:1.5em;.coloured-text.coloured-bg カスタムスタイルとクラスを持つテキスト@@">>
+
+ブロックコンテンツの場合、スタイルとクラスは、インラインコンテンツの場合と同じように開始`@@`の後の1行で定義することも、それぞれ`@@`で始まる別々の行で定義することもできます: 
+
+<<wikitext-example src:"@@font-size:1.5em;
+@@.coloured-text
+@@.coloured-bg
+* ブロックコンテンツ
+* カスタムスタイルとクラス
+@@">>
+
+同様に、行の先頭の文字によって導入されるブロックWikiText要素に、スタイルではなくクラスを適用できます。プレフィックス`.`が付くクラスは、特殊文字の直後に記述され、その後にスペース` `が続きます。
+
+<<wikitext-example src:"!!!.coloured-bg カスタム背景クラスを使用した見出し。
+
+* 標準のリスト要素。
+*.coloured-bg カスタム背景色を持つリスト要素。
+*.coloured-text カスタムテキスト色を持つリスト要素。
+*.coloured-bg.coloured-text 両方のカスタムクラスを持つリスト要素。
+">>

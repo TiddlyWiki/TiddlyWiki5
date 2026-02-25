@@ -1,0 +1,36 @@
+created: 20230601123245916
+modified: 20230601125015463
+title: Widget `destroy` method examples
+type: text/vnd.tiddlywiki
+
+!! When using a v-dom library
+
+Virtual DOM libraries manages its internal state and apply state to DOM periodically, this is so called [["controlled" component|https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components]]. When Tiddlywiki remove a DOM element controlled by a v-dom library, it may throws error.
+
+So when creating a plugin providing v-dom library binding, you need to tell v-dom library (for example, React.js) the DOM element is removed. We will use `destroy` method for this.
+
+```js
+  render() {
+    // ...other render related code
+    if (this.root === undefined || this.containerElement === undefined) {
+      // initialize the v-dom library
+      this.root = ReactDom.createRoot(document.createElement('div'));
+    }
+  }
+
+  destroy() {
+    // end the lifecycle of v-dom library
+    this.root && this.root.unmount();
+  }
+```
+
+The `destroy` method will be called by parent widget. If you widget don't have any child widget, you can just write your own tear down logic. If it may have some child widget, don't forget to call original `destroy` method in the `Widget` class to destroy children widgets.
+
+```js
+Widget.prototype.destroy();
+this.root && this.root.unmount();
+/** if you are using ESNext
+super.destroy();
+this.root?.unmount();
+*/
+```

@@ -1,0 +1,18 @@
+title: GettingStarted
+
+\define lingo-base() $:/language/ControlPanel/Basics/
+!Добредојдовте во ТидлиВики 🐈‍⬛
+
+Пред да започнете со складирање на важни информации во вашето ТидлиВики, од големо значење е да знаете како навистина можете да ги меморирате вашите промени. За повеќе информации прочитајте ја објавата: https://tiddlywiki.com/#GettingStarted
+
+!! Основни податоци
+
+<div class="tc-control-panel">
+
+|tc-table-no-border tc-first-col-min-width tc-first-link-nowrap|k
+| <$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link>|<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+| <$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link>|<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|^ <$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link><br><<lingo DefaultTiddlers/TopHint>>|<$edit tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
+
+Отворете го [[контролниот панел|$:/ControlPanel]] за повеќе опции.

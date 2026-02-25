@@ -3,7 +3,7 @@ description: Gefilterte Ausgabe von Tiddlern, in einem spezifizierten Format.
 
 ''WICHTIG:''
 
-* Der `--rendertiddlers` Befehl wird ab V5.1.15 durch `--render` ersetzt. 
+* Der `--rendertiddlers` Befehl wird ab V5.1.15 durch `--render` ersetzt.
 * `--rendertiddlers` wird auslaufen und sollte daher nicht mehr verwendet werden!
 
 Gefilterte Ausgabe mehrerer Tiddler, in ein angegebenes Dateiformat (standard: `text/html`) mit spezifischer Erweiterung (Standard: `.html`).

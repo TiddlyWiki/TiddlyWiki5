@@ -6,10 +6,7 @@ module-type: utils
 Module that creates a $tw.utils.Scroller object prototype that manages scrolling in the browser
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -35,7 +32,7 @@ var PageScroller = function() {
 
 PageScroller.prototype.isScrolling = function() {
 	return this.idRequestFrame !== null;
-}
+};
 
 PageScroller.prototype.cancelScroll = function(srcWindow) {
 	if(this.idRequestFrame) {
@@ -81,7 +78,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	}
 	// Get the client bounds of the element and adjust by the scroll position
 	var getBounds = function() {
-			var clientBounds = typeof callback === 'function' ? callback() : element.getBoundingClientRect(),
+			var clientBounds = typeof callback === "function" ? callback() : element.getBoundingClientRect(),
 				scrollPosition = $tw.utils.getScrollPosition(srcWindow);
 			return {
 				left: clientBounds.left + scrollPosition.x,
@@ -127,13 +124,11 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 };
 
 PageScroller.prototype.scrollSelectorIntoView = function(baseElement,selector,callback,options) {
-	baseElement = baseElement || document.body;
-	var element = baseElement.querySelector(selector);
+	baseElement = baseElement || document;
+	var element = $tw.utils.querySelectorSafe(selector,baseElement);
 	if(element) {
 		this.scrollIntoView(element,callback,options);
 	}
 };
 
 exports.PageScroller = PageScroller;
-
-})();

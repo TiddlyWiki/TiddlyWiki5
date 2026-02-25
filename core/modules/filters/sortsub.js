@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for sorting by a subfilter
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -25,19 +22,10 @@ exports.sortsub = function(source,operator,options) {
 		inputTitles.push(title);
 		var r = filterFn.call(options.wiki,function(iterator) {
 			iterator(options.wiki.getTiddler(title),title);
-		},{
-			getVariable: function(name,opts) {
-				opts = opts || {};
-				switch(name) {
-					case "currentTiddler":
-						return "" + title;
-					case "..currentTiddler":
-						return options.widget.getVariable("currentTiddler");
-					default:
-						return options.widget.getVariable(name,opts);
-				}
-			}
-		});
+		},options.widget.makeFakeWidgetWithVariables({
+			"currentTiddler": "" + title,
+			"..currentTiddler": options.widget.getVariable("currentTiddler")
+		}));
 		sortKeys.push(r[0] || "");
 	});
 	// Rather than sorting the titles array, we'll sort the indexes so that we can consult both arrays
@@ -57,5 +45,3 @@ exports.sortsub = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

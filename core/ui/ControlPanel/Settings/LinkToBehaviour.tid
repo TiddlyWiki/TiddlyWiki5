@@ -2,21 +2,25 @@ title: $:/core/ui/ControlPanel/Settings/LinkToBehaviour
 tags: $:/tags/ControlPanel/Settings
 caption: {{$:/language/ControlPanel/Settings/LinkToBehaviour/Caption}}
 
-\define lingo-base() $:/language/ControlPanel/Settings/LinkToBehaviour/
 \whitespace trim
+\define lingo-base() $:/language/ControlPanel/Settings/LinkToBehaviour/
 
-<$link to="$:/config/Navigation/openLinkFromInsideRiver"><<lingo "InsideRiver/Hint">></$link>
+<$link to="$:/config/Navigation/openLinkFromInsideRiver" class="tc-control-panel-item">
+	<<lingo "InsideRiver/Hint">>
+</$link>
 
-<$select tiddler="$:/config/Navigation/openLinkFromInsideRiver">
-  <option value="above"><<lingo "OpenAbove">></option>
-  <option value="below"><<lingo "OpenBelow">></option>
-  <option value="top"><<lingo "OpenAtTop">></option>
-  <option value="bottom"><<lingo "OpenAtBottom">></option>
+<$select tiddler="$:/config/Navigation/openLinkFromInsideRiver" class="tc-select">
+	<option value="above"><<lingo "OpenAbove">></option>
+	<option value="below"><<lingo "OpenBelow">></option>
+	<option value="top"><<lingo "OpenAtTop">></option>
+	<option value="bottom"><<lingo "OpenAtBottom">></option>
 </$select>
 
-<$link to="$:/config/Navigation/openLinkFromOutsideRiver"><<lingo "OutsideRiver/Hint">></$link>
+<$link to="$:/config/Navigation/openLinkFromOutsideRiver" class="tc-control-panel-item">
+	<<lingo "OutsideRiver/Hint">>
+</$link>
 
-<$select tiddler="$:/config/Navigation/openLinkFromOutsideRiver">
-  <option value="top"><<lingo "OpenAtTop">></option>
-  <option value="bottom"><<lingo "OpenAtBottom">></option>
+<$select tiddler="$:/config/Navigation/openLinkFromOutsideRiver" class="tc-select">
+	<option value="top"><<lingo "OpenAtTop">></option>
+	<option value="bottom"><<lingo "OpenAtBottom">></option>
 </$select>

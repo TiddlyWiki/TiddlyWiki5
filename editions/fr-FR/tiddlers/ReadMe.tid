@@ -5,7 +5,7 @@ type: text/vnd.tiddlywiki
 
 \define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
 
-<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
+<$importvariables filter={{$:/core/config/GlobalImportFilter}}>
 
 Bienvenue sur <<tw>>, un carnet de notes personnel web et non-linéaire que tout le monde peut utiliser et conserver, sans dépendre d'une quelconque entreprise.
 

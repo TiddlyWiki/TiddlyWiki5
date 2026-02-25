@@ -1,0 +1,16 @@
+title: $:/language/Filters/
+
+AllTags: Сите ознаки освен системски ознаки
+AllTiddlers: Сите записи освен системски записи
+Drafts: Незачувани записи
+Missing: Непостоечки записи
+Orphans: Самостојни записи
+OverriddenShadowTiddlers: Променливи сенки
+RecentSystemTiddlers: Неодамна модифицирани записи, вклучувајќи ги системските записи
+RecentTiddlers: Неодамна модифицирани записи
+SessionTiddlers: Модифицирани записи од моментот на вклучување на википедијата
+ShadowTiddlers: Сенки
+StoryList: Записи во реката, без <$text text="$:/AdvancedSearch"/>
+SystemTags: Системски ознаки
+SystemTiddlers: Системски записи
+TypedTiddlers: Записи кои не се вики-текст

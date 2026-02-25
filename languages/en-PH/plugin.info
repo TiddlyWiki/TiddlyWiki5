@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/en-PH",
+	"name": "en-PH",
+	"plugin-type": "language",
+	"description": "English (Philippines)",
+	"author": "JC John Sese Cuneta",
+	"core-version": ">=5.3.5"
+}

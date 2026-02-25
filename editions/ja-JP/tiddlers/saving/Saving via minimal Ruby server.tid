@@ -1,0 +1,21 @@
+caption: Rubyサーバー
+color: #78909C
+community-author: Jim Foltz
+created: 20180514011710789
+delivery: Server-side Script
+description: サーバーとして実行できるDIYスクリプト
+method: save
+modified: 20241007111123765
+original-modified: 20200507203129704
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows iOS Edge
+title: Saving via a Minimal Ruby Server
+ja-title: 最小Rubyサーバ経由の保存
+type: text/vnd.tiddlywiki
+
+Ruby Webrickを使用した最小サーバーです。同じフォルダーからファイルを提供し、保存を処理します。
+
+実行したら、Webブラウザーで http://localhost:8000 を指定してフォルダーの一覧を表示し、wikiのhtmlファイルをクリックします。
+
+スクリプトは以下を参照してください:
+
+https://gist.github.com/jimfoltz/ee791c1bdd30ce137bc23cce826096da

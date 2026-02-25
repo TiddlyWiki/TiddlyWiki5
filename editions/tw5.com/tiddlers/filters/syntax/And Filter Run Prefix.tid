@@ -1,0 +1,18 @@
+created: 20230318142752854
+from-version: 5.1.23
+modified: 20230711084712170
+op-purpose: accumulation of filter steps
+rp-input: the filter output of all previous runs so far
+rp-output: output titles replace the output of previous filter runs
+tags: [[Named Filter Run Prefix]]
+title: And Filter Run Prefix
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( ":and" | - )
+[[run|"Filter Run"]]
+"""/>
+
+This prefix has an optional [[shortcut syntax|Shortcut Filter Run Prefix]] symbol `+run`

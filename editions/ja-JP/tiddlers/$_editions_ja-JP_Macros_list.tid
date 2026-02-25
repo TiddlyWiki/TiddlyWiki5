@@ -1,0 +1,25 @@
+created: 20141127091159720
+modified: 20240929104004177
+original-modified: 20141221122727114
+tags: $:/tags/Macro
+title: $:/editions/ja-JP/Macros/list
+type: text/vnd.tiddlywiki
+
+\define list-links(filter,type:"ul",subtype:"li",class:"")
+<!-- Essentially overriding $:/core/macros/list
+	 so that the list item is rather labeled with ja-title
+     when present. -->
+<$type$ class="$class$">
+<$list filter="$filter$">
+<$subtype$>
+<$link to={{!!title}}>
+<$transclude field="caption">
+<$view field="ja-title">
+<$view field="title"/>
+</$view>
+</$transclude>
+</$link>
+</$subtype$>
+</$list>
+</$type$>
+\end

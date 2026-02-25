@@ -1,0 +1,18 @@
+created: 20230304123606350
+modified: 20230304124149055
+tags: [[thisTiddler Variable]] [[Variable Examples]]
+title: thisTiddler Variable (Examples)
+type: text/vnd.tiddlywiki
+
+The first example shows how <<.def thisTiddler>> works whithin transcluded template. Here the [[SampleTemplate]] is a template for demonstration.
+
+<$macrocall $name=".example" n="1" eg="""{{||SampleTemplate}}"""/>
+
+The second example shows <<.def thisTiddler>> in the body of tiddler and inside a macro.
+
+<$macrocall $name=".example" n="2" eg="""<$text text=<<thisTiddler>>/>"""/>
+
+<$macrocall $name=".example" n="3" eg="""\define example() <$text text=<<thisTiddler>>/>
+<<example>>
+"""/>
+

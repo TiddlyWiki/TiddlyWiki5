@@ -1,0 +1,16 @@
+title: Procedures/IndentedEnd
+description: \end line starting with whitespace ends a procedure body
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure hello()
+ hello \end
+  \end
+
+Out: <<hello>>
++
+title: ExpectedResult
+
+<p>Out:  hello \end</p>

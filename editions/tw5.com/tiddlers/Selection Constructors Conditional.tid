@@ -1,0 +1,9 @@
+created: 20240708174435694
+modified: 20240708175546166
+title: Selection Constructors: Conditional
+
+Most [[filter Operators|filter Operator]] are either ''selection modifiers'' or [[Selection Constructors]].
+
+Within the exceptional category <<tag>> are a tiny minority that //usually// act as ''selection modifiers'', but which can construct a fresh selection under special conditions — namely, whenever their [[parameter|Filter Parameter]] is specified with a selection constructor.
+
+<<list-links "[tag<currentTiddler>]">>

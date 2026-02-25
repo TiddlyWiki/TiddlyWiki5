@@ -1,5 +1,5 @@
 title: $:/language/Help/server
-description: Provides an HTTP server interface to TiddlyWiki (deprecated in favour of the new listen command)
+description: (deprecated: see 'listen' command) Provides an HTTP server interface to TiddlyWiki
 
 Legacy command to serve a wiki over HTTP.
 

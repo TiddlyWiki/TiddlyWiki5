@@ -1,0 +1,28 @@
+created: 20140324223413403
+modified: 20240422111609609
+original-modified: 20150505063713581
+tags: Learning
+title: Making curved text with SVG
+ja-title: SVGでカーブしたテキストを作成する
+type: text/vnd.tiddlywiki
+
+\define textOnPath(text)
+$$$.svg
+<svg width="100%" height="100%" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background:white;">
+<defs>
+<path id="MyPath" d="M 100 200 C 200 100 300   0 400 100 C 500 200 600 300 700 200 C 800 100 900 100 900 100"/>
+</defs>
+<use xlink:href="#MyPath" fill="none" stroke="#ddd"/>
+<text font-family="'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif" font-size="42.5">
+<textPath xlink:href="#MyPath">
+$text$
+</textPath>
+</text>
+</svg>
+$$$
+\end
+このデモでは、SVGを使用してパスに沿ってトランスクルードされたテキストをレンダリングする方法を示します。下のテキストボックスにテキストを入力して試してください。[[ソースを表示|Making curved text with SVG]]して、それがどのように行われているかを確認してください
+
+<$edit-text tiddler="$:/CurvedText" tag="input" placeholder="Type text here" default=""/>
+
+<$macrocall $name="textOnPath" text={{$:/CurvedText}}/>

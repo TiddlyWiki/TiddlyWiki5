@@ -1,6 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/blog",
-	"name": "Blog",
-	"description": "Blog publishing tools",
-	"list": "readme docs"
-}

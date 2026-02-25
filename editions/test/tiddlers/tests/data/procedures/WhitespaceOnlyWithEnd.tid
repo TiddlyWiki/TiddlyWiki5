@@ -1,0 +1,18 @@
+title: Procedures/WhitespaceOnlyWithEnd
+description: The /end should be detected when procedure definition contains only whitespace
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure max()
+\end
+Nothing
+\end
+
+Out: <<max>>
++
+title: ExpectedResult
+
+<p>Nothing
+\end</p><p>Out: </p>

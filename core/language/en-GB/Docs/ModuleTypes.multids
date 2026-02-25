@@ -9,7 +9,7 @@ config: Data to be inserted into `$tw.config`.
 filteroperator: Individual filter operator methods.
 global: Global data to be inserted into `$tw`.
 info: Publishes system information via the [[$:/temp/info-plugin]] pseudo-plugin.
-isfilteroperator: Operands for the ''is'' filter operator.
+isfilteroperator: Parameters for the ''is'' filter operator.
 library: Generic module type for general purpose JavaScript modules.
 macro: JavaScript macro definitions.
 parser: Parsers for different content types.

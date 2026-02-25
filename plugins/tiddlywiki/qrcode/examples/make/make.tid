@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/qrcode/examples/make
+tags: $:/tags/QRCodeExample
+caption: Making Barcodes
+
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/MakeQR]!has[draft.of]]" "$:/plugins/tiddlywiki/qrcode/make/MakeGenericQR">>

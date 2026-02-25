@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/qrcode/make/MakeGenericQR
+tags: $:/tags/MakeQR
+caption: Generic
+
+\define image(content)
+<img src=<<makeqr text:"""$content$""" size:"350">>/>
+\end
+
+! Enter the details
+
+You can also use this form to encode URLs.
+
+<$edit-text tiddler="$:/config/plugins/tiddlywiki/qrcode/generic" default="" class="tc-edit-texteditor"/>
+
+! Here is your QR code
+
+<$macrocall $name="image" content={{$:/config/plugins/tiddlywiki/qrcode/generic}}/>

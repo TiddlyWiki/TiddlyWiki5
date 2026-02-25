@@ -1,0 +1,27 @@
+created: 20211130114043280
+from-version: 5.2.1
+modified: 20250305112707026
+original-modified: 20230710073343947
+rp-input: これまでのすべてのランのフィルタアウトプット
+rp-output: このフィルタランによって返されるフィルタによって変更されたインプットタイトル
+rp-purpose: フィルターのリストを順に評価し、最初の結果を適用してインプットタイトルを変更
+tags: [[Named Filter Run Prefix]]
+title: Cascade Filter Run Prefix
+ja-title: cascadeフィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( ":cascade" | - )
+[["ラン"|"Filter Run"]]
+"""/>
+
+この[[フィルタラン|Filter Run]]の[[フィルタ式|Filter Expression]]が評価され、フィルタのリストが返されます。次に、各インプットタイトルが各フィルタに対して順番に評価され、インプットタイトルは空でないリストを返す最初のフィルタの最初の結果に置き換えられます。どのフィルタもインプットタイトルの結果を返さない場合は、空の文字列に置き換えられます。
+
+フィルタラン内では、次の変数を使用できます: 
+
+* <<.var currentTiddler>> - インプットタイトル
+* <<.var ..currentTiddler>> - フィルタラン外の変数<<.var currentTiddler>>の値。
+
+[[cascadeフィルタランプレフィックス (例)|Cascade Filter Run Prefix (Examples)]]

@@ -1,0 +1,20 @@
+{
+	"tiddlers": [
+		{
+			"file": "confetti.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/confetti/confetti.js",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/confetti/license"
+			}
+		}
+	]
+}

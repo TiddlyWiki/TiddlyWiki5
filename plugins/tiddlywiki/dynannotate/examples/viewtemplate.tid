@@ -1,28 +1,69 @@
-title: $:/plugins/tiddlywiki/dynannotate/examples/viewtemplate
-tags: $:/tags/dynannotateExamples
 caption: View Template
+tags: $:/tags/dynannotateExamples
+title: $:/plugins/tiddlywiki/dynannotate/examples/viewtemplate
+
+\define show-example(example)
+<$codeblock code=<<__example__>>/>
+
+//''Displays as:''//
+
+$example$
+\end
 
 <div class="tc-dynannotation-example-info">
 
 !! Using Dynannotate in the view template
 
-This example shows how to override the core view template with a custom template that includes dynannotate. It is disabled by default but can be enabled by clicking the button below. (Clicking the button below copies the custom view template from $:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text to $:/core/ui/ViewTemplate/body).
+This example shows how to override the core view template with a custom template that includes dynannotate. It is disabled by default but can be enabled by clicking the corresponding button below. The example transcludes the [[Searching in TiddlyWiki|$:/plugins/tiddlywiki/dynannotate/searching-in-tiddlywiki]] tiddler for illustration purposes, but the chosen view template is applied to all open tiddlers.
 
-Once enabled, this example demonstrates several features:
+Once enabled, this example demonstrates several features of Dynannotate:
 
-* Highlighting of search results within tiddler bodies
-* Creating annotations on any tiddler by selecting text and then clicking a colour in the resulting dropdown
+* Highlight text within tiddler bodies -- any text entered in the sidebar search input will be highlighted (in all tiddlers)
+* Create annotations (on any tiddler) by selecting text and then clicking //Create annotation// in the resulting dropdown
+
+(Clicking the buttons below either puts the custom body view template [[$:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text]] in front of the default in the [[View Template Body Cascade|https://tiddlywiki.com/#View%20Template%20Body%20Cascade]] or removes it from the cascade).
 
 </div>
 
 <$button>
-<$action-setfield $tiddler="$:/config/ViewTemplateTitleFilters/dynannotate" tags="$:/tags/ViewTemplateTitleFilter" text="[[$:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text]]" list-before="$:/config/ViewTemplateBodyFilters/default"/>
+<$action-setfield $tiddler="$:/config/ViewTemplateBodyFilters/dynannotate" tags="$:/tags/ViewTemplateBodyFilter" text="[[$:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text]]" list-before="$:/config/ViewTemplateBodyFilters/default"/>
 Click here to use the custom view template
 </$button>
 
 <$button>
-<$action-deletetiddler $tiddler="$:/config/ViewTemplateTitleFilters/dynannotate"/>
+<$action-deletetiddler $tiddler="$:/config/ViewTemplateBodyFilters/dynannotate"/>
 Click here to revert to the core view template
 </$button>
 
-<$codeblock code={{$:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text}}/>
+<p/>
+
+<div class="tc-dynannotation-example-info">
+
+!! Using Dynannotate to highlight text on a per-tiddler basis
+
+Using state tiddlers containing the text which is to be highlighted, Dynannotate highlights can be applied on a per-tiddler basis when used in the body view template. This can also be combined with the [[GenesisWidget]] to insert the Dynannotate widget into the DOM only when such a highlight is configured.
+
+This example uses a transcluded tiddler, but Dynannotate could be added to the view template (to show highlights in all parts of a tiddler) or to the body view template (to show highlights only in the tiddler body) in the same way. Note how in this example, Dynannotate only affects the transcluded content.
+
+</div>
+
+<<show-example """<$button set="$:/state/dynannotate/examples/viewtemplate" setTo="tiddler">Highlight "tiddler"</$button>
+<$button set="$:/state/dynannotate/examples/viewtemplate" setTo="created">Highlight "created"</$button>
+<$button set="$:/state/dynannotate/examples/viewtemplate" setTo="">Clear highlights</$button>
+<p/>
+<$let dynannotateText={{$:/state/dynannotate/examples/viewtemplate}}>
+    <$genesis $type={{{ [<dynannotateText>!is[blank]then[$dynannotate]] }}}
+              search=<<dynannotateText>>
+              searchDisplay="overlay"
+              searchClass="tc-dynannotation-search-overlay-animated"
+              searchCaseSensitive="no">
+        <div class="tc-dynannotate-example-frame">
+
+            !! `$:/core/ui/ControlPanel/TiddlerFields`:
+            <$transclude tiddler="$:/core/ui/ControlPanel/TiddlerFields" mode="block" />
+        </div>
+    </$genesis>
+</$let>
+""">>
+
+When used in the view template, the state tiddler title could be derived from the current tiddler, e.g. `<$let dynannotateText={{{ [<currentTiddler>addprefix[$:/state/dynannotate/]get[text]] }}}>`, to configure highlights for each tiddler separately.

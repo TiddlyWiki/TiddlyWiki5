@@ -1,0 +1,16 @@
+title: $:/language/Help/savetiddlers
+description: 將一羣條目的原始內容儲存到一個資料夾
+
+(請注意：`--savetiddlers` 命令已被棄用，而支援新的、更靈活得 `--save` 命令)
+
+儲存一羣條目的原始文字或二進位格式到指定的資料夾。
+
+```
+--savetiddlers <filter> <pathname> [noclean]
+```
+
+預設情況下，路徑名被解析為相對於發行版資料夾的 `output` 子資料夾。 `--output` 命令可以用於將輸出指定到一個不同的資料夾。
+
+儲存指定的檔案之前，會先清除輸出目錄的現有檔案。可藉由指定 ''noclean'' 旗標，停用該刪除動作。
+
+自動建立在路徑中任何缺少的資料夾。

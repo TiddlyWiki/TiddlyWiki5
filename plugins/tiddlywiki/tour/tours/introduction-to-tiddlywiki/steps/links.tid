@@ -1,0 +1,23 @@
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/links
+caption: Linking tiddlers
+tags: $:/tags/Tour/IntroductionToTiddlyWiki
+display-mode: fullscreen
+enter-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Jupiter"/>
+step-success-filter: [[$:/temp/Tour/DemoStoryList]contains[$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Saturn]]
+
+Links allow you to decide if you want more information on a particular area or term as you go.
+
+<<tour-task "Click the blue link to open the tiddler 'Saturn'">>
+
+Notice how the new tiddler opens alongside the old one. This allows you to scroll back up to retrace your steps.
+
+<$navigator story="$:/temp/Tour/DemoStoryList" history="$:/temp/Tour/DemoHistoryList" openLinkFromInsideRiver="below">
+
+<$list
+	filter="[list[$:/temp/Tour/DemoStoryList]]"
+	history="$:/temp/Tour/DemoHistoryList"
+	template="$:/plugins/tiddlywiki/tour/simplified-tiddler"
+	storyview="classic"
+/>
+
+</$navigator>

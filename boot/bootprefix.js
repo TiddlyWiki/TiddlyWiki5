@@ -12,6 +12,8 @@ See Boot.js for further details of the boot process.
 
 \*/
 
+/* eslint-disable @stylistic/indent */
+
 var _bootprefix = (function($tw) {
 
 "use strict";
@@ -19,9 +21,13 @@ var _bootprefix = (function($tw) {
 $tw = $tw || Object.create(null);
 $tw.boot = $tw.boot || Object.create(null);
 
+// Config
+$tw.config = $tw.config || Object.create(null);
+$tw.config.maxEditFileSize = 100 * 1024 * 1024; // 100MB
+
 // Detect platforms
 if(!("browser" in $tw)) {
-	$tw.browser = typeof(window) !== "undefined" ? {} : null;
+	$tw.browser = typeof(window) !== "undefined" && typeof(document) !== "undefined" ? {} : null;
 }
 if(!("node" in $tw)) {
 	$tw.node = typeof(process) === "object" ? {} : null;
@@ -109,6 +115,8 @@ $tw.preloadTiddlerArray = function(fieldsArray) {
 return $tw;
 
 });
+
+/* eslint-enable @stylistic/indent */
 
 if(typeof(exports) === "undefined") {
 	// Set up $tw global for the browser

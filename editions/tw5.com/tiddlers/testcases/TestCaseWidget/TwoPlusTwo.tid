@@ -1,0 +1,18 @@
+title: TestCases/TestCaseWidget/TwoPlusTwo
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec-failing]]
+description: A testcase to calculate 2+2
+
+title: Narrative
+
+This test case shows an elaborate way to calculate 2+2 involving multiple tiddlers
++
+title: Output
+
+The sum is <$text text={{{ [{FirstNumber}add{SecondNumber}] }}}/>
++
+title: FirstNumber
+text: 2
++
+title: SecondNumber
+text: 2

@@ -6,10 +6,7 @@ module-type: global
 Base class for wiki parser rules
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -35,5 +32,3 @@ WikiRuleBase.prototype.findNextMatch = function(startPos) {
 };
 
 exports.WikiRuleBase = WikiRuleBase;
-
-})();

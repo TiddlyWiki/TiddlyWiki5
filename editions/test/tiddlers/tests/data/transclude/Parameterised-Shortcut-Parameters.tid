@@ -1,0 +1,20 @@
+title: Transclude/Parameterised/Shortcut/Parameters
+description: Simple parameterised transclusion using the parameters pragma
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler='TiddlerOne' one='Ferret'/>
+<$transclude $tiddler='TiddlerOne'/>
++
+title: TiddlerOne
+
+\whitespace trim
+\parameters(one:'Jaguar')
+<$text text=<<one>>/>
++
+title: ExpectedResult
+
+<p>FerretJaguar</p>

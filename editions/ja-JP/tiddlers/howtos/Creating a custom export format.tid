@@ -1,0 +1,23 @@
+title: Creating a custom export format
+ja-title: カスタムエクスポートフォーマットを作成する
+modified: 20241113113601051
+original-modified: 20141124173526227
+created: 20141124173526227
+tags: [[Customise TiddlyWiki]]
+
+TiddlerをRAWデータテキストとしてエクスポートするカスタムエクスポートフォーマットを作成するには: 
+
+# 次のフィールドを持つTiddlerを作成します。
+#* ''tags'': [[$:/tags/Exporter]]
+#* ''description'': このエクスポートフォーマットの説明
+#* ''extension'': このエクスポートフォーマットのデフォルトのファイル拡張子(ドットを含む、たとえば`.tid`)
+# 以下の内容を設定します。: 
+
+```
+\define renderContent()
+{{{ $(exportFilter)$ ||$:/core/templates/plain-text-tiddler}}}
+\end
+<<renderContent>>
+```
+
+変数`exportFilter`には、どのTiddlerをエクスポートするのかを定義するフィルターが含まれています。

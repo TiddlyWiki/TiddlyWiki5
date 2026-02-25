@@ -1,0 +1,31 @@
+title: $:/language/ControlPanel/
+
+Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中括弧&#93;&#93;，或者您可用 {{保留開啓中的條目順序||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/TopHint: 預設開啓的條目
+KeyboardShortcuts/Platform/All: 所有平台
+KeyboardShortcuts/Platform/Mac: 僅 Macintosh 平台
+KeyboardShortcuts/Platform/NonMac: 僅非 Macintosh 平台
+KeyboardShortcuts/Platform/Linux: 僅 Linux 平台
+KeyboardShortcuts/Platform/NonLinux: 僅非 Linux 平台
+KeyboardShortcuts/Platform/Windows: 僅 Windows 平台
+KeyboardShortcuts/Platform/NonWindows: 僅非 Windows 平台
+Plugins/Enable/Caption: 啓用
+Plugins/Enable/Hint: 重新載入頁面時啓用此插件
+Plugins/OpenPluginLibrary: 開啓插件程式庫
+Parsing/Hint: 在此您可以全域停用或啓用維基解析規則。要使更改生效，請儲存並重新載入您的維基。停用某些解析規則，會妨礙 <$text text="TiddlyWiki"/>  正常運作。可使用[[安全模式|https://tiddlywiki.com/#SafeMode]]恢復正常操作。
+Saving/DownloadSaver/AutoSave/Hint: 啓用下載儲存模組的自動儲存
+Saving/GitService/GitHub/Password: 密碼、OAUTH 權杖，或個人存取權杖 (詳見 [[GitHub 説明頁面|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]])
+Saving/GitService/GitLab/Password: 個人存取權杖的 API (詳見 [[GitLab 説明頁面|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]])
+Settings/CamelCase/Caption: 駝峯式維基鏈接
+Settings/CamelCase/Hint: 您可以全域停用駝峯式短語自動鏈接。須儲存後重新載入，方才生效。
+Settings/CamelCase/Description: 啓用自動駝峯式鏈接
+Settings/EditorToolbar/Hint: 啓用或停用編輯器工具列︰
+Settings/InfoPanelMode/Sticky/Description: 條目資訊面板保持開啓狀態，直到明確關閉
+Settings/LinkToBehaviour/Caption: 條目開啓行為
+Settings/LinkToBehaviour/OpenAbove: 開啓於當前條目之上
+Settings/LinkToBehaviour/OpenBelow: 開啓於當前條目之下
+Settings/LinkToBehaviour/OpenAtTop: 開啓於故事河的頂端
+Settings/LinkToBehaviour/OpenAtBottom: 開啓於故事河的底部
+Settings/MissingLinks/Description: 啓用鏈接到佚失條目
+Settings/NavigationAddressBar/Permaview/Description: 包括目標條目和當前已開啓的條目序列
+Settings/PerformanceInstrumentation/Description: 啓用效能檢測

@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator returning all the descendents of a tiddler listed in the "list" field
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -34,5 +31,3 @@ exports["list-children"] = function(source,operator,options) {
 	});
 	return Object.keys(children);
 };
-
-})();

@@ -1,51 +1,40 @@
 created: 20130822170200000
+icon: $:/core/icon
 list: [[A Gentle Guide to TiddlyWiki]] [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[What happened to the original TiddlyWiki?]]
-modified: 20221219184500440
-tags: TableOfContents
+modified: 20250807084952911
+tags: Welcome
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-!! ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
+<h2
+style="
+	background: red;
+	padding: 0.5em;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 0.5em;
+	box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+	background-image: linear-gradient(90deg, rgb(34, 132, 224), rgb(95, 174, 248), rgb(34, 132, 224));
+">
+Make Something of Your Notes
+</h2>
+
+<h2
+class="tc-hero-heading"
+style="
+	text-align: center;
+">
+Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information
+</h2>
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
 
-Unlike conventional online services, TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today.
+* ~TiddlyWiki stores its data and code in a single HTML file, requiring no installs, no external dependencies, just a web browser
 
-!! ''Find Out More''
+* ~TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today
 
-<div class="tc-cards">
-<$list filter="[tag[HelloThumbnail]]">
-<$macrocall $name="flex-card" captionField="caption" descriptionField="text"/>
-</$list>
-</div>
+* ~TiddlyWiki is infinitely customisable and extensible with many plugins that add new features
 
-!! ''~TiddlyWiki Hubs''
+* ~TiddlyWiki is the product of a collective of developers, part of an extensive community of users
 
-<div class="tc-cards" style="font-size:0.7em;text-align:center;margin:3em auto;">
-<a href="https://talk.tiddlywiki.org/" class="tc-btn-big-green" style="border-radius:4px;background-color:#FF8C19;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/help}} ~TalkTW
-</a>
-<a href="https://www.youtube.com/c/JeremyRuston" class="tc-btn-big-green" style="border-radius:4px;background-color:#e52d27;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/video}} ~YouTube
-</a>
-<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#1DA1F2;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/twitter}} Twitter
-</a>
-<a rel="me" href="https://fosstodon.org/@TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#2b90d9;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/mastodon}} Mastodon
-</a>
-<a href="https://github.com/Jermolene/TiddlyWiki5" class="tc-btn-big-green" style="border-radius:4px;background-color:#444;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/github}} ~GitHub
-</a>
-<a href="https://gitter.im/TiddlyWiki/public" class="tc-btn-big-green" style="border-radius:4px;background-color:#753a88;background-image:linear-gradient(to left,#cc2b5e,#753a88);" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/gitter}} Gitter
-</a>
-</div>
-
-!! ''Testimonials & Reviews''
-
-<div class="tc-cards">
-<$list filter="[tag[Testimonial]]">
-<$macrocall $name="flex-card" class="tc-card-quote" captionField="caption" descriptionField="text"/>
-</$list>
-</div>

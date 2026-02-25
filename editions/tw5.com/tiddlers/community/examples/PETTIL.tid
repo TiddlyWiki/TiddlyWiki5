@@ -3,7 +3,7 @@ modified: 20140716084548184
 tags: Examples
 title: "PETTIL - Forth for the Commodore PET" by Charlie Hitselberger
 type: text/vnd.tiddlywiki
-url: http://pettilmobile.com/tw/
+url: http://pettilmobile.com
 
 A fast Forth interpreter for the [[Commodore PET|https://en.wikipedia.org/wiki/Commodore_PET]], written in 6502 assembly language. The TiddlyWiki containing program documentation is automatically generated from the source code: see https://github.com/chitselb/pettil.
 

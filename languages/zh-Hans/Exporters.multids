@@ -3,4 +3,4 @@ title: $:/language/Exporters/
 StaticRiver: 静态 HTML
 JsonFile: JSON 文件
 CsvFile: CSV 文件
-TidFile: ".tid" 文件
+TidFile: TID 文本文件

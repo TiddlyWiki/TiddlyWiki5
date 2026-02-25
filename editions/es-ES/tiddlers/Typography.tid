@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 Se recomienda el uso de las [[macros de documentación|Documentation Macros]] para facilitar las futuras tareas de mantenimiento del texto frente a nuevos cambios y actualizaciones. 
 
-Se recomienda precaución en el uso arbitrario de estilos directos de formato (''negrita'', //cursiva// ...etc). Si se puede usar una macro, conviene usarla. Si no existe la macro adecuada, se puede crear o, si no se sabe cómo, pedir su creación en el [[Grupo de Google|http://groups.google.com/group/TiddlyWiki]].
+Se recomienda precaución en el uso arbitrario de estilos directos de formato (''negrita'', //cursiva// ...etc). Si se puede usar una macro, conviene usarla. Si no existe la macro adecuada, se puede crear o, si no se sabe cómo, pedir su creación en el [[Foro de TiddlyWiki|https://talk.tiddlywiki.org/]].
 
 Por el mismo motivo, se aconseja el uso de acentos graves <code>&#96;...&#96;</code> para transcribir fragmentos de código y ~WikiText, pero no para nombres de cosas tales como campos, operadores, variables o widgets. Estas tienen su macro correspondiente.
 

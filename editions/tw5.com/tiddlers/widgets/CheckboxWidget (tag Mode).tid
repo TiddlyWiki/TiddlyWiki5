@@ -1,0 +1,18 @@
+caption: <<.attr tag>>
+created: 20230314171205017
+description: tab
+modified: 20230317161122617
+tags: CheckboxWidget
+title: CheckboxWidget (tag Mode)
+
+!!<<.link "<<.attr tag>> Mode" "CheckboxWidget (tag Mode)">>
+
+Using the checkbox widget in tag mode requires the <<.attr tag>> attribute to specify the name of the tag. The checkbox will be checked if the tiddler specified in the <<.attr tiddler>> attribute has the specified tag and unchecked if it does not.
+
+This example creates a checkbox that flips the <<.tag done>> tag on the current tiddler:
+
+<<wikitext-example-without-html """<$checkbox tag="done"> Is it done?</$checkbox>""">>
+
+When the attribute <<.attr invertTag>> is set to <<.value yes>>, the checkbox will be checked if the tiddler does <<.em not>> have the specified tag and unchecked if it does.
+
+<<wikitext-example-without-html """<$checkbox tag="done" invertTag="yes"> Is it not done?</$checkbox>""">>

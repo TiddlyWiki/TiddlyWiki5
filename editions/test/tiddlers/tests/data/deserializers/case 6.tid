@@ -1,0 +1,8 @@
+title: dezerializer test data case 6
+type: application/json
+
+[
+	{"created":"20230601125557184","text":"Before you start storing important information in ~TiddlyWiki it is vital to make sure that you can reliably save changes. See https://tiddlywiki.com/#GettingStarted for details\n\n","title":"GettingStarted","modified":"20230601125601619"},
+    {"created":"20230601125507054","text":"Welcome to \"TiddlyWiki\".\n\nThis is a test tiddler.","tags":"","title":"Hello There \"Welcome\"","modified":"20230601125551144"},
+    {"title":"TiddlyWiki","created":"20130822170700000","modified":"20170127221451610","tags":"Concepts","type":"text/vnd.tiddlywiki","text":"~TiddlyWiki is a rich, interactive tool for manipulating complex data with structure that doesn't easily fit into conventional tools like spreadsheets or wordprocessors.\n\n~TiddlyWiki is designed to fit around your brain, helping you deal with the things that won't fit."}
+]

@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Напредно
+Advanced/PluginInfo/Empty/Hint: ништо
+Advanced/PluginInfo/Heading: Опис на плаген
+Advanced/PluginInfo/Hint: Овој плаген ги содржи следниве сенки:
+Advanced/ShadowInfo/Heading: Статус за сенка
+Advanced/ShadowInfo/NotShadow/Hint: Записот <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> не е сенка
+Advanced/ShadowInfo/OverriddenShadow/Hint: Заменето е со обичен запис
+Advanced/ShadowInfo/Shadow/Hint: Записот <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> е сенка
+Advanced/ShadowInfo/Shadow/Source: Дефинирано е во плагенот <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Fields/Caption: Полиња
+List/Caption: Своја листа
+List/Empty: Овој запис нема своја листа
+Listed/Caption: Друга листа
+Listed/Empty: Овој запис не е спомнат во друга листа
+References/Caption: Линкови
+References/Empty: Нема записи кои го спомнуваат овој запис
+Tagging/Caption: Ознаки
+Tagging/Empty: Нема записи кои се означени со овој запис
+Tools/Caption: Алатки

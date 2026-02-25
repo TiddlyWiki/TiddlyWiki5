@@ -7,26 +7,26 @@ description: {{$:/language/Buttons/Fold/Hint}}
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" default="show">
 <$button tooltip={{$:/language/Buttons/Fold/Hint}} aria-label={{$:/language/Buttons/Fold/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="listItem">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/fold-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/Fold/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>
 </$reveal>
 <$reveal type="match" stateTitle=<<folded-state>> text="hide" default="show">
 <$button tooltip={{$:/language/Buttons/Unfold/Hint}} aria-label={{$:/language/Buttons/Unfold/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="listItem">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/unfold-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/Unfold/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>
 </$reveal>

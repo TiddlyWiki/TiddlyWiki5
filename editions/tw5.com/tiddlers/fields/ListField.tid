@@ -1,8 +1,8 @@
+caption: list
 created: 20130830092500000
-modified: 20150124202924000
+modified: 20230803052727464
 tags: Fields
 title: ListField
-caption: list
 type: text/vnd.tiddlywiki
 
 The `list` [[field of a tiddler|TiddlerFields]] is an optional feature that can be used to help structure your content. Its value is a [[title list|Title List]], and it can be used in several ways:
@@ -10,4 +10,4 @@ The `list` [[field of a tiddler|TiddlerFields]] is an optional feature that can 
 * The `list` field of a tiddler that is being used as a tag determines the ordering of the tiddlers that carry that tag - see [[Tagging]] for details
 * The `list` [[filter|Filters]] selects the entries from a list
 * The `listed` [[filter|Filters]] selects the tiddlers that list the selected tiddler(s)
-* The NavigatorWidget manipulates a StoryList tiddler containing a `list` field of the tiddlers that are displayed in the main story column
+* The NavigatorWidget manipulates a [[StoryList|$:/StoryList]] tiddler containing a `list` field of the tiddlers that are displayed in the main story column

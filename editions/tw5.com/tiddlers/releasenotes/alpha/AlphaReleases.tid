@@ -1,9 +1,9 @@
 created: 20131109105400007
-modified: 20211117225858830
+modified: 20231220113044942
 tags: Releases AlphaReleaseNotes
 title: AlphaReleases
 type: text/vnd.tiddlywiki
 
 Here are the details of the alpha releases of TiddlyWiki5. See [[TiddlyWiki5 Versioning]] for details of how releases are named.
 
-<<tabs "[tag[AlphaReleaseNotes]!sort[created]]" "Release 5.0.1-alpha" "$:/state/tab2" "tc-vertical" "ReleaseTemplate">>
+<<tabs "[tag[AlphaReleaseNotes]!sort[created]] -[<currentTiddler>]" "Release 5.0.1-alpha" "$:/state/tab2" "tc-vertical" "ReleaseTemplate">>

@@ -1,0 +1,29 @@
+title: Transclude/Parameterised/SlotFillParseTreeNodes
+description: Parameterised transclusion using the $slotFillParseTreeNodes attribute
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
+<$fill $name="one">This is first</$fill>
+<$fill $name="two">But this is second</$fill>
+</$transclude>
+
+<$transclude $tiddler='TiddlerOne'>
+<$fill $name="one">This is first
+<$fill $name="two">But this is second</$fill></$fill>
+</$transclude>
++
+title: TiddlerOne
+
+\whitespace trim
+<$parameters $slotFillParseTreeNodes="@slotFillParseTreeNodes">
+	<$text text={{{ [<@slotFillParseTreeNodes>jsonindexes[]join[,]] }}}/>
+</$parameters>
++
+title: ExpectedResult
+
+<p>one,ts-raw,two</p><p>one,ts-raw</p>

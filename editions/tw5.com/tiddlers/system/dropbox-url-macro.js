@@ -12,10 +12,7 @@ Implements the Dropbox URL converter macro.
 
 \*/
 
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "dropbox-url";
@@ -29,4 +26,3 @@ exports.run = function(url) {
 	return "`" + url + "` <small>([[open|" + url + "]])</small>";
 };
 
-})();

@@ -1,0 +1,17 @@
+created: 20140101192052333
+modified: 20241117105837064
+original-modified: 20140912142248706
+tags: [[Customise TiddlyWiki]]
+title: Preserving open tiddlers at startup
+ja-title: 開いているTiddlerを起動時に保持する
+type: text/vnd.tiddlywiki
+
+通常、TiddlyWikiは起動時にTiddler[[$:/DefaultTiddlers]]でフィルターとして指定されたTiddlerを表示します
+
+ファイルを保存したときに開いていたTiddlerを再度開くと便利な場合があります。これを行うには、[[$:/DefaultTiddlers]]に次のフィルタを設定します: 
+
+```
+[list[$:/StoryList]]
+```
+
+このフィルタは、[[$:/StoryList]]Tiddlerで指定されたTiddlerを返します。これは、TiddlyWikiが現在のストーリーのTiddlerのシーケンスを保存するために使用するシステムTiddlerです

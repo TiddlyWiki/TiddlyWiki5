@@ -4,7 +4,7 @@ description: Speichert ein Wiki in einen neues Verzeichnis
 <<.from-version "5.1.20">> Speichert das aktuelle Wiki als ein Wiki-Verzeichnis. Inklusive Tiddlern, Plugins und Konfiguration:
 
 ```
---savewikifolder <wikifolderpath> [<filter>]
+--savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]*
 ```
 
 * Das Zielverzeichnis muss leer sein, oder nicht existent
@@ -12,8 +12,22 @@ description: Speichert ein Wiki in einen neues Verzeichnis
 * Plugins des offiziellen Plugin-Verzeichnisses werden durch Referenzen zu den Plugins in der `tiddlywiki.info` Datei ersetzt.
 * Drittanbieter Plugins werden in ihre eigenen Verzeichnisse entpackt
 
-Diese Funktion wird vor allem dazu verwendet, eine Wiki-Datei in einzelne Tiddler in einem Wiki-Verzeichnis umzuwandeln. 
+Folgende Optionen werden unterstützt:
+
+* ''filter'': Ein "Filter-Run" der die Tiddler definiert, die ausgegeben werden sollen.
+
+* ''explodePlugins'': Standard ist: "yes"
+** "yes": wird Plugins "aufspalten" und einzelne "Shadow Tiddler" in ein  "tiddlers/<plugin>" Verzeichnis speichern.
+** "no": Wird das "aufspalten" von Plugins in einzelne "Shadow Tiddler" unterbinden. Das plugin selbst wird als 1 JSON Tiddler gespeichert.
+
+Diese Funktionen werden vor allem dazu verwendet, eine Wiki-Datei in einzelne Tiddler in einem Wiki-Verzeichnis umzuwandeln:
 
 ```
 tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder
+```
+
+Der folgende Befehl wird das Plugin als JSON-Tiddler in das "tiddlers" Verzeichnis speichern:
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder explodePlugins=no
 ```

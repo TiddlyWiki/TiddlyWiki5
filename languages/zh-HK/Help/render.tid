@@ -1,0 +1,34 @@
+title: $:/language/Help/render
+description: 呈現個別條目到檔案
+
+呈現由篩選器標識的個別條目，並將結果儲存到指定的檔案。
+
+可選擇性地指定範本條目名稱。在此情況下，不是直接呈現每個條目，而是使用設為正在呈現的條目名稱的 "currentTiddler" 變數，來呈現範本條目。
+
+也可以選擇性地指定附加變數的名稱和值。
+
+```
+--render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
+```
+
+* ''tiddler-filter'': 標識要呈現的條目的篩選器
+* ''filename-filter'': 可選的篩選器，轉換條目名稱至路徑名。如果省略，預設為 `[is[tiddler]addsuffix[.html]]`，其使用未改變的條目名稱為檔名
+* ''template'': 可選的範本，用於呈現每個條目
+* ''render-type'': 可選的呈現類型：`text/html` (預設值) 會傳回完整的 HTML 文字，而 `text/plain` 只會傳迴文字內容 (即其忽略 HTML 標記與其他不可印出的資料)
+* ''name'': 可選的變數名稱
+* ''value'': 可選的變數值
+
+預設情況下，檔名被解析為相對於發行版資料夾的 `output` 子資料夾。`--output` 命令可用於將輸出指到一個不同的資料夾。
+
+附註：
+
+* 輸出資料夾不清除任何現有的檔案
+* 檔名的路徑中，任何不存在的資料夾，將自動建立。
+* 當正呈現的條目名稱中帶有空格，請注意同時使用命令列介面所要求的引號，與 TiddlyWiki 的雙重方括號：`--render "[[Motovun Jack.jpg]]"`
+* 所選的項目被設定為當前正在呈現的條目名稱，以此評估檔名篩選器，允條目名稱用作基礎計算的檔名。例如，`[encodeuricomponent[]addprefix[static/]]` 為每個條目名稱套用 URI 編碼，然後增加首碼 `static/`
+* `--render` 命令是已棄用的 `--rendertiddler` 和 `--rendertiddlers` 的一個更靈活的替代命令。
+
+範例：
+
+* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- 呈現所有非系統條目為 "tiddlers" 子資料夾中的檔案，檔名為 URL 編碼的條目名稱和副檔名 HTML
+* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- 將標籤為 "HelloThere" 的條目渲染到名為 "tiddlers.json" 的 JSON 檔案

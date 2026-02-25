@@ -1,17 +1,17 @@
+caption: get
 created: 20140426183123179
-modified: 20150203185001000
+modified: 20230309163844434
+op-input: a [[selection of titles|Title Selection]]
+op-output: the values of field <<.place F>> in each of the input titles
+op-parameter: the name of a [[field|TiddlerFields]]
+op-parameter-name: F
+op-purpose: select all values of a field in the input titles
 tags: [[Filter Operators]] [[Field Operators]]
 title: get Operator
 type: text/vnd.tiddlywiki
-caption: get
-op-purpose: select all values of a field in the input titles
-op-input: a [[selection of titles|Title Selection]]
-op-parameter: the name of a [[field|TiddlerFields]]
-op-parameter-name: F
-op-output: the values of field <<.place F>> in each of the input titles
 
 Each input title is processed in turn. If the corresponding tiddler contains field <<.place F>>, and the value of this field is not empty, then its value is appended to the output.
 
-Unlike most other [[Filter Operators]], the [[selection|Title Selection]] output by <<.op get>> can contain duplicates. To avoid duplicates, use `each[F]get[F]`.
+<<.tip "Unlike most other [[Filter Operators]], the [[selection|Title Selection]] output by <<.op get>> can contain duplicates. To avoid duplicates, use `get[F]unique[]`.">>
 
 <<.operator-examples "get">>

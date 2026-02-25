@@ -1,7 +1,0 @@
-title: $:/core/ui/ControlPanel/Settings
-tags: $:/tags/ControlPanel
-caption: {{$:/language/ControlPanel/Settings/Caption}}
-
-<div class="tc-control-panel">
-<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/SettingsTab]!has[draft.of]]" default="$:/core/ui/ControlPanel/Settings/TiddlyWiki" explicitState="$:/state/tab--697582678"/>
-</div>

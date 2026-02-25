@@ -12,7 +12,7 @@ element, and right-click its `src` URI. Save the link as ''$(jsFileName)$''</p>
 Export the ~TiddlyWiki core ~JavaScript code for running with external ~JavaScript:
 
 <$button tooltip="Export the ~TiddlyWiki core code for running with external ~JavaScript" aria-label="export TiddlyWiki core" class="tc-btn-big-green">
-<$list filter="[[$:/boot/boot.js]is[missing]]" variable="ignore" emptyMessage="""<$action-sendmessage $message="tm-download-file" $param="$:/core/templates/tiddlywiki5.js" filename=<<jsFileName>>/>""" >
+<$list filter="[[$:/boot/boot.js]is[missing]]" variable="ignore" emptyMessage="""<$action-sendmessage $message="tm-download-file" $param="$:/core/templates/tiddlywiki5.js" filename=<<jsFileName>> type="application/javascript"/>""" >
 <$action-setfield $tiddler=<<qualify "$:/temp/alert">> text=<<noExportMsg>> subtitle="Export ~TiddllyWiki Core"/>
 <$action-sendmessage $message="tm-modal" $param=<<qualify "$:/temp/alert">>/>
 </$list>

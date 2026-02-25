@@ -1,0 +1,38 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: Овој запис прикажува содржина зачувана надвор од ТидлиВики фајлот. Можете да ги уредувате ознаките и полињата, но не можете директно да ја уредувате содржината.
+Body/Placeholder: Напишете го текстот за овој запис
+Body/Preview/Type/DiffCurrent: разлики од претходното
+Body/Preview/Type/DiffShadow: разлики од сенката
+Body/Preview/Type/Output: излезен приказ
+Caption: Уредник
+Field/Dropdown/Caption: листа на поле
+Field/Dropdown/Hint: Листа на полиња
+Field/Remove/Caption: избриши поле
+Field/Remove/Hint: Избриши поле
+Fields/Add/Button: додади
+Fields/Add/Button/Hint: Додади го новото поле на записот
+Fields/Add/Dropdown/System: Системски полиња
+Fields/Add/Dropdown/User: Кориснички полиња
+Fields/Add/Name/Placeholder: име на поле
+Fields/Add/Prompt: Додади ново поле:
+Fields/Add/Value/Placeholder: содржина на поле
+Shadow/OverriddenWarning: Ова е модифицирана сенка. Можете да ја вратите стандардната верзија во плагенот <<pluginLink>> со бришење на овој запис
+Shadow/Warning: Ова е сенка. Сите промени што ќе ги направите ќе ја обноват (презапишат) стандардната верзија од плагенот <<pluginLink>>
+Tags/Add/Button: додади
+Tags/Add/Button/Hint: додади ознака
+Tags/Add/Placeholder: има на ознака
+Tags/ClearInput/Caption: очисти
+Tags/ClearInput/Hint: Очисти ознака
+Tags/Dropdown/Caption: листа на ознаки
+Tags/Dropdown/Hint: Листа на ознаки
+Title/BadCharacterWarning: Предупредување: избегнувајте да ги користите знаците <<bad-chars>> во наслови на записи.
+Title/Exists/Prompt: Таргетираниот запис веќе постои
+Title/References/Prompt: Следниве референци од овој запис нема автоматски да се ажурираат:
+Title/Relink/Prompt: Промени го ''<$text text=<<fromTitle>>/>'' во ''<$text text=<<toTitle>>/>'' и во сите други __ознаки__ и __полиња__
+Type/Delete/Caption: избриши го видот на содржина
+Type/Delete/Hint: Избриши го видот на содржина
+Type/Dropdown/Caption: листа на видови содржина
+Type/Dropdown/Hint: Листа на видови содржина
+Type/Placeholder: видови содржина
+Type/Prompt: Видови:

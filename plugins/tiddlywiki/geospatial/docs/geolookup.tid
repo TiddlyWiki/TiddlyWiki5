@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/geolookup
+caption: geolookup operator
+tags: $:/tags/GeospatialDocs
+
+!! `geolookup` operator
+
+The `geolookup` operator identifies the polygon(s) within a [[GeoJSON Polygon Feature]] that correspond to a particular point, and returns the JSON properties of that polygon.
+
+Each input list item is interpreted as a [[GeoJSON Point Feature]] and the operand is interpreted as a [[GeoJSON Polygon Feature Collection]].
+
+!! Examples
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geolookup"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>

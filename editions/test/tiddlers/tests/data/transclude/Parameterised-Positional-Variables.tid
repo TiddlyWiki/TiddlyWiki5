@@ -1,0 +1,30 @@
+title: Transclude/Parameterised/Positional/Variables
+description: Positional parameterised transclusion of variables
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function myfunction(alpha:"apple",beta:"banana",gamma:"grenadine") [<alpha>]
+\define mymacro(alpha:"apple",beta:"banana",gamma:"grenadine") $beta$
+\function f(a) [<a>]
+
+(Functions:
+<$text text={{{ [<myfunction gamma:"unused" f1>] }}}/>
+,
+<$text text=<<myfunction gamma:"unused" f1>>/>
+,
+<<myfunction gamma:"unused" f1>>
+)(Macros:
+<$text text={{{ [<mymacro gamma:"unused" f1>] }}}/>
+,
+<$text text=<<mymacro gamma:"unused" f1>>/>
+,
+<<mymacro gamma:"unused" f1>>
+)
+
++
+title: ExpectedResult
+
+<p>(Functions:f1,f1,f1)(Macros:banana,banana,banana)</p>

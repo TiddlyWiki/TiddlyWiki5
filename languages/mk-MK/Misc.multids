@@ -1,0 +1,99 @@
+title: $:/language/
+
+AboveStory/ClassicPlugin/Warning: Изгледа дека се обидувате да вклучите плаген дизајниран за ТидлиВики Класик. Имајте во предвид дека [[овие плагени не функционираат со ТидлиВики верзија 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]. Избришани плагени што се за ТидлиВики Класик:
+BinaryWarning/Prompt: Овој запис содржи бинарни податоци
+ClassicWarning/Hint: Овој запис е креиран со вики-текст формат за ТидлиВики Класик кој што не е целосно компатибилен со верзија 5 на ТидлиВики. Посетете ја оваа страница https://tiddlywiki.com/static/Upgrading.html за повеќе информации.
+ClassicWarning/Upgrade/Caption: надоградба
+CloseAll/Button: затвори ги сите
+ColourPicker/Recent: Скорашни:
+ConfirmAction: Дали сакате да продолжите?
+ConfirmCancelTiddler: Дали сакате да ги отстраните промените на записот "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Дали сакате да го избришете записот "<$text text=<<title>>/>"?
+ConfirmDeleteTiddlers: Сигурно сакате да избришете <<resultCount>> запис(и)?
+ConfirmEditShadowTiddler: Ќе започнете со уредување на сенка. Било каква промена што ќе ја направите тука ќе го презапише (обнови) основниот систем. Сигурно сакате да го уредувате "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Дали сакате да го обновите записот "<$text text=<<title>>/>"?
+Count: брои
+DefaultNewTiddlerTitle: Нов Запис
+Diffs/CountMessage: <<diff-count>> разлики
+DropMessage: Пуштете сега (или користете го копчето „Escape“ за да откажете)
+Encryption/Cancel: Откажи
+Encryption/ConfirmClearPassword: Дали сакате да ја избришете лозинката? Со овој чекор ќе го отстраните шифрирањето што се применува за оваа википедија
+Encryption/Password: Лозинка
+Encryption/PasswordNoMatch: Лозинките не се совпаѓаат
+Encryption/PromptSetPassword: Поставете нова лозинка за ова ТидлиВики
+Encryption/RepeatPassword: Повтори лозинка
+Encryption/SetPassword: Постави лозинка
+Encryption/Username: Корисничко име
+Error/Caption: Грешка
+Error/DeserializeOperator/MissingOperand: Грешка во филтер: Недостасува управител за операторот 'deserialize'
+Error/DeserializeOperator/UnknownDeserializer: Грешка во филтер: Непознат 'deserializer' означен како управител на операторот 'deserialize' 
+Error/Filter: Грешка во филтер
+Error/FilterRunPrefix: Грешка во филтер: Непознат префикс за работа на филтерот
+Error/FilterSyntax: Синтаксна грешка во изразот на филтерот
+Error/FormatFilterOperator: Грешка во филтер: Непозната наставка за операторот на 'format' филтерот
+Error/IsFilterOperator: Грешка во филтер: Непознат управител на операторот 'is'
+Error/LoadingPluginLibrary: Грешка при вчитување на библиотеката со плагени
+Error/NetworkErrorAlert: `<h2>''Мрежна грешка''</h2> Изгледа дека врската со серверот е изгубена. Проверете ја вашата мрежна конекција. Обидете се да ја вратите врската пред да продолжите.<br><br>''Сите незачувани промени автоматски ќе се синхронизираат откако ќе се врати поврзувањето''.`
+Error/PutEditConflict: Фајлот е променет на серверот
+Error/PutForbidden: Барањето е одбиено
+Error/PutUnauthorized: Потребна е авторизација
+Error/RecursiveTransclusion: Грешка при ''recursive transclusion'' во widget
+Error/RetrievingSkinny: Грешка при превземање листа со записи
+Error/SavingToTWEdit: Грешка при меморирање во TWEdit
+Error/WhileSaving: Грешка при меморирање
+Error/XMLHttpRequest: XMLHttpRequest грешка
+Error/ZoominTextNode: Грешка во изгледот на реката: Се чини дека се обидовте да работите со запис кој се прикажува во посебен контејнер. Ова најверојатно е предизвикано од користењето на `$:/tags/StoryTiddlerTemplateFilter` со шаблон кој содржи текст или празно место на почетокот. Ве молиме користете ја прагмата `\whitespace trim` и погрижете се целата содржина на записот да биде опфатена во еден HTML елемент. Текстот кој го предизвика овој проблем:
+InternalJavaScriptError/Hint: Ах...е ова е за срамота. Се препорачува да го рестартирате вашето ТидлиВики со освежување на вашиот прелистувач
+InternalJavaScriptError/Title: Внатрешна ЈаваСкрипт грешка
+LayoutSwitcher/Description: Отвори го менувачот за распоред
+LazyLoadingWarning: <p>Се обидува да вчита надворешна содржина од ''<$text text={{!!_canonical_uri}}/>''</p><p>Доколку оваа порака не исчезне, или видот на содржина во записот не одговара со надворешната содржина, или пак користите прелистувач кој не подржува надворешна содржина за самостојни википедии. Видете повеќе тука: https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Најава до TiddlySpace
+Manager/Controls/FilterByTag/None: (ништо)
+Manager/Controls/FilterByTag/Prompt: Филтер според ознака:
+Manager/Controls/Order/Prompt: Обратен редослед
+Manager/Controls/Search/Placeholder: Пребарувај
+Manager/Controls/Search/Prompt: Пребарувај:
+Manager/Controls/Show/Option/Tags: ознаки
+Manager/Controls/Show/Option/Tiddlers: записи
+Manager/Controls/Show/Prompt: Прикажи:
+Manager/Controls/Sort/Prompt: Подреди според:
+Manager/Item/Colour: Боја
+Manager/Item/Fields: Полиња
+Manager/Item/Icon: Икона
+Manager/Item/Icon/None: (ништо)
+Manager/Item/RawText: Чист текст
+Manager/Item/Tags: Ознаки
+Manager/Item/Tools: Алатки
+Manager/Item/WikifiedText: Wikified текст
+MissingTiddler/Hint: Записот "<$text text=<<currentTiddler>>/>" е непостоечки -- кликни {{||$:/core/ui/Buttons/edit}} за да го креираш
+No: Не
+OfficialPluginLibrary: Официјална библиотека за плагени
+OfficialPluginLibrary/Hint: Официјална библиотека за ТидлиВики плагени од tiddlywiki.com. Сите плагени, теми и јазични пакети се одржувани од страна на главниот тим.
+PageTemplate/Description: Основен ТидлиВики распоред
+PageTemplate/Name: Основен шаблон
+PluginReloadWarning: Ве молиме зачувајте {{$:/core/ui/Buttons/save-wiki}} и освежете {{$:/core/ui/Buttons/refresh}} за да може промените во ЈаваСкрипт плагените да имаат ефект
+RecentChanges/DateFormat: DDth MMM YYYY
+Shortcuts/Input/Accept/Hint: Прифати го означеното
+Shortcuts/Input/AcceptVariant/Hint: Прифати го означеното (варијанта)
+Shortcuts/Input/AdvancedSearch/Hint: Отвори напредно пребарување додека пишуваме во полето за пребарувај
+Shortcuts/Input/Cancel/Hint: Исчисти го полето за внесување
+Shortcuts/Input/Down/Hint: Одбери следно
+Shortcuts/Input/Tab-Left/Hint: Одбери претходна група
+Shortcuts/Input/Tab-Right/Hint: Одбери следна група
+Shortcuts/Input/Up/Hint: Одбери претходно
+Shortcuts/SidebarLayout/Hint: Смени распоред на страничното мени
+Switcher/Subtitle/language: Смени јазик
+Switcher/Subtitle/layout: Смени распоред
+Switcher/Subtitle/palette: Смени палета
+Switcher/Subtitle/theme: Смени тема
+SystemTiddler/Tooltip: Ова е системски запис
+SystemTiddlers/Include/Prompt: Прикажи ги системските записи
+TagManager/Colour/Heading: Боја
+TagManager/Count/Heading: Вкупно
+TagManager/Icon/Heading: Икона
+TagManager/Icons/None: Ништо
+TagManager/Info/Heading: Инфо
+TagManager/Tag/Heading: Ознака
+Tiddler/DateFormat: DDth MMM YYYY во hh:0mm
+UnsavedChangesWarning: Имате незачувани промени во вашето ТидлиВики
+Yes: Да

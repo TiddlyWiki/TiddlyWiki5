@@ -4,5 +4,6 @@
 	"description": "Keymap compatible with Sublime Text for CodeMirror",
 	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
 	"dependents": ["$:/plugins/tiddlywiki/codemirror-search-replace","$:/plugins/tiddlywiki/codemirror-closebrackets"],
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
 }

@@ -1,0 +1,34 @@
+title: $:/language/Import/
+
+Editor/Import/Heading: Импортирај слики и додади ги во уредникот.
+Imported/Hint: Овие записи беа импортирани:
+Listing/Cancel/Caption: Откажи
+Listing/Cancel/Warning: Дали сакате да го откажете импортирањето?
+Listing/Hint: Овие записи се спремни за импорт:
+Listing/Import/Caption: Импортирај
+Listing/Preview: Преглед:
+Listing/Preview/Diff: Разлика
+Listing/Preview/DiffFields: Разлика (Полиња)
+Listing/Preview/Fields: Полиња
+Listing/Preview/Text: Текст
+Listing/Preview/TextRaw: Текст (Чист)
+Listing/Rename/CancelRename: Откажи
+Listing/Rename/ConfirmRename: Преименувај запис
+Listing/Rename/OverwriteWarning: Запис со ваков наслов веќе постои.
+Listing/Rename/Prompt: Преименувај во:
+Listing/Rename/Tooltip: Преименувај го записот пред импортирање
+Listing/Select/Caption: Избери
+Listing/Status/Caption: Статус
+Listing/Title/Caption: Наслов
+Upgrader/Plugins/Suppressed/Incompatible: Блокиран некомпатибилен или застарен плаген.
+Upgrader/Plugins/Suppressed/Version: Блокиран плаген (поради тоа што дојдовниот <<incoming>> не е понов од постоечкиот <<existing>>).
+Upgrader/Plugins/Upgraded: Надоградба на плаген  од <<incoming>> во <<upgraded>>.
+Upgrader/State/Suppressed: Блокирана привремена состојба на запис.
+Upgrader/System/Alert: Ќе импортирате запис кој ќе обнови (презапише) основен модуларен запис. Ова не е препорачливо бидејќи може да го направи системот нестабилен.
+Upgrader/System/Disabled: Исклучен системски запис.
+Upgrader/System/Suppressed: Блокиран системски запис.
+Upgrader/System/Warning: Основен модуларен запис.
+Upgrader/ThemeTweaks/Created: Мигрирана тематска измена од <$text text=<<from>>/>.
+Upgrader/Tiddler/Disabled: Исклучен запис.
+Upgrader/Tiddler/Selected: Избран запис.
+Upgrader/Tiddler/Unselected: Неизбран запис.

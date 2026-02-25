@@ -1,0 +1,26 @@
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/tags
+caption: Tagging tiddlers
+tags: $:/tags/Tour/IntroductionToTiddlyWiki
+display-mode: fullscreen
+enter-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Mars"/>
+step-success-filter: [[$:/temp/Tour/DemoStoryList]contains[$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Saturn]]
+
+Tiddlers may be categorised with one or more descriptive keywords or phrases called "tags". Tags can be used to search and navigate between tiddlers.
+
+Click on the tag to display a dropdown menu. The menu is divided into two parts:
+
+* At the top, there is a link to the tiddler with the same title as the tag. This is generally used to describe the tag or give an overview of its purpose
+* Beneath the link to the tag, there a list of links to the other tiddlers with the same tag
+
+<<tour-task "Use the tag dropdown to open the tiddler 'Saturn'">>
+
+<$navigator story="$:/temp/Tour/DemoStoryList" history="$:/temp/Tour/DemoHistoryList" openLinkFromInsideRiver="below">
+
+<$list
+	filter="[list[$:/temp/Tour/DemoStoryList]]"
+	history="$:/temp/Tour/DemoHistoryList"
+	template="$:/plugins/tiddlywiki/tour/simplified-tiddler-with-tags"
+	storyview="classic"
+/>
+
+</$navigator>

@@ -1,0 +1,19 @@
+created: 20150117204109000
+modified: 20250222112113766
+original-modified: 20240708201746542
+tags: Filters
+title: Selection Constructors
+ja-title: セレクションコンストラクタ
+type: text/vnd.tiddlywiki
+
+[[フィルタステップ|Filter Step]]のアウトプットはその[[オペレータ|Filter Operators]]によって異なります: 
+
+* ほとんどのオペレータは、インプットからアウトプットを派生します。たとえば、それらの多くはインプットのサブセットをアウトプットし、まさに<<.word フィルタ>>の名にふさわしく、含んでいる[[ラン|Filter Run]]の全体的なアウトプットを絞り込みます。これらのオペレータは<<.def "セレクションモディファイア">>と呼ばれます。
+
+* いくつかのオペレータはインプットを無視し、代わりに独立したアウトプットを生成します。これらは<<.def "セレクションコンストラクタ">>と呼ばれ、完全に新しい[[セレクション|Title Selection]]を構築します。
+
+コンストラクタの良い例は<<.olink title>>です。`[title[A]title[B]]`のアウトプットは<<.tid B>>です。しかし、<<.olink field>>オペレータはモディファイアなので、`[title[A]field:title[B]`は何もアウトプットしません。
+
+次の[[フィルタオペレータ|filter Operator]]は<<tag>>でタグ付けされています:
+
+<<list-links "[tag<currentTiddler>]" class:"multi-columns">>

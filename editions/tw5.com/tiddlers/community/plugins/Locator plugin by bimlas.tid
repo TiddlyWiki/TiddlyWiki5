@@ -3,7 +3,7 @@ modified: 20210106151027508
 tags: [[Community Plugins]]
 title: Locator plugin by bimlas
 type: text/vnd.tiddlywiki
-url: https://bimlas.gitlab.io/tw5-locator/
+url: https://bimlas.github.io/tw5-locator/
 
 For those who use many tags or store many different topics in a common wiki the Locator plugin is a table of contents widget and an enhanced search engine that gives you the opportunity to filter results by related tags. Unlike table of contents, standard search and list of tags, this plugin offers these features in an organic, collaborative way.
 

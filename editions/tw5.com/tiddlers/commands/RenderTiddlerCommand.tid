@@ -1,6 +1,7 @@
-title: RenderTiddlerCommand
-tags: Commands
 caption: rendertiddler
+tags: Commands $:/deprecated
+title: RenderTiddlerCommand
+type: text/vnd.tiddlywiki
 
 <<.deprecated-since "5.1.15" "RenderCommand">>.
 

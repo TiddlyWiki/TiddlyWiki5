@@ -6,10 +6,7 @@ module-type: tiddlermethod
 Extension methods for the $tw.Tiddler object (constructor and methods required at boot time are in boot/boot.js)
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.hasTag = function(tag) {
@@ -40,10 +37,10 @@ exports.getFieldString = function(field,defaultValue) {
 };
 
 /*
-Get the value of a field as a list
+Get the value of a field as an array / list
 */
 exports.getFieldList = function(field) {
-	var value = this.fields[field];
+	var value = this.getFieldString(field,null);
 	// Check for a missing field
 	if(value === undefined || value === null) {
 		return [];
@@ -99,5 +96,3 @@ exports.getFieldDay = function(field) {
 	this.cache.day[field] = day;
 	return day;
 };
-
-})();

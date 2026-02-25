@@ -6,6 +6,8 @@ Filter/Hint: Suche mit [["filter expression"|https://tiddlywiki.com/static/Filte
 Filter/Matches: //<small><<resultCount>> Treffer</small>//
 Matches: //<small><<resultCount>> Treffer</small>//
 Matches/All: Alle Treffer:
+Matches/NoMatch: //Kein Treffer//
+Matches/NoResult: //Kein Suchergebnis//
 Matches/Title: Titel Treffer:
 Search: Suchen
 Search/TooShort: Suchtext ist zu kurz
@@ -14,7 +16,7 @@ Shadows/Hint: Suche in Schatten-Tiddlern.
 Shadows/Matches: //<small><<resultCount>> Treffer</small>//
 Standard/Caption: Standard
 Standard/Hint: Suche in Standard-Tiddlern.
-Standard/Matches: //<small><<resultCount>> matches</small>//
+Standard/Matches: //<small><<resultCount>> Treffer</small>//
 System/Caption: System
 System/Hint: Suche in System-Tiddlern.
 System/Matches: //<small><<resultCount>> Treffer</small>//

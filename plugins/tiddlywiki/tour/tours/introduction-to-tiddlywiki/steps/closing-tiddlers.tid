@@ -1,0 +1,25 @@
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/closing-tiddlers
+caption: Closing tiddlers
+tags: $:/tags/Tour/IntroductionToTiddlyWiki
+display-mode: fullscreen
+enter-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Jupiter $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Saturn"/>
+step-success-filter: [list[$:/temp/Tour/DemoStoryList]count[]match[0]]
+
+\procedure tour-simplified-tiddler-close-button() yes
+
+In the top right corner of each tiddler there is a button marked {{$:/core/images/close-button|0.65em}} that can be used to close them when you are finished with them.
+
+<<tour-task "Close both of these tiddlers">>
+
+Closing a tiddler does not delete it or alter it in any way. It just removes it from the display.
+
+<$navigator story="$:/temp/Tour/DemoStoryList" history="$:/temp/Tour/DemoHistoryList" openLinkFromInsideRiver="below">
+
+<$list
+	filter="[list[$:/temp/Tour/DemoStoryList]]"
+	history="$:/temp/Tour/DemoHistoryList"
+	template="$:/plugins/tiddlywiki/tour/simplified-tiddler"
+	storyview="classic"
+/>
+
+</$navigator>

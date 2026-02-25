@@ -2,7 +2,7 @@ caption: modulesproperty
 created: 20210919201126246
 modified: 20210919201347702
 op-input: a [[selection|Title Selection]] of modules
-op-output: the value of the module property as specified in the operand
+op-output: the value of the module property as specified in the parameter
 op-parameter: module property to retrieve
 op-purpose: retrieve a module property
 tags: [[Filter Operators]] [[Special Operators]]

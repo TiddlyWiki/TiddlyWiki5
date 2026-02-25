@@ -1,6 +1,6 @@
 caption: codeblock
 created: 20151103160200000
-modified: 20160817175325205
+modified: 20240809074611002
 tags: Widgets
 title: CodeBlockWidget
 type: text/vnd.tiddlywiki
@@ -22,7 +22,7 @@ The content of the `<$codeblock>` widget is ignored.
 
 The `language` attribute accepts either:
 
-* a Highlight.js language code (see https://highlightjs.org/static/demo/ for a list)
+* a Highlight.js language code (see https://highlightjs.org/demo for a list)
 * a MIME type (eg, `text/html` or `image/svg+xml`)
 
 ! Examples

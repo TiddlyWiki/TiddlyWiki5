@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Discuss feature request
-    url: https://github.com/Jermolene/TiddlyWiki5/discussions
+    url: https://github.com/TiddlyWiki/TiddlyWiki5/discussions
     about: Open new discussion about new feature
   - name: Talk.Tiddlywiki Forum
     url: https://talk.tiddlywiki.org

@@ -15,4 +15,6 @@ In the example above, a comma appears between each occurrence of the `repeated` 
 
 Characters in round boxes are literal, i.e. they denote themselves. A name in a rectangular box denotes a further railroad diagram.
 
+The TW [[Filter Syntax]] documentation makes extensive use of railroad diagrams.
+
 The railroad diagrams in ~TiddlyWiki's documentation are generated with the [[Railroad Plugin]].

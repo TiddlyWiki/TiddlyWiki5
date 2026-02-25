@@ -1,0 +1,23 @@
+caption: <<.attr filter>>
+created: 20230314174505003
+description: tab
+modified: 20230325101447667
+tags: CheckboxWidget
+title: CheckboxWidget (filter Mode)
+
+!!<<.link "<<.attr filter>> Mode" "CheckboxWidget (filter Mode)">>
+
+Using the checkbox widget in filter mode requires the <<.attr filter>> attribute to contain a filter whose output will determine the checked state of the checkbox. In filter mode, checking the checkbox will not automatically make changes to any field of any tiddler. Instead, you can use the <<.attr actions>> attribute (or the <<.attr checkactions>> and <<.attr uncheckactions>> attributes) to specify what should happen when the checkbox is toggled. It is your responsibility to make sure the actions cause changes to the tiddlers or fields that the filter results depend on, so that the checkbox becomes properly checked or unchecked after the actions have triggered and the filter has updated.
+
+If the filter returns an empty result, the checkbox will be unchecked. Otherwise, if the filter result is non-empty, the checkbox will be checked.
+
+However, if either the <<.attr checked>> or <<.attr unchecked>> attributes (or both) are specified, then their values will be looked for in the filter result, instead of considering any non-empty value to mean <<.value checked>>.
+
+This example creates the same checkbox as in the <<.doc-tab-link "listField mode example" "CheckboxWidget (listField Mode)">>, selecting between <<.value red>> and <<.value green>> in the <<.field colors>> list field, but using filters and actions to make the change.
+
+<<wikitext-example-without-html """\define checkActions() <$action-listops $field="colors" $subfilter="-red green"/>
+\define uncheckActions() <$action-listops $field="colors" $subfilter="red -green"/>
+<$checkbox filter="[list[!!colors]]" checked="green" unchecked="red" default="red" checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> > Is "green" in colors?</$checkbox>
+
+''colors:'' {{!!colors}}
+""">>

@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/qrcode/examples/read/BarCodeReader
+tags: $:/tags/ReadQR
+caption: Barcode Reader
+
+\procedure success()
+<$action-setfield $tiddler="$:/state/BarCodeReaderDemoStatus" text=<<text>> result=<<format>> success="yes"/>
+\end
+
+\procedure failure()
+<$action-setfield $tiddler="$:/state/BarCodeReaderDemoStatus" text=<<error>>  success="no"/>
+\end
+
+Scanning status: {{$:/state/BarCodeReaderDemoStatus}}
+
+{{$:/state/BarCodeReaderDemoStatus||$:/core/ui/TiddlerFields}}
+
+<$barcodereader actionsSuccess=<<success>> actionsFail=<<failure>>/>

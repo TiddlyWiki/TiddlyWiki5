@@ -1,0 +1,26 @@
+caption: <<.attr listField>>
+created: 20230314171331190
+description: tab
+modified: 20230317160948525
+tags: CheckboxWidget
+title: CheckboxWidget (listField Mode)
+
+!!<<.link "<<.attr listField>> Mode" "CheckboxWidget (listField Mode)">>
+
+Using the checkbox widget in list mode requires the <<.attr listField>> attribute to specify the name of a field containing a list. The <<.attr checked>> attribute specifies the value that should be present or absent in the list when the checkbox is checked or unchecked respectively. If <<.attr checked>> is absent (or empty) but <<.attr unchecked>> is present, then the logic will be inverted: the checkbox will be checked when the <<.attr unchecked>> value is missing from the list, and unchecked when the <<.attr unchecked>> value is found in the list. If both <<.attr checked>> and <<.attr unchecked>> are present, the checkbox will work like a toggle, replacing the <<.attr checked>> value with the <<.attr unchecked>> value and vice-versa. Finally, if neither <<.attr checked>> nor <<.attr unchecked>> is specified, the checkbox will be checked if the field has anything in it, but unchecked if the field is missing or empty. (This is rarely useful. Most of the time you want to specify <<.attr checked>> or <<.attr unchecked>> or both.)
+
+The <<.attr default>> attribute is used as a fallback for the checkbox state if the field is not defined.
+
+The following table summarizes the possible combinations:
+
+| !defined attributes| !<$checkbox tag="void" disabled="yes"/> | !<$checkbox field="tag" checked="void" default="void" disabled="yes" /> | !<$checkbox listField="tag" checked="void" unchecked="invalid" indeterminate="yes" disabled="yes" /> |
+| neither| field missing or list empty<br/>no <<.attr default>> defined | field has any value | -- |
+| <<.attr checked>>=<<.value item1>>| <<.value item1>> removed from list | <<.value item1>> added to list | -- |
+| <<.attr unchecked>>=<<.value item2>>| <<.value item2>> added to list | <<.value item2>> removed from list | -- |
+| both| <<.value item1>> removed from list<br/><<.value item2>> added to list | <<.value item1>> added to list<br/><<.value item2>> removed from list | <<.value item1>> not in list<br/><<.value item2>> not in list<br/>no <<.attr default>> defined |
+
+This example creates a checkbox that is checked if the list field named <<.field colors>> contains <<.value green>> and unchecked if the field contains <<.value red>>. If the field is undefined, or if neither <<.value green>> nor <<.value red>> appears in the field, then it defaults to <<.value green>>, meaning that the checkbox will be checked.
+
+<<wikitext-example-without-html """<$checkbox listField="colors" checked="green" unchecked="red" default="green"> Is "green" in colors?</$checkbox><br />''colors:'' {{!!colors}}""">>
+
+Try editing the <<.field colors>> field of this tiddler to see how the example changes.

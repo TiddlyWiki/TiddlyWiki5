@@ -1,0 +1,12 @@
+caption: Chrome
+created: 20140811165935523
+modified: 20241029105419969
+original-modified: 20211114031651878
+tags: GettingStarted
+title: GettingStarted - Chrome
+ja-title: はじめに - Chrome
+type: text/vnd.tiddlywiki
+
+Google ChromeでTiddlyWikiを使用して変更を保存するには、HTML5互換のセーバーモジュールを使用します。
+
+{{Saving with the HTML5 saver}}

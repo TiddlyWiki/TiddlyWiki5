@@ -1,0 +1,42 @@
+title: $:/language/ThemeTweaks/
+
+Metrics: Големина
+Metrics/BodyFontSize: Големина на фонт во реката со записи
+Metrics/BodyLineHeight: Размер во реката со записи
+Metrics/FontSize: Големина на фонт за страничното мени
+Metrics/LineHeight: Размер за страничното мени
+Metrics/SidebarBreakpoint: Сокри го страничното мени
+Metrics/SidebarBreakpoint/Hint: минимална ширина со која ќе се одреди дали страничното мени <br> ќе биде прикажано или сокриено при намалување на <br> отворениот ТидлиВики прозорец
+Metrics/SidebarWidth: Ширина на страничното мени
+Metrics/SidebarWidth/Hint: ширината на страничното мени во <br> __флуидни записи, фиксирано мени__ распоред
+Metrics/StoryLeft: Лева маргина на реката со записи
+Metrics/StoryLeft/Hint: колку левата маргина на реката со записи ќе биде <br> оддалечена од левата страна на екранот
+Metrics/StoryRight: Лева маргина на страничното мени
+Metrics/StoryRight/Hint: колку левата маргина на страничното мени <br> ќе биде оддалечена од левата страна на екранот во <br> __фиксирани записи, флуидно мени__ распоред
+Metrics/StoryTop: Горна маргина
+Metrics/StoryTop/Hint: колку горната маргина ќе биде оддалечена од горната страна на екранот
+Metrics/StoryWidth: Општа ширина
+Metrics/StoryWidth/Hint: ширината на самата река со записи
+Metrics/TiddlerWidth: Ширина на запис
+Metrics/TiddlerWidth/Hint: ширината во реката со записи
+Options: Опции
+Options/CodeWrapping: Завиткајте ги долгите реченици при работа со код блокови
+Options/SidebarLayout: Распоред
+Options/SidebarLayout/Fixed-Fluid: Фиксирани записи, флуидно мени
+Options/SidebarLayout/Fluid-Fixed: Флуидни записи, фиксирано мени
+Options/StickyTitles: Видливи наслови
+Options/StickyTitles/Hint: насловите на записите да се “закачат“ <br> на горниот дел од реката со записи при скролање нагоре/надоле
+Settings: Поставки
+Settings/BackgroundImage: Позадинска слика
+Settings/BackgroundImageAttachment: Начин на однесување на сликата
+Settings/BackgroundImageAttachment/Fixed: Фиксирано
+Settings/BackgroundImageAttachment/Scroll: Движечко
+Settings/BackgroundImageSize: Димензии на сликата
+Settings/BackgroundImageSize/Auto: Ауто
+Settings/BackgroundImageSize/Contain: Прикриј
+Settings/BackgroundImageSize/Cover: Опфати
+Settings/CodeFontFamily: Фонт фамилија за код
+Settings/EditorFontFamily: Фонт фамилија за уредник
+Settings/FontFamily: Фонт фамилија
+ThemeTweaks: Измени
+ThemeTweaks/Hint: Можете да промените одредени аспекти на „Ванила“ темата.

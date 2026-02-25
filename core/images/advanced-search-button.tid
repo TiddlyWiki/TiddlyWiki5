@@ -1,4 +1,5 @@
 title: $:/core/images/advanced-search-button
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-advanced-search-button tc-image-button" viewBox="0 0 128 128"><g fill-rule="evenodd"><path d="M74.565 87.985A47.776 47.776 0 0148 96C21.49 96 0 74.51 0 48S21.49 0 48 0s48 21.49 48 48c0 9.854-2.97 19.015-8.062 26.636l34.347 34.347a9.443 9.443 0 010 13.36 9.446 9.446 0 01-13.36 0l-34.36-34.358zM48 80c17.673 0 32-14.327 32-32 0-17.673-14.327-32-32-32-17.673 0-32 14.327-32 32 0 17.673 14.327 32 32 32z"/><circle cx="48" cy="48" r="8"/><circle cx="28" cy="48" r="8"/><circle cx="68" cy="48" r="8"/></g></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-advanced-search-button tc-image-button" viewBox="0 0 128 128"><g fill-rule="evenodd"><path d="M74.565 87.985A47.776 47.776 0 0148 96C21.49 96 0 74.51 0 48S21.49 0 48 0s48 21.49 48 48c0 9.854-2.97 19.015-8.062 26.636l34.347 34.347a9.443 9.443 0 010 13.36 9.446 9.446 0 01-13.36 0l-34.36-34.358zM48 80c17.673 0 32-14.327 32-32 0-17.673-14.327-32-32-32-17.673 0-32 14.327-32 32 0 17.673 14.327 32 32 32z"/><circle cx="48" cy="48" r="8"/><circle cx="28" cy="48" r="8"/><circle cx="68" cy="48" r="8"/></g></svg>

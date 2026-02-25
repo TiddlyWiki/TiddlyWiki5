@@ -1,0 +1,52 @@
+created: 20131219100637788
+modified: 20250124112753177
+original-modified: 20141015165343893
+tags: [[TiddlyWiki on Node.js]]
+title: Scripts for TiddlyWiki on Node.js
+ja-title: Node.js上のTiddlyWiki用スクリプト
+type: text/vnd.tiddlywiki
+
+! スクリプトファイル
+
+TiddlyWiki5リポジトリの`bin`フォルダーには、共通のタスクを自動化したり、独自のスクリプトの便利な開始点として使用したりできるスクリプトがいくつか含まれています。https://tiddlywiki.com/ の構築とリリースに使用されるスクリプトの詳細については、[[Scripts for building tiddlywiki.com]]を参照してください。
+
+すべてのスクリプトは、リポジトリのルートフォルダーから実行されることを想定しています。
+
+!! `serve`: tw5.comを提供する
+
+```
+./bin/serve.sh -h
+./bin/serve.sh [edition dir] [username] [password] [host] [port]
+```
+
+または:
+
+```
+./bin/serve.cmd -h
+./bin/serve.cmd [edition dir] [username] [password] [host] [port]
+```
+
+このスクリプトは、TiddlyWiki5をHTTPサーバーとして実行し、`tw5.com-server`エディションのコンテンツをデフォルトにします。デフォルトでは、Node.jsは8080ポート でサービスを提供します。オプションの`username`パラメータが指定されている場合は、編集の署名に使用されます。`password`が指定されている場合は、HTTP基本認証が使用されます。`-h`パラメータを指定してスクリプトを実行すると、オンラインヘルプが表示されます。
+
+この構成を試すには、スクリプトを実行してからブラウザで`http://127.0.0.1:8080`にアクセスしてください。
+
+ブラウザで行われた変更は、HTTP経由でサーバーに伝えられます(これらのリクエストを確認するには、ブラウザ開発者コンソールを使用します)。その後、サーバーは変更をファイルシステムに同期します(各変更をスクリーンに記録します)。
+
+!! `test`: テストをビルドして実行する
+
+This script runs the `test` edition of TiddlyWiki on the server to perform the server-side tests and to build `test.html` for running the tests in the browser.
+このスクリプトは、サーバー側のテストを実行し、ブラウザでテストを実行するために、`test.html`をビルドし、サーバー上でTiddlyWikiの`test`のエディションを実行します。
+
+!! `lazy`: tw5.comを遅延読み込み画像で提供する
+
+```
+./bin/lazy.sh <username> [<password>]
+```
+
+または:
+
+```
+./bin/lazy.cmd <username> [<password>]
+```
+
+このスクリプトは、画像に[[遅延読み込み|LazyLoading]]を適用して`tw5.com-server`エディションコンテンツを提供します。

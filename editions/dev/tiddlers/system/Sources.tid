@@ -3,7 +3,7 @@ tags: $:/tags/TiddlerInfo
 caption: Sources
 
 \define github-link-base()
-https://github.com/Jermolene/TiddlyWiki5/blob/master/editions/dev/tiddlers/$(title)$
+https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/editions/dev/tiddlers/$(title)$
 \end
 
 \define make-github-link()

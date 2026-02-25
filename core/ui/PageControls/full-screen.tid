@@ -5,12 +5,12 @@ description: {{$:/language/Buttons/FullScreen/Hint}}
 
 \whitespace trim
 <$button message="tm-full-screen" tooltip={{$:/language/Buttons/FullScreen/Hint}} aria-label={{$:/language/Buttons/FullScreen/Caption}} class=<<tv-config-toolbar-class>>>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/full-screen-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/FullScreen/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>

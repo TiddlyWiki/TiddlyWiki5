@@ -1,0 +1,16 @@
+title: MultiValuedVariables/InlineDisplaySeparator
+description: ((var||separator)) in inline wikitext displays MVV with custom separator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$let items={{{ [all[tiddlers]sort[]] }}}>
+((items||:))
+</$let>
++
+title: ExpectedResult
+
+<p>$:/core:ExpectedResult:Output</p>
++

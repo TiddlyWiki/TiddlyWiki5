@@ -1,13 +1,13 @@
 caption: tm-modal
 created: 20140811112133701
-modified: 20201117081247738
+modified: 20230723215434712
 tags: Messages
 title: WidgetMessage: tm-modal
 type: text/vnd.tiddlywiki
 
 |!Name |!Description |
 |param |Title of the tiddler to be displayed |
-|paramObject |Hashmap of variables to be provided to the modal, contains all extra parameters passed to the widget sending the message. |
+|//{any other params}// |Any other parameters are made available as variables within the context of the widget message. |
 |rootwindow |<<.from-version 5.1.18>> ''yes'' or ''true'' will always display a modal in the wiki-root-window |
 
 The modal message is usually generated with the ButtonWidget. The modal message is handled by the TiddlyWiki core.

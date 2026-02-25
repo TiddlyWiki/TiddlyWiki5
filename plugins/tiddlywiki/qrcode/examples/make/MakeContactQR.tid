@@ -1,0 +1,27 @@
+title: $:/plugins/tiddlywiki/qrcode/make/MakeContactQR
+tags: $:/tags/MakeQR
+caption: Contact
+
+\define wifi-url()
+WIFI:wifi name;T:WPA;S:SSID;P:password;
+\end
+
+\define image(firstname,lastname,address,tel,email)
+<img src=<<makeqr text:"""MECARD:N:$lastname$,$firstname$;ADR:$address$;TEL:$tel$;EMAIL:$email$;;""" size:"350">>/>
+\end
+
+! Enter the contact details
+
+First name: <$edit-text tiddler="$:/config/plugins/tiddlywiki/qrcode/contact/firstname" tag="input" default=""/>
+
+Last name: <$edit-text tiddler="$:/config/plugins/tiddlywiki/qrcode/contact/lastname" tag="input" default=""/>
+
+Address: <$edit-text tiddler="$:/config/plugins/tiddlywiki/qrcode/contact/address" tag="input" default=""/>
+
+Telephone: <$edit-text tiddler="$:/config/plugins/tiddlywiki/qrcode/contact/tel" tag="input" default=""/>
+
+Email: <$edit-text tiddler="$:/config/plugins/tiddlywiki/qrcode/contact/email" tag="input" default=""/>
+
+! Here is your QR code
+
+<$macrocall $name="image" firstname={{$:/config/plugins/tiddlywiki/qrcode/contact/firstname}} lastname={{$:/config/plugins/tiddlywiki/qrcode/contact/lastname}} address={{$:/config/plugins/tiddlywiki/qrcode/contact/address}} tel={{$:/config/plugins/tiddlywiki/qrcode/contact/tel}} email={{$:/config/plugins/tiddlywiki/qrcode/contact/email}}/>

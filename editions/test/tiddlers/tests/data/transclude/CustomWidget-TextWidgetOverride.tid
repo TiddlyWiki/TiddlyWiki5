@@ -1,0 +1,27 @@
+title: Transclude/CustomWidget/TextWidgetOverride
+description: Custom widget definition redefining the text widget
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler='TiddlerOne'>
+</$transclude>
++
+title: TiddlerOne
+
+\whitespace trim
+<!-- Redefining the text widget only works when it is explicitly invoked with the <$text> syntax, and not implicitly via typed text -->
+\widget $text(text:'Jaguar')
+\whitespace trim
+<$genesis $type="$text" $remappable="no" text={{{ [<text>addprefix[≤]addsuffix[≥]] }}}/>
+\end
+
+<$text text="Dingo"/>
+
+Crocodile
++
+title: ExpectedResult
+
+<p>≤Dingo≥≤Jaguar≥</p>

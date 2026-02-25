@@ -1,0 +1,62 @@
+caption: {{!!ja-title}} - ^^非推奨^^
+created: 20141001132300000
+modified: 20241121113613599
+original-modified: 20220704174221300
+tags: [[How to apply custom styles]] $:/deprecated
+title: How to apply custom styles by tag
+ja-title: タグでカスタムスタイルを適用する方法
+type: text/vnd.tiddlywiki
+
+<<.deprecated-since "5.1.16" "Custom styles by data-tags">>. [[カスタムスタイルを適用する方法|How to apply custom styles]]も参照してください
+
+----
+
+`tc-tagged-<Tag Name>`という名前のCSSクラスを定義することで、特定のタグを持つTiddlerにカスタムスタイルを適用できます。
+
+たとえば、"NightReader"というタグが付けられたTiddlerを夜の読書に適した特別な配色で表示するには、次のようにクラス`tc-tagged-NightReader`を定義する[[スタイルシートを作成|Using Stylesheets]]します:
+
+```
+.tc-tagged-NightReader {
+	background-color:black;
+	color: orange;
+	padding: 35px 35px;
+}
+
+.tc-tagged-NightReader .tc-tiddler-body {
+	font-size: 1.5em;
+}
+```
+
+クラス`tc-tagged-NightReader`は、Tiddlerのテキスト部分だけでなく、Tiddler全体に適用されます。Tiddlerのより小さな部分をターゲットにしたい場合は、この`.tc-tagged-NightReader .tc-tiddler-body`のようにCSSセレクターを修飾します。
+
+Note that tags containing spaces or non-alphanumeric characters will be converted using URI encoding, making the generated CSS classname hard to predict. For example:
+スペースや英数字以外の文字を含むタグはURIエンコーディングを使用して変換されるため、生成されるCSSクラス名を予測することが困難になることに注意してください。例:
+
+|!Tag |!Generated Class Name |
+|`$:/mytag` |`tc-tagged-%24%3A%2Fmytag` |
+|`Doctor Who` |`tc-tagged-Doctor%20Who` |
+|`£35.23` |`tc-tagged-%C2%A335.23` |
+
+~TiddlyWikiはこれらのタグを生成しますが、実際にCSSで使用するには、次のようにスタイルシートでパーセント文字をエスケープする必要があります: 
+
+```
+.tc-tagged-Doctor\%20Who {
+    background-image: url(./tardis_back.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    color:#FBFBFB;
+}
+```
+
+変換を実行するためのユーティリティ関数がJavaScriptで利用できます: 
+
+```
+$tw.utils.tagToCssSelector("$:/tags/Stylesheet")
+```
+
+次の出力を生成します: 
+
+```
+tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet
+```
+

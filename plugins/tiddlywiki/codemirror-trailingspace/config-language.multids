@@ -1,0 +1,4 @@
+title: $:/language/codemirror/
+
+showTrailingSpace/hint: Show trailing space
+showTrailingSpace/info: Trailing space on each line will be decorated as per theme CSS.

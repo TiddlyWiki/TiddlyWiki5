@@ -1,0 +1,64 @@
+created: 20131202102427114
+modified: 20241029111216866
+original-modified: 20160617105124677
+tags: Features [[Working with TiddlyWiki]]
+title: Upgrading
+ja-title: アップグレード
+type: text/vnd.tiddlywiki
+
+TiddlyWikiは定期的にリリースされ、バグ修正や改良が行われています。定期的に最新バージョンにアップグレードして、最新の状態を保つことが最善です。
+
+! イントロダクション
+
+ここで説明するプロセスは、スタンドアロンのTiddlyWikiファイルをアップグレードするためのものです。[[Node.js上のTiddlyWiki|TiddlyWiki on Node.js]]をアップグレードするには、[[別の手続き|Upgrading TiddlyWiki on Node.js]]が必要です。
+
+<<<
+アップグレードするときは、[[TiddlyWikiを使用する上での第一ルール|The First Rule of Using TiddlyWiki]]を思い出してください:
+
+//あなた自身のデータを管理する責任はあなたにあります。特に~TiddlyWikiコアをアップグレードするときは、バックアップするようにしてください//
+<<<
+
+! オンラインアップグレード
+
+このプロセスは、ほとんどのデスクトップブラウザで機能します。このプロセスでは、個人データがブラウザから外部に送信されることはありません。
+
+# ファイルシステムでTiddlyWikiファイルの場所を確認します(Windowsエクスプローラー、Mac OS Xの Finder、Linuxのファイル ネージャーなどを使用)
+# ブラウザで https://tiddlywiki.com/upgrade.html にアクセスします
+
+# 古いTiddlyWiki HTMLファイルをブラウザのウィンドウにドラッグします
+#* ファイルが暗号化されている場合はパスワードの入力を求められます
+# アップグレードされるTiddlerのリストを確認します
+# ''Upgrade''をクリックします
+# 変更を保存して新しいバージョンを保存します(<<.icon $:/core/images/save-button-dynamic>>)
+
+これにより、''upgrade.html''というファイルがコンピューターにダウンロードされます。このファイルは、古いファイルのアップグレードです。''upgrade.html''がダウンロードされた場所を開き、''upgrade.html''の名前をアップグレードする古いファイルの名前に変更し、新しいファイルをその場所に移動して古いファイルを置き換える必要がある場合があります。
+
+! オフラインアップグレード
+
+https://tiddlywiki.com/upgrade.html をローカルにダウンロードし、同じドラッグアンドドロップ手順を実行してファイルをアップグレードすることもできます。
+
+! アップグレードに関する問題
+
+!! Firefoxのセキュリティ制限
+
+Firefoxを使用してオンラインアップグレード手順を実行すると、次のエラーが発生します:
+
+<<<
+Error while saving:
+
+Error:NS_ERROR_DOM_BAD_URI: Access to restricted URI denied
+<<<
+
+アップグレード操作は、Firefoxのセキュリティ制限に違反します。これが解決されるまで、オフラインアップグレーダーを使用するか、Chromeを使用してアップグレードを実行することをお勧めします: 
+
+# Chromeを使用して https://tiddlywiki.com/upgrade.html を開き、アップグレードするTiddlyWiki HTMLファイルを、上記の''オンラインアップグレード''の説明に従ってアップグレードウィンドウにドラッグします
+# アップグレードしたファイルを保存後、そのファイルをFirefoxで開いて、再び[[TiddlyFoxでの保存|Saving with TiddlyFox]]により保存できます。
+
+!! 互換性のないカスタマイズ
+
+以前のバージョンで適用されたカスタマイズは、最新バージョンにアップグレードすると壊れる可能性があります。問題を追跡するために使用できる2つのテクニックがあります: 
+
+* TiddlyWikiにカスタマイズを適用している可能性のあるTiddlerを選択しチェックを外して、アップグレードを繰り返してみてください
+* [[セーフモード|SafeMode]]を使用して、隠しTiddlerのすべてのカスタマイズを無効にします
+
+[[Advanced search|$:/AdvancedSearch]]の''フィルタ''タブで、オーバーライドされた隠しTIddlerを確認できます。ドロップダウンから"上書きされている隠しTiddler"を選択します。

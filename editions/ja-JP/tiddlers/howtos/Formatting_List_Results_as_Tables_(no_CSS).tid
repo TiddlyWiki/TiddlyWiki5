@@ -1,0 +1,51 @@
+created: 20161220154952676
+modified: 20241020104643991
+original-modified: 20161220161706470
+tags: Learning
+title: Formatting List Results as Tables (no CSS)
+ja-title: リスト結果を表フォーマットで出力する(CSS無し)
+type: text/vnd.tiddlywiki
+
+``<$list>``ウィジェットの結果を単純な1つのリストではなく、複数列の形式でフォーマットしたい場合があります。次のメソッドでは、実際のテーブル構造を作成し、[[n番目の演算子|nth Operator]]を使用して各行の改行を実現します。この方法では応答性はありません。つまり、ウィンドウが小さすぎる場合、表示する列を減らすための位置変更を行いません
+
+一番外側のリスト構造では、項目番号に改行が発生することを示すカウントを指定する必要があります。したがって、次の例では、各行は4個の項目の後で区切られるため、順序は1、5、9、・・・になります。これには、存在する項目の最大数を事前に知っておく必要があることに注意してください。n-1個の項目に設定される内部制限もあります(nは必要な列の数です)
+
+内側の`<$list>`ウィジェット内で駆動フィルター演算子を繰り返す必要があることにも注意してください。明らかに、このテクニックはマクロの実装に役立ちます
+
+他のテーブル作成テクニックについては、以下も参照してください: 
+
+* [[CSSを使用してリスト結果を表フォーマットで出力する - 可変列メソッド|Formatting List Results as Tables with CSS - Variable Column Method]]
+* [[CSSを使用してリスト結果を表フォーマットで出力する - 固定列メソッド|Formatting List Results as Tables with CSS - Specified Columns Methods]]
+
+!! 項目数が70未満の4列テーブルのコード例
+
+```
+<table>
+<$list filter="1 5 9 13 17 21 25 29 33 37 41 45 49 53 57 61 65" variable ="rows">
+    <$list filter="[tag[Filter Operators]limit[50]] +[nth<rows>]" variable="cell">
+        <tr>
+        <td> <<cell>> </td>
+        <$list filter="[tag[Filter Operators]limit[50]] +[allafter<cell>limit[3]]" variable="this">
+            <td> <<this>> </td>
+        </$list>
+        </tr>
+    </$list>
+</$list>
+</table>
+```
+
+!! 結果
+
+<table>
+<$list filter="1 5 9 13 17 21 25 29 33 37 41 45 49 53 57 61 65" variable ="rows">
+    <$list filter="[tag[Filter Operators]limit[50]] +[nth<rows>]" variable="cell">
+        <tr>
+        <td> <<cell>> </td>
+        <$list filter="[tag[Filter Operators]limit[50]] +[allafter<cell>limit[3]]" variable="this">
+            <td> <<this>> </td>
+        </$list>
+        </tr>
+    </$list>
+</$list>
+</table>
+

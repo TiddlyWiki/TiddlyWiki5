@@ -5,16 +5,22 @@ on:
       - master
       - tiddlywiki-com
 env:
-  NODE_VERSION: "12"
+  NODE_VERSION: "22"
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
         with:
           node-version: "${{ env.NODE_VERSION }}"
-      - run: "./bin/test.sh"
+      - run: "./bin/ci-test.sh"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
   build-prerelease:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
@@ -24,8 +30,8 @@ jobs:
       TW5_BUILD_MAIN_EDITION: "./editions/prerelease"
       TW5_BUILD_OUTPUT: "./output/prerelease"
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
         with:
           node-version: "${{ env.NODE_VERSION }}"
       - run: "./bin/ci-pre-build.sh"
@@ -54,9 +60,10 @@ jobs:
       TW5_BUILD_TIDDLYWIKI: "./node_modules/tiddlywiki/tiddlywiki.js"
       TW5_BUILD_MAIN_EDITION: "./editions/tw5.com"
       TW5_BUILD_OUTPUT: "./output"
+      TW5_BUILD_ARCHIVE: "./output"
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
         with:
           node-version: "${{ env.NODE_VERSION }}"
       - run: "./bin/ci-pre-build.sh"

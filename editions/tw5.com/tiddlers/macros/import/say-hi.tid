@@ -1,8 +1,9 @@
+code-body: yes
 created: 20150221145803000
 modified: 20150221221536000
 title: $:/editions/tw5.com/macro-examples/say-hi
 type: text/vnd.tiddlywiki
 
-\define sayhi(name:"Bugs Bunny" address:"Rabbit Hole Hill")
+\define sayhi(name:"Bugs Bunny",address:"Rabbit Hole Hill")
 Hi, I'm $name$ and I live in $address$.
 \end

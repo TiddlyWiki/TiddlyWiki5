@@ -1,0 +1,12 @@
+created: 20180816105911495
+modified: 20241124112441126
+original-modified: 20180816110627713
+tags: [[Hidden Settings]]
+title: Hidden Setting: Scroll Top Adjustment
+ja-title: 隠し設定: スクロールトップの調整
+type: text/vnd.tiddlywiki
+
+Tiddlerへの移動の一環として、TiddlyWikiはページをスクロールして、Tiddlerの上部がブラウザウィンドウの上部と揃うようにします。つまり、ウィンドウの上部にあるカスタム`position:fixed`ツールバーを使用すると、Tiddlerの上部が見えなくなる可能性があります
+
+ツールバーに合わせてスクロール位置を調整するには、ツールバーにCSSクラス`tc-adjust-top-of-scroll`を追加します。TiddlyWikiのスクロールメカニズムにより、その要素の高さに応じてスクロール位置が動的に調整されます。
+

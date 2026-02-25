@@ -1,0 +1,2 @@
+title: $:/core/config/GlobalImportFilter
+text: [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global]!is[draft]]

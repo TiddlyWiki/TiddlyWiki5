@@ -18,7 +18,7 @@ Todos los parámetros son opcionales con valores predeterminados seguros y se pu
 * ''anon-username'' - el nombre de usuario para firmar ediciones de usuarios anónimos
 * ''username'' - nombre de usuario opcional para autenticación básica
 * ''password'' - contraseña opcional para autenticación básica
-* ''authenticated-user-header'' - nombre opcional del encabezado que se utilizará para la autenticación de confianza
+* ''authenticated-user-header'' - nombre opcional del encabezado de solicitud que se utilizará para la autenticación de confianza.
 * ''readers'' - lista separada por comas de los usuarios autorizados a leer de este wiki
 * ''writers'' - lista separada por comas de los usuarios autorizados a escribir en este wiki
 * ''csrf-disable'' - establecer a "yes" para deshabilitar las comprobaciones CSRF (el valor predeterminado es "no")

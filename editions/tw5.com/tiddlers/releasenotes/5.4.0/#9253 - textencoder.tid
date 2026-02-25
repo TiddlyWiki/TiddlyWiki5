@@ -1,0 +1,8 @@
+title: $:/changenotes/5.4.0/#9253/impacts/textencoder
+changenote: $:/changenotes/5.4.0/#9253
+created: 20251115041709112
+modified: 20251115041709112
+tags: $:/tags/ImpactNote
+description: Encoding & decoding base64 no longer works on browsers that doesn't support [[TextEncoder|https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder]] or [[TextDecoder|https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder]]
+impact-type: compatibility-break
+

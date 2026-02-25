@@ -1,0 +1,48 @@
+title: Transclude/MissingTarget
+description: Transcluding a missing target
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
+	<$parameters one='Ferret'>
+		Badger
+		<$text text=<<one>>/>
+	</$parameters>
+</$transclude>
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
+	<$fill $name="ts-missing">
+		<$parameters one='Ferret'>
+			Badger
+			<$text text=<<one>>/>
+		</$parameters>
+	</$fill>
+</$transclude>
+<$transclude $tiddler='MissingTiddler' one='Ferret'>
+	<$parameters one='Ferret'>
+		Badger
+		<$text text=<<one>>/>
+	</$parameters>
+</$transclude>
+<$transclude $tiddler='MissingTiddler' one='Ferret'>
+	<$fill $name="ts-missing">
+		<$parameters one='Ferret'>
+			Badger
+			<$text text=<<one>>/>
+		</$parameters>
+	</$fill>
+</$transclude>
++
+title: TiddlerOne
+
+\whitespace trim
+<$parameters one='Kangaroo'>
+	Piranha
+	<$text text=<<one>>/>
+</$parameters>
++
+title: ExpectedResult
+
+<p>PiranhaFerretPiranhaFerretBadgerFerretBadgerFerret</p>

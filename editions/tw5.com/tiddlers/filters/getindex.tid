@@ -1,17 +1,16 @@
+caption: getindex
 created: 20150203140000000
-modified: 20150203140000000
+modified: 20230309163838670
+op-input: a [[selection of titles|Title Selection]]
+op-output: the values of property <<.place P>> in each of the input titles
+op-parameter: the name of a [[property|DataTiddlers]]
+op-parameter-name: P
+op-purpose: select all values of a data property in the input titles
 tags: [[Filter Operators]] [[Field Operators]]
 title: getindex Operator
-caption: getindex
-op-purpose: select all values of a data property in the input titles
 
-<$macrocall $name=".operator-def"
-input="a [[selection of titles|Title Selection]]"
-parameter="the name of a [[property|DataTiddlers]]"
-paramName="P"
-output="the values of property <<.place P>> in each of the input titles"
-/>
+Each input title is processed in turn, and is ignored if it does not denote a [[data tiddler|DataTiddlers]]. If the corresponding tiddler contains property <<.place P>>, and the value of this property is not empty, then its value is appended to the output.
 
-Each input title is processed in turn, and is ignored if it does not denote a [[data tiddler|DataTiddlers]]. If the tiddler contains property <<.place P>>, the value of that property is [[dominantly appended|Dominant Append]] to the output.
+<<.tip "Unlike most other [[Filter Operators]], the [[selection|Title Selection]] output by <<.op getindex>> can contain duplicates. To avoid duplicates, use `getindex[P]unique[]`.">>
 
 <<.operator-examples "getindex">>

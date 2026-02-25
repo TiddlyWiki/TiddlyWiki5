@@ -1,0 +1,13 @@
+title: ListWidget/WithEmptyParagraphTemplate
+description: List widget with an empty paragraph as inline template
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
++
+title: Output
+
+<$list filter="1"><p/></$list>
++
+title: ExpectedResult
+
+<p><p></p></p>

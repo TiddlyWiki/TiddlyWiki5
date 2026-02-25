@@ -12,10 +12,7 @@ This is an em-dash: ---
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "dash";
@@ -36,5 +33,3 @@ exports.parse = function() {
 		entity: dash
 	}];
 };
-
-})();

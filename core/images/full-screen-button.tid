@@ -1,4 +1,5 @@
 title: $:/core/images/full-screen-button
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-full-screen-button tc-image-button" viewBox="0 0 128 128"><path d="M0 8a8 8 0 018-8h32a8 8 0 110 16H16v24a8 8 0 11-16 0V8zM128 120a8 8 0 01-8 8H88a8 8 0 110-16h24V88a8 8 0 1116 0v32zM8 128a8 8 0 01-8-8V88a8 8 0 1116 0v24h24a8 8 0 110 16H8zM120 0a8 8 0 018 8v32a8 8 0 11-16 0V16H88a8 8 0 110-16h32z"/></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-full-screen-button tc-image-button" viewBox="0 0 128 128"><path d="M0 8a8 8 0 018-8h32a8 8 0 110 16H16v24a8 8 0 11-16 0V8zM128 120a8 8 0 01-8 8H88a8 8 0 110-16h24V88a8 8 0 1116 0v32zM8 128a8 8 0 01-8-8V88a8 8 0 1116 0v24h24a8 8 0 110 16H8zM120 0a8 8 0 018 8v32a8 8 0 11-16 0V16H88a8 8 0 110-16h32z"/></svg>

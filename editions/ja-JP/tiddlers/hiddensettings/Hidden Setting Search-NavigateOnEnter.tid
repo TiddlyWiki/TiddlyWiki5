@@ -1,0 +1,9 @@
+title: Hidden Setting: Navigate on Enter
+ja-title: 隠し設定: Enterキーでナビゲート
+tags: [[Hidden Settings]]
+created: 20201108104956516
+modified: 20241124105904502
+original-modified: 20201108104956516
+
+設定Tiddler $:/config/Search/NavigateOnEnter/enableを使用すると、さまざまな検索入力フィールドで<kbd>{{$:/config/shortcuts/input-accept}}</kbd>のあと<kbd>{{$:/config/shortcuts/input-accept-variant}}</kbd>をヒットしたときに、欠落しているTiddlerへのナビゲーションと作成を、(''yes''に設定により)有効にすることができます。
+

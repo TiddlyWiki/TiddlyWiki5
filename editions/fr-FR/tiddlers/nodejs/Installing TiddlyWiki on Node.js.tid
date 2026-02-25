@@ -39,7 +39,7 @@ type: text/vnd.tiddlywiki
 
 L'option `-g` demande à Node.js d'installer <<tw>> globalement. Sans elle, <<tw>> sera disponible seulement dans le répertoire où vous l'avez installé.
 
-Si vous utilisez Debian ou une distribution Linux dérivée de Debian et que vous recevez une erreur `node: command not found` alors que le paquet node.js est installé, vous devrez peut-être créer un lien symbolique entre `nodejs` et `node`. Consultez le manuel de votre distribution et de `whereis` pour créer un lien correctement. Voir le [[rapport d'erreur 1434|http://github.com/Jermolene/TiddlyWiki5/issues/1434]] sur github.
+Si vous utilisez Debian ou une distribution Linux dérivée de Debian et que vous recevez une erreur `node: command not found` alors que le paquet node.js est installé, vous devrez peut-être créer un lien symbolique entre `nodejs` et `node`. Consultez le manuel de votre distribution et de `whereis` pour créer un lien correctement. Voir le [[rapport d'erreur 1434|http://github.com/TiddlyWiki/TiddlyWiki5/issues/1434]] sur github.
 
 Exemple pour Debian 8.0<<:>> `sudo ln -s /usr/bin/nodejs /usr/bin/node`
 

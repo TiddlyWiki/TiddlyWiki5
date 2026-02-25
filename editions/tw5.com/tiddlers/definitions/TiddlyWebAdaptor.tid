@@ -1,0 +1,9 @@
+created: 20240309100338678
+modified: 20240309135821423
+tags: Definitions
+title: TiddlyWebAdaptor
+type: text/vnd.tiddlywiki
+
+TiddlyWebAdaptor is a component of [[TiddlyWiki on Node.js]]. It provides the means to synchronise changes to tiddlers from the browser to a server, and from the server to the browser. It can be found in the plugin [[$:/plugins/tiddlywiki/tiddlyweb]].
+
+TiddlyWebAdaptor was designed to be compatible both with TiddlyWeb and with TiddlyWiki's own built-in server mechanism. The [[Bags and Recipes]] model is fully supported by [[TiddlyWeb]], but TiddlyWiki's built-in server only supports a simplified model with a single bag and a single recipe.

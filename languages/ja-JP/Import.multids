@@ -13,7 +13,7 @@ Listing/Preview/Fields: 項目
 Listing/Preview/Text: テキスト
 Listing/Preview/TextRaw: テキスト (Raw)
 Listing/Rename/CancelRename: キャンセル
-Listing/Rename/ConfirmRename] Tiddler の名前を変更
+Listing/Rename/ConfirmRename: Tiddler の名前を変更
 Listing/Rename/OverwriteWarning: このタイトルの Tiddler はすでに存在しています。
 Listing/Rename/Prompt: 変更名:
 Listing/Rename/Tooltip: インポート前に Tiddler の名前を変更する

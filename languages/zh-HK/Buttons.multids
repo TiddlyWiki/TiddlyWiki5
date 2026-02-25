@@ -1,0 +1,17 @@
+title: $:/language/Buttons/
+
+ControlPanel/Hint: 開啓控制台
+FoldOthers/Hint: 收合其他已開啓條目的內容
+FoldAll/Hint: 收合所有已開啓條目的內容
+UnfoldAll/Hint: 展開所有已開啓條目的內容
+Help/Caption: 説明
+Help/Hint: 顯示説明中心
+Home/Hint: 開啓首頁條目
+LayoutSwitcher/Hint: 開啓版面切換器
+Manager/Hint: 開啓條目管理器
+OpenControlPanel/Hint: 開啓控制台
+OpenWindow/Caption: 開啓於新視窗
+OpenWindow/Hint: 在新視窗中開啓條目
+Permaview/Hint: 設定瀏覽器網址列為直接連結到當前所有已開啓條目
+Timestamp/On/Caption: 時間戳記開啓
+Stamp/New/Text: 片段的文字。（記得在 `caption` 欄位中新增一個説明性的標題）。

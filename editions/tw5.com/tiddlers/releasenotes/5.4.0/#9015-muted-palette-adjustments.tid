@@ -1,0 +1,11 @@
+change-category: theme
+change-type: enhancement
+created: 20251115012539668
+description: Muted palette, minor adjustments
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9015
+modified: 20251115012705865
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9015
+type: text/vnd.tiddlywiki

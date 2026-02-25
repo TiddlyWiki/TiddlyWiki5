@@ -1,9 +1,14 @@
 created: 20141122200310516
-modified: 20201213161842776
+modified: 20230923031318421
+tags: Mechanisms
 title: HookMechanism
 type: text/vnd.tiddlywiki
 
-The hook mechanism provides a way for plugins to intercept and modify default functionality. Hooks are added as follows:
+The hook mechanism provides a way for plugins to intercept and modify default functionality. 
+
+!! Add a hook
+
+Hooks are added as follows:
 
 ```js
 /*
@@ -13,6 +18,8 @@ handler: function to be called when hook is invoked
 $tw.hooks.addHook(name,handler);
 ```
 
+!!! Params and return
+
 The handler function will be called with parameters that depend on the specific hook in question, but they always follow the pattern `handler(value,params...)`
 
 * ''value'': an optional value that is to be transformed by the hook function
@@ -20,11 +27,29 @@ The handler function will be called with parameters that depend on the specific 
 
 If required by the hook in question, the handler function must return the modified ''value''.
 
+!!! Multiple handlers
+
 Multiple handlers can be assigned to the same name using repeated calls. When a hook is invoked by name all registered functions will be called sequentially in their order of addition.
 
 Note that the ''value'' passed to the subsequent hook function will be the return value of the previous hook function.
 
-Though not essential care should be taken to ensure that hooks are added before they are invoked. For example: [[Hook: th-opening-default-tiddlers-list]] should ideally be added before the story startup module is invoked otherwise any hook specified additions to the default tiddlers will not be seen on the initial loading of the page, though will be visible if the user clicks the home button.
+Be careful not to `addHook` in widget's `render` method, which will be call several times. You could `addHook` in methods that only called once, e.g. the constructor of widget class. Otherwise you should `removeHook` then add it again.
+
+!!! Timing of registration
+
+Though not essential care should be taken to ensure that hooks are added before they are invoked.
+
+For example: [[Hook: th-opening-default-tiddlers-list]] should ideally be added before the story startup module is invoked. Otherwise any hook specified additions to the default tiddlers will not be seen on the initial loading of the page, though will be visible if the user clicks the home button.
+
+!! Remove a hook
+
+You should clean up the callback when your widget is going to unmount.
+
+```js
+$tw.hooks.removeHook(handler)
+```
+
+The `handler` should be the same function instance you used in `addHook` (check by `===`). You can save it to `this.xxxHookHandler` on your widget, and call `removeHook` in [[destroy method|Widget `destroy` method examples]].
 
 !! Example
 

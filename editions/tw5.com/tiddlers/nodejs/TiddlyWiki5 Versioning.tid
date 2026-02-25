@@ -4,7 +4,7 @@ tags: [[Releases]]
 title: TiddlyWiki5 Versioning
 type: text/vnd.tiddlywiki
 
-Each release of TiddlyWiki5 is identified by a version number that complies with the [[Semantic Versioning 2.0.0|http://semver.org/]] standard.
+Each release of TiddlyWiki5 is identified by a version number that complies with a variant of [[Semantic Versioning 2.0.0|http://semver.org/]] standard.
 
 ! TiddlyWiki Core Version
 

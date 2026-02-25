@@ -1,0 +1,30 @@
+created: 20140419082845576
+modified: 20241217111550799 
+original-modified: 20190912093109517
+tags: Features
+title: SafeMode
+ja-title: セーフモード
+type: text/vnd.tiddlywiki
+
+! 紹介
+
+セーフモードでは、TiddlyWikiのほとんどのカスタマイズを無効にすることができます。TiddlyWikiが誤ってカスタマイズされると動作しなくなる可能性があるため、この機能は便利です。特に問題となるのは、TiddlyWikiの新しいコアバージョン(特にベータ版)にアップグレードすると、一部のカスタマイズが壊れてしまうことです。
+
+<<.warning "セーフモードは、TiddlyWikiの単一ファイル構成でのみ使用し、自動保存を行わないセーバーでのみ使用してください。クライアントサーバー構成でセーフモードを使用すると、データが失われる可能性があります。">>
+
+! セーフモードの有効化
+
+ブラウザでセーフモードを有効にするには、URLハッシュに文字列`#:safe`に設定してTiddlyWikiを起動します。例:
+
+https://tiddlywiki.com/#:safe
+
+! セーフモードの仕組み
+
+セーフモードでは、次の2つの変更が行われます: 
+
+* すべてのプラグインは一時的に無効になっています。[[コントロールパネル|$:/ControlPanel]] <<.icon $:/core/images/options-button>>を使用して個々のプラグインを無効にすることができます。
+* 隠しTiddlerをオーバーライドするTiddlerは、プレフィックス`SAFE: `を付けた名前に変更され、元の隠しTiddlerが復元されます
+* 特定の構成オプションは無視され、代わりにデフォルト設定が使用されます: 
+** WikiParserRuleConfiguration
+
+名前が変更されたTiddlerを検査できるレポートTiddlerが表示されます。

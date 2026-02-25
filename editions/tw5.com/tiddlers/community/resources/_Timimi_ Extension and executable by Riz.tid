@@ -13,6 +13,8 @@ url: https://ibnishak.github.io/Timimi/
 
 Timimi is a web-extension accompanied by a native host that allows you to save and backup your standalone HTML tiddlywiki files ''anywhere in your hard-drive''. Once installed, you can save the tiddlywiki files without any extra steps, like the original Tiddlyfox addon.
 
+* The native host requires a component installed on the host computer, outside the browser.
+
 {{!!url}}
 
 As of version 2.1, Timimi supports the following browsers   

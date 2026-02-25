@@ -1,0 +1,8 @@
+title: $:/changenotes/5.4.0/#9350/impacts/plugin-deprecation
+changenote: $:/changenotes/5.4.0/#9350
+created: 20251116030650076
+modified: 20251116030650076
+tags: $:/tags/ImpactNote
+description: The purged deprecated plugins are no longer availabe in the official plugin library
+impact-type: deprecation
+

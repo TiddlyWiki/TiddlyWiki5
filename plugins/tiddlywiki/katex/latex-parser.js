@@ -17,10 +17,7 @@ This wikiparser can be modified using the rules eg:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "latex-parser";
@@ -44,7 +41,7 @@ exports.parse = function() {
 	// Process the text
 	if(match) {
 		text = this.parser.source.substring(this.parser.pos,match.index);
-		displayMode = text.indexOf('\n') != -1;
+		displayMode = text.indexOf("\n") != -1;
 		this.parser.pos = match.index + match[0].length;
 	} else {
 		text = this.parser.source.substr(this.parser.pos);
@@ -65,5 +62,3 @@ exports.parse = function() {
 		}
 	}];
 };
-
-})();

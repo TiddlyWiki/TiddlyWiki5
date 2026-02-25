@@ -1,0 +1,16 @@
+created: 20141212090228728
+modified: 20240929104321590
+original-modified: 20141212090606825
+tags: $:/tags/Macro
+title: $:/editions/ja-JP/Macros/toc-caption
+type: text/vnd.tiddlywiki
+
+\define toc-caption()
+<$set name="tv-wikilinks" value="no">
+<$transclude field="caption">
+<$view field="ja-title">
+<$view field="title"/>
+</$view>
+</$transclude>
+</$set>
+\end

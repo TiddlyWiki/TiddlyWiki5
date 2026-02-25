@@ -1,0 +1,11 @@
+title: TiddlyWiki Node.js Privacy and Security
+tags: [[TiddlyWiki Privacy and Security]]
+
+!!! Node.js Configuration
+
+Using ~TiddlyWiki in the Node.js configuration requires more technical knowledge than the single file configuration.  There are several important areas with respect to security and privacy.
+
+* Most obviously, there is the matter of how user data is stored on disc as individual `.tid` files. Just as with the single file configuration, these are just ordinary files, and so can be used with third party tools that provide encryption.
+* Consideration must also be given to how data is transmitted across the network. By default, the Node.js configuration does not use SSL and so network traffic can be observed by others.
+** The impact of this is mitigated by the fact that, by default, only users on the same machine can connect to the server.
+** ~TiddlyWiki itself does offer the option of setting up an SSL connection.  However, it is generally advised to use an external proxy server to provide SSL services. nginx is popular for this purpose.

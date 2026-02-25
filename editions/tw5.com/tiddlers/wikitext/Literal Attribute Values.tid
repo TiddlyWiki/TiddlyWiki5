@@ -1,0 +1,30 @@
+created: 20230615045409162
+modified: 20230615045432768
+tags: [[Widget Attributes]] WikiText
+title: Literal Attribute Values
+type: text/vnd.tiddlywiki
+
+Literal attribute values can use several different styles of quoting:
+
+* Single quotes (eg `attr='value'`)
+* Double quotes (eg `attr="value"`)
+* Tripe double quotes (eg `attr="""value"""`)
+* No quoting is necessary for values that do not contain spaces (eg `attr=value`)
+
+Literal attribute values can include line breaks. For example:
+
+```
+<div data-address="Mouse House,
+Mouse Lane,
+Rodentville,
+Ratland."/>
+```
+
+By using triple-double quotes you can specify attribute values that contain single double quotes. For example:
+
+```
+<div data-address="""Mouse House,
+"Mouse" Lane,
+Rodentville,
+Ratland."""/>
+```

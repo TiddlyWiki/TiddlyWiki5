@@ -1,0 +1,16 @@
+caption: <<.attr index>>
+created: 20230314171351122
+description: tab
+modified: 20230317160939333
+tags: CheckboxWidget
+title: CheckboxWidget (index Mode)
+
+!!<<.link "<<.attr index>> Mode" "CheckboxWidget (index Mode)">>
+
+To use the checkbox widget in index mode set the <<.attr index>> attribute to a property of a [[DataTiddler|DataTiddlers]]. The <<.attr checked>> and <<.attr unchecked>> attributes specify the values to be assigned to the property and correspond to its checked and unchecked states respectively. The <<.attr default>> attribute is used as a fallback value if the property is undefined.
+
+<<.warning "Make sure to set <<.attr tiddler>> correctly, because non-[[DataTiddlers]] will be overwritten without warning">>
+
+The example below creates a checkbox that is checked if the property in the tiddler [[ExampleData]] by the name of the current tiddler is equal to <<.value selected>> and unchecked if the property is an empty string. If the property is undefined then it defaults to an empty string, meaning the checkbox will be unchecked if the property is missing.
+
+<$macrocall $name="wikitext-example-without-html" src="""<$checkbox tiddler="ExampleData" index=<<currentTiddler>> checked="selected" unchecked="" default=""> Selected?</$checkbox>"""/>

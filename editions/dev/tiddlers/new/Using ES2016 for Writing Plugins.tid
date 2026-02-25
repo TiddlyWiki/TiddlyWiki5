@@ -1,5 +1,5 @@
-modified: 20160305222940000
 created: 20160111034749658
+modified: 20240302110735646
 title: Using ES2016 for Writing Plugins
 type: text/vnd.tiddlywiki
 
@@ -7,7 +7,15 @@ With the advent of ES2015 (also known as ES6) and the availability of [[Babel.js
 
 Please understand how the PluginMechanism works since this is all about writing a plugin using Babel to compile the output that will be included in the final TiddlyWiki (for example [[TiddlyWiki on Node.js]]).
 
-!! Installing and Configuring Babel
+!! Use a framework
+
+It is recommended to use develop toolkit managed by community. For example, 
+
+# [[Modern.TiddlyDev|https://tiddly-gittly.github.io/Modern.TiddlyDev/]]
+
+They are known as "~JavaScript Meta-Framework". With them, you can start developing in a few minutes, without hours of configuration and debugging the build steps.
+
+!! Installing and Configuring Babel by yourself
 
 You can install Babel using
 
@@ -33,7 +41,9 @@ Inside your plugin project edit the file `.babelrc` and enter the following:
 
 <<.tip "I found it easier to manage my plugins as if they were ''npm'' modules complete with a `package.json` that compiles the output via `npm run build`. See [[npm-scripts documentation|https://docs.npmjs.com/misc/scripts]] for details.">>
 
-!! Compiling the Output
+Another benefit of using such a "Meta-Framework" is that you can easily maintain your configuration, you will find it difficult to upgrade those config files after several months.
+
+!!! Compiling the Output
 
 Pick a folder to store the ES2015 JavaScript and a folder to output the TiddlyWiki ready JavaScript. In this example I will use `src` and `lib` respectively. With Babel installed and working I can compile all the JavaScript in the `src` folder to the `lib` folder by running this command:
 
@@ -43,7 +53,7 @@ $ babel src -d lib
 
 <<.warning "Babel will //not// copy over non-JavaScript files. It is up to the developer to include all the supporting files themselves. Babel only converts the ~JavaScript files (ending in `.js`) from the `src` folder to the `lib` folder.">>
 
-!! Imports and Exports
+!!! Imports and Exports
 
 In a plugin written pre-ES2015 one would `require` a module through TiddlyWiki like so:
 
@@ -71,7 +81,7 @@ export { MyWidget as mywidget };
 
 It is important to understand that in ES2016 the ''default'' export is not supported in TiddlyWiki. This is mostly because the core code expects specific properties to be attached to the `exports` variable. Bable's `export` conversion plays well with this //except// with the default export.
 
-!! Classes
+!!! Classes
 
 In the example of a widget ES2016 plays well with class inheritance. To contrast the typical Widget definition would look something like this:
 
@@ -104,7 +114,7 @@ class NameWidget extends Widget {
 }
 ```
 
-!!! Non Class Modules
+!!!! Non Class Modules
 
 For non class modules you can use the `export` keyword. Here is a simple [[Startup Module|ModuleType]]:
 
@@ -122,11 +132,11 @@ export const params = {};
 export function run() {…}
 ```
 
-!! Polyfills
+!!! Polyfills
 
 ES2015 comes with some features that are part of the JavaScript core objects. These are not supported by all browsers. To use these features in [[most browsers|BrowserCompatibility]] you will need a <<.def "polyfill">>. Babel has a polyfill package that you can include. See [[Adding Babel Polyfill to TiddlyWiki]] for how to accomplish this.
 
-!! Example
+!!! Example
 
 Here is an example ES2015 plugin/widget that will show the time and update it:
 

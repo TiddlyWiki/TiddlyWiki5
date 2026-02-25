@@ -6,15 +6,13 @@ module-type: startup
 Startup logic concerned with managing plugins
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
 exports.name = "plugins";
 exports.after = ["load-modules"];
+exports.before = ["startup"];
 exports.synchronous = true;
 
 var TITLE_REQUIRE_RELOAD_DUE_TO_PLUGIN_CHANGE = "$:/status/RequireReloadDueToPluginChange";
@@ -33,7 +31,6 @@ exports.startup = function() {
 			if(requiresReload) {
 				requireReloadDueToPluginChange = true;
 			} else if(tiddler) {
-				var pluginType = tiddler.fields["plugin-type"];
 				if($tw.wiki.getTiddlerText(PREFIX_CONFIG_REGISTER_PLUGIN_TYPE + (tiddler.fields["plugin-type"] || ""),"no") === "yes") {
 					changesToProcess.push(title);
 				}
@@ -60,7 +57,7 @@ exports.startup = function() {
 				// Collect the shadow tiddlers of any modified plugins
 				$tw.utils.each(changes.modifiedPlugins,function(pluginTitle) {
 					var pluginInfo = $tw.wiki.getPluginInfo(pluginTitle);
-					if(pluginInfo) {
+					if(pluginInfo && pluginInfo.tiddlers) {
 						$tw.utils.each(Object.keys(pluginInfo.tiddlers),function(title) {
 							changedShadowTiddlers[title] = false;
 						});
@@ -74,11 +71,10 @@ exports.startup = function() {
 				$tw.wiki.unpackPluginTiddlers();
 				// Queue change events for the changed shadow tiddlers
 				$tw.utils.each(Object.keys(changedShadowTiddlers),function(title) {
-					$tw.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title]);
+					$tw.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title], true);
 				});
 			}
 		}
 	});
 };
 
-})();

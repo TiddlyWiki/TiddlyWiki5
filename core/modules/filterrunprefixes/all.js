@@ -7,10 +7,7 @@ Union of sets without de-duplication.
 Equivalent to = filter run prefix.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -21,5 +18,3 @@ exports.all = function(operationSubFunction) {
 		results.push.apply(results, operationSubFunction(source,widget));
 	};
 };
-
-})();

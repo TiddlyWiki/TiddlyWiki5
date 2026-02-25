@@ -16,6 +16,7 @@ Welcome to the developer documentation for TiddlyWiki (https://tiddlywiki.com/).
 ** [[Adding Babel Polyfill to TiddlyWiki]]
 ** [[TiddlyWiki Drag and Drop Interoperability]]
 ** [[Javascript Widget Tutorial]]
+** [[Using TiddlyWiki as a library in another Node.js application]]
 * The original developer documentation from https://tiddlywiki.com:
 ** [[TiddlyWiki for Developers]]
 ** [[TiddlyWiki Coding Style Guidelines]]

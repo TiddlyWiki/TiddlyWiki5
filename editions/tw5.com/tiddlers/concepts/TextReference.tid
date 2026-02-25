@@ -1,5 +1,5 @@
 created: 20130827075900000
-modified: 20161216173541948
+modified: 20230321130421587
 tags: Concepts
 title: TextReference
 type: text/vnd.tiddlywiki
@@ -27,7 +27,7 @@ Text references can be used in several places:
 
 * As [[indirect parameters|Filter Parameter]] within [[Filters]] (eg, `<$list filter="[tag{MyTag!!name}]"/>`)
 * As [[indirect attributes|HTML in WikiText]] of an element or widget (eg, `<$widget attrib={{Title!!description}}/>`)
-* As the operand of a shortcut transclusion (eg, `{{MyTiddler!!title}}`)
+* As the parameter of a shortcut transclusion (eg, `{{MyTiddler!!title}}`)
 * As the `state` attribute of the RevealWidget and the LinkCatcherWidget
 
 <$macrocall $name=".tip" _="""Note the distinction between a text reference such as `foo!!bar` and a transclusion of a text reference such as `{{foo!!bar}}`"""/>

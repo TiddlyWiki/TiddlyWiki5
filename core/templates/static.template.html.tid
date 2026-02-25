@@ -1,6 +1,7 @@
 title: $:/core/templates/static.template.html
 type: text/vnd.tiddlywiki-html
 
+\define tv-config-static() yes
 \define tv-wikilink-template() static/$uri_doubleencoded$.html
 \define tv-config-toolbar-icons() no
 \define tv-config-toolbar-text() no

@@ -2,3 +2,4 @@ title: $:/language/Docs/Types/image/jpeg
 description: JPEG - Bild
 name: image/jpeg
 group: Bilder
+group-sort: 1

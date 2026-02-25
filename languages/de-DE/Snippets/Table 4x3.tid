@@ -1,6 +1,6 @@
 title: $:/language/Snippets/Table4x3
 tags: $:/tags/TextEditor/Snippet
-caption: Tabelle mit 5 Spalten, 4 Zeilen, Kopf- und Fußzeile
+caption: Tabelle -- 5 Spalten, 3 Zeilen, Kopf-, Fußzeile und Beschriftung
 
 | |Alpha |Beta |Gamma |Delta |h
 |!Beta | | | | |

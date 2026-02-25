@@ -1,6 +1,7 @@
+code-body: yes
 created: 20150228123855000
-modified: 20150228123921000
+modified: 20240310133309881
 title: $:/editions/tw5.com/macro-examples/tv-get-export-image-link
 type: text/vnd.tiddlywiki
 
-\define tv-get-export-image-link(src) https://www.tiddlywiki.com/$src$
+\function tv-get-export-image-link(src) [[https://www.tiddlywiki.com/$(src)$]substitute[]]

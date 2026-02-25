@@ -1,0 +1,24 @@
+title: Functions/FunctionFilterrunVariables
+description: Functions in filter runs that set variables
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Idiosyncrasy
+caption: Idiosyncrasy Caption Field
+
++
+title: Output
+
+\whitespace trim
+\procedure demo-subfilter() [<currentTiddler>]
+\function .demo-function() [<currentTiddler>]
+
+<$let currentTiddler="Idiosyncrasy">
+<$text text={{{ [<currentTiddler>get[caption]!is[blank]else<currentTiddler>] :map[subfilter<demo-subfilter>] }}}/>,
+<$text text={{{ [<currentTiddler>get[caption]!is[blank]else<currentTiddler>] :map[.demo-function[]] }}}/>
+</$let>
+
++
+title: ExpectedResult
+
+<p>Idiosyncrasy Caption Field,Idiosyncrasy Caption Field</p>
