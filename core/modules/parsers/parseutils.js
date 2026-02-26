@@ -107,7 +107,7 @@ exports.parseStringLiteral = function(source,pos) {
 		type: "string",
 		start: pos
 	};
-	var reString = /(?:"""([\s\S]*?)"""|"([^"]*)")|(?:'([^']*)')|\[\[((?:[^\]]|\](?!\]))*)\]\]/g;
+	var reString = /(?:"""([\s\S]*?)"""|"([^"]*)")|(?:'([^']*)')|\[\[((?:[^\]]|\](?!\]))*)\]\]/y;
 	reString.lastIndex = pos;
 	var match = reString.exec(source);
 	if(match && match.index === pos) {
@@ -221,7 +221,7 @@ exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 		orderedAttributes: []
 	};
 	// Define our regexps
-	var reVarName = /([^\s>"'=:]+)/g;
+	var reVarName = /([^\s>"'=:]+)/y;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a double opening angle bracket
@@ -235,10 +235,18 @@ exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 	if(!token) {
 		return null;
 	}
+	// If the next character is also < then this is a blockquote, not a macro invocation
+	if(source.charAt(token.end) === "<") {
+		return null;
+	}
 	$tw.utils.addAttributeToParseTreeNode(node,"$variable",token.match[1]);
 	pos = token.end;
 	// Check that the tag is terminated by a space or >>
 	if(!$tw.utils.parseWhiteSpace(source,pos) && !(source.charAt(pos) === ">" && source.charAt(pos + 1) === ">") ) {
+		return null;
+	}
+	// Check that there is a closing >> somewhere ahead before doing expensive parameter parsing
+	if(source.indexOf(">>",pos) === -1) {
 		return null;
 	}
 	// Process attributes
@@ -267,7 +275,7 @@ exports.parseMVVReferenceAsTransclusion = function(source,pos) {
 		orderedAttributes: []
 	};
 	// Define our regexps
-	var reVarName = /([^\s>"'=:)]+)/g;
+	var reVarName = /([^\s>"'=:)]+)/y;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a double opening parenthesis
@@ -323,17 +331,17 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 		start: pos
 	};
 	// Define our regexps
-	var reAttributeName = /([^\/\s>"'`=:]+)/g,
-		reUnquotedAttribute = /((?:(?:>(?!>))|[^\s>"'])+)/g,
-		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/g,
-		reIndirectValue = /\{\{([^\}]+)\}\}/g,
-		reSubstitutedValue = /(?:```([\s\S]*?)```|`([^`]|[\S\s]*?)`)/g;
+	var reAttributeName = /([^\/\s>"'`=:]+)/y,
+		reUnquotedAttribute = /((?:(?:>(?!>))|[^\s>"'])+)/y,
+		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/y,
+		reIndirectValue = /\{\{([^\}]+)\}\}/y,
+		reSubstitutedValue = /(?:```([\s\S]*?)```|`([^`]|[\S\s]*?)`)/y;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Get the attribute name and the separator token
 	var nameToken = $tw.utils.parseTokenRegExp(source,pos,reAttributeName),
 		namePos = nameToken && $tw.utils.skipWhiteSpace(source,nameToken.end),
-		separatorToken = nameToken && $tw.utils.parseTokenRegExp(source,namePos,/=|:/g),
+		separatorToken = nameToken && $tw.utils.parseTokenRegExp(source,namePos,/=|:/y),
 		isNewStyleSeparator = false; // If there is no separator then we don't allow new style values
 	// If we have a name and a separator then we have a named attribute
 	if(nameToken && separatorToken) {
