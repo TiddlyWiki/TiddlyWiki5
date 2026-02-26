@@ -237,12 +237,12 @@ exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 	}
 	$tw.utils.addAttributeToParseTreeNode(node,"$variable",token.match[1]);
 	pos = token.end;
-    // Check that the tag is terminated by a space or >>, and that there is a closing >> somewhere ahead
-    if(!(source.charAt(pos) === ">" && source.charAt(pos + 1) === ">") ) {
-        if(!$tw.utils.parseWhiteSpace(source,pos) || source.indexOf(">>",pos) === -1) {
-            return null;
-        }
-    }
+	// Check that the tag is terminated by a space or >>, and that there is a closing >> somewhere ahead
+	if(!(source.charAt(pos) === ">" && source.charAt(pos + 1) === ">") ) {
+		if(!$tw.utils.parseWhiteSpace(source,pos) || source.indexOf(">>",pos) === -1) {
+			return null;
+		}
+	}
 	// Process attributes
 	pos = $tw.utils.parseMacroParametersAsAttributes(node,source,pos);
 	// Skip whitespace
