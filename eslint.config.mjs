@@ -23,7 +23,9 @@ const es2023rules = {
     files: ["bin/**/*", "core-server/**/*"],
 };
 
-
+const stylisticRulesOff = Object.fromEntries(
+    Object.keys(stylistic.rules).map(key => [`@stylistic/${key}`, "off"])
+);
 
 export default defineConfig([{
     ignores: [
@@ -37,7 +39,8 @@ export default defineConfig([{
         "plugins/tiddlywiki/*/files/",
         "eslint.config.mjs",
         "playwright.config.js",
-        "**/output/**"
+        "**/output/**",
+        "**/testcommonjs/**"
     ],
 
 },
@@ -315,6 +318,11 @@ js.configs.recommended,
 },
     es2017rules,
     es2023rules,
+    {
+        // For test files, we only want to lint them, but not format them.
+        files: ["editions/test/**"],
+        rules: stylisticRulesOff
+    },
     {
         files: ["tiddlywiki.js"],
         plugins:  {
