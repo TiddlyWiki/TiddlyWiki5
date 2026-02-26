@@ -44,15 +44,35 @@ SlashMenuUI.prototype.createContainer = function() {
 
 SlashMenuUI.prototype.setupStateListener = function() {
 	const self = this;
+	this._rafId = null;
+	this._destroyed = false;
 	
-	const checkState = () => {
+	this._checkState = function() {
+		if(self._destroyed) return;
 		self.updateMenu();
-		// Continue checking on next frame
-		requestAnimationFrame(checkState);
+		// Only keep animating while the menu is visible (positioning/rendering updates)
+		if(self.isVisible) {
+			self._rafId = requestAnimationFrame(self._checkState);
+		} else {
+			self._rafId = null;
+		}
 	};
 	
-	// Start the animation frame loop
-	requestAnimationFrame(checkState);
+	// Do an initial check
+	self._checkState();
+};
+
+/**
+ * Called externally (from dispatchTransaction) to check whether the menu should open.
+ * Restarts the rAF loop if the menu becomes visible.
+ */
+SlashMenuUI.prototype.checkState = function() {
+	if(this._destroyed) return;
+	this.updateMenu();
+	// If menu just became visible but rAF isn't running, start it
+	if(this.isVisible && !this._rafId) {
+		this._rafId = requestAnimationFrame(this._checkState);
+	}
 };
 
 SlashMenuUI.prototype.updateMenu = function() {
@@ -92,8 +112,8 @@ SlashMenuUI.prototype.positionMenu = function() {
 };
 
 SlashMenuUI.prototype.renderMenu = function(state) {
-	// Clear existing content
-	this.container.innerHTML = "";
+	// Clear existing content safely
+	while(this.container.firstChild) { this.container.removeChild(this.container.firstChild); }
 	
 	// Create filter display if there's a filter
 	if(state.filter) {
@@ -154,17 +174,35 @@ SlashMenuUI.prototype.createMenuItem = function(element, state) {
 		}
 	}
 
-	// Create icon placeholder
+	// Create icon — render SVG from tiddler if available, else fallback emoji/text
 	const icon = document.createElement("div");
 	icon.className = "tw-slash-menu-item-icon";
-	icon.textContent = this.getIconForElement(element);
+	if(element.icon) {
+		const svgEl = this._renderSvgIcon(element.icon, "1em");
+		if(svgEl) {
+			icon.appendChild(svgEl);
+		} else {
+			icon.textContent = this.getIconForElement(element);
+		}
+	} else {
+		icon.textContent = this.getIconForElement(element);
+	}
 	menuItem.appendChild(icon);
 
-	// Create label
+	// Create text wrapper with label + description
+	const textWrap = document.createElement("div");
+	textWrap.className = "tw-slash-menu-item-text";
 	const label = document.createElement("div");
 	label.className = "tw-slash-menu-item-label";
 	label.textContent = element.label;
-	menuItem.appendChild(label);
+	textWrap.appendChild(label);
+	if(element.description) {
+		const desc = document.createElement("div");
+		desc.className = "tw-slash-menu-item-description";
+		desc.textContent = element.description;
+		textWrap.appendChild(desc);
+	}
+	menuItem.appendChild(textWrap);
 
 	// Add click handler if clickable
 	if(this.options.clickable) {
@@ -175,6 +213,31 @@ SlashMenuUI.prototype.createMenuItem = function(element, state) {
 	}
 
 	return menuItem;
+};
+
+/**
+ * Render an SVG icon from a tiddler title, returning a safe DOM element.
+ */
+SlashMenuUI.prototype._renderSvgIcon = function(tiddlerTitle, size) {
+	try {
+		const tiddler = $tw.wiki.getTiddler(tiddlerTitle);
+		if(!tiddler) return null;
+		const text = tiddler.fields.text;
+		const svgMatch = text.match(/<svg[\s\S]*<\/svg>/);
+		if(!svgMatch) return null;
+		const svgString = svgMatch[0].replace(/<<size>>/g, size || "1em");
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(svgString, "image/svg+xml");
+		const svgEl = doc.querySelector("svg");
+		if(!svgEl) return null;
+		// Ensure consistent sizing
+		svgEl.setAttribute("width", size || "1em");
+		svgEl.setAttribute("height", size || "1em");
+		svgEl.style.verticalAlign = "middle";
+		return document.importNode(svgEl, true);
+	} catch(e) {
+		return null;
+	}
 };
 
 SlashMenuUI.prototype.getIconForElement = function(element) {
@@ -197,6 +260,11 @@ SlashMenuUI.prototype.executeCommand = function(element) {
 };
 
 SlashMenuUI.prototype.destroy = function() {
+	this._destroyed = true;
+	if(this._rafId) {
+		cancelAnimationFrame(this._rafId);
+		this._rafId = null;
+	}
 	if(this.container && this.container.parentNode) {
 		this.container.parentNode.removeChild(this.container);
 	}

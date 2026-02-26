@@ -15,20 +15,40 @@ immediate: if true, trigger function on the leading edge instead of trailing
 */
 exports.debounce = (func, wait, immediate) => {
 	let timeout;
-	return function() {
-		const context = this;
-		const args = arguments;
-		const later = () => {
-			timeout = null;
-			if(!immediate) {
-				func.apply(context, args);
-			}
-		};
+	let lastContext;
+	let lastArgs;
+	const debounced = function() {
+		lastContext = this;
+		lastArgs = arguments;
 		const callNow = immediate && !timeout;
 		clearTimeout(timeout);
-		timeout = setTimeout(later, wait);
+		timeout = setTimeout(() => {
+			timeout = null;
+			if(!immediate) {
+				func.apply(lastContext, lastArgs);
+			}
+		}, wait);
 		if(callNow) {
-			func.apply(context, args);
+			func.apply(lastContext, lastArgs);
 		}
 	};
+	/*
+	Immediately execute the pending debounced call (if any) and clear the timer.
+	Safe to call even when nothing is pending.
+	*/
+	debounced.flush = function() {
+		if(timeout) {
+			clearTimeout(timeout);
+			timeout = null;
+			func.apply(lastContext, lastArgs);
+		}
+	};
+	/*
+	Cancel the pending debounced call without executing it.
+	*/
+	debounced.cancel = function() {
+		clearTimeout(timeout);
+		timeout = null;
+	};
+	return debounced;
 };

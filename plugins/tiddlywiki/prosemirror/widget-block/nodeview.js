@@ -102,7 +102,13 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 			
 			if(DEBUG) console.log("[WidgetBlockNodeView] Rendering widget:", widgetText);
 			
-			const parseTree = $tw.wiki.parseText("text/vnd.tiddlywiki", widgetText).tree;
+			// Collect pragma definitions from the document so \define/\procedure etc. are available
+			var preamble = "";
+			if(this.parentWidget && typeof this.parentWidget.getPragmaPreamble === "function") {
+				preamble = this.parentWidget.getPragmaPreamble();
+			}
+			var fullText = preamble + widgetText;
+			const parseTree = $tw.wiki.parseText("text/vnd.tiddlywiki", fullText).tree;
 			
 			const Widget = require("$:/core/modules/widgets/widget.js").widget;
 			const tempWidget = new Widget({
@@ -149,12 +155,10 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 		// Update button icon
 		if(this.settingsBtn) {
 			if(this.isEditMode) {
-				const svg = this.getSvgIcon("$:/core/images/done-button");
-				if(svg) this.settingsBtn.innerHTML = svg;
+				this.setButtonIcon(this.settingsBtn, "$:/core/images/done-button", "✔");
 				this.settingsBtn.title = "Save and view";
 			} else {
-				const svg = this.getSvgIcon("$:/core/images/edit-button");
-				if(svg) this.settingsBtn.innerHTML = svg;
+				this.setButtonIcon(this.settingsBtn, "$:/core/images/edit-button", "✏️");
 				this.settingsBtn.title = "Edit widget";
 			}
 		}
@@ -198,8 +202,7 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 			this.dom.classList.remove("pm-widget-block-editing");
 		}
 		if(this.settingsBtn) {
-			const svg = this.getSvgIcon("$:/core/images/edit-button");
-			if(svg) this.settingsBtn.innerHTML = svg;
+			this.setButtonIcon(this.settingsBtn, "$:/core/images/edit-button", "✏️");
 			this.settingsBtn.title = "Edit widget";
 		}
 		this.updateContent();

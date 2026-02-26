@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorToolbar/toggle-source
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/chevron-right
+caption: {{$:/plugins/tiddlywiki/prosemirror/language/SourcePanel/Title}}
+description: Toggle wikitext source panel
+condition: [[$:/config/EditorTypeMappings/text/vnd.tiddlywiki]get[text]match[prosemirror]]
+shortcuts:
+
+\whitespace trim
+<$action-sendmessage $message="tm-edit-text-operation" $param="toggle-source"/>

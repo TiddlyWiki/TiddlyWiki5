@@ -28,7 +28,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		wrap.draggable = false;
 
 		// Create header with title and buttons
-		const header = this.createHeader(this.node.attrs.twSource || "Image");
+		const header = this.createHeader(this.node.attrs.twSource || this.getLanguageString("ImagePicker/Title", "Image"));
 
 		// Create content container to hold image, textarea, and picker
 		const contentContainer = document.createElement("div");
@@ -83,7 +83,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 
 	updateTitle() {
 		if(this._titleEl) {
-			this._titleEl.textContent = this.node.attrs.twSource || "Image";
+			this._titleEl.textContent = this.node.attrs.twSource || this.getLanguageString("ImagePicker/Title", "Image");
 		}
 		if(this.img) {
 			this.img.setAttribute("src", this.node.attrs.src || "");
@@ -124,7 +124,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		if(!this.contentContainer) return;
 		
 		// Clear content (hide image during edit, like widget-block does)
-		this.contentContainer.innerHTML = "";
+		while(this.contentContainer.firstChild) { this.contentContainer.removeChild(this.contentContainer.firstChild); }
 		
 		// Create textarea for editing image wikitext
 		const twSource = this.node.attrs.twSource || "";
@@ -166,7 +166,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		if(!this.contentContainer) return;
 		
 		// Clear content
-		this.contentContainer.innerHTML = "";
+		while(this.contentContainer.firstChild) { this.contentContainer.removeChild(this.contentContainer.firstChild); }
 		
 		// Add image back
 		this.contentContainer.appendChild(this.img);
@@ -194,7 +194,10 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		// Render TW image picker widget using the built-in image-picker macro
 		if(this.parentWidget) {
 			const nodeViewId = this.getNodeViewId();
-			const pickerWikitext = `<<image-picker actions:"<$action-sendmessage $message='tm-prosemirror-image-picked-nodeview' nodeViewId='${nodeViewId}' imageTitle=<<imageTitle>>/>">>`;
+			// Sanitise nodeViewId for safe embedding in single-quoted TW attribute.
+			// The id is alphanumeric by construction, but defence-in-depth matters.
+			const safeId = nodeViewId.replace(/[^a-zA-Z0-9_-]/g, "");
+			const pickerWikitext = `<<image-picker actions:"<$action-sendmessage $message='tm-prosemirror-image-picked-nodeview' nodeViewId='${safeId}' imageTitle=<<imageTitle>>/>">>`;
 			
 			const pickerTree = this.parentWidget.wiki.parseText("text/vnd.tiddlywiki", pickerWikitext).tree;
 			const WidgetBase = require("$:/core/modules/widgets/widget.js").widget;
@@ -372,49 +375,74 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		this.resizeHandle.addEventListener("mousedown", function(e) {
 			e.preventDefault();
 			e.stopPropagation();
-			
-			startX = e.clientX;
-			startY = e.clientY;
+			startResize(e.clientX, e.clientY);
+			document.addEventListener("mousemove", onPointerMove);
+			document.addEventListener("mouseup", onPointerUp);
+		});
+
+		// Touch support for mobile devices
+		this.resizeHandle.addEventListener("touchstart", function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			const touch = e.touches[0];
+			startResize(touch.clientX, touch.clientY);
+			document.addEventListener("touchmove", onTouchMove, { passive: false });
+			document.addEventListener("touchend", onTouchEnd);
+		});
+
+		function startResize(x, y) {
+			startX = x;
+			startY = y;
 			startWidth = parseInt(self.img.getAttribute("width") || self.img.offsetWidth);
 			startHeight = parseInt(self.img.getAttribute("height") || self.img.offsetHeight);
-			
-			function onMouseMove(e) {
-				const dx = e.clientX - startX;
-				const dy = e.clientY - startY;
-				const newWidth = Math.max(50, startWidth + dx);
-				const newHeight = Math.max(30, startHeight + dy);
-				
-				self.img.style.width = newWidth + "px";
-				self.img.style.height = newHeight + "px";
+		}
+
+		function onPointerMove(e) {
+			doResize(e.clientX, e.clientY);
+		}
+
+		function onTouchMove(e) {
+			e.preventDefault(); // Prevent scroll during resize
+			const touch = e.touches[0];
+			doResize(touch.clientX, touch.clientY);
+		}
+
+		function doResize(x, y) {
+			const dx = x - startX;
+			const dy = y - startY;
+			const newWidth = Math.max(50, startWidth + dx);
+			const newHeight = Math.max(30, startHeight + dy);
+			self.img.style.width = newWidth + "px";
+			self.img.style.height = newHeight + "px";
+		}
+
+		function commitResize() {
+			const finalWidth = Math.round(self.img.offsetWidth);
+			const finalHeight = Math.round(self.img.offsetHeight);
+			self.img.style.width = "";
+			self.img.style.height = "";
+			const tr = self.view.state.tr;
+			const pos = self.getPos();
+			if(pos !== undefined) {
+				tr.setNodeMarkup(pos, null, Object.assign({}, self.node.attrs, {
+					width: String(finalWidth),
+					height: String(finalHeight)
+				}));
+				self.view.dispatch(tr);
 			}
-			
-			function onMouseUp(e) {
-				document.removeEventListener("mousemove", onMouseMove);
-				document.removeEventListener("mouseup", onMouseUp);
-				
-				// Get final dimensions from style
-				const finalWidth = Math.round(self.img.offsetWidth);
-				const finalHeight = Math.round(self.img.offsetHeight);
-				
-				// Clear inline styles
-				self.img.style.width = "";
-				self.img.style.height = "";
-				
-				// Update ProseMirror node with new dimensions
-				const tr = self.view.state.tr;
-				const pos = self.getPos();
-				if(pos !== undefined) {
-					tr.setNodeMarkup(pos, null, Object.assign({}, self.node.attrs, {
-						width: String(finalWidth),
-						height: String(finalHeight)
-					}));
-					self.view.dispatch(tr);
-				}
-			}
-			
-			document.addEventListener("mousemove", onMouseMove);
-			document.addEventListener("mouseup", onMouseUp);
-		});
+		}
+
+		function onPointerUp() {
+			document.removeEventListener("mousemove", onPointerMove);
+			document.removeEventListener("mouseup", onPointerUp);
+			commitResize();
+		}
+
+		function onTouchEnd() {
+			document.removeEventListener("touchmove", onTouchMove);
+			document.removeEventListener("touchend", onTouchEnd);
+			commitResize();
+		}
 	}
 }
 

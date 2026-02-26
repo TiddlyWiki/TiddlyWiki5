@@ -216,6 +216,165 @@ function buildCodeBlock(context, node) {
 	};
 }
 
+function buildBlockquote(context, node) {
+	// Filter out <cite> elements — they are optional metadata in wikitext blockquotes
+	var bodyChildren = (node.children || []).filter(function(child) {
+		return !(child.type === "element" && child.tag === "cite");
+	});
+	return {
+		type: "blockquote",
+		content: convertNodes(context, bodyChildren)
+	};
+}
+
+function buildHorizRule(context, node) {
+	return {
+		type: "horizontal_rule"
+	};
+}
+
+function buildBr(context, node) {
+	return {
+		type: "hard_break"
+	};
+}
+
+/**
+ * Build link mark for internal wiki links (`[[text|target]]`)
+ * The link AST node has type "link", rule "prettylink", attributes.to, and children
+ */
+function buildLink(context, node) {
+	var target = (node.attributes && node.attributes.to) ? node.attributes.to.value : "";
+	var content = convertNodes(context, node.children);
+	// Apply link mark to all text children
+	return content.map(function(childNode) {
+		if(childNode.type === "text") {
+			var marks = (childNode.marks || []).slice();
+			marks.push({ type: "link", attrs: { href: target, title: null } });
+			var result = {};
+			for(var key in childNode) {
+				if(childNode.hasOwnProperty(key)) {
+					result[key] = childNode[key];
+				}
+			}
+			result.marks = marks;
+			return result;
+		}
+		return childNode;
+	});
+}
+
+/**
+ * Build link mark for external links (`<a href="...">` elements)
+ * These come from prettylink (external), prettyextlink, or extlink rules
+ */
+function buildAnchor(context, node) {
+	var href = (node.attributes && node.attributes.href) ? node.attributes.href.value : "";
+	var content = convertNodes(context, node.children);
+	return content.map(function(childNode) {
+		if(childNode.type === "text") {
+			var marks = (childNode.marks || []).slice();
+			marks.push({ type: "link", attrs: { href: href, title: null } });
+			var result = {};
+			for(var key in childNode) {
+				if(childNode.hasOwnProperty(key)) {
+					result[key] = childNode[key];
+				}
+			}
+			result.marks = marks;
+			return result;
+		}
+		return childNode;
+	});
+}
+
+function buildCite(context, node) {
+	// cite elements inside blockquote are filtered out in buildBlockquote;
+	// if encountered standalone, convert children as inline content
+	return convertNodes(context, node.children);
+}
+
+/**
+ * Build a PM table from a wiki AST table element.
+ * Wiki AST structure: element.tag="table" > children=[tr elements]
+ */
+function buildTable(context, node) {
+	if(!node.children || node.children.length === 0) {
+		return buildOpaqueFromNode(context, node);
+	}
+	var rows = [];
+	for(var i = 0; i < node.children.length; i++) {
+		var child = node.children[i];
+		if(child.type === "element" && child.tag === "tr") {
+			var row = buildTableRow(context, child);
+			if(row) rows.push(row);
+		} else if(child.type === "element" && (child.tag === "tbody" || child.tag === "thead" || child.tag === "tfoot")) {
+			// Intermediate row container — extract tr children
+			if(child.children) {
+				for(var j = 0; j < child.children.length; j++) {
+					var grandchild = child.children[j];
+					if(grandchild.type === "element" && grandchild.tag === "tr") {
+						var row2 = buildTableRow(context, grandchild);
+						if(row2) rows.push(row2);
+					}
+				}
+			}
+		}
+	}
+	if(rows.length === 0) {
+		return buildOpaqueFromNode(context, node);
+	}
+	return {
+		type: "table",
+		content: rows
+	};
+}
+
+function buildTableRow(context, node) {
+	if(!node.children || node.children.length === 0) return null;
+	var cells = [];
+	for(var i = 0; i < node.children.length; i++) {
+		var child = node.children[i];
+		if(child.type === "element" && (child.tag === "td" || child.tag === "th")) {
+			cells.push(buildTableCell(context, child, child.tag === "th"));
+		}
+	}
+	if(cells.length === 0) return null;
+	return {
+		type: "table_row",
+		content: cells
+	};
+}
+
+function buildTableCell(context, child, isHeader) {
+	var cellContent = convertNodes(context, child.children);
+	// Table cells need block content; wrap inline in a paragraph
+	if(!cellContent || cellContent.length === 0) {
+		cellContent = [{ type: "paragraph" }];
+	} else {
+		var needsWrap = cellContent.every(function(n) {
+			return n.type === "text" || (n.marks && n.marks.length > 0);
+		});
+		if(needsWrap) {
+			cellContent = [{ type: "paragraph", content: cellContent }];
+		}
+	}
+	var attrs = {};
+	if(child.attributes) {
+		if(child.attributes.colspan) {
+			attrs.colspan = parseInt(child.attributes.colspan.value) || 1;
+		}
+		if(child.attributes.rowspan) {
+			attrs.rowspan = parseInt(child.attributes.rowspan.value) || 1;
+		}
+	}
+	return {
+		type: isHeader ? "table_header" : "table_cell",
+		attrs: attrs,
+		content: cellContent
+	};
+}
+
 /**
  * Many node shares same type `element` in wikiAst, we need to distinguish them by tag.
  */
@@ -231,13 +390,29 @@ const elementBuilders = {
 	ol: buildOrderedList,
 	li: buildListItem,
 	strong: buildStrong,
+	b: buildStrong,
 	em: buildEm,
+	i: buildEm,
 	code: buildCode,
 	u: buildUnderline,
 	strike: buildStrike,
+	s: buildStrike,
+	del: buildStrike,
 	sup: buildSup,
 	sub: buildSub,
-	pre: buildCodeBlock
+	pre: buildCodeBlock,
+	blockquote: buildBlockquote,
+	hr: buildHorizRule,
+	br: buildBr,
+	a: buildAnchor,
+	cite: buildCite,
+	table: buildTable,
+	tbody: function(context, node) { return buildTable(context, { children: node.children }); },
+	thead: function(context, node) { return buildTable(context, { children: node.children }); },
+	tfoot: function(context, node) { return buildTable(context, { children: node.children }); },
+	tr: buildTableRow,
+	td: function(context, node) { return buildTableCell(context, node, false); },
+	th: function(context, node) { return buildTableCell(context, node, true); }
 };
 
 function element(context, node) {
@@ -245,8 +420,8 @@ function element(context, node) {
 	if(builder) {
 		return builder(context, node);
 	} else {
-		console.warn("Unknown element tag: " + node.tag);
-		return [];
+		// Unknown element tag — preserve as opaque_block to avoid data loss
+		return buildOpaqueFromNode(context, node);
 	}
 }
 
@@ -282,16 +457,24 @@ function image(context, node) {
 
 /**
  * Handle transclude nodes (widgets, macros, procedures)
- * Convert them to paragraphs with the original widget syntax
+ * For macro calls (<<name>>), convert to paragraph with widget syntax.
+ * For other transclusion types ({{tiddler}}, <$transclude>), preserve as opaque_block.
  */
 function transclude(context, node) {
+	// Check if this is a macrocall (has $variable attribute with macrocallblock rule)
+	var hasVariable = node.attributes && node.attributes.$variable;
+	var isMacroCall = hasVariable && (node.rule === "macrocallblock" || node.rule === "macrocall" || node.rule === "macrodef");
+	
+	if(!isMacroCall) {
+		// For non-macro transclusions ({{tiddler}}, <$transclude>), preserve as opaque
+		return buildOpaqueFromNode(context, node);
+	}
+	
 	// Reconstruct the widget call syntax from the transclude node
 	let widgetText = "<<";
 	
 	// Get the widget/macro/procedure name
-	const widgetName = node.attributes && node.attributes.$variable 
-		? node.attributes.$variable.value 
-		: "unknown";
+	const widgetName = hasVariable ? node.attributes.$variable.value : "unknown";
 	
 	widgetText += widgetName;
 	
@@ -325,6 +508,113 @@ function transclude(context, node) {
 }
 
 /**
+ * Handle wiki link nodes (type "link", rule "prettylink")
+ * These are internal wiki links like [[text|target]]
+ */
+function link(context, node) {
+	return buildLink(context, node);
+}
+
+/**
+ * Helper: serialize a wiki AST node back to raw wikitext for preservation.
+ */
+function serializeNodeToRawText(node) {
+	try {
+		var tree = Array.isArray(node) ? node : [node];
+		return $tw.utils.serializeWikitextParseTree(tree);
+	} catch(e) {
+		return JSON.stringify(node);
+	}
+}
+
+/**
+ * Build an opaque_block from an unsupported wiki AST node.
+ * Preserves raw text so the content is not lost on round-trip.
+ */
+function buildOpaqueFromNode(context, node) {
+	var rawText = serializeNodeToRawText(node);
+	var firstLine = rawText.split("\n")[0] || rawText;
+	return {
+		type: "opaque_block",
+		attrs: {
+			rawText: rawText,
+			firstLine: firstLine
+		}
+	};
+}
+
+/**
+ * Handle pragma nodes (set, importvariables, void with rule "rules", etc.)
+ * These are \define, \procedure, \function, \widget, \import, \rules
+ * They get preserved as pragma_block atoms in ProseMirror.
+ */
+function pragmaNode(context, node) {
+	// Serialize just this pragma node (without its children, which are the rest of the document)
+	var pragmaCopy = {};
+	for(var key in node) {
+		if(node.hasOwnProperty(key) && key !== "children") {
+			pragmaCopy[key] = node[key];
+		}
+	}
+	pragmaCopy.children = [];
+	var rawText = serializeNodeToRawText(pragmaCopy);
+	var firstLine = rawText.split("\n")[0] || rawText;
+	
+	// Also convert children (the rest of the document after the pragma)
+	var childResults = convertNodes(context, node.children || []);
+	var pragmaResult = {
+		type: "pragma_block",
+		attrs: {
+			rawText: rawText,
+			firstLine: firstLine.trim()
+		}
+	};
+	return [pragmaResult].concat(childResults);
+}
+
+/**
+ * Handle entity nodes (e.g. &ndash;, &mdash;, &amp; etc.)
+ * Convert them to plain text with the decoded character.
+ */
+function entity(context, node) {
+	// Decode HTML entity to the actual character without using innerHTML
+	var entityStr = node.entity || "";
+	var entityMap = {
+		"&ndash;": "\u2013",
+		"&mdash;": "\u2014",
+		"&amp;": "&",
+		"&lt;": "<",
+		"&gt;": ">",
+		"&quot;": "\"",
+		"&apos;": "'",
+		"&nbsp;": "\u00A0",
+		"&laquo;": "\u00AB",
+		"&raquo;": "\u00BB",
+		"&hellip;": "\u2026",
+		"&copy;": "\u00A9",
+		"&reg;": "\u00AE",
+		"&trade;": "\u2122",
+		"&times;": "\u00D7",
+		"&divide;": "\u00F7"
+	};
+	var decoded = entityMap[entityStr];
+	if(decoded === undefined) {
+		// Try numeric entity: &#123; or &#x1F4A9;
+		var numMatch = entityStr.match(/^&#(x?)([0-9a-fA-F]+);$/);
+		if(numMatch) {
+			var codePoint = parseInt(numMatch[2], numMatch[1] ? 16 : 10);
+			if(codePoint > 0 && codePoint <= 0x10FFFF) {
+				decoded = String.fromCodePoint(codePoint);
+			}
+		}
+	}
+	return {
+		type: "text",
+		text: decoded !== undefined ? decoded : entityStr
+	};
+}
+
+/**
  * Key is wikiAst node type, value is node converter function.
  */
 const builders = {
@@ -332,7 +622,12 @@ const builders = {
 	text: text,
 	codeblock: codeblock,
 	image: image,
-	transclude: transclude
+	transclude: transclude,
+	link: link,
+	entity: entity,
+	set: pragmaNode,
+	importvariables: pragmaNode,
+	"void": pragmaNode
 };
 
 function wikiAstToProsemirrorAst(node, options) {
@@ -361,15 +656,11 @@ function wikiAstToProsemirrorAst(node, options) {
 		};
 	}
 	
-	// Wrap in a doc if needed
-	if(result.length > 0 && result[0].type !== "doc") {
-		return {
-			type: "doc",
-			content: result
-		};
-	}
-	
-	return result;
+	// Always wrap in a doc
+	return {
+		type: "doc",
+		content: result
+	};
 }
 
 exports.to = wikiAstToProsemirrorAst;
@@ -393,6 +684,14 @@ function convertANode(context, node) {
 		? convertedNode : [convertedNode]);
 		return arrayOfNodes;
 	}
-	console.warn("ProseMirror get Unknown node type: " + JSON.stringify(node));
-	return [];
+	// Unknown node type — preserve as opaque_block to avoid data loss
+	var rawText = serializeNodeToRawText(node);
+	var firstLine = rawText.split("\n")[0] || rawText;
+	return [{
+		type: "opaque_block",
+		attrs: {
+			rawText: rawText,
+			firstLine: firstLine
+		}
+	}];
 }

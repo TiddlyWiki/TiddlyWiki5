@@ -13,6 +13,11 @@ const prefix = "ProseMirror-prompt";
 function openPrompt(options) {
 	const wrapper = document.body.appendChild(document.createElement("div"));
 	wrapper.className = prefix;
+	wrapper.setAttribute("role", "dialog");
+	wrapper.setAttribute("aria-modal", "true");
+	if(options.title) {
+		wrapper.setAttribute("aria-label", options.title);
+	}
 
 	const mouseOutside = e => {
 		if(!wrapper.contains(e.target)) {
@@ -37,11 +42,11 @@ function openPrompt(options) {
 	const submitButton = document.createElement("button");
 	submitButton.type = "submit";
 	submitButton.className = prefix + "-submit";
-	submitButton.textContent = "OK";
+	submitButton.textContent = $tw.wiki.getTiddlerText("$:/language/Buttons/Ok/Caption", "OK");
 	const cancelButton = document.createElement("button");
 	cancelButton.type = "button";
 	cancelButton.className = prefix + "-cancel";
-	cancelButton.textContent = "Cancel";
+	cancelButton.textContent = $tw.wiki.getTiddlerText("$:/language/Buttons/Cancel/Caption", "Cancel");
 	cancelButton.addEventListener("click", close);
 
 	const form = wrapper.appendChild(document.createElement("form"));
@@ -75,18 +80,26 @@ function openPrompt(options) {
 	});
 
 	form.addEventListener("keydown", e => {
-		if(e.keyCode == 27) {
+		if(e.key === "Escape") {
 			e.preventDefault();
 			close();
-		} else if(e.keyCode == 13 && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
+		} else if(e.key === "Enter" && !(e.ctrlKey || e.metaKey || e.shiftKey)) {
 			e.preventDefault();
 			submit();
-		} else if(e.keyCode == 9) {
-			window.setTimeout(() => {
-				if(!wrapper.contains(document.activeElement)) {
-					close();
+		} else if(e.key === "Tab") {
+			// Focus trap: keep Tab within the dialog
+			const focusable = wrapper.querySelectorAll("input, select, textarea, button:not([disabled])");
+			if(focusable.length) {
+				const first = focusable[0];
+				const last = focusable[focusable.length - 1];
+				if(e.shiftKey && document.activeElement === first) {
+					e.preventDefault();
+					last.focus();
+				} else if(!e.shiftKey && document.activeElement === last) {
+					e.preventDefault();
+					first.focus();
 				}
-			}, 500);
+			}
 		}
 	});
 
@@ -137,7 +150,7 @@ Field.prototype.validateType = function(value) {
 
 Field.prototype.validate = function(value) {
 	if(!value && this.options.required) {
-		return "Required field";
+		return $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Prompt/RequiredField", "Required field");
 	}
 	return this.validateType(value) || (this.options.validate ? this.options.validate(value) : null);
 };

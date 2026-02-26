@@ -61,6 +61,9 @@ EditWidget.prototype.getEditorType = function() {
 	}
 	type = type || "text/vnd.tiddlywiki";
 	var editorType = this.wiki.getTiddlerText(EDITOR_MAPPING_PREFIX + type);
+	if(editorType) {
+		editorType = editorType.trim();
+	}
 	if(!editorType) {
 		var typeInfo = $tw.config.contentTypeInfo[type];
 		if(typeInfo && typeInfo.encoding === "base64") {

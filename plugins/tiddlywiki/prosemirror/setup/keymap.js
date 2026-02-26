@@ -14,7 +14,11 @@ const prosemirrorInputrules = require("prosemirror-inputrules");
 const prosemirrorState = require("prosemirror-state");
 const prosemirrorModel = require("prosemirror-model");
 
-const mac = typeof navigator != "undefined" ? /Mac|iP(hone|[oa]d)/.test(navigator.platform) : false;
+const mac = typeof navigator != "undefined"
+	? (navigator.userAgentData
+		? /mac/i.test(navigator.userAgentData.platform)
+		: /Mac|iP(hone|[oa]d)/.test(navigator.platform))
+	: false;
 
 /**
  * Get keyboard shortcut from config, with fallback to default

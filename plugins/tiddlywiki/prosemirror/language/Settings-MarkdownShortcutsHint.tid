@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/prosemirror/language/Settings/MarkdownShortcutsHint
+
+Use Markdown syntax like **bold**, *italic*, ~~strike~~, `code`, # Heading, --- for horizontal rule and ``` for code blocks. Output is always wikitext.

@@ -145,9 +145,13 @@ function createSlashMenuPlugin(menuElements, options) {
 		return undefined;
 	}
 
+	function escapeRegExp(string) {
+		return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	}
+
 	function getFilteredItems(state, input) {
 		const allElements = flattenMenuElementsWithGroup(state.elements);
-		const regExp = new RegExp(input.toLowerCase().replace(/\s/g, "\\s"));
+		const regExp = new RegExp(escapeRegExp(input.toLowerCase()).replace(/\s/g, "\\s"));
 		const result = [];
 		for(let i = 0; i < allElements.length; i++) {
 			const element = allElements[i];

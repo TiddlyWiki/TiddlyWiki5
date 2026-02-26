@@ -71,14 +71,24 @@ function paragraph(builder, node) {
 // Map ProseMirror mark types to HTML tags
 const markTypeMap = {
 	strong: "strong",
-	em: "em"
+	em: "em",
+	code: "code",
+	underline: "u",
+	strike: "s",
+	superscript: "sup",
+	subscript: "sub"
 };
 const markRuleMap = {
 	em: "italic",
-	strong: "bold"
+	strong: "bold",
+	code: "codeinline",
+	underline: "underscore",
+	strike: "strikethrough",
+	superscript: "superscript",
+	subscript: "subscript"
 };
 // Define mark priority (inner to outer)
-const markPriority = ["code", "strong", "bold", "em", "italic", "underline", "strike", "strikethrough", "superscript", "subscript"];
+const markPriority = ["code", "strong", "bold", "em", "italic", "underline", "strike", "strikethrough", "superscript", "subscript", "link"];
 function text(builder, node) {
 	if(!node.text) {
 		return {
@@ -103,8 +113,52 @@ function text(builder, node) {
 		
 		// Apply marks from inner to outer
 		return sortedMarks.reduce((wrappedNode, mark) => {
-			const tag = markTypeMap[mark.type];
-			const rule = markRuleMap[mark.type];
+			// Special handling for link mark
+			if(mark.type === "link") {
+				var href = mark.attrs && mark.attrs.href || "";
+				var isExternal = /^(?:https?|ftp|mailto):/i.test(href);
+				var displayText = wrappedNode.text || "";
+				if(isExternal && displayText && displayText !== href) {
+					// External link with custom display text: use prettylink [[text|url]]
+					return {
+						type: "link",
+						rule: "prettylink",
+						attributes: {
+							to: { type: "string", value: href }
+						},
+						children: [wrappedNode]
+					};
+				} else if(isExternal) {
+					// External link with URL as display text: use prettyextlink [ext[url]]
+					return {
+						type: "element",
+						tag: "a",
+						rule: "prettyextlink",
+						attributes: {
+							class: { type: "string", value: "tc-tiddlylink-external" },
+							href: { type: "string", value: href },
+							target: { type: "string", value: "_blank" },
+							rel: { type: "string", value: "noopener noreferrer" }
+						},
+						children: [wrappedNode]
+					};
+				} else {
+					return {
+						type: "link",
+						rule: "prettylink",
+						attributes: {
+							to: { type: "string", value: href }
+						},
+						children: [wrappedNode]
+					};
+				}
+			}
+			var tag = markTypeMap[mark.type];
+			var rule = markRuleMap[mark.type];
+			if(!tag) {
+				// Unknown mark type — skip it rather than produce invalid AST
+				return wrappedNode;
+			}
 			return {
 				type: "element",
 				tag: tag,
@@ -310,6 +364,168 @@ function image(builder, node) {
 	};
 }
 
+function blockquote(builder, node) {
+	return {
+		type: "element",
+		tag: "blockquote",
+		rule: "quoteblock",
+		attributes: {
+			"class": { type: "string", value: "tc-quote" }
+		},
+		children: convertNodes(builder, node.content)
+	};
+}
+
+function horizontal_rule(builder, node) {
+	return {
+		type: "element",
+		tag: "hr",
+		rule: "horizrule"
+	};
+}
+
+function hard_break(builder, node) {
+	return {
+		type: "element",
+		tag: "br"
+	};
+}
+
+/**
+ * Pragma block — preserves raw text for \define, \procedure, \function, \widget, \import, \rules etc.
+ * Restored back to wiki AST by re-parsing the raw text.
+ */
+function pragma_block(builder, node) {
+	var rawText = (node.attrs && node.attrs.rawText) || "";
+	var parsedNodes = [];
+	try {
+		var parseResult = $tw.wiki.parseText(null, rawText);
+		if(parseResult && parseResult.tree) {
+			parsedNodes = parseResult.tree;
+		}
+	} catch(e) {
+		// Fallback: return as raw text paragraph
+		return {
+			type: "element",
+			tag: "p",
+			children: [{ type: "text", text: rawText }]
+		};
+	}
+	// Return only the top-level pragma nodes (not their children which are the rest of the document)
+	if(parsedNodes.length > 0) {
+		// Strip children from pragma nodes to avoid duplicating subsequent content
+		return parsedNodes.map(function(pragmaNode) {
+			var result = {};
+			for(var key in pragmaNode) {
+				if(pragmaNode.hasOwnProperty(key) && key !== "children") {
+					result[key] = pragmaNode[key];
+				}
+			}
+			result.children = [];
+			return result;
+		});
+	}
+	return { type: "text", text: rawText };
+}
+
+/**
+ * Opaque block — preserves raw wikitext for unsupported constructs (typed blocks, etc.).
+ * Re-parsed to restore the original wiki AST.
+ */
+function opaque_block(builder, node) {
+	var rawText = (node.attrs && node.attrs.rawText) || "";
+	try {
+		var parseResult = $tw.wiki.parseText(null, rawText);
+		if(parseResult && parseResult.tree) {
+			return parseResult.tree;
+		}
+	} catch(e) {
+		// ignore
+	}
+	return { type: "text", text: rawText };
+}
+
+/**
+ * Table → wiki AST (element tag="table" with rule="table").
+ * TW serializer expects: table > [tbody] > [tr] > [td|th]
+ * PM table structure:   table > [table_row] > [table_cell|table_header]
+ */
+function table_node(builder, node) {
+	var rows = [];
+	if(node.content) {
+		for(var i = 0; i < node.content.length; i++) {
+			var rowNode = node.content[i];
+			if(rowNode.type === "table_row") {
+				rows.push(table_row(builder, rowNode));
+			}
+		}
+	}
+	// Wrap rows in a tbody container (as TW parser/serializer expects)
+	var tbody = {
+		type: "element",
+		tag: "tbody",
+		children: rows
+	};
+	return {
+		type: "element",
+		tag: "table",
+		rule: "table",
+		children: [tbody]
+	};
+}
+
+function table_row(builder, node) {
+	var cells = [];
+	if(node.content) {
+		for(var i = 0; i < node.content.length; i++) {
+			var cellNode = node.content[i];
+			if(cellNode.type === "table_header" || cellNode.type === "table_cell") {
+				cells.push(table_cell_or_header(builder, cellNode));
+			}
+		}
+	}
+	return {
+		type: "element",
+		tag: "tr",
+		children: cells
+	};
+}
+
+function table_cell_or_header(builder, node) {
+	var isHeader = (node.type === "table_header");
+	// Flatten cell content: TW table cells contain inline content, not blocks.
+	// PM table cells contain block content (paragraphs).
+	// We need to extract the inline children from the paragraph wrappers.
+	var inlineContent = [];
+	if(node.content) {
+		for(var i = 0; i < node.content.length; i++) {
+			var child = node.content[i];
+			if(child.type === "paragraph" && child.content) {
+				// Extract inline nodes from the paragraph
+				var inlines = convertNodes(builder, child.content);
+				if(Array.isArray(inlines)) {
+					inlineContent = inlineContent.concat(inlines);
+				} else {
+					inlineContent.push(inlines);
+				}
+			} else {
+				// Non-paragraph block in a cell — convert normally
+				var converted = convertANode(builder, child);
+				if(Array.isArray(converted)) {
+					inlineContent = inlineContent.concat(converted);
+				} else if(converted) {
+					inlineContent.push(converted);
+				}
+			}
+		}
+	}
+	return {
+		type: "element",
+		tag: isHeader ? "th" : "td",
+		children: inlineContent
+	};
+}
+
 /**
  * Key is `node.type`, value is node converter function.
  */
@@ -320,7 +536,16 @@ const builders = {
 	heading: heading,
 	list: list,
 	code_block: code_block,
-	image: image
+	image: image,
+	blockquote: blockquote,
+	horizontal_rule: horizontal_rule,
+	hard_break: hard_break,
+	pragma_block: pragma_block,
+	opaque_block: opaque_block,
+	table: table_node,
+	table_row: table_row,
+	table_header: table_cell_or_header,
+	table_cell: table_cell_or_header
 };
 
 function wikiAstFromProseMirrorAst(input) {
@@ -373,6 +598,12 @@ function convertANode(builders, node, context) {
 			return result;
 		});
 	}
-	console.warn("WikiAst get Unknown node type: " + JSON.stringify(node));
+	// Unknown PM node type — try to extract text content to avoid silent data loss
+	if(node.content && node.content.length > 0) {
+		return convertNodes(builders, node.content);
+	}
+	if(node.text) {
+		return [{ type: "text", text: node.text }];
+	}
 	return [];
 }
