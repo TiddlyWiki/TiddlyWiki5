@@ -221,7 +221,7 @@ exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 		orderedAttributes: []
 	};
 	// Define our regexps
-	var reVarName = /([^\s>"'=:]+)/y;
+	var reVarName = /([^\s<>"'=:]+)/y;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a double opening angle bracket
@@ -233,10 +233,6 @@ exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 	// Get the variable name for the macro
 	token = $tw.utils.parseTokenRegExp(source,pos,reVarName);
 	if(!token) {
-		return null;
-	}
-	// If the next character is also < then this is a blockquote, not a macro invocation
-	if(source.charAt(token.end) === "<") {
 		return null;
 	}
 	$tw.utils.addAttributeToParseTreeNode(node,"$variable",token.match[1]);
