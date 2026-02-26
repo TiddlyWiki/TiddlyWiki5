@@ -10,66 +10,187 @@ Widget/Procedure block parser and recognizer for ProseMirror
 "use strict";
 
 /**
- * Parse a widget invocation string
+ * Parse a widget invocation string using character scanning.
+ * Handles << >> delimiters correctly even when >> appears inside quoted values.
  * @param {string} text - The text to parse, e.g. `<<list-links "[tag[task]sort[title]]">>`
  * @returns {object|null} - Parsed widget object or null if not a valid widget
  */
 function parseWidget(text) {
-	// Match pattern: <<widgetName attributes>>
-	const widgetPattern = /^<<\s*([a-zA-Z_][a-zA-Z0-9_-]*)\s*(.*)>>$/;
-	const match = text.trim().match(widgetPattern);
-	
-	if(!match) {
+	const trimmed = (text || "").trim();
+	if(!trimmed.startsWith("<<") || trimmed.length < 5) {
 		return null;
 	}
-	
-	const widgetName = match[1];
-	const attributesStr = match[2].trim();
-	
-	// For now, we'll do simple parsing of attributes
-	// We'll handle the specific case: <<list-links "[tag[task]sort[title]]">>
+	// Scan past the opening <<
+	let pos = 2;
+	// Skip whitespace
+	while(pos < trimmed.length && /\s/.test(trimmed[pos])) pos++;
+	// Read widget/macro name: [a-zA-Z_][a-zA-Z0-9_-]*
+	const nameStart = pos;
+	if(pos < trimmed.length && /[a-zA-Z_]/.test(trimmed[pos])) {
+		pos++;
+		while(pos < trimmed.length && /[a-zA-Z0-9_-]/.test(trimmed[pos])) pos++;
+	}
+	const widgetName = trimmed.substring(nameStart, pos);
+	if(!widgetName) return null;
+	// Skip whitespace
+	while(pos < trimmed.length && /\s/.test(trimmed[pos])) pos++;
+	// Now scan for the closing >> that is NOT inside quotes.
+	// Collect the attribute portion.
+	const attrStart = pos;
+	const closingPos = scanForClosingBrackets(trimmed, pos);
+	if(closingPos === -1) return null;
+	const attributesStr = trimmed.substring(attrStart, closingPos).trim();
 	const attributes = parseAttributes(attributesStr);
-	
 	return {
 		type: "widget",
 		widgetName: widgetName,
 		attributes: attributes,
-		rawText: text.trim()
+		rawText: trimmed
 	};
 }
 
 /**
- * Parse widget attributes
- * For now, this is a simple implementation that handles quoted strings and identifiers
+ * Scan for the closing >> that is not inside a quoted string.
+ * Respects double-quotes, single-quotes, and triple-double-quote delimiters.
+ * @param {string} str - Full macro string (from <<...)
+ * @param {number} start - Position to begin scanning (after the name)
+ * @returns {number} - Position of the first > in >>, or -1 if not found
+ */
+function scanForClosingBrackets(str, start) {
+	let pos = start;
+	while(pos < str.length - 1) {
+		const ch = str[pos];
+		// Triple-double-quote delimiter: """..."""
+		if(ch === '"' && str[pos + 1] === '"' && str[pos + 2] === '"') {
+			pos += 3;
+			while(pos < str.length - 2) {
+				if(str[pos] === '"' && str[pos + 1] === '"' && str[pos + 2] === '"') {
+					pos += 3;
+					break;
+				}
+				pos++;
+			}
+			continue;
+		}
+		// Double-quote string
+		if(ch === '"') {
+			pos++;
+			while(pos < str.length && str[pos] !== '"') {
+				if(str[pos] === '\\') pos++; // skip escaped char
+				pos++;
+			}
+			pos++; // skip closing quote
+			continue;
+		}
+		// Single-quote string
+		if(ch === "'") {
+			pos++;
+			while(pos < str.length && str[pos] !== "'") {
+				if(str[pos] === '\\') pos++;
+				pos++;
+			}
+			pos++;
+			continue;
+		}
+		// Check for >>
+		if(ch === '>' && str[pos + 1] === '>') {
+			return pos;
+		}
+		pos++;
+	}
+	return -1;
+}
+
+/**
+ * Parse widget attributes using character scanning.
+ * Handles TiddlyWiki-style key:"value", key='value', key=value, and positional args.
  * @param {string} str - The attributes string
  * @returns {object} - Parsed attributes as key-value pairs
  */
 function parseAttributes(str) {
 	const attributes = {};
-	
-	if(!str) {
-		return attributes;
-	}
-	
-	// Try to match patterns like: "value" or key="value" or key=value
-	const attrPattern = /(?:([a-zA-Z_][a-zA-Z0-9_-]*)=)?(?:"([^"]*)"|'([^']*)'|([^\s]+))/g;
-	let match;
+	if(!str) return attributes;
+	let pos = 0;
 	let paramIndex = 0;
-	
-	while((match = attrPattern.exec(str)) !== null) {
-		const key = match[1];
-		const value = match[2] || match[3] || match[4];
-		
-		if(key) {
-			attributes[key] = value;
+	while(pos < str.length) {
+		// Skip whitespace
+		while(pos < str.length && /\s/.test(str[pos])) pos++;
+		if(pos >= str.length) break;
+		// Try to read key=value or key:"value" or key:'value'
+		const keyMatch = str.substring(pos).match(/^([a-zA-Z_$][a-zA-Z0-9_$-]*)(?:[:=])/);
+		if(keyMatch) {
+			const key = keyMatch[1];
+			pos += keyMatch[0].length;
+			// Read the value
+			const valueResult = readValue(str, pos);
+			attributes[key] = valueResult.value;
+			pos = valueResult.end;
 		} else {
 			// Positional argument
-			attributes[`param${paramIndex}`] = value;
-			paramIndex++;
+			const valueResult = readValue(str, pos);
+			if(valueResult.value !== null && valueResult.end > pos) {
+				attributes["param" + paramIndex] = valueResult.value;
+				paramIndex++;
+				pos = valueResult.end;
+			} else {
+				// Skip a character to avoid infinite loop
+				pos++;
+			}
 		}
 	}
-	
 	return attributes;
+}
+
+/**
+ * Read a value starting at pos. Value can be:
+ * - Triple-double-quoted: """..."""
+ * - Double-quoted: "..."
+ * - Single-quoted: '...'
+ * - [[...]] (double bracket)
+ * - Unquoted: sequence of non-whitespace
+ * @returns {{value: string, end: number}}
+ */
+function readValue(str, pos) {
+	if(pos >= str.length) return { value: null, end: pos };
+	// Triple-double-quote
+	if(str[pos] === '"' && str[pos + 1] === '"' && str[pos + 2] === '"') {
+		const start = pos + 3;
+		let end = str.indexOf('"""', start);
+		if(end === -1) end = str.length;
+		return { value: str.substring(start, end), end: end + 3 };
+	}
+	// Double-quoted
+	if(str[pos] === '"') {
+		const start = pos + 1;
+		let end = start;
+		while(end < str.length && str[end] !== '"') {
+			if(str[end] === '\\') end++;
+			end++;
+		}
+		return { value: str.substring(start, end), end: end + 1 };
+	}
+	// Single-quoted
+	if(str[pos] === "'") {
+		const start = pos + 1;
+		let end = start;
+		while(end < str.length && str[end] !== "'") {
+			if(str[end] === '\\') end++;
+			end++;
+		}
+		return { value: str.substring(start, end), end: end + 1 };
+	}
+	// [[double bracket]]
+	if(str[pos] === '[' && str[pos + 1] === '[') {
+		const start = pos + 2;
+		const end = str.indexOf(']]', start);
+		if(end !== -1) {
+			return { value: str.substring(start, end), end: end + 2 };
+		}
+	}
+	// Unquoted: read until whitespace
+	const start = pos;
+	while(pos < str.length && !/\s/.test(str[pos])) pos++;
+	return { value: str.substring(start, pos), end: pos };
 }
 
 /**

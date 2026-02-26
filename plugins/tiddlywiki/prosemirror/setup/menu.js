@@ -42,8 +42,8 @@ function canInsert(state, nodeType) {
 
 function insertImageItem(nodeType) {
 	return new MenuItem({
-		title: "Insert image",
-		label: "Image",
+		title: $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Menu/InsertImage", "Insert image"),
+		label: $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/ImagePicker/Title", "Image"),
 		enable: state => canInsert(state, nodeType),
 		run: (state, _, view) => {
 			const from = state.selection.from, to = state.selection.to;
@@ -52,7 +52,7 @@ function insertImageItem(nodeType) {
 				attrs = state.selection.node.attrs;
 			}
 			openPrompt({
-				title: "Insert image",
+				title: $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Menu/InsertImage", "Insert image"),
 				fields: {
 					src: new TextField({label: "Location", required: true, value: attrs && attrs.src}),
 					title: new TextField({label: "Title", value: attrs && attrs.title}),
@@ -103,7 +103,7 @@ function markItem(markType, options) {
 
 function linkItem(markType) {
 	return new MenuItem({
-		title: "Add or remove link",
+		title: $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Menu/AddOrRemoveLink", "Add or remove link"),
 		icon: icons.link,
 		active: state => markActive(state, markType),
 		enable: state => !state.selection.empty,
@@ -113,9 +113,9 @@ function linkItem(markType) {
 				return true;
 			}
 			openPrompt({
-				title: "Create a link",
+				title: $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Menu/CreateLink", "Create a link"),
 				fields: {
-					href: new TextField({label: "Link target", required: true}),
+					href: new TextField({label: $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Menu/LinkTarget", "Link target"), required: true}),
 					title: new TextField({label: "Title"})
 				},
 				callback: attrs => {
@@ -178,7 +178,7 @@ function buildMenuItems(schema) {
 	}
 	node = schema.nodes.heading;
 	if(node) {
-		for(let i = 1; i <= 10; i++) {
+		for(let i = 1; i <= 6; i++) {
 			r["makeHead" + i] = blockTypeItem(node, {title: "Change to heading " + i, label: "Level " + i, attrs: {level: i}});
 		}
 	}

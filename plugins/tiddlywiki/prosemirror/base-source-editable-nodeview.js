@@ -33,7 +33,16 @@ class BaseSourceEditableNodeView {
 	}
 
 	/**
-	 * Get SVG icon from tiddler
+	 * Get a translatable string from a language tiddler.
+	 * Falls back to the provided default if the tiddler is missing.
+	 */
+	getLanguageString(suffix, fallback) {
+		return $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/" + suffix, fallback);
+	}
+
+	/**
+	 * Get SVG icon from tiddler.
+	 * Returns a sanitized SVG DOM element (not a raw string) to avoid innerHTML XSS.
 	 */
 	getSvgIcon(tiddlerTitle, size = "16pt") {
 		const iconTiddler = $tw.wiki.getTiddler(tiddlerTitle);
@@ -41,10 +50,35 @@ class BaseSourceEditableNodeView {
 			const iconText = iconTiddler.fields.text;
 			const svgMatch = iconText.match(/<svg[\s\S]*<\/svg>/);
 			if(svgMatch) {
-				return svgMatch[0].replace(/<<size>>/g, size);
+				var svgString = svgMatch[0].replace(/<<size>>/g, size);
+				// Parse via DOMParser to get a safe SVG element (no script execution)
+				try {
+					var parser = new DOMParser();
+					var doc = parser.parseFromString(svgString, "image/svg+xml");
+					var svgEl = doc.querySelector("svg");
+					if(svgEl) {
+						return svgEl;
+					}
+				} catch(e) {
+					// Fallback: return null
+				}
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Set icon on a button element safely (avoids innerHTML).
+	 */
+	setButtonIcon(button, tiddlerTitle, fallbackEmoji) {
+		var svgEl = this.getSvgIcon(tiddlerTitle);
+		if(svgEl) {
+			// Clear existing content and append the parsed SVG node
+			while(button.firstChild) { button.removeChild(button.firstChild); }
+			button.appendChild(document.importNode(svgEl, true));
+		} else {
+			button.textContent = fallbackEmoji || "•";
+		}
 	}
 
 	/**
@@ -91,16 +125,11 @@ class BaseSourceEditableNodeView {
 		for(let i = 0; i < deleteClasses.length; i++) {
 			deleteBtn.classList.add(deleteClasses[i]);
 		}
-		deleteBtn.title = "Delete";
+		deleteBtn.title = this.getLanguageString("Buttons/Delete", "Delete");
 		deleteBtn.type = "button";
 		deleteBtn.style.display = "none";
 
-		const svg = this.getSvgIcon("$:/core/images/delete-button");
-		if(svg) {
-			deleteBtn.innerHTML = svg;
-		} else {
-			deleteBtn.innerHTML = "🗑";
-		}
+		this.setButtonIcon(deleteBtn, "$:/core/images/delete-button", "🗑");
 
 		const self = this;
 		deleteBtn.addEventListener("click", e => {
@@ -130,18 +159,13 @@ class BaseSourceEditableNodeView {
 		for(let i = 0; i < cancelClasses.length; i++) {
 			cancelBtn.classList.add(cancelClasses[i]);
 		}
-		cancelBtn.title = "Cancel";
+		cancelBtn.title = this.getLanguageString("Buttons/Cancel", "Cancel");
 		cancelBtn.type = "button";
 		cancelBtn.style.display = "none"; // Hidden by default, shown in edit mode
 		cancelBtn.contentEditable = "false";
 
 		// Get SVG icon
-		const svg = this.getSvgIcon("$:/core/images/cancel-button");
-		if(svg) {
-			cancelBtn.innerHTML = svg;
-		} else {
-			cancelBtn.innerHTML = "✖";
-		}
+		this.setButtonIcon(cancelBtn, "$:/core/images/cancel-button", "✖");
 
 		const self = this;
 		cancelBtn.addEventListener("click", function(e) {
@@ -165,15 +189,10 @@ class BaseSourceEditableNodeView {
 		for(let i = 0; i < editClasses.length; i++) {
 			editBtn.classList.add(editClasses[i]);
 		}
-		editBtn.title = "Edit";
+		editBtn.title = this.getLanguageString("Buttons/Edit", "Edit");
 		editBtn.type = "button";
 
-		const svg = this.getSvgIcon("$:/core/images/edit-button");
-		if(svg) {
-			editBtn.innerHTML = svg;
-		} else {
-			editBtn.innerHTML = "✏️";
-		}
+		this.setButtonIcon(editBtn, "$:/core/images/edit-button", "✏️");
 
 		const self = this;
 		editBtn.addEventListener("click", e => {
@@ -215,11 +234,8 @@ class BaseSourceEditableNodeView {
 		
 		if(this.isEditMode) {
 			// Switch to save icon
-			const svg = this.getSvgIcon("$:/core/images/done-button");
-			if(svg) {
-				this.editBtn.innerHTML = svg;
-			}
-			this.editBtn.title = "Save changes";
+			this.setButtonIcon(this.editBtn, "$:/core/images/done-button", "✔");
+					this.editBtn.title = this.getLanguageString("Buttons/SaveChanges", "Save changes");
 			const saveClasses = this.getSaveButtonClass().split(" ");
 			for(let i = 0; i < saveClasses.length; i++) {
 				this.editBtn.classList.add(saveClasses[i]);
@@ -245,11 +261,8 @@ class BaseSourceEditableNodeView {
 			this.renderEditMode();
 		} else {
 			// Switch back to edit icon
-			const svg = this.getSvgIcon("$:/core/images/edit-button");
-			if(svg) {
-				this.editBtn.innerHTML = svg;
-			}
-			this.editBtn.title = "Edit";
+			this.setButtonIcon(this.editBtn, "$:/core/images/edit-button", "✏️");
+			this.editBtn.title = this.getLanguageString("Buttons/Edit", "Edit");
 			const editClasses = this.getEditButtonClass().split(" ");
 			for(let i = 0; i < editClasses.length; i++) {
 				this.editBtn.classList.add(editClasses[i]);

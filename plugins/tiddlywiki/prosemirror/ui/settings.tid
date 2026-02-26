@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/prosemirror/settings
+tags: $:/tags/ControlPanel/Settings
+caption: ProseMirror
+
+\whitespace trim
+<$checkbox tiddler="$:/config/prosemirror/markdown-shortcuts" field="text" checked="yes" unchecked="no" default="no">
+  <$text text={{$:/plugins/tiddlywiki/prosemirror/language/Settings/MarkdownShortcuts}}/>
+</$checkbox>
+<div class="tc-control-panel-info">
+  <$text text={{$:/plugins/tiddlywiki/prosemirror/language/Settings/MarkdownShortcutsHint}}/>
+</div>

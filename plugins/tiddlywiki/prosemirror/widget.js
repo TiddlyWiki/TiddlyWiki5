@@ -11,20 +11,15 @@ const Widget = require("$:/core/modules/widgets/widget.js").widget;
 const debounce = require("$:/core/modules/utils/debounce.js").debounce;
 const wikiAstFromProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js").from;
 const wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js").to;
+const buildSchema = require("$:/plugins/tiddlywiki/prosemirror/engine.js").buildSchema;
 
 const EditorState = require("prosemirror-state").EditorState;
 const EditorView = require("prosemirror-view").EditorView;
-const Schema = require("prosemirror-model").Schema;
-const DOMParser = require("prosemirror-model").DOMParser;
 const TextSelection = require("prosemirror-state").TextSelection;
-const basicSchema = require("prosemirror-schema-basic").schema;
+const keymap = require("prosemirror-keymap").keymap;
 const createListPlugins = require("prosemirror-flat-list").createListPlugins;
-const createListSpec = require("prosemirror-flat-list").createListSpec;
 const listKeymap = require("prosemirror-flat-list").listKeymap;
 const exampleSetup = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js").exampleSetup;
-const keymap = require("prosemirror-keymap").keymap;
-const inputRules = require("prosemirror-inputrules").inputRules;
-const buildInputRules = require("$:/plugins/tiddlywiki/prosemirror/setup/inputrules.js").buildInputRules;
 const placeholderPlugin = require("$:/plugins/tiddlywiki/prosemirror/setup/placeholder.js").placeholderPlugin;
 const SlashMenuPlugin = require("$:/plugins/tiddlywiki/prosemirror/slash-menu.js").SlashMenuPlugin;
 const SlashMenuUI = require("$:/plugins/tiddlywiki/prosemirror/slash-menu-ui.js").SlashMenuUI;
@@ -34,6 +29,7 @@ const createWidgetBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirr
 const createImageBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/image-block/plugin.js").createImageBlockPlugin;
 const createImageNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/image/plugin.js").createImageNodeViewPlugin;
 const computeImageSrc = require("$:/plugins/tiddlywiki/prosemirror/image/utils.js").computeImageSrc;
+const createPragmaBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/pragma-block/nodeview.js").createPragmaBlockNodeViewPlugin;
 
 const NodeSelection = require("prosemirror-state").NodeSelection;
 
@@ -43,6 +39,8 @@ const ProsemirrorWidget = function(parseTreeNode,options) {
 	this.saveLock = false;
 	this.imagePickerOpen = false;
 	this.imagePickerInitialized = false;
+	// Each instance gets its own debounced save to avoid shared timer bugs
+	this.debouncedSaveEditorContent = debounce(this.saveEditorContent.bind(this), 300);
 };
 
 /*
@@ -60,8 +58,15 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 
 	const tiddler = this.getAttribute("tiddler");
 	const initialText = this.wiki.getTiddlerText(tiddler, "");
-	const initialWikiAst = $tw.wiki.parseText(null, initialText).tree;
-	const doc = wikiAstToProseMirrorAst(initialWikiAst);
+	var initialWikiAst, doc;
+	try {
+		initialWikiAst = $tw.wiki.parseText(null, initialText).tree;
+		doc = wikiAstToProseMirrorAst(initialWikiAst);
+	} catch(e) {
+		console.error("[ProseMirror] Error parsing initial content:", e);
+		// Fallback: empty document
+		doc = { type: "doc", content: [{ type: "paragraph" }] };
+	}
 
 	const outerWrap = $tw.utils.domMaker("div", {
 		class: "tc-prosemirror-wrapper"
@@ -90,7 +95,7 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	});
 	const imagePickerClose = $tw.utils.domMaker("button", {
 		class: "tc-prosemirror-imagepicker-close",
-		text: "关闭"
+		text: this.wiki.getTiddlerText("$:/language/Buttons/Close/Caption", "Close")
 	});
 	imagePickerClose.setAttribute("type", "button");
 	imagePickerClose.addEventListener("click", e => {
@@ -111,58 +116,8 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	// Hide picker initially
 	imagePickerWrap.style.display = "none";
 	
-	const baseNodes = basicSchema.spec.nodes.append({ list: createListSpec() });
-	const baseImageSpec = basicSchema.spec.nodes.get("image");
-	const nodes = baseNodes.update("image", Object.assign({}, baseImageSpec, {
-		attrs: Object.assign({}, baseImageSpec && baseImageSpec.attrs, {
-			width: { default: null },
-			height: { default: null },
-			twSource: { default: null },
-			twKind: { default: "shortcut" },
-			twTooltip: { default: null }
-		}),
-		toDOM: node => {
-			const attrs = {
-				src: node.attrs.src,
-				alt: node.attrs.alt,
-				title: node.attrs.title
-			};
-			if(node.attrs.width) {
-				attrs.width = node.attrs.width;
-			}
-			if(node.attrs.height) {
-				attrs.height = node.attrs.height;
-			}
-			if(node.attrs.twSource) {
-				attrs["data-tw-source"] = node.attrs.twSource;
-			}
-			if(node.attrs.twKind) {
-				attrs["data-tw-kind"] = node.attrs.twKind;
-			}
-			if(node.attrs.twTooltip) {
-				attrs["data-tw-tooltip"] = node.attrs.twTooltip;
-			}
-			return ["img", attrs];
-		},
-		parseDOM: [{
-			tag: "img[src]",
-			getAttrs: dom => ({
-				src: dom.getAttribute("src"),
-				title: dom.getAttribute("title"),
-				alt: dom.getAttribute("alt"),
-				width: dom.getAttribute("width") || null,
-				height: dom.getAttribute("height") || null,
-				twSource: dom.getAttribute("data-tw-source") || null,
-				twKind: dom.getAttribute("data-tw-kind") || "shortcut",
-				twTooltip: dom.getAttribute("data-tw-tooltip") || null
-			})
-		}]
-	}));
-
-	const schema = new Schema({
-		nodes: nodes,
-		marks: basicSchema.spec.marks
-	});
+	// Build schema (shared with engine.js)
+	const schema = buildSchema();
 	
 	const listKeymapPlugin = keymap(listKeymap);
 	const listPlugins = createListPlugins({ schema: schema });
@@ -180,12 +135,13 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 				createImageBlockPlugin(),
 				createImageNodeViewPlugin(this),
 				listKeymapPlugin,
-				buildInputRules(schema),
+
 				placeholderPlugin({
 					text: this.wiki.getTiddlerText("$:/config/prosemirror/placeholder", "Type / for commands")
 				}),
 				createWidgetBlockPlugin(),
-				createWidgetBlockNodeViewPlugin(this)
+				createWidgetBlockNodeViewPlugin(this),
+				createPragmaBlockNodeViewPlugin(this)
 			]
 			.concat(listPlugins)
 			.concat(exampleSetup({ schema: schema })),
@@ -196,7 +152,14 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 			if(this.imagePickerOpen) {
 				this.updateImagePickerFromSelection();
 			}
-			this.debouncedSaveEditorContent();
+			// Notify slash menu UI of state change (replaces always-on rAF polling)
+			if(this.slashMenuUI) {
+				this.slashMenuUI.checkState();
+			}
+			// Only save when the document actually changed, not on pure selection moves
+			if(transaction.docChanged) {
+				this.debouncedSaveEditorContent();
+			}
 		}
 	});
 	
@@ -220,7 +183,7 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	});
 	const addLineBtn = $tw.utils.domMaker("button", {
 		class: "tc-prosemirror-addline-btn",
-		text: "添加新行"
+		text: this.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/AddNewLine", "+ new line")
 	});
 	addLineBtn.setAttribute("type", "button");
 	addLineBtn.setAttribute("contenteditable", "false");
@@ -433,7 +396,7 @@ ProsemirrorWidget.prototype.updateImagePickerFromSelection = function() {
 	this.imagePickerWrap.style.display = "block";
 	const src = (info.node.attrs && info.node.attrs.twSource) || (info.node.attrs && info.node.attrs.src) || "";
 	if(this.imagePickerTitle) {
-		this.imagePickerTitle.textContent = "替换图片: " + src;
+		this.imagePickerTitle.textContent = this.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/ReplaceImage", "Replace image") + ": " + src;
 	}
 };
 
@@ -489,19 +452,57 @@ ProsemirrorWidget.prototype.handleProseMirrorImagePickedNodeView = function(even
 };
 
 ProsemirrorWidget.prototype.saveEditorContent = function() {
-	const content = this.view.state.doc.toJSON();
-	const wikiast = wikiAstFromProseMirrorAst(content);
-	const wikiText = $tw.utils.serializeWikitextParseTree(wikiast);
-	const tiddler = this.getAttribute("tiddler");
-	const currentText = this.wiki.getTiddlerText(tiddler, "");
-	if(currentText !== wikiText) {
-		this.saveLock = true;
-		this.wiki.setText(tiddler, "text", undefined, wikiText);
+	try {
+		const content = this.view.state.doc.toJSON();
+		const wikiast = wikiAstFromProseMirrorAst(content);
+		const wikiText = $tw.utils.serializeWikitextParseTree(wikiast);
+		const tiddler = this.getAttribute("tiddler");
+		const currentText = this.wiki.getTiddlerText(tiddler, "");
+		if(currentText !== wikiText) {
+			this.saveLock = true;
+			this.wiki.setText(tiddler, "text", undefined, wikiText);
+		}
+	} catch(e) {
+		console.error("[ProseMirror] Error saving editor content:", e);
 	}
 }
 
-// Debounced save function for performance
-ProsemirrorWidget.prototype.debouncedSaveEditorContent = debounce(ProsemirrorWidget.prototype.saveEditorContent, 300);
+/**
+ * Collect all pragma_block rawTexts from the current document.
+ * Returns a string of concatenated pragma definitions that can be prepended
+ * before widget text for parsing, so that \define/\procedure/etc. are available.
+ */
+ProsemirrorWidget.prototype.getPragmaPreamble = function() {
+	if(!this.view || !this.view.state) return "";
+	var parts = [];
+	this.view.state.doc.forEach(function(node) {
+		if(node.type.name === "pragma_block" && node.attrs.rawText) {
+			parts.push(node.attrs.rawText);
+		}
+	});
+	return parts.length > 0 ? parts.join("\n") + "\n" : "";
+};
+
+// onDestroy lifecycle hook (requires PR #9097 merged into base Widget)
+ProsemirrorWidget.prototype.onDestroy = function() {
+	// Flush any pending debounced save to prevent data loss
+	if(this.debouncedSaveEditorContent && this.debouncedSaveEditorContent.flush) {
+		this.debouncedSaveEditorContent.flush();
+	} else {
+		// Fallback: save immediately if flush is not available
+		try { this.saveEditorContent(); } catch(e) { /* ignore */ }
+	}
+	// Stop SlashMenuUI rAF loop
+	if(this.slashMenuUI) {
+		this.slashMenuUI.destroy();
+		this.slashMenuUI = null;
+	}
+	// Destroy ProseMirror EditorView
+	if(this.view) {
+		this.view.destroy();
+		this.view = null;
+	}
+};
 
 /*
 Compute the internal state of the widget

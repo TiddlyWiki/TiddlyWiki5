@@ -54,6 +54,10 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Create our element
 		var editInfo = this.getEditInfo(),
 			Engine = this.editShowToolbar ? toolbarEngine : nonToolbarEngine;
+		// Destroy previous engine if re-rendering (e.g. during refreshSelf)
+		if(this.engine && typeof this.engine.destroy === "function") {
+			this.engine.destroy();
+		}
 		this.engine = new Engine({
 			widget: this,
 			value: editInfo.value,
@@ -145,6 +149,13 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Handle an edit text operation message from the toolbar
 	*/
 	EditTextWidget.prototype.handleEditTextOperationMessage = function(event) {
+		// Give the engine a chance to handle the operation natively (e.g. ProseMirror
+		// can toggle marks / set block types directly without text serialization).
+		if(this.engine.handleTextOperationNatively && this.engine.handleTextOperationNatively(event)) {
+			this.engine.fixHeight();
+			this.saveChanges(this.engine.getText());
+			return;
+		}
 		// Prepare information about the operation
 		var operation = this.engine.createTextOperation();
 		// Invoke the handler for the selected operation

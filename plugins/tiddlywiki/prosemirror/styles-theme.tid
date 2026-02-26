@@ -1,0 +1,376 @@
+title: $:/plugins/tiddlywiki/prosemirror/styles-theme.tid
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/*
+ * ProseMirror Editor Theme Overrides
+ * Uses TiddlyWiki colour macros for dark-mode compatibility.
+ * Structural CSS remains in the original .css files; this file
+ * only overrides colour-dependent properties.
+ */
+
+/* --- Content spacing normalization (match TW rendered output) --- */
+
+.ProseMirror p {
+	margin: 0.5em 0;
+}
+
+.ProseMirror p:first-child {
+	margin-top: 0;
+}
+
+.ProseMirror p:last-child {
+	margin-bottom: 0;
+}
+
+.ProseMirror blockquote {
+	margin: 0.5em 0;
+	padding: 0 15px;
+	border-left: 5px solid <<colour blockquote-bar>>;
+}
+
+.ProseMirror pre {
+	padding: 8px 12px;
+	border-radius: 4px;
+	background: <<colour pre-background>>;
+	border: 1px solid <<colour pre-border>>;
+	overflow-x: auto;
+}
+
+.ProseMirror hr {
+	border: none;
+	border-top: 1px solid <<colour tiddler-editor-border>>;
+	margin: 1em 0;
+}
+
+.ProseMirror h1, .ProseMirror h2, .ProseMirror h3,
+.ProseMirror h4, .ProseMirror h5, .ProseMirror h6 {
+	margin: 0.8em 0 0.3em;
+}
+
+.ProseMirror h1:first-child, .ProseMirror h2:first-child, .ProseMirror h3:first-child,
+.ProseMirror h4:first-child, .ProseMirror h5:first-child, .ProseMirror h6:first-child {
+	margin-top: 0;
+}
+
+/* --- Slash Menu --- */
+
+.tw-slash-menu-root {
+	background-color: <<colour tiddler-editor-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+	color: <<colour foreground>>;
+}
+
+.tw-slash-menu-filter-wrapper {
+	background-color: <<colour page-background>>;
+	border-bottom-color: <<colour tiddler-editor-border>>;
+}
+
+.tw-slash-menu-filter {
+	color: <<colour muted-foreground>>;
+}
+
+.tw-slash-menu-item-description {
+	font-size: 0.8em;
+	color: <<colour muted-foreground>>;
+	line-height: 1.3;
+}
+
+.tw-slash-menu-item-text {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+}
+
+.tw-slash-menu-item-icon svg {
+	fill: <<colour foreground>>;
+}
+
+.tw-slash-menu-item:hover,
+.tw-slash-menu-item-selected {
+	background-color: <<colour tiddler-editor-fields-even>>;
+}
+
+.tw-slash-menu-item-icon {
+	color: <<colour muted-foreground>>;
+}
+
+.tw-slash-menu-item-label {
+	color: <<colour foreground>>;
+}
+
+.tw-slash-menu-placeholder {
+	color: <<colour muted-foreground>>;
+}
+
+.tw-slash-menu-group-title {
+	color: <<colour foreground>>;
+	border-bottom-color: <<colour tiddler-editor-border>>;
+	background: <<colour page-background>>;
+}
+
+/* --- Widget Block NodeView --- */
+
+.pm-widget-block-nodeview:hover,
+.pm-widget-block-nodeview.selected,
+.pm-widget-block-nodeview.pm-widget-block-editing {
+	outline-color: <<colour primary>>;
+}
+
+.pm-widget-block-nodeview-header {
+	background: <<colour primary>>;
+}
+
+.pm-widget-block-nodeview-error {
+	color: <<colour alert-highlight>>;
+	background-color: <<colour alert-muted-foreground>>;
+}
+
+.pm-widget-block-nodeview-editor {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.pm-widget-block-nodeview-editor:focus {
+	border-color: <<colour primary>>;
+}
+
+/* --- Image NodeView --- */
+
+.pm-image-nodeview:hover,
+.pm-image-nodeview.selected {
+	outline-color: <<colour primary>>;
+}
+
+.pm-image-nodeview-header {
+	background: <<colour primary>>;
+}
+
+.pm-image-nodeview-editor {
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.pm-image-nodeview-picker {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour page-background>>;
+}
+
+.tc-prosemirror-imagepicker {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour page-background>>;
+}
+
+.tc-prosemirror-imagepicker-close {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.pm-image-resize-handle {
+	background: <<colour primary>>;
+}
+
+/* --- Pragma / Opaque Blocks --- */
+
+.pm-pragma-block {
+	border-color: <<colour muted-foreground>>;
+	background: <<colour page-background>>;
+	color: <<colour muted-foreground>>;
+}
+
+.pm-pragma-block:hover {
+	border-color: <<colour primary>>;
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.pm-pragma-block:hover .pm-pragma-block-label {
+	color: <<colour primary>>;
+}
+
+.pm-opaque-block {
+	border-color: <<colour muted-foreground>>;
+	background: <<colour page-background>>;
+	color: <<colour muted-foreground>>;
+}
+
+.pm-opaque-block:hover {
+	border-color: <<colour tag-background>>;
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.pm-opaque-block:hover .pm-opaque-block-label {
+	color: <<colour tag-foreground>>;
+}
+
+.pm-pragma-block-editor,
+.pm-opaque-block-editor {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+/* --- Source Code Panel (side-by-side) --- */
+
+.tc-prosemirror-wrapper.tc-prosemirror-source-active {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+}
+
+.tc-prosemirror-source-panel {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: 4px;
+	overflow: hidden;
+	min-height: 200px;
+}
+
+.tc-prosemirror-source-label {
+	padding: 4px 8px;
+	font-size: 0.8em;
+	font-weight: 600;
+	background: <<colour tiddler-editor-fields-even>>;
+	color: <<colour muted-foreground>>;
+	border-bottom: 1px solid <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-source-textarea {
+	flex: 1;
+	resize: none;
+	border: none;
+	padding: 8px;
+	font-family: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", "Courier", monospace;
+	font-size: 0.9em;
+	line-height: 1.5;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+	tab-size: 4;
+	min-height: 200px;
+}
+
+.tc-prosemirror-source-textarea:focus {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;
+}
+
+/* On small screens, stack vertically */
+@media (max-width: 768px) {
+	.tc-prosemirror-wrapper.tc-prosemirror-source-active {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* --- Bubble Menu (floating toolbar) --- */
+
+.tc-prosemirror-bubble-menu {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	padding: 4px 6px;
+	border-radius: 6px;
+	background: <<colour tiddler-editor-background>>;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.tc-prosemirror-bubble-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border: none;
+	border-radius: 4px;
+	background: transparent;
+	cursor: pointer;
+	padding: 4px;
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-bubble-btn:hover {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-prosemirror-bubble-btn-active {
+	background: <<colour primary>>;
+	color: <<colour background>>;
+}
+
+.tc-prosemirror-bubble-btn-active:hover {
+	background: <<colour primary>>;
+	opacity: 0.85;
+}
+
+.tc-prosemirror-bubble-btn svg {
+	width: 16px;
+	height: 16px;
+	fill: currentColor;
+}
+
+/* --- Drag Handle --- */
+
+.tc-prosemirror-drag-handle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 24px;
+	cursor: grab;
+	color: <<colour muted-foreground>>;
+	font-size: 14px;
+	border-radius: 3px;
+	user-select: none;
+	opacity: 0.5;
+	transition: opacity 0.15s;
+}
+
+.tc-prosemirror-drag-handle:hover {
+	opacity: 1;
+	background: <<colour tiddler-editor-fields-even>>;
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-drag-handle:active {
+	cursor: grabbing;
+}
+
+/* --- Table styles --- */
+
+.ProseMirror table {
+	border-collapse: collapse;
+	table-layout: fixed;
+	width: 100%;
+	margin: 0.5em 0;
+}
+
+.ProseMirror th,
+.ProseMirror td {
+	border: 1px solid <<colour tiddler-editor-border>>;
+	padding: 4px 8px;
+	vertical-align: top;
+	position: relative;
+}
+
+.ProseMirror th {
+	font-weight: bold;
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.ProseMirror .selectedCell {
+	background: <<colour selection-background>>;
+}
+
+.ProseMirror .column-resize-handle {
+	position: absolute;
+	right: -2px;
+	top: 0;
+	bottom: 0;
+	width: 4px;
+	z-index: 20;
+	background-color: <<colour primary>>;
+	pointer-events: none;
+}
