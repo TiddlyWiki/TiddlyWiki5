@@ -221,7 +221,7 @@ exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 		orderedAttributes: []
 	};
 	// Define our regexps
-	var reVarName = /([^\s<>"'=:]+)/y;
+	var reVarName = /([^\s>"'=:]+)/y;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a double opening angle bracket
