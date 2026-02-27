@@ -182,7 +182,7 @@ BubbleMenu.prototype.update = function(view) {
 	// Measure menu width for centering
 	this.el.style.display = "flex";
 	const menuRect = this.el.getBoundingClientRect();
-	const menuLeft = Math.max(4, left - menuRect.width / 2);
+	const menuLeft = Math.max(4, left - menuRect.width / 2 + window.scrollX);
 	const menuTop = top - menuRect.height - 8 + window.scrollY;
 
 	this.el.style.position = "absolute";

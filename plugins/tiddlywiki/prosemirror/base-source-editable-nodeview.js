@@ -368,6 +368,23 @@ class BaseSourceEditableNodeView {
 		}
 	}
 
+	/**
+	 * Stop events from reaching ProseMirror when in edit mode.
+	 * This prevents keystrokes in the textarea from being interpreted as PM commands.
+	 */
+	stopEvent(event) {
+		if(this.isEditMode) return true;
+		return false;
+	}
+
+	/**
+	 * Ignore DOM mutations inside this node view.
+	 * ProseMirror should not try to parse our custom DOM structure.
+	 */
+	ignoreMutation() {
+		return true;
+	}
+
 	// Override these methods in subclasses
 	getHeaderClass() { return "pm-nodeview-header"; }
 	getTitleClass() { return "pm-nodeview-title"; }

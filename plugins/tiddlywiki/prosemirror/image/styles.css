@@ -9,7 +9,7 @@ Styles for inline image node UI in ProseMirror editor
 
 /* Lower menubar z-index so image nodeview headers don't get covered */
 .ProseMirror-menubar {
-	z-index: 5 !important;
+	z-index: 5;
 }
 
 .pm-image-nodeview {

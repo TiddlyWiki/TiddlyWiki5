@@ -15,37 +15,31 @@ function paragraph(builder, node) {
 	// Check if this paragraph contains a widget call
 	// If it's a single text node that looks like <<widgetName ...>>
 	if(node.content && node.content.length === 1 && node.content[0].type === "text") {
-		const text = node.content[0].text.trim();
-		const widgetPattern = /^<<\s*([a-zA-Z_][a-zA-Z0-9_-]*)\s*(.*)>>$/;
-		const match = text.match(widgetPattern);
+		var text = node.content[0].text.trim();
+		// Use the proper parser from widget-block/utils.js which handles
+		// >> inside quoted strings and nested macros correctly
+		var parseWidget;
+		try {
+			parseWidget = require("$:/plugins/tiddlywiki/prosemirror/widget-block/utils.js").parseWidget;
+		} catch(e) {
+			parseWidget = null;
+		}
+		var parsed = parseWidget ? parseWidget(text) : null;
 		
-		if(match) {
-			const widgetName = match[1];
-			const attributesStr = match[2].trim();
+		if(parsed) {
+			var widgetName = parsed.widgetName;
+			var parsedAttrs = parsed.attributes || {};
 			
-			// Parse attributes
-			const attributes = { $variable: { name: "$variable", type: "string", value: widgetName } };
-			const orderedAttributes = [{ name: "$variable", type: "string", value: widgetName }];
+			// Build TW-style attributes object
+			var attributes = { $variable: { name: "$variable", type: "string", value: widgetName } };
+			var orderedAttributes = [{ name: "$variable", type: "string", value: widgetName }];
 			
-			// Simple attribute parsing - handle quoted strings
-			const attrPattern = /(?:([a-zA-Z_][a-zA-Z0-9_-]*)=)?(?:"([^"]*)"|'([^']*)'|([^\s]+))/g;
-			let attrMatch;
-			let paramIndex = 0;
-			
-			while((attrMatch = attrPattern.exec(attributesStr)) !== null) {
-				const key = attrMatch[1];
-				const value = attrMatch[2] || attrMatch[3] || attrMatch[4];
-				
-				if(key) {
-					attributes[key] = { name: key, type: "string", value: value };
-					orderedAttributes.push({ name: key, type: "string", value: value });
-				} else {
-					// Positional argument
-					const paramName = String(paramIndex);
-					attributes[paramName] = { name: paramName, type: "string", value: value };
-					orderedAttributes.push({ name: paramName, type: "string", value: value });
-					paramIndex++;
-				}
+			var keys = Object.keys(parsedAttrs);
+			for(var ki = 0; ki < keys.length; ki++) {
+				var key = keys[ki];
+				var value = parsedAttrs[key];
+				attributes[key] = { name: key, type: "string", value: value };
+				orderedAttributes.push({ name: key, type: "string", value: value });
 			}
 			
 			// Return a transclude node
@@ -365,6 +359,15 @@ function image(builder, node) {
 }
 
 function blockquote(builder, node) {
+	var children = convertNodes(builder, node.content);
+	// If the PM blockquote has a cite attribute, re-add it as a <cite> element
+	if(node.attrs && node.attrs.cite) {
+		children.push({
+			type: "element",
+			tag: "cite",
+			children: [{ type: "text", text: node.attrs.cite }]
+		});
+	}
 	return {
 		type: "element",
 		tag: "blockquote",
@@ -372,7 +375,7 @@ function blockquote(builder, node) {
 		attributes: {
 			"class": { type: "string", value: "tc-quote" }
 		},
-		children: convertNodes(builder, node.content)
+		children: children
 	};
 }
 
