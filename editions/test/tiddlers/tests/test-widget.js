@@ -281,7 +281,7 @@ describe("Widget module", function() {
 		// Test the sequence numbers in the DOM
 		expect(wrapper.sequenceNumber).toBe(0);
 		expect(wrapper.children[0].sequenceNumber).toBe(2);
-//		expect(wrapper.children[0].children[0].sequenceNumber).toBe(3);
+		//expect(wrapper.children[0].children[0].sequenceNumber).toBe(3);
 	});
 
 	it("should deal with the set widget", function() {

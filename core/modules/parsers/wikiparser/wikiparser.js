@@ -276,7 +276,7 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 			(child.type === "link") ||
 			(child.type === "checkbox") ) {
 			isP = true;
-			}
+		}
 	});
 
 	// $tw.utils.each(children, function(child) {
