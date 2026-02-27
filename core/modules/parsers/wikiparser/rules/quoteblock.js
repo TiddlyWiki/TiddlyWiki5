@@ -7,17 +7,58 @@ Wiki text rule for quote blocks.
 
 \*/
 
+/**
+ * @typedef {import('../../base.js').ParseTreeAttribute} ParseTreeAttribute
+ * @typedef {import('../../base.js').ParseTreeNode} ParseTreeNode
+ * @typedef {import('../wikirulebase.js').WikiRuleBase} WikiRuleBase
+ * @typedef {import('../../base.js').Parser} Parser
+ */
+
+/**
+ * Parse tree node produced by the `quoteblock` wiki rule.
+ *
+ * @example
+ * ```
+ * <<<
+ * This is a blockquote
+ * <<< Optional citation
+ * ```
+ *
+ * @typedef {Object} ParseTreeQuoteBlockNode
+ * @property {"element"} type - Widget type
+ * @property {"quoteblock"} rule - Parse rule that generated this node
+ * @property {"blockquote"} tag - Always renders as `<blockquote>`
+ * @property {number} start
+ * @property {number} end
+ * @property {Object} attributes
+ * @property {ParseTreeAttribute & { type: "string" }} attributes.class - CSS classes (always includes `"tc-quote"`)
+ * @property {ParseTreeNode[]} children - Block content and optional `<cite>` elements
+ */
+
 "use strict";
 
 exports.name = "quoteblock";
 exports.types = {block: true};
 
+/**
+ * Initialise the quoteblock rule.
+ *
+ * @this {WikiRuleBase}
+ * @param {Parser} parser
+ * @returns {void}
+ */
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /(<<<+)/mg;
 };
 
+/**
+ * Parse the most recent quoteblock match.
+ *
+ * @this {WikiRuleBase}
+ * @returns {ParseTreeQuoteBlockNode[]} Array containing a single blockquote node
+ */
 exports.parse = function() {
 	var classes = ["tc-quote"];
 	// Get all the details of the match

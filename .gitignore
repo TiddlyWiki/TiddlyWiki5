@@ -9,3 +9,5 @@ node_modules/
 /playwright-report/
 /playwright/.cache/
 $__StoryList.tid
+# Generated TypeScript declaration files (run `tsc` to regenerate)
+types/core/

@@ -21,6 +21,18 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+  typecheck:
+    name: "TypeScript type check"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "${{ env.NODE_VERSION }}"
+      - name: Generate declaration files
+        run: npx --yes -p typescript@5.8.3 tsc
+      - name: Check type tests pass
+        run: npx --yes -p typescript@5.8.3 tsc --noEmit -p types/tests/tsconfig.json
   build-prerelease:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'

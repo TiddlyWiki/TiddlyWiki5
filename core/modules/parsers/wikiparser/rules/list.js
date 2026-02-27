@@ -41,17 +41,61 @@ A CSS class can be applied to a list item as follows:
 
 \*/
 
+/**
+ * @typedef {import('../../base.js').ParseTreeAttribute} ParseTreeAttribute
+ * @typedef {import('../../base.js').ParseTreeNode} ParseTreeNode
+ * @typedef {import('../wikirulebase.js').WikiRuleBase} WikiRuleBase
+ * @typedef {import('../../base.js').Parser} Parser
+ */
+
+/**
+ * A list item element node within a list (`<li>`, `<dt>`, `<dd>`, or `<div>`).
+ *
+ * @typedef {Object} ParseTreeListItemNode
+ * @property {"element"} type
+ * @property {"list"} rule - Parse rule that generated this node
+ * @property {"li" | "dt" | "dd" | "div"} tag - List item tag
+ * @property {number} start
+ * @property {number} end
+ * @property {Object} attributes
+ * @property {ParseTreeAttribute & { type: "string" }} [attributes.class] - CSS classes on this item
+ * @property {ParseTreeNode[]} children - Item content nodes
+ */
+
+/**
+ * A list container element node (`<ul>`, `<ol>`, `<dl>`, or `<blockquote>`).
+ *
+ * @typedef {Object} ParseTreeListNode
+ * @property {"element"} type
+ * @property {"list"} rule - Parse rule that generated this node
+ * @property {"ul" | "ol" | "dl" | "blockquote"} tag - List container tag
+ * @property {number} start
+ * @property {number} end
+ * @property {ParseTreeListItemNode[]} children - List item nodes
+ */
+
 "use strict";
 
 exports.name = "list";
 exports.types = {block: true};
 
+/**
+ * Initialise the list rule with the given parser.
+ *
+ * @this {WikiRuleBase}
+ * @param {Parser} parser
+ * @returns {void}
+ */
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /([\*#;:>]+)/mg;
 };
 
+/**
+ * Mapping from list marker character to the container and item HTML tags.
+ * @type {Record<string, { listTag: "ul" | "ol" | "dl" | "blockquote", itemTag: "li" | "dt" | "dd" | "div" }>}
+ */
 var listTypes = {
 	"*": {listTag: "ul", itemTag: "li"},
 	"#": {listTag: "ol", itemTag: "li"},
@@ -61,9 +105,13 @@ var listTypes = {
 };
 exports.listTypes = listTypes;
 
-/*
-Parse the most recent match
-*/
+/**
+ * Parse the most recent list match.
+ * Handles arbitrarily nested lists and optional CSS class specifiers on items.
+ *
+ * @this {WikiRuleBase}
+ * @returns {ParseTreeListNode[]} Array containing the root list element node
+ */
 exports.parse = function() {
 	// Array of parse tree nodes for the previous row of the list
 	var listStack = [];

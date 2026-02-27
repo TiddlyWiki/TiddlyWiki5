@@ -1452,9 +1452,19 @@ exports.search = function(text,options) {
 	return results;
 };
 
-/*
-Trigger a load for a tiddler if it is skinny. Returns the text, or undefined if the tiddler is missing, null if the tiddler is being lazily loaded.
-*/
+/**
+ * Get the text field of a tiddler.
+ *
+ * If the tiddler has a `_is_skinny` field, a lazy-load event is dispatched
+ * and `null` is returned while the tiddler text is being fetched.
+ *
+ * @param {string} title - Title of the tiddler
+ * @param {string} [defaultText] - Value to return when the tiddler does not exist
+ * @returns {string | null | undefined}
+ *   - `string` — the tiddler's text content (may be `""` for empty tiddlers)
+ *   - `null` — tiddler exists but is being lazily loaded
+ *   - `undefined` (or `defaultText`) — tiddler does not exist
+ */
 exports.getTiddlerText = function(title,defaultText) {
 	var tiddler = this.getTiddler(title);
 	// Return undefined if the tiddler isn't found

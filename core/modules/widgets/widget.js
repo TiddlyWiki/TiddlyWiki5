@@ -9,22 +9,40 @@ Widget base class
 
 "use strict";
 
-/*
-Create a widget object for a parse tree node
-	parseTreeNode: reference to the parse tree node to be rendered
-	options: see below
-Options include:
-	wiki: mandatory reference to wiki associated with this render tree
-	parentWidget: optional reference to a parent renderer node for the context chain
-	document: optional document object to use instead of global document
-*/
-var Widget = function(parseTreeNode,options) {
+/**
+ * @typedef {import('../parsers/base.js').ParseTreeNode} ParseTreeNode
+ */
+
+/**
+ * Widget class — creates a renderable widget object for a parse tree node.
+ *
+ * Subclasses override `render()`, `execute()`, and other lifecycle methods.
+ *
+ * @class Widget
+ * @constructor
+ * @param {ParseTreeNode} [parseTreeNode] - Reference to the parse tree node to be rendered.
+ *   Omit (or pass `undefined`) when subclassing — the constructor will then return early
+ *   and you must call `initialise()` manually.
+ * @param {Object} [options] - Widget options
+ * @param {Object} [options.wiki] - Mandatory reference to the wiki associated with this render tree
+ * @param {Widget} [options.parentWidget] - Optional parent renderer node for the context chain
+ * @param {Document} [options.document] - Optional document object to use instead of the global document
+ */
+function Widget(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Initialise widget properties. These steps are pulled out of the constructor so that we can reuse them in subclasses
-*/
+/**
+ * Initialise widget properties. These steps are pulled out of the constructor
+ * so that we can reuse them in subclasses.
+ *
+ * @param {ParseTreeNode} [parseTreeNode] - Reference to the parse tree node
+ * @param {Object} [options]
+ * @param {Object} [options.wiki] - Reference to the wiki associated with this render tree
+ * @param {Widget} [options.parentWidget] - Optional parent widget for context chain
+ * @param {Document} [options.document] - Optional document object
+ * @returns {void}
+ */
 Widget.prototype.initialise = function(parseTreeNode,options) {
 	// Bail if parseTreeNode is undefined, meaning  that the widget constructor was called without any arguments so that it can be subclassed
 	if(parseTreeNode === undefined) {
