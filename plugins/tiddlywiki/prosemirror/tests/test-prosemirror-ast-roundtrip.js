@@ -124,6 +124,13 @@ if(!$tw.browser) {
 			expect(result).toContain("quoted text");
 		});
 
+		it("should round-trip blockquote with cite", function() {
+			var input = "<<<\nquoted text\n<<<citation source";
+			var result = roundTrip(input);
+			expect(result).toContain("quoted text");
+			expect(result).toContain("citation source");
+		});
+
 		// --- Links ---
 
 		it("should round-trip internal link", function() {

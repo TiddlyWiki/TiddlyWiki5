@@ -57,6 +57,15 @@ try {
  */
 function buildSchema() {
 	var baseNodes = basicSchema.spec.nodes.append({ list: createListSpec() });
+	// Override blockquote to add cite attr for preserving <<<...<<<cite text
+	var baseBqSpec = basicSchema.spec.nodes.get("blockquote");
+	baseNodes = baseNodes.update("blockquote", Object.assign({}, baseBqSpec, {
+		attrs: { cite: { default: null } },
+		toDOM: function(node) {
+			return ["blockquote", 0];
+		},
+		parseDOM: [{ tag: "blockquote" }]
+	}));
 	var baseImageSpec = basicSchema.spec.nodes.get("image");
 	var nodes = baseNodes.update("image", Object.assign({}, baseImageSpec, {
 		attrs: Object.assign({}, baseImageSpec && baseImageSpec.attrs, {
@@ -679,8 +688,8 @@ ProseMirrorEngine.prototype.handleTextOperationNatively = function(event) {
 	// --- prefix-lines: bullet list ---
 	if(param === "prefix-lines" && paramObj.character === "*") {
 		if(schema.nodes.list) {
-			var cmd = flatListCommands.createWrapInListCommand({ kind: "bullet" });
-			cmd(state, dispatch);
+			var bulletCmd = flatListCommands.createWrapInListCommand({ kind: "bullet" });
+			bulletCmd(state, dispatch);
 			view.focus();
 			return true;
 		}
@@ -689,8 +698,8 @@ ProseMirrorEngine.prototype.handleTextOperationNatively = function(event) {
 	// --- prefix-lines: ordered list ---
 	if(param === "prefix-lines" && paramObj.character === "#") {
 		if(schema.nodes.list) {
-			var cmd = flatListCommands.createWrapInListCommand({ kind: "ordered" });
-			cmd(state, dispatch);
+			var orderedCmd = flatListCommands.createWrapInListCommand({ kind: "ordered" });
+			orderedCmd(state, dispatch);
 			view.focus();
 			return true;
 		}

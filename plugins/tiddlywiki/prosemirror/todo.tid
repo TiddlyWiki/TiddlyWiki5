@@ -107,3 +107,18 @@ title: $:/plugins/tiddlywiki/prosemirror/todo
 * `[[` 页面链接补全
 * 查找替换
 * 定义列表（`;` `:` 语法）
+
+!!! 阶段 7: 代码审查与改进（最终轮次）
+
+* [x] 7.1 修复 bubble-menu.js 水平滚动定位：添加 `window.scrollX` 偏移 — ''menuLeft 计算正确加上 scrollX''
+* [x] 7.2 修复 markdown-shortcuts.js blockquoteInputRule 逻辑错误 — ''重写：先 delete 触发文本，apply 得到新 state，在新 state 上执行 wrapIn(blockquote)，合并两组 transaction steps''
+* [x] 7.3 修复 drag-handle.js domSerializer 不存在 — ''改用 DOMSerializer.fromSchema(schema).serializeFragment()，创建临时 wrapper div 作为 dragImage，setTimeout 清理''
+* [x] 7.4 修复 drag-handle.js mouseleave handle 后不隐藏 — ''给 handle 元素添加 mouseleave 事件，判断 relatedTarget 是否在 editor DOM 内''
+* [x] 7.5 修复 from-prosemirror.js widget 解析重复逻辑 — ''复用 widget-block/utils.js 的 parseWidget()，正确处理引号内 >> 和嵌套 <<>>''
+* [x] 7.6 修复 to-prosemirror.js transclude 属性值未转义 — ''对含双引号或 >> 的值使用三重引号 """..."""，命名参数改用 colon 语法 key:"value"''
+* [x] 7.7 修复 slash-menu-ui.js 定位缺少 scrollX/scrollY — ''positionMenu 添加 window.scrollX/scrollY 偏移，requestAnimationFrame 检查视口边界溢出''
+* [x] 7.8 添加 BaseSourceEditableNodeView 的 stopEvent/ignoreMutation — ''isEditMode 时 stopEvent=true，ignoreMutation 始终 true 避免 PM 错误解析自定义 DOM''
+* [x] 7.9 修复 blockquote cite 数据丢失 — ''schema 添加 blockquote.attrs.cite，to-prosemirror 提取 cite 文本存入 attrs，from-prosemirror 还原为 cite 元素，wikitext-serialize quoteblock 规则支持序列化 cite 子元素''
+* [x] 7.10 engine.js var 重声明修复 — ''bulletCmd / orderedCmd 使用独立变量名''
+* [x] 7.11 image/styles.css 移除 !important — ''z-index: 5 不再使用 !important''
+* [x] 7.12 新增 blockquote cite roundtrip 测试 — ''测试 <<<\ntext\n<<<citation source 的完整往返''

@@ -106,9 +106,22 @@ SlashMenuUI.prototype.positionMenu = function() {
 	const coords = this.view.coordsAtPos(selection.to);
 	
 	this.container.style.position = "absolute";
-	this.container.style.left = coords.left + "px";
-	this.container.style.top = (coords.bottom + 5) + "px";
+	this.container.style.left = (coords.left + window.scrollX) + "px";
+	this.container.style.top = (coords.bottom + 5 + window.scrollY) + "px";
 	this.container.style.zIndex = "1000";
+	
+	// Ensure menu doesn't overflow viewport bottom
+	requestAnimationFrame(function() {
+		var menuRect = this.container.getBoundingClientRect();
+		if(menuRect.bottom > window.innerHeight) {
+			// Show above the cursor instead
+			this.container.style.top = (coords.top - menuRect.height - 5 + window.scrollY) + "px";
+		}
+		// Ensure menu doesn't overflow viewport right
+		if(menuRect.right > window.innerWidth) {
+			this.container.style.left = Math.max(4, window.innerWidth - menuRect.width - 8 + window.scrollX) + "px";
+		}
+	}.bind(this));
 };
 
 SlashMenuUI.prototype.renderMenu = function(state) {

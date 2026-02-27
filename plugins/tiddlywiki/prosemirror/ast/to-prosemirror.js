@@ -217,14 +217,38 @@ function buildCodeBlock(context, node) {
 }
 
 function buildBlockquote(context, node) {
-	// Filter out <cite> elements — they are optional metadata in wikitext blockquotes
-	var bodyChildren = (node.children || []).filter(function(child) {
-		return !(child.type === "element" && child.tag === "cite");
-	});
+	// Extract cite text if present (<<<text\n<<<cite)
+	var citeText = null;
+	var bodyChildren = [];
+	var children = node.children || [];
+	for(var ci = 0; ci < children.length; ci++) {
+		if(children[ci].type === "element" && children[ci].tag === "cite") {
+			// Serialize cite children to plain text
+			citeText = extractPlainText(children[ci]);
+		} else {
+			bodyChildren.push(children[ci]);
+		}
+	}
 	return {
 		type: "blockquote",
+		attrs: { cite: citeText },
 		content: convertNodes(context, bodyChildren)
 	};
+}
+
+/**
+ * Extract plain text from an AST subtree (for cite preservation).
+ */
+function extractPlainText(node) {
+	if(!node) return "";
+	if(node.type === "text") return node.text || "";
+	var result = "";
+	if(node.children) {
+		for(var i = 0; i < node.children.length; i++) {
+			result += extractPlainText(node.children[i]);
+		}
+	}
+	return result;
 }
 
 function buildHorizRule(context, node) {
@@ -289,7 +313,7 @@ function buildAnchor(context, node) {
 }
 
 function buildCite(context, node) {
-	// cite elements inside blockquote are filtered out in buildBlockquote;
+	// cite elements inside blockquote are handled by buildBlockquote (stored in attrs.cite);
 	// if encountered standalone, convert children as inline content
 	return convertNodes(context, node.children);
 }
@@ -484,12 +508,16 @@ function transclude(context, node) {
 			const attr = node.orderedAttributes[i];
 			if(attr.name !== "$variable") {
 				widgetText += " ";
+				var safeValue = attr.value || "";
+				// Use triple-quotes if value contains double-quotes or >>
+				var needsTriple = safeValue.indexOf('"') >= 0 || safeValue.indexOf('>>' ) >= 0;
+				var q = needsTriple ? '"""' : '"';
 				// For positional parameters, just add the value
 				if(attr.name.match(/^\d+$/)) {
-					widgetText += '"' + attr.value + '"';
+					widgetText += q + safeValue + q;
 				} else {
-					// For named parameters, add name=value
-					widgetText += attr.name + '="' + attr.value + '"';
+					// For named parameters, add name:value (colon syntax for TW5)
+					widgetText += attr.name + ':' + q + safeValue + q;
 				}
 			}
 		}

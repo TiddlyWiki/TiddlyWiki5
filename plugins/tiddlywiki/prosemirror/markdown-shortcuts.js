@@ -80,8 +80,21 @@ function blockquoteInputRule(schema) {
 	var wrapIn = require("prosemirror-commands").wrapIn;
 	return [
 		new InputRule(/^>\s$/, function(state, match, start, end) {
+			// Delete the "> " trigger text first
 			var tr = state.tr.delete(start, end);
-			wrapIn(bqType)(tr.doc.resolve(start).node() ? state : state, function(wrapped) { tr = wrapped; });
+			// Apply wrapIn on the resulting state after deletion
+			var newState = state.apply(tr);
+			var wrapTr = null;
+			wrapIn(bqType)(newState, function(t) { wrapTr = t; });
+			if(wrapTr) {
+				// Combine: first delete, then wrap. Rebuild from scratch using
+				// the steps from both transactions.
+				var combined = state.tr.delete(start, end);
+				for(var si = 0; si < wrapTr.steps.length; si++) {
+					combined.step(wrapTr.steps[si]);
+				}
+				return combined;
+			}
 			return tr;
 		})
 	];

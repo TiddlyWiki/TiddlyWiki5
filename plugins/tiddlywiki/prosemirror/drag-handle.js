@@ -56,12 +56,22 @@ function createDragHandlePlugin() {
 			// Use ProseMirror's built-in drag handling by triggering it through NodeSelection
 			try {
 				var slice = currentView.state.selection.content();
-				var { dom, text } = currentView.domSerializer 
-					? currentView.domSerializer.serializeSlice(slice)
-					: { dom: null, text: "" };
-				if(dom) {
-					e.dataTransfer.setDragImage(dom, 0, 0);
-				}
+				// Use DOMSerializer from prosemirror-model to create drag image
+				var DOMSerializer = require("prosemirror-model").DOMSerializer;
+				var serializer = DOMSerializer.fromSchema(currentView.state.schema);
+				var fragment = slice.content;
+				var dragDom = serializer.serializeFragment(fragment);
+				// Wrap in a div for setDragImage
+				var wrapper = document.createElement("div");
+				wrapper.appendChild(dragDom);
+				wrapper.style.position = "absolute";
+				wrapper.style.left = "-9999px";
+				document.body.appendChild(wrapper);
+				e.dataTransfer.setDragImage(wrapper, 0, 0);
+				// Clean up after drag starts
+				setTimeout(function() {
+					if(wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
+				}, 0);
 				e.dataTransfer.effectAllowed = "move";
 				// ProseMirror will handle the actual node movement via its
 				// built-in drop handler when a NodeSelection is active
@@ -69,6 +79,14 @@ function createDragHandlePlugin() {
 			} catch(ex) {
 				// Fallback: let PM handle naturally
 			}
+		});
+
+		// Hide handle when mouse leaves the handle itself
+		el.addEventListener("mouseleave", function(e) {
+			var related = e.relatedTarget;
+			// Don't hide if moving back into the editor
+			if(currentView && currentView.dom && currentView.dom.contains(related)) return;
+			hideHandle();
 		});
 
 		return el;
