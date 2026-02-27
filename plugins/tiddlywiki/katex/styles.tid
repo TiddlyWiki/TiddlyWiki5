@@ -19,6 +19,26 @@ tags: [[$:/tags/Stylesheet]]
 	counter-reset: katexEqnNo;
 }
 
+/* Replace \eqref placeholder with generated eqnum */
+
+.katex-eqref [data-katex-eqnum] > * {
+	display: none;
+}
+
+.katex-eqref [data-katex-eqnum]::after {
+	content: attr(data-katex-eqnum);
+}
+
+/* Emulate tiddlylink style but w/o decorating the parentheses */
+
+.katex-eqref a {
+	text-decoration: none;
+}
+
+.katex-eqref a:hover .enclosing {
+	text-decoration: underline;
+}
+
 /* Avoid TW5's max-width: 100% */
 
 .katex svg {
