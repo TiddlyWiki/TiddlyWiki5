@@ -1,0 +1,14 @@
+title: $:/core/startup/secure-context
+tags: $:/tags/StartupAction/Browser
+
+\procedure secure-warning()
+<<lingo InsecureContext>>
+
+<$checkbox tiddler="$:/state/alerts/secure-context" field="text" checked="yes" unchecked="no"> 
+ <<lingo DontShowAgain>>
+</$checkbox>
+\end
+
+<%if [{$:/info/browser/secure-context}match[no]] :and[{$:/state/alerts/secure-context}!match[yes]] %>
+<$action-setfield $tiddler="$:/temp/alerts/secure-context" tags="$:/tags/Alert" text=<<secure-warning>>/>
+<%endif%>
