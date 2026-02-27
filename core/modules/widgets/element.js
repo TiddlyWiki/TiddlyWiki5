@@ -25,7 +25,6 @@ Render this widget into the DOM
 */
 ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
-	this.computeAttributes();
 	// Neuter blacklisted elements
 	this.tag = this.parseTreeNode.tag;
 	if($tw.config.htmlUnsafeElements.indexOf(this.tag) !== -1) {
@@ -42,6 +41,8 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 		headingLevel = Math.min(Math.max(headingLevel + 1 + baseLevel,1),6);
 		this.tag = "h" + headingLevel;
 	}
+	// Compute the attributes, mapping the element tag if needed
+	this.computeAttributes();
 	// Select the namespace for the tag
 	var XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml",
 		tagNamespaces = {
@@ -97,6 +98,27 @@ ElementWidget.prototype.refresh = function(changedTiddlers) {
 		}
 	}
 	return this.refreshChildren(changedTiddlers) || hasChangedAttributes;
+};
+
+/*
+Override the base computeAttributes method
+*/
+ElementWidget.prototype.computeAttributes = function() {
+	// Call the base class to compute the initial values of the attributes
+	var changedAttributes = Widget.prototype.computeAttributes.call(this);
+	// Check for element mapping
+	var mappedTag = this.getVariable("tv-map-" + this.tag),
+		mappedClass = this.getVariable("tv-map-" + this.tag + "-class");
+	if(mappedTag) {
+		this.tag = mappedTag.trim();
+		// Add an attribute to indicate the original tag
+		this.attributes["data-element-mapping-from"] = this.parseTreeNode.tag;
+		// Check for a mapped class
+		if(mappedClass) {
+			this.attributes["class"] = mappedClass.trim() + (this.attributes["class"] ? " " + this.attributes["class"] : "");
+		}
+	}
+	return changedAttributes;
 };
 
 exports.element = ElementWidget;
