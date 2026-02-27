@@ -818,30 +818,22 @@ exports.getSubTiddler = function(title,subTiddlerTitle) {
 Retrieve a tiddler as a JSON string of the fields
 */
 exports.getTiddlerAsJson = function(title) {
-	var tiddler = this.getTiddler(title);
+	const tiddler = this.getTiddler(title);
 	if(tiddler) {
-		var fields = Object.create(null);
-		$tw.utils.each(tiddler.fields,function(value,name) {
-			fields[name] = tiddler.getFieldString(name);
-		});
-		return JSON.stringify(fields);
+		return JSON.stringify(tiddler);
 	} else {
 		return JSON.stringify({title: title});
 	}
 };
 
 exports.getTiddlersAsJson = function(filter,spaces) {
-	var tiddlers = this.filterTiddlers(filter),
-		spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces,
-		data = [];
-	for(var t=0;t<tiddlers.length; t++) {
-		var tiddler = this.getTiddler(tiddlers[t]);
+	const tiddlers = this.filterTiddlers(filter);
+	spaces = (spaces === undefined) ? $tw.config.preferences.jsonSpaces : spaces;
+	let data = [];
+	for(const title of tiddlers) {
+		const tiddler = this.getTiddler(title);
 		if(tiddler) {
-			var fields = new Object();
-			for(var field in tiddler.fields) {
-				fields[field] = tiddler.getFieldString(field);
-			}
-			data.push(fields);
+			data.push(tiddler);
 		}
 	}
 	return JSON.stringify(data,null,spaces);
