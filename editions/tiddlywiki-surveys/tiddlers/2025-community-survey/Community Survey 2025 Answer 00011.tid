@@ -1,0 +1,33 @@
+are-you-a-dev: No, I would not
+backup-method: No automatic sync across my devices
+diy-backup-info: 
+first-heard-survey: Official newsletter
+first-used-tw: 2023
+joined-tw-community: No
+main-use-cases: Note-taking;As a knowledge base (including technical, non-fiction and encyclopaedic content)
+ok-to-publish: Yes, I am happy for my responses to be published
+other-survey-source: 
+other-use-cases: 
+positive-about-future: Yes
+project-decision-trust: Yes
+project-strengths: despite the changes the workflow remains the same, very clean and intuitive
+project-weaknesses: I would like a better markdown support without using more than one plugins to have code highlight, a side panel with the titles and subtitle index and so on
+publish-to-intranet: Yes, served through Node.js
+publish-to-web: Not publishing to this location
+published-plugin: No
+save-method: Single-file wiki with custom saver (e.g. TiddlyPWA, Timimi, tw5-browser-nativesaver);Multi-file wiki served through Node.js
+share-wikis: Yes, with multiple editors/administrators
+started-tw-community: 
+tags: [[Community Survey 2025]]
+title: Community Survey 2025 Answer 00011
+tw-ability-level: I am comfortable using WikiText widgets (e.g. <$transclude>, <$list>...)
+tw-customisations: mostly some macros to have multiple page templates
+tw-future-confidence: Yes
+use-discord: 
+use-for-work-or-study: Yes
+use-github-discuss: 
+use-mailing-list: 
+use-reddit: 
+use-ttw: 
+value-of-tw: incredibly fast access to notes and tips about the work and my self - written guides
+wiki-setup-info: mostly I access the nodejs wiki in the intranet of the office but manually keep updated an HTML snapshot offline to access when out of the office

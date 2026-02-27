@@ -6,23 +6,23 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \procedure test(animal)
-<% if [<animal>match[Elephant]] %>
+<%if [<animal>match[Elephant]] %>
 
 ! It is an elephant
 
-<% else %>
+<%else%>
 
-<% if [<animal>match[Giraffe]] %>
+<%if [<animal>match[Giraffe]] %>
 
 ! It is a giraffe
 
-<% else %>
+<%else%>
 
 ! It is completely unknown
 
-<% endif %>
+<%endif%>
 
-<% endif %>
+<%endif%>
 
 \end
 

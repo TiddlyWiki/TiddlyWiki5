@@ -6,10 +6,6 @@ module-type: filteroperator
 Filter operators for geospatial lookup
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var turf = require("$:/plugins/tiddlywiki/geospatial/turf.js"),
@@ -24,7 +20,7 @@ exports.geolookup = function(source,operator,options) {
 		source(function(tiddler,title) {
 			var point = geotools.parsePoint(title),
 				result = getPolygonsContainingPoint(jsonObject,point);
-			output.push(JSON.stringify(result))
+			output.push(JSON.stringify(result));
 		});
 	}
 	// Perform the transformation
@@ -41,5 +37,3 @@ function getPolygonsContainingPoint(featureCollection,point) {
 	});
 	return properties;
 }
-
-})();

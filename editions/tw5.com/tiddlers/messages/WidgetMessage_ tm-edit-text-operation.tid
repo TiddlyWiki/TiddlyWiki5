@@ -1,6 +1,6 @@
 caption: tm-edit-text-operation
 created: 20160424211339792
-modified: 20230803045746596
+modified: 20240909083525060
 tags: Messages
 title: WidgetMessage: tm-edit-text-operation
 type: text/vnd.tiddlywiki
@@ -11,9 +11,9 @@ type: text/vnd.tiddlywiki
 Excises the currently selected text into a new tiddler and replaces it with a link, a macro or a transclude of the new tiddler. Parameters include:
 
 |!Name |!Description |
-|title |Title of the new tiddler the selected content is excised to|
-|type |Type of the replacement to be inserted: Can be one of <<.value "transclude">>, <<.value "link">> or <<.value "macro">>|
-|macro |In case //type=<<.value "macro">>//, specifies the name of the macro to be inserted. The title of the new tiddler is provided as the first parameter to the macro. Defaults to the [[translink macro|translink Macro]]|
+|title |Title of the new tiddler the selected content is excised to |
+|type |Type of the replacement to be inserted: Can be one of <<.value "transclude">>, <<.value "link">> or <<.value "macro">> |
+|macro |In case //type=<<.value "macro">>//, specifies the name of the macro to be inserted. The title of the new tiddler is provided as the first parameter to the macro. Defaults to the [[translink macro|translink Macro]] |
 |tagnew |If '<<.value "yes">>', will tag the new tiddler with the title of the tiddler currently being edited |
 
 </div>
@@ -25,7 +25,7 @@ Excises the currently selected text into a new tiddler and replaces it with a li
 Replaces ''all'' contents of the editor with the provided text.
 
 |!Name |!Description |
-|text |Text to be inserted|
+|text |Text to be inserted |
 
 </div>
 \end
@@ -36,7 +36,7 @@ Replaces ''all'' contents of the editor with the provided text.
 Replaces the current selection with the provided text.
 
 |!Name |!Description |
-|text |Text to be inserted|
+|text |Text to be inserted |
 
 </div>
 \end
@@ -47,8 +47,8 @@ Replaces the current selection with the provided text.
 Prefixes the currently selected line//(s)// with the provided character. If a line is already prefixed by the provided prefix, the prefix is removed instead.
 
 |!Name |!Description |
-|character |Prefix character|
-|count |Number of characters that make up the prefix|
+|character |Prefix character |
+|count |Number of characters that make up the prefix |
 
 ''Example'' Setting //character="<<.value "!">>"// and //count="<<.value "3">>"// would insert the prefix "<<.value "!!!" >>", which will resolve to a subheading when parsed as WikiText.
 
@@ -61,8 +61,8 @@ Prefixes the currently selected line//(s)// with the provided character. If a li
 Surrounds the selected //lines// with the provided <<.param "prefix">> and <<.param "suffix">>.
 
 |!Name |!Description |
-|prefix |String to be prefixed to the selected lines|
-|suffix |Suffix to be inserted after the selected lines|
+|prefix |String to be prefixed to the selected lines |
+|suffix |Suffix to be inserted after the selected lines |
 
 
 </div>
@@ -75,8 +75,9 @@ Surrounds the selected //lines// with the provided <<.param "prefix">> and <<.pa
 Surrounds the current //selection// with the provided <<.param "prefix">> and <<.param "suffix">>.
 
 |!Name |!Description |
-|prefix |String to be prefixed to the selection|
-|suffix |Suffix to be inserted after the selection|
+|prefix |String to be prefixed to the selection |
+|suffix |Suffix to be inserted after the selection |
+|trimSelection |<<.from-version 5.3.6>> Trim leading and trailing white-space from the selection and move it to the surrounding text. Possible values are: `yes`, `no` (default), `start` and `end` |
 
 </div>
 \end
@@ -138,11 +139,11 @@ At this point the following text operations have been implemented:
 |<<.def "wrap-selection">>|<<wrapSelectionDescription>> |
 |<<.def "save-selection">>|<<saveSelectionDescription>> |
 |<<.def "make-link">>|<<makeLinkDescription>> |
-|<<.def "insert-text">>|<<insertTextDescription>>|
+|<<.def "insert-text">>|<<insertTextDescription>> |
 |<<.def "focus-editor">>|<<.from-version 5.2.0>> <<focusEditorDescription>> |
 
 
-!Example
+! Example
 
 An example can be seen in [[$:/core/ui/EditorToolbar/bold]]:
 
@@ -152,6 +153,7 @@ An example can be seen in [[$:/core/ui/EditorToolbar/bold]]:
 	$param="wrap-selection"
 	prefix="''"
 	suffix="''"
+	trimSelection="yes"
 />
 ```
 

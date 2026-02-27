@@ -1,0 +1,19 @@
+created: 20141202125500000
+modified: 20241221104605323
+original-modified: 20160617101222113
+tags: TableOfContents
+title: Languages
+ja-title: 言語
+type: text/vnd.tiddlywiki
+
+!! 言語プラグイン
+
+TiddlyWikiのコアユーザーインターフェイスは20以上の言語で利用できます。[[プラグインライブラリからプラグインをインストールする|Installing a plugin from the plugin library]]の手順に従って、言語プラグインをインストールできます。サイドバーの"ツール"タブにある"言語"ボタンを使用して、表示する言語を変更できます。
+
+[[TiddlyWiki を母国語に翻訳する|Translate TiddlyWiki into your language]]方法を学ぶことで、ライブラリに新しい言語を提供できます。
+
+!! 言語エディション
+
+一部の言語については、追加の翻訳ドキュメントを備えた、ビルド済みエディションがあります。
+
+<<list-links "[tag[Languages]]">>

@@ -1,0 +1,42 @@
+created: 20211204120244761
+modified: 20241024105517309
+original-modified: 20211206165108185
+tags: Learning Cascades [[Story Tiddler Template]] [[Story Tiddler Template Cascade]] [[Customise TiddlyWiki]]
+title: How to create a custom story tiddler template
+ja-title: カスタムストーリーTiddlerテンプレートを作成する方法
+type: text/vnd.tiddlywiki
+
+ここでは、[[ストーリーTiddlerテンプレートカスケード|Story Tiddler Template Cascade]]にルールを追加して、<<tag "$:/tags/TiddlerList">>タグを付けたTiddlerをリストフィールドに名前が付けられたTiddlerのサムネイルを組み込んだカスタム外観で表示する方法を示します。
+
+デモを表示するには、[[カスタムストーリーTiddlerテンプレートを含むデモTiddlerリスト|Demo Tiddler List with Custom Story Tiddler Template]]を開きます。
+
+最初に、ストーリーTiddlerテンプレートカスケードに新しいステップを追加します。新しいフィルターステップは次のとおりです: 
+
+```
+[tag[$:/tags/TiddlerList]then[$:/_tw5.com/CustomStoryTiddlerTemplateDemo/Template]]
+```
+
+次のように読むことができます:
+
+```
+Tiddlerが$:/tags/TiddlerListタグを持つなら、$:/_tw5.com/CustomStoryTiddlerTemplateDemo/Templateを返します
+```
+
+> テンプレート$:/_tw5.com/CustomStoryTiddlerTemplateDemo/Templateも、 [[$:/_tw5.com/CustomStoryTiddlerTemplateDemo/Styles]]で定義したスタイルに依存します。
+
+ストーリーTiddlerテンプレートカスケードはタグ<<tag "$:/tags/StoryTiddlerTemplateFilter">>によって定義されます。そのため、そのタグを使用してTiddlerを作成する必要があります。
+
+また、カスケード内の正しいポイントに挿入されていることを確認する必要があります:
+
+* 新しいルールは、タグ$:/tags/TiddlerListが付いたドラフトTiddlerが編集できるようにするために、"draft"ルールの後に置く必要があります。
+* 新しいルールは"default"ルールの前になければなりません。そうでないと実行されません。
+
+コントロールパネルの"カスケード"タブには、`list-before`フィールドを使用してdefaultのステップの直前に新しいステップを挿入できることが示されています。
+
+構成Tiddlerの完全なフィールドのリストは次のとおりです:
+
+<<.tiddler-fields "$:/_tw5.com/CustomStoryTiddlerTemplateDemo/Filter">>
+
+最後に、デモTiddlerを作成する必要があります:
+
+<<.tiddler-fields "Demo Tiddler List with Custom Story Tiddler Template">>

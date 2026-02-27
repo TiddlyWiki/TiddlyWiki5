@@ -1,0 +1,5 @@
+title: Hidden Setting: Retain Story ordering
+ja-title: 隠し設定: 保存時の表示を維持
+tags: [[Hidden Settings]]
+
+Tiddler $:/config/ControlPanel/Basics/DefaultTiddlers/RetainStoryには、$:/ControlPanelの''情報'' -> ''基本''タブの"保存時の表示を維持"ボタンをクリックしたときに$:/DefaultTiddlersに割り当てられる値が含まれています。

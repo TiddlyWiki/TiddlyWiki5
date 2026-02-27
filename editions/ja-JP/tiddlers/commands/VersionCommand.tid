@@ -1,0 +1,6 @@
+title: VersionCommand
+ja-title: Versionコマンド
+tags: Commands
+caption: version
+
+{{$:/language/Help/version}}

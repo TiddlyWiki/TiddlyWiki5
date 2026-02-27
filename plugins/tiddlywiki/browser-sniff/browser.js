@@ -6,10 +6,7 @@ module-type: info
 Initialise $:/info/browser tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.getInfoTiddlerFields = function() {
@@ -68,8 +65,7 @@ exports.getInfoTiddlerFields = function() {
 		}
 		infoTiddlerFields.push({title: "$:/info/browser/name", text: platform});
 		// Non-bowser settings for TiddlyFox and TiddlyDesktop
-		var hasTiddlyFox = !!document.getElementById("tiddlyfox-message-box"), // Fails because message box is added after page load
-			isTiddlyDesktop = false; // Can't detect it until we update TiddlyDesktop to have a distinct useragent string
+		var isTiddlyDesktop = false; // Can't detect it until we update TiddlyDesktop to have a distinct useragent string
 		//infoTiddlerFields.push({title: "$:/info/browser/has/tiddlyfox", text: mapBoolean(hasTiddlyFox)});
 		//infoTiddlerFields.push({title: "$:/info/browser/is/tiddlydesktop", text: mapBoolean(isTiddlyDesktop)});
 		if(isTiddlyDesktop) {
@@ -78,5 +74,3 @@ exports.getInfoTiddlerFields = function() {
 	}
 	return infoTiddlerFields;
 };
-
-})();

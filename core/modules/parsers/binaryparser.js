@@ -6,10 +6,7 @@ module-type: parser
 The binary parser parses a binary tiddler into a warning message and download link
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var BINARY_WARNING_MESSAGE = "$:/core/ui/BinaryWarning";
@@ -62,13 +59,10 @@ var BinaryParser = function(type,text,options) {
 			class: {type: "string", value: "tc-binary-warning"}
 		},
 		children: [warn, link]
-	}
+	};
 	this.tree = [element];
 	this.source = text;
 	this.type = type;
 };
 
 exports["application/octet-stream"] = BinaryParser;
-
-})();
-

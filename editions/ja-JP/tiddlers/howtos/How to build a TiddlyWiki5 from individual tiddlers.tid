@@ -1,0 +1,19 @@
+created: 20131124220600000
+modified: 20250121112457196
+original-modified: 20241025051111864
+tags: [[TiddlyWiki on Node.js]]
+title: How to build a TiddlyWiki5 from individual tiddlers
+ja-title: 個々のTiddlerからTiddlyWiki5を構築する方法
+type: text/vnd.tiddlywiki
+
+まず、[[Node.jsにTiddlyWikiをインストール|Installing TiddlyWiki on Node.js]]の説明に従ってTiddlyWikiをインストールします。
+
+# 空の[[TiddlyWikiFolder|TiddlyWikiFolders]]を作成します
+## 適当な場所に新しいフォルダを作成します (例: `~/MyWiki`)
+## 次のテキストを含む`tiddlywiki.info`というファイルを作成します: 
+##* `{"themes": ["tiddlywiki/vanilla","tiddlywiki/snowwhite"]}`
+## `tiddlers`というサブフォルダを作成します
+##* あるいは、TiddlyWiki5リポジトリから、`editions/empty`フォルダをコピーします
+# `~/MyWiki/tiddlers`ディレクトリ内に個々のTiddlerFilesを作成します
+# TiddlyWiki5ルートディレクトリから次のコマンドを実行して、TiddlerからTiddlyWiki5ファイルを構築します: 
+## `tiddlywiki ~/MyWiki --render $:/core/save/all index.html text/plain`

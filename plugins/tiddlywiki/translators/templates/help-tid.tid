@@ -1,9 +1,9 @@
 title: $:/plugins/tiddlywiki/translators/templates/help-tid
 
-\define generateTid(title)
-title: $:/language/Help/$title$
-description: <$text text={{$:/language/Help/$title$!!description}}/>
+\procedure generateTid(title)
+title: <<title>>
+description: <$text text={{!!description}}/>
 
-<$text text={{$:/language/Help/$title$}}/>
+<$text text={{!!text}}/>
 \end
-<$macrocall $name="generateTid" title=<<currentTiddler>>/>
+<$transclude $variable="generateTid" title=<<currentTiddler>>/>

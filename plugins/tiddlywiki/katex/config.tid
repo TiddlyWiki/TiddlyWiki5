@@ -1,4 +1,6 @@
 title: $:/plugins/tiddlywiki/katex/config
+caption: KaTeX
+tags: $:/tags/ControlPanel/SettingsTab
 
 <div class="tc-control-panel">
 

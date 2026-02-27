@@ -1,0 +1,15 @@
+created: 20190903192324700
+modified: 20241126103517604
+original-modified: 20190903192324700
+tags: [[Hidden Settings]]
+title: Hidden Setting: Sync Polling Interval
+ja-title: 隠し設定: 同期ポーリング間隔
+type: text/vnd.tiddlywiki
+
+[[Syncadaptor|https://tiddlywiki.com/dev/#Syncadaptor]]がサーバーとブラウザ間でTiddlerを同期する間隔を指定します。
+
+デフォルトは"60000" (60 * 1000ミリ秒 = 1分)です。
+
+変更を有効にするには再起動が必要です。
+
+$:/config/SyncPollingInterval

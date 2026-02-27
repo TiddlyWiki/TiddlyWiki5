@@ -1,0 +1,36 @@
+created: 20180927081216605
+modified: 20241114112009202
+original-modified: 20180927084436111
+tags: [[Customise TiddlyWiki]]
+title: Creating a splash screen
+ja-title: スプラッシュ画面を作成する
+type: text/vnd.tiddlywiki
+
+デフォルトでは、TiddlyWikiはロード中に空白の画面を表示します。Wikiのロード中に表示される特別な"スプラッシュ画面"を追加できます。
+
+大きなTiddlyWikiファイルや、遅いネットワーク接続を介してロードされるファイルは、ロードに少し時間がかかる場合があります。完全にロードされると、ブラウザ内ですべてが実行されるため、パフォーマンスが向上します。スプラッシュ画面を使用すると、読み込みプロセスが行われていることをユーザーが認識できるため、ページから離れる可能性が低くなります。
+
+TiddlyWikiが初期化や[[復号化|Encryption]]の前にスプラッシュ画面を表示するには、TiddlyWiki HTMLファイル内に静的HTML/CSSとして埋め込まれます。これは、[[SystemTag: $:/tags/RawMarkupWikified/TopBody]]、または$:/tags/RawMarkupで始まるシステムタグで行われます。
+
+Wikiの読み込みが完了したときにスプラッシュ画面を削除するには、HTMLを特別なクラス`tc-remove-when-wiki-loaded`を持つコンテナ内に包み込む必要があります。このクラスを持つDOM要素は、Wikiがロードされるとコア機能によって自動的に削除されます。
+
+以下は、//Loading//というテキストを表示するだけの単純なスプラッシュ画面の例です。これを使用するには、このテキストを新しいTiddlerにコピーし、タイプ"text/plain"とタグ"$:/tags/RawMarkupWikified/TopBody"を指定します。: 
+
+```
+<div class="tc-remove-when-wiki-loaded">
+Loading...
+</div>
+```
+
+TiddlerにWikiTextタイプ`text/vnd.tiddlywiki`が指定されている場合、ファイルの保存時にコンテンツがwiki化されるので、トランスクルージョンなども可能になります。たとえば、ロード時メッセージでサイトのタイトルを引用する例を次に示します。これを使用するには、このテキストを新しいTiddlerにコピーし、タイプ"text/vnd.tiddlywiki"とタグ"$:/tags/RawMarkupWikified/TopBody"を指定します。: 
+
+```
+\rules only filteredtranscludeinline transcludeinline
+<div class="tc-remove-when-wiki-loaded">
+Please wait while {{$:/SiteTitle}} is loading
+</div>
+```
+
+この`\rules`命令は、認識されるWikiText構文を2つの形式のインライントランスクルージョンに制限するために使用されます。これにより、Tiddlerコンテンツの誤ったWiki化が回避できます。
+
+このWikiには、CSSアニメーションと画像を使用した複雑なスプラッシュ画面の例があります: $:/SplashScreenを参照してください。

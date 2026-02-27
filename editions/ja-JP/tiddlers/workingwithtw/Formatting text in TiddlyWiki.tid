@@ -1,0 +1,59 @@
+created: 20140908131500000
+modified: 20241103115932893
+original-modified: 20140919214820549
+tags: [[Working with TiddlyWiki]]
+title: Formatting text in TiddlyWiki
+ja-title: TiddlyWikiでのテキストフォーマット
+type: text/vnd.tiddlywiki
+
+Tiddlerのテキスト内では、WikiTextと呼ばれる特別なフォーマットを使用して、テキストの表示方法を制御できます。
+
+WikiTextは、[[エディターツールバー|Editor toolbar]]を使用して入力することも、手動で入力することもできます。前者は便利ですが、WikiTextマークアップコードがわかっている場合は後者の方が速いです。
+
+! 単純なフォーマット
+
+最も単純なものは、WikiTextでは、太字、斜体、リスト、表などの使い慣れたワードプロセッサ機能を使用できます。例:
+
+```
+The ''quick'' brown ~~flea~~ fox //jumps// over the `lazy` dog
+```
+
+… 次のように表示されます:
+
+The ''quick'' brown ~~flea~~ fox //jumps// over the `lazy` dog
+
+! Tiddlerとの連携
+
+WikiTextでは、二重角括弧を使用するか、CamelCaseワードの自動リンクを利用して、Tiddlerにリンクすることができます: 
+
+```
+This is a link to HelloThere, and one to [[History of TiddlyWiki]]
+```
+
+… 次のように表示されます:
+
+This is a link to HelloThere, and one to [[History of TiddlyWiki]]
+
+! マクロ
+
+マクロを使用すると、WikiTextの繰り返し断片をパッケージ化して、簡単に再利用できるようになります。
+
+たとえば、一意の識別子から~YouTube動画のURLを生成するマクロの定義は次のとおりです:
+
+```
+\define youtube(video)
+https://www.youtube.com/watch?v=$video$
+\end
+```
+
+この定義を適用すると、`<<youtube 1g66s7UbyuU>>`は、URL https://www.youtube.com/watch?v=1g66s7UbyuU を生成します
+
+! 高度なWikiText
+
+高度なWikiText機能を使用すると、自動リストやドロップダウンメニューなどのインタラクティブ機能を作成できます。実際、TiddlyWiki自体のユーザーインターフェイス全体がWikiTextで記述されているため、TiddlyWikiで見られるどの機能もすべて、独自のWikiで使用できます。
+
+高度な機能の中には、複雑なコーディングを必要とするものもあります。TiddlyWikiには、タブ、目次、Tiddlerリストなど、一般的なユーザーインターフェイスタスクを簡素化する組み込みマクロがいくつか用意されています。
+
+! 詳細
+
+WikiTextの書き方の詳細については、[[WikiText]]を参照してください。

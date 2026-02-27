@@ -1,0 +1,172 @@
+created: 20161015114118243
+modified: 20250201104758596
+original-modified: 20211114101256212
+tags: TiddlyWikiFolders [[TiddlyWiki on Node.js]]
+title: tiddlywiki.files Files
+ja-title: tiddlywiki.filesファイル
+type: text/vnd.tiddlywiki
+
+! 紹介
+
+[[TiddlyWikiフォルダ|TiddlyWikiFolders]]内のサブフォルダーにあるJSONファイル`tiddlywiki.files`は、フォルダーを再帰的にスキャンしてTiddlerファイルを探す通常のロジックをオーバーライドします。代わりに、`tiddlywiki.files`ファイルは特定のファイルとフォルダーからTiddlerをロードするための指示を指定します。
+
+ファイルの形式は、2つのオプションプロパティを持つオブジェクトです: 
+
+* ''tiddlers'' - ファイルから読み取ったフィールドを上書きや変更する機能を持つ外部ファイルを記述するオブジェクトの配列
+* ''directories'' - 外部ディレクトリを記述するオブジェクトの配列、それらのディレクトリ内のどのファイルを処理すべきかを決定するフィルターと、ファイルから読み取ったフィールドのいずれかを上書きや変更する機能
+
+`tiddlywiki.files`の処理に大幅な機能強化が[[リリース 5.1.14|Release 5.1.14]]で導入されたことに注意してください。
+
+!! フィールドのオーバーライド
+
+`tiddlywiki.files`ファイルの''tiddlers''セクションと''directories''セクションの両方に、`fields`オブジェクトを使用してフィールドの値を上書きやカスタマイズする機能が含まれています。
+
+各フィールドは、フィールドに直接割り当てられる''文字列''や''配列''値として指定することも、<<.from-version "5.1.14">>フィールドの値を生成する方法を説明する''オブジェクト''として指定することもできます。オブジェクトには次のプロパティが含まれます: 
+
+* ''source'' - (オプション) フィールドのソース値を指定する文字列。指定しない場合は、既存の値が使用されます
+** //filename// Tiddlerを含むファイルのファイル名
+** //filename-uri-decoded// [[URIデコード|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]]を適用した、Tiddlerを含むファイルのファイル名
+** //basename// 拡張子なしのTiddlerを含むファイルのファイル名
+** //basename-uri-decoded// [[URIデコード|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]]を適用した、拡張子なしのTiddlerを含むファイルのファイル名
+** //extname// Tiddlerを含むファイル名の拡張子
+** //created// Tiddlerを含むファイルの作成日時
+** //modified// Tiddlerを含むファイルの更新日時
+** <<.from-version "5.3.0">> //filepath// ディレクトリの''path''プロパティを基準とした、Tiddlerを含むファイルのパス(''directories''宣言でのみ使用可能)
+** <<.from-version "5.3.0">> //subdirectories// ディレクトリの''path''プロパティを基準とした、ファイルの相対パス内のサブディレクトリの配列(''directories''宣言でのみ使用可能)
+* ''prefix'' - (オプション) フィールドの値の先頭に追加する文字列
+* ''suffix'' - (オプション) フィールドの値の末尾に追加する文字列
+
+! Tiddlersセクション
+
+`tiddlers`配列内のファイルの仕様は、次のプロパティをサポートします: 
+
+* ''file'': (必須) Tiddlerデータを含むファイルへの絶対パスまたは相対パス (相対パスは`tiddlywiki.files`ファイルのパスを基準とします)
+* ''isTiddlerFile'': (オプション) `true`の場合、ファイルは[[tiddlerファイル|TiddlerFiles]]として扱われ、Tiddlerを抽出するためにデシリアライズされます。それ以外の場合は、ファイルの生のコンテンツが解析されずに`text`フィールドに割り当てられます
+* ''fields'': (オプション) Tiddlerファイルで提供されるフィールドを上書きやカスタマイズする値を含むオブジェクト (上記を参照)
+* ''prefix''と''suffix'': (オプション) Tiddlerの`text`フィールドにプレフィックスとサフィックスとして付加される文字列
+*> ''prefix''を指定することは、''fields''オブジェクトの`text`のフィールドを`{"prefix":"<prefixvalue>"}`に設定することと同じであることに注意してください。
+
+! Directoriesセクション
+
+`directories`配列内のディレクトリの仕様は次の形式を取ることができます: 
+
+* Tiddlerファイルを含むディレクトリへの絶対パスか相対パスを指定する、''string''リテラル(相対パスは`tiddlywiki.files`ファイルのパスを基準として解釈されます)。Tiddlerファイルはディレクトリを再帰的に検索されます
+* <<.from-version "5.1.14">> 次のプロパティを持つ''object'':
+** ''path'' - (必須) Tiddlerファイルを含むディレクトリへの絶対パスか相対パス(相対パスは`tiddlywiki.files`ファイルのパスを基準として解釈されます)。デフォルトではディレクトリは再帰的に検索されないことに注意してください。//searchSubdirectories//フラグが`true`に設定されていない限り、サブディレクトリは無視されます(以下を参照)。
+** ''filesRegExp'' - (オプション) ディレクトリ内で処理するファイルのファイル名に一致する[[正規表現|https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions]]
+** ''isTiddlerFile'' - (必須) `true`の場合、ファイルは[[Tiddlerファイル|TiddlerFiles]]として扱われ、Tiddlerを抽出するためにデシリアライズされます。それ以外の場合、ファイルの生のコンテンツが解析されずに`text`フィールドに割り当てられます
+** ''isEditableFile'' - <<.from-version "5.1.23">> (オプション) `true`の場合、Tiddlerへの変更は元のファイルに保存されます。Tiddlerは、$:/config/FileSystemPathフィルターから結果が生成されない限り、元のファイルパスに保存されます。フィルターから結果が返された場合、生成された最終的なファイルパスが上書きされます。
+** ''searchSubdirectories'' - <<.from-version "5.1.23">> (オプション) `true`の場合、//path//のすべてのサブディレクトリで(オプションの)//filesRegExp//に一致するファイルが再帰的に検索されます。//filesRegExp//が指定されていない場合は、//path//のすべてのサブディレクトリ内のすべてのファイルがロードされます。//source//属性の//filename//(上記を参照)によって生成されたTiddlerタイトルにはファイル名のみが含まれ、パスのサブディレクトリは含まれません。この結果、同じTiddlerタイトルでロードされた複数のファイルが存在する場合、そのTiddlerタイトルでロードされた最後のファイルのみがメモリに格納されます。これを防ぐには、//filename//の代わりに//filepath//属性を使用できます。または、複数のディレクトリオブジェクトを含め、//source//属性とともに//prefix//または//suffix//を使用してタイトルフィールドをカスタマイズすることもできます。
+** ''fields'' - (必須) Tiddlerファイルで提供されるフィールドを上書きやカスタマイズする値を含むオブジェクト(上記を参照)
+
+同じ名前にサフィックス`.meta`を加えたファイルを作成することで、特定のファイルのフィールドを上書きすることもできます。 -- TiddlerFilesを参照してください。
+
+! 例
+
+これらの`tiddlywiki.files`の例は、[[Wikiフォルダ|TiddlyWikiFolders]]の独自のサブディレクトリに配置する必要があります。
+
+メインの[[TiddlyWiki 5 GitHub リポジトリ|https://github.com/TiddlyWiki/TiddlyWiki5]]にも`tiddlywiki.files`ファイルの例がいくつかあります。
+
+!! PDFのフォルダをインポートする
+
+この例では、相対パスで指定されたフォルダーから拡張子`.pdf`を持つすべてのファイルを取得します。このパスは"../../../"で始まり、この構成ファイルが格納されているフォルダーの3ディレクトリ階層上を示します。各Tiddlerは、次のフィールドを使用してLazyLoading用にセットアップされています:
+
+* ''title'' - PDFファイルのURIデコードされたベースファイル名を設定。[[URIデコード|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]]により、"/"などの文字をURIエンコードして"%2F"としてタイトルに含めることができます
+* ''created'' - PDFファイルの作成日時を設定
+* ''modified'' - PDFファイルの変更日時を設定
+* ''type'' - `application/pdf`を設定
+* ''tags'' - `$:/tags/AttachedFile`を設定
+* ''text'' - 空の文字列を設定
+* ''_canonical_uri'' - ファイル名と文字列"pdfs/"を連結した値を設定
+
+```
+{
+    "directories": [
+        {
+            "path": "../../../input/pdfs",
+            "filesRegExp": "^.*\\.pdf$",
+            "isTiddlerFile": false,
+            "fields": {
+                "title": {"source": "basename-uri-decoded"},
+                "created": {"source": "created"},
+                "modified": {"source": "modified"},
+                "type": "application/pdf",
+                "tags": ["$:/tags/AttachedFile"],
+                "text": "",
+                "_canonical_uri": {"source": "filename", "prefix": "pdfs/"}
+            }
+        }
+    ]
+}
+```
+
+!! テキストファイルのフォルダをインポートする
+
+この例では、相対パスで指定されたフォルダから拡張子`.txt`を持つすべてのファイルを取得します。このフォルダはWikiのベースディレクトリ内にあり、現在の構成ファイルはWikiの"tiddlers/"ディレクトリ内のディレクトリにあります。したがって、この場合、パスは"../../"で始まり、2つのディレクトリ階層上に移動し、次に "externalnotes/"ディレクトリまで下ります。各Tiddlerは次のフィールドで設定されます: 
+
+* ''title'' - テキストファイルのURIデコードされたベースファイル名を設定します。[[URIデコード|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]]により、"/"などの文字をURIエンコードして"%2F"としてタイトルに含めることができます
+* ''created'' - テキストファイルの作成日時を設定
+* ''modified'' - テキストファイルの変更日時を設定
+* ''type'' - `text/plain`を設定
+* ''tags'' - `[[note]] [[externalnote]] [[.txt]]`を設定(配列表記を使用)
+* ''text'' - 設定されないため、ファイルの内容がテキストフィールドとして読み込まれます
+
+```
+{
+    "directories": [
+        {
+            "path": "../../externalnotes",
+            "filesRegExp": ".+\\.txt",
+            "isTiddlerFile": false,
+            "isEditableFile": true,
+            "fields": {
+                "title": {"source": "basename-uri-decoded"},
+                "created": {"source": "created"},
+                "modified": {"source": "modified"},
+                "type": "text/plain",
+                "tags": ["note", "externalnote", ".txt"]
+            }
+        }
+  ]
+}
+```
+
+これにより、`../../externalnotes/`ディレクトリ内のすべてのテキストファイルが個別のTiddlerとしてWikiに読み込まれます。これらは、さまざまなマークアップ言語のスニペットコレクションである可能性があります。次に、これらの各Tiddlerの`type`フィールドを、言語に合わせて変更できます。たとえば、Wikitextの場合は"text/vnd.tiddlywiki"、マークダウンファイルの場合は"text/markdown"です。次に、次の行で$:/config/FileSystemPathsと$:/config/FileSystemExtentions Tiddlerを使用すると、これらのTiddlerへの変更が、開始元のディレクトリに保存され、"*.txt"ファイルとして、"*.txt.meta"ファイルとともに保存されます。これらのメタファイルは必要に応じて生成され、サーバーの再起動時に、`tiddlywiki.files`構成ファイルから生成されたフィールド(Tiddlerの`type`フィールドなど)が上書きされます。
+
+[[Tiddlerファイル名のカスタマイズ|Customising Tiddler File Naming]]の例から、$:/config/FileSystemPaths Tiddler内の最後のフィルター`[!tag[externalnote]addprefix[wiki/]]`は、`externalnotes`でタグ付けされたすべてのTiddler(以前のフィルターに一致しなかったもの)を除外することがわかります。これらのTiddlerのファイルパスは、ブート起動時に生成された$:/config/OriginalTiddlerPathsから取得されます。
+
+次に、$:/config/FileSystemExtensions Tiddler内のフィルター`[tag[.txt]then[.txt]]`により、これらすべてのTiddlerが*.txtおよび付随する*.txt.metaファイルとしてディスクに保存されます(通常のTiddlerタイプとファイルタイプのマッピングを上書きします)。この場合、Tiddlywiki Wikitextやマークダウンテキストのスニペットを"テキスト"(*.txtファイル)に保存できるようになります。
+
+!! 画像のインポートと自動タグ付け
+
+この例では、`files`ディレクトリとそのすべてのサブディレクトリ内のすべての画像ファイルを外部画像Tiddlerとしてインポートし、ファイルパスに基づいてタグ付けします。各Tiddlerには、次のフィールドが設定されます: 
+
+* ''title'' - テキストファイルのURIデコードされたベースファイル名を設定
+* ''created'' - テキストファイルの作成日時を設定
+* ''modified'' - テキストファイルの更新日時を設定
+* ''type'' - `image/jpeg`に設定します。現在、ファイルから画像Tiddlerの正しいContentTypeを推測する方法はありませんが、`image/jpeg`Tiddlerはpngやgif画像でも正しくレンダリングされるはずです。代わりに、jpg、png、gifファイルの個別の定義を、`image/jpeg`、`image/png`、`image/gif`タイプをそれぞれ使用して作成することもできます。
+* ''tags'' - 親ディレクトリ(この場合は`files`)を基準とした画像の相対パスに基づいて生成されます。たとえば、`files/photos`内の画像には`photos`のタグが付けられ、 `files/photos/family`内の画像には`photos`と`family`両方のタグが付けられ、ルート`files`ディレクトリ内の画像にはタグが付けられません。
+* ''text'' - 空の文字列に設定
+* ''_canonical_uri'' - Wikiルートを基準とした画像の完全な相対ファイルパスを設定
+
+```
+{
+    "directories": [
+        {
+            "path": "../../files/",
+            "filesRegExp": "^.*\\.(?:jpg|jpeg|png|gif)$",
+            "isTiddlerFile": false,
+	        "searchSubdirectories": true,
+            "fields": {
+                "title": {"source": "basename-uri-decoded"},
+                "created": {"source": "created"},
+                "modified": {"source": "modified"},
+                "type": "image/jpeg",
+                "tags": { "source": "subdirectories" },
+                "text": "",
+                "_canonical_uri": { "source": "filepath", "prefix": "files/" }
+            }
+        }
+    ]
+}
+```

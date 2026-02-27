@@ -1,0 +1,15 @@
+caption: ~TiddlyPWA
+color: #E056B4
+community-author: Val Packett
+created: 20240902162617154
+delivery: Progressive Web Application
+description: Save to Browser Storage
+method: save
+modified: 20240902162617154
+tags: Chrome Firefox Linux Mac Opera Safari Saving Windows iOS Edge
+title: TiddlyPWA - Save to Browser Storage
+type: text/vnd.tiddlywiki
+
+~TiddlyPWA turns TiddlyWiki 5 into an offline-first Progressive Web App with encrypted local persistent storage and efficient synchronization with a self-hosted server that can easily be hosted for free.
+
+https://tiddly.packett.cool/

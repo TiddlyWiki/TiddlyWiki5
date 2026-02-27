@@ -6,10 +6,7 @@ module-type: command
 Command to import an xlsx file
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -27,8 +24,7 @@ Command.prototype.execute = function() {
 	if(this.params.length < 1) {
 		return "Missing parameters";
 	}
-	var self = this,
-		wiki = this.commander.wiki,
+	var wiki = this.commander.wiki,
 		filename = this.params[0],
 		importSpec = this.params[1],
 		XLSXImporter = require("$:/plugins/tiddlywiki/xlsx-utils/importer.js").XLSXImporter,
@@ -42,5 +38,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

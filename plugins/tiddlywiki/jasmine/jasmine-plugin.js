@@ -6,10 +6,8 @@ module-type: library
 The main module of the Jasmine test plugin for TiddlyWiki5
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: true */
+
 "use strict";
 
 var TEST_TIDDLER_FILTER = "[all[tiddlers+shadows]type[application/javascript]tag[$:/tags/test-spec]]";
@@ -71,7 +69,7 @@ exports.runTests = function(callback,specFilter) {
 		context.require = function(moduleTitle) {
 			// mock out the 'glob' module required in
 			// "$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js"
-			if (moduleTitle === "glob") {
+			if(moduleTitle === "glob") {
 				return {};
 			}
 			return $tw.modules.execute(moduleTitle,title);
@@ -95,7 +93,6 @@ exports.runTests = function(callback,specFilter) {
 		window.jasmineRequire = jasmineCore;
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/jasmine-html.js");
 		// Prevent jasmine-core/boot.js from installing its own onload handler. We'll execute it explicitly when everything is ready
-		var previousOnloadHandler = window.onload;
 		window.onload = function() {};
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/boot.js");
 		var jasmineOnloadHandler = window.onload;
@@ -144,7 +141,7 @@ exports.runTests = function(callback,specFilter) {
 	}
 	// Add Jasmine's DSL to our context
 	var env = jasmine.getEnv();
-	var jasmineInterface = jasmineCore.interface(jasmine,env)
+	var jasmineInterface = jasmineCore.interface(jasmine,env);
 	context = $tw.utils.extend({},jasmineInterface,context);
 	// Iterate through all the test modules
 	var tests = $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
@@ -157,5 +154,3 @@ exports.runTests = function(callback,specFilter) {
 		nodeJasmineWrapper.execute(null,specFilter);
 	}
 };
-
-})();

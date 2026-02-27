@@ -1,0 +1,32 @@
+created: 20151006145934884
+modified: 20241020112248683
+original-modified: 20160610084018658
+tags: Learning
+title: How to export tiddlers
+ja-title: Tiddlerのエクスポート方法
+type: text/vnd.tiddlywiki
+
+! すべてのTiddlerをエクスポートする
+
+''すべて''のTiddlerをエクスポートするには、サイドバーの"ツール"タブをクリックします。<<.icon $:/core/images/export-button>>''すべてエクスポート''ボタンを見つけてクリックします。ポップアップメニューで、Tiddlerをエクスポートする形式の選択がいくつか提供されます
+
+! Tiddlerのエクスポート
+
+特定のTiddlerをエクスポートする場合は、まずそのTiddlerに移動します。次に、Tiddler上部に表示される<<.icon $:/core/images/down-arrow>>''その他のコマンド''ボタンをクリックします。表示されるリストから<<.icon $:/core/images/export-button>>''Tiddlerをエクスポート''を選択します。ポップアップメニューでは、Tiddlerをエクスポートする形式を選択できます
+
+! 条件に一致するTiddlerをエクスポートする(フィルター)
+
+Tiddlerを選択してエクスポートするには、サイドバーの検索領域の横にある小さな虫眼鏡<<.icon $:/core/images/advanced-search-button>>をクリックします。これにより、[[Advanced Search|$:/AdvancedSearch]]Tiddlerが開きます。Advanced Search Tiddlerの"フィルタ"タブをクリックします。[[フィルタ|Filters]]タブのみで、選択したTiddlerをエクスポートできます。[[フィルタ|Filters]]は特定の構文に従います。フィルタの作成方法については、この[[フィルタ|Filters]]リンクをクリックしてください
+
+フィルタを入力すると、そのフィルタに一致するTiddlerのリストが表示されます。これで、フィルタ入力フィールドの右側に、<<.icon $:/core/images/export-button>>''Tiddlerをエクスポート''ボタンをクリックできるようになります。ポップアップメニューでは、Tiddlerをエクスポートする形式を選択できます
+
+! エクスポート形式
+
+現在、利用可能なエクスポート形式は次のとおりです: 
+
+* CSVファイル形式
+* JSONファイル形式
+* 静的HTMLファイル
+* ".tid"ファイル形式
+
+この``".tid"``形式は、すべてのTiddlerまたは選択したTiddlerをエクスポートしようとしても、1つのTiddlerだけがエクスポートされるという点で他の形式とは異なります

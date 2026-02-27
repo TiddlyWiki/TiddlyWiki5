@@ -17,10 +17,7 @@ Wiki text inline rule for embedding images. For example:
 Generates the `<$image>` widget.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "image";
@@ -116,7 +113,7 @@ exports.parseImage = function(source,pos) {
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Get the source up to the terminating `]]`
-	token = $tw.utils.parseTokenRegExp(source,pos,/(?:([^|\]]*?)\|)?([^\]]+?)\]\]/g);
+	token = $tw.utils.parseTokenRegExp(source,pos,/(?:([^|\]]*?)\|)?([^\]]+?)\]\]/y);
 	if(!token) {
 		return null;
 	}
@@ -129,5 +126,3 @@ exports.parseImage = function(source,pos) {
 	node.end = pos;
 	return node;
 };
-
-})();

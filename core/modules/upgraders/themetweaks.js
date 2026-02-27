@@ -15,10 +15,7 @@ Now, each tweak is stored in its own separate tiddler.
 This upgrader copies any values from the old format to the new. The old data tiddlers are not deleted in case they have been used to store additional indexes.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var MAPPINGS = {
@@ -37,8 +34,7 @@ var MAPPINGS = {
 };
 
 exports.upgrade = function(wiki,titles,tiddlers) {
-	var self = this,
-		messages = {};
+	var messages = {};
 	// Check for tiddlers on our list
 	$tw.utils.each(titles,function(title) {
 		var mapping = MAPPINGS[title];
@@ -61,5 +57,3 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 	});
 	return messages;
 };
-
-})();

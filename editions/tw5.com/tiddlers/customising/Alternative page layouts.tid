@@ -1,5 +1,5 @@
 created: 20201123172925848
-modified: 20240627060629394
+modified: 20240801020629394
 tags: [[Customise TiddlyWiki]]
 title: Alternative page layouts
 type: text/vnd.tiddlywiki
@@ -23,9 +23,8 @@ This alternative page template can either be a tweaked and modified version of t
 tc-page-container tc-language-$(languageTitle)$ your-plugin-name-container
 \end
 \procedure redirected-navigate-actions()
-  <$action-setfield $tiddler="$:/layout" text="" $timestamp="no">
-    <$action-navigate $to=<<event-navigateTo>> $scroll="yes" />
-  </$action-setfield>
+  <$action-setfield $tiddler="$:/layout" text="" $timestamp="no" />
+  <$action-navigate $to=<<event-navigateTo>> $scroll="yes" />
 \end
 
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>

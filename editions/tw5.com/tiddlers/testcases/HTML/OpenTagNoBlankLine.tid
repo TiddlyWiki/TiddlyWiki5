@@ -1,0 +1,34 @@
+created: 20240622143533021
+description: No blank line after open tag
+modified: 20240622145145440
+tags: $:/tags/wiki-test-spec
+title: TestCases/HTML/OpenTagNoBlankLine
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Block mode punctuation is not recognised when HTML open tag is not followed by a blank line
++
+title: Output
+
+<div>
+* Open tag without a blank line means
+* block mode punctuation (i.e. this list) will
+* NOT be recognised.
+
+Paragraphs are only recognised in block mode. Even with blank lines, new paragraphs are not recognised.
+
+This also is not a new paragraph.
+</div>
++
+title: ExpectedResult
+
+<p><div>
+* Open tag without a blank line means
+* block mode punctuation (i.e. this list) will
+* NOT be recognised.
+
+Paragraphs are only recognised in block mode. Even with blank lines, new paragraphs are not recognised.
+
+This also is not a new paragraph.
+</div></p>

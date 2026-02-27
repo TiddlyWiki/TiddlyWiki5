@@ -1,0 +1,35 @@
+caption: Noteself
+color: #29B6F6
+community-author: Danielo Rodríguez
+created: 20141122093837330
+delivery: Web Service
+description: 自分でホストもできるフリーのオンラインサービス
+method: sync
+modified: 20241014101640671
+original-modified: 20211113010826610
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge [[Community Editions]] [[Other Resources]]
+title: "Noteself" by Danielo Rodríguez
+ja-title: Danielo Rodríguezによる"Noteself"
+type: text/vnd.tiddlywiki
+url: https://noteself.github.io/
+
+~NoteSelfは、個人の、プライベートな、カスタマイズ可能なEvernoteのようなエクスペリエンスです。
+クラウドが必要ですか?いいですね!必要ありませんか?それも結構です!すべてはあなた次第です。決めるのはあなたです!
+少しわがままになってみませんか?
+
+https://noteself.github.io/
+
+<<<
+~NoteSelfは、アイデア、メモ、考え、ヒント、コツ、レシピなど...、
+何でも保存するのに最適な場所です。~NoteSelfは保存し、インデックス付けし、簡単に検索できるようにして、
+必要なときにいつでもすぐに見つけられるようにします!
+
+皆さんは既にEvernoteをご存知で、愛用していることを私たちも知っています。使いやすく、同期でき、検索機能もあります...
+ほぼ完璧ですが、次の点はどうでしょうか:
+
+* プライバシー - すべてがEvernoteのサーバーに保存されます!
+* カスタマイズ - Evernoteのインターフェースが気に入らなくても、何もできません
+
+~NoteSelfは、強力で、フリーで、高度にカスタマイズ可能なオープンソースの個人用Wikiである~TiddlyWikiをベースに構築されています。
+私たちは、強力なカスタマイズシステムを最大限に活用し、利用可能な最高の組み込みデータベースの1つである[[PouchDb|http://www.pouchdb.com]]と組み合わせて、必要な同期機能を実現しました。
+<<<

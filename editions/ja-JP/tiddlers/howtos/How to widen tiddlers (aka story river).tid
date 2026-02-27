@@ -1,0 +1,17 @@
+created: 20161208000000000
+modified: 20241021113311176
+original-modified: 20161208000000000
+tags: Learning [[Customise TiddlyWiki]]
+title: How to widen tiddlers (aka storyriver)
+ja-title: Tiddler(別名ストーリーリバー)を広げる方法
+type: text/vnd.tiddlywiki
+
+次の方法で、Tiddler(ストーリーリバーとも呼ばれる)のメイン列の幅を変更できます: 
+
+* 設定の歯車をクリックしてコントロールパネルを開きます
+* コントロールパネルで "外観" を選択し、"Theme Tweaks"を選択します
+* Theme tweaksで、下にスクロールします 
+
+`story right`と`story width`、`tiddler width`の設定が表示されます。これらの数値を、より大きな値に設定すると、Tiddlerの幅 を広げることができます。一般的に、`story right`と`story width`は、同じサイズか、`tiddler width`を少し小さくします。Tiddlerの幅にパーセンテージを使用することもできます。
+サイドバーがページの上部に表示されても構わない場合を除き、サイドバーのブレークポイントをストーリーリバーよりも大きなものに変更することもできます
+

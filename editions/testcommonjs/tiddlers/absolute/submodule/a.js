@@ -9,6 +9,6 @@ Absolute require test
 
 
 exports.foo = function () {
-    return require('../b');
+	return require("../b");
 };
 

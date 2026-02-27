@@ -6,10 +6,7 @@ module-type: global
 The $tw.Language() manages translateable strings
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -41,5 +38,3 @@ Language.prototype.getRawString = function(title) {
 };
 
 exports.Language = Language;
-
-})();

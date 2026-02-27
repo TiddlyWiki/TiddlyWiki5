@@ -1,0 +1,9 @@
+created: 20240612115323606
+modified: 20240612115535069
+tags: [[Core Variables]] Variables
+title: actionTiddlerList Variable
+type: text/vnd.tiddlywiki
+
+The variable `actionTiddlerList` is used:
+
+* Within the ''listActions'' string of the DroppableWidget, the <<.def actionTiddlerList>> [[variable|Variables]] contains a [[Title List]] of the tiddlers being dropped.

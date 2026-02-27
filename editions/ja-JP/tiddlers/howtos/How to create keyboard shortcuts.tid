@@ -1,0 +1,107 @@
+tags: [[Customise TiddlyWiki]] Learning
+title: How to create keyboard shortcuts
+ja-title: キーボードショートカットを作成する方法
+type: text/vnd.tiddlywiki
+
+<br>
+<<.tip """[[TiddlyWiki]]は2種類のキーボードショートカットを区別します。<$macrocall $name=".tag" _="input"/>フィールド内や<$macrocall $name=".wlink" to="KeyboardWidget"/>ウィジェットによって処理される<$macrocall $name=".tag" _="textareas"/>でのみ機能するものと、またはグローバルに機能する、つまり、アクセスするのにページにフォーカスがあるだけでよいというキーボードショートカットです。後者は、Wikiが読み込まれたときに機能し始めるメカニズムによって処理されます""">>
+
+!! 設定メカニズムは両方のショートカットタイプで同じです
+
+<$vars tv-show-missing-links="no">
+
+<<.def プレフィックス>> `$:/config/ShortcutInfo/`と`my-shortcut`のような''一意のサフィックス''が追加されたTiddlerは、新しいショートカットを$:/ControlPanelの[[キーボードショートカットタブ|$:/core/ui/ControlPanel/KeyboardShortcuts]]に表示します。オプションの説明をテキストフィールドに追加できます
+
+[[キーボードショートカットタブ|$:/core/ui/ControlPanel/KeyboardShortcuts]]では、ショートカットをトリガーする''キーの組み合わせ''を設定できます:
+
+> 新しいショートカットに定義された''一意のサフィックス''を探し、''キーの組み合わせ''を検出し、入力フィールドに検出された組み合わせを表示するポップアップを開くボタン<$button class="tc-btn-invisible"><<.icon $:/core/images/edit-button>><$action-sendmessage $message="tm-notify" $param="$:/core/images/edit-button"/></$button>をクリックします
+
+>''ショートカットの追加''は、ショートカットにキーの組み合わせを割り当てます
+
+!!! 選択したプラットフォームに応じて、構成メカニズムは特定の命名法を持つTiddlerを作成します
+
+> $:/config/shortcuts/ + すべてのプラットフォーム(オペレーティングシステム)で機能するショートカットの''ショートカットサフィックス'' 
+
+> $:/config/shortcuts-(mac/not-mac/windows/not-windows/linux/not-linux)/ + 選択したプラットフォームでのみ機能するショートカットや除外されたプラットフォームでは機能しないショートカットの''ショートカットサフィックス''
+
+!!! 例
+
+* $:/config/shortcuts/`my-shortcut`
+* $:/config/shortcuts-mac/`my-shortcut`
+* $:/config/shortcuts-windows/`my-shortcut`
+* $:/config/shortcuts-linux/`my-shortcut`
+* $:/config/shortcuts-not-mac/`my-shortcut`
+* $:/config/shortcuts-not-windows/`my-shortcut`
+* $:/config/shortcuts-not-linux/`my-shortcut`
+
+<<.tip """上記の''ShortcutInfo''Tiddlerが最初に作成され、ショートカットが~ControlPanelで構成されている場合には、これらのプラットフォーム固有のTiddlerを手動で作成する必要がないことに注意してください""">>
+
+<br>
+
+!! この時点でショートカットが定義され、その''アクション''を設定できます
+
+!! [[キーボードウィジェット|KeyboardWidget]]の使用
+
+> <<.wlink "KeyboardWidget">>ウィジェットは、そのスコープ内の<<.tag input>>や<<.tag textarea>>フィールド内で押されたキーの組み合わせを検出します。<<.wlink "KeyboardWidget">>ウィジェットは、<<.tag input>>や<<.tag textarea>>フィールドを"包含"する必要があり、その<<.attr key>>属性は、[[キー記述子|Key Descriptor]]構文を使用して構成Tiddlerを指定するか、キーを明示的に含みます
+
+```
+<$keyboard key="((my-shortcut))" actions='<$action-setfield $tiddler="my-tiddler" $field="my-field" $value="my-value"/>'>
+
+<$edit-text tag="input" tiddler="my-tiddler"/>
+
+</$keyboard>
+```
+
+```
+<$keyboard key="alt-shift-M" actions='<$action-setfield $tiddler="my-tiddler" $field="my-field" $value="my-value"/>'>
+
+<$edit-text tag="input" tiddler="my-tiddler"/>
+
+</$keyboard>
+```
+
+> アクションが定義されている場合、<<.wlink KeyboardWidget>>ウィジェットは、その<<.attr key>>属性で定義されたキーの組み合わせがそのスコープ内の
+<<.tag input>>や<<.tag textarea>>フィールドで押されたことを検出すると、その<<.attr actions>>属性で定義されたアクションを呼び出します
+
+<br>
+
+!! グローバルなキーボードショートカットの使用
+
+> 新しいグローバルキーボードショートカットの作成の詳細については、[[キーボードショートカットTiddler]]を参照してください。
+
+> ''グローバル''キーボードショートカットのアクションは、<<tag $:/tags/KeyboardShortcut>>タグが付けられたTiddlerの''テキスト''フィールドに保存されます
+
+> ''キーフィールド''は、[[キーボードショートカット記述子|Keyboard Shortcut Descriptor]]と呼ばれる`((my-shortcut))`構文を通じて、アクションTiddlerと対応するショートカットを結びつけます
+
+:<h3> 構文: `((` + `選択したサフィックス` + `))` </h3>
+
+> Tiddlerが<<tag $:/tags/KeyboardShortcut>>タグを持っている場合、''key''フィールドに[[キーボードショートカット記述子|Keyboard Shortcut Descriptor]]を値として設定し、テキストフィールドにアクションを設定すると、メカニズムが設定されたキーの組み合わせを検出するとアクションがトリガーされます
+
+<br>
+<$macrocall $name=".tip" _="""グローバルキーボードショートカットの''外部で''定義された''マクロ''(`$:/tags/Global`タグの付いたTiddler経由)は、アクセス可能にするために''インポートする''必要があります。
+[[インポートプラグマ|Pragma]]は、そのために使用できます"""/>
+
+<pre>
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+</pre>
+
+マクロ定義を含むTiddlerがわかっていて、例えばタイトルが`my-macro-tiddler`なら、
+
+<pre>
+\import [[my-macro-tiddler]]
+</pre>
+
+<br>
+<$macrocall $name=".tip" _="""一部のアクションは<<.wlink NavigatorWidget>>ウィジェット内にラップする必要があります。これは、グローバルなキーボードショートカット内で使用される場合に、次のウィジェットとメッセージのリストが機能するために必要です"""/>
+
+!!! ウィジェット
+
+<<.wlink ActionNavigateWidget>> (ActionNavigateWidget)
+
+!!! メッセージ
+
+<$list filter="[tag[navigator-message]]">
+<$link/><br>
+</$list>
+
+</$vars>

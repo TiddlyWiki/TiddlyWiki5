@@ -6,19 +6,15 @@ module-type: parser
 The PDF parser embeds a PDF viewer
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var ImageParser = function(type,text,options) {
 	var element = {
-			type: "element",
-			tag: "iframe",
-			attributes: {}
-		},
-		src;
+		type: "element",
+		tag: "iframe",
+		attributes: {}
+	};
 	if(options._canonical_uri) {
 		element.attributes.src = {type: "string", value: options._canonical_uri};
 	} else if(text) {
@@ -30,6 +26,3 @@ var ImageParser = function(type,text,options) {
 };
 
 exports["application/pdf"] = ImageParser;
-
-})();
-

@@ -6,10 +6,7 @@ module-type: startup
 Title, stylesheet and page rendering
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -36,10 +33,15 @@ exports.startup = function() {
 	});
 	$tw.titleContainer = $tw.fakeDocument.createElement("div");
 	$tw.titleWidgetNode.render($tw.titleContainer,null);
-	document.title = $tw.titleContainer.textContent;
+	var publishTitle = function() {
+		$tw.titlePublisher.send({verb: "PAGETITLE",body: document.title});
+		document.title = $tw.titleContainer.textContent;
+	};
+	$tw.titlePublisher = new $tw.utils.BrowserMessagingPublisher({type: "PAGETITLE", onsubscribe: publishTitle});
+	publishTitle();
 	$tw.wiki.addEventListener("change",function(changes) {
 		if($tw.titleWidgetNode.refresh(changes,$tw.titleContainer,null)) {
-			document.title = $tw.titleContainer.textContent;
+			publishTitle();
 		}
 	});
 	// Set up the styles
@@ -66,7 +68,7 @@ exports.startup = function() {
 		$tw.utils.addClass($tw.pageContainer,"tc-page-container-wrapper");
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
 		$tw.pageWidgetNode.render($tw.pageContainer,null);
-   		$tw.hooks.invokeHook("th-page-refreshed");
+		$tw.hooks.invokeHook("th-page-refreshed");
 	})();
 	// Remove any splash screen elements
 	var removeList = document.querySelectorAll(".tc-remove-when-wiki-loaded");
@@ -120,5 +122,3 @@ exports.startup = function() {
 	// Run any post-render startup actions
 	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/PostRender");
 };
-
-})();

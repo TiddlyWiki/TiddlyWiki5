@@ -1,0 +1,17 @@
+caption: ~TiddlyPWA
+color: #E056B4
+community-author: Val Packett
+created: 20240902162617154
+delivery: Progressive Web Application
+description: ブラウザストレージに保存
+method: save
+modified: 20241013111446887 
+original-modified: 20240902162617154
+tags: Chrome Firefox Linux Mac Opera Safari Saving Windows iOS Edge
+title: TiddlyPWA - Save to Browser Storage
+ja-title: TiddlyPWA - ブラウザストレージに保存
+type: text/vnd.tiddlywiki
+
+~TiddlyPWAは、暗号化されたローカル永続ストレージと、簡単に無料でホストできる自己ホスト型サーバーとの効率的な同期を備えた、オフラインファーストのプログレッシブウェブアプリとしてTiddlyWiki 5を実現します。
+
+https://tiddly.packett.cool/

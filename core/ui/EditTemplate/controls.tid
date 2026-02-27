@@ -3,7 +3,7 @@ tags: $:/tags/EditTemplate
 
 \define config-title() $:/config/EditToolbarButtons/Visibility/$(listItem)$
 \whitespace trim
-<div class="tc-tiddler-title tc-tiddler-edit-title">
+<div class="tc-tiddler-title tc-tiddler-edit-title tc-clearfix">
 	<$view field="title"/>
 	<span class="tc-tiddler-controls tc-titlebar">
 		<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditToolbar]!has[draft.of]]" variable="listItem">
@@ -14,5 +14,4 @@ tags: $:/tags/EditTemplate
 			</$let>
 		</$list>
 	</span>
-	<div style="clear: both;"></div>
 </div>

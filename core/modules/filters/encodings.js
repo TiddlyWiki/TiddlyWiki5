@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for applying decodeURIComponent() to each item.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -18,8 +15,8 @@ Export our filter functions
 
 exports.decodebase64 = function(source,operator,options) {
 	var results = [];
-	var binary = operator.suffixes && operator.suffixes.indexOf("binary") !== -1;
-	var urlsafe = operator.suffixes && operator.suffixes.indexOf("urlsafe") !== -1;
+	var binary = operator.suffixes && operator.suffixes[0].indexOf("binary") !== -1;
+	var urlsafe = operator.suffixes && operator.suffixes[0].indexOf("urlsafe") !== -1;
 	source(function(tiddler,title) {
 		results.push($tw.utils.base64Decode(title,binary,urlsafe));
 	});
@@ -28,8 +25,8 @@ exports.decodebase64 = function(source,operator,options) {
 
 exports.encodebase64 = function(source,operator,options) {
 	var results = [];
-	var binary = operator.suffixes && operator.suffixes.indexOf("binary") !== -1;
-	var urlsafe = operator.suffixes && operator.suffixes.indexOf("urlsafe") !== -1;
+	var binary = operator.suffixes && operator.suffixes[0].indexOf("binary") !== -1;
+	var urlsafe = operator.suffixes && operator.suffixes[0].indexOf("urlsafe") !== -1;
 	source(function(tiddler,title) {
 		results.push($tw.utils.base64Encode(title,binary,urlsafe));
 	});
@@ -116,5 +113,3 @@ exports.escapecss = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

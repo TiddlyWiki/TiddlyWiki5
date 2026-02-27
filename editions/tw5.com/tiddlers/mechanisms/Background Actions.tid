@@ -1,0 +1,28 @@
+title: Background Actions
+created: 20250212154426403
+modified: 20250212154426403
+tags: Mechanisms
+
+Background actions are performed whenever there are changes to the results of a filter.
+
+They can be useful for hooking into existing functionality by tracking changes to the tiddler store.
+
+The following example tracks changes to the story list, reusing itself as the text of a notification at the same time:
+
+<<.demo-tiddler """
+title: SampleBackgroundAction: Story Change
+tags: $:/tags/BackgroundAction
+track-filter: [list[$:/StoryList]]
+
+<$action-sendmessage $message="tm-notify" $param="SampleBackgroundAction: Story Change" list={{$:/StoryList!!list}}/>
+
+Story List:
+
+<ol>
+<$list filter="[enlist<list>]">
+<li>
+<$text text=<<currentTiddler>>/>
+</li>
+</$list>
+</ol>
+""">>

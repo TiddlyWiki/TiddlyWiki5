@@ -6,13 +6,8 @@ module-type: command
 Read tiddlers from an unzipped Twitter archive
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
-
-var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.info = {
 	name: "loadtwitterarchive",
@@ -33,11 +28,11 @@ Command.prototype.execute = function() {
 	var archivePath = this.params[0];
 	// Load tweets
 	var archiveSource = new $tw.utils.TwitterArchivistSourceNodeJs({
-		archivePath: archivePath
-	}),
-	archivist = new $tw.utils.TwitterArchivist({
-		source: archiveSource
-	});
+			archivePath: archivePath
+		}),
+		archivist = new $tw.utils.TwitterArchivist({
+			source: archiveSource
+		});
 	archivist.loadArchive({
 		wiki: this.commander.wiki
 	}).then(function() {
@@ -49,5 +44,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

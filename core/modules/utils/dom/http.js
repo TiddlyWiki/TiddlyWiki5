@@ -6,10 +6,7 @@ module-type: utils
 HTTP support
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -64,7 +61,6 @@ HttpClient.prototype.initiateHttpRequest = function(options) {
 };
 
 HttpClient.prototype.cancelAllHttpRequests = function() {
-	var self = this;
 	if(this.requests.length > 0) {
 		for(var t=this.requests.length - 1; t--; t>=0) {
 			var requestInfo = this.requests[t];
@@ -104,10 +100,12 @@ basicAuthUsername: plain username for basic authentication
 basicAuthUsernameFromStore: name of password store entry containing username
 basicAuthPassword: plain password for basic authentication
 basicAuthPasswordFromStore: name of password store entry containing password
+bearerAuthToken: plain text token for bearer authentication
+bearerAuthTokenFromStore: name of password store entry contain bear authorization token
 */
 function HttpClientRequest(options) {
 	var self = this;
-	console.log("Initiating an HTTP request",options)
+	console.log("Initiating an HTTP request",options);
 	this.wiki = options.wiki;
 	this.completionActions = options.oncompletion;
 	this.progressActions = options.onprogress;
@@ -135,8 +133,11 @@ function HttpClientRequest(options) {
 	});
 	this.basicAuthUsername = options.basicAuthUsername || (options.basicAuthUsernameFromStore && $tw.utils.getPassword(options.basicAuthUsernameFromStore)) || "";
 	this.basicAuthPassword = options.basicAuthPassword || (options.basicAuthPasswordFromStore && $tw.utils.getPassword(options.basicAuthPasswordFromStore)) || "";
+	this.bearerAuthToken = options.bearerAuthToken || (options.bearerAuthTokenFromStore && $tw.utils.getPassword(options.bearerAuthTokenFromStore)) || "";
 	if(this.basicAuthUsername && this.basicAuthPassword) {
 		this.requestHeaders.Authorization = "Basic " + $tw.utils.base64Encode(this.basicAuthUsername + ":" + this.basicAuthPassword);
+	} else if(this.bearerAuthToken) {
+		this.requestHeaders.Authorization = "Bearer " + this.bearerAuthToken;
 	}
 }
 
@@ -191,11 +192,11 @@ HttpClientRequest.prototype.send = function(callback) {
 					headers: JSON.stringify(headers)
 				};
 				/* Convert data from binary to base64 */
-				if (xhr.responseType === "arraybuffer") {
+				if(xhr.responseType === "arraybuffer") {
 					var binary = "",
 						bytes = new Uint8Array(data),
 						len = bytes.byteLength;
-					for (var i=0; i<len; i++) {
+					for(var i=0; i<len; i++) {
 						binary += String.fromCharCode(bytes[i]);
 					}
 					resultVariables.data = $tw.utils.base64Encode(binary,true);
@@ -209,13 +210,13 @@ HttpClientRequest.prototype.send = function(callback) {
 			},
 			progress: function(lengthComputable,loaded,total) {
 				if(lengthComputable) {
-					setBinding(self.bindProgress,"" + Math.floor((loaded/total) * 100))
+					setBinding(self.bindProgress,"" + Math.floor((loaded/total) * 100));
 				}
-				self.wiki.invokeActionString(self.progressActions,undefined,{
+				self.wiki.invokeActionString(self.progressActions,undefined,$tw.utils.extend({},self.variables,{
 					lengthComputable: lengthComputable ? "yes" : "no",
 					loaded: loaded,
 					total: total
-				},{parentWidget: $tw.rootWidget});
+				}),{parentWidget: $tw.rootWidget});
 			}
 		});
 	}
@@ -274,7 +275,7 @@ exports.httpRequest = function(options) {
 		returnProp = options.returnProp || "responseText",
 		request = new XMLHttpRequest(),
 		data = "",
-		f,results;
+		results;
 	// Massage the data hashmap into a string
 	if(options.data) {
 		if(typeof options.data === "string") { // Already a string
@@ -300,14 +301,14 @@ exports.httpRequest = function(options) {
 				options.callback(null,this[returnProp],this);
 				return;
 			}
-		// Something went wrong
-		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,this[returnProp],this);
+			// Something went wrong
+			options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,this[returnProp],this);
 		}
 	};
 	// Handle progress
 	if(options.progress) {
 		request.onprogress = function(event) {
-			console.log("Progress event",event)
+			console.log("Progress event",event);
 			options.progress(event.lengthComputable,event.loaded,event.total);
 		};
 	}
@@ -348,5 +349,3 @@ exports.setQueryStringParameter = function(url,paramName,paramValue) {
 		return url;
 	}
 };
-
-})();

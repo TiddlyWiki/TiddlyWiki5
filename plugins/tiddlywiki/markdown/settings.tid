@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/markdown/settings
+tags: $:/tags/ControlPanel/SettingsTab
+caption: Markdown
+
+These settings let you customise the behaviour of Markdown. See [[plugin|$:/plugins/tiddlywiki/markdown]] readme tab for more information.
+
+''IMPORTANT:'' You must reload your wiki for changes to take effect.
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Settings/Markdown]]">
+
+<div class="tc-control-panel-setting" data-setting-title=<<currentTiddler>> >
+
+!!.tc-control-panel-accent <$link><$transclude field="caption"/></$link>
+
+<$transclude/>
+
+</div>
+
+</$list>

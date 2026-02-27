@@ -6,17 +6,14 @@ tags: [[$:/tags/test-spec]]
 Tests the backlinks mechanism.
 
 \*/
-(function(){
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
-describe('CSV Parsing', function() {
-	var tid = $tw.wiki.getTiddler('csv-cases');
+describe("CSV Parsing", function() {
+	var tid = $tw.wiki.getTiddler("csv-cases");
 	var testCases = JSON.parse(tid.fields.text);
 	
 	$tw.utils.each(testCases, function(testCase) {
-		if (testCase.skip) {
+		if(testCase.skip) {
 			return;
 		}
 		it("Test case: " + testCase.name, function() {
@@ -26,8 +23,6 @@ describe('CSV Parsing', function() {
 			var parsedCsvWithHeaders = $tw.utils.parseCsvStringWithHeader(testCase.csv, testCase.options);
 			expect(parsedCsvWithHeaders).withContext("The generated CSV with headers should match the expected one").toEqual(testCase.jsonWithHeaders);
 		});
-	})
+	});
 	
 });
-
-})();

@@ -1,10 +1,10 @@
 title: $:/plugins/tiddlywiki/translators/templates/snippet-tid
 
-\define generateTid(title)
-title: $:/language/Snippets/$title$
+\procedure generateTid(title)
+title: <<title>>
 tags: $:/tags/TextEditor/Snippet
-caption: <$text text={{$:/language/Snippets/$title$!!caption}}/>
+caption: <$text text={{!!caption}}/>
 
-<$text text={{$:/language/Snippets/$title$}}/>
+<$text text={{!!text}}/>
 \end
-<$macrocall $name="generateTid" title=<<currentTiddler>>/>
+<$transclude $variable="generateTid" title=<<currentTiddler>>/>

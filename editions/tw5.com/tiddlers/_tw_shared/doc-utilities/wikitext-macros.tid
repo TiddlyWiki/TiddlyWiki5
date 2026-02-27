@@ -1,0 +1,89 @@
+code-body: yes
+created: 20150117184156000
+modified: 20240716181836632
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/wikitext-macros
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\procedure activatePluginTab()
+<$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Plugins"/>
+<$action-navigate $to="$:/ControlPanel"/>
+\end
+
+\procedure activateTiddlerWindow()
+<$action-sendmessage $message="tm-open-window" $param=<<currentTiddler>> windowTitle="Side by Side View" width="800" height="600" />
+\end
+
+\procedure controlPanel-plugin-link()
+<$button actions=<<activatePluginTab>> class="tc-btn-invisible tc-tiddlylink">
+	{{$:/core/images/options-button}} ~ControlPanel
+</$button>
+\end
+
+\procedure open-tiddler-in-window()
+\whitespace notrim
+<$button actions=<<activateTiddlerWindow>> class="tc-btn-invisible tc-tiddlylink">
+	open ''this'' tiddler in a new window
+</$button>
+\end
+
+\procedure activateEditionWindow(url)
+<$action-sendmessage $message="tm-open-external-window" $param=<<url>> windowName="_edition" windowFeatures="width=800 height=600" />
+\end
+
+\procedure open-external-window(url)
+\whitespace notrim
+<$button actions=<<activateEditionWindow <<url>> class="tc-btn-invisible tc-tiddlylink">
+	open the ''example edition'' in a new window
+</$button>
+\end
+
+
+\procedure wikitext-example(src)
+<div class="doc-example">
+	<$macrocall $name="copy-to-clipboard-above-right" src=<<src>>/>
+	<$codeblock code=<<src>>/>
+	<p>
+		That renders as:
+	</p>
+	<$transclude $variable="src" $mode="block"/>
+	<p>
+		... and the underlying HTML is:
+	</p>
+	<$wikify name="html" text=<<src>> output="html">
+		<$codeblock code=<<html>>/>
+	</$wikify>
+</div>
+\end
+
+\procedure wikitext-example-without-html(src)
+<div class="doc-example">
+	<$macrocall $name="copy-to-clipboard-above-right" src=<<src>>/>
+	<$codeblock code=<<src>>/>
+	<p>
+		That renders as:
+	</p>
+	<$transclude $variable="src" $mode="block"/>
+</div>
+\end
+
+\procedure wikitext-example-table-header() <thead><tr><th/><th>wiki text</th><th>renders as</th></tr></thead>
+
+\procedure wikitext-example-table-row(id, code)
+<tr>
+	<th><<id>></th>
+	<td><$codeblock code=<<code>>/></td>
+	<td><$transclude $variable="code" $mode="block"/></td>
+</tr>
+\end
+
+\procedure tw-code(tiddler)
+<$codeblock language={{{ [<tiddler>get[type]] }}} code={{{ [<tiddler>get[text]] }}}/>
+\end
+
+\procedure tw-code-link(tiddler)
+<$link to=<<tiddler>>/>:
+<$transclude $variable=tw-code tiddler=<<tiddler>> />
+\end

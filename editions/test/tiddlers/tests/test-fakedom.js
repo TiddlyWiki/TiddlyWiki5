@@ -6,10 +6,6 @@ tags: [[$:/tags/test-spec]]
 Tests the fakedom that Tiddlywiki occasionally uses.
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("fakedom tests", function() {
@@ -23,5 +19,3 @@ describe("fakedom tests", function() {
 		expect($tw.fakeDocument.createTextNode("text").TEXT_NODE).toBe(3);
 	});
 });
-
-})();

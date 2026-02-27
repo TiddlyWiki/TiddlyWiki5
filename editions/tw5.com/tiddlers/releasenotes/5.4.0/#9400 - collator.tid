@@ -1,0 +1,9 @@
+title: $:/changenotes/5.4.0/#9400/impacts/collator
+changenote: $:/changenotes/5.4.0/#9400
+created: 20251114102355243
+modified: 20251114102355243
+tags: $:/tags/ImpactNote
+description: Tiddlywiki no longer works on browsers that doesn't support [[Intl.Collator|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator]]
+impact-type: compatibility-break
+
+

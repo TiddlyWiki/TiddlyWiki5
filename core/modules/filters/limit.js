@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator for chopping the results to a specified maximum number of entries
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -30,5 +27,3 @@ exports.limit = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

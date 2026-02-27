@@ -17,10 +17,7 @@ This wikiparser can be modified using the rules eg:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "strikethrough";
@@ -42,9 +39,7 @@ exports.parse = function() {
 	// Return the classed span
 	return [{
 		type: "element",
-		tag: "strike",
+		tag: "s",
 		children: tree
 	}];
 };
-
-})();

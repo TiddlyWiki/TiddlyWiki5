@@ -6,10 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the tiddler object
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 describe("Tiddler tests", function() {
@@ -134,4 +131,3 @@ describe("Tiddler tests", function() {
 
 });
 
-})();

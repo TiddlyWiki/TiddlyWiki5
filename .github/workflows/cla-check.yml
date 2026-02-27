@@ -14,7 +14,7 @@ jobs:
     if: ${{ (github.event.pull_request.user.login != github.repository_owner) }}
     steps:
     - run: |
-        if ! curl -s https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/tiddlywiki-com/licenses/cla-individual.md | grep -o "@$USER,"; then
+        if ! curl -s https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/tiddlywiki-com/licenses/cla-individual.md | grep -io "@$USER,"; then
           echo "CLA not signed"
           gh pr comment "$NUMBER" -b "@$USER It appears that this is your first contribution to the project, welcome.
           

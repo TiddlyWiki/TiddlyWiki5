@@ -1,0 +1,82 @@
+created: 20140305091244145
+modified: 20241118112833362
+original-modified: 20211125175708977
+tags: [[Customise TiddlyWiki]]
+title: Using Stylesheets
+ja-title: スタイルシートの使用
+type: text/vnd.tiddlywiki
+
+\define tv-config-toolbar-text() yes
+
+\define openCpTheme()
+<$action-setfield $tiddler="$:/state/tab-1749438307" $value="$:/core/ui/ControlPanel/Appearance"/>
+<$action-setfield $tiddler="$:/state/tab--1963855381" $value="$:/core/ui/ControlPanel/Theme"/>
+<$action-navigate $to="$:/ControlPanel"/>
+\end
+
+! テーマとカラーパレット
+
+~TiddlyWikiの外観を変更するための最初の手順は、以下を選択して適用することです: 
+
+* 利用可能なテーマの1つ: {{$:/core/ui/Buttons/theme}}
+* カラーパレットの変更: {{$:/core/ui/Buttons/palette}}
+* <$button actions=<<openCpTheme>> class="tc-btn-invisible"><<.icon $:/core/images/options-button>>コントロールパネル</$button>で試す
+
+! スタイルシートの動き
+
+コントロールパネルに加えて、Tiddlerに`$:/tags/Stylesheet`タグを付けることでカスタムスタイルを定義できます。ページの背景色を赤に変更するには、次の内容でカスタムスタイルシートを作成します: 
+
+```
+body.tc-body {
+	background: red;
+}
+```
+
+その後、[[WikiTextで独自のスタイルとクラス|Styles and Classes in WikiText]]を使用します。
+
+!! 追加リソース
+
+* [[カスケーディングスタイルシート(CSS) (mozillaサイト)|https://developer.mozilla.org/en-US/docs/Web/CSS]]
+* [[カスケーディングスタイルシート(CSS) (w3scoolsサイト)|http://www.w3schools.com/css]]
+
+! テーマ設定の上書き
+
+カスタムスタイルシートは、テーマスタイルシートとは独立して適用されます。そのため、カスタムスタイルシートのCSSルールは、上書きするテーマのCSSルールよりも具体的にする必要があります。たとえば、`html body.tc-body`は`body.tc-body`よりも具体的です。
+
+<<.tip """常に、最も具体的でない値から始めます!""">>
+
+! スタイルシートの種類
+
+通常、スタイルシートの種類には`text/css`を使用するのが最適です。これにより、プレーンなスタイルシートとして扱われ、~TiddlyWikiがWi​​ki処理を適用しないことが保証されます。
+
+If you wish to use macros and transclusions in your stylesheets you should instead use the default WikiText type `text/vnd.tiddlywiki`. This allows full ~WikiText processing to be performed. Here is an example:
+スタイルシートでマクロやトランスクルージョンを使用したい場合は、代わりにデフォルトの種類であるWikiText `text/vnd.tiddlywiki`を使用します。これにより、完全な~WikiText処理を実行できます。次に例を示します。
+
+```
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+body.tc-body pre {
+	<<box-shadow "inset 0 1px 0 #fff">>
+}
+```
+
+ティドラーの先頭にある`\rules`プラグマは、~WikiTextがマクロとトランスクルージョンのみを許可するように制限します。これにより、誤って不要な~WikiText処理がトリガーされることを回避できます。
+
+スタイルシートTiddlerは、まずWiki化され、次に出力のテキスト部分が抽出されてCSSとして適用されるように処理されます。したがって、スタイルシートで使用しているHTMLタグはすべて無視されます。たとえば、RevealWidgetによって生成されたHTML要素は出力に影響しません。次の例のように、CSSルールを`<pre>`タグで囲んで、内部マクロの処理などの処理に影響を与えることなく、コードブロックとして表示できます。
+
+```
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+<pre>body.tc-body pre {
+	<<box-shadow "inset 0 1px 0 #fff">>
+}
+</pre>
+```
+
+!! スタイルシートマクロ
+
+~TiddlyWikiコアは、[[スタイルシートの構築に役立つグローバルマクロ|Stylesheet Macros]]を提供します。
+
+!! 参照
+
+<<list-links "[tag[Using Stylesheets]]">>

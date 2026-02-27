@@ -6,10 +6,7 @@ module-type: widget
 Droppable widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -27,8 +24,7 @@ DroppableWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DroppableWidget.prototype.render = function(parent,nextSibling) {
-	var self = this,
-		tag = this.parseTreeNode.isBlock ? "div" : "span",
+	var tag = this.parseTreeNode.isBlock ? "div" : "span",
 		domNode;
 	// Remember parent
 	this.parentDomNode = parent;
@@ -60,8 +56,8 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 	// Stack of outstanding enter/leave events
 	this.currentlyEntered = [];
 };
@@ -125,16 +121,35 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 	// Remove highlighting
 	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 	// Try to import the various data types we understand
-	$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
-		fieldsArray.forEach(function(fields) {
-			self.performActions(fields.title || fields.text,event);
+	if(this.droppableActions) {
+		$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
+			fieldsArray.forEach(function(fields) {
+				self.performActions(fields.title || fields.text,event);
+			});
 		});
-	});
+	}
+	// Send a TitleList to performListActions
+	if(this.droppableListActions) {
+		$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
+			var titleList = [];
+			fieldsArray.forEach(function(fields) {
+				titleList.push(fields.title || fields.text);
+			});
+			self.performListActions($tw.utils.stringifyList(titleList),event);
+		});
+	}
 	// Tell the browser that we handled the drop
 	event.preventDefault();
 	// Stop the drop ripple up to any parent handlers
 	event.stopPropagation();
 	return false;
+};
+
+DroppableWidget.prototype.performListActions = function(titleList,event) {
+	if(this.droppableListActions) {
+		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+		this.invokeActionString(this.droppableListActions,this,event,{actionTiddlerList: titleList, modifier: modifierKey});
+	}
 };
 
 DroppableWidget.prototype.performActions = function(title,event) {
@@ -149,6 +164,7 @@ Compute the internal state of the widget
 */
 DroppableWidget.prototype.execute = function() {
 	this.droppableActions = this.getAttribute("actions");
+	this.droppableListActions = this.getAttribute("listActions");
 	this.droppableEffect = this.getAttribute("effect","copy");
 	this.droppableTag = this.getAttribute("tag");
 	this.droppableEnable = (this.getAttribute("enable") || "yes") === "yes";
@@ -160,7 +176,7 @@ DroppableWidget.prototype.execute = function() {
 DroppableWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-droppable");
-	this.domNode.className = classes.join(" ");
+	this.domNode.className = classes.join(" ").trim();
 };
 
 /*
@@ -168,7 +184,8 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DroppableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tag || changedAttributes.enable || changedAttributes.disabledClass || changedAttributes.actions || changedAttributes.effect) {
+	if(changedAttributes.tag || changedAttributes.enable || changedAttributes.disabledClass ||
+		changedAttributes.actions|| changedAttributes.listActions || changedAttributes.effect) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -185,5 +202,3 @@ DroppableWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.droppable = DroppableWidget;
-
-})();

@@ -4,7 +4,6 @@ caption: {{$:/core/images/down-arrow}} {{$:/language/Buttons/More/Caption}}
 description: {{$:/language/Buttons/More/Hint}}
 
 \whitespace trim
-\define config-title() $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 
 <$button popup=<<qualify "$:/state/popup/more">>
 	tooltip={{$:/language/Buttons/More/Hint}}
@@ -12,33 +11,29 @@ description: {{$:/language/Buttons/More/Hint}}
 	class=<<tv-config-toolbar-class>>
 	selectedClass="tc-selected"
 >
-	<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
 		{{$:/core/images/down-arrow}}
-	</$list>
-	<$list filter="[<tv-config-toolbar-text>match[yes]]">
+	<%endif%>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
 		<span class="tc-btn-text">
 			<$text text={{$:/language/Buttons/More/Caption}}/>
 		</span>
-	</$list>
+	<%endif%>
 </$button>
 <$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="belowleft" animate="yes">
 	<div class="tc-drop-down">
-		<$set name="tv-config-toolbar-icons" value="yes">
-			<$set name="tv-config-toolbar-text" value="yes">
-				<$set name="tv-config-toolbar-class" value="tc-btn-invisible">
-					<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/Buttons/more-tiddler-actions]]"
-						variable="listItem"
+		<$let tv-config-toolbar-icons="yes" tv-config-toolbar-text="yes" tv-config-toolbar-class="tc-btn-invisible">
+			<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/Buttons/more-tiddler-actions]]"
+				variable="listItem"
+			>
+				<$reveal type="match" state=`$:/config/ViewToolbarButtons/Visibility/$(listItem)$` text="hide">
+					<$set name="tv-config-toolbar-class"
+						filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]"
 					>
-						<$reveal type="match" state=<<config-title>> text="hide">
-							<$set name="tv-config-toolbar-class"
-								filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]"
-							>
-								<$transclude tiddler=<<listItem>> mode="inline"/>
-							</$set>
-						</$reveal>
-					</$list>
-				</$set>
-			</$set>
-		</$set>
+						<$transclude tiddler=<<listItem>> mode="inline"/>
+					</$set>
+				</$reveal>
+			</$list>
+		</$let>
 	</div>
 </$reveal>

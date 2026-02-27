@@ -1,0 +1,9 @@
+created: 20220219134855444
+modified: 20240929102821839
+original-modified: 20220220192530872
+title: $:/core/ui/ViewTemplate/title/ja-default
+
+\whitespace trim
+<h2 class="tc-title">
+<$view field="ja-title"/>
+</h2>

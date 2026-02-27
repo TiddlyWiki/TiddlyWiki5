@@ -1,20 +1,30 @@
 title: $:/core/ui/EditorToolbar/file-import
 tags: $:/tags/EditorTools
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>filter{$:/config/Editor/EnableImportFilter}]
 
-\define lingo-base() $:/language/Import/
+\procedure lingo-base() $:/language/Import/
 
-\define closePopupActions()
+\procedure closePopupActions()
 <$action-deletetiddler $filter="[title<importState>] [title<importTitle>]"/>
-\end
+\end closePopupActions
 
-\define replacement-text-image() [img[$title$]]
+\procedure tw5-ImageTemplate() [img[$(currentTiddler)$]]
+\procedure tw5-FileTemplate() [[$(currentTiddler)$]]
 
-\define replacement-text-file() [[$title$]]
+<!-- The following characters must be escaped in markdown: <>()\ -->
+\function escape.title() [search-replace:g:regexp[\(|\)|<|>|\\],[\$&]]
+\procedure markdown-ImageTemplate() ![](<#${ [<currentTiddler>escape.title[]] }$>)
+\procedure markdown-FileTemplate() [](<#${ [<currentTiddler>escape.title[]] }$>)
 
-\define postImportActions()
+\function is.markdown.tiddler() [all[]type[text/x-markdown]] [all[]type[text/markdown]]
+\function is.image() [get[type]prefix[image]]
+\function get.markdown.link() [is.image[]then<markdown-ImageTemplate>else<markdown-FileTemplate>]
+\function get.tw5.link() [is.image[]then<tw5-ImageTemplate>else<tw5-FileTemplate>] 
+\function get.link.template() [<storyTiddler>is.markdown.tiddler[]then<get.markdown.link>else<get.tw5.link>]
+
+\procedure postImportActions()
 \whitespace trim
-<$list filter="[<importTitle>links[]] :reduce[get[type]prefix[image]then<replacement-text-image>else<replacement-text-file>search-replace[$title$],<currentTiddler>addprefix<accumulator>]" variable="imageTitle">
+<$list filter="[<importTitle>links[]] :reduce[get.link.template[]substitute[]addprefix<accumulator>]" variable="imageTitle">
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="insert-text"
@@ -22,14 +32,14 @@ condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]
 />
 </$list>
 <<closePopupActions>>
-\end
+\end postImportActions
 
-\define buttons()
+\procedure buttons()
 \whitespace trim
 <$button class="tc-btn-invisible" actions=<<closePopupActions>> ><<lingo Listing/Cancel/Caption>></$button>
 &#32;
 <$button class="tc-btn-invisible" message="tm-perform-import" param=<<importTitle>> actions=<<postImportActions>> ><<lingo Listing/Import/Caption>></$button>
-\end
+\end buttons
 
 \whitespace trim
 <$reveal type="popup" state=<<importState>> tag="div" class="tc-editor-importpopup">

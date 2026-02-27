@@ -1,0 +1,11 @@
+title: HelloThumbnail - Introduction Video
+ja-title: HelloThumbnail - 紹介ビデオ
+tags: HelloThumbnail
+color: red
+background-color: #fff
+icon: {{$:/core/images/video}}
+caption: ~TiddlyWikiの紹介
+link: Introduction Video
+image: Introduction Video Thumbnail.jpg
+
+~TiddlyWikiの基本的なコンセプトを紹介する短いビデオです

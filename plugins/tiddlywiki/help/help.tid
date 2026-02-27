@@ -8,22 +8,22 @@ description: {{$:/language/Buttons/Help/Hint}}
 \whitespace trim
 <$list filter="[[$:/config/ShowHelp]get[text]] +[else[no]match[yes]]" variable="ignore">
 <$button set="$:/config/ShowHelp" setTo="no" tooltip={{$:/language/Buttons/Help/Hint}} aria-label={{$:/language/Buttons/Help/Caption}} class="""$(tv-config-toolbar-class)$ tc-selected""">
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/help}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/Help/Caption}}/></span>
-</$list>
+<%endif%>
 </$button>
 </$list>
 <$list filter="[[$:/config/ShowHelp]get[text]] +[else[no]!match[yes]]" variable="ignore">
 <$button set="$:/config/ShowHelp" setTo="yes" tooltip={{$:/language/Buttons/Help/Hint}} aria-label={{$:/language/Buttons/Help/Caption}} class=<<tv-config-toolbar-class>>>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/help}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/Help/Caption}}/></span>
-</$list>
+<%endif%>
 </$button>
 </$list>
 \end

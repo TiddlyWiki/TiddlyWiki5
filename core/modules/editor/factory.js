@@ -6,10 +6,7 @@ module-type: library
 Factory for constructing text editor widgets with specified engines for the toolbar and non-toolbar cases
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DEFAULT_MIN_TEXT_AREA_HEIGHT = "100px"; // Minimum height of textareas in pixels
@@ -51,19 +48,19 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			this.toolbarNode = this.document.createElement("div");
 			this.toolbarNode.className = "tc-editor-toolbar";
 			parent.insertBefore(this.toolbarNode,nextSibling);
-			this.renderChildren(this.toolbarNode,null);
 			this.domNodes.push(this.toolbarNode);
+			this.renderChildren(this.toolbarNode,null);
 		}
 		// Create our element
 		var editInfo = this.getEditInfo(),
 			Engine = this.editShowToolbar ? toolbarEngine : nonToolbarEngine;
 		this.engine = new Engine({
-				widget: this,
-				value: editInfo.value,
-				type: editInfo.type,
-				parentNode: parent,
-				nextSibling: nextSibling
-			});
+			widget: this,
+			value: editInfo.value,
+			type: editInfo.type,
+			parentNode: parent,
+			nextSibling: nextSibling
+		});
 		// Call the postRender hook
 		if(this.postRender) {
 			this.postRender();
@@ -71,7 +68,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Fix height
 		this.engine.fixHeight();
 		// Focus if required
-		if(this.editFocus === "true" || this.editFocus === "yes") {
+		if($tw.browser && (this.editFocus === "true" || this.editFocus === "yes") && !$tw.utils.hasClass(this.parentDomNode.ownerDocument.activeElement,"tc-keep-focus")) {
 			this.engine.focus();
 		}
 		// Add widget message listeners
@@ -223,7 +220,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
 			this.refreshSelf();
 			return true;
-		} else if (changedTiddlers[this.editRefreshTitle]) {
+		} else if(changedTiddlers[this.editRefreshTitle]) {
 			this.engine.updateDomNodeText(this.getEditInfo().value);
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
@@ -277,8 +274,8 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 					});
 				if($tw.keyboardManager.checkKeyDescriptors(event,keyInfoArray)) {
 					var clickEvent = this.document.createEvent("Events");
-				    clickEvent.initEvent("click",true,false);
-				    el.dispatchEvent(clickEvent);
+					clickEvent.initEvent("click",true,false);
+					el.dispatchEvent(clickEvent);
 					event.preventDefault();
 					event.stopPropagation();
 					return true;
@@ -386,5 +383,3 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 }
 
 exports.editTextWidgetFactory = editTextWidgetFactory;
-
-})();

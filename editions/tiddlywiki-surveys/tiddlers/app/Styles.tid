@@ -1,0 +1,25 @@
+title: $:/surveys/2010-interview/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.interview h1 button svg {
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+}
+
+.interview h2 img {
+	width: 32px;
+	height: 32px;
+	vertical-align: middle;
+}
+
+.interview h3 {
+	font-size: 0.9em;
+	line-height: 1;
+}
+
+.interview-answer {
+	margin-left: 32px;
+}

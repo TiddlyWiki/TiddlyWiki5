@@ -20,7 +20,7 @@ code-background: #f7f7f9
 code-border: #e1e1e8
 code-foreground: #dd1144
 dirty-indicator: #ff0000
-download-background: #34c734
+download-background: #30b830
 download-foreground: <<colour background>>
 dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
@@ -58,22 +58,26 @@ primary: #5778d8
 select-tag-background:
 select-tag-foreground:
 sidebar-button-foreground: <<colour foreground>>
-sidebar-controls-foreground-hover: #ccf
-sidebar-controls-foreground: #fff
-sidebar-foreground-shadow: rgba(0,0,0, 0.5)
-sidebar-foreground: #fff
-sidebar-muted-foreground-hover: #444444
-sidebar-muted-foreground: #eee
-sidebar-tab-background-selected: rgba(255,255,255, 0.8)
-sidebar-tab-background: rgba(255,255,255, 0.4)
+sidebar-controls-foreground-hover: #a6a6ff
+sidebar-controls-foreground: #eeeeee
+sidebar-foreground-shadow: transparent
+sidebar-foreground: #eeeeee
+sidebar-muted-foreground-hover: #999999
+sidebar-muted-foreground: #eeeeee
+sidebar-tab-background-selected: <<colour page-background>>
+sidebar-tab-background: #e0e0e0
 sidebar-tab-border-selected: <<colour tab-border-selected>>
 sidebar-tab-border: <<colour tab-border>>
-sidebar-tab-divider: rgba(255,255,255, 0.2)
-sidebar-tab-foreground-selected: 
+sidebar-tab-divider: #e4e4e4
+sidebar-tab-foreground-selected: #ddddff
 sidebar-tab-foreground: <<colour tab-foreground>>
-sidebar-tiddler-link-foreground-hover: #aaf
-sidebar-tiddler-link-foreground: #ddf
-site-title-foreground: #fff
+sidebar-tiddler-link-foreground-hover: #aaaaff
+sidebar-tiddler-link-foreground: #ddddff
+site-title-foreground: #ffffff
+stability-stable: #008000
+stability-experimental: #c07c00
+stability-deprecated: #ff0000
+stability-legacy: #0000ff
 static-alert-foreground: #aaaaaa
 tab-background-selected: #ffffff
 tab-background: #d8d8d8
@@ -90,7 +94,7 @@ tag-foreground: #ffffff
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #888888
-tiddler-controls-foreground-selected: #444444
+tiddler-controls-foreground-selected: #6a6aff
 tiddler-controls-foreground: #cccccc
 tiddler-editor-background: #f8f8f8
 tiddler-editor-border-image: #ffffff
@@ -115,3 +119,4 @@ toolbar-cancel-button:
 toolbar-done-button: 
 untagged-background: #999999
 very-muted-foreground: #888888
+network-activity-foreground: #11ff23

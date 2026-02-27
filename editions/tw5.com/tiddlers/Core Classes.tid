@@ -1,0 +1,16 @@
+created: 20240421142359127
+modified: 20240422090116239
+tags: Reference
+title: Core Classes
+
+~TiddlyWiki class definitions are ''prefixed'' with `tc-` and are mainly used in the "vanilla base" theme. The ''tc-'' prefix ''is reserved'' for ~TiddlyWiki, so it should not be used for user defined classes.
+
+Users, especially plugin developers, should use their own prefixes eg: mytc- or something similar. 
+
+The following info can also be found in the $:/ControlPanel ''-> Advanced -> Stylesheets'' tab
+
+All stylesheets used in this wiki are: <small>(shadow tiddlers are bold)</small>
+
+<<list-links filter:"[all[shadows+tiddlers]tag[$:/tags/Stylesheet]]">>
+
+Also see: [[Utility Classes]]

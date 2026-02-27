@@ -1,0 +1,13 @@
+created: 20211125175712017
+modified: 20241118113249073
+original-modified: 20211125175906085
+tags: [[Using Stylesheets]]
+title: Debugging Stylesheets
+ja-title: スタイルシートのデバッグ
+type: text/vnd.tiddlywiki
+
+コアの隠しTiddler $:/snippets/DebugStylesheetsには、括弧の不一致やその他の入れ子構造に関する特定の問題を追跡するための簡単なツールが含まれています
+
+以下のリストでは、エラーを含むスタイルシートには赤いバツ印が付いています: 
+
+{{$:/snippets/DebugStylesheets}}

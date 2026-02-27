@@ -6,10 +6,6 @@ tags: [[$:/tags/test-spec]]
 Tests for integrity of the core plugins, languages, themes and editions
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 if($tw.node) {
@@ -50,6 +46,3 @@ if($tw.node) {
 		});
 	});
 }
-
-
-})();

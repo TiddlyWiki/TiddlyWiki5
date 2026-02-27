@@ -65,6 +65,10 @@ sidebar-tab-foreground-selected: Premier plan pour les onglets sélectionnés de
 sidebar-tab-foreground: Premier plan pour les onglets de la barre latérale
 sidebar-tiddler-link-foreground-hover: Premier plan au passage de la souris sur le lien d'un tiddler de la barre latérale
 sidebar-tiddler-link-foreground: Premier plan du lien d'un tiddler de la barre latérale
+stability-stable: Badge pour le niveau de stabilité "stable"
+stability-experimental: Badge pour le niveau de stabilité "experimental"
+stability-deprecated: Badge pour le niveau de stabilité "deprecated"
+stability-legacy: Badge pour le niveau de stabilité "legacy"
 site-title-foreground: Premier plan pour le titre du wiki (SiteTitle)
 static-alert-foreground: Premier plan pour les alertes statiques
 tab-background-selected: Fond pour les onglets sélectionnés
@@ -79,9 +83,9 @@ table-footer-background: Fond pour les bas de tableau
 table-header-background: Fond pour les en-têtes de tableau
 tag-background: Fond pour les tags
 tag-foreground: Premier plan pour les tags
-testcase-accent-level-1: Couleur d'accentuation des scénarios de test de premier niveau
-testcase-accent-level-2: Couleur d'accentuation des scénarios de test de profondeur 2
-testcase-accent-level-3: Couleur d'accentuation des scénarios de test de profondeur 3 et plus
+testcase-accent-level-1: Couleur accentuée pour les scénarios de test sans imbrication
+testcase-accent-level-2: Couleur accentuée pour les scénarios de test avec un 2e niveau d'imbrication
+testcase-accent-level-3: Couleur accentuée pour les scénarios de test avec un 3e niveau d'imbrication ou plus
 tiddler-background: Fond pour les tiddlers
 tiddler-border: Bordure pour les tiddlers
 tiddler-controls-foreground-hover: Premier plan au passage de la souris sur les boutons de commande d'un tiddler

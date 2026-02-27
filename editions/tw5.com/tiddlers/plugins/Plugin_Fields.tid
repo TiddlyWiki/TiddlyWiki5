@@ -20,3 +20,4 @@ Plugins are stored as tiddlers with the following fields:
 |title |Title of plugin |
 |type |Must be ''application/json'' |
 |version |//(optional)// Version string (should conform to [ext[SemanticVersioning|http://semver.org/]] convention) |
+|platform |<<.from-version 5.4.0>> //(optional)// Set this field to ''node'' to restrict the plugin to only be loaded on the server (this is accomplished by suppressing such plugins from the various save templates) |

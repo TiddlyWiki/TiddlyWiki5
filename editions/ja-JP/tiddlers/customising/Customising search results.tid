@@ -1,0 +1,51 @@
+created: 20141027151552783
+modified: 20241115112411640
+original-modified: 20201207181116804
+tags: [[Customise TiddlyWiki]]
+title: Customising search results
+ja-title: 検索結果のカスタマイズ
+type: text/vnd.tiddlywiki
+
+デフォルトでは、サイドバーの検索ボックスの結果は、Tiddlerタイトルの単純なリストとして表示されます。検索結果は、さまざまな方法でプラグイン視覚エフェクトを追加することでカスタマイズできます(追加の検索結果の視覚エフェクトが検出された場合、タブが自動的に表示されます)
+
+検索結果の視覚エフェクトは、[[$:/tags/SearchResults]]タグが付いたTiddlerに保存されます。デフォルトの検索結果リストは、システムTiddler[[$:/core/ui/DefaultSearchResultList]]に実装されています
+
+新しい検索結果の視覚エフェクトを作成するには:
+
+# [[$:/tags/SearchResults]]タグを付けた新しいTiddlerを作成します
+# ウィジェット変数''searchTiddler''を使用して、現在の検索用語を含むTiddlerのタイトルにアクセスします
+
+新しい視覚エフェクトをデフォルトにしたい場合は、デフォルトで表示したい検索視覚エフェクトを含むTiddlerのタイトルを含む[[$:/config/SearchResults/Default]]という名前のTiddlerを作成します
+
+以下は、結果を時系列の逆順に表示する別の視覚エフェクトの例です: 
+
+```
+\define searchResults()
+<$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
+
+{{$:/language/Search/Matches}}
+
+</$set>
+<<timeline subfilter:"!is[system]search{$(searchTiddler)$}">>
+\end
+<<searchResults>>
+```
+
+<<.from-version 5.1.23>>サイドバー検索に、キーボードショートカット<kbd><<displayshortcuts ((input-down))>></kbd>と<kbd><<displayshortcuts ((input-up))>></kbd>を使用して検索結果をナビゲートできる、より洗練された検索メカニズムが導入します
+
+# <<tag-pill "$:/tags/SearchResults">>のタグ付けされたTiddlerは、<<.var configTiddler>>変数を通じてアクセスできます
+# 検索フィールドへのユーザ入力には、<<.var userInput>>変数を通じてアクセスできます
+# フィールド<<.field first-search-filter>>とフィールド<<.field second-search-filter>>を使用して、検索結果に使用されるフィルターを保存します。詳細については、Tiddler $:/core/ui/DefaultSearchResultListを参照してください
+# ナビゲートされた検索結果が強調表示されるように次のフォームを使用し、ニーズに合わせて変更します:
+
+```
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+```
+
+<$macrocall $name=".tip" _="<<.var searchTiddler>>変数には、検索結果の並べ替えに使用されるTiddlerの名前がまだ含まれていることに注意してください。<<.var editTiddler>>変数には、編集中のTiddlerの名前が含まれます"/>

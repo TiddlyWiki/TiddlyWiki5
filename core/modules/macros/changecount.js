@@ -6,10 +6,7 @@ module-type: macro
 Macro to return the changecount for the current tiddler
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -26,5 +23,3 @@ Run the macro
 exports.run = function() {
 	return this.wiki.getChangeCount(this.getVariable("currentTiddler")) + "";
 };
-
-})();

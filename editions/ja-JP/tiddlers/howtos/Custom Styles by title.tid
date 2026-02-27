@@ -1,0 +1,41 @@
+created: 201804111739
+modified: 20241119112922446
+original-modified: 201804111739
+tags: [[How to apply custom styles]]
+title: Custom styles by data-tiddler-title
+ja-title: data-tiddler-titleによるカスタムスタイル
+type: text/vnd.tiddlywiki
+
+! 属性: data-tiddler-title
+
+<<.from-version "5.1.16">>
+
+~TiddlyWikiのコアでは、レンダリングされたコンテンツにいくつかの`属性`を追加します。これらの属性を使用すると、カスタムスタイルをTiddlerコンテンツに適用できます
+
+例えば、この"{{!!title}}"という名前のTiddlerには、次のような属性になります: 
+
+```
+data-tiddler-title="Custom styles by data-tiddler-title"
+```
+
+!! 例
+
+次のCSSは[[Custom data-styles]]で定義されており、まさにこのTiddlerに青い境界線を作成します
+
+```
+[data-tiddler-title="Custom styles by data-tiddler-title"] {
+  border: 1px solid blue;
+}
+```
+
+システムTiddlerと呼ばれる`$:/`で始まるすべてのTiddlerに緑色の境界線を作成するには、次のようにCSSを使用する必要があります: (ここでは適用されていませんが、試してみることはできます!)
+
+```
+[data-tiddler-title^="$:/"] {
+  border: 1px solid green;
+}
+```
+
+!! その他の記述方法
+
+{{Attribute Selectors}}

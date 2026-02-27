@@ -6,16 +6,12 @@ module-type: widget
 Widget to display an innerwiki in an iframe
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DEFAULT_INNERWIKI_TEMPLATE = "$:/plugins/tiddlywiki/innerwiki/template";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	DataWidget = require("$:/core/modules/widgets/data.js").data,
 	dm = $tw.utils.domMaker;
 
 var InnerWikiWidget = function(parseTreeNode,options) {
@@ -284,7 +280,7 @@ InnerWikiWidget.prototype.refresh = function(changedTiddlers) {
 			this.deleteAnchors();
 			this.createAnchors();
 		}
-		return childrenRefreshed
+		return childrenRefreshed;
 	}
 };
 
@@ -311,7 +307,7 @@ InnerWikiWidget.prototype.saveScreenshot = function(options,callback) {
 		throw "Google Puppeteer not found";
 	}
 	// Take screenshots
-	puppeteer.launch().then(async browser => {
+	puppeteer.launch().then(async (browser) => {
 		// NOTE: Copying Google's sample code by using new fangled promises "await"
 		const page = await browser.newPage();
 		await page.setContent(self.createInnerHTML(),{
@@ -347,5 +343,3 @@ InnerWikiWidget.prototype.saveScreenshot = function(options,callback) {
 };
 
 exports.innerwiki = InnerWikiWidget;
-
-})();

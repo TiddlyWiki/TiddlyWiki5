@@ -26,7 +26,7 @@ The content of the `<$edit>` widget is ignored.
 
 ! Examples
 
-!! Edit the contents (text field) of a tiddler titled <%if [<now YYYY-0MM-0DD>is[tiddler]] %> <$tiddler tiddler=<<now YYYY-0MM-0DD>> > <$link/></$tiddler> <%else %> with today’s date <% endif %>
+!! Edit the contents (text field) of a tiddler titled <%if [<now YYYY-0MM-0DD>is[tiddler]] %> <$tiddler tiddler=<<now YYYY-0MM-0DD>> > <$link/></$tiddler> <%else %> with today’s date <%endif%>
 
 <$macrocall $name=".example" n="1"
 eg="""<$edit tiddler=<<now YYYY-0MM-0DD>> class="tc-edit-texteditor"/>

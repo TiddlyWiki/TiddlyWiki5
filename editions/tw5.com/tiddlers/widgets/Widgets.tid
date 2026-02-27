@@ -1,6 +1,6 @@
 created: 20140908130500000
-modified: 20240326164134356
-tags: Concepts Reference
+modified: 20240422083334052
+tags: Concepts [[Core Widgets]]
 title: Widgets
 type: text/vnd.tiddlywiki
 
@@ -14,6 +14,4 @@ Each class of widget contributes a specific ability to the overall functionality
 
 The more specialised widgets use a general-purpose [[widget syntax|Widgets in WikiText]] as their only possible WikiText representation.
 
-The following classes of widget are built into the core:
 
-<<list-links "[tag[Widgets]]" class:"multi-columns">>

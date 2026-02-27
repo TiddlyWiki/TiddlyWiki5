@@ -6,10 +6,7 @@ module-type: startup
 Browser message handling
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -62,7 +59,7 @@ function loadIFrame(url,callback) {
 Unload library iframe for given url
 */
 function unloadIFrame(url){
-	var iframes = document.getElementsByTagName('iframe');
+	var iframes = document.getElementsByTagName("iframe");
 	for(var t=iframes.length-1; t--; t>=0) {
 		var iframe = iframes[t];
 		if(iframe.getAttribute("library") === "true" &&
@@ -181,5 +178,3 @@ exports.startup = function() {
 		}
 	},false);
 };
-
-})();

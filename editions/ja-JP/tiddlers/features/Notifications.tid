@@ -1,0 +1,11 @@
+created: 20160107225753340
+modified: 20241215112240963 
+original-modified: 20160107225855353
+tags: Features
+title: Notifications
+ja-title: 通知
+type: text/vnd.tiddlywiki
+
+通知は、 TiddlyWikiウィンドウの右上に表示される小さな情報メッセージで、事前に設定された時間が経過すると自動的に消えます。
+
+<$button message="tm-notify" param="SampleNotification">通知のサンプルを表示</$button>

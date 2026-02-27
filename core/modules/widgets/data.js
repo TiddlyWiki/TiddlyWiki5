@@ -6,10 +6,6 @@ module-type: widget
 Widget to dynamically represent one or more tiddlers
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -162,7 +158,7 @@ DataWidget.prototype.extractCompoundTiddler = function(title) {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DataWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	this.computeAttributes();
 	var newPayload = this.computeDataTiddlerValues();
 	if(hasPayloadChanged(this.dataPayload,newPayload)) {
 		this.dataPayload = newPayload;
@@ -190,5 +186,3 @@ function hasPayloadChanged(a,b) {
 }
 
 exports.data = DataWidget;
-
-})();

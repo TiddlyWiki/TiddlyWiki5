@@ -1,0 +1,15 @@
+title: Functions/VariableLeakage
+description: Variables from filter runs or functions should not pollute widget
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\function myvar(element) [<element>]
+\function call(element) [[myvar]is[variable]then<element>]
+
+<<call abc>>
++
+title: ExpectedResult
+
+<p>abc</p>

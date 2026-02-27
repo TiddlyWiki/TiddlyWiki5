@@ -1,0 +1,9 @@
+created: 20180307153530187
+modified: 20241022105026989
+original-modified: 20180307153530187
+tags: Learning
+title: TaskManagementExampleDraggableTemplate
+ja-title: タスク管理の例(ドラッグ可能)のテンプレート
+type: text/vnd.tiddlywiki
+
+<$checkbox tag="done"> <$link/></$checkbox>

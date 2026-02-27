@@ -3,5 +3,5 @@
 	"name": "Geospatial Utilities",
 	"description": "Geospatial utilities",
 	"list": "readme docs settings license",
-	"stability": "STABILITY_1_EXPERIMENTAL"
+	"stability": "STABILITY_2_STABLE"
 }

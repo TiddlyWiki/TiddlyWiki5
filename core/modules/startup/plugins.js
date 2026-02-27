@@ -6,10 +6,7 @@ module-type: startup
 Startup logic concerned with managing plugins
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -34,7 +31,6 @@ exports.startup = function() {
 			if(requiresReload) {
 				requireReloadDueToPluginChange = true;
 			} else if(tiddler) {
-				var pluginType = tiddler.fields["plugin-type"];
 				if($tw.wiki.getTiddlerText(PREFIX_CONFIG_REGISTER_PLUGIN_TYPE + (tiddler.fields["plugin-type"] || ""),"no") === "yes") {
 					changesToProcess.push(title);
 				}
@@ -75,11 +71,10 @@ exports.startup = function() {
 				$tw.wiki.unpackPluginTiddlers();
 				// Queue change events for the changed shadow tiddlers
 				$tw.utils.each(Object.keys(changedShadowTiddlers),function(title) {
-					$tw.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title]);
+					$tw.wiki.enqueueTiddlerEvent(title,changedShadowTiddlers[title], true);
 				});
 			}
 		}
 	});
 };
 
-})();

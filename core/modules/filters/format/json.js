@@ -3,10 +3,7 @@ title: $:/core/modules/filters/format/json.js
 type: application/javascript
 module-type: formatfilteroperator
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -19,17 +16,11 @@ exports.json = function(source,operand,options) {
 		spaces = /^\d+$/.test(operand) ? parseInt(operand,10) : operand;
 	}
 	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title);
-		try {
-			data = JSON.parse(title);
-		} catch(e) {
-			data = undefined;
-		}
+		var data = $tw.utils.parseJSONSafe(title,function(){return undefined;});
+
 		if(data !== undefined) {
 			results.push(JSON.stringify(data,null,spaces));
 		}
 	});
 	return results;
 };
-
-})();

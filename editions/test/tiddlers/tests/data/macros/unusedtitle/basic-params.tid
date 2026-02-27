@@ -14,7 +14,15 @@ title: Output
 
 <<unusedtitle baseName:"About" separator:"-">>
 
+<!-- v5.3.6 startCount -->
+
+<<unusedtitle startCount:"3">>
+
+<<unusedtitle startCount:"-1" baseName:"invalid start">>
+
+<<unusedtitle startCount:"aaa" baseName:"invalid count">>
+
 +
 title: ExpectedResult
 
-<p>New Tiddler</p><p>New Tiddler</p><p>anotherBase</p><p>About</p>
+<p>New Tiddler</p><p>New Tiddler</p><p>anotherBase</p><p>About</p><p>New Tiddler 3</p><p>invalid start</p><p>invalid count</p>

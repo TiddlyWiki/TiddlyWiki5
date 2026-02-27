@@ -6,10 +6,7 @@ module-type: startup
 Setup the root widget and the core root widget handlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -52,7 +49,9 @@ exports.startup = function() {
 			basicAuthUsername: params["basic-auth-username"],
 			basicAuthUsernameFromStore: params["basic-auth-username-from-store"],
 			basicAuthPassword: params["basic-auth-password"],
-			basicAuthPasswordFromStore: params["basic-auth-password-from-store"]
+			basicAuthPasswordFromStore: params["basic-auth-password-from-store"],
+			bearerAuthToken: params["bearer-auth-token"],
+			bearerAuthTokenFromStore: params["bearer-auth-token-from-store"]
 		});
 	});
 	$tw.rootWidget.addEventListener("tm-http-cancel-all-requests",function(event) {
@@ -82,7 +81,7 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
 		var selector = event.param || "",
 			element,
-		    	baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
+			baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
 		element = $tw.utils.querySelectorSafe(selector,baseElement);
 		if(element && element.focus) {
 			element.focus(event.paramObject);
@@ -125,5 +124,3 @@ exports.startup = function() {
 		});
 	}
 };
-
-})();

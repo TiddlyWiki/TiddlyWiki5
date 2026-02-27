@@ -1,0 +1,123 @@
+created: 20210222140234737
+modified: 20241019104919003
+original-modified: 20211123034501278
+tags: Learning KeyboardDrivenInput
+title: Demonstration: keyboard-driven-input Macro
+ja-title: デモ: キーボード入力マクロ
+type: text/vnd.tiddlywiki
+
+\define allshortcuts(descriptor)
+<$wikify name=scutlist text=<<displayshortcuts (($descriptor$)) '' ' ' ''>> >
+<$list filter="[<scutlist>split[ ]join[</kbd>や<kbd>]addprefix[<kbd>]addsuffix[</kbd>]]" variable=scts><<scts>></$list>
+</$wikify>
+\end
+
+\define kdi-demo-textmacrocall()
+```
+<$macrocall $name=keyboard-driven-input 
+        tiddler="$(tiddler)$"
+        storeTitle="$(storeTitle)$" 
+        selectionStateTitle="$(selectionStateTitle)$" 
+        configTiddlerFilter="$(configTiddlerFilter)$" 
+ />
+```
+\end
+
+<$vars configTiddlerFilter="[[kdi-demo-configtid]]" tiddler="kdi-demo-tiddler" storeTitle="kdi-demo-storeTitle" selectionStateTitle="kdi-demo-selectionStateTitle" >
+
+[[キーボード入力マクロ|keyboard-driven-input Macro]]は、ユーザーの入力に応じて更新されるフィルターされたリストを作成するために使用されます。また、キーボードを使用してリストをナビゲートしたり、リスト項目を使用してマクロを呼び出したりすることもできます。
+
+これは、[[キーボードウィジェット|KeyboardWidget]]でラップされた''[[編集テキストウィジェット|EditTextWidget]]''で構成されています。`((input-accept))`、`((input-accept-variant))`、および`((input-cancel))`キーボードショートカットをリッスンする<<.def keyboard>>ウィジェットがありますが、これらのイベントに応答するデフォルトの動作はありません。マクロをユースケースに合わせて記述する必要があります。また、フィルターされたオプションリストのデフォルトの視覚化も定まっていません。
+
+!!<<.var keyboard-driven-input>>マクロによって処理されるキーボード入力の種類: 
+
+!!!設定不可: 
+
+次のキーボードイベントは、[[$:/core/macros/keyboard-driven-input]]の<<.var keyboard-driven-input>>で定義されているマクロを呼び出します。
+
+|入力 |目的 |マクロ |h
+|タイプ入力 |リストフィルター内で使用される文字列を作成する |<<.var keyboard-input-actions>> |
+|`((input-up))` (<<allshortcuts input-up>>) |フィルタリングされたリスト内の前の項目を一時的に選択する |パタメータ<<.param afterOrBefore>>=`"before"`、<<.param reverse>>=`"reverse[]"`付きの<<.var input-next-actions>> |
+|`((input-down))` (<<allshortcuts input-down>>) |フィルタリングされたリスト内の次の項目を一時的に選択する |パラメータ<<.param afterOrBefore>>=`"after"`、<<.param reverse>>=`""`付きの<<.var input-next-actions>> |
+
+上記のすべてのアクションは、<<.var keyboard-driven-input>>がマクロのパラメータを使用して指定されたTiddler内に保持されるデータを生成または変更します。その後、キーボードショートカットによって呼び出されるマクロだけでなく、例えばフィルタリングされたリストを表示するマクロなど、これらの外部もデータにアクセスできます。
+
+!!!パラメータで設定可能:
+
+次のキーボードイベントは、<<.var keyboard-driven-input>>にパラメータで名前が指定されているマクロを呼び出します。パラメータ名から目的が推測されますが、[[$:/core/macros/keyboard-driven-input]]内にはデフォルトのマクロは定義されていません。
+
+|[[キーボードショートカット記述 |Keyboard Shortcut Descriptor]] |キーの組み合わせ |パタメーター |h
+|`((input-accept))` |<<allshortcuts input-accept>> |<<.param inputAcceptActions>> |
+|`((input-accept-variant))` |<<allshortcuts input-accept-variant>> |<<.param inputAcceptVariantActions>> |
+|`((input-cancel))` |<<allshortcuts input-cancel>> |<<.param inputCancelActions>> |
+
+<<.var keyboard-driven-input>> は、TiddlyWikiのさまざまなコア機能の一部として動作しているのを見ることができます。たとえば、[[検索機能|Searching in TiddlyWiki]]、[[tag-pickerマクロ|tag-picker Macro]]、[[リンクの挿入|Insert link]]のような[[エディターツールバー|Editor toolbar]]のドロップダウンインターフェースなどです。
+
+!!デモに必要な最小限の材料
+
+<<.var keyboard-driven-input>>マクロ自体はリストの結果を表示したり、選択されたオプションに対して何かを実行したりしないことを念頭に置いて、<<.var keyboard-driven-input>>マクロの最小限のデモンストレーションには以下が必要です: 
+
+# ユーザーのテキスト入力に応じて結果が変化する''フィルターを含むTiddler''は、ユーザーが選択できるオプションを生成すること
+# ''いくつかのパラメータ:''
+#*ステップ1で説明したフィルタが見つかるTiddlerのタイトルを返す''フィルタ''
+#*入力イベントに応答して状態情報を格納するために使用する''Tiddler タイトル''。これらのTiddlerは既に存在している必要はありません。存在する場合は、<<.var keyboard-driven-input>>マクロによってその内容が変更されます。
+
+!!検索フィルター
+
+デフォルトでは、Tiddler(そのタイトルは、以下で説明するパラメータで指定されます)の<<.field first-search-filter>>と<<.field second-search-filter>>フィールドでフィルターを検索します。
+
+このフィルタは、<<.var userInput>>と呼ばれる変数を参照できます。この変数は、最新の<kbd><<displayshortcuts ((input-up))>></kbd>や<kbd><<displayshortcuts ((input-down))>></kbd>イベントの発生時に、状態Tiddler(後述)に保存されている<<.def edit-text>>ウィジェットの内容を表示します。
+
+''注:'' このフィルターが<<.var keyboard-driven-input>>マクロ(フィルターされたオプションを表示するポップアップなど)の外のコンテキストで参照される場合は、変数<<.var userInput>>もそれらのコンテキストで定義する必要があります(状態Tiddlerから読み取ることによって)。
+
+!!最小限のパラメータ
+
+|Parameter name |Notes |h
+|<<.param configTiddlerFilter>> |これは、Tiddlerのタイトルではなく、条件付き動作(たとえば、アクティブなタブの確認やフォールバックで存在しないフィルターを選び出すなど)を可能にするフィルターです。<br>返されるタイトルは、<<.var keyboard-driven-input>>が結果リストを生成できる少なくとも1つのフィルターを含む既存のTiddlerに属している必要があります。 |
+|<<.param tiddler>> |このTiddlerには、最新のイベントに応じて、入力された内容や即時の選択結果が含まれます。これは、''edit-text''ウィジェットでキーが押されるたびに、//また//、ユーザーが<kbd><<displayshortcuts ((input-up))>></kbd>や<kbd><<displayshortcuts ((input-down))>></kbd>キーを使用してフィルタリングされた結果を循環するときにも更新されます。 |
+|<<.param storeTitle>> |このTiddlerは、常にユーザー入力を反映します(各キーストロークの後にTiddler<<.param tiddler>>から''edit-text''ウィジェットに転送されます)。 |
+|<<.param selectionStateTitle>> |このTiddlerは、<kbd><<displayshortcuts ((input-up))>></kbd>や<kbd><<displayshortcuts ((input-down))>></kbd>イベントで更新され、最大2つのフィルタのどちらがリストを生成したかに応じて、サフィックス`-userInput`が付いたユーザー入力か、またはサフィックス`-primaryList`か`-secondaryList`が付いた瞬間的な選択のいずれかが含まれます。 |
+
+!!デモのセットアップ
+
+私は<$list filter=<<configTiddlerFilter>> />というTiddlerを作成し、その<<.field first-search-filter>>フィールドに次のフィルターを配置しました: 
+
+<code><$list filter=<<configTiddlerFilter>> ><$text text={{!!first-search-filter}}/></$list></code>. 
+
+これは、タイトルにユーザーが入力したテキストが含まれる非システムTiddlerをフィルターします。
+
+上記の<<.var keyboard-driven-input>>を持つフィルターを使用するには、パラメーター<<.param configTiddlerFilter>>の値が<$list filter=<<configTiddlerFilter>> />を返すフィルターである必要があります。
+
+<<.param tiddler>>、<<.param storeTitle>>、<<.param selectionStateTitle>>は、かなり任意に選択できます(変更したくないTiddlerのタイトルを使用しないように注意するだけです)。
+
+このデモは、次のマクロ呼び出しで呼び出すことができます: 
+
+<<kdi-demo-textmacrocall>>
+
+!!デモ
+
+ここに入力してみてください: <$macrocall $name=keyboard-driven-input 
+        tiddler=<<tiddler>>
+        storeTitle=<<storeTitle>> 
+        selectionStateTitle=<<selectionStateTitle>> 
+        configTiddlerFilter=<<configTiddlerFilter>> 
+ />  
+
+下の表のさまざまな状態Tiddlerの変化を観察してください。<kbd><<displayshortcuts ((input-up))>></kbd>や<kbd><<displayshortcuts ((input-down))>></kbd>キーを使用して、フィルター結果を移動します。何も変化がない場合は、入力を短くしてフィルターを広げてください。入力の長さが0の場合、リストにはシステム以外のTiddlerがすべて含まれます。
+
+@@.tablestyle
+
+|Parameter name |Tiddlerのタイトル |Tiddlerの<<.field text>>フィールドの内容 |h
+|<<.param tiddler>> |{{{[<tiddler>]}}} |<pre><$text text={{{[<tiddler>get[text]]}}}/></pre>|
+|<<.param storeTitle>> |{{{[<storeTitle>]}}} |<pre><$text text= {{{[<storeTitle>get[text]]}}}/></pre>|
+|<<.param selectionStateTitle>> |{{{[<selectionStateTitle>]}}} |<pre><$text text={{{[<selectionStateTitle>get[text]]}}}/></pre>|
+@@
+
+<<.var keyboard-driven-input>>マクロには、囲まれた''edit-text''ウィジェットのすべての属性を含む多くのパラメーターが用意されており、その使用方法や結果の表示方法、操作方法が非常に柔軟です。
+
+参照: [[検索結果のカスタマイズ|Customising search results]]と[[$:/core/ui/DefaultSearchResultList]]
+
+<style>
+.tablestyle {width:100%;}
+.tablestyle td + td + td {width: 50%;}
+</style>

@@ -1,0 +1,32 @@
+created: 20180310002601813
+modified: 20241022104217783
+original-modified: 20211106021629911
+tags: Learning [[How to apply custom styles]]
+title: Simple ways to write protect tiddlers
+ja-title: TIddlerの書き込み保護するための簡単な方法
+type: text/vnd.tiddlywiki
+
+自分自身やゲストによるTiddlyWikiファイルへの意図しない変更からTiddlerを保護したい場合があります。ここでは簡単なアプローチをいくつか紹介します。これらは意図的な攻撃に対する強化された保護を提供するものではないことに注意してください
+
+!! スタイルシートを使用してタグ名指定でTiddlerをロックする
+
+次の内容でTiddlerを作成し、次のように`$:/tags/Stylesheet`のタグ付けをします: 
+
+```css
+[data-tags*="Locked"] button[title="このTIddlerを編集します"]   {display: none;}
+```
+
+TWの言語が英語ではない場合は、'title="...."'内のテキストを編集ボタンの上にカーソルを置いたときに表示されるテキストに変更する必要があります
+
+これで、"Locked"とタグ付けしたすべてのTiddlerの編集ボタンが非表示になります。これを元に戻すには、スタイルシートTiddlerを開いて、"none"を"inline"に変更します
+
+!! トランスクルージョンを使用してシステムTiddler内にTiddlerを非表示にする
+
+* 編集のためにTiddlerを開きます
+* タイトルを選択してコピーします
+* すべてのTiddlerテキストを選択します
+* 切り出しツールをクリックします
+* タイトル ボックスに、`$:/`を入力し、元のタイトルをペーストします
+* デフォルトを使用してテキストを新しいTiddlerに切り出し、トランスクルージョンに置き換えます
+
+これで、元のTiddlerの内容を表示できますが、それらを編集するには、プレフィックス`$:/`が付いたTiddlerを見つける必要があります

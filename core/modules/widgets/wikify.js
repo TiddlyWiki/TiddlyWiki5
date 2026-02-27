@@ -6,10 +6,7 @@ module-type: widget
 Widget to wikify text into a variable
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -45,13 +42,13 @@ WikifyWidget.prototype.execute = function() {
 	this.wikifyOutput = this.getAttribute("output","text");
 	// Create the parse tree
 	this.wikifyParser = this.wiki.parseText(this.wikifyType,this.wikifyText,{
-			parseAsInline: this.wikifyMode === "inline"
-		});
+		parseAsInline: this.wikifyMode === "inline"
+	});
 	// Create the widget tree 
 	this.wikifyWidgetNode = this.wiki.makeWidget(this.wikifyParser,{
-			document: $tw.fakeDocument,
-			parentWidget: this
-		});
+		document: $tw.fakeDocument,
+		parentWidget: this
+	});
 	// Render the widget tree to the container
 	this.wikifyContainer = $tw.fakeDocument.createElement("div");
 	this.wikifyWidgetNode.render(this.wikifyContainer,null);
@@ -153,5 +150,3 @@ WikifyWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.wikify = WikifyWidget;
-
-})();

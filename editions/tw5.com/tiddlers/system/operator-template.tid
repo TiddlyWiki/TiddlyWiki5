@@ -8,17 +8,17 @@ title: $:/editions/tw5.com/operator-template
 \whitespace trim
 
 \procedure .op-place()
-<% if [<op-name>!is[blank]] %>
+<%if [<op-name>!is[blank]] %>
 	<$macrocall $name=".place" _=<<op-name>> /><span class="tc-tiny-gap">=</span>
-<% endif %>
+<%endif%>
 \end
 
 \procedure .op-row()
-<% if [<op-body>!is[blank]] %>
+<%if [<op-body>!is[blank]] %>
 	<tr>
 		<th align="left"><<op-head>></th><td><<.op-place>><<op-body>></td>
 	</tr>
-<% endif %>
+<%endif%>
 \end
 
 <$list filter="[all[current]tag[Filter Operators]]">

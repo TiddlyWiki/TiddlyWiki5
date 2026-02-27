@@ -6,10 +6,7 @@ module-type: startup
 Setup the root widget event handlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var JSZip = require("$:/plugins/tiddlywiki/jszip/jszip.js");
@@ -71,7 +68,7 @@ function loadZipTiddler(title) {
 					base64: true
 				});
 			} catch(e) {
-				console.log("JSZip error: " + e)
+				console.log("JSZip error: " + e);
 			}
 		}
 		return zip;		
@@ -80,8 +77,8 @@ function loadZipTiddler(title) {
 
 function saveZipTiddler(title,zip) {
 	var data = zip.generate({
-			type: "base64"
-		});
+		type: "base64"
+	});
 	$tw.wiki.addTiddler({
 		title: title,
 		type: "application/zip",
@@ -100,5 +97,3 @@ function downloadZipFile(title,filename) {
 		document.body.removeChild(link);
 	}
 }
-
-})();

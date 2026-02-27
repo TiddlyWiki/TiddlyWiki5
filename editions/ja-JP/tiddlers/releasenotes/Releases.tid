@@ -1,0 +1,15 @@
+created: 20150419144523070
+modified: 20241226113315947
+original-modified: 20231005205612322
+tags: About
+title: Releases
+ja-title: リリース
+type: text/vnd.tiddlywiki
+
+TiddlyWikiとTiddlyDesktopの新しいリリースは、[[公式ディスカッショングループ|Forums]]と[[Twitter|https://twitter.com/TiddlyWiki]]にて発表します
+
+TiddlyWikiの次のバージョンのプレリリースは、テストとレビューの目的で https://tiddlywiki.com/prerelease で見付けられます。
+
+旧バージョンをダウンロードするには、[[TiddlyWikiアーカイブ|TiddlyWiki Archive]]を参照してください
+
+<<tabs "[[TiddlyWiki Releases]] [[TiddlyDesktop Releases]]" "TiddlyWiki Releases" "$:/state/tab">>

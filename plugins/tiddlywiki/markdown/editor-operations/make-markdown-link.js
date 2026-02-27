@@ -6,14 +6,11 @@ module-type: texteditoroperation
 Text editor operation to make a markdown link
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports["make-markdown-link"] = function(event,operation) {
-	var rx = /[()<>\\]/g, rs = '\\$&';
+	var rx = /[()<>\\]/g, rs = "\\$&";
 
 	if(operation.selection) {
 		var desc = operation.selection.replace(/[\[\]\\]/g, rs);
@@ -39,5 +36,3 @@ exports["make-markdown-link"] = function(event,operation) {
 	operation.newSelStart = operation.selStart + operation.replacement.length;
 	operation.newSelEnd = operation.newSelStart;
 };
-
-})();

@@ -5,7 +5,7 @@ description: High contrast and unambiguous (light version)
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 
-alert-background: #f00
+alert-background: #ff4a4a
 alert-border: <<colour background>>
 alert-highlight: <<colour foreground>>
 alert-muted-foreground: #800
@@ -18,13 +18,13 @@ code-background: <<colour background>>
 code-border: <<colour foreground>>
 code-foreground: <<colour foreground>>
 dirty-indicator: #f00
-download-background: #080
+download-background: #008200
 download-foreground: <<colour background>>
 dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
 dropdown-background: <<colour background>>
 dropdown-border: <<colour muted-foreground>>
-dropdown-tab-background-selected: <<colour foreground>>
+dropdown-tab-background-selected: <<colour background>>
 dropdown-tab-background: <<colour foreground>>
 dropzone-background: rgba(0,200,0,0.7)
 external-link-background-hover: inherit
@@ -52,13 +52,13 @@ notification-border: <<colour foreground>>
 page-background: <<colour background>>
 pre-background: <<colour background>>
 pre-border: <<colour foreground>>
-primary: #00f
+primary: #0000ff
 select-tag-background:
 select-tag-foreground:
 sidebar-button-foreground: <<colour foreground>>
-sidebar-controls-foreground-hover: <<colour background>>
+sidebar-controls-foreground-hover: #606060
 sidebar-controls-foreground: <<colour foreground>>
-sidebar-foreground-shadow: rgba(0,0,0, 0)
+sidebar-foreground-shadow: #000000
 sidebar-foreground: <<colour foreground>>
 sidebar-muted-foreground-hover: #444444
 sidebar-muted-foreground: <<colour foreground>>
@@ -72,6 +72,10 @@ sidebar-tab-foreground: <<colour tab-foreground>>
 sidebar-tiddler-link-foreground-hover: <<colour foreground>>
 sidebar-tiddler-link-foreground: <<colour primary>>
 site-title-foreground: <<colour tiddler-title-foreground>>
+stability-deprecated: #ff0000
+stability-experimental: #b37400
+stability-legacy: #000075
+stability-stable: #008000
 static-alert-foreground: #aaaaaa
 tab-background-selected: <<colour background>>
 tab-background: <<colour foreground>>
@@ -88,7 +92,7 @@ tag-foreground: #fff
 tiddler-background: <<colour background>>
 tiddler-border: <<colour foreground>>
 tiddler-controls-foreground-hover: #ddd
-tiddler-controls-foreground-selected: #fdd
+tiddler-controls-foreground-selected: #c5abf3
 tiddler-controls-foreground: <<colour foreground>>
 tiddler-editor-background: <<colour background>>
 tiddler-editor-border-image: <<colour foreground>>
@@ -113,3 +117,4 @@ toolbar-cancel-button:
 toolbar-done-button: 
 untagged-background: <<colour foreground>>
 very-muted-foreground: #888888
+network-activity-foreground: <<colour primary>>

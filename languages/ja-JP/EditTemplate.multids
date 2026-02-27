@@ -26,6 +26,8 @@ Tags/ClearInput/Caption: 入力をクリア
 Tags/ClearInput/Hint: タグ入力をクリア
 Tags/Dropdown/Caption: タグ一覧
 Tags/Dropdown/Hint: タグ一覧を表示
+Tags/EmptyMessage: タグが見つかりません
+Tags/EmptyMessage/System: システムタグが見つかりません
 Title/BadCharacterWarning: 警告: Tiddler のタイトルに <<bad-chars>> という文字の使用は避けてください
 Title/Exists/Prompt: 対象の Tiddler がすでに存在します
 Title/References/Prompt: この Tiddler の次のリファレンスは、自動的には更新されません:

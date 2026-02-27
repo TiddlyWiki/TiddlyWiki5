@@ -1,0 +1,13 @@
+created: 20170210075109635
+modified: 20241221112634689
+original-modified: 20220612082350537
+tags: Plugins
+title: OfficialPlugins
+ja-title: 公式プラグイン
+type: text/vnd.tiddlywiki
+
+公式TiddlyWikiプラグインライブラリには、[[TiddlyWiki 5のメインGitHubレポジトリ|Working with the TiddlyWiki5 repository]]の一部であるプラグインが含まれています。[[プラグインライブラリ|Installing a plugin from the plugin library]]からインストールします。公式プラグインライブラリのプラグインは、[[アップグレードプロセス|UpgradeMechanism]]の一部として自動的に更新されます。 
+
+<<list-links "[tag[OfficialPlugins]]">>
+
+<$macrocall $name=".note" _="プラグインの概要と処理方法については、[[プラグイン|Plugins]]を参照してください"/>

@@ -1,0 +1,8 @@
+created: 20220219141117559
+list-before: $:/config/ViewTemplateTitleFilters/default
+modified: 20240929101800579
+original-modified: 20220220192507247
+tags: $:/tags/ViewTemplateTitleFilter
+title: $:/config/ViewTemplateTitleFilters/fr-default
+
+[has[ja-title]then[$:/core/ui/ViewTemplate/title/ja-default]]

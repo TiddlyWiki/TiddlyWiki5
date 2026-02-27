@@ -1,0 +1,16 @@
+created: 20220909111836951
+modified: 20241022105614479
+original-modified: 20230419103154329
+tags: Learning
+title: Visible Transclusions
+ja-title: トランスクルージョンの可視化
+type: text/vnd.tiddlywiki
+
+!! トランスクルージョンの可視化
+
+ブロックのトランスクルージョンは赤で表示され、インラインのトランスクルージョンは緑で表示されます
+
+<$button>
+<$action-setfield $tiddler="$:/temp/VisibleTransclusions" tags="$:/tags/Macro/View/Body" text={{$:/core/ui/VisibleTransclude}}/>
+ここをクリックすると、ストーリーリバー内のTiddlerでトランクスージョンが表示されるようになります
+</$button>

@@ -1,5 +1,5 @@
 created: 20150118134611000
-modified: 20150118183152000
+modified: 20241204085904594
 tags: [[each Operator]] [[Operator Examples]]
 title: each Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -9,5 +9,3 @@ type: text/vnd.tiddlywiki
 <<.operator-example 3 "[each:list-item[list]]" "all tiddlers listed anywhere in the core list field">>
 <<.operator-example 4 "[[Non existing]] [[GettingStarted]] +[each:value[]]" "Compare this to `+[each[]]` below">>
 <<.operator-example 5 "[[Non existing]] [[GettingStarted]] +[each[]]" "Compare this to `+[each:value[]]` above">>
-
-For an example of using the <<.op each>> operator to generate a two-tier list of groups and members, see [[GroupedLists]].

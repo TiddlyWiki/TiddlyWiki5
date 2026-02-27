@@ -1,5 +1,5 @@
 created: 20220917112931273
-modified: 20230724184044642
+modified: 20240923161726957
 tags: Pragmas
 title: Pragma: \rules
 type: text/vnd.tiddlywiki
@@ -18,8 +18,8 @@ For example, in stylesheets it is typical to only use the rules associated with 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 ```
 
-Some users prefer not to use CamelCase links:
+Disable CamelCase for just one tiddler:
 
 ```
-\rules except prettylink
+\rules except wikilink
 ```

@@ -1,0 +1,13 @@
+created: 20140912145532856
+footer: <$button message="tm-close-tiddler">閉じる</$button>
+modified: 20241215111706825
+original-modified: 20211119205144340
+subtitle: これはもう一つのモーダルウィザードです
+tags: Demonstrations
+title: SampleWizard2
+ja-title: サンプルウィザード2
+type: text/vnd.tiddlywiki
+
+これは、Tiddler [[サンプルウィザード2|SampleWizard2]]に保存されているもう一つのモーダルウィザードダイアログです。
+
+<$button message="tm-modal" param="SampleWizard">ウィザードをネスト</$button>することもできます。

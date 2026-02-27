@@ -1,0 +1,7 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/WikiLink
+type: text/vnd.tiddlywiki
+
+AWikiLink
+AnotherLink
+~SuppressedLink

@@ -1,0 +1,27 @@
+created: 20140617211749290
+modified: 20250120104354585
+original-modified: 20220613114121229
+tags: [[TiddlyWiki on Node.js]]
+title: Environment Variables on Node.js
+ja-title: Node.jsの環境変数
+type: text/vnd.tiddlywiki
+
+[[Node.js上のTiddlyWiki|TiddlyWiki on Node.js]]は、プラグインとエディションを検索するためのパスの区切りリストを指定するために、次のOS環境変数をサポートしています: 
+
+* `TIDDLYWIKI_PLUGIN_PATH` - 通常のプラグインの検索パス
+* `TIDDLYWIKI_THEME_PATH` - テーマの検索パス
+* `TIDDLYWIKI_LANGUAGE_PATH` - 言語の検索パス
+* `TIDDLYWIKI_EDITION_PATH` - エディションの検索パス (InitCommandによって使用される)
+
+
+<$macrocall $name=".note" _="""''1.'' 区切り文字はオペレーティングシステムによって異なる場合があります。Windowsではセミコロン`;`が使用されますが、Linux ではコロン`:`が使用されます。<br><br>''2.'' Linuxシステムでは、変数を定義するだけでなく//''export''//する必要もあります。
+"""/> 
+
+追加のパスはそれぞれ、~TiddlyWiki5 GitHubリポジトリの同等のディレクトリのように、構造化されたフォルダを指す必要があります: プラグイン、テーマ、言語のディレクトリには`publisher/pluginname/<files>`が含まれ、エディションのディレクトリには`editionname/<files>`が含まれます
+
+例:
+
+```
+export TIDDLYWIKI_PLUGIN_PATH=~/MyPluginStore
+tiddlywiki mywiki --build index
+```

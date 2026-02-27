@@ -6,10 +6,6 @@ module-type: global
 Confetti manager
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var confetti = require("$:/plugins/tiddlywiki/confetti/confetti.js");
@@ -52,5 +48,3 @@ ConfettiManager.prototype.reset = function () {
 };
 
 exports.ConfettiManager = ConfettiManager;
-
-})();

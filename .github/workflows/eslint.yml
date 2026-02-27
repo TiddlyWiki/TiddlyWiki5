@@ -1,0 +1,40 @@
+name: ESLint
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+concurrency:
+  group: lint-${{ github.event.pull_request.number || github.ref_name }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  # Needed for GitHub Checks API
+  checks: write
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --include=dev
+
+      - name: Run ESLint with reviewdog (GitHub Checks)
+        uses: reviewdog/action-eslint@v1
+        with:
+          eslint_flags: '.'
+          reporter: github-pr-check
+          fail_level: error
+          level: error
+          tool_name: ESLint PR code

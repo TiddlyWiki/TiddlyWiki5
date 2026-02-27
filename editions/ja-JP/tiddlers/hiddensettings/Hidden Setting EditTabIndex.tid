@@ -1,0 +1,10 @@
+title: Hidden Setting: Tab Index for Edit-Inputs
+ja-title: 隠し設定: 編集入力のタブインデックス
+tags: [[Hidden Settings]]
+created: 20190702074846206
+modified: 20241126104700035
+original-modified: 20190702074846206
+
+編集中のTiddlerの入力フィールドには、''タブインデックス''値(1が望ましい)を割り当てることができるので、<kbd>Tab</kbd>キーを使用して、フォーカスを1つの入力から次の入力へ、または<kbd>shift-Tab</kbd>で後方へ直接移動することができます。
+
+$:/config/EditTabIndex

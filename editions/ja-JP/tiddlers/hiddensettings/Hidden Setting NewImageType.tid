@@ -1,0 +1,11 @@
+created: 20211116222524148
+modified: 20241124111223981
+original-modified: 20211116222535549
+tags: [[Hidden Settings]]
+title: Hidden Setting: New-Image Type
+ja-title: 隠し設定: 新しい画像タイプ
+type: text/vnd.tiddlywiki
+
+デフォルトでは、新しい画像は`jpeg`画像タイプで作成されます
+
+$:/config/NewImageTypeの隠し設定は、新しい画像Tiddlerに使用される別の画像タイプ、例えば`png`を設定できます。

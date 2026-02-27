@@ -6,18 +6,13 @@ module-type: syncadaptor
 A sync adaptor module for synchronising with the local filesystem via node.js APIs
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Get a reference to the file system
-var fs = $tw.node ? require("fs") : null,
-	path = $tw.node ? require("path") : null;
+var fs = $tw.node ? require("fs") : null;
 
 function FileSystemAdaptor(options) {
-	var self = this;
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
 	this.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
@@ -167,5 +162,3 @@ FileSystemAdaptor.prototype.removeTiddlerFileInfo = function(title) {
 if(fs) {
 	exports.adaptorClass = FileSystemAdaptor;
 }
-
-})();

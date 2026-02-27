@@ -1,0 +1,37 @@
+created: 20211124205415217
+modified: 20241114113201979
+original-modified: 20230803050345698
+tags: [[Customise TiddlyWiki]]
+title: Creating new toolbar buttons
+ja-title: ツールバーボタンを新しく作成する
+type: text/vnd.tiddlywiki
+
+'レシピテンプレート'というスケルトンTiddlerを使って、オンデマンドで新しいレシピTiddlerを作成するためにViewToolbar Tiddlerで使用できるボタンを用意したいとします。これには次の手順が必要になります:
+
+# ボタンには画像が必要になります。コアイメージ($:/core/images/で始まる名前のシャドウTiddler)がどれも適合しない場合は、SVGイメージ(たとえば、 http://flaticon.com にあるイメージの一つ)をファイルにドラッグしてTiddlerにし、Tiddlerを編集して高さと幅がを22pxに調整します。
+# そのTiddlerを含むTiddlerを作成するとよいでしょう。Tiddlerを作成し、タイトルを付け、ボタンのコードを追加します(例として、下記のコードを参照してください。変更が必要な箇所にはヒントが含まれています)。[[$:/tags/ViewToolbar]]のタグを付けます。
+# ボタンをツールバーに表示するか非表示にするかをTiddlyWikiに伝えるTiddlerを作成する必要があります。[[$:/config/ViewToolbarButtons/Visibility/Recipe]]というタイトルにします。テキスト領域に`show`と入力して保存します。非表示にしたい場合は、テキスト領域に`hide`と入力して保存します。このボタンには、''コントロールパネル : 外観 : ツールバー : 閲覧画面''タブからもアクセスできます。
+# ボタンを適切な位置に配置する場合は、$:/tags/ViewToolbar Tiddlerを開き、ボタンTiddlerのタイトルをリストフィールドの適切な場所に挿入します。
+
+```
+\define newHereButtonTags()
+[[$(currentTiddler)$]]
+\end
+\define newHereButton()
+<$button class=<<tv-config-toolbar-class>>>
+<$action-sendmessage
+  $message="tm-new-tiddler"
+$param="TITLE OF YOUR SKELETON BUTTON"
+title="New tiddler"
+  tags=<<newHereButtonTags>> />
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{TITLE OF YOUR SVG IMAGE TIDDLER}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text="CAPTION FOR YOUR BUTTON"/></span>
+</$list>
+</$button>
+\end
+
+<<newHereButton>>
+```

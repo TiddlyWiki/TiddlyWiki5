@@ -1,4 +1,8 @@
 title: $:/core/ui/ViewTemplate/body/code
 
+<%if [<currentTiddler>is[missing]] :and[!is[shadow]] %>
+<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+<%else%>
 <$transclude $variable="copy-to-clipboard-above-right" src={{{ [<currentTiddler>get[text]] }}} />
 <$codeblock code={{{ [<currentTiddler>get[text]] }}} language={{{ [<currentTiddler>get[type]else[text/vnd.tiddlywiki]] }}}/>
+<%endif%>

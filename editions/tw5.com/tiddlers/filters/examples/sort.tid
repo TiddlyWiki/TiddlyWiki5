@@ -1,5 +1,5 @@
 created: 20150124112340000
-modified: 20150124113250000
+modified: 20251218023608468
 tags: [[sort Operator]] [[Operator Examples]]
 title: sort Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -11,3 +11,10 @@ type: text/vnd.tiddlywiki
 <<.operator-example 3 "one two Three four +[sort[]]">>
 <<.operator-example 4 "[prefix[Tiddl]sort[text]]">>
 <<.operator-example 5 "[has[created]sort[created]limit[10]]" "the oldest 10 tiddlers in the wiki">>
+
+! Using a custom locale
+The following examples shows the differences when using the sort operator with default, Swedish and Estonian locale.
+
+<<.operator-example 6 "[list[Locale Example]sort[]]">>
+<<.operator-example 7 "[list[Locale Example]sort[],[sv]]">>
+<<.operator-example 8 "[list[Locale Example]sort[],[et]]">>

@@ -1,0 +1,8 @@
+caption: --tp-font-size
+created: 20260122110956954
+modified: 20260130045455466
+tags: [[Core CSS Variables]]
+title: --tp-font-size CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-font-size` CSS variable represents the "Font size" setting in Theme Tweaks.

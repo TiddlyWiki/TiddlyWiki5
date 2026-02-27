@@ -18,7 +18,7 @@ code-background: #f7f7f9
 code-border: #e1e1e8
 code-foreground: #dd1144
 dirty-indicator: #ff0000
-download-background: #66cccc
+download-background: #3aafaf
 download-foreground: <<colour background>>
 dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
@@ -26,7 +26,7 @@ dropdown-background: <<colour background>>
 dropdown-border: <<colour muted-foreground>>
 dropdown-tab-background-selected: #fff
 dropdown-tab-background: #ececec
-dropzone-background: rgba(0,200,0,0.7)
+dropzone-background: #00d900
 external-link-background-hover: inherit
 external-link-background-visited: inherit
 external-link-background: inherit
@@ -52,26 +52,30 @@ notification-border: #999999
 page-background: #ffffff
 pre-background: #f5f5f5
 pre-border: #cccccc
-primary: #7897f3
+primary: #6387f1
 select-tag-background:
 select-tag-foreground:
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #000000
-sidebar-controls-foreground: #ccc
-sidebar-foreground-shadow: rgba(255,255,255, 0.8)
+sidebar-controls-foreground: #aaaaaa
+sidebar-foreground-shadow: #ffffff
 sidebar-foreground: #acacac
 sidebar-muted-foreground-hover: #444444
-sidebar-muted-foreground: #c0c0c0
+sidebar-muted-foreground: #aaaaaa
 sidebar-tab-background-selected: #ffffff
 sidebar-tab-background: <<colour tab-background>>
 sidebar-tab-border-selected: <<colour tab-border-selected>>
 sidebar-tab-border: <<colour tab-border>>
 sidebar-tab-divider: <<colour tab-divider>>
-sidebar-tab-foreground-selected: 
+sidebar-tab-foreground-selected: <<colour tab-foreground>>
 sidebar-tab-foreground: <<colour tab-foreground>>
 sidebar-tiddler-link-foreground-hover: #444444
-sidebar-tiddler-link-foreground: #7897f3
+sidebar-tiddler-link-foreground: <<colour primary>>
 site-title-foreground: <<colour tiddler-title-foreground>>
+stability-stable: #008000
+stability-experimental: #c07c00
+stability-deprecated: #ff0000
+stability-legacy: #0000ff
 static-alert-foreground: #aaaaaa
 tab-background-selected: #ffffff
 tab-background: #eeeeee
@@ -83,10 +87,10 @@ tab-foreground: #666666
 table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
-tag-background: #ffeedd
-tag-foreground: #000
+tag-background: #ffd5aa
+tag-foreground: #000000
 tiddler-background: <<colour background>>
-tiddler-border: #eee
+tiddler-border: #eeeeee
 tiddler-controls-foreground-hover: #888888
 tiddler-controls-foreground-selected: #444444
 tiddler-controls-foreground: #cccccc
@@ -97,7 +101,7 @@ tiddler-editor-fields-even: #e0e8e0
 tiddler-editor-fields-odd: #f0f4f0
 tiddler-info-background: #f8f8f8
 tiddler-info-border: #dddddd
-tiddler-info-tab-background: #f8f8f8
+tiddler-info-tab-background: <<colour tiddler-info-background>>
 tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: #c0c0c0
@@ -111,5 +115,6 @@ toolbar-close-button:
 toolbar-delete-button:
 toolbar-cancel-button:
 toolbar-done-button:
-untagged-background: #999999
+untagged-background: #cccccc
 very-muted-foreground: #888888
+network-activity-foreground: <<colour primary>>

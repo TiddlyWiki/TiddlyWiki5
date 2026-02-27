@@ -7,3 +7,9 @@ This is a demo of TiddlyWiki5 incorporating a plugin for parsing tiddlers writte
 To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:
 
 [[$:/plugins/tiddlywiki/markdown]]
+
+! Overridden Defaults
+
+This demo overrides the default value for tiddlers created from missing tiddler
+links so that Markdown is the default rather than WikiText. See
+the [[$:/config/DefaultMissingType]] tiddler for the modification.

@@ -1,0 +1,10 @@
+created: 20240421144407522
+modified: 20240422091247905
+tags: Reference
+title: Core Messages
+
+{{||Messages}}
+
+The following widget messages are implemented by the core:
+
+<<list-links filter:"[tag[Messages]]" class:"multi-columns">>

@@ -1,6 +1,6 @@
 breadcrumbs: [[Filter Step]]
 created: 20140410103123179
-modified: 20230410114132501
+modified: 20250302200615061
 tags: Filters
 title: Filter Operators
 type: text/vnd.tiddlywiki
@@ -21,7 +21,7 @@ type: text/vnd.tiddlywiki
 
 A <<.def "filter operator">> is a predefined keyword attached to an individual step of a [[filter|Filters]]. It defines the particular action of that step.
 
-''Important:'' In general, each first [[filter step|Filter Step]] of a [[filter run|Filter Run]] not given any input titles receives the output of <$link to="all Operator">[all[tiddlers]]</$link> as its input.
+<<.tip """In general, each first [[filter step|Filter Step]] of a [[filter run|Filter Run]] not given any input titles receives the output of <$link to="all Operator">''[all[tiddlers]]''</$link> as its input.""" title:"Important">>
 
 
 ''Table legend:''

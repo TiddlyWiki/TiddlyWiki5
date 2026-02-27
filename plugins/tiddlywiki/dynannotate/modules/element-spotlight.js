@@ -6,10 +6,6 @@ module-type: library
 Manages the element spotlight effect
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function ElementSpotlight() {
@@ -59,7 +55,7 @@ ElementSpotlight.prototype.querySelectorSafe = function(selector) {
 			targetNodes = [].slice.call(targetNodes, 1); 
 			didRemoveFirstEntry = true;
 		}
-	} while(didRemoveFirstEntry)
+	} while(didRemoveFirstEntry);
 	// Return the first result
 	return targetNodes[0];
 };
@@ -132,5 +128,3 @@ ElementSpotlight.prototype.shineSpotlight = function(selectors) {
 };
 
 exports.ElementSpotlight = ElementSpotlight;
-
-})();

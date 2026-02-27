@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/markdown/settings/linkify
+tags: $:/tags/ControlPanel/Settings/Markdown
+caption: Linkify
+
+markdown-it library config: Autoconvert URL-like text to links
+
+<$checkbox tiddler="$:/config/markdown/linkify" field="text" checked="true" unchecked="false">
+    [[Linkify|$:/config/markdown/linkify]]
+</$checkbox>

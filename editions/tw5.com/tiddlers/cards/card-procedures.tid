@@ -1,0 +1,86 @@
+code-body: yes
+tags: $:/tags/Macro
+title: $:/cards/procedures
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\procedure flex-card(class,bordercolor:"",backgroundcolor:"",textcolor:"",imageField:"image",captionField:"caption",subtitle:"",descriptionField:"description",linkField:"link")
+<$link class={{{ [<class>addprefix[tc-card ]] }}}
+	to={{{ [<currentTiddler>get<linkField>else<currentTiddler>] }}}
+	aria-label=<<currentTiddler>>
+>
+	<$transclude
+		$variable="flex-card-body"
+		bordercolor=<<bordercolor>>
+		backgroundcolor=<<backgroundcolor>>
+		textcolor=<<textcolor>>
+		imageField=<<imageField>>
+		captionField=<<captionField>>
+		subtitle=<<subtitle>>
+		descriptionField=<<descriptionField>>
+	/>
+</$link>
+\end
+
+\procedure flex-card-external(class,bordercolor:"",backgroundcolor:"",textcolor:"",imageField:"image",captionField:"caption",subtitle:"",descriptionField:"description",linkField:"url")
+<a class={{{ [<class>addprefix[tc-card ]addprefix[tc-tiddlylink ]]  }}}
+	href={{{ [<currentTiddler>get<linkField>] }}}
+	aria-label=<<currentTiddler>>
+	rel="noopener noreferrer"
+	target="_blank"
+>
+	<$transclude
+		$variable="flex-card-body"
+		bordercolor=<<bordercolor>>
+		backgroundcolor=<<backgroundcolor>>
+		textcolor=<<textcolor>>
+		imageField=<<imageField>>
+		captionField=<<captionField>>
+		subtitle=<<subtitle>>
+		descriptionField=<<descriptionField>>
+	/>
+</a>
+\end
+
+\procedure flex-card-body(bordercolor,backgroundcolor,textcolor,imageField,captionField,subtitle,descriptionField)
+<div class="tc-card-accent" style.borderTop={{{ [<bordercolor>!is[blank]addprefix[5px solid ]] }}} style.background={{!!background}} style.backgroundColor=<<backgroundcolor>> style.color=<<textcolor>> style.fill=<<textcolor>>>
+	<$list filter="[<currentTiddler>has[ribbon-text]]" variable="ignore">
+		<div class="tc-card-ribbon-wrapper" aria-hidden="true">
+			<div class="tc-card-ribbon" style.backgroundColor={{{ [<currentTiddler>get[ribbon-color]else[red]] }}}>
+				<div class="tc-card-ribbon-inner">
+					<$text text={{!!ribbon-text}}/>
+				</div>
+			</div>
+		</div>
+	</$list>
+	<$list filter="[<currentTiddler>has<imageField>]" variable="ignore">
+		<div class="tc-card-image">
+			<$image source={{{ [<currentTiddler>get<imageField>] }}}
+				alt={{{ [<currentTiddler>get<imageField>get[alt-text]else[Image.]] }}}
+			/>
+		</div>
+	</$list>
+	<div class="tc-card-title"><$transclude field=<<captionField>>><$view field="title"/></$transclude></div>
+	<$list filter="[<subtitle>!is[blank]]" variable="ignore">
+		<div class="tc-card-subtitle">
+			<$text text=<<subtitle>>/>
+		</div>
+	</$list>
+	<div class="tc-card-icon"><$transclude tiddler={{!!icon}}/></div>
+	<%if [all[current]get<descriptionField>else[]!match[]] %>
+		<div class="tc-card-body-wrapper">
+			<div class="tc-card-body">
+				<$transclude field=<<descriptionField>> mode="block"/>
+			</div>
+			<div class="tc-card-body-clear">
+			</div>
+		</div>
+	<%endif%>
+	<%if [all[current]has[button-text]] %>
+		<div class="tc-card-button" style.background-color={{!!button-color}} style.border-color={{!!button-color}}>
+			<$text text={{!!button-text}}/>&#32;{{$:/core/images/chevron-right}}
+		</div>
+	<%endif%>
+</div>
+\end

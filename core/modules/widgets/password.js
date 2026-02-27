@@ -6,10 +6,7 @@ module-type: widget
 Password widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -45,8 +42,8 @@ PasswordWidget.prototype.render = function(parent,nextSibling) {
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 };
 
 PasswordWidget.prototype.handleChangeEvent = function(event) {
@@ -78,5 +75,3 @@ PasswordWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.password = PasswordWidget;
-
-})();

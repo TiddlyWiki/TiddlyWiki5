@@ -63,10 +63,12 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 \end
 
 \define toolbar-button-outer()
-\whitespace trim
-<$set name="buttonClasses" value={{!!button-classes}}>
-	<<toolbar-button>>
-</$set>
+<$set
+
+  name="buttonClasses"
+  value={{{ [subfilter{!!button-classes}] :and[join[ ]] }}}
+
+><<toolbar-button>></$set>
 \end
 
 <<toolbar-button-outer>>

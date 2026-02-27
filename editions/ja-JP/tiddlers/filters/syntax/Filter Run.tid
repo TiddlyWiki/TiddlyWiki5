@@ -1,0 +1,29 @@
+created: 20150124182117000
+modified: 20250220111652831
+original-modified: 20230710074357002
+tags: [[Filter Expression]]
+title: Filter Run
+ja-title: フィルタラン
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( "[" { [[<"フィルタステップ">|"Filter Step"]] } "]"
+  |
+  [:{/"[ ]または空白以外の文字"/}]
+  |
+  '"' [:{/'"以外の文字'/}] '"'
+  |
+  "'" [:{/"'以外の文字"/}] "'"
+)
+"""/>
+
+<<.def ラン>>は[[ステップ|Filter Step]]で構成され、より大きな[[フィルタ式|Filter Expression]]に貢献する[[選択|Title Selection]]を出力します。
+
+ステップは左から右に処理されます。最初のステップへのインプットはランへのインプットと同じです。後続の各ステップのインプットは、前のステップのアウトプットです。
+
+
+図の下の3つのオプションは`HelloThere`、`"HelloThere"`、`'HelloThere'`と`"Filter Operators"`の構文と一致します。これらは`[title[...]]`の短縮形です。
+
+引用符で囲まれたオプションは、`"An [[[[Unusual]]]] Tiddler"`のように角括弧を含むタイトルをサポートするために存在します。

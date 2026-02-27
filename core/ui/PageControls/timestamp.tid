@@ -7,26 +7,26 @@ description: {{$:/language/Buttons/Timestamp/Hint}}
 <$reveal type="nomatch" state="$:/config/TimestampDisable" text="yes">
 <$button tooltip={{$:/language/Buttons/Timestamp/On/Hint}} aria-label={{$:/language/Buttons/Timestamp/On/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-setfield $tiddler="$:/config/TimestampDisable" $value="yes"/>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/timestamp-on}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/Timestamp/On/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>
 </$reveal>
 <$reveal type="match" state="$:/config/TimestampDisable" text="yes">
 <$button tooltip={{$:/language/Buttons/Timestamp/Off/Hint}} aria-label={{$:/language/Buttons/Timestamp/Off/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-setfield $tiddler="$:/config/TimestampDisable" $value="no"/>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/timestamp-off}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/Timestamp/Off/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>
 </$reveal>

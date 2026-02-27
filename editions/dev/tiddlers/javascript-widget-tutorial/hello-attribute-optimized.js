@@ -3,10 +3,6 @@
 Hello, World widget
 
 \*/
-(function() {
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -38,7 +34,7 @@ Refresh if the attribute value changed since render
 MyWidget.prototype.refresh = function(changedTiddlers) {
 	// Find which attributes have changed
 	var changedAttributes = this.computeAttributes();
-	if (changedAttributes.message) {
+	if(changedAttributes.message) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -47,5 +43,3 @@ MyWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.hello = MyWidget;
-
-})();

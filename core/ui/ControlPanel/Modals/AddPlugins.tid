@@ -75,13 +75,13 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 <h2><$view tiddler=<<assetInfo>> field="original-title"/></h2>
 <div>
 <%if [<assetInfo>get[stability]match[STABILITY_0_DEPRECATED]] %>
-	<span class="tc-plugin-info-stability tc-plugin-info-stability-deprecated">DEPRECATED</span>
+	<span class="tc-plugin-info-stability tc-plugin-info-stability-deprecated">{{$:/language/ControlPanel/Plugins/Stability/Deprecated}}</span>
 <%elseif [<assetInfo>get[stability]match[STABILITY_1_EXPERIMENTAL]] %>
-	<span class="tc-plugin-info-stability tc-plugin-info-stability-experimental">EXPERIMENTAL</span>
+	<span class="tc-plugin-info-stability tc-plugin-info-stability-experimental">{{$:/language/ControlPanel/Plugins/Stability/Experimental}}</span>
 <%elseif [<assetInfo>get[stability]match[STABILITY_2_STABLE]] %>
-	<span class="tc-plugin-info-stability tc-plugin-info-stability-stable">STABLE</span>
+	<span class="tc-plugin-info-stability tc-plugin-info-stability-stable">{{$:/language/ControlPanel/Plugins/Stability/Stable}}</span>
 <%elseif [<assetInfo>get[stability]match[STABILITY_3_LEGACY]] %>
-	<span class="tc-plugin-info-stability tc-plugin-info-stability-legacy">LEGACY</span>
+	<span class="tc-plugin-info-stability tc-plugin-info-stability-legacy">{{$:/language/ControlPanel/Plugins/Stability/Legacy}}</span>
 <%endif%>
 <em><$view tiddler=<<assetInfo>> field="version"/></em></div>
 <$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion"><div><em>{{$:/language/ControlPanel/Plugins/AlreadyInstalled/Hint}}</em></div></$list>

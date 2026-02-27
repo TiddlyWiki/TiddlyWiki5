@@ -6,10 +6,6 @@ module-type: filteroperator
 Filter operator for returning all the backtranscludes from a tiddler
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -22,5 +18,3 @@ exports.backtranscludes = function(source,operator,options) {
 	});
 	return results.makeTiddlerIterator(options.wiki);
 };
-
-})();

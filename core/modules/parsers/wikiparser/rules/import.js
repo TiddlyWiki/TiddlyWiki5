@@ -10,10 +10,7 @@ Wiki pragma rule for importing variable definitions
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "import";
@@ -32,7 +29,6 @@ exports.init = function(parser) {
 Parse the most recent match
 */
 exports.parse = function() {
-	var self = this;
 	// Move past the pragma invocation
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the filter terminated by a line break
@@ -50,5 +46,3 @@ exports.parse = function() {
 		children: []
 	}];
 };
-
-})();

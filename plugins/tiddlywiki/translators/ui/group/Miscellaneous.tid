@@ -6,6 +6,7 @@ tags: $:/tags/TranslationGroup
 [all[tiddlers+shadows]prefix[$:/language/]]
 -[all[tiddlers+shadows]prefix[$:/language/Buttons/]]
 -[all[tiddlers+shadows]prefix[$:/language/ControlPanel/]]
+-[all[tiddlers+shadows]prefix[$:/language/Draft/]]
 -[all[tiddlers+shadows]prefix[$:/language/Date/]]
 -[all[tiddlers+shadows]prefix[$:/language/Docs/]]
 -[all[tiddlers+shadows]prefix[$:/language/EditTemplate/]]

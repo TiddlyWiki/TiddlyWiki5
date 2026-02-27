@@ -1,0 +1,8 @@
+title: Hidden Setting: ViewTemplate and EditTemplate
+ja-title: 隠し設定: ViewTemplateとEditTemplate
+tags: [[Hidden Settings]]
+created: 20190704053532718
+modified: 20241128113035943
+original-modified: 20190704053532718
+
+設定Tiddler $:/config/ui/ViewTemplateと$:/config/ui/EditTemplateで、[[ストーリーのページテンプレート|$:/core/ui/PageTemplate/story]]で使用される''~ViewTemplate''と''~EditTemplate''を変更できます。

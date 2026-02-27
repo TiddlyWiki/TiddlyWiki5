@@ -1,0 +1,43 @@
+created: 20131219100520659
+modified: 20250206101730728
+original-modified: 20241025051303991
+tags: [[TiddlyWiki on Node.js]]
+title: Using TiddlyWiki on Node.js
+ja-title: Node.jsでTiddlyWikiを使用する
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki5には、[[TiddlyWikiフォルダ|TiddlyWikiFolders]]、[[Tiddlerファイル|TiddlerFiles]]に基づいて広範な操作を実行するためにコマンドラインで使用するコマンドセットが含まれています。
+
+たとえば、次のコマンドは、~TiddlyWiki HTMLファイルからTiddlerを読み込み、そのうちの1つを静的HTMLに保存します: 
+
+```
+tiddlywiki --verbose --load mywiki.html --render ReadMe ./readme.html
+```
+
+コマンドラインから`tiddlywiki`を実行すると、~TiddlyWikiカーネルが起動し、コアプラグインがロードされ、空のWikiストアが確立されます。次に、コマンドライン引数を左から右に順番に処理します。引数はスペースで区切られます。
+
+<<.from-version "5.1.20">> まず、プレフィックス`+`で始まるプラグイン名や、`++`で始まるプラグインフォルダーへのパスによって識別される0個以上のプラグイン参照が存在する可能性があります。これらのプラグインは、[[TiddlyWikiフォルダ|TiddlyWikiFolders]]で指定されたプラグインに加えてロードされます。
+
+次の引数は、ロードする[[TiddlyWikiフォルダ|TiddlyWikiFolders]]へのオプションのパスです。存在しない場合は、現在のディレクトリが使用されます。
+
+コマンドとそれぞれの引数は以下のように示されます。各コマンドはプレフィックス`--`で識別されます。
+
+```
+tiddlywiki [+<pluginname> | ++<pluginpath>] [<wikipath>] [--<command> [<arg>[,<arg>]]]
+```
+
+例えば:
+
+```
+tiddlywiki --version
+tiddlywiki +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb mywiki --listen
+tiddlywiki ++./mygreatplugin mywiki --listen
+```
+
+<<.from-version "5.1.18">> 多数のパラメータをサポートするListenCommandなどのコマンドでは、[[名前付きコマンドパラメータ|NamedCommandParameters]]を使用して扱いやすくすることができます。例:
+
+```
+tiddlywiki wikipath --listen username=jeremy port=8090
+```
+
+使用可能なコマンドの完全なリストについては、[[コマンド|Commands]]を参照してください。

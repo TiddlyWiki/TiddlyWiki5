@@ -1,0 +1,9 @@
+created: 20200306145004925
+modified: 20241116104809059
+original-modified: 20200306145004925
+tags: [[Hidden Settings]]
+title: Hidden Setting: Default Tiddler Icon
+ja-title: 隠し設定: Tiddlerのデフォルトアイコン
+type: text/vnd.tiddlywiki
+
+デフォルトのTiddlerアイコンは、$:/config/DefaultTiddlerIconというTiddlerを作成し、そのアイコンを含むTiddlerのタイトルを含むことで設定できます。

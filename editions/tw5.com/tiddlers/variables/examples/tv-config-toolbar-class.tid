@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 <style>
 .green-background {
 	background-color: green;
-	fill: white;
+	color: white;
 }
 </style>
 

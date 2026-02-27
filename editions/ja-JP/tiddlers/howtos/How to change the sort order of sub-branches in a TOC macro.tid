@@ -1,0 +1,27 @@
+created: 20161209172820513
+modified: 20241020110058381
+original-modified: 20190220000000000
+tags: Learning
+title: How to change the sort order of sub-branches in a TOC macro
+ja-title: TOCマクロでのサブブランチのソート順を変更する方法
+type: text/vnd.tiddlywiki
+
+次のような[[目次|Table-of-Contents Macros]]マクロを使用していると想定します: 
+
+```
+<<toc-selective-expandable  "TableOfContents" "sort[title]">>
+```
+
+多くの場合、並び順は問題ありませんが、`Journal`タグ付けされたアイテムを`created`フィールドの順に並べ替えたいとします。`Journal`タグ付けされたサブ項目だけに別の並べ替え順を適用するにはどうすればよいでしょうか?
+
+秘訣は、別の並べ替え基準を指すフィールドを、親のタグTiddler(つまり、`Journal`)に追加することです。そのフィールドを`fuzzy`と呼び、値`created`を入力します(`created `はTiddlerの作成日を持つフィールドの名前です)
+
+次に、[[目次|Table-of-Contents Macros]]を次のように変更します: 
+
+```
+<<toc-selective-expandable  "TableOfContents" "sort{!!fuzzy}">>
+```
+
+これで、`created `の日付順に並べ替えられる`Journal`Tiddlerの子を除き、目次はどこでもタイトル順に並べ替えられるようになります
+
+このトリックの欠点は、1つの特別なフィールドのみに逆順ソートを適用できないことです。並べ替え順序を逆順にすると、どこも逆になります

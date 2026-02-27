@@ -1,0 +1,13 @@
+created: 20161011074235805
+modified: 20241125110155182
+original-modified: 20161011074235805
+tags: [[Hidden Settings]]
+title: Hidden Setting: Search Minimum Length
+ja-title: 隠し設定: 検索の最小文字数
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.14">> 結果が表示される検索文字列の最小長を制御します。
+
+デフォルトは"3"です。
+
+$:/config/Search/MinLength

@@ -6,10 +6,7 @@ module-type: widget
 Widget for definition of transclusion parameters
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
@@ -64,7 +61,9 @@ ParametersWidget.prototype.execute = function() {
 			if(name.substr(0,2) === "$$") {
 				name = name.substr(1);
 			}
-			var value = pointer.getTransclusionParameter(name,index,self.getAttribute(attr.name,""));
+			var defaultValue = (self.multiValuedAttributes && self.multiValuedAttributes[attr.name])
+					|| self.getAttribute(attr.name,"");
+			var value = pointer.getTransclusionParameter(name,index,defaultValue);
 			self.setVariable(name,value);
 		});
 		// Assign any metaparameters
@@ -83,7 +82,8 @@ ParametersWidget.prototype.execute = function() {
 			if(name.substr(0,2) === "$$") {
 				name = name.substr(1);
 			}
-			var value = self.getAttribute(attr.name,"");
+			var value = (self.multiValuedAttributes && self.multiValuedAttributes[attr.name])
+					|| self.getAttribute(attr.name,"");
 			self.setVariable(name,value);
 		});
 	}
@@ -104,5 +104,3 @@ ParametersWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.parameters = ParametersWidget;
-
-})();

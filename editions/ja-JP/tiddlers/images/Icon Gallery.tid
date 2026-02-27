@@ -1,0 +1,16 @@
+created: 20211013132515594
+modified: 20241021113650824
+original-modified: 20211018102307833
+tags: Learning [[Core Icons]]
+title: Icon Gallery
+ja-title: アイコンギャラリー
+type: text/vnd.tiddlywiki
+
+\define copyActions() <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<imageTitle>>/>
+
+<<.tip "アイコンをクリックすると、タイトルをクリップボードにコピーします">>
+
+<div class="tc-image-chooser">
+<$macrocall $name="image-picker-list" filter="[all[shadows+tiddlers]tag[$:/tags/Image]]" actions=<<copyActions>> />
+</div>
+

@@ -1,4 +1,6 @@
 title: $:/plugins/tiddlywiki/googleanalytics/settings
+caption: Google Analytics
+tags: $:/tags/ControlPanel/SettingsTab
 
 ''[[Google Analytics Measurement ID|$:/GoogleAnalyticsMeasurementID]]'': (mandatory) a code of the form `G-XXXXXXXXXX` where X are digits or uppercase letters<br/><$edit-text tiddler="$:/GoogleAnalyticsMeasurementID" default="" tag="input"/>
 

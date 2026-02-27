@@ -28,6 +28,8 @@ The following parameters are used:
 |basic-auth-username-from-store |<<.from-version "5.3.4">> Optional username for HTTP basic authentication, specified as the name of the entry in the password store containing the username |
 |basic-auth-password |<<.from-version "5.3.4">> Optional password for HTTP basic authentication |
 |basic-auth-password-from-store |<<.from-version "5.3.4">> Optional password for HTTP basic authentication, specified as the name of the entry in the password store containing the password |
+|bearerAuthToken |<<.from-version "5.3.6">> Optional plain text token for HTTP bearer authentication |
+|basic-auth-password-from-store |<<.from-version "5.3.6">> Optional token for HTTP bearer authentication, specified as the name of the entry in the password store containing the token |
 |var-* |Variables to be passed to the completion and progress handlers (without the "var-" prefix) |
 |bind-status |Title of tiddler to which the status of the request ("pending", "complete", "error") should be bound |
 |bind-progress |Title of tiddler to which the progress of the request (0 to 100) should be bound |

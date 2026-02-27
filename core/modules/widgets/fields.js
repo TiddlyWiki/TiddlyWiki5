@@ -6,10 +6,7 @@ module-type: widget
 Fields widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -59,7 +56,7 @@ FieldsWidget.prototype.execute = function() {
 	var text = [];
 	if(this.template && tiddler) {
 		var fields = [];
-		if (includeArr) { // Include takes precedence
+		if(includeArr) { // Include takes precedence
 			for(var i=0; i<includeArr.length; i++) {
 				if(tiddler.fields[includeArr[i]]) {
 					fields.push(includeArr[i]);
@@ -72,8 +69,8 @@ FieldsWidget.prototype.execute = function() {
 				}
 			}
 		}
-		if (this.sort) fields.sort();
-		if (this.sortReverse) fields.reverse();
+		if(this.sort) fields.sort();
+		if(this.sortReverse) fields.reverse();
 		for(var f=0, fmax=fields.length; f<fmax; f++) {
 			fieldName = fields[f];
 			var row = this.template,
@@ -102,13 +99,11 @@ FieldsWidget.prototype.refresh = function(changedTiddlers) {
 	if( changedAttributes.tiddler || changedAttributes.template || changedAttributes.exclude ||
 		changedAttributes.include || changedAttributes.sort || changedAttributes.sortReverse ||
 		changedTiddlers[this.tiddlerTitle] || changedAttributes.stripTitlePrefix) {
-			this.refreshSelf();
-			return true;
+		this.refreshSelf();
+		return true;
 	} else {
 		return false;
 	}
 };
 
 exports.fields = FieldsWidget;
-
-})();

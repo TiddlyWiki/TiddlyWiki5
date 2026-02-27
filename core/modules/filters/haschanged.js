@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator returns tiddlers from the list that have a non-zero changecount.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -32,5 +29,3 @@ exports.haschanged = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

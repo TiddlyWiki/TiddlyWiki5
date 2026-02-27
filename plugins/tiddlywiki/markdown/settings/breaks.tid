@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/markdown/settings/breaks
+tags: $:/tags/ControlPanel/Settings/Markdown
+caption: Breaks
+
+markdown-it library config: Convert `\n` in paragraphs into `<br>`
+
+<$checkbox tiddler="$:/config/markdown/breaks" field="text" checked="true" unchecked="false">
+    [[Breaks|$:/config/markdown/breaks]]
+</$checkbox>

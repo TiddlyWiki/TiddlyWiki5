@@ -6,10 +6,7 @@ module-type: library
 Geospatial utilities
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var turf = require("$:/plugins/tiddlywiki/geospatial/turf.js");
@@ -20,7 +17,7 @@ Parse a string as a GeoJSON Point
 exports.parsePoint = function(str) {
 	var defaultResult = function() {
 		return turf.point([0,0,0]);
-	}
+	};
 	// If the string is missing then return 0,0,0
 	if(!str) {
 		return defaultResult();
@@ -36,6 +33,4 @@ exports.parsePoint = function(str) {
 	}
 	// Return the string now we know it is a valid GeoJSON Point
 	return json;
-}
-
-})();
+};

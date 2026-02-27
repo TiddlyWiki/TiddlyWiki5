@@ -16,3 +16,5 @@ type: text/vnd.tiddlywiki
 """/>
 
 This prefix has a [[Shortcut Filter Run Prefix]] symbol `~run`
+
+Also see: [[Then Filter Run Prefix]] | [[then Operator]] and [[else Operator]]

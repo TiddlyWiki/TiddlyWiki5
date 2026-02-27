@@ -1,0 +1,8 @@
+created: 20160817103854725
+modified: 20241104105649800
+original-modified: 20160817105415313
+tags: [[Editor toolbar]]
+title: Height of text editor
+ja-title: テキストエディタの高さ
+
+{{ $:/core/ui/EditorToolbar/editor-height}}ボタンを使用すると、テキスト入力フィールドの高さを調整できます。

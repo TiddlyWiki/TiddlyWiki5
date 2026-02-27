@@ -1,0 +1,11 @@
+title: Quick Start: DIY
+ja-title: クイックスタート: DIY
+tags: [[Getting Started]]
+caption: DIY
+icon: $:/core/images/theme-button
+button-color: #ff4522
+button-text: エクスプローラ
+background: linear-gradient(90deg,#fff4f2, #ffffff)
+link: GettingStarted
+
+~TiddlyWikiの利点を最大限に活用するために適切な構成を見つけてください

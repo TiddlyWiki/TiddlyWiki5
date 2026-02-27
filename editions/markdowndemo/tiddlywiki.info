@@ -13,6 +13,9 @@
 	],
 	"build": {
 		"index": [
-			"--rendertiddler","$:/core/save/all","markdowndemo.html","text/plain"]
+			"--rendertiddler","$:/core/save/all","markdowndemo.html","text/plain"],
+		"external": [
+			"--render","$:/core/save/all-external-js","markdowndemo.html","text/plain"
+		]
 	}
 }

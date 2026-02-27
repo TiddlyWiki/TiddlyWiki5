@@ -1,6 +1,6 @@
 caption: testcase
 created: 20240507221902644
-modified: 20240507221902644
+modified: 20241113203728572
 tags: Widgets
 title: TestCaseWidget
 type: text/vnd.tiddlywiki
@@ -55,6 +55,7 @@ The content of the `<$testcase>` widget is not displayed but instead is scanned 
 |<<.attr testExpectedResult>> |Optional title of the tiddler whose content is the expected result of rendering the output tiddler (note that both <<.attr testOutput>> and  <<.attr testExpectedResult>> must be provided in order for testing to occur)  |
 |<<.attr testActions>> |Optional title of the tiddler containing actions that should be executed before the test occurs |
 |<<.attr testHideIfPass>> |If set to "yes", hides the <<.wid testcase>> widget if the test passes |
+|<<.attr class>> |<<.from-version "5.3.7">> Optional CSS classes in addition to the default `tc-test-case` class |
 
 ! Payload Tiddlers
 
