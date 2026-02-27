@@ -2,4 +2,4 @@ title: $:/core/images/delete-button
 tags: $:/tags/Image
 
 \parameters (size:"22pt")
-<svg width=<<size>> height=<<size>> class="tc-image-delete-button tc-image-button" viewBox="0 0 128 128"><g fill-rule="evenodd" transform="translate(12)"><rect width="105" height="16" y="11" rx="8"/><rect width="48" height="16" x="28" rx="8"/><rect width="16" height="112" x="8" y="16" rx="8"/><rect width="88" height="16" x="8" y="112" rx="8"/><rect width="16" height="112" x="80" y="16" rx="8"/><rect width="16" height="112" x="56" y="16" rx="8"/><rect width="16" height="112" x="32" y="16" rx="8"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>> viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tc-image-delete-button tc-image-button lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
