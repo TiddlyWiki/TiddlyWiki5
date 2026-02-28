@@ -1,6 +1,8 @@
 title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki
 tags: $:/tags/Tour
 tour-tag: $:/tags/Tour/IntroductionToTiddlyWiki
+actualCompletion: $:/state/tour/progress/$%3A%2Fplugins%2Ftiddlywiki%2Ftour%2Fintroduction-to-tiddlywiki/actualCompletion
+completedSteps: $:/state/tour/progress/$%3A%2Fplugins%2Ftiddlywiki%2Ftour%2Fintroduction-to-tiddlywiki/completedSteps
 logo: $:/plugins/tiddlywiki/tour/tiddlywiki-tour-logo
 description: Introduction to {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}}
 settings: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/settings

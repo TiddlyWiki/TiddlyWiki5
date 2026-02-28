@@ -1,0 +1,167 @@
+title: $:/plugins/tiddlywiki/tour/layouts/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-tour-center-layout {
+	background: <<colour background>>;
+	min-height: 100vh;
+}
+
+.tc-tour-center-shell {
+	max-width: 960px;
+	margin: 2em auto;
+	padding: 0 1em;
+}
+
+.tc-tour-center-header {
+	margin-bottom: 1.5em;
+}
+
+.tc-tour-center-header h1 {
+	margin: 0;
+}
+
+.tc-tour-center-header p {
+	color: <<colour muted-foreground>>;
+	margin-top: 0.5em;
+}
+
+.tc-tour-center-back-button {
+	margin-top: 0.75em;
+	border: 1px solid <<colour muted-foreground>>;
+	border-radius: 0.4em;
+	padding: 0.4em 0.7em;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35em;
+}
+
+.tc-tour-center-back-button svg {
+	vertical-align: middle;
+	width: 1.2em;
+	height: 1.2em;
+}
+
+.tc-tour-center-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75em;
+}
+
+.tc-tour-center-item {
+	border: 1px solid <<colour muted-foreground>>;
+	border-radius: 0.6em;
+	background: <<colour tiddler-background>>;
+	padding: 0.85em 0.85em 1.1em 0.85em;
+	display: flex;
+	gap: 1em;
+	align-items: flex-start;
+	position: relative;
+}
+
+.tc-tour-center-item-logo {
+	flex: 0 0 72px;
+	min-height: 72px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: <<colour background>>;
+	border: 1px solid <<colour muted-background>>;
+	border-radius: 0.35em;
+	overflow: hidden;
+}
+
+.tc-tour-center-item-logo img,
+.tc-tour-center-item-logo svg {
+	max-width: 100%;
+	max-height: 72px;
+}
+
+.tc-tour-center-item-body {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.tc-tour-center-item-title {
+	font-weight: 600;
+	margin-bottom: 0.35em;
+}
+
+.tc-tour-center-item-description {
+	color: <<colour muted-foreground>>;
+	margin-bottom: 0.5em;
+}
+
+.tc-tour-center-item-description p:first-child {
+	margin-top: 0;
+}
+
+.tc-tour-center-item-description p:last-child {
+	margin-bottom: 0;
+}
+
+.tc-tour-center-item-progress {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+}
+
+.tc-tour-center-progress-bar {
+	display: block;
+	width: 100%;
+	height: 0.28em;
+	border: 0;
+	border-radius: 0 0 0.6em 0.6em;
+	overflow: hidden;
+}
+
+.tc-tour-center-progress-bar::-webkit-progress-bar {
+	background: <<colour muted-background>>;
+}
+
+.tc-tour-center-progress-bar::-webkit-progress-value {
+	background: <<colour primary>>;
+}
+
+.tc-tour-center-progress-bar::-moz-progress-bar {
+	background: <<colour primary>>;
+}
+
+.tc-tour-center-item-actions {
+	flex: 0 0 auto;
+}
+
+.tc-tour-center-start-button {
+	border-radius: 0.35em;
+	padding: 0.4em 0.75em;
+	border: 1px solid <<colour muted-foreground>>;
+	background: <<colour background>>;
+}
+
+.tc-tour-center-reset-icon {
+	position: absolute;
+	right: 0.35em;
+	bottom: 0.4em;
+	border-radius: 0.25em;
+	padding: 0.1em 0.2em;
+	opacity: 0.75;
+}
+
+.tc-tour-center-start-button:hover {
+	background: <<colour foreground>>;
+	color: <<colour background>>;
+}
+
+.tc-tour-center-back-button:hover {
+	background: <<colour foreground>>;
+	color: <<colour background>>;
+}
+
+.tc-tour-center-reset-icon:hover {
+	background: <<colour foreground>>;
+	color: <<colour background>>;
+	opacity: 1;
+}

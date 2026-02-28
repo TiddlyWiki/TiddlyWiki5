@@ -50,6 +50,7 @@ Select a tour:
 <$let
 	currentTour={{{ [<stateCurrentTour>get[text]] :else[<defaultTour>] }}}
 	currentTourTag={{{ [<currentTour>get[tour-tag]] }}}
+	currentTourCompletedSteps={{{ [<currentTour>get[completedSteps]] }}}
 >
 	<div class="tc-table-wrapper">
 		<table class="tc-tour-settings-tour-details">
@@ -124,6 +125,12 @@ Select a tour:
 						<$transclude $tiddler=<<currentStep>> $field="caption">
 							<$text text=<<currentStep>>/>
 						</$transclude>
+					</$button>
+					<$button class="tc-btn-invisible tc-tour-settings-tour-step-completion-button" tooltip="Toggle completion for this step">
+						<$action-sendmessage $message="tm-tour-toggle-step-completed" tour=<<currentTour>> step=<<currentStep>>/>
+						<$list filter="[<currentTourCompletedSteps>get[list]contains<currentStep>]" variable="ignore" emptyMessage="{{$:/core/images/checkbox-unchecked}}">
+							{{$:/core/images/checkbox-checked}}
+						</$list>
 					</$button>
 					<$button class="tc-btn-invisible tc-tour-settings-tour-step-launch-button" tooltip="Launch this step of the tour">
 						<$transclude $variable="tour-start" title=<<currentTour>> step=<<currentStep>>/>

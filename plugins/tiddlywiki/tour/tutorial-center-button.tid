@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/tour/tutorial-center-button
+tags: $:/tags/PageControls
+caption: {{$:/plugins/tiddlywiki/tour/tour-button-icon}} Tutorial Center
+description: Open tutorial center layout
+
+\whitespace trim
+<$button tooltip="Open tutorial center" aria-label="Tutorial Center" class=<<tv-config-toolbar-class>>>
+<$action-setfield $tiddler="$:/layout" text="$:/plugins/tiddlywiki/tour/layouts/tutorial-center"/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="listItem">
+{{$:/plugins/tiddlywiki/tour/tour-button-icon}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text">
+<$text text="Tutorial Center"/>
+</span>
+</$list>
+</$button>

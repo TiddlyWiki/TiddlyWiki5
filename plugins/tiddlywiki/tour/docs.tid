@@ -5,6 +5,8 @@ Tour definition tiddlers have the following fields:
 |!Name |!Description |
 |tags |Must include $:/tags/Tour |
 |tour-tag |Name of tag used to define tour step sequence |
+|actualCompletion |Title of tiddler containing numeric completion count for this tour (recommended in `$:/state/tour/progress/...`) |
+|completedSteps |Title of tiddler containing completed step state; partial progress uses `list`, full completion is compacted to field `completed: yes` with empty list |
 |logo |Title of tiddler containing logo of tour |
 |description |Brief description of the tour |
 |text |Longer description of the tour |
@@ -23,3 +25,24 @@ Tour step tiddlers have the following fields:
 |condition|(optional) filter expression that must return a result for the step to be displayed |
 |step-success-filter|(optional) filter expression that must return a result for the step to be considered completed |
 |step-success-filtervar|(optional) filter expression evaluated to set the first result as the variable `step-success-filter-var` which can be used in the `step-success-filter` |
+
+When a step is completed the plugin emits `tm-tour-step-completed` and invokes hook `th-tour-step-completed`.
+
+When a whole tour is completed the plugin emits `tm-tour-completed` and invokes hook `th-tour-completed`.
+
+Hook payload fields:
+
+|!Name |!Description |
+|tourTitle |Tour tiddler title |
+|stepTitle |Current step tiddler title |
+|completion |Current completion count |
+|totalSteps |Current tour total step count |
+|event |Original widget event object |
+
+Step completion can also be controlled manually with widget messages:
+
+* `tm-tour-progress-step` (mark step complete)
+* `tm-tour-deprogress-step` (mark step incomplete)
+* `tm-tour-toggle-step-completed` (toggle a step)
+
+The `completionEvents` idea from VS Code means that a step can become complete when a specific event happens (for example: a command runs), not only when user clicks the next button.
