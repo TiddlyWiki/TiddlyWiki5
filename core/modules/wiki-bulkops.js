@@ -37,7 +37,7 @@ function relinkTiddler(fromTitle,toTitle,options) {
 	toTitle = (toTitle || "").trim();
 	options = options || {};
 	if(fromTitle && toTitle && fromTitle !== toTitle) {
-		for (var name in relinkers) {
+		for(var name in relinkers) {
 			relinkers[name].relink(this,fromTitle,toTitle,options);
 		}
 	}

@@ -45,9 +45,9 @@ exports.relink = function(wiki,fromTitle,toTitle,options) {
 				processList(list);
 			}
 			if(isModified) {
-				var newTiddler = new $tw.Tiddler(tiddler,{tags: tags, list: list},self.getModificationFields());
+				var newTiddler = new $tw.Tiddler(tiddler,{tags: tags, list: list},wiki.getModificationFields());
 				newTiddler = $tw.hooks.invokeHook("th-relinking-tiddler",newTiddler,tiddler);
-				self.addTiddler(newTiddler);
+				wiki.addTiddler(newTiddler);
 			}
 		}
 	});
