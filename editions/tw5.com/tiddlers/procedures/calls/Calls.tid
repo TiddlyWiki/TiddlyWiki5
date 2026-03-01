@@ -1,6 +1,6 @@
 caption: Calls
 created: 20221007130006705
-modified: 20260125212303316
+modified: 20260301030947969
 tags: WikiText Procedures Functions Macros
 title: Calls
 type: text/vnd.tiddlywiki
@@ -24,6 +24,12 @@ If no value is specified for a parameter, the default value given for that param
 Each parameter value can be enclosed in `'`single quotes`'`, `"`double quotes`"`, `"""`triple double quotes`"""` or `[[`double square brackets`]]`. Triple double quotes allow a value to contain almost anything. If a value contains no spaces or single or double quotes, it requires no delimiters. [[Substituted Attribute Values]] enclosed in single or triple back quotes are also supported.
 
 See the discussion about [[parser modes|WikiText parser mode: macro examples]]
+
+!!! Examples
+
+<<testcase TestCases/Calls/ProcedureStaticAttributes>>
+
+<<testcase TestCases/Calls/ProcedureDynamicAttributes>>
 
 !! Calls with <<.wlink TranscludeWidget>> Widget
 
