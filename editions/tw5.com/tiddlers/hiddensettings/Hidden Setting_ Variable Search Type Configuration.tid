@@ -1,0 +1,11 @@
+created: 20240501111046716
+modified: 20240501111407244
+tags: [[Hidden Settings]]
+title: Hidden Setting: Variable Search Type Configuration
+type: text/vnd.tiddlywiki
+
+$:/config/DumpVariables/type-selector defines if radio-buttons or checkboxes are used in $:/AdvancedSearch ''-> Variables'' tab.
+
+; Options
+: `radio` (default) if config tiddler is missing
+: `checkbox` -- to use checkboxes instead of radio-buttons
