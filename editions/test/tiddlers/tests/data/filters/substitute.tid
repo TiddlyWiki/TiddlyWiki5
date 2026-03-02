@@ -31,10 +31,10 @@ title: Output
 +
 title: ExpectedResult
 
-<p>()
+()
 (Hello There, welcome to $TiddlyWiki$)
 (Welcome to TiddlyWiki)
 (Welcome to TiddlyWiki today)
 (This is not a valid embedded filter ${ hello )$)
 (The output of the filter `[[substitute filter data 1]tags[]]` is Hello.)
-(Welcome to TiddlyWiki every day $3$. Tiddlers starting with `substitute`: [[substitute filter data 1]] [[substitute filter data 2]] [[substitute filter data 3]].)</p>
+(Welcome to TiddlyWiki every day $3$. Tiddlers starting with `substitute`: [[substitute filter data 1]] [[substitute filter data 2]] [[substitute filter data 3]].)

@@ -26,4 +26,4 @@ title: TiddlerTwo
 +
 title: ExpectedResult
 
-<p>[{Jaguar}{Lizard}{Mole}]</p><p>[{Ferret}{Lizard}{Mole}]</p><p>[{Butterfly}{Moth}{Mole}]</p><p>[{Beetle}{Scorpion}{Snake}]</p><p>([{Beetle}{Scorpion}{Snake}])</p>
+[{Jaguar}{Lizard}{Mole}][{Ferret}{Lizard}{Mole}][{Butterfly}{Moth}{Mole}][{Beetle}{Scorpion}{Snake}]([{Beetle}{Scorpion}{Snake}])

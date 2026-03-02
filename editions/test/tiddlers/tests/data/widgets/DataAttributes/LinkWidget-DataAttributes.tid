@@ -24,4 +24,4 @@ Title1
 +
 title: ExpectedResult
 
-<p><a class="tc-tiddlylink tc-tiddlylink-resolves" data-id="mytiddler" href="#Temp" style="color:red;">link to Temp</a><button class="tc-tiddlylink tc-tiddlylink-missing" data-id="Title2" draggable="true" style="color:red;">some tiddler</button></p>
+<a class="tc-tiddlylink tc-tiddlylink-resolves" data-id="mytiddler" href="#Temp" style="color:red;">link to Temp</a><button class="tc-tiddlylink tc-tiddlylink-missing" data-id="Title2" draggable="true" style="color:red;">some tiddler</button>

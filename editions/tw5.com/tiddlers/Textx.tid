@@ -1,0 +1,7 @@
+created: 20240217002301695
+modified: 20240217002309108
+tags: 
+title: Textx
+type: text/vnd.tiddlywiki
+
+This is a <% if [<something>match[one]] %>Elephant<% else %>Crocodile<% endif %>, I think.

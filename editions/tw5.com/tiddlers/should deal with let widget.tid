@@ -1,0 +1,15 @@
+created: 20240216213957752
+modified: 20240216220947555
+tags: 
+title: should deal with let widget
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\define macro() TiddlerThree
+\define currentTiddler() TiddlerOne
+
+<$let field={{!!text}} currentTiddler='TiddlerTwo' field={{{ [all[current]get<field>] }}}
+    currentTiddler=<<macro>>
+>
+<$transclude field=<<field>>/>
+</$let>

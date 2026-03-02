@@ -18,4 +18,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>{Ferret}{Jaguar}{Rat}{Mouse}</p>
+{Ferret}{Jaguar}{Rat}{Mouse}

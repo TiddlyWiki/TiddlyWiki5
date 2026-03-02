@@ -1,0 +1,15 @@
+created: 20221123144646987
+modified: 20240901193230247
+tags: 
+title: WidgetMessage: tm-close-window-todo-dm-fixed
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+The `<.tip ` macro seems to have a problem. 
+
+[img[dot-tip-macro-old]]
+
+---
+
+[img[dot-tip-macro-new]]

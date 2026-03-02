@@ -1,0 +1,15 @@
+created: 20240216230456556
+modified: 20240216230724893
+tags: 
+title: Transclude/CustomWidget/CodeblockOverride-TextParser
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\widget $codeblock(code)
+<$transclude $variable="copy-to-clipboard" src=<<code>>/>
+<$genesis $type="$codeblock" $remappable="no" code=<<code>>/>
+\end
+
+\procedure myvariable() hello
+
+<$transclude $variable="myvariable" $type="text/plain" $output="text/plain"/>
