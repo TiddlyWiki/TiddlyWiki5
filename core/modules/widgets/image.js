@@ -28,6 +28,7 @@ The width and height attributes are interpreted as a number of pixels, and do no
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var ImageWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 

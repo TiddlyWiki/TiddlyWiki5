@@ -16,6 +16,7 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
 var ButtonWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 
@@ -23,6 +24,23 @@ var ButtonWidget = function(parseTreeNode,options) {
 Inherit from the base widget class
 */
 ButtonWidget.prototype = new Widget();
+
+/*
+Detect nested buttons
+*/
+ButtonWidget.prototype.isNestedButton = function() {
+	var pointer = this.parentWidget,
+		depth = 0;
+	while(pointer) {
+		if(pointer instanceof ButtonWidget) {
+			// we allow 1 nested button
+			if(depth > 1) return true;
+			depth += 1;
+		}
+		pointer = pointer.parentWidget;
+	}
+	return false;
+}
 
 /*
 Render this widget into the DOM
@@ -36,6 +54,19 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
+	// Check "button in button". Return early with an error message
+	// This check also prevents fatal recursion errors using the transclusion widget
+	if(this.getVariable("tv-limit-nested-buttons") === "yes") {
+		if(this.isNestedButton()) {
+			var domNode = this.document.createElement("span");
+			var textNode = this.document.createTextNode($tw.language.getString("Error/RecursiveButton"));
+			domNode.appendChild(textNode);
+			domNode.className = "tc-error";
+			parent.insertBefore(domNode,nextSibling);
+			this.domNodes.push(domNode);
+			return;  // an error message
+		}
+	}
 	// Create element
 	if(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {
 		tag = this.buttonTag;
@@ -43,7 +74,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	// Assign classes
-	var classes = this["class"].split(" ") || [],
+	var classes = (this["class"]) ? this["class"].split(" ") : [],
 		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
 	if(this.selectedClass) {
 		if((this.set || this.setTitle) && this.setTo) {
@@ -62,7 +93,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(isPoppedUp) {
 		$tw.utils.pushTop(classes,"tc-popup-handle");
 	}
-	domNode.className = classes.join(" ");
+	if(classes.length > 0) {
+		domNode.className = classes.join(" ");
+	}
 	// Assign data- attributes
 	this.assignAttributes(domNode,{
 		sourcePrefix: "data-",

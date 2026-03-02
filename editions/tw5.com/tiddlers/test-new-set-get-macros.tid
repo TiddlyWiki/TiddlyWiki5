@@ -1,0 +1,23 @@
+created: 20240417070900019
+modified: 20240425133540950
+tags: 
+title: test-new-set-get-macros
+type: text/vnd.tiddlywiki
+
+\import test-collatz
+
+ancestor count: <<parent-ancestorcount>>
+
+ancestor dom count: <<parent-ancestorcount-dom>>
+
+UNSAFE_max_widget_tree_depth: <<get_UNSAFE_max_widget_tree_depth>>
+
+<<set_UNSAFE_max_widget_tree_depth 2000>>
+UNSAFE_max_widget_tree_depth was set to: <<get_UNSAFE_max_widget_tree_depth>>
+
+<$transclude $variable=collatz n="77031"/>
+
+<<set_UNSAFE_max_widget_tree_depth 1000>>
+UNSAFE_max_widget_tree_depth was set to: <<get_UNSAFE_max_widget_tree_depth>>
+
+<$transclude $variable=collatz n="77031"/>
