@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-go/register.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-go/register.js
 type: application/javascript
 module-type: startup
 
@@ -23,7 +23,7 @@ exports.startup = function() {
 	var core, langGo;
 	try {
 		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-		langGo = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-go/lang-go.js");
+		langGo = require("$:/plugins/tiddlywiki/codemirror-6-lang-go/lang-go.js");
 	} catch (e) {
 		return;
 	}

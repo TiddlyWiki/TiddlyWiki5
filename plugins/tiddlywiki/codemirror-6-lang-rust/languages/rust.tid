@@ -3,4 +3,4 @@ tags: $:/tags/CodeMirror/Language
 name: Rust
 type: text/x-rustsrc
 category: Programming
-plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-rust
+plugin: $:/plugins/tiddlywiki/codemirror-6-lang-rust

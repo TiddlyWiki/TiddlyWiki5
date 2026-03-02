@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/edit-text/focus-selector-hook.js
+title: $:/plugins/tiddlywiki/codemirror-6-edit-text/focus-selector-hook.js
 type: application/javascript
 module-type: startup
 

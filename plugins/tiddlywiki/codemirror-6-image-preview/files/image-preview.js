@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/image-preview.js
+title: $:/plugins/tiddlywiki/codemirror-6-image-preview.js
 type: application/javascript
 module-type: codemirror6-plugin
 

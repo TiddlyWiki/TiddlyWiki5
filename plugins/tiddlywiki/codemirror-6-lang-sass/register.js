@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-sass/register.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-sass/register.js
 type: application/javascript
 module-type: startup
 
@@ -23,7 +23,7 @@ exports.startup = function() {
 	var core, langSass;
 	try {
 		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-		langSass = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sass/lang-sass.js");
+		langSass = require("$:/plugins/tiddlywiki/codemirror-6-lang-sass/lang-sass.js");
 	} catch (e) {
 		return;
 	}

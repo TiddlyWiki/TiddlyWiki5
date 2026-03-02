@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-java/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-java/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -12,7 +12,7 @@ Java language support for CodeMirror 6
 // Dependency check - exit early if core editor plugin is not available
 var langJava, hasConfiguredTag;
 try {
-	langJava = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-java/lang-java.js");
+	langJava = require("$:/plugins/tiddlywiki/codemirror-6-lang-java/lang-java.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;

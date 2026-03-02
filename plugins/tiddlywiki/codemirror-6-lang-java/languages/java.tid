@@ -3,4 +3,4 @@ tags: $:/tags/CodeMirror/Language
 name: Java
 type: text/x-java
 category: Programming
-plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-java
+plugin: $:/plugins/tiddlywiki/codemirror-6-lang-java

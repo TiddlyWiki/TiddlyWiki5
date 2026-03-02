@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-php/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-php/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -12,7 +12,7 @@ PHP language support for CodeMirror 6
 // Dependency check - exit early if core editor plugin is not available
 var langPhp, hasConfiguredTag;
 try {
-	langPhp = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-php/lang-php.js");
+	langPhp = require("$:/plugins/tiddlywiki/codemirror-6-lang-php/lang-php.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;

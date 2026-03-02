@@ -4,7 +4,7 @@
             "file": "codemirror-lint.js",
             "fields": {
                 "type": "application/javascript",
-                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lint/codemirror-lint.js",
+                "title": "$:/plugins/tiddlywiki/codemirror-6-lint/codemirror-lint.js",
                 "module-type": "library"
             }
         },
@@ -12,7 +12,7 @@
             "file": "lint.js",
             "fields": {
                 "type": "application/javascript",
-                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lint/lint.js",
+                "title": "$:/plugins/tiddlywiki/codemirror-6-lint/lint.js",
                 "module-type": "codemirror6-plugin"
             }
         }

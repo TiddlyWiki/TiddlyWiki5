@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-latex/register.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-latex/register.js
 type: application/javascript
 module-type: startup
 
@@ -23,7 +23,7 @@ exports.startup = function() {
 	var core, langLatex;
 	try {
 		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-		langLatex = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-latex/lang-latex.js");
+		langLatex = require("$:/plugins/tiddlywiki/codemirror-6-lang-latex/lang-latex.js");
 	} catch (e) {
 		return;
 	}

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-cpp/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-cpp/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -12,7 +12,7 @@ C/C++ language support for CodeMirror 6
 // Dependency check - exit early if core editor plugin is not available
 var langCpp, hasConfiguredTag;
 try {
-	langCpp = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-cpp/lang-cpp.js");
+	langCpp = require("$:/plugins/tiddlywiki/codemirror-6-lang-cpp/lang-cpp.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;

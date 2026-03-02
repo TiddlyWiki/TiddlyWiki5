@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-latex/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-latex/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -12,7 +12,7 @@ LaTeX language support for CodeMirror 6
 // Dependency check - exit early if core editor plugin is not available
 var langLatex, cmAutocomplete, hasConfiguredTag;
 try {
-	langLatex = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-latex/lang-latex.js");
+	langLatex = require("$:/plugins/tiddlywiki/codemirror-6-lang-latex/lang-latex.js");
 	cmAutocomplete = require("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-autocomplete.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {

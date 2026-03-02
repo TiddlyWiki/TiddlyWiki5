@@ -4,7 +4,7 @@
             "file": "plugin.js",
             "fields": {
                 "type": "application/javascript",
-                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/keymap-emacs/plugin.js",
+                "title": "$:/plugins/tiddlywiki/codemirror-6-keymap-emacs/plugin.js",
                 "module-type": "codemirror6-plugin"
             }
         }

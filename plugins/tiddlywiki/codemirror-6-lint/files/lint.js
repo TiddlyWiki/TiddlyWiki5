@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lint.js
+title: $:/plugins/tiddlywiki/codemirror-6-lint.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -23,7 +23,7 @@ Checks for:
 // Load the bundled lint library
 var lintLib = null;
 try {
-	lintLib = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lint/codemirror-lint.js");
+	lintLib = require("$:/plugins/tiddlywiki/codemirror-6-lint/codemirror-lint.js");
 } catch (_e) {
 	// Lint library not available
 }

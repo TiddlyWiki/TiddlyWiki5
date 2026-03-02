@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer/register.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-lezer/register.js
 type: application/javascript
 module-type: startup
 
@@ -23,7 +23,7 @@ exports.startup = function() {
 	var core, langLezer;
 	try {
 		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-		langLezer = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer/lang-lezer.js");
+		langLezer = require("$:/plugins/tiddlywiki/codemirror-6-lang-lezer/lang-lezer.js");
 	} catch (e) {
 		return;
 	}

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-lezer/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -12,7 +12,7 @@ Lezer grammar language support for CodeMirror 6
 // Dependency check - exit early if core editor plugin is not available
 var langLezer, hasConfiguredTag;
 try {
-	langLezer = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-lezer/lang-lezer.js");
+	langLezer = require("$:/plugins/tiddlywiki/codemirror-6-lang-lezer/lang-lezer.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;

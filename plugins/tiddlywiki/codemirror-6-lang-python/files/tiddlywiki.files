@@ -4,7 +4,7 @@
             "file": "lang-python.js",
             "fields": {
                 "type": "application/javascript",
-                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-python/lang-python.js",
+                "title": "$:/plugins/tiddlywiki/codemirror-6-lang-python/lang-python.js",
                 "module-type": "library"
             }
         },
@@ -12,7 +12,7 @@
             "file": "plugin.js",
             "fields": {
                 "type": "application/javascript",
-                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/lang-python/plugin.js",
+                "title": "$:/plugins/tiddlywiki/codemirror-6-lang-python/plugin.js",
                 "module-type": "codemirror6-plugin"
             }
         }

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-rust/register.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-rust/register.js
 type: application/javascript
 module-type: startup
 
@@ -23,7 +23,7 @@ exports.startup = function() {
 	var core, langRust;
 	try {
 		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-		langRust = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-rust/lang-rust.js");
+		langRust = require("$:/plugins/tiddlywiki/codemirror-6-lang-rust/lang-rust.js");
 	} catch (e) {
 		return;
 	}

@@ -3,4 +3,4 @@ tags: $:/tags/CodeMirror/Language
 name: SQL
 type: text/x-sql
 category: Data
-plugin: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql
+plugin: $:/plugins/tiddlywiki/codemirror-6-lang-sql

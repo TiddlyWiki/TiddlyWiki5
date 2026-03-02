@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-python/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-python/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -12,7 +12,7 @@ Python language support for CodeMirror 6
 // Dependency check - exit early if core editor plugin is not available
 var langPython, core, hasConfiguredTag;
 try {
-	langPython = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-python/lang-python.js");
+	langPython = require("$:/plugins/tiddlywiki/codemirror-6-lang-python/lang-python.js");
 	core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {

@@ -4,7 +4,7 @@
             "file": "codemirror-vim.js",
             "fields": {
                 "type": "application/javascript",
-                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/keymap-vim/codemirror-vim.js",
+                "title": "$:/plugins/tiddlywiki/codemirror-6-keymap-vim/codemirror-vim.js",
                 "module-type": "library"
             }
         },
@@ -12,7 +12,7 @@
             "file": "plugin.js",
             "fields": {
                 "type": "application/javascript",
-                "title": "$:/plugins/tiddlywiki/codemirror-6/plugins/keymap-vim/plugin.js",
+                "title": "$:/plugins/tiddlywiki/codemirror-6-keymap-vim/plugin.js",
                 "module-type": "codemirror6-plugin"
             }
         }

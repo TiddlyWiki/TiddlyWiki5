@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-go/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-go/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -12,7 +12,7 @@ Go language support for CodeMirror 6
 // Dependency check - exit early if core editor plugin is not available
 var langGo, core, hasConfiguredTag;
 try {
-	langGo = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-go/lang-go.js");
+	langGo = require("$:/plugins/tiddlywiki/codemirror-6-lang-go/lang-go.js");
 	core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {

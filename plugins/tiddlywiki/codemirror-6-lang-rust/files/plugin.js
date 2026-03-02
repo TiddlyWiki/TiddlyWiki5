@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-rust/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-rust/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -12,7 +12,7 @@ Rust language support for CodeMirror 6
 // Dependency check - exit early if core editor plugin is not available
 var langRust, hasConfiguredTag;
 try {
-	langRust = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-rust/lang-rust.js");
+	langRust = require("$:/plugins/tiddlywiki/codemirror-6-lang-rust/lang-rust.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;

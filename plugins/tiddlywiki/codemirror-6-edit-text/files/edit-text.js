@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/edit-text/edit-text.js
+title: $:/plugins/tiddlywiki/codemirror-6-edit-text/edit-text.js
 type: application/javascript
 module-type: widget
 
@@ -36,7 +36,7 @@ var CodeMirrorEngine = null,
 
 try {
 	CodeMirrorEngine = require("$:/plugins/tiddlywiki/codemirror-6/engine.js").CodeMirrorEngine;
-	CodeMirrorSimpleEngine = require("$:/plugins/tiddlywiki/codemirror-6/plugins/edit-text/engine.js").CodeMirrorSimpleEngine;
+	CodeMirrorSimpleEngine = require("$:/plugins/tiddlywiki/codemirror-6-edit-text/engine.js").CodeMirrorSimpleEngine;
 	useCodeMirror = !!(CodeMirrorEngine && CodeMirrorSimpleEngine);
 } catch (e) {
 	// CodeMirror not available, will use fallback

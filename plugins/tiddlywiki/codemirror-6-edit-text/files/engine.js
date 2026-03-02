@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/edit-text/engine.js
+title: $:/plugins/tiddlywiki/codemirror-6-edit-text/engine.js
 type: application/javascript
 module-type: library
 

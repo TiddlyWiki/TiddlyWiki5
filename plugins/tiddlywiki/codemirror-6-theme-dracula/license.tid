@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/theme-dracula/license
+title: $:/plugins/tiddlywiki/codemirror-6-theme-dracula/license
 
 \define theme-name() Dracula Theme
 \define theme-url() https://draculatheme.com

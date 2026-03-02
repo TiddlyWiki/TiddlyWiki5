@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/plugin.js
+title: $:/plugins/tiddlywiki/codemirror-6-lang-sql/plugin.js
 type: application/javascript
 module-type: codemirror6-plugin
 
@@ -12,7 +12,7 @@ SQL language support for CodeMirror 6
 // Dependency check - exit early if core editor plugin is not available
 var langSql, hasConfiguredTag;
 try {
-	langSql = require("$:/plugins/tiddlywiki/codemirror-6/plugins/lang-sql/lang-sql.js");
+	langSql = require("$:/plugins/tiddlywiki/codemirror-6-lang-sql/lang-sql.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;
