@@ -10,3 +10,4 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#9214
 type: text/vnd.tiddlywiki
 
+''ControlPanel -> Info -> Basics'' tab now contains a ''Default focus field for existing tiddlers'' setting, which allows users to select, title, text or tags to be auto-focused if the editor is opened.

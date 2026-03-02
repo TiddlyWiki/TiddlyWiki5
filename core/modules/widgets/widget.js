@@ -452,9 +452,7 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 	} else { // String attribute
 		value = attribute.value;
 		if(options.asList) {
-			if(value === undefined) {
-				value = [];
-			} else {
+			if(value !== undefined) {
 				value = [value];
 			}
 		}
