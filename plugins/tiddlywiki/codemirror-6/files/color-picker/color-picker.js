@@ -146,7 +146,7 @@ exports.plugin = {
 				return other.color === this.color && other.from === this.from && other.to === this.to;
 			}
 
-			ignoreEvent() {
+			ignoreEvent() { // eslint-disable-line class-methods-use-this
 				return false;
 			}
 		}
