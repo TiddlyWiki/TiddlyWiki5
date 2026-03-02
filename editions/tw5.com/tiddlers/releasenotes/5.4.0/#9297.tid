@@ -1,0 +1,12 @@
+title: $:/changenotes/5.4.0/#9297
+description: Better support for downloading binary image tiddlers
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: enhancement
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9297
+github-contributors: Flibbles
+
+TiddlyWiki used to convert to blog all tiddlers intended to be downloaded, which is efficient, but interfered with a browser's ability to download binary image data in a way that it recognized.
+
+This isn't necessarily the best solution, but it makes image downloading possible in TiddlyWiki until we require a more sufficient solution.
