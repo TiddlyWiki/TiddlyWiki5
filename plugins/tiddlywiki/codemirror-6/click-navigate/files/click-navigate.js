@@ -626,7 +626,7 @@ function findJavaScriptModule(moduleType, name) {
 			if(moduleType === "widgets") {
 				if(text.indexOf("exports." + moduleName) !== -1 ||
 					text.indexOf("exports['" + moduleName + "']") !== -1 ||
-					text.indexOf('exports["' + moduleName + '"]') !== -1) {
+					text.indexOf("exports[\"" + moduleName + "\"]") !== -1) {
 					return title;
 				}
 			}
@@ -747,7 +747,7 @@ function findParameterDefinition(varName, state, pos) {
 			defType === "FunctionDefinition" || defType === "WidgetDefinition") {
 			// Found an enclosing definition, check its parameters
 			var defText = state.doc.sliceString(current.from, current.to);
-			var firstLineEnd = defText.indexOf('\n');
+			var firstLineEnd = defText.indexOf("\n");
 			var firstLine = firstLineEnd > 0 ? defText.substring(0, firstLineEnd) : defText;
 
 			// Extract parameters from the first line
@@ -755,13 +755,13 @@ function findParameterDefinition(varName, state, pos) {
 			var paramMatch = firstLine.match(/\(([^)]*)\)/);
 			if(paramMatch) {
 				var paramsStr = paramMatch[1];
-				var params = paramsStr.split(',');
+				var params = paramsStr.split(",");
 
 				// Find the parameter and its position
 				var searchPos = 0;
 				for(var i = 0; i < params.length; i++) {
 					var param = params[i];
-					var colonIdx = param.indexOf(':');
+					var colonIdx = param.indexOf(":");
 					var paramName = colonIdx > 0 ? param.substring(0, colonIdx).trim() : param.trim();
 
 					if(paramName === varName) {
@@ -771,7 +771,7 @@ function findParameterDefinition(varName, state, pos) {
 						var leadingWs = param.match(/^\s*/)[0].length;
 
 						// Calculate absolute position
-						var parensStart = current.from + firstLine.indexOf('(') + 1;
+						var parensStart = current.from + firstLine.indexOf("(") + 1;
 						var paramPos = parensStart + paramStartInStr + leadingWs;
 
 						return {
@@ -920,7 +920,7 @@ function findOpeningTagEnd(text) {
 		var ch = text[i];
 		if(ch === '"' && !inSingleQuote) inDoubleQuote = !inDoubleQuote;
 		else if(ch === "'" && !inDoubleQuote) inSingleQuote = !inSingleQuote;
-		else if(ch === '>' && !inSingleQuote && !inDoubleQuote) return i;
+		else if(ch === ">" && !inSingleQuote && !inDoubleQuote) return i;
 	}
 	return text.length;
 }
@@ -1040,7 +1040,7 @@ function findWidgetVariableDefinition(varName, state, pos) {
 
 				if(scopeType) {
 					// Extract the opening tag's attributes
-					var tagEndIdx = widgetText.indexOf('>');
+					var tagEndIdx = widgetText.indexOf(">");
 					if(tagEndIdx === -1) tagEndIdx = widgetText.length;
 					var openingTag = widgetText.substring(0, tagEndIdx);
 					var attrsStart = openingTag.indexOf(widgetType) + widgetType.length;
@@ -1080,7 +1080,7 @@ function extractWidgetVariables(widgetType, attrs, scopeType) {
 		}
 		// Also handle bare attributes for $parameters
 		if(widgetType === "$parameters") {
-			var withoutQuotes = attrs.replace(/"[^"]*"|'[^']*'|\[\[[^\]]*\]\]/g, '');
+			var withoutQuotes = attrs.replace(/"[^"]*"|'[^']*'|\[\[[^\]]*\]\]/g, "");
 			var bareRegex = /\b([a-zA-Z_][\w-]*)\b(?!\s*=)/g;
 			var assignedNames = new Set(vars);
 			while((match = bareRegex.exec(withoutQuotes)) !== null) {
@@ -1093,7 +1093,7 @@ function extractWidgetVariables(widgetType, attrs, scopeType) {
 		// Specific attribute contains the variable name
 		var attrName = scopeType;
 		// Match name="value", name='value', or name=value
-		var specificRegex = new RegExp(attrName + '\\s*=\\s*(?:"([^"]*)"|\'([^\']*)\'|([^\\s>]+))', 'i');
+		var specificRegex = new RegExp(attrName + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))", "i");
 		var match = specificRegex.exec(attrs);
 		if(match) {
 			var value = match[1] || match[2] || match[3];
@@ -1104,13 +1104,13 @@ function extractWidgetVariables(widgetType, attrs, scopeType) {
 		}
 	}
 
-	// Check for additional variable attributes (e.g., $list has both 'variable' and 'counter')
+	// Check for additional variable attributes (e.g., $list has both "variable" and "counter")
 	var additionalAttrs = ADDITIONAL_VARIABLE_ATTRS[widgetType];
 	if(additionalAttrs) {
 		for(var i = 0; i < additionalAttrs.length; i++) {
 			var attrName = additionalAttrs[i];
 			if(attrName === scopeType) continue; // Already handled
-			var specificRegex = new RegExp(attrName + '\\s*=\\s*(?:"([^"]*)"|\'([^\']*)\'|([^\\s>]+))', 'i');
+			var specificRegex = new RegExp(attrName + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))", "i");
 			var match = specificRegex.exec(attrs);
 			if(match) {
 				var value = match[1] || match[2] || match[3];
@@ -1130,12 +1130,12 @@ function extractWidgetVariables(widgetType, attrs, scopeType) {
 function findVariablePositionInWidget(varName, attrs, scopeType) {
 	if(scopeType === "all") {
 		// Look for varName= or bare varName
-		var regex = new RegExp('\\b' + escapeRegex(varName) + '\\b');
+		var regex = new RegExp("\\b" + escapeRegex(varName) + "\\b");
 		var match = regex.exec(attrs);
 		return match ? match.index : 0;
 	} else {
 		// Look for attrName="varName" or attrName=varName
-		var regex = new RegExp(scopeType + '\\s*=\\s*["\']?' + escapeRegex(varName));
+		var regex = new RegExp(scopeType + "\\s*=\\s*[\"']?" + escapeRegex(varName));
 		var match = regex.exec(attrs);
 		if(match) {
 			// Return position of the actual variable name, not the attribute name
