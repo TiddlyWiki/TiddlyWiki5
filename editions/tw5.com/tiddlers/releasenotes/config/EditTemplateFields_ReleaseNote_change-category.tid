@@ -1,0 +1,8 @@
+title: $:/config/EditTemplateFields/ReleaseNote/change-category
+
+\define options() internal translation plugin widget filters usability theme hackability nodejs performance  developer
+<$select tiddler=<<currentTiddler>> field=<<currentField>> class="tc-edit-texteditor tc-edit-fieldeditor" cancelPopups="yes">
+    <$list filter='[enlist<options>sort[title]]'>
+        <option value=<<currentTiddler>>><<currentTiddler>></option>
+    </$list>
+</$select>
