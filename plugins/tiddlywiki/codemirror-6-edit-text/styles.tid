@@ -14,6 +14,17 @@ html body .tc-editor-codemirror6-simple .cm-editor {
 	-webkit-appearance: none;
 }
 
+/* Inset box-shadow matching snowwhite theme for native inputs */
+html body .tc-tiddler-frame .tc-editor-codemirror6-simple .cm-editor {
+	box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Tag input inside .tc-edit-tags has no box-shadow/border (wrapper already has it) */
+html body .tc-tiddler-frame .tc-edit-tags .tc-editor-codemirror6-simple .cm-editor {
+	box-shadow: none;
+	border: none;
+}
+
 html body .tc-editor-codemirror6-simple .cm-editor.cm-focused {
 	outline: 2px solid <<colour primary>>;
 	outline-offset: -2px;
@@ -126,36 +137,6 @@ html body .tc-editor-codemirror6-textarea .cm-scroller {
    BLOCK contexts - inputs that should be full width
    ============================================ */
 
-/* Title field */
-html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input {
-	display: block;
-	width: 100%;
-}
-
-html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-editor {
-	display: block;
-	width: 100%;
-	border: none;
-	background: transparent;
-}
-
-html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-editor.cm-focused {
-	outline: none;
-}
-
-html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-scroller {
-	font-weight: normal;
-	font-size: 2.35em;
-	line-height: 1.35em;
-	font-family: inherit;
-	white-space: normal;
-}
-
-html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-content {
-	color: <<colour tiddler-title-foreground>>;
-	padding: 4px 6px;
-}
-
 /* Sidebar search - inline with search button */
 html body .tc-search .tc-editor-codemirror6-input {
 	display: inline-block;
@@ -257,14 +238,8 @@ html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input {
 html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-editor {
 	display: block;
 	width: 100%;
-	border: none;
-	background: transparent;
 	font-size: inherit;
 	line-height: inherit;
-}
-
-html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-editor.cm-focused {
-	outline: none;
 }
 
 html body .tc-tiddler-edit-frame .tc-titlebar.tc-editor-codemirror6-input .cm-scroller {
