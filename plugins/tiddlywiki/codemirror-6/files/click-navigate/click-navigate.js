@@ -416,11 +416,11 @@ function getLinkAtPos(state, pos, context) {
 			// No definition found - don't return a link
 		}
 
-		// Check for filter variable <variable> or <__param__>
-		if(current.name === "FilterVariable") {
-			// FilterVariable includes angle brackets, extract the name
+		// Check for filter variable <variable>, <__param__>, or multi-valued (variable)
+		if(current.name === "FilterVariable" || current.name === "FilterMultiVariable") {
+			// FilterVariable includes angle brackets, FilterMultiVariable includes parentheses - extract the name
 			var varText = state.doc.sliceString(current.from, current.to);
-			var varName = varText.replace(/^<|>$/g, "").trim();
+			var varName = varText.replace(/^[<(]|[>)]$/g, "").trim();
 			// Strip __underscores__ if present
 			var paramName = varName;
 			if(paramName.startsWith("__") && paramName.endsWith("__")) {

@@ -3339,10 +3339,10 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 				}
 			}
 
-			// Check filter variable references <varName>
-			if(nodeType === "FilterVariable" && isRuleEnabled("undefinedMacros")) {
-				// FilterVariable includes the angle brackets, extract the name
-				var varName = text.replace(/^<|>$/g, "").trim();
+			// Check filter variable references <varName> and (varName)
+			if((nodeType === "FilterVariable" || nodeType === "FilterMultiVariable") && isRuleEnabled("undefinedMacros")) {
+				// FilterVariable includes angle brackets, FilterMultiVariable includes parentheses - extract the name
+				var varName = text.replace(/^[<(]|[>)]$/g, "").trim();
 				if(varName) {
 					// Check global definitions first, plus widget tree scope
 					// Note: localDefs.variables is NOT checked here because those are scoped variables

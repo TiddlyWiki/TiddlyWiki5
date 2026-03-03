@@ -109,18 +109,33 @@ exports.plugin = {
 				var next = textBeforeFull[i + 1] || "";
 				var next2 = textBeforeFull[i + 2] || "";
 
-				// Track quoted strings
-				if(!inQuote && (ch === '"' || ch === "'")) {
-					inQuote = true;
-					quoteChar = ch;
+				// Track quoted strings (including backtick-quoted attribute values)
+				if(!inQuote) {
+					if(ch === "`" && next === "`" && next2 === "`") {
+						inQuote = true;
+						quoteChar = "```";
+						i += 2;
+						continue;
+					}
+					if(ch === "`" || ch === '"' || ch === "'") {
+						inQuote = true;
+						quoteChar = ch;
+						continue;
+					}
+				} else {
+					if(quoteChar === "```" && ch === "`" && next === "`" && next2 === "`") {
+						inQuote = false;
+						quoteChar = null;
+						i += 2;
+						continue;
+					}
+					if(quoteChar !== "```" && ch === quoteChar && textBeforeFull[i - 1] !== "\\") {
+						inQuote = false;
+						quoteChar = null;
+						continue;
+					}
 					continue;
 				}
-				if(inQuote && ch === quoteChar && textBeforeFull[i - 1] !== "\\") {
-					inQuote = false;
-					quoteChar = null;
-					continue;
-				}
-				if(inQuote) continue;
 
 				// Track {{{ }}} filtered transclusion brackets
 				if(ch === "{" && next === "{" && next2 === "{") {
@@ -159,9 +174,9 @@ exports.plugin = {
 				}
 			}
 
-			// If we're inside unclosed filter/macro context, don't auto-close
-			// The > is likely closing a filter variable like <tag> not an HTML tag
-			if(filterBrackets > 0 || squareBrackets > 0 || macroBrackets > 0) {
+			// If we're inside unclosed filter/macro context or quoted attribute value, don't auto-close
+			// The > is likely part of a filter run prefix (=>) or filter variable, not a tag close
+			if(filterBrackets > 0 || squareBrackets > 0 || macroBrackets > 0 || inQuote) {
 				return false;
 			}
 
