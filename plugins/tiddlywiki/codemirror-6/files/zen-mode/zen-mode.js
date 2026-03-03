@@ -24,9 +24,11 @@ class ZenMode {
 		this.engine = null;
 		this.wiki = null;
 		this.document = null;
-		this.statsInterval = null;
 		this.focusModeCleanup = null;
 		this.typewriterCleanup = null;
+		this._wikiChangeHandler = null;
+		this._statsHandler = null;
+		this._statsDebounceHandle = null;
 	}
 
 	init() {
@@ -215,16 +217,20 @@ class ZenMode {
 			this.placeholder = null;
 
 			// Restore selection and focus after editor is back in place
-			if(view) {
+			// Guard: view may have been destroyed if exit was triggered by engine destruction
+			if(view && view.dom && view.dom.parentNode) {
 				requestAnimationFrame(function() {
 					requestAnimationFrame(function() {
+						if(!view.dom || !view.dom.parentNode) return;
 						// Restore selection
 						if(savedSelection) {
-							view.dispatch({
-								selection: savedSelection
-							});
+							try {
+								view.dispatch({
+									selection: savedSelection
+								});
+							} catch(_e) {}
 						}
-						view.focus();
+						try { view.focus(); } catch(_e) {}
 					});
 				});
 			}
@@ -416,9 +422,13 @@ class ZenMode {
 	}
 
 	/**
-	 * Listen for wiki changes (settings, theme)
+	 * Listen for wiki changes (settings, theme).
+	 * The listener is stored so it can be removed on destroy.
 	 */
 	setupWikiListener() {
+		// Don't install twice
+		if(this._wikiChangeHandler) return;
+
 		var self = this;
 		var settingsTiddlers = [
 			"$:/config/codemirror-6/zen-mode/max-width",
@@ -433,7 +443,7 @@ class ZenMode {
 			"$:/palette"
 		];
 
-		$tw.wiki.addEventListener("change", function(changes) {
+		this._wikiChangeHandler = function(changes) {
 			if(!self.isActive) return;
 
 			for(var i = 0; i < settingsTiddlers.length; i++) {
@@ -444,25 +454,55 @@ class ZenMode {
 					break;
 				}
 			}
-		});
+		};
+
+		$tw.wiki.addEventListener("change", this._wikiChangeHandler);
 	}
 
 	/**
-	 * Start periodic stats updates
+	 * Remove the wiki change listener
+	 */
+	removeWikiListener() {
+		if(this._wikiChangeHandler) {
+			$tw.wiki.removeEventListener("change", this._wikiChangeHandler);
+			this._wikiChangeHandler = null;
+		}
+	}
+
+	/**
+	 * Start stats updates (event-driven with debounce instead of polling)
 	 */
 	startStatsUpdates() {
+		var self = this;
 		this.updateStats();
-		this.statsInterval = setInterval(this.updateStats.bind(this), 1000);
+
+		// Debounced handler: update stats 300ms after last document change
+		this._statsDebounceHandle = null;
+		this._statsHandler = function() {
+			if(self._statsDebounceHandle) clearTimeout(self._statsDebounceHandle);
+			self._statsDebounceHandle = setTimeout(function() {
+				self._statsDebounceHandle = null;
+				self.updateStats();
+			}, 300);
+		};
+
+		if(this.engine && this.engine.on) {
+			this.engine.on("docChanged", this._statsHandler);
+		}
 	}
 
 	/**
 	 * Stop stats updates
 	 */
 	stopStatsUpdates() {
-		if(this.statsInterval) {
-			clearInterval(this.statsInterval);
-			this.statsInterval = null;
+		if(this._statsDebounceHandle) {
+			clearTimeout(this._statsDebounceHandle);
+			this._statsDebounceHandle = null;
 		}
+		if(this._statsHandler && this.engine && this.engine.off) {
+			this.engine.off("docChanged", this._statsHandler);
+		}
+		this._statsHandler = null;
 	}
 
 	/**
@@ -498,7 +538,6 @@ class ZenMode {
 		if(focusMode === "none" || !this.engine || !this.engine.view) return;
 
 		var self = this;
-		var _view = this.engine.view;
 
 		if(focusMode === "sentence" || focusMode === "paragraph") {
 			// Track last highlighted range to avoid unnecessary updates
@@ -507,6 +546,7 @@ class ZenMode {
 
 			// Create update listener for sentence/paragraph focus
 			var updateFocus = function() {
+				if(!self.isActive || !self.engine || !self.engine.view) return;
 				var range = self.getFocusRange(focusMode);
 				if(range && (range.start !== lastStart || range.end !== lastEnd)) {
 					lastStart = range.start;
@@ -518,11 +558,17 @@ class ZenMode {
 			// Initial update
 			updateFocus();
 
-			// Listen to selection changes via polling (simpler than CM6 extension)
-			var pollInterval = setInterval(updateFocus, 100);
+			// Listen to selection/doc changes via engine events (not polling)
+			if(this.engine.on) {
+				this.engine.on("selectionChanged", updateFocus);
+				this.engine.on("docChanged", updateFocus);
+			}
 
 			this.focusModeCleanup = function() {
-				clearInterval(pollInterval);
+				if(self.engine && self.engine.off) {
+					self.engine.off("selectionChanged", updateFocus);
+					self.engine.off("docChanged", updateFocus);
+				}
 				self.clearFocusHighlight();
 			};
 		}
@@ -646,6 +692,34 @@ class ZenMode {
 		} else {
 			this.enter(editorWrapper, engine);
 		}
+	}
+
+	/**
+	 * Handle engine destruction while zen mode is active.
+	 * Called from the widget's onDestroy lifecycle hook.
+	 * @param {object} engine - The engine being destroyed
+	 */
+	handleEngineDestroy(engine) {
+		if(this.isActive && this.engine === engine) {
+			this.exit();
+		}
+	}
+
+	/**
+	 * Full cleanup - removes all listeners and DOM elements.
+	 * Called when the singleton is no longer needed.
+	 */
+	destroy() {
+		if(this.isActive) {
+			this.exit();
+		}
+		this.removeWikiListener();
+		if(this.overlay && this.overlay.parentNode) {
+			this.overlay.parentNode.removeChild(this.overlay);
+		}
+		this.overlay = null;
+		this.editorContainer = null;
+		this.statsBar = null;
 	}
 }
 

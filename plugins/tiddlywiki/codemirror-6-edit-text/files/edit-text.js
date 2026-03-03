@@ -245,6 +245,21 @@ class CM6EditTextWidget extends BaseEditTextWidget {
 	}
 
 	// ============================================================================
+	// Destroy lifecycle - clean up engine when widget is removed
+	// ============================================================================
+
+	/**
+	 * Called by TiddlyWiki 5.4.0+ Widget.prototype.destroy() → onDestroy().
+	 * For older versions, the fallback below routes through removeChildDomNodes.
+	 */
+	onDestroy() {
+		if(this.engine && typeof this.engine.destroy === "function") {
+			this.engine.destroy();
+		}
+		this.engine = null;
+	}
+
+	// ============================================================================
 	// Refresh override to handle config changes
 	// ============================================================================
 
@@ -273,5 +288,25 @@ class CM6EditTextWidget extends BaseEditTextWidget {
 		return super.refresh(changedTiddlers);
 	}
 }
+
+// Fallback for TiddlyWiki versions before 5.4.0 that lack Widget.prototype.destroy().
+// In older versions, removeChildDomNodes() is the only cleanup entry point and does
+// not call onDestroy(). We override it to call our cleanup before the base implementation.
+(function() {
+	var BaseWidget = require("$:/core/modules/widgets/widget.js").widget;
+	if(BaseWidget && !BaseWidget.prototype.destroy) {
+		var origRemoveChildDomNodes = CM6EditTextWidget.prototype.removeChildDomNodes;
+		CM6EditTextWidget.prototype.removeChildDomNodes = function() {
+			if(typeof this.onDestroy === "function") {
+				this.onDestroy();
+			}
+			if(origRemoveChildDomNodes) {
+				origRemoveChildDomNodes.call(this);
+			} else {
+				BaseWidget.prototype.removeChildDomNodes.call(this);
+			}
+		};
+	}
+})();
 
 exports["edit-text"] = CM6EditTextWidget;

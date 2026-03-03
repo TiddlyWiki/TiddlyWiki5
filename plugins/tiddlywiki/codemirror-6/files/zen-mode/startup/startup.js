@@ -49,6 +49,15 @@ exports.startup = function() {
 				},
 
 				/**
+				 * Called when the editor widget is destroyed
+				 */
+				onDestroy: function(widget) {
+					if(widget.engine) {
+						zenMode.handleEngineDestroy(widget.engine);
+					}
+				},
+
+				/**
 				 * Message handlers
 				 */
 				onMessage: {

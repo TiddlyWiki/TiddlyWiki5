@@ -863,6 +863,50 @@ exports.prototype.handleEditTextOperationMessage = function(event) {
 };
 
 // ============================================================================
+// Lifecycle: Destroy / Cleanup
+// ============================================================================
+
+/**
+ * Clean up engine and zen mode when the widget is destroyed.
+ * Called by TiddlyWiki 5.4.0+ Widget.prototype.destroy() → onDestroy().
+ */
+exports.prototype.onDestroy = function() {
+	// If zen mode is active with our engine, exit it first
+	if($tw.cm6ZenMode && this.engine) {
+		$tw.cm6ZenMode.handleEngineDestroy(this.engine);
+	}
+
+	// Notify registered plugins
+	pluginRegistry.callHook("onDestroy", this);
+
+	// Destroy the engine
+	if(this.engine && typeof this.engine.destroy === "function") {
+		this.engine.destroy();
+	}
+	this.engine = null;
+
+	// Clean up language picker if open
+	this.hideLanguagePicker();
+};
+
+// Fallback for TiddlyWiki versions before 5.4.0 that lack Widget.prototype.destroy().
+// In older versions, removeChildDomNodes() is the only cleanup entry point and does
+// not call onDestroy(). We override it to call our cleanup before the base implementation.
+(function() {
+	var BaseWidget = require("$:/core/modules/widgets/widget.js").widget;
+	if(BaseWidget && !BaseWidget.prototype.destroy) {
+		exports.prototype.removeChildDomNodes = function() {
+			// Call our cleanup
+			if(typeof this.onDestroy === "function") {
+				this.onDestroy();
+			}
+			// Call base implementation (removes DOM nodes)
+			BaseWidget.prototype.removeChildDomNodes.call(this);
+		};
+	}
+})();
+
+// ============================================================================
 // Events / DOM integration
 // ============================================================================
 

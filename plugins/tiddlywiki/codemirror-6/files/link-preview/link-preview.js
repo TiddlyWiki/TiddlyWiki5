@@ -142,6 +142,8 @@ var tooltipElement = null;
 var hideTimeout = null;
 var currentTarget = null;
 var contextMenuOpen = false;
+var _docClickHandler = null;
+var _docContextMenuHandler = null;
 
 function createTooltip() {
 	if(tooltipElement) return tooltipElement;
@@ -187,17 +189,19 @@ function createTooltip() {
 	});
 
 	// Close context menu detection - any click closes it
-	doc.addEventListener("click", function() {
+	_docClickHandler = function() {
 		if(contextMenuOpen) {
 			contextMenuOpen = false;
 		}
-	});
-	doc.addEventListener("contextmenu", function(e) {
+	};
+	_docContextMenuHandler = function(e) {
 		// If context menu opened outside tooltip, allow hiding
 		if(contextMenuOpen && tooltipElement && !tooltipElement.contains(e.target)) {
 			contextMenuOpen = false;
 		}
-	});
+	};
+	doc.addEventListener("click", _docClickHandler);
+	doc.addEventListener("contextmenu", _docContextMenuHandler);
 
 	return tooltipElement;
 }
@@ -719,6 +723,16 @@ exports.plugin = {
 	},
 
 	destroy: function(_engine) {
+		// Remove document-level listeners
+		var doc = _document || document;
+		if(_docClickHandler) {
+			doc.removeEventListener("click", _docClickHandler);
+			_docClickHandler = null;
+		}
+		if(_docContextMenuHandler) {
+			doc.removeEventListener("contextmenu", _docContextMenuHandler);
+			_docContextMenuHandler = null;
+		}
 		// Clean up tooltip
 		if(tooltipElement && tooltipElement.parentNode) {
 			tooltipElement.parentNode.removeChild(tooltipElement);
