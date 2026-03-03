@@ -6,7 +6,7 @@ Provides syntax highlighting for SQL in code blocks.
 
 !! Supported Content
 
-* Fenced code blocks: ```` ```sql ````
+* Fenced code blocks with language tag `sql`
 * Typed blocks: `$$$.sql`
 
 !! Features

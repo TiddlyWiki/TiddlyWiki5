@@ -8,5 +8,5 @@
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme license",
-  "stability": "STABILITY_1_EXPERIMENTAL"
+  "stability": "STABILITY_2_STABLE"
 }

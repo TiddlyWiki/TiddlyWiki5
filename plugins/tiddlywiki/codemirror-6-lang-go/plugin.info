@@ -8,5 +8,5 @@
   "list": "readme license",
   "core-version": ">=5.3.0",
   "author": "TiddlyWiki",
-  "stability": "STABILITY_1_EXPERIMENTAL"
+  "stability": "STABILITY_2_STABLE"
 }
