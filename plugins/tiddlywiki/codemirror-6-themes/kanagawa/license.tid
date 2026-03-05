@@ -1,7 +1,0 @@
-title: $:/plugins/tiddlywiki/codemirror-6-themes/kanagawa/license
-
-\define theme-name() Kanagawa
-\define theme-url() https://github.com/rebelot/kanagawa.nvim
-\define theme-author() rebelot
-
-{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

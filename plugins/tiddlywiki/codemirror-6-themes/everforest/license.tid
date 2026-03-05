@@ -1,7 +1,0 @@
-title: $:/plugins/tiddlywiki/codemirror-6-themes/everforest/license
-
-\define theme-name() Everforest
-\define theme-url() https://github.com/sainnhe/everforest
-\define theme-author() sainnhe
-
-{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

@@ -1,7 +1,0 @@
-title: $:/plugins/tiddlywiki/codemirror-6-themes/solarized/license
-
-\define theme-name() Solarized
-\define theme-url() https://ethanschoonover.com/solarized
-\define theme-author() Ethan Schoonover
-
-{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}
