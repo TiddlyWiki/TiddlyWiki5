@@ -46,7 +46,7 @@ function parseFilterOperation(operators,filterString,p,operation) {
 		var bracket = filterString.charAt(nextBracketPos);
 		operator.operator = filterString.substring(p,nextBracketPos);
 		// Any suffix?
-		var colon = operator.operator.indexOf(':');
+		var colon = operator.operator.indexOf(":");
 		if(colon > -1) {
 			operator.suffixStart = p + colon;
 			// The raw suffix for older filters
@@ -72,7 +72,7 @@ function parseFilterOperation(operators,filterString,p,operation) {
 		var parseOperand = function(bracketType) {
 			var operand = {};
 			operand.start = p - 1;
-			switch (bracketType) {
+			switch(bracketType) {
 				case "{": // Curly brackets
 					operand.indirect = true;
 					nextBracketPos = filterString.indexOf("}",p);
@@ -113,7 +113,7 @@ function parseFilterOperation(operators,filterString,p,operation) {
 			}
 			operator.operands.push(operand);
 			p = nextBracketPos + 1;
-		}
+		};
 
 		p = nextBracketPos + 1;
 		parseOperand(bracket);
@@ -242,7 +242,7 @@ exports.getFilterRunPrefixes = function() {
 		$tw.modules.applyMethods("filterrunprefix",this.filterRunPrefixes);
 	}
 	return this.filterRunPrefixes;
-}
+};
 
 exports.filterTiddlers = function(filterString,widget,source) {
 	var fn = this.compileFilter(filterString);
@@ -452,10 +452,10 @@ exports.parseFilterToHtml = function(filterString) {
 					tooltip = "Run: '" + safeOperator + "'";
 				opHtml.push('<span class="tc-filter-operator" title="' + tooltip + '">');
 				opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">[</span>');
-				if (operator.prefix) {
+				if(operator.prefix) {
 					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element" title="Negated">');
 					opHtml.push($tw.utils.htmlEncode(operator.prefix));
-					opHtml.push('</span>');
+					opHtml.push("</span>");
 				}
 				opHtml.push('<span class="tc-filter-operator-name" title="Operator Name: ' + safeOperator + '">');
 				opHtml.push(safeOperator);
@@ -543,7 +543,7 @@ exports.parseFilterToHtml = function(filterString) {
 					"=": "all",
 					"=>": "let"
 				}[operation.prefix] || operation.namedPrefix || "";
-				runHtml.push('<span class="tc-filter-prefix tc-filter-small-element ' + (modifier ? 'tc-filter-prefix-' + modifier : '') + '" title="' + tooltip + '">');
+				runHtml.push('<span class="tc-filter-prefix tc-filter-small-element ' + (modifier ? "tc-filter-prefix-" + modifier : "") + '" title="' + tooltip + '">');
 				runHtml.push(operation.prefix);
 				runHtml.push("</span>");
 			}
@@ -561,7 +561,7 @@ exports.parseFilterToHtml = function(filterString) {
 	$tw.utils.each(operationHtmlGenerators, function(generator) {
 		html.push(generator());
 	});
-	html.push('</div>');
+	html.push("</div>");
 	return html.join("");
 };
 
