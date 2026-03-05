@@ -11,7 +11,7 @@ tags: [[Filter Operators]] [[Negatable Operators]]
 title: checkbox Operator
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.4.0">>
+<<.from-version "5.5.0">>
 
 The <<.op checkbox>> operator filters tiddlers based on whether their `text` field contains wikitext checkbox syntax (`[ ]`, `[x]`, or `[X]`).
 

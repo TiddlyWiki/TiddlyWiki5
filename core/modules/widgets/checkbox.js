@@ -70,7 +70,7 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 
 CheckboxWidget.prototype.getValue = function() {
 	// Wikitext inline mode: state comes directly from the parse tree node
-	if(this.parseTreeNode.sourceTitle) {
+	if(this.isWikitextCheckbox) {
 		return !!this.parseTreeNode.checked;
 	}
 	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
@@ -175,7 +175,7 @@ Handle a click on a wikitext inline checkbox: splice [x] or [ ] into the
 source tiddler's text field at the position recorded in the parse tree node.
 */
 CheckboxWidget.prototype.handleTextCheckboxChange = function(checked) {
-	var sourceTiddler = this.wiki.getTiddler(this.parseTreeNode.sourceTitle);
+	var sourceTiddler = this.wiki.getTiddler(this.checkboxSourceTitle);
 	if(sourceTiddler) {
 		var text = sourceTiddler.fields.text || "";
 		var start = this.parseTreeNode.start;
@@ -188,7 +188,7 @@ CheckboxWidget.prototype.handleTextCheckboxChange = function(checked) {
 
 CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	var checked = this.inputDomNode.checked;
-	if(this.parseTreeNode.sourceTitle) {
+	if(this.isWikitextCheckbox) {
 		// Wikitext inline mode: update the source tiddler's text directly
 		this.handleTextCheckboxChange(checked);
 	} else {
@@ -331,6 +331,14 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	this.isDisabled = this.getAttribute("disabled","no");
 	this.tabIndex = this.getAttribute();
+	// Wikitext inline checkbox mode: the parse tree node has a boolean `checked`
+	// property (set by the checkbox wikiparser rule) AND numeric `start`/`end`
+	// offsets into the source text. Regular <$checkbox> widgets do not have these.
+	// The source tiddler title is inherited via the "sourceTitle" variable
+	// set by the transclude widget (or makeWidget call chain).
+	this.isWikitextCheckbox = this.parseTreeNode.checked !== undefined
+		&& typeof this.parseTreeNode.start === "number";
+	this.checkboxSourceTitle = this.isWikitextCheckbox ? this.getVariable("sourceTitle") : undefined;
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -345,7 +353,7 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	} else {
 		var refreshed = false;
-		if(!this.parseTreeNode.sourceTitle && changedTiddlers[this.checkboxTitle]) {
+		if(!this.isWikitextCheckbox && changedTiddlers[this.checkboxTitle]) {
 			var isChecked = this.getValue();
 			this.inputDomNode.checked = !!isChecked;
 			this.inputDomNode.indeterminate = (isChecked === undefined);

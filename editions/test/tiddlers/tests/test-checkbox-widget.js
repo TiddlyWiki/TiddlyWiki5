@@ -593,18 +593,19 @@ describe("Checkbox widget", function() {
 
 	describe("Wikitext inline checkbox", function() {
 
-		it("parseTiddler sets sourceTitle so clicking modifies the tiddler's own text", function() {
+		it("parseTiddler sets sourceTitle variable so clicking modifies the tiddler's own text", function() {
 			var wiki = new $tw.Wiki();
 			wiki.addTiddler({title: "DirectTasks", text: "* [ ] Direct task"});
 
-			// Render by going through parseTiddler (the direct path)
+			// Render through wiki.makeWidget which propagates sourceTitle from the parser
 			var parser = wiki.parseTiddler("DirectTasks");
-			var widgetNode = createWidgetNode({type: "widget", children: parser.tree}, wiki);
+			var widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
 			widgetNode.render($tw.fakeDocument.createElement("div"), null);
 
 			var checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(1);
-			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("DirectTasks");
+			// sourceTitle is now a widget variable, not a parseTreeNode property
+			expect(checkboxes[0].getVariable("sourceTitle")).toBe("DirectTasks");
 			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
 			expect(checkboxes[0].getValue()).toBe(false);
 
@@ -619,13 +620,13 @@ describe("Checkbox widget", function() {
 			wiki.addTiddler({title: "Container",   text: "Container intro\n\n{{SourceTasks}}"});
 
 			var parser = wiki.parseTiddler("Container");
-			var widgetNode = createWidgetNode({type: "widget", children: parser.tree}, wiki);
+			var widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
 			widgetNode.render($tw.fakeDocument.createElement("div"), null);
 
 			var checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(1);
-			// Must point to SourceTasks, NOT Container
-			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("SourceTasks");
+			// sourceTitle variable must point to SourceTasks, NOT Container
+			expect(checkboxes[0].getVariable("sourceTitle")).toBe("SourceTasks");
 
 			clickCheckbox(checkboxes[0],true);
 
@@ -644,16 +645,16 @@ describe("Checkbox widget", function() {
 				text: "Here are my tasks:\n\n* [ ] Task 1\n* [x] Task 2\n* [X] Task 3\n"
 			});
 
-			// Render via transclusion so that sourceTitle is propagated through parseTiddler
+			// Render via transclusion so that sourceTitle variable is propagated
 			var widgetNode = createWidgetNode(parseText("{{MyTasks}}",wiki),wiki);
 			widgetNode.render($tw.fakeDocument.createElement("div"),null);
 
 			var checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(3);
 
-			// State comes from parseTreeNode, not from widget attributes
+			// State comes from parseTreeNode.checked, sourceTitle from variable
 			expect(checkboxes[0].getValue()).toBe(false);
-			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("MyTasks");
+			expect(checkboxes[0].getVariable("sourceTitle")).toBe("MyTasks");
 			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
 			expect(checkboxes[1].parseTreeNode.checked).toBe(true);
 			expect(checkboxes[2].parseTreeNode.checked).toBe(true);
@@ -676,7 +677,7 @@ describe("Checkbox widget", function() {
 			wiki.addTiddler({title: "MultiCheck", text: "[ ] First [ ] Second [x] Third"});
 
 			var parser = wiki.parseTiddler("MultiCheck");
-			var widgetNode = createWidgetNode({type: "widget", children: parser.tree}, wiki);
+			var widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
 			widgetNode.render($tw.fakeDocument.createElement("div"), null);
 
 			var checkboxes = findCheckboxes(widgetNode);
@@ -696,7 +697,7 @@ describe("Checkbox widget", function() {
 			wiki.addTiddler({title: "NumberedTasks", text: "# [ ] Step 1\n# [x] Step 2\n"});
 
 			var parser = wiki.parseTiddler("NumberedTasks");
-			var widgetNode = createWidgetNode({type: "widget", children: parser.tree}, wiki);
+			var widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
 			widgetNode.render($tw.fakeDocument.createElement("div"), null);
 
 			var checkboxes = findCheckboxes(widgetNode);
@@ -712,7 +713,7 @@ describe("Checkbox widget", function() {
 			wiki.addTiddler({title: "ThreeTasks", text: "[ ] A\n[ ] B\n[ ] C\n"});
 
 			var parser = wiki.parseTiddler("ThreeTasks");
-			var widgetNode = createWidgetNode({type: "widget", children: parser.tree}, wiki);
+			var widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
 			widgetNode.render($tw.fakeDocument.createElement("div"), null);
 
 			var checkboxes = findCheckboxes(widgetNode);

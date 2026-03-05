@@ -1150,6 +1150,13 @@ parentWidget: optional parent widget for the root node
 */
 exports.makeWidget = function(parser,options) {
 	options = options || {};
+	// If the parser knows which tiddler it parsed, propagate that as a
+	// variable so that widgets (e.g. inline checkboxes) can find out
+	// which tiddler to edit.  Explicit options.variables take precedence.
+	if(parser && parser.sourceTitle && !(options.variables && options.variables.sourceTitle)) {
+		options.variables = options.variables || {};
+		options.variables.sourceTitle = parser.sourceTitle;
+	}
 	var widgetNode = {
 			type: "widget",
 			children: []

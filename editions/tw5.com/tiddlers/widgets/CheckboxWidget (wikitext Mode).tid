@@ -7,7 +7,7 @@ title: CheckboxWidget (wikitext Mode)
 
 !! Wikitext Inline Mode
 
-<<.from-version "5.4.0">>
+<<.from-version "5.5.0">>
 
 TiddlyWiki supports an inline checkbox syntax directly in wikitext, similar to GitHub Flavored Markdown:
 
