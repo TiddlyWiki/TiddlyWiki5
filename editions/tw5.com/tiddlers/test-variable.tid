@@ -1,7 +1,7 @@
 created: 20251231112117700
-modified: 20251231142200527
+modified: 20260305230826098
 tags: 
 title: test-variable
 type: text/vnd.tiddlywiki
 
-<<filter-html """[<config-title>!text[hide]]""">>
+<<filter-html """[is[tiddler]] -[[$:/core]] -[[$:/library/sjcl.js]] -[prefix[$:/boot/]] -[prefix[$:/HistoryList]] -[status[pending]plugin-type[import]] -[[$:/isEncrypted]] -[prefix[$:/status/]] -[prefix[$:/state/]] -[prefix[$:/temp/]]""">>

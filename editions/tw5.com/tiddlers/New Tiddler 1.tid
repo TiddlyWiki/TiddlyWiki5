@@ -1,0 +1,22 @@
+created: 20260305225245230
+modified: 20260305225254988
+tags: 
+title: New Tiddler 1
+type: text/vnd.tiddlywiki
+
+|`[tag{$:/MySpecialTag}has<field>get[text]!is[blank]]` | |
+|`                                                   ` | |
+|`[                                                 ]` |A run of filter operators that are piped together |
+|` tag                                               ` |"tag" operator |
+|`    {               }                              ` |Curly braces means that the operand value will be obtained from a tiddler |
+|`     $:/MySpecialTag                               ` |Title of the tiddler containing the operand value for the "tag" operator |
+|`                     has                           ` |"has" operator |
+|`                        <     >                    ` |Angle brackets means that the operand value will be obtained from a variable |
+|`                         field                     ` |Name of the variable containing the operand value for the "has" operator |
+|`                               get                 ` |"get" operator |
+|`                                  [    ]           ` |Square brackets means that the operand value is given literally |
+|`                                   text            ` |"text" operand for the "get" operator |
+|`                                        !          ` |Negation: the result of the "is" operator will be inverted |
+|`                                         is        ` |"is" operator |
+|`                                           [     ] ` |Square brackets means that the operand value is given literally |
+|`                                            blank  ` |"blank" operand for the "is" operator |
