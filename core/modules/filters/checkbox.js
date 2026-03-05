@@ -11,9 +11,9 @@ Usage:
   [checkbox[unchecked]] - tiddlers with at least one unchecked checkbox ([ ])
   [!checkbox[...]]      - negated forms of the above
 
-The operator scans the tiddler's text field for the checkbox syntax.
-This is a fast regex scan; it does not do a full wikitext parse and therefore
-will also match checkboxes inside code blocks or comments.
+When the CheckboxIndexer is available, indexed titles are intersected with
+the input set for O(1)-per-title lookups.  Falls back to a regex scan when
+the indexer is not loaded.
 
 \*/
 
@@ -21,30 +21,58 @@ will also match checkboxes inside code blocks or comments.
 
 // Regexps match the same syntax as the checkbox wikirule parser rule.
 // No `g` flag so there is no lastIndex state to manage between calls.
-var REGEXP_ANY      = /\[([ xX])\]/;
-var REGEXP_CHECKED  = /\[[xX]\]/;
+var REGEXP_ANY       = /\[([ xX])\]/;
+var REGEXP_CHECKED   = /\[[xX]\]/;
 var REGEXP_UNCHECKED = /\[ \]/;
 
 exports.checkbox = function(source, operator, options) {
 	var results = [];
 	var operand = operator.operand; // "", "checked", or "unchecked"
 	var invert = operator.prefix === "!";
-	var regexp;
+	var category;
 	if(operand === "checked") {
-		regexp = REGEXP_CHECKED;
+		category = "checked";
 	} else if(operand === "unchecked") {
-		regexp = REGEXP_UNCHECKED;
+		category = "unchecked";
 	} else {
-		regexp = REGEXP_ANY;
+		category = "any";
 	}
-	source(function(tiddler, title) {
-		if(!tiddler) {
-			return;
+	// Try the indexer first
+	var indexer = options.wiki.getIndexer("CheckboxIndexer");
+	if(indexer) {
+		var indexedSet = Object.create(null);
+		var indexedTitles = indexer.lookup(category);
+		for(var i = 0; i < indexedTitles.length; i++) {
+			indexedSet[indexedTitles[i]] = true;
 		}
-		var found = regexp.test(tiddler.fields.text || "");
-		if(found !== invert) {
-			results.push(title);
+		source(function(tiddler, title) {
+			if(!tiddler) {
+				return;
+			}
+			var found = !!indexedSet[title];
+			if(found !== invert) {
+				results.push(title);
+			}
+		});
+	} else {
+		// Fall back to regex scan when indexer is not available
+		var regexp;
+		if(category === "checked") {
+			regexp = REGEXP_CHECKED;
+		} else if(category === "unchecked") {
+			regexp = REGEXP_UNCHECKED;
+		} else {
+			regexp = REGEXP_ANY;
 		}
-	});
+		source(function(tiddler, title) {
+			if(!tiddler) {
+				return;
+			}
+			var found = regexp.test(tiddler.fields.text || "");
+			if(found !== invert) {
+				results.push(title);
+			}
+		});
+	}
 	return results;
 };
