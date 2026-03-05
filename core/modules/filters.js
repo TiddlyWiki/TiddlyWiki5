@@ -550,3 +550,243 @@ exports.parseFilterToHtml = function(filterString) {
 	html.push('</div>');
 	return html.join("");
 };
+
+/*
+Parse a filter string and return a wikitext debug table showing each syntactic
+element at its original character position with a description.
+*/
+exports.parseFilterToDebugTable = function(filterString) {
+	filterString = filterString || "";
+	var totalLen = filterString.length;
+	if(totalLen === 0) {
+		return "";
+	}
+	var parseTree;
+	try {
+		parseTree = this.parseFilter(filterString);
+	} catch(e) {
+		return "Error parsing filter: " + e;
+	}
+	// Helper: create a string of totalLen with text placed at a given position, rest spaces
+	function placeText(start,text) {
+		var result = [];
+		for(var i = 0; i < totalLen; i++) {
+			if(i >= start && i < start + text.length) {
+				result.push(text.charAt(i - start));
+			} else {
+				result.push(" ");
+			}
+		}
+		return result.join("");
+	}
+	// Helper: place multiple text fragments at specific positions
+	function placeMultiple(parts) {
+		var chars = [];
+		for(var i = 0; i < totalLen; i++) {
+			chars.push(" ");
+		}
+		for(var j = 0; j < parts.length; j++) {
+			for(var k = 0; k < parts[j].text.length; k++) {
+				chars[parts[j].start + k] = parts[j].text.charAt(k);
+			}
+		}
+		return chars.join("");
+	}
+	// Build rows: [{line, description}]
+	var rows = [];
+	// First row: the full filter string
+	rows.push({line: filterString, description: ""});
+	// Blank separator
+	rows.push({line: placeText(0,""), description: ""});
+	// Walk through the filter string alongside the parse tree
+	var p = 0;
+	for(var i = 0; i < parseTree.length; i++) {
+		var operation = parseTree[i];
+		// Skip whitespace
+		while(p < totalLen && /\s/.test(filterString.charAt(p))) {
+			p++;
+		}
+		// Run prefix
+		if(operation.prefix) {
+			var prefixStart = p;
+			p += operation.prefix.length;
+			var prefixDescriptions = {
+				"+": "Intersection: only keep titles that are also in this run's results",
+				"-": "Exclusion: remove this run's results from the output",
+				"~": "Else: use this run's results only if the output so far is empty",
+				"=": "All: append this run's results without deduplication",
+				"=>": "Let: assign this run's results to a variable"
+			};
+			var prefixDesc = prefixDescriptions[operation.prefix];
+			if(!prefixDesc && operation.namedPrefix) {
+				prefixDesc = "Named prefix: \"" + operation.namedPrefix + "\"";
+			}
+			rows.push({
+				line: placeText(prefixStart,operation.prefix),
+				description: prefixDesc || ("Prefix: " + operation.prefix)
+			});
+		}
+		// Bracketed run
+		if(filterString.charAt(p) === "[") {
+			var runOpenPos = p;
+			p++; // skip [
+			var operatorRows = [];
+			for(var j = 0; j < operation.operators.length; j++) {
+				var op = operation.operators[j];
+				// Negation prefix
+				var negPos = -1;
+				if(op.prefix === "!") {
+					negPos = p;
+					p++;
+				}
+				// Operator name + suffixes in the original string
+				var opStart = p;
+				var nextBracketIdx = filterString.substring(p).search(/[\[\{<\/\(]/);
+				if(nextBracketIdx === -1) {
+					break;
+				}
+				var opStringPart = filterString.substring(p,p + nextBracketIdx);
+				p += nextBracketIdx;
+				// Record negation
+				if(negPos >= 0) {
+					operatorRows.push({
+						line: placeText(negPos,"!"),
+						description: "Negation: the result of the \"" + op.operator + "\" operator will be inverted"
+					});
+				}
+				// Record operator name (without suffixes)
+				var colonIdx = opStringPart.indexOf(":");
+				var opNameInString = colonIdx > -1 ? opStringPart.substring(0,colonIdx) : opStringPart;
+				if(opNameInString.length > 0) {
+					operatorRows.push({
+						line: placeText(opStart,opNameInString),
+						description: "\"" + op.operator + "\" operator"
+					});
+				}
+				// Record suffixes if present
+				if(colonIdx > -1) {
+					var suffixStr = opStringPart.substring(colonIdx);
+					operatorRows.push({
+						line: placeText(opStart + colonIdx,suffixStr),
+						description: "Suffix for the \"" + op.operator + "\" operator"
+					});
+				}
+				// Process operands
+				for(var k = 0; k < op.operands.length; k++) {
+					if(k > 0 && filterString.charAt(p) === ",") {
+						p++; // skip comma between operands
+					}
+					var operand = op.operands[k];
+					var openBracketChar = filterString.charAt(p);
+					var openBracketPos = p;
+					p++; // skip opening bracket
+					var operandTextStart = p;
+					p += operand.text.length;
+					var closeBracketPos = p;
+					var closeBracketChar = filterString.charAt(p);
+					p++; // skip closing bracket
+					// Bracket type description
+					var bracketDesc;
+					if(operand.indirect) {
+						bracketDesc = "Curly braces means that the operand value will be obtained from a tiddler";
+					} else if(operand.variable) {
+						bracketDesc = "Angle brackets means that the operand value will be obtained from a variable";
+					} else if(operand.multiValuedVariable) {
+						bracketDesc = "Round brackets means that the operand value will be obtained from a multi-valued variable";
+					} else {
+						bracketDesc = "Square brackets means that the operand value is given literally";
+					}
+					operatorRows.push({
+						line: placeMultiple([
+							{start: openBracketPos, text: openBracketChar},
+							{start: closeBracketPos, text: closeBracketChar}
+						]),
+						description: bracketDesc
+					});
+					// Operand text
+					if(operand.text.length > 0) {
+						var operandDesc;
+						if(operand.indirect) {
+							operandDesc = "Title of the tiddler containing the operand value for the \"" + op.operator + "\" operator";
+						} else if(operand.variable) {
+							operandDesc = "Name of the variable containing the operand value for the \"" + op.operator + "\" operator";
+						} else {
+							operandDesc = "\"" + operand.text + "\" operand for the \"" + op.operator + "\" operator";
+						}
+						operatorRows.push({
+							line: placeText(operandTextStart,operand.text),
+							description: operandDesc
+						});
+					}
+				}
+			}
+			// Closing ]
+			var runClosePos = p;
+			p++; // skip ]
+			// Add the run brackets row first
+			rows.push({
+				line: placeMultiple([
+					{start: runOpenPos, text: "["},
+					{start: runClosePos, text: "]"}
+				]),
+				description: "A run of filter operators that are piped together"
+			});
+			// Then add all operator rows
+			for(var r = 0; r < operatorRows.length; r++) {
+				rows.push(operatorRows[r]);
+			}
+		} else {
+			// Quoted or unquoted title string
+			var titleRegExp = /(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+)/g;
+			titleRegExp.lastIndex = p;
+			var match = titleRegExp.exec(filterString);
+			if(match && match.index === p) {
+				var titleText = match[1] !== undefined ? match[1] : (match[2] !== undefined ? match[2] : match[3]);
+				if(match[1] !== undefined) {
+					// Double-quoted
+					rows.push({
+						line: placeMultiple([
+							{start: p, text: "\""},
+							{start: p + match[0].length - 1, text: "\""}
+						]),
+						description: "Double-quoted title"
+					});
+					if(titleText.length > 0) {
+						rows.push({
+							line: placeText(p + 1,titleText),
+							description: "Title: \"" + titleText + "\""
+						});
+					}
+				} else if(match[2] !== undefined) {
+					// Single-quoted
+					rows.push({
+						line: placeMultiple([
+							{start: p, text: "'"},
+							{start: p + match[0].length - 1, text: "'"}
+						]),
+						description: "Single-quoted title"
+					});
+					if(titleText.length > 0) {
+						rows.push({
+							line: placeText(p + 1,titleText),
+							description: "Title: \"" + titleText + "\""
+						});
+					}
+				} else {
+					// Unquoted
+					rows.push({
+						line: placeText(p,titleText),
+						description: "Unquoted title: \"" + titleText + "\""
+					});
+				}
+				p = match.index + match[0].length;
+			}
+		}
+	}
+	// Build the wikitext table
+	var table = [];
+	for(var t = 0; t < rows.length; t++) {
+		table.push("|`" + rows[t].line + "` |" + rows[t].description + " |");
+	}
+	return table.join("\n");
+};
