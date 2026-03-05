@@ -114,11 +114,6 @@ TranscludeWidget.prototype.execute = function() {
 		var recursionMarker = this.makeRecursionMarker();
 		this.setVariable("transclusion",recursionMarker);
 	}
-	// Propagate the source tiddler title from the parser so that widgets
-	// (e.g. inline checkboxes) can know which tiddler to edit
-	if(target.parser && target.parser.sourceTitle) {
-		this.setVariable("sourceTitle",target.parser.sourceTitle);
-	}
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
 };

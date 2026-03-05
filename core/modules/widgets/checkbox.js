@@ -36,6 +36,12 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.labelDomNode.setAttribute("class","tc-checkbox " + this.checkboxClass);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","checkbox");
+	// Wikitext inline checkboxes parsed in macro expansion context have no
+	// sourceTitle on the AST node and must be read-only to prevent corrupting
+	// the parent tiddler with wrong byte offsets.
+	if(this.isWikitextCheckbox && !this.checkboxSourceTitle) {
+		this.inputDomNode.setAttribute("disabled",true);
+	}
 	isChecked = this.getValue();
 	if(isChecked) {
 		this.inputDomNode.setAttribute("checked","true");
@@ -334,11 +340,15 @@ CheckboxWidget.prototype.execute = function() {
 	// Wikitext inline checkbox mode: the parse tree node has a boolean `checked`
 	// property (set by the checkbox wikiparser rule) AND numeric `start`/`end`
 	// offsets into the source text. Regular <$checkbox> widgets do not have these.
-	// The source tiddler title is inherited via the "sourceTitle" variable
-	// set by the transclude widget (or makeWidget call chain).
+	// sourceTitle is stored on the node by the parser rule only when parsing a
+	// real tiddler (via parseTiddler / parseText with sourceTitle). When checkboxes
+	// are produced by macro expansion the parser has no sourceTitle, so the node
+	// has no sourceTitle and the widget disables itself.
 	this.isWikitextCheckbox = this.parseTreeNode.checked !== undefined
 		&& typeof this.parseTreeNode.start === "number";
-	this.checkboxSourceTitle = this.isWikitextCheckbox ? this.getVariable("sourceTitle") : undefined;
+	this.checkboxSourceTitle = this.isWikitextCheckbox
+		? this.parseTreeNode.sourceTitle
+		: undefined;
 	// Make the child widgets
 	this.makeChildWidgets();
 };

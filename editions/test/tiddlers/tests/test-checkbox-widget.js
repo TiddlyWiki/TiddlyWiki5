@@ -593,19 +593,19 @@ describe("Checkbox widget", function() {
 
 	describe("Wikitext inline checkbox", function() {
 
-		it("parseTiddler sets sourceTitle variable so clicking modifies the tiddler's own text", function() {
+		it("parseTiddler sets sourceTitle on AST node so clicking modifies the tiddler's own text", function() {
 			var wiki = new $tw.Wiki();
 			wiki.addTiddler({title: "DirectTasks", text: "* [ ] Direct task"});
 
-			// Render through wiki.makeWidget which propagates sourceTitle from the parser
 			var parser = wiki.parseTiddler("DirectTasks");
 			var widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
 			widgetNode.render($tw.fakeDocument.createElement("div"), null);
 
 			var checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(1);
-			// sourceTitle is now a widget variable, not a parseTreeNode property
-			expect(checkboxes[0].getVariable("sourceTitle")).toBe("DirectTasks");
+			// sourceTitle is on the AST node (co-located with start/end offsets)
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("DirectTasks");
+			expect(checkboxes[0].checkboxSourceTitle).toBe("DirectTasks");
 			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
 			expect(checkboxes[0].getValue()).toBe(false);
 
@@ -625,8 +625,9 @@ describe("Checkbox widget", function() {
 
 			var checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(1);
-			// sourceTitle variable must point to SourceTasks, NOT Container
-			expect(checkboxes[0].getVariable("sourceTitle")).toBe("SourceTasks");
+			// sourceTitle is on the AST node of the checkbox from SourceTasks
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("SourceTasks");
+			expect(checkboxes[0].checkboxSourceTitle).toBe("SourceTasks");
 
 			clickCheckbox(checkboxes[0],true);
 
@@ -652,9 +653,10 @@ describe("Checkbox widget", function() {
 			var checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(3);
 
-			// State comes from parseTreeNode.checked, sourceTitle from variable
+			// State comes from parseTreeNode.checked, sourceTitle from the AST node
 			expect(checkboxes[0].getValue()).toBe(false);
-			expect(checkboxes[0].getVariable("sourceTitle")).toBe("MyTasks");
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("MyTasks");
+			expect(checkboxes[0].checkboxSourceTitle).toBe("MyTasks");
 			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
 			expect(checkboxes[1].parseTreeNode.checked).toBe(true);
 			expect(checkboxes[2].parseTreeNode.checked).toBe(true);
@@ -722,6 +724,27 @@ describe("Checkbox widget", function() {
 			// Check the middle one only
 			clickCheckbox(checkboxes[1],true);
 			expect(wiki.getTiddler("ThreeTasks").fields.text).toBe("[ ] A\n[x] B\n[ ] C\n");
+		});
+
+		it("checkboxes parsed without a sourceTitle (macro expansion context) have no sourceTitle and are disabled", function() {
+			// This tests the core safety invariant: start/end offsets must come
+			// from the same parse context as sourceTitle.  When text is parsed
+			// without a sourceTitle (as macro expansion does), the resulting
+			// checkboxes must be disabled so they cannot corrupt any tiddler.
+			var wiki = new $tw.Wiki();
+			// Parse text WITHOUT sourceTitle — this is what macro expansion does
+			var parser = wiki.parseText("text/vnd.tiddlywiki","* [ ] Buy milk\n* [x] Write code",{});
+			var widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
+			widgetNode.render($tw.fakeDocument.createElement("div"),null);
+
+			var checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(2);
+			// No sourceTitle on the AST node — parsed without a tiddler context
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
+			expect(checkboxes[0].checkboxSourceTitle).toBeUndefined();
+			// The input must be disabled to prevent corrupting any tiddler
+			expect(checkboxes[0].inputDomNode.getAttribute("disabled")).toBeTruthy();
+			expect(checkboxes[1].inputDomNode.getAttribute("disabled")).toBeTruthy();
 		});
 
 	});

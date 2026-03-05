@@ -1,12 +1,12 @@
 caption: wikitext inline
 created: 20260306000000000
 description: tab
-modified: 20260305194353563
+modified: 20260306000000000
 tags: CheckboxWidget
 title: CheckboxWidget (wikitext Mode)
 type: text/vnd.tiddlywiki
 
-!![x]kitext Inlin[ ]ode
+!! Wikitext Inline Mode
 
 <<.from-version "5.5.0">>
 
@@ -19,6 +19,8 @@ TiddlyWiki supports an inline checkbox syntax directly in wikitext, similar to G
 ```
 
 When rendered, each `[ ]`/`[x]`/`[X]` becomes an interactive checkbox. Clicking it directly modifies the `text` field of the //source tiddler// — the tiddler whose wikitext was parsed — replacing the checkbox syntax in-place.
+
+''Note:'' Checkboxes that appear inside macro-expanded output (such as in documentation examples) are automatically rendered as //disabled// (read-only). Only checkboxes parsed directly from a tiddler's own `text` field are interactive.
 
 !!! Behaviour inside transclusions
 
@@ -39,7 +41,7 @@ Bullet list items whose first element is a checkbox will have their list marker 
 
 !!! Filter operator
 
-The [[checkbox Operator]] can be used to find tiddlers by checkbox state:
+The [[checkbox Operator]] can be used to find tiddlers by checkbox state. See [[checkbox Operator]] for full details.
 
 ```
 [all[tiddlers]checkbox[unchecked]]
@@ -47,7 +49,15 @@ The [[checkbox Operator]] can be used to find tiddlers by checkbox state:
 
 Returns all tiddlers that have at least one unchecked checkbox.
 
+```
+[all[tiddlers]checkbox:text[unchecked]]
+```
+
+Returns the text of every unchecked checkbox item across all tiddlers.
+
 !!! Example
+
+The checkboxes below are rendered from the example source text shown. Because they are rendered via macro expansion (not from a real tiddler), they appear disabled (read-only).
 
 <<wikitext-example-without-html """* [ ] Buy milk
 * [x] Write code
