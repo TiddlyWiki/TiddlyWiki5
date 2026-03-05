@@ -3,8 +3,8 @@ colors: red orange yellow blue
 created: 20131024141900000
 fruits: bananas oranges grapes
 list: [[CheckboxWidget (tag Mode)]] [[CheckboxWidget (field Mode)]] [[CheckboxWidget (listField Mode)]] [[CheckboxWidget (index Mode)]] [[CheckboxWidget (listIndex Mode)]] [[CheckboxWidget (filter Mode)]] [[CheckboxWidget (indeterminate)]] [[CheckboxWidget (wikitext Mode)]]
-modified: 20231113093304323
-tags: Widgets TriggeringWidgets
+modified: 20260305194333709
+tags: Widgets TriggeringWidgets done
 title: CheckboxWidget
 type: text/vnd.tiddlywiki
 vegetables: carrots potatoes

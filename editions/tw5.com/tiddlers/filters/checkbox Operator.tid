@@ -3,24 +3,39 @@ created: 20260306000000000
 modified: 20260306000000000
 op-input: a [[selection of titles|Title Selection]]
 op-neg-output: those input tiddlers that do <<.em not>> match the operand condition
-op-output: those input titles that match the operand condition
+op-output: those input titles (or checkbox texts when using the <<.place :text>> suffix) that match the operand condition
 op-parameter: one of: (empty), <<.value checked>>, <<.value unchecked>>
 op-parameter-name: C
-op-purpose: filter the input titles by the presence of wikitext checkboxes in their text field
+op-purpose: filter the input titles by the presence of wikitext checkboxes, or extract checkbox item text
 tags: [[Filter Operators]] [[Negatable Operators]]
 title: checkbox Operator
 type: text/vnd.tiddlywiki
 
 <<.from-version "5.5.0">>
 
-The <<.op checkbox>> operator filters tiddlers based on whether their `text` field contains wikitext checkbox syntax (`[ ]`, `[x]`, or `[X]`).
+The <<.op checkbox>> operator works in two modes depending on the optional suffix.
+
+!! Title-returning mode (no suffix)
+
+Returns tiddler titles from the input that contain wikitext checkbox syntax (`[ ]`, `[x]`, or `[X]`).
 
 |!Operand |!Meaning |
 |''(empty)'' |at least one checkbox of any state |
 |`checked` |at least one checked checkbox (`[x]` or `[X]`) |
 |`unchecked` |at least one unchecked checkbox (`[ ]`) |
 
-''Note:'' The operator scans the raw wikitext using a regular expression. It does //not// do a full wikitext parse, so checkboxes inside code blocks or comments will also be matched.
+The negated form (`[!checkbox[...]]`) returns titles with //no// matching checkboxes.
+
+!! Text-extracting mode (`:text` suffix)
+
+`[checkbox:text[checked]]` — instead of returning tiddler titles, returns the text content of each matching checkbox item (everything after the `[ ]`/`[x]`/`[X]` marker on the same line), one result per checkbox item across all input tiddlers.
+
+|!Usage |!Returns |
+|`[checkbox:text[]]` |text of every checkbox item (any state) |
+|`[checkbox:text[checked]]` |text of every checked checkbox item |
+|`[checkbox:text[unchecked]]` |text of every unchecked checkbox item |
+
+''Note:'' Both modes scan the raw wikitext and will also match checkboxes inside code blocks or comments.
 
 ! Examples
 
@@ -38,5 +53,10 @@ Returns all tiddlers that have at least one unchecked task.
 [all[tiddlers]!checkbox[]]
 ```
 Returns all tiddlers that have no checkboxes at all.
+
+```
+[all[tiddlers]checkbox:text[unchecked]]
+```
+Returns the text of every unchecked task item across all tiddlers.
 
 <<.operator-examples "checkbox">>

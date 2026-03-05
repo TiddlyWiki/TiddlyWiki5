@@ -1,11 +1,12 @@
 caption: wikitext inline
 created: 20260306000000000
 description: tab
-modified: 20260306000000000
+modified: 20260305194353563
 tags: CheckboxWidget
 title: CheckboxWidget (wikitext Mode)
+type: text/vnd.tiddlywiki
 
-!! Wikitext Inline Mode
+!![x]kitext Inlin[ ]ode
 
 <<.from-version "5.5.0">>
 

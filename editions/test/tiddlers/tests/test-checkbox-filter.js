@@ -87,6 +87,51 @@ describe("Checkbox filter operator", function() {
 			expect(result).toEqual([]);
 		});
 
+		// ── :text suffix tests ───────────────────────────────────────────────
+
+		it("checkbox:text[] returns the text of every checkbox item", function() {
+			var w = new $tw.Wiki();
+			w.addTiddler({title: "Tasks", text: "* [ ] Buy milk\n* [x] Write code\n* [ ] Ship feature"});
+			var result = w.filterTiddlers("[all[tiddlers]checkbox:text[]]").sort();
+			expect(result).toEqual(["Buy milk","Ship feature","Write code"].sort());
+		});
+
+		it("checkbox:text[checked] returns text of checked items only", function() {
+			var w = new $tw.Wiki();
+			w.addTiddler({title: "Tasks", text: "* [ ] Buy milk\n* [x] Write code\n* [X] Also done"});
+			var result = w.filterTiddlers("[all[tiddlers]checkbox:text[checked]]").sort();
+			expect(result).toEqual(["Also done","Write code"].sort());
+		});
+
+		it("checkbox:text[unchecked] returns text of unchecked items only", function() {
+			var w = new $tw.Wiki();
+			w.addTiddler({title: "Tasks", text: "* [ ] Buy milk\n* [x] Write code\n* [ ] Ship feature"});
+			var result = w.filterTiddlers("[all[tiddlers]checkbox:text[unchecked]]").sort();
+			expect(result).toEqual(["Buy milk","Ship feature"].sort());
+		});
+
+		it("checkbox:text[] returns items from multiple tiddlers flattened", function() {
+			var w = new $tw.Wiki();
+			w.addTiddler({title: "Work",  text: "[ ] Review PR"});
+			w.addTiddler({title: "Home",  text: "[ ] Buy groceries"});
+			var result = w.filterTiddlers("[all[tiddlers]checkbox:text[unchecked]]").sort();
+			expect(result).toEqual(["Buy groceries","Review PR"].sort());
+		});
+
+		it("checkbox:text[] strips leading/trailing whitespace from item text", function() {
+			var w = new $tw.Wiki();
+			w.addTiddler({title: "T", text: "[ ]   Spaced item   "});
+			var result = w.filterTiddlers("[all[tiddlers]checkbox:text[]]");
+			expect(result).toEqual(["Spaced item"]);
+		});
+
+		it("checkbox:text[] returns empty array when there are no matching checkboxes", function() {
+			var w = new $tw.Wiki();
+			w.addTiddler({title: "T", text: "[x] Done"});
+			var result = w.filterTiddlers("[all[tiddlers]checkbox:text[unchecked]]");
+			expect(result).toEqual([]);
+		});
+
 		it("index is updated when a tiddler is modified", function() {
 			// Start with an unchecked checkbox
 			wiki.addTiddler({title: "MutableTask", text: "[ ] pending"});
