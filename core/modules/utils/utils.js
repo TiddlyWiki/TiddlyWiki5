@@ -962,6 +962,16 @@ exports.makeCompareFunction = function(type,options) {
 	return (types[type] || types[options.defaultType] || types.number);
 };
 
+// Parse https://tc39.es/ecma262/#sec-date-time-string-format
+const dateValidator = new RegExp("^(\\d{4}(-\\d{2}){0,2})?((^|T)\\d{2}:\\d{2}(:\\d{2}(\\.\\d{3})?)?(Z|([+-]\\d{2}:\\d{2}))?)?$");
+exports.parseECMAScriptDate = function(input) {
+	if(dateValidator.test(input)) {
+		return new Date(input);
+	} else {
+		return false;
+	}
+};
+
 /*
 Split text into parts (lines or words) for diff operations
 Adapted from https://github.com/google/diff-match-patch/wiki/Line-or-Word-Diffs
