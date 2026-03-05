@@ -48,6 +48,13 @@ describe("Checkbox widget", function() {
 		return results;
 	}
 
+	// Simulate a user clicking a wikitext inline checkbox widget.
+	// Sets the DOM property and fires the change event, mirroring what the browser does.
+	function clickCheckbox(checkbox, checked) {
+		checkbox.inputDomNode.checked = checked;
+		checkbox.handleChangeEvent({});
+	}
+
 	// Find a particular type of node from inside the widget tree
 	// Less brittle than wrapper.children[0].children[0] if the parse
 	// tree ever changes in the future
@@ -601,8 +608,7 @@ describe("Checkbox widget", function() {
 			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
 			expect(checkboxes[0].getValue()).toBe(false);
 
-			checkboxes[0].inputDomNode.checked = true;
-			checkboxes[0].handleChangeEvent({});
+			clickCheckbox(checkboxes[0],true);
 
 			expect(wiki.getTiddler("DirectTasks").fields.text).toBe("* [x] Direct task");
 		});
@@ -621,8 +627,7 @@ describe("Checkbox widget", function() {
 			// Must point to SourceTasks, NOT Container
 			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("SourceTasks");
 
-			checkboxes[0].inputDomNode.checked = true;
-			checkboxes[0].handleChangeEvent({});
+			clickCheckbox(checkboxes[0],true);
 
 			// SourceTasks is updated
 			expect(wiki.getTiddler("SourceTasks").fields.text).toBe("* [x] Source task");
@@ -654,15 +659,13 @@ describe("Checkbox widget", function() {
 			expect(checkboxes[2].parseTreeNode.checked).toBe(true);
 
 			// Simulate checking the first checkbox
-			checkboxes[0].inputDomNode.checked = true;
-			checkboxes[0].handleChangeEvent({});
+			clickCheckbox(checkboxes[0],true);
 
 			var myTasks = wiki.getTiddler("MyTasks");
 			expect(myTasks.fields.text).toBe("Here are my tasks:\n\n* [x] Task 1\n* [x] Task 2\n* [X] Task 3\n");
 
 			// Simulate unchecking the third checkbox
-			checkboxes[2].inputDomNode.checked = false;
-			checkboxes[2].handleChangeEvent({});
+			clickCheckbox(checkboxes[2],false);
 
 			myTasks = wiki.getTiddler("MyTasks");
 			expect(myTasks.fields.text).toBe("Here are my tasks:\n\n* [x] Task 1\n* [x] Task 2\n* [ ] Task 3\n");
@@ -683,8 +686,7 @@ describe("Checkbox widget", function() {
 			expect(checkboxes[2].parseTreeNode.checked).toBe(true);
 
 			// Click the second checkbox; only it should change
-			checkboxes[1].inputDomNode.checked = true;
-			checkboxes[1].handleChangeEvent({});
+			clickCheckbox(checkboxes[1],true);
 
 			expect(wiki.getTiddler("MultiCheck").fields.text).toBe("[ ] First [x] Second [x] Third");
 		});
@@ -700,8 +702,7 @@ describe("Checkbox widget", function() {
 			var checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(2);
 
-			checkboxes[0].inputDomNode.checked = true;
-			checkboxes[0].handleChangeEvent({});
+			clickCheckbox(checkboxes[0],true);
 			expect(wiki.getTiddler("NumberedTasks").fields.text).toBe("# [x] Step 1\n# [x] Step 2\n");
 		});
 
@@ -718,8 +719,7 @@ describe("Checkbox widget", function() {
 			expect(checkboxes.length).toBe(3);
 
 			// Check the middle one only
-			checkboxes[1].inputDomNode.checked = true;
-			checkboxes[1].handleChangeEvent({});
+			clickCheckbox(checkboxes[1],true);
 			expect(wiki.getTiddler("ThreeTasks").fields.text).toBe("[ ] A\n[x] B\n[ ] C\n");
 		});
 
