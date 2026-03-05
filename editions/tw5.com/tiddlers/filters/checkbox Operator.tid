@@ -1,0 +1,42 @@
+caption: checkbox
+created: 20260306000000000
+modified: 20260306000000000
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: those input tiddlers that do <<.em not>> match the operand condition
+op-output: those input titles that match the operand condition
+op-parameter: one of: (empty), <<.value checked>>, <<.value unchecked>>
+op-parameter-name: C
+op-purpose: filter the input titles by the presence of wikitext checkboxes in their text field
+tags: [[Filter Operators]] [[Negatable Operators]]
+title: checkbox Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.4.0">>
+
+The <<.op checkbox>> operator filters tiddlers based on whether their `text` field contains wikitext checkbox syntax (`[ ]`, `[x]`, or `[X]`).
+
+|!Operand |!Meaning |
+|''(empty)'' |at least one checkbox of any state |
+|`checked` |at least one checked checkbox (`[x]` or `[X]`) |
+|`unchecked` |at least one unchecked checkbox (`[ ]`) |
+
+''Note:'' The operator scans the raw wikitext using a regular expression. It does //not// do a full wikitext parse, so checkboxes inside code blocks or comments will also be matched.
+
+! Examples
+
+```
+[all[tiddlers]checkbox[]]
+```
+Returns all tiddlers that contain any checkbox.
+
+```
+[all[tiddlers]checkbox[unchecked]]
+```
+Returns all tiddlers that have at least one unchecked task.
+
+```
+[all[tiddlers]!checkbox[]]
+```
+Returns all tiddlers that have no checkboxes at all.
+
+<<.operator-examples "checkbox">>

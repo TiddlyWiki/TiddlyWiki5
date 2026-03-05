@@ -1035,7 +1035,9 @@ exports.parseText = function(type,text,options) {
 		parseAsInline: options.parseAsInline,
 		wiki: this,
 		_canonical_uri: options._canonical_uri,
-		configTrimWhiteSpace: options.configTrimWhiteSpace
+		configTrimWhiteSpace: options.configTrimWhiteSpace,
+		sourceTitle: options.sourceTitle,
+		rules: options.rules
 	});
 };
 
@@ -1051,7 +1053,8 @@ exports.parseTiddler = function(title,options) {
 		if(tiddler.hasField("_canonical_uri")) {
 			options._canonical_uri = tiddler.fields._canonical_uri;
 		}
-		return self.parseText(tiddler.fields.type,tiddler.fields.text,options);
+		var parseOptions = $tw.utils.extend({},options,{sourceTitle: title});
+		return self.parseText(tiddler.fields.type,tiddler.fields.text,parseOptions);
 	}) : null;
 };
 

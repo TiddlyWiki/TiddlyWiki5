@@ -35,6 +35,19 @@ describe("Checkbox widget", function() {
 		return wrapper;
 	}
 
+	// Recursively collect all checkbox widget nodes in a subtree.
+	// Used by the wikitext inline checkbox tests.
+	function findCheckboxes(widgetNode) {
+		var results = [];
+		if(widgetNode.parseTreeNode.type === "checkbox") {
+			results.push(widgetNode);
+		}
+		for(var i = 0; i < widgetNode.children.length; i++) {
+			results = results.concat(findCheckboxes(widgetNode.children[i]));
+		}
+		return results;
+	}
+
 	// Find a particular type of node from inside the widget tree
 	// Less brittle than wrapper.children[0].children[0] if the parse
 	// tree ever changes in the future
@@ -570,7 +583,146 @@ describe("Checkbox widget", function() {
 			}
 		});
 	});
-    
+
+	describe("Wikitext inline checkbox", function() {
+
+		it("parseTiddler sets sourceTitle so clicking modifies the tiddler's own text", function() {
+			var wiki = new $tw.Wiki();
+			wiki.addTiddler({title: "DirectTasks", text: "* [ ] Direct task"});
+
+			// Render by going through parseTiddler (the direct path)
+			var parser = wiki.parseTiddler("DirectTasks");
+			var widgetNode = createWidgetNode({type: "widget", children: parser.tree}, wiki);
+			widgetNode.render($tw.fakeDocument.createElement("div"), null);
+
+			var checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(1);
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("DirectTasks");
+			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
+			expect(checkboxes[0].getValue()).toBe(false);
+
+			checkboxes[0].inputDomNode.checked = true;
+			checkboxes[0].handleChangeEvent({});
+
+			expect(wiki.getTiddler("DirectTasks").fields.text).toBe("* [x] Direct task");
+		});
+
+		it("clicking a checkbox inside {{transclusion}} modifies the SOURCE tiddler, not the host", function() {
+			var wiki = new $tw.Wiki();
+			wiki.addTiddler({title: "SourceTasks", text: "* [ ] Source task"});
+			wiki.addTiddler({title: "Container",   text: "Container intro\n\n{{SourceTasks}}"});
+
+			var parser = wiki.parseTiddler("Container");
+			var widgetNode = createWidgetNode({type: "widget", children: parser.tree}, wiki);
+			widgetNode.render($tw.fakeDocument.createElement("div"), null);
+
+			var checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(1);
+			// Must point to SourceTasks, NOT Container
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("SourceTasks");
+
+			checkboxes[0].inputDomNode.checked = true;
+			checkboxes[0].handleChangeEvent({});
+
+			// SourceTasks is updated
+			expect(wiki.getTiddler("SourceTasks").fields.text).toBe("* [x] Source task");
+			// Container is untouched
+			expect(wiki.getTiddler("Container").fields.text).toBe("Container intro\n\n{{SourceTasks}}");
+		});
+
+		it("should render inline checkboxes and modify the source wikitext text field when changed", function() {
+			var wiki = new $tw.Wiki();
+
+			// Add a source tiddler with inline checkboxes
+			wiki.addTiddler({
+				title: "MyTasks",
+				text: "Here are my tasks:\n\n* [ ] Task 1\n* [x] Task 2\n* [X] Task 3\n"
+			});
+
+			// Render via transclusion so that sourceTitle is propagated through parseTiddler
+			var widgetNode = createWidgetNode(parseText("{{MyTasks}}",wiki),wiki);
+			widgetNode.render($tw.fakeDocument.createElement("div"),null);
+
+			var checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(3);
+
+			// State comes from parseTreeNode, not from widget attributes
+			expect(checkboxes[0].getValue()).toBe(false);
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("MyTasks");
+			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
+			expect(checkboxes[1].parseTreeNode.checked).toBe(true);
+			expect(checkboxes[2].parseTreeNode.checked).toBe(true);
+
+			// Simulate checking the first checkbox
+			checkboxes[0].inputDomNode.checked = true;
+			checkboxes[0].handleChangeEvent({});
+
+			var myTasks = wiki.getTiddler("MyTasks");
+			expect(myTasks.fields.text).toBe("Here are my tasks:\n\n* [x] Task 1\n* [x] Task 2\n* [X] Task 3\n");
+
+			// Simulate unchecking the third checkbox
+			checkboxes[2].inputDomNode.checked = false;
+			checkboxes[2].handleChangeEvent({});
+
+			myTasks = wiki.getTiddler("MyTasks");
+			expect(myTasks.fields.text).toBe("Here are my tasks:\n\n* [x] Task 1\n* [x] Task 2\n* [ ] Task 3\n");
+		});
+
+		it("handles multiple checkboxes on the same line independently", function() {
+			var wiki = new $tw.Wiki();
+			wiki.addTiddler({title: "MultiCheck", text: "[ ] First [ ] Second [x] Third"});
+
+			var parser = wiki.parseTiddler("MultiCheck");
+			var widgetNode = createWidgetNode({type: "widget", children: parser.tree}, wiki);
+			widgetNode.render($tw.fakeDocument.createElement("div"), null);
+
+			var checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(3);
+			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
+			expect(checkboxes[1].parseTreeNode.checked).toBe(false);
+			expect(checkboxes[2].parseTreeNode.checked).toBe(true);
+
+			// Click the second checkbox; only it should change
+			checkboxes[1].inputDomNode.checked = true;
+			checkboxes[1].handleChangeEvent({});
+
+			expect(wiki.getTiddler("MultiCheck").fields.text).toBe("[ ] First [x] Second [x] Third");
+		});
+
+		it("handles checkboxes in numbered lists", function() {
+			var wiki = new $tw.Wiki();
+			wiki.addTiddler({title: "NumberedTasks", text: "# [ ] Step 1\n# [x] Step 2\n"});
+
+			var parser = wiki.parseTiddler("NumberedTasks");
+			var widgetNode = createWidgetNode({type: "widget", children: parser.tree}, wiki);
+			widgetNode.render($tw.fakeDocument.createElement("div"), null);
+
+			var checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(2);
+
+			checkboxes[0].inputDomNode.checked = true;
+			checkboxes[0].handleChangeEvent({});
+			expect(wiki.getTiddler("NumberedTasks").fields.text).toBe("# [x] Step 1\n# [x] Step 2\n");
+		});
+
+		it("correctly identifies start/end offsets so adjacent checkboxes do not corrupt each other", function() {
+			var wiki = new $tw.Wiki();
+			// All three checkboxes on consecutive lines
+			wiki.addTiddler({title: "ThreeTasks", text: "[ ] A\n[ ] B\n[ ] C\n"});
+
+			var parser = wiki.parseTiddler("ThreeTasks");
+			var widgetNode = createWidgetNode({type: "widget", children: parser.tree}, wiki);
+			widgetNode.render($tw.fakeDocument.createElement("div"), null);
+
+			var checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(3);
+
+			// Check the middle one only
+			checkboxes[1].inputDomNode.checked = true;
+			checkboxes[1].handleChangeEvent({});
+			expect(wiki.getTiddler("ThreeTasks").fields.text).toBe("[ ] A\n[x] B\n[ ] C\n");
+		});
+
+	});
+
 });
-    
-    

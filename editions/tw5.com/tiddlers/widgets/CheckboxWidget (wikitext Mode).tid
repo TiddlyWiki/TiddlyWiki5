@@ -1,0 +1,53 @@
+caption: wikitext inline
+created: 20260306000000000
+description: tab
+modified: 20260306000000000
+tags: CheckboxWidget
+title: CheckboxWidget (wikitext Mode)
+
+!! Wikitext Inline Mode
+
+<<.from-version "5.4.0">>
+
+TiddlyWiki supports an inline checkbox syntax directly in wikitext, similar to GitHub Flavored Markdown:
+
+```
+[ ] Unchecked task
+[x] Checked task
+[X] Also checked (uppercase X)
+```
+
+When rendered, each `[ ]`/`[x]`/`[X]` becomes an interactive checkbox. Clicking it directly modifies the `text` field of the //source tiddler// — the tiddler whose wikitext was parsed — replacing the checkbox syntax in-place.
+
+!!! Behaviour inside transclusions
+
+When a tiddler containing inline checkboxes is transcluded with `{{OtherTiddler}}`, clicking a checkbox will update //OtherTiddler//, not the tiddler that contains the transclusion. This is the correct behaviour: the source of truth is always the tiddler that owns the text.
+
+!!! Combining with list syntax
+
+Inline checkboxes integrate naturally with the TiddlyWiki list syntax:
+
+```
+* [ ] Bullet list item
+* [x] Done
+# [ ] Numbered item
+** [ ] Nested item
+```
+
+Bullet list items whose first element is a checkbox will have their list marker hidden via CSS, producing a clean task-list appearance.
+
+!!! Filter operator
+
+The [[checkbox Operator]] can be used to find tiddlers by checkbox state:
+
+```
+[all[tiddlers]checkbox[unchecked]]
+```
+
+Returns all tiddlers that have at least one unchecked checkbox.
+
+!!! Example
+
+<<wikitext-example-without-html """* [ ] Buy milk
+* [x] Write code
+* [ ] Ship feature""">>

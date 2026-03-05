@@ -2,7 +2,7 @@ caption: checkbox
 colors: red orange yellow blue
 created: 20131024141900000
 fruits: bananas oranges grapes
-list: [[CheckboxWidget (tag Mode)]] [[CheckboxWidget (field Mode)]] [[CheckboxWidget (listField Mode)]] [[CheckboxWidget (index Mode)]] [[CheckboxWidget (listIndex Mode)]] [[CheckboxWidget (filter Mode)]] [[CheckboxWidget (indeterminate)]]
+list: [[CheckboxWidget (tag Mode)]] [[CheckboxWidget (field Mode)]] [[CheckboxWidget (listField Mode)]] [[CheckboxWidget (index Mode)]] [[CheckboxWidget (listIndex Mode)]] [[CheckboxWidget (filter Mode)]] [[CheckboxWidget (indeterminate)]] [[CheckboxWidget (wikitext Mode)]]
 modified: 20231113093304323
 tags: Widgets TriggeringWidgets
 title: CheckboxWidget

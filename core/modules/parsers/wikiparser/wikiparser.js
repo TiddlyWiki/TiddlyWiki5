@@ -47,6 +47,7 @@ var WikiParser = function(type,text,options) {
 	this.configTrimWhiteSpace = options.configTrimWhiteSpace !== undefined ? options.configTrimWhiteSpace : false;
 	// Parser mode
 	this.parseAsInline = options.parseAsInline;
+	this.sourceTitle = options.sourceTitle;
 	// Set current parse position
 	this.pos = 0;
 	// Start with empty output
