@@ -1,7 +1,0 @@
-title: $:/plugins/tiddlywiki/codemirror-6-theme-monokai/license
-
-\define theme-name() Monokai
-\define theme-url() https://monokai.pro
-\define theme-author() Wimer Hazenberg
-
-{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}

@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6",
   "name": "CodeMirror 6",
   "description": "CodeMirror 6 text editor with features and language support for TiddlyWiki5",
-  "version": "0.0.37",
+  "version": "0.1.0",
   "plugin-type": "plugin",
   "dependents": "",
   "list": "readme license",

@@ -2,7 +2,7 @@
   "title": "$:/plugins/tiddlywiki/codemirror-6-lang-php",
   "name": "CodeMirror 6 PHP Language",
   "description": "PHP syntax highlighting for CodeMirror 6",
-  "version": "0.0.37",
+  "version": "0.1.0",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme license",

@@ -1,7 +1,0 @@
-title: $:/plugins/tiddlywiki/codemirror-6-theme-dracula/license
-
-\define theme-name() Dracula Theme
-\define theme-url() https://draculatheme.com
-\define theme-author() Zeno Rocha
-
-{{$:/plugins/tiddlywiki/codemirror-6/licenses/theme-template}}
