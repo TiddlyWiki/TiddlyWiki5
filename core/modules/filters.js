@@ -34,11 +34,10 @@ function parseFilterOperation(operators,filterString,p,operation) {
 		operator = {};
 		// Check for an operator prefix
 		if(filterString.charAt(p) === "!") {
-			operator.prefixPos = p;
 			operator.prefix = filterString.charAt(p++);
 		}
 		// Get the operator name
-		operator.nameStart = p;
+		operator.start = p;
 		nextBracketPos = filterString.substring(p).search(/[\[\{<\/\(]/);
 		if(nextBracketPos === -1) {
 			throw "Missing [ in filter expression";
@@ -49,9 +48,7 @@ function parseFilterOperation(operators,filterString,p,operation) {
 		// Any suffix?
 		var colon = operator.operator.indexOf(':');
 		if(colon > -1) {
-			operator.nameEnd = p + colon;
 			operator.suffixStart = p + colon;
-			operator.suffixEnd = nextBracketPos;
 			// The raw suffix for older filters
 			operator.suffix = operator.operator.substring(colon + 1);
 			operator.operator = operator.operator.substring(0,colon) || "field";
@@ -69,16 +66,12 @@ function parseFilterOperation(operators,filterString,p,operation) {
 		}
 		// Empty operator means: title
 		else if(operator.operator === "") {
-			operator.nameEnd = p;
 			operator.operator = "title";
-		} else {
-			operator.nameEnd = nextBracketPos;
 		}
 		operator.operands = [];
 		var parseOperand = function(bracketType) {
 			var operand = {};
-			operand.bracketStart = p - 1;
-			operand.textStart = p;
+			operand.start = p - 1;
 			switch (bracketType) {
 				case "{": // Curly brackets
 					operand.indirect = true;
@@ -118,8 +111,6 @@ function parseFilterOperation(operators,filterString,p,operation) {
 			} else {
 				operand.text = filterString.substring(p,nextBracketPos);
 			}
-			operand.textEnd = nextBracketPos;
-			operand.bracketEnd = nextBracketPos;
 			operator.operands.push(operand);
 			p = nextBracketPos + 1;
 		}
@@ -223,16 +214,10 @@ exports.parseFilter = function(filterString) {
 			if(match[5] || match[6] || match[7]) { // Double quoted string, single quoted string or unquoted title
 				var titleText = match[5] || match[6] || match[7];
 				var contentStart = match.index + (match[1] ? match[1].length : 0);
-				var quoteChar = match[5] !== undefined ? '"' : (match[6] !== undefined ? "'" : null);
 				var titleOperand = {
 					text: titleText,
-					textStart: quoteChar ? contentStart + 1 : contentStart,
-					textEnd: quoteChar ? contentStart + 1 + titleText.length : contentStart + titleText.length
+					start: contentStart
 				};
-				if(quoteChar) {
-					titleOperand.bracketStart = contentStart;
-					titleOperand.bracketEnd = titleOperand.textEnd;
-				}
 				operation.operators.push(
 					{operator: "title", operands: [titleOperand]}
 				);
@@ -648,30 +633,34 @@ exports.parseFilterToDebugTable = function(filterString) {
 			var operatorRows = [];
 			for(var j = 0; j < operation.operators.length; j++) {
 				var op = operation.operators[j];
+				// Derive nameEnd: suffixStart if suffixes exist, else first operand's start
+				var nameEnd = op.suffixStart !== undefined ? op.suffixStart : op.operands[0].start;
 				// Negation prefix
 				if(op.prefix === "!") {
 					operatorRows.push({
-						line: placeText(op.prefixPos,"!"),
+						line: placeText(op.start - 1,"!"),
 						description: "Negation: the result of the \"" + op.operator + "\" operator will be inverted"
 					});
 				}
 				// Operator name
-				if(op.nameStart < op.nameEnd) {
+				if(op.start < nameEnd) {
 					operatorRows.push({
-						line: placeText(op.nameStart,filterString.substring(op.nameStart,op.nameEnd)),
+						line: placeText(op.start,filterString.substring(op.start,nameEnd)),
 						description: "\"" + op.operator + "\" operator"
 					});
 				}
 				// Suffixes
 				if(op.suffixStart !== undefined) {
+					var suffixEnd = op.operands[0].start;
 					operatorRows.push({
-						line: placeText(op.suffixStart,filterString.substring(op.suffixStart,op.suffixEnd)),
+						line: placeText(op.suffixStart,filterString.substring(op.suffixStart,suffixEnd)),
 						description: "Suffix for the \"" + op.operator + "\" operator"
 					});
 				}
 				// Operands
 				for(var k = 0; k < op.operands.length; k++) {
 					var operand = op.operands[k];
+					var bracketEnd = operand.start + 1 + operand.text.length;
 					// Bracket type description
 					var bracketDesc;
 					if(operand.indirect) {
@@ -684,11 +673,11 @@ exports.parseFilterToDebugTable = function(filterString) {
 						bracketDesc = "Square brackets means that the operand value is given literally";
 					}
 					operatorRows.push({
-						line: placePair(operand.bracketStart,filterString.charAt(operand.bracketStart),operand.bracketEnd,filterString.charAt(operand.bracketEnd)),
+						line: placePair(operand.start,filterString.charAt(operand.start),bracketEnd,filterString.charAt(bracketEnd)),
 						description: bracketDesc
 					});
 					// Operand text
-					if(operand.textStart < operand.textEnd) {
+					if(operand.text.length > 0) {
 						var operandDesc;
 						if(operand.indirect) {
 							operandDesc = "Title of the tiddler containing the operand value for the \"" + op.operator + "\" operator";
@@ -698,7 +687,7 @@ exports.parseFilterToDebugTable = function(filterString) {
 							operandDesc = "\"" + operand.text + "\" operand for the \"" + op.operator + "\" operator";
 						}
 						operatorRows.push({
-							line: placeText(operand.textStart,operand.text),
+							line: placeText(operand.start + 1,operand.text),
 							description: operandDesc
 						});
 					}
@@ -717,23 +706,27 @@ exports.parseFilterToDebugTable = function(filterString) {
 			var titleOp = operation.operators[0];
 			if(titleOp && titleOp.operands.length > 0) {
 				var titleOperand = titleOp.operands[0];
-				if(titleOperand.bracketStart !== undefined) {
+				if(titleOperand.start === undefined) {
+					continue;
+				}
+				var startChar = filterString.charAt(titleOperand.start);
+				if(startChar === "\"" || startChar === "'") {
 					// Quoted title
-					var quoteChar = filterString.charAt(titleOperand.bracketStart);
+					var closingQuotePos = titleOperand.start + 1 + titleOperand.text.length;
 					rows.push({
-						line: placePair(titleOperand.bracketStart,quoteChar,titleOperand.bracketEnd,quoteChar),
-						description: (quoteChar === "\"" ? "Double" : "Single") + "-quoted title"
+						line: placePair(titleOperand.start,startChar,closingQuotePos,startChar),
+						description: (startChar === "\"" ? "Double" : "Single") + "-quoted title"
 					});
-					if(titleOperand.textStart < titleOperand.textEnd) {
+					if(titleOperand.text.length > 0) {
 						rows.push({
-							line: placeText(titleOperand.textStart,titleOperand.text),
+							line: placeText(titleOperand.start + 1,titleOperand.text),
 							description: "Title: \"" + titleOperand.text + "\""
 						});
 					}
-				} else if(titleOperand.textStart !== undefined) {
+				} else {
 					// Unquoted title
 					rows.push({
-						line: placeText(titleOperand.textStart,titleOperand.text),
+						line: placeText(titleOperand.start,titleOperand.text),
 						description: "Unquoted title: \"" + titleOperand.text + "\""
 					});
 				}
