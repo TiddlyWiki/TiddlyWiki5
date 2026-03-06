@@ -298,8 +298,8 @@ JsonTreeWidget.prototype.createExportButton = function() {
 };
 
 JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
-	var OPEN = "\u25BC";
-	var CLOSED = "\u25B6";
+	var OPEN = "\u2B9F";
+	var CLOSED = "\u2B9E";
 	var lines = [];
 	if(Array.isArray(data)) {
 		var hint = "[...] (" + data.length + " items)";

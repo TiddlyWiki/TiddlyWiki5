@@ -1,0 +1,17 @@
+⮟ [...] (1 items)
+	⮟ {$list ...}
+		"type": "list"
+		"start": 0
+			"attributes": ⮟ {...}
+					"filter": ⮞ {string ...}
+					"variable": ⮞ {string ...}
+			"orderedAttributes": ⮞ [...] (2 items)
+		"tag": "$list"
+		"end": 70
+		"openTagStart": 0
+		"openTagEnd": 40
+		"isBlock": true
+			"children": ⮞ [...] (1 items)
+		"closeTagEnd": 70
+		"closeTagStart": 70
+		"rule": "html"
