@@ -132,6 +132,21 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 		}
 	});
 	var summary = this.document.createElement("summary");
+	summary.addEventListener("click",function(event) {
+		if(event.ctrlKey || event.metaKey) {
+			// After browser toggles the parent, match all children
+			setTimeout(function() {
+				var isOpen = details.open;
+				var childDetails = details.querySelectorAll("details");
+				self._suppressToggleSave = true;
+				for(var i = 0; i < childDetails.length; i++) {
+					childDetails[i].open = isOpen;
+				}
+				self._suppressToggleSave = false;
+				self.batchSaveState();
+			},0);
+		}
+	});
 	if(key !== null) {
 		summary.appendChild(this.createKeySpan(key));
 	}
@@ -327,6 +342,26 @@ JsonTreeWidget.prototype.selectEditorRange = function(start,end) {
 		textarea.focus();
 		textarea.setSelectionRange(start,end);
 	}
+};
+
+JsonTreeWidget.prototype.batchSaveState = function() {
+	var container = this.domNodes[0];
+	if(!container) {
+		return;
+	}
+	var allDetails = container.querySelectorAll("details[data-state-key]");
+	var stateData = {};
+	for(var i = 0; i < allDetails.length; i++) {
+		var key = allDetails[i].getAttribute("data-state-key");
+		if(key !== null && !allDetails[i].open) {
+			stateData[key] = "hide";
+		}
+	}
+	this.wiki.addTiddler(new $tw.Tiddler({
+		title: this.foldState,
+		type: "application/json",
+		text: JSON.stringify(stateData,null,2)
+	}));
 };
 
 JsonTreeWidget.prototype.saveState = function(stateKey,isOpen) {
