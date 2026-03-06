@@ -7,17 +7,4 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9708
 github-contributors: linonetwo
 
-Adds support for the `[ ]` / `[x]` / `[X]` inline checkbox syntax in WikiText, matching the widely-used GitHub Flavoured Markdown convention.
-
-When a tiddler is parsed via `parseTiddler()`, the parser stores the tiddler title on itself (`parser.sourceTitle`). This is then propagated down the widget tree as a `sourceTitle` widget variable — by `wiki.makeWidget()` and by the transclude widget's `execute()`. Each checkbox AST node carries only its `start`/`end` byte offsets (standard AST convention) and a `checked` boolean. Clicking the rendered checkbox splices the corresponding three-character span in the source tiddler's `text` field directly — no separate state tiddler is needed.
-
-Checkboxes work correctly when transcluded: clicking a checkbox inside `{{AnotherTiddler}}` modifies `AnotherTiddler`, not the container, because the transclude widget sets the `sourceTitle` variable to the transcluded tiddler's title.
-
-Also adds the `checkbox` filter operator for querying tiddlers by their checkbox content:
-
-* `[checkbox[]]` — tiddlers containing any checkbox
-* `[checkbox[checked]]` — tiddlers with at least one checked checkbox (`[x]` or `[X]`)
-* `[checkbox[unchecked]]` — tiddlers with at least one unchecked checkbox (`[ ]`)
-* `[!checkbox[...]]` — negated forms of the above
-
-List items whose first inline element is a checkbox have their bullet automatically hidden via CSS.
+Adds support for the `[ ]` / `[x]` / `[X]` inline checkbox syntax in WikiText. Also adds the `checkbox` filter operator for collecting checkboxes across the wiki.

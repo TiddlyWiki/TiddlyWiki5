@@ -4,7 +4,6 @@ description: tab
 modified: 20260306000000000
 tags: CheckboxWidget
 title: CheckboxWidget (wikitext Mode)
-type: text/vnd.tiddlywiki
 
 !! Wikitext Inline Mode
 
@@ -12,15 +11,14 @@ type: text/vnd.tiddlywiki
 
 TiddlyWiki supports an inline checkbox syntax directly in wikitext, similar to GitHub Flavored Markdown:
 
-```
-[ ] Unchecked task
+<<wikitext-example-without-html """[ ] Unchecked task
 [x] Checked task
 [X] Also checked (uppercase X)
-```
+""">>
 
 When rendered, each `[ ]`/`[x]`/`[X]` becomes an interactive checkbox. Clicking it directly modifies the `text` field of the //source tiddler// — the tiddler whose wikitext was parsed — replacing the checkbox syntax in-place.
 
-''Note:'' Checkboxes that appear inside macro-expanded output (such as in documentation examples) are automatically rendered as //disabled// (read-only). Only checkboxes parsed directly from a tiddler's own `text` field are interactive.
+* Checkboxes that appear inside macro-expanded output (such as in documentation examples) are automatically rendered as //disabled// (read-only). Only checkboxes parsed directly from a tiddler's own `text` field are interactive.
 
 !!! Behaviour inside transclusions
 
@@ -30,12 +28,11 @@ When a tiddler containing inline checkboxes is transcluded with `{{OtherTiddler}
 
 Inline checkboxes integrate naturally with the TiddlyWiki list syntax:
 
-```
-* [ ] Bullet list item
+<<wikitext-example-without-html """* [ ] Bullet list item
 * [x] Done
 # [ ] Numbered item
 ** [ ] Nested item
-```
+""">>
 
 Bullet list items whose first element is a checkbox will have their list marker hidden via CSS, producing a clean task-list appearance.
 
@@ -43,17 +40,16 @@ Bullet list items whose first element is a checkbox will have their list marker 
 
 The [[checkbox Operator]] can be used to find tiddlers by checkbox state. See [[checkbox Operator]] for full details.
 
-```
-[all[tiddlers]checkbox[unchecked]]
-```
+<<wikitext-example-without-html """<$list filter="[all[tiddlers]checkbox[unchecked]]}}}">""">>
 
 Returns all tiddlers that have at least one unchecked checkbox.
 
-```
-[all[tiddlers]checkbox:text[unchecked]]
-```
+<<wikitext-example-without-html """<$list filter="[all[tiddlers]checkbox:text[unchecked]]">""">>
 
 Returns the text of every unchecked checkbox item across all tiddlers.
+
+Both forms scan the raw wikitext and will also match checkboxes inside
+code blocks or comments.
 
 !!! Example
 

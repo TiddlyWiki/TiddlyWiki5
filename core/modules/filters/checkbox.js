@@ -3,30 +3,8 @@ title: $:/core/modules/filters/checkbox.js
 type: application/javascript
 module-type: filteroperator
 
-Filter operator for finding tiddlers containing wikitext checkboxes and for
-extracting checkbox item text.
-
-Title-returning forms (default, no suffix):
-  [checkbox[]]          - tiddlers containing any checkbox ([ ], [x], or [X])
-  [checkbox[checked]]   - tiddlers with at least one checked checkbox
-  [checkbox[unchecked]] - tiddlers with at least one unchecked checkbox
-  [!checkbox[...]]      - negated forms of the above
-
-Text-extracting form (suffix :text):
-  [checkbox:text[]]          - text of every checkbox item across all input tiddlers
-  [checkbox:text[checked]]   - text of every checked checkbox item
-  [checkbox:text[unchecked]] - text of every unchecked checkbox item
-
-The operand controls which checkboxes are matched:
-  (empty)     any checkbox state
-  "checked"   [x] or [X] only
-  "unchecked" [ ] only
-
 For the default (no suffix) form, the CheckboxIndexer is used when available
 for O(1)-per-tiddler lookups. The :text form always scans the raw text.
-
-Note: Both forms scan the raw wikitext and will also match checkboxes inside
-code blocks or comments.
 
 \*/
 
