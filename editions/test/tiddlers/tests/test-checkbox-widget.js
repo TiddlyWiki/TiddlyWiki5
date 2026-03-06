@@ -601,9 +601,9 @@ describe("Checkbox widget", function() {
 
 			const checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(1);
-			// sourceTitle is NOT on the individual AST node; it is propagated via
-			// the `parseSourceTitle` widget variable set by wiki.makeWidget().
-			// checkboxSourceTitle is resolved by reading that variable.
+			// sourceTitle is NOT stored on individual AST nodes; it is propagated
+			// as the `parseSourceTitle` widget variable by wiki.makeWidget().
+			expect(checkboxes[0].getVariable("parseSourceTitle")).toBe("DirectTasks");
 			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
 			expect(checkboxes[0].checkboxSourceTitle).toBe("DirectTasks");
 			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
@@ -625,8 +625,8 @@ describe("Checkbox widget", function() {
 
 			const checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(1);
-			// sourceTitle is at the TranscludeWidget level (parse boundary),
-			// not on the AST node of the checkbox from SourceTasks.
+			// TranscludeWidget sets parseSourceTitle to the transcluded tiddler's title.
+			expect(checkboxes[0].getVariable("parseSourceTitle")).toBe("SourceTasks");
 			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
 			expect(checkboxes[0].checkboxSourceTitle).toBe("SourceTasks");
 
@@ -654,8 +654,8 @@ describe("Checkbox widget", function() {
 			const checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(3);
 
-			// State comes from parseTreeNode.checked; sourceTitle is resolved via
-			// parent TranscludeWidget (not on individual AST nodes).
+			// TranscludeWidget sets parseSourceTitle to the transcluded tiddler's title.
+			expect(checkboxes[0].getVariable("parseSourceTitle")).toBe("MyTasks");
 			expect(checkboxes[0].getValue()).toBe(false);
 			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
 			expect(checkboxes[0].checkboxSourceTitle).toBe("MyTasks");
@@ -741,11 +741,11 @@ describe("Checkbox widget", function() {
 
 			const checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(2);
-			// sourceTitle is NOT on the individual AST node in any case.
+			// sourceTitle is NOT stored on individual AST nodes.
 			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
-			// The `parseSourceTitle` variable is set to "" (empty string) by
-			// wiki.makeWidget() when the parser has no sourceTitle.
+			// wiki.makeWidget() sets parseSourceTitle = "" for anonymous parses;
 			// checkboxSourceTitle resolves to undefined (empty string is falsy).
+			expect(checkboxes[0].getVariable("parseSourceTitle")).toBe("");
 			expect(checkboxes[0].checkboxSourceTitle).toBeUndefined();
 			// The input must be disabled to prevent corrupting any tiddler.
 			expect(checkboxes[0].inputDomNode.getAttribute("disabled")).toBeTruthy();
