@@ -7,4 +7,8 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9708
 github-contributors: linonetwo
 
-Adds support for the `[ ]` / `[x]` / `[X]` inline checkbox syntax in WikiText. Also adds the `checkbox` filter operator for collecting checkboxes across the wiki.
+Adds support for the `[ ]` / `[x]` / `[X]` inline checkbox syntax in WikiText.
+Clicking an inline checkbox directly modifies the `text` field of the tiddler
+whose wikitext was parsed. Checkboxes inside macro-expanded output are
+automatically disabled (read-only).
+Also adds the `checkbox` filter operator for collecting checkboxes across the wiki.

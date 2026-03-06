@@ -27,6 +27,9 @@ exports.parse = function() {
 	const checked = this.match[1] === "x" || this.match[1] === "X";
 	return [{
 		type: "checkbox",
+		// start/end are character offsets (JavaScript string indices, UTF-16
+		// code units) of this node within the source text, following the
+		// standard TW5 AST convention — NOT byte offsets.
 		start: this.matchRegExp.lastIndex - this.match[0].length,
 		end: this.matchRegExp.lastIndex,
 		checked

@@ -47,6 +47,9 @@ var WikiParser = function(type,text,options) {
 	this.configTrimWhiteSpace = options.configTrimWhiteSpace !== undefined ? options.configTrimWhiteSpace : false;
 	// Parser mode
 	this.parseAsInline = options.parseAsInline;
+	// sourceTitle: title of the tiddler whose text is being parsed.
+	// Stored on the parser and later passed to wiki.makeWidget() so that
+	// inline widgets (e.g. wikitext checkboxes) know which tiddler to modify.
 	this.sourceTitle = options.sourceTitle;
 	// Set current parse position
 	this.pos = 0;

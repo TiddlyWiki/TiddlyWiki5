@@ -1025,6 +1025,12 @@ Parse a block of text of a specified MIME type
 Options include:
 	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
 	_canonical_uri: optional string of the canonical URI of this content
+	sourceTitle: optional title of the tiddler whose text is being parsed;
+	             stored on the returned parser as `parser.sourceTitle` and used
+	             by inline widgets (e.g. wikitext checkboxes) to identify the
+	             tiddler they should modify on interaction
+	rules: optional object with `pragma`/`block`/`inline` arrays to restrict
+	       which parser rules are active
 */
 exports.parseText = function(type,text,options) {
 	text = text || "";

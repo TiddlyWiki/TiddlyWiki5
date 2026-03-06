@@ -3651,7 +3651,7 @@ span.tc-translink > a:first-child {
 		float: right;
 	}
 }
-li:has(> span.tc-checkbox:first-child) {
+li:has(> label.tc-checkbox:first-child) {
 	list-style-type: none;
 }
 
