@@ -28,9 +28,9 @@ exports.checkbox = function(source,operator,options) {
 	const operand  = operator.operand;
 	const suffix   = operator.suffix || "";
 	const invert   = operator.prefix === "!";
-	const category = operand === "checked"   ? "checked"
-	               : operand === "unchecked" ? "unchecked"
-	               : "any";
+	let category = "any";
+	if(operand === "checked") category = "checked";
+	else if(operand === "unchecked") category = "unchecked";
 
 	if(suffix === "text") {
 		source((tiddler) => {
@@ -58,9 +58,9 @@ exports.checkbox = function(source,operator,options) {
 		});
 	} else {
 		// Regex fallback when indexer is not available
-		const regexp = category === "checked"   ? REGEXP_CHECKED
-		             : category === "unchecked" ? REGEXP_UNCHECKED
-		             : REGEXP_ANY;
+		let regexp = REGEXP_ANY;
+		if(category === "checked") regexp = REGEXP_CHECKED;
+		else if(category === "unchecked") regexp = REGEXP_UNCHECKED;
 		source((tiddler,title) => {
 			if(!tiddler) return;
 			if(regexp.test(tiddler.fields.text || "") !== invert) results.push(title);

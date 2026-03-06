@@ -182,9 +182,9 @@ CheckboxWidget.prototype.handleTextCheckboxChange = function(checked) {
 	if(!sourceTiddler) return;
 	const text = sourceTiddler.fields.text || "";
 	const {start, end} = this.parseTreeNode;
-		// Safety: verify the character range actually contains a checkbox token in
-		// the source text.  Guards against stale or mis-matched parse contexts
-		// (e.g. a checkbox whose offsets come from a different string than sourceTiddler).
+	// Safety: verify the character range actually contains a checkbox token in
+	// the source text.  Guards against stale or mis-matched parse contexts
+	// (e.g. a checkbox whose offsets come from a different string than sourceTiddler).
 	const token = text.substring(start, end);
 	if(token !== "[ ]" && token !== "[x]" && token !== "[X]") return;
 	const replacement = checked ? "[x]" : "[ ]";
@@ -341,7 +341,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxClass = this.getAttribute("class","");
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	this.isDisabled = this.getAttribute("disabled","no");
-		this.tabIndex = this.getAttribute("tabindex");
+	this.tabIndex = this.getAttribute("tabindex");
 	// Source tiddler title comes from the `parseSourceTitle` variable (set by wiki.makeWidget and overridden by each TranscludeWidget). Empty string means anonymous parse context (e.g. macro expansion) → checkbox is disabled.
 	this.isWikitextCheckbox = this.parseTreeNode.checked !== undefined
 		&& typeof this.parseTreeNode.start === "number";
