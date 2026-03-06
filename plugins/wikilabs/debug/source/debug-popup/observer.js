@@ -17,24 +17,24 @@ exports.init = function(globalDebugPopup) {
 	 * @param {IntersectionObserverEntry[]} entries - The entries that have changed.
 	 */
 	const handleIntersection = (entries) => {
-		for (const entry of entries) {
+		for(const entry of entries) {
 			const domNode = entry.target;
 			const data = nodeDataMap.get(domNode);
 
-			if (!data) {
+			if(!data) {
 				continue;
 			}
 
-			if (entry.isIntersecting) {
+			if(entry.isIntersecting) {
 				// Element is in view: add listeners if they aren't already active
-				if (!data.listenersAttached) {
+				if(!data.listenersAttached) {
 					domNode.addEventListener("mouseenter", data.mouseenterListener, true);
 					domNode.addEventListener("mouseleave", data.mouseleaveListener, true);
 					data.listenersAttached = true;
 				}
 			} else {
 				// Element is out of view: remove listeners if they are active
-				if (data.listenersAttached) {
+				if(data.listenersAttached) {
 					domNode.removeEventListener("mouseenter", data.mouseenterListener, true);
 					domNode.removeEventListener("mouseleave", data.mouseleaveListener, true);
 					data.listenersAttached = false;
@@ -59,41 +59,41 @@ exports.init = function(globalDebugPopup) {
 			var allVars = Object.create(null);
 			var filter;
 
-			for (var v in widget.variables) {
+			for(var v in widget.variables) {
 				let variable = widget.parentWidget && widget.parentWidget.variables[v];
 				let entry = null;
 
-				if (variable && variable.isFunctionDefinition) {
-					if (widget.getVariable("tv-debug-functions") === "yes") {
+				if(variable && variable.isFunctionDefinition) {
+					if(widget.getVariable("tv-debug-functions") === "yes") {
 						entry = {
 							value: variable.value,
-							type: 'f',
+							type: "f",
 							content: widget.getVariable(v, { defaultValue: "" })
 						};
 					}
-				} else if (variable && variable.isProcedureDefinition) {
-					if (widget.getVariable("tv-debug-procedures") === "yes") {
-						entry = { value: widget.getVariable(v, { defaultValue: "" }), type: 'p' };
+				} else if(variable && variable.isProcedureDefinition) {
+					if(widget.getVariable("tv-debug-procedures") === "yes") {
+						entry = { value: widget.getVariable(v, { defaultValue: "" }), type: "p" };
 					}
-				} else if (variable && variable.isMacroDefinition) {
-					if (widget.getVariable("tv-debug-macros") === "yes") {
-						entry = { value: widget.getVariable(v, { defaultValue: "" }), type: 'm' };
+				} else if(variable && variable.isMacroDefinition) {
+					if(widget.getVariable("tv-debug-macros") === "yes") {
+						entry = { value: widget.getVariable(v, { defaultValue: "" }), type: "m" };
 					}
-				} else if (variable && variable.isWidgetDefinition) {
-					if (widget.getVariable("tv-debug-widgets") === "yes") {
-						entry = { value: widget.getVariable(v, { defaultValue: "" }), type: 'w' };
+				} else if(variable && variable.isWidgetDefinition) {
+					if(widget.getVariable("tv-debug-widgets") === "yes") {
+						entry = { value: widget.getVariable(v, { defaultValue: "" }), type: "w" };
 					}
 				} else {
-					entry = { value: widget.getVariable(v, { defaultValue: "" }), type: '' };
+					entry = { value: widget.getVariable(v, { defaultValue: "" }), type: "" };
 				}
 
-				if (entry && entry.value !== undefined) {
+				if(entry && entry.value !== undefined) {
 					allVars[v] = entry;
 				}
 			}
 
 			filter = widget.getVariable("tv-debug-filter", { defaultValue: "[limit[100]]" });
-			if (filter) {
+			if(filter) {
 				var filteredVars = widget.wiki.compileFilter(filter).call(widget.wiki, widget.wiki.makeTiddlerIterator(Object.keys(allVars)));
 				$tw.utils.each(filteredVars, function(name) {
 					data[name] = allVars[name];
@@ -105,12 +105,12 @@ exports.init = function(globalDebugPopup) {
 
 			$tw.utils.each((filter) ? data : allVars, function(el, title) {
 				let str = "";
-				if (typeof el.value === "string" && el.value.includes("\n")) {
+				if(typeof el.value === "string" && el.value.includes("\n")) {
 					str = el.value.split("\n")[0] + " ...";
 				} else {
 					str = (el.value) ? String(el.value) : "";
 				}
-				if (str) {
+				if(str) {
 					finalData[title] = { value: str, type: el.type, content: el.content }; // Preserve content
 				}
 			});
@@ -123,7 +123,7 @@ exports.init = function(globalDebugPopup) {
 		 * @param {MouseEvent} event - The mouse event.
 		 */
 		const showPopupCallback = (event) => {
-			if (globalDebugPopup._popup.style.display !== "none") {
+			if(globalDebugPopup._popup.style.display !== "none") {
 				return;
 			}
 			const finalData = _gatherVariableData(widget);
@@ -134,7 +134,7 @@ exports.init = function(globalDebugPopup) {
 
 		const mouseenterListener = function(event) {
 			// Clear any existing timeout to prevent multiple popups or flickering
-			if (globalDebugPopup._popupTimeout) {
+			if(globalDebugPopup._popupTimeout) {
 				clearTimeout(globalDebugPopup._popupTimeout);
 			}
 			// Set a timeout to show the popup
@@ -143,13 +143,13 @@ exports.init = function(globalDebugPopup) {
 
 		const mouseleaveListener = function(event) {
 			// Clear the show timeout if mouse leaves before popup shows
-			if (globalDebugPopup._popupTimeout) {
+			if(globalDebugPopup._popupTimeout) {
 				clearTimeout(globalDebugPopup._popupTimeout);
 				globalDebugPopup._popupTimeout = null;
 			}
 			// Set a hide timeout if the popup is visible
-			if (globalDebugPopup._popup.style.display !== "none") {
-				if (globalDebugPopup._hideTimeout) {
+			if(globalDebugPopup._popup.style.display !== "none") {
+				if(globalDebugPopup._hideTimeout) {
 					clearTimeout(globalDebugPopup._hideTimeout);
 				}
 				globalDebugPopup._hideTimeout = setTimeout(() => {
@@ -167,7 +167,7 @@ exports.init = function(globalDebugPopup) {
 		});
 
 		// Start observing the element, but only if it is a valid Element
-		if (domNode instanceof Element) {
+		if(domNode instanceof Element) {
 			if(widget.getVariable("tv-debug") === "yes") {
 				domNode.setAttribute("data-debug-xxxx", widget.getVariable("transclusion"));
 				observer.observe(domNode);

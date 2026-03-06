@@ -19,7 +19,7 @@ exports.synchronous = true;
 
 exports.startup = function() {
 	// Define the custom element
-	if (!window.customElements.get("json-tree")) {
+	if(!window.customElements.get("json-tree")) {
 		class JsonTree extends HTMLElement {
 			constructor() {
 				super();
@@ -80,7 +80,7 @@ exports.startup = function() {
 					.value {
 						margin-left: 1em;
 					}
-				`
+				`;
 				this.shadowRoot.append(style);
 				this._container = document.createElement("div");
 				this._container.setAttribute("class", "tree");
@@ -109,7 +109,7 @@ exports.startup = function() {
 				const sourceTiddler = this.getAttribute("tiddler") || "$:/plugins/wikilabs/debug/test.json";
 				const tiddler = $tw.wiki.getTiddler(sourceTiddler);
 				let data;
-				if (tiddler) {
+				if(tiddler) {
 					try {
 						data = JSON.parse(tiddler.fields.text);
 					} catch (e) {
@@ -132,16 +132,16 @@ exports.startup = function() {
 			}
 
 			_createTreeElement(data, key, currentPath, stateDataTiddlerTitle) {
-				if (Array.isArray(data)) {
+				if(Array.isArray(data)) {
 					return this._createArrayElement(data, key, currentPath, stateDataTiddlerTitle);
-				} else if (typeof data === "object" && data !== null) {
+				} else if(typeof data === "object" && data !== null) {
 					return this._createObjectElement(data, key, currentPath, stateDataTiddlerTitle);
 				} else {
 					const fragment = document.createDocumentFragment();
-					if (key !== null) {
+					if(key !== null) {
 						const keySpan = document.createElement("span");
 						keySpan.className = "key";
-						keySpan.textContent = (typeof key === 'number') ? `${key}: ` : `"${key}": `;
+						keySpan.textContent = (typeof key === "number") ? `${key}: ` : `"${key}": `;
 						fragment.append(keySpan);
 					}
 					fragment.append(this._createValueElement(data));
@@ -158,10 +158,10 @@ exports.startup = function() {
 				details.setAttribute("data-state-key", stateKey); // For event listener
 				details.addEventListener("toggle", (event) => {
 					const keyToUpdate = event.target.getAttribute("data-state-key");
-					if (keyToUpdate) {
+					if(keyToUpdate) {
 						let currentData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
 						currentData = {...currentData}; // Create a mutable copy
-						if (event.target.open) {
+						if(event.target.open) {
 							delete currentData[keyToUpdate]; // Remove key if open (default)
 						} else {
 							currentData[keyToUpdate] = "hide"; // Set to hide if closed
@@ -175,7 +175,7 @@ exports.startup = function() {
 				});
 				const summary = document.createElement("summary");
 
-				if (key !== null) {
+				if(key !== null) {
 					const keySpan = document.createElement("span");
 					keySpan.className = "key";
 					keySpan.textContent = `"${key}": `;
@@ -187,9 +187,9 @@ exports.startup = function() {
 
 				const list = document.createElement("div");
 				list.className = "value";
-				for (const newKey in obj) {
-					if (Object.prototype.hasOwnProperty.call(obj, newKey)) {
-						if (this._blockList.includes(newKey)) {
+				for(const newKey in obj) {
+					if(Object.prototype.hasOwnProperty.call(obj, newKey)) {
+						if(this._blockList.includes(newKey)) {
 							continue;
 						}
 						const item = document.createElement("div");
@@ -211,10 +211,10 @@ exports.startup = function() {
 				details.setAttribute("data-state-key", stateKey); // For event listener
 				details.addEventListener("toggle", (event) => {
 					const keyToUpdate = event.target.getAttribute("data-state-key");
-					if (keyToUpdate) {
+					if(keyToUpdate) {
 						let currentData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
 						currentData = {...currentData}; // Create a mutable copy
-						if (event.target.open) {
+						if(event.target.open) {
 							delete currentData[keyToUpdate]; // Remove key if open (default)
 						} else {
 							currentData[keyToUpdate] = "hide"; // Set to hide if closed
@@ -228,11 +228,11 @@ exports.startup = function() {
 				});
 				const summary = document.createElement("summary");
 
-				if (key !== null) {
+				if(key !== null) {
 					const keySpan = document.createElement("span");
 					keySpan.className = "key";
 					// Use the key for arrays too, for consistency
-					keySpan.textContent = (typeof key === 'number') ? `${key}: ` : `"${key}": `;
+					keySpan.textContent = (typeof key === "number") ? `${key}: ` : `"${key}": `;
 					summary.append(keySpan);
 				}
 				summary.append(`[...] (${arr.length} items)`);
@@ -255,9 +255,9 @@ exports.startup = function() {
 				const span = document.createElement("span");
 				const type = typeof value;
 				span.className = type;
-				if (type === "string") {
-					span.textContent = `"${value}"`
-				} else if (value === null) {
+				if(type === "string") {
+					span.textContent = `"${value}"`;
+				} else if(value === null) {
 					span.textContent = "null";
 					span.className = "null";
 				} else {
