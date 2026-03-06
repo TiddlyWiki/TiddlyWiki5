@@ -38,6 +38,11 @@ class DebugInfoPopup extends HTMLElement {
 		this._suggestions = suggestions;
 		popup.append(suggestions);
 
+		suggestions.addEventListener("mouseleave", () => {
+			this._highlightedSuggestionIndex = -1;
+			this._updateSuggestionHighlight();
+		});
+
 		// Add event listener for the search input
 		searchInput.addEventListener("input", () => {
 			this._filterTable();
@@ -75,6 +80,29 @@ class DebugInfoPopup extends HTMLElement {
 		this._popupTimeout = null; // Initialize timeout ID
 		this._hideTimeout = null; // Initialize hide timeout ID
 		this._boundGlobalWheelListener = this._globalWheelListener.bind(this); // Bind global wheel listener
+		this._boundHandlePopupMouseEnter = this.handlePopupMouseEnter.bind(this);
+		this._boundHandlePopupMouseLeave = this.handlePopupMouseLeave.bind(this);
+	}
+
+	connectedCallback() {
+		this.addEventListener("mouseenter", this._boundHandlePopupMouseEnter);
+		this.addEventListener("mouseleave", this._boundHandlePopupMouseLeave);
+	}
+
+	disconnectedCallback() {
+		this.removeEventListener("mouseenter", this._boundHandlePopupMouseEnter);
+		this.removeEventListener("mouseleave", this._boundHandlePopupMouseLeave);
+		// Clean up global listeners in case the element is removed while popup is visible
+		document.removeEventListener("keydown", this._boundEscapeKeyListener, true);
+		document.body.removeEventListener("wheel", this._boundGlobalWheelListener);
+		if(this._hideTimeout) {
+			clearTimeout(this._hideTimeout);
+			this._hideTimeout = null;
+		}
+		if(this._popupTimeout) {
+			clearTimeout(this._popupTimeout);
+			this._popupTimeout = null;
+		}
 	}
 
 	_showSuggestions() {
@@ -171,7 +199,7 @@ class DebugInfoPopup extends HTMLElement {
 		if(!suggestions) {
 			return;
 		}
-		suggestions.innerHTML = "";
+		suggestions.replaceChildren();
 		this._highlightedSuggestionIndex = -1;
 
 		history.forEach((term, index) => {
@@ -187,11 +215,6 @@ class DebugInfoPopup extends HTMLElement {
 				this._updateSuggestionHighlight();
 			});
 			suggestions.appendChild(item);
-		});
-
-		suggestions.addEventListener("mouseleave", () => {
-			this._highlightedSuggestionIndex = -1;
-			this._updateSuggestionHighlight();
 		});
 	}
 

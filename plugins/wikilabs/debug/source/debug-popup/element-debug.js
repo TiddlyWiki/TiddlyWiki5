@@ -24,13 +24,6 @@ exports.startup = function() {
 			globalDebugPopup = document.createElement("debug-info-popup");
 			globalDebugPopup.id = "tw-debug-popup-instance";
 			document.body.appendChild(globalDebugPopup);
-
-			globalDebugPopup.addEventListener("mouseenter", function() {
-				globalDebugPopup.handlePopupMouseEnter();
-			});
-			globalDebugPopup.addEventListener("mouseleave", function() {
-				globalDebugPopup.handlePopupMouseLeave();
-			});
 		}
 
 		init(globalDebugPopup);
