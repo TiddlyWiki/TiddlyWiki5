@@ -155,7 +155,7 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 	} else {
 		summary.appendChild(this.document.createTextNode("{...}"));
 	}
-	if(!isArray && typeof data.start === "number" && typeof data.end === "number") {
+	if(this.attVariable === "preview-text" && !isArray && typeof data.start === "number" && typeof data.end === "number") {
 		summary.appendChild(this.createSelectRangeButton(data.start,data.end));
 	}
 	details.appendChild(summary);
