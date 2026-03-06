@@ -3,7 +3,7 @@ tags: $:/tags/Stylesheet
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
-.tc-json-tree {
+.tc-jsontree {
 	display: block;
 	font-family: "Source Code Pro", monospace;
 	font-size: 12px;
@@ -14,76 +14,76 @@ tags: $:/tags/Stylesheet
 	resize: vertical;
 }
 
-.tc-json-tree > details:first-child {
+.tc-jsontree > details:first-child {
 	border-left: none;
 	margin-left: 0;
 	padding-left: 0;
 }
 
-.tc-json-tree details {
+.tc-jsontree details {
 	border-left: 1px solid <<colour muted-foreground>>;
 	padding-left: 1em;
 	margin-left: 1em;
 }
 
-.tc-json-tree summary {
+.tc-jsontree summary {
 	cursor: pointer;
 	outline: none;
 }
 
-.tc-json-tree summary:hover {
+.tc-jsontree summary:hover {
 	color: <<colour primary>>;
 }
 
-.tc-json-tree summary::marker {
+.tc-jsontree summary::marker {
 	color: <<colour muted-foreground>>;
 }
 
-.tc-json-tree details:not([open]) > summary::marker {
+.tc-jsontree details:not([open]) > summary::marker {
 	color: <<colour dirty-indicator>>;
 }
 
-.tc-json-tree .tc-json-tree-key {
+.tc-jsontree .tc-jsontree-key {
 	color: <<colour foreground>>;
 }
 
-.tc-json-tree .tc-json-tree-string {
+.tc-jsontree .tc-jsontree-string {
 	color: #a31515;
 }
 
-.tc-json-tree .tc-json-tree-number {
+.tc-jsontree .tc-jsontree-number {
 	color: #098658;
 }
 
-.tc-json-tree .tc-json-tree-boolean {
+.tc-jsontree .tc-jsontree-boolean {
 	color: #0000ff;
 }
 
-.tc-json-tree .tc-json-tree-null {
+.tc-jsontree .tc-jsontree-null {
 	color: #800080;
 }
 
-.tc-json-tree .tc-json-tree-value {
+.tc-jsontree .tc-jsontree-value {
 	margin-left: 1em;
 }
 
-.tc-json-tree .tc-json-tree-select-range {
+.tc-jsontree .tc-jsontree-select-range {
 	margin-left: 0.5em;
 	padding: 0 2px;
 	vertical-align: middle;
 	cursor: pointer;
 }
 
-.tc-json-tree .tc-json-tree-select-range svg {
+.tc-jsontree .tc-jsontree-select-range svg {
 	width: 10px;
 	height: 10px;
 	fill: <<colour muted-foreground>>;
 }
 
-.tc-json-tree .tc-json-tree-select-range:hover svg {
+.tc-jsontree .tc-jsontree-select-range:hover svg {
 	fill: <<colour primary>>;
 }
 
-.tc-json-tree .tc-json-tree-select-range-active svg {
+.tc-jsontree .tc-jsontree-select-range-active svg {
 	fill: <<colour dirty-indicator>>;
 }

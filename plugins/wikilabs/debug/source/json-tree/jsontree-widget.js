@@ -29,7 +29,7 @@ JsonTreeWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create container
 	var container = this.document.createElement("div");
-	container.className = "tc-json-tree";
+	container.className = "tc-jsontree";
 	// Get JSON data
 	var data = this.getData();
 	if(typeof data === "string") {
@@ -160,7 +160,7 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 	}
 	details.appendChild(summary);
 	var list = this.document.createElement("div");
-	list.className = "tc-json-tree-value";
+	list.className = "tc-jsontree-value";
 	if(isArray) {
 		for(var i = 0; i < data.length; i++) {
 			var item = this.document.createElement("div");
@@ -187,7 +187,7 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 
 JsonTreeWidget.prototype.createKeySpan = function(key) {
 	var span = this.document.createElement("span");
-	span.className = "tc-json-tree-key";
+	span.className = "tc-jsontree-key";
 	span.appendChild(this.document.createTextNode(
 		(typeof key === "number") ? key + ": " : "\"" + key + "\": "
 	));
@@ -197,11 +197,11 @@ JsonTreeWidget.prototype.createKeySpan = function(key) {
 JsonTreeWidget.prototype.createValueElement = function(value) {
 	var span = this.document.createElement("span");
 	if(value === null) {
-		span.className = "tc-json-tree-null";
+		span.className = "tc-jsontree-null";
 		span.appendChild(this.document.createTextNode("null"));
 	} else {
 		var type = typeof value;
-		span.className = "tc-json-tree-" + type;
+		span.className = "tc-jsontree-" + type;
 		span.appendChild(this.document.createTextNode(
 			(type === "string") ? "\"" + value + "\"" : String(value)
 		));
@@ -212,7 +212,7 @@ JsonTreeWidget.prototype.createValueElement = function(value) {
 JsonTreeWidget.prototype.createSelectRangeButton = function(start,end) {
 	var self = this;
 	var button = this.document.createElement("button");
-	button.className = "tc-json-tree-select-range tc-btn-invisible";
+	button.className = "tc-jsontree-select-range tc-btn-invisible";
 	button.setAttribute("title","Select source text (" + start + "-" + end + ")");
 	var SVG_NS = "http://www.w3.org/2000/svg";
 	var svg = this.document.createElementNS(SVG_NS,"svg");
@@ -232,9 +232,9 @@ JsonTreeWidget.prototype.createSelectRangeButton = function(start,end) {
 		event.stopPropagation();
 		event.preventDefault();
 		if(self._activeButton) {
-			self._activeButton.classList.remove("tc-json-tree-select-range-active");
+			self._activeButton.classList.remove("tc-jsontree-select-range-active");
 		}
-		button.classList.add("tc-json-tree-select-range-active");
+		button.classList.add("tc-jsontree-select-range-active");
 		self._activeButton = button;
 		if(event.ctrlKey || event.metaKey) {
 			self.focusPath(button);

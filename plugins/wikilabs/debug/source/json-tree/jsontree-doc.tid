@@ -40,15 +40,15 @@ The previous fold state is saved to `{state}/saved` and restored on the next Ctr
 ! CSS Classes
 
 |!Class |!Description |
-|`tc-json-tree` |Container element |
-|`tc-json-tree-key` |Object key or array index label |
-|`tc-json-tree-string` |String value |
-|`tc-json-tree-number` |Number value |
-|`tc-json-tree-boolean` |Boolean value |
-|`tc-json-tree-null` |Null value |
-|`tc-json-tree-value` |Indented content area of a collapsible node |
-|`tc-json-tree-select-range` |Select range button |
-|`tc-json-tree-select-range-active` |Currently active select range button |
+|`tc-jsontree` |Container element |
+|`tc-jsontree-key` |Object key or array index label |
+|`tc-jsontree-string` |String value |
+|`tc-jsontree-number` |Number value |
+|`tc-jsontree-boolean` |Boolean value |
+|`tc-jsontree-null` |Null value |
+|`tc-jsontree-value` |Indented content area of a collapsible node |
+|`tc-jsontree-select-range` |Select range button |
+|`tc-jsontree-select-range-active` |Currently active select range button |
 
 ! Examples
 
