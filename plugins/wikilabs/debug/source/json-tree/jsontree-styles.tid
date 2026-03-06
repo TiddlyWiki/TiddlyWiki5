@@ -66,3 +66,20 @@ tags: $:/tags/Stylesheet
 .tc-json-tree .tc-json-tree-value {
 	margin-left: 1em;
 }
+
+.tc-json-tree .tc-json-tree-select-range {
+	margin-left: 0.5em;
+	padding: 0 2px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.tc-json-tree .tc-json-tree-select-range svg {
+	width: 10px;
+	height: 10px;
+	fill: <<colour muted-foreground>>;
+}
+
+.tc-json-tree .tc-json-tree-select-range:hover svg {
+	fill: <<colour primary>>;
+}

@@ -137,6 +137,9 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 	} else {
 		summary.appendChild(this.document.createTextNode("{...}"));
 	}
+	if(!isArray && typeof data.start === "number" && typeof data.end === "number") {
+		summary.appendChild(this.createSelectRangeButton(data.start,data.end));
+	}
 	details.appendChild(summary);
 	var list = this.document.createElement("div");
 	list.className = "tc-json-tree-value";
@@ -186,6 +189,49 @@ JsonTreeWidget.prototype.createValueElement = function(value) {
 		));
 	}
 	return span;
+};
+
+JsonTreeWidget.prototype.createSelectRangeButton = function(start,end) {
+	var self = this;
+	var button = this.document.createElement("button");
+	button.className = "tc-json-tree-select-range tc-btn-invisible";
+	button.setAttribute("title","Select source text (" + start + "-" + end + ")");
+	var wrapper = this.document.createElement("span");
+	wrapper.innerHTML = "<svg class='tc-image-link tc-image-button' viewBox='0 0 128 128'><g fill-rule='evenodd'><path d='M42.263 69.38a31.919 31.919 0 006.841 10.13c12.5 12.5 32.758 12.496 45.255 0l22.627-22.628c12.502-12.501 12.497-32.758 0-45.255-12.5-12.5-32.758-12.496-45.254 0L49.104 34.255a32.333 32.333 0 00-2.666 3.019 36.156 36.156 0 0121.94.334l14.663-14.663c6.25-6.25 16.382-6.254 22.632-.004 6.248 6.249 6.254 16.373-.004 22.631l-22.62 22.62c-6.25 6.25-16.381 6.254-22.631.004a15.93 15.93 0 01-4.428-8.433 11.948 11.948 0 00-7.59 3.48l-6.137 6.137z'/><path d='M86.35 59.234a31.919 31.919 0 00-6.84-10.13c-12.5-12.5-32.758-12.497-45.255 0L11.627 71.732c-12.501 12.5-12.496 32.758 0 45.254 12.5 12.5 32.758 12.497 45.255 0L79.51 94.36a32.333 32.333 0 002.665-3.02 36.156 36.156 0 01-21.94-.333l-14.663 14.663c-6.25 6.25-16.381 6.253-22.63.004-6.25-6.249-6.255-16.374.003-22.632l22.62-22.62c6.25-6.25 16.381-6.253 22.631-.003a15.93 15.93 0 014.428 8.432 11.948 11.948 0 007.59-3.48l6.137-6.136z'/></g></svg>";
+	button.appendChild(wrapper.firstChild);
+	button.addEventListener("click",function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+		self.selectEditorRange(start,end);
+	});
+	return button;
+};
+
+JsonTreeWidget.prototype.selectEditorRange = function(start,end) {
+	// Find the editor container by walking up from our DOM node
+	var container = this.domNodes[0];
+	while(container && !container.classList.contains("tc-tiddler-editor")) {
+		container = container.parentNode;
+	}
+	if(!container) {
+		return;
+	}
+	// Look for the editor iframe (framed engine) or textarea (simple engine)
+	var iframe = container.querySelector("iframe.tc-edit-texteditor-body");
+	if(iframe) {
+		var textarea = iframe.contentWindow && iframe.contentWindow.document.querySelector("textarea,input");
+		if(textarea) {
+			textarea.focus();
+			textarea.setSelectionRange(start,end);
+		}
+		return;
+	}
+	// Simple engine: direct textarea
+	var textarea = container.querySelector("textarea.tc-edit-texteditor-body,input.tc-edit-texteditor-body");
+	if(textarea) {
+		textarea.focus();
+		textarea.setSelectionRange(start,end);
+	}
 };
 
 JsonTreeWidget.prototype.saveState = function(stateKey,isOpen) {

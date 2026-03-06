@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -r \"$:/tags/EditPreview\" \"e:\\\\git\\\\tiddly\\\\tiddlywiki\\\\TiddlyWiki5\" --include=\"*.tid\")",
+      "Bash(xargs grep -l \"edit-text\\\\|editTemplate\")"
+    ]
+  }
+}
