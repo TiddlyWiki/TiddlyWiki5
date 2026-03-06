@@ -327,7 +327,7 @@ JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
 		if(!detailsElement || !detailsElement.open) {
 			return CLOSED + " " + hint;
 		}
-		lines.push(OPEN + " " + hint);
+		lines.push(OPEN + " {...}");
 		var keys = Object.keys(data);
 		var valueDiv = detailsElement.querySelector(":scope > .tc-jsontree-value");
 		var items = valueDiv ? valueDiv.children : [];

@@ -1,9 +1,14 @@
 ⮟ [...] (1 items)
-	⮟ {$list ...}
+	⮟ {...}
 		"type": "list"
 		"start": 0
 			"attributes": ⮟ {...}
-					"filter": ⮞ {string ...}
+					"filter": ⮟ {...}
+						"start": 6
+						"name": "filter"
+						"type": "string"
+						"value": "[range[2]]"
+						"end": 26
 					"variable": ⮞ {string ...}
 			"orderedAttributes": ⮞ [...] (2 items)
 		"tag": "$list"
