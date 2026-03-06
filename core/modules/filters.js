@@ -609,7 +609,7 @@ exports.parseFilterToDebugTable = function(filterString,options) {
 		// Run prefix
 		if(operation.prefix) {
 			var prefixDescriptions = {
-				"+": "Intersection: only keep titles that are also in this run's results",
+				"+": "Add: add titles that are also in this run's results",
 				"-": "Exclusion: remove this run's results from the output",
 				"~": "Else: use this run's results only if the output so far is empty",
 				"=": "All: append this run's results without deduplication",
