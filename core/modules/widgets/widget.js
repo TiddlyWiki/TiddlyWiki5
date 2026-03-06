@@ -33,13 +33,6 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	options = options || {};
 	// Save widget info
 	this.parseTreeNode = parseTreeNode;
-	// If this node marks a parse-source boundary (set by makeWidget or TranscludeWidget),
-	// store it as an own property so that getParseSourceTitle() traversal can find it.
-	// parseSourceTitle: string = a real tiddler title; null = anonymous parse context;
-	// not present = not a parse boundary (keep traversing).
-	if($tw.utils.hop(parseTreeNode,"parseSourceTitle")) {
-		this.parseSourceTitle = parseTreeNode.parseSourceTitle;
-	}
 	this.wiki = options.wiki;
 	this.parentWidget = options.parentWidget;
 	this.variables = Object.create(this.parentWidget ? this.parentWidget.variables : null);
@@ -308,24 +301,6 @@ Widget.prototype.hasVariable = function(name,value) {
 		node = node.parentWidget;
 	}
 	return false;
-};
-
-/*
-Walk up the parent widget chain to find the nearest parse-source boundary set by
-wiki.makeWidget() or TranscludeWidget. Returns:
-  string – the title of the tiddler whose text was parsed (interactive)
-  null   – anonymous parse context (macro/variable expansion); no safe source title
-  undefined – no parse boundary found in the chain at all
-*/
-Widget.prototype.getParseSourceTitle = function() {
-	let widget = this;
-	while(widget) {
-		if($tw.utils.hop(widget,"parseSourceTitle")) {
-			return widget.parseSourceTitle;
-		}
-		widget = widget.parentWidget;
-	}
-	return undefined;
 };
 
 /*

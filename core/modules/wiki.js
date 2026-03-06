@@ -1150,13 +1150,20 @@ parentWidget: optional parent widget for the root node
 */
 exports.makeWidget = function(parser,options) {
 	options = options || {};
+	// Inject parseSourceTitle so that inline widgets (e.g. wikitext checkboxes)
+	// can discover which tiddler's text was parsed by reading this variable.
+	// String = a real tiddler title (checkbox is interactive);
+	// empty string = anonymous parse context (no sourceTitle → checkbox disabled).
+	// Explicit options.variables take precedence.
+	if(!(options.variables && options.variables.parseSourceTitle !== undefined)) {
+		options = $tw.utils.extend({},options);
+		options.variables = $tw.utils.extend({},options.variables,{
+			parseSourceTitle: (parser && parser.sourceTitle) || ""
+		});
+	}
 	var widgetNode = {
 			type: "widget",
-			children: [],
-			// Mark this root widget as a parse-source boundary.
-			// string = tiddler title the parser was created for;
-			// null   = anonymous parse (no sourceTitle on parser).
-			parseSourceTitle: (parser && parser.sourceTitle) || null
+			children: []
 		},
 		currWidgetNode = widgetNode;
 	// Create let variable widget for variables

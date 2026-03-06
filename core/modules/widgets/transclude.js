@@ -114,12 +114,7 @@ TranscludeWidget.prototype.execute = function() {
 		var recursionMarker = this.makeRecursionMarker();
 		this.setVariable("transclusion",recursionMarker);
 	}
-	// Mark this widget as a parse-source boundary so that descendant widgets
-	// (e.g. inline checkboxes) can discover the correct source tiddler title.
-	// For tiddler transclusion: target.parser.sourceTitle = "TiddlerName".
-	// For variable/macro expansion: target.parser has no sourceTitle → null,
-	// which signals "anonymous context – checkboxes are read-only".
-	this.parseSourceTitle = (target && target.parser && target.parser.sourceTitle) || null;
+	this.setVariable("parseSourceTitle",(target && target.parser && target.parser.sourceTitle) || "");
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
 };

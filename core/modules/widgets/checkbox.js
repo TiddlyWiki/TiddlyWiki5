@@ -347,15 +347,16 @@ CheckboxWidget.prototype.execute = function() {
 	this.tabIndex = this.getAttribute();
 	// Wikitext inline checkbox mode: the parse tree node carries boolean `checked`
 	// and numeric `start`/`end` (set by the checkbox wikiparser rule).
-	// The source tiddler title is discovered by walking up the parentWidget chain
-	// to the nearest parse-source boundary (set by makeWidget or TranscludeWidget).
-	// null = anonymous parse context (macro expansion) → checkboxSourceTitle stays
-	// undefined so the input is rendered disabled.
+	// The source tiddler title is read from the `parseSourceTitle` variable, which
+	// is set by wiki.makeWidget() and overridden by each TranscludeWidget for its
+	// subtree.  Non-empty string = a real tiddler title (interactive); empty string
+	// = anonymous parse context (macro/variable expansion) → checkbox disabled.
 	this.isWikitextCheckbox = this.parseTreeNode.checked !== undefined
 		&& typeof this.parseTreeNode.start === "number";
-	this.checkboxSourceTitle = this.isWikitextCheckbox
-		? (this.getParseSourceTitle() || undefined)
+	const rawSourceTitle = this.isWikitextCheckbox
+		? this.getVariable("parseSourceTitle")
 		: undefined;
+	this.checkboxSourceTitle = rawSourceTitle || undefined;
 	// Make the child widgets
 	this.makeChildWidgets();
 };

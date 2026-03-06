@@ -16,7 +16,7 @@ both the indexed fast-path and the regex fallback.
 describe("Checkbox filter operator", function() {
 
 	function setupWiki(wikiOptions) {
-		var wiki = new $tw.Wiki(wikiOptions);
+		const wiki = new $tw.Wiki(wikiOptions);
 		wiki.addTiddler({title: "HasUnchecked",   text: "* [ ] Task A\n* [ ] Task B"});
 		wiki.addTiddler({title: "HasChecked",     text: "* [x] Done"});
 		wiki.addTiddler({title: "HasUpperChecked",text: "* [X] Also done"});
@@ -29,113 +29,113 @@ describe("Checkbox filter operator", function() {
 	function runTests(wiki) {
 
 		it("checkbox[] returns titles that contain any checkbox", function() {
-			var result = wiki.filterTiddlers("[all[tiddlers]checkbox[]]").sort();
+			const result = wiki.filterTiddlers("[all[tiddlers]checkbox[]]").sort();
 			expect(result).toEqual(["HasBoth","HasChecked","HasUnchecked","HasUpperChecked"].sort());
 		});
 
 		it("checkbox[checked] returns titles with at least one checked checkbox", function() {
-			var result = wiki.filterTiddlers("[all[tiddlers]checkbox[checked]]").sort();
+			const result = wiki.filterTiddlers("[all[tiddlers]checkbox[checked]]").sort();
 			expect(result).toEqual(["HasBoth","HasChecked","HasUpperChecked"].sort());
 		});
 
 		it("checkbox[unchecked] returns titles with at least one unchecked checkbox", function() {
-			var result = wiki.filterTiddlers("[all[tiddlers]checkbox[unchecked]]").sort();
+			const result = wiki.filterTiddlers("[all[tiddlers]checkbox[unchecked]]").sort();
 			expect(result).toEqual(["HasBoth","HasUnchecked"].sort());
 		});
 
 		it("!checkbox[] returns titles with no checkboxes", function() {
-			var result = wiki.filterTiddlers("[all[tiddlers]!checkbox[]]").sort();
+			const result = wiki.filterTiddlers("[all[tiddlers]!checkbox[]]").sort();
 			expect(result).toEqual(["EmptyText","HasNone"].sort());
 		});
 
 		it("!checkbox[checked] returns titles with no checked checkboxes", function() {
-			var result = wiki.filterTiddlers("[all[tiddlers]!checkbox[checked]]").sort();
+			const result = wiki.filterTiddlers("[all[tiddlers]!checkbox[checked]]").sort();
 			expect(result).toEqual(["EmptyText","HasNone","HasUnchecked"].sort());
 		});
 
 		it("!checkbox[unchecked] returns titles with no unchecked checkboxes", function() {
-			var result = wiki.filterTiddlers("[all[tiddlers]!checkbox[unchecked]]").sort();
+			const result = wiki.filterTiddlers("[all[tiddlers]!checkbox[unchecked]]").sort();
 			expect(result).toEqual(["EmptyText","HasChecked","HasNone","HasUpperChecked"].sort());
 		});
 
 		it("checkbox[] returns empty list when no tiddlers match", function() {
-			var emptyWiki = new $tw.Wiki();
+			const emptyWiki = new $tw.Wiki();
 			emptyWiki.addTiddler({title: "PlainText", text: "nothing here"});
-			var result = emptyWiki.filterTiddlers("[all[tiddlers]checkbox[]]");
+			const result = emptyWiki.filterTiddlers("[all[tiddlers]checkbox[]]");
 			expect(result).toEqual([]);
 		});
 
 		it("works when composed with other operators", function() {
-			var result = wiki.filterTiddlers("[all[tiddlers]checkbox[unchecked]prefix[Has]]").sort();
+			const result = wiki.filterTiddlers("[all[tiddlers]checkbox[unchecked]prefix[Has]]").sort();
 			expect(result).toEqual(["HasBoth","HasUnchecked"].sort());
 		});
 
 		it("treats [X] (uppercase) as checked", function() {
-			var result = wiki.filterTiddlers("[all[tiddlers]checkbox[checked]]");
+			const result = wiki.filterTiddlers("[all[tiddlers]checkbox[checked]]");
 			expect(result.indexOf("HasUpperChecked")).not.toBe(-1);
 		});
 
 		it("does not treat [X] (uppercase) as unchecked", function() {
-			var result = wiki.filterTiddlers("[all[tiddlers]checkbox[unchecked]]");
+			const result = wiki.filterTiddlers("[all[tiddlers]checkbox[unchecked]]");
 			expect(result.indexOf("HasUpperChecked")).toBe(-1);
 		});
 
 		it("does not match [[WikiLinks]] as checkboxes", function() {
-			var w = new $tw.Wiki();
+			const w = new $tw.Wiki();
 			w.addTiddler({title: "WithLinks", text: "[[LinkTarget]] and [[Another]]"});
-			var result = w.filterTiddlers("[all[tiddlers]checkbox[]]");
+			const result = w.filterTiddlers("[all[tiddlers]checkbox[]]");
 			expect(result).toEqual([]);
 		});
 
 		// ── :text suffix tests ───────────────────────────────────────────────
 
 		it("checkbox:text[] returns the text of every checkbox item", function() {
-			var w = new $tw.Wiki();
+			const w = new $tw.Wiki();
 			w.addTiddler({title: "Tasks", text: "* [ ] Buy milk\n* [x] Write code\n* [ ] Ship feature"});
-			var result = w.filterTiddlers("[all[tiddlers]checkbox:text[]]").sort();
+			const result = w.filterTiddlers("[all[tiddlers]checkbox:text[]]").sort();
 			expect(result).toEqual(["Buy milk","Ship feature","Write code"].sort());
 		});
 
 		it("checkbox:text[checked] returns text of checked items only", function() {
-			var w = new $tw.Wiki();
+			const w = new $tw.Wiki();
 			w.addTiddler({title: "Tasks", text: "* [ ] Buy milk\n* [x] Write code\n* [X] Also done"});
-			var result = w.filterTiddlers("[all[tiddlers]checkbox:text[checked]]").sort();
+			const result = w.filterTiddlers("[all[tiddlers]checkbox:text[checked]]").sort();
 			expect(result).toEqual(["Also done","Write code"].sort());
 		});
 
 		it("checkbox:text[unchecked] returns text of unchecked items only", function() {
-			var w = new $tw.Wiki();
+			const w = new $tw.Wiki();
 			w.addTiddler({title: "Tasks", text: "* [ ] Buy milk\n* [x] Write code\n* [ ] Ship feature"});
-			var result = w.filterTiddlers("[all[tiddlers]checkbox:text[unchecked]]").sort();
+			const result = w.filterTiddlers("[all[tiddlers]checkbox:text[unchecked]]").sort();
 			expect(result).toEqual(["Buy milk","Ship feature"].sort());
 		});
 
 		it("checkbox:text[] returns items from multiple tiddlers flattened", function() {
-			var w = new $tw.Wiki();
+			const w = new $tw.Wiki();
 			w.addTiddler({title: "Work",  text: "[ ] Review PR"});
 			w.addTiddler({title: "Home",  text: "[ ] Buy groceries"});
-			var result = w.filterTiddlers("[all[tiddlers]checkbox:text[unchecked]]").sort();
+			const result = w.filterTiddlers("[all[tiddlers]checkbox:text[unchecked]]").sort();
 			expect(result).toEqual(["Buy groceries","Review PR"].sort());
 		});
 
 		it("checkbox:text[] strips leading/trailing whitespace from item text", function() {
-			var w = new $tw.Wiki();
+			const w = new $tw.Wiki();
 			w.addTiddler({title: "T", text: "[ ]   Spaced item   "});
-			var result = w.filterTiddlers("[all[tiddlers]checkbox:text[]]");
+			const result = w.filterTiddlers("[all[tiddlers]checkbox:text[]]");
 			expect(result).toEqual(["Spaced item"]);
 		});
 
 		it("checkbox:text[] returns empty array when there are no matching checkboxes", function() {
-			var w = new $tw.Wiki();
+			const w = new $tw.Wiki();
 			w.addTiddler({title: "T", text: "[x] Done"});
-			var result = w.filterTiddlers("[all[tiddlers]checkbox:text[unchecked]]");
+			const result = w.filterTiddlers("[all[tiddlers]checkbox:text[unchecked]]");
 			expect(result).toEqual([]);
 		});
 
 		it("index is updated when a tiddler is modified", function() {
 			// Start with an unchecked checkbox
 			wiki.addTiddler({title: "MutableTask", text: "[ ] pending"});
-			var result = wiki.filterTiddlers("[all[tiddlers]checkbox[unchecked]]");
+			let result = wiki.filterTiddlers("[all[tiddlers]checkbox[unchecked]]");
 			expect(result.indexOf("MutableTask")).not.toBe(-1);
 
 			// Simulate checking it
@@ -156,7 +156,7 @@ describe("Checkbox filter operator", function() {
 
 		it("index is updated when a tiddler is deleted", function() {
 			wiki.addTiddler({title: "TempTask", text: "[ ] temp"});
-			var result = wiki.filterTiddlers("[all[tiddlers]checkbox[]]");
+			let result = wiki.filterTiddlers("[all[tiddlers]checkbox[]]");
 			expect(result.indexOf("TempTask")).not.toBe(-1);
 
 			wiki.deleteTiddler("TempTask");
@@ -166,7 +166,7 @@ describe("Checkbox filter operator", function() {
 	}
 
 	describe("With no indexers (regex fallback)", function() {
-		var wiki = setupWiki({enableIndexers: []});
+		const wiki = setupWiki({enableIndexers: []});
 		it("should not have the CheckboxIndexer", function() {
 			expect(wiki.getIndexer("CheckboxIndexer")).toBe(null);
 		});
@@ -174,7 +174,7 @@ describe("Checkbox filter operator", function() {
 	});
 
 	describe("With all indexers", function() {
-		var wiki = setupWiki();
+		const wiki = setupWiki();
 		it("should have the CheckboxIndexer", function() {
 			expect(wiki.getIndexer("CheckboxIndexer")).not.toBe(null);
 		});
