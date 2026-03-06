@@ -568,8 +568,9 @@ exports.parseFilterToHtml = function(filterString) {
 Parse a filter string and return a wikitext debug table showing each syntactic
 element at its original character position with a description.
 */
-exports.parseFilterToDebugTable = function(filterString) {
+exports.parseFilterToDebugTable = function(filterString,options) {
 	filterString = filterString || "";
+	options = options || {};
 	var totalLen = filterString.length;
 	if(totalLen === 0) {
 		return "";
@@ -734,8 +735,17 @@ exports.parseFilterToDebugTable = function(filterString) {
 	}
 	// Build the wikitext table
 	var table = [];
-	for(var t = 0; t < rows.length; t++) {
-		table.push("|`" + rows[t].line + "` |" + rows[t].description + " |");
+	if(options.narrowTable) {
+		for(var t = 0; t < rows.length; t++) {
+			if(rows[t].description) {
+				table.push("|" + rows[t].description + " |");
+			}
+			table.push("|`" + rows[t].line + "` |");
+		}
+	} else {
+		for(var t = 0; t < rows.length; t++) {
+			table.push("|`" + rows[t].line + "` |" + rows[t].description + " |");
+		}
 	}
 	return table.join("\n");
 };

@@ -1,7 +1,7 @@
 created: 20260305230209767
-modified: 20260306000641223
+modified: 20260306004402803
 tags: 
 title: New Tiddler 2
 type: text/vnd.tiddlywiki
 
-<<filter-debug """[all[shadows+tiddlers]tag[$:/tags/ClassFilters/PageTemplate]!is[draft]] :map:flat[subfilter{!!text}] tc-page-container [[tc-page-view-]addsuffix<storyviewTitle>] [[tc-language-]addsuffix<languageTitle>] :and[unique[]join[ ]]""">>
+<<filter-debug """[all[shadows+tiddlers]tag[$:/tags/ClassFilters/PageTemplate]!is[draft]] :map:flat[subfilter{!!text}] tc-page-container [[tc-page-view-]addsuffix<storyviewTitle>] [[tc-language-]addsuffix<languageTitle>] :and[unique[]join[ ]]""" narrowTable:"yes">>

@@ -11,12 +11,13 @@ Macro to return a wikitext debug table for a filter string.
 exports.name = "filter-debug";
 
 exports.params = [
-	{ name: "filter" }
+	{ name: "filter" },
+	{ name: "narrowTable" }
 ];
 
 /*
 Run the macro
 */
-exports.run = function(filter) {
-	return this.wiki.parseFilterToDebugTable(filter || "");
+exports.run = function(filter,narrowTable) {
+	return this.wiki.parseFilterToDebugTable(filter || "",{narrowTable: narrowTable === "yes"});
 };
