@@ -144,7 +144,7 @@ Settings/AutoSave/Disabled/Description: Pas de sauvegarde automatique des modifi
 Settings/AutoSave/Enabled/Description: Sauvegarde automatique des modifications
 Settings/AutoSave/Hint: Tentative de sauvegarde automatique des modifications pendant l'édition quand un enregistreur compatible est utilisé
 Settings/CamelCase/Caption: Liens Wiki //Camel Case//
-Settings/CamelCase/Hint: Vous pouvez désactiver globalement les liens créés à partir des expressions de type ~CamelCase. Pour que ce paramètre prenne effet, il est nécessaire de recharger le wiki
+Settings/CamelCase/Hint: Pour que ce paramètre prenne effet, il est nécessaire de recharger le wiki
 Settings/CamelCase/Description: Active les liens automatiques sur les expressions de la forme ~CamelCase
 Settings/Caption: Paramétrage
 Settings/EditorToolbar/Caption: Barre d'outils de l'éditeur

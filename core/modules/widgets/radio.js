@@ -59,8 +59,8 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	]);
 	// Insert the label into the DOM and render any children
 	parent.insertBefore(this.labelDomNode,nextSibling);
-	this.renderChildren(this.spanDomNode,null);
 	this.domNodes.push(this.labelDomNode);
+	this.renderChildren(this.spanDomNode,null);
 };
 
 RadioWidget.prototype.getValue = function() {

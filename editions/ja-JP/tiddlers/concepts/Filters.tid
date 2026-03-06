@@ -27,4 +27,5 @@ Wiki内でTiddlerが追加や削除されると、フィルタのアウトプッ
 
 * <$linkcatcher message="tm-navigate" actions=<<openAdvancedSearch>> >[[高度な検索|$:/AdvancedSearch]]</$linkcatcher> -- フィルタを簡単に試すことができる<<.advancedsearch-tab Filter>>タブがあります
 
-* [[WikiTextでのフィルタされたトランスクルージョン|Transclusion in WikiText]] -- テキスト内でフィルタ結果を使用したい場合
+* [[フィルタされたトランスクルージョン|Transclusion in WikiText]] -- テキスト内でフィルタ結果を使用したい場合
+* [[フィルタのシンタックスの歴史|Filter Syntax History]] -- フィルタのシンタックスがなぜそのようになっているのか知りたい場合

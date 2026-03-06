@@ -6,6 +6,9 @@ code-body: yes
 	display: block;
 	margin: 0px;
 }
+span.markdown {
+	display: inline;
+}
 .markdown hr {
   margin-top: 20px;
   margin-bottom: 20px;

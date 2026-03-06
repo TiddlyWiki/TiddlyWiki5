@@ -1,6 +1,6 @@
 base-url: http://tiddlywiki.com/
 created: 20230615050814821
-modified: 20230615173033918
+modified: 20251021134906488
 tags: [[Widget Attributes]] WikiText
 title: Substituted Attribute Values
 type: text/vnd.tiddlywiki
@@ -24,22 +24,12 @@ The value of the attribute will be the text denoted by the backticks with any of
 
 !! Substituting a variable value into a string
 
-<$macrocall $name=wikitext-example-without-html src='<$text text=`Hello there this is the tiddler "$(currentTiddler)$"`/>'/>
+<$macrocall $name=wikitext-example-without-html src="""<$text text=`Hello there this is the tiddler "$(currentTiddler)$"`/>"""/>
 
 
 !! Substituting a variable value and the result of evaluating a filter expression into a string
-<$macrocall $name=wikitext-example-without-html src='<$text text=`This tiddler is titled "$(currentTiddler)$" and was last modified on ${[{!!modified}format:date[DDth MMM YYYY]]}$`/>'/>
+<$macrocall $name=wikitext-example-without-html src="""<$text text=`This tiddler is titled "$(currentTiddler)$" and was last modified on ${[{!!modified}format:date[DDth MMM YYYY]]}$`/>"""/>
 
-!! Concatenating strings and variables to create a URL
+{{Concatenating variables to create a URL}}
 
-<$macrocall $name=wikitext-example-without-html src='
-<$let hash={{{ [<currentTiddler>encodeuricomponent[]] }}}>
-<a href=`http://tiddlywiki.com/#$(hash)$`>this tiddler on tiddlywiki.com</a>
-</$let>'/>
-
-!! Concatenating variables and a text reference to create a URL
-
-<$macrocall $name=wikitext-example-without-html src='
-<$let hash={{{ [<currentTiddler>encodeuricomponent[]] }}}>
-<a href=`${ [{!!base-url}] }$#$(hash)$`>this tiddler on tiddlywiki.com</a>
-</$let>'/>
+{{Concatenating a text reference to create a URL}}

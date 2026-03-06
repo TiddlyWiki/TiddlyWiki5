@@ -1,0 +1,23 @@
+title: Macros/Dynamic/Standalone
+description: Standalone macrocall with dynamic paramters
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+\define mamacro(one:"red",two:"green")
+It is $one$ and $two$ or <<__one__>> and <<__two__>>.
+\end
+
+<<mamacro>>
+
+<<mamacro one={{{ [[b]addprefix[a]] }}}>>
+
+
+<<mamacro one>>
++
+title: ExpectedResult
+
+<p>It is red and green or red and green.</p><p>It is ab and green or ab and green.</p><p>It is one and green or one and green.</p>

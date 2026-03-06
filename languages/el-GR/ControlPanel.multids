@@ -152,7 +152,7 @@ Settings/AutoSave/Enabled/Description: Αποθήκευσε αυτόματα τ�
 Settings/AutoSave/Hint: Προσπάθησε να αποθηκεύσεις αυτόματα τις αλλαγές κατά την επεξεργασία, όταν χρησιμοποιώ αποθηκευτή που το υποστηρίζει
 Settings/CamelCase/Caption: Σύνδεσμοι Σε Γραφή Με Ενδιάμεσα Κεφαλαία (Camel Case)
 Settings/CamelCase/Description: Ενεργοποίηση αυτόματης δημιουργίας συνδέσμων ~CamelCase
-Settings/CamelCase/Hint: Μπορείς να απενεργοποιήσεις καθολικά την αυτόματη δημιουργία συνδέσμων σε φράσεις ~CamelCase. Απαιτείται επαναφόρτωση για να εφαρμοστεί
+Settings/CamelCase/Hint: Απαιτείται επαναφόρτωση για να εφαρμοστεί
 Settings/Caption: Ρυθμίσεις
 Settings/DefaultMoreSidebarTab/Caption: Προκαθορισμένη Καρτέλα «Περισσότερα» Της Πλευρικής Εργαλειοθήκης
 Settings/DefaultMoreSidebarTab/Hint: Καθόρισε ποιες καρτέλες εμφανίζεται από προεπιλογή υπό «Περισσότερα» στη πλευρική εργαλειοθήκη

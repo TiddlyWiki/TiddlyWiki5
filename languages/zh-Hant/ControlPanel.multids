@@ -148,7 +148,7 @@ Settings/AutoSave/Disabled/Description: 不要自動儲存變更
 Settings/AutoSave/Enabled/Description: 自動儲存變更
 Settings/AutoSave/Hint: 當使用支援的儲存模組時，在編輯期間嘗試自動儲存變更
 Settings/CamelCase/Caption: 駝峰式維基鏈接
-Settings/CamelCase/Hint: 您可以全域停用駝峰式短語自動鏈接。須儲存後重新載入，方才生效。
+Settings/CamelCase/Hint: 須儲存後重新載入，方才生效。
 Settings/CamelCase/Description: 啟用自動駝峰式鏈接
 Settings/Caption: 設定
 Settings/DefaultSidebarTab/Caption: 預設側邊欄頁籤

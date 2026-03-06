@@ -81,7 +81,7 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
 		var selector = event.param || "",
 			element,
-		    	baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
+			baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
 		element = $tw.utils.querySelectorSafe(selector,baseElement);
 		if(element && element.focus) {
 			element.focus(event.paramObject);

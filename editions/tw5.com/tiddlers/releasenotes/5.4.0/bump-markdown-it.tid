@@ -1,0 +1,18 @@
+title: $:/changenotes/5.4.0/#9513
+description: Bump markdown-it and its plugins to newest version
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9513
+github-contributors: Leilei332
+
+Upgrade the markdown-it libraries used by the [[Markdown Plugin]]:
+
+* markdown-it: 14.1.0
+* markdown-it-deflist: 3.0.0
+* markdown-it-footnote: 4.0.0
+* markdown-it-ins: 4.0.0
+* markdown-it-mark: 4.0.0
+* markdown-it-sub: 2.0.0
+* markdown-it-sup: 2.0.0

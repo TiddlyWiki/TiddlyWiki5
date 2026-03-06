@@ -1,0 +1,14 @@
+title: $:/changenotes/5.4.0/#8258
+description:  Core plugin to serialize syntax trees back to strings
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: feature
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8258
+github-contributors: linonetwo
+
+This is an internal change that will only be of direct interest to plugin developers but will form the basis of future user-facing features. For example:
+
+* Programmatically manipulating wikitext content by modifying the syntax tree and deserializing it back to wikitext
+* Building WYSIWYG editors
+* Creating WikiText formatters and linters

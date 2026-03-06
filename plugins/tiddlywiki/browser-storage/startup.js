@@ -17,23 +17,17 @@ exports.synchronous = true;
 
 var ENABLED_TITLE = "$:/config/BrowserStorage/Enabled",
 	SAVE_FILTER_TITLE = "$:/config/BrowserStorage/SaveFilter",
-	PERSISTED_STATE_TITLE = "$:/info/browser/storage/persisted";
+	PERSISTED_STATE_TITLE = "$:/state/browser/storage/persisted";
 
 var BrowserStorageUtil = require("$:/plugins/tiddlywiki/browser-storage/util.js").BrowserStorageUtil;
 
 exports.startup = function() {
-	var self = this;
-
-	// If not exists, add ENABLED tiddler with default value "yes"
-	if(!$tw.wiki.getTiddler(ENABLED_TITLE)) {
-		$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "yes"});
-	}
 	// Compute our prefix for local storage keys
 	var prefix = "tw5#" + window.location.pathname + "#";
 	// Make a logger
 	var logger = new $tw.utils.Logger("browser-storage",{
-			colour: "cyan"
-		});
+		colour: "cyan"
+	});
 	// Add browserStorage object to $tw
 	$tw.browserStorage = new BrowserStorageUtil($tw.wiki,{
 		enabledTitle: ENABLED_TITLE,
@@ -44,7 +38,7 @@ exports.startup = function() {
 	var filterFn,
 		compileFilter = function() {
 			filterFn = $tw.wiki.compileFilter($tw.wiki.getTiddlerText(SAVE_FILTER_TITLE));
-	}
+		};
 	compileFilter();
 	// Listen for tm-clear-browser-storage messages
 	$tw.rootWidget.addEventListener("tm-clear-browser-storage",function(event) {

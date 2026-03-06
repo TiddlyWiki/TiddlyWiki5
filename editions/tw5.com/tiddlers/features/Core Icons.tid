@@ -37,5 +37,5 @@ Some icons take further parameters to customise how they are rendered. For examp
 
 The core icons are implemented as embedded [[SVG elements|Using SVG]], and not as full-blown SVG images. This means that they can be styled using CSS. For example, the CSS property `fill` can be used to change the colour of the icons. For example:
 
-<<wikitext-example-without-html """<span style="fill: red;">{{$:/core/images/opacity}}</span>
+<<wikitext-example-without-html """<span style="color: red;">{{$:/core/images/opacity}}</span>
 """>>

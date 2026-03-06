@@ -1,6 +1,6 @@
 title: $:/core/save/empty
 
 \define saveTiddlerFilter()
-[is[system]] -[prefix[$:/state/popup/]] -[[$:/boot/boot.css]] -[is[system]type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] +[sort[title]]
+[is[system]] -[prefix[$:/state/popup/]] -[[$:/boot/boot.css]] -[is[system]type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[has[plugin-type]field:platform[server]] +[sort[title]]
 \end
 {{$:/core/templates/tiddlywiki5.html}}

@@ -158,7 +158,7 @@ DataWidget.prototype.extractCompoundTiddler = function(title) {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DataWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	this.computeAttributes();
 	var newPayload = this.computeDataTiddlerValues();
 	if(hasPayloadChanged(this.dataPayload,newPayload)) {
 		this.dataPayload = newPayload;

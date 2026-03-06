@@ -52,13 +52,20 @@ first-search-filter: [is[system]search<userInput>sort[title]limit[250]] :except[
 </$list></$list>
 \end
 
+\procedure input-actions()
+<%if [<event-key-descriptor>match[((input-tab-right))]] %>
+<<set-next-input-tab>>
+<%elseif [<event-key-descriptor>match[((input-tab-left))]] %>
+<<set-previous-input-tab>>
+<%endif%>
+\end
+
 \whitespace trim
 
 <<lingo System/Hint>>
 
 <div class="tc-search">
-<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
-<$keyboard key="((input-tab-left))" actions=<<set-previous-input-tab>>>
+<$keyboard key="((input-tab-right)) ((input-tab-left))" actions=<<input-actions>>>
 <$transclude $variable="keyboard-driven-input"
 	tiddler="$:/temp/advancedsearch/input"
 	storeTitle="$:/temp/advancedsearch"
@@ -72,7 +79,6 @@ first-search-filter: [is[system]search<userInput>sort[title]limit[250]] :except[
 	inputAcceptActions=<<input-accept-actions>>
 	inputAcceptVariantActions=<<input-accept-variant-actions>>
 	filterMinLength={{$:/config/Search/MinLength}}/>
-</$keyboard>
 </$keyboard>
 &#32;
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">

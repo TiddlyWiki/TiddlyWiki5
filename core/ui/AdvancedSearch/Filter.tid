@@ -62,28 +62,34 @@ caption: {{$:/language/Search/Filter/Caption}}
 </$list>
 \end
 
+\procedure input-actions()
+<%if [<event-key-descriptor>match[((input-tab-right))]] %>
+<<set-next-input-tab>>
+<%elseif [<event-key-descriptor>match[((input-tab-left))]] %>
+<<set-previous-input-tab>>
+<%endif%>
+\end
+
 \whitespace trim
 
 <<lingo Filter/Hint>>
 
 <div class="tc-search tc-advanced-search">
-	<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>> class="tc-small-gap-right">
-		<$keyboard key="((input-tab-left))" actions=<<set-previous-input-tab>>>
-			<$transclude $variable="keyboard-driven-input"
-				tiddler="$:/temp/advancedsearch/input"
-				storeTitle="$:/temp/advancedsearch"
-				refreshTitle="$:/temp/advancedsearch/refresh"
-				selectionStateTitle="$:/temp/advancedsearch/selected-item"
-				type="search"
-				tag="input"
-				focus={{$:/config/Search/AutoFocus}}
-				configTiddlerFilter="[[$:/temp/advancedsearch]]"
-				firstSearchFilterField="text"
-				inputAcceptActions=<<input-accept-actions>>
-				inputAcceptVariantActions=<<input-accept-variant-actions>>
-				inputCancelActions=<<cancel-search-actions>>
-			/>
-		</$keyboard>
+	<$keyboard key="((input-tab-right)) ((input-tab-left))" actions=<<input-actions>> class="tc-small-gap-right">
+		<$transclude $variable="keyboard-driven-input"
+			tiddler="$:/temp/advancedsearch/input"
+			storeTitle="$:/temp/advancedsearch"
+			refreshTitle="$:/temp/advancedsearch/refresh"
+			selectionStateTitle="$:/temp/advancedsearch/selected-item"
+			type="search"
+			tag="input"
+			focus={{$:/config/Search/AutoFocus}}
+			configTiddlerFilter="[[$:/temp/advancedsearch]]"
+			firstSearchFilterField="text"
+			inputAcceptActions=<<input-accept-actions>>
+			inputAcceptVariantActions=<<input-accept-variant-actions>>
+			inputCancelActions=<<cancel-search-actions>>
+		/>
 	</$keyboard>
 	<$list filter="[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterButton]!has[draft.of]]">
 		<$transclude/>

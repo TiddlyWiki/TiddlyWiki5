@@ -97,7 +97,6 @@ type: text/vnd.tiddlywiki
 	font-size: 1.2em;
 	line-height: 1.4em;
 	color: #fff;
-	fill: #fff;
 }
 
 .tc-btn-download:active {

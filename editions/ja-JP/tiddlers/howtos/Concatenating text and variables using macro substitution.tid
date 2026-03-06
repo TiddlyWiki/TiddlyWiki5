@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 !! 重要
 
-<<.from-version "5.3.0">> テキストと変数を連結するには、[[置換された属性|Substituted Attribute Values]]や[[置換フィルター演算子|substitute Operator]]を使用することをお勧めします。
+<<.from-version "5.3.0">>以降、テキストと変数を連結するには、[[置換された属性|Substituted Attribute Values]]や[[置換フィルター演算子|substitute Operator]]を使用することをお勧めします。
 
 ~TiddlyWikiでは、変数の値をさまざまなテキスト文字列と組み合わせることがよくあります。一部のプログラミング言語では、このプロセスはテキストの"連結"と呼ばれることがよくあります。
 
