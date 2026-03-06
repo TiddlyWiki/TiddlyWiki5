@@ -1,0 +1,68 @@
+title: $:/plugins/wikilabs/debug/jsontree-styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-json-tree {
+	display: block;
+	font-family: "Source Code Pro", monospace;
+	font-size: 12px;
+	line-height: 1.3;
+	overflow-y: auto;
+	border: 1px solid <<colour tiddler-border>>;
+	padding: 10px;
+	resize: vertical;
+}
+
+.tc-json-tree > details:first-child {
+	border-left: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.tc-json-tree details {
+	border-left: 1px solid <<colour muted-foreground>>;
+	padding-left: 1em;
+	margin-left: 1em;
+}
+
+.tc-json-tree summary {
+	cursor: pointer;
+	outline: none;
+}
+
+.tc-json-tree summary:hover {
+	color: <<colour primary>>;
+}
+
+.tc-json-tree summary::marker {
+	color: <<colour muted-foreground>>;
+}
+
+.tc-json-tree details:not([open]) > summary::marker {
+	color: <<colour dirty-indicator>>;
+}
+
+.tc-json-tree .tc-json-tree-key {
+	color: <<colour foreground>>;
+}
+
+.tc-json-tree .tc-json-tree-string {
+	color: #a31515;
+}
+
+.tc-json-tree .tc-json-tree-number {
+	color: #098658;
+}
+
+.tc-json-tree .tc-json-tree-boolean {
+	color: #0000ff;
+}
+
+.tc-json-tree .tc-json-tree-null {
+	color: #800080;
+}
+
+.tc-json-tree .tc-json-tree-value {
+	margin-left: 1em;
+}
