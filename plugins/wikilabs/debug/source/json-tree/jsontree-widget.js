@@ -123,6 +123,9 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 	details.open = (stateValue === undefined) ? true : (stateValue !== "hide");
 	details.setAttribute("data-state-key",stateKey);
 	details.addEventListener("toggle",function(event) {
+		if(self._suppressToggleSave) {
+			return;
+		}
 		var keyToUpdate = event.target.getAttribute("data-state-key");
 		if(keyToUpdate) {
 			self.saveState(keyToUpdate,event.target.open);
@@ -213,9 +216,80 @@ JsonTreeWidget.prototype.createSelectRangeButton = function(start,end) {
 	button.addEventListener("click",function(event) {
 		event.stopPropagation();
 		event.preventDefault();
+		if(event.ctrlKey || event.metaKey) {
+			self.focusPath(button);
+		}
 		self.selectEditorRange(start,end);
 	});
 	return button;
+};
+
+JsonTreeWidget.prototype.focusPath = function(buttonElement) {
+	var container = this.domNodes[0];
+	if(!container) {
+		return;
+	}
+	var allDetails = container.querySelectorAll("details[data-state-key]");
+	// Find ancestor <details> elements of the clicked button — these stay open
+	var keepOpen = Object.create(null);
+	var node = buttonElement;
+	while(node && node !== container) {
+		if(node.nodeName.toLowerCase() === "details") {
+			var ancestorKey = node.getAttribute("data-state-key");
+			if(ancestorKey !== null) {
+				keepOpen[ancestorKey] = true;
+			}
+		}
+		node = node.parentNode;
+	}
+	// If we have a saved state, restore it (toggle back)
+	if(this._savedFoldState) {
+		var saved = this._savedFoldState;
+		this._savedFoldState = null;
+		this._suppressToggleSave = true;
+		for(var i = 0; i < allDetails.length; i++) {
+			var key = allDetails[i].getAttribute("data-state-key");
+			if(key !== null) {
+				allDetails[i].open = (saved[key] !== "hide");
+			}
+		}
+		this._suppressToggleSave = false;
+		this.wiki.addTiddler(new $tw.Tiddler({
+			title: this.attState,
+			type: "application/json",
+			text: JSON.stringify(saved,null,2)
+		}));
+		return;
+	}
+	// Save current fold state from DOM before focusing
+	var savedState = {};
+	for(var i = 0; i < allDetails.length; i++) {
+		var key = allDetails[i].getAttribute("data-state-key");
+		if(key !== null && !allDetails[i].open) {
+			savedState[key] = "hide";
+		}
+	}
+	this._savedFoldState = savedState;
+	// Close all except ancestors of the clicked button
+	var newState = {};
+	this._suppressToggleSave = true;
+	for(var i = 0; i < allDetails.length; i++) {
+		var key = allDetails[i].getAttribute("data-state-key");
+		if(key !== null) {
+			if(keepOpen[key]) {
+				allDetails[i].open = true;
+			} else {
+				allDetails[i].open = false;
+				newState[key] = "hide";
+			}
+		}
+	}
+	this._suppressToggleSave = false;
+	this.wiki.addTiddler(new $tw.Tiddler({
+		title: this.attState,
+		type: "application/json",
+		text: JSON.stringify(newState,null,2)
+	}));
 };
 
 JsonTreeWidget.prototype.selectEditorRange = function(start,end) {
