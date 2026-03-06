@@ -36,7 +36,7 @@ JsonTreeWidget.prototype.render = function(parent,nextSibling) {
 		// Error message
 		container.appendChild(this.document.createTextNode(data));
 	} else {
-		this.stateData = this.wiki.getTiddlerDataCached(this.attState,{});
+		this.stateData = this.wiki.getTiddlerDataCached(this.foldState,{});
 		var tree = this.createTreeElement(data,null,"");
 		container.appendChild(tree);
 		this.stateData = null;
@@ -49,7 +49,7 @@ JsonTreeWidget.prototype.execute = function() {
 	this.attTiddler = this.getAttribute("tiddler");
 	this.attVariable = this.getAttribute("variable");
 	this.attBlockList = this.getAttribute("block-list","");
-	this.attState = this.getAttribute("state","$:/temp/json-tree/state");
+	this.foldState = this.getAttribute("state","$:/temp/json-tree/state");
 	this.blockList = this.attBlockList ? this.attBlockList.split(" ") : [];
 };
 
@@ -216,6 +216,11 @@ JsonTreeWidget.prototype.createSelectRangeButton = function(start,end) {
 	button.addEventListener("click",function(event) {
 		event.stopPropagation();
 		event.preventDefault();
+		if(self._activeButton) {
+			self._activeButton.classList.remove("tc-json-tree-select-range-active");
+		}
+		button.classList.add("tc-json-tree-select-range-active");
+		self._activeButton = button;
 		if(event.ctrlKey || event.metaKey) {
 			self.focusPath(button);
 		}
@@ -243,9 +248,10 @@ JsonTreeWidget.prototype.focusPath = function(buttonElement) {
 		node = node.parentNode;
 	}
 	// If we have a saved state, restore it (toggle back)
-	if(this._savedFoldState) {
-		var saved = this._savedFoldState;
-		this._savedFoldState = null;
+	var savedTiddler = this.wiki.getTiddler(this.foldState + "/saved");
+	if(savedTiddler) {
+		var saved = this.wiki.getTiddlerDataCached(this.foldState + "/saved",{});
+		this.wiki.deleteTiddler(this.foldState + "/saved");
 		this._suppressToggleSave = true;
 		for(var i = 0; i < allDetails.length; i++) {
 			var key = allDetails[i].getAttribute("data-state-key");
@@ -255,7 +261,7 @@ JsonTreeWidget.prototype.focusPath = function(buttonElement) {
 		}
 		this._suppressToggleSave = false;
 		this.wiki.addTiddler(new $tw.Tiddler({
-			title: this.attState,
+			title: this.foldState,
 			type: "application/json",
 			text: JSON.stringify(saved,null,2)
 		}));
@@ -269,7 +275,11 @@ JsonTreeWidget.prototype.focusPath = function(buttonElement) {
 			savedState[key] = "hide";
 		}
 	}
-	this._savedFoldState = savedState;
+	this.wiki.addTiddler(new $tw.Tiddler({
+		title: this.foldState + "/saved",
+		type: "application/json",
+		text: JSON.stringify(savedState,null,2)
+	}));
 	// Close all except ancestors of the clicked button
 	var newState = {};
 	this._suppressToggleSave = true;
@@ -286,7 +296,7 @@ JsonTreeWidget.prototype.focusPath = function(buttonElement) {
 	}
 	this._suppressToggleSave = false;
 	this.wiki.addTiddler(new $tw.Tiddler({
-		title: this.attState,
+		title: this.foldState,
 		type: "application/json",
 		text: JSON.stringify(newState,null,2)
 	}));
@@ -320,14 +330,14 @@ JsonTreeWidget.prototype.selectEditorRange = function(start,end) {
 };
 
 JsonTreeWidget.prototype.saveState = function(stateKey,isOpen) {
-	var currentData = $tw.utils.extend({},this.wiki.getTiddlerDataCached(this.attState,{}));
+	var currentData = $tw.utils.extend({},this.wiki.getTiddlerDataCached(this.foldState,{}));
 	if(isOpen) {
 		delete currentData[stateKey];
 	} else {
 		currentData[stateKey] = "hide";
 	}
 	this.wiki.addTiddler(new $tw.Tiddler({
-		title: this.attState,
+		title: this.foldState,
 		type: "application/json",
 		text: JSON.stringify(currentData,null,2)
 	}));

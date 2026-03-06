@@ -83,3 +83,7 @@ tags: $:/tags/Stylesheet
 .tc-json-tree .tc-json-tree-select-range:hover svg {
 	fill: <<colour primary>>;
 }
+
+.tc-json-tree .tc-json-tree-select-range-active svg {
+	fill: <<colour dirty-indicator>>;
+}
