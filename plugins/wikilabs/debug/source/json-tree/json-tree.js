@@ -18,7 +18,6 @@ exports.before = ["startup"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	// Define the custom element
 	if(!window.customElements.get("json-tree")) {
 		class JsonTree extends HTMLElement {
 			constructor() {
@@ -28,11 +27,11 @@ exports.startup = function() {
 				style.textContent = `
 					:host {
 						display: block;
-						font-family: "Source Code Pro", monospace;
-						font-size: 12px;
+						font-family: var(--json-tree-font-family, "Source Code Pro", monospace);
+						font-size: var(--json-tree-font-size, 12px);
 						line-height: 1.3;
 						overflow-y: auto;
-						border: 1px solid #ddd;
+						border: 1px solid var(--json-tree-border-color, #ddd);
 						padding: 10px;
 						resize: vertical;
 					}
@@ -45,7 +44,7 @@ exports.startup = function() {
 						padding-left: 0;
 					}
 					details {
-						border-left: 1px solid #ccc;
+						border-left: 1px solid var(--json-tree-guide-color, #ccc);
 						padding-left: 1em;
 						margin-left: 1em;
 					}
@@ -54,28 +53,28 @@ exports.startup = function() {
 						outline: none;
 					}
 					summary:hover {
-						color: blue;
+						color: var(--json-tree-hover-color, blue);
 					}
 					summary::marker {
-						color: #666;
+						color: var(--json-tree-marker-color, #666);
 					}
 					details:not([open]) > summary::marker {
-						color: red;
+						color: var(--json-tree-marker-closed-color, red);
 					}
 					.key {
-						color: #666;
+						color: var(--json-tree-key-color, #666);
 					}
 					.string {
-						color: #a31515;
+						color: var(--json-tree-string-color, #a31515);
 					}
 					.number {
-						color: #098658;
+						color: var(--json-tree-number-color, #098658);
 					}
 					.boolean {
-						color: #0000ff;
+						color: var(--json-tree-boolean-color, #0000ff);
 					}
 					.null {
-						color: #800080;
+						color: var(--json-tree-null-color, #800080);
 					}
 					.value {
 						margin-left: 1em;
@@ -86,6 +85,12 @@ exports.startup = function() {
 				this._container.setAttribute("class", "tree");
 				this.shadowRoot.append(this._container);
 				this._boundUpdateMaxHeight = this._updateMaxHeight.bind(this);
+				this._saveStateTimer = null;
+				this._pendingStateUpdates = null;
+			}
+
+			static get observedAttributes() {
+				return ["tiddler", "block-list", "state"];
 			}
 
 			connectedCallback() {
@@ -96,176 +101,177 @@ exports.startup = function() {
 
 			disconnectedCallback() {
 				window.removeEventListener("resize", this._boundUpdateMaxHeight);
+				if(this._saveStateTimer) {
+					clearTimeout(this._saveStateTimer);
+					this._flushStateUpdates();
+				}
+			}
+
+			attributeChangedCallback() {
+				if(this.isConnected) {
+					this.render();
+				}
 			}
 
 			_updateMaxHeight() {
 				const rect = this.getBoundingClientRect();
 				const availableHeight = window.innerHeight - rect.top;
-				const margin = 40; // A bit of space at the bottom
+				const margin = 40;
 				this.style.maxHeight = (availableHeight - margin) + "px";
 			}
 
-			render() {
-				const sourceTiddler = this.getAttribute("tiddler") || "$:/plugins/wikilabs/debug/test.json";
-				const tiddler = $tw.wiki.getTiddler(sourceTiddler);
-				let data;
-				if(tiddler) {
-					try {
-						data = JSON.parse(tiddler.fields.text);
-					} catch (e) {
-						this._container.textContent = "Invalid JSON in tiddler: " + sourceTiddler;
-						return;
+			_getStateTiddlerTitle() {
+				return this.getAttribute("state") || "$:/temp/json-tree/state";
+			}
+
+			_scheduleSaveState(stateKey, isOpen) {
+				var self = this;
+				if(!this._pendingStateUpdates) {
+					this._pendingStateUpdates = {};
+				}
+				this._pendingStateUpdates[stateKey] = isOpen;
+				if(!this._saveStateTimer) {
+					this._saveStateTimer = setTimeout(function() {
+						self._flushStateUpdates();
+					}, 100);
+				}
+			}
+
+			_flushStateUpdates() {
+				this._saveStateTimer = null;
+				if(!this._pendingStateUpdates) {
+					return;
+				}
+				var stateDataTiddlerTitle = this._getStateTiddlerTitle();
+				var currentData = Object.assign({}, $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {}));
+				for(var key in this._pendingStateUpdates) {
+					if(this._pendingStateUpdates[key]) {
+						delete currentData[key];
+					} else {
+						currentData[key] = "hide";
 					}
-				} else {
+				}
+				this._pendingStateUpdates = null;
+				$tw.wiki.addTiddler(new $tw.Tiddler({
+					title: stateDataTiddlerTitle,
+					type: "application/json",
+					text: JSON.stringify(currentData, null, 2)
+				}));
+			}
+
+			render() {
+				var sourceTiddler = this.getAttribute("tiddler");
+				if(!sourceTiddler) {
+					this._container.textContent = "No tiddler attribute specified";
+					return;
+				}
+				var tiddler = $tw.wiki.getTiddler(sourceTiddler);
+				if(!tiddler) {
 					this._container.textContent = "Source tiddler not found: " + sourceTiddler;
 					return;
 				}
-
-				const blockListAttr = this.getAttribute("block-list");
-				this._blockList = blockListAttr ? blockListAttr.split(" ") : [];
-
-				this._container.innerHTML = ""; // Clear previous content
-				const stateAttr = this.getAttribute("state");
-				const stateDataTiddlerTitle = stateAttr || "_"; // Default to "_" if not provided
-				const tree = this._createTreeElement(data, null, "", stateDataTiddlerTitle); // Initial empty path and state tiddler title
-				this._container.append(tree);
-			}
-
-			_createTreeElement(data, key, currentPath, stateDataTiddlerTitle) {
-				if(Array.isArray(data)) {
-					return this._createArrayElement(data, key, currentPath, stateDataTiddlerTitle);
-				} else if(typeof data === "object" && data !== null) {
-					return this._createObjectElement(data, key, currentPath, stateDataTiddlerTitle);
-				} else {
-					const fragment = document.createDocumentFragment();
-					if(key !== null) {
-						const keySpan = document.createElement("span");
-						keySpan.className = "key";
-						keySpan.textContent = (typeof key === "number") ? `${key}: ` : `"${key}": `;
-						fragment.append(keySpan);
-					}
-					fragment.append(this._createValueElement(data));
-					return fragment;
+				var data;
+				try {
+					data = JSON.parse(tiddler.fields.text);
+				} catch(e) {
+					this._container.textContent = "Invalid JSON in tiddler: " + sourceTiddler;
+					return;
 				}
+				var blockListAttr = this.getAttribute("block-list");
+				this._blockList = blockListAttr ? blockListAttr.split(" ") : [];
+				this._container.replaceChildren();
+				var stateDataTiddlerTitle = this._getStateTiddlerTitle();
+				this._stateData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
+				var tree = this._createTreeElement(data, null, "");
+				this._container.append(tree);
+				this._stateData = null;
 			}
 
-			_createObjectElement(obj, key, currentPath, stateDataTiddlerTitle) {
-				const details = document.createElement("details");
-				// const stateDataTiddlerTitle = "_"; // Now passed as parameter
-				const stateKey = currentPath; // The key within the data tiddler
-				const stateData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
-				details.open = (stateData[stateKey] === undefined) ? true : (stateData[stateKey] !== "hide");
-				details.setAttribute("data-state-key", stateKey); // For event listener
-				details.addEventListener("toggle", (event) => {
-					const keyToUpdate = event.target.getAttribute("data-state-key");
+			_createTreeElement(data, key, currentPath) {
+				if(Array.isArray(data)) {
+					return this._createCollapsibleElement(data, key, currentPath, true);
+				} else if(typeof data === "object" && data !== null) {
+					return this._createCollapsibleElement(data, key, currentPath, false);
+				}
+				var fragment = document.createDocumentFragment();
+				if(key !== null) {
+					fragment.append(createKeySpan(key));
+				}
+				fragment.append(createValueElement(data));
+				return fragment;
+			}
+
+			_createCollapsibleElement(data, key, currentPath, isArray) {
+				var self = this;
+				var details = document.createElement("details");
+				var stateKey = currentPath;
+				var stateValue = this._stateData[stateKey];
+				details.open = (stateValue === undefined) ? true : (stateValue !== "hide");
+				details.setAttribute("data-state-key", stateKey);
+				details.addEventListener("toggle", function(event) {
+					var keyToUpdate = event.target.getAttribute("data-state-key");
 					if(keyToUpdate) {
-						let currentData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
-						currentData = {...currentData}; // Create a mutable copy
-						if(event.target.open) {
-							delete currentData[keyToUpdate]; // Remove key if open (default)
-						} else {
-							currentData[keyToUpdate] = "hide"; // Set to hide if closed
-						}
-						$tw.wiki.addTiddler(new $tw.Tiddler({
-							title: stateDataTiddlerTitle,
-							type: "application/json", // Assuming data tiddlers are JSON
-							text: JSON.stringify(currentData, null, 2)
-						}));
+						self._scheduleSaveState(keyToUpdate, event.target.open);
 					}
 				});
-				const summary = document.createElement("summary");
-
+				var summary = document.createElement("summary");
 				if(key !== null) {
-					const keySpan = document.createElement("span");
-					keySpan.className = "key";
-					keySpan.textContent = `"${key}": `;
-					summary.append(keySpan);
+					summary.append(createKeySpan(key));
 				}
-				summary.append("{...}");
-
+				if(isArray) {
+					summary.append("[...] (" + data.length + " items)");
+				} else {
+					summary.append("{...}");
+				}
 				details.append(summary);
-
-				const list = document.createElement("div");
+				var list = document.createElement("div");
 				list.className = "value";
-				for(const newKey in obj) {
-					if(Object.prototype.hasOwnProperty.call(obj, newKey)) {
-						if(this._blockList.includes(newKey)) {
-							continue;
-						}
-						const item = document.createElement("div");
-						const newPath = (currentPath ? `${currentPath}/${newKey}` : newKey);
-						item.append(this._createTreeElement(obj[newKey], newKey, newPath, stateDataTiddlerTitle));
+				if(isArray) {
+					for(var i = 0; i < data.length; i++) {
+						var item = document.createElement("div");
+						var newPath = currentPath ? currentPath + "/" + i : String(i);
+						item.append(this._createTreeElement(data[i], i, newPath));
 						list.append(item);
 					}
-				}
-				details.append(list);
-				return details;
-			}
-
-			_createArrayElement(arr, key, currentPath, stateDataTiddlerTitle) {
-				const details = document.createElement("details");
-				// const stateDataTiddlerTitle = "_"; // Now passed as parameter
-				const stateKey = currentPath; // The key within the data tiddler
-				const stateData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
-				details.open = (stateData[stateKey] === undefined) ? (key !== "orderedAttributes") : (stateData[stateKey] !== "hide");
-				details.setAttribute("data-state-key", stateKey); // For event listener
-				details.addEventListener("toggle", (event) => {
-					const keyToUpdate = event.target.getAttribute("data-state-key");
-					if(keyToUpdate) {
-						let currentData = $tw.wiki.getTiddlerDataCached(stateDataTiddlerTitle, {});
-						currentData = {...currentData}; // Create a mutable copy
-						if(event.target.open) {
-							delete currentData[keyToUpdate]; // Remove key if open (default)
-						} else {
-							currentData[keyToUpdate] = "hide"; // Set to hide if closed
-						}
-						$tw.wiki.addTiddler(new $tw.Tiddler({
-							title: stateDataTiddlerTitle,
-							type: "application/json", // Assuming data tiddlers are JSON
-							text: JSON.stringify(currentData, null, 2)
-						}));
-					}
-				});
-				const summary = document.createElement("summary");
-
-				if(key !== null) {
-					const keySpan = document.createElement("span");
-					keySpan.className = "key";
-					// Use the key for arrays too, for consistency
-					keySpan.textContent = (typeof key === "number") ? `${key}: ` : `"${key}": `;
-					summary.append(keySpan);
-				}
-				summary.append(`[...] (${arr.length} items)`);
-
-				details.append(summary);
-
-				const list = document.createElement("div");
-				list.className = "value";
-				arr.forEach((value, index) => {
-					const item = document.createElement("div");
-					const newPath = (currentPath ? `${currentPath}/${index}` : String(index));
-					item.append(this._createTreeElement(value, index, newPath, stateDataTiddlerTitle));
-					list.append(item);
-				});
-				details.append(list);
-				return details;
-			}
-
-			_createValueElement(value) {
-				const span = document.createElement("span");
-				const type = typeof value;
-				span.className = type;
-				if(type === "string") {
-					span.textContent = `"${value}"`;
-				} else if(value === null) {
-					span.textContent = "null";
-					span.className = "null";
 				} else {
-					span.textContent = String(value);
+					var keys = Object.keys(data);
+					for(var k = 0; k < keys.length; k++) {
+						var newKey = keys[k];
+						if(this._blockList.indexOf(newKey) !== -1) {
+							continue;
+						}
+						var objItem = document.createElement("div");
+						var objPath = currentPath ? currentPath + "/" + newKey : newKey;
+						objItem.append(this._createTreeElement(data[newKey], newKey, objPath));
+						list.append(objItem);
+					}
 				}
-				return span;
+				details.append(list);
+				return details;
 			}
+
 		}
+
+		function createKeySpan(key) {
+			var span = document.createElement("span");
+			span.className = "key";
+			span.textContent = (typeof key === "number") ? key + ": " : "\"" + key + "\": ";
+			return span;
+		}
+
+		function createValueElement(value) {
+			var span = document.createElement("span");
+			if(value === null) {
+				span.className = "null";
+				span.textContent = "null";
+			} else {
+				var type = typeof value;
+				span.className = type;
+				span.textContent = (type === "string") ? "\"" + value + "\"" : String(value);
+			}
+			return span;
+		}
+
 		window.customElements.define("json-tree", JsonTree);
 	}
 };
