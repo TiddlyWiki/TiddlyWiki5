@@ -36,6 +36,9 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.labelDomNode.setAttribute("class","tc-checkbox " + this.checkboxClass);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","checkbox");
+	if(this.isWikitextCheckbox && !this.checkboxSourceTitle) {
+		this.inputDomNode.setAttribute("disabled",true);
+	}
 	isChecked = this.getValue();
 	if(isChecked) {
 		this.inputDomNode.setAttribute("checked","true");
@@ -69,6 +72,10 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 };
 
 CheckboxWidget.prototype.getValue = function() {
+	// Wikitext inline mode: state comes directly from the parse tree node
+	if(this.isWikitextCheckbox) {
+		return !!this.parseTreeNode.checked;
+	}
 	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
 	if(tiddler || this.checkboxFilter) {
 		if(tiddler && this.checkboxTag) {
@@ -166,112 +173,141 @@ CheckboxWidget.prototype.getValue = function() {
 	return false;
 };
 
+/*
+Handle a click on a wikitext inline checkbox: splice [x] or [ ] into the
+source tiddler's text field at the position recorded in the parse tree node.
+*/
+CheckboxWidget.prototype.handleTextCheckboxChange = function(checked) {
+	const sourceTiddler = this.wiki.getTiddler(this.checkboxSourceTitle);
+	if(!sourceTiddler) return;
+	const text = sourceTiddler.fields.text || "";
+	const {start, end} = this.parseTreeNode;
+	// Safety: verify the character range actually contains a checkbox token in
+	// the source text.  Guards against stale or mis-matched parse contexts
+	// (e.g. a checkbox whose offsets come from a different string than sourceTiddler).
+	const token = text.substring(start, end);
+	if(token !== "[ ]" && token !== "[x]" && token !== "[X]") return;
+	const replacement = checked ? "[x]" : "[ ]";
+	const newText = text.substring(0, start) + replacement + text.substring(end);
+	this.wiki.addTiddler(new $tw.Tiddler(
+		this.wiki.getCreationFields(),
+		sourceTiddler,
+		{text: newText},
+		this.wiki.getModificationFields()
+	));
+};
+
 CheckboxWidget.prototype.handleChangeEvent = function(event) {
-	var checked = this.inputDomNode.checked,
-		tiddler = this.wiki.getTiddler(this.checkboxTitle),
-		fallbackFields = {text: ""},
-		newFields = {title: this.checkboxTitle},
-		hasChanged = false,
-		tagCheck = false,
-		hasTag = tiddler && tiddler.hasTag(this.checkboxTag),
-		value = checked ? this.checkboxChecked : this.checkboxUnchecked,
-		notValue = checked ? this.checkboxUnchecked : this.checkboxChecked;
-	if(this.checkboxTag && this.checkboxInvertTag === "yes") {
-		tagCheck = hasTag === checked;
+	var checked = this.inputDomNode.checked;
+	if(this.isWikitextCheckbox) {
+		// Wikitext inline mode: update the source tiddler's text directly
+		this.handleTextCheckboxChange(checked);
 	} else {
-		tagCheck = hasTag !== checked;
-	}
-	// Set the tag if specified
-	if(this.checkboxTag && (!tiddler || tagCheck)) {
-		newFields.tags = tiddler ? (tiddler.fields.tags || []).slice(0) : [];
-		var pos = newFields.tags.indexOf(this.checkboxTag);
-		if(pos !== -1) {
-			newFields.tags.splice(pos,1);
-		}
-		if(this.checkboxInvertTag === "yes" && !checked) {
-			newFields.tags.push(this.checkboxTag);
-		} else if(this.checkboxInvertTag !== "yes" && checked) {
-			newFields.tags.push(this.checkboxTag);
-		}
-		hasChanged = true;
-	}
-	// Set the field if specified
-	if(this.checkboxField) {
-		if(!tiddler || tiddler.fields[this.checkboxField] !== value) {
-			newFields[this.checkboxField] = value;
-			hasChanged = true;
-		}
-	}
-	// Set the index if specified
-	if(this.checkboxIndex) {
-		var indexValue = this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxIndex);
-		if(!tiddler || indexValue !== value) {
-			hasChanged = true;
-		}
-	}
-	// Set the list field (or index) if specified
-	if(this.checkboxListField || this.checkboxListIndex) {
-		var fieldContents, listContents, oldPos, newPos;
-		if(this.checkboxListField) {
-			fieldContents = (tiddler ? tiddler.fields[this.checkboxListField] : undefined) || [];
+		var tiddler = this.wiki.getTiddler(this.checkboxTitle),
+			fallbackFields = {text: ""},
+			newFields = {title: this.checkboxTitle},
+			hasChanged = false,
+			tagCheck = false,
+			hasTag = tiddler && tiddler.hasTag(this.checkboxTag),
+			value = checked ? this.checkboxChecked : this.checkboxUnchecked,
+			notValue = checked ? this.checkboxUnchecked : this.checkboxChecked;
+		if(this.checkboxTag && this.checkboxInvertTag === "yes") {
+			tagCheck = hasTag === checked;
 		} else {
-			fieldContents = this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex);
+			tagCheck = hasTag !== checked;
 		}
-		if($tw.utils.isArray(fieldContents)) {
-			// Make a copy so we can modify it without changing original that's refrenced elsewhere
-			listContents = fieldContents.slice(0);
-		} else if(fieldContents === undefined) {
-			listContents = [];
-		} else if(typeof fieldContents === "string") {
-			listContents = $tw.utils.parseStringArray(fieldContents);
-			// No need to copy since parseStringArray returns a fresh array, not refrenced elsewhere
-		} else {
-			// Field was neither an array nor a string; it's probably something that shouldn't become
-			// an array (such as a date field), so bail out *without* triggering actions
-			return;
-		}
-		oldPos = notValue ? listContents.indexOf(notValue) : -1;
-		newPos = value ? listContents.indexOf(value) : -1;
-		if(oldPos === -1 && newPos !== -1) {
-			// old value absent, new value present: no change needed
-		} else if(oldPos === -1) {
-			// neither one was present
-			if(value) {
-				listContents.push(value);
-				hasChanged = true;
-			} else {
-				// value unspecified? then leave list unchanged
+		// Set the tag if specified
+		if(this.checkboxTag && (!tiddler || tagCheck)) {
+			newFields.tags = tiddler ? (tiddler.fields.tags || []).slice(0) : [];
+			var pos = newFields.tags.indexOf(this.checkboxTag);
+			if(pos !== -1) {
+				newFields.tags.splice(pos,1);
 			}
-		} else if(newPos === -1) {
-			// old value present, new value absent
-			if(value) {
-				listContents[oldPos] = value;
+			if(this.checkboxInvertTag === "yes" && !checked) {
+				newFields.tags.push(this.checkboxTag);
+			} else if(this.checkboxInvertTag !== "yes" && checked) {
+				newFields.tags.push(this.checkboxTag);
+			}
+			hasChanged = true;
+		}
+		// Set the field if specified
+		if(this.checkboxField) {
+			if(!tiddler || tiddler.fields[this.checkboxField] !== value) {
+				newFields[this.checkboxField] = value;
 				hasChanged = true;
+			}
+		}
+		// Set the index if specified
+		if(this.checkboxIndex) {
+			var indexValue = this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxIndex);
+			if(!tiddler || indexValue !== value) {
+				hasChanged = true;
+			}
+		}
+		// Set the list field (or index) if specified
+		if(this.checkboxListField || this.checkboxListIndex) {
+			var fieldContents, listContents, oldPos, newPos;
+			if(this.checkboxListField) {
+				fieldContents = (tiddler ? tiddler.fields[this.checkboxListField] : undefined) || [];
 			} else {
+				fieldContents = this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex);
+			}
+			if($tw.utils.isArray(fieldContents)) {
+				// Make a copy so we can modify it without changing original that's refrenced elsewhere
+				listContents = fieldContents.slice(0);
+			} else if(fieldContents === undefined) {
+				listContents = [];
+			} else if(typeof fieldContents === "string") {
+				listContents = $tw.utils.parseStringArray(fieldContents);
+				// No need to copy since parseStringArray returns a fresh array, not refrenced elsewhere
+			} else {
+				// Field was neither an array nor a string; it's probably something that shouldn't become
+				// an array (such as a date field), so bail out *without* triggering actions
+				return;
+			}
+			oldPos = notValue ? listContents.indexOf(notValue) : -1;
+			newPos = value ? listContents.indexOf(value) : -1;
+			if(oldPos === -1 && newPos !== -1) {
+				// old value absent, new value present: no change needed
+			} else if(oldPos === -1) {
+				// neither one was present
+				if(value) {
+					listContents.push(value);
+					hasChanged = true;
+				} else {
+					// value unspecified? then leave list unchanged
+				}
+			} else if(newPos === -1) {
+				// old value present, new value absent
+				if(value) {
+					listContents[oldPos] = value;
+					hasChanged = true;
+				} else {
+					listContents.splice(oldPos, 1);
+					hasChanged = true;
+				}
+			} else {
+				// both were present: just remove the old one, leave new alone
 				listContents.splice(oldPos, 1);
 				hasChanged = true;
 			}
-		} else {
-			// both were present: just remove the old one, leave new alone
-			listContents.splice(oldPos, 1);
-			hasChanged = true;
+			if(this.checkboxListField) {
+				newFields[this.checkboxListField] = $tw.utils.stringifyList(listContents);
+			}
+			// The listIndex case will be handled in the if(hasChanged) block below
 		}
-		if(this.checkboxListField) {
-			newFields[this.checkboxListField] = $tw.utils.stringifyList(listContents);
-		}
-		// The listIndex case will be handled in the if(hasChanged) block below
-	}
-	if(hasChanged) {
-		if(this.checkboxIndex) {
-			this.wiki.setText(this.checkboxTitle,"",this.checkboxIndex,value);
-		} else if(this.checkboxListIndex) {
-			var listIndexValue = (listContents && listContents.length) ? $tw.utils.stringifyList(listContents) : undefined;
-			this.wiki.setText(this.checkboxTitle,"",this.checkboxListIndex,listIndexValue);
-		} else {
-			this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),fallbackFields,tiddler,newFields,this.wiki.getModificationFields()));
+		if(hasChanged) {
+			if(this.checkboxIndex) {
+				this.wiki.setText(this.checkboxTitle,"",this.checkboxIndex,value);
+			} else if(this.checkboxListIndex) {
+				var listIndexValue = (listContents && listContents.length) ? $tw.utils.stringifyList(listContents) : undefined;
+				this.wiki.setText(this.checkboxTitle,"",this.checkboxListIndex,listIndexValue);
+			} else {
+				this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),fallbackFields,tiddler,newFields,this.wiki.getModificationFields()));
+			}
 		}
 	}
-	// Trigger actions
+	// Trigger actions (always run regardless of mode)
 	if(this.checkboxActions) {
 		this.invokeActionString(this.checkboxActions,this,event);
 	}
@@ -305,8 +341,14 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxClass = this.getAttribute("class","");
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	this.isDisabled = this.getAttribute("disabled","no");
-	this.tabIndex = this.getAttribute();
-	// Make the child widgets
+	this.tabIndex = this.getAttribute("tabindex");
+	// Source tiddler title comes from the `parseSourceTitle` variable (set by wiki.makeWidget and overridden by each TranscludeWidget). Empty string means anonymous parse context (e.g. macro expansion) → checkbox is disabled.
+	this.isWikitextCheckbox = this.parseTreeNode.checked !== undefined
+		&& typeof this.parseTreeNode.start === "number";
+	const rawSourceTitle = this.isWikitextCheckbox
+		? this.getVariable("parseSourceTitle")
+		: undefined;
+	this.checkboxSourceTitle = rawSourceTitle || undefined;
 	this.makeChildWidgets();
 };
 
@@ -320,7 +362,7 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	} else {
 		var refreshed = false;
-		if(changedTiddlers[this.checkboxTitle]) {
+		if(!this.isWikitextCheckbox && changedTiddlers[this.checkboxTitle]) {
 			var isChecked = this.getValue();
 			this.inputDomNode.checked = !!isChecked;
 			this.inputDomNode.indeterminate = (isChecked === undefined);
