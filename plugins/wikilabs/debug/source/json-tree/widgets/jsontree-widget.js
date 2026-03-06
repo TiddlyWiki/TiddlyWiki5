@@ -178,6 +178,9 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 	if(this.attVariable === "preview-text" && !isArray && typeof data.start === "number" && typeof data.end === "number") {
 		summary.appendChild(this.createSelectRangeButton(data.start,data.end));
 	}
+	if(currentPath === "") {
+		summary.appendChild(this.createExportButton());
+	}
 	details.appendChild(summary);
 	var list = this.document.createElement("div");
 	list.className = "tc-jsontree-value";
@@ -257,6 +260,109 @@ JsonTreeWidget.prototype.createSelectRangeButton = function(start,end) {
 		self.selectEditorRange(start,end);
 	});
 	return button;
+};
+
+JsonTreeWidget.prototype.createExportButton = function() {
+	var self = this;
+	var button = this.document.createElement("button");
+	button.className = "tc-jsontree-select-range tc-btn-invisible";
+	button.setAttribute("title","Export visible tree to tiddler");
+	var iconWidget = this.makeChildWidget({
+		type: "transclude",
+		attributes: {
+			"$tiddler": {type: "string", value: "$:/core/images/import-button"},
+			"size": {type: "string", value: "10px"}
+		}
+	});
+	iconWidget.render(button,null);
+	button.addEventListener("click",function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+		var container = self.domNodes[0];
+		if(!container) {
+			return;
+		}
+		var data = self.getData();
+		if(typeof data === "string") {
+			return;
+		}
+		var rootDetails = container.querySelector("details");
+		var text = self.exportTreeText(data,rootDetails,"");
+		self.wiki.addTiddler(new $tw.Tiddler({
+			title: "jsontree-limited-view",
+			type: "text/plain",
+			text: text
+		}));
+	});
+	return button;
+};
+
+JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
+	var OPEN = "\u25BC";
+	var CLOSED = "\u25B6";
+	var lines = [];
+	if(Array.isArray(data)) {
+		var hint = "[...] (" + data.length + " items)";
+		if(!detailsElement || !detailsElement.open) {
+			return CLOSED + " " + hint;
+		}
+		lines.push(OPEN + " " + hint);
+		var valueDiv = detailsElement.querySelector(":scope > .tc-jsontree-value");
+		var items = valueDiv ? valueDiv.children : [];
+		var childIndent = indent + "\t";
+		for(var i = 0; i < data.length; i++) {
+			var itemDiv = items[i];
+			var childDetail = itemDiv ? itemDiv.querySelector(":scope > details") : null;
+			var value = data[i];
+			if(typeof value === "object" && value !== null) {
+				lines.push(childIndent + this.exportTreeText(value,childDetail,childIndent));
+			} else {
+				lines.push(childIndent + this.formatValue(value));
+			}
+		}
+	} else if(typeof data === "object" && data !== null) {
+		var tag = typeof data.tag === "string" ? data.tag : "";
+		var type = typeof data.type === "string" ? data.type : "";
+		var hint = "{" + (tag ? tag + " " : (type ? type + " " : "")) + "...}";
+		if(!detailsElement || !detailsElement.open) {
+			return CLOSED + " " + hint;
+		}
+		lines.push(OPEN + " " + hint);
+		var keys = Object.keys(data);
+		var valueDiv = detailsElement.querySelector(":scope > .tc-jsontree-value");
+		var items = valueDiv ? valueDiv.children : [];
+		var childIndent = indent + "\t";
+		var visibleIndex = 0;
+		for(var k = 0; k < keys.length; k++) {
+			var key = keys[k];
+			if(this.blockList.indexOf(key) !== -1) {
+				continue;
+			}
+			var itemDiv = items[visibleIndex];
+			visibleIndex++;
+			var childDetail = itemDiv ? itemDiv.querySelector(":scope > details") : null;
+			var value = data[key];
+			if(typeof value === "object" && value !== null) {
+				var nestedIndent = childIndent + "\t";
+				lines.push(nestedIndent + "\"" + key + "\": " + this.exportTreeText(value,childDetail,nestedIndent));
+			} else {
+				lines.push(childIndent + "\"" + key + "\": " + this.formatValue(value));
+			}
+		}
+	} else {
+		return this.formatValue(data);
+	}
+	return lines.join("\n");
+};
+
+JsonTreeWidget.prototype.formatValue = function(value) {
+	if(value === null) {
+		return "null";
+	}
+	if(typeof value === "string") {
+		return "\"" + value + "\"";
+	}
+	return String(value);
 };
 
 JsonTreeWidget.prototype.focusPath = function(buttonElement) {
