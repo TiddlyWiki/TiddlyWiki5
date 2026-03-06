@@ -152,7 +152,6 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
-		// Groups:
 		// 1 - entire filter run prefix
 		// 2 - filter run prefix itself
 		// 3 - filter run prefix suffixes
@@ -680,11 +679,11 @@ exports.parseFilterToDebugTable = function(filterString) {
 					if(operand.text.length > 0) {
 						var operandDesc;
 						if(operand.indirect) {
-							operandDesc = "Title of the tiddler containing the operand value for the \"" + op.operator + "\" operator";
+							operandDesc = "Title of the tiddler containing the parameter value for the \"" + op.operator + "\" operator";
 						} else if(operand.variable) {
-							operandDesc = "Name of the variable containing the operand value for the \"" + op.operator + "\" operator";
+							operandDesc = "Name of the variable containing the parameter value for the \"" + op.operator + "\" operator";
 						} else {
-							operandDesc = "\"" + operand.text + "\" operand for the \"" + op.operator + "\" operator";
+							operandDesc = "\"" + operand.text + "\" parameter for the \"" + op.operator + "\" operator";
 						}
 						operatorRows.push({
 							line: placeText(operand.start + 1,operand.text),
