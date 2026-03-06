@@ -25,8 +25,8 @@ exports.init = function(parser) {
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
-	var checked = this.match[1] === "x" || this.match[1] === "X";
-	var node = {
+	const checked = this.match[1] === "x" || this.match[1] === "X";
+	return [{
 		type: "checkbox",
 		// start/end follow the standard TW5 AST convention: byte offsets of
 		// this node's full extent within the source text.  For checkbox nodes
@@ -34,15 +34,10 @@ exports.parse = function() {
 		start: this.matchRegExp.lastIndex - this.match[0].length,
 		end: this.matchRegExp.lastIndex,
 		// checked: initial boolean state derived from the parsed syntax.
-		checked: checked
-	};
-	// sourceTitle is stored on the node when the parser knows which tiddler
-	// it is parsing (set by parseTiddler or parseText with sourceTitle).
-	// It is deliberately NOT set when parsing macro-expansion text or other
-	// anonymous text, so that the widget can tell the offsets are invalid
-	// for any real tiddler and should disable editing.
-	if(this.parser.sourceTitle) {
-		node.sourceTitle = this.parser.sourceTitle;
-	}
-	return [node];
+		checked
+	}];
+	// Note: sourceTitle is intentionally NOT stored on individual checkbox nodes.
+	// It lives at the parse-root level via widget.parseSourceTitle (set by
+	// wiki.makeWidget and TranscludeWidget) and is found at render time via
+	// widget.getParseSourceTitle() traversal.
 };

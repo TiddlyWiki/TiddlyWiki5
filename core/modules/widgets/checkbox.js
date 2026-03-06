@@ -181,15 +181,23 @@ Handle a click on a wikitext inline checkbox: splice [x] or [ ] into the
 source tiddler's text field at the position recorded in the parse tree node.
 */
 CheckboxWidget.prototype.handleTextCheckboxChange = function(checked) {
-	var sourceTiddler = this.wiki.getTiddler(this.checkboxSourceTitle);
-	if(sourceTiddler) {
-		var text = sourceTiddler.fields.text || "";
-		var start = this.parseTreeNode.start;
-		var end = this.parseTreeNode.end;
-		var replacement = checked ? "[x]" : "[ ]";
-		var newText = text.substring(0,start) + replacement + text.substring(end);
-		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),sourceTiddler,{text: newText},this.wiki.getModificationFields()));
-	}
+	const sourceTiddler = this.wiki.getTiddler(this.checkboxSourceTitle);
+	if(!sourceTiddler) return;
+	const text = sourceTiddler.fields.text || "";
+	const {start, end} = this.parseTreeNode;
+	// Safety: verify the byte range actually contains a checkbox token in the
+	// source text.  Guards against stale or mis-matched parse contexts (e.g.
+	// a checkbox whose offsets come from a different string than sourceTiddler).
+	const token = text.substring(start, end);
+	if(token !== "[ ]" && token !== "[x]" && token !== "[X]") return;
+	const replacement = checked ? "[x]" : "[ ]";
+	const newText = text.substring(0, start) + replacement + text.substring(end);
+	this.wiki.addTiddler(new $tw.Tiddler(
+		this.wiki.getCreationFields(),
+		sourceTiddler,
+		{text: newText},
+		this.wiki.getModificationFields()
+	));
 };
 
 CheckboxWidget.prototype.handleChangeEvent = function(event) {
@@ -337,17 +345,16 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	this.isDisabled = this.getAttribute("disabled","no");
 	this.tabIndex = this.getAttribute();
-	// Wikitext inline checkbox mode: the parse tree node has a boolean `checked`
-	// property (set by the checkbox wikiparser rule) AND numeric `start`/`end`
-	// offsets into the source text. Regular <$checkbox> widgets do not have these.
-	// sourceTitle is stored on the node by the parser rule only when parsing a
-	// real tiddler (via parseTiddler / parseText with sourceTitle). When checkboxes
-	// are produced by macro expansion the parser has no sourceTitle, so the node
-	// has no sourceTitle and the widget disables itself.
+	// Wikitext inline checkbox mode: the parse tree node carries boolean `checked`
+	// and numeric `start`/`end` (set by the checkbox wikiparser rule).
+	// The source tiddler title is discovered by walking up the parentWidget chain
+	// to the nearest parse-source boundary (set by makeWidget or TranscludeWidget).
+	// null = anonymous parse context (macro expansion) → checkboxSourceTitle stays
+	// undefined so the input is rendered disabled.
 	this.isWikitextCheckbox = this.parseTreeNode.checked !== undefined
 		&& typeof this.parseTreeNode.start === "number";
 	this.checkboxSourceTitle = this.isWikitextCheckbox
-		? this.parseTreeNode.sourceTitle
+		? (this.getParseSourceTitle() || undefined)
 		: undefined;
 	// Make the child widgets
 	this.makeChildWidgets();

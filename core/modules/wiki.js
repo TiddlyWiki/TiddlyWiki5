@@ -1152,7 +1152,11 @@ exports.makeWidget = function(parser,options) {
 	options = options || {};
 	var widgetNode = {
 			type: "widget",
-			children: []
+			children: [],
+			// Mark this root widget as a parse-source boundary.
+			// string = tiddler title the parser was created for;
+			// null   = anonymous parse (no sourceTitle on parser).
+			parseSourceTitle: (parser && parser.sourceTitle) || null
 		},
 		currWidgetNode = widgetNode;
 	// Create let variable widget for variables

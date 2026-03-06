@@ -603,8 +603,9 @@ describe("Checkbox widget", function() {
 
 			var checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(1);
-			// sourceTitle is on the AST node (co-located with start/end offsets)
-			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("DirectTasks");
+			// sourceTitle lives at the parse-root level (widget.parseSourceTitle),
+			// NOT on the individual AST node. checkboxSourceTitle is resolved via traversal.
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
 			expect(checkboxes[0].checkboxSourceTitle).toBe("DirectTasks");
 			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
 			expect(checkboxes[0].getValue()).toBe(false);
@@ -625,8 +626,9 @@ describe("Checkbox widget", function() {
 
 			var checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(1);
-			// sourceTitle is on the AST node of the checkbox from SourceTasks
-			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("SourceTasks");
+			// sourceTitle is at the TranscludeWidget level (parse boundary),
+			// not on the AST node of the checkbox from SourceTasks.
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
 			expect(checkboxes[0].checkboxSourceTitle).toBe("SourceTasks");
 
 			clickCheckbox(checkboxes[0],true);
@@ -653,9 +655,10 @@ describe("Checkbox widget", function() {
 			var checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(3);
 
-			// State comes from parseTreeNode.checked, sourceTitle from the AST node
+			// State comes from parseTreeNode.checked; sourceTitle is resolved via
+			// parent TranscludeWidget (not on individual AST nodes).
 			expect(checkboxes[0].getValue()).toBe(false);
-			expect(checkboxes[0].parseTreeNode.sourceTitle).toBe("MyTasks");
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
 			expect(checkboxes[0].checkboxSourceTitle).toBe("MyTasks");
 			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
 			expect(checkboxes[1].parseTreeNode.checked).toBe(true);
@@ -732,17 +735,19 @@ describe("Checkbox widget", function() {
 			// without a sourceTitle (as macro expansion does), the resulting
 			// checkboxes must be disabled so they cannot corrupt any tiddler.
 			var wiki = new $tw.Wiki();
-			// Parse text WITHOUT sourceTitle — this is what macro expansion does
+			// Parse text WITHOUT sourceTitle — this is what macro/variable expansion does
 			var parser = wiki.parseText("text/vnd.tiddlywiki","* [ ] Buy milk\n* [x] Write code",{});
 			var widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
 			widgetNode.render($tw.fakeDocument.createElement("div"),null);
 
 			var checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(2);
-			// No sourceTitle on the AST node — parsed without a tiddler context
+			// sourceTitle is NOT on the individual AST node in any case.
 			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
+			// The parse root widget has parseSourceTitle = null (anonymous parse),
+			// so getParseSourceTitle() returns null → checkboxSourceTitle = undefined.
 			expect(checkboxes[0].checkboxSourceTitle).toBeUndefined();
-			// The input must be disabled to prevent corrupting any tiddler
+			// The input must be disabled to prevent corrupting any tiddler.
 			expect(checkboxes[0].inputDomNode.getAttribute("disabled")).toBeTruthy();
 			expect(checkboxes[1].inputDomNode.getAttribute("disabled")).toBeTruthy();
 		});
