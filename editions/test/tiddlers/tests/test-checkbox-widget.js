@@ -601,7 +601,7 @@ describe("Checkbox widget", function() {
 
 			const checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(1);
-			// sourceTitle is NOT stored on individual AST nodes; it is propagated
+			// sourceTitle is not stored on individual AST nodes; it is propagated
 			// as the `parseSourceTitle` widget variable by wiki.makeWidget().
 			expect(checkboxes[0].getVariable("parseSourceTitle")).toBe("DirectTasks");
 			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
@@ -654,7 +654,6 @@ describe("Checkbox widget", function() {
 			const checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(3);
 
-			// TranscludeWidget sets parseSourceTitle to the transcluded tiddler's title.
 			expect(checkboxes[0].getVariable("parseSourceTitle")).toBe("MyTasks");
 			expect(checkboxes[0].getValue()).toBe(false);
 			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
@@ -741,7 +740,6 @@ describe("Checkbox widget", function() {
 
 			const checkboxes = findCheckboxes(widgetNode);
 			expect(checkboxes.length).toBe(2);
-			// sourceTitle is NOT stored on individual AST nodes.
 			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
 			// wiki.makeWidget() sets parseSourceTitle = "" for anonymous parses;
 			// checkboxSourceTitle resolves to undefined (empty string is falsy).
