@@ -125,7 +125,7 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 	details.addEventListener("toggle",function(event) {
 		var keyToUpdate = event.target.getAttribute("data-state-key");
 		if(keyToUpdate) {
-			self.scheduleSaveState(keyToUpdate,event.target.open);
+			self.saveState(keyToUpdate,event.target.open);
 		}
 	});
 	var summary = this.document.createElement("summary");
@@ -188,33 +188,13 @@ JsonTreeWidget.prototype.createValueElement = function(value) {
 	return span;
 };
 
-JsonTreeWidget.prototype.scheduleSaveState = function(stateKey,isOpen) {
-	var self = this;
-	if(!this.pendingStateUpdates) {
-		this.pendingStateUpdates = {};
-	}
-	this.pendingStateUpdates[stateKey] = isOpen;
-	if(!this.saveStateTimer) {
-		this.saveStateTimer = setTimeout(function() {
-			self.flushStateUpdates();
-		},100);
-	}
-};
-
-JsonTreeWidget.prototype.flushStateUpdates = function() {
-	this.saveStateTimer = null;
-	if(!this.pendingStateUpdates) {
-		return;
-	}
+JsonTreeWidget.prototype.saveState = function(stateKey,isOpen) {
 	var currentData = $tw.utils.extend({},this.wiki.getTiddlerDataCached(this.attState,{}));
-	for(var key in this.pendingStateUpdates) {
-		if(this.pendingStateUpdates[key]) {
-			delete currentData[key];
-		} else {
-			currentData[key] = "hide";
-		}
+	if(isOpen) {
+		delete currentData[stateKey];
+	} else {
+		currentData[stateKey] = "hide";
 	}
-	this.pendingStateUpdates = null;
 	this.wiki.addTiddler(new $tw.Tiddler({
 		title: this.attState,
 		type: "application/json",
