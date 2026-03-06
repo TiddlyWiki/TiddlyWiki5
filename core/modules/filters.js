@@ -620,7 +620,7 @@ exports.parseFilterToDebugTable = function(filterString) {
 			};
 			var prefixDesc = prefixDescriptions[operation.prefix];
 			if(!prefixDesc && operation.namedPrefix) {
-				prefixDesc = "Named prefix: \"" + operation.namedPrefix + "\"";
+				prefixDesc = "Named prefix: [[" + operation.namedPrefix + "|" + operation.namedPrefix.charAt(0).toUpperCase() + operation.namedPrefix.slice(1) + " Filter Run Prefix]]";
 			}
 			rows.push({
 				line: placeText(operation.prefixStart,operation.prefix),
@@ -638,14 +638,14 @@ exports.parseFilterToDebugTable = function(filterString) {
 				if(op.prefix === "!") {
 					operatorRows.push({
 						line: placeText(op.start - 1,"!"),
-						description: "Negation: the result of the \"" + op.operator + "\" operator will be inverted"
+						description: "Negation: the result of the [[" + op.operator + " Operator]] will be inverted"
 					});
 				}
 				// Operator name
 				if(op.start < nameEnd) {
 					operatorRows.push({
 						line: placeText(op.start,filterString.substring(op.start,nameEnd)),
-						description: "\"" + op.operator + "\" operator"
+						description: "[[" + op.operator + " Operator]]"
 					});
 				}
 				// Suffixes
@@ -653,7 +653,7 @@ exports.parseFilterToDebugTable = function(filterString) {
 					var suffixEnd = op.operands[0].start;
 					operatorRows.push({
 						line: placeText(op.suffixStart,filterString.substring(op.suffixStart,suffixEnd)),
-						description: "Suffix for the \"" + op.operator + "\" operator"
+						description: "Suffix for the [[" + op.operator + " Operator]]"
 					});
 				}
 				// Operands
@@ -679,11 +679,11 @@ exports.parseFilterToDebugTable = function(filterString) {
 					if(operand.text.length > 0) {
 						var operandDesc;
 						if(operand.indirect) {
-							operandDesc = "Title of the tiddler containing the parameter value for the \"" + op.operator + "\" operator";
+							operandDesc = "Title of the tiddler containing the parameter value for the [[" + op.operator + " Operator]]";
 						} else if(operand.variable) {
-							operandDesc = "Name of the variable containing the parameter value for the \"" + op.operator + "\" operator";
+							operandDesc = "Name of the variable containing the parameter value for the [[" + op.operator + " Operator]]";
 						} else {
-							operandDesc = "\"" + operand.text + "\" parameter for the \"" + op.operator + "\" operator";
+							operandDesc = "\"" + operand.text + "\" parameter for the [[" + op.operator + " Operator]]";
 						}
 						operatorRows.push({
 							line: placeText(operand.start + 1,operand.text),
