@@ -1,0 +1,7 @@
+created: 20260306203540219
+modified: 20260306204133213
+tags: 
+title: test-jsontree-with-tiddler
+type: text/vnd.tiddlywiki
+
+<$jsontree tiddler="$:/plugins/wikilabs/debug/test.json"/>
