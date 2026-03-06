@@ -47,6 +47,7 @@ function parseFilterOperation(operators,filterString,p,operation) {
 		operator.operator = filterString.substring(p,nextBracketPos);
 		// Any suffix?
 		var colon = operator.operator.indexOf(":");
+		var colon = operator.operator.indexOf(":");
 		if(colon > -1) {
 			operator.suffixStart = p + colon;
 			// The raw suffix for older filters
@@ -245,12 +246,7 @@ exports.getFilterRunPrefixes = function() {
 
 exports.filterTiddlers = function(filterString,widget,source) {
 	var fn = this.compileFilter(filterString);
-	try {
-		const fnResult = fn.call(this,source,widget);
-		return fnResult;
-	} catch(e) {
-		return [`${$tw.language.getString("Error/Filter")}: ${e}`];
-	}
+	return fn.call(this,source,widget);
 };
 
 /*

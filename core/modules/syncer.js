@@ -89,7 +89,7 @@ function Syncer(options) {
 			self.processTaskQueue();
 		} else {
 			// Look for deletions of tiddlers we're already syncing	
-			var outstandingDeletion = false
+			var outstandingDeletion = false;
 			$tw.utils.each(changes,function(change,title,object) {
 				if(change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) {
 					outstandingDeletion = true;
@@ -304,7 +304,7 @@ Syncer.prototype.syncFromServer = function() {
 
 Syncer.prototype.canSyncFromServer = function() {
 	return !!this.syncadaptor.getUpdatedTiddlers || !!this.syncadaptor.getSkinnyTiddlers;
-}
+};
 
 /*
 Force load a tiddler from the server
@@ -355,7 +355,7 @@ Dispay a password prompt
 */
 Syncer.prototype.displayLoginPrompt = function() {
 	var self = this;
-	var promptInfo = $tw.passwordPrompt.createPrompt({
+	$tw.passwordPrompt.createPrompt({
 		serviceName: $tw.language.getString("LoginToTiddlySpace"),
 		callback: function(data) {
 			self.login(data.username,data.password,function(err,isLoggedIn) {
@@ -530,7 +530,7 @@ function SaveTiddlerTask(syncer,title) {
 
 SaveTiddlerTask.prototype.toString = function() {
 	return "SAVE " + this.title;
-}
+};
 
 SaveTiddlerTask.prototype.run = function(callback) {
 	var self = this,
@@ -568,7 +568,7 @@ function DeleteTiddlerTask(syncer,title) {
 
 DeleteTiddlerTask.prototype.toString = function() {
 	return "DELETE " + this.title;
-}
+};
 
 DeleteTiddlerTask.prototype.run = function(callback) {
 	var self = this;
@@ -595,7 +595,7 @@ function LoadTiddlerTask(syncer,title) {
 
 LoadTiddlerTask.prototype.toString = function() {
 	return "LOAD " + this.title;
-}
+};
 
 LoadTiddlerTask.prototype.run = function(callback) {
 	var self = this;
@@ -621,7 +621,7 @@ function SyncFromServerTask(syncer) {
 
 SyncFromServerTask.prototype.toString = function() {
 	return "SYNCFROMSERVER";
-}
+};
 
 SyncFromServerTask.prototype.run = function(callback) {
 	var self = this;

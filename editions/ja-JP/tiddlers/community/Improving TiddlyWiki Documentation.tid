@@ -1,0 +1,55 @@
+created: 20140820151051019
+modified: 20260208120130753
+original-modified: 20251023154718268
+tags: Community
+title: Improving TiddlyWiki Documentation
+ja-title: TiddlyWikiドキュメントの改善
+type: text/vnd.tiddlywiki
+
+誰でも https://tiddlywiki.com で読めるTiddlyWikiドキュメントの改善を提出できます(コアコードを改善するには、提出前にブラウザとNode.jsの両方で変更をテストする必要があるため、より複雑なプロセスを使用します)
+
+<<.warning """すでに[[GitHub]]をご存じであれば、ドキュメントの更新は`tiddlywiki-com`ブランチに送信する必要があることに注意してください""">>
+
+! 編集を開始する前に
+
+# [[ドキュメントスタイルガイド|Documentation Style Guide]]を読んで遵守してください
+# まだアカウントをお持ちでない場合は、 https://github.com でアカウントを作成します
+# まだ署名していない場合は、[[コントリビュータライセンスアグリメントにサインする|Signing the Contributor License Agreement]]の説明に従って[[コントリビュータライセンスアグリメント|Contributor License Agreement]]に署名してください
+
+! 編集し、編集内容を送信する
+
+[[TiddlyWiki Docs PR Maker]]を使用してドキュメントを編集するか、~GitHubで直接編集するかを選択できます。前者の方法は、~GitHubに詳しくないユーザーに特に推奨されます
+
+!! [[Docs PR Maker|TiddlyWiki Docs PR Maker]]エディションの使用
+
+# https://edit.tiddlywiki.com にアクセスするか、tiddlywiki.comでTiddlerを編集するときにタイトルの下のリボンに表示されるリンクをクリックします
+# ~GitHubユーザー名と~GitHubアクセストークンを指定する簡単な導入に進みます(ガイドに従って作成します)
+# Tiddlerを編集または作成してドキュメントを更新すると、Wikiがすべての変更を追跡します
+# "Submit updates"ボタンをクリックし、編集したすべてのTiddlerが送信内容に含まれているかどうかを確認します。そうでない場合は、ボックスにドラッグします
+# 変更内容の簡潔なタイトルと説明を入力します([[コントリビュートガイドライン|Contributing]]のプルリクエストのタイトル付けに関するルールを参照してください)
+# 変更を送信します:
+** "Save as draft"はプルリクエストの//ドラフト//を作成します。これは、後で作業するかまずは議論したいため、変更を//まだ//マージしたくない場合に便利です
+** "Submit documentation update"はプルリクエストが作成され、すぐにレビューとマージに利用されるようになります
+
+!! ~GitHubの使用
+
+# https://tiddlywiki.com で、改善したいTiddlerの"Edit"をクリックします
+# 次のテキストが記載されたピンクのバナーが表示されます: //Can you help us improve this documentation? Find out how to edit this tiddler on ~GitHub//
+# ''this tiddler on ~GitHub''の外部リンクをクリックします
+## "you need to fork this repository to propose changes"というメッセージが表示されます。"fork"とは、提案している変更を組み込むためのリポジトリの独自コピーです
+# 新しいブラウザタブが開き、github.comでTiddlerを編集できるようになります
+# Tiddlerテキストの編集ボックスの下に、''Propose file change''というラベルのボックスが表示されます
+# 変更を説明する簡単なタイトルを入力します(例, "Clarify attribute syntax instability")
+# 必要に応じて、より長い説明も入力します
+# ''Propose file change''というラベルの付いた緑色のボタンをクリックします
+# 次の画面で、''Create pull request''というラベルの付いた緑色のボタンをクリックします
+
+[[Jermolene|https://github.com/Jermolene]]か、他のコアデベロッパーが、プルリクエストをマージして、 https://tiddlywiki.com の次のビルドに組み込みます
+
+Mario Pietschは、次の短いチュートリアル動画を作成しました: 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/L4zTkMYcri8" frameborder="0" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6ElUruH92tc" frameborder="0" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/axFCk9KsMFc" frameborder="0" allowfullscreen></iframe>

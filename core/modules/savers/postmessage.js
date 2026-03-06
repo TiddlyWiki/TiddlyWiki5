@@ -6,10 +6,7 @@ module-type: saver
 Handles saving changes via window.postMessage() to the window.parent
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -63,4 +60,3 @@ exports.create = function(wiki) {
 	return new PostMessageSaver(wiki);
 };
 
-})();

@@ -20,8 +20,7 @@ var Command = function(params,commander) {
 };
 
 Command.prototype.execute = function() {
-	var fs = require("fs"),
-		path = require("path");
+	var fs = require("fs");
 	// Check that we don't already have a valid wiki folder
 	if($tw.boot.wikiTiddlersPath || ($tw.utils.isDirectory($tw.boot.wikiPath) && !$tw.utils.isDirectoryEmpty($tw.boot.wikiPath))) {
 		return "Wiki folder is not empty";

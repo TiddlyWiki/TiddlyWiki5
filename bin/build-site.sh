@@ -120,7 +120,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 	|| exit 1
 
 # /empty.html					Empty
-# /empty.hta					For Internet Explorer
 # /empty-external-core.html		External core empty
 # /tiddlywikicore-<version>.js	Core plugin javascript
 node $TW5_BUILD_TIDDLYWIKI \

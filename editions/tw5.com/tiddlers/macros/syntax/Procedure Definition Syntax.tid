@@ -1,6 +1,6 @@
 created: 20240310165023000
 modified: 20240310175033730
-tags: [[Procedure Syntax]]
+tags: [[Call Syntax]]
 title: Procedure Definition Syntax
 type: text/vnd.tiddlywiki
 
@@ -73,7 +73,7 @@ Each ''individual'' <<.place parameter>> has the following syntax:
 
 * <<.place default>> is an optional value of a parameter is specified as follows:
 
-<$railroad text={{$:/editions/tw5.com/railroad/macro-parameter-value}}/>
+<$railroad text={{$:/editions/tw5.com/railroad/call-parameter-value}}/>
 
 !! body
 

@@ -36,9 +36,9 @@ TwitterWidget.prototype.render = function(parent,nextSibling) {
 	var method,
 		arg,
 		options = {};
-		$tw.utils.each(optionAttributes,function(attr) {
-			options[attr] = self.getAttribute(attr);
-		});
+	$tw.utils.each(optionAttributes,function(attr) {
+		options[attr] = self.getAttribute(attr);
+	});
 	switch(this.getAttribute("type")) {
 		case "shareButton":
 			method = "createShareButton";

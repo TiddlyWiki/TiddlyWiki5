@@ -1,0 +1,8 @@
+caption: --tp-story-right
+created: 20260130065417448
+modified: 20260130065457358
+tags: [[Core CSS Variables]]
+title: --tp-story-right CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-story-right` CSS variable represents how far the left margin of the sidebar is from the left of the page.

@@ -1,0 +1,12 @@
+title: $:/changenotes/5.4.0/#9177
+description: Add Display Field to list-tagged-draggable and list-links-draggable macros
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9177
+github-contributors: kookma
+
+A new input parameter, `displayField`, has been added to the `list-links-draggable` and `list-tagged-draggable` macros, 
+allowing users to specify which field (e.g., title, caption, or any custom field) should be displayed when a tiddler is 
+rendered via the draggable macro.

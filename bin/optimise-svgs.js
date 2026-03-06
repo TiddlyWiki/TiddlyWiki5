@@ -15,40 +15,40 @@ var fs = require("fs"),
 	{ optimize } = require("svgo"),
 	config = {
 		plugins: [
-			'cleanupAttrs',
-			'removeDoctype',
-			'removeXMLProcInst',
-			'removeComments',
-			'removeMetadata',
-			'removeTitle',
-			'removeDesc',
-			'removeUselessDefs',
-			'removeEditorsNSData',
-			'removeEmptyAttrs',
-			'removeHiddenElems',
-			'removeEmptyText',
-			'removeEmptyContainers',
+			"cleanupAttrs",
+			"removeDoctype",
+			"removeXMLProcInst",
+			"removeComments",
+			"removeMetadata",
+			"removeTitle",
+			"removeDesc",
+			"removeUselessDefs",
+			"removeEditorsNSData",
+			"removeEmptyAttrs",
+			"removeHiddenElems",
+			"removeEmptyText",
+			"removeEmptyContainers",
 			// 'removeViewBox',
-			'cleanupEnableBackground',
-			'convertStyleToAttrs',
-			'convertColors',
-			'convertPathData',
-			'convertTransform',
-			'removeUnknownsAndDefaults',
-			'removeNonInheritableGroupAttrs',
-			'removeUselessStrokeAndFill',
-			'removeUnusedNS',
-			'cleanupIDs',
-			'cleanupNumericValues',
-			'moveElemsAttrsToGroup',
-			'moveGroupAttrsToElems',
-			'collapseGroups',
+			"cleanupEnableBackground",
+			"convertStyleToAttrs",
+			"convertColors",
+			"convertPathData",
+			"convertTransform",
+			"removeUnknownsAndDefaults",
+			"removeNonInheritableGroupAttrs",
+			"removeUselessStrokeAndFill",
+			"removeUnusedNS",
+			"cleanupIDs",
+			"cleanupNumericValues",
+			"moveElemsAttrsToGroup",
+			"moveGroupAttrsToElems",
+			"collapseGroups",
 			// 'removeRasterImages',
-			'mergePaths',
-			'convertShapeToPath',
-			'sortAttrs',
+			"mergePaths",
+			"convertShapeToPath",
+			"sortAttrs",
 			//'removeDimensions',
-			{name: 'removeAttrs', params: { attrs: '(stroke|fill)' } }
+			{name: "removeAttrs", params: { attrs: "(stroke|fill)" } }
 		]
 	};
 
@@ -72,7 +72,7 @@ files.forEach(function(filename) {
 			var newSVG = header.join("\n") + "\n\n" + result.data.replace("&lt;&lt;now &quot;DD&quot;&gt;&gt;","<<now \"DD\">>");
 			fs.writeFileSync(filepath,newSVG);
 		} else {
-			console.log("Error " + err + " with " + filename)
+			console.log("Error " + err + " with " + filename);
 			process.exit();
 		};
 	}

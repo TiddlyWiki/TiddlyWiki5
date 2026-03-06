@@ -22,7 +22,7 @@ tags: $:/tags/Macro
 <$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
 \end
 
-\define list-links-draggable(tiddler,field:"list",emptyMessage,type:"ul",subtype:"li",class:"",itemTemplate)
+\define list-links-draggable(tiddler,field:"list",emptyMessage,type:"ul",subtype:"li",class:"",itemTemplate,displayField:"caption",startactions,endactions)
 \whitespace trim
 <$set name="_tiddler" value="""$tiddler$""" emptyValue=<<currentTiddler>> >
 	<$let field-reference={{{ [<_tiddler>] "!!" [[$field$]] +[join[]] }}}
@@ -39,10 +39,13 @@ tags: $:/tags/Macro
 					>
 						<div class="tc-droppable-placeholder"/>
 						<div>
-							<$transclude tiddler="""$itemTemplate$""">
-								<$link to={{!!title}}>
+							<$transclude tiddler=<<__itemTemplate__>>>
+								<$link to={{!!title}}
+									startactions=<<__startactions__>>
+									endactions=<<__endactions__>>
+								>
 									<$let tv-wikilinks="no">
-										<$transclude field="caption">
+										<$transclude field=<<__displayField__>>>
 											<$view field="title"/>
 										</$transclude>
 									</$let>
@@ -92,7 +95,7 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"")
+\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"",displayField:"title",startactions,endactions)
 \whitespace trim
 <span class="tc-tagged-draggable-list">
 	<$set name="tag" value=<<__tag__>>>
@@ -108,9 +111,16 @@ tags: $:/tags/Macro
 				>
 					<$genesis $type=<<__elementTag__>> class="tc-droppable-placeholder"/>
 					<$genesis $type=<<__elementTag__>>>
-						<$transclude tiddler="""$itemTemplate$""">
-							<$link to={{!!title}}>
-								<$view field="title"/>
+						<$transclude tiddler=<<__itemTemplate__>>>
+							<$link to={{!!title}}
+								startactions=<<__startactions__>>
+								endactions=<<__endactions__>>
+							>
+								<$let tv-wikilinks="no">
+									<$transclude field=<<__displayField__>>>
+										<$view field="title"/>
+									</$transclude>
+								</$let>
 							</$link>
 						</$transclude>
 					</$genesis>

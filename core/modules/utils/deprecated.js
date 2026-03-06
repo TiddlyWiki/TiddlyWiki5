@@ -7,7 +7,7 @@ Deprecated util functions
 
 \*/
 
-exports.logTable = data => console.table(data);
+exports.logTable = (data) => console.table(data);
 
 exports.repeat = (str,count) => str.repeat(count);
 
@@ -23,13 +23,13 @@ exports.trim = function(str) {
 	}
 };
 
-exports.hopArray = (object,array) => array.some(element => $tw.utils.hop(object,element));
+exports.hopArray = (object,array) => array.some((element) => $tw.utils.hop(object,element));
 
 exports.sign = Math.sign;
 
 exports.strEndsWith = (str,ending,position) => str.endsWith(ending,position);
 
-exports.stringifyNumber = num => num.toString();
+exports.stringifyNumber = (num) => num.toString();
 
 exports.tagToCssSelector = function(tagName) {
 	return "tc-tagged-" + encodeURIComponent(tagName).replace(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^`{\|}~,]/mg,function(c) {
@@ -44,15 +44,15 @@ exports.domMatchesSelector = (node,selector) => node.matches(selector);
 exports.hasClass = (el,className) => el.classList && el.classList.contains(className);
 
 exports.addClass = function(el,className) {
-	el.classList && el.classList.add(className);
+	el.classList && className && el.classList.add(className);
 };
 
 exports.removeClass = function(el,className) {
-	el.classList && el.classList.remove(className);
+	el.classList && className && el.classList.remove(className);
 };
 
 exports.toggleClass = function(el,className,status) {
-	el.classList && el.classList.toggle(className, status);
+	el.classList && className && el.classList.toggle(className, status);
 };
 
 exports.getLocationPath = () => window.location.origin + window.location.pathname;

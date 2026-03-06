@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9148
+description: Bidirectional improvements for core classes
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: theme
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9148
+github-contributors: Leilei332
+
+Make some core classes display properly when Tiddlywiki's language uses bidirectional scripts.

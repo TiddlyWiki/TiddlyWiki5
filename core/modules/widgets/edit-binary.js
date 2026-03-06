@@ -27,7 +27,6 @@ EditBinaryWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 EditBinaryWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -66,7 +65,7 @@ EditBinaryWidget.prototype.execute = function() {
 			download: {type: "indirect", textReference: "!!draft.title"}
 		},
 		children: [{
-		type: "transclude",
+			type: "transclude",
 			attributes: {
 				tiddler: {type: "string", value: EXPORT_BUTTON_IMAGE}
 			}
@@ -87,7 +86,7 @@ EditBinaryWidget.prototype.execute = function() {
 			class: {type: "string", value: "tc-binary-warning"}
 		},
 		children: [warn, link]
-	}
+	};
 	// Construct the child widgets
 	this.makeChildWidgets([element]);
 };

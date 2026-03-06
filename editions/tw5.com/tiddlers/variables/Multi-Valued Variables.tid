@@ -59,14 +59,57 @@ For example:
 ```
 \function myfunc(tiddlers) [(tiddlers)sort[]]
 
-<$let varname={{{ [all[tiddlers]limit[50]] }}}> 
+<$let varname={{{ [all[tiddlers]limit[50]] }}}>
 <$text text={{{ [function[myfunc],(varname)] +[join[-]] }}}/>
 </$let>
 ```
 
-! Examples
+!! Passing Multi-Valued Variables to Procedures and Functions
 
-For example:
+<<.from-version "5.4.0">> Multi-valued variables can be passed to procedures and functions using the `((var))` syntax in [[widget attributes|Multi-Valued Variable Attribute Values]]. This is the multi-valued counterpart of the `<<var>>` syntax:
+
+```
+\procedure showItems(itemList)
+<$text text={{{ [(itemList)join[-]] }}}/>
+\end
+
+<$let items={{{ [all[tiddlers]sort[]] }}}>
+<$transclude $variable="showItems" itemList=((items))/>
+</$let>
+```
+
+The `((var))` syntax can also be used in procedure and function parameter defaults:
+
+```
+\procedure showItems(itemList:((defaults)))
+<$text text={{{ [(itemList)join[-]] }}}/>
+\end
+```
+
+! Displaying Multi-Valued Variables
+
+<<.from-version "5.4.0">> Multi-valued variables can be displayed inline in wikitext using the `((var))` syntax. The values are joined with a comma and space by default:
+
+```
+<$let items={{{ [all[tiddlers]sort[]] }}}>
+((items))
+</$let>
+```
+
+A custom separator can be specified using the `||` delimiter:
+
+```
+((items||:))
+```
+
+A similar syntax with triple round brackets is available for displaying the results of a filter expression:
+
+```
+(((  [all[tiddlers]sort[]]  )))
+(((  [all[tiddlers]sort[]]  ||:  )))
+```
+
+! Examples
 
 ```
 <$let varname={{{ [all[tiddlers]sort[]] }}}>

@@ -5,6 +5,72 @@ type: text/vnd.tiddlywiki
 .doc-release-note {
 }
 
+.tc-tab-set.doc-release-tabs {
+	margin-top: 1rem;
+}
+
+.doc-release-tab-search {
+	margin-bottom: 0.75em;
+}
+
+.doc-release-tab-search input {
+	width: 100%;
+	padding: 0.5em;
+	border: 1px solid #e8e8e8;
+	border-radius: 0.25em;
+	font-size: inherit;
+	font-family: inherit;
+}
+
+.doc-release-search-count {
+	font-size: 0.85em;
+	color: #888;
+	margin-bottom: 0.5em;
+}
+
+.doc-release-section {
+	border: 1px solid #e8e8e8;
+	border-radius: 0.5em;
+	margin: 0.75em 0;
+	background: #ffffff;
+}
+
+.doc-release-section-summary {
+	display: flex;
+	align-items: center;
+	padding: 0.5em 0.75em;
+	font-weight: 600;
+	background: #f1f1f1;
+	width: 100%;
+	cursor: pointer;
+	text-align: left;
+	border: none;
+	font-size: inherit;
+	font-family: inherit;
+	border-radius: 0.5em 0.5em 0 0;
+}
+
+.doc-release-section-toggle {
+	margin-right: 0.5em;
+}
+
+.doc-release-section-summary-text {
+	flex: 1 1 auto;
+}
+
+.doc-release-section-count {
+	font-weight: normal;
+	opacity: 0.6;
+}
+
+.doc-release-credits {
+	margin: 0.75em 0;
+}
+
+.doc-release-section-body {
+	padding: 0.5em 0.75em;
+}
+
 .doc-release-note-heading {
 }
 
@@ -83,4 +149,57 @@ type: text/vnd.tiddlywiki
 .doc-change-note-description {
 	padding: 0.25em;
 	background: #ffffff;
+}
+
+.doc-impact-note-item {
+	border: 1px solid #e8e8e8;
+	border-radius: 0.5em;
+	margin: 0.5em 0;
+	padding: 0.5em;
+	background: #f9f9f9;
+}
+
+.doc-impact-note-heading {
+	font-weight: 600;
+	margin: 0 0 0.25em 0;
+	padding: 0.25em 0.5em;
+	border-radius: 0.25em;
+}
+
+.doc-impact-note-item > .doc-change-note-item {
+	font-size: 0.9em;
+}
+
+.doc-impact-note-details {
+	font-size: 0.9em;
+	margin-bottom: 0.5em;
+}
+
+.doc-impact-note-change {
+	display: flex;
+	gap: 0.5em;
+	align-items: baseline;
+	flex-wrap: wrap;
+}
+
+.doc-impact-note-change-caption {
+	text-transform: uppercase;
+	font-size: 0.7em;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+.doc-impact-note-change-link {
+	font-weight: 600;
+}
+
+.doc-change-note-description-link {
+	font-weight: inherit;
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-style: dotted;
+}
+
+.doc-change-note-description-link:hover {
+	text-decoration-style: solid;
 }

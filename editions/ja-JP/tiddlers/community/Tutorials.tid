@@ -1,7 +1,7 @@
 created: 20140908125300000
 modified: 20241004110027506
 original-modified: 20160602172722526
-tags: Community
+tags: Resources
 title: Tutorials
 ja-title: チュートリアル
 caption: チュートリアル
@@ -15,7 +15,7 @@ type: text/vnd.tiddlywiki
 
 <div class="tc-link-info-item">
 
-! <$link><$view field="title"/></$link>
+! <$link><$view field="ja-title"><$view field="title"/></$view></$link>
 
 <div class="tc-subtitle"> <$view field="original-modified" format="relativedate"><$view field="modified" format="relativedate"/></$view> の投稿</div>
 

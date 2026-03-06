@@ -45,7 +45,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create element
 	// Determine what type of image it is
-	var tag = "img", src = "",
+	var tag = "img", src = "", self = this,
 		tiddler = this.wiki.getTiddler(this.imageSource);
 	if(!tiddler) {
 		// The source isn't the title of a tiddler, so we'll assume it's a URL
@@ -62,10 +62,10 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 			if(text) {
 				// Render the appropriate element for the image type by looking up the encoding in the content type info
 				var encoding = typeInfo.encoding || "utf8";
-				if (encoding === "base64") {
+				if(encoding === "base64") {
 					// .pdf .png .jpg etc.
 					src = "data:" + deserializerType + ";base64," + text;
-					if (deserializerType === "application/pdf") {
+					if(deserializerType === "application/pdf") {
 						tag = "embed";
 					}
 				} else {
@@ -98,7 +98,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("class",this.imageClass);
 	}
 	if(this.imageUsemap) {
-	    	domNode.setAttribute("usemap",this.imageUsemap);
+		domNode.setAttribute("usemap",this.imageUsemap);
 	}
 	if(this.imageWidth) {
 		domNode.setAttribute("width",this.imageWidth);
@@ -115,11 +115,21 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	if(this.lazyLoading && tag === "img") {
 		domNode.setAttribute("loading",this.lazyLoading);
 	}
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Add classes when the image loads or fails
 	$tw.utils.addClass(domNode,"tc-image-loading");
-	domNode.addEventListener("load",function() {
+	domNode.addEventListener("load",function(event) {
 		$tw.utils.removeClass(domNode,"tc-image-loading");
 		$tw.utils.addClass(domNode,"tc-image-loaded");
+		if(self.loadedActions) {
+			var variables = $tw.utils.collectDOMVariables(domNode,null,event);
+			variables["img-natural-width"] = domNode.naturalWidth.toString();
+			variables["img-natural-height"] = domNode.naturalHeight.toString();
+			self.invokeActionString(self.loadedActions,self,event,variables);		
+		}
 	},false);
 	domNode.addEventListener("error",function() {
 		$tw.utils.removeClass(domNode,"tc-image-loading");
@@ -139,21 +149,35 @@ ImageWidget.prototype.execute = function() {
 	this.imageWidth = this.getAttribute("width");
 	this.imageHeight = this.getAttribute("height");
 	this.imageClass = this.getAttribute("class");
-    	this.imageUsemap = this.getAttribute("usemap");
+	this.imageUsemap = this.getAttribute("usemap");
 	this.imageTooltip = this.getAttribute("tooltip");
 	this.imageAlt = this.getAttribute("alt");
 	this.lazyLoading = this.getAttribute("loading");
+	this.loadedActions = this.getAttribute("loadActions");
 };
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ImageWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.source || changedAttributes.width || changedAttributes.height || changedAttributes["class"] || changedAttributes.usemap || changedAttributes.tooltip || changedTiddlers[this.imageSource]) {
+	var changedAttributes = this.computeAttributes(),
+		hasChangedAttributes = $tw.utils.count(changedAttributes) > 0;
+	if(changedAttributes.source || changedAttributes["class"] || changedAttributes.usemap || changedAttributes.tooltip || changedTiddlers[this.imageSource] ||changedAttributes.loadActions) {
 		this.refreshSelf();
 		return true;
-	} else {
+	} else if(hasChangedAttributes) {
+		this.assignAttributes(this.domNodes[0],{
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
+		if(changedAttributes.width) {
+			this.domNodes[0].setAttribute("width",this.getAttribute("width"));
+		}
+		if(changedAttributes.height) {
+			this.domNodes[0].setAttribute("height",this.getAttribute("height"));
+		}
+	}
+	else {
 		return false;
 	}
 };

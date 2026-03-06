@@ -9,6 +9,11 @@ Advanced/ShadowInfo/NotShadow/Hint: Der Tiddler: <$link to=<<infoTiddler>>><$tex
 Advanced/ShadowInfo/Shadow/Hint: Der Tiddler: <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> ist ein Schatten-Tiddler.
 Advanced/ShadowInfo/Shadow/Source: Er ist definiert im Plugin: <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>.
 Advanced/ShadowInfo/OverriddenShadow/Hint: Der originale Schatten-Tiddler wurde durch diesen Tiddler überschrieben. Wenn Sie diesen Tiddler löschen, wird der originale Schatten-Tiddler wieder aktiv. Erstellen Sie vorher eventuell eine Sicherungskopie!
+Advanced/CascadeInfo/Heading: Kascade Details
+Advanced/CascadeInfo/Hint: ViewTemplate Kaskade - Filter Segmente getagged: <<tag "$:/tags/ViewTemplate">>.
+Advanced/CascadeInfo/Detail/View: Ansicht
+Advanced/CascadeInfo/Detail/ActiveCascadeFilter: Filter - Aktive Kascade
+Advanced/CascadeInfo/Detail/Template: Template
 Fields/Caption: Felder
 List/Caption: Liste
 List/Empty: Dieser Tiddler hat kein "list" Feld.

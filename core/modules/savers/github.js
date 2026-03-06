@@ -17,8 +17,7 @@ var GitHubSaver = function(wiki) {
 };
 
 GitHubSaver.prototype.save = function(text,method,callback) {
-	var self = this,
-		username = this.wiki.getTiddlerText("$:/GitHub/Username"),
+	var username = this.wiki.getTiddlerText("$:/GitHub/Username"),
 		password = $tw.utils.getPassword("github"),
 		repo = this.wiki.getTiddlerText("$:/GitHub/Repo"),
 		path = this.wiki.getTiddlerText("$:/GitHub/Path",""),
@@ -81,7 +80,6 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 					if(err) {
 						return callback(err);
 					}
-					var putResponseData = $tw.utils.parseJSONSafe(putResponseDataJson);
 					callback(null);
 				}
 			});

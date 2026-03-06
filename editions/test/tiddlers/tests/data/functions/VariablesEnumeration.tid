@@ -1,0 +1,14 @@
+title: Functions/VariableEnumeration
+description: Variables should be enumerable within functions
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\function list-vars() [variables[]]
+ 
+<$text text={{{ [function[list-vars]count[]compare:number:gt[0]then[yes]] }}}/>
++
+title: ExpectedResult
+
+<p>yes</p>
