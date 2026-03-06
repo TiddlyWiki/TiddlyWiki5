@@ -36,20 +36,9 @@ Inline checkboxes integrate naturally with the TiddlyWiki list syntax:
 
 Bullet list items whose first element is a checkbox will have their list marker hidden via CSS, producing a clean task-list appearance.
 
-!!! Filter operator
+!!! See also
 
-The [[checkbox Operator]] can be used to find tiddlers by checkbox state. See [[checkbox Operator]] for full details.
-
-<<wikitext-example-without-html """<$list filter="[all[tiddlers]checkbox[unchecked]]}}}">""">>
-
-Returns all tiddlers that have at least one unchecked checkbox.
-
-<<wikitext-example-without-html """<$list filter="[all[tiddlers]checkbox:text[unchecked]]">""">>
-
-Returns the text of every unchecked checkbox item across all tiddlers.
-
-Both forms scan the raw wikitext and will also match checkboxes inside
-code blocks or comments.
+The [[checkbox Operator]] can be used to find tiddlers by checkbox state or extract checkbox item text.
 
 !!! Example
 
