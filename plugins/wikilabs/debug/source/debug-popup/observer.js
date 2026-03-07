@@ -13,6 +13,49 @@ exports.init = function(globalDebugPopup) {
 	const defaultOpt = { defaultValue: "" };
 
 	/**
+	 * Shared mouseenter handler. Reads widget from the WeakMap via `this` (the DOM node).
+	 */
+	function mouseenterHandler(event) {
+		var data = nodeDataMap.get(this);
+		if(!data || globalDebugPopup._popup.style.display !== "none") {
+			return;
+		}
+		if(globalDebugPopup._popupTimeout) {
+			clearTimeout(globalDebugPopup._popupTimeout);
+		}
+		var mouseX = event.clientX, mouseY = event.clientY;
+		var domNode = this;
+		globalDebugPopup._popupTimeout = setTimeout(function() {
+			if(globalDebugPopup._popup.style.display !== "none") {
+				return;
+			}
+			var finalData = _gatherVariableData(data.widget);
+			globalDebugPopup.setData(finalData);
+			globalDebugPopup.showPopup(domNode, mouseX, mouseY);
+			globalDebugPopup._popupTimeout = null;
+		}, 1000);
+	}
+
+	/**
+	 * Shared mouseleave handler.
+	 */
+	function mouseleaveHandler() {
+		if(globalDebugPopup._popupTimeout) {
+			clearTimeout(globalDebugPopup._popupTimeout);
+			globalDebugPopup._popupTimeout = null;
+		}
+		if(globalDebugPopup._popup.style.display !== "none") {
+			if(globalDebugPopup._hideTimeout) {
+				clearTimeout(globalDebugPopup._hideTimeout);
+			}
+			globalDebugPopup._hideTimeout = setTimeout(function() {
+				globalDebugPopup.hide();
+				globalDebugPopup._hideTimeout = null;
+			}, 900);
+		}
+	}
+
+	/**
 	 * Callback for the IntersectionObserver. Adds/removes event listeners as elements
 	 * enter or leave the viewport.
 	 * @param {IntersectionObserverEntry[]} entries - The entries that have changed.
@@ -29,15 +72,15 @@ exports.init = function(globalDebugPopup) {
 			if(entry.isIntersecting) {
 				// Element is in view: add listeners if they aren't already active
 				if(!data.listenersAttached) {
-					domNode.addEventListener("mouseenter", data.mouseenterListener, true);
-					domNode.addEventListener("mouseleave", data.mouseleaveListener, true);
+					domNode.addEventListener("mouseenter", mouseenterHandler, true);
+					domNode.addEventListener("mouseleave", mouseleaveHandler, true);
 					data.listenersAttached = true;
 				}
 			} else {
 				// Element is out of view: remove listeners if they are active
 				if(data.listenersAttached) {
-					domNode.removeEventListener("mouseenter", data.mouseenterListener, true);
-					domNode.removeEventListener("mouseleave", data.mouseleaveListener, true);
+					domNode.removeEventListener("mouseenter", mouseenterHandler, true);
+					domNode.removeEventListener("mouseleave", mouseleaveHandler, true);
 					data.listenersAttached = false;
 				}
 			}
@@ -134,55 +177,9 @@ exports.init = function(globalDebugPopup) {
 
 		domNode.setAttribute("data-debug-xxxx", widget.getVariable("transclusion"));
 
-		/**
-		 * The callback function to execute after a delay when the mouse enters the element.
-		 * It gathers data and shows the popup.
-		 * @param {number} mouseX - The X coordinate of the mouse.
-		 * @param {number} mouseY - The Y coordinate of the mouse.
-		 */
-		const showPopupCallback = (mouseX, mouseY) => {
-			if(globalDebugPopup._popup.style.display !== "none") {
-				return;
-			}
-			const finalData = _gatherVariableData(widget);
-			globalDebugPopup.setData(finalData);
-			globalDebugPopup.showPopup(domNode, mouseX, mouseY);
-			globalDebugPopup._popupTimeout = null; // Clear timeout ID after execution
-		};
-
-		const mouseenterListener = function(event) {
-			// Clear any existing timeout to prevent multiple popups or flickering
-			if(globalDebugPopup._popupTimeout) {
-				clearTimeout(globalDebugPopup._popupTimeout);
-			}
-			// Capture coordinates eagerly to avoid stale event references in the timeout
-			const mouseX = event.clientX, mouseY = event.clientY;
-			// Set a timeout to show the popup
-			globalDebugPopup._popupTimeout = setTimeout(() => showPopupCallback(mouseX, mouseY), 1000); // Delay to show popup
-		};
-
-		const mouseleaveListener = function() {
-			// Clear the show timeout if mouse leaves before popup shows
-			if(globalDebugPopup._popupTimeout) {
-				clearTimeout(globalDebugPopup._popupTimeout);
-				globalDebugPopup._popupTimeout = null;
-			}
-			// Set a hide timeout if the popup is visible
-			if(globalDebugPopup._popup.style.display !== "none") {
-				if(globalDebugPopup._hideTimeout) {
-					clearTimeout(globalDebugPopup._hideTimeout);
-				}
-				globalDebugPopup._hideTimeout = setTimeout(() => {
-					globalDebugPopup.hide();
-					globalDebugPopup._hideTimeout = null;
-				}, 900); // Delay before hiding
-			}
-		};
-
-		// Store the listeners and their state in the WeakMap, associated with the domNode
+		// Store the widget and listener state in the WeakMap, associated with the domNode
 		nodeDataMap.set(domNode, {
-			mouseenterListener: mouseenterListener,
-			mouseleaveListener: mouseleaveListener,
+			widget: widget,
 			listenersAttached: false // Start with listeners detached
 		});
 
