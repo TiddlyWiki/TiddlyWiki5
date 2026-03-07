@@ -18,6 +18,7 @@ class DebugInfoPopup extends HTMLElement {
 
 		const popup = document.createElement("div");
 		popup.setAttribute("class", "debug-popup");
+		popup.style.display = "none";
 		this._popup = popup;
 
 		const style = document.createElement("style");
@@ -380,7 +381,12 @@ class DebugInfoPopup extends HTMLElement {
 		}
 
 		if(triggerElement && typeof triggerElement.getBoundingClientRect === "function") {
+			// Reset previous trigger element back to "yes"
+			if(this._triggerElement && this._triggerElement !== triggerElement) {
+				this._triggerElement.setAttribute("data-debug", "yes");
+			}
 			this._triggerElement = triggerElement;
+			triggerElement.setAttribute("data-debug", "active");
 		}
 
 		if(!this._triggerElement) {
@@ -425,6 +431,9 @@ class DebugInfoPopup extends HTMLElement {
 		this._hideSuggestions();
 		if(this._searchInput) {
 			$tw.wiki.setText(this._lastSearchTiddler, "text", undefined, this._searchInput.value);
+		}
+		if(this._triggerElement) {
+			this._triggerElement.setAttribute("data-debug", "yes");
 		}
 		this._popup.style.display = "none";
 		document.removeEventListener("keydown", this._boundEscapeKeyListener, true);
