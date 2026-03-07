@@ -120,15 +120,16 @@ exports.init = function(globalDebugPopup) {
 		/**
 		 * The callback function to execute after a delay when the mouse enters the element.
 		 * It gathers data and shows the popup.
-		 * @param {MouseEvent} event - The mouse event.
+		 * @param {number} mouseX - The X coordinate of the mouse.
+		 * @param {number} mouseY - The Y coordinate of the mouse.
 		 */
-		const showPopupCallback = (event) => {
+		const showPopupCallback = (mouseX, mouseY) => {
 			if(globalDebugPopup._popup.style.display !== "none") {
 				return;
 			}
 			const finalData = _gatherVariableData(widget);
 			globalDebugPopup.setData(finalData);
-			globalDebugPopup.showPopup(domNode, event.clientX, event.clientY);
+			globalDebugPopup.showPopup(domNode, mouseX, mouseY);
 			globalDebugPopup._popupTimeout = null; // Clear timeout ID after execution
 		};
 
@@ -137,8 +138,10 @@ exports.init = function(globalDebugPopup) {
 			if(globalDebugPopup._popupTimeout) {
 				clearTimeout(globalDebugPopup._popupTimeout);
 			}
+			// Capture coordinates eagerly to avoid stale event references in the timeout
+			const mouseX = event.clientX, mouseY = event.clientY;
 			// Set a timeout to show the popup
-			globalDebugPopup._popupTimeout = setTimeout(() => showPopupCallback(event), 1000); // Delay to show popup
+			globalDebugPopup._popupTimeout = setTimeout(() => showPopupCallback(mouseX, mouseY), 1000); // Delay to show popup
 		};
 
 		const mouseleaveListener = function(event) {
