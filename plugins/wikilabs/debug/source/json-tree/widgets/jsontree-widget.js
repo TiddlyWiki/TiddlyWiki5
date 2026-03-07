@@ -120,7 +120,8 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 	var details = this.document.createElement("details");
 	var stateKey = currentPath;
 	var stateValue = Object.prototype.hasOwnProperty.call(this.stateData,stateKey) ? this.stateData[stateKey] : undefined;
-	details.open = (stateValue === undefined) ? true : (stateValue !== "hide");
+	var defaultOpen = (key !== "orderedAttributes");
+	details.open = (stateValue === undefined) ? defaultOpen : (stateValue !== "hide");
 	details.setAttribute("data-state-key",stateKey);
 	details.addEventListener("toggle",function(event) {
 		if(self._suppressToggleSave) {
