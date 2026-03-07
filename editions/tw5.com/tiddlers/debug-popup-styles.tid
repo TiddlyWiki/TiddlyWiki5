@@ -1,0 +1,14 @@
+code-body: yes
+created: 20250820131507992
+modified: 20260307164329371
+tags: $:/tags/Stylesheet
+title: debug-popup-styles
+type: text/vnd.tiddlywiki
+
+[data-debug]:hover {
+  outline: 1px solid blue;
+}
+
+[data-debug="active"] {
+  outline: 1px solid red !important;
+}

@@ -1,0 +1,73 @@
+title: $:/plugins/wikilabs/debug/jsontree-doc
+caption: jsontree
+
+! Introduction
+
+The ''jsontree'' widget renders JSON data as an interactive collapsible tree. It can read JSON from a tiddler or directly from a widget variable.
+
+Each object and array node is rendered as a collapsible `<details>` element. The expansion state of each node is persisted to a state tiddler so that the tree retains its shape across refreshes.
+
+Objects that contain both `start` and `end` number properties display a link button. Clicking this button selects the corresponding character range in the nearest editor textarea. This is particularly useful for visualising parse trees alongside their source text.
+
+! Content and Attributes
+
+The content of the `<$jsontree>` widget is ignored.
+
+|!Attribute |!Description |
+|tiddler |Title of a tiddler containing JSON text |
+|variable |Name of a variable containing JSON text |
+|block-list |Space-separated list of object keys to hide from the tree |
+|state |Tiddler title for storing the expansion state (defaults to `$:/temp/json-tree/state`) |
+
+If both ''tiddler'' and ''variable'' are specified, ''variable'' takes precedence.
+
+! Keyboard Modifiers
+
+!! Select Range Button
+
+Each object node with `start`/`end` properties shows a link icon button:
+
+* ''Click'' — selects the corresponding text range in the editor and highlights the button
+* ''Ctrl+Click'' (''Cmd+Click'' on Mac) — additionally folds all other paths, keeping only the ancestors of the clicked node open. Ctrl+clicking again restores the previous fold state.
+
+The previous fold state is saved to `{state}/saved` and restored on the next Ctrl+click.
+
+!! Fold Triangle
+
+* ''Click'' — toggles the clicked node open or closed
+* ''Ctrl+Click'' (''Cmd+Click'' on Mac) — toggles the clicked node and all of its children together
+
+! CSS Classes
+
+|!Class |!Description |
+|`tc-jsontree` |Container element |
+|`tc-jsontree-key` |Object key or array index label |
+|`tc-jsontree-string` |String value |
+|`tc-jsontree-number` |Number value |
+|`tc-jsontree-boolean` |Boolean value |
+|`tc-jsontree-null` |Null value |
+|`tc-jsontree-value` |Indented content area of a collapsible node |
+|`tc-jsontree-select-range` |Select range button |
+|`tc-jsontree-select-range-active` |Currently active select range button |
+
+! Examples
+
+Display JSON from a tiddler:
+
+```
+<$jsontree tiddler="MyData"/>
+```
+
+Display a parse tree using `$wikify`:
+
+```
+<$wikify name="tree" text={{!!text}} output="parsetree">
+	<$jsontree variable="tree"/>
+</$wikify>
+```
+
+Hide specific keys from the output:
+
+```
+<$jsontree tiddler="MyData" block-list="rule start end"/>
+```
