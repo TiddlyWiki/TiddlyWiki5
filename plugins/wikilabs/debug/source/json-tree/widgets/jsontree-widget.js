@@ -399,7 +399,7 @@ JsonTreeWidget.prototype.createZoomButton = function(currentPath) {
 	button.addEventListener("click",function(event) {
 		event.stopPropagation();
 		event.preventDefault();
-		self.zoomPath = currentPath;
+		self.zoomPath = self.zoomPath ? self.zoomPath + "/" + currentPath : currentPath;
 		self.refreshSelf();
 	});
 	return button;
