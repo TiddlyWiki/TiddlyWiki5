@@ -175,7 +175,7 @@ exports.init = function(globalDebugPopup) {
 			return;
 		}
 
-		domNode.setAttribute("data-debug-xxxx", widget.getVariable("transclusion"));
+		domNode.setAttribute("data-debug","yes");
 
 		// Store the widget and listener state in the WeakMap, associated with the domNode
 		nodeDataMap.set(domNode, {
