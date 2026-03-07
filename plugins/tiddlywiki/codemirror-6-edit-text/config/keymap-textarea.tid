@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/simple/keymap-textarea
+caption: Simple Editor Keymap (Textarea)
+description: Keymap for simple editor textareas. Leave empty to use simple-keymap, then main keymap.
+config-type: keymap-select
+config-category: Keybindings
+default:
+text:

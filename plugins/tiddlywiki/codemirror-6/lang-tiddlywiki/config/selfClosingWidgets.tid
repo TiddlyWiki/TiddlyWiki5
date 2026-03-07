@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/lang-tiddlywiki/selfClosingWidgets
+caption: Self-closing widgets
+description: Additional widgets that auto-close with /> in autocomplete (changes apply immediately). Action widgets and widgets that never have children always auto-close. Enter widget names separated by spaces.
+config-type: input
+config-category: Autocompletion
+default: $transclude $macrocall $slot $view
+text: $transclude $macrocall $slot $view

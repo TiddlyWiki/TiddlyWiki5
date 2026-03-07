@@ -1,0 +1,35 @@
+{
+	"description": "Demo of the CodeMirror 6 plugin",
+	"plugins": [
+		"tiddlywiki/codemirror-6",
+		"tiddlywiki/codemirror-6-edit-text",
+		"tiddlywiki/codemirror-6-image-preview",
+		"tiddlywiki/codemirror-6-keymap-emacs",
+		"tiddlywiki/codemirror-6-keymap-vim",
+		"tiddlywiki/codemirror-6-lang-cpp",
+		"tiddlywiki/codemirror-6-lang-go",
+		"tiddlywiki/codemirror-6-lang-java",
+		"tiddlywiki/codemirror-6-lang-latex",
+		"tiddlywiki/codemirror-6-lang-lezer",
+		"tiddlywiki/codemirror-6-lang-php",
+		"tiddlywiki/codemirror-6-lang-python",
+		"tiddlywiki/codemirror-6-lang-rust",
+		"tiddlywiki/codemirror-6-lang-sass",
+		"tiddlywiki/codemirror-6-lang-sql",
+		"tiddlywiki/codemirror-6-lang-wast",
+		"tiddlywiki/codemirror-6-lint",
+		"tiddlywiki/codemirror-6-themes"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","codemirror-6-demo.html","text/plain"
+		],
+		"external": [
+			"--render","$:/core/save/all-external-js","codemirror-6-demo.html","text/plain"
+		]
+	}
+}
