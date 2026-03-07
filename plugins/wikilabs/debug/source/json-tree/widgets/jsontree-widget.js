@@ -297,12 +297,20 @@ JsonTreeWidget.prototype.createExportButton = function() {
 		if(!container) {
 			return;
 		}
-		var data = self.getData();
-		if(typeof data === "string") {
+		var fullData = self.getData();
+		if(typeof fullData === "string") {
+			return;
+		}
+		var data = self.zoomPath ? self.getDataAtPath(fullData,self.zoomPath) : fullData;
+		if(data === undefined) {
 			return;
 		}
 		var rootDetails = container.querySelector("details");
-		var text = self.exportTreeText(data,rootDetails,"");
+		var text = "";
+		if(self.zoomPath) {
+			text = self.exportBreadcrumbText() + "\n\n";
+		}
+		text += self.exportTreeText(data,rootDetails,"");
 		self.wiki.addTiddler(new $tw.Tiddler(
 			self.wiki.getCreationFields(),
 			{
@@ -371,6 +379,11 @@ JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
 		return this.formatValue(data);
 	}
 	return lines.join("\n");
+};
+
+JsonTreeWidget.prototype.exportBreadcrumbText = function() {
+	var parts = this.zoomPath.split("/");
+	return "\u2302 / " + parts.join(" / ");
 };
 
 JsonTreeWidget.prototype.formatValue = function(value) {
