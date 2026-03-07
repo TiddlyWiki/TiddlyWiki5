@@ -10,6 +10,7 @@ Initializes the Intersection Observer and the hook to trigger the debug popup.
 exports.init = function(globalDebugPopup) {
 	// Use a WeakMap to associate DOM nodes with their specific data and listeners
 	const nodeDataMap = new WeakMap();
+	const defaultOpt = { defaultValue: "" };
 
 	/**
 	 * Callback for the IntersectionObserver. Adds/removes event listeners as elements
@@ -46,76 +47,92 @@ exports.init = function(globalDebugPopup) {
 	// Create a single observer to watch all relevant elements
 	const observer = new IntersectionObserver(handleIntersection);
 
-	$tw.hooks.addHook("th-dom-rendering-element", function(domNode, widget) {
-
-		/**
-		 * Gathers and formats all relevant variable data from the current widget context.
-		 * @param {object} widget - The widget instance to inspect.
-		 * @returns {object} A formatted object containing variable data for the popup.
-		 */
-		function _gatherVariableData(widget) {
-			var test = widget.getVariable("transclusion");
-			var data = Object.create(null);
-			var allVars = Object.create(null);
-			var filter;
-
-			for(var v in widget.variables) {
-				let variable = widget.parentWidget && widget.parentWidget.variables[v];
-				let entry = null;
-
-				if(variable && variable.isFunctionDefinition) {
-					if(widget.getVariable("tv-debug-functions") === "yes") {
-						entry = {
-							value: variable.value,
-							type: "f",
-							content: widget.getVariable(v, { defaultValue: "" })
-						};
-					}
-				} else if(variable && variable.isProcedureDefinition) {
-					if(widget.getVariable("tv-debug-procedures") === "yes") {
-						entry = { value: widget.getVariable(v, { defaultValue: "" }), type: "p" };
-					}
-				} else if(variable && variable.isMacroDefinition) {
-					if(widget.getVariable("tv-debug-macros") === "yes") {
-						entry = { value: widget.getVariable(v, { defaultValue: "" }), type: "m" };
-					}
-				} else if(variable && variable.isWidgetDefinition) {
-					if(widget.getVariable("tv-debug-widgets") === "yes") {
-						entry = { value: widget.getVariable(v, { defaultValue: "" }), type: "w" };
-					}
-				} else {
-					entry = { value: widget.getVariable(v, { defaultValue: "" }), type: "" };
-				}
-
-				if(entry && entry.value !== undefined) {
-					allVars[v] = entry;
-				}
+	/**
+	 * Truncates a value string to its first line for display.
+	 * @param {*} value - The value to format.
+	 * @returns {string} The formatted string.
+	 */
+	function _formatValue(value) {
+		if(typeof value === "string") {
+			var idx = value.indexOf("\n");
+			if(idx !== -1) {
+				return value.substring(0, idx) + " ...";
 			}
-
-			filter = widget.getVariable("tv-debug-filter", { defaultValue: "[limit[100]]" });
-			if(filter) {
-				var filteredVars = widget.wiki.compileFilter(filter).call(widget.wiki, widget.wiki.makeTiddlerIterator(Object.keys(allVars)));
-				$tw.utils.each(filteredVars, function(name) {
-					data[name] = allVars[name];
-				});
-			}
-
-			var finalData = Object.create(null);
-			finalData["transclusion"] = { value: test || "", type: "" };
-
-			$tw.utils.each((filter) ? data : allVars, function(el, title) {
-				let str = "";
-				if(typeof el.value === "string" && el.value.includes("\n")) {
-					str = el.value.split("\n")[0] + " ...";
-				} else {
-					str = (el.value) ? String(el.value) : "";
-				}
-				if(str) {
-					finalData[title] = { value: str, type: el.type, content: el.content }; // Preserve content
-				}
-			});
-			return finalData;
+			return value;
 		}
+		return value ? String(value) : "";
+	}
+
+	/**
+	 * Gathers and formats all relevant variable data from the current widget context.
+	 * @param {object} widget - The widget instance to inspect.
+	 * @returns {object} A formatted object containing variable data for the popup.
+	 */
+	function _gatherVariableData(widget) {
+		var transclusion = widget.getVariable("transclusion");
+		var allVars = Object.create(null);
+		var parentVars = widget.parentWidget && widget.parentWidget.variables;
+		// Cache debug flags once instead of per-variable
+		var debugFunctions = widget.getVariable("tv-debug-functions") === "yes";
+		var debugProcedures = widget.getVariable("tv-debug-procedures") === "yes";
+		var debugMacros = widget.getVariable("tv-debug-macros") === "yes";
+		var debugWidgets = widget.getVariable("tv-debug-widgets") === "yes";
+
+		for(var v in widget.variables) {
+			var variable = parentVars && parentVars[v];
+			var entry = null;
+
+			if(variable && variable.isFunctionDefinition) {
+				if(debugFunctions) {
+					entry = {
+						value: variable.value,
+						type: "f",
+						content: widget.getVariable(v, defaultOpt)
+					};
+				}
+			} else if(variable && variable.isProcedureDefinition) {
+				if(debugProcedures) {
+					entry = { value: widget.getVariable(v, defaultOpt), type: "p" };
+				}
+			} else if(variable && variable.isMacroDefinition) {
+				if(debugMacros) {
+					entry = { value: widget.getVariable(v, defaultOpt), type: "m" };
+				}
+			} else if(variable && variable.isWidgetDefinition) {
+				if(debugWidgets) {
+					entry = { value: widget.getVariable(v, defaultOpt), type: "w" };
+				}
+			} else {
+				entry = { value: widget.getVariable(v, defaultOpt), type: "" };
+			}
+
+			if(entry && entry.value !== undefined) {
+				allVars[v] = entry;
+			}
+		}
+
+		var filter = widget.getVariable("tv-debug-filter", { defaultValue: "[limit[100]]" });
+		var filteredVars = widget.wiki.compileFilter(filter).call(widget.wiki, widget.wiki.makeTiddlerIterator(Object.keys(allVars)));
+		var finalData = Object.create(null);
+		finalData["transclusion"] = { value: transclusion || "", type: "" };
+
+		$tw.utils.each(filteredVars, function(name) {
+			var el = allVars[name];
+			var str = _formatValue(el.value);
+			if(str) {
+				finalData[name] = { value: str, type: el.type, content: el.content };
+			}
+		});
+		return finalData;
+	}
+
+	$tw.hooks.addHook("th-dom-rendering-element", function(domNode, widget) {
+		// Early exit: skip all work for non-debug elements
+		if(!(domNode instanceof Element) || widget.getVariable("tv-debug") !== "yes") {
+			return;
+		}
+
+		domNode.setAttribute("data-debug-xxxx", widget.getVariable("transclusion"));
 
 		/**
 		 * The callback function to execute after a delay when the mouse enters the element.
@@ -144,7 +161,7 @@ exports.init = function(globalDebugPopup) {
 			globalDebugPopup._popupTimeout = setTimeout(() => showPopupCallback(mouseX, mouseY), 1000); // Delay to show popup
 		};
 
-		const mouseleaveListener = function(event) {
+		const mouseleaveListener = function() {
 			// Clear the show timeout if mouse leaves before popup shows
 			if(globalDebugPopup._popupTimeout) {
 				clearTimeout(globalDebugPopup._popupTimeout);
@@ -169,12 +186,6 @@ exports.init = function(globalDebugPopup) {
 			listenersAttached: false // Start with listeners detached
 		});
 
-		// Start observing the element, but only if it is a valid Element
-		if(domNode instanceof Element) {
-			if(widget.getVariable("tv-debug") === "yes") {
-				domNode.setAttribute("data-debug-xxxx", widget.getVariable("transclusion"));
-				observer.observe(domNode);
-			}
-		}
+		observer.observe(domNode);
 	});
 };
