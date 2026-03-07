@@ -101,7 +101,7 @@ JsonTreeWidget.prototype.execute = function() {
 	this.attVariable = this.getAttribute("variable");
 	this.attBlockList = this.getAttribute("block-list","");
 	this.foldState = this.getAttribute("state","$:/temp/json-tree/state");
-	this.blockList = {};
+	this.blockList = Object.create(null);
 	if(this.attBlockList) {
 		var blockParts = this.attBlockList.split(" ");
 		for(var i = 0; i < blockParts.length; i++) {
