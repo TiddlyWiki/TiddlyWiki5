@@ -275,11 +275,14 @@ JsonTreeWidget.prototype.createExportButton = function() {
 		}
 		var rootDetails = container.querySelector("details");
 		var text = self.exportTreeText(data,rootDetails,"");
-		self.wiki.addTiddler(new $tw.Tiddler({
-			title: "jsontree-limited-view",
-			type: "text/plain",
-			text: text
-		}));
+		self.wiki.addTiddler(new $tw.Tiddler(
+			self.wiki.getCreationFields(),
+			{
+				title: "jsontree-limited-view",
+				type: "text/plain",
+				text: text
+			},
+			self.wiki.getModificationFields()));
 	});
 	return button;
 };
