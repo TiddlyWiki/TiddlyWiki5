@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/internals/EditTemplate/body/preview/widget-tree-interactive
+tags: $:/tags/EditPreview
+list-after: $:/core/ui/EditTemplate/body/preview/output
+caption: widget tree (interactive)
+
+\whitespace trim
+
+\procedure preview(mode)
+
+Hide: <span style="display:inline-block;" class="tc-max-width-80 tc-max-width tc-tiny-gap-left"><$edit-text tag="input" class="tc-max-width" tiddler="$:/state/json-interactive/block-list" field="text"/></span>
+
+<$wikify name="preview-text" text={{!!text}} type={{!!type}} mode="$mode$" output="widgettree">
+	<$jsontree variable="preview-text" block-list={{$:/state/json-interactive/block-list}} state=<<qualify title:"$:/temp/json-tree/state">>/>
+</$wikify>
+\end
+
+{{||$:/plugins/tiddlywiki/internals/EditTemplate/body/preview/shared}}

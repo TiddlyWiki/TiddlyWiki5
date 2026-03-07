@@ -1,22 +1,5 @@
-⮟ [...] (1 items)
-	⮟ {...}
-		"type": "list"
-		"start": 0
-			"attributes": ⮟ {...}
-					"filter": ⮟ {...}
-						"start": 6
-						"name": "filter"
-						"type": "string"
-						"value": "[range[2]]"
-						"end": 26
-					"variable": ⮞ {string ...}
-			"orderedAttributes": ⮞ [...] (2 items)
-		"tag": "$list"
-		"end": 70
-		"openTagStart": 0
-		"openTagEnd": 40
-		"isBlock": true
-			"children": ⮞ [...] (1 items)
-		"closeTagEnd": 70
-		"closeTagStart": 70
-		"rule": "html"
+⮟ {...}
+	"type": "widget"
+		"children": ⮟ [...] (2 items)
+			⮞ {p ...}
+			⮞ {p ...}
