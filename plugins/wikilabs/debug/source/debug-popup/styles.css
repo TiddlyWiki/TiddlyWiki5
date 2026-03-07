@@ -39,6 +39,9 @@ This stylesheet is __not tagged__ because it will be injected into custom elemen
 	overflow: auto;
 }
 .debug-popup-drag-handle {
+	position: sticky;
+	top: -10px;
+	z-index: 2;
 	cursor: grab;
 	text-align: center;
 	padding: 2px 0;
@@ -67,6 +70,9 @@ This stylesheet is __not tagged__ because it will be injected into custom elemen
 }
 .debug-popup-table tr:nth-child(even){background-color: #f9f9f9;}
 .debug-popup-table th {
+	position: sticky;
+	top: 42px;
+	z-index: 1;
 	padding-top: 4px;
 	padding-bottom: 4px;
 	text-align: left;
@@ -74,12 +80,16 @@ This stylesheet is __not tagged__ because it will be injected into custom elemen
 	color: var(--popup-header-color);
 }
 .debug-search-input {
+	position: sticky;
+	top: 16px;
+	z-index: 2;
 	width: 98%;
 	padding: 4px;
 	margin-bottom: 8px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	font-size: 14px;
+	background-color: var(--popup-bg-color);
 }
 .debug-function-content {
 	color: var(--function-content-color);
