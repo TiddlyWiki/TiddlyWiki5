@@ -177,11 +177,10 @@ JsonTreeWidget.prototype.createTreeElement = function(data,key,currentPath) {
 
 JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPath,isArray) {
 	var details = this.document.createElement("details");
-	var stateKey = currentPath;
-	var stateValue = Object.prototype.hasOwnProperty.call(this.stateData,stateKey) ? this.stateData[stateKey] : undefined;
+	var stateValue = Object.prototype.hasOwnProperty.call(this.stateData,currentPath) ? this.stateData[currentPath] : undefined;
 	var defaultOpen = (key !== "orderedAttributes");
 	details.open = (stateValue === undefined) ? defaultOpen : (stateValue !== "hide");
-	details.setAttribute("data-state-key",stateKey);
+	details.setAttribute("data-state-key",currentPath);
 	var summary = this.document.createElement("summary");
 	if(key !== null) {
 		summary.appendChild(this.createKeySpan(key));
@@ -515,29 +514,25 @@ JsonTreeWidget.prototype.createBreadcrumb = function(fullData) {
 		bar.appendChild(this.document.createTextNode(" / "));
 		accumulated = accumulated ? accumulated + "/" + parts[i] : parts[i];
 		segData = (segData && typeof segData === "object") ? segData[Array.isArray(segData) ? parseInt(parts[i],10) : parts[i]] : undefined;
+		var isLast = (i === parts.length - 1);
+		var seg = this.document.createElement(isLast ? "span" : "button");
+		if(!isLast) {
+			seg.className = "tc-btn-invisible tc-jsontree-breadcrumb-item";
+		}
+		seg.appendChild(this.document.createTextNode(parts[i]));
 		var tooltip = this.getAttributesTooltip(segData);
-		if(i < parts.length - 1) {
-			var segLink = this.document.createElement("button");
-			segLink.className = "tc-btn-invisible tc-jsontree-breadcrumb-item";
-			segLink.appendChild(this.document.createTextNode(parts[i]));
-			if(tooltip) {
-				segLink.setAttribute("title",tooltip);
-			}
+		if(tooltip) {
+			seg.setAttribute("title",tooltip);
+		}
+		if(!isLast) {
 			(function(path) {
-				segLink.addEventListener("click",function() {
+				seg.addEventListener("click",function() {
 					self.zoomPath = path;
 					self.refreshSelf();
 				});
 			})(accumulated);
-			bar.appendChild(segLink);
-		} else {
-			var segSpan = this.document.createElement("span");
-			segSpan.appendChild(this.document.createTextNode(parts[i]));
-			if(tooltip) {
-				segSpan.setAttribute("title",tooltip);
-			}
-			bar.appendChild(segSpan);
 		}
+		bar.appendChild(seg);
 	}
 	return bar;
 };
