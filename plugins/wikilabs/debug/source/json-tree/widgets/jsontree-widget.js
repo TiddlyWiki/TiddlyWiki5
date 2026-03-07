@@ -383,7 +383,22 @@ JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
 
 JsonTreeWidget.prototype.exportBreadcrumbText = function() {
 	var parts = this.zoomPath.split("/");
-	return "\u2302 / " + parts.join(" / ");
+	var segments = ["\u2302"];
+	var lines = [];
+	var currentLine = segments[0];
+	for(var i = 0; i < parts.length; i++) {
+		var addition = " / " + parts[i];
+		if(currentLine.length + addition.length > 120 && currentLine.length > 0) {
+			lines.push(currentLine);
+			currentLine = "  " + parts[i];
+		} else {
+			currentLine += addition;
+		}
+	}
+	if(currentLine) {
+		lines.push(currentLine);
+	}
+	return lines.join("\n");
 };
 
 JsonTreeWidget.prototype.formatValue = function(value) {
