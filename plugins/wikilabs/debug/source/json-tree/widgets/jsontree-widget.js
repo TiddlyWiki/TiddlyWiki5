@@ -37,7 +37,20 @@ JsonTreeWidget.prototype.render = function(parent,nextSibling) {
 		container.appendChild(this.document.createTextNode(data));
 	} else {
 		this.stateData = this.wiki.getTiddlerDataCached(this.foldState,{});
-		var tree = this.createTreeElement(data,null,"");
+		// Navigate to zoom path if set
+		var zoomData = data;
+		if(this.zoomPath) {
+			zoomData = this.getDataAtPath(data,this.zoomPath);
+			if(zoomData === undefined) {
+				this.zoomPath = "";
+				zoomData = data;
+			}
+		}
+		// Show breadcrumb bar when zoomed in
+		if(this.zoomPath) {
+			container.appendChild(this.createBreadcrumb());
+		}
+		var tree = this.createTreeElement(zoomData,null,"");
 		container.appendChild(tree);
 		this.stateData = null;
 	}
@@ -51,6 +64,9 @@ JsonTreeWidget.prototype.execute = function() {
 	this.attBlockList = this.getAttribute("block-list","");
 	this.foldState = this.getAttribute("state","$:/temp/json-tree/state");
 	this.blockList = this.attBlockList ? this.attBlockList.split(" ") : [];
+	if(this.zoomPath === undefined) {
+		this.zoomPath = "";
+	}
 };
 
 JsonTreeWidget.prototype.refresh = function(changedTiddlers) {
@@ -168,6 +184,9 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 	}
 	if(currentPath === "") {
 		summary.appendChild(this.createExportButton());
+	}
+	if(currentPath !== "") {
+		summary.appendChild(this.createZoomButton(currentPath));
 	}
 	details.appendChild(summary);
 	var list = this.document.createElement("div");
@@ -362,6 +381,85 @@ JsonTreeWidget.prototype.formatValue = function(value) {
 		return "\"" + value + "\"";
 	}
 	return String(value);
+};
+
+JsonTreeWidget.prototype.createZoomButton = function(currentPath) {
+	var self = this;
+	var button = this.document.createElement("button");
+	button.className = "tc-jsontree-select-range tc-btn-invisible";
+	button.setAttribute("title","Zoom into this node");
+	var iconWidget = this.makeChildWidget({
+		type: "transclude",
+		attributes: {
+			"$tiddler": {type: "string", value: "$:/core/images/preview-open"},
+			"size": {type: "string", value: "10px"}
+		}
+	});
+	iconWidget.render(button,null);
+	button.addEventListener("click",function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+		self.zoomPath = currentPath;
+		self.refreshSelf();
+	});
+	return button;
+};
+
+JsonTreeWidget.prototype.getDataAtPath = function(data,path) {
+	if(!path) {
+		return data;
+	}
+	var parts = path.split("/");
+	var current = data;
+	for(var i = 0; i < parts.length; i++) {
+		if(current === null || typeof current !== "object") {
+			return undefined;
+		}
+		var key = parts[i];
+		if(Array.isArray(current)) {
+			key = parseInt(key,10);
+		}
+		current = current[key];
+	}
+	return current;
+};
+
+JsonTreeWidget.prototype.createBreadcrumb = function() {
+	var self = this;
+	var bar = this.document.createElement("div");
+	bar.className = "tc-jsontree-breadcrumb";
+	// Root link
+	var rootLink = this.document.createElement("button");
+	rootLink.className = "tc-btn-invisible tc-jsontree-breadcrumb-item";
+	rootLink.appendChild(this.document.createTextNode("\u2302"));
+	rootLink.setAttribute("title","Back to root");
+	rootLink.addEventListener("click",function() {
+		self.zoomPath = "";
+		self.refreshSelf();
+	});
+	bar.appendChild(rootLink);
+	// Path segments
+	var parts = this.zoomPath.split("/");
+	var accumulated = "";
+	for(var i = 0; i < parts.length; i++) {
+		bar.appendChild(this.document.createTextNode(" / "));
+		accumulated = accumulated ? accumulated + "/" + parts[i] : parts[i];
+		if(i < parts.length - 1) {
+			var segLink = this.document.createElement("button");
+			segLink.className = "tc-btn-invisible tc-jsontree-breadcrumb-item";
+			segLink.appendChild(this.document.createTextNode(parts[i]));
+			(function(path) {
+				segLink.addEventListener("click",function() {
+					self.zoomPath = path;
+					self.refreshSelf();
+				});
+			})(accumulated);
+			bar.appendChild(segLink);
+		} else {
+			bar.appendChild(this.document.createTextNode(parts[i]));
+		}
+	}
+	return bar;
 };
 
 JsonTreeWidget.prototype.focusPath = function(buttonElement) {

@@ -91,3 +91,20 @@ tags: $:/tags/Stylesheet
 .tc-jsontree summary.tc-jsontree-selected {
 	background-color: <<colour message-background>>;
 }
+
+.tc-jsontree-breadcrumb {
+	padding: 4px 0;
+	margin-bottom: 6px;
+	border-bottom: 1px solid <<colour tiddler-border>>;
+	font-size: 11px;
+}
+
+.tc-jsontree-breadcrumb-item {
+	cursor: pointer;
+	color: <<colour primary>>;
+	text-decoration: underline;
+}
+
+.tc-jsontree-breadcrumb-item:hover {
+	color: <<colour foreground>>;
+}
