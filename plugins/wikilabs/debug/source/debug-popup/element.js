@@ -26,6 +26,36 @@ class DebugInfoPopup extends HTMLElement {
 
 		this.shadowRoot.append(style, popup);
 
+		const dragHandle = document.createElement("div");
+		dragHandle.setAttribute("class", "debug-popup-drag-handle");
+		dragHandle.textContent = "⋮⋮";
+		popup.append(dragHandle);
+
+		// Drag-to-move via the handle
+		this._isDragging = false;
+		dragHandle.addEventListener("mousedown", (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			this._isDragging = true;
+			const startX = e.clientX, startY = e.clientY;
+			const startLeft = parseInt(popup.style.left, 10) || 0;
+			const startTop = parseInt(popup.style.top, 10) || 0;
+			const onMouseMove = (ev) => {
+				ev.preventDefault();
+				ev.stopPropagation();
+				popup.style.left = (startLeft + ev.clientX - startX) + "px";
+				popup.style.top = (startTop + ev.clientY - startY) + "px";
+			};
+			const onMouseUp = (ev) => {
+				ev.stopPropagation();
+				this._isDragging = false;
+				document.removeEventListener("mousemove", onMouseMove, true);
+				document.removeEventListener("mouseup", onMouseUp, true);
+			};
+			document.addEventListener("mousemove", onMouseMove, true);
+			document.addEventListener("mouseup", onMouseUp, true);
+		});
+
 		const searchInput = document.createElement("input");
 		searchInput.setAttribute("type", "text");
 		searchInput.setAttribute("placeholder", "Filter variables...");
@@ -373,6 +403,9 @@ class DebugInfoPopup extends HTMLElement {
 	}
 
 	showPopup(triggerElement, mouseX, mouseY) {
+		if(this._isDragging) {
+			return;
+		}
 		this._loadSearchHistory();
 
 		if(this._searchInput) {

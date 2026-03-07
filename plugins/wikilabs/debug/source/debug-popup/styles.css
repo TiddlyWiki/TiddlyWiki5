@@ -37,6 +37,22 @@ This stylesheet is __not tagged__ because it will be injected into custom elemen
 	white-space: pre-wrap;
 	text-align: left;
 }
+.debug-popup-drag-handle {
+	cursor: grab;
+	text-align: center;
+	padding: 2px 0;
+	margin: -10px -10px 6px -10px;
+	background-color: #e0e0e0;
+	border-bottom: 1px solid #ccc;
+	border-radius: 5px 5px 0 0;
+	font-size: 10px;
+	letter-spacing: 2px;
+	color: #888;
+	user-select: none;
+}
+.debug-popup-drag-handle:active {
+	cursor: grabbing;
+}
 .debug-popup-table {
 	border-collapse: collapse;
 	width: 100%;
