@@ -259,21 +259,36 @@ JsonTreeWidget.prototype.createValueElement = function(value) {
 	return span;
 };
 
-JsonTreeWidget.prototype.createSelectRangeButton = function(start,end) {
-	var self = this;
+JsonTreeWidget.prototype.createIconButton = function(tiddler,title,onClick) {
 	var button = this.document.createElement("button");
 	button.className = "tc-jsontree-select-range tc-btn-invisible";
-	button.setAttribute("title","Select source text (" + start + "-" + end + ")");
-	// Transclude the core link icon
-	var iconWidget = this.makeChildWidget({
+	button.setAttribute("title",title);
+	this.makeChildWidget({
 		type: "transclude",
 		attributes: {
-			"$tiddler": {type: "string", value: "$:/core/images/link"},
+			"$tiddler": {type: "string", value: tiddler},
 			"size": {type: "string", value: "10px"}
 		}
-	});
-	iconWidget.render(button,null);
-	button.addEventListener("click",function(event) {
+	}).render(button,null);
+	button.addEventListener("click",onClick);
+	return button;
+};
+
+JsonTreeWidget.prototype.saveTiddlerJSON = function(title,data) {
+	this.wiki.addTiddler(new $tw.Tiddler(
+		this.wiki.getCreationFields(),
+		{
+			title: title,
+			type: "application/json",
+			text: JSON.stringify(data,null,2)
+		},
+		this.wiki.getModificationFields()
+	));
+};
+
+JsonTreeWidget.prototype.createSelectRangeButton = function(start,end) {
+	var self = this;
+	return this.createIconButton("$:/core/images/link","Select source text (" + start + "-" + end + ")",function(event) {
 		event.stopPropagation();
 		event.preventDefault();
 		if(self._activeButton) {
@@ -283,6 +298,7 @@ JsonTreeWidget.prototype.createSelectRangeButton = function(start,end) {
 				prevSummary.classList.remove("tc-jsontree-selected");
 			}
 		}
+		var button = event.currentTarget;
 		button.classList.add("tc-jsontree-select-range-active");
 		var parentSummary = button.parentNode;
 		if(parentSummary && parentSummary.tagName === "SUMMARY") {
@@ -294,23 +310,11 @@ JsonTreeWidget.prototype.createSelectRangeButton = function(start,end) {
 		}
 		self.selectEditorRange(start,end);
 	});
-	return button;
 };
 
 JsonTreeWidget.prototype.createExportButton = function() {
 	var self = this;
-	var button = this.document.createElement("button");
-	button.className = "tc-jsontree-select-range tc-btn-invisible";
-	button.setAttribute("title","Export visible tree to tiddler");
-	var iconWidget = this.makeChildWidget({
-		type: "transclude",
-		attributes: {
-			"$tiddler": {type: "string", value: "$:/core/images/import-button"},
-			"size": {type: "string", value: "10px"}
-		}
-	});
-	iconWidget.render(button,null);
-	button.addEventListener("click",function(event) {
+	return this.createIconButton("$:/core/images/import-button","Export visible tree to tiddler",function(event) {
 		event.stopPropagation();
 		event.preventDefault();
 		var container = self.domNodes[0];
@@ -340,25 +344,24 @@ JsonTreeWidget.prototype.createExportButton = function() {
 			},
 			self.wiki.getModificationFields()));
 	});
-	return button;
 };
 
 JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
-	var OPEN = "\u2B9F";
-	var CLOSED = "\u2B9E";
-	var lines = [];
-	if(Array.isArray(data)) {
-		var hint = this.getHint(data,true);
-		if(!detailsElement || !detailsElement.open) {
-			return CLOSED + " " + hint;
-		}
-		lines.push(OPEN + " " + hint);
-		var valueDiv = detailsElement.querySelector(":scope > .tc-jsontree-value");
-		var items = valueDiv ? valueDiv.children : [];
-		var childIndent = indent + "\t";
+	if(typeof data !== "object" || data === null) {
+		return this.formatValue(data);
+	}
+	var isArray = Array.isArray(data);
+	var hint = this.getHint(data,isArray);
+	if(!detailsElement || !detailsElement.open) {
+		return "\u2B9E " + hint;
+	}
+	var lines = ["\u2B9F " + hint];
+	var valueDiv = detailsElement.querySelector(":scope > .tc-jsontree-value");
+	var items = valueDiv ? valueDiv.children : [];
+	var childIndent = indent + "\t";
+	if(isArray) {
 		for(var i = 0; i < data.length; i++) {
-			var itemDiv = items[i];
-			var childDetail = itemDiv ? itemDiv.querySelector(":scope > details") : null;
+			var childDetail = items[i] ? items[i].querySelector(":scope > details") : null;
 			var value = data[i];
 			if(typeof value === "object" && value !== null) {
 				lines.push(childIndent + this.exportTreeText(value,childDetail,childIndent));
@@ -366,25 +369,16 @@ JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
 				lines.push(childIndent + this.formatValue(value));
 			}
 		}
-	} else if(typeof data === "object" && data !== null) {
-		var hint = this.getHint(data,false);
-		if(!detailsElement || !detailsElement.open) {
-			return CLOSED + " " + hint;
-		}
-		lines.push(OPEN + " " + hint);
+	} else {
 		var keys = Object.keys(data);
-		var valueDiv = detailsElement.querySelector(":scope > .tc-jsontree-value");
-		var items = valueDiv ? valueDiv.children : [];
-		var childIndent = indent + "\t";
 		var visibleIndex = 0;
 		for(var k = 0; k < keys.length; k++) {
 			var key = keys[k];
 			if(this.blockList[key]) {
 				continue;
 			}
-			var itemDiv = items[visibleIndex];
+			var childDetail = items[visibleIndex] ? items[visibleIndex].querySelector(":scope > details") : null;
 			visibleIndex++;
-			var childDetail = itemDiv ? itemDiv.querySelector(":scope > details") : null;
 			var value = data[key];
 			if(typeof value === "object" && value !== null) {
 				var nestedIndent = childIndent + "\t";
@@ -393,8 +387,6 @@ JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
 				lines.push(childIndent + "\"" + key + "\": " + this.formatValue(value));
 			}
 		}
-	} else {
-		return this.formatValue(data);
 	}
 	return lines.join("\n");
 };
@@ -431,24 +423,12 @@ JsonTreeWidget.prototype.formatValue = function(value) {
 
 JsonTreeWidget.prototype.createZoomButton = function(currentPath) {
 	var self = this;
-	var button = this.document.createElement("button");
-	button.className = "tc-jsontree-select-range tc-btn-invisible";
-	button.setAttribute("title","Zoom into this node");
-	var iconWidget = this.makeChildWidget({
-		type: "transclude",
-		attributes: {
-			"$tiddler": {type: "string", value: "$:/core/images/preview-open"},
-			"size": {type: "string", value: "10px"}
-		}
-	});
-	iconWidget.render(button,null);
-	button.addEventListener("click",function(event) {
+	return this.createIconButton("$:/core/images/preview-open","Zoom into this node",function(event) {
 		event.stopPropagation();
 		event.preventDefault();
 		self.zoomPath = self.zoomPath ? self.zoomPath + "/" + currentPath : currentPath;
 		self.refreshSelf();
 	});
-	return button;
 };
 
 JsonTreeWidget.prototype.getDataAtPath = function(data,path) {
@@ -594,11 +574,7 @@ JsonTreeWidget.prototype.focusPath = function(buttonElement) {
 			}
 		}
 		this._suppressToggleSave = false;
-		this.wiki.addTiddler(new $tw.Tiddler({
-			title: this.foldState,
-			type: "application/json",
-			text: JSON.stringify(saved,null,2)
-		}));
+		this.saveTiddlerJSON(this.foldState,saved);
 		return;
 	}
 	// Save current fold state from DOM before focusing
@@ -609,11 +585,7 @@ JsonTreeWidget.prototype.focusPath = function(buttonElement) {
 			savedState[key] = "hide";
 		}
 	}
-	this.wiki.addTiddler(new $tw.Tiddler({
-		title: this.foldState + "/saved",
-		type: "application/json",
-		text: JSON.stringify(savedState,null,2)
-	}));
+	this.saveTiddlerJSON(this.foldState + "/saved",savedState);
 	// Close all except ancestors of the clicked button
 	var newState = {};
 	this._suppressToggleSave = true;
@@ -629,11 +601,7 @@ JsonTreeWidget.prototype.focusPath = function(buttonElement) {
 		}
 	}
 	this._suppressToggleSave = false;
-	this.wiki.addTiddler(new $tw.Tiddler({
-		title: this.foldState,
-		type: "application/json",
-		text: JSON.stringify(newState,null,2)
-	}));
+	this.saveTiddlerJSON(this.foldState,newState);
 };
 
 JsonTreeWidget.prototype.selectEditorRange = function(start,end) {
@@ -676,11 +644,7 @@ JsonTreeWidget.prototype.batchSaveState = function() {
 			stateData[key] = "hide";
 		}
 	}
-	this.wiki.addTiddler(new $tw.Tiddler({
-		title: this.foldState,
-		type: "application/json",
-		text: JSON.stringify(stateData,null,2)
-	}));
+	this.saveTiddlerJSON(this.foldState,stateData);
 };
 
 JsonTreeWidget.prototype.saveState = function(stateKey,isOpen) {
@@ -690,11 +654,7 @@ JsonTreeWidget.prototype.saveState = function(stateKey,isOpen) {
 	} else {
 		currentData[stateKey] = "hide";
 	}
-	this.wiki.addTiddler(new $tw.Tiddler({
-		title: this.foldState,
-		type: "application/json",
-		text: JSON.stringify(currentData,null,2)
-	}));
+	this.saveTiddlerJSON(this.foldState,currentData);
 };
 
 exports.jsontree = JsonTreeWidget;
