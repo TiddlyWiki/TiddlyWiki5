@@ -22,8 +22,8 @@ tags: $:/tags/Stylesheet
 
 .tc-jsontree details {
 	border-left: 1px solid <<colour muted-foreground>>;
-	padding-left: 1em;
-	margin-left: 1em;
+	padding-left: .5em;
+	margin-left: .5em;
 }
 
 .tc-jsontree summary {
