@@ -153,28 +153,15 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 	var hint = "";
 	if(isArray) {
 		hint = "[...] (" + data.length + " items)";
-	} else if(!details.open && typeof data.tag === "string") {
+	} else if(typeof data.tag === "string") {
 		hint = "{" + data.tag + " ...}";
-	} else if(!details.open && typeof data.type === "string") {
+	} else if(typeof data.type === "string") {
 		hint = "{" + data.type + " ...}";
 	} else {
-		hint = isArray ? "[...]" : "{...}";
+		hint = "{...}";
 	}
 	var hintNode = this.document.createTextNode(hint);
 	summary.appendChild(hintNode);
-	details.addEventListener("toggle",function() {
-		var newHint;
-		if(isArray) {
-			newHint = "[...] (" + data.length + " items)";
-		} else if(!details.open && typeof data.tag === "string") {
-			newHint = "{" + data.tag + " ...}";
-		} else if(!details.open && typeof data.type === "string") {
-			newHint = "{" + data.type + " ...}";
-		} else {
-			newHint = isArray ? "[...]" : "{...}";
-		}
-		hintNode.nodeValue = newHint;
-	});
 	if(this.attVariable === "preview-text" && !isArray && typeof data.start === "number" && typeof data.end === "number") {
 		summary.appendChild(this.createSelectRangeButton(data.start,data.end));
 	}
@@ -327,7 +314,7 @@ JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
 		if(!detailsElement || !detailsElement.open) {
 			return CLOSED + " " + hint;
 		}
-		lines.push(OPEN + " {...}");
+		lines.push(OPEN + " " + hint);
 		var keys = Object.keys(data);
 		var valueDiv = detailsElement.querySelector(":scope > .tc-jsontree-value");
 		var items = valueDiv ? valueDiv.children : [];
