@@ -15,7 +15,7 @@ type: text/vnd.tiddlywiki
 [[run|"Filter Run"]]
 """/>
 
-The filter output from previous runs is set aside. The `:intersection` filter run is started with all tiddler titles as input. Once this latest filter run has completed, the latest output is compared to the set-aside output. A new output is produced that contains only titles that appeared in both the set-aside output and the latest output. The order of titles in the output is preserved from the accumulated results.
+The filter output from previous runs is set aside. The `:intersection` filter run is started with all tiddler titles as input. Once this filter run has completed, the output is compared to the set-aside output. A new output is produced that contains only titles that appeared in both the set-aside output and the latest output. The order of titles in the output is preserved from the accumulated results.
 
 !! Difference from `:and` / `+`
 
