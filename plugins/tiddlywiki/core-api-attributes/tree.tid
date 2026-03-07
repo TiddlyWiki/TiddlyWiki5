@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/core-api-attributes/tree
+
+<<tree prefix:"$:/plugins/tiddlywiki/core-api-attributes/">>
+
+<<tree prefix:"$:/docs/filter-operators/">>
+
+<<tree prefix:"$:/docs/widgets/">>

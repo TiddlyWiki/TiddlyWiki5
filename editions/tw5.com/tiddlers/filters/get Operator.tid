@@ -1,0 +1,8 @@
+caption: get
+created: 20140426183123179
+modified: 20260224000000000
+tags: [[Filter Operators]] [[Field Operators]]
+title: get Operator
+type: text/vnd.tiddlywiki
+
+{{||$:/plugins/tiddlywiki/core-api-docs/filters/get Operator}}

@@ -1,0 +1,7 @@
+title: $:/schemas/WidgetAttributeDocs/deprecated
+field-type: enum
+enum-values: yes no
+required: no
+type: text/vnd.tiddlywiki
+
+Whether this attribute is deprecated. Deprecated attributes should include deprecation details in the `text` field.

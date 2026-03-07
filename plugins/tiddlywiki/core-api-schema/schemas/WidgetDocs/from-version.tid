@@ -1,0 +1,6 @@
+title: $:/schemas/WidgetDocs/from-version
+field-type: string
+required: no
+type: text/vnd.tiddlywiki
+
+The TiddlyWiki version in which this widget was introduced.
