@@ -53,6 +53,44 @@ JsonTreeWidget.prototype.render = function(parent,nextSibling) {
 		var tree = this.createTreeElement(zoomData,null,"");
 		container.appendChild(tree);
 		this.stateData = null;
+		// Delegated event listeners on the container
+		var self = this;
+		container.addEventListener("toggle",function(event) {
+			if(self._suppressToggleSave) {
+				return;
+			}
+			var target = event.target;
+			if(target.tagName === "DETAILS") {
+				var keyToUpdate = target.getAttribute("data-state-key");
+				if(keyToUpdate) {
+					self.saveState(keyToUpdate,target.open);
+				}
+			}
+		},true);
+		container.addEventListener("click",function(event) {
+			var summary = event.target;
+			if(summary.tagName !== "SUMMARY") {
+				summary = summary.closest ? summary.closest("summary") : null;
+			}
+			if(!summary || summary.tagName !== "SUMMARY") {
+				return;
+			}
+			if(event.ctrlKey || event.metaKey) {
+				var details = summary.parentNode;
+				if(details && details.tagName === "DETAILS") {
+					setTimeout(function() {
+						var isOpen = details.open;
+						var childDetails = details.querySelectorAll("details");
+						self._suppressToggleSave = true;
+						for(var i = 0; i < childDetails.length; i++) {
+							childDetails[i].open = isOpen;
+						}
+						self._suppressToggleSave = false;
+						self.batchSaveState();
+					},0);
+				}
+			}
+		});
 	}
 	parent.insertBefore(container,nextSibling);
 	this.domNodes.push(container);
@@ -63,7 +101,13 @@ JsonTreeWidget.prototype.execute = function() {
 	this.attVariable = this.getAttribute("variable");
 	this.attBlockList = this.getAttribute("block-list","");
 	this.foldState = this.getAttribute("state","$:/temp/json-tree/state");
-	this.blockList = this.attBlockList ? this.attBlockList.split(" ") : [];
+	this.blockList = {};
+	if(this.attBlockList) {
+		var blockParts = this.attBlockList.split(" ");
+		for(var i = 0; i < blockParts.length; i++) {
+			this.blockList[blockParts[i]] = true;
+		}
+	}
 	if(this.zoomPath === undefined) {
 		this.zoomPath = "";
 	}
@@ -132,52 +176,17 @@ JsonTreeWidget.prototype.createTreeElement = function(data,key,currentPath) {
 };
 
 JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPath,isArray) {
-	var self = this;
 	var details = this.document.createElement("details");
 	var stateKey = currentPath;
 	var stateValue = Object.prototype.hasOwnProperty.call(this.stateData,stateKey) ? this.stateData[stateKey] : undefined;
 	var defaultOpen = (key !== "orderedAttributes");
 	details.open = (stateValue === undefined) ? defaultOpen : (stateValue !== "hide");
 	details.setAttribute("data-state-key",stateKey);
-	details.addEventListener("toggle",function(event) {
-		if(self._suppressToggleSave) {
-			return;
-		}
-		var keyToUpdate = event.target.getAttribute("data-state-key");
-		if(keyToUpdate) {
-			self.saveState(keyToUpdate,event.target.open);
-		}
-	});
 	var summary = this.document.createElement("summary");
-	summary.addEventListener("click",function(event) {
-		if(event.ctrlKey || event.metaKey) {
-			// After browser toggles the parent, match all children
-			setTimeout(function() {
-				var isOpen = details.open;
-				var childDetails = details.querySelectorAll("details");
-				self._suppressToggleSave = true;
-				for(var i = 0; i < childDetails.length; i++) {
-					childDetails[i].open = isOpen;
-				}
-				self._suppressToggleSave = false;
-				self.batchSaveState();
-			},0);
-		}
-	});
 	if(key !== null) {
 		summary.appendChild(this.createKeySpan(key));
 	}
-	var hint = "";
-	if(isArray) {
-		hint = "[...] (" + data.length + " items)";
-	} else if(typeof data.tag === "string") {
-		hint = "{" + data.tag + " ...}";
-	} else if(typeof data.type === "string") {
-		hint = "{" + data.type + " ...}";
-	} else {
-		hint = "{...}";
-	}
-	var hintNode = this.document.createTextNode(hint);
+	var hintNode = this.document.createTextNode(this.getHint(data,isArray));
 	summary.appendChild(hintNode);
 	if(this.attVariable === "preview-text" && !isArray && typeof data.start === "number" && typeof data.end === "number") {
 		summary.appendChild(this.createSelectRangeButton(data.start,data.end));
@@ -202,7 +211,7 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 		var keys = Object.keys(data);
 		for(var k = 0; k < keys.length; k++) {
 			var newKey = keys[k];
-			if(this.blockList.indexOf(newKey) !== -1) {
+			if(this.blockList[newKey]) {
 				continue;
 			}
 			var objItem = this.document.createElement("div");
@@ -213,6 +222,17 @@ JsonTreeWidget.prototype.createCollapsibleElement = function(data,key,currentPat
 	}
 	details.appendChild(list);
 	return details;
+};
+
+JsonTreeWidget.prototype.getHint = function(data,isArray) {
+	if(isArray) {
+		return "[...] (" + data.length + " items)";
+	} else if(typeof data.tag === "string") {
+		return "{" + data.tag + " ...}";
+	} else if(typeof data.type === "string") {
+		return "{" + data.type + " ...}";
+	}
+	return "{...}";
 };
 
 JsonTreeWidget.prototype.createKeySpan = function(key) {
@@ -328,7 +348,7 @@ JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
 	var CLOSED = "\u2B9E";
 	var lines = [];
 	if(Array.isArray(data)) {
-		var hint = "[...] (" + data.length + " items)";
+		var hint = this.getHint(data,true);
 		if(!detailsElement || !detailsElement.open) {
 			return CLOSED + " " + hint;
 		}
@@ -347,9 +367,7 @@ JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
 			}
 		}
 	} else if(typeof data === "object" && data !== null) {
-		var tag = typeof data.tag === "string" ? data.tag : "";
-		var type = typeof data.type === "string" ? data.type : "";
-		var hint = "{" + (tag ? tag + " " : (type ? type + " " : "")) + "...}";
+		var hint = this.getHint(data,false);
 		if(!detailsElement || !detailsElement.open) {
 			return CLOSED + " " + hint;
 		}
@@ -361,7 +379,7 @@ JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
 		var visibleIndex = 0;
 		for(var k = 0; k < keys.length; k++) {
 			var key = keys[k];
-			if(this.blockList.indexOf(key) !== -1) {
+			if(this.blockList[key]) {
 				continue;
 			}
 			var itemDiv = items[visibleIndex];
@@ -459,11 +477,20 @@ JsonTreeWidget.prototype.findFirstAttributes = function(data) {
 	if(!Array.isArray(data) && data.attributes && typeof data.attributes === "object" && !Array.isArray(data.attributes) && Object.keys(data.attributes).length > 0) {
 		return data.attributes;
 	}
-	var children = Array.isArray(data) ? data : Object.keys(data).map(function(k) { return data[k]; });
-	for(var i = 0; i < children.length; i++) {
-		var found = this.findFirstAttributes(children[i]);
-		if(found) {
-			return found;
+	if(Array.isArray(data)) {
+		for(var i = 0; i < data.length; i++) {
+			var found = this.findFirstAttributes(data[i]);
+			if(found) {
+				return found;
+			}
+		}
+	} else {
+		var keys = Object.keys(data);
+		for(var i = 0; i < keys.length; i++) {
+			var found = this.findFirstAttributes(data[keys[i]]);
+			if(found) {
+				return found;
+			}
 		}
 	}
 	return null;
@@ -504,10 +531,11 @@ JsonTreeWidget.prototype.createBreadcrumb = function(fullData) {
 	// Path segments
 	var parts = this.zoomPath.split("/");
 	var accumulated = "";
+	var segData = fullData;
 	for(var i = 0; i < parts.length; i++) {
 		bar.appendChild(this.document.createTextNode(" / "));
 		accumulated = accumulated ? accumulated + "/" + parts[i] : parts[i];
-		var segData = this.getDataAtPath(fullData,accumulated);
+		segData = (segData && typeof segData === "object") ? segData[Array.isArray(segData) ? parseInt(parts[i],10) : parts[i]] : undefined;
 		var tooltip = this.getAttributesTooltip(segData);
 		if(i < parts.length - 1) {
 			var segLink = this.document.createElement("button");
