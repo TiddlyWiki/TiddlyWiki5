@@ -27,15 +27,16 @@ This stylesheet is __not tagged__ because it will be injected into custom elemen
 	border-radius: 5px;
 	padding: 10px;
 	min-width: var(--popup-min-width);
-	max-width: var(--popup-max-width);
-	max-height: var(--popup-max-height);
-	overflow-y: auto;
+	width: var(--popup-max-width);
+	height: var(--popup-max-height);
 	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
 	font-family: "Source Code Pro", monospace;
 	font-size: 12px;
 	line-height: 1.4;
 	white-space: pre-wrap;
 	text-align: left;
+	resize: both;
+	overflow: auto;
 }
 .debug-popup-drag-handle {
 	cursor: grab;
