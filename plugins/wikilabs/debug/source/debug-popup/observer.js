@@ -17,23 +17,36 @@ exports.init = function(globalDebugPopup) {
 	 */
 	function mouseenterHandler(event) {
 		const data = nodeDataMap.get(this);
-		if(!data || globalDebugPopup._popup.style.display !== "none") {
+		if(!data) {
 			return;
+		}
+		// Cancel any pending hide timeout from a previous element's mouseleave
+		if(globalDebugPopup._hideTimeout) {
+			clearTimeout(globalDebugPopup._hideTimeout);
+			globalDebugPopup._hideTimeout = null;
 		}
 		if(globalDebugPopup._popupTimeout) {
 			clearTimeout(globalDebugPopup._popupTimeout);
 		}
 		const mouseX = event.clientX, mouseY = event.clientY;
 		const domNode = this;
-		globalDebugPopup._popupTimeout = setTimeout(function() {
-			if(globalDebugPopup._popup.style.display !== "none") {
-				return;
-			}
+		// If the popup is already visible, update it immediately with the new element's data
+		if(globalDebugPopup._popup.style.display !== "none") {
 			const finalData = _gatherVariableData(data.widget);
 			globalDebugPopup.setData(finalData);
 			globalDebugPopup.showPopup(domNode, mouseX, mouseY);
 			globalDebugPopup._popupTimeout = null;
-		}, 1000);
+		} else {
+			globalDebugPopup._popupTimeout = setTimeout(function() {
+				if(globalDebugPopup._popup.style.display !== "none") {
+					return;
+				}
+				const finalData = _gatherVariableData(data.widget);
+				globalDebugPopup.setData(finalData);
+				globalDebugPopup.showPopup(domNode, mouseX, mouseY);
+				globalDebugPopup._popupTimeout = null;
+			}, 1000);
+		}
 	}
 
 	/**
