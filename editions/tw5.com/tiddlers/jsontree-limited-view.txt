@@ -1,5 +1,106 @@
-⮟ {...}
+⮟ {widget ...}
 	"type": "widget"
 		"children": ⮟ [...] (2 items)
 			⮞ {p ...}
-			⮞ {p ...}
+			⮟ {p ...}
+				"type": "element"
+				"tag": "p"
+					"children": ⮟ [...] (4 items)
+						⮟ {div ...}
+							"type": "element"
+							"tag": "div"
+								"attributes": ⮞ {...}
+								"children": ⮟ [...] (3 items)
+									⮞ {text ...}
+									⮟ {list ...}
+										"type": "list"
+											"attributes": ⮞ {...}
+											"children": ⮟ [...] (4 items)
+												⮟ {listitem ...}
+													"type": "listitem"
+														"children": ⮟ [...] (3 items)
+															⮞ {text ...}
+															⮟ {macrocall ...}
+																"type": "macrocall"
+																	"attributes": ⮞ {...}
+																	"children": ⮟ [...] (1 items)
+																		⮟ {transclude ...}
+																			"type": "transclude"
+																				"attributes": ⮞ {...}
+																				"children": ⮟ [...] (1 items)
+																					⮟ {parameters ...}
+																						"type": "parameters"
+																							"attributes": ⮟ {...}
+																								"imageField": "image"
+																								"captionField": "caption"
+																								"descriptionField": "description"
+																								"linkField": "link"
+																							"children": ⮟ [...] (1 items)
+																								⮟ {link ...}
+																									"type": "link"
+																										"attributes": ⮞ {...}
+																										"children": ⮟ [...] (1 items)
+																											⮟ {transclude ...}
+																												"type": "transclude"
+																													"attributes": ⮞ {...}
+																													"children": ⮟ [...] (1 items)
+																														⮟ {parameters ...}
+																															"type": "parameters"
+																																"children": ⮟ [...] (1 items)
+																																	⮟ {div ...}
+																																		"type": "element"
+																																		"tag": "div"
+																																			"attributes": ⮞ {...}
+																																			"children": ⮟ [...] (7 items)
+																																				⮞ {list ...}
+																																				⮞ {list ...}
+																																				⮞ {div ...}
+																																				⮞ {list ...}
+																																				⮞ {div ...}
+																																				⮞ {list ...}
+																																				⮟ {list ...}
+																																					"type": "list"
+																																						"attributes": ⮞ {...}
+																																						"children": ⮟ [...] (1 items)
+																																							⮟ {listitem ...}
+																																								"type": "listitem"
+																																									"children": ⮟ [...] (1 items)
+																																										⮟ {div ...}
+																																											"type": "element"
+																																											"tag": "div"
+																																												"attributes": ⮟ {...}
+																																													"class": "tc-card-button"
+																																													"style.background-color": "#00009a"
+																																													"style.border-color": "#00009a"
+																																												"children": ⮟ [...] (3 items)
+																																													⮞ {text ...}
+																																													⮞ {entity ...}
+																																													⮟ {tiddler ...}
+																																														"type": "tiddler"
+																																															"attributes": ⮞ {...}
+																																															"children": ⮟ [...] (1 items)
+																																																⮟ {transclude ...}
+																																																	"type": "transclude"
+																																																		"attributes": ⮞ {...}
+																																																		"children": ⮟ [...] (1 items)
+																																																			⮟ {parameters ...}
+																																																				"type": "parameters"
+																																																					"attributes": ⮞ {...}
+																																																					"children": ⮟ [...] (1 items)
+																																																						⮟ {svg ...}
+																																																							"type": "element"
+																																																							"tag": "svg"
+																																																								"attributes": ⮟ {...}
+																																																									"width": "22pt"
+																																																									"height": "22pt"
+																																																									"class": "tc-image-chevron-right tc-image-button"
+																																																									"viewBox": "0 0 128 128"
+																																																								"children": ⮞ [...] (1 items)
+															⮞ {text ...}
+												⮞ {listitem ...}
+												⮞ {listitem ...}
+												⮞ {listitem ...}
+									⮞ {text ...}
+						⮞ {text ...}
+						⮞ {div ...}
+						⮞ {text ...}
