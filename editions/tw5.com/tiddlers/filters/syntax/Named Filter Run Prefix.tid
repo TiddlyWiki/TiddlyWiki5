@@ -34,4 +34,14 @@ A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expre
 
 <<.tip """Within the filter runs prefixed with `:reduce`, `:sort`, `:map` and `:filter`, the <<.var currentTiddler>> variable is set to the title of the tiddler being processed.<br>The value of currentTiddler outside the subfilter is available in the variable <<.var "..currentTiddler">> <<.from-version "5.2.0">>""" >>
 
+!! Suffixes
+
+Named filter run prefixes can accept suffixes separated by `:` characters, each optionally containing comma-separated values. The general syntax is `:prefixname:suffix1:suffix2,...`. Currently the following prefixes accept suffixes:
+
+|!Prefix |!Suffixes |!Example |
+|`:map` |`flat` — return all results instead of only the first per item |`:map:flat[...]` |
+|`:sort` |type (''string'', ''alphanumeric'', ''number'', ''integer'', ''version'', ''date'') and flags (''reverse'', ''casesensitive'', ''caseinsensitive'') |`:sort:number:reverse[...]` |
+
+All other named prefixes (`:all`, `:and`, `:cascade`, `:else`, `:except`, `:filter`, `:intersection`, `:let`, `:or`, `:reduce`, `:then`) do not currently accept suffixes.
+
 Also see: [[Interchangeable Filter Run Prefixes]]
