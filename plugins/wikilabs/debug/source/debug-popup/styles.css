@@ -45,6 +45,8 @@ This stylesheet is __not tagged__ because it will be injected into custom elemen
 	border: 1px solid #ddd;
 	padding: 3px;
 	vertical-align: top;
+	user-select: text;
+	cursor: text;
 }
 .debug-popup-table tr:nth-child(even){background-color: #f9f9f9;}
 .debug-popup-table th {
@@ -85,4 +87,20 @@ This stylesheet is __not tagged__ because it will be injected into custom elemen
 }
 .suggestion-item:hover, .suggestion-item.suggestion-active {
 	background-color: #ddd;
+}
+.copy-feedback {
+	position: fixed;
+	background-color: #333;
+	color: #fff;
+	padding: 4px 10px;
+	border-radius: 4px;
+	font-size: 12px;
+	z-index: 1002;
+	pointer-events: none;
+	animation: copy-fade 1.2s ease-out forwards;
+}
+@keyframes copy-fade {
+	0% { opacity: 1; transform: translateY(0); }
+	70% { opacity: 1; transform: translateY(-5px); }
+	100% { opacity: 0; transform: translateY(-10px); }
 }

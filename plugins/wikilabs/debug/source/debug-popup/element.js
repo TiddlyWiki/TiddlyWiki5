@@ -43,6 +43,25 @@ class DebugInfoPopup extends HTMLElement {
 			this._updateSuggestionHighlight();
 		});
 
+		// Right-click on selected text copies it to clipboard
+		popup.addEventListener("contextmenu", (e) => {
+			const selection = this.shadowRoot.getSelection
+				? this.shadowRoot.getSelection()
+				: document.getSelection();
+			const selectedText = selection ? selection.toString() : "";
+			if(selectedText && selection.rangeCount > 0) {
+				const range = selection.getRangeAt(0);
+				const rect = range.getBoundingClientRect();
+				// Only copy if right-click is within the selection boundary
+				if(e.clientX >= rect.left && e.clientX <= rect.right &&
+					e.clientY >= rect.top && e.clientY <= rect.bottom) {
+					e.preventDefault();
+					navigator.clipboard.writeText(selectedText);
+					this._showCopyFeedback(e.clientX, e.clientY);
+				}
+			}
+		});
+
 		// Add event listener for the search input
 		searchInput.addEventListener("input", () => {
 			this._filterTable();
@@ -437,6 +456,17 @@ class DebugInfoPopup extends HTMLElement {
 				this.hide();
 			}
 		}
+	}
+
+	_showCopyFeedback(x, y) {
+		const tooltip = document.createElement("div");
+		tooltip.setAttribute("class", "copy-feedback");
+		tooltip.textContent = "Copied!";
+		this.shadowRoot.appendChild(tooltip);
+		// Position relative to viewport using fixed positioning
+		tooltip.style.left = x + "px";
+		tooltip.style.top = (y - 30) + "px";
+		setTimeout(() => tooltip.remove(), 1200);
 	}
 
 	// Methods to handle mouse events on the popup itself
