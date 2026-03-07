@@ -87,3 +87,7 @@ tags: $:/tags/Stylesheet
 .tc-jsontree .tc-jsontree-select-range-active svg {
 	fill: <<colour dirty-indicator>>;
 }
+
+.tc-jsontree summary.tc-jsontree-selected {
+	background-color: <<colour message-background>>;
+}

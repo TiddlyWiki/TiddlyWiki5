@@ -238,8 +238,16 @@ JsonTreeWidget.prototype.createSelectRangeButton = function(start,end) {
 		event.preventDefault();
 		if(self._activeButton) {
 			self._activeButton.classList.remove("tc-jsontree-select-range-active");
+			var prevSummary = self._activeButton.parentNode;
+			if(prevSummary && prevSummary.tagName === "SUMMARY") {
+				prevSummary.classList.remove("tc-jsontree-selected");
+			}
 		}
 		button.classList.add("tc-jsontree-select-range-active");
+		var parentSummary = button.parentNode;
+		if(parentSummary && parentSummary.tagName === "SUMMARY") {
+			parentSummary.classList.add("tc-jsontree-selected");
+		}
 		self._activeButton = button;
 		if(event.ctrlKey || event.metaKey) {
 			self.focusPath(button);
