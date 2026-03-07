@@ -1,0 +1,14 @@
+title: MarkdownToWikitext/Italic
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/markdown-to-wikitext-test-spec]]
+
++
+title: Markdown
+
+This is *italic* text
+
++
+title: ExpectedWikitext
+
+This is //italic// text
+

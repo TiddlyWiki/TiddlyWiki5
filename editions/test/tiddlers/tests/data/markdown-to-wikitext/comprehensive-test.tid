@@ -1,0 +1,264 @@
+title: Markdown to Wikitext/comprehensive-test
+tags: $:/tags/markdown-to-wikitext-test-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: Markdown
+
+# This is a table
+
+This is a `firefox`
+
+The sunshine is clean, I really like you
+Life is a `game`, I'll accompany you
+
+# Level 1 Heading
+
+Sleeping is just thinking of you in another world
+Keep me as a pet, I promise to be good
+I have many sweet words, I only want to tell you
+My palm is soft, do you want to sign it
+Like you is the breeze, is the morning dew, is blushing cheeks, is among thousands of people, can't fit anyone else
+The moments you liked are called sweet circles
+Meeting you is just right
+I'm a little afraid of you, because I'm afraid of my wife
+
+## Level 2 Heading
+
+### Level 3 Heading
+
+#### Level 4 Heading
+
+##### Level 5 Heading
+
+###### Level 6 Heading
+
+Want to hold your hand through spring, summer, autumn and winter, and taste all the flavors of life
+
+> This is a quote.
+>
+> > Nested quote.
+
+Dating is a bit tiring, let's get married
+
+**Bold** _Italic_ ~~Strikethrough~~
+
+Meeting you feels like walking a long way and finally coming home
+I hope your happiness includes me, I hope your heart has me, I hope you have
+
+| ab | b | c | d |
+| - | :- | -: | :-: |
+| e | f |
+| g | h | i | j | k |
+| L | L | R | C |
+
+## Love Words
+
+A person falls in love with a stream because they haven't seen the ocean, but I've seen the Milky Way, yet I only love one star
+Mountains and rivers are just preludes, I will eventually meet the belated {{you}}
+
+- Item 1
+- Item 2
+  - Subitem 2.1
+  - Subitem 2.2
+- Item 3
+
+Like you is the breeze, is the morning dew, is blushing cheeks, is among thousands of people, can't fit anyone else
+
+1. Item 1
+2. Item 2
+   1. Subitem 2.1
+   2. Subitem 2.2
+3. Item 3
+
+---
+
+## Level 2 Heading
+
+[Normal link](http://example.com)
+[Link with title](http://example.com 'Link title')
+
+<http://example.com>
+<mailto:example@example.com>
+
+## Level 2 Heading
+
+![Image description](http://example.com/image.png)
+![Image with title](http://example.com/image.png 'Image title')
+
+## Level 2 Heading
+
+| Header 1 | Header 2 | Header 3 |
+| -------- | -------- | -------- |
+| Row 1 Col 1 | Row 1 Col 2 | Row 1 Col 3 |
+| Row 2 Col 1 | Row 2 Col 2 | Row 2 Col 3 |
+
+## Footnote
+
+This is a footnote[^1]
+
+[^1]: Footnote content
+
+## Level 3 Heading
+
+:smile:
+:heart:
+
+<p>This is an HTML paragraph.</p>
+
+$$E=mc^2$$
+
+\*This is a text\* (not displayed as italic)
+
+# Heading Example
+
+This is a normal paragraph, containing **bold**, *italic* and ~~strikethrough~~ text.
+
+- Unordered list item 1
+- Unordered list item 2
+  - Sub-list item 2.1
+  - Sub-list item 2.2
+
+1. Ordered list item 1
+2. Ordered list item 2
+   1. Sub-list item 2.1
+   2. Sub-list item 2.2
+
+[This is a link](http://example.com)
+
+![This is an image](http://example.com/image.png)
+
+> This is a quote
+
++
+title: ExpectedWikitext
+
+! This is a table
+
+This is a `firefox`
+
+The sunshine is clean, I really like you
+Life is a `game`, I'll accompany you
+
+! Level 1 Heading
+
+Sleeping is just thinking of you in another world
+Keep me as a pet, I promise to be good
+I have many sweet words, I only want to tell you
+My palm is soft, do you want to sign it
+Like you is the breeze, is the morning dew, is blushing cheeks, is among thousands of people, can't fit anyone else
+The moments you liked are called sweet circles
+Meeting you is just right
+I'm a little afraid of you, because I'm afraid of my wife
+
+!! Level 2 Heading
+
+!!! Level 3 Heading
+
+!!!! Level 4 Heading
+
+!!!!! Level 5 Heading
+
+!!!!!! Level 6 Heading
+
+Want to hold your hand through spring, summer, autumn and winter, and taste all the flavors of life
+
+<<<
+This is a quote.
+
+<<<<
+Nested quote.
+<<<<
+
+<<<
+
+Dating is a bit tiring, let's get married
+
+''Bold'' //Italic// ~~Strikethrough~~
+
+Meeting you feels like walking a long way and finally coming home
+I hope your happiness includes me, I hope your heart has me, I hope you have
+
+|!ab|!b|!c|!d|
+|e|f|||
+|g|h|i|j|
+|L|L|R|C|
+
+!! Love Words
+
+A person falls in love with a stream because they haven't seen the ocean, but I've seen the Milky Way, yet I only love one star
+Mountains and rivers are just preludes, I will eventually meet the belated {{you}}
+
+* Item 1
+* Item 2
+** Subitem 2.1
+** Subitem 2.2
+* Item 3
+
+Like you is the breeze, is the morning dew, is blushing cheeks, is among thousands of people, can't fit anyone else
+
+# Item 1
+# Item 2
+## Subitem 2.1
+## Subitem 2.2
+# Item 3
+
+---
+
+!! Level 2 Heading
+
+[[Normal link|http://example.com]]
+[[Link with title|http://example.com]]
+
+http://example.com
+mailto:example@example.com
+
+!! Level 2 Heading
+
+[img[Image description|http://example.com/image.png]]
+[img[Image with title|http://example.com/image.png]]
+
+!! Level 2 Heading
+
+|!Header 1|!Header 2|!Header 3|
+|Row 1 Col 1|Row 1 Col 2|Row 1 Col 3|
+|Row 2 Col 1|Row 2 Col 2|Row 2 Col 3|
+
+!! Footnote
+
+This is a footnote[^1]
+
+[^1]: Footnote content
+
+!! Level 3 Heading
+
+:smile:
+:heart:
+
+<p>This is an HTML paragraph.</p>
+
+$$E=mc^2$$
+
+*This is a text* (not displayed as italic)
+
+! Heading Example
+
+This is a normal paragraph, containing ''bold'', //italic// and ~~strikethrough~~ text.
+
+* Unordered list item 1
+* Unordered list item 2
+** Sub-list item 2.1
+** Sub-list item 2.2
+
+# Ordered list item 1
+# Ordered list item 2
+## Sub-list item 2.1
+## Sub-list item 2.2
+
+[[This is a link|http://example.com]]
+
+[img[This is an image|http://example.com/image.png]]
+
+<<<
+This is a quote
+<<<
+

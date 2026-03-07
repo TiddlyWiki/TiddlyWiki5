@@ -1,0 +1,24 @@
+title: MarkdownToWikitext/CodeBlock
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/markdown-to-wikitext-test-spec]]
+
++
+title: Markdown
+
+Inline `code` here.
+
+```javascript
+var x = 1;
+console.log(x);
+```
+
++
+title: ExpectedWikitext
+
+Inline `code` here.
+
+```javascript
+var x = 1;
+console.log(x);
+```
+
