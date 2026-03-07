@@ -48,7 +48,7 @@ JsonTreeWidget.prototype.render = function(parent,nextSibling) {
 		}
 		// Show breadcrumb bar when zoomed in
 		if(this.zoomPath) {
-			container.appendChild(this.createBreadcrumb());
+			container.appendChild(this.createBreadcrumb(data));
 		}
 		var tree = this.createTreeElement(zoomData,null,"");
 		container.appendChild(tree);
@@ -424,7 +424,42 @@ JsonTreeWidget.prototype.getDataAtPath = function(data,path) {
 	return current;
 };
 
-JsonTreeWidget.prototype.createBreadcrumb = function() {
+JsonTreeWidget.prototype.findFirstAttributes = function(data) {
+	if(!data || typeof data !== "object") {
+		return null;
+	}
+	if(!Array.isArray(data) && data.attributes && typeof data.attributes === "object" && !Array.isArray(data.attributes) && Object.keys(data.attributes).length > 0) {
+		return data.attributes;
+	}
+	var children = Array.isArray(data) ? data : Object.keys(data).map(function(k) { return data[k]; });
+	for(var i = 0; i < children.length; i++) {
+		var found = this.findFirstAttributes(children[i]);
+		if(found) {
+			return found;
+		}
+	}
+	return null;
+};
+
+JsonTreeWidget.prototype.getAttributesTooltip = function(data) {
+	var attrs = this.findFirstAttributes(data);
+	if(!attrs) {
+		return "";
+	}
+	var lines = [];
+	var keys = Object.keys(attrs);
+	for(var i = 0; i < keys.length; i++) {
+		var attr = attrs[keys[i]];
+		if(attr && typeof attr === "object" && typeof attr.value === "string") {
+			lines.push(keys[i] + "=\"" + attr.value + "\"");
+		} else {
+			lines.push(keys[i] + "=" + JSON.stringify(attr));
+		}
+	}
+	return lines.length ? lines.join("\n") : "";
+};
+
+JsonTreeWidget.prototype.createBreadcrumb = function(fullData) {
 	var self = this;
 	var bar = this.document.createElement("div");
 	bar.className = "tc-jsontree-breadcrumb";
@@ -444,10 +479,15 @@ JsonTreeWidget.prototype.createBreadcrumb = function() {
 	for(var i = 0; i < parts.length; i++) {
 		bar.appendChild(this.document.createTextNode(" / "));
 		accumulated = accumulated ? accumulated + "/" + parts[i] : parts[i];
+		var segData = this.getDataAtPath(fullData,accumulated);
+		var tooltip = this.getAttributesTooltip(segData);
 		if(i < parts.length - 1) {
 			var segLink = this.document.createElement("button");
 			segLink.className = "tc-btn-invisible tc-jsontree-breadcrumb-item";
 			segLink.appendChild(this.document.createTextNode(parts[i]));
+			if(tooltip) {
+				segLink.setAttribute("title",tooltip);
+			}
 			(function(path) {
 				segLink.addEventListener("click",function() {
 					self.zoomPath = path;
@@ -456,7 +496,12 @@ JsonTreeWidget.prototype.createBreadcrumb = function() {
 			})(accumulated);
 			bar.appendChild(segLink);
 		} else {
-			bar.appendChild(this.document.createTextNode(parts[i]));
+			var segSpan = this.document.createElement("span");
+			segSpan.appendChild(this.document.createTextNode(parts[i]));
+			if(tooltip) {
+				segSpan.setAttribute("title",tooltip);
+			}
+			bar.appendChild(segSpan);
 		}
 	}
 	return bar;
