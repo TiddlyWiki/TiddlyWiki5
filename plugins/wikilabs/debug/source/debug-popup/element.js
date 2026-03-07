@@ -45,20 +45,8 @@ class DebugInfoPopup extends HTMLElement {
 
 		// Right-click on selected text copies it to clipboard
 		popup.addEventListener("contextmenu", (e) => {
-			const selection = this.shadowRoot.getSelection
-				? this.shadowRoot.getSelection()
-				: document.getSelection();
-			const selectedText = selection ? selection.toString() : "";
-			if(selectedText && selection.rangeCount > 0) {
-				const range = selection.getRangeAt(0);
-				const rect = range.getBoundingClientRect();
-				// Only copy if right-click is within the selection boundary
-				if(e.clientX >= rect.left && e.clientX <= rect.right &&
-					e.clientY >= rect.top && e.clientY <= rect.bottom) {
-					e.preventDefault();
-					navigator.clipboard.writeText(selectedText);
-					this._showCopyFeedback(e.clientX, e.clientY);
-				}
+			if(this._tryCopySelection(e.clientX, e.clientY)) {
+				e.preventDefault();
 			}
 		});
 
@@ -456,6 +444,24 @@ class DebugInfoPopup extends HTMLElement {
 				this.hide();
 			}
 		}
+	}
+
+	_tryCopySelection(x, y) {
+		const selection = this.shadowRoot.getSelection
+			? this.shadowRoot.getSelection()
+			: document.getSelection();
+		const selectedText = selection ? selection.toString() : "";
+		if(selectedText && selection.rangeCount > 0) {
+			const range = selection.getRangeAt(0);
+			const rect = range.getBoundingClientRect();
+			if(x >= rect.left && x <= rect.right &&
+				y >= rect.top && y <= rect.bottom) {
+				navigator.clipboard.writeText(selectedText);
+				this._showCopyFeedback(x, y);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	_showCopyFeedback(x, y) {
