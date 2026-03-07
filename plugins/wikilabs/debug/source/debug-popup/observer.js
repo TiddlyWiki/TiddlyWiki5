@@ -16,20 +16,20 @@ exports.init = function(globalDebugPopup) {
 	 * Shared mouseenter handler. Reads widget from the WeakMap via `this` (the DOM node).
 	 */
 	function mouseenterHandler(event) {
-		var data = nodeDataMap.get(this);
+		const data = nodeDataMap.get(this);
 		if(!data || globalDebugPopup._popup.style.display !== "none") {
 			return;
 		}
 		if(globalDebugPopup._popupTimeout) {
 			clearTimeout(globalDebugPopup._popupTimeout);
 		}
-		var mouseX = event.clientX, mouseY = event.clientY;
-		var domNode = this;
+		const mouseX = event.clientX, mouseY = event.clientY;
+		const domNode = this;
 		globalDebugPopup._popupTimeout = setTimeout(function() {
 			if(globalDebugPopup._popup.style.display !== "none") {
 				return;
 			}
-			var finalData = _gatherVariableData(data.widget);
+			const finalData = _gatherVariableData(data.widget);
 			globalDebugPopup.setData(finalData);
 			globalDebugPopup.showPopup(domNode, mouseX, mouseY);
 			globalDebugPopup._popupTimeout = null;
@@ -97,7 +97,7 @@ exports.init = function(globalDebugPopup) {
 	 */
 	function _formatValue(value) {
 		if(typeof value === "string") {
-			var idx = value.indexOf("\n");
+			const idx = value.indexOf("\n");
 			if(idx !== -1) {
 				return value.substring(0, idx) + " ...";
 			}
@@ -112,18 +112,18 @@ exports.init = function(globalDebugPopup) {
 	 * @returns {object} A formatted object containing variable data for the popup.
 	 */
 	function _gatherVariableData(widget) {
-		var transclusion = widget.getVariable("transclusion");
-		var allVars = Object.create(null);
-		var parentVars = widget.parentWidget && widget.parentWidget.variables;
+		const transclusion = widget.getVariable("transclusion");
+		const allVars = Object.create(null);
+		const parentVars = widget.parentWidget && widget.parentWidget.variables;
 		// Cache debug flags once instead of per-variable
-		var debugFunctions = widget.getVariable("tv-debug-functions") === "yes";
-		var debugProcedures = widget.getVariable("tv-debug-procedures") === "yes";
-		var debugMacros = widget.getVariable("tv-debug-macros") === "yes";
-		var debugWidgets = widget.getVariable("tv-debug-widgets") === "yes";
+		const debugFunctions = widget.getVariable("tv-debug-functions") === "yes";
+		const debugProcedures = widget.getVariable("tv-debug-procedures") === "yes";
+		const debugMacros = widget.getVariable("tv-debug-macros") === "yes";
+		const debugWidgets = widget.getVariable("tv-debug-widgets") === "yes";
 
-		for(var v in widget.variables) {
-			var variable = parentVars && parentVars[v];
-			var entry = null;
+		for(let v in widget.variables) {
+			const variable = parentVars && parentVars[v];
+			let entry = null;
 
 			if(variable && variable.isFunctionDefinition) {
 				if(debugFunctions) {
@@ -154,14 +154,14 @@ exports.init = function(globalDebugPopup) {
 			}
 		}
 
-		var filter = widget.getVariable("tv-debug-filter", { defaultValue: "[limit[100]]" });
-		var filteredVars = widget.wiki.compileFilter(filter).call(widget.wiki, widget.wiki.makeTiddlerIterator(Object.keys(allVars)));
-		var finalData = Object.create(null);
+		const filter = widget.getVariable("tv-debug-filter", { defaultValue: "[limit[100]]" });
+		const filteredVars = widget.wiki.compileFilter(filter).call(widget.wiki, widget.wiki.makeTiddlerIterator(Object.keys(allVars)));
+		const finalData = Object.create(null);
 		finalData["transclusion"] = { value: transclusion || "", type: "" };
 
 		$tw.utils.each(filteredVars, function(name) {
-			var el = allVars[name];
-			var str = _formatValue(el.value);
+			const el = allVars[name];
+			const str = _formatValue(el.value);
 			if(str) {
 				finalData[name] = { value: str, type: el.type, content: el.content };
 			}
