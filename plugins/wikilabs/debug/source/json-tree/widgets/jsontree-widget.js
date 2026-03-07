@@ -393,9 +393,8 @@ JsonTreeWidget.prototype.exportTreeText = function(data,detailsElement,indent) {
 
 JsonTreeWidget.prototype.exportBreadcrumbText = function() {
 	var parts = this.zoomPath.split("/");
-	var segments = ["\u2302"];
 	var lines = [];
-	var currentLine = segments[0];
+	var currentLine = "\u2302";
 	for(var i = 0; i < parts.length; i++) {
 		var addition = " / " + parts[i];
 		if(currentLine.length + addition.length > 120 && currentLine.length > 0) {
@@ -491,7 +490,7 @@ JsonTreeWidget.prototype.getAttributesTooltip = function(data) {
 			lines.push(keys[i] + "=" + JSON.stringify(attr));
 		}
 	}
-	return lines.length ? lines.join("\n") : "";
+	return lines.join("\n");
 };
 
 JsonTreeWidget.prototype.createBreadcrumb = function(fullData) {
@@ -578,14 +577,7 @@ JsonTreeWidget.prototype.focusPath = function(buttonElement) {
 		return;
 	}
 	// Save current fold state from DOM before focusing
-	var savedState = {};
-	for(var i = 0; i < allDetails.length; i++) {
-		var key = allDetails[i].getAttribute("data-state-key");
-		if(key !== null && !allDetails[i].open) {
-			savedState[key] = "hide";
-		}
-	}
-	this.saveTiddlerJSON(this.foldState + "/saved",savedState);
+	this.saveTiddlerJSON(this.foldState + "/saved",this.collectClosedState(allDetails));
 	// Close all except ancestors of the clicked button
 	var newState = {};
 	this._suppressToggleSave = true;
@@ -615,20 +607,24 @@ JsonTreeWidget.prototype.selectEditorRange = function(start,end) {
 	}
 	// Look for the editor iframe (framed engine) or textarea (simple engine)
 	var iframe = container.querySelector("iframe.tc-edit-texteditor-body");
-	if(iframe) {
-		var textarea = iframe.contentWindow && iframe.contentWindow.document.querySelector("textarea,input");
-		if(textarea) {
-			textarea.focus();
-			textarea.setSelectionRange(start,end);
-		}
-		return;
-	}
-	// Simple engine: direct textarea
-	var textarea = container.querySelector("textarea.tc-edit-texteditor-body,input.tc-edit-texteditor-body");
+	var textarea = iframe
+		? (iframe.contentWindow && iframe.contentWindow.document.querySelector("textarea,input"))
+		: container.querySelector("textarea.tc-edit-texteditor-body,input.tc-edit-texteditor-body");
 	if(textarea) {
 		textarea.focus();
 		textarea.setSelectionRange(start,end);
 	}
+};
+
+JsonTreeWidget.prototype.collectClosedState = function(detailsList) {
+	var state = {};
+	for(var i = 0; i < detailsList.length; i++) {
+		var key = detailsList[i].getAttribute("data-state-key");
+		if(key !== null && !detailsList[i].open) {
+			state[key] = "hide";
+		}
+	}
+	return state;
 };
 
 JsonTreeWidget.prototype.batchSaveState = function() {
@@ -636,15 +632,7 @@ JsonTreeWidget.prototype.batchSaveState = function() {
 	if(!container) {
 		return;
 	}
-	var allDetails = container.querySelectorAll("details[data-state-key]");
-	var stateData = {};
-	for(var i = 0; i < allDetails.length; i++) {
-		var key = allDetails[i].getAttribute("data-state-key");
-		if(key !== null && !allDetails[i].open) {
-			stateData[key] = "hide";
-		}
-	}
-	this.saveTiddlerJSON(this.foldState,stateData);
+	this.saveTiddlerJSON(this.foldState,this.collectClosedState(container.querySelectorAll("details[data-state-key]")));
 };
 
 JsonTreeWidget.prototype.saveState = function(stateKey,isOpen) {
