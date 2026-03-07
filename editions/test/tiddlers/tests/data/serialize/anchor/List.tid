@@ -1,0 +1,14 @@
+title: Serialize/Anchor/List
+tags: $:/tags/wikitext-serialize-test-spec
+
+* first item ^listA
+* second item ^listB
+* third item
+
+# numbered item ^numA
+# second numbered
+
+* outer ^outerA
+** inner ^innerB
+** inner2
+* outer2

@@ -44,12 +44,14 @@ exports.parse = function() {
 		};
 	});
 	// Prepare the tiddler widget
-	var tr, targetTitle, targetField, targetIndex, tiddlerNode;
+	var tr, targetTitle, targetField, targetIndex, targetAnchor, targetAnchorEnd, tiddlerNode;
 	if(textRef) {
 		tr = $tw.utils.parseTextReference(textRef);
 		targetTitle = tr.title;
 		targetField = tr.field;
 		targetIndex = tr.index;
+		targetAnchor = tr.anchor;
+		targetAnchorEnd = tr.anchorEnd;
 		tiddlerNode = {
 			type: "tiddler",
 			attributes: {
@@ -73,6 +75,12 @@ exports.parse = function() {
 			}
 			if(targetIndex) {
 				transcludeNode.attributes["$index"] = {name: "$index", type: "string", value: targetIndex};
+			}
+			if(targetAnchor) {
+				transcludeNode.attributes["$anchor"] = {name: "$anchor", type: "string", value: targetAnchor};
+			}
+			if(targetAnchorEnd) {
+				transcludeNode.attributes["$anchorEnd"] = {name: "$anchorEnd", type: "string", value: targetAnchorEnd};
 			}
 			return [tiddlerNode];
 		} else {

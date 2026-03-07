@@ -28,7 +28,8 @@ exports.parse = function() {
 	var classStart = this.parser.pos;
 	classes.push.apply(classes, this.parser.parseClasses());
 	var classEnd = this.parser.pos;
-	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
+	// Do NOT skip whitespace here — the leading space must be preserved so that
+	// the inline anchor rule can match " ^id" on the <<< line.
 	var citeStart = this.parser.pos;
 	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
 	var citeEnd = this.parser.pos;

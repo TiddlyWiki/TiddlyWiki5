@@ -239,24 +239,25 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	if(this.pos >= this.sourceLength) {
 		return [];
 	}
+	var start = this.pos,
+		result;
 	// Look for a block rule that applies at the current position
 	var nextMatch = this.findNextMatch(this.blockRules,this.pos);
 	if(nextMatch && nextMatch.matchIndex === this.pos) {
-		var start = this.pos;
-		var subTree = nextMatch.rule.parse();
+		result = nextMatch.rule.parse();
 		// Set the start and end positions of the first and last blocks if they're not already set
-		if(subTree.length > 0) {
-			if(subTree[0].start === undefined) subTree[0].start = start;
-			if(subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
+		if(result.length > 0) {
+			if(result[0].start === undefined) result[0].start = start;
+			if(result[result.length - 1].end === undefined) result[result.length - 1].end = this.pos;
 		}
-		$tw.utils.each(subTree, function (node) { node.rule = nextMatch.rule.name; });
-		return subTree;
+		$tw.utils.each(result, function(node) { node.rule = nextMatch.rule.name; });
+	} else {
+		// Treat it as a paragraph if we didn't find a block rule
+		var children = this.parseInlineRun(terminatorRegExp);
+		result = [{type: "element", tag: "p", children: children, start: start, end: this.pos, rule: "parseblock"}];
 	}
-	// Treat it as a paragraph if we didn't find a block rule
-	var start = this.pos;
-	var children = this.parseInlineRun(terminatorRegExp);
-	var end = this.pos;
-	return [{type: "element", tag: "p", children: children, start: start, end: end, rule: "parseblock" }];
+	// Wrap any blocks containing name anchors in target anchor containers
+	return $tw.utils.wrapAnchorsInTree(result, this.source);
 };
 
 /*

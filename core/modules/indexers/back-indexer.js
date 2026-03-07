@@ -14,6 +14,7 @@ BackIndexer.prototype.init = function() {
 	this.subIndexers = {
 		link: new BackSubIndexer(this,"extractLinks"),
 		transclude: new BackSubIndexer(this,"extractTranscludes"),
+		anchorlink: new BackSubIndexer(this,"extractLinkDetails"),
 	};
 };
 

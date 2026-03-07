@@ -148,6 +148,8 @@ TranscludeWidget.prototype.collectAttributes = function() {
 		this.transcludeField = this.getAttribute("$field");
 		this.transcludeIndex = this.getAttribute("$index");
 		this.transcludeMode = this.getAttribute("$mode");
+		this.transcludeAnchor = this.getAttribute("$anchor");
+		this.transcludeAnchorEnd = this.getAttribute("$anchorEnd");
 		this.recursionMarker = this.getAttribute("$recursionMarker","yes");
 	}
 };
@@ -357,6 +359,17 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 				subTiddler: this.transcludeSubTiddler,
 				defaultType: this.transcludeType
 			});
+	}
+	// If an anchor is specified, extract only the matching block(s) from the parse tree
+	if(this.transcludeAnchor && parser) {
+		var anchorNodes = $tw.utils.extractAnchorNodes(parser.tree,this.transcludeAnchor,this.transcludeAnchorEnd);
+		if(anchorNodes) {
+			parser = {
+				tree: anchorNodes,
+				source: parser.source,
+				type: parser.type
+			};
+		}
 	}
 	// Return the parse tree
 	return {

@@ -520,6 +520,32 @@ exports.extractLinks = function(parseTreeRoot) {
 };
 
 /*
+Return an array of "title^anchor" strings for links with anchors, plus plain titles.
+Used by the anchorlink back-indexer for block-level backlink tracking.
+*/
+exports.extractLinkDetails = function(parseTreeRoot) {
+	var details = [],
+		checkParseTree = function(parseTree) {
+			for(var t=0; t<parseTree.length; t++) {
+				var parseTreeNode = parseTree[t];
+				if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
+					var title = parseTreeNode.attributes.to.value;
+					var anchor = parseTreeNode.attributes.anchor && parseTreeNode.attributes.anchor.value;
+					var key = anchor ? (title + "^" + anchor) : title;
+					if(details.indexOf(key) === -1) {
+						details.push(key);
+					}
+				}
+				if(parseTreeNode.children) {
+					checkParseTree(parseTreeNode.children);
+				}
+			}
+		};
+	checkParseTree(parseTreeRoot);
+	return details;
+};
+
+/*
 Return an array of tiddler titles that are directly linked from the specified tiddler
 */
 exports.getTiddlerLinks = function(title) {
@@ -554,6 +580,44 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 		return backlinks;
 	}
 	return backlinks.slice(0);
+};
+
+/*
+Return an array of tiddler titles that link to the specified tiddler+anchor combination
+*/
+exports.getTiddlerAnchorBacklinks = function(targetTitle,anchor) {
+	var backIndexer = this.getIndexer("BackIndexer"),
+		key = targetTitle + "^" + anchor,
+		backlinks = backIndexer && backIndexer.subIndexers.anchorlink.lookup(key);
+	return backlinks || [];
+};
+
+/*
+Return an array of anchors that a source tiddler links to in a given target tiddler
+*/
+exports.getTiddlerAnchorLinks = function(sourceTitle,targetTitle) {
+	var self = this;
+	var parser = self.parseTiddler(sourceTitle);
+	if(!parser) {
+		return [];
+	}
+	var marks = [],
+		checkParseTree = function(parseTree) {
+			for(var t=0; t<parseTree.length; t++) {
+				var node = parseTree[t];
+				if(node.type === "link" && node.attributes.to && node.attributes.to.type === "string" && node.attributes.to.value === targetTitle) {
+					var anchor = node.attributes.anchor && node.attributes.anchor.value;
+					if(anchor && marks.indexOf(anchor) === -1) {
+						marks.push(anchor);
+					}
+				}
+				if(node.children) {
+					checkParseTree(node.children);
+				}
+			}
+		};
+	checkParseTree(parser.tree);
+	return marks;
 };
 
 

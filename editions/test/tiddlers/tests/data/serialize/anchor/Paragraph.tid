@@ -1,0 +1,6 @@
+title: Serialize/Anchor/Paragraph
+tags: $:/tags/wikitext-serialize-test-spec
+
+A simple paragraph with anchor. ^paraId
+
+Another paragraph without anchor.
