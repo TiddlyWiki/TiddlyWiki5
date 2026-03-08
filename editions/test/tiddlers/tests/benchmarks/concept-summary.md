@@ -61,37 +61,141 @@ Located directly above `getOrphanTitles` in `core/modules/wiki.js` (line ~641). 
 
 ---
 
-## 2. How to Write TiddlyWiki Benchmarks
+## 2. Benchmark Architecture: Shared Core + Two Runners
 
-### File structure
+### The problem
 
-Benchmark files go in `editions/test/tiddlers/tests/` (or a subfolder like `benchmarks/`). They need the TiddlyWiki module header:
+Running benchmarks via the full TW Jasmine test suite (`node tiddlywiki.js editions/test --verbose --test`) is slow on Windows due to process startup overhead and full TW boot. But we also need benchmarks to run in the browser via the Jasmine test runner.
+
+### The solution: Three-file architecture
+
+Write the benchmark logic **once** in a shared core module, then use two thin runner wrappers:
+
+```
+editions/test/tiddlers/tests/benchmarks/
+├── orphans-benchmark-core.js   ← Shared benchmark logic (write tests here)
+├── test-orphans-benchmark.js   ← Thin Jasmine wrapper (browser + full TW)
+├── run-benchmark.js            ← Thin standalone wrapper (fast local testing)
+└── concept-summary.md          ← This file
+```
+
+### Shared core module (`orphans-benchmark-core.js`)
+
+This file has **both** a TW module header and standard `exports`, so it works in both contexts:
 
 ```javascript
 /*\
-title: test-my-benchmark.js
+title: orphans-benchmark-core.js
 type: application/javascript
-tags: [[$:/tags/test-spec]]
-
-Description here.
-
+module-type: library
 \*/
 "use strict";
+
+exports.run = function($tw) {
+    // Build wiki, run old vs new, return results
+    return {
+        correct: true/false,
+        orphanCount: N,
+        tiddlerCount: N,
+        oldMedian: N,
+        newMedian: N,
+        speedup: N
+    };
+};
 ```
 
-The `$:/tags/test-spec` tag is required for the Jasmine test runner to pick up the file.
+Key points:
+- `module-type: library` makes it requireable inside TW via `require("orphans-benchmark-core.js")`
+- Standard `exports.run` makes it requireable via Node's `require("./orphans-benchmark-core.js")`
+- Accepts `$tw` as a parameter — does NOT reference `$tw` as a global
+- All benchmark config (TIDDLER_COUNT, etc.), wiki building, old/new implementations, timing logic, and correctness checking live here
+
+### Jasmine wrapper (`test-orphans-benchmark.js`)
+
+Thin wrapper for in-browser and full TW test suite:
+
+```javascript
+/*\
+title: test-orphans-benchmark.js
+type: application/javascript
+tags: [[$:/tags/test-spec]]
+\*/
+"use strict";
+
+if($tw.version.indexOf("5.4.0") === 0) {
+    var benchmark = require("orphans-benchmark-core.js");
+
+    describe("Orphan tiddler performance benchmarks", function() {
+        var results = benchmark.run($tw);
+
+        it("correctness: ...", function() {
+            expect(results.correct).toBe(true);
+        });
+
+        it("performance: ...", function() {
+            expect(results.newMedian).toBeLessThan(results.oldMedian);
+        });
+    });
+}
+```
+
+Key points:
+- Uses `require("orphans-benchmark-core.js")` (TW title, no `./` prefix)
+- Version guard with `$tw.version.indexOf(...)` to skip on incompatible versions
+- Wiki is built at `describe` scope (no `beforeAll` — not reliable in TW's browser Jasmine)
+- Jasmine `expect()` calls use the pre-computed results from the core module
+
+### Standalone runner (`run-benchmark.js`)
+
+Fast runner for local development — boots only TW core:
+
+```javascript
+#!/usr/bin/env node
+"use strict";
+
+var $tw = require("../../../../../boot/boot.js").TiddlyWiki();
+$tw.boot.argv = [];
+// Suppress boot help output
+var _write = process.stdout.write;
+process.stdout.write = function() { return true; };
+$tw.boot.boot(function() {
+    process.stdout.write = _write;
+    var benchmark = require("./orphans-benchmark-core.js");
+    var results = benchmark.run($tw);
+    process.exit(results.correct ? 0 : 1);
+});
+```
+
+Key points:
+- Uses `require("./orphans-benchmark-core.js")` (filesystem path, with `./` prefix)
+- Boots with empty `$tw.boot.argv = []` — no editions, no plugins, no Jasmine
+- Suppresses TW's boot help output by temporarily replacing `process.stdout.write`
+- Exits with code 0/1 for CI integration
 
 ### Running benchmarks
 
 ```bash
-# Run ALL tests
-node tiddlywiki.js editions/test --verbose --test
+# Fast standalone (Windows-friendly, ~2-3 seconds)
+node editions/test/tiddlers/tests/benchmarks/run-benchmark.js
 
-# Run only specific tests using Jasmine's specFilter (matches against full spec name)
+# Full Jasmine suite with spec filter (~45 seconds)
 node tiddlywiki.js editions/test --verbose --test spec="Orphan"
+
+# Full Jasmine suite (all tests)
+node tiddlywiki.js editions/test --verbose --test
 ```
 
-The `spec=` parameter is a regex matched against the full spec name (describe + it text).
+### Adding a new benchmark
+
+To add a new benchmark (e.g., for `getMissingTitles`):
+
+1. Add the old/new implementations and benchmark logic to the core module's `exports.run()` (or create a new core module like `missing-benchmark-core.js`)
+2. Add corresponding `expect()` checks in the Jasmine wrapper
+3. The standalone runner picks it up automatically since it calls the same `exports.run()`
+
+---
+
+## 3. How to Write TiddlyWiki Benchmarks
 
 ### Key TiddlyWiki APIs for tests
 
@@ -118,18 +222,35 @@ wiki.filterTiddlers(filterString)     // Run a TW filter
 
 Links are created with `[[TargetTitle]]` wikitext syntax. The parser extracts these via `extractLinks()` which walks the parse tree looking for `type === "link"` nodes.
 
+### Version-conditional tests
+
+Use `$tw.version` (a string like `"5.4.0-prerelease"`) to gate tests:
+
+```javascript
+// Run only on v5.5.0 and v5.5.0-prerelease
+if($tw.version.indexOf("5.5.0") === 0) {
+    describe("my tests", function() { ... });
+}
+
+// Or for "5.5.0 and above" use TW's version comparator:
+var isV550 = $tw.utils.compareVersions($tw.version, "5.5.0") >= 0;
+```
+
+### TW module `require()` differences
+
+- **Inside TW context** (Jasmine tests, browser): `require("my-module.js")` resolves by the `title` field in the TW module header
+- **Standalone Node.js**: `require("./my-module.js")` resolves by filesystem path
+- A module can work in both contexts by having both a TW header (`title`, `module-type: library`) and standard Node.js `exports`
+
 ### Critical gotchas learned
 
-1. **No `beforeAll` in browser Jasmine** — TW's in-browser Jasmine doesn't reliably support `beforeAll`. Initialize the wiki directly at `describe` scope (not inside `beforeAll` or `beforeEach`). This works in both Node and browser.
+1. **No `beforeAll` in browser Jasmine** — TW's in-browser Jasmine doesn't reliably support `beforeAll`. Initialize the wiki directly at `describe` scope. This works in both Node and browser.
 
 2. **Timer resolution in browsers** — Browser `performance.now()` may have only 1ms resolution (integer values). For fast functions (~5-10ms), individual timings round to the same value, making comparisons meaningless. **Solution:** Batch multiple iterations per timed sample:
    ```javascript
    var ITERATIONS_PER_SAMPLE = 10;
-   // ...
    var start = now();
-   for(i = 0; i < ITERATIONS_PER_SAMPLE; i++) {
-       result = fn();
-   }
+   for(i = 0; i < ITERATIONS_PER_SAMPLE; i++) { result = fn(); }
    var end = now();
    times.push((end - start) / ITERATIONS_PER_SAMPLE);
    ```
@@ -148,42 +269,11 @@ Links are created with `[[TargetTitle]]` wikitext syntax. The parser extracts th
 
 5. **Seeded PRNG for reproducibility** — Use a deterministic PRNG (mulberry32) instead of `Math.random()` so benchmark data is identical across runs.
 
-### Benchmark function template
-
-```javascript
-function benchmarkFn(fn, label) {
-    var r, i;
-    for(r = 0; r < WARMUP_RUNS; r++) { fn(); }
-    var times = [], result;
-    for(r = 0; r < BENCHMARK_RUNS; r++) {
-        var start = now();
-        for(i = 0; i < ITERATIONS_PER_SAMPLE; i++) { result = fn(); }
-        var end = now();
-        times.push((end - start) / ITERATIONS_PER_SAMPLE);
-    }
-    times.sort(function(a,b) { return a - b; });
-    var median = times[Math.floor(times.length / 2)];
-    console.log("  " + label + ": median=" + median.toFixed(2) + "ms");
-    return { result: result, median: median };
-}
-```
-
-### Correctness test pattern
-
-Always verify the new implementation returns the same results before benchmarking:
-```javascript
-it("correctness: new should match old", function() {
-    var oldSorted = oldFn().slice().sort();
-    var newSorted = newFn().slice().sort();
-    expect(newSorted).toEqual(oldSorted);
-});
-```
-
-Sort both results since order may differ between implementations.
+6. **Selectively checking out files** — If the benchmark files live on a different branch, you can selectively pull them: `git checkout <branch> -- editions/test/tiddlers/tests/benchmarks/`
 
 ---
 
-## 3. Synthetic Test Data Design
+## 4. Synthetic Test Data Design
 
 For 10,000 tiddlers:
 - **10% linking** (1,000 tiddlers) — contain `[[Target]]` wikitext links, 1-5 links each
@@ -197,21 +287,23 @@ Use Fisher-Yates shuffle with seeded PRNG to randomly assign which tiddlers get 
 
 ---
 
-## 4. Observed Results
+## 5. Observed Results
 
 | Function | Old (ms) | New (ms) | Speedup |
 |---|---|---|---|
-| `getOrphanTitles` | ~48-130 | ~11-13 | **4-10x faster** |
+| `getOrphanTitles` | ~48-209 | ~11-13 | **4-19x faster** |
 | `getMissingTitles` | ~7-8 | ~6-7 | ~1.2-1.4x faster |
 
-The `getOrphanTitles` speedup is dramatic because `indexOf`+`splice` on a 10,000-element array is expensive. The `getMissingTitles` speedup is modest because the missing array stays small (~259 elements).
+The `getOrphanTitles` speedup is dramatic because `indexOf`+`splice` on a 10,000-element array is expensive. The `getMissingTitles` speedup is modest because the missing array stays small (~259 elements). Speedup varies by environment (Node vs browser, Windows vs Linux).
 
 ---
 
-## 5. File Locations
+## 6. File Locations
 
 - **Optimized source:** `core/modules/wiki.js` — `getOrphanTitles` (~line 656), `getMissingTitles` (~line 641)
-- **Benchmark test:** `editions/test/tiddlers/tests/benchmarks/test-orphans-benchmark.js`
+- **Benchmark core:** `editions/test/tiddlers/tests/benchmarks/orphans-benchmark-core.js` — shared logic
+- **Jasmine wrapper:** `editions/test/tiddlers/tests/benchmarks/test-orphans-benchmark.js` — browser + full TW
+- **Standalone runner:** `editions/test/tiddlers/tests/benchmarks/run-benchmark.js` — fast local testing
 - **TW test runner:** `plugins/tiddlywiki/jasmine/jasmine-plugin.js` (filter on line 13)
 - **TW boot:** `boot/boot.js` — `$tw.Wiki` constructor, `addTiddler`, etc.
 - **Link extraction:** `core/modules/wiki.js` — `extractLinks` (~line 501), `getTiddlerLinks` (~line 525)
