@@ -172,6 +172,63 @@ describe("Tag tests", function() {
 			expect(wiki.filterTiddlers("[tag[sortTag]]").join(",")).toBe("__proto__,A");
 		});
 
+		it("should correctly filter with !tag[] (negation) on a non-indexed source", function() {
+			// !tag[] must use O(1) hashset lookup, not indexOf on array
+			// Tiddlers tagged "one": TiddlerOne, Tiddler Three — all others appear in negation
+			expect(wiki.filterTiddlers("[!tag[one]sort[title]]").join(",")).toBe(
+				"$:/TiddlerFive,$:/TiddlerTwo,a fourth tiddler,one,Tiddler10,Tiddler11,Tiddler8,Tiddler9,TiddlerSeventh,TiddlerSix"
+			);
+			// Every tiddler in the positive result should NOT be in the negative result
+			var positiveResult = wiki.filterTiddlers("[tag[one]]");
+			var negativeResult = wiki.filterTiddlers("[!tag[one]]");
+			positiveResult.forEach(function(title) {
+				expect(negativeResult.indexOf(title)).toBe(-1);
+			});
+			// Non-tagged tiddlers should be in the negative result
+			expect(negativeResult.indexOf("TiddlerSix")).not.toBe(-1);
+		});
+
+		it("should correctly filter tag[] when chained (non-indexed source)", function() {
+			// When tag[] follows another operator, source.byTag is unavailable;
+			// the fix ensures O(1) hashset lookup instead of Array.indexOf
+			expect(wiki.filterTiddlers("[prefix[Tiddler]tag[one]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+			// prefix[Tiddler] matches: Tiddler Three(one), TiddlerOne(one), Tiddler10, Tiddler11, Tiddler8, Tiddler9, TiddlerSeventh, TiddlerSix
+			expect(wiki.filterTiddlers("[prefix[Tiddler]!tag[one]sort[title]]").join(",")).toBe("Tiddler10,Tiddler11,Tiddler8,Tiddler9,TiddlerSeventh,TiddlerSix");
+		});
+
+		it("should produce consistent results between tag[] and !tag[] for large sets", function() {
+			// Create a wiki with many tiddlers to stress-test the O(1) lookup path
+			var bigWiki = new $tw.Wiki(wikiOptions);
+			var taggedTitles = [], untaggedTitles = [];
+			for(var i = 0; i < 50; i++) {
+				var title = "Tagged" + i;
+				taggedTitles.push(title);
+				bigWiki.addTiddler({title: title, tags: ["myTag"]});
+			}
+			for(var j = 0; j < 50; j++) {
+				var title2 = "Untagged" + j;
+				untaggedTitles.push(title2);
+				bigWiki.addTiddler({title: title2, tags: []});
+			}
+			var positiveResults = bigWiki.filterTiddlers("[tag[myTag]]");
+			var negativeResults = bigWiki.filterTiddlers("[!tag[myTag]]");
+			// All tagged tiddlers should appear in positive result
+			taggedTitles.forEach(function(title) {
+				expect(positiveResults.indexOf(title)).not.toBe(-1);
+				expect(negativeResults.indexOf(title)).toBe(-1);
+			});
+			// All untagged tiddlers should appear in negative result
+			untaggedTitles.forEach(function(title) {
+				expect(negativeResults.indexOf(title)).not.toBe(-1);
+				expect(positiveResults.indexOf(title)).toBe(-1);
+			});
+			// Chained: prefix filter + tag[], ensures non-indexed source path
+			var chainedPositive = bigWiki.filterTiddlers("[prefix[Tagged]tag[myTag]]");
+			var chainedNegative = bigWiki.filterTiddlers("[prefix[Tagged]!tag[myTag]]");
+			expect(chainedPositive.length).toBe(50);
+			expect(chainedNegative.length).toBe(0);
+		});
+
 	}
 
 });
