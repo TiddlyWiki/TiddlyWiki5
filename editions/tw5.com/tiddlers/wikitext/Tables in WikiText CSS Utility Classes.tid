@@ -89,4 +89,4 @@ You will need to create your own stylesheet. See [[Using Stylesheets]]. The idea
 .myclass tbody tr:nth-of-type(odd) { background-color: <<color tiddler-editor-fields-odd>>; }
 ```
 
-Note that TiddlyWiki automatically applies classes `evenRow` and `oddRow` to table rows. However, use of these classes is not recommended. Rows start as 'even' (opposite to that expected) and all the rows of the table are considered to be a single combined set of rows, regardless of if they appear in the header, footer, or body.
+<<.note """~TiddlyWiki automatically applies classes `evenRow` and `oddRow` to table rows. However, use of these classes is not recommended. Rows start as 'even' (opposite to that expected) and all the rows of the table are considered to be a single combined set of rows, regardless of if they appear in the header, footer, or body.""">>
