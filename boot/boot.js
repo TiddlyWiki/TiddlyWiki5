@@ -2516,6 +2516,9 @@ $tw.boot.initStartup = function(options) {
 	// Install the tiddler deserializer modules
 	$tw.Wiki.tiddlerDeserializerModules = Object.create(null);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	// Install the tiddler serializer modules
+	$tw.Wiki.tiddlerSerializerModules = Object.create(null);
+	$tw.modules.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerModules);
 	// Call unload handlers in the browser
 	if($tw.browser) {
 		window.onbeforeunload = function(event) {
