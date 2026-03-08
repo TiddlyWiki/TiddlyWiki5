@@ -20,7 +20,7 @@ var now = (typeof performance !== "undefined" && typeof performance.now === "fun
 // TODO: Adjust the version check! Currently for the draft it is v5.4.0-pre.. 
 
 if($tw.version.indexOf("5.4.0") === 0) {
-	describe("Orphan and Missing tiddler performance benchmarks", function() {
+	describe("Orphan tiddler performance benchmarks", function() {
 
 		var TIDDLER_COUNT = 10000;
 		var LINK_PERCENTAGE = 0.10;       // 10% of tiddlers link to other tiddlers
