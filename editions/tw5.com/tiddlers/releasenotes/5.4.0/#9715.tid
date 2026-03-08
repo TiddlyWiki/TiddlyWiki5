@@ -2,6 +2,7 @@ title: $:/changenotes/5.4.0/#9715
 change-type: performance
 change-category: filters
 tags: $:/tags/ChangeNote
+github-contributors: linonetwo
 release: 5.4.0
 description: Optimized tag[] and !tag[] filter operators to use Set for O(1) lookup, matching search:tags[] performance.
 github-links: [[https://github.com/Jermolene/TiddlyWiki5/pull/9715]]
