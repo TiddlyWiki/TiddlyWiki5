@@ -640,17 +640,16 @@ Return a hashmap of tiddler titles that are referenced but not defined. Each val
 */
 exports.getMissingTitles = function() {
 	var self = this,
-		missing = [];
-	// We should cache the missing tiddler list, even if we recreate it every time any tiddler is modified
-	this.forEachTiddler(function(title,tiddler) {
+		missing = Object.create(null);
+	this.each(function(tiddler,title) {
 		var links = self.getTiddlerLinks(title);
 		$tw.utils.each(links,function(link) {
-			if((!self.tiddlerExists(link) && !self.isShadowTiddler(link)) && missing.indexOf(link) === -1) {
-				missing.push(link);
+			if(!self.tiddlerExists(link) && !self.isShadowTiddler(link)) {
+				missing[link] = true;
 			}
 		});
 	});
-	return missing;
+	return Object.keys(missing);
 };
 
 exports.getOrphanTitles = function() {
