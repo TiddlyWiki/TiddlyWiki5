@@ -30,6 +30,10 @@ Command.prototype.execute = function() {
 	text = this.commander.wiki.renderTiddler("text/plain-formatted",helpBase + subhelp);
 	// Remove any leading linebreaks and add a single one for spacing
 	text = "\n" + text.replace(/^(\r?\n)*/g,"");
+	// Show version in main help
+	if(subhelp === "default") {
+		text = "\nTiddlyWiki version: " + $tw.version + "\n" + text;
+	}
 	// Collapse runs of blank lines into a single blank line
 	text = text.replace(/(\r?\n){3,}/g,"\n\n");
 	// Ensure trailing newline
