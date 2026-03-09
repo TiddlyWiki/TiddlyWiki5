@@ -321,8 +321,10 @@ Object.defineProperty(TW_Element.prototype, "formattedTextContent", {
 			if(this.tag === "li") {
 				b.push("\n* ");
 			}
+			var self = this;
 			$tw.utils.each(this.children,function(node) {
-				b.push(node.formattedTextContent);
+				// Preserve literal newlines inside <pre> elements (code blocks)
+				b.push(self.tag === "pre" ? node.textContent : node.formattedTextContent);
 			});
 			if(isBlock && this.tag !== "li") {
 				b.push("\n");
