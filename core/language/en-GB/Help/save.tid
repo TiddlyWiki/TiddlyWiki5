@@ -25,4 +25,8 @@ Notes:
 
 Examples:
 
-* `--save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"` -- saves all non-system image tiddlers as files in the subdirectory "tiddlers" with URL-encoded titles
+```
+  Saves all non-system image tiddlers as files in the subdirectory "tiddlers" with URL-encoded titles
+
+    --save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"
+```
