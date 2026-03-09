@@ -7,11 +7,11 @@ module-type: library
 
 "use strict";
 
-const{ getFunctionSignature, colour, SIGNATURE_THRESHOLD } = require("$:/core/modules/commands/inspect/utils.js");
+const { getFunctionSignature, colour, SIGNATURE_THRESHOLD } = require("$:/core/modules/commands/inspect/utils.js");
 
 exports.createCompleter = function(commandInstance) {
-    return function completer(line) {
-        if(!commandInstance.runtime || !commandInstance.runtime.context) {
+	return function completer(line) {
+		if(!commandInstance.runtime || !commandInstance.runtime.context) {
 			return [[], line];
 		}
 		const context = commandInstance.runtime.context;
@@ -35,8 +35,8 @@ exports.createCompleter = function(commandInstance) {
 			} while((currentObj = Object.getPrototypeOf(currentObj)));
 
 			const properties = [...new Set(allProperties)];
-			const filteredProperties = properties.filter(p => !p.startsWith("__"));
-			const matchingProperties = filteredProperties.filter(p => p.toLowerCase().startsWith(partial.toLowerCase()));
+			const filteredProperties = properties.filter((p) => !p.startsWith("__"));
+			const matchingProperties = filteredProperties.filter((p) => p.toLowerCase().startsWith(partial.toLowerCase()));
 
 			// Special case: if there's a single exact match for a function, complete its signature
 			if(matchingProperties.length === 1 && matchingProperties[0] === partial) {
@@ -54,7 +54,7 @@ exports.createCompleter = function(commandInstance) {
 
 			// If we have a small number of matches, show signatures for functions
 			if(matchingProperties.length > 0 && matchingProperties.length < SIGNATURE_THRESHOLD) {
-				hits = matchingProperties.map(propName => {
+				hits = matchingProperties.map((propName) => {
 					const target = obj[propName];
 					const prefix = (path ? path + "." : "");
 					if(typeof target === "function") {
@@ -69,10 +69,10 @@ exports.createCompleter = function(commandInstance) {
 				});
 			} else {
 				// Otherwise, just show the property names
-				hits = matchingProperties.map(p => (path ? path + "." : "") + p);
+				hits = matchingProperties.map((p) => (path ? path + "." : "") + p);
 			}
 		} catch (e) {
 		}
 		return [hits, line];
-    }
-}
+	};
+};

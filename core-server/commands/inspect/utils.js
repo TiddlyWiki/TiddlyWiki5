@@ -40,4 +40,4 @@ exports.getFunctionSignature = function(func) {
 		return signatureMatch[1] ? signatureMatch[1].trim() : "";
 	}
 	return null;
-}
+};

@@ -9,41 +9,41 @@ module-type: library
 
 const repl = require("repl");
 const util = require("util");
-const{ createCompleter } = require("$:/core/modules/commands/inspect/completer.js");
-const{ processOutput } = require("$:/core/modules/commands/inspect/output.js");
-const{ colour, INITIAL_INSPECT_DEPTH, REPL_HISTORY_PATH } = require("$:/core/modules/commands/inspect/utils.js");
+const { createCompleter } = require("$:/core/modules/commands/inspect/completer.js");
+const { processOutput } = require("$:/core/modules/commands/inspect/output.js");
+const { colour, INITIAL_INSPECT_DEPTH, REPL_HISTORY_PATH } = require("$:/core/modules/commands/inspect/utils.js");
 
 exports.startRepl = function(commandInstance) {
-    let inspectDepth = INITIAL_INSPECT_DEPTH;
+	let inspectDepth = INITIAL_INSPECT_DEPTH;
 
-    function customWriter(output) {
-        return util.inspect(processOutput(output), {
-            colors: true,
-            depth: inspectDepth
-        });
-    }
+	function customWriter(output) {
+		return util.inspect(processOutput(output), {
+			colors: true,
+			depth: inspectDepth
+		});
+	}
 
-    const completer = createCompleter(commandInstance);
+	const completer = createCompleter(commandInstance);
 
-    const runtime = repl.start({
-        prompt: commandInstance.params.length ? colour.txt(commandInstance.params[0],33,0,7,0) : colour.txt("$command: > ",33,0,7,0),
+	const runtime = repl.start({
+		prompt: commandInstance.params.length ? colour.txt(commandInstance.params[0],33,0,7,0) : colour.txt("$command: > ",33,0,7,0),
 		useColors: true,
 		ignoreUndefined: true,
 		completer: completer,
 		writer: customWriter
-    });
+	});
 
 	// Welcome message
 	console.log("Type .help to list commands.\nAccess the TW variable space with '$tw.' \n");
 
-    commandInstance.runtime = runtime;
+	commandInstance.runtime = runtime;
 
-    // REPL: Initialie History Setup
+	// REPL: Initialie History Setup
 	runtime.setupHistory({
 		filePath: REPL_HISTORY_PATH,
 		size: 200,
 		removeHistoryDuplicates: true
-	}, err => {
+	}, (err) => {
 		if(err) {
 			console.error("Error setting up REPL history:", err);
 		}
@@ -107,5 +107,5 @@ exports.startRepl = function(commandInstance) {
 
 	runtime.context.$tw = $tw;
 
-    return runtime;
-}
+	return runtime;
+};

@@ -8,7 +8,7 @@ module-type: library
 "use strict";
 
 const util = require("util");
-const{ getFunctionSignature, colour, MAX_SOURCE_LINES } = require("$:/core/modules/commands/inspect/utils.js");
+const { getFunctionSignature, colour, MAX_SOURCE_LINES } = require("$:/core/modules/commands/inspect/utils.js");
 
 // utils.inspect: Custom inspect function
 class CustomFunctionInspect {
@@ -123,7 +123,7 @@ exports.processOutput = function(obj, maxLines = MAX_SOURCE_LINES) {
 		];
 
 		// Filter out internal and Object.prototype properties
-		const filteredProperties = properties.filter(p => !p.startsWith("__") && propertiesToFilter.indexOf(p) === -1);
+		const filteredProperties = properties.filter((p) => !p.startsWith("__") && propertiesToFilter.indexOf(p) === -1);
 		for(const key of filteredProperties) {
 			try {
 				// Accessing properties can throw errors (e.g., getters)
@@ -135,4 +135,4 @@ exports.processOutput = function(obj, maxLines = MAX_SOURCE_LINES) {
 		return newObj;
 	}
 	return walk(obj, 0);
-}
+};
