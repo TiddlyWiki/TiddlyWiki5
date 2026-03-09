@@ -11,12 +11,17 @@ description: 呈現個別條目到檔案
 --render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
 ```
 
-* ''tiddler-filter'': 標識要呈現的條目的篩選器
-* ''filename-filter'': 可選的篩選器，轉換條目名稱至路徑名。如果省略，預設為 `[is[tiddler]addsuffix[.html]]`，其使用未改變的條目名稱為檔名
-* ''template'': 可選的範本，用於呈現每個條目
-* ''render-type'': 可選的呈現類型：`text/html` (預設值) 會傳回完整的 HTML 文字，而 `text/plain` 只會傳迴文字內容 (即其忽略 HTML 標記與其他不可印出的資料)
-* ''name'': 可選的變數名稱
-* ''value'': 可選的變數值
+```
+  tiddler-filter   標識要呈現的條目的篩選器
+  filename-filter  可選的篩選器，轉換條目名稱至路徑名。如果省略，預設為
+                   [is[tiddler]addsuffix[.html]]，其使用未改變的條目名稱為檔名
+  template         可選的範本，用於呈現每個條目
+  render-type      可選的呈現類型：text/html (預設值) 會傳回完整的 HTML 文字，
+                   而 text/plain 只會傳迴文字內容 (即其忽略 HTML 標記與其他
+                   不可印出的資料)
+  name             可選的變數名稱
+  value            可選的變數值
+```
 
 預設情況下，檔名被解析為相對於發行版資料夾的 `output` 子資料夾。`--output` 命令可用於將輸出指到一個不同的資料夾。
 
@@ -30,5 +35,12 @@ description: 呈現個別條目到檔案
 
 範例：
 
-* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- 呈現所有非系統條目為 "tiddlers" 子資料夾中的檔案，檔名為 URL 編碼的條目名稱和副檔名 HTML
-* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- 將標籤為 "HelloThere" 的條目渲染到名為 "tiddlers.json" 的 JSON 檔案
+```
+  呈現所有非系統條目為 "tiddlers" 子資料夾中的檔案，檔名為 URL 編碼的條目名稱和副檔名 HTML:
+
+    --render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'
+
+  將標籤為 "HelloThere" 的條目渲染到名為 "tiddlers.json" 的 JSON 檔案:
+
+    --render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'
+```

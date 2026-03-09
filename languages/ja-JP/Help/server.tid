@@ -11,13 +11,19 @@ root 階層では指定された Tiddler のレンダリングを行います。
 
 以下のパラメータがあります:
 
-* ''port'' - 待ち受けるポート番号（デフォルトは "8080"）
-* ''roottiddler'' - root 階層になる Tiddler（デフォルトは "$:/core/save/all"）
-* ''rendertype'' - root Tiddler がレンダリングされるときの ContentType（デフォルトは "text/plain"）
-* ''servetype'' - root Tiddler がリクエストされるときの ContentType（デフォルトは "text/html"）
-* ''username'' - 編集した Tiddler を保存する際のデフォルトユーザ名
-* ''password'' - ベーシック認証用のパスワード
-* ''host'' - サーバーとなるホスト名（デフォルトは "127.0.0.1" つまり "localhost"）
+```
+  port           待ち受けるポート番号（デフォルトは"8080"）
+  roottiddler    root階層になるTiddler
+                 （デフォルトは"$:/core/save/all"）
+  rendertype     rootTiddlerがレンダリングされるときのContentType
+                 （デフォルトは"text/plain"）
+  servetype      rootTiddlerがリクエストされるときのContentType
+                 （デフォルトは"text/html"）
+  username       編集したTiddlerを保存する際のデフォルトユーザ名
+  password       ベーシック認証用のパスワード
+  host           サーバーとなるホスト名
+                 （デフォルトは"127.0.0.1"つまり"localhost"）
+```
 
 password パラメータが指定された場合ブラウザはユーザ名とパスワードを尋ねるようになります。なお、このパスワードはネットワーク上を平文で流れるため、この実装はインターネット上に公開するような一般的な使用には適していないことに注意してください。
 
