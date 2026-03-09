@@ -11,6 +11,7 @@ Attributes of [[HTML elements|HTML in WikiText]] and widgets can be specified in
 * [[a transclusion of a macro/variable|Variable Attribute Values]]
 * [[as the result of a filter expression|Filtered Attribute Values]]
 * <<.from-version "5.3.0">> [[as the result of performing filter and variable substitutions on the given string|Substituted Attribute Values]]
+* <<.from-version "5.4.0">> [[as a multi-valued variable reference|Multi-Valued Variable Attribute Values]]
 
 |attribute type|syntax|h
 |literal |single, double or triple quotes or no quotes for values without spaces |
@@ -18,9 +19,10 @@ Attributes of [[HTML elements|HTML in WikiText]] and widgets can be specified in
 |variable |double angle brackets around a macro or variable invocation |
 |filtered |triple curly braces around a filter expression|
 |substituted|single or triple backticks around the text to be processed for substitutions|
+|multi-valued variable |double round brackets around a variable name |
 
 
-<$list filter="[[Literal Attribute Values]] [[Transcluded Attribute Values]] [[Variable Attribute Values]] [[Filtered Attribute Values]] [[Substituted Attribute Values]]">
+<$list filter="[[Literal Attribute Values]] [[Transcluded Attribute Values]] [[Variable Attribute Values]] [[Filtered Attribute Values]] [[Substituted Attribute Values]] [[Multi-Valued Variable Attribute Values]]">
 <$link><h1><$text text=<<currentTiddler>>/></h1></$link>
 <$transclude mode="block"/>
 </$list>

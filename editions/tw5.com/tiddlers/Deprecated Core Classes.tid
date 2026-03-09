@@ -1,0 +1,13 @@
+created: 20251015120940754
+modified: 20251101092833913
+tags: $:/deprecated [[Core Classes]]
+title: Deprecated Core Classes
+type: text/vnd.tiddlywiki
+
+<<.warning "It is not recommended to use these classes for styling. Though tiddlywiki might still support them, they may be in the process of being dropped, or may only be kept for compatibility purposes. Avoid using them, and update existing code if possible. Be aware that this feature may cease to work at any time.">>
+
+These [[Core Classes]] are considered deprecated. It is not recommend to use them for styling.
+
+* `tc-tagged-*` <<.deprecated-since 5.1.16>> Use [[Custom styles by data-tags]] instead.
+* `tc-reveal` <<.deprecated-since 5.3.8>> for styling purposes as it is subject to change.
+* `tc-language-(language code)` <<.deprecated-since 5.3.8>> Please use [[:lang()|https://developer.mozilla.org/en-US/docs/Web/CSS/:lang]] instead.

@@ -261,7 +261,7 @@ describe("WikiText parser tests", function() {
 		);
 		expect(parse("text <<john one:val1 two: 'val \"2\"' three: \"val '3'\" four: \"\"\"val 4\"5'\"\"\" five: [[val 5]] >>")).toEqual(
 
-			[{"type":"element","tag":"p",rule:"parseblock","children":[{"type":"text","text":"text ","start":0,"end":5},{"type":"transclude","start":5,"end":92,"rule":"macrocallinline","attributes":{"$variable":{"name":"$variable","type":"string","value":"john"},"one":{"name":"one","type":"string","value":"val1","start":11,"end":20},"two":{"name":"two","type":"string","value":"val \"2\"","start":20,"end":35},"three":{"name":"three","type":"string","value":"val '3'","start":35,"end":52},"four":{"name":"four","type":"string","value":"val 4\"5'","start":52,"end":73},"five":{"name":"five","type":"string","value":"val 5","start":73,"end":89}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"one","type":"string","value":"val1","start":11,"end":20},{"name":"two","type":"string","value":"val \"2\"","start":20,"end":35},{"name":"three","type":"string","value":"val '3'","start":35,"end":52},{"name":"four","type":"string","value":"val 4\"5'","start":52,"end":73},{"name":"five","type":"string","value":"val 5","start":73,"end":89}]}],"start":0,"end":92}]
+			[{"type":"element","tag":"p",rule:"parseblock","children":[{"type":"text","text":"text ","start":0,"end":5},{"type":"transclude","start":5,"end":92,"rule":"macrocallinline","attributes":{"$variable":{"name":"$variable","type":"string","value":"john"},"one":{"name":"one","assignmentOperator":":","type":"string","value":"val1","start":11,"end":20},"two":{"name":"two","assignmentOperator":":","type":"string","value":"val \"2\"","quoted":true,"start":20,"end":35},"three":{"name":"three","assignmentOperator":":","type":"string","value":"val '3'","quoted":true,"start":35,"end":52},"four":{"name":"four","assignmentOperator":":","type":"string","value":"val 4\"5'","quoted":true,"start":52,"end":73},"five":{"name":"five","assignmentOperator":":","type":"string","value":"val 5","quoted":true,"start":73,"end":89}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"one","assignmentOperator":":","type":"string","value":"val1","start":11,"end":20},{"name":"two","assignmentOperator":":","type":"string","value":"val \"2\"","quoted":true,"start":20,"end":35},{"name":"three","assignmentOperator":":","type":"string","value":"val '3'","quoted":true,"start":35,"end":52},{"name":"four","assignmentOperator":":","type":"string","value":"val 4\"5'","quoted":true,"start":52,"end":73},{"name":"five","assignmentOperator":":","type":"string","value":"val 5","quoted":true,"start":73,"end":89}]}],"start":0,"end":92}]
 
 		);
 		expect(parse("ignored << carrots <<john>>")).toEqual(
@@ -287,7 +287,7 @@ describe("WikiText parser tests", function() {
 		);
 		expect(parse("text <<outie one:'my <<innie>>' >>")).toEqual(
 
-			[{"type":"element","tag":"p",rule:"parseblock","children":[{"type":"text","text":"text ","start":0,"end":5},{"type":"transclude","start":5,"end":34,"rule":"macrocallinline","attributes":{"$variable":{"name":"$variable","type":"string","value":"outie"},"one":{"name":"one","type":"string","value":"my <<innie>>","start":12,"end":31}},"orderedAttributes":[{"name":"$variable","type":"string","value":"outie"},{"name":"one","type":"string","value":"my <<innie>>","start":12,"end":31}]}],"start":0,"end":34}]
+			[{"type":"element","tag":"p",rule:"parseblock","children":[{"type":"text","text":"text ","start":0,"end":5},{"type":"transclude","start":5,"end":34,"rule":"macrocallinline","attributes":{"$variable":{"name":"$variable","type":"string","value":"outie"},"one":{"name":"one","assignmentOperator":":","type":"string","value":"my <<innie>>","quoted":true,"start":12,"end":31}},"orderedAttributes":[{"name":"$variable","type":"string","value":"outie"},{"name":"one","assignmentOperator":":","type":"string","value":"my <<innie>>","quoted":true,"start":12,"end":31}]}],"start":0,"end":34}]
 
 		);
 
@@ -301,7 +301,7 @@ describe("WikiText parser tests", function() {
 		);
 		expect(parse("<<john one:val1 two: 'val \"2\"' three: \"val '3'\" four: \"\"\"val 4\"5'\"\"\" five: [[val 5]] >>")).toEqual(
 
-			[{"type":"transclude","start":0,"end":87,"rule":"macrocallblock","attributes":{"$variable":{"name":"$variable","type":"string","value":"john"},"one":{"name":"one","type":"string","value":"val1","start":6,"end":15},"two":{"name":"two","type":"string","value":"val \"2\"","start":15,"end":30},"three":{"name":"three","type":"string","value":"val '3'","start":30,"end":47},"four":{"name":"four","type":"string","value":"val 4\"5'","start":47,"end":68},"five":{"name":"five","type":"string","value":"val 5","start":68,"end":84}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"one","type":"string","value":"val1","start":6,"end":15},{"name":"two","type":"string","value":"val \"2\"","start":15,"end":30},{"name":"three","type":"string","value":"val '3'","start":30,"end":47},{"name":"four","type":"string","value":"val 4\"5'","start":47,"end":68},{"name":"five","type":"string","value":"val 5","start":68,"end":84}],"isBlock":true}]
+			[{"type":"transclude","start":0,"end":87,"rule":"macrocallblock","attributes":{"$variable":{"name":"$variable","type":"string","value":"john"},"one":{"name":"one","assignmentOperator":":","type":"string","value":"val1","start":6,"end":15},"two":{"name":"two","assignmentOperator":":","type":"string","value":"val \"2\"","quoted":true,"start":15,"end":30},"three":{"name":"three","assignmentOperator":":","type":"string","value":"val '3'","quoted":true,"start":30,"end":47},"four":{"name":"four","assignmentOperator":":","type":"string","value":"val 4\"5'","quoted":true,"start":47,"end":68},"five":{"name":"five","assignmentOperator":":","type":"string","value":"val 5","quoted":true,"start":68,"end":84}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"one","assignmentOperator":":","type":"string","value":"val1","start":6,"end":15},{"name":"two","assignmentOperator":":","type":"string","value":"val \"2\"","quoted":true,"start":15,"end":30},{"name":"three","assignmentOperator":":","type":"string","value":"val '3'","quoted":true,"start":30,"end":47},{"name":"four","assignmentOperator":":","type":"string","value":"val 4\"5'","quoted":true,"start":47,"end":68},{"name":"five","assignmentOperator":":","type":"string","value":"val 5","quoted":true,"start":68,"end":84}],"isBlock":true}]
 
 		);
 		expect(parse("<< carrots\n\n<<john>>")).toEqual(
@@ -321,12 +321,12 @@ describe("WikiText parser tests", function() {
 		);
 		expect(parse("<<multiline arg:\"\"\"\n\nwikitext\n\"\"\" >>")).toEqual(
 
-			[{"type":"transclude","start":0,"end":36,"rule":"macrocallblock","attributes":{"$variable":{"name":"$variable","type":"string","value":"multiline"},"arg":{"name":"arg","type":"string","value":"\n\nwikitext\n","start":11,"end":33}},"orderedAttributes":[{"name":"$variable","type":"string","value":"multiline"},{"name":"arg","type":"string","value":"\n\nwikitext\n","start":11,"end":33}],"isBlock":true}]
+			[{"type":"transclude","start":0,"end":36,"rule":"macrocallblock","attributes":{"$variable":{"name":"$variable","type":"string","value":"multiline"},"arg":{"name":"arg","assignmentOperator":":","type":"string","value":"\n\nwikitext\n","quoted":true,"start":11,"end":33}},"orderedAttributes":[{"name":"$variable","type":"string","value":"multiline"},{"name":"arg","assignmentOperator":":","type":"string","value":"\n\nwikitext\n","quoted":true,"start":11,"end":33}],"isBlock":true}]
 
 		);
 		expect(parse("<<outie one:'my <<innie>>' >>")).toEqual(
 
-			[ { type: "transclude", start: 0, rule: "macrocallblock", attributes: { $variable: {name: "$variable", type:"string", value: "outie"}, one: {name: "one", type:"string", value: "my <<innie>>", start: 7, end: 26} }, orderedAttributes: [ {name: "$variable", type:"string", value: "outie"}, {name: "one", type:"string", value: "my <<innie>>", start: 7, end: 26} ], end: 29, isBlock: true } ]
+			[ { type: "transclude", start: 0, rule: "macrocallblock", attributes: { $variable: {name: "$variable", type:"string", value: "outie"}, one: {name: "one", assignmentOperator: ":", type:"string", value: "my <<innie>>", quoted: true, start: 7, end: 26} }, orderedAttributes: [ {name: "$variable", type:"string", value: "outie"}, {name: "one", assignmentOperator: ":", type:"string", value: "my <<innie>>", quoted: true, start: 7, end: 26} ], end: 29, isBlock: true } ]
 
 		);
 	});
@@ -334,23 +334,23 @@ describe("WikiText parser tests", function() {
 	it("should parse tricky macrocall parameters", function() {
 		expect(parse("<<john pa>am>>")).toEqual(
 
-			[{"type":"transclude","start":0,"end":14,"attributes":{"0":{"name":"0","type":"string","value":"pa>am","start":6,"end":12},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"pa>am","start":6,"end":12}],"isBlock":true,"rule":"macrocallblock"}]
+			[{"type":"transclude","start":0,"end":14,"attributes":{"0":{"name":"0","type":"string","value":"pa>am","start":6,"end":12,"isPositional":true},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"pa>am","start":6,"end":12,"isPositional":true}],"isBlock":true,"rule":"macrocallblock"}]
 
 		);
 		expect(parse("<<john param> >>")).toEqual(
 
-			[{"type":"transclude","start":0,"end":16,"attributes":{"0":{"name":"0","type":"string","value":"param>","start":6,"end":13},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"param>","start":6,"end":13}],"isBlock":true,"rule":"macrocallblock"}]
+			[{"type":"transclude","start":0,"end":16,"attributes":{"0":{"name":"0","type":"string","value":"param>","start":6,"end":13,"isPositional":true},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"param>","start":6,"end":13,"isPositional":true}],"isBlock":true,"rule":"macrocallblock"}]
 
 		);
 		expect(parse("<<john param>>>")).toEqual(
 
-			[{"type":"element","tag":"p",rule:"parseblock","children":[{"type":"transclude","start":0,"end":14,"rule":"macrocallinline","attributes":{"0":{"name":"0","type":"string","value":"param","start":6,"end":12},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"param","start":6,"end":12}]},{"type":"text","text":">","start":14,"end":15}],"start":0,"end":15}]
+			[{"type":"element","rule":"parseblock","tag":"p","children":[{"type":"transclude","start":0,"end":14,"rule":"macrocallinline","attributes":{"0":{"name":"0","type":"string","value":"param","start":6,"end":12,"isPositional":true},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"param","start":6,"end":12,"isPositional":true}]},{"type":"text","text":">","start":14,"end":15}],"start":0,"end":15}]
 
 		);
 		// equals signs should be allowed
 		expect(parse("<<john var>=4 >>")).toEqual(
 
-			[{"type":"transclude","start":0,"end":16,"attributes":{"0":{"name":"0","type":"string","value":"var>=4","start":6,"end":13},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"var>=4","start":6,"end":13}],"isBlock":true,"rule":"macrocallblock"}]
+			[{"type":"transclude","start":0,"end":16,"attributes":{"0":{"name":"0","type":"string","value":"var>=4","start":6,"end":13,"isPositional":true},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"var>=4","start":6,"end":13,"isPositional":true}],"isBlock":true,"rule":"macrocallblock"}]
 
 		);
 
@@ -374,7 +374,7 @@ describe("WikiText parser tests", function() {
 
 	});
 
-        it("should parse tables", function() {
+	it("should parse tables", function() {
 		let wikitext = `
 |!Cell1 |!Cell2 |
 |Cell3 |Cell4 |`.trim();
@@ -467,6 +467,6 @@ describe("WikiText parser tests", function() {
 		}];
 
 		expect(parse(wikitext)).toEqual(expectedParseTree);
-        });
+	});
 });
 

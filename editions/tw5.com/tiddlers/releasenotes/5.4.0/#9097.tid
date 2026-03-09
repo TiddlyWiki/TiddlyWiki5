@@ -1,0 +1,13 @@
+change-category: developer
+change-type: enhancement
+created: 20260120153052332
+description: Adds a destroy method for widgets allowing for clean up of resources when a widget is removed.
+github-contributors: saqimtiaz
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9097
+modified: 20260125212701672
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9097
+type: text/vnd.tiddlywiki
+
+Adds a destroy method for widgets allowing for clean up of resources when a widget is removed.

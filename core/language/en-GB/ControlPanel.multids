@@ -6,6 +6,7 @@ Appearance/Caption: Appearance
 Appearance/Hint: Ways to customise the appearance of your TiddlyWiki.
 Basics/AnimDuration/Prompt: Animation duration
 Basics/AutoFocus/Prompt: Default focus field for new tiddlers
+Basics/AutoFocusEdit/Prompt: Default focus field for existing tiddlers
 Basics/Caption: Basics
 Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to {{retain story ordering||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Default tiddlers

@@ -1,6 +1,6 @@
 created: 20140908163900000
-modified: 20241016111248572
-original-modified: 20201228143412000
+modified: 20251214112408533
+original-modified: 20230803052125981
 tags: Learning
 title: Sharing your tiddlers with others
 ja-title: Tiddlerを他の人と共有する
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 * ~TiddlyWikiをオンラインで公開し、リンクを取得して他の人に送信、または、伝言できます:
 ** ~TiddlyWikiファイル全体のWebアドレスへのリンク
 ** 特定のTiddlerへの[[パーマリンク|PermaLinks]](<<.icon $:/core/images/permalink-button>>)
-** 現在開いているすべてのTiddlerの[[パーマビュー|PermaViews]](<<.icon $:/core/images/permaview-button>>)リンク
+** 現在開いているすべてのTiddlerの[[パーマビュー|PermaLinks]](<<.icon $:/core/images/permaview-button>>)リンク
 * [[TiddlyWikiへのDropboxリンクを共有|Sharing a TiddlyWiki on Dropbox]]できます
 * テキスト、静的HTML、カンマ区切り値(つまり、スプレッドシート互換)などのさまざまな形式で[[Tiddlerをエクスポート|How to export tiddlers]](<<.icon $:/core/images/export-button>>)できます
 * また、~TiddlyWikiを他の人がアクセスできるようにするだけで、例えば、オンラインで公開して、そこから[[Tiddlerをインポート|Importing Tiddlers]]できるようにするだけで、Tiddlerを共有できます

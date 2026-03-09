@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9494
+description: Fix LetWidget to always set all staged variables on first render
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9494
+github-contributors: yaisog
+
+This PR corrects a bug where the LetWidget did not set variables if their value was the empty output of a filtered transclusion.

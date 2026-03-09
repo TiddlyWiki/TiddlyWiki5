@@ -59,7 +59,7 @@ var BinaryParser = function(type,text,options) {
 			class: {type: "string", value: "tc-binary-warning"}
 		},
 		children: [warn, link]
-	}
+	};
 	this.tree = [element];
 	this.source = text;
 	this.type = type;

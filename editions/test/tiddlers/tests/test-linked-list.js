@@ -29,7 +29,7 @@ describe("LinkedList class tests", function() {
 	// creates and initializes a new {array, list} pair for testing
 	function newPair(initialArray) {
 		var pair = {array: [], list: new $tw.utils.LinkedList()};
-		if (initialArray) {
+		if(initialArray) {
 			push(pair, initialArray);
 		}
 		return pair;
@@ -126,7 +126,7 @@ describe("LinkedList class tests", function() {
 		compare(pushTop(remove(newPair(["A", "A"]), ["A", "A"]), ["B", "A"])); // BA
 
 		// Again, but this time with other values mixed in
-		compare(remove(newPair(["B", "A", "A", "C"]), ["A", "A"])) // BC;
+		compare(remove(newPair(["B", "A", "A", "C"]), ["A", "A"])); // BC;
 		// And again, but this time with value inbetween too.
 		compare(remove(newPair(["B", "A", "X", "Y", "Z", "A", "C"]), ["A", "A"])); // BXYZC
 
@@ -195,10 +195,10 @@ describe("LinkedList class tests", function() {
 		// This actually caused an infinite loop once. So important test here.
 		push(pair, ["A"]);
 		compare(pair); // XYCAA
-		pushTop(pair, "A") // switch those last As
+		pushTop(pair, "A"); // switch those last As
 		compare(pair); // XYCAA
 		remove(pair, ["A", "A"]); // Remove all As, then add them back
-		pushTop(pair, ["A", "A"])
+		pushTop(pair, ["A", "A"]);
 		compare(pair); // XYCAA
 	});
 

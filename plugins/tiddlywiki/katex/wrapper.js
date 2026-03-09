@@ -10,7 +10,6 @@ Wrapper for `katex.min.js` that provides a `<$latex>` widget. It is also availab
 "use strict";
 
 var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),
-    chemParse = require("$:/plugins/tiddlywiki/katex/mhchem.min.js"),
 	Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 katex.macros = {};

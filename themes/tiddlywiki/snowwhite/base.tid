@@ -28,7 +28,7 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .tc-page-controls button svg, .tc-tiddler-controls button svg, .tc-topbar button svg {
-	transition: fill 150ms ease-in-out;
+	transition: color 150ms ease-in-out;
 }
 
 .tc-tiddler-controls button.tc-selected,
@@ -46,7 +46,7 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .tc-tiddler-frame .tc-edit-tags input.tc-edit-texteditor {
-	box-shadow: none
+	box-shadow: none;
 	border: none;
 	outline: none;
 }
@@ -97,12 +97,26 @@ canvas.tc-edit-bitmapeditor  {
 	background-image: linear-gradient(to right, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 100%); 
 }
 
+/* HACK: :dir should be used here. html[dir="rtl"] rules are used to support browsers released before 2023 */
+
+html[dir="rtl"] .tc-sidebar-lists .tc-tab-set .tc-tab-divider {
+	background-image: linear-gradient(to left, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 100%);
+}
+
 .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
 	background-image: linear-gradient(to right, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.1) 100%);
 }
 
 .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected {
 	background-image: linear-gradient(to right, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
+}
+
+html[dir="rtl"] .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button {
+    background-image: linear-gradient(to right, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.01) 100%);
+}
+
+html[dir="rtl"] .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected {
+    background-image: linear-gradient(to right, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.05) 100%)
 }
 
 .tc-message-box img {

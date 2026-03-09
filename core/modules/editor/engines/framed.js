@@ -156,8 +156,8 @@ Fix the height of textarea to fit content
 FramedEngine.prototype.fixHeight = function() {
 	// Make sure styles are updated
 	this.copyStyles();
-	// Adjust height
-	if(this.widget.editTag === "textarea") {
+	// If .editRows is initialised, it takes precedence
+	if(this.widget.editTag === "textarea" && !this.widget.editRows) {
 		if(this.widget.editAutoHeight) {
 			if(this.domNode && !this.domNode.isTiddlyWikiFakeDom) {
 				var newHeight = $tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);
@@ -197,7 +197,7 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 Handle a keydown event
  */
 FramedEngine.prototype.handleKeydownEvent = function(event) {
-	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+	if($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
 		return true;
 	}
 

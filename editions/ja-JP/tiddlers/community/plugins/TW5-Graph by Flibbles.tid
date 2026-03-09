@@ -1,0 +1,22 @@
+created: 20251009192405351
+modified: 20260211112136626
+original-modified: 20251009192405351
+tags: [[Community Plugins]] Resources
+title: TW5-Graph by Flibbles
+ja-title: FlibblesによるTW5-Graph
+type: text/vnd.tiddlywiki
+url: https://flibbles.github.io/tw5-graph/
+
+TW5-Graphは、TiddlyWikiを既存のグラフ表示エンジン([[Vis-Network|https://visjs.github.io/vis-network/docs/network/]]など)と統合するためのフレームワークです。このプラグインを使えば、Tiddlerやその他の必要な情報を、簡単かつ洗練されたグラフで表現できます。
+
+これは[[TiddlyMap|TiddlyMap Plugin by Felix Küppers]]の精神を受け継いだ後継です。
+
+TW5-Graphでできること:
+
+* 簡単なポイント&クリックGUIでグラフを素早く作成・編集
+* Wikiテキストウィジェットを使用して、ニーズにぴったり合ったカスタマイズされたグラフとテンプレートを作成
+* 状態変化や個々のTiddlerを表す動的なグラフを簡単に作成
+
+TW5-Graphにはできることがたくさんあります。[[デモWebサイトはここをクリックしてください。|https://flibbles.github.io/tw5-graph/]]
+
+または、[[ここ|https://github.com/flibbles/tw5-graph]]からソースコードを参照してください。

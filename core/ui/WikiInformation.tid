@@ -41,6 +41,8 @@ Drag this link to copy this tool to another wiki
 </$wikify>
 \end capture-item-wikified
 
+\function get.shadow.source() [shadowsource[]]
+
 \procedure capture-wiki-info(tempWikiInfo)
 <$transclude $variable="capture-item-wikified" label="TiddlyWiki Version" value="<<version>>"/>
 <$transclude $variable="capture-item" label="Current palette" value={{$:/palette}}/>
@@ -64,6 +66,7 @@ Drag this link to copy this tool to another wiki
 <$transclude $variable="capture-item" label="Keyboard shortcuts that have been customised" value={{{ [all[tiddlers]prefix[$:/config/shortcuts]] +[join[,]] }}}/>
 <$transclude $variable="capture-item" label="Disabled plugins" value={{{ [all[tiddlers]prefix[$:/config/Plugins/Disabled/]] :filter[{!!text}match[yes]] :map[<currentTiddler>removeprefix[$:/config/Plugins/Disabled/]] +[join[,]] }}}/>
 <$transclude $variable="capture-item" label="Plugins" value={{{ [has[plugin-type]sort[]] :filter[<currentTiddler>addprefix[$:/config/Plugins/Disabled/]get[text]else[no]!match[yes]] :map[{!!version}addprefix[ - ]addprefix<currentTiddler>] +[addprefix[  ]addprefix<crlf>join[]] }}}/>
+<$transclude $variable="capture-item" label="Stylesheets" value={{{ [all[shadows+tiddlers]tag[$:/tags/Stylesheet]!is[draft]] :map[is[shadow]addsuffix[ ∈ ]addsuffix<get.shadow.source>else<currentTiddler>] +[addprefix[  ]addprefix<crlf>join[]] }}}/>
 \end capture-wiki-info
 
 \procedure template-header()

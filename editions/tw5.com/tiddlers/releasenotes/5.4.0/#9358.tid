@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9358
+description: Remove redundant code in format/json.js
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: performance
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9358
+github-contributors: cdruan
+
+Remove redundant code in `core/modules/filters/format/json.js`.

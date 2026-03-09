@@ -4,5 +4,5 @@ release: 5.3.8
 tags: $:/tags/ChangeNote
 change-type: bugfix
 change-category: usability
-links: https://github.com/TiddlyWiki/TiddlyWiki5/commit/93d30f374da4a6b2037b335f7f7d4eddce8192db
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/commit/93d30f374da4a6b2037b335f7f7d4eddce8192db
 github-contributors: Jermolene
