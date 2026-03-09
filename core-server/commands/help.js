@@ -28,8 +28,8 @@ Command.prototype.execute = function() {
 	}
 	// Wikify the help as formatted text (ie block elements generate newlines)
 	text = this.commander.wiki.renderTiddler("text/plain-formatted",helpBase + subhelp);
-	// Remove any leading linebreaks
-	text = text.replace(/^(\r?\n)*/g,"");
+	// Remove any leading linebreaks and add a single one for spacing
+	text = "\n" + text.replace(/^(\r?\n)*/g,"");
 	this.commander.streams.output.write(text);
 };
 
