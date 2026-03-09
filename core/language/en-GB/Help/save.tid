@@ -7,8 +7,11 @@ Saves individual tiddlers identified by a filter in their raw text or binary for
 --save <tiddler-filter> <filename-filter>
 ```
 
-* ''tiddler-filter'': A filter identifying the tiddler(s) to be saved
-* ''filename-filter'': Optional filter transforming tiddler titles into pathnames. If omitted, defaults to `[is[tiddler]]`, which uses the unchanged tiddler title as the filename
+```
+  tiddler-filter    filter identifying the tiddler(s) to be saved
+  filename-filter   filter transforming titles into pathnames
+                    (default: [is[tiddler]])
+```
 
 By default, the filename is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
 
