@@ -2,6 +2,7 @@
 .c9/
 .vs/
 .vscode/
+.claude/
 tmp/
 output/
 node_modules/
