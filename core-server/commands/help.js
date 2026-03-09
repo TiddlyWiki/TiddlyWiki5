@@ -30,6 +30,12 @@ Command.prototype.execute = function() {
 	text = this.commander.wiki.renderTiddler("text/plain-formatted",helpBase + subhelp);
 	// Remove any leading linebreaks and add a single one for spacing
 	text = "\n" + text.replace(/^(\r?\n)*/g,"");
+	// Collapse runs of blank lines into a single blank line
+	text = text.replace(/(\r?\n){3,}/g,"\n\n");
+	// Ensure trailing newline
+	if(!/\n$/.test(text)) {
+		text = text + "\n";
+	}
 	this.commander.streams.output.write(text);
 };
 
