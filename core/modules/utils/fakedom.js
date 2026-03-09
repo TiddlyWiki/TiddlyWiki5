@@ -319,7 +319,7 @@ Object.defineProperty(TW_Element.prototype, "formattedTextContent", {
 				b.push("\n");
 			}
 			if(this.tag === "li") {
-				b.push("\n* ");
+				b.push("\n  - ");
 			}
 			var self = this;
 			$tw.utils.each(this.children,function(node) {
