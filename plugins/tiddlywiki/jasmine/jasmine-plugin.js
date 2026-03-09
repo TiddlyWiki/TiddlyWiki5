@@ -143,6 +143,16 @@ exports.runTests = function(callback,specFilter,seed) {
 	var env = jasmine.getEnv();
 	var jasmineInterface = jasmineCore.interface(jasmine,env);
 	context = $tw.utils.extend({},jasmineInterface,context);
+	// Initialise the WikiParser prototype with the correct rule config
+	// from the main wiki, before any test can trigger it from an empty wiki
+	$tw.wiki.parseText("text/vnd.tiddlywiki","");
+	// Set up test utilities available to all test specs
+	$tw.test = {
+		/** Create a test wiki instance, pre-configured with core settings */
+		wiki: function() {
+			return new $tw.Wiki();
+		}
+	};
 	// Iterate through all the test modules
 	var tests = $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
 	$tw.utils.each(tests,evalInContext);
