@@ -309,8 +309,10 @@ exports.setupEditorHistory = function(runtime) {
 
 		// Show the block and ask for confirmation
 		self.output.write("\n" + block + "\n\n");
-		runtime.question("Run " + blockLabel + "? (y/n) ", function(answer) {
-			if(answer.trim().toLowerCase() === "y") {
+		runtime.question("Run " + blockLabel + "? (Y/n) ", function(answer) {
+			var a = answer.trim().toLowerCase();
+			if(a === "" || a === "y") {
+				self.output.write("\n");
 				executeBlock(self, block);
 			} else {
 				self.output.write("Cancelled.\n");
@@ -324,6 +326,12 @@ exports.setupEditorHistory = function(runtime) {
 	delete runtime.commands.save;
 	delete runtime.commands.editor;
 
+	// Define .h as a shortcut for .help
+	runtime.defineCommand("h", {
+		help: "Show help (same as .help)",
+		action: runtime.commands.help.action
+	});
+
 	// Define .edit command
 	runtime.defineCommand("edit", {
 		help: "Multi-line editor. Usage: .edit [new|history|info|show N|N]",
@@ -334,5 +342,52 @@ exports.setupEditorHistory = function(runtime) {
 	runtime.defineCommand("run", {
 		help: "List or run editor blocks. Usage: .run [N|<search term>]",
 		action: runAction
+	});
+
+	// Define .ls command (list blocks, optionally filtered by search term)
+	runtime.defineCommand("ls", {
+		help: "List editor blocks. Usage: .ls [<search term>]",
+		action: function(input) {
+			var self = this;
+			var trimmed = input.trim();
+			if(trimmed.length === 0) {
+				showHistory(self);
+				return;
+			}
+			var result = findBlocksByWord(trimmed);
+			if(result.matches.length === 0) {
+				self.output.write("No blocks matching '" + trimmed + "' found.\n");
+			} else {
+				for(var i = 0; i < result.matches.length; i++) {
+					var dateLine = getDateFromBlock(result.matches[i]);
+					var code = getCodeFromBlock(result.matches[i]);
+					var firstCodeLine = code.split("\n")[0];
+					var lineCount = code.trim().split("\n").length;
+					self.output.write("[" + result.indices[i] + "] " + dateLine + " (" + lineCount + " lines) " + firstCodeLine + "\n");
+				}
+			}
+			self.displayPrompt();
+		}
+	});
+
+	// Define .cat command (show a block without opening the editor)
+	runtime.defineCommand("cat", {
+		help: "Display an editor block. Usage: .cat <N>",
+		action: function(input) {
+			var self = this;
+			var index = parseInt(input.trim(), 10);
+			if(isNaN(index)) {
+				self.output.write("Usage: .cat <N>\n");
+				self.displayPrompt();
+				return;
+			}
+			var blocks = loadEditorHistory();
+			if(index >= 1 && index <= blocks.length) {
+				self.output.write("\n" + blocks[index - 1] + "\n\n");
+			} else {
+				self.output.write("Invalid block number. Use .ls to list blocks.\n");
+			}
+			self.displayPrompt();
+		}
 	});
 };

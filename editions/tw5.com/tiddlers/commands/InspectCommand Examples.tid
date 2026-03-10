@@ -174,6 +174,32 @@ View a block without opening the editor:
 $command: > .edit show 1
 ```
 
+!! Listing and Viewing Blocks with .ls and .cat
+
+`.ls` lists saved editor blocks, optionally filtered by a search term:
+
+```
+$command: > .ls
+[1] // 2026-03-10 14:22:05 (4 lines) var titles = $tw.wiki.filterTiddlers("[tag[Journal]]");
+[2] // 2026-03-10 15:01:33 (3 lines) Object.keys($tw.modules.types).forEach(function(type) {
+```
+
+Search for blocks by word in the comment line:
+
+```
+$command: > .ls Journal
+[1] // 2026-03-10 14:22:05 (4 lines) var titles = $tw.wiki.filterTiddlers("[tag[Journal]]");
+```
+
+`.cat` displays a block's full contents:
+
+```
+$command: > .cat 1
+// 2026-03-10 14:22:05
+var titles = $tw.wiki.filterTiddlers("[tag[Journal]]");
+titles.forEach(function(t) { console.log(t); });
+```
+
 !! Running Editor Blocks with .run
 
 The `.run` command lets you execute a saved editor block by number or by searching for a word in the comment line. The block is displayed and you are asked to confirm before it runs.
