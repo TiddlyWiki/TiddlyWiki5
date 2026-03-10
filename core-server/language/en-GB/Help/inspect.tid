@@ -20,6 +20,15 @@ The REPL provides:
 ```
   - .help            list all available commands
   - .depth <number>  set the object inspection depth (default: 1)
+  - .edit            list saved editor blocks (same as .edit history)
+  - .edit new        open $EDITOR for a new multi-line code block
+  - .edit N          open $EDITOR pre-populated with history block N
+  - .edit show N     display a history block without opening the editor
+  - .edit history    list saved editor blocks (with dates)
+  - .edit info       show the editor history file path
+  - .run             list saved editor blocks (same as .edit history)
+  - .run N           run editor block N (with confirmation)
+  - .run <term>      find and run a block by word match in comment line
   - .history         show deduplicated command history
   - .history info    show the history file path
   - .exit            exit the REPL

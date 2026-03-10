@@ -141,6 +141,75 @@ Find where the history file is stored:
 $command: > .history info
 ```
 
+!! Multi-line Editing with .edit
+
+The `.edit` command provides multi-line code editing using your `$EDITOR` (or `$VISUAL`). Blocks are saved with a date stamp to a persistent editor history.
+
+Open a new editor:
+
+```
+$command: > .edit new
+Opening new editor with vim
+// Write your code, save, and close to evaluate
+```
+
+List saved editor blocks (also the default when typing just `.edit`):
+
+```
+$command: > .edit
+[1] // 2026-03-10 14:22:05 (4 lines) var titles = $tw.wiki.filterTiddlers("[tag[Journal]]");
+[2] // 2026-03-10 15:01:33 (3 lines) Object.keys($tw.modules.types).forEach(function(type) {
+```
+
+Re-edit a previous block:
+
+```
+$command: > .edit 2
+Opening block 2 with vim
+```
+
+View a block without opening the editor:
+
+```
+$command: > .edit show 1
+```
+
+!! Running Editor Blocks with .run
+
+The `.run` command lets you execute a saved editor block by number or by searching for a word in the comment line. The block is displayed and you are asked to confirm before it runs.
+
+Run by block number:
+
+```
+$command: > .run 7
+// 2026-03-10 14:22:05 Setup test data
+var data = [1, 2, 3];
+...
+
+Run block 7? (y/n) y
+```
+
+Search by word in the comment line (uses word-boundary matching):
+
+```
+$command: > .run Test
+// 2026-03-10 14:22:05 Setup test data
+var data = [1, 2, 3];
+...
+
+Run block 7? (y/n)
+```
+
+If multiple blocks match, the matches are listed so you can be more specific:
+
+```
+$command: > .run setup
+Multiple blocks match 'setup':
+[3] // 2026-03-10 12:00:00 Setup widgets
+[7] // 2026-03-10 14:22:05 Setup test data
+Please be more specific or use .run <number>.
+```
+
 !! Advanced: Modifying Tiddlers
 
 Add a new tiddler:

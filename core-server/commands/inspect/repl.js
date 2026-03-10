@@ -12,6 +12,7 @@ const util = require("util");
 const { createCompleter } = require("$:/core/modules/commands/inspect/completer.js");
 const { processOutput } = require("$:/core/modules/commands/inspect/output.js");
 const { colour, INITIAL_INSPECT_DEPTH, REPL_HISTORY_PATH } = require("$:/core/modules/commands/inspect/utils.js");
+const { setupEditorHistory } = require("$:/core/modules/commands/inspect/editor-history.js");
 
 exports.startRepl = function(commandInstance) {
 	let inspectDepth = INITIAL_INSPECT_DEPTH;
@@ -25,6 +26,14 @@ exports.startRepl = function(commandInstance) {
 
 	const completer = createCompleter(commandInstance);
 
+	// Suppress syncer log messages so they don't clobber the REPL prompt
+	if($tw.syncer && $tw.syncer.logger) {
+		$tw.syncer.logger.enable = false;
+	}
+
+	// Welcome message (printed before the REPL starts so it appears above the first prompt)
+	console.log("\nType .help to list commands.\nAccess the TW variable space with '$tw.' \n");
+
 	const runtime = repl.start({
 		prompt: commandInstance.params.length ? colour.txt(commandInstance.params[0],33,0,7,0) : colour.txt("$command: > ",33,0,7,0),
 		useColors: true,
@@ -32,9 +41,6 @@ exports.startRepl = function(commandInstance) {
 		completer: completer,
 		writer: customWriter
 	});
-
-	// Welcome message
-	console.log("Type .help to list commands.\nAccess the TW variable space with '$tw.' \n");
 
 	commandInstance.runtime = runtime;
 
@@ -48,6 +54,9 @@ exports.startRepl = function(commandInstance) {
 			console.error("Error setting up REPL history:", err);
 		}
 	});
+
+	// REPL: Set up multi-line editor history
+	setupEditorHistory(runtime);
 
 	// REPL: Define .depth command
 	runtime.defineCommand("depth", {
@@ -106,6 +115,13 @@ exports.startRepl = function(commandInstance) {
 	});
 
 	runtime.context.$tw = $tw;
+
+	// Re-enable syncer logging when the REPL exits
+	runtime.on("exit", function() {
+		if($tw.syncer && $tw.syncer.logger) {
+			$tw.syncer.logger.enable = true;
+		}
+	});
 
 	return runtime;
 };
