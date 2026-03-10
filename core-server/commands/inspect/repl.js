@@ -116,6 +116,18 @@ exports.startRepl = function(commandInstance) {
 
 	runtime.context.$tw = $tw;
 
+	// Override unknown dot-command handler to show .help instead of "Invalid REPL keyword"
+	const origOutput = runtime.output;
+	const origWrite = origOutput.write.bind(origOutput);
+	origOutput.write = function(data, encoding, callback) {
+		if(typeof data === "string" && data.indexOf("Invalid REPL keyword") !== -1) {
+			origWrite("Unknown command\n\n");
+			runtime.commands.help.action.call(runtime);
+			return true;
+		}
+		return origWrite(data, encoding, callback);
+	};
+
 	// Re-enable syncer logging when the REPL exits
 	runtime.on("exit", function() {
 		if($tw.syncer && $tw.syncer.logger) {
