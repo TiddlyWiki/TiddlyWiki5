@@ -1,0 +1,40 @@
+title: $:/language/Help/inspect
+description: Open an interactive REPL to inspect the TiddlyWiki variable space
+
+Start a Node.js REPL (Read-Eval-Print Loop) with full access to the `$tw` variable space, allowing interactive exploration of the wiki store, tiddlers, modules, and internal APIs.
+
+```
+--inspect [<prompt>]
+```
+
+The optional `<prompt>` parameter sets a custom REPL prompt string.
+
+The REPL provides:
+
+* Tab-completion for `$tw` properties and methods, including function signatures
+* Coloured output with smart inspection of objects and functions
+* Persistent command history across sessions (saved to `~/.tiddlywiki_repl_history`)
+
+!! Built-in REPL commands
+
+```
+  - .help            list all available commands
+  - .depth <number>  set the object inspection depth (default: 1)
+  - .history         show deduplicated command history
+  - .history info    show the history file path
+  - .exit            exit the REPL
+```
+
+!! Examples
+
+Load a wiki and open the REPL:
+
+```
+tiddlywiki ./MyWiki --inspect
+```
+
+Load a wiki with a custom prompt:
+
+```
+tiddlywiki ./MyWiki --inspect "mywiki> "
+```

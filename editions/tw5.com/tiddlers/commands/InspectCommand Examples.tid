@@ -1,0 +1,173 @@
+created: 20260310120000000
+modified: 20260310213807404
+tags: Commands
+title: InspectCommand Examples
+type: text/vnd.tiddlywiki
+
+!! InspectCommand
+
+The `--inspect` command launches an interactive REPL session inside a loaded TiddlyWiki instance. You can explore tiddlers, query the store, call internal APIs, and debug your wiki -- all from the terminal.
+
+!! Starting the REPL
+
+Start with the default prompt:
+
+```
+tiddlywiki ./MyWiki --inspect
+```
+
+Start with a custom prompt:
+
+```
+tiddlywiki ./MyWiki --inspect "debug> "
+```
+
+!! Exploring Tiddlers
+
+Get a single tiddler by title:
+
+```
+$command: > $tw.wiki.getTiddler("$:/SiteTitle")
+```
+
+List all tiddler titles:
+
+```
+$command: > $tw.wiki.getTiddlers()
+```
+
+Get the text field of a tiddler:
+
+```
+$command: > $tw.wiki.getTiddlerText("$:/SiteTitle")
+```
+
+!! Querying with Filters
+
+Run a filter and get matching titles:
+
+```
+$command: > $tw.wiki.filterTiddlers("[tag[Journal]]")
+```
+
+Count tiddlers with a specific tag:
+
+```
+$command: > $tw.wiki.filterTiddlers("[tag[Journal]count[]]")
+```
+
+Find all tiddlers modified today:
+
+```
+$command: > $tw.wiki.filterTiddlers("[days:modified[-1]]")
+```
+
+!! Exploring the Wiki Store
+
+Check how many tiddlers are in the store:
+
+```
+$command: > $tw.wiki.getTiddlers().length
+```
+
+List all tags in use:
+
+```
+$command: > $tw.wiki.filterTiddlers("[tags[]]")
+```
+
+Get field values from a tiddler:
+
+```
+$command: > $tw.wiki.getTiddler("MyTiddler").fields
+```
+
+!! Working with Modules and Plugins
+
+List all loaded plugins:
+
+```
+$command: > Object.keys($tw.plugins.titles)
+```
+
+Explore available widget types:
+
+```
+$command: > Object.keys($tw.modules.types["widget"])
+```
+
+Look at a module's exports:
+
+```
+$command: > $tw.modules.titles["$:/core/modules/widgets/link.js"]
+```
+
+!! Using Tab Completion
+
+The REPL supports intelligent tab completion:
+
+* Type `$tw.` and press `Tab` to see all properties of `$tw`
+* Type `$tw.wiki.get` and press `Tab` to see all methods starting with "get"
+* When there are few matches, function signatures are shown automatically
+* Press `Tab` twice on an exact function name to see its parameter signature
+
+!! Controlling Inspection Depth
+
+By default, objects are inspected to depth 1. Increase it to see nested structures:
+
+```
+$command: > .depth 3
+Inspection depth set to 3.
+$command: > $tw.wiki.getTiddler("$:/SiteTitle")
+```
+
+Set it back to a shallow view:
+
+```
+$command: > .depth 1
+```
+
+!! Viewing Command History
+
+Show deduplicated history of previous commands:
+
+```
+$command: > .history
+```
+
+Find where the history file is stored:
+
+```
+$command: > .history info
+```
+
+!! Advanced: Modifying Tiddlers
+
+Add a new tiddler:
+
+```
+$command: > $tw.wiki.addTiddler({title: "TestTiddler", text: "Hello from the REPL!"})
+```
+
+Delete a tiddler:
+
+```
+$command: > $tw.wiki.deleteTiddler("TestTiddler")
+```
+
+!! Advanced: Accessing Node.js APIs
+
+Since this is a full Node.js REPL, you can use any Node.js built-in:
+
+```
+$command: > const fs = require("fs")
+$command: > fs.readdirSync(".")
+```
+
+!! Exiting the REPL
+
+Type `.exit` or press `Ctrl+C` twice:
+
+```
+$command: > .exit
+```
