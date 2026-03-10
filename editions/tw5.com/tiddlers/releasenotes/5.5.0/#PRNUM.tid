@@ -1,0 +1,19 @@
+title: $:/changenotes/5.5.0/#PRNUM
+description: Filter serialization: CST quote-style preservation and formatting options
+tags: $:/tags/ChangeNote
+release: 5.5.0
+change-type: enhancement
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/#PRNUM
+github-contributors: linonetwo
+
+Extends the filter serialization work introduced in v5.4.0 with two improvements:
+
+* ''CST round-trip for shorthand title syntax'': The filter parser now preserves a `titleQuote` property (`"double"`, `"single"`, or `"none"`) on operators produced by shorthand title syntax (`"My Title"`, `'My Title'`, `MyTitle`). The serializer uses this metadata so that `$tw.utils.serializeFilterParseTree()` faithfully reproduces the original quoting style instead of normalising everything to `[title[...]]`.
+
+* ''Formatting options'': `serializeFilterParseTree(tree, options)` now accepts:
+** `maxRunsPerLine` — insert a newline + indent after every N filter runs
+** `wrapAt` — wrap at approximately a given column width
+** `indent` — the indentation string used when wrapping (default `"  "`)
+
+These options lay the groundwork for a future WikiText linter and formatter.
