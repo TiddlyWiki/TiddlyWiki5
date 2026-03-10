@@ -9,237 +9,116 @@ Tests the filter expression serialization from filter AST.
 
 describe("Filter serialization unit tests", function () {
 
-	it("should serialize simple operator", function () {
-		var filter = "[tag[docs]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[tag[docs]]");
+	// --- Core round-trip ---
+
+	it("should round-trip operator syntax variants", function () {
+		var cases = [
+			// basic operators
+			"[tag[docs]]",
+			"[!tag[docs]]",
+			"[tag[docs]sort[title]]",
+			// operator suffixes
+			"[search:title,text[foo]]",
+			"[search:title:literal,casesensitive[hello]]",
+			// operand types: square, indirect, variable, multi-valued variable
+			"[title{CurrentTiddler}]",
+			"[tag<myVar>]",
+			"[tag(myMVV)]",
+			// multiple and empty operands
+			"[operator[a],[b]]",
+			"[operator[a],{b},<c>,(d)]",
+			"[length[]]",
+			// complex real-world filter
+			"[all[tiddlers]!is[system]sort[title]limit[20]]",
+		];
+		cases.forEach(function(filter) {
+			var tree = $tw.wiki.parseFilter(filter);
+			expect($tw.utils.serializeFilterParseTree(tree)).toBe(filter);
+		});
 	});
 
-	it("should serialize negated operator", function () {
-		var filter = "[!tag[docs]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[!tag[docs]]");
+	it("should round-trip all run prefix types", function () {
+		var cases = [
+			"[tag[docs]] [tag[other]]",
+			"[tag[docs]] +[sort[title]]",
+			"[tag[docs]] -[tag[exclude]]",
+			"[tag[docs]] ~[tag[fallback]]",
+			"=[tag[docs]]",
+			"=>[sum[]]",
+			"[tag[docs]] :filter[get[text]length[]compare:integer:gteq[100]]",
+			":reduce:flat[add[]]",
+		];
+		cases.forEach(function(filter) {
+			var tree = $tw.wiki.parseFilter(filter);
+			expect($tw.utils.serializeFilterParseTree(tree)).toBe(filter);
+		});
 	});
 
-	it("should serialize chained operators", function () {
-		var filter = "[tag[docs]sort[title]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[tag[docs]sort[title]]");
-	});
-
-	it("should serialize multiple runs", function () {
-		var filter = "[tag[docs]] [tag[other]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[tag[docs]] [tag[other]]");
-	});
-
-	it("should serialize + prefix", function () {
-		var filter = "[tag[docs]] +[sort[title]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[tag[docs]] +[sort[title]]");
-	});
-
-	it("should serialize - prefix", function () {
-		var filter = "[tag[docs]] -[tag[exclude]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[tag[docs]] -[tag[exclude]]");
-	});
-
-	it("should serialize ~ prefix", function () {
-		var filter = "[tag[docs]] ~[tag[fallback]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[tag[docs]] ~[tag[fallback]]");
-	});
-
-	it("should serialize => prefix", function () {
-		var filter = "=>[sum[]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("=>[sum[]]");
-	});
-
-	it("should serialize = prefix", function () {
-		var filter = "=[tag[docs]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("=[tag[docs]]");
-	});
-
-	it("should serialize named prefix :filter", function () {
-		var filter = "[tag[docs]] :filter[get[text]length[]compare:integer:gteq[100]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[tag[docs]] :filter[get[text]length[]compare:integer:gteq[100]]");
-	});
-
-	it("should serialize operator suffix with single part", function () {
-		var filter = "[search:title,text[foo]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[search:title,text[foo]]");
-	});
-
-	it("should serialize operator suffix with multiple parts", function () {
-		var filter = "[search:title:literal,casesensitive[hello]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[search:title:literal,casesensitive[hello]]");
-	});
-
-	it("should serialize indirect operand {}", function () {
-		var filter = "[title{CurrentTiddler}]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[title{CurrentTiddler}]");
-	});
-
-	it("should serialize variable operand <>", function () {
-		var filter = "[tag<myVar>]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[tag<myVar>]");
-	});
-
-	it("should serialize multi-valued variable operand ()", function () {
-		var filter = "[tag(myMVV)]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[tag(myMVV)]");
-	});
-
-	it("should serialize multiple operands", function () {
-		var filter = "[operator[a],[b]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[operator[a],[b]]");
-	});
-
-	it("should serialize mixed operand types", function () {
-		var filter = "[operator[a],{b},<c>,(d)]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[operator[a],{b},<c>,(d)]");
-	});
-
-	it("should serialize empty operand", function () {
-		var filter = "[length[]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[length[]]");
-	});
-
-	it("should serialize empty filter", function () {
-		var tree = $tw.wiki.parseFilter("");
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("");
-	});
-
-	it("should serialize complex real-world filter", function () {
-		var filter = "[all[tiddlers]!is[system]sort[title]limit[20]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[all[tiddlers]!is[system]sort[title]limit[20]]");
-	});
-
-	it("should handle null/undefined input", function () {
+	it("should handle edge cases: empty, null, undefined", function () {
+		expect($tw.utils.serializeFilterParseTree($tw.wiki.parseFilter(""))).toBe("");
 		expect($tw.utils.serializeFilterParseTree(null)).toBe("");
 		expect($tw.utils.serializeFilterParseTree(undefined)).toBe("");
 	});
 
-	it("should serialize named prefix with suffixes", function () {
-		var filter = ":reduce:flat[add[]]";
-		var tree = $tw.wiki.parseFilter(filter);
+	it("should handle deprecated regexp operand", function () {
+		// /pattern/ syntax is deprecated but must round-trip correctly
+		var tree = $tw.wiki.parseFilter("[modifier/Joe/]");
 		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe(":reduce:flat[add[]]");
+		expect(serialized).toBe("[modifier/Joe/]");
 	});
 
-	// --- CST round-trip tests for shorthand title syntax ---
+	// --- CST: shorthand title quote preservation ---
 
-	it("should round-trip unquoted title (CST: none)", function () {
-		var filter = "MyTitle";
-		var tree = $tw.wiki.parseFilter(filter);
+	it("should annotate shorthand title operators with titleQuote metadata", function () {
+		var tree;
+		tree = $tw.wiki.parseFilter("MyTitle");
 		expect(tree[0].operators[0].titleQuote).toBe("none");
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("MyTitle");
-	});
 
-	it("should round-trip double-quoted title (CST: double)", function () {
-		var filter = "\"My Title\"";
-		var tree = $tw.wiki.parseFilter(filter);
+		tree = $tw.wiki.parseFilter("\"My Title\"");
 		expect(tree[0].operators[0].titleQuote).toBe("double");
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("\"My Title\"");
-	});
 
-	it("should round-trip single-quoted title (CST: single)", function () {
-		var filter = "'My Title'";
-		var tree = $tw.wiki.parseFilter(filter);
+		tree = $tw.wiki.parseFilter("'My Title'");
 		expect(tree[0].operators[0].titleQuote).toBe("single");
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("'My Title'");
-	});
 
-	it("should NOT set titleQuote on explicit bracket form [title[...]]", function () {
-		var filter = "[title[MyTitle]]";
-		var tree = $tw.wiki.parseFilter(filter);
+		// explicit bracket form must NOT get titleQuote
+		tree = $tw.wiki.parseFilter("[title[MyTitle]]");
 		expect(tree[0].operators[0].titleQuote).toBeUndefined();
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[title[MyTitle]]");
 	});
 
-	it("should round-trip multiple shorthand titles with different quotes", function () {
-		var filter = "\"Title One\" 'Title Two' TitleThree";
-		var tree = $tw.wiki.parseFilter(filter);
-		expect(tree[0].operators[0].titleQuote).toBe("double");
-		expect(tree[1].operators[0].titleQuote).toBe("single");
-		expect(tree[2].operators[0].titleQuote).toBe("none");
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("\"Title One\" 'Title Two' TitleThree");
-	});
-
-	it("should serialize shorthand title mixed with a regular run", function () {
-		var filter = "MyTitle [tag[docs]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("MyTitle [tag[docs]]");
+	it("should round-trip all shorthand title quote styles", function () {
+		// All four styles produce the same AST text value but differ in titleQuote
+		var cases = [
+			["MyTitle",         "MyTitle"],
+			['"My Title"',      '"My Title"'],
+			["'My Title'",      "'My Title'"],
+			["[title[MyTitle]]","[title[MyTitle]]"],  // bracket form stays as bracket
+			["MyTitle [tag[docs]]", "MyTitle [tag[docs]]"],  // mixed with regular run
+			['"Title One" \'Title Two\' TitleThree', '"Title One" \'Title Two\' TitleThree'],
+		];
+		cases.forEach(function(pair) {
+			var tree = $tw.wiki.parseFilter(pair[0]);
+			expect($tw.utils.serializeFilterParseTree(tree)).toBe(pair[1]);
+		});
 	});
 
 	// --- Formatting options ---
 
-	it("should wrap at maxRunsPerLine", function () {
-		var filter = "[tag[a]] [tag[b]] [tag[c]] [tag[d]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree, {maxRunsPerLine: 2});
-		expect(serialized).toBe("[tag[a]] [tag[b]]\n  [tag[c]] [tag[d]]");
+	it("should support maxRunsPerLine and custom indent", function () {
+		var tree = $tw.wiki.parseFilter("[tag[a]] [tag[b]] [tag[c]] [tag[d]]");
+		expect($tw.utils.serializeFilterParseTree(tree, {maxRunsPerLine: 2}))
+			.toBe("[tag[a]] [tag[b]]\n  [tag[c]] [tag[d]]");
+		expect($tw.utils.serializeFilterParseTree(tree, {maxRunsPerLine: 1, indent: "\t"}))
+			.toBe("[tag[a]]\n\t[tag[b]]\n\t[tag[c]]\n\t[tag[d]]");
+		// default: no wrapping
+		expect($tw.utils.serializeFilterParseTree(tree))
+			.toBe("[tag[a]] [tag[b]] [tag[c]] [tag[d]]");
 	});
 
-	it("should use custom indent string", function () {
-		var filter = "[tag[a]] [tag[b]] [tag[c]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree, {maxRunsPerLine: 1, indent: "\t"});
-		expect(serialized).toBe("[tag[a]]\n\t[tag[b]]\n\t[tag[c]]");
+	it("should support wrapAt column width", function () {
+		var tree = $tw.wiki.parseFilter("[tag[alpha]] [tag[beta]] [tag[gamma]]");
+		// [tag[alpha]] = 12 chars; adding " [tag[beta]]" (12) = 24 which exceeds wrapAt:20
+		expect($tw.utils.serializeFilterParseTree(tree, {wrapAt: 20}))
+			.toBe("[tag[alpha]]\n  [tag[beta]]\n  [tag[gamma]]");
 	});
 
-	it("should wrap at wrapAt column width", function () {
-		var filter = "[tag[alpha]] [tag[beta]] [tag[gamma]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		// "[tag[alpha]]" is 12 chars, " [tag[beta]]" would make 24, " [tag[gamma]]" would make 37
-		// wrapAt:20 → wrap before [tag[beta]]
-		var serialized = $tw.utils.serializeFilterParseTree(tree, {wrapAt: 20});
-		expect(serialized).toBe("[tag[alpha]]\n  [tag[beta]]\n  [tag[gamma]]");
-	});
-
-	it("should not wrap with default options", function () {
-		var filter = "[tag[a]] [tag[b]] [tag[c]]";
-		var tree = $tw.wiki.parseFilter(filter);
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
-		expect(serialized).toBe("[tag[a]] [tag[b]] [tag[c]]");
-	});
 });

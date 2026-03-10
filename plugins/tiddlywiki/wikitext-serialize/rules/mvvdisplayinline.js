@@ -17,29 +17,19 @@ The default separator is ", " (comma space).
 exports.name = "mvvdisplayinline";
 
 exports.serialize = function(tree, serialize) {
-	var filter = tree.attributes.text.filter;
+	const filter = tree.attributes.text.filter;
 	// Variable mode produces: [(varname)join[sep]]
-	var varMatch = /^\[\(([^()]+)\)join\[([^\]]*)\]\]$/.exec(filter);
+	const varMatch = /^\[\(([^()]+)\)join\[([^\]]*)\]\]$/.exec(filter);
 	if(varMatch) {
-		var varName = varMatch[1];
-		var sep = varMatch[2];
-		if(sep === ", ") {
-			return "((" + varName + "))";
-		} else {
-			return "((" + varName + "||" + sep + "))";
-		}
+		const [, varName, sep] = varMatch;
+		return sep === ", " ? `((${varName}))` : `((${varName}||${sep}))`;
 	}
 	// Filter mode produces: originalFilter +[join[sep]]
-	var filterMatch = /^([\s\S]*) \+\[join\[([^\]]*)\]\]$/.exec(filter);
+	const filterMatch = /^([\s\S]*) \+\[join\[([^\]]*)\]\]$/.exec(filter);
 	if(filterMatch) {
-		var innerFilter = filterMatch[1];
-		var filterSep = filterMatch[2];
-		if(filterSep === ", ") {
-			return "(((" + innerFilter + ")))";
-		} else {
-			return "(((" + innerFilter + "||" + filterSep + ")))";
-		}
+		const [, innerFilter, filterSep] = filterMatch;
+		return filterSep === ", " ? `(((${innerFilter})))` : `(((${innerFilter}||${filterSep})))`;
 	}
 	// Fallback: should not occur in normal usage
-	return "(((" + filter + ")))";
+	return `(((${filter})))`;
 };
