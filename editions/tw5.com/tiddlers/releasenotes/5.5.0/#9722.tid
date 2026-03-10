@@ -1,10 +1,10 @@
-title: $:/changenotes/5.5.0/#PRNUM
+title: $:/changenotes/5.5.0/#9722
 description: Filter serialization: CST quote-style preservation and formatting options
 tags: $:/tags/ChangeNote
 release: 5.5.0
 change-type: enhancement
 change-category: developer
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/#PRNUM
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9722
 github-contributors: linonetwo
 
 Extends the filter serialization work introduced in v5.4.0 with two improvements:
