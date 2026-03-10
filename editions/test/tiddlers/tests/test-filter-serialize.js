@@ -12,7 +12,7 @@ describe("Filter serialization unit tests", function () {
 	// --- Core round-trip ---
 
 	it("should round-trip operator syntax variants", function () {
-		var cases = [
+		const cases = [
 			// basic operators
 			"[tag[docs]]",
 			"[!tag[docs]]",
@@ -31,14 +31,14 @@ describe("Filter serialization unit tests", function () {
 			// complex real-world filter
 			"[all[tiddlers]!is[system]sort[title]limit[20]]",
 		];
-		cases.forEach(function(filter) {
-			var tree = $tw.wiki.parseFilter(filter);
+		cases.forEach((filter) => {
+			const tree = $tw.wiki.parseFilter(filter);
 			expect($tw.utils.serializeFilterParseTree(tree)).toBe(filter);
 		});
 	});
 
 	it("should round-trip all run prefix types", function () {
-		var cases = [
+		const cases = [
 			"[tag[docs]] [tag[other]]",
 			"[tag[docs]] +[sort[title]]",
 			"[tag[docs]] -[tag[exclude]]",
@@ -48,8 +48,8 @@ describe("Filter serialization unit tests", function () {
 			"[tag[docs]] :filter[get[text]length[]compare:integer:gteq[100]]",
 			":reduce:flat[add[]]",
 		];
-		cases.forEach(function(filter) {
-			var tree = $tw.wiki.parseFilter(filter);
+		cases.forEach((filter) => {
+			const tree = $tw.wiki.parseFilter(filter);
 			expect($tw.utils.serializeFilterParseTree(tree)).toBe(filter);
 		});
 	});
@@ -62,15 +62,15 @@ describe("Filter serialization unit tests", function () {
 
 	it("should handle deprecated regexp operand", function () {
 		// /pattern/ syntax is deprecated but must round-trip correctly
-		var tree = $tw.wiki.parseFilter("[modifier/Joe/]");
-		var serialized = $tw.utils.serializeFilterParseTree(tree);
+		const tree = $tw.wiki.parseFilter("[modifier/Joe/]");
+		const serialized = $tw.utils.serializeFilterParseTree(tree);
 		expect(serialized).toBe("[modifier/Joe/]");
 	});
 
 	// --- CST: shorthand title quote preservation ---
 
 	it("should annotate shorthand title operators with titleQuote metadata", function () {
-		var tree;
+		let tree;
 		tree = $tw.wiki.parseFilter("MyTitle");
 		expect(tree[0].operators[0].titleQuote).toBe("none");
 
@@ -87,16 +87,16 @@ describe("Filter serialization unit tests", function () {
 
 	it("should round-trip all shorthand title quote styles", function () {
 		// All four styles produce the same AST text value but differ in titleQuote
-		var cases = [
-			["MyTitle",         "MyTitle"],
-			['"My Title"',      '"My Title"'],
-			["'My Title'",      "'My Title'"],
-			["[title[MyTitle]]","[title[MyTitle]]"],  // bracket form stays as bracket
+		const cases = [
+			["MyTitle",          "MyTitle"],
+			['"My Title"',       '"My Title"'],
+			["'My Title'",       "'My Title'"],
+			["[title[MyTitle]]", "[title[MyTitle]]"],  // bracket form stays as bracket
 			["MyTitle [tag[docs]]", "MyTitle [tag[docs]]"],  // mixed with regular run
 			['"Title One" \'Title Two\' TitleThree', '"Title One" \'Title Two\' TitleThree'],
 		];
-		cases.forEach(function(pair) {
-			var tree = $tw.wiki.parseFilter(pair[0]);
+		cases.forEach((pair) => {
+			const tree = $tw.wiki.parseFilter(pair[0]);
 			expect($tw.utils.serializeFilterParseTree(tree)).toBe(pair[1]);
 		});
 	});
@@ -104,7 +104,7 @@ describe("Filter serialization unit tests", function () {
 	// --- Formatting options ---
 
 	it("should support maxRunsPerLine and custom indent", function () {
-		var tree = $tw.wiki.parseFilter("[tag[a]] [tag[b]] [tag[c]] [tag[d]]");
+		const tree = $tw.wiki.parseFilter("[tag[a]] [tag[b]] [tag[c]] [tag[d]]");
 		expect($tw.utils.serializeFilterParseTree(tree, {maxRunsPerLine: 2}))
 			.toBe("[tag[a]] [tag[b]]\n  [tag[c]] [tag[d]]");
 		expect($tw.utils.serializeFilterParseTree(tree, {maxRunsPerLine: 1, indent: "\t"}))
@@ -115,7 +115,7 @@ describe("Filter serialization unit tests", function () {
 	});
 
 	it("should support wrapAt column width", function () {
-		var tree = $tw.wiki.parseFilter("[tag[alpha]] [tag[beta]] [tag[gamma]]");
+		const tree = $tw.wiki.parseFilter("[tag[alpha]] [tag[beta]] [tag[gamma]]");
 		// [tag[alpha]] = 12 chars; adding " [tag[beta]]" (12) = 24 which exceeds wrapAt:20
 		expect($tw.utils.serializeFilterParseTree(tree, {wrapAt: 20}))
 			.toBe("[tag[alpha]]\n  [tag[beta]]\n  [tag[gamma]]");
