@@ -114,11 +114,11 @@ describe("Filter serialization unit tests", function () {
 			.toBe("[tag[a]] [tag[b]] [tag[c]] [tag[d]]");
 	});
 
-	it("should support wrapAt column width", function () {
+	it("should support wrapAt column width with explicit indent", function () {
 		const tree = $tw.wiki.parseFilter("[tag[alpha]] [tag[beta]] [tag[gamma]]");
 		// [tag[alpha]] = 12 chars; adding " [tag[beta]]" (12) = 24 which exceeds wrapAt:20
-		expect($tw.utils.serializeFilterParseTree(tree, {wrapAt: 20}))
-			.toBe("[tag[alpha]]\n  [tag[beta]]\n  [tag[gamma]]");
+		expect($tw.utils.serializeFilterParseTree(tree, {wrapAt: 20, indent: "\t"}))
+			.toBe("[tag[alpha]]\n\t[tag[beta]]\n\t[tag[gamma]]");
 	});
 
 });
