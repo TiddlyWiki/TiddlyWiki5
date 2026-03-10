@@ -31,6 +31,17 @@ exports.startRepl = function(commandInstance) {
 		$tw.syncer.logger.enable = false;
 	}
 
+	// Suppress Node.js experimental/deprecation warnings during REPL
+	const warningHandler = function() {};
+	process.on("warning", warningHandler);
+	const origStderrWrite = process.stderr.write.bind(process.stderr);
+	process.stderr.write = function(data, encoding, callback) {
+		if(typeof data === "string" && /ExperimentalWarning|DeprecationWarning/.test(data)) {
+			return true;
+		}
+		return origStderrWrite(data, encoding, callback);
+	};
+
 	// Welcome message (printed before the REPL starts so it appears above the first prompt)
 	console.log("\nType .help to list commands.\nAccess the TW variable space with '$tw.' \n");
 
@@ -128,11 +139,13 @@ exports.startRepl = function(commandInstance) {
 		return origWrite(data, encoding, callback);
 	};
 
-	// Re-enable syncer logging when the REPL exits
+	// Re-enable syncer logging and warning output when the REPL exits
 	runtime.on("exit", function() {
 		if($tw.syncer && $tw.syncer.logger) {
 			$tw.syncer.logger.enable = true;
 		}
+		process.removeListener("warning", warningHandler);
+		process.stderr.write = origStderrWrite;
 	});
 
 	return runtime;
