@@ -89,7 +89,7 @@ exports.serializeFilterParseTree = function serializeFilterParseTree(tree, optio
 	// Skip empty operations (e.g. produced by empty quoted titles "" / '' which
 	// parseFilter ignores rather than pushing into results).
 	const runs = tree
-		.filter(operation => operation.operators.length > 0)
+		.filter((operation) => operation.operators.length > 0)
 		.map((operation) => {
 			// Reconstruct the run prefix: named (:filter, :reduce:flat…) or symbolic (+, -, ~, =, =>)
 			let prefix = "";
