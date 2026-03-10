@@ -38,10 +38,10 @@ exports.createCompleter = function(commandInstance) {
 			const filteredProperties = properties.filter((p) => !p.startsWith("__"));
 			const matchingProperties = filteredProperties.filter((p) => p.toLowerCase().startsWith(partial.toLowerCase()));
 
-			// Special case: if there's a single exact match for a function, complete its signature
-			if(matchingProperties.length === 1 && matchingProperties[0] === partial) {
-				const propName = matchingProperties[0];
-				const target = obj[propName];
+			// Special case: if the partial is an exact match for a property,
+			// complete intelligently (append dot for objects, show signature for functions)
+			if(partial && filteredProperties.indexOf(partial) !== -1) {
+				const target = obj[partial];
 				if(typeof target === "function") {
 					const signature = getFunctionSignature(target);
 					if(signature !== null) {
@@ -49,6 +49,11 @@ exports.createCompleter = function(commandInstance) {
 						hits.push(line + `(${signature})`);
 						return [hits, line];
 					}
+				}
+				// For objects, append a dot so the next TAB shows their properties
+				if(target !== null && typeof target === "object") {
+					hits.push(line + ".");
+					return [hits, line];
 				}
 			}
 
