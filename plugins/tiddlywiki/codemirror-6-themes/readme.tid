@@ -1,0 +1,27 @@
+title: $:/plugins/tiddlywiki/codemirror-6-themes/readme
+
+! CodeMirror 6 Themes
+
+A collection of colour themes for the CodeMirror 6 editor.
+
+!! Included Themes
+
+|!Theme |!Variants |
+|Ayu |Dark, Mirage, Light |
+|Catppuccin |Latte, Frappé, Macchiato, Mocha |
+|Dracula |Dark, Light |
+|Everforest |Dark, Dark Hard, Light |
+|Flexoki |Dark, Light |
+|GitHub |Light, Dark, Dimmed |
+|Greyscale |Default, Dark, Light |
+|Gruvbox |Dark, Dark Hard, Light, Light Hard |
+|Kanagawa |Wave, Dragon, Lotus |
+|Material |Default, Darker, Lighter, Ocean, Palenight |
+|Monokai |Classic, Pro, Light |
+|Nord |Dark, Light |
+|One |Dark, Light |
+|Palenight |Default, Italic |
+|Rosé Pine |Main, Moon, Dawn |
+|Solarized |Dark, Light |
+|Tokyo Night |Night, Storm, Day |
+|Zenburn |Default, High Contrast |

@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/click-navigate/enabled
+caption: Click to navigate
+description: Ctrl+Click (Cmd+Click on Mac) to navigate to linked tiddlers
+config-type: checkbox
+config-category: Navigation
+default: yes
+text: yes

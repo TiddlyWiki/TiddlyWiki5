@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/fold/enabled
+caption: Show fold gutter
+description: Allows folding code blocks, widgets, headings, and other block elements. Use Ctrl+Shift+[ to fold and Ctrl+Shift+] to unfold.
+config-type: checkbox
+config-category: Code Folding
+default: yes
+text: yes
