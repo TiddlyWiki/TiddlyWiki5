@@ -28,7 +28,7 @@ repository is https://github.com/jasmine/jasmine-npm.
 They're all locally checked into the `./files` directory.
 */
 
-exports.runTests = function(callback,specFilter) {
+exports.runTests = function(callback,specFilter,seed) {
 	// Set up a shared context object.
 	var context = {
 		console: console,
@@ -151,6 +151,9 @@ exports.runTests = function(callback,specFilter) {
 	if($tw.browser) {
 		jasmineOnloadHandler();
 	} else {
+		if(seed) {
+			nodeJasmineWrapper.seed(seed);
+		}
 		nodeJasmineWrapper.execute(null,specFilter);
 	}
 };
