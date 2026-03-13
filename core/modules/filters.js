@@ -21,8 +21,10 @@ Parses an operation (i.e. a run) within a filter string
 	p: start position within the string
 Returns the new start position, after the parsed operation
 */
-function parseFilterOperation(operators,filterString,p) {
+function parseFilterOperation(operators,filterString,p,operation) {
 	var nextBracketPos, operator;
+	// Record the position of the opening square bracket
+	operation.runStart = p;
 	// Skip the starting square bracket
 	if(filterString.charAt(p++) !== "[") {
 		throw "Missing [ in filter expression";
@@ -35,6 +37,7 @@ function parseFilterOperation(operators,filterString,p) {
 			operator.prefix = filterString.charAt(p++);
 		}
 		// Get the operator name
+		operator.start = p;
 		nextBracketPos = filterString.substring(p).search(/[\[\{<\/\(]/);
 		if(nextBracketPos === -1) {
 			throw "Missing [ in filter expression";
@@ -44,7 +47,9 @@ function parseFilterOperation(operators,filterString,p) {
 		operator.operator = filterString.substring(p,nextBracketPos);
 		// Any suffix?
 		var colon = operator.operator.indexOf(":");
+		var colon = operator.operator.indexOf(":");
 		if(colon > -1) {
+			operator.suffixStart = p + colon;
 			// The raw suffix for older filters
 			operator.suffix = operator.operator.substring(colon + 1);
 			operator.operator = operator.operator.substring(0,colon) || "field";
@@ -55,7 +60,7 @@ function parseFilterOperation(operators,filterString,p) {
 				$tw.utils.each(subsuffix.split(","),function(entry) {
 					entry = $tw.utils.trim(entry);
 					if(entry) {
-						operator.suffixes[operator.suffixes.length - 1].push(entry); 
+						operator.suffixes[operator.suffixes.length - 1].push(entry);
 					}
 				});
 			});
@@ -67,6 +72,7 @@ function parseFilterOperation(operators,filterString,p) {
 		operator.operands = [];
 		var parseOperand = function(bracketType) {
 			var operand = {};
+			operand.start = p - 1;
 			switch(bracketType) {
 				case "{": // Curly brackets
 					operand.indirect = true;
@@ -128,6 +134,8 @@ function parseFilterOperation(operators,filterString,p) {
 		// Push this operator
 		operators.push(operator);
 	} while(filterString.charAt(p) !== "]");
+	// Record the position of the closing square bracket
+	operation.runEnd = p;
 	// Skip the ending square bracket
 	if(filterString.charAt(p++) !== "]") {
 		throw "Missing ] in filter expression";
@@ -145,7 +153,6 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
-		// Groups:
 		// 1 - entire filter run prefix
 		// 2 - filter run prefix itself
 		// 3 - filter run prefix suffixes
@@ -172,6 +179,7 @@ exports.parseFilter = function(filterString) {
 			if(match && match.index === p) {
 				// If there is a filter run prefix
 				if(match[1]) {
+					operation.prefixStart = p;
 					operation.prefix = match[1];
 					p = p + operation.prefix.length;
 					// Name for named prefixes
@@ -194,18 +202,24 @@ exports.parseFilter = function(filterString) {
 				}
 				// Opening square bracket
 				if(match[4]) {
-					p = parseFilterOperation(operation.operators,filterString,p);
+					p = parseFilterOperation(operation.operators,filterString,p,operation);
 				} else {
 					p = match.index + match[0].length;
 				}
 			} else {
 				// No filter run prefix
-				p = parseFilterOperation(operation.operators,filterString,p);
+				p = parseFilterOperation(operation.operators,filterString,p,operation);
 			}
 			// Quoted strings and unquoted title
 			if(match[5] || match[6] || match[7]) { // Double quoted string, single quoted string or unquoted title
+				var titleText = match[5] || match[6] || match[7];
+				var contentStart = match.index + (match[1] ? match[1].length : 0);
+				var titleOperand = {
+					text: titleText,
+					start: contentStart
+				};
 				operation.operators.push(
-					{operator: "title", operands: [{text: match[5] || match[6] || match[7]}]}
+					{operator: "title", operands: [titleOperand]}
 				);
 			}
 			results.push(operation);
@@ -410,4 +424,324 @@ exports.compileFilter = function(filterString) {
 	this.filterCache[filterString] = fnMeasured;
 	this.filterCacheCount++;
 	return fnMeasured;
+};
+
+/*
+Parse a filter string and return an HTML representation
+*/
+exports.parseFilterToHtml = function(filterString) {
+	var filterParseTree;
+	try {
+		filterParseTree = this.parseFilter(filterString);
+	} catch(e) {
+		return "Error parsing filter: " + e;
+	}
+
+	var operationHtmlGenerators = [];
+	$tw.utils.each(filterParseTree, function(operation) {
+		// Create a function that generates the HTML for the operators in this run
+		var operationSubGenerator = function() {
+			var opHtml = [];
+			$tw.utils.each(operation.operators, function(operator) {
+				var safeOperator = $tw.utils.htmlEncode(operator.operator),
+					tooltip = "Run: '" + safeOperator + "'";
+				opHtml.push('<span class="tc-filter-operator" title="' + tooltip + '">');
+				opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">[</span>');
+				if(operator.prefix) {
+					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element" title="Negated">');
+					opHtml.push($tw.utils.htmlEncode(operator.prefix));
+					opHtml.push("</span>");
+				}
+				opHtml.push('<span class="tc-filter-operator-name" title="Operator Name: ' + safeOperator + '">');
+				opHtml.push(safeOperator);
+				opHtml.push("</span>");
+
+				if(operator.suffixes) {
+					for(var s=0; s<operator.suffixes.length; s++) {
+						var suffixGroup = operator.suffixes[s];
+						if(suffixGroup.length > 0) {
+							opHtml.push('<span class="tc-filter-suffix-group" title="Suffix Group">');
+							opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">:</span>');
+							for(var e=0; e<suffixGroup.length; e++) {
+								var entry = $tw.utils.htmlEncode(suffixGroup[e]);
+								opHtml.push('<span class="tc-filter-suffix-entry" title="Suffix Entry: ' + entry + '">');
+								opHtml.push(entry);
+								opHtml.push("</span>");
+								if(e < suffixGroup.length - 1) {
+									opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">,</span>');
+								}
+							}
+							opHtml.push("</span>");
+						}
+					}
+				}
+
+				for(var k=0; k<operator.operands.length; k++) {
+					var operand = operator.operands[k],
+						safeOperandText = $tw.utils.htmlEncode(operand.text),
+						startBracket, endBracket, title;
+					if(operand.indirect) {
+						startBracket = "{";
+						endBracket = "}";
+						title = "Operand indirect: ";
+					} else if(operand.variable) {
+						startBracket = "&lt;";
+						endBracket = "&gt;";
+						title = "Operand variable: ";
+					} else {
+						startBracket = "[";
+						endBracket = "]";
+						title = "Operand literal: ";
+					}
+					var fullTitle = $tw.utils.htmlEncode(title + operand.text);
+					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element" title="' + fullTitle + '">' + startBracket + "</span>");
+					var operandHtml = [];
+					if(operand.indirect) {
+						operandHtml.push('<span class="tc-filter-operand tc-filter-operand-indirect" title="' + fullTitle + '">');
+						operandHtml.push(safeOperandText);
+						operandHtml.push("</span>");
+					} else if(operand.variable) {
+						operandHtml.push('<span class="tc-filter-operand tc-filter-operand-variable" title="' + fullTitle + '">');
+						operandHtml.push(safeOperandText);
+						operandHtml.push("</span>");
+					} else {
+						operandHtml.push('<span class="tc-filter-operand" title="' + fullTitle + '">');
+						operandHtml.push(safeOperandText);
+						operandHtml.push("</span>");
+					}
+					opHtml.push(operandHtml.join(""));
+					opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element" title="' + fullTitle + '">' + endBracket + "</span>");
+				}
+				opHtml.push('<span class="tc-filter-punctuation tc-filter-small-element">]</span>');
+				opHtml.push("</span>");
+			});
+			return opHtml.join("");
+		};
+
+		// Create a function that wraps the operator HTML with the prefix and run container
+		var runGenerator = (function() {
+			var innerHtml = operationSubGenerator();
+			var runHtml = ['<span class="tc-filter-run" title="A filter run, which is a sequence of operators applied to a set of titles.">'];
+			
+			if(operation.prefix) {
+				var tooltip = {
+					"+": "Prefix: 'and' - Intersects the results of this run with the main results.",
+					"-": "Prefix: 'except' - Removes the results of this run from the main results.",
+					"~": "Prefix: 'else' - Unions the results of this run with the main results only if the main results are empty.",
+					"=": "Prefix: 'all' - Unions the results of this run with the main results without deduplication.",
+					"=>": "Prefix: 'let' - Assigns the results of this run to a variable."
+				}[operation.prefix] || "Prefix: " + operation.prefix;
+				var modifier = {
+					"+": "and",
+					"-": "except",
+					"~": "else",
+					"=": "all",
+					"=>": "let"
+				}[operation.prefix] || operation.namedPrefix || "";
+				runHtml.push('<span class="tc-filter-prefix tc-filter-small-element ' + (modifier ? "tc-filter-prefix-" + modifier : "") + '" title="' + tooltip + '">');
+				runHtml.push(operation.prefix);
+				runHtml.push("</span>");
+			}
+			
+			runHtml.push(innerHtml);
+			runHtml.push("</span>");
+			return function() {
+				return runHtml.join("");
+			};
+		})();
+		operationHtmlGenerators.push(runGenerator);
+	});
+
+	var html = ['<div class="tc-filter">'];
+	$tw.utils.each(operationHtmlGenerators, function(generator) {
+		html.push(generator());
+	});
+	html.push("</div>");
+	return html.join("");
+};
+
+/*
+Parse a filter string and return a wikitext debug table showing each syntactic
+element at its original character position with a description.
+*/
+exports.parseFilterToDebugTable = function(filterString,options) {
+	filterString = filterString || "";
+	options = options || {};
+	var totalLen = filterString.length;
+	if(totalLen === 0) {
+		return "";
+	}
+	var parseTree;
+	try {
+		parseTree = this.parseFilter(filterString);
+	} catch(e) {
+		return "Error parsing filter: " + e;
+	}
+	// Helper: create a string of totalLen with text placed at a given position, rest spaces
+	function placeText(start,text) {
+		var result = [];
+		for(var i = 0; i < totalLen; i++) {
+			if(i >= start && i < start + text.length) {
+				result.push(text.charAt(i - start));
+			} else {
+				result.push(" ");
+			}
+		}
+		return result.join("");
+	}
+	// Helper: place characters at two specific positions
+	function placePair(pos1,char1,pos2,char2) {
+		var chars = [];
+		for(var i = 0; i < totalLen; i++) {
+			chars.push(" ");
+		}
+		chars[pos1] = char1;
+		chars[pos2] = char2;
+		return chars.join("");
+	}
+	// Build rows: [{line, description}]
+	var rows = [];
+	rows.push({line: filterString, description: ""});
+	rows.push({line: placeText(0,""), description: ""});
+	// Walk the parse tree using positional info from the AST
+	for(var i = 0; i < parseTree.length; i++) {
+		var operation = parseTree[i];
+		// Run prefix
+		if(operation.prefix) {
+			var prefixDescriptions = {
+				"+": "Add: add titles that are also in this run's results",
+				"-": "Exclusion: remove this run's results from the output",
+				"~": "Else: use this run's results only if the output so far is empty",
+				"=": "All: append this run's results without deduplication",
+				"=>": "Let: assign this run's results to a variable"
+			};
+			var prefixDesc = prefixDescriptions[operation.prefix];
+			if(!prefixDesc && operation.namedPrefix) {
+				prefixDesc = "Named prefix: [[" + operation.namedPrefix + "|" + operation.namedPrefix.charAt(0).toUpperCase() + operation.namedPrefix.slice(1) + " Filter Run Prefix]]";
+			}
+			rows.push({
+				line: placeText(operation.prefixStart,operation.prefix),
+				description: prefixDesc || ("Prefix: " + operation.prefix)
+			});
+		}
+		// Bracketed run
+		if(operation.runStart !== undefined) {
+			var operatorRows = [];
+			for(var j = 0; j < operation.operators.length; j++) {
+				var op = operation.operators[j];
+				// Derive nameEnd: suffixStart if suffixes exist, else first operand's start
+				var nameEnd = op.suffixStart !== undefined ? op.suffixStart : op.operands[0].start;
+				// Negation prefix
+				if(op.prefix === "!") {
+					operatorRows.push({
+						line: placeText(op.start - 1,"!"),
+						description: "Negation: the result of the [[" + op.operator + " Operator]] will be inverted"
+					});
+				}
+				// Operator name
+				if(op.start < nameEnd) {
+					operatorRows.push({
+						line: placeText(op.start,filterString.substring(op.start,nameEnd)),
+						description: "[[" + op.operator + " Operator]]"
+					});
+				}
+				// Suffixes
+				if(op.suffixStart !== undefined) {
+					var suffixEnd = op.operands[0].start;
+					operatorRows.push({
+						line: placeText(op.suffixStart,filterString.substring(op.suffixStart,suffixEnd)),
+						description: "Suffix for the [[" + op.operator + " Operator]]"
+					});
+				}
+				// Operands
+				for(var k = 0; k < op.operands.length; k++) {
+					var operand = op.operands[k];
+					var bracketEnd = operand.start + 1 + operand.text.length;
+					// Bracket type description
+					var bracketDesc;
+					if(operand.indirect) {
+						bracketDesc = "Curly braces means that the operand value will be obtained from a tiddler";
+					} else if(operand.variable) {
+						bracketDesc = "Angle brackets means that the operand value will be obtained from a variable";
+					} else if(operand.multiValuedVariable) {
+						bracketDesc = "Round brackets means that the operand value will be obtained from a multi-valued variable";
+					} else {
+						bracketDesc = "Square brackets means that the operand value is given literally";
+					}
+					operatorRows.push({
+						line: placePair(operand.start,filterString.charAt(operand.start),bracketEnd,filterString.charAt(bracketEnd)),
+						description: bracketDesc
+					});
+					// Operand text
+					if(operand.text.length > 0) {
+						var operandDesc;
+						if(operand.indirect) {
+							operandDesc = "Title of the tiddler containing the parameter value for the [[" + op.operator + " Operator]]";
+						} else if(operand.variable) {
+							operandDesc = "Name of the variable containing the parameter value for the [[" + op.operator + " Operator]]";
+						} else {
+							operandDesc = "\"" + operand.text + "\" parameter for the [[" + op.operator + " Operator]]";
+						}
+						operatorRows.push({
+							line: placeText(operand.start + 1,operand.text),
+							description: operandDesc
+						});
+					}
+				}
+			}
+			// Run brackets row first, then operator rows
+			rows.push({
+				line: placePair(operation.runStart,"[",operation.runEnd,"]"),
+				description: "A run of filter operators that are piped together"
+			});
+			for(var r = 0; r < operatorRows.length; r++) {
+				rows.push(operatorRows[r]);
+			}
+		} else {
+			// Quoted or unquoted title (synthetic title operator from parseFilter)
+			var titleOp = operation.operators[0];
+			if(titleOp && titleOp.operands.length > 0) {
+				var titleOperand = titleOp.operands[0];
+				if(titleOperand.start === undefined) {
+					continue;
+				}
+				var startChar = filterString.charAt(titleOperand.start);
+				if(startChar === "\"" || startChar === "'") {
+					// Quoted title
+					var closingQuotePos = titleOperand.start + 1 + titleOperand.text.length;
+					rows.push({
+						line: placePair(titleOperand.start,startChar,closingQuotePos,startChar),
+						description: (startChar === "\"" ? "Double" : "Single") + "-quoted title"
+					});
+					if(titleOperand.text.length > 0) {
+						rows.push({
+							line: placeText(titleOperand.start + 1,titleOperand.text),
+							description: "Title: \"" + titleOperand.text + "\""
+						});
+					}
+				} else {
+					// Unquoted title
+					rows.push({
+						line: placeText(titleOperand.start,titleOperand.text),
+						description: "Unquoted title: \"" + titleOperand.text + "\""
+					});
+				}
+			}
+		}
+	}
+	// Build the wikitext table
+	var table = [];
+	if(options.narrowTable) {
+		for(var t = 0; t < rows.length; t++) {
+			if(rows[t].description) {
+				table.push("|" + rows[t].description + " |");
+			}
+			table.push("|`" + rows[t].line + "` |");
+		}
+	} else {
+		for(var t = 0; t < rows.length; t++) {
+			table.push("|`" + rows[t].line + "` |" + rows[t].description + " |");
+		}
+	}
+	return table.join("\n");
 };
