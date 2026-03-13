@@ -11,12 +11,18 @@ Nazwy i wartości dodatkowych zmiennych mogą być też podane.
 --render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
 ```
 
-* ''tiddler-filter'': Filtr określający tiddlery, które mają być wyrenderowane
-* ''filename-filter'': Opcjonalny filtr zmieniający nazwy plików. Domyślnie to `[is[tiddler]addsuffix[.html]]`, który używa nazwy tiddleru jako pliku.
-* ''render-type'': Opcjonalny typ renderowania: `text/html` (domyślny) zwraca kod HTML a `text/plain` samą treść z pominięciem tagów HTML i innych nietekstowych treści
-* ''template'': Opcjonalny szablon
-* ''name'': Nazwy zmiennych
-* ''value'': Wartości zmiennych
+```
+  tiddler-filter    Filtr określający tiddlery, które mają być wyrenderowane
+  filename-filter   Opcjonalny filtr zmieniający nazwy plików. Domyślnie to
+                    [is[tiddler]addsuffix[.html]], który używa nazwy tiddleru
+                    jako pliku
+  render-type       Opcjonalny typ renderowania: text/html (domyślny) zwraca
+                    kod HTML a text/plain samą treść z pominięciem tagów HTML
+                    i innych nietekstowych treści
+  template          Opcjonalny szablon
+  name              Nazwy zmiennych
+  value             Wartości zmiennych
+```
 
 Domyślnie pliki są zapisywane w folderze `./output`, relatywnych do folderu z wiki. Komenda `--output` może być użyta by zmienić ścieżkę.
 
@@ -31,5 +37,12 @@ Notatki:
 
 Przykłady:
 
-* `--render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'` -- renderuje wszystkie niesystemowe tiddlery jako pliki w podfolderze "tiddlers", kodując znaki URI w nazwie i dodając rozszerzenie .html
-* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- renderuje wszystkie tiddlery z tagiem "HelloThere" do pliku JSON o nazwie "tiddlers.json"
+```
+  Renderuje wszystkie niesystemowe tiddlery jako pliki w podfolderze "tiddlers", kodując znaki URI w nazwie i dodając rozszerzenie .html:
+
+    --render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'
+
+  Renderuje wszystkie tiddlery z tagiem "HelloThere" do pliku JSON o nazwie "tiddlers.json":
+
+    --render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'
+```

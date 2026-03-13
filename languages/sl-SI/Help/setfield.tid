@@ -11,7 +11,12 @@ Nastavi navedeno polje skupine tiddlerjev na rezultat "wikizacije" predloge tidd
 
 Parametri so:
 
-* ''filter'' - filter, ki izbere tiddlerje za spremembo
-* ''fieldname'' - polje za spreminjanje (privzeto je "text")
-* ''templatetitle'' - tiddler predloga, ki se vnese v navedeno polje. Če je parameter prazen ali manjka, se podano polje izbriše
-* ''rendertype'' - tip besedila, ki ga želite prikazati (privzeto je "text/plain"; besedilo "html" se lahko uporablja za vključitev oznak HTML)
+```
+  filter          filter, ki izbere tiddlerje za spremembo
+  fieldname       polje za spreminjanje (privzeto je "text")
+  templatetitle   tiddler predloga, ki se vnese v navedeno polje; če je
+                  parameter prazen ali manjka, se podano polje izbriše
+  rendertype      tip besedila, ki ga želite prikazati (privzeto je
+                  "text/plain"; besedilo "html" se lahko uporablja za
+                  vključitev oznak HTML)
+```

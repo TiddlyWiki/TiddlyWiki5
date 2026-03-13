@@ -11,12 +11,16 @@ A name and value for an additional variable may optionally also be specified.
 --render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
 ```
 
-* ''tiddler-filter'': A filter identifying the tiddler(s) to be rendered
-* ''filename-filter'': Optional filter transforming tiddler titles into pathnames. If omitted, defaults to `[is[tiddler]addsuffix[.html]]`, which uses the unchanged tiddler title as the filename
-* ''render-type'': Optional render type: `text/html` (the default) returns the full HTML text and `text/plain` just returns the text content (ie it ignores HTML tags and other unprintable material)
-* ''template'': Optional template through which each tiddler is rendered
-* ''name'': Name of optional variables
-* ''value'': Value of optional variables
+```
+  tiddler-filter    filter identifying the tiddler(s) to be rendered
+  filename-filter   filter transforming titles into pathnames
+                    (default: [is[tiddler]addsuffix[.html]])
+  render-type       text/html (default) for full HTML, or text/plain for
+                    text content only
+  template          template tiddler through which each tiddler is rendered
+  name              name of optional variables
+  value             value of optional variables
+```
 
 By default, the filename is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
 
@@ -31,5 +35,13 @@ Notes:
 
 Examples:
 
-* `--render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'` -- renders all non-system tiddlers as files in the subdirectory "tiddlers" with URL-encoded titles and the extension HTML
-* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- renders the tiddlers tagged "HelloThere" to a JSON file named "tiddlers.json"
+```
+  Render all non-system tiddlers as files in the subdirectory "tiddlers" with URL-encoded titles and the extension HTML:
+
+    --render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'
+
+  Render the tiddlers tagged "HelloThere" to a JSON file named "tiddlers.json"
+
+    --render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'
+```
+
