@@ -19,3 +19,5 @@ A <<.def "filter expression">> is the outermost level of the [[filter syntax|Fil
 <<.tip """If the diagram has a single start and end line, as shown above, it means there is more info in the linked level above. The breadcrumbs can be used to navigate""">>
 
 <<.tip """If the diagram has no start and no end, as used in lower levels, it means that higher level syntax elements have been removed, to increase readability and simplicity. The breadcrumbs can be used to navigate""">>
+
+<<.note """Filter expressions have a maximum recursion depth of 300. Filters that recursively invoke themselves (e.g. via the <<.olink subfilter>> or <<.olink filter>> operators) beyond this limit will return the error message `/**-- Excessive filter recursion --**/`. This protects against infinite loops.""">>
