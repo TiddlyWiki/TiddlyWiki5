@@ -2987,6 +2987,24 @@ input.tc-palette-manager-colour-input {
 	font-weight: normal;
 }
 
+.tc-toc .tc-toc-item-focused > a,
+.tc-toc .tc-toc-item-focused > a:hover,
+.tc-toc .tc-toc-item-focused > button,
+.tc-toc .tc-toc-item-focused > button:hover,
+.tc-toc .tc-toc-item-focused > span,
+.tc-toc .tc-toc-item-focused > span:hover {
+	background-color: <<colour primary>>;
+	color: <<colour background>>;
+	text-shadow: none;
+	border-radius: 2px;
+	padding: 0 2px;
+}
+
+.tc-toc .tc-toc-item-focused > a svg,
+.tc-toc .tc-toc-item-focused > button svg {
+	fill: <<colour background>>;
+}
+
 .tc-tabbed-table-of-contents {
 	display: -webkit-flex;
 	display: flex;
