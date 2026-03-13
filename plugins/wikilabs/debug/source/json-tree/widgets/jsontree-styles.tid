@@ -1,0 +1,110 @@
+title: $:/plugins/wikilabs/debug/jsontree-styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-jsontree {
+	display: block;
+	font-family: "Source Code Pro", monospace;
+	font-size: 12px;
+	line-height: 1.3;
+	overflow-y: auto;
+	border: 1px solid <<colour tiddler-border>>;
+	padding: 10px;
+	resize: vertical;
+}
+
+.tc-jsontree > details:first-child {
+	border-left: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.tc-jsontree details {
+	border-left: 1px solid <<colour muted-foreground>>;
+	padding-left: .5em;
+	margin-left: .5em;
+}
+
+.tc-jsontree summary {
+	cursor: pointer;
+	outline: none;
+}
+
+.tc-jsontree summary:hover {
+	color: <<colour primary>>;
+}
+
+.tc-jsontree summary::marker {
+	color: <<colour muted-foreground>>;
+}
+
+.tc-jsontree details:not([open]) > summary::marker {
+	color: <<colour dirty-indicator>>;
+}
+
+.tc-jsontree .tc-jsontree-key {
+	color: <<colour foreground>>;
+}
+
+.tc-jsontree .tc-jsontree-string {
+	color: #a31515;
+}
+
+.tc-jsontree .tc-jsontree-number {
+	color: #098658;
+}
+
+.tc-jsontree .tc-jsontree-boolean {
+	color: #0000ff;
+}
+
+.tc-jsontree .tc-jsontree-null {
+	color: #800080;
+}
+
+.tc-jsontree .tc-jsontree-value {
+	margin-left: 1em;
+}
+
+.tc-jsontree .tc-jsontree-select-range {
+	margin-left: 0.5em;
+	padding: 0 2px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.tc-jsontree .tc-jsontree-select-range svg {
+	width: 10px;
+	height: 10px;
+	fill: <<colour muted-foreground>>;
+}
+
+.tc-jsontree .tc-jsontree-select-range:hover svg {
+	fill: <<colour primary>>;
+}
+
+.tc-jsontree .tc-jsontree-select-range-active svg {
+	fill: <<colour dirty-indicator>>;
+}
+
+.tc-jsontree summary.tc-jsontree-selected {
+	background-color: <<colour message-background>>;
+}
+
+.tc-jsontree-breadcrumb {
+	padding: 4px 0;
+	margin-bottom: 6px;
+	border-bottom: 1px solid <<colour tiddler-border>>;
+	font-size: 11px;
+}
+
+.tc-jsontree-breadcrumb-item {
+	cursor: pointer;
+	color: <<colour primary>>;
+	text-decoration: underline;
+}
+
+.tc-jsontree-breadcrumb-item:hover {
+	color: <<colour foreground>>;
+}
