@@ -1,0 +1,8 @@
+title: Serialize/Anchor/Heading
+tags: $:/tags/wikitext-serialize-test-spec
+
+! Heading Level 1 ^h1Id
+
+!! Heading Level 2 ^h2Id
+
+Normal paragraph after heading.

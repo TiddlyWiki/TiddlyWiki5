@@ -1,0 +1,13 @@
+title: Serialize/Anchor/Codeblock
+tags: $:/tags/wikitext-serialize-test-spec
+
+```css ^codeId
+.main {
+  display: none;
+}
+```
+
+``` ^plainId
+plain code block
+```
+

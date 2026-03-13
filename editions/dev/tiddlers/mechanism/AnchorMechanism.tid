@@ -1,0 +1,57 @@
+created: 20260225143000000
+modified: 20260225143000000
+tags:
+title: AnchorMechanism
+
+This note documents the internal design of block anchors
+
+!! goals
+
+* Keep anchor support consistent across paragraph/heading/list/code/quote/typed blocks
+* Avoid per-rule anchor hacks in unrelated block rules
+* Preserve existing `start`/`end` source coordinates (no source rewriting)
+* Keep serialization round-trip stable
+
+!! architecture
+
+1. Inline rule `$:/core/modules/parsers/wikiparser/rules/anchor.js` matches trailing ` ^anchorId` and emits an anchor node with `name: "true"`.
+2. `parseBlock()` calls `$tw.utils.wrapAnchorsInTree()` from `$:/core/modules/utils/parsetree.js` once per block parse result.
+3. `wrapAnchorsInTree()` locates these name anchors and wraps the owning block in a container anchor (`target: "true"`).
+4. Widget layer (`$:/core/modules/widgets/anchor.js`) renders only target anchors; name anchors are parse-time markers and render nothing.
+
+This gives one canonical runtime shape: a target anchor container around the addressed block.
+
+!! key trade-offs
+
+Chosen:
+
+* Two-phase parse (inline marker + tree wrapping)
+* Minimal coupling to existing block rules
+* Explicit name/target distinction in AST and widget behavior
+
+Rejected:
+
+* Source pre-processing (strip `^id` before parse): rejected because it shifts character offsets and breaks source-coordinate consumers
+* Dedicated per-block anchor parsing logic in each rule: rejected due to maintenance cost and behavior drift
+* Post-parse synthetic text removal without marker nodes: rejected because serializer round-trip becomes fragile
+
+!! `TiddlerTitle^^anchorId` in rendered DOM
+
+Qualified DOM ids avoid collisions when the same `anchorId` appears in multiple transcluded tiddlers on one page.
+
+This DOM convention is intentionally separate from wikitext reference syntax.
+
+!! constraints and invariants
+
+* Only `wrapAnchorsInTree` read child AST node, not modifying children AST node, not child widget accessing parent widget, so don't need to make assumptions about the parent node.
+* Name anchors do not render DOM, target anchors are the only runtime anchor targets
+* Anchor ids do not include `^`， so ranged transclusion syntax is unambiguous
+* No rewrite of parser source text, so start/end coordinates remain stable
+
+!! key files
+
+- `$:/core/modules/parsers/wikiparser/rules/anchor.js`
+- `$:/core/modules/utils/parsetree.js` (`wrapAnchorsInTree`)
+- `$:/core/modules/widgets/anchor.js`
+- `$:/core/modules/utils/utils.js` (`parseTextReference`)
+- `$:/core/modules/widgets/transclude.js`

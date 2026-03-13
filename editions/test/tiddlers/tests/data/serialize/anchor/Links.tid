@@ -1,0 +1,6 @@
+title: Serialize/Anchor/Links
+tags: $:/tags/wikitext-serialize-test-spec
+
+Link to paragraph: [[Serialize/Anchor/Paragraph^paraId]].
+
+Link with alias: [[Click here|Serialize/Anchor/Heading^h1Id]].

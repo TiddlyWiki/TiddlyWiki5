@@ -25,9 +25,10 @@
   ],
   "devDependencies": {
     "@eslint/js": "9.36.0",
+    "@playwright/test": "^1.58.2",
+    "@stylistic/eslint-plugin": "5.4.0",
     "eslint": "9.36.0",
     "eslint-plugin-es-x": "9.1.0",
-    "@stylistic/eslint-plugin": "5.4.0",
     "globals": "16.4.0"
   },
   "license": "BSD",

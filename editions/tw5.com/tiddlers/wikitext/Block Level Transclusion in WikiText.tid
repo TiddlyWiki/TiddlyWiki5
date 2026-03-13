@@ -1,0 +1,40 @@
+caption: Block Level Transclusion
+created: 20260225120000000
+modified: 20260225120000000
+tags: WikiText
+title: Block Level Transclusion in WikiText
+type: text/vnd.tiddlywiki
+
+! Single Block Transclusion
+
+You can transclude a single anchored block from another tiddler using `{{Title^anchor}}`.
+
+For example, the [[Block Level Links in WikiText^linkSection]] tiddler has a section marked `^linkSection`.
+
+<<wikitext-example-without-html src:"{{Block Level Links in WikiText^linkSection}}">>
+
+This renders only the block with anchor `linkSection`, not the entire tiddler.
+
+! Range Transclusion
+
+You can transclude a range of consecutive blocks using `{{Title^startAnchor^endAnchor}}`.
+
+Anchor ids cannot contain `^`, so the second `^` unambiguously introduces the end anchor.
+
+The [[Block Level Links in WikiText^backlinksSection]] tiddler also has `^backlinksSection`.
+
+<<wikitext-example-without-html src:"{{Block Level Links in WikiText^linkSection^backlinksSection}}">>
+
+This renders all top-level blocks from `^linkSection` to `^backlinksSection`, inclusive.
+
+! Transclusion of Different Block Types
+
+Anchor transclusion works with all block types that support anchors — paragraphs, headings, code blocks (`` ```lang ^id ``), quote blocks (`<<< ^id`), and list items (`* item ^id`).
+
+If the referenced anchor does not exist in the target tiddler, the full tiddler content is rendered as a fallback.
+
+! Important Notes
+
+* Do ''not'' transclude a tiddler's own anchored blocks from within that same tiddler (e.g., `{{MyTiddler^block}}` inside `MyTiddler`) — this causes a recursive transclusion error.
+* Note: the qualified DOM `id` attribute uses `TiddlerTitle^^anchorId` (double caret) as a namespace separator — this is an HTML attribute value, not wikitext syntax, and does not conflict with the single `^` used in wikitext references.
+* See [[Block Level Links in WikiText]] for how to add anchors to blocks.

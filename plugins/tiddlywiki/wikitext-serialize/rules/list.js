@@ -38,6 +38,12 @@ exports.serialize = function (tree,serialize) {
 		var result = [];
 		if(node.type === "element" && isListNode(node)) {
 			node.children.forEach(function (child) {
+				// Unwrap target anchor containers around list items — the name
+				// anchor inside the <li> children handles ^id serialization
+				if(child.type === "anchor" && child.attributes && child.attributes.target &&
+						child.children && child.children.length === 1) {
+					child = child.children[0];
+				}
 				if(itemTags.includes(child.tag)) {
 					var currentMarker = findMarker(node.tag, child.tag);
 					// Handle class attributes
@@ -49,7 +55,8 @@ exports.serialize = function (tree,serialize) {
 					var content = [];
 					$tw.utils.each(child.children,function (subNode) {
 						if(isListNode(subNode)) {
-							// Recursive call for nested lists
+							// Recursive call for nested lists.
+							// Flush content before entering nested list.
 							if(content.length > 0) {
 								result.push(markerPrefix + currentMarker + classAttr + " " + content.join("").trim());
 								content = [];

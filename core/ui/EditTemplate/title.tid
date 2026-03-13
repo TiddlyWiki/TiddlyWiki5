@@ -8,7 +8,7 @@ tags: $:/tags/EditTemplate
 	cancelPopups="yes"
 />
 
-<$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
+<$vars pattern="""[\^\|\[\]{}]""" bad-chars="""`| ^ [ ] { }`""">
 
 <$list filter="[all[current]regexp:draft.title<pattern>]" variable="listItem">
 

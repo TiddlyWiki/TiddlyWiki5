@@ -724,6 +724,28 @@ Returns an object with the following fields, all optional:
 * index: JSON property index
 */
 exports.parseTextReference = function(textRef) {
+	// Check for ^anchor suffix before processing !! and ## separators
+	// ^anchor is only valid for wikitext text content and is mutually exclusive with !!field and ##index
+	// Supports range syntax: Title^start^end (both anchors required for range; ^ is safe separator
+	// since anchor ids cannot contain ^)
+	var anchor, anchorEnd, caretPos = textRef.indexOf("^");
+	if(caretPos !== -1) {
+		// Only treat as anchor if there's no !! or ## before the ^
+		var beforeCaret = textRef.substring(0,caretPos);
+		if(beforeCaret.indexOf("!!") === -1 && beforeCaret.indexOf("##") === -1) {
+			var anchorPart = textRef.substring(caretPos + 1);
+			// Check for range syntax: anchorStart^anchorEnd
+			// Anchor ids cannot contain ^ so this split is unambiguous
+			var rangeMatch = /^([^\^]+)\^([^\^]+)$/.exec(anchorPart);
+			if(rangeMatch) {
+				anchor = rangeMatch[1];
+				anchorEnd = rangeMatch[2];
+			} else {
+				anchor = anchorPart;
+			}
+			textRef = beforeCaret;
+		}
+	}
 	// Separate out the title, field name and/or JSON indices
 	var reTextRef = /(?:(.*?)!!(.+))|(?:(.*?)##(.+))|(.*)/mg,
 		match = reTextRef.exec(textRef),
@@ -748,6 +770,12 @@ exports.parseTextReference = function(textRef) {
 	} else {
 		// If we couldn't parse it
 		result.title = textRef;
+	}
+	if(anchor) {
+		result.anchor = anchor;
+	}
+	if(anchorEnd) {
+		result.anchorEnd = anchorEnd;
 	}
 	return result;
 };

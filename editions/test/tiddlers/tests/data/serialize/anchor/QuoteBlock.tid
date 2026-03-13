@@ -1,0 +1,7 @@
+title: Serialize/Anchor/QuoteBlock
+tags: $:/tags/wikitext-serialize-test-spec
+
+<<< ^quoteId
+A simple quote with anchor.
+<<<
+

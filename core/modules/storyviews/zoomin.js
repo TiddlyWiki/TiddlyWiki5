@@ -48,6 +48,13 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	}
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
+	// If anchor is provided, find the marked element via DOM query
+	if(targetElement && historyInfo.anchor) {
+		var anchorElement = targetElement.parentNode.querySelector("[data-tw-anchor=\"" + historyInfo.anchor + "\"]");
+		if(anchorElement) {
+			targetElement = anchorElement;
+		}
+	}
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement) {
 		return;
@@ -119,7 +126,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		},duration);
 	}
 	// Scroll the target into view
-//	$tw.pageScroller.scrollIntoView(targetElement);
+	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement, highlight: true});
 };
 
 /*
