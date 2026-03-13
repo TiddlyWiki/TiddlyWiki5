@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/markdown/md-to-tid/language/en-GB/
+
+Buttons/ConvertMarkdown/Caption: Convert to WikiText
+Buttons/ConvertMarkdown/Hint: Convert this markdown tiddler to WikiText
+Import/ConvertMarkdown: Convert Markdown files to WikiText on import
+Notifications/ConvertSuccess: <<targetTiddler>> Markdown successfully converted to WikiText
+Notifications/ConvertFailure: <<targetTiddler>> Failed to convert Markdown to WikiText

@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/markdown/md-to-tid/ui/EditorToolbar/convert-markdown
+tags: $:/tags/EditorToolbar
+icon: $:/plugins/tiddlywiki/markdown/md-to-tid/images/convert-markdown
+caption: {{$:/plugins/tiddlywiki/markdown/md-to-tid/language/en-GB/Buttons/ConvertMarkdown/Caption}}
+description: {{$:/plugins/tiddlywiki/markdown/md-to-tid/language/en-GB/Buttons/ConvertMarkdown/Hint}}
+condition: [<targetTiddler>type[text/vnd.tiddlywiki]] [<targetTiddler>!has[type]]
+shortcuts: ((convert-markdown))
+list-after: $:/core/ui/EditorToolbar/excise
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="convert-markdown"
+/>

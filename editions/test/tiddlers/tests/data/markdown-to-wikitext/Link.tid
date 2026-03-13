@@ -1,0 +1,21 @@
+title: MarkdownToWikitext/Link
+tags: $:/tags/markdown-to-wikitext-test-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: Markdown
+
+[Normal link](http://example.com)
+[Link with title](http://example.com 'Link title')
+
+<http://example.com>
+<mailto:example@example.com>
+
++
+title: ExpectedWikitext
+
+[[Normal link|http://example.com]]
+[[Link with title|http://example.com]]
+
+http://example.com
+mailto:example@example.com
+

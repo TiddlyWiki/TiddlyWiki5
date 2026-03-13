@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/markdown/md-to-tid/images/convert-markdown
+tags: $:/tags/Image
+
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> xmlns="http://www.w3.org/2000/svg" class="tc-image-convert-markdown tc-image-button" viewBox="0 0 24 24" fill="none">
+  <g transform="translate(0, 0) scale(0.55)" fill="currentColor">
+    <path d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm4 12.5v-4l2 2 2-2v4h2v-7h-2l-2 2-2-2H5v7h2zm11-3v-4h-2v4h-2l3 3 3-3h-2z"/>
+  </g>
+  <g transform="translate(10.8, 10.8) scale(0.55)" fill="currentColor">
+    <path d="M3 3h19a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z m2 5.5 v2 h2 v5 h2 v-5 h2 v-2 h-6 z m9 0 h-2 v7 h2 l2 -2 l2 2 h2 v-7 h-2 v4 l-2 -2 l-2 2 v-4 z"/>
+  </g>
+  <path d="M 12.2 5.8 Q 16.8 5.8 16.8 12.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 16.8 12.2 L 19.8 9.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+</svg>
