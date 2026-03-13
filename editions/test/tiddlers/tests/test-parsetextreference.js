@@ -12,7 +12,7 @@ Tests for source attribute in parser returned from wiki.parseTextReference
 describe("Wiki.parseTextReference tests", function() {
 
 	// Create a wiki
-	var wiki = new $tw.Wiki();
+	var wiki = $tw.test.wiki();
 	wiki.addTiddler({
 		title: "TiddlerOne",
 		text: "The quick brown fox in $:/TiddlerTwo",
