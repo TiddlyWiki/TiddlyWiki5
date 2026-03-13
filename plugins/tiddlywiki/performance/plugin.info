@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/performance",
+	"name": "Performance",
+	"description": "Record and replay wiki store modifications for performance testing",
+	"list": "readme ui",
+	"stability": "STABILITY_0_EXPLORATORY"
+}
