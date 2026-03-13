@@ -14,7 +14,7 @@ Tests the checkbox widget thoroughly.
     
 describe("Checkbox widget", function() {
     
-	var widget = require("$:/core/modules/widgets/widget.js");
+	const widget = require("$:/core/modules/widgets/widget.js");
     
 	function createWidgetNode(parseTreeNode,wiki) {
 		return new widget.widget(parseTreeNode,{
@@ -24,15 +24,35 @@ describe("Checkbox widget", function() {
 	}
     
 	function parseText(text,wiki,options) {
-		var parser = wiki.parseText("text/vnd.tiddlywiki",text,options);
+		const parser = wiki.parseText("text/vnd.tiddlywiki",text,options);
 		return parser ? {type: "widget", children: parser.tree} : undefined;
 	}
     
 	function renderWidgetNode(widgetNode) {
 		$tw.fakeDocument.setSequenceNumber(0);
-		var wrapper = $tw.fakeDocument.createElement("div");
+		const wrapper = $tw.fakeDocument.createElement("div");
 		widgetNode.render(wrapper,null);
 		return wrapper;
+	}
+
+	// Recursively collect all checkbox widget nodes in a subtree.
+	// Used by the wikitext inline checkbox tests.
+	function findCheckboxes(widgetNode) {
+		let results = [];
+		if(widgetNode.parseTreeNode.type === "checkbox") {
+			results.push(widgetNode);
+		}
+		for(const child of widgetNode.children) {
+			results = results.concat(findCheckboxes(child));
+		}
+		return results;
+	}
+
+	// Simulate a user clicking a wikitext inline checkbox widget.
+	// Sets the DOM property and fires the change event, mirroring what the browser does.
+	function clickCheckbox(checkbox, checked) {
+		checkbox.inputDomNode.checked = checked;
+		checkbox.handleChangeEvent({});
 	}
 
 	// Find a particular type of node from inside the widget tree
@@ -42,10 +62,8 @@ describe("Checkbox widget", function() {
 		if(currentNode.parseTreeNode && currentNode.parseTreeNode.type === targetType) {
 			return currentNode;
 		} else if(currentNode.children && currentNode.children.length) {
-			var child, result, i;
-			for(i = 0; i < currentNode.children.length; i++) {
-				child = currentNode.children[i];
-				result = findNodeOfType(targetType, child);
+			for(const child of currentNode.children) {
+				const result = findNodeOfType(targetType, child);
 				if(result) return result;
 			}
 		}
@@ -56,7 +74,7 @@ describe("Checkbox widget", function() {
          * Test data for checkbox widget tests
          */
     
-	var fieldModeTests = [
+	const fieldModeTests = [
 		{
 			testName: "field mode checked",
 			tiddlers: [{title: "TiddlerOne", text: "Jolly Old World", expand: "yes"}],
@@ -102,21 +120,21 @@ describe("Checkbox widget", function() {
 		},
 	];
 
-	var indexModeTests = fieldModeTests.map((data) => {
-		var newData = Object.assign({}, data);
-		var newName = data.testName.replace("field mode", "index mode");
-		var tiddlerOneAlreadyExists = false;
-		var newTiddlers = data.tiddlers.map((tiddler) => {
+	const indexModeTests = fieldModeTests.map((data) => {
+		const newData = Object.assign({}, data);
+		const newName = data.testName.replace("field mode", "index mode");
+		let tiddlerOneAlreadyExists = false;
+		const newTiddlers = data.tiddlers.map((tiddler) => {
 			if(tiddler.title === "TiddlerOne") {
 				tiddlerOneAlreadyExists = true;
 			}
 			return {title: tiddler.title, type: "application/x-tiddler-dictionary", text: `one: a\nexpand: ${tiddler.expand}\ntwo: b`};
 		});
-		var newWidgetText = data.widgetText.replace("field='expand'", "index='expand'");
-		var newChange = {};
-		for(var key of Object.keys(data.expectedChange)) {
-			var oldChange = data.expectedChange[key];
-			var text;
+		const newWidgetText = data.widgetText.replace("field='expand'", "index='expand'");
+		const newChange = {};
+		for(const key of Object.keys(data.expectedChange)) {
+			const oldChange = data.expectedChange[key];
+			let text;
 			if(!tiddlerOneAlreadyExists) {
 				// If it wasn't there, the created one will be JSON
 				text = `{\n    "expand": "${oldChange.expand}"\n}`;
@@ -135,7 +153,7 @@ describe("Checkbox widget", function() {
 		return newData;
 	});
 
-	var listModeTestsForDateFields = [
+	const listModeTestsForDateFields = [
 		{
 			testName: "list mode created date field",
 			tiddlers: [{title: "Colors", created: "201304152222", modified: "202301022222"}],
@@ -154,7 +172,7 @@ describe("Checkbox widget", function() {
 		},
 	];
 
-	var listModeTests = [
+	const listModeTests = [
 		{
 			testName: "list mode add",
 			tiddlers: [{title: "Colors", colors: "orange yellow"}],
@@ -270,11 +288,11 @@ describe("Checkbox widget", function() {
 	];
 
 	// https://github.com/TiddlyWiki/TiddlyWiki5/issues/6871
-	var listModeTestsWithListField = (
+	const listModeTestsWithListField = (
 		listModeTests
 			.filter((data) => data.widgetText.includes("listField='colors'"))
 			.map((data) => {
-				var newData = Object.assign({}, data, {
+				const newData = Object.assign({}, data, {
 					tiddlers: data.tiddlers.map((tiddler) => Object.assign({}, tiddler, {list: tiddler.colors, colors: undefined})),
 					widgetText: data.widgetText.replace("listField='colors'", "listField='list'"),
 					expectedChange: {
@@ -284,11 +302,11 @@ describe("Checkbox widget", function() {
 				return newData;
 			})
 	);
-	var listModeTestsWithTagsField = (
+	const listModeTestsWithTagsField = (
 		listModeTests
 			.filter((data) => data.widgetText.includes("listField='colors'"))
 			.map((data) => {
-				var newData = Object.assign({}, data, {
+				const newData = Object.assign({}, data, {
 					tiddlers: data.tiddlers.map((tiddler) => Object.assign({}, tiddler, {tags: tiddler.colors, colors: undefined})),
 					widgetText: data.widgetText.replace("listField='colors'", "listField='tags'"),
 					expectedChange: {
@@ -299,20 +317,20 @@ describe("Checkbox widget", function() {
 			})
 	);
 
-	var indexListModeTests = listModeTests.map((data) => {
-		var newData = Object.assign({}, data);
-		var newName = data.testName.replace("list mode", "index list mode");
-		var newTiddlers = data.tiddlers.map((tiddler) => {
+	const indexListModeTests = listModeTests.map((data) => {
+		const newData = Object.assign({}, data);
+		const newName = data.testName.replace("list mode", "index list mode");
+		const newTiddlers = data.tiddlers.map((tiddler) => {
 			if(tiddler.hasOwnProperty("colors")) {
 				return {title: tiddler.title, type: "application/x-tiddler-dictionary", text: `one: a\ncolors: ${tiddler.colors}\ntwo: b`};
 			} else if(tiddler.hasOwnProperty("someField")) {
 				return {title: tiddler.title, type: "application/x-tiddler-dictionary", text: `one: a\nsomeField: ${tiddler.someField}\ntwo: b`};
 			}
 		});
-		var newWidgetText = data.widgetText.replace("listField='colors'", "listIndex='colors'").replace(/\$field/g, "$index").replace("listField='someField'", "listIndex='someField'");
-		var newChange = {};
-		for(var key of Object.keys(data.expectedChange)) {
-			var oldChange = data.expectedChange[key];
+		const newWidgetText = data.widgetText.replace("listField='colors'", "listIndex='colors'").replace(/\$field/g, "$index").replace("listField='someField'", "listIndex='someField'");
+		const newChange = {};
+		for(const key of Object.keys(data.expectedChange)) {
+			const oldChange = data.expectedChange[key];
 			if(oldChange.colors) {
 				newChange[key] = { text: `one: a\ncolors: ${oldChange.colors}\ntwo: b` };
 			} else if(oldChange.someField !== undefined) {
@@ -329,7 +347,7 @@ describe("Checkbox widget", function() {
 		return newData;
 	});
 
-	var filterModeTests = [
+	const filterModeTests = [
 		{
 			testName: "filter mode false -> true",
 			tiddlers: [{title: "Colors", colors: "red orange yellow"}],
@@ -515,7 +533,7 @@ describe("Checkbox widget", function() {
 		},
 	];
 
-	var checkboxTestData = fieldModeTests.concat(
+	const checkboxTestData = fieldModeTests.concat(
 		indexModeTests,
 		listModeTests,
 		listModeTestsForDateFields,
@@ -534,14 +552,14 @@ describe("Checkbox widget", function() {
 		it("checkbox widget test: " + data.testName, function() {
 			// Setup
     
-			var wiki = new $tw.Wiki();
+			const wiki = new $tw.Wiki();
 			wiki.addTiddlers(data.tiddlers);
-			var widgetNode = createWidgetNode(parseText(data.widgetText,wiki),wiki);
+			const widgetNode = createWidgetNode(parseText(data.widgetText,wiki),wiki);
 			renderWidgetNode(widgetNode);
     
 			// Check initial state
     
-			var widget = findNodeOfType("checkbox", widgetNode);
+			const widget = findNodeOfType("checkbox", widgetNode);
 			// Verify that the widget is or is not checked as expected
 			expect(widget.getValue()).toBe(data.startsOutChecked);
     
@@ -555,22 +573,183 @@ describe("Checkbox widget", function() {
 			widget.handleChangeEvent(null);
     
 			// Check state again: in most tests, checkbox should be inverse of what it was
-			var finalValue = data.hasOwnProperty("finalValue") ? data.finalValue : !data.startsOutChecked;
+			const finalValue = data.hasOwnProperty("finalValue") ? data.finalValue : !data.startsOutChecked;
 			expect(widget.getValue()).toBe(finalValue);
     
 			// Check that tiddler(s) has/have gone through expected change(s)
-			for(var key of Object.keys(data.expectedChange)) {
-				var tiddler = wiki.getTiddler(key);
-				var change = data.expectedChange[key];
-				for(var fieldName of Object.keys(change)) {
-					var expectedValue = change[fieldName];
-					var fieldValue = tiddler.fields[fieldName];
+			for(const key of Object.keys(data.expectedChange)) {
+				const tiddler = wiki.getTiddler(key);
+				const change = data.expectedChange[key];
+				for(const fieldName of Object.keys(change)) {
+					const expectedValue = change[fieldName];
+					const fieldValue = tiddler.fields[fieldName];
 					expect(fieldValue).toEqual(expectedValue);
 				}
 			}
 		});
 	});
-    
+
+	describe("Wikitext inline checkbox", function() {
+
+		it("parseTiddler sets sourceTitle on AST node so clicking modifies the tiddler's own text", function() {
+			const wiki = new $tw.Wiki();
+			wiki.addTiddler({title: "DirectTasks", text: "* [ ] Direct task"});
+
+			const parser = wiki.parseTiddler("DirectTasks");
+			const widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
+			widgetNode.render($tw.fakeDocument.createElement("div"), null);
+
+			const checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(1);
+			// sourceTitle is not stored on individual AST nodes; it is propagated
+			// as the `parseSourceTitle` widget variable by wiki.makeWidget().
+			expect(checkboxes[0].getVariable("parseSourceTitle")).toBe("DirectTasks");
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
+			expect(checkboxes[0].checkboxSourceTitle).toBe("DirectTasks");
+			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
+			expect(checkboxes[0].getValue()).toBe(false);
+
+			clickCheckbox(checkboxes[0],true);
+
+			expect(wiki.getTiddler("DirectTasks").fields.text).toBe("* [x] Direct task");
+		});
+
+		it("clicking a checkbox inside {{transclusion}} modifies the SOURCE tiddler, not the host", function() {
+			const wiki = new $tw.Wiki();
+			wiki.addTiddler({title: "SourceTasks", text: "* [ ] Source task"});
+			wiki.addTiddler({title: "Container",   text: "Container intro\n\n{{SourceTasks}}"});
+
+			const parser = wiki.parseTiddler("Container");
+			const widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
+			widgetNode.render($tw.fakeDocument.createElement("div"), null);
+
+			const checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(1);
+			// TranscludeWidget sets parseSourceTitle to the transcluded tiddler's title.
+			expect(checkboxes[0].getVariable("parseSourceTitle")).toBe("SourceTasks");
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
+			expect(checkboxes[0].checkboxSourceTitle).toBe("SourceTasks");
+
+			clickCheckbox(checkboxes[0],true);
+
+			// SourceTasks is updated
+			expect(wiki.getTiddler("SourceTasks").fields.text).toBe("* [x] Source task");
+			// Container is untouched
+			expect(wiki.getTiddler("Container").fields.text).toBe("Container intro\n\n{{SourceTasks}}");
+		});
+
+		it("should render inline checkboxes and modify the source wikitext text field when changed", function() {
+			const wiki = new $tw.Wiki();
+
+			// Add a source tiddler with inline checkboxes
+			wiki.addTiddler({
+				title: "MyTasks",
+				text: "Here are my tasks:\n\n* [ ] Task 1\n* [x] Task 2\n* [X] Task 3\n"
+			});
+
+			// Render via transclusion so that sourceTitle variable is propagated
+			const widgetNode = createWidgetNode(parseText("{{MyTasks}}",wiki),wiki);
+			widgetNode.render($tw.fakeDocument.createElement("div"),null);
+
+			const checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(3);
+
+			expect(checkboxes[0].getVariable("parseSourceTitle")).toBe("MyTasks");
+			expect(checkboxes[0].getValue()).toBe(false);
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
+			expect(checkboxes[0].checkboxSourceTitle).toBe("MyTasks");
+			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
+			expect(checkboxes[1].parseTreeNode.checked).toBe(true);
+			expect(checkboxes[2].parseTreeNode.checked).toBe(true);
+
+			// Simulate checking the first checkbox
+			clickCheckbox(checkboxes[0],true);
+
+			let myTasks = wiki.getTiddler("MyTasks");
+			expect(myTasks.fields.text).toBe("Here are my tasks:\n\n* [x] Task 1\n* [x] Task 2\n* [X] Task 3\n");
+
+			// Simulate unchecking the third checkbox
+			clickCheckbox(checkboxes[2],false);
+
+			myTasks = wiki.getTiddler("MyTasks");
+			expect(myTasks.fields.text).toBe("Here are my tasks:\n\n* [x] Task 1\n* [x] Task 2\n* [ ] Task 3\n");
+		});
+
+		it("handles multiple checkboxes on the same line independently", function() {
+			const wiki = new $tw.Wiki();
+			wiki.addTiddler({title: "MultiCheck", text: "[ ] First [ ] Second [x] Third"});
+
+			const parser = wiki.parseTiddler("MultiCheck");
+			const widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
+			widgetNode.render($tw.fakeDocument.createElement("div"), null);
+
+			const checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(3);
+			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
+			expect(checkboxes[1].parseTreeNode.checked).toBe(false);
+			expect(checkboxes[2].parseTreeNode.checked).toBe(true);
+
+			// Click the second checkbox; only it should change
+			clickCheckbox(checkboxes[1],true);
+
+			expect(wiki.getTiddler("MultiCheck").fields.text).toBe("[ ] First [x] Second [x] Third");
+		});
+
+		it("handles checkboxes in numbered lists", function() {
+			const wiki = new $tw.Wiki();
+			wiki.addTiddler({title: "NumberedTasks", text: "# [ ] Step 1\n# [x] Step 2\n"});
+
+			const parser = wiki.parseTiddler("NumberedTasks");
+			const widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
+			widgetNode.render($tw.fakeDocument.createElement("div"), null);
+
+			const checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(2);
+
+			clickCheckbox(checkboxes[0],true);
+			expect(wiki.getTiddler("NumberedTasks").fields.text).toBe("# [x] Step 1\n# [x] Step 2\n");
+		});
+
+		it("correctly identifies start/end offsets so adjacent checkboxes do not corrupt each other", function() {
+			const wiki = new $tw.Wiki();
+			// All three checkboxes on consecutive lines
+			wiki.addTiddler({title: "ThreeTasks", text: "[ ] A\n[ ] B\n[ ] C\n"});
+
+			const parser = wiki.parseTiddler("ThreeTasks");
+			const widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
+			widgetNode.render($tw.fakeDocument.createElement("div"), null);
+
+			const checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(3);
+
+			// Check the middle one only
+			clickCheckbox(checkboxes[1],true);
+			expect(wiki.getTiddler("ThreeTasks").fields.text).toBe("[ ] A\n[x] B\n[ ] C\n");
+		});
+
+		it("checkboxes parsed without a sourceTitle (macro expansion context) have no sourceTitle and are disabled", function() {
+			// This tests the core safety invariant: start/end offsets must come
+			// from the same parse context as sourceTitle.  When text is parsed
+			// without a sourceTitle (as macro expansion does), the resulting
+			// checkboxes must be disabled so they cannot corrupt any tiddler.
+			const wiki = new $tw.Wiki();
+			// Parse text WITHOUT sourceTitle — this is what macro/variable expansion does
+			const parser = wiki.parseText("text/vnd.tiddlywiki","* [ ] Buy milk\n* [x] Write code",{});
+			const widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
+			widgetNode.render($tw.fakeDocument.createElement("div"),null);
+
+			const checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(2);
+			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
+			// wiki.makeWidget() sets parseSourceTitle = "" for anonymous parses;
+			// checkboxSourceTitle resolves to undefined (empty string is falsy).
+			expect(checkboxes[0].getVariable("parseSourceTitle")).toBe("");
+			expect(checkboxes[0].checkboxSourceTitle).toBeUndefined();
+			// The input must be disabled to prevent corrupting any tiddler.
+			expect(checkboxes[0].inputDomNode.getAttribute("disabled")).toBeTruthy();
+			expect(checkboxes[1].inputDomNode.getAttribute("disabled")).toBeTruthy();
+		});
+
+	});
+
 });
-    
-    
