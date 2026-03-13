@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#8335
+description: Add tutorial center for tours with compact progress persistence
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9691
+github-contributors: linonetwo
+
+Adds a new tutorial center layout for tour discovery and launch, introduces step-level progress persistence, and compacts stored completion state when tours are fully completed.

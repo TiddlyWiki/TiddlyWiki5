@@ -30,7 +30,7 @@ ConfettiWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Launch confetti
-	if($tw.browser) {
+	if($tw.browser && $tw.confettiManager) {
 		var options = {};
 		$tw.utils.each(this.attributes,function(attribute,name) {
 			options[name] = self.getAttribute(name);

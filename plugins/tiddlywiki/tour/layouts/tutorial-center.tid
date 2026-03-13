@@ -1,0 +1,88 @@
+title: $:/plugins/tiddlywiki/tour/layouts/tutorial-center
+tags: $:/tags/Layout
+name: Tutorial Center
+description: Browse and launch all available tours
+icon: $:/plugins/tiddlywiki/tour/tour-button-icon
+code-body: yes
+
+\whitespace trim
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+\import [[$:/plugins/tiddlywiki/tour/variables]]
+
+\define containerClasses()
+tc-page-container tc-language-$(languageTitle)$ tc-tour-center-layout
+\end
+
+<$vars
+languageTitle={{{ [{$:/language}get[name]] }}}
+>
+
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+	{{$:/core/ui/CommandPaletteTemplate}}
+	<div class=<<containerClasses>>>
+		<div class="tc-tour-center-shell">
+			<div class="tc-tour-center-header">
+				<h1>Tutorial Center</h1>
+				<p>Learn your way around with guided walkthroughs.</p>
+				<$button class="tc-btn-invisible tc-tour-center-back-button" tooltip="Back to standard layout">
+					<$action-setfield $tiddler="$:/layout" text="" $timestamp="no"/>
+					{{$:/core/images/standard-layout}} Back to standard layout
+				</$button>
+			</div>
+			<div class="tc-tour-center-list">
+				<$list filter="[all[shadows+tiddlers]tag[$:/tags/Tour]!is[draft]sort[description]]" emptyMessage="No tours are currently available.">
+					<$let
+						tourTitle=<<currentTiddler>>
+						tourTag={{{ [<currentTiddler>get[tour-tag]] }}}
+						actualCompletionTitle={{{ [<currentTiddler>get[actualCompletion]] }}}
+						completedStepsTitle={{{ [<currentTiddler>get[completedSteps]] }}}
+						totalSteps={{{ [all[shadows+tiddlers]tag<tourTag>count[]] }}}
+						completion={{{ [<actualCompletionTitle>get[text]else[0]] }}}
+					>
+						<div class="tc-tour-center-item">
+							<div class="tc-tour-center-item-logo">
+								<$image source={{{ [<tourTitle>get[logo]] }}}/>
+							</div>
+							<div class="tc-tour-center-item-body">
+								<div class="tc-tour-center-item-title">
+									<$transclude $tiddler=<<tourTitle>> $field="description">
+										<$text text=<<tourTitle>>/>
+									</$transclude>
+								</div>
+								<div class="tc-tour-center-item-description">
+									<$transclude $tiddler=<<tourTitle>> mode="block">
+										(No description available)
+									</$transclude>
+								</div>
+							</div>
+							<div class="tc-tour-center-item-actions">
+								<$button class="tc-btn-invisible tc-tour-center-start-button">
+									<$action-setfield $tiddler="$:/layout" text="" $timestamp="no"/>
+									<$transclude $variable="tour-start" title=<<tourTitle>>/>
+									Start
+									{{$:/core/images/chevron-right}}
+								</$button>
+							</div>
+							<$list filter="[<actualCompletionTitle>!is[blank]]" variable="ignore">
+								<$button class="tc-btn-invisible tc-tour-center-reset-icon" tooltip="Reset this walkthrough progress">
+									<$action-setfield $tiddler=<<actualCompletionTitle>> text="0"/>
+									<$list filter="[<completedStepsTitle>!is[blank]]" variable="ignore2">
+										<$action-setfield $tiddler=<<completedStepsTitle>> list="" completed="no"/>
+									</$list>
+									{{$:/core/images/refresh-button}}
+								</$button>
+							</$list>
+							<div class="tc-tour-center-item-progress">
+								<$list filter="[<completion>compare:number:gt[0]]" variable="ignore">
+									<progress class="tc-tour-center-progress-bar" max={{{ [<totalSteps>!is[blank]then<totalSteps>else[1]] }}} value={{{ [<completion>!is[blank]then<completion>else[0]] }}}></progress>
+								</$list>
+							</div>
+						</div>
+					</$let>
+				</$list>
+			</div>
+		</div>
+	</div>
+</$navigator>
+
+</$vars>
