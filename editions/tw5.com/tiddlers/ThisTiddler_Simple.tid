@@ -1,0 +1,17 @@
+created: 20240216233744705
+modified: 20240216233918569
+tags: 
+title: ThisTiddler/Simple
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\import Macro
+\define print-this-tiddler()
+<$text text=<<thisTiddler>>/>
+\end
+
+(<$text text=<<thisTiddler>>/>)
+
+(<<print-this-tiddler>>)
+
+(<<imported-print-this-tiddler>>)

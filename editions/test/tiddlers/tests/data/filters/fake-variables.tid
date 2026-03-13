@@ -24,4 +24,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p><p>existing variable should have output</p></p><p></p><p></p><p><p>non-existing variable negated should have output</p></p>
+<p>existing variable should have output</p><p>non-existing variable negated should have output</p>

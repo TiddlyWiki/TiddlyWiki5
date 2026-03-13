@@ -1,0 +1,9 @@
+created: 20221123152108247
+modified: 20240901190207865
+tags: 
+title: ActionSetFieldWidget-todo-fixed
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+2 buttons first example vertical spacing is wrong

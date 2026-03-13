@@ -21,7 +21,7 @@ Now!
 +
 title: ExpectedResult
 
-<p>
+
 [
     {
         "type": "set",
@@ -64,4 +64,3 @@ title: ExpectedResult
         "rule": "fnprocdef"
     }
 ]
-</p>
