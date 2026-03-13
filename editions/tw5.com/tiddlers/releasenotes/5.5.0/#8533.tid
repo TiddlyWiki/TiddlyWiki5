@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#8533
+description: Add JSDoc parser AST type annotations and TS type-check pipeline
+tags: $:/tags/ChangeNote
+release: 5.5.0
+change-type: enhancement
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8533
+github-contributors: linonetwo
+
+Add JSDoc type annotations for wiki parser AST-related modules and expose generated declaration files for plugin authors. This includes TypeScript-based type tests (with expect-error assertions) and a CI type-check step to validate generated typing usefulness and prevent regressions.

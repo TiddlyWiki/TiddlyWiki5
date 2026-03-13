@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "$:/core/*": ["../core/*"]
+    },
+    "baseUrl": "..",
+    "rootDir": "..",
+    "noEmit": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "Node16",
+    "skipLibCheck": true,
+    "target": "ESNext"
+  },
+  "include": ["./core/**/*.d.ts"]
+}

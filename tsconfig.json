@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "paths": {
+      // Allow `import('$:/core/modules/...')` instead of `import('../../core/modules/...')`.
+      // Only works inside this project when editor/tsc reads this tsconfig.
+      "$:/core/*": ["core/*"]
+    },
+    "baseUrl": ".",
+    "rootDir": ".",
+    "noImplicitAny": false,
+    "strict": false,
+    "allowJs": true,
+    "checkJs": false,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "declarationDir": "types/",
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "Node16",
+    "outDir": "types/",
+    "skipLibCheck": true,
+    "target": "ESNext"
+  },
+  // Only include files that have been annotated with JSDoc types.
+  // Expand this list when adding JSDoc to more source files.
+  // NOTE: types/ast.d.ts is intentionally excluded here — it re-exports from
+  // types/core/ which is the OUTPUT of this compilation. Include it only
+  // in downstream configs (e.g. types/tests/tsconfig.json) that run AFTER tsc.
+  "include": [
+    "./core/modules/parsers/base.js",
+    "./core/modules/parsers/wikiparser/wikirulebase.js",
+    "./core/modules/parsers/wikiparser/wikiparser.js",
+    "./core/modules/parsers/wikiparser/rules/codeblock.js",
+    "./core/modules/parsers/wikiparser/rules/html.js",
+    "./core/modules/parsers/wikiparser/rules/heading.js",
+    "./core/modules/parsers/wikiparser/rules/list.js",
+    "./core/modules/parsers/wikiparser/rules/quoteblock.js",
+    "./core/modules/widgets/widget.js",
+    "./core/modules/wiki.js",
+    "./types/tw.d.ts"
+  ],
+  // Exclude the generated types directory to avoid circular declaration issues
+  "exclude": ["types/core"]
+}

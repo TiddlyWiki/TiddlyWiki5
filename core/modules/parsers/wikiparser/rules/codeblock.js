@@ -13,17 +13,56 @@ Wiki text rule for code blocks. For example:
 
 \*/
 
+/**
+ * @typedef {import('../../base.js').ParseTreeAttribute} ParseTreeAttribute
+ * @typedef {import('../wikirulebase.js').WikiRuleBase} WikiRuleBase
+ * @typedef {import('../../base.js').Parser} Parser
+ */
+
+/**
+ * Parse tree node produced by the `codeblock` wiki rule.
+ *
+ * Example wiki text that produces this node:
+ * ```
+ * ```javascript
+ * const x = 1;
+ * ```
+ * ```
+ *
+ * @typedef {Object} ParseTreeCodeblockNode
+ * @property {"codeblock"} type - Widget type identifier
+ * @property {"codeblock"} rule - Parse rule that generated this node
+ * @property {number} start - Start position in source text
+ * @property {number} end - End position in source text
+ * @property {Object} attributes - Widget attributes
+ * @property {ParseTreeAttribute & { type: "string", value: string }} attributes.code - The code content
+ * @property {ParseTreeAttribute & { type: "string", value: string }} attributes.language - The language specifier (may be empty string)
+ */
+
 "use strict";
 
 exports.name = "codeblock";
 exports.types = {block: true};
 
+/**
+ * Initialise the codeblock rule with the given parser.
+ *
+ * @this {WikiRuleBase}
+ * @param {Parser} parser
+ * @returns {void}
+ */
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match and get language if defined
 	this.matchRegExp = /```([\w-]*)\r?\n/mg;
 };
 
+/**
+ * Parse the most recent code block match.
+ *
+ * @this {WikiRuleBase}
+ * @returns {ParseTreeCodeblockNode[]} Array containing a single codeblock node
+ */
 exports.parse = function() {
 	var reEnd = /(\r?\n```$)/mg;
 	var languageStart = this.parser.pos + 3,

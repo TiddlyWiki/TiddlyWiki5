@@ -18,15 +18,57 @@ This is a widget invocation
 
 \*/
 
+/**
+ * @typedef {import('../../base.js').ParseTreeAttribute} ParseTreeAttribute
+ * @typedef {import('../wikirulebase.js').WikiRuleBase} WikiRuleBase
+ * @typedef {import('../../base.js').Parser} Parser
+ */
+
+/**
+ * Parse tree node produced by the `html` wiki rule.
+ *
+ * Represents a parsed HTML or widget element tag.
+ *
+ * @typedef {Object} ParseTreeHtmlNode
+ * @property {"element"} type - Widget type; always `"element"` for HTML tags
+ * @property {"html"} rule - Parse rule that generated this node
+ * @property {keyof HTMLElementTagNameMap | string} tag - Tag name (e.g. `"div"`, `"$link"`)
+ * @property {number} start - Start position in source text
+ * @property {number} end - End position in source text
+ * @property {Record<string, ParseTreeAttribute>} attributes - Element attributes
+ * @property {Array<{ name: string } & ParseTreeAttribute>} orderedAttributes - Attributes in source order
+ * @property {boolean} isSelfClosing - Whether the tag is self-closing (e.g. `<br/>`)
+ * @property {boolean} [isBlock] - Whether the element is rendered as a block
+ * @property {number} [openTagStart] - Start position of the opening tag
+ * @property {number} [openTagEnd] - End position of the opening tag
+ * @property {number} [closeTagStart] - Start position of the closing tag
+ * @property {number} [closeTagEnd] - End position of the closing tag
+ * @property {ParseTreeHtmlNode[]} [children] - Child parse tree nodes (for non-void elements)
+ */
+
 "use strict";
 
 exports.name = "html";
 exports.types = {inline: true, block: true};
 
+/**
+ * Initialise the html rule with the given parser.
+ *
+ * @this {WikiRuleBase}
+ * @param {Parser} parser
+ * @returns {void}
+ */
 exports.init = function(parser) {
 	this.parser = parser;
 };
 
+/**
+ * Find the next position in the source where an HTML or widget tag occurs.
+ *
+ * @this {WikiRuleBase & { nextTag?: ParseTreeHtmlNode | null }}
+ * @param {number} startPos - Position to start searching from
+ * @returns {number | undefined} Start position of the next tag, or `undefined`
+ */
 exports.findNextMatch = function(startPos) {
 	// Find the next tag
 	this.nextTag = this.findNextTag(this.parser.source,startPos,{
@@ -40,6 +82,7 @@ Parse the most recent match
 */
 exports.parse = function() {
 	// Retrieve the most recent match so that recursive calls don't overwrite it
+	/** @type {ParseTreeHtmlNode} */
 	var tag = this.nextTag;
 	if(!tag.isSelfClosing) {
 		tag.openTagStart = tag.start;
@@ -87,9 +130,17 @@ exports.parse = function() {
 	return [tag];
 };
 
-/*
-Look for an HTML tag. Returns null if not found, otherwise returns {type: "element", name:, attributes: {}, orderedAttributes: [], isSelfClosing:, start:, end:,}
-*/
+/**
+ * Parse an HTML/widget opening tag at the given position.
+ * Returns `null` if no valid tag is found.
+ *
+ * @this {WikiRuleBase}
+ * @param {string} source - Full source text
+ * @param {number} pos - Position to start parsing from
+ * @param {Object} [options]
+ * @param {boolean} [options.requireLineBreak=false] - If true, tag must be followed by a blank line
+ * @returns {ParseTreeHtmlNode | null} Parsed tag node, or `null`
+ */
 exports.parseTag = function(source,pos,options) {
 	options = options || {};
 	var token,
@@ -158,6 +209,17 @@ exports.parseTag = function(source,pos,options) {
 	return node;
 };
 
+/**
+ * Find the next valid HTML or widget tag in the source, searching forward
+ * from `pos`.
+ *
+ * @this {WikiRuleBase}
+ * @param {string} source - Full source text
+ * @param {number} pos - Start search position
+ * @param {Object} [options]
+ * @param {boolean} [options.requireLineBreak=false] - Passed through to `parseTag`
+ * @returns {ParseTreeHtmlNode | null} Next valid tag, or `null` if none found
+ */
 exports.findNextTag = function(source,pos,options) {
 	// A regexp for finding candidate HTML tags
 	var reLookahead = /<([a-zA-Z\-\$\.]+)/g;
@@ -179,6 +241,15 @@ exports.findNextTag = function(source,pos,options) {
 	return null;
 };
 
+/**
+ * Check whether a parsed tag is a legal HTML element or widget.
+ * Widgets (tag names starting with `$`) are always legal;
+ * HTML tags starting with `-` are not.
+ *
+ * @this {WikiRuleBase}
+ * @param {ParseTreeHtmlNode} tag - Parsed tag to validate
+ * @returns {boolean} `true` if the tag is legal
+ */
 exports.isLegalTag = function(tag) {
 	// Widgets are always OK
 	if(tag.type !== "element") {

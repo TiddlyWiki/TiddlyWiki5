@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "lib": ["ES2020", "DOM"],
+    "module": "CommonJS",
+    "moduleResolution": "node10",
+    "baseUrl": "../..",
+    "paths": {
+      "$:/core/*": ["core/*"]
+    },
+    // Skip type-checking of generated .d.ts files (e.g. @this issues in rule declarations).
+    // The test files themselves are still fully type-checked.
+    "skipLibCheck": true
+  },
+  "include": ["./**/*.ts"]
+}

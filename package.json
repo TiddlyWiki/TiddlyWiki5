@@ -13,6 +13,7 @@
   "bin": {
     "tiddlywiki": "./tiddlywiki.js"
   },
+  "types": "./types/tw.d.ts",
   "main": "./boot/boot.js",
   "repository": {
     "type": "git",
@@ -28,7 +29,8 @@
     "eslint": "9.36.0",
     "eslint-plugin-es-x": "9.1.0",
     "@stylistic/eslint-plugin": "5.4.0",
-    "globals": "16.4.0"
+    "globals": "16.4.0",
+    "typescript": "5.8.3"
   },
   "license": "BSD",
   "engines": {
@@ -39,6 +41,8 @@
     "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lint:check": "eslint . --fix-dry-run"
+    "lint:check": "eslint . --fix-dry-run",
+    "typecheck": "tsc --noEmit && tsc -p types/tests/tsconfig.json --noEmit",
+    "build:types": "tsc"
   }
 }
