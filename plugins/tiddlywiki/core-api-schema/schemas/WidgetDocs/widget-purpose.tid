@@ -1,0 +1,6 @@
+title: $:/schemas/WidgetDocs/widget-purpose
+field-type: string
+required: yes
+type: text/vnd.tiddlywiki
+
+A short description of what the widget does. Used in visual editor tooltips and documentation tables.
