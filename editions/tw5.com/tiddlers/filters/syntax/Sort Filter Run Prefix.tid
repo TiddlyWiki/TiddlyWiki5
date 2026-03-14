@@ -1,10 +1,11 @@
 created: 20210428083929749
 from-version: 5.2.0
-modified: 20240312203002082
+modified: 20240717120111427
 rp-input: the filter output of all previous runs so far
 rp-output: output titles replace the output of previous filter runs
 rp-purpose: sort the input titles by the result of evaluating this filter run for each item
-rp-suffix: the <<.op :sort>> filter run prefix uses a rich suffix, see below for details
+rp-suffix: the :sort filter run prefix uses a rich suffix, see below for details
+rp-suffix-name: S
 tags: [[Named Filter Run Prefix]]
 title: Sort Filter Run Prefix
 type: text/vnd.tiddlywiki
@@ -12,9 +13,19 @@ type: text/vnd.tiddlywiki
 <$railroad text="""
 \start none
 \end none
-( ( ":sort" ) 
-( : ":string" | ":alphanumeric" | ":number" | ":integer" | ":version" | ":date" )
-( : ":casesensitive" /"required for string and alphanumeric"/ | ":caseinsensitive" /"required for string and alphanumeric"/  | ":reverse" /"optional"/ | - ) | - )
+( ":sort" ) 
+( ":" ) 
+( : "string" | "alphanumeric" | "number" | "integer" | "version" | "date" )
+( ":" ) 
+{
+	(
+		(
+			( : "caseinsensitive" /"required for string and alphanumeric"/ | "casesensitive" /"required for string and alphanumeric"/)
+			| "reverse" /"optional"/ 
+		)
+	)
+	+","
+}
 [[run|"Filter Run"]]
 """/>
 
@@ -22,7 +33,7 @@ Each input title from previous runs is passed to this run in turn. The filter ru
 
 Note that within the filter run, the <<.var currentTiddler>> variable is set to the title of the tiddler being processed. This permits filter runs like `:sort:number[{!!value}divide{!!cost}]` to be used for computation. The value of <<.var currentTiddler>> outside the run is available in the variable <<.var "..currentTiddler">>.
 
-The `:sort` filter run prefix uses an extended syntax that allows for multiple suffixes, some of which are required:
+The `:sort` <<.place S>> filter run prefix uses an extended syntax that allows for multiple suffixes, some of which are required:
 
 ```
 :sort:<type>:<flaglist>[...filter run...]
@@ -30,10 +41,19 @@ The `:sort` filter run prefix uses an extended syntax that allows for multiple s
 ```
 
 * ''type'': Required. Determines how the items are compared and can be any of: ''string'', ''alphanumeric'', ''number'', ''integer'', ''version'' or ''date''.
+
 * ''flaglist'': comma separated list of the following flags:
+
 ** ''casesensitive'' or ''caseinsensitive'' (required for types `string` and `alphanumeric`).
+*** defaults to: //caseinsensitive// if the flag is missing.
+*** for clarity this parameter should be always defined.
+
 ** ''reverse'' to invert the order of the filter run (optional).
 
-Note that filter runs used with the `:sort` prefix should return the same number of items that they are passed. Any missing entries will be treated as zero or the empty string. In particular, when retrieving the value of a field with the [[get Operator]] it is helpful to guard against a missing field value using the [[else Operator]]. For example `[get[myfield]else[default-value]...`.
+<<.tip """Note that filter runs used with the `:sort` prefix ''should return the same number of items that they are passed''. In particular, when retrieving the value of a field with the [[get Operator]] it is helpful to guard against a missing field value using the [[else Operator]]. For example `...[get[myfield]else[default-value]]`.<br><br>
+
+Any ''missing'' entries will be treated as ''zero'' or the ''empty string''.""">>
+
+Also see: <<.olink sortsub>> Operator
 
 [[Examples|Sort Filter Run Prefix (Examples)]]

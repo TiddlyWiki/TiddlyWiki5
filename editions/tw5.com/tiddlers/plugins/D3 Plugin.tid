@@ -1,11 +1,11 @@
 created: 20160107223425581
-list: 
-modified: 20170228102531138
-tags: OfficialPlugins [[Plugin Editions]]
+caption: {{!!title}} - ^^deprecated^^
+modified: 20240913122437925
+tags: OfficialPlugins [[Plugin Editions]] $:/deprecated
 title: D3 Plugin
 type: text/vnd.tiddlywiki
 
-The D3 plugin integrates the D3 visualisation library with TiddlyWiki.
+<<.deprecated-since "5.3.4">> The D3 plugin integrates the D3 visualisation library with TiddlyWiki.
 
 See https://tiddlywiki.com/plugins/tiddlywiki/d3/
 

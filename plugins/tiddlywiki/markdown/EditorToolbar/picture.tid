@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/picture
+list-after: $:/core/ui/EditorToolbar/picture
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/picture
+caption: {{$:/language/Buttons/Picture/Caption}} (Markdown)
+description: {{$:/language/Buttons/Picture/Hint}}
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
+shortcuts: ((picture))
+dropdown: $:/plugins/tiddlywiki/markdown/EditorToolbar/picture-dropdown
+

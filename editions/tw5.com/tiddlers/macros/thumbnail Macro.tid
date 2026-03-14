@@ -1,14 +1,29 @@
 caption: thumbnail
 created: 20150325172203603
-modified: 20150325172336079
+modified: 20230803033450805
 tags: Macros [[Core Macros]]
 title: thumbnail Macro
 type: text/vnd.tiddlywiki
 
-The <<.def thumbnail>> [[macros|Macros]] are used to create linkable thumbnail panels.
+The <<.def thumbnail>> [[macro|Macros]] is used to create linkable thumbnail panels. An alternative <<.def thumbnail-right>> macro uses the same parameters, but floats to the right of its container.
 
 !! Parameters
 
-(none)
+;link
+: The tiddler to link to
+;icon
+: An icon to place in the center of the thumbnail. Must be enclosed in curly brackets
+;color
+: A color for the icon
+;background-color
+: A background color if there is no image. Does not show if the image has transparency
+;image
+: A background image for the thumbnail
+;caption
+: A caption for the element
+;width
+: A width in px for the thumbnail, defaulting to `280`
+;height
+: A height in px for the thumbnail, defaulting to `157`
 
 <<.macro-examples "thumbnail">>

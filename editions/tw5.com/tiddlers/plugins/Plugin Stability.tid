@@ -1,0 +1,14 @@
+created: 20240520155341641
+modified: 20240520162820882
+tags: PluginMechanism
+title: Plugin Stability
+type: text/vnd.tiddlywiki
+
+Plugins are recommended to have a `stability` field that communicates the state of development of the plugin. It can contain the following values:
+
+* ''STABILITY_0_DEPRECATED'' - Deprecated. This plugin is not recommended for new projects
+* ''STABILITY_1_EXPERIMENTAL'' - Experimental. Non-backward compatible changes or removal may occur in any future release. Use of the plugin is not recommended in production environments
+* ''STABILITY_2_STABLE''  - Stable.
+* ''STABILITY_3_LEGACY'' - Legacy. Although this plugin is unlikely to be removed, it is no longer actively maintained, and other alternatives are available
+
+These stability levels are taken from the Node.js project - https://nodejs.org/api/documentation.html#stability-index.

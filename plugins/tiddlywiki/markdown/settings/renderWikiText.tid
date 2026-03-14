@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/markdown/settings/renderWikiText
+tags: $:/tags/ControlPanel/Settings/Markdown
+caption: Enable WikiText
+
+After Markdown is parsed, should any text elements be handed off to the ~WikiText parser for further processing?
+
+<$checkbox tiddler="$:/config/markdown/renderWikiText" field="text" checked="true" unchecked="false">
+    [[Enable WikiText|$:/config/markdown/renderWikiText]]
+</$checkbox>

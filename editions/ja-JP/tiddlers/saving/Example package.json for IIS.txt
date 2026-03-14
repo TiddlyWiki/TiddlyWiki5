@@ -1,0 +1,8 @@
+{
+    "name": "MyStuff",
+    "description": "A description of this wiki",
+    "dependencies": {
+        "sax": "1.2.4",
+        "tiddlywiki": "*"
+    }
+}

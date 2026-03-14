@@ -6,10 +6,6 @@ module-type: global
 Confetti manager
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var confetti = require("$:/plugins/tiddlywiki/confetti/confetti.js");
@@ -33,7 +29,7 @@ ConfettiManager.prototype.launch = function (delay,options) {
 				self.outstandingTimers.splice(p,1);
 			} else {
 				console.log("Confetti Manager Error: Cannot find previously stored timer ID");
-				debugger;
+				// debugger;
 			}
 			confetti(options);
 		},delay);
@@ -52,5 +48,3 @@ ConfettiManager.prototype.reset = function () {
 };
 
 exports.ConfettiManager = ConfettiManager;
-
-})();

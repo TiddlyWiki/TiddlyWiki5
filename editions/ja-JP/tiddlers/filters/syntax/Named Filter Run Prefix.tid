@@ -1,0 +1,38 @@
+created: 20201214044413473
+modified: 20250227102948619
+original-modified: 20230711090833212
+tags: [[Filter Run Prefix]]
+title: Named Filter Run Prefix
+ja-title: 名前付きフィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.23">>で、名前付きフィルタランプレフィックスが実装されました。図に示すように、`:cascade`、`:map`、`:sort`が後から追加されました。
+
+名前付きフィルタランプレフィックスは、[[ショートカットランプレフィックス|Shortcut Filter Run Prefix]]の代わりに、[[フィルタ式|Filter Expression]]の[[ラン|Filter Run]]の前に置くことができます。
+
+<$railroad text="""
+\start none
+\end none
+(
+[[<":all"> |"All Filter Run Prefix"]] |
+[[<":and"> |"And Filter Run Prefix"]] |
+[[<":cascade">  /"v5.2.1"/  |"Cascade Filter Run Prefix"]] |
+[[<":else"> |"Else Filter Run Prefix"]] |
+[[<":except"> |"Except Filter Run Prefix"]] |
+[[<":filter"> |"Filter Filter Run Prefix"]] |
+[[<":intersection"> |"Intersection Filter Run Prefix"]] |
+[[<":map">  /"v5.2.0"/ |"Map Filter Run Prefix"]] |
+[[<":or"> |"Or Filter Run Prefix"]] |
+[[<":reduce"> |"Reduce Filter Run Prefix"]] |
+[[<":sort">  /"v5.2.0"/ |"Sort Filter Run Prefix"]] |
+[[<":then">  /"v5.3.0"/ |"Then Filter Run Prefix"]]) [[run|"Filter Run"]]
+"""/>
+
+
+<<.tip "名前付きフィルタランプレフィックス`:filter`を、すべてのインプットタイトルにサブフィルタを適用し、サブフィルタから空の結果を返すタイトルを除外する[[filterオペレータ|filter Operator]]と比較します">>
+
+<<.tip "名前付きフィルタランプレフィックス`:reduce`を、サブフィルタを繰り返し適用してアイテムのリストを単一のアイテムに平坦化するために使用される[[reduceオペレータ|reduce Operator]]と比較します">> 
+
+<<.tip """フィルタランプレフィックス`:reduce`、`:sort`、`:map`、`:filter`内では、変数<<.var currentTiddler>>は処理中のTiddlerのタイトルに設定されます。<br>サブフィルタ外のcurrentTiddlerの値は、変数<<.var "..currentTiddler">>で使用できます <<.from-version "5.2.0">>""" >>
+
+参照: [[交換可能なフィルターランプレフィックス|Interchangeable Filter Run Prefixes]]

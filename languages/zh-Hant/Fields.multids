@@ -30,6 +30,7 @@ name: 具可讀性的套件條目的名稱
 parent-plugin: 對於一個插件，指定其為哪個插件的子插件
 plugin-priority: 套件條目的優先級數值
 plugin-type: 套件條目的類型
+stability: 插件的開發狀態：已棄用、實驗性、穩定或舊版
 released: TiddlyWiki 的釋出日期
 revision: 條目存放於伺服器中的修訂版本
 source: 條目的網址

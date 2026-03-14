@@ -1,0 +1,59 @@
+created: 20171212175130471
+modified: 20241026112227533
+original-modified: 20171212175139631
+tags: Learning
+title: Introduction to Lists
+ja-title: リストの紹介
+type: text/vnd.tiddlywiki
+
+アイテムのリストを作成することは、TiddlyWikiでの作業において中心的な役割を果たします。以下は、一般的なテクニックのいくつかを簡単に説明したものです。
+
+~TiddlyWikiは[[内部的に|ListField]]さまざまな目的でリストを[[使用する|Extended Listops Filters]]ため、この単語には複数の意味があります。ここでは、一連の項目を表示することに重点が置かれていますが、必ずしも従来の箇条書きリストとして表示されるわけではありません。
+
+! 手動で入力したリスト
+
+!! ~WikiText
+
+WikiTextリストは、特殊文字を使用してリストの種類と表示方法を指定する、手動で入力されたリストです。
+
+例としては、アスタリスク(*)で作成された箇条書きリストや番号付きリスト(#)などがあります。内部的には、~WikiTextリストは標準のHTML要素`<ul>`と`<li>`に基づいています。詳細については、[[WikiTextのリスト|Lists in WikiText]]を参照してください。
+
+WikiTextで入力されたリストの例:
+
+<<wikitext-example-without-html """* 史上最高の映画
+** カサブランカ
+** 高慢と偏見とゾンビ""">>
+
+! 生成されたリスト
+
+リストは、[[フィルター演算子|Filter Operators]]が出力したいTiddlerを選択するための基準を指定する[[フィルター|Filters]]を使用して、ListWidgetで自動的に生成できます。いくつかの一般的なリストタイプには、ショートカットマクロが用意されています。
+
+!! ~ListWidget
+
+ListWidgetは、リストを作成するための最も強力なツールです。これを使用すると、フィルタリングされた出力を操作して、例えば表や複雑なテキストなど、リストにはまったく似ていないフォームにスタイルを設定できます。詳細については、[[ListWidget]]を参照してください。
+
+"HelloThere"タグが付いたすべてのTiddlerを表示する例は次のようになります: 
+
+<<wikitext-example-without-html """<$list filter="[tag[HelloThere]]"><$view field="title"/><br/></$list>""">>
+
+<<.tip """Tiddler自体も~ListWidgetを使用して作成されます。[[ViewTemplate|$:/core/ui/ViewTemplate]]はListWidgetを使用して、Tiddlerのタイトル、タグ、テキストなどを表示するために使用される指定されたすべてのテンプレートを取得します。""">>
+
+
+!! フィルタリングされたトランスクルージョン
+
+フィルターされたトランスクルージョンの`{{{...}}}`構文は、入力としてフィルターを受け取り、一致するタイトルのリンクリストを出力します。[[テンプレート|Transclusion with Templates]]を適用することもできます。例:
+
+<<wikitext-example-without-html """{{{ [tag[HelloThere]] || $:/core/ui/TagTemplate }}}""">>
+
+!! list-linksマクロ
+
+[[list-links|list-links Macro]]マクロは、 ListWidgetを使用するよりも簡単な方法で、事前にフォーマットされたリスト(通常は箇条書きリスト)を提供します。内部的には、各リスト項目にデフォルトのテンプレートを適用しているのはListWidgetです。
+
+<$macrocall $name="wikitext-example-without-html" src="""<<list-links "[tag[HelloThere]]">>"""/>
+
+!“リスト関連”のその他の機能
+
+[[list|ListField]]、[[list-before|Order of Tagged Tiddlers]]、[[list-after|Order of Tagged Tiddlers]]はすべて、リスト内のTiddlerの位置を制御するフィールド名です。[[フィールド|TiddlerFields]]は、日付、数量、カテゴリなどの構造化された情報の追加ビットをTiddlerに追加する方法です。
+
+[[list|list Operator]] and [[listed|listed Operator]] are //filter operators// to, respectively, select and find titles in lists.
+[[list|list Operator]]と[[listed|listed Operator]]は、それぞれリスト内のタイトルを選択および検索するための//フィルター演算子//です。

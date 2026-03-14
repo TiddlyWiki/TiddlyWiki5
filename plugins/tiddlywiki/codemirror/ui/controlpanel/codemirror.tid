@@ -13,9 +13,9 @@ list-after: $:/core/ui/ControlPanel/Settings/TiddlyWiki
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Settings/CodeMirror]]">
 
-<div style="border-top:1px solid #eee;">
+<div class="tc-control-panel-setting" data-setting-title=<<currentTiddler>> >
 
-!! <$link><$transclude field="caption"/></$link>
+!!.tc-control-panel-accent <$link><$transclude field="caption"/></$link>
 
 <$transclude/>
 

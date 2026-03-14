@@ -6,10 +6,7 @@ module-type: filterrunprefix
 Replace results of previous runs unless empty
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -28,5 +25,3 @@ exports.then = function(operationSubFunction) {
 		}
 	};
 };
-
-})();

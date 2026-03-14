@@ -1,0 +1,21 @@
+created: 201804111739
+modified: 20241120110107221
+original-modified: 201804111739
+title: Q: What if a tiddler has no tags?
+ja-title: Q: Tiddlerにタグがない場合はどうしますか?
+tags: [[Custom Styles FAQ]]
+
+''回答:'' <<.from-version "5.1.16">>
+
+* Tiddlerにタグがないが、スタイル設定が必要な場合は、CSSセレクターとして`data-tiddler-title`を使用します
+** Tiddlerは一つのみです
+
+* ユーザーがシステムTiddlerのスタイルをカスタム設定したい場合: セレクターとして`[data-tiddler-title^="$:"/]`を使用します
+** TW名前空間機能を使用する
+
+* ユーザーがタグ付けされたTiddlerに対して特別な動作を設定したい場合。例: Learning
+** CSSセレクターとして`[data-tags*="Learning"]`を使用します
+
+私が使用している名前は、既存のWikiを変更することなく、ドキュメント目的でのみ使用されます。ドキュメントに副作用があることは望ましくありません
+
+[[利用できる属性についての詳細はこちらをご覧ください!|Attribute Selectors]]

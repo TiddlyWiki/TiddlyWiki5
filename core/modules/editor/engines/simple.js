@@ -6,10 +6,7 @@ module-type: library
 Text editor engine based on a simple input or textarea tag
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
@@ -103,7 +100,8 @@ SimpleEngine.prototype.getText = function() {
 Fix the height of textarea to fit content
 */
 SimpleEngine.prototype.fixHeight = function() {
-	if(this.widget.editTag === "textarea") {
+	// If .editRows is initialised, it takes precedence
+	if((this.widget.editTag === "textarea") && !this.widget.editRows) {
 		if(this.widget.editAutoHeight) {
 			if(this.domNode && !this.domNode.isTiddlyWikiFakeDom) {
 				$tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);
@@ -172,5 +170,3 @@ SimpleEngine.prototype.executeTextOperation = function(operation) {
 };
 
 exports.SimpleEngine = SimpleEngine;
-
-})();

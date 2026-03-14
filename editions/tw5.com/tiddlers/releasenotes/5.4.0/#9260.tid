@@ -1,0 +1,29 @@
+change-category: hackability
+change-type: feature
+created: 20260120154445701
+description: Adds info tiddlers for viewport dimensions that are updated on window resize.
+github-contributors: saqimtiaz
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9260
+modified: 20260120160515462
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9260
+type: text/vnd.tiddlywiki
+
+Adds info tiddlers for viewport dimensions that are updated on window resize.
+
+!! Example: Main and a user-created window with windowID my-window
+
+|Window | Info tiddler | Meaning |h
+|system/main |`$:/info/browser/window/system/main/outer/width` | Full browser window including chrome, tabs, toolbars |
+|system/main |`$:/info/browser/window/system/main/outer/height` | Full browser window including chrome, tabs, toolbars |
+|system/main |`$:/info/browser/window/system/main/inner/width` | Viewport width including scrollbars |
+|system/main |`$:/info/browser/window/system/main/inner/height` | Viewport height including scrollbars |
+|system/main |`$:/info/browser/window/system/main/client/width` | Content width excluding scrollbars |
+|system/main |`$:/info/browser/window/system/main/client/height` | Content height excluding scrollbars |
+|user/my-window |`$:/info/browser/window/user/my-window/outer/width` | Full browser window including chrome, tabs, toolbars |
+|user/my-window |`$:/info/browser/window/user/my-window/outer/height` | Full browser window including chrome, tabs, toolbars |
+|user/my-window |`$:/info/browser/window/user/my-window/inner/width` | Viewport width including scrollbars |
+|user/my-window |`$:/info/browser/window/user/my-window/inner/height` | Viewport height including scrollbars |
+|user/my-window |`$:/info/browser/window/user/my-window/client/width` | Content width excluding scrollbars |
+|user/my-window |`$:/info/browser/window/user/my-window/client/height` | Content height excluding scrollbars |

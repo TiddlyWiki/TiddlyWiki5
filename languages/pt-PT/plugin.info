@@ -2,7 +2,7 @@
 	"title": "$:/languages/pt-PT",
 	"name": "pt-PT",
 	"plugin-type": "language",
-	"description": "Portuguese (Portugal)",
+	"description": "Português (Portugal)",
 	"author": "Duarte Farrajota Ramos",
 	"core-version": ">=5.0.8"
 }

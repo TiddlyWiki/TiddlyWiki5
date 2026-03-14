@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9489
+description: Fix ActionLogWidget sluggishness
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9489
+github-contributors: yaisog
+
+PR #8972 introduced a change in the ActionLogWidget that could lead to a significant slowdown, which has been fixed.

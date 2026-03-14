@@ -15,5 +15,5 @@ TiddlyWeb can be used to host TiddlyWiki and TiddlyWiki5 wikis, making the indiv
 Other implementations of the API include:
 
 * [[TiddlyWiki App Engine Server|https://github.com/rsc/tiddly]], a 300-line Go implementation from Russ Cox
-* [[TiddlyWiki 5 server module|https://github.com/Jermolene/TiddlyWiki5/blob/master/core/modules/commands/server.js]], the bare-bones subset of the API implemented in TiddlyWiki version 5 for Node.js
+* [[TiddlyWiki 5 server module|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/core/modules/commands/server.js]], the bare-bones subset of the API implemented in TiddlyWiki version 5 for Node.js
 * [[tiddly-wiki-server|https://github.com/nathanielknight/tiddly-wiki-server]], an implementation based on Rust and SQLite

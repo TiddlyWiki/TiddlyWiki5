@@ -31,46 +31,46 @@ Date/DaySuffix/28: .
 Date/DaySuffix/29: .
 Date/DaySuffix/30: .
 Date/DaySuffix/31: .
-Date/Long/Day/0: Niedziela
-Date/Long/Day/1: Poniedziałek
-Date/Long/Day/2: Wtorek
-Date/Long/Day/3: Środa
-Date/Long/Day/4: Czwartek
-Date/Long/Day/5: Piątek
-Date/Long/Day/6: Sobota
-Date/Long/Month/1: Styczeń
-Date/Long/Month/2: Luty
-Date/Long/Month/3: Marzec
-Date/Long/Month/4: Kwiecień
-Date/Long/Month/5: Maj
-Date/Long/Month/6: Czerwiec
-Date/Long/Month/7: Lipiec
-Date/Long/Month/8: Sierpień
-Date/Long/Month/9: Wrzesień
-Date/Long/Month/10: Październik
-Date/Long/Month/11: Listopad
-Date/Long/Month/12: Grudzień
-Date/Period/am: AM
-Date/Period/pm: PM
-Date/Short/Day/0: nd
-Date/Short/Day/1: pn
-Date/Short/Day/2: wt
-Date/Short/Day/3: śr
-Date/Short/Day/4: cz
-Date/Short/Day/5: pt
-Date/Short/Day/6: sb
-Date/Short/Month/1: st
-Date/Short/Month/2: lut
-Date/Short/Month/3: mrz
-Date/Short/Month/4: kw
-Date/Short/Month/5: maj
-Date/Short/Month/6: cz
-Date/Short/Month/7: lip
-Date/Short/Month/8: sier
-Date/Short/Month/9: wrz
-Date/Short/Month/10: paź
-Date/Short/Month/11: lis
-Date/Short/Month/12: gr
+Date/Long/Day/0: niedziela
+Date/Long/Day/1: poniedziałek
+Date/Long/Day/2: wtorek
+Date/Long/Day/3: środa
+Date/Long/Day/4: czwartek
+Date/Long/Day/5: piątek
+Date/Long/Day/6: sobota
+Date/Long/Month/1: stycznia
+Date/Long/Month/2: lutego
+Date/Long/Month/3: marca
+Date/Long/Month/4: kwietnia
+Date/Long/Month/5: maja
+Date/Long/Month/6: czerwca
+Date/Long/Month/7: lipca
+Date/Long/Month/8: sierpnia
+Date/Long/Month/9: września
+Date/Long/Month/10: października
+Date/Long/Month/11: listopada
+Date/Long/Month/12: grudnia
+Date/Period/am: rano
+Date/Period/pm: po południu
+Date/Short/Day/0: niedz.
+Date/Short/Day/1: pon.
+Date/Short/Day/2: wt.
+Date/Short/Day/3: śr.
+Date/Short/Day/4: czw.
+Date/Short/Day/5: pt.
+Date/Short/Day/6: sob.
+Date/Short/Month/1: I
+Date/Short/Month/2: II
+Date/Short/Month/3: III
+Date/Short/Month/4: IV
+Date/Short/Month/5: V
+Date/Short/Month/6: VI
+Date/Short/Month/7: VII
+Date/Short/Month/8: VIII
+Date/Short/Month/9: IX
+Date/Short/Month/10: X
+Date/Short/Month/11: XI
+Date/Short/Month/12: XII
 RelativeDate/Future/Days: <<period>> dni od teraz
 RelativeDate/Future/Hours: <<period>> godzin od teraz
 RelativeDate/Future/Minutes: <<period>> minut od teraz
@@ -79,7 +79,7 @@ RelativeDate/Future/Second: 1 sekunda od teraz
 RelativeDate/Future/Seconds: <<period>> sekund od teraz
 RelativeDate/Future/Years: <<period>> lat od teraz
 RelativeDate/Past/Days: <<period>> dni temu
-RelativeDate/Past/Hours: <<period>> godizn temu
+RelativeDate/Past/Hours: <<period>> godzin temu
 RelativeDate/Past/Minutes: <<period>> minut temu
 RelativeDate/Past/Months: <<period>> miesięcy temu
 RelativeDate/Past/Second: 1 sekundę temu

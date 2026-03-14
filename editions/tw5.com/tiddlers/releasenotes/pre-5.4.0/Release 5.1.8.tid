@@ -1,0 +1,107 @@
+caption: 5.1.8
+created: 20150417163307227
+modified: 20150417163307227
+tags: ReleaseNotes
+title: Release 5.1.8
+type: text/vnd.tiddlywiki
+released: 2015041716307227
+description: Plugin library, Railroad Plugin, sticky titles, 7 new translations
+
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.7...v5.1.8]]//
+
+This release includes many improvements to the documentation for TiddlyWiki. Many thanks to everyone who has helped out, but especially to our prodigious new contributor Astrid Elocson.
+
+!! Translation Improvements
+
+* Improvements to French, Danish, Chinese and Japanese translations
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/cb8caf6a01aeeac480bf28661888961657b0dbd8]] Czech translation
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d6918d737f5d1b663346ad9a35421a5ae0ffb9a7]] [[Interlingua|https://en.wikipedia.org/wiki/Interlingua]] translation
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/6721a5eb1b77935226ccc8559008af3a0a05d0cb]] Portuguese translation
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b845751d3c549366adb2f6e5c58b0114fa95ba30]] Punjabi and Hindu translations
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/49a9a2c44ca3a71fff3062709f06940aaca4a574]] Slovak translation
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5d947ed582fb9d68c01d82a334ab75498a8724ef]] Spanish translation
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/2c367c5476da70ce9c2b37838febcdf437b9aca4]] localisation for encryption prompt
+
+!! Usability Improvements
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/987bfcfd5b49b992e5fd45f3428497f6f55cae53]] user interface for [[setting a page background image|Setting a page background image]]
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3df341621d30b205775288e324cef137c48e9f6e]] problem with unnecessary scrolling at startup
+* [[Upgraded|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ae001a19e5b3e43cf5388fd4e8d99788085649fe]] the [[KaTeX Plugin]] to use [[KaTeX v0.2.0|https://github.com/Khan/KaTeX/releases/tag/v0.2.0]], with better symbol support
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/70e419824fab107aab58f87780dbb5a1de70c248]] [[Help Plugin]] providing floating help panel
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8643278a452d1a300cec8d3425c1b18699a17dca]] support for an online plugin library
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ea6e60e66983ee1184f09c5796ef6c8bceae703a]] automatic focusing of the search box at startup
+* [[Introduced|https://github.com/TiddlyWiki/TiddlyWiki5/commit/4f3cb8b9aebfc4f65f40c96ef99730887d746b41]] the [[Railroad Plugin]] by Astrid Elocson (see it in action in the new [[Filter Syntax]] documentation)
+* [[Migrated|https://github.com/TiddlyWiki/TiddlyWiki5/commit/230066eeae9ace8336612e02c78f8cdaa3f717e4]] functionality of "Sticky Titles" theme into an optional tweak for the "Vanilla"/"Snow White" themes. This means that tiddler titles will stick to the top of the window during scrolling on browsers that support `position: sticky` (such as Safari and Firefox)
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8cb7090c40489c81e8c5dfb8cbbdee2c60998c3e]] icons to [[$:/AdvancedSearch]], [[$:/ControlPanel]] and [[$:/TagManager]]
+* [[Changed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/21b6ce71ffc617f61d4da0065a3ee695be535e2a]] wording of tiddler "save" button to "confirm"
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/issues/1103]] automatic linking of system tiddlers such as $:/ControlPanel
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/9c7936413a8c50817044eb409661a575f7f97563]] new tag dropdown to only list title matches
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/aae56f20af35e7be6f3839a8c727e3f43174efe9]] a warning banner notifying the user when modified plugins require the page to be reloaded
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0bd2ec50e1514ef247182816f9f9e421f52f67bb]] first pass at "stacked" story view
+* [[Changed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/421ac16389cf07e8c00611ef5a858da0b89f7584]] modal headers and footers to be parsed in inline mode by default (avoiding unneeded `<p>` tags)
+
+!! Hackability Improvements
+
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d340277cb219ffebd212fbf409e8ea804121d105]] [[resolvepath Macro]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/718ce3e4aa04f7af5e9310f90d3415c0d82bee6f]] ''class'' attribute to CheckboxWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/bb10e2b02900ece4701c44c3a7e7c03304e813b7]] support for a special message to be displayed when the main story river is empty
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/6e0c7d90221771ae384d620984f08a2090c500dc]] font rendering under Mac OS X
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a2493f80a973b24ad3d3affda945c437b98c2d2e]] support for embedding ZIP files
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1808b1597e5a61379e4e5381d6d78bb73fa3a523]] support for custom elements with the RevealWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/bd6472c1d10bc86eaf1b317c35b86f84086ee3c8]] ''style'' attribute to RevealWidget
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0b4ed3c72de16148ffe62abf1c5c06f2d2ce47f1]] text inputs to use palette colours
+* Several new [[core icons|ImageGallery Example]]: <span style="fill:#aaa;"><span title="$:/core/images/github">{{$:/core/images/github}}</span> <span title="$:/core/images/help">{{$:/core/images/help}}</span> <span title="$:/core/images/mail">{{$:/core/images/mail}}</span> <span title="$:/core/images/tip">{{$:/core/images/tip}}</span> <span title="$:/core/images/warning">{{$:/core/images/warning}}</span> <span title="$:/core/images/twitter">{{$:/core/images/twitter}}</span> <span title="$:/core/images/video">{{$:/core/images/video}}</span> <span title="$:/core/images/up-arrow">{{$:/core/images/up-arrow}}</span> <span title="$:/core/images/left-arrow">{{$:/core/images/left-arrow}}</span></span>
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/1520]] the [[sameday Operator]] and [[eachday Operator]] to accept TW5 date strings
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/1249]] version number compatibility checks for plugins
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1adfe20508116da0ee4b5c9e72ea9742f24b60c9]] problem with repeatedly cancelling a draft
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/050b643948e24d1d93a83766a23a0d693616d01e]] sandboxing of generated `<iframe>` elements
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b166632bbb76a7a033cd8fc3af14e5dadddfc631]] problem with modal backgrounds on Firefox
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1b87d9134bd0b45be671eebfdcac1d7acadcecf4]] problem with accidentally dragging a tiddler within its originating window
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c9ab873ba393753647f2b0b3b3aa1a8bcf6b1c28]] problem with dragging certain plugins with Safari
+* [[Partially fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/2f8837a44508687223c4d78e718cf82a9b35c97b]] problem with SVG icons being clipped by 1 pixel on the right and bottom
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f3ed9bf7e4936dd9bbe3e237673828bbe89326f9]] problem with double quotes in a new field value
+
+!! Node.js Changes
+
+//These changes are only relevant to people using TiddlyWiki under Node.js//
+
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/cc85368fd48f1e5878018a4e00b6c17d436e67a9]] [[Highlight Plugin]] to work when generating static files under Node.js
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c296f14210545374124df5d4ae9ffb402ed73561]] problem with case-insensitive filing systems (eg Windows)
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/1354]] mobile metadata to static page templates
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/1352]] added "noclean" parameter to RenderTiddlersCommand
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b768dc332b2d5d7ac1f731953cafb5fd1b30dad9]] [[editions Operator]] and [[editiondescription Operator]] for enumerating available editions
+
+!! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@aelocson|https://github.com/aelocson]]
+* [[@andreasabeck|https://github.com/andreasabeck]]
+* [[@alexhough|https://github.com/alexhough]]
+* [[@Arlen22|https://github.com/Arlen22]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@danielo515|https://github.com/danielo515]]
+* [[@dpdannemiller|https://github.com/dpdannemiller]]
+* [[@Drakor|https://github.com/Drakor]]
+* [[@evgeniy-gryaznov|https://github.com/evgeniy-gryaznov]]
+* [[@felixhayashi|https://github.com/felixhayashi]]
+* [[@gernert|https://github.com/gernert]]
+* [[@Infurnoape|https://github.com/Infurnoape]]
+* [[@Jc-L|https://github.com/Jc-L]]
+* [[@le-pako|https://github.com/le-pako]]
+* [[@Mathobal|https://github.com/Mathobal]]
+* [[@ng110|https://github.com/ng110]]
+* [[@pmario|https://github.com/pmario]]
+* [[@reflectionist|https://github.com/reflectionist]]
+* [[@roma0104|https://github.com/roma0104]]
+* [[@simonbaird|https://github.com/simonbaird]]
+* [[@Spangenhelm|https://github.com/Spangenhelm]]
+* [[@sukima|https://github.com/sukima]]
+* [[@tobibeer|https://github.com/tobibeer]]
+* [[@twMat|https://github.com/twMat]]
+* [[@welford|https://github.com/welford]]
+* [[@xcazin|https://github.com/xcazin]]

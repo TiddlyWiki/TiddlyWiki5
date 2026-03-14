@@ -1,0 +1,65 @@
+title: Message/tm-new-tiddler/new-from-template-without-tag
+description: tm-new-tiddler create 2 drafts from a template. Template has no tags field
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<pre>{{	Draft of 'new-tiddler-template 1'||output-template}}</pre>
+<pre>{{	Draft of 'new-tiddler-template 2'||output-template}}</pre>
++
+title: Actions
+
+<$navigator story="$:/StoryList">
+
+New in TW v5.3.6
+	Create a new tiddler from a template, which has no tags field
+	So draft should also have __no__ tags field
+
+<$action-sendmessage $message="tm-new-tiddler"
+	$param="new-tiddler-template"
+	text="some text"
+	z-field="a"
+/>
+
+Create a new tiddler from a template, which has no tag field
+AND __add__ a tags field with the command below
+
+<$action-sendmessage $message="tm-new-tiddler"
+	$param="new-tiddler-template"
+	text="some text"
+	z-field="a"
+	tag=""
+/>
+
+</$navigator>
+
++
+title: new-tiddler-template
+asdf: asdf
+
++
+title: output-template
+
+<!-- This template is used for saving tiddlers in TiddlyWeb *.tid format -->
+<$fields exclude='text bag created modified' template='$name$: $value$
+'></$fields>
+<$view field="text" format="text" />
++
+title: ExpectedResult
+
+<p><pre>asdf: asdf
+draft.of: new-tiddler-template 1
+draft.title: new-tiddler-template 1
+title: Draft of 'new-tiddler-template 1'
+z-field: a
+
+some text</pre>
+<pre>asdf: asdf
+draft.of: new-tiddler-template 2
+draft.title: new-tiddler-template 2
+tag: 
+title: Draft of 'new-tiddler-template 2'
+z-field: a
+
+some text</pre></p>

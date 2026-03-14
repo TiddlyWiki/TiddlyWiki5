@@ -1,0 +1,54 @@
+title: $:/plugins/tiddlywiki/geospatial/tests/widgets/geomap
+description: geomap widget
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec-XXXXX]]
+NOTE: THIS TEST IS DISABLED BECAUSE IT CURRENTLY DOES NOT WORK IN CI WITH PLAYWRIGHT
+
+title: Description
+text: Map using geolayer to represent features
++
+title: Layer
+tags: $:/tags/GeoFeature
+type: application/json
+color: red
+
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"id": "An example geofeature feature",
+			"properties": {
+				"custom": "A custom property of this feature",
+				"color": "#ff8"
+			},
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[
+						[-90,35],
+						[-90,30],
+						[-85,30],
+						[-85,35],
+						[-90,35]
+					]
+				]
+			}
+		}
+	]
+}
++
+title: Output
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+>
+	<$geolayer 
+		json={{Layer}}
+		colorFilter="[<currentTiddler>jsonget[properties],[color]else[red]]"
+	/>
+</$geomap>
++
+title: ExpectedResult
+
+<p><div style="width:100%;height:600px;"></div></p>

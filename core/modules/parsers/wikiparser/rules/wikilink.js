@@ -14,10 +14,7 @@ AnotherLink
 Precede a camel case word with `~` to prevent it from being recognised as a link.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "wikilink";
@@ -36,6 +33,7 @@ exports.parse = function() {
 	// Get the details of the match
 	var linkText = this.match[0];
 	// Move past the macro call
+	var start = this.parser.pos;
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// If the link starts with the unwikilink character then just output it as plain text
 	if(linkText.substr(0,1) === $tw.config.textPrimitives.unWikiLink) {
@@ -57,9 +55,9 @@ exports.parse = function() {
 		},
 		children: [{
 			type: "text",
-			text: linkText
+			text: linkText,
+			start: start,
+			end: this.parser.pos
 		}]
 	}];
 };
-
-})();

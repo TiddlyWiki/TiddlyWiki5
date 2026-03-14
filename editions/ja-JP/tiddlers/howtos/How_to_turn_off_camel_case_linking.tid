@@ -1,0 +1,27 @@
+created: 20161209172820513
+modified: 20241021112200962
+original-modified: 20240923161828376
+tags: [[Customise TiddlyWiki]] Learning
+title: How to turn off camel case linking
+ja-title: キャメルケースリンクをオフにする方法
+type: text/vnd.tiddlywiki
+
+[[キャメルケース|CamelCase]]は多くのWikiで使用されていますが、状況によってはテキスト表示に支障をきたす可能性があります。
+
+!! キャメルケースを局所的にオフにする
+
+特定の[[キャメルケース|CamelCase]]ワードがリンクされないようにするには、次のようにワードの前にチルダ(~)を書きます: 
+
+```
+~CamelCase
+```
+
+Tiddler全体に対して[[キャメルケース|CamelCase]]を無効にする必要がある場合は、[[\rulesプラグマ|Pragma: \rules]]を使用できます:
+
+```
+\rules except wikilink
+```
+
+!! キャメルケースをグローバルにオフにする
+
+すべてのTiddlerで[[キャメルケース|CamelCase]]をオフにするには、[[コントロールパネル|$:/ControlPanel]]に移動します。`設定`タブを選択し、``Camel Case Wiki リンク``セクションまでスクロールするか読み進み、``自動で CamelCase リンクを有効にする``の選択を解除します。

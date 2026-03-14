@@ -1,0 +1,22 @@
+created: 20240622144753311
+description: Blank line after open tag in table syntax
+modified: 20240622145056299
+tags: $:/tags/wiki-test-spec
+title: TestCases/HTML/OpenTagBlankLineInTableSyntax
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+A blank line after an open html tag cannot work when used inside table syntax since each row of a table must be all on one line
++
+title: Output
+
+|For a blank line after open tag|<div>
+
+* list is recognised
+* but the surrounding table row is not
+</div>|
++
+title: ExpectedResult
+
+<p>|For a blank line after open tag|<div><ul><li>list is recognised</li><li>but the surrounding table row is not</li></ul></div>|</p>

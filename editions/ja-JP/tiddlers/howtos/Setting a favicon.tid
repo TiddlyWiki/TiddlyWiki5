@@ -1,0 +1,19 @@
+created: 20131224074240979
+modified: 20241117110141506
+original-modified: 20200510115704738
+tags: [[Customise TiddlyWiki]]
+title: Setting a favicon
+ja-title: faviconを設定する
+type: text/vnd.tiddlywiki
+
+"favicon"は、Webサイトを区別できるようにするために、主なブラウザで表示される小さなアイコンです。すべてのブラウザはビットマップ画像形式をサポートしていますが、SVG画像形式のアイコンをサポートしているのは特定の最新ブラウザだけであることに注意してください。
+
+! ブラウザのfavicon
+
+TiddlyWikiがブラウザで起動すると、[[$:/favicon.ico]]というTiddlerが検索され、ページのfaviconとして動的に使用されます。画像を変更すると、faviconが即座に変更され、反映されます。
+
+<<.from-version "5.1.23">> 外部画像をfaviconとして設定するには、[[$:/favicon.ico]]Tiddlerの''_canonical_uri''フィールドにURLを割り当てます。
+
+! サーバ上のfavicon
+
+サーバ上では、ServerCommandがパス`/favicon.ico`に[[$:/favicon.ico]]Tiddlerを提供します。

@@ -1,0 +1,22 @@
+created: 20150124125646000
+modified: 20241108113832769
+original-modified: 20220729141540007
+tags: Tagging
+title: Order of Tagged Tiddlers
+ja-title: タグ付きTiddlerの順序
+type: text/vnd.tiddlywiki
+
+~TiddlyWikiは、特定のタグを持つTiddlerのリスト(たとえば、タグピルのドロップダウンリストなど)を生成するときに、次のルールを使用してTiddlerを並べます: 
+
+# タグTiddlerの<<.field list>>フィールドで[[指定されて|Title List]]いるものから、そこに指定された順序で開始します。
+
+# 残りのTiddler<<.place T>>で、<<.field list-before>>フィールドを探します。この値にTiddlerタイトルが含まれる場合は、その<<.em 直前>>に<<.place T>>を配置します。
+#* 特別なケースとして、フィールドは存在するがその値が空の場合は、リストの先頭に<<.place T>>を配置します。
+
+# 残りのTiddler<<.place T>>で、<<.field list-after>>フィールドを探します。この値にTiddlerタイトルが含まれる場合は、その<<.em 直後>>にTiddler<<.place T>>を配置します。
+
+#* 特別なケースとして、フィールドは存在するがその値が空の場合は、リストの一番最後に<<.place T>>を配置します。
+
+# まだ残っているTiddlerがある場合は、タイトルのアルファベットの昇順でリストの最後に配置します。大文字小文字の違いは無視されます。
+
+特定のタグが付いたTiddlerの順序は、タグピルドロップダウン内でドラッグアンドドロップを使用して直接変更できます。基礎となる[[list-tagged-draggableマクロ|list-tagged-draggable Macro]]は、他の場所でも使用できます。

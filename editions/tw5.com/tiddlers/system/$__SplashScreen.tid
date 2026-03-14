@@ -113,7 +113,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 </div>
 
 <div class="tc-splash-text">
-Please wait while {{$:/SiteTitle}} is loading
+<strong>{{$:/SiteTitle}}</strong>
+<br/>
+is loading
 </div>
 
 <!-- Demonstrating how to embed a bitmap graphic --> 

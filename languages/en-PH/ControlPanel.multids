@@ -1,0 +1,9 @@
+title: $:/language/ControlPanel/
+
+Appearance/Hint: Ways to customize the appearance of your TiddlyWiki.
+Basics/Language/Prompt: Mabuhay! Current language:
+LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicized modules lack a source tiddler, typically because they were setup during the boot process.
+Palette/Editor/Names/External/Show: Show color names that are not part of the current palette
+Settings/Hint: These settings let you customize the behaviour of TiddlyWiki.
+TiddlerColour/Caption: Tiddler Color
+TiddlerColour/Hint: This rules cascade is used to dynamically choose the color for a tiddler (used for the icon and the associated tag pill).

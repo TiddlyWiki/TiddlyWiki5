@@ -1,5 +1,5 @@
 created: 20130826122000000
-modified: 20220613124446953
+modified: 20240520162828577
 tags: Mechanisms
 title: PluginMechanism
 type: text/vnd.tiddlywiki
@@ -15,6 +15,10 @@ Plugins can be used to package any tiddler content, including JavaScript [[modul
 By convention, plugin titles have the form `$:/plugins/<publisher>/<name>`. Plugins that are part of the core TiddlyWiki distribution have titles of the form `$:/plugins/tiddlywiki/<name>`.
 
 When [[running TiddlyWiki under Node.js|TiddlyWiki on Node.js]], plugins can also be stored as individual tiddler files in [[PluginFolders]].
+
+! Plugin Stability
+
+{{Plugin Stability}}
 
 ! Plugin Types
 

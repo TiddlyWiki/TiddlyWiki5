@@ -33,10 +33,7 @@ pragmas:
 	\end single|double|none
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var components = require("$:/plugins/tiddlywiki/railroad/components.js").components;
@@ -249,7 +246,7 @@ Parser.prototype.parseTerminal = function() {
 	var component = new components.Terminal(this.token.value);
 	// Consume the string literal
 	this.advance();
-    return component;
+	return component;
 };
 
 Parser.prototype.parseTransclusion = function() {
@@ -292,18 +289,18 @@ Parser.prototype.parsePragma = function() {
 
 Parser.prototype.parseYesNo = function(pragma) {
 	return this.parseSetting(["yes","no"],pragma) === "yes";
-}
+};
 
 Parser.prototype.parseTerminusStyle = function(pragma) {
 	return this.parseSetting(["single","double","none"],pragma);
-}
+};
 
 Parser.prototype.parseSetting = function(options,pragma) {
 	if(this.at("name") && options.indexOf(this.token.value) !== -1) {
 		return this.tokenValueEaten();		
 	}
 	throw options.join(" or ") + " expected after \\" + pragma;
-}
+};
 
 /////////////////////////// Token manipulation
 
@@ -377,7 +374,7 @@ Parser.prototype.tokenise = function(source) {
 		// Skip whitespace
 		pos = $tw.utils.skipWhiteSpace(source,pos);
 		// Avoid falling off the end of the string
-		if (pos >= source.length) {
+		if(pos >= source.length) {
 			break;
 		}
 		// Examine the next character
@@ -448,5 +445,3 @@ Parser.prototype.readPragma = function(source,pos) {
 /////////////////////////// Exports
 
 exports.parser = Parser;
-
-})();

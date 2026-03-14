@@ -1,0 +1,21 @@
+created: 20170127221457627
+modified: 20241226112706885
+original-modified: 20170127222646488
+title: License
+ja-title: ライセンス
+type: text/vnd.tiddlywiki
+tags: About
+
+TiddlyWikiは、[[隠しTiddler|ShadowTiddlers]] [[$:/core/copyright.txt]]に保存されている[[寛容な3条項BSDライセンス|https://opensource.org/licenses/BSD-3-Clause]]に基づいて公開されています:
+
+<div style="font-size: 0.7em;line-height:1.4;">
+
+{{$:/core/copyright.txt}}
+
+</div>
+
+平たく言うと、このライセンスには、~TiddlyWikiの作成者やその他の者へのライセンス料の支払いやその他の法的義務を課すことなく、TiddlyWikiを利用して、やりたいことを何でもできる、と書かれています。代償として、~TiddlyWikiのようなオープンソースプロジェクトには何の保証もありません。~TiddlyWikiに関わる悲劇的な状況の連鎖によってデータが失われたとしても、~TiddlyWikiの使用による損失や損害についてTiddlyWikiの貢献者を訴えることはできません
+
+プロジェクトへの関わりを明示することが求められていますが、そうする義務はありません
+
+誤解を避けるために付け加えておきますが、あなたが~TiddlyWikiの自分のコピー内に保存する情報はすべて、あなたのもののままです。~TiddlyWikiを使用してコンテンツを公開しても、そのコンテンツに対してあなたが持つ権利は変更されません

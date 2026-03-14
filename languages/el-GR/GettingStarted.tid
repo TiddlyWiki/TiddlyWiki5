@@ -1,18 +1,18 @@
 title: GettingStarted
 
 \define lingo-base() $:/language/ControlPanel/Basics/
-Καλώς ήρθατε στο ~TiddlyWiki, και στην ~TiddlyWiki κοινότητα
+Καλώς ήρθες στο ~TiddlyWiki, και στην κοινότητα ~TiddlyWiki
 
-Πριν ξεκινήσετε να διοχετεύετε σημαντικές πληροφορίες στο ~TiddlyWiki είναι σημαντικό να σιγουρευτείτε ότι μπορείτε να αποθηκεύσετε τις αλλαγές σας με αξιοπιστία. Δείτε στο  https://tiddlywiki.com/#GettingStarted για λεπτομέρειες
+Πριν διοχετεύσεις σημαντικές πληροφορίες στο ~TiddlyWiki, είναι σημαντικό να σιγουρέψεις ότι μπορείς να αποθηκεύσεις τις αλλαγές σου με αξιοπιστία. Δες https://tiddlywiki.com/#GettingStarted για λεπτομέρειες
 
-!! Ρυθμίστε αυτό το ~TiddlyWiki
+!! Ρύθμισε αυτό το ~TiddlyWiki
 
 <div class="tc-control-panel">
 
-|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
-|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
-|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+|tc-table-no-border tc-first-col-min-width tc-first-link-nowrap|k
+| <$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link>|<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+| <$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link>|<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|^ <$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link><br><<lingo DefaultTiddlers/TopHint>>|<$edit tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
 </div>
 
-
-Δείτε στον [[πίνακα ελέγχου|$:/ControlPanel]] για περισσότερες επιλογές.
+Δες τον [[πίνακα ελέγχου|$:/ControlPanel]] για περισσότερες επιλογές.

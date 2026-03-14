@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/geospatial/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.leaflet-retina .leaflet-control-layers-toggle,
+.leaflet-control-layers-toggle {
+    background-image: url(<<datauri '$:/plugins/tiddlywiki/geospatial/leaflet/images/layers-2x.png'>>);
+
+}

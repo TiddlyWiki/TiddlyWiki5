@@ -1,0 +1,12 @@
+title: $:/geospatialdemo/features/canada-census-subdivision-millesime/popupTemplate
+
+!!! Canadian Census Subdivision Boundary
+
+|!Field |!English |!French |
+|Year |<$text text={{{ [<feature>jsonget[properties],[year]] }}}/> |<|
+|Province Code |<$text text={{{ [<feature>jsonget[properties],[prov_code]join[,]] }}}/> |<|
+|Province Name |<$text text={{{ [<feature>jsonget[properties],[prov_name_en]join[,]] }}}/> |<$text text={{{ [<feature>jsonget[properties],[prov_name_fr]join[,]] }}}/> |
+|Census Division Code |<$text text={{{ [<feature>jsonget[properties],[cd_code]join[,]] }}}/> |<|
+|Census Division Name |<$text text={{{ [<feature>jsonget[properties],[cd_name_en]join[,]] }}}/> |<$text text={{{ [<feature>jsonget[properties],[cd_name_fr]join[,]] }}}/> |
+|Census Subdivision Code |<$text text={{{ [<feature>jsonget[properties],[csd_area_code]join[,]] }}}/> |<|
+|Census Subdivision Name |<$text text={{{ [<feature>jsonget[properties],[csd_name_en]join[,]] }}}/> |<$text text={{{ [<feature>jsonget[properties],[csd_name_fr]join[,]] }}}/> |

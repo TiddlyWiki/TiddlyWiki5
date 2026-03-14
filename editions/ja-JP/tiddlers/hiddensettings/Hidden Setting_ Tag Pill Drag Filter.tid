@@ -1,0 +1,24 @@
+created: 20240508093242925
+modified: 20241201115406166
+original-modified: 20240728134955433
+tags: [[Hidden Settings]]
+title: Hidden Setting: Tag Pill Drag Filter
+ja-title: 隠し設定: タグピルのドラッグフィルター
+type: text/vnd.tiddlywiki
+
+''~$:/core/config/TagPillDragFilter''は、タップピル(例: <<tag HelloThere>>)をあるWikiから別のWikiへ、ドラッグアンドドロップするために使用されるフィルター文字列を定義します。
+
+* デフォルトでは、セットには、HelloThere''タグが付けられた''Tiddlerが、HelloThereタグTiddler自体を''除いて''すべて含まれます。
+** Coreのデフォルト: <code><$transclude $tiddler="$:/core" $subtiddler="$:/core/config/TagPillDragFilter" output="text/plain" /></code>
+* タグTiddlerを含める場合は、次のフィルターを使用します: 
+** タグ付けされたTiddlerのみ: `[all[current]tagging[]] [all[current]is[tiddler]] +[!is[draft]]`
+
+$:/core/config/TagPillDragFilter
+<%if [[$:/core/config/TagPillDragFilter]is[tiddler]] %>
+''は上書きされて'' 次のとおりです:
+<%else%>
+デフォルトで次のとおりです:
+<%endif%>
+<code>{{$:/core/config/TagPillDragFilter}}</code>
+
+<<.note title:"注意" _:"Coreのデフォルトフィルターには、隠しTiddlerは含まれ//ません//。上書きされた隠しTiddlerは//含まれ//ます。`is[tiddler]`やその他の可能なことの詳細については、 [[isオペレーター|is Operator]]を参照してください。">>

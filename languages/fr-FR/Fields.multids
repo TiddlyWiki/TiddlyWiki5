@@ -2,8 +2,9 @@ title: $:/language/Docs/Fields/
 
 _canonical_uri: L'URI complet vers le contenu externe d'un tiddler image
 author: Nom de l'auteur d'un plugin
-bag: Nom du <q>bag</q> d'où provient le tiddler
+bag: Nom du ''bag'' d'où provient le tiddler
 caption: Texte à afficher sur un onglet ou un bouton
+class: La classe CSS appliquée à un tiddler lors de son rendu — voir [[Custom styles by user-class]]. Également utilisée pour les [[Modals]]
 code-body: Le template de visualisation affichera ce tiddler comme du code si la valeur est ''yes''
 color: Couleur CSS associée au tiddler
 component: Nom du composant responsable pour un [[tiddler d'alerte|AlertMechanism]]
@@ -18,7 +19,7 @@ draft.title: Pour les tiddlers en cours d'édition, contient le nouveau titre pr
 footer: Texte de bas de page dans le cas d'une fenêtre modale
 hide-body: Le template de visualisation cachera le corps des tiddlers si la valeur est ''yes''
 icon: Titre du tiddler contenant l'icone associée à un tiddler
-library: Si la valeur est <q>yes</q>, indique qu'un tiddler doit être sauvegardé comme bibliothèque JavaScript
+library: Une valeur ''yes'' indique qu'un tiddler doit être sauvegardé comme bibliothèque JavaScript
 list: Liste ordonnée de titres de tiddlers associée à un tiddler
 list-before: Si présent, contient le titre du tiddler avant lequel ce tiddler doit être ajouté dans la liste ordonnée des titres de tiddlers. Si ce champ est présent mais vide, le titre doit être ajouté au début de la liste.
 list-after: Si présent, contient le titre du tiddler après lequel ce tiddler doit être ajouté dans la liste ordonnée des titres de tiddlers.
@@ -29,8 +30,9 @@ name: Dans le cas d'un tiddler plugin, le nom associé à ce plugin
 parent-plugin: Dans le cas d'un tiddler plugin, spécifie de quel plugin il est un sous-plugin
 plugin-priority: Dans le cas d'un tiddler plugin, un nombre indiquant sa priorité
 plugin-type: Dans le cas d'un tiddler plugin, le type du plugin
-revision: Numéro de révision du tiddler présent sur le serveur
+stability: Le statut de développement d'un plugin : deprecated, experimental, stable, ou legacy
 released: Date de version d'un TiddlyWiki
+revision: Numéro de révision du tiddler présent sur le serveur
 source: URL source associée à ce tiddler
 subtitle: Texte du sous-titre pour une fenêtre modale
 tags: Liste des tags associés à un tiddler

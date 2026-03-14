@@ -1,0 +1,20 @@
+title: Functions/FunctionFilterrunVariables4
+description: Nested functions in filter runs that set variables should not pollute upstream widget tree
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\function .a() [.b[]]
+\function .b() [all[]] :map[subtract[1].c[]]
+\function .c() [all[]] :map[subtract[1].d[]]
+\function .d() [all[]] :map[subtract[1].e[]]
+\function .e() [all[]] :map[subtract[1]]
+
+
+<$text text={{{ [[10]] :map:flat[.a[]then<currentTiddler>] }}}/>
+
++
+title: ExpectedResult
+
+10

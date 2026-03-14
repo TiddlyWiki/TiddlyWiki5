@@ -1,0 +1,27 @@
+title: Flickr Demo
+caption: Flickr
+tags: $:/tags/GeospatialDemo
+
+! Retrieve Geotagged Flickr Photos
+
+This demo will not work until you have set a Flickr API key in the [[Geospatial plugin settings|$:/plugins/tiddlywiki/geospatial/settings]].
+
+<$button>
+<$macrocall $name="flickr-get-album-items" albumID={{$:/config/flickr-param/album-id}}/>
+Get Flickr album
+</$button> <$edit-text tiddler="$:/config/flickr-param/album-id" tag="input"/> (parameter should be an album ID, e.g. 72157630297432522)
+
+<$button>
+<$macrocall $name="flickr-get-interesting-items"/>
+Get Flickr interesting items
+</$button>
+
+<$button>
+<$macrocall $name="flickr-get-photos-of-user-items" userID={{$:/config/flickr-param/user-id}}/>
+Get Flickr photos of user
+</$button> <$edit-text tiddler="$:/config/flickr-param/user-id" tag="input"/> (parameter should be a user ID, e.g. 35468148136@N01)
+
+<$button>
+<$macrocall $name="flickr-get-group-items" groupID={{$:/config/flickr-param/group-id}}/>
+Get Flickr group
+</$button> <$edit-text tiddler="$:/config/flickr-param/group-id" tag="input"/> (parameter should be an group ID, e.g. 22075379@N00)

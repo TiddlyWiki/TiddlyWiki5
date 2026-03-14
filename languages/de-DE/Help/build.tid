@@ -1,7 +1,7 @@
 title: $:/language/Help/build
 description: Ausführen, von vorkonfigurierten Befehlen.
 
-Dieser Befehl erstellt die vorkonfigurierten Ziele, der aktuellen Wiki Edition. Sind keine Ziele spezifiziert, dann werden all konfigurierten Ziele erstellt.
+Dieser Befehl erstellt eine Zielversion, der aktuellen Wiki Edition. Sind keine Ziele spezifiziert, dann werden all konfigurierten Ziele erstellt.
 
 ```
 --build <target> [<target> ...]

@@ -1,0 +1,7 @@
+import-field-column: Sales Agent
+import-field-name: salesagent
+import-field-source: column
+import-spec-role: field
+title: $:/_importspec/RealEstate/PropertiesRow/Field/salesagent
+type: text/vnd.tiddlywiki
+

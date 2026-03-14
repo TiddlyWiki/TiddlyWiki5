@@ -1,0 +1,31 @@
+created: 20160107222430613
+modified: 20241221112212036
+original-modified: 20220617115930635
+tags: Plugins
+title: Manually installing a plugin
+ja-title: プラグインを手動でインストールする
+type: text/vnd.tiddlywiki
+
+\rules except wikilink
+
+手順を//隣に並べて//実行したい場合は、<<open-external-window "https://tiddlywiki.com/plugins/tiddlywiki/katex">>でできます。
+
+# 現在のTiddlyWiki HTMLファイルのバックアップを作成します([[念のため|The First Rule of Using TiddlyWiki]])
+
+# ブラウザでTiddlyWikiを開きます
+
+# 別のブラウザウィンドウで、プラグインへのリンク(例: https://tiddlywiki.com/plugins/tiddlywiki/katex )を見つけます。通常、これらのリンクはプラグインのホームページにあります
+
+# TiddlyWikiブラウザウィンドウに、`$:/plugins/tiddlywiki/example`へのリンクをドラッグします
+
+# $:/Import Tiddlerに表示された新しいプラグインをインポートします
+
+# TiddlyWikiを保存します(<<.icon $:/core/images/save-button-dynamic>>)
+
+# ウィンドウの上部に黄色い警告バーが表示された場合は、TiddlyWikiがプラグイン<<.icon $:/core/images/refresh-button>>のインストールを完了するためにウィンドウを更新します。
+
+#* <<.from-version "5.1.22">> 動的読み込みをサポートするプラグインを削除するときにTiddlyWikiを更新する必要がなくなりました。詳細については、[[プラグインのメカニズム|PluginMechanism]]を参照してください。
+
+# これでプラグインが使用できるようになりました
+
+<$macrocall $name=".note" _="公式プラグインライブラリからプラグインをインストールする方法の詳細については、[[プラグインライブラリからプラグインをインストールする|Installing a plugin from the plugin library]]を確認してください。<br>概要は[[プラグイン|Plugins]]でご覧いただけます。"/> 

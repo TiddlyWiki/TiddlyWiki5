@@ -2,8 +2,8 @@ title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/search
 caption: Searching
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 hint-selector: .tc-sidebar-search .tc-popup-handle
-step-success-filter: [{$:/temp/search}match[help]]
+step-success-filter: [{$:/temp/search}match[home]]
 
-<<tour-task "Search for the phrase 'help'">>
+<<tour-task "Search for the phrase 'home'">>
 
 Type the phrase into the text box labelled "search" in the sidebar at the right.

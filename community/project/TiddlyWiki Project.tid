@@ -1,0 +1,10 @@
+title: TiddlyWiki Project
+modified: 20250909171928024
+created: 20250909171928024
+tags: Community About
+
+The TiddlyWiki Project is the coordinated, ongoing effort to maintain and improve TiddlyWiki, and to support the TiddlyWiki community.
+
+{{Community Cards Caveats}}
+
+<$list filter="[tag[Community/Team]]" template="$:/tiddlywiki/community/cards/ViewTemplateBodyTemplateTeam"/>

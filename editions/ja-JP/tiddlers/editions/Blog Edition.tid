@@ -1,0 +1,11 @@
+created: 20150902123139133
+modified: 20241221102414663
+original-modified: 20150902123255662
+tags: Editions
+title: Blog Edition
+ja-title: ブログエディション
+type: text/vnd.tiddlywiki
+
+TiddlyWikiの''ブログ''エディションには、TiddlyWikiで書かれた静的HTMLブログの公開を支援するツールが含まれています。現在、Node.jsで使用するように設計されています。
+
+ドキュメントは準備中ですが、使用例については https://github.com/Jermolene-blog/blog を参照してください。

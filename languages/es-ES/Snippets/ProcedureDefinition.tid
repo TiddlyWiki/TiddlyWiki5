@@ -1,0 +1,7 @@
+title: $:/language/Snippets/ProcedureDefinition
+tags: $:/tags/TextEditor/Snippet
+caption: Definición Procedimiento
+
+\procedure procName(param1:"valor defecto",param2)
+Tu texto se pone aquí.
+\end

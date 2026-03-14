@@ -6,10 +6,7 @@ module-type: startup
 Zoom everything
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -158,7 +155,7 @@ function updateAddressBar() {
 		var top = findTopmostTiddler();
 		if(top.element) {
 			var hash = "#" + encodeURIComponent(top.title) + ":" + encodeURIComponent("[list[$:/StoryList]]");
-			if(title && $tw.locationHash !== hash) {
+			if(top.title && $tw.locationHash !== hash) {
 				$tw.locationHash = hash;
 				window.location.hash = hash;			
 			}
@@ -263,5 +260,3 @@ function saveViewportDimensions() {
 		}
 	}
 }
-
-})();

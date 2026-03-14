@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/menubar/items/contents
+ja-title: $:/plugins/tiddlywiki/menubar/items/contents
+caption: 目次
+description: 目次
+is-dropdown: yes
+tags: $:/tags/MenuBar
+
+<div class="tc-table-of-contents">
+
+<$macrocall $name="toc-selective-expandable" tag={{$:/config/plugins/menubar/TableOfContents/Tag}}/>
+
+</div>

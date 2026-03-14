@@ -1,19 +1,19 @@
 caption: list-thumbnails
 created: 20200612170158838
-modified: 20200612171804473
+modified: 20230803033631967
 tags: Macros [[Core Macros]]
 title: list-thumbnails Macro
 type: text/vnd.tiddlywiki
 
-The <<.def list-thumbnails>> [[macros|Macros]] are used to create lists of linkable thumbnail panels.
+The <<.def list-thumbnails>> [[macros|Macros]] are used to create lists of linkable thumbnail panels. It assumes that the input has <<.field icon>>, <<.field color>>, <<.field background-color>>, <<.field image>>, and <<.field caption>> fields, filled as desired.
 
 !! Parameters
 
 ;filter
-: filter for selecting thumbnails
+: A [[filter|Filters]] for selecting thumbnails
 ;width
-:Width of thumbnail (default 280 pixels)
+: A width in px for the thumbnail, defaulting to `280`
 ;height
-:Height of thumbnail (default 157 pixels)
+: A height in px for the thumbnail, defaulting to `157`
 
 <<.macro-examples "list-thumbnails">>

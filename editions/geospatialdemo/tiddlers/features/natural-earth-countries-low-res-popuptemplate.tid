@@ -1,0 +1,32 @@
+title: $:/geospatialdemo/features/natural-earth-countries-low-res/popupTemplate
+
+!!! Countries of the World from Natural Earth
+
+''<$text text={{{ [<feature>jsonget[properties],[name_en]] }}}/>'' (<$text text={{{ [<feature>jsonget[properties],[formal_en]] }}}/>)
+
+<div style=`height: 10em; overflow: scroll;`>
+	<table>
+		<thead>
+			<tr>
+				<th>
+					Field
+				</th>
+				<th>
+					Value
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<$list filter="[<feature>jsonindexes[properties]]">
+				<tr>
+					<td>
+						<$text text=<<currentTiddler>>/>
+					</td>
+					<td>
+						<$text text={{{ [<feature>jsonget[properties],<currentTiddler>] }}}/>
+					</td>
+				</tr>
+			</$list>
+		</tbody>
+	</table>
+</div>

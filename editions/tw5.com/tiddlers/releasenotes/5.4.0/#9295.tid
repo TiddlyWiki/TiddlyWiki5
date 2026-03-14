@@ -1,0 +1,14 @@
+title: $:/changenotes/5.4.0/#9295
+description: Markdown: Fix missing inline support and macrocall args parsing error
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9295
+github-contributors: cdruan
+
+* Fix markdown parser to respect ''parseAsInline'' option [[#8917|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8917]].
+
+* Fix improper parsing of macrocall, whenenver args contain `>` character.
+
+* Use ''$tw.log.MARKDOWN'' flag to enable debug messages.

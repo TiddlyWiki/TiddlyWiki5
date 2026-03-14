@@ -1,0 +1,9 @@
+created: 20240726074915230
+modified: 20240726075106830
+tags: Definitions
+title: WordJoiner
+type: text/vnd.tiddlywiki
+
+>The word joiner (WJ) is a Unicode format character which is used to indicate that line breaking should not occur at its position. It does not affect the formation of ligatures or cursive joining and is ignored for the purpose of text segmentation. It is encoded since Unicode version 3.2 (released in 2002) as U+2060 WORD JOINER (`&NoBreak;`). 
+>
+>https://en.wikipedia.org/wiki/Word_joiner

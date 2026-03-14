@@ -6,10 +6,7 @@ module-type: library
 Structure for modelling mapping between a string and its representation in the DOM
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var PREFIX_SUFFIX_LENGTH = 50;
@@ -85,7 +82,7 @@ exports.TextMap.prototype.findText = function(targetString,targetPrefix,targetSu
 				startOffset: startPos - startMetadata.start,
 				endNode: endMetadata.domNode,
 				endOffset: (startPos + targetString.length) - endMetadata.start
-			}			
+			};			
 		}
 	}
 	return null;
@@ -119,12 +116,12 @@ exports.TextMap.prototype.search = function(searchString,options) {
 	} else if(options.mode === "whitespace") {
 		// Normalise whitespace
 		regExpString = "(" + searchString.split(/\s+/g).filter(function(word) {
-			return !!word
+			return !!word;
 		}).map($tw.utils.escapeRegExp).join("\\s+") + ")";
 	} else if(options.mode === "words" || options.mode === "some") {
 		// Match any word separated by whitespace
 		regExpString = "(" + searchString.split(/\s+/g).filter(function(word) {
-			return !!word
+			return !!word;
 		}).map($tw.utils.escapeRegExp).join("|") + ")";
 	} else {
 		// Normal search
@@ -167,8 +164,8 @@ Given a start container and offset and a search string, return a prefix and suff
 */
 exports.TextMap.prototype.extractContext = function(startContainer,startOffset,text) {
 	var startMetadata = this.metadata.find(function(metadata) {
-			return metadata.domNode === startContainer
-		});
+		return metadata.domNode === startContainer;
+	});
 	if(!startMetadata) {
 		return null;
 	}
@@ -178,5 +175,3 @@ exports.TextMap.prototype.extractContext = function(startContainer,startOffset,t
 		suffix: this.string.slice(startPos + text.length, Math.min(startPos + text.length + PREFIX_SUFFIX_LENGTH, this.string.length))
 	};
 };
-
-})();

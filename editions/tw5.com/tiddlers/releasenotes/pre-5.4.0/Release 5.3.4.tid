@@ -1,0 +1,170 @@
+caption: 5.3.4
+created: 20240627165458407
+description: Testcase Widget, Tour Plugin, Geospatial Plugin, transcludes- backtranscludes operators, ... 
+modified: 20240628132840367
+released: 20240627165458407
+tags: ReleaseNotes
+title: Release 5.3.4
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.3...v5.3.4]]//
+
+<<.banner-credits
+	credit:"""Congratulations to [[duarte.framos|https://talk.tiddlywiki.org/u/duarte.framos]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/banner-image-competition-for-v5-3-4/9940]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/05792a9de331dc31b5016c2029a43977114eb018/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
+! Major Improvements
+
+!! Tour Plugin
+
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7734">> several new features that together allow interactive learning tours to be created and presented in TiddlyWiki.
+
+The demo TiddlyWiki interactive tour can be seen at https://tiddlywiki.com/tour
+
+The new features include:
+
+* The new Tour Plugin itself
+* The new Confetti Plugin that allows animated bursts of confetti to be displayed
+* Improvements to the Dynannotate Plugin to add the ability to highlight screen elements using an animated spotlight effect
+
+!! Geospatial Plugin
+
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7406">> new Geospatial Plugin that adds new primitives to the TiddlyWiki platform to enable non-developers to build sophisticated interactive geospatial applications.
+
+The Geospatial Plugin incorporates a number of third party libraries and online services:
+
+* [[Leaflet.js|https://leafletjs.com/]], an open source library to display interactive maps
+* [[Turf.js|https://turfjs.org/]], an open source library to perform geospatial calculations with [[GeoJSON|https://en.wikipedia.org/wiki/GeoJSON]] objects
+* [[TravelTime|https://traveltime.com/]], a commercial API for [[geocoding|https://traveltime.com/features/geocoding]], [[routing|https://traveltime.com/features/multi-modal-routing]] and [[isochrones|https://traveltime.com/features/isochrones]]
+* [[Flickr|https://www.flickr.com/services/api/]], a free API for retrieving geotagged photographs
+* [[OpenLocationCode|https://github.com/google/open-location-code]], Google's open source library for converting to and from Open Location Codes (also known as [[PlusCodes|https://maps.google.com/pluscodes/]])
+
+Try it out at https://tiddlywiki.com/plugins/tiddlywiki/geospatial/
+
+!! <<.wlink TestCaseWidget>> Widget
+
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7817">> new <<.wlink TestCaseWidget>> widget that is intended to solve a problem with the examples that we feature in the documentation. The existing macros are workable for simple, self-contained examples, but can be hard to follow in cases where the examples use additional tiddlers. The <<.wlink TestCaseWidget>> widget displays complete, self-contained interactive examples showing the output together with a tabbed display of the constituent tiddlers that produce it:
+
+<<testcase "TestCases/TestCaseWidget/TwoPlusTwo">>
+
+The payload tiddlers for a test case are specified with the <<.wlink DataWidget>> widget. Test cases are run as an independent, self-contained nested wiki in a similar way to the [[Innerwiki Plugin]], but are much more lightweight. The disadvantage is that test cases are rendered as part of the main page, and so any styling changes will leak out to the rest of the page.
+
+Test cases can also specify the raw HTML of the expected result which causes them to be executed as tests, with success or failure indicated by an icon:
+
+<<testcase "TestCases/TestCaseWidget/FailingTest">>
+
+The easiest way to use the <<.wlink TestCaseWidget>> is by creating TestCaseTiddlers using the new CompoundTiddlers format. There are also many test cases to view in the TiddlyWiki test edition at https://tiddlywiki.com/test.html
+
+! Translation improvements
+
+This release also includes improvements to the following translations:
+
+* Chinese
+* French
+* German
+* Macedonian
+* Polish
+
+! Plugin Improvements
+
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8198">> badges to the core plugins to indicate their [[stability level|Plugin Stability]] from "deprecated", "experimental", "stable" and "legacy". These badges are shown in the plugin library and in the control panel
+
+! Widget Improvements
+
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8115">> ''$timestamp'' attribute to ActionDeleteFieldWidget
+
+! Filter Improvements
+
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6081">> new [[transcludes|transcludes Operator]] and [[backtranscludes|backtranscludes Operator]] operators
+
+! Usability Improvements
+
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8121">> new keyboard shortcut for refreshing the page
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/commit/f3614c1e47e6ac5d5fec221b060699e975cd5ef6">> and simplified the splash screen for tiddlywiki.com. See [[Creating a splash screen]] for instructions on creating your own splash screen
+
+! Hackability Improvements
+
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7866">> the wikitext parser to generate start/end properties for all nodes
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8109">> [[WidgetMessage: tm-http-request]] to be able to use Basic Authentication
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8225">> [[WidgetMessage: tm-http-request]] to allow the default headers to be suppressed
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7882">> infinite recursion handling using a custom exception
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7966">> button to the JavaScript error popup allowing tiddlers to be saved to a local JSON file
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8120">> to latest version of modern-normalize 2.0.0
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8211">> [[tm-permalink|WidgetMessage: tm-permalink]], [[tm-permaview|WidgetMessage: tm-permaview]] and [[tm-copy-to-clipboard|WidgetMessage: tm-copy-to-clipboard]] messages to allow the notification text to be customised
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8097">> window title rendering to automatically include global definitions
+
+! Bug Fixes
+
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8233">> nested functions not resolving variables created in filter runs
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8186">> nested [[Block Quotes in WikiText]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7933">> TiddlyWikiClassic build process
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7935">> LinkWidget not refreshing when the `to` attribute changes
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/3460">> parsing bug with empty procedures/macros
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7907">> functions to use variables set by filter runs
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7943">> edit widget not refreshing when the editor type changes
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7922">> editor preview width
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/9bf3c0602d4fd3fe5ac7411db697b51f87a79056">> [[WidgetMessage: tm-http-request]] not returning data in the event of an error
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8150">> [[WidgetMessage: tm-http-request]] incorrectly interpreting 2XX status codes
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7949">> processing of path separators in `tiddlywiki.files` files on Windows
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7975">> incorrect state reference in advanced search
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7985">> clipping of popups in preview pane
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8039">> JavaScript error when attempting to export missing tiddlers to a CSV file
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7909">> imported procedures defaulting to `\whitespace trim`
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/801ed0ea1164aab4f88547322f9d73704388143f">> crash with [[cycle Operator]] if the the step size is larger than the number of operands
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8095">> proper DOCTYPE for the open window template
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7945">> theme font size settings to open in new window CSS
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8098">> backlink parser to prevent it parsing binary tiddlers
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8203">> issue where default parameters were not applied when a ParametersWidget did not find a parent TranscludeWidget
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8222">> crash when using [[splitregexp Operator]] with a regular expression that includes capture groups
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8239">> ActionLogWidget evaluating all variables in scope
+
+! Node.js Improvements
+
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8141">> usage of "Cache-Control" header
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7878">> SaveCommand not overwriting files when required
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8237">> server header authentication when header is missing
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8253">> ButtonWidget should refresh when "tooltip" attribute changes
+
+! Developer Improvements
+
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8195">> issue with fakedom TW_Node inheritence
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8099">> SJCL library creating variables in global scope
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8179">> `widget.getVariableInfo()` to always return a `params` property
+
+! Acknowledgements
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+<<.contributors """
+andjar
+AnthonyMuscio
+bimlas
+BramChen
+btheado
+BurningTreeC
+catter-fly
+Drevarr
+eschlon
+etardiff
+flibbles
+FSpark
+Gk0Wk
+hoelzro
+jinix6
+joshuafontany
+linonetwo
+mateuszwilczek
+mklauber
+oeyoews
+pmario
+PotOfCoffee2Go
+rmunn
+saqimtiaz
+sarna
+Telumire
+twMat
+xcazin
+yaisog
+""">>

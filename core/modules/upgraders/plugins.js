@@ -6,10 +6,7 @@ module-type: upgrader
 Upgrader module that checks that plugins are newer than any already installed version
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var UPGRADE_LIBRARY_TITLE = "$:/UpgradeLibrary";
@@ -24,8 +21,7 @@ var BLOCKED_PLUGINS = {
 };
 
 exports.upgrade = function(wiki,titles,tiddlers) {
-	var self = this,
-		messages = {},
+	var messages = {},
 		upgradeLibrary,
 		getLibraryTiddler = function(title) {
 			if(!upgradeLibrary) {
@@ -75,5 +71,3 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 	});
 	return messages;
 };
-
-})();

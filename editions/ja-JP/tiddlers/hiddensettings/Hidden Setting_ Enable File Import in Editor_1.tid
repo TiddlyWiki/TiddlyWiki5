@@ -1,0 +1,14 @@
+created: 20210519155447339
+modified: 20241117103103808
+original-modified: 20210519160010708
+tags: [[Hidden Settings]]
+title: Hidden Setting: Enable File Import in Editor
+ja-title: 隠し設定: エディターでファイルのインポートを有効にする
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.0">>
+
+$:/config/Editor/EnableImportFilter
+
+このフィルターは、特定のTiddlerでエディター内でのファイルのドラッグアンドドロップが機能するかどうかを決定します。結果が空でない場合、そのTiddlerのエディター内でのドラッグアンドドロップが有効になります。
+このフィルターは、グローバルなドラッグアンドドロップ設定を尊重して使用されます。

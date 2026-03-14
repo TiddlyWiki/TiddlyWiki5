@@ -26,6 +26,8 @@ Tags/ClearInput/Caption: vaciar campo
 Tags/ClearInput/Hint: Vacia campo etiqueta
 Tags/Dropdown/Caption: Etiquetas
 Tags/Dropdown/Hint: Muestra la lista de etiquetas existentes
+Tags/EmptyMessage: No se encontraron etiquetas
+Tags/EmptyMessage/System: No se encontraron etiquetas del sistema
 Title/BadCharacterWarning: Advertencia: evita usar cualquiera de los caracteres <<bad-chars>> en los títulos de tiddler
 Title/Exists/Prompt: El tiddler de destino ya existe
 Title/Relink/Prompt: Actualizar ''<$text text=<<fromTitle>>/>'' a ''<$text text=<<toTitle>>/>'' en los campos //tags// y //list// de otros tiddlers

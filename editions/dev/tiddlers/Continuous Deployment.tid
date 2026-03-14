@@ -5,4 +5,4 @@ type: text/vnd.tiddlywiki
 
 TiddlyWiki 5 uses [[GitHub Actions|https://docs.github.com/en/actions]] for continuous deployment. It is driven by the workflow file `.github/workflows/ci.yml` in the repo, along with the scripts in the `bin` folder that it invokes.
 
-The build history can be seen at https://github.com/Jermolene/TiddlyWiki5/actions
+The build history can be seen at https://github.com/TiddlyWiki/TiddlyWiki5/actions

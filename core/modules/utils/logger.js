@@ -6,10 +6,7 @@ module-type: utils
 A basic logging implementation
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var ALERT_TAG = "$:/tags/Alert";
@@ -86,7 +83,7 @@ Logger.prototype.alert = function(/* args */) {
 			$tw.utils.each(existingAlerts,function(title) {
 				var tiddler = $tw.wiki.getTiddler(title);
 				if(tiddler.fields.text === text && tiddler.fields.component === self.componentName && tiddler.fields.modified && (!alertFields || tiddler.fields.modified < alertFields.modified)) {
-						alertFields = $tw.utils.extend({},tiddler.fields);
+					alertFields = $tw.utils.extend({},tiddler.fields);
 				}
 			});
 			if(alertFields) {
@@ -134,5 +131,3 @@ Logger.prototype.clearAlerts = function() {
 };
 
 exports.Logger = Logger;
-
-})();

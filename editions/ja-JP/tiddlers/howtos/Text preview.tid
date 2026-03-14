@@ -1,0 +1,20 @@
+created: 20160817104110857
+modified: 20241104110951286
+original-modified: 20211029090145708
+tags: [[Editor toolbar]]
+title: Text preview
+ja-title: テキストプレビュー
+
+目のアイコン{{$:/core/ui/EditorToolbar/preview}}を押すと、WikiTextのレンダリング結果を表示するプレビューウィンドウが開いたり閉じたりします(目のアイコンも開いたり閉じたりします)。
+
+目の右側には別のアイコン{{$:/core/images/chevron-down}}があり、クリックするとドロップダウンが表示され、6種類のプレビューにアクセスできます:
+
+* //出力//は、Tiddlerを編集していないときに表示されるテキストが表示されます。
+* //raw HTML//は、 その出力の[[ソースコード|https://www.w3schools.com/html/html_intro.asp]]を表示します。Web ブラウザーはこのソースコードを使用してWebページを表示します。
+* //parse tree//と//widget tree//は、~TiddlyWikiが~WikiTextから内部的に生成する2つのオブジェクトツリーを示します。//parse tree//は~WikiTextに関する基本情報を収集します。次に、parse treeの情報から//widget tree//が拡張情報を生成し、最終的に上記のHTMLを生成します(widget treeは他の処理も行います)。
+* //現在との差異//は、Tiddlerが最後に保存されてからの相違点を示します。削除された部分は<span style="color:red;">赤</span>、追加された部分は<span style="color:green;">緑</span>です。
+* //shadowとの相違点 (あれば)//は、同じことを行いますが、これは基礎となる[[隠しtiddler|ShadowTiddlers]]との違いを表示します。
+
+<<.tip "デフォルトでは、プレビューペインボタンは、編集用に開いているすべてのTiddlerに対してプレビューペインを表示するかどうかを制御します。ボタンをTiddlerごとに機能させる[[隠し設定|Hidden Setting: Show Edit Preview per Tiddler]]があります。">>
+
+<<.tip "変数[[tv-tiddler-preview|tv-tiddler-preview Variable]]を使用すると、プレビューペインにコンテンツが表示されているかどうかを検出できます。">>

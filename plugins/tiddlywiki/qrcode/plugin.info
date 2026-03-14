@@ -3,5 +3,6 @@
 	"name": "QR Code",
 	"description": "QR Code generator",
 	"author": "Zeno Zeng",
-	"list": "readme docs examples license"
+	"list": "readme docs examples license",
+	"stability": "STABILITY_2_STABLE"
 }

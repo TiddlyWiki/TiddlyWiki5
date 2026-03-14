@@ -6,10 +6,7 @@ module-type: startup
 Startup initialisation
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
@@ -20,23 +17,17 @@ exports.synchronous = true;
 
 var ENABLED_TITLE = "$:/config/BrowserStorage/Enabled",
 	SAVE_FILTER_TITLE = "$:/config/BrowserStorage/SaveFilter",
-	PERSISTED_STATE_TITLE = "$:/info/browser/storage/persisted";
+	PERSISTED_STATE_TITLE = "$:/state/browser/storage/persisted";
 
 var BrowserStorageUtil = require("$:/plugins/tiddlywiki/browser-storage/util.js").BrowserStorageUtil;
 
 exports.startup = function() {
-	var self = this;
-	
-        // If not exists, add ENABLED tiddler with default value "yes"
-        if(!$tw.wiki.getTiddler(ENABLED_TITLE)) {
-                $tw.wiki.addTiddler({title: ENABLED_TITLE, text: "yes"});
-        }
 	// Compute our prefix for local storage keys
 	var prefix = "tw5#" + window.location.pathname + "#";
 	// Make a logger
 	var logger = new $tw.utils.Logger("browser-storage",{
-			colour: "cyan"
-		});
+		colour: "cyan"
+	});
 	// Add browserStorage object to $tw
 	$tw.browserStorage = new BrowserStorageUtil($tw.wiki,{
 		enabledTitle: ENABLED_TITLE,
@@ -47,12 +38,19 @@ exports.startup = function() {
 	var filterFn,
 		compileFilter = function() {
 			filterFn = $tw.wiki.compileFilter($tw.wiki.getTiddlerText(SAVE_FILTER_TITLE));
-	}
+		};
 	compileFilter();
 	// Listen for tm-clear-browser-storage messages
 	$tw.rootWidget.addEventListener("tm-clear-browser-storage",function(event) {
 		$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "no"});
 		$tw.browserStorage.clearLocalStorage();
+	});
+	// Seperate clear cookie and disable action
+	$tw.rootWidget.addEventListener("tm-delete-browser-storage",function(event) {
+		$tw.browserStorage.clearLocalStorage();
+	});
+	$tw.rootWidget.addEventListener("tm-disable-browser-storage",function(event) {
+		$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "no"});
 	});
 	// Helpers for protecting storage from eviction
 	var setPersistedState = function(state) {
@@ -68,11 +66,11 @@ exports.startup = function() {
 		persistPermissionRequested = false,
 		requestPersistenceOnFirstSave = function() {
 			$tw.hooks.addHook("th-saving-tiddler", function(tiddler) {
-				if (!persistPermissionRequested) {
+				if(!persistPermissionRequested) {
 					var filteredChanges = filterFn.call($tw.wiki, function(iterator) {
 						iterator(tiddler,tiddler.getFieldString("title"));
 					});
-					if (filteredChanges.length > 0) {
+					if(filteredChanges.length > 0) {
 						// The tiddler will be saved to local storage, so request persistence
 						requestPersistence();
 						persistPermissionRequested = true;
@@ -84,9 +82,9 @@ exports.startup = function() {
 	// Request the browser to never evict the localstorage. Some browsers such as firefox
 	// will prompt the user. To make the decision easier for the user only prompt them
 	// when they click the save button on a tiddler which will be stored to localstorage.
-	if (navigator.storage && navigator.storage.persist) {
+	if(navigator.storage && navigator.storage.persist) {
 		navigator.storage.persisted().then(function(isPersisted) {
-			if (!isPersisted) {
+			if(!isPersisted) {
 				setPersistedState("not requested yet");
 				requestPersistenceOnFirstSave();
 			} else {
@@ -128,5 +126,3 @@ exports.startup = function() {
 		});
 	});
 };
-
-})();

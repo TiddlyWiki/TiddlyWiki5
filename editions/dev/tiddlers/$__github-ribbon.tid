@@ -1,0 +1,9 @@
+code-body: yes
+created: 20241205094051389
+modified: 20241205094051389
+tags: $:/tags/PageTemplate
+title: $:/github-ribbon
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$transclude $tiddler="$:/plugins/tiddlywiki/github-fork-ribbon/template" top="30px" fixed=fixed color="green"/>

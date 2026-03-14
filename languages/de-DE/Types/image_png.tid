@@ -2,3 +2,4 @@ title: $:/language/Docs/Types/image/png
 description: PNG - Portable Netzwerkgrafik
 name: image/png
 group: Bilder
+group-sort: 1

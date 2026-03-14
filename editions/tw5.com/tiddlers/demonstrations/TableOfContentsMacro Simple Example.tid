@@ -1,11 +1,43 @@
-created: 20150221201838000
-modified: 20150221203742000
-title: Example Table of Contents: Simple
 caption: Simple
-tags: table-of-contents-example
+created: 20150221201838000
+modified: 20260124125915331
 order: 1
+tags: table-of-contents-example
+title: Example Table of Contents: Simple
+type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1"
 eg="""<div class="tc-table-of-contents">
 <<toc "Contents">>
+</div>"""/>
+
+---
+
+<<.tip"""If you use several parameters in a macro call, it is advised to use ''named parameters'' for all of them""">>
+
+<$macrocall $name=".example" n="2"
+eg="""<div class="tc-table-of-contents">
+<<toc tag:"Contents" level:"1">>
+</div>"""/>
+
+<$macrocall $name=".example" n="3"
+eg="""<div class="tc-table-of-contents">
+<<toc tag:"Contents" level:"2">>
+</div>"""/>
+
+<$macrocall $name=".example" n="4"
+eg="""<div class="tc-table-of-contents">
+<<toc tag:"Contents" level:"4">>
+</div>"""/>
+
+* If you want to ''change'' or ''remove'' the indicator, you can locally overwrite the `toc-level-indicator` macro. 
+* It is globally defined at: $:/core/macros/toc tiddler. Eg:
+
+<$macrocall $name=".example" n="5"
+eg="""\define toc-level-indicator()
+<!-- remove the indicator --> 
+\end
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents" level:"1">>
 </div>"""/>

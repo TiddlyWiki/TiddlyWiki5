@@ -1,0 +1,7 @@
+title: $:/changenotes/5.4.0/#9275/impacts/remove-range-ie
+changenote: $:/changenotes/5.4.0/#9275
+created: 20250901000000000
+modified: 20250901000000000
+tags: $:/tags/ImpactNote
+description: RangeWidget will not work on Internet Explorer 10
+impact-type: compatibility-break

@@ -1,0 +1,11 @@
+created: 20140908131700000
+modified: 20241016111747713
+original-modified: 20140919161524603
+tags: Learning
+title: Copying tiddlers between TiddlyWiki files
+ja-title: TiddlyWikiファイル間でTiddlerをコピーする
+type: text/vnd.tiddlywiki
+
+ブラウザウィンドウから別のブラウザウィンドウへTiddlerへのリンクをドラッグすることで、個々のTiddlerを1つのTiddlyWikiファイルから別のTiddlyWikiファイルにコピーできます
+
+リンクをドラッグする場合は、まず垂直方向に移動します。水平方向の移動はブラウザがテキストの選択として認識するためです

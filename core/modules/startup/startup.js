@@ -6,21 +6,13 @@ module-type: startup
 Miscellaneous startup logic for both the client and server.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 // Export name and synchronous status
 exports.name = "startup";
 exports.after = ["load-modules"];
 exports.synchronous = true;
-
-// Set to `true` to enable performance instrumentation
-var PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE = "$:/config/Performance/Instrumentation";
-
-var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
 	// Minimal browser detection
@@ -57,24 +49,6 @@ exports.startup = function() {
 	}
 	// Initialise version
 	$tw.version = $tw.utils.extractVersionInfo();
-	// Set up the performance framework
-	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
-	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
-	$tw.rootWidget = new widget.widget({
-		type: "widget",
-		children: []
-	},{
-		wiki: $tw.wiki,
-		document: $tw.browser ? document : $tw.fakeDocument
-	});
-	// Execute any startup actions
-	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
-	if($tw.browser) {
-		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");
-	}
-	if($tw.node) {
-		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
-	}
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
 	$tw.languageSwitcher = new $tw.PluginSwitcher({
@@ -88,8 +62,10 @@ exports.startup = function() {
 			if($tw.browser) {
 				var pluginTiddler = $tw.wiki.getTiddler(plugins[0]);
 				if(pluginTiddler) {
+					document.documentElement.setAttribute("lang",pluginTiddler.getFieldString("name"));
 					document.documentElement.setAttribute("dir",pluginTiddler.getFieldString("text-direction") || "auto");
 				} else {
+					document.documentElement.setAttribute("lang","en-GB");
 					document.documentElement.removeAttribute("dir");
 				}
 			}
@@ -115,6 +91,14 @@ exports.startup = function() {
 			handlerMethod: "handleKeydownEvent"
 		}]);
 	}
+	// Execute any startup actions
+	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
+	if($tw.browser) {
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");
+	}
+	if($tw.node) {
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
+	}
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
 	// Find a working syncadaptor
@@ -129,7 +113,7 @@ exports.startup = function() {
 		$tw.syncer = new $tw.Syncer({
 			wiki: $tw.wiki,
 			syncadaptor: $tw.syncadaptor,
-			logging: $tw.wiki.getTiddlerText('$:/config/SyncLogging', "yes") === "yes"
+			logging: $tw.wiki.getTiddlerText("$:/config/SyncLogging", "yes") === "yes"
 		});
 	}
 	// Setup the saver handler
@@ -146,5 +130,3 @@ exports.startup = function() {
 		$tw.anim = new $tw.utils.Animator();
 	}
 };
-
-})();

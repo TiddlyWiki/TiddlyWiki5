@@ -6,18 +6,18 @@ description: Slice this text tiddler by headings and lists
 
 \whitespace trim
 
-\define hint()
+\procedure hint()
 Slice this text tiddler into chunks
 \end
 
 <$list filter="[<currentTiddler>!is[image]!is[binary]]" variable="ignore">
 <$button tooltip=<<hint>> aria-label=<<hint>> class=<<tv-config-toolbar-class>>>
 <$action-sendmessage $message="tm-modal" $param="$:/plugins/tiddlywiki/text-slicer/ui/slice-modal" currentTiddler=<<currentTiddler>>/>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/plugins/tiddlywiki/text-slicer/images/text-slicer-icon}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">Slice tiddler</span>
-</$list>
+<%endif%>
 </$button>
 </$list>

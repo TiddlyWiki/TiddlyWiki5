@@ -3,5 +3,6 @@
 	"name": "CodeMirror Search and Replace",
 	"description": "Search and replace for CodeMirror",
 	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
 }

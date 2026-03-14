@@ -1,0 +1,15 @@
+caption: ~TiddlyFox
+color: #4DB6AC
+community-author: Jeremy Ruston
+created: 20131221085742684
+delivery: Browser Extension
+description: 古いバージョンのFirefox用ブラウザ拡張
+method: save
+modified: 20241008120723504
+original-modified: 20230806001436106
+tags: Saving Firefox
+title: Saving with TiddlyFox
+ja-title: TiddlyFoxでの保存
+type: text/vnd.tiddlywiki
+
+<<.deprecated-since "FireFox 57" "Saving with FireFox">>

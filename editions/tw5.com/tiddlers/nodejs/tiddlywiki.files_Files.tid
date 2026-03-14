@@ -63,7 +63,7 @@ Fields can also be overridden for particular files by creating a file with the s
 
 These example `tiddlywiki.files` must be placed in their own sub-directory of the [[wiki folder|TiddlyWikiFolders]].
 
-There are also several examples of `tiddlywiki.files` files in the main [[TiddlyWiki 5 GitHub repository|https://github.com/Jermolene/TiddlyWiki5]]. 
+There are also several examples of `tiddlywiki.files` files in the main [[TiddlyWiki 5 GitHub repository|https://github.com/TiddlyWiki/TiddlyWiki5]]. 
 
 !! Importing a folder of PDFs
 

@@ -8,10 +8,7 @@ Filter operator for handling unknown filter operators.
 Not intended to be used directly by end users, hence the square brackets around the name.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var fieldFilterOperatorFn = require("$:/core/modules/filters/field.js").field;
@@ -23,8 +20,8 @@ exports["[unknown]"] = function(source,operator,options) {
 	// Check for a user defined filter operator
 	if(operator.operator.indexOf(".") !== -1) {
 		var params = [];
-		$tw.utils.each(operator.operands,function(param) {
-			params.push({value: param});
+		$tw.utils.each(operator.multiValueOperands,function(paramList) {
+			params.push({value: paramList[0] || "",multiValue: paramList});
 		});	
 		var variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(operator.operator,{params: params, source: source});
 		if(variableInfo && variableInfo.srcVariable) {
@@ -45,5 +42,3 @@ exports["[unknown]"] = function(source,operator,options) {
 	// Otherwise, use the "field" operator
 	return fieldFilterOperatorFn(source,operator,options);
 };
-
-})();

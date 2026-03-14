@@ -6,14 +6,10 @@ module-type: wikirule
 Conditional shortcut syntax
 
 ```
-This is a <% if [{something}] %>Elephant<% elseif [{else}] %>Pelican<% else %>Crocodile<% endif %>
+This is a <%if [{something}] %>Elephant<%elseif [{else}] %>Pelican<%else%>Crocodile<%endif%>
 ```
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "conditional";
@@ -27,7 +23,7 @@ exports.init = function(parser) {
 };
 
 exports.findNextMatch = function(startPos) {
-	// Look for the next <% if shortcut
+	// Look for the next <%if shortcut
 	this.matchRegExp.lastIndex = startPos;
 	this.match = this.matchRegExp.exec(this.parser.source);
 	// If not found then return no match
@@ -99,7 +95,7 @@ exports.parseIfClause = function(filterCondition) {
 			hasLineBreak = !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 			// If we found an else then we need to parse the body looking for the endif
 			var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>",
-			ex;
+				ex;
 			if(hasLineBreak) {
 				ex = this.parser.parseBlocksTerminatedExtended(reEndString);
 			} else {
@@ -116,5 +112,3 @@ exports.parseIfClause = function(filterCondition) {
 	// Return the parse tree node
 	return [listWidget];
 };
-
-})();

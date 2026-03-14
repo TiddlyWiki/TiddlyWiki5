@@ -6,10 +6,7 @@ module-type: widget
 Scrollable widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DEBOUNCE_INTERVAL = 100; // Delay after last scroll event before updating the bound tiddler
@@ -132,7 +129,6 @@ ScrollableWidget.prototype.scrollSelectorIntoView = function(baseElement,selecto
 Render this widget into the DOM
 */
 ScrollableWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	this.scaleFactor = 1;
 	this.addEventListeners([
 		{type: "tm-scroll", handler: "handleScrollEvent"}
@@ -171,8 +167,8 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 	this.outerDomNode.className = this["class"] || "";
 	// Insert element
 	parent.insertBefore(this.outerDomNode,nextSibling);
-	this.renderChildren(this.innerDomNode,null);
 	this.domNodes.push(this.outerDomNode);
+	this.renderChildren(this.innerDomNode,null);
 	// If the scroll position is bound to a tiddler
 	if(this.scrollableBind) {
 		// After a delay for rendering, scroll to the bound position
@@ -184,7 +180,7 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 };
 
 ScrollableWidget.prototype.listenerFunction = function(event) {
-	self = this;
+	var self = this;
 	clearTimeout(this.timeout);
 	this.timeout = setTimeout(function() {
 		var existingTiddler = self.wiki.getTiddler(self.scrollableBind),
@@ -197,7 +193,7 @@ ScrollableWidget.prototype.listenerFunction = function(event) {
 			self.wiki.addTiddler(new $tw.Tiddler(existingTiddler,newTiddlerFields));
 		}
 	}, DEBOUNCE_INTERVAL);
-}
+};
 
 ScrollableWidget.prototype.updateScrollPositionFromBoundTiddler = function() {
 	// Bail if we're running on the fakedom
@@ -218,7 +214,7 @@ ScrollableWidget.prototype.updateScrollPositionFromBoundTiddler = function() {
 			top: scrollTopTo,
 			left: scrollLeftTo,
 			behavior: "instant"
-		})
+		});
 	}
 };
 
@@ -262,5 +258,3 @@ ScrollableWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.scrollable = ScrollableWidget;
-
-})();

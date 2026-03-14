@@ -1,0 +1,13 @@
+created: 20131128075743966
+modified: 20241018104722786
+original-modified: 20140919160655340
+tags: Learning
+title: Philosophy of Tiddlers
+ja-title: Tiddlerの哲学
+type: text/vnd.tiddlywiki
+
+情報を記録して整理する目的は、情報を再利用できるようにすることです。記録された情報の価値は、再利用の容易さに直接比例します
+
+[[Tiddler|Tiddlers]]の哲学は、情報を意味のある最小単位にスライスし、[[それらの間の関係を豊富にモデリングする|Structuring TiddlyWiki]]ことで、再利用の可能性を最大化することです。次に、集約と合成を使用して断片を織り合わせてストーリーを表現します
+
+TiddlyWikiは、情報アイテム間の関係を表現し探索する簡潔な方法である、Tiddlerの代数を提供することを目指しています

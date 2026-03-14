@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/freelinks",
 	"name": "Freelinks",
 	"description": "Freelinking of tiddler titles",
-	"list": "readme settings"
+	"list": "readme settings",
+	"stability": "STABILITY_2_STABLE"
 }

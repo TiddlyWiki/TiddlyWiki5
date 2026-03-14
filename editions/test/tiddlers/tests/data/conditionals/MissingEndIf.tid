@@ -5,7 +5,7 @@ tags: [[$:/tags/wiki-test-spec]]
 
 title: Text
 
-This is a <% if [<something>match[one]] %>Elephant
+This is a <%if [<something>match[one]] %>Elephant
 +
 title: Output
 

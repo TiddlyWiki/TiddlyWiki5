@@ -4,6 +4,7 @@ _canonical_uri: Die komplette URI eines externen Foto Tiddlers. URI = Uniform Re
 author: Name des Plugin-Authors
 bag: Der Name eines ~TiddlyWeb "bags" von dem der Tiddler kam.
 caption: Der Text, der auf "Tab-Buttons" angezeigt wird.
+class: Die CSS Klasse, die angewendet wird, wenn ein Tiddler ausgegeben wird. Siehe: [[Custom styles by user-class]]. Wird auch verwended für: [[Modals]]
 code-body: Das "View Template" wird den Tiddler Text als "Code" anzeigen, wenn dieses Feld auf: ''"yes"'' gesetzt wird.
 color: Der CSS Farbwert, der mit einem Tiddler assoziiert wird.
 component: Der Name einer Komponente, die für eine [[Alarm Anzeige|AlertMechanism]] verantwortlich ist.
@@ -31,6 +32,7 @@ plugin-priority: Ein numerischer Wert, der die Priorität eines "plugins" festle
 plugin-type: Der Typ eines "plugins".
 revision: Die Revisionsnummer eines Tiddlers. Wird von einem Server vergeben.
 released: Datum der ~TiddlyWiki Ausgabe.
+stability: Entwicklungs Status: "deprecated"=abgekündigt, "experimental"=experimentell, "stable"=stabil, "legacy"=Altlast.
 source: Eine Quelltext URL, verbunden mit diesem Tiddler.
 subtitle: Der Untertitel für einen "~Wizard-Dialog".
 tags: Eine Liste von "Tags" für diesen Tiddler.

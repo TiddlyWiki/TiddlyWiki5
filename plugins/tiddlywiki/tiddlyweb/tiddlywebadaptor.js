@@ -6,10 +6,7 @@ module-type: syncadaptor
 A sync adaptor module for synchronising with TiddlyWeb compatible servers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",
@@ -84,7 +81,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			var json = null;
 			try {
 				json = JSON.parse(data);
-			} catch (e) {
+			} catch(e) {
 			}
 			if(json) {
 				self.logger.log("Status:",data);
@@ -164,7 +161,7 @@ TiddlyWebAdaptor.prototype.getCsrfToken = function() {
 	var regex = /^(?:.*; )?csrf_token=([^(;|$)]*)(?:;|$)/,
 		match = regex.exec(document.cookie),
 		csrf = null;
-	if (match && (match.length === 2)) {
+	if(match && (match.length === 2)) {
 		csrf = match[1];
 	}
 	return csrf;
@@ -178,7 +175,7 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
 		data: {
-			filter: "[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/library/sjcl.js]] -[[$:/core]]"
+			filter: "[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[has[plugin-type]field:platform[server]] -[[$:/library/sjcl.js]] -[[$:/core]]"
 		},
 		callback: function(err,data) {
 			// Check for errors
@@ -221,7 +218,7 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			}
 			//If Browser-Storage plugin is present, remove tiddler from local storage after successful sync to the server
 			if($tw.browserStorage && $tw.browserStorage.isEnabled()) {
-				$tw.browserStorage.removeTiddlerFromLocalStorage(tiddler.fields.title)
+				$tw.browserStorage.removeTiddlerFromLocalStorage(tiddler.fields.title);
 			}
 			// Save the details of the new revision of the tiddler
 			var etag = request.getResponseHeader("Etag");
@@ -261,7 +258,6 @@ options include:
 tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 */
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
-	var self = this;
 	if(this.isReadOnly) {
 		return callback(null);
 	}
@@ -295,8 +291,8 @@ TiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {
 	if(tiddler) {
 		$tw.utils.each(tiddler.fields,function(fieldValue,fieldName) {
 			var fieldString = fieldName === "tags" ?
-								tiddler.fields.tags :
-								tiddler.getFieldString(fieldName); // Tags must be passed as an array, not a string
+				tiddler.fields.tags :
+				tiddler.getFieldString(fieldName); // Tags must be passed as an array, not a string
 
 			if(knownFields.indexOf(fieldName) !== -1) {
 				// If it's a known field, just copy it across
@@ -317,8 +313,7 @@ TiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {
 Convert a field set in TiddlyWeb format into ordinary TiddlyWiki5 format
 */
 TiddlyWebAdaptor.prototype.convertTiddlerFromTiddlyWebFormat = function(tiddlerFields) {
-	var self = this,
-		result = {};
+	var result = {};
 	// Transfer the fields, pulling down the `fields` hashmap
 	$tw.utils.each(tiddlerFields,function(element,title,object) {
 		if(title === "fields") {
@@ -375,5 +370,3 @@ TiddlyWebAdaptor.prototype.parseEtag = function(etag) {
 if($tw.browser && document.location.protocol.substr(0,4) === "http" ) {
 	exports.adaptorClass = TiddlyWebAdaptor;
 }
-
-})();

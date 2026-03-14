@@ -7,4 +7,4 @@ npm --force install tiddlywiki || exit 1
 
 # Pull existing GitHub pages content
 
-git clone --depth=1 --branch=master "https://github.com/Jermolene/jermolene.github.io.git" output
+git clone --depth=1 --branch=master "https://github.com/TiddlyWiki/tiddlywiki.com-gh-pages.git" output

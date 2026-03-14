@@ -1,0 +1,9 @@
+created: 20140912145543340
+modified: 20241216105528737
+original-modified: 20211119192337845
+tags: Demonstrations
+title: SampleNotification
+ja-title: 通知のサンプル
+type: text/vnd.tiddlywiki
+
+{{$:/core/images/done-button}} これは通知です!

@@ -1,0 +1,5 @@
+title: $:/language/Docs/Fields/
+
+class: 渲染條目時，套用到條目的 CSS 類別 - 請參閲[[依自訂類別的自訂樣式|Custom styles by user-class]]。也適用於[[互動視窗|Modals]]
+description: 插件的説明、描述
+toc-link: 若設定為 ''no''，則抑制目錄樹中的條目鏈接。

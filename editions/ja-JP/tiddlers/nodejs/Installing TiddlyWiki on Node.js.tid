@@ -1,0 +1,44 @@
+caption: Node.js
+color: #F06292
+created: 20131219100608529
+delivery: DIY
+description: 自分のマシンやクラウドで柔軟なホスティング
+method: sync
+modified: 20241013103026564
+original-modified: 20221115230831173
+tags: Saving [[TiddlyWiki on Node.js]] Windows Mac Linux
+title: Installing TiddlyWiki on Node.js
+ja-title: Node.jsにTiddlyWikiをインストールする
+type: text/vnd.tiddlywiki
+
+# [[Node.js]]をインストールします
+#* Linux: 
+#*> //Debian/Ubuntu//:<br/>`apt install nodejs`<br/>次のフォローアップが必要になる場合があります:<br/>`apt install npm`
+#*> //Arch Linux//<br/>`yay -S tiddlywiki` <br/>(nodeとtiddlywikiをインストール)
+#* Mac
+#*> `brew install node`
+#* Android
+#*> [[Android用Termux|Serving TW5 from Android]]
+#* その他 
+#*> http://nodejs.org を参照してください
+# コマンドラインターミナルを開き、次のように入力します:
+#> `npm install -g tiddlywiki`
+#> エラーで失敗した場合は、管理者としてコマンドを再実行する必要があるかもしれません:
+#> `sudo npm install -g tiddlywiki` (Mac/Linux)
+# 次のように入力し、~TiddlyWikiがインストールされていることを確認します:
+#> `tiddlywiki --version`
+#* 応答により, インストールしたTiddlyWikiのバージョンを確認できます(例: "<<version>>"。その他のデバッグ情報も報告される場合があります。)
+# 試してみてください:
+## `tiddlywiki mynewwiki --init server`: サーバー関連コンポーネントを含む新しいWikiのフォルダを作成します
+## `tiddlywiki mynewwiki --listen`: TiddlyWikiを開始します
+## ブラウザで http://127.0.0.1:8080/ を訪れてください
+## Tiddlerを編集し作成してみてください
+# オプション: オフラインコピーを作成します:
+#* サイドバーの<<.icon $:/core/images/save-button-dynamic>> ''Wikiを保存します''ボタンをクリックします。''あるいは''
+#* `tiddlywiki mynewwiki --build index`
+
+`-g`フラグにより​​、TiddlyWikiはグローバルインストールされます。このフラグを付けないと、TiddlyWikiはインストールしたディレクトリでのみ使用可能になります。
+
+<<.warning "DebianまたはDebianベースのLinuxを使用していて、node.jsパッケージがインストールされているにもかかわらず`node: command not found`エラーが発生する場合は、`nodejs`と`node`の間にシンボリックリンクを作成する必要があります。リンクを正しく作成するには、ディストリビューションのマニュアルと`whereis`を参照してください。githubの[[issue 1434|http://github.com/TiddlyWiki/TiddlyWiki5/issues/1434]]を参照してください。<br><br>例: Debian v8.0: `sudo ln -s /usr/bin/nodejs /usr/bin/node`">>
+<br>
+<<.tip "次のようにして古いバージョンをインストールすることもできます: <br><code> npm install -g tiddlywiki@5.1.13</code>">>

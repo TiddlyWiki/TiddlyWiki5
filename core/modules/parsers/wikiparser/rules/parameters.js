@@ -11,10 +11,7 @@ definition text
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.name = "parameters";
@@ -56,5 +53,3 @@ exports.parse = function() {
 		orderedAttributes: orderedAttributes
 	}];
 };
-
-})();

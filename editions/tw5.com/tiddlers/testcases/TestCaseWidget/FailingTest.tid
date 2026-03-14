@@ -1,0 +1,15 @@
+title: TestCases/TestCaseWidget/FailingTest
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec-failing]]
+description: An example of a failing test
+
+title: Narrative
+
+This test case intentionally fails (in order to show how failures are displayed). The expected result is set to <code><$text text={{ExpectedResult}}/></code>, but the result computes to <code><$wikify name="html" text={{Output}} mode="block" output="html"><$text text=<<html>>/></$wikify></code>
++
+title: Output
+
+The sum is <$text text={{{ [[2]add[2]] }}}/>.
++
+title: ExpectedResult
+text: <p>The sum is not 8.</p>

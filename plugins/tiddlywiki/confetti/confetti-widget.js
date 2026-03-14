@@ -6,15 +6,9 @@ module-type: widget
 Confetti widget
 
 \*/
-(function(){
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
-
-var confetti = require("$:/plugins/tiddlywiki/confetti/confetti.js");
 
 var ConfettiWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -63,5 +57,3 @@ ConfettiWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.confetti = ConfettiWidget;
-
-})();

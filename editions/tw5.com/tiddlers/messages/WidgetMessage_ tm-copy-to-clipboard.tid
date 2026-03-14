@@ -1,6 +1,6 @@
 caption: tm-copy-to-clipboard
 created: 20171215150056004
-modified: 20171215150600888
+modified: 20240523174013095
 tags: Messages
 title: WidgetMessage: tm-copy-to-clipboard
 type: text/vnd.tiddlywiki
@@ -11,6 +11,8 @@ It requires the following properties on the `event` object:
 
 |!Name |!Description |
 |param |Text to be copied to the clipboard |
+|successNotification |<<.from-version "5.3.4">> Optional title of tiddler containing notification to be used if the operation succeeds |
+|failureNotification |<<.from-version "5.3.4">> Optional title of tiddler containing notification to be used if the operation fails |
 
 This message is usually generated with the ButtonWidget. It is handled by the TiddlyWiki core.
 

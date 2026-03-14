@@ -6,10 +6,7 @@ module-type: widget
 Action widget to navigate to a tiddler
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -87,5 +84,3 @@ NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 exports["action-navigate"] = NavigateWidget;
-
-})();

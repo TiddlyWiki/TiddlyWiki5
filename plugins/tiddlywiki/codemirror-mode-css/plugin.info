@@ -3,5 +3,6 @@
 	"name": "CodeMirror Mode CSS",
 	"description": "CSS highlighting mode for CodeMirror",
 	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
 }

@@ -1,0 +1,34 @@
+created: 201804111739
+modified: 20241120110107221
+original-modified: 201804111739
+title: Q: How can I style a tiddler if it has "this" AND "that" tag?
+ja-title: Q: "this"タグと"that"タグの両方を持つTiddlerのスタイルを設定するにはどうすればよいですか?
+tags: [[Custom Styles FAQ]]
+
+''回答: '' <<.from-version "5.1.16">>
+
+Tiddlerに`this`と`that`の両方のタグがある場合、オレンジ色の境界線が作成されます
+
+```
+[data-tags*="bar"][data-tags*="froz"] {
+  border: 2px solid orange;
+}
+```
+
+''CSSが次のような場合: ''
+
+```
+[data-tags~="this"] {
+  border: 2px solid blue;
+}
+
+[data-tags~="that"] {
+  border: 2px solid red;
+}
+```
+
+`this`は青い境界線を作成します
+`that`は赤青い境界線を作成します
+位置を入れ替えると、逆になります
+
+[[利用できる属性についての詳細はこちらをご覧ください!|Attribute Selectors]]

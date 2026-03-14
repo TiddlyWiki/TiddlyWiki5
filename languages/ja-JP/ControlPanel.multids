@@ -98,6 +98,10 @@ Plugins/Plugins/Caption: プラグイン
 Plugins/Plugins/Hint: プラグイン
 Plugins/PluginWillRequireReload: (再読み込みが必要)
 Plugins/Reinstall/Caption: 再インストール
+Plugins/Stability/Deprecated: 非推奨
+Plugins/Stability/Experimental: 実験的
+Plugins/Stability/Legacy: レガシー
+Plugins/Stability/Stable: 安定版
 Plugins/SubPluginPrompt: <<count>> 件サブプラグインが利用可能です
 Plugins/Theme/Prompt: テーマ
 Plugins/Themes/Caption: テーマ
@@ -155,6 +159,8 @@ Settings/DefaultMoreSidebarTab/Caption: デフォルトのサイドバー 詳し
 Settings/DefaultMoreSidebarTab/Hint: デフォルトで表示されるサイドバー 詳しく タブを指定します
 Settings/DefaultSidebarTab/Caption: 標準サイドバータブ
 Settings/DefaultSidebarTab/Hint: 標準で表示されるサイドバータブを指定します
+Settings/DefaultTiddlerInfoTab/Caption: Tiddler情報のデフォルトタブ
+Settings/DefaultTiddlerInfoTab/Hint: Tiddler情報パネルを開いたときにデフォルトで表示されるタブを指定します
 Settings/EditorToolbar/Caption: エディターツールバー
 Settings/EditorToolbar/Description: エディターツールバーを表示
 Settings/EditorToolbar/Hint: エディターツールバーの有効・無効を切り替えます:
@@ -189,6 +195,8 @@ Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: アドレス�
 Settings/PerformanceInstrumentation/Caption: パフォーマンス統計情報
 Settings/PerformanceInstrumentation/Description: パフォーマンス統計情報の有効
 Settings/PerformanceInstrumentation/Hint: ブラウザの開発者コンソールにパフォーマンスの統計情報を表示します。有効にするには再読み込みが必要です
+Settings/RecentLimit/Caption: 最近の更新タブの上限
+Settings/RecentLimit/Hint: サイドバーの"最近の更新"タブに表示されるTiddlerの最大数
 Settings/TitleLinks/Caption: Tiddler タイトル
 Settings/TitleLinks/Hint: オプションで Tiddler のタイトルをリンクとして表示することができます
 Settings/TitleLinks/No/Description: Tiddler のタイトルをリンクとして表示しない
@@ -202,6 +210,12 @@ Settings/ToolbarButtonStyle/Hint: ツールバーのボタンのスタイルを�
 Settings/ToolbarButtonStyle/Styles/Borderless: 枠なし
 Settings/ToolbarButtonStyle/Styles/Boxed: 四角
 Settings/ToolbarButtonStyle/Styles/Rounded: 角丸
+SocialCard/Caption: ソーシャルメディアカード
+SocialCard/Domain/Prompt: リンクに表示するドメイン名(例: ''tiddlywiki.com'')
+SocialCard/Hint: この情報は、オンラインでホストされているこの~TiddlyWikiへのリンクのプレビューカードを表示するために、ソーシャルサービスやメッセージングサービスによって使用されます
+SocialCard/PreviewUrl/Preview: プレビュー画像:
+SocialCard/PreviewUrl/Prompt: この~TiddlyWikiのプレビュー画像のフルURL
+SocialCard/Url/Prompt: この~TiddlyWikiのフルURL
 StoryTiddler/Caption: Tiddler 表示部
 StoryTiddler/Hint: このルールカスケードは、Tiddler 表示部にに Tiddler を表示するためのテンプレートを動的に選択するために使用されます。
 StoryView/Caption: 表示スタイル
@@ -210,6 +224,12 @@ Stylesheets/Caption: スタイルシート
 Stylesheets/Expand/Caption: すべて展開
 Stylesheets/Hint: <<tag "$:/tags/Stylesheet">> でタグ付けされた現在のスタイルシートの Tiddler でレンダリングされた CSS です
 Stylesheets/Restore/Caption: 復旧
+TestCases/All/Caption: すべてのテストケース
+TestCases/All/Hint: すべてのテストケース
+TestCases/Caption: テストケース
+TestCases/Failed/Caption: 失敗したテストケース
+TestCases/Failed/Hint: 失敗したテストケースのみ
+TestCases/Hint: テストケースは、それ自体で完結していて、テストや学習に使える例です
 Theme/Caption: テーマ
 Theme/Prompt: 現在のテーマ:
 TiddlerColour/Caption: Tiddler の色
@@ -234,5 +254,13 @@ Tools/Export/AllAsStaticHTML/Caption: すべての Tiddler を含む閲覧用 HT
 Tools/Export/Heading: エクスポート
 ViewTemplateBody/Caption: 表示テンプレートの本体
 ViewTemplateBody/Hint: このルールカスケードは、デフォルトのビューテンプレートが Tiddler の本体を表示するためのテンプレートを動的に選択するために使用されます。
+ViewTemplateSubtitle/Caption: 表示テンプレートのサブタイトル
+ViewTemplateSubtitle/Hint: このルールカスケードは、デフォルトのビューテンプレートがTiddlerのサブタイトルを表示するためのテンプレートを動的に選択するために使用されます。
+ViewTemplateTags/Caption: 表示テンプレートのタグ
+ViewTemplateTags/Hint: このルールカスケードは、デフォルトのビューテンプレートがTiddlerのタグエリアを表示するためのテンプレートを動的に選択するために使用されます。
 ViewTemplateTitle/Caption: 表示テンプレートのタイトル
 ViewTemplateTitle/Hint: このルールカスケードは、デフォルトのビューテンプレートが Tiddler のタイトルを表示するためのテンプレートを動的に選択するために使用されます。
+WikiInformation/Caption: Wikiの情報
+WikiInformation/Drag/Caption: このツールを別のウィキにコピーするには、このリンクをドラッグします
+WikiInformation/Hint: このページは、~TiddlyWikiの設定に関する概要情報をまとめたものです。フォーラムで助けを求める際など、ユーザーが~TiddlyWikiの設定に関する重要な情報を他のユーザーと簡単に共有できるように設計されています。プライベート情報や個人情報は含まれておらず、明示的にコピー＆ペーストしない限り、他の場所に共有されることはありません
+

@@ -7,8 +7,6 @@ Startup code injected as raw markup
 
 \*/
 
-(function() {
-
 // Need to initialise these because we run before bootprefix.js and boot.js
 $tw = window.$tw || Object.create(null);
 $tw.hooks = $tw.hooks || { names: {}};
@@ -89,5 +87,3 @@ function hookBootTiddlersLoaded() {
 		text: $tw.utils.stringifyList(log)
 	});
 }
-
-})();

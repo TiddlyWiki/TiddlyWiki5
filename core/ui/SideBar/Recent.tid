@@ -2,4 +2,4 @@ title: $:/core/ui/SideBar/Recent
 tags: $:/tags/SideBar
 caption: {{$:/language/SideBar/Recent/Caption}}
 
-<$macrocall $name="timeline" format={{$:/language/RecentChanges/DateFormat}}/>
+<$transclude $variable="timeline" format={{$:/language/RecentChanges/DateFormat}} limit={{$:/config/RecentLimit}}/>

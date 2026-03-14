@@ -6,6 +6,8 @@ Filter/Hint: Szukaj przy pomocy [[wyrażenia filtrującego|https://tiddlywiki.co
 Filter/Matches: //<small>trafienia: <<resultCount>></small>//
 Matches: //<small>trafienia: <<resultCount>></small>//
 Matches/All: Wszystkie trafienia
+Matches/NoMatch: //Brak trafień//
+Matches/NoResult: //Brak wyników//
 Matches/Title: Trafienia w nazwach:
 Search: Szukaj
 Search/TooShort: Zbyt krótki tekst wyszukiwania

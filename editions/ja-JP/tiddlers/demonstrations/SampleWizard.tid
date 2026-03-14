@@ -1,0 +1,15 @@
+created: 20140912145537860
+footer: <$button message="tm-close-tiddler">閉じる</$button>
+modified: 20241215111438511 
+original-modified: 20211119205125230
+subtitle: これはモーダルウィザードです
+tags: Demonstrations
+title: SampleWizard
+ja-title: サンプルウィザード
+type: text/vnd.tiddlywiki
+
+これは、Tiddler [[サンプルウィザード|SampleWizard]]に保存されているモーダルウィザードダイアログです。
+
+{{Motovun Jack.jpg}}
+
+<$button message="tm-modal" param="SampleWizard2">ウィザードをネスト</$button>することもできます。

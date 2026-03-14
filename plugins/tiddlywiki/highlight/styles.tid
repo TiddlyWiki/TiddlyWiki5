@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/highlight/styles
-tags: [[$:/tags/Stylesheet]]
+tags: [[$:/tags/Stylesheet]] [[$:/tags/Stylesheet/Highlight]]
 
 pre.hljs {
   padding: 0;

@@ -1,0 +1,62 @@
+created: 20170124132500000
+modified: 20241119105640364
+original-modified: 201804111739
+tags: example-test [[How to apply custom styles]]
+title: Custom styles by data-tags
+ja-title: data-tagsによるカスタムスタイル
+type: text/vnd.tiddlywiki
+
+! 属性: data-tags
+
+<<.from-version "5.1.16">>
+
+~TiddlyWikiのコアでは、レンダリングされたコンテンツにいくつかの`属性`を追加します。これらの属性を使用すると、カスタムスタイルをTiddlerコンテンツに適用できます
+
+例えば、この<<tag "How to apply custom styles">>と<<tag "example-test">>でタグ付けされたTiddlerには、次のような属性になります:
+
+```
+data-tags="[[How to apply custom styles]] example-test"
+```
+
+''重要: ''Tiddlerタグはソートされて''いない''ため、レンダリングされた出力の順序は異なる場合があります!
+
+!! 例
+
+次のCSSは[[Custom data-styles]]で定義されており、`example-test`でタグ付けされたすべてのTiddler(これを含む)にピンクの境界線を作成します
+
+```
+[data-tags*="example-test"] {
+  border: 2px solid pink;
+}
+```
+
+!!! スタイルシートのスタイリング
+
+`data-tags-styles`でタグ付けされたTiddlerを表示するには、適切な方法で、次のコードを使用できます(`$:/tags/Stylesheet`を使用することもできますが、このWiki 内のすべてのスタイルシートに影響を与えることになり、意図したものではありません。)
+
+''重要:'' `.tc-tiddler-body`を指定することも忘れないでください。指定しないと、タイトルを含むTiddler全体が変更されます! 参照: [[Custom data-styles]]
+
+```
+[data-tags*="data-tags-styles"] .tc-tiddler-body {
+  display: block;
+  padding: 14px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  word-break: normal;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  background-color: #f5f5f5;
+  border: 1px solid #cccccc;
+  padding: 0 3px 2px;
+  border-radius: 3px;
+  font-family: Monaco, Consolas, "Lucida Console", "DejaVu Sans Mono", monospace;
+}
+```
+
+!! 強制改行
+
+この仕組みは、散文的な文章を書きたいユーザーにとっては便利です。参照: [[CSSを使用した強制改行|Hard Linebreaks with CSS]]
+
+!! その他の記述方法
+
+{{Attribute Selectors}}

@@ -1,0 +1,19 @@
+created: 20140828080837703
+modified: 20241112113549386
+original-modified: 20140912145908651
+tags: [[Customise TiddlyWiki]]
+title: Configuring the default TiddlerInfo tab
+ja-title: Tiddler情報タブのデフォルトを構成する
+type: text/vnd.tiddlywiki
+
+設定用Tiddler[[$:/config/TiddlerInfo/Default]]は、Tiddler情報タブのデフォルトとなるTiddlerのタイトルが含まれています。
+
+デフォルト値は''項目''タブに対応する`$:/core/ui/TiddlerInfo/Fields`です。他に構成可能な値は次のとおりです。: 
+
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo]!has[draft.of]]">
+<li>
+<$view field="title"/>
+</li>
+</$list>
+</ul>

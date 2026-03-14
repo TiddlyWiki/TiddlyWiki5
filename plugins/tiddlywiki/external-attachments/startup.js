@@ -6,10 +6,7 @@ module-type: startup
 Startup initialisation
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var ENABLE_EXTERNAL_ATTACHMENTS_TITLE = "$:/config/ExternalAttachments/Enable",
@@ -26,8 +23,8 @@ exports.startup = function() {
 	test_makePathRelative();
 	$tw.hooks.addHook("th-importing-file",function(info) {
 		if(document.location.protocol === "file:" && info.isBinary && info.file.path && $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE,"") === "yes") {
-console.log("Wiki location",document.location.pathname)
-console.log("File location",info.file.path)
+			console.log("Wiki location",document.location.pathname);
+			console.log("File location",info.file.path);
 			info.callback([
 				{
 					title: info.file.name,
@@ -123,6 +120,3 @@ function test_makePathRelative() {
 	test("\\\\SHARE\\Users\\me\\something\\file.png","/SHARE/Users/me/somethingelse/index.html","../something/file.png",{isWindows: true});
 	test("\\\\SHARE\\Users\\me\\something\\file.png","/C:/Users/me/something/index.html","/SHARE/Users/me/something/file.png",{isWindows: true});
 }
-
-
-})();

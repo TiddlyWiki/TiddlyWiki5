@@ -1,0 +1,13 @@
+title: $:/language/Buttons/
+
+Clear/Hint: Clear image to solid color
+Excise/Caption: cut out
+Excise/Caption/Excise: Cut out
+Excise/Caption/Replace: Replace cut out text with:
+Excise/Hint: Cut out the selected text into a new tiddler
+FullScreen/Hint: Enter or leave fullscreen mode
+Paint/Caption: paint color
+Paint/Hint: Set painting color
+Palette/Hint: Choose the color palette
+Stamp/Hint: Insert a pre–configured snippet of text
+StoryView/Hint: Choose the story visualization

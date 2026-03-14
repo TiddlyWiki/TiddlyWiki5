@@ -1,0 +1,33 @@
+created: 20170126152839462
+modified: 20241119110659035
+original-modified: 201804111739
+tags: [[Custom data-styles]]
+title: Attribute Selectors
+ja-title: 属性セレクタ
+type: text/vnd.tiddlywiki
+
+;[attr]
+:属性attrを持つ要素を表します。
+
+;[attr="value"]
+:属性attrの値が"value"である要素を表します。
+
+;[attr~="value"]
+:属性attrの値が、空白で区切られた単語のリストで、そのうちの1つが"value"である要素を表します。
+
+;[attr|="value"]
+:属性attrの値が、“value”か、“value”の後に“-” (U+002D)が続く値である要素を表します。言語サブコードの一致に使用できます。
+
+;[attr^="value"]
+:属性attrの値の先頭に"value"が付く要素を表します。
+
+;[attr$="value"]
+:属性attrの値の末尾に"value"が付く要素を表します。
+
+;[attr*="value"]
+:属性attrの値に文字列"value"が部分文字列として少なくとも1回含まれる要素を表します。
+
+;[attr "operator value" i]
+:閉じ括弧の前にi(またはI)を追加すると、値は大文字と小文字を区別せずに比較されます(ASCII範囲内の文字の場合)。
+
+詳細は[[CSSの属性セレクタ|https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors]]や[[CSS仕様書|https://www.w3.org/TR/CSS22/selector.html#attribute-selectors]]を参照してください

@@ -1,0 +1,13 @@
+title: $:/changenotes/5.4.0/#9585
+created: 20260106174849522
+modified: 20260106174849522
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: hackability
+description: The button classes of Editor toolbar buttons can now be evaluated as filter expressions
+release: 5.4.0
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9585
+github-contributors: BurningTreeC
+type: text/vnd.tiddlywiki
+
+This change lets you define the button-classes of Editor toolbar buttons as filters for flexible styling

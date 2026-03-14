@@ -1,5 +1,5 @@
 created: 20150117204109000
-modified: 20150917193713204
+modified: 20240708201746542
 tags: Filters
 title: Selection Constructors
 type: text/vnd.tiddlywiki
@@ -11,3 +11,7 @@ The output of a [[Filter Step]] depends on its [[operator|Filter Operators]]:
 * A few operators ignore their input and generate an independent output instead. These are called <<.def "selection constructors">>: they construct an entirely new [[selection|Title Selection]].
 
 A good example of a constructor is <<.olink title>>. The output of `[title[A]title[B]]` is just <<.tid B>>. But the <<.olink field>> operator is a modifier, so `[title[A]field:title[B]` outputs nothing at all.
+
+The following [[filter Operators|filter Operator]] are tagged <<tag>>:
+
+<<list-links "[tag<currentTiddler>]" class:"multi-columns">>

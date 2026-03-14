@@ -1,0 +1,15 @@
+created: 20220909094340097
+modified: 20241126103915330
+original-modified: 20220909094340097
+title: Hidden Setting: Sync System Tiddlers From Server
+ja-title: 隠し設定: システムTiddlerをサーバーから同期する
+tags: [[Hidden Settings]]
+
+<<.from-version "5.1.23">> Node.jsでシステムTiddlerをサーバーから同期するかどうかを決定します。(これは一方向の設定であることに注意してください。システムTiddlerは常にサーバー//へ//同期されます)。
+
+* `no` -- システムTiddlerはサーバーから同期されません(デフォルト)
+* `yes` -- システムTiddlerはサーバーから同期されます
+
+システムTiddlerの同期を有​​効にすると、$:/StoryListや$:/HistoryListなどのTiddlerが同期されるため、複数のユーザーが同時に同じサーバーに接続したときに予期しない結果が生じる可能性があります(ストーリーシーケンスがすべてのユーザー間で同期されることになります)。
+
+$:/config/SyncSystemTiddlersFromServer

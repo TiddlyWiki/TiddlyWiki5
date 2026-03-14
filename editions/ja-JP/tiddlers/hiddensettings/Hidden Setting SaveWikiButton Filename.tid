@@ -1,0 +1,13 @@
+created: 20181215154811835
+modified: 20241117104725880
+original-modified: 20190122000000000
+tags: [[Hidden Settings]]
+title: Hidden Setting: Filename for Save Wiki Button
+ja-title: 隠し設定: Wiki保存ボタンのファイル名
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.19">> <<.button save-wiki>>ボタンを使用して~TiddlyWikiを保存する場合、保存に使用されるデフォルトのファイル名は、[[コントロールパネル|$:/ControlPanel]]に入力された~TiddlyWikiのタイトルを使用して作成され、Tiddler [[$:/SiteTitle]]に記録されます。
+
+使用される値は`{{$:/SiteTitle}}.html`の形式です。これにより、ファイル名は`.html`拡張子付きのサイトタイトルから作成されます。
+
+[[$:/config/SaveWikiButton/Filename]]という名前のTiddlerが作成されると、そのTiddler内のテキストが~TiddlyWikiを保存するために使用されるデフォルトのファイル名として使用されます。

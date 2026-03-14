@@ -6,10 +6,7 @@ module-type: widget
 Dynannotate widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var TextMap = require("$:/plugins/tiddlywiki/dynannotate/textmap.js").TextMap;
@@ -31,7 +28,6 @@ DynannotateWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DynannotateWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -60,7 +56,7 @@ DynannotateWidget.prototype.render = function(parent,nextSibling) {
 		"class": "tc-dynannotation-wrapper",
 		children: [this.domContent,this.domAnnotations,this.domSnippets,this.domSearches],
 		document: this.document
-	})
+	});
 	parent.insertBefore(this.domWrapper,nextSibling);
 	this.domNodes.push(this.domWrapper);
 	// Apply the selection tracker data to the DOM
@@ -96,7 +92,7 @@ DynannotateWidget.prototype.execute = function() {
 
 DynannotateWidget.prototype.isSnippetMode = function() {
 	return this.getAttribute("searchDisplay") === "snippet";
-}
+};
 
 /*
 Save the data attributes required by the selection tracker
@@ -205,8 +201,8 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 			if(self.hasAttribute("popup")) {
 				$tw.popup.triggerPopup({
 					domNode: domOverlay,
-                    title: self.getAttribute("popup"),
-                    floating: self.getAttribute("floating"),
+					title: self.getAttribute("popup"),
+					floating: self.getAttribute("floating"),
 					wiki: self.wiki
 				});
 			}
@@ -264,8 +260,6 @@ DynannotateWidget.prototype.applySearch = function() {
 	this.removeSearch();
 	// Gather parameters
 	var searchString = this.getAttribute("search",""),
-		searchMode = this.getAttribute("searchMode"),
-		searchCaseSensitive = this.getAttribute("searchCaseSensitive","yes") === "yes",
 		searchMinLength = parseInt(this.getAttribute("searchMinLength","1"),10) || 1;
 	// Bail if search string too short
 	if(searchString.length < searchMinLength) {
@@ -304,11 +298,6 @@ DynannotateWidget.prototype.applySnippets = function() {
 	var textMap = new TextMap(this.domContent);
 	// Remove any previous snippets
 	this.removeSnippets();
-	// Gather parameters
-	var searchString = this.getAttribute("search",""),
-		searchMode = this.getAttribute("searchMode"),
-		searchCaseSensitive = this.getAttribute("searchCaseSensitive","yes") === "yes",
-		searchMinLength = parseInt(this.getAttribute("searchMinLength","1"),10) || 1;
 	// Build the map of the text content
 	var textMap = new TextMap(this.domContent);
 	// Search for the string
@@ -433,5 +422,3 @@ DynannotateWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.dynannotate = DynannotateWidget;
-
-})();

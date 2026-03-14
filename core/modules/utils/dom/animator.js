@@ -6,10 +6,7 @@ module-type: utils
 Orchestrates animations and transitions
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 function Animator() {
@@ -39,5 +36,3 @@ Animator.prototype.perform = function(type,domNode,options) {
 };
 
 exports.Animator = Animator;
-
-})();

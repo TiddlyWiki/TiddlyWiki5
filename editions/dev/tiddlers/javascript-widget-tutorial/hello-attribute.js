@@ -3,10 +3,6 @@
 Hello, World widget
 
 \*/
-(function() {
-
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -43,5 +39,3 @@ MyWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.hello = MyWidget;
-
-})();

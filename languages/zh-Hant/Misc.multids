@@ -1,5 +1,6 @@
 title: $:/language/
 
+Alerts: 警示訊息
 AboveStory/ClassicPlugin/Warning: 您似乎要載入為 ~TiddlyWiki 經典版設計的插件。請注意，[[這些插件無法運行於 TiddlyWiki 5.x.x 版|https://tiddlywiki.com/#TiddlyWikiClassic]]。偵測到 ~TiddlyWiki 經典版插件：
 BinaryWarning/Prompt: 此條目包含二進位資料
 ClassicWarning/Hint: 此條目以經典版 TiddlyWiki 標記格式撰寫，不完全相容新版 TiddlyWiki 的格式，詳細資訊請參閱：https://tiddlywiki.com/static/Upgrading。
@@ -70,7 +71,7 @@ No: 否
 OfficialPluginLibrary: ~TiddlyWiki 官方插件程式庫
 OfficialPluginLibrary/Hint: 此為在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式庫。由核心團隊維護的插件、主題和語言包。
 PageTemplate/Description: 預設的 ~Tiddlywiki 佈局
-PageTemplate/Name: 預設的 ~PageTemplate
+PageTemplate/Name: 標準佈局
 PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} ，使 ~JavaScript 插件的更改生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 Shortcuts/Input/Accept/Hint: 接受選取的項目

@@ -1,0 +1,38 @@
+created: 20211128212902292
+modified: 20250319104544220
+original-modified: 20230305125354209
+tags: [[Intersection Filter Run Prefix]]
+title: Intersection Filter Run Prefix (Examples)
+ja-title: intersectionフィルタランプレフィックス(例)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "A B C D :intersection[enlist[C D E F]]">>
+
+<<.operator-example 2 "A B C D :intersection[enlist[A B C D]]">>
+
+<<.operator-example 3 "A B C D :intersection[enlist[E F G H]]">>
+
+<<.operator-example 4 ":intersection[enlist[A B C D]]" "最初のフィルタランでintersectionを使用することはあまり役に立ちません。結果は常に空になります。">>
+
+!! `+`と`:intersection`の違い
+
+プレフィックス`+`は、形式論理における"AND"として考えてください。たとえば、"条件A ''かつ'' 条件Bを満たすすべてのタイトルを取得する"などです。ただし、すべてのケースに適しているわけではありません。条件Bがインプットを置き換えるフィルタオペレータを使用する場合、プレフィックス`+`の使用は難しくなります。たとえば、2つのTiddlerに共通するタグを見つけたい場合は、次のようなフィルタ式を記述します: 
+
+* <$link to="tags Operator">`[[field Operator]tags[]] +[[compare Operator]tags[]]`</$link>
+
+しかし、これは機能しません。2回目のフィルタランでインプットが破棄され、単一のtitle`[[compare Operator]]`で構成されるインプットに置き換えられるからです。そのため、このフィルタ式から得られる結果は、`compare Operator`Tiddlerのタグだけになります。
+
+このような場合、必要なのは`:intersection`プレフィックスです。これまでのフィルタアウトプットを取得して、//保留し//、すべてのTiddlerタイトルをインプットとして次のフィルタランを開始します。その後、最新のフィルタランが完了すると、最新のアウトプットを取得して保留していたアウトプットと比較し、保留していたアウトプットと最新のアウトプットの両方に表示されたタイトルのみを含む新しいアウトプットを生成します。したがって、`field Operator`と`compare Operator`に共通するタグのみを取得するには、次のようなフィルタ式を記述します。
+
+* <$link to="tags Operator">`[[field Operator]tags[]] :intersection[[compare Operator]tags[]]`</$link>
+
+次の例では、[[field Operator]]と[[compare Operator]]を使用して、Tiddlerとそれぞれのタグを比較します。
+
+<<.operator-example 5 "[[field Operator]tags[]]">>
+<<.operator-example 6 "[[compare Operator]tags[]]">>
+
+<<.operator-example 7 "[[field Operator]tags[]] +[[compare Operator]tags[]]" """"field Operator"Tiddlerのタグは失われるため、"compare Operator"Tiddlerのタグのみが返されます""">>
+
+<<.operator-example 8 "[[field Operator]tags[]] :intersection[[compare Operator]tags[]]" """両方のTiddlerに共通するタグを返します""">>
+ 
+

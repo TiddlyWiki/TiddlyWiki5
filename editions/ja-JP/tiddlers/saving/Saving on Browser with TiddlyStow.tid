@@ -1,0 +1,19 @@
+caption: ~TiddlyStow (実験的)
+color: #FF8A65
+created: 20230403170650008
+delivery: Saver
+description: Chromiumベースブラウザの新しいバージョンを使用して変更を保存
+method: save
+modified: 20241005115705671
+original-modified: 20230403183020357
+tags: Chrome Edge Opera Saving Linux Mac Windows
+title: Saving on Browser with TiddlyStow
+ja-title: TiddlyStowを使ってブラウザで保存
+type: text/vnd.tiddlywiki
+url: https://github.com/btheado/tiddlystow
+
+''リンク:'' {{!!url}}
+
+Tiddlystowは、ブラウザのFile System API(現在は Chrome ベースのブラウザ)を使用してTiddlyWikiファイルをローカルに保存します。
+これはプラグインや拡張機能を必要とせずに、ローカルのTiddlyWikiファイルを読み込み、同じローカルファイルに保存するシンプルなWebページです。
+

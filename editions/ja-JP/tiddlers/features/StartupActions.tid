@@ -1,0 +1,46 @@
+created: 20180323092308399
+modified: 20241218112530254 
+original-modified: 20201025161723719
+tags: Features
+title: StartupActions
+ja-title: スタートアップアクション
+type: text/vnd.tiddlywiki
+
+TiddlyWikiはスタートアップ時に、次のシステムタグを持つTiddlerのActionWidgetsを実行します: 
+
+* 初期スタートアップ時に実行されます:
+** <<tag "$:/tags/StartupAction">> (すべてのプラットフォームで実行)
+** <<tag "$:/tags/StartupAction/Browser">> (ブラウザで実行している場合にのみ実)
+** <<tag "$:/tags/StartupAction/Node">> (Node.jsで実行している場合にのみ実行)
+* レンダリング後のスタートアップ時に実行されます:
+** <<.from-version "5.1.23">> <<tag "$:/tags/StartupAction/PostRender">> (ブラウザで実行している場合にのみ実行)
+
+!! 初期スタートアップアクション
+
+初期スタートアップアクションは、画面サイズなどの環境要因に応じてTiddlyWikiをカスタマイズするのに役立ちます。たとえば、次のアクションウィジェットをTiddlerタグ`$:/tags/StartupAction/Browser`を付けて配置すると、画面幅が1000ピクセル未満の場合にサイドバーがデフォルトで非表示になります:
+
+```
+<$reveal type="lt" state="$:/info/browser/screen/width" text="3000">
+<$action-setfield $tiddler="$:/state/sidebar" $value="no"/>
+</$reveal>
+
+<$reveal type="gteq" state="$:/info/browser/screen/width" text="3000">
+<$action-setfield $tiddler="$:/state/sidebar" $value="yes"/>
+</$reveal>
+```
+
+<<.from-version "5.1.20">> 次の例では、ブラウザによって報告された言語に一致する言語プラグインに切り替えます:
+
+```
+<$action-setfield $tiddler="$:/language" text={{{ [[$:/languages/en-GB]] [plugin-type[language]sort[description]removeprefix[$:/languages/]] +[prefix{$:/info/browser/language}] ~[[en-GB]] +[addprefix[$:/languages/]] }}}/>
+```
+
+デフォルトでは、グローバルマクロは初期スタートアップアクションTiddler内では利用できないことに注意してください。これらにアクセスする必要がある場合は、Tiddlerの先頭に[[Pragma: \import]]を明示的に含める必要があります:
+
+```
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+```
+
+!! レンダリング後のスタートアップアクション
+
+<<.from-version "5.1.23">> レンダリング後のスタートアップアクションは、TiddlyWikiのユーザーインターフェイスがレンダリングされた後に実行されます。これにより、レンダリングされた表示に依存するアクション(モーダルの表示など)を実行できるようになります。

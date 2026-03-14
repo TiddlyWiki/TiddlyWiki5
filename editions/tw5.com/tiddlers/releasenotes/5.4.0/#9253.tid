@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9253
+description: Switch to native support for converting utf-8 between base64
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: performance
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9253
+github-contributors: Leilei332
+
+Replace `base64-utf8` module with `TextEncoder` method to convert between utf-8 and Base64.

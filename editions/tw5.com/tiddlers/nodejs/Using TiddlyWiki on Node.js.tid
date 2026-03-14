@@ -1,5 +1,5 @@
 created: 20131219100520659
-modified: 20220613172345723
+modified: 20241025051303991
 tags: [[TiddlyWiki on Node.js]]
 title: Using TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 For example, the following command loads the tiddlers from a ~TiddlyWiki HTML file and then saves one of them in static HTML:
 
 ```
-tiddlywiki --verbose --load mywiki.html --rendertiddler ReadMe ./readme.html
+tiddlywiki --verbose --load mywiki.html --render ReadMe ./readme.html
 ```
 
 Running `tiddlywiki` from the command line boots the ~TiddlyWiki kernel, loads the core plugins and establishes an empty wiki store. It then sequentially processes the command line arguments from left to right. The arguments are separated with spaces.

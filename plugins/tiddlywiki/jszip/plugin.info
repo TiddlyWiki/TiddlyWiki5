@@ -3,5 +3,6 @@
 	"name": "JSZip",
 	"description": "JSZip library",
 	"author": "Stuart Knightley, David Duponchel, Franz Buchinger, António Afonso",
-	"list": "readme docs examples license"
+	"list": "readme docs examples license",
+	"stability": "STABILITY_2_STABLE"
 }

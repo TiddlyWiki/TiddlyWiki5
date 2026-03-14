@@ -6,10 +6,7 @@ module-type: info
 Initialise basic platform $:/info/ tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
@@ -36,17 +33,8 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 		// Screen size
 		infoTiddlerFields.push({title: "$:/info/browser/screen/width", text: window.screen.width.toString()});
 		infoTiddlerFields.push({title: "$:/info/browser/screen/height", text: window.screen.height.toString()});
- 		// Dark mode through event listener on MediaQueryList
- 		var mqList = window.matchMedia("(prefers-color-scheme: dark)"),
- 			getDarkModeTiddler = function() {return {title: "$:/info/darkmode", text: mqList.matches ? "yes" : "no"};};
- 		infoTiddlerFields.push(getDarkModeTiddler());
- 		mqList.addListener(function(event) {
- 			updateInfoTiddlersCallback([getDarkModeTiddler()]);
- 		});
 		// Language
 		infoTiddlerFields.push({title: "$:/info/browser/language", text: navigator.language || ""});
 	}
 	return infoTiddlerFields;
 };
-
-})();

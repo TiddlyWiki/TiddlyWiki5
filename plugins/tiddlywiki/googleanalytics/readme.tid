@@ -4,4 +4,4 @@ This plugin enables you to use Google Analytics to track access to your online T
 
 By default, the user is not asked for permission before initialising Google Analytics. This plugin also optionally integrates with the "Consent Banner" plugin (also found in the official plugin library) so that Google Analytics is not initialised until the user grants explicit permission.
 
-[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/googleanalytics]]
+[[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/googleanalytics]]

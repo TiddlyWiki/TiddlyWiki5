@@ -16,10 +16,7 @@ Select widget:
 ```
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -53,6 +50,9 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 	if(this.selectMultiple) {
 		domNode.setAttribute("multiple","multiple");
 	}
+	if(this.isDisabled === "yes") {
+		domNode.setAttribute("disabled", true);
+	}
 	if(this.selectSize) {
 		domNode.setAttribute("size",this.selectSize);
 	}
@@ -63,8 +63,8 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("title",this.selectTooltip);
 	}
 	this.parentDomNode.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 	this.setSelectValue();
 	if(this.selectFocus == "yes") {
 		this.getSelectDomNode().focus();
@@ -82,8 +82,8 @@ SelectWidget.prototype.handleChangeEvent = function(event) {
 	if(this.selectMultiple == false) {
 		var value = this.getSelectDomNode().value;
 	} else {
-		var value = this.getSelectValues()
-				value = $tw.utils.stringifyList(value);
+		var value = this.getSelectValues();
+		value = $tw.utils.stringifyList(value);
 	}
 	this.wiki.setText(this.selectTitle,this.selectField,this.selectIndex,value);
 	// Trigger actions
@@ -118,12 +118,21 @@ SelectWidget.prototype.setSelectValue = function() {
 		}
 	}
 	// Assign it to the select element if it's different than the current value
-	if (this.selectMultiple) {
+	if(this.selectMultiple) {
 		value = value === undefined ? "" : value;
 		var select = this.getSelectDomNode();
-		var values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
+		var child,
+			values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
 		for(var i=0; i < select.children.length; i++){
-			select.children[i].selected = values.indexOf(select.children[i].value) !== -1
+			child=select.children[i];
+			if(child.children.length === 0){
+				child.selected = values.indexOf(child.value) !== -1;
+			} else {
+				// grouped options
+				for(var y=0; y < child.children.length; y++){
+					child.children[y].selected = values.indexOf(child.children[y].value) !== -1;
+				}
+			}
 		}
 	} else {
 		var domNode = this.getSelectDomNode();
@@ -147,14 +156,14 @@ SelectWidget.prototype.getSelectValues = function() {
 	select = this.getSelectDomNode();
 	result = [];
 	options = select && select.options;
-	for (var i=0; i<options.length; i++) {
+	for(var i=0; i<options.length; i++) {
 		opt = options[i];
-		if (opt.selected) {
+		if(opt.selected) {
 			result.push(opt.value || opt.text);
 		}
 	}
 	return result;
-}
+};
 
 /*
 Compute the internal state of the widget
@@ -172,6 +181,7 @@ SelectWidget.prototype.execute = function() {
 	this.selectTabindex = this.getAttribute("tabindex");
 	this.selectTooltip = this.getAttribute("tooltip");
 	this.selectFocus = this.getAttribute("focus");
+	this.isDisabled = this.getAttribute("disabled","no");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -182,7 +192,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 SelectWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// If we're using a different tiddler/field/index then completely refresh ourselves
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip || changedAttributes.tabindex) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip || changedAttributes.default || changedAttributes.tabindex || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -205,5 +215,3 @@ SelectWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.select = SelectWidget;
-
-})();

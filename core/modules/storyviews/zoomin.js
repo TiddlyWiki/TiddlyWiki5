@@ -6,10 +6,7 @@ module-type: storyview
 Zooms between individual tiddlers
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/#easeInOutCubic
@@ -19,7 +16,7 @@ var ZoominListView = function(listWidget) {
 	this.listWidget = listWidget;
 	this.textNodeLogger = new $tw.utils.Logger("zoomin story river view", {
 		enable: true,
-		colour: 'red'
+		colour: "red"
 	});
 	// Get the index of the tiddler that is at the top of the history
 	var history = this.listWidget.wiki.getTiddlerDataCached(this.listWidget.historyTitle,[]),
@@ -54,7 +51,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement) {
 		return;
-	} else if (targetElement.nodeType === Node.TEXT_NODE) {
+	} else if(targetElement.nodeType === Node.TEXT_NODE) {
 		this.logTextNodeRoot(targetElement);
 		return;
 	}
@@ -69,11 +66,11 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	]);
 	// Get the position of the source node, or use the centre of the window as the source position
 	var sourceBounds = historyInfo.fromPageRect || {
-			left: window.innerWidth/2 - 2,
-			top: window.innerHeight/2 - 2,
-			width: window.innerWidth/8,
-			height: window.innerHeight/8
-		};
+		left: window.innerWidth/2 - 2,
+		top: window.innerHeight/2 - 2,
+		width: window.innerWidth/8,
+		height: window.innerHeight/8
+	};
 	// Try to find the title node in the target tiddler
 	var titleDomNode = findTitleDomNode(listItemWidget) || listItemWidget.findFirstDomNode(),
 		zoomBounds = titleDomNode.getBoundingClientRect();
@@ -99,6 +96,9 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
 		{zIndex: "500"},
 	]);
+	setTimeout(function() {
+		$tw.utils.removeStyles(targetElement, ["transition", "opacity", "transform", "zIndex"]);
+	}, duration);
 	// Transform the previous tiddler out of the way and then hide it
 	if(prevCurrentTiddler && prevCurrentTiddler !== targetElement) {
 		scale = zoomBounds.width / sourceBounds.width;
@@ -139,7 +139,7 @@ ZoominListView.prototype.insert = function(widget) {
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement) {
 		return;
-	} else if (targetElement.nodeType === Node.TEXT_NODE) {
+	} else if(targetElement.nodeType === Node.TEXT_NODE) {
 		this.logTextNodeRoot(targetElement);
 		return;
 	}
@@ -183,7 +183,7 @@ ZoominListView.prototype.remove = function(widget) {
 	var toWidgetDomNode = toWidget && toWidget.findFirstDomNode();
 	// Set up the tiddler we're moving back in
 	if(toWidgetDomNode) {
-		if (toWidgetDomNode.nodeType === Node.TEXT_NODE) {
+		if(toWidgetDomNode.nodeType === Node.TEXT_NODE) {
 			this.logTextNodeRoot(toWidgetDomNode);
 			toWidgetDomNode = null;
 		} else {
@@ -210,7 +210,10 @@ ZoominListView.prototype.remove = function(widget) {
 		{opacity: "0"},
 		{zIndex: "0"}
 	]);
-	setTimeout(removeElement,duration);
+	setTimeout(function() {
+		$tw.utils.removeStyles(toWidgetDomNode, ["transformOrigin", "transform", "transition", "opacity", "zIndex"]);
+		removeElement();
+	}, duration);	
 	// Now the tiddler we're going back to
 	if(toWidgetDomNode) {
 		$tw.utils.setStyle(toWidgetDomNode,[
@@ -226,5 +229,3 @@ ZoominListView.prototype.logTextNodeRoot = function(node) {
 };
 
 exports.zoomin = ZoominListView;
-
-})();

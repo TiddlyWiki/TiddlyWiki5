@@ -1,0 +1,27 @@
+created: 20160424150551727
+modified: 20241111111307811
+original-modified: 20181106224128548
+tags: [[Customise TiddlyWiki]]
+title: Adding a table of contents to the sidebar
+ja-title: サイドバーに目次を追加する
+type: text/vnd.tiddlywiki
+
+目次を作成するための~TiddlyWikiの標準メカニズムは、"toc"[[マクロ|Macros]]です。(マクロの詳細については、リンクをクリックしてください。)Tiddlerを目次の見出しとして扱うようにする手段として`タグ付け`を使用します。タグ付けについては[[タグ付け|Tagging]]Tiddlerを参照してください。
+
+以下のステップで、サイドバーにカスタマイズできる[[目次|Table-of-Contents Macros]]を追加できます:
+
+# [[TableOfContents]]という名前のTiddlerを作成します
+# ''~$:/tags/SideBar''というタグを付けます
+# テキストに次のように入力します <div><pre><code><$text text="""
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'TableOfContents'>>
+
+</div>"""/></code></pre></div>
+# ''目次''という値を持つ''caption''フィールドを追加します
+#  ''~$:/core/ui/SideBar/Open''という値を持つ''list-after''フィールドを追加します
+
+''TableOfContents''というタグを持つTiddlerを作成することで目次にエントリを追加します。より簡単な方法としては、''TableOfContents''TiddlerのTiddlerツールバーの<<.icon $:/core/images/new-here-button>> ''タグ付きTiddlerの作成''を選択します。
+(''タグ付きTiddlerの作成''ボタンが表示されない場合は、下向き矢印<<.icon $:/core/images/down-arrow>>をクリックしてその他メニューを表示します。)
+
+子Tiddler(他のTiddlerの下にあるTiddler)を作成するには、親Tiddlerの名前を子Tiddlerにタグ付けします。

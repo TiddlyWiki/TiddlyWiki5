@@ -1,6 +1,6 @@
 caption: unusedtitle
 created: 20210104143546885
-modified: 20210427184035684
+modified: 20240119224103283
 tags: Macros [[Core Macros]]
 title: unusedtitle Macro
 type: text/vnd.tiddlywiki
@@ -18,7 +18,10 @@ It uses the same method as the create new tiddler button, a number is appended t
 : <<.from-version "5.2.0">> An ''optional'' string specifying the separator between baseName and the unique number. eg: `separator:"-"`. Defaults to a space: `" "`. If you need an empty separator use the ''template''!
 
 ; template
-: <<.from-version "5.2.0">> A ''optional'' template string can be used to allow you maximum flexibility. If the template string is used, there will always be a counter value. 
+: <<.from-version "5.2.0">> An ''optional'' template string can be used to allow you maximum flexibility. If the template string is used, there will always be a counter value. 
+
+; startCount
+: <<.from-version "5.3.6">> An ''optional'' parameter, that sets the initial value for the new tiddler counter.
 
 !! Template String
 

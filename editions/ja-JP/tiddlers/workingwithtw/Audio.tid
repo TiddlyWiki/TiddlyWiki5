@@ -1,0 +1,27 @@
+created: 20141018131647392
+modified: 20241110105324243
+original-modified: 20141019200654436
+tags: [[Working with TiddlyWiki]] Features
+title: Audio
+ja-title: オーディオ
+type: text/vnd.tiddlywiki
+
+オーディオファイルは、[[画像|Images in WikiText]]と非常によく似た方法でTiddlyWikiに組み込むことができます。
+
+! 埋め込みオーディオ
+
+小さなオーディオファイルは、TiddlyWiki内に直接埋め込むことができます。埋め込みは、TiddlyWikiファイルのサイズが大きくなるため、大きなファイル(数百キロバイト以上)には適していません。
+
+たとえば、Tiddler[[TiddlyWiki.mp3]]には、"TiddlyWiki"という単語のMP3録音が含まれています。このTiddlerにアクセスすると、録音を再生するオーディオプレーヤーが表示されます。
+
+オーディオファイルをトランスクルードすることもできます。例:
+
+<<wikitext-example-without-html '{{TiddlyWiki.mp3}}'>>
+
+! 外部オーディオ
+
+外部オーディオTiddlerは、''_canonical_uri''フィールドを使用して外部オーディオファイル/ストリームを指定し、''テキスト''フィールドをブロックします。これにより、サイズが大幅に削減されますが、再生は可能です。
+
+たとえば、Tiddler[[Caruso - Ave Maria]]は、 http://archive.org でホストされているオンラインオーディオ録音を指しています: 
+
+<<wikitext-example-without-html '{{Caruso - Ave Maria}}'>>

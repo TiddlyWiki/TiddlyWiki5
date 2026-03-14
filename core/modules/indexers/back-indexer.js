@@ -46,7 +46,7 @@ function BackSubIndexer(indexer,extractor) {
 BackSubIndexer.prototype.init = function() {
 	// lazy init until first lookup
 	this.index = null;
-}
+};
 
 BackSubIndexer.prototype._init = function() {
 	this.index = Object.create(null);
@@ -60,22 +60,25 @@ BackSubIndexer.prototype._init = function() {
 			self.index[target][sourceTitle] = true;
 		});
 	});
-}
+};
 
 BackSubIndexer.prototype.rebuild = function() {
 	this.index = null;
-}
+};
 
 /*
 * Get things that is being referenced in the text, e.g. tiddler names in the link syntax.
 */
 BackSubIndexer.prototype._getTarget = function(tiddler) {
+	if(this.wiki.isBinaryTiddler(tiddler.fields.text)) {
+		return [];
+	}
 	var parser = this.wiki.parseText(tiddler.fields.type, tiddler.fields.text, {});
 	if(parser) {
-		return this.wiki[this.extractor](parser.tree);
+		return this.wiki[this.extractor](parser.tree, tiddler.fields.title);
 	}
 	return [];
-}
+};
 
 BackSubIndexer.prototype.update = function(updateDescriptor) {
 	// lazy init/update until first lookup
@@ -83,8 +86,8 @@ BackSubIndexer.prototype.update = function(updateDescriptor) {
 		return;
 	}
 	var newTargets = [],
-	    oldTargets = [],
-	    self = this;
+		oldTargets = [],
+		self = this;
 	if(updateDescriptor.old.exists) {
 		oldTargets = this._getTarget(updateDescriptor.old.tiddler);
 	}
@@ -103,7 +106,7 @@ BackSubIndexer.prototype.update = function(updateDescriptor) {
 		}
 		self.index[target][updateDescriptor.new.tiddler.fields.title] = true;
 	});
-}
+};
 
 BackSubIndexer.prototype.lookup = function(title) {
 	if(!this.index) {
@@ -114,6 +117,6 @@ BackSubIndexer.prototype.lookup = function(title) {
 	} else {
 		return [];
 	}
-}
+};
 
 exports.BackIndexer = BackIndexer;

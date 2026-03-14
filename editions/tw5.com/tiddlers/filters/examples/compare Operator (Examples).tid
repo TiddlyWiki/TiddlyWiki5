@@ -9,3 +9,4 @@ type: text/vnd.tiddlywiki
 <<.operator-example 3 "[list[Days of the Week]compare:string:gt[M]compare:string:lt[W]]">>
 <<.operator-example 4 "[[v5.1.23-prerelease]compare:version:gt[v5.1.22]]">>
 <<.operator-example 5 "[[1]compare:number:gt[2]then[yes]else[no]]">>
+<<.operator-example 6 "[[-2]compare::lt[-1]]">>

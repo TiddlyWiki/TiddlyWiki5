@@ -11,40 +11,40 @@ Within an "if" or "elseif" clause, the variable `condition` contains the value o
 A simple example:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<% if [{$:/info/url/protocol}match[file:]] %>
+src='<%if [{$:/info/url/protocol}match[file:]] %>
   Loaded from a file URI
-<% else %>
+<%else%>
   Not loaded from a file URI
-<% endif %>
+<%endif%>
 '/>
 
-One or more `<% elseif %>` clauses may be included before the `<% else %>` clause:
+One or more `<%elseif%>` clauses may be included before the `<%else%>` clause:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<% if [{$:/info/url/protocol}match[file:]] %>
+src='<%if [{$:/info/url/protocol}match[file:]] %>
   Loaded from a file URI
-<% elseif [{$:/info/url/protocol}match[https:]] %>
+<%elseif [{$:/info/url/protocol}match[https:]] %>
   Loaded from an HTTPS URI
-<% elseif [{$:/info/url/protocol}match[http:]] %>
+<%elseif [{$:/info/url/protocol}match[http:]] %>
   Loaded from an HTTP URI
-<% else %>
+<%else%>
   Loaded from an unknown protocol
-<% endif %>
+<%endif%>
 '/>
 
 The conditional shortcut syntax can be nested:
 
 <$macrocall $name='wikitext-example-without-html'
 src='\procedure test(animal)
-<% if [<animal>match[Elephant]] %>
+<%if [<animal>match[Elephant]] %>
   It is an elephant
-<% else %>
-  <% if [<animal>match[Giraffe]] %>
+<%else%>
+  <%if [<animal>match[Giraffe]] %>
     It is a giraffe
-  <% else %>
+  <%else%>
     It is completely unknown
-  <% endif %>
-<% endif %>
+  <%endif%>
+<%endif%>
 \end
 
 <<test "Giraffe">>
@@ -56,7 +56,7 @@ src='\procedure test(animal)
 
 Notes:
 
-* Clauses are parsed in inline mode by default. Force block mode parsing by following the opening `<% if %>`, `<% elseif %>` or `<% else %>` with two line breaks
+* Clauses are parsed in inline mode by default. Force block mode parsing by following the opening `<%if %>`, `<%elseif%>` or `<%else%>` with two line breaks
 * Widgets and HTML elements must be within a single conditional clause; it is not possible to start an element in one conditional clause and end it in another
 * The conditional shortcut syntax cannot contain pragmas such as procedure definitions
 

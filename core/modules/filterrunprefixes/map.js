@@ -3,10 +3,7 @@ title: $:/core/modules/filterrunprefixes/map.js
 type: application/javascript
 module-type: filterrunprefix
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -23,7 +20,7 @@ exports.map = function(operationSubFunction,options) {
 			$tw.utils.each(inputTitles,function(title) {
 				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
 					"currentTiddler": "" + title,
-					"..currentTiddler": widget.getVariable("currentTiddler",""),
+					"..currentTiddler": widget.getVariable("currentTiddler",{defaultValue:""}),
 					"index": "" + index,
 					"revIndex": "" +  (inputTitles.length - 1 - index),
 					"length": "" + inputTitles.length
@@ -31,14 +28,12 @@ exports.map = function(operationSubFunction,options) {
 				if(filtered.length && flatten) {
 					$tw.utils.each(filtered,function(value) {
 						results.push(value);
-					})
+					});
 				} else {
 					results.push(filtered[0]||"");
 				}
 				++index;
 			});
 		}
-	}
+	};
 };
-
-})();

@@ -1,0 +1,17 @@
+created: 20141118143636664
+modified: 20241201112046756
+original-modified: 20141118143636664
+tags: Examples
+title: Simple Zork-like Game by Jed Carty
+ja-title: Jed CartyのシンプルなZorkライクゲーム
+url: http://zorklike.tiddlyspot.com
+
+[[この投稿|https://groups.google.com/d/topic/tiddlywiki/4aRpZht1vOs/discussion]]で紹介されている、TiddlyWikiで構築されたシンプルなゲーム。
+
+{{!!url}}
+
+<<<
+プラグインやJavaScriptを使わずに、Coreのtiddlywikiだけを使って、なんらかのゲームが作れるかどうか試してみることにしました。私は、非常に基本的なZork/インタラクティブフィクションタイプのゲームを作りました。これは、現時点では私が作ることができ、ゲームだと言える最もシンプルなものですが、将来的には改造していくかもしれません。action-setfieldウィジェットによってマクロ作成の作業が大幅に軽減されたため、5.1.5 プレリリースを使用しています。
+
+この目標の1つは、Coreのtiddlywikiに含まれているもの以外は何も使用しないことです。そのため、JavaScriptやプラグインはありません。
+<<<

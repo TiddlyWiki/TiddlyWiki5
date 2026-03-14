@@ -16,6 +16,8 @@
 			"--setfield","[tag[external-image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",
 			"--setfield","[tag[external-image]]","text","","text/plain",
 			"--render","$:/core/save/all","index.html","text/plain"],
+		"readmes": [
+			"--render","[[Code of Conduct]]","code-of-conduct.md","text/html"],
 		"favicon": [
 			"--savetiddler","$:/favicon.ico","favicon.ico"],
 		"static": [

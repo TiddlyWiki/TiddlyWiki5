@@ -15,3 +15,11 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--output . \
 	--build readmes \
 	|| exit 1
+
+# tw.org readmes
+node $TW5_BUILD_TIDDLYWIKI \
+	editions/tw.org \
+	--verbose \
+	--output . \
+	--build readmes \
+	|| exit 1

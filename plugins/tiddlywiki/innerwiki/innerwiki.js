@@ -6,16 +6,12 @@ module-type: widget
 Widget to display an innerwiki in an iframe
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var DEFAULT_INNERWIKI_TEMPLATE = "$:/plugins/tiddlywiki/innerwiki/template";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	DataWidget = require("$:/plugins/tiddlywiki/innerwiki/data.js").data,
 	dm = $tw.utils.domMaker;
 
 var InnerWikiWidget = function(parseTreeNode,options) {
@@ -143,7 +139,7 @@ Create the anchors
 */
 InnerWikiWidget.prototype.createAnchors = function() {
 	var self = this;
-	this.findDataWidgets(this.children,"anchor",function(widget) {
+	this.findChildrenDataWidgets(this.children,"anchor",function(widget) {
 		var anchorWidth = 40,
 			anchorHeight = 40,
 			getAnchorCoordinate = function(name) {
@@ -233,74 +229,14 @@ InnerWikiWidget.prototype.createInnerHTML = function() {
 		IMPLANT_PREFIX = "<" + "script>\n$tw.preloadTiddlerArray(",
 		IMPLANT_SUFFIX = ");\n</" + "script>\n",
 		parts = html.split(SPLIT_MARKER),
-		tiddlers = this.readTiddlerDataWidgets(this.children);
+		tiddlers = [];
+	this.findChildrenDataWidgets(this.children,"data",function(widget) {
+		Array.prototype.push.apply(tiddlers,widget.readDataTiddlerValues());
+	});
 	if(parts.length === 2) {
 		html = parts[0] + IMPLANT_PREFIX + JSON.stringify(tiddlers) + IMPLANT_SUFFIX + SPLIT_MARKER + parts[1];
 	}
 	return html;
-};
-
-/*
-Find child data widgets
-*/
-InnerWikiWidget.prototype.findDataWidgets = function(children,tag,callback) {
-	var self = this;
-	$tw.utils.each(children,function(child) {
-		if(child.dataWidgetTag === tag) {
-			callback(child);
-		}
-		if(child.children) {
-			self.findDataWidgets(child.children,tag,callback);
-		}
-	});
-};
-
-/*
-Find the child data widgets
-*/
-InnerWikiWidget.prototype.readTiddlerDataWidgets = function(children) {
-	var self = this,
-		results = [];
-	this.findDataWidgets(children,"data",function(widget) {
-		Array.prototype.push.apply(results,self.readTiddlerDataWidget(widget));
-	});
-	return results;
-};
-
-/*
-Read the value(s) from a data widget
-*/
-InnerWikiWidget.prototype.readTiddlerDataWidget = function(dataWidget) {
-	// Start with a blank object
-	var item = Object.create(null);
-	// Read any attributes not prefixed with $
-	$tw.utils.each(dataWidget.attributes,function(value,name) {
-		if(name.charAt(0) !== "$") {
-			item[name] = value;			
-		}
-	});
-	// Deal with $tiddler or $filter attributes
-	var titles;
-	if(dataWidget.hasAttribute("$tiddler")) {
-		titles = [dataWidget.getAttribute("$tiddler")];
-	} else if(dataWidget.hasAttribute("$filter")) {
-		titles = this.wiki.filterTiddlers(dataWidget.getAttribute("$filter"));
-	}
-	if(titles) {
-		var self = this;
-		var results = [];
-		$tw.utils.each(titles,function(title,index) {
-			var tiddler = self.wiki.getTiddler(title),
-				fields;
-			if(tiddler) {
-				fields = tiddler.getFieldStrings();
-			}
-			results.push($tw.utils.extend({},fields,item));
-		})
-		return results;
-	} else {
-		return [item];		
-	}
 };
 
 /*
@@ -344,7 +280,7 @@ InnerWikiWidget.prototype.refresh = function(changedTiddlers) {
 			this.deleteAnchors();
 			this.createAnchors();
 		}
-		return childrenRefreshed
+		return childrenRefreshed;
 	}
 };
 
@@ -371,7 +307,7 @@ InnerWikiWidget.prototype.saveScreenshot = function(options,callback) {
 		throw "Google Puppeteer not found";
 	}
 	// Take screenshots
-	puppeteer.launch().then(async browser => {
+	puppeteer.launch().then(async (browser) => {
 		// NOTE: Copying Google's sample code by using new fangled promises "await"
 		const page = await browser.newPage();
 		await page.setContent(self.createInnerHTML(),{
@@ -407,5 +343,3 @@ InnerWikiWidget.prototype.saveScreenshot = function(options,callback) {
 };
 
 exports.innerwiki = InnerWikiWidget;
-
-})();

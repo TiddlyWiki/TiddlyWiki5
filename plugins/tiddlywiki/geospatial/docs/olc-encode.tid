@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/olc-encode
+caption: olc-encode operator
+tags: $:/tags/GeospatialDocs
+
+!! `olc-encode` operator
+
+The `olc-encode` operator converts separate latitude and longitude numbers into an [[OpenLocationCode|https://github.com/google/open-location-code]] shortcut code with a specified length (defaults to 11 characters).
+
+!! Examples
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/olc-encode"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>

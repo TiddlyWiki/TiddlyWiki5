@@ -80,6 +80,7 @@ NewMarkdown/Caption: 添加 Markdown 条目
 NewMarkdown/Hint: 创建一个新的 Markdown 条目
 NewTiddler/Caption: 添加条目
 NewTiddler/Hint: 创建一个新的条目
+OpenControlPanel/Hint: 开启控制台
 OpenWindow/Caption: 开启于新窗口
 OpenWindow/Hint: 在新窗口中开启条目
 Palette/Caption: 调色板
@@ -104,6 +105,8 @@ ShowSideBar/Caption: 显示侧边栏
 ShowSideBar/Hint: 显示侧边栏
 TagManager/Caption: 标签管理
 TagManager/Hint: 标签管理
+TestCaseImport/Caption: 导入条目
+TestCaseImport/Hint: 导入条目
 Timestamp/Caption: 时间戳
 Timestamp/Hint: 选择修改是否更新时间戳
 Timestamp/On/Caption: 时间戳开启
@@ -130,6 +133,7 @@ Excise/Caption/Replace/Link: 链接
 Excise/Caption/Replace/Transclusion: 嵌入
 Excise/Caption/Tag: 将新条目的标签设为此条目的名称
 Excise/Caption/TiddlerExists: 提醒：条目已经存在
+Excise/DefaultTitle: 新的剪切
 Excise/Hint: 剪切所选文本到一个新条目
 Heading1/Caption: 标题 1
 Heading1/Hint: 套用标题级别 1 的格式于包含所选文本的列

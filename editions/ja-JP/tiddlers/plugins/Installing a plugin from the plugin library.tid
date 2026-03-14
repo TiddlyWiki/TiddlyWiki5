@@ -1,0 +1,40 @@
+created: 20160107222352710
+modified: 20241221111035323
+original-modified: 20220617122143911
+tags: Plugins
+title: Installing a plugin from the plugin library
+ja-title: プラグインライブラリからプラグインをインストールする
+type: text/vnd.tiddlywiki
+
+\rules except wikilink
+
+手順を//隣に並べて//実行したい場合は、<<open-tiddler-in-window>>でできます。
+
+TiddlyWikiをスタンドアロンの単一ファイルWikiとして使用する場合は、次の手順に従ってください。
+
+# ブラウザでTiddlyWikiを開きます
+
+# 現在のWikiファイルのバックアップを作成します([[念のため|The First Rule of Using TiddlyWiki]])
+
+# <<controlPanel-plugin-link>>を開きます
+
+#* ''プラグイン''タブをクリックし 
+#*<<.icon $:/core/images/download-button>> ''他のプラグインを取得''ボタンをクリックします
+
+# <<.icon $:/core/images/chevron-right>> ''プラグインライブラリを開く''をクリックして公式プラグインライブラリを開きます
+
+# ライブラリのリストがロードされると:
+## ''プラグイン''、''テーマ''、''言語''のタブが使用でき、
+## プラグインの詳細を検索する''検索''ボックスが使用できます
+
+# ''インストール''ボタンをクリックしてプラグインをインストールします
+
+# <<.icon $:/core/images/save-button-dynamic>>をクリックしてTiddlyWikiを保存します
+
+# ウィンドウの上部に黄色い警告バーが表示された場合は、TiddlyWikiがプラグイン<<.icon $:/core/images/refresh-button>>のインストールを完了するためにウィンドウを更新します。
+
+#* <<.from-version "5.1.22">> 動的読み込みをサポートするプラグインを削除するときにTiddlyWikiを更新する必要がなくなりました。詳細については、[[プラグインのメカニズム|PluginMechanism]]を参照してください。
+
+# これでプラグインが使用できるようになりました
+
+<$macrocall $name=".note" _="""''Node.js''でTiddlyWikiを使用する場合の詳細は、[[Node.jsで公式プラグインをインストールする|Installing official plugins on Node.js]]を確認してください。<br>概要は[[プラグイン|Plugins]]でご覧いただけます。"""/> 

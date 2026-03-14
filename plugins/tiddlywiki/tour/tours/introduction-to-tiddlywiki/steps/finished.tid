@@ -4,6 +4,10 @@ tags: $:/tags/Tour/IntroductionToTiddlyWiki
 
 You have completed the tour.
 
+<%if [all[shadows+tiddlers]tag[$:/tags/Tour]] -[<currentTour>] %>
+
 You can choose to take another tour:
 
 <<tour-chooser filter:"[all[shadows+tiddlers]tag[$:/tags/Tour]] -[<currentTour>]">>
+
+<%endif%>

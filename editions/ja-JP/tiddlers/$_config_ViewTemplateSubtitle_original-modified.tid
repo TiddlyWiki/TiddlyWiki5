@@ -1,0 +1,6 @@
+created: 20241008104504617
+modified: 20241008105625074
+tags: $:/tags/ViewTemplate/Subtitle
+title: $:/config/ViewTemplateSubtitle/original-modified
+
+<$view field="original-modified" format="date" template="(原文: YYYY年MM月DD日(ddd) 0hh:0mm)"/>

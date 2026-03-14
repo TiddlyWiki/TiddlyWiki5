@@ -6,10 +6,7 @@ module-type: widget
 Action widget to set a single field or index on a tiddler.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -71,5 +68,3 @@ SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 };
 
 exports["action-setfield"] = SetFieldWidget;
-
-})();

@@ -5,10 +5,7 @@ type: application/javascript
 module-type: widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -59,7 +56,7 @@ Invoke the action associated with this widget
 ConfirmWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var invokeActions = true,
 		handled = true,
-	    	win = event && event.event && event.event.view ? event.event.view : window;
+		win = event && event.event && event.event.view ? event.event.view : window;
 	if(this.prompt) {
 		invokeActions = win.confirm(this.message);
 	}
@@ -74,5 +71,3 @@ ConfirmWidget.prototype.allowActionPropagation = function() {
 };
 
 exports["action-confirm"] = ConfirmWidget;
-
-})();

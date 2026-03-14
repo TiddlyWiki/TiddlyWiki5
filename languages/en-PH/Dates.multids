@@ -1,0 +1,5 @@
+title: $:/language/
+
+RelativeDate/Future/Days: <<period>> days from today
+RelativeDate/Future/Months: <<period>> months from today
+RelativeDate/Future/Years: <<period>> years from today

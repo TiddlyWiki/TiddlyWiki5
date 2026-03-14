@@ -1,0 +1,22 @@
+created: 20230627093650105
+modified: 20241207112556326
+original-modified: 20230627094356394
+tags: Features
+title: Deserializers
+ja-title: デシリアライザー
+type: text/vnd.tiddlywiki
+
+デシリアライザー[[モジュール|Modules]]は、さまざまな形式のテキストをTiddlerとしてJSON表現に解析します。Wikiで使用可能なデシリアライザーモジュールは、 [[デシリアライザー演算子|deserializers Operator]]を使用して表示でき 、[[デシリアライズ演算子|deserialize Operator]]とともに使用できます。
+
+TiddlyWikiコアは次のデシリアライザーを提供します:
+
+|!デシリアライザー |!説明 |
+|(DOM)|DOMノードからTiddlerを抽出します。<<.op deserialize[]>>演算子と一緒に使用しないでください|
+|application/javascript|ヘッダーコメントからフィールドを抽出するTiddlerとしてJavaScriptモジュールを解析します|
+|application/json|[[JSON|JSON in TiddlyWiki]]を解析してTiddlerにします|
+|application/x-tiddler|[[.tidファイル形式|TiddlerFiles]]を解析してTiddlerにします|
+|application/x-tiddler-html-div|[[<DIV>.tiddlerファイルフォーマット|TiddlerFiles]]を解析してTiddlerにします|
+|application/x-tiddlers|[[MultiTiddlerFile形式|MultiTiddlerFiles]]を解析してTiddlerにします|
+|text/css|CSSを解析しヘッダーコメントからフィールドを抽出してTiddlerにします|
+|text/html|HTMLファイルを解析してTiddlerにします。~TiddlyWikiクラシックHTMLファイル、~TiddlyWiki5 HTMLファイル、通常のHTMLファイルをサポートします|
+|text/plain|プレーンテキストを解析してTiddlerにします|

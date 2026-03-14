@@ -3,5 +3,6 @@
 	"name": "Async",
 	"description": "async.js library",
 	"author": "Caolan McMahon",
-	"list": "readme license"
+	"list": "readme license",
+	"stability": "STABILITY_2_STABLE"
 }

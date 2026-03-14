@@ -1,0 +1,7 @@
+title: $:/language/Snippets/FunctionDefinition
+tags: $:/tags/TextEditor/Snippet
+caption: Ορισμός συνάρτησης
+
+\function σ.όνομα(παράμετρος1,παράμετρος2:"προκαθορισμένη τιμή") [<παράμετρος1>!is[blank]else<παράμετρος2>]
+
+<<σ.όνομα>>

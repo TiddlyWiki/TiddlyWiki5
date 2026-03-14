@@ -15,6 +15,7 @@ The following variable names have special behaviour:
 
 |!Name |!Description |
 |filename |Filename for the downloaded file (note that this is a hint to the browser, and the actual filename used may be different) |
+|type |<<.from-version "5.3.7">> Content type for the downloaded file |
 
 The download file message is usually generated with the ButtonWidget.
 

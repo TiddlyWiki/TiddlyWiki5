@@ -1,0 +1,8 @@
+import-field-column: Price
+import-field-name: price
+import-field-type: number
+import-field-source: column
+import-spec-role: field
+title: $:/_importspec/RealEstate/PropertiesRow/Field/price
+type: text/vnd.tiddlywiki
+

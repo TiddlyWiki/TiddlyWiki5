@@ -1,1 +1,1 @@
-Translation notes are available here: https://github.com/Jermolene/TiddlyWiki5/discussions/6080
+Translation notes are available here: https://github.com/TiddlyWiki/TiddlyWiki5/discussions/6080

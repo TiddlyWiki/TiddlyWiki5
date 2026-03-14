@@ -1,0 +1,21 @@
+caption: ~TiddlyDesktop
+color: #FF8A65
+community-author: Jeremy Ruston
+created: 20171112085137764
+delivery: App
+description: TiddlyWikiの操作のためのカスタムデスクトップアプリケーション
+method: save
+modified: 20241005105224520
+original-modified: 20200507104332791
+tags: Saving Mac Windows Linux [[Standalone App]]
+title: Saving on TiddlyDesktop
+ja-title: TiddlyDesktopでの保存
+type: text/vnd.tiddlywiki
+url: https://github.com/TiddlyWiki/TiddlyDesktop/releases
+
+[[TiddlyDesktopの紹介動画|Introducing TiddlyDesktop Video]]をご覧ください
+
+# https://github.com/TiddlyWiki/TiddlyDesktop/releases からTiddlyDesktopの最新リリースをインストールします
+# TiddlyDesktopを実行します
+# browseボタンを使用してTiddlyWikiファイルを開きます
+# 通常の方法でTiddlyWikiで変更し保存します

@@ -6,10 +6,7 @@ module-type: filteroperator
 General purpose comparison operator
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 exports.compare = function(source,operator,options) {
@@ -35,6 +32,4 @@ var modes = {
 	"gt": function(value) {return value > 0;},
 	"lteq": function(value) {return value <= 0;},
 	"lt": function(value) {return value < 0;}
-}
-
-})();
+};

@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operators for manipulating the current selection list
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -116,5 +113,3 @@ exports.zth = function(source,operator,options) {
 	});
 	return results.slice(count,count + 1);
 };
-
-})();

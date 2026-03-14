@@ -1,9 +1,9 @@
+caption: Hard Linebreaks
 created: 20131214165710101
-modified: 20131214170106553
+modified: 20240512001649319
 tags: WikiText
 title: Hard Linebreaks in WikiText
 type: text/vnd.tiddlywiki
-caption: Hard Linebreaks
 
 The usual handling of [[paragraphs in wikitext|Paragraphs in WikiText]] causes single line breaks to be ignored, and double linebreaks to be interpreted as the end of a paragraph.
 
@@ -15,4 +15,8 @@ and this is a new line
 while this is yet another line
 and this is the final one
 apart from this one
-"""'>>
+"""
+
+'>>
+
+<<.tip 'Note: <strong>Hard Linebreaks in ~WikiText</strong> require an extra blank line after the trailing `"""` before the parser will return to [[block mode|Block Mode WikiText]].'>>.

@@ -4,12 +4,12 @@ tags: Features
 title: Future Proof
 type: text/vnd.tiddlywiki
 
-From [[Network World|http://www.networkworld.com/article/3028098/open-source-tools/tiddlywiki-a-free-open-source-wiki-revisited.html]] magazine in January 2016:
+From [[Network World|https://www.networkworld.com/article/947618/tiddlywiki-a-free-open-source-wiki-revisited.html]] magazine in January 2016:
 
 <<<
-Way back in the mists of time (actually, January 2009) I [[wrote|http://www.networkworld.com/article/2272104/applications/an-amazing-free-microwiki.html]] about a really cool tool called TiddlyWiki, a “non-linear personal web notebook”. Fast forward to today and I just had an out of body experience: Completely by accident I found a TiddlyWiki that I started when I wrote that piece and it still works!
+Way back in the mists of time (actually, January 2009) I [[wrote|http://www.networkworld.com/article/2272104/applications/an-amazing-free-microwiki.html]] about a really cool tool called ~TiddlyWiki, a “non-linear personal web notebook”. Fast forward to today and I just had an out of body experience: Completely by accident I found a ~TiddlyWiki that I started when I wrote that piece and it still works!
 
-Finding code that works flawlessly after just two or three years is magical enough but after seven years?! And given that TiddlyWiki is written as a single page Web application and considering how different browsers are now than they were in 2009, the fact that the old version of TiddlyWiki still works is not short of miraculous.
+Finding code that works flawlessly after just two or three years is magical enough but after seven years?! And given that ~TiddlyWiki is written as a single page Web application and considering how different browsers are now than they were in 2009, the fact that the old version of ~TiddlyWiki still works is not short of miraculous.
 <<<
 
 TiddlyWiki is designed with the long term needs of its users in mind. Because it is OpenSource and needs no infrastructure, we can be confident that all we'll need to access a ~TiddlyWiki file even in the far future is an ordinary HTML browser. If you're starting to use ~TiddlyWiki at the beginning of your career you can be confident that it will carry you through to retirement.

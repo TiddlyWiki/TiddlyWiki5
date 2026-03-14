@@ -4,4 +4,4 @@ caption: {{$:/language/codemirror/tabSize/hint}}
 
 \define lingo-base() $:/language/codemirror/tabSize/
 
-|<$link to="$:/config/codemirror/tabSize"><<lingo hint>></$link> |<$edit-text tiddler="$:/config/codemirror/tabSize" default="" placeholder="tabSize" tag="input"/> |
+|<$link to="$:/config/codemirror/tabSize"><<lingo hint>></$link> |<$edit-text tiddler="$:/config/codemirror/tabSize" default="" placeholder="tabSize" tag="input" type="number"/> |

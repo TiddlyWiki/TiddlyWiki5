@@ -6,10 +6,7 @@ module-type: widget
 Edit widget is a meta-widget chooses the appropriate actual editting widget
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
@@ -43,15 +40,6 @@ EditWidget.prototype.execute = function() {
 	// Get our parameters
 	this.editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.editField = this.getAttribute("field","text");
-	this.editIndex = this.getAttribute("index");
-	this.editClass = this.getAttribute("class");
-	this.editPlaceholder = this.getAttribute("placeholder");
-	this.editTabIndex = this.getAttribute("tabindex");
-	this.editFocus = this.getAttribute("focus","");
-	this.editCancelPopups = this.getAttribute("cancelPopups","");
-	this.editInputActions = this.getAttribute("inputActions");
-	this.editRefreshTitle = this.getAttribute("refreshTitle");
-	this.editAutoComplete = this.getAttribute("autocomplete");
 	// Choose the appropriate edit widget
 	this.editorType = this.getEditorType();
 	// Make the child widgets
@@ -89,8 +77,8 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 EditWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	// Refresh if an attribute has changed, or the type associated with the target tiddler has changed
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || (this.getEditorType() !== this.editorType)) {
+	// Refresh if the editor type has changed
+	if(changedAttributes.tiddler || changedAttributes.field || (this.getEditorType() !== this.editorType)) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -99,5 +87,3 @@ EditWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.edit = EditWidget;
-
-})();

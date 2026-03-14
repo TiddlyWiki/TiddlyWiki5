@@ -1,0 +1,6 @@
+title: $:/geospatialdemo/features/us-states/popupTemplate
+
+!!! US State Boundary
+
+|State |<$text text={{{ [<feature>jsonget[properties],[name]] }}}/> |
+|Population Density |<$text text={{{ [<feature>jsonget[properties],[density]] }}}/> |

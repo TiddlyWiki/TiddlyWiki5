@@ -1,5 +1,5 @@
 created: 20230726142925020
-modified: 20230726150648189
+modified: 20240619211452297
 tags: [[Variable Usage]]
 title: Behaviour of variables invoked via normal wikitext
 type: text/vnd.tiddlywiki
@@ -8,4 +8,4 @@ type: text/vnd.tiddlywiki
 |!how declared|!behaviour|
 |\define|All wikitext and variable substitution and textual substitution takes place|
 |<<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>, \procedure, \widget|All wikitext and variable substitution takes place|
-|\function|Invoking a function in this way (`<<macro>>`) is a synonym for `<$text text={{{[function[macro]]}}}/>`. As with any filtered transclusion (i.e. triple curly braces), all results except the first are discarded|
+|\function|Invoking a function in this way (`<<.myfun>>`) is a synonym for `<$text text={{{[function[.myfun]]}}}/>`. As with any filtered transclusion (i.e. triple curly braces), all results except the first are discarded|

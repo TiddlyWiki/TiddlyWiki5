@@ -11,4 +11,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>(Kitten|Donkey)(Kitten|Donkey)</p>
+<p>(Shark|Donkey)(Shark|Donkey)</p>

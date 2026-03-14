@@ -3,10 +3,7 @@ title: $:/core/modules/filterrunprefixes/reduce.js
 type: application/javascript
 module-type: filterrunprefix
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -20,7 +17,7 @@ exports.reduce = function(operationSubFunction,options) {
 			results.each(function(title) {
 				var list = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
 					"currentTiddler": "" + title,
-					"..currentTiddler": widget.getVariable("currentTiddler"),
+					"..currentTiddler": widget.getVariable("currentTiddler",{defaultValue:""}),
 					"index": "" + index,
 					"revIndex": "" +  (results.length - 1 - index),
 					"length": "" + results.length,
@@ -34,7 +31,5 @@ exports.reduce = function(operationSubFunction,options) {
 			results.clear();
 			results.push(accumulator);
 		}
-	}
+	};
 };
-
-})();

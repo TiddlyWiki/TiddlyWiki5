@@ -1,0 +1,10 @@
+title: $:/core/ui/ControlPanel/Settings/RecentLimit
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/RecentLimit/Caption}}
+
+\whitespace trim
+\procedure lingo-base() $:/language/ControlPanel/Settings/RecentLimit/
+<<lingo Hint>>
+
+|tc-table-no-border|k
+|<$link to="$:/config/RecentLimit"><<lingo Caption>></$link> |<$edit-text tiddler="$:/config/RecentLimit" tag="input" type="number"/> |

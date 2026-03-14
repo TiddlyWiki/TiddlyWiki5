@@ -1,0 +1,8 @@
+title: $:/Community Survey 2025/ViewTemplate
+tags: $:/tags/ViewTemplate
+
+<%if [<currentTiddler>tag[Community Survey 2025]] %>
+
+<$transclude $variable="survey-2025-list-answers" answerTitle=<<currentTiddler>>/>
+
+<%endif%>

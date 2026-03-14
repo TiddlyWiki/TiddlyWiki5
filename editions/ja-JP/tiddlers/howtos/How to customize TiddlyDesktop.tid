@@ -1,0 +1,34 @@
+created: 20171118194518819
+modified: 20241026104802213
+original-modified: 20171118194518819
+tags: Learning
+title: How to Customize TiddlyDesktop
+ja-title: TiddlyDesktopをカスタマイズする方法
+type: text/vnd.tiddlywiki
+
+!! 前置き/注意:
+
+TiddlyDesktopの内部実装を実験する前に、“ユーザー構成フォルダ”の場所を見つける必要があります。それには、メインのTiddlyDesktopウィンドウの“Settings”ボタンをクリックし、“Open user config folder”ボタンをクリックします。次に、上へ移動して“TiddlyDesktop”という名前の親フォルダを見つけます。問題が発生した場合は、このフォルダ全体を削除してTiddlyDesktopを初期状態にリセットできます。
+
+TiddlyDesktopメインウィンドウのBackstageボタンをクリックすると、バックステージWikiが開きます。これは、TiddlyDesktopのUIとロジックを実行する、TiddlyWikiの Node.jsのようなインスタンスです。
+
+!! "Add a ~TiddlyWiki Folder"ボタンを削除する方法。
+
+バックステージWiki内で、`WikiListToolbar`Tiddlerを見つけます(HelloThereにリンクがあります)。それをクリックして編集モードにすると、すべてのツールバーボタンのWikiテキストが表示されます。変更を加えて“done”をクリックすると、変更がTiddlyDesktopのメインウィンドウにすぐに反映されます。
+
+!! "advanced"ボタンを"reveal backups"ボタンに変更する方法。
+
+`$:/TiddlyDesktop/Settings`Tiddlerから“reveal backups”ボタンのコードをコピーして、`WikiListToolbar`にペーストします。
+
+!! 色を変える方法。
+
+TiddlyWikiと同様に、パレットを使用することも、独自のカスタムCSSを定義することもできます。
+
+!! ティドラーがリストされる順序(アルファベット順)を変更する方法。
+
+`WikiList`Tiddlerを開いて、編集にし、最後までスクロールします。次に、''wikilist''マクロの中を`<$list>`ウィジェットを変更します:
+
+```
+<$list filter="[tag[wikilist]sort[title]!has[draft.of]]" emptyMessage="開始するには、~TiddlyWikiファイルやフォルダーを追加してください。上のボタンをクリックして参照するか、ファイルエクスプローラー/ファインダーからドラッグアンドドロップします" storyview="pop">
+```
+

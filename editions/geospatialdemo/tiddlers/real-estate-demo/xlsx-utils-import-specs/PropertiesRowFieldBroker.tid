@@ -1,0 +1,7 @@
+import-field-column: Broker
+import-field-name: broker
+import-field-source: column
+import-spec-role: field
+title: $:/_importspec/RealEstate/PropertiesRow/Field/broker
+type: text/vnd.tiddlywiki
+

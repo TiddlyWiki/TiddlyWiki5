@@ -6,4 +6,5 @@ underline: meta-U
 new-image: ctrl-I
 new-journal: ctrl-J
 new-tiddler: ctrl-N
+refresh: meta-R
 save-wiki: meta-S

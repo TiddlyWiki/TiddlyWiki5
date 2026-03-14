@@ -6,10 +6,7 @@ module-type: filteroperator
 Filter operator returning those input titles that pass a subfilter
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -22,7 +19,7 @@ exports.filter = function(source,operator,options) {
 	source(function(tiddler,title) {
 		var list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),options.widget.makeFakeWidgetWithVariables({
 			"currentTiddler": "" + title,
-			"..currentTiddler": options.widget.getVariable("currentTiddler","")
+			"..currentTiddler": options.widget.getVariable("currentTiddler",{defaultValue:""})
 		}));
 		if((list.length > 0) === target) {
 			results.push(title);
@@ -30,5 +27,3 @@ exports.filter = function(source,operator,options) {
 	});
 	return results;
 };
-
-})();

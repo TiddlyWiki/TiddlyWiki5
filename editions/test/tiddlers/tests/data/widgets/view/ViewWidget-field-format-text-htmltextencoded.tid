@@ -1,0 +1,21 @@
+title: Widgets/ViewWidget/Parameter/field-format-htmltextencoded
+description: Test view-widget parameters tiddler, field and format=*
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: input
+
+Some text > "aaa"
+
++
+title: Output
+
+<$view tiddler="input" field="text" format="htmltextencoded"/>
+
+<$view tiddler="input" field="text"/>
+
++
+title: ExpectedResult
+
+Some text &amp;gt; "aaa"
+Some text &gt; "aaa"

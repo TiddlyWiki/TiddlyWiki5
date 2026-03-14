@@ -7,20 +7,20 @@ title: Text
 
 \whitespace trim
 This is a&#32;
-	<% if [<something>match[one]] %>
-		<% if [<another>match[one]] %>
+	<%if [<something>match[one]] %>
+		<%if [<another>match[one]] %>
 			Indian
-		<% elseif [<another>match[two]] %>
+		<%elseif [<another>match[two]] %>
 			African
-		<% else %>
+		<%else%>
 			Unknown
-		<% endif %>
+		<%endif%>
 		&#32;Elephant
-	<% elseif [<something>match[two]] %>
+	<%elseif [<something>match[two]] %>
 		Antelope
-	<% else %>
+	<%else%>
 		Crocodile
-	<% endif %>
+	<%endif%>
 , I think.
 +
 title: Output

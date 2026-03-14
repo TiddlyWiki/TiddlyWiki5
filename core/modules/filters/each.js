@@ -7,10 +7,7 @@ Filter operator that selects one tiddler for each unique value of the specified 
 With suffix "list", selects all tiddlers that are values in a specified list field.
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*
@@ -18,8 +15,8 @@ Export our filter function
 */
 exports.each = function(source,operator,options) {
 	var results =[] ,
-	value,values = {},
-	field = operator.operand || "title";
+		value,values = {},
+		field = operator.operand || "title";
 	if(operator.suffix === "value" && field === "title") {
 		source(function(tiddler,title) {
 			if(!$tw.utils.hop(values,title)) {
@@ -63,5 +60,3 @@ exports.each = function(source,operator,options) {
 	}
 	return results;
 };
-
-})();

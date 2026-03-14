@@ -1,0 +1,8 @@
+import-field-column: Address
+import-field-name: title
+import-field-source: column
+import-spec-role: field
+import-field-skip-tiddler-if-blank: yes
+title: $:/_importspec/RealEstate/PropertiesRow/Field/title
+type: text/vnd.tiddlywiki
+
