@@ -1154,6 +1154,30 @@ $tw.Wiki = function(options) {
 		pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
 		pluginInfo = Object.create(null), // Hashmap of parsed plugin content
 		shadowTiddlers = Object.create(null), // Hashmap by title of {source:, tiddler:}
+		systemTiddlerTitles = null, // Array of system tiddler titles (starting with "$:/")
+		nonSystemTiddlerTitles = null, // Array of non-system tiddler titles
+		partitionTiddlerTitles = function() {
+			if(systemTiddlerTitles === null) {
+				systemTiddlerTitles = [];
+				nonSystemTiddlerTitles = [];
+				var titles = getTiddlerTitles();
+				for(var i = 0, length = titles.length; i < length; i++) {
+					if(titles[i].indexOf("$:/") === 0) {
+						systemTiddlerTitles.push(titles[i]);
+					} else {
+						nonSystemTiddlerTitles.push(titles[i]);
+					}
+				}
+			}
+		},
+		getSystemTiddlerTitles = function() {
+			partitionTiddlerTitles();
+			return systemTiddlerTitles;
+		},
+		getNonSystemTiddlerTitles = function() {
+			partitionTiddlerTitles();
+			return nonSystemTiddlerTitles;
+		},
 		shadowTiddlerTitles = null,
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
@@ -1202,6 +1226,14 @@ $tw.Wiki = function(options) {
 				tiddlers[title] = tiddler;
 				// Check we've got the title
 				tiddlerTitles = $tw.utils.insertSortedArray(tiddlerTitles || [],title);
+				// Maintain system/non-system partitions
+				if(systemTiddlerTitles !== null) {
+					if(title.indexOf("$:/") === 0) {
+						$tw.utils.insertSortedArray(systemTiddlerTitles,title);
+					} else {
+						$tw.utils.insertSortedArray(nonSystemTiddlerTitles,title);
+					}
+				}
 				// Record the new tiddler state
 				updateDescriptor["new"] = {
 					tiddler: tiddler,
@@ -1242,6 +1274,14 @@ $tw.Wiki = function(options) {
 					tiddlerTitles.splice(index,1);
 				}
 			}
+			// Delete from system/non-system partitions
+			if(systemTiddlerTitles !== null) {
+				var partitionArray = title.indexOf("$:/") === 0 ? systemTiddlerTitles : nonSystemTiddlerTitles;
+				var partitionIndex = partitionArray.indexOf(title);
+				if(partitionIndex !== -1) {
+					partitionArray.splice(partitionIndex,1);
+				}
+			}
 			// Record the new tiddler state
 			updateDescriptor["new"] = {
 				tiddler: this.getTiddler(title),
@@ -1278,6 +1318,16 @@ $tw.Wiki = function(options) {
 	// Get an array of all tiddler titles
 	this.allTitles = function() {
 		return getTiddlerTitles().slice(0);
+	};
+
+	// Get an array of all system tiddler titles (returns cached array; do not mutate)
+	this.allSystemTitles = function() {
+		return getSystemTiddlerTitles();
+	};
+
+	// Get an array of all non-system tiddler titles (returns cached array; do not mutate)
+	this.allNonSystemTitles = function() {
+		return getNonSystemTiddlerTitles();
 	};
 
 	// Iterate through all tiddler titles

@@ -23,7 +23,7 @@ $tw.boot = $tw.boot || Object.create(null);
 
 // Config
 $tw.config = $tw.config || Object.create(null);
-$tw.config.maxEditFileSize = 100 * 1024 * 1024; // 100MB
+$tw.config.maxEditFileSize = 200 * 1024 * 1024; // 200MB
 
 // Detect platforms
 if(!("browser" in $tw)) {

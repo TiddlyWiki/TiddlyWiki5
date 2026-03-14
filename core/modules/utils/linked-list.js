@@ -59,14 +59,48 @@ LinkedList.prototype.push = function(/* values */) {
 LinkedList.prototype.pushTop = function(value) {
 	var t;
 	if($tw.utils.isArray(value)) {
-		for(t=0; t<value.length; t++) {
-			_assertString(value[t]);
-		}
-		for(t=0; t<value.length; t++) {
-			_removeOne(this,value[t]);
-		}
-		for(t=0; t<value.length; t++) {
-			_linkToEnd(this,value[t]);
+		if(this.length === 0) {
+			// Fast path for empty list: skip removal pass
+			for(t = 0; t < value.length; t++) {
+				_assertString(value[t]);
+			}
+			var prev = null,
+				useInline = true;
+			for(t = 0; t < value.length; t++) {
+				if(useInline) {
+					var v = value[t];
+					var old = this.next.get(v);
+					if(old !== undefined) {
+						// Duplicate found: switch to _linkToEnd for this and all remaining elements
+						useInline = false;
+						_linkToEnd(this,v);
+					} else {
+						// Inline the common case of _linkToEnd for new unique values
+						this.next.set(v,null);
+						this.prev.set(v,prev);
+						if(prev !== null) {
+							this.next.set(prev,v);
+						} else {
+							this.next.set(null,v);
+						}
+						this.prev.set(null,v);
+						this.length++;
+						prev = v;
+					}
+				} else {
+					_linkToEnd(this,value[t]);
+				}
+			}
+		} else {
+			for(t=0; t<value.length; t++) {
+				_assertString(value[t]);
+			}
+			for(t=0; t<value.length; t++) {
+				_removeOne(this,value[t]);
+			}
+			for(t=0; t<value.length; t++) {
+				_linkToEnd(this,value[t]);
+			}
 		}
 	} else {
 		_assertString(value);
