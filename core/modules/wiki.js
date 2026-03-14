@@ -545,7 +545,7 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 
 	if(!backlinks) {
 		backlinks = [];
-		this.forEachTiddler(function(title,tiddler) {
+		this.each(function(_tiddler,title) {
 			var links = self.getTiddlerLinks(title);
 			if(links.indexOf(targetTitle) !== -1) {
 				backlinks.push(title);
