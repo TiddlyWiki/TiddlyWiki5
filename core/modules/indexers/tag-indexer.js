@@ -67,7 +67,7 @@ TagSubIndexer.prototype.rebuild = function() {
 	var self = this;
 	// Hashmap by tag of array of {isSorted:, titles:[]}
 
-	// const t0 = $tw.utils.timer();
+const t0 = $tw.utils.timer(); // eslint-disable-line @stylistic/indent
 
 	this.index = Object.create(null);
 	// Add all the tags
@@ -81,7 +81,7 @@ TagSubIndexer.prototype.rebuild = function() {
 		});
 	});
 
-	// console.log("--------------- ", $tw.utils.timer(t0), this.iteratorMethod);
+console.log("--------------- ", $tw.utils.timer(t0), this.iteratorMethod); // eslint-disable-line @stylistic/indent
 
 };
 
