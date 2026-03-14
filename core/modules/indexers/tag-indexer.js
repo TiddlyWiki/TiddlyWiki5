@@ -67,7 +67,7 @@ TagSubIndexer.prototype.rebuild = function() {
 	var self = this;
 	// Hashmap by tag of array of {isSorted:, titles:[]}
 
-const t0 = $tw.utils.timer();
+	// const t0 = $tw.utils.timer();
 
 	this.index = Object.create(null);
 	// Add all the tags
@@ -81,7 +81,7 @@ const t0 = $tw.utils.timer();
 		});
 	});
 
-console.log("--------------- ", $tw.utils.timer(t0), this.iteratorMethod);
+	// console.log("--------------- ", $tw.utils.timer(t0), this.iteratorMethod);
 
 };
 
