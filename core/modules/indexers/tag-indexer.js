@@ -34,15 +34,19 @@ TagIndexer.prototype.rebuild = function() {
 TagIndexer.prototype.update = function(updateDescriptor) {
 	var newTid = updateDescriptor.new.tiddler;
 	var oldTid = updateDescriptor.old.tiddler;
-	var noOldTid = oldTid === undefined;
+	var newFields = newTid && newTid.fields;
+	var oldFields = oldTid && oldTid.fields;
+	var newHasNoTags = newFields && newFields.tags === undefined;
+	var oldHasNoTags = !oldTid || (oldFields && oldFields.tags === undefined);
 
-	// a) new tiddler has no tags && no old tiddler -> or
-	// b) new tiddler has no tags && old tiddler has no tags -> return early!
-	var a=((newTid && newTid.fields && newTid.fields.tags === undefined) && noOldTid),
-		b=((newTid && newTid.fields && newTid.fields.tags === undefined) && (oldTid && oldTid.fields && oldTid.fields.tags === undefined));
-
-	if( a || b ) {
-		return; // early
+	if(newHasNoTags && oldHasNoTags) {
+		// Neither old nor new tiddler has tags, but the list field may have
+		// changed which affects sort order for tiddlers tagged with this title
+		var newList = newFields ? newFields.list : undefined;
+		var oldList = oldFields ? oldFields.list : undefined;
+		if($tw.utils.isArrayEqual(newList, oldList)) {
+			return;
+		}
 	}
 
 	$tw.utils.each(this.subIndexers,function(subIndexer) {
