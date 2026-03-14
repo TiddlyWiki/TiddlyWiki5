@@ -61,19 +61,19 @@ Located directly above `getOrphanTitles` in `core/modules/wiki.js` (line ~641). 
 
 ---
 
-## 2. Benchmark Architecture: Shared Core + Two Runners
+## 2. Benchmark Architecture: Shared Core + Two Runners + Browser Console
 
 ### The problem
 
-Running benchmarks via the full TW Jasmine test suite (`node tiddlywiki.js editions/test --verbose --test`) is slow on Windows due to process startup overhead and full TW boot. But we also need benchmarks to run in the browser via the Jasmine test runner.
+Running benchmarks via the full TW Jasmine test suite (`node tiddlywiki.js editions/test --verbose --test`) is slow on Windows due to process startup overhead and full TW boot. But we also need benchmarks to run in the browser via the Jasmine test runner. And sometimes we want to add test tiddlers to a **live wiki** in the browser to test UI responses interactively.
 
-### The solution: Three-file architecture
+### The solution: Three-file architecture with UMD-style auto-run
 
-Write the benchmark logic **once** in a shared core module, then use two thin runner wrappers:
+Write the benchmark logic **once** in a shared core module, then use two thin runner wrappers. The core module also auto-runs when pasted into a browser console.
 
 ```
 editions/test/tiddlers/tests/benchmarks/
-├── orphans-benchmark-core.js   ← Shared benchmark logic (write tests here)
+├── orphans-benchmark-core.js   ← Shared benchmark logic (+ browser console auto-run)
 ├── test-orphans-benchmark.js   ← Thin Jasmine wrapper (browser + full TW)
 ├── run-benchmark.js            ← Thin standalone wrapper (fast local testing)
 └── concept-summary.md          ← This file
@@ -81,7 +81,7 @@ editions/test/tiddlers/tests/benchmarks/
 
 ### Shared core module (`orphans-benchmark-core.js`)
 
-This file has **both** a TW module header and standard `exports`, so it works in both contexts:
+This file has a TW module header, standard `exports`, and a UMD-style tail so it works in three contexts:
 
 ```javascript
 /*\
@@ -91,17 +91,19 @@ module-type: library
 \*/
 "use strict";
 
-exports.run = function($tw) {
+var run = function($tw, wiki) {
     // Build wiki, run old vs new, return results
-    return {
-        correct: true/false,
-        orphanCount: N,
-        tiddlerCount: N,
-        oldMedian: N,
-        newMedian: N,
-        speedup: N
-    };
+    // wiki param is optional — omit for isolated wiki, pass $tw.wiki for live wiki
 };
+
+// --- Module exports (Node / TW test suite) or auto-run (browser console) ---
+if(typeof module !== "undefined" && module.exports) {
+    exports.run = run;
+    exports.buildWiki = buildWiki;
+} else if(typeof $tw !== "undefined") {
+    // Browser console: add tiddlers to live wiki, then run benchmark
+    run($tw, $tw.wiki);
+}
 ```
 
 Key points:
@@ -109,6 +111,18 @@ Key points:
 - Standard `exports.run` makes it requireable via Node's `require("./orphans-benchmark-core.js")`
 - Accepts `$tw` as a parameter — does NOT reference `$tw` as a global
 - All benchmark config (TIDDLER_COUNT, etc.), wiki building, old/new implementations, timing logic, and correctness checking live here
+- The `typeof module !== "undefined" && module.exports` check (not `typeof exports`) avoids ReferenceError when pasted into a browser console under strict mode
+
+### `buildWiki($tw, wiki)` — dual-mode test data creation
+
+The `buildWiki` function accepts an optional `wiki` parameter:
+
+- **Omitted / falsy** → creates a fresh isolated `new $tw.Wiki({enableIndexers: []})`. Used by the Node test suite.
+- **Provided** (e.g., `$tw.wiki`) → adds tiddlers to the existing live wiki. Used when pasted into the browser console.
+
+Both modes produce **identical tiddlers** — same titles (e.g., `"Tiddler0"`), same content, same seeded PRNG, same percentages. No prefixes, no extra fields (tags, etc.). This ensures benchmark results are comparable across environments.
+
+In the browser, find the tiddlers via `[prefix[Tiddler]]` or `[prefix[MissingTiddler]]` in Advanced Search.
 
 ### Jasmine wrapper (`test-orphans-benchmark.js`)
 
@@ -143,6 +157,7 @@ Key points:
 - Uses `require("orphans-benchmark-core.js")` (TW title, no `./` prefix)
 - Version guard with `$tw.version.indexOf(...)` to skip on incompatible versions
 - Wiki is built at `describe` scope (no `beforeAll` — not reliable in TW's browser Jasmine)
+- Calls `benchmark.run($tw)` without a wiki parameter → isolated wiki, no prefix
 - Jasmine `expect()` calls use the pre-computed results from the core module
 
 ### Standalone runner (`run-benchmark.js`)
@@ -170,7 +185,18 @@ Key points:
 - Uses `require("./orphans-benchmark-core.js")` (filesystem path, with `./` prefix)
 - Boots with empty `$tw.boot.argv = []` — no editions, no plugins, no Jasmine
 - Suppresses TW's boot help output by temporarily replacing `process.stdout.write`
+- Calls `benchmark.run($tw)` without a wiki parameter → isolated wiki, no prefix
 - Exits with code 0/1 for CI integration
+
+### Browser console usage
+
+Paste the entire contents of `orphans-benchmark-core.js` into the browser console of a running TiddlyWiki. The UMD tail detects that `module` is undefined and `$tw` exists, and auto-runs `run($tw, $tw.wiki)`. This:
+
+1. Adds 10,000 tiddlers (`Tiddler0` through `Tiddler9999`) to the live wiki
+2. Runs the old vs new benchmark against the live wiki (which now includes both real and test tiddlers)
+3. Logs results to the console
+
+The tiddlers persist in the wiki — they are **not** cleaned up. You can browse them, test UI responses (e.g., the Orphans tab in $:/ControlPanel), and use filters like `[prefix[Tiddler]]`.
 
 ### Running benchmarks
 
@@ -183,15 +209,17 @@ node tiddlywiki.js editions/test --verbose --test spec="Orphan"
 
 # Full Jasmine suite (all tests)
 node tiddlywiki.js editions/test --verbose --test
+
+# Browser console (paste entire orphans-benchmark-core.js contents)
 ```
 
 ### Adding a new benchmark
 
 To add a new benchmark (e.g., for `getMissingTitles`):
 
-1. Add the old/new implementations and benchmark logic to the core module's `exports.run()` (or create a new core module like `missing-benchmark-core.js`)
+1. Add the old/new implementations and benchmark logic to the core module's `run()` function (or create a new core module like `missing-benchmark-core.js`)
 2. Add corresponding `expect()` checks in the Jasmine wrapper
-3. The standalone runner picks it up automatically since it calls the same `exports.run()`
+3. The standalone runner picks it up automatically since it calls the same `run()`
 
 ---
 
@@ -200,12 +228,17 @@ To add a new benchmark (e.g., for `getMissingTitles`):
 ### Key TiddlyWiki APIs for tests
 
 ```javascript
-// Create a wiki instance (use enableIndexers:[] to disable indexers for controlled testing)
+// Create an isolated wiki instance (used by Node test suite / buildWiki without wiki param)
 var wiki = new $tw.Wiki({enableIndexers: []});
 wiki.addIndexersToWiki();
 
-// Add tiddlers — accepts plain objects, auto-converts to $tw.Tiddler
+// Or use the live wiki (used by browser console / buildWiki with wiki param)
+var wiki = $tw.wiki;
+
+// Add tiddlers — plain objects work for isolated wikis
 wiki.addTiddler({ title: "MyTiddler", text: "Content with [[Link]]" });
+// For live wikis, wrap in new $tw.Tiddler() to trigger change events properly
+wiki.addTiddler(new $tw.Tiddler({ title: "MyTiddler", text: "Content with [[Link]]" }));
 
 // Core methods
 wiki.getTiddlers()                    // Returns sorted array of non-system tiddler titles
@@ -270,6 +303,10 @@ var isV550 = $tw.utils.compareVersions($tw.version, "5.5.0") >= 0;
 5. **Seeded PRNG for reproducibility** — Use a deterministic PRNG (mulberry32) instead of `Math.random()` so benchmark data is identical across runs.
 
 6. **Selectively checking out files** — If the benchmark files live on a different branch, you can selectively pull them: `git checkout <branch> -- editions/test/tiddlers/tests/benchmarks/`
+
+7. **Keep test tiddlers identical across environments** — When adding test tiddlers to a live wiki (browser console mode), do not add tags, prefixes, extra fields, or any data that the isolated wiki mode doesn't add. Any difference changes test conditions (e.g., tags affect link parsing, prefixes change titles), making results non-comparable. Both modes must produce the exact same tiddlers.
+
+8. **UMD detection: use `typeof module` not `typeof exports`** — In strict mode, referencing an undeclared variable like `exports` throws a ReferenceError in the browser console. Use `typeof module !== "undefined" && module.exports` instead, which is safe in all environments.
 
 ---
 

@@ -4,12 +4,12 @@ type: application/javascript
 module-type: library
 
 Shared benchmark code for getOrphanTitles optimization.
-Used by both the Jasmine test (test-orphans-benchmark.js) and
-the standalone runner (run-benchmark.js).
 
-Usage:
-  var benchmark = require("orphans-benchmark-core.js");
-  var results = benchmark.run($tw);
+Works in three environments:
+  1. Node / TW test suite:  var benchmark = require("orphans-benchmark-core.js");
+                            var results = benchmark.run($tw);
+  2. Browser console:       paste the whole file — auto-runs, adds tiddlers
+                            to the live $tw.wiki so you can inspect them in the UI.
 
 \*/
 "use strict";
@@ -77,10 +77,20 @@ function getOrphanTitlesNew(wiki, $tw) {
 	return orphans;
 }
 
-function buildWiki($tw) {
+/*
+Build test tiddlers and add them to a wiki.
+  $tw   - the TiddlyWiki instance (must be booted)
+  wiki  - (optional) wiki to add tiddlers to. If omitted a fresh
+          isolated wiki is created (used by the Node test suite).
+          Identical tiddlers are produced in both modes.
+*/
+function buildWiki($tw, wiki) {
 	var random = mulberry32(42);
-	var wiki = new $tw.Wiki({enableIndexers: []});
-	wiki.addIndexersToWiki();
+	var useLiveWiki = !!wiki;
+	if(!wiki) {
+		wiki = new $tw.Wiki({enableIndexers: []});
+		wiki.addIndexersToWiki();
+	}
 	var allTitles = [];
 	var missingTitles = [];
 	var t;
@@ -127,10 +137,15 @@ function buildWiki($tw) {
 		} else {
 			text = "Content of tiddler " + t + ".";
 		}
-		wiki.addTiddler({
+		var fields = {
 			title: allTitles[t],
 			text: text
-		});
+		};
+		if(useLiveWiki) {
+			wiki.addTiddler(new $tw.Tiddler(fields));
+		} else {
+			wiki.addTiddler(fields);
+		}
 	}
 	return { wiki: wiki, allTitles: allTitles, missingTitles: missingTitles };
 }
@@ -161,13 +176,14 @@ function benchmarkFn(fn, label) {
 
 /*
 Run all benchmarks. Returns an object with results for use by callers.
-  $tw - the TiddlyWiki instance (must be booted)
+  $tw  - the TiddlyWiki instance (must be booted)
+  wiki - (optional) existing wiki to use instead of creating a fresh one
 */
-exports.run = function($tw) {
+var run = function($tw, wiki) {
 	console.log("\nBuilding wiki with " + TIDDLER_COUNT + " tiddlers...");
 	var buildStart = now();
-	var data = buildWiki($tw);
-	var wiki = data.wiki;
+	var data = buildWiki($tw, wiki);
+	wiki = data.wiki;
 	var buildElapsed = now() - buildStart;
 	console.log("Wiki built in " + buildElapsed.toFixed(0) + "ms");
 	console.log("  " + TIDDLER_COUNT + " tiddlers, " +
@@ -198,3 +214,13 @@ exports.run = function($tw) {
 		speedup: speedup
 	};
 };
+
+// --- Module exports (Node / TW test suite) or auto-run (browser console) ---
+if(typeof module !== "undefined" && module.exports) {
+	exports.run = run;
+	exports.buildWiki = buildWiki;
+} else if(typeof $tw !== "undefined") {
+	// Browser console: add tiddlers to live wiki, then run benchmark
+	console.log("Adding " + TIDDLER_COUNT + " tiddlers to live wiki...");
+	run($tw, $tw.wiki);
+}
