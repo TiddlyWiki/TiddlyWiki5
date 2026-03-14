@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
 Standalone benchmark runner for TiddlyWiki performance tests.
 Boots TW core minimally and runs benchmarks directly — much faster

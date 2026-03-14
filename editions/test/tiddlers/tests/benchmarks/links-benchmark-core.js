@@ -66,10 +66,19 @@ function getTiddlerBacklinksNew(wiki, targetTitle) {
 	return backlinks;
 }
 
-function buildWiki($tw) {
+/*
+Build test tiddlers and add them to a wiki.
+  $tw   - the TiddlyWiki instance (must be booted)
+  wiki  - (optional) wiki to add tiddlers to. If omitted a fresh
+          isolated wiki is created (used by the Node test suite).
+          Identical tiddlers are produced in both modes.
+*/
+function buildWiki($tw, wiki) {
 	var random = mulberry32(42);
-	var wiki = new $tw.Wiki({enableIndexers: []});
-	wiki.addIndexersToWiki();
+	if(!wiki) {
+		wiki = new $tw.Wiki({enableIndexers: []});
+		wiki.addIndexersToWiki();
+	}
 	var allTitles = [];
 	var missingTitles = [];
 	var linkingTiddlers = [];
@@ -152,13 +161,14 @@ function benchmarkFn(fn, label) {
 
 /*
 Run all benchmarks. Returns an object with results for use by callers.
-  $tw - the TiddlyWiki instance (must be booted)
+  $tw   - the TiddlyWiki instance (must be booted)
+  wiki  - (optional) existing wiki to add tiddlers to
 */
-exports.run = function($tw) {
+function run($tw, wiki) {
 	console.log("\nBuilding wiki with " + TIDDLER_COUNT + " tiddlers...");
 	var buildStart = now();
-	var data = buildWiki($tw);
-	var wiki = data.wiki;
+	var data = buildWiki($tw, wiki);
+	var benchWiki = data.wiki;
 	var buildElapsed = now() - buildStart;
 	console.log("Wiki built in " + buildElapsed.toFixed(0) + "ms");
 	console.log("  " + TIDDLER_COUNT + " tiddlers, " +
@@ -169,9 +179,9 @@ exports.run = function($tw) {
 	// Pick a subset of target titles that have backlinks for meaningful testing
 	var backlinkTargets = [];
 	for(var b = 0; b < data.linkingTiddlers.length && backlinkTargets.length < 20; b++) {
-		var links = wiki.getTiddlerLinks(data.linkingTiddlers[b]);
+		var links = benchWiki.getTiddlerLinks(data.linkingTiddlers[b]);
 		for(var lb = 0; lb < links.length && backlinkTargets.length < 20; lb++) {
-			if(wiki.tiddlerExists(links[lb])) {
+			if(benchWiki.tiddlerExists(links[lb])) {
 				backlinkTargets.push(links[lb]);
 			}
 		}
@@ -181,8 +191,8 @@ exports.run = function($tw) {
 	// getTiddlerBacklinks correctness
 	var backlinksCorrect = true;
 	for(var bc = 0; bc < backlinkTargets.length; bc++) {
-		var oldBacklinks = getTiddlerBacklinksOld(wiki, backlinkTargets[bc]).slice().sort();
-		var newBacklinks = getTiddlerBacklinksNew(wiki, backlinkTargets[bc]).slice().sort();
+		var oldBacklinks = getTiddlerBacklinksOld(benchWiki, backlinkTargets[bc]).slice().sort();
+		var newBacklinks = getTiddlerBacklinksNew(benchWiki, backlinkTargets[bc]).slice().sort();
 		if(JSON.stringify(oldBacklinks) !== JSON.stringify(newBacklinks)) {
 			// The new version uses each() which includes system tiddlers,
 			// while the old uses forEachTiddler which excludes them.
@@ -197,14 +207,14 @@ exports.run = function($tw) {
 	var backlinksOldBench = benchmarkFn(function() {
 		var results = [];
 		for(var i = 0; i < backlinkTargets.length; i++) {
-			results.push(getTiddlerBacklinksOld(wiki, backlinkTargets[i]));
+			results.push(getTiddlerBacklinksOld(benchWiki, backlinkTargets[i]));
 		}
 		return results;
 	}, "OLD (forEachTiddler)  ");
 	var backlinksNewBench = benchmarkFn(function() {
 		var results = [];
 		for(var i = 0; i < backlinkTargets.length; i++) {
-			results.push(getTiddlerBacklinksNew(wiki, backlinkTargets[i]));
+			results.push(getTiddlerBacklinksNew(benchWiki, backlinkTargets[i]));
 		}
 		return results;
 	}, "NEW (each)            ");
@@ -218,4 +228,11 @@ exports.run = function($tw) {
 		newMedian: backlinksNewBench.median,
 		speedup: backlinksSpeedup
 	};
-};
+}
+
+// Export for Node/TiddlyWiki module system, auto-run for browser console
+if(typeof exports !== "undefined") {
+	exports.run = run;
+} else {
+	run($tw, $tw.wiki);
+}
