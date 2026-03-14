@@ -116,11 +116,33 @@ editions/test/tiddlers/tests/benchmarks/
 
 The standalone runner (`run-benchmark.js`) auto-detects all `*-benchmark-core.js` files in the directory, so it runs benchmarks from multiple optimization branches automatically.
 
+### Dual-mode: Node module + browser console
+
+`missing-benchmark-core.js` works in three contexts:
+
+1. **Node test suite** — `require("missing-benchmark-core.js")` returns `{ run: fn }`, called by the Jasmine wrapper
+2. **Standalone runner** — same `require()` path, called by `run-benchmark.js`
+3. **Browser console** — paste the entire file; it detects `typeof exports === "undefined"` and auto-runs with `$tw.wiki`
+
+`buildWiki($tw, wiki)` accepts an optional second argument:
+- **Omitted / falsy** — creates a fresh isolated `new $tw.Wiki({enableIndexers: []})`. Used by the Node test suite.
+- **Provided** (e.g., `$tw.wiki`) — adds tiddlers to the existing live wiki. Used when pasted into the browser console.
+
+Both modes produce **identical tiddlers** — same titles (e.g., `"Tiddler0"`), same content, same seeded PRNG, same percentages. No prefixes, no extra fields (tags, etc.). This ensures benchmark results are comparable across environments.
+
+In the browser, tiddlers persist after the benchmark — they are **not** cleaned up. Find them via `[prefix[Tiddler]]` or `[prefix[MissingTiddler]]` in Advanced Search.
+
 See `concept-summary.md` (from the `getOrphanTitles-performance-improvement` branch) for full details on the benchmark architecture, TiddlyWiki test APIs, and gotchas.
 
 ---
 
-## 7. File Locations
+## 7. Design Rules
+
+1. **Keep test tiddlers identical across environments** — Do not add tags, prefixes, extra fields, or any data that the isolated wiki mode doesn't add. Any difference changes test conditions (e.g., tags affect link parsing, prefixes change titles), making results non-comparable. Both modes must produce the exact same tiddlers.
+
+---
+
+## 8. File Locations
 
 - **Optimized source:** `core/modules/wiki.js` — `getMissingTitles` (line ~645)
 - **`each()` definition:** `boot/boot.js` (line ~1284)

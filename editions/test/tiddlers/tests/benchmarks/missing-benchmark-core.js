@@ -72,10 +72,19 @@ function getMissingTitlesNew(wiki, $tw) {
 	return Object.keys(missing);
 }
 
-function buildWiki($tw) {
+/*
+Build test tiddlers and add them to a wiki.
+  $tw   - the TiddlyWiki instance (must be booted)
+  wiki  - (optional) wiki to add tiddlers to. If omitted a fresh
+          isolated wiki is created (used by the Node test suite).
+          Identical tiddlers are produced in both modes.
+*/
+function buildWiki($tw, wiki) {
 	var random = mulberry32(42);
-	var wiki = new $tw.Wiki({enableIndexers: []});
-	wiki.addIndexersToWiki();
+	if(!wiki) {
+		wiki = new $tw.Wiki({enableIndexers: []});
+		wiki.addIndexersToWiki();
+	}
 	var allTitles = [];
 	var missingTitles = [];
 	var t;
@@ -156,13 +165,14 @@ function benchmarkFn(fn, label) {
 
 /*
 Run all benchmarks. Returns an object with results for use by callers.
-  $tw - the TiddlyWiki instance (must be booted)
+  $tw   - the TiddlyWiki instance (must be booted)
+  wiki  - (optional) existing wiki to add tiddlers to
 */
-exports.run = function($tw) {
+function run($tw, wiki) {
 	console.log("\nBuilding wiki with " + TIDDLER_COUNT + " tiddlers...");
 	var buildStart = now();
-	var data = buildWiki($tw);
-	var wiki = data.wiki;
+	var data = buildWiki($tw, wiki);
+	var benchWiki = data.wiki;
 	var buildElapsed = now() - buildStart;
 	console.log("Wiki built in " + buildElapsed.toFixed(0) + "ms");
 	console.log("  " + TIDDLER_COUNT + " tiddlers, " +
@@ -171,16 +181,16 @@ exports.run = function($tw) {
 		data.missingTitles.length + " missing targets");
 
 	// Correctness
-	var oldResult = getMissingTitlesOld(wiki, $tw);
-	var newResult = getMissingTitlesNew(wiki, $tw);
+	var oldResult = getMissingTitlesOld(benchWiki, $tw);
+	var newResult = getMissingTitlesNew(benchWiki, $tw);
 	var oldSorted = oldResult.slice().sort();
 	var newSorted = newResult.slice().sort();
 	var correct = JSON.stringify(oldSorted) === JSON.stringify(newSorted);
 
 	// Performance
 	console.log("\n  getMissingTitles benchmark (" + BENCHMARK_RUNS + " runs, " + WARMUP_RUNS + " warmup, " + ITERATIONS_PER_SAMPLE + " iter/sample):");
-	var oldBench = benchmarkFn(function() { return getMissingTitlesOld(wiki, $tw); }, "OLD (forEachTiddler + indexOf)");
-	var newBench = benchmarkFn(function() { return getMissingTitlesNew(wiki, $tw); }, "NEW (each + hashmap)          ");
+	var oldBench = benchmarkFn(function() { return getMissingTitlesOld(benchWiki, $tw); }, "OLD (forEachTiddler + indexOf)");
+	var newBench = benchmarkFn(function() { return getMissingTitlesNew(benchWiki, $tw); }, "NEW (each + hashmap)          ");
 	var speedup = oldBench.median / newBench.median;
 	console.log("  Speedup: " + speedup.toFixed(2) + "x faster");
 
@@ -192,4 +202,11 @@ exports.run = function($tw) {
 		newMedian: newBench.median,
 		speedup: speedup
 	};
-};
+}
+
+// Export for Node/TiddlyWiki module system, auto-run for browser console
+if(typeof exports !== "undefined") {
+	exports.run = run;
+} else {
+	run($tw, $tw.wiki);
+}
