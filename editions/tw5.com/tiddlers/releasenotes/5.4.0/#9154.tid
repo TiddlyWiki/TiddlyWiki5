@@ -6,3 +6,5 @@ change-type: enhancement
 change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9154
 github-contributors: Leilei332
+
+The ButtonWidget now supports all `aria-*` attributes directly, improving accessibility for custom button implementations.

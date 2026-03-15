@@ -3,9 +3,11 @@ changenote: $:/changenotes/5.4.0/#9511
 created: 20251220010540143
 modified: 20251220010540143
 tags: $:/tags/ImpactNote
-description: The diff-match-patch-es library uses different APIs
+description: The diff-match-patch-es library has a different API from the old diff-match-patch library
 impact-type: compatibility-break
 
-* Default export and the class constructor has been removed
-* Function name has been unified to camelCase
-* Previous options like Diff_Timeout and Diff_EditCost are now passed as an options object in the arguments if needed
+Plugins that use the `diff-match-patch` library directly will need to update their code:
+
+* The default export and class constructor have been removed; use the named function exports instead
+* Function names are now camelCase (e.g. `diffMain` instead of `diff_main`)
+* Options such as `Diff_Timeout` and `Diff_EditCost` are now passed as an options object argument rather than being set as properties

@@ -7,7 +7,7 @@ change-category: usability
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9465
 github-contributors: linonetwo
 
-The import UI now displays import options based on the file types being imported. Import options are only shown when relevant files are detected, an example is:
+The import UI now shows file-type-specific options only when the relevant file types are included in the import. Plugin developers can target their import options to specific MIME types using a `condition` field, for example:
 
 ```tid
 tags: $:/tags/ImportOptions

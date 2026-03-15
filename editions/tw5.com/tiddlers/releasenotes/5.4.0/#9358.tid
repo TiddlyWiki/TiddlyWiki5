@@ -7,4 +7,4 @@ change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9358
 github-contributors: cdruan
 
-Remove redundant code in `core/modules/filters/format/json.js`.
+Removed redundant code from the `format/json` filter module, reducing code size and improving maintainability.

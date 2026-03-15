@@ -6,3 +6,5 @@ change-type: performance
 change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9119
 github-contributors: Leilei332
+
+The wikitext parser now uses the regular expression sticky flag (`y`) instead of the global flag (`g`), improving search performance during parsing.

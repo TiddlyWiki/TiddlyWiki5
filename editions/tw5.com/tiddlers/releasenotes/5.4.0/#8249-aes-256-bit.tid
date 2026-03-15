@@ -10,16 +10,6 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#8249
 type: text/vnd.tiddlywiki
 
-This PR changes the default ''AES encryption'' setting ''from 128 bit to 256'' bit. 
+The default AES encryption strength has been increased from 128-bit to 256-bit, improving the security of encrypted wikis.
 
-* Download [[emtpy.html v5.3.8 from the archve|https://tiddlywiki.com/archive/empty/Empty-TiddlyWiki-5.3.8]] which uses AES 128 bit
-* Create some content
-* Save encrypted as eg: ''aes-128.html''
-* Create aes-256.html with TW v5.4.x
-* Create some content
-* Save encrypted as: ''aes-256.html''
-
-''Import decryption test''
-
-* Import ''aes-256.html'' into ''aes-128.html'' -> Decryption and import works
-* Import ''aes-128.html'' into ''aes-256.html'' -> Decryption and import works
+Existing wikis encrypted with the old 128-bit setting can still be decrypted and imported into wikis using 256-bit encryption, and vice versa, so there is no risk of losing access to previously-saved data.

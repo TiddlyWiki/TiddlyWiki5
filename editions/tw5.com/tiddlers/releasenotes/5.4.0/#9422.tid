@@ -7,4 +7,4 @@ change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9422
 github-contributors: Leilei332
 
-Remove Opera & Microsoft prefix in `$:/core/modules/utils/dom/browser.js`.
+Legacy Opera and Microsoft browser-detection prefixes have been removed from the browser utility module, as those browsers are no longer supported.

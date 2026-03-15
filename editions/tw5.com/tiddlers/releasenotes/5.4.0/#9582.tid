@@ -7,4 +7,4 @@ change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9582
 github-contributors: yaisog
 
-Refactored the EditTemplate fields.tid template to improve code maintainability and readability
+Refactored the `EditTemplate fields.tid` template to improve code maintainability and readability.

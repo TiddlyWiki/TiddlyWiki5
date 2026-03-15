@@ -6,3 +6,5 @@ change-type: deprecation
 change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9275
 github-contributors: Leilei332
+
+The Internet Explorer compatibility workaround in the RangeWidget has been removed as IE is no longer supported.

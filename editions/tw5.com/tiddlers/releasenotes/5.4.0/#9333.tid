@@ -1,5 +1,5 @@
 title: $:/changenotes/5.4.0/#9333
-description: Intergrate Tiddlywiki palette colors and settings to custom CSS properties
+description: Expose TiddlyWiki palette colours and theme settings as CSS custom properties
 release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: feature
@@ -7,7 +7,9 @@ change-category: developer
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9333
 github-contributors: Leilei332
 
-Adds `--tpc-*` (for palettes colors) and `--tp-*` (for CSS settings) [[custom CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/--*]] to allow writing stylesheets with vanilla CSS, for example:
+TiddlyWiki palette colours and theme settings are now exposed as standard CSS custom properties, making it possible to write stylesheets in plain CSS without wikitext. Use `--tpc-*` for palette colours and `--tp-*` for theme settings. See [[Writing stylesheets in vanilla CSS]] and [[Core CSS Variables]] for details.
+
+For example:
 
 ```
 /* Old way to get a palette color, which requires using wikitext */
@@ -43,7 +45,3 @@ Adds `--tpc-*` (for palettes colors) and `--tp-*` (for CSS settings) [[custom CS
 }
 ```
 
-See:  
-
-* [[Writing stylesheets in vanilla CSS]] and [[Core CSS Variables]] for details.  
-* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/var  

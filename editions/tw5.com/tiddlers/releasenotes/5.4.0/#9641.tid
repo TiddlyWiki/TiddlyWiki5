@@ -7,8 +7,7 @@ change-category: hackability
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9641
 github-contributors: Jermolene
 
-Introduces [[Background Actions]] that are triggered whenever there is a change to the results of a specified filter.
+Introduces two new reactive mechanisms for advanced wiki-building:
 
-Building on that, it also introduces a new [[Media Query Tracker Mechanism]] that can track the results of any CSS media query (not just dark mode), storing the results in a shadow `$:/info/...` tiddler
-
-These improvements were cherrypicked from [[#8702 - Colour Handling Improvements|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8702]] when it was deferred until v5.5.0.
+* [[Background Actions]]: actions that fire automatically whenever the results of a specified filter change
+* [[Media Query Tracker Mechanism]]: tracks the result of any CSS media query (not just dark mode) and stores it in a `$:/info/...` tiddler, so wikitext can react to viewport size, reduced-motion preferences, and more

@@ -7,5 +7,5 @@ change-category: translation
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9375 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9576
 github-contributors: BramChen
 
-* change camel-case hint text for chinese translations
-* add alerts ARIA message
+* Updated camel-case hint text for Chinese translations
+* Added ARIA message strings for alerts

@@ -7,5 +7,5 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/9427
 github-contributors: linonetwo
 
-Fixed a bug in the RevealWidget, DroppableWidget, EventcatcherWidget, and KeyboardWidget where an empty class attribute would generate a leading space in the rendered HTML. By trimming the resulting class string, we shorten the HTML and avoid potential confusion.
+Fixed a bug in the RevealWidget, DroppableWidget, EventcatcherWidget, and KeyboardWidget where an empty additional class attribute would produce a leading space in the rendered HTML `class` attribute.
 

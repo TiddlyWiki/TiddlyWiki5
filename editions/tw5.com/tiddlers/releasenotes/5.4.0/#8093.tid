@@ -1,5 +1,5 @@
 title: $:/changenotes/5.4.0/#8093
-description: Fixes SelectWidget does not work with multiple options organised into group - issue #8092
+description: Fix SelectWidget not working with multiple options organised into groups
 release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: bugfix
@@ -7,4 +7,4 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/8093 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9616
 github-contributors: buggyj saqimtiaz
 
-Fixed SelectWidget does not work with multiple options organised into group.
+Fixed a bug where the SelectWidget did not work correctly when multiple options were organised into groups.

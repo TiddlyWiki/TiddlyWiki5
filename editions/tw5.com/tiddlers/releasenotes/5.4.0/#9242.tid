@@ -7,4 +7,4 @@ change-category: developer
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9242
 github-contributors: Leilei332
 
-Mark CSS macros supported in 2017 baseline as deprecated. They are moved to [[$:/core/macros/deprecated]] now.
+CSS property macros that have native CSS equivalents in the 2017 baseline (such as `<<box-shadow>>` and `<<transform-origin>>`) have been deprecated and moved to [[$:/core/macros/deprecated]]. Use standard CSS properties in their place.

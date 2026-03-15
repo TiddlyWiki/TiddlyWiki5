@@ -7,4 +7,4 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9167
 github-contributors: Leilei332
 
-Allow LinkWidget to use all aria attributes directly.
+The LinkWidget now supports all `aria-*` attributes directly, improving accessibility for custom link implementations.

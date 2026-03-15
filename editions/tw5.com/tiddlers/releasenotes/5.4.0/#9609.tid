@@ -1,7 +1,7 @@
 change-category: widget
 change-type: enhancement
 created: 20260125124838970
-description: Adds support for pointer capture and enabling/disabling to the EventCatcherWidget.
+description: Add pointer capture, enable/disable control, and eventJSON variable to EventCatcherWidget
 github-contributors: saqimtiaz
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9609
 modified: 20260125202924515
@@ -10,15 +10,8 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#9609
 type: text/vnd.tiddlywiki
 
-The [[EventCatcher|EventCatcherWidget]] widget has been updated to provide:
+The [[EventCatcherWidget]] has been enhanced with three new capabilities:
 
-1. ''Optional Pointer Capture Support'' 
-   Adds native pointer capture handling to improve pointer event reliability and tracking outside the widget DOM nodes boundaries. When enabled, pointer events such as `pointermove`, `pointerup`, and `pointercancel` are correctly captured and routed to the widget, even if the pointer moves off-screen or outside the element.  
-   The pointer capture logic supports two modes of event listener attachment for better performance and control.
-
-2. ''Widget Enable/Disable Control''
-   Adds a new attribute to enable or disable the ~EventCatcher widget at runtime. This allows users to temporarily deactivate event handling without removing the widget or disrupting the DOM structure, enhancing flexibility for dynamic UIs.
-
-3. Access to event properties via the variable `eventJSON` in actions. 
-
-4. Deprecation of the error-prone event-detail* variables in favour of using the new `eventJSON` variable.
+* ''Pointer capture'': An optional mode that captures `pointermove`, `pointerup`, and `pointercancel` events even when the pointer moves outside the widget's DOM boundary, improving reliability for drag interactions
+* ''Enable/disable control'': A new attribute lets you temporarily disable event handling at runtime without removing the widget from the DOM
+* ''`eventJSON` variable'': Event properties are now accessible in actions via an `eventJSON` variable. The older `event-detail*` variables have been deprecated in its favour

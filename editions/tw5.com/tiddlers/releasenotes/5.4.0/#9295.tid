@@ -7,8 +7,6 @@ change-category: plugin
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9295
 github-contributors: cdruan
 
-* Fix markdown parser to respect ''parseAsInline'' option [[#8917|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8917]].
-
-* Fix improper parsing of macrocall, whenenver args contain `>` character.
-
-* Use ''$tw.log.MARKDOWN'' flag to enable debug messages.
+* Fixed the Markdown parser not respecting the `parseAsInline` option
+* Fixed incorrect parsing of macro calls when arguments contain a `>` character
+* Debug logging can now be enabled with the `$tw.log.MARKDOWN` flag

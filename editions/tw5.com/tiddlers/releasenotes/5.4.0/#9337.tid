@@ -7,7 +7,7 @@ change-category: filters
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9337
 github-contributors: yaisog
 
-The following math operators are changed to output an empty list when the input list is empty:
+The following math filter operators now return an empty list when given an empty input list, rather than returning a default value. Filters that relied on the previous behaviour may need to be updated:
 
 * sum[]
 * product[]

@@ -7,4 +7,4 @@ change-category: developer
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9401
 github-contributors: andrewgoz
 
-This PR modifies `$tw.utils.repackPlugin()` so that it adds the standard tiddler modification fields to plugin tiddlers when they are repacked.
+`$tw.utils.repackPlugin()` now sets the standard `created` and `modified` timestamp fields when repacking a plugin tiddler, ensuring the tiddler's metadata is consistent after repacking.

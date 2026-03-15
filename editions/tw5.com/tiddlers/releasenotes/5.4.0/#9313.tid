@@ -7,4 +7,4 @@ change-category: hackability
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9313
 github-contributors: Leilei332
 
-
+The `mask-closable` attribute of the ModalWidget now defaults to `yes`, so clicking outside a modal will close it unless explicitly overridden.

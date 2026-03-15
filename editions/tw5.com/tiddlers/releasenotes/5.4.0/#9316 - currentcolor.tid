@@ -3,6 +3,6 @@ changenote: $:/changenotes/5.4.0/#9316
 created: 20251115032340986
 modified: 20251115032340986
 tags: $:/tags/ImpactNote
-description: SVG icons will inherit colors instead of using `#333333` if its parent element has `color` property set
+description: SVG icons now inherit the text colour of their parent element instead of using a hardcoded colour
 impact-type: compatibility-break
 

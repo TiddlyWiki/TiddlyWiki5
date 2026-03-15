@@ -3,5 +3,5 @@ changenote: $:/changenotes/5.4.0/#9242
 created: 20250901000000000
 modified: 20250901000000000
 tags: $:/tags/ImpactNote
-description: Currently all the CSS property macros are deprecated
+description: CSS property macros with native CSS equivalents are now deprecated
 impact-type: deprecation

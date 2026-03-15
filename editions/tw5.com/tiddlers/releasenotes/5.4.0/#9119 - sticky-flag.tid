@@ -3,5 +3,5 @@ changenote: $:/changenotes/5.4.0/#9119
 created: 20251114082949025
 modified: 20251114082949025
 tags: $:/tags/ImpactNote
-description: Tiddlywiki no longer works on old browsers that doesn't support [[sticky flag|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/sticky]].
+description: TiddlyWiki no longer works on old browsers that do not support the [[regular expression sticky flag|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/sticky]].
 impact-type: compatibility-break
