@@ -32,6 +32,23 @@ TagIndexer.prototype.rebuild = function() {
 };
 
 TagIndexer.prototype.update = function(updateDescriptor) {
+	var newTid = updateDescriptor.new.tiddler;
+	var oldTid = updateDescriptor.old.tiddler;
+	var newFields = newTid && newTid.fields;
+	var oldFields = oldTid && oldTid.fields;
+	var newHasNoTags = newFields && newFields.tags === undefined;
+	var oldHasNoTags = !oldTid || (oldFields && oldFields.tags === undefined);
+
+	if(newHasNoTags && oldHasNoTags) {
+		// Neither old nor new tiddler has tags, but the list field may have
+		// changed which affects sort order for tiddlers tagged with this title
+		var newList = newFields ? newFields.list : undefined;
+		var oldList = oldFields ? oldFields.list : undefined;
+		if($tw.utils.isArrayEqual(newList, oldList)) {
+			return;
+		}
+	}
+
 	$tw.utils.each(this.subIndexers,function(subIndexer) {
 		subIndexer.update(updateDescriptor);
 	});
@@ -53,6 +70,9 @@ TagSubIndexer.prototype.addIndexMethod = function() {
 TagSubIndexer.prototype.rebuild = function() {
 	var self = this;
 	// Hashmap by tag of array of {isSorted:, titles:[]}
+
+const t0 = $tw.utils.timer(); // eslint-disable-line @stylistic/indent
+
 	this.index = Object.create(null);
 	// Add all the tags
 	this.indexer.wiki[this.iteratorMethod](function(tiddler,title) {
@@ -64,6 +84,9 @@ TagSubIndexer.prototype.rebuild = function() {
 			}
 		});
 	});
+
+console.log("--------------- ", $tw.utils.timer(t0), this.iteratorMethod); // eslint-disable-line @stylistic/indent
+
 };
 
 TagSubIndexer.prototype.update = function(updateDescriptor) {
