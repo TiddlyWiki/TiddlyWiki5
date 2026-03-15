@@ -7,4 +7,4 @@ change-category: developer
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9328
 github-contributors: Leilei332
 
-Migrate eslint deprecated rules (except for nodejs related rules). Format related rules are replaced by `@stylistic/eslint-plugin`.
+Migrated deprecated ESLint rules (except Node.js-related ones) to their current equivalents. Code formatting rules are now handled by `@stylistic/eslint-plugin`.

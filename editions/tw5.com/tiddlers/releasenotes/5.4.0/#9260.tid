@@ -1,7 +1,7 @@
 change-category: hackability
 change-type: feature
 created: 20260120154445701
-description: Adds info tiddlers for viewport dimensions that are updated on window resize.
+description: New info tiddlers report viewport and window dimensions, updated on resize
 github-contributors: saqimtiaz
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9260
 modified: 20260120160515462
@@ -10,9 +10,9 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#9260
 type: text/vnd.tiddlywiki
 
-Adds info tiddlers for viewport dimensions that are updated on window resize.
+New `$:/info/browser/window/...` tiddlers report the current viewport and window dimensions, and are updated automatically when the window is resized. This makes it easy to build responsive layouts in wikitext without custom JavaScript.
 
-!! Example: Main and a user-created window with windowID my-window
+!! Available info tiddlers (example: main window and a user-created window with windowID my-window)
 
 |Window | Info tiddler | Meaning |h
 |system/main |`$:/info/browser/window/system/main/outer/width` | Full browser window including chrome, tabs, toolbars |

@@ -6,3 +6,5 @@ change-type: deprecation
 change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9131
 github-contributors: Leilei332
+
+The strikethrough wikitext syntax now renders an `<s>` element instead of the obsolete `<strike>` element, aligning with the HTML5 standard.

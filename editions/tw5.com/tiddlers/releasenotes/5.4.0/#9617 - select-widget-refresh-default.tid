@@ -1,7 +1,7 @@
 change-category: widget
 change-type: bugfix
 created: 20260125195754439
-description: Refresh widget if "default" parameter input value is changed
+description: Fix SelectWidget not refreshing when the default attribute value changes
 github-contributors: pmario
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9617
 modified: 20260125195754439
@@ -10,3 +10,4 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#9617
 type: text/vnd.tiddlywiki
 
+Fixed a bug where the SelectWidget would not refresh when the value of its `default` attribute changed, causing the displayed selection to become out of sync.

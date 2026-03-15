@@ -10,8 +10,4 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#9281
 type: text/vnd.tiddlywiki
 
-This PR adds:
-
-* `th-dom-rendering-element` hook, that is called right before the DOM node is inserted into the DOM
-* It allows plugins to add debug info
-* An example using an experimental hook can be found at: [[#9222|https://github.com/TiddlyWiki/TiddlyWiki5/pull/9222]]
+The new `th-dom-rendering-element` hook is called immediately before each DOM node is inserted into the document. Plugin developers can use it to attach debug information to rendered elements.

@@ -7,4 +7,4 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9489
 github-contributors: yaisog
 
-PR #8972 introduced a change in the ActionLogWidget that could lead to a significant slowdown, which has been fixed.
+Fixed a significant slowdown in the ActionLogWidget that was introduced alongside the multi-valued variables feature (#8972).

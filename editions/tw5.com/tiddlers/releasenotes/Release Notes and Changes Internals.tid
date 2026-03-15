@@ -54,6 +54,36 @@ Impact note fields:
 * `impact-type` - the type of impact; see [[here|Release Notes and Changes]] for valid values
 * `text` - description of the impact if required
 
+! Writing Change Notes
+
+Good change notes follow a simple ''what / why / so what'' structure:
+
+# ''What'' changed? (one sentence)
+# ''Why'' — what problem did it solve, or what opportunity did it take? (one sentence; omit if obvious)
+# ''So what'' — what does this mean for the user or developer? (one sentence, or a short bullet list)
+
+!! Length by audience
+
+* ''User-facing enhancements and widely-relevant bug fixes'': 2–4 short sentences or bullets in plain English. Avoid implementation detail
+* ''Developer/API/internal changes'': A little more technical detail is fine, but still follow the checklist. Narrow audience does not mean the note can be vague
+* ''Trivial or narrow-scope changes'': 1–2 sentences is sufficient
+* ''Important changes affecting many users'': Can be slightly longer, but stay focused
+
+!! Tone and style
+
+* Write in third person or imperative, not "This PR...". Avoid leading with "This PR adds..." or "This change..."
+* Do not put a full stop at the end of a bullet point item
+* The `description` field (one-liner) should match the body — if you rewrite the body significantly, update `description` too
+* The `github-links` field carries the full context for readers who want it; do not repeat what is already there
+
+!! Good examples from 5.4.0
+
+These notes illustrate the standard well:
+
+* `$:/changenotes/5.4.0/#9280` — a concise bug fix: what was wrong, what changed, done
+* `$:/changenotes/5.4.0/#9183` — a performance change with a concrete number and user benefit
+* `$:/changenotes/5.4.0/#9551` — a widget enhancement with a clear intro and well-structured bullets for each new mode
+
 ! Summary Lists
 
 Summary sections are curated via lists stored in fields on the tiddler `$:/tw5.com/releases/info/summary-lists`.

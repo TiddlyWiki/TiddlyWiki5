@@ -1,13 +1,13 @@
 [
     {
         "created": "20260125202948362",
-        "text": "",
+        "text": "Any actions in `$eventcatcher` widgets that use `event-detail*` variables must be updated to use the new `eventJSON` variable instead.",
         "title": "$:/changenotes/5.4.0/#9609/impacts/event detail variables in eventcatcher",
         "modified": "20260125203132149",
         "tags": "$:/tags/ImpactNote",
         "type": "text/vnd.tiddlywiki",
         "changenote": "$:/changenotes/5.4.0/#9609",
-        "description": "`event-detail*` variables have been removed in favour of the new `eventJSON` variable",
-        "impact-type": "compatibility-break "
+        "description": "The event-detail* variables in the eventcatcher widget have been deprecated in favour of the new eventJSON variable",
+        "impact-type": "compatibility-break"
     }
 ]

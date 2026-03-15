@@ -7,4 +7,4 @@ change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9287 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9657
 github-contributors: Jermolene
 
-Doing so enables us to filter and group changes. For example, we could show all the breaking changes between two releases.
+Release notes are now composed of individual change note tiddlers, allowing changes to be filtered and grouped. For example, it is now possible to show all breaking changes introduced between two releases.

@@ -7,4 +7,4 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9452
 github-contributors: pmario
 
-See: [[DiffTextWidget]] -> Attributes and Examples
+The new `editcost` parameter lets you tune the trade-off between the number of edits and the length of the diff output. See [[DiffTextWidget]] for details and examples.

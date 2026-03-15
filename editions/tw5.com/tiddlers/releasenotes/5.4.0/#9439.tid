@@ -7,4 +7,4 @@ change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9218 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9439
 github-contributors: Leilei332
 
-Fix the problem that tiddlywiki's raw markup shadow tiddlers in `$:/core` is not included in HTML.
+Fixed a bug where raw markup shadow tiddlers from `$:/core` were not included when building the external-core edition HTML output.

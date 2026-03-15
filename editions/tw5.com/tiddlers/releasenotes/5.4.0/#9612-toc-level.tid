@@ -10,5 +10,4 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#9612
 type: text/vnd.tiddlywiki
 
-* The [[toc-macro|Table-of-Contents Macros]] now supports a ''level'' parameter, that allows us to limit the [[toc-levels|Table-of-Contents Macros (Examples)]], that are listed. 
-* If the level parameter is active, levels, which have children will show a level indicator at the front. By default it uses the core "+" icon
+The [[Table-of-Contents Macros]] now support a `level` parameter to limit the depth of the tree shown. When a level limit is set, entries with children display a level indicator (the core "+" icon by default) to indicate there are deeper levels not shown.

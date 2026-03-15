@@ -7,4 +7,4 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9494
 github-contributors: yaisog
 
-This PR corrects a bug where the LetWidget did not set variables if their value was the empty output of a filtered transclusion.
+Fixed a bug where the LetWidget would not set a variable if its value came from a filtered transclusion that returned an empty result.

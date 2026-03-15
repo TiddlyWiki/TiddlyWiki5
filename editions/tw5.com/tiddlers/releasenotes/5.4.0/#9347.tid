@@ -6,3 +6,5 @@ change-type: enhancement
 change-category: usability
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9347
 github-contributors: Leilei332
+
+Accessibility improvements to the theme/language/palette switcher UI, including better ARIA roles and keyboard navigation support.

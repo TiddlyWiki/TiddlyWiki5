@@ -7,7 +7,7 @@ change-category: hackability
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9466
 github-contributors: linonetwo
 
-ViewToolbar buttons can now be conditionally displayed based on the currentTiddler using a `condition` field. Similar to how `$:/tags/Exporter` and `$:/tags/EditorTools` already have. An example would be:
+ViewToolbar buttons can now include a `condition` filter field to show them only for specific tiddler types, consistent with how `$:/tags/Exporter` and `$:/tags/EditorTools` already work. For example:
 
 ```tid
 tags: $:/tags/ViewToolbar

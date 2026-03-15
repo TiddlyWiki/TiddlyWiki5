@@ -3,7 +3,7 @@ changenote: $:/changenotes/5.4.0/#9183
 created: 20250901000000000
 modified: 20250901000000000
 tags: $:/tags/ImpactNote
-description: Server components of the core have been moved into a new `$:/core-server` plugin
+description: Server-only components of the core have been moved into a new $:/core-server plugin
 impact-type: pluginisation
 
-It is not necessary for wikis to explicitly include the `$:/core-server` plugin.
+The `$:/core-server` plugin is included automatically when running the Node.js server — wikis do not need to include it explicitly.

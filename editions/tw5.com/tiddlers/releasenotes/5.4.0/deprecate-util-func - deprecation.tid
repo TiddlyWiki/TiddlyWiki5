@@ -3,6 +3,7 @@ changenote: $:/changenotes/5.4.0/#9251
 created: 20251129130610944
 modified: 20251129130610953
 tags: $:/tags/ImpactNote
-description: Some utility functions are deprecated and are discouraged to be used
+description: Some utility functions are deprecated and plugin developers should migrate to their replacements
 impact-type: deprecation
 
+Plugin developers using the deprecated utility functions should migrate to the recommended replacements before these functions are removed in a future release.

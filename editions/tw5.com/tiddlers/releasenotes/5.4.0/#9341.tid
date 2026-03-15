@@ -7,6 +7,4 @@ change-category: nodejs
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9341
 github-contributors: cdruan
 
-* skip reading file content when `_canonical_uri` is present
-
-* skip loading file when file size is too large
+Fixed a crash when loading wikis that include very large files via `tiddlywiki.files`. Files with a `_canonical_uri` field are no longer read into memory, and files that exceed the size limit are skipped gracefully.
