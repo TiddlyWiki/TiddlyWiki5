@@ -14,6 +14,8 @@ See Boot.js for further details of the boot process.
 
 /* eslint-disable @stylistic/indent */
 
+if(typeof performance !== "undefined") { performance.mark("tw-bootprefix-start"); }
+
 var _bootprefix = (function($tw) {
 
 "use strict";
@@ -121,6 +123,7 @@ return $tw;
 if(typeof(exports) === "undefined") {
 	// Set up $tw global for the browser
 	window.$tw = _bootprefix(window.$tw);
+	if(typeof performance !== "undefined") { performance.mark("tw-bootprefix-end"); }
 } else {
 	// Export functionality as a module
 	exports.bootprefix = _bootprefix;

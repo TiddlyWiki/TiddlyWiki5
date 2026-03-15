@@ -14,6 +14,8 @@ var _boot = (function($tw) {
 
 "use strict";
 
+if(typeof performance !== "undefined") { performance.mark("tw-boot-start"); }
+
 // Include bootprefix if we're not given module data
 if(!$tw) {
 	$tw = require("./bootprefix.js").bootprefix();
@@ -2585,7 +2587,9 @@ $tw.boot.loadStartup = function(options){
 
 	// Load tiddlers
 	if($tw.boot.tasks.readBrowserTiddlers) {
+		if(typeof performance !== "undefined") { performance.mark("tw-boot-store-read-start"); }
 		$tw.loadTiddlersBrowser();
+		if(typeof performance !== "undefined") { performance.mark("tw-boot-store-read-end"); }
 	} else {
 		$tw.loadTiddlersNode();
 	}
@@ -2597,6 +2601,7 @@ $tw.boot.loadStartup = function(options){
 	$tw.hooks.invokeHook("th-boot-tiddlers-loaded");
 };
 $tw.boot.execStartup = function(options){
+	if(typeof performance !== "undefined") { performance.mark("tw-boot-exec-start"); }
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin",$tw.safeMode ? ["$:/core"] : undefined);
@@ -2624,6 +2629,7 @@ $tw.boot.execStartup = function(options){
 	$tw.boot.executedStartupModules = Object.create(null);
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
+	if(typeof performance !== "undefined") { performance.mark("tw-boot-startup-modules-start"); }
 	$tw.boot.executeNextStartupTask(options.callback);
 };
 /*
@@ -2691,6 +2697,7 @@ $tw.boot.executeNextStartupTask = function(callback) {
 		}
 		taskIndex++;
 	}
+	if(typeof performance !== "undefined") { performance.mark("tw-boot-complete"); }
 	if(typeof callback === "function") {
 		callback();
 	}
