@@ -29,8 +29,37 @@ var LINKS_PER_TIDDLER_MIN = 1;
 var LINKS_PER_TIDDLER_MAX = 5;
 var WARMUP_RUNS = 2;
 var BENCHMARK_RUNS = 5;
-// Run multiple iterations per timed sample to overcome low-resolution browser timers
-var ITERATIONS_PER_SAMPLE = 10;
+// Target minimum measurable duration in ms — samples shorter than this
+// are unreliable on coarsened browser timers
+var MIN_SAMPLE_MS = 5;
+
+// Detect timer resolution and choose iterations per sample accordingly.
+// Browsers reduce performance.now() precision (often to 100us or 1ms) for
+// Spectre mitigation unless cross-origin isolated. On Node / high-res
+// environments we can use fewer iterations and save CI time.
+function detectIterationsPerSample() {
+	var deltas = [];
+	var prev = now();
+	// Collect non-zero deltas to estimate resolution
+	while(deltas.length < 10) {
+		var current = now();
+		var d = current - prev;
+		if(d > 0) {
+			deltas.push(d);
+			prev = current;
+		}
+	}
+	deltas.sort(function(a, b) { return a - b; });
+	var resolution = deltas[0];
+	// If resolution is fine-grained (< 0.1ms), a single iteration is enough.
+	// For coarser timers, use enough iterations so that each sample spans
+	// well above the resolution floor.
+	if(resolution < 0.1) {
+		return 1;
+	}
+	var estimate = Math.ceil(MIN_SAMPLE_MS / resolution);
+	return Math.max(1, Math.min(estimate, 50));
+}
 
 // Seeded PRNG for reproducible benchmarks
 function mulberry32(seed) {
@@ -135,7 +164,7 @@ function buildWiki($tw, wiki) {
 	return { wiki: wiki, allTitles: allTitles, missingTitles: missingTitles, linkingTiddlers: linkingTiddlers };
 }
 
-function benchmarkFn(fn, label) {
+function benchmarkFn(fn, label, iterationsPerSample) {
 	var r, i;
 	for(r = 0; r < WARMUP_RUNS; r++) {
 		fn();
@@ -144,11 +173,11 @@ function benchmarkFn(fn, label) {
 	var result;
 	for(r = 0; r < BENCHMARK_RUNS; r++) {
 		var start = now();
-		for(i = 0; i < ITERATIONS_PER_SAMPLE; i++) {
+		for(i = 0; i < iterationsPerSample; i++) {
 			result = fn();
 		}
 		var end = now();
-		times.push((end - start) / ITERATIONS_PER_SAMPLE);
+		times.push((end - start) / iterationsPerSample);
 	}
 	times.sort(function(a, b) { return a - b; });
 	var median = times[Math.floor(times.length / 2)];
@@ -203,21 +232,22 @@ function run($tw, wiki) {
 	}
 
 	// getTiddlerBacklinks performance
-	console.log("\n  getTiddlerBacklinks benchmark (" + BENCHMARK_RUNS + " runs, " + WARMUP_RUNS + " warmup, " + ITERATIONS_PER_SAMPLE + " iter/sample):");
+	var iterationsPerSample = detectIterationsPerSample();
+	console.log("\n  getTiddlerBacklinks benchmark (" + BENCHMARK_RUNS + " runs, " + WARMUP_RUNS + " warmup, " + iterationsPerSample + " iter/sample):");
 	var backlinksOldBench = benchmarkFn(function() {
 		var results = [];
 		for(var i = 0; i < backlinkTargets.length; i++) {
 			results.push(getTiddlerBacklinksOld(benchWiki, backlinkTargets[i]));
 		}
 		return results;
-	}, "OLD (forEachTiddler)  ");
+	}, "OLD (forEachTiddler)  ", iterationsPerSample);
 	var backlinksNewBench = benchmarkFn(function() {
 		var results = [];
 		for(var i = 0; i < backlinkTargets.length; i++) {
 			results.push(getTiddlerBacklinksNew(benchWiki, backlinkTargets[i]));
 		}
 		return results;
-	}, "NEW (each)            ");
+	}, "NEW (each)            ", iterationsPerSample);
 	var backlinksSpeedup = backlinksOldBench.median / backlinksNewBench.median;
 	console.log("  Speedup: " + backlinksSpeedup.toFixed(2) + "x faster");
 
