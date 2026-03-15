@@ -2292,9 +2292,9 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-more-sidebar > .tc-tab-set > .tc-tab-buttons > button.tc-tab-selected {
 	background-color: <<colour sidebar-tab-background-selected>>;
-	border-top: 1px solid #ddd;
-	border-left: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
+	border-top: 1px solid <<colour sidebar-tab-border-selected>>;
+	border-left: 1px solid <<colour sidebar-tab-border-selected>>;
+	border-bottom: 1px solid <<colour sidebar-tab-border-selected>>;
 	border-right: none;
 }
 
