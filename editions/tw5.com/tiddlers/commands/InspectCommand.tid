@@ -1,0 +1,12 @@
+caption: inspect
+created: 20260310120000000
+modified: 20260310120000000
+tags: Commands
+title: InspectCommand
+type: text/vnd.tiddlywiki
+
+The `inspect` command opens an interactive Node.js REPL with full access to the TiddlyWiki `$tw` variable space. It is useful for debugging, exploring the wiki store, and testing TiddlyWiki's internal APIs from the command line.
+
+{{$:/language/Help/inspect}}
+
+See also: [[InspectCommand Examples]]
