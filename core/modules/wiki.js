@@ -1400,15 +1400,15 @@ exports.search = function(text,options) {
 		fields.push("text");
 	}
 	// Function to check a given tiddler for the search term
-	var searchTiddler = function(title) {
+	var searchTiddler = function(tiddler,title) {
 		if(!searchTermsRegExps) {
 			return true;
 		}
-		var notYetFound = searchTermsRegExps.slice();
-
-		var tiddler = self.getTiddler(title);
 		if(!tiddler) {
-			tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
+			tiddler = self.getTiddler(title);
+			if(!tiddler) {
+				tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
+			}
 		}
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"],
 			searchFields;
@@ -1424,6 +1424,33 @@ exports.search = function(text,options) {
 		} else {
 			searchFields = fields;
 		}
+		// Fast path for single search term (avoids array slice/splice per tiddler)
+		if(searchTermsRegExps.length === 1) {
+			var singleRegExp = searchTermsRegExps[0];
+			for(var fieldIndex=0; fieldIndex<searchFields.length; fieldIndex++) {
+				var fieldName = searchFields[fieldIndex];
+				if(fieldName === "text" && contentTypeInfo.encoding !== "utf8") {
+					continue;
+				}
+				var str = tiddler.fields[fieldName];
+				if(str) {
+					if($tw.utils.isArray(str)) {
+						for(var s=0; s<str.length; s++) {
+							if(singleRegExp.test(str[s])) {
+								return true;
+							}
+						}
+					} else {
+						str = tiddler.getFieldString(fieldName);
+						if(singleRegExp.test(str)) {
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+		}
+		var notYetFound = searchTermsRegExps.slice();
 		for(var fieldIndex=0; notYetFound.length>0 && fieldIndex<searchFields.length; fieldIndex++) {
 			// Don't search the text field if the content type is binary
 			var fieldName = searchFields[fieldIndex];
@@ -1463,7 +1490,7 @@ exports.search = function(text,options) {
 	var results = [],
 		source = options.source || this.each;
 	source(function(tiddler,title) {
-		if(searchTiddler(title) !== invert) {
+		if(searchTiddler(tiddler,title) !== invert) {
 			results.push(title);
 		}
 	});

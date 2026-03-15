@@ -14,6 +14,8 @@ See Boot.js for further details of the boot process.
 
 /* eslint-disable @stylistic/indent */
 
+if(typeof performance !== "undefined") { performance.mark("tw-bootprefix-start"); }
+
 var _bootprefix = (function($tw) {
 
 "use strict";
@@ -23,7 +25,7 @@ $tw.boot = $tw.boot || Object.create(null);
 
 // Config
 $tw.config = $tw.config || Object.create(null);
-$tw.config.maxEditFileSize = 100 * 1024 * 1024; // 100MB
+$tw.config.maxEditFileSize = 200 * 1024 * 1024; // 200MB
 
 // Detect platforms
 if(!("browser" in $tw)) {
@@ -121,6 +123,7 @@ return $tw;
 if(typeof(exports) === "undefined") {
 	// Set up $tw global for the browser
 	window.$tw = _bootprefix(window.$tw);
+	if(typeof performance !== "undefined") { performance.mark("tw-bootprefix-end"); }
 } else {
 	// Export functionality as a module
 	exports.bootprefix = _bootprefix;

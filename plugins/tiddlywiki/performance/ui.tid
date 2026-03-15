@@ -1,0 +1,48 @@
+title: $:/plugins/tiddlywiki/performance/ui
+caption: Recorder
+
+! Performance Testing Recorder
+
+<$let
+	state="$:/state/performance/recording"
+	timeline="$:/temp/performance/timeline"
+	coalesceConfig="$:/config/performance/coalesce-drafts"
+>
+
+!! Recording
+
+<$reveal state=<<state>> type="nomatch" text="yes">
+<$button set=<<state>> setTo="yes" class="tc-btn-big-green">Start Recording</$button>
+</$reveal>
+
+<$reveal state=<<state>> type="match" text="yes">
+<$button set=<<state>> setTo="no" class="tc-btn-big-green" style="background: #d33;">Stop Recording</$button>
+&nbsp; //Recording in progress...//
+</$reveal>
+
+!! Options
+
+<$checkbox tiddler=<<coalesceConfig>> field="text" checked="yes" unchecked="no" default="yes"> Coalesce rapid draft updates</$checkbox>
+
+!! Timeline
+
+<$reveal type="nomatch" state=<<timeline>> text="">
+
+<$let timelineText={{$(timeline)$}}>
+<$vars count={{{ [<timeline>get[text]jsonextract[]] +[count[]] }}}>
+Timeline contains <<count>> operations.
+</$vars>
+
+<$button>
+<$action-sendmessage $message="tm-download-file" $param=<<timeline>> filename="timeline.json"/>
+Download timeline.json
+</$button>
+
+</$let>
+</$reveal>
+
+<$reveal type="match" state=<<timeline>> text="">
+No timeline recorded yet. Click "Start Recording", interact with the wiki, then click "Stop Recording".
+</$reveal>
+
+</$let>
