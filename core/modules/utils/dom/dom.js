@@ -151,9 +151,10 @@ exports.forceLayout = function(element) {
 Pulse an element for debugging purposes
 */
 exports.pulseElement = function(element) {
+	var eventName = $tw.utils.convertEventName("animationEnd");
 	// Event handler to remove the class at the end
-	element.addEventListener($tw.browser.animationEnd,function handler(event) {
-		element.removeEventListener($tw.browser.animationEnd,handler,false);
+	element.addEventListener(eventName,function handler(event) {
+		element.removeEventListener(eventName,handler,false);
 		$tw.utils.removeClass(element,"pulse");
 	},false);
 	// Apply the pulse class

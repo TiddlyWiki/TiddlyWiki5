@@ -1225,6 +1225,17 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	100% {background-position: 250% 0, 250% 0}
 }
 
+@keyframes pulse {
+	0% { opacity: .3; }
+	100% { opacity: 1; }
+}
+
+.pulse {
+	background: lightgreen;
+	animation: pulse 0.8s ease-out;
+	z-index: 99999;
+}
+
 .tc-titlebar h2 {
 	font-size: 1em;
 	display: inline;
