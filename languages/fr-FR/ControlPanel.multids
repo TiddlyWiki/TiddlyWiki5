@@ -96,6 +96,10 @@ Plugins/PluginWillRequireReload: (rechargement requis)
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
 Plugins/Reinstall/Caption: réinstalle
+Plugins/Stability/Deprecated: DÉPRÉCIÉ
+Plugins/Stability/Experimental: EXPÉRIMENTAL
+Plugins/Stability/Legacy: LEGACY
+Plugins/Stability/Stable: STABLE
 Plugins/Themes/Caption: Thèmes
 Plugins/Themes/Hint: Plugins de thème
 Plugins/Update/Caption: mise à jour
@@ -183,6 +187,8 @@ Settings/DefaultSidebarTab/Caption: Onglet par défaut sur la barre latérale
 Settings/DefaultSidebarTab/Hint: Indique l'onglet de la barre latérale qui sera affiché par défaut
 Settings/DefaultMoreSidebarTab/Caption: Onglet par défaut sous le Plus de la barre latérale
 Settings/DefaultMoreSidebarTab/Hint: Indique quel onglet sera affiché par défaut sous le Plus de la barre latérale
+Settings/DefaultTiddlerInfoTab/Caption: Onglet par défaut pour les Infos du tiddler
+Settings/DefaultTiddlerInfoTab/Hint: Spécifie l'onglet affiché par défaut lorsque le panneau d'information du tiddler est ouvert
 Settings/LinkToBehaviour/Caption: Comportement à l'ouverture du tiddler
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation depuis un emplacement //interne// au déroulé
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation depuis un emplacement //externe// au déroulé
