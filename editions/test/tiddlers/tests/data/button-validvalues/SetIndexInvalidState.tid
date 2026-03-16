@@ -1,0 +1,43 @@
+title: Button/ValidValues/SetIndexInvalidState
+description: Button validValues with setTitle+setIndex — invalid state falls back to default
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Narrative
+
+This test verifies that `validValues` works with `setTitle` + `setIndex`. The state is read from the `myindex` key of a JSON data tiddler, which contains `InvalidValue`. Since this is not in `validValues`, the button matching `default` (`OptionA`) should be highlighted with a red background.
++
+title: $:/state/test-btn
+type: application/json
+text: {"myindex":"InvalidValue"}
++
+title: Output
+
+\whitespace trim
+
+<style>
+.selected { background-color: red; color: white; }
+</style>
+
+<$button setTitle="$:/state/test-btn"
+	setIndex="myindex"
+	setTo="OptionA"
+	default="OptionA"
+	validValues="OptionA OptionB"
+	selectedClass="selected"
+>
+	A
+</$button>
+<$button setTitle="$:/state/test-btn"
+	setIndex="myindex"
+	setTo="OptionB"
+	default="OptionA"
+	validValues="OptionA OptionB"
+	selectedClass="selected"
+>
+	B
+</$button>
++
+title: ExpectedResult
+
+<p><style>.selected { background-color: red; color: white; }</style></p><p><button aria-checked="true" class=" selected">A</button><button aria-checked="false" class="">B</button></p>
