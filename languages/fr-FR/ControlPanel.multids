@@ -245,3 +245,6 @@ ViewTemplateSubtitle/Caption: Visualisation du sous-titre
 ViewTemplateSubtitle/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage du sous-titre d'un tiddler.
 ViewTemplateTags/Caption: Visualisation des tags
 ViewTemplateTags/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage de la zone de tags d'un tiddler.
+WikiInformation/Caption: Informations sur le Wiki
+WikiInformation/Hint: Cette page rassemble quelques informations générales sur la configuration de ce ~TiddlyWiki. Elle est conçue pour permettre de partager rapidement certains aspects de sa configuration avec d'autres, par exemple lorsqu'on demande de l'aide sur un forum. Elle ne contient aucune information privée ni personnelle, et rien n'est partagé sans être explicitement copié-collé ailleurs.
+WikiInformation/Drag/Caption: Déplacer ce lien pour copier cet outil sur un autre wiki
