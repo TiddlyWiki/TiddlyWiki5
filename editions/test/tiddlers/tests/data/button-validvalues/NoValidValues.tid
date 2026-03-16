@@ -1,0 +1,29 @@
+title: Button/ValidValues/NoValidValues
+description: Button without validValues should work normally (no regression)
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: $:/state/test-btn
+text: OptionB
++
+title: Output
+
+\whitespace trim
+<$button set="$:/state/test-btn"
+	setTo="OptionA"
+	default="OptionA"
+	selectedClass="selected"
+>
+	A
+</$button>
+<$button set="$:/state/test-btn"
+	setTo="OptionB"
+	default="OptionA"
+	selectedClass="selected"
+>
+	B
+</$button>
++
+title: ExpectedResult
+
+<p><button aria-checked="false" class="">A</button><button aria-checked="true" class=" selected">B</button></p>

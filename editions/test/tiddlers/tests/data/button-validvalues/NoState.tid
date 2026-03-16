@@ -1,0 +1,28 @@
+title: Button/ValidValues/NoState
+description: Button with validValues should highlight default when state tiddler does not exist
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$button set="$:/state/test-btn"
+	setTo="OptionA"
+	default="OptionA"
+	validValues="OptionA OptionB"
+	selectedClass="selected"
+>
+	A
+</$button>
+<$button set="$:/state/test-btn"
+	setTo="OptionB"
+	default="OptionA"
+	validValues="OptionA OptionB"
+	selectedClass="selected"
+>
+	B
+</$button>
++
+title: ExpectedResult
+
+<p><button aria-checked="true" class=" selected">A</button><button aria-checked="false" class="">B</button></p>

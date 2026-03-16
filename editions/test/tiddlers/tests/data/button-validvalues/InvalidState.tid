@@ -1,0 +1,31 @@
+title: Button/ValidValues/InvalidState
+description: Button with validValues should highlight default when state is invalid
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: $:/state/test-btn
+text: InvalidValue
++
+title: Output
+
+\whitespace trim
+<$button set="$:/state/test-btn"
+	setTo="OptionA"
+	default="OptionA"
+	validValues="OptionA OptionB OptionC"
+	selectedClass="selected"
+>
+	A
+</$button>
+<$button set="$:/state/test-btn"
+	setTo="OptionB"
+	default="OptionA"
+	validValues="OptionA OptionB OptionC"
+	selectedClass="selected"
+>
+	B
+</$button>
++
+title: ExpectedResult
+
+<p><button aria-checked="true" class=" selected">A</button><button aria-checked="false" class="">B</button></p>

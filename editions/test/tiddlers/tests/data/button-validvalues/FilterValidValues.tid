@@ -1,0 +1,39 @@
+title: Button/ValidValues/FilterValidValues
+description: Button with filter expression as validValues should fall back to default when state is invalid
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: OptionA
+tags: options
+text: A
++
+title: OptionB
+tags: options
+text: B
++
+title: $:/state/test-btn
+text: InvalidValue
++
+title: Output
+
+\whitespace trim
+<$button set="$:/state/test-btn"
+	setTo="OptionA"
+	default="OptionA"
+	validValues="[tag[options]]"
+	selectedClass="selected"
+>
+	A
+</$button>
+<$button set="$:/state/test-btn"
+	setTo="OptionB"
+	default="OptionA"
+	validValues="[tag[options]]"
+	selectedClass="selected"
+>
+	B
+</$button>
++
+title: ExpectedResult
+
+<p><button aria-checked="true" class=" selected">A</button><button aria-checked="false" class="">B</button></p>
