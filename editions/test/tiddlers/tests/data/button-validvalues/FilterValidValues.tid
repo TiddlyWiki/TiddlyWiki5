@@ -1,8 +1,14 @@
 title: Button/ValidValues/FilterValidValues
-description: Button with filter expression as validValues should fall back to default when state is invalid
+description: Button validValues — filter expression as validValues
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
+title: Narrative
+
+This test verifies that the `validValues` attribute accepts filter expressions, not just literal space-separated lists. The valid values are defined by the filter `[tag[options]]`, which resolves to the tiddlers `OptionA` and `OptionB` (both tagged `options`).
+
+The state tiddler contains `InvalidValue`, which is not in the filter results. The button widget falls back to `default` (`OptionA`), so button ''A'' should be highlighted with a red background.
++
 title: OptionA
 tags: options
 text: A
@@ -17,6 +23,11 @@ text: InvalidValue
 title: Output
 
 \whitespace trim
+
+<style>
+.selected { background-color: red; color: white; }
+</style>
+
 <$button set="$:/state/test-btn"
 	setTo="OptionA"
 	default="OptionA"
@@ -36,4 +47,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p><button aria-checked="true" class=" selected">A</button><button aria-checked="false" class="">B</button></p>
+<p><style>.selected { background-color: red; color: white; }</style></p><p><button aria-checked="true" class=" selected">A</button><button aria-checked="false" class="">B</button></p>

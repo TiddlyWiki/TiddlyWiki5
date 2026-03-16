@@ -1,14 +1,23 @@
 title: Button/ValidValues/NoValidValues
-description: Button without validValues should work normally (no regression)
+description: Button without validValues — no regression
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
+title: Narrative
+
+This is a regression test. The buttons here do ''not'' use the `validValues` attribute. The state tiddler contains `OptionB`, which matches button ''B''. This test ensures that existing button behaviour is completely unchanged when `validValues` is not specified — button ''B'' should be highlighted with a red background.
++
 title: $:/state/test-btn
 text: OptionB
 +
 title: Output
 
 \whitespace trim
+
+<style>
+.selected { background-color: red; color: white; }
+</style>
+
 <$button set="$:/state/test-btn"
 	setTo="OptionA"
 	default="OptionA"
@@ -26,4 +35,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p><button aria-checked="false" class="">A</button><button aria-checked="true" class=" selected">B</button></p>
+<p><style>.selected { background-color: red; color: white; }</style></p><p><button aria-checked="false" class="">A</button><button aria-checked="true" class=" selected">B</button></p>

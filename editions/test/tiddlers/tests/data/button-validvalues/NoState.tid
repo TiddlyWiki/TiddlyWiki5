@@ -1,14 +1,23 @@
 title: Button/ValidValues/NoState
-description: Button with validValues should highlight default when state tiddler does not exist
+description: Button validValues — missing state falls back to default
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
+title: Narrative
+
+This test verifies that `validValues` does not change the existing default behaviour when the state tiddler does not exist. The button widget already falls back to `default` when there is no state tiddler — adding `validValues` should not break this. Button ''B'' should be highlighted with a red background because it matches the `default` value (`OptionB`).
++
 title: Output
 
 \whitespace trim
+
+<style>
+.selected { background-color: red; color: white; }
+</style>
+
 <$button set="$:/state/test-btn"
 	setTo="OptionA"
-	default="OptionA"
+	default="OptionB"
 	validValues="OptionA OptionB"
 	selectedClass="selected"
 >
@@ -16,7 +25,7 @@ title: Output
 </$button>
 <$button set="$:/state/test-btn"
 	setTo="OptionB"
-	default="OptionA"
+	default="OptionB"
 	validValues="OptionA OptionB"
 	selectedClass="selected"
 >
@@ -25,4 +34,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p><button aria-checked="true" class=" selected">A</button><button aria-checked="false" class="">B</button></p>
+<p><style>.selected { background-color: red; color: white; }</style></p><p><button aria-checked="false" class="">A</button><button aria-checked="true" class=" selected">B</button></p>

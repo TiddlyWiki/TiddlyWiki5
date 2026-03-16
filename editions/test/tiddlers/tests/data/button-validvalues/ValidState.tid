@@ -1,14 +1,23 @@
 title: Button/ValidValues/ValidState
-description: Button with validValues should highlight correct button when state is valid
+description: Button validValues — valid state highlights correct button
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
+title: Narrative
+
+This test verifies that the `validValues` attribute does not interfere with normal operation. The state tiddler `$:/state/test-btn` contains `OptionB`, which is a valid value listed in `validValues`. The button widget should behave exactly as it would without `validValues` — button ''B'' should be highlighted with a red background because its `setTo` matches the state.
++
 title: $:/state/test-btn
 text: OptionB
 +
 title: Output
 
 \whitespace trim
+
+<style>
+.selected { background-color: red; color: white; }
+</style>
+
 <$button set="$:/state/test-btn"
 	setTo="OptionA"
 	default="OptionA"
@@ -28,4 +37,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p><button aria-checked="false" class="">A</button><button aria-checked="true" class=" selected">B</button></p>
+<p><style>.selected { background-color: red; color: white; }</style></p><p><button aria-checked="false" class="">A</button><button aria-checked="true" class=" selected">B</button></p>
