@@ -159,7 +159,7 @@ ButtonWidget.prototype.isSelected = function() {
 	var currentValue = this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler"));
 	// If validValues is specified, fall back to default when current value doesn't match any valid value
 	if(this.validValues && currentValue !== this.defaultSetValue) {
-		var validValuesList = this.wiki.filterTiddlers(this.validValues);
+		var validValuesList = this.wiki.filterTiddlers(this.validValues,this);
 		if(validValuesList.indexOf(currentValue) === -1) {
 			currentValue = this.defaultSetValue;
 		}

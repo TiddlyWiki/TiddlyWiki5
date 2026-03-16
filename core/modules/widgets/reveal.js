@@ -183,7 +183,7 @@ RevealWidget.prototype.readState = function() {
 	}
 	// If validValues is specified, fall back to default when state doesn't match any valid value
 	if(this.validValues && state !== defaultState) {
-		var validValuesList = this.wiki.filterTiddlers(this.validValues);
+		var validValuesList = this.wiki.filterTiddlers(this.validValues,this);
 		if(validValuesList.indexOf(state) === -1) {
 			state = defaultState;
 		}
