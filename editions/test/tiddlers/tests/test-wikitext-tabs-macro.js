@@ -98,7 +98,7 @@ describe("Tabs-macro HTML tests", function() {
 		// TabTwo content should be visible (validValues on reveal widget)
 		expect(html).toContain('<div class="tc-reveal"><p>Text tab 2</p></div>');
 		// The invalid tab (NonExistentTab) should not appear in the output
-		expect(html).not.toContain('NonExistentTab');
+		expect(html).not.toContain("NonExistentTab");
 	});
 });
 
