@@ -1,0 +1,26 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Node dependencies (re-installed during build)
+node_modules
+
+# CI/CD and tooling
+.github
+.eslintrc*
+.eslintignore
+*.eslint*
+
+# Test output and coverage
+output
+*.test.js
+
+# Documentation source (not needed at runtime)
+tw5.com
+editions/tw5.com
+
+# Misc
+*.md
+CNAME
+LICENSE
