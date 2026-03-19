@@ -6,7 +6,7 @@ on:
   workflow_dispatch:     # allow manual trigger from the Actions tab
     inputs:
       tag:
-        description: "TiddlyWiki version tag to publish (e.g. v5.3.6)"
+        description: "TiddlyWiki version tag to publish (e.g. v5.4.0)"
         required: true
 
 jobs:
