@@ -3,7 +3,7 @@ services:
     build:
       context: .
       args:
-        NODE_LTS_VERSION: "22"
+        NODE_LTS_VERSION: "24"
     # Or use the published image:
     # image: tiddlywiki/tiddlywiki:latest
     init: true          # Docker's built-in init process for proper signal handling
