@@ -15,7 +15,7 @@
 set -euo pipefail
 
 TIDDLYWIKI_VERSION="${1:?Usage: $0 <tiddlywiki-version> [node-lts-version]}"
-NODE_LTS_VERSION="${2:-22}"
+NODE_LTS_VERSION="${2:-24}"
 REPO="tiddlywiki/tiddlywiki"
 
 echo "Publishing ${REPO}:${TIDDLYWIKI_VERSION} (Node ${NODE_LTS_VERSION}-alpine) ..."
