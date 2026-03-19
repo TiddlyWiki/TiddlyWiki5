@@ -71,6 +71,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            NODE_LTS_VERSION=22
+            NODE_LTS_VERSION=24
           cache-from: type=gha
           cache-to: type=gha,mode=max
