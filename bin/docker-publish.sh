@@ -6,7 +6,7 @@
 #
 # Example:
 #   ./bin/docker-publish.sh 5.3.6
-#   ./bin/docker-publish.sh 5.3.6 22
+#   ./bin/docker-publish.sh 5.4.0 24
 #
 # Requires:
 #   - docker buildx with multi-platform support (linux/amd64, linux/arm64)
