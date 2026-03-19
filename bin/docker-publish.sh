@@ -5,7 +5,7 @@
 #   ./bin/docker-publish.sh <tiddlywiki-version> [node-lts-version]
 #
 # Example:
-#   ./bin/docker-publish.sh 5.3.6
+#   ./bin/docker-publish.sh 5.4.0
 #   ./bin/docker-publish.sh 5.4.0 24
 #
 # Requires:
