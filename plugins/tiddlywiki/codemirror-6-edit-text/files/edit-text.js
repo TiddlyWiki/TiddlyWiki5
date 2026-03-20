@@ -14,10 +14,12 @@ Falls back to FramedEngine/SimpleEngine if CodeMirror is not available
 
 if(!$tw.browser) return;
 
-// Check if another CodeMirror engine is already registered
+// Check if another CodeMirror engine is already registered (e.g., CM5)
+// Note: we intentionally do NOT check for "edit-codemirror-6" here, since that's
+// our own editor plugin's widget and we need to coexist with it
 var hasExistingCM = false;
 $tw.modules.forEachModuleOfType("widget", function(title, module) {
-	if(module["edit-codemirror"] || module["edit-codemirror-6"]) {
+	if(module["edit-codemirror"]) {
 		hasExistingCM = true;
 	}
 });
