@@ -17,5 +17,5 @@ $__StoryList.tid
 test-screenshots/
 test-output.txt
 .playwright-mcp
-# TW MPC
-.tw-mcp-*
+# TiddlyWiki MPC
+.tw-mcp
