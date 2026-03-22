@@ -150,7 +150,8 @@ SlashMenuUI.prototype.renderMenu = function(state) {
 	if(elements.length === 0) {
 		const placeholder = document.createElement("div");
 		placeholder.className = "tw-slash-menu-placeholder";
-		placeholder.textContent = "No matching items";
+		placeholder.textContent = $tw.wiki.getTiddlerText(
+			"$:/plugins/tiddlywiki/prosemirror/language/SlashMenu/NoMatches", "No matching items");
 		menuContent.appendChild(placeholder);
 	} else {
 		for(let i = 0; i < elements.length; i++) {

@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/prosemirror/language/Settings/Autocomplete/LinkTriggersHint
+
+One trigger per line. Type these characters to open link autocompletion. Default: [[ and 【【

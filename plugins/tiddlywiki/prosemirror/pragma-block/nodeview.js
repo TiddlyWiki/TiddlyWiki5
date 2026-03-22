@@ -4,166 +4,144 @@ type: application/javascript
 module-type: library
 
 NodeView for pragma_block and opaque_block atoms in ProseMirror.
-Pragma blocks display their first line and can be expanded to edit.
-Opaque blocks do the same for unsupported wikitext constructs.
+Now uses the shared BaseSourceEditableNodeView for a consistent edit UI
+with widget blocks (header toolbar, edit/save/cancel/delete buttons).
 
 \*/
 
 "use strict";
 
+var BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/base-source-editable-nodeview.js").BaseSourceEditableNodeView;
+
 /**
- * Shared NodeView for both pragma_block and opaque_block.
- * @param {Node} node - ProseMirror node
- * @param {EditorView} view - ProseMirror EditorView
- * @param {Function} getPos - returns current position
- * @param {string} blockType - "pragma" or "opaque"
+ * SourceBlockNodeView — unified NodeView for pragma_block and opaque_block.
+ * Extends BaseSourceEditableNodeView to get the same toolbar UI as widget blocks.
  */
-function SourceBlockNodeView(node, view, getPos, blockType) {
-	this.node = node;
-	this.view = view;
-	this.getPos = getPos;
-	this.blockType = blockType;
-	this.editing = false;
+class SourceBlockNodeView extends BaseSourceEditableNodeView {
+	constructor(node, view, getPos, blockType, parentWidget) {
+		super(node, view, getPos, parentWidget);
 
-	// Build DOM
-	var prefix = blockType === "pragma" ? "pm-pragma-block" : "pm-opaque-block";
-	this.dom = document.createElement("div");
-	this.dom.className = prefix;
-	this.dom.setAttribute("contenteditable", "false");
+		this.blockType = blockType;
+		this.labelEl = null;
+		this.contentEl = null;
 
-	// Label showing first line
-	this.label = document.createElement("span");
-	this.label.className = prefix + "-label";
-	this.label.textContent = node.attrs.firstLine || (blockType === "pragma" ? "(pragma)" : "(block)");
-	this.dom.appendChild(this.label);
+		this.createDOM();
+	}
 
-	// Click to edit
-	var self = this;
-	this.dom.addEventListener("click", function(e) {
-		if(!self.editing) {
-			e.preventDefault();
-			e.stopPropagation();
-			self.startEdit();
+	createDOM() {
+		var prefix = this.blockType === "pragma" ? "pm-pragma-block" : "pm-opaque-block";
+		var labelText = this.blockType === "pragma" ? "Pragma" : "Block";
+
+		var container = document.createElement("div");
+		container.className = prefix;
+		container.setAttribute("contenteditable", "false");
+
+		// Header with title and buttons (Edit, Delete, Cancel)
+		var header = this.createHeader(labelText + ": " + (this.node.attrs.firstLine || ""));
+		header.contentEditable = "false";
+		container.appendChild(header);
+
+		// Content area — shows the first line summary in view mode, textarea in edit mode
+		var content = document.createElement("div");
+		content.className = prefix + "-content";
+		container.appendChild(content);
+
+		this.contentEl = content;
+		this.contentContainer = content;
+		this.dom = container;
+
+		this.renderViewMode();
+	}
+
+	renderViewMode() {
+		if(!this.contentEl) return;
+		while(this.contentEl.firstChild) this.contentEl.removeChild(this.contentEl.firstChild);
+
+		var prefix = this.blockType === "pragma" ? "pm-pragma-block" : "pm-opaque-block";
+		this.dom.classList.remove(prefix + "-editing");
+
+		var label = document.createElement("span");
+		label.className = prefix + "-label";
+		label.textContent = this.node.attrs.firstLine || (this.blockType === "pragma" ? "(pragma)" : "(block)");
+		this.contentEl.appendChild(label);
+		this.labelEl = label;
+	}
+
+	renderEditMode() {
+		if(!this.contentEl) return;
+		while(this.contentEl.firstChild) this.contentEl.removeChild(this.contentEl.firstChild);
+
+		var prefix = this.blockType === "pragma" ? "pm-pragma-block" : "pm-opaque-block";
+		this.dom.classList.add(prefix + "-editing");
+
+		var textarea = this.createEditTextarea(this.node.attrs.rawText || "", 2);
+		textarea.rows = Math.max(2, (this.node.attrs.rawText || "").split("\n").length);
+		this.contentEl.appendChild(textarea);
+
+		var ta = textarea;
+		setTimeout(function() { ta.focus(); }, 0);
+	}
+
+	saveEdit(newText) {
+		var newRawText = (newText != null) ? newText : (this.node.attrs.rawText || "");
+		var newFirstLine = newRawText.split("\n")[0] || newRawText;
+
+		// Exit edit mode before dispatching to avoid stale UI
+		this.isEditMode = false;
+
+		// Update the node attrs
+		var pos = this.getPos();
+		if(typeof pos !== "number") return;
+		var tr = this.view.state.tr.setNodeMarkup(pos, null, {
+			rawText: newRawText,
+			firstLine: newFirstLine.trim()
+		});
+		this.view.dispatch(tr);
+	}
+
+	updateTitle() {
+		if(this._titleEl) {
+			var labelText = this.blockType === "pragma" ? "Pragma" : "Block";
+			this._titleEl.textContent = labelText + ": " + (this.node.attrs.firstLine || "");
 		}
-	});
+	}
+
+	update(node) {
+		if(node.type.name !== this.node.type.name) return false;
+		this.node = node;
+		this.updateTitle();
+		if(!this.isEditMode && this.labelEl) {
+			this.labelEl.textContent = node.attrs.firstLine || (this.blockType === "pragma" ? "(pragma)" : "(block)");
+		}
+		return true;
+	}
+
+	// Class name overrides for pragma/opaque styling
+	// eslint-disable-next-line class-methods-use-this
+	getHeaderClass() { return "pm-source-block-header"; }
+
+	// eslint-disable-next-line class-methods-use-this
+	getTitleClass() { return "pm-source-block-title"; }
+
+	// eslint-disable-next-line class-methods-use-this
+	getButtonsClass() { return "pm-source-block-buttons"; }
+
+	// eslint-disable-next-line class-methods-use-this
+	getDeleteButtonClass() { return "pm-source-block-btn pm-source-block-delete"; }
+
+	// eslint-disable-next-line class-methods-use-this
+	getEditButtonClass() { return "pm-source-block-btn pm-source-block-edit"; }
+
+	// eslint-disable-next-line class-methods-use-this
+	getSaveButtonClass() { return "pm-source-block-btn pm-source-block-save"; }
+
+	// eslint-disable-next-line class-methods-use-this
+	getCancelButtonClass() { return "pm-source-block-btn pm-source-block-cancel"; }
+
+	getEditorClass() {
+		return this.blockType === "pragma" ? "pm-pragma-block-editor" : "pm-opaque-block-editor";
+	}
 }
-
-SourceBlockNodeView.prototype.startEdit = function() {
-	if(this.editing) return;
-	this.editing = true;
-	var prefix = this.blockType === "pragma" ? "pm-pragma-block" : "pm-opaque-block";
-	this.dom.classList.add(prefix + "-editing");
-
-	// Hide label
-	this.label.style.display = "none";
-
-	// Create textarea
-	this.textarea = document.createElement("textarea");
-	this.textarea.className = prefix + "-editor";
-	this.textarea.value = this.node.attrs.rawText || "";
-	this.textarea.rows = Math.max(2, (this.node.attrs.rawText || "").split("\n").length);
-	this.dom.appendChild(this.textarea);
-
-	// Create button row
-	this.buttonRow = document.createElement("div");
-	this.buttonRow.style.cssText = "display:flex;gap:6px;margin-top:4px;justify-content:flex-end;";
-
-	var cancelBtn = document.createElement("button");
-	cancelBtn.type = "button";
-	cancelBtn.textContent = "Cancel";
-	cancelBtn.style.cssText = "padding:2px 10px;font-size:12px;cursor:pointer;";
-	var self = this;
-	cancelBtn.addEventListener("click", function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		self.cancelEdit();
-	});
-
-	var saveBtn = document.createElement("button");
-	saveBtn.type = "button";
-	saveBtn.textContent = "Save";
-	saveBtn.style.cssText = "padding:2px 10px;font-size:12px;cursor:pointer;background:#2589D8;color:white;border:1px solid #1a6fa8;border-radius:3px;";
-	saveBtn.addEventListener("click", function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		self.saveEdit();
-	});
-
-	this.buttonRow.appendChild(cancelBtn);
-	this.buttonRow.appendChild(saveBtn);
-	this.dom.appendChild(this.buttonRow);
-
-	// Focus textarea
-	var textarea = this.textarea;
-	setTimeout(function() { textarea.focus(); }, 0);
-
-	// Stop keyboard events from reaching ProseMirror
-	this.textarea.addEventListener("keydown", function(e) {
-		e.stopPropagation();
-		// Escape = cancel, Ctrl/Cmd+Enter = save
-		if(e.key === "Escape") {
-			self.cancelEdit();
-		} else if(e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
-			self.saveEdit();
-		}
-	});
-};
-
-SourceBlockNodeView.prototype.cancelEdit = function() {
-	this.editing = false;
-	var prefix = this.blockType === "pragma" ? "pm-pragma-block" : "pm-opaque-block";
-	this.dom.classList.remove(prefix + "-editing");
-	if(this.textarea && this.textarea.parentNode) {
-		this.textarea.parentNode.removeChild(this.textarea);
-	}
-	if(this.buttonRow && this.buttonRow.parentNode) {
-		this.buttonRow.parentNode.removeChild(this.buttonRow);
-	}
-	this.textarea = null;
-	this.buttonRow = null;
-	this.label.style.display = "";
-	this.view.focus();
-};
-
-SourceBlockNodeView.prototype.saveEdit = function() {
-	var newRawText = this.textarea ? this.textarea.value : this.node.attrs.rawText;
-	var newFirstLine = newRawText.split("\n")[0] || newRawText;
-	this.cancelEdit();
-
-	// Update the node attrs
-	var pos = this.getPos();
-	if(typeof pos !== "number") return;
-	var tr = this.view.state.tr.setNodeMarkup(pos, null, {
-		rawText: newRawText,
-		firstLine: newFirstLine.trim()
-	});
-	this.view.dispatch(tr);
-};
-
-SourceBlockNodeView.prototype.update = function(node) {
-	if(node.type.name !== this.node.type.name) return false;
-	this.node = node;
-	if(!this.editing) {
-		this.label.textContent = node.attrs.firstLine || (this.blockType === "pragma" ? "(pragma)" : "(block)");
-	}
-	return true;
-};
-
-SourceBlockNodeView.prototype.stopEvent = function(event) {
-	// When editing, stop all events from reaching ProseMirror
-	if(this.editing) return true;
-	return false;
-};
-
-SourceBlockNodeView.prototype.ignoreMutation = function() {
-	return true;
-};
-
-SourceBlockNodeView.prototype.destroy = function() {
-	// Cleanup
-	this.textarea = null;
-	this.buttonRow = null;
-};
 
 /**
  * Create a ProseMirror plugin that registers NodeViews for pragma_block and opaque_block.
@@ -174,10 +152,10 @@ function createPragmaBlockNodeViewPlugin(hostWidget) {
 		props: {
 			nodeViews: {
 				pragma_block: function(node, view, getPos) {
-					return new SourceBlockNodeView(node, view, getPos, "pragma");
+					return new SourceBlockNodeView(node, view, getPos, "pragma", hostWidget);
 				},
 				opaque_block: function(node, view, getPos) {
-					return new SourceBlockNodeView(node, view, getPos, "opaque");
+					return new SourceBlockNodeView(node, view, getPos, "opaque", hostWidget);
 				}
 			}
 		}

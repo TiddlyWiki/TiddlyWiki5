@@ -395,5 +395,23 @@ if(!$tw.browser) {
 			expect(result).toContain("angle");
 			expect(result).toContain("quotes");
 		});
+
+		// --- Definition lists ---
+
+		it("should round-trip definition list", function() {
+			var input = "; Term\n: Definition";
+			var result = roundTrip(input);
+			expect(result).toContain("Term");
+			expect(result).toContain("Definition");
+		});
+
+		it("should round-trip multiple definition pairs", function() {
+			var input = "; Apple\n: A fruit\n; Banana\n: Another fruit";
+			var result = roundTrip(input);
+			expect(result).toContain("Apple");
+			expect(result).toContain("A fruit");
+			expect(result).toContain("Banana");
+			expect(result).toContain("Another fruit");
+		});
 	});
 }

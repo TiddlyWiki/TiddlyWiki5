@@ -529,6 +529,34 @@ function table_cell_or_header(builder, node) {
 	};
 }
 
+// --- Definition list (;/: syntax) ---
+
+function definition_list(builder, node) {
+	var items = convertNodes(builder, node.content);
+	// Wrap all dt/dd items in a single dl
+	return {
+		type: "element",
+		tag: "dl",
+		children: items
+	};
+}
+
+function definition_term(builder, node) {
+	return {
+		type: "element",
+		tag: "dt",
+		children: convertNodes(builder, node.content)
+	};
+}
+
+function definition_description(builder, node) {
+	return {
+		type: "element",
+		tag: "dd",
+		children: convertNodes(builder, node.content)
+	};
+}
+
 /**
  * Key is `node.type`, value is node converter function.
  */
@@ -548,7 +576,10 @@ const builders = {
 	table: table_node,
 	table_row: table_row,
 	table_header: table_cell_or_header,
-	table_cell: table_cell_or_header
+	table_cell: table_cell_or_header,
+	definition_list: definition_list,
+	definition_term: definition_term,
+	definition_description: definition_description
 };
 
 function wikiAstFromProseMirrorAst(input) {

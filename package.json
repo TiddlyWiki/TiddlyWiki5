@@ -37,7 +37,7 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "dev": "nodemon --watch plugins --watch core --ext js,css,tid,json --exec \"node ./tiddlywiki.js ./editions/tw5.com-server --listen\"",
+    "dev": "nodemon --watch plugins --watch core --ext js,css,tid,json --exec \"node ./tiddlywiki.js ./editions/tw5.com-server --listen port=9300\"",
     "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
     "test:e2e": "playwright test",
     "test:prosemirror": "playwright test plugins/tiddlywiki/prosemirror/tests",

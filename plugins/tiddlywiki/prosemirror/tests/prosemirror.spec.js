@@ -754,7 +754,7 @@ test.describe("ProseMirror Editor - Images", () => {
 			configTiddlers: tiddlers
 		});
 
-		const img = editor.locator(`img[data-tw-source="Motovun Jack.jpg"]`).first();
+		const img = editor.locator("img[data-tw-source=\"Motovun Jack.jpg\"]").first();
 		await expect(img).toBeVisible({ timeout: 5000 });
 		
 		await img.click();
@@ -790,8 +790,8 @@ test.describe("ProseMirror Editor - Images", () => {
 		// Check that width and height attributes are applied to the DOM
 		const img = editor.locator('img[data-tw-source="Test.svg"]').first();
 		await expect(img).toBeVisible({ timeout: 5000 });
-		await expect(img).toHaveAttribute('width', '100');
-		await expect(img).toHaveAttribute('height', '80');
+		await expect(img).toHaveAttribute("width", "100");
+		await expect(img).toHaveAttribute("height", "80");
 		
 		// Verify round-trip
 		const exampleTitle = "$:/plugins/tiddlywiki/prosemirror/example";
@@ -953,5 +953,149 @@ test.describe("ProseMirror Editor - Integration", () => {
 		// Import dialog should NOT appear
 		await expect(importFrame).toHaveCount(0);
 		await expect(editor).toContainText("Pasted text");
+	});
+});
+
+test.describe("ProseMirror Editor - Drag Handle", () => {
+	test("should show drag handle on hover over block node", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "First paragraph\n\nSecond paragraph"
+		});
+
+		// Hover over the first paragraph — a drag handle should appear on the page
+		const firstP = editor.locator("p").first();
+		await firstP.hover();
+
+		// Wait briefly for the drag handle to appear
+		await page.waitForTimeout(200);
+
+		const dragHandle = page.locator(".tc-prosemirror-drag-handle");
+		await expect(dragHandle).toBeVisible();
+	});
+
+	test("drag handle should hide when mouse leaves editor", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "Paragraph here"
+		});
+
+		// Hover over paragraph
+		const firstP = editor.locator("p").first();
+		await firstP.hover();
+		await page.waitForTimeout(200);
+
+		const dragHandle = page.locator(".tc-prosemirror-drag-handle");
+		await expect(dragHandle).toBeVisible();
+
+		// Move mouse away from the editor area
+		await page.mouse.move(0, 0);
+		await page.waitForTimeout(300);
+
+		await expect(dragHandle).not.toBeVisible();
+	});
+});
+
+test.describe("ProseMirror Editor - Find & Replace", () => {
+	test("should open find panel with Ctrl+F", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "hello world hello"
+		});
+
+		await editor.press("Control+f");
+		await page.waitForTimeout(200);
+
+		const findPanel = page.locator(".tc-prosemirror-find-replace-panel");
+		await expect(findPanel).toBeVisible();
+	});
+
+	test("should highlight search matches", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "hello world hello planet hello"
+		});
+
+		await editor.press("Control+f");
+		await page.waitForTimeout(200);
+
+		const searchInput = page.locator(".tc-prosemirror-find-input");
+		await searchInput.fill("hello");
+		await page.waitForTimeout(200);
+
+		const matches = editor.locator(".tc-prosemirror-find-match, .tc-prosemirror-find-current");
+		await expect(matches).toHaveCount(3);
+	});
+
+	test("should replace single match", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "foo bar foo baz"
+		});
+
+		await editor.press("Control+f");
+		await page.waitForTimeout(200);
+
+		const searchInput = page.locator(".tc-prosemirror-find-input");
+		await searchInput.fill("foo");
+		await page.waitForTimeout(200);
+
+		const replaceInput = page.locator(".tc-prosemirror-replace-input");
+		await replaceInput.fill("qux");
+
+		// Click replace button
+		const replaceBtn = page.locator(".tc-prosemirror-find-replace-row").nth(1).locator("button").first();
+		await replaceBtn.click();
+		await page.waitForTimeout(200);
+
+		await expect(editor).toContainText("qux");
+	});
+});
+
+test.describe("ProseMirror Editor - Definition List", () => {
+	test("should render definition list syntax", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "; Term\n: Definition"
+		});
+
+		// Should contain a <dl> with <dt> and <dd>
+		const dl = editor.locator("dl");
+		await expect(dl).toHaveCount(1);
+
+		const dt = editor.locator("dt");
+		await expect(dt).toContainText("Term");
+
+		const dd = editor.locator("dd");
+		await expect(dd).toContainText("Definition");
+	});
+});
+
+test.describe("ProseMirror Editor - Autocomplete", () => {
+	test("should show autocomplete dropdown on [[ trigger", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: ""
+		});
+
+		await clearEditor(editor);
+		await editor.click();
+		await editor.pressSequentially("[[");
+		await page.waitForTimeout(300);
+
+		const dropdown = page.locator(".tc-prosemirror-autocomplete");
+		await expect(dropdown).toBeVisible();
+	});
+
+	test("should close autocomplete on Escape", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: ""
+		});
+
+		await clearEditor(editor);
+		await editor.click();
+		await editor.pressSequentially("[[");
+		await page.waitForTimeout(300);
+
+		const dropdown = page.locator(".tc-prosemirror-autocomplete");
+		await expect(dropdown).toBeVisible();
+
+		await editor.press("Escape");
+		await page.waitForTimeout(200);
+
+		await expect(dropdown).not.toBeVisible();
 	});
 });

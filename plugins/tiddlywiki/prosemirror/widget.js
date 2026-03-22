@@ -30,6 +30,12 @@ const createImageBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/image-
 const createImageNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/image/plugin.js").createImageNodeViewPlugin;
 const computeImageSrc = require("$:/plugins/tiddlywiki/prosemirror/image/utils.js").computeImageSrc;
 const createPragmaBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/pragma-block/nodeview.js").createPragmaBlockNodeViewPlugin;
+const createDragHandlePlugin = require("$:/plugins/tiddlywiki/prosemirror/drag-handle.js").createDragHandlePlugin;
+const BubbleMenu = require("$:/plugins/tiddlywiki/prosemirror/bubble-menu.js").BubbleMenu;
+const getMarkdownInputRules = require("$:/plugins/tiddlywiki/prosemirror/markdown-shortcuts.js").getMarkdownInputRules;
+const inputRules = require("prosemirror-inputrules").inputRules;
+const createAutocompletePlugin = require("$:/plugins/tiddlywiki/prosemirror/autocomplete/autocomplete-plugin.js").createAutocompletePlugin;
+const createFindReplacePlugin = require("$:/plugins/tiddlywiki/prosemirror/find-replace/find-replace-plugin.js").createFindReplacePlugin;
 
 const NodeSelection = require("prosemirror-state").NodeSelection;
 
@@ -124,6 +130,10 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 
 	const allMenuElements = getAllMenuElements(this.wiki, schema);
 
+	// Markdown-style input rules (optional, controlled by config tiddler)
+	const mdRules = getMarkdownInputRules(this.wiki, schema);
+	const mdPlugin = mdRules.length > 0 ? [inputRules({ rules: mdRules })] : [];
+
 	this.view = new EditorView(mount, {
 		state: EditorState.create({
 			// doc: schema.node("doc", null, [schema.node("paragraph")]),
@@ -141,8 +151,12 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 				}),
 				createWidgetBlockPlugin(),
 				createWidgetBlockNodeViewPlugin(this),
-				createPragmaBlockNodeViewPlugin(this)
+				createPragmaBlockNodeViewPlugin(this),
+				createDragHandlePlugin(),
+				createAutocompletePlugin(this.wiki),
+				createFindReplacePlugin(this.wiki)
 			]
+			.concat(mdPlugin)
 			.concat(listPlugins)
 			.concat(exampleSetup({ schema: schema })),
 		}),
@@ -155,6 +169,10 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 			// Notify slash menu UI of state change (replaces always-on rAF polling)
 			if(this.slashMenuUI) {
 				this.slashMenuUI.checkState();
+			}
+			// Update bubble menu position/visibility
+			if(this.bubbleMenu) {
+				this.bubbleMenu.update(this.view);
 			}
 			// Only save when the document actually changed, not on pure selection moves
 			if(transaction.docChanged) {
@@ -214,6 +232,9 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	this.slashMenuUI = new SlashMenuUI(this.view, {
 		clickable: true
 	});
+
+	// Initialize Bubble Menu (floating format toolbar on text selection)
+	this.bubbleMenu = new BubbleMenu(this.view, schema);
 
 	// Listen for selection from the embedded image picker
 	this.addEventListener("tm-prosemirror-image-picked", "handleProseMirrorImagePicked");
@@ -496,6 +517,11 @@ ProsemirrorWidget.prototype.onDestroy = function() {
 	if(this.slashMenuUI) {
 		this.slashMenuUI.destroy();
 		this.slashMenuUI = null;
+	}
+	// Destroy BubbleMenu
+	if(this.bubbleMenu) {
+		this.bubbleMenu.destroy();
+		this.bubbleMenu = null;
 	}
 	// Destroy ProseMirror EditorView
 	if(this.view) {

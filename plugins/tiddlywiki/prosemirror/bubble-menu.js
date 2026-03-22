@@ -95,20 +95,17 @@ BubbleMenu.prototype._buildButtons = function() {
 };
 
 BubbleMenu.prototype._renderSvgIcon = function(tiddlerTitle, size) {
+	size = size || "16px";
 	try {
-		const tiddler = $tw.wiki.getTiddler(tiddlerTitle);
-		if(!tiddler) return null;
-		const text = tiddler.fields.text;
-		const svgMatch = text.match(/<svg[\s\S]*<\/svg>/);
-		if(!svgMatch) return null;
-		const svgString = svgMatch[0].replace(/<<size>>/g, size || "16px");
-		const parser = new DOMParser();
-		const doc = parser.parseFromString(svgString, "image/svg+xml");
-		const svgEl = doc.querySelector("svg");
+		var htmlStr = $tw.wiki.renderTiddler("text/html", tiddlerTitle, {
+			variables: { size: size }
+		});
+		if(!htmlStr) return null;
+		var container = document.createElement("div");
+		container.innerHTML = htmlStr;
+		var svgEl = container.querySelector("svg");
 		if(!svgEl) return null;
-		svgEl.setAttribute("width", size || "16px");
-		svgEl.setAttribute("height", size || "16px");
-		return document.importNode(svgEl, true);
+		return svgEl;
 	} catch(e) {
 		return null;
 	}
@@ -120,7 +117,7 @@ BubbleMenu.prototype._toggleLink = function() {
 	if(!schema.marks.link) return;
 
 	// Check if link is already active
-	const { from, to } = state.selection;
+	const{ from, to } = state.selection;
 	const $from = state.selection.$from;
 	const linkMark = schema.marks.link.isInSet($from.marks());
 
@@ -207,7 +204,7 @@ BubbleMenu.prototype._updateActiveStates = function(state) {
 };
 
 BubbleMenu.prototype._isMarkActive = function(state, markType) {
-	const { from, $from, to, empty } = state.selection;
+	const{ from, $from, to, empty } = state.selection;
 	if(empty) {
 		return !!markType.isInSet(state.storedMarks || $from.marks());
 	}

@@ -57,6 +57,7 @@ test.describe("Widget Block Utils", () => {
 		];
 		
 		for(const testCase of testCases) {
+			// eslint-disable-next-line no-await-in-loop
 			const result = await page.evaluate(input => {
 				const parseWidget = text => {
 					const widgetPattern = /^<<\s*([a-zA-Z_][a-zA-Z0-9_-]*)\s*(.*)>>$/;

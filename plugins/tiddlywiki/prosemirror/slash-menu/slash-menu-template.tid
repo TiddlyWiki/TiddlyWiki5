@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/prosemirror/slash-menu/slash-menu-template
+type: text/vnd.tiddlywiki
+
+\define slash-menu-container()
+<div class="tw-slash-menu-root" role="listbox" aria-label={{$:/plugins/tiddlywiki/prosemirror/language/SlashMenu/AriaLabel}}>
+<div class="tw-slash-menu-filter-wrapper">
+<input class="tw-slash-menu-filter" type="text" placeholder={{$:/plugins/tiddlywiki/prosemirror/language/SlashMenu/FilterPlaceholder}} aria-label={{$:/plugins/tiddlywiki/prosemirror/language/SlashMenu/FilterAriaLabel}}/>
+</div>
+<div class="tw-slash-menu-container">
+</div>
+</div>
+\end
