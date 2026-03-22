@@ -13,6 +13,12 @@ tags: $:/tags/Stylesheet
 
 /* --- Content spacing normalization (match TW rendered output) --- */
 
+/* Add left padding so the drag handle has room to appear */
+.ProseMirror {
+	padding-left: 28px;
+	position: relative;
+}
+
 .ProseMirror p {
 	margin: 0.5em 0;
 }
@@ -121,6 +127,11 @@ tags: $:/tags/Stylesheet
 
 .pm-widget-block-nodeview-header {
 	background: <<colour primary>>;
+	color: <<colour background>>;
+}
+
+.pm-widget-block-nodeview-btn {
+	color: <<colour background>>;
 }
 
 .pm-widget-block-nodeview-error {
@@ -147,6 +158,11 @@ tags: $:/tags/Stylesheet
 
 .pm-image-nodeview-header {
 	background: <<colour primary>>;
+	color: <<colour background>>;
+}
+
+.pm-image-nodeview-btn {
+	color: <<colour background>>;
 }
 
 .pm-image-nodeview-editor {
@@ -324,8 +340,8 @@ tags: $:/tags/Stylesheet
 	font-size: 14px;
 	border-radius: 3px;
 	user-select: none;
-	opacity: 0.5;
-	transition: opacity 0.15s;
+	opacity: 0.7;
+	transition: opacity 0.15s, background 0.15s;
 }
 
 .tc-prosemirror-drag-handle:hover {
@@ -336,6 +352,89 @@ tags: $:/tags/Stylesheet
 
 .tc-prosemirror-drag-handle:active {
 	cursor: grabbing;
+}
+
+/* --- Block Action Menu (shown on drag handle click) --- */
+
+.tc-prosemirror-block-menu {
+	background: <<colour tiddler-background>>;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: 6px;
+	box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+	min-width: 180px;
+	max-width: 260px;
+	max-height: 320px;
+	overflow-y: auto;
+	padding: 4px 0;
+	font-size: 0.9em;
+}
+
+.tc-prosemirror-block-menu-search {
+	display: block;
+	width: calc(100% - 16px);
+	margin: 4px 8px 6px;
+	padding: 5px 8px;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: 4px;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+	font-size: 0.9em;
+	outline: none;
+}
+
+.tc-prosemirror-block-menu-search:focus {
+	border-color: <<colour primary>>;
+}
+
+.tc-prosemirror-block-menu-group {
+	padding: 4px 12px 2px;
+	font-size: 0.8em;
+	font-weight: bold;
+	color: <<colour muted-foreground>>;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	user-select: none;
+}
+
+.tc-prosemirror-block-menu-items {
+	max-height: 240px;
+	overflow-y: auto;
+}
+
+.tc-prosemirror-block-menu-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 5px 12px;
+	cursor: pointer;
+	color: <<colour foreground>>;
+	border-radius: 0;
+	transition: background 0.1s;
+}
+
+.tc-prosemirror-block-menu-item:hover,
+.tc-prosemirror-block-menu-item-focused {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-prosemirror-block-menu-item-icon {
+	width: 20px;
+	text-align: center;
+	flex-shrink: 0;
+	font-size: 0.95em;
+	color: <<colour muted-foreground>>;
+}
+
+.tc-prosemirror-block-menu-item-label {
+	flex: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Utility class for hiding filtered menu items (used by JS instead of inline styles) */
+.tc-prosemirror-hidden {
+	display: none !important;
 }
 
 /* --- Table styles --- */
@@ -373,4 +472,171 @@ tags: $:/tags/Stylesheet
 	z-index: 20;
 	background-color: <<colour primary>>;
 	pointer-events: none;
+}
+
+/* === RTL (Right-to-Left) Support === */
+
+/* Widget block empty placeholder — theme overrides */
+.pm-widget-block-empty-placeholder {
+	color: <<colour muted-foreground>>;
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+/* TiddlyWiki sets <html dir="rtl"> for RTL languages (ar-PS, fa-IR, he-IL) */
+
+html[dir="rtl"] .ProseMirror {
+	direction: rtl;
+	text-align: right;
+	padding-left: 0;
+	padding-right: 28px;
+}
+
+html[dir="rtl"] .ProseMirror-menubar {
+	direction: rtl;
+}
+
+html[dir="rtl"] .tc-prosemirror-drag-handle {
+	left: auto;
+	right: -24px;
+}
+
+html[dir="rtl"] .tc-prosemirror-source-panel {
+	border-left: none;
+	border-right: 1px solid <<colour tiddler-editor-border>>;
+}
+
+html[dir="rtl"] .pm-widget-block-nodeview-header,
+html[dir="rtl"] .pm-image-nodeview-header,
+html[dir="rtl"] .pm-source-block-header {
+	flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .tc-prosemirror-block-menu {
+	direction: rtl;
+	text-align: right;
+}
+
+html[dir="rtl"] .tc-prosemirror-bubble-menu {
+	direction: ltr;
+}
+
+html[dir="rtl"] .tw-slash-menu-container {
+	direction: rtl;
+	text-align: right;
+}
+
+/* === Autocomplete Dropdown === */
+
+.tc-prosemirror-autocomplete {
+	background: <<colour tiddler-background>>;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: 4px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+	max-height: 240px;
+	overflow-y: auto;
+	min-width: 200px;
+	max-width: 400px;
+	padding: 4px 0;
+}
+
+.tc-prosemirror-autocomplete-item {
+	padding: 6px 12px;
+	cursor: pointer;
+	color: <<colour foreground>>;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 0.9em;
+}
+
+.tc-prosemirror-autocomplete-item:hover {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-prosemirror-autocomplete-item-selected {
+	background: <<colour primary>>;
+	color: <<colour tiddler-background>>;
+}
+
+/* === Definition List === */
+
+.ProseMirror .pm-definition-list {
+	margin: 0.5em 0;
+}
+
+.ProseMirror .pm-definition-list dt {
+	font-weight: bold;
+	color: <<colour foreground>>;
+}
+
+.ProseMirror .pm-definition-list dd {
+	margin-left: 1.5em;
+	color: <<colour foreground>>;
+}
+
+/* === Find & Replace === */
+
+.tc-prosemirror-find-replace-panel {
+	background: <<colour tiddler-background>>;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-bottom: none;
+	padding: 6px 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.tc-prosemirror-find-replace-row {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.tc-prosemirror-find-input,
+.tc-prosemirror-replace-input {
+	flex: 1;
+	padding: 4px 8px;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: 3px;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+	font-size: 0.9em;
+	min-width: 120px;
+}
+
+.tc-prosemirror-find-count {
+	font-size: 0.85em;
+	color: <<colour muted-foreground>>;
+	min-width: 40px;
+	text-align: center;
+}
+
+.tc-prosemirror-find-btn {
+	padding: 2px 8px;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: 3px;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+	cursor: pointer;
+	font-size: 0.85em;
+}
+
+.tc-prosemirror-find-btn:hover {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-prosemirror-find-case-btn.active {
+	background: <<colour primary>>;
+	color: <<colour tiddler-background>>;
+}
+
+.tc-prosemirror-find-match {
+	background: <<colour highlight-background>>;
+}
+
+.tc-prosemirror-find-current {
+	background: <<colour selection-background>>;
+	outline: 2px solid <<colour primary>>;
+	border-radius: 2px;
 }

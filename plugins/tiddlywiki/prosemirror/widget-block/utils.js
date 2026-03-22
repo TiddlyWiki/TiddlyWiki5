@@ -76,7 +76,7 @@ function scanForClosingBrackets(str, start) {
 		if(ch === '"') {
 			pos++;
 			while(pos < str.length && str[pos] !== '"') {
-				if(str[pos] === '\\') pos++; // skip escaped char
+				if(str[pos] === "\\") pos++; // skip escaped char
 				pos++;
 			}
 			pos++; // skip closing quote
@@ -86,14 +86,14 @@ function scanForClosingBrackets(str, start) {
 		if(ch === "'") {
 			pos++;
 			while(pos < str.length && str[pos] !== "'") {
-				if(str[pos] === '\\') pos++;
+				if(str[pos] === "\\") pos++;
 				pos++;
 			}
 			pos++;
 			continue;
 		}
 		// Check for >>
-		if(ch === '>' && str[pos + 1] === '>') {
+		if(ch === ">" && str[pos + 1] === ">") {
 			return pos;
 		}
 		pos++;
@@ -164,7 +164,7 @@ function readValue(str, pos) {
 		const start = pos + 1;
 		let end = start;
 		while(end < str.length && str[end] !== '"') {
-			if(str[end] === '\\') end++;
+			if(str[end] === "\\") end++;
 			end++;
 		}
 		return { value: str.substring(start, end), end: end + 1 };
@@ -174,15 +174,15 @@ function readValue(str, pos) {
 		const start = pos + 1;
 		let end = start;
 		while(end < str.length && str[end] !== "'") {
-			if(str[end] === '\\') end++;
+			if(str[end] === "\\") end++;
 			end++;
 		}
 		return { value: str.substring(start, end), end: end + 1 };
 	}
 	// [[double bracket]]
-	if(str[pos] === '[' && str[pos + 1] === '[') {
+	if(str[pos] === "[" && str[pos + 1] === "[") {
 		const start = pos + 2;
-		const end = str.indexOf(']]', start);
+		const end = str.indexOf("]]", start);
 		if(end !== -1) {
 			return { value: str.substring(start, end), end: end + 2 };
 		}

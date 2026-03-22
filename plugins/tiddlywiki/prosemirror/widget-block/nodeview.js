@@ -10,8 +10,7 @@ Node view for rendering widget blocks in ProseMirror
 "use strict";
 
 const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/base-source-editable-nodeview.js").BaseSourceEditableNodeView;
-const utils = require("$:/plugins/tiddlywiki/prosemirror/widget-block/utils.js");
-const parseWidget = utils.parseWidget;
+const parseWidget = require("$:/plugins/tiddlywiki/prosemirror/widget-block/utils.js").parseWidget;
 
 const DEBUG = typeof window !== "undefined" && !!window.__TW_PROSEMIRROR_DEBUG__;
 
@@ -22,7 +21,6 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 		this.widgetContent = null;
 		this.widgetInfo = null;
 		this.settingsBtn = null;
-		this.selectedNode = null;
 		
 		this.createDOM();
 		this.updateContent();
@@ -111,6 +109,11 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 			const parseTree = $tw.wiki.parseText("text/vnd.tiddlywiki", fullText).tree;
 			
 			const Widget = require("$:/core/modules/widgets/widget.js").widget;
+			// Destroy previous TW widget if any
+			if(this.renderedTWWidget) {
+				try { this.renderedTWWidget.destroy(); } catch(e) { /* ignore */ }
+				this.renderedTWWidget = null;
+			}
 			const tempWidget = new Widget({
 				type: "element",
 				tag: "div",
@@ -123,8 +126,30 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 			});
 
 			tempWidget.render(this.widgetContent, null);
+			this.renderedTWWidget = tempWidget;
 			
 			if(DEBUG) console.log("[WidgetBlockNodeView] Rendered successfully");
+
+			// If the widget rendered nothing visible, show a placeholder
+			// so the user can still click to edit it
+			var self = this;
+			requestAnimationFrame(function() {
+				if(!self.widgetContent) return;
+				if(self.isEditMode) return;
+				var hasContent = self.widgetContent.offsetHeight > 4 &&
+					self.widgetContent.textContent.trim().length > 0;
+				if(!hasContent) {
+					// Only add placeholder if one doesn't exist yet
+					if(!self.widgetContent.querySelector(".pm-widget-block-empty-placeholder")) {
+						var placeholder = document.createElement("div");
+						placeholder.className = "pm-widget-block-empty-placeholder";
+						placeholder.textContent = widgetText.length > 60
+							? widgetText.substring(0, 60) + "…"
+							: widgetText;
+						self.widgetContent.appendChild(placeholder);
+					}
+				}
+			});
 		} catch(e) {
 			if(console) console.error("[WidgetBlockNodeView] Render error:", e);
 			const errorDiv = document.createElement("div");
@@ -144,6 +169,33 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 		}, 0);
 	}
 
+	cancelEdit() {
+		if(DEBUG) console.log("[WidgetBlockNodeView] cancelEdit");
+		if(!this.isEditMode) return;
+		this.isEditMode = false;
+		if(this.dom) {
+			this.dom.classList.remove("pm-widget-block-editing");
+		}
+		// Reset settings button icon
+		if(this.settingsBtn) {
+			this.setButtonIcon(this.settingsBtn, "$:/core/images/edit-button", "E");
+			this.settingsBtn.title = this.getLanguageString("Buttons/Edit", "Edit widget");
+		}
+		// Hide delete and cancel buttons
+		if(this.deleteBtn) {
+			this.deleteBtn.style.display = "none";
+		}
+		if(this.cancelBtn) {
+			this.cancelBtn.style.display = "none";
+		}
+		// Clean up textarea blur handler
+		if(this.editTextarea && this.boundBlurHandler) {
+			this.editTextarea.removeEventListener("blur", this.boundBlurHandler);
+		}
+		// Refresh view without saving
+		this.updateContent();
+	}
+
 	toggleEditMode() {
 		if(DEBUG) console.log("[WidgetBlockNodeView] toggleEditMode, current:", this.isEditMode);
 		
@@ -155,17 +207,20 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 		// Update button icon
 		if(this.settingsBtn) {
 			if(this.isEditMode) {
-				this.setButtonIcon(this.settingsBtn, "$:/core/images/done-button", "✔");
-				this.settingsBtn.title = "Save and view";
+				this.setButtonIcon(this.settingsBtn, "$:/core/images/done-button", "\u2713");
+				this.settingsBtn.title = this.getLanguageString("Buttons/SaveChanges", "Save and view");
 			} else {
-				this.setButtonIcon(this.settingsBtn, "$:/core/images/edit-button", "✏️");
-				this.settingsBtn.title = "Edit widget";
+				this.setButtonIcon(this.settingsBtn, "$:/core/images/edit-button", "E");
+				this.settingsBtn.title = this.getLanguageString("Buttons/Edit", "Edit widget");
 			}
 		}
 		
-		// Show/hide delete button
+		// Show/hide delete and cancel buttons
 		if(this.deleteBtn) {
 			this.deleteBtn.style.display = this.isEditMode ? "inline-flex" : "none";
+		}
+		if(this.cancelBtn) {
+			this.cancelBtn.style.display = this.isEditMode ? "inline-flex" : "none";
 		}
 		
 		if(!this.isEditMode && this.editTextarea) {
@@ -202,7 +257,7 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 			this.dom.classList.remove("pm-widget-block-editing");
 		}
 		if(this.settingsBtn) {
-			this.setButtonIcon(this.settingsBtn, "$:/core/images/edit-button", "✏️");
+			this.setButtonIcon(this.settingsBtn, "$:/core/images/edit-button", "E");
 			this.settingsBtn.title = "Edit widget";
 		}
 		this.updateContent();
@@ -225,12 +280,12 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 
 	selectNode() {
 		this.dom.classList.add("selected");
-		this.selectedNode = true;
+		this.selected = true;
 	}
 
 	deselectNode() {
 		this.dom.classList.remove("selected");
-		this.selectedNode = false;
+		this.selected = false;
 	}
 
 	update(node) {
@@ -264,6 +319,12 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 	}
 
 	destroy() {
+		// Destroy TW widget before removing DOM
+		if(this.renderedTWWidget) {
+			try { this.renderedTWWidget.destroy(); } catch(e) { /* ignore */ }
+			this.renderedTWWidget = null;
+		}
+		
 		super.destroy();
 		
 		if(this.widgetContent) {
@@ -278,13 +339,28 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 	}
 
 	// Override class names
+	// eslint-disable-next-line class-methods-use-this
 	getHeaderClass() { return "pm-widget-block-nodeview-header"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getTitleClass() { return "pm-widget-block-nodeview-title"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getButtonsClass() { return "pm-widget-block-nodeview-buttons"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getDeleteButtonClass() { return "pm-widget-block-nodeview-btn pm-widget-block-nodeview-delete"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getEditButtonClass() { return "pm-widget-block-nodeview-btn pm-widget-block-nodeview-edit"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getSaveButtonClass() { return "pm-widget-block-nodeview-btn pm-widget-block-nodeview-save"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getCancelButtonClass() { return "pm-widget-block-nodeview-btn pm-widget-block-nodeview-cancel"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getEditorClass() { return "pm-widget-block-nodeview-editor"; }
 }
 

@@ -3,14 +3,15 @@ title: $:/plugins/tiddlywiki/prosemirror/pragma-block/styles.css
 type: text/css
 tags: $:/tags/Stylesheet
 
-Styles for pragma and opaque blocks in ProseMirror editor
+Styles for pragma and opaque blocks in ProseMirror editor.
+Now uses the same header-toolbar pattern as widget blocks.
 
 \*/
 
 /* Pragma block — \define, \procedure, \function, \widget, \import, \rules */
 .pm-pragma-block {
-	display: flex;
-	align-items: center;
+	position: relative;
+	display: block;
 	padding: 4px 10px;
 	margin: 2px 0;
 	border-radius: 4px;
@@ -33,6 +34,10 @@ Styles for pragma and opaque blocks in ProseMirror editor
 	outline-offset: 1px;
 }
 
+.pm-pragma-block-content {
+	padding: 0;
+}
+
 .pm-pragma-block-label {
 	flex: 1;
 	overflow: hidden;
@@ -47,7 +52,6 @@ Styles for pragma and opaque blocks in ProseMirror editor
 
 /* Pragma block in edit mode */
 .pm-pragma-block-editing {
-	display: block;
 	border-style: solid;
 	border-color: #2589D8;
 }
@@ -67,8 +71,8 @@ Styles for pragma and opaque blocks in ProseMirror editor
 
 /* Opaque block — tables, typed blocks, style blocks and other unsupported constructs */
 .pm-opaque-block {
-	display: flex;
-	align-items: center;
+	position: relative;
+	display: block;
 	padding: 4px 10px;
 	margin: 2px 0;
 	border-radius: 4px;
@@ -91,6 +95,10 @@ Styles for pragma and opaque blocks in ProseMirror editor
 	outline-offset: 1px;
 }
 
+.pm-opaque-block-content {
+	padding: 0;
+}
+
 .pm-opaque-block-label {
 	flex: 1;
 	overflow: hidden;
@@ -104,7 +112,6 @@ Styles for pragma and opaque blocks in ProseMirror editor
 }
 
 .pm-opaque-block-editing {
-	display: block;
 	border-style: solid;
 	border-color: #d49a00;
 }
@@ -120,4 +127,82 @@ Styles for pragma and opaque blocks in ProseMirror editor
 	resize: vertical;
 	box-sizing: border-box;
 	min-height: 60px;
+}
+
+/* --- Shared source block header toolbar (same pattern as widget blocks) --- */
+
+.pm-source-block-header {
+	position: absolute;
+	top: -28px;
+	right: 0;
+	background: linear-gradient(90deg, #666 0%, #555 100%);
+	color: white;
+	padding: 3px 8px;
+	display: flex;
+	gap: 6px;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 11px;
+	font-weight: bold;
+	user-select: none;
+	border-radius: 999px;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 5;
+}
+
+.pm-pragma-block:hover .pm-source-block-header,
+.pm-pragma-block.ProseMirror-selectednode .pm-source-block-header,
+.pm-pragma-block-editing .pm-source-block-header,
+.pm-opaque-block:hover .pm-source-block-header,
+.pm-opaque-block.ProseMirror-selectednode .pm-source-block-header,
+.pm-opaque-block-editing .pm-source-block-header {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.pm-source-block-title {
+	flex: 1;
+	font-family: monospace;
+	word-break: break-all;
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.pm-source-block-buttons {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.pm-source-block-btn {
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	color: white;
+	padding: 3px 5px;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: background 0.2s;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+}
+
+.pm-source-block-btn:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.pm-source-block-btn svg {
+	width: 14px;
+	height: 14px;
+	fill: currentColor;
+}
+
+.pm-source-block-delete:hover {
+	background: rgba(244, 67, 54, 0.3);
+	border-color: rgba(244, 67, 54, 0.5);
 }

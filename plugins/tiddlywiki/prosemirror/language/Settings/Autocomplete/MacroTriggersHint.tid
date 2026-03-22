@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/prosemirror/language/Settings/Autocomplete/MacroTriggersHint
+
+One trigger per line. Type these characters to open macro autocompletion. Default: << and 《《

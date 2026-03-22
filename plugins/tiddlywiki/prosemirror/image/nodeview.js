@@ -145,9 +145,9 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 			const attrsStr = attrs.trim();
 			const tooltip = this.node.attrs.twTooltip || "";
 			if(tooltip) {
-				initialValue = `[img${attrsStr ? ' ' + attrsStr : ''}[${tooltip}|${twSource}]]`;
+				initialValue = `[img${attrsStr ? " " + attrsStr : ""}[${tooltip}|${twSource}]]`;
 			} else {
-				initialValue = `[img${attrsStr ? ' ' + attrsStr + ' ' : ''}[${twSource}]]`;
+				initialValue = `[img${attrsStr ? " " + attrsStr + " " : ""}[${twSource}]]`;
 			}
 		}
 		
@@ -168,8 +168,11 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		// Clear content
 		while(this.contentContainer.firstChild) { this.contentContainer.removeChild(this.contentContainer.firstChild); }
 		
-		// Add image back
+		// Add image and resize handle back
 		this.contentContainer.appendChild(this.img);
+		if(this.resizeHandle) {
+			this.contentContainer.appendChild(this.resizeHandle);
+		}
 		
 		// Remove image picker
 		if(this.imagePickerWrap && this.imagePickerWrap.parentNode) {
@@ -320,9 +323,9 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 			const attrsStr = attrs.trim();
 			const tooltip = this.node.attrs.twTooltip || "";
 			if(tooltip) {
-				newValue = `[img${attrsStr ? ' ' + attrsStr : ''}[${tooltip}|${imageName}]]`;
+				newValue = `[img${attrsStr ? " " + attrsStr : ""}[${tooltip}|${imageName}]]`;
 			} else {
-				newValue = `[img${attrsStr ? ' ' + attrsStr + ' ' : ''}[${imageName}]]`;
+				newValue = `[img${attrsStr ? " " + attrsStr + " " : ""}[${imageName}]]`;
 			}
 		}
 		
@@ -334,34 +337,42 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 	}
 
 	// Override class names
+	// eslint-disable-next-line class-methods-use-this
 	getHeaderClass() {
 		return "pm-image-nodeview-header";
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	getTitleClass() {
 		return "pm-image-nodeview-title";
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	getButtonsClass() {
 		return "pm-image-nodeview-buttons";
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	getDeleteButtonClass() {
 		return "pm-image-nodeview-btn pm-image-nodeview-delete";
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	getEditButtonClass() {
 		return "pm-image-nodeview-btn pm-image-nodeview-edit";
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	getSaveButtonClass() {
 		return "pm-image-nodeview-btn pm-image-nodeview-save";
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	getCancelButtonClass() {
 		return "pm-image-nodeview-btn pm-image-nodeview-cancel";
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	getEditorClass() {
 		return "pm-image-nodeview-editor";
 	}
@@ -371,11 +382,40 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		
 		let startX, startY, startWidth, startHeight;
 		const self = this;
+
+		// Store listener references for cleanup in destroy()
+		function onPointerMove(e) {
+			doResize(e.clientX, e.clientY);
+		}
+
+		function onTouchMove(e) {
+			e.preventDefault(); // Prevent scroll during resize
+			const touch = e.touches[0];
+			doResize(touch.clientX, touch.clientY);
+		}
+
+		function onPointerUp() {
+			document.removeEventListener("mousemove", onPointerMove);
+			document.removeEventListener("mouseup", onPointerUp);
+			self._activeResizeListeners = null;
+			commitResize();
+		}
+
+		function onTouchEnd() {
+			document.removeEventListener("touchmove", onTouchMove);
+			document.removeEventListener("touchend", onTouchEnd);
+			self._activeResizeListeners = null;
+			commitResize();
+		}
+
+		// Save references so destroy() can clean up mid-drag
+		this._resizeCleanup = { onPointerMove, onPointerUp, onTouchMove, onTouchEnd };
 		
 		this.resizeHandle.addEventListener("mousedown", function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			startResize(e.clientX, e.clientY);
+			self._activeResizeListeners = { mouse: true };
 			document.addEventListener("mousemove", onPointerMove);
 			document.addEventListener("mouseup", onPointerUp);
 		});
@@ -386,6 +426,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 			e.stopPropagation();
 			const touch = e.touches[0];
 			startResize(touch.clientX, touch.clientY);
+			self._activeResizeListeners = { touch: true };
 			document.addEventListener("touchmove", onTouchMove, { passive: false });
 			document.addEventListener("touchend", onTouchEnd);
 		});
@@ -395,16 +436,6 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 			startY = y;
 			startWidth = parseInt(self.img.getAttribute("width") || self.img.offsetWidth);
 			startHeight = parseInt(self.img.getAttribute("height") || self.img.offsetHeight);
-		}
-
-		function onPointerMove(e) {
-			doResize(e.clientX, e.clientY);
-		}
-
-		function onTouchMove(e) {
-			e.preventDefault(); // Prevent scroll during resize
-			const touch = e.touches[0];
-			doResize(touch.clientX, touch.clientY);
 		}
 
 		function doResize(x, y) {
@@ -431,18 +462,25 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 				self.view.dispatch(tr);
 			}
 		}
+	}
 
-		function onPointerUp() {
-			document.removeEventListener("mousemove", onPointerMove);
-			document.removeEventListener("mouseup", onPointerUp);
-			commitResize();
+	destroy() {
+		// Destroy imagePickerWidget if it exists
+		if(this.imagePickerWidget) {
+			try { this.imagePickerWidget.destroy(); } catch(e) { /* ignore */ }
+			this.imagePickerWidget = null;
 		}
-
-		function onTouchEnd() {
-			document.removeEventListener("touchmove", onTouchMove);
-			document.removeEventListener("touchend", onTouchEnd);
-			commitResize();
+		// Clean up any active resize document listeners (handles mid-drag destroy)
+		if(this._activeResizeListeners && this._resizeCleanup) {
+			var rc = this._resizeCleanup;
+			document.removeEventListener("mousemove", rc.onPointerMove);
+			document.removeEventListener("mouseup", rc.onPointerUp);
+			document.removeEventListener("touchmove", rc.onTouchMove);
+			document.removeEventListener("touchend", rc.onTouchEnd);
+			this._activeResizeListeners = null;
 		}
+		this._resizeCleanup = null;
+		super.destroy();
 	}
 }
 

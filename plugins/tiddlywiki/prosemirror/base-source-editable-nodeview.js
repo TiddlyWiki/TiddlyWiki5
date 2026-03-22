@@ -36,33 +36,30 @@ class BaseSourceEditableNodeView {
 	 * Get a translatable string from a language tiddler.
 	 * Falls back to the provided default if the tiddler is missing.
 	 */
+	// eslint-disable-next-line class-methods-use-this
 	getLanguageString(suffix, fallback) {
 		return $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/" + suffix, fallback);
 	}
 
 	/**
-	 * Get SVG icon from tiddler.
-	 * Returns a sanitized SVG DOM element (not a raw string) to avoid innerHTML XSS.
+	 * Get SVG icon from a TW image tiddler.
+	 * Uses TW's rendering pipeline so wikitext macros (<<size>> etc.) are resolved.
+	 * Returns a sanitized SVG DOM element or null.
 	 */
-	getSvgIcon(tiddlerTitle, size = "16pt") {
-		const iconTiddler = $tw.wiki.getTiddler(tiddlerTitle);
-		if(iconTiddler) {
-			const iconText = iconTiddler.fields.text;
-			const svgMatch = iconText.match(/<svg[\s\S]*<\/svg>/);
-			if(svgMatch) {
-				var svgString = svgMatch[0].replace(/<<size>>/g, size);
-				// Parse via DOMParser to get a safe SVG element (no script execution)
-				try {
-					var parser = new DOMParser();
-					var doc = parser.parseFromString(svgString, "image/svg+xml");
-					var svgEl = doc.querySelector("svg");
-					if(svgEl) {
-						return svgEl;
-					}
-				} catch(e) {
-					// Fallback: return null
-				}
-			}
+	// eslint-disable-next-line class-methods-use-this
+	getSvgIcon(tiddlerTitle, size) {
+		size = size || "1em";
+		try {
+			var htmlStr = $tw.wiki.renderTiddler("text/html", tiddlerTitle, {
+				variables: { size: size }
+			});
+			if(!htmlStr) return null;
+			var container = document.createElement("div");
+			container.innerHTML = htmlStr;
+			var svgEl = container.querySelector("svg");
+			if(svgEl) return svgEl;
+		} catch(e) {
+			// Fallback: return null
 		}
 		return null;
 	}
@@ -129,7 +126,7 @@ class BaseSourceEditableNodeView {
 		deleteBtn.type = "button";
 		deleteBtn.style.display = "none";
 
-		this.setButtonIcon(deleteBtn, "$:/core/images/delete-button", "🗑");
+		this.setButtonIcon(deleteBtn, "$:/core/images/delete-button", "\u00D7");
 
 		const self = this;
 		deleteBtn.addEventListener("click", e => {
@@ -165,14 +162,14 @@ class BaseSourceEditableNodeView {
 		cancelBtn.contentEditable = "false";
 
 		// Get SVG icon
-		this.setButtonIcon(cancelBtn, "$:/core/images/cancel-button", "✖");
+		this.setButtonIcon(cancelBtn, "$:/core/images/cancel-button", "\u00D7");
 
 		const self = this;
 		cancelBtn.addEventListener("click", function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			if(self.isEditMode) {
-				self.toggleEditMode(); // Exit edit mode without saving
+				self.cancelEdit(); // Exit edit mode without saving
 			}
 			return false;
 		}, true);
@@ -192,7 +189,7 @@ class BaseSourceEditableNodeView {
 		editBtn.title = this.getLanguageString("Buttons/Edit", "Edit");
 		editBtn.type = "button";
 
-		this.setButtonIcon(editBtn, "$:/core/images/edit-button", "✏️");
+		this.setButtonIcon(editBtn, "$:/core/images/edit-button", "E");
 
 		const self = this;
 		editBtn.addEventListener("click", e => {
@@ -227,6 +224,36 @@ class BaseSourceEditableNodeView {
 	}
 
 	/**
+	 * Cancel editing — exit edit mode without saving.
+	 * Subclasses can override to add cleanup.
+	 */
+	cancelEdit() {
+		if(!this.isEditMode) return;
+		this.isEditMode = false;
+		
+		// Reset button states (same as the "else" branch in toggleEditMode)
+		this.setButtonIcon(this.editBtn, "$:/core/images/edit-button", "E");
+		this.editBtn.title = this.getLanguageString("Buttons/Edit", "Edit");
+		const editClasses = this.getEditButtonClass().split(" ");
+		for(let i = 0; i < editClasses.length; i++) {
+			this.editBtn.classList.add(editClasses[i]);
+		}
+		const saveClasses = this.getSaveButtonClass().split(" ");
+		for(let i = 0; i < saveClasses.length; i++) {
+			this.editBtn.classList.remove(saveClasses[i]);
+		}
+		
+		if(this.deleteBtn) {
+			this.deleteBtn.style.display = "none";
+		}
+		if(this.cancelBtn) {
+			this.cancelBtn.style.display = "none";
+		}
+		
+		this.renderViewMode();
+	}
+
+	/**
 	 * Toggle between edit and view mode
 	 */
 	toggleEditMode() {
@@ -234,7 +261,7 @@ class BaseSourceEditableNodeView {
 		
 		if(this.isEditMode) {
 			// Switch to save icon
-			this.setButtonIcon(this.editBtn, "$:/core/images/done-button", "✔");
+			this.setButtonIcon(this.editBtn, "$:/core/images/done-button", "\u2713");
 					this.editBtn.title = this.getLanguageString("Buttons/SaveChanges", "Save changes");
 			const saveClasses = this.getSaveButtonClass().split(" ");
 			for(let i = 0; i < saveClasses.length; i++) {
@@ -261,7 +288,7 @@ class BaseSourceEditableNodeView {
 			this.renderEditMode();
 		} else {
 			// Switch back to edit icon
-			this.setButtonIcon(this.editBtn, "$:/core/images/edit-button", "✏️");
+			this.setButtonIcon(this.editBtn, "$:/core/images/edit-button", "E");
 			this.editBtn.title = this.getLanguageString("Buttons/Edit", "Edit");
 			const editClasses = this.getEditButtonClass().split(" ");
 			for(let i = 0; i < editClasses.length; i++) {
@@ -306,8 +333,7 @@ class BaseSourceEditableNodeView {
 			if(e.key === "Escape") {
 				e.preventDefault();
 				textarea.removeEventListener("blur", self.boundBlurHandler);
-				self.isEditMode = false;
-				self.toggleEditMode();
+				self.cancelEdit();
 			} else if(e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
 				e.preventDefault();
 				textarea.removeEventListener("blur", self.boundBlurHandler);
@@ -381,22 +407,46 @@ class BaseSourceEditableNodeView {
 	 * Ignore DOM mutations inside this node view.
 	 * ProseMirror should not try to parse our custom DOM structure.
 	 */
+	// eslint-disable-next-line class-methods-use-this
 	ignoreMutation() {
 		return true;
 	}
 
 	// Override these methods in subclasses
+	// eslint-disable-next-line class-methods-use-this
 	getHeaderClass() { return "pm-nodeview-header"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getTitleClass() { return "pm-nodeview-title"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getButtonsClass() { return "pm-nodeview-buttons"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getDeleteButtonClass() { return "pm-nodeview-delete"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getEditButtonClass() { return "pm-nodeview-edit"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getSaveButtonClass() { return "pm-nodeview-save"; }
+
+	// eslint-disable-next-line class-methods-use-this
+	getCancelButtonClass() { return "pm-nodeview-cancel"; }
+
+	// eslint-disable-next-line class-methods-use-this
 	getEditorClass() { return "pm-nodeview-editor"; }
 	
+	// eslint-disable-next-line class-methods-use-this
 	updateTitle() {}
+
+	// eslint-disable-next-line class-methods-use-this
 	renderEditMode() {}
+
+	// eslint-disable-next-line class-methods-use-this
 	renderViewMode() {}
+
+	// eslint-disable-next-line class-methods-use-this
 	saveEdit(newText) {}
 }
 

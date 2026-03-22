@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/prosemirror/language/Settings/Autocomplete/DefDescTriggersHint
+
+One trigger per line. Type at the start of a line to create a definition description (<dd>). Default: : and ：

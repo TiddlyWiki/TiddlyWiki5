@@ -19,7 +19,6 @@ var EditorState = require("prosemirror-state").EditorState;
 var EditorView = require("prosemirror-view").EditorView;
 var Schema = require("prosemirror-model").Schema;
 var TextSelection = require("prosemirror-state").TextSelection;
-var NodeSelection = require("prosemirror-state").NodeSelection;
 var basicSchema = require("prosemirror-schema-basic").schema;
 var createListPlugins = require("prosemirror-flat-list").createListPlugins;
 var createListSpec = require("prosemirror-flat-list").createListSpec;
@@ -34,7 +33,6 @@ var createWidgetBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/widget-
 var createWidgetBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/widget-block/plugin.js").createWidgetBlockNodeViewPlugin;
 var createImageBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/image-block/plugin.js").createImageBlockPlugin;
 var createImageNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/image/plugin.js").createImageNodeViewPlugin;
-var computeImageSrc = require("$:/plugins/tiddlywiki/prosemirror/image/utils.js").computeImageSrc;
 var createPragmaBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/pragma-block/nodeview.js").createPragmaBlockNodeViewPlugin;
 var debounce = require("$:/core/modules/utils/debounce.js").debounce;
 var pmCommands = require("prosemirror-commands");
@@ -43,6 +41,8 @@ var BubbleMenu = require("$:/plugins/tiddlywiki/prosemirror/bubble-menu.js").Bub
 var createDragHandlePlugin = require("$:/plugins/tiddlywiki/prosemirror/drag-handle.js").createDragHandlePlugin;
 var getMarkdownInputRules = require("$:/plugins/tiddlywiki/prosemirror/markdown-shortcuts.js").getMarkdownInputRules;
 var inputRules = require("prosemirror-inputrules").inputRules;
+var createAutocompletePlugin = require("$:/plugins/tiddlywiki/prosemirror/autocomplete/autocomplete-plugin.js").createAutocompletePlugin;
+var createFindReplacePlugin = require("$:/plugins/tiddlywiki/prosemirror/find-replace/find-replace-plugin.js").createFindReplacePlugin;
 
 // prosemirror-tables — conditional require (not available in Node tests)
 var pmTables;
@@ -153,6 +153,24 @@ function buildSchema() {
 					};
 				}
 			}]
+		},
+		definition_list: {
+			group: "block",
+			content: "(definition_term | definition_description)+",
+			toDOM: function() { return ["dl", { class: "pm-definition-list" }, 0]; },
+			parseDOM: [{ tag: "dl" }]
+		},
+		definition_term: {
+			content: "inline*",
+			toDOM: function() { return ["dt", 0]; },
+			parseDOM: [{ tag: "dt" }],
+			defining: true
+		},
+		definition_description: {
+			content: "inline*",
+			toDOM: function() { return ["dd", 0]; },
+			parseDOM: [{ tag: "dd" }],
+			defining: true
 		}
 	});
 
@@ -275,6 +293,29 @@ function ProseMirrorEngine(options) {
 		}
 	};
 
+	// Bridge Widget interface methods so nodeViews can create child widgets
+	// that walk the parent chain correctly (getAncestorCount, getVariable, etc.)
+	this.getAncestorCount = function() {
+		if(self.widget && typeof self.widget.getAncestorCount === "function") {
+			return self.widget.getAncestorCount();
+		}
+		return 0;
+	};
+	this.getVariable = function(name, options) {
+		if(self.widget && typeof self.widget.getVariable === "function") {
+			return self.widget.getVariable(name, options);
+		}
+		return undefined;
+	};
+	this.dispatchEvent = function(event) {
+		if(self.widget && typeof self.widget.dispatchEvent === "function") {
+			return self.widget.dispatchEvent(event);
+		}
+		return true;
+	};
+	this.makeChildWidgets = function() {};
+	this.parentWidget = self.widget;
+
 	// Create EditorView
 	var tablePlugins = [];
 	if(pmTables && this.schema.nodes.table) {
@@ -306,7 +347,9 @@ function ProseMirrorEngine(options) {
 				createWidgetBlockPlugin(),
 				createWidgetBlockNodeViewPlugin(nodeViewHost),
 				createPragmaBlockNodeViewPlugin(nodeViewHost),
-				createDragHandlePlugin()
+				createDragHandlePlugin(),
+				createAutocompletePlugin(this.widget.wiki),
+				createFindReplacePlugin(this.widget.wiki)
 			]
 			.concat(mdPlugin)
 			.concat(listPlugins)

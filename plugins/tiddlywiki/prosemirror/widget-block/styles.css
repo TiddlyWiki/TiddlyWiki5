@@ -100,7 +100,7 @@ Styles for widget and procedure blocks in ProseMirror editor
 
 .pm-widget-block-nodeview-content {
 	padding: 0;
-	min-height: 0;
+	min-height: 1.5em;
 	color: inherit;
 	background: transparent;
 }
@@ -133,4 +133,21 @@ Styles for widget and procedure blocks in ProseMirror editor
 	outline: none;
 	border-color: #2589D8;
 	box-shadow: 0 0 0 2px rgba(37, 137, 216, 0.2);
+}
+
+/* Empty widget placeholder — shown when macro/widget renders nothing */
+.pm-widget-block-empty-placeholder {
+	min-height: 1.5em;
+	padding: 4px 8px;
+	font-family: monospace;
+	font-size: 12px;
+	color: #999;
+	border: 1px dashed #ccc;
+	border-radius: 3px;
+	background: #fafafa;
+	cursor: pointer;
+	user-select: none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

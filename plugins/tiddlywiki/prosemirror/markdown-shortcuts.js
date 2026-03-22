@@ -144,9 +144,9 @@ function getMarkdownInputRules(wiki, schema) {
 	if(marks.strong) {
 		rules.push(markInputRule(/\*\*([^\*]+)\*\*$/, marks.strong));
 	}
-	// *italic* (only single asterisk, not preceded by another *)
+	// *italic* (only single asterisk — match when preceded by whitespace or start of line)
 	if(marks.em) {
-		rules.push(markInputRule(/(?<!\*)\*([^\*]+)\*$/, marks.em));
+		rules.push(markInputRule(/(?:^|[\s\u00A0])\*([^\*]+)\*$/, marks.em));
 	}
 	// ~~strikethrough~~
 	if(marks.strike) {
@@ -166,7 +166,65 @@ function getMarkdownInputRules(wiki, schema) {
 	// Code block: ```
 	rules = rules.concat(codeBlockInputRule(schema));
 
+	// Definition list shortcuts: ; and ：for term, : and ： for description
+	rules = rules.concat(definitionListInputRules(schema, wiki));
+
 	return rules;
+}
+
+/**
+ * Input rules for definition list (;/: wikitext syntax).
+ * Supports alias triggers configured in $:/config/prosemirror/autocomplete/def-term-triggers
+ * and $:/config/prosemirror/autocomplete/def-desc-triggers.
+ */
+function definitionListInputRules(schema, wiki) {
+	var rules = [];
+	var dtType = schema.nodes.definition_term;
+	var ddType = schema.nodes.definition_description;
+	var dlType = schema.nodes.definition_list;
+	if(!dtType || !ddType || !dlType) return rules;
+
+	// Default triggers: ; and ；for <dt>, : and ：for <dd>
+	var termTriggers = parseTriggerList(wiki, "$:/config/prosemirror/def-term-triggers", [";", "；"]);
+	var descTriggers = parseTriggerList(wiki, "$:/config/prosemirror/def-desc-triggers", [":", "："]);
+
+	termTriggers.forEach(function(trig) {
+		var escaped = trig.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+		var pattern = new RegExp("^" + escaped + "\\s$");
+		rules.push(new InputRule(pattern, function(state, match, start, end) {
+			return createDefListItem(state, start, end, dlType, dtType);
+		}));
+	});
+
+	descTriggers.forEach(function(trig) {
+		var escaped = trig.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+		var pattern = new RegExp("^" + escaped + "\\s$");
+		rules.push(new InputRule(pattern, function(state, match, start, end) {
+			return createDefListItem(state, start, end, dlType, ddType);
+		}));
+	});
+
+	return rules;
+}
+
+function parseTriggerList(wiki, title, defaults) {
+	var text = wiki.getTiddlerText(title, "");
+	if(!text.trim()) return defaults;
+	return text.split("\n").map(function(s) { return s.trim(); }).filter(function(s) { return s.length > 0; });
+}
+
+function createDefListItem(state, start, end, dlType, itemType) {
+	var $pos = state.doc.resolve(start);
+	// Only convert if we're in a paragraph that's a direct child of doc or a definition_list
+	if(!$pos.parent.isTextblock) return null;
+	var tr = state.tr.delete(start, end);
+	// Replace the paragraph with a definition_list containing the item
+	var blockStart = $pos.before($pos.depth);
+	var blockEnd = $pos.after($pos.depth);
+	var dl = dlType.create(null, [itemType.create()]);
+	tr = tr.replaceWith(blockStart, blockEnd, dl);
+	// Place cursor inside the new item
+	return tr.setSelection(TextSelection.create(tr.doc, blockStart + 2));
 }
 
 exports.getMarkdownInputRules = getMarkdownInputRules;

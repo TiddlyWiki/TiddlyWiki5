@@ -103,10 +103,10 @@ title: $:/plugins/tiddlywiki/prosemirror/todo
 * [x] 拖拽块重排 — ''drag-handle.js ProseMirror 插件：hover 时在块左侧显示拖拽手柄(⠿)；mousedown 创建 NodeSelection；dragstart 设置 PM dragging slice；PM 内置 drop handler 完成移动''
 * TODO checkbox 列表
 * 协作编辑
-* RTL 文本
-* `[[` 页面链接补全
-* 查找替换
-* 定义列表（`;` `:` 语法）
+* [x] RTL 文本 — ''styles-theme.tid 添加 html[dir="rtl"] 规则集：.ProseMirror direction:rtl+text-align:right，drag-handle/source-panel/header 翻转，bubble-menu 保持 ltr，slash-menu rtl''
+* [x] `[[` `{{` `<<` 页面/嵌入/宏补全 — ''autocomplete-plugin.js：基于 PluginKey 管理状态，支持 [[ {{ << 三种触发、可配置 alias（【【 「『 《《）、ArrowUp/Down/Enter/Tab/Escape 键盘导航、实时模糊搜索 tiddler 标题和宏名、点击选择。config tiddler 可配置触发字符。autocomplete-settings.tid 设置 UI''
+* [x] 查找替换 — ''find-replace-plugin.js：Ctrl+F/Ctrl+H 打开面板，实时搜索高亮（Decoration.inline），前进/后退导航，单个替换/全部替换，大小写敏感开关，Escape 关闭。完整 theme 适配''
+* [x] 定义列表（`;` `:` 语法）— ''schema 添加 definition_list/definition_term/definition_description 节点；to-prosemirror 添加 dl/dt/dd builders；from-prosemirror 生成 element dl>dt/dd AST；markdown-shortcuts 添加 ; ：→dt 和 : ：→dd 输入规则，支持 alias 配置；styles-theme.tid 添加样式；2 个 round-trip 测试 + 1 个 Playwright 测试''
 
 !!! 阶段 7: 代码审查与改进（最终轮次）
 
@@ -122,3 +122,16 @@ title: $:/plugins/tiddlywiki/prosemirror/todo
 * [x] 7.10 engine.js var 重声明修复 — ''bulletCmd / orderedCmd 使用独立变量名''
 * [x] 7.11 image/styles.css 移除 !important — ''z-index: 5 不再使用 !important''
 * [x] 7.12 新增 blockquote cite roundtrip 测试 — ''测试 <<<\ntext\n<<<citation source 的完整往返''
+
+!!! 阶段 8: 功能扩展与质量加固
+
+* [x] 8.1 修复 widget getAncestorCount 错误 — ''engine.js nodeViewHost 添加 getAncestorCount/getVariable/dispatchEvent/makeChildWidgets/parentWidget 桥接方法，解决 Error: this.parentWidget.getAncestorCount is not a function''
+* [x] 8.2 widget.js 补齐插件 — ''添加 createDragHandlePlugin、BubbleMenu、markdown input rules、autocomplete、find-replace 到 standalone widget，与 engine.js 保持一致''
+* [x] 8.3 RTL 文本支持 — ''styles-theme.tid 添加 html[dir="rtl"] 规则，覆盖 ProseMirror 编辑器/菜单/拖拽手柄/source panel/header 方向翻转''
+* [x] 8.4 定义列表完整 round-trip — ''schema definition_list/definition_term/definition_description 三个节点；to-prosemirror dl/dt/dd builders；from-prosemirror 生成 dl>dt/dd AST；markdown-shortcuts 添加 ;/；→dt 和 :/：→dd 输入规则（可配置 alias）；styles-theme.tid 样式；2 个 jasmine + 1 个 Playwright 测试''
+* [x] 8.5 `[[` `{{` `<<` 自动补全 — ''autocomplete-plugin.js 完整实现：PluginKey 状态管理、configurable triggers（默认 [[/【【 {{/「『 <</《《）、ArrowUp/Down/Enter/Tab/Escape 键盘交互、fuzzy 搜索 tiddler/macro names、点击选择、dropdown 定位。settings UI + 语言 tiddler''
+* [x] 8.6 查找替换 — ''find-replace-plugin.js：Ctrl+F/H 打开、Decoration.inline 高亮匹配、前进/后退导航、单个/全部替换、大小写敏感切换、Escape 关闭。主题适配。语言 tiddler''
+* [x] 8.7 CSS 主题完善 — ''styles-theme.tid 补全 header 按钮文字色（background macro）、autocomplete dropdown、definition list、find-replace panel 全部使用 colour 宏''
+* [x] 8.8 ES2017 lint 合规 — ''修复 ES2018 lookbehind（markdown-shortcuts.js (?<!\\*) → (?:^|[\\s])），eslint --fix 自动修复 44 个样式问题，手动修复 31 个 class-methods-use-this（eslint-disable），最终 0 error''
+* [x] 8.9 Slash Menu 字符串国际化 — ''"No matching items" 改用 $tw.wiki.getTiddlerText 查找语言 tiddler，新增 slash-menu-template.tid / AriaLabel / FilterPlaceholder / NoMatches 语言文件''
+* [x] 8.10 新增 Playwright 测试 — ''Drag Handle（hover 显示 + 离开隐藏）、Find & Replace（Ctrl+F 打开 + 搜索高亮 + 替换）、Definition List（dt/dd 渲染）、Autocomplete（[[ 触发 + Escape 关闭）共 8 个 E2E 测试''

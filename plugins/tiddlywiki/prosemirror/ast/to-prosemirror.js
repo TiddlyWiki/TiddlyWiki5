@@ -400,6 +400,45 @@ function buildTableCell(context, child, isHeader) {
 }
 
 /**
+ * Build a definition list (<dl>) from wiki AST.
+ * Wiki AST structure: element.tag="dl" > children=[dt/dd elements]
+ */
+function buildDefinitionList(context, node) {
+	var items = [];
+	var children = node.children || [];
+	for(var i = 0; i < children.length; i++) {
+		var child = children[i];
+		if(child.type === "element" && child.tag === "dt") {
+			items.push(buildDefinitionTerm(context, child));
+		} else if(child.type === "element" && child.tag === "dd") {
+			items.push(buildDefinitionDescription(context, child));
+		}
+		// Nested <dl> inside <dt>/<dd> is handled by the children themselves
+	}
+	if(items.length === 0) {
+		return buildOpaqueFromNode(context, node);
+	}
+	return {
+		type: "definition_list",
+		content: items
+	};
+}
+
+function buildDefinitionTerm(context, node) {
+	return {
+		type: "definition_term",
+		content: convertNodes(context, node.children)
+	};
+}
+
+function buildDefinitionDescription(context, node) {
+	return {
+		type: "definition_description",
+		content: convertNodes(context, node.children)
+	};
+}
+
+/**
  * Many node shares same type `element` in wikiAst, we need to distinguish them by tag.
  */
 const elementBuilders = {
@@ -436,7 +475,10 @@ const elementBuilders = {
 	tfoot: function(context, node) { return buildTable(context, { children: node.children }); },
 	tr: buildTableRow,
 	td: function(context, node) { return buildTableCell(context, node, false); },
-	th: function(context, node) { return buildTableCell(context, node, true); }
+	th: function(context, node) { return buildTableCell(context, node, true); },
+	dl: buildDefinitionList,
+	dt: buildDefinitionTerm,
+	dd: buildDefinitionDescription
 };
 
 function element(context, node) {
@@ -510,14 +552,14 @@ function transclude(context, node) {
 				widgetText += " ";
 				var safeValue = attr.value || "";
 				// Use triple-quotes if value contains double-quotes or >>
-				var needsTriple = safeValue.indexOf('"') >= 0 || safeValue.indexOf('>>' ) >= 0;
+				var needsTriple = safeValue.indexOf('"') >= 0 || safeValue.indexOf(">>" ) >= 0;
 				var q = needsTriple ? '"""' : '"';
 				// For positional parameters, just add the value
 				if(attr.name.match(/^\d+$/)) {
 					widgetText += q + safeValue + q;
 				} else {
 					// For named parameters, add name:value (colon syntax for TW5)
-					widgetText += attr.name + ':' + q + safeValue + q;
+					widgetText += attr.name + ":" + q + safeValue + q;
 				}
 			}
 		}
