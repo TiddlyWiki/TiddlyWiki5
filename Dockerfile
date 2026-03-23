@@ -21,8 +21,15 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
 
-# Copy source
-COPY . .
+# Copy only runtime files and server init editions
+COPY tiddlywiki.js ./
+COPY boot ./boot
+COPY core ./core
+COPY languages ./languages
+COPY plugins ./plugins
+COPY themes ./themes
+COPY editions/server ./editions/server
+COPY editions/server-external-js ./editions/server-external-js
 
 # Symlink CLI so 'tiddlywiki' is available on PATH
 RUN chmod +x tiddlywiki.js && \

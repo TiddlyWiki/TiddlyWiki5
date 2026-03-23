@@ -1,26 +1,23 @@
-# Version control
-.git
-.gitignore
-.gitattributes
-
-# Node dependencies (re-installed during build)
-node_modules
-
-# CI/CD and tooling
-.github
-.eslintrc*
-.eslintignore
-*.eslint*
-
-# Test output and coverage
-output
-*.test.js
-
-# Documentation source (not needed at runtime)
-tw5.com
-editions/tw5.com
-
-# Misc
-*.md
-CNAME
-LICENSE
+# Exclude everything by default and whitelist the runtime files needed for the Docker image
+*
+!.dockerignore
+!package.json
+!package-lock.json
+!tiddlywiki.js
+!boot/
+!boot/**
+!core/
+!core/**
+!languages/
+!languages/**
+!plugins/
+!plugins/**
+!themes/
+!themes/**
+!editions/
+!editions/server/
+!editions/server/**
+!editions/server-external-js/
+!editions/server-external-js/**
+!docker/
+!docker/entrypoint.sh
