@@ -1052,6 +1052,12 @@ Parse a block of text of a specified MIME type
 Options include:
 	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
 	_canonical_uri: optional string of the canonical URI of this content
+	sourceTitle: optional title of the tiddler whose text is being parsed;
+	             stored on the returned parser as `parser.sourceTitle` and used
+	             by inline widgets (e.g. wikitext checkboxes) to identify the
+	             tiddler they should modify on interaction
+	rules: optional object with `pragma`/`block`/`inline` arrays to restrict
+	       which parser rules are active
 */
 exports.parseText = function(type,text,options) {
 	text = text || "";
@@ -1062,7 +1068,9 @@ exports.parseText = function(type,text,options) {
 		parseAsInline: options.parseAsInline,
 		wiki: this,
 		_canonical_uri: options._canonical_uri,
-		configTrimWhiteSpace: options.configTrimWhiteSpace
+		configTrimWhiteSpace: options.configTrimWhiteSpace,
+		sourceTitle: options.sourceTitle,
+		rules: options.rules
 	});
 };
 
@@ -1078,7 +1086,8 @@ exports.parseTiddler = function(title,options) {
 		if(tiddler.hasField("_canonical_uri")) {
 			options._canonical_uri = tiddler.fields._canonical_uri;
 		}
-		return self.parseText(tiddler.fields.type,tiddler.fields.text,options);
+		var parseOptions = $tw.utils.extend({},options,{sourceTitle: title});
+		return self.parseText(tiddler.fields.type,tiddler.fields.text,parseOptions);
 	}) : null;
 };
 
@@ -1174,6 +1183,14 @@ parentWidget: optional parent widget for the root node
 */
 exports.makeWidget = function(parser,options) {
 	options = options || {};
+	// Set the parseSourceTitle variable so descendant widgets know which tiddler
+	// was parsed. Empty string signals an anonymous parse context (no sourceTitle).
+	if(!(options.variables && options.variables.parseSourceTitle !== undefined)) {
+		options = $tw.utils.extend({},options);
+		options.variables = $tw.utils.extend({},options.variables,{
+			parseSourceTitle: (parser && parser.sourceTitle) || ""
+		});
+	}
 	var widgetNode = {
 			type: "widget",
 			children: []

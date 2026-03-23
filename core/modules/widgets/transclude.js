@@ -114,6 +114,7 @@ TranscludeWidget.prototype.execute = function() {
 		var recursionMarker = this.makeRecursionMarker();
 		this.setVariable("transclusion",recursionMarker);
 	}
+	this.setVariable("parseSourceTitle",(target && target.parser && target.parser.sourceTitle) || "");
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
 };
