@@ -12,7 +12,7 @@ Tests for wikitext parser
 describe("WikiText parser tests", function() {
 
 	// Create a wiki
-	var wiki = new $tw.Wiki();
+	var wiki = $tw.test.wiki();
 
 	// Define a parsing shortcut
 	var parse = function(text) {

@@ -28,7 +28,7 @@ describe("Backlinks tests", function() {
 	}
 
 	describe("a tiddler with no links to it", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestIncoming",

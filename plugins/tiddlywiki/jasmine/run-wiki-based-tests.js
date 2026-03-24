@@ -19,7 +19,7 @@ describe("Wiki-based tests", function() {
 		var tiddler = $tw.wiki.getTiddler(title);
 		it(tiddler.fields.title + ": " + tiddler.fields.description, function() {
 			// Add our tiddlers
-			var wiki = new $tw.Wiki(),
+			var wiki = $tw.test.wiki(),
 				coreTiddler = $tw.wiki.getTiddler("$:/core");
 			if(coreTiddler) {
 				wiki.addTiddler(coreTiddler);
