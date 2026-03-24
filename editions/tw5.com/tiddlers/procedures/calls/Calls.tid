@@ -55,6 +55,8 @@ The text returned from a call can be directly assigned to an attribute of a widg
 
 Calls can be used in filters. The text is not wikified which again means that the parameters will be ignored.
 
+//Note that currently only literal string parameters are supported//
+
 ```
 <$list filter="[<my-procedure>]">
 ...
