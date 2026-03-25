@@ -2,10 +2,20 @@
 .c9/
 .vs/
 .vscode/
+.claude/
+# TiddlyWiki
 tmp/
 output/
 node_modules/
+$__StoryList.tid
+# Playwright
 /test-results/
 /playwright-report/
+/blob-report/
 /playwright/.cache/
-$__StoryList.tid
+/playwright/.auth/
+test-screenshots/
+test-output.txt
+.playwright-mcp
+# TiddlyWiki MPC
+.tw-mcp
