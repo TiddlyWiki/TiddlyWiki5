@@ -14,7 +14,8 @@
 		"tiddlywiki/jszip",
 		"tiddlywiki/confetti",
 		"tiddlywiki/tour",
-		"tiddlywiki/performance"
+		"tiddlywiki/performance",
+		"tiddlywiki/dom-to-image"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
