@@ -14,6 +14,6 @@ type: text/vnd.tiddlywiki
 
 
 <div class="tc-image-chooser">
-<$macrocall $name="image-picker-list" filter="[all[shadows+tiddlers]tag[$:/tags/Image]]" actions=<<copyActions>> />
+<$macrocall $name="image-picker-list" filter="[all[shadows+tiddlers]tag[$:/tags/Image]search{!!search}]" actions=<<copyActions>> />
 </div>
 
