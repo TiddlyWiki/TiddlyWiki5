@@ -29,6 +29,7 @@ type: text/vnd.tiddlywiki
 
 !! 変数の値とフィルタ式の評価結果を文字列へ代入
 <$macrocall $name=wikitext-example-without-html src="""<$text text=`このTiddlerのタイトルは "$(currentTiddler)$" で、最終更新日は ${[{!!modified}format:date[YYYY年MM月DD日]]}$ です`/>"""/>
+
 {{Concatenating variables to create a URL}}
 
 {{Concatenating a text reference to create a URL}}
