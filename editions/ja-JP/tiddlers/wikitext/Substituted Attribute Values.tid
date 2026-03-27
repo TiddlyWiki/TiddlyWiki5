@@ -1,0 +1,34 @@
+base-url: http://tiddlywiki.com/
+created: 20230615050814821
+modified: 20260326113238925
+original-modified: 20251021134906488
+tags: [[Widget Attributes]] WikiText
+title: Substituted Attribute Values
+ja-title: 置換属性値
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.0">>
+置換属性値には、2種類の異なる引用スタイルを使用できます:
+
+* 一つのバッククォート <$codeblock code="attr=`value`"/>
+* 3重のバッククォート <$codeblock code="attr=```value```"/>
+
+属性値は、フィルタ式や変数のプレースホルダーを対応する値に置き換えたバッククォートで囲まれたテキストです。フィルタ式のプレースホルダーは変数のプレースホルダーよりも前に置換されるため、返される値に対してさらに変数置換を行うことができます。
+<<.warning "そのテキストに含まれるその他のWiki構文はそのまま残されます。">>
+
+|プレースホルダー構文|説明|h
+|`$(varname)$`|変数のテキスト置換。未定義の変数は空の文字列に置き換えられます。 |
+|`${ filter expression }$`|フィルタ式を評価した最初の結果でテキストを置換します。 |
+
+! 例
+
+!! 変数の値を文字列へ代入
+
+<$macrocall $name=wikitext-example-without-html src="""<$text text=`こんにちは、これは "$(currentTiddler)$" Tiddlerです`/>"""/>
+
+
+!! 変数の値とフィルタ式の評価結果を文字列へ代入
+<$macrocall $name=wikitext-example-without-html src="""<$text text=`このTiddlerのタイトルは "$(currentTiddler)$" で、最終更新日は ${[{!!modified}format:date[YYYY年MM月DD日]]}$ です`/>"""/>
+{{Concatenating variables to create a URL}}
+
+{{Concatenating a text reference to create a URL}}
