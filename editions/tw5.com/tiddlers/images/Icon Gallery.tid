@@ -5,17 +5,16 @@ title: Icon Gallery
 type: text/vnd.tiddlywiki
 
 \define copyActions() <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<imageTitle>>/>
+\define temp.tiddler() $:/temp/$(thisTiddler)$/search
+\function search.query() [<temp.tiddler>get[search]]
 
 <<.tip "Click an icon to copy the title to the clipboard">>
 
-<$tiddler tiddler=`$:/temp/$(thisTiddler)$/search`>
 @@display:flex;gap:1ch;
-<$edit type="search" field="search" class="tc-search"/><$button set="!!search" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button>
+<$edit tiddler=<<temp.tiddler>> type="search" field="search" class="tc-search"/><$button setTitle=<<temp.tiddler>> setField="search" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button>
 @@
 
 
 <div class="tc-image-chooser">
-<$macrocall $name="image-picker-list" filter="[all[shadows+tiddlers]tag[$:/tags/Image]search{!!search}]" actions=<<copyActions>> />
+<$macrocall $name="image-picker-list" filter="[all[shadows+tiddlers]tag[$:/tags/Image]search<search.query>]" actions=<<copyActions>> />
 </div>
-
-</$tiddler>
