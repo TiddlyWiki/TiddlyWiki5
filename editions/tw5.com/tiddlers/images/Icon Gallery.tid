@@ -8,6 +8,7 @@ type: text/vnd.tiddlywiki
 
 <<.tip "Click an icon to copy the title to the clipboard">>
 
+<$tiddler tiddler=`$:/temp/$(thisTiddler)$/search`>
 @@display:flex;gap:1ch;
 <$edit type="search" field="search" class="tc-search"/><$button set="!!search" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button>
 @@
@@ -17,3 +18,4 @@ type: text/vnd.tiddlywiki
 <$macrocall $name="image-picker-list" filter="[all[shadows+tiddlers]tag[$:/tags/Image]search{!!search}]" actions=<<copyActions>> />
 </div>
 
+</$tiddler>
