@@ -1,5 +1,5 @@
 created: 20211013132515594
-modified: 20211018102307833
+modified: 20260327102420168
 tags: Learning [[Core Icons]]
 title: Icon Gallery
 type: text/vnd.tiddlywiki
@@ -7,6 +7,11 @@ type: text/vnd.tiddlywiki
 \define copyActions() <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<imageTitle>>/>
 
 <<.tip "Click an icon to copy the title to the clipboard">>
+
+@@display:flex;gap:1ch;
+<$edit type="search" field="search" class="tc-search"/><$button set="!!search" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button>
+@@
+
 
 <div class="tc-image-chooser">
 <$macrocall $name="image-picker-list" filter="[all[shadows+tiddlers]tag[$:/tags/Image]]" actions=<<copyActions>> />
