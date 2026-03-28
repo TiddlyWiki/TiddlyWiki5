@@ -30,6 +30,7 @@ EditorHeight/Caption: エディタの縦幅
 EditorHeight/Caption/Auto: コンテンツに合わせて自動的に高さを調整します
 EditorHeight/Caption/Fixed: 縦幅の固定:
 EditorHeight/Hint: テキストエディタの縦幅を選択します
+EmergencyDownload/Caption: JSON形式でTiddlerをダウンロード
 Encryption/Caption: 暗号化
 Encryption/ClearPassword/Caption: パスワードの解除
 Encryption/ClearPassword/Hint: パスワードと暗号化を解除します
