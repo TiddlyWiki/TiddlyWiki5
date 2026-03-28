@@ -1,11 +1,14 @@
 title: $:/language/Help/load
 description: ファイルから Tiddler を読み込み
 
-Tiddler を TiddlyWiki Ver.2 のファイル (`.html`), `.tiddler`, `.tid`, `.json` などから読み込みます。
+TiddlyWiki(`.html`)、`.tiddler`、`.tid`、`.json`、またはその他のローカルファイルからTiddlerを読み込みます。入力ファイルに適用される処理は、ファイル拡張子によって決定されます。デシリアライザとエンコーディングを明示的に指定する必要がある場合は、代わりに`import`コマンドを使用してください。
 
 ```
---load <filepath>
+--load <filepath> [noerror]
+--load <dirpath> [noerror]
 ```
+
+デフォルトでは、loadコマンドはTiddlerが見つからない場合にエラーを発生します。オプションの"noerror"パラメータを指定することで、このエラーを抑制できます。
 
 暗号化された TiddlyWiki ファイルから読み込むためには、最初に password コマンドでパスワードを指定する必要があります。
 
