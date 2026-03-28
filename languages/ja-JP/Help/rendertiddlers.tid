@@ -1,14 +1,20 @@
 title: $:/language/Help/rendertiddlers
 description: フィルタパターンを指定してマッチする Tiddler を指定した ContentTypeで出力
 
-フィルタパターンを指定してマッチする Tiddler を指定した ContentType（デフォルトは`text/html`）と拡張子（デフォルトは`.html`）で出力します。 
+(注意: この`--rendertiddlers`コマンドは、より柔軟な新しい`--render`コマンドに置き換えられたため、非推奨となりました。)
+
+フィルタパターンを指定してマッチするTiddlerを指定したContentType(デフォルトは`text/html`)と拡張子(デフォルトは`.html`)で出力します。 
 
 ```
---rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
+--rendertiddlers '<filter>' <template> <pathname> [<type>] [<extension>] ["noclean"]
 ```
 
 使用例:
 
 ```
---rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+--rendertiddlers '[!is[system]]' $:/core/templates/static.tiddler.html ./static text/plain
 ```
+
+デフォルトでは、パス名はeditionディレクトリの`output`サブディレクトリからの相対として解決されます。`--output`コマンドを使用すると、出力先を別のディレクトリに指定できます。
+
+''noclean''フラグが指定されていない限り、対象ディレクトリ内のファイルはすべて削除されます。対象ディレクトリが存在しない場合は、再帰的に作成されます。
