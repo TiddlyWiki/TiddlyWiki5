@@ -11,7 +11,12 @@ Fixa le quadro specificate de un gruppo de notas al resultato de wikificar un no
 
 Le parametros es:
 
-* ''filter'' - filtro que identifica le notas a esser toccate
-* ''fieldname'' - le quadro a modificar (le standard es "text")
-* ''templatetitle'' - le nota a wikificar a in le quadro specificate. Si vacue o mancante, alora le quadro specificate es delite
-* ''rendertype'' - le typo de texto a tractar (le standard es "text/plain"; "text/html" pote esser usate pro includer etiquettas HTML)
+```
+  filter          filtro que identifica le notas a esser toccate
+  fieldname       le quadro a modificar (le standard es "text")
+  templatetitle   le nota a wikificar a in le quadro specificate; si
+                  vacue o mancante, alora le quadro specificate es delite
+  rendertype      le typo de texto a tractar (le standard es
+                  "text/plain"; "text/html" pote esser usate pro includer
+                  etiquettas HTML)
+```

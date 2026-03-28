@@ -315,16 +315,18 @@ Object.defineProperty(TW_Element.prototype, "formattedTextContent", {
 		} else {
 			var b = [],
 				isBlock = $tw.config.htmlBlockElements.indexOf(this.tag) !== -1;
-			if(isBlock) {
+			if(isBlock && this.tag !== "li" && this.tag !== "ul" && this.tag !== "ol") {
 				b.push("\n");
 			}
 			if(this.tag === "li") {
-				b.push("* ");
+				b.push("\n  - ");
 			}
+			var self = this;
 			$tw.utils.each(this.children,function(node) {
-				b.push(node.formattedTextContent);
+				// Preserve literal newlines inside <pre> elements (code blocks)
+				b.push(self.tag === "pre" ? node.textContent : node.formattedTextContent);
 			});
-			if(isBlock) {
+			if(isBlock && this.tag !== "li") {
 				b.push("\n");
 			}
 			return b.join("");
