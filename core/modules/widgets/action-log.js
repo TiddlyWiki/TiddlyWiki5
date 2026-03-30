@@ -61,7 +61,7 @@ LogWidget.prototype.log = function() {
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		if(name.substring(0,2) !== "$$") {
 			var resultList = self.computeAttribute(attribute,{asList: true});
-			if(resultList.length <= 1) {
+			if(resultList && resultList.length <= 1) {
 				data[name] = resultList[0] || "";
 			} else {
 				data[name] = resultList;
@@ -75,7 +75,7 @@ LogWidget.prototype.log = function() {
 			allVars[v] = variable.value;
 		} else {
 			var variableInfo = this.getVariableInfo(v);
-			allVars[v] = variableInfo.resultList.length > 1 ? variableInfo.resultList : variableInfo.text;
+			allVars[v] = variableInfo && variableInfo.resultList && variableInfo.resultList.length > 1 ? variableInfo.resultList : variableInfo.text;
 		}
 	}
 	if(this.filter) {

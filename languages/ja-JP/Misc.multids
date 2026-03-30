@@ -1,5 +1,6 @@
 title: $:/language/
 
+Alerts: アラート
 AboveStory/ClassicPlugin/Warning: ~TiddlyWiki Classic用に設計されたプラグインを読み込もうとしています。 [[これらのプラグインは TiddlyWiki バージョン 5.xx では動作しません|these plugins do not work with TiddlyWiki version 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]のでご注意ください。検出された~TiddlyWiki Classic プラグイン:
 BinaryWarning/Prompt: この Tiddler にはバイナリデータが含まれています
 ClassicWarning/Hint: この Tiddler はクラシックスタイルの TiddlyWiki フォーマットで書かれています。このフォーマットは TiddlyWiki5 との完全な互換性はありません。詳しくは https://tiddlywiki.com/static/Upgrading.html を参照してください。
@@ -32,7 +33,7 @@ Error/Filter: フィルタエラー
 Error/FilterRunPrefix: フィルタエラー: フィルタランのプレフィックスが不明です
 Error/FilterSyntax: フィルタエラー: フィルタ式のシンタックスが間違っています
 Error/FormatFilterOperator: フィルタエラー: 'format'フィルタオペレータのサフィックスが不明です
-Error/IsFilterOperator: フィルタエラー: 'is'フィルタオペレータのオペランドが不明です
+Error/IsFilterOperator: フィルタエラー: 'is'フィルタオペレータのパラメータが不明です
 Error/LoadingPluginLibrary: プラグインライブラリの読み込みエラー
 Error/NetworkErrorAlert: `<h2>''ネットワークエラー''</h2>サーバーへの接続が失われたようです。ネットワーク接続に問題がある可能性があります。続行する前に、ネットワーク接続を回復してください。<br><br>''保存されていない変更は、接続が回復すると自動的に同期されます。''`
 Error/PutEditConflict: サーバー上でファイルが変更されました
@@ -77,7 +78,7 @@ No: いいえ
 OfficialPluginLibrary: 公式 ~TiddlyWiki プラグインライブラリ
 OfficialPluginLibrary/Hint: tiddlywiki.comにある公式~TiddlyWikiプラグインライブラリ。プラグイン、テーマ、言語パックはコアチームによってメンテナンスされています。
 PageTemplate/Description: 標準 ~TiddlyWiki レイアウト
-PageTemplate/Name: 標準 ~PageTemplate
+PageTemplate/Name: 標準レイアウト
 PluginReloadWarning: ~JavaScript プラグインの変更を有効にするため、 {{$:/core/ui/Buttons/save-wiki}} 保存して {{$:/core/ui/Buttons/refresh}} 再読み込みしてください
 RecentChanges/DateFormat: YYYY-0MM-0DD
 Shortcuts/Input/Accept/Hint: 選択項目を許可します

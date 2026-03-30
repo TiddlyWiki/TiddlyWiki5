@@ -1,0 +1,13 @@
+change-category: hackability
+change-type: enhancement
+created: 20260228212206750
+description: Allows modular relinking behavior for plugin support
+github-contributors: flibbles
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9703
+modified: 20260228212206750
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9703
+type: text/vnd.tiddlywiki
+
+This PR introduces the `relinker` module type so that plugins can introduce behavior whenever a tiddler is renamed. This could be enhanced tiddler relinking behavior, server behavior, or temp tiddler changes.
