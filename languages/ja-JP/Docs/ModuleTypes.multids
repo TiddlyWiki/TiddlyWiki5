@@ -10,7 +10,7 @@ config: `$tw.config` に格納されるデータ。
 filteroperator: 個々のフィルタ操作用メソッドモジュール。
 global: `$tw` に格納されるグローバルデータ。
 info: [[$:/temp/info-plugin]] 疑似プラグインを介してシステム情報を公開します。
-isfilteroperator: フィルタ ''is'' メソッドのオペランドモジュール。
+isfilteroperator: ''is''フィルタオペレータのパラメータ。
 library: JavaScript汎用モジュール用の汎用モジュールタイプ。
 macro: JavaScript マクロの定義モジュール。
 parser: 各種 ContentType のパーサモジュール。
