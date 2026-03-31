@@ -9,9 +9,12 @@ description: Under development
 \procedure release-introduction()
 Release v5.4.0 deliberately and forensically loosens backwards compatibility to clear the path for significant new features and fundamental improvements to be made in the future.
 
-''Please note that there are some changes that do not yet change notes, please see the change history on ~GitHub for the full list of changes.''
-
 See the [[project plan|https://github.com/orgs/TiddlyWiki/projects/4]] for full details.
 \end release-introduction
+
+\define banner-credit-user-name() Peter
+\define banner-credit-user-link() https://talk.tiddlywiki.org/u/peter
+\define banner-credit-discussion-link() https://talk.tiddlywiki.org/t/vote-for-the-banner-tiddlywiki-v5-4-0/15016
+\define banner-credit-permalink() https://raw.githubusercontent.com/TiddlyWiki/TiddlyWiki5/92caa7312ebc51c59cd345cc81b4a326661a0650/editions/tw5.com/tiddlers/images/New%20Release%20Banner.webp
 
 <<releasenote 5.4.0>>
