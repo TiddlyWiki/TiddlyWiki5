@@ -131,9 +131,6 @@ $tw.utils.pushTop = function(array,value) {
 	return array;
 };
 
-/** @deprecated Use instanceof Date instead */
-$tw.utils.isDate = (value) => value instanceof Date;
-
 /** @deprecated Use array iterative methods instead */
 $tw.utils.each = function(object,callback) {
 	if(object) {
