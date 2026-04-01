@@ -1,0 +1,23 @@
+title: Procedures/Calls
+description: Procedure Calls
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure test(param)
+<$text text=<<param>>/>
+\end test
+
+<<test Hello>>
+-
+<<test"Hello">>
+-
+<<test'Hello'>>
+-
+<<test`Hello`>>
+
++
+title: ExpectedResult
+
+<p>Hello</p>
