@@ -1,0 +1,81 @@
+caption: Block Level Links
+created: 20230916061138153
+modified: 20260225120000000
+tags: WikiText
+title: Block Level Links in WikiText
+type: text/vnd.tiddlywiki
+
+! Adding Anchors
+
+<<wikitext-example-without-html src:"! Adding anchor for heading ^🤗→AddingIDforTitle">>
+
+The basic syntax for anchors is:
+
+<<wikitext-example src:"A paragraph with an invisible anchor. ^BlockLevelLinksID1">>
+
+# Add a space between the end of your text and the `^`.
+# There is no space between `^` and the id.
+# ID can contain any Unicode char other than `^` and space ` `.
+
+The anchor becomes an attribute of the enclosing block element. The DOM will have:
+
+```html
+<p data-tw-anchor="BlockLevelLinksID1" id="Block Level Links in WikiText^^BlockLevelLinksID1">...</p>
+```
+
+!! Adding anchor to code blocks
+
+Put `^anchor` at the end of the opening fence line:
+
+<<wikitext-example src:"```css ^codeAnchor
+.main {
+  display: none;
+}
+```
+">>
+
+!! Adding anchor to quote blocks
+
+Put `^anchor` after the `<<<` marker:
+
+<<wikitext-example src:"<<< ^quoteAnchor
+A quoted paragraph.
+<<<
+">>
+
+!! Adding anchor to list items
+
+<<wikitext-example src:"* first item ^listA
+* second item ^listB
+* third item
+">>
+
+! Link to Anchors ^linkSection
+
+Add `^anchor` after the title in a link to navigate to and highlight that block:
+
+<<wikitext-example-without-html src:"[[Link to paragraph|Block Level Links in WikiText^BlockLevelLinksID1]]">>
+
+<<wikitext-example-without-html src:"[[Link to heading|Block Level Links in WikiText^🤗→AddingIDforTitle]]">>
+
+<<wikitext-example-without-html src:"[[Link to code block|Block Level Links in WikiText^codeAnchor]]">>
+
+<<wikitext-example-without-html  src:"[[Link to Non-existing anchor|Block Level Links in WikiText^😂❎]]">>
+
+! Single Block Transclusion and Range Transclusion
+
+See [[Block Level Transclusion in WikiText]] for details on transcluding individual blocks or ranges of blocks using anchors.
+
+! Block-Level Backlinks ^backlinksSection
+
+Use the `backlinks:anchor` filter suffix to find tiddlers linking to a specific anchor:
+
+```
+[{!!title}backlinks:anchor[BlockLevelLinksID1]]
+```
+
+Use the `anchors` filter to find which anchors a source tiddler links to in a target:
+
+```
+[<sourceTiddler>anchors[TargetTitle]]
+```

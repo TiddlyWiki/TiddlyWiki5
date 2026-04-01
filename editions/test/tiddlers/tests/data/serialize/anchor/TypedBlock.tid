@@ -1,0 +1,7 @@
+title: Serialize/Anchor/TypedBlock
+tags: $:/tags/wikitext-serialize-test-spec
+
+$$$text/plain ^typedId
+Hello typed block.
+$$$
+

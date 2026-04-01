@@ -468,5 +468,150 @@ describe("WikiText parser tests", function() {
 
 		expect(parse(wikitext)).toEqual(expectedParseTree);
 	});
-});
 
+	it("should parse section marks (wrapped in anchor container)", function () {
+		var result = parse("There is an anchor that is invisible. ^BlockLevelLinksID1");
+		expect(result.length).toBe(1);
+		expect(result[0].type).toBe("anchor");
+		expect(result[0].attributes.id.value).toBe("BlockLevelLinksID1");
+		expect(result[0].attributes.target.value).toBe("true");
+		var pNode = result[0].children[0];
+		expect(pNode.type).toBe("element");
+		expect(pNode.tag).toBe("p");
+		// Name anchor should be present in the paragraph's children
+		var lastChild = pNode.children[pNode.children.length - 1];
+		expect(lastChild.type).toBe("anchor");
+		expect(lastChild.attributes.name.value).toBe("true");
+		expect(lastChild.attributes.id.value).toBe("BlockLevelLinksID1");
+	});
+
+
+	it("should parse link to anchors", function () {
+		expect(parse("[[Link to BlockLevelLinksID1|Block Level Links in WikiText^BlockLevelLinksID1]]")).toEqual(
+
+			[{"type":"element","tag":"p","rule":"parseblock","children":[{"type":"link","attributes":{"to":{"type":"string","value":"Block Level Links in WikiText","start":29,"end":58},"anchor":{"type":"string","value":"BlockLevelLinksID1","start":59,"end":77}},"children":[{"type":"text","text":"Link to BlockLevelLinksID1","start":2,"end":28}],"start":0,"end":79,"rule":"prettylink"}],"start":0,"end":79}]
+
+		);
+	});
+
+	it("should parse code block with anchor (inline syntax)", function () {
+		var result = parse("```css ^codeId\ncode block\n```");
+		expect(result.length).toBe(1);
+		expect(result[0].type).toBe("anchor");
+		expect(result[0].attributes.id.value).toBe("codeId");
+		expect(result[0].attributes.target.value).toBe("true");
+		var codeblock = result[0].children[0];
+		expect(codeblock.type).toBe("codeblock");
+		expect(codeblock.attributes.code.value).toBe("code block");
+		expect(codeblock.attributes.language.value).toBe("css");
+	});
+
+	it("should parse link without anchor", function () {
+		expect(parse("[[Simple Link]]")).toEqual(
+
+			[{"type":"element","tag":"p","rule":"parseblock","children":[{"type":"link","attributes":{"to":{"type":"string","value":"Simple Link","start":2,"end":13},"anchor":{"type":"string","value":"","start":13,"end":13}},"children":[{"type":"text","text":"Simple Link","start":2,"end":13}],"start":0,"end":15,"rule":"prettylink"}],"start":0,"end":15}]
+
+		);
+	});
+
+	it("should parse link with alias and anchor", function () {
+		expect(parse("[[Click here|TiddlerTitle^mark123]]")).toEqual(
+
+			[{"type":"element","tag":"p","rule":"parseblock","children":[{"type":"link","attributes":{"to":{"type":"string","value":"TiddlerTitle","start":13,"end":25},"anchor":{"type":"string","value":"mark123","start":26,"end":33}},"children":[{"type":"text","text":"Click here","start":2,"end":12}],"start":0,"end":35,"rule":"prettylink"}],"start":0,"end":35}]
+
+		);
+	});
+
+	it("should parse transclusion with anchor", function () {
+		var result = parse("{{SomeTitle^myAnchor}}");
+		expect(result.length).toBe(1);
+		var tiddlerNode = result[0];
+		expect(tiddlerNode.type).toBe("tiddler");
+		var transclude = tiddlerNode.children[0];
+		expect(transclude.type).toBe("transclude");
+		expect(transclude.attributes.$tiddler.value).toBe("SomeTitle");
+		expect(transclude.attributes.$anchor.value).toBe("myAnchor");
+	});
+
+	it("should parse transclusion with anchor range", function () {
+		var result = parse("{{SomeTitle^startId^endId}}");
+		expect(result.length).toBe(1);
+		var tiddlerNode = result[0];
+		expect(tiddlerNode.type).toBe("tiddler");
+		var transclude = tiddlerNode.children[0];
+		expect(transclude.type).toBe("transclude");
+		expect(transclude.attributes.$tiddler.value).toBe("SomeTitle");
+		expect(transclude.attributes.$anchor.value).toBe("startId");
+		expect(transclude.attributes.$anchorEnd.value).toBe("endId");
+	});
+
+	it("should parse text reference with anchor range", function () {
+		var result = $tw.utils.parseTextReference("MyTitle^blockA^blockZ");
+		expect(result.title).toBe("MyTitle");
+		expect(result.anchor).toBe("blockA");
+		expect(result.anchorEnd).toBe("blockZ");
+	});
+
+	it("should parse text reference with single anchor", function () {
+		var result = $tw.utils.parseTextReference("MyTitle^singleBlock");
+		expect(result.title).toBe("MyTitle");
+		expect(result.anchor).toBe("singleBlock");
+		expect(result.anchorEnd).toBeUndefined();
+	});
+
+	it("should parse heading with anchor", function () {
+		var result = parse("!! My Heading ^headingId");
+		expect(result.length).toBe(1);
+		expect(result[0].type).toBe("anchor");
+		expect(result[0].attributes.id.value).toBe("headingId");
+		expect(result[0].attributes.target.value).toBe("true");
+		var heading = result[0].children[0];
+		expect(heading.type).toBe("element");
+		expect(heading.tag).toBe("h2");
+	});
+
+	it("should parse list items with anchors", function () {
+		var result = parse("* item A ^listA\n* item B ^listB\n* item C");
+		expect(result.length).toBe(1);
+		expect(result[0].type).toBe("element");
+		expect(result[0].tag).toBe("ul");
+		// First li is wrapped in target anchor
+		expect(result[0].children[0].type).toBe("anchor");
+		expect(result[0].children[0].attributes.id.value).toBe("listA");
+		expect(result[0].children[0].attributes.target.value).toBe("true");
+		// Second li is wrapped in target anchor
+		expect(result[0].children[1].type).toBe("anchor");
+		expect(result[0].children[1].attributes.id.value).toBe("listB");
+		// Third li has no anchor
+		expect(result[0].children[2].type).toBe("element");
+		expect(result[0].children[2].tag).toBe("li");
+	});
+
+	it("should parse typedblock with anchor (inline syntax)", function () {
+		var result = parse("$$$text/plain ^typedId\nhello world\n$$$");
+		expect(result.length).toBe(1);
+		expect(result[0].type).toBe("anchor");
+		expect(result[0].attributes.id.value).toBe("typedId");
+		expect(result[0].attributes.target.value).toBe("true");
+		var inner = result[0].children[0];
+		expect(inner.type).toBe("void");
+	});
+
+	it("should parse quoteblock with anchor (inline syntax)", function () {
+		var result = parse("<<< ^quoteId\nQuote body.\n<<<");
+		expect(result.length).toBe(1);
+		expect(result[0].type).toBe("anchor");
+		expect(result[0].attributes.id.value).toBe("quoteId");
+		expect(result[0].attributes.target.value).toBe("true");
+		var blockquote = result[0].children[0];
+		expect(blockquote.type).toBe("element");
+		expect(blockquote.tag).toBe("blockquote");
+	});
+
+	it("should parse code block without anchor", function () {
+		var result = parse("```\nplain code\n```");
+		expect(result.length).toBe(1);
+		expect(result[0].type).toBe("codeblock");
+		expect(result[0].attributes.code.value).toBe("plain code");
+	});
+});

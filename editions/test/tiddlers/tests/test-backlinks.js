@@ -45,6 +45,45 @@ describe("Backlinks tests", function() {
 		it("should have a backlink", function() {
 			expect(wiki.filterTiddlers("TestIncoming +[backlinks[]]").join(",")).toBe("TestOutgoing");
 		});
+
+		it("should have a backlink to anchor", function() {
+			wiki.addTiddler({
+				title: "TestIncoming",
+				text: "With a mark. ^ToThisBlock",
+			});
+			wiki.addTiddler({
+				title: "TestOutgoing",
+				text: "A link to [[TestIncoming^ToThisBlock]]",
+			});
+			expect(wiki.filterTiddlers("TestIncoming +[backlinks[]]").join(",")).toBe("TestOutgoing");
+		});
+
+		it("should have a backlink with anchor filter", function() {
+			wiki.addTiddler({
+				title: "TestIncoming",
+				text: "With a mark. ^ToThisBlock",
+			});
+			wiki.addTiddler({
+				title: "TestOutgoing",
+				text: "A link to [[TestIncoming^ToThisBlock]]",
+			});
+			expect(wiki.filterTiddlers("TestIncoming +[backlinks:anchor[ToThisBlock]]").join(",")).toBe("TestOutgoing");
+			// Non-matching anchor should return empty
+			expect(wiki.filterTiddlers("TestIncoming +[backlinks:anchor[WrongAnchor]]").join(",")).toBe("");
+		});
+
+		it("should track anchor links for the anchors filter", function() {
+			wiki.addTiddler({
+				title: "TestIncoming",
+				text: "First. ^anchor1\n\nSecond. ^anchor2",
+			});
+			wiki.addTiddler({
+				title: "TestOutgoing",
+				text: "Link to [[TestIncoming^anchor1]] and [[TestIncoming^anchor2]]",
+			});
+			var anchors = wiki.getTiddlerAnchorLinks("TestOutgoing","TestIncoming");
+			expect(anchors.sort().join(",")).toBe("anchor1,anchor2");
+		});
 	});
 
 	describe("A tiddler that has a link added to it later", function() {

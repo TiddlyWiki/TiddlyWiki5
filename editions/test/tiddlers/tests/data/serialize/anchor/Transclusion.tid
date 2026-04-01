@@ -1,0 +1,10 @@
+title: Serialize/Anchor/Transclusion
+tags: $:/tags/wikitext-serialize-test-spec
+
+Single block transclusion:
+
+{{Serialize/Anchor/Paragraph^paraId}}
+
+Range transclusion:
+
+{{Serialize/Anchor/Heading^h1Id^h2Id}}
