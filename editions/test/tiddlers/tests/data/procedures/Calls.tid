@@ -9,15 +9,20 @@ title: Output
 <$text text=<<param>>/>
 \end test
 
+-
 <<test Hello>>
 -
 <<test"Hello">>
 -
 <<test'Hello'>>
 -
-<<test`Hello`>>
-
 +
 title: ExpectedResult
 
-<p>Hello</p>
+<p>-
+Hello
+-
+Hello
+-
+Hello
+-</p>
