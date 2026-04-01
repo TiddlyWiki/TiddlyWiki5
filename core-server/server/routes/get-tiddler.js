@@ -8,9 +8,13 @@ GET /recipes/default/tiddlers/:title
 \*/
 "use strict";
 
-exports.method = "GET";
+exports.methods = ["GET"];
 
 exports.path = /^\/recipes\/default\/tiddlers\/(.+)$/;
+
+exports.info = {
+	priority: 100
+};
 
 exports.handler = function(request,response,state) {
 	var title = $tw.utils.decodeURIComponentSafe(state.params[0]),

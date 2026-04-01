@@ -9,8 +9,6 @@ Command to modify selected tiddlers to set a field to the text of a template tid
 
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
-
 exports.info = {
 	name: "setfield",
 	synchronous: true
@@ -26,8 +24,7 @@ Command.prototype.execute = function() {
 	if(this.params.length < 4) {
 		return "Missing parameters";
 	}
-	var self = this,
-		wiki = this.commander.wiki,
+	var wiki = this.commander.wiki,
 		filter = this.params[0],
 		fieldname = this.params[1] || "text",
 		templatetitle = this.params[2],

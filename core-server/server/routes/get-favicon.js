@@ -8,9 +8,13 @@ GET /favicon.ico
 \*/
 "use strict";
 
-exports.method = "GET";
+exports.methods = ["GET"];
 
 exports.path = /^\/favicon.ico$/;
+
+exports.info = {
+	priority: 100
+};
 
 exports.handler = function(request,response,state) {
 	var buffer = state.wiki.getTiddlerText("$:/favicon.ico","");

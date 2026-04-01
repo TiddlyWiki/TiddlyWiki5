@@ -218,7 +218,7 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			}
 			//If Browser-Storage plugin is present, remove tiddler from local storage after successful sync to the server
 			if($tw.browserStorage && $tw.browserStorage.isEnabled()) {
-				$tw.browserStorage.removeTiddlerFromLocalStorage(tiddler.fields.title)
+				$tw.browserStorage.removeTiddlerFromLocalStorage(tiddler.fields.title);
 			}
 			// Save the details of the new revision of the tiddler
 			var etag = request.getResponseHeader("Etag");
@@ -258,7 +258,6 @@ options include:
 tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 */
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
-	var self = this;
 	if(this.isReadOnly) {
 		return callback(null);
 	}
@@ -292,8 +291,8 @@ TiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {
 	if(tiddler) {
 		$tw.utils.each(tiddler.fields,function(fieldValue,fieldName) {
 			var fieldString = fieldName === "tags" ?
-								tiddler.fields.tags :
-								tiddler.getFieldString(fieldName); // Tags must be passed as an array, not a string
+				tiddler.fields.tags :
+				tiddler.getFieldString(fieldName); // Tags must be passed as an array, not a string
 
 			if(knownFields.indexOf(fieldName) !== -1) {
 				// If it's a known field, just copy it across
@@ -314,8 +313,7 @@ TiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {
 Convert a field set in TiddlyWeb format into ordinary TiddlyWiki5 format
 */
 TiddlyWebAdaptor.prototype.convertTiddlerFromTiddlyWebFormat = function(tiddlerFields) {
-	var self = this,
-		result = {};
+	var result = {};
 	// Transfer the fields, pulling down the `fields` hashmap
 	$tw.utils.each(tiddlerFields,function(element,title,object) {
 		if(title === "fields") {

@@ -23,6 +23,7 @@ A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expre
 [[<":or"> |"Or Filter Run Prefix"]] |
 [[<":reduce"> |"Reduce Filter Run Prefix"]] |
 [[<":sort">  /"v5.2.0"/ |"Sort Filter Run Prefix"]] |
+[[<":let">  /"v5.4.0"/ |"Let Filter Run Prefix"]] |
 [[<":then">  /"v5.3.0"/ |"Then Filter Run Prefix"]]) [[run|"Filter Run"]]
 """/>
 
@@ -32,5 +33,15 @@ A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expre
 <<.tip "Compare named filter run prefix `:reduce` with [[reduce Operator]] which is used to used to flatten a list of items down to a single item by repeatedly applying a subfilter">> 
 
 <<.tip """Within the filter runs prefixed with `:reduce`, `:sort`, `:map` and `:filter`, the <<.var currentTiddler>> variable is set to the title of the tiddler being processed.<br>The value of currentTiddler outside the subfilter is available in the variable <<.var "..currentTiddler">> <<.from-version "5.2.0">>""" >>
+
+!! Suffixes
+
+Named filter run prefixes can accept suffixes separated by `:` characters, each optionally containing comma-separated values. The general syntax is `:prefixname:suffix1:suffix2,...`. Currently the following prefixes accept suffixes:
+
+|!Prefix |!Suffixes |!Example |
+|`:map` |`flat` — return all results instead of only the first per item |`:map:flat[...]` |
+|`:sort` |type (''string'', ''alphanumeric'', ''number'', ''integer'', ''version'', ''date'') and flags (''reverse'', ''casesensitive'', ''caseinsensitive'') |`:sort:number:reverse[...]` |
+
+All other named prefixes (`:all`, `:and`, `:cascade`, `:else`, `:except`, `:filter`, `:intersection`, `:let`, `:or`, `:reduce`, `:then`) do not currently accept suffixes.
 
 Also see: [[Interchangeable Filter Run Prefixes]]

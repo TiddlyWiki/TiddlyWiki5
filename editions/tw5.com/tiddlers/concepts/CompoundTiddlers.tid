@@ -1,5 +1,5 @@
 created: 20240507221902644
-modified: 20240729082610287
+modified: 20250814073256942
 tags: Concepts
 title: CompoundTiddlers
 type: text/vnd.tiddlywiki
@@ -8,7 +8,7 @@ Compound tiddlers are a special type of tiddler that can store one or more paylo
 
 The compound tiddler format is extremely simple, and includes the notable flaw that it does not permit tiddlers that contain a plus sign (`+`) on a line by itself. It is not intended as a general purpose way of storing tiddler data.
 
-Compound tiddlers are identified by having their type field set to `text/vnd.tiddlywiki-multiple`.
+Compound tiddlers are identified by having their [[type field|ContentType]] set to `text/vnd.tiddlywiki-multiple`.
 
 The content of a compound tiddler consists of a sequence of tiddlers separated by a plus sign (`+`) on a line by itself. Each tiddler uses the same format as [[.tid files|TiddlerFiles]].
 

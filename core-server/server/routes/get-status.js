@@ -8,9 +8,13 @@ GET /status
 \*/
 "use strict";
 
-exports.method = "GET";
+exports.methods = ["GET"];
 
 exports.path = /^\/status$/;
+
+exports.info = {
+	priority: 100
+};
 
 exports.handler = function(request,response,state) {
 	var text = JSON.stringify({

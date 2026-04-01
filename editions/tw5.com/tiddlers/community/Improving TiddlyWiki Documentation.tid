@@ -1,5 +1,5 @@
 created: 20140820151051019
-modified: 20240313114828368
+modified: 20251023154718268
 tags: Community
 title: Improving TiddlyWiki Documentation
 type: text/vnd.tiddlywiki
@@ -20,7 +20,7 @@ You can choose to edit the documentation using the [[TiddlyWiki Docs PR Maker]] 
 
 !! Using [[Docs PR Maker|TiddlyWiki Docs PR Maker]] edition
 
-# Go to https://saqimtiaz.github.io/tw5-docs-pr-maker/ or click the link displayed in the ribbon underneath the title when editing a tiddler on tiddlywiki.com
+# Go to https://edit.tiddlywiki.com or click the link displayed in the ribbon underneath the title when editing a tiddler on tiddlywiki.com
 # Go through the quick introduction where you will need to provide your ~GitHub username and a ~GitHub access token (you will be guided in creating one)
 # Edit or create tiddlers to update the documentation, the wiki will keep track of all changes
 # Click the "Submit updates" button and check if all the tiddlers that you edited are included in the submission; if not, drag them into the box

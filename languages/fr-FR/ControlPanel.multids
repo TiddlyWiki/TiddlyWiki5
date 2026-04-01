@@ -96,6 +96,10 @@ Plugins/PluginWillRequireReload: (rechargement requis)
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
 Plugins/Reinstall/Caption: réinstalle
+Plugins/Stability/Deprecated: DÉPRÉCIÉ
+Plugins/Stability/Experimental: EXPÉRIMENTAL
+Plugins/Stability/Legacy: LEGACY
+Plugins/Stability/Stable: STABLE
 Plugins/Themes/Caption: Thèmes
 Plugins/Themes/Hint: Plugins de thème
 Plugins/Update/Caption: mise à jour
@@ -128,23 +132,22 @@ Saving/GitService/Gitea/Password: //Jeton d'accès// pour cette API (via l'inter
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
 Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
 Saving/TiddlySpot/Backups: Sauvegardes
-Saving/TiddlySpot/Caption: Enregistreur ~TiddlySpot
-Saving/TiddlySpot/ControlPanel: Panneau de contrôle ~TiddlySpot
-Saving/TiddlySpot/Description: Ces paramètres ne servent que lors de la sauvegarde vers [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]] ou vers un serveur distant compatible. Voir [[ici|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] pour plus d'informations sur la configuration de la sauvegarde sur ~TiddlySpot et ~TiddlyHost.
+Saving/TiddlySpot/Caption: Enregistreur ~TiddlyHost
+Saving/TiddlySpot/ControlPanel: Panneau de contrôle ~TiddlyHost
+Saving/TiddlySpot/Description: Ces paramètres ne servent que lors de la sauvegarde vers [[TiddlyHost|https://tiddlyhost.com]] ou vers un serveur distant compatible. Voir [[ici|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] pour plus d'informations sur la configuration de la sauvegarde sur ~TiddlyHost.
 Saving/TiddlySpot/Filename: Nom du fichier enregistré
-Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Heading: ~TiddlyHost
 Saving/TiddlySpot/Hint: //L'URL par défaut est `http://<nom du wiki>.tiddlyspot.com/store.cgi`. Elle peut être remplacée par une adresse serveur personnalisée, comme `http://example.com/store.php`.//
 Saving/TiddlySpot/Password: Mot de passe
-Saving/TiddlySpot/ReadOnly: Notez que [[TiddlySpot|http://tiddlyspot.com]] n'autorise plus la création de nouveaux sites. Pour les nouveaux sites vous pouvez utiliser [[TiddlyHost|https://tiddlyhost.com]], un nouveau service d'hébergement qui remplace ~TiddlySpot.
 Saving/TiddlySpot/ServerURL: URL du serveur
 Saving/TiddlySpot/UploadDir: Dossier des dépôts
-Saving/TiddlySpot/UserName: Nom utilisé pour ce Wiki
+Saving/TiddlySpot/UserName: Nom du Wiki
 Settings/AutoSave/Caption: Sauvegarde automatique
 Settings/AutoSave/Disabled/Description: Pas de sauvegarde automatique des modifications
 Settings/AutoSave/Enabled/Description: Sauvegarde automatique des modifications
 Settings/AutoSave/Hint: Tentative de sauvegarde automatique des modifications pendant l'édition quand un enregistreur compatible est utilisé
 Settings/CamelCase/Caption: Liens Wiki //Camel Case//
-Settings/CamelCase/Hint: Vous pouvez désactiver globalement les liens créés à partir des expressions de type ~CamelCase. Pour que ce paramètre prenne effet, il est nécessaire de recharger le wiki
+Settings/CamelCase/Hint: Pour que ce paramètre prenne effet, il est nécessaire de recharger le wiki
 Settings/CamelCase/Description: Active les liens automatiques sur les expressions de la forme ~CamelCase
 Settings/Caption: Paramétrage
 Settings/EditorToolbar/Caption: Barre d'outils de l'éditeur
@@ -184,6 +187,8 @@ Settings/DefaultSidebarTab/Caption: Onglet par défaut sur la barre latérale
 Settings/DefaultSidebarTab/Hint: Indique l'onglet de la barre latérale qui sera affiché par défaut
 Settings/DefaultMoreSidebarTab/Caption: Onglet par défaut sous le Plus de la barre latérale
 Settings/DefaultMoreSidebarTab/Hint: Indique quel onglet sera affiché par défaut sous le Plus de la barre latérale
+Settings/DefaultTiddlerInfoTab/Caption: Onglet par défaut pour les Infos du tiddler
+Settings/DefaultTiddlerInfoTab/Hint: Spécifie l'onglet affiché par défaut lorsque le panneau d'information du tiddler est ouvert
 Settings/LinkToBehaviour/Caption: Comportement à l'ouverture du tiddler
 Settings/LinkToBehaviour/InsideRiver/Hint: Navigation depuis un emplacement //interne// au déroulé
 Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation depuis un emplacement //externe// au déroulé
@@ -245,3 +250,6 @@ ViewTemplateSubtitle/Caption: Visualisation du sous-titre
 ViewTemplateSubtitle/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage du sous-titre d'un tiddler.
 ViewTemplateTags/Caption: Visualisation des tags
 ViewTemplateTags/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage de la zone de tags d'un tiddler.
+WikiInformation/Caption: Informations sur le Wiki
+WikiInformation/Hint: Cette page rassemble quelques informations générales sur la configuration de ce ~TiddlyWiki. Elle est conçue pour permettre de partager rapidement certains aspects de sa configuration avec d'autres, par exemple lorsqu'on demande de l'aide sur un forum. Elle ne contient aucune information privée ni personnelle, et rien n'est partagé sans être explicitement copié-collé ailleurs.
+WikiInformation/Drag/Caption: Déplacer ce lien pour copier cet outil sur un autre wiki

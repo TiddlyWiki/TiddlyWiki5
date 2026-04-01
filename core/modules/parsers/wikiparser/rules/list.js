@@ -59,6 +59,7 @@ var listTypes = {
 	":": {listTag: "dl", itemTag: "dd"},
 	">": {listTag: "blockquote", itemTag: "div"}
 };
+exports.listTypes = listTypes;
 
 /*
 Parse the most recent match

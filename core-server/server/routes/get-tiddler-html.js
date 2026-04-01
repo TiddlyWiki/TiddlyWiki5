@@ -8,9 +8,13 @@ GET /:title
 \*/
 "use strict";
 
-exports.method = "GET";
+exports.methods = ["GET"];
 
 exports.path = /^\/([^\/]+)$/;
+
+exports.info = {
+	priority: 100
+};
 
 exports.handler = function(request,response,state) {
 	var title = $tw.utils.decodeURIComponentSafe(state.params[0]),
@@ -29,8 +33,8 @@ exports.handler = function(request,response,state) {
 		}
 		var text = state.wiki.renderTiddler(renderType,renderTemplate,{parseAsInline: true, variables: {currentTiddler: title}});
 
-		// Naughty not to set a content-type, but it's the easiest way to ensure the browser will see HTML pages as HTML, and accept plain text tiddlers as CSS or JS
-		state.sendResponse(200,{},text,"utf8");
+		var headers = {"Content-Type": renderType};
+		state.sendResponse(200,headers,text,"utf8");
 	} else {
 		response.writeHead(404);
 		response.end();

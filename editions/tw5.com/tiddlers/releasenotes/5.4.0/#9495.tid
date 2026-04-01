@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9495
+description: Protect cached array data from external mutation
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9495
+github-contributors: yaisog
+
+Functions returning cached tiddler lists now return shallow copies to prevent external code from inadvertently mutating the cache

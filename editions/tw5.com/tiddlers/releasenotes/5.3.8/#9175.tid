@@ -3,6 +3,6 @@ description: Fixed Flexoki palette regressions
 release: 5.3.8
 tags: $:/tags/ChangeNote
 change-type: bugfix
-change-category: palette
-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9175
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9175
 github-contributors: Leilei332

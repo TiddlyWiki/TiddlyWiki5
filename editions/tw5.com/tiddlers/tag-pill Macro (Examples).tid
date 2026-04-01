@@ -1,5 +1,5 @@
 created: 20230803034230294
-modified: 20230803043848449
+modified: 20260114112240512
 tags: [[Macro Examples]] [[tag-pill Macro]]
 title: tag-pill Macro (Examples)
 
@@ -12,3 +12,9 @@ This example displays the [[Definitions]] tag as an unclickable, but still-style
 <$transclude $variable=".example" n="2" eg="""<<tag-pill Definitions element-tag:"big" element-attributes:"inert">>"""/>
 
 
+<$transclude $variable=".example" n="3" eg="""\procedure tag-actions()
+<$action-confirm $message="test"/>
+\end
+
+<$transclude $variable="tag-pill" tag="asdf" element-tag="$button" actions=<<tag-actions>>/>
+""">>

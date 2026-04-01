@@ -1,5 +1,5 @@
 created: 20181002123907518
-modified: 20181002124345482
+modified: 20250605000000000
 tags: [[WebServer API]]
 title: WebServer API: Get File
 type: text/vnd.tiddlywiki
@@ -15,11 +15,22 @@ Parameters:
 
 * ''pathname'' - URI encoded path to the file
 
+Headers:
+
+* ''Range'' - <<.from-version "5.3.7">> (optional) Request specific byte ranges using the format `bytes=start-end`. Supports partial content delivery for media streaming.
+
 Response:
 
 * 200 OK
 *> `Content-Type: <content-type>` (determined from file extension)
-*> Body: data retrieved from file
+*> `Content-Length: <file-size>`
+*> `Accept-Ranges: bytes`
+*> Body: complete file data
+* 206 Partial Content (when Range header is provided)
+*> `Content-Type: <content-type>` (determined from file extension)
+*> `Content-Length: <range-size>`
+*> `Content-Range: bytes <start>-<end>/<total-size>`
+*> `Accept-Ranges: bytes`
+*> Body: requested byte range data
 * 403 Forbidden
 * 404 Not Found
-

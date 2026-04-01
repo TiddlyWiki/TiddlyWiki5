@@ -7,11 +7,12 @@ description: Internet Explorer用のブラウザ拡張
 method: save
 modified: 20241009114650356
 original-modified: 20200507201415232
-tags: [[Internet Explorer]] Saving
+tags: [[Internet Explorer]] Saving $:/deprecated
 title: Saving with TiddlyIE
 ja-title: TiddlyIEでの保存
 type: text/vnd.tiddlywiki
 
+<<.deprecated-since "5.3.6">>
 # TiddlyIEアドオンを次の場所からインストールします: 
 #* https://github.com/davidjade/TiddlyIE/releases
 # Internet Explorerを再起動します。IEはTiddlyIEアドオンを有効にするように要求します。

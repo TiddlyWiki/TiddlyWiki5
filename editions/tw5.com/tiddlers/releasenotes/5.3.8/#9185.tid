@@ -4,5 +4,5 @@ release: 5.3.8
 tags: $:/tags/ChangeNote
 change-type: bugfix
 change-category: plugin
-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9185
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9185
 github-contributors: Leilei332

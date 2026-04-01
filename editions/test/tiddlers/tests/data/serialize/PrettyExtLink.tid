@@ -1,0 +1,6 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/PrettyExtLink
+type: text/vnd.tiddlywiki
+
+[ext[https://tiddlywiki.com/fractalveg.jpg]]
+[ext[Tooltip|https://tiddlywiki.com/fractalveg.jpg]]

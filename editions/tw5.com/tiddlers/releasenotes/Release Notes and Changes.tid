@@ -1,18 +1,25 @@
 title: Release Notes and Changes
 
+See [[Release Notes and Changes Internals]] for a detailed breakdown of the tiddlers that make up a release note.
+
 ! Release Notes
+
+Release notes describe the changes in a release, and the impact of those changes. They comprise the following information:
+
+* the version number (eg `5.4.0`)
+* the release date if the release has been published
+* a brief description of the release
 
 ! Change Notes
 
-* `title` by convention titles are formed `$:/changenotes/<version>/<unique identifier>`. The unique identifier is typically a GitHub PR or issue like `#1234` or a GitHub commit ID such as `98f850609d29bc36ded83f90c0d5be231649254b`
-* `tags` must include `$:/tags/ChangeNote`, see below for other valid tags
-* `change-type` the type of change as a single string; see below for values
-* `change-category` the category of the change; see below for vqalues
+Change notes describe a discrete change within a release. Change note comprise the following information:
 
-Other valid tags for change notes:
-
-* `$:/tags/ChangeNote/Deprecation`
-* `$:/tags/ChangeNote/Breaking`
+* the associated release
+* the change-type from the list below
+* the change-category from the list below
+* a description of the change
+* a list of the ~GitHub links associated with this change
+* a list of the ~GitHub handles of the developers responsible for the PR/commits
 
 Valid change note types are as follows:
 
@@ -21,7 +28,7 @@ Valid change note types are as follows:
 * ''enhancement''
 * ''deprecation''
 * ''security''
-* ''pluginisation''
+* ''performance''
 
 Valid change categories are as follows: 
 
@@ -31,8 +38,22 @@ Valid change categories are as follows:
 * ''widget''
 * ''filters''
 * ''usability''
-* ''palette''
+* ''theme''
 * ''hackability''
 * ''nodejs''
 * ''performance''
 * ''developer''
+
+! Impact Notes
+
+Impact notes describe the impact of a particular change. There can be multiple impact notes for a given change. They comprise the following information:
+
+* the associated change note
+* a description of the impact
+* the impact type from the list below
+
+Valid impact types are as follows:
+
+* ''deprecation'' - there are features or functionality that should no longer be used in new code
+* ''compatibility-break'' - changes are included that break backwards compatibility
+* ''pluginisation'' - functionality has been moved from the core to a plugin

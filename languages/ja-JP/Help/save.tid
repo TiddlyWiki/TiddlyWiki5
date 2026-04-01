@@ -1,0 +1,25 @@
+title: $:/language/Help/save
+description: 個々の生のTiddlerをファイルに保存
+
+フィルターによって識別された個々のTiddlerを、生のテキスト形式やバイナリ形式で、指定されたファイルに保存します。
+
+```
+--save <tiddler-filter> <filename-filter>
+```
+
+* ''tiddler-filter'': 保存するTiddlerを識別するフィルター
+* ''filename-filter'': Tiddlerのタイトルをパス名に変換するオプションのフィルタ。省略された場合は、デフォルトは`[is[tiddler]]`となり、Tiddlerのタイトルがそのままファイル名として使用されます
+
+デフォルトでは、エディションディレクトリの`output`サブディレクトリを基準としてファイル名が解決されます。`--output`コマンドを使用すると、出力先を別のディレクトリに指定できます。
+
+注:
+
+* 出力ディレクトリから既存のファイルは削除されません
+* ファイル名へのパスに存在しないディレクトリは自動的に作成されます
+* タイトルにスペースが含まれるTiddlerを保存する場合は、シェルに必要な引用符とTiddlyWikiの二重角括弧の両方を使用するように注意してください: `--save "[[Motovun Jack.jpg]]"`
+* ファイル名フィルタは、選択された項目を現在保存中のTiddlerのタイトルに設定して評価されます。これにより、タイトルをファイル名の計算の基準として使用できます。例えば、 `[encodeuricomponent[]addprefix[static/]]` は、各タイトルにURIエンコーディングを適用し、`static/`プレフィックスを追加します
+* `--save`コマンドは、非推奨の`--savetiddler`コマンドと`--savetiddlers`コマンドより柔軟な代替手段です
+
+例:
+
+* `--save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"` -- システム以外のすべての画像Tiddlerを、URLエンコードされたタイトルを持つ"tiddlers"サブディレクトリ内のファイルとして保存します

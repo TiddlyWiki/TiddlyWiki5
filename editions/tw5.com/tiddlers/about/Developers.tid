@@ -1,5 +1,5 @@
 created: 20150412191004348
-modified: 20240925114810504
+modified: 20251022153208584
 tags: Community Reference
 title: Developers
 type: text/vnd.tiddlywiki
@@ -8,3 +8,4 @@ type: text/vnd.tiddlywiki
 * Get involved in the [[development on GitHub|https://github.com/TiddlyWiki/TiddlyWiki5]]
 * [[GitHub Discussions|https://github.com/TiddlyWiki/TiddlyWiki5/discussions]] are for Q&A and open-ended discussion
 * [[GitHub Issues|https://github.com/TiddlyWiki/TiddlyWiki5/issues]] are for raising bug reports and proposing specific, actionable new ideas
+* See [[Contributing]] for guidelines on how to contribute to the project.

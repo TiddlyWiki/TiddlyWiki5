@@ -11,19 +11,6 @@ Various static DOM-related utility functions.
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
-/*
-Determines whether element 'a' contains element 'b'
-Code thanks to John Resig, http://ejohn.org/blog/comparing-document-position/
-*/
-exports.domContains = function(a,b) {
-	return a.contains ?
-		a !== b && a.contains(b) :
-		!!(a.compareDocumentPosition(b) & 16);
-};
-
-exports.domMatchesSelector = function(node,selector) {
-	return node.matches ? node.matches(selector) : node.msMatchesSelector(selector);
-};
 
 /*
 Select text in a an input or textarea (setSelectionRange crashes on certain input types)
@@ -46,38 +33,6 @@ exports.setSelectionByPosition = function(node,selectFromStart,selectFromEnd) {
 exports.removeChildren = function(node) {
 	while(node.hasChildNodes()) {
 		node.removeChild(node.firstChild);
-	}
-};
-
-exports.hasClass = function(el,className) {
-	return el && el.hasAttribute && el.hasAttribute("class") && el.getAttribute("class").split(" ").indexOf(className) !== -1;
-};
-
-exports.addClass = function(el,className) {
-	var c = (el.getAttribute("class") || "").split(" ");
-	if(c.indexOf(className) === -1) {
-		c.push(className);
-		el.setAttribute("class",c.join(" "));
-	}
-};
-
-exports.removeClass = function(el,className) {
-	var c = (el.getAttribute("class") || "").split(" "),
-		p = c.indexOf(className);
-	if(p !== -1) {
-		c.splice(p,1);
-		el.setAttribute("class",c.join(" "));
-	}
-};
-
-exports.toggleClass = function(el,className,status) {
-	if(status === undefined) {
-		status = !exports.hasClass(el,className);
-	}
-	if(status) {
-		exports.addClass(el,className);
-	} else {
-		exports.removeClass(el,className);
 	}
 };
 
@@ -119,7 +74,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 	// Get the scroll container and register the current scroll position
 	var container = $tw.utils.getScrollContainer(domNode),
 		scrollTop = container.scrollTop;
-    // Measure the specified minimum height
+	// Measure the specified minimum height
 	domNode.style.height = minHeight;
 	var measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
 	// Set its height to auto so that it snaps to the correct height
@@ -189,7 +144,7 @@ exports.getPassword = function(name) {
 Force layout of a dom node and its descendents
 */
 exports.forceLayout = function(element) {
-	var dummy = element.offsetWidth;
+	void element.offsetWidth;
 };
 
 /*
@@ -291,14 +246,10 @@ exports.copyToClipboard = function(text,options) {
 	}
 	if(!options.doNotNotify) {
 		var successNotification = options.successNotification || "$:/language/Notifications/CopiedToClipboard/Succeeded",
-			failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed"
+			failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed";
 		$tw.notifier.display(succeeded ? successNotification : failureNotification);
 	}
 	document.body.removeChild(textArea);
-};
-
-exports.getLocationPath = function() {
-	return window.location.toString().split("#")[0];
 };
 
 /*
@@ -306,8 +257,8 @@ Collect DOM variables
 */
 exports.collectDOMVariables = function(selectedNode,domNode,event) {
 	var variables = {},
-	    selectedNodeRect,
-	    domNodeRect;
+		selectedNodeRect,
+		domNodeRect;
 	if(selectedNode) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();

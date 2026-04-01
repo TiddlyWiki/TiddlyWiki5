@@ -1,0 +1,15 @@
+title: $:/changenotes/5.4.0/#9465
+description: Import UI now conditionally displays file-type-specific import options
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: enhancement
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9465
+github-contributors: linonetwo
+
+The import UI now displays import options based on the file types being imported. Import options are only shown when relevant files are detected, an example is:
+
+```tid
+tags: $:/tags/ImportOptions
+condition: [match[text/x-markdown]] :or[match[text/markdown]]
+```

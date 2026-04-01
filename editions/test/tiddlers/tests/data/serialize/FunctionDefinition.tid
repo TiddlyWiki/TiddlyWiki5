@@ -1,0 +1,15 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/FunctionDefinition
+type: text/vnd.tiddlywiki
+
+\function name(param:"defaultvalue", param2:"defaultvalue")
+definition text
+\end
+
+\procedure name(param:"defaultvalue", param2:"defaultvalue")
+definition text
+\end
+
+\widget $mywidget(param:"defaultvalue", param2:"defaultvalue")
+definition text
+\end
