@@ -55,7 +55,20 @@ When using the <<.param itemTemplate>> parameter or the <<.field toc-itemTemplat
 
 ''Important:'' Template tiddlers must have a <<.field text>> field (i.e. they must have body content) to be recognised. An empty tiddler will not qualify as a template, and the default rendering will be used instead.
 
-See [[Examples/TOC/param/itemTemplate]] for the macro parameter, [[Examples/TOC/param/itemTemplate-level]] for combined use with the level parameter, and [[Examples/TOC/field/toc-itemTemplate]] for per-node field overrides.
+See [[Examples/TOC/param/itemTemplate]] for the macro parameter, [[Examples/TOC/param/itemTemplate-level]] for combined use with the level parameter, [[Examples/TOC/field/toc-itemTemplate]] for per-node field overrides, and [[Examples/TOC/param/branchTemplate]] for branch-wide template inheritance.
+
+!! Template Priority
+
+<<.from-version "5.4.0">>
+
+When determining which template to use for a node, the following priority applies (highest first):
+
+# <<.field toc-itemTemplate>> field on the current tiddler — per-node override
+# <<.field toc-branchTemplate>> inherited from a parent node — applies to the entire branch
+# <<.param itemTemplate>> macro parameter — global default
+# No template — uses the default `toc-defaultFieldTemplate` with `<<_linkTemplate>>`
+
+See [[Examples/TOC/param/branchTemplate-priority]] for a test that demonstrates this cascade.
 
 !! Field Cascade
 

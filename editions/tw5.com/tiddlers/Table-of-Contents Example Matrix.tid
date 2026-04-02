@@ -31,6 +31,10 @@ type: text/vnd.tiddlywiki
 |[[Examples/TOC/param/parentField-level]] |parentField + level |parentField combined with level limit |
 |[[Examples/TOC/param/itemTemplate]] |itemTemplate |global custom template |
 |[[Examples/TOC/param/itemTemplate-level]] |itemTemplate + level |itemTemplate combined with level limit |
+|[[Examples/TOC/param/branchTemplate]] |toc-branchTemplate |branch-wide template for children |
+|[[Examples/TOC/param/branchTemplate-priority]] |toc-branchTemplate + toc-itemTemplate |toc-itemTemplate overrides toc-branchTemplate |
+|[[Examples/TOC/param/branchTemplate-expandable]] |toc-branchTemplate + expandable |branch template with toc-expandable |
+|[[Examples/TOC/param/branchTemplate-selective]] |toc-branchTemplate + selective |branch template with toc-selective-expandable |
 
 !! Node Fields
 

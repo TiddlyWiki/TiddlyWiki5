@@ -53,6 +53,13 @@ These fields allow control over which children appear under a node and how they 
 : If set, uses the content of the template tiddler to display this specific node
 : This field takes ''precedence'' over the <<.param itemTemplate>> macro parameter, allowing per-node template overrides
 
+; toc-branchTemplate <<.from-version "5.4.0">>
+: Expects a template tiddler title
+: If set, uses the content of the template tiddler to display ''all children'' in the branch below this node
+: Unlike <<.field toc-itemTemplate>> which affects only the node itself, <<.field toc-branchTemplate>> propagates down the entire sub-tree
+: A child's <<.field toc-itemTemplate>> takes ''precedence'' over an inherited <<.field toc-branchTemplate>>
+: A child can also set its own <<.field toc-branchTemplate>> to override the parent's value for its sub-branch
+
 !! Field Name Overrides
 
 The field names used by the node control fields are defined as global procedures. Expert users can override them:
