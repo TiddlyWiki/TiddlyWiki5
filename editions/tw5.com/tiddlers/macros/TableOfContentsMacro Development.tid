@@ -1,0 +1,152 @@
+created: 20260402120000000
+modified: 20260402120000000
+tags: [[Table-of-Contents Macros]]
+title: Table-of-Contents Macros Development
+type: text/vnd.tiddlywiki
+
+This tiddler documents internals, extension points, and migration notes for developers working with the [[Table-of-Contents Macros]].
+
+!! New Child Buttons
+
+<<.from-version "5.4.0">>
+
+Setting the variable `tv-toc-show-new-child` to `yes` adds a "new child" button to every node in the tree. The button creates a new tiddler with the appropriate relationship field already set.
+
+```
+\define tv-toc-show-new-child() yes
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>
+```
+
+The button behaviour is mode-aware:
+
+|Mode |Field set on new tiddler |Icon |h
+|tagMode |`tags` |{{$:/core/images/new-here-button}} |
+|parentField (tocpMode) |the <<.param parentField>> value |{{$:/core/images/new-child}} |
+|tagField (tagLikeMode) |the <<.param tagField>> value |{{$:/core/images/new-here-button}} |
+
+The button and its surrounding markup use the CSS classes `tc-toc-new-child`, `tc-toc-new-child-tag`, `tc-toc-new-child-parent`, and `tc-toc-new-child-tagLike` for styling.
+
+The `toc-newChildButton` procedure can be overridden locally to customise or remove the button.
+
+See [[Examples/TOC/param/parentField]] and [[Examples/TOC/param/tagField]] for working examples.
+
+!! Writing Custom Item Templates
+
+<<.from-version "5.4.0">>
+
+When using the <<.param itemTemplate>> parameter or the <<.field toc-itemTemplate>> field, the template tiddler's content is transcluded for each node. Inside the template, the following procedures are available:
+
+; `<<_linkTemplate>>`
+: Renders the default link (or unlinked text if `toc-link: no`). This is the most common building block for custom templates. Example:
+
+```
+<$checkbox tag="done"/> - <<_linkTemplate>>
+```
+
+; `<<toc-defaultFieldTemplate>>`
+: Renders the node text (caption/title) with tooltip, using the field cascade. Does not include link wrapping
+
+; `<<toc-newChildButton>>`
+: Renders the new-child button (if `tv-toc-show-new-child` is active)
+
+''Important:'' Template tiddlers must have a <<.field text>> field (i.e. they must have body content) to be recognised. An empty tiddler will not qualify as a template, and the default rendering will be used instead.
+
+See [[toc-param-itemTemplate]] for the macro parameter, [[toc-param-itemTemplate-level]] for combined use with the level parameter, and [[toc-field-toc-itemTemplate]] for per-node field overrides.
+
+!! Field Cascade
+
+<<.from-version "5.4.0">>
+
+The `toc-defaultFieldTemplate` procedure uses a filter cascade to determine which field to display for each node. The cascade is evaluated in this order:
+
+# If the <<.param itemTemplate>> parameter is set → use the `text` field
+# If the <<.param captionField>> parameter is set and the tiddler has a non-blank value in that field → use <<.param captionField>>
+# If the tiddler has a non-blank <<.field caption>> field → use `caption`
+# Fallback → use `title`
+
+This means that <<.param captionField>> only takes effect when the tiddler actually has content in the specified field. If the field is empty or missing, the cascade continues to <<.field caption>> and then <<.field title>>.
+
+!! Backwards Compatibility: toc-caption
+
+If user code defines `\procedure toc-caption()` (the old pattern from pre-rewrite toc macros), the rewrite still honours it in ''tagMode''. When the `toc-caption` variable is detected, the `toc-defaultFieldTemplate` will use `<$transclude $variable="toc-caption"/>` instead of the field cascade.
+
+This ensures existing wikis that customise toc display via `toc-caption` continue to work after upgrading. The `toc-caption` path is ''only'' active in tagMode, not in parentField or tagField modes.
+
+!! Complete CSS Classes Reference
+
+The toc macros apply several CSS classes for styling. Beyond the [[node control field classes|Table-of-Contents Macros Customisation]], these additional classes are available:
+
+|Class |Element |Applied when |h
+|`toc-item` |`<li>` |Default class for every toc node |
+|`toc-item-selected` |`<li>` |In tabbed mode, when the node matches the selected tiddler |
+|`toc-item-muted` |`<span>` |In selective-expandable, for unlinked leaf nodes (no children, `toc-link: no`) |
+|`tc-toc-unlinked` |`<span>` |On the caption text inside an unlinked chevron button |
+|`tc-toc-filter` |`<li>` |Node's children come from <<.field toc-filter>> |
+|`tc-toc-include` |`<li>` |Node was added via <<.field toc-include>> |
+|`tc-toc-hide` |`<li>` |Node's parent has a <<.field toc-hide>> field |
+|`tc-toc-new-child` |`<button>` |The new-child button |
+|`tc-toc-new-child-tag` |`<span>` |New-child button wrapper in tagMode |
+|`tc-toc-new-child-parent` |`<span>` |New-child button wrapper in parentField mode |
+|`tc-toc-new-child-tagLike` |`<span>` |New-child button wrapper in tagField mode |
+
+!! State Tiddlers and $qualify
+
+The expandable toc macros use `$qualify` to create unique state tiddler paths. The path is built from:
+
+> `$:/state/toc` + <<.param path>> + `-` + <<.var currentTiddler>>
+
+The <<.param path>> accumulates as the tree recurses: each level appends `/` and the current tag. This ensures that the same tiddler appearing in different branches of the tree has independent open/close state.
+
+When embedding multiple TOCs in the same tiddler, `$qualify` further ensures unique state by incorporating the tiddler's position in the widget tree.
+
+!! Programmatic Branch Control
+
+<<.from-version "5.4.0">>
+
+The `toc-openBranch` and `toc-closeBranch` procedures accept a `manual` parameter (default: `"no"`). When set to `"yes"`, the branch opens or closes without requiring a CTRL-click:
+
+|Procedure |`manual:"yes"` |CTRL-click |h
+|`toc-openBranch` |Opens the branch and recursively opens all children |Same behaviour |
+|`toc-closeBranch` |Closes the branch and deletes all child state tiddlers |Same behaviour |
+
+This is useful for plugin authors who want to programmatically expand or collapse specific branches.
+
+See [[test-open-close-branch-buttons]] for a working example.
+
+!! Deprecated: itemClassFilter Parameter
+
+The `itemClassFilter` parameter still appears in all macro signatures for backwards compatibility but is no longer used. It has been replaced by the internal `tf.toc-itemClassFilter` function, which automatically handles the `toc-item-selected` class in tabbed mode.
+
+Existing code that passes `itemClassFilter` will not break, but the parameter is silently ignored.
+
+!! Internal Architecture
+
+The toc macros are designed for code reuse from bottom to top:
+
+```
+toc-expandable
+  └─ used by toc-selective-expandable
+       └─ used by toc-tabbed-external-nav
+            └─ used by toc-tabbed-internal-nav
+```
+
+The simple <<.var toc>> macro is the exception — it does ''not'' reuse the expandable macros. This makes it a useful reference implementation for debugging, as it is self-contained in `toc` and `toc-body`.
+
+Key internal functions and procedures:
+
+|Name |Type |Purpose |h
+|`tf.toc-filterString` |function |Returns the correct filter string based on mode (tag/parentField/tagField) |
+|`tf.toc-mode` |function |Returns the current mode: `tagMode`, `tocpMode`, or `tagLikeMode` |
+|`tf.toc-hasChildren` |function |Returns a filter string to check if a node has children (mode-aware) |
+|`tf.toc-hide` |function |Evaluates the `toc-hide` field: returns a titlelist for `yes`, or the field content as filter |
+|`tf.toc-include` |function |Reads the `toc-include` field from the current tag/parent |
+|`tf.toc-filter` |function |Reads the `toc-filter` field from the current tag/parent |
+|`tf.toc-itemClass` |function |Joins all CSS classes for a node (selected, include, filter, hide) |
+|`tf.toc-getItemTemplateTitle` |function |Resolves template: tiddler field takes precedence over macro parameter |
+|`tf.toc-getTooltip` |function |Returns tooltip text: `toc-tooltip` field or fallback to title |
+|`tf.toc-stateTitle` |function |Builds the state tiddler path for open/close state |
+|`tf.toc-stateIsClosed` |function |Checks if a branch is in closed state |
+|`tf.toc-stateIsOpen` |function |Checks if a branch is open (or `tv-toc-expand` is yes) |

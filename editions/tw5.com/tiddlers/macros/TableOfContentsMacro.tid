@@ -49,6 +49,9 @@ To make a table of contents appear in the sidebar, see [[How to add a new tab to
 ; [[Customisation|Table-of-Contents Macros Customisation]]
 : Custom icons, CTRL-click branch expand/fold, field name overrides, tooltip functions, and styling with `data-fieldClass`
 
+; [[Development|Table-of-Contents Macros Development]]
+: Internals for developers and plugin authors: new-child buttons, custom template authoring, field cascade, CSS classes reference, state tiddlers, programmatic branch control, backwards compatibility, and internal architecture
+
 !! Examples
 
 Learn more at [[Standard Examples|Table-of-Contents Macros (Examples)]]
