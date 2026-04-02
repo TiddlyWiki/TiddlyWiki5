@@ -12,6 +12,7 @@ Draggable widget
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var DraggableWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 

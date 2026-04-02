@@ -1,0 +1,18 @@
+title: Transclude/Recursion/Variables
+description: Transclusion recursion variables
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<<get_UNSAFE_max_widget_tree_depth>> - {{Button}}
++
+title: Button
+
+<$button><<parent-ancestorcount>></$button>
+<$button><<parent-ancestorcount-dom>></$button>
++
+title: ExpectedResult
+
+<p>1000 - <button>6</button>
+<button>2</button></p>
