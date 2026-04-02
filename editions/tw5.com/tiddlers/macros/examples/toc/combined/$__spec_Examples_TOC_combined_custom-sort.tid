@@ -1,9 +1,18 @@
 code-body: yes
 created: 20260402120000000
-modified: 20260402120000000
-tags:
+modified: 20260402163416830
+tags: 
 title: $:/spec/Examples/TOC/combined/custom-sort
 type: text/vnd.tiddlywiki-multiple
 
 title: ExpectedResult
 
+<p>The <code>name-sort</code> function is defined as:</p><pre><code>\function name-sort() "[{!!last-name}] [{!!first-name}] +[join[, ]]"</code></pre><p><div class="tc-table-of-contents">
+<ol class="tc-toc"><li class="toc-item "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Another%20TOC%20Entry"><span class="" data-fieldClass="field-title" title="Another TOC Entry">Another TOC Entry</span></a><ol class="tc-toc"><li class="toc-item tc-toc-filter ">Rubble, Betty
+<ol class="tc-toc"></ol></li><li class="toc-item tc-toc-filter ">Bear, Booboo
+<ol class="tc-toc"></ol></li><li class="toc-item tc-toc-filter ">Flintstone, Wilma
+<ol class="tc-toc"></ol></li><li class="toc-item tc-toc-filter ">Rubble, Barney
+<ol class="tc-toc"></ol></li><li class="toc-item tc-toc-filter ">Bear, Yogi
+<ol class="tc-toc"></ol></li><li class="toc-item tc-toc-filter ">Flintstone, Fred
+<ol class="tc-toc"></ol></li></ol></li><li class="toc-item "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Sorted%20by%20%28tiddler%29%20Title"><span class="" data-fieldClass="field-title" title="Sorted by (tiddler) Title">Sorted by (tiddler) Title</span></a><ol class="tc-toc"><li class="toc-item tc-toc-include "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Person%2F1"><span class="" data-fieldClass="field-caption" title="Person/1">Betty Rubble</span></a><ol class="tc-toc"></ol></li><li class="toc-item tc-toc-include "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Person%2F2"><span class="" data-fieldClass="field-caption" title="Person/2">Booboo Bear</span></a><ol class="tc-toc"></ol></li><li class="toc-item tc-toc-include "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Person%2F3"><span class="" data-fieldClass="field-caption" title="Person/3">Wilma Flintstone</span></a><ol class="tc-toc"></ol></li><li class="toc-item tc-toc-include "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Person%2F4"><span class="" data-fieldClass="field-caption" title="Person/4">Barney Rubble</span></a><ol class="tc-toc"></ol></li><li class="toc-item tc-toc-include "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Person%2F5"><span class="" data-fieldClass="field-caption" title="Person/5">Yogi Bear</span></a><ol class="tc-toc"></ol></li><li class="toc-item tc-toc-include "><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Person%2F6"><span class="" data-fieldClass="field-caption" title="Person/6">Fred Flintstone</span></a><ol class="tc-toc"></ol></li></ol></li></ol>
+</div></p>

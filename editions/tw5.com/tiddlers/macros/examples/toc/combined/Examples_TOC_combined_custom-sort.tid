@@ -1,19 +1,19 @@
 created: 20260402120000000
-import-compound: $:/spec/Examples/TOC/combined/custom-sortXXX
-modified: 20260402160702575
+import-compound: $:/spec/Examples/TOC/combined/custom-sort
+modified: 20260402163528013
 tags: $:/tags/wiki-test-spec combined
 title: Examples/TOC/combined/custom-sort
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative
 
-* This example shows a ''custom sort function'' for the toc macro
+* This example combines ''toc-include'', ''toc-filter'', ''toc-branchTemplate'', and a ''custom sort function''
 
-* The `name-sort` function combines `last-name` and `first-name` fields
+* "Sorted by (tiddler) Title" uses `toc-include: [tag[Person]]` to add Person tiddlers to its child list. They are sorted by title (Person/1, Person/2, ...)
 
-* In the "Sorted by Title" section, people are sorted by their Person/1, Person/2, ... titles
+* "Another TOC Entry" uses `toc-filter: [tag[Person]]` to ''replace'' its child list with Person tiddlers
 
-* In the "People" section, they are ''sorted by last name'' and then by first name
+* "Another TOC Entry" also uses `toc-branchTemplate: customTemplate` — all its children are rendered with the `customTemplate` template, which shows `last-name, first-name` using a custom `name-sort` function
 
 +
 title: Description
@@ -32,20 +32,17 @@ toc-include: [tag[Person]]
 This node toc-includes all Person tiddlers
 
 +
-title: name-sort
-tags: $:/tags/Global
+title: customTemplate
 
-\function name-sort() "[{!!last-name}] [{!!first-name}] +[join[, ]]"
-+
-title: test
+\function name-sort() [{!!last-name}] [{!!first-name}] +[join[, ]]
 
-<<currentTiddler>>
+<<name-sort>>
 
 +
 title: Another TOC Entry
 tags: nameSorted
 toc-filter: [tag[Person]]
-toc-branchTemplate: test
+toc-branchTemplate: customTemplate
 
 +
 title: Person/1
