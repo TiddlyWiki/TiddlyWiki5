@@ -1,0 +1,51 @@
+created: 20260402120000000
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/param/branchTemplate-priority
+modified: 20260402165357384
+tags: $:/tags/wiki-test-spec param
+title: Examples/TOC/param/branchTemplate-priority
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example tests the ''priority'' between `toc-branchTemplate` and `toc-itemTemplate`
+
+* Tiddler `bb` has `toc-branchTemplate: branch-tmpl` — applies to all children
+
+* Tiddler `bb-bb` has `toc-itemTemplate: node-tmpl` — overrides the branch template for this node only
+
+* `bb-bb-bb` should use the branch template (inherited from `bb`)
+
+* `toc-itemTemplate` takes ''precedence'' over `toc-branchTemplate`
+
+{{example-overview}}
+
++
+title: Description
+
+toc-itemTemplate overrides toc-branchTemplate
++
+title: branch-tmpl
+
+Branch: <$link/>
+
++
+title: node-tmpl
+
+Node: <$link/>
+
++
+title: bb
+tags: Contents
+toc-branchTemplate: branch-tmpl
+
++
+title: bb-bb
+tags: bb
+toc-itemTemplate: node-tmpl
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>
