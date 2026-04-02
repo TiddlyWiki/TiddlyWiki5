@@ -2,7 +2,7 @@ code-body: yes
 created: 20250924112404397
 modified: 20250924112440598
 tags: 
-title: $:/spec/toc-param-captionField
+title: $:/spec/Examples/TOC/param/captionField
 type: text/vnd.tiddlywiki-multiple
 
 title: ExpectedResult

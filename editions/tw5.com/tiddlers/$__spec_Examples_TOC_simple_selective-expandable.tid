@@ -2,7 +2,7 @@ code-body: yes
 created: 20250924110352338
 modified: 20250924110432636
 tags: 
-title: $:/spec/toc-simple-selective-expandable
+title: $:/spec/Examples/TOC/simple/selective-expandable
 type: text/vnd.tiddlywiki-multiple
 
 title: ExpectedResult

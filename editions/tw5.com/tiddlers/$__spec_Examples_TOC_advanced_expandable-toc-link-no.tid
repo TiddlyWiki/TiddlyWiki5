@@ -2,7 +2,7 @@ code-body: yes
 created: 20250924105233397
 modified: 20250924105449606
 tags: 
-title: $:/spec/toc-advanced-expandable-toc-link-no
+title: $:/spec/Examples/TOC/advanced/expandable-toc-link-no
 type: text/vnd.tiddlywiki-multiple
 
 title: ExpectedResult

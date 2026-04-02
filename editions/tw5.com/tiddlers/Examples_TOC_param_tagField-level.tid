@@ -1,8 +1,8 @@
 created: 20260402120000000
-import-compound: $:/spec/toc-param-tagField-level
+import-compound: $:/spec/Examples/TOC/param/tagField-level
 modified: 20260401235409708
 tags: $:/tags/wiki-test-spec param
-title: toc-param-tagField-level
+title: Examples/TOC/param/tagField-level
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative

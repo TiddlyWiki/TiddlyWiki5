@@ -1,8 +1,8 @@
 created: 20250923083011345
-import-compound: toc-simple $:/spec/toc-param-parentField
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/param/parentField
 modified: 20250924112721192
 tags: $:/tags/wiki-test-spec param
-title: toc-param-parentField
+title: Examples/TOC/param/parentField
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative

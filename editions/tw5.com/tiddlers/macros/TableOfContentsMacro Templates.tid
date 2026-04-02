@@ -32,7 +32,7 @@ The button and its surrounding markup use the CSS classes `tc-toc-new-child`, `t
 
 The `toc-newChildButton` procedure can be overridden locally to customise or remove the button.
 
-See [[Examples/TOC/param/parentField]] and [[Examples/TOC/param/tagField]] for working examples.
+See [[Examples/TOC/param/parentField-newChild]] and [[Examples/TOC/param/tagField-newChild]] for working examples.
 
 !! Writing Custom Item Templates
 
@@ -55,7 +55,7 @@ When using the <<.param itemTemplate>> parameter or the <<.field toc-itemTemplat
 
 ''Important:'' Template tiddlers must have a <<.field text>> field (i.e. they must have body content) to be recognised. An empty tiddler will not qualify as a template, and the default rendering will be used instead.
 
-See [[toc-param-itemTemplate]] for the macro parameter, [[toc-param-itemTemplate-level]] for combined use with the level parameter, and [[toc-field-toc-itemTemplate]] for per-node field overrides.
+See [[Examples/TOC/param/itemTemplate]] for the macro parameter, [[Examples/TOC/param/itemTemplate-level]] for combined use with the level parameter, and [[Examples/TOC/field/toc-itemTemplate]] for per-node field overrides.
 
 !! Field Cascade
 

@@ -1,8 +1,8 @@
 created: 20250922115819376
-import-compound: toc-simple $:/spec/toc-simple-expandable
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/tag-expandable
 modified: 20250922130813561
 tags: $:/tags/wiki-test-spec simple
-title: toc-simple-expandable
+title: Examples/TOC/simple/expandable
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative

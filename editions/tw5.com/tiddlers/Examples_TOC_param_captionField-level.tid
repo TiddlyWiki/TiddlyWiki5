@@ -1,8 +1,8 @@
 created: 20260402120000000
-import-compound: toc-simple $:/spec/toc-param-captionField-level
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/param/captionField-level
 modified: 20260402120000000
 tags: $:/tags/wiki-test-spec param
-title: toc-param-captionField-level
+title: Examples/TOC/param/captionField-level
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative

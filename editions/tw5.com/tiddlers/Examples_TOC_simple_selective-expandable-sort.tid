@@ -1,8 +1,8 @@
 created: 20250922121940524
-import-compound: toc-simple $:/spec/toc-simple-selective-expandable-sort-title
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/selective-expandable-sort
 modified: 20260402011736808
 tags: $:/tags/wiki-test-spec simple
-title: toc-simple-selectiv-expandable-sort-title
+title: Examples/TOC/simple/selective-expandable-sort
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative

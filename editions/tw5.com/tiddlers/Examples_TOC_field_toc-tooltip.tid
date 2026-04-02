@@ -1,8 +1,8 @@
 created: 20250923072105209
-import-compound: toc-simple $:/spec/toc-field-toc-tooltip
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/field/toc-tooltip
 modified: 20250924110301190
 tags: $:/tags/wiki-test-spec field
-title: toc-field-toc-tooltip
+title: Examples/TOC/field/toc-tooltip
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative

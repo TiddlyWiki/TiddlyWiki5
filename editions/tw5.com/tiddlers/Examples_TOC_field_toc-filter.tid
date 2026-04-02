@@ -1,8 +1,8 @@
 created: 20260402120000000
-import-compound: toc-simple $:/spec/toc-field-toc-filter
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/field/toc-filter
 modified: 20260402120000000
 tags: $:/tags/wiki-test-spec field
-title: toc-field-toc-filter
+title: Examples/TOC/field/toc-filter
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative

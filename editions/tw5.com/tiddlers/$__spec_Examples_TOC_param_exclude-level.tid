@@ -2,7 +2,7 @@ code-body: yes
 created: 20260402120000000
 modified: 20260402000835665
 tags: 
-title: $:/spec/toc-param-exclude-level
+title: $:/spec/Examples/TOC/param/exclude-level
 type: text/vnd.tiddlywiki-multiple
 
 title: ExpectedResult

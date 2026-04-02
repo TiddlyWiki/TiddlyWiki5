@@ -2,7 +2,7 @@ code-body: yes
 created: 20250924112824594
 modified: 20250924112944323
 tags: 
-title: $:/spec/toc-param-itemTemplate
+title: $:/spec/Examples/TOC/param/itemTemplate
 type: text/vnd.tiddlywiki-multiple
 
 title: ExpectedResult

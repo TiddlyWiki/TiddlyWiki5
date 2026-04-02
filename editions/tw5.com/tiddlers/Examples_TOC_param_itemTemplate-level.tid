@@ -1,8 +1,8 @@
 created: 20260402120000000
-import-compound: toc-simple $:/spec/toc-param-itemTemplate-level
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/param/itemTemplate-level
 modified: 20260402001645761
 tags: $:/tags/wiki-test-spec param
-title: toc-param-itemTemplate-level
+title: Examples/TOC/param/itemTemplate-level
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative
