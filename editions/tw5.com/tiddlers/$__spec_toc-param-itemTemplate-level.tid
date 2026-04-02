@@ -1,0 +1,17 @@
+code-body: yes
+created: 20260402120000000
+modified: 20260402001753459
+tags: 
+title: $:/spec/toc-param-itemTemplate-level
+type: text/vnd.tiddlywiki-multiple
+
+title: ExpectedResult
+
+<p><div class="tc-table-of-contents">
+<ol class="tc-toc"><li class="toc-item "><span class="tc-tiny-gap-left"><svg class="tc-image-new-button tc-image-button" height="22pt" viewBox="0 0 128 128" width="22pt"><path d="M56 72H8.007C3.591 72 0 68.418 0 64c0-4.41 3.585-8 8.007-8H56V8.007C56 3.591 59.582 0 64 0c4.41 0 8 3.585 8 8.007V56h47.993c4.416 0 8.007 3.582 8.007 8 0 4.41-3.585 8-8.007 8H72v47.993c0 4.416-3.582 8.007-8 8.007-4.41 0-8-3.585-8-8.007V72z" fill-rule="evenodd"></path></svg></span><label class="tc-checkbox "><input type="checkbox"><span></span></label> - <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#aa"><span class="" data-fieldClass="field-title" title="aa">aa</span></a>
+<ol class="tc-toc"><li class="toc-item "><span class="tc-tiny-gap-left"><svg class="tc-image-blank tc-image-button" height="22pt" viewBox="0 0 128 128" width="22pt"></svg></span><label class="tc-checkbox "><input type="checkbox"><span></span></label> - <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#aa-aa"><span class="" data-fieldClass="field-title" title="aa-aa">aa-aa</span></a>
+</li></ol></li><li class="toc-item "><span class="tc-tiny-gap-left"><svg class="tc-image-new-button tc-image-button" height="22pt" viewBox="0 0 128 128" width="22pt"><path d="M56 72H8.007C3.591 72 0 68.418 0 64c0-4.41 3.585-8 8.007-8H56V8.007C56 3.591 59.582 0 64 0c4.41 0 8 3.585 8 8.007V56h47.993c4.416 0 8.007 3.582 8.007 8 0 4.41-3.585 8-8.007 8H72v47.993c0 4.416-3.582 8.007-8 8.007-4.41 0-8-3.585-8-8.007V72z" fill-rule="evenodd"></path></svg></span><label class="tc-checkbox "><input type="checkbox"><span></span></label> - <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#bb"><span class="" data-fieldClass="field-title" title="bb">bb</span></a>
+<ol class="tc-toc"><li class="toc-item "><span class="tc-tiny-gap-left"><svg class="tc-image-new-button tc-image-button" height="22pt" viewBox="0 0 128 128" width="22pt"><path d="M56 72H8.007C3.591 72 0 68.418 0 64c0-4.41 3.585-8 8.007-8H56V8.007C56 3.591 59.582 0 64 0c4.41 0 8 3.585 8 8.007V56h47.993c4.416 0 8.007 3.582 8.007 8 0 4.41-3.585 8-8.007 8H72v47.993c0 4.416-3.582 8.007-8 8.007-4.41 0-8-3.585-8-8.007V72z" fill-rule="evenodd"></path></svg></span><label class="tc-checkbox "><input type="checkbox"><span></span></label> - <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#bb-bb"><span class="" data-fieldClass="field-title" title="bb-bb">bb-bb</span></a>
+</li></ol></li><li class="toc-item "><span class="tc-tiny-gap-left"><svg class="tc-image-blank tc-image-button" height="22pt" viewBox="0 0 128 128" width="22pt"></svg></span><label class="tc-checkbox "><input type="checkbox"><span></span></label> - <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#cc"><span class="" data-fieldClass="field-title" title="cc">cc</span></a>
+<ol class="tc-toc"></ol></li></ol>
+</div></p>
