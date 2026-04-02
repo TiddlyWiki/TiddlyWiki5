@@ -1,0 +1,9 @@
+created: 20240216230843012
+modified: 20240216231150955
+tags: 
+title: Transclude/CustomWidget/ActionWidget
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$transclude $tiddler='Result'>
+</$transclude>

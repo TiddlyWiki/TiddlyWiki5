@@ -1,0 +1,12 @@
+caption: moduletypes
+created: 20140410103123179
+modified: 20240217231725897
+op-input: ignored
+op-output: the name of each known ~TiddlyWiki [[module type|ModuleType]], in alphabetical order
+op-parameter: none
+op-purpose: select the names of all ~TiddlyWiki module types
+tags: [[Filter Operators]] [[Special Operators]] [[Selection Constructors]]
+title: moduletypes Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "moduletypes">>

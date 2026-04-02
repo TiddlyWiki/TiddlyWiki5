@@ -124,6 +124,7 @@ Add 'abc' to 'myfield'
 
 <$list filter="[enlist:raw{!!myfield}]" template="$:/core/ui/ListItemTemplate" />
 """/>
+
 The [[enlist Operator]] with `raw` suffix will enlist the list saved in <<.field myfield>> of the current tiddler without de-duplication, while e.g. the [[list Operator]] will always de-duplicate. The widget then adds the item <<.value abc>> -- whether or not it is already included in the list -- and replaces the original list in <<.field myfield>>.
 
 

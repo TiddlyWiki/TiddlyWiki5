@@ -1,0 +1,9 @@
+created: 20221123152743439
+modified: 20240901192210856
+tags: 
+title: LinkWidget-todo-fixed
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+first example renders as -- vertical spacing -- 

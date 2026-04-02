@@ -1,0 +1,27 @@
+created: 20260319195909340
+modified: 20260319205702037
+tags: 
+title: SCREENSHOT-TIDDLER
+type: text/vnd.tiddlywiki
+
+\procedure complete()
+<$action-createtiddler $basetitle="_newScreenshot" text=<<newTitle>> $overwrite="yes" >
+</$action-createtiddler>
+\end
+\procedure screenshot()
+<$let save-title=<<now "YYYY-0MM-0DD-0hh-0mm-0ss-0XXX">>>
+<$action-sendmessage
+	$message="tm-save-dom-to-image"
+	selector=".tc-tiddler-frame"
+	scale="2"
+	save-title=<<save-title>>
+    oncompletion=<<complete>>
+    var-newTitle=<<save-title>>
+/>
+</$let>
+\end
+
+<$button actions=<<screenshot>> class="save-screenshot">
+SAVE-SCREENSHOT
+</$button> <$link to={{_newScreenshot}}/>
+
