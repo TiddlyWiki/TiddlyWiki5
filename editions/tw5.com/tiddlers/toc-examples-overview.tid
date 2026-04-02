@@ -1,10 +1,61 @@
 created: 20250922122215951
-modified: 20250923080837936
-tags: 
+modified: 20260402120000000
+tags:
 title: toc-examples-overview
 type: text/vnd.tiddlywiki
 
-! Simple toc-rewritten Examples
+! Coverage Matrix
+
+!! Macro Variants
+
+|Example |Macro |Feature |h
+|[[toc-simple]] |toc |basic tag mode |
+|[[toc-simple-level]] |toc |level parameter |
+|[[toc-simple-expandable]] |toc-expandable |expandable branches |
+|[[toc-simple-expandable-fully-expanded]] |toc-expandable |pre-expanded with tv-toc-expand |
+|[[toc-simple-selectiv-expandable]] |toc-selective-expandable |selective expandable |
+|[[toc-simple-selectiv-expandable-expanded]] |toc-selective-expandable |pre-expanded with tv-toc-expand |
+|[[toc-simple-selectiv-expandable-sort-title]] |toc-selective-expandable |sort parameter |
+|[[toc-simple-selectiv-expandable-custom-icons]] |toc-selective-expandable |custom icons |
+|[[toc-simple-tabbed-internal]] |toc-tabbed-internal-nav |tabbed internal navigation |
+|[[toc-simple-tabbed-external]] |toc-tabbed-external-nav |tabbed external navigation |
+
+!! Macro Parameters
+
+|Example |Parameter(s) |Description |h
+|[[toc-param-exclude]] |exclude |exclude tiddlers from TOC |
+|[[toc-param-exclude-level]] |exclude + level |exclude combined with level limit |
+|[[toc-param-captionField]] |captionField |use alternate field for display |
+|[[toc-param-captionField-level]] |captionField + level |captionField combined with level limit |
+|[[toc-param-tagField]] |tagField |build tree from tag-like field |
+|[[toc-param-tagField-level]] |tagField + level |tagField combined with level limit |
+|[[toc-param-parentField]] |parentField |build tree from parent field |
+|[[toc-param-parentField-level]] |parentField + level |parentField combined with level limit |
+|[[toc-param-itemTemplate]] |itemTemplate |global custom template |
+|[[toc-param-itemTemplate-level]] |itemTemplate + level |itemTemplate combined with level limit |
+
+!! Node Fields
+
+|Example |Field(s) |Description |h
+|[[toc-field-caption-target]] |caption, target |display caption and link to target |
+|[[toc-field-toc-link]] |toc-link |suppress link with toc-link: no |
+|[[toc-field-toc-tooltip]] |toc-tooltip |custom tooltip on hover |
+|[[toc-field-toc-filter]] |toc-filter |replace child list with custom filter |
+|[[toc-field-toc-include]] |toc-include |add tiddlers to child list |
+|[[toc-field-toc-hide]] |toc-hide |remove node from child list |
+|[[toc-field-toc-itemTemplate]] |toc-itemTemplate |per-node template override |
+
+!! Advanced
+
+|Example |Macro |Feature |h
+|[[toc-advanced-expandable-toc-link-no]] |toc-expandable |toc-link: no with expandable |
+|[[toc-advanced-selectiv-expandable-toc-link-no]] |toc-selective-expandable |toc-link: no with selective expandable |
+
+---
+
+! Dynamic Lists
+
+!! Simple toc-rewritten Examples
 
 Test the parameters, that are part of the "old" toc macro.
 
@@ -14,7 +65,7 @@ Test the parameters, that are part of the "old" toc macro.
 </$list>
 </ul>
 
-! TOC Node Fields Examples
+!! TOC Node Fields Examples
 
 These tests show the functions, that are available with the node fields, including the "old" ones.
 
@@ -24,7 +75,7 @@ These tests show the functions, that are available with the node fields, includi
 </$list>
 </ul>
 
-! TOC Macro Parameter Examples
+!! TOC Macro Parameter Examples
 
 These tests show how the different macro parameters are used
 

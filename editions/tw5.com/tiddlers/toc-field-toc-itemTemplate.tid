@@ -1,0 +1,43 @@
+created: 20260402120000000
+import-compound: toc-simple $:/spec/toc-field-toc-itemTemplate
+modified: 20260402120000000
+tags: $:/tags/wiki-test-spec field
+title: toc-field-toc-itemTemplate
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents with the ''toc-itemTemplate'' field
+
+* The "root" elements are ''tagged Contents''
+
+* Tiddler `aa-aa` has a `toc-itemTemplate` field pointing to `my-node-template`
+
+* This overrides the default template for that ''specific node only''
+
+* The macro is called ''without'' the itemTemplate parameter
+
+{{examples-overview}}
+
++
+title: Description
+
+Field "toc-itemTemplate" overrides template per node
++
+title: my-node-template
+
+<$checkbox tag="done"/> - <<_linkTemplate>>
+
++
+title: aa-aa
+tags: aa
+toc-itemTemplate: my-node-template
+
+Link to [[bb]]
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>

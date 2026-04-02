@@ -1,0 +1,36 @@
+created: 20260402120000000
+import-compound: toc-simple $:/spec/toc-field-toc-hide
+modified: 20260402120000000
+tags: $:/tags/wiki-test-spec field
+title: toc-field-toc-hide
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents with the ''toc-hide'' field
+
+* The "root" elements are ''tagged Contents''
+
+* Tiddler `bb-bb` has `toc-hide: yes`, so it is ''removed'' from the child list of `bb`
+
+* `toc-hide` takes ''precedence'' over all other fields
+
+{{examples-overview}}
+
++
+title: Description
+
+Field "toc-hide" removes node from child list
++
+title: bb-bb
+tags: bb
+toc-hide: yes
+
+Link to [[bb-bb-bb]]
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>
