@@ -1,53 +1,76 @@
-created: 20240730081443212
-description: Simple TOC - parentField parameter
-modified: 20240826162950242
-tags: $:/tags/wiki-test-spec
-title: Examples/TOC/param/parentField
+created: 20250923083011345
+import-compound: toc-simple $:/spec/toc-param-parentField
+modified: 20250924112721192
+tags: $:/tags/wiki-test-spec param
+title: toc-param-parentField
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative
 
-* The "Output" code defines a "Simple Table of Contents" using the ''parent'' field in child-tiddlers to connect to a parent-tiddler
-* Click through all the tabs to get additional info
+* This example shows a simple table of contents to show the use of different parameters
 
-<$transclude $tiddler="Narrative-extended" $mode="block"/>
+* The "root" element is `parent: Contents`
+
+* The macro-call uses the ''parentField'' to define a tree structure
+
+* Using a parent field is fundamentally different to using tags -> ''There can only be one!''
+
+* The field-name can be ''any name''.
+
+{{example-overview}}
 
 +
-title: root
+title: Description
 
-The parent-field in the ''child''-tiddlers are used to define the relation to the parent tiddler
+TOC Macro Parameter "parentField"
+
 +
-title: Child-1
-tooltip: child-1 tooltip
-parent: root
+title: aa-aa
+tags: aa
+tag-like: dd
+parent: gg
 
-1st 1st 1st 1st 1st
+Tiddlers can belong to different TOC structures 
+
 +
-title: Child-2
-parent: root
+title: gg
+parent: Contents
 
-2nd 2nd 2nd 2nd 2nd
+Link to [[gg-gg]]
+
 +
-title: Child-3
-parent: root
+title: gg-gg
+parent: gg
 
-3rd 3rd 3rd 3rd 3rd
+Link to [[hh]]
+
 +
-title: Child-2-1
-caption: 2-1 caption
-parent: Child-2
+title: hh
+parent: Contents
 
-This tiddler contains a caption, which will be shown in the TOC instead of the tiddler title
+Link to [[hh-hh]]
+
++
+title: hh-hh
+parent: hh
+
+Link to [[hh-hh-hh]]
+
++
+title: hh-hh-hh
+parent: hh-hh
+
+Link to [[ii]]
+
++
+title: ii
+parent: Contents
+
+Link to [[gg]]
+
 +
 title: Output
 
-<!-- 
-This variable set to yes allows you to show a New-Child button.
-This button will create a "real" tiddler, which will _not_ be listed here
--->
-\define tv-toc-show-new-child() yes
-
 <div class="tc-table-of-contents">
-<<toc tag:"root" parentField:"parent">>
+<<toc tag:"Contents" parentField:"parent">>
 </div>
-
