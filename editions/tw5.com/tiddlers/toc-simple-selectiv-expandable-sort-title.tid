@@ -1,7 +1,7 @@
 created: 20250922121940524
 import-compound: toc-simple $:/spec/toc-simple-selective-expandable-sort-title
-modified: 20250923081648168
-tags: $:/tags/wiki-test-spec simple param
+modified: 20260402011736808
+tags: $:/tags/wiki-test-spec simple
 title: toc-simple-selectiv-expandable-sort-title
 type: text/vnd.tiddlywiki-multiple
 
