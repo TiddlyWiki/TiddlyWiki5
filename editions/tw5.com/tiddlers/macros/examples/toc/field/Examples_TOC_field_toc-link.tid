@@ -9,7 +9,7 @@ title: Narrative
 
 * This example shows a simple table of contents with 3 levels
 * The "root" elements are ''tagged Contents''
-* The [[aa-aa]] tiddler contains a field: `toc-link: no` to it does not contain a link
+* The [[aa-aa]] tiddler contains a field: `toc-link: no` so it does not contain a link
 
 {{example-overview}}
 

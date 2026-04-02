@@ -7,9 +7,9 @@ type: text/vnd.tiddlywiki-multiple
 
 title: Narrative
 
-* This example shows a simple expandable list
+* This example shows an expandable TOC using `toc-expandable`
 
-* Every element has a chevron, even if there are no child elements
+* ''Every'' element has a chevron — even leaf nodes without children
 
 {{ctrl-click-info}}
 +

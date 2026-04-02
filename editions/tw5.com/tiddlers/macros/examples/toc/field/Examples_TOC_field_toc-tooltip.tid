@@ -11,7 +11,7 @@ title: Narrative
 
 * The "root" elements are ''tagged Contents''
 
-* Tiddler [[aa-aa]] has a `tooltip` field
+* Tiddler [[aa-aa]] has a `toc-tooltip` field
 
 {{example-overview}}
 

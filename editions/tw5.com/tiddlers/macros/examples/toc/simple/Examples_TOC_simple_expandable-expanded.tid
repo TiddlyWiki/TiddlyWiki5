@@ -7,11 +7,11 @@ type: text/vnd.tiddlywiki-multiple
 
 title: Narrative
 
-* This example shows a simple expandable list
+* This example shows an expandable TOC using `toc-expandable` with all branches pre-expanded
 
-* Every element has a chevron, even if there are no child elements
+* ''Every'' element has a chevron — even leaf nodes without children
 
-* All paths are expanded as long as `tv-toc-expand() yes` is defined.
+* All paths are expanded because `tv-toc-expand() yes` is defined
 
 +
 title: Description
