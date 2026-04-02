@@ -11,7 +11,7 @@ title: Narrative
 
 * Every element has a chevron, even if there are no child elements
 
-* All paths are expanded as long as `tv-toc-expanded() yes` is defined.
+* All paths are expanded as long as `tv-toc-expand() yes` is defined.
 
 +
 title: Description

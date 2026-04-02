@@ -11,7 +11,7 @@ title: Narrative
 
 * Every element which has at least 1 child shows a chevron
 
-* All paths are expanded as long as `tv-toc-expanded() yes` is defined.
+* All paths are expanded as long as `tv-toc-expand() yes` is defined.
 
 * The ''bb-bb'' tiddler contains a field: `toc-link: no`, that's why it is muted
 

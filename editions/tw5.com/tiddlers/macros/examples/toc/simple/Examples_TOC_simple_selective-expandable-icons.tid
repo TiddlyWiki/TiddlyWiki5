@@ -7,7 +7,15 @@ type: text/vnd.tiddlywiki-multiple
 
 title: Narrative
 
-TODO Narrative ffff
+* This example shows a selective expandable TOC with ''custom icons''
+
+* The default chevron icons are overridden using the `$let` widget
+
+* `toc-open-icon` is set to `$:/core/images/fold-button`
+
+* `toc-closed-icon` is set to `$:/core/images/folder`
+
+{{example-overview}}
 +
 title: Description
 
