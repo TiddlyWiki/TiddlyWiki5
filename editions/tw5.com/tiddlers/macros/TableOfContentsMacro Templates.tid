@@ -1,0 +1,77 @@
+created: 20260402120000000
+modified: 20260402120000000
+caption: TOC Macros Templates
+tags: [[Table-of-Contents Macros Customisation]]
+title: Table-of-Contents Macros Templates
+type: text/vnd.tiddlywiki
+
+Template and rendering customisation for the [[Table-of-Contents Macros]].
+
+!! New Child Buttons
+
+<<.from-version "5.4.0">>
+
+Setting the variable `tv-toc-show-new-child` to `yes` adds a "new child" button to every node in the tree. The button creates a new tiddler with the appropriate relationship field already set.
+
+```
+\define tv-toc-show-new-child() yes
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>
+```
+
+The button behaviour is mode-aware:
+
+|Mode |Field set on new tiddler |Icon |h
+|tagMode |`tags` |{{$:/core/images/new-here-button}} |
+|parentField (tocpMode) |the <<.param parentField>> value |{{$:/core/images/new-child}} |
+|tagField (tagLikeMode) |the <<.param tagField>> value |{{$:/core/images/new-here-button}} |
+
+The button and its surrounding markup use the CSS classes `tc-toc-new-child`, `tc-toc-new-child-tag`, `tc-toc-new-child-parent`, and `tc-toc-new-child-tagLike` for styling.
+
+The `toc-newChildButton` procedure can be overridden locally to customise or remove the button.
+
+See [[Examples/TOC/param/parentField]] and [[Examples/TOC/param/tagField]] for working examples.
+
+!! Writing Custom Item Templates
+
+<<.from-version "5.4.0">>
+
+When using the <<.param itemTemplate>> parameter or the <<.field toc-itemTemplate>> field, the template tiddler's content is transcluded for each node. Inside the template, the following procedures are available:
+
+; `<<_linkTemplate>>`
+: Renders the default link (or unlinked text if `toc-link: no`). This is the most common building block for custom templates. Example:
+
+```
+<$checkbox tag="done"/> - <<_linkTemplate>>
+```
+
+; `<<toc-defaultFieldTemplate>>`
+: Renders the node text (caption/title) with tooltip, using the field cascade. Does not include link wrapping
+
+; `<<toc-newChildButton>>`
+: Renders the new-child button (if `tv-toc-show-new-child` is active)
+
+''Important:'' Template tiddlers must have a <<.field text>> field (i.e. they must have body content) to be recognised. An empty tiddler will not qualify as a template, and the default rendering will be used instead.
+
+See [[toc-param-itemTemplate]] for the macro parameter, [[toc-param-itemTemplate-level]] for combined use with the level parameter, and [[toc-field-toc-itemTemplate]] for per-node field overrides.
+
+!! Field Cascade
+
+<<.from-version "5.4.0">>
+
+The `toc-defaultFieldTemplate` procedure uses a filter cascade to determine which field to display for each node. The cascade is evaluated in this order:
+
+# If the <<.param itemTemplate>> parameter is set → use the `text` field
+# If the <<.param captionField>> parameter is set and the tiddler has a non-blank value in that field → use <<.param captionField>>
+# If the tiddler has a non-blank <<.field caption>> field → use `caption`
+# Fallback → use `title`
+
+This means that <<.param captionField>> only takes effect when the tiddler actually has content in the specified field. If the field is empty or missing, the cascade continues to <<.field caption>> and then <<.field title>>.
+
+!! Backwards Compatibility: toc-caption
+
+If user code defines `\procedure toc-caption()` (the old pattern from pre-rewrite toc macros), the rewrite still honours it in ''tagMode''. When the `toc-caption` variable is detected, the `toc-defaultFieldTemplate` will use `<$transclude $variable="toc-caption"/>` instead of the field cascade.
+
+This ensures existing wikis that customise toc display via `toc-caption` continue to work after upgrading. The `toc-caption` path is ''only'' active in tagMode, not in parentField or tagField modes.

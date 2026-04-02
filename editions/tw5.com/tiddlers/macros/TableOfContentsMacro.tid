@@ -1,6 +1,6 @@
 created: 20140919155729620
-modified: 20260402120000000
-tags: Macros [[Core Macros]]
+modified: 20260402130416137
+tags: Macros [[Core Macros]] [[Customise TiddlyWiki]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
 
@@ -47,10 +47,7 @@ To make a table of contents appear in the sidebar, see [[How to add a new tab to
 : Tiddler fields for per-node control: <<.field caption>>, <<.field toc-link>>, <<.field target>>, <<.field toc-tooltip>>, <<.field toc-filter>>, <<.field toc-include>>, <<.field toc-hide>>, <<.field toc-itemTemplate>>
 
 ; [[Customisation|Table-of-Contents Macros Customisation]]
-: Custom icons, CTRL-click branch expand/fold, field name overrides, tooltip functions, and styling with `data-fieldClass`
-
-; [[Development|Table-of-Contents Macros Development]]
-: Internals for developers and plugin authors: new-child buttons, custom template authoring, field cascade, CSS classes reference, state tiddlers, programmatic branch control, backwards compatibility, and internal architecture
+: Icons, behaviour, tooltips, styling, custom templates, CSS reference, and internals for developers
 
 !! Examples
 

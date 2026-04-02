@@ -1,117 +1,23 @@
 created: 20260402120000000
 modified: 20260402120000000
+caption: TOC Macros Customisation
 tags: [[Table-of-Contents Macros]]
 title: Table-of-Contents Macros Customisation
 type: text/vnd.tiddlywiki
 
-Advanced customisation options for the [[Table-of-Contents Macros]].
+Customisation and developer documentation for the [[Table-of-Contents Macros]].
 
-!! CTRL-click Expand / Fold
+; [[Icons and Behaviour|Table-of-Contents Macros Icons and Behaviour]]
+: CTRL-click expand/fold, custom icons, pre-expanded trees, and level indicator
 
-<<.from-version "5.4.0">>
+; [[Tooltips and Styling|Table-of-Contents Macros Tooltips and Styling]]
+: Custom tooltips, `data-fieldClass` styling, and CSS classes for node control fields
 
-In the expandable and selective-expandable variants, <kbd>CTRL</kbd>-clicking a chevron will expand the ''whole branch'' recursively. <kbd>CTRL</kbd>-clicking again will close the whole branch.
+; [[Templates|Table-of-Contents Macros Templates]]
+: New-child buttons, custom item templates, field cascade logic, and `toc-caption` backwards compatibility
 
-''Advantage:'' If everything is expanded, a normal click only folds the current branch.
+; [[CSS Reference|Table-of-Contents Macros CSS Reference]]
+: Complete CSS classes reference, breaking changes to tabbed TOC selectors, and migration guide for custom stylesheets
 
-!! Custom Icons
-
-<<.from-version "5.2.4">>
-
-To change the icons used by the Table-of-Contents macros, redefine the procedures `toc-open-icon` and `toc-closed-icon`. This setting works for all toc-macro variants.
-
-!!! Default Settings
-
-* <<.var toc-open-icon>>: `\procedure toc-open-icon() $:/core/images/down-arrow`
-
-* <<.var toc-closed-icon>>: `\procedure toc-closed-icon() $:/core/images/right-arrow`
-
-!!! Custom Definitions
-
-The default settings can be overwritten in your code using the define-pragma or the let-widget. The <<.wlink LetWidget>> widget can be used if you have multiple table of contents macros in one tiddler that need different icons.
-
-''Define new icons using a pragma''
-
-```
-\procedure toc-open-icon() $:/core/images/fold-button
-\procedure toc-closed-icon() $:/core/images/folder
-...
-```
-
-''Define new icons using the let-widget''
-
-```
-<$let toc-open-icon="$:/core/images/fold-button" toc-closed-icon="$:/core/images/folder">
-...
-</$let>
-```
-
-!! Pre-expanded Trees
-
-Setting the variable `tv-toc-expand` to `yes` will load the toc with all branches expanded. This is especially important for testing "ExpectedResults" in testcase tiddlers.
-
-```
-\define tv-toc-expand() yes
-
-<<toc-expandable tag:"Contents">>
-```
-
-!! Level Indicator
-
-<<.from-version "5.4.0">>
-
-When the <<.param level>> parameter is used with the <<.var toc>> macro, nodes with children show a "+" indicator icon. To change or remove it, override the `toc-level-indicator` procedure locally:
-
-```
-\define toc-level-indicator()
-<!-- remove the indicator -->
-\end
-
-<<toc tag:"Contents" level:"1">>
-```
-
-!! Custom Tooltips
-
-<<.from-version "5.4.0">>
-
-The `tf.toc-getTooltip` function controls what tooltip is shown on hover. By default it uses the <<.field toc-tooltip>> field, falling back to <<.field currentTiddler>>.
-
-You can override it to use a different field. For example, to show the <<.field description>> field:
-
-```
-\function tf.toc-getTooltip() [<currentTiddler>get[description]!is[blank]] :else[<currentTiddler>]
-
-<div class="tc-table-of-contents">
-<<toc tag:"Contents">>
-</div>
-```
-
-!! Styling with data-fieldClass
-
-<<.from-version "5.4.0">>
-
-Each toc node has a `data-fieldClass` attribute set to `field-$(field)$`, where `$(field)$` is replaced with the field name being displayed (e.g. `field-caption`, `field-title`). This can be used for CSS styling:
-
-```css
-[data-fieldClass="field-caption"] {
-  font-style: italic;
-}
-```
-
-The `data-fieldClass` attribute is used instead of `class` because field names can use character sets that are not allowed in the HTML `class` attribute.
-
-!! CSS Classes for Node Control Fields
-
-Nodes affected by the [[node control fields|Table-of-Contents Macros Fields]] receive CSS classes for styling:
-
-|Class |Applied when |h
-|`tc-toc-filter` |Node's children come from <<.field toc-filter>> |
-|`tc-toc-include` |Node was added via <<.field toc-include>> |
-|`tc-toc-hide` |Node's parent has a <<.field toc-hide>> field |
-
-Example styles:
-
-```css
-.tc-toc-filter > a { color: darkviolet; }
-.tc-toc-include > a { color: green; }
-```
+; [[Internals|Table-of-Contents Macros Internals]]
+: State tiddlers, programmatic branch control, deprecated parameters, internal architecture, and function reference

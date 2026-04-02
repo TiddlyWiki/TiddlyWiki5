@@ -1,0 +1,87 @@
+created: 20260402120000000
+modified: 20260402120000000
+caption: TOC Macros CSS Reference
+tags: [[Table-of-Contents Macros Customisation]]
+title: Table-of-Contents Macros CSS Reference
+type: text/vnd.tiddlywiki
+
+CSS classes and styling information for the [[Table-of-Contents Macros]].
+
+!! Complete CSS Classes Reference
+
+The toc macros apply several CSS classes for styling. Beyond the [[node control field classes|Table-of-Contents Macros Customisation]], these additional classes are available:
+
+|Class |Element |Applied when |h
+|`toc-item` |`<li>` |Default class for every toc node |
+|`toc-item-selected` |`<li>` |In tabbed mode, when the node matches the selected tiddler |
+|`toc-item-muted` |`<span>` |In selective-expandable, for unlinked leaf nodes (no children, `toc-link: no`) |
+|`tc-toc-unlinked` |`<span>` |On the caption text inside an unlinked chevron button |
+|`tc-toc-filter` |`<li>` |Node's children come from <<.field toc-filter>> |
+|`tc-toc-include` |`<li>` |Node was added via <<.field toc-include>> |
+|`tc-toc-hide` |`<li>` |Node's parent has a <<.field toc-hide>> field |
+|`tc-toc-new-child` |`<button>` |The new-child button |
+|`tc-toc-new-child-tag` |`<span>` |New-child button wrapper in tagMode |
+|`tc-toc-new-child-parent` |`<span>` |New-child button wrapper in parentField mode |
+|`tc-toc-new-child-tagLike` |`<span>` |New-child button wrapper in tagField mode |
+
+!! Breaking Change: Tabbed TOC CSS Selectors
+
+<<.from-version "5.4.0">>
+
+The CSS rules for the tabbed table of contents (`toc-tabbed-internal-nav` / `toc-tabbed-external-nav`) have changed. In the rewritten macros, the `<li>` element contains a chevron `<button>` and a `<a>` link as siblings, whereas the old macros wrapped everything inside the `<a>`. This means ''CSS selectors targeting `> a` for borders and backgrounds no longer work correctly''.
+
+If you have custom stylesheets that target the tabbed TOC, you will need to update them.
+
+!!! What changed
+
+|Before (< 5.4.0) |After (>= 5.4.0) |Reason |h
+|Borders and background on `.toc-item > a` |Borders and background on `.toc-item` |The `<li>` now contains both `<button>` and `<a>` as siblings. Styling the `<a>` alone leaves the chevron unstyled |
+|`.toc-item > a:hover` adds visible borders |Removed — hover borders caused layout shift |Transparent borders on `.toc-item` at rest prevent shift; hover only changes colour |
+|`.toc-item-selected > a` gets border + background |`.toc-item-selected` gets border + background |Same reason — styling moves from `<a>` to the `<li>` |
+|`display: block` on `.toc-item > a` |`display: inline-block` on `.toc-item > a` |Links no longer span the full row; the chevron button sits alongside |
+
+!!! Migration guide
+
+If you have custom CSS like this:
+
+```css
+/* OLD — will no longer work correctly */
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a {
+    border: 1px solid ...;
+    background: ...;
+}
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a {
+    border: 1px solid ...;
+    background: ...;
+}
+```
+
+Change it to target the `<li>` instead:
+
+```css
+/* NEW — target the <li> element */
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item {
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected {
+    border-top: 1px solid ...;
+    border-left: 1px solid ...;
+    border-bottom: 1px solid ...;
+    background: ...;
+    margin-right: -1px;
+}
+```
+
+!!! Preventing children from inheriting selected background
+
+When a node is selected, its `<li>` gets a background colour. Because child `<li>` elements are nested inside, they inherit this background. To prevent this, reset the children:
+
+```css
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected .toc-item {
+    background: <<colour tab-background>>;
+    border-color: transparent;
+    margin-right: 0;
+}
+```
