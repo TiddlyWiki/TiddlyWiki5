@@ -1,10 +1,8 @@
 created: 20250922122215951
-modified: 20260402120000000
-tags:
+modified: 20260402171615043
+tags: [[Table-of-Contents Macros]]
 title: Table-of-Contents Example Matrix
 type: text/vnd.tiddlywiki
-
-! Coverage Matrix
 
 !! Macro Variants
 
@@ -64,9 +62,9 @@ type: text/vnd.tiddlywiki
 
 ---
 
-! Dynamic Lists
+!! Dynamic Lists
 
-!! Simple toc-rewritten Examples
+!!! Simple toc-rewritten Examples
 
 Test the parameters, that are part of the "old" toc macro.
 
@@ -76,7 +74,7 @@ Test the parameters, that are part of the "old" toc macro.
 </$list>
 </ul>
 
-!! TOC Node Fields Examples
+!!! TOC Node Fields Examples
 
 These tests show the functions, that are available with the node fields, including the "old" ones.
 
@@ -86,7 +84,7 @@ These tests show the functions, that are available with the node fields, includi
 </$list>
 </ul>
 
-!! TOC Macro Parameter Examples
+!!! TOC Macro Parameter Examples
 
 These tests show how the different macro parameters are used
 

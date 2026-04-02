@@ -51,5 +51,11 @@ To make a table of contents appear in the sidebar, see [[How to add a new tab to
 
 !! Examples
 
-Learn more at [[Standard Examples|Table-of-Contents Macros (Examples)]]
-Learn much more at: [[Advanced Examples|Table-of-Contents Macros (Advanced Examples)]]
+; [[Standard Examples|Table-of-Contents Macros (Examples)]]
+: Interactive examples for each macro variant
+
+; [[Advanced Examples|Table-of-Contents Macros (Advanced Examples)]]
+: Combined feature demonstrations and edge cases
+
+; [[Example Matrix|Table-of-Contents Example Matrix]]
+: Complete coverage matrix with links to all test specs
