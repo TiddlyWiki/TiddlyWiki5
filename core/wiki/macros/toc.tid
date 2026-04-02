@@ -199,7 +199,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 </ol>
 </$set>
 \end
-<!--  -->
+<!-- Keep $log -->
 <!-- <$log $$filter="tag currentTiddler _excluded _path" /> -->
 <!-- <$log $$filter="tag parentField toc-filter currentTiddler captionField /> -->
 <!--  -->
@@ -250,7 +250,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 	<$macrocall $name="recursiveOpen" exclude=<<exclude>> path=<<path>> />
 <% endif %>
 \end
-<!-- <$action-log/> -->
+<!-- Keep action-logs -->
 <!-- <$action-log ct=<<currentTiddler>> hasChildren=<<tf.toc-hasChildren>> path=<<path>> exclude=<<exclude>>/> -->
 <!-- <$action-log toc-state=<<toc-state>> path=<<path>> exclude=<<exclude>> ct=<<currentTiddler>> /> -->
 <!-- <$action-log ct=<<currentTiddler>> prefix=<<prefix>> toc-state=<<toc-state>>/> -->
@@ -278,8 +278,6 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 	The buttons also call toc-stateOpen and toc-stateClose, which by default allow us to CTRL-click to expand or fold the whole branch
 -->
 \procedure toc-chevron(isUnlinked:"")
-<!-- <% if [<toc-state>get[text]else[close]match[close]] %> -->
-
 <% if [<tf.toc-stateIsClosed>!is[blank]] %>
 	<$button actions=<<toc-openBranch>> setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-tiny-gap-right">
 		<$transclude tiddler=<<toc-closed-icon>> />
