@@ -5,11 +5,18 @@ title: fix-toc-styles
 type: text/vnd.tiddlywiki
 
 .tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a,
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a {
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a,
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a:hover {
 	border: none;
 	display: inline-block;
 }
 
+
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item {
+	border-top: 1px solid transparent;
+	border-left: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+}
 
 .tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected {
 	border-top: 1px solid <<colour tab-border>>;
@@ -20,6 +27,6 @@ type: text/vnd.tiddlywiki
 }
 .tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected .toc-item {
 	background: <<colour tab-background>>;
-	border: none;
+	border-color: transparent;
 	margin-right: 0;
 }
