@@ -46,9 +46,10 @@ Nodes affected by the [[node control fields|Table-of-Contents Macros Fields]] re
 |`tc-toc-include` |Node was added via <<.field toc-include>> |
 |`tc-toc-hide` |Node's parent has a <<.field toc-hide>> field |
 
-Example styles:
+The [[TOC Node Control Styles]] stylesheet is active by default and provides visual colour-coding for these classes:
 
-```css
-.tc-toc-filter > a { color: darkviolet; }
-.tc-toc-include > a { color: green; }
-```
+* `tc-toc-filter` — darkviolet
+* `tc-toc-include` — green
+* `tc-toc-hide` — red
+
+It also styles `.toc-item-muted` and `.tc-toc-unlinked` with left margins.

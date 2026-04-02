@@ -1,7 +1,7 @@
 created: 20240206133241785
 modified: 20240723110610801
-tags: $:/tags/Stylesheet testTOC
-title: test-styles
+tags: $:/tags/Stylesheet
+title: TOC Node Control Styles
 type: text/vnd.tiddlywiki
 
 .tc-toc-filter> a,

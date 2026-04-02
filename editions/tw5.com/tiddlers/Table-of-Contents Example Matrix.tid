@@ -50,6 +50,17 @@ type: text/vnd.tiddlywiki
 |Example |Macro |Feature |h
 |[[Examples/TOC/advanced/expandable-toc-link-no]] |toc-expandable |toc-link: no with expandable |
 |[[Examples/TOC/advanced/selective-expandable-toc-link-no]] |toc-selective-expandable |toc-link: no with selective expandable |
+|[[Examples/TOC/advanced/open-close-branch-buttons]] |toc-selective-expandable |programmatic branch open/close with buttons |
+|[[Examples/TOC/advanced/tv-toc-show-new-child]] |toc-selective-expandable |tv-toc-show-new-child with parentField |
+
+!! Combined
+
+|Example |Features combined |h
+|[[Examples/TOC/combined/toc-hide-methods]] |toc-hide field vs exclude parameter, branch control buttons |
+|[[Examples/TOC/combined/parentField-all-macros]] |parentField across toc, expandable, selective, tabbed + custom field name |
+|[[Examples/TOC/combined/tagField-variations]] |tagField with selective-expandable, exclude, and simple toc |
+|[[Examples/TOC/combined/custom-sort]] |Custom sort function with last-name/first-name fields |
+|[[Examples/TOC/combined/parentField-include-ctrl]] |parentField + toc-include + CTRL-click expand |
 
 ---
 

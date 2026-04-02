@@ -29,7 +29,7 @@ The `toc-openBranch` and `toc-closeBranch` procedures accept a `manual` paramete
 
 This is useful for plugin authors who want to programmatically expand or collapse specific branches.
 
-See [[test-open-close-branch-buttons]] for a working example.
+See [[Examples/TOC/advanced/open-close-branch-buttons]] for a working example.
 
 !! Deprecated: itemClassFilter Parameter
 
