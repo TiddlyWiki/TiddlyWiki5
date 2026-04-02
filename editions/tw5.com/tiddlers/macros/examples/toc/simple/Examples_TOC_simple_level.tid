@@ -1,0 +1,29 @@
+created: 20260402120000000
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/tag-level
+modified: 20260402001502844
+tags: $:/tags/wiki-test-spec simple
+title: Examples/TOC/simple/level
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents with the ''level'' parameter
+
+* The "root" elements are ''tagged Contents''
+
+* The ''level'' parameter limits the displayed depth to ''2 levels''
+
+** `bb-bb-bb` at level 3 should ''not'' be visible
+
+{{example-overview}}
+
++
+title: Description
+
+Simple TOC with "level"
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents" level:"2">>
+</div>

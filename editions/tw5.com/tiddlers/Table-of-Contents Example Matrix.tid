@@ -1,0 +1,71 @@
+created: 20250922122215951
+modified: 20260402183928388
+tags: [[Table-of-Contents Macros]]
+title: Table-of-Contents Example Matrix
+type: text/vnd.tiddlywiki
+
+!! Macro Variants
+
+|Example |Macro |Feature |h
+|[[Examples/TOC/simple/tag]] |toc |basic tag mode |
+|[[Examples/TOC/simple/level]] |toc |level parameter |
+|[[Examples/TOC/simple/expandable]] |toc-expandable |expandable branches |
+|[[Examples/TOC/simple/expandable-expanded]] |toc-expandable |pre-expanded with tv-toc-expand |
+|[[Examples/TOC/simple/selective-expandable]] |toc-selective-expandable |selective expandable |
+|[[Examples/TOC/simple/selective-expandable-expanded]] |toc-selective-expandable |pre-expanded with tv-toc-expand |
+|[[Examples/TOC/simple/selective-expandable-sort]] |toc-selective-expandable |sort parameter |
+|[[Examples/TOC/simple/selective-expandable-icons]] |toc-selective-expandable |custom icons |
+|[[Examples/TOC/simple/tabbed-internal]] |toc-tabbed-internal-nav |tabbed internal navigation |
+|[[Examples/TOC/simple/tabbed-external]] |toc-tabbed-external-nav |tabbed external navigation |
+
+!! Macro Parameters
+
+|Example |Parameter(s) |Description |h
+|[[Examples/TOC/param/exclude]] |exclude |exclude tiddlers from TOC |
+|[[Examples/TOC/param/exclude-level]] |exclude + level |exclude combined with level limit |
+|[[Examples/TOC/param/captionField]] |captionField |use alternate field for display |
+|[[Examples/TOC/param/captionField-level]] |captionField + level |captionField combined with level limit |
+|[[Examples/TOC/param/tagField]] |tagField |build tree from tag-like field |
+|[[Examples/TOC/param/tagField-level]] |tagField + level |tagField combined with level limit |
+|[[Examples/TOC/param/parentField]] |parentField |build tree from parent field |
+|[[Examples/TOC/param/parentField-level]] |parentField + level |parentField combined with level limit |
+|[[Examples/TOC/param/itemTemplate]] |itemTemplate |global custom template |
+|[[Examples/TOC/param/itemTemplate-level]] |itemTemplate + level |itemTemplate combined with level limit |
+|[[Examples/TOC/param/branchTemplate]] |toc-branchTemplate |branch-wide template for children |
+|[[Examples/TOC/param/branchTemplate-priority]] |toc-branchTemplate + toc-itemTemplate |toc-itemTemplate overrides toc-branchTemplate |
+|[[Examples/TOC/param/branchTemplate-expandable]] |toc-branchTemplate + expandable |branch template with toc-expandable |
+|[[Examples/TOC/param/branchTemplate-selective]] |toc-branchTemplate + selective |branch template with toc-selective-expandable |
+
+!! Node Fields
+
+|Example |Field(s) |Description |h
+|[[Examples/TOC/field/caption-target]] |caption, target |display caption and link to target |
+|[[Examples/TOC/field/toc-link]] |toc-link |suppress link with toc-link: no |
+|[[Examples/TOC/field/toc-tooltip]] |toc-tooltip |custom tooltip on hover |
+|[[Examples/TOC/field/toc-filter]] |toc-filter |replace child list with custom filter |
+|[[Examples/TOC/field/toc-include]] |toc-include |add tiddlers to child list |
+|[[Examples/TOC/field/toc-hide]] |toc-hide |remove node from child list |
+|[[Examples/TOC/field/toc-itemTemplate]] |toc-itemTemplate |per-node template override |
+
+!! Advanced
+
+|Example |Macro |Feature |h
+|[[Examples/TOC/advanced/expandable-toc-link-no]] |toc-expandable |toc-link: no with expandable |
+|[[Examples/TOC/advanced/selective-expandable-toc-link-no]] |toc-selective-expandable |toc-link: no with selective expandable |
+|[[Examples/TOC/advanced/open-close-branch-buttons]] |toc-selective-expandable |programmatic branch open/close with buttons |
+|[[Examples/TOC/advanced/tv-toc-show-new-child]] |toc-selective-expandable |tv-toc-show-new-child with parentField |
+
+!! Combined
+
+|Example |Features combined |h
+|[[Examples/TOC/combined/toc-hide-methods]] |toc-hide field vs exclude parameter, branch control buttons |
+|[[Examples/TOC/combined/parentField-all-macros]] |parentField across toc, expandable, selective, tabbed + custom field name |
+|[[Examples/TOC/combined/tagField-variations]] |tagField with selective-expandable, exclude, and simple toc |
+|[[Examples/TOC/combined/custom-sort]] |Custom sort function with last-name/first-name fields |
+|[[Examples/TOC/combined/parentField-include-ctrl]] |parentField + toc-include + CTRL-click expand |
+
+---
+
+!! Dynamic Tree
+
+<<tree prefix:"Examples/TOC/">>

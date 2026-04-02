@@ -1,0 +1,25 @@
+created: 20250922115819376
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/tag-expandable
+modified: 20250922130813561
+tags: $:/tags/wiki-test-spec simple
+title: Examples/TOC/simple/expandable
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows an expandable TOC using `toc-expandable`
+
+* ''Every'' element has a chevron — even leaf nodes without children
+
+{{ctrl-click-info}}
++
+title: Description
+
+Simple TOC Expandable
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc-expandable tag:"Contents">>
+</div>
+

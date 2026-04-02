@@ -1,0 +1,30 @@
+created: 20250922121811982
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/tag-selective-expandable-custom-icons
+modified: 20250924110134442
+tags: $:/tags/wiki-test-spec simple
+title: Examples/TOC/simple/selective-expandable-icons
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a selective expandable TOC with ''custom icons''
+
+* The default chevron icons are overridden using the `$let` widget
+
+* `toc-open-icon` is set to `$:/core/images/fold-button`
+
+* `toc-closed-icon` is set to `$:/core/images/folder`
+
+{{example-overview}}
++
+title: Description
+
+Simple TOC Selective Expandable with Custom Icons
++
+title: Output
+
+<$let toc-open-icon="$:/core/images/fold-button" toc-closed-icon="$:/core/images/folder">
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"Contents">>
+</div>
+</$let>

@@ -1,0 +1,66 @@
+created: 20260402120000000
+modified: 20260402120000000
+caption: TOC Macros Parameters
+tags: [[Table-of-Contents Macros]]
+title: Table-of-Contents Macros Parameters
+type: text/vnd.tiddlywiki
+
+These parameters control the overall structure and behaviour of the [[Table-of-Contents Macros]].
+
+!! Common Parameters
+
+These parameters are used by ''all'' toc macros.
+
+; tag
+: The root tag that identifies the top level of the tree
+: <<.from-version "5.3.5">> If the <<.param tag>> parameter is missing or an empty string, the <<.var currentTiddler>> variable is used
+
+; sort
+: An optional extra [[filter step|Filter Step]], e.g. `sort[title]`
+
+These two parameters are combined into a single [[filter expression|Filter Expression]] like this:
+
+:> ``<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] -[<tag>] -[subfilter<exclude>]`>``
+
+The `$(sort)$` text substitution is only there for backwards compatibility and should not be used for new code.
+
+; exclude <<.from-version "5.3.0">>
+: This optional parameter can be used to exclude tiddlers from the TOC list. It allows a [[Title List]] or a <<.olink subfilter>>. Eg: `exclude:"HelloThere [[Title with spaces]]"` or `exclude:"[has[excludeTOC]]"`. Where the former will exclude two tiddlers and the later would exclude every tiddler that has a field <<.field excludeTOC>> independent of its value
+: ''Be aware'' that eg: `[prefix[H]]` is a shortcut for `[all[tiddlers]prefix[H]]`, which can have a performance impact, if used carelessly. So use $:/AdvancedSearch -> ''Filters'' tab to test the <<.param exclude>> parameter
+
+; level <<.from-version "5.4.0">>
+: This optional parameter can be used to define how many toc levels are shown by the <<.var toc>> macro. By default all levels are shown
+: If the level parameter is active, nodes which have children will show a level indicator. The indicator can be customised by overriding the `toc-level-indicator` procedure
+
+; captionField <<.from-version "5.4.0">>
+: Default: `caption`. Expects a field-name. If set, it uses this field instead of the <<.field caption>> field to display the node text
+: If the field is empty or does not exist, it falls back to <<.field caption>> and then to the tiddler <<.field title>>
+
+; tagField <<.from-version "5.4.0">>
+: Uses any "tag-like" field instead of the <<.field tags>> field to create the tree structure
+: <<.param tagField>> takes precedence over <<.param parentField>>
+
+; parentField <<.from-version "5.4.0">>
+: Instead of using tags, the toc tree is built using a "parent" field. There is no default, but usually it will be `parent`
+: Using a parent field is fundamentally different to using tags -- ''there can only be one parent''
+
+; itemTemplate <<.from-version "5.4.0">>
+: Expects a template tiddler title. By default toc macros use the `toc-defaultItemTemplate` procedure, which is specific to toc macros
+: If <<.param itemTemplate>> is set, it uses the content of the template tiddler to display a toc node. If <<.param itemTemplate>> is used, <<.param captionField>> is set to `text`
+: ''Important:'' If the <<.field toc-itemTemplate>> field is set on a tiddler, it will take precedence over this macro parameter. See [[Table-of-Contents Macros Fields]]
+
+!! Additional Tabbed Parameters
+
+<<.var toc-tabbed-internal-nav>> and <<.var toc-tabbed-external-nav>> take these additional parameters:
+
+; selectedTiddler
+: The title of the [[state tiddler|StateMechanism]] for noting the currently selected tiddler, defaulting to `$:/temp/toc/selectedTiddler`. It is recommended that this be a [[system tiddler|SystemTiddlers]]
+
+; unselectedText
+: The text to display when no tiddler is selected in the tree
+
+; missingText
+: The text to display if the selected tiddler doesn't exist
+
+; template
+: Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the selected tiddler into the right-hand panel

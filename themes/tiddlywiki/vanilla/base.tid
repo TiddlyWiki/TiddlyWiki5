@@ -3006,26 +3006,20 @@ input.tc-palette-manager-colour-input {
 }
 
 .tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a,
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a {
-	display: block;
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a,
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a:hover {
+	display: inline-block;
+	border: none;
 	padding: 0.12em 1em 0.12em 0.25em;
 }
 
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a {
-	border-top: 1px solid <<colour tab-background>>;
-	border-left: 1px solid <<colour tab-background>>;
-	border-bottom: 1px solid <<colour tab-background>>;
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item {
+	border-top: 1px solid transparent;
+	border-left: 1px solid transparent;
+	border-bottom: 1px solid transparent;
 }
 
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a:hover {
-	text-decoration: none;
-	border-top: 1px solid <<colour tab-border>>;
-	border-left: 1px solid <<colour tab-border>>;
-	border-bottom: 1px solid <<colour tab-border>>;
-	background: <<colour tab-border>>;
-}
-
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a {
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected {
 	border-top: 1px solid <<colour tab-border>>;
 	border-left: 1px solid <<colour tab-border>>;
 	border-bottom: 1px solid <<colour tab-border>>;
@@ -3033,8 +3027,10 @@ input.tc-palette-manager-colour-input {
 	margin-right: -1px;
 }
 
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a:hover {
-	text-decoration: none;
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected .toc-item {
+	background: <<colour tab-background>>;
+	border-color: transparent;
+	margin-right: 0;
 }
 
 .tc-tabbed-table-of-contents .tc-tabbed-table-of-contents-content {
