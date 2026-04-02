@@ -137,19 +137,32 @@ If the macro parameter is empty - Use the toc-defaultFieldTemplate
 <!-- Define unique path based state title -->
 \function tf.toc-newPath() [<path>addsuffix[/]addsuffix<tag>]
 
+<!-- Level indicator: shown when level parameter limits the tree depth.
+     Items with children show a "+" icon, others show a blank placeholder.
+     Override this procedure locally to customise or remove the indicator. -->
+\procedure toc-level-indicator()
+<%if [<level>compare:number:gt[0]]%>
+	<%if [subfilter<tf.toc-filterString>] -[<tag>] +[limit[1]] %>
+		<span class="tc-tiny-gap-left">{{$:/core/images/new-button}}</span>
+	<%else%>
+		<span class="tc-tiny-gap-left">{{$:/core/images/blank}}</span>
+	<%endif%>
+<% endif %>
+\end
+
 <!-- ====================================================================================
 Simple toc macro which shows the full tree
 This macro is _not_ used by other toc-macros
 v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-itemClass()
 ========================================================================================== -->
-\procedure toc(tag,sort:"",itemClassFilter,exclude,captionField,tagField,parentField,itemTemplate)
+\procedure toc(tag,sort:"",itemClassFilter,exclude,captionField,tagField,parentField,itemTemplate,level)
 <$let tag={{{ [<tag>is[blank]then<currentTiddler>else<tag>] }}} >
-	<$macrocall $name="toc-body" tag=<<tag>> sort=<<sort>> exclude=<<exclude>>/>
+	<$macrocall $name="toc-body" tag=<<tag>> sort=<<sort>> exclude=<<exclude>> level=<<level>>/>
 </$let>
 \end
 
 <!-- Simple toc helper body -->
-\procedure toc-body(tag,sort:"",itemClassFilter,exclude,path)
+\procedure toc-body(tag,sort:"",itemClassFilter,exclude,path,level)
 <!-- Be aware: if parentField is set, the "tag" parameter contains the currentTiddler -->
 <$set name=currentTiddler filter="[<parentField>!is[blank]then<tag>else<currentTiddler>]">
 <ol class="tc-toc">
@@ -164,18 +177,20 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 				<!-- adding tf.toc-hide, excludes blocked elements from all visible sub-nodes -->
 				<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-hide>]">
 					<li class=<<tf.toc-itemClass>>>
-						<!-- <% if [all[current]toc-link[no]] %> -->
-							<<_itemTemplate>>
-						<!-- <% else %> -->
-							<!-- Since v5.1.23 use target-field if present in tiddler -->
-							<!-- <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}> -->
-								<!-- <<_itemTemplate>> -->
-							<!-- </$link> -->
-						<!-- <% endif %> -->
+						<$let tag=<<currentTiddler>>>
+							<<toc-level-indicator>>
+						</$let>
+						<<_itemTemplate>>
 						<!-- toc-body only calls itself, so only modified variables have to be passed on. -->
 						<!-- The rest can be reused from toc parameters -->
-						<$macrocall $name="toc-body" tag=<<currentTiddler>> exclude=<<_excluded>> path=<<_path>>
-						/>
+						<$let _level={{{ [<level>subtract[1]] }}}>
+							<%if [<_level>compare:number:gt[0]]%>
+								<$macrocall $name="toc-body" tag=<<currentTiddler>> exclude=<<_excluded>> path=<<_path>> level=<<_level>>/>
+							<%elseif [<_level>match[-1]]%>
+								<!-- show full toc, no level defined -->
+								<$macrocall $name="toc-body" tag=<<currentTiddler>> exclude=<<_excluded>> path=<<_path>>/>
+							<%endif%>
+						</$let>
 					</li>
 				</$set>
 			</$let>
