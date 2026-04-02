@@ -1,5 +1,5 @@
 created: 20140919155729620
-modified: 20260402130416137
+modified: 20260402183939098
 tags: Macros [[Core Macros]] [[Customise TiddlyWiki]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
@@ -51,11 +51,8 @@ To make a table of contents appear in the sidebar, see [[How to add a new tab to
 
 !! Examples
 
-; [[Standard Examples|Table-of-Contents Macros (Examples)]]
+; [[Examples|Table-of-Contents Macros (Examples)]]
 : Interactive examples for each macro variant
-
-; [[Advanced Examples|Table-of-Contents Macros (Advanced Examples)]]
-: Combined feature demonstrations and edge cases
 
 ; [[Example Matrix|Table-of-Contents Example Matrix]]
 : Complete coverage matrix with links to all test specs

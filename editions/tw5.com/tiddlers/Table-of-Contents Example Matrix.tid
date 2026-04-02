@@ -1,5 +1,5 @@
 created: 20250922122215951
-modified: 20260402171615043
+modified: 20260402183928388
 tags: [[Table-of-Contents Macros]]
 title: Table-of-Contents Example Matrix
 type: text/vnd.tiddlywiki
@@ -66,34 +66,6 @@ type: text/vnd.tiddlywiki
 
 ---
 
-!! Dynamic Lists
+!! Dynamic Tree
 
-!!! Simple toc-rewritten Examples
-
-Test the parameters, that are part of the "old" toc macro.
-
-<ul>
-<$list filter="[tag[simple]]">
-<li><$link/></li>
-</$list>
-</ul>
-
-!!! TOC Node Fields Examples
-
-These tests show the functions, that are available with the node fields, including the "old" ones.
-
-<ul>
-<$list filter="[tag[field]]">
-<li><$link/></li>
-</$list>
-</ul>
-
-!!! TOC Macro Parameter Examples
-
-These tests show how the different macro parameters are used
-
-<ul>
-<$list filter="[tag[param]]">
-<li><$link/></li>
-</$list>
-</ul>
+<<tree prefix:"Examples/TOC/">>
