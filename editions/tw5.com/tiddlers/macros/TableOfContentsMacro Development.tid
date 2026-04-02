@@ -118,7 +118,7 @@ See [[test-open-close-branch-buttons]] for a working example.
 
 !! Deprecated: itemClassFilter Parameter
 
-The `itemClassFilter` parameter still appears in all macro signatures for backwards compatibility but is no longer used. It has been replaced by the internal `tf.toc-itemClassFilter` function, which automatically handles the `toc-item-selected` class in tabbed mode.
+The `itemClassFilter` parameter still appears in all macro signatures for backwards compatibility but is no longer used. It has been replaced by the internal [[$:/core/macros/toc]] `tf.toc-itemClassFilter` function, which automatically handles the `toc-item-selected` class in tabbed mode.
 
 Existing code that passes `itemClassFilter` will not break, but the parameter is silently ignored.
 
