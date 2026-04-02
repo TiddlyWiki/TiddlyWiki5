@@ -1,0 +1,67 @@
+created: 20260402120000000
+modified: 20260402120000000
+tags: [[Table-of-Contents Macros]]
+title: Table-of-Contents Macros Fields
+type: text/vnd.tiddlywiki
+
+''Tiddler fields'' allow fine-grained control over individual nodes in the [[Table-of-Contents Macros]]. These fields are set on the tiddlers that appear in the tree, not on the macro call.
+
+!! Display Fields
+
+; caption
+: The tree displays the <<.field caption>> field of a tiddler if it has one, or the tiddler's <<.field title>> otherwise. This behaviour can be changed globally with the <<.param captionField>> [[parameter|Table-of-Contents Macros Parameters]]
+
+; toc-link
+: Each tiddler in the tree is normally displayed as a link. To suppress this, give the tiddler a <<.field toc-link>> field with the value <<.value no>>. Clicking such a tiddler in the expandable tree variants causes its branch to expand or collapse
+
+; target <<.from-version "5.1.23">>
+: By default, the links open the tiddlers making up the table of contents. If the tiddler contains a <<.field target>> field, its contents will be used as the target of the link instead
+
+; toc-tooltip <<.from-version "5.4.0">>
+: The content of this field will be shown as a tooltip on mouse hover. Defaults to the tiddler <<.field title>> if not set
+: The field expects a string, which will not be wikified
+
+!! Node Control Fields
+
+<<.from-version "5.4.0">>
+
+These fields allow control over which children appear under a node and how they are displayed. All titlelist and filter values are internally evaluated using `[subfilter[...]]`.
+
+; toc-filter
+: Expects a ''titlelist'' or a ''filter''
+: If a toc node contains this field, it will ''replace the standard filter'' that normally creates the child list of that node
+: Nodes added with <<.field toc-filter>> have the CSS class `tc-toc-filter`
+: If you want to list nodes with the current tag, include `[tag<tag>!has[draft.of]]` in your filter
+: If there is no <<.field toc-filter>>, the default filter is used: `[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$]`
+
+; toc-include
+: Expects a ''titlelist'' or a ''filter''
+: Tiddlers will be ''added'' to the existing child list
+: Nodes added with <<.field toc-include>> have the CSS class `tc-toc-include`
+
+; toc-hide
+: If set to <<.value yes>>, the node will be removed from the child list
+: ''Takes precedence'' over all other fields
+: Can also be set to a ''filter'' eg: `[prefix[todo]]` to remove all matching tiddlers
+: Be aware: `[prefix[todo]]` is equivalent to `[all[tiddlers]prefix[todo]]`
+: Internally, the <<.field toc-hide>> value is added to the `_excluded` variable
+: Parents with a <<.field toc-hide>> field have the CSS class `tc-toc-hide`
+
+; toc-itemTemplate <<.from-version "5.4.0">>
+: Expects a template tiddler title
+: If set, uses the content of the template tiddler to display this specific node
+: This field takes ''precedence'' over the <<.param itemTemplate>> macro parameter, allowing per-node template overrides
+
+!! Field Name Overrides
+
+The field names used by the node control fields are defined as global procedures. Expert users can override them:
+
+```
+\procedure toc-hideField()    toc-hide
+\procedure toc-includeField() toc-include
+\procedure toc-filterField()  toc-filter
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>
+```
