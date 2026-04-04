@@ -920,6 +920,8 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 				return $tw.utils.parseJSONSafe(tiddler.fields.text,defaultData);
 			case "application/x-tiddler-dictionary":
 				return $tw.utils.parseFields(tiddler.fields.text);
+			case "text/vnd.tiddlywiki-fields":
+				return $tw.utils.parseMultilineFields(tiddler.fields.text);
 		}
 	}
 	return defaultData;
@@ -933,6 +935,10 @@ exports.extractTiddlerDataItem = function(titleOrTiddler,index,defaultText) {
 		text;
 	if(data && $tw.utils.hop(data,index)) {
 		text = data[index];
+	}
+	// Unwrap nested object from text/vnd.tiddlywiki-fields metadata entries
+	if(text !== null && typeof text === "object" && $tw.utils.hop(text,"value")) {
+		text = text.value;
 	}
 	if(typeof text === "string" || typeof text === "number") {
 		return text.toString();
@@ -959,6 +965,8 @@ exports.setTiddlerData = function(title,data,fields,options) {
 		};
 	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
 		newFields.text = $tw.utils.makeTiddlerDictionary(data);
+	} else if(existingTiddler && existingTiddler.fields.type === "text/vnd.tiddlywiki-fields") {
+		newFields.text = $tw.utils.makeMultilineFieldsDictionary(data);
 	} else {
 		newFields.type = "application/json";
 		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);

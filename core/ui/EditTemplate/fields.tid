@@ -66,7 +66,7 @@ tags: $:/tags/EditTemplate
 
 \function tf.list-selection-class(listSuffix) [<searchListState>get[text]removesuffix<listSuffix>match<currentField>then[tc-list-item-selected]]
 
-
+<%if [all[current]get[type]!match[text/vnd.tiddlywiki-fields]] %>
 <$let newFieldValueTiddlerPrefix={{{ [<newFieldValueTiddlerPrefix>!is[blank]else<qualify "$:/temp/NewFieldValue">] }}} >
 	<div class="tc-edit-fields">
 		<!-- table of user fields of the current tiddler -->
@@ -179,3 +179,4 @@ tags: $:/tags/EditTemplate
 		</$let>
 	</div>
 </$let>
+<%endif%>

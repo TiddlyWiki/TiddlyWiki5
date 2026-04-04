@@ -1,0 +1,5 @@
+title: $:/language/Docs/Types/text/vnd.tiddlywiki-fields
+description: Multi-line fields compound tiddler
+name: text/vnd.tiddlywiki-fields
+group: Developer
+group-sort: 2

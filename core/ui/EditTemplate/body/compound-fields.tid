@@ -1,0 +1,81 @@
+title: $:/core/ui/EditTemplate/body/compound-fields
+
+\whitespace trim
+
+\procedure add-field-actions()
+<$let newName={{{ [<newFieldState>get[text]] }}}>
+	<%if [<newName>!is[blank]] %>
+		<$action-setfield $tiddler=<<currentTiddler>> $index=<<newName>> $value=""/>
+		<$action-deletetiddler $tiddler=<<newFieldState>>/>
+	<%endif%>
+</$let>
+\end
+
+\procedure delete-field-actions()
+<$action-setfield $tiddler=<<currentTiddler>> $index=<<fieldName>>/>
+\end
+
+<$let
+	rawModeState=<<qualify "$:/state/compound-fields/raw">>
+	newFieldState=<<qualify "$:/state/compound-fields/new-name">>
+>
+
+<div class="tc-compound-fields-editor">
+
+	<!-- Toolbar: toggle raw/pane mode -->
+	<div class="tc-compound-toolbar">
+		<$button set=<<rawModeState>> setTo={{{ [<rawModeState>get[text]match[yes]then[no]else[yes]] }}} class="tc-btn-invisible tc-btn-mini">
+			<%if [<rawModeState>get[text]match[yes]] %>
+				{{$:/core/images/storyview-classic}} Show Panes
+			<%else%>
+				{{$:/core/images/unfold-button}} Show Raw Text
+			<%endif%>
+		</$button>
+	</div>
+
+	<%if [<rawModeState>get[text]match[yes]] %>
+
+		<!-- Raw text mode -->
+		<$edit-text tiddler=<<currentTiddler>> field="text" class="tc-edit-texteditor" type="textarea"/>
+
+	<%else%>
+
+		<!-- Preview of sub-text -->
+		<div class="tc-compound-preview">
+			<$transclude $tiddler=<<currentTiddler>> $index="sub-text" mode="block"/>
+		</div>
+
+		<!-- Sub-text editor pane -->
+		<div class="tc-compound-field-pane tc-compound-field-pane-subtext">
+			<div class="tc-compound-field-header">
+				<span class="tc-compound-field-name">sub-text</span>
+			</div>
+			<$edit-text tiddler=<<currentTiddler>> index="sub-text" class="tc-edit-texteditor" type="textarea"/>
+		</div>
+
+		<!-- Other field editor panes -->
+		<$list filter="[<currentTiddler>indexes[]] -sub-text +[sort[]]" variable="fieldName">
+			<div class="tc-compound-field-pane">
+				<div class="tc-compound-field-header">
+					<span class="tc-compound-field-name"><$text text=<<fieldName>>/></span>
+					<$button actions=<<delete-field-actions>> class="tc-btn-invisible tc-btn-mini" tooltip="Remove field">
+						{{$:/core/images/delete-button}}
+					</$button>
+				</div>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" type="textarea"/>
+			</div>
+		</$list>
+
+		<!-- Add new field -->
+		<div class="tc-compound-field-add">
+			<$edit-text tiddler=<<newFieldState>> field="text" tag="input" placeholder="New field name" class="tc-edit-texteditor"/>
+			<$button actions=<<add-field-actions>> class="tc-btn-invisible tc-btn-mini">
+				{{$:/core/images/new-button}} Add Field
+			</$button>
+		</div>
+
+	<%endif%>
+
+</div>
+
+</$let>

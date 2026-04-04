@@ -844,6 +844,35 @@ exports.makeTiddlerDictionary = function(data) {
 };
 
 /*
+Convert a hashmap into text/vnd.tiddlywiki-fields format.
+Values can be plain strings or nested objects with {value: "...", ...metadata}.
+*/
+exports.makeMultilineFieldsDictionary = function(data) {
+	var entries = [];
+	var names = Object.keys(data).sort();
+	for(var t = 0; t < names.length; t++) {
+		var name = names[t];
+		var item = data[name];
+		var header, body;
+		if(item !== null && typeof item === "object" && $tw.utils.hop(item,"value")) {
+			var headerParts = ["title: " + name];
+			for(var key in item) {
+				if(key !== "value" && $tw.utils.hop(item,key)) {
+					headerParts.push(key + ": " + item[key]);
+				}
+			}
+			header = headerParts.join("\n");
+			body = item.value;
+		} else {
+			header = "title: " + name;
+			body = (item !== undefined && item !== null) ? item.toString() : "";
+		}
+		entries.push(header + "\n\n" + body);
+	}
+	return entries.join("\n+\n");
+};
+
+/*
 High resolution microsecond timer for profiling
 */
 exports.timer = function(base) {
