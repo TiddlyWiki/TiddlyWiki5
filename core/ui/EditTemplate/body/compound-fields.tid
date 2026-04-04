@@ -12,7 +12,9 @@ title: $:/core/ui/EditTemplate/body/compound-fields
 \end
 
 \procedure delete-field-actions()
-<$action-setfield $tiddler=<<currentTiddler>> $index=<<fieldName>>/>
+<$action-confirm $message={{{ [[Remove field ']addsuffix<fieldName>addsuffix[' and its content?]] }}}>
+	<$action-setfield $tiddler=<<currentTiddler>> $index=<<fieldName>>/>
+</$action-confirm>
 \end
 
 \procedure set-type-actions(type)

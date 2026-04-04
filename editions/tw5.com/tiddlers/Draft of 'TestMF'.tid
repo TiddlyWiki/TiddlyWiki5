@@ -2,7 +2,7 @@ bbb: b2
 created: 20260404214146191
 draft.of: TestMF
 draft.title: TestMF
-modified: 20260404234130743
+modified: 20260404234513199
 title: Draft of 'TestMF'
 type: text/vnd.tiddlywiki-fields
 
@@ -33,4 +33,5 @@ paragraph 2
 
 +
 title: test
+type: multiline
 
