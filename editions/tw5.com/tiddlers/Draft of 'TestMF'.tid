@@ -1,21 +1,24 @@
+bbb: b2
 created: 20260404214146191
 draft.of: TestMF
 draft.title: TestMF
-modified: 20260404232841703
+modified: 20260404234130743
 title: Draft of 'TestMF'
 type: text/vnd.tiddlywiki-fields
 
 title: aaa
+type: multiline
 
 a1
 
 a2
 +
-title: bbb
+title: bb
 
-b2
+some text
 +
 title: ccc
+type: multiline
 
 c3
 

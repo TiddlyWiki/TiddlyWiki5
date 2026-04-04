@@ -74,7 +74,13 @@ exports.setText = function(title,field,index,value,options) {
 	if(index) {
 		var data = this.getTiddlerData(title,Object.create(null));
 		if(value !== undefined) {
-			data[index] = value;
+			// For text/vnd.tiddlywiki-fields, preserve metadata when updating the value
+			var existingEntry = data[index];
+			if(existingEntry !== null && typeof existingEntry === "object" && $tw.utils.hop(existingEntry,"value")) {
+				existingEntry.value = value;
+			} else {
+				data[index] = value;
+			}
 		} else {
 			delete data[index];
 		}

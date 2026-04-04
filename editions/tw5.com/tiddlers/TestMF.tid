@@ -1,8 +1,27 @@
+bbb: b2
 created: 20260404214146191
-modified: 20260404225053051
+modified: 20260404234122164
 title: TestMF
 type: text/vnd.tiddlywiki-fields
 
+title: aaa
+type: multiline
+
+a1
+
+a2
++
+title: bb
+
+some text
++
+title: ccc
+
+c3
+
+some more text
+
++
 title: sub-text
 
 This is the main body text
@@ -10,18 +29,5 @@ This is the main body text
 paragraph 2
 
 +
-title: aaa
+title: test
 
-a1
-
-a2
-+
-title: bbb
-
-b2
-+
-title: ccc
-
-c3
-
-some more text
