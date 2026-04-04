@@ -25,6 +25,18 @@ title: $:/core/ui/EditTemplate/body/compound-fields
 <$let fieldType={{{ [<currentTiddler>compound-field-type<fieldName>] }}}>
 	<%if [<fieldType>match[multiline]] %>
 		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" type="textarea"/>
+	<%elseif [<fieldType>prefix[binary-]] %>
+		<$let binaryOptions={{{ [<fieldType>removeprefix[binary-]] }}}>
+			<$list filter="[<binaryOptions>split[-]]" variable="optionValue">
+				<$radio tiddler=<<currentTiddler>> index=<<fieldName>> value=<<optionValue>>>
+					<$text text=<<optionValue>>/>
+				</$radio>
+				&nbsp;
+			</$list>
+			<$radio tiddler=<<currentTiddler>> index=<<fieldName>> value="">
+				none
+			</$radio>
+		</$let>
 	<%else%>
 		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input"/>
 	<%endif%>
@@ -41,6 +53,8 @@ title: $:/core/ui/EditTemplate/body/compound-fields
 			$type={{{ [<typeStateTiddler>get[text]] }}}/>""">
 		<option value="">single-line</option>
 		<option value="multiline">multiline</option>
+		<option value="binary-yes-no">binary-yes-no</option>
+		<option value="binary-true-false">binary-true-false</option>
 	</$select>
 </$let>
 \end
