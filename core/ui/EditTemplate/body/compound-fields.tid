@@ -84,7 +84,7 @@ title: $:/core/ui/EditTemplate/body/compound-fields
 		</div>
 
 		<!-- Other field editor panes -->
-		<$list filter="[<currentTiddler>indexes[]] -sub-text +[sort[]]" variable="fieldName">
+		<$list filter="[<currentTiddler>compound-field-names[]] -sub-text" variable="fieldName">
 			<div class="tc-compound-field-pane">
 				<div class="tc-compound-field-header">
 					<span class="tc-compound-field-name"><$text text=<<fieldName>>/></span>
