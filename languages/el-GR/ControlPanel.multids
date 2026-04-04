@@ -112,7 +112,7 @@ Plugins/Update/Caption: ενημέρωσε
 Plugins/Updates/Caption: Ενημερώσεις
 Plugins/Updates/Hint: Διαθέσιμες ενημερώσεις για εγκατεστημένα πρόσθετα
 Plugins/Updates/UpdateAll/Caption: Ενημέρωσε <<update-count>> πρόσθετα
-Saving/Caption: Αποθηκεύεται
+Saving/Caption: Αποθήκευση
 Saving/DownloadSaver/AutoSave/Description: Επέτρεψε αυτόματη αποθήκευση για τον Αποθηκευτή Λήψης
 Saving/DownloadSaver/AutoSave/Hint: Ενεργοποιεί την αυτόματη αποθήκευση στον Αποθηκευτή Λήψης
 Saving/DownloadSaver/Caption: Αποθηκευτής Λήψης
