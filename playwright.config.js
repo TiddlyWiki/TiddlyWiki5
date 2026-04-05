@@ -30,6 +30,8 @@ module.exports = defineConfig({
 
   // Settings shared with all the tests
   use: {
+    // Default to headless for stable automated runs; use --headed to override.
+    headless: true,
     // Take a screenshot when the test fails
     screenshot: {
       mode: 'only-on-failure',
