@@ -29,7 +29,7 @@ You can create multiple descriptions for a term, or multiple terms for a single 
 
 !! Nested description lists
 
-Description lists may also be nested to create lists within the lists:
+Description lists may also be nested to create lists within lists:
 
 <<wikitext-example src:"; Coffee
 : A beverage prepared from roasted coffee beans
