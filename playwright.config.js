@@ -10,8 +10,6 @@ module.exports = defineConfig({
     'plugins/**/tests/**/*.spec.js'
   ],
 
-  timeout: 60000,
-
   // Allow parallel tests
   fullyParallel: true,
 
@@ -32,17 +30,13 @@ module.exports = defineConfig({
 
   // Settings shared with all the tests
   use: {
+    // Default to headless for stable automated runs; use --headed to override.
+    headless: true,
+    // Take a screenshot when the test fails
     screenshot: {
       mode: 'only-on-failure',
       fullPage: true
-    },
-    // Limit individual actions (like click/type) so they don't hang indefinitely
-    actionTimeout: 15000, 
-  },
-
-  expect: {
-    // Give expect() assertions more time to find elements like '.jasmine-overall-result'
-    timeout: 20000, 
+    }
   },
 
   /* Configure projects for major browsers */
@@ -54,7 +48,7 @@ module.exports = defineConfig({
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] }
+      use: { ...devices['Desktop Firefox'] },
     },
 
     {
