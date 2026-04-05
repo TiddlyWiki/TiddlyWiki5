@@ -30,6 +30,7 @@ const createImageBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/image-
 const createImageNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/image/plugin.js").createImageNodeViewPlugin;
 const computeImageSrc = require("$:/plugins/tiddlywiki/prosemirror/image/utils.js").computeImageSrc;
 const createPragmaBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/pragma-block/nodeview.js").createPragmaBlockNodeViewPlugin;
+const createHardLineBreaksNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/hard-line-breaks-block/nodeview.js").createHardLineBreaksNodeViewPlugin;
 const createDragHandlePlugin = require("$:/plugins/tiddlywiki/prosemirror/drag-handle.js").createDragHandlePlugin;
 const BubbleMenu = require("$:/plugins/tiddlywiki/prosemirror/bubble-menu.js").BubbleMenu;
 const getMarkdownInputRules = require("$:/plugins/tiddlywiki/prosemirror/markdown-shortcuts.js").getMarkdownInputRules;
@@ -152,6 +153,7 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 				createWidgetBlockPlugin(),
 				createWidgetBlockNodeViewPlugin(this),
 				createPragmaBlockNodeViewPlugin(this),
+				createHardLineBreaksNodeViewPlugin(),
 				createDragHandlePlugin(),
 				createAutocompletePlugin(this.wiki),
 				createFindReplacePlugin(this.wiki)

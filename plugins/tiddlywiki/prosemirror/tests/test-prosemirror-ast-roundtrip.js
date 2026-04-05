@@ -112,6 +112,14 @@ if(!$tw.browser) {
 
 		// --- Block elements ---
 
+		it("should round-trip hard line breaks block", function() {
+			var input = '"""\nThis is some text\nThat is set like\nIt is a Poem\n"""';
+			var result = roundTrip(input);
+			expect(result).toContain('"""');
+			expect(result).toContain("This is some text");
+			expect(result).toContain("That is set like");
+		});
+
 		it("should round-trip horizontal rule", function() {
 			var input = "text above\n\n---\n\ntext below";
 			var result = roundTrip(input);
