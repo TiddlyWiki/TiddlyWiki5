@@ -395,6 +395,54 @@ function hard_break(builder, node) {
 }
 
 /**
+ * hard_line_breaks_block → wiki AST paragraph with hardlinebreaks-marked children.
+ * Serializes back as:  """\nline1\nline2\n"""
+ *
+ * The PM node content is pure inline content (text + hard_break nodes).
+ * The isRuleEnd <br> is NOT stored in PM state — it's re-added here on serialization.
+ */
+function hard_line_breaks_block(builder, node) {
+	var children = convertNodes(builder, node.content || []);
+
+	if(children.length === 0) {
+		// Empty block: produce minimal valid hardlinebreaks output
+		return {
+			type: "element",
+			tag: "p",
+			rule: "parseblock",
+			children: [
+				{ type: "text", text: "", rule: "hardlinebreaks", isRuleStart: true },
+				{ type: "element", tag: "br", rule: "hardlinebreaks", isRuleEnd: true }
+			]
+		};
+	}
+
+	// Mark all children with rule "hardlinebreaks"
+	for(var i = 0; i < children.length; i++) {
+		children[i].rule = "hardlinebreaks";
+	}
+
+	// isRuleStart on the first child
+	children[0].isRuleStart = true;
+
+	// Always append the closing isRuleEnd <br> (the """ terminator)
+	// The PM state never stores this br — it was stripped on load (see to-prosemirror.js)
+	children.push({
+		type: "element",
+		tag: "br",
+		rule: "hardlinebreaks",
+		isRuleEnd: true
+	});
+
+	return {
+		type: "element",
+		tag: "p",
+		rule: "parseblock",
+		children: children
+	};
+}
+
+/**
  * Pragma block — preserves raw text for \define, \procedure, \function, \widget, \import, \rules etc.
  * Restored back to wiki AST by re-parsing the raw text.
  */
@@ -571,6 +619,7 @@ const builders = {
 	blockquote: blockquote,
 	horizontal_rule: horizontal_rule,
 	hard_break: hard_break,
+	hard_line_breaks_block: hard_line_breaks_block,
 	pragma_block: pragma_block,
 	opaque_block: opaque_block,
 	table: table_node,

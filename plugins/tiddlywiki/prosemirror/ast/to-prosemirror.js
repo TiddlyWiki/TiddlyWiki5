@@ -8,10 +8,54 @@ Get the Prosemirror AST from a Wiki AST
 \*/
 
 function buildParagraph(context, node) {
-	return {
-		type: "paragraph",
-		content: convertNodes(context, node.children)
-	};
+	// Detect hard line breaks blocks and split the paragraph children iteratively
+	var children = node.children || [];
+	var result = [];
+	var currentP = [];
+
+	for(var i = 0; i < children.length; i++) {
+		if(children[i].rule === "hardlinebreaks") {
+			if(currentP.length > 0) {
+				result.push({
+					type: "paragraph",
+					content: convertNodes(context, currentP)
+				});
+				currentP = [];
+			}
+			var hardBlock = [];
+			while(i < children.length && children[i].rule === "hardlinebreaks") {
+				hardBlock.push(children[i]);
+				i++;
+			}
+			i--; // Backtrack for the outer loop increment
+			// Strip the closing isRuleEnd <br> — it's the """ syntax marker, not actual content
+			var contentBlock = hardBlock.filter(function(n) { return !n.isRuleEnd; });
+			result.push({
+				type: "hard_line_breaks_block",
+				content: convertNodes(context, contentBlock)
+			});
+		} else {
+			currentP.push(children[i]);
+		}
+	}
+
+	if(currentP.length > 0) {
+		result.push({
+			type: "paragraph",
+			content: convertNodes(context, currentP)
+		});
+	}
+
+	if(result.length === 1) {
+		return result[0];
+	} else if(result.length > 1) {
+		return result;
+	} else {
+		return {
+			type: "paragraph",
+			content: []
+		};
+	}
 }
 
 function buildHeading(context, node, level) {

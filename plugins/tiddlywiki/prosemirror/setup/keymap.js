@@ -111,17 +111,10 @@ function buildKeymap(schema, mapKeys) {
 			}
 			return true;
 		});
+		// Mod-Enter always inserts a hard_break inline node
 		bind("hardbreak", "Mod-Enter", cmd);
-		const shiftEnterKey = getShortcut("hardbreak-shift", "Shift-Enter");
-		if(shiftEnterKey && shiftEnterKey !== "none") {
-			keys[shiftEnterKey] = cmd;
-		}
-		if(mac) {
-			const ctrlEnterKey = getShortcut("hardbreak-ctrl", "Ctrl-Enter");
-			if(ctrlEnterKey && ctrlEnterKey !== "none") {
-				keys[ctrlEnterKey] = cmd;
-			}
-		}
+		// Shift-Enter is handled below in the combined chain (block-exit + hard_break fallback)
+		// We store the original hard_break command for use by the combined Shift-Enter handler
 	}
 	type = schema.nodes.list;
 	if(type) {
@@ -132,9 +125,144 @@ function buildKeymap(schema, mapKeys) {
 	if(type) {
 		bind("paragraph", "Shift-Ctrl-0", prosemirrorCommands.setBlockType(type));
 	}
+
+	// ── Shift-Enter: exit / split an inline-content block ────────────────────
+	// Shared by hard_line_breaks_block and code_block.
+	//
+	// Rules (in priority order):
+	//   1. Cursor at block START  → insert empty paragraph BEFORE the block
+	//   2. Cursor at block END    → insert empty paragraph AFTER the block
+	//   3. Cursor in MIDDLE       → split the block in two, insert paragraph between
+	//
+	// When the block has only one line the "start" rule wins (inserts before).
+	// ─────────────────────────────────────────────────────────────────────────
+	function makeShiftEnterExitHandler(blockTypePredicate) {
+		return function(state, dispatch) {
+			var $from = state.selection.$from;
+			var $to = state.selection.$to;
+
+			// Only handle collapsed selections (cursor, not range selection)
+			if($from.pos !== $to.pos) return false;
+
+			// Find the innermost ancestor block matching our predicate
+			var blockDepth = -1;
+			for(var d = $from.depth; d > 0; d--) {
+				if(blockTypePredicate($from.node(d).type)) {
+					blockDepth = d;
+					break;
+				}
+			}
+			if(blockDepth === -1) return false;
+
+			var paragraphType = state.schema.nodes.paragraph;
+			if(!paragraphType) return false;
+
+			var blockStart = $from.start(blockDepth); // pos of first content char
+			var blockEnd = $from.end(blockDepth);     // pos after last content char
+			var cursorPos = $from.pos;
+
+			var isAtStart = cursorPos === blockStart;
+			var isAtEnd = cursorPos === blockEnd;
+
+			if(!dispatch) return true; // dry-run: we will handle it
+
+			var tr = state.tr;
+
+			if(isAtStart) {
+				// Insert empty paragraph BEFORE the block
+				var insertBefore = $from.before(blockDepth);
+				tr.insert(insertBefore, paragraphType.createAndFill());
+				tr.setSelection(prosemirrorState.TextSelection.create(tr.doc, insertBefore + 1));
+
+			} else if(isAtEnd) {
+				// Insert empty paragraph AFTER the block
+				var insertAfter = $from.after(blockDepth);
+				tr.insert(insertAfter, paragraphType.createAndFill());
+				tr.setSelection(prosemirrorState.TextSelection.create(tr.doc, insertAfter + 1));
+
+			} else {
+				// Split block at cursor, insert paragraph in between
+				tr.split(cursorPos, 1);
+				// After split: two block nodes. cursorPos + 1 is now inside the second block.
+				// We insert a paragraph between them, at the position just after the first block ends.
+				// After tr.split, the first block ends at cursorPos and the second starts at cursorPos+1.
+				// The boundary between the two blocks is at cursorPos (end of first = start of second).
+				tr.insert(cursorPos, paragraphType.createAndFill());
+				tr.setSelection(prosemirrorState.TextSelection.create(tr.doc, cursorPos + 1));
+			}
+
+			dispatch(tr.scrollIntoView());
+			return true;
+		};
+	}
+
+	// Collect all Shift-Enter block-exit handlers; combine at the end with chainCommands
+	const shiftEnterHandlers = [];
+
+	type = schema.nodes.hard_line_breaks_block;
+	if(type) {
+		const hardLineBreaksType = type; // Capture in const before `type` is reassigned below
+		const hardBreakType = schema.nodes.hard_break;
+		if(hardBreakType) {
+			// Enter: insert a hard_break inline node (stays inside the block)
+			var enterInHardLineBreaks = function(state, dispatch) {
+				var $from = state.selection.$from;
+				for(var depth = $from.depth; depth > 0; depth--) {
+					if($from.node(depth).type === hardLineBreaksType) {
+						if(dispatch) {
+							dispatch(state.tr.replaceSelectionWith(hardBreakType.create()).scrollIntoView());
+						}
+						return true;
+					}
+				}
+				return false;
+			};
+			bind("hard-line-breaks-enter", "Enter", enterInHardLineBreaks);
+
+			// Shift-Enter: exit / split the block
+			shiftEnterHandlers.push(makeShiftEnterExitHandler(function(nodeType) {
+				return nodeType === hardLineBreaksType;
+			}));
+		}
+	}
 	type = schema.nodes.code_block;
 	if(type) {
 		bind("codeblock", "Shift-Ctrl-\\", prosemirrorCommands.setBlockType(type));
+
+		// Shift-Enter in code_block: same exit/split behavior
+		const codeBlockType = type;
+		shiftEnterHandlers.push(makeShiftEnterExitHandler(function(nodeType) {
+			return nodeType === codeBlockType;
+		}));
+	}
+
+	// Bind Shift-Enter: block-exit handlers run first; then fall through to hard_break insertion
+	if(shiftEnterHandlers.length > 0) {
+		// Build the hard_break insertion command that was previously bound to Shift-Enter
+		const hardBreakNode = schema.nodes.hard_break;
+		const hardBreakCmd = hardBreakNode
+			? prosemirrorCommands.chainCommands(prosemirrorCommands.exitCode, (state, dispatch) => {
+				if(dispatch) {
+					dispatch(state.tr.replaceSelectionWith(hardBreakNode.create()).scrollIntoView());
+				}
+				return true;
+			})
+			: null;
+
+		const allShiftEnterHandlers = [...shiftEnterHandlers];
+		if(hardBreakCmd) allShiftEnterHandlers.push(hardBreakCmd);
+
+		const combinedShiftEnter = prosemirrorCommands.chainCommands(...allShiftEnterHandlers);
+		const shiftEnterKey = getShortcut("hardbreak-shift", "Shift-Enter");
+		if(shiftEnterKey && shiftEnterKey !== "none") {
+			keys[shiftEnterKey] = combinedShiftEnter;
+		}
+		if(mac) {
+			const ctrlEnterKey = getShortcut("hardbreak-ctrl", "Ctrl-Enter");
+			if(ctrlEnterKey && ctrlEnterKey !== "none") {
+				keys[ctrlEnterKey] = combinedShiftEnter;
+			}
+		}
 	}
 	type = schema.nodes.heading;
 	if(type) {

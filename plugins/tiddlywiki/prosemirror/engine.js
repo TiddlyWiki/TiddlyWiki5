@@ -34,6 +34,7 @@ var createWidgetBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror
 var createImageBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/image-block/plugin.js").createImageBlockPlugin;
 var createImageNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/image/plugin.js").createImageNodeViewPlugin;
 var createPragmaBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/pragma-block/nodeview.js").createPragmaBlockNodeViewPlugin;
+var createHardLineBreaksNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/hard-line-breaks-block/nodeview.js").createHardLineBreaksNodeViewPlugin;
 var debounce = require("$:/core/modules/utils/debounce.js").debounce;
 var pmCommands = require("prosemirror-commands");
 var flatListCommands = require("prosemirror-flat-list");
@@ -171,6 +172,12 @@ function buildSchema() {
 			toDOM: function() { return ["dd", 0]; },
 			parseDOM: [{ tag: "dd" }],
 			defining: true
+		},
+		hard_line_breaks_block: {
+			group: "block",
+			content: "inline*",
+			toDOM: function() { return ["div", { class: "pm-hard-line-breaks-block-wrapper" }, 0]; },
+			parseDOM: [{ tag: "div.pm-hard-line-breaks-block-wrapper" }]
 		}
 	});
 
@@ -347,6 +354,7 @@ function ProseMirrorEngine(options) {
 				createWidgetBlockPlugin(),
 				createWidgetBlockNodeViewPlugin(nodeViewHost),
 				createPragmaBlockNodeViewPlugin(nodeViewHost),
+				createHardLineBreaksNodeViewPlugin(),
 				createDragHandlePlugin(),
 				createAutocompletePlugin(this.widget.wiki),
 				createFindReplacePlugin(this.widget.wiki)
