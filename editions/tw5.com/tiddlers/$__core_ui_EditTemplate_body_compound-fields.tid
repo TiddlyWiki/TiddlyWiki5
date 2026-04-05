@@ -1,4 +1,7 @@
+created: 20260405063351982
+modified: 20260405163022503
 title: $:/core/ui/EditTemplate/body/compound-fields
+type: text/vnd.tiddlywiki
 
 \whitespace trim
 
@@ -33,7 +36,7 @@ title: $:/core/ui/EditTemplate/body/compound-fields
 				</$radio>
 				&nbsp;
 			</$list>
-			<$radio tiddler=<<currentTiddler>> index=<<fieldName>> value="">
+			<$radio tiddler=<<currentTiddler>> index=<<fieldName>> value="" class="tc-tiny-gap-left">
 				none
 			</$radio>
 		</$let>
@@ -106,7 +109,7 @@ title: $:/core/ui/EditTemplate/body/compound-fields
 					<span class="tc-compound-field-type-selector" style="float:right;">
 						<$macrocall $name="compound-type-selector" fieldName=<<fieldName>>/>
 					</span>
-					<$button actions=<<delete-field-actions>> class="tc-btn-invisible tc-btn-mini" tooltip="Remove field" style="float:right;">
+					<$button actions=<<delete-field-actions>> class="tc-btn-invisible tc-btn-mini tc-small-gap-right" tooltip="Remove field" style="float:right;">
 						{{$:/core/images/delete-button}}
 					</$button>
 				</div>

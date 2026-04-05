@@ -5,12 +5,21 @@ tags: $:/tags/EditTemplate
 
 \procedure lingo-base() $:/language/EditTemplate/
 
-\procedure delete-state-tiddlers() <$action-deletetiddler $filter="[<newFieldNameTiddler>] [<storeTitle>] [<searchListState>]"/>
+\procedure delete-state-tiddlers()
+<$action-deletetiddler $filter="[<newFieldNameTiddler>] [<storeTitle>] [<searchListState>]"/>
+\end
 
-\procedure focus-new-field-input() <$action-sendmessage $message="tm-focus-selector" $param=`[data-tiddler-title="$(storyTiddler)$"] .tc-edit-field-add-name-wrapper input` />
+\procedure focus-new-field-input()
+<$action-sendmessage $message="tm-focus-selector"
+	$param=`[data-tiddler-title="$(storyTiddler)$"] .tc-edit-field-add-name-wrapper input`
+/>
+\end
 
 \procedure new-field-actions()
-	<$action-setfield $tiddler=<<storyTiddler>> $field={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}} />
+	<$action-setfield $tiddler=<<storyTiddler>>
+		$field={{{ [<newFieldNameTiddler>get[text]] }}}
+		$value={{{ [<newFieldValueTiddler>get[text]] }}}
+	/>
 	<$action-deletetiddler $filter="[prefix[$:/temp/NewFieldValue]prefix<newFieldValueTiddlerPrefix>]"/>
 	<<delete-state-tiddlers>>
 	<<focus-new-field-input>>

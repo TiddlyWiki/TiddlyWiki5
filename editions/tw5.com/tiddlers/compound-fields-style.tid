@@ -1,0 +1,29 @@
+created: 20260405064438235
+modified: 20260405164205491
+tags: $:/tags/Stylesheet
+title: compound-fields-style
+type: text/vnd.tiddlywiki
+
+.tc-compound-field-pane {
+	margin-bottom: 1em;
+}
+
+.tc-compound-field-header {
+	margin-bottom: .5em;
+}
+
+.tc-compound-field-pane label {
+	margin-right: .5em;
+}
+
+.tc-compound-field-pane input[type="radio"] {
+	margin-right: .25em;
+}
+
+.tc-radio > input[type="radio"] {
+	margin-right: .4em;
+}
+
+.tc-btn-mini .tc-image-button {
+	margin-right: .25em;
+}

@@ -1,6 +1,6 @@
 bbb: b2
 created: 20260404214146191
-modified: 20260404234122164
+modified: 20260405164238503
 title: TestMF
 type: text/vnd.tiddlywiki-fields
 
@@ -16,11 +16,9 @@ title: bb
 some text
 +
 title: ccc
+type: binary-x-y
 
-c3
-
-some more text
-
+y
 +
 title: sub-text
 
@@ -30,4 +28,6 @@ paragraph 2
 
 +
 title: test
+type: binary-yes-no
 
+no
