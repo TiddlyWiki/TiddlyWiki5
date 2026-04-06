@@ -3,6 +3,6 @@ title: $:/core/ui/TiddlerFields
 \whitespace trim
 <table class="tc-view-field-table">
 <tbody>
-<$list filter="[all[current]fields[]sort[title]] -text" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+<$list filter="[all[current]fields[]sort[title]] -text -[all[current]compound-field-names[]]" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
 </tbody>
 </table>
