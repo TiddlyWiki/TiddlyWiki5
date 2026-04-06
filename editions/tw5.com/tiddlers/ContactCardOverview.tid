@@ -1,0 +1,55 @@
+created: 20260406143500000
+modified: 20260406143500000
+tags:
+title: ContactCardOverview
+type: text/vnd.tiddlywiki
+
+! Contact Card Overview
+
+This tiddler demonstrates the two contact card templates for `text/vnd.tiddlywiki-multiple+fields` tiddlers tagged ''ContactCard''.
+
+---
+
+!! Compact List View
+
+Uses `$:/core/ui/contact-card-list-item` — designed for overviews and lists.
+
+<div style="display:flex; flex-wrap:wrap; gap:1em;">
+<$list filter="[tag[ContactCard]sort[title]]">
+<$transclude tiddler="$:/core/ui/contact-card-list-item"/>
+</$list>
+</div>
+
+---
+
+!! Full Card View
+
+Each tiddler's view template renders the full card automatically (click a name above to navigate). Below is an inline transclude of each contact's full card:
+
+<$list filter="[tag[ContactCard]sort[title]]">
+
+<div style="margin-bottom:1.5em;">
+
+!!! <$link/>
+
+<$transclude tiddler="$:/core/ui/ViewTemplate/body/contact-card"/>
+
+</div>
+
+</$list>
+
+---
+
+!! Filter Examples
+
+;All contacts
+:`[tag[ContactCard]]` → <$text text={{{ [tag[ContactCard]count[]] }}}/> contacts
+
+;Business contacts
+:`[tag[ContactCard]each:compound-field[category]field:category[business]]` — filter by compound field values
+
+;Favorites
+:<$list filter="[tag[ContactCard]] :filter[get[favorite]match[yes]]"><$link/> </$list>
+
+;All email addresses across contacts
+:<$list filter="[tag[ContactCard]]" variable="contact"><$list filter="[<contact>compound-field-names[]] :filter[<contact>compound-field-type<currentTiddler>match[email]]" variable="fn"><$text text={{{ [<contact>get<fn>] }}}/>, </$list></$list>

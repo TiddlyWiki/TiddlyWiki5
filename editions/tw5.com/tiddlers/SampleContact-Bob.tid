@@ -1,0 +1,56 @@
+created: 20260406143200000
+modified: 20260406143200000
+tags: ContactCard
+title: SampleContact-Bob
+type: text/vnd.tiddlywiki-multiple+fields
+
+title: body
+type: multiline
+
+Old friend from university. Runs a small startup building personal knowledge tools.
++
+title: first-name
+
+Bob
++
+title: last-name
+
+Martinez
++
+title: role
+
+Founder
++
+title: company
+
+NoteGraph
++
+title: email-personal
+type: email
+
+bob@martinez.family
++
+title: phone-mobile
+type: phone
+
++1-555-0199
++
+title: birthday
+type: date
+
+1991-03-08
++
+title: category
+type: binary-personal-business
+
+personal
++
+title: favorite
+type: binary-yes-no
+
+no
++
+title: accent-color
+type: color
+
+#9b59b6

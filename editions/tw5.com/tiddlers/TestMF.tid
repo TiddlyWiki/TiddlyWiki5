@@ -1,9 +1,22 @@
 bbb: b2
 created: 20260404214146191
-modified: 20260406105008951
+modified: 20260406142503618
 title: TestMF
 type: text/vnd.tiddlywiki-multiple+fields
 
+title: body
+
+This is the main body text
+
+paragraph 2
+
+aa
++
+title: date-x
+type: date
+
+2026-04-06
++
 title: aaa
 type: multiline
 
@@ -11,29 +24,23 @@ a1
 
 a2 ''test''
 
-asdf
+asdf 
 +
 title: bb
 
 some text
-+
-title: body
-
-This is the main body text
-
-paragraph 2
-
 +
 title: ccc
 type: binary-x-y
 
 y
 +
-title: date-x
-
-
-+
 title: test
 type: date
 
 2026-04-06
++
+title: date-time field test
+type: date-time
+
+2026-04-06T15:40

@@ -1,0 +1,86 @@
+created: 20260406140000000
+modified: 20260406144807484
+tags: ContactCard
+title: SampleContact
+type: text/vnd.tiddlywiki-multiple+fields
+
+title: body
+type: multiline
+
+<$let tv-wikilinks="no">
+
+!! {{!!first-name}} {{{ [{!!middle-name}!is[blank]addsuffix[ ]] }}}{{!!last-name}}
+</$let>
+
+Senior Developer at ~ExampleCorp. Specialist in reactive systems and data pipelines.
++
+title: first-name
+
+Jane
++
+title: middle-name
+
+test
++
+title: last-name
+
+Doe
++
+title: company
+
+ExampleCorp
++
+title: role
+
+Senior Developer
++
+title: email-work
+type: email
+
+jane.doe@examplecorp.com
++
+title: email-personal
+type: email
+
+jane@example.net
++
+title: phone-mobile
+type: phone
+
++1-555-0123
++
+title: phone-office
+type: phone
+
++1-555-0100
++
+title: website
+type: url
+
+https://janedoe.dev
++
+title: birthday
+type: date
+
+1990-06-15
++
+title: category
+type: binary-personal-business
+
+business
++
+title: favorite
+type: binary-yes-no
+
+yes
++
+title: address
+type: multiline
+
+Hauptstrasse 42
+1010 Wien, Austria
++
+title: accent-color
+type: color
+
+#4a90d9

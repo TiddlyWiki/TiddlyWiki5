@@ -27,3 +27,142 @@ type: text/vnd.tiddlywiki
 .tc-btn-mini .tc-image-button {
 	margin-right: .25em;
 }
+
+/* Contact card view */
+.tc-contact-card {
+	border: 1px solid <<colour tiddler-border>>;
+	border-radius: 4px;
+	padding: 1em;
+}
+
+.tc-contact-card-body {
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+	border-bottom: 1px solid <<colour tiddler-border>>;
+}
+
+.tc-contact-card-fields {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 0.75em;
+}
+
+.tc-contact-card-field {
+	padding: 0.4em 0.6em;
+	border-radius: 3px;
+	background: <<colour tiddler-background>>;
+}
+
+.tc-contact-card-label {
+	font-size: 0.85em;
+	font-weight: bold;
+	color: <<colour muted-foreground>>;
+	text-transform: capitalize;
+	margin-bottom: 0.15em;
+}
+
+.tc-contact-card-value {
+	word-break: break-word;
+}
+
+.tc-contact-card-link {
+	text-decoration: none;
+}
+
+.tc-contact-card-link:hover {
+	text-decoration: underline;
+}
+
+.tc-contact-card-color {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	border: 1px solid <<colour tiddler-border>>;
+	border-radius: 2px;
+	vertical-align: middle;
+}
+
+/* Contact list item (compact card) */
+.tc-contact-list-item {
+	border: 1px solid <<colour tiddler-border>>;
+	border-radius: 6px;
+	padding: 0.8em 1em;
+	background: <<colour tiddler-background>>;
+	max-width: 400px;
+}
+
+.tc-contact-list-header {
+	display: flex;
+	align-items: center;
+	gap: 0.75em;
+	margin-bottom: 0.6em;
+}
+
+.tc-contact-list-avatar {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+.tc-contact-list-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.tc-contact-list-avatar-placeholder {
+	background: <<colour primary>>;
+	color: <<colour tiddler-background>>;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+.tc-contact-list-name {
+	font-size: 1.15em;
+	font-weight: bold;
+}
+
+.tc-contact-list-subtitle {
+	color: <<colour muted-foreground>>;
+	font-size: 0.9em;
+}
+
+.tc-contact-list-details {
+	padding-left: 0.3em;
+}
+
+.tc-contact-list-row {
+	padding: 0.15em 0;
+	font-size: 0.9em;
+}
+
+.tc-contact-list-row a {
+	text-decoration: none;
+}
+
+.tc-contact-list-row a:hover {
+	text-decoration: underline;
+}
+
+.tc-contact-list-icon {
+	display: inline-block;
+	width: 1.6em;
+	text-align: center;
+}
+
+.tc-contact-list-address {
+	padding-left: 1.6em;
+	white-space: pre-line;
+	color: <<colour muted-foreground>>;
+}
+
+.tc-contact-list-notes {
+	padding-left: 1.6em;
+	color: <<colour muted-foreground>>;
+	font-style: italic;
+}

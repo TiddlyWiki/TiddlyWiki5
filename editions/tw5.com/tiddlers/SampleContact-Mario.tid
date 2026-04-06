@@ -1,0 +1,62 @@
+created: 20260406143000000
+modified: 20260406143000000
+tags: ContactCard
+title: SampleContact-Mario
+type: text/vnd.tiddlywiki-multiple+fields
+
+title: body
+type: multiline
+
+Met at the TiddlyWiki meetup in Vienna 2025. Interested in collaboration on compound tiddler plugins.
++
+title: first-name
+
+Mario
++
+title: last-name
+
+Storti
++
+title: company
+
+WikiLabs
++
+title: role
+
+Developer
++
+title: email-work
+type: email
+
+mario@wikilabs.example.com
++
+title: phone-mobile
+type: phone
+
++43-660-1234567
++
+title: website
+type: url
+
+https://wikilabs.github.io
++
+title: address
+type: multiline
+
+Hauptstrasse 42
+1010 Wien, Austria
++
+title: category
+type: binary-personal-business
+
+business
++
+title: favorite
+type: binary-yes-no
+
+yes
++
+title: accent-color
+type: color
+
+#2ecc71
