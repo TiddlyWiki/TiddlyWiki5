@@ -2,6 +2,10 @@ title: $:/core/ui/EditTemplate/body/compound-fields
 
 \whitespace trim
 
+\define config-visibility-title()
+$:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
+\end
+
 \procedure add-field-actions()
 <$let newName={{{ [<newFieldState>get[text]] }}}>
 	<%if [<newName>!is[blank]] %>
@@ -21,7 +25,7 @@ title: $:/core/ui/EditTemplate/body/compound-fields
 \procedure compound-field-editor(fieldName)
 <$let fieldType={{{ [<currentTiddler>compound-field-type<fieldName>] }}}>
 	<%if [<fieldType>match[multiline]] %>
-		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" type="textarea"/>
+		<$edit index=<<fieldName>> class="tc-edit-texteditor tc-edit-texteditor-body" tabindex={{$:/config/EditTabIndex}}><$set name="targetTiddler" value=<<currentTiddler>>><$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]"><$reveal type="nomatch" state=<<config-visibility-title>> text="hide" class="tc-text-editor-toolbar-item-wrapper"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$reveal></$list></$set></$edit>
 	<%elseif [<fieldType>match[date]] %>
 		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="date"/>
 	<%elseif [<fieldType>prefix[binary-]] %>
@@ -90,12 +94,12 @@ title: $:/core/ui/EditTemplate/body/compound-fields
 			<$transclude $tiddler=<<currentTiddler>> $index="body" mode="block"/>
 		</div>
 
-		<!-- Sub-text editor pane -->
-		<div class="tc-compound-field-pane tc-compound-field-pane-subtext">
+		<!-- Body editor pane with toolbar -->
+		<div class="tc-compound-field-pane tc-compound-field-pane-body">
 			<div class="tc-compound-field-header">
 				<strong class="tc-compound-field-name">body</strong>
 			</div>
-			<$edit-text tiddler=<<currentTiddler>> index="body" class="tc-edit-texteditor" type="textarea"/>
+			<$edit index="body" class="tc-edit-texteditor tc-edit-texteditor-body" tabindex={{$:/config/EditTabIndex}} cancelPopups="yes" fileDrop={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}}><$set name="targetTiddler" value=<<currentTiddler>>><$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]"><$reveal type="nomatch" state=<<config-visibility-title>> text="hide" class="tc-text-editor-toolbar-item-wrapper"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$reveal></$list></$set></$edit>
 		</div>
 
 		<!-- Other field editor panes -->
