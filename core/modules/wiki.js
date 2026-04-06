@@ -74,7 +74,7 @@ exports.setText = function(title,field,index,value,options) {
 	if(index) {
 		var data = this.getTiddlerData(title,Object.create(null));
 		if(value !== undefined) {
-			// For text/vnd.tiddlywiki-fields, preserve metadata when updating the value
+			// Preserve metadata objects (e.g. {value: "...", type: "multiline"}) when updating
 			var existingEntry = data[index];
 			if(existingEntry !== null && typeof existingEntry === "object" && $tw.utils.hop(existingEntry,"value")) {
 				existingEntry.value = value;
@@ -926,7 +926,8 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 				return $tw.utils.parseJSONSafe(tiddler.fields.text,defaultData);
 			case "application/x-tiddler-dictionary":
 				return $tw.utils.parseFields(tiddler.fields.text);
-			case "text/vnd.tiddlywiki-fields":
+			case "text/vnd.tiddlywiki-multiple":
+			case "text/vnd.tiddlywiki-multiple+fields":
 				return $tw.utils.parseMultilineFields(tiddler.fields.text);
 		}
 	}
@@ -942,7 +943,7 @@ exports.extractTiddlerDataItem = function(titleOrTiddler,index,defaultText) {
 	if(data && $tw.utils.hop(data,index)) {
 		text = data[index];
 	}
-	// Unwrap nested object from text/vnd.tiddlywiki-fields metadata entries
+	// Unwrap nested object from compound tiddler metadata entries
 	if(text !== null && typeof text === "object" && $tw.utils.hop(text,"value")) {
 		text = text.value;
 	}
@@ -971,7 +972,7 @@ exports.setTiddlerData = function(title,data,fields,options) {
 		};
 	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
 		newFields.text = $tw.utils.makeTiddlerDictionary(data);
-	} else if(existingTiddler && existingTiddler.fields.type === "text/vnd.tiddlywiki-fields") {
+	} else if(existingTiddler && (existingTiddler.fields.type === "text/vnd.tiddlywiki-multiple" || existingTiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields")) {
 		newFields.text = $tw.utils.makeMultilineFieldsDictionary(data);
 	} else {
 		newFields.type = "application/json";

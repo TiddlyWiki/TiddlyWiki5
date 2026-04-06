@@ -3,7 +3,7 @@ title: $:/core/modules/filters/compound-field-type.js
 type: application/javascript
 module-type: filteroperator
 
-Returns the type metadata of a sub-entry in a text/vnd.tiddlywiki-fields tiddler
+Returns the type metadata of a sub-entry in a compound tiddler
 
 \*/
 
@@ -15,7 +15,7 @@ Export our filter function
 exports["compound-field-type"] = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		if(tiddler && tiddler.fields.type === "text/vnd.tiddlywiki-fields") {
+		if(tiddler && (tiddler.fields.type === "text/vnd.tiddlywiki-multiple" || tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields")) {
 			var data = options.wiki.getTiddlerData(tiddler);
 			if(data && operator.operand && $tw.utils.hop(data,operator.operand)) {
 				var entry = data[operator.operand];

@@ -441,7 +441,7 @@ $tw.utils.parseFields = function(text,fields) {
 };
 
 /*
-Parse a block of text in text/vnd.tiddlywiki-fields format into a hashmap of field values.
+Parse a block of text in text/vnd.tiddlywiki-multiple+fields format into a hashmap of field values.
 Entries are separated by \n+\n. Each entry is a .tid-style block with header fields and body.
 The "title" header is the field name, the body is the field value.
 If extra headers exist beyond "title", the value is wrapped as {value: "...", ...metadata}.
@@ -1226,8 +1226,8 @@ $tw.Wiki = function(options) {
 		if(!(tiddler instanceof $tw.Tiddler)) {
 			tiddler = new $tw.Tiddler(tiddler);
 		}
-		// For text/vnd.tiddlywiki-fields tiddlers, expose sub-entry titles as fields
-		if(tiddler && tiddler.fields.type === "text/vnd.tiddlywiki-fields" && tiddler.fields.text) {
+		// For text/vnd.tiddlywiki-multiple+fields tiddlers, expose sub-entry titles as fields
+		if(tiddler && tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields" && tiddler.fields.text) {
 			var reservedFields = {"title":true,"text":true,"type":true,"created":true,"modified":true,"tags":true,"bag":true,"revision":true};
 			var parsedFields = $tw.utils.parseMultilineFields(tiddler.fields.text);
 			var extraFields = Object.create(null);
@@ -1736,9 +1736,9 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/tids","tiddlerdeserializer",{
 	}
 });
 $tw.modules.define("$:/boot/tiddlerdeserializer/tiddlywiki-fields","tiddlerdeserializer",{
-	"text/vnd.tiddlywiki-fields": function(text,fields) {
+	"text/vnd.tiddlywiki-multiple+fields": function(text,fields) {
 		fields.text = text;
-		fields.type = "text/vnd.tiddlywiki-fields";
+		fields.type = "text/vnd.tiddlywiki-multiple+fields";
 		return [fields];
 	}
 });
@@ -2527,7 +2527,7 @@ $tw.boot.initStartup = function(options) {
 	}
 	// Add file extension information
 	$tw.utils.registerFileType("text/vnd.tiddlywiki","utf8",".tid");
-	$tw.utils.registerFileType("text/vnd.tiddlywiki-fields","utf8",".tids-fields");
+	$tw.utils.registerFileType("text/vnd.tiddlywiki-multiple+fields","utf8",".tids-fields");
 	$tw.utils.registerFileType("application/x-tiddler","utf8",".tid");
 	$tw.utils.registerFileType("application/x-tiddlers","utf8",".multids");
 	$tw.utils.registerFileType("application/x-tiddler-html-div","utf8",".tiddler");

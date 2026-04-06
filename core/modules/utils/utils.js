@@ -844,7 +844,7 @@ exports.makeTiddlerDictionary = function(data) {
 };
 
 /*
-Convert a hashmap into text/vnd.tiddlywiki-fields format.
+Convert a hashmap into compound tiddler format (text/vnd.tiddlywiki-multiple).
 Values can be plain strings or nested objects with {value: "...", ...metadata}.
 */
 exports.makeMultilineFieldsDictionary = function(data) {

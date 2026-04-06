@@ -17,9 +17,6 @@ title: $:/core/ui/EditTemplate/body/compound-fields
 </$action-confirm>
 \end
 
-\procedure set-type-actions(type)
-<$action-compound-settype $tiddler=<<currentTiddler>> $index=<<fieldName>> $type=<<type>>/>
-\end
 
 \procedure compound-field-editor(fieldName)
 <$let fieldType={{{ [<currentTiddler>compound-field-type<fieldName>] }}}>
@@ -51,8 +48,8 @@ title: $:/core/ui/EditTemplate/body/compound-fields
 	fieldType={{{ [<currentTiddler>compound-field-type<fieldName>] }}}
 >
 	<$select tiddler=<<typeStateTiddler>> field="text" default=<<fieldType>>
-		actions="""<$action-compound-settype $tiddler=<<currentTiddler>> $index=<<fieldName>>
-			$type={{{ [<typeStateTiddler>get[text]] }}}/>""">
+		actions="""<$action-setfield $tiddler=<<currentTiddler>> $index=<<fieldName>>
+			$indexProperty="type" $value={{{ [<typeStateTiddler>get[text]] }}}/>""">
 		<option value="">single-line</option>
 		<option value="multiline">multiline</option>
 		<option value="date">date</option>
