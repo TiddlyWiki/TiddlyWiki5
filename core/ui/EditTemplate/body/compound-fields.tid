@@ -150,25 +150,19 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 	<%else%>
 
-		<!-- Body editor pane -->
-		<div class="tc-compound-field-pane tc-compound-field-pane-body">
-			<div class="tc-compound-field-header">
-				<strong class="tc-compound-field-name">body</strong>
-			</div>
-			<$macrocall $name="compound-field-editor" fieldName="body"/>
-		</div>
-
-		<!-- Other field editor panes -->
-		<$list filter="[<currentTiddler>compound-field-names[]] -body" variable="fieldName">
-			<div class="tc-compound-field-pane">
+		<!-- All field editor panes in compound text order -->
+		<$list filter="[<currentTiddler>compound-field-names[]]" variable="fieldName">
+			<div class={{{ [[tc-compound-field-pane]] [<fieldName>match[body]then[tc-compound-field-pane-body]] +[join[ ]] }}}>
 				<div class="tc-compound-field-header">
 					<strong class="tc-compound-field-name"><$text text=<<fieldName>>/></strong>
-					<span class="tc-compound-field-type-selector" style="float:right;">
-						<$macrocall $name="compound-type-selector" fieldName=<<fieldName>>/>
-					</span>
-					<$button actions=<<delete-field-actions>> class="tc-btn-invisible tc-btn-mini" tooltip="Remove field" style="float:right;">
-						{{$:/core/images/delete-button}}
-					</$button>
+					<%if [<fieldName>!match[body]] %>
+						<span class="tc-compound-field-type-selector" style="float:right;">
+							<$macrocall $name="compound-type-selector" fieldName=<<fieldName>>/>
+						</span>
+						<$button actions=<<delete-field-actions>> class="tc-btn-invisible tc-btn-mini" tooltip="Remove field" style="float:right;">
+							{{$:/core/images/delete-button}}
+						</$button>
+					<%endif%>
 				</div>
 				<$macrocall $name="compound-field-editor" fieldName=<<fieldName>>/>
 			</div>

@@ -847,9 +847,34 @@ exports.makeTiddlerDictionary = function(data) {
 Convert a hashmap into compound tiddler format (text/vnd.tiddlywiki-multiple).
 Values can be plain strings or nested objects with {value: "...", ...metadata}.
 */
-exports.makeMultilineFieldsDictionary = function(data) {
+exports.makeMultilineFieldsDictionary = function(data,originalText) {
 	var entries = [];
-	var names = Object.keys(data).sort();
+	// Preserve original key order if available, append new keys at the end
+	var names;
+	if(originalText) {
+		names = [];
+		var rawEntries = originalText.split(/\r?\n\+\r?\n/);
+		for(var r = 0; r < rawEntries.length; r++) {
+			var split = rawEntries[r].split(/\r?\n\r?\n/mg);
+			if(split.length >= 1) {
+				var entryFields = $tw.utils.parseFields(split[0]);
+				if(entryFields.title && names.indexOf(entryFields.title) === -1) {
+					names.push(entryFields.title);
+				}
+			}
+		}
+		// Append any new keys not in the original
+		var allKeys = Object.keys(data);
+		for(var k = 0; k < allKeys.length; k++) {
+			if(names.indexOf(allKeys[k]) === -1) {
+				names.push(allKeys[k]);
+			}
+		}
+		// Remove deleted keys
+		names = names.filter(function(n) { return $tw.utils.hop(data,n); });
+	} else {
+		names = Object.keys(data);
+	}
 	for(var t = 0; t < names.length; t++) {
 		var name = names[t];
 		var item = data[name];

@@ -973,7 +973,7 @@ exports.setTiddlerData = function(title,data,fields,options) {
 	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
 		newFields.text = $tw.utils.makeTiddlerDictionary(data);
 	} else if(existingTiddler && (existingTiddler.fields.type === "text/vnd.tiddlywiki-multiple" || existingTiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields")) {
-		newFields.text = $tw.utils.makeMultilineFieldsDictionary(data);
+		newFields.text = $tw.utils.makeMultilineFieldsDictionary(data,existingTiddler.fields.text);
 	} else {
 		newFields.type = "application/json";
 		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
