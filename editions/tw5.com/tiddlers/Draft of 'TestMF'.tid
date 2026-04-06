@@ -2,22 +2,29 @@ bbb: b2
 created: 20260404214146191
 draft.of: TestMF
 draft.title: TestMF
-modified: 20260406085859257
+modified: 20260406105102044
 title: Draft of 'TestMF'
-type: text/vnd.tiddlywiki-fields
+type: text/vnd.tiddlywiki-multiple+fields
 
 title: aaa
 type: multiline
 
 a1
 
-a2 test
+a2 ''test''
 
 asdf
 +
 title: bb
 
 some text
++
+title: body
+
+This is the main body text
+
+paragraph 2
+
 +
 title: ccc
 type: binary-x-y
@@ -26,13 +33,6 @@ y
 +
 title: date-x
 
-
-+
-title: body
-
-This is the main body text
-
-paragraph 2
 
 +
 title: test

@@ -33,18 +33,24 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 			<$list filter="[<previewState>get[text]match[yes]]" variable="ignore">
 				<div class="tc-tiddler-preview-preview" data-tiddler-title={{!!draft.title}} data-tags={{!!tags}}>
 					<$let compoundFieldText={{{ [<currentTiddler>get<fieldName>] }}}
-						previewType={{{ [{$:/state/editpreviewtype}get[title]] }}}
+						previewType={{{ [{$:/state/editpreviewtype}] }}}
 					>
-						<%if [<previewType>search[parse-tree]] %>
+						<%if [<previewType>suffix[parse-tree]] %>
 							<$wikify name="preview-text" text=<<compoundFieldText>> mode="block" output="parsetree">
 								<pre><code><$text text=<<preview-text>>/></code></pre>
 							</$wikify>
-						<%elseif [<previewType>search[widget-tree]] %>
+						<%elseif [<previewType>suffix[widget-tree]] %>
 							<$wikify name="preview-text" text=<<compoundFieldText>> mode="block" output="widgettree">
 								<pre><code><$text text=<<preview-text>>/></code></pre>
 							</$wikify>
-						<%elseif [<previewType>search[raw]] %>
-							<pre><code><$text text=<<compoundFieldText>>/></code></pre>
+						<%elseif [<previewType>suffix[raw]] %>
+							<$wikify name="preview-text" text=<<compoundFieldText>> mode="block" output="html">
+								<pre><code><$text text=<<preview-text>>/></code></pre>
+							</$wikify>
+						<%elseif [<previewType>suffix[diffs-shadow]] %>
+							<$transclude $tiddler=<<currentTiddler>> $field=<<fieldName>> $mode="block"/>
+						<%elseif [<previewType>suffix[diffs-current]] %>
+							<$transclude $tiddler=<<currentTiddler>> $field=<<fieldName>> $mode="block"/>
 						<%else%>
 							<$importvariables filter="[all[shadows+tiddlers]tag[$:/tags/Macro/View]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Macro/View/Body]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global/View]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global/View/Body]!is[draft]]">
 								<$set name="tv-tiddler-preview" value="yes">
