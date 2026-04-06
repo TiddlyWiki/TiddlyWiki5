@@ -37,7 +37,8 @@ title: $:/core/ui/ViewTemplate/body/contact-card
 </$let>
 \end
 
-<div class="tc-contact-card">
+<$let accentColor={{{ [<currentTiddler>get[accent-color]] }}}>
+<div class="tc-contact-card" style={{{ [<accentColor>!is[blank]addprefix[--contact-accent:]] :else[[--contact-accent:]] +[addsuffix[;]] }}}>
 
 	<!-- Body / notes section -->
 	<$let bodyValue={{{ [<currentTiddler>get[body]] }}}>
@@ -56,3 +57,4 @@ title: $:/core/ui/ViewTemplate/body/contact-card
 	</div>
 
 </div>
+</$let>

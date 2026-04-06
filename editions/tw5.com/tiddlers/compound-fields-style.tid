@@ -1,6 +1,6 @@
 created: 20260405064438235
 modified: 20260405164205491
-tags: [[$:/tags/Stylesheet]]
+tags: $:/tags/Stylesheet
 title: compound-fields-style
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
@@ -31,7 +31,8 @@ title: compound-fields-style
 
 /* Contact card view */
 .tc-contact-card {
-	border: 1px solid <<colour tiddler-border>>;
+	border: 1px solid var(--contact-accent, <<colour primary>>);
+	border-left: 5px solid var(--contact-accent, <<colour primary>>);
 	border-radius: 4px;
 	padding: 1em;
 }
@@ -98,8 +99,8 @@ title: compound-fields-style
 
 /* Contact list item (compact card) */
 .tc-contact-list-item {
-	border: 1px solid <<colour tiddler-border>>;
-	border-left: 4px solid var(--contact-accent, <<colour primary>>);
+	border: 1px solid var(--contact-accent, <<colour primary>>);
+	border-left: 5px solid var(--contact-accent, <<colour primary>>);
 	border-radius: 6px;
 	padding: 0.8em 1em;
 	background: <<colour tiddler-background>>;
