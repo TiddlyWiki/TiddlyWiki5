@@ -55,9 +55,9 @@ title: compound-fields-style
 }
 
 .tc-contact-card-label {
-	font-size: 0.85em;
+	font-size: 0.9em;
 	font-weight: bold;
-	color: <<colour muted-foreground>>;
+	color: <<colour foreground>>;
 	text-transform: capitalize;
 	margin-bottom: 0.15em;
 }
@@ -68,10 +68,16 @@ title: compound-fields-style
 
 .tc-contact-card-link {
 	text-decoration: none;
+	color: <<colour tiddler-link-foreground>>;
 }
 
 .tc-contact-card-link:hover {
 	text-decoration: underline;
+}
+
+.tc-contact-card-link:focus {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: 2px;
 }
 
 .tc-contact-card-color {
@@ -130,7 +136,7 @@ title: compound-fields-style
 
 .tc-contact-list-avatar-placeholder {
 	background: var(--contact-accent, <<colour primary>>);
-	color: #fff;
+	color: <<colour tiddler-background>>;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -144,11 +150,11 @@ title: compound-fields-style
 }
 
 .tc-contact-list-name a.tc-tiddlylink {
-	color: var(--contact-accent, <<colour primary>>);
+	color: <<colour tiddler-link-foreground>>;
 }
 
 .tc-contact-list-subtitle {
-	color: <<colour muted-foreground>>;
+	color: <<colour foreground>>;
 	font-size: 0.9em;
 }
 
@@ -163,11 +169,17 @@ title: compound-fields-style
 
 .tc-contact-list-row a {
 	text-decoration: none;
-	color: var(--contact-accent, <<colour primary>>);
+	color: <<colour tiddler-link-foreground>>;
 }
 
 .tc-contact-list-row a:hover {
 	text-decoration: underline;
+}
+
+.tc-contact-list-row a:focus,
+.tc-contact-list-name a:focus {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: 2px;
 }
 
 .tc-contact-list-icon {
@@ -179,12 +191,12 @@ title: compound-fields-style
 .tc-contact-list-address {
 	padding-left: 1.6em;
 	white-space: pre-line;
-	color: <<colour muted-foreground>>;
+	color: <<colour foreground>>;
 }
 
 .tc-contact-list-notes {
 	padding-left: 1.6em;
-	color: <<colour muted-foreground>>;
+	color: <<colour foreground>>;
 	font-style: italic;
 	border-top: 1px dashed <<colour tiddler-border>>;
 	margin-top: 0.4em;
