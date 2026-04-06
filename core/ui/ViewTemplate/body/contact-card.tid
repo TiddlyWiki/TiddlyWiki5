@@ -2,7 +2,7 @@ title: $:/core/ui/ViewTemplate/body/contact-card
 
 \whitespace trim
 
-\procedure contact-card-field(fieldName)
+\procedure contact-card-field-view(fieldName)
 <$let
 	fieldType={{{ [<currentTiddler>compound-field-type<fieldName>] }}}
 	fieldValue={{{ [<currentTiddler>get<fieldName>] }}}
@@ -37,24 +37,96 @@ title: $:/core/ui/ViewTemplate/body/contact-card
 </$let>
 \end
 
-<$let accentColor={{{ [<currentTiddler>get[accent-color]] }}}>
+\procedure contact-card-field-edit(fieldName)
+<$let fieldType={{{ [<currentTiddler>compound-field-type<fieldName>] }}}>
+	<div class="tc-contact-card-field">
+		<div class="tc-contact-card-label"><$text text=<<fieldName>>/></div>
+		<div class="tc-contact-card-value">
+			<%if [<fieldType>match[multiline]] %>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="textarea"/>
+			<%elseif [<fieldType>match[date]] %>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="date"/>
+			<%elseif [<fieldType>match[date-time]] %>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="datetime-local"/>
+			<%elseif [<fieldType>match[email]] %>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="email"/>
+			<%elseif [<fieldType>match[phone]] %>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="tel"/>
+			<%elseif [<fieldType>match[url]] %>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="url"/>
+			<%elseif [<fieldType>match[color]] %>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="color"/>
+			<%elseif [<fieldType>prefix[binary-]] %>
+				<$let binaryOptions={{{ [<fieldType>removeprefix[binary-]] }}}>
+					<$list filter="[<binaryOptions>split[-]]" variable="optionValue">
+						<$radio tiddler=<<currentTiddler>> index=<<fieldName>> value=<<optionValue>>>
+							<$text text=<<optionValue>>/>
+						</$radio>
+						&nbsp;
+					</$list>
+					<$radio tiddler=<<currentTiddler>> index=<<fieldName>> value="">
+						none
+					</$radio>
+				</$let>
+			<%else%>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input"/>
+			<%endif%>
+		</div>
+	</div>
+</$let>
+\end
+
+<$let
+	accentColor={{{ [<currentTiddler>get[accent-color]] }}}
+	editState=<<qualify "$:/state/contact-card/edit">>
+>
 <div class="tc-contact-card" style={{{ [<accentColor>!is[blank]addprefix[--contact-accent:]] :else[[--contact-accent:]] +[addsuffix[;]] }}}>
 
-	<!-- Body / notes section -->
-	<$let bodyValue={{{ [<currentTiddler>get[body]] }}}>
-		<%if [<bodyValue>!is[blank]] %>
-			<div class="tc-contact-card-body">
-				<$transclude $field="body" $mode="block"/>
-			</div>
-		<%endif%>
-	</$let>
-
-	<!-- All other compound fields -->
-	<div class="tc-contact-card-fields">
-		<$list filter="[<currentTiddler>compound-field-names[]!match[body]]" variable="fieldName">
-			<$macrocall $name="contact-card-field" fieldName=<<fieldName>>/>
-		</$list>
+	<!-- Toolbar -->
+	<div class="tc-contact-card-toolbar">
+		<$button set=<<editState>> setTo={{{ [<editState>get[text]match[yes]then[no]else[yes]] }}} class="tc-btn-invisible tc-btn-mini">
+			<%if [<editState>get[text]match[yes]] %>
+				{{$:/core/images/done-button}} Done
+			<%else%>
+				{{$:/core/images/edit-button}} Edit
+			<%endif%>
+		</$button>
 	</div>
+
+	<%if [<editState>get[text]match[yes]] %>
+
+		<!-- Edit mode: body -->
+		<div class="tc-contact-card-body">
+			<div class="tc-contact-card-label">body</div>
+			<$edit-text tiddler=<<currentTiddler>> index="body" class="tc-edit-texteditor" tag="textarea"/>
+		</div>
+
+		<!-- Edit mode: all other fields -->
+		<div class="tc-contact-card-fields">
+			<$list filter="[<currentTiddler>compound-field-names[]!match[body]]" variable="fieldName">
+				<$macrocall $name="contact-card-field-edit" fieldName=<<fieldName>>/>
+			</$list>
+		</div>
+
+	<%else%>
+
+		<!-- View mode: body -->
+		<$let bodyValue={{{ [<currentTiddler>get[body]] }}}>
+			<%if [<bodyValue>!is[blank]] %>
+				<div class="tc-contact-card-body">
+					<$transclude $field="body" $mode="block"/>
+				</div>
+			<%endif%>
+		</$let>
+
+		<!-- View mode: all other fields -->
+		<div class="tc-contact-card-fields">
+			<$list filter="[<currentTiddler>compound-field-names[]!match[body]]" variable="fieldName">
+				<$macrocall $name="contact-card-field-view" fieldName=<<fieldName>>/>
+			</$list>
+		</div>
+
+	<%endif%>
 
 </div>
 </$let>
