@@ -1,0 +1,117 @@
+title: $:/core/ui/contact-card-list-item
+
+\whitespace trim
+
+<$let contactTitle=<<currentTiddler>>
+	accentColor={{{ [<currentTiddler>get[accent-color]] }}}
+>
+
+<div class="tc-contact-list-item" style={{{ [<accentColor>!is[blank]addprefix[--contact-accent:]] :else[[--contact-accent:]] +[addsuffix[;]] }}}>
+
+	<!-- Header: avatar + name + role -->
+	<div class="tc-contact-list-header">
+		<$let avatarUri={{{ [<contactTitle>get[avatar]] }}}>
+			<%if [<avatarUri>!is[blank]] %>
+				<div class="tc-contact-list-avatar">
+					<img src=<<avatarUri>> alt="avatar"/>
+				</div>
+			<%else%>
+				<div class="tc-contact-list-avatar tc-contact-list-avatar-placeholder">
+					<$text text={{{ [<contactTitle>get[first-name]split[]first[]] [<contactTitle>get[last-name]split[]first[]] +[join[]] ~[<contactTitle>get[title]split[]first[]] }}}/>
+				</div>
+			<%endif%>
+		</$let>
+		<div class="tc-contact-list-identity">
+			<div class="tc-contact-list-name">
+				<$link to=<<contactTitle>>>
+					<$let
+						firstName={{{ [<contactTitle>get[first-name]] }}}
+						middleName={{{ [<contactTitle>get[middle-name]] }}}
+						lastName={{{ [<contactTitle>get[last-name]] }}}
+					>
+						<%if [<firstName>!is[blank]] %>
+							<$text text=<<firstName>>/>
+							<%if [<middleName>!is[blank]] %>
+								 <$text text=<<middleName>>/>
+							<%endif%>
+							 <$text text=<<lastName>>/>
+						<%else%>
+							<$text text=<<contactTitle>>/>
+						<%endif%>
+					</$let>
+				</$link>
+			</div>
+			<$let
+				role={{{ [<contactTitle>get[role]] }}}
+				company={{{ [<contactTitle>get[company]] }}}
+			>
+				<%if [<role>!is[blank]] [<company>!is[blank]] +[first[]] %>
+					<div class="tc-contact-list-subtitle">
+						<%if [<role>!is[blank]] [<company>!is[blank]] +[count[]match[2]] %>
+							<$text text=<<role>>/> @ <$text text=<<company>>/>
+						<%elseif [<role>!is[blank]] %>
+							<$text text=<<role>>/>
+						<%else%>
+							<$text text=<<company>>/>
+						<%endif%>
+					</div>
+				<%endif%>
+			</$let>
+		</div>
+	</div>
+
+	<!-- Contact details -->
+	<div class="tc-contact-list-details">
+		<$list filter="[<contactTitle>compound-field-names[]!match[body]] :filter[<contactTitle>compound-field-type<currentTiddler>match[email]]" variable="fn" counter="cnt">
+			<%if [<cnt-first>match[yes]] %>
+				<$let val={{{ [<contactTitle>get<fn>] }}}>
+					<div class="tc-contact-list-row">
+						<span class="tc-contact-list-icon">&#x1f4e7;</span>
+						<a href={{{ [[mailto:]addsuffix<val>] }}}><$text text=<<val>>/></a>
+					</div>
+				</$let>
+			<%endif%>
+		</$list>
+
+		<$list filter="[<contactTitle>compound-field-names[]!match[body]] :filter[<contactTitle>compound-field-type<currentTiddler>match[phone]]" variable="fn" counter="cnt">
+			<%if [<cnt-first>match[yes]] %>
+				<$let val={{{ [<contactTitle>get<fn>] }}}>
+					<div class="tc-contact-list-row">
+						<span class="tc-contact-list-icon">&#x1f4f1;</span>
+						<a href={{{ [[tel:]addsuffix<val>] }}}><$text text=<<val>>/></a>
+					</div>
+				</$let>
+			<%endif%>
+		</$list>
+
+		<$list filter="[<contactTitle>compound-field-names[]!match[body]] :filter[<contactTitle>compound-field-type<currentTiddler>match[url]]" variable="fn" counter="cnt">
+			<%if [<cnt-first>match[yes]] %>
+				<$let val={{{ [<contactTitle>get<fn>] }}}>
+					<div class="tc-contact-list-row">
+						<span class="tc-contact-list-icon">&#x1f310;</span>
+						<a href=<<val>> class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text=<<val>>/></a>
+					</div>
+				</$let>
+			<%endif%>
+		</$list>
+
+		<$let address={{{ [<contactTitle>get[address]] }}}>
+			<%if [<address>!is[blank]] %>
+				<div class="tc-contact-list-row tc-contact-list-address">
+					<$text text=<<address>>/>
+				</div>
+			<%endif%>
+		</$let>
+
+		<$let bodyValue={{{ [<contactTitle>get[body]] }}}>
+			<%if [<bodyValue>!is[blank]] %>
+				<div class="tc-contact-list-row tc-contact-list-notes">
+					Notes: <$text text={{{ [<contactTitle>get[body]truncate[80]] }}}/>
+				</div>
+			<%endif%>
+		</$let>
+	</div>
+
+</div>
+
+</$let>

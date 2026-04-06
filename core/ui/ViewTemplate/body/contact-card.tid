@@ -1,0 +1,58 @@
+title: $:/core/ui/ViewTemplate/body/contact-card
+
+\whitespace trim
+
+\procedure contact-card-field(fieldName)
+<$let
+	fieldType={{{ [<currentTiddler>compound-field-type<fieldName>] }}}
+	fieldValue={{{ [<currentTiddler>get<fieldName>] }}}
+>
+	<%if [<fieldValue>!is[blank]] %>
+		<div class="tc-contact-card-field">
+			<div class="tc-contact-card-label"><$text text=<<fieldName>>/></div>
+			<div class="tc-contact-card-value">
+				<%if [<fieldType>match[multiline]] %>
+					<$transclude $tiddler=<<currentTiddler>> $field=<<fieldName>> $mode="block"/>
+				<%elseif [<fieldType>match[email]] %>
+					<a href={{{ [[mailto:]addsuffix<fieldValue>] }}} class="tc-contact-card-link"><$text text=<<fieldValue>>/></a>
+				<%elseif [<fieldType>match[phone]] %>
+					<a href={{{ [[tel:]addsuffix<fieldValue>] }}} class="tc-contact-card-link"><$text text=<<fieldValue>>/></a>
+				<%elseif [<fieldType>match[url]] %>
+					<a href=<<fieldValue>> class="tc-contact-card-link tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text=<<fieldValue>>/></a>
+				<%elseif [<fieldType>match[date]] %>
+					<$text text=<<fieldValue>>/>
+				<%elseif [<fieldType>match[date-time]] %>
+					<$text text=<<fieldValue>>/>
+				<%elseif [<fieldType>match[color]] %>
+					<span class="tc-contact-card-color" style={{{ [[background-color:]addsuffix<fieldValue>] }}}>&nbsp;&nbsp;&nbsp;</span>
+					&nbsp;<$text text=<<fieldValue>>/>
+				<%elseif [<fieldType>prefix[binary-]] %>
+					<$text text=<<fieldValue>>/>
+				<%else%>
+					<$text text=<<fieldValue>>/>
+				<%endif%>
+			</div>
+		</div>
+	<%endif%>
+</$let>
+\end
+
+<div class="tc-contact-card">
+
+	<!-- Body / notes section -->
+	<$let bodyValue={{{ [<currentTiddler>get[body]] }}}>
+		<%if [<bodyValue>!is[blank]] %>
+			<div class="tc-contact-card-body">
+				<$transclude $field="body" $mode="block"/>
+			</div>
+		<%endif%>
+	</$let>
+
+	<!-- All other compound fields -->
+	<div class="tc-contact-card-fields">
+		<$list filter="[<currentTiddler>compound-field-names[]!match[body]]" variable="fieldName">
+			<$macrocall $name="contact-card-field" fieldName=<<fieldName>>/>
+		</$list>
+	</div>
+
+</div>
