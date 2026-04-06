@@ -97,6 +97,19 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="url"/>
 	<%elseif [<fieldType>match[color]] %>
 		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="color"/>
+	<%elseif [<fieldType>prefix[select-]] %>
+		<$let
+			selectMetaKey={{{ [<fieldType>removeprefix[select-]] }}}
+			selectMetaOperand={{{ [<fieldName>addsuffix[::]addsuffix<selectMetaKey>] }}}
+			selectOptions={{{ [<currentTiddler>compound-field-meta<selectMetaOperand>] }}}
+		>
+			<$select tiddler=<<currentTiddler>> index=<<fieldName>> default="">
+				<option value="">-- select --</option>
+				<$list filter="[enlist<selectOptions>]" variable="optionValue">
+					<option value=<<optionValue>>><$text text=<<optionValue>>/></option>
+				</$list>
+			</$select>
+		</$let>
 	<%elseif [<fieldType>prefix[binary-]] %>
 		<$let binaryOptions={{{ [<fieldType>removeprefix[binary-]] }}}>
 			<$list filter="[<binaryOptions>split[-]]" variable="optionValue">
@@ -133,6 +146,9 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 		<option value="color">color</option>
 		<$list filter="[<currentTiddler>compound-field-types[]prefix[binary-]] binary-yes-no +[unique[]]" variable="binaryType">
 			<option value=<<binaryType>>><$text text=<<binaryType>>/></option>
+		</$list>
+		<$list filter="[<currentTiddler>compound-field-types[]prefix[select-]] +[unique[]]" variable="selectType">
+			<option value=<<selectType>>><$text text=<<selectType>>/></option>
 		</$list>
 	</$select>
 </$let>
