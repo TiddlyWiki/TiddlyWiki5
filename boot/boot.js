@@ -1228,7 +1228,7 @@ $tw.Wiki = function(options) {
 		}
 		// For text/vnd.tiddlywiki-multiple+fields tiddlers, expose sub-entry titles as fields
 		if(tiddler && tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields" && tiddler.fields.text) {
-			var reservedFields = {"title":true,"text":true,"type":true,"created":true,"modified":true,"tags":true,"bag":true,"revision":true};
+			var reservedFields = {"title":true,"text":true,"type":true,"created":true,"creator":true,"modified":true,"modifier":true,"tags":true,"bag":true,"revision":true};
 			var parsedFields = $tw.utils.parseMultilineFields(tiddler.fields.text);
 			var extraFields = Object.create(null);
 			for(var fieldName in parsedFields) {
