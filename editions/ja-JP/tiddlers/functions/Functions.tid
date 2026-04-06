@@ -1,0 +1,30 @@
+created: 20221009124003601
+modified: 20240428122146059
+original-modified: 20240422084850412
+tags: Concepts [[Core Functions]]
+title: Functions
+ja-title: 関数
+type: text/vnd.tiddlywiki
+
+!! イントロダクション
+
+<<.from-version "5.3.0">> <<.def 関数>> は、 [[フィルタ式|Filter Expression]] を含むテキストの名前付きスニペットです。関数には、関数内で変数として使用できる名前付きパラメータを持つことができます
+
+関数は通常、 [[プラグマ: \function|Pragma: \function]] で定義されます:
+
+```
+\function myfun(param:"2")
+[<param>multiply[1.5]]
+\end
+```
+
+関数はいくつかの方法で呼び出すことができます: 
+
+* 構文 `<<myfun param:"value">>` を使用して関数を直接トランスクルードする
+* 構文 `<div class=<<myfun param:"value">>>` を使用してウィジェット属性に関数を割り当てる
+* 構文 `[function[myfun],[value],...]` を使用して [[関数オペレータ|function Operator]] を介して関数を呼び出す
+* 構文 `[my.fun[value]]`  または `[.myfun[value]]` で、カスタムフィルター演算子として名前にピリオドが含まれる関数を直接呼び出す
+
+!! 関数の仕組み
+
+関数は特別な種類の [[変数|Variables]] として実装されています。通常の変数と異なる唯一の点は、パラメータの扱い方法です
