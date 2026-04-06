@@ -23,9 +23,40 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 
 \procedure compound-field-editor(fieldName)
-<$let fieldType={{{ [<currentTiddler>compound-field-type<fieldName>] }}}>
-	<%if [<fieldType>match[multiline]] %>
-		<$edit index=<<fieldName>> class="tc-edit-texteditor tc-edit-texteditor-body" tabindex={{$:/config/EditTabIndex}}><$set name="targetTiddler" value=<<currentTiddler>>><$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]"><$reveal type="nomatch" state=<<config-visibility-title>> text="hide" class="tc-text-editor-toolbar-item-wrapper"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$reveal></$list></$set></$edit>
+<$let fieldType={{{ [<currentTiddler>compound-field-type<fieldName>] }}}
+	previewState={{{ [<qualify "$:/state/compound-preview/">addsuffix<fieldName>] }}}
+>
+	<%if [<fieldType>match[multiline]] [<fieldName>match[body]!is[blank]] +[first[]] %>
+		<$let editPreviewStateTiddler=<<previewState>>>
+		<div class={{{ [<previewState>get[text]match[yes]then[tc-tiddler-preview]else[tc-tiddler-preview-hidden]] [[tc-tiddler-editor]] +[join[ ]] }}}>
+			<$edit index=<<fieldName>> class="tc-edit-texteditor tc-edit-texteditor-body" tabindex={{$:/config/EditTabIndex}}><$set name="targetTiddler" value=<<currentTiddler>>><$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]"><$reveal type="nomatch" state=<<config-visibility-title>> text="hide" class="tc-text-editor-toolbar-item-wrapper"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$reveal></$list></$set></$edit>
+			<$list filter="[<previewState>get[text]match[yes]]" variable="ignore">
+				<div class="tc-tiddler-preview-preview" data-tiddler-title={{!!draft.title}} data-tags={{!!tags}}>
+					<$let compoundFieldText={{{ [<currentTiddler>get<fieldName>] }}}
+						previewType={{{ [{$:/state/editpreviewtype}get[title]] }}}
+					>
+						<%if [<previewType>search[parse-tree]] %>
+							<$wikify name="preview-text" text=<<compoundFieldText>> mode="block" output="parsetree">
+								<pre><code><$text text=<<preview-text>>/></code></pre>
+							</$wikify>
+						<%elseif [<previewType>search[widget-tree]] %>
+							<$wikify name="preview-text" text=<<compoundFieldText>> mode="block" output="widgettree">
+								<pre><code><$text text=<<preview-text>>/></code></pre>
+							</$wikify>
+						<%elseif [<previewType>search[raw]] %>
+							<pre><code><$text text=<<compoundFieldText>>/></code></pre>
+						<%else%>
+							<$importvariables filter="[all[shadows+tiddlers]tag[$:/tags/Macro/View]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Macro/View/Body]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global/View]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global/View/Body]!is[draft]]">
+								<$set name="tv-tiddler-preview" value="yes">
+									<$transclude $tiddler=<<currentTiddler>> $field=<<fieldName>> $mode="block"/>
+								</$set>
+							</$importvariables>
+						<%endif%>
+					</$let>
+				</div>
+			</$list>
+		</div>
+		</$let>
 	<%elseif [<fieldType>match[date]] %>
 		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="date"/>
 	<%elseif [<fieldType>prefix[binary-]] %>
@@ -64,9 +95,15 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 </$let>
 \end
 
+\function edit-preview-state()
+[{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] +[get[text]] :else[[no]]
+\end
+
 <$let
 	rawModeState=<<qualify "$:/state/compound-fields/raw">>
 	newFieldState=<<qualify "$:/state/compound-fields/new-name">>
+	qualified-preview-state=<<qualify "$:/state/showeditpreview">>
+	editPreviewStateTiddler={{{ [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] }}}
 >
 
 <div class="tc-compound-fields-editor">
@@ -89,17 +126,12 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 	<%else%>
 
-		<!-- Preview of body -->
-		<div class="tc-compound-preview">
-			<$transclude $tiddler=<<currentTiddler>> $index="body" mode="block"/>
-		</div>
-
-		<!-- Body editor pane with toolbar -->
+		<!-- Body editor pane -->
 		<div class="tc-compound-field-pane tc-compound-field-pane-body">
 			<div class="tc-compound-field-header">
 				<strong class="tc-compound-field-name">body</strong>
 			</div>
-			<$edit index="body" class="tc-edit-texteditor tc-edit-texteditor-body" tabindex={{$:/config/EditTabIndex}} cancelPopups="yes" fileDrop={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}}><$set name="targetTiddler" value=<<currentTiddler>>><$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]"><$reveal type="nomatch" state=<<config-visibility-title>> text="hide" class="tc-text-editor-toolbar-item-wrapper"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$reveal></$list></$set></$edit>
+			<$macrocall $name="compound-field-editor" fieldName="body"/>
 		</div>
 
 		<!-- Other field editor panes -->
