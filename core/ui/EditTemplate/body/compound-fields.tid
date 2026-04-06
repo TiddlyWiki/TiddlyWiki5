@@ -72,7 +72,11 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 								[all[shadows+tiddlers]tag[$:/tags/Global/View/Body]!is[draft]]"
 							>
 								<$set name="tv-tiddler-preview" value="yes">
-									<$transclude $tiddler=<<currentTiddler>> $field=<<fieldName>> $mode="block"/>
+									<%if [<fieldName>match[body]] [<currentTiddler>tag[ContactCard]] +[count[]match[2]] %>
+										<$transclude $tiddler="$:/core/ui/ViewTemplate/body/contact-card" $mode="block"/>
+									<%else%>
+										<$transclude $tiddler=<<currentTiddler>> $field=<<fieldName>> $mode="block"/>
+									<%endif%>
 								</$set>
 							</$importvariables>
 						<%endif%>
@@ -85,6 +89,14 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="date"/>
 	<%elseif [<fieldType>match[date-time]] %>
 		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="datetime-local"/>
+	<%elseif [<fieldType>match[email]] %>
+		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="email"/>
+	<%elseif [<fieldType>match[phone]] %>
+		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="tel"/>
+	<%elseif [<fieldType>match[url]] %>
+		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="url"/>
+	<%elseif [<fieldType>match[color]] %>
+		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="color"/>
 	<%elseif [<fieldType>prefix[binary-]] %>
 		<$let binaryOptions={{{ [<fieldType>removeprefix[binary-]] }}}>
 			<$list filter="[<binaryOptions>split[-]]" variable="optionValue">
@@ -115,6 +127,10 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 		<option value="multiline">multiline</option>
 		<option value="date">date</option>
 		<option value="date-time">date-time</option>
+		<option value="email">email</option>
+		<option value="phone">phone</option>
+		<option value="url">url</option>
+		<option value="color">color</option>
 		<$list filter="[<currentTiddler>compound-field-types[]prefix[binary-]] binary-yes-no +[unique[]]" variable="binaryType">
 			<option value=<<binaryType>>><$text text=<<binaryType>>/></option>
 		</$list>
