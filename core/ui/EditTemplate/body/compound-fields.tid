@@ -29,7 +29,21 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 	<%if [<fieldType>match[multiline]] [<fieldName>match[body]!is[blank]] +[first[]] %>
 		<$let editPreviewStateTiddler=<<previewState>>>
 		<div class={{{ [<previewState>get[text]match[yes]then[tc-tiddler-preview]else[tc-tiddler-preview-hidden]] [[tc-tiddler-editor]] +[join[ ]] }}}>
-			<$edit index=<<fieldName>> class="tc-edit-texteditor tc-edit-texteditor-body" tabindex={{$:/config/EditTabIndex}}><$set name="targetTiddler" value=<<currentTiddler>>><$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]"><$reveal type="nomatch" state=<<config-visibility-title>> text="hide" class="tc-text-editor-toolbar-item-wrapper"><$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/></$reveal></$list></$set></$edit>
+			<$edit index=<<fieldName>>
+				class="tc-edit-texteditor tc-edit-texteditor-body"
+				tabindex={{$:/config/EditTabIndex}}
+			>
+				<$set name="targetTiddler" value=<<currentTiddler>>>
+					<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]">
+						<$reveal type="nomatch"
+							state=<<config-visibility-title>>
+							text="hide" class="tc-text-editor-toolbar-item-wrapper"
+						>
+							<$transclude tiddler="$:/core/ui/EditTemplate/body/toolbar/button" mode="inline"/>
+						</$reveal>
+					</$list>
+				</$set>
+			</$edit>
 			<$list filter="[<previewState>get[text]match[yes]]" variable="ignore">
 				<div class="tc-tiddler-preview-preview" data-tiddler-title={{!!draft.title}} data-tags={{!!tags}}>
 					<$let compoundFieldText={{{ [<currentTiddler>get<fieldName>] }}}
@@ -52,7 +66,11 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 						<%elseif [<previewType>suffix[diffs-current]] %>
 							<$transclude $tiddler=<<currentTiddler>> $field=<<fieldName>> $mode="block"/>
 						<%else%>
-							<$importvariables filter="[all[shadows+tiddlers]tag[$:/tags/Macro/View]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Macro/View/Body]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global/View]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global/View/Body]!is[draft]]">
+							<$importvariables filter="[all[shadows+tiddlers]tag[$:/tags/Macro/View]!is[draft]]
+								[all[shadows+tiddlers]tag[$:/tags/Macro/View/Body]!is[draft]]
+								[all[shadows+tiddlers]tag[$:/tags/Global/View]!is[draft]]
+								[all[shadows+tiddlers]tag[$:/tags/Global/View/Body]!is[draft]]"
+							>
 								<$set name="tv-tiddler-preview" value="yes">
 									<$transclude $tiddler=<<currentTiddler>> $field=<<fieldName>> $mode="block"/>
 								</$set>
