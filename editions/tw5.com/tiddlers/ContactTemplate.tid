@@ -1,0 +1,50 @@
+created: 20260406190741556
+modified: 20260406190937704
+title: ContactTemplate
+type: text/vnd.tiddlywiki-multiple+fields
+
+title: body
+type: multiline
+
++
+title: first-name
+
++
+title: last-name
+
++
+title: company
+
++
+title: role
+type: select-roles
+roles: [[Developer]] [[Designer]] [[Manager]] [[Team Lead]] [[CEO]]
+
++
+title: email
+type: email
+
++
+title: phone
+type: phone
+
++
+title: website
+type: url
+
++
+title: address
+type: multiline
+
++
+title: birthday
+type: date
+
++
+title: category
+type: binary-personal-business
+
++
+title: favorite
+type: binary-yes-no
+

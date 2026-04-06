@@ -1,5 +1,5 @@
 created: 20260406140000000
-modified: 20260406145932992
+modified: 20260406191015687
 tags: ContactCard
 title: SampleContact
 type: text/vnd.tiddlywiki-multiple+fields
@@ -13,6 +13,7 @@ type: multiline
 </$let>
 
 Senior Developer at ~ExampleCorp. Specialist in reactive systems and data pipelines.
+
 +
 title: first-name
 
@@ -31,8 +32,10 @@ title: company
 ExampleCorp
 +
 title: role
+type: select-role
+role: [[Seniour Developer]] [[Team Member]] [[Designer]]
 
-Senior Developer
+
 +
 title: email-work
 type: email
@@ -79,6 +82,8 @@ type: multiline
 
 Hauptstrasse 42
 1010 Wien, Austria
+
+
 +
 title: accent-color
 type: color

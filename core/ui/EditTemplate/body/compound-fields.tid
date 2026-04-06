@@ -103,7 +103,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 			selectMetaOperand={{{ [<fieldName>addsuffix[::]addsuffix<selectMetaKey>] }}}
 			selectOptions={{{ [<currentTiddler>compound-field-meta<selectMetaOperand>] }}}
 		>
-			<$select tiddler=<<currentTiddler>> index=<<fieldName>> default="">
+			<$select tiddler=<<currentTiddler>> index=<<fieldName>> default="-- select --">
 				<option value="">-- select --</option>
 				<$list filter="[enlist<selectOptions>]" variable="optionValue">
 					<option value=<<optionValue>>><$text text=<<optionValue>>/></option>
