@@ -1,8 +1,9 @@
 created: 20260405064438235
 modified: 20260405164205491
-tags: $:/tags/Stylesheet
+tags: [[$:/tags/Stylesheet]]
 title: compound-fields-style
-type: text/vnd.tiddlywiki
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
 .tc-compound-field-pane {
 	margin-bottom: 1em;
@@ -82,13 +83,26 @@ type: text/vnd.tiddlywiki
 	vertical-align: middle;
 }
 
+/* Contact list grid container */
+.tc-contact-list-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 1em;
+}
+
 /* Contact list item (compact card) */
 .tc-contact-list-item {
 	border: 1px solid <<colour tiddler-border>>;
+	border-left: 4px solid var(--contact-accent, <<colour primary>>);
 	border-radius: 6px;
 	padding: 0.8em 1em;
 	background: <<colour tiddler-background>>;
-	max-width: 400px;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+	transition: box-shadow 0.2s ease;
+}
+
+.tc-contact-list-item:hover {
+	box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 }
 
 .tc-contact-list-header {
@@ -96,6 +110,8 @@ type: text/vnd.tiddlywiki
 	align-items: center;
 	gap: 0.75em;
 	margin-bottom: 0.6em;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid <<colour tiddler-border>>;
 }
 
 .tc-contact-list-avatar {
@@ -113,8 +129,8 @@ type: text/vnd.tiddlywiki
 }
 
 .tc-contact-list-avatar-placeholder {
-	background: <<colour primary>>;
-	color: <<colour tiddler-background>>;
+	background: var(--contact-accent, <<colour primary>>);
+	color: #fff;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -125,6 +141,10 @@ type: text/vnd.tiddlywiki
 .tc-contact-list-name {
 	font-size: 1.15em;
 	font-weight: bold;
+}
+
+.tc-contact-list-name a.tc-tiddlylink {
+	color: var(--contact-accent, <<colour primary>>);
 }
 
 .tc-contact-list-subtitle {
@@ -143,6 +163,7 @@ type: text/vnd.tiddlywiki
 
 .tc-contact-list-row a {
 	text-decoration: none;
+	color: var(--contact-accent, <<colour primary>>);
 }
 
 .tc-contact-list-row a:hover {
@@ -165,4 +186,7 @@ type: text/vnd.tiddlywiki
 	padding-left: 1.6em;
 	color: <<colour muted-foreground>>;
 	font-style: italic;
+	border-top: 1px dashed <<colour tiddler-border>>;
+	margin-top: 0.4em;
+	padding-top: 0.4em;
 }

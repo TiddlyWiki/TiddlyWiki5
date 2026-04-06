@@ -14,7 +14,7 @@ This tiddler demonstrates the two contact card templates for `text/vnd.tiddlywik
 
 Uses `$:/core/ui/contact-card-list-item` — designed for overviews and lists.
 
-<div style="display:flex; flex-wrap:wrap; gap:1em;">
+<div class="tc-contact-list-grid">
 <$list filter="[tag[ContactCard]sort[title]]">
 <$transclude tiddler="$:/core/ui/contact-card-list-item"/>
 </$list>
