@@ -83,6 +83,8 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 		</$let>
 	<%elseif [<fieldType>match[date]] %>
 		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="date"/>
+	<%elseif [<fieldType>match[date-time]] %>
+		<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="datetime-local"/>
 	<%elseif [<fieldType>prefix[binary-]] %>
 		<$let binaryOptions={{{ [<fieldType>removeprefix[binary-]] }}}>
 			<$list filter="[<binaryOptions>split[-]]" variable="optionValue">
@@ -112,6 +114,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 		<option value="">single-line</option>
 		<option value="multiline">multiline</option>
 		<option value="date">date</option>
+		<option value="date-time">date-time</option>
 		<$list filter="[<currentTiddler>compound-field-types[]prefix[binary-]] binary-yes-no +[unique[]]" variable="binaryType">
 			<option value=<<binaryType>>><$text text=<<binaryType>>/></option>
 		</$list>
