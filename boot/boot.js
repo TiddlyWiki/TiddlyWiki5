@@ -1235,8 +1235,8 @@ $tw.Wiki = function(options) {
 				var value = parsedFields[fieldName];
 				var unwrapped = (value !== null && typeof value === "object" && $tw.utils.hop(value,"value")) ? value.value : value;
 				if(fieldName === "text") {
-					// Map the "text" sub-entry to "sub-text" to avoid overwriting the compound format
-					extraFields["sub-text"] = unwrapped;
+					// Map the "text" sub-entry to "body" to avoid overwriting the compound format
+					extraFields["body"] = unwrapped;
 				} else if(!reservedFields[fieldName]) {
 					extraFields[fieldName] = unwrapped;
 				}

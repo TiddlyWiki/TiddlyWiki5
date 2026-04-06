@@ -1,8 +1,10 @@
 bbb: b2
 created: 20260404214146191
-modified: 20260406081457286
-title: TestMF
-type: text/vnd.tiddlywiki-multiple+fields
+draft.of: TestMF
+draft.title: TestMF
+modified: 20260406085859257
+title: Draft of 'TestMF'
+type: text/vnd.tiddlywiki-fields
 
 title: aaa
 type: multiline

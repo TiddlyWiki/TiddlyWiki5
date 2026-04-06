@@ -1,6 +1,6 @@
 title: $:/core/ui/ViewTemplate/body/multiline-fields
 
-<$transclude $field="sub-text">
+<$transclude $field="body">
 
 <$transclude $tiddler="$:/language/MissingTiddler/Hint"/>
 

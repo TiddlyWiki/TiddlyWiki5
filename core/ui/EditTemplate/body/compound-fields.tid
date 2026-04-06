@@ -85,21 +85,21 @@ title: $:/core/ui/EditTemplate/body/compound-fields
 
 	<%else%>
 
-		<!-- Preview of sub-text -->
+		<!-- Preview of body -->
 		<div class="tc-compound-preview">
-			<$transclude $tiddler=<<currentTiddler>> $index="sub-text" mode="block"/>
+			<$transclude $tiddler=<<currentTiddler>> $index="body" mode="block"/>
 		</div>
 
 		<!-- Sub-text editor pane -->
 		<div class="tc-compound-field-pane tc-compound-field-pane-subtext">
 			<div class="tc-compound-field-header">
-				<strong class="tc-compound-field-name">sub-text</strong>
+				<strong class="tc-compound-field-name">body</strong>
 			</div>
-			<$edit-text tiddler=<<currentTiddler>> index="sub-text" class="tc-edit-texteditor" type="textarea"/>
+			<$edit-text tiddler=<<currentTiddler>> index="body" class="tc-edit-texteditor" type="textarea"/>
 		</div>
 
 		<!-- Other field editor panes -->
-		<$list filter="[<currentTiddler>compound-field-names[]] -sub-text" variable="fieldName">
+		<$list filter="[<currentTiddler>compound-field-names[]] -body" variable="fieldName">
 			<div class="tc-compound-field-pane">
 				<div class="tc-compound-field-header">
 					<strong class="tc-compound-field-name"><$text text=<<fieldName>>/></strong>

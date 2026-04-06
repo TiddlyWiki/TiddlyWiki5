@@ -59,7 +59,7 @@ exports.getFieldStrings = function(options) {
 	if(this.fields.type === "text/vnd.tiddlywiki-multiple+fields" && this.fields.text) {
 		var parsedFields = $tw.utils.parseMultilineFields(this.fields.text);
 		for(var name in parsedFields) {
-			var derivedName = (name === "text") ? "sub-text" : name;
+			var derivedName = (name === "text") ? "body" : name;
 			if(exclude.indexOf(derivedName) === -1) {
 				exclude.push(derivedName);
 			}
@@ -89,7 +89,7 @@ exports.getFieldStringBlock = function(options) {
 	if(this.fields.type === "text/vnd.tiddlywiki-multiple+fields" && this.fields.text) {
 		var parsedFields = $tw.utils.parseMultilineFields(this.fields.text);
 		for(var name in parsedFields) {
-			var derivedName = (name === "text") ? "sub-text" : name;
+			var derivedName = (name === "text") ? "body" : name;
 			if(exclude.indexOf(derivedName) === -1) {
 				exclude.push(derivedName);
 			}
