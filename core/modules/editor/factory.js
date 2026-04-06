@@ -90,7 +90,14 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			value = this.wiki.extractTiddlerDataItem(this.editTitle,this.editIndex,this.editDefault);
 			update = function(value) {
 				var data = self.wiki.getTiddlerData(self.editTitle,{});
-				if(data[self.editIndex] !== value) {
+				var existingEntry = data[self.editIndex];
+				// Preserve metadata objects (e.g. {value: "...", type: "multiline"})
+				if(existingEntry !== null && typeof existingEntry === "object" && $tw.utils.hop(existingEntry,"value")) {
+					if(existingEntry.value !== value) {
+						existingEntry.value = value;
+						self.wiki.setTiddlerData(self.editTitle,data);
+					}
+				} else if(data[self.editIndex] !== value) {
 					data[self.editIndex] = value;
 					self.wiki.setTiddlerData(self.editTitle,data);
 				}
