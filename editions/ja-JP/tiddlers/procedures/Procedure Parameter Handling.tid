@@ -1,0 +1,26 @@
+created: 20221007130538285
+modified: 20260329110806303
+original-modified: 20230419103154329
+tags: WikiText Procedures
+title: Procedure Parameter Handling
+ja-title: プロシージャパラメータの処理
+type: text/vnd.tiddlywiki
+
+!! 紹介
+
+プロシージャの内容がWiki化されると、[[プロシージャ|Procedures]]パラメータは変数として利用可能になります。
+
+!! パラメータを変数としてアクセス
+
+プロシージャをWiki化すると、パラメータを変数としてアクセスできるようになります。
+
+例えば:
+
+<$macrocall $name="wikitext-example-without-html" src="""\procedure say-hi(name,address)
+こんにちは、私は<<name>>です。<<address>>に住んでいます。
+\end
+
+<<say-hi name:"Bugs" address:"Rabbit Hole Hill">>
+"""/>
+
+パラメータを変数としてアクセスすることは、Wiki化されたプロシージャ内でのみ機能し、例えばプロシージャが属性値として使用される場合には機能しません。
