@@ -727,6 +727,7 @@ const builders = {
 	entity: entity,
 	set: pragmaNode,
 	importvariables: pragmaNode,
+	parameters: pragmaNode,
 	"void": pragmaNode
 };
 
