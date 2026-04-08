@@ -32,7 +32,7 @@
   },
   "license": "BSD",
   "engines": {
-    "node": ">=0.8.2"
+    "node": ">=22.0.0"
   },
   "scripts": {
     "dev": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
