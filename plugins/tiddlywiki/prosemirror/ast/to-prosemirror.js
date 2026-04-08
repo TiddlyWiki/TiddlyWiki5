@@ -66,17 +66,24 @@ function buildHeading(context, node, level) {
 	};
 }
 
-function buildUnorderedList(context, node) {
-	// Prosemirror requires split all lists into separate lists with single items
-	return node.children.map(item => {
-		const newContext = {};
-		for(const key in context) {
-			if(context.hasOwnProperty(key)) {
-				newContext[key] = context[key];
-			}
+/**
+ * Create a child context with incremented nesting level.
+ */
+function childContext(context) {
+	var newContext = {};
+	for(var key in context) {
+		if(context.hasOwnProperty(key)) {
+			newContext[key] = context[key];
 		}
-		newContext.level = context.level + 1;
-		const processedItem = convertANode(newContext, item);
+	}
+	newContext.level = context.level + 1;
+	return newContext;
+}
+
+function buildUnorderedList(context, node) {
+	// ProseMirror requires each list item to be its own list node
+	var ctx = childContext(context);
+	return node.children.map(function(item) {
 		return {
 			type: "list",
 			attrs: {
@@ -85,21 +92,14 @@ function buildUnorderedList(context, node) {
 				checked: false,
 				collapsed: false
 			},
-			content: processedItem
+			content: convertANode(ctx, item)
 		};
 	});
 }
 
 function buildOrderedList(context, node) {
-	return node.children.map(item => {
-		const newContext = {};
-		for(const key in context) {
-			if(context.hasOwnProperty(key)) {
-				newContext[key] = context[key];
-			}
-		}
-		newContext.level = context.level + 1;
-		const processedItem = convertANode(newContext, item);
+	var ctx = childContext(context);
+	return node.children.map(function(item) {
 		return {
 			type: "list",
 			attrs: {
@@ -108,7 +108,7 @@ function buildOrderedList(context, node) {
 				checked: false,
 				collapsed: false
 			},
-			content: processedItem
+			content: convertANode(ctx, item)
 		};
 	});
 }
@@ -155,14 +155,8 @@ function wrapTextNodesInParagraphs(context, nodes) {
 }
 
 function buildListItem(context, node) {
-	const newContext = {};
-	for(const key in context) {
-		if(context.hasOwnProperty(key)) {
-			newContext[key] = context[key];
-		}
-	}
-	newContext.level = context.level + 1;
-	const processedContent = convertNodes(newContext, node.children);
+	var ctx = childContext(context);
+	var processedContent = convertNodes(ctx, node.children);
 	// Ensure content starts with a block element (typically paragraph)
 	return wrapTextNodesInParagraphs(context, processedContent);
 }
@@ -173,16 +167,8 @@ function buildTextWithMark(context, node, markType) {
 		if(childNode.type === "text") {
 			// Add the mark to the text node
 			const marks = childNode.marks || [];
-			const newMarks = marks.slice();
-			newMarks.push({ type: markType });
-			const result = {};
-			for(const key in childNode) {
-				if(childNode.hasOwnProperty(key)) {
-					result[key] = childNode[key];
-				}
-			}
-			result.marks = newMarks;
-			return result;
+			const newMarks = (childNode.marks || []).concat([{ type: markType }]);
+			return Object.assign({}, childNode, { marks: newMarks });
 		}
 		return childNode;
 	});

@@ -1144,17 +1144,13 @@ test.describe("ProseMirror Editor - Hard Line Breaks Block", () => {
 		await expect(block).toBeVisible({ timeout: 5000 });
 
 		// Before hover: border-color should be transparent
-		const borderBefore = await block.evaluate(el =>
-			window.getComputedStyle(el).borderColor
-		);
+		const borderBefore = await block.evaluate(el => window.getComputedStyle(el).borderColor);
 
 		await block.hover();
 		await page.waitForTimeout(200);
 
 		// After hover: border-color should be non-transparent (blue)
-		const borderAfter = await block.evaluate(el =>
-			window.getComputedStyle(el).borderColor
-		);
+		const borderAfter = await block.evaluate(el => window.getComputedStyle(el).borderColor);
 		expect(borderBefore).not.toBe(borderAfter);
 	});
 
@@ -1196,7 +1192,7 @@ test.describe("ProseMirror Editor - Hard Line Breaks Block", () => {
 		const blockCount = await editor.locator(".pm-hard-line-breaks-block").count();
 		
 		// In Firefox, Playwright click positioning might produce a split. We only strictly expect it correctly in generic terms
-		if (blockCount === 1) {
+		if(blockCount === 1) {
 			expect(blockCount).toBe(1);
 			await expect(block).toContainText("Line B");
 		} else {
@@ -1217,9 +1213,7 @@ test.describe("ProseMirror Editor - Hard Line Breaks Block", () => {
 		await page.waitForTimeout(800);
 
 		// Read back the saved tiddler text
-		const savedText = await page.evaluate(title => {
-			return $tw.wiki.getTiddlerText(title, "");
-		}, exampleTitle);
+		const savedText = await page.evaluate(title => $tw.wiki.getTiddlerText(title, ""), exampleTitle);
 
 		// Should contain the triple-quote wrapper
 		expect(savedText).toContain('"""');
@@ -1281,7 +1275,13 @@ test.describe("ProseMirror Editor - Hard Line Breaks Block", () => {
 		// Move to after "Line A" + br, i.e., start of "Line B"
 		await page.keyboard.press("Control+Home");
 		// Skip "Line A" + line break to get into Line B
-		for(let i = 0; i < 7; i++) await page.keyboard.press("ArrowRight");
+		await page.keyboard.press("ArrowRight");
+		await page.keyboard.press("ArrowRight");
+		await page.keyboard.press("ArrowRight");
+		await page.keyboard.press("ArrowRight");
+		await page.keyboard.press("ArrowRight");
+		await page.keyboard.press("ArrowRight");
+		await page.keyboard.press("ArrowRight");
 		// Move to end of "Line B"
 		await page.keyboard.press("End");
 

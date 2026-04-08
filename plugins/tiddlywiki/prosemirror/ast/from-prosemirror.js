@@ -7,6 +7,14 @@ Get the Wiki AST from a Prosemirror AST
 
 \*/
 
+// Require at module level to avoid repeated require() calls on every paragraph conversion
+var parseWidget;
+try {
+	parseWidget = require("$:/plugins/tiddlywiki/prosemirror/widget-block/utils.js").parseWidget;
+} catch(e) {
+	parseWidget = null;
+}
+
 function doc(builder, node) {
 	return convertNodes(builder, node.content);
 }
@@ -16,14 +24,6 @@ function paragraph(builder, node) {
 	// If it's a single text node that looks like <<widgetName ...>>
 	if(node.content && node.content.length === 1 && node.content[0].type === "text") {
 		var text = node.content[0].text.trim();
-		// Use the proper parser from widget-block/utils.js which handles
-		// >> inside quoted strings and nested macros correctly
-		var parseWidget;
-		try {
-			parseWidget = require("$:/plugins/tiddlywiki/prosemirror/widget-block/utils.js").parseWidget;
-		} catch(e) {
-			parseWidget = null;
-		}
 		var parsed = parseWidget ? parseWidget(text) : null;
 		
 		if(parsed) {

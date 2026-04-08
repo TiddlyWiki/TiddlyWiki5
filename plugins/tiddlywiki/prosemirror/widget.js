@@ -120,8 +120,6 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	outerWrap.appendChild(imagePickerWrap);
 	this.imagePickerWrap = imagePickerWrap;
 	this.imagePickerTitle = imagePickerTitle;
-	// Hide picker initially
-	imagePickerWrap.style.display = "none";
 	
 	// Build schema (shared with engine.js)
 	const schema = buildSchema();
@@ -137,7 +135,6 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 
 	this.view = new EditorView(mount, {
 		state: EditorState.create({
-			// doc: schema.node("doc", null, [schema.node("paragraph")]),
 			doc: schema.nodeFromJSON(doc),
 			plugins: [
 				SlashMenuPlugin(allMenuElements, {
@@ -451,8 +448,9 @@ ProsemirrorWidget.prototype.handleProseMirrorImagePicked = function(event) {
 };
 
 ProsemirrorWidget.prototype.handleProseMirrorImagePickedNodeView = function(event) {
-	const nodeviewId = event.paramObject && event.paramObject.nodeviewId || event.paramObject && event.paramObject.nodeViewId;
-	const pickedTitle = event.paramObject && event.paramObject.imageTitle;
+	const paramObj = event && event.paramObject;
+	const nodeviewId = paramObj && (paramObj.nodeviewId || paramObj.nodeViewId);
+	const pickedTitle = paramObj && paramObj.imageTitle;
 	if(!nodeviewId || !pickedTitle || !this.view) {
 		return true;
 	}
@@ -483,7 +481,12 @@ ProsemirrorWidget.prototype.saveEditorContent = function() {
 		const currentText = this.wiki.getTiddlerText(tiddler, "");
 		if(currentText !== wikiText) {
 			this.saveLock = true;
-			this.wiki.setText(tiddler, "text", undefined, wikiText);
+			try {
+				this.wiki.setText(tiddler, "text", undefined, wikiText);
+			} catch(e) {
+				this.saveLock = false;
+				throw e;
+			}
 		}
 	} catch(e) {
 		console.error("[ProseMirror] Error saving editor content:", e);
