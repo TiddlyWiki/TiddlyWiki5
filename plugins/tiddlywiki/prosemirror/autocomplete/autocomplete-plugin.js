@@ -276,66 +276,59 @@ function acceptCompletion(view, state) {
 /**
  * Autocomplete dropdown view (manages DOM).
  */
-function AutocompleteView(editorView, wiki) {
-	this.view = editorView;
-	this.wiki = wiki;
-	this.container = document.createElement("div");
-	this.container.className = "tc-prosemirror-autocomplete";
-	this.container.style.display = "none";
-	this.container.style.position = "absolute";
-	this.container.style.zIndex = "1100";
-	document.body.appendChild(this.container);
-}
-
-AutocompleteView.prototype.update = function(view) {
-	var state = AUTOCOMPLETE_KEY.getState(view.state);
-	if(!state || !state.active || !state.items.length) {
+class AutocompleteView {
+	constructor(editorView, wiki) {
+		this.view = editorView;
+		this.wiki = wiki;
+		this.container = document.createElement("div");
+		this.container.className = "tc-prosemirror-autocomplete";
 		this.container.style.display = "none";
-		return;
+		this.container.style.position = "absolute";
+		this.container.style.zIndex = "1100";
+		document.body.appendChild(this.container);
 	}
 
-	// Position dropdown below cursor
-	var coords = view.coordsAtPos(view.state.selection.from);
-	this.container.style.left = (coords.left + window.scrollX) + "px";
-	this.container.style.top = (coords.bottom + 4 + window.scrollY) + "px";
-	this.container.style.display = "block";
+	update(view) {
+		const state = AUTOCOMPLETE_KEY.getState(view.state);
+		if(!state || !state.active || !state.items.length) {
+			this.container.style.display = "none";
+			return;
+		}
 
-	// Render items
-	var self = this;
-	while(this.container.firstChild) this.container.removeChild(this.container.firstChild);
+		const coords = view.coordsAtPos(view.state.selection.from);
+		this.container.style.left = (coords.left + window.scrollX) + "px";
+		this.container.style.top = (coords.bottom + 4 + window.scrollY) + "px";
+		this.container.style.display = "block";
 
-	for(var i = 0; i < state.items.length; i++) {
-		(function(idx) {
-			var item = document.createElement("div");
+		while(this.container.firstChild) this.container.removeChild(this.container.firstChild);
+
+		for(let idx = 0; idx < state.items.length; idx++) {
+			const item = document.createElement("div");
 			item.className = "tc-prosemirror-autocomplete-item";
 			if(idx === state.selectedIndex) {
 				item.classList.add("tc-prosemirror-autocomplete-item-selected");
 			}
 			item.textContent = state.items[idx];
-			item.addEventListener("mousedown", function(e) {
+			item.addEventListener("mousedown", (e) => {
 				e.preventDefault();
-				var currentState = AUTOCOMPLETE_KEY.getState(view.state);
+				const currentState = AUTOCOMPLETE_KEY.getState(view.state);
 				if(currentState) {
-					var updated = Object.assign({}, currentState, { selectedIndex: idx });
-					acceptCompletion(view, updated);
+					acceptCompletion(view, Object.assign({}, currentState, { selectedIndex: idx }));
 				}
 			});
-			self.container.appendChild(item);
-		})(i);
+			this.container.appendChild(item);
+		}
+
+		const selectedEl = this.container.children[state.selectedIndex];
+		if(selectedEl) selectedEl.scrollIntoView({ block: "nearest" });
 	}
 
-	// Scroll selected item into view
-	var selectedEl = this.container.children[state.selectedIndex];
-	if(selectedEl) {
-		selectedEl.scrollIntoView({ block: "nearest" });
+	destroy() {
+		if(this.container && this.container.parentNode) {
+			this.container.parentNode.removeChild(this.container);
+		}
 	}
-};
-
-AutocompleteView.prototype.destroy = function() {
-	if(this.container && this.container.parentNode) {
-		this.container.parentNode.removeChild(this.container);
-	}
-};
+}
 
 exports.createAutocompletePlugin = createAutocompletePlugin;
 exports.AUTOCOMPLETE_KEY = AUTOCOMPLETE_KEY;

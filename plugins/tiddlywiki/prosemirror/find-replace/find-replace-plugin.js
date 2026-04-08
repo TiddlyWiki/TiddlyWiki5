@@ -178,258 +178,251 @@ function createFindReplacePlugin(wiki) {
 /**
  * Find & Replace UI panel.
  */
-function FindReplaceView(editorView, wiki) {
-	this.view = editorView;
-	this.wiki = wiki;
-	this.panel = null;
-	this.searchInput = null;
-	this.replaceInput = null;
-}
-
-FindReplaceView.prototype.buildPanel = function() {
-	var self = this;
-	var panel = document.createElement("div");
-	panel.className = "tc-prosemirror-find-replace-panel";
-	panel.style.display = "none";
-
-	// Search row
-	var searchRow = document.createElement("div");
-	searchRow.className = "tc-prosemirror-find-replace-row";
-
-	var searchInput = document.createElement("input");
-	searchInput.type = "text";
-	searchInput.className = "tc-prosemirror-find-input";
-	searchInput.placeholder = this.wiki.getTiddlerText(
-		"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/SearchPlaceholder", "Find...");
-	searchInput.addEventListener("input", function() {
-		self.view.dispatch(self.view.state.tr.setMeta(FIND_REPLACE_KEY, {
-			searchTerm: searchInput.value
-		}));
-	});
-	searchInput.addEventListener("keydown", function(e) {
-		if(e.key === "Enter") {
-			e.preventDefault();
-			if(e.shiftKey) { self.findPrev(); } else { self.findNext(); }
-		}
-		if(e.key === "Escape") {
-			e.preventDefault();
-			self.close();
-		}
-	});
-	this.searchInput = searchInput;
-
-	var countLabel = document.createElement("span");
-	countLabel.className = "tc-prosemirror-find-count";
-	this.countLabel = countLabel;
-
-	var prevBtn = document.createElement("button");
-	prevBtn.type = "button";
-	prevBtn.className = "tc-prosemirror-find-btn";
-	prevBtn.textContent = "▲";
-	prevBtn.title = this.wiki.getTiddlerText(
-		"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/Previous", "Previous");
-	prevBtn.addEventListener("click", function(e) { e.preventDefault(); self.findPrev(); });
-
-	var nextBtn = document.createElement("button");
-	nextBtn.type = "button";
-	nextBtn.className = "tc-prosemirror-find-btn";
-	nextBtn.textContent = "▼";
-	nextBtn.title = this.wiki.getTiddlerText(
-		"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/Next", "Next");
-	nextBtn.addEventListener("click", function(e) { e.preventDefault(); self.findNext(); });
-
-	var caseSensitiveBtn = document.createElement("button");
-	caseSensitiveBtn.type = "button";
-	caseSensitiveBtn.className = "tc-prosemirror-find-btn tc-prosemirror-find-case-btn";
-	caseSensitiveBtn.textContent = "Aa";
-	caseSensitiveBtn.title = this.wiki.getTiddlerText(
-		"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/CaseSensitive", "Case sensitive");
-	caseSensitiveBtn.addEventListener("click", function(e) {
-		e.preventDefault();
-		var st = FIND_REPLACE_KEY.getState(self.view.state);
-		self.view.dispatch(self.view.state.tr.setMeta(FIND_REPLACE_KEY, {
-			caseSensitive: !st.caseSensitive,
-			searchTerm: st.searchTerm
-		}));
-		caseSensitiveBtn.classList.toggle("active", !st.caseSensitive);
-	});
-	this.caseSensitiveBtn = caseSensitiveBtn;
-
-	var closeBtn = document.createElement("button");
-	closeBtn.type = "button";
-	closeBtn.className = "tc-prosemirror-find-btn tc-prosemirror-find-close-btn";
-	var closeSvg = getSvgIcon("$:/core/images/close-button", "1em");
-	if(closeSvg) {
-		closeBtn.appendChild(document.importNode(closeSvg, true));
-	} else {
-		closeBtn.textContent = "\u00D7";
-	}
-	closeBtn.title = this.wiki.getTiddlerText(
-		"$:/plugins/tiddlywiki/prosemirror/language/Buttons/Close", "Close");
-	closeBtn.addEventListener("click", function(e) { e.preventDefault(); self.close(); });
-
-	searchRow.appendChild(searchInput);
-	searchRow.appendChild(countLabel);
-	searchRow.appendChild(prevBtn);
-	searchRow.appendChild(nextBtn);
-	searchRow.appendChild(caseSensitiveBtn);
-	searchRow.appendChild(closeBtn);
-
-	// Replace row
-	var replaceRow = document.createElement("div");
-	replaceRow.className = "tc-prosemirror-find-replace-row";
-
-	var replaceInput = document.createElement("input");
-	replaceInput.type = "text";
-	replaceInput.className = "tc-prosemirror-replace-input";
-	replaceInput.placeholder = this.wiki.getTiddlerText(
-		"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/ReplacePlaceholder", "Replace...");
-	replaceInput.addEventListener("keydown", function(e) {
-		if(e.key === "Enter") {
-			e.preventDefault();
-			self.replaceOne();
-		}
-		if(e.key === "Escape") {
-			e.preventDefault();
-			self.close();
-		}
-	});
-	this.replaceInput = replaceInput;
-
-	var replaceBtn = document.createElement("button");
-	replaceBtn.type = "button";
-	replaceBtn.className = "tc-prosemirror-find-btn";
-	replaceBtn.textContent = this.wiki.getTiddlerText(
-		"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/Replace", "Replace");
-	replaceBtn.addEventListener("click", function(e) { e.preventDefault(); self.replaceOne(); });
-
-	var replaceAllBtn = document.createElement("button");
-	replaceAllBtn.type = "button";
-	replaceAllBtn.className = "tc-prosemirror-find-btn";
-	replaceAllBtn.textContent = this.wiki.getTiddlerText(
-		"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/ReplaceAll", "Replace All");
-	replaceAllBtn.addEventListener("click", function(e) { e.preventDefault(); self.replaceAll(); });
-
-	replaceRow.appendChild(replaceInput);
-	replaceRow.appendChild(replaceBtn);
-	replaceRow.appendChild(replaceAllBtn);
-
-	panel.appendChild(searchRow);
-	panel.appendChild(replaceRow);
-
-	this.panel = panel;
-	return panel;
-};
-
-FindReplaceView.prototype.update = function(view) {
-	var state = FIND_REPLACE_KEY.getState(view.state);
-	if(!this.panel) {
-		var panel = this.buildPanel();
-		// Insert panel before the ProseMirror editor DOM
-		var editorParent = view.dom.parentNode;
-		if(editorParent) {
-			editorParent.insertBefore(panel, view.dom);
-		}
+class FindReplaceView {
+	constructor(editorView, wiki) {
+		this.view = editorView;
+		this.wiki = wiki;
+		this.panel = null;
+		this.searchInput = null;
+		this.replaceInput = null;
+		this.countLabel = null;
+		this.caseSensitiveBtn = null;
 	}
 
-	if(state.active) {
-		var wasHidden = this.panel.style.display === "none";
-		this.panel.style.display = "block";
-		// Focus search input only when first opened (not on every update)
-		if(wasHidden) {
-			this.searchInput.focus();
-			this.searchInput.select();
-		}
-		// Update count label
-		if(state.matches.length > 0) {
-			this.countLabel.textContent = (state.currentIndex + 1) + "/" + state.matches.length;
-		} else if(state.searchTerm) {
-			this.countLabel.textContent = "0/0";
+	buildPanel() {
+		const panel = document.createElement("div");
+		panel.className = "tc-prosemirror-find-replace-panel";
+		panel.style.display = "none";
+
+		// Search row
+		const searchRow = document.createElement("div");
+		searchRow.className = "tc-prosemirror-find-replace-row";
+
+		const searchInput = document.createElement("input");
+		searchInput.type = "text";
+		searchInput.className = "tc-prosemirror-find-input";
+		searchInput.placeholder = this.wiki.getTiddlerText(
+			"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/SearchPlaceholder", "Find...");
+		searchInput.addEventListener("input", () => {
+			this.view.dispatch(this.view.state.tr.setMeta(FIND_REPLACE_KEY, {
+				searchTerm: searchInput.value
+			}));
+		});
+		searchInput.addEventListener("keydown", (e) => {
+			if(e.key === "Enter") {
+				e.preventDefault();
+				if(e.shiftKey) { this.findPrev(); } else { this.findNext(); }
+			}
+			if(e.key === "Escape") {
+				e.preventDefault();
+				this.close();
+			}
+		});
+		this.searchInput = searchInput;
+
+		const countLabel = document.createElement("span");
+		countLabel.className = "tc-prosemirror-find-count";
+		this.countLabel = countLabel;
+
+		const prevBtn = document.createElement("button");
+		prevBtn.type = "button";
+		prevBtn.className = "tc-prosemirror-find-btn";
+		prevBtn.textContent = "▲";
+		prevBtn.title = this.wiki.getTiddlerText(
+			"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/Previous", "Previous");
+		prevBtn.addEventListener("click", (e) => { e.preventDefault(); this.findPrev(); });
+
+		const nextBtn = document.createElement("button");
+		nextBtn.type = "button";
+		nextBtn.className = "tc-prosemirror-find-btn";
+		nextBtn.textContent = "▼";
+		nextBtn.title = this.wiki.getTiddlerText(
+			"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/Next", "Next");
+		nextBtn.addEventListener("click", (e) => { e.preventDefault(); this.findNext(); });
+
+		const caseSensitiveBtn = document.createElement("button");
+		caseSensitiveBtn.type = "button";
+		caseSensitiveBtn.className = "tc-prosemirror-find-btn tc-prosemirror-find-case-btn";
+		caseSensitiveBtn.textContent = "Aa";
+		caseSensitiveBtn.title = this.wiki.getTiddlerText(
+			"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/CaseSensitive", "Case sensitive");
+		caseSensitiveBtn.addEventListener("click", (e) => {
+			e.preventDefault();
+			const st = FIND_REPLACE_KEY.getState(this.view.state);
+			this.view.dispatch(this.view.state.tr.setMeta(FIND_REPLACE_KEY, {
+				caseSensitive: !st.caseSensitive,
+				searchTerm: st.searchTerm
+			}));
+			caseSensitiveBtn.classList.toggle("active", !st.caseSensitive);
+		});
+		this.caseSensitiveBtn = caseSensitiveBtn;
+
+		const closeBtn = document.createElement("button");
+		closeBtn.type = "button";
+		closeBtn.className = "tc-prosemirror-find-btn tc-prosemirror-find-close-btn";
+		const closeSvg = getSvgIcon("$:/core/images/close-button", "1em");
+		if(closeSvg) {
+			closeBtn.appendChild(document.importNode(closeSvg, true));
 		} else {
-			this.countLabel.textContent = "";
+			closeBtn.textContent = "\u00D7";
 		}
-		// Scroll to current match
-		if(state.currentIndex >= 0 && state.matches[state.currentIndex]) {
-			var match = state.matches[state.currentIndex];
-			try {
-				var coords = view.coordsAtPos(match.from);
-				if(coords) {
-					var editorRect = view.dom.getBoundingClientRect();
-					if(coords.top < editorRect.top || coords.bottom > editorRect.bottom) {
-						view.dispatch(view.state.tr.setSelection(
-							TextSelection.create(view.state.doc, match.from, match.to)
-						));
-						view.dom.scrollIntoView && view.dom.scrollIntoView({ block: "center" });
+		closeBtn.title = this.wiki.getTiddlerText(
+			"$:/plugins/tiddlywiki/prosemirror/language/Buttons/Close", "Close");
+		closeBtn.addEventListener("click", (e) => { e.preventDefault(); this.close(); });
+
+		searchRow.appendChild(searchInput);
+		searchRow.appendChild(countLabel);
+		searchRow.appendChild(prevBtn);
+		searchRow.appendChild(nextBtn);
+		searchRow.appendChild(caseSensitiveBtn);
+		searchRow.appendChild(closeBtn);
+
+		// Replace row
+		const replaceRow = document.createElement("div");
+		replaceRow.className = "tc-prosemirror-find-replace-row";
+
+		const replaceInput = document.createElement("input");
+		replaceInput.type = "text";
+		replaceInput.className = "tc-prosemirror-replace-input";
+		replaceInput.placeholder = this.wiki.getTiddlerText(
+			"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/ReplacePlaceholder", "Replace...");
+		replaceInput.addEventListener("keydown", (e) => {
+			if(e.key === "Enter") { e.preventDefault(); this.replaceOne(); }
+			if(e.key === "Escape") { e.preventDefault(); this.close(); }
+		});
+		this.replaceInput = replaceInput;
+
+		const replaceBtn = document.createElement("button");
+		replaceBtn.type = "button";
+		replaceBtn.className = "tc-prosemirror-find-btn";
+		replaceBtn.textContent = this.wiki.getTiddlerText(
+			"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/Replace", "Replace");
+		replaceBtn.addEventListener("click", (e) => { e.preventDefault(); this.replaceOne(); });
+
+		const replaceAllBtn = document.createElement("button");
+		replaceAllBtn.type = "button";
+		replaceAllBtn.className = "tc-prosemirror-find-btn";
+		replaceAllBtn.textContent = this.wiki.getTiddlerText(
+			"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/ReplaceAll", "Replace All");
+		replaceAllBtn.addEventListener("click", (e) => { e.preventDefault(); this.replaceAll(); });
+
+		replaceRow.appendChild(replaceInput);
+		replaceRow.appendChild(replaceBtn);
+		replaceRow.appendChild(replaceAllBtn);
+
+		panel.appendChild(searchRow);
+		panel.appendChild(replaceRow);
+
+		this.panel = panel;
+		return panel;
+	}
+
+	update(view) {
+		const state = FIND_REPLACE_KEY.getState(view.state);
+		if(!this.panel) {
+			const panel = this.buildPanel();
+			const editorParent = view.dom.parentNode;
+			if(editorParent) {
+				editorParent.insertBefore(panel, view.dom);
+			}
+		}
+
+		if(state.active) {
+			const wasHidden = this.panel.style.display === "none";
+			this.panel.style.display = "block";
+			if(wasHidden) {
+				this.searchInput.focus();
+				this.searchInput.select();
+			}
+			if(state.matches.length > 0) {
+				this.countLabel.textContent = (state.currentIndex + 1) + "/" + state.matches.length;
+			} else if(state.searchTerm) {
+				this.countLabel.textContent = "0/0";
+			} else {
+				this.countLabel.textContent = "";
+			}
+			if(state.currentIndex >= 0 && state.matches[state.currentIndex]) {
+				const match = state.matches[state.currentIndex];
+				try {
+					const coords = view.coordsAtPos(match.from);
+					if(coords) {
+						const editorRect = view.dom.getBoundingClientRect();
+						if(coords.top < editorRect.top || coords.bottom > editorRect.bottom) {
+							view.dispatch(view.state.tr.setSelection(
+								TextSelection.create(view.state.doc, match.from, match.to)
+							));
+							if(view.dom.scrollIntoView) view.dom.scrollIntoView({ block: "center" });
+						}
 					}
-				}
-			} catch(e) { /* ignore scroll errors */ }
-		}
-	} else {
-		if(this.panel) this.panel.style.display = "none";
-	}
-};
-
-FindReplaceView.prototype.findNext = function() {
-	var state = FIND_REPLACE_KEY.getState(this.view.state);
-	if(state.matches.length === 0) return;
-	var next = (state.currentIndex + 1) % state.matches.length;
-	this.view.dispatch(this.view.state.tr.setMeta(FIND_REPLACE_KEY, { currentIndex: next }));
-};
-
-FindReplaceView.prototype.findPrev = function() {
-	var state = FIND_REPLACE_KEY.getState(this.view.state);
-	if(state.matches.length === 0) return;
-	var prev = (state.currentIndex - 1 + state.matches.length) % state.matches.length;
-	this.view.dispatch(this.view.state.tr.setMeta(FIND_REPLACE_KEY, { currentIndex: prev }));
-};
-
-FindReplaceView.prototype.replaceOne = function() {
-	var state = FIND_REPLACE_KEY.getState(this.view.state);
-	if(state.currentIndex < 0 || !state.matches[state.currentIndex]) return;
-	var match = state.matches[state.currentIndex];
-	var replaceTerm = this.replaceInput.value;
-	var tr;
-	if(replaceTerm) {
-		tr = this.view.state.tr.replaceWith(match.from, match.to,
-			this.view.state.schema.text(replaceTerm));
-	} else {
-		tr = this.view.state.tr.delete(match.from, match.to);
-	}
-	tr.setMeta(FIND_REPLACE_KEY, { searchTerm: state.searchTerm });
-	this.view.dispatch(tr);
-};
-
-FindReplaceView.prototype.replaceAll = function() {
-	var state = FIND_REPLACE_KEY.getState(this.view.state);
-	if(state.matches.length === 0) return;
-	var replaceTerm = this.replaceInput.value;
-	var schema = this.view.state.schema;
-	// Apply replacements from end to start to avoid position remapping issues
-	var tr = this.view.state.tr;
-	var sortedMatches = state.matches.slice().sort(function(a, b) { return b.from - a.from; });
-	for(var i = 0; i < sortedMatches.length; i++) {
-		var mappedFrom = tr.mapping.map(sortedMatches[i].from);
-		var mappedTo = tr.mapping.map(sortedMatches[i].to);
-		if(replaceTerm) {
-			tr.replaceWith(mappedFrom, mappedTo, schema.text(replaceTerm));
+				} catch(e) { /* ignore scroll errors */ }
+			}
 		} else {
-			tr.delete(mappedFrom, mappedTo);
+			if(this.panel) this.panel.style.display = "none";
 		}
 	}
-	tr.setMeta(FIND_REPLACE_KEY, { searchTerm: state.searchTerm });
-	this.view.dispatch(tr);
-};
 
-FindReplaceView.prototype.close = function() {
-	this.view.dispatch(this.view.state.tr.setMeta(FIND_REPLACE_KEY, { active: false }));
-	this.view.focus();
-};
-
-FindReplaceView.prototype.destroy = function() {
-	if(this.panel && this.panel.parentNode) {
-		this.panel.parentNode.removeChild(this.panel);
+	findNext() {
+		const state = FIND_REPLACE_KEY.getState(this.view.state);
+		if(state.matches.length === 0) return;
+		const next = (state.currentIndex + 1) % state.matches.length;
+		this.view.dispatch(this.view.state.tr.setMeta(FIND_REPLACE_KEY, { currentIndex: next }));
 	}
-};
+
+	findPrev() {
+		const state = FIND_REPLACE_KEY.getState(this.view.state);
+		if(state.matches.length === 0) return;
+		const prev = (state.currentIndex - 1 + state.matches.length) % state.matches.length;
+		this.view.dispatch(this.view.state.tr.setMeta(FIND_REPLACE_KEY, { currentIndex: prev }));
+	}
+
+	replaceOne() {
+		const state = FIND_REPLACE_KEY.getState(this.view.state);
+		if(state.currentIndex < 0 || !state.matches[state.currentIndex]) return;
+		const match = state.matches[state.currentIndex];
+		const replaceTerm = this.replaceInput.value;
+		let tr;
+		if(replaceTerm) {
+			tr = this.view.state.tr.replaceWith(match.from, match.to,
+				this.view.state.schema.text(replaceTerm));
+		} else {
+			tr = this.view.state.tr.delete(match.from, match.to);
+		}
+		tr.setMeta(FIND_REPLACE_KEY, { searchTerm: state.searchTerm });
+		this.view.dispatch(tr);
+	}
+
+	replaceAll() {
+		const state = FIND_REPLACE_KEY.getState(this.view.state);
+		if(state.matches.length === 0) return;
+		const replaceTerm = this.replaceInput.value;
+		const schema = this.view.state.schema;
+		// Apply replacements from end to start to avoid position remapping issues
+		const tr = this.view.state.tr;
+		const sortedMatches = state.matches.slice().sort((a, b) => b.from - a.from);
+		for(const m of sortedMatches) {
+			const mappedFrom = tr.mapping.map(m.from);
+			const mappedTo = tr.mapping.map(m.to);
+			if(replaceTerm) {
+				tr.replaceWith(mappedFrom, mappedTo, schema.text(replaceTerm));
+			} else {
+				tr.delete(mappedFrom, mappedTo);
+			}
+		}
+		tr.setMeta(FIND_REPLACE_KEY, { searchTerm: state.searchTerm });
+		this.view.dispatch(tr);
+	}
+
+	close() {
+		this.view.dispatch(this.view.state.tr.setMeta(FIND_REPLACE_KEY, { active: false }));
+		this.view.focus();
+	}
+
+	destroy() {
+		if(this.panel && this.panel.parentNode) {
+			this.panel.parentNode.removeChild(this.panel);
+		}
+	}
+}
 
 exports.createFindReplacePlugin = createFindReplacePlugin;
 exports.FIND_REPLACE_KEY = FIND_REPLACE_KEY;
