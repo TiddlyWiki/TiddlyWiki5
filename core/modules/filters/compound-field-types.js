@@ -27,7 +27,9 @@ function collectTypes(wiki,tiddler,results) {
 exports["compound-field-types"] = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		if(tiddler && (tiddler.fields.type === "text/vnd.tiddlywiki-multiple" || tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields")) {
+		if(tiddler && (tiddler.fields.type === "text/vnd.tiddlywiki-multiple" ||
+			tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields"))
+		{
 			// Collect from template first
 			if(tiddler.fields["inherit-compound"]) {
 				var templateTiddler = options.wiki.getTiddler(tiddler.fields["inherit-compound"]);

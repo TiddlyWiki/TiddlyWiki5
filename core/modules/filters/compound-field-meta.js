@@ -31,7 +31,8 @@ exports["compound-field-meta"] = function(source,operator,options) {
 		return results;
 	}
 	source(function(tiddler,title) {
-		if(tiddler && (tiddler.fields.type === "text/vnd.tiddlywiki-multiple" || tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields")) {
+		if(tiddler && (tiddler.fields.type === "text/vnd.tiddlywiki-multiple" ||
+			tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields")) {
 			var value = getEntryMeta(options.wiki,tiddler,fieldName,propertyName);
 			// Fall back to template
 			if(value === null && tiddler.fields["inherit-compound"]) {

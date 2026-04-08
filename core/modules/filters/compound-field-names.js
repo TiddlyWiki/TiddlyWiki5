@@ -30,7 +30,8 @@ function extractFieldNames(text) {
 exports["compound-field-names"] = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		if(tiddler && (tiddler.fields.type === "text/vnd.tiddlywiki-multiple" || tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields")) {
+		if(tiddler && (tiddler.fields.type === "text/vnd.tiddlywiki-multiple" ||
+			tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields")) {
 			// Get template field names first if inherit-compound is set
 			if(tiddler.fields["inherit-compound"]) {
 				var templateTiddler = options.wiki.getTiddler(tiddler.fields["inherit-compound"]);

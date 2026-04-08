@@ -58,7 +58,8 @@ exports.getInt = function(str,deflt) {
 };
 
 /*
-Repeatedly replaces a substring within a string. Like String.prototype.replace, but without any of the default special handling of $ sequences in the replace string
+Repeatedly replaces a substring within a string. Like String.prototype.replace,
+but without any of the default special handling of $ sequences in the replace string
 */
 exports.replaceString = function(text,search,replace) {
 	return text.replace(search,function() {
@@ -686,7 +687,8 @@ exports.isLinkExternal = function(to) {
 exports.nextTick = function(fn) {
 /*global window: false */
 	if(typeof process === "undefined") {
-		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
+		// Apparently it would be faster to use postMessage
+		// http://dbaron.org/log/20100309-faster-timeouts
 		window.setTimeout(fn,0);
 	} else {
 		process.nextTick(fn);

@@ -24,7 +24,9 @@ function getEntryType(wiki,tiddler,fieldName) {
 exports["compound-field-type"] = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		if(tiddler && (tiddler.fields.type === "text/vnd.tiddlywiki-multiple" || tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields")) {
+		if(tiddler && (tiddler.fields.type === "text/vnd.tiddlywiki-multiple" ||
+			tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields"))
+		{
 			var type = getEntryType(options.wiki,tiddler,operator.operand);
 			// Fall back to template
 			if(!type && tiddler.fields["inherit-compound"]) {

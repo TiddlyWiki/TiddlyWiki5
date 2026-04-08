@@ -32,7 +32,8 @@ SetFieldWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 SetFieldWidget.prototype.execute = function() {
-	this.actionTiddler = this.getAttribute("$tiddler") || (!this.hasParseTreeNodeAttribute("$tiddler") && this.getVariable("currentTiddler"));
+	this.actionTiddler = this.getAttribute("$tiddler") ||
+		(!this.hasParseTreeNodeAttribute("$tiddler") && this.getVariable("currentTiddler"));
 	this.actionField = this.getAttribute("$field");
 	this.actionIndex = this.getAttribute("$index");
 	this.actionIndexProperty = this.getAttribute("$indexProperty");
@@ -84,7 +85,10 @@ SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 				}
 			}
 			this.wiki.setTiddlerData(this.actionTiddler,data,{},options);
-		} else if((typeof this.actionField == "string") || (typeof this.actionIndex == "string")  || (typeof this.actionValue == "string")) {
+		} else if((typeof this.actionField == "string") ||
+			(typeof this.actionIndex == "string")  ||
+			(typeof this.actionValue == "string"))
+		{
 			this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue,options);
 		}
 		$tw.utils.each(this.attributes,function(attribute,name) {
