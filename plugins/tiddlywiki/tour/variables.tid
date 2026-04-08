@@ -69,13 +69,17 @@ These config tiddlers may be changed directly as required:
 \procedure tour-start(title,step)
 \procedure tv-action-refresh-policy() always
 <$action-setfield $tiddler="$:/config/CurrentTour" text=<<title>>/>
-<$transclude $variable="tour-restart" step=<<step>>/>
+<$transclude $variable="tour-restart" title=<<title>> step=<<step>>/>
 \end
 
-\procedure tour-restart(step)
+\procedure tour-restart(title,step)
 \procedure tv-action-refresh-policy() always
 <$action-setfield $tiddler="$:/config/ShowTour" text="show"/>
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [<step>!is[blank]] :else[function[tour-all-steps-filtered-by-condition]first[]] }}}/>
+<$action-setfield $tiddler="$:/state/tour/last-reported-completed-step" text=""/>
+<$action-setfield $tiddler="$:/state/tour/last-reported-completed-tour" text=""/>
+<$let targetTour={{{ [<title>!is[blank]then<title>else{$:/config/CurrentTour}] }}} targetTag={{{ [<targetTour>get[tour-tag]] }}}>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [<step>!is[blank]] :else[all[shadows+tiddlers]tag<targetTag>filter<tour-filter-steps-by-condition>first[]] }}}/>
+</$let>
 <<tour-initialise-current-tour-step>>
 \end
 

@@ -45,6 +45,20 @@ tags: $:/tags/PageTemplate
 \end tour-step-success-filter-not-satisfied
 
 \procedure tour-step-success-filter-satisfied()
+<$list filter="[[$:/state/tour/last-reported-completed-step]get[text]match<currentTourStep>]" variable="ignore">
+	<$list-empty>
+		<$action-setfield $tiddler="$:/state/tour/last-reported-completed-step" text=<<currentTourStep>>/>
+		<$action-sendmessage $message="tm-tour-step-completed" tour=<<currentTour>> step=<<currentTourStep>>/>
+	</$list-empty>
+</$list>
+<$list filter="[function[tour-is-last-step]]" variable="ignore">
+	<$list filter="[[$:/state/tour/last-reported-completed-tour]get[text]match<currentTour>]" variable="ignore2">
+		<$list-empty>
+			<$action-setfield $tiddler="$:/state/tour/last-reported-completed-tour" text=<<currentTour>>/>
+			<$action-sendmessage $message="tm-tour-completed" tour=<<currentTour>> step=<<currentTourStep>>/>
+		</$list-empty>
+	</$list>
+</$list>
 <$let tour-task="">
 	<$transclude tiddler=<<currentTourStep>> mode="block"/>
 </$let>
@@ -54,16 +68,35 @@ tags: $:/tags/PageTemplate
 </p>
 <<tour-buttons>>
 \end tour-step-success-filter-satisfied
+
+\procedure tour-progress()
+<$let
+	currentTour={{$:/config/CurrentTour}}
+	tourTag={{{ [<currentTour>get[tour-tag]] }}}
+	totalSteps={{{ [all[shadows+tiddlers]tag<tourTag>count[]max[1]] }}}
+	completion={{{ [<currentTour>get[actualCompletion]get[text]else[0]] }}}
+	percentage={{{ [<completion>divide<totalSteps>multiply[100]] }}}
+>
+	<div class="tc-tour-panel-progress" style=`width: ${ [<percentage>!is[blank]then<percentage>else[0]] }$%;`></div>
+</$let>
+\end
+
 \import [[$:/plugins/tiddlywiki/tour/variables]]
 
 <%if [{$:/config/ShowTour}!is[blank]else[show]match[show]] %>
+<%if [{$:/layout}!match[$:/plugins/tiddlywiki/tour/layouts/tutorial-center]] %>
 	<div class=`tc-tour-panel tc-tour-panel-${ [{$:/state/tour/step}get[display-mode]else[normal]] }$ ${ [{$:/config/CurrentTour}get[class]] }$`>
 		<$image class="tc-tour-panel-banner-image" source={{{ [{$:/config/CurrentTour}get[logo]] }}}/>
 		<div class="tc-tour-panel-inner">
 			<div class="tc-tiddler-controls tc-tour-panel-controls">
-				<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button>
+				<<tour-progress>>
 				<$button popup=<<qualify "$:/state/popup/tour-dropdown">> class="tc-btn-invisible tc-tour-panel-list-button" selectedClass="tc-selected">
 					<span class="tc-small-gap-right">''Tour'':</span> <<tour-display-current-tour>>
+				</$button>
+				<$button class="tc-btn-invisible">
+					<$action-setfield $tiddler="$:/config/ShowTour" text="no"/>
+					<$action-setfield $tiddler="$:/layout" text="$:/plugins/tiddlywiki/tour/layouts/tutorial-center"/>
+					{{$:/core/images/close-button}}
 				</$button>
 				<$reveal state=<<qualify "$:/state/popup/tour-dropdown">> type="popup" position="belowleft" animate="yes" tag="div">
 					<div class="tc-drop-down">
@@ -101,4 +134,5 @@ tags: $:/tags/PageTemplate
 			</$let>
 		</div>
 	</div>
+<%endif%>
 <%endif%>

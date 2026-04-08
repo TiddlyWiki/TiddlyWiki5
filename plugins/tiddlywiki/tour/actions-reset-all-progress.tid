@@ -1,0 +1,22 @@
+title: $:/plugins/tiddlywiki/tour/actions/reset-all-progress
+tags: $:/tags/Actions
+
+\whitespace trim
+\procedure tv-action-refresh-policy() always
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Tour]]" variable="tourTitle">
+	<$let
+		actualCompletionTitle={{{ [<tourTitle>get[actualCompletion]] }}}
+		completedStepsTitle={{{ [<tourTitle>get[completedSteps]] }}}
+	>
+		<$list filter="[<actualCompletionTitle>!is[blank]]" variable="ignore">
+			<$action-setfield $tiddler=<<actualCompletionTitle>> text="0"/>
+		</$list>
+		<$list filter="[<completedStepsTitle>!is[blank]]" variable="ignore">
+			<$action-setfield $tiddler=<<completedStepsTitle>> list="" completed="no"/>
+		</$list>
+	</$let>
+</$list>
+
+<$action-setfield $tiddler="$:/state/tour/last-reported-completed-step" text=""/>
+<$action-setfield $tiddler="$:/state/tour/last-reported-completed-tour" text=""/>
