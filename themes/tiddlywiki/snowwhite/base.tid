@@ -34,7 +34,6 @@ tags: [[$:/tags/Stylesheet]]
 
 .tc-tiddler-frame .tc-edit-tags input.tc-edit-texteditor {
 	border: none;
-	outline: none;
 }
 
 textarea.tc-edit-texteditor {

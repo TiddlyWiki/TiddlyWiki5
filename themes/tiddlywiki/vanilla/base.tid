@@ -863,7 +863,6 @@ button.tc-untagged-label {
 }
 
 button.tc-btn-invisible.tc-remove-tag-button {
-	outline: none;
 }
 
 .tc-tag-button-selected,
