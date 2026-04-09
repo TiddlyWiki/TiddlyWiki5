@@ -21,21 +21,6 @@ exports.isDraft = function() {
 	return this.hasField("draft.of");
 };
 
-exports.getFieldString = function(field,defaultValue) {
-	var value = this.fields[field];
-	// Check for a missing field
-	if(value === undefined || value === null) {
-		return defaultValue || "";
-	}
-	// Stringify the field with the associated tiddler field module (if any)
-	var fieldModule = $tw.Tiddler.fieldModules[field];
-	if(fieldModule && fieldModule.stringify) {
-		return fieldModule.stringify.call(this,value);
-	} else {
-		return value.toString();
-	}
-};
-
 /*
 Get the value of a field as an array / list
 */
