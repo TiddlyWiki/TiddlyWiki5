@@ -3243,17 +3243,17 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 */
 
 .tc-tree div {
-	<<padding-start: "14px">>
+	<<padding-start "14px">>
 }
 
 .tc-tree ol {
 	list-style-type: none;
-	<<padding-start: 0>>
+	<<padding-start 0>>
 	margin-top: 0;
 }
 
 .tc-tree ol ol {
-	<<padding-start: 1em>>
+	<<padding-start 1em>>
 }
 
 .tc-tree button {
