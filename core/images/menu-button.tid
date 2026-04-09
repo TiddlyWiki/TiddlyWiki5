@@ -2,4 +2,4 @@ title: $:/core/images/menu-button
 tags: $:/tags/Image
 
 \parameters (size:"22pt")
-<svg width=<<size>> height=<<size>> class="tc-image-menu-button tc-image-button" viewBox="0 0 128 128"><rect width="128" height="16" y="16" rx="8"/><rect width="128" height="16" y="56" rx="8"/><rect width="128" height="16" y="96" rx="8"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>> viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tc-image-menu-button tc-image-button lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
