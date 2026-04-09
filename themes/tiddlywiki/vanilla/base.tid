@@ -1234,9 +1234,9 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-subtitle {
-	font-size: 0.9em;
+	font-size: 0.8em;
 	color: <<colour tiddler-subtitle-foreground>>;
-	font-weight: normal;
+	font-weight: 300;
 }
 
 .tc-subtitle .tc-tiddlylink {
