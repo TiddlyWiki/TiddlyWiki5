@@ -1168,7 +1168,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
-		border-radius: 2px;
+		border-radius: 8px;
 	}
 
 <<if-no-sidebar "
