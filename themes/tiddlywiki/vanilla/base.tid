@@ -667,9 +667,9 @@ html body.tc-body .tc-btn-rounded svg {
 /* used for documentation "fake" buttons */
 .tc-btn-standard {
 	line-height: 1.8;
-	color: #667;
-	background-color: #e0e0e0;
-	border: 1px solid #888;
+	color: <<colour foreground>>;
+	background-color: <<colour tab-background>>;
+	border: 1px solid <<colour muted-foreground>>;
 	padding: 2px 1px 2px 1px;
 	margin: 1px 4px 1px 4px;
 }
@@ -2285,7 +2285,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top: none;
 	border-left: none;
 	border-bottom: none;
-	border-right: 1px solid #ccc;
+	border-right: 1px solid <<colour sidebar-tab-border>>;
 	margin-bottom: inherit;
 }
 
@@ -2919,7 +2919,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	width: 2em;
 	height: 2em;
 	margin: 0.4em;
-	border: 1px solid #888;
+	border: 1px solid <<colour muted-foreground>>;
 }
 
 input.tc-palette-manager-colour-input {
@@ -3153,7 +3153,7 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 
 .tc-thumbnail-wrapper:hover .tc-thumbnail-icon svg,
 .tc-thumbnail-wrapper:hover .tc-thumbnail-icon img {
-	color: #fff;
+	color: <<colour background>>;
 	<<filter "drop-shadow(3px 3px 4px rgba(0,0,0,0.6))">>
 }
 
@@ -3173,8 +3173,8 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 
 .tc-thumbnail-caption {
 	position: absolute;
-	background-color: #777;
-	color: #fff;
+	background-color: <<colour muted-foreground>>;
+	color: <<colour background>>;
 	text-align: center;
 	bottom: 0;
 	width: 100%;
@@ -3256,11 +3256,11 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 }
 
 .tc-tree button {
-	color: #acacac;
+	color: <<colour muted-foreground>>;
 }
 
 .tc-tree svg {
-	color: #acacac;
+	color: <<colour muted-foreground>>;
 }
 
 .tc-tree span svg {
@@ -3270,7 +3270,7 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 }
 
 .tc-tree li span {
-	color: lightgray;
+	color: <<colour muted-foreground>>;
 }
 
 select {
@@ -3386,7 +3386,7 @@ span.tc-translink > a:first-child {
 }
 
 .tc-test-case-result-icon svg {
-	color: #fff;
+	color: <<colour background>>;
 }
 
 .tc-test-case-result-icon-pass {
