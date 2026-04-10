@@ -7,4 +7,4 @@ change-category: theme
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9148
 github-contributors: Leilei332
 
-Make some core classes display properly when Tiddlywiki's language uses bidirectional scripts.
+Core CSS classes have been updated to display correctly when TiddlyWiki is used with right-to-left or bidirectional scripts.

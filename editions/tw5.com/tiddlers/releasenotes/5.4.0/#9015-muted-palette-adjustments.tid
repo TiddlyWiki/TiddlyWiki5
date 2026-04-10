@@ -9,3 +9,5 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#9015
 type: text/vnd.tiddlywiki
+
+Minor colour adjustments to the Muted palette.

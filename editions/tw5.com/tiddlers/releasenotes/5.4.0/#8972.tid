@@ -7,10 +7,9 @@ change-category: hackability
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8972 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9614 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9645
 github-contributors: Jermolene saqimtiaz
 
-This PR introduces a new filter run prefix `:let` that assigns the result of the filter run to a variable that is made available for the remaining filter runs of the filter expression. It solves the problem that previously it was impossible to compute values for filter operator parameters; parameters could only be a literal string, text reference or variable reference.
+Two related capabilities have been added to TiddlyWiki's filter system:
 
-This PR also introduces multi-valued variables, the ability to store a list of results in a variable, not just a single string. They can be assigned with the new `:let` filter run prefix, or the existing `<$let>` widget. The full list of values can be retrieved using round brackets instead of the usual angle brackets. In all other contexts only the first item in the list is used as the variable value.
+* ''`:let` filter run prefix'': Assigns the result of a filter run to a named variable, making it available to subsequent filter runs in the same expression. This solves a long-standing limitation where filter operator parameters could only be literal strings, text references, or variable references — not computed values
+* ''Multi-valued variables'': Variables can now hold a list of values, not just a single string. Assign them using `:let` or `<$let>`, and retrieve the full list using round brackets (e.g. `([myvar])`). In all other contexts, only the first value is used
 
-* [[Multi-Valued Variables]]
-* [[Let Filter Run Prefix]]
-* [[LetWidget]]
+See [[Multi-Valued Variables]], [[Let Filter Run Prefix]], and [[LetWidget]] for details and examples.

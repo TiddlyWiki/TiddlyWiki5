@@ -7,4 +7,4 @@ change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9183 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9288
 github-contributors: Jermolene Leilei332
 
-This change reduces the size of the core plugin by 119.3KB or about 4.5%.
+Server-only code has been moved from the core into a new `$:/core-server` plugin, reducing the core plugin size by approximately 119KB (about 4.5%). This benefits all browser-based wikis where the server code was previously loaded unnecessarily.

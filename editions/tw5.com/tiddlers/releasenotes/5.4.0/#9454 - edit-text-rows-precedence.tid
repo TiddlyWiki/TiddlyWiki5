@@ -7,4 +7,4 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9454
 github-contributors: pmario
 
-[[Edit-text widget|EditTextWidget]] rows parameter takes precedence and ~CodeMirror editor accepts rows parameter now
+The `rows` parameter of the [[EditTextWidget]] now takes precedence over any other height settings, and the CodeMirror editor plugin also respects this parameter.

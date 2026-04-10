@@ -7,4 +7,4 @@ change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9495
 github-contributors: yaisog
 
-Functions returning cached tiddler lists now return shallow copies to prevent external code from inadvertently mutating the cache
+Functions that return cached tiddler lists now return shallow copies, preventing external code from accidentally mutating the internal cache.

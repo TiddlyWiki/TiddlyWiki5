@@ -10,4 +10,4 @@ github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9585
 github-contributors: BurningTreeC
 type: text/vnd.tiddlywiki
 
-This change lets you define the button-classes of Editor toolbar buttons as filters for flexible styling
+The `button-classes` field of Editor toolbar buttons can now contain a filter expression, allowing CSS classes to be assigned dynamically based on the current tiddler or other state.

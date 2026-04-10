@@ -1,7 +1,7 @@
 change-category: widget
 change-type: deprecation
 created: 20260120154533983
-description: The deprecated events and actions-* atrributes for the eventcatcher widget have been removed.
+description: Remove the deprecated events and actions-* attributes from the eventcatcher widget
 github-contributors: saqimtiaz
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9259
 modified: 20260120160236297
@@ -10,4 +10,4 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#9259
 type: text/vnd.tiddlywiki
 
-Deprecates and removes the `events` and `actions-*` attributes for the $eventcatcher widget.
+The previously-deprecated `events` and `actions-*` attributes of the `$eventcatcher` widget have been removed. Use the `on-*` attribute syntax instead.

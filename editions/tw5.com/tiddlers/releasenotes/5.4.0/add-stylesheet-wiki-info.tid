@@ -7,4 +7,4 @@ change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9565
 github-contributors: Leilei332
 
-Extend wiki information tool to display stylesheet information.
+The wiki information tool has been extended to show a list of all active stylesheets, making it easier to understand and debug theme and styling configuration.

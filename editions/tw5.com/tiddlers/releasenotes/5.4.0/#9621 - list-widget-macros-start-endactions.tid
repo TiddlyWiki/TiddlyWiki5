@@ -10,7 +10,8 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#9621
 type: text/vnd.tiddlywiki
 
-* [[LinkWidget]] new Attributes and Action Variables section
-* [[list-links-draggable Macro]] new Attributes
-* [[list-tagged-draggable Macro]] new Attributes
+The LinkWidget and the `list-links-draggable` and `list-tagged-draggable` macros now support `startactions` and `endactions` attributes, allowing you to trigger actions when a drag operation starts or ends. See the updated documentation for each:
 
+* [[LinkWidget]] — Attributes and Action Variables section
+* [[list-links-draggable Macro]] — Attributes
+* [[list-tagged-draggable Macro]] — Attributes

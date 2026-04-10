@@ -7,4 +7,4 @@ change-category: theme
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9660
 github-contributors: DesignThinkerer
 
-Remove `overflow: hidden` from the `.tc-tiddler-info` style definition. This allows popups and dropdowns triggered from within the tiddler info panel to extend beyond its boundaries rather than being clipped.
+Removed `overflow: hidden` from the `.tc-tiddler-info` style, so popups and dropdowns triggered from within the tiddler info panel are no longer clipped at its edges.

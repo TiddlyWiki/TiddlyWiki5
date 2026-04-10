@@ -10,5 +10,4 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#9254
 type: text/vnd.tiddlywiki
 
-* If macro `list-links-draggable` misses the tiddler parameter it points to `currentTiddler` variable by default now
-* Also discussed at [[Talk Tiddlywiki|https://talk.tiddlywiki.org/t/long-standing-bug-in-list-links-draggable-macro/8057]]
+The `list-links-draggable` macro now defaults to `currentTiddler` when no `tiddler` parameter is supplied, fixing a long-standing inconsistency with similar macros.

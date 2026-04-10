@@ -7,4 +7,4 @@ change-category: translation
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9655
 github-contributors: pmario
 
-Brings German UI texts up to par with English version
+Updated the German translation to bring it in line with the current English UI strings.

@@ -10,4 +10,4 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.0/#9317
 type: text/vnd.tiddlywiki
 
-This PR adds the `**/output/**` directory to eslint ignore configuration
+The `**/output/**` directory is now excluded from ESLint linting, preventing spurious warnings on built output files.
