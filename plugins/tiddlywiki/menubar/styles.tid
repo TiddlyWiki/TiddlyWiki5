@@ -87,6 +87,8 @@ nav.tc-menubar li.tc-menubar-item > button {
 	font-weight: 700;
 	color: <<colour foreground>>;
 	color: <<colour menubar-foreground>>;
+	fill: <<colour foreground>>;
+	fill: <<colour menubar-foreground>>;
 	text-decoration: none;
 	padding: 0.5em;
 	margin: 0;
@@ -103,14 +105,16 @@ nav.tc-menubar li.tc-menubar-item > button.tc-selected {
 	background: <<colour menubar-foreground>>;
 	color: <<colour background>>;
 	color: <<colour menubar-background>>;
+	fill: <<colour background>>;
+	fill: <<colour menubar-background>>;
 }
 
 nav.tc-menubar li.tc-menubar-item svg {
 	transition: none;
 	width: 1em;
 	height: 1em;
-	color: <<colour foreground>>;
-	color: <<colour menubar-foreground>>;
+	fill: <<colour foreground>>;
+	fill: <<colour menubar-foreground>>;
 }
 
 nav.tc-menubar li.tc-menubar-item .tc-menubar-dropdown-arrow svg {
@@ -120,8 +124,8 @@ nav.tc-menubar li.tc-menubar-item .tc-menubar-dropdown-arrow svg {
 
 nav.tc-menubar li.tc-menubar-item > a.tc-selected svg,
 nav.tc-menubar li.tc-menubar-item > button.tc-selected svg {
-	color: <<colour background>>;
-	color: <<colour menubar-background>>;
+	fill: <<colour background>>;
+	fill: <<colour menubar-background>>;
 }
 
 nav.tc-menubar li.tc-menubar-item > a:hover,
@@ -131,6 +135,8 @@ nav.tc-menubar li.tc-menubar-item > button:hover {
 	background: <<colour menubar-foreground>>;
 	color: <<colour background>>;
 	color: <<colour menubar-background>>;
+	fill: <<colour background>>;
+	fill: <<colour menubar-background>>;
 	border-radius: 0;
 	text-decoration: none;
 }
@@ -142,6 +148,8 @@ nav.tc-menubar li.tc-menubar-item > button:active {
 	background: <<colour menubar-foreground>>;
 	color: <<colour background>>;
 	color: <<colour menubar-background>>;
+	fill: <<colour background>>;
+	fill: <<colour menubar-background>>;
 	border-radius: 0;
 	text-decoration: none;
 }
