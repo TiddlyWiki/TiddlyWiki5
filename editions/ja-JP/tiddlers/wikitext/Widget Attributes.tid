@@ -1,0 +1,28 @@
+created: 20230615045526689
+modified: 20260405110439714
+original-modified: 20230731210638956
+tags: WikiText
+title: Widget Attributes
+ja-title: ウィジェットの属性
+type: text/vnd.tiddlywiki
+
+[[HTML要素|HTML in WikiText]]やウィジェットの属性は、いくつかの異なる方法で指定できます:
+
+* [[リテラル文字列|Literal Attribute Values]]
+* [[テキスト参照のトランスクルージョン|Transcluded Attribute Values]]
+* [[マクロ/変数のトランスクルージョン|Variable Attribute Values]]
+* [[フィルター式の結果として|Filtered Attribute Values]]
+* <<.from-version "5.3.0">> [[指定された文字列に対してフィルタと変数置換を実行した結果として|Substituted Attribute Values]]
+
+|属性タイプ|構文|h
+|リテラル |スペースを含まない値には、シングルクォーテーション、ダブルクォーテーション、トリプルクォーテーション、またはクォーテーションなし |
+|トランスクルード |テキスト参照を囲む二重の中括弧 |
+|変数 |マクロまたは変数呼び出しを囲む二重の山括弧 |
+|フィルタリング結果 |フィルター式を囲む三重の中括弧|
+|置換結果|置換処理を行うテキストの、単一または三重のバッククォート|
+
+
+<$list filter="[[Literal Attribute Values]] [[Transcluded Attribute Values]] [[Variable Attribute Values]] [[Filtered Attribute Values]] [[Substituted Attribute Values]]">
+<$link><h1><$view tiddler=<<currentTiddler>> field=ja-title/></h1></$link>
+<$transclude mode="block"/>
+</$list>

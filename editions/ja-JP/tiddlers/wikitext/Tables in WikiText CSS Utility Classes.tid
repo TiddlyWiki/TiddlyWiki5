@@ -1,0 +1,83 @@
+created: 20220817153236691
+modified: 20260404112841923 
+original-modified: 20221010074314452
+tags: [[Tables in WikiText]]
+title: Tables in WikiText CSS Utility Classes
+ja-title: Wikiテキストの表に関するCSSユーティリティクラス
+type: text/vnd.tiddlywiki
+
+Wikiテキストの表は、CSSクラスを適用することでスタイルを設定できます。Wikiテキストの表の基本情報やスタイルの設定方法については、[[Wikiテキストでの表|Tables in WikiText]]を参照してください。
+
+{{Table Classes, Captions, Headers and Footers}}
+
+上記のように、結果として生成される表は左揃えで、コンテンツに合わせてサイズが調整されます。これは、ブラウザの表レイアウトのデフォルト動作です。別の動作を実現するには、"`k`行"にさまざまなCSSクラスを追加します。
+
+! ユーティリティクラス
+
+{{Utility Classes}}
+
+! 例
+
+以下の例では表にスタイルクラスを適用していますが、"汎用ユーティリティクラス"は、DIV要素やその他の[[HTMLブロック要素|HTML Block Elements]]にも使用できます。
+
+!! 中央寄せの表
+
+表を水平方向に中央寄せにするには、`tc-center`を使用します:
+
+<<wikitext-example-without-html src:"""|tc-center|k
+|これはキャプションです |c
+|セル1 |セル2 |
+|セル3 |セル4 |
+|ヘッダー|ヘッダー|h
+|フッター|フッター|f
+""">>
+
+!! 中央寄せの表、80%幅
+
+full-tiddler-widthである表に、左右の余白を追加するには、`tc-max-width-80`を使用できます
+
+<<wikitext-example-without-html src:"""|tc-center tc-max-width-80|k
+|これはキャプションです |c
+|セル1 |<<.lorem>> |
+|<<.lorem>> |セル4 |
+|ヘッダー|ヘッダー|h
+""">>
+
+!! 最大幅の表
+
+表をTiddlerの幅いっぱいに広げるには、`tc-max-width`を使用します
+
+<<wikitext-example-without-html src:"""|tc-max-width|k
+|ヘッダー|ヘッダー|h
+|セル1 |セル2 |
+|セル3 |セル4 |
+""">>
+
+!! 最初の列の幅が最小の表
+
+次の例は、`tc-first-col-min-width`により、最初の列の幅がコンテンツに合わせて調整されるシンプルな"フォーム"を示しています。
+
+<<wikitext-example-without-html src:"""|tc-max-width tc-first-col-min-width|k
+|ヘッダー|ヘッダー|h
+|セル1 |<$edit-text tiddler="$:/temp/test-table-input" tag="input" field="test"/> |
+|セル3 |<$edit-text tiddler="$:/temp/test-table-input" field="text"/>  |
+""">>
+
+!! 最大幅のテキストウィジェットを備えた表
+
+ここでは、前の"フォーム"にクラス`tc-edit-max-width`を追加することで、[[Textウィジェット|TextWidget]]にフルの幅を与えるようにスタイルが付けられています。
+
+<<wikitext-example-without-html src:"""|tc-max-width tc-first-col-min-width tc-edit-max-width|k
+|ヘッダー|ヘッダー|h
+|セル1 |<$edit-text tiddler="$:/temp/test-table-input" tag="input" field="test"/> |
+|セル3 |<$edit-text tiddler="$:/temp/test-table-input" field="text"/>  |
+""">>
+
+!! 枠線の無い表
+
+以下は最大幅の表です。この表には最大幅の[[Textウィジェット|TextWidget]]が含まれています。最初の列は最小幅に設定されています。さらに、最初の列のすべてのリンクは、ウィンドウのサイズ変更に関係なく、改行(折り返し)__しない__ように設定されています。
+
+<<wikitext-example-without-html src:"""|tc-max-width tc-first-col-min-width tc-edit-max-width tc-table-no-border tc-first-link-nowrap|k
+| セル1|<$edit-text tiddler="$:/temp/test-table-input" tag="input" field="test"/> |
+|^ [[Tiddlerへのリンク|Link to a tiddler]]<br>さらに詳しい説明|<$edit-text tiddler="$:/temp/test-table-input" field="text"/>  |
+""">>
