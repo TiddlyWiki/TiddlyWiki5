@@ -26,7 +26,7 @@ jobs:
     
     # Step 2: Validate change notes
     - name: Validate Change Notes
-      uses: TiddlyWiki/cerebrus@v8
+      uses: TiddlyWiki/cerebrus@v8.1
       with:
         pr_number: ${{ github.event.pull_request.number }}
         repo: ${{ github.repository }}
