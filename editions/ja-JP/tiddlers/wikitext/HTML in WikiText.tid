@@ -1,0 +1,94 @@
+caption: HTML
+created: 20131205160816081
+modified: 20260307113719789
+original-modified: 20241025073517909
+tags: WikiText
+title: HTML in WikiText
+ja-title: WikiテキストでのHTML
+type: text/vnd.tiddlywiki
+
+! HTMLタグとコメント
+
+HTMLタグとコメントは[[Wikiテキスト|WikiText]]内でそのまま使用できます。例:
+
+```
+<article class="hello">
+これは私の素敵でシンプルなテキストブロックです。こんにちは
+<!-- このコメントはWiki化した出力には表示されません -->
+</article>
+```
+
+!! プラグマのコメント
+
+<<.from-version 5.2.0>> コメントは、Wikiテキストのブロック本体内だけでなく、プラグマと自由に混在できるようになりました。
+
+```
+<!-- 新: マクロを説明するコメント -->
+\define test()
+何らかのテキスト <!-- インラインコメント -->
+\end
+
+<<test>>
+```
+
+! 重要
+
+!! セキュリティ
+
+<<.warning """レンダリングしたHTMLコンテンツから、`on`で始まるHTML属性が削除されることに注意してください。これは、イベントハンドラ("onclick"など)が信頼できないJavaScriptを実行するための秘密の手段として利用されるのを防ぐためです。TiddlyWikiの設計目標は、実行可能なJavaScriptが明示的なJavaScriptモジュールTiddlerやrawマークアップTiddlerを介してのみシステムに侵入できるようにすることです。これにより、マルチユーザー環境で安全でないコンテンツをフィルタリングできるようになり、信頼できないWikiテキストの例をより安全にコピーできるようになります。""">> 
+
+!! ウィジェット
+
+<<.tip """[[ウィジェットはHTMLタグと同じ構文を共有します|Widgets in WikiText]]<br>そのため、次の情報はウィジェットにも適用されます。""">>
+
+! ブロックモード vs インラインモード
+
+HTML要素のコンテンツを[[ブロックモード|Block Mode WikiText]]で[[パース|WikiText Parser Modes]]するには、開始タグの後に2つの改行を続ける必要があります。
+
+2つの改行がない場合、タグの内容は[[インラインモード|Inline Mode WikiText]]で[[パース|WikiText Parser Modes]]します。つまり、Wikiテキストのテーブル、リスト、見出しなどのブロックモードの書式は認識されません。
+
+[[Wikiテキストパーサーモード: HTMLの例|WikiText parser mode: HTML examples]]と[[Wikiテキストパーサーモードの遷移|WikiText parser mode transitions]]も参照してください。
+
+! 自己終了タグ
+
+次のタグは'void'として扱われます。つまり、`<tag>`は`<tag/>`であるものとして扱われ、終了タグ`</tag>`は必要ありません(閉じタグが与えられた場合は無視され、プレーンテキストとして扱われます)。
+
+* `<area>`, `<base>`, `<br>`, `<col>`, `<command>`, `<embed>`, `<hr>`, `<img>`, `<input>`, `<keygen>`, `<link>`, `<meta>`, `<param>`, `<source>`, `<track>`, `<wbr>`
+
+他のタグを閉じないと、欠落している終了タグがTiddlerの末尾にあるかのように動作します。
+
+! 属性
+
+従来のHTML構文の拡張では、要素とウィジェットの属性を[[いくつかの方法|Widget Attributes]]で指定できます:
+
+* [[リテラル文字列|Literal Attribute Values]]
+* [[テキスト参照のトランスクルージョン|Transcluded Attribute Values]]
+* [[マクロ/変数のトランスクルージョン|Variable Attribute Values]]
+* [[フィルタ式の結果として|Filtered Attribute Values]]
+* <<.from-version "5.3.0">> [[指定した文字列に対してフィルタと変数の置換を実行した結果として|Substituted Attribute Values]]
+
+!! スタイル属性
+
+TiddlyWikiは、要素にCSSスタイルを割り当てるための通常のHTMLの''style''属性をサポートしています:
+
+```
+<div style="color:red;">こんにちは</div>
+```
+
+<<.from-version "5.2.2">> HTMLの拡張として、TiddlyWikiは個々のCSSスタイルを独立した属性としてアクセスする機能もサポートしています。例えば: 
+
+```
+<div style.color="red">こんにちは</div>
+```
+
+この構文の利点は、計算された値をCSSスタイルに割り当てるのが簡単になることです。例えば:
+
+```
+<div style.color={{!!color}}>こんにちは</div>
+```
+
+<<.from-version "5.3.6">> TiddlyWikiは[[CSSカスタムプロパティ|https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties]]を独立した属性として設定できるようになりました。例えば:
+
+```
+<div --bg-color={{{ [[red]] }}}>こんにちは</div>
+```
