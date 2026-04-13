@@ -1,5 +1,5 @@
 created: 20260413142327531
-modified: 20260413152214563
+modified: 20260413180029935
 tags: doc dev
 title: Wikitext EBNF
 type: text/vnd.tiddlywiki
@@ -136,18 +136,36 @@ The following table lists every parser rule file in `core/modules/parsers/wikipa
 
 !! Shared Productions
 
-Several productions appear in multiple rules across the grammar:
+The following productions are referenced throughout the six child tiddlers. They are defined here once as a single point of reference so that the child grammars stay concise and consistent.
 
 ```
-StringLiteral   ::= '"' [^"]* '"'
+(* === Shared Terminal Productions === *)
+
+StringLiteral   ::= '"""' AnyChar* '"""'
+                  | '"' [^"]* '"'
                   | "'" [^']* "'"
-                  | '[[' [^\]]* ']]'
-                  | '"""' .* '"""'
+                  | '[[' ( [^\]] | ']' [^\]] )* ']]'
 
 Classes         ::= ( '.' ClassName )*
-ClassName       ::= [a-zA-Z_-] [a-zA-Z0-9_-]*
+ClassName       ::= Letter ( Letter | Digit | '-' | '_' )*
 
 StyleDefs       ::= ( PropertyName ':' PropertyValue ';' )*
+
+(* === Shared Non-Terminal Productions === *)
+
+InlineRun       ::= ( InlineRule | PlainText )*    (* inline wikitext until terminator *)
+BlockContent    ::= ( Block | InlineRun | BlankLine )*    (* block-level wikitext until closing marker *)
+PlainText       ::= AnyChar+    (* characters not starting an inline rule *)
+
+(* === Character Classes === *)
+
+Letter          ::= [a-zA-Z]
+Digit           ::= [0-9]
+AnyChar         ::= (* any character *)
+WS              ::= [ \t]+    (* horizontal whitespace *)
+SP              ::= [ \t]+    (* alias for WS *)
+EOL             ::= '\r'? '\n' | EOF
+Newline         ::= EOL
 ```
 
-`StringLiteral` covers the four quoting forms used in widget attributes and filter parameters. `Classes` appears in image syntax, transclusions, and filtered transclusions to attach CSS classes. `StyleDefs` appears in style blocks and inline styles.
+`StringLiteral` covers the four quoting forms used in widget attributes and filter parameters. `Classes` appears in image syntax, transclusions, and filtered transclusions to attach CSS classes. `StyleDefs` appears in style blocks and inline styles. The non-terminal productions (`InlineRun`, `BlockContent`, `PlainText`) describe the recursive structure the parser uses when it enters a new parsing context. The character classes provide the building blocks that the terminal productions above are composed from.

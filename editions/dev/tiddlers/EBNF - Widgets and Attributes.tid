@@ -1,5 +1,5 @@
 created: 20260413142500338
-modified: 20260413150513462
+modified: 20260413180051442
 tags: doc dev [[Wikitext EBNF]]
 title: EBNF - Widgets and Attributes
 
@@ -39,11 +39,15 @@ Four quoting styles are supported. The `""".."""` triple-double-quote form allow
 
 Also unquoted: `attr=value` (the value must not contain `/` whitespace `<` `>` `"` `'` `` ` `` `=`).
 
+
+''Example:'' `<$list filter="[tag[doc]]">`, `<$text text='hello'>`, `<$set name=[[My Variable]]>`
 !!! 2. Filtered Value
 
 `attr={{{filter-expression}}}`
 
 The filter is evaluated at runtime. The first result of the filter becomes the attribute value.
+
+''Example:'' `<$text text={{{[tag[doc]first[]]}}}/>`
 
 !!! 3. Indirect Value (Text Reference)
 
@@ -51,11 +55,15 @@ The filter is evaluated at runtime. The first result of the filter becomes the a
 
 Looks up a text reference at runtime. The value inside the double braces is a standard TiddlyWiki text reference (e.g., `MyTiddler`, `MyTiddler!!field`, `MyTiddler##index`).
 
+''Example:'' `<$text text={{MyTiddler!!caption}}/>`
+
 !!! 4. Macro/Variable Value
 
 `attr=<<macroname params>>`
 
 Evaluates a macro or variable invocation and uses the result as the attribute value. The macro call syntax inside the angle brackets follows the standard macro invocation syntax.
+
+''Example:'' `<$text text=<<currentTiddler>>/>`
 
 !!! 5. MVV (Multi-Valued Variable) Value
 
@@ -63,17 +71,23 @@ Evaluates a macro or variable invocation and uses the result as the attribute va
 
 A variable reference evaluated at runtime. Internally stored as a transclusion node with `isMVV: true`.
 
+''Example:'' `<$text text=((my-variable))/>`
+
 !!! 6. Substituted Value
 
 `attr=` &#96;`text with $(variable)$ substitution`&#96; or `attr=` &#96;&#96;&#96;`multiline text`&#96;&#96;&#96;
 
 Text with `$(varname)$` placeholders that are replaced at runtime. This is a text substitution mechanism, not a filter. The triple-backtick form allows the value to span multiple lines and contain single backticks.
 
+''Example:'' (see Substituted Attributes in Detail below)
+
 !!! 7. Boolean (No Value)
 
 `disabled` alone (without `=`) means the attribute value is `"true"`.
 
 If the parser finds an attribute name followed by `=` but none of the value forms match, it also falls back to `"true"`.
+
+''Example:'' `<$list filter="[tag[doc]]" variable="item" counter="num">` (counter is a boolean-style attribute)
 
 !! Parse Order
 
