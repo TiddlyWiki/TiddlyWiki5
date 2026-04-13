@@ -13,8 +13,9 @@ alert-highlight: #881122
 alert-muted-foreground: #b99e2f
 background: #ffffff
 blockquote-bar: <<colour muted-foreground>>
-button-background: 
-button-foreground: 
+button-background:
+button-background-hover: rgba(255, 255, 255, 0.15)
+button-foreground:
 button-border: 
 code-background: #f7f7f9
 code-border: #e1e1e8
@@ -90,7 +91,7 @@ table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
 tag-background: #ec6
-tag-foreground: #ffffff
+tag-foreground: #333333
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #888888

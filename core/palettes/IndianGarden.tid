@@ -1,0 +1,134 @@
+title: $:/palettes/IndianGarden
+name: Indian Garden
+description: Dark palette inspired by an evening garden party under warm lights
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: dark
+
+alert-background: #4a3a10
+alert-border: #c4a050
+alert-highlight: #c43080
+alert-muted-foreground: #a08840
+background: #2a3028
+blockquote-bar: <<colour muted-foreground>>
+button-background: transparent
+button-background-hover: rgba(255, 255, 255, 0.1)
+button-foreground: inherit
+button-border:
+code-background: #222a20
+code-border: #3a4a30
+code-foreground: #c43080
+diff-delete-background: #4a2020
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background:
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #204a20
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background:
+diff-invisible-foreground: <<colour muted-foreground>>
+dirty-indicator: #c43080
+download-background: #5a8a30
+download-foreground: <<colour foreground>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: #323a2e
+dropdown-border: #4a5a3a
+dropdown-tab-background-selected: <<colour dropdown-background>>
+dropdown-tab-background: #1a2418
+dropzone-background: rgba(90,138,48,0.7)
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: #a878b0
+external-link-foreground: #c43080
+footnote-target-background: #323828
+foreground: #e0dcd0
+highlight-background: #605020
+highlight-foreground: #f0ece0
+message-background: <<colour background>>
+message-border: <<colour muted-foreground>>
+message-foreground: <<colour foreground>>
+modal-backdrop: <<colour page-background>>
+modal-background: <<colour background>>
+modal-border: #4a5a3a
+modal-footer-background: <<colour background>>
+modal-footer-border: #3a4a30
+modal-header-border: #3a4a30
+muted-foreground: #8a9878
+network-activity-foreground: #5a8a30
+notification-background: <<colour dropdown-background>>
+notification-border: <<colour dropdown-background>>
+page-background: #1a2418
+pre-background: #222a20
+pre-border: #3a4a30
+primary: #c4a050
+selection-background:
+selection-foreground:
+select-tag-background: <<colour background>>
+select-tag-foreground: <<colour foreground>>
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: #c4a050
+sidebar-controls-foreground: #5a6a48
+sidebar-foreground-shadow: transparent
+sidebar-foreground: #a0a890
+sidebar-muted-foreground-hover: <<colour foreground>>
+sidebar-muted-foreground: #6a7a58
+sidebar-tab-background-selected: <<colour page-background>>
+sidebar-tab-background: transparent
+sidebar-tab-border-selected: #4a5a3a
+sidebar-tab-border: transparent
+sidebar-tab-divider: #3a4a30
+sidebar-tab-foreground-selected: <<colour foreground>>
+sidebar-tab-foreground: #8a9878
+sidebar-tiddler-link-foreground-hover: #c4a050
+sidebar-tiddler-link-foreground: #a0a890
+site-title-foreground: #c4a050
+stability-stable: #5a8a30
+stability-experimental: #c4a050
+stability-deprecated: #c43080
+stability-legacy: #6a5acd
+static-alert-foreground: #8a9878
+tab-background-selected: <<colour background>>
+tab-background: transparent
+tab-border-selected: #4a5a3a
+tab-border: transparent
+tab-divider: #3a4a30
+tab-foreground-selected: <<colour foreground>>
+tab-foreground: #8a9878
+table-border: #3a4a30
+table-footer-background: #222a20
+table-header-background: #283028
+tag-background: #8a6878
+tag-foreground: #f0ece0
+testcase-accent-level-1: #2a4a5a
+testcase-accent-level-2: #c4a050
+testcase-accent-level-3: #5a8a30
+tiddler-background: <<colour background>>
+tiddler-border: #3a4a30
+tiddler-controls-foreground-hover: #c4a050
+tiddler-controls-foreground-selected: #c4a050
+tiddler-controls-foreground: #4a5a3a
+tiddler-editor-background: transparent
+tiddler-editor-border-image:
+tiddler-editor-border: #3a4a30
+tiddler-editor-fields-even: rgba(255, 255, 255, 0.05)
+tiddler-editor-fields-odd: rgba(255, 255, 255, 0.02)
+tiddler-info-background: #283028
+tiddler-info-border: #3a4a30
+tiddler-info-tab-background: <<colour tiddler-editor-fields-odd>>
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: #6a7a58
+tiddler-title-foreground: #f0ece0
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
+untagged-background: #5a6a48
+very-muted-foreground: #4a5a3a

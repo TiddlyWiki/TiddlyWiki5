@@ -12,8 +12,9 @@ alert-muted-foreground: <<colour muted-foreground>>
 background: #FAFAFA
 blockquote-bar: <<colour page-background>>
 button-background: transparent
+button-background-hover: rgba(0, 0, 0, 0.12)
 button-foreground: inherit
-button-border: <<colour tag-background>>
+button-border:
 code-background: #ececec
 code-border: #ececec
 code-foreground: 

@@ -12,6 +12,7 @@ alert-muted-foreground: <<colour muted-foreground>>
 background: #303030
 blockquote-bar: <<colour page-background>>
 button-background: transparent
+button-background-hover: rgba(255, 255, 255, 0.15)
 button-foreground: inherit
 button-border: <<colour tag-background>>
 code-background: <<colour pre-background>>
@@ -61,7 +62,7 @@ sidebar-controls-foreground: #5d5d5d
 sidebar-foreground-shadow: transparent
 sidebar-foreground: rgba(255, 255, 255, 0.54)
 sidebar-muted-foreground-hover: rgba(255, 255, 255, 0.54)
-sidebar-muted-foreground: rgba(255, 255, 255, 0.38)
+sidebar-muted-foreground: rgba(255, 255, 255, 0.50)
 sidebar-tab-background-selected: <<colour page-background>>
 sidebar-tab-background: transparent
 sidebar-tab-border-selected: <<colour table-border>>
@@ -84,7 +85,7 @@ table-border: #3a3a3a
 table-footer-background: <<colour tiddler-editor-fields-odd>>
 table-header-background: <<colour tiddler-editor-fields-even>>
 tag-background: #ec6
-tag-foreground: <<colour button-foreground>>
+tag-foreground: <<colour background>>
 tiddler-background: <<colour background>>
 tiddler-border: rgb(55,55,55)
 tiddler-controls-foreground-hover: <<colour sidebar-controls-foreground-hover>>
