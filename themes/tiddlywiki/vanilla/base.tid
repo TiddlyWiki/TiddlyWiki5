@@ -96,7 +96,8 @@ html button {
 	color: <<colour button-foreground>>;
 	fill: <<colour button-foreground>>;
 	background: <<colour button-background>>;
-	border-color: <<colour button-border>>;
+	border: 1px solid <<colour button-border>>;
+	border-radius: 0.25em;
 	cursor: pointer;
 }
 
@@ -947,6 +948,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-sidebar-tools-item {
 	margin-top: 3px;
 	margin-bottom: 3px;
+}
+
+.tc-sidebar-tools-item button:hover {
+	background-color: <<colour button-background-hover>>;
 }
 
 .tc-sidebar-header .tc-missing-tiddler-label {
@@ -1848,6 +1853,7 @@ html body.tc-body.tc-single-tiddler-window {
 	min-width: 380px;
 	border: 1px solid <<colour dropdown-border>>;
 	background-color: <<colour dropdown-background>>;
+	color: <<colour foreground>>;
 	padding: 7px 0 7px 0;
 	margin: 4px 0 0 0;
 	white-space: nowrap;
@@ -1888,7 +1894,8 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 1em;
 }
 
-.tc-drop-down a, .tc-drop-down button {
+.tc-drop-down a, .tc-drop-down button,
+.tc-drop-down a.tc-tiddlylink {
 	display: block;
 	padding: 0 14px 0 14px;
 	width: 100%;
@@ -1959,6 +1966,7 @@ html body.tc-body.tc-single-tiddler-window {
 	min-width: 220px;
 	border: 1px solid <<colour dropdown-border>>;
 	background-color: <<colour dropdown-background>>;
+	color: <<colour foreground>>;
 	padding: 7px 0;
 	margin: 4px 0 0 0;
 	white-space: nowrap;
@@ -1970,9 +1978,11 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-left: -12px;
 }
 
-.tc-block-dropdown a {
+.tc-block-dropdown a,
+.tc-block-dropdown a.tc-tiddlylink {
 	display: block;
 	padding: 4px 14px 4px 14px;
+	color: <<colour foreground>>;
 }
 
 .tc-block-dropdown.tc-search-drop-down a {
@@ -2227,6 +2237,11 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top-right-radius: 2px;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
+}
+
+.tc-tab-buttons button:hover:not(.tc-tab-selected) {
+	background-color: <<colour tab-background-selected>>;
+	color: <<colour tab-foreground-selected>>;
 }
 
 .tc-tab-buttons.tc-vertical button {
