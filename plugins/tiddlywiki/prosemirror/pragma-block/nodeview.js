@@ -13,10 +13,6 @@ with widget blocks (header toolbar, edit/save/cancel/delete buttons).
 
 const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/nodeview/base-source-editable.js").BaseSourceEditableNodeView;
 
-/**
- * SourceBlockNodeView — unified NodeView for pragma_block and opaque_block.
- * Extends BaseSourceEditableNodeView to get the same toolbar UI as widget blocks.
- */
 class SourceBlockNodeView extends BaseSourceEditableNodeView {
 	constructor(node, view, getPos, blockType, parentWidget) {
 		super(node, view, getPos, parentWidget);
@@ -103,9 +99,6 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 	}
 }
 
-/**
- * Create a ProseMirror plugin that registers NodeViews for pragma_block and opaque_block.
- */
 function createPragmaBlockNodeViewPlugin(hostWidget) {
 	const Plugin = require("prosemirror-state").Plugin;
 	return new Plugin({

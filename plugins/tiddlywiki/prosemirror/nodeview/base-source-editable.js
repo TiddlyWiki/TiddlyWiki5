@@ -10,10 +10,6 @@ All subclasses share a unified bottom-right badge pattern.
 
 "use strict";
 
-/**
- * Base class for node views with a unified bottom-right edit badge.
- * Subclasses override renderEditMode(), renderViewMode(), and saveEdit().
- */
 class BaseSourceEditableNodeView {
 	constructor(node, view, getPos, parentWidget) {
 		this.node = node;
@@ -32,16 +28,10 @@ class BaseSourceEditableNodeView {
 		this._titleEl = null;
 	}
 
-	/**
-	 * Get a translatable string from a language tiddler.
-	 */
 	getLanguageString(suffix, fallback) {
 		return $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/" + suffix, fallback);
 	}
 
-	/**
-	 * Get SVG icon from a TW image tiddler.
-	 */
 	getSvgIcon(tiddlerTitle, size = "1em") {
 		try {
 			const htmlStr = $tw.wiki.renderTiddler("text/html", tiddlerTitle, {
@@ -56,9 +46,6 @@ class BaseSourceEditableNodeView {
 		}
 	}
 
-	/**
-	 * Set icon on a button element safely.
-	 */
 	setButtonIcon(button, tiddlerTitle, fallbackText) {
 		const svgEl = this.getSvgIcon(tiddlerTitle);
 		if(svgEl) {
@@ -69,9 +56,6 @@ class BaseSourceEditableNodeView {
 		}
 	}
 
-	/**
-	 * Create the unified bottom-right badge header with title and buttons.
-	 */
 	createHeader(titleText) {
 		const header = document.createElement("span");
 		header.className = "pm-nodeview-header";
@@ -163,9 +147,6 @@ class BaseSourceEditableNodeView {
 		return btn;
 	}
 
-	/**
-	 * Enter edit mode.
-	 */
 	enterEditMode() {
 		if(this.isEditMode) return;
 		this.isEditMode = true;
@@ -181,9 +162,6 @@ class BaseSourceEditableNodeView {
 		this.renderEditMode();
 	}
 
-	/**
-	 * Exit edit mode without saving.
-	 */
 	cancelEdit() {
 		if(!this.isEditMode) return;
 		this.isEditMode = false;
@@ -198,9 +176,6 @@ class BaseSourceEditableNodeView {
 		this.renderViewMode();
 	}
 
-	/**
-	 * Commit edit — save and exit edit mode.
-	 */
 	commitEdit() {
 		if(!this.isEditMode) return;
 		const editValue = this.getEditValue();
@@ -216,9 +191,6 @@ class BaseSourceEditableNodeView {
 		this.saveEdit(editValue);
 	}
 
-	/**
-	 * Create a textarea for editing raw text.
-	 */
 	createEditTextarea(initialValue, rows = 2) {
 		const textarea = document.createElement("textarea");
 		textarea.className = "pm-nodeview-editor";
@@ -238,11 +210,6 @@ class BaseSourceEditableNodeView {
 		return textarea;
 	}
 
-	/**
-	 * Create a form with labeled input fields.
-	 * @param {Array} fields — [{key, label, value, type, placeholder}]
-	 * @returns {HTMLElement}
-	 */
 	createEditForm(fields) {
 		const form = document.createElement("div");
 		form.className = "pm-nodeview-form";
@@ -280,9 +247,6 @@ class BaseSourceEditableNodeView {
 		return form;
 	}
 
-	/**
-	 * Get current edit value. Override in subclasses that use forms.
-	 */
 	getEditValue() {
 		if(this.contentContainer) {
 			const textarea = this.contentContainer.querySelector(".pm-nodeview-editor");
@@ -299,9 +263,6 @@ class BaseSourceEditableNodeView {
 		return "";
 	}
 
-	/**
-	 * Delete this node.
-	 */
 	handleDelete() {
 		const pos = this.getPos();
 		if(typeof pos !== "number") return;

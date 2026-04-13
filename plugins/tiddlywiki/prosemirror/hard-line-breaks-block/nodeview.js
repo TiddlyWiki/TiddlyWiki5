@@ -12,11 +12,6 @@ Uses the unified pm-nodeview badge pattern.
 
 "use strict";
 
-/**
- * HardLineBreaksNodeView — NodeView for the hard_line_breaks_block node type.
- * The inner content is always directly editable via contentDOM.
- * A border + label appear on hover to indicate the block boundary.
- */
 class HardLineBreaksNodeView {
 	constructor(node, view, getPos) {
 		this.node = node;
@@ -56,9 +51,6 @@ class HardLineBreaksNodeView {
 	}
 }
 
-/**
- * Create a ProseMirror plugin that registers the NodeView for hard_line_breaks_block.
- */
 function createHardLineBreaksNodeViewPlugin() {
 	const Plugin = require("prosemirror-state").Plugin;
 	const PluginKey = require("prosemirror-state").PluginKey;

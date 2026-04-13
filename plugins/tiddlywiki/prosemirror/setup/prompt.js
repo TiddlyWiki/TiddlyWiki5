@@ -7,7 +7,6 @@ module-type: library
 
 "use strict";
 
-
 const prefix = "ProseMirror-prompt";
 
 function openPrompt(options) {

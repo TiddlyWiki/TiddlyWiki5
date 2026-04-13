@@ -9,14 +9,6 @@ Widget block UI actions (focus/edit) for ProseMirror
 
 "use strict";
 
-/**
- * Try to find the widget-block nodeview near a document position and enter edit mode.
- * Uses DOM proximity because widget-block is implemented as a paragraph nodeview.
- *
- * @param {import("prosemirror-view").EditorView} view
- * @param {number} pos
- * @returns {boolean}
- */
 function tryEnterWidgetBlockEditModeAtPos(view, pos) {
 	if(!view || typeof pos !== "number") {
 		return false;
@@ -70,13 +62,6 @@ function tryEnterWidgetBlockEditModeAtPos(view, pos) {
 	return true;
 }
 
-/**
- * Schedule entering widget edit mode near the current selection.
- * Retries for a few frames because nodeviews/decorations update asynchronously.
- *
- * @param {import("prosemirror-view").EditorView} view
- * @param {{maxAttempts?: number}} [options]
- */
 function scheduleEnterWidgetBlockEditModeNearSelection(view, options) {
 	const maxAttempts = (options && options.maxAttempts) || 6;
 	const expectedWidgetName = options && options.expectedWidgetName;

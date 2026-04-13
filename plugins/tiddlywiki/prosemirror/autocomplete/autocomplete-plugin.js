@@ -21,21 +21,12 @@ const LINK_TRIGGERS_TITLE = "$:/config/prosemirror/autocomplete/link-triggers";
 const TRANSCLUSION_TRIGGERS_TITLE = "$:/config/prosemirror/autocomplete/transclusion-triggers";
 const MACRO_TRIGGERS_TITLE = "$:/config/prosemirror/autocomplete/macro-triggers";
 
-/**
- * Parse trigger config from tiddler text.
- * Each line is an alias trigger string, e.g. "【【" or "[["
- * Returns array of trigger strings.
- */
 function parseTriggerConfig(wiki, title, defaults) {
 	const text = wiki.getTiddlerText(title, "");
 	if(!text.trim()) return defaults;
 	return text.split("\n").map((s) => { return s.trim(); }).filter((s) => { return s.length > 0; });
 }
 
-/**
- * Build the trigger map from config.
- * Returns array of { trigger: string, type: "link"|"transclusion"|"macro", closing: string }
- */
 function buildTriggerMap(wiki) {
 	const linkTriggers = parseTriggerConfig(wiki, LINK_TRIGGERS_TITLE, ["[["]);
 	const transclusionTriggers = parseTriggerConfig(wiki, TRANSCLUSION_TRIGGERS_TITLE, ["{{"]);
@@ -57,9 +48,6 @@ function buildTriggerMap(wiki) {
 	return result;
 }
 
-/**
- * Get tiddler titles for completion suggestions.
- */
 function getTiddlerCompletions(wiki, query) {
 	const allTitles = wiki.getTiddlers({ sortField: "modified", reverse: true });
 	if(!query) return allTitles.slice(0, 20);
@@ -73,9 +61,6 @@ function getTiddlerCompletions(wiki, query) {
 	return matched;
 }
 
-/**
- * Get macro/procedure names for completion.
- */
 function getMacroCompletions(wiki, query) {
 	// Collect all tiddlers tagged with $:/tags/Macro or that define \define/\procedure
 	let macroNames = [];
@@ -105,9 +90,6 @@ function getMacroCompletions(wiki, query) {
 	}).slice(0, 20);
 }
 
-/**
- * Create the autocomplete ProseMirror plugin.
- */
 function createAutocompletePlugin(wiki) {
 	const triggerMap = buildTriggerMap(wiki);
 
@@ -244,9 +226,6 @@ function createAutocompletePlugin(wiki) {
 	});
 }
 
-/**
- * Accept the selected completion item.
- */
 function acceptCompletion(view, state) {
 	if(!state.items.length) {
 		view.dispatch(view.state.tr.setMeta(AUTOCOMPLETE_KEY, { active: false }));
@@ -273,9 +252,6 @@ function acceptCompletion(view, state) {
 	view.focus();
 }
 
-/**
- * Autocomplete dropdown view (manages DOM).
- */
 class AutocompleteView {
 	constructor(editorView, wiki) {
 		this.view = editorView;

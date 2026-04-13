@@ -11,10 +11,6 @@ Floating toolbar that appears above text selection for inline formatting.
 
 const toggleMark = require("prosemirror-commands").toggleMark;
 
-/**
- * BubbleMenu — appears when there is a non-empty text selection.
- * Provides quick access to inline formatting (bold, italic, etc.)
- */
 class BubbleMenu {
 	constructor(view, schema) {
 		this.view = view;
@@ -112,7 +108,6 @@ class BubbleMenu {
 		this.update(this.view);
 	}
 
-	/** Called by ProseMirror view on every update to reposition/show/hide. */
 	update(view) {
 		if(this._destroyed) return;
 		this.view = view;

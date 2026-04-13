@@ -9,12 +9,6 @@ Widget/Procedure block parser and recognizer for ProseMirror
 
 "use strict";
 
-/**
- * Parse a widget invocation string using character scanning.
- * Handles << >> delimiters correctly even when >> appears inside quoted values.
- * @param {string} text - The text to parse, e.g. `<<list-links "[tag[task]sort[title]]">>`
- * @returns {object|null} - Parsed widget object or null if not a valid widget
- */
 function parseWidget(text) {
 	const trimmed = (text || "").trim();
 	if(!trimmed.startsWith("<<") || trimmed.length < 5) {
@@ -49,13 +43,6 @@ function parseWidget(text) {
 	};
 }
 
-/**
- * Scan for the closing >> that is not inside a quoted string.
- * Respects double-quotes, single-quotes, and triple-double-quote delimiters.
- * @param {string} str - Full macro string (from <<...)
- * @param {number} start - Position to begin scanning (after the name)
- * @returns {number} - Position of the first > in >>, or -1 if not found
- */
 function scanForClosingBrackets(str, start) {
 	let pos = start;
 	while(pos < str.length - 1) {
@@ -101,12 +88,6 @@ function scanForClosingBrackets(str, start) {
 	return -1;
 }
 
-/**
- * Parse widget attributes using character scanning.
- * Handles TiddlyWiki-style key:"value", key='value', key=value, and positional args.
- * @param {string} str - The attributes string
- * @returns {object} - Parsed attributes as key-value pairs
- */
 function parseAttributes(str) {
 	const attributes = {};
 	if(!str) return attributes;
@@ -141,15 +122,6 @@ function parseAttributes(str) {
 	return attributes;
 }
 
-/**
- * Read a value starting at pos. Value can be:
- * - Triple-double-quoted: """..."""
- * - Double-quoted: "..."
- * - Single-quoted: '...'
- * - [[...]] (double bracket)
- * - Unquoted: sequence of non-whitespace
- * @returns {{value: string, end: number}}
- */
 function readValue(str, pos) {
 	if(pos >= str.length) return { value: null, end: pos };
 	// Triple-double-quote
@@ -193,11 +165,6 @@ function readValue(str, pos) {
 	return { value: str.substring(start, pos), end: pos };
 }
 
-/**
- * Check if a line contains a widget invocation
- * @param {string} line - The line text
- * @returns {object|null} - Parsed widget or null
- */
 function recognizeWidget(line) {
 	return parseWidget(line);
 }

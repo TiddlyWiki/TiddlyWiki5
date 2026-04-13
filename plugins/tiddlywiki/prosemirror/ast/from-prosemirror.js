@@ -394,13 +394,6 @@ function hard_break(builder, node) {
 	};
 }
 
-/**
- * hard_line_breaks_block → wiki AST paragraph with hardlinebreaks-marked children.
- * Serializes back as:  """\nline1\nline2\n"""
- *
- * The PM node content is pure inline content (text + hard_break nodes).
- * The isRuleEnd <br> is NOT stored in PM state — it's re-added here on serialization.
- */
 function hard_line_breaks_block(builder, node) {
 	const children = convertNodes(builder, node.content || []);
 
@@ -442,10 +435,6 @@ function hard_line_breaks_block(builder, node) {
 	};
 }
 
-/**
- * Pragma block — preserves raw text for \define, \procedure, \function, \widget, \import, \rules etc.
- * Restored back to wiki AST by re-parsing the raw text.
- */
 function pragma_block(builder, node) {
 	const rawText = (node.attrs && node.attrs.rawText) || "";
 	let parsedNodes = [];
@@ -479,10 +468,6 @@ function pragma_block(builder, node) {
 	return { type: "text", text: rawText };
 }
 
-/**
- * Opaque block — preserves raw wikitext for unsupported constructs (typed blocks, etc.).
- * Re-parsed to restore the original wiki AST.
- */
 function opaque_block(builder, node) {
 	const rawText = (node.attrs && node.attrs.rawText) || "";
 	try {
@@ -496,11 +481,6 @@ function opaque_block(builder, node) {
 	return { type: "text", text: rawText };
 }
 
-/**
- * Table → wiki AST (element tag="table" with rule="table").
- * TW serializer expects: table > [tbody] > [tr] > [td|th]
- * PM table structure:   table > [table_row] > [table_cell|table_header]
- */
 function table_node(builder, node) {
 	const rows = [];
 	if(node.content) {
@@ -605,9 +585,6 @@ function definition_description(builder, node) {
 	};
 }
 
-/**
- * Key is `node.type`, value is node converter function.
- */
 const builders = {
 	doc: doc,
 	paragraph: paragraph,

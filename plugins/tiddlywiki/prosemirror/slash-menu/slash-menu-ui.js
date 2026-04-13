@@ -53,10 +53,6 @@ class SlashMenuUI {
 		this._checkState();
 	}
 
-	/**
-	 * Called externally (from dispatchTransaction) to trigger a menu state check.
-	 * Restarts the rAF loop if the menu becomes visible.
-	 */
 	checkState() {
 		if(this._destroyed) return;
 		this.updateMenu();

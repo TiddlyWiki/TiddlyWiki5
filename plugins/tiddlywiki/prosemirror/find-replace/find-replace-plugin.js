@@ -17,11 +17,6 @@ const TextSelection = require("prosemirror-state").TextSelection;
 
 const FIND_REPLACE_KEY = new PluginKey("tw-find-replace");
 
-/**
- * Get SVG icon from a TW image tiddler.
- * Uses TW's rendering pipeline so wikitext macros (<<size>> etc.) are resolved.
- * Returns a sanitized SVG DOM element or null.
- */
 function getSvgIcon(tiddlerTitle, size) {
 	size = size || "1em";
 	try {
@@ -37,10 +32,6 @@ function getSvgIcon(tiddlerTitle, size) {
 	return null;
 }
 
-/**
- * Find all occurrences of a search term in the document.
- * Returns array of { from, to } positions.
- */
 function findMatches(doc, searchTerm, caseSensitive) {
 	if(!searchTerm) return [];
 	const results = [];
@@ -61,9 +52,6 @@ function findMatches(doc, searchTerm, caseSensitive) {
 	return results;
 }
 
-/**
- * Create decorations for all search matches.
- */
 function createDecorations(doc, matches, currentIndex) {
 	const decorations = [];
 	for(let i = 0; i < matches.length; i++) {
@@ -176,9 +164,6 @@ function createFindReplacePlugin(wiki) {
 	});
 }
 
-/**
- * Find & Replace UI panel.
- */
 class FindReplaceView {
 	constructor(editorView, wiki) {
 		this.view = editorView;
