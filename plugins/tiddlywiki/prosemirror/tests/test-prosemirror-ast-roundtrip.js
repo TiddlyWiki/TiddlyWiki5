@@ -22,10 +22,6 @@ if(!$tw.browser) {
 			return;
 		}
 
-		/**
-		 * Helper: run a full round-trip and return the result wikitext.
-		 * wikitext → parse → toPM → fromPM → serialize
-		 */
 		function roundTrip(wikitext) {
 			const parseResult = $tw.wiki.parseText("text/vnd.tiddlywiki", wikitext);
 			const wikiAst = parseResult.tree;

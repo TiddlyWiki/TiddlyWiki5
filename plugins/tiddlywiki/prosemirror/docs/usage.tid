@@ -1,0 +1,52 @@
+title: $:/plugins/tiddlywiki/prosemirror/docs/usage
+caption: Usage
+tags: $:/plugins/tiddlywiki/prosemirror/docs
+
+! Using the ProseMirror Editor
+
+!! Enabling the Editor
+
+To enable ProseMirror as the default editor for wikitext tiddlers, go to ''Control Panel > Editing'' and select "prosemirror" as the editor type, or set the [[EditorTypeMappings|$:/config/EditorTypeMappings/text/vnd.tiddlywiki]] tiddler to `prosemirror`.
+
+!! Text Formatting
+
+Use toolbar buttons or keyboard shortcuts:
+
+|!Format |!WikiText |!Shortcut |
+|Bold |`''text''` |Ctrl/Cmd+B |
+|Italic |`//text//` |Ctrl/Cmd+I |
+|Underline |`__text__` |Ctrl/Cmd+U |
+|Strikethrough |`~~text~~` | |
+|Inline code |<code>``text``</code> |Ctrl/Cmd+` |
+|Superscript |`^^text^^` | |
+|Subscript |`,,text,,` | |
+
+!! Block Types
+
+Use the ''Type'' dropdown in the toolbar, or press `/` to open the slash menu:
+
+* Heading 1–6 (`!` to `!!!!!!`)
+* Blockquote (`>` or `<<<`)
+* Code block (triple backtick ` ``` `)
+* Horizontal rule (`---`)
+* Ordered, unordered, and task lists
+
+!! Links
+
+Click the link icon in the toolbar or use `[[` to start a link. Wiki links navigate within TiddlyWiki; external links open in a new tab.
+
+!! Tables
+
+Insert via the slash menu or toolbar ''Insert > Table''. Tables are 3×3 by default with a header row.
+
+!! Widget Blocks
+
+Macro/widget syntax like `<<macroName "param">>` is automatically detected and rendered as a visual block. Click the block to edit its source.
+
+!! Find & Replace
+
+Press `Ctrl/Cmd+F` to open find, `Ctrl/Cmd+H` to open find & replace.
+
+!! Source Panel
+
+Click the source toggle button in the toolbar to view/edit the raw WikiText side by side.

@@ -1,0 +1,31 @@
+title: $:/plugins/tiddlywiki/prosemirror/docs/extending
+caption: Extending
+tags: $:/plugins/tiddlywiki/prosemirror/docs
+
+! Extending the Editor
+
+!! Custom Editor Actions
+
+Add toolbar and slash-menu items by creating tiddlers tagged `$:/tags/ProseMirror/EditorAction` with:
+
+|!Field |!Description |
+|`action-id` |Built-in command id (e.g. `bold`, `heading1`, `insert-table`) |
+|`caption` |Display label |
+|`description` |Tooltip / slash-menu description |
+|`category` |`inline-format`, `block-type`, `block-insert`, or `other` |
+|`icon` |Tiddler title of an SVG icon |
+|`keyboard-shortcut` |PM keymap string (e.g. `Mod-b`) or `none` |
+
+!! Custom Snippets
+
+Any tiddler tagged `$:/tags/TextEditor/Snippet` appears in the slash menu. If the snippet text is a pragma (e.g. `\procedure`), it is inserted as a visual pragma block.
+
+!! Architecture
+
+The editor is built on [[ProseMirror|https://prosemirror.net/]]:
+
+* ''Schema'' (`schema.js`): defines PM node/mark types corresponding to WikiText constructs
+* ''AST conversion'' (`ast/`): bidirectional conversion between TW parse tree and PM document JSON
+* ''Engine'' (`engine.js`): implements the TW editor engine interface
+* ''Widget'' (`widget.js`): the `$prosemirror` and `edit-prosemirror` widgets
+* ''Plugins'' (`editor-plugins/`): bubble menu, drag handle, link tooltip, markdown shortcuts, block placeholder
