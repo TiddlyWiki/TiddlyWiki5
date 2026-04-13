@@ -913,7 +913,7 @@ test.describe("ProseMirror Editor - Configuration", () => {
 test.describe("ProseMirror Editor - Integration", () => {
 	test("should save content to tiddler", async ({ page }) => {
 		// Use isolated harness to control the tiddler title we read back
-		const tiddlerTitle = "ProseMirrorTestTiddler";
+		let tiddlerTitle = "ProseMirrorTestTiddler";
 		const editor = await setupProseMirrorTest(page, tiddlerTitle, {
 			useReadmeTiddler: false,
 			initialText: "Start"
@@ -931,7 +931,7 @@ test.describe("ProseMirror Editor - Integration", () => {
 	});
 
 	test("should load existing tiddler content", async ({ page }) => {
-		const tiddlerTitle = "ProseMirrorTestTiddler";
+		let tiddlerTitle = "ProseMirrorTestTiddler";
 		const editor = await setupProseMirrorTest(page, tiddlerTitle, {
 			useReadmeTiddler: false,
 			initialText: "Existing content"

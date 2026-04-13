@@ -10,7 +10,7 @@ These run in node without a real EditorView, testing the helper methods.
 
 "use strict";
 
-describe("ProseMirror engine operation mapping", function() {
+describe("ProseMirror engine operation mapping", () => {
 
 	let buildSchema, ProseMirrorEngine;
 	try {
@@ -35,13 +35,13 @@ describe("ProseMirror engine operation mapping", function() {
 	}
 
 	// Test buildSchema
-	describe("buildSchema", function() {
+	describe("buildSchema", () => {
 
-		it("should export buildSchema function", function() {
+		it("should export buildSchema function", () => {
 			expect(typeof buildSchema).toBe("function");
 		});
 
-		it("should return a ProseMirror schema with expected node types", function() {
+		it("should return a ProseMirror schema with expected node types", () => {
 			const schema = buildSchema();
 			expect(schema).toBeDefined();
 			expect(schema.nodes).toBeDefined();
@@ -56,13 +56,13 @@ describe("ProseMirror engine operation mapping", function() {
 			expect(schema.nodes.list).toBeDefined();
 		});
 
-		it("should have custom block types (pragma_block, opaque_block)", function() {
+		it("should have custom block types (pragma_block, opaque_block)", () => {
 			const schema = buildSchema();
 			expect(schema.nodes.pragma_block).toBeDefined();
 			expect(schema.nodes.opaque_block).toBeDefined();
 		});
 
-		it("should have extended marks (underline, strike, superscript, subscript)", function() {
+		it("should have extended marks (underline, strike, superscript, subscript)", () => {
 			const schema = buildSchema();
 			expect(schema.marks.strong).toBeDefined();
 			expect(schema.marks.em).toBeDefined();
@@ -74,7 +74,7 @@ describe("ProseMirror engine operation mapping", function() {
 			expect(schema.marks.subscript).toBeDefined();
 		});
 
-		it("should set image node attrs with tw-specific fields", function() {
+		it("should set image node attrs with tw-specific fields", () => {
 			const schema = buildSchema();
 			const imageSpec = schema.nodes.image.spec;
 			expect(imageSpec.attrs.twSource).toBeDefined();
@@ -84,7 +84,7 @@ describe("ProseMirror engine operation mapping", function() {
 			expect(imageSpec.attrs.height).toBeDefined();
 		});
 
-		it("should mark superscript and subscript as mutually exclusive", function() {
+		it("should mark superscript and subscript as mutually exclusive", () => {
 			const schema = buildSchema();
 			expect(schema.marks.superscript.spec.excludes).toBe("subscript");
 			expect(schema.marks.subscript.spec.excludes).toBe("superscript");
@@ -92,7 +92,7 @@ describe("ProseMirror engine operation mapping", function() {
 	});
 
 	// Test _wrapSelectionToMark mapping (we instantiate a mock engine)
-	describe("_wrapSelectionToMark mapping", function() {
+	describe("_wrapSelectionToMark mapping", () => {
 
 		// Create a minimal mock engine to test the prototype method
 		const proto = {};
@@ -102,45 +102,45 @@ describe("ProseMirror engine operation mapping", function() {
 		}
 
 		if(proto._wrapSelectionToMark) {
-			it("should map bold prefix/suffix to 'strong'", function() {
+			it("should map bold prefix/suffix to 'strong'", () => {
 				expect(proto._wrapSelectionToMark("''", "''")).toBe("strong");
 			});
 
-			it("should map italic prefix/suffix to 'em'", function() {
+			it("should map italic prefix/suffix to 'em'", () => {
 				expect(proto._wrapSelectionToMark("//", "//")).toBe("em");
 			});
 
-			it("should map underline prefix/suffix to 'underline'", function() {
+			it("should map underline prefix/suffix to 'underline'", () => {
 				expect(proto._wrapSelectionToMark("__", "__")).toBe("underline");
 			});
 
-			it("should map strikethrough prefix/suffix to 'strike'", function() {
+			it("should map strikethrough prefix/suffix to 'strike'", () => {
 				expect(proto._wrapSelectionToMark("~~", "~~")).toBe("strike");
 			});
 
-			it("should map superscript prefix/suffix to 'superscript'", function() {
+			it("should map superscript prefix/suffix to 'superscript'", () => {
 				expect(proto._wrapSelectionToMark("^^", "^^")).toBe("superscript");
 			});
 
-			it("should map subscript prefix/suffix to 'subscript'", function() {
+			it("should map subscript prefix/suffix to 'subscript'", () => {
 				expect(proto._wrapSelectionToMark(",,", ",,")).toBe("subscript");
 			});
 
-			it("should map backtick prefix/suffix to 'code'", function() {
+			it("should map backtick prefix/suffix to 'code'", () => {
 				expect(proto._wrapSelectionToMark("`", "`")).toBe("code");
 			});
 
-			it("should return null for non-matching prefix/suffix", function() {
+			it("should return null for non-matching prefix/suffix", () => {
 				expect(proto._wrapSelectionToMark("[[", "]]")).toBeNull();
 				expect(proto._wrapSelectionToMark("{{", "}}")).toBeNull();
 				expect(proto._wrapSelectionToMark("<<<", "<<<")).toBeNull();
 			});
 
-			it("should return null for asymmetric prefix/suffix", function() {
+			it("should return null for asymmetric prefix/suffix", () => {
 				expect(proto._wrapSelectionToMark("''", "//")).toBeNull();
 			});
 
-			it("should return null for null/empty args", function() {
+			it("should return null for null/empty args", () => {
 				expect(proto._wrapSelectionToMark(null, null)).toBeNull();
 				expect(proto._wrapSelectionToMark("", "")).toBeNull();
 			});

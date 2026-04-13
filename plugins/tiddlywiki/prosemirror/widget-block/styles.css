@@ -3,136 +3,17 @@ title: $:/plugins/tiddlywiki/prosemirror/widget-block/styles.css
 type: text/css
 tags: $:/tags/Stylesheet
 
-Styles for widget and procedure blocks in ProseMirror editor
+Styles for widget blocks in ProseMirror editor.
+Colour overrides are in styles/theme.
 
 \*/
 
-/* NodeView styles */
-.pm-widget-block-nodeview {
-	position: relative;
-	border: 0;
-	border-radius: 4px;
-	margin: 0;
-	background: transparent;
-	overflow: visible;
-}
-
-.pm-widget-block-nodeview:hover,
-.pm-widget-block-nodeview.selected,
-.pm-widget-block-nodeview.pm-widget-block-editing {
-	outline: 2px solid #2589D8;
-	outline-offset: 2px;
-}
-
-.pm-widget-block-nodeview-header {
-	position: absolute;
-	top: -30px;
-	right: 0;
-	background: linear-gradient(90deg, #2589D8 0%, #1E6BA8 100%);
-	color: white;
-	padding: 4px 8px;
-	display: flex;
-	gap: 8px;
-	justify-content: space-between;
-	align-items: center;
-	font-size: 12px;
-	font-weight: bold;
-	user-select: none;
-	border-radius: 999px;
-	opacity: 0;
-	pointer-events: none;
-	z-index: 5;
-}
-
-.pm-widget-block-nodeview:hover .pm-widget-block-nodeview-header,
-.pm-widget-block-nodeview.selected .pm-widget-block-nodeview-header,
-.pm-widget-block-nodeview.pm-widget-block-editing .pm-widget-block-nodeview-header {
-	opacity: 1;
-	pointer-events: auto;
-}
-
-.pm-widget-block-nodeview-title {
-	flex: 1;
-	font-family: monospace;
-	word-break: break-all;
-	padding-right: 0;
-}
-
-.pm-widget-block-nodeview-buttons {
-	display: flex;
-	gap: 4px;
-	align-items: center;
-}
-
-.pm-widget-block-nodeview-btn {
-	background: rgba(255, 255, 255, 0.2);
-	border: 1px solid rgba(255, 255, 255, 0.4);
-	color: white;
-	padding: 4px 6px;
-	border-radius: 3px;
-	cursor: pointer;
-	transition: background 0.2s;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 24px;
-	height: 24px;
-}
-
-.pm-widget-block-nodeview-btn:hover {
-	background: rgba(255, 255, 255, 0.3);
-}
-
-.pm-widget-block-nodeview-btn:active {
-	background: rgba(255, 255, 255, 0.4);
-}
-
-.pm-widget-block-nodeview-btn svg {
-	width: 16px;
-	height: 16px;
-	fill: currentColor;
-}
-
-.pm-widget-block-nodeview-delete:hover {
-	background: rgba(244, 67, 54, 0.3);
-	border-color: rgba(244, 67, 54, 0.5);
-}
-
-.pm-widget-block-nodeview-content {
-	padding: 0;
-	min-height: 1.5em;
-	color: inherit;
-	background: transparent;
-}
-
 .pm-widget-block-nodeview-error {
-	color: #C41E3A;
 	font-family: monospace;
 	padding: 8px;
-	background-color: #FFE5E5;
 	border-radius: 3px;
 	font-size: 12px;
 	margin: 8px 12px;
-}
-
-/* Edit mode styles */
-.pm-widget-block-nodeview-editor {
-	width: 100%;
-	min-height: 60px;
-	padding: 8px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	font-family: monospace;
-	font-size: 13px;
-	resize: vertical;
-	background: white;
-	box-sizing: border-box;
-}
-
-.pm-widget-block-nodeview-editor:focus {
-	outline: none;
-	border-color: #2589D8;
-	box-shadow: 0 0 0 2px rgba(37, 137, 216, 0.2);
 }
 
 /* Empty widget placeholder — shown when macro/widget renders nothing */
@@ -141,10 +22,8 @@ Styles for widget and procedure blocks in ProseMirror editor
 	padding: 4px 8px;
 	font-family: monospace;
 	font-size: 12px;
-	color: #999;
-	border: 1px dashed #ccc;
+	border: 1px dashed transparent;
 	border-radius: 3px;
-	background: #fafafa;
 	cursor: pointer;
 	user-select: none;
 	overflow: hidden;

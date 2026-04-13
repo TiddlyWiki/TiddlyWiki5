@@ -6,6 +6,7 @@ module-type: library
 NodeView for hard_line_breaks_block in ProseMirror.
 Renders as a block with a hover border indicator, while keeping the inner content
 directly editable (no separate edit/view modes needed).
+Uses the unified pm-nodeview badge pattern.
 
 \*/
 
@@ -22,20 +23,18 @@ class HardLineBreaksNodeView {
 		this.view = view;
 		this.getPos = getPos;
 
-		// Outer container — ProseMirror's "dom"
-		var container = document.createElement("div");
-		container.className = "pm-hard-line-breaks-block";
+		const container = document.createElement("div");
+		container.className = "pm-nodeview pm-nodeview-hardbreaks";
 
-		// Label badge — shows on hover, not editable
-		var label = document.createElement("span");
-		label.className = "pm-hard-line-breaks-block-label";
+		// Label badge — shows on hover via .pm-nodeview-header
+		const label = document.createElement("span");
+		label.className = "pm-nodeview-header";
 		label.setAttribute("contenteditable", "false");
 		label.textContent = '"""  Hard Line Breaks  """';
 		container.appendChild(label);
 
-		// Inner editable area — ProseMirror's "contentDOM"
-		var content = document.createElement("div");
-		content.className = "pm-hard-line-breaks-block-content";
+		const content = document.createElement("div");
+		content.className = "pm-nodeview-content";
 		container.appendChild(content);
 
 		this.dom = container;
@@ -48,13 +47,12 @@ class HardLineBreaksNodeView {
 		return true;
 	}
 
-	// Let ProseMirror handle selection display normally inside the block
 	selectNode() {
-		this.dom.classList.add("pm-hard-line-breaks-block-selected");
+		this.dom.classList.add("pm-nodeview-selected");
 	}
 
 	deselectNode() {
-		this.dom.classList.remove("pm-hard-line-breaks-block-selected");
+		this.dom.classList.remove("pm-nodeview-selected");
 	}
 }
 
@@ -62,14 +60,14 @@ class HardLineBreaksNodeView {
  * Create a ProseMirror plugin that registers the NodeView for hard_line_breaks_block.
  */
 function createHardLineBreaksNodeViewPlugin() {
-	var Plugin = require("prosemirror-state").Plugin;
-	var PluginKey = require("prosemirror-state").PluginKey;
+	const Plugin = require("prosemirror-state").Plugin;
+	const PluginKey = require("prosemirror-state").PluginKey;
 
 	return new Plugin({
 		key: new PluginKey("hardLineBreaksNodeView"),
 		props: {
 			nodeViews: {
-				hard_line_breaks_block: function(node, view, getPos) {
+				hard_line_breaks_block: (node, view, getPos) => {
 					return new HardLineBreaksNodeView(node, view, getPos);
 				}
 			}

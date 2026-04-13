@@ -11,7 +11,7 @@ with widget blocks (header toolbar, edit/save/cancel/delete buttons).
 
 "use strict";
 
-var BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/base-source-editable-nodeview.js").BaseSourceEditableNodeView;
+const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/nodeview/base-source-editable.js").BaseSourceEditableNodeView;
 
 /**
  * SourceBlockNodeView — unified NodeView for pragma_block and opaque_block.
@@ -25,25 +25,22 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		this.labelEl = null;
 		this.contentEl = null;
 
-		this.createDOM();
+		this._createDOM();
 	}
 
-	createDOM() {
-		var prefix = this.blockType === "pragma" ? "pm-pragma-block" : "pm-opaque-block";
-		var labelText = this.blockType === "pragma" ? "Pragma" : "Block";
+	_createDOM() {
+		const variant = this.blockType === "pragma" ? "pm-nodeview-pragma" : "pm-nodeview-opaque";
+		const labelText = this.blockType === "pragma" ? "Pragma" : "Block";
 
-		var container = document.createElement("div");
-		container.className = prefix;
+		const container = document.createElement("div");
+		container.className = "pm-nodeview " + variant;
 		container.setAttribute("contenteditable", "false");
 
-		// Header with title and buttons (Edit, Delete, Cancel)
-		var header = this.createHeader(labelText + ": " + (this.node.attrs.firstLine || ""));
-		header.contentEditable = "false";
+		const header = this.createHeader(labelText + ": " + (this.node.attrs.firstLine || ""));
 		container.appendChild(header);
 
-		// Content area — shows the first line summary in view mode, textarea in edit mode
-		var content = document.createElement("div");
-		content.className = prefix + "-content";
+		const content = document.createElement("div");
+		content.className = "pm-nodeview-content";
 		container.appendChild(content);
 
 		this.contentEl = content;
@@ -57,11 +54,8 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		if(!this.contentEl) return;
 		while(this.contentEl.firstChild) this.contentEl.removeChild(this.contentEl.firstChild);
 
-		var prefix = this.blockType === "pragma" ? "pm-pragma-block" : "pm-opaque-block";
-		this.dom.classList.remove(prefix + "-editing");
-
-		var label = document.createElement("span");
-		label.className = prefix + "-label";
+		const label = document.createElement("span");
+		label.className = "pm-nodeview-label";
 		label.textContent = this.node.attrs.firstLine || (this.blockType === "pragma" ? "(pragma)" : "(block)");
 		this.contentEl.appendChild(label);
 		this.labelEl = label;
@@ -71,28 +65,20 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		if(!this.contentEl) return;
 		while(this.contentEl.firstChild) this.contentEl.removeChild(this.contentEl.firstChild);
 
-		var prefix = this.blockType === "pragma" ? "pm-pragma-block" : "pm-opaque-block";
-		this.dom.classList.add(prefix + "-editing");
-
-		var textarea = this.createEditTextarea(this.node.attrs.rawText || "", 2);
+		const textarea = this.createEditTextarea(this.node.attrs.rawText || "", 2);
 		textarea.rows = Math.max(2, (this.node.attrs.rawText || "").split("\n").length);
 		this.contentEl.appendChild(textarea);
 
-		var ta = textarea;
-		setTimeout(function() { ta.focus(); }, 0);
+		setTimeout(() => { textarea.focus(); }, 0);
 	}
 
 	saveEdit(newText) {
-		var newRawText = (newText != null) ? newText : (this.node.attrs.rawText || "");
-		var newFirstLine = newRawText.split("\n")[0] || newRawText;
+		const newRawText = (newText != null) ? newText : (this.node.attrs.rawText || "");
+		const newFirstLine = newRawText.split("\n")[0] || newRawText;
 
-		// Exit edit mode before dispatching to avoid stale UI
-		this.isEditMode = false;
-
-		// Update the node attrs
-		var pos = this.getPos();
+		const pos = this.getPos();
 		if(typeof pos !== "number") return;
-		var tr = this.view.state.tr.setNodeMarkup(pos, null, {
+		const tr = this.view.state.tr.setNodeMarkup(pos, null, {
 			rawText: newRawText,
 			firstLine: newFirstLine.trim()
 		});
@@ -101,7 +87,7 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 
 	updateTitle() {
 		if(this._titleEl) {
-			var labelText = this.blockType === "pragma" ? "Pragma" : "Block";
+			const labelText = this.blockType === "pragma" ? "Pragma" : "Block";
 			this._titleEl.textContent = labelText + ": " + (this.node.attrs.firstLine || "");
 		}
 	}
@@ -115,46 +101,20 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		}
 		return true;
 	}
-
-	// Class name overrides for pragma/opaque styling
-	// eslint-disable-next-line class-methods-use-this
-	getHeaderClass() { return "pm-source-block-header"; }
-
-	// eslint-disable-next-line class-methods-use-this
-	getTitleClass() { return "pm-source-block-title"; }
-
-	// eslint-disable-next-line class-methods-use-this
-	getButtonsClass() { return "pm-source-block-buttons"; }
-
-	// eslint-disable-next-line class-methods-use-this
-	getDeleteButtonClass() { return "pm-source-block-btn pm-source-block-delete"; }
-
-	// eslint-disable-next-line class-methods-use-this
-	getEditButtonClass() { return "pm-source-block-btn pm-source-block-edit"; }
-
-	// eslint-disable-next-line class-methods-use-this
-	getSaveButtonClass() { return "pm-source-block-btn pm-source-block-save"; }
-
-	// eslint-disable-next-line class-methods-use-this
-	getCancelButtonClass() { return "pm-source-block-btn pm-source-block-cancel"; }
-
-	getEditorClass() {
-		return this.blockType === "pragma" ? "pm-pragma-block-editor" : "pm-opaque-block-editor";
-	}
 }
 
 /**
  * Create a ProseMirror plugin that registers NodeViews for pragma_block and opaque_block.
  */
 function createPragmaBlockNodeViewPlugin(hostWidget) {
-	var Plugin = require("prosemirror-state").Plugin;
+	const Plugin = require("prosemirror-state").Plugin;
 	return new Plugin({
 		props: {
 			nodeViews: {
-				pragma_block: function(node, view, getPos) {
+				pragma_block: (node, view, getPos) => {
 					return new SourceBlockNodeView(node, view, getPos, "pragma", hostWidget);
 				},
-				opaque_block: function(node, view, getPos) {
+				opaque_block: (node, view, getPos) => {
 					return new SourceBlockNodeView(node, view, getPos, "opaque", hostWidget);
 				}
 			}

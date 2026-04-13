@@ -9,11 +9,11 @@ Get the Prosemirror AST from a Wiki AST
 
 function buildParagraph(context, node) {
 	// Detect hard line breaks blocks and split the paragraph children iteratively
-	var children = node.children || [];
-	var result = [];
-	var currentP = [];
+	const children = node.children || [];
+	const result = [];
+	let currentP = [];
 
-	for(var i = 0; i < children.length; i++) {
+	for(let i = 0; i < children.length; i++) {
 		if(children[i].rule === "hardlinebreaks") {
 			if(currentP.length > 0) {
 				result.push({
@@ -22,14 +22,14 @@ function buildParagraph(context, node) {
 				});
 				currentP = [];
 			}
-			var hardBlock = [];
+			const hardBlock = [];
 			while(i < children.length && children[i].rule === "hardlinebreaks") {
 				hardBlock.push(children[i]);
 				i++;
 			}
 			i--; // Backtrack for the outer loop increment
 			// Strip the closing isRuleEnd <br> — it's the """ syntax marker, not actual content
-			var contentBlock = hardBlock.filter(function(n) { return !n.isRuleEnd; });
+			const contentBlock = hardBlock.filter((n) => { return !n.isRuleEnd; });
 			result.push({
 				type: "hard_line_breaks_block",
 				content: convertNodes(context, contentBlock)
@@ -70,8 +70,8 @@ function buildHeading(context, node, level) {
  * Create a child context with incremented nesting level.
  */
 function childContext(context) {
-	var newContext = {};
-	for(var key in context) {
+	const newContext = {};
+	for(let key in context) {
 		if(context.hasOwnProperty(key)) {
 			newContext[key] = context[key];
 		}
@@ -82,8 +82,8 @@ function childContext(context) {
 
 function buildUnorderedList(context, node) {
 	// ProseMirror requires each list item to be its own list node
-	var ctx = childContext(context);
-	return node.children.map(function(item) {
+	const ctx = childContext(context);
+	return node.children.map((item) => {
 		return {
 			type: "list",
 			attrs: {
@@ -98,8 +98,8 @@ function buildUnorderedList(context, node) {
 }
 
 function buildOrderedList(context, node) {
-	var ctx = childContext(context);
-	return node.children.map(function(item) {
+	const ctx = childContext(context);
+	return node.children.map((item) => {
 		return {
 			type: "list",
 			attrs: {
@@ -155,8 +155,8 @@ function wrapTextNodesInParagraphs(context, nodes) {
 }
 
 function buildListItem(context, node) {
-	var ctx = childContext(context);
-	var processedContent = convertNodes(ctx, node.children);
+	const ctx = childContext(context);
+	const processedContent = convertNodes(ctx, node.children);
 	// Ensure content starts with a block element (typically paragraph)
 	return wrapTextNodesInParagraphs(context, processedContent);
 }
@@ -168,7 +168,7 @@ function buildTextWithMark(context, node, markType) {
 			// Add the mark to the text node
 			const marks = childNode.marks || [];
 			const newMarks = (childNode.marks || []).concat([{ type: markType }]);
-			return Object.assign({}, childNode, { marks: newMarks });
+			return { ...childNode, ...{ marks: newMarks } };
 		}
 		return childNode;
 	});
@@ -248,10 +248,10 @@ function buildCodeBlock(context, node) {
 
 function buildBlockquote(context, node) {
 	// Extract cite text if present (<<<text\n<<<cite)
-	var citeText = null;
-	var bodyChildren = [];
-	var children = node.children || [];
-	for(var ci = 0; ci < children.length; ci++) {
+	let citeText = null;
+	const bodyChildren = [];
+	let children = node.children || [];
+	for(let ci = 0; ci < children.length; ci++) {
 		if(children[ci].type === "element" && children[ci].tag === "cite") {
 			// Serialize cite children to plain text
 			citeText = extractPlainText(children[ci]);
@@ -272,9 +272,9 @@ function buildBlockquote(context, node) {
 function extractPlainText(node) {
 	if(!node) return "";
 	if(node.type === "text") return node.text || "";
-	var result = "";
+	let result = "";
 	if(node.children) {
-		for(var i = 0; i < node.children.length; i++) {
+		for(let i = 0; i < node.children.length; i++) {
 			result += extractPlainText(node.children[i]);
 		}
 	}
@@ -298,15 +298,15 @@ function buildBr(context, node) {
  * The link AST node has type "link", rule "prettylink", attributes.to, and children
  */
 function buildLink(context, node) {
-	var target = (node.attributes && node.attributes.to) ? node.attributes.to.value : "";
-	var content = convertNodes(context, node.children);
+	const target = (node.attributes && node.attributes.to) ? node.attributes.to.value : "";
+	const content = convertNodes(context, node.children);
 	// Apply link mark to all text children
-	return content.map(function(childNode) {
+	return content.map((childNode) => {
 		if(childNode.type === "text") {
-			var marks = (childNode.marks || []).slice();
+			const marks = (childNode.marks || []).slice();
 			marks.push({ type: "link", attrs: { href: target, title: null } });
-			var result = {};
-			for(var key in childNode) {
+			const result = {};
+			for(let key in childNode) {
 				if(childNode.hasOwnProperty(key)) {
 					result[key] = childNode[key];
 				}
@@ -323,14 +323,14 @@ function buildLink(context, node) {
  * These come from prettylink (external), prettyextlink, or extlink rules
  */
 function buildAnchor(context, node) {
-	var href = (node.attributes && node.attributes.href) ? node.attributes.href.value : "";
-	var content = convertNodes(context, node.children);
-	return content.map(function(childNode) {
+	const href = (node.attributes && node.attributes.href) ? node.attributes.href.value : "";
+	const content = convertNodes(context, node.children);
+	return content.map((childNode) => {
 		if(childNode.type === "text") {
-			var marks = (childNode.marks || []).slice();
+			const marks = (childNode.marks || []).slice();
 			marks.push({ type: "link", attrs: { href: href, title: null } });
-			var result = {};
-			for(var key in childNode) {
+			const result = {};
+			for(let key in childNode) {
 				if(childNode.hasOwnProperty(key)) {
 					result[key] = childNode[key];
 				}
@@ -356,19 +356,19 @@ function buildTable(context, node) {
 	if(!node.children || node.children.length === 0) {
 		return buildOpaqueFromNode(context, node);
 	}
-	var rows = [];
-	for(var i = 0; i < node.children.length; i++) {
-		var child = node.children[i];
+	const rows = [];
+	for(let i = 0; i < node.children.length; i++) {
+		const child = node.children[i];
 		if(child.type === "element" && child.tag === "tr") {
-			var row = buildTableRow(context, child);
+			const row = buildTableRow(context, child);
 			if(row) rows.push(row);
 		} else if(child.type === "element" && (child.tag === "tbody" || child.tag === "thead" || child.tag === "tfoot")) {
 			// Intermediate row container — extract tr children
 			if(child.children) {
-				for(var j = 0; j < child.children.length; j++) {
-					var grandchild = child.children[j];
+				for(let j = 0; j < child.children.length; j++) {
+					const grandchild = child.children[j];
 					if(grandchild.type === "element" && grandchild.tag === "tr") {
-						var row2 = buildTableRow(context, grandchild);
+						const row2 = buildTableRow(context, grandchild);
 						if(row2) rows.push(row2);
 					}
 				}
@@ -386,9 +386,9 @@ function buildTable(context, node) {
 
 function buildTableRow(context, node) {
 	if(!node.children || node.children.length === 0) return null;
-	var cells = [];
-	for(var i = 0; i < node.children.length; i++) {
-		var child = node.children[i];
+	const cells = [];
+	for(let i = 0; i < node.children.length; i++) {
+		const child = node.children[i];
 		if(child.type === "element" && (child.tag === "td" || child.tag === "th")) {
 			cells.push(buildTableCell(context, child, child.tag === "th"));
 		}
@@ -401,19 +401,19 @@ function buildTableRow(context, node) {
 }
 
 function buildTableCell(context, child, isHeader) {
-	var cellContent = convertNodes(context, child.children);
+	let cellContent = convertNodes(context, child.children);
 	// Table cells need block content; wrap inline in a paragraph
 	if(!cellContent || cellContent.length === 0) {
 		cellContent = [{ type: "paragraph" }];
 	} else {
-		var needsWrap = cellContent.every(function(n) {
+		const needsWrap = cellContent.every((n) => {
 			return n.type === "text" || (n.marks && n.marks.length > 0);
 		});
 		if(needsWrap) {
 			cellContent = [{ type: "paragraph", content: cellContent }];
 		}
 	}
-	var attrs = {};
+	const attrs = {};
 	if(child.attributes) {
 		if(child.attributes.colspan) {
 			attrs.colspan = parseInt(child.attributes.colspan.value) || 1;
@@ -434,10 +434,10 @@ function buildTableCell(context, child, isHeader) {
  * Wiki AST structure: element.tag="dl" > children=[dt/dd elements]
  */
 function buildDefinitionList(context, node) {
-	var items = [];
-	var children = node.children || [];
-	for(var i = 0; i < children.length; i++) {
-		var child = children[i];
+	const items = [];
+	const children = node.children || [];
+	for(let i = 0; i < children.length; i++) {
+		const child = children[i];
 		if(child.type === "element" && child.tag === "dt") {
 			items.push(buildDefinitionTerm(context, child));
 		} else if(child.type === "element" && child.tag === "dd") {
@@ -500,12 +500,12 @@ const elementBuilders = {
 	a: buildAnchor,
 	cite: buildCite,
 	table: buildTable,
-	tbody: function(context, node) { return buildTable(context, { children: node.children }); },
-	thead: function(context, node) { return buildTable(context, { children: node.children }); },
-	tfoot: function(context, node) { return buildTable(context, { children: node.children }); },
+	tbody: (context, node) => { return buildTable(context, { children: node.children }); },
+	thead: (context, node) => { return buildTable(context, { children: node.children }); },
+	tfoot: (context, node) => { return buildTable(context, { children: node.children }); },
 	tr: buildTableRow,
-	td: function(context, node) { return buildTableCell(context, node, false); },
-	th: function(context, node) { return buildTableCell(context, node, true); },
+	td: (context, node) => { return buildTableCell(context, node, false); },
+	th: (context, node) => { return buildTableCell(context, node, true); },
 	dl: buildDefinitionList,
 	dt: buildDefinitionTerm,
 	dd: buildDefinitionDescription
@@ -558,8 +558,8 @@ function image(context, node) {
  */
 function transclude(context, node) {
 	// Check if this is a macrocall (has $variable attribute with macrocallblock rule)
-	var hasVariable = node.attributes && node.attributes.$variable;
-	var isMacroCall = hasVariable && (node.rule === "macrocallblock" || node.rule === "macrocall" || node.rule === "macrodef");
+	const hasVariable = node.attributes && node.attributes.$variable;
+	const isMacroCall = hasVariable && (node.rule === "macrocallblock" || node.rule === "macrocall" || node.rule === "macrodef");
 	
 	if(!isMacroCall) {
 		// For non-macro transclusions ({{tiddler}}, <$transclude>), preserve as opaque
@@ -580,12 +580,12 @@ function transclude(context, node) {
 			const attr = node.orderedAttributes[i];
 			if(attr.name !== "$variable") {
 				widgetText += " ";
-				var safeValue = attr.value || "";
+				const safeValue = attr.value || "";
 				// Use triple-quotes if value contains double-quotes or >>
-				var needsTriple = safeValue.indexOf('"') >= 0 || safeValue.indexOf(">>" ) >= 0;
-				var q = needsTriple ? '"""' : '"';
+				const needsTriple = safeValue.indexOf('"') >= 0 || safeValue.indexOf(">>" ) >= 0;
+				const q = needsTriple ? '"""' : '"';
 				// For positional parameters, just add the value
-				if(attr.name.match(/^\d+$/)) {
+				if(attr.name.match(/^(param)?\d+$/)) {
 					widgetText += q + safeValue + q;
 				} else {
 					// For named parameters, add name:value (colon syntax for TW5)
@@ -620,7 +620,7 @@ function link(context, node) {
  */
 function serializeNodeToRawText(node) {
 	try {
-		var tree = Array.isArray(node) ? node : [node];
+		const tree = Array.isArray(node) ? node : [node];
 		return $tw.utils.serializeWikitextParseTree(tree);
 	} catch(e) {
 		return JSON.stringify(node);
@@ -632,8 +632,8 @@ function serializeNodeToRawText(node) {
  * Preserves raw text so the content is not lost on round-trip.
  */
 function buildOpaqueFromNode(context, node) {
-	var rawText = serializeNodeToRawText(node);
-	var firstLine = rawText.split("\n")[0] || rawText;
+	const rawText = serializeNodeToRawText(node);
+	const firstLine = rawText.split("\n")[0] || rawText;
 	return {
 		type: "opaque_block",
 		attrs: {
@@ -650,19 +650,19 @@ function buildOpaqueFromNode(context, node) {
  */
 function pragmaNode(context, node) {
 	// Serialize just this pragma node (without its children, which are the rest of the document)
-	var pragmaCopy = {};
-	for(var key in node) {
+	const pragmaCopy = {};
+	for(let key in node) {
 		if(node.hasOwnProperty(key) && key !== "children") {
 			pragmaCopy[key] = node[key];
 		}
 	}
 	pragmaCopy.children = [];
-	var rawText = serializeNodeToRawText(pragmaCopy);
-	var firstLine = rawText.split("\n")[0] || rawText;
+	const rawText = serializeNodeToRawText(pragmaCopy);
+	const firstLine = rawText.split("\n")[0] || rawText;
 	
 	// Also convert children (the rest of the document after the pragma)
-	var childResults = convertNodes(context, node.children || []);
-	var pragmaResult = {
+	const childResults = convertNodes(context, node.children || []);
+	const pragmaResult = {
 		type: "pragma_block",
 		attrs: {
 			rawText: rawText,
@@ -678,8 +678,8 @@ function pragmaNode(context, node) {
  */
 function entity(context, node) {
 	// Decode HTML entity to the actual character without using innerHTML
-	var entityStr = node.entity || "";
-	var entityMap = {
+	const entityStr = node.entity || "";
+	const entityMap = {
 		"&ndash;": "\u2013",
 		"&mdash;": "\u2014",
 		"&amp;": "&",
@@ -697,12 +697,12 @@ function entity(context, node) {
 		"&times;": "\u00D7",
 		"&divide;": "\u00F7"
 	};
-	var decoded = entityMap[entityStr];
+	let decoded = entityMap[entityStr];
 	if(decoded === undefined) {
 		// Try numeric entity: &#123; or &#x1F4A9;
-		var numMatch = entityStr.match(/^&#(x?)([0-9a-fA-F]+);$/);
+		const numMatch = entityStr.match(/^&#(x?)([0-9a-fA-F]+);$/);
 		if(numMatch) {
-			var codePoint = parseInt(numMatch[2], numMatch[1] ? 16 : 10);
+			const codePoint = parseInt(numMatch[2], numMatch[1] ? 16 : 10);
 			if(codePoint > 0 && codePoint <= 0x10FFFF) {
 				decoded = String.fromCodePoint(codePoint);
 			}
@@ -786,8 +786,8 @@ function convertANode(context, node) {
 		return arrayOfNodes;
 	}
 	// Unknown node type — preserve as opaque_block to avoid data loss
-	var rawText = serializeNodeToRawText(node);
-	var firstLine = rawText.split("\n")[0] || rawText;
+	const rawText = serializeNodeToRawText(node);
+	const firstLine = rawText.split("\n")[0] || rawText;
 	return [{
 		type: "opaque_block",
 		attrs: {
