@@ -1,0 +1,62 @@
+title: $:/plugins/tiddlywiki/prosemirror/language/
+
+AddNewLine: + new line
+Buttons/Cancel: Cancel
+Buttons/Delete: Delete
+Buttons/Edit: Edit
+Buttons/SaveChanges: Save changes
+ImagePicker/Title: Image
+Menu/AddOrRemoveLink: Add or remove link
+Menu/CreateLink: Create a link
+Menu/InsertImage: Insert image
+Menu/LinkTarget: Link target
+Prompt/RequiredField: Required field
+ReplaceImage: Replace image
+Settings/MarkdownShortcuts: Enable Markdown-style input shortcuts
+Settings/MarkdownShortcutsHint: Use Markdown syntax like **bold**, *italic*, ~~strike~~, `code`, # Heading, --- for horizontal rule and ``` for code blocks. Output is always wikitext.
+SlashMenu/BlockType: Block Type
+SlashMenu/TurnIntoCodeblock: Turn into codeblock
+SlashMenu/TurnIntoParagraph: Turn into paragraph
+SlashMenu/TurnIntoQuote: Turn into quote
+SlashMenu/AriaLabel: Slash menu commands
+SlashMenu/FilterAriaLabel: Filter commands
+SlashMenu/FilterPlaceholder: Filter...
+SlashMenu/NoMatches: No matching commands
+SourcePanel/Title: WikiText Source
+BlockMenu/FilterPlaceholder: Filter actions...
+DragHandle/Actions: Actions
+DragHandle/AriaLabel: Drag to reorder, click for options
+DragHandle/Blockquote: Blockquote
+DragHandle/BulletList: Bullet list
+DragHandle/CodeBlock: Code block
+DragHandle/Dedent: Dedent
+DragHandle/Delete: Delete
+DragHandle/Duplicate: Duplicate
+DragHandle/FilterAriaLabel: Filter actions
+DragHandle/FilterPlaceholder: Filter actions...
+DragHandle/Heading: Heading
+DragHandle/Indent: Indent
+DragHandle/List: List
+DragHandle/NumberedList: Numbered list
+DragHandle/Paragraph: Paragraph
+DragHandle/TaskList: Task list
+DragHandle/TurnInto: Turn into
+FindReplace/CaseSensitive: Case sensitive
+FindReplace/Next: Next
+FindReplace/Previous: Previous
+FindReplace/Replace: Replace
+FindReplace/ReplaceAll: Replace All
+FindReplace/ReplacePlaceholder: Replace...
+FindReplace/SearchPlaceholder: Find...
+Settings/Autocomplete/Caption: Autocomplete
+Settings/Autocomplete/DefDescTriggers: Definition description triggers (`:`)
+Settings/Autocomplete/DefDescTriggersHint: One trigger per line. Type at the start of a line to create a definition description (<dd>). Default: : and ：
+Settings/Autocomplete/DefTermTriggers: Definition term triggers (`;`)
+Settings/Autocomplete/DefTermTriggersHint: One trigger per line. Type at the start of a line to create a definition term (<dt>). Default: ; and ；
+Settings/Autocomplete/Description: Configure trigger characters for autocompletion of links, transclusions, and macros
+Settings/Autocomplete/LinkTriggers: Link triggers (`[[`)
+Settings/Autocomplete/LinkTriggersHint: One trigger per line. Type these characters to open link autocompletion. Default: [[ and 【【
+Settings/Autocomplete/MacroTriggers: Macro triggers (`<<`)
+Settings/Autocomplete/MacroTriggersHint: One trigger per line. Type these characters to open macro autocompletion. Default: << and 《《
+Settings/Autocomplete/TransclusionTriggers: Transclusion triggers (`{{`)
+Settings/Autocomplete/TransclusionTriggersHint: One trigger per line. Type these characters to open transclusion autocompletion. Default: {{ and 「『
