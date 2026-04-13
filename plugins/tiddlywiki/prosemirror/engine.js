@@ -10,216 +10,44 @@ Implements the engine interface required by $:/core/modules/editor/factory.js.
 
 "use strict";
 
-var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
+const HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
 
-var wikiAstFromProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js").from;
-var wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js").to;
+const wikiAstFromProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js").from;
+const wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js").to;
+const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/schema.js");
 
-var EditorState = require("prosemirror-state").EditorState;
-var EditorView = require("prosemirror-view").EditorView;
-var Schema = require("prosemirror-model").Schema;
-var TextSelection = require("prosemirror-state").TextSelection;
-var basicSchema = require("prosemirror-schema-basic").schema;
-var createListPlugins = require("prosemirror-flat-list").createListPlugins;
-var createListSpec = require("prosemirror-flat-list").createListSpec;
-var listKeymap = require("prosemirror-flat-list").listKeymap;
-var exampleSetup = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js").exampleSetup;
-var keymap = require("prosemirror-keymap").keymap;
-var placeholderPlugin = require("$:/plugins/tiddlywiki/prosemirror/setup/placeholder.js").placeholderPlugin;
-var SlashMenuPlugin = require("$:/plugins/tiddlywiki/prosemirror/slash-menu.js").SlashMenuPlugin;
-var SlashMenuUI = require("$:/plugins/tiddlywiki/prosemirror/slash-menu-ui.js").SlashMenuUI;
-var getAllMenuElements = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js").getAllMenuElements;
-var createWidgetBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/widget-block/plugin.js").createWidgetBlockPlugin;
-var createWidgetBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/widget-block/plugin.js").createWidgetBlockNodeViewPlugin;
-var createImageBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/image-block/plugin.js").createImageBlockPlugin;
-var createImageNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/image/plugin.js").createImageNodeViewPlugin;
-var createPragmaBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/pragma-block/nodeview.js").createPragmaBlockNodeViewPlugin;
-var createHardLineBreaksNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/hard-line-breaks-block/nodeview.js").createHardLineBreaksNodeViewPlugin;
-var debounce = require("$:/core/modules/utils/debounce.js").debounce;
-var pmCommands = require("prosemirror-commands");
-var flatListCommands = require("prosemirror-flat-list");
-var BubbleMenu = require("$:/plugins/tiddlywiki/prosemirror/bubble-menu.js").BubbleMenu;
-var createDragHandlePlugin = require("$:/plugins/tiddlywiki/prosemirror/drag-handle.js").createDragHandlePlugin;
-var getMarkdownInputRules = require("$:/plugins/tiddlywiki/prosemirror/markdown-shortcuts.js").getMarkdownInputRules;
-var inputRules = require("prosemirror-inputrules").inputRules;
-var createAutocompletePlugin = require("$:/plugins/tiddlywiki/prosemirror/autocomplete/autocomplete-plugin.js").createAutocompletePlugin;
-var createFindReplacePlugin = require("$:/plugins/tiddlywiki/prosemirror/find-replace/find-replace-plugin.js").createFindReplacePlugin;
+const { EditorState, TextSelection } = require("prosemirror-state");
+const { EditorView } = require("prosemirror-view");
+const { createListPlugins, listKeymap } = require("prosemirror-flat-list");
+const { exampleSetup } = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js");
+const { keymap } = require("prosemirror-keymap");
+const { placeholderPlugin } = require("$:/plugins/tiddlywiki/prosemirror/setup/placeholder.js");
+const { SlashMenuPlugin } = require("$:/plugins/tiddlywiki/prosemirror/slash-menu/slash-menu.js");
+const { SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/slash-menu/slash-menu-ui.js");
+const { getAllMenuElements } = require("$:/plugins/tiddlywiki/prosemirror/slash-menu/menu-elements.js");
+const { createWidgetBlockPlugin, createWidgetBlockNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/widget-block/plugin.js");
+const { createImageBlockPlugin } = require("$:/plugins/tiddlywiki/prosemirror/image-block/plugin.js");
+const { createImageNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/image/plugin.js");
+const { createPragmaBlockNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/pragma-block/nodeview.js");
+const { createHardLineBreaksNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/hard-line-breaks-block/nodeview.js");
+const { debounce } = require("$:/core/modules/utils/debounce.js");
+const pmCommands = require("prosemirror-commands");
+const flatListCommands = require("prosemirror-flat-list");
+const { BubbleMenu } = require("$:/plugins/tiddlywiki/prosemirror/editor-plugins/bubble-menu.js");
+const { createLinkTooltipPlugin } = require("$:/plugins/tiddlywiki/prosemirror/editor-plugins/link-tooltip.js");
+const { createBlockPlaceholderPlugin } = require("$:/plugins/tiddlywiki/prosemirror/editor-plugins/block-placeholder.js");
+const { createDragHandlePlugin } = require("$:/plugins/tiddlywiki/prosemirror/editor-plugins/drag-handle.js");
+const { getMarkdownInputRules } = require("$:/plugins/tiddlywiki/prosemirror/editor-plugins/markdown-shortcuts.js");
+const { inputRules } = require("prosemirror-inputrules");
+const { createAutocompletePlugin } = require("$:/plugins/tiddlywiki/prosemirror/autocomplete/autocomplete-plugin.js");
+const { createFindReplacePlugin } = require("$:/plugins/tiddlywiki/prosemirror/find-replace/find-replace-plugin.js");
 
 // prosemirror-tables — conditional require (not available in Node tests)
-var pmTables;
+let pmTables;
 try {
 	pmTables = require("prosemirror-tables");
 } catch(e) {
 	pmTables = null;
-}
-
-/**
- * Build the ProseMirror schema (shared between engine and standalone widget).
- */
-function buildSchema() {
-	var baseNodes = basicSchema.spec.nodes.append({ list: createListSpec() });
-	// Override blockquote to add cite attr for preserving <<<...<<<cite text
-	var baseBqSpec = basicSchema.spec.nodes.get("blockquote");
-	baseNodes = baseNodes.update("blockquote", Object.assign({}, baseBqSpec, {
-		attrs: { cite: { default: null } },
-		toDOM: function(node) {
-			return ["blockquote", 0];
-		},
-		parseDOM: [{ tag: "blockquote" }]
-	}));
-	var baseImageSpec = basicSchema.spec.nodes.get("image");
-	var nodes = baseNodes.update("image", Object.assign({}, baseImageSpec, {
-		attrs: Object.assign({}, baseImageSpec && baseImageSpec.attrs, {
-			width: { default: null },
-			height: { default: null },
-			twSource: { default: null },
-			twKind: { default: "shortcut" },
-			twTooltip: { default: null }
-		}),
-		toDOM: function(node) {
-			var attrs = {
-				src: node.attrs.src,
-				alt: node.attrs.alt,
-				title: node.attrs.title
-			};
-			if(node.attrs.width) attrs.width = node.attrs.width;
-			if(node.attrs.height) attrs.height = node.attrs.height;
-			if(node.attrs.twSource) attrs["data-tw-source"] = node.attrs.twSource;
-			if(node.attrs.twKind) attrs["data-tw-kind"] = node.attrs.twKind;
-			if(node.attrs.twTooltip) attrs["data-tw-tooltip"] = node.attrs.twTooltip;
-			return ["img", attrs];
-		},
-		parseDOM: [{
-			tag: "img[src]",
-			getAttrs: function(dom) {
-				return {
-					src: dom.getAttribute("src"),
-					title: dom.getAttribute("title"),
-					alt: dom.getAttribute("alt"),
-					width: dom.getAttribute("width") || null,
-					height: dom.getAttribute("height") || null,
-					twSource: dom.getAttribute("data-tw-source") || null,
-					twKind: dom.getAttribute("data-tw-kind") || "shortcut",
-					twTooltip: dom.getAttribute("data-tw-tooltip") || null
-				};
-			}
-		}]
-	})).append({
-		pragma_block: {
-			attrs: { rawText: { default: "" }, firstLine: { default: "" } },
-			group: "block", atom: true, selectable: true, draggable: true,
-			toDOM: function(node) {
-				var wrapper = document.createElement("div");
-				wrapper.className = "pm-pragma-block";
-				wrapper.setAttribute("data-raw-text", node.attrs.rawText);
-				wrapper.setAttribute("data-first-line", node.attrs.firstLine);
-				wrapper.setAttribute("contenteditable", "false");
-				var label = document.createElement("span");
-				label.className = "pm-pragma-block-label";
-				label.textContent = node.attrs.firstLine || "(pragma)";
-				wrapper.appendChild(label);
-				return wrapper;
-			},
-			parseDOM: [{
-				tag: "div.pm-pragma-block",
-				getAttrs: function(dom) {
-					return {
-						rawText: dom.getAttribute("data-raw-text") || "",
-						firstLine: dom.getAttribute("data-first-line") || ""
-					};
-				}
-			}]
-		},
-		opaque_block: {
-			attrs: { rawText: { default: "" }, firstLine: { default: "" } },
-			group: "block", atom: true, selectable: true, draggable: true,
-			toDOM: function(node) {
-				var wrapper = document.createElement("div");
-				wrapper.className = "pm-opaque-block";
-				wrapper.setAttribute("data-raw-text", node.attrs.rawText);
-				wrapper.setAttribute("data-first-line", node.attrs.firstLine);
-				wrapper.setAttribute("contenteditable", "false");
-				var label = document.createElement("span");
-				label.className = "pm-opaque-block-label";
-				label.textContent = node.attrs.firstLine || "(unsupported block)";
-				wrapper.appendChild(label);
-				return wrapper;
-			},
-			parseDOM: [{
-				tag: "div.pm-opaque-block",
-				getAttrs: function(dom) {
-					return {
-						rawText: dom.getAttribute("data-raw-text") || "",
-						firstLine: dom.getAttribute("data-first-line") || ""
-					};
-				}
-			}]
-		},
-		definition_list: {
-			group: "block",
-			content: "(definition_term | definition_description)+",
-			toDOM: function() { return ["dl", { class: "pm-definition-list" }, 0]; },
-			parseDOM: [{ tag: "dl" }]
-		},
-		definition_term: {
-			content: "inline*",
-			toDOM: function() { return ["dt", 0]; },
-			parseDOM: [{ tag: "dt" }],
-			defining: true
-		},
-		definition_description: {
-			content: "inline*",
-			toDOM: function() { return ["dd", 0]; },
-			parseDOM: [{ tag: "dd" }],
-			defining: true
-		},
-		hard_line_breaks_block: {
-			group: "block",
-			content: "inline*",
-			toDOM: function() { return ["div", { class: "pm-hard-line-breaks-block-wrapper" }, 0]; },
-			parseDOM: [{ tag: "div.pm-hard-line-breaks-block-wrapper" }]
-		}
-	});
-
-	// Add table nodes if prosemirror-tables is available
-	if(pmTables) {
-		var tableNodeSpecs = pmTables.tableNodes({
-			tableGroup: "block",
-			cellContent: "block+",
-			cellAttributes: {
-				background: {
-					default: null,
-					getFromDOM: function(dom) { return dom.style.backgroundColor || null; },
-					setDOMAttr: function(value, attrs) { if(value) attrs.style = (attrs.style || "") + "background-color: " + value + ";"; }
-				}
-			}
-		});
-		// Merge table node specs into nodes
-		nodes = nodes.append(tableNodeSpecs);
-	}
-
-	var extendedMarks = basicSchema.spec.marks.append({
-		underline: {
-			parseDOM: [{ tag: "u" }, { style: "text-decoration=underline" }],
-			toDOM: function() { return ["u", 0]; }
-		},
-		strike: {
-			parseDOM: [{ tag: "strike" }, { tag: "s" }, { tag: "del" }, { style: "text-decoration=line-through" }],
-			toDOM: function() { return ["strike", 0]; }
-		},
-		superscript: {
-			parseDOM: [{ tag: "sup" }],
-			toDOM: function() { return ["sup", 0]; },
-			excludes: "subscript"
-		},
-		subscript: {
-			parseDOM: [{ tag: "sub" }],
-			toDOM: function() { return ["sub", 0]; },
-			excludes: "superscript"
-		}
-	});
-
-	return new Schema({ nodes: nodes, marks: extendedMarks });
 }
 
 /**
@@ -322,7 +150,9 @@ class ProseMirrorEngine {
 					createHardLineBreaksNodeViewPlugin(),
 					createDragHandlePlugin(),
 					createAutocompletePlugin(this.widget.wiki),
-					createFindReplacePlugin(this.widget.wiki)
+					createFindReplacePlugin(this.widget.wiki),
+					createLinkTooltipPlugin(this),
+					createBlockPlaceholderPlugin(this.widget.wiki)
 				]
 				.concat(mdPlugin)
 				.concat(listPlugins)
@@ -812,4 +642,4 @@ class ProseMirrorEngine {
 }
 
 exports.ProseMirrorEngine = $tw.browser ? ProseMirrorEngine : require("$:/core/modules/editor/engines/simple.js").SimpleEngine;
-exports.buildSchema = buildSchema;
+exports.buildSchema = buildSchema; // re-exported from schema.js

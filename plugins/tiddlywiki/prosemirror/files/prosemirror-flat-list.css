@@ -27,6 +27,15 @@ different kinds (e.g. bullet list followed by ordered list). */
   margin-top: var(--pm-list-block-gap, 15px);
 }
 
+/* Reset ordered counter when an ordered list follows a non-ordered list (bullet/task/etc.)
+   so numbering restarts from 1, matching TiddlyWiki's default behavior.
+   Note: counter-set applies after counter-increment in Chrome, so we set to 1
+   (the value we want displayed), not 0. */
+.prosemirror-flat-list[data-list-kind=bullet] + .prosemirror-flat-list[data-list-kind=ordered],
+:not(.prosemirror-flat-list) + .prosemirror-flat-list[data-list-kind=ordered] {
+  counter-set: prosemirror-flat-list-counter 1;
+}
+
 /* In ProseMirror we wrap list item text in <p>. Browser default margins on <p>
 create extra vertical gaps between list items compared to rendered TW lists. */
 .prosemirror-flat-list > .list-content > p,

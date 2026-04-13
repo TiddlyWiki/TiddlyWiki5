@@ -8,13 +8,13 @@ module-type: widget
 if(!$tw.browser) {
 	return;
 }
-// separate the widget from the exports here, so we can skip the require of react code if `!$tw.browser`. Those ts code will error if loaded in the nodejs side.
-var components = require("$:/plugins/tiddlywiki/prosemirror/widget.js");
-var prosemirror = components.prosemirror;
+// Skip browser-only code when running in Node.js (e.g. tests, server-side rendering).
+// ProseMirror depends on DOM APIs that are not available in Node.
+const { prosemirror } = require("$:/plugins/tiddlywiki/prosemirror/widget.js");
 exports.prosemirror = prosemirror;
 
 // Register the factory-based edit widget for integration with $:/core/modules/editor/factory.js
 // This allows the ProseMirror editor to be used via <$edit> when EditorTypeMappings maps to "prosemirror"
-var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTextWidgetFactory;
-var ProseMirrorEngine = require("$:/plugins/tiddlywiki/prosemirror/engine.js").ProseMirrorEngine;
+const { editTextWidgetFactory } = require("$:/core/modules/editor/factory.js");
+const { ProseMirrorEngine } = require("$:/plugins/tiddlywiki/prosemirror/engine.js");
 exports["edit-prosemirror"] = editTextWidgetFactory(ProseMirrorEngine, ProseMirrorEngine);
