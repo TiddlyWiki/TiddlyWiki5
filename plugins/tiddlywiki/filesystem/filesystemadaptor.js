@@ -27,6 +27,13 @@ function FileSystemAdaptor(options) {
 	this.pendingTimers = Object.create(null);
 	this.watchers = [];
 	this.setupWatchers();
+	// Only advertise getUpdatedTiddlers (and so opt into syncer polling) when
+	// there is actually a dynamic store to report changes from. Otherwise the
+	// syncer would reschedule its poll forever and keep node alive past the
+	// natural end of headless commands like --build.
+	if(!(this.boot.dynamicStores && this.boot.dynamicStores.length > 0)) {
+		this.getUpdatedTiddlers = undefined;
+	}
 }
 
 FileSystemAdaptor.prototype.name = "filesystem";
