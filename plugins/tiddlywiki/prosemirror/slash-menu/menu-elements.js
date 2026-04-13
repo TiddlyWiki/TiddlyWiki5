@@ -13,10 +13,6 @@ const scheduleEnterWidgetBlockEditModeNearSelection = require("$:/plugins/tiddly
 
 const EDITOR_ACTION_TAG = "$:/tags/ProseMirror/EditorAction";
 
-/**
- * Built-in command registry: actionId → PM command factory.
- * Each entry receives (schema) and returns a PM command function (state, dispatch, view) => boolean.
- */
 function getBuiltinActionCommands(schema) {
 	const pmCommands = require("prosemirror-commands");
 	return {
@@ -94,6 +90,10 @@ function getBuiltinActionCommands(schema) {
 	};
 }
 
+function isPragmaText(text) {
+	return /^\\(?:procedure|widget|function|define|import|rules|whitespace|parameters)\b/.test((text || "").trim());
+}
+
 function getSnippetMenuElements(wiki) {
 	return wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]]")
 		.map(title => {
@@ -113,12 +113,25 @@ function getSnippetMenuElements(wiki) {
 				category: "snippet",
 				available: () => true,
 				command: view => {
-					const selection = view.state.selection;
-					const tr = view.state.tr.insertText(snippetText, selection.from, selection.to);
-					view.dispatch(tr);
-					const widget = parseWidget((snippetText || "").trim());
-					if(widget) {
-						scheduleEnterWidgetBlockEditModeNearSelection(view, { expectedWidgetName: widget.widgetName });
+					const trimmed = (snippetText || "").trim();
+					const schema = view.state.schema;
+					if(isPragmaText(trimmed) && schema.nodes.pragma_block) {
+						const firstLine = trimmed.split("\n")[0];
+						const node = schema.nodes.pragma_block.create({
+							rawText: trimmed,
+							firstLine: firstLine
+						});
+						const tr = view.state.tr.replaceSelectionWith(node);
+						view.dispatch(tr.scrollIntoView());
+						view.focus();
+					} else {
+						const selection = view.state.selection;
+						const tr = view.state.tr.insertText(snippetText, selection.from, selection.to);
+						view.dispatch(tr);
+						const widget = parseWidget(trimmed);
+						if(widget) {
+							scheduleEnterWidgetBlockEditModeNearSelection(view, { expectedWidgetName: widget.widgetName });
+						}
 					}
 					return true;
 				}
@@ -126,11 +139,6 @@ function getSnippetMenuElements(wiki) {
 		});
 }
 
-/**
- * Collect menu elements from $:/tags/ProseMirror/EditorAction tiddlers.
- * Each tiddler has: caption, description, category, icon, and an actionId field
- * that maps to a built-in PM command.
- */
 function getEditorActionMenuElements(wiki, schema) {
 	const builtinCommands = getBuiltinActionCommands(schema);
 	const titles = wiki.filterTiddlers("[all[shadows+tiddlers]tag[" + EDITOR_ACTION_TAG + "]]");

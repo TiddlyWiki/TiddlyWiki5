@@ -20,12 +20,6 @@ const mac = typeof navigator != "undefined"
 		: /Mac|iP(hone|[oa]d)/.test(navigator.platform))
 	: false;
 
-/**
- * Get keyboard shortcut from config, with fallback to default
- * @param {string} action - The action name (e.g., "bold", "italic")
- * @param {string} defaultKey - The default key binding
- * @returns {string|null} - The configured key binding, or null if disabled
- */
 function getShortcut(action, defaultKey) {
 	const configTiddler = "$:/config/prosemirror/shortcuts/" + action;
 	const customKey = $tw.wiki.getTiddlerText(configTiddler, "").trim();
@@ -146,7 +140,7 @@ function buildKeymap(schema, mapKeys) {
 
 			// Find the innermost ancestor block matching our predicate
 			let blockDepth = -1;
-			for(const d = $from.depth; d > 0; d--) {
+			for(let d = $from.depth; d > 0; d--) {
 				if(blockTypePredicate($from.node(d).type)) {
 					blockDepth = d;
 					break;
@@ -207,7 +201,7 @@ function buildKeymap(schema, mapKeys) {
 			// Enter: insert a hard_break inline node (stays inside the block)
 			const enterInHardLineBreaks = (state, dispatch) => {
 				const $from = state.selection.$from;
-				for(const depth = $from.depth; depth > 0; depth--) {
+				for(let depth = $from.depth; depth > 0; depth--) {
 					if($from.node(depth).type === hardLineBreaksType) {
 						if(dispatch) {
 							dispatch(state.tr.replaceSelectionWith(hardBreakType.create()).scrollIntoView());

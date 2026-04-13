@@ -23,11 +23,6 @@ return $tw.wiki.getTiddlerText(
 "$:/plugins/tiddlywiki/prosemirror/language/DragHandle/" + suffix, fallback);
 }
 
-/**
- * Get SVG icon from a TW image tiddler.
- * Uses TW's rendering pipeline so wikitext macros (<<size>> etc.) are resolved.
- * Returns a sanitized SVG DOM element or null.
- */
 function getSvgIcon(tiddlerTitle, size) {
 size = size || "1em";
 try {
@@ -43,19 +38,11 @@ try {
 return null;
 }
 
-/**
- * Detect RTL document direction.
- */
 function isRTL() {
 const dir = document.documentElement.getAttribute("dir");
 return dir === "rtl";
 }
 
-/**
- * Find the nearest draggable/selectable block node under the cursor.
- * Walks outward from the resolved position to find a block we can operate on.
- * Returns { pos, node, dom, depth } or null.
- */
 function findBlockAtCoords(view, coords) {
 const posInfo = view.posAtCoords(coords);
 if(!posInfo) return null;
@@ -66,7 +53,7 @@ try {
 const $pos = view.state.doc.resolve(posInfo.pos);
 
 // Walk from deepest to shallowest to find the tightest enclosing block
-for(const depth = $pos.depth; depth >= 1; depth--) {
+for(let depth = $pos.depth; depth >= 1; depth--) {
 const node = $pos.node(depth);
 const pos = $pos.before(depth);
 
@@ -115,13 +102,6 @@ return { pos: blockPos, node: blockNode, dom: domF, depth: 1 };
 return null;
 }
 
-/**
- * Re-resolve a block node's position in the current document.
- * When the document changes between opening the menu and executing an action,
- * the original pos/node captured at menu-open time may be stale. This function
- * attempts to find the node at the original position and validates it is still
- * the same type. Returns { pos, node } or null.
- */
 function resolveCurrentBlock(view, origPos, origNode) {
 try {
 const doc = view.state.doc;
@@ -136,9 +116,6 @@ return { pos: origPos, node: node };
 return null;
 }
 
-/**
- * Block drag handle + action menu plugin.
- */
 function createDragHandlePlugin() {
 let handle = null;
 let currentBlockPos = null;
@@ -465,7 +442,7 @@ pmCommands.setBlockType(schema.nodes.paragraph)(view.state, view.dispatch);
 });
 }
 
-for(const level = 1; level <= 6; level++) {
+for(let level = 1; level <= 6; level++) {
 ((lvl) => {
 if(schema.nodes.heading && !(origNode.type === schema.nodes.heading && origNode.attrs.level === lvl)) {
 actions.push({
@@ -496,7 +473,7 @@ icon: "\u00AB",
 iconTiddler: "$:/core/images/quote",
 action: safeAction(() => {
 const $from = view.state.selection.$from;
-for(const d = $from.depth; d > 0; d--) {
+for(let d = $from.depth; d > 0; d--) {
 if($from.node(d).type === schema.nodes.blockquote) {
 pmCommands.lift(view.state, view.dispatch);
 return;
