@@ -9,3 +9,11 @@ caption: ProseMirror
 <div class="tc-control-panel-info">
   <$text text={{$:/plugins/tiddlywiki/prosemirror/language/Settings/MarkdownShortcutsHint}}/>
 </div>
+
+---
+
+!! Keyboard Shortcuts
+
+|Shortcut |Action |Default |h
+|Exit block |Exit hard-line-breaks or code block |Shift-Enter |
+|<$edit-text tiddler="$:/config/prosemirror/shortcuts/hardbreak-shift" tag="input" default="Shift-Enter" size="15"/>|~|~|
