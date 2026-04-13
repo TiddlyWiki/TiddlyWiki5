@@ -1,0 +1,353 @@
+title: $:/plugins/tiddlywiki/prosemirror/styles/theme
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/*
+ * ProseMirror Editor — Colour Theme Overrides
+ *
+ * This file contains ONLY colour-dependent CSS that uses the TiddlyWiki
+ * palette via <<colour …>> macros, for dark-mode compatibility.
+ * Structural / layout CSS lives in styles-structure.tid and component
+ * stylesheet tiddlers.
+ */
+
+/* === ProseMirror content area === */
+
+.ProseMirror blockquote {
+	border-left-color: <<colour blockquote-bar>>;
+}
+
+.ProseMirror pre {
+	background: <<colour pre-background>>;
+	border-color: <<colour pre-border>>;
+}
+
+.ProseMirror hr {
+	border-top-color: <<colour tiddler-editor-border>>;
+}
+
+/* === Slash Menu === */
+
+.tw-slash-menu-root {
+	background-color: <<colour tiddler-editor-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+	color: <<colour foreground>>;
+}
+
+.tw-slash-menu-filter-wrapper {
+	background-color: <<colour page-background>>;
+	border-bottom-color: <<colour tiddler-editor-border>>;
+}
+
+.tw-slash-menu-filter {
+	color: <<colour muted-foreground>>;
+}
+
+.tw-slash-menu-item-description {
+	color: <<colour muted-foreground>>;
+}
+
+.tw-slash-menu-item-icon svg {
+	fill: <<colour foreground>>;
+}
+
+.tw-slash-menu-item:hover,
+.tw-slash-menu-item-selected {
+	background-color: <<colour tiddler-editor-fields-even>>;
+}
+
+.tw-slash-menu-item-icon {
+	color: <<colour muted-foreground>>;
+}
+
+.tw-slash-menu-item-label {
+	color: <<colour foreground>>;
+}
+
+.tw-slash-menu-placeholder {
+	color: <<colour muted-foreground>>;
+}
+
+.tw-slash-menu-group-title {
+	color: <<colour foreground>>;
+	border-bottom-color: <<colour tiddler-editor-border>>;
+	background: <<colour page-background>>;
+}
+
+/* === Widget Block === */
+
+.pm-widget-block-nodeview-error {
+	color: <<colour alert-highlight>>;
+	background-color: <<colour alert-muted-foreground>>;
+}
+
+.pm-widget-block-empty-placeholder {
+	color: <<colour muted-foreground>>;
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+/* === Source Code Panel === */
+
+.tc-prosemirror-source-panel {
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-source-label {
+	background: <<colour tiddler-editor-fields-even>>;
+	color: <<colour muted-foreground>>;
+	border-bottom-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-source-textarea {
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-source-textarea:focus {
+	outline-color: <<colour primary>>;
+}
+
+/* === Bubble Menu === */
+
+.tc-prosemirror-bubble-menu {
+	background: <<colour tiddler-editor-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-bubble-btn {
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-bubble-btn:hover {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-prosemirror-bubble-btn-active {
+	background: <<colour primary>>;
+	color: <<colour background>>;
+}
+
+.tc-prosemirror-bubble-btn-active:hover {
+	background: <<colour primary>>;
+}
+
+/* === Link Tooltip === */
+
+.tc-prosemirror-link-tooltip {
+	background: <<colour tiddler-editor-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-link-tooltip-href {
+	color: <<colour primary>>;
+}
+
+.tc-prosemirror-link-tooltip-btn {
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-link-tooltip-btn:hover {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-prosemirror-link-tooltip-btn-danger:hover {
+	background: <<colour alert-highlight>>;
+	color: <<colour background>>;
+}
+
+.tc-prosemirror-link-tooltip-btn-ok {
+	color: <<colour primary>>;
+}
+
+.tc-prosemirror-link-tooltip-input {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-link-tooltip-input:focus {
+	border-color: <<colour primary>>;
+}
+
+/* === Block Placeholder === */
+
+.tc-prosemirror-block-placeholder {
+	color: <<colour muted-foreground>>;
+}
+
+/* === Drag Handle === */
+
+.tc-prosemirror-drag-handle {
+	color: <<colour muted-foreground>>;
+}
+
+.tc-prosemirror-drag-handle:hover {
+	background: <<colour tiddler-editor-fields-even>>;
+	color: <<colour foreground>>;
+}
+
+/* === Block Action Menu === */
+
+.tc-prosemirror-block-menu {
+	background: <<colour tiddler-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-block-menu-search {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-block-menu-search:focus {
+	border-color: <<colour primary>>;
+}
+
+.tc-prosemirror-block-menu-group {
+	color: <<colour muted-foreground>>;
+}
+
+.tc-prosemirror-block-menu-item {
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-block-menu-item:hover,
+.tc-prosemirror-block-menu-item-focused {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-prosemirror-block-menu-item-icon {
+	color: <<colour muted-foreground>>;
+}
+
+/* === Table === */
+
+.ProseMirror th,
+.ProseMirror td {
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.ProseMirror th {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.ProseMirror .selectedCell {
+	background: <<colour selection-background>>;
+}
+
+.ProseMirror .column-resize-handle {
+	background-color: <<colour primary>>;
+}
+
+/* === Image NodeView resize handle === */
+
+.pm-image-resize-handle {
+	background: <<colour primary>>;
+	border-color: <<colour background>>;
+}
+
+.pm-image-picker-wrap {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour page-background>>;
+}
+
+/* === Pragma / Opaque labels === */
+
+.pm-nodeview-label {
+	color: <<colour muted-foreground>>;
+}
+
+.pm-nodeview.pm-nodeview-pragma:hover .pm-nodeview-label {
+	color: <<colour primary>>;
+}
+
+.pm-nodeview.pm-nodeview-opaque:hover .pm-nodeview-label {
+	color: <<colour tag-foreground>>;
+}
+
+/* === Hard line breaks header === */
+
+.pm-nodeview.pm-nodeview-hardbreaks .pm-nodeview-header {
+	background: <<colour primary>>;
+}
+
+/* === RTL colour overrides === */
+
+html[dir="rtl"] .tc-prosemirror-source-panel {
+	border-right-color: <<colour tiddler-editor-border>>;
+}
+
+/* === Autocomplete Dropdown === */
+
+.tc-prosemirror-autocomplete {
+	background: <<colour tiddler-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-autocomplete-item {
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-autocomplete-item:hover {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-prosemirror-autocomplete-item-selected {
+	background: <<colour primary>>;
+	color: <<colour tiddler-background>>;
+}
+
+/* === Definition List === */
+
+.ProseMirror .pm-definition-list dt {
+	color: <<colour foreground>>;
+}
+
+.ProseMirror .pm-definition-list dd {
+	color: <<colour foreground>>;
+}
+
+/* === Find & Replace === */
+
+.tc-prosemirror-find-replace-panel {
+	background: <<colour tiddler-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-find-input,
+.tc-prosemirror-replace-input {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-find-count {
+	color: <<colour muted-foreground>>;
+}
+
+.tc-prosemirror-find-btn {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-find-btn:hover {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-prosemirror-find-case-btn.active {
+	background: <<colour primary>>;
+	color: <<colour tiddler-background>>;
+}
+
+.tc-prosemirror-find-match {
+	background: <<colour highlight-background>>;
+}
+
+.tc-prosemirror-find-current {
+	background: <<colour selection-background>>;
+	outline-color: <<colour primary>>;
+}

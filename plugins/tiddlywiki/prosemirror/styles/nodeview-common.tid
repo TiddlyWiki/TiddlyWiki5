@@ -1,0 +1,228 @@
+title: $:/plugins/tiddlywiki/prosemirror/styles/nodeview-common
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/* ── Common nodeview container ── */
+.pm-nodeview {
+	position: relative;
+	border: 2px dashed transparent;
+	border-radius: 4px;
+	padding: 4px;
+	margin: 2px 0;
+	transition: border-color 0.15s ease;
+}
+
+.pm-nodeview:hover,
+.pm-nodeview.pm-nodeview-selected,
+.pm-nodeview.pm-nodeview-editing {
+	border-color: <<colour primary>>;
+}
+
+/* ── Bottom-right badge (header) — hidden by default, appears on hover ── */
+.pm-nodeview-header {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background: <<colour primary>>;
+	color: <<colour background>>;
+	padding: 2px 6px;
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	font-size: 11px;
+	font-weight: bold;
+	user-select: none;
+	border-radius: 4px 0 0 0;
+	opacity: 0;
+	pointer-events: none;
+	white-space: nowrap;
+	z-index: 5;
+	transition: opacity 0.15s ease;
+	line-height: 1.2;
+}
+
+.pm-nodeview:hover .pm-nodeview-header,
+.pm-nodeview.pm-nodeview-selected .pm-nodeview-header,
+.pm-nodeview.pm-nodeview-editing .pm-nodeview-header {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.pm-nodeview-title {
+	font-family: monospace;
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.pm-nodeview-buttons {
+	display: flex;
+	gap: 3px;
+	align-items: center;
+}
+
+/* ── Common button style ── */
+.pm-nodeview-btn {
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	color: <<colour background>>;
+	padding: 2px 4px;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: background 0.2s;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	line-height: 1;
+}
+
+.pm-nodeview-btn:hover {
+	background: rgba(255, 255, 255, 0.35);
+}
+
+.pm-nodeview-btn:active {
+	background: rgba(255, 255, 255, 0.45);
+}
+
+.pm-nodeview-btn svg {
+	width: 14px;
+	height: 14px;
+	fill: currentColor;
+}
+
+.pm-nodeview-btn-delete:hover {
+	background: <<colour alert-highlight>>;
+	border-color: <<colour alert-highlight>>;
+}
+
+/* ── Common content area ── */
+.pm-nodeview-content {
+	display: block;
+	min-height: 1.4em;
+	outline: none;
+}
+
+/* ── Common editor (textarea) styles ── */
+.pm-nodeview-editor {
+	width: 100%;
+	padding: 6px 8px;
+	margin-top: 4px;
+	font-family: monospace;
+	font-size: 13px;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: 4px;
+	resize: vertical;
+	box-sizing: border-box;
+	min-height: 60px;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.pm-nodeview-editor:focus {
+	outline: none;
+	border-color: <<colour primary>>;
+}
+
+/* ── Edit form styles (for image, link, etc.) ── */
+.pm-nodeview-form {
+	padding: 8px;
+	margin-top: 4px;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: 4px;
+	background: <<colour page-background>>;
+}
+
+.pm-nodeview-form-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 6px;
+}
+
+.pm-nodeview-form-row:last-child {
+	margin-bottom: 0;
+}
+
+.pm-nodeview-form-label {
+	font-size: 12px;
+	font-weight: bold;
+	min-width: 60px;
+	color: <<colour muted-foreground>>;
+}
+
+.pm-nodeview-form-input {
+	flex: 1;
+	padding: 4px 6px;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: 3px;
+	font-size: 13px;
+	font-family: monospace;
+	box-sizing: border-box;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.pm-nodeview-form-input:focus {
+	outline: none;
+	border-color: <<colour primary>>;
+}
+
+/* ── Variant badge colors ── */
+
+/* Pragma blocks */
+.pm-nodeview.pm-nodeview-pragma .pm-nodeview-header {
+	background: <<colour muted-foreground>>;
+}
+
+.pm-nodeview.pm-nodeview-pragma {
+	border-color: transparent;
+	border-style: dashed;
+	background: <<colour page-background>>;
+}
+
+.pm-nodeview.pm-nodeview-pragma:hover,
+.pm-nodeview.pm-nodeview-pragma.pm-nodeview-selected,
+.pm-nodeview.pm-nodeview-pragma.pm-nodeview-editing {
+	border-color: <<colour muted-foreground>>;
+}
+
+/* Opaque blocks */
+.pm-nodeview.pm-nodeview-opaque .pm-nodeview-header {
+	background: <<colour tag-background>>;
+	color: <<colour tag-foreground>>;
+}
+
+.pm-nodeview.pm-nodeview-opaque {
+	border-color: transparent;
+	border-style: dashed;
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.pm-nodeview.pm-nodeview-opaque:hover,
+.pm-nodeview.pm-nodeview-opaque.pm-nodeview-selected,
+.pm-nodeview.pm-nodeview-opaque.pm-nodeview-editing {
+	border-color: <<colour tag-background>>;
+}
+
+/* Widget blocks */
+.pm-nodeview.pm-nodeview-widget .pm-nodeview-header {
+	background: <<colour primary>>;
+}
+
+/* Image blocks — inline */
+.pm-nodeview.pm-nodeview-image {
+	display: inline-block;
+	vertical-align: baseline;
+	max-width: 100%;
+	line-height: 0;
+}
+
+.pm-nodeview.pm-nodeview-image:hover,
+.pm-nodeview.pm-nodeview-image.pm-nodeview-selected {
+	z-index: 100;
+}

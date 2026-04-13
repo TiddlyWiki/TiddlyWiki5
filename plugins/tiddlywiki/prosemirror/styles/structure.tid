@@ -1,0 +1,483 @@
+title: $:/plugins/tiddlywiki/prosemirror/styles/structure
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+/*
+ * ProseMirror Editor — Structural / Layout CSS
+ *
+ * This file contains layout and structural styles that do NOT depend
+ * on the colour palette.  Colour overrides are in styles/theme.
+ */
+
+/* === ProseMirror content area === */
+
+.ProseMirror {
+	padding-left: 28px;
+	position: relative;
+}
+
+.ProseMirror p {
+	margin: 0.5em 0;
+}
+
+.ProseMirror p:first-child {
+	margin-top: 0;
+}
+
+.ProseMirror p:last-child {
+	margin-bottom: 0;
+}
+
+.ProseMirror blockquote {
+	margin: 0.5em 0;
+	padding: 0 15px;
+	border-left: 5px solid transparent;
+}
+
+.ProseMirror pre {
+	padding: 8px 12px;
+	border-radius: 4px;
+	border: 1px solid transparent;
+	overflow-x: auto;
+}
+
+.ProseMirror hr {
+	border: none;
+	border-top: 1px solid transparent;
+	margin: 1em 0;
+}
+
+.ProseMirror h1, .ProseMirror h2, .ProseMirror h3,
+.ProseMirror h4, .ProseMirror h5, .ProseMirror h6 {
+	margin: 0.8em 0 0.3em;
+}
+
+.ProseMirror h1:first-child, .ProseMirror h2:first-child, .ProseMirror h3:first-child,
+.ProseMirror h4:first-child, .ProseMirror h5:first-child, .ProseMirror h6:first-child {
+	margin-top: 0;
+}
+
+/* === Slash Menu item layout === */
+
+.tw-slash-menu-item-description {
+	font-size: 0.8em;
+	line-height: 1.3;
+}
+
+.tw-slash-menu-item-text {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+}
+
+/* === Source Code Panel layout === */
+
+.tc-prosemirror-wrapper.tc-prosemirror-source-active {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+}
+
+.tc-prosemirror-source-panel {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	overflow: hidden;
+	min-height: 200px;
+}
+
+.tc-prosemirror-source-label {
+	padding: 4px 8px;
+	font-size: 0.8em;
+	font-weight: 600;
+	border-bottom: 1px solid transparent;
+}
+
+.tc-prosemirror-source-textarea {
+	flex: 1;
+	resize: none;
+	border: none;
+	padding: 8px;
+	font-family: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", "Courier", monospace;
+	font-size: 0.9em;
+	line-height: 1.5;
+	tab-size: 4;
+	min-height: 200px;
+}
+
+.tc-prosemirror-source-textarea:focus {
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+}
+
+@media (max-width: 768px) {
+	.tc-prosemirror-wrapper.tc-prosemirror-source-active {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* === Bubble Menu layout === */
+
+.tc-prosemirror-bubble-menu {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	padding: 4px 6px;
+	border-radius: 6px;
+	border: 1px solid transparent;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.tc-prosemirror-bubble-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border: none;
+	border-radius: 4px;
+	background: transparent;
+	cursor: pointer;
+	padding: 4px;
+}
+
+.tc-prosemirror-bubble-btn-active:hover {
+	opacity: 0.85;
+}
+
+.tc-prosemirror-bubble-btn svg {
+	width: 16px;
+	height: 16px;
+	fill: currentColor;
+}
+
+/* === Link Tooltip layout === */
+
+.tc-prosemirror-link-tooltip {
+	display: flex;
+	align-items: center;
+	padding: 4px 8px;
+	border-radius: 6px;
+	border: 1px solid transparent;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	font-size: 0.85em;
+	max-width: 400px;
+	white-space: nowrap;
+}
+
+.tc-prosemirror-link-tooltip-display {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	overflow: hidden;
+}
+
+.tc-prosemirror-link-tooltip-href {
+	text-decoration: underline;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 240px;
+	cursor: pointer;
+}
+
+.tc-prosemirror-link-tooltip-buttons {
+	display: flex;
+	gap: 2px;
+	margin-left: 6px;
+	flex-shrink: 0;
+}
+
+.tc-prosemirror-link-tooltip-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	border: none;
+	border-radius: 4px;
+	background: transparent;
+	cursor: pointer;
+	padding: 2px;
+	font-size: 0.85em;
+}
+
+.tc-prosemirror-link-tooltip-btn-ok {
+	font-weight: bold;
+}
+
+.tc-prosemirror-link-tooltip-edit {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.tc-prosemirror-link-tooltip-input {
+	border: 1px solid transparent;
+	border-radius: 4px;
+	padding: 3px 6px;
+	font-size: 0.9em;
+	min-width: 200px;
+}
+
+.tc-prosemirror-link-tooltip-input:focus {
+	outline: none;
+}
+
+.tc-prosemirror-link-tooltip-btn svg {
+	width: 14px;
+	height: 14px;
+	fill: currentColor;
+}
+
+/* === Block Placeholder === */
+
+.tc-prosemirror-block-placeholder {
+	font-style: italic;
+	pointer-events: none;
+	user-select: none;
+	opacity: 0.6;
+	font-size: 0.85em;
+}
+
+/* === Drag Handle layout === */
+
+.tc-prosemirror-drag-handle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 24px;
+	cursor: grab;
+	font-size: 14px;
+	border-radius: 3px;
+	user-select: none;
+	opacity: 0.7;
+	transition: opacity 0.15s, background 0.15s;
+}
+
+.tc-prosemirror-drag-handle:hover {
+	opacity: 1;
+}
+
+.tc-prosemirror-drag-handle:active {
+	cursor: grabbing;
+}
+
+/* === Block Action Menu layout === */
+
+.tc-prosemirror-block-menu {
+	border: 1px solid transparent;
+	border-radius: 6px;
+	box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+	min-width: 180px;
+	max-width: 260px;
+	max-height: 320px;
+	overflow-y: auto;
+	padding: 4px 0;
+	font-size: 0.9em;
+}
+
+.tc-prosemirror-block-menu-search {
+	display: block;
+	width: calc(100% - 16px);
+	margin: 4px 8px 6px;
+	padding: 5px 8px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	font-size: 0.9em;
+	outline: none;
+}
+
+.tc-prosemirror-block-menu-group {
+	padding: 4px 12px 2px;
+	font-size: 0.8em;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	user-select: none;
+}
+
+.tc-prosemirror-block-menu-items {
+	max-height: 240px;
+	overflow-y: auto;
+}
+
+.tc-prosemirror-block-menu-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 5px 12px;
+	cursor: pointer;
+	border-radius: 0;
+	transition: background 0.1s;
+}
+
+.tc-prosemirror-block-menu-item-icon {
+	width: 20px;
+	text-align: center;
+	flex-shrink: 0;
+	font-size: 0.95em;
+}
+
+.tc-prosemirror-block-menu-item-label {
+	flex: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tc-prosemirror-hidden {
+	display: none !important;
+}
+
+/* === Table layout === */
+
+.ProseMirror table {
+	border-collapse: collapse;
+	table-layout: fixed;
+	width: 100%;
+	margin: 0.5em 0;
+}
+
+.ProseMirror th,
+.ProseMirror td {
+	border: 1px solid transparent;
+	padding: 4px 8px;
+	vertical-align: top;
+	position: relative;
+}
+
+.ProseMirror th {
+	font-weight: bold;
+}
+
+.ProseMirror .column-resize-handle {
+	position: absolute;
+	right: -2px;
+	top: 0;
+	bottom: 0;
+	width: 4px;
+	z-index: 20;
+	pointer-events: none;
+}
+
+/* === RTL structural overrides === */
+
+html[dir="rtl"] .ProseMirror {
+	direction: rtl;
+	text-align: right;
+	padding-left: 0;
+	padding-right: 28px;
+}
+
+html[dir="rtl"] .ProseMirror-menubar {
+	direction: rtl;
+}
+
+html[dir="rtl"] .tc-prosemirror-drag-handle {
+	left: auto;
+	right: -24px;
+}
+
+html[dir="rtl"] .tc-prosemirror-source-panel {
+	border-left: none;
+}
+
+html[dir="rtl"] .pm-nodeview-header {
+	right: auto;
+	left: 0;
+	border-radius: 0 4px 0 0;
+}
+
+html[dir="rtl"] .tc-prosemirror-block-menu {
+	direction: rtl;
+	text-align: right;
+}
+
+html[dir="rtl"] .tc-prosemirror-bubble-menu {
+	direction: ltr;
+}
+
+html[dir="rtl"] .tw-slash-menu-container {
+	direction: rtl;
+	text-align: right;
+}
+
+/* === Definition List layout === */
+
+.ProseMirror .pm-definition-list {
+	margin: 0.5em 0;
+}
+
+.ProseMirror .pm-definition-list dd {
+	margin-left: 1.5em;
+}
+
+/* === Find & Replace layout === */
+
+.tc-prosemirror-find-replace-panel {
+	border: 1px solid transparent;
+	border-bottom: none;
+	padding: 6px 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.tc-prosemirror-find-replace-row {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.tc-prosemirror-find-input,
+.tc-prosemirror-replace-input {
+	flex: 1;
+	padding: 4px 8px;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	font-size: 0.9em;
+	min-width: 120px;
+}
+
+.tc-prosemirror-find-count {
+	font-size: 0.85em;
+	min-width: 40px;
+	text-align: center;
+}
+
+.tc-prosemirror-find-btn {
+	padding: 2px 8px;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 0.85em;
+}
+
+.tc-prosemirror-find-current {
+	border-radius: 2px;
+	outline: 2px solid transparent;
+}
+
+/* === Autocomplete layout === */
+
+.tc-prosemirror-autocomplete {
+	border: 1px solid transparent;
+	border-radius: 4px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+	max-height: 240px;
+	overflow-y: auto;
+	min-width: 200px;
+	max-width: 400px;
+	padding: 4px 0;
+}
+
+.tc-prosemirror-autocomplete-item {
+	padding: 6px 12px;
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 0.9em;
+}
