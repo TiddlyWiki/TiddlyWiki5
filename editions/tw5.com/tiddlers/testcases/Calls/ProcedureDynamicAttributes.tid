@@ -1,6 +1,6 @@
 created: 20260301005951330
 description: Procedure calls with dynamic attributes
-modified: 20260301013907635
+modified: 20260413124310063
 tags: $:/tags/wiki-test-spec
 title: TestCases/Calls/ProcedureDynamicAttributes
 type: text/vnd.tiddlywiki-multiple
@@ -34,6 +34,7 @@ title: ExpectedResult
 <p>
 foo 1 -
 foo 2 -
+foo 3 -
 foo 3 -
 foo 4 -
 foo 5 -
