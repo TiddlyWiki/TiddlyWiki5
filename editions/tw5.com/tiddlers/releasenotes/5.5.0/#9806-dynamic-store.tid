@@ -1,9 +1,11 @@
-title: $:/changenotes/5.5.0/dynamic-store
+title: $:/changenotes/5.5.0/#9806
 description: Filesystem dynamic stores with live reload via chokidar
 release: 5.5.0
 tags: $:/tags/ChangeNote
 change-type: feature
 change-category: nodejs
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9806
+github-contributors: Jermolene
 
 The filesystem syncadaptor can now be configured to treat a folder as a [[dynamic store|tiddlywiki.files Files]]: tiddlers in the folder are loaded at boot, a configurable filter decides which tiddlers are saved back into that folder instead of the default `tiddlers/` directory, and external edits to files in the folder are picked up live by a [[chokidar|https://github.com/paulmillr/chokidar]] watcher.
 
