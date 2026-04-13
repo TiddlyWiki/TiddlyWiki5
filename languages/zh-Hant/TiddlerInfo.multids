@@ -10,7 +10,7 @@ Advanced/ShadowInfo/Shadow/Hint: <$link to=<<infoTiddler>>><$text text=<<infoTid
 Advanced/ShadowInfo/Shadow/Source: 此條目定義於插件 <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
 Advanced/ShadowInfo/OverriddenShadow/Hint: 已被一般條目覆寫
 Advanced/CascadeInfo/Heading: 級聯詳細資訊
-Advanced/CascadeInfo/Hint: 這些是使用級聯篩選器的視圖範本區段（標籤為 <<tag "$:/tags/ViewTemplate">> ）及其為當前條目產生的範本。
+Advanced/CascadeInfo/Hint: 這些是對於每個系統視圖範本級聯解析的視圖範本片段
 Advanced/CascadeInfo/Detail/View: 檢視
 Advanced/CascadeInfo/Detail/ActiveCascadeFilter: 啟用級聯篩選器
 Advanced/CascadeInfo/Detail/Template: 範本
