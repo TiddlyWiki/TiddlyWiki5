@@ -48,6 +48,37 @@ if($tw.node) {
 		return new Promise(function(resolve) { setTimeout(resolve,ms); });
 	}
 
+	// Poll getUpdatedTiddlers until `predicate(updates)` returns true, or until
+	// `timeoutMs` elapses. Returns the updates object on success.
+	function waitForUpdates(adaptor,predicate,timeoutMs) {
+		timeoutMs = timeoutMs || 4000;
+		var deadline = Date.now() + timeoutMs,
+			collected = {modifications: [], deletions: []};
+		return new Promise(function(resolve,reject) {
+			function poll() {
+				adaptor.getUpdatedTiddlers({},function(err,updates) {
+					if(err) { return reject(err); }
+					if(updates) {
+						(updates.modifications || []).forEach(function(t) {
+							if(collected.modifications.indexOf(t) === -1) collected.modifications.push(t);
+						});
+						(updates.deletions || []).forEach(function(t) {
+							if(collected.deletions.indexOf(t) === -1) collected.deletions.push(t);
+							var i = collected.modifications.indexOf(t);
+							if(i !== -1) collected.modifications.splice(i,1);
+						});
+					}
+					if(predicate(collected)) { return resolve(collected); }
+					if(Date.now() >= deadline) {
+						return reject(new Error("waitForUpdates timed out; collected=" + JSON.stringify(collected)));
+					}
+					setTimeout(poll,40);
+				});
+			}
+			poll();
+		});
+	}
+
 	describe("filesystem dynamic store", function() {
 
 		var tmpRoot, wikiTiddlers, storeDir, origDynamicStores, origFiles, originalBootPath;
@@ -140,50 +171,25 @@ if($tw.node) {
 				return done();
 			}
 			var filepath = path.join(storeDir,"external.tid");
-			// Write initial file
 			fs.writeFileSync(filepath,"title: external\ntype: text/x-markdown\n\nInitial\n");
-			waitMs(200).then(function() {
-				return new Promise(function(resolve) {
-					adaptor.getUpdatedTiddlers({},function(err,updates) {
-						expect(err).toBeFalsy();
-						expect(updates.modifications).toContain("external");
-						resolve();
-					});
-				});
-			}).then(function() {
-				// loadTiddler should now return the fields from disk
-				return new Promise(function(resolve) {
+			waitForUpdates(adaptor,function(c) { return c.modifications.indexOf("external") !== -1; }).then(function() {
+				return new Promise(function(resolve,reject) {
 					adaptor.loadTiddler("external",function(err,fields) {
-						expect(err).toBeFalsy();
+						if(err) { return reject(err); }
 						expect(fields).toBeTruthy();
+						if(!fields) { return reject(new Error("loadTiddler returned null after reported modification")); }
 						expect(fields.title).toBe("external");
 						expect(fields.text).toContain("Initial");
 						resolve();
 					});
 				});
 			}).then(function() {
-				// Edit the file
 				fs.writeFileSync(filepath,"title: external\ntype: text/x-markdown\n\nChanged\n");
-				return waitMs(200);
+				return waitForUpdates(adaptor,function(c) { return c.modifications.indexOf("external") !== -1; });
 			}).then(function() {
-				return new Promise(function(resolve) {
-					adaptor.getUpdatedTiddlers({},function(err,updates) {
-						expect(updates.modifications).toContain("external");
-						resolve();
-					});
-				});
-			}).then(function() {
-				// Delete the file
 				fs.unlinkSync(filepath);
-				return waitMs(200);
-			}).then(function() {
-				return new Promise(function(resolve) {
-					adaptor.getUpdatedTiddlers({},function(err,updates) {
-						expect(updates.deletions).toContain("external");
-						resolve();
-					});
-				});
-			}).then(done, done.fail);
+				return waitForUpdates(adaptor,function(c) { return c.deletions.indexOf("external") !== -1; });
+			}).then(function() { done(); },done.fail);
 		});
 
 		it("suppresses echoes when the file on disk matches the current wiki tiddler", function(done) {
@@ -195,7 +201,8 @@ if($tw.node) {
 			wiki.addTiddler(new $tw.Tiddler({title: "echo", type: "text/x-markdown", text: "same\n"}));
 			var filepath = path.join(storeDir,"echo.tid");
 			fs.writeFileSync(filepath,"title: echo\ntype: text/x-markdown\n\nsame\n");
-			waitMs(200).then(function() {
+			// Wait long enough for chokidar+debounce to definitely have processed the event
+			waitMs(800).then(function() {
 				adaptor.getUpdatedTiddlers({},function(err,updates) {
 					expect(updates.modifications).not.toContain("echo");
 					done();
