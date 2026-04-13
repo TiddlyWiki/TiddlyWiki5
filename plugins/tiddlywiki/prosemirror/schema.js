@@ -22,9 +22,6 @@ try {
 	pmTables = null;
 }
 
-/**
- * Build the ProseMirror schema with all TiddlyWiki-specific nodes and marks.
- */
 function buildSchema() {
 	let baseNodes = basicSchema.spec.nodes.append({ list: createListSpec() });
 

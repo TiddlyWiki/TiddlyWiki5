@@ -19,11 +19,6 @@ const { toggleMark } = require("prosemirror-commands");
 const { wrapInList } = require("prosemirror-flat-list");
 const { TextField, openPrompt } = require("$:/plugins/tiddlywiki/prosemirror/setup/prompt.js");
 
-/**
- * Build a prosemirror-menu icon spec from a TiddlyWiki SVG image tiddler.
- * Renders the tiddler to resolve <<size>> macros, then extracts the SVG element.
- * Falls back to a plain-text icon when the tiddler is unavailable.
- */
 function twIcon(tiddlerTitle, fallbackText) {
 	try {
 		const htmlStr = $tw.wiki.renderTiddler("text/html", tiddlerTitle, {

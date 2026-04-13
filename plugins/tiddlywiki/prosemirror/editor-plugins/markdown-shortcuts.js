@@ -15,12 +15,6 @@ Enabled/disabled via $:/config/prosemirror/markdown-shortcuts.
 const InputRule = require("prosemirror-inputrules").InputRule;
 const TextSelection = require("prosemirror-state").TextSelection;
 
-/**
- * Create an input rule that wraps the matched text in a mark.
- * @param {RegExp} regexp - Must have a capture group for the text between delimiters
- * @param {MarkType} markType - The PM mark type to apply
- * @param {number} [groupIndex=1] - The capture group index for the inner text
- */
 function markInputRule(regexp, markType, groupIndex) {
 	groupIndex = groupIndex || 1;
 	return new InputRule(regexp, (state, match, start, end) => {
@@ -41,10 +35,6 @@ function markInputRule(regexp, markType, groupIndex) {
 	});
 }
 
-/**
- * Create an input rule for heading shorthand: # text at start of line.
- * Only match at the very start of a textblock.
- */
 function headingInputRule(schema) {
 	const headingType = schema.nodes.heading;
 	if(!headingType) return [];
@@ -71,9 +61,6 @@ function headingInputRule(schema) {
 	];
 }
 
-/**
- * Create an input rule for blockquote: > at start of line.
- */
 function blockquoteInputRule(schema) {
 	const bqType = schema.nodes.blockquote;
 	if(!bqType) return [];
@@ -100,9 +87,6 @@ function blockquoteInputRule(schema) {
 	];
 }
 
-/**
- * Create an input rule for horizontal rule: --- at start of line.
- */
 function hrInputRule(schema) {
 	const hrType = schema.nodes.horizontal_rule;
 	if(!hrType) return [];
@@ -116,9 +100,6 @@ function hrInputRule(schema) {
 	];
 }
 
-/**
- * Create an input rule for code blocks: ``` at start of line.
- */
 function codeBlockInputRule(schema) {
 	const cbType = schema.nodes.code_block;
 	if(!cbType) return [];
@@ -129,10 +110,6 @@ function codeBlockInputRule(schema) {
 	];
 }
 
-/**
- * Get all markdown-style input rules for the given schema.
- * Only returns rules if the setting is enabled.
- */
 function getMarkdownInputRules(wiki, schema) {
 	const enabled = wiki.getTiddlerText("$:/config/prosemirror/markdown-shortcuts", "no");
 	if(enabled !== "yes") return [];
@@ -172,11 +149,6 @@ function getMarkdownInputRules(wiki, schema) {
 	return rules;
 }
 
-/**
- * Input rules for definition list (;/: wikitext syntax).
- * Supports alias triggers configured in $:/config/prosemirror/autocomplete/def-term-triggers
- * and $:/config/prosemirror/autocomplete/def-desc-triggers.
- */
 function definitionListInputRules(schema, wiki) {
 	let rules = [];
 	const dtType = schema.nodes.definition_term;

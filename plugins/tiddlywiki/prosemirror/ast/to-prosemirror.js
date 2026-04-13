@@ -66,9 +66,6 @@ function buildHeading(context, node, level) {
 	};
 }
 
-/**
- * Create a child context with incremented nesting level.
- */
 function childContext(context) {
 	const newContext = {};
 	for(let key in context) {
@@ -113,11 +110,6 @@ function buildOrderedList(context, node) {
 	});
 }
 
-
-/**
- * Helper function to ensure text nodes in list items are wrapped in paragraphs
- * ProseMirror requires list items to contain block content, not bare text
- */
 function wrapTextNodesInParagraphs(context, nodes) {
 	if(!nodes || nodes.length === 0) {
 		return [];
@@ -266,9 +258,6 @@ function buildBlockquote(context, node) {
 	};
 }
 
-/**
- * Extract plain text from an AST subtree (for cite preservation).
- */
 function extractPlainText(node) {
 	if(!node) return "";
 	if(node.type === "text") return node.text || "";
@@ -293,10 +282,6 @@ function buildBr(context, node) {
 	};
 }
 
-/**
- * Build link mark for internal wiki links (`[[text|target]]`)
- * The link AST node has type "link", rule "prettylink", attributes.to, and children
- */
 function buildLink(context, node) {
 	const target = (node.attributes && node.attributes.to) ? node.attributes.to.value : "";
 	const content = convertNodes(context, node.children);
@@ -318,10 +303,6 @@ function buildLink(context, node) {
 	});
 }
 
-/**
- * Build link mark for external links (`<a href="...">` elements)
- * These come from prettylink (external), prettyextlink, or extlink rules
- */
 function buildAnchor(context, node) {
 	const href = (node.attributes && node.attributes.href) ? node.attributes.href.value : "";
 	const content = convertNodes(context, node.children);
@@ -348,10 +329,6 @@ function buildCite(context, node) {
 	return convertNodes(context, node.children);
 }
 
-/**
- * Build a PM table from a wiki AST table element.
- * Wiki AST structure: element.tag="table" > children=[tr elements]
- */
 function buildTable(context, node) {
 	if(!node.children || node.children.length === 0) {
 		return buildOpaqueFromNode(context, node);
@@ -429,10 +406,6 @@ function buildTableCell(context, child, isHeader) {
 	};
 }
 
-/**
- * Build a definition list (<dl>) from wiki AST.
- * Wiki AST structure: element.tag="dl" > children=[dt/dd elements]
- */
 function buildDefinitionList(context, node) {
 	const items = [];
 	const children = node.children || [];
@@ -468,9 +441,6 @@ function buildDefinitionDescription(context, node) {
 	};
 }
 
-/**
- * Many node shares same type `element` in wikiAst, we need to distinguish them by tag.
- */
 const elementBuilders = {
 	p: buildParagraph,
 	h1: (context, node) => buildHeading(context, node, 1),
@@ -551,11 +521,6 @@ function image(context, node) {
 	};
 }
 
-/**
- * Handle transclude nodes (widgets, macros, procedures)
- * For macro calls (<<name>>), convert to paragraph with widget syntax.
- * For other transclusion types ({{tiddler}}, <$transclude>), preserve as opaque_block.
- */
 function transclude(context, node) {
 	// Check if this is a macrocall (has $variable attribute with macrocallblock rule)
 	const hasVariable = node.attributes && node.attributes.$variable;
@@ -607,17 +572,10 @@ function transclude(context, node) {
 	};
 }
 
-/**
- * Handle wiki link nodes (type "link", rule "prettylink")
- * These are internal wiki links like [[text|target]]
- */
 function link(context, node) {
 	return buildLink(context, node);
 }
 
-/**
- * Helper: serialize a wiki AST node back to raw wikitext for preservation.
- */
 function serializeNodeToRawText(node) {
 	try {
 		const tree = Array.isArray(node) ? node : [node];
@@ -627,10 +585,6 @@ function serializeNodeToRawText(node) {
 	}
 }
 
-/**
- * Build an opaque_block from an unsupported wiki AST node.
- * Preserves raw text so the content is not lost on round-trip.
- */
 function buildOpaqueFromNode(context, node) {
 	const rawText = serializeNodeToRawText(node);
 	const firstLine = rawText.split("\n")[0] || rawText;
@@ -643,11 +597,6 @@ function buildOpaqueFromNode(context, node) {
 	};
 }
 
-/**
- * Handle pragma nodes (set, importvariables, void with rule "rules", etc.)
- * These are \define, \procedure, \function, \widget, \import, \rules
- * They get preserved as pragma_block atoms in ProseMirror.
- */
 function pragmaNode(context, node) {
 	// Serialize just this pragma node (without its children, which are the rest of the document)
 	const pragmaCopy = {};
@@ -672,10 +621,6 @@ function pragmaNode(context, node) {
 	return [pragmaResult].concat(childResults);
 }
 
-/**
- * Handle entity nodes (e.g. &ndash;, &mdash;, &amp; etc.)
- * Convert them to plain text with the decoded character.
- */
 function entity(context, node) {
 	// Decode HTML entity to the actual character without using innerHTML
 	const entityStr = node.entity || "";
@@ -714,9 +659,6 @@ function entity(context, node) {
 	};
 }
 
-/**
- * Key is wikiAst node type, value is node converter function.
- */
 const builders = {
 	element: element,
 	text: text,

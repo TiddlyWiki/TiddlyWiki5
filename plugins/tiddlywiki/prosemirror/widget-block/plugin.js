@@ -30,9 +30,6 @@ function isWidgetBlocksEnabled(wiki) {
 	}
 }
 
-/**
- * Create plugin that adds node views for widget blocks
- */
 function createWidgetBlockNodeViewPlugin(parentWidget) {
 	return new Plugin({
 		key: new PluginKey("widgetBlockNodeView"),
@@ -50,10 +47,6 @@ function createWidgetBlockNodeViewPlugin(parentWidget) {
 	});
 }
 
-/**
- * Create a plugin that converts widget syntax in text to decorated blocks
- * This makes widgets show as blocks immediately after typing/pasting
- */
 function createWidgetBlockPlugin() {
 	return new Plugin({
 		key: new PluginKey("widgetBlock"),

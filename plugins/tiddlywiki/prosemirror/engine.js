@@ -50,10 +50,6 @@ try {
 	pmTables = null;
 }
 
-/**
- * ProseMirrorEngine — implements the factory engine interface required by
- * $:/core/modules/editor/factory.js.
- */
 class ProseMirrorEngine {
 	constructor(options) {
 		this.widget = options.widget;
