@@ -1,0 +1,80 @@
+created: 20220917154902906
+modified: 20260322113926744
+original-modified: 20230419103154328
+tags: WikiText Macros
+title: Macro Parameter Handling
+ja-title: マクロパラメータの処理
+type: text/vnd.tiddlywiki
+
+!! 紹介
+
+[[マクロ|Macros]]のパラメータは、2つの異なる方法で処理されます:
+
+# マクロの内容が使用される前に、各パラメータに対して必ずテキスト置換が実行されます
+# マクロの内容をWiki化すると、パラメータは変数として利用できるようになります。変数名は、パラメータ名を二重アンダースコアで囲んで作成します
+
+やや紛らわしいことに、状況によってはこれら両方のメカニズムが発生する場合があります。これは[[マクロを使用する際の落とし穴|Macro Pitfalls]]に関連しています。
+
+!! パラメータと変数のテキスト置換
+
+マクロのテキストが使用される前に、以下の置換処理が行われます:
+
+* パターン`$param$`は、指定されたパラメータの値に置き換えられます。
+* パターン`$(variable)$`は、指定された変数の値に置き換えられます。
+
+マクロが呼ばれるたびに、プレースホルダーにはパラメータや変数の実際の値が代入されます:
+
+<$macrocall $name="wikitext-example-without-html" src="""\define say-hi-using-parameters(name,address)
+こんにちは、私は$name$です。$address$に住んでいます。
+\end
+
+<<say-hi-using-parameters name:"Bugs" address:"Rabbit Hole Hill">>
+"""/>
+
+変数置換を使った例を示します:
+
+<$macrocall $name="wikitext-example-without-html" src="""\define say-hi-using-variables()
+こんにちは、私は$(name)$です。$(address)$に住んでいます。
+\end
+
+\define name() Bugs
+
+<$let address="Rabbit Hole Hill">
+<<say-hi-using-variables>>
+</$let>
+"""/>
+
+<<.warning """挿入されるテキストに置換トークンが含まれている場合、それらも処理されることに注意してください。これにより、予期しない結果が生じるかもしれません。""">>
+
+!! パラメータを変数としてアクセス
+
+マクロがWiki化されると、パラメータは、パラメータ名を二重アンダースコアで囲んだ変数としてアクセスできます。たとえば、パラメータ`address`は変数`__address__`としてアクセスします。
+
+したがって、上記の例は次のように表現することもできます:
+
+<$macrocall $name="wikitext-example-without-html" src="""\define say-hi-using-parameters(name,address)
+こんにちは、私は<<__name__>>です。<<__address__>>に住んでいます。
+\end
+
+<<say-hi-using-parameters name:"Bugs" address:"Rabbit Hole Hill">>
+"""/>
+
+パラメータを変数としてアクセスできるのは、Wiki化されたマクロの場合のみであり、例えばマクロが属性値として使用される場合にはアクセスできません。
+
+!!! パラメータを変数としてアクセスする利点
+
+このテクニックの主な利点は、パラメータ値がリテラル文字列としてマクロに代入されるのを回避できる点であり、引用符を含むパラメータに関する問題を回避できる点にあります。
+
+例えば、このマクロを考えてみましょう。これは、単一のパラメータを引数として別のマクロを呼び出します:
+
+```
+\define film-quote(line) <$macrocall $name="anothermacro" actor="Bugs Bunny" line="""$line$"""/>
+```
+
+上記のコードは、引数に三重ダブルクォートが含まれている場合(例:`<<film-quote '3回引用します """ - ほらね!?'>>`)、マクロが呼び出されると失敗します。パラメータ変数を使用することで回避できます: 
+
+```
+\define film-quote(line) <$macrocall $name="anothermacro" actor="Bugs Bunny" line=<<__line__>>/>
+```
+
+詳細は[[マクロを使用する際の落とし穴|Macro Pitfalls]]を参照してください。

@@ -1,0 +1,28 @@
+created: 20170126174506507
+modified: 20260223105027444
+original-modified: 20170126211042714
+tags: [[Hard Linebreaks in WikiText]]
+title: Hard Linebreaks with CSS
+ja-title: CSSを使用した強制改行
+type: text/vnd.tiddlywiki
+
+TiddlyWikiバージョン5.1.16以降、`data-`属性を使用してカスタムスタイルを適用できるようになりました。参照: [[カスタムスタイルを適用する方法|How to apply custom styles]]
+
+[[Custom data-styles]]スタイルシートTiddlerには、次の定義が含まれています: 
+
+```
+[data-tags*="example-hardlinebreaks"] .tc-tiddler-body {
+  word-break: normal; 
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+```
+
+タグなしでレンダリングすると、"CSSを使用した強制改行 - 例"の内容は次のように表示されます: 
+
+>{{Hard Linebreaks with CSS - Example}}
+
+----
+
+TIddlerを開いて、適用されているカスタムCSSルールを確認してください: [[CSSを使用した強制改行 - 例|Hard Linebreaks with CSS - Example]]
+

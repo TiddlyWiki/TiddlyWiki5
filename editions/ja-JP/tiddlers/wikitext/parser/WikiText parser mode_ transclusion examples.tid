@@ -1,0 +1,58 @@
+created: 20220122145022547
+modified: 20260406003530535
+original-modified: 20220122180845946
+tags: [[WikiText parser mode transitions]]
+title: WikiText parser mode: transclusion examples
+ja-title: Wikiテキストパーサモード: トランスクルージョンの例
+type: text/vnd.tiddlywiki
+
+
+以下の内容で定義されたTiddler[[表の例|table-example]]を扱います:
+<$codeblock code={{table-example}}/>
+すると
+<table><<wikitext-example-table-header>><tbody>
+<<wikitext-example-table-row 1 "* {{table-example}}">>
+<<wikitext-example-table-row 2 """* <div>
+
+{{table-example}}
+</div>
+""">>
+<<wikitext-example-table-row 3 "* <$transclude tiddler=table-example/>">>
+<<wikitext-example-table-row 4 "* <$transclude tiddler=table-example></$transclude>">>
+<<wikitext-example-table-row 5 """* <$transclude tiddler=table-example>
+
+</$transclude>""">>
+<<wikitext-example-table-row  6 "* <$transclude tiddler=table-example mode=block/>">>
+</tbody></table>
+
+リスト構文は[[ブロックモード|Block Mode WikiText]]で認識され、囲まれた内容は[[インラインモード|Inline Mode WikiText]]で解析されます。パーサーが[[Wikiテキストのトランスクルージョン|Transclusion in WikiText]]を検出すると、現在のパーサモードを使用してトランスクルージョンされたTiddlerの内容を解析します。例Tiddlerの内容には、[[ブロックモード|Block Mode WikiText]]でのみ認識される表構文が含まれています。
+
+したがって、上記の#1では表構文が認識されません。上記の#2では、`div`開始タグの後の空白行によってパーサが[[ブロックモード|Block Mode WikiText]]に戻り、トランスクルードされたテキストがそれを継承して表が認識されます。
+
+[[ウィジェット|TranscludeWidget]]を使用してTiddlerをトランスクルードする場合、パースモードはインラインになります(上記の#3と#4)。ただし、開始タグとそれに続く空行が記述されている場合は除きます(上記の#5)。
+
+<<.tip "同様の例については、[[Wikiテキストパーサモード: マクロの例|WikiText parser mode: macro examples]]も参照してください。ここでの唯一の違いは、<<.wlink TranscludeWidget>>には、タグの記述方法に基づいて暗黙的に決定されるのではなく、パースモードを明示的に上書きできる<<.attr mode>>属性(追加例 #6)があることです">>
+
+---
+
+これらの例では、トランスクルージョンはリスト項目内ではなく、最上位レベルに配置されています:
+
+<table><<wikitext-example-table-header>><tbody>
+<<wikitext-example-table-row 1 "{{table-example}}">>
+<<wikitext-example-table-row 2 """<div>
+
+{{table-example}}
+</div>
+""">>
+<<wikitext-example-table-row 3 "<$transclude tiddler=table-example/>">>
+<<wikitext-example-table-row 4 "<$transclude tiddler=table-example></$transclude>">>
+<<wikitext-example-table-row 5 """<$transclude tiddler=table-example>
+
+</$transclude>""">>
+<<wikitext-example-table-row  6 "<$transclude tiddler=table-example mode=inline/>">>
+</tbody></table>
+
+
+これらの例のうち、空白行が後に続かない2つの<<.wlink TranscludeWidget>>タグと、<<.attr mode>>=<<.value inline>>を使用したウィジェット呼び出しが[[インラインモード|Inline Mode WikiText]]で解析されます。
+
+<<.tip "同様の例については、[[Wikiテキストパーサモード: マクロの例|WikiText parser mode: macro examples]]も参照してください。">>

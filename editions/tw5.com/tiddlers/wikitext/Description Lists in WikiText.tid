@@ -1,14 +1,44 @@
 caption: Description Lists
 created: 20131205160424246
-modified: 20251229110936191
+modified: 20260405082055301
 tags: WikiText
 title: Description Lists in WikiText
 type: text/vnd.tiddlywiki
 
-HTML description lists (<abbr title="also known as">AKA</abbr> definition lists) are created with this syntax:
+!! Basic syntax
+
+HTML description lists (<abbr title="also known as">AKA</abbr> definition lists) are created with this syntax: 
 
 <<wikitext-example src:"; Term being described
 : Description / Definition of that term
 ; Another term
 : Another description / definition
+">>
+
+!! Multiple terms and descriptions
+
+You can create multiple descriptions for a term, or multiple terms for a single description:
+
+<<wikitext-example src:"; Mouse
+: A rodent with a small body and a long tail
+: A pointing device used to interact with a computer
+; Apple
+; Pear
+: A type of fruit belonging to the Rosaceae family
+">>
+
+!! Nested description lists
+
+Description lists may also be nested to create lists within lists:
+
+<<wikitext-example src:"; Coffee
+: A beverage prepared from roasted coffee beans
+:; Black coffee
+:: Coffee served without any additives
+:; Milk coffee
+:: Coffee combined with steamed or frothed milk
+::; Latte
+::: A coffee made with espresso and steamed milk
+; Tea
+: A beverage typically made from tea leaves
 ">>

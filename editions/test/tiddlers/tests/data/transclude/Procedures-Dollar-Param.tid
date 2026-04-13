@@ -1,0 +1,22 @@
+title: Transclude/Procedures/Dollar/Param
+description: Procedure call with unquoted parameter containing dollar-colon ($:) prefix should not be parsed as a named parameter
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\procedure test(a, b)
+<<a>>--<<b>>
+\end
+
+<<test 1 2>>
+
+<<test 1 $:/foo>>
+
+<<test $:/foo $:/bar>>
+
++
+title: ExpectedResult
+
+<p>1–2</p><p>1–<a class="tc-tiddlylink tc-tiddlylink-missing" href="#%24%3A%2Ffoo">$:/foo</a></p><p><a class="tc-tiddlylink tc-tiddlylink-missing" href="#%24%3A%2Ffoo">$:/foo</a>–<a class="tc-tiddlylink tc-tiddlylink-missing" href="#%24%3A%2Fbar">$:/bar</a></p>
