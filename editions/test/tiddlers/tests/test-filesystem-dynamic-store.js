@@ -44,42 +44,7 @@ if($tw.node) {
 		}
 	}
 
-	function waitMs(ms) {
-		return new Promise(function(resolve) { setTimeout(resolve,ms); });
-	}
-
-	// Poll getUpdatedTiddlers until `predicate(updates)` returns true, or until
-	// `timeoutMs` elapses. Returns the updates object on success.
-	function waitForUpdates(adaptor,predicate,timeoutMs) {
-		timeoutMs = timeoutMs || 4000;
-		var deadline = Date.now() + timeoutMs,
-			collected = {modifications: [], deletions: []};
-		return new Promise(function(resolve,reject) {
-			function poll() {
-				adaptor.getUpdatedTiddlers({},function(err,updates) {
-					if(err) { return reject(err); }
-					if(updates) {
-						(updates.modifications || []).forEach(function(t) {
-							if(collected.modifications.indexOf(t) === -1) collected.modifications.push(t);
-						});
-						(updates.deletions || []).forEach(function(t) {
-							if(collected.deletions.indexOf(t) === -1) collected.deletions.push(t);
-							var i = collected.modifications.indexOf(t);
-							if(i !== -1) collected.modifications.splice(i,1);
-						});
-					}
-					if(predicate(collected)) { return resolve(collected); }
-					if(Date.now() >= deadline) {
-						return reject(new Error("waitForUpdates timed out; collected=" + JSON.stringify(collected)));
-					}
-					setTimeout(poll,40);
-				});
-			}
-			poll();
-		});
-	}
-
-	describe("filesystem dynamic store", function() {
+describe("filesystem dynamic store", function() {
 
 		var tmpRoot, wikiTiddlers, storeDir, origDynamicStores, origFiles, originalBootPath;
 		var adaptor, wiki;
@@ -164,49 +129,50 @@ if($tw.node) {
 			});
 		});
 
-		it("detects out-of-band additions and changes via chokidar", function(done) {
-			if(adaptor.watchers.length === 0) {
-				// chokidar unavailable in this environment
-				pending("chokidar not installed");
-				return done();
-			}
+		// Note: the chokidar watcher's only job is to call processFileEvent in
+		// response to fs events. We invoke processFileEvent directly here so the
+		// tests don't depend on real fs notifications being delivered (some CI
+		// sandboxes do not propagate inotify events to chokidar).
+
+		it("processes external additions, changes and deletions", function(done) {
+			var store = $tw.boot.dynamicStores[0];
 			var filepath = path.join(storeDir,"external.tid");
 			fs.writeFileSync(filepath,"title: external\ntype: text/x-markdown\n\nInitial\n");
-			waitForUpdates(adaptor,function(c) { return c.modifications.indexOf("external") !== -1; }).then(function() {
-				return new Promise(function(resolve,reject) {
-					adaptor.loadTiddler("external",function(err,fields) {
-						if(err) { return reject(err); }
-						expect(fields).toBeTruthy();
-						if(!fields) { return reject(new Error("loadTiddler returned null after reported modification")); }
-						expect(fields.title).toBe("external");
-						expect(fields.text).toContain("Initial");
-						resolve();
+			adaptor.processFileEvent(store,filepath,"change");
+			adaptor.getUpdatedTiddlers({},function(err,updates) {
+				expect(err).toBeFalsy();
+				expect(updates.modifications).toContain("external");
+				adaptor.loadTiddler("external",function(err,fields) {
+					expect(err).toBeFalsy();
+					expect(fields).toBeTruthy();
+					expect(fields.title).toBe("external");
+					expect(fields.text).toContain("Initial");
+					// Edit
+					fs.writeFileSync(filepath,"title: external\ntype: text/x-markdown\n\nChanged\n");
+					adaptor.processFileEvent(store,filepath,"change");
+					adaptor.getUpdatedTiddlers({},function(err,updates) {
+						expect(updates.modifications).toContain("external");
+						// Delete
+						fs.unlinkSync(filepath);
+						adaptor.processFileEvent(store,filepath,"unlink");
+						adaptor.getUpdatedTiddlers({},function(err,updates) {
+							expect(updates.deletions).toContain("external");
+							done();
+						});
 					});
 				});
-			}).then(function() {
-				fs.writeFileSync(filepath,"title: external\ntype: text/x-markdown\n\nChanged\n");
-				return waitForUpdates(adaptor,function(c) { return c.modifications.indexOf("external") !== -1; });
-			}).then(function() {
-				fs.unlinkSync(filepath);
-				return waitForUpdates(adaptor,function(c) { return c.deletions.indexOf("external") !== -1; });
-			}).then(function() { done(); },done.fail);
+			});
 		});
 
 		it("suppresses echoes when the file on disk matches the current wiki tiddler", function(done) {
-			if(adaptor.watchers.length === 0) {
-				pending("chokidar not installed");
-				return done();
-			}
-			// Seed the wiki with a tiddler whose content exactly matches what we'll write
+			var store = $tw.boot.dynamicStores[0];
 			wiki.addTiddler(new $tw.Tiddler({title: "echo", type: "text/x-markdown", text: "same\n"}));
 			var filepath = path.join(storeDir,"echo.tid");
 			fs.writeFileSync(filepath,"title: echo\ntype: text/x-markdown\n\nsame\n");
-			// Wait long enough for chokidar+debounce to definitely have processed the event
-			waitMs(800).then(function() {
-				adaptor.getUpdatedTiddlers({},function(err,updates) {
-					expect(updates.modifications).not.toContain("echo");
-					done();
-				});
+			adaptor.processFileEvent(store,filepath,"change");
+			adaptor.getUpdatedTiddlers({},function(err,updates) {
+				expect(updates.modifications).not.toContain("echo");
+				done();
 			});
 		});
 	});
