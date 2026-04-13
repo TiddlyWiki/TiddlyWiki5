@@ -1,0 +1,13 @@
+created: 20230726143332803
+modified: 20260404110322627
+original-modified: 20240619210723396
+tags: [[Variable Usage]]
+title: Behaviour of variables invoked via widget attributes
+ja-title: 
+type: text/vnd.tiddlywiki
+
+|tc-first-col-min-width|k
+|!宣言方法|!動作|
+|\define|本文テキストに対してパラメータのテキスト置換が実行されます。それ以上の処理は行われません。テキスト置換後の結果が属性の値として使用されます|
+|<<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>, \procedure, \widget|本文はそのまま取得され、属性の値として使用されます|
+|\function|ファンクション(例: .myfun)が`<div class=<<.myfun>>/>`で呼び出されると、`<div class={{{[function[.myfun]]}}}/>`の同義になります。他のフィルタ付きトランスクルージョン(つまり、三重中括弧)と同様に、最初の結果以外はすべて破棄されます。最初の結果が属性の値として使用されます。この形式で呼び出された場合でも、ファンクションは再帰的に処理されることに注意してください。つまり、ファンクション内のフィルタ式は別のファンクションを呼び出すことができ、処理は継続されます|

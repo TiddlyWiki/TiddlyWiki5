@@ -1,0 +1,23 @@
+created: 20220818093624828
+modified: 20260303113612277
+original-modified: 20221010074235929
+tags: WikiText
+title: Utility Classes
+ja-title: ユーティリティクラス
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.4">> 以下では、[[HTMLブロック要素|HTML Block Elements]]と[[Wikiテキストによる表|Tables in WikiText CSS Utility Classes]]のスタイルを簡単に設定するための定義済みCSSクラスを概説します。
+
+!! 一般的なユーティリティクラス
+
+|`tc-center` |ブロック要素をコンテナの中央に配置します |
+|`tc-max-width `|ブロック要素をコンテナの最大幅に拡張します |
+|`tc-max-width-80`|ブロック要素の幅をコンテナの最大幅の80%に設定します。この設定は`tc-center`クラスと一緒に使用すると便利です |
+|`tc-edit-max-width `|[[テキストウィジェット|TextWidget]]を利用可能な最大幅に拡張します。[[ControlPanel -> 情報 -> 基本|$:/core/ui/ControlPanel/Basics]]を参照してください|
+|`tc-first-link-nowrap` |最初のテーブル列のリンクが次の行に折り返されないようにします |
+|`tc-clearfix`|<<.from-version "5.3.6">>このクラスは、`class="tc-float-right"`を持つ要素がコンテナ要素からオーバーフローするのを防ぐために使用できます。tc-clearfixは、主要なViewTemplate要素とEditTemplate要素に既に割り当てられています。そのため、デフォルトの設定がそのままでは機能しない場合にのみ使用してください。|
+!! 表のユーティリティクラス
+
+|`tc-table-no-border` |表の境界線を削除します |
+|`tc-first-col-min-width` |表の最初の列は、コンテンツに合わせて最小限の幅で表示されます |
+|`tc-table-wrapper` |<<.from-version "5.3.6">>テーブルがオーバーフローするのを防ぐためにテーブル外の`div`要素に適用されるクラス |

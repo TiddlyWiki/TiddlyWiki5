@@ -1,0 +1,13 @@
+created: 20230410105035569
+modified: 20260406065237731
+original-modified: 20230410105035569
+tags: Definitions
+title: Tiddlyhost
+ja-title: Tiddlyhost
+type: text/vnd.tiddlywiki
+
+<span style="float:right;">[img width=140 [Tiddlyhost Logo]]</span>
+
+[[Tiddlyhost.com|https://tiddlyhost.com/]]は、Simon Bairdによって作成されたTiddlyWikiのホスティングサービスです。サインアップして電子メールを確認すると、オンライン保存をサポートする"サイト"(つまり、~TiddlyWiki)を作成できます。サイトはプライベートやパブリックにすることができ、オプションでタグ付け可能で検索可能な[[Tiddlyhostハブ|https://tiddlyhost.com/hub]]にサイトをリストし、他のユーザーが見付けられるようにすることもできます。
+
+[[TiddlySpot|Saving on TiddlySpot]]とは異なり、[[Tiddlyhost|https://tiddlyhost.com]]は安全でオープンソースであり、TiddlyWiki5を適切にサポートしています。また、既存の~TiddlyWikiファイルをアップロードしたり、TiddlyWikiClassicをサポートしたり、~TiddlySpotサイトの所有権を主張したりすることもできます。詳細については、[[FAQ|https://github.com/simonbaird/tiddlyhost/wiki/FAQ]]と[[About|https://tiddlyhost.com/about]]ページをご覧ください。
