@@ -18,6 +18,7 @@ title: Output
 <<p a1=<<v>>>> -
 <<p a1=<<f 2>>>> -
 <<p a1=`$(v2)$`>> -
+<<p a1=```$(v2)$```>> -
 <<p a1={{my tiddler}}>> -
 <<p a1={{my tiddler!!myfield}}>> -
 <<p a1={{{ foo 6 :and[join[ ]] }}}>>
