@@ -2,10 +2,6 @@ const{ test, expect } = require("@playwright/test");
 const{ resolve } = require("path");
 const{ pathToFileURL } = require("url");
 
-/**
- * Basic smoke tests to verify ProseMirror editor is loaded and functional
- */
-
 test.describe("ProseMirror Editor - Smoke Tests", () => {
 	async function loadTestPage(page) {
 		// TiddlyWiki test.html sometimes references external resources; on CI/offline these can
