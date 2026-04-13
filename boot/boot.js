@@ -1971,7 +1971,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 	});
 
 	// Helper to process a file
-	var processFile = function(filename,isTiddlerFile,fields,isEditableFile,rootPath) {
+	var processFile = function(filename,isTiddlerFile,fields,isEditableFile,rootPath,dynamicStoreId) {
 		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
 			type = (extInfo || {}).type || fields.type || "text/plain",
 			typeInfo = $tw.config.contentTypeInfo[type] || {},
@@ -2046,9 +2046,9 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			});
 		});
 		if(isEditableFile) {
-			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, isEditableFile: true, tiddlers: fileTiddlers});
+			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, isEditableFile: true, dynamicStoreId: dynamicStoreId, tiddlers: fileTiddlers});
 		} else {
-			tiddlers.push({tiddlers: fileTiddlers});
+			tiddlers.push({dynamicStoreId: dynamicStoreId, tiddlers: fileTiddlers});
 		}
 	};
 	// Helper to recursively search subdirectories
@@ -2089,6 +2089,31 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			// Process directory specifier
 			var dirPath = path.resolve(filepath,dirSpec.path);
 			if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
+				// Register a dynamic store if requested
+				var dynamicStoreId = null;
+				if(dirSpec.dynamicStore && $tw.boot.dynamicStores) {
+					dynamicStoreId = dirPath;
+					var existing = null;
+					for(var ds=0; ds<$tw.boot.dynamicStores.length; ds++) {
+						if($tw.boot.dynamicStores[ds].id === dynamicStoreId) {
+							existing = $tw.boot.dynamicStores[ds];
+							break;
+						}
+					}
+					if(!existing) {
+						$tw.boot.dynamicStores.push({
+							id: dynamicStoreId,
+							directory: dirPath,
+							saveFilter: dirSpec.dynamicStore.saveFilter || "",
+							watch: dirSpec.dynamicStore.watch !== false,
+							debounce: dirSpec.dynamicStore.debounce || 400,
+							filesRegExp: dirSpec.filesRegExp || "^.*$",
+							searchSubdirectories: !!dirSpec.searchSubdirectories,
+							isTiddlerFile: !!dirSpec.isTiddlerFile,
+							fields: dirSpec.fields || {}
+						});
+					}
+				}
 				var	files = getAllFiles(dirPath, dirSpec.searchSubdirectories),
 					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
 					metaRegExp = /^.*\.meta$/;
@@ -2097,7 +2122,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 					filename = path.basename(thisPath);
 					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
 						dirSpec.fields = dirSpec.fields || {};
-						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile,dirSpec.path);
+						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile || !!dirSpec.dynamicStore,dirSpec.path,dynamicStoreId);
 					}
 				}
 			} else {
@@ -2293,7 +2318,8 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 					filepath: tiddlerFile.filepath,
 					type: tiddlerFile.type,
 					hasMetaFile: tiddlerFile.hasMetaFile,
-					isEditableFile: config["retain-original-tiddler-path"] || tiddlerFile.isEditableFile || tiddlerFile.filepath.indexOf($tw.boot.wikiTiddlersPath) !== 0
+					isEditableFile: config["retain-original-tiddler-path"] || tiddlerFile.isEditableFile || tiddlerFile.filepath.indexOf($tw.boot.wikiTiddlersPath) !== 0,
+					dynamicStoreId: tiddlerFile.dynamicStoreId || null
 				};
 			});
 		}
@@ -2431,6 +2457,8 @@ $tw.boot.initStartup = function(options) {
 	if(!$tw.boot.tasks.readBrowserTiddlers) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
 		$tw.boot.files = Object.create(null);
+		// Array of {id, directory, saveFilter, watch, debounce} registered via tiddlywiki.files dynamicStore directives
+		$tw.boot.dynamicStores = [];
 		// System paths and filenames
 		$tw.boot.bootPath = options.bootPath || path.dirname(module.filename);
 		$tw.boot.corePath = path.resolve($tw.boot.bootPath,"../core");

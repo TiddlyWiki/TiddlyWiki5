@@ -1,0 +1,34 @@
+title: $:/changenotes/5.5.0/dynamic-store
+description: Filesystem dynamic stores with live reload via chokidar
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: nodejs
+
+The filesystem syncadaptor can now be configured to treat a folder as a [[dynamic store|tiddlywiki.files Files]]: tiddlers in the folder are loaded at boot, a configurable filter decides which tiddlers are saved back into that folder instead of the default `tiddlers/` directory, and external edits to files in the folder are picked up live by a [[chokidar|https://github.com/paulmillr/chokidar]] watcher.
+
+Dynamic stores are declared inside a `tiddlywiki.files` specification via the new `dynamicStore` property on a directory entry. For example, the following declaration loads every `.md` file in a sibling `content/` folder, routes any tiddler with `type: text/x-markdown` back to that folder on save, and hot-reloads changes made by an external editor:
+
+```
+{
+    "directories": [{
+        "path": "../content",
+        "filesRegExp": "^.*\\.md$",
+        "isTiddlerFile": true,
+        "dynamicStore": {
+            "saveFilter": "[type[text/x-markdown]]",
+            "watch": true,
+            "debounce": 400
+        }
+    }]
+}
+```
+
+Notes:
+
+* File events are debounced per file (default 400ms, configurable via `debounce`) to cope with editors that save atomically via rename.
+* Each detected change is diffed against the current in-wiki tiddler before being reported, so self-writes performed by TiddlyWiki itself do not cause reload loops.
+* Deletions on disk propagate to the wiki via the syncer's standard server-side-deletion path.
+* JavaScript module tiddlers (those with `type: application/javascript` and a `module-type` field) are never hot-reloaded; reloading them would require restarting the TiddlyWiki process.
+
+This feature adds [[chokidar|https://github.com/paulmillr/chokidar]] as a new runtime dependency of TiddlyWiki on Node.js.
