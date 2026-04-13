@@ -7,65 +7,54 @@ module-type: library
 
 "use strict";
 
-const Widget = require("$:/core/modules/widgets/widget.js").widget;
-const debounce = require("$:/core/modules/utils/debounce.js").debounce;
-const wikiAstFromProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js").from;
-const wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js").to;
-const buildSchema = require("$:/plugins/tiddlywiki/prosemirror/engine.js").buildSchema;
+const { widget: Widget } = require("$:/core/modules/widgets/widget.js");
+const { debounce } = require("$:/core/modules/utils/debounce.js");
+const { from: wikiAstFromProseMirrorAst } = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js");
+const { to: wikiAstToProseMirrorAst } = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js");
+const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/schema.js");
 
-const EditorState = require("prosemirror-state").EditorState;
-const EditorView = require("prosemirror-view").EditorView;
-const TextSelection = require("prosemirror-state").TextSelection;
-const keymap = require("prosemirror-keymap").keymap;
-const createListPlugins = require("prosemirror-flat-list").createListPlugins;
-const listKeymap = require("prosemirror-flat-list").listKeymap;
-const exampleSetup = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js").exampleSetup;
-const placeholderPlugin = require("$:/plugins/tiddlywiki/prosemirror/setup/placeholder.js").placeholderPlugin;
-const SlashMenuPlugin = require("$:/plugins/tiddlywiki/prosemirror/slash-menu.js").SlashMenuPlugin;
-const SlashMenuUI = require("$:/plugins/tiddlywiki/prosemirror/slash-menu-ui.js").SlashMenuUI;
-const getAllMenuElements = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js").getAllMenuElements;
-const createWidgetBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/widget-block/plugin.js").createWidgetBlockPlugin;
-const createWidgetBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/widget-block/plugin.js").createWidgetBlockNodeViewPlugin;
-const createImageBlockPlugin = require("$:/plugins/tiddlywiki/prosemirror/image-block/plugin.js").createImageBlockPlugin;
-const createImageNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/image/plugin.js").createImageNodeViewPlugin;
-const computeImageSrc = require("$:/plugins/tiddlywiki/prosemirror/image/utils.js").computeImageSrc;
-const createPragmaBlockNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/pragma-block/nodeview.js").createPragmaBlockNodeViewPlugin;
-const createHardLineBreaksNodeViewPlugin = require("$:/plugins/tiddlywiki/prosemirror/hard-line-breaks-block/nodeview.js").createHardLineBreaksNodeViewPlugin;
-const createDragHandlePlugin = require("$:/plugins/tiddlywiki/prosemirror/drag-handle.js").createDragHandlePlugin;
-const BubbleMenu = require("$:/plugins/tiddlywiki/prosemirror/bubble-menu.js").BubbleMenu;
-const getMarkdownInputRules = require("$:/plugins/tiddlywiki/prosemirror/markdown-shortcuts.js").getMarkdownInputRules;
-const inputRules = require("prosemirror-inputrules").inputRules;
-const createAutocompletePlugin = require("$:/plugins/tiddlywiki/prosemirror/autocomplete/autocomplete-plugin.js").createAutocompletePlugin;
-const createFindReplacePlugin = require("$:/plugins/tiddlywiki/prosemirror/find-replace/find-replace-plugin.js").createFindReplacePlugin;
+const { EditorState, TextSelection, NodeSelection } = require("prosemirror-state");
+const { EditorView } = require("prosemirror-view");
+const { keymap } = require("prosemirror-keymap");
+const { createListPlugins, listKeymap } = require("prosemirror-flat-list");
+const { exampleSetup } = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js");
+const { placeholderPlugin } = require("$:/plugins/tiddlywiki/prosemirror/setup/placeholder.js");
+const { SlashMenuPlugin } = require("$:/plugins/tiddlywiki/prosemirror/slash-menu/slash-menu.js");
+const { SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/slash-menu/slash-menu-ui.js");
+const { getAllMenuElements } = require("$:/plugins/tiddlywiki/prosemirror/slash-menu/menu-elements.js");
+const { createWidgetBlockPlugin, createWidgetBlockNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/widget-block/plugin.js");
+const { createImageBlockPlugin } = require("$:/plugins/tiddlywiki/prosemirror/image-block/plugin.js");
+const { createImageNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/image/plugin.js");
+const { computeImageSrc } = require("$:/plugins/tiddlywiki/prosemirror/image/utils.js");
+const { createPragmaBlockNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/pragma-block/nodeview.js");
+const { createHardLineBreaksNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/hard-line-breaks-block/nodeview.js");
+const { createDragHandlePlugin } = require("$:/plugins/tiddlywiki/prosemirror/editor-plugins/drag-handle.js");
+const { BubbleMenu } = require("$:/plugins/tiddlywiki/prosemirror/editor-plugins/bubble-menu.js");
+const { getMarkdownInputRules } = require("$:/plugins/tiddlywiki/prosemirror/editor-plugins/markdown-shortcuts.js");
+const { inputRules } = require("prosemirror-inputrules");
+const { createAutocompletePlugin } = require("$:/plugins/tiddlywiki/prosemirror/autocomplete/autocomplete-plugin.js");
+const { createFindReplacePlugin } = require("$:/plugins/tiddlywiki/prosemirror/find-replace/find-replace-plugin.js");
 
-const NodeSelection = require("prosemirror-state").NodeSelection;
+class ProsemirrorWidget extends Widget {
 
-const ProsemirrorWidget = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
+constructor(parseTreeNode, options) {
+	super(parseTreeNode, options);
 	// indicate the change is triggered by the widget itself
 	this.saveLock = false;
 	this.imagePickerOpen = false;
 	this.imagePickerInitialized = false;
 	// Each instance gets its own debounced save to avoid shared timer bugs
 	this.debouncedSaveEditorContent = debounce(this.saveEditorContent.bind(this), 300);
-};
+}
 
-/*
-Inherit from the base widget class
-*/
-ProsemirrorWidget.prototype = new Widget();
-
-/*
-Render this widget into the DOM
-*/
-ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
+render(parent, nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
 
 	const tiddler = this.getAttribute("tiddler");
 	const initialText = this.wiki.getTiddlerText(tiddler, "");
-	var initialWikiAst, doc;
+	let initialWikiAst, doc;
 	try {
 		initialWikiAst = $tw.wiki.parseText(null, initialText).tree;
 		doc = wikiAstToProseMirrorAst(initialWikiAst);
@@ -183,11 +172,11 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	// Mark events with twEditor and stop propagation so TiddlyWiki/document handlers
 	// don't hijack shortcuts or show the import dialog. Attach to the editor DOM in
 	// bubble phase so ProseMirror gets first dibs on handling the event.
-	this.view.dom.addEventListener("paste", function(event) {
+	this.view.dom.addEventListener("paste", (event) => {
 		event.twEditor = true;
 		event.stopPropagation();
 	});
-	this.view.dom.addEventListener("keydown", function(event) {
+	this.view.dom.addEventListener("keydown", (event) => {
 		event.twEditor = true;
 		event.stopPropagation();
 	});
@@ -204,7 +193,7 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 	});
 	addLineBtn.setAttribute("type", "button");
 	addLineBtn.setAttribute("contenteditable", "false");
-	addLineBtn.addEventListener("mousedown", function(event) {
+	addLineBtn.addEventListener("mousedown", (event) => {
 		event.preventDefault();
 		event.stopPropagation();
 	}, true);
@@ -377,9 +366,9 @@ ProsemirrorWidget.prototype.render = function(parent,nextSibling) {
 			// ignore
 		}
 	}, 0);
-};
+}
 
-ProsemirrorWidget.prototype.getSelectedImageInfo = function() {
+getSelectedImageInfo() {
 	if(!this.view || !this.view.state) {
 		return null;
 	}
@@ -391,19 +380,19 @@ ProsemirrorWidget.prototype.getSelectedImageInfo = function() {
 		};
 	}
 	return null;
-};
+}
 
-ProsemirrorWidget.prototype.openImagePicker = function() {
+openImagePicker() {
 	this.imagePickerOpen = true;
 	this.updateImagePickerFromSelection();
-};
+}
 
-ProsemirrorWidget.prototype.closeImagePicker = function() {
+closeImagePicker() {
 	this.imagePickerOpen = false;
 	this.updateImagePickerFromSelection();
-};
+}
 
-ProsemirrorWidget.prototype.updateImagePickerFromSelection = function() {
+updateImagePickerFromSelection() {
 	if(!this.imagePickerWrap) {
 		return;
 	}
@@ -418,9 +407,9 @@ ProsemirrorWidget.prototype.updateImagePickerFromSelection = function() {
 	if(this.imagePickerTitle) {
 		this.imagePickerTitle.textContent = this.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/ReplaceImage", "Replace image") + ": " + src;
 	}
-};
+}
 
-ProsemirrorWidget.prototype.handleProseMirrorImagePicked = function(event) {
+handleProseMirrorImagePicked(event) {
 	const pickedTitle = event && event.paramObject && event.paramObject.imageTitle;
 	if(!pickedTitle || !this.view) {
 		return true;
@@ -435,19 +424,16 @@ ProsemirrorWidget.prototype.handleProseMirrorImagePicked = function(event) {
 	if(!imageType) {
 		return true;
 	}
-	const newAttrs = Object.assign({}, oldAttrs, {
-		twSource: pickedTitle,
-		src: computeImageSrc(pickedTitle, this.wiki)
-	});
+	const newAttrs = { ...oldAttrs, twSource: pickedTitle, src: computeImageSrc(pickedTitle, this.wiki) };
 	const newNode = imageType.create(newAttrs);
 	let tr = this.view.state.tr.replaceWith(info.pos, info.pos + info.node.nodeSize, newNode);
 	tr = tr.setSelection(NodeSelection.create(tr.doc, info.pos));
 	this.view.dispatch(tr.scrollIntoView());
 	this.view.focus();
 	return false;
-};
+}
 
-ProsemirrorWidget.prototype.handleProseMirrorImagePickedNodeView = function(event) {
+handleProseMirrorImagePickedNodeView(event) {
 	const paramObj = event && event.paramObject;
 	const nodeviewId = paramObj && (paramObj.nodeviewId || paramObj.nodeViewId);
 	const pickedTitle = paramObj && paramObj.imageTitle;
@@ -470,9 +456,9 @@ ProsemirrorWidget.prototype.handleProseMirrorImagePickedNodeView = function(even
 	}
 	
 	return true;
-};
+}
 
-ProsemirrorWidget.prototype.saveEditorContent = function() {
+saveEditorContent() {
 	try {
 		const content = this.view.state.doc.toJSON();
 		const wikiast = wikiAstFromProseMirrorAst(content);
@@ -493,24 +479,18 @@ ProsemirrorWidget.prototype.saveEditorContent = function() {
 	}
 }
 
-/**
- * Collect all pragma_block rawTexts from the current document.
- * Returns a string of concatenated pragma definitions that can be prepended
- * before widget text for parsing, so that \define/\procedure/etc. are available.
- */
-ProsemirrorWidget.prototype.getPragmaPreamble = function() {
+getPragmaPreamble() {
 	if(!this.view || !this.view.state) return "";
-	var parts = [];
-	this.view.state.doc.forEach(function(node) {
+	const parts = [];
+	this.view.state.doc.forEach((node) => {
 		if(node.type.name === "pragma_block" && node.attrs.rawText) {
 			parts.push(node.attrs.rawText);
 		}
 	});
 	return parts.length > 0 ? parts.join("\n") + "\n" : "";
-};
+}
 
-// onDestroy lifecycle hook (requires PR #9097 merged into base Widget)
-ProsemirrorWidget.prototype.onDestroy = function() {
+onDestroy() {
 	// Flush any pending debounced save to prevent data loss
 	if(this.debouncedSaveEditorContent && this.debouncedSaveEditorContent.flush) {
 		this.debouncedSaveEditorContent.flush();
@@ -533,20 +513,14 @@ ProsemirrorWidget.prototype.onDestroy = function() {
 		this.view.destroy();
 		this.view = null;
 	}
-};
+}
 
-/*
-Compute the internal state of the widget
-*/
-ProsemirrorWidget.prototype.execute = function() {
+execute() {
 	// Nothing to do for a text node
-};
+}
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
-ProsemirrorWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+refresh(changedTiddlers) {
+	const changedAttributes = this.computeAttributes();
 	if(changedAttributes.text) {
 		this.refreshSelf();
 		return true;
@@ -562,6 +536,8 @@ ProsemirrorWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	}
 	return false;
-};
+}
+
+} // end class ProsemirrorWidget
 
 exports.prosemirror = ProsemirrorWidget;

@@ -136,61 +136,54 @@ function reportInvalid(dom, message) {
 	}, 1500);
 }
 
-function Field(options) {
-	this.options = options;
-}
-
-Field.prototype.read = function(dom) {
-	return dom.value;
-};
-
-Field.prototype.validateType = function(value) {
-	return null;
-};
-
-Field.prototype.validate = function(value) {
-	if(!value && this.options.required) {
-		return $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Prompt/RequiredField", "Required field");
+class Field {
+	constructor(options) {
+		this.options = options;
 	}
-	return this.validateType(value) || (this.options.validate ? this.options.validate(value) : null);
-};
 
-Field.prototype.clean = function(value) {
-	return this.options.clean ? this.options.clean(value) : value;
-};
-
-function TextField(options) {
-	Field.call(this, options);
-}
-
-TextField.prototype = Object.create(Field.prototype);
-
-TextField.prototype.render = function() {
-	const input = document.createElement("input");
-	input.type = "text";
-	input.placeholder = this.options.label;
-	input.value = this.options.value || "";
-	input.autocomplete = "off";
-	return input;
-};
-
-function SelectField(options) {
-	Field.call(this, options);
-}
-
-SelectField.prototype = Object.create(Field.prototype);
-
-SelectField.prototype.render = function() {
-	const select = document.createElement("select");
-	for(let i = 0; i < this.options.options.length; i++) {
-		const o = this.options.options[i];
-		const opt = select.appendChild(document.createElement("option"));
-		opt.value = o.value;
-		opt.selected = o.value == this.options.value;
-		opt.label = o.label;
+	read(dom) {
+		return dom.value;
 	}
-	return select;
-};
+
+	validateType(_value) {
+		return null;
+	}
+
+	validate(value) {
+		if(!value && this.options.required) {
+			return $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Prompt/RequiredField", "Required field");
+		}
+		return this.validateType(value) || (this.options.validate ? this.options.validate(value) : null);
+	}
+
+	clean(value) {
+		return this.options.clean ? this.options.clean(value) : value;
+	}
+}
+
+class TextField extends Field {
+	render() {
+		const input = document.createElement("input");
+		input.type = "text";
+		input.placeholder = this.options.label;
+		input.value = this.options.value || "";
+		input.autocomplete = "off";
+		return input;
+	}
+}
+
+class SelectField extends Field {
+	render() {
+		const select = document.createElement("select");
+		for(const o of this.options.options) {
+			const opt = select.appendChild(document.createElement("option"));
+			opt.value = o.value;
+			opt.selected = o.value == this.options.value;
+			opt.label = o.label;
+		}
+		return select;
+	}
+}
 
 exports.openPrompt = openPrompt;
 exports.Field = Field;
