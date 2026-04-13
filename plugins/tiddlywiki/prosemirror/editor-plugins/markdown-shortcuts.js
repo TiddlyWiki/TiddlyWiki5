@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/prosemirror/markdown-shortcuts.js
+title: $:/plugins/tiddlywiki/prosemirror/editor-plugins/markdown-shortcuts.js
 type: application/javascript
 module-type: library
 
@@ -12,8 +12,8 @@ Enabled/disabled via $:/config/prosemirror/markdown-shortcuts.
 
 "use strict";
 
-var InputRule = require("prosemirror-inputrules").InputRule;
-var TextSelection = require("prosemirror-state").TextSelection;
+const InputRule = require("prosemirror-inputrules").InputRule;
+const TextSelection = require("prosemirror-state").TextSelection;
 
 /**
  * Create an input rule that wraps the matched text in a mark.
@@ -23,15 +23,15 @@ var TextSelection = require("prosemirror-state").TextSelection;
  */
 function markInputRule(regexp, markType, groupIndex) {
 	groupIndex = groupIndex || 1;
-	return new InputRule(regexp, function(state, match, start, end) {
-		var innerText = match[groupIndex];
+	return new InputRule(regexp, (state, match, start, end) => {
+		const innerText = match[groupIndex];
 		if(!innerText) return null;
-		var tr = state.tr;
+		const tr = state.tr;
 		// Replace the full matched text with just the inner text + mark
 		tr.delete(start, end);
 		tr.insertText(innerText, start);
-		var markFrom = start;
-		var markTo = start + innerText.length;
+		const markFrom = start;
+		const markTo = start + innerText.length;
 		tr.addMark(markFrom, markTo, markType.create());
 		// Move cursor after the marked text
 		tr.setSelection(TextSelection.create(tr.doc, markTo));
@@ -46,26 +46,26 @@ function markInputRule(regexp, markType, groupIndex) {
  * Only match at the very start of a textblock.
  */
 function headingInputRule(schema) {
-	var headingType = schema.nodes.heading;
+	const headingType = schema.nodes.heading;
 	if(!headingType) return [];
 	return [
 		// # Heading 1 (must be at start of textblock; triggered by Space)
-		new InputRule(/^#\s$/, function(state, match, start, end) {
+		new InputRule(/^#\s$/, (state, match, start, end) => {
 			return state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 1 });
 		}),
-		new InputRule(/^##\s$/, function(state, match, start, end) {
+		new InputRule(/^##\s$/, (state, match, start, end) => {
 			return state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 2 });
 		}),
-		new InputRule(/^###\s$/, function(state, match, start, end) {
+		new InputRule(/^###\s$/, (state, match, start, end) => {
 			return state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 3 });
 		}),
-		new InputRule(/^####\s$/, function(state, match, start, end) {
+		new InputRule(/^####\s$/, (state, match, start, end) => {
 			return state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 4 });
 		}),
-		new InputRule(/^#####\s$/, function(state, match, start, end) {
+		new InputRule(/^#####\s$/, (state, match, start, end) => {
 			return state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 5 });
 		}),
-		new InputRule(/^######\s$/, function(state, match, start, end) {
+		new InputRule(/^######\s$/, (state, match, start, end) => {
 			return state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 6 });
 		})
 	];
@@ -75,22 +75,22 @@ function headingInputRule(schema) {
  * Create an input rule for blockquote: > at start of line.
  */
 function blockquoteInputRule(schema) {
-	var bqType = schema.nodes.blockquote;
+	const bqType = schema.nodes.blockquote;
 	if(!bqType) return [];
-	var wrapIn = require("prosemirror-commands").wrapIn;
+	const wrapIn = require("prosemirror-commands").wrapIn;
 	return [
-		new InputRule(/^>\s$/, function(state, match, start, end) {
+		new InputRule(/^>\s$/, (state, match, start, end) => {
 			// Delete the "> " trigger text first
-			var tr = state.tr.delete(start, end);
+			let tr = state.tr.delete(start, end);
 			// Apply wrapIn on the resulting state after deletion
-			var newState = state.apply(tr);
-			var wrapTr = null;
-			wrapIn(bqType)(newState, function(t) { wrapTr = t; });
+			const newState = state.apply(tr);
+			let wrapTr = null;
+			wrapIn(bqType)(newState, (t) => { wrapTr = t; });
 			if(wrapTr) {
 				// Combine: first delete, then wrap. Rebuild from scratch using
 				// the steps from both transactions.
-				var combined = state.tr.delete(start, end);
-				for(var si = 0; si < wrapTr.steps.length; si++) {
+				const combined = state.tr.delete(start, end);
+				for(let si = 0; si < wrapTr.steps.length; si++) {
 					combined.step(wrapTr.steps[si]);
 				}
 				return combined;
@@ -104,10 +104,10 @@ function blockquoteInputRule(schema) {
  * Create an input rule for horizontal rule: --- at start of line.
  */
 function hrInputRule(schema) {
-	var hrType = schema.nodes.horizontal_rule;
+	const hrType = schema.nodes.horizontal_rule;
 	if(!hrType) return [];
 	return [
-		new InputRule(/^---$/, function(state, match, start, end) {
+		new InputRule(/^---$/, (state, match, start, end) => {
 			return state.tr.replaceWith(start - 1, end, [
 				hrType.create(),
 				schema.nodes.paragraph.createAndFill()
@@ -120,10 +120,10 @@ function hrInputRule(schema) {
  * Create an input rule for code blocks: ``` at start of line.
  */
 function codeBlockInputRule(schema) {
-	var cbType = schema.nodes.code_block;
+	const cbType = schema.nodes.code_block;
 	if(!cbType) return [];
 	return [
-		new InputRule(/^```$/, function(state, match, start, end) {
+		new InputRule(/^```$/, (state, match, start, end) => {
 			return state.tr.delete(start - 1, end).setBlockType(start - 1, start - 1, cbType);
 		})
 	];
@@ -134,11 +134,11 @@ function codeBlockInputRule(schema) {
  * Only returns rules if the setting is enabled.
  */
 function getMarkdownInputRules(wiki, schema) {
-	var enabled = wiki.getTiddlerText("$:/config/prosemirror/markdown-shortcuts", "no");
+	const enabled = wiki.getTiddlerText("$:/config/prosemirror/markdown-shortcuts", "no");
 	if(enabled !== "yes") return [];
 
-	var rules = [];
-	var marks = schema.marks;
+	let rules = [];
+	const marks = schema.marks;
 
 	// **bold** 
 	if(marks.strong) {
@@ -178,28 +178,28 @@ function getMarkdownInputRules(wiki, schema) {
  * and $:/config/prosemirror/autocomplete/def-desc-triggers.
  */
 function definitionListInputRules(schema, wiki) {
-	var rules = [];
-	var dtType = schema.nodes.definition_term;
-	var ddType = schema.nodes.definition_description;
-	var dlType = schema.nodes.definition_list;
+	let rules = [];
+	const dtType = schema.nodes.definition_term;
+	const ddType = schema.nodes.definition_description;
+	const dlType = schema.nodes.definition_list;
 	if(!dtType || !ddType || !dlType) return rules;
 
 	// Default triggers: ; and ；for <dt>, : and ：for <dd>
-	var termTriggers = parseTriggerList(wiki, "$:/config/prosemirror/def-term-triggers", [";", "；"]);
-	var descTriggers = parseTriggerList(wiki, "$:/config/prosemirror/def-desc-triggers", [":", "："]);
+	const termTriggers = parseTriggerList(wiki, "$:/config/prosemirror/def-term-triggers", [";", "；"]);
+	const descTriggers = parseTriggerList(wiki, "$:/config/prosemirror/def-desc-triggers", [":", "："]);
 
-	termTriggers.forEach(function(trig) {
-		var escaped = trig.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-		var pattern = new RegExp("^" + escaped + "\\s$");
-		rules.push(new InputRule(pattern, function(state, match, start, end) {
+	termTriggers.forEach((trig) => {
+		const escaped = trig.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+		const pattern = new RegExp("^" + escaped + "\\s$");
+		rules.push(new InputRule(pattern, (state, match, start, end) => {
 			return createDefListItem(state, start, end, dlType, dtType);
 		}));
 	});
 
-	descTriggers.forEach(function(trig) {
-		var escaped = trig.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-		var pattern = new RegExp("^" + escaped + "\\s$");
-		rules.push(new InputRule(pattern, function(state, match, start, end) {
+	descTriggers.forEach((trig) => {
+		const escaped = trig.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+		const pattern = new RegExp("^" + escaped + "\\s$");
+		rules.push(new InputRule(pattern, (state, match, start, end) => {
 			return createDefListItem(state, start, end, dlType, ddType);
 		}));
 	});
@@ -208,20 +208,20 @@ function definitionListInputRules(schema, wiki) {
 }
 
 function parseTriggerList(wiki, title, defaults) {
-	var text = wiki.getTiddlerText(title, "");
+	const text = wiki.getTiddlerText(title, "");
 	if(!text.trim()) return defaults;
-	return text.split("\n").map(function(s) { return s.trim(); }).filter(function(s) { return s.length > 0; });
+	return text.split("\n").map((s) => { return s.trim(); }).filter((s) => { return s.length > 0; });
 }
 
 function createDefListItem(state, start, end, dlType, itemType) {
-	var $pos = state.doc.resolve(start);
+	const $pos = state.doc.resolve(start);
 	// Only convert if we're in a paragraph that's a direct child of doc or a definition_list
 	if(!$pos.parent.isTextblock) return null;
-	var tr = state.tr.delete(start, end);
+	let tr = state.tr.delete(start, end);
 	// Replace the paragraph with a definition_list containing the item
-	var blockStart = $pos.before($pos.depth);
-	var blockEnd = $pos.after($pos.depth);
-	var dl = dlType.create(null, [itemType.create()]);
+	const blockStart = $pos.before($pos.depth);
+	const blockEnd = $pos.after($pos.depth);
+	const dl = dlType.create(null, [itemType.create()]);
 	tr = tr.replaceWith(blockStart, blockEnd, dl);
 	// Place cursor inside the new item
 	return tr.setSelection(TextSelection.create(tr.doc, blockStart + 2));

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/prosemirror/bubble-menu.js
+title: $:/plugins/tiddlywiki/prosemirror/editor-plugins/bubble-menu.js
 type: application/javascript
 module-type: library
 
@@ -98,25 +98,18 @@ class BubbleMenu {
 		const linkMark = schema.marks.link.isInSet(state.selection.$from.marks());
 
 		if(linkMark) {
+			// Remove existing link
 			this.view.dispatch(state.tr.removeMark(from, to, schema.marks.link));
 			this.view.focus();
-		} else {
-			const { TextField, openPrompt } = require("$:/plugins/tiddlywiki/prosemirror/setup/prompt.js");
-			const view = this.view;
-			openPrompt({
-				title: $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Menu/CreateLink", "Create a link"),
-				fields: {
-					href: new TextField({
-						label: $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Menu/LinkTarget", "Link target"),
-						required: true
-					})
-				},
-				callback(attrs) {
-					toggleMark(schema.marks.link, { href: attrs.href, title: attrs.href })(view.state, view.dispatch);
-					view.focus();
-				}
-			});
+		} else if(!state.selection.empty) {
+			// Create wikilink from selected text: [[selectedText]]
+			const selectedText = state.doc.textBetween(from, to, "");
+			const href = selectedText;
+			const mark = schema.marks.link.create({ href: href, title: href });
+			this.view.dispatch(state.tr.addMark(from, to, mark));
+			this.view.focus();
 		}
+		this.update(this.view);
 	}
 
 	/** Called by ProseMirror view on every update to reposition/show/hide. */
