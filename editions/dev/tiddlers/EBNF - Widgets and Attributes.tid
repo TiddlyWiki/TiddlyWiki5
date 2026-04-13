@@ -1,0 +1,170 @@
+created: 20260413142500338
+modified: 20260413150513462
+tags: doc dev [[Wikitext EBNF]]
+title: EBNF - Widgets and Attributes
+
+!! HTML Elements and Widgets
+
+The same parser rule ([[html.js|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/core/modules/parsers/wikiparser/rules/html.js]]) handles both plain HTML elements and TiddlyWiki widgets. Widgets are distinguished by the `$` prefix on their tag name. When the parser sees a `$` prefix, the node type is set to the widget name (the tag minus the `$` character); otherwise the node type is `element`.
+
+* HTML: `<div class="foo">content</div>`
+* Widget: `<$list filter="[tag[doc]]">content</$list>`
+* Self-closing: `<br/>` or `<$set name="x" value="y"/>`
+
+''Block vs inline:'' If the opening tag is followed by a double newline (blank line), the content is parsed in block mode. Otherwise the content is parsed in inline mode. This is what allows widgets to contain block-level content like paragraphs and headings.
+
+The tag name regex allows alphanumeric characters, hyphens, `$`, and dots: `/([a-zA-Z0-9\-\$\.]+)/`
+
+```
+HTMLElement   ::= '<' TagName Attributes? ( '/>' | '>' Content '</' TagName '>' )
+TagName       ::= '$' WidgetName | HTMLTagName
+WidgetName    ::= [a-zA-Z0-9] [a-zA-Z0-9.\-]*
+HTMLTagName   ::= [a-zA-Z] [a-zA-Z0-9.\-]*
+Content       ::= BlockContent | InlineContent    (* block if double-newline after open tag *)
+```
+
+Note: A tag starting with `-` is rejected by `isLegalTag()` for HTML elements (but widgets are always legal).
+
+!! The Attribute System (7 Value Forms)
+
+This is the most complex part of the wikitext syntax. Attributes can appear on HTML elements, widgets, and image syntax. The parser in [[parseutils.js|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/core/modules/parsers/parseutils.js]] tries each value form in a specific order, taking the first match.
+
+The attribute name allows any character except: `/` whitespace `>` `"` `'` `` ` `` `=`
+
+!!! 1. String Value
+
+`attr="value"` or `attr='value'` or `attr=[[value]]` or `attr="""value"""`
+
+Four quoting styles are supported. The `""".."""` triple-double-quote form allows embedded double quotes and newlines. The `[[...]]` form is familiar from TiddlyWiki link syntax.
+
+Also unquoted: `attr=value` (the value must not contain `/` whitespace `<` `>` `"` `'` `` ` `` `=`).
+
+!!! 2. Filtered Value
+
+`attr={{{filter-expression}}}`
+
+The filter is evaluated at runtime. The first result of the filter becomes the attribute value.
+
+!!! 3. Indirect Value (Text Reference)
+
+`attr={{tiddler!!field}}`
+
+Looks up a text reference at runtime. The value inside the double braces is a standard TiddlyWiki text reference (e.g., `MyTiddler`, `MyTiddler!!field`, `MyTiddler##index`).
+
+!!! 4. Macro/Variable Value
+
+`attr=<<macroname params>>`
+
+Evaluates a macro or variable invocation and uses the result as the attribute value. The macro call syntax inside the angle brackets follows the standard macro invocation syntax.
+
+!!! 5. MVV (Multi-Valued Variable) Value
+
+`attr=((varname))`
+
+A variable reference evaluated at runtime. Internally stored as a transclusion node with `isMVV: true`.
+
+!!! 6. Substituted Value
+
+`attr=` &#96;`text with $(variable)$ substitution`&#96; or `attr=` &#96;&#96;&#96;`multiline text`&#96;&#96;&#96;
+
+Text with `$(varname)$` placeholders that are replaced at runtime. This is a text substitution mechanism, not a filter. The triple-backtick form allows the value to span multiple lines and contain single backticks.
+
+!!! 7. Boolean (No Value)
+
+`disabled` alone (without `=`) means the attribute value is `"true"`.
+
+If the parser finds an attribute name followed by `=` but none of the value forms match, it also falls back to `"true"`.
+
+!! Parse Order
+
+The `parseAttribute()` function tries value forms in this specific order after seeing `=`:
+
+# String literal (`"..."`, `'...'`, `[[...]]`, `"""..."""`) -- checked first via `parseStringLiteral()`
+# Filtered value (`{{{...}}}`)
+# Indirect value (`{{...}}`)
+# Macro invocation (`<<...>>`)
+# MVV reference (`((...))`) 
+# Substituted value (&#96;`...`&#96; or &#96;&#96;&#96;`...`&#96;&#96;&#96;)
+# Unquoted value (any run of non-delimiter characters)
+# Fallback: value is `"true"`
+
+This ordering matters. For example, `{{{filter}}}` is checked before `{{textref}}`, so there is no ambiguity between filtered and indirect values. Similarly, `(((...)))` would be parsed as MVV wrapping a filter-like expression, not as nested MVV references.
+
+!! Substituted Attributes in Detail
+
+Inside backtick-quoted attribute values, the `$(varname)$` placeholder syntax provides text substitution:
+
+```
+<$text text=`Hello $(username)$, you have $(count)$ messages`/>
+```
+
+This is a text substitution mechanism, not a filter. The variable name between `$(` and `)$` is looked up at runtime and its value replaces the entire `$(varname)$` token. Multiple placeholders can appear in a single substituted attribute value.
+
+The triple-backtick form allows multiline substituted values:
+
+```
+<$text text=```First line with $(var1)$
+Second line with $(var2)$```/>
+```
+
+!! Design Notes
+
+* The attribute system is arguably the most complex part of wikitext -- 7 value forms, each with its own delimiter syntax.
+* All attribute value forms share the same syntax regardless of whether they appear on an HTML element or a widget.
+* The parser tries each form in order: string literals first, then filtered, indirect, macro, MVV, substituted, unquoted. The first match wins.
+* Attributes can span multiple lines when using `"""..."""` or triple-backtick forms.
+* The attribute name regex is deliberately permissive -- it accepts any character not in the delimiter set (`/`, whitespace, `>`, `"`, `'`, &#96;, `=`). This means attribute names like `data-custom` and `$variable` are valid.
+* In `html.js`, the `parseTag` function loops calling `parseAttribute` until it returns `null`, collecting all attributes into both an ordered array (`orderedAttributes`) and a name-keyed object (`attributes`). If duplicate attribute names appear, the last one wins in the object, but all are preserved in the ordered array.
+
+!! Combined EBNF
+
+```
+(* === HTML Elements and Widgets === *)
+
+HTMLElement     ::= '<' TagName Attributes? ( '/>' | '>' Content '</' TagName '>' )
+TagName         ::= '$' WidgetName | HTMLTagName
+WidgetName      ::= [a-zA-Z0-9] [a-zA-Z0-9.\-]*
+HTMLTagName     ::= [a-zA-Z] [a-zA-Z0-9.\-]*
+Content         ::= BlockContent | InlineContent
+
+(* === Attributes === *)
+
+Attributes      ::= ( WS Attribute )*
+Attribute       ::= AttrName ( '=' AttrValue )?
+
+AttrName        ::= [^\/\s>"'`=]+
+
+AttrValue       ::= StringLiteral                        (* quoted string *)
+                   | '{{{' FilterExpr '}}}'               (* filtered value *)
+                   | '{{' TextReference '}}'              (* indirect value *)
+                   | '<<' MacroCall '>>'                  (* macro/variable value *)
+                   | '((' VarName '))'                    (* MVV variable *)
+                   | '```' SubstitutedText '```'          (* substituted, multiline *)
+                   | '`' SubstitutedText '`'              (* substituted, single-line *)
+                   | UnquotedValue                        (* unquoted string *)
+
+(* === String Literals === *)
+
+StringLiteral   ::= '"""' AnyChar* '"""'                  (* triple-double-quote, lazy match *)
+                   | '"' [^"]* '"'                        (* double-quoted *)
+                   | "'" [^']* "'"                        (* single-quoted *)
+                   | '[[' ( [^\]] | ']' [^\]] )* ']]'    (* double-bracket *)
+
+UnquotedValue   ::= [^\/\s<>"'`=]+
+
+(* === Substitution Placeholders === *)
+
+SubstitutedText ::= ( PlainText | Placeholder )*
+Placeholder     ::= '$(' VarName ')$'
+
+(* === Macro Call (inside attribute value) === *)
+
+MacroCall       ::= MacroName ( WS MacroParam )*
+MacroParam      ::= ( ParamName ':' )? ParamValue
+ParamValue      ::= StringLiteral | UnquotedMacroParam
+```
+
+!! Source References
+
+* [[html.js|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/core/modules/parsers/wikiparser/rules/html.js]] -- `parseTag()` at line 93, `findNextTag()` at line 161
+* [[parseutils.js|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/core/modules/parsers/parseutils.js]] -- `parseAttribute()` at line 504, `parseStringLiteral()` at line 105, `parseMacroInvocationAsTransclusion()` at line 216, `parseMVVReferenceAsTransclusion()` at line 263

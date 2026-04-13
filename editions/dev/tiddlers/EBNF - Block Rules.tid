@@ -1,0 +1,458 @@
+created: 20260413142414047
+modified: 20260413142414047
+tags: doc dev [[Wikitext EBNF]]
+title: EBNF - Block Rules
+
+Block rules are parser rules that match at //line-start positions//. Unlike inline rules, which match within a line of text, block rules consume one or more complete lines. Block content typically terminates at a double newline (blank line) or a matching closing marker. Many block rules -- such as lists, quote blocks, and tables -- can contain inline runs within them, meaning inline formatting like bold, italic, and links is parsed inside those blocks.
+
+! Heading
+
+A heading is one to six `!` characters at the start of a line, followed by optional CSS classes, optional whitespace, and then the heading text. The number of `!` characters determines the heading level (`<h1>` through `<h6>`).
+
+```
+Heading         = "!" , { "!" } , [ Classes ] , [ Whitespace ] , InlineRun , Newline ;
+                  (* 1 to 6 "!" characters *)
+Classes         = { "." , ClassName } ;
+```
+
+The heading text is parsed as an inline run, so it can contain bold, italic, links, and other inline formatting.
+
+''Examples:''
+
+```
+! Heading level 1
+!! Heading level 2
+!!! Heading level 3
+!.myclass Heading with a CSS class
+!!.important.highlight Heading with two classes
+```
+
+! Horizontal Rule
+
+A horizontal rule is three or more `-` characters on a line by themselves. It produces an `<hr>` element.
+
+```
+HorizRule       = "-" , "-" , "-" , { "-" } , Newline ;
+                  (* 3 or more dashes *)
+```
+
+''Examples:''
+
+```
+---
+-----
+```
+
+! List
+
+A list is a sequence of lines, each starting with one or more list-marker characters. The marker characters determine the list type:
+
+* `*` -- unordered list (`<ul>` / `<li>`)
+* `#` -- ordered list (`<ol>` / `<li>`)
+* `;` -- definition term (`<dl>` / `<dt>`)
+* `:` -- definition description (`<dl>` / `<dd>`)
+* `>` -- blockquote (`<blockquote>` / `<div>`)
+
+Nesting is achieved by repeating marker characters. Markers can be mixed to create complex nested structures. Each list item's text is parsed as an inline run.
+
+```
+List            = ListItem , { ListItem } ;
+ListItem        = ListMarker , [ Classes ] , [ Whitespace ] , InlineRun , Newline ;
+ListMarker      = MarkerChar , { MarkerChar } ;
+MarkerChar      = "*" | "#" | ";" | ":" | ">" ;
+Classes         = { "." , ClassName } ;
+```
+
+A list continues as long as consecutive lines begin with marker characters whose top-level type matches the first line. A blank line or a line that does not start with a marker ends the list.
+
+''Examples:''
+
+```
+* Bullet item one
+* Bullet item two
+** Nested bullet item
+
+# Numbered item one
+# Numbered item two
+## Sub-item
+
+; Term
+: Definition
+
+> Blockquote line one
+> Blockquote line two
+
+*.myclass Bullet item with a CSS class
+
+#** Mixed nesting: ordered > unordered > unordered
+```
+
+! Code Block
+
+A fenced code block begins with three backticks and an optional language identifier, followed by a newline. It ends with three backticks on a line by themselves. The content inside is not wikified -- it is rendered as literal preformatted text.
+
+```
+CodeBlock       = "```" , [ Language ] , Newline ,
+                  { CodeLine } ,
+                  Newline , "```" ;
+Language        = WordChar , { WordChar | "-" } ;
+                  (* e.g., javascript, text/html, css *)
+```
+
+The language identifier must consist of word characters (`[a-zA-Z0-9_]`) and hyphens. If no language is provided, the code block is treated as plain text.
+
+''Examples:''
+
+<!-- The indentation prevents the parser from treating the backticks as real code fences -->
+
+```
+ ```
+ Plain code block
+ ```
+
+ ```javascript
+ var x = 42;
+ ```
+
+ ```css
+ .myclass { color: red; }
+ ```
+```
+
+! Quote Block
+
+A quote block is delimited by `<<<` (three or more `<` characters). The opening line can include optional CSS classes and an optional opening cite (displayed above the quoted content). The closing `<<<` line can also carry a cite (displayed below the quoted content). The number of `<` characters in the closing marker must match the opening.
+
+```
+QuoteBlock      = OpenQuote , [ Classes ] , [ Whitespace ] , [ InlineRun ] , Newline ,
+                  BlockContent ,
+                  CloseQuote , [ Whitespace ] , [ InlineRun ] , Newline ;
+OpenQuote       = "<<<" , { "<" } ;
+CloseQuote      = "<<<" , { "<" } ;  (* must match OpenQuote length *)
+Classes         = { "." , ClassName } ;
+```
+
+The block content between the markers is parsed as full block-level wikitext, so it can contain paragraphs, lists, headings, and other block rules.
+
+''Examples:''
+
+```
+<<<
+A simple quote block.
+<<<
+
+<<<.myclass An opening cite
+Quoted text here.
+<<<A closing cite
+
+<<<<
+Nested-style quote with four angle brackets.
+<<<<
+```
+
+! Style Block
+
+A style block wraps content in CSS styles and/or classes. It starts with `@@` followed by optional inline styles (as `property:value;` pairs) and/or CSS classes (as `.className`), then a newline. It closes with `@@` on a line by itself. Multiple opening lines of styles/classes can be stacked.
+
+```
+StyleBlock      = StyleOpener , { StyleOpener } ,
+                  BlockContent ,
+                  "@@" , Newline ;
+StyleOpener     = "@@" , [ Styles ] , [ ClassList ] , Newline ;
+Styles          = StyleDecl , { StyleDecl } ;
+StyleDecl       = PropertyName , ":" , Value , ";" ;
+ClassList       = "." , ClassName , { "." , ClassName } ;
+```
+
+Styles must precede classes on the same line. The block content is parsed as full block-level wikitext. Styles and classes are applied to each top-level element inside the block.
+
+''Examples:''
+
+```
+@@.myClass
+This paragraph gets the class "myClass".
+@@
+
+@@background-color:red;color:white;
+Styled paragraph.
+@@
+
+@@width:100px;.myClass.otherClass
+Styled paragraph with classes.
+@@
+
+@@.firstClass
+@@font-size:1.5em;.secondClass
+Multiple openers are combined.
+@@
+```
+
+! Table
+
+A table is a sequence of rows. Each row starts and ends with `|`. Cells are separated by `|`. A row can carry a suffix character after the final `|` to indicate its role.
+
+Row suffixes:
+
+* `h` -- header row (placed in `<thead>`)
+* `f` -- footer row (placed in `<tfoot>`)
+* `c` -- caption row (placed in `<caption>`)
+* `k` -- class row (the cell content becomes a CSS class on the `<table>`)
+* (none) -- body row (placed in `<tbody>`)
+
+Special cell contents:
+
+* `!` as the first character makes the cell a header cell (`<th>` instead of `<td>`)
+* `~` merges the cell with the one above (rowspan)
+* `>` merges the cell with the one to the right (colspan)
+* `<` merges the cell with the one to the left (colspan)
+
+Cell alignment is determined by leading/trailing spaces: a leading space means right-aligned, a trailing space means left-aligned, both means centered.
+
+Vertical alignment: `^` at the start of cell content means top-aligned, `,` means bottom-aligned.
+
+```
+Table           = TableRow , { TableRow } ;
+TableRow        = "|" , Cell , { "|" , Cell } , "|" , [ RowSuffix ] , Newline ;
+Cell            = [ CellAlign ] , [ "!" ] , InlineRun
+                | "~"      (* rowspan *)
+                | ">"      (* colspan right *)
+                | "<" ;    (* colspan left *)
+CellAlign       = [ "^" | "," ] , { " " } ;
+RowSuffix       = "h" | "f" | "c" | "k" ;
+```
+
+Cell content is parsed as an inline run, so it can contain links, bold, italic, and other inline formatting.
+
+''Examples:''
+
+```
+|!Header 1|!Header 2|!Header 3|h
+|Cell A1|Cell A2|Cell A3|
+|Cell B1|Cell B2|Cell B3|
+|Footer 1|Footer 2|Footer 3|f
+|This is a caption|c
+|myTableClass anotherClass|k
+
+|>|Spans two columns|  <- colspan
+|~|Spans two rows|  <- rowspan in second pass
+
+| Right aligned |Left aligned| Centered |
+|^Top aligned|,Bottom aligned|Normal|
+```
+
+! Typed Block
+
+A typed block passes its content through a specified parser (identified by MIME type or file extension). Optionally, a render type can be specified to further transform the output. It opens with `$$$` and closes with `$$$` on a line by itself.
+
+```
+TypedBlock      = "$$$" , [ ParseType ] , [ " > " , RenderType ] , Newline ,
+                  RawContent ,
+                  Newline , "$$$" ;
+ParseType       = MimeType | FileExtension ;
+                  (* e.g., text/html, .js, .svg, application/json *)
+RenderType      = MimeType ;
+                  (* e.g., text/html, text/plain *)
+```
+
+When no render type is given, the parsed content is inserted directly into the parse tree. When a render type is specified, the content is rendered to that type and wrapped in a `<pre>` element.
+
+''Examples:''
+
+```
+$$$.js
+var x = 42;
+console.log(x);
+$$$
+
+$$$.svg
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+  <circle cx="50" cy="50" r="40" fill="blue" />
+</svg>
+$$$
+
+$$$text/vnd.tiddlywiki>text/html
+This will be rendered as an //HTML representation// of WikiText.
+$$$
+```
+
+! Comment Block
+
+An HTML comment block uses the standard `<!-- ... -->` syntax. Everything between the opening `<!--` and closing `-->` markers is ignored during rendering. Comment blocks can also appear in pragma position (before the body of a tiddler).
+
+```
+CommentBlock    = "<!--" , CommentText , "-->" ;
+CommentText     = { AnyChar } ;   (* must not contain "-->" *)
+```
+
+''Examples:''
+
+```
+<!-- This is a comment and will not be rendered -->
+
+<!--
+Multi-line comment.
+Also not rendered.
+-->
+```
+
+! Conditional Block
+
+The conditional block provides `if` / `elseif` / `else` branching based on filter expressions. If the filter produces any output, the condition is true. A double newline after `%>` causes the body to be parsed in block mode; otherwise it is parsed as an inline run.
+
+The conditional rule is both a block and an inline rule -- it can appear at the start of a line or within flowing text.
+
+```
+Conditional     = IfClause , { ElseIfClause } , [ ElseClause ] , EndIf ;
+IfClause        = "<%if" , Whitespace , FilterExpr , "%>" , Body ;
+ElseIfClause    = "<%elseif" , Whitespace , FilterExpr , "%>" , Body ;
+ElseClause      = "<%else%>" , Body ;
+EndIf           = "<%endif%>" ;
+FilterExpr      = (* a TiddlyWiki filter expression *) ;
+Body            = InlineRun | BlockContent ;  (* block mode if preceded by blank line *)
+```
+
+''Examples:''
+
+```
+<%if [<myVar>match[yes]]%>
+This is shown when myVar is "yes".
+<%elseif [<myVar>match[maybe]]%>
+This is shown when myVar is "maybe".
+<%else%>
+This is the fallback.
+<%endif%>
+```
+
+Block mode (double newline after `%>`):
+
+```
+<%if [tag[important]]%>
+
+! Important Content
+
+This section is parsed as block-level wikitext.
+
+<%endif%>
+```
+
+! Hard Line Breaks
+
+The hard line breaks rule is actually an //inline// rule, but it is commonly grouped with block-level constructs because it controls line-level formatting. It is delimited by `"""` markers. Within this region, every newline is converted to a `<br>` element, preserving line breaks exactly as written.
+
+```
+HardLineBreaks  = '"""' , [ Newline ] ,
+                  { InlineRun , Newline } ,
+                  '"""' ;
+```
+
+Inline formatting is still parsed within the hard line breaks region.
+
+''Examples:''
+
+```
+"""
+This is line one
+This is line two
+This is line three
+"""
+```
+
+Each line break in the source becomes an explicit `<br>` in the rendered output.
+
+! Combined EBNF
+
+The following grammar combines all block rules into a single reference.
+
+```
+(* ===== Block Rules ===== *)
+
+BlockRule       = Heading
+                | HorizRule
+                | List
+                | CodeBlock
+                | QuoteBlock
+                | StyleBlock
+                | Table
+                | TypedBlock
+                | CommentBlock
+                | Conditional
+                | HardLineBreaks ;
+
+(* --- Heading --- *)
+Heading         = "!" , { "!" } , [ Classes ] , [ Whitespace ] , InlineRun , Newline ;
+
+(* --- Horizontal Rule --- *)
+HorizRule       = "-" , "-" , "-" , { "-" } , Newline ;
+
+(* --- List --- *)
+List            = ListItem , { ListItem } ;
+ListItem        = ListMarker , [ Classes ] , [ Whitespace ] , InlineRun , Newline ;
+ListMarker      = MarkerChar , { MarkerChar } ;
+MarkerChar      = "*" | "#" | ";" | ":" | ">" ;
+
+(* --- Code Block --- *)
+CodeBlock       = "```" , [ Language ] , Newline ,
+                  { CodeLine } ,
+                  Newline , "```" ;
+Language        = WordChar , { WordChar | "-" } ;
+
+(* --- Quote Block --- *)
+QuoteBlock      = OpenQuote , [ Classes ] , [ Whitespace ] , [ InlineRun ] , Newline ,
+                  BlockContent ,
+                  CloseQuote , [ Whitespace ] , [ InlineRun ] , Newline ;
+OpenQuote       = "<<<" , { "<" } ;
+CloseQuote      = "<<<" , { "<" } ;
+
+(* --- Style Block --- *)
+StyleBlock      = StyleOpener , { StyleOpener } ,
+                  BlockContent ,
+                  "@@" , Newline ;
+StyleOpener     = "@@" , [ Styles ] , [ ClassList ] , Newline ;
+Styles          = StyleDecl , { StyleDecl } ;
+StyleDecl       = PropertyName , ":" , Value , ";" ;
+ClassList       = "." , ClassName , { "." , ClassName } ;
+
+(* --- Table --- *)
+Table           = TableRow , { TableRow } ;
+TableRow        = "|" , Cell , { "|" , Cell } , "|" , [ RowSuffix ] , Newline ;
+Cell            = [ CellAlign ] , [ "!" ] , InlineRun
+                | "~"
+                | ">"
+                | "<" ;
+CellAlign       = [ "^" | "," ] , { " " } ;
+RowSuffix       = "h" | "f" | "c" | "k" ;
+
+(* --- Typed Block --- *)
+TypedBlock      = "$$$" , [ ParseType ] , [ " > " , RenderType ] , Newline ,
+                  RawContent ,
+                  Newline , "$$$" ;
+ParseType       = MimeType | FileExtension ;
+RenderType      = MimeType ;
+
+(* --- Comment Block --- *)
+CommentBlock    = "<!--" , CommentText , "-->" ;
+CommentText     = { AnyChar } ;
+
+(* --- Conditional Block --- *)
+Conditional     = IfClause , { ElseIfClause } , [ ElseClause ] , EndIf ;
+IfClause        = "<%if" , Whitespace , FilterExpr , "%>" , Body ;
+ElseIfClause    = "<%elseif" , Whitespace , FilterExpr , "%>" , Body ;
+ElseClause      = "<%else%>" , Body ;
+EndIf           = "<%endif%>" ;
+Body            = InlineRun | BlockContent ;
+
+(* --- Hard Line Breaks (inline rule) --- *)
+HardLineBreaks  = '"""' , [ Newline ] ,
+                  { InlineRun , Newline } ,
+                  '"""' ;
+
+(* ===== Shared Productions ===== *)
+Classes         = { "." , ClassName } ;
+ClassName       = Letter , { Letter | Digit | "-" | "_" } ;
+InlineRun       = (* inline wikitext parsed until line end or terminator *) ;
+BlockContent    = (* block-level wikitext parsed until closing marker *) ;
+FilterExpr      = (* a TiddlyWiki filter expression *) ;
+Whitespace      = " " , { " " } ;
+Newline         = [ CR ] , LF ;
+WordChar        = Letter | Digit | "_" ;
+```
