@@ -9,17 +9,17 @@ ProseMirror plugin for [[ {{ << autocompletion with configurable trigger aliases
 
 "use strict";
 
-var Plugin = require("prosemirror-state").Plugin;
-var PluginKey = require("prosemirror-state").PluginKey;
-var Decoration = require("prosemirror-view").Decoration;
-var DecorationSet = require("prosemirror-view").DecorationSet;
+const Plugin = require("prosemirror-state").Plugin;
+const PluginKey = require("prosemirror-state").PluginKey;
+const Decoration = require("prosemirror-view").Decoration;
+const DecorationSet = require("prosemirror-view").DecorationSet;
 
-var AUTOCOMPLETE_KEY = new PluginKey("tw-autocomplete");
+const AUTOCOMPLETE_KEY = new PluginKey("tw-autocomplete");
 
 // Config tiddler paths for trigger aliases
-var LINK_TRIGGERS_TITLE = "$:/config/prosemirror/autocomplete/link-triggers";
-var TRANSCLUSION_TRIGGERS_TITLE = "$:/config/prosemirror/autocomplete/transclusion-triggers";
-var MACRO_TRIGGERS_TITLE = "$:/config/prosemirror/autocomplete/macro-triggers";
+const LINK_TRIGGERS_TITLE = "$:/config/prosemirror/autocomplete/link-triggers";
+const TRANSCLUSION_TRIGGERS_TITLE = "$:/config/prosemirror/autocomplete/transclusion-triggers";
+const MACRO_TRIGGERS_TITLE = "$:/config/prosemirror/autocomplete/macro-triggers";
 
 /**
  * Parse trigger config from tiddler text.
@@ -27,9 +27,9 @@ var MACRO_TRIGGERS_TITLE = "$:/config/prosemirror/autocomplete/macro-triggers";
  * Returns array of trigger strings.
  */
 function parseTriggerConfig(wiki, title, defaults) {
-	var text = wiki.getTiddlerText(title, "");
+	const text = wiki.getTiddlerText(title, "");
 	if(!text.trim()) return defaults;
-	return text.split("\n").map(function(s) { return s.trim(); }).filter(function(s) { return s.length > 0; });
+	return text.split("\n").map((s) => { return s.trim(); }).filter((s) => { return s.length > 0; });
 }
 
 /**
@@ -37,23 +37,23 @@ function parseTriggerConfig(wiki, title, defaults) {
  * Returns array of { trigger: string, type: "link"|"transclusion"|"macro", closing: string }
  */
 function buildTriggerMap(wiki) {
-	var linkTriggers = parseTriggerConfig(wiki, LINK_TRIGGERS_TITLE, ["[["]);
-	var transclusionTriggers = parseTriggerConfig(wiki, TRANSCLUSION_TRIGGERS_TITLE, ["{{"]);
-	var macroTriggers = parseTriggerConfig(wiki, MACRO_TRIGGERS_TITLE, ["<<"]);
+	const linkTriggers = parseTriggerConfig(wiki, LINK_TRIGGERS_TITLE, ["[["]);
+	const transclusionTriggers = parseTriggerConfig(wiki, TRANSCLUSION_TRIGGERS_TITLE, ["{{"]);
+	const macroTriggers = parseTriggerConfig(wiki, MACRO_TRIGGERS_TITLE, ["<<"]);
 
-	var result = [];
-	linkTriggers.forEach(function(t) {
+	const result = [];
+	linkTriggers.forEach((t) => {
 		result.push({ trigger: t, type: "link", closing: "]]" });
 	});
-	transclusionTriggers.forEach(function(t) {
+	transclusionTriggers.forEach((t) => {
 		result.push({ trigger: t, type: "transclusion", closing: "}}" });
 	});
-	macroTriggers.forEach(function(t) {
+	macroTriggers.forEach((t) => {
 		result.push({ trigger: t, type: "macro", closing: ">>" });
 	});
 
 	// Sort by length descending so longer triggers match first
-	result.sort(function(a, b) { return b.trigger.length - a.trigger.length; });
+	result.sort((a, b) => { return b.trigger.length - a.trigger.length; });
 	return result;
 }
 
@@ -61,11 +61,11 @@ function buildTriggerMap(wiki) {
  * Get tiddler titles for completion suggestions.
  */
 function getTiddlerCompletions(wiki, query) {
-	var allTitles = wiki.getTiddlers({ sortField: "modified", reverse: true });
+	const allTitles = wiki.getTiddlers({ sortField: "modified", reverse: true });
 	if(!query) return allTitles.slice(0, 20);
-	var lower = query.toLowerCase();
-	var matched = [];
-	for(var i = 0; i < allTitles.length && matched.length < 20; i++) {
+	const lower = query.toLowerCase();
+	const matched = [];
+	for(let i = 0; i < allTitles.length && matched.length < 20; i++) {
 		if(allTitles[i].toLowerCase().indexOf(lower) >= 0) {
 			matched.push(allTitles[i]);
 		}
@@ -78,18 +78,18 @@ function getTiddlerCompletions(wiki, query) {
  */
 function getMacroCompletions(wiki, query) {
 	// Collect all tiddlers tagged with $:/tags/Macro or that define \define/\procedure
-	var macroNames = [];
-	var tiddlers = wiki.getTiddlersWithTag("$:/tags/Macro");
-	tiddlers.forEach(function(title) {
+	let macroNames = [];
+	const tiddlers = wiki.getTiddlersWithTag("$:/tags/Macro");
+	tiddlers.forEach((title) => {
 		macroNames.push(title.replace(/^\$:\//, ""));
 	});
 	// Also add built-in variable names from wiki
-	var globalDefs = wiki.getGlobalCache("prosemirror-macro-names", function() {
-		var names = [];
-		wiki.each(function(tiddler, title) {
-			var text = tiddler.fields.text || "";
-			var pattern = /^\\(?:define|procedure|function|widget)\s+([^\s(]+)/gm;
-			var match;
+	const globalDefs = wiki.getGlobalCache("prosemirror-macro-names", () => {
+		const names = [];
+		wiki.each((tiddler, title) => {
+			const text = tiddler.fields.text || "";
+			const pattern = /^\\(?:define|procedure|function|widget)\s+([^\s(]+)/gm;
+			let match;
 			while((match = pattern.exec(text)) !== null) {
 				if(names.indexOf(match[1]) < 0) names.push(match[1]);
 			}
@@ -99,8 +99,8 @@ function getMacroCompletions(wiki, query) {
 	macroNames = macroNames.concat(globalDefs);
 
 	if(!query) return macroNames.slice(0, 20);
-	var lower = query.toLowerCase();
-	return macroNames.filter(function(n) {
+	const lower = query.toLowerCase();
+	return macroNames.filter((n) => {
 		return n.toLowerCase().indexOf(lower) >= 0;
 	}).slice(0, 20);
 }
@@ -109,7 +109,7 @@ function getMacroCompletions(wiki, query) {
  * Create the autocomplete ProseMirror plugin.
  */
 function createAutocompletePlugin(wiki) {
-	var triggerMap = buildTriggerMap(wiki);
+	const triggerMap = buildTriggerMap(wiki);
 
 	return new Plugin({
 		key: AUTOCOMPLETE_KEY,
@@ -128,29 +128,29 @@ function createAutocompletePlugin(wiki) {
 			},
 			apply: function(tr, prev, oldState, newState) {
 				// On any doc change, re-check if we should be in autocomplete mode
-				var meta = tr.getMeta(AUTOCOMPLETE_KEY);
+				const meta = tr.getMeta(AUTOCOMPLETE_KEY);
 				if(meta) return meta;
 
 				if(!tr.docChanged) return prev;
 
 				// Check text before cursor for trigger sequences
-				var sel = newState.selection;
+				const sel = newState.selection;
 				if(!sel.empty) return { active: false };
 
-				var $pos = sel.$from;
-				var textBefore = "";
+				const $pos = sel.$from;
+				let textBefore = "";
 				// Get text from start of current text block to cursor
 				if($pos.parent.isTextblock) {
 					textBefore = $pos.parent.textBetween(0, $pos.parentOffset, null, "\ufffc");
 				}
 
 				// Check each trigger
-				for(var i = 0; i < triggerMap.length; i++) {
-					var trig = triggerMap[i];
+				for(let i = 0; i < triggerMap.length; i++) {
+					const trig = triggerMap[i];
 					if(textBefore.endsWith(trig.trigger)) {
 						// Trigger detected — start autocomplete
-						var triggerStart = $pos.pos - trig.trigger.length;
-						var items;
+						const triggerStart = $pos.pos - trig.trigger.length;
+						let items;
 						if(trig.type === "macro") {
 							items = getMacroCompletions(wiki, "");
 						} else {
@@ -171,12 +171,12 @@ function createAutocompletePlugin(wiki) {
 
 				// If already active, update query
 				if(prev.active) {
-					var curPos = sel.$from.pos;
-					var queryStart = prev.triggerPos + prev.triggerLen;
+					const curPos = sel.$from.pos;
+					const queryStart = prev.triggerPos + prev.triggerLen;
 					if(curPos < queryStart) {
 						return { active: false };
 					}
-					var queryText = "";
+					let queryText = "";
 					try {
 						queryText = newState.doc.textBetween(queryStart, curPos, "", "\ufffc");
 					} catch(e) {
@@ -187,7 +187,7 @@ function createAutocompletePlugin(wiki) {
 					if(queryText.length > 100) {
 						return { active: false };
 					}
-					var items;
+					let items;
 					if(prev.type === "macro") {
 						items = getMacroCompletions(wiki, queryText);
 					} else {
@@ -210,19 +210,19 @@ function createAutocompletePlugin(wiki) {
 		},
 		props: {
 			handleKeyDown: function(view, event) {
-				var state = AUTOCOMPLETE_KEY.getState(view.state);
+				const state = AUTOCOMPLETE_KEY.getState(view.state);
 				if(!state || !state.active) return false;
 
 				if(event.key === "ArrowDown") {
 					event.preventDefault();
-					var next = Math.min(state.selectedIndex + 1, state.items.length - 1);
-					view.dispatch(view.state.tr.setMeta(AUTOCOMPLETE_KEY, Object.assign({}, state, { selectedIndex: next })));
+					const next = Math.min(state.selectedIndex + 1, state.items.length - 1);
+					view.dispatch(view.state.tr.setMeta(AUTOCOMPLETE_KEY, { ...state, ...{ selectedIndex: next } }));
 					return true;
 				}
 				if(event.key === "ArrowUp") {
 					event.preventDefault();
-					var prev = Math.max(state.selectedIndex - 1, 0);
-					view.dispatch(view.state.tr.setMeta(AUTOCOMPLETE_KEY, Object.assign({}, state, { selectedIndex: prev })));
+					const prev = Math.max(state.selectedIndex - 1, 0);
+					view.dispatch(view.state.tr.setMeta(AUTOCOMPLETE_KEY, { ...state, ...{ selectedIndex: prev } }));
 					return true;
 				}
 				if(event.key === "Enter" || event.key === "Tab") {
@@ -252,11 +252,11 @@ function acceptCompletion(view, state) {
 		view.dispatch(view.state.tr.setMeta(AUTOCOMPLETE_KEY, { active: false }));
 		return;
 	}
-	var selected = state.items[state.selectedIndex];
-	var from = state.triggerPos;
-	var to = view.state.selection.from;
+	const selected = state.items[state.selectedIndex];
+	const from = state.triggerPos;
+	const to = view.state.selection.from;
 
-	var insertText;
+	let insertText;
 	if(state.type === "link") {
 		insertText = "[[" + selected + "]]";
 	} else if(state.type === "transclusion") {
@@ -265,7 +265,7 @@ function acceptCompletion(view, state) {
 		insertText = "<<" + selected + ">>";
 	}
 
-	var tr = view.state.tr.replaceWith(from, to,
+	const tr = view.state.tr.replaceWith(from, to,
 		view.state.schema.text(insertText)
 	);
 	tr.setMeta(AUTOCOMPLETE_KEY, { active: false });
@@ -313,7 +313,7 @@ class AutocompleteView {
 				e.preventDefault();
 				const currentState = AUTOCOMPLETE_KEY.getState(view.state);
 				if(currentState) {
-					acceptCompletion(view, Object.assign({}, currentState, { selectedIndex: idx }));
+					acceptCompletion(view, { ...currentState, ...{ selectedIndex: idx } });
 				}
 			});
 			this.container.appendChild(item);

@@ -9,63 +9,42 @@ Image node view for ProseMirror
 
 "use strict";
 
-const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/base-source-editable-nodeview.js").BaseSourceEditableNodeView;
+const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/nodeview/base-source-editable.js").BaseSourceEditableNodeView;
 
 class ImageNodeView extends BaseSourceEditableNodeView {
 	constructor(node, view, getPos, parentWidget) {
 		super(node, view, getPos, parentWidget);
-		
+
 		this.img = null;
-		this.imagePickerWrap = null;
+		this.resizeHandle = null;
+		this.imagePickerWidget = null;
 		this._nodeViewId = null;
-		
-		this.createDOM();
+
+		this._createDOM();
 	}
 
-	createDOM() {
+	_createDOM() {
 		const wrap = document.createElement("span");
-		wrap.className = "pm-image-nodeview";
+		wrap.className = "pm-nodeview pm-nodeview-image";
 		wrap.draggable = false;
 
-		// Create header with title and buttons
 		const header = this.createHeader(this.node.attrs.twSource || this.getLanguageString("ImagePicker/Title", "Image"));
-
-		// Create content container to hold image, textarea, and picker
 		const contentContainer = document.createElement("div");
-		contentContainer.className = "pm-image-nodeview-content";
+		contentContainer.className = "pm-nodeview-content pm-image-nodeview-content";
 
 		const img = document.createElement("img");
 		img.className = "pm-image-nodeview-img";
 		img.draggable = false;
-		img.setAttribute("src", this.node.attrs.src || "");
-		if(this.node.attrs.alt) {
-			img.setAttribute("alt", this.node.attrs.alt);
-		}
-		if(this.node.attrs.title) {
-			img.setAttribute("title", this.node.attrs.title);
-		}
-		if(this.node.attrs.width) {
-			img.setAttribute("width", this.node.attrs.width);
-		}
-		if(this.node.attrs.height) {
-			img.setAttribute("height", this.node.attrs.height);
-		}
-		if(this.node.attrs.twSource) {
-			img.setAttribute("data-tw-source", this.node.attrs.twSource);
-		}
-		if(this.node.attrs.twKind) {
-			img.setAttribute("data-tw-kind", this.node.attrs.twKind);
-		}
+		this._applyImgAttrs(img, this.node.attrs);
 
 		contentContainer.appendChild(img);
-		
-		// Add resize handle for WYSIWYG resizing
+
 		const resizeHandle = document.createElement("div");
 		resizeHandle.className = "pm-image-resize-handle";
 		resizeHandle.draggable = false;
 		resizeHandle.contentEditable = false;
 		contentContainer.appendChild(resizeHandle);
-		
+
 		wrap.appendChild(header);
 		wrap.appendChild(contentContainer);
 
@@ -73,135 +52,152 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		this.img = img;
 		this.contentContainer = contentContainer;
 		this.resizeHandle = resizeHandle;
-		
-		// Store reference to this nodeView on the DOM element for message handling
 		wrap._imageNodeView = this;
-		
-		// Setup resize handler
-		this.setupResizeHandler();
+
+		this._setupResizeHandler();
+	}
+
+	_applyImgAttrs(img, attrs) {
+		img.setAttribute("src", attrs.src || "");
+		const optionals = ["alt", "title", "width", "height"];
+		for(let i = 0; i < optionals.length; i++) {
+			if(attrs[optionals[i]]) img.setAttribute(optionals[i], attrs[optionals[i]]);
+			else img.removeAttribute(optionals[i]);
+		}
+		if(attrs.twSource) img.setAttribute("data-tw-source", attrs.twSource);
+		if(attrs.twKind) img.setAttribute("data-tw-kind", attrs.twKind);
 	}
 
 	updateTitle() {
 		if(this._titleEl) {
 			this._titleEl.textContent = this.node.attrs.twSource || this.getLanguageString("ImagePicker/Title", "Image");
 		}
-		if(this.img) {
-			this.img.setAttribute("src", this.node.attrs.src || "");
-			if(this.node.attrs.alt) {
-				this.img.setAttribute("alt", this.node.attrs.alt);
-			} else {
-				this.img.removeAttribute("alt");
-			}
-			if(this.node.attrs.title) {
-				this.img.setAttribute("title", this.node.attrs.title);
-			} else {
-				this.img.removeAttribute("title");
-			}
-			if(this.node.attrs.width) {
-				this.img.setAttribute("width", this.node.attrs.width);
-			} else {
-				this.img.removeAttribute("width");
-			}
-			if(this.node.attrs.height) {
-				this.img.setAttribute("height", this.node.attrs.height);
-			} else {
-				this.img.removeAttribute("height");
-			}
-			if(this.node.attrs.twSource) {
-				this.img.setAttribute("data-tw-source", this.node.attrs.twSource);
-			} else {
-				this.img.removeAttribute("data-tw-source");
-			}
-			if(this.node.attrs.twKind) {
-				this.img.setAttribute("data-tw-kind", this.node.attrs.twKind);
-			} else {
-				this.img.removeAttribute("data-tw-kind");
-			}
-		}
+		if(this.img) this._applyImgAttrs(this.img, this.node.attrs);
 	}
 
 	renderEditMode() {
 		if(!this.contentContainer) return;
-		
-		// Clear content (hide image during edit, like widget-block does)
-		while(this.contentContainer.firstChild) { this.contentContainer.removeChild(this.contentContainer.firstChild); }
-		
-		// Create textarea for editing image wikitext
-		const twSource = this.node.attrs.twSource || "";
-		const twKind = this.node.attrs.twKind || "shortcut";
-		
-		let initialValue;
-		if(twKind === "widget") {
-			let attrs = `source="${twSource}"`;
-			if(this.node.attrs.width) attrs += ` width="${this.node.attrs.width}"`;
-			if(this.node.attrs.height) attrs += ` height="${this.node.attrs.height}"`;
-			if(this.node.attrs.twTooltip) attrs += ` tooltip="${this.node.attrs.twTooltip}"`;
-			initialValue = `<$image ${attrs}/>`;
-		} else {
-			// Build shortcut syntax manually with quoted width/height
-			let attrs = "";
-			if(this.node.attrs.width) attrs += `width="${this.node.attrs.width}" `;
-			if(this.node.attrs.height) attrs += `height="${this.node.attrs.height}" `;
-			const attrsStr = attrs.trim();
-			const tooltip = this.node.attrs.twTooltip || "";
-			if(tooltip) {
-				initialValue = `[img${attrsStr ? " " + attrsStr : ""}[${tooltip}|${twSource}]]`;
-			} else {
-				initialValue = `[img${attrsStr ? " " + attrsStr + " " : ""}[${twSource}]]`;
-			}
-		}
-		
-		const textarea = this.createEditTextarea(initialValue, 2);
-		this.contentContainer.appendChild(textarea);
-		this.editTextarea = textarea;  // Save reference for handleImagePicked
-		
-		// Render image picker below textarea
-		this.renderImagePicker();
-		
-		// Focus textarea
-		setTimeout(() => textarea.focus(), 0);
+		while(this.contentContainer.firstChild) this.contentContainer.removeChild(this.contentContainer.firstChild);
+
+		const form = this.createEditForm([
+			{ key: "twSource", label: "Source", value: this.node.attrs.twSource || "", placeholder: "Image tiddler title or URL" },
+			{ key: "width", label: "Width", value: this.node.attrs.width || "", placeholder: "e.g. 200" },
+			{ key: "height", label: "Height", value: this.node.attrs.height || "", placeholder: "e.g. 150" },
+			{ key: "twTooltip", label: "Tooltip", value: this.node.attrs.twTooltip || "", placeholder: "Hover text" },
+			{ key: "alt", label: "Alt", value: this.node.attrs.alt || "", placeholder: "Alt text" }
+		]);
+		this.contentContainer.appendChild(form);
+
+		// Render image picker below form
+		this._renderImagePicker();
+
+		const firstInput = form.querySelector(".pm-nodeview-form-input");
+		if(firstInput) setTimeout(() => { firstInput.focus(); }, 0);
 	}
 
 	renderViewMode() {
 		if(!this.contentContainer) return;
-		
-		// Clear content
-		while(this.contentContainer.firstChild) { this.contentContainer.removeChild(this.contentContainer.firstChild); }
-		
-		// Add image and resize handle back
+		while(this.contentContainer.firstChild) this.contentContainer.removeChild(this.contentContainer.firstChild);
+
 		this.contentContainer.appendChild(this.img);
-		if(this.resizeHandle) {
-			this.contentContainer.appendChild(this.resizeHandle);
-		}
-		
+		if(this.resizeHandle) this.contentContainer.appendChild(this.resizeHandle);
+
 		// Remove image picker
-		if(this.imagePickerWrap && this.imagePickerWrap.parentNode) {
-			this.imagePickerWrap.parentNode.removeChild(this.imagePickerWrap);
+		if(this.imagePickerWidget) {
+			try { this.imagePickerWidget.destroy(); } catch(e) { /* ignore */ }
+			this.imagePickerWidget = null;
 		}
-		this.imagePickerWrap = null;
-		this.editTextarea = null;
 	}
 
-	renderImagePicker() {
-		// Create container for image picker
+	getEditValue() {
+		if(!this.contentContainer) return {};
+		const form = this.contentContainer.querySelector(".pm-nodeview-form");
+		if(!form) return {};
+		const inputs = form.querySelectorAll(".pm-nodeview-form-input");
+		const result = {};
+		for(let i = 0; i < inputs.length; i++) {
+			result[inputs[i].dataset.key] = inputs[i].value;
+		}
+		return result;
+	}
+
+	saveEdit(formValues) {
+		if(!formValues || typeof formValues !== "object") return;
+		const pos = this.getPos();
+		if(typeof pos !== "number") return;
+
+		const source = formValues.twSource || "";
+		if(!source) return;
+
+		// Resolve image src via TW
+		let src = source;
+		const wiki = this.parentWidget ? this.parentWidget.wiki : $tw.wiki;
+		const tiddler = wiki.getTiddler(source);
+		if(tiddler) {
+			const type = tiddler.fields.type || "";
+			if(type.indexOf("image/") === 0) {
+				if(tiddler.fields._canonical_uri) {
+					src = tiddler.fields._canonical_uri;
+				} else if(tiddler.fields.text) {
+					src = "data:" + type + ";base64," + tiddler.fields.text;
+				}
+			}
+		}
+
+		const newAttrs = {
+			src: src,
+			twSource: source,
+			twKind: this.node.attrs.twKind || "shortcut",
+			width: formValues.width || null,
+			height: formValues.height || null,
+			twTooltip: formValues.twTooltip || null,
+			alt: formValues.alt || null,
+			title: formValues.twTooltip || null
+		};
+
+		const tr = this.view.state.tr.setNodeMarkup(pos, null, newAttrs);
+		this.view.dispatch(tr);
+	}
+
+	handleImagePicked(imageName) {
+		// Update the source field if form is visible
+		if(this.contentContainer) {
+			const sourceInput = this.contentContainer.querySelector('.pm-nodeview-form-input[data-key="twSource"]');
+			if(sourceInput) {
+				sourceInput.value = imageName;
+				return;
+			}
+		}
+		// Otherwise directly save
+		this.saveEdit({ twSource: imageName, width: this.node.attrs.width, height: this.node.attrs.height, twTooltip: this.node.attrs.twTooltip, alt: this.node.attrs.alt });
+	}
+
+	getNodeViewId() {
+		if(!this._nodeViewId) {
+			this._nodeViewId = "img-nv-" + Math.random().toString(36).substr(2, 9);
+		}
+		return this._nodeViewId;
+	}
+
+	_getNodeViewId() {
+		return this.getNodeViewId();
+	}
+
+	_renderImagePicker() {
 		const pickerWrap = document.createElement("div");
 		pickerWrap.className = "pm-image-picker-wrap pm-image-nodeview-picker";
-		
+
 		const pickerBody = document.createElement("div");
 		pickerBody.className = "pm-image-picker-body";
 		pickerWrap.appendChild(pickerBody);
-		
-		this.contentContainer.appendChild(pickerWrap);
-		this.imagePickerWrap = pickerWrap;
 
-		// Render TW image picker widget using the built-in image-picker macro
+		this.contentContainer.appendChild(pickerWrap);
+
 		if(this.parentWidget) {
 			const nodeViewId = this.getNodeViewId();
-			// Sanitise nodeViewId for safe embedding in single-quoted TW attribute.
-			// The id is alphanumeric by construction, but defence-in-depth matters.
 			const safeId = nodeViewId.replace(/[^a-zA-Z0-9_-]/g, "");
-			const pickerWikitext = `<<image-picker actions:"<$action-sendmessage $message='tm-prosemirror-image-picked-nodeview' nodeViewId='${safeId}' imageTitle=<<imageTitle>>/>">>`;
-			
+			const pickerWikitext = '<<image-picker actions:"<$action-sendmessage $message=\'tm-prosemirror-image-picked-nodeview\' nodeViewId=\'' + safeId + '\' imageTitle=<<imageTitle>>/>">>'; 
+
 			const pickerTree = this.parentWidget.wiki.parseText("text/vnd.tiddlywiki", pickerWikitext).tree;
 			const WidgetBase = require("$:/core/modules/widgets/widget.js").widget;
 			this.imagePickerWidget = new WidgetBase({
@@ -216,169 +212,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		}
 	}
 
-	getNodeViewId() {
-		if(!this._nodeViewId) {
-			this._nodeViewId = "img-nv-" + Math.random().toString(36).substr(2, 9);
-		}
-		return this._nodeViewId;
-	}
-
-	// Alias for compatibility with widget.js handler
-	_getNodeViewId() {
-		return this.getNodeViewId();
-	}
-
-	saveEdit(newText) {
-		const pos = this.getPos();
-		if(typeof pos !== "number") {
-			// Exit edit mode on error
-			if(this.isEditMode) {
-				this.toggleEditMode();
-			}
-			return;
-		}
-		
-		// Parse the wikitext to get full attributes
-		if(!this.parentWidget || !this.parentWidget.wiki) {
-			if(this.isEditMode) {
-				this.toggleEditMode();
-			}
-			return;
-		}
-		
-		const wiki = this.parentWidget.wiki;
-		const parseTree = wiki.parseText("text/vnd.tiddlywiki", newText);
-		
-		// Look for image node in parse tree
-		let imageNode = null;
-		
-		function findImageNode(node) {
-			if(!node) return null;
-			
-			// Check if this is an image shortcut syntax
-			if(node.type === "image") {
-				return node;
-			}
-			
-			// Check if this is a $image widget (element type with tag="$image")
-			if(node.type === "element" && node.tag === "$image") {
-				return node;
-			}
-			
-			// Recursively search children
-			if(node.children && node.children.length > 0) {
-				for(let child of node.children) {
-					const found = findImageNode(child);
-					if(found) return found;
-				}
-			}
-			
-			return null;
-		}
-		
-		if(parseTree && parseTree.tree && parseTree.tree.length > 0) {
-			for(let node of parseTree.tree) {
-				imageNode = findImageNode(node);
-				if(imageNode) break;
-			}
-		}
-		
-		if(imageNode) {
-			// Use getImageAttrsFromWikiAstImageNode to extract all attributes
-			const getImageAttrsFromWikiAstImageNode = require("$:/plugins/tiddlywiki/prosemirror/image/utils.js").getImageAttrsFromWikiAstImageNode;
-			const attrs = getImageAttrsFromWikiAstImageNode(imageNode, wiki);
-			
-			// Update node with all attributes
-			const tr = this.view.state.tr.setNodeMarkup(pos, null, attrs);
-			this.view.dispatch(tr);
-			
-			// Exit edit mode after successful save
-			if(this.isEditMode) {
-				this.toggleEditMode();
-			}
-		} else {
-			// Invalid format, just close
-			if(this.isEditMode) {
-				this.toggleEditMode();
-			}
-		}
-	}
-
-	handleImagePicked(imageName) {
-		if(!this.editTextarea) return;
-		
-		const twKind = this.node.attrs.twKind || "shortcut";
-		let newValue;
-		if(twKind === "widget") {
-			let attrs = `source="${imageName}"`;
-			if(this.node.attrs.width) attrs += ` width="${this.node.attrs.width}"`;
-			if(this.node.attrs.height) attrs += ` height="${this.node.attrs.height}"`;
-			if(this.node.attrs.twTooltip) attrs += ` tooltip="${this.node.attrs.twTooltip}"`;
-			newValue = `<$image ${attrs}/>`;
-		} else {
-			// Build shortcut syntax manually with quoted width/height, preserving attributes
-			let attrs = "";
-			if(this.node.attrs.width) attrs += `width="${this.node.attrs.width}" `;
-			if(this.node.attrs.height) attrs += `height="${this.node.attrs.height}" `;
-			const attrsStr = attrs.trim();
-			const tooltip = this.node.attrs.twTooltip || "";
-			if(tooltip) {
-				newValue = `[img${attrsStr ? " " + attrsStr : ""}[${tooltip}|${imageName}]]`;
-			} else {
-				newValue = `[img${attrsStr ? " " + attrsStr + " " : ""}[${imageName}]]`;
-			}
-		}
-		
-		// Update textarea
-		this.editTextarea.value = newValue;
-		
-		// Auto-save and exit edit mode
-		this.saveEdit(newValue);
-	}
-
-	// Override class names
-	// eslint-disable-next-line class-methods-use-this
-	getHeaderClass() {
-		return "pm-image-nodeview-header";
-	}
-
-	// eslint-disable-next-line class-methods-use-this
-	getTitleClass() {
-		return "pm-image-nodeview-title";
-	}
-
-	// eslint-disable-next-line class-methods-use-this
-	getButtonsClass() {
-		return "pm-image-nodeview-buttons";
-	}
-
-	// eslint-disable-next-line class-methods-use-this
-	getDeleteButtonClass() {
-		return "pm-image-nodeview-btn pm-image-nodeview-delete";
-	}
-
-	// eslint-disable-next-line class-methods-use-this
-	getEditButtonClass() {
-		return "pm-image-nodeview-btn pm-image-nodeview-edit";
-	}
-
-	// eslint-disable-next-line class-methods-use-this
-	getSaveButtonClass() {
-		return "pm-image-nodeview-btn pm-image-nodeview-save";
-	}
-
-	// eslint-disable-next-line class-methods-use-this
-	getCancelButtonClass() {
-		return "pm-image-nodeview-btn pm-image-nodeview-cancel";
-	}
-
-	// eslint-disable-next-line class-methods-use-this
-	getEditorClass() {
-		return "pm-image-nodeview-editor";
-	}
-
-	setupResizeHandler() {
-		if(!this.resizeHandle || !this.img) return;
+	_setupResizeHandler() {
 		
 		let startX, startY, startWidth, startHeight;
 		const self = this;
@@ -411,7 +245,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		// Save references so destroy() can clean up mid-drag
 		this._resizeCleanup = { onPointerMove, onPointerUp, onTouchMove, onTouchEnd };
 		
-		this.resizeHandle.addEventListener("mousedown", function(e) {
+		this.resizeHandle.addEventListener("mousedown", (e) => {
 			e.preventDefault();
 			e.stopPropagation();
 			startResize(e.clientX, e.clientY);
@@ -421,7 +255,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		});
 
 		// Touch support for mobile devices
-		this.resizeHandle.addEventListener("touchstart", function(e) {
+		this.resizeHandle.addEventListener("touchstart", (e) => {
 			e.preventDefault();
 			e.stopPropagation();
 			const touch = e.touches[0];
@@ -455,10 +289,11 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 			const tr = self.view.state.tr;
 			const pos = self.getPos();
 			if(pos !== undefined) {
-				tr.setNodeMarkup(pos, null, Object.assign({}, self.node.attrs, {
+				tr.setNodeMarkup(pos, null, {
+					...self.node.attrs,
 					width: String(finalWidth),
 					height: String(finalHeight)
-				}));
+				});
 				self.view.dispatch(tr);
 			}
 		}
@@ -472,7 +307,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		}
 		// Clean up any active resize document listeners (handles mid-drag destroy)
 		if(this._activeResizeListeners && this._resizeCleanup) {
-			var rc = this._resizeCleanup;
+			const rc = this._resizeCleanup;
 			document.removeEventListener("mousemove", rc.onPointerMove);
 			document.removeEventListener("mouseup", rc.onPointerUp);
 			document.removeEventListener("touchmove", rc.onTouchMove);

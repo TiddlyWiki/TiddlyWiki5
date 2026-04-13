@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/prosemirror/slash-menu.js
+title: $:/plugins/tiddlywiki/prosemirror/slash-menu/slash-menu.js
 type: application/javascript
 module-type: library
 
@@ -10,7 +10,7 @@ Custom slash menu implementation based on prosemirror-slash-menu
 
 const Plugin = require("prosemirror-state").Plugin;
 const PluginKey = require("prosemirror-state").PluginKey;
-const flattenMenuElementsWithGroup = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js").flattenMenuElementsWithGroup;
+const flattenMenuElementsWithGroup = require("$:/plugins/tiddlywiki/prosemirror/slash-menu/menu-elements.js").flattenMenuElementsWithGroup;
 
 const SlashMenuKey = new PluginKey("slash-menu-plugin");
 
@@ -264,14 +264,14 @@ function createSlashMenuPlugin(menuElements, options) {
 				}
 			},
 			handleDOMEvents: {
-				compositionstart: function(view, event) {
+				compositionstart: (view, event) => {
 					const state = SlashMenuKey.getState(view.state);
 					if(state && state.open) {
 						this._slashMenuComposing = true;
 					}
 					return false;
 				},
-				compositionupdate: function(view, event) {
+				compositionupdate: (view, event) => {
 					const state = SlashMenuKey.getState(view.state);
 					if(state && state.open && this._slashMenuComposing) {
 						const data = event.data;
@@ -285,21 +285,32 @@ function createSlashMenuPlugin(menuElements, options) {
 					}
 					return false;
 				},
-				compositionend: function(view, event) {
+				compositionend: (view, event) => {
 					const state = SlashMenuKey.getState(view.state);
 					if(state && state.open) {
 						const data = event.data;
 						if(data && (data === "、" || data === "/")) {
 							setTimeout(() => {
 								const currentState = view.state;
-								const tr = currentState.tr.delete(currentState.selection.from - data.length, currentState.selection.from);
-								view.dispatch(tr);
+								const from = currentState.selection.from;
+								// Clamp deletion to stay within the current parent node
+								const parentStart = currentState.selection.$from.start();
+								const deleteFrom = Math.max(parentStart, from - data.length);
+								if(deleteFrom < from) {
+									const tr = currentState.tr.delete(deleteFrom, from);
+									view.dispatch(tr);
+								}
 							}, 0);
 						} else if(this._slashMenuComposing && data) {
 							setTimeout(() => {
 								const currentState = view.state;
-								const tr = currentState.tr.delete(currentState.selection.from - data.length, currentState.selection.from);
-								view.dispatch(tr);
+								const from = currentState.selection.from;
+								const parentStart = currentState.selection.$from.start();
+								const deleteFrom = Math.max(parentStart, from - data.length);
+								if(deleteFrom < from) {
+									const tr = currentState.tr.delete(deleteFrom, from);
+									view.dispatch(tr);
+								}
 								dispatchWithMeta(view, {
 									type: SlashMetaTypes.inputChange,
 									filter: data

@@ -137,16 +137,16 @@ function buildKeymap(schema, mapKeys) {
 	// When the block has only one line the "start" rule wins (inserts before).
 	// ─────────────────────────────────────────────────────────────────────────
 	function makeShiftEnterExitHandler(blockTypePredicate) {
-		return function(state, dispatch) {
-			var $from = state.selection.$from;
-			var $to = state.selection.$to;
+		return (state, dispatch) => {
+			const $from = state.selection.$from;
+			const $to = state.selection.$to;
 
 			// Only handle collapsed selections (cursor, not range selection)
 			if($from.pos !== $to.pos) return false;
 
 			// Find the innermost ancestor block matching our predicate
-			var blockDepth = -1;
-			for(var d = $from.depth; d > 0; d--) {
+			let blockDepth = -1;
+			for(const d = $from.depth; d > 0; d--) {
 				if(blockTypePredicate($from.node(d).type)) {
 					blockDepth = d;
 					break;
@@ -154,29 +154,29 @@ function buildKeymap(schema, mapKeys) {
 			}
 			if(blockDepth === -1) return false;
 
-			var paragraphType = state.schema.nodes.paragraph;
+			const paragraphType = state.schema.nodes.paragraph;
 			if(!paragraphType) return false;
 
-			var blockStart = $from.start(blockDepth); // pos of first content char
-			var blockEnd = $from.end(blockDepth);     // pos after last content char
-			var cursorPos = $from.pos;
+			const blockStart = $from.start(blockDepth); // pos of first content char
+			const blockEnd = $from.end(blockDepth);     // pos after last content char
+			const cursorPos = $from.pos;
 
-			var isAtStart = cursorPos === blockStart;
-			var isAtEnd = cursorPos === blockEnd;
+			const isAtStart = cursorPos === blockStart;
+			const isAtEnd = cursorPos === blockEnd;
 
 			if(!dispatch) return true; // dry-run: we will handle it
 
-			var tr = state.tr;
+			const tr = state.tr;
 
 			if(isAtStart) {
 				// Insert empty paragraph BEFORE the block
-				var insertBefore = $from.before(blockDepth);
+				const insertBefore = $from.before(blockDepth);
 				tr.insert(insertBefore, paragraphType.createAndFill());
 				tr.setSelection(prosemirrorState.TextSelection.create(tr.doc, insertBefore + 1));
 
 			} else if(isAtEnd) {
 				// Insert empty paragraph AFTER the block
-				var insertAfter = $from.after(blockDepth);
+				const insertAfter = $from.after(blockDepth);
 				tr.insert(insertAfter, paragraphType.createAndFill());
 				tr.setSelection(prosemirrorState.TextSelection.create(tr.doc, insertAfter + 1));
 
@@ -205,9 +205,9 @@ function buildKeymap(schema, mapKeys) {
 		const hardBreakType = schema.nodes.hard_break;
 		if(hardBreakType) {
 			// Enter: insert a hard_break inline node (stays inside the block)
-			var enterInHardLineBreaks = function(state, dispatch) {
-				var $from = state.selection.$from;
-				for(var depth = $from.depth; depth > 0; depth--) {
+			const enterInHardLineBreaks = (state, dispatch) => {
+				const $from = state.selection.$from;
+				for(const depth = $from.depth; depth > 0; depth--) {
 					if($from.node(depth).type === hardLineBreaksType) {
 						if(dispatch) {
 							dispatch(state.tr.replaceSelectionWith(hardBreakType.create()).scrollIntoView());
@@ -220,7 +220,7 @@ function buildKeymap(schema, mapKeys) {
 			bind("hard-line-breaks-enter", "Enter", enterInHardLineBreaks);
 
 			// Shift-Enter: exit / split the block
-			shiftEnterHandlers.push(makeShiftEnterExitHandler(function(nodeType) {
+			shiftEnterHandlers.push(makeShiftEnterExitHandler((nodeType) => {
 				return nodeType === hardLineBreaksType;
 			}));
 		}
@@ -231,7 +231,7 @@ function buildKeymap(schema, mapKeys) {
 
 		// Shift-Enter in code_block: same exit/split behavior
 		const codeBlockType = type;
-		shiftEnterHandlers.push(makeShiftEnterExitHandler(function(nodeType) {
+		shiftEnterHandlers.push(makeShiftEnterExitHandler((nodeType) => {
 			return nodeType === codeBlockType;
 		}));
 	}

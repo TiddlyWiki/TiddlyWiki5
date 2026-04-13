@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/prosemirror/slash-menu-ui.js
+title: $:/plugins/tiddlywiki/prosemirror/slash-menu/slash-menu-ui.js
 type: application/javascript
 module-type: library
 
@@ -8,7 +8,7 @@ Native JS SlashMenu UI implementation for TiddlyWiki
 
 "use strict";
 
-const slashMenu = require("$:/plugins/tiddlywiki/prosemirror/slash-menu.js");
+const slashMenu = require("$:/plugins/tiddlywiki/prosemirror/slash-menu/slash-menu.js");
 
 class SlashMenuUI {
 	constructor(view, options) {

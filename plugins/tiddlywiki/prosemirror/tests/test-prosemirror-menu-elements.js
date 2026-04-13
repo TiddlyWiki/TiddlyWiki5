@@ -8,12 +8,12 @@ Tests for menu-elements.js (EditorAction collection, snippet loading, etc.)
 
 "use strict";
 
-describe("ProseMirror menu-elements tests", function() {
+describe("ProseMirror menu-elements tests", () => {
 
 	let getAllMenuElements, flattenMenuElementsWithGroup, getBuiltinActionCommands;
 	let buildSchema;
 	try {
-		const mod = require("$:/plugins/tiddlywiki/prosemirror/menu-elements.js");
+		const mod = require("$:/plugins/tiddlywiki/prosemirror/slash-menu/menu-elements.js");
 		getAllMenuElements = mod.getAllMenuElements;
 		flattenMenuElementsWithGroup = mod.flattenMenuElementsWithGroup;
 		getBuiltinActionCommands = mod.getBuiltinActionCommands;
@@ -23,16 +23,16 @@ describe("ProseMirror menu-elements tests", function() {
 		return;
 	}
 
-	describe("getBuiltinActionCommands", function() {
+	describe("getBuiltinActionCommands", () => {
 
-		it("should return an object with command functions", function() {
+		it("should return an object with command functions", () => {
 			const schema = buildSchema();
 			const cmds = getBuiltinActionCommands(schema);
 			expect(cmds).toBeDefined();
 			expect(typeof cmds).toBe("object");
 		});
 
-		it("should have entries for common actions", function() {
+		it("should have entries for common actions", () => {
 			const schema = buildSchema();
 			const cmds = getBuiltinActionCommands(schema);
 			const expectedKeys = [
@@ -47,15 +47,15 @@ describe("ProseMirror menu-elements tests", function() {
 		});
 	});
 
-	describe("getAllMenuElements", function() {
+	describe("getAllMenuElements", () => {
 
-		it("should return an array", function() {
+		it("should return an array", () => {
 			const schema = buildSchema();
 			const elements = getAllMenuElements($tw.wiki, schema);
 			expect(Array.isArray(elements)).toBe(true);
 		});
 
-		it("should include EditorAction tiddler-based elements", function() {
+		it("should include EditorAction tiddler-based elements", () => {
 			const schema = buildSchema();
 			const elements = getAllMenuElements($tw.wiki, schema);
 			// Should have some action-* items from the editor-actions/*.tid files
@@ -63,7 +63,7 @@ describe("ProseMirror menu-elements tests", function() {
 			expect(actionItems.length).toBeGreaterThan(0);
 		});
 
-		it("should include block-type submenu", function() {
+		it("should include block-type submenu", () => {
 			const schema = buildSchema();
 			const elements = getAllMenuElements($tw.wiki, schema);
 			const blockTypeSubmenu = elements.find(e => e && e.id === "blocktype-submenu");
@@ -72,9 +72,9 @@ describe("ProseMirror menu-elements tests", function() {
 		});
 	});
 
-	describe("flattenMenuElementsWithGroup", function() {
+	describe("flattenMenuElementsWithGroup", () => {
 
-		it("should flatten submenus into group headers + items", function() {
+		it("should flatten submenus into group headers + items", () => {
 			const input = [
 				{ id: "a", label: "A", type: "command", available: () => true },
 				{
@@ -94,7 +94,7 @@ describe("ProseMirror menu-elements tests", function() {
 			expect(flat[3].id).toBe("c");
 		});
 
-		it("should handle empty array", function() {
+		it("should handle empty array", () => {
 			expect(flattenMenuElementsWithGroup([]).length).toBe(0);
 		});
 	});

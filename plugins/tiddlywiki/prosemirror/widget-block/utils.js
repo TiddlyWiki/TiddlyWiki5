@@ -126,10 +126,10 @@ function parseAttributes(str) {
 			attributes[key] = valueResult.value;
 			pos = valueResult.end;
 		} else {
-			// Positional argument
+			// Positional argument — use numeric-only name to match TW's convention
 			const valueResult = readValue(str, pos);
 			if(valueResult.value !== null && valueResult.end > pos) {
-				attributes["param" + paramIndex] = valueResult.value;
+				attributes[paramIndex + ""] = valueResult.value;
 				paramIndex++;
 				pos = valueResult.end;
 			} else {

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/prosemirror/menu-elements.js
+title: $:/plugins/tiddlywiki/prosemirror/slash-menu/menu-elements.js
 type: application/javascript
 module-type: library
 
@@ -63,21 +63,30 @@ function getBuiltinActionCommands(schema) {
 		"insert-table": view => {
 			if(!schema.nodes.table || !schema.nodes.table_row || !schema.nodes.table_cell || !schema.nodes.table_header) return false;
 			// Create a 3×3 table with header row
-			var headerCells = [];
-			var dataCells = [];
-			for(var c = 0; c < 3; c++) {
+			const headerCells = [];
+			let dataCells = [];
+			for(let c = 0; c < 3; c++) {
 				headerCells.push(schema.nodes.table_header.createAndFill());
 				dataCells.push(schema.nodes.table_cell.createAndFill());
 			}
-			var headerRow = schema.nodes.table_row.create(null, headerCells);
-			var dataRow1 = schema.nodes.table_row.create(null, dataCells);
+			const headerRow = schema.nodes.table_row.create(null, headerCells);
+			const dataRow1 = schema.nodes.table_row.create(null, dataCells);
 			dataCells = [];
-			for(var c2 = 0; c2 < 3; c2++) {
+			for(let c2 = 0; c2 < 3; c2++) {
 				dataCells.push(schema.nodes.table_cell.createAndFill());
 			}
-			var dataRow2 = schema.nodes.table_row.create(null, dataCells);
-			var table = schema.nodes.table.create(null, [headerRow, dataRow1, dataRow2]);
-			var tr = view.state.tr.replaceSelectionWith(table);
+			const dataRow2 = schema.nodes.table_row.create(null, dataCells);
+			const table = schema.nodes.table.create(null, [headerRow, dataRow1, dataRow2]);
+			const tr = view.state.tr.replaceSelectionWith(table);
+			view.dispatch(tr.scrollIntoView());
+			view.focus();
+			return true;
+		},
+		"hard-line-breaks": view => {
+			if(!schema.nodes.hard_line_breaks_block) return false;
+			const node = schema.nodes.hard_line_breaks_block.createAndFill();
+			if(!node) return false;
+			const tr = view.state.tr.replaceSelectionWith(node);
 			view.dispatch(tr.scrollIntoView());
 			view.focus();
 			return true;
@@ -125,7 +134,7 @@ function getSnippetMenuElements(wiki) {
 function getEditorActionMenuElements(wiki, schema) {
 	const builtinCommands = getBuiltinActionCommands(schema);
 	const titles = wiki.filterTiddlers("[all[shadows+tiddlers]tag[" + EDITOR_ACTION_TAG + "]]");
-	const result = [];
+	let result = [];
 	for(let i = 0; i < titles.length; i++) {
 		const title = titles[i];
 		const tiddler = wiki.getTiddler(title);

@@ -9,13 +9,13 @@ ProseMirror Find & Replace plugin.
 
 "use strict";
 
-var Plugin = require("prosemirror-state").Plugin;
-var PluginKey = require("prosemirror-state").PluginKey;
-var Decoration = require("prosemirror-view").Decoration;
-var DecorationSet = require("prosemirror-view").DecorationSet;
-var TextSelection = require("prosemirror-state").TextSelection;
+const Plugin = require("prosemirror-state").Plugin;
+const PluginKey = require("prosemirror-state").PluginKey;
+const Decoration = require("prosemirror-view").Decoration;
+const DecorationSet = require("prosemirror-view").DecorationSet;
+const TextSelection = require("prosemirror-state").TextSelection;
 
-var FIND_REPLACE_KEY = new PluginKey("tw-find-replace");
+const FIND_REPLACE_KEY = new PluginKey("tw-find-replace");
 
 /**
  * Get SVG icon from a TW image tiddler.
@@ -25,13 +25,13 @@ var FIND_REPLACE_KEY = new PluginKey("tw-find-replace");
 function getSvgIcon(tiddlerTitle, size) {
 	size = size || "1em";
 	try {
-		var htmlStr = $tw.wiki.renderTiddler("text/html", tiddlerTitle, {
+		const htmlStr = $tw.wiki.renderTiddler("text/html", tiddlerTitle, {
 			variables: { size: size }
 		});
 		if(!htmlStr) return null;
-		var container = document.createElement("div");
+		const container = document.createElement("div");
 		container.innerHTML = htmlStr;
-		var svgEl = container.querySelector("svg");
+		const svgEl = container.querySelector("svg");
 		if(svgEl) return svgEl;
 	} catch(e) { /* ignore */ }
 	return null;
@@ -43,15 +43,15 @@ function getSvgIcon(tiddlerTitle, size) {
  */
 function findMatches(doc, searchTerm, caseSensitive) {
 	if(!searchTerm) return [];
-	var results = [];
-	var search = caseSensitive ? searchTerm : searchTerm.toLowerCase();
+	const results = [];
+	const search = caseSensitive ? searchTerm : searchTerm.toLowerCase();
 
-	doc.descendants(function(node, pos) {
+	doc.descendants((node, pos) => {
 		if(node.isText) {
-			var text = caseSensitive ? node.text : node.text.toLowerCase();
-			var idx = 0;
+			const text = caseSensitive ? node.text : node.text.toLowerCase();
+			let idx = 0;
 			while(idx < text.length) {
-				var found = text.indexOf(search, idx);
+				const found = text.indexOf(search, idx);
 				if(found < 0) break;
 				results.push({ from: pos + found, to: pos + found + searchTerm.length });
 				idx = found + 1;
@@ -65,10 +65,10 @@ function findMatches(doc, searchTerm, caseSensitive) {
  * Create decorations for all search matches.
  */
 function createDecorations(doc, matches, currentIndex) {
-	var decorations = [];
-	for(var i = 0; i < matches.length; i++) {
-		var match = matches[i];
-		var cls = i === currentIndex ? "tc-prosemirror-find-current" : "tc-prosemirror-find-match";
+	const decorations = [];
+	for(let i = 0; i < matches.length; i++) {
+		const match = matches[i];
+		const cls = i === currentIndex ? "tc-prosemirror-find-current" : "tc-prosemirror-find-match";
 		decorations.push(Decoration.inline(match.from, match.to, { class: cls }));
 	}
 	return DecorationSet.create(doc, decorations);
@@ -90,14 +90,14 @@ function createFindReplacePlugin(wiki) {
 				};
 			},
 			apply: function(tr, prev, oldState, newState) {
-				var meta = tr.getMeta(FIND_REPLACE_KEY);
+				const meta = tr.getMeta(FIND_REPLACE_KEY);
 				if(meta) {
 					// Recalculate matches if search changed
 					if(meta.searchTerm !== undefined || meta.caseSensitive !== undefined) {
-						var term = meta.searchTerm !== undefined ? meta.searchTerm : prev.searchTerm;
-						var cs = meta.caseSensitive !== undefined ? meta.caseSensitive : prev.caseSensitive;
-						var matches = findMatches(newState.doc, term, cs);
-						var curIdx = matches.length > 0 ? 0 : -1;
+						const term = meta.searchTerm !== undefined ? meta.searchTerm : prev.searchTerm;
+						const cs = meta.caseSensitive !== undefined ? meta.caseSensitive : prev.caseSensitive;
+						const matches = findMatches(newState.doc, term, cs);
+						let curIdx = matches.length > 0 ? 0 : -1;
 						if(meta.currentIndex !== undefined) curIdx = meta.currentIndex;
 						return {
 							active: meta.active !== undefined ? meta.active : prev.active,
@@ -110,7 +110,7 @@ function createFindReplacePlugin(wiki) {
 						};
 					}
 					// Just updating currentIndex or active state
-					var state = Object.assign({}, prev);
+					const state = { ...prev };
 					if(meta.active !== undefined) state.active = meta.active;
 					if(meta.currentIndex !== undefined) state.currentIndex = meta.currentIndex;
 					if(meta.replaceTerm !== undefined) state.replaceTerm = meta.replaceTerm;
@@ -120,27 +120,28 @@ function createFindReplacePlugin(wiki) {
 				}
 				// On doc change, remap decorations
 				if(tr.docChanged && prev.active && prev.searchTerm) {
-					var matches = findMatches(newState.doc, prev.searchTerm, prev.caseSensitive);
-					var curIdx = Math.min(prev.currentIndex, matches.length - 1);
+					const matches = findMatches(newState.doc, prev.searchTerm, prev.caseSensitive);
+					let curIdx = Math.min(prev.currentIndex, matches.length - 1);
 					if(curIdx < 0 && matches.length > 0) curIdx = 0;
-					return Object.assign({}, prev, {
-						matches: matches,
+					return {
+						...prev,
+						matches,
 						currentIndex: curIdx,
 						decorations: createDecorations(newState.doc, matches, curIdx)
-					});
+					};
 				}
 				return prev;
 			}
 		},
 		props: {
-			decorations: function(state) {
+			decorations: (state) => {
 				return FIND_REPLACE_KEY.getState(state).decorations;
 			},
 			handleKeyDown: function(view, event) {
 				// Ctrl+F / Cmd+F to open find
 				if((event.ctrlKey || event.metaKey) && event.key === "f") {
 					event.preventDefault();
-					var st = FIND_REPLACE_KEY.getState(view.state);
+					const st = FIND_REPLACE_KEY.getState(view.state);
 					view.dispatch(view.state.tr.setMeta(FIND_REPLACE_KEY, {
 						active: true,
 						searchTerm: st.searchTerm
@@ -150,7 +151,7 @@ function createFindReplacePlugin(wiki) {
 				// Ctrl+H / Cmd+H to open find+replace
 				if((event.ctrlKey || event.metaKey) && event.key === "h") {
 					event.preventDefault();
-					var st = FIND_REPLACE_KEY.getState(view.state);
+					const st = FIND_REPLACE_KEY.getState(view.state);
 					view.dispatch(view.state.tr.setMeta(FIND_REPLACE_KEY, {
 						active: true,
 						searchTerm: st.searchTerm
@@ -159,7 +160,7 @@ function createFindReplacePlugin(wiki) {
 				}
 				// Escape to close
 				if(event.key === "Escape") {
-					var st = FIND_REPLACE_KEY.getState(view.state);
+					const st = FIND_REPLACE_KEY.getState(view.state);
 					if(st.active) {
 						view.dispatch(view.state.tr.setMeta(FIND_REPLACE_KEY, { active: false }));
 						view.focus();
@@ -397,7 +398,7 @@ class FindReplaceView {
 		const replaceTerm = this.replaceInput.value;
 		const schema = this.view.state.schema;
 		// Apply replacements from end to start to avoid position remapping issues
-		const tr = this.view.state.tr;
+		let tr = this.view.state.tr;
 		const sortedMatches = state.matches.slice().sort((a, b) => b.from - a.from);
 		for(const m of sortedMatches) {
 			const mappedFrom = tr.mapping.map(m.from);

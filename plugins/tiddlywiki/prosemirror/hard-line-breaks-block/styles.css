@@ -5,53 +5,19 @@ tags: $:/tags/Stylesheet
 
 Styles for hard line breaks blocks in the ProseMirror editor.
 The """ ... """ syntax displays as a distinct editable block with a hover border.
+Uses the unified pm-nodeview pattern from styles/nodeview-common.
 
 \*/
 
-/* Outer container */
-.pm-hard-line-breaks-block {
-	position: relative;
-	border: 2px dashed transparent;
-	border-radius: 4px;
-	padding: 4px;
-	margin: 2px 0;
-	transition: border-color 0.15s ease;
-}
-
-/* Show dashed border on hover or when selected */
-.pm-hard-line-breaks-block:hover,
-.pm-hard-line-breaks-block-selected {
-	border-color: #2589D8;
-}
-
-/* Label badge — hidden by default, appears on hover at bottom-right corner */
-.pm-hard-line-breaks-block-label {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	background: #2589D8;
-	color: white;
+/* Hard-line-breaks variant */
+.pm-nodeview.pm-nodeview-hardbreaks .pm-nodeview-header {
 	font-family: monospace;
 	font-size: 11px;
 	padding: 1px 6px;
-	border-radius: 4px 0 0 0; /* only top-left rounded, fits the corner */
-	opacity: 0;
-	pointer-events: none;
-	white-space: nowrap;
-	user-select: none;
-	transition: opacity 0.15s ease;
-	/* Sit inside the border, so it never overlaps adjacent blocks */
-	transform: translateY(0);
+	/* No buttons, just a label */
 }
 
-.pm-hard-line-breaks-block:hover .pm-hard-line-breaks-block-label,
-.pm-hard-line-breaks-block-selected .pm-hard-line-breaks-block-label {
-	opacity: 1;
-}
-
-/* Inner content area — each hard_break renders as a line break visually */
-.pm-hard-line-breaks-block-content {
-	display: block;
+.pm-nodeview.pm-nodeview-hardbreaks .pm-nodeview-content {
 	min-height: 1.4em;
 	outline: none;
 }

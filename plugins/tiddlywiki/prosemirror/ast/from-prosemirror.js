@@ -8,7 +8,7 @@ Get the Wiki AST from a Prosemirror AST
 \*/
 
 // Require at module level to avoid repeated require() calls on every paragraph conversion
-var parseWidget;
+let parseWidget;
 try {
 	parseWidget = require("$:/plugins/tiddlywiki/prosemirror/widget-block/utils.js").parseWidget;
 } catch(e) {
@@ -23,21 +23,21 @@ function paragraph(builder, node) {
 	// Check if this paragraph contains a widget call
 	// If it's a single text node that looks like <<widgetName ...>>
 	if(node.content && node.content.length === 1 && node.content[0].type === "text") {
-		var text = node.content[0].text.trim();
-		var parsed = parseWidget ? parseWidget(text) : null;
+		const text = node.content[0].text.trim();
+		const parsed = parseWidget ? parseWidget(text) : null;
 		
 		if(parsed) {
-			var widgetName = parsed.widgetName;
-			var parsedAttrs = parsed.attributes || {};
+			const widgetName = parsed.widgetName;
+			const parsedAttrs = parsed.attributes || {};
 			
 			// Build TW-style attributes object
-			var attributes = { $variable: { name: "$variable", type: "string", value: widgetName } };
-			var orderedAttributes = [{ name: "$variable", type: "string", value: widgetName }];
+			const attributes = { $variable: { name: "$variable", type: "string", value: widgetName } };
+			const orderedAttributes = [{ name: "$variable", type: "string", value: widgetName }];
 			
-			var keys = Object.keys(parsedAttrs);
-			for(var ki = 0; ki < keys.length; ki++) {
-				var key = keys[ki];
-				var value = parsedAttrs[key];
+			const keys = Object.keys(parsedAttrs);
+			for(let ki = 0; ki < keys.length; ki++) {
+				const key = keys[ki];
+				const value = parsedAttrs[key];
 				attributes[key] = { name: key, type: "string", value: value };
 				orderedAttributes.push({ name: key, type: "string", value: value });
 			}
@@ -109,9 +109,9 @@ function text(builder, node) {
 		return sortedMarks.reduce((wrappedNode, mark) => {
 			// Special handling for link mark
 			if(mark.type === "link") {
-				var href = mark.attrs && mark.attrs.href || "";
-				var isExternal = /^(?:https?|ftp|mailto):/i.test(href);
-				var displayText = wrappedNode.text || "";
+				const href = mark.attrs && mark.attrs.href || "";
+				const isExternal = /^(?:https?|ftp|mailto):/i.test(href);
+				const displayText = wrappedNode.text || "";
 				if(isExternal && displayText && displayText !== href) {
 					// External link with custom display text: use prettylink [[text|url]]
 					return {
@@ -147,8 +147,8 @@ function text(builder, node) {
 					};
 				}
 			}
-			var tag = markTypeMap[mark.type];
-			var rule = markRuleMap[mark.type];
+			const tag = markTypeMap[mark.type];
+			const rule = markRuleMap[mark.type];
 			if(!tag) {
 				// Unknown mark type — skip it rather than produce invalid AST
 				return wrappedNode;
@@ -359,7 +359,7 @@ function image(builder, node) {
 }
 
 function blockquote(builder, node) {
-	var children = convertNodes(builder, node.content);
+	const children = convertNodes(builder, node.content);
 	// If the PM blockquote has a cite attribute, re-add it as a <cite> element
 	if(node.attrs && node.attrs.cite) {
 		children.push({
@@ -402,7 +402,7 @@ function hard_break(builder, node) {
  * The isRuleEnd <br> is NOT stored in PM state — it's re-added here on serialization.
  */
 function hard_line_breaks_block(builder, node) {
-	var children = convertNodes(builder, node.content || []);
+	const children = convertNodes(builder, node.content || []);
 
 	if(children.length === 0) {
 		// Empty block: produce minimal valid hardlinebreaks output
@@ -418,7 +418,7 @@ function hard_line_breaks_block(builder, node) {
 	}
 
 	// Mark all children with rule "hardlinebreaks"
-	for(var i = 0; i < children.length; i++) {
+	for(let i = 0; i < children.length; i++) {
 		children[i].rule = "hardlinebreaks";
 	}
 
@@ -447,10 +447,10 @@ function hard_line_breaks_block(builder, node) {
  * Restored back to wiki AST by re-parsing the raw text.
  */
 function pragma_block(builder, node) {
-	var rawText = (node.attrs && node.attrs.rawText) || "";
-	var parsedNodes = [];
+	const rawText = (node.attrs && node.attrs.rawText) || "";
+	let parsedNodes = [];
 	try {
-		var parseResult = $tw.wiki.parseText(null, rawText);
+		const parseResult = $tw.wiki.parseText(null, rawText);
 		if(parseResult && parseResult.tree) {
 			parsedNodes = parseResult.tree;
 		}
@@ -465,9 +465,9 @@ function pragma_block(builder, node) {
 	// Return only the top-level pragma nodes (not their children which are the rest of the document)
 	if(parsedNodes.length > 0) {
 		// Strip children from pragma nodes to avoid duplicating subsequent content
-		return parsedNodes.map(function(pragmaNode) {
-			var result = {};
-			for(var key in pragmaNode) {
+		return parsedNodes.map((pragmaNode) => {
+			let result = {};
+			for(let key in pragmaNode) {
 				if(pragmaNode.hasOwnProperty(key) && key !== "children") {
 					result[key] = pragmaNode[key];
 				}
@@ -484,9 +484,9 @@ function pragma_block(builder, node) {
  * Re-parsed to restore the original wiki AST.
  */
 function opaque_block(builder, node) {
-	var rawText = (node.attrs && node.attrs.rawText) || "";
+	const rawText = (node.attrs && node.attrs.rawText) || "";
 	try {
-		var parseResult = $tw.wiki.parseText(null, rawText);
+		const parseResult = $tw.wiki.parseText(null, rawText);
 		if(parseResult && parseResult.tree) {
 			return parseResult.tree;
 		}
@@ -502,17 +502,17 @@ function opaque_block(builder, node) {
  * PM table structure:   table > [table_row] > [table_cell|table_header]
  */
 function table_node(builder, node) {
-	var rows = [];
+	const rows = [];
 	if(node.content) {
-		for(var i = 0; i < node.content.length; i++) {
-			var rowNode = node.content[i];
+		for(let i = 0; i < node.content.length; i++) {
+			const rowNode = node.content[i];
 			if(rowNode.type === "table_row") {
 				rows.push(table_row(builder, rowNode));
 			}
 		}
 	}
 	// Wrap rows in a tbody container (as TW parser/serializer expects)
-	var tbody = {
+	const tbody = {
 		type: "element",
 		tag: "tbody",
 		children: rows
@@ -526,10 +526,10 @@ function table_node(builder, node) {
 }
 
 function table_row(builder, node) {
-	var cells = [];
+	const cells = [];
 	if(node.content) {
-		for(var i = 0; i < node.content.length; i++) {
-			var cellNode = node.content[i];
+		for(let i = 0; i < node.content.length; i++) {
+			const cellNode = node.content[i];
 			if(cellNode.type === "table_header" || cellNode.type === "table_cell") {
 				cells.push(table_cell_or_header(builder, cellNode));
 			}
@@ -543,17 +543,17 @@ function table_row(builder, node) {
 }
 
 function table_cell_or_header(builder, node) {
-	var isHeader = (node.type === "table_header");
+	const isHeader = (node.type === "table_header");
 	// Flatten cell content: TW table cells contain inline content, not blocks.
 	// PM table cells contain block content (paragraphs).
 	// We need to extract the inline children from the paragraph wrappers.
-	var inlineContent = [];
+	let inlineContent = [];
 	if(node.content) {
-		for(var i = 0; i < node.content.length; i++) {
-			var child = node.content[i];
+		for(let i = 0; i < node.content.length; i++) {
+			let child = node.content[i];
 			if(child.type === "paragraph" && child.content) {
 				// Extract inline nodes from the paragraph
-				var inlines = convertNodes(builder, child.content);
+				const inlines = convertNodes(builder, child.content);
 				if(Array.isArray(inlines)) {
 					inlineContent = inlineContent.concat(inlines);
 				} else {
@@ -561,7 +561,7 @@ function table_cell_or_header(builder, node) {
 				}
 			} else {
 				// Non-paragraph block in a cell — convert normally
-				var converted = convertANode(builder, child);
+				const converted = convertANode(builder, child);
 				if(Array.isArray(converted)) {
 					inlineContent = inlineContent.concat(converted);
 				} else if(converted) {
@@ -580,7 +580,7 @@ function table_cell_or_header(builder, node) {
 // --- Definition list (;/: syntax) ---
 
 function definition_list(builder, node) {
-	var items = convertNodes(builder, node.content);
+	const items = convertNodes(builder, node.content);
 	// Wrap all dt/dd items in a single dl
 	return {
 		type: "element",
@@ -666,7 +666,7 @@ function convertANode(builders, node, context) {
 		? convertedNode : [convertedNode]);
 		return arrayOfNodes.map(child => {
 			const metadata = restoreMetadata(node);
-			const result = {};
+			let result = {};
 			// Manual object merge instead of spread operator
 			for(const key in metadata) {
 				if(metadata.hasOwnProperty(key)) {

@@ -30,7 +30,8 @@ function headingRule(nodeType, maxLevel) {
 }
 
 function buildInputRules(schema) {
-	var rules = smartQuotes.concat(ellipsis, emDash), type;
+	const rules = smartQuotes.concat(ellipsis, emDash);
+	let type;
 	type = schema.nodes.blockquote;
 	if(type) {
 		rules.push(blockQuoteRule(type));
@@ -41,9 +42,9 @@ function buildInputRules(schema) {
 			kind: "bullet",
 			collapsed: false
 		}));
-		rules.push(wrappingListInputRule(/^\s?(#)\s$|^\s?(\d+)\.\s$/, function(params) {
-			var match = params.match;
-			var order = match[1] === "#" ? 1 : parseInt(match[1], 10);
+		rules.push(wrappingListInputRule(/^\s?(#)\s$|^\s?(\d+)\.\s$/, (params) => {
+			const match = params.match;
+			const order = match[1] === "#" ? 1 : parseInt(match[1], 10);
 			return {
 				kind: "ordered",
 				collapsed: false,
