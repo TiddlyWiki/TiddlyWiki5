@@ -16,7 +16,7 @@ representation.
 
 var yaml = require("$:/plugins/tiddlywiki/markdown/yaml.js");
 
-exports["text/x-markdown"] = function(text,fields) {
+function deserialize(text,fields) {
 	var result = Object.create(null),
 		body = text,
 		frontmatter = null;
@@ -76,7 +76,12 @@ exports["text/x-markdown"] = function(text,fields) {
 		result.type = "text/x-markdown";
 	}
 	return [result];
-};
+}
+
+// Register under both types — text/x-markdown is the deserializer type
+// registered for .md file extensions; text/markdown is the raw content type.
+exports["text/x-markdown"] = deserialize;
+exports["text/markdown"] = deserialize;
 
 /*
 Convert a parsed YAML value to a tiddler field string.

@@ -32,7 +32,7 @@ var SKIP_FIELDS = {
 	revision: true
 };
 
-exports["text/x-markdown"] = function(tiddler) {
+function serialize(tiddler) {
 	if(!tiddler) {
 		return "";
 	}
@@ -72,4 +72,10 @@ exports["text/x-markdown"] = function(tiddler) {
 		return body;
 	}
 	return "---\n" + yaml.dump(frontmatter) + "\n---\n\n" + body;
-};
+}
+
+// Register under both types — text/markdown is what the "New Markdown" button
+// sets; text/x-markdown is what the deserializer uses after content-type
+// resolution for .md files loaded from disk.
+exports["text/x-markdown"] = serialize;
+exports["text/markdown"] = serialize;
