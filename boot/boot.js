@@ -2311,11 +2311,20 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	$tw.loadPlugins(wikiInfo.languages,$tw.config.languagesPath,$tw.config.languagesEnvVar);
 	// Register plugin-provided tiddlerdeserializer and tiddlerserializer modules now,
 	// so they are available when the wiki tiddler files are read from disk below.
-	// (The same steps run again later in execStartup; the operations are idempotent.)
+	// We also apply the supporting `utils`, `tiddlerfield`, and `tiddlermethod`
+	// modules so deserializers can call into them (e.g. core's text/html
+	// deserializer needs $tw.utils.extractEncryptedStoreArea).
+	// (All of these steps run again later in execStartup; they are idempotent.)
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin");
 	$tw.wiki.unpackPluginTiddlers();
 	$tw.wiki.defineShadowModules();
+	$tw.modules.applyMethods("utils",$tw.utils);
+	if($tw.node) {
+		$tw.modules.applyMethods("utils-node",$tw.utils);
+	}
+	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
+	$tw.modules.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	$tw.modules.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerModules);
 	// Load the wiki files, registering them as writable
