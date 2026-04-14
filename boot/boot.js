@@ -1539,8 +1539,8 @@ Register all the module tiddlers that have a module type
 $tw.Wiki.prototype.defineShadowModules = function() {
 	var self = this;
 	this.eachShadow(function(tiddler,title) {
-		// Don't define the module if it is overidden by an ordinary tiddler
-		if(!self.tiddlerExists(title) && tiddler.hasField("module-type")) {
+		// Don't define the module if it is overidden by an ordinary tiddler, or has already been defined
+		if(!self.tiddlerExists(title) && tiddler.hasField("module-type") && !$tw.utils.hop($tw.modules.titles,title)) {
 			if(tiddler.hasField("draft.of")) {
 				// Report a fundamental problem
 				console.warn(`TiddlyWiki: Plugins should not contain tiddlers with a 'draft.of' field: ${tiddler.fields.title}`);
@@ -2309,6 +2309,15 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	$tw.loadPlugins(wikiInfo.plugins,$tw.config.pluginsPath,$tw.config.pluginsEnvVar);
 	$tw.loadPlugins(wikiInfo.themes,$tw.config.themesPath,$tw.config.themesEnvVar);
 	$tw.loadPlugins(wikiInfo.languages,$tw.config.languagesPath,$tw.config.languagesEnvVar);
+	// Register plugin-provided tiddlerdeserializer and tiddlerserializer modules now,
+	// so they are available when the wiki tiddler files are read from disk below.
+	// (The same steps run again later in execStartup; the operations are idempotent.)
+	$tw.wiki.readPluginInfo();
+	$tw.wiki.registerPluginTiddlers("plugin");
+	$tw.wiki.unpackPluginTiddlers();
+	$tw.wiki.defineShadowModules();
+	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	$tw.modules.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerModules);
 	// Load the wiki files, registering them as writable
 	var resolvedWikiPath = path.resolve(wikiPath,$tw.config.wikiTiddlersSubDir);
 	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
