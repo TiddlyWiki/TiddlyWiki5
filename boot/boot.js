@@ -2331,7 +2331,10 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		for(var title in $tw.boot.files) {
 			fileInfo = $tw.boot.files[title];
 			if(fileInfo.isEditableFile) {
-				relativePath = path.relative($tw.boot.wikiTiddlersPath,fileInfo.filepath);
+				// For tiddlers loaded from a dynamic store, compute originalpath relative to the store's directory
+				// so that save-time path resolution against that directory yields the correct location.
+				var basePath = fileInfo.dynamicStoreId || $tw.boot.wikiTiddlersPath;
+				relativePath = path.relative(basePath,fileInfo.filepath);
 				fileInfo.originalpath = relativePath;
 				output[title] =
 					path.sep === "/" ?
@@ -2548,6 +2551,9 @@ $tw.boot.initStartup = function(options) {
 	// Install the tiddler deserializer modules
 	$tw.Wiki.tiddlerDeserializerModules = Object.create(null);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	// Install the tiddler serializer modules
+	$tw.Wiki.tiddlerSerializerModules = Object.create(null);
+	$tw.modules.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerModules);
 	// Call unload handlers in the browser
 	if($tw.browser) {
 		window.onbeforeunload = function(event) {
