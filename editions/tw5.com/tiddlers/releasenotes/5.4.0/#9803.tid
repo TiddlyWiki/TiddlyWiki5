@@ -1,0 +1,24 @@
+title: $:/changenotes/5.4.0/#9803
+description: Re-enable WikiText table caption positioning
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9803
+github-contributors: andrewg_oz
+
+Re-enable positioning of WikiText table captions by un-commenting-out original code. The way it works is:
+
+```
+|caption above table|c
+|!h1|!h2|h
+|d1|d2|
+```
+
+and
+
+```
+|!h1|!h2|h
+|d1|d2|
+|caption below table|c
+```
