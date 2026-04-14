@@ -44,7 +44,7 @@ if($tw.node) {
 		}
 	}
 
-describe("filesystem dynamic store", function() {
+	describe("filesystem dynamic store", function() {
 
 		var tmpRoot, wikiTiddlers, storeDir, origDynamicStores, origFiles, originalBootPath;
 		var adaptor, wiki;
