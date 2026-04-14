@@ -35,12 +35,20 @@ function parseScalar(raw) {
 	   (raw[0] === "'" && raw[raw.length - 1] === "'")) {
 		var inner = raw.slice(1, -1);
 		if(raw[0] === '"') {
-			// Handle basic escape sequences in double-quoted strings
-			inner = inner.replace(/\\n/g, "\n")
-				.replace(/\\t/g, "\t")
-				.replace(/\\r/g, "\r")
-				.replace(/\\\\/g, "\\")
-				.replace(/\\"/g, '"');
+			// Handle basic escape sequences in double-quoted strings.
+			// Use a single pass so each escape consumes its backslash before
+			// later replacements can re-interpret it (e.g. "\\n" must become
+			// backslash + n, not backslash + newline).
+			inner = inner.replace(/\\(.)/g, function(_, c) {
+				switch(c) {
+					case "n": return "\n";
+					case "t": return "\t";
+					case "r": return "\r";
+					case "\\": return "\\";
+					case '"': return '"';
+					default: return c;
+				}
+			});
 		}
 		return inner;
 	}
