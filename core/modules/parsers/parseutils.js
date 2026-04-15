@@ -528,64 +528,75 @@ exports.parseAttribute = function(source,pos) {
 		pos = token.end;
 		// Skip whitespace
 		pos = $tw.utils.skipWhiteSpace(source,pos);
-		// Look for a string literal
-		var stringLiteral = $tw.utils.parseStringLiteral(source,pos);
-		if(stringLiteral) {
-			pos = stringLiteral.end;
-			node.type = "string";
-			node.value = stringLiteral.value;
-		} else {
+
+		do {
+			// Look for a string literal
+			var stringLiteral = $tw.utils.parseStringLiteral(source,pos);
+			if(stringLiteral) {
+				pos = stringLiteral.end;
+				node.type = "string";
+				node.value = stringLiteral.value;
+				break;
+			}
+
 			// Look for a filtered value
 			var filteredValue = $tw.utils.parseTokenRegExp(source,pos,reFilteredValue);
 			if(filteredValue) {
 				pos = filteredValue.end;
 				node.type = "filtered";
 				node.filter = filteredValue.match[1];
-			} else {
-				// Look for an indirect value
-				var indirectValue = $tw.utils.parseTokenRegExp(source,pos,reIndirectValue);
-				if(indirectValue) {
-					pos = indirectValue.end;
-					node.type = "indirect";
-					node.textReference = indirectValue.match[1];
-				} else {
-					// Look for a macro invocation value
-					var macroInvocation = $tw.utils.parseMacroInvocationAsTransclusion(source,pos);
-					if(macroInvocation) {
-						pos = macroInvocation.end;
-						node.type = "macro";
-						node.value = macroInvocation;
-					} else {
-						// Look for an MVV reference value
-						var mvvReference = $tw.utils.parseMVVReferenceAsTransclusion(source,pos);
-						if(mvvReference) {
-							pos = mvvReference.end;
-							node.type = "macro";
-							node.value = mvvReference;
-							node.isMVV = true;
-						} else {
-							var substitutedValue = $tw.utils.parseTokenRegExp(source,pos,reSubstitutedValue);
-							if(substitutedValue) {
-								pos = substitutedValue.end;
-								node.type = "substituted";
-								node.rawValue = substitutedValue.match[1] || substitutedValue.match[2];
-							} else {
-								// Look for a unquoted value
-								var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
-								if(unquotedValue) {
-									pos = unquotedValue.end;
-									node.type = "string";
-									node.value = unquotedValue.match[1];
-								} else {
-									node.type = "string";
-									node.value = "true";
-								}
-							}
-						}
-					}
-				}
+				break;
 			}
-		}
+
+			// Look for an indirect value
+			var indirectValue = $tw.utils.parseTokenRegExp(source,pos,reIndirectValue);
+			if(indirectValue) {
+				pos = indirectValue.end;
+				node.type = "indirect";
+				node.textReference = indirectValue.match[1];
+				break;
+			}
+
+			// Look for a macro invocation value
+			var macroInvocation = $tw.utils.parseMacroInvocationAsTransclusion(source,pos);
+			if(macroInvocation) {
+				pos = macroInvocation.end;
+				node.type = "macro";
+				node.value = macroInvocation;
+				break;
+			}
+
+			// Look for an MVV reference value
+			var mvvReference = $tw.utils.parseMVVReferenceAsTransclusion(source,pos);
+			if(mvvReference) {
+				pos = mvvReference.end;
+				node.type = "macro";
+				node.value = mvvReference;
+				node.isMVV = true;
+				break;
+			}
+
+			// Look for a substituted value
+			var substitutedValue = $tw.utils.parseTokenRegExp(source,pos,reSubstitutedValue);
+			if(substitutedValue) {
+				pos = substitutedValue.end;
+				node.type = "substituted";
+				node.rawValue = substitutedValue.match[1] || substitutedValue.match[2];
+				break;
+			}
+
+			// Look for a unquoted value
+			var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
+			if(unquotedValue) {
+				pos = unquotedValue.end;
+				node.type = "string";
+				node.value = unquotedValue.match[1];
+				break;
+			}
+
+			node.type = "string";
+			node.value = "true";
+		} while(false);
 	} else {
 		// If there is no equals sign or colon, then this is an attribute with no value, defaulting to "true"
 		node.type = "string";
