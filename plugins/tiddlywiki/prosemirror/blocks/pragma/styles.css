@@ -1,0 +1,26 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/blocks/pragma/styles.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+Styles for pragma and opaque blocks in ProseMirror editor.
+Uses the unified pm-nodeview pattern from styles/nodeview-common.
+
+\*/
+
+/* Pragma/opaque label in view mode */
+.pm-nodeview-label {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-family: monospace;
+	font-size: 12px;
+	cursor: pointer;
+	user-select: none;
+	min-height: 28px;
+	line-height: 28px;
+	padding: 0 4px;
+}
+
+/* Hover colours are defined in styles/theme.tid via <<colour>> macros */

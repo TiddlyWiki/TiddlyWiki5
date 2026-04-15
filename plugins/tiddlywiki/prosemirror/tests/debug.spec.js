@@ -25,9 +25,9 @@ test.describe("ProseMirror Editor - Module Debug", () => {
 
 				const data = {
 					prosemirrorState: $tw.modules.titles["prosemirror-state"] ? "found" : "missing",
-					widgetJs: $tw.modules.titles["$:/plugins/tiddlywiki/prosemirror/widget.js"] ? "found" : "missing",
-					widgetLoader: $tw.modules.titles["$:/plugins/tiddlywiki/prosemirror/widget-loader.js"] ? "found" : "missing",
-					loaderExecution: tryExecute("$:/plugins/tiddlywiki/prosemirror/widget-loader.js"),
+					widgetJs: $tw.modules.titles["$:/plugins/tiddlywiki/prosemirror/core/widget.js"] ? "found" : "missing",
+					widgetLoader: $tw.modules.titles["$:/plugins/tiddlywiki/prosemirror/core/widget-loader.js"] ? "found" : "missing",
+					loaderExecution: tryExecute("$:/plugins/tiddlywiki/prosemirror/core/widget-loader.js"),
 					widgetTypes: Object.keys($tw.modules.types.widget || {})
 				};
 

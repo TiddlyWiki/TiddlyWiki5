@@ -24,8 +24,8 @@ Any tiddler tagged `$:/tags/TextEditor/Snippet` appears in the slash menu. If th
 
 The editor is built on [[ProseMirror|https://prosemirror.net/]]:
 
-* ''Schema'' (`schema.js`): defines PM node/mark types corresponding to WikiText constructs
-* ''AST conversion'' (`ast/`): bidirectional conversion between TW parse tree and PM document JSON
-* ''Engine'' (`engine.js`): implements the TW editor engine interface
-* ''Widget'' (`widget.js`): the `$prosemirror` and `edit-prosemirror` widgets
-* ''Plugins'' (`editor-plugins/`): bubble menu, drag handle, link tooltip, markdown shortcuts, block placeholder
+* ''Core'' (`core/`): schema, engine, widget, shared plugin assembly, text operations, source panel
+* ''AST'' (`ast/`): bidirectional conversion between TW parse tree and PM document JSON
+* ''Blocks'' (`blocks/`): custom block nodeviews — widget, image, pragma, hard-line-breaks
+* ''Features'' (`features/`): editor feature plugins — bubble menu, drag handle, link tooltip, markdown shortcuts, autocomplete, find-replace, slash menu
+* ''Setup'' (`setup/`): keymap, menu bar, input rules, placeholder, prompt dialogs

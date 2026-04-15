@@ -514,7 +514,7 @@ function codeblock(context, node) {
 }
 
 function image(context, node) {
-	const getImageAttrsFromWikiAstImageNode = require("$:/plugins/tiddlywiki/prosemirror/image/utils.js").getImageAttrsFromWikiAstImageNode;
+	const getImageAttrsFromWikiAstImageNode = require("$:/plugins/tiddlywiki/prosemirror/blocks/image/utils.js").getImageAttrsFromWikiAstImageNode;
 	return {
 		type: "image",
 		attrs: getImageAttrsFromWikiAstImageNode(node)

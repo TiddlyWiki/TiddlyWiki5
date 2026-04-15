@@ -31,7 +31,7 @@ test.describe("ProseMirror Editor - Smoke Tests", () => {
 			const widgets = Object.keys($tw.modules.types.widget || {});
 			return {
 				widgets: widgets,
-				hasProsemirrorLoader: widgets.includes("$:/plugins/tiddlywiki/prosemirror/widget-loader.js"),
+				hasProsemirrorLoader: widgets.includes("$:/plugins/tiddlywiki/prosemirror/core/widget-loader.js"),
 				hasProsemirror: typeof $tw.modules.types.widget["prosemirror"] !== "undefined",
 				hasEditProsemirror: typeof $tw.modules.types.widget["edit-prosemirror"] !== "undefined"
 			};
