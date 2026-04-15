@@ -13,11 +13,11 @@ describe("ProseMirror menu-elements tests", () => {
 	let getAllMenuElements, flattenMenuElementsWithGroup, getBuiltinActionCommands;
 	let buildSchema;
 	try {
-		const mod = require("$:/plugins/tiddlywiki/prosemirror/slash-menu/menu-elements.js");
+		const mod = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/menu-elements.js");
 		getAllMenuElements = mod.getAllMenuElements;
 		flattenMenuElementsWithGroup = mod.flattenMenuElementsWithGroup;
 		getBuiltinActionCommands = mod.getBuiltinActionCommands;
-		buildSchema = require("$:/plugins/tiddlywiki/prosemirror/engine.js").buildSchema;
+		buildSchema = require("$:/plugins/tiddlywiki/prosemirror/core/engine.js").buildSchema;
 	} catch(e) {
 		// prosemirror dependencies not available in this test env
 		return;

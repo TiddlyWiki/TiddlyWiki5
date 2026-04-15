@@ -1,0 +1,59 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/blocks/image/styles.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+Styles for inline image node UI in ProseMirror editor.
+Uses the unified pm-nodeview pattern from styles/nodeview-common.
+
+\*/
+
+/* Lower menubar z-index so image nodeview headers don't get covered */
+.ProseMirror-menubar {
+	z-index: 5;
+}
+
+.pm-image-nodeview-content {
+	position: relative;
+	display: block;
+}
+
+.pm-image-nodeview-img {
+	display: block;
+	border-radius: 4px;
+}
+
+.pm-image-nodeview-img:not([width]):not([height]) {
+	max-width: 100%;
+	height: auto;
+}
+
+.pm-image-resize-handle {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 12px;
+	height: 12px;
+	border: 2px solid;
+	border-radius: 50%;
+	cursor: nwse-resize;
+	opacity: 0;
+	transition: opacity 0.2s;
+	z-index: 1001;
+}
+
+.pm-nodeview.pm-nodeview-image:hover .pm-image-resize-handle,
+.pm-nodeview.pm-nodeview-image.pm-nodeview-selected .pm-image-resize-handle {
+	opacity: 1;
+}
+
+.pm-image-picker-wrap {
+	margin-top: 8px;
+	padding: 8px;
+	border-radius: 4px;
+}
+
+.pm-image-picker-body {
+	max-height: 300px;
+	overflow-y: auto;
+}

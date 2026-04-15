@@ -14,7 +14,7 @@ describe("ProseMirror parseWidget tests", () => {
 
 	let parseWidget, parseAttributes;
 	try {
-		const utils = require("$:/plugins/tiddlywiki/prosemirror/widget-block/utils.js");
+		const utils = require("$:/plugins/tiddlywiki/prosemirror/blocks/widget/utils.js");
 		parseWidget = utils.parseWidget;
 		parseAttributes = utils.parseAttributes;
 	} catch(e) {

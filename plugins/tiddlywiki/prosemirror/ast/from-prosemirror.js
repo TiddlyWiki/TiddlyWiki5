@@ -10,7 +10,7 @@ Get the Wiki AST from a Prosemirror AST
 // Require at module level to avoid repeated require() calls on every paragraph conversion
 let parseWidget;
 try {
-	parseWidget = require("$:/plugins/tiddlywiki/prosemirror/widget-block/utils.js").parseWidget;
+	parseWidget = require("$:/plugins/tiddlywiki/prosemirror/blocks/widget/utils.js").parseWidget;
 } catch(e) {
 	parseWidget = null;
 }

@@ -17,7 +17,7 @@ describe("ProseMirror engine operation mapping", () => {
 		// engine.js imports browser-only prosemirror-view at the top level,
 		// so in Node it will throw. We still test buildSchema and mark mapping
 		// by importing the engine module which re-exports buildSchema.
-		const mod = require("$:/plugins/tiddlywiki/prosemirror/engine.js");
+		const mod = require("$:/plugins/tiddlywiki/prosemirror/core/engine.js");
 		buildSchema = mod.buildSchema;
 		ProseMirrorEngine = mod.ProseMirrorEngine;
 	} catch(e) {
