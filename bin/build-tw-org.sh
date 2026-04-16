@@ -45,7 +45,7 @@ git clone --depth=1 --branch=main "https://github.com/TiddlyWiki/tiddlywiki.org-
 
 # Make the CNAME file that GitHub Pages requires
 
-echo "tiddlywiki.org" > $TWORG_BUILD_OUTPUT/CNAME
+# echo "tiddlywiki.org" > $TWORG_BUILD_OUTPUT/CNAME
 
 # Delete any existing static content
 
