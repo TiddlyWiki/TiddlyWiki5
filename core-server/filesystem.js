@@ -353,7 +353,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 	// Replace any Unicode control codes
 	filepath = filepath.replace(/[\x00-\x1f\x80-\x9f]/g,"_");
 	// Replace any characters that can't be used in cross-platform filenames
-	filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^/g,"_"));
+	filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^|\\/g,"_"));
 	// Replace any dots or spaces at the end of the extension with the same number of underscores
 	extension = extension.replace(/[\. ]+$/, function (u) { return u.replace(/[\. ]/g, "_");});
 	// Truncate the extension if it is too long
