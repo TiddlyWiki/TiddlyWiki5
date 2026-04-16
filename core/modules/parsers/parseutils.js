@@ -327,7 +327,7 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 	// Define our regexps
 	var reAttributeName = /([^\/\s>"'`=:]+)/y,
 		reStrictIdentifier = /^[A-Za-z0-9\-_]+$/,
-		reUnquotedAttribute = /(?!<<)((?:(?:>(?!>))|[^\s>"'])+)/y,
+		reUnquotedAttribute = /((?:(?:>(?!>))|[^\s>"'])+)/y,
 		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/y,
 		reIndirectValue = /\{\{([^\}]+)\}\}/y,
 		reSubstitutedValue = /(?:```([\s\S]*?)```|`([^`]|[\S\s]*?)`)/y;
