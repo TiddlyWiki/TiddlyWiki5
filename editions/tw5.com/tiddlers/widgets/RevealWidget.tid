@@ -20,6 +20,7 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |<<.attr stateField>> |A field name which is used to look for the state, if the attribute <<.attr stateTitle>> is present |
 |<<.attr stateIndex>> |An index which is used to look for the state, if the attribute <<.attr stateTitle>> is present |
 |<<.attr default>> |Default value to use when the state tiddler is missing |
+|<<.attr validValues>> |<<.from-version "5.5.0">> An optional filter evaluating to the list of valid values for the state. If the current state value is not in this list, the <<.attr default>> value is used instead. This is useful for falling back to a default when the state contains a stale or invalid value |
 |<<.attr tag>> |Overrides the default [[HTML tag|HTML Tags]] (`<div>` in block mode or `<span>` in inline mode) |
 |<<.attr type>> |The type of matching performed, see below |
 |<<.attr text>> |The text to match when the type is <<.value match>>, <<.value nomatch>>, <<.value lt>>, <<.value gt>>, <<.value lteq>> or <<.value gteq>> |

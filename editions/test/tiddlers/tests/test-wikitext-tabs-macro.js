@@ -58,6 +58,15 @@ describe("Tabs-macro HTML tests", function() {
 		$tw.wiki.getModificationFields())
 	);
 
+	// Test for invalid state fallback (issue #6548)
+	// Uses explicitState so we can control the state tiddler directly
+	$tw.wiki.addTiddler(new $tw.Tiddler(
+		{title: "test-tabs-invalid-state", text: '\\import [[tabs-macro-definition]]\n<<tabs "TabOne TabTwo TabThree TabFour" "TabTwo" "$:/state/test-tab-01" explicitState:"$:/state/test-tab-invalid">>'},
+		$tw.wiki.getModificationFields())
+	);
+	// Set the state tiddler to a value that doesn't match any tab
+	$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/state/test-tab-invalid", text: "NonExistentTab"},$tw.wiki.getModificationFields()));
+
 	// End This code can be copy pasted into the browser console
 
 	/* -----------------
@@ -75,6 +84,21 @@ describe("Tabs-macro HTML tests", function() {
 	// vertical
 	it("should render 'vertical' tabs from v5.2.2 and up with whitespace trim", function() {
 		expect($tw.wiki.renderTiddler("text/html","test-tabs-vertical")).toBe(expectedVert.fields.text.replace(/\n/g,""));
+	});
+
+	// invalid state fallback (issue #6548)
+	it("should fall back to default tab when state tiddler contains an invalid value", function() {
+		var html = $tw.wiki.renderTiddler("text/html","test-tabs-invalid-state");
+		// TabTwo is the default - its button should be selected (validValues on button widget)
+		expect(html).toContain('aria-selected="true" class=" tc-tab-selected" data-tab-title="TabTwo"');
+		// Other buttons should NOT be selected
+		expect(html).toContain('aria-selected="false" class="" data-tab-title="TabOne"');
+		expect(html).toContain('aria-selected="false" class="" data-tab-title="TabThree"');
+		expect(html).toContain('aria-selected="false" class="" data-tab-title="TabFour"');
+		// TabTwo content should be visible (validValues on reveal widget)
+		expect(html).toContain('<div class="tc-reveal"><p>Text tab 2</p></div>');
+		// The invalid tab (NonExistentTab) should not appear in the output
+		expect(html).not.toContain("NonExistentTab");
 	});
 });
 
