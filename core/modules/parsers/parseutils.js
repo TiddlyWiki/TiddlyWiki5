@@ -576,6 +576,9 @@ exports.parseAttribute = function(source,pos) {
 									pos = unquotedValue.end;
 									node.type = "string";
 									node.value = unquotedValue.match[1];
+								} else if(source.charAt(pos) === "<" && source.charAt(pos + 1) === "<" && source.indexOf(">>",pos) !== -1) {
+									// Value looks like a macro invocation (starts with << with a closing >> ahead) but does not parse as one. Return null so the enclosing tag fails to parse rather than silently binding the attribute to "true" and treating the remainder as further attributes (restores v5.3.8 behaviour)
+									return null;
 								} else {
 									node.type = "string";
 									node.value = "true";

@@ -1,0 +1,13 @@
+title: Parse/BackCompat/WidgetAttrEqualsNoValue
+description: Widget attribute with trailing equals and no value falls through to "true"
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define x(d) got=$d$
+<$macrocall $name="x" d= />
++
+title: ExpectedResult
+
+<p>got=true</p>
