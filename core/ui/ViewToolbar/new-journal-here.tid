@@ -17,6 +17,9 @@ description: {{$:/language/Buttons/NewJournalHere/Hint}}
 <%endif%>
 </$button>
 \end
-<$let journalTitle=<<now format={{$:/config/NewJournal/Title}}>> journalTags={{$:/config/NewJournal/Tags}} currentTiddlerTag=<<currentTiddler>>>
+<$let journalTitle=<<now format={{$:/config/NewJournal/Title}}>>
+	journalTags={{$:/config/NewJournal/Tags}}
+	currentTiddlerTag=<<currentTiddler>>  
+>
 <<journalButton>>
 </$let>
