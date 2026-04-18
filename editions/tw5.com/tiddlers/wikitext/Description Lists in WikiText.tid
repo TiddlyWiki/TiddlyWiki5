@@ -1,13 +1,13 @@
 caption: Description Lists
 created: 20131205160424246
-modified: 20260418123016769
+modified: 20260405082055301
 tags: WikiText
 title: Description Lists in WikiText
 type: text/vnd.tiddlywiki
 
 !! Basic syntax
 
-HTML description lists (<abbr title="also known as">AKA</abbr> definition lists) are created with this syntax: 
+HTML description lists (<abbr title="also known as">AKA</abbr> definition lists) are created with this syntax:
 
 <<wikitext-example src:"; Term being described
 : Description / Definition of that term
