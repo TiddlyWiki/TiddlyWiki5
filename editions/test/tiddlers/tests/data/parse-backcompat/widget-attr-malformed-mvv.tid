@@ -1,0 +1,13 @@
+title: Parse/BackCompat/WidgetAttrMalformedMvv
+description: Widget attribute value with unclosed ((v) falls through to a string literal
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define x(d) got=$d$
+<$macrocall $name="x" d=((d) />
++
+title: ExpectedResult
+
+<p>got=((d)</p>

@@ -468,5 +468,9 @@ describe("WikiText parser tests", function() {
 
 		expect(parse(wikitext)).toEqual(expectedParseTree);
 	});
-});
 
+	it("should reject unquoted macro parameter values that start with <<", function() {
+		var attribute = $tw.utils.parseMacroParameterAsAttribute("d=<<d> />",0);
+		expect(attribute).toBeNull();
+	});
+});

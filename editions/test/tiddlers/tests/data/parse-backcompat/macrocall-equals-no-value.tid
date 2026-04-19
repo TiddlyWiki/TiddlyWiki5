@@ -1,0 +1,13 @@
+title: Parse/BackCompat/MacrocallEqualsNoValue
+description: Macrocall named parameter with =-separator but no value fails to parse the macro call
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define x(d) got=$d$
+<<x d=>>
++
+title: ExpectedResult
+
+<p>&lt;<x d="true">&gt;</x></p>
