@@ -5,6 +5,14 @@ tags: [[$:/tags/Stylesheet]]
 
 /* Underlined tabs — GitHub / Primer style */
 
+@keyframes tc-underlinedtabs-first-slide-in {
+	from { padding-left: 0; }
+}
+
+@keyframes tc-underlinedtabs-first-slide-out {
+	from { padding-left: 8px; }
+}
+
 .tc-tab-buttons {
 	display: flex;
 	gap: 0;
@@ -44,6 +52,14 @@ tags: [[$:/tags/Stylesheet]]
 
 .tc-tab-buttons button:first-child:not(.tc-tab-selected) {
 	padding-left: 0;
+}
+
+.tc-tab-buttons button.tc-uit-anim-in {
+	animation: tc-underlinedtabs-first-slide-in 200ms ease-out;
+}
+
+.tc-tab-buttons button.tc-uit-anim-out {
+	animation: tc-underlinedtabs-first-slide-out 300ms ease-out;
 }
 
 .tc-tab-divider {
