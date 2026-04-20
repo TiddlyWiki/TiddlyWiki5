@@ -20,7 +20,8 @@
 		"tiddlywiki/heavier",
 		"tiddlywiki/tight-heavier",
 		"tiddlywiki/readonly",
-		"tiddlywiki/roundedtabs"
+		"tiddlywiki/roundedtabs",
+		"tiddlywiki/underlinedtabs"
 	],
 	"languages": [
 	],
