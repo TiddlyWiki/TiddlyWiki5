@@ -9,7 +9,8 @@ tags: [[$:/tags/Stylesheet]]
 	display: inline-flex;
 	gap: 2px;
 	padding: 2px;
-	background: <<colour tab-background>>;
+	background-color: <<colour tab-background>>;
+	background-image: linear-gradient(rgba(128,128,128,0.12), rgba(128,128,128,0.12));
 	border-radius: 8px;
 	border: none;
 	font-size: 0.95em;
@@ -31,6 +32,7 @@ tags: [[$:/tags/Stylesheet]]
 	color: <<colour foreground>>;
 	font-weight: 600;
 	border: 1px solid <<colour tab-border>>;
+	box-shadow: inset 0 0 0 1px rgba(128,128,128,0.2);
 }
 
 .tc-tab-buttons button:hover:not(.tc-tab-selected) {
