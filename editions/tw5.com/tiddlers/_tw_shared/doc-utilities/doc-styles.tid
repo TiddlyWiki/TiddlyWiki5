@@ -1,6 +1,6 @@
 code-body: yes
 created: 20150117152612000
-modified: 20240223123123497
+modified: 20260420170025620
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/doc-styles
 type: text/vnd.tiddlywiki
@@ -329,9 +329,11 @@ ol.doc-github-contributors li {
 	background-color: unset;
 	color: #666;
 }
+.doc-tabs.tc-tab-buttons {
+	font-size: 1.15rem;
+}
 .doc-tabs.tc-tab-buttons button {
-	font-size: 1rem;
-	padding: 0.5em;
+	padding: 0.25em 0.75em;
 }
 .doc-tabs button .doc-attr {
 	background-color: unset;
