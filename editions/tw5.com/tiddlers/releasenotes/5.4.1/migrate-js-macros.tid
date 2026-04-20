@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.1/#9640
+description: Replace javascript macros with filter operators
+release: 5.4.1
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: filters
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9640
+github-contributors: Leilei332
+
+TODO: 
