@@ -95,7 +95,7 @@ tab-border-selected: #4a5a3a
 tab-border: transparent
 tab-divider: #3a4a30
 tab-foreground-selected: <<colour foreground>>
-tab-foreground: #8a9878
+tab-foreground: #a8b898
 table-border: #3a4a30
 table-footer-background: #222a20
 table-header-background: #283028
@@ -131,4 +131,4 @@ toolbar-delete-button:
 toolbar-cancel-button:
 toolbar-done-button:
 untagged-background: #5a6a48
-very-muted-foreground: #4a5a3a
+very-muted-foreground: #788868
