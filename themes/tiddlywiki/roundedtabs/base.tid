@@ -8,10 +8,11 @@ tags: [[$:/tags/Stylesheet]]
 .tc-tab-buttons {
 	display: inline-flex;
 	gap: 2px;
-	padding: 4px;
+	padding: 2px;
 	background: <<colour tab-background>>;
-	border-radius: 10px;
+	border-radius: 8px;
 	border: none;
+	font-size: 0.95em;
 }
 
 .tc-tab-buttons button {
