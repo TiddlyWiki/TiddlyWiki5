@@ -1,0 +1,68 @@
+title: $:/themes/tiddlywiki/roundedtabs/base
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/* Segmented control tabs */
+
+.tc-tab-buttons {
+	display: inline-flex;
+	gap: 2px;
+	padding: 4px;
+	background: <<colour tab-background>>;
+	border-radius: 10px;
+	border: none;
+}
+
+.tc-tab-buttons button {
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 6px;
+	padding: 0.382em 0.618em;
+	color: <<colour tab-foreground>>;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	margin-right: 0;
+}
+
+.tc-tab-buttons button.tc-tab-selected {
+	background: <<colour background>>;
+	color: <<colour foreground>>;
+	font-weight: 600;
+	border: 1px solid <<colour tab-border>>;
+}
+
+.tc-tab-buttons button:hover:not(.tc-tab-selected) {
+	background: transparent;
+	color: <<colour foreground>>;
+}
+
+.tc-tab-divider {
+	border-top: none;
+}
+
+/* Sidebar overrides — vanilla's .tc-sidebar-lists rules have higher specificity */
+
+.tc-sidebar-lists .tc-tab-buttons {
+	margin-top: .6em;
+}
+
+.tc-sidebar-lists .tc-tab-buttons button {
+	background: transparent;
+	background-color: transparent;
+	border: 1px solid transparent;
+	color: <<colour tab-foreground>>;
+}
+
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected {
+	background: <<colour background>>;
+	background-color: <<colour background>>;
+	color: <<colour foreground>>;
+	border: 1px solid <<colour tab-border>>;
+}
+
+.tc-sidebar-lists .tc-tab-buttons button:hover:not(.tc-tab-selected) {
+	background: transparent;
+	background-color: transparent;
+	color: <<colour foreground>>;
+}
