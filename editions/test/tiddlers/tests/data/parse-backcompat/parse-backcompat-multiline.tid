@@ -1,0 +1,17 @@
+title: Parse/BackCompat/MalformedMultiLineTerminator
+description: When << value looks like a macro invocation but fails to parse, the enclosing widget tag must fail cleanly so the remainder of the document is not silently reinterpreted (the v5.4 strict parser previously collapsed to attribute="true" and swallowed subsequent lines as stray attributes)
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define d() DEFD
+\define x(d) got=$d$
+<$macrocall $name="x" d=<<d> />
+<$macrocall $name="x" d=<<d> />
+>>
++
+title: ExpectedResult
+
+<p>&lt;$macrocall $name="x" d=&lt;<d> /&gt;
+&lt;$macrocall $name="x" d=DEFD</d></p>

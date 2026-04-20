@@ -1,0 +1,14 @@
+title: Parse/BackCompat/QuotedGtInNestedMacro
+description: Nested macro invocation in widget attribute can contain > in quoted inner attribute values
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define d() DEFD
+\define x(d) got=$d$
+<$macrocall $name="x" d=<<d b="x>y">> />
++
+title: ExpectedResult
+
+<p>got=DEFD</p>

@@ -1,0 +1,13 @@
+title: Parse/BackCompat/MacrocallPositionalGt
+description: Bare > (not followed by >) is permitted in unquoted macrocall positional params
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define x(d) got=$d$
+<<x foo>val>>
++
+title: ExpectedResult
+
+<p>got=foo&gt;val</p>
