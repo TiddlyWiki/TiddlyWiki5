@@ -1,0 +1,202 @@
+title: $:/plugins/tiddlywiki/performance/readme
+
+! Performance Testing Plugin
+
+This plugin provides a framework for measuring the performance of TiddlyWiki's refresh cycle — the process that updates the display when tiddlers are modified.
+
+The idea is to capture a realistic workload by recording store modifications while a user interacts with a wiki in the browser, and then replaying those modifications under Node.js where the refresh cycle can be precisely measured in isolation.
+
+!! Motivation
+
+An important motivation for this framework is to enable LLMs to iteratively optimise TiddlyWiki's performance. The workflow is:
+
+# An LLM makes a change to the TiddlyWiki codebase (e.g. optimising a filter operator, caching a computation, or restructuring a widget's refresh logic)
+# The LLM runs `--perf-replay` against a recorded timeline to measure the impact
+# The LLM reads the JSON results file to determine whether the change improved, regressed, or had no effect on performance
+# The LLM iterates: tries another approach, measures again, and converges on the best solution
+
+This tight edit-measure-iterate loop works because `--perf-replay` runs entirely under Node.js with no browser required, produces machine-readable JSON output, and completes in seconds.
+
+!! How It Works
+
+The framework has two parts:
+
+!!! 1. Recording (Browser)
+
+The plugin intercepts `wiki.addTiddler()` and `wiki.deleteTiddler()` to capture every store modification as it happens. Each operation is recorded with:
+
+* A sequence number and high-resolution timestamp
+* The full tiddler fields (so the exact state can be recreated)
+* A batch identifier that tracks TiddlyWiki's change batching via `$tw.utils.nextTick()`
+
+The batch tracking is important because TiddlyWiki groups multiple store changes that occur in the same tick into a single refresh cycle. The recorder preserves these batch boundaries so that playback triggers the same pattern of refreshes.
+
+!!! 2. Playback (Node.js)
+
+The `--perf-replay` command loads a wiki and builds the full widget tree using TiddlyWiki's `$tw.fakeDocument` — the lightweight DOM implementation used for server-side rendering. It then replays the recorded timeline batch by batch, calling `widgetNode.refresh(changedTiddlers)` after each batch and measuring how long it takes.
+
+This means we are measuring TiddlyWiki's own refresh logic (widget tree traversal, filter evaluation, DOM diffing) in isolation from browser layout and paint. This is intentional — it lets us identify performance bottlenecks within TiddlyWiki itself, independent of which browser is being used.
+
+!! Why Store-Level Recording?
+
+An alternative would be to record DOM events (clicks, keystrokes) and replay them in a headless browser. Store-level recording was chosen instead because:
+
+* The refresh cycle responds to ''store changes'', not DOM events — store modifications are the natural input
+* Store changes are fully deterministic and reproducible
+* No DOM dependency means playback works in pure Node.js with no headless browser to install
+* A headless browser would add its own overhead, making measurements less precise
+
+!! Recording
+
+# Include this plugin in your wiki
+# Open the Control Panel and find the "Performance Testing Recorder" tab
+# Click "Start Recording"
+# Interact with the wiki — open tiddlers, edit, type, navigate, switch tabs
+# Click "Stop Recording"
+# Download the `timeline.json` file
+
+!!! Draft Coalescing
+
+When editing a tiddler, TiddlyWiki writes to draft tiddlers on every keystroke. By default, the recorder coalesces rapid draft updates within the same batch, keeping only the last update. This produces a more compact timeline that focuses on the refresh-relevant changes.
+
+Uncheck "Coalesce rapid draft updates" to record every individual keystroke. This is useful when you specifically want to measure the performance impact of rapid typing.
+
+!! Playback
+
+```
+tiddlywiki editions/performance --load mywiki.html --perf-replay timeline.json
+```
+
+Or from any edition that includes this plugin:
+
+```
+tiddlywiki myedition --perf-replay timeline.json
+```
+
+Playback runs at full speed with no delays between batches. The recorded timestamps are preserved in the timeline for reference but are not used for pacing.
+
+!! What Gets Measured
+
+* ''Initial render time'' — the time to build and render the full widget tree from scratch
+* ''Refresh time per batch'' — the time `widgetNode.refresh(changedTiddlers)` takes for each batch of store modifications
+* ''Filter execution'' — individual filter timings and invocation counts, showing which filters are the most expensive
+* ''Statistical summary'' — mean, P50, P95, P99, and maximum refresh times across all batches
+
+!! Output
+
+The command produces two forms of output:
+
+!!! Text Report (stdout)
+
+A human-readable table printed to the console showing per-batch timings, a summary with percentile statistics, and a breakdown of the most expensive filter executions.
+
+!!! JSON Results File
+
+A `<timeline-name>-results.json` file is written alongside the input timeline. This is the primary output for automated consumption. The file contains:
+
+```json
+{
+  "wiki": {
+    "tiddlerCount": 2076
+  },
+  "timeline": {
+    "operations": 156,
+    "batches": 42
+  },
+  "initialRender": 55.46,
+  "summary": {
+    "totalRefreshTime": 234.5,
+    "meanRefresh": 5.58,
+    "p50": 4.12,
+    "p95": 18.7,
+    "p99": 31.2,
+    "maxRefresh": 31.2,
+    "totalFilterInvocations": 4821
+  },
+  "batches": [
+    {
+      "batch": 1,
+      "ops": 1,
+      "changed": 1,
+      "refreshMs": 12.3,
+      "filters": 293,
+      "tiddlers": ["$:/StoryList"]
+    }
+  ],
+  "topFilters": [
+    {
+      "name": "filter: [subfilter{$:/core/config/GlobalImportFilter}]",
+      "time": 5.65,
+      "invocations": 5
+    }
+  ]
+}
+```
+
+All times are in milliseconds. The key fields for automated analysis:
+
+* `summary.totalRefreshTime` — the single most important number: total time spent in refresh across all batches
+* `summary.meanRefresh` — average refresh time per batch
+* `summary.p95` / `summary.p99` — tail latency indicators
+* `initialRender` — time to build the widget tree from scratch (measures startup cost)
+* `batches[].refreshMs` — per-batch breakdown, useful for identifying which user actions are expensive
+* `topFilters[]` — the most expensive filters by total execution time, useful for identifying optimisation targets
+
+!! Example: LLM Optimisation Workflow
+
+An LLM optimising TiddlyWiki performance would follow this pattern:
+
+!!! Step 1: Establish baseline
+
+```
+node ./tiddlywiki.js editions/performance --load mywiki.html --perf-replay timeline.json
+```
+
+Read `timeline-results.json` and note the baseline `summary.totalRefreshTime`.
+
+!!! Step 2: Make a change
+
+Edit a source file (e.g. optimise a filter operator in `core/modules/filters/`).
+
+!!! Step 3: Measure impact
+
+Run the same `--perf-replay` command again and read the new `timeline-results.json`.
+
+!!! Step 4: Compare
+
+Compare `summary.totalRefreshTime` and `summary.p95` between baseline and new results. If improved, keep the change. If regressed, revert and try a different approach.
+
+!!! Step 5: Iterate
+
+Repeat steps 2-4 until the target metric is optimised.
+
+The JSON results file makes step 4 straightforward — an LLM can read two JSON files and compare numeric fields directly without parsing tabular text output.
+
+!! Timeline Format
+
+The timeline is a JSON array of operations:
+
+```json
+[
+  {
+    "seq": 0,
+    "t": 123.45,
+    "batch": 0,
+    "op": "add",
+    "title": "$:/StoryList",
+    "isDraft": false,
+    "fields": {
+      "title": "$:/StoryList",
+      "list": "GettingStarted",
+      "text": ""
+    }
+  }
+]
+```
+
+* `seq` — sequential operation number
+* `t` — milliseconds since recording started
+* `batch` — batch identifier (operations in the same batch trigger a single refresh)
+* `op` — `"add"` or `"delete"`
+* `isDraft` — whether this is a draft tiddler (used for coalescing)
+* `fields` — complete tiddler fields (null for delete operations)

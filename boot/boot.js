@@ -14,6 +14,8 @@ var _boot = (function($tw) {
 
 "use strict";
 
+if(typeof performance !== "undefined") { performance.mark("tw-boot-start"); }
+
 // Include bootprefix if we're not given module data
 if(!$tw) {
 	$tw = require("./bootprefix.js").bootprefix();
@@ -1158,6 +1160,30 @@ $tw.Wiki = function(options) {
 		pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
 		pluginInfo = Object.create(null), // Hashmap of parsed plugin content
 		shadowTiddlers = Object.create(null), // Hashmap by title of {source:, tiddler:}
+		systemTiddlerTitles = null, // Array of system tiddler titles (starting with "$:/")
+		nonSystemTiddlerTitles = null, // Array of non-system tiddler titles
+		partitionTiddlerTitles = function() {
+			if(systemTiddlerTitles === null) {
+				systemTiddlerTitles = [];
+				nonSystemTiddlerTitles = [];
+				var titles = getTiddlerTitles();
+				for(var i = 0, length = titles.length; i < length; i++) {
+					if(titles[i].indexOf("$:/") === 0) {
+						systemTiddlerTitles.push(titles[i]);
+					} else {
+						nonSystemTiddlerTitles.push(titles[i]);
+					}
+				}
+			}
+		},
+		getSystemTiddlerTitles = function() {
+			partitionTiddlerTitles();
+			return systemTiddlerTitles;
+		},
+		getNonSystemTiddlerTitles = function() {
+			partitionTiddlerTitles();
+			return nonSystemTiddlerTitles;
+		},
 		shadowTiddlerTitles = null,
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
@@ -1206,6 +1232,14 @@ $tw.Wiki = function(options) {
 				tiddlers[title] = tiddler;
 				// Check we've got the title
 				tiddlerTitles = $tw.utils.insertSortedArray(tiddlerTitles || [],title);
+				// Maintain system/non-system partitions
+				if(systemTiddlerTitles !== null) {
+					if(title.indexOf("$:/") === 0) {
+						$tw.utils.insertSortedArray(systemTiddlerTitles,title);
+					} else {
+						$tw.utils.insertSortedArray(nonSystemTiddlerTitles,title);
+					}
+				}
 				// Record the new tiddler state
 				updateDescriptor["new"] = {
 					tiddler: tiddler,
@@ -1246,6 +1280,14 @@ $tw.Wiki = function(options) {
 					tiddlerTitles.splice(index,1);
 				}
 			}
+			// Delete from system/non-system partitions
+			if(systemTiddlerTitles !== null) {
+				var partitionArray = title.indexOf("$:/") === 0 ? systemTiddlerTitles : nonSystemTiddlerTitles;
+				var partitionIndex = partitionArray.indexOf(title);
+				if(partitionIndex !== -1) {
+					partitionArray.splice(partitionIndex,1);
+				}
+			}
 			// Record the new tiddler state
 			updateDescriptor["new"] = {
 				tiddler: this.getTiddler(title),
@@ -1282,6 +1324,16 @@ $tw.Wiki = function(options) {
 	// Get an array of all tiddler titles
 	this.allTitles = function() {
 		return getTiddlerTitles().slice(0);
+	};
+
+	// Get an array of all system tiddler titles (returns cached array; do not mutate)
+	this.allSystemTitles = function() {
+		return getSystemTiddlerTitles();
+	};
+
+	// Get an array of all non-system tiddler titles (returns cached array; do not mutate)
+	this.allNonSystemTitles = function() {
+		return getNonSystemTiddlerTitles();
 	};
 
 	// Iterate through all tiddler titles
@@ -2539,7 +2591,9 @@ $tw.boot.loadStartup = function(options){
 
 	// Load tiddlers
 	if($tw.boot.tasks.readBrowserTiddlers) {
+		if(typeof performance !== "undefined") { performance.mark("tw-boot-store-read-start"); }
 		$tw.loadTiddlersBrowser();
+		if(typeof performance !== "undefined") { performance.mark("tw-boot-store-read-end"); }
 	} else {
 		$tw.loadTiddlersNode();
 	}
@@ -2551,6 +2605,7 @@ $tw.boot.loadStartup = function(options){
 	$tw.hooks.invokeHook("th-boot-tiddlers-loaded");
 };
 $tw.boot.execStartup = function(options){
+	if(typeof performance !== "undefined") { performance.mark("tw-boot-exec-start"); }
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin",$tw.safeMode ? ["$:/core"] : undefined);
@@ -2578,6 +2633,7 @@ $tw.boot.execStartup = function(options){
 	$tw.boot.executedStartupModules = Object.create(null);
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
+	if(typeof performance !== "undefined") { performance.mark("tw-boot-startup-modules-start"); }
 	$tw.boot.executeNextStartupTask(options.callback);
 };
 /*
@@ -2645,6 +2701,7 @@ $tw.boot.executeNextStartupTask = function(callback) {
 		}
 		taskIndex++;
 	}
+	if(typeof performance !== "undefined") { performance.mark("tw-boot-complete"); }
 	if(typeof callback === "function") {
 		callback();
 	}

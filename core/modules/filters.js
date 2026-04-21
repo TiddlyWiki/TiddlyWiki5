@@ -261,6 +261,7 @@ exports.compileFilter = function(filterString) {
 	var filterOperators = this.getFilterOperators();
 	// Assemble array of functions, one for each operation
 	var operationFunctions = [];
+	var operationSubFunctions = []; // Unwrapped sub-functions for fast path
 	// Step through the operations
 	var self = this;
 	$tw.utils.each(filterParseTree,function(operation) {
@@ -289,20 +290,24 @@ exports.compileFilter = function(filterString) {
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
 						operand.multiValue = [operand.value];
 					} else if(operand.variable) {
-						var varTree = $tw.utils.parseFilterVariable(operand.text);
-						operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source})[0] || "";
+						if(!operand._varTree) {
+							operand._varTree = $tw.utils.parseFilterVariable(operand.text);
+						}
+						operand.value = widgetClass.evaluateVariable(widget,operand._varTree.name,{params: operand._varTree.params, source: source})[0] || "";
 						operand.multiValue = [operand.value];
 					} else if(operand.multiValuedVariable) {
-						var varTree = $tw.utils.parseFilterVariable(operand.text);
-						var resultList = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source});
+						if(!operand._varTree) {
+							operand._varTree = $tw.utils.parseFilterVariable(operand.text);
+						}
+						var resultList = widgetClass.evaluateVariable(widget,operand._varTree.name,{params: operand._varTree.params, source: source});
 						if((resultList.length > 0 && resultList[0] !== undefined) || resultList.length === 0) {
-							operand.multiValue = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source}) || [];
+							operand.multiValue = widgetClass.evaluateVariable(widget,operand._varTree.name,{params: operand._varTree.params, source: source}) || [];
 							operand.value = operand.multiValue[0] || "";
 						} else {
 							operand.value = "";
 							operand.multiValue = [];
 						}
-						operand.isMultiValueOperand = true;	
+						operand.isMultiValueOperand = true;
 					} else {
 						operand.value = operand.text;
 						operand.multiValue = [operand.value];
@@ -343,6 +348,7 @@ exports.compileFilter = function(filterString) {
 				return resultArray;
 			}
 		};
+		operationSubFunctions.push(operationSubFunction);
 		var filterRunPrefixes = self.getFilterRunPrefixes();
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
@@ -372,6 +378,10 @@ exports.compileFilter = function(filterString) {
 			}
 		})());
 	});
+	// Detect single "or" run for fast path (bypass LinkedList)
+	var isSingleOrRun = filterParseTree.length === 1 &&
+		(!filterParseTree[0].prefix || filterParseTree[0].prefix === "");
+	var singleOrSubFunction = isSingleOrRun ? operationSubFunctions[0] : null;
 	// Return a function that applies the operations to a source iterator of tiddler titles
 	var fnMeasured = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
 		if(!source) {
@@ -382,23 +392,30 @@ exports.compileFilter = function(filterString) {
 		if(!widget) {
 			widget = $tw.rootWidget;
 		}
-		var results = new $tw.utils.LinkedList();
 		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
+		var resultArray;
 		if(self.filterRecursionCount < MAX_FILTER_DEPTH) {
-			$tw.utils.each(operationFunctions,function(operationFunction) {
-				var operationResult = operationFunction(results,source,widget);
-				if(operationResult) {
-					if(operationResult.variables) {
-						// If the filter run prefix has returned variables, create a new fake widget with those variables
-						widget = widget.makeFakeWidgetWithVariables(operationResult.variables);
+			if(singleOrSubFunction) {
+				// Fast path: single "or" run, return array directly without LinkedList
+				resultArray = singleOrSubFunction(source,widget);
+			} else {
+				var results = new $tw.utils.LinkedList();
+				$tw.utils.each(operationFunctions,function(operationFunction) {
+					var operationResult = operationFunction(results,source,widget);
+					if(operationResult) {
+						if(operationResult.variables) {
+							// If the filter run prefix has returned variables, create a new fake widget with those variables
+							widget = widget.makeFakeWidgetWithVariables(operationResult.variables);
+						}
 					}
-				}
-			});
+				});
+				resultArray = results.toArray();
+			}
 		} else {
-			results.push("/**-- Excessive filter recursion --**/");
+			resultArray = ["/**-- Excessive filter recursion --**/"];
 		}
 		self.filterRecursionCount = self.filterRecursionCount - 1;
-		return results.toArray();
+		return resultArray;
 	});
 	if(this.filterCacheCount >= 2000) {
 		// To prevent memory leak, we maintain an upper limit for cache size.

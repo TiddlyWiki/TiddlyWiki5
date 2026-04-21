@@ -67,7 +67,57 @@ TagSubIndexer.prototype.rebuild = function() {
 };
 
 TagSubIndexer.prototype.update = function(updateDescriptor) {
-	this.index = null;
+	// If the index hasn't been built yet, no update needed
+	if(this.index === null) {
+		return;
+	}
+	// Determine whether the old/new tiddler is visible to this iterator
+	var oldVisible = this._isVisible(updateDescriptor.old),
+		newVisible = this._isVisible(updateDescriptor["new"]),
+		self = this;
+	// Remove old tags from index
+	if(oldVisible && updateDescriptor.old.tiddler) {
+		var oldTitle = updateDescriptor.old.tiddler.fields.title,
+			oldTags = updateDescriptor.old.tiddler.fields.tags || [];
+		$tw.utils.each(oldTags,function(tag) {
+			if(self.index[tag]) {
+				var idx = self.index[tag].titles.indexOf(oldTitle);
+				if(idx !== -1) {
+					self.index[tag].titles.splice(idx,1);
+					if(self.index[tag].titles.length === 0) {
+						delete self.index[tag];
+					}
+				}
+			}
+		});
+	}
+	// Add new tags to index
+	if(newVisible && updateDescriptor["new"].tiddler) {
+		var newTitle = updateDescriptor["new"].tiddler.fields.title,
+			newTags = updateDescriptor["new"].tiddler.fields.tags || [];
+		$tw.utils.each(newTags,function(tag) {
+			if(!self.index[tag]) {
+				self.index[tag] = {isSorted: false, titles: [newTitle]};
+			} else if(self.index[tag].titles.indexOf(newTitle) === -1) {
+				self.index[tag].titles.push(newTitle);
+				self.index[tag].isSorted = false;
+			}
+		});
+	}
+};
+
+/*
+Determine whether a tiddler described by a descriptor is visible to this sub-indexer's iterator
+*/
+TagSubIndexer.prototype._isVisible = function(descriptor) {
+	if(this.iteratorMethod === "each") {
+		return descriptor.exists;
+	} else if(this.iteratorMethod === "eachShadow") {
+		return descriptor.shadow;
+	} else {
+		// eachTiddlerPlusShadows and eachShadowPlusTiddlers both visit all tiddlers and shadows
+		return descriptor.exists || descriptor.shadow;
+	}
 };
 
 TagSubIndexer.prototype.lookup = function(tag) {
