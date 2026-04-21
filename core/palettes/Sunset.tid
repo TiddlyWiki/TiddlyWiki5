@@ -1,0 +1,134 @@
+title: $:/palettes/Sunset
+name: Sunset
+description: Dark palette inspired by a golden African sunset
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: dark
+
+alert-background: #4a3010
+alert-border: #d4a030
+alert-highlight: #e88030
+alert-muted-foreground: #b08830
+background: #302820
+blockquote-bar: <<colour muted-foreground>>
+button-background: transparent
+button-background-hover: rgba(255, 200, 120, 0.1)
+button-foreground: inherit
+button-border:
+code-background: #282018
+code-border: #483828
+code-foreground: #d4a030
+diff-delete-background: #4a2018
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background:
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #2a3818
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background:
+diff-invisible-foreground: <<colour muted-foreground>>
+dirty-indicator: #e88030
+download-background: #8a6828
+download-foreground: <<colour foreground>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: #383020
+dropdown-border: #584830
+dropdown-tab-background-selected: <<colour dropdown-background>>
+dropdown-tab-background: #201810
+dropzone-background: rgba(138,104,40,0.7)
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: #c09060
+external-link-foreground: #d4a030
+footnote-target-background: #383020
+foreground: #e8d8c0
+highlight-background: #605020
+highlight-foreground: #f0e0c8
+message-background: <<colour background>>
+message-border: <<colour muted-foreground>>
+message-foreground: <<colour foreground>>
+modal-backdrop: <<colour page-background>>
+modal-background: <<colour background>>
+modal-border: #584830
+modal-footer-background: <<colour background>>
+modal-footer-border: #483828
+modal-header-border: #483828
+muted-foreground: #907858
+network-activity-foreground: #d4a030
+notification-background: <<colour dropdown-background>>
+notification-border: <<colour dropdown-background>>
+page-background: #201810
+pre-background: #282018
+pre-border: #483828
+primary: #d4a030
+selection-background:
+selection-foreground:
+select-tag-background: <<colour background>>
+select-tag-foreground: <<colour foreground>>
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: #d4a030
+sidebar-controls-foreground: #685840
+sidebar-foreground-shadow: transparent
+sidebar-foreground: #a89070
+sidebar-muted-foreground-hover: <<colour foreground>>
+sidebar-muted-foreground: #786848
+sidebar-tab-background-selected: <<colour page-background>>
+sidebar-tab-background: transparent
+sidebar-tab-border-selected: #584830
+sidebar-tab-border: transparent
+sidebar-tab-divider: #483828
+sidebar-tab-foreground-selected: <<colour foreground>>
+sidebar-tab-foreground: #907858
+sidebar-tiddler-link-foreground-hover: #d4a030
+sidebar-tiddler-link-foreground: #a89070
+site-title-foreground: #d4a030
+stability-stable: #8a9848
+stability-experimental: #d4a030
+stability-deprecated: #e88030
+stability-legacy: #8878a0
+static-alert-foreground: #907858
+tab-background-selected: <<colour background>>
+tab-background: transparent
+tab-border-selected: #584830
+tab-border: transparent
+tab-divider: #483828
+tab-foreground-selected: <<colour foreground>>
+tab-foreground: #a89070
+table-border: #483828
+table-footer-background: #282018
+table-header-background: #302820
+tag-background: #8a6828
+tag-foreground: #f0e0c8
+testcase-accent-level-1: #2a3848
+testcase-accent-level-2: #d4a030
+testcase-accent-level-3: #8a9848
+tiddler-background: <<colour background>>
+tiddler-border: #3a3020
+tiddler-controls-foreground-hover: #d4a030
+tiddler-controls-foreground-selected: #d4a030
+tiddler-controls-foreground: #584830
+tiddler-editor-background: transparent
+tiddler-editor-border-image:
+tiddler-editor-border: #483828
+tiddler-editor-fields-even: rgba(255, 200, 120, 0.05)
+tiddler-editor-fields-odd: rgba(255, 200, 120, 0.02)
+tiddler-info-background: #302820
+tiddler-info-border: #483828
+tiddler-info-tab-background: <<colour tiddler-editor-fields-odd>>
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: #786848
+tiddler-title-foreground: #f0e0c8
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
+untagged-background: #685840
+very-muted-foreground: #786040

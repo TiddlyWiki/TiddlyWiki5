@@ -1,0 +1,98 @@
+title: $:/themes/tiddlywiki/underlinedtabs/base
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/* Underlined tabs — GitHub / Primer style */
+
+@keyframes tc-underlinedtabs-first-slide-in {
+	from { padding-left: 0; }
+}
+
+@keyframes tc-underlinedtabs-first-slide-out {
+	from { padding-left: 8px; }
+}
+
+.tc-tab-buttons {
+	display: flex;
+	gap: 0;
+	padding: 0;
+	background: transparent;
+	border: none;
+	border-bottom: none;
+	border-radius: 0;
+	font-size: 1em;
+}
+
+.tc-tab-buttons button {
+	background: transparent;
+	border: none;
+	border-bottom: 2px solid transparent;
+	border-radius: 0;
+	padding: 4px 8px;
+	margin-right: 8px;
+	margin-bottom: -1px;
+	color: <<colour tab-foreground>>;
+	font-weight: normal;
+}
+
+.tc-tab-buttons button.tc-tab-selected {
+	background: transparent;
+	color: <<colour foreground>>;
+	font-weight: 600;
+	border: none;
+	border-bottom: 2px solid <<colour primary>>;
+}
+
+.tc-tab-buttons button:hover:not(.tc-tab-selected) {
+	background: transparent;
+	color: <<colour foreground>>;
+	border-bottom-color: <<colour muted-foreground>>;
+}
+
+.tc-tab-buttons button:first-child:not(.tc-tab-selected) {
+	padding-left: 0;
+}
+
+.tc-tab-buttons button.tc-uit-anim-in {
+	animation: tc-underlinedtabs-first-slide-in 200ms ease-out;
+}
+
+.tc-tab-buttons button.tc-uit-anim-out {
+	animation: tc-underlinedtabs-first-slide-out 300ms ease-out;
+}
+
+.tc-tab-divider {
+	display: none;
+}
+
+/* Sidebar overrides — vanilla's .tc-sidebar-lists rules have higher specificity */
+
+.tc-sidebar-lists .tc-tab-buttons {
+	margin-top: 1em;
+}
+
+.tc-sidebar-lists .tc-tab-buttons button {
+	background: transparent;
+	background-color: transparent;
+	border: none;
+	border-bottom: 2px solid transparent;
+	color: <<colour tab-foreground>>;
+	padding: 6px 4px 4px;
+	margin-right: 4px;
+}
+
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected {
+	background: transparent;
+	background-color: transparent;
+	border: none;
+	border-bottom: 2px solid <<colour primary>>;
+	color: <<colour foreground>>;
+}
+
+.tc-sidebar-lists .tc-tab-buttons button:hover:not(.tc-tab-selected) {
+	background: transparent;
+	background-color: transparent;
+	color: <<colour foreground>>;
+	border-bottom-color: <<colour muted-foreground>>;
+}
