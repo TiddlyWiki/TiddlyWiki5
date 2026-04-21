@@ -1,0 +1,62 @@
+created: 20141018090608643
+modified: 20260329112320535
+original-modified: 20231030124224424
+tags: WikiText
+title: Transclusion and Substitution
+ja-title: トランスクルージョンと置換
+type: text/vnd.tiddlywiki
+
+[[Wikiテキスト|WikiText]]の強みは、あるTiddlerの内容を別のTiddlerの中に組み込むことができる点にあります。この機能にはいくつかの異なる形態があり、混同しやすい。
+
+主な違いは、テキストのトランスクルージョンとテキストの置換にあります。
+
+* トランスクルージョンは、以下のいずれかの値で動的に置き換えられます: 
+** Tiddlerフィールド
+** 変数
+* マクロ定義のテキストは、使用される前にテキスト置換処理が実施されます。
+
+! Tiddlerフィールドのトランスクルージョン
+
+[[Wikiテキストでのトランスクルージョン|Transclusion in WikiText]]では、トランスクルージョンの基本について説明しています。例えば:
+
+```
+{{MyTiddler}}
+```
+
+[[WikiテキストでのHTML|HTML in WikiText]]の説明にあるように、Tiddlerフィールドの値をHTMLの要素やウィジェットの属性として含めることもできます。例:
+
+```
+<$text text={{MyTiddler}}/>
+```
+
+[[フィルタ表記の紹介|Introduction to filter notation]]で説明しているように、[[フィルタのシンタックス|Filter Syntax]]を使用してTiddlerフィールドの値をトランスクルードすることもできます。例えば:
+
+```
+{{{ [tag{TiddlerContainingMyTag}] }}}
+```
+
+! 変数/マクロのトランスクルージョン
+
+パラメータや変数の置換によって定義された変数は"マクロ"と呼びます。変数/マクロの値は、次の構文でトランスクルードできます:
+
+```
+<<myMacro param:"パラメータの値">>
+```
+
+[[WikiテキストでのHTML|HTML in WikiText]]の説明にあるように、変数をHTML要素やウィジェットの属性値としてトランスクルードすることもできます。例: 
+
+```
+<$text text=<<myMacro>>/>
+```
+
+[[フィルタ表記の紹介|Introduction to filter notation]]で説明しているように、[[フィルタのシンタックス|Filter Syntax]]を使用して、変数をフィルタパラメータの値としてトランスクルードできます。例:
+
+```
+{{{ [tag<myMacro>] }}}
+```
+
+! テキスト置換
+
+テキスト置換は、マクロ/変数の値が使用されるときに発生します。[[置換属性値|Substituted Attribute Values]] and [[substituteオペレータ|substitute Operator]]で説明しています。
+
+置換とトランスクルージョンの主な違いは、置換は[[Wikiテキスト|WikiText]]のパースよりも前に行われる点です。つまり、置換を使ってWikiテキストの構造を構築できます。トランスクルージョンは独立して処理されるため、隣接するテキストと組み合わせてWikiテキストの構造を定義することはできません。

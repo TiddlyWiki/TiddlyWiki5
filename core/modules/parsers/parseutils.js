@@ -326,7 +326,8 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 	};
 	// Define our regexps
 	var reAttributeName = /([^\/\s>"'`=:]+)/y,
-		reUnquotedAttribute = /((?:(?:>(?!>))|[^\s>"'])+)/y,
+		reStrictIdentifier = /^[A-Za-z0-9\-_]+$/,
+		reUnquotedAttribute = /(?!<<)((?:(?:>(?!>))|[^\s>"'])+)/y,
 		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/y,
 		reIndirectValue = /\{\{([^\}]+)\}\}/y,
 		reSubstitutedValue = /(?:```([\s\S]*?)```|`([^`]|[\S\s]*?)`)/y;
@@ -337,6 +338,11 @@ exports.parseMacroParameterAsAttribute = function(source,pos) {
 		namePos = nameToken && $tw.utils.skipWhiteSpace(source,nameToken.end),
 		separatorToken = nameToken && $tw.utils.parseTokenRegExp(source,namePos,/=|:/y),
 		isNewStyleSeparator = false; // If there is no separator then we don't allow new style values
+	// Colon separator requires a strict identifier name to avoid mis-parsing values like $:/foo
+	if(nameToken && separatorToken && separatorToken.match[0] === ":" && !reStrictIdentifier.test(nameToken.match[1])) {
+		nameToken = null;
+		separatorToken = null;
+	}
 	// If we have a name and a separator then we have a named attribute
 	if(nameToken && separatorToken) {
 		node.name = nameToken.match[1];
@@ -570,6 +576,9 @@ exports.parseAttribute = function(source,pos) {
 									pos = unquotedValue.end;
 									node.type = "string";
 									node.value = unquotedValue.match[1];
+								} else if(source.charAt(pos) === "<" && source.charAt(pos + 1) === "<" && source.indexOf(">>",pos) !== -1) {
+									// Value looks like a macro invocation (starts with << with a closing >> ahead) but does not parse as one. Return null so the enclosing tag fails to parse rather than silently binding the attribute to "true" and treating the remainder as further attributes (restores v5.3.8 behaviour)
+									return null;
 								} else {
 									node.type = "string";
 									node.value = "true";
