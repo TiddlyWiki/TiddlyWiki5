@@ -77,10 +77,23 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 	// Measure the specified minimum height
 	domNode.style.height = minHeight;
 	var measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
+	// Temporarily force rows=1 during auto-measurement so the intrinsic floor
+	// is one row rather than the HTML default of two; restore afterwards
+	var hadRowsAttr = domNode.hasAttribute("rows"),
+		savedRows = hadRowsAttr ? domNode.getAttribute("rows") : null;
+	if(!hadRowsAttr) {
+		domNode.setAttribute("rows","1");
+	}
 	// Set its height to auto so that it snaps to the correct height
 	domNode.style.height = "auto";
 	// Calculate the revised height
 	var newHeight = Math.max(domNode.scrollHeight + domNode.offsetHeight - domNode.clientHeight,measuredHeight);
+	// Restore the original rows attribute state
+	if(!hadRowsAttr) {
+		domNode.removeAttribute("rows");
+	} else {
+		domNode.setAttribute("rows",savedRows);
+	}
 	// Only try to change the height if it has changed
 	if(newHeight !== domNode.offsetHeight) {
 		domNode.style.height = newHeight + "px";
