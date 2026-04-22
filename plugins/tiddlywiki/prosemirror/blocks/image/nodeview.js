@@ -165,6 +165,8 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 			const sourceInput = this.contentContainer.querySelector('.pm-nodeview-form-input[data-key="twSource"]');
 			if(sourceInput) {
 				sourceInput.value = imageName;
+				// Auto-commit and exit edit mode after picker selection
+				this.commitEdit();
 				return;
 			}
 		}

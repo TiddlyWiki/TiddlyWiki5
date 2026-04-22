@@ -301,7 +301,7 @@ class ProseMirrorEngine {
 		const nodeviewId = paramObj && (paramObj.nodeviewId || paramObj.nodeViewId);
 		const pickedTitle = paramObj && paramObj.imageTitle;
 		if(!nodeviewId || !pickedTitle || !this.view) return true;
-		for(const el of this.view.dom.querySelectorAll(".pm-image-nodeview")) {
+		for(const el of this.view.dom.querySelectorAll(".pm-nodeview-image")) {
 			const nodeview = el._imageNodeView;
 			if(nodeview && typeof nodeview._getNodeViewId === "function" && nodeview._getNodeViewId() === nodeviewId) {
 				if(typeof nodeview.handleImagePicked === "function") {

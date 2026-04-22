@@ -148,6 +148,33 @@ function buildSchema() {
 			content: "inline*",
 			toDOM() { return ["div", { class: "pm-hard-line-breaks-block-wrapper" }, 0]; },
 			parseDOM: [{ tag: "div.pm-hard-line-breaks-block-wrapper" }]
+		},
+		typed_block: {
+			attrs: { rawText: { default: "" }, parseType: { default: "" }, renderType: { default: null } },
+			group: "block", atom: true, selectable: true, draggable: true,
+			toDOM(node) {
+				const wrapper = document.createElement("div");
+				wrapper.className = "pm-typed-block";
+				wrapper.setAttribute("data-raw-text", node.attrs.rawText);
+				wrapper.setAttribute("data-parse-type", node.attrs.parseType);
+				if(node.attrs.renderType) wrapper.setAttribute("data-render-type", node.attrs.renderType);
+				wrapper.setAttribute("contenteditable", "false");
+				const label = document.createElement("span");
+				label.className = "pm-typed-block-label";
+				label.textContent = "$$$" + (node.attrs.parseType || "");
+				wrapper.appendChild(label);
+				return wrapper;
+			},
+			parseDOM: [{
+				tag: "div.pm-typed-block",
+				getAttrs(dom) {
+					return {
+						rawText: dom.getAttribute("data-raw-text") || "",
+						parseType: dom.getAttribute("data-parse-type") || "",
+						renderType: dom.getAttribute("data-render-type") || null
+					};
+				}
+			}]
 		}
 	});
 

@@ -481,6 +481,42 @@ function opaque_block(builder, node) {
 	return { type: "text", text: rawText };
 }
 
+function typed_block(builder, node) {
+	var rawText = (node.attrs && node.attrs.rawText) || "";
+	var parseType = (node.attrs && node.attrs.parseType) || "";
+	var renderType = (node.attrs && node.attrs.renderType) || null;
+	// Re-parse to get the children AST for the typed content
+	var parser = $tw.wiki.parseText(parseType, rawText, { defaultType: "text/plain" });
+	var children = (parser && parser.tree) ? parser.tree : [];
+	if(!renderType) {
+		return {
+			type: "void",
+			rule: "typedblock",
+			children: $tw.utils.isArray(children) ? children : [children],
+			parseType: parseType,
+			renderType: renderType,
+			text: rawText
+		};
+	} else {
+		var widgetNode = $tw.wiki.makeWidget(parser);
+		var container = $tw.fakeDocument.createElement("div");
+		widgetNode.render(container, null);
+		var renderResult = renderType === "text/html" ? container.innerHTML : container.textContent;
+		return {
+			type: "void",
+			rule: "typedblock",
+			children: [{
+				type: "element",
+				tag: "pre",
+				children: [{ type: "text", text: renderResult }]
+			}],
+			parseType: parseType,
+			renderType: renderType,
+			text: rawText
+		};
+	}
+}
+
 function table_node(builder, node) {
 	const rows = [];
 	if(node.content) {
@@ -597,6 +633,7 @@ const builders = {
 	horizontal_rule: horizontal_rule,
 	hard_break: hard_break,
 	hard_line_breaks_block: hard_line_breaks_block,
+	typed_block: typed_block,
 	pragma_block: pragma_block,
 	opaque_block: opaque_block,
 	table: table_node,

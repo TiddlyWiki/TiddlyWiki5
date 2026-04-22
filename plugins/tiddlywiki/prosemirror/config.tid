@@ -2,7 +2,25 @@ title: $:/plugins/tiddlywiki/prosemirror/config
 tags: $:/tags/ControlPanel/SettingsTab
 caption: ProseMirror
 
+\whitespace trim
+
 ! ProseMirror Editor Configuration
+
+!! Editor Selection
+
+Choose which editor to use for ~WikiText tiddlers. Changes take effect when you next open a tiddler for editing.
+
+|!Content Type |!Current Editor |!Change To |
+|~text/vnd.tiddlywiki |<$text text={{$:/config/EditorTypeMappings/text/vnd.tiddlywiki}}/> |<$select tiddler="$:/config/EditorTypeMappings/text/vnd.tiddlywiki" default="prosemirror"><option value="prosemirror">ProseMirror (WYSIWYG)</option><option value="text">Default (Simple)</option><$list filter="[[$:/plugins/tiddlywiki/codemirror]is[shadow]]" variable="x"><option value="codemirror">CodeMirror</option></$list></$select> |
+
+!! General
+
+<$checkbox tiddler="$:/config/prosemirror/markdown-shortcuts" field="text" checked="yes" unchecked="no" default="no">
+  <$text text={{$:/plugins/tiddlywiki/prosemirror/language/Settings/MarkdownShortcuts}}/>
+</$checkbox>
+<div class="tc-control-panel-info">
+  <$text text={{$:/plugins/tiddlywiki/prosemirror/language/Settings/MarkdownShortcutsHint}}/>
+</div>
 
 !! Keyboard Shortcuts
 

@@ -177,12 +177,14 @@ function buildKeymap(schema, mapKeys) {
 			} else {
 				// Split block at cursor, insert paragraph in between
 				tr.split(cursorPos, 1);
-				// After split: two block nodes. cursorPos + 1 is now inside the second block.
-				// We insert a paragraph between them, at the position just after the first block ends.
-				// After tr.split, the first block ends at cursorPos and the second starts at cursorPos+1.
-				// The boundary between the two blocks is at cursorPos (end of first = start of second).
-				tr.insert(cursorPos, paragraphType.createAndFill());
-				tr.setSelection(prosemirrorState.TextSelection.create(tr.doc, cursorPos + 1));
+				// After tr.split, the original block is split into two.
+				// The split point becomes the boundary: first block ends, second block starts.
+				// After split, the boundary between the two blocks is just after cursorPos.
+				// We need to find the exact position between the two blocks.
+				const $splitPos = tr.doc.resolve(cursorPos);
+				const afterFirstBlock = $splitPos.after($splitPos.depth);
+				tr.insert(afterFirstBlock, paragraphType.createAndFill());
+				tr.setSelection(prosemirrorState.TextSelection.create(tr.doc, afterFirstBlock + 1));
 			}
 
 			dispatch(tr.scrollIntoView());

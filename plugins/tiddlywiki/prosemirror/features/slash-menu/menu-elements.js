@@ -175,7 +175,7 @@ function getBlockTypeMenuElements(wiki, schema) {
 		{ id: "blockquote", label: wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/SlashMenu/TurnIntoQuote", "Turn into quote"), node: schema.nodes.blockquote },
 		{ id: "paragraph", label: wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/SlashMenu/TurnIntoParagraph", "Turn into paragraph"), node: schema.nodes.paragraph }
 	];
-	const blockTypeCommands = blockTypes.map(item => ({
+	return blockTypes.map(item => ({
 			id: item.id,
 			label: item.label,
 			type: "command",
@@ -187,18 +187,103 @@ function getBlockTypeMenuElements(wiki, schema) {
 				return true;
 			}
 		}));
-	return [{
-		id: "blocktype-submenu",
-		label: wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/SlashMenu/BlockType", "Block Type"),
-		type: "submenu",
-		category: "block-type",
-		available: () => true,
-		elements: blockTypeCommands
-	}];
+}
+
+// --- Programmatic slash menu item registry ---
+var registeredItems = [];
+
+/**
+ * Register a slash menu item programmatically.
+ * @param {Object} item - { id, label, type:"command", command:fn(view), category:string, icon?, description? }
+ */
+function registerSlashMenuItem(item) {
+	if(!item || !item.id) return;
+	item.type = item.type || "command";
+	item.category = item.category || "other";
+	item.available = item.available || function() { return true; };
+	registeredItems.push(item);
+}
+
+function getRegisteredMenuElements() {
+	return registeredItems.slice();
+}
+
+// --- Typed block menu items ---
+function getTypedBlockMenuElements(wiki, schema) {
+	if(!schema.nodes.typed_block) return [];
+	var types = [
+		{ value: "application/javascript", label: "JavaScript", shortLabel: ".js" },
+		{ value: "text/css", label: "CSS", shortLabel: ".css" },
+		{ value: "text/html", label: "HTML", shortLabel: ".html" },
+		{ value: "application/json", label: "JSON", shortLabel: ".json" },
+		{ value: "image/svg+xml", label: "SVG", shortLabel: ".svg" },
+		{ value: "text/x-markdown", label: "Markdown", shortLabel: ".md" },
+		{ value: "text/vnd.tiddlywiki", label: "WikiText", shortLabel: ".tid" }
+	];
+	return types.map(function(t) {
+		return {
+			id: "typed-block-" + t.value,
+			label: "$$$ " + t.label,
+			type: "command",
+			category: "typed-block",
+			description: t.value,
+			available: function() { return true; },
+			command: function(view) {
+				var node = schema.nodes.typed_block.create({
+					rawText: "",
+					parseType: t.value,
+					renderType: null
+				});
+				var tr = view.state.tr.replaceSelectionWith(node);
+				view.dispatch(tr.scrollIntoView());
+				view.focus();
+				return true;
+			}
+		};
+	});
+}
+
+/**
+ * Group flat menu elements by category into submenu groups.
+ * Category labels support wikitext rendering via wiki.renderText().
+ */
+function groupByCategory(elements, wiki) {
+	var categoryOrder = [];
+	var categoryItems = {};
+	for(var i = 0; i < elements.length; i++) {
+		var el = elements[i];
+		if(!el) continue;
+		var cat = el.category || "other";
+		if(!categoryItems[cat]) {
+			categoryItems[cat] = [];
+			categoryOrder.push(cat);
+		}
+		categoryItems[cat].push(el);
+	}
+	var result = [];
+	for(var c = 0; c < categoryOrder.length; c++) {
+		var catKey = categoryOrder[c];
+		// Try to render category label as wikitext for i18n
+		var catLabel = catKey;
+		var langTiddler = "$:/plugins/tiddlywiki/prosemirror/language/SlashMenu/Category/" + catKey;
+		var langText = wiki ? wiki.getTiddlerText(langTiddler) : null;
+		if(langText) {
+			catLabel = langText;
+		}
+		result.push({
+			id: "category-group-" + catKey,
+			label: catLabel,
+			type: "group",
+			category: catKey,
+			available: function() { return true; }
+		});
+		result = result.concat(categoryItems[catKey]);
+	}
+	return result;
 }
 
 function flattenMenuElementsWithGroup(elements) {
-	let result = [];
+	var result = [];
 	elements.forEach(item => {
 		if(item.type === "submenu" && Array.isArray(item.elements)) {
 			result.push({
@@ -215,9 +300,15 @@ function flattenMenuElementsWithGroup(elements) {
 	return result;
 }
 
-exports.getAllMenuElements = (wiki, schema) => getSnippetMenuElements(wiki)
+exports.getAllMenuElements = function(wiki, schema) {
+	var allItems = getSnippetMenuElements(wiki)
 		.concat(getEditorActionMenuElements(wiki, schema))
 		.concat(getBlockTypeMenuElements(wiki, schema))
-		.filter(item => !!item);
+		.concat(getTypedBlockMenuElements(wiki, schema))
+		.concat(getRegisteredMenuElements())
+		.filter(function(item) { return !!item; });
+	return groupByCategory(allItems, wiki);
+};
 exports.flattenMenuElementsWithGroup = flattenMenuElementsWithGroup;
 exports.getBuiltinActionCommands = getBuiltinActionCommands;
+exports.registerSlashMenuItem = registerSlashMenuItem;
