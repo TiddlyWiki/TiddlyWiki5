@@ -23,7 +23,9 @@ const es2023rules = {
     files: ["bin/**/*", "core-server/**/*"],
 };
 
-
+const stylisticRulesOff = Object.fromEntries(
+    Object.keys(stylistic.rules).map(key => [`@stylistic/${key}`, "off"])
+);
 
 export default defineConfig([{
     ignores: [
@@ -37,7 +39,8 @@ export default defineConfig([{
         "plugins/tiddlywiki/*/files/",
         "eslint.config.mjs",
         "playwright.config.js",
-        "**/output/**"
+        "**/output/**",
+        "**/testcommonjs/**"
     ],
 
 },
@@ -65,12 +68,12 @@ js.configs.recommended,
         }],
         "block-scoped-var": "off",
         "@stylistic/block-spacing": "off",
-        "@stylistic/brace-style": "off",
+        "@stylistic/brace-style": ["error", "1tbs"],
         "callback-return": "off",
         camelcase: "off",
         "capitalized-comments": "off",
         "class-methods-use-this": "error",
-        "@stylistic/comma-dangle": "off",
+        "@stylistic/comma-dangle": ["error", "never"],
         "@stylistic/comma-spacing": "off",
         "@stylistic/comma-style": "off",
         complexity: "off",
@@ -124,7 +127,7 @@ js.configs.recommended,
         "@stylistic/lines-between-class-members": "error",
         "@stylistic/no-trailing-spaces": "error",
         "@stylistic/no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
-        "@stylistic/space-infix-ops": "error",
+        "@stylistic/space-infix-ops": "off",
         "max-classes-per-file": "off",
         "max-depth": "off",
         "@stylistic/max-len": "off",
@@ -184,7 +187,6 @@ js.configs.recommended,
         "no-multi-assign": "off",
         "@stylistic/no-multi-spaces": "off",
         "no-multi-str": "error",
-        "@stylistic/no-multiple-empty-lines": "off",
         "@stylistic/no-native-reassign": "off",
         "no-negated-condition": "off",
         "no-unsafe-negation": "error",
@@ -219,7 +221,6 @@ js.configs.recommended,
         "no-template-curly-in-string": "error",
         "no-ternary": "off",
         "no-throw-literal": "off",
-        "@stylistic/no-trailing-spaces": "off",
         "no-undef-init": "off",
         "no-undefined": "off",
         "no-underscore-dangle": "off",
@@ -241,7 +242,7 @@ js.configs.recommended,
         "@stylistic/no-whitespace-before-property": "error",
         "@stylistic/nonblock-statement-body-position": ["error", "any"],
         "@stylistic/object-curly-newline": "off",
-        "@stylistic/object-curly-spacing": "off",
+        "@stylistic/object-curly-spacing": ["error", "never"],
         "@stylistic/object-property-newline": "off",
         "object-shorthand": "off",
         "one-var": "off",
@@ -262,7 +263,7 @@ js.configs.recommended,
         "prefer-rest-params": "off",
         "prefer-spread": "off",
         "prefer-template": "off",
-        "@stylistic/quote-props": "off",
+        "@stylistic/quote-props": ["error", "as-needed"],
         "@stylistic/quotes": ["error", "double", { avoidEscape: true }],
         radix: "off",
         "require-atomic-updates": "error",
@@ -270,7 +271,7 @@ js.configs.recommended,
         "require-jsdoc": "off",
         "require-unicode-regexp": "off",
         "@stylistic/rest-spread-spacing": "error",
-        "@stylistic/semi": ["error", "always"],
+        "@stylistic/semi": ["error", "always", { "omitLastInOneLineBlock": true, "omitLastInOneLineClassBody": true }],
         "@stylistic/semi-spacing": "off",
         "@stylistic/semi-style": "off",
         "sort-imports": "error",
@@ -279,7 +280,6 @@ js.configs.recommended,
         "@stylistic/space-before-blocks": "off",
         "@stylistic/space-before-function-paren": "off",
         "@stylistic/space-in-parens": "off",
-        "@stylistic/space-infix-ops": "off",
         "@stylistic/space-unary-ops": "off",
         "@stylistic/spaced-comment": "off",
         strict: "off",
@@ -301,7 +301,7 @@ js.configs.recommended,
             "caughtErrors": "none"
         }],
         "no-empty": "off",
-        "@stylistic/no-extra-semi": "off",
+        "@stylistic/no-extra-semi": "error",
         "no-redeclare": "off",
         "no-control-regex": "off",
         "@stylistic/no-mixed-spaces-and-tabs": "off",
@@ -316,12 +316,17 @@ js.configs.recommended,
     es2017rules,
     es2023rules,
     {
+        // For test files, we only want to lint them, but not format them.
+        files: ["editions/test/**"],
+        rules: stylisticRulesOff
+    },
+    {
         files: ["tiddlywiki.js"],
         plugins:  {
 		    "es-x": esx
 	    },
         rules: {
-   	    	"es-x/no-hashbang": "off"         
+   	    	"es-x/no-hashbang": "off"
         }
     }
 ]);
