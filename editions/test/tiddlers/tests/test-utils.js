@@ -206,4 +206,102 @@ describe("Utility tests", function() {
 		expect($tw.utils.insertSortedArray(["b","c","d"],"ccc").join(",")).toEqual("b,c,ccc,d");
 	});
 
+	// Regression guard #9831:
+	// classList.add/remove/toggle throw InvalidCharacterError on whitespace.
+	// Manual repro: open tw5-com #SampleWizard, set `class` field to "aaa bbb", Done,
+	// open the popup -> OK -> open nested popup -> RSOD without this fix.
+	// Stubbed classList mimics the real DOM: it rejects any whitespace in a token,
+	// de-duplicates on add, and no-ops on remove of a missing token.
+	describe("addClass/removeClass/toggleClass",function() {
+		function makeEl() {
+			var tokens = [];
+			function reject(t) { if(/\s/.test(t)) { throw new Error("InvalidCharacterError: '" + t + "'"); } }
+			return {
+				classList: {
+					add: function() {
+						for(var i = 0; i < arguments.length; i++) {
+							reject(arguments[i]);
+							if(tokens.indexOf(arguments[i]) === -1) { tokens.push(arguments[i]); }
+						}
+					},
+					remove: function() {
+						for(var i = 0; i < arguments.length; i++) {
+							reject(arguments[i]);
+							var idx = tokens.indexOf(arguments[i]);
+							if(idx !== -1) { tokens.splice(idx,1); }
+						}
+					},
+					toggle: function(cls,status) {
+						reject(cls);
+						var has = tokens.indexOf(cls) !== -1;
+						var want = status === undefined ? !has : status;
+						if(want && !has) { tokens.push(cls); }
+						if(!want && has) { tokens.splice(tokens.indexOf(cls),1); }
+					}
+				},
+				_tokens: tokens
+			};
+		}
+
+		it("splits on every ASCII-whitespace flavour (space, tab, newline, CR, mixed runs, leading/trailing)",function() {
+			var el = makeEl();
+			$tw.utils.addClass(el,"  a\tb\nc\r\nd  \t  e  ");
+			expect(el._tokens).toEqual(["a","b","c","d","e"]);
+		});
+
+		it("splits on Unicode whitespace too (U+00A0 non-breaking space, a common paste-in hazard)",function() {
+			var el = makeEl();
+			$tw.utils.addClass(el,"a\u00A0b");
+			expect(el._tokens).toEqual(["a","b"]);
+		});
+
+		it("de-duplicates tokens within one call and across calls",function() {
+			var el = makeEl();
+			$tw.utils.addClass(el,"x x y");
+			$tw.utils.addClass(el,"y z");
+			expect(el._tokens).toEqual(["x","y","z"]);
+		});
+
+		it("remove is a no-op for missing tokens and tolerates mixed-presence input",function() {
+			var el = makeEl();
+			$tw.utils.addClass(el,"a b");
+			$tw.utils.removeClass(el,"b c d"); // only b is present
+			expect(el._tokens).toEqual(["a"]);
+		});
+
+		it("toggle with no status flips each token independently",function() {
+			var el = makeEl();
+			$tw.utils.addClass(el,"a");
+			$tw.utils.toggleClass(el,"a b"); // remove a, add b
+			expect(el._tokens).toEqual(["b"]);
+		});
+
+		it("toggle with status=true/false forces state regardless of current",function() {
+			var el = makeEl();
+			$tw.utils.addClass(el,"a");
+			$tw.utils.toggleClass(el,"a b",true);  // both on
+			expect(el._tokens).toEqual(["a","b"]);
+			$tw.utils.toggleClass(el,"a b",false); // both off
+			expect(el._tokens).toEqual([]);
+		});
+
+		it("is a silent no-op for whitespace-only / empty / non-string / null / undefined className",function() {
+			var el = makeEl();
+			var inputs = ["", "   \t\n ", null, undefined, 42, {}, ["a"]];
+			inputs.forEach(function(v) {
+				expect(function() { $tw.utils.addClass(el,v); }).not.toThrow();
+				expect(function() { $tw.utils.removeClass(el,v); }).not.toThrow();
+				expect(function() { $tw.utils.toggleClass(el,v); }).not.toThrow();
+			});
+			expect(el._tokens).toEqual([]);
+		});
+
+		it("is a silent no-op when element has no classList (SVG in old browsers, detached nodes, stubs)",function() {
+			var el = {};
+			expect(function() { $tw.utils.addClass(el,"a b"); }).not.toThrow();
+			expect(function() { $tw.utils.removeClass(el,"a b"); }).not.toThrow();
+			expect(function() { $tw.utils.toggleClass(el,"a b",true); }).not.toThrow();
+		});
+	});
+
 });

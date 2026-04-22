@@ -43,16 +43,24 @@ exports.domMatchesSelector = (node,selector) => node.matches(selector);
 
 exports.hasClass = (el,className) => el.classList && el.classList.contains(className);
 
+// classList.add/remove/toggle reject whitespace, but the legacy API accepts "aaa bbb".
+function splitClasses(className) {
+	return (typeof className === "string" && className.match(/\S+/g)) || [];
+}
+
 exports.addClass = function(el,className) {
-	el.classList && className && el.classList.add(className);
+	if(!el.classList) return;
+	splitClasses(className).forEach(function(c) { el.classList.add(c); });
 };
 
 exports.removeClass = function(el,className) {
-	el.classList && className && el.classList.remove(className);
+	if(!el.classList) return;
+	splitClasses(className).forEach(function(c) { el.classList.remove(c); });
 };
 
 exports.toggleClass = function(el,className,status) {
-	el.classList && className && el.classList.toggle(className, status);
+	if(!el.classList) return;
+	splitClasses(className).forEach(function(c) { el.classList.toggle(c,status); });
 };
 
 exports.getLocationPath = () => window.location.origin + window.location.pathname;
