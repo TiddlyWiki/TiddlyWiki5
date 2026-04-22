@@ -28,6 +28,7 @@ function createSlashMenuPlugin(menuElements, options) {
 	const ignoredKeys = options.ignoredKeys || [];
 	const customConditions = options.customConditions;
 	const triggerCodes = options.triggerCodes || ["Slash"];
+	let isComposing = false;
 
 	const defaultIgnoredKeys = [
 		"Unidentified", "Alt", "AltGraph", "CapsLock", "Control", "Fn", "FnLock",
@@ -157,11 +158,16 @@ function createSlashMenuPlugin(menuElements, options) {
 		const allElements = flattenMenuElementsWithGroup(state.elements);
 		const regExp = new RegExp(escapeRegExp(input.toLowerCase()).replace(/\s/g, "\\s"));
 		const result = [];
+		let pendingGroup = null;
 		for(let i = 0; i < allElements.length; i++) {
 			const element = allElements[i];
 			if(element.type === "group") {
-				result.push(element);
+				pendingGroup = element;
 			} else if(element.label.toLowerCase().match(regExp) !== null && !element.locked) {
+				if(pendingGroup) {
+					result.push(pendingGroup);
+					pendingGroup = null;
+				}
 				result.push(element);
 			}
 		}
@@ -177,6 +183,10 @@ function createSlashMenuPlugin(menuElements, options) {
 			return "CloseMenu";
 		}
 		if(state.open) {
+			if((event.code === "Enter" || event.key === "Enter" || event.code === "Tab" || event.key === "Tab") &&
+				(event.isComposing || isComposing || event.key === "Process" || event.keyCode === 229)) {
+				return "Ignore";
+			}
 			if(event.code === "ArrowDown" || event.key === "ArrowDown") {
 				return "NextItem";
 			}
@@ -271,13 +281,13 @@ function createSlashMenuPlugin(menuElements, options) {
 				compositionstart: (view, event) => {
 					const state = SlashMenuKey.getState(view.state);
 					if(state && state.open) {
-						this._slashMenuComposing = true;
+						isComposing = true;
 					}
 					return false;
 				},
 				compositionupdate: (view, event) => {
 					const state = SlashMenuKey.getState(view.state);
-					if(state && state.open && this._slashMenuComposing) {
+					if(state && state.open && isComposing) {
 						const data = event.data;
 						if(data && data !== "、" && data !== "/") {
 							dispatchWithMeta(view, {
@@ -305,7 +315,7 @@ function createSlashMenuPlugin(menuElements, options) {
 									view.dispatch(tr);
 								}
 							}, 0);
-						} else if(this._slashMenuComposing && data) {
+						} else if(isComposing && data) {
 							setTimeout(() => {
 								const currentState = view.state;
 								const from = currentState.selection.from;
@@ -321,7 +331,7 @@ function createSlashMenuPlugin(menuElements, options) {
 								});
 							}, 0);
 						}
-						this._slashMenuComposing = false;
+						isComposing = false;
 					}
 					return false;
 				}

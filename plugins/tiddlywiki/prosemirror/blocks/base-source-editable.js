@@ -294,8 +294,20 @@ class BaseSourceEditableNodeView {
 		// Subclasses can override
 	}
 
-	stopEvent() {
-		return this.isEditMode;
+	shouldStopControlEvent(event) {
+		if(!event || !event.target || !this.dom || !this.dom.contains(event.target)) {
+			return false;
+		}
+		if(typeof event.target.closest !== "function") {
+			return false;
+		}
+		return !!event.target.closest(
+			".pm-nodeview-header, .pm-nodeview-btn, .pm-nodeview-editor, .pm-nodeview-form, .pm-nodeview-form-input"
+		);
+	}
+
+	stopEvent(event) {
+		return this.shouldStopControlEvent(event) || this.isEditMode;
 	}
 
 	ignoreMutation() {

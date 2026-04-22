@@ -17,6 +17,7 @@ class SourcePanel {
 	constructor(engine) {
 		this.engine = engine;
 		this._showing = false;
+		this._dirtyFromSource = false;
 
 		const wiki = engine.widget.wiki;
 
@@ -36,11 +37,13 @@ class SourcePanel {
 		this.panel.appendChild(label);
 		this.panel.appendChild(this.textarea);
 
-		const debouncedSync = debounce(() => {
-			if(!this._showing || !engine.view) return;
-			engine.updateDomNodeText(this.textarea.value);
+		this._debouncedSync = debounce(() => {
+			this.applySourceText();
 		}, 500);
-		this.textarea.addEventListener("input", () => debouncedSync());
+		this.textarea.addEventListener("input", () => {
+			this._dirtyFromSource = true;
+			this._debouncedSync();
+		});
 
 		if(wiki.getTiddlerText(SOURCE_STATE_TIDDLER) === "yes") {
 			this._showing = true;
@@ -54,8 +57,22 @@ class SourcePanel {
 
 	get showing() { return this._showing; }
 
+	applySourceText() {
+		if(!this._showing || !this.engine.view) return;
+		const text = this.textarea.value;
+		this.engine.updateDomNodeText(text);
+		this.engine.widget.saveChanges(text);
+		this._dirtyFromSource = false;
+	}
+
+	flushPendingSync() {
+		if(this._debouncedSync && this._debouncedSync.flush) {
+			this._debouncedSync.flush();
+		}
+	}
+
 	syncFromEditor() {
-		if(this._showing && this.textarea && document.activeElement !== this.textarea) {
+		if(this._showing && this.textarea && document.activeElement !== this.textarea && !this._dirtyFromSource) {
 			this.textarea.value = this.engine.getText();
 		}
 	}
@@ -63,13 +80,18 @@ class SourcePanel {
 	toggle() {
 		this._showing = !this._showing;
 		if(this._showing) {
+			if(this._debouncedSync && this._debouncedSync.cancel) {
+				this._debouncedSync.cancel();
+			}
+			this._dirtyFromSource = false;
 			this.textarea.value = this.engine.getText();
 			this.panel.style.display = "";
 			this.engine.domNode.classList.add("tc-prosemirror-source-active");
 		} else {
-			if(this.engine.view && this.textarea.value !== this.engine.getText()) {
-				this.engine.updateDomNodeText(this.textarea.value);
-				this.engine.widget.saveChanges(this.textarea.value);
+			if(this._dirtyFromSource) {
+				this.flushPendingSync();
+			} else if(this._debouncedSync && this._debouncedSync.cancel) {
+				this._debouncedSync.cancel();
 			}
 			this.panel.style.display = "none";
 			this.engine.domNode.classList.remove("tc-prosemirror-source-active");

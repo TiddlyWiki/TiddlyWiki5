@@ -344,22 +344,24 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		
 		const widgetBlock = editor.locator(".pm-nodeview-widget");
 		await expect(widgetBlock).toBeVisible({ timeout: 2000 });
-		await widgetBlock.hover();
-		const editBtn = widgetBlock.locator(".pm-nodeview-btn-edit").first();
-		await expect(editBtn).toBeVisible({ timeout: 2000 });
-		
-		// Enter edit mode via evaluate to avoid DOM detachment issues
-		await editBtn.evaluate(el => el.click());
-		
-		// Wait for the nodeview to stabilize in edit mode
-		const editingWidget = editor.locator(".pm-nodeview-widget.pm-nodeview-editing").first();
-		await expect(editingWidget).toBeVisible({ timeout: 3000 });
-		await expect(editingWidget.locator("textarea.pm-nodeview-editor").first()).toBeVisible({ timeout: 3000 });
-		
-		// Re-locate delete button on the (potentially new) nodeview
-		const deleteBtn = editingWidget.locator(".pm-nodeview-btn-delete").first();
-		await expect(deleteBtn).toBeVisible({ timeout: 2000 });
-		await deleteBtn.evaluate(el => el.click());
+
+		const deleteResult = await editor.evaluate(async root => {
+			const waitFrame = () => new Promise(resolve => requestAnimationFrame(() => resolve()));
+			const editBtn = root.querySelector(".pm-nodeview-widget .pm-nodeview-btn-edit");
+			if(!editBtn) return { ok: false, step: "editBtn" };
+			editBtn.click();
+			for(let i = 0; i < 5; i++) {
+				await waitFrame();
+				const deleteBtn = root.querySelector(".pm-nodeview-widget.pm-nodeview-editing .pm-nodeview-btn-delete");
+				if(deleteBtn) {
+					deleteBtn.click();
+					await waitFrame();
+					return { ok: true };
+				}
+			}
+			return { ok: false, step: "deleteBtn" };
+		});
+		expect(deleteResult).toEqual({ ok: true });
 		
 		// Widget should be removed
 		await expect(editor.locator(".pm-nodeview-widget")).toHaveCount(0, { timeout: 10000 });
@@ -419,6 +421,58 @@ test.describe("ProseMirror Editor - Lists", () => {
 		const list = editor.locator(".prosemirror-flat-list").first();
 		await expect(list).toBeVisible();
 		await expect(list.locator(".list-content")).toContainText("Item 1");
+	});
+
+	test("should toggle bullet list via prefix-lines operation", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "Item 1"
+		});
+		await editor.click();
+
+		await editor.evaluate(el => {
+			const viewEl = el.closest(".ProseMirror") || el;
+			function findAllEngines(widget) {
+				const results = [];
+				if(widget && widget.engine && widget.engine.view) results.push(widget.engine);
+				if(widget && widget.children) {
+					for(const child of widget.children) {
+						results.push.apply(results, findAllEngines(child));
+					}
+				}
+				return results;
+			}
+			const engine = findAllEngines($tw.rootWidget).find(e => e.view && e.view.dom === viewEl);
+			if(!engine) throw new Error("ProseMirror engine not found");
+			engine.handleTextOperationNatively({
+				param: "prefix-lines",
+				paramObject: { character: "*" }
+			});
+		});
+
+		await expect(editor.locator(".prosemirror-flat-list")).toHaveCount(1);
+
+		await editor.evaluate(el => {
+			const viewEl = el.closest(".ProseMirror") || el;
+			function findAllEngines(widget) {
+				const results = [];
+				if(widget && widget.engine && widget.engine.view) results.push(widget.engine);
+				if(widget && widget.children) {
+					for(const child of widget.children) {
+						results.push.apply(results, findAllEngines(child));
+					}
+				}
+				return results;
+			}
+			const engine = findAllEngines($tw.rootWidget).find(e => e.view && e.view.dom === viewEl);
+			if(!engine) throw new Error("ProseMirror engine not found");
+			engine.handleTextOperationNatively({
+				param: "prefix-lines",
+				paramObject: { character: "*" }
+			});
+		});
+
+		await expect(editor.locator(".prosemirror-flat-list")).toHaveCount(0);
+		await expect(editor.locator("p").first()).toContainText("Item 1");
 	});
 
 	test("should not add extra paragraph margins inside list items", async ({ page }) => {
@@ -627,6 +681,59 @@ test.describe("ProseMirror Editor - Slash Menu", () => {
 
 		// Confirm document changed
 		await expect(editor.locator("pre")).toHaveCount(1);
+	});
+
+	test("should hide empty category groups after filtering", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			configTiddlers: [{
+				title: "$:/tests/prosemirror/snippets/unique-group-filter",
+				caption: "Only Slash Menu Group Match",
+				tags: ["$:/tags/TextEditor/Snippet"],
+				text: "Only Slash Menu Group Match",
+				type: "text/vnd.tiddlywiki"
+			}]
+		});
+		await clearEditor(editor);
+		await editor.click();
+
+		await editor.press("Slash");
+		const menu = page.locator(".tw-slash-menu-root");
+		await expect(menu).toBeVisible({ timeout: 5000 });
+
+		await page.keyboard.type("Only Slash Menu Group Match");
+		await page.waitForTimeout(200);
+
+		const groupTitles = await menu.locator(".tw-slash-menu-group-title").allTextContents();
+		expect(groupTitles).toEqual(["snippet"]);
+		await expect(menu.locator(".tw-slash-menu-item")).toHaveCount(1);
+	});
+
+	test("should not execute selected item on Enter during IME composition", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page);
+		await clearEditor(editor);
+		await editor.click();
+
+		await editor.press("Slash");
+		const menu = page.locator(".tw-slash-menu-root");
+		await expect(menu).toBeVisible({ timeout: 5000 });
+
+		await page.keyboard.type("code");
+		await expect(menu.locator(".tw-slash-menu-item-label", { hasText: "Turn into codeblock" }).first()).toBeVisible();
+
+		await editor.evaluate(root => {
+			const event = new KeyboardEvent("keydown", {
+				key: "Enter",
+				code: "Enter",
+				bubbles: true,
+				cancelable: true
+			});
+			Object.defineProperty(event, "isComposing", { configurable: true, get: () => true });
+			Object.defineProperty(event, "keyCode", { configurable: true, get: () => 229 });
+			root.dispatchEvent(event);
+		});
+
+		await page.waitForTimeout(200);
+		await expect(editor.locator("pre")).toHaveCount(0);
 	});
 
 	test("should enter edit mode after inserting widget snippet", async ({ page }) => {
@@ -1495,25 +1602,30 @@ test.describe("ProseMirror Editor - Table", () => {
 		});
 
 		await editor.click();
-		await page.keyboard.type("/");
-		await page.waitForTimeout(300);
+		await editor.press("Slash");
 
-		const menu = page.locator(".tc-prosemirror-slash-menu");
-		if(await menu.isVisible()) {
-			// Filter to table
-			await page.keyboard.type("table");
-			await page.waitForTimeout(200);
+		const menu = page.locator(".tw-slash-menu-root");
+		await expect(menu).toBeVisible({ timeout: 5000 });
 
-			const tableItem = menu.locator("text=table").first();
-			if(await tableItem.isVisible()) {
-				await page.keyboard.press("Enter");
-				await page.waitForTimeout(300);
-			}
-		}
+		await page.keyboard.type("table");
+		await expect(menu.locator(".tw-slash-menu-item-label", { hasText: "Insert table" }).first()).toBeVisible({ timeout: 5000 });
 
-		const table = editor.locator("table");
-		const tableCount = await table.count();
-		expect(tableCount).toBeGreaterThanOrEqual(0); // Table may or may not have been inserted
+		const tableItem = menu.locator(".tw-slash-menu-item").filter({ hasText: "Insert table" }).first();
+		await expect(tableItem).toBeVisible({ timeout: 5000 });
+		await tableItem.evaluate(el => el.click());
+
+		const table = editor.locator("table").first();
+		await expect(table).toBeVisible({ timeout: 5000 });
+
+		const selectionInTable = await editor.evaluate(root => {
+			const selection = root.ownerDocument.getSelection();
+			if(!selection || !selection.anchorNode) return false;
+			const anchorElement = selection.anchorNode.nodeType === Node.ELEMENT_NODE
+				? selection.anchorNode
+				: selection.anchorNode.parentElement;
+			return !!(anchorElement && anchorElement.closest("td,th"));
+		});
+		expect(selectionInTable).toBeTruthy();
 	});
 });
 
@@ -1651,34 +1763,81 @@ test.describe("ProseMirror Editor - Bubble Menu", () => {
 // Source Panel
 // ─────────────────────────────────────────────────────────────────────────────
 test.describe("ProseMirror Editor - Source Panel", () => {
+	async function toggleSourcePanel(editor) {
+		await editor.evaluate(el => {
+			const viewEl = el.closest(".ProseMirror") || el;
+			function findAllEngines(widget) {
+				const results = [];
+				if(widget && widget.engine && widget.engine.view) results.push(widget.engine);
+				if(widget && widget.children) {
+					for(const child of widget.children) {
+						results.push.apply(results, findAllEngines(child));
+					}
+				}
+				return results;
+			}
+			const engine = findAllEngines($tw.rootWidget).find(e => e.view && e.view.dom === viewEl);
+			if(!engine) throw new Error("ProseMirror engine not found");
+			engine.toggleSourcePanel();
+		});
+	}
+
 	test("should display source panel with wikitext", async ({ page }) => {
 		const editor = await setupProseMirrorTest(page, null, {
-			initialText: "''Bold'' and //italic//"
+			initialText: "''Bold'' and //italic//",
+			configTiddlers: [{
+				title: "$:/state/prosemirror/show-source",
+				text: "yes"
+			}]
 		});
 
 		const sourcePanel = page.locator(".tc-prosemirror-source-panel textarea").first();
-		const isVisible = await sourcePanel.isVisible().catch(() => false);
-		if(isVisible) {
-			const sourceText = await sourcePanel.inputValue();
-			expect(sourceText).toContain("Bold");
-		}
+		await expect(sourcePanel).toBeVisible({ timeout: 5000 });
+		const sourceText = await sourcePanel.inputValue();
+		expect(sourceText).toContain("Bold");
 	});
 
 	test("should sync edits from source panel to editor", async ({ page }) => {
 		const editor = await setupProseMirrorTest(page, null, {
-			initialText: "Original text"
+			initialText: "Original text",
+			configTiddlers: [{
+				title: "$:/state/prosemirror/show-source",
+				text: "yes"
+			}]
 		});
 
 		const sourcePanel = page.locator(".tc-prosemirror-source-panel textarea").first();
-		const isVisible = await sourcePanel.isVisible().catch(() => false);
-		if(isVisible) {
-			await sourcePanel.fill("''New bold text''");
-			await sourcePanel.press("Tab"); // trigger blur/change
-			await page.waitForTimeout(500);
+		await expect(sourcePanel).toBeVisible({ timeout: 5000 });
+		await sourcePanel.fill("''New bold text''");
+		await page.waitForTimeout(700);
 
-			// The editor should now show bold text
-			await expect(editor).toContainText("New bold text");
-		}
+		// The editor should now show bold text
+		await expect(editor).toContainText("New bold text");
+		const savedText = await page.evaluate(() => $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/example", ""));
+		expect(savedText).toBe("''New bold text''");
+	});
+
+	test("should not overwrite newer editor edits when hiding source panel", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "Start",
+			configTiddlers: [{
+				title: "$:/state/prosemirror/show-source",
+				text: "yes"
+			}]
+		});
+
+		const sourcePanel = page.locator(".tc-prosemirror-source-panel textarea").first();
+		await expect(sourcePanel).toBeVisible({ timeout: 5000 });
+		await expect(await sourcePanel.inputValue()).toContain("Start");
+
+		await clearEditor(editor);
+		await page.keyboard.type("Fresh from editor");
+		await toggleSourcePanel(editor);
+		await expect(sourcePanel).toBeHidden({ timeout: 5000 });
+		await page.waitForTimeout(700);
+
+		const savedText = await page.evaluate(() => $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/example", ""));
+		expect(savedText.trim()).toBe("Fresh from editor");
 	});
 });
 
@@ -1739,6 +1898,13 @@ test.describe("ProseMirror Editor - Typed Block", () => {
 		// Should have a type selector dropdown
 		const select = typedBlock.locator(".pm-typed-block-type-select");
 		await expect(select).toBeVisible();
+		await expect(select).toHaveValue("application/javascript");
+		const selectedType = await select.evaluate(el => ({
+			label: el.selectedOptions[0] ? el.selectedOptions[0].textContent.trim() : "",
+			width: el.clientWidth
+		}));
+		expect(selectedType.label).toBe("JavaScript");
+		expect(selectedType.width).toBeGreaterThan(40);
 
 		// Should show the content
 		const content = typedBlock.locator(".pm-typed-block-content");

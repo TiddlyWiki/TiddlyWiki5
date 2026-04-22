@@ -218,6 +218,10 @@ class SlashMenuUI {
 	executeCommand(element) {
 		if(element.type === "command" && element.command) {
 			element.command(this.view);
+			this.view.dispatch(this.view.state.tr.setMeta(slashMenu.SlashMenuKey, {
+				type: slashMenu.SlashMetaTypes.execute
+			}));
+			this.hideMenu();
 		}
 	}
 
