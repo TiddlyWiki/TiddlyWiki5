@@ -192,6 +192,25 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 		}
 		super.destroy();
 	}
+
+	ignoreMutation(mutation) {
+		// When acting as a plain paragraph (no widget detected), allow
+		// ProseMirror to process DOM mutations normally so that text input
+		// works.  Only ignore mutations when we are rendering a widget
+		// block with custom (non-ProseMirror) DOM.
+		if(!this.widgetInfo) {
+			return false;
+		}
+		return true;
+	}
+
+	stopEvent() {
+		// Only stop events when in widget mode (editing textarea, etc.)
+		if(!this.widgetInfo) {
+			return false;
+		}
+		return this.isEditMode;
+	}
 }
 
 exports.WidgetBlockNodeView = WidgetBlockNodeView;

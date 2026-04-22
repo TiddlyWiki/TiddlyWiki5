@@ -172,7 +172,8 @@ hideMenu();
 });
 
 el.addEventListener("mousedown", (e) => {
-e.preventDefault();
+// Do NOT call e.preventDefault() — it kills the native drag gesture.
+// Instead, set the NodeSelection so dragstart can read the correct slice.
 if(currentView && currentBlockPos !== null) {
 try {
 const sel = NodeSelection.create(currentView.state.doc, currentBlockPos);
@@ -218,7 +219,14 @@ el.addEventListener("mouseleave", (e) => {
 const related = e.relatedTarget;
 if(currentView && currentView.dom && currentView.dom.contains(related)) return;
 if(menuEl && menuEl.contains(related)) return;
-hideHandle();
+// Delay hiding to allow re-entry into the editor
+safeTimeout(() => {
+	if(handle && handle.matches(":hover")) return;
+	if(currentView && currentView.dom && currentView.dom.matches(":hover")) return;
+	if(menuEl && menuEl.matches(":hover")) return;
+	if(menuVisible) return;
+	hideHandle();
+}, 150);
 });
 
 return el;
@@ -617,7 +625,7 @@ const siblings = container.querySelectorAll(".tc-prosemirror-block-menu-item-foc
 for(let s = 0; s < siblings.length; s++) {
 siblings[s].classList.remove("tc-prosemirror-block-menu-item-focused");
 }
-this.classList.add("tc-prosemirror-block-menu-item-focused");
+item.classList.add("tc-prosemirror-block-menu-item-focused");
 });
 
 container.appendChild(item);
@@ -674,7 +682,14 @@ mouseleave: (view, event) => {
 const related = event.relatedTarget;
 if(handle && handle.contains(related)) return false;
 if(menuEl && menuEl.contains(related)) return false;
-hideHandle();
+// Delay hiding to give the user time to reach the handle
+safeTimeout(() => {
+	// Re-check: if mouse is now over the handle or menu, don't hide
+	if(handle && handle.matches(":hover")) return;
+	if(menuEl && menuEl.matches(":hover")) return;
+	if(menuVisible) return;
+	hideHandle();
+}, 150);
 return false;
 },
 scroll: () => {

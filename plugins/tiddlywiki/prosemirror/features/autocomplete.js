@@ -49,7 +49,7 @@ function buildTriggerMap(wiki) {
 }
 
 function getTiddlerCompletions(wiki, query) {
-	const allTitles = wiki.getTiddlers({ sortField: "modified", reverse: true });
+	const allTitles = wiki.getTiddlers();
 	if(!query) return allTitles.slice(0, 20);
 	const lower = query.toLowerCase();
 	const matched = [];

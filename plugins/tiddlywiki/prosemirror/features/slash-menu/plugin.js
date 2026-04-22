@@ -73,15 +73,19 @@ function createSlashMenuPlugin(menuElements, options) {
 				const editorState = view.state;
 				const resolvedPos = editorState.doc.resolve(editorState.selection.from);
 				const parentNode = resolvedPos.parent;
-				const inParagraph = parentNode.type.name === "paragraph";
-				const inEmptyPar = inParagraph && parentNode.nodeSize === 2;
+				const parentType = parentNode.type.name;
+				// Allow slash menu in paragraphs and headings
+				const inTextBlock = parentType === "paragraph" || parentType === "heading";
+				const inEmptyBlock = inTextBlock && parentNode.nodeSize === 2;
 				const posInLine = editorState.selection.$head.parentOffset;
-				const prevCharacter = editorState.selection.$head.parent.textContent.slice(posInLine - 1, posInLine);
-				const spaceBeforePos = prevCharacter === " " || prevCharacter === "" || prevCharacter === "　";
+				const textContent = editorState.selection.$head.parent.textContent;
+				const prevCharacter = textContent.slice(posInLine - 1, posInLine);
+				const atLineEnd = posInLine === textContent.length;
+				const spaceBeforePos = prevCharacter === " " || prevCharacter === "" || prevCharacter === "\u3000";
 				return (
 					!state.open &&
-					inParagraph &&
-					(inEmptyPar || spaceBeforePos || (editorState.selection.from !== editorState.selection.to))
+					inTextBlock &&
+					(inEmptyBlock || spaceBeforePos || atLineEnd || (editorState.selection.from !== editorState.selection.to))
 				);
 			},
 			shouldClose: (state, event, view) => {

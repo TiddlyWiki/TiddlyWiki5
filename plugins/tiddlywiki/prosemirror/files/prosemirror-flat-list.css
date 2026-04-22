@@ -12,11 +12,19 @@
   padding: 0;
   margin: 0;
   /* Match typical browser default ul/ol indentation (≈40px) for visual parity
-  with TiddlyWiki-rendered lists below the editor. */
+  with TiddlyWiki-rendered lists below the editor.
+  Top-level lists subtract the ProseMirror editor's padding-left (28px) so that
+  list text aligns with rendered <ul>/<ol> output. Nested lists (inside
+  .list-content) use the full 40px indent since the parent has no extra padding. */
   margin-left: var(--pm-list-indent, 40px);
   position: relative;
   display: list-item;
   list-style: none;
+}
+
+/* Top-level lists: compensate for .ProseMirror padding-left (28px) */
+.ProseMirror > .prosemirror-flat-list {
+  margin-left: calc(var(--pm-list-indent, 40px) - 28px);
 }
 
 /* Match the vertical separation between distinct list blocks in rendered output.

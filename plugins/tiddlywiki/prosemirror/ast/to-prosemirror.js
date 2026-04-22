@@ -597,6 +597,23 @@ function buildOpaqueFromNode(context, node) {
 	};
 }
 
+function voidNode(context, node) {
+	// Typed blocks have parseType attribute (from the typedblock rule)
+	if(node.parseType !== undefined) {
+		var rawText = node.text || "";
+		return {
+			type: "typed_block",
+			attrs: {
+				rawText: rawText,
+				parseType: node.parseType || "",
+				renderType: node.renderType || null
+			}
+		};
+	}
+	// Everything else is a pragma
+	return pragmaNode(context, node);
+}
+
 function pragmaNode(context, node) {
 	// Serialize just this pragma node (without its children, which are the rest of the document)
 	const pragmaCopy = {};
@@ -670,7 +687,7 @@ const builders = {
 	set: pragmaNode,
 	importvariables: pragmaNode,
 	parameters: pragmaNode,
-	"void": pragmaNode
+	"void": voidNode
 };
 
 function wikiAstToProsemirrorAst(node, options) {

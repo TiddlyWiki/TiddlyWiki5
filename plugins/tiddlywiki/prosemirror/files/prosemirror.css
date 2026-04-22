@@ -22,6 +22,15 @@
 
 .tc-prosemirror-wrapper {
   display: block;
+  overflow: hidden;
+}
+
+/* Prevent headings from overflowing the editor boundaries */
+.ProseMirror h1, .ProseMirror h2, .ProseMirror h3,
+.ProseMirror h4, .ProseMirror h5, .ProseMirror h6 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 .tc-prosemirror-addline-btn {
