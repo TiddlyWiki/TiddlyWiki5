@@ -1062,7 +1062,7 @@ describe("Filter tests", function() {
 		});
 	
 		it("should handle the deserializers operator", function() {
-			var expectedDeserializers = ["application/javascript","application/json","application/x-tiddler","application/x-tiddler-html-div","application/x-tiddlers","text/css","text/html","text/plain"];
+			var expectedDeserializers = ["application/javascript","application/json","application/x-tiddler","application/x-tiddler-html-div","application/x-tiddlers","text/css","text/html","text/markdown","text/plain","text/x-markdown"];
 			if($tw.browser) {
 				expectedDeserializers.unshift("(DOM)");
 			}
