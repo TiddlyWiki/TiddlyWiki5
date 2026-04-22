@@ -11,6 +11,11 @@ field with a registered `stringify` method) are converted to TiddlyWiki
 bracketed lists. Non-string, non-array values are stored as their JSON
 representation.
 
+`created` and `modified` in the frontmatter are accepted in either
+TiddlyWiki's native `YYYYMMDDHHMMSSmmm` UTC format or any ISO-8601
+string that `Date()` can parse; both are normalised to TW's native
+format. Values that cannot be parsed are dropped.
+
 \*/
 "use strict";
 
@@ -60,7 +65,10 @@ function deserialize(text,fields) {
 				value = frontmatter[key];
 			// Apply field collision policy
 			if(key === "created" || key === "modified") {
-				// Defer to TiddlyWiki's own timestamps; ignore YAML values
+				var normalised = normaliseDate(value);
+				if(normalised !== null) {
+					result[key] = normalised;
+				}
 				continue;
 			}
 			if(key === "tags" && result[key]) {
@@ -111,6 +119,35 @@ function fieldValueToString(key,value) {
 		return JSON.stringify(value);
 	}
 	return String(value);
+}
+
+/*
+Normalise a frontmatter date value to TiddlyWiki's YYYYMMDDHHMMSSmmm UTC
+format. Accepts TW native strings (14 or 17 digits, optional leading "-"
+for negative years) and anything `Date()` can parse (ISO 8601, RFC 2822,
+Date objects). Returns null if the value cannot be interpreted as a date.
+*/
+function normaliseDate(value) {
+	if(value === null || value === undefined) {
+		return null;
+	}
+	if(typeof value === "string") {
+		if(/^-?\d{14}$/.test(value)) {
+			return value + "000";
+		}
+		if(/^-?\d{17}$/.test(value)) {
+			return value;
+		}
+		var d = new Date(value);
+		if(!isNaN(d.getTime())) {
+			return $tw.utils.stringifyDate(d);
+		}
+		return null;
+	}
+	if(value instanceof Date && !isNaN(value.getTime())) {
+		return $tw.utils.stringifyDate(value);
+	}
+	return null;
 }
 
 /*

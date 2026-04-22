@@ -12,7 +12,8 @@ Markdown file body whose first lines are a YAML frontmatter block
 Field handling:
 - `title` is always emitted (frontmatter wins over filename when reloaded).
 - `text` is the body; not emitted in the frontmatter.
-- `created`, `modified` are skipped (TiddlyWiki manages timestamps via filesystem).
+- `created`, `modified` are emitted as ISO-8601 strings (symmetric with
+  the deserializer, which accepts either ISO-8601 or TW's native format).
 - `type` is skipped when it equals `text/x-markdown` (the default for `.md` files).
 - `bag`, `revision` are skipped (sync metadata, not authored content).
 - List fields (those with a registered `stringify` method) are emitted as YAML arrays.
@@ -26,8 +27,6 @@ var yaml = require("$:/plugins/tiddlywiki/markdown/yaml.js");
 // Field names to skip when emitting frontmatter
 var SKIP_FIELDS = {
 	text: true,
-	created: true,
-	modified: true,
 	bag: true,
 	revision: true
 };
@@ -48,6 +47,13 @@ function serialize(tiddler) {
 			return;
 		}
 		if(name === "type" && value === "text/x-markdown") {
+			return;
+		}
+		if(name === "created" || name === "modified") {
+			var iso = toIsoDate(value);
+			if(iso) {
+				frontmatter[name] = iso;
+			}
 			return;
 		}
 		// List fields → YAML arrays
@@ -72,6 +78,27 @@ function serialize(tiddler) {
 		return body;
 	}
 	return "---\n" + yaml.dump(frontmatter) + "\n---\n\n" + body;
+}
+
+/*
+Convert a TiddlyWiki date field value to an ISO-8601 string. Accepts a
+native `YYYYMMDDHHMMSSmmm` string or a Date. Returns null if the value
+cannot be parsed.
+*/
+function toIsoDate(value) {
+	if(!value) {
+		return null;
+	}
+	var d;
+	if($tw.utils.isDate(value)) {
+		d = value;
+	} else {
+		d = $tw.utils.parseDate(String(value));
+	}
+	if(d && !isNaN(d.getTime())) {
+		return d.toISOString();
+	}
+	return null;
 }
 
 // Register under both types — text/markdown is what the "New Markdown" button

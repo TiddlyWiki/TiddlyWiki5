@@ -163,10 +163,23 @@ describe("markdown YAML frontmatter", function() {
 			// Malformed YAML still parses something; we just ensure body is set
 			expect(result[0].text).toBeDefined();
 		});
-		it("ignores created and modified per collision policy", function() {
-			var result = ds("---\ntitle: T\ncreated: 2026-01-01\nmodified: 2026-02-02\n---\n\nb",{});
+		it("parses ISO-8601 created and modified into TW native format", function() {
+			var result = ds("---\ntitle: T\ncreated: 2025-01-02T03:04:05.006Z\nmodified: 2026-02-03T04:05:06Z\n---\n\nb",{});
+			expect(result[0].created).toBe("20250102030405006");
+			expect(result[0].modified).toBe("20260203040506000");
+		});
+		it("accepts a bare YYYY-MM-DD date for created/modified", function() {
+			var result = ds("---\ntitle: T\ncreated: 2025-03-15\n---\n\nb",{});
+			expect(result[0].created).toBe("20250315000000000");
+		});
+		it("passes through TW native timestamps for created/modified", function() {
+			var result = ds("---\ntitle: T\ncreated: \"20250101000000000\"\nmodified: \"20260101000000\"\n---\n\nb",{});
+			expect(result[0].created).toBe("20250101000000000");
+			expect(result[0].modified).toBe("20260101000000000");
+		});
+		it("drops unparseable created/modified values", function() {
+			var result = ds("---\ntitle: T\ncreated: not-a-date\n---\n\nb",{});
 			expect(result[0].created).toBeUndefined();
-			expect(result[0].modified).toBeUndefined();
 		});
 		it("merges existing tags with frontmatter tags", function() {
 			var result = ds("---\ntags: [b, c]\n---\n\nbody",{tags: "a"});
@@ -204,21 +217,33 @@ describe("markdown YAML frontmatter", function() {
 			expect(out).toContain("- multi word tag");
 			expect(out).toContain("- simple");
 		});
-		it("skips text, created, modified, bag, revision", function() {
+		it("skips text, bag, revision", function() {
 			var t = new $tw.Tiddler({
 				title: "X",
 				text: "body",
-				created: "20260101000000000",
-				modified: "20260101000000000",
 				bag: "default",
 				revision: "1"
 			});
 			var out = ser(t);
-			expect(out).not.toContain("created:");
-			expect(out).not.toContain("modified:");
 			expect(out).not.toContain("bag:");
 			expect(out).not.toContain("revision:");
 			expect(out).not.toContain("text:");
+		});
+		it("emits created and modified as ISO-8601 strings", function() {
+			var t = new $tw.Tiddler({
+				title: "X",
+				text: "b",
+				created: "20250102030405006",
+				modified: "20260203040506000"
+			});
+			var out = ser(t);
+			expect(out).toContain('created: "2025-01-02T03:04:05.006Z"');
+			expect(out).toContain('modified: "2026-02-03T04:05:06.000Z"');
+		});
+		it("drops unparseable created/modified values", function() {
+			var t = new $tw.Tiddler({title: "X", text: "b", created: "garbage"});
+			var out = ser(t);
+			expect(out).not.toContain("created:");
 		});
 		it("skips type when it equals text/x-markdown", function() {
 			var t = new $tw.Tiddler({title: "X", type: "text/x-markdown", text: "b"});
@@ -261,6 +286,15 @@ describe("markdown YAML frontmatter", function() {
 			expect(reparsed.tags).toBe("concept synthesis");
 			expect(reparsed.rating).toBe("7");
 			expect(reparsed.text).toBe("This is the body.");
+		});
+		it("preserves created and modified across deserialize → serialize", function() {
+			var input = "---\ntitle: T\ncreated: 2025-01-02T03:04:05.006Z\nmodified: 2026-02-03T04:05:06.007Z\n---\n\nbody";
+			var fields = ds(input,{})[0];
+			var t = new $tw.Tiddler(fields);
+			var out = ser(t);
+			var reparsed = ds(out,{})[0];
+			expect(reparsed.created).toBe("20250102030405006");
+			expect(reparsed.modified).toBe("20260203040506007");
 		});
 	});
 
