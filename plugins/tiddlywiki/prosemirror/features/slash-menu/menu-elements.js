@@ -8,6 +8,7 @@ Exports functions to get all menu elements for SlashMenu (default + snippets + E
 
 "use strict";
 
+const TextSelection = require("prosemirror-state").TextSelection;
 const parseWidget = require("$:/plugins/tiddlywiki/prosemirror/blocks/widget/utils.js").parseWidget;
 const scheduleEnterWidgetBlockEditModeNearSelection = require("$:/plugins/tiddlywiki/prosemirror/blocks/widget/actions.js").scheduleEnterWidgetBlockEditModeNearSelection;
 
@@ -76,6 +77,18 @@ function getBuiltinActionCommands(schema) {
 			const tr = view.state.tr.replaceSelectionWith(table);
 			view.dispatch(tr.scrollIntoView());
 			view.focus();
+			requestAnimationFrame(function() {
+				const firstCell = view.dom.querySelector("table td p, table td, table th p, table th");
+				if(!firstCell) return;
+				try {
+					const pos = view.posAtDOM(firstCell, 0);
+					const focusTr = view.state.tr.setSelection(TextSelection.near(view.state.doc.resolve(pos + 1), 1));
+					view.dispatch(focusTr.scrollIntoView());
+					view.focus();
+				} catch(e) {
+					view.focus();
+				}
+			});
 			return true;
 		},
 		"hard-line-breaks": view => {

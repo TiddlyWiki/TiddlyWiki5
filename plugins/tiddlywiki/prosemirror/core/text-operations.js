@@ -87,13 +87,13 @@ function handleTextOperation(engine, event) {
 	}
 
 	if(param === "prefix-lines" && paramObj.character === "*" && schema.nodes.list) {
-		flatListCommands.createWrapInListCommand({ kind: "bullet" })(state, dispatch);
+		flatListCommands.createToggleListCommand({ kind: "bullet" })(state, dispatch);
 		view.focus();
 		return true;
 	}
 
 	if(param === "prefix-lines" && paramObj.character === "#" && schema.nodes.list) {
-		flatListCommands.createWrapInListCommand({ kind: "ordered" })(state, dispatch);
+		flatListCommands.createToggleListCommand({ kind: "ordered" })(state, dispatch);
 		view.focus();
 		return true;
 	}

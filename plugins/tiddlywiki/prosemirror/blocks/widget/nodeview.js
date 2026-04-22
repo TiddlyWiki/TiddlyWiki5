@@ -204,12 +204,12 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 		return true;
 	}
 
-	stopEvent() {
+	stopEvent(event) {
 		// Only stop events when in widget mode (editing textarea, etc.)
 		if(!this.widgetInfo) {
 			return false;
 		}
-		return this.isEditMode;
+		return this.shouldStopControlEvent(event) || this.isEditMode;
 	}
 }
 

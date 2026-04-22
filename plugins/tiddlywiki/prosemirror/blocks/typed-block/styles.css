@@ -36,6 +36,7 @@ Styles for typed block ($$$) NodeView in ProseMirror.
 	font-family: monospace;
 	font-size: 12px;
 	padding: 1px 4px;
+	min-width: 8rem;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	background: white;

@@ -314,6 +314,7 @@ class ProseMirrorEngine {
 	}
 
 	destroy() {
+		if(this.sourcePanel && this.sourcePanel.flushPendingSync) this.sourcePanel.flushPendingSync();
 		if(this.debouncedSave && this.debouncedSave.flush) this.debouncedSave.flush();
 		if(this.bubbleMenu) { this.bubbleMenu.destroy(); this.bubbleMenu = null; }
 		if(this.slashMenuUI) { this.slashMenuUI.destroy(); this.slashMenuUI = null; }

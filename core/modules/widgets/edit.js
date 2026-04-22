@@ -64,6 +64,9 @@ EditWidget.prototype.getEditorType = function() {
 	if(editorType) {
 		editorType = editorType.trim();
 	}
+	if(editorType === "prosemirror" && !$tw.browser) {
+		editorType = "text";
+	}
 	if(!editorType) {
 		var typeInfo = $tw.config.contentTypeInfo[type];
 		if(typeInfo && typeInfo.encoding === "base64") {

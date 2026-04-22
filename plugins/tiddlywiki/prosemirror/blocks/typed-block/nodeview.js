@@ -121,6 +121,7 @@ function TypedBlockNodeView(node, view, getPos) {
 TypedBlockNodeView.prototype._populateSelect = function(select, currentType) {
 	while(select.firstChild) select.removeChild(select.firstChild);
 	var found = false;
+	var selectedIndex = -1;
 	for(var i = 0; i < COMMON_TYPES.length; i++) {
 		var opt = document.createElement("option");
 		opt.value = COMMON_TYPES[i].value;
@@ -128,6 +129,7 @@ TypedBlockNodeView.prototype._populateSelect = function(select, currentType) {
 		if(COMMON_TYPES[i].value === currentType) {
 			opt.selected = true;
 			found = true;
+			selectedIndex = i;
 		}
 		select.appendChild(opt);
 	}
@@ -138,6 +140,14 @@ TypedBlockNodeView.prototype._populateSelect = function(select, currentType) {
 		custom.textContent = currentType;
 		custom.selected = true;
 		select.insertBefore(custom, select.firstChild);
+		selectedIndex = 0;
+	}
+	select.value = currentType || "";
+	if(select.selectedIndex === -1 && selectedIndex !== -1) {
+		select.selectedIndex = selectedIndex;
+	}
+	if(select.selectedIndex !== -1) {
+		select.title = select.options[select.selectedIndex].textContent || "";
 	}
 };
 
