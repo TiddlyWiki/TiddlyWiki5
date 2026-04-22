@@ -63,12 +63,11 @@ describe("ProseMirror menu-elements tests", () => {
 			expect(actionItems.length).toBeGreaterThan(0);
 		});
 
-		it("should include block-type submenu", () => {
+		it("should include block-type category items", () => {
 			const schema = buildSchema();
 			const elements = getAllMenuElements($tw.wiki, schema);
-			const blockTypeSubmenu = elements.find(e => e && e.id === "blocktype-submenu");
-			expect(blockTypeSubmenu).toBeDefined();
-			expect(blockTypeSubmenu.type).toBe("submenu");
+			const blockTypeItems = elements.filter(e => e && e.category === "block-type" && e.type === "command");
+			expect(blockTypeItems.length).toBeGreaterThan(0);
 		});
 	});
 

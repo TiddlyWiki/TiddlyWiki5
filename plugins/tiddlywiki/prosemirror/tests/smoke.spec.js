@@ -74,7 +74,7 @@ test.describe("ProseMirror Editor - Smoke Tests", () => {
 	test("should open tiddler in edit mode with ProseMirror", async ({ page }) => {
 		await loadTestPage(page);
 		
-		// Create and edit a tiddler
+		// Create a tiddler and open it in the story
 		await page.evaluate(() => {
 			$tw.wiki.addTiddler({
 				title: "EditTestTiddler",
@@ -87,13 +87,15 @@ test.describe("ProseMirror Editor - Smoke Tests", () => {
 				title: "$:/StoryList",
 				list: ["EditTestTiddler"].concat(storyList)
 			});
-			
-			// Trigger edit mode
-			$tw.rootWidget.dispatchEvent({
-				type: "tm-edit-tiddler",
-				tiddlerTitle: "EditTestTiddler"
-			});
 		});
+
+		const tiddlerFrame = page.locator('.tc-tiddler-frame[data-tiddler-title="EditTestTiddler"]').first();
+		await expect(tiddlerFrame).toBeVisible({ timeout: 5000 });
+
+		// Enter edit mode through the real UI so the smoke test matches user behavior
+		const editButton = tiddlerFrame.locator('button[title*="Edit this tiddler"]').first();
+		await expect(editButton).toBeVisible({ timeout: 5000 });
+		await editButton.click();
 		
 		// Wait for edit frame
 		await page.waitForSelector(".tc-tiddler-edit-frame", { timeout: 5000 });

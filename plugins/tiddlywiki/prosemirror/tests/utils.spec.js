@@ -5,11 +5,6 @@ test.describe("Widget Block Utils", () => {
 		await page.goto("about:blank");
 		
 		const result = await page.evaluate(() => {
-			// Mock TiddlyWiki environment if needed
-			if(typeof $tw === "undefined") {
-				global.$tw = { wiki: {} };
-			}
-			
 			// Import and test parseWidget function
 			// Note: This would require the module to be accessible in browser context
 			const parseWidget = text => {
@@ -106,7 +101,7 @@ test.describe("Keyboard Shortcut Configuration", () => {
 		
 		const result = await page.evaluate(() => {
 			// Mock TiddlyWiki
-			global.$tw = {
+			globalThis.$tw = {
 				wiki: {
 					getTiddlerText: () => ""
 				}
@@ -133,7 +128,7 @@ test.describe("Keyboard Shortcut Configuration", () => {
 		await page.goto("about:blank");
 		
 		const result = await page.evaluate(() => {
-			global.$tw = {
+			globalThis.$tw = {
 				wiki: {
 					getTiddlerText: () => "none"
 				}
@@ -160,7 +155,7 @@ test.describe("Keyboard Shortcut Configuration", () => {
 		await page.goto("about:blank");
 		
 		const result = await page.evaluate(() => {
-			global.$tw = {
+			globalThis.$tw = {
 				wiki: {
 					getTiddlerText: () => "Ctrl-Alt-b"
 				}
