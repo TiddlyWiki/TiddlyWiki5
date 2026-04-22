@@ -58,10 +58,8 @@ exports.stringifyNumber = function(num) {
 	return num + "";
 };
 
-/*
-Useful for finding out the fully escaped CSS selector equivalent to a given tag. For example:
-$tw.utils.tagToCssSelector("$:/tags/Stylesheet") --> tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet
-*/
+// Returns the fully escaped CSS selector for a tag, e.g.
+// "$:/tags/Stylesheet" -> "tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet" 
 exports.tagToCssSelector = function(tagName) {
 	return "tc-tagged-" + encodeURIComponent(tagName).replace(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^`{\|}~,]/mg,function(c) {
 		return "\\" + c;
@@ -82,10 +80,9 @@ exports.hasClass = function(el,className) {
 	return !!(el && el.classList && el.classList.contains(className));
 };
 
-// addClass/removeClass/toggleClass use classList with whitespace-token support,
-// matching the behaviour of the original setAttribute("class", ...) code which
-// accepted multi-token class strings like "foo bar". See
-// https://github.com/TiddlyWiki/TiddlyWiki5/pull/9251 regression fix.
+// addClass/removeClass/toggleClass split on whitespace to preserve the
+// original setAttribute("class", ...) acceptance of "foo bar" as two
+// classes. Regressed in #9251.
 function splitClasses(className) {
 	return (typeof className === "string" && className.match(/\S+/g)) || [];
 }

@@ -5,20 +5,14 @@ tags: [[$:/tags/test-spec]]
 
 Regression-guard tests for $:/core/modules/utils/deprecated.js.
 
-The purpose of deprecated.js is to keep the pre-5.4.0 helper API behaving
-exactly as it did, so plugins and external scripts that relied on the
-tolerant old behaviour keep working. PR #9251 simplified several helpers to
-one-line modern equivalents that diverge on edge-case inputs; these tests
-lock in the old behaviour.
+Locks in pre-5.4.0 tolerant behaviour of $tw.utils helpers that regressed
+in PR #9251 (one-line modern equivalents diverge on edge-case inputs).
+Without the companion restoration patch to core/modules/utils/deprecated.js:
+8 specs fail. With the patch: green.
 
-If you pull this file on a branch WITHOUT the companion restoration patch to
-core/modules/utils/deprecated.js, the behavioural backwards-compat specs
-below will fail. After applying the patch, they go green.
-
-The addClass/removeClass/toggleClass specs at the end are the pre-existing
-RSOD regression guards for the SampleWizard report (class field "aaa bbb"
-triggering InvalidCharacterError from classList.add) — moved here from
-test-utils.js to colocate all deprecated.js coverage.
+The addClass/removeClass/toggleClass specs at the end were moved from
+test-utils.js — RSOD guard for the SampleWizard report (class field
+"aaa bbb" crashing classList.add with InvalidCharacterError).
 
 \*/
 
@@ -119,10 +113,9 @@ describe("deprecated.js — backwards-compat",function() {
 		});
 	});
 
-	// getLocationPath reads window.location. In Node the TW5 module sandbox
-	// has no `window`, so the specs pend. In the browser we use
-	// history.replaceState to change the URL WITHOUT navigating — assigning to
-	// window.location directly would trigger a navigation and reload.
+	// getLocationPath reads window.location: specs pend in Node (no `window`
+	// in the TW5 sandbox) and use history.replaceState in the browser —
+	// assigning to window.location would trigger a navigation and reload.
 	describe("$tw.utils.getLocationPath",function() {
 		var originalUrl;
 		beforeEach(function() {
@@ -160,11 +153,10 @@ describe("deprecated.js — backwards-compat",function() {
 		});
 	});
 
-	// Regression guard: classList.add/remove/toggle throw InvalidCharacterError on whitespace.
-	// Manual repro: open tw5-com #SampleWizard, set `class` field to "aaa bbb", Done,
-	// open the popup -> OK -> open nested popup -> RSOD without this fix.
-	// Stubbed classList mimics the real DOM: it rejects any whitespace in a token,
-	// de-duplicates on add, and no-ops on remove of a missing token.
+	// Regression guard: classList.add/remove/toggle throw InvalidCharacterError on
+	// whitespace. Manual repro: tw5-com #SampleWizard, class="aaa bbb", Done, popup
+	// -> OK -> nested popup -> RSOD. Stub classList mirrors real DOM semantics
+	// (reject whitespace, de-dupe on add, no-op on remove of missing token).
 	describe("addClass/removeClass/toggleClass",function() {
 		function makeEl() {
 			var tokens = [];
