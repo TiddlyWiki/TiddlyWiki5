@@ -116,6 +116,14 @@ if(!$tw.browser) {
 			expect(result).toContain("That is set like");
 		});
 
+		it("should round-trip typed block", () => {
+			const input = '$$$application/javascript\nconsole.log("test");\n$$$';
+			const result = roundTrip(input);
+			expect(result).toContain("$$$application/javascript");
+			expect(result).toContain('console.log("test");');
+			expect(result).toContain("$$$");
+		});
+
 		it("should round-trip horizontal rule", () => {
 			const input = "text above\n\n---\n\ntext below";
 			const result = roundTrip(input);
