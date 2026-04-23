@@ -29,7 +29,6 @@ const { createTypedBlockNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosem
 const { createDragHandlePlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/drag-handle.js");
 const { createBlockPlaceholderPlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/block-placeholder.js");
 const { createLinkTooltipPlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/link-tooltip.js");
-const { BubbleMenu } = require("$:/plugins/tiddlywiki/prosemirror/features/bubble-menu.js");
 const { getMarkdownInputRules } = require("$:/plugins/tiddlywiki/prosemirror/features/markdown-shortcuts.js");
 const { createAutocompletePlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/autocomplete.js");
 const { createFindReplacePlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/find-replace.js");
@@ -81,9 +80,8 @@ function buildPlugins(schema, wiki, nodeViewHost) {
 	.concat(mdPlugin)
 	.concat(listPlugins)
 	.concat(tablePlugins)
-	.concat(exampleSetup({ schema }));
+	.concat(exampleSetup({ schema, menuBar: false }));
 }
 
 exports.buildPlugins = buildPlugins;
-exports.BubbleMenu = BubbleMenu;
 exports.SlashMenuUI = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/ui.js").SlashMenuUI;

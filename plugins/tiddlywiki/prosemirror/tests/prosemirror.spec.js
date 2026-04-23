@@ -1147,6 +1147,45 @@ test.describe("ProseMirror Editor - Drag Handle", () => {
 
 		await expect(dragHandle).not.toBeVisible();
 	});
+
+	test("drag handle should remain reachable while moving from block to handle", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "First paragraph\n\nSecond paragraph"
+		});
+
+		const firstP = editor.locator("p").first();
+		await firstP.hover();
+		await page.waitForTimeout(250);
+
+		const dragHandle = page.locator(".tc-prosemirror-drag-handle");
+		await expect(dragHandle).toBeVisible();
+
+		const blockBox = await firstP.boundingBox();
+		const handleBox = await dragHandle.boundingBox();
+		expect(blockBox).toBeTruthy();
+		expect(handleBox).toBeTruthy();
+
+		await page.mouse.move(blockBox.x + 8, blockBox.y + blockBox.height / 2);
+		await page.mouse.move(handleBox.x + handleBox.width / 2, handleBox.y + handleBox.height / 2, {
+			steps: 8
+		});
+		await page.waitForTimeout(150);
+
+		await expect(dragHandle).toBeVisible();
+	});
+
+	test("should show drag handle for typed block nodeviews", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: '$$$text/x-markdown\n# Heading\n$$$'
+		});
+
+		const typedBlock = editor.locator(".pm-nodeview-typedblock").first();
+		await expect(typedBlock).toBeVisible({ timeout: 5000 });
+		await typedBlock.hover();
+		await page.waitForTimeout(250);
+
+		await expect(page.locator(".tc-prosemirror-drag-handle")).toBeVisible();
+	});
 });
 
 test.describe("ProseMirror Editor - Find & Replace", () => {
@@ -1763,6 +1802,30 @@ test.describe("ProseMirror Editor - Bubble Menu", () => {
 // Source Panel
 // ─────────────────────────────────────────────────────────────────────────────
 test.describe("ProseMirror Editor - Source Panel", () => {
+	function getSourcePanel(editor) {
+		return editor.locator('xpath=ancestor::div[contains(concat(" ", normalize-space(@class), " "), " tc-prosemirror-wrapper ")][1]')
+			.locator(".tc-prosemirror-source-panel textarea");
+	}
+
+	async function getEngineForEditor(editor) {
+		await editor.evaluate(el => {
+			const viewEl = el.closest(".ProseMirror") || el;
+			function findAllEngines(widget) {
+				const results = [];
+				if(widget && widget.engine && widget.engine.view) results.push(widget.engine);
+				if(widget && widget.children) {
+					for(const child of widget.children) {
+						results.push.apply(results, findAllEngines(child));
+					}
+				}
+				return results;
+			}
+			const engine = findAllEngines($tw.rootWidget).find(e => e.view && e.view.dom === viewEl);
+			if(!engine) throw new Error("ProseMirror engine not found");
+			el.__pmEngineForTest = engine;
+		});
+	}
+
 	async function toggleSourcePanel(editor) {
 		await editor.evaluate(el => {
 			const viewEl = el.closest(".ProseMirror") || el;
@@ -1791,7 +1854,7 @@ test.describe("ProseMirror Editor - Source Panel", () => {
 			}]
 		});
 
-		const sourcePanel = page.locator(".tc-prosemirror-source-panel textarea").first();
+		const sourcePanel = getSourcePanel(editor);
 		await expect(sourcePanel).toBeVisible({ timeout: 5000 });
 		const sourceText = await sourcePanel.inputValue();
 		expect(sourceText).toContain("Bold");
@@ -1806,7 +1869,7 @@ test.describe("ProseMirror Editor - Source Panel", () => {
 			}]
 		});
 
-		const sourcePanel = page.locator(".tc-prosemirror-source-panel textarea").first();
+		const sourcePanel = getSourcePanel(editor);
 		await expect(sourcePanel).toBeVisible({ timeout: 5000 });
 		await sourcePanel.fill("''New bold text''");
 		await page.waitForTimeout(700);
@@ -1826,7 +1889,7 @@ test.describe("ProseMirror Editor - Source Panel", () => {
 			}]
 		});
 
-		const sourcePanel = page.locator(".tc-prosemirror-source-panel textarea").first();
+		const sourcePanel = getSourcePanel(editor);
 		await expect(sourcePanel).toBeVisible({ timeout: 5000 });
 		await expect(await sourcePanel.inputValue()).toContain("Start");
 
@@ -1838,6 +1901,25 @@ test.describe("ProseMirror Editor - Source Panel", () => {
 
 		const savedText = await page.evaluate(() => $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/example", ""));
 		expect(savedText.trim()).toBe("Fresh from editor");
+	});
+
+	test("should also show source panel when edit preview is enabled", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "Preview me"
+		});
+
+		// The readme harness is not a full edit template, so toggle the same preview
+		// state tiddler that Alt+P would change in normal edit mode.
+		await getEngineForEditor(editor);
+		await editor.evaluate(el => {
+			const engine = el.__pmEngineForTest;
+			if(!engine || !engine.sourcePanel) throw new Error("ProseMirror engine/source panel not found");
+			const previewStateTitle = engine.sourcePanel.getPreviewStateTiddler();
+			engine.widget.wiki.setText(previewStateTitle, null, null, "yes");
+		});
+		await page.waitForTimeout(400);
+
+		await expect(getSourcePanel(editor)).toBeVisible({ timeout: 5000 });
 	});
 });
 
@@ -2041,6 +2123,27 @@ test.describe("ProseMirror Editor - Drag Handle Extended", () => {
 
 		const blockMenu = page.locator(".tc-prosemirror-block-menu");
 		await expect(blockMenu).toBeVisible();
+	});
+
+	test("block menu should reuse slash menu commands for typed blocks", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "Test paragraph"
+		});
+
+		const firstP = editor.locator("p").first();
+		await firstP.hover();
+		await page.waitForTimeout(300);
+
+		const dragHandle = page.locator(".tc-prosemirror-drag-handle");
+		await expect(dragHandle).toBeVisible();
+		await dragHandle.click();
+
+		const blockMenu = page.locator(".tc-prosemirror-block-menu");
+		await expect(blockMenu).toBeVisible();
+
+		const searchInput = blockMenu.locator(".tc-prosemirror-block-menu-search");
+		await searchInput.fill("markdown");
+		await expect(blockMenu.locator(".tc-prosemirror-block-menu-item", { hasText: "$$$ Markdown" })).toBeVisible();
 	});
 });
 

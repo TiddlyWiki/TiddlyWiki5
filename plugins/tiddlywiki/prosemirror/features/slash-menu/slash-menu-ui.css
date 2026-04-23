@@ -3,10 +3,11 @@
 	position: absolute;
 	display: flex;
 	flex-direction: column;
-	max-height: 200px;
+	max-height: 280px;
 	width: 250px;
 	z-index: 1000;
-	overflow-y: auto;
+	/* outer container is NOT scrollable; the filter row stays pinned at the top */
+	overflow: hidden;
 	border-radius: 6px;
 	border: 1px solid transparent;
 	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -14,6 +15,7 @@
 }
 
 .tw-slash-menu-filter-wrapper {
+	flex: 0 0 auto;
 	display: flex;
 	padding: 8px 12px;
 	border-bottom: 1px solid transparent;
@@ -25,6 +27,9 @@
 }
 
 .tw-slash-menu-content {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow-y: auto;
 	padding: 4px;
 }
 

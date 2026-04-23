@@ -16,6 +16,16 @@ const NodeSelection = require("prosemirror-state").NodeSelection;
 const DOMSerializer = require("prosemirror-model").DOMSerializer;
 const pmCommands = require("prosemirror-commands");
 const flatListCommands = require("prosemirror-flat-list");
+const slashMenuElements = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/menu-elements.js");
+
+const HANDLE_POINTER_BRIDGE = 28;
+const INLINE_SLASH_ACTION_IDS = {
+	"action-bold": true,
+	"action-italic": true,
+	"action-underline": true,
+	"action-strikethrough": true,
+	"action-code-inline": true
+};
 
 // Language helper — reads from TW language tiddlers with fallback
 function lang(suffix, fallback) {
@@ -48,6 +58,19 @@ const posInfo = view.posAtCoords(coords);
 if(!posInfo) return null;
 
 try {
+// Check posInfo.inside first — handles atom nodeviews like typed_block, pragma_block
+if(posInfo.inside >= 0) {
+try {
+const innerNode = view.state.doc.nodeAt(posInfo.inside);
+if(innerNode && innerNode.isBlock) {
+const innerDom = view.nodeDOM(posInfo.inside);
+if(innerDom && innerDom.nodeType === 1) {
+return { pos: posInfo.inside, node: innerNode, dom: innerDom, depth: 1 };
+}
+}
+} catch(ex) { /* ignore */ }
+}
+
 // Always resolve using posInfo.pos (the text-level position).
 // posInfo.inside can land on node boundaries (depth 0) which breaks depth walking.
 const $pos = view.state.doc.resolve(posInfo.pos);
@@ -126,6 +149,7 @@ let menuVisible = false;
 let destroyed = false;
 const pendingTimers = [];
 let dragWrapper = null;
+let removeDocumentMousemove = null;
 
 function safeTimeout(fn, delay) {
 const id = setTimeout(() => {
@@ -135,6 +159,28 @@ if(!destroyed) fn();
 }, delay);
 pendingTimers.push(id);
 return id;
+}
+
+function isPointerNearHandle(event) {
+if(!handle || handle.style.display === "none" || !event) return false;
+const rect = handle.getBoundingClientRect();
+return event.clientX >= rect.left - HANDLE_POINTER_BRIDGE &&
+	event.clientX <= rect.right + 8 &&
+	event.clientY >= rect.top - 12 &&
+	event.clientY <= rect.bottom + 12;
+}
+
+function onDocumentMouseMove(event) {
+if(destroyed || menuVisible || !currentView) return;
+const info = findBlockAtCoords(currentView, { left: event.clientX, top: event.clientY });
+if(info) {
+	showHandle(currentView, info);
+	return;
+}
+if(isPointerNearHandle(event)) return;
+if(handle && handle.matches(":hover")) return;
+if(menuEl && menuEl.matches(":hover")) return;
+hideHandle();
 }
 
 function createHandle() {
@@ -202,7 +248,14 @@ dragWrapper.style.left = "-9999px";
 document.body.appendChild(dragWrapper);
 e.dataTransfer.setDragImage(dragWrapper, 0, 0);
 e.dataTransfer.effectAllowed = "move";
+// Prime PM's drop handler with our slice so it can move the block when
+// the drop lands inside the editor.
 currentView.dragging = { slice: slice, move: true };
+// Tell the host TiddlyWiki dropzone widgets that THIS window is the
+// drag source. Without this flag the page-level dropzone catches the
+// dragenter and renders the global "Drop Here" overlay, which also
+// swallows the eventual drop event.
+$tw.dragInProgress = el;
 } catch(ex) {
 // Fallback: let PM handle naturally
 }
@@ -213,6 +266,9 @@ if(dragWrapper && dragWrapper.parentNode) {
 dragWrapper.parentNode.removeChild(dragWrapper);
 }
 dragWrapper = null;
+if($tw.dragInProgress === el) {
+	$tw.dragInProgress = null;
+}
 });
 
 el.addEventListener("mouseleave", (e) => {
@@ -251,13 +307,13 @@ const editorBox = view.dom.getBoundingClientRect();
 const rtl = isRTL();
 
 if(rtl) {
-// For RTL, position inside the editor's right padding area
-const handleRight = editorBox.right - 24 + window.scrollX;
+// Keep the handle close enough to the hovered block edge.
+const handleRight = Math.max(editorBox.right - 18, box.right + 18) + window.scrollX;
 handle.style.left = "";
 handle.style.right = (window.innerWidth - handleRight) + "px";
 } else {
-// Position at the left edge of the editor content area
-const handleLeft = editorBox.left + 2 + window.scrollX;
+// Keep the handle close enough to the hovered block edge.
+const handleLeft = Math.max(editorBox.left - 10, box.left - 18) + window.scrollX;
 handle.style.right = "";
 handle.style.left = handleLeft + "px";
 }
@@ -417,6 +473,50 @@ items[nextIdx].classList.add("tc-prosemirror-block-menu-item-focused");
 items[nextIdx].scrollIntoView({ block: "nearest" });
 }
 
+function isEligibleSlashMenuItem(element) {
+if(!element || element.type !== "command" || INLINE_SLASH_ACTION_IDS[element.id]) {
+	return false;
+}
+if(typeof element.available === "function" && !element.available()) {
+	return false;
+}
+return true;
+}
+
+function buildSlashMenuActions(view, schema, safeAction) {
+const flattened = slashMenuElements.flattenMenuElementsWithGroup(
+	slashMenuElements.getAllMenuElements($tw.wiki, schema)
+);
+const actions = [];
+const seen = Object.create(null);
+let previousWasGroup = true;
+for(let i = 0; i < flattened.length; i++) {
+	const element = flattened[i];
+	if(!element) continue;
+	if(element.type === "group") {
+		if(previousWasGroup) continue;
+		actions.push({ type: "group", label: element.label });
+		previousWasGroup = true;
+		continue;
+	}
+	if(!isEligibleSlashMenuItem(element) || seen[element.id]) continue;
+	seen[element.id] = true;
+	actions.push({
+		label: element.label,
+		icon: element.icon && element.icon.indexOf("$:/") !== 0 ? element.icon : null,
+		iconTiddler: element.icon && element.icon.indexOf("$:/") === 0 ? element.icon : null,
+		action: safeAction(() => {
+			element.command(view);
+		})
+	});
+	previousWasGroup = false;
+}
+while(actions.length > 0 && actions[actions.length - 1].type === "group") {
+	actions.pop();
+}
+return actions;
+}
+
 function getBlockActions(view, schema, origPos, origNode) {
 const actions = [];
 
@@ -438,59 +538,7 @@ view.focus();
 };
 }
 
-actions.push({ type: "group", label: lang("TurnInto", "Turn into") });
-
-if(schema.nodes.paragraph && origNode.type !== schema.nodes.paragraph) {
-actions.push({
-label: lang("Paragraph", "Paragraph"),
-icon: "¶",
-action: safeAction(() => {
-pmCommands.setBlockType(schema.nodes.paragraph)(view.state, view.dispatch);
-})
-});
-}
-
-for(let level = 1; level <= 6; level++) {
-((lvl) => {
-if(schema.nodes.heading && !(origNode.type === schema.nodes.heading && origNode.attrs.level === lvl)) {
-actions.push({
-label: lang("Heading", "Heading") + " " + lvl,
-icon: "H" + lvl,
-action: safeAction(() => {
-pmCommands.setBlockType(schema.nodes.heading, { level: lvl })(view.state, view.dispatch);
-})
-});
-}
-})(level);
-}
-
-if(schema.nodes.code_block && origNode.type !== schema.nodes.code_block) {
-actions.push({
-label: lang("CodeBlock", "Code block"),
-icon: "</>",
-action: safeAction(() => {
-pmCommands.setBlockType(schema.nodes.code_block)(view.state, view.dispatch);
-})
-});
-}
-
-if(schema.nodes.blockquote) {
-actions.push({
-label: lang("Blockquote", "Blockquote"),
-icon: "\u00AB",
-iconTiddler: "$:/core/images/quote",
-action: safeAction(() => {
-const $from = view.state.selection.$from;
-for(let d = $from.depth; d > 0; d--) {
-if($from.node(d).type === schema.nodes.blockquote) {
-pmCommands.lift(view.state, view.dispatch);
-return;
-}
-}
-pmCommands.wrapIn(schema.nodes.blockquote)(view.state, view.dispatch);
-})
-});
-}
+actions.push.apply(actions, buildSlashMenuActions(view, schema, safeAction));
 
 if(origNode.type.name === "list") {
 actions.push({ type: "group", label: lang("List", "List") });
@@ -674,7 +722,10 @@ const info = findBlockAtCoords(view, { left: event.clientX, top: event.clientY }
 if(info) {
 showHandle(view, info);
 } else {
+// Don't hide while the pointer is travelling from the block toward the handle/menu.
+if((!handle || !handle.matches(":hover")) && !isPointerNearHandle(event)) {
 hideHandle();
+}
 }
 return false;
 },
@@ -687,6 +738,7 @@ safeTimeout(() => {
 	// Re-check: if mouse is now over the handle or menu, don't hide
 	if(handle && handle.matches(":hover")) return;
 	if(menuEl && menuEl.matches(":hover")) return;
+	if(isPointerNearHandle(event)) return;
 	if(menuVisible) return;
 	hideHandle();
 }, 150);
@@ -699,8 +751,13 @@ return false;
 }
 },
 view: function() {
+if(!removeDocumentMousemove) {
+	document.addEventListener("mousemove", onDocumentMouseMove, true);
+	removeDocumentMousemove = () => document.removeEventListener("mousemove", onDocumentMouseMove, true);
+}
 return {
 update: (view) => {
+currentView = view;
 if(menuVisible && currentBlockPos !== null && currentBlockNode !== null) {
 const resolved = resolveCurrentBlock(view, currentBlockPos, currentBlockNode);
 if(!resolved) {
@@ -724,6 +781,10 @@ handle.parentNode.removeChild(handle);
 }
 if(menuEl && menuEl.parentNode) {
 menuEl.parentNode.removeChild(menuEl);
+}
+if(removeDocumentMousemove) {
+	removeDocumentMousemove();
+	removeDocumentMousemove = null;
 }
 handle = null;
 menuEl = null;

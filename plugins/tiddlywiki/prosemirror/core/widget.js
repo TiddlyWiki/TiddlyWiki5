@@ -12,7 +12,7 @@ const { debounce } = require("$:/core/modules/utils/debounce.js");
 const { from: wikiAstFromProseMirrorAst } = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js");
 const { to: wikiAstToProseMirrorAst } = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js");
 const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/core/schema.js");
-const { buildPlugins, BubbleMenu, SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
+const { buildPlugins, SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
 const { computeImageSrc } = require("$:/plugins/tiddlywiki/prosemirror/blocks/image/utils.js");
 
 const { EditorState, TextSelection, NodeSelection } = require("prosemirror-state");
@@ -66,7 +66,6 @@ render(parent, nextSibling) {
 			this.view.updateState(newState);
 			if(this.imagePickerOpen) this.updateImagePickerFromSelection();
 			if(this.slashMenuUI) this.slashMenuUI.checkState();
-			if(this.bubbleMenu) this.bubbleMenu.update(this.view);
 			if(transaction.docChanged) this.debouncedSaveEditorContent();
 		}
 	});
@@ -83,7 +82,6 @@ render(parent, nextSibling) {
 
 	this._buildAddLineButton(outerWrap);
 	this.slashMenuUI = new SlashMenuUI(this.view, { clickable: true });
-	this.bubbleMenu = new BubbleMenu(this.view, schema);
 
 	this.addEventListener("tm-prosemirror-image-picked", "handleProseMirrorImagePicked");
 	this.addEventListener("tm-prosemirror-image-picked-nodeview", "handleProseMirrorImagePickedNodeView");
@@ -358,7 +356,6 @@ onDestroy() {
 		try { this.saveEditorContent(); } catch(e) { /* ignore */ }
 	}
 	if(this.slashMenuUI) { this.slashMenuUI.destroy(); this.slashMenuUI = null; }
-	if(this.bubbleMenu) { this.bubbleMenu.destroy(); this.bubbleMenu = null; }
 	if(this.view) { this.view.destroy(); this.view = null; }
 }
 

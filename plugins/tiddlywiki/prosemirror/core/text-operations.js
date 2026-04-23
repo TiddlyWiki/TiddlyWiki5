@@ -148,7 +148,7 @@ function handleTextOperation(engine, event) {
 	}
 
 	if(param === "focus-editor") {
-		view.focus();
+		engine.focus();
 		return true;
 	}
 

@@ -15,7 +15,7 @@ const HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
 const wikiAstFromProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js").from;
 const wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js").to;
 const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/core/schema.js");
-const { buildPlugins, BubbleMenu, SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
+const { buildPlugins, SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
 const { handleTextOperation } = require("$:/plugins/tiddlywiki/prosemirror/core/text-operations.js");
 const { SourcePanel } = require("$:/plugins/tiddlywiki/prosemirror/core/source-panel.js");
 
@@ -49,7 +49,6 @@ class ProseMirrorEngine {
 		this._attachEventHandlers();
 
 		this.slashMenuUI = new SlashMenuUI(this.view, { clickable: true });
-		this.bubbleMenu = new BubbleMenu(this.view, this.schema);
 
 		this._buildAddLineButton();
 
@@ -112,7 +111,6 @@ class ProseMirrorEngine {
 				const newState = this.view.state.apply(transaction);
 				this.view.updateState(newState);
 				if(this.slashMenuUI) this.slashMenuUI.checkState();
-				if(this.bubbleMenu) this.bubbleMenu.update(this.view);
 				if(transaction.docChanged) this.debouncedSave();
 			}
 		});
@@ -234,6 +232,9 @@ class ProseMirrorEngine {
 	}
 
 	focus() {
+		if(this.sourcePanel && this.sourcePanel.syncWithPreviewState) {
+			this.sourcePanel.syncWithPreviewState();
+		}
 		if(this.view) this.view.focus();
 	}
 
@@ -315,8 +316,8 @@ class ProseMirrorEngine {
 
 	destroy() {
 		if(this.sourcePanel && this.sourcePanel.flushPendingSync) this.sourcePanel.flushPendingSync();
+		if(this.sourcePanel && this.sourcePanel.destroy) this.sourcePanel.destroy();
 		if(this.debouncedSave && this.debouncedSave.flush) this.debouncedSave.flush();
-		if(this.bubbleMenu) { this.bubbleMenu.destroy(); this.bubbleMenu = null; }
 		if(this.slashMenuUI) { this.slashMenuUI.destroy(); this.slashMenuUI = null; }
 		if(this.view) { this.view.destroy(); this.view = null; }
 	}
