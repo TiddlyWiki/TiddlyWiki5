@@ -107,6 +107,14 @@ tags: $:/tags/Stylesheet
 	outline: none;
 }
 
+/* ── Empty placeholder (rendered by BaseSourceEditableNodeView) ── */
+.pm-nodeview-empty-placeholder {
+	font-style: italic;
+	color: <<colour muted-foreground>>;
+	pointer-events: none;
+	user-select: none;
+}
+
 /* ── Common editor (textarea) styles ── */
 .pm-nodeview-editor {
 	width: 100%;

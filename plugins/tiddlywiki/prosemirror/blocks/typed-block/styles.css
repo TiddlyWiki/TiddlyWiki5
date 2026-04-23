@@ -10,7 +10,7 @@ content rendering area are customised here.
 \*/
 
 .pm-nodeview.pm-nodeview-typedblock {
-	background: rgba(0, 0, 0, 0.02);
+	background: <<colour tiddler-editor-fields-even>>;
 }
 
 .pm-nodeview.pm-nodeview-typedblock .pm-typed-block-content {
@@ -20,16 +20,10 @@ content rendering area are customised here.
 	line-height: 1.5;
 }
 
-.pm-typed-block-content-empty::after {
-	content: "(empty)";
-	font-style: italic;
-	opacity: 0.6;
-}
-
 .pm-typed-block-source {
 	margin: 0;
 	padding: 4px 6px;
-	background: rgba(0, 0, 0, 0.04);
+	background: <<colour pre-background>>;
 	border-radius: 3px;
 	font-family: monospace;
 	font-size: 12px;
@@ -46,14 +40,19 @@ content rendering area are customised here.
 	min-width: 7rem;
 	height: 18px;
 	line-height: 18px;
-	border: 1px solid rgba(255, 255, 255, 0.4);
+	border: 1px solid <<colour tiddler-editor-border>>;
 	border-radius: 3px;
-	background: rgba(255, 255, 255, 0.15);
-	color: inherit;
+	background: <<colour background>>;
+	color: <<colour foreground>>;
 	cursor: pointer;
 }
 
 .pm-typed-block-type-select:focus {
 	outline: none;
-	border-color: rgba(255, 255, 255, 0.8);
+	border-color: <<colour primary>>;
+}
+
+.pm-typed-block-type-select option {
+	color: <<colour foreground>>;
+	background: <<colour background>>;
 }

@@ -50,16 +50,7 @@ class ProseMirrorEngine {
 
 		this.slashMenuUI = new SlashMenuUI(this.view, { clickable: true });
 
-		this._buildAddLineButton();
-
 		this.sourcePanel = new SourcePanel(this);
-
-		setTimeout(() => {
-			try {
-				const host = this.view && this.view.dom && this.view.dom.parentNode;
-				(host || this.domNode).appendChild(this._addLineWrap);
-			} catch(e) { /* ignore */ }
-		}, 0);
 
 		if(this.widget.addEventListener) {
 			this.widget.addEventListener("tm-prosemirror-image-picked-nodeview", (event) => this.handleImagePickedNodeView(event));
@@ -129,31 +120,6 @@ class ProseMirrorEngine {
 			event.stopPropagation();
 		});
 		this._container.setAttribute("data-tw-prosemirror-keycapture", "yes");
-	}
-
-	_buildAddLineButton() {
-		const addLineWrap = document.createElement("div");
-		addLineWrap.className = "tc-prosemirror-addline";
-		const addLineBtn = document.createElement("button");
-		addLineBtn.type = "button";
-		addLineBtn.className = "tc-prosemirror-addline-btn";
-		addLineBtn.textContent = this.widget.wiki.getTiddlerText(
-			"$:/plugins/tiddlywiki/prosemirror/language/AddNewLine", "+ new line");
-		addLineBtn.setAttribute("contenteditable", "false");
-		addLineBtn.addEventListener("mousedown", (e) => { e.preventDefault(); e.stopPropagation(); }, true);
-		addLineBtn.addEventListener("click", () => {
-			if(!this.view) return;
-			const state = this.view.state;
-			const endPos = state.doc.content.size;
-			const para = state.schema.nodes.paragraph && state.schema.nodes.paragraph.createAndFill();
-			if(!para) { this.view.focus(); return; }
-			let tr = state.tr.insert(endPos, para);
-			tr = tr.setSelection(TextSelection.atEnd(tr.doc));
-			this.view.dispatch(tr.scrollIntoView());
-			this.view.focus();
-		});
-		addLineWrap.appendChild(addLineBtn);
-		this._addLineWrap = addLineWrap;
 	}
 
 	get parentWidget() { return this.widget; }
