@@ -1,0 +1,7 @@
+title: $:/docs/widgets/ActionCreateTiddlerWidget/attributes/$basetitle
+schema: $:/schemas/WidgetAttributeDocs
+field-type: string
+required: yes
+type: text/vnd.tiddlywiki
+
+The initial title that will be attempted. If a tiddler with that title already exists, then a numerical counter is added to the title and incremented until it is unique.

@@ -1,0 +1,8 @@
+{
+	"title": "$:/plugins/tiddlywiki/core-api-docs",
+	"name": "Core API Docs",
+	"description": "Human-readable reference documentation for core filter operators and widgets",
+	"list": "readme config tree",
+	"stability": "STABILITY_1_EXPERIMENTAL",
+	"plugin-type": "plugin"
+}

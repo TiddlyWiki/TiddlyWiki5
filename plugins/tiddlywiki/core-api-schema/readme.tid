@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/core-api-schema/readme
+
+This plugin provides schema definitions that constrain the fields of tiddlers used in the core API documentation system.
+
+Schemas follow the convention proposed in [[GitHub Issue #9677|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9677]]:
+
+* Schema root tiddlers are tagged `$:/tags/Schema` and define a `fields` list
+* Field definition sub-tiddlers live under the schema root's title namespace
+* Each field definition specifies `field-type`, `required`, `aliases`, etc.
+
+Schemas are consumed by validation utilities to ensure documentation tiddlers have correct and complete metadata.

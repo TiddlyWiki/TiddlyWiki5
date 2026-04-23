@@ -1,0 +1,12 @@
+title: $:/docs/filter-operators/append
+schema: $:/schemas/FilterOperatorDocs
+op-purpose: append a range of items from an array to the list
+op-input: a list of items
+op-output: a list with items appended from the head of the parameter array
+op-neg-output: a list with items appended from the tail of the parameter array
+op-parameter: the array of items to be appended to the tail of the list
+op-parameter-name: list
+op-suffix: an integer N, defaulting to all
+type: text/vnd.tiddlywiki
+
+Filter operator `append` — appends items from an array to the list.
