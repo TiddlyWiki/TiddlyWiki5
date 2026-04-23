@@ -374,9 +374,11 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await page.keyboard.type("<<now>>");
 		await expect(editor.locator(".pm-nodeview-widget").first()).toBeVisible({ timeout: 2000 });
 
-		// Move past the widget block and add a new paragraph
-		await page.keyboard.press("ArrowRight");
-		await page.keyboard.press("Enter");
+		// Click after the widget block and add a new paragraph
+		const widgetBox = await editor.locator(".pm-nodeview-widget").first().boundingBox();
+		if(widgetBox) {
+			await page.mouse.click(widgetBox.x + widgetBox.width / 2, widgetBox.y + widgetBox.height + 8);
+		}
 		await page.keyboard.type('<<list-links "[tag[test]]">>');
 		
 		// Both should render as blocks
@@ -401,9 +403,11 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		const widgetBlock = page.locator(".pm-nodeview-widget").first();
 		await expect(widgetBlock).toBeVisible({ timeout: 2000 });
 
-		// Move past the widget block and insert a new paragraph
-		await page.keyboard.press("ArrowRight");
-		await page.keyboard.press("Enter");
+		// Click after the widget block and insert a new paragraph
+		const widgetBox = await widgetBlock.boundingBox();
+		if(widgetBox) {
+			await page.mouse.click(widgetBox.x + widgetBox.width / 2, widgetBox.y + widgetBox.height + 8);
+		}
 		await page.keyboard.type("After widget");
 
 		await expect(editor).toContainText("After widget");
