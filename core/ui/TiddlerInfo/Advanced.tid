@@ -2,8 +2,12 @@ title: $:/core/ui/TiddlerInfo/Advanced
 tags: $:/tags/TiddlerInfo
 caption: {{$:/language/TiddlerInfo/Advanced/Caption}}
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo/Advanced]!has[draft.of]]" variable="listItem">
+\whitespace trim
 
-<$transclude tiddler=<<listItem>> mode="block"/>
+\function tabs.list()
+[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo/Advanced]!has[draft.of]]
+:cascade[all[tiddlers+shadows]tag[$:/tags/TiddlerInfoFilter]!has[draft.of]get[text]]
+:and[!is[blank]]
+\end
 
-</$list>
+<$transclude $variable="tabs" tabsList="[tabs.list[]]" default="$:/core/ui/TiddlerInfo/Advanced/ShadowInfo" explicitState="$:/state/tab/tiddler-info/advanced"/>
