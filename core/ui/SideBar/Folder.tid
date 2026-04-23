@@ -1,0 +1,60 @@
+title: $:/core/ui/SideBar/Folder
+tags: $:/tags/SideBar
+caption: {{$:/language/SideBar/Folder/Caption}}
+list-after: $:/core/ui/SideBar/Open
+
+\whitespace trim
+\procedure lingo-base() $:/language/SideBar/Folder/
+
+<$let
+  focused-tiddler={{{ [{$:/temp/focussedTiddler}!is[blank]] ~[{$:/HistoryList!!current-tiddler}] }}}
+  toc-open-icon="$:/core/images/down-arrow"
+  toc-closed-icon="$:/core/images/folder"
+  inputTiddler=<<qualify "$:/temp/folder-sidebar/root-tag-input">>
+>
+  <!-- when root tag is configured: show pill + clear button + TOC -->
+  <$list filter="[{$:/config/SideBar/Folder/RootTag}!is[blank]]" variable="ignore">
+    <div class="tc-folder-sidebar-header">
+      <$macrocall $name="tag-pill" tag={{$:/config/SideBar/Folder/RootTag}}/>
+      <$button class="tc-btn-invisible" tooltip={{$:/language/SideBar/Folder/Root/Clear/Hint}}>
+        <$action-setfield $tiddler="$:/config/SideBar/Folder/RootTag" text=""/>
+        {{$:/core/images/close-button}}
+      </$button>
+    </div>
+    <$macrocall $name="toc-selective-expandable-auto"
+      tag={{$:/config/SideBar/Folder/RootTag}}
+      focusedTiddler=<<focused-tiddler>>
+    />
+  </$list>
+  <!-- when no root tag: show text input + live-filtered tag suggestion list -->
+  <$list filter="[{$:/config/SideBar/Folder/RootTag}is[blank]]" variable="ignore">
+    <div class="tc-folder-sidebar-setup">
+      <p><<lingo Setup/Hint>></p>
+      <$edit-text
+        tiddler=<<inputTiddler>>
+        tag="input"
+        placeholder={{$:/language/SideBar/Folder/Setup/Placeholder}}
+        class="tc-edit-texteditor tc-folder-root-tag-input"
+      />
+      <!-- live tag suggestions: only shown when user has typed at least 1 char -->
+      <$list
+        filter="[<inputTiddler>get[text]minlength[1]limit[1]]"
+        variable="ignore"
+        emptyMessage=""
+      >
+        <$let userInput={{{ [<inputTiddler>get[text]] }}}>
+          <div class="tc-block-dropdown tc-folder-tag-dropdown">
+            <$list filter="[tags[]search:title<userInput>sort[]]">
+              <$button class="tc-btn-invisible tc-folder-tag-suggestion">
+                <$action-setfield $tiddler="$:/config/SideBar/Folder/RootTag" text=<<currentTiddler>>/>
+                <$action-deletetiddler $tiddler=<<inputTiddler>>/>
+                <$macrocall $name="tag-pill" tag=<<currentTiddler>>/>
+              </$button>
+            </$list>
+          </div>
+        </$let>
+      </$list>
+      <p class="tc-muted"><<lingo Setup/Help>></p>
+    </div>
+  </$list>
+</$let>
