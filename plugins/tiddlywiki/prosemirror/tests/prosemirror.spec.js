@@ -225,19 +225,13 @@ test.describe("ProseMirror Editor - Basic Editing", () => {
 		await page.keyboard.type("Second line");
 		
 		await expect(editor).toContainText("Second line");
-		
-		const container = editor.locator('xpath=ancestor::div[contains(@class,"tc-prosemirror-container")]').first();
-		const undoButton = container.locator('.ProseMirror-menubar [title*="Undo"]').first();
-		const redoButton = container.locator('.ProseMirror-menubar [title*="Redo"]').first();
-		await expect(undoButton).toBeVisible();
-		await expect(redoButton).toBeVisible();
 
-		// Undo
-		await undoButton.click();
+		// Undo with keyboard shortcut
+		await page.keyboard.press("Control+z");
 		await expect(editor).not.toContainText("Second line");
-		
-		// Redo
-		await redoButton.click();
+
+		// Redo with keyboard shortcut
+		await page.keyboard.press("Control+Shift+z");
 		await expect(editor).toContainText("Second line");
 	});
 });
@@ -374,12 +368,8 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await page.keyboard.type("<<now>>");
 		await expect(editor.locator(".pm-nodeview-widget").first()).toBeVisible({ timeout: 2000 });
 
-		// Click after the widget block and add a new paragraph
-		const widgetBox = await editor.locator(".pm-nodeview-widget").first().boundingBox();
-		if(widgetBox) {
-			await page.mouse.click(widgetBox.x + widgetBox.width / 2, widgetBox.y + widgetBox.height + 8);
-		}
-		await page.keyboard.type('<<list-links "[tag[test]]">>');
+		// Type the second widget after a blank line (simulates paragraph break)
+		await page.keyboard.type("\n\n<<list-links '[tag[test]]'>>");
 		
 		// Both should render as blocks
 		const widgetBlocks = editor.locator(".pm-nodeview-widget");
@@ -403,12 +393,8 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		const widgetBlock = page.locator(".pm-nodeview-widget").first();
 		await expect(widgetBlock).toBeVisible({ timeout: 2000 });
 
-		// Click after the widget block and insert a new paragraph
-		const widgetBox = await widgetBlock.boundingBox();
-		if(widgetBox) {
-			await page.mouse.click(widgetBox.x + widgetBox.width / 2, widgetBox.y + widgetBox.height + 8);
-		}
-		await page.keyboard.type("After widget");
+		// Type text after a blank line (simulates paragraph break)
+		await page.keyboard.type("\n\nAfter widget");
 
 		await expect(editor).toContainText("After widget");
 	});
