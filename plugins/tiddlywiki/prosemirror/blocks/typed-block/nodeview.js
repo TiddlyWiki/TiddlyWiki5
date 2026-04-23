@@ -185,9 +185,9 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 
 	_renderContent(el, rawText, parseType) {
 		while(el.firstChild) el.removeChild(el.firstChild);
-		el.classList.remove("pm-typed-block-content-empty");
+		this.clearEmptyPlaceholder();
 		if(!rawText) {
-			el.classList.add("pm-typed-block-content-empty");
+			this.renderEmptyPlaceholder();
 			return;
 		}
 		const renderType = parseType || "";

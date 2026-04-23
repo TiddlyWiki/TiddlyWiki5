@@ -263,6 +263,25 @@ class BaseSourceEditableNodeView {
 		return "";
 	}
 
+	getEmptyPlaceholderText() {
+		return this.getLanguageString("Placeholder/Empty", "(empty)");
+	}
+
+	renderEmptyPlaceholder(text) {
+		if(!this.contentContainer) return;
+		this.clearEmptyPlaceholder();
+		const placeholder = document.createElement("div");
+		placeholder.className = "pm-nodeview-empty-placeholder";
+		placeholder.textContent = text || this.getEmptyPlaceholderText();
+		this.contentContainer.appendChild(placeholder);
+	}
+
+	clearEmptyPlaceholder() {
+		if(!this.contentContainer) return;
+		const existing = this.contentContainer.querySelector(".pm-nodeview-empty-placeholder");
+		if(existing) existing.remove();
+	}
+
 	handleDelete() {
 		const pos = this.getPos();
 		if(typeof pos !== "number") return;

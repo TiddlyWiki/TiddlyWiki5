@@ -374,8 +374,9 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await page.keyboard.type("<<now>>");
 		await expect(editor.locator(".pm-nodeview-widget").first()).toBeVisible({ timeout: 2000 });
 
-		// Ensure we can add a new paragraph after a widget block
-		await page.locator(".tc-prosemirror-addline-btn").first().click();
+		// Move past the widget block and add a new paragraph
+		await page.keyboard.press("ArrowRight");
+		await page.keyboard.press("Enter");
 		await page.keyboard.type('<<list-links "[tag[test]]">>');
 		
 		// Both should render as blocks
@@ -400,10 +401,9 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		const widgetBlock = page.locator(".pm-nodeview-widget").first();
 		await expect(widgetBlock).toBeVisible({ timeout: 2000 });
 
-		// Use the bottom button to insert a new paragraph and type into it
-		const addLineBtn = page.locator(".tc-prosemirror-addline-btn").first();
-		await expect(addLineBtn).toBeVisible();
-		await addLineBtn.click();
+		// Move past the widget block and insert a new paragraph
+		await page.keyboard.press("ArrowRight");
+		await page.keyboard.press("Enter");
 		await page.keyboard.type("After widget");
 
 		await expect(editor).toContainText("After widget");

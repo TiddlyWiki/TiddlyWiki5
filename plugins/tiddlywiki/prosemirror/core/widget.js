@@ -80,7 +80,6 @@ render(parent, nextSibling) {
 	});
 	container.setAttribute("data-tw-prosemirror-keycapture", "yes");
 
-	this._buildAddLineButton(outerWrap);
 	this.slashMenuUI = new SlashMenuUI(this.view, { clickable: true });
 
 	this.addEventListener("tm-prosemirror-image-picked", "handleProseMirrorImagePicked");
@@ -93,10 +92,6 @@ render(parent, nextSibling) {
 
 	setTimeout(() => {
 		try {
-			if(!this._addLineWrap.isConnected) {
-				const host = this.view && this.view.dom && this.view.dom.parentNode;
-				(host || outerWrap).appendChild(this._addLineWrap);
-			}
 			this._syncListIndentation(outerWrap, container);
 		} catch(e) { /* ignore */ }
 	}, 0);
@@ -147,30 +142,6 @@ _renderImagePickerWidget() {
 		this.children.push(this.imagePickerWidget);
 	} catch(e) { /* ignore */ }
 	this.imagePickerWrap.style.display = "none";
-}
-
-_buildAddLineButton(outerWrap) {
-	const addLineWrap = $tw.utils.domMaker("div", { class: "tc-prosemirror-addline" });
-	const addLineBtn = $tw.utils.domMaker("button", {
-		class: "tc-prosemirror-addline-btn",
-		text: this.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/AddNewLine", "+ new line")
-	});
-	addLineBtn.setAttribute("type", "button");
-	addLineBtn.setAttribute("contenteditable", "false");
-	addLineBtn.addEventListener("mousedown", (e) => { e.preventDefault(); e.stopPropagation(); }, true);
-	addLineBtn.addEventListener("click", () => {
-		if(!this.view) return;
-		const state = this.view.state;
-		const endPos = state.doc.content.size;
-		const para = state.schema.nodes.paragraph && state.schema.nodes.paragraph.createAndFill();
-		if(!para) { this.view.focus(); return; }
-		let tr = state.tr.insert(endPos, para);
-		tr = tr.setSelection(TextSelection.atEnd(tr.doc));
-		this.view.dispatch(tr.scrollIntoView());
-		this.view.focus();
-	});
-	addLineWrap.appendChild(addLineBtn);
-	this._addLineWrap = addLineWrap;
 }
 
 _syncListIndentation(outerWrap, container) {
