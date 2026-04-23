@@ -3,94 +3,57 @@ title: $:/plugins/tiddlywiki/prosemirror/blocks/typed-block/styles.css
 type: text/css
 tags: $:/tags/Stylesheet
 
-Styles for typed block ($$$) NodeView in ProseMirror.
+Variant styles for typed_block ($$$). Header layout, hover behaviour and
+buttons all come from styles/nodeview-common — only the type select and the
+content rendering area are customised here.
 
 \*/
 
 .pm-nodeview.pm-nodeview-typedblock {
-	border: 1px solid #d0d0d0;
-	border-radius: 4px;
-	margin: 4px 0;
-	overflow: hidden;
+	background: rgba(0, 0, 0, 0.02);
 }
 
-.pm-nodeview.pm-nodeview-typedblock .pm-nodeview-header {
-	display: flex;
-	align-items: center;
-	gap: 4px;
-	padding: 2px 8px;
-	background: #f5f5f5;
-	border-bottom: 1px solid #e0e0e0;
+.pm-nodeview.pm-nodeview-typedblock .pm-typed-block-content {
+	margin: 0;
+	min-height: 1.4em;
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.pm-typed-block-content-empty::after {
+	content: "(empty)";
+	font-style: italic;
+	opacity: 0.6;
+}
+
+.pm-typed-block-source {
+	margin: 0;
+	padding: 4px 6px;
+	background: rgba(0, 0, 0, 0.04);
+	border-radius: 3px;
 	font-family: monospace;
 	font-size: 12px;
-	position: relative;
-	z-index: 1;
-}
-
-.pm-typed-block-prefix {
-	font-weight: bold;
-	color: #666;
+	white-space: pre-wrap;
+	word-break: break-all;
+	max-height: 320px;
+	overflow-y: auto;
 }
 
 .pm-typed-block-type-select {
 	font-family: monospace;
-	font-size: 12px;
-	padding: 1px 4px;
-	min-width: 8rem;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	background: white;
-	cursor: pointer;
-}
-
-.pm-typed-block-content {
-	margin: 0;
-	padding: 8px 12px;
-	font-family: monospace;
-	font-size: 13px;
-	white-space: pre-wrap;
-	word-break: break-all;
-	background: #fafafa;
-	min-height: 1.4em;
-	max-height: 300px;
-	overflow-y: auto;
-}
-
-.pm-typed-block-textarea {
-	display: block;
-	width: 100%;
-	min-height: 60px;
-	padding: 8px 12px;
-	font-family: monospace;
-	font-size: 13px;
-	border: none;
-	outline: 2px solid #4a9eff;
-	resize: vertical;
-	box-sizing: border-box;
-}
-
-.pm-nodeview-edit-btn,
-.pm-nodeview-delete-btn {
-	margin-left: auto;
-	background: none;
-	border: 1px solid transparent;
-	cursor: pointer;
-	font-size: 14px;
+	font-size: 11px;
 	padding: 0 4px;
+	min-width: 7rem;
+	height: 18px;
+	line-height: 18px;
+	border: 1px solid rgba(255, 255, 255, 0.4);
 	border-radius: 3px;
-	opacity: 0.5;
+	background: rgba(255, 255, 255, 0.15);
+	color: inherit;
+	cursor: pointer;
 }
 
-.pm-nodeview-edit-btn:hover,
-.pm-nodeview-delete-btn:hover {
-	opacity: 1;
-	background: #e0e0e0;
-}
-
-.pm-nodeview-delete-btn {
-	margin-left: 2px;
-}
-
-.pm-nodeview.pm-nodeview-typedblock.pm-nodeview-selected {
-	outline: 2px solid #4a9eff;
+.pm-typed-block-type-select:focus {
+	outline: none;
+	border-color: rgba(255, 255, 255, 0.8);
 }

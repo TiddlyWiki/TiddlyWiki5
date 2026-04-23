@@ -387,7 +387,17 @@ function createSlashMenuPlugin(menuElements, options) {
 					}
 					case SlashMetaTypes.inputChange: {
 						const newElements = meta.filter ? getFilteredItems(state, meta.filter) : flattenMenuElementsWithGroup(initialState.elements);
-						const selectedId = getFirstSelectableId(newElements, state.selected);
+						let selectedId = getFirstSelectableId(newElements, state.selected);
+						// Allow callers (e.g. the UI hover handler) to override the
+						// selected item when the filter has not actually changed.
+						if(meta.selected != null) {
+							for(let i = 0; i < newElements.length; i++) {
+								if(newElements[i].id === meta.selected && newElements[i].type !== "group") {
+									selectedId = meta.selected;
+									break;
+								}
+							}
+						}
 						newState = {};
 						for(const key in state) {
 							if(state.hasOwnProperty(key)) {

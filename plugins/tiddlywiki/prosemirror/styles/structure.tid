@@ -35,6 +35,7 @@ tags: $:/tags/Stylesheet
 }
 
 .ProseMirror pre {
+	position: relative;
 	padding: 8px 12px;
 	border-radius: 4px;
 	border: 1px solid transparent;
@@ -233,11 +234,13 @@ tags: $:/tags/Stylesheet
 /* === Block Placeholder === */
 
 .tc-prosemirror-block-placeholder {
+	position: absolute;
 	font-style: italic;
 	pointer-events: none;
 	user-select: none;
 	opacity: 0.6;
 	font-size: 0.85em;
+	white-space: nowrap;
 }
 
 /* === Drag Handle layout === */

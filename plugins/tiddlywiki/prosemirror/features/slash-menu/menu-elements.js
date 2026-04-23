@@ -11,6 +11,7 @@ Exports functions to get all menu elements for SlashMenu (default + snippets + E
 const TextSelection = require("prosemirror-state").TextSelection;
 const parseWidget = require("$:/plugins/tiddlywiki/prosemirror/blocks/widget/utils.js").parseWidget;
 const scheduleEnterWidgetBlockEditModeNearSelection = require("$:/plugins/tiddlywiki/prosemirror/blocks/widget/actions.js").scheduleEnterWidgetBlockEditModeNearSelection;
+const scheduleNextAutoEdit = require("$:/plugins/tiddlywiki/prosemirror/blocks/typed-block/nodeview.js").scheduleNextAutoEdit;
 
 const EDITOR_ACTION_TAG = "$:/tags/ProseMirror/EditorAction";
 
@@ -247,6 +248,7 @@ function getTypedBlockMenuElements(wiki, schema) {
 					parseType: t.value,
 					renderType: null
 				});
+				scheduleNextAutoEdit(); // Signal nodeview constructor to auto-enter edit mode
 				var tr = view.state.tr.replaceSelectionWith(node);
 				view.dispatch(tr.scrollIntoView());
 				view.focus();

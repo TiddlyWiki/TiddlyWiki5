@@ -4,12 +4,25 @@ type: application/javascript
 module-type: library
 
 NodeView for typed_block in ProseMirror.
-Renders as an atom block with a type dropdown selector and raw text display,
-similar to hard_line_breaks_block but with type controls.
+Uses the shared BaseSourceEditableNodeView so the header/badge sits in the
+bottom-right corner with the same edit/delete affordances as pragma/widget.
 
 \*/
 
 "use strict";
+
+const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/base-source-editable.js").BaseSourceEditableNodeView;
+
+// Module-level flag: when a typed_block is inserted via slash menu,
+// set this to true before dispatching the transaction. The next
+// nodeview constructor will consume this flag and auto-enter edit mode.
+var _pendingAutoEdit = false;
+
+function scheduleNextAutoEdit() {
+	_pendingAutoEdit = true;
+}
+
+exports.scheduleNextAutoEdit = scheduleNextAutoEdit;
 
 var COMMON_TYPES = [
 	{ value: "", label: "text/plain" },
@@ -30,224 +43,200 @@ var COMMON_TYPES = [
 	{ value: ".tid", label: ".tid" }
 ];
 
-function TypedBlockNodeView(node, view, getPos) {
-	this.node = node;
-	this.view = view;
-	this.getPos = getPos;
+var CODE_RENDER_TYPES = {
+	"application/javascript": true,
+	"text/css": true,
+	"application/json": true,
+	".js": true,
+	".css": true,
+	".json": true
+};
 
-	var container = document.createElement("div");
-	container.className = "pm-nodeview pm-nodeview-typedblock";
+class TypedBlockNodeView extends BaseSourceEditableNodeView {
+	constructor(node, view, getPos) {
+		super(node, view, getPos, null);
+		this.contentEl = null;
+		this._select = null;
 
-	// Header with type selector
-	var header = document.createElement("div");
-	header.className = "pm-nodeview-header";
-	header.setAttribute("contenteditable", "false");
+		this._createDOM();
 
-	var label = document.createElement("span");
-	label.className = "pm-typed-block-prefix";
-	label.textContent = "$$$";
-	header.appendChild(label);
+		// Consume the pending auto-edit flag and enter edit mode on next frame
+		if(_pendingAutoEdit) {
+			_pendingAutoEdit = false;
+			requestAnimationFrame(() => {
+				if(!this.isEditMode) this.enterEditMode();
+			});
+		}
+	}
 
-	var select = document.createElement("select");
-	select.className = "pm-typed-block-type-select";
-	this._populateSelect(select, node.attrs.parseType);
-	header.appendChild(select);
+	_createDOM() {
+		const container = document.createElement("div");
+		container.className = "pm-nodeview pm-nodeview-typedblock";
+		container.setAttribute("contenteditable", "false");
 
-	var self = this;
-	select.addEventListener("change", function() {
-		var pos = self.getPos();
-		if(pos === undefined) return;
-		var tr = self.view.state.tr.setNodeMarkup(pos, null, {
-			rawText: self.node.attrs.rawText,
-			parseType: select.value,
-			renderType: self.node.attrs.renderType
-		});
-		self.view.dispatch(tr);
-	});
-
-	select.addEventListener("mousedown", function(e) {
-		e.stopPropagation();
-	});
-
-	container.appendChild(header);
-
-	// Content area — shows raw text in a pre block
-	var content = document.createElement("pre");
-	content.className = "pm-typed-block-content";
-	content.textContent = node.attrs.rawText || "";
-	container.appendChild(content);
-
-	// Edit button (in header)
-	var editBtn = document.createElement("button");
-	editBtn.className = "pm-nodeview-edit-btn";
-	editBtn.textContent = "✎";
-	editBtn.title = "Edit";
-	editBtn.addEventListener("click", function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		if(self._editing) {
-			self._commitEdit();
+		const header = this.createHeader(this._getTitleText());
+		// Insert a type selector ahead of the buttons so it stays inside the
+		// shared bottom-right badge layout instead of floating at the top.
+		const select = this._buildTypeSelect();
+		const buttons = header.querySelector(".pm-nodeview-buttons");
+		if(buttons) {
+			header.insertBefore(select, buttons);
 		} else {
-			self._enterEditMode();
+			header.appendChild(select);
 		}
-	});
-	header.appendChild(editBtn);
+		container.appendChild(header);
 
-	// Delete button (in header)
-	var deleteBtn = document.createElement("button");
-	deleteBtn.className = "pm-nodeview-delete-btn";
-	deleteBtn.textContent = "✕";
-	deleteBtn.title = "Delete";
-	deleteBtn.addEventListener("click", function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		var pos = self.getPos();
-		if(pos === undefined) return;
-		var tr = self.view.state.tr.delete(pos, pos + self.node.nodeSize);
-		self.view.dispatch(tr);
-	});
-	header.appendChild(deleteBtn);
+		const content = document.createElement("div");
+		content.className = "pm-nodeview-content pm-typed-block-content";
+		container.appendChild(content);
 
-	this.dom = container;
-	this.contentDOM = null; // atom node, no contentDOM
-	this._select = select;
-	this._content = content;
-	this._contentParent = container;
-	this._editBtn = editBtn;
-	this._editing = false;
-	this._textarea = null;
-}
+		this.contentEl = content;
+		this.contentContainer = content;
+		this.dom = container;
+		this._select = select;
 
-TypedBlockNodeView.prototype._populateSelect = function(select, currentType) {
-	while(select.firstChild) select.removeChild(select.firstChild);
-	var found = false;
-	var selectedIndex = -1;
-	for(var i = 0; i < COMMON_TYPES.length; i++) {
-		var opt = document.createElement("option");
-		opt.value = COMMON_TYPES[i].value;
-		opt.textContent = COMMON_TYPES[i].label;
-		if(COMMON_TYPES[i].value === currentType) {
-			opt.selected = true;
-			found = true;
-			selectedIndex = i;
+		this.renderViewMode();
+	}
+
+	_getTitleText() {
+		const type = this.node.attrs.parseType || "text/plain";
+		return "$$$ " + type;
+	}
+
+	_buildTypeSelect() {
+		const select = document.createElement("select");
+		select.className = "pm-typed-block-type-select pm-nodeview-control";
+		select.setAttribute("contenteditable", "false");
+		this._populateSelect(select, this.node.attrs.parseType);
+
+		select.addEventListener("change", () => {
+			const pos = this.getPos();
+			if(typeof pos !== "number") return;
+			const tr = this.view.state.tr.setNodeMarkup(pos, null, {
+				rawText: this.node.attrs.rawText,
+				parseType: select.value,
+				renderType: this.node.attrs.renderType
+			});
+			this.view.dispatch(tr);
+		});
+		// Keep PM from selecting the surrounding node on mousedown,
+		// so the dropdown opens normally.
+		select.addEventListener("mousedown", (e) => {
+			e.stopPropagation();
+		});
+		return select;
+	}
+
+	_populateSelect(select, currentType) {
+		while(select.firstChild) select.removeChild(select.firstChild);
+		let found = false;
+		for(let i = 0; i < COMMON_TYPES.length; i++) {
+			const opt = document.createElement("option");
+			opt.value = COMMON_TYPES[i].value;
+			opt.textContent = COMMON_TYPES[i].label;
+			if(COMMON_TYPES[i].value === currentType) {
+				opt.selected = true;
+				found = true;
+			}
+			select.appendChild(opt);
 		}
-		select.appendChild(opt);
-	}
-	// If current type is not in common list, add it
-	if(!found && currentType) {
-		var custom = document.createElement("option");
-		custom.value = currentType;
-		custom.textContent = currentType;
-		custom.selected = true;
-		select.insertBefore(custom, select.firstChild);
-		selectedIndex = 0;
-	}
-	select.value = currentType || "";
-	if(select.selectedIndex === -1 && selectedIndex !== -1) {
-		select.selectedIndex = selectedIndex;
-	}
-	if(select.selectedIndex !== -1) {
-		select.title = select.options[select.selectedIndex].textContent || "";
-	}
-};
-
-TypedBlockNodeView.prototype._enterEditMode = function() {
-	if(this._editing) return;
-	this._editing = true;
-	var self = this;
-
-	// Replace pre with textarea
-	var textarea = document.createElement("textarea");
-	textarea.className = "pm-typed-block-textarea";
-	textarea.value = this.node.attrs.rawText || "";
-	textarea.rows = Math.max(3, (this.node.attrs.rawText || "").split("\n").length);
-	this._contentParent.replaceChild(textarea, this._content);
-	this._textarea = textarea;
-
-	// Switch edit button to checkmark
-	this._editBtn.textContent = "✓";
-	this._editBtn.title = "Save";
-	this.dom.classList.add("pm-nodeview-editing");
-
-	textarea.focus();
-
-	textarea.addEventListener("keydown", function(e) {
-		if(e.key === "Escape") {
-			e.preventDefault();
-			self._commitEdit();
-			self.view.focus();
+		if(!found && currentType) {
+			const custom = document.createElement("option");
+			custom.value = currentType;
+			custom.textContent = currentType;
+			custom.selected = true;
+			select.insertBefore(custom, select.firstChild);
 		}
-		e.stopPropagation();
-	});
-};
+		select.value = currentType || "";
+	}
 
-TypedBlockNodeView.prototype._commitEdit = function() {
-	if(!this._editing) return;
-	this._editing = false;
-	var newText = this._textarea ? this._textarea.value : this.node.attrs.rawText;
+	updateTitle() {
+		if(this._titleEl) {
+			this._titleEl.textContent = this._getTitleText();
+		}
+	}
 
-	// Replace textarea back with pre
-	var content = document.createElement("pre");
-	content.className = "pm-typed-block-content";
-	content.textContent = newText;
-	this._contentParent.replaceChild(content, this._textarea);
-	this._content = content;
-	this._textarea = null;
+	renderViewMode() {
+		if(!this.contentEl) return;
+		this._renderContent(this.contentEl, this.node.attrs.rawText, this.node.attrs.parseType);
+	}
 
-	// Switch button back to edit icon
-	this._editBtn.textContent = "✎";
-	this._editBtn.title = "Edit";
-	this.dom.classList.remove("pm-nodeview-editing");
+	renderEditMode() {
+		if(!this.contentEl) return;
+		while(this.contentEl.firstChild) this.contentEl.removeChild(this.contentEl.firstChild);
 
-	// Commit to PM state
-	var pos = this.getPos();
-	if(pos !== undefined) {
-		var tr = this.view.state.tr.setNodeMarkup(pos, null, {
-			rawText: newText,
+		const initial = this.node.attrs.rawText || "";
+		const textarea = this.createEditTextarea(initial, Math.max(3, initial.split("\n").length));
+		this.contentEl.appendChild(textarea);
+		setTimeout(() => { textarea.focus(); }, 0);
+	}
+
+	saveEdit(newText) {
+		const text = newText != null ? newText : (this.node.attrs.rawText || "");
+		const pos = this.getPos();
+		if(typeof pos !== "number") return;
+		const tr = this.view.state.tr.setNodeMarkup(pos, null, {
+			rawText: text,
 			parseType: this.node.attrs.parseType,
 			renderType: this.node.attrs.renderType
 		});
 		this.view.dispatch(tr);
 	}
-};
 
-TypedBlockNodeView.prototype.update = function(node) {
-	if(node.type.name !== "typed_block") return false;
-	this.node = node;
-	this._populateSelect(this._select, node.attrs.parseType);
-	if(!this._editing) {
-		this._content.textContent = node.attrs.rawText || "";
+	_renderContent(el, rawText, parseType) {
+		while(el.firstChild) el.removeChild(el.firstChild);
+		el.classList.remove("pm-typed-block-content-empty");
+		if(!rawText) {
+			el.classList.add("pm-typed-block-content-empty");
+			return;
+		}
+		const renderType = parseType || "";
+		if(CODE_RENDER_TYPES[renderType]) {
+			const pre = document.createElement("pre");
+			pre.className = "pm-typed-block-source";
+			pre.textContent = rawText;
+			el.appendChild(pre);
+			return;
+		}
+		try {
+			const html = $tw.wiki.renderText("text/html", renderType || "text/vnd.tiddlywiki", rawText);
+			if(html) {
+				el.innerHTML = html;
+				return;
+			}
+		} catch(e) {
+			// fall through
+		}
+		const fallback = document.createElement("pre");
+		fallback.className = "pm-typed-block-source";
+		fallback.textContent = rawText;
+		el.appendChild(fallback);
 	}
-	return true;
-};
 
-TypedBlockNodeView.prototype.selectNode = function() {
-	this.dom.classList.add("pm-nodeview-selected");
-};
-
-TypedBlockNodeView.prototype.deselectNode = function() {
-	this.dom.classList.remove("pm-nodeview-selected");
-};
-
-TypedBlockNodeView.prototype.stopEvent = function(event) {
-	return this.dom.contains(event.target);
-};
-
-TypedBlockNodeView.prototype.ignoreMutation = function() {
-	return true;
-};
+	update(node) {
+		if(node.type.name !== "typed_block") return false;
+		const typeChanged = node.attrs.parseType !== this.node.attrs.parseType;
+		this.node = node;
+		if(typeChanged && this._select) {
+			this._populateSelect(this._select, node.attrs.parseType);
+		}
+		this.updateTitle();
+		if(!this.isEditMode) {
+			this.renderViewMode();
+		}
+		return true;
+	}
+}
 
 function createTypedBlockNodeViewPlugin() {
-	var Plugin = require("prosemirror-state").Plugin;
-	var PluginKey = require("prosemirror-state").PluginKey;
+	const Plugin = require("prosemirror-state").Plugin;
+	const PluginKey = require("prosemirror-state").PluginKey;
 
 	return new Plugin({
 		key: new PluginKey("typedBlockNodeView"),
 		props: {
 			nodeViews: {
-				typed_block: function(node, view, getPos) {
-					return new TypedBlockNodeView(node, view, getPos);
-				}
+				typed_block: (node, view, getPos) => new TypedBlockNodeView(node, view, getPos)
 			}
 		}
 	});

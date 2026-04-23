@@ -12,11 +12,13 @@ Side-by-side WikiText source panel for the ProseMirror editor.
 const { debounce } = require("$:/core/modules/utils/debounce.js");
 
 const SOURCE_STATE_TIDDLER = "$:/state/prosemirror/show-source";
+const PREVIEW_STATE_TIDDLER = "$:/state/showeditpreview";
 
 class SourcePanel {
 	constructor(engine) {
 		this.engine = engine;
 		this._showing = false;
+		this._manualShowing = false;
 		this._dirtyFromSource = false;
 
 		const wiki = engine.widget.wiki;
@@ -45,17 +47,69 @@ class SourcePanel {
 			this._debouncedSync();
 		});
 
-		if(wiki.getTiddlerText(SOURCE_STATE_TIDDLER) === "yes") {
-			this._showing = true;
-			this.textarea.value = engine.getText();
-			this.panel.style.display = "";
-			engine.domNode.classList.add("tc-prosemirror-source-active");
-		}
+		this._manualShowing = wiki.getTiddlerText(SOURCE_STATE_TIDDLER) === "yes";
+		this._wikiChangeHandler = (changes) => {
+			if(!changes) return;
+			if(changes[SOURCE_STATE_TIDDLER] ||
+				changes[PREVIEW_STATE_TIDDLER] ||
+				changes[this.getPreviewStateTiddler()] ||
+				changes["$:/config/ShowEditPreview/PerTiddler"]) {
+				this.syncWithPreviewState();
+			}
+		};
+		wiki.addEventListener("change", this._wikiChangeHandler);
 
 		engine.domNode.appendChild(this.panel);
+		this.syncWithPreviewState();
 	}
 
 	get showing() { return this._showing; }
+
+	getPreviewStateTiddler() {
+		const wiki = this.engine.widget.wiki;
+		if(wiki.getTiddlerText("$:/config/ShowEditPreview/PerTiddler") === "yes") {
+			return PREVIEW_STATE_TIDDLER;
+		}
+		if(this.engine.widget && typeof this.engine.widget.getStateQualifier === "function") {
+			return PREVIEW_STATE_TIDDLER + "-" + this.engine.widget.getStateQualifier();
+		}
+		return PREVIEW_STATE_TIDDLER;
+	}
+
+	isPreviewShowing() {
+		return this.engine.widget.wiki.getTiddlerText(this.getPreviewStateTiddler(), "no") === "yes";
+	}
+
+	_applyVisibility(shouldShow) {
+		if(shouldShow === this._showing) {
+			if(shouldShow) {
+				this.syncFromEditor();
+			}
+			return;
+		}
+		this._showing = shouldShow;
+		if(shouldShow) {
+			if(this._debouncedSync && this._debouncedSync.cancel) {
+				this._debouncedSync.cancel();
+			}
+			this._dirtyFromSource = false;
+			this.textarea.value = this.engine.getText();
+			this.panel.style.display = "";
+			this.engine.domNode.classList.add("tc-prosemirror-source-active");
+		} else {
+			if(this._dirtyFromSource) {
+				this.flushPendingSync();
+			} else if(this._debouncedSync && this._debouncedSync.cancel) {
+				this._debouncedSync.cancel();
+			}
+			this.panel.style.display = "none";
+			this.engine.domNode.classList.remove("tc-prosemirror-source-active");
+		}
+	}
+
+	syncWithPreviewState() {
+		this._applyVisibility(this._manualShowing || this.isPreviewShowing());
+	}
 
 	applySourceText() {
 		if(!this._showing || !this.engine.view) return;
@@ -78,26 +132,17 @@ class SourcePanel {
 	}
 
 	toggle() {
-		this._showing = !this._showing;
-		if(this._showing) {
-			if(this._debouncedSync && this._debouncedSync.cancel) {
-				this._debouncedSync.cancel();
-			}
-			this._dirtyFromSource = false;
-			this.textarea.value = this.engine.getText();
-			this.panel.style.display = "";
-			this.engine.domNode.classList.add("tc-prosemirror-source-active");
-		} else {
-			if(this._dirtyFromSource) {
-				this.flushPendingSync();
-			} else if(this._debouncedSync && this._debouncedSync.cancel) {
-				this._debouncedSync.cancel();
-			}
-			this.panel.style.display = "none";
-			this.engine.domNode.classList.remove("tc-prosemirror-source-active");
-		}
+		this._manualShowing = !this._manualShowing;
 		this.engine.widget.wiki.setText(SOURCE_STATE_TIDDLER, null, null,
-			this._showing ? "yes" : "no");
+			this._manualShowing ? "yes" : "no");
+		this.syncWithPreviewState();
+	}
+
+	destroy() {
+		if(this._wikiChangeHandler) {
+			this.engine.widget.wiki.removeEventListener("change", this._wikiChangeHandler);
+			this._wikiChangeHandler = null;
+		}
 	}
 }
 

@@ -15,50 +15,46 @@ class SlashMenuUI {
 		this.view = view;
 		this.options = options || {};
 		this.container = null;
+		this.filterWrapper = null;
+		this.filterText = null;
+		this.menuContent = null;
 		this.isVisible = false;
-		this.lastState = null;
-		this.lastNavByKey = false;
-		this._rafId = null;
+		this._lastSelectedId = null;
 		this._destroyed = false;
 
 		this._createContainer();
-		this._setupStateListener();
-
-		document.addEventListener("keydown", (e) => {
-			if(this.isVisible && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
-				this.lastNavByKey = true;
-			} else if(this.isVisible) {
-				this.lastNavByKey = false;
-			}
-		});
 	}
 
 	_createContainer() {
 		this.container = document.createElement("div");
 		this.container.className = "tw-slash-menu-root";
 		this.container.style.display = "none";
-		document.body.appendChild(this.container);
-	}
 
-	_setupStateListener() {
-		this._checkState = () => {
-			if(this._destroyed) return;
-			this.updateMenu();
-			if(this.isVisible) {
-				this._rafId = requestAnimationFrame(this._checkState);
-			} else {
-				this._rafId = null;
-			}
-		};
-		this._checkState();
+		this.filterWrapper = document.createElement("div");
+		this.filterWrapper.className = "tw-slash-menu-filter-wrapper";
+		this.filterWrapper.style.display = "none";
+		this.filterText = document.createElement("div");
+		this.filterText.className = "tw-slash-menu-filter";
+		this.filterWrapper.appendChild(this.filterText);
+		this.container.appendChild(this.filterWrapper);
+
+		this.menuContent = document.createElement("div");
+		this.menuContent.className = "tw-slash-menu-content";
+		this.container.appendChild(this.menuContent);
+
+		// Prevent the editor from blurring or losing selection when the user
+		// presses on the menu — without this, click handlers fire too late
+		// because focus moves and the slash plugin closes via outside-click.
+		this.container.addEventListener("mousedown", (e) => {
+			e.preventDefault();
+		});
+
+		document.body.appendChild(this.container);
 	}
 
 	checkState() {
 		if(this._destroyed) return;
 		this.updateMenu();
-		if(this.isVisible && !this._rafId) {
-			this._rafId = requestAnimationFrame(this._checkState);
-		}
 	}
 
 	updateMenu() {
@@ -75,13 +71,15 @@ class SlashMenuUI {
 
 	showMenu(state) {
 		this.isVisible = true;
+		this._lastSelectedId = null;
 		this.positionMenu();
 		this.renderMenu(state);
-		this.container.style.display = "block";
+		this.container.style.display = "flex";
 	}
 
 	hideMenu() {
 		this.isVisible = false;
+		this._lastSelectedId = null;
 		this.container.style.display = "none";
 	}
 
@@ -95,6 +93,7 @@ class SlashMenuUI {
 
 		// Ensure menu doesn't overflow viewport
 		requestAnimationFrame(() => {
+			if(!this.isVisible || this._destroyed) return;
 			const menuRect = this.container.getBoundingClientRect();
 			if(menuRect.bottom > window.innerHeight) {
 				this.container.style.top = (coords.top - menuRect.height - 5 + window.scrollY) + "px";
@@ -106,20 +105,15 @@ class SlashMenuUI {
 	}
 
 	renderMenu(state) {
-		while(this.container.firstChild) { this.container.removeChild(this.container.firstChild); }
-
+		// Filter row stays pinned in flex layout — outside the scroll area.
 		if(state.filter) {
-			const filterWrapper = document.createElement("div");
-			filterWrapper.className = "tw-slash-menu-filter-wrapper";
-			const filterText = document.createElement("div");
-			filterText.className = "tw-slash-menu-filter";
-			filterText.textContent = state.filter;
-			filterWrapper.appendChild(filterText);
-			this.container.appendChild(filterWrapper);
+			this.filterText.textContent = state.filter;
+			this.filterWrapper.style.display = "flex";
+		} else {
+			this.filterWrapper.style.display = "none";
 		}
 
-		const menuContent = document.createElement("div");
-		menuContent.className = "tw-slash-menu-content";
+		while(this.menuContent.firstChild) { this.menuContent.removeChild(this.menuContent.firstChild); }
 
 		const elements = state.filteredElements;
 		if(elements.length === 0) {
@@ -127,14 +121,36 @@ class SlashMenuUI {
 			placeholder.className = "tw-slash-menu-placeholder";
 			placeholder.textContent = $tw.wiki.getTiddlerText(
 				"$:/plugins/tiddlywiki/prosemirror/language/SlashMenu/NoMatches", "No matching items");
-			menuContent.appendChild(placeholder);
+			this.menuContent.appendChild(placeholder);
 		} else {
+			let selectedItemEl = null;
 			for(const element of elements) {
-				menuContent.appendChild(this.createMenuItem(element, state));
+				const node = this.createMenuItem(element, state);
+				this.menuContent.appendChild(node);
+				if(element.id === state.selected && element.type !== "group") {
+					selectedItemEl = node;
+				}
+			}
+			// Keep the highlighted item in view whenever the selection changes
+			// (covers both keyboard arrows and incremental filter changes).
+			if(selectedItemEl && this._lastSelectedId !== state.selected) {
+				this._lastSelectedId = state.selected;
+				this._scrollIntoView(selectedItemEl);
 			}
 		}
+	}
 
-		this.container.appendChild(menuContent);
+	_scrollIntoView(itemEl) {
+		const container = this.menuContent;
+		const itemTop = itemEl.offsetTop;
+		const itemBottom = itemTop + itemEl.offsetHeight;
+		const viewTop = container.scrollTop;
+		const viewBottom = viewTop + container.clientHeight;
+		if(itemTop < viewTop) {
+			container.scrollTop = itemTop;
+		} else if(itemBottom > viewBottom) {
+			container.scrollTop = itemBottom - container.clientHeight;
+		}
 	}
 
 	createMenuItem(element, state) {
@@ -151,12 +167,6 @@ class SlashMenuUI {
 
 		if(element.id === state.selected) {
 			menuItem.classList.add("tw-slash-menu-item-selected");
-			if(this.lastNavByKey) {
-				setTimeout(() => {
-					menuItem.scrollIntoView({ block: "nearest" });
-					this.lastNavByKey = false;
-				}, 0);
-			}
 		}
 
 		const icon = document.createElement("div");
@@ -185,7 +195,24 @@ class SlashMenuUI {
 
 		if(this.options.clickable) {
 			menuItem.classList.add("tw-slash-menu-item-clickable");
-			menuItem.onclick = () => this.executeCommand(element);
+			// mousedown is suppressed by the container handler; click then
+			// fires reliably without losing the editor selection.
+			menuItem.addEventListener("click", (e) => {
+				e.preventDefault();
+				e.stopPropagation();
+				this.executeCommand(element);
+			});
+			menuItem.addEventListener("mouseenter", () => {
+				// Hover-driven highlight syncs the plugin's `selected` state
+				// so Enter and click both target the same item.
+				if(state.selected !== element.id) {
+					this.view.dispatch(this.view.state.tr.setMeta(slashMenu.SlashMenuKey, {
+						type: slashMenu.SlashMetaTypes.inputChange,
+						filter: state.filter,
+						selected: element.id
+					}));
+				}
+			});
 		}
 
 		return menuItem;
@@ -216,21 +243,20 @@ class SlashMenuUI {
 	}
 
 	executeCommand(element) {
-		if(element.type === "command" && element.command) {
-			element.command(this.view);
-			this.view.dispatch(this.view.state.tr.setMeta(slashMenu.SlashMenuKey, {
-				type: slashMenu.SlashMetaTypes.execute
-			}));
-			this.hideMenu();
-		}
+		if(element.type !== "command" || !element.command) return;
+		// Restore editor focus before running the command so commands that
+		// depend on the current selection (e.g. setBlockType) operate on the
+		// expected range.
+		this.view.focus();
+		element.command(this.view);
+		this.view.dispatch(this.view.state.tr.setMeta(slashMenu.SlashMenuKey, {
+			type: slashMenu.SlashMetaTypes.execute
+		}));
+		this.hideMenu();
 	}
 
 	destroy() {
 		this._destroyed = true;
-		if(this._rafId) {
-			cancelAnimationFrame(this._rafId);
-			this._rafId = null;
-		}
 		if(this.container && this.container.parentNode) {
 			this.container.parentNode.removeChild(this.container);
 		}
@@ -238,4 +264,3 @@ class SlashMenuUI {
 }
 
 exports.SlashMenuUI = SlashMenuUI;
-
