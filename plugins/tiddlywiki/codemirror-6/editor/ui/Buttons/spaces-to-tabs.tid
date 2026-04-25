@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Buttons/spaces-to-tabs
+tags: $:/tags/EditorToolbar
+caption: {{$:/plugins/tiddlywiki/codemirror-6/icons/spaces-to-tabs}} Spaces to Tabs
+description: Convert leading spaces to tabs
+icon: $:/plugins/tiddlywiki/codemirror-6/icons/spaces-to-tabs
+condition: [<targetTiddler>]
+
+<$action-sendmessage $message="tm-cm6-spaces-to-tabs"/>
