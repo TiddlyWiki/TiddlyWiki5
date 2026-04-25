@@ -1,0 +1,76 @@
+name: Publish Docker Image
+
+on:
+  release:
+    types: [published]   # triggers when a GitHub Release is published
+  workflow_dispatch:     # allow manual trigger from the Actions tab
+    inputs:
+      tag:
+        description: "TiddlyWiki version tag to publish (e.g. v5.4.0)"
+        required: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write   # needed if also pushing to GitHub Container Registry
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
+
+      - name: Resolve version
+        id: version
+        run: |
+          # Strip leading 'v' from tag (v5.3.6 → 5.3.6)
+          RAW="${{ github.event.release.tag_name || inputs.tag }}"
+          echo "value=${RAW#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up QEMU (for multi-platform builds)
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Optional: also push to GitHub Container Registry (ghcr.io)
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata for Docker tags
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            tiddlywiki/tiddlywiki
+            ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,value=${{ steps.version.outputs.value }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ steps.version.outputs.value }}
+            type=semver,pattern={{major}},value=${{ steps.version.outputs.value }}
+            type=raw,value=latest
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            NODE_LTS_VERSION=24
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
