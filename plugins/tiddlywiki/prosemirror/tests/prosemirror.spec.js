@@ -59,6 +59,7 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 		tiddlerTitle = "ProseMirrorTestTiddler_" + Math.floor(Math.random() * 10000);
 	}
 	const initialText = options.initialText !== undefined ? options.initialText : "Start";
+	const contentType = options.contentType || "text/vnd.tiddlywiki";
 	const configTiddlers = Array.isArray(options.configTiddlers) ? options.configTiddlers : [];
 	const useReadmeTiddler = options.useReadmeTiddler !== undefined ? !!options.useReadmeTiddler : true;
 
@@ -71,7 +72,7 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 	if(useReadmeTiddler) {
 		const readmeTitle = "$:/plugins/tiddlywiki/prosemirror/readme";
 		const exampleTitle = "$:/plugins/tiddlywiki/prosemirror/example";
-		await page.evaluate(({readmeTitle, exampleTitle, initialText, configTiddlers}) => {
+		await page.evaluate(({readmeTitle, exampleTitle, initialText, configTiddlers, contentType}) => {
 			// Optional config tiddlers must be created before the editor widget is instantiated
 			for(const t of configTiddlers) {
 				// Allow passing arbitrary fields (e.g. tags/caption) for test setup
@@ -82,7 +83,7 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 			$tw.wiki.addTiddler({
 				title: exampleTitle,
 				text: initialText,
-				type: "text/vnd.tiddlywiki"
+				type: contentType
 			});
 
 			// Ensure the readme tiddler is open
@@ -91,7 +92,7 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 				storyList.unshift(readmeTitle);
 				$tw.wiki.addTiddler({title: "$:/StoryList", list: storyList});
 			}
-		}, {readmeTitle, exampleTitle, initialText, configTiddlers});
+		}, {readmeTitle, exampleTitle, initialText, configTiddlers, contentType});
 
 		await page.waitForSelector(`.tc-tiddler-frame[data-tiddler-title="${readmeTitle}"]`, { timeout: 10000 });
 		const editor = page.locator(`.tc-tiddler-frame[data-tiddler-title="${readmeTitle}"] .ProseMirror`).first();
@@ -101,7 +102,7 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 
 	// Legacy: isolated harness tiddler per test
 	const harnessTitle = `Harness_${tiddlerTitle}`;
-	await page.evaluate(({tiddlerTitle, harnessTitle, initialText, configTiddlers}) => {
+	await page.evaluate(({tiddlerTitle, harnessTitle, initialText, configTiddlers, contentType}) => {
 		for(const t of configTiddlers) {
 			$tw.wiki.addTiddler(t);
 		}
@@ -109,7 +110,7 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 		$tw.wiki.addTiddler({
 			title: tiddlerTitle,
 			text: initialText,
-			type: "text/vnd.tiddlywiki"
+			type: contentType
 		});
 
 		$tw.wiki.addTiddler({
@@ -122,7 +123,7 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 			storyList.unshift(harnessTitle);
 			$tw.wiki.addTiddler({title: "$:/StoryList", list: storyList});
 		}
-	}, {tiddlerTitle, harnessTitle, initialText, configTiddlers});
+	}, {tiddlerTitle, harnessTitle, initialText, configTiddlers, contentType});
 
 	await page.waitForSelector(`.tc-tiddler-frame[data-tiddler-title="${harnessTitle}"]`, { timeout: 10000 });
 	const editor = page.locator(`.tc-tiddler-frame[data-tiddler-title="${harnessTitle}"] .ProseMirror`).first();
@@ -1911,6 +1912,67 @@ test.describe("ProseMirror Editor - Source Panel", () => {
 
 		await expect(getSourcePanel(editor)).toBeVisible({ timeout: 5000 });
 	});
+
+	test("should use a qualified preview state tiddler in per-tiddler mode", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "Preview me",
+			configTiddlers: [{
+				title: "$:/config/ShowEditPreview/PerTiddler",
+				text: "yes"
+			}]
+		});
+
+		await getEngineForEditor(editor);
+		const info = await editor.evaluate(el => {
+			const engine = el.__pmEngineForTest;
+			return {
+				previewStateTitle: engine.sourcePanel.getPreviewStateTiddler(),
+				qualifier: engine.widget.getStateQualifier()
+			};
+		});
+
+		expect(info.previewStateTitle).toBe(`$:/state/showeditpreview-${info.qualifier}`);
+	});
+});
+
+test.describe("ProseMirror Editor - Preview Types", () => {
+	test("should only include Source for ProseMirror editors", async ({ page }) => {
+		await loadTestPage(page);
+		const availability = await page.evaluate(() => {
+			function hasSourceOption(editorType) {
+				const parser = $tw.wiki.parseText("text/vnd.tiddlywiki",
+					`<$set name="tv-editor-type" value="${editorType}"><$transclude tiddler="$:/core/ui/EditorToolbar/preview-type-dropdown"/></$set>`);
+				const widget = $tw.wiki.makeWidget(parser, {
+					parentWidget: $tw.rootWidget,
+					document: document
+				});
+				const container = document.createElement("div");
+				widget.render(container, null);
+				return Array.from(container.querySelectorAll("a"))
+					.some(el => el.textContent.replace(/\s+/g, " ").trim().indexOf("Source") !== -1);
+			}
+			return {
+				prosemirror: hasSourceOption("prosemirror"),
+				text: hasSourceOption("text")
+			};
+		});
+
+		expect(availability.prosemirror).toBeTruthy();
+		expect(availability.text).toBeFalsy();
+	});
+});
+
+test.describe("ProseMirror Editor - Markdown Tiddlers", () => {
+	test("should render markdown tiddlers through the markdown parser", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			contentType: "text/markdown",
+			initialText: "# Heading\n\n**bold**",
+			useReadmeTiddler: false
+		});
+
+		await expect(editor.locator("h1")).toContainText("Heading");
+		await expect(editor.locator("strong")).toContainText("bold");
+	});
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -2147,7 +2209,7 @@ test.describe("ProseMirror Editor - Typed Block Edit", () => {
 			initialText: '$$$application/javascript\nconsole.log("test");\n$$$'
 		});
 
-		const editBtn = page.locator(".pm-nodeview-typedblock .pm-nodeview-edit-btn").first();
+		const editBtn = page.locator(".pm-nodeview-typedblock .pm-nodeview-btn-edit").first();
 		await expect(editBtn).toBeVisible({ timeout: 5000 });
 		await editBtn.scrollIntoViewIfNeeded();
 
@@ -2159,11 +2221,11 @@ test.describe("ProseMirror Editor - Typed Block Edit", () => {
 		await page.waitForTimeout(300);
 
 		// Now shows save icon
-		const editBtnAfter = page.locator(".pm-nodeview-typedblock .pm-nodeview-edit-btn").first();
+		const editBtnAfter = page.locator(".pm-nodeview-typedblock .pm-nodeview-btn-edit").first();
 		await expect(editBtnAfter).toHaveAttribute("title", /save/i);
 
 		// Textarea should be visible
-		const textarea = page.locator(".pm-typed-block-textarea");
+		const textarea = page.locator(".pm-nodeview-typedblock textarea.pm-nodeview-editor").first();
 		await expect(textarea).toBeVisible();
 
 		// Click again to save
@@ -2171,7 +2233,7 @@ test.describe("ProseMirror Editor - Typed Block Edit", () => {
 		await page.waitForTimeout(500);
 
 		// Back to edit icon
-		const editBtnFinal = page.locator(".pm-nodeview-typedblock .pm-nodeview-edit-btn").first();
+		const editBtnFinal = page.locator(".pm-nodeview-typedblock .pm-nodeview-btn-edit").first();
 		await expect(editBtnFinal).toBeVisible({ timeout: 3000 });
 		await expect(editBtnFinal).toHaveAttribute("title", /edit/i, { timeout: 3000 });
 
@@ -2184,7 +2246,7 @@ test.describe("ProseMirror Editor - Typed Block Edit", () => {
 			initialText: '$$$text/css\nbody { color: red; }\n$$$'
 		});
 
-		const editBtn = page.locator(".pm-nodeview-typedblock .pm-nodeview-edit-btn").first();
+		const editBtn = page.locator(".pm-nodeview-typedblock .pm-nodeview-btn-edit").first();
 		await expect(editBtn).toBeVisible({ timeout: 5000 });
 		await editBtn.scrollIntoViewIfNeeded();
 
