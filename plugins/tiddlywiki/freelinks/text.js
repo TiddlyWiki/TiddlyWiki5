@@ -9,6 +9,11 @@ Optimized override of the core text widget that automatically linkifies text.
 - Global longest-match priority, then removes overlaps.
 - Excludes current tiddler title from linking.
 - Uses Aho-Corasick for performance.
+- Render output capped by $:/config/Freelinks/MaxLinks (default 500).
+  The cap applies to the final set of non-overlapping rendered links, not to
+  the raw search results: search always runs to completion so that the
+  longest-match selection has full information. Text beyond the cap remains
+  as plain text rather than being silently omitted.
 
 \*/
 
@@ -16,6 +21,7 @@ Optimized override of the core text widget that automatically linkifies text.
 
 var TITLE_TARGET_FILTER = "$:/config/Freelinks/TargetFilter";
 var WORD_BOUNDARY_TIDDLER = "$:/config/Freelinks/WordBoundary";
+var MAX_LINKS_TIDDLER = "$:/config/Freelinks/MaxLinks";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
 	LinkWidget = require("$:/core/modules/widgets/link.js").link,
@@ -63,7 +69,8 @@ TextNodeWidget.prototype.execute = function() {
 			return computeTiddlerTitleInfo(self,ignoreCase);
 		});
 
-		if(this.tiddlerTitleInfo && this.tiddlerTitleInfo.titles && this.tiddlerTitleInfo.titles.length > 0 && this.tiddlerTitleInfo.ac) {
+		if(this.tiddlerTitleInfo && this.tiddlerTitleInfo.titles &&
+		   this.tiddlerTitleInfo.titles.length > 0 && this.tiddlerTitleInfo.ac) {
 			var newParseTree = this.processTextWithMatches(text,currentTiddlerTitle,ignoreCase,useWordBoundary);
 			if(newParseTree && newParseTree.length > 0 &&
 				(newParseTree.length > 1 || newParseTree[0].type !== "plain-text")) {
@@ -103,7 +110,14 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 	var occupied = new Uint8Array(text.length);
 	var validMatches = [];
 
+	var maxLinks = parseInt(this.wiki.getTiddlerText(MAX_LINKS_TIDDLER,"500"),10);
+	if(isNaN(maxLinks) || maxLinks <= 0) {
+		maxLinks = 500;
+	}
+
 	for(var i = 0; i < matches.length; i++) {
+		if(validMatches.length >= maxLinks) break;
+
 		var m = matches[i];
 		var start = m.index;
 		var end = start + m.length;
@@ -242,7 +256,8 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 			}
 
 			if(change && change.isDeleted) {
-				if(self.tiddlerTitleInfo && self.tiddlerTitleInfo.titles && self.tiddlerTitleInfo.titles.indexOf(title) !== -1) {
+				if(self.tiddlerTitleInfo && self.tiddlerTitleInfo.titles &&
+				   self.tiddlerTitleInfo.titles.indexOf(title) !== -1) {
 					titlesHaveChanged = true;
 				}
 				return;
@@ -253,15 +268,17 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 				return;
 			}
 
-			if(!self.tiddlerTitleInfo || !self.tiddlerTitleInfo.titles || self.tiddlerTitleInfo.titles.indexOf(title) === -1) {
+			if(!self.tiddlerTitleInfo || !self.tiddlerTitleInfo.titles ||
+			   self.tiddlerTitleInfo.titles.indexOf(title) === -1) {
 				titlesHaveChanged = true;
 			}
 		});
 	}
 
 	var wordBoundaryChanged = !!(changedTiddlers && changedTiddlers[WORD_BOUNDARY_TIDDLER]);
+	var maxLinksChanged = !!(changedTiddlers && changedTiddlers[MAX_LINKS_TIDDLER]);
 
-	if(changedAttributes.text || titlesHaveChanged || wordBoundaryChanged) {
+	if(changedAttributes.text || titlesHaveChanged || wordBoundaryChanged || maxLinksChanged) {
 		if(titlesHaveChanged) {
 			self.wiki.clearCache("tiddler-title-info-insensitive");
 			self.wiki.clearCache("tiddler-title-info-sensitive");
