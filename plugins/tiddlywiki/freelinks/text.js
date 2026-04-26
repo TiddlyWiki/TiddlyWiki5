@@ -16,6 +16,7 @@ Optimized override of the core text widget that automatically linkifies text.
 
 var TITLE_TARGET_FILTER = "$:/config/Freelinks/TargetFilter";
 var WORD_BOUNDARY_TIDDLER = "$:/config/Freelinks/WordBoundary";
+var IGNORE_CASE_TIDDLER = "$:/config/Freelinks/IgnoreCase";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
 	LinkWidget = require("$:/core/modules/widgets/link.js").link,
@@ -232,28 +233,29 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 		$tw.utils.each(changedTiddlers,function(change,title) {
 			if(titlesHaveChanged) return;
 
-			if(title === WORD_BOUNDARY_TIDDLER || title === TITLE_TARGET_FILTER) {
+			// 需要清 trie cache 的白名單
+			if(title === WORD_BOUNDARY_TIDDLER ||
+			   title === TITLE_TARGET_FILTER ||
+			   title === IGNORE_CASE_TIDDLER) {
 				titlesHaveChanged = true;
 				return;
 			}
 
-			if(title.substring(0,3) === "$:/") {
-				return;
-			}
+			if(title.substring(0,3) === "$:/") return;
 
 			if(change && change.isDeleted) {
-				if(self.tiddlerTitleInfo && self.tiddlerTitleInfo.titles && self.tiddlerTitleInfo.titles.indexOf(title) !== -1) {
+				if(self.tiddlerTitleInfo && self.tiddlerTitleInfo.titles &&
+				   self.tiddlerTitleInfo.titles.indexOf(title) !== -1) {
 					titlesHaveChanged = true;
 				}
 				return;
 			}
 
 			var tiddler = self.wiki.getTiddler(title);
-			if(tiddler && tiddler.hasField("draft.of")) {
-				return;
-			}
+			if(tiddler && tiddler.hasField("draft.of")) return;
 
-			if(!self.tiddlerTitleInfo || !self.tiddlerTitleInfo.titles || self.tiddlerTitleInfo.titles.indexOf(title) === -1) {
+			if(!self.tiddlerTitleInfo || !self.tiddlerTitleInfo.titles ||
+			   self.tiddlerTitleInfo.titles.indexOf(title) === -1) {
 				titlesHaveChanged = true;
 			}
 		});
