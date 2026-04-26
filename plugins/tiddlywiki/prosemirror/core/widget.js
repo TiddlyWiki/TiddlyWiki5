@@ -35,10 +35,14 @@ render(parent, nextSibling) {
 
 	const tiddler = this.getAttribute("tiddler");
 	const initialText = this.wiki.getTiddlerText(tiddler, "");
+		const tiddlerRecord = tiddler ? this.wiki.getTiddler(tiddler) : null;
+		this.editType = (tiddlerRecord && tiddlerRecord.fields && tiddlerRecord.fields.type) || "text/vnd.tiddlywiki";
 
 	let doc;
 	try {
-		const initialWikiAst = $tw.wiki.parseText(null, initialText).tree;
+			const initialWikiAst = this.wiki.parseText(this.editType, initialText, {
+				defaultType: "text/vnd.tiddlywiki"
+			}).tree;
 		doc = wikiAstToProseMirrorAst(initialWikiAst);
 	} catch(e) {
 		console.error("[ProseMirror] Error parsing initial content:", e);

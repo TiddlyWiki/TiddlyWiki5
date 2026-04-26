@@ -27,6 +27,7 @@ class ProseMirrorEngine {
 	constructor(options) {
 		this.widget = options.widget;
 		this.value = options.value;
+		this.type = options.type || "text/vnd.tiddlywiki";
 		this.parentNode = options.parentNode;
 		this.nextSibling = options.nextSibling;
 		this.wiki = this.widget.wiki;
@@ -82,7 +83,9 @@ class ProseMirrorEngine {
 
 	_parseInitialDoc() {
 		try {
-			const initialWikiAst = $tw.wiki.parseText(null, this.value || "").tree;
+			const initialWikiAst = this.wiki.parseText(this.type, this.value || "", {
+				defaultType: "text/vnd.tiddlywiki"
+			}).tree;
 			return wikiAstToProseMirrorAst(initialWikiAst);
 		} catch(e) {
 			console.error("[ProseMirror] Error parsing initial content:", e);
@@ -162,7 +165,9 @@ class ProseMirrorEngine {
 	updateDomNodeText(text) {
 		if(!this.view) return;
 		try {
-			const wikiAst = $tw.wiki.parseText(null, text || "").tree;
+			const wikiAst = this.wiki.parseText(this.type, text || "", {
+				defaultType: "text/vnd.tiddlywiki"
+			}).tree;
 			const pmDoc = wikiAstToProseMirrorAst(wikiAst);
 			const newDoc = this.schema.nodeFromJSON(pmDoc);
 			const state = EditorState.create({ doc: newDoc, plugins: this.view.state.plugins });

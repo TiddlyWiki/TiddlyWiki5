@@ -258,6 +258,14 @@ function buildBlockquote(context, node) {
 	};
 }
 
+function buildDiv(context, node) {
+	const classAttr = node.attributes && node.attributes.class && node.attributes.class.value;
+	if(classAttr && classAttr.split(/\s+/).indexOf("markdown") !== -1) {
+		return convertNodes(context, node.children);
+	}
+	return buildOpaqueFromNode(context, node);
+}
+
 function extractPlainText(node) {
 	if(!node) return "";
 	if(node.type === "text") return node.text || "";
@@ -465,6 +473,7 @@ const elementBuilders = {
 	sub: buildSub,
 	pre: buildCodeBlock,
 	blockquote: buildBlockquote,
+	div: buildDiv,
 	hr: buildHorizRule,
 	br: buildBr,
 	a: buildAnchor,

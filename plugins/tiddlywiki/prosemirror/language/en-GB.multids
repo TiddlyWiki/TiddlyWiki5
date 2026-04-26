@@ -14,6 +14,7 @@ Prompt/RequiredField: Required field
 ReplaceImage: Replace image
 Settings/MarkdownShortcuts: Enable Markdown-style input shortcuts
 Settings/MarkdownShortcutsHint: Use Markdown syntax like **bold**, *italic*, ~~strike~~, `code`, # Heading, --- for horizontal rule and ``` for code blocks. Output is always wikitext.
+PreviewType/Source: Source
 SlashMenu/BlockType: Block Type
 SlashMenu/TurnIntoCodeblock: Turn into codeblock
 SlashMenu/TurnIntoParagraph: Turn into paragraph
