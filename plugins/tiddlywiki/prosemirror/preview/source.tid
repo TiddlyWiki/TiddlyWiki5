@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditTemplate/body/preview/source
+tags: $:/tags/EditPreview
+caption: {{$:/plugins/tiddlywiki/prosemirror/language/PreviewType/Source}}
+condition: [<tv-editor-type>match[prosemirror]]
+list-after: $:/core/ui/EditTemplate/body/preview/output
+
+<$edit-text
+	tiddler=<<currentTiddler>>
+	field="text"
+	tag="textarea"
+	class="tc-edit-texteditor tc-max-width"
+	rows="12"
+	disabled="yes"
+/>
