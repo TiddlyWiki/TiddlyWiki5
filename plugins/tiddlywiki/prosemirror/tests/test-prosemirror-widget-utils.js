@@ -112,6 +112,8 @@ describe("ProseMirror parseWidget tests", () => {
 		expect(result).not.toBeNull();
 		expect(result.widgetName).toBe("list-links");
 		expect(result.attributes["0"]).toBe("[tag[task]sort[title]]");
+		expect(result.orderedAttributes[0].name).toBe("0");
+		expect(result.orderedAttributes[0].quoted).toBe(true);
 	});
 
 	// --- Complex real-world cases ---

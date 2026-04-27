@@ -29,17 +29,27 @@ function paragraph(builder, node) {
 		if(parsed) {
 			const widgetName = parsed.widgetName;
 			const parsedAttrs = parsed.attributes || {};
+			const parsedOrderedAttrs = parsed.orderedAttributes || [];
 			
 			// Build TW-style attributes object
 			const attributes = { $variable: { name: "$variable", type: "string", value: widgetName } };
 			const orderedAttributes = [{ name: "$variable", type: "string", value: widgetName }];
-			
-			const keys = Object.keys(parsedAttrs);
-			for(let ki = 0; ki < keys.length; ki++) {
-				const key = keys[ki];
-				const value = parsedAttrs[key];
-				attributes[key] = { name: key, type: "string", value: value };
-				orderedAttributes.push({ name: key, type: "string", value: value });
+
+			const sourceAttributes = parsedOrderedAttrs.length > 0 ? parsedOrderedAttrs : Object.keys(parsedAttrs).map((key) => ({
+				name: key,
+				value: parsedAttrs[key]
+			}));
+			for(let ki = 0; ki < sourceAttributes.length; ki++) {
+				const sourceAttr = sourceAttributes[ki];
+				const attribute = { name: sourceAttr.name, type: "string", value: sourceAttr.value };
+				if(sourceAttr.quoted) {
+					attribute.quoted = true;
+				}
+				if(sourceAttr.assignmentOperator) {
+					attribute.assignmentOperator = sourceAttr.assignmentOperator;
+				}
+				attributes[sourceAttr.name] = attribute;
+				orderedAttributes.push(attribute);
 			}
 			
 			// Return a transclude node
