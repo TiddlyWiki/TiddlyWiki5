@@ -98,7 +98,7 @@ function createFindReplacePlugin(wiki) {
 						};
 					}
 					// Just updating currentIndex or active state
-					const state = { ...prev };
+					const state = Object.assign({}, prev);
 					if(meta.active !== undefined) state.active = meta.active;
 					if(meta.currentIndex !== undefined) state.currentIndex = meta.currentIndex;
 					if(meta.replaceTerm !== undefined) state.replaceTerm = meta.replaceTerm;
@@ -111,20 +111,17 @@ function createFindReplacePlugin(wiki) {
 					const matches = findMatches(newState.doc, prev.searchTerm, prev.caseSensitive);
 					let curIdx = Math.min(prev.currentIndex, matches.length - 1);
 					if(curIdx < 0 && matches.length > 0) curIdx = 0;
-					return {
-						...prev,
+					return Object.assign({}, prev, {
 						matches,
 						currentIndex: curIdx,
 						decorations: createDecorations(newState.doc, matches, curIdx)
-					};
+					});
 				}
 				return prev;
 			}
 		},
 		props: {
-			decorations: (state) => {
-				return FIND_REPLACE_KEY.getState(state).decorations;
-			},
+			decorations: (state) => FIND_REPLACE_KEY.getState(state).decorations,
 			handleKeyDown: function(view, event) {
 				// Ctrl+F / Cmd+F to open find
 				if((event.ctrlKey || event.metaKey) && event.key === "f") {

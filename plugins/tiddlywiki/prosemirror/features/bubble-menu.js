@@ -50,7 +50,7 @@ class BubbleMenu {
 			btn.title = item.title;
 			btn.setAttribute("data-mark", item.mark);
 
-			const svgEl = this._renderSvgIcon(item.icon, "16px");
+			const svgEl = this.constructor._renderSvgIcon(item.icon, "16px");
 			if(svgEl) {
 				btn.appendChild(svgEl);
 			} else {
@@ -74,7 +74,7 @@ class BubbleMenu {
 		}
 	}
 
-	_renderSvgIcon(tiddlerTitle, size = "16px") {
+	static _renderSvgIcon(tiddlerTitle, size = "16px") {
 		try {
 			const htmlStr = $tw.wiki.renderTiddler("text/html", tiddlerTitle, { variables: { size } });
 			if(!htmlStr) return null;
@@ -138,11 +138,11 @@ class BubbleMenu {
 		for(const btn of this._buttons) {
 			const markType = this.schema.marks[btn.mark];
 			if(!markType) continue;
-			btn.el.classList.toggle("tc-prosemirror-bubble-btn-active", this._isMarkActive(state, markType));
+			btn.el.classList.toggle("tc-prosemirror-bubble-btn-active", this.constructor._isMarkActive(state, markType));
 		}
 	}
 
-	_isMarkActive(state, markType) {
+	static _isMarkActive(state, markType) {
 		const { from, $from, to, empty } = state.selection;
 		if(empty) return !!markType.isInSet(state.storedMarks || $from.marks());
 		return state.doc.rangeHasMark(from, to, markType);

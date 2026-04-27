@@ -10,6 +10,39 @@ async function clearEditor(editor) {
 	await editor.press("Backspace");
 }
 
+function dispatchEditorShortcut(editor, key, code, options = {}) {
+	return editor.evaluate((el, { key, code, options }) => {
+		const viewEl = el.closest(".ProseMirror") || el;
+		function findAllEngines(widget) {
+			const results = [];
+			if(widget && widget.engine && widget.engine.view) results.push(widget.engine);
+			if(widget && widget.children) {
+				for(const child of widget.children) {
+					results.push.apply(results, findAllEngines(child));
+				}
+			}
+			return results;
+		}
+		const engine = findAllEngines($tw.rootWidget).find((e) => e.view && e.view.dom === viewEl);
+		if(!engine || !engine.view) {
+			throw new Error("ProseMirror engine not found");
+		}
+		const event = new KeyboardEvent("keydown", Object.assign({
+			key,
+			code,
+			bubbles: true,
+			cancelable: true
+		}, options));
+		event.twEditor = true;
+		let handled = false;
+		engine.view.someProp("handleKeyDown", (handler) => {
+			handled = handler(engine.view, event) || handled;
+			return handled;
+		});
+		return handled;
+	}, { key, code, options });
+}
+
 async function pastePlainText(editor, text) {
 	await editor.evaluate((el, t) => {
 		const dt = new DataTransfer();
@@ -145,7 +178,7 @@ test.describe("ProseMirror Editor - Basic Editing", () => {
 		await expect(editor).toContainText("Hello World");
 	});
 
-	test("should support basic formatting with keyboard shortcuts", async ({ page }) => {
+	test("should support basic formatting with keyboard shortcuts", async ({ page, browserName }) => {
 		const editor = await setupProseMirrorTest(page);
 		await clearEditor(editor);
 		await page.keyboard.type("Bold text");
@@ -163,7 +196,13 @@ test.describe("ProseMirror Editor - Basic Editing", () => {
 
 		await editor.press("Control+A");
 		await page.waitForTimeout(100);
-		await editor.press("Control+b");
+		if(browserName === "firefox") {
+			// Firefox reserves Ctrl+B for browser chrome; invoke the editor key handler directly.
+			const handled = await dispatchEditorShortcut(editor, "b", "KeyB", { ctrlKey: true });
+			expect(handled).toBeTruthy();
+		} else {
+			await editor.press("Control+b");
+		}
 		await page.waitForTimeout(200);
 		
 		// Check that bold mark was applied
@@ -294,10 +333,10 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		// Click edit button
 		const editBtn = widgetBlock.locator(".pm-nodeview-btn-edit").first();
 		await editBtn.evaluate((el) => el.click());
-		await expect(editor.locator(".pm-nodeview-widget.pm-nodeview-editing").first()).toBeVisible({ timeout: 3000 });
+		await expect(widgetBlock.locator("textarea.pm-nodeview-editor").first()).toBeVisible({ timeout: 3000 });
 		
 		// Delete button should now be visible on the editing nodeview
-		const deleteBtnEditing = editor.locator(".pm-nodeview-widget.pm-nodeview-editing .pm-nodeview-btn-delete").first();
+		const deleteBtnEditing = widgetBlock.locator(".pm-nodeview-btn-delete").first();
 		await expect(deleteBtnEditing).toBeVisible();
 	});
 

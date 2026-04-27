@@ -60,7 +60,7 @@ function createImageBlockPlugin(options) {
 	return new Plugin({
 		key,
 		appendTransaction(transactions, oldState, newState) {
-			if(!transactions || !transactions.some(tr => tr.docChanged)) {
+			if(!transactions || !transactions.some((tr) => tr.docChanged)) {
 				return null;
 			}
 

@@ -216,9 +216,7 @@ function buildKeymap(schema, mapKeys) {
 			bind("hard-line-breaks-enter", "Enter", enterInHardLineBreaks);
 
 			// Shift-Enter: exit / split the block
-			shiftEnterHandlers.push(makeShiftEnterExitHandler((nodeType) => {
-				return nodeType === hardLineBreaksType;
-			}));
+			shiftEnterHandlers.push(makeShiftEnterExitHandler((nodeType) => nodeType === hardLineBreaksType));
 		}
 	}
 	type = schema.nodes.code_block;
@@ -227,9 +225,7 @@ function buildKeymap(schema, mapKeys) {
 
 		// Shift-Enter in code_block: same exit/split behavior
 		const codeBlockType = type;
-		shiftEnterHandlers.push(makeShiftEnterExitHandler((nodeType) => {
-			return nodeType === codeBlockType;
-		}));
+		shiftEnterHandlers.push(makeShiftEnterExitHandler((nodeType) => nodeType === codeBlockType));
 	}
 
 	// Bind Shift-Enter: block-exit handlers run first; then fall through to hard_break insertion

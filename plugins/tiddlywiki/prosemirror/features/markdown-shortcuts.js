@@ -40,24 +40,12 @@ function headingInputRule(schema) {
 	if(!headingType) return [];
 	return [
 		// # Heading 1 (must be at start of textblock; triggered by Space)
-		new InputRule(/^#\s$/, (state, match, start, end) => {
-			return state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 1 });
-		}),
-		new InputRule(/^##\s$/, (state, match, start, end) => {
-			return state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 2 });
-		}),
-		new InputRule(/^###\s$/, (state, match, start, end) => {
-			return state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 3 });
-		}),
-		new InputRule(/^####\s$/, (state, match, start, end) => {
-			return state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 4 });
-		}),
-		new InputRule(/^#####\s$/, (state, match, start, end) => {
-			return state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 5 });
-		}),
-		new InputRule(/^######\s$/, (state, match, start, end) => {
-			return state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 6 });
-		})
+		new InputRule(/^#\s$/, (state, match, start, end) => state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 1 })),
+		new InputRule(/^##\s$/, (state, match, start, end) => state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 2 })),
+		new InputRule(/^###\s$/, (state, match, start, end) => state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 3 })),
+		new InputRule(/^####\s$/, (state, match, start, end) => state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 4 })),
+		new InputRule(/^#####\s$/, (state, match, start, end) => state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 5 })),
+		new InputRule(/^######\s$/, (state, match, start, end) => state.tr.delete(start, end).setBlockType(start, start, headingType, { level: 6 }))
 	];
 }
 
@@ -91,12 +79,10 @@ function hrInputRule(schema) {
 	const hrType = schema.nodes.horizontal_rule;
 	if(!hrType) return [];
 	return [
-		new InputRule(/^---$/, (state, match, start, end) => {
-			return state.tr.replaceWith(start - 1, end, [
-				hrType.create(),
-				schema.nodes.paragraph.createAndFill()
-			]);
-		})
+		new InputRule(/^---$/, (state, match, start, end) => state.tr.replaceWith(start - 1, end, [
+			hrType.create(),
+			schema.nodes.paragraph.createAndFill()
+		]))
 	];
 }
 
@@ -104,9 +90,7 @@ function codeBlockInputRule(schema) {
 	const cbType = schema.nodes.code_block;
 	if(!cbType) return [];
 	return [
-		new InputRule(/^```$/, (state, match, start, end) => {
-			return state.tr.delete(start - 1, end).setBlockType(start - 1, start - 1, cbType);
-		})
+		new InputRule(/^```$/, (state, match, start, end) => state.tr.delete(start - 1, end).setBlockType(start - 1, start - 1, cbType))
 	];
 }
 
@@ -163,17 +147,13 @@ function definitionListInputRules(schema, wiki) {
 	termTriggers.forEach((trig) => {
 		const escaped = trig.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 		const pattern = new RegExp("^" + escaped + "\\s$");
-		rules.push(new InputRule(pattern, (state, match, start, end) => {
-			return createDefListItem(state, start, end, dlType, dtType);
-		}));
+		rules.push(new InputRule(pattern, (state, match, start, end) => createDefListItem(state, start, end, dlType, dtType)));
 	});
 
 	descTriggers.forEach((trig) => {
 		const escaped = trig.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 		const pattern = new RegExp("^" + escaped + "\\s$");
-		rules.push(new InputRule(pattern, (state, match, start, end) => {
-			return createDefListItem(state, start, end, dlType, ddType);
-		}));
+		rules.push(new InputRule(pattern, (state, match, start, end) => createDefListItem(state, start, end, dlType, ddType)));
 	});
 
 	return rules;
@@ -182,7 +162,7 @@ function definitionListInputRules(schema, wiki) {
 function parseTriggerList(wiki, title, defaults) {
 	const text = wiki.getTiddlerText(title, "");
 	if(!text.trim()) return defaults;
-	return text.split("\n").map((s) => { return s.trim(); }).filter((s) => { return s.length > 0; });
+	return text.split("\n").map((s) => s.trim()).filter((s) => s.length > 0);
 }
 
 function createDefListItem(state, start, end, dlType, itemType) {

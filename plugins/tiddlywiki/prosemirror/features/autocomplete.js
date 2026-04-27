@@ -24,7 +24,7 @@ const MACRO_TRIGGERS_TITLE = "$:/config/prosemirror/autocomplete/macro-triggers"
 function parseTriggerConfig(wiki, title, defaults) {
 	const text = wiki.getTiddlerText(title, "");
 	if(!text.trim()) return defaults;
-	return text.split("\n").map((s) => { return s.trim(); }).filter((s) => { return s.length > 0; });
+	return text.split("\n").map((s) => s.trim()).filter((s) => s.length > 0);
 }
 
 function buildTriggerMap(wiki) {
@@ -44,7 +44,7 @@ function buildTriggerMap(wiki) {
 	});
 
 	// Sort by length descending so longer triggers match first
-	result.sort((a, b) => { return b.trigger.length - a.trigger.length; });
+	result.sort((a, b) => b.trigger.length - a.trigger.length);
 	return result;
 }
 
@@ -85,9 +85,7 @@ function getMacroCompletions(wiki, query) {
 
 	if(!query) return macroNames.slice(0, 20);
 	const lower = query.toLowerCase();
-	return macroNames.filter((n) => {
-		return n.toLowerCase().indexOf(lower) >= 0;
-	}).slice(0, 20);
+	return macroNames.filter((n) => n.toLowerCase().indexOf(lower) >= 0).slice(0, 20);
 }
 
 function createAutocompletePlugin(wiki) {
@@ -198,13 +196,17 @@ function createAutocompletePlugin(wiki) {
 				if(event.key === "ArrowDown") {
 					event.preventDefault();
 					const next = Math.min(state.selectedIndex + 1, state.items.length - 1);
-					view.dispatch(view.state.tr.setMeta(AUTOCOMPLETE_KEY, { ...state, ...{ selectedIndex: next } }));
+					view.dispatch(view.state.tr.setMeta(AUTOCOMPLETE_KEY, Object.assign({}, state, {
+						selectedIndex: next
+					})));
 					return true;
 				}
 				if(event.key === "ArrowUp") {
 					event.preventDefault();
 					const prev = Math.max(state.selectedIndex - 1, 0);
-					view.dispatch(view.state.tr.setMeta(AUTOCOMPLETE_KEY, { ...state, ...{ selectedIndex: prev } }));
+					view.dispatch(view.state.tr.setMeta(AUTOCOMPLETE_KEY, Object.assign({}, state, {
+						selectedIndex: prev
+					})));
 					return true;
 				}
 				if(event.key === "Enter" || event.key === "Tab") {
@@ -289,7 +291,9 @@ class AutocompleteView {
 				e.preventDefault();
 				const currentState = AUTOCOMPLETE_KEY.getState(view.state);
 				if(currentState) {
-					acceptCompletion(view, { ...currentState, ...{ selectedIndex: idx } });
+					acceptCompletion(view, Object.assign({}, currentState, {
+						selectedIndex: idx
+					}));
 				}
 			});
 			this.container.appendChild(item);

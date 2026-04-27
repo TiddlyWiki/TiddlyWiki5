@@ -18,7 +18,7 @@ function openPrompt(options) {
 		wrapper.setAttribute("aria-label", options.title);
 	}
 
-	const mouseOutside = e => {
+	const mouseOutside = (e) => {
 		if(!wrapper.contains(e.target)) {
 			close();
 		}
@@ -52,7 +52,7 @@ function openPrompt(options) {
 	if(options.title) {
 		form.appendChild(document.createElement("h5")).textContent = options.title;
 	}
-	domFields.forEach(field => {
+	domFields.forEach((field) => {
 		form.appendChild(document.createElement("div")).appendChild(field);
 	});
 	const buttons = form.appendChild(document.createElement("div"));
@@ -73,12 +73,12 @@ function openPrompt(options) {
 		}
 	};
 
-	form.addEventListener("submit", e => {
+	form.addEventListener("submit", (e) => {
 		e.preventDefault();
 		submit();
 	});
 
-	form.addEventListener("keydown", e => {
+	form.addEventListener("keydown", (e) => {
 		if(e.key === "Escape") {
 			e.preventDefault();
 			close();
@@ -113,7 +113,7 @@ function getValues(fields, domFields) {
 	let i = 0;
 	for(const name in fields) {
 		const field = fields[name], dom = domFields[i++];
-		const value = field.read(dom), bad = field.validate(value);
+		const value = field.constructor.read(dom), bad = field.validate(value);
 		if(bad) {
 			reportInvalid(dom, bad);
 			return null;
@@ -140,11 +140,11 @@ class Field {
 		this.options = options;
 	}
 
-	read(dom) {
+	static read(dom) {
 		return dom.value;
 	}
 
-	validateType(_value) {
+	static validateType(_value) {
 		return null;
 	}
 
@@ -152,7 +152,7 @@ class Field {
 		if(!value && this.options.required) {
 			return $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Prompt/RequiredField", "Required field");
 		}
-		return this.validateType(value) || (this.options.validate ? this.options.validate(value) : null);
+		return this.constructor.validateType(value) || (this.options.validate ? this.options.validate(value) : null);
 	}
 
 	clean(value) {

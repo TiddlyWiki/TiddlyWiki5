@@ -27,24 +27,31 @@ function buildSchema() {
 
 	// Override blockquote to add cite attr for preserving <<<...<<<cite text
 	const baseBqSpec = basicSchema.spec.nodes.get("blockquote");
-	baseNodes = baseNodes.update("blockquote", {
-		...baseBqSpec,
+	baseNodes = baseNodes.update("blockquote", Object.assign({}, baseBqSpec, {
 		attrs: { cite: { default: null } },
 		toDOM() { return ["blockquote", 0]; },
 		parseDOM: [{ tag: "blockquote" }]
-	});
+	}));
 
 	// Extend image node with TW-specific attrs (width, height, source, kind, tooltip)
 	const baseImageSpec = basicSchema.spec.nodes.get("image");
-	let nodes = baseNodes.update("image", {
-		...baseImageSpec,
+	const imageAttrs = Object.assign({}, baseImageSpec && baseImageSpec.attrs, {
+		width: { default: null },
+		height: { default: null },
+		twSource: { default: null },
+		twKind: { default: "shortcut" },
+		twTooltip: { default: null }
+	});
+	let nodes = baseNodes.update("image", Object.assign({}, baseImageSpec, {
 		attrs: {
-			...(baseImageSpec && baseImageSpec.attrs),
-			width: { default: null },
-			height: { default: null },
-			twSource: { default: null },
-			twKind: { default: "shortcut" },
-			twTooltip: { default: null }
+			src: imageAttrs.src,
+			alt: imageAttrs.alt,
+			title: imageAttrs.title,
+			width: imageAttrs.width,
+			height: imageAttrs.height,
+			twSource: imageAttrs.twSource,
+			twKind: imageAttrs.twKind,
+			twTooltip: imageAttrs.twTooltip
 		},
 		toDOM(node) {
 			const attrs = {
@@ -74,7 +81,7 @@ function buildSchema() {
 				};
 			}
 		}]
-	}).append({
+	})).append({
 		pragma_block: {
 			attrs: { rawText: { default: "" }, firstLine: { default: "" } },
 			group: "block", atom: true, selectable: true, draggable: true,
@@ -200,8 +207,7 @@ function buildSchema() {
 	// The default link mark's toDOM renders <a href="TiddlerName"> which the browser resolves
 	// to a full URL. We store the raw href in data-tw-href and read it back in parseDOM.
 	const baseLinkSpec = basicSchema.spec.marks.get("link");
-	const extendedMarks = basicSchema.spec.marks.update("link", {
-		...baseLinkSpec,
+	const extendedMarks = basicSchema.spec.marks.update("link", Object.assign({}, baseLinkSpec, {
 		toDOM(node) {
 			const { href, title } = node.attrs;
 			const isExternal = /^(?:https?|ftp|mailto):/i.test(href);
@@ -222,7 +228,7 @@ function buildSchema() {
 				};
 			}
 		}]
-	}).append({
+	})).append({
 		underline: {
 			parseDOM: [{ tag: "u" }, { style: "text-decoration=underline" }],
 			toDOM() { return ["u", 0]; }
