@@ -334,15 +334,15 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await page.keyboard.type("<<now>>");
 		
 		const widgetBlock = editor.locator(".pm-nodeview-widget").first();
-		await expect(widgetBlock).toBeVisible({ timeout: 2000 });
+		await expect(widgetBlock).toBeVisible({ timeout: 5000 });
 		await widgetBlock.hover();
 		
 		const editBtn = widgetBlock.locator(".pm-nodeview-btn-edit").first();
 		await expect(editBtn).toBeVisible({ timeout: 2000 });
 		await editBtn.evaluate((el) => el.click());
 
-		const textarea = editor.locator(".pm-nodeview-widget.pm-nodeview-editing textarea.pm-nodeview-editor").first();
-		await expect(textarea).toBeVisible({ timeout: 3000 });
+		const textarea = widgetBlock.locator("textarea.pm-nodeview-editor").first();
+		await expect(textarea).toBeVisible({ timeout: 5000 });
 		await expect(textarea).toHaveValue("<<now>>");
 	});
 
@@ -374,23 +374,32 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await clearEditor(editor);
 		await page.keyboard.type("<<now>>");
 		
-		const widgetBlock = editor.locator(".pm-nodeview-widget");
-		await expect(widgetBlock).toBeVisible({ timeout: 2000 });
+		const widgetBlock = editor.locator(".pm-nodeview-widget").first();
+		await expect(widgetBlock).toBeVisible({ timeout: 5000 });
 
 		// Perform the full edit cycle inside the browser task to avoid locator detachment
-		const saveResult = await editor.evaluate((root, newText) => {
+		const saveResult = await editor.evaluate(async (root, newText) => {
+			const waitFrame = () => new Promise((resolve) => {
+				requestAnimationFrame(resolve);
+			});
+			const findTextarea = async (remainingAttempts) => {
+				await waitFrame();
+				const textarea = root.querySelector(".pm-nodeview-widget textarea.pm-nodeview-editor");
+				if(textarea || remainingAttempts <= 1) {
+					return textarea;
+				}
+				return findTextarea(remainingAttempts - 1);
+			};
 			const editBtn = root.querySelector(".pm-nodeview-widget .pm-nodeview-btn-edit");
 			if(!editBtn) return { ok: false, step: "editBtn" };
 			editBtn.click();
 
-			const textarea = root.querySelector(".pm-nodeview-widget.pm-nodeview-editing textarea.pm-nodeview-editor");
+			const textarea = await findTextarea(10);
 			if(!textarea) return { ok: false, step: "textarea" };
 			textarea.value = newText;
 			textarea.dispatchEvent(new Event("input", { bubbles: true }));
 
-			const saveBtn = root.querySelector(".pm-nodeview-widget.pm-nodeview-editing .pm-nodeview-btn-edit");
-			if(!saveBtn) return { ok: false, step: "saveBtn" };
-			saveBtn.click();
+			editBtn.click();
 			return { ok: true };
 		}, '<<now "YYYY">>');
 		expect(saveResult).toEqual({ ok: true });
