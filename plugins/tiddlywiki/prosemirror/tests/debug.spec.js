@@ -1,5 +1,5 @@
-const{ test, expect } = require("@playwright/test");
-const{ resolve } = require("path");
+const { test, expect } = require("@playwright/test");
+const { resolve } = require("path");
 
 test.describe("ProseMirror Editor - Module Debug", () => {
 	test("debug module loading", async ({ page }) => {
@@ -14,7 +14,7 @@ test.describe("ProseMirror Editor - Module Debug", () => {
 				if(typeof $tw === "undefined") return { success: false, error: "$tw is undefined" };
 
 				// Helper to safely execute a module
-				const tryExecute = title => {
+				const tryExecute = (title) => {
 					try {
 						const exports = $tw.modules.execute(title);
 						return { success: true, exports: Object.keys(exports || {}) };
