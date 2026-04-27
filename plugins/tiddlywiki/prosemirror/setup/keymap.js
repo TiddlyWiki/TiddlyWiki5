@@ -12,7 +12,6 @@ const prosemirrorFlatList = require("prosemirror-flat-list");
 const prosemirrorHistory = require("prosemirror-history");
 const prosemirrorInputrules = require("prosemirror-inputrules");
 const prosemirrorState = require("prosemirror-state");
-const prosemirrorModel = require("prosemirror-model");
 
 const mac = typeof navigator != "undefined"
 	? (navigator.userAgentData

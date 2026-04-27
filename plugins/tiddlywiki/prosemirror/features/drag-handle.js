@@ -14,7 +14,6 @@ Clicking the handle opens a block action menu (type conversion, delete, etc.).
 const Plugin = require("prosemirror-state").Plugin;
 const NodeSelection = require("prosemirror-state").NodeSelection;
 const DOMSerializer = require("prosemirror-model").DOMSerializer;
-const pmCommands = require("prosemirror-commands");
 const flatListCommands = require("prosemirror-flat-list");
 const slashMenuElements = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/menu-elements.js");
 
