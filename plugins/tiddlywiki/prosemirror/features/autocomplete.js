@@ -22,7 +22,7 @@ const MACRO_TRIGGERS_TITLE = "$:/config/prosemirror/autocomplete/macro-triggers"
 function parseTriggerConfig(wiki, title, defaults) {
 	const text = wiki.getTiddlerText(title, "");
 	if(!text.trim()) return defaults;
-	return text.split("\n").map((s) => s.trim()).filter((s) => s.length > 0);
+	return text.split(/\s+/).map((s) => s.trim()).filter((s) => s.length > 0);
 }
 
 function buildTriggerMap(wiki) {
