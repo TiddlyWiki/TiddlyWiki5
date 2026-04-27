@@ -54,7 +54,7 @@ function insertImageItem(nodeType) {
 	return new MenuItem({
 		title: $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Menu/InsertImage", "Insert image"),
 		label: $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/ImagePicker/Title", "Image"),
-		enable: state => canInsert(state, nodeType),
+		enable: (state) => canInsert(state, nodeType),
 		run(state, _, view) {
 			const { from, to } = state.selection;
 			let attrs = null;
@@ -78,13 +78,12 @@ function insertImageItem(nodeType) {
 }
 
 function cmdItem(cmd, options) {
-	const passedOptions = {
+	const passedOptions = Object.assign({
 		label: options.title,
-		run: cmd,
-		...options
-	};
+		run: cmd
+	}, options);
 	if(!options.enable && !options.select) {
-		passedOptions[options.enable ? "enable" : "select"] = state => cmd(state);
+		passedOptions[options.enable ? "enable" : "select"] = (state) => cmd(state);
 	}
 	return new MenuItem(passedOptions);
 }
@@ -97,18 +96,17 @@ function markActive(state, type) {
 }
 
 function markItem(markType, options) {
-	return cmdItem(toggleMark(markType), {
-		active: state => markActive(state, markType),
-		...options
-	});
+	return cmdItem(toggleMark(markType), Object.assign({
+		active: (state) => markActive(state, markType),
+	}, options));
 }
 
 function linkItem(markType) {
 	return new MenuItem({
 		title: $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/Menu/AddOrRemoveLink", "Add or remove link"),
 		icon: icons.link,
-		active: state => markActive(state, markType),
-		enable: state => !state.selection.empty,
+		active: (state) => markActive(state, markType),
+		enable: (state) => !state.selection.empty,
 		run(state, dispatch, view) {
 			if(markActive(state, markType)) {
 				toggleMark(markType)(state, dispatch);
@@ -193,14 +191,14 @@ function buildMenuItems(schema) {
 		r.insertHorizontalRule = new MenuItem({
 			title: "Insert horizontal rule",
 			label: "Horizontal rule",
-			enable: state => canInsert(state, hr),
+			enable: (state) => canInsert(state, hr),
 			run(state, dispatch) {
 				dispatch(state.tr.replaceSelectionWith(hr.create()));
 			}
 		});
 	}
 
-	const cut = arr => arr.filter(Boolean);
+	const cut = (arr) => arr.filter(Boolean);
 
 	r.insertMenu = new Dropdown(cut([r.insertImage, r.insertHorizontalRule]), { label: "Insert" });
 	r.typeMenu = new Dropdown(cut([

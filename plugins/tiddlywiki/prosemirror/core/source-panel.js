@@ -68,13 +68,13 @@ class SourcePanel {
 
 	get showing() { return this._showing; }
 
-		isManualShowing() {
-			return this.engine.widget.wiki.getTiddlerText(SOURCE_STATE_TIDDLER) === "yes";
-		}
+	isManualShowing() {
+		return this.engine.widget.wiki.getTiddlerText(SOURCE_STATE_TIDDLER) === "yes";
+	}
 
 	getPreviewStateTiddler() {
 		const wiki = this.engine.widget.wiki;
-			if(wiki.getTiddlerText("$:/config/ShowEditPreview/PerTiddler") !== "yes") {
+		if(wiki.getTiddlerText("$:/config/ShowEditPreview/PerTiddler") !== "yes") {
 			return PREVIEW_STATE_TIDDLER;
 		}
 		if(this.engine.widget && typeof this.engine.widget.getStateQualifier === "function") {

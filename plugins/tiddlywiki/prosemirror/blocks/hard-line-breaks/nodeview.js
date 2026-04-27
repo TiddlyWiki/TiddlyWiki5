@@ -59,9 +59,7 @@ function createHardLineBreaksNodeViewPlugin() {
 		key: new PluginKey("hardLineBreaksNodeView"),
 		props: {
 			nodeViews: {
-				hard_line_breaks_block: (node, view, getPos) => {
-					return new HardLineBreaksNodeView(node, view, getPos);
-				}
+				hard_line_breaks_block: (node, view, getPos) => new HardLineBreaksNodeView(node, view, getPos)
 			}
 		}
 	});

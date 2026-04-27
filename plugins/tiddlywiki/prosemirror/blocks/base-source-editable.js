@@ -28,11 +28,11 @@ class BaseSourceEditableNodeView {
 		this._titleEl = null;
 	}
 
-	getLanguageString(suffix, fallback) {
+	static getLanguageString(suffix, fallback) {
 		return $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/" + suffix, fallback);
 	}
 
-	getSvgIcon(tiddlerTitle, size = "1em") {
+	static getSvgIcon(tiddlerTitle, size = "1em") {
 		try {
 			const htmlStr = $tw.wiki.renderTiddler("text/html", tiddlerTitle, {
 				variables: { size }
@@ -47,7 +47,7 @@ class BaseSourceEditableNodeView {
 	}
 
 	setButtonIcon(button, tiddlerTitle, fallbackText) {
-		const svgEl = this.getSvgIcon(tiddlerTitle);
+		const svgEl = this.constructor.getSvgIcon(tiddlerTitle);
 		if(svgEl) {
 			button.innerHTML = "";
 			button.appendChild(document.importNode(svgEl, true));
@@ -68,9 +68,9 @@ class BaseSourceEditableNodeView {
 		const buttons = document.createElement("span");
 		buttons.className = "pm-nodeview-buttons";
 
-		const editBtn = this._createButton("$:/core/images/edit-button", "E", this.getLanguageString("Buttons/Edit", "Edit"));
-		const deleteBtn = this._createButton("$:/core/images/delete-button", "\u00D7", this.getLanguageString("Buttons/Delete", "Delete"));
-		const cancelBtn = this._createButton("$:/core/images/cancel-button", "\u00D7", this.getLanguageString("Buttons/Cancel", "Cancel"));
+		const editBtn = this._createButton("$:/core/images/edit-button", "E", this.constructor.getLanguageString("Buttons/Edit", "Edit"));
+		const deleteBtn = this._createButton("$:/core/images/delete-button", "\u00D7", this.constructor.getLanguageString("Buttons/Delete", "Delete"));
+		const cancelBtn = this._createButton("$:/core/images/cancel-button", "\u00D7", this.constructor.getLanguageString("Buttons/Cancel", "Cancel"));
 
 		editBtn.classList.add("pm-nodeview-btn-edit");
 		deleteBtn.classList.add("pm-nodeview-btn-delete");
@@ -153,7 +153,7 @@ class BaseSourceEditableNodeView {
 		if(this.dom) this.dom.classList.add("pm-nodeview-editing");
 
 		this.setButtonIcon(this.editBtn, "$:/core/images/done-button", "\u2713");
-		this.editBtn.title = this.getLanguageString("Buttons/SaveChanges", "Save changes");
+		this.editBtn.title = this.constructor.getLanguageString("Buttons/SaveChanges", "Save changes");
 
 		if(this.deleteBtn) this.deleteBtn.style.display = "";
 		if(this.cancelBtn) this.cancelBtn.style.display = "";
@@ -168,7 +168,7 @@ class BaseSourceEditableNodeView {
 		if(this.dom) this.dom.classList.remove("pm-nodeview-editing");
 
 		this.setButtonIcon(this.editBtn, "$:/core/images/edit-button", "E");
-		this.editBtn.title = this.getLanguageString("Buttons/Edit", "Edit");
+		this.editBtn.title = this.constructor.getLanguageString("Buttons/Edit", "Edit");
 
 		if(this.deleteBtn) this.deleteBtn.style.display = "none";
 		if(this.cancelBtn) this.cancelBtn.style.display = "none";
@@ -183,7 +183,7 @@ class BaseSourceEditableNodeView {
 		if(this.dom) this.dom.classList.remove("pm-nodeview-editing");
 
 		this.setButtonIcon(this.editBtn, "$:/core/images/edit-button", "E");
-		this.editBtn.title = this.getLanguageString("Buttons/Edit", "Edit");
+		this.editBtn.title = this.constructor.getLanguageString("Buttons/Edit", "Edit");
 
 		if(this.deleteBtn) this.deleteBtn.style.display = "none";
 		if(this.cancelBtn) this.cancelBtn.style.display = "none";
@@ -264,7 +264,7 @@ class BaseSourceEditableNodeView {
 	}
 
 	getEmptyPlaceholderText() {
-		return this.getLanguageString("Placeholder/Empty", "(empty)");
+		return this.constructor.getLanguageString("Placeholder/Empty", "(empty)");
 	}
 
 	renderEmptyPlaceholder(text) {
@@ -310,7 +310,7 @@ class BaseSourceEditableNodeView {
 	}
 
 	destroy() {
-		// Subclasses can override
+		this._destroyed = true;
 	}
 
 	shouldStopControlEvent(event) {
@@ -329,15 +329,27 @@ class BaseSourceEditableNodeView {
 		return this.shouldStopControlEvent(event) || this.isEditMode;
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	ignoreMutation() {
 		return true;
 	}
 
 	// Override in subclasses
-	updateTitle() {}
-	renderEditMode() {}
-	renderViewMode() {}
-	saveEdit(_value) {}
+	updateTitle() {
+		throw new Error(this.constructor.name + " must implement updateTitle()");
+	}
+
+	renderEditMode() {
+		throw new Error(this.constructor.name + " must implement renderEditMode()");
+	}
+
+	renderViewMode() {
+		throw new Error(this.constructor.name + " must implement renderViewMode()");
+	}
+
+	saveEdit(_value) {
+		throw new Error(this.constructor.name + " must implement saveEdit()");
+	}
 }
 
 exports.BaseSourceEditableNodeView = BaseSourceEditableNodeView;

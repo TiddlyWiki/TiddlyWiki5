@@ -29,7 +29,7 @@ function buildParagraph(context, node) {
 			}
 			i--; // Backtrack for the outer loop increment
 			// Strip the closing isRuleEnd <br> — it's the """ syntax marker, not actual content
-			const contentBlock = hardBlock.filter((n) => { return !n.isRuleEnd; });
+			const contentBlock = hardBlock.filter((n) => !n.isRuleEnd);
 			result.push({
 				type: "hard_line_breaks_block",
 				content: convertNodes(context, contentBlock)
@@ -80,34 +80,30 @@ function childContext(context) {
 function buildUnorderedList(context, node) {
 	// ProseMirror requires each list item to be its own list node
 	const ctx = childContext(context);
-	return node.children.map((item) => {
-		return {
-			type: "list",
-			attrs: {
-				kind: "bullet",
-				order: null,
-				checked: false,
-				collapsed: false
-			},
-			content: convertANode(ctx, item)
-		};
-	});
+	return node.children.map((item) => ({
+		type: "list",
+		attrs: {
+			kind: "bullet",
+			order: null,
+			checked: false,
+			collapsed: false
+		},
+		content: convertANode(ctx, item)
+	}));
 }
 
 function buildOrderedList(context, node) {
 	const ctx = childContext(context);
-	return node.children.map((item) => {
-		return {
-			type: "list",
-			attrs: {
-				kind: "ordered",
-				order: null,
-				checked: false,
-				collapsed: false
-			},
-			content: convertANode(ctx, item)
-		};
-	});
+	return node.children.map((item) => ({
+		type: "list",
+		attrs: {
+			kind: "ordered",
+			order: null,
+			checked: false,
+			collapsed: false
+		},
+		content: convertANode(ctx, item)
+	}));
 }
 
 function wrapTextNodesInParagraphs(context, nodes) {
@@ -128,7 +124,7 @@ function wrapTextNodesInParagraphs(context, nodes) {
 		}
 	};
 
-	nodes.forEach(node => {
+	nodes.forEach((node) => {
 		// If it's a text node, collect it
 		if(node.type === "text") {
 			currentTextNodes.push(node);
@@ -155,12 +151,13 @@ function buildListItem(context, node) {
 
 function buildTextWithMark(context, node, markType) {
 	const content = convertNodes(context, node.children);
-	return content.map(childNode => {
+	return content.map((childNode) => {
 		if(childNode.type === "text") {
 			// Add the mark to the text node
-			const marks = childNode.marks || [];
 			const newMarks = (childNode.marks || []).concat([{ type: markType }]);
-			return { ...childNode, ...{ marks: newMarks } };
+			const result = Object.assign({}, childNode);
+			result.marks = newMarks;
+			return result;
 		}
 		return childNode;
 	});
@@ -391,9 +388,7 @@ function buildTableCell(context, child, isHeader) {
 	if(!cellContent || cellContent.length === 0) {
 		cellContent = [{ type: "paragraph" }];
 	} else {
-		const needsWrap = cellContent.every((n) => {
-			return n.type === "text" || (n.marks && n.marks.length > 0);
-		});
+		const needsWrap = cellContent.every((n) => n.type === "text" || (n.marks && n.marks.length > 0));
 		if(needsWrap) {
 			cellContent = [{ type: "paragraph", content: cellContent }];
 		}
@@ -479,12 +474,12 @@ const elementBuilders = {
 	a: buildAnchor,
 	cite: buildCite,
 	table: buildTable,
-	tbody: (context, node) => { return buildTable(context, { children: node.children }); },
-	thead: (context, node) => { return buildTable(context, { children: node.children }); },
-	tfoot: (context, node) => { return buildTable(context, { children: node.children }); },
+	tbody: (context, node) => buildTable(context, { children: node.children }),
+	thead: (context, node) => buildTable(context, { children: node.children }),
+	tfoot: (context, node) => buildTable(context, { children: node.children }),
 	tr: buildTableRow,
-	td: (context, node) => { return buildTableCell(context, node, false); },
-	th: (context, node) => { return buildTableCell(context, node, true); },
+	td: (context, node) => buildTableCell(context, node, false),
+	th: (context, node) => buildTableCell(context, node, true),
 	dl: buildDefinitionList,
 	dt: buildDefinitionTerm,
 	dd: buildDefinitionDescription
@@ -750,7 +745,7 @@ function convertANode(context, node) {
 	if(typeof builder === "function") {
 		const convertedNode = builder(context, node);
 		const arrayOfNodes = (Array.isArray(convertedNode)
-		? convertedNode : [convertedNode]);
+			? convertedNode : [convertedNode]);
 		return arrayOfNodes;
 	}
 	// Unknown node type — preserve as opaque_block to avoid data loss

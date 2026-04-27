@@ -77,10 +77,10 @@ function buildPlugins(schema, wiki, nodeViewHost) {
 		createLinkTooltipPlugin(nodeViewHost),
 		createBlockPlaceholderPlugin(wiki)
 	]
-	.concat(mdPlugin)
-	.concat(listPlugins)
-	.concat(tablePlugins)
-	.concat(exampleSetup({ schema, menuBar: false }));
+		.concat(mdPlugin)
+		.concat(listPlugins)
+		.concat(tablePlugins)
+		.concat(exampleSetup({ schema, menuBar: false }));
 }
 
 exports.buildPlugins = buildPlugins;

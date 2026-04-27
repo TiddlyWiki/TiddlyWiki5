@@ -89,7 +89,7 @@ function scheduleEnterWidgetBlockEditModeNearSelection(view, options) {
 			return false;
 		}
 		const wantedPrefix = `Widget: ${expectedWidgetName}`;
-		const candidates = blocks.filter(b => {
+		const candidates = blocks.filter((b) => {
 			const title = b.querySelector(".pm-widget-block-nodeview-title");
 			return title && (title.textContent || "").indexOf(wantedPrefix) !== -1;
 		});

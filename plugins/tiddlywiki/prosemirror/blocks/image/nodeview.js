@@ -28,14 +28,14 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		wrap.className = "pm-nodeview pm-nodeview-image";
 		wrap.draggable = false;
 
-		const header = this.createHeader(this.node.attrs.twSource || this.getLanguageString("ImagePicker/Title", "Image"));
+		const header = this.createHeader(this.node.attrs.twSource || this.constructor.getLanguageString("ImagePicker/Title", "Image"));
 		const contentContainer = document.createElement("div");
 		contentContainer.className = "pm-nodeview-content pm-image-nodeview-content";
 
 		const img = document.createElement("img");
 		img.className = "pm-image-nodeview-img";
 		img.draggable = false;
-		this._applyImgAttrs(img, this.node.attrs);
+		this.constructor._applyImgAttrs(img, this.node.attrs);
 
 		contentContainer.appendChild(img);
 
@@ -57,7 +57,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		this._setupResizeHandler();
 	}
 
-	_applyImgAttrs(img, attrs) {
+	static _applyImgAttrs(img, attrs) {
 		img.setAttribute("src", attrs.src || "");
 		const optionals = ["alt", "title", "width", "height"];
 		for(let i = 0; i < optionals.length; i++) {
@@ -70,9 +70,9 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 
 	updateTitle() {
 		if(this._titleEl) {
-			this._titleEl.textContent = this.node.attrs.twSource || this.getLanguageString("ImagePicker/Title", "Image");
+			this._titleEl.textContent = this.node.attrs.twSource || this.constructor.getLanguageString("ImagePicker/Title", "Image");
 		}
-		if(this.img) this._applyImgAttrs(this.img, this.node.attrs);
+		if(this.img) this.constructor._applyImgAttrs(this.img, this.node.attrs);
 	}
 
 	renderEditMode() {
@@ -291,11 +291,10 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 			const tr = self.view.state.tr;
 			const pos = self.getPos();
 			if(pos !== undefined) {
-				tr.setNodeMarkup(pos, null, {
-					...self.node.attrs,
+				tr.setNodeMarkup(pos, null, Object.assign({}, self.node.attrs, {
 					width: String(finalWidth),
 					height: String(finalHeight)
-				});
+				}));
 				self.view.dispatch(tr);
 			}
 		}

@@ -38,7 +38,9 @@ describe("ProseMirror editor mapping fallback", function() {
 			editField: "text"
 		};
 
-		expect(EditWidget.prototype.getEditorType.call(widget)).toBe("text");
+		withBrowserFlag(false,function() {
+			expect(EditWidget.prototype.getEditorType.call(widget)).toBe("text");
+		});
 	});
 
 	it("should fall back to text editor in the browser when a mapped parser is unavailable", function() {

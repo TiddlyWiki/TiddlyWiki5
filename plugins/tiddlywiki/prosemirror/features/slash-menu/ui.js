@@ -172,10 +172,10 @@ class SlashMenuUI {
 		const icon = document.createElement("div");
 		icon.className = "tw-slash-menu-item-icon";
 		if(element.icon) {
-			const svgEl = this._renderSvgIcon(element.icon, "1em");
-			icon.appendChild(svgEl || document.createTextNode(this._getIconForElement(element)));
+			const svgEl = this.constructor._renderSvgIcon(element.icon, "1em");
+			icon.appendChild(svgEl || document.createTextNode(this.constructor._getIconForElement(element)));
 		} else {
-			icon.textContent = this._getIconForElement(element);
+			icon.textContent = this.constructor._getIconForElement(element);
 		}
 		menuItem.appendChild(icon);
 
@@ -218,7 +218,7 @@ class SlashMenuUI {
 		return menuItem;
 	}
 
-	_renderSvgIcon(tiddlerTitle, size) {
+	static _renderSvgIcon(tiddlerTitle, size) {
 		try {
 			const tiddler = $tw.wiki.getTiddler(tiddlerTitle);
 			if(!tiddler) return null;
@@ -237,7 +237,7 @@ class SlashMenuUI {
 		}
 	}
 
-	_getIconForElement(element) {
+	static _getIconForElement(element) {
 		if(element.type === "submenu") return "▶";
 		return "•";
 	}

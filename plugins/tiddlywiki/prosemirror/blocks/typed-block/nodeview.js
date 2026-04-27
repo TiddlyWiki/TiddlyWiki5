@@ -107,7 +107,7 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 		const select = document.createElement("select");
 		select.className = "pm-typed-block-type-select pm-nodeview-control";
 		select.setAttribute("contenteditable", "false");
-		this._populateSelect(select, this.node.attrs.parseType);
+		this.constructor._populateSelect(select, this.node.attrs.parseType);
 
 		select.addEventListener("change", () => {
 			const pos = this.getPos();
@@ -127,7 +127,7 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 		return select;
 	}
 
-	_populateSelect(select, currentType) {
+	static _populateSelect(select, currentType) {
 		while(select.firstChild) select.removeChild(select.firstChild);
 		let found = false;
 		for(let i = 0; i < COMMON_TYPES.length; i++) {
@@ -218,7 +218,7 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 		const typeChanged = node.attrs.parseType !== this.node.attrs.parseType;
 		this.node = node;
 		if(typeChanged && this._select) {
-			this._populateSelect(this._select, node.attrs.parseType);
+			this.constructor._populateSelect(this._select, node.attrs.parseType);
 		}
 		this.updateTitle();
 		if(!this.isEditMode) {

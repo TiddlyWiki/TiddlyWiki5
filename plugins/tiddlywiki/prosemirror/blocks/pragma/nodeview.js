@@ -104,12 +104,8 @@ function createPragmaBlockNodeViewPlugin(hostWidget) {
 	return new Plugin({
 		props: {
 			nodeViews: {
-				pragma_block: (node, view, getPos) => {
-					return new SourceBlockNodeView(node, view, getPos, "pragma", hostWidget);
-				},
-				opaque_block: (node, view, getPos) => {
-					return new SourceBlockNodeView(node, view, getPos, "opaque", hostWidget);
-				}
+				pragma_block: (node, view, getPos) => new SourceBlockNodeView(node, view, getPos, "pragma", hostWidget),
+				opaque_block: (node, view, getPos) => new SourceBlockNodeView(node, view, getPos, "opaque", hostWidget)
 			}
 		}
 	});

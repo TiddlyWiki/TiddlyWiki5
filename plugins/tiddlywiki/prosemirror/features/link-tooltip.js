@@ -21,7 +21,7 @@ function getLinkAtPos(state) {
 	if(!selection.empty) return null;
 	const $pos = selection.$from;
 	const marks = $pos.marks();
-	const linkMark = marks.find(m => m.type === linkType);
+	const linkMark = marks.find((m) => m.type === linkType);
 	if(!linkMark) return null;
 	// Scan the parent node's children to find the extent of this link mark
 	const parentStart = $pos.start();
@@ -29,7 +29,7 @@ function getLinkAtPos(state) {
 	$pos.parent.forEach((child, childOffset) => {
 		const childFrom = parentStart + childOffset;
 		const childTo = childFrom + child.nodeSize;
-		if(child.isText && child.marks.some(m => m.type === linkType && m.attrs.href === linkMark.attrs.href)) {
+		if(child.isText && child.marks.some((m) => m.type === linkType && m.attrs.href === linkMark.attrs.href)) {
 			if(childFrom <= $pos.pos && $pos.pos <= childTo) {
 				linkFrom = childFrom;
 				linkTo = childTo;
@@ -81,7 +81,7 @@ class LinkTooltip {
 		this.el.setAttribute("contenteditable", "false");
 		document.body.appendChild(this.el);
 
-		this.el.addEventListener("mousedown", e => {
+		this.el.addEventListener("mousedown", (e) => {
 			e.preventDefault();
 			e.stopPropagation();
 		});
@@ -110,7 +110,7 @@ class LinkTooltip {
 		editBtn.className = "tc-prosemirror-link-tooltip-btn";
 		editBtn.title = "Edit link";
 		setButtonIcon(editBtn, "$:/core/images/edit-button", "E");
-		editBtn.addEventListener("click", e => {
+		editBtn.addEventListener("click", (e) => {
 			e.preventDefault();
 			this._enterEditMode();
 		});
@@ -121,7 +121,7 @@ class LinkTooltip {
 		openBtn.className = "tc-prosemirror-link-tooltip-btn";
 		openBtn.title = "Open link";
 		setButtonIcon(openBtn, "$:/core/images/open-window", "\u2197");
-		openBtn.addEventListener("click", e => {
+		openBtn.addEventListener("click", (e) => {
 			e.preventDefault();
 			if(!this._currentLink) return;
 			const href = this._currentLink.mark.attrs.href || "";
@@ -148,7 +148,7 @@ class LinkTooltip {
 		unlinkBtn.className = "tc-prosemirror-link-tooltip-btn tc-prosemirror-link-tooltip-btn-danger";
 		unlinkBtn.title = "Remove link";
 		setButtonIcon(unlinkBtn, "$:/core/images/close-button", "\u00D7");
-		unlinkBtn.addEventListener("click", e => {
+		unlinkBtn.addEventListener("click", (e) => {
 			e.preventDefault();
 			if(!this._currentLink) return;
 			const { state } = this.view;
@@ -192,7 +192,7 @@ class LinkTooltip {
 		okBtn.className = "tc-prosemirror-link-tooltip-btn tc-prosemirror-link-tooltip-btn-ok";
 		setButtonIcon(okBtn, "$:/core/images/done-button", "\u2713");
 		okBtn.title = "Confirm";
-		okBtn.addEventListener("click", e => {
+		okBtn.addEventListener("click", (e) => {
 			e.preventDefault();
 			this._commitEdit(input.value);
 		});
@@ -203,7 +203,7 @@ class LinkTooltip {
 		cancelBtn.className = "tc-prosemirror-link-tooltip-btn";
 		setButtonIcon(cancelBtn, "$:/core/images/cancel-button", "\u00D7");
 		cancelBtn.title = "Cancel";
-		cancelBtn.addEventListener("click", e => {
+		cancelBtn.addEventListener("click", (e) => {
 			e.preventDefault();
 			this._editing = false;
 			this._buildViewMode();
@@ -215,7 +215,7 @@ class LinkTooltip {
 
 		setTimeout(() => { input.focus(); input.select(); }, 0);
 
-		input.addEventListener("keydown", e => {
+		input.addEventListener("keydown", (e) => {
 			if(e.key === "Enter") {
 				e.preventDefault();
 				this._commitEdit(input.value);

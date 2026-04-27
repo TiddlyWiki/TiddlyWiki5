@@ -18,7 +18,7 @@ const EDITOR_ACTION_TAG = "$:/tags/ProseMirror/EditorAction";
 function getBuiltinActionCommands(schema) {
 	const pmCommands = require("prosemirror-commands");
 	return {
-		"codeblock": view => {
+		"codeblock": (view) => {
 			const current = view.state.selection.$from.parent;
 			if(current.type === schema.nodes.code_block) {
 				pmCommands.setBlockType(schema.nodes.paragraph)(view.state, view.dispatch);
@@ -27,7 +27,7 @@ function getBuiltinActionCommands(schema) {
 			}
 			return true;
 		},
-		"blockquote": view => {
+		"blockquote": (view) => {
 			const $from = view.state.selection.$from;
 			for(let d = $from.depth; d > 0; d--) {
 				if($from.node(d).type === schema.nodes.blockquote) {
@@ -38,27 +38,27 @@ function getBuiltinActionCommands(schema) {
 			pmCommands.wrapIn(schema.nodes.blockquote)(view.state, view.dispatch);
 			return true;
 		},
-		"paragraph": view => {
+		"paragraph": (view) => {
 			pmCommands.setBlockType(schema.nodes.paragraph)(view.state, view.dispatch);
 			return true;
 		},
-		"heading1": view => { pmCommands.setBlockType(schema.nodes.heading, { level: 1 })(view.state, view.dispatch); return true; },
-		"heading2": view => { pmCommands.setBlockType(schema.nodes.heading, { level: 2 })(view.state, view.dispatch); return true; },
-		"heading3": view => { pmCommands.setBlockType(schema.nodes.heading, { level: 3 })(view.state, view.dispatch); return true; },
-		"heading4": view => { pmCommands.setBlockType(schema.nodes.heading, { level: 4 })(view.state, view.dispatch); return true; },
-		"heading5": view => { pmCommands.setBlockType(schema.nodes.heading, { level: 5 })(view.state, view.dispatch); return true; },
-		"heading6": view => { pmCommands.setBlockType(schema.nodes.heading, { level: 6 })(view.state, view.dispatch); return true; },
-		"horizontal-rule": view => {
+		"heading1": (view) => { pmCommands.setBlockType(schema.nodes.heading, { level: 1 })(view.state, view.dispatch); return true; },
+		"heading2": (view) => { pmCommands.setBlockType(schema.nodes.heading, { level: 2 })(view.state, view.dispatch); return true; },
+		"heading3": (view) => { pmCommands.setBlockType(schema.nodes.heading, { level: 3 })(view.state, view.dispatch); return true; },
+		"heading4": (view) => { pmCommands.setBlockType(schema.nodes.heading, { level: 4 })(view.state, view.dispatch); return true; },
+		"heading5": (view) => { pmCommands.setBlockType(schema.nodes.heading, { level: 5 })(view.state, view.dispatch); return true; },
+		"heading6": (view) => { pmCommands.setBlockType(schema.nodes.heading, { level: 6 })(view.state, view.dispatch); return true; },
+		"horizontal-rule": (view) => {
 			const tr = view.state.tr.replaceSelectionWith(schema.nodes.horizontal_rule.create());
 			view.dispatch(tr);
 			return true;
 		},
-		"bold": view => { pmCommands.toggleMark(schema.marks.strong)(view.state, view.dispatch); return true; },
-		"italic": view => { pmCommands.toggleMark(schema.marks.em)(view.state, view.dispatch); return true; },
-		"underline": view => { if(schema.marks.underline) { pmCommands.toggleMark(schema.marks.underline)(view.state, view.dispatch); } return true; },
-		"strikethrough": view => { if(schema.marks.strike) { pmCommands.toggleMark(schema.marks.strike)(view.state, view.dispatch); } return true; },
-		"code-inline": view => { pmCommands.toggleMark(schema.marks.code)(view.state, view.dispatch); return true; },
-		"insert-table": view => {
+		"bold": (view) => { pmCommands.toggleMark(schema.marks.strong)(view.state, view.dispatch); return true; },
+		"italic": (view) => { pmCommands.toggleMark(schema.marks.em)(view.state, view.dispatch); return true; },
+		"underline": (view) => { if(schema.marks.underline) { pmCommands.toggleMark(schema.marks.underline)(view.state, view.dispatch); } return true; },
+		"strikethrough": (view) => { if(schema.marks.strike) { pmCommands.toggleMark(schema.marks.strike)(view.state, view.dispatch); } return true; },
+		"code-inline": (view) => { pmCommands.toggleMark(schema.marks.code)(view.state, view.dispatch); return true; },
+		"insert-table": (view) => {
 			if(!schema.nodes.table || !schema.nodes.table_row || !schema.nodes.table_cell || !schema.nodes.table_header) return false;
 			// Create a 3×3 table with header row
 			const headerCells = [];
@@ -92,7 +92,7 @@ function getBuiltinActionCommands(schema) {
 			});
 			return true;
 		},
-		"hard-line-breaks": view => {
+		"hard-line-breaks": (view) => {
 			if(!schema.nodes.hard_line_breaks_block) return false;
 			const node = schema.nodes.hard_line_breaks_block.createAndFill();
 			if(!node) return false;
@@ -110,7 +110,7 @@ function isPragmaText(text) {
 
 function getSnippetMenuElements(wiki) {
 	return wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]]")
-		.map(title => {
+		.map((title) => {
 			const tiddler = wiki.getTiddler(title);
 			if(!tiddler) {
 				return null;
@@ -126,7 +126,7 @@ function getSnippetMenuElements(wiki) {
 				type: "command",
 				category: "snippet",
 				available: () => true,
-				command: view => {
+				command: (view) => {
 					const trimmed = (snippetText || "").trim();
 					const schema = view.state.schema;
 					if(isPragmaText(trimmed) && schema.nodes.pragma_block) {
@@ -189,18 +189,18 @@ function getBlockTypeMenuElements(wiki, schema) {
 		{ id: "blockquote", label: wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/SlashMenu/TurnIntoQuote", "Turn into quote"), node: schema.nodes.blockquote },
 		{ id: "paragraph", label: wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/SlashMenu/TurnIntoParagraph", "Turn into paragraph"), node: schema.nodes.paragraph }
 	];
-	return blockTypes.map(item => ({
-			id: item.id,
-			label: item.label,
-			type: "command",
-			category: "block-type",
-			available: () => true,
-			command: view => {
-				const tr = view.state.tr.setBlockType(view.state.selection.from, view.state.selection.to, item.node);
-				view.dispatch(tr);
-				return true;
-			}
-		}));
+	return blockTypes.map((item) => ({
+		id: item.id,
+		label: item.label,
+		type: "command",
+		category: "block-type",
+		available: () => true,
+		command: (view) => {
+			const tr = view.state.tr.setBlockType(view.state.selection.from, view.state.selection.to, item.node);
+			view.dispatch(tr);
+			return true;
+		}
+	}));
 }
 
 // --- Programmatic slash menu item registry ---
@@ -299,7 +299,7 @@ function groupByCategory(elements, wiki) {
 
 function flattenMenuElementsWithGroup(elements) {
 	var result = [];
-	elements.forEach(item => {
+	elements.forEach((item) => {
 		if(item.type === "submenu" && Array.isArray(item.elements)) {
 			result.push({
 				id: "group-" + item.id,
