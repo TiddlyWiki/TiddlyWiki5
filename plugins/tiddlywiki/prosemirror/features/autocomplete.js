@@ -11,8 +11,6 @@ ProseMirror plugin for [[ {{ << autocompletion with configurable trigger aliases
 
 const Plugin = require("prosemirror-state").Plugin;
 const PluginKey = require("prosemirror-state").PluginKey;
-const Decoration = require("prosemirror-view").Decoration;
-const DecorationSet = require("prosemirror-view").DecorationSet;
 
 const AUTOCOMPLETE_KEY = new PluginKey("tw-autocomplete");
 

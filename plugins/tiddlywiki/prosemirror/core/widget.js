@@ -15,7 +15,7 @@ const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/core/schema.j
 const { buildPlugins, SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
 const { computeImageSrc } = require("$:/plugins/tiddlywiki/prosemirror/blocks/image/utils.js");
 
-const { EditorState, TextSelection, NodeSelection } = require("prosemirror-state");
+const { EditorState, NodeSelection } = require("prosemirror-state");
 const { EditorView } = require("prosemirror-view");
 
 class ProsemirrorWidget extends Widget {

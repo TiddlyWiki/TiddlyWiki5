@@ -14,8 +14,6 @@ const smartQuotes = require("prosemirror-inputrules").smartQuotes;
 const emDash = require("prosemirror-inputrules").emDash;
 const ellipsis = require("prosemirror-inputrules").ellipsis;
 const wrappingListInputRule = require("prosemirror-flat-list").wrappingListInputRule;
-const NodeType = require("prosemirror-model").NodeType;
-const Schema = require("prosemirror-model").Schema;
 
 function blockQuoteRule(nodeType) {
 	return wrappingInputRule(/^\s*>\s$/, nodeType);

@@ -24,8 +24,8 @@ describe("ProseMirror engine operation mapping", () => {
 		// If engine.js cannot be loaded (missing prosemirror-view in Node),
 		// try buildSchema from a lighter module or skip gracefully.
 		try {
-			// buildSchema only needs prosemirror-model and prosemirror-schema-basic
-			const Schema = require("prosemirror-model").Schema;
+			// buildSchema only needs prosemirror-model and prosemirror-schema-basic.
+			require("prosemirror-model").Schema;
 			// If we got here, prosemirror-model is available but engine.js failed
 			// due to prosemirror-view. Skip the tests.
 		} catch(e2) {

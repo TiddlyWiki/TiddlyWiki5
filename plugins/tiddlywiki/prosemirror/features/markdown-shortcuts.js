@@ -49,32 +49,6 @@ function headingInputRule(schema) {
 	];
 }
 
-function blockquoteInputRule(schema) {
-	const bqType = schema.nodes.blockquote;
-	if(!bqType) return [];
-	const wrapIn = require("prosemirror-commands").wrapIn;
-	return [
-		new InputRule(/^>\s$/, (state, match, start, end) => {
-			// Delete the "> " trigger text first
-			let tr = state.tr.delete(start, end);
-			// Apply wrapIn on the resulting state after deletion
-			const newState = state.apply(tr);
-			let wrapTr = null;
-			wrapIn(bqType)(newState, (t) => { wrapTr = t; });
-			if(wrapTr) {
-				// Combine: first delete, then wrap. Rebuild from scratch using
-				// the steps from both transactions.
-				const combined = state.tr.delete(start, end);
-				for(let si = 0; si < wrapTr.steps.length; si++) {
-					combined.step(wrapTr.steps[si]);
-				}
-				return combined;
-			}
-			return tr;
-		})
-	];
-}
-
 function hrInputRule(schema) {
 	const hrType = schema.nodes.horizontal_rule;
 	if(!hrType) return [];

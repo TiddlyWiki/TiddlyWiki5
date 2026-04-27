@@ -832,7 +832,6 @@ test.describe("ProseMirror Editor - Images", () => {
 			configTiddlers: [imageTiddlerFields()]
 		});
 
-		const imgs = editor.locator("img");
 		const editorImgs = editor.locator(`img[data-tw-source=\"${imageTitle}\"]`);
 		await expect(editorImgs).toHaveCount(2);
 
@@ -2068,7 +2067,7 @@ test.describe("ProseMirror Editor - Markdown Shortcuts", () => {
 // ─────────────────────────────────────────────────────────────────────────────
 test.describe("ProseMirror Editor - Typed Block", () => {
 	test("should render typed block with type dropdown", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, {
+		await setupProseMirrorTest(page, null, {
 			initialText: '$$$application/javascript\nconsole.log("hello");\n$$$'
 		});
 
@@ -2117,7 +2116,7 @@ test.describe("ProseMirror Editor - Typed Block", () => {
 	});
 
 	test("should change type via dropdown", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, {
+		await setupProseMirrorTest(page, null, {
 			initialText: "$$$application/javascript\ncode here\n$$$"
 		});
 
@@ -2134,7 +2133,7 @@ test.describe("ProseMirror Editor - Typed Block", () => {
 
 	test("typed block round-trip should preserve content", async ({ page }) => {
 		const wikitext = "$$$application/javascript\nvar x = 1;\n$$$";
-		const editor = await setupProseMirrorTest(page, null, {
+		await setupProseMirrorTest(page, null, {
 			initialText: wikitext
 		});
 
@@ -2249,7 +2248,7 @@ test.describe("ProseMirror Editor - Drag Handle Extended", () => {
 test.describe("ProseMirror Editor - Typed Block Edit", () => {
 	test.describe.configure({ retries: 2 });
 	test("edit button should toggle between edit and save icons", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, {
+		await setupProseMirrorTest(page, null, {
 			initialText: '$$$application/javascript\nconsole.log("test");\n$$$'
 		});
 
@@ -2286,7 +2285,7 @@ test.describe("ProseMirror Editor - Typed Block Edit", () => {
 	});
 
 	test("double-clicking edit button should not crash", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, {
+		await setupProseMirrorTest(page, null, {
 			initialText: "$$$text/css\nbody { color: red; }\n$$$"
 		});
 

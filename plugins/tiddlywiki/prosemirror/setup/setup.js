@@ -14,7 +14,6 @@ const Plugin = require("prosemirror-state").Plugin;
 const dropCursor = require("prosemirror-dropcursor").dropCursor;
 const gapCursor = require("prosemirror-gapcursor").gapCursor;
 const menuBar = require("prosemirror-menu").menuBar;
-const Schema = require("prosemirror-model").Schema;
 
 const buildMenuItems = require("$:/plugins/tiddlywiki/prosemirror/setup/menu.js").buildMenuItems;
 const buildKeymap = require("$:/plugins/tiddlywiki/prosemirror/setup/keymap.js").buildKeymap;
