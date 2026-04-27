@@ -43,6 +43,33 @@ function dispatchEditorShortcut(editor, key, code, options = {}) {
 	}, { key, code, options });
 }
 
+function selectAllEditorContent(editor) {
+	return editor.evaluate((el) => {
+		const viewEl = el.closest(".ProseMirror") || el;
+		function findAllEngines(widget) {
+			const results = [];
+			if(widget && widget.engine && widget.engine.view) results.push(widget.engine);
+			if(widget && widget.children) {
+				for(const child of widget.children) {
+					results.push.apply(results, findAllEngines(child));
+				}
+			}
+			return results;
+		}
+		const engine = findAllEngines($tw.rootWidget).find((e) => e.view && e.view.dom === viewEl);
+		if(!engine || !engine.view) {
+			throw new Error("ProseMirror engine not found");
+		}
+		const state = engine.view.state;
+		const SelectionType = state.selection.constructor;
+		const selection = SelectionType.create(state.doc, 1, state.doc.content.size);
+		engine.view.dispatch(state.tr.setSelection(selection));
+		engine.view.focus();
+		const nextSelection = engine.view.state.selection;
+		return nextSelection.from === 1 && nextSelection.to === engine.view.state.doc.content.size;
+	});
+}
+
 async function pastePlainText(editor, text) {
 	await editor.evaluate((el, t) => {
 		const dt = new DataTransfer();
@@ -229,8 +256,10 @@ test.describe("ProseMirror Editor - Basic Editing", () => {
 			});
 		}
 
-		await editor.press("Control+A");
-		await editor.press("Control+I");
+		const selectedAll = await selectAllEditorContent(editor);
+		expect(selectedAll).toBeTruthy();
+		const handled = await dispatchEditorShortcut(editor, "i", "KeyI", { ctrlKey: true });
+		expect(handled).toBeTruthy();
 		
 		const hasItalicMark = await editor.evaluate((el) => {
 			const viewEl = el.closest(".ProseMirror") || el;
@@ -1080,8 +1109,13 @@ test.describe("ProseMirror Editor - Configuration", () => {
 
 		await clearEditor(editor);
 		await page.keyboard.type("Bold Text");
-		await editor.press("Control+A");
-		await editor.press("Control+Shift+B");
+		const selectedAll = await selectAllEditorContent(editor);
+		expect(selectedAll).toBeTruthy();
+		const handled = await dispatchEditorShortcut(editor, "B", "KeyB", {
+			ctrlKey: true,
+			shiftKey: true
+		});
+		expect(handled).toBeTruthy();
 
 		await expect(editor.locator("strong")).toContainText("Bold Text");
 	});
