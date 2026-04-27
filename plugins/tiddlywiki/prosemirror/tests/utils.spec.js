@@ -1,4 +1,4 @@
-const{ test, expect } = require("@playwright/test");
+const { test, expect } = require("@playwright/test");
 
 test.describe("Widget Block Utils", () => {
 	test("parseWidget should recognize valid widget syntax", async ({ page }) => {
@@ -7,7 +7,7 @@ test.describe("Widget Block Utils", () => {
 		const result = await page.evaluate(() => {
 			// Import and test parseWidget function
 			// Note: This would require the module to be accessible in browser context
-			const parseWidget = text => {
+			const parseWidget = (text) => {
 				const widgetPattern = /^<<\s*([a-zA-Z_][a-zA-Z0-9_-]*)\s*(.*)>>$/;
 				const match = text.trim().match(widgetPattern);
 				
@@ -53,8 +53,8 @@ test.describe("Widget Block Utils", () => {
 		
 		for(const testCase of testCases) {
 			// eslint-disable-next-line no-await-in-loop
-			const result = await page.evaluate(input => {
-				const parseWidget = text => {
+			const result = await page.evaluate((input) => {
+				const parseWidget = (text) => {
 					const widgetPattern = /^<<\s*([a-zA-Z_][a-zA-Z0-9_-]*)\s*(.*)>>$/;
 					const match = text.trim().match(widgetPattern);
 					return match ? { widgetName: match[1] } : null;
@@ -71,7 +71,7 @@ test.describe("Widget Block Utils", () => {
 		await page.goto("about:blank");
 		
 		const result = await page.evaluate(() => {
-			const parseWidget = text => {
+			const parseWidget = (text) => {
 				const widgetPattern = /^<<\s*([a-zA-Z_][a-zA-Z0-9_-]*)\s*(.*)>>$/;
 				const match = text.trim().match(widgetPattern);
 				return match ? { widgetName: match[1] } : null;
@@ -101,7 +101,7 @@ test.describe("Keyboard Shortcut Configuration", () => {
 		
 		const result = await page.evaluate(() => {
 			// Mock TiddlyWiki
-			globalThis.$tw = {
+			window.$tw = {
 				wiki: {
 					getTiddlerText: () => ""
 				}
@@ -124,11 +124,11 @@ test.describe("Keyboard Shortcut Configuration", () => {
 		expect(result).toBe("Mod-b");
 	});
 
-	test('getShortcut should return null when set to "none"', async ({ page }) => {
+	test("getShortcut should return null when set to \"none\"", async ({ page }) => {
 		await page.goto("about:blank");
 		
 		const result = await page.evaluate(() => {
-			globalThis.$tw = {
+			window.$tw = {
 				wiki: {
 					getTiddlerText: () => "none"
 				}
@@ -155,7 +155,7 @@ test.describe("Keyboard Shortcut Configuration", () => {
 		await page.goto("about:blank");
 		
 		const result = await page.evaluate(() => {
-			globalThis.$tw = {
+			window.$tw = {
 				wiki: {
 					getTiddlerText: () => "Ctrl-Alt-b"
 				}
