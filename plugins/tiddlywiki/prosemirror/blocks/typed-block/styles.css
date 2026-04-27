@@ -9,10 +9,6 @@ content rendering area are customised here.
 
 \*/
 
-.pm-nodeview.pm-nodeview-typedblock {
-	background: <<colour tiddler-editor-fields-even>>;
-}
-
 .pm-nodeview.pm-nodeview-typedblock .pm-typed-block-content {
 	margin: 0;
 	min-height: 1.4em;
@@ -23,7 +19,6 @@ content rendering area are customised here.
 .pm-typed-block-source {
 	margin: 0;
 	padding: 4px 6px;
-	background: <<colour pre-background>>;
 	border-radius: 3px;
 	font-family: monospace;
 	font-size: 12px;
@@ -40,19 +35,10 @@ content rendering area are customised here.
 	min-width: 7rem;
 	height: 18px;
 	line-height: 18px;
-	border: 1px solid <<colour tiddler-editor-border>>;
 	border-radius: 3px;
-	background: <<colour background>>;
-	color: <<colour foreground>>;
 	cursor: pointer;
 }
 
 .pm-typed-block-type-select:focus {
 	outline: none;
-	border-color: <<colour primary>>;
-}
-
-.pm-typed-block-type-select option {
-	color: <<colour foreground>>;
-	background: <<colour background>>;
 }

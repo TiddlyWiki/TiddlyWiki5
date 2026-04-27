@@ -1,0 +1,9 @@
+title: $:/config/
+
+prosemirror/autocomplete/link-triggers: [[ 【【
+prosemirror/autocomplete/macro-triggers: << 《《
+prosemirror/autocomplete/transclusion-triggers: {{ 「『
+prosemirror/def-desc-triggers: : ：
+prosemirror/def-term-triggers: ; ；
+prosemirror/enable-widget-blocks: yes
+prosemirror/widget-block/auto-focus: yes

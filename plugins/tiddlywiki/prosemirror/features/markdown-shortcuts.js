@@ -136,7 +136,7 @@ function definitionListInputRules(schema, wiki) {
 function parseTriggerList(wiki, title, defaults) {
 	const text = wiki.getTiddlerText(title, "");
 	if(!text.trim()) return defaults;
-	return text.split("\n").map((s) => s.trim()).filter((s) => s.length > 0);
+	return text.split(/\s+/).map((s) => s.trim()).filter((s) => s.length > 0);
 }
 
 function createDefListItem(state, start, end, dlType, itemType) {
