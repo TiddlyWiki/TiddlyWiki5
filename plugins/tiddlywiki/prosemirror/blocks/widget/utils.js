@@ -34,11 +34,12 @@ function parseWidget(text) {
 	const closingPos = scanForClosingBrackets(trimmed, pos);
 	if(closingPos === -1) return null;
 	const attributesStr = trimmed.substring(attrStart, closingPos).trim();
-	const attributes = parseAttributes(attributesStr);
+	const parsedAttributes = parseAttributesDetailed(attributesStr);
 	return {
 		type: "widget",
 		widgetName: widgetName,
-		attributes: attributes,
+		attributes: parsedAttributes.attributes,
+		orderedAttributes: parsedAttributes.orderedAttributes,
 		rawText: trimmed
 	};
 }
@@ -89,8 +90,15 @@ function scanForClosingBrackets(str, start) {
 }
 
 function parseAttributes(str) {
+	return parseAttributesDetailed(str).attributes;
+}
+
+function parseAttributesDetailed(str) {
 	const attributes = {};
-	if(!str) return attributes;
+	const orderedAttributes = [];
+	if(!str) {
+		return { attributes: attributes, orderedAttributes: orderedAttributes };
+	}
 	let pos = 0;
 	let paramIndex = 0;
 	while(pos < str.length) {
@@ -98,19 +106,31 @@ function parseAttributes(str) {
 		while(pos < str.length && /\s/.test(str[pos])) pos++;
 		if(pos >= str.length) break;
 		// Try to read key=value or key:"value" or key:'value'
-		const keyMatch = str.substring(pos).match(/^([a-zA-Z_$][a-zA-Z0-9_$-]*)(?:[:=])/);
+		const keyMatch = str.substring(pos).match(/^([a-zA-Z_$][a-zA-Z0-9_$-]*)([:=])/);
 		if(keyMatch) {
 			const key = keyMatch[1];
+			const assignmentOperator = keyMatch[2];
 			pos += keyMatch[0].length;
 			// Read the value
 			const valueResult = readValue(str, pos);
 			attributes[key] = valueResult.value;
+			orderedAttributes.push({
+				name: key,
+				value: valueResult.value,
+				quoted: !!valueResult.quoted,
+				assignmentOperator: assignmentOperator
+			});
 			pos = valueResult.end;
 		} else {
 			// Positional argument — use numeric-only name to match TW's convention
 			const valueResult = readValue(str, pos);
 			if(valueResult.value !== null && valueResult.end > pos) {
 				attributes[paramIndex + ""] = valueResult.value;
+				orderedAttributes.push({
+					name: paramIndex + "",
+					value: valueResult.value,
+					quoted: !!valueResult.quoted
+				});
 				paramIndex++;
 				pos = valueResult.end;
 			} else {
@@ -119,7 +139,7 @@ function parseAttributes(str) {
 			}
 		}
 	}
-	return attributes;
+	return { attributes: attributes, orderedAttributes: orderedAttributes };
 }
 
 function readValue(str, pos) {
@@ -129,7 +149,7 @@ function readValue(str, pos) {
 		const start = pos + 3;
 		let end = str.indexOf('"""', start);
 		if(end === -1) end = str.length;
-		return { value: str.substring(start, end), end: end + 3 };
+		return { value: str.substring(start, end), end: end + 3, quoted: true };
 	}
 	// Double-quoted
 	if(str[pos] === '"') {
@@ -139,7 +159,7 @@ function readValue(str, pos) {
 			if(str[end] === "\\") end++;
 			end++;
 		}
-		return { value: str.substring(start, end), end: end + 1 };
+		return { value: str.substring(start, end), end: end + 1, quoted: true };
 	}
 	// Single-quoted
 	if(str[pos] === "'") {
@@ -149,7 +169,7 @@ function readValue(str, pos) {
 			if(str[end] === "\\") end++;
 			end++;
 		}
-		return { value: str.substring(start, end), end: end + 1 };
+		return { value: str.substring(start, end), end: end + 1, quoted: true };
 	}
 	// [[double bracket]]
 	if(str[pos] === "[" && str[pos + 1] === "[") {
