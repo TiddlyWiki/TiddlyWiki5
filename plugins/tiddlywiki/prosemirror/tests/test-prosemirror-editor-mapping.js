@@ -14,7 +14,7 @@ describe("ProseMirror editor mapping fallback", function() {
 		$tw.browser = value;
 		try {
 			callback();
-		} finally {
+		} finally{
 			$tw.browser = originalBrowser;
 		}
 	}

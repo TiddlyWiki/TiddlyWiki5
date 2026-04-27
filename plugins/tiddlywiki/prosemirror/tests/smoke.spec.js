@@ -1,13 +1,13 @@
-const{ test, expect } = require("@playwright/test");
-const{ resolve } = require("path");
-const{ pathToFileURL } = require("url");
+const { test, expect } = require("@playwright/test");
+const { resolve } = require("path");
+const { pathToFileURL } = require("url");
 
 test.describe("ProseMirror Editor - Smoke Tests", () => {
 	async function loadTestPage(page) {
 		// TiddlyWiki test.html sometimes references external resources; on CI/offline these can
 		// stall for many seconds due to connection timeouts.
-		await page.route("http://**/*", route => route.abort());
-		await page.route("https://**/*", route => route.abort());
+		await page.route("http://**/*", (route) => route.abort());
+		await page.route("https://**/*", (route) => route.abort());
 
 		const repoRoot = resolve(__dirname, "../../../../");
 		const indexPath = resolve(repoRoot, "editions/test/output", "test.html");

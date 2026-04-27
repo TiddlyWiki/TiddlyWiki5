@@ -59,14 +59,14 @@ describe("ProseMirror menu-elements tests", () => {
 			const schema = buildSchema();
 			const elements = getAllMenuElements($tw.wiki, schema);
 			// Should have some action-* items from the editor-actions/*.tid files
-			const actionItems = elements.filter(e => e && e.id && e.id.startsWith("action-"));
+			const actionItems = elements.filter((e) => e && e.id && e.id.startsWith("action-"));
 			expect(actionItems.length).toBeGreaterThan(0);
 		});
 
 		it("should include block-type category items", () => {
 			const schema = buildSchema();
 			const elements = getAllMenuElements($tw.wiki, schema);
-			const blockTypeItems = elements.filter(e => e && e.category === "block-type" && e.type === "command");
+			const blockTypeItems = elements.filter((e) => e && e.category === "block-type" && e.type === "command");
 			expect(blockTypeItems.length).toBeGreaterThan(0);
 		});
 	});
