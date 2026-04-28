@@ -1,0 +1,58 @@
+title: $:/core/macros/static-tabs
+tags: $:/tags/Macro
+code-body: yes
+
+\whitespace trim
+
+\procedure static-tabs-section(currentTab,template,headingLevel,headingShift)
+<$let caption={{{ [<currentTab>get[caption]else<currentTab>] }}}>
+<section class="tc-static-tab">
+<$genesis $type=<<headingLevel>> class="tc-static-tab-heading">
+<$link to=<<currentTab>>><$text text=<<caption>>/></$link>
+</$genesis>
+<div class="tc-static-tab-content">
+<$let tv-adjust-heading-level=<<headingShift>>>
+<%if [<template>!is[blank]] %>
+<$transclude $tiddler=<<template>> $mode="block"/>
+<%else%>
+<$transclude $tiddler=<<currentTab>> $mode="block"/>
+<%endif%>
+</$let>
+</div>
+</section>
+</$let>
+\end
+
+\procedure static-tabs-detail(currentTab,template,headingShift)
+<$let caption={{{ [<currentTab>get[caption]else<currentTab>] }}}>
+<details open class="tc-static-tab">
+<summary class="tc-static-tab-heading"><$link to=<<currentTab>>><$text text=<<caption>>/></$link></summary>
+<div class="tc-static-tab-content">
+<$let tv-adjust-heading-level=<<headingShift>>>
+<%if [<template>!is[blank]] %>
+<$transclude $tiddler=<<template>> $mode="block"/>
+<%else%>
+<$transclude $tiddler=<<currentTab>> $mode="block"/>
+<%endif%>
+</$let>
+</div>
+</details>
+</$let>
+\end
+
+\procedure static-tabs(tabsList,template,class,headingLevel:"h2",anchorPrefix:"",mode:"sections")
+<$let
+	validHeadingLevel={{{ [<headingLevel>!is[blank]else[h2]] }}}
+	headingShift={{{ [<validHeadingLevel>removeprefix[h]subtract[1]] }}}
+>
+<div class={{{ [[tc-static-tabs]] [<class>] +[join[ ]] }}}>
+<$list filter=<<tabsList>> variable="currentTab">
+<%if [<mode>match[details]] %>
+<$transclude $variable="static-tabs-detail" currentTab=<<currentTab>> template=<<template>> headingShift=<<headingShift>>/>
+<%else%>
+<$transclude $variable="static-tabs-section" currentTab=<<currentTab>> template=<<template>> headingLevel=<<validHeadingLevel>> headingShift=<<headingShift>>/>
+<%endif%>
+</$list>
+</div>
+</$let>
+\end

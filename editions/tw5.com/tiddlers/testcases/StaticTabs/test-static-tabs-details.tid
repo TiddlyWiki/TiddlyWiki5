@@ -1,0 +1,25 @@
+created: 20260428000000000
+description: static-tabs details mode vs interactive tabs
+import: [[$:/core/macros/static-tabs]]
+import-compound: [[TestCases/StaticTabs/SharedSamples]]
+modified: 20260428170825731
+tags: $:/tags/wiki-test-spec
+title: TestCases/StaticTabs/test-static-tabs-details
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Compares the standard interactive <<.def "tabs">> macro with `<<.def "static-tabs">>` in `details` mode. Each tab becomes a `<details open>` block with its caption inside `<summary>`.
+
++
+title: Output
+
+;Interactive tabs (default)
+
+<<tabs "[[SampleTabOne]] [[SampleTabTwo]] [[SampleTabThree]] [[SampleTabFour]]" "SampleTabOne" "$:/state/test/static-tabs/outer">>
+
+-----
+
+;Explicit static-tabs, details mode
+
+<<static-tabs "[[SampleTabOne]] [[SampleTabTwo]] [[SampleTabThree]] [[SampleTabFour]]" "" "" "h2" "demo" "details">>

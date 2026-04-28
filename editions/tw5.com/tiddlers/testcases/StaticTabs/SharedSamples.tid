@@ -1,0 +1,72 @@
+created: 20260428000000000
+modified: 20260428171754131
+title: TestCases/StaticTabs/SharedSamples
+type: text/vnd.tiddlywiki-multiple
+
+title: SampleTabOne
+caption: Sample One
+
+!! H2 in tab one
+
+Para A.
+
+!!! H3 in tab one
+
+Para B.
+
+!!!! H4 in tab one
+
+Para C.
+
++
+title: SampleTabTwo
+caption: Sample Two
+
+!! H2 in tab two
+
+* item one
+* item two
+
+!!! H3 in tab two
+
+<<<
+First short paragraph in the block.
+
+Second short paragraph in the block.
+<<<
+
++
+title: SampleTabThree
+caption: Sample Three
+
+!! Tab three transcludes one and two
+
+{{SampleTabOne}}
+
+{{SampleTabTwo}}
+
++
+title: SampleTabFour
+caption: Sample Four
+
+!! Tab four contains nested tabs
+
+<<tabs "[[NestedTabA]] [[NestedTabB]] [[NestedTabC]]" "NestedTabA" "$:/state/test/static-tabs/inner">>
+
++
+title: NestedTabA
+caption: Nested A
+
+Twenty word filler tiddler A used to verify nested tabs render flat under static-tabs container during static site generation.
+
++
+title: NestedTabB
+caption: Nested B
+
+Twenty word filler tiddler B used to verify nested tabs render flat under static-tabs container during static site generation.
+
++
+title: NestedTabC
+caption: Nested C
+
+Twenty word filler tiddler C used to verify nested tabs render flat under static-tabs container during static site generation.
