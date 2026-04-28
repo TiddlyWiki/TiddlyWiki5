@@ -178,51 +178,6 @@ tags: $:/tags/Stylesheet
 	color: <<colour muted-foreground>>;
 }
 
-/* === Drag Handle === */
-
-.tc-prosemirror-drag-handle {
-	color: <<colour muted-foreground>>;
-}
-
-.tc-prosemirror-drag-handle:hover {
-	background: <<colour tiddler-editor-fields-even>>;
-	color: <<colour foreground>>;
-}
-
-/* === Block Action Menu === */
-
-.tc-prosemirror-block-menu {
-	background: <<colour tiddler-background>>;
-	border-color: <<colour tiddler-editor-border>>;
-}
-
-.tc-prosemirror-block-menu-search {
-	border-color: <<colour tiddler-editor-border>>;
-	background: <<colour tiddler-editor-background>>;
-	color: <<colour foreground>>;
-}
-
-.tc-prosemirror-block-menu-search:focus {
-	border-color: <<colour primary>>;
-}
-
-.tc-prosemirror-block-menu-group {
-	color: <<colour muted-foreground>>;
-}
-
-.tc-prosemirror-block-menu-item {
-	color: <<colour foreground>>;
-}
-
-.tc-prosemirror-block-menu-item:hover,
-.tc-prosemirror-block-menu-item-focused {
-	background: <<colour tiddler-editor-fields-even>>;
-}
-
-.tc-prosemirror-block-menu-item-icon {
-	color: <<colour muted-foreground>>;
-}
-
 /* === Table === */
 
 .ProseMirror th,

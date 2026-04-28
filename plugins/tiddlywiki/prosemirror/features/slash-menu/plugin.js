@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/prosemirror/features/slash-menu/plugin.js
 type: application/javascript
 module-type: library
 
-Custom slash menu implementation based on prosemirror-slash-menu
+Custom slash menu implementation inspired by prosemirror-slash-menu
 \*/
 
 "use strict";
