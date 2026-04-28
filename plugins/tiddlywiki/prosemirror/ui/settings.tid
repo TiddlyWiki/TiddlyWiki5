@@ -1,4 +1,0 @@
-title: $:/plugins/tiddlywiki/prosemirror/settings
-caption: ProseMirror
-
-ProseMirror editor settings have been moved to the [[ProseMirror|$:/plugins/tiddlywiki/prosemirror/config]] tab under Settings.

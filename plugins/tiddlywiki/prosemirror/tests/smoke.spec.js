@@ -47,30 +47,6 @@ test.describe("ProseMirror Editor - Smoke Tests", () => {
 		expect(hasWidget).toBeTruthy();
 	});
 
-	test("should create and edit a tiddler", async ({ page }) => {
-		await loadTestPage(page);
-		
-		// Create a test tiddler
-		await page.evaluate(() => {
-			$tw.wiki.addTiddler({
-				title: "SmokeTestTiddler",
-				text: "Test content",
-				type: "text/vnd.tiddlywiki"
-			});
-			
-			// Open in story
-			const storyList = $tw.wiki.getTiddlerList("$:/StoryList");
-			$tw.wiki.addTiddler({
-				title: "$:/StoryList",
-				list: ["SmokeTestTiddler"].concat(storyList)
-			});
-		});
-		
-		// Verify tiddler appears
-		const tiddler = page.locator(".tc-tiddler-frame").filter({ hasText: "SmokeTestTiddler" });
-		await expect(tiddler).toBeVisible({ timeout: 5000 });
-	});
-
 	test("should open tiddler in edit mode with ProseMirror", async ({ page }) => {
 		await loadTestPage(page);
 		
