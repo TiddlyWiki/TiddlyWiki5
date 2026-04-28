@@ -43,7 +43,7 @@ function buildBaseSetupPlugins(options) {
 
 	plugins.push(new Plugin({
 		props: {
-			attributes: { class: "ProseMirror-example-setup-style" }
+			attributes: { class: "ProseMirror-tiddlywiki-style" }
 		}
 	}));
 
