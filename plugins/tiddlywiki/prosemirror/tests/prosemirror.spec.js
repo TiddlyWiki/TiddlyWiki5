@@ -348,13 +348,34 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await expect(deleteBtn).toBeHidden();
 		
 		// Click edit button
-		const editBtn = widgetBlock.locator(".pm-nodeview-btn-edit").first();
-		await editBtn.evaluate((el) => el.click());
-		await expect(widgetBlock.locator("textarea.pm-nodeview-editor").first()).toBeVisible({ timeout: 3000 });
-		
-		// Delete button should now be visible on the editing nodeview
-		const deleteBtnEditing = widgetBlock.locator(".pm-nodeview-btn-delete").first();
-		await expect(deleteBtnEditing).toBeVisible();
+		const editState = await editor.evaluate(async (root) => {
+			const waitFrame = () => new Promise((resolve) => {
+				requestAnimationFrame(resolve);
+			});
+			const findEditingWidget = async (remainingAttempts) => {
+				await waitFrame();
+				const editingWidget = root.querySelector(".pm-nodeview-widget.pm-nodeview-editing");
+				if(editingWidget || remainingAttempts <= 1) {
+					return editingWidget;
+				}
+				return findEditingWidget(remainingAttempts - 1);
+			};
+			const editBtn = root.querySelector(".pm-nodeview-widget .pm-nodeview-btn-edit");
+			if(!editBtn) return { ok: false, step: "editBtn" };
+			editBtn.click();
+			const editingWidget = await findEditingWidget(10);
+			if(!editingWidget) return { ok: false, step: "editingWidget" };
+			const textarea = editingWidget.querySelector("textarea.pm-nodeview-editor");
+			const deleteBtnEditing = editingWidget.querySelector(".pm-nodeview-btn-delete");
+			if(!textarea) return { ok: false, step: "textarea" };
+			if(!deleteBtnEditing) return { ok: false, step: "deleteBtn" };
+			return {
+				ok: getComputedStyle(deleteBtnEditing).display !== "none",
+				step: "display",
+				display: getComputedStyle(deleteBtnEditing).display
+			};
+		});
+		expect(editState).toEqual({ ok: true, step: "display", display: "flex" });
 	});
 
 	test("should save changes when clicking save button", async ({ page }) => {

@@ -7,38 +7,29 @@ module-type: library
 
 "use strict";
 
-const keymap = require("prosemirror-keymap").keymap;
-const history = require("prosemirror-history").history;
-const baseKeymap = require("prosemirror-commands").baseKeymap;
-const Plugin = require("prosemirror-state").Plugin;
-const dropCursor = require("prosemirror-dropcursor").dropCursor;
-const gapCursor = require("prosemirror-gapcursor").gapCursor;
-const menuBar = require("prosemirror-menu").menuBar;
-
-const buildMenuItems = require("$:/plugins/tiddlywiki/prosemirror/setup/menu.js").buildMenuItems;
+const buildBaseSetupPlugins = require("$:/plugins/tiddlywiki/prosemirror/core/base-setup.js").buildBaseSetupPlugins;
 const buildKeymap = require("$:/plugins/tiddlywiki/prosemirror/setup/keymap.js").buildKeymap;
 const buildInputRules = require("$:/plugins/tiddlywiki/prosemirror/setup/inputrules.js").buildInputRules;
+
+function buildMenuItems(schema) {
+	return require("$:/plugins/tiddlywiki/prosemirror/setup/menu.js").buildMenuItems(schema);
+}
 
 exports.buildMenuItems = buildMenuItems;
 exports.buildKeymap = buildKeymap;
 exports.buildInputRules = buildInputRules;
 
+// Legacy compatibility helper mirroring the original ProseMirror example-setup
+// shape. The main editor runtime now assembles its plugins via core/base-setup.js.
 function exampleSetup(options) {
-	const plugins = [
-		buildInputRules(options.schema),
-		keymap(buildKeymap(options.schema, options.mapKeys)),
-		keymap(baseKeymap),
-		dropCursor(),
-		gapCursor()
-	];
-	if(options.menuBar !== false)
-		plugins.push(menuBar({ floating: options.floatingMenu !== false, content: options.menuContent || buildMenuItems(options.schema).fullMenu }));
-	if(options.history !== false)
-		plugins.push(history());
-
-	return plugins.concat(new Plugin({
-		props: {
-			attributes: { class: "ProseMirror-example-setup-style" }
+	options = options || {};
+	return buildBaseSetupPlugins(Object.assign({}, options, {
+		getMenuPlugin: options.menuBar === false ? null : () => {
+			const menuBar = require("prosemirror-menu").menuBar;
+			return menuBar({
+				floating: options.floatingMenu !== false,
+				content: options.menuContent || buildMenuItems(options.schema).fullMenu
+			});
 		}
 	}));
 }
