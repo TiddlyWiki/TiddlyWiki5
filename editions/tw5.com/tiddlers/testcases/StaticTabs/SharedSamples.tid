@@ -1,5 +1,5 @@
 created: 20260428000000000
-modified: 20260428173022817
+modified: 20260428181636871
 title: TestCases/StaticTabs/SharedSamples
 type: text/vnd.tiddlywiki-multiple
 
@@ -51,7 +51,7 @@ caption: Sample Four
 
 !! Tab four contains nested tabs
 
-<<static-tabs "[[NestedTabA]] [[NestedTabB]] [[NestedTabC]]">>
+<<tabs "[[NestedTabA]] [[NestedTabB]] [[NestedTabC]]" "NestedTabA" "$:/state/test/static-tabs/inner">>
 
 +
 title: NestedTabA
