@@ -1,7 +1,7 @@
 created: 20260428000000000
 description: tabs macro auto-replaces with static-tabs under tv-config-static
 import-compound: [[TestCases/StaticTabs/SharedSamples]]
-modified: 20260428100000000
+modified: 20260428175227977
 tags: $:/tags/wiki-test-spec
 title: TestCases/StaticTabs/test-static-tabs-auto
 type: text/vnd.tiddlywiki-multiple

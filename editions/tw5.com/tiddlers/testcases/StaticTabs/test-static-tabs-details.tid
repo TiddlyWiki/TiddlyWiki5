@@ -1,6 +1,5 @@
 created: 20260428000000000
 description: static-tabs details mode vs interactive tabs
-import: [[$:/core/macros/static-tabs]]
 import-compound: [[TestCases/StaticTabs/SharedSamples]]
 modified: 20260428170825731
 tags: $:/tags/wiki-test-spec

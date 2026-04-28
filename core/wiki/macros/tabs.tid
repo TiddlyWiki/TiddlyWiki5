@@ -56,6 +56,9 @@ code-body: yes
 
 \define tabs(tabsList,default,state:"$:/state/tab",class,template,buttonTemplate,retain,actions,explicitState)
 \whitespace trim
+<%if [<tv-config-static>match[yes]] %>
+<$transclude $variable="static-tabs" tabsList=<<__tabsList__>> template=<<__template__>> class=<<__class__>>/>
+<%else%>
 <$qualify title=<<__state__>> name="qualifiedState">
 	<$let tabsState={{{ [<__explicitState__>minlength[1]] ~[<qualifiedState>] }}}>
 		<div class={{{ [[tc-tab-set]addsuffix[ ]addsuffix<__class__>] }}} role="tablist">
@@ -69,4 +72,5 @@ code-body: yes
 		</div>
 	</$let>
 </$qualify>
+<%endif%>
 \end
