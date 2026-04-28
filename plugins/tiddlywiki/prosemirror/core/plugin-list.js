@@ -40,12 +40,12 @@ try {
 	pmTables = null;
 }
 
-function buildPlugins(schema, wiki, nodeViewHost) {
+function buildPlugins(schema, wiki, nodeViewHost, editorType) {
 	const listKeymapPlugin = keymap(listKeymap);
 	const listPlugins = createListPlugins({ schema });
 	const allMenuElements = getAllMenuElements(wiki, schema);
 
-	const mdRules = getMarkdownInputRules(wiki, schema);
+	const mdRules = getMarkdownInputRules(wiki, schema, editorType);
 	const mdPlugin = mdRules.length > 0 ? [inputRules({ rules: mdRules })] : [];
 
 	const tablePlugins = [];

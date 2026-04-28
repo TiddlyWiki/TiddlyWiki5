@@ -7,7 +7,6 @@ module-type: library
 "use strict";
 
 module.exports = function entity(context, node) {
-	void context;
 	const entityStr = node.entity || "";
 	const entityMap = {
 		"&ndash;": "\u2013",

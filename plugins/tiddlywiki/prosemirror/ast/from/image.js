@@ -7,7 +7,6 @@ module-type: library
 "use strict";
 
 module.exports = function image(builders, node) {
-	void builders;
 	const attrs = node && node.attrs || {};
 	const source = (attrs.twSource || attrs.src || "").toString();
 	const kind = (attrs.twKind || "shortcut").toString();

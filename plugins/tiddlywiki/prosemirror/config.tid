@@ -22,6 +22,13 @@ Choose which editor to use for ~WikiText tiddlers. Changes take effect when you 
   <$text text={{$:/plugins/tiddlywiki/prosemirror/language/Settings/MarkdownShortcutsHint}}/>
 </div>
 
+<$checkbox tiddler="$:/config/prosemirror/markdown-shortcuts/auto-for-markdown" field="text" checked="yes" unchecked="no" default="yes">
+  <$text text={{$:/plugins/tiddlywiki/prosemirror/language/Settings/MarkdownShortcutsAutoForMarkdown}}/>
+</$checkbox>
+<div class="tc-control-panel-info">
+  <$text text={{$:/plugins/tiddlywiki/prosemirror/language/Settings/MarkdownShortcutsAutoForMarkdownHint}}/>
+</div>
+
 !! Keyboard Shortcuts
 
 Customize keyboard shortcuts for the ProseMirror editor. Leave blank to use default, or enter `none` to disable a shortcut.

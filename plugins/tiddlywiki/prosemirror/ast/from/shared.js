@@ -21,8 +21,7 @@ function convertNodes(builders, nodes) {
 	return result;
 }
 
-function restoreMetadata(node) {
-	void node;
+function restoreMetadata() {
 	return {};
 }
 

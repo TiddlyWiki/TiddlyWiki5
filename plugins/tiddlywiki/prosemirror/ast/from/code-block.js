@@ -7,7 +7,6 @@ module-type: library
 "use strict";
 
 module.exports = function codeBlock(builders, node) {
-	void builders;
 	let textContent = "";
 	if(node.content && node.content.length > 0) {
 		textContent = node.content.map((child) => child.text || "").join("");

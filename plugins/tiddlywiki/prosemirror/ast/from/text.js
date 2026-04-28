@@ -29,7 +29,6 @@ const markRuleMap = {
 const markPriority = ["code", "strong", "bold", "em", "italic", "underline", "strike", "strikethrough", "superscript", "subscript", "link"];
 
 module.exports = function text(builders, node) {
-	void builders;
 	if(!node.text) {
 		return { type: "text", text: "" };
 	}

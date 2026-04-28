@@ -7,7 +7,6 @@ module-type: library
 "use strict";
 
 module.exports = function buildCodeBlock(context, node) {
-	void context;
 	let codeElement = null;
 	if(node.children && node.children.length > 0) {
 		for(let i = 0; i < node.children.length; i++) {

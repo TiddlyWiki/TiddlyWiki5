@@ -94,7 +94,7 @@ class ProseMirrorEngine {
 	}
 
 	_createEditorView(doc) {
-		const plugins = buildPlugins(this.schema, this.widget.wiki, this);
+		const plugins = buildPlugins(this.schema, this.widget.wiki, this, this.type);
 
 		this.view = new EditorView(this._mount, {
 			state: EditorState.create({
@@ -156,7 +156,9 @@ class ProseMirrorEngine {
 	}
 
 	setText(text, type) {
-		if(type && type !== "text/vnd.tiddlywiki") return;
+		if(type) {
+			this.type = type;
+		}
 		if(this.view && !this.view.hasFocus()) {
 			this.updateDomNodeText(text);
 		}
@@ -170,7 +172,8 @@ class ProseMirrorEngine {
 			}).tree;
 			const pmDoc = wikiAstToProseMirrorAst(wikiAst);
 			const newDoc = this.schema.nodeFromJSON(pmDoc);
-			const state = EditorState.create({ doc: newDoc, plugins: this.view.state.plugins });
+			const plugins = buildPlugins(this.schema, this.widget.wiki, this, this.type);
+			const state = EditorState.create({ doc: newDoc, plugins: plugins });
 			this.view.updateState(state);
 		} catch(e) {
 			console.error("[ProseMirror] Error updating content:", e);
