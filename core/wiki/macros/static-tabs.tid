@@ -40,19 +40,28 @@ code-body: yes
 </$let>
 \end
 
-\procedure static-tabs(tabsList,template,class,headingLevel:"h2",anchorPrefix:"",mode:"sections")
+\procedure static-tabs(tabsList,template,class,headingLevel:"h2",anchorPrefix:"",mode)
 <$let
-	validHeadingLevel={{{ [<headingLevel>!is[blank]else[h2]] }}}
-	headingShift={{{ [<validHeadingLevel>removeprefix[h]subtract[1]] }}}
+	parentDepth={{{ [<tv-static-tabs-depth>!is[blank]else[0]] }}}
+	baseHeading={{{ [<headingLevel>!is[blank]else[h2]] }}}
+	baseLevelNum={{{ [<baseHeading>removeprefix[h]] }}}
+	effectiveLevelNum={{{ [<baseLevelNum>add<parentDepth>] }}}
+	cappedLevelNum={{{ [<effectiveLevelNum>compare:integer:lt[7]else[6]] }}}
+	validHeadingLevel={{{ [<cappedLevelNum>addprefix[h]] }}}
+	headingShift={{{ [<cappedLevelNum>subtract[1]] }}}
+	inheritedMode={{{ [<mode>!is[blank]] ~[<tv-static-tabs-mode>!is[blank]] ~[[sections]] }}}
+	newDepth={{{ [<parentDepth>add[1]] }}}
 >
+<$let tv-static-tabs-depth=<<newDepth>> tv-static-tabs-mode=<<inheritedMode>>>
 <div class={{{ [[tc-static-tabs]] [<class>] +[join[ ]] }}}>
 <$list filter=<<tabsList>> variable="currentTab">
-<%if [<mode>match[details]] %>
+<%if [<inheritedMode>match[details]] %>
 <$transclude $variable="static-tabs-detail" currentTab=<<currentTab>> template=<<template>> headingShift=<<headingShift>>/>
 <%else%>
 <$transclude $variable="static-tabs-section" currentTab=<<currentTab>> template=<<template>> headingLevel=<<validHeadingLevel>> headingShift=<<headingShift>>/>
 <%endif%>
 </$list>
 </div>
+</$let>
 </$let>
 \end
