@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/prosemirror/tests/README
+title: $:/plugins/tiddlywiki/prosemirror/tests/readme
 type: text/vnd.tiddlywiki
 
 ! ProseMirror (WYSIWYG) Editor Tests
@@ -20,7 +20,7 @@ From the repo root (build the HTML only):
 node ./tiddlywiki.js ./editions/test --verbose --rendertiddler '$:/core/save/all' test.html text/plain
 ```
 
-Note: do not pass an output path that already includes `editions/test/output/...` here, because TiddlyWiki writes into the edition output folder and you can accidentally create nested paths like `editions/test/output/editions/test/output/test.html`.
+Do not pass an output path that already includes `editions/test/output/...` here, because TiddlyWiki writes into the edition output folder and you can accidentally create nested paths like `editions/test/output/editions/test/output/test.html`.
 
 If you changed any ProseMirror plugin/editor code (for example [plugins/tiddlywiki/prosemirror/widget.js](plugins/tiddlywiki/prosemirror/widget.js)), you must re-run the build command above so the browser page picks up the changes.
 
@@ -117,15 +117,6 @@ During normal development, you can open the built page in a browser and navigate
 * ''$:/plugins/tiddlywiki/prosemirror/readme''
 
 That tiddler embeds the editor instance used for day-to-day manual testing.
-
-!! Coverage goals
-
-* Basic editing: typing, undo/redo
-* Formatting: bold/italic/inline code
-* Widget Blocks: detect/render/edit/save/delete/config toggles
-* Lists: creation + indent/dedent (prosemirror-flat-list)
-* Headings: H1-H6 shortcuts
-* Integration: content saved back to a tiddler; paste events flagged to avoid the import dialog
 
 !! AI-friendly conventions
 
