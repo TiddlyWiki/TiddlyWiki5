@@ -98,10 +98,6 @@ html[dir="rtl"] .ProseMirror {
 	padding-right: 28px;
 }
 
-html[dir="rtl"] .ProseMirror-menubar {
-	direction: rtl;
-}
-
 /* === Definition List layout === */
 
 .ProseMirror .pm-definition-list {

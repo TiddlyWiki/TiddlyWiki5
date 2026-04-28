@@ -1,7 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/prosemirror/setup/inputrules.js
+title: $:/plugins/tiddlywiki/prosemirror/core/inputrules.js
 type: application/javascript
 module-type: library
+
+Build the ProseMirror input rules for the editor.
 
 \*/
 
@@ -60,4 +62,7 @@ function buildInputRules(schema) {
 	}
 	return inputRules({ rules: rules });
 }
-exports.buildInputRules = buildInputRules;
+
+module.exports = {
+	buildInputRules: buildInputRules
+};

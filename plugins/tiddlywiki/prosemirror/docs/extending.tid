@@ -28,4 +28,4 @@ The editor is built on [[ProseMirror|https://prosemirror.net/]]:
 * ''AST'' (`ast/`): bidirectional conversion between TW parse tree and PM document JSON
 * ''Blocks'' (`blocks/`): custom block nodeviews — widget, image, pragma, hard-line-breaks
 * ''Features'' (`features/`): editor feature plugins — bubble menu, drag handle, link tooltip, markdown shortcuts, autocomplete, find-replace, slash menu
-* ''Setup'' (`setup/`): keymap, menu bar, input rules, placeholder, prompt dialogs
+* ''Core'' also owns shared editing infrastructure such as keymaps and input rules
