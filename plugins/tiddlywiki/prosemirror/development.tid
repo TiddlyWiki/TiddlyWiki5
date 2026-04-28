@@ -12,7 +12,6 @@ Downloaded from JsDelivr CDN (like `https://cdn.jsdelivr.net/npm/prosemirror-sta
 * [ext[prosemirror-flat-list|https://cdn.jsdelivr.net/npm/prosemirror-flat-list@latest/dist/prosemirror-flat-list.cjs]]: v0.5.4
 ** [ext[prosemirror-flat-list.css|https://cdn.jsdelivr.net/npm/prosemirror-flat-list@latest/dist/style.css]]
 ** (Instead of [ext[prosemirror-schema-list|https://cdn.jsdelivr.net/npm/prosemirror-schema-list@latest/dist/index.cjs]])
-* [ext[prosemirror-example-setup|https://cdn.jsdelivr.net/npm/prosemirror-example-setup@latest/dist/index.cjs]]: v1.2.3
 * [ext[orderedmap|https://cdn.jsdelivr.net/npm/orderedmap@latest/dist/index.cjs]]: v2.1.1
 * [ext[prosemirror-transform|https://cdn.jsdelivr.net/npm/prosemirror-transform@latest/dist/index.cjs]]: v1.10.3
 * [ext[prosemirror-keymap|https://cdn.jsdelivr.net/npm/prosemirror-keymap@latest/dist/index.cjs]]: v1.2.2
