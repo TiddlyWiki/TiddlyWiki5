@@ -148,12 +148,6 @@
 				"module-type": "library"
 			}
 		},{
-			"file": "prosemirror-slash-menu.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "prosemirror-slash-menu",
-				"module-type": "library"
-			}		},{
 			"file": "prosemirror-tables.cjs",
 			"fields": {
 				"type": "application/javascript",
