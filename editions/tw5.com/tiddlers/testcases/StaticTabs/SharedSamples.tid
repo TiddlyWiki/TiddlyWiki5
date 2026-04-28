@@ -1,6 +1,6 @@
 code-body: yes
 created: 20260428000000000
-modified: 20260428184735173
+modified: 20260428192139570
 title: TestCases/StaticTabs/SharedSamples
 type: text/vnd.tiddlywiki-multiple
 
@@ -71,3 +71,5 @@ title: NestedTabC
 caption: Nested C
 
 Twenty word filler tiddler C used to verify nested tabs render flat under static-tabs container during static site generation.
+
+<<tabs "[[NestedTabA]] [[NestedTabB]]" "NestedTabA" "$:/state/test/static-tabs/inner-c">>

@@ -5,43 +5,45 @@ code-body: yes
 \whitespace trim
 
 \procedure static-tabs-section(currentTab,template,headingLevel,headingShift)
-<$let _caption={{{ [<currentTab>get[caption]else<currentTab>] }}}>
-	<section class="tc-static-tab">
-		<$genesis $type=<<headingLevel>> class="tc-static-tab-heading">
-			<$link to=<<currentTab>>><$text text=<<_caption>>/></$link>
-		</$genesis>
-		<div class="tc-static-tab-content">
-			<$let tv-adjust-heading-level=<<headingShift>>>
-				<%if [<template>!is[blank]] %>
-					<$transclude $tiddler=<<template>> $mode="block"/>
-				<%else%>
-					<$transclude $tiddler=<<currentTab>> $mode="block"/>
-				<%endif%>
-			</$let>
-		</div>
-	</section>
-</$let>
+<section class="tc-static-tab">
+	<$genesis $type=<<headingLevel>> class="tc-static-tab-heading">
+		<$link to=<<currentTab>>>
+			<$transclude tiddler=<<currentTab>> field="caption">
+				<$text text=<<currentTab>>/>
+			</$transclude>
+		</$link>
+	</$genesis>
+	<div class="tc-static-tab-content">
+		<$let tv-adjust-heading-level=<<headingShift>>>
+			<%if [<template>!is[blank]] %>
+				<$transclude $tiddler=<<template>> $mode="block"/>
+			<%else%>
+				<$transclude $tiddler=<<currentTab>> $mode="block"/>
+			<%endif%>
+		</$let>
+	</div>
+</section>
 \end
 
 \procedure static-tabs-detail(currentTab,template,headingShift)
-<$let _caption={{{ [<currentTab>get[caption]else<currentTab>] }}}>
-	<details open class="tc-static-tab">
-		<summary class="tc-static-tab-heading">
-			<$link to=<<currentTab>> >
-				<$text text=<<_caption>>/>
-			</$link>
-		</summary>
-		<div class="tc-static-tab-content">
-			<$let tv-adjust-heading-level=<<headingShift>>>
-				<%if [<template>!is[blank]] %>
-					<$transclude $tiddler=<<template>> $mode="block"/>
-				<%else%>
-					<$transclude $tiddler=<<currentTab>> $mode="block"/>
-				<%endif%>
-			</$let>
-		</div>
-	</details>
-</$let>
+<details open class="tc-static-tab">
+	<summary class="tc-static-tab-heading">
+		<$link to=<<currentTab>> >
+			<$transclude tiddler=<<currentTab>> field="caption">
+				<$text text=<<currentTab>>/>
+			</$transclude>
+		</$link>
+	</summary>
+	<div class="tc-static-tab-content">
+		<$let tv-adjust-heading-level=<<headingShift>>>
+			<%if [<template>!is[blank]] %>
+				<$transclude $tiddler=<<template>> $mode="block"/>
+			<%else%>
+				<$transclude $tiddler=<<currentTab>> $mode="block"/>
+			<%endif%>
+		</$let>
+	</div>
+</details>
 \end
 
 \procedure static-tabs(tabsList,template,class,headingLevel:"h2",anchorPrefix:"",mode)
@@ -51,7 +53,7 @@ code-body: yes
 	_ownShift={{{ [<_levelNum>subtract[1]] }}}
 	_parentShift={{{ [<tv-adjust-heading-level>!is[blank]else[0]] }}}
 	_shift={{{ [<_parentShift>add<_ownShift>] }}}
-	_mode={{{ [<mode>!is[blank]] ~[<tv-static-tabs-mode>!is[blank]] ~[[sections]] }}}
+	_mode={{{ [<mode>!is[blank]] ~[<tv-static-tabs-mode>!is[blank]] ~[[details]] }}}
 >
 	<$let tv-static-tabs-mode=<<_mode>>>
 		<div class={{{ [[tc-static-tabs]] [<class>] +[join[ ]] }}}>
