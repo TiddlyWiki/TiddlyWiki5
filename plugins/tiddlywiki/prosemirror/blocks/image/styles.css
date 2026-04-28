@@ -8,11 +8,6 @@ Uses the unified pm-nodeview pattern from blocks/nodeview-common.
 
 \*/
 
-/* Lower menubar z-index so image nodeview headers don't get covered */
-.ProseMirror-menubar {
-	z-index: 5;
-}
-
 .pm-nodeview.pm-nodeview-image {
 	display: inline-block;
 	vertical-align: baseline;

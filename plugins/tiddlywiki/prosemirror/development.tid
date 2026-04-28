@@ -20,11 +20,8 @@ Downloaded from JsDelivr CDN (like `https://cdn.jsdelivr.net/npm/prosemirror-sta
 * [ext[prosemirror-commands|https://cdn.jsdelivr.net/npm/prosemirror-commands@latest/dist/index.cjs]]: v1.7.0
 * [ext[prosemirror-dropcursor|https://cdn.jsdelivr.net/npm/prosemirror-dropcursor@latest/dist/index.cjs]]: v1.8.1
 * [ext[prosemirror-gapcursor|https://cdn.jsdelivr.net/npm/prosemirror-gapcursor@latest/dist/index.cjs]]: v1.3.2
-* [ext[prosemirror-menu|https://cdn.jsdelivr.net/npm/prosemirror-menu@latest/dist/index.cjs]]: v1.2.4
-** [ext[menu.css|https://cdn.jsdelivr.net/npm/prosemirror-menu@latest/style/menu.css]]
 * [ext[prosemirror-inputrules|https://cdn.jsdelivr.net/npm/prosemirror-inputrules@latest/dist/index.cjs]]: v1.5.0
 * [ext[w3c-keyname|https://cdn.jsdelivr.net/npm/w3c-keyname@latest/dist/index.cjs]]: v2.2.8
-* [ext[crelt|https://cdn.jsdelivr.net/npm/crelt@latest/dist/index.cjs]]: v1.0.6
 * [ext[rope-sequence|https://cdn.jsdelivr.net/npm/rope-sequence@latest/dist/index.cjs]]: v1.3.4
 * [ext[prosemirror-safari-ime-span|https://cdn.jsdelivr.net/npm/prosemirror-safari-ime-span@latest/dist/index.cjs]]: v1.0.2
 !! Implementations
@@ -39,7 +36,7 @@ ProseMirror editor settings can be customized through the [[Control Panel|$:/plu
 * Each action (bold, italic, undo, etc.) has its own config tiddler
 * Set to `none` to disable a shortcut
 * Leave empty to use default
-* `setup/keymap.js` reads configs via `getShortcut()` function
+* `core/keymap.js` reads configs via `getShortcut()` function
 * Supports both lowercase and uppercase variants (e.g., Mod-b and Mod-B for bold)
 
 ''Widget Block Settings:''

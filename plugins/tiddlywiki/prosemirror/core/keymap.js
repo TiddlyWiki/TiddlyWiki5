@@ -1,7 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/prosemirror/setup/keymap.js
+title: $:/plugins/tiddlywiki/prosemirror/core/keymap.js
 type: application/javascript
 module-type: library
+
+Build the ProseMirror keymap for the editor.
 
 \*/
 
@@ -22,12 +24,12 @@ const mac = typeof navigator != "undefined"
 function getShortcut(action, defaultKey) {
 	const configTiddler = "$:/config/prosemirror/shortcuts/" + action;
 	const customKey = $tw.wiki.getTiddlerText(configTiddler, "").trim();
-	
+
 	// If custom key is explicitly set to "none", disable the shortcut
 	if(customKey === "none") {
 		return null;
 	}
-	
+
 	// Use custom key if provided, otherwise use default
 	return customKey || defaultKey;
 }
@@ -37,12 +39,12 @@ function buildKeymap(schema, mapKeys) {
 	let type;
 	const bind = (action, defaultKey, cmd) => {
 		let key = getShortcut(action, defaultKey);
-		
+
 		// Skip if disabled
 		if(key === null) {
 			return;
 		}
-		
+
 		if(mapKeys) {
 			const mapped = mapKeys[key];
 			if(mapped === false) {

@@ -17,8 +17,8 @@ const Plugin = require("prosemirror-state").Plugin;
 const dropCursor = require("prosemirror-dropcursor").dropCursor;
 const gapCursor = require("prosemirror-gapcursor").gapCursor;
 
-const buildKeymap = require("$:/plugins/tiddlywiki/prosemirror/setup/keymap.js").buildKeymap;
-const buildInputRules = require("$:/plugins/tiddlywiki/prosemirror/setup/inputrules.js").buildInputRules;
+const buildKeymap = require("$:/plugins/tiddlywiki/prosemirror/core/keymap.js").buildKeymap;
+const buildInputRules = require("$:/plugins/tiddlywiki/prosemirror/core/inputrules.js").buildInputRules;
 
 function buildBaseSetupPlugins(options) {
 	options = options || {};

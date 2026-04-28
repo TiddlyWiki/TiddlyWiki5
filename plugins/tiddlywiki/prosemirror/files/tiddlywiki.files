@@ -99,20 +99,6 @@
 				"module-type": "library"
 			}
 		},{
-			"file": "prosemirror-menu.cjs",
-			"fields": {
-				"type": "application/javascript",
-				"title": "prosemirror-menu",
-				"module-type": "library"
-			}
-		},{
-			"file": "menu.css",
-			"fields": {
-				"type": "text/css",
-				"title": "$:/plugins/tiddlywiki/prosemirror/lib/menu.css",
-				"tags": "[[$:/tags/Stylesheet]]"
-			}
-		},{
 			"file": "prosemirror-inputrules.cjs",
 			"fields": {
 				"type": "application/javascript",
@@ -124,13 +110,6 @@
 			"fields": {
 				"type": "application/javascript",
 				"title": "w3c-keyname",
-				"module-type": "library"
-			}
-		},{
-			"file": "crelt.cjs",
-			"fields": {
-				"type": "application/javascript",
-				"title": "crelt",
 				"module-type": "library"
 			}
 		},{
