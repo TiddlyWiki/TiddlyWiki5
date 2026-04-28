@@ -197,7 +197,16 @@ TW_Element.prototype.addEventListener = function(type,listener,useCapture) {
 
 Object.defineProperty(TW_Element.prototype, "tagName", {
 	get: function() {
-		return this.tag || "";
+		if(!this.tag) {
+			return "";
+		}
+		// HTML elements report uppercase tagName per DOM spec. Other namespaces
+		// preserve case. Fakedom only models HTML documents.
+		// https://dom.spec.whatwg.org/#dom-element-tagname
+		if(this.namespaceURI === "http://www.w3.org/1999/xhtml") {
+			return this.tag.toUpperCase();
+		}
+		return this.tag;
 	}
 });
 
