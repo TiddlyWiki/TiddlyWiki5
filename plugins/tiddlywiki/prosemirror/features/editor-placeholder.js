@@ -1,7 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/prosemirror/setup/placeholder.js
+title: $:/plugins/tiddlywiki/prosemirror/features/editor-placeholder.js
 type: application/javascript
 module-type: library
+
+Editor-wide placeholder behavior for an empty ProseMirror document.
 
 \*/
 
@@ -10,7 +12,6 @@ module-type: library
 const Plugin = require("prosemirror-state").Plugin;
 
 function defaultIsEmpty(state) {
-	// Treat a single empty paragraph as empty
 	return state.doc.childCount === 1 && state.doc.firstChild && state.doc.firstChild.isTextblock && state.doc.firstChild.content.size === 0;
 }
 
@@ -24,7 +25,6 @@ function placeholderPlugin(options = {}) {
 				if(!isEmpty(state)) {
 					return null;
 				}
-				// No decorations: we render via a CSS ::before on the editor dom.
 				return null;
 			}
 		},

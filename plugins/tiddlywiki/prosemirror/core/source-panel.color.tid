@@ -1,0 +1,28 @@
+title: $:/plugins/tiddlywiki/prosemirror/core/source-panel/colors
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-prosemirror-source-panel {
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-source-label {
+	background: <<colour tiddler-editor-fields-even>>;
+	color: <<colour muted-foreground>>;
+	border-bottom-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-source-textarea {
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-source-textarea:focus {
+	outline-color: <<colour primary>>;
+}
+
+html[dir="rtl"] .tc-prosemirror-source-panel {
+	border-right-color: <<colour tiddler-editor-border>>;
+}

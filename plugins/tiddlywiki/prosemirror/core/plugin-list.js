@@ -16,7 +16,7 @@ const { inputRules } = require("prosemirror-inputrules");
 const { createListPlugins, listKeymap } = require("prosemirror-flat-list");
 
 const { exampleSetup } = require("$:/plugins/tiddlywiki/prosemirror/setup/setup.js");
-const { placeholderPlugin } = require("$:/plugins/tiddlywiki/prosemirror/setup/placeholder.js");
+const { placeholderPlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/editor-placeholder.js");
 
 const { SlashMenuPlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/plugin.js");
 const { getAllMenuElements } = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/menu-elements.js");

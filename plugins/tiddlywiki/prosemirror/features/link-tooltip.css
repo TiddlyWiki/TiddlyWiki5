@@ -1,0 +1,84 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/features/link-tooltip.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+Structural styles for the ProseMirror link tooltip.
+
+\*/
+
+.tc-prosemirror-link-tooltip {
+	display: flex;
+	align-items: center;
+	padding: 4px 8px;
+	border-radius: 6px;
+	border: 1px solid transparent;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+	font-size: 0.85em;
+	max-width: 400px;
+	white-space: nowrap;
+}
+
+.tc-prosemirror-link-tooltip-display {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	overflow: hidden;
+}
+
+.tc-prosemirror-link-tooltip-href {
+	text-decoration: underline;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 240px;
+	cursor: pointer;
+}
+
+.tc-prosemirror-link-tooltip-buttons {
+	display: flex;
+	gap: 2px;
+	margin-left: 6px;
+	flex-shrink: 0;
+}
+
+.tc-prosemirror-link-tooltip-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	border: none;
+	border-radius: 4px;
+	background: transparent;
+	cursor: pointer;
+	padding: 2px;
+	font-size: 0.85em;
+}
+
+.tc-prosemirror-link-tooltip-btn-ok {
+	font-weight: bold;
+}
+
+.tc-prosemirror-link-tooltip-edit {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.tc-prosemirror-link-tooltip-input {
+	border: 1px solid transparent;
+	border-radius: 4px;
+	padding: 3px 6px;
+	font-size: 0.9em;
+	min-width: 200px;
+}
+
+.tc-prosemirror-link-tooltip-input:focus {
+	outline: none;
+}
+
+.tc-prosemirror-link-tooltip-btn svg {
+	width: 14px;
+	height: 14px;
+	fill: currentColor;
+}

@@ -4,13 +4,25 @@ type: text/css
 tags: $:/tags/Stylesheet
 
 Styles for inline image node UI in ProseMirror editor.
-Uses the unified pm-nodeview pattern from styles/nodeview-common.
+Uses the unified pm-nodeview pattern from blocks/nodeview-common.
 
 \*/
 
 /* Lower menubar z-index so image nodeview headers don't get covered */
 .ProseMirror-menubar {
 	z-index: 5;
+}
+
+.pm-nodeview.pm-nodeview-image {
+	display: inline-block;
+	vertical-align: baseline;
+	max-width: 100%;
+	line-height: 0;
+}
+
+.pm-nodeview.pm-nodeview-image:hover,
+.pm-nodeview.pm-nodeview-image.pm-nodeview-selected {
+	z-index: 100;
 }
 
 .pm-image-nodeview-content {

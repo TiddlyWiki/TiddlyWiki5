@@ -5,7 +5,7 @@ tags: $:/tags/Stylesheet
 
 Styles for hard line breaks blocks in the ProseMirror editor.
 The """ ... """ syntax displays as a distinct editable block with a hover border.
-Uses the unified pm-nodeview pattern from styles/nodeview-common.
+Uses the unified pm-nodeview pattern from blocks/nodeview-common.
 
 \*/
 

@@ -4,7 +4,7 @@ type: text/css
 tags: $:/tags/Stylesheet
 
 Variant styles for typed_block ($$$). Header layout, hover behaviour and
-buttons all come from styles/nodeview-common — only the type select and the
+buttons all come from blocks/nodeview-common — only the type select and the
 content rendering area are customised here.
 
 \*/

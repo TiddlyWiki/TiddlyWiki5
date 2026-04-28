@@ -4,7 +4,7 @@ type: text/css
 tags: $:/tags/Stylesheet
 
 Styles for pragma and opaque blocks in ProseMirror editor.
-Uses the unified pm-nodeview pattern from styles/nodeview-common.
+Uses the unified pm-nodeview pattern from blocks/nodeview-common.
 
 \*/
 
@@ -23,4 +23,4 @@ Uses the unified pm-nodeview pattern from styles/nodeview-common.
 	padding: 0 4px;
 }
 
-/* Hover colours are defined in styles/theme.tid via <<colour>> macros */
+/* Colour overrides are defined in styles.color.tid via <<colour>> macros */
