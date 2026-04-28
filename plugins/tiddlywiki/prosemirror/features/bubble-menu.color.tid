@@ -1,0 +1,27 @@
+title: $:/plugins/tiddlywiki/prosemirror/features/bubble-menu/colors
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-prosemirror-bubble-menu {
+	background: <<colour tiddler-editor-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-bubble-btn {
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-bubble-btn:hover {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-prosemirror-bubble-btn-active {
+	background: <<colour primary>>;
+	color: <<colour background>>;
+}
+
+.tc-prosemirror-bubble-btn-active:hover {
+	background: <<colour primary>>;
+}

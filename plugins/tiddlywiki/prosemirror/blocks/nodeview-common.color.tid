@@ -1,0 +1,70 @@
+title: $:/plugins/tiddlywiki/prosemirror/blocks/nodeview-common/colors
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.pm-nodeview:hover,
+.pm-nodeview.pm-nodeview-selected,
+.pm-nodeview.pm-nodeview-editing {
+	border-color: <<colour primary>>;
+}
+
+.pm-nodeview-header {
+	background: <<colour primary>>;
+	color: <<colour background>>;
+}
+
+.pm-nodeview-btn {
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	color: <<colour background>>;
+}
+
+.pm-nodeview-btn:hover {
+	background: rgba(255, 255, 255, 0.35);
+}
+
+.pm-nodeview-btn:active {
+	background: rgba(255, 255, 255, 0.45);
+}
+
+.pm-nodeview-btn-delete:hover {
+	background: <<colour alert-highlight>>;
+	border-color: <<colour alert-highlight>>;
+}
+
+.pm-nodeview-empty-placeholder {
+	color: <<colour muted-foreground>>;
+}
+
+.pm-nodeview-editor {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.pm-nodeview-editor:focus {
+	outline: none;
+	border-color: <<colour primary>>;
+}
+
+.pm-nodeview-form {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour page-background>>;
+}
+
+.pm-nodeview-form-label {
+	color: <<colour muted-foreground>>;
+}
+
+.pm-nodeview-form-input {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.pm-nodeview-form-input:focus {
+	outline: none;
+	border-color: <<colour primary>>;
+}
