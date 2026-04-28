@@ -47,11 +47,16 @@ code-body: yes
 </div>
 \end
 
+<!-- TODO remove the $(status)$ trick -->
 \procedure static-tabs-detail(currentTab,template,headingShift)
-<details class="tc-static-tab" open>
-	<<static-tabs-detail-summary>>
-	<<static-tabs-detail-body>>
-</details>
+<$let status={{{ [<tv-config-static-tabs-closed>!is[blank]match[yes]then[]else[open]] }}}
+	this-details=`
+	<details class="tc-static-tab" $(status)$>
+		<<static-tabs-detail-summary>>
+		<<static-tabs-detail-body>>
+	</details>`
+>
+<<this-details>>
 \end
 
 \procedure static-tabs(tabsList,template,class,headingLevel:"h2",anchorPrefix:"",mode)
