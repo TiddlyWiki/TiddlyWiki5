@@ -25,24 +25,32 @@ code-body: yes
 </section>
 \end
 
+\procedure static-tabs-detail-summary()
+<summary class="tc-static-tab-heading">
+	<$link to=<<currentTab>> >
+		<$transclude tiddler=<<currentTab>> field="caption">
+			<$text text=<<currentTab>>/>
+		</$transclude>
+	</$link>
+</summary>
+\end
+
+\procedure static-tabs-detail-body()
+<div class="tc-static-tab-content">
+	<$let tv-adjust-heading-level=<<headingShift>>>
+		<%if [<template>!is[blank]] %>
+			<$transclude $tiddler=<<template>> $mode="block"/>
+		<%else%>
+			<$transclude $tiddler=<<currentTab>> $mode="block"/>
+		<%endif%>
+	</$let>
+</div>
+\end
+
 \procedure static-tabs-detail(currentTab,template,headingShift)
-<details open class="tc-static-tab">
-	<summary class="tc-static-tab-heading">
-		<$link to=<<currentTab>> >
-			<$transclude tiddler=<<currentTab>> field="caption">
-				<$text text=<<currentTab>>/>
-			</$transclude>
-		</$link>
-	</summary>
-	<div class="tc-static-tab-content">
-		<$let tv-adjust-heading-level=<<headingShift>>>
-			<%if [<template>!is[blank]] %>
-				<$transclude $tiddler=<<template>> $mode="block"/>
-			<%else%>
-				<$transclude $tiddler=<<currentTab>> $mode="block"/>
-			<%endif%>
-		</$let>
-	</div>
+<details class="tc-static-tab" open>
+	<<static-tabs-detail-summary>>
+	<<static-tabs-detail-body>>
 </details>
 \end
 
