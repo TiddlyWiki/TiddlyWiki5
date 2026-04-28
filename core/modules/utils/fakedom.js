@@ -106,7 +106,9 @@ var TW_Element = function(tag, namespace) {
 	this.children = [];
 	this._style = {}; // Internal style object
 	this.style = new TW_Style(this); // Proxy for style management
-	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
+	// createElementNS with empty-string or null normalises to null (no namespace) per spec.
+	// https://dom.spec.whatwg.org/#dom-document-createelementns
+	this.namespaceURI = namespace !== undefined ? (namespace || null) : "http://www.w3.org/1999/xhtml";
 };
 
 
@@ -197,7 +199,16 @@ TW_Element.prototype.addEventListener = function(type,listener,useCapture) {
 
 Object.defineProperty(TW_Element.prototype, "tagName", {
 	get: function() {
-		return this.tag || "";
+		if(!this.tag) {
+			return "";
+		}
+		// HTML elements report uppercase tagName per DOM spec. Other namespaces
+		// preserve case. Fakedom only models HTML documents.
+		// https://dom.spec.whatwg.org/#dom-element-tagname
+		if(this.namespaceURI === "http://www.w3.org/1999/xhtml") {
+			return this.tag.toUpperCase();
+		}
+		return this.tag;
 	}
 });
 
