@@ -214,7 +214,7 @@ class DragHandleController {
 		this.currentBlockNode = null;
 	}
 
-	createMenu() {
+	static createMenu() {
 		const el = document.createElement("div");
 		el.className = "tc-prosemirror-block-menu";
 		el.setAttribute("role", "menu");
@@ -228,7 +228,7 @@ class DragHandleController {
 
 	showMenu() {
 		if(!this.currentView || this.currentBlockPos === null || !this.handle) return;
-		if(!this.menuEl) this.menuEl = this.createMenu();
+		if(!this.menuEl) this.menuEl = DragHandleController.createMenu();
 		this.menuVisible = true;
 		this.handle.setAttribute("aria-expanded", "true");
 
