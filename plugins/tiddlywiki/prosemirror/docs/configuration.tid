@@ -18,7 +18,7 @@ When enabled, the editor recognises Markdown-style shortcuts:
 * `---` → horizontal rule
 * <code>```</code> → code block
 
-Output is always WikiText. Config tiddler: `$:/config/prosemirror/markdown-shortcuts`.
+Output is always WikiText. Global enable/disable is controlled by `$:/config/prosemirror/markdown-shortcuts`, and Markdown tiddlers can auto-enable these shortcuts by default via `$:/config/prosemirror/markdown-shortcuts/auto-for-markdown`.
 
 !! Widget Blocks
 

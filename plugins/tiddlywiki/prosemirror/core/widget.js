@@ -58,7 +58,7 @@ class ProsemirrorWidget extends Widget {
 		this._buildImagePicker(outerWrap);
 
 		const schema = buildSchema();
-		const plugins = buildPlugins(schema, this.wiki, this);
+		const plugins = buildPlugins(schema, this.wiki, this, this.editType);
 
 		this.view = new EditorView(mount, {
 			state: EditorState.create({

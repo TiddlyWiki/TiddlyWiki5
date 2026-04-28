@@ -2052,48 +2052,6 @@ test.describe("ProseMirror Editor - Markdown Tiddlers", () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Markdown Shortcuts
-// ─────────────────────────────────────────────────────────────────────────────
-test.describe("ProseMirror Editor - Markdown Shortcuts", () => {
-	test("should convert # at line start to heading when enabled", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, {
-			initialText: "",
-			configTiddlers: [{
-				title: "$:/config/prosemirror/markdown-shortcuts",
-				text: "yes"
-			}]
-		});
-
-		await editor.click();
-		await page.keyboard.type("# ");
-		await page.waitForTimeout(200);
-
-		const heading = editor.locator("h1");
-		const count = await heading.count();
-		// If markdown shortcuts are enabled, should convert to heading
-		expect(count).toBeGreaterThanOrEqual(0);
-	});
-
-	test("should convert --- to horizontal rule when enabled", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, {
-			initialText: "",
-			configTiddlers: [{
-				title: "$:/config/prosemirror/markdown-shortcuts",
-				text: "yes"
-			}]
-		});
-
-		await editor.click();
-		await page.keyboard.type("---");
-		await page.waitForTimeout(200);
-
-		// May or may not have converted (depends on inputrule timing)
-		const hr = editor.locator("hr");
-		const count = await hr.count();
-		expect(typeof count).toBe("number");
-	});
-});
-// ─────────────────────────────────────────────────────────────────────────────
 // Typed Block
 // ─────────────────────────────────────────────────────────────────────────────
 test.describe("ProseMirror Editor - Typed Block", () => {

@@ -7,7 +7,6 @@ module-type: library
 "use strict";
 
 function pragmaBlock(builders, node) {
-	void builders;
 	const rawText = node.attrs && node.attrs.rawText || "";
 	let parsedNodes = [];
 	try {
@@ -38,7 +37,6 @@ function pragmaBlock(builders, node) {
 }
 
 function opaqueBlock(builders, node) {
-	void builders;
 	const rawText = node.attrs && node.attrs.rawText || "";
 	try {
 		const parseResult = $tw.wiki.parseText(null, rawText);
@@ -52,7 +50,6 @@ function opaqueBlock(builders, node) {
 }
 
 function typedBlock(builders, node) {
-	void builders;
 	var rawText = node.attrs && node.attrs.rawText || "";
 	var parseType = node.attrs && node.attrs.parseType || "";
 	var renderType = node.attrs && node.attrs.renderType || null;

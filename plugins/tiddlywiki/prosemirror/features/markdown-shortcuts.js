@@ -15,6 +15,24 @@ Enabled/disabled via $:/config/prosemirror/markdown-shortcuts.
 const InputRule = require("prosemirror-inputrules").InputRule;
 const TextSelection = require("prosemirror-state").TextSelection;
 
+const GLOBAL_MARKDOWN_SHORTCUTS_TITLE = "$:/config/prosemirror/markdown-shortcuts";
+const AUTO_MARKDOWN_SHORTCUTS_FOR_MARKDOWN_TITLE = "$:/config/prosemirror/markdown-shortcuts/auto-for-markdown";
+
+function isMarkdownEditorType(editorType) {
+	if(!editorType) return false;
+	const normalizedType = editorType.trim().toLowerCase();
+	return normalizedType === "text/markdown" || normalizedType === "text/x-markdown";
+}
+
+function shouldEnableMarkdownShortcuts(wiki, editorType) {
+	const explicitSetting = wiki.getTiddlerText(GLOBAL_MARKDOWN_SHORTCUTS_TITLE, "no").trim().toLowerCase();
+	if(explicitSetting === "yes") {
+		return true;
+	}
+	const autoForMarkdown = wiki.getTiddlerText(AUTO_MARKDOWN_SHORTCUTS_FOR_MARKDOWN_TITLE, "yes").trim().toLowerCase();
+	return autoForMarkdown === "yes" && isMarkdownEditorType(editorType);
+}
+
 function markInputRule(regexp, markType, groupIndex) {
 	groupIndex = groupIndex || 1;
 	return new InputRule(regexp, (state, match, start, end) => {
@@ -68,9 +86,8 @@ function codeBlockInputRule(schema) {
 	];
 }
 
-function getMarkdownInputRules(wiki, schema) {
-	const enabled = wiki.getTiddlerText("$:/config/prosemirror/markdown-shortcuts", "no");
-	if(enabled !== "yes") return [];
+function getMarkdownInputRules(wiki, schema, editorType) {
+	if(!shouldEnableMarkdownShortcuts(wiki, editorType)) return [];
 
 	let rules = [];
 	const marks = schema.marks;
@@ -154,3 +171,4 @@ function createDefListItem(state, start, end, dlType, itemType) {
 }
 
 exports.getMarkdownInputRules = getMarkdownInputRules;
+exports.shouldEnableMarkdownShortcuts = shouldEnableMarkdownShortcuts;

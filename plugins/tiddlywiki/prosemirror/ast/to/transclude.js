@@ -9,7 +9,6 @@ module-type: library
 const buildOpaqueFromNode = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js").buildOpaqueFromNode;
 
 module.exports = function transclude(context, node) {
-	void context;
 	const hasVariable = node.attributes && node.attributes.$variable;
 	const isMacroCall = hasVariable && (node.rule === "macrocallblock" || node.rule === "macrocall" || node.rule === "macrodef");
 	if(!isMacroCall) {
