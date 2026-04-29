@@ -21,7 +21,7 @@ const { SourcePanel } = require("$:/plugins/tiddlywiki/prosemirror/core/source-p
 
 const { EditorState, TextSelection } = require("prosemirror-state");
 const { EditorView } = require("prosemirror-view");
-const { debounce } = require("$:/core/modules/utils/debounce.js");
+const { debounce } = require("$:/plugins/tiddlywiki/prosemirror/core/debounce.js");
 
 class ProseMirrorEngine {
 	constructor(options) {

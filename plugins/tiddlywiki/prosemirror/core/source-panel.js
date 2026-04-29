@@ -9,7 +9,7 @@ Side-by-side WikiText source panel for the ProseMirror editor.
 
 "use strict";
 
-const { debounce } = require("$:/core/modules/utils/debounce.js");
+const { debounce } = require("$:/plugins/tiddlywiki/prosemirror/core/debounce.js");
 
 const SOURCE_STATE_TIDDLER = "$:/state/prosemirror/show-source";
 const PREVIEW_STATE_TIDDLER = "$:/state/showeditpreview";
