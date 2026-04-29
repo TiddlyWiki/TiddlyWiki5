@@ -13,6 +13,16 @@ const flatListCommands = require("prosemirror-flat-list");
 const slashMenuElements = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/menu-elements.js");
 const helpers = require("$:/plugins/tiddlywiki/prosemirror/features/drag-handle/helpers.js");
 
+// Categories that make sense in a block-level action menu.
+// "snippet" inserts new content; "typed-block" inserts new typed blocks;
+// neither is a block-level operation on the current block.
+const BLOCK_MENU_CATEGORIES = {
+	"block-type": true,   // Turn into paragraph/codeblock/quote/headings
+	"block-insert": true, // Insert structural blocks: horizontal-rule, hard-line-breaks, insert-table
+	"other": true         // Misc structural actions
+};
+
+// Inline formatting actions are not block operations.
 const INLINE_SLASH_ACTION_IDS = {
 	"action-bold": true,
 	"action-italic": true,
@@ -22,7 +32,15 @@ const INLINE_SLASH_ACTION_IDS = {
 };
 
 function isEligibleSlashMenuItem(element) {
-	if(!element || element.type !== "command" || INLINE_SLASH_ACTION_IDS[element.id]) {
+	if(!element || element.type !== "command") {
+		return false;
+	}
+	// Exclude inline formatting
+	if(INLINE_SLASH_ACTION_IDS[element.id]) {
+		return false;
+	}
+	// Only include categories relevant to block operations
+	if(!BLOCK_MENU_CATEGORIES[element.category]) {
 		return false;
 	}
 	if(typeof element.available === "function" && !element.available()) {
