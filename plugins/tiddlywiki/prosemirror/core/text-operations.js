@@ -152,11 +152,6 @@ function handleTextOperation(engine, event) {
 		return true;
 	}
 
-	if(param === "toggle-source") {
-		engine.toggleSourcePanel();
-		return true;
-	}
-
 	return false;
 }
 

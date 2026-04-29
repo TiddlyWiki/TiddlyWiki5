@@ -10,5 +10,4 @@ list-after: $:/core/ui/EditTemplate/body/preview/output
 	tag="textarea"
 	class="tc-edit-texteditor tc-max-width"
 	rows="12"
-	disabled="yes"
 />

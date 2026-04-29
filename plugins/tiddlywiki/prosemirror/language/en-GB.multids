@@ -25,7 +25,6 @@ SlashMenu/AriaLabel: Slash menu commands
 SlashMenu/FilterAriaLabel: Filter commands
 SlashMenu/FilterPlaceholder: Filter...
 SlashMenu/NoMatches: No matching commands
-SourcePanel/Title: WikiText Source
 BlockMenu/FilterPlaceholder: Filter actions...
 DragHandle/Actions: Actions
 DragHandle/AriaLabel: Drag to reorder, click for options
