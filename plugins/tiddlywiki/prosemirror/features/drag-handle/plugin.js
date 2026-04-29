@@ -31,6 +31,12 @@ class DragHandleController {
 		this.dragWrapper = null;
 		this.removeDocumentMousemove = null;
 
+		this._suppressNextClick = false;
+		this._touchStartX = 0;
+		this._touchStartY = 0;
+		this._touchMoved = false;
+		this._longPressTimer = null;
+
 		this.onDocumentMouseMove = this.onDocumentMouseMove.bind(this);
 		this.closeOnOutsideClick = this.closeOnOutsideClick.bind(this);
 	}
@@ -89,6 +95,11 @@ class DragHandleController {
 		document.body.appendChild(el);
 
 		el.addEventListener("click", (e) => {
+			// Suppress menu open if this click was triggered by a touch (use long-press instead)
+			if(this._suppressNextClick) {
+				this._suppressNextClick = false;
+				return;
+			}
 			e.preventDefault();
 			e.stopPropagation();
 			if(this.menuVisible) {
@@ -97,6 +108,49 @@ class DragHandleController {
 				this.showMenu();
 			}
 		});
+
+		// Touch support: long-press to open menu, short tap does nothing (avoids blocking scroll)
+		el.addEventListener("touchstart", (e) => {
+			this._suppressNextClick = true;
+			const touch = e.touches[0];
+			this._touchStartX = touch.clientX;
+			this._touchStartY = touch.clientY;
+			this._touchMoved = false;
+			this._longPressTimer = this.safeTimeout(() => {
+				if(!this._touchMoved) {
+					if(this.menuVisible) {
+						this.hideMenu();
+					} else {
+						this.showMenu();
+					}
+				}
+				this._suppressNextClick = false;
+			}, 500);
+		}, { passive: true });
+
+		el.addEventListener("touchmove", (e) => {
+			if(e.touches.length > 0) {
+				const dx = Math.abs(e.touches[0].clientX - this._touchStartX);
+				const dy = Math.abs(e.touches[0].clientY - this._touchStartY);
+				if(dx > 8 || dy > 8) {
+					this._touchMoved = true;
+					if(this._longPressTimer) {
+						clearTimeout(this._longPressTimer);
+						this._longPressTimer = null;
+					}
+				}
+			}
+		}, { passive: true });
+
+		el.addEventListener("touchend", () => {
+			if(this._longPressTimer) {
+				clearTimeout(this._longPressTimer);
+				this._longPressTimer = null;
+			}
+			// Keep _suppressNextClick = true so the synthesised click is ignored;
+			// reset after the synthetic-click delay (~300 ms)
+			this.safeTimeout(() => { this._suppressNextClick = false; }, 400);
+		}, { passive: true });
 
 		el.addEventListener("keydown", (e) => {
 			if(e.key === "Enter" || e.key === " ") {
@@ -154,6 +208,20 @@ class DragHandleController {
 			this.dragWrapper = null;
 			if($tw.dragInProgress === el) {
 				$tw.dragInProgress = null;
+			}
+			// Clear ProseMirror's dragging state — the view.dragging flag causes the
+			// editor to apply ProseMirror-hideselection (transparent text selection).
+			// Because our handle lives outside the editor DOM, PM's own dragend
+			// listener never fires, so we must reset it manually.
+			if(this.currentView) {
+				this.currentView.dragging = null;
+				// Dispatch a no-op transaction so PM re-renders and removes the
+				// ProseMirror-hideselection class.
+				try {
+					this.currentView.dispatch(this.currentView.state.tr);
+				} catch(ex) {
+					// ignore
+				}
 			}
 		});
 
