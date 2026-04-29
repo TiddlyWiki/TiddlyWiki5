@@ -8,7 +8,7 @@ module-type: library
 "use strict";
 
 const { widget: Widget } = require("$:/core/modules/widgets/widget.js");
-const { debounce } = require("$:/core/modules/utils/debounce.js");
+const { debounce } = require("$:/plugins/tiddlywiki/prosemirror/core/debounce.js");
 const { from: wikiAstFromProseMirrorAst } = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js");
 const { to: wikiAstToProseMirrorAst } = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js");
 const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/core/schema.js");
