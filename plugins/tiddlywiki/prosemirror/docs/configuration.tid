@@ -1,0 +1,46 @@
+title: $:/plugins/tiddlywiki/prosemirror/docs/configuration
+caption: Configuration
+tags: $:/plugins/tiddlywiki/prosemirror/docs
+
+! Configuration
+
+All ProseMirror settings are available under ''Control Panel > Settings > ProseMirror''.
+
+!! Markdown Shortcuts
+
+When enabled, the editor recognises Markdown-style shortcuts:
+
+* `**bold**` → ''bold''
+* `*italic*` → //italic//
+* `~~strike~~` → ~~strike~~
+* <code>``code``</code> → `code`
+* `# Heading` → heading
+* `---` → horizontal rule
+* <code>```</code> → code block
+
+Output is always WikiText. Global enable/disable is controlled by `$:/config/prosemirror/markdown-shortcuts`, and Markdown tiddlers can auto-enable these shortcuts by default via `$:/config/prosemirror/markdown-shortcuts/auto-for-markdown`.
+
+!! Widget Blocks
+
+Visual rendering of `<<macro>>` syntax can be toggled via `$:/config/prosemirror/enable-widget-blocks`.
+
+!! Autocomplete Triggers
+
+The characters that open the autocomplete dropdown are configurable:
+
+|!Type |!Default triggers |!Config tiddler |
+|Links |`[[` `【【` |`$:/config/prosemirror/autocomplete/link-triggers` |
+|Macros |`<<` `《《` |`$:/config/prosemirror/autocomplete/macro-triggers` |
+|Transclusions |`{{` `「『` |`$:/config/prosemirror/autocomplete/transclusion-triggers` |
+
+!! Keyboard Shortcuts
+
+Each toolbar action has a configurable shortcut via its EditorAction tiddler. Set the `keyboard-shortcut` field, or use `none` to disable.
+
+|!Action |!Default |
+|Bold |Mod-b |
+|Italic |Mod-i |
+|Heading 1–3 |Shift-Ctrl-1 to 3 |
+|Blockquote |Ctrl-> |
+|Code block |Shift-Ctrl-\\ |
+|Horizontal rule |Mod-_ |

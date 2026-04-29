@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorAction/blockquote
+tags: $:/tags/ProseMirror/EditorAction
+caption: Turn into quote
+description: Convert the current block to a blockquote
+category: block-type
+icon: $:/core/images/quote
+
+\rules only
+
+<$action-sendmessage $message="tm-prosemirror-editor-action" actionId="blockquote"/>

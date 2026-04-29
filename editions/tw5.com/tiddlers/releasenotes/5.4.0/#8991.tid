@@ -1,0 +1,12 @@
+title: $:/changenotes/5.4.0/#8991
+description: Add ProseMirror-based WYSIWYG editor plugin
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: feature
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8991
+github-contributors: linonetwo
+
+* New `tiddlywiki/prosemirror` plugin providing a rich text editor, based on `tiddlywiki/wikitext-serialize` plugin
+* Slash menu (/) for quick access to formatting commands
+* Input rules for quick formatting (e.g., `## ` for headings, ``` for code blocks)

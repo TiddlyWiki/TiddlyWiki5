@@ -1,0 +1,110 @@
+title: $:/plugins/tiddlywiki/prosemirror/styles/structure
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+/*
+ * ProseMirror Editor — Structural / Layout CSS
+ *
+ * This file contains layout and structural styles that do NOT depend
+ * on the colour palette.  Colour overrides are in styles/theme.
+ */
+
+/* === ProseMirror content area === */
+
+.ProseMirror {
+	padding-left: 28px;
+	position: relative;
+}
+
+.ProseMirror p {
+	margin: 0.5em 0;
+}
+
+.ProseMirror p:first-child {
+	margin-top: 0;
+}
+
+.ProseMirror p:last-child {
+	margin-bottom: 0;
+}
+
+.ProseMirror blockquote {
+	margin: 0.5em 0;
+	padding: 0 15px;
+	border-left: 5px solid transparent;
+}
+
+.ProseMirror pre {
+	position: relative;
+	padding: 8px 12px;
+	border-radius: 4px;
+	border: 1px solid transparent;
+	overflow-x: auto;
+}
+
+.ProseMirror hr {
+	border: none;
+	border-top: 1px solid transparent;
+	margin: 1em 0;
+}
+
+.ProseMirror h1, .ProseMirror h2, .ProseMirror h3,
+.ProseMirror h4, .ProseMirror h5, .ProseMirror h6 {
+	margin: 0.8em 0 0.3em;
+}
+
+.ProseMirror h1:first-child, .ProseMirror h2:first-child, .ProseMirror h3:first-child,
+.ProseMirror h4:first-child, .ProseMirror h5:first-child, .ProseMirror h6:first-child {
+	margin-top: 0;
+}
+
+/* === Table layout === */
+
+.ProseMirror table {
+	border-collapse: collapse;
+	table-layout: fixed;
+	width: 100%;
+	margin: 0.5em 0;
+}
+
+.ProseMirror th,
+.ProseMirror td {
+	border: 1px solid transparent;
+	padding: 4px 8px;
+	vertical-align: top;
+	position: relative;
+}
+
+.ProseMirror th {
+	font-weight: bold;
+}
+
+.ProseMirror .column-resize-handle {
+	position: absolute;
+	right: -2px;
+	top: 0;
+	bottom: 0;
+	width: 4px;
+	z-index: 20;
+	pointer-events: none;
+}
+
+/* === RTL structural overrides === */
+
+html[dir="rtl"] .ProseMirror {
+	direction: rtl;
+	text-align: right;
+	padding-left: 0;
+	padding-right: 28px;
+}
+
+/* === Definition List layout === */
+
+.ProseMirror .pm-definition-list {
+	margin: 0.5em 0;
+}
+
+.ProseMirror .pm-definition-list dd {
+	margin-left: 1.5em;
+}
+

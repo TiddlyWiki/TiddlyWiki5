@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorAction/insert-table
+tags: $:/tags/ProseMirror/EditorAction
+caption: Insert table
+description: Insert a 3×3 table with header row
+category: block-insert
+action-id: insert-table
+

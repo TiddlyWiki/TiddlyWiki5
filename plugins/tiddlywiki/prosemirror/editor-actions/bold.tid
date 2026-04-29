@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorAction/bold
+tags: $:/tags/ProseMirror/EditorAction
+caption: Bold
+description: Toggle bold formatting
+category: inline-format
+action-id: bold
+icon: $:/core/images/bold
+

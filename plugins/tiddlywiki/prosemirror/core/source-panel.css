@@ -1,0 +1,57 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/core/source-panel.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+Structural styles for the ProseMirror source panel.
+
+\*/
+
+.tc-prosemirror-wrapper.tc-prosemirror-source-active {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+}
+
+.tc-prosemirror-source-panel {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	overflow: hidden;
+	min-height: 200px;
+}
+
+.tc-prosemirror-source-label {
+	padding: 4px 8px;
+	font-size: 0.8em;
+	font-weight: 600;
+	border-bottom: 1px solid transparent;
+}
+
+.tc-prosemirror-source-textarea {
+	flex: 1;
+	resize: none;
+	border: none;
+	padding: 8px;
+	font-family: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", "Courier", monospace;
+	font-size: 0.9em;
+	line-height: 1.5;
+	tab-size: 4;
+	min-height: 200px;
+}
+
+.tc-prosemirror-source-textarea:focus {
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+}
+
+@media (max-width: 768px) {
+	.tc-prosemirror-wrapper.tc-prosemirror-source-active {
+		grid-template-columns: 1fr;
+	}
+}
+
+html[dir="rtl"] .tc-prosemirror-source-panel {
+	border-left: none;
+}

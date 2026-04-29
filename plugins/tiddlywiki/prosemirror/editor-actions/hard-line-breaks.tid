@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorAction/hard-line-breaks
+tags: $:/tags/ProseMirror/EditorAction
+caption: Hard line breaks block
+description: Insert a multiline text block (""" ... """) where each line break is preserved
+category: block-insert
+action-id: hard-line-breaks
