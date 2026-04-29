@@ -17,8 +17,6 @@ const wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/t
 const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/core/schema.js");
 const { buildPlugins, SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
 const { handleTextOperation } = require("$:/plugins/tiddlywiki/prosemirror/core/text-operations.js");
-const { SourcePanel } = require("$:/plugins/tiddlywiki/prosemirror/core/source-panel.js");
-
 const { EditorState, TextSelection } = require("prosemirror-state");
 const { EditorView } = require("prosemirror-view");
 const { debounce } = require("$:/plugins/tiddlywiki/prosemirror/core/debounce.js");
@@ -43,7 +41,6 @@ class ProseMirrorEngine {
 		this.debouncedSave = debounce(() => {
 			const text = this.getText();
 			this.widget.saveChanges(text);
-			this.sourcePanel.syncFromEditor();
 		}, 300);
 
 		this._createEditorView(doc);
@@ -51,14 +48,8 @@ class ProseMirrorEngine {
 
 		this.slashMenuUI = new SlashMenuUI(this.view, { clickable: true });
 
-		this.sourcePanel = new SourcePanel(this);
-
 		if(this.widget.addEventListener) {
 			this.widget.addEventListener("tm-prosemirror-image-picked-nodeview", (event) => this.handleImagePickedNodeView(event));
-			this.widget.addEventListener("tm-prosemirror-toggle-source", () => {
-				this.toggleSourcePanel();
-				return true;
-			});
 		}
 	}
 
@@ -151,10 +142,6 @@ class ProseMirrorEngine {
 	// eslint-disable-next-line class-methods-use-this
 	makeChildWidgets() {}
 
-	toggleSourcePanel() {
-		this.sourcePanel.toggle();
-	}
-
 	setText(text, type) {
 		if(type) {
 			this.type = type;
@@ -206,9 +193,6 @@ class ProseMirrorEngine {
 	}
 
 	focus() {
-		if(this.sourcePanel && this.sourcePanel.syncWithPreviewState) {
-			this.sourcePanel.syncWithPreviewState();
-		}
 		if(this.view) this.view.focus();
 	}
 
@@ -289,8 +273,6 @@ class ProseMirrorEngine {
 	}
 
 	destroy() {
-		if(this.sourcePanel && this.sourcePanel.flushPendingSync) this.sourcePanel.flushPendingSync();
-		if(this.sourcePanel && this.sourcePanel.destroy) this.sourcePanel.destroy();
 		if(this.debouncedSave && this.debouncedSave.flush) this.debouncedSave.flush();
 		if(this.slashMenuUI) { this.slashMenuUI.destroy(); this.slashMenuUI = null; }
 		if(this.view) { this.view.destroy(); this.view = null; }
