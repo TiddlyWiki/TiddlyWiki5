@@ -14,12 +14,17 @@ code-body: yes
 		</$link>
 	</$genesis>
 	<div class="tc-static-tab-content">
-		<$let tv-adjust-heading-level=<<headingShift>>>
-			<%if [<template>!is[blank]] %>
-				<$transclude $tiddler=<<template>> $mode="block"/>
-			<%else%>
-				<$transclude $tiddler=<<currentTab>> $mode="block"/>
-			<%endif%>
+		<$let
+			_fieldShift={{{ [<currentTab>get[static-adjust-heading-level]else[0]] }}}
+			_finalShift={{{ [<headingShift>add<_fieldShift>] }}}
+		>
+			<$let tv-adjust-heading-level=<<_finalShift>>>
+				<%if [<template>!is[blank]] %>
+					<$transclude $tiddler=<<template>> $mode="block"/>
+				<%else%>
+					<$transclude $tiddler=<<currentTab>> $mode="block"/>
+				<%endif%>
+			</$let>
 		</$let>
 	</div>
 </section>
@@ -37,12 +42,17 @@ code-body: yes
 
 \procedure static-tabs-detail-body()
 <div class="tc-static-tab-content">
-	<$let tv-adjust-heading-level=<<headingShift>>>
-		<%if [<template>!is[blank]] %>
-			<$transclude $tiddler=<<template>> $mode="block"/>
-		<%else%>
-			<$transclude $tiddler=<<currentTab>> $mode="block"/>
-		<%endif%>
+	<$let
+		_fieldShift={{{ [<currentTab>get[static-adjust-heading-level]else[0]] }}}
+		_finalShift={{{ [<headingShift>add<_fieldShift>] }}}
+	>
+		<$let tv-adjust-heading-level=<<_finalShift>>>
+			<%if [<template>!is[blank]] %>
+				<$transclude $tiddler=<<template>> $mode="block"/>
+			<%else%>
+				<$transclude $tiddler=<<currentTab>> $mode="block"/>
+			<%endif%>
+		</$let>
 	</$let>
 </div>
 \end
