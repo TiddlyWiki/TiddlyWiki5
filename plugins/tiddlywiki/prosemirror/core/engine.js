@@ -157,7 +157,7 @@ class ProseMirrorEngine {
 			const wikiAst = this.wiki.parseText(this.type, text || "", {
 				defaultType: "text/vnd.tiddlywiki"
 			}).tree;
-			const pmDoc = wikiAstToProseMirrorAst(wikiAst);
+			const pmDoc = wikiAstToProseMirrorAst(wikiAst, { sourceText: text || "" });
 			const newDoc = this.schema.nodeFromJSON(pmDoc);
 			const plugins = buildPlugins(this.schema, this.widget.wiki, this, this.type);
 			const state = EditorState.create({ doc: newDoc, plugins: plugins });
