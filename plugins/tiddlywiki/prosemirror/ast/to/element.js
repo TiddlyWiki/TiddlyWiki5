@@ -65,5 +65,5 @@ module.exports = function element(context, node) {
 	if(builder) {
 		return builder(context, node);
 	}
-	return buildOpaqueFromNode(node);
+	return buildOpaqueFromNode(node, context);
 };

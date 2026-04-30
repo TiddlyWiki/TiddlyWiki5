@@ -20,6 +20,7 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		this.blockType = blockType;
 		this.labelEl = null;
 		this.contentEl = null;
+		this.renderedWidget = null;
 
 		this._createDOM();
 	}
@@ -48,8 +49,39 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 
 	renderViewMode() {
 		if(!this.contentEl) return;
+		this._destroyRenderedWidget();
 		while(this.contentEl.firstChild) this.contentEl.removeChild(this.contentEl.firstChild);
 
+		const rawText = this.node.attrs.rawText || "";
+		if(!rawText) {
+			const placeholder = document.createElement("div");
+			placeholder.className = "pm-nodeview-empty-placeholder";
+			placeholder.textContent = "(empty)";
+			this.contentEl.appendChild(placeholder);
+			return;
+		}
+
+		try {
+			const parseTree = $tw.wiki.parseText("text/vnd.tiddlywiki", rawText).tree;
+			const Widget = require("$:/core/modules/widgets/widget.js").widget;
+			const renderWidget = new Widget({
+				type: "element",
+				tag: "div",
+				children: parseTree
+			}, {
+				wiki: $tw.wiki,
+				parentWidget: this.parentWidget || null,
+				document: document,
+				variables: this.parentWidget ? this.parentWidget.variables : {}
+			});
+			renderWidget.render(this.contentEl, null);
+			this.renderedWidget = renderWidget;
+			return;
+		} catch(e) {
+			// fall through to label fallback
+		}
+
+		// Fallback: show first line as plain text
 		const label = document.createElement("span");
 		label.className = "pm-nodeview-label";
 		label.textContent = this.node.attrs.firstLine || (this.blockType === "pragma" ? "(pragma)" : "(block)");
@@ -59,6 +91,8 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 
 	renderEditMode() {
 		if(!this.contentEl) return;
+		this._destroyRenderedWidget();
+		this.labelEl = null;
 		while(this.contentEl.firstChild) this.contentEl.removeChild(this.contentEl.firstChild);
 
 		const textarea = this.createEditTextarea(this.node.attrs.rawText || "", 2);
@@ -66,6 +100,13 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		this.contentEl.appendChild(textarea);
 
 		setTimeout(() => { textarea.focus(); }, 0);
+	}
+
+	_destroyRenderedWidget() {
+		if(this.renderedWidget) {
+			try { this.renderedWidget.destroy(); } catch(e) { /* ignore */ }
+			this.renderedWidget = null;
+		}
 	}
 
 	saveEdit(newText) {
@@ -90,12 +131,23 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 
 	update(node) {
 		if(node.type.name !== this.node.type.name) return false;
+		const oldRawText = this.node.attrs.rawText;
 		this.node = node;
 		this.updateTitle();
-		if(!this.isEditMode && this.labelEl) {
-			this.labelEl.textContent = node.attrs.firstLine || (this.blockType === "pragma" ? "(pragma)" : "(block)");
+		if(!this.isEditMode) {
+			const newRawText = node.attrs.rawText;
+			if(newRawText !== oldRawText) {
+				this.renderViewMode();
+			} else if(this.labelEl) {
+				this.labelEl.textContent = node.attrs.firstLine || (this.blockType === "pragma" ? "(pragma)" : "(block)");
+			}
 		}
 		return true;
+	}
+
+	destroy() {
+		this._destroyRenderedWidget();
+		super.destroy();
 	}
 }
 

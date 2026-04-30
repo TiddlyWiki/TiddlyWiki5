@@ -13,5 +13,5 @@ module.exports = function buildDiv(context, node) {
 	if(classAttr && classAttr.split(/\s+/).indexOf("markdown") !== -1) {
 		return shared.convertNodes(context, node.children);
 	}
-	return shared.buildOpaqueFromNode(node);
+	return shared.buildOpaqueFromNode(node, context);
 };
