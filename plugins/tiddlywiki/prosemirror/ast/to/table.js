@@ -10,7 +10,7 @@ const shared = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js");
 
 function buildTable(context, node) {
 	if(!node.children || node.children.length === 0) {
-		return shared.buildOpaqueFromNode(node);
+		return shared.buildOpaqueFromNode(node, context);
 	}
 	const rows = [];
 	for(let i = 0; i < node.children.length; i++) {
@@ -31,7 +31,7 @@ function buildTable(context, node) {
 		}
 	}
 	if(rows.length === 0) {
-		return shared.buildOpaqueFromNode(node);
+		return shared.buildOpaqueFromNode(node, context);
 	}
 	return { type: "table", content: rows };
 }

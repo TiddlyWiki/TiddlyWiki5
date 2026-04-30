@@ -75,8 +75,19 @@ function serializeNodeToRawText(node) {
 	}
 }
 
-function buildOpaqueFromNode(node) {
-	const rawText = serializeNodeToRawText(node);
+function extractSourceText(node, context) {
+	if(context && context.sourceText && typeof node.start === "number" && typeof node.end === "number") {
+		const sourceText = context.sourceText;
+		if(node.start >= 0 && node.end <= sourceText.length && node.start < node.end) {
+			return sourceText.substring(node.start, node.end);
+		}
+	}
+	return null;
+}
+
+function buildOpaqueFromNode(node, context) {
+	const sourceText = extractSourceText(node, context);
+	const rawText = sourceText || serializeNodeToRawText(node);
 	const firstLine = rawText.split("\n")[0] || rawText;
 	return {
 		type: "opaque_block",
@@ -100,15 +111,7 @@ function convertANode(context, node) {
 		const convertedNode = builder(context, node);
 		return Array.isArray(convertedNode) ? convertedNode : [convertedNode];
 	}
-	const rawText = serializeNodeToRawText(node);
-	const firstLine = rawText.split("\n")[0] || rawText;
-	return [{
-		type: "opaque_block",
-		attrs: {
-			rawText: rawText,
-			firstLine: firstLine
-		}
-	}];
+	return [buildOpaqueFromNode(node, context)];
 }
 
 exports.childContext = childContext;

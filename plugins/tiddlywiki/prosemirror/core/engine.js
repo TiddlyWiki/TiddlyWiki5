@@ -77,7 +77,7 @@ class ProseMirrorEngine {
 			const initialWikiAst = this.wiki.parseText(this.type, this.value || "", {
 				defaultType: "text/vnd.tiddlywiki"
 			}).tree;
-			return wikiAstToProseMirrorAst(initialWikiAst);
+			return wikiAstToProseMirrorAst(initialWikiAst, { sourceText: this.value });
 		} catch(e) {
 			console.error("[ProseMirror] Error parsing initial content:", e);
 			return { type: "doc", content: [{ type: "paragraph" }] };

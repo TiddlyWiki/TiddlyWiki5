@@ -20,7 +20,7 @@ function buildDefinitionList(context, node) {
 		}
 	}
 	if(items.length === 0) {
-		return shared.buildOpaqueFromNode(node);
+		return shared.buildOpaqueFromNode(node, context);
 	}
 	return {
 		type: "definition_list",
