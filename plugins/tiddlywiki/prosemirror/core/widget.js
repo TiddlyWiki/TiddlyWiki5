@@ -43,7 +43,7 @@ class ProsemirrorWidget extends Widget {
 			const initialWikiAst = this.wiki.parseText(this.editType, initialText, {
 				defaultType: "text/vnd.tiddlywiki"
 			}).tree;
-			doc = wikiAstToProseMirrorAst(initialWikiAst);
+			doc = wikiAstToProseMirrorAst(initialWikiAst, { sourceText: initialText });
 		} catch(e) {
 			console.error("[ProseMirror] Error parsing initial content:", e);
 			doc = { type: "doc", content: [{ type: "paragraph" }] };
