@@ -1,0 +1,268 @@
+created: 20260310120000000
+modified: 20260310213807404
+tags: Commands
+title: InspectCommand Examples
+type: text/vnd.tiddlywiki
+
+!! InspectCommand
+
+The `--inspect` command launches an interactive REPL session inside a loaded TiddlyWiki instance. You can explore tiddlers, query the store, call internal APIs, and debug your wiki -- all from the terminal.
+
+!! Starting the REPL
+
+Start with the default prompt:
+
+```
+tiddlywiki ./MyWiki --inspect
+```
+
+Start with a custom prompt:
+
+```
+tiddlywiki ./MyWiki --inspect "debug> "
+```
+
+!! Exploring Tiddlers
+
+Get a single tiddler by title:
+
+```
+$command: > $tw.wiki.getTiddler("$:/SiteTitle")
+```
+
+List all tiddler titles:
+
+```
+$command: > $tw.wiki.getTiddlers()
+```
+
+Get the text field of a tiddler:
+
+```
+$command: > $tw.wiki.getTiddlerText("$:/SiteTitle")
+```
+
+!! Querying with Filters
+
+Run a filter and get matching titles:
+
+```
+$command: > $tw.wiki.filterTiddlers("[tag[Journal]]")
+```
+
+Count tiddlers with a specific tag:
+
+```
+$command: > $tw.wiki.filterTiddlers("[tag[Journal]count[]]")
+```
+
+Find all tiddlers modified today:
+
+```
+$command: > $tw.wiki.filterTiddlers("[days:modified[-1]]")
+```
+
+!! Exploring the Wiki Store
+
+Check how many tiddlers are in the store:
+
+```
+$command: > $tw.wiki.getTiddlers().length
+```
+
+List all tags in use:
+
+```
+$command: > $tw.wiki.filterTiddlers("[tags[]]")
+```
+
+Get field values from a tiddler:
+
+```
+$command: > $tw.wiki.getTiddler("MyTiddler").fields
+```
+
+!! Working with Modules and Plugins
+
+List all loaded plugins:
+
+```
+$command: > Object.keys($tw.plugins.titles)
+```
+
+Explore available widget types:
+
+```
+$command: > Object.keys($tw.modules.types["widget"])
+```
+
+Look at a module's exports:
+
+```
+$command: > $tw.modules.titles["$:/core/modules/widgets/link.js"]
+```
+
+!! Using Tab Completion
+
+The REPL supports intelligent tab completion:
+
+* Type `$tw.` and press `Tab` to see all properties of `$tw`
+* Type `$tw.wiki.get` and press `Tab` to see all methods starting with "get"
+* When there are few matches, function signatures are shown automatically
+* Press `Tab` twice on an exact function name to see its parameter signature
+
+!! Controlling Inspection Depth
+
+By default, objects are inspected to depth 1. Increase it to see nested structures:
+
+```
+$command: > .depth 3
+Inspection depth set to 3.
+$command: > $tw.wiki.getTiddler("$:/SiteTitle")
+```
+
+Set it back to a shallow view:
+
+```
+$command: > .depth 1
+```
+
+!! Viewing Command History
+
+Show deduplicated history of previous commands:
+
+```
+$command: > .history
+```
+
+Find where the history file is stored:
+
+```
+$command: > .history info
+```
+
+!! Multi-line Editing with .edit
+
+The `.edit` command provides multi-line code editing using your `$EDITOR` (or `$VISUAL`). Blocks are saved with a date stamp to a persistent editor history.
+
+Open a new editor:
+
+```
+$command: > .edit new
+Opening new editor with vim
+// Write your code, save, and close to evaluate
+```
+
+List saved editor blocks (also the default when typing just `.edit`):
+
+```
+$command: > .edit
+[1] // 2026-03-10 14:22:05 (4 lines) var titles = $tw.wiki.filterTiddlers("[tag[Journal]]");
+[2] // 2026-03-10 15:01:33 (3 lines) Object.keys($tw.modules.types).forEach(function(type) {
+```
+
+Re-edit a previous block:
+
+```
+$command: > .edit 2
+Opening block 2 with vim
+```
+
+View a block without opening the editor:
+
+```
+$command: > .edit show 1
+```
+
+!! Listing and Viewing Blocks with .ls and .cat
+
+`.ls` lists saved editor blocks, optionally filtered by a search term:
+
+```
+$command: > .ls
+[1] // 2026-03-10 14:22:05 (4 lines) var titles = $tw.wiki.filterTiddlers("[tag[Journal]]");
+[2] // 2026-03-10 15:01:33 (3 lines) Object.keys($tw.modules.types).forEach(function(type) {
+```
+
+Search for blocks by word in the comment line:
+
+```
+$command: > .ls Journal
+[1] // 2026-03-10 14:22:05 (4 lines) var titles = $tw.wiki.filterTiddlers("[tag[Journal]]");
+```
+
+`.cat` displays a block's full contents:
+
+```
+$command: > .cat 1
+// 2026-03-10 14:22:05
+var titles = $tw.wiki.filterTiddlers("[tag[Journal]]");
+titles.forEach(function(t) { console.log(t); });
+```
+
+!! Running Editor Blocks with .run
+
+The `.run` command lets you execute a saved editor block by number or by searching for a word in the comment line. The block is displayed and you are asked to confirm before it runs.
+
+Run by block number:
+
+```
+$command: > .run 7
+// 2026-03-10 14:22:05 Setup test data
+var data = [1, 2, 3];
+...
+
+Run block 7? (y/n) y
+```
+
+Search by word in the comment line (uses word-boundary matching):
+
+```
+$command: > .run Test
+// 2026-03-10 14:22:05 Setup test data
+var data = [1, 2, 3];
+...
+
+Run block 7? (y/n)
+```
+
+If multiple blocks match, the matches are listed so you can be more specific:
+
+```
+$command: > .run setup
+Multiple blocks match 'setup':
+[3] // 2026-03-10 12:00:00 Setup widgets
+[7] // 2026-03-10 14:22:05 Setup test data
+Please be more specific or use .run <number>.
+```
+
+!! Advanced: Modifying Tiddlers
+
+Add a new tiddler:
+
+```
+$command: > $tw.wiki.addTiddler({title: "TestTiddler", text: "Hello from the REPL!"})
+```
+
+Delete a tiddler:
+
+```
+$command: > $tw.wiki.deleteTiddler("TestTiddler")
+```
+
+!! Advanced: Accessing Node.js APIs
+
+Since this is a full Node.js REPL, you can use any Node.js built-in:
+
+```
+$command: > const fs = require("fs")
+$command: > fs.readdirSync(".")
+```
+
+!! Exiting the REPL
+
+Type `.exit` or press `Ctrl+C` twice:
+
+```
+$command: > .exit
+```
