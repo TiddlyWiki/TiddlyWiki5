@@ -18,6 +18,9 @@ tags: $:/tags/Stylesheet
 
 .ProseMirror p {
 	margin: 0.5em 0;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	max-width: 100%;
 }
 
 .ProseMirror p:first-child {
@@ -107,4 +110,3 @@ html[dir="rtl"] .ProseMirror {
 .ProseMirror .pm-definition-list dd {
 	margin-left: 1.5em;
 }
-
