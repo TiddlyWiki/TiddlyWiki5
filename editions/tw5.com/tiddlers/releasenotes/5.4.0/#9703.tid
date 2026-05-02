@@ -2,7 +2,7 @@ change-category: hackability
 change-type: enhancement
 created: 20260228212206750
 description: Allows modular relinking behavior for plugin support
-github-contributors: flibbles
+github-contributors: Flibbles
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9703
 modified: 20260228212206750
 release: 5.4.0
