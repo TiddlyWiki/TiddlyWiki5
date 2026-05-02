@@ -75,3 +75,30 @@ tags: $:/tags/Stylesheet
 .tc-filter-operand-variable:hover {
     background-color: #0069d9;
 }
+
+/* --- Filter debug table --- */
+
+.tc-filter-debug-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.tc-filter-debug-table td,
+.tc-filter-debug-table th {
+    padding: 2px 4px 5px;
+}
+
+.tc-filter-debug-sticky > td,
+.tc-filter-debug-sticky > th {
+    position: sticky;
+    top: 3em;
+    background-color: var(--tpc-page-background);
+    z-index: 1000;
+    box-shadow: inset 0 2px 0 var(--tpc-primary), inset 0 -2px 0 var(--tpc-primary);
+}
+
+.tc-filter-debug-sticky > td:first-child,
+.tc-filter-debug-sticky > th:first-child {
+    box-shadow: inset 0 2px 0 var(--tpc-primary), inset 0 -2px 0 var(--tpc-primary), inset 2px 0 0 var(--tpc-primary);
+}
+

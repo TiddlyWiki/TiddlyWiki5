@@ -599,10 +599,10 @@ exports.parseFilterToDebugTable = function(filterString,options) {
 		chars[pos2] = char2;
 		return chars.join("");
 	}
-	// Build rows: [{line, description}]
+	// Build rows: [{line, description, kind}]
 	var rows = [];
-	rows.push({line: filterString, description: ""});
-	rows.push({line: placeText(0,""), description: ""});
+	rows.push({line: filterString, description: "", kind: "filterString"});
+	rows.push({line: placeText(0,""), description: "", kind: "spacer"});
 	// Walk the parse tree using positional info from the AST
 	for(var i = 0; i < parseTree.length; i++) {
 		var operation = parseTree[i];
@@ -621,7 +621,8 @@ exports.parseFilterToDebugTable = function(filterString,options) {
 			}
 			rows.push({
 				line: placeText(operation.prefixStart,operation.prefix),
-				description: prefixDesc || ("Prefix: " + operation.prefix)
+				description: prefixDesc || ("Prefix: " + operation.prefix),
+				kind: "runPrefix"
 			});
 		}
 		// Bracketed run
@@ -635,14 +636,16 @@ exports.parseFilterToDebugTable = function(filterString,options) {
 				if(op.prefix === "!") {
 					operatorRows.push({
 						line: placeText(op.start - 1,"!"),
-						description: "Negation: the result of the [[" + op.operator + " Operator]] will be inverted"
+						description: "Negation: the result of the [[" + op.operator + " Operator]] will be inverted",
+						kind: "negation"
 					});
 				}
 				// Operator name
 				if(op.start < nameEnd) {
 					operatorRows.push({
 						line: placeText(op.start,filterString.substring(op.start,nameEnd)),
-						description: "[[" + op.operator + " Operator]]"
+						description: "[[" + op.operator + " Operator]]",
+						kind: "operatorName"
 					});
 				}
 				// Suffixes
@@ -650,7 +653,8 @@ exports.parseFilterToDebugTable = function(filterString,options) {
 					var suffixEnd = op.operands[0].start;
 					operatorRows.push({
 						line: placeText(op.suffixStart,filterString.substring(op.suffixStart,suffixEnd)),
-						description: "Suffix for the [[" + op.operator + " Operator]]"
+						description: "Suffix for the [[" + op.operator + " Operator]]",
+						kind: "suffix"
 					});
 				}
 				// Operands
@@ -658,19 +662,28 @@ exports.parseFilterToDebugTable = function(filterString,options) {
 					var operand = op.operands[k];
 					var bracketEnd = operand.start + 1 + operand.text.length;
 					// Bracket type description
-					var bracketDesc;
+					var bracketDesc, bracketKind, textKind;
 					if(operand.indirect) {
 						bracketDesc = "Curly braces means that the operand value will be obtained from a tiddler";
+						bracketKind = "operandBracketsIndirect";
+						textKind = "operandTextIndirect";
 					} else if(operand.variable) {
 						bracketDesc = "Angle brackets means that the operand value will be obtained from a variable";
+						bracketKind = "operandBracketsVariable";
+						textKind = "operandTextVariable";
 					} else if(operand.multiValuedVariable) {
 						bracketDesc = "Round brackets means that the operand value will be obtained from a multi-valued variable";
+						bracketKind = "operandBracketsMultiValued";
+						textKind = "operandTextMultiValued";
 					} else {
 						bracketDesc = "Square brackets means that the operand value is given literally";
+						bracketKind = "operandBracketsLiteral";
+						textKind = "operandTextLiteral";
 					}
 					operatorRows.push({
 						line: placePair(operand.start,filterString.charAt(operand.start),bracketEnd,filterString.charAt(bracketEnd)),
-						description: bracketDesc
+						description: bracketDesc,
+						kind: bracketKind
 					});
 					// Operand text
 					if(operand.text.length > 0) {
@@ -684,7 +697,8 @@ exports.parseFilterToDebugTable = function(filterString,options) {
 						}
 						operatorRows.push({
 							line: placeText(operand.start + 1,operand.text),
-							description: operandDesc
+							description: operandDesc,
+							kind: textKind
 						});
 					}
 				}
@@ -692,7 +706,8 @@ exports.parseFilterToDebugTable = function(filterString,options) {
 			// Run brackets row first, then operator rows
 			rows.push({
 				line: placePair(operation.runStart,"[",operation.runEnd,"]"),
-				description: "A run of filter operators that are piped together"
+				description: "A run of filter operators that are piped together",
+				kind: "runBrackets"
 			});
 			for(var r = 0; r < operatorRows.length; r++) {
 				rows.push(operatorRows[r]);
@@ -711,37 +726,64 @@ exports.parseFilterToDebugTable = function(filterString,options) {
 					var closingQuotePos = titleOperand.start + 1 + titleOperand.text.length;
 					rows.push({
 						line: placePair(titleOperand.start,startChar,closingQuotePos,startChar),
-						description: (startChar === "\"" ? "Double" : "Single") + "-quoted title"
+						description: (startChar === "\"" ? "Double" : "Single") + "-quoted title",
+						kind: startChar === "\"" ? "quotedTitleDouble" : "quotedTitleSingle"
 					});
 					if(titleOperand.text.length > 0) {
 						rows.push({
 							line: placeText(titleOperand.start + 1,titleOperand.text),
-							description: "Title: \"" + titleOperand.text + "\""
+							description: "Title: \"" + titleOperand.text + "\"",
+							kind: "quotedTitleText"
 						});
 					}
 				} else {
 					// Unquoted title
 					rows.push({
 						line: placeText(titleOperand.start,titleOperand.text),
-						description: "Unquoted title: \"" + titleOperand.text + "\""
+						description: "Unquoted title: \"" + titleOperand.text + "\"",
+						kind: "unquotedTitle"
 					});
 				}
 			}
 		}
 	}
-	// Build the wikitext table
-	var table = [];
+	// Build the output as raw HTML so the first <tr> can carry the sticky class
+	var table = ["<table class=\"tc-filter-debug-table\">"];
+	function makeCode(text,kind) {
+		var cls = "tc-filter-debug-" + (kind || "row"),
+			encoded = $tw.utils.htmlEncode(text)
+				.replace(/\[/g,"&#91;")
+				.replace(/\]/g,"&#93;")
+				.replace(/\$:\//g,"~$:/");
+		return "<code class=\"" + cls + "\">" + encoded + "</code>";
+	}
+	function processDesc(desc) {
+		// Suppress the syslink wikitext rule by prefixing system titles with `~`
+		desc = desc.replace(/\$:\//g,"~$:/");
+		return desc.replace(/\[\[([^\|\]]+)(?:\|([^\]]+))?\]\]/g,function(_match,a,b) {
+			var label = a,
+				target = b ? b : a,
+				cls = "tc-filter-debug-" + target.replace(/ Operator$/,"").replace(/\s+/g,"");
+			return "<$link to=\"" + target.replace(/"/g,"&quot;") + "\" class=\"" + cls + "\">" + label + "</$link>";
+		});
+	}
+	function trOpen(isFirst) {
+		return isFirst ? "<tr class=\"tc-filter-debug-sticky\">" : "<tr>";
+	}
 	if(options.narrowTable) {
 		for(var t = 0; t < rows.length; t++) {
 			if(rows[t].description) {
-				table.push("|" + rows[t].description + " |");
+				table.push(trOpen(t === 0) + "<td>" + processDesc(rows[t].description) + "</td></tr>");
+				table.push("<tr><td>" + makeCode(rows[t].line,rows[t].kind) + "</td></tr>");
+			} else {
+				table.push(trOpen(t === 0) + "<td>" + makeCode(rows[t].line,rows[t].kind) + "</td></tr>");
 			}
-			table.push("|`" + rows[t].line + "` |");
 		}
 	} else {
 		for(var t = 0; t < rows.length; t++) {
-			table.push("|`" + rows[t].line + "` |" + rows[t].description + " |");
+			table.push(trOpen(t === 0) + "<td>" + makeCode(rows[t].line,rows[t].kind) + "</td><td>" + processDesc(rows[t].description) + "</td></tr>");
 		}
 	}
+	table.push("</table>");
 	return table.join("\n");
 };
