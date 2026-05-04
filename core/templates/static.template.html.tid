@@ -19,13 +19,8 @@ type: text/vnd.tiddlywiki-html
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="format-detection" content="telephone=no">
 <link id="faviconLink" rel="shortcut icon" href="favicon.ico">
+<link rel="stylesheet" href="static/static.css">
 <title>{{$:/core/wiki/title}}</title>
-<div id="styleArea">
-{{$:/boot/boot.css||$:/core/templates/css-tiddler}}
-</div>
-<style type="text/css">
-{{$:/core/ui/PageStylesheet||$:/core/templates/wikified-tiddler}}
-</style>
 </head>
 <body class="tc-body">
 {{$:/StaticBanner||$:/core/templates/html-tiddler}}
