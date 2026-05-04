@@ -14,11 +14,12 @@ const slashMenuElements = require("$:/plugins/tiddlywiki/prosemirror/features/sl
 const helpers = require("$:/plugins/tiddlywiki/prosemirror/features/drag-handle/helpers.js");
 
 // Categories that make sense in a block-level action menu.
-// "snippet" inserts new content; "typed-block" inserts new typed blocks;
-// neither is a block-level operation on the current block.
+// "snippet" inserts freeform content and doesn't belong in the block handle menu.
+// "typed-block" inserts structural blocks and is expected in the drag-handle menu.
 const BLOCK_MENU_CATEGORIES = {
 	"block-type": true,   // Turn into paragraph/codeblock/quote/headings
 	"block-insert": true, // Insert structural blocks: horizontal-rule, hard-line-breaks, insert-table
+	"typed-block": true,  // Insert typed blocks such as Markdown / HTML / JSON
 	"other": true         // Misc structural actions
 };
 

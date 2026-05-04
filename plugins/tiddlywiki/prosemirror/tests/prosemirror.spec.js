@@ -15,6 +15,6 @@
  *                                     definition list, blockquote, code block, table,
  *                                     horizontal rule, pragma blocks
  *
- * This file is intentionally empty — Playwright will pick up the specs/ files
- * via the `plugins/**/tests/**/*.spec.js` testMatch glob.
+ * This file is intentionally empty.
+ * Playwright picks up the specs/ subfolder through the configured testMatch glob.
  */

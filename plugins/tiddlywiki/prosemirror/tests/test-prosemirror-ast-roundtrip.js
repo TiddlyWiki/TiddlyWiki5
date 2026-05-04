@@ -25,7 +25,7 @@ if(!$tw.browser) {
 		function roundTrip(wikitext) {
 			const parseResult = $tw.wiki.parseText("text/vnd.tiddlywiki", wikitext);
 			const wikiAst = parseResult.tree;
-			const pmAst = wikiAstToProseMirrorAst(wikiAst);
+			const pmAst = wikiAstToProseMirrorAst(wikiAst, { sourceText: wikitext });
 			// pmAst is a doc object; fromPM expects the doc's content array or the doc itself
 			let restored;
 			if(pmAst && pmAst.type === "doc" && pmAst.content) {
@@ -183,6 +183,42 @@ if(!$tw.browser) {
 			const input = '<<list-links "[tag[task]sort[title]]">>';
 			const result = roundTrip(input);
 			expect(result).toBe('<<list-links "[tag[task]sort[title]]">>');
+		});
+
+		it("should preserve custom parse nodes that use node start/end offsets", () => {
+			const input = "[% ] Modern task one\n[%x] Modern task two";
+			const customNode = {
+				type: "pmtest-modern-task-list",
+				start: 0,
+				end: input.length,
+				attributes: {
+					renderLabel: { type: "string", value: "Modern custom syntax preserved" }
+				},
+				children: []
+			};
+			const pmAst = wikiAstToProseMirrorAst([customNode], { sourceText: input });
+			expect(pmAst.content[0].type).toBe("opaque_block");
+			expect(pmAst.content[0].attrs.rawText).toBe(input);
+			const restored = wikiAstFromProseMirrorAst(pmAst);
+			expect($tw.utils.serializeWikitextParseTree(restored).trimEnd()).toBe(input);
+		});
+
+		it("should preserve custom parse nodes that store source offsets in attributes", () => {
+			const input = "[@ ] Legacy task one\n[@x] Legacy task two";
+			const customNode = {
+				type: "pmtest-legacy-task-list",
+				attributes: {
+					renderLabel: { type: "string", value: "Legacy custom syntax preserved" },
+					listStartPos: { type: "string", value: "0" },
+					listStopPos: { type: "string", value: String(input.length) }
+				},
+				children: []
+			};
+			const pmAst = wikiAstToProseMirrorAst([customNode], { sourceText: input });
+			expect(pmAst.content[0].type).toBe("opaque_block");
+			expect(pmAst.content[0].attrs.rawText).toBe(input);
+			const restored = wikiAstFromProseMirrorAst(pmAst);
+			expect($tw.utils.serializeWikitextParseTree(restored).trimEnd()).toBe(input);
 		});
 
 		// --- Pragmas ---

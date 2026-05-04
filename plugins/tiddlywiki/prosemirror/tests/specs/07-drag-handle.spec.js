@@ -1,7 +1,7 @@
 "use strict";
 
 const { test, expect } = require("@playwright/test");
-const { setupProseMirrorTest, clearEditor } = require("../helpers.js");
+const { setupProseMirrorTest } = require("../helpers.js");
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Drag Handle (consolidated: basic + extended)

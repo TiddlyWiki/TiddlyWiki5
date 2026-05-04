@@ -75,11 +75,49 @@ function serializeNodeToRawText(node) {
 	}
 }
 
+function coerceSourceOffset(value) {
+	if(typeof value === "number" && isFinite(value)) {
+		return value;
+	}
+	if(typeof value === "string" && /^-?\d+$/.test(value)) {
+		return parseInt(value, 10);
+	}
+	return null;
+}
+
+function getAttributeOffset(node, name) {
+	const attributes = node && node.attributes;
+	const attribute = attributes && attributes[name];
+	if(attribute == null) {
+		return null;
+	}
+	const value = Object.prototype.hasOwnProperty.call(attribute, "value") ? attribute.value : attribute;
+	return coerceSourceOffset(value);
+}
+
+function extractSourceSlice(sourceText, start, end) {
+	if(typeof start === "number" && typeof end === "number"
+		&& start >= 0 && end <= sourceText.length && start < end) {
+		return sourceText.substring(start, end);
+	}
+	return null;
+}
+
 function extractSourceText(node, context) {
-	if(context && context.sourceText && typeof node.start === "number" && typeof node.end === "number") {
+	if(context && context.sourceText) {
 		const sourceText = context.sourceText;
-		if(node.start >= 0 && node.end <= sourceText.length && node.start < node.end) {
-			return sourceText.substring(node.start, node.end);
+		const ranges = [
+			[node.start, node.end],
+			[getAttributeOffset(node, "start"), getAttributeOffset(node, "end")],
+			[getAttributeOffset(node, "startPos"), getAttributeOffset(node, "endPos")],
+			[getAttributeOffset(node, "listStartPos"), getAttributeOffset(node, "listStopPos")],
+			[getAttributeOffset(node, "from"), getAttributeOffset(node, "to")]
+		];
+		for(let index = 0; index < ranges.length; index++) {
+			const slice = extractSourceSlice(sourceText, ranges[index][0], ranges[index][1]);
+			if(slice !== null) {
+				return slice;
+			}
 		}
 	}
 	return null;
