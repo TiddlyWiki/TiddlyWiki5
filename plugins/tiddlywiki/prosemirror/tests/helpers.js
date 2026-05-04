@@ -79,6 +79,136 @@ async function pastePlainText(editor, text) {
 	}, text);
 }
 
+async function installCustomSyntaxTestModules(page) {
+	await page.evaluate(() => {
+		if($tw.__pmCustomSyntaxTestModulesInstalled) {
+			return;
+		}
+		$tw.__pmCustomSyntaxTestModulesInstalled = true;
+
+		const BaseWidget = Object.getPrototypeOf($tw.rootWidget).constructor;
+
+		function TestSyntaxWidget(parseTreeNode, options) {
+			this.initialise(parseTreeNode, options);
+		}
+		TestSyntaxWidget.prototype = new BaseWidget();
+		TestSyntaxWidget.prototype.render = function(parent, nextSibling) {
+			this.parentDomNode = parent;
+			this.computeAttributes();
+			this.execute();
+
+			const wrapper = this.document.createElement("div");
+			wrapper.className = "pmtest-custom-syntax-box";
+			wrapper.setAttribute("data-syntax-kind", this.getAttribute("kind", "unknown"));
+
+			const heading = this.document.createElement("div");
+			heading.className = "pmtest-custom-syntax-heading";
+			heading.textContent = this.getAttribute("renderLabel", "Custom syntax preserved");
+			wrapper.appendChild(heading);
+
+			const list = this.document.createElement("ul");
+			list.className = "pmtest-custom-syntax-items";
+			wrapper.appendChild(list);
+
+			this.renderChildren(list, null);
+			parent.insertBefore(wrapper, nextSibling);
+			this.domNodes.push(wrapper);
+		};
+		TestSyntaxWidget.prototype.execute = function() {
+			this.makeChildWidgets();
+		};
+
+		function makeChecklistRule(options) {
+			return {
+				name: options.name,
+				types: { inline: true },
+				init: function(parser) {
+					this.parser = parser;
+					this.matchRegExp = options.matchRegExp;
+				},
+				parse: function() {
+					const listItems = [];
+					const listStartPos = this.parser.pos;
+					let match = this.match;
+					do {
+						const lineStartPos = match.index;
+						this.parser.pos = this.matchRegExp.lastIndex;
+						const bodyText = this.parser.source.substring(lineStartPos + 5, this.parser.pos);
+						const parseResults = this.parser.wiki.parseText("text/vnd.tiddlywiki", bodyText, {
+							parseAsInline: true
+						});
+						listItems.push({
+							type: "element",
+							tag: "li",
+							children: [{
+								type: "element",
+								tag: "label",
+								children: parseResults.tree
+							}]
+						});
+						match = this.matchRegExp.exec(this.parser.source);
+					} while(match != null && match.index === 1 + this.parser.pos);
+
+					const node = {
+						type: options.widgetType,
+						attributes: {
+							kind: { type: "string", value: options.kind },
+							renderLabel: { type: "string", value: options.renderLabel }
+						},
+						children: listItems
+					};
+
+					if(options.includeNodeOffsets) {
+						node.start = listStartPos;
+						node.end = this.parser.pos;
+					} else {
+						node.attributes.listStartPos = { type: "string", value: String(listStartPos) };
+						node.attributes.listStopPos = { type: "string", value: String(this.parser.pos) };
+					}
+
+					return [node];
+				}
+			};
+		}
+
+		$tw.modules.define("$:/temp/prosemirror/tests/custom-syntax-widget.js", "widget", {
+			"pmtest-legacy-task-list": TestSyntaxWidget,
+			"pmtest-modern-task-list": TestSyntaxWidget
+		});
+		$tw.modules.define("$:/temp/prosemirror/tests/custom-syntax-legacy-rule.js", "wikirule", makeChecklistRule({
+			name: "pmtest-legacy-task",
+			matchRegExp: /^\[@([ xX])\] .*$/mg,
+			widgetType: "pmtest-legacy-task-list",
+			kind: "legacy",
+			renderLabel: "Legacy custom syntax preserved",
+			includeNodeOffsets: false
+		}));
+		$tw.modules.define("$:/temp/prosemirror/tests/custom-syntax-modern-rule.js", "wikirule", makeChecklistRule({
+			name: "pmtest-modern-task",
+			matchRegExp: /^\[%([ xX])\] .*$/mg,
+			widgetType: "pmtest-modern-task-list",
+			kind: "modern",
+			renderLabel: "Modern custom syntax preserved",
+			includeNodeOffsets: true
+		}));
+
+		const WikitextParser = $tw.Wiki.parsers["text/vnd.tiddlywiki"];
+		if(WikitextParser && WikitextParser.prototype) {
+			delete WikitextParser.prototype.pragmaRuleClasses;
+			delete WikitextParser.prototype.blockRuleClasses;
+			delete WikitextParser.prototype.inlineRuleClasses;
+		}
+
+		delete BaseWidget.prototype.widgetClasses;
+		if($tw.rootWidget && Object.prototype.hasOwnProperty.call($tw.rootWidget, "widgetClasses")) {
+			delete $tw.rootWidget.widgetClasses;
+		}
+		if($tw.wiki && typeof $tw.wiki.clearCache === "function") {
+			$tw.wiki.clearCache();
+		}
+	});
+}
+
 // ---------------------------------------------------------------------------
 // Page setup
 // ---------------------------------------------------------------------------
@@ -159,6 +289,7 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 module.exports = {
 	clearEditor,
 	dispatchEditorShortcut,
+	installCustomSyntaxTestModules,
 	selectAllEditorContent,
 	pastePlainText,
 	loadTestPage,

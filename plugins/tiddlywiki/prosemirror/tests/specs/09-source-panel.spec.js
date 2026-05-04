@@ -1,7 +1,7 @@
 "use strict";
 
 const { test, expect } = require("@playwright/test");
-const { setupProseMirrorTest, loadTestPage } = require("../helpers.js");
+const { setupProseMirrorTest, loadTestPage, installCustomSyntaxTestModules } = require("../helpers.js");
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Source Preview Tab (toolbar/source.tid)
@@ -10,25 +10,37 @@ const { setupProseMirrorTest, loadTestPage } = require("../helpers.js");
 // when tv-editor-type === "prosemirror".
 // ─────────────────────────────────────────────────────────────────────────────
 test.describe("ProseMirror Editor - Source Preview Tab", () => {
-	/** Open the preview panel and switch to the Source tab, returning the textarea locator */
-	async function openSourceTab(page, tiddlerTitle) {
-		// Toggle the preview panel open via the wiki state tiddler
-		await page.evaluate((title) => {
-			const PREVIEW_STATE = "$:/state/showeditpreview";
-			$tw.wiki.setText(PREVIEW_STATE, null, null, "yes");
-		}, tiddlerTitle);
-		await page.waitForTimeout(300);
+	async function assertCustomSyntaxSurvivesPreview(page, options) {
+		const { tiddlerTitle, sourceText, expectedLabel } = options;
+		const waitForLabelOccurrences = (minimum) => page.waitForFunction(({ label, expectedCount }) => {
+			const bodyText = (document.body && document.body.textContent) || "";
+			if(!label) {
+				return false;
+			}
+			return bodyText.split(label).length - 1 >= expectedCount;
+		}, { label: expectedLabel, expectedCount: minimum }, { timeout: 10000 });
+		await loadTestPage(page);
+		await installCustomSyntaxTestModules(page);
+		await page.evaluate(({ title, text }) => {
+			$tw.wiki.addTiddler({ title: title, text: text, type: "text/vnd.tiddlywiki" });
+			const storyList = $tw.wiki.getTiddlerList("$:/StoryList");
+			if(storyList.indexOf(title) === -1) {
+				storyList.unshift(title);
+				$tw.wiki.addTiddler({ title: "$:/StoryList", list: storyList });
+			}
+		}, { title: tiddlerTitle, text: sourceText });
 
-		// The source tab button
-		const sourceTabBtn = page.locator(
-			'[data-tiddler-title] .tc-tiddler-preview-preview a, [data-tiddler-title] .tc-tab-buttons a'
-		).filter({ hasText: /source/i }).first();
-		// Try clicking; fall back to evaluating if the tab exists
-		const tabCount = await sourceTabBtn.count();
-		if(tabCount > 0) await sourceTabBtn.click();
+		await waitForLabelOccurrences(1);
+		await page.getByRole("button", { name: /edit this tiddler/i }).first().click();
 
-		await page.waitForTimeout(200);
-		return page.locator(".tc-tiddler-preview .tc-edit-texteditor, .tc-edit-preview-source textarea").first();
+		await waitForLabelOccurrences(1);
+
+		const previewButton = page.getByRole("button", { name: /preview pane/i }).first();
+		await expect(previewButton).toBeVisible({ timeout: 10000 });
+		await previewButton.click();
+
+		await expect(page.locator(".tc-tiddler-preview-preview").first()).toBeVisible({ timeout: 10000 });
+		await waitForLabelOccurrences(2);
 	}
 
 	test("Source preview type should only be offered for prosemirror editors", async ({ page }) => {
@@ -36,7 +48,7 @@ test.describe("ProseMirror Editor - Source Preview Tab", () => {
 		const availability = await page.evaluate(() => {
 			function hasSourceOption(editorType) {
 				const parser = $tw.wiki.parseText("text/vnd.tiddlywiki",
-					`<$set name="tv-editor-type" value="${editorType}"><$transclude tiddler="$:/core/ui/EditTemplate/body/preview/type-dropdown"/></$set>`);
+					`<$set name="tv-editor-type" value="${editorType}"><$transclude tiddler="$:/core/ui/EditorToolbar/preview-type-dropdown"/></$set>`);
 				const widget = $tw.wiki.makeWidget(parser, { parentWidget: $tw.rootWidget, document });
 				const container = document.createElement("div");
 				widget.render(container, null);
@@ -59,6 +71,22 @@ test.describe("ProseMirror Editor - Source Preview Tab", () => {
 		expect(available).not.toBeNull();
 		expect(available).not.toContain('disabled="yes"');
 	});
+
+	test("Preview toggle should preserve legacy custom syntax without node start/end", async ({ page }) => {
+		await assertCustomSyntaxSurvivesPreview(page, {
+			tiddlerTitle: "LegacyCustomSyntaxPreviewTest",
+			sourceText: "[@ ] Legacy task one\n[@x] Legacy task two",
+			expectedLabel: "Legacy custom syntax preserved"
+		});
+	});
+
+	test("Preview toggle should preserve custom syntax with node start/end", async ({ page }) => {
+		await assertCustomSyntaxSurvivesPreview(page, {
+			tiddlerTitle: "ModernCustomSyntaxPreviewTest",
+			sourceText: "[% ] Modern task one\n[%x] Modern task two",
+			expectedLabel: "Modern custom syntax preserved"
+		});
+	});
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -70,7 +98,7 @@ test.describe("ProseMirror Editor - Preview Types", () => {
 		const availability = await page.evaluate(() => {
 			function hasSourceOption(editorType) {
 				const parser = $tw.wiki.parseText("text/vnd.tiddlywiki",
-					`<$set name="tv-editor-type" value="${editorType}"><$transclude tiddler="$:/core/ui/EditTemplate/body/preview/type-dropdown"/></$set>`);
+					`<$set name="tv-editor-type" value="${editorType}"><$transclude tiddler="$:/core/ui/EditorToolbar/preview-type-dropdown"/></$set>`);
 				const widget = $tw.wiki.makeWidget(parser, { parentWidget: $tw.rootWidget, document });
 				const container = document.createElement("div");
 				widget.render(container, null);
