@@ -11,16 +11,42 @@ Tests for menu-elements.js (EditorAction collection, snippet loading, etc.)
 describe("ProseMirror menu-elements tests", () => {
 
 	let getAllMenuElements, flattenMenuElementsWithGroup, getBuiltinActionCommands;
-	let buildSchema;
+	let buildSchema, SlashMenuPlugin, SlashMenuKey, EditorState;
 	try {
 		const mod = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/menu-elements.js");
 		getAllMenuElements = mod.getAllMenuElements;
 		flattenMenuElementsWithGroup = mod.flattenMenuElementsWithGroup;
 		getBuiltinActionCommands = mod.getBuiltinActionCommands;
 		buildSchema = require("$:/plugins/tiddlywiki/prosemirror/core/engine.js").buildSchema;
+		const slashPlugin = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/plugin.js");
+		SlashMenuPlugin = slashPlugin.SlashMenuPlugin;
+		SlashMenuKey = slashPlugin.SlashMenuKey;
+		EditorState = require("prosemirror-state").EditorState;
 	} catch(e) {
 		// prosemirror dependencies not available in this test env
 		return;
+	}
+
+	function makeSlashMenuView(triggerOptions) {
+		const schema = buildSchema();
+		const plugin = SlashMenuPlugin([{
+			id: "paragraph",
+			label: "Paragraph",
+			type: "command",
+			command: function() {}
+		}], triggerOptions || { triggerKeys: ["/"] });
+		const state = EditorState.create({
+			schema: schema,
+			doc: schema.nodes.doc.create(null, [schema.nodes.paragraph.create()]),
+			plugins: [plugin]
+		});
+		return {
+			plugin: plugin,
+			state: state,
+			dispatch: function(tr) {
+				this.state = this.state.apply(tr);
+			}
+		};
 	}
 
 	describe("getBuiltinActionCommands", () => {
@@ -95,6 +121,28 @@ describe("ProseMirror menu-elements tests", () => {
 
 		it("should handle empty array", () => {
 			expect(flattenMenuElementsWithGroup([]).length).toBe(0);
+		});
+	});
+
+	describe("SlashMenuPlugin trigger matching", () => {
+		it("should open for '/' even if the physical key code differs", () => {
+			const view = makeSlashMenuView({ triggerKeys: ["/"] });
+			const handled = view.plugin.props.handleKeyDown(view, {
+				key: "/",
+				code: "Digit7"
+			});
+			expect(handled).toBe(true);
+			expect(SlashMenuKey.getState(view.state).open).toBe(true);
+		});
+
+		it("should not open for '#' even when it comes from the slash key position", () => {
+			const view = makeSlashMenuView({ triggerKeys: ["/"] });
+			const handled = view.plugin.props.handleKeyDown(view, {
+				key: "#",
+				code: "Slash"
+			});
+			expect(handled).toBe(false);
+			expect(SlashMenuKey.getState(view.state).open).toBe(false);
 		});
 	});
 });

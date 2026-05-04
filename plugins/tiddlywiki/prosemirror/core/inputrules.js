@@ -12,7 +12,6 @@ Build the ProseMirror input rules for the editor.
 const inputRules = require("prosemirror-inputrules").inputRules;
 const wrappingInputRule = require("prosemirror-inputrules").wrappingInputRule;
 const textblockTypeInputRule = require("prosemirror-inputrules").textblockTypeInputRule;
-const smartQuotes = require("prosemirror-inputrules").smartQuotes;
 const emDash = require("prosemirror-inputrules").emDash;
 const ellipsis = require("prosemirror-inputrules").ellipsis;
 const wrappingListInputRule = require("prosemirror-flat-list").wrappingListInputRule;
@@ -30,7 +29,7 @@ function headingRule(nodeType, maxLevel) {
 }
 
 function buildInputRules(schema) {
-	const rules = smartQuotes.concat(ellipsis, emDash);
+	const rules = [].concat(ellipsis, emDash);
 	let type;
 	type = schema.nodes.blockquote;
 	if(type) {

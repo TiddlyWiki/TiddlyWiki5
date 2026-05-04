@@ -27,6 +27,7 @@ function createSlashMenuPlugin(menuElements, options) {
 	options = options || {};
 	const ignoredKeys = options.ignoredKeys || [];
 	const customConditions = options.customConditions;
+	const triggerKeys = options.triggerKeys || ["/"];
 	const triggerCodes = options.triggerCodes || ["Slash"];
 	let isComposing = false;
 
@@ -60,16 +61,30 @@ function createSlashMenuPlugin(menuElements, options) {
 		ignoredKeys: allIgnoredKeys
 	};
 
+	function matchesTrigger(event) {
+		if(!event) {
+			return false;
+		}
+		if(triggerKeys && triggerKeys.length > 0) {
+			for(let i = 0; i < triggerKeys.length; i++) {
+				if(triggerKeys[i] === event.key) {
+					return true;
+				}
+			}
+			return false;
+		}
+		for(let i = 0; i < triggerCodes.length; i++) {
+			if(triggerCodes[i] === event.code) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	function defaultConditions() {
 		return {
 			shouldOpen: (state, event, view) => {
-				let isSlashTrigger = false;
-				for(let i = 0; i < triggerCodes.length; i++) {
-					if(triggerCodes[i] === event.code) {
-						isSlashTrigger = true;
-						break;
-					}
-				}
+				const isSlashTrigger = matchesTrigger(event);
 				if(!isSlashTrigger) return false;
 				const editorState = view.state;
 				const resolvedPos = editorState.doc.resolve(editorState.selection.from);
@@ -90,13 +105,7 @@ function createSlashMenuPlugin(menuElements, options) {
 				);
 			},
 			shouldClose: (state, event, view) => {
-				let isTrigger = false;
-				for(let i = 0; i < triggerCodes.length; i++) {
-					if(triggerCodes[i] === event.code) {
-						isTrigger = true;
-						break;
-					}
-				}
+				const isTrigger = matchesTrigger(event);
 				return state.open &&
 					(isTrigger || event.key === "Escape" || event.key === "Backspace") &&
 					state.filter.length === 0;
