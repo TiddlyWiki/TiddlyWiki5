@@ -40,7 +40,9 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await expect(widgetBlock.locator(".pm-nodeview-btn-delete")).toBeHidden();
 
 		const editState = await editor.evaluate(async (root) => {
-			const waitFrame = () => new Promise((resolve) => requestAnimationFrame(resolve));
+			const waitFrame = () => new Promise((resolve) => {
+				requestAnimationFrame(resolve);
+			});
 			const findEditingWidget = async (n) => {
 				await waitFrame();
 				const el = root.querySelector(".pm-nodeview-widget.pm-nodeview-editing");
@@ -66,7 +68,9 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await expect(editor.locator(".pm-nodeview-widget").first()).toBeVisible({ timeout: 5000 });
 
 		const saveResult = await editor.evaluate(async (root, newText) => {
-			const waitFrame = () => new Promise((resolve) => requestAnimationFrame(resolve));
+			const waitFrame = () => new Promise((resolve) => {
+				requestAnimationFrame(resolve);
+			});
 			const findTextarea = async (n) => {
 				await waitFrame();
 				const el = root.querySelector(".pm-nodeview-widget textarea.pm-nodeview-editor");
@@ -94,7 +98,9 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await expect(editor.locator(".pm-nodeview-widget")).toBeVisible({ timeout: 2000 });
 
 		const deleteResult = await editor.evaluate(async (root) => {
-			const waitFrame = () => new Promise((resolve) => requestAnimationFrame(resolve));
+			const waitFrame = () => new Promise((resolve) => {
+				requestAnimationFrame(resolve);
+			});
 			const findDeleteButton = async (n) => {
 				await waitFrame();
 				const el = root.querySelector(".pm-nodeview-widget.pm-nodeview-editing .pm-nodeview-btn-delete");
