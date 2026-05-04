@@ -59,7 +59,7 @@ function buildPlugins(schema, wiki, nodeViewHost, editorType) {
 	}
 
 	return [
-		SlashMenuPlugin(allMenuElements, { triggerCodes: ["Slash", "Backslash"] }),
+		SlashMenuPlugin(allMenuElements, { triggerKeys: ["/"] }),
 		createImageBlockPlugin(),
 		createImageNodeViewPlugin(nodeViewHost),
 		listKeymapPlugin,

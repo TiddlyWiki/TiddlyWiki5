@@ -166,6 +166,21 @@ test.describe("ProseMirror Editor - Integration", () => {
 		expect(tiddlerText).toContain("Test content");
 	});
 
+	test("should preserve straight quotes in wikitext widget syntax", async ({ page }) => {
+		const title = "ProseMirrorQuoteSyntaxTiddler";
+		const editor = await setupProseMirrorTest(page, title, {
+			useReadmeTiddler: false,
+			initialText: ""
+		});
+		await clearEditor(editor);
+		await page.keyboard.type('<<tag "Welcome">>');
+		await page.waitForTimeout(500);
+		const tiddlerText = await page.evaluate((t) => $tw.wiki.getTiddlerText(t, ""), title);
+		expect(tiddlerText).toContain('<<tag "Welcome">>');
+		expect(tiddlerText).not.toContain("“");
+		expect(tiddlerText).not.toContain("”");
+	});
+
 	test("should load existing tiddler content", async ({ page }) => {
 		const editor = await setupProseMirrorTest(page, "ProseMirrorTestTiddler", {
 			useReadmeTiddler: false,
