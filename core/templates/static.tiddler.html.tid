@@ -2,6 +2,7 @@ title: $:/core/templates/static.tiddler.html
 
 \define tv-wikilink-template() $uri_doubleencoded$.html
 \define tv-config-static() yes
+\procedure tv-static-avatar-prefix() ./images/avatars/
 \define tv-config-toolbar-icons() no
 \define tv-config-toolbar-text() no
 \define tv-config-toolbar-class() tc-btn-invisible

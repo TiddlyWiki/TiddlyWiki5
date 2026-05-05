@@ -1,0 +1,4 @@
+title: $:/core/templates/canonical-uri-static-tiddler-image
+
+\whitespace trim
+./images/<$view field="title" format="doubleurlencoded"/>

@@ -4,7 +4,11 @@ tags: $:/tags/Global
 \procedure community-card-display-jpeg-field(fieldName,mode:"block",default)
 <$genesis $type={{{ [<mode>match[block]then[div]else[span]] }}} class={{{ tc-community-card-field-image [[tc-community-card-field-image-]addsuffix<fieldName>] +[join[ ]] }}}>
 	<%if [<currentTiddler>has<fieldName>] %>
-		<img src={{{ [<currentTiddler>get<fieldName>addprefix[data:image/jpeg;base64,]] }}} width="32"/>
+		<%if [<tv-config-static>match[yes]] %>
+			<img src={{{ [<currentTiddler>encodeuricomponent[]encodeuricomponent[]addprefix<tv-static-avatar-prefix>addsuffix[.jpg]] }}} width="32"/>
+		<%else%>
+			<img src={{{ [<currentTiddler>get<fieldName>addprefix[data:image/jpeg;base64,]] }}} width="32"/>
+		<%endif%>
 	<%else%>
 		<$transclude $tiddler=<<default>> $mode=<<mode>>/>
 	<%endif%>

@@ -48,8 +48,13 @@
 		"tw2": [
 			"--render","TiddlyWiki2ReadMe","tw2/readme.md","text/html"],
 		"static": [
+			"--savetiddlers","[!is[system]is[image]]","static/images",
+			"--savefieldcontent","[tag[Community/Person]has[avatar]]","avatar","static/images/avatars",".jpg",
+			"--setfield","[!is[system]is[image]]","_canonical_uri","$:/core/templates/canonical-uri-static-index-image","text/plain",
+			"--setfield","[!is[system]is[image]]","text","","text/plain",
 			"--render","$:/core/templates/static.template.html","static.html","text/plain",
 			"--render","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
+			"--setfield","[!is[system]is[image]]","_canonical_uri","$:/core/templates/canonical-uri-static-tiddler-image","text/plain",
 			"--render","[!is[system]]","[encodeuricomponent[]addprefix[static/]addsuffix[.html]]","text/plain","$:/core/templates/static.tiddler.html",
 			"--render","$:/core/templates/static.template.css","static/static.css","text/plain"],
 		"external-js": [

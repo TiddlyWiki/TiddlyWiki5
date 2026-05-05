@@ -1,0 +1,4 @@
+title: $:/core/templates/canonical-uri-static-index-image
+
+\whitespace trim
+./static/images/<$view field="title" format="doubleurlencoded"/>
