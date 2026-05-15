@@ -34,10 +34,30 @@ test.describe("ProseMirror Editor - Hard Line Breaks Block", () => {
 		const editor = await setupProseMirrorTest(page, null, { initialText: '"""\nLine A\n"""' });
 		const block = editor.locator(".pm-nodeview-hardbreaks");
 		await expect(block).toBeVisible({ timeout: 5000 });
-		await editor.click();
-		await page.keyboard.press("Control+Home");
-		await page.keyboard.press("ArrowRight");
-		await page.keyboard.press("ArrowRight");
+		await block.locator(".pm-nodeview-content").evaluate((el) => {
+			const viewEl = el.closest(".ProseMirror");
+			function findAllEngines(widget) {
+				const results = [];
+				if(widget && widget.engine && widget.engine.view) results.push(widget.engine);
+				if(widget && widget.children) {
+					for(const child of widget.children) results.push.apply(results, findAllEngines(child));
+				}
+				return results;
+			}
+			const engine = findAllEngines($tw.rootWidget).find((e) => e.view && e.view.dom === viewEl);
+			if(!engine || !engine.view) throw new Error("ProseMirror view not found");
+			const view = engine.view;
+			const TextSelection = $tw.modules.execute("prosemirror-state").TextSelection;
+			let targetPos = null;
+			view.state.doc.descendants((node, pos) => {
+				if(targetPos !== null || !node.isText) return;
+				const idx = (node.text || "").indexOf("Line A");
+				if(idx !== -1) targetPos = pos + idx + "Line A".length;
+			});
+			if(targetPos === null) throw new Error("Line A position not found");
+			view.dispatch(view.state.tr.setSelection(TextSelection.create(view.state.doc, targetPos)));
+			view.focus();
+		});
 		await page.keyboard.press("Enter");
 		await page.keyboard.type("Line B");
 		await page.waitForTimeout(300);
