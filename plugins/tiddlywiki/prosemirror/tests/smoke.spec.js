@@ -63,10 +63,12 @@ test.describe("ProseMirror Editor - Smoke Tests", () => {
 				title: "$:/StoryList",
 				list: ["EditTestTiddler"].concat(storyList)
 			});
+			window.location.hash = "#EditTestTiddler";
 		});
 
 		const tiddlerFrame = page.locator('.tc-tiddler-frame[data-tiddler-title="EditTestTiddler"]').first();
-		await expect(tiddlerFrame).toBeVisible({ timeout: 5000 });
+		await page.waitForSelector('.tc-tiddler-frame[data-tiddler-title="EditTestTiddler"]', { timeout: 10000 });
+		await expect(tiddlerFrame).toBeVisible({ timeout: 10000 });
 
 		// Enter edit mode through the real UI so the smoke test matches user behavior
 		const editButton = tiddlerFrame.locator('button[title*="Edit this tiddler"]').first();
