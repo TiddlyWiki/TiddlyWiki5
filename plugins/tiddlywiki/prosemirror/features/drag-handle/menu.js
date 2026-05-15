@@ -10,6 +10,7 @@ Block action menu builders and rendering helpers for the drag handle feature.
 "use strict";
 
 const flatListCommands = require("prosemirror-flat-list");
+const TextSelection = require("prosemirror-state").TextSelection;
 const slashMenuElements = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/menu-elements.js");
 const helpers = require("$:/plugins/tiddlywiki/prosemirror/features/drag-handle/helpers.js");
 
@@ -108,6 +109,20 @@ function buildBlockActions(options) {
 		};
 	}
 
+	function insertParagraphAt(pos) {
+		const paragraphType = schema.nodes.paragraph;
+		if(!paragraphType) {
+			return;
+		}
+		const paragraph = paragraphType.createAndFill();
+		if(!paragraph) {
+			return;
+		}
+		let tr = view.state.tr.insert(pos, paragraph);
+		tr = tr.setSelection(TextSelection.create(tr.doc, pos + 1)).scrollIntoView();
+		view.dispatch(tr);
+	}
+
 	actions.push.apply(actions, buildSlashMenuActions(view, schema, safeAction));
 
 	if(origNode.type.name === "list") {
@@ -171,6 +186,20 @@ function buildBlockActions(options) {
 	}
 
 	actions.push({ type: "group", label: helpers.lang("Actions", "Actions") });
+	actions.push({
+		label: helpers.lang("InsertBlockAbove", "Insert block above"),
+		icon: "↑",
+		action: safeAction((pos) => {
+			insertParagraphAt(pos);
+		})
+	});
+	actions.push({
+		label: helpers.lang("InsertBlockBelow", "Insert block below"),
+		icon: "↓",
+		action: safeAction((pos, node) => {
+			insertParagraphAt(pos + node.nodeSize);
+		})
+	});
 	actions.push({
 		label: helpers.lang("Duplicate", "Duplicate"),
 		icon: "+",

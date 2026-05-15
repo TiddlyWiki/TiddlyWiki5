@@ -193,6 +193,10 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 		super.destroy();
 	}
 
+	usesExternalRenderedContent() {
+		return !!this.widgetInfo && !this.isEditMode;
+	}
+
 	ignoreMutation(mutation) {
 		// When acting as a plain paragraph (no widget detected), allow
 		// ProseMirror to process DOM mutations normally so that text input
@@ -202,14 +206,6 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 			return false;
 		}
 		return true;
-	}
-
-	stopEvent(event) {
-		// Only stop events when in widget mode (editing textarea, etc.)
-		if(!this.widgetInfo) {
-			return false;
-		}
-		return this.shouldStopControlEvent(event) || this.isEditMode;
 	}
 }
 
