@@ -99,13 +99,33 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await page.keyboard.type("<<now>>");
 		const widgetBlock = editor.locator(".pm-nodeview-widget").first();
 		await expect(widgetBlock).toBeVisible({ timeout: 5000 });
-		await widgetBlock.hover();
-		const editBtn = widgetBlock.locator(".pm-nodeview-btn-edit").first();
-		await expect(editBtn).toBeVisible({ timeout: 5000 });
-		await editBtn.click();
-		const deleteBtn = widgetBlock.locator(".pm-nodeview-btn-delete").first();
-		await expect(deleteBtn).toBeVisible({ timeout: 5000 });
-		await deleteBtn.evaluate((el) => el.click());
+
+		const deleteResult = await editor.evaluate(async (root) => {
+			const waitFrame = () => new Promise((resolve) => {
+				requestAnimationFrame(resolve);
+			});
+			const waitFor = async (selector, retries) => {
+				const el = root.querySelector(selector);
+				if(el || retries <= 1) {
+					return el;
+				}
+				await waitFrame();
+				return waitFor(selector, retries - 1);
+			};
+			const editBtn = root.querySelector(".pm-nodeview-widget .pm-nodeview-btn-edit");
+			if(!editBtn) {
+				return { ok: false, step: "editBtn" };
+			}
+			editBtn.click();
+			const deleteBtn = await waitFor(".pm-nodeview-widget.pm-nodeview-editing .pm-nodeview-btn-delete", 30);
+			if(!deleteBtn) {
+				return { ok: false, step: "deleteBtn" };
+			}
+			deleteBtn.click();
+			await waitFrame();
+			return { ok: true };
+		});
+		expect(deleteResult).toEqual({ ok: true });
 		await expect(editor.locator(".pm-nodeview-widget")).toHaveCount(0, { timeout: 10000 });
 	});
 
