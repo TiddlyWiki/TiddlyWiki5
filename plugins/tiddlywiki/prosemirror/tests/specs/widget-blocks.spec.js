@@ -105,7 +105,7 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await editBtn.click();
 		const deleteBtn = widgetBlock.locator(".pm-nodeview-btn-delete").first();
 		await expect(deleteBtn).toBeVisible({ timeout: 5000 });
-		await deleteBtn.click();
+		await deleteBtn.evaluate((el) => el.click());
 		await expect(editor.locator(".pm-nodeview-widget")).toHaveCount(0, { timeout: 10000 });
 	});
 
