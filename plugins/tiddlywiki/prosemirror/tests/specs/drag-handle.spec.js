@@ -76,4 +76,41 @@ test.describe("ProseMirror Editor - Drag Handle", () => {
 		await blockMenu.locator(".tc-prosemirror-block-menu-search").fill("markdown");
 		await expect(blockMenu.locator(".tc-prosemirror-block-menu-item", { hasText: "$$$ Markdown" })).toBeVisible();
 	});
+
+	test("block menu should insert a paragraph below the current block", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			useReadmeTiddler: false,
+			initialText: "First paragraph"
+		});
+		const firstParagraph = editor.locator("p").first();
+		await firstParagraph.hover();
+		await page.waitForTimeout(300);
+		await page.locator(".tc-prosemirror-drag-handle").click();
+		const blockMenu = page.locator(".tc-prosemirror-block-menu");
+		await expect(blockMenu).toBeVisible();
+		await expect(blockMenu).toContainText("Insert block below");
+		await blockMenu.locator(".tc-prosemirror-block-menu-item", { hasText: "Insert block below" }).click();
+		await page.keyboard.type("After first paragraph");
+		await expect(editor.locator("p").nth(1)).toContainText("After first paragraph");
+	});
+
+	test("block menu should insert a paragraph above the current block", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			useReadmeTiddler: false,
+			initialText: "First paragraph\n\nSecond paragraph"
+		});
+		const secondParagraph = editor.locator("p").nth(1);
+		await secondParagraph.hover();
+		await page.waitForTimeout(300);
+		await page.locator(".tc-prosemirror-drag-handle").click();
+		const blockMenu = page.locator(".tc-prosemirror-block-menu");
+		await expect(blockMenu).toBeVisible();
+		await expect(blockMenu).toContainText("Insert block above");
+		await blockMenu.locator(".tc-prosemirror-block-menu-item", { hasText: "Insert block above" }).click();
+		await page.keyboard.type("Between first and second");
+		const paragraphs = await editor.locator("p").allTextContents();
+		expect(paragraphs[0]).toContain("First paragraph");
+		expect(paragraphs[1]).toContain("Between first and second");
+		expect(paragraphs[2]).toContain("Second paragraph");
+	});
 });

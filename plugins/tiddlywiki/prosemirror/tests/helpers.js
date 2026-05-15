@@ -209,6 +209,149 @@ async function installCustomSyntaxTestModules(page) {
 	});
 }
 
+async function installInteractiveChecklistTestModules(page) {
+	await page.evaluate(() => {
+		if($tw.__pmInteractiveChecklistTestModulesInstalled) {
+			return;
+		}
+		$tw.__pmInteractiveChecklistTestModulesInstalled = true;
+
+		const BaseWidget = Object.getPrototypeOf($tw.rootWidget).constructor;
+
+		function InteractiveChecklistWidget(parseTreeNode, options) {
+			this.initialise(parseTreeNode, options);
+		}
+		InteractiveChecklistWidget.prototype = new BaseWidget();
+		InteractiveChecklistWidget.prototype.execute = function() {};
+		InteractiveChecklistWidget.prototype.render = function(parent, nextSibling) {
+			this.parentDomNode = parent;
+			this.computeAttributes();
+			this.execute();
+
+			const wrapper = this.document.createElement("div");
+			wrapper.className = "pmtest-interactive-checklist";
+
+			const list = this.document.createElement("ul");
+			list.className = "pmtest-interactive-checklist-list";
+			wrapper.appendChild(list);
+
+			const input = this.document.createElement("input");
+			input.type = "text";
+			input.className = "pmtest-interactive-checklist-newitem";
+			input.placeholder = "New item";
+
+			const tiddlerTitle = (this.parentWidget && this.parentWidget.editTitle) || this.getVariable("currentTiddler");
+			const startPos = parseInt(this.getAttribute("listStartPos", "0"), 10);
+			const stopPos = parseInt(this.getAttribute("listStopPos", "0"), 10);
+
+			const getLines = () => {
+				const tiddlerText = $tw.wiki.getTiddlerText(tiddlerTitle, "");
+				return tiddlerText.substring(startPos, stopPos).split("\n").filter(Boolean);
+			};
+
+			const writeLines = (lines) => {
+				const tiddlerText = $tw.wiki.getTiddlerText(tiddlerTitle, "");
+				const newBody = tiddlerText.substring(0, startPos) + lines.join("\n") + tiddlerText.substring(stopPos);
+				$tw.wiki.setText(tiddlerTitle, "text", null, newBody);
+			};
+
+			getLines().forEach((line, index) => {
+				const match = /^\[\?([ xX])\]\s?(.*)$/.exec(line);
+				if(!match) {
+					return;
+				}
+				const item = this.document.createElement("li");
+				item.className = "pmtest-interactive-checklist-item";
+
+				const checkbox = this.document.createElement("input");
+				checkbox.type = "checkbox";
+				checkbox.className = "pmtest-interactive-checklist-checkbox";
+				checkbox.checked = match[1].toLowerCase() === "x";
+				checkbox.addEventListener("change", () => {
+					const lines = getLines();
+					lines[index] = lines[index].replace(/^\[\?[ xX]\]/, checkbox.checked ? "[?x]" : "[? ]");
+					writeLines(lines);
+				});
+
+				const label = this.document.createElement("span");
+				label.className = "pmtest-interactive-checklist-label";
+				label.textContent = match[2];
+
+				item.appendChild(checkbox);
+				item.appendChild(label);
+				list.appendChild(item);
+			});
+
+			const saveNewItem = () => {
+				const value = input.value.trim();
+				if(!value) {
+					return;
+				}
+				const lines = getLines();
+				lines.push("[? ] " + value);
+				input.value = "";
+				writeLines(lines);
+			};
+
+			input.addEventListener("keyup", (event) => {
+				if(event.key === "Enter") {
+					saveNewItem();
+				}
+			});
+
+			wrapper.appendChild(input);
+			parent.insertBefore(wrapper, nextSibling);
+			this.domNodes.push(wrapper);
+		};
+
+		$tw.modules.define("$:/temp/prosemirror/tests/interactive-checklist-widget.js", "widget", {
+			"pmtest-interactive-checklist": InteractiveChecklistWidget
+		});
+
+		$tw.modules.define("$:/temp/prosemirror/tests/interactive-checklist-rule.js", "wikirule", {
+			name: "pmtest-interactive-checklist-rule",
+			types: { inline: true },
+			init: function(parser) {
+				this.parser = parser;
+				this.matchRegExp = /^\[\?([ xX])\] .*$/mg;
+			},
+			parse: function() {
+				const listStartPos = this.parser.pos;
+				let match = this.match;
+				do {
+					this.parser.pos = this.matchRegExp.lastIndex;
+					match = this.matchRegExp.exec(this.parser.source);
+				} while(match != null && match.index === 1 + this.parser.pos);
+
+				return [{
+					type: "pmtest-interactive-checklist",
+					attributes: {
+						listStartPos: { type: "string", value: String(listStartPos) },
+						listStopPos: { type: "string", value: String(this.parser.pos) }
+					},
+					children: []
+				}];
+			}
+		});
+
+		const WikitextParser = $tw.Wiki.parsers["text/vnd.tiddlywiki"];
+		if(WikitextParser && WikitextParser.prototype) {
+			delete WikitextParser.prototype.pragmaRuleClasses;
+			delete WikitextParser.prototype.blockRuleClasses;
+			delete WikitextParser.prototype.inlineRuleClasses;
+		}
+
+		const BaseWidgetProto = BaseWidget.prototype;
+		delete BaseWidgetProto.widgetClasses;
+		if($tw.rootWidget && Object.prototype.hasOwnProperty.call($tw.rootWidget, "widgetClasses")) {
+			delete $tw.rootWidget.widgetClasses;
+		}
+		if($tw.wiki && typeof $tw.wiki.clearCache === "function") {
+			$tw.wiki.clearCache();
+		}
+	});
+}
+
 // ---------------------------------------------------------------------------
 // Page setup
 // ---------------------------------------------------------------------------
@@ -290,6 +433,7 @@ module.exports = {
 	clearEditor,
 	dispatchEditorShortcut,
 	installCustomSyntaxTestModules,
+	installInteractiveChecklistTestModules,
 	selectAllEditorContent,
 	pastePlainText,
 	loadTestPage,

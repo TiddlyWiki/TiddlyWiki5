@@ -1,7 +1,9 @@
 "use strict";
 
 const { test, expect } = require("@playwright/test");
-const { setupProseMirrorTest, clearEditor, pastePlainText } = require("../helpers.js");
+const {
+	setupProseMirrorTest, clearEditor, pastePlainText
+} = require("../helpers.js");
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Widget Blocks
@@ -144,4 +146,5 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await page.keyboard.type("\n\nAfter widget");
 		await expect(editor).toContainText("After widget");
 	});
+
 });

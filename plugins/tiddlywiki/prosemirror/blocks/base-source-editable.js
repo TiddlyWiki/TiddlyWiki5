@@ -325,8 +325,57 @@ class BaseSourceEditableNodeView {
 		);
 	}
 
+	// eslint-disable-next-line class-methods-use-this
+	usesExternalRenderedContent() {
+		return false;
+	}
+
+	isRenderedContentInteractiveTarget(target) {
+		if(!target || !this.contentContainer || typeof target.closest !== "function") {
+			return false;
+		}
+		const interactive = target.closest(
+			"input, textarea, button, select, option, label, a[href], summary, details, [contenteditable='true'], [contenteditable=''], [tabindex], [role='button'], [role='checkbox'], [role='textbox'], [role='combobox'], [role='link'], [role='menuitem'], audio[controls], video[controls]"
+		);
+		return !!(interactive && this.contentContainer.contains(interactive));
+	}
+
+	shouldStopRenderedContentEvent(event) {
+		if(!this.usesExternalRenderedContent() || !event || !event.target || !this.contentContainer) {
+			return false;
+		}
+		if(!this.contentContainer.contains(event.target)) {
+			return false;
+		}
+		if(this.isRenderedContentInteractiveTarget(event.target)) {
+			return true;
+		}
+		switch(event.type) {
+			case "mousedown":
+			case "mouseup":
+			case "click":
+			case "dblclick":
+			case "focus":
+			case "focusin":
+			case "keydown":
+			case "keypress":
+			case "keyup":
+			case "beforeinput":
+			case "input":
+			case "compositionstart":
+			case "compositionupdate":
+			case "compositionend":
+			case "paste":
+			case "cut":
+			case "drop":
+				return true;
+			default:
+				return false;
+		}
+	}
+
 	stopEvent(event) {
-		return this.shouldStopControlEvent(event) || this.isEditMode;
+		return this.shouldStopControlEvent(event) || this.isEditMode || this.shouldStopRenderedContentEvent(event);
 	}
 
 	// eslint-disable-next-line class-methods-use-this

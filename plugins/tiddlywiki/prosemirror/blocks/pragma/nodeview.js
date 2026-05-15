@@ -149,6 +149,10 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		this._destroyRenderedWidget();
 		super.destroy();
 	}
+
+	usesExternalRenderedContent() {
+		return !this.isEditMode;
+	}
 }
 
 function createPragmaBlockNodeViewPlugin(hostWidget) {
