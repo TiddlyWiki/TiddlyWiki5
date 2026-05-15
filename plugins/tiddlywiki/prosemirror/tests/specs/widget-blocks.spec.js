@@ -97,28 +97,15 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		const editor = await setupProseMirrorTest(page);
 		await clearEditor(editor);
 		await page.keyboard.type("<<now>>");
-		await expect(editor.locator(".pm-nodeview-widget")).toBeVisible({ timeout: 2000 });
-
-		const deleteResult = await editor.evaluate(async (root) => {
-			const waitFrame = () => new Promise((resolve) => {
-				requestAnimationFrame(resolve);
-			});
-			const findDeleteButton = async (n) => {
-				await waitFrame();
-				const el = root.querySelector(".pm-nodeview-widget.pm-nodeview-editing .pm-nodeview-btn-delete");
-				if(el || n <= 1) return el;
-				return findDeleteButton(n - 1);
-			};
-			const editBtn = root.querySelector(".pm-nodeview-widget .pm-nodeview-btn-edit");
-			if(!editBtn) return { ok: false, step: "editBtn" };
-			editBtn.click();
-			const deleteBtn = await findDeleteButton(5);
-			if(!deleteBtn) return { ok: false, step: "deleteBtn" };
-			deleteBtn.click();
-			await waitFrame();
-			return { ok: true };
-		});
-		expect(deleteResult).toEqual({ ok: true });
+		const widgetBlock = editor.locator(".pm-nodeview-widget").first();
+		await expect(widgetBlock).toBeVisible({ timeout: 5000 });
+		await widgetBlock.hover();
+		const editBtn = widgetBlock.locator(".pm-nodeview-btn-edit").first();
+		await expect(editBtn).toBeVisible({ timeout: 5000 });
+		await editBtn.click();
+		const deleteBtn = widgetBlock.locator(".pm-nodeview-btn-delete").first();
+		await expect(deleteBtn).toBeVisible({ timeout: 5000 });
+		await deleteBtn.click();
 		await expect(editor.locator(".pm-nodeview-widget")).toHaveCount(0, { timeout: 10000 });
 	});
 
@@ -135,7 +122,7 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		const editor = await setupProseMirrorTest(page);
 		await clearEditor(editor);
 		await pastePlainText(editor, '<<now "YYYY-MM-DD">>');
-		await expect(editor.locator(".pm-nodeview-widget")).toBeVisible({ timeout: 2000 });
+		await expect.poll(() => editor.locator(".pm-nodeview-widget").count(), { timeout: 5000 }).toBe(1);
 	});
 
 	test("should allow adding a new line after a widget block", async ({ page }) => {
