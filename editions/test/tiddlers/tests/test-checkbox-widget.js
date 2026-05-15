@@ -607,6 +607,12 @@ describe("Checkbox widget", function() {
 			expect(checkboxes[0].parseTreeNode.sourceTitle).toBeUndefined();
 			expect(checkboxes[0].checkboxSourceTitle).toBe("DirectTasks");
 			expect(checkboxes[0].parseTreeNode.checked).toBe(false);
+			expect(checkboxes[0].parseTreeNode.markerStart).toBe(checkboxes[0].parseTreeNode.start + 1);
+			expect(checkboxes[0].parseTreeNode.markerEnd).toBe(checkboxes[0].parseTreeNode.end - 1);
+			expect(wiki.getTiddler("DirectTasks").fields.text.substring(
+				checkboxes[0].parseTreeNode.markerStart,
+				checkboxes[0].parseTreeNode.markerEnd
+			)).toBe(" ");
 			expect(checkboxes[0].getValue()).toBe(false);
 
 			clickCheckbox(checkboxes[0],true);
@@ -725,6 +731,24 @@ describe("Checkbox widget", function() {
 			// Check the middle one only
 			clickCheckbox(checkboxes[1],true);
 			expect(wiki.getTiddler("ThreeTasks").fields.text).toBe("[ ] A\n[x] B\n[ ] C\n");
+		});
+
+		it("does not modify text if stored checkbox offsets no longer match the source", function() {
+			const wiki = new $tw.Wiki();
+			wiki.addTiddler({title: "ShiftedTask", text: "[ ] Task"});
+
+			const parser = wiki.parseTiddler("ShiftedTask");
+			const widgetNode = wiki.makeWidget(parser,{document: $tw.fakeDocument});
+			widgetNode.render($tw.fakeDocument.createElement("div"), null);
+
+			const checkboxes = findCheckboxes(widgetNode);
+			expect(checkboxes.length).toBe(1);
+
+			wiki.addTiddler({title: "ShiftedTask", text: "prefix [ ] Task"});
+			clickCheckbox(checkboxes[0],true);
+
+			expect(checkboxes[0].inputDomNode.checked).toBe(false);
+			expect(wiki.getTiddler("ShiftedTask").fields.text).toBe("prefix [ ] Task");
 		});
 
 		it("checkboxes parsed without a sourceTitle (macro expansion context) have no sourceTitle and are disabled", function() {

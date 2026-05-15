@@ -4,7 +4,7 @@ type: application/javascript
 module-type: indexer
 
 Indexes tiddlers that contain wikitext checkbox syntax ([ ], [x], [X]).
-Maintains three sets so that the checkbox filter operator can answer
+Maintains checked and unchecked title sets so that the checkbox filter operator can answer
 in O(1) per-tiddler instead of scanning every tiddler's text.
 
 \*/
@@ -31,9 +31,8 @@ Lazy-build the full index the first time it is needed.
 */
 CheckboxIndexer.prototype._init = function() {
 	this.index = {
-		checked:   Object.create(null), // titles with at least one [x]/[X]
-		unchecked: Object.create(null), // titles with at least one [ ]
-		any:       Object.create(null)  // titles with any checkbox at all
+		checked:   Object.create(null),
+		unchecked: Object.create(null)
 	};
 	this.wiki.forEachTiddler((title, tiddler) => this._classifyTiddler(title, tiddler));
 };
@@ -44,13 +43,11 @@ CheckboxIndexer.prototype._classifyTiddler = function(title, tiddler) {
 	const hasUnchecked = REGEXP_UNCHECKED.test(text);
 	if(hasChecked)             this.index.checked[title]   = true;
 	if(hasUnchecked)           this.index.unchecked[title] = true;
-	if(hasChecked || hasUnchecked) this.index.any[title]   = true;
 };
 
 CheckboxIndexer.prototype._removeTiddler = function(title) {
 	delete this.index.checked[title];
 	delete this.index.unchecked[title];
-	delete this.index.any[title];
 };
 
 CheckboxIndexer.prototype.update = function(updateDescriptor) {
@@ -66,13 +63,22 @@ CheckboxIndexer.prototype.update = function(updateDescriptor) {
 
 /*
 Look up titles by checkbox state.
-@param {string} category - "checked", "unchecked", or "any" (default)
+@param {string} state - "checked" or "unchecked"; omitted means either state
 @returns {string[]} array of titles
 */
-CheckboxIndexer.prototype.lookup = function(category) {
+CheckboxIndexer.prototype.lookup = function(state) {
 	if(!this.index) this._init();
-	const bucket = this.index[category || "any"];
-	return bucket ? Object.keys(bucket) : [];
+	if(state === "checked" || state === "unchecked") {
+		return Object.keys(this.index[state]);
+	}
+	const titles = Object.create(null);
+	for(const title of Object.keys(this.index.checked)) {
+		titles[title] = true;
+	}
+	for(const title of Object.keys(this.index.unchecked)) {
+		titles[title] = true;
+	}
+	return Object.keys(titles);
 };
 
 exports.CheckboxIndexer = CheckboxIndexer;

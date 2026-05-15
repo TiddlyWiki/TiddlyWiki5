@@ -178,30 +178,54 @@ Handle a click on a wikitext inline checkbox: splice [x] or [ ] into the
 source tiddler's text field at the position recorded in the parse tree node.
 */
 CheckboxWidget.prototype.handleTextCheckboxChange = function(checked) {
-	const sourceTiddler = this.wiki.getTiddler(this.checkboxSourceTitle);
-	if(!sourceTiddler) return;
-	const text = sourceTiddler.fields.text || "";
-	const {start, end} = this.parseTreeNode;
-	// Safety: verify the character range actually contains a checkbox token in
-	// the source text.  Guards against stale or mis-matched parse contexts
-	// (e.g. a checkbox whose offsets come from a different string than sourceTiddler).
-	const token = text.substring(start, end);
-	if(token !== "[ ]" && token !== "[x]" && token !== "[X]") return;
-	const replacement = checked ? "[x]" : "[ ]";
-	const newText = text.substring(0, start) + replacement + text.substring(end);
+	var sourceTiddler = this.wiki.getTiddler(this.checkboxSourceTitle),
+		text,
+		tokenStart = this.parseTreeNode.start,
+		tokenEnd = this.parseTreeNode.end,
+		markerStart = this.parseTreeNode.markerStart,
+		markerEnd = this.parseTreeNode.markerEnd,
+		marker,
+		replacement,
+		newText;
+	if(!sourceTiddler) {
+		return false;
+	}
+	text = sourceTiddler.fields.text || "";
+	if(typeof tokenStart !== "number" || typeof tokenEnd !== "number" ||
+		typeof markerStart !== "number" || typeof markerEnd !== "number" ||
+		tokenEnd !== tokenStart + 3 || markerStart !== tokenStart + 1 ||
+		markerEnd !== markerStart + 1 || markerEnd !== tokenEnd - 1 ||
+		tokenStart < 0 || tokenEnd > text.length) {
+		return false;
+	}
+	if(text.charAt(tokenStart) !== "[" || text.charAt(tokenEnd - 1) !== "]") {
+		return false;
+	}
+	marker = text.substring(markerStart, markerEnd);
+	if(marker !== " " && marker !== "x" && marker !== "X") {
+		return false;
+	}
+	replacement = checked ? "x" : " ";
+	if(marker === replacement) {
+		return true;
+	}
+	newText = text.substring(0, markerStart) + replacement + text.substring(markerEnd);
 	this.wiki.addTiddler(new $tw.Tiddler(
 		this.wiki.getCreationFields(),
 		sourceTiddler,
 		{text: newText},
 		this.wiki.getModificationFields()
 	));
+	return true;
 };
 
 CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	var checked = this.inputDomNode.checked;
 	if(this.isWikitextCheckbox) {
-		// Wikitext inline mode: update the source tiddler's text directly
-		this.handleTextCheckboxChange(checked);
+		if(!this.handleTextCheckboxChange(checked)) {
+			this.inputDomNode.checked = !checked;
+			return;
+		}
 	} else {
 		var tiddler = this.wiki.getTiddler(this.checkboxTitle),
 			fallbackFields = {text: ""},
@@ -342,9 +366,12 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	this.isDisabled = this.getAttribute("disabled","no");
 	this.tabIndex = this.getAttribute("tabindex");
-	// Source tiddler title comes from the `parseSourceTitle` variable (set by wiki.makeWidget and overridden by each TranscludeWidget). Empty string means anonymous parse context (e.g. macro expansion) → checkbox is disabled.
+	// Empty parseSourceTitle means anonymous parsed text, so inline checkboxes stay read-only.
 	this.isWikitextCheckbox = this.parseTreeNode.checked !== undefined
-		&& typeof this.parseTreeNode.start === "number";
+		&& typeof this.parseTreeNode.start === "number"
+		&& typeof this.parseTreeNode.end === "number"
+		&& typeof this.parseTreeNode.markerStart === "number"
+		&& typeof this.parseTreeNode.markerEnd === "number";
 	const rawSourceTitle = this.isWikitextCheckbox
 		? this.getVariable("parseSourceTitle")
 		: undefined;

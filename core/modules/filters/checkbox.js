@@ -10,33 +10,49 @@ for O(1)-per-tiddler lookups. The :text form always scans the raw text.
 
 "use strict";
 
-// Regexps used for the title-returning (indexed/fallback) path.
-// No `g` flag — no lastIndex state between calls.
-const REGEXP_ANY       = /\[([ xX])\]/;
-const REGEXP_CHECKED   = /\[[xX]\]/;
-const REGEXP_UNCHECKED = /\[ \]/;
+const STATE_PATTERN_SOURCES = {
+	checked: "\\[[xX]\\]",
+	unchecked: "\\[ \\]"
+};
 
-// Returns a fresh global RegExp for extracting checkbox text items.
-const makeExtractRegExp = (category) => {
-	if(category === "checked")   return /\[[xX]\]\s*([^\n]+)/g;
-	if(category === "unchecked") return /\[ \]\s*([^\n]+)/g;
-	return /\[[ xX]\]\s*([^\n]+)/g;
+// No `g` flag — no lastIndex state between calls.
+const STATE_TEST_REGEXPS = {
+	checked: new RegExp(STATE_PATTERN_SOURCES.checked),
+	unchecked: new RegExp(STATE_PATTERN_SOURCES.unchecked)
+};
+
+const getState = (operand) => {
+	if(operand === "checked" || operand === "unchecked") {
+		return operand;
+	}
+	return undefined;
+};
+
+const matchesCheckbox = (text, state) => {
+	if(state) {
+		return STATE_TEST_REGEXPS[state].test(text);
+	}
+	return STATE_TEST_REGEXPS.checked.test(text) || STATE_TEST_REGEXPS.unchecked.test(text);
+};
+
+const makeExtractRegExp = (state) => {
+	const markerSource = state
+		? STATE_PATTERN_SOURCES[state]
+		: "(?:" + STATE_PATTERN_SOURCES.checked + "|" + STATE_PATTERN_SOURCES.unchecked + ")";
+	return new RegExp(markerSource + "\\s*([^\\n]+)","g");
 };
 
 exports.checkbox = function(source,operator,options) {
 	const results  = [];
-	const operand  = operator.operand;
 	const suffix   = operator.suffix || "";
 	const invert   = operator.prefix === "!";
-	let category = "any";
-	if(operand === "checked") category = "checked";
-	else if(operand === "unchecked") category = "unchecked";
+	const state = getState(operator.operand);
 
 	if(suffix === "text") {
 		source((tiddler) => {
 			if(!tiddler) return;
 			const text = tiddler.fields.text || "";
-			const re = makeExtractRegExp(category);
+			const re = makeExtractRegExp(state);
 			let m;
 			while((m = re.exec(text)) !== null) {
 				const item = m[1].trim();
@@ -49,7 +65,7 @@ exports.checkbox = function(source,operator,options) {
 	const indexer = options.wiki.getIndexer("CheckboxIndexer");
 	if(indexer) {
 		const indexedSet = Object.create(null);
-		for(const title of indexer.lookup(category)) {
+		for(const title of indexer.lookup(state)) {
 			indexedSet[title] = true;
 		}
 		source((tiddler,title) => {
@@ -57,13 +73,10 @@ exports.checkbox = function(source,operator,options) {
 			if(!!indexedSet[title] !== invert) results.push(title);
 		});
 	} else {
-		// Regex fallback when indexer is not available
-		let regexp = REGEXP_ANY;
-		if(category === "checked") regexp = REGEXP_CHECKED;
-		else if(category === "unchecked") regexp = REGEXP_UNCHECKED;
+		// Keep the regex fallback so checkbox[] still works when indexers are disabled.
 		source((tiddler,title) => {
 			if(!tiddler) return;
-			if(regexp.test(tiddler.fields.text || "") !== invert) results.push(title);
+			if(matchesCheckbox(tiddler.fields.text || "",state) !== invert) results.push(title);
 		});
 	}
 	return results;
