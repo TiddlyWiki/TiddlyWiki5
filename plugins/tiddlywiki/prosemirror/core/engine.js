@@ -152,13 +152,12 @@ class ProseMirrorEngine {
 			return;
 		}
 		const nextText = text || "";
-		const currentText = this.getText();
 		const shouldRefresh = this.saveLock === "refresh";
 		const fromOwnSave = !!this.saveLock;
 		this.saveLock = false;
 		this.value = nextText;
 
-		if(shouldRefresh || nextText !== currentText || !this.view.hasFocus()) {
+		if(shouldRefresh || !this.view.hasFocus()) {
 			this.updateDomNodeText(nextText);
 			return;
 		}
