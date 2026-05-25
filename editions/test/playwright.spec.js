@@ -6,8 +6,8 @@ const crossPlatformIndexPath = indexPath.replace(/^\/+/, "");
 
 
 test("get started link", async ({ page, browserName }) => {
-	// Firefox takes longer to boot the full Jasmine test page.
-	const timeout = browserName === "firefox" ? 1000 * 90 : 1000 * 30;
+	// Firefox and Edge take longer to boot the full Jasmine test page.
+	const timeout = (browserName === "firefox" || browserName === "msedge") ? 1000 * 90 : 1000 * 30;
 	test.setTimeout(timeout);
 
 	// Avoid long offline stalls if the generated test page references external assets.
