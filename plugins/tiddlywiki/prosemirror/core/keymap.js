@@ -14,6 +14,7 @@ const prosemirrorFlatList = require("prosemirror-flat-list");
 const prosemirrorHistory = require("prosemirror-history");
 const prosemirrorInputrules = require("prosemirror-inputrules");
 const prosemirrorState = require("prosemirror-state");
+const parseWidget = require("$:/plugins/tiddlywiki/prosemirror/blocks/widget/utils.js").parseWidget;
 
 const mac = typeof navigator != "undefined"
 	? (navigator.userAgentData
@@ -32,6 +33,42 @@ function getShortcut(action, defaultKey) {
 
 	// Use custom key if provided, otherwise use default
 	return customKey || defaultKey;
+}
+
+function isReadOnlyRenderedBlockNode(node) {
+	if(!node) {
+		return false;
+	}
+	if(node.type && (node.type.name === "opaque_block" || node.type.name === "pragma_block")) {
+		return true;
+	}
+	if(node.type && node.type.name === "paragraph") {
+		return !!parseWidget((node.textContent || "").trim());
+	}
+	return false;
+}
+
+function insertParagraphAfterSelectedRenderedBlock(state, dispatch) {
+	const selection = state.selection;
+	if(!(selection instanceof prosemirrorState.NodeSelection) || !isReadOnlyRenderedBlockNode(selection.node)) {
+		return false;
+	}
+	const paragraphType = state.schema.nodes.paragraph;
+	if(!paragraphType) {
+		return false;
+	}
+	const paragraph = paragraphType.createAndFill();
+	if(!paragraph) {
+		return false;
+	}
+	if(!dispatch) {
+		return true;
+	}
+	const insertPos = selection.to;
+	let tr = state.tr.insert(insertPos, paragraph);
+	tr = tr.setSelection(prosemirrorState.TextSelection.create(tr.doc, insertPos + 1)).scrollIntoView();
+	dispatch(tr);
+	return true;
 }
 
 function buildKeymap(schema, mapKeys) {
@@ -256,6 +293,19 @@ function buildKeymap(schema, mapKeys) {
 				keys[ctrlEnterKey] = combinedShiftEnter;
 			}
 		}
+	}
+
+	if(keys.Enter) {
+		keys.Enter = prosemirrorCommands.chainCommands(insertParagraphAfterSelectedRenderedBlock, keys.Enter);
+	} else {
+		keys.Enter = insertParagraphAfterSelectedRenderedBlock;
+	}
+	const shiftEnterKey = getShortcut("hardbreak-shift", "Shift-Enter");
+	if(shiftEnterKey && shiftEnterKey !== "none") {
+		const existingShiftEnter = keys[shiftEnterKey];
+		keys[shiftEnterKey] = existingShiftEnter
+			? prosemirrorCommands.chainCommands(insertParagraphAfterSelectedRenderedBlock, existingShiftEnter)
+			: insertParagraphAfterSelectedRenderedBlock;
 	}
 	type = schema.nodes.heading;
 	if(type) {

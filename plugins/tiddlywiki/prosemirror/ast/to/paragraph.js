@@ -8,6 +8,26 @@ module-type: library
 
 const convertNodes = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js").convertNodes;
 
+function isLiftedBlockNode(node) {
+	return !!node && (
+		node.type === "opaque_block" ||
+		node.type === "pragma_block" ||
+		node.type === "typed_block"
+	);
+}
+
+function pushParagraphOrLiftedBlocks(result, context, children) {
+	const converted = convertNodes(context, children);
+	if(converted.length > 0 && converted.every(isLiftedBlockNode)) {
+		result.push.apply(result, converted);
+		return;
+	}
+	result.push({
+		type: "paragraph",
+		content: converted
+	});
+}
+
 module.exports = function buildParagraph(context, node) {
 	const children = node.children || [];
 	const result = [];
@@ -15,10 +35,7 @@ module.exports = function buildParagraph(context, node) {
 	for(let i = 0; i < children.length; i++) {
 		if(children[i].rule === "hardlinebreaks") {
 			if(currentP.length > 0) {
-				result.push({
-					type: "paragraph",
-					content: convertNodes(context, currentP)
-				});
+				pushParagraphOrLiftedBlocks(result, context, currentP);
 				currentP = [];
 			}
 			const hardBlock = [];
@@ -37,10 +54,7 @@ module.exports = function buildParagraph(context, node) {
 		}
 	}
 	if(currentP.length > 0) {
-		result.push({
-			type: "paragraph",
-			content: convertNodes(context, currentP)
-		});
+		pushParagraphOrLiftedBlocks(result, context, currentP);
 	}
 	if(result.length === 1) {
 		return result[0];

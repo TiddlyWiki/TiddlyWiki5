@@ -43,6 +43,7 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 			this.widgetInfo = widget;
 			this.widgetContent = content;
 			this.contentContainer = content;
+			this.installRenderedContentSelectionGuards();
 		} else {
 			const p = document.createElement("p");
 			p.className = "pm-paragraph-normal";

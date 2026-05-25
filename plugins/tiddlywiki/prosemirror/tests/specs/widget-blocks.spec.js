@@ -5,6 +5,61 @@ const {
 	setupProseMirrorTest, clearEditor, pastePlainText
 } = require("../helpers.js");
 
+function selectFirstWidgetBlockNode(editor) {
+	return editor.evaluate((el) => {
+		const viewEl = el.closest(".ProseMirror") || el;
+		function findAllEngines(widget) {
+			const results = [];
+			if(widget && widget.engine && widget.engine.view) results.push(widget.engine);
+			if(widget && widget.children) {
+				for(const child of widget.children) results.push.apply(results, findAllEngines(child));
+			}
+			return results;
+		}
+		const engine = findAllEngines($tw.rootWidget).find((e) => e.view && e.view.dom === viewEl);
+		if(!engine || !engine.view) return { selectionType: null, selectedNodeType: null };
+		const sel = engine.view.state.selection;
+		return {
+			selectionType: sel && sel.constructor && sel.constructor.name,
+			selectedNodeType: sel && sel.node && sel.node.type && sel.node.type.name
+		};
+	});
+}
+
+function setFirstWidgetBlockNodeSelection(editor) {
+	return editor.evaluate((el) => {
+		const viewEl = el.closest(".ProseMirror") || el;
+		function findAllEngines(widget) {
+			const results = [];
+			if(widget && widget.engine && widget.engine.view) results.push(widget.engine);
+			if(widget && widget.children) {
+				for(const child of widget.children) results.push.apply(results, findAllEngines(child));
+			}
+			return results;
+		}
+		const engine = findAllEngines($tw.rootWidget).find((e) => e.view && e.view.dom === viewEl);
+		if(!engine || !engine.view) return { selectionType: null, selectedNodeType: null };
+		const view = engine.view;
+		const NodeSelection = $tw.modules.execute("prosemirror-state").NodeSelection;
+		let widgetPos = null;
+		view.state.doc.descendants((node, pos) => {
+			if(widgetPos !== null) return false;
+			if(node.type && node.type.name === "paragraph" && /^<</.test((node.textContent || "").trim())) {
+				widgetPos = pos;
+				return false;
+			}
+		});
+		if(widgetPos === null) return { selectionType: null, selectedNodeType: null };
+		view.dispatch(view.state.tr.setSelection(NodeSelection.create(view.state.doc, widgetPos)));
+		view.focus();
+		const sel = view.state.selection;
+		return {
+			selectionType: sel && sel.constructor && sel.constructor.name,
+			selectedNodeType: sel && sel.node && sel.node.type && sel.node.type.name
+		};
+	});
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Widget Blocks
 // ─────────────────────────────────────────────────────────────────────────────
@@ -152,6 +207,76 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 		await expect(page.locator(".pm-nodeview-widget").first()).toBeVisible({ timeout: 2000 });
 		await page.keyboard.type("\n\nAfter widget");
 		await expect(editor).toContainText("After widget");
+	});
+
+	test("clicking read-only widget content should select the widget block", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, "WidgetListLinkSelection", {
+			useReadmeTiddler: false,
+			initialText: '<<list-links "[tag[test]]">>',
+			configTiddlers: [
+				{ title: "TaggedA", text: "A", tags: ["test"] },
+				{ title: "TaggedB", text: "B", tags: ["test"] }
+			]
+		});
+		const widgetContent = editor.locator(".pm-nodeview-widget .pm-nodeview-content").first();
+		await expect(widgetContent).toBeVisible({ timeout: 5000 });
+		await widgetContent.evaluate((el) => {
+			el.dispatchEvent(new MouseEvent("mousedown", { bubbles: true, cancelable: true, button: 0 }));
+		});
+		const selectionInfo = await selectFirstWidgetBlockNode(editor);
+		expect(selectionInfo).toEqual({ selectionType: "NodeSelection", selectedNodeType: "paragraph" });
+		await expect(editor.locator(".pm-nodeview-widget").first()).toHaveClass(/pm-nodeview-selected/);
+	});
+
+	test("links inside list-links widget should remain clickable", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, "WidgetListLinkClick", {
+			useReadmeTiddler: false,
+			initialText: '<<list-links "[tag[test]]">>',
+			configTiddlers: [
+				{ title: "TaggedLinkA", text: "A", tags: ["test"] },
+				{ title: "TaggedLinkB", text: "B", tags: ["test"] }
+			]
+		});
+		const firstLink = editor.locator(".pm-nodeview-widget .pm-nodeview-content a").first();
+		await expect(firstLink).toBeVisible({ timeout: 5000 });
+		await firstLink.click();
+		await expect(page.locator('.tc-tiddler-frame[data-tiddler-title="TaggedLinkA"]')).toBeVisible({ timeout: 5000 });
+	});
+
+	test("Enter on a selected read-only widget block should insert a paragraph after it", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, "WidgetListLinkEnter", {
+			useReadmeTiddler: false,
+			initialText: '<<list-links "[tag[test]]">>',
+			configTiddlers: [
+				{ title: "TaggedEnterA", text: "A", tags: ["test"] },
+				{ title: "TaggedEnterB", text: "B", tags: ["test"] }
+			]
+		});
+		const widgetBlock = editor.locator(".pm-nodeview-widget").first();
+		await expect(widgetBlock).toBeVisible({ timeout: 5000 });
+		expect(await setFirstWidgetBlockNodeSelection(editor)).toEqual({ selectionType: "NodeSelection", selectedNodeType: "paragraph" });
+		await page.keyboard.press("Enter");
+		await page.keyboard.type("After widget block");
+		await expect(editor.locator(":scope > .pm-nodeview-widget + p").first()).toContainText("After widget block");
+		await expect(widgetBlock).not.toContainText("After widget block");
+	});
+
+	test("Shift-Enter on a selected read-only widget block should insert a paragraph after it", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, "WidgetListLinkShiftEnter", {
+			useReadmeTiddler: false,
+			initialText: '<<list-links "[tag[test]]">>',
+			configTiddlers: [
+				{ title: "TaggedShiftA", text: "A", tags: ["test"] },
+				{ title: "TaggedShiftB", text: "B", tags: ["test"] }
+			]
+		});
+		const widgetBlock = editor.locator(".pm-nodeview-widget").first();
+		await expect(widgetBlock).toBeVisible({ timeout: 5000 });
+		expect(await setFirstWidgetBlockNodeSelection(editor)).toEqual({ selectionType: "NodeSelection", selectedNodeType: "paragraph" });
+		await page.keyboard.press("Shift+Enter");
+		await page.keyboard.type("After shift enter");
+		await expect(editor.locator(":scope > .pm-nodeview-widget + p").first()).toContainText("After shift enter");
+		await expect(widgetBlock).not.toContainText("After shift enter");
 	});
 
 });
