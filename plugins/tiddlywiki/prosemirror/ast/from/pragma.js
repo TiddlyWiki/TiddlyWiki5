@@ -38,14 +38,6 @@ function pragmaBlock(builders, node) {
 
 function opaqueBlock(builders, node) {
 	const rawText = node.attrs && node.attrs.rawText || "";
-	try {
-		const parseResult = $tw.wiki.parseText(null, rawText);
-		if(parseResult && parseResult.tree) {
-			return parseResult.tree;
-		}
-	} catch(e) {
-		// ignore
-	}
 	return { type: "text", text: rawText };
 }
 
