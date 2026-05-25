@@ -125,7 +125,7 @@ exports.serializeAttribute = function(node,options) {
 			return null;
 		}
 	} else {
-		 // Unsupported type
+		// Unsupported type
 		return null;
 	}
 	return attributeString;

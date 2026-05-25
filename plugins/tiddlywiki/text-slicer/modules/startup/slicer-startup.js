@@ -27,7 +27,7 @@ exports.startup = function() {
 	}
 	// Add tm-slice-tiddler event handler
 	$tw.rootWidget.addEventListener("tm-slice-tiddler",function(event) {
-		var slicer = new textSlicer.Slicer({
+		new textSlicer.Slicer({
 			sourceTiddlerTitle: event.param,
 			slicerRules: event.paramObject && event.paramObject.slicerRules,
 			outputMode: event.paramObject && event.paramObject.outputMode,

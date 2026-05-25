@@ -1,0 +1,17 @@
+created: 20150117174359000
+modified: 20260112112021010
+original-modified: 20241018094151786
+tags: Concepts Reference
+title: Commands
+ja-title: コマンド
+type: text/vnd.tiddlywiki
+
+<<.def コマンド>>とは、以下に列挙した単語で、頭に`--`を付けて記述され、Node.jsのコマンドラインオプションとして使用され、必要なアクションを示します。使用方法の詳細については、[[Node.jsでTiddlyWikiを使用する|Using TiddlyWiki on Node.js]]を参照してください。
+
+''コマンド''
+
+<<list-links "[tag[Commands]] -[tag[$:/deprecated]]" class:"multi-columns">>
+
+''非推奨のコマンド''
+
+<<list-links "[tag[Commands]] :and[tag[$:/deprecated]]" class:"multi-columns">>

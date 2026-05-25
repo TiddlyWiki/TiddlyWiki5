@@ -6,6 +6,7 @@ Appearance/Caption: Design
 Appearance/Hint: Möglichkeiten um das Aussehen Ihres ~TiddlyWikis anzupassen.
 Basics/AnimDuration/Prompt: Dauer der Animation
 Basics/AutoFocus/Prompt: Standard Fokus Feld für neue Tiddler
+Basics/AutoFocusEdit/Prompt: Standard Fokus Feld für bestehende Tiddler
 Basics/Caption: Basis
 Basics/DefaultTiddlers/BottomHint: Verwenden Sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen Sie {{Offene Tiddler beim Laden wiederherstellen.||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Standard-Tiddler
@@ -96,12 +97,12 @@ Plugins/PluginWillRequireReload: ("reload" ist nötig)
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Erweiterungen
 Plugins/Reinstall/Caption: erneut installieren
-Plugins/Themes/Caption: Themes
-Plugins/Themes/Hint: Theme Erweiterungen
 Plugins/Stability/Deprecated: ABGEKÜNDIGT
 Plugins/Stability/Experimental: EXPERIMENTELL
 Plugins/Stability/Legacy: VERALTET
 Plugins/Stability/Stable: STABIL
+Plugins/Themes/Caption: Themes
+Plugins/Themes/Hint: Theme Erweiterungen
 Plugins/Update/Caption: aktualisieren
 Plugins/Updates/Caption: Aktualisieren
 Plugins/Updates/Hint: Verfügbare Erweiterungen zu bereits installierten "Plugins"
@@ -252,3 +253,6 @@ ViewTemplateSubtitle/Caption: View Template Subtitle
 ViewTemplateSubtitle/Hint: Diese Filter-Kaskade wird vom "View Template" dazu verwendet, um den "Sub-Titel" für den Tidddler Kopf auszuwählen. 
 ViewTemplateTags/Caption: View Template Tags
 ViewTemplateTags/Hint: Diese Filter-Kaskade wird vom "View Template" dazu verwendet, um das Template für den Tag auszuwählen
+WikiInformation/Caption: Wiki Information
+WikiInformation/Hint: Diese Seite generiert eine Zusammenfassung wichtiger Informationen über dieses Wiki. Diese Seite kann dazu benutzt werden um Wiki Informationen mit anderen Usern auszutauschen. Zum Beispiel: Um Hilfe im TW Talk Forum zu bekommen. Es wereden ''keine'' privaten oder persönliche Daten erfasst. Keine Daten verlassen den Computer, ausser sie werden aktiv kopiert.
+WikiInformation/Drag/Caption: Ziehe diesen Link in ein anderes Wiki um die Daten zu kopieren

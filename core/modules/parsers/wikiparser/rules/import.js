@@ -29,7 +29,6 @@ exports.init = function(parser) {
 Parse the most recent match
 */
 exports.parse = function() {
-	var self = this;
 	// Move past the pragma invocation
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the filter terminated by a line break

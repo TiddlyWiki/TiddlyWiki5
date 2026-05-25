@@ -1,0 +1,16 @@
+caption: server
+created: 20131219163923630
+modified: 20260115113945040
+original-modified: 20180626150505679
+tags: Commands $:/deprecated
+title: ServerCommand
+ja-title: Serverコマンド
+type: text/vnd.tiddlywiki
+
+<<.deprecated-since "5.1.18" "ListenCommand">>.
+
+''この`--server`コマンドは廃止されました。新しい[[Listenコマンド|ListenCommand]]を使用してください。''
+
+TiddlyWikiのWebサーバー機能の詳細については、WebServerを参照してください。
+
+{{$:/language/Help/server}}

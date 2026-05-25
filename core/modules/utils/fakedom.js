@@ -22,13 +22,13 @@ var TW_Node = function (){
 	throw TypeError("Illegal constructor");
 };
 
-Object.defineProperty(TW_Node.prototype, 'ELEMENT_NODE', {
+Object.defineProperty(TW_Node.prototype, "ELEMENT_NODE", {
 	get: function() {
 		return 1;
 	}
 });
 
-Object.defineProperty(TW_Node.prototype, 'TEXT_NODE', {
+Object.defineProperty(TW_Node.prototype, "TEXT_NODE", {
 	get: function() {
 		return 3;
 	}
@@ -63,7 +63,6 @@ var TW_Style = function(el) {
 		},
 		// Method to set styles using a string (e.g. "color:red; background-color:blue;")
 		set: function(str) {
-			var self = this;
 			str = str || "";
 			$tw.utils.each(str.split(";"),function(declaration) {
 				var parts = declaration.split(":"),
@@ -83,14 +82,23 @@ var TW_Style = function(el) {
 	// Return a Proxy to handle direct access to individual style properties
 	return new Proxy(styleObject, {
 		get: function(target, property) {
+			// Real CSSStyleDeclaration returns undefined for non-string keys.
+			// Guards against crashes when consumers probe Symbol.toPrimitive etc.
+			if(typeof property !== "string") {
+				return undefined;
+			}
 			// If the property exists on styleObject, return it (get, set, setProperty methods)
-			if (property in target) {
+			if(property in target) {
 				return target[property];
 			}
 			// Otherwise, return the corresponding property from _style
 			return el._style[$tw.utils.convertStyleNameToPropertyName(property)] || "";
 		},
 		set: function(target, property, value) {
+			// Mirror the get trap: ignore non-string keys instead of crashing.
+			if(typeof property !== "string") {
+				return true;
+			}
 			// Set the property in _style
 			el._style[$tw.utils.convertStyleNameToPropertyName(property)] = value;
 			return true;

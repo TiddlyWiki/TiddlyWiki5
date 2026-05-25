@@ -24,7 +24,7 @@ exports.sort = function(operationSubFunction,options) {
 			results.each(function(title) {
 				var key = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
 					"currentTiddler": "" + title,
-					"..currentTiddler": widget.getVariable("currentTiddler")
+					"..currentTiddler": widget.getVariable("currentTiddler",{defaultValue:""})
 				}));
 				sortKeys.push(key[0] || "");
 			});
@@ -36,12 +36,12 @@ exports.sort = function(operationSubFunction,options) {
 			// Sort the indexes
 			compareFn = $tw.utils.makeCompareFunction(sortType,{defaultType: "string", invert:invert, isCaseSensitive:isCaseSensitive});
 			indexes = indexes.sort(function(a,b) {
-					return compareFn(sortKeys[a],sortKeys[b]);
+				return compareFn(sortKeys[a],sortKeys[b]);
 			});
 			// Add to results in correct order
 			$tw.utils.each(indexes,function(index) {
 				results.push(inputTitles[index]);
 			});
 		}
-	}
+	};
 };

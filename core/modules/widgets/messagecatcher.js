@@ -69,7 +69,7 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 				}
 			);
 		}
-	}
+	};
 	// Add the main event handler
 	addEventHandler(this.getAttribute("type"),this.getAttribute("actions"));
 	// Add any other event handlers

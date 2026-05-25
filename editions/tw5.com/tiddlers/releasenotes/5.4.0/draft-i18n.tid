@@ -3,7 +3,7 @@ description: Draft title internationalization
 release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
-change-category: internal
+change-category: translation
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8891
 github-contributors: Leilei332
 

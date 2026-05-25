@@ -1,0 +1,13 @@
+title: Media Query Tracker Mechanism
+tags: Mechanisms
+created: 20250212154426403
+modified: 20250212154426403
+
+
+<<.from-version "5.4.0">> The media query tracker mechanism allows you to define [[custom CSS media queries|https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries]] to be bound to a specified [[info|InfoMechanism]] tiddler. The info tiddler will be dynamically update to reflect the current state of the media query.
+
+Adding or modifying a tiddler tagged $:/tags/MediaQueryTracker takes effect immediately.
+
+The media queries are always applied against the main window. This is relevant for viewport related media queries such as `min-width` which will always respect the main window and ignore the sizes of any external windows.
+
+The core includes a media query tracker that is used for tracking the operating system dark/light setting. See $:/core/wiki/config/MediaQueryTrackers/DarkLightPreferred for details.

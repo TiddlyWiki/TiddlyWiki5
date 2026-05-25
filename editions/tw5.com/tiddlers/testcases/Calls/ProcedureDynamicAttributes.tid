@@ -1,0 +1,40 @@
+created: 20260301005951330
+description: Procedure calls with dynamic attributes
+modified: 20260301013907635
+tags: $:/tags/wiki-test-spec
+title: TestCases/Calls/ProcedureDynamicAttributes
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+New-style equals sign named parameters support dynamic values
++
+title: Output
+
+\function f(a) foo [<a>] :and[join[ ]]
+\procedure p(a1) <$text text=<<a1>>/>
+
+<$let v="foo 1" v2="foo 3">
+<<p a1=<<v>>>> -
+<<p a1=<<f 2>>>> -
+<<p a1=`$(v2)$`>> -
+<<p a1={{my tiddler}}>> -
+<<p a1={{my tiddler!!myfield}}>> -
+<<p a1={{{ foo 6 :and[join[ ]] }}}>>
+</$let>
++
+title: my tiddler
+myfield: foo 5
+
+foo 4
++
+title: ExpectedResult
+
+<p>
+foo 1 -
+foo 2 -
+foo 3 -
+foo 4 -
+foo 5 -
+foo 6
+</p>

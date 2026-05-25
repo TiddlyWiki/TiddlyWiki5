@@ -32,7 +32,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\\(function|procedure|widget)\s+([^(\s]+)\((\s*([^)]*))?\)(\s*\r?\n)?/mg;
+	this.matchRegExp = /\\(function|procedure|widget)\s+([^(\s]+)\((\s*([^)]*(?:\)\)[^)]*)*))?\)(\s*\r?\n)?/mg;
 };
 
 /*

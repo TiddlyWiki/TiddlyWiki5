@@ -15,7 +15,7 @@ Export our filter function
 exports.removesuffix = function(source,operator,options) {
 	var results = [],
 		suffixes = (operator.suffixes || [])[0] || [];
-	if (!operator.operand) {
+	if(!operator.operand) {
 		source(function(tiddler,title) {
 			results.push(title);
 		});

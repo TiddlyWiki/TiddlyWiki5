@@ -15,7 +15,7 @@ exports.serialize = function(tree,serialize) {
 	var name = tree.attributes.name.value;
 	// Parameters with default values
 	var params = tree.params.map(function(param) {
-			return param.name + (param.default ? ':"' + param.default + '"' : "");
+		return param.name + (param.default ? ':"' + param.default + '"' : "");
 	}).join(", ");
 	// Definition text
 	var definition = tree.attributes.value.value;

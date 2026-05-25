@@ -9,8 +9,6 @@ Command to save several tiddlers to a folder of files
 
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
-
 exports.info = {
 	name: "savetiddlers",
 	synchronous: true

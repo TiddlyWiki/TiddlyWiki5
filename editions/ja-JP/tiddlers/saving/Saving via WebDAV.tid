@@ -4,8 +4,8 @@ created: 20160216191710789
 delivery: Protocol
 description: SharePointなどの製品で利用できる標準Webプロトコル
 method: save
-modified: 20251214110658333
-original-modified: 20220615155048712
+modified: 20260204105130569
+original-modified: 20260102081028704
 tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
 title: Saving via WebDAV
 ja-title: WebDAV経由の保存
@@ -21,6 +21,9 @@ type: text/vnd.tiddlywiki
 
 *   [[rclone|https://rclone.org/commands/rclone_serve_webdav/]]
 **  実行方法は次のようにシンプルです: <br/>`rclone serve webdav some_directory_containing_tiddlywiki_files`
+* [[copyparty|https://github.com/9001/copyparty]]
+** Copypartyには~WebDAVサーバが付属しています。`copyparty -v .::rwd:c,daw`を実行するだけで、カレントフォルダをサーバーとして公開し、[[http://[::1]:3923/]]にアクセスしてTiddlyWikiを利用できます
+** Copypartyが既存のファイルを上書きできるようにするには、読み取り、書き込み、削除の権限を付与し、`daw` volflagを追加する必要があることに注意してください。
 *   [[micromata dave - シンプルなWebDAVサーバー|https://github.com/micromata/dave]]
 * [[dav-server|https://github.com/edrex/dav-server]]はHTML ~TiddlyWikiのフォルダーを素早く提供する方法です。
 *   [[hacdias webdav server|https://github.com/hacdias/webdav/]]
@@ -45,6 +48,10 @@ type: text/vnd.tiddlywiki
 !! Android
 
 * RCXは、//rclone//をベースにしたAndroid用のオープンソースファイルマネージャーです。//F-Droid//と//Google Play//の両方で利用できます。統合されたWebDAVサーバーのおかげで、ポケットの中に保存しているwikiを編集できます。ローカルネットワーク上の他のデバイスと共有することもできます。
+
+!! iOS
+
+* ~WebDAVサーバーを提供できるネイティブアプリはありませんが、 [[iSH Shell|https://apps.apple.com/cn/app/ish-shell/id1436902243]]上でrcloneやcopypartyを、または、[[a-Shell|https://apps.apple.com/cn/app/a-shell/id1473805438]]上でcopypartyを使用できます。
 
 !! サーバー
 

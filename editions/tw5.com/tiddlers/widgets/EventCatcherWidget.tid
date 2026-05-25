@@ -1,5 +1,5 @@
 created: 20201123113532200
-modified: 20250817151316712
+modified: 20260125202715594
 tags: Widgets TriggeringWidgets
 title: EventCatcherWidget
 type: text/vnd.tiddlywiki
@@ -12,14 +12,16 @@ type: text/vnd.tiddlywiki
 
 The event catcher widget traps DOM-initiated Javascript events dispatched within its child content, and allows invoking a series of ActionWidgets in response to those events.
 
+Use of the event catcher widget is beneficial when using large numbers of other trigger widgets such as the ButtonWidget is causing performance problems. The workflow it enables is akin to what is referred to as "event delegation" in JavaScript parlance.
+
 In order for the events to be trapped:
 
-* The event must be of one of the events specified in the event catcher widget's `events` attribute
+* The event must be of one of the events specified in the event catcher widget's attributes
 * The event must target a DOM node with an ancestor that matches the widget's `selector` attribute
-* <<.from-version "5.2.2">> Optionally, the DOM node targeted by the event must also match the widgets `matchSelector` attribute
+* <<.from-version "5.2.2">> Optionally, the DOM node targeted by the event must also match the widget's `matchSelector` attribute
 * The event must support event bubbling
-
-Use of the event catcher widget is beneficial when using large numbers of other trigger widgets such as the ButtonWidget is causing performance problems. The workflow it enables is akin to what is referred to as "event delegation" in JavaScript parlance.
+* <<.from-version "5.4.0">> The widget must be enabled (`enabled="yes"`)
+* <<.from-version "5.4.0">> Pointer events may continue to be trapped outside the widget DOM boundaries if pointer capture is enabled
 
 ! Content and Attributes
 
@@ -28,14 +30,54 @@ The content of the `<$eventcatcher>` widget is displayed normally.
 |!Attribute |!Description |
 |selector |A CSS selector. Only events originating inside a DOM node with this selector will be trapped |
 |matchSelector |<<.from-version "5.2.2">> An optional CSS selector. Only events targeting DOM nodes matching this selector will be trapped |
-|//{any attributes starting with $}// |<<.from-version "5.2.0">> Each attribute name (excluding the $) specifies the name of an event, and the value specifies the action string to be invoked. For example: `$click=<<clickActions>>`  |
+|//{any attributes starting with $}// |<<.from-version "5.2.0">> Each attribute name (excluding the $) specifies the name of an event, and the value specifies the action string to be invoked. For example: `$click=<<clickActions>>` |
 |tag |Optional. The HTML element the widget creates to capture the events, defaults to:<br>» `span` when parsed in inline-mode<br>» `div` when parsed in block-mode |
 |class |Optional. A CSS class name (or names) to be assigned to the widget HTML element |
-|stopPropagation |<<.from-version "5.2.0">> Optional. Set to "always" to always stop event propagation even if there are no corresponding actions to invoke, "never" to never stop event propagation, or the default value "onaction" with which event propagation is only stopped if there are corresponding actions that are invoked. |
-|//events// |//(removed – see below)// Space separated list of JavaScript events to be trapped, for example "click" or "click dblclick" |
-|//actions-*// |//(removed – see below)// Action strings to be invoked when a matching event is trapped. Each event is mapped to an action attribute name of the form <code>actions-<em>event</em></code> where <code><em>event</em></code> represents the type of the event. For example: `actions-click` or `actions-dblclick` |
+|stopPropagation |<<.from-version "5.2.0">> Optional. Set to "always" to always stop event propagation even if there are no corresponding actions to invoke, "never" to never stop event propagation, or the default value "onaction" with which event propagation is only stopped if there are corresponding actions that are invoked |
+|enabled |<<.from-version "5.4.0">> Optional. Enables or disables the event catcher widget. Set to "no" to remove all event listeners while keeping the widget’s DOM structure intact. Defaults to "yes" |
+|pointerCapture |<<.from-version "5.4.0">> Optional. Enables native pointer capture for pointer events. Possible values are "no", "yes", or "dynamic". Defaults to "no" |
+|events |//(removed – see below)// Space separated list of JavaScript events to be trapped, for example "click" or "click dblclick" |
+|actions-* |//(removed – see below)// Action strings to be invoked when a matching event is trapped. Each event is mapped to an action attribute name of the form <code>actions-<em>event</em></code> |
 
-<<.from-version "5.4.0">> The attributes `events` and `actions-*` have been removed as they are no longer needed. Instead you can use attributes starting with $ where the attribute name (excluding the $) specifies the name of the event and the value specifies the action string to be invoked. If any attributes with the prefix $ are present then the `types` attribute is ignored.
+<<.from-version "5.4.0">> The attributes `events` and `actions-*` have been removed as they are no longer needed. Instead you can use attributes starting with `$` where the attribute name (excluding the `$`) specifies the name of the event and the value specifies the action string to be invoked.
+
+! Pointer Capture
+
+<<.from-version "5.4.0">>  
+The `pointerCapture` attribute enables native [[Pointer Events|https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events]] support using `setPointerCapture()`. This allows pointer interactions to continue to be tracked even if the pointer moves outside the widget’s DOM nodes or the browser viewport.
+
+This is particularly useful for drag-and-drop interfaces, sliders, drawing tools, and other pointer-driven interactions.
+
+!! Values
+
+* `no` (default)  
+Pointer capture is not used. Pointer events are only received while the pointer remains within the widget’s DOM nodes.
+
+* `yes`  
+Pointer capture is enabled whenever a `pointerdown` event occurs. All pointer event handlers specified on the widget remain active for the lifetime of the widget.
+
+* `dynamic`  
+Pointer capture is enabled only for the duration of an active pointer interaction.  
+Event handlers for `pointerup`, `pointercancel`, and optionally `pointermove` are attached only while pointer capture is active and are removed when the interaction ends.  
+This mode minimizes active event listeners and is recommended for performance-sensitive use cases.
+
+!! Notes
+
+* Pointer capture only applies to pointer events such as `pointerdown`, `pointermove`, `pointerup`, and `pointercancel`
+* Pointer capture does not affect mouse or touch events
+* Pointer capture is automatically released on `pointerup` or `pointercancel`
+
+! Enabling and Disabling the Widget
+
+<<.from-version "5.4.0">>  
+The `enabled` attribute allows the event catcher widget to be temporarily disabled without removing it from the DOM.
+
+When `enabled="no"`:
+
+* All event listeners are removed
+* No actions are invoked
+* The widget’s DOM node and child content remain unchanged
+
 
 ! Variables
 
@@ -43,16 +85,16 @@ The following variables are made available to the actions:
 
 |!Variables |!Description |
 |`dom-*` |All DOM attributes of the node matching the given selector are made available as variables, with the prefix `dom-` |
-|`modifier` |The [[modifier Variable]] contains the Modifier Key held during the event (can be "normal", "ctrl", "shift", "alt" or combinations thereof) |
-|`event-mousebutton` |The mouse button (if any) used to trigger the event (can be "left", "right" or "middle"). Note that not all event types support the mousebutton property.  <<.infoBox """This property only guarantees to indicate which buttons are pressed during events caused by pressing or releasing one or multiple buttons. As such, it is not reliable for events such as mouseenter, mouseleave, mouseover, mouseout, or mousemove. More details at: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button""">> |
-|`event-type` |The type property of the JavaScript event.  |
-|`event-detail-*` |Any properties in the detail attribute of the event are made available with the prefix `event-detail-` |
-|`tv-popup-coords` |A relative co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the DOM node matching the selector where the event originated (see [[Coordinate Systems]] for more information) |
-|`tv-popup-abs-coords` |<<.from-version "5.2.4">> An absolute co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the DOM node matching the selector where the event originated (see [[Coordinate Systems]] for more information) |
+|`modifier` |The [[modifier Variable]] contains the Modifier Key held during the event |
+|`event-mousebutton` |The mouse button (if any) used to trigger the event (can be "left", "right" or "middle") <<.infoBox """This property is only reliable for events caused by pressing or releasing mouse buttons. It is not reliable for mouseenter, mouseleave, mouseover, mouseout, or mousemove. More details at: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button""">> |
+|`event-type` |The type property of the JavaScript event. <<.deprecated-since 5.4.0>> Removed in favour of `eventJSON`|
+|`event-detail-*` |Any properties in the detail attribute of the event are made available with the prefix `event-detail-`. <<.deprecated-since 5.4.0>> Removed in favour of `eventJSON` |
+|`tv-popup-coords` |A relative coordinate string that can be used with the ActionPopupWidget |
+|`tv-popup-abs-coords` |<<.from-version "5.2.4">> An absolute coordinate string that can be used with the ActionPopupWidget |
 |`tv-widgetnode-width` |<<.from-version "5.2.3">> `offsetWidth` of the DOM node created by the eventcatcher widget |
 |`tv-widgetnode-height` |<<.from-version "5.2.3">> `offsetHeight` of the DOM node created by the eventcatcher widget |
 |`tv-selectednode-posx` |`x` offset position of the selected DOM node |
-|`tv-selectednode-posy` |`y` offset position of the selected DOM node  |
+|`tv-selectednode-posy` |`y` offset position of the selected DOM node |
 |`tv-selectednode-width` |`offsetWidth` of the selected DOM node |
 |`tv-selectednode-height` |`offsetHeight` of the selected DOM node |
 |`event-fromselected-posx` |`x` position of the event relative to the selected DOM node |
@@ -61,37 +103,59 @@ The following variables are made available to the actions:
 |`event-fromcatcher-posy` |`y` position of the event relative to the event catcher DOM node |
 |`event-fromviewport-posx` |<<.from-version "5.2.0">> `x` position of the event relative to the viewport |
 |`event-fromviewport-posy` |<<.from-version "5.2.0">> `y` position of the event relative to the viewport |
+|`eventJSON`|<<.from-version "5.4.0">>A stringified JSON object containing string-safe copies of the event’s own properties. Can be accessed using the [[jsonget Operator]]. |
 
 ! Example
 
-This example uses the ActionLogWidget and will log the `data-item-id` attribute of the clicked DOM node to the browser's JavaScript [[console|Web Developer Tools]]
+This example illustrates how to work with click and right click events:
 
 ```
-\define clickactions()
-<$action-log item=<<dom-data-item-id>> event=<<event-type>>/>
-\end
-
-\define contextmenu-actions()
-<$action-log item=<<dom-data-item-id>> event=<<event-type>>/>
-\end
-
-<$eventcatcher selector=".item" $click=<<clickactions>> $contextmenu=<<contextmenu-actions>> tag="div">
-
-<div class="item" data-item-id="item1">
-Click events here will be trapped
-</div>
-
-<div class="item" data-item-id="item2">
-And here too
-</div>
-
-<div data-item-id="item3">
-Not here
-</div>
-
-<div class="item" data-item-id="item4">
-And here
-</div>
-
-</$eventcatcher>
+\procedure card-click-actions()  
+<$action-setfield $tiddler="$:/temp/selected-card" text=<<dom-data-card-id>>/>  
+\end  
+  
+\procedure card-context-actions()  
+<$action-setfield $tiddler="$:/temp/context-menu"   
+  text=`Showing context menu for card: {{!!card}}`
+  card=<<dom-data-card-id>>
+  x=<<event-fromviewport-posx>>  
+  y=<<event-fromviewport-posy>>/>  
+\end  
+  
+<$eventcatcher   
+  selector=".gallery-card"   
+  $click=<<card-click-actions>>   
+  $contextmenu=<<card-context-actions>>  
+  class="card-gallery">  
+  
+<div class="gallery-card" data-card-id="card1" style="border: 1px solid #ccc; padding: 10px; margin: 5px; cursor: pointer;">  
+  <h3>1: Mountain Landscape</h3>  
+  <p>Click to select, right-click for options</p>  
+</div>  
+  
+<div class="gallery-card" data-card-id="card2" style="border: 1px solid #ccc; padding: 10px; margin: 5px; cursor: pointer;">  
+  <h3>2: Ocean View</h3>  
+  <p>Click to select, right-click for options</p>  
+</div>  
+  
+<div class="gallery-card" data-card-id="card3" style="border: 1px solid #ccc; padding: 10px; margin: 5px; cursor: pointer;">  
+  <h3>3: City Skyline</h3>  
+  <p>Click to select, right-click for options</p>  
+</div>  
+  
+</$eventcatcher>  
+  
+<!-- Display selected card info -->  
+<$reveal type="nomatch" state="$:/temp/selected-card" text="">  
+<div style="background: #f0f0f0; padding: 10px; margin-top: 10px;">  
+  <strong>Selected:</strong> {{$:/temp/selected-card}}  
+</div>  
+</$reveal>  
+  
+<!-- Display context menu info -->  
+<$reveal type="nomatch" state="$:/temp/context-menu" text="">  
+<div style="background: #ffe0e0; padding: 10px; margin-top: 10px;">  
+  {{$:/temp/context-menu}}  
+</div>  
+</$reveal>
 ```

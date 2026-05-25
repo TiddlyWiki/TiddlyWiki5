@@ -14,9 +14,9 @@ describe("Widget module", function() {
 
 	function createWidgetNode(parseTreeNode,wiki) {
 		return new widget.widget(parseTreeNode,{
-				wiki: wiki,
-				document: $tw.fakeDocument
-			});
+			wiki: wiki,
+			document: $tw.fakeDocument
+		});
 	}
 
 	function parseText(text,wiki,options) {
@@ -28,19 +28,8 @@ describe("Widget module", function() {
 		$tw.fakeDocument.setSequenceNumber(0);
 		var wrapper = $tw.fakeDocument.createElement("div");
 		widgetNode.render(wrapper,null);
-// console.log(require("util").inspect(wrapper,{depth: 8}));
+		// console.log(require("util").inspect(wrapper,{depth: 8}));
 		return wrapper;
-	}
-
-	function refreshWidgetNode(widgetNode,wrapper,changes) {
-		var changedTiddlers = {};
-		if(changes) {
-			$tw.utils.each(changes,function(title) {
-				changedTiddlers[title] = true;
-			});
-		}
-		widgetNode.refresh(changedTiddlers,wrapper,null);
-// console.log(require("util").inspect(wrapper,{depth: 8}));
 	}
 
 	it("should make sure that getVariableInfo returns all expected parameters", function() {

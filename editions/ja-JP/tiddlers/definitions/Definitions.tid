@@ -1,0 +1,12 @@
+color: #7bb95d
+created: 20130825145100000
+modified: 20260406064409034
+original-modified: 20250104111522881
+title: Definitions
+ja-title: 定義
+tags: Reference
+type: text/vnd.tiddlywiki
+
+これらは、このドキュメントで使用される技術的なワードやフレーズの定義です(TiddlyWiki自体を構成する[[コンセプト|Concepts]]とは異なります)
+
+<<list-links "[tag[Definitions]]" class:"multi-columns">>

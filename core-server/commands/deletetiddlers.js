@@ -24,8 +24,7 @@ Command.prototype.execute = function() {
 	if(this.params.length < 1) {
 		return "Missing filter";
 	}
-	var self = this,
-		wiki = this.commander.wiki,
+	var wiki = this.commander.wiki,
 		filter = this.params[0],
 		tiddlers = wiki.filterTiddlers(filter);
 	$tw.utils.each(tiddlers,function(title) {

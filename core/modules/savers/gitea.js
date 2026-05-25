@@ -80,7 +80,7 @@ GiteaSaver.prototype.save = function(text,method,callback) {
 				callback: function(err,getResponseDataJson,xhr) {
 					if(xhr.status === 404) {
 						callback("Please ensure the branch in the Gitea repo exists");
-					}else{
+					} else {
 						data["branch"] = branch;
 						self.upload(uri + filename, use_put?"PUT":"POST", headers, data, callback);
 					}
@@ -101,7 +101,6 @@ GiteaSaver.prototype.upload = function(uri,method,headers,data,callback) {
 			if(err) {
 				return callback(err);
 			}
-			var putResponseData = $tw.utils.parseJSONSafe(putResponseDataJson);
 			callback(null);
 		}
 	});

@@ -12,8 +12,7 @@ Wraps up the remarkable parser for use as a Parser in TiddlyWiki
 var r = require("$:/plugins/tiddlywiki/markdown-legacy/remarkable.js");
 
 var Remarkable = r.Remarkable,
-	linkify = r.linkify,
-	utils = r.utils;
+	linkify = r.linkify;
 
 ///// Set up configuration options /////
 function parseAsBoolean(tiddlerName) {
@@ -51,7 +50,7 @@ if(parseAsBoolean("$:/config/markdown/linkify")) {
 }
 
 function findTagWithType(nodes, startPoint, type, level) {
-	for (var i = startPoint; i < nodes.length; i++) {
+	for(var i = startPoint; i < nodes.length; i++) {
 		if(nodes[i].type === type && nodes[i].level === level) {
 			return i;
 		}
@@ -75,7 +74,7 @@ function findTagWithType(nodes, startPoint, type, level) {
  */
 function convertNodes(remarkableTree, isStartOfInline) {
 	let out = [];
-	var accumulatedText = '';
+	var accumulatedText = "";
 	function withChildren(currentIndex, currentLevel, closingType, nodes, callback) {
 		var j = findTagWithType(nodes, currentIndex + 1, closingType, currentLevel);
 		if(j === false) {
@@ -97,175 +96,175 @@ function convertNodes(remarkableTree, isStartOfInline) {
 		});
 	}
 
-	for (var i = 0; i < remarkableTree.length; i++) {
+	for(var i = 0; i < remarkableTree.length; i++) {
 		var currentNode = remarkableTree[i];
-		switch (currentNode.type) {
-		case "paragraph_open":
+		switch(currentNode.type) {
+			case "paragraph_open":
 			// If the paragraph is a "tight" layout paragraph, don't wrap children in a <p> tag.
-			if(currentNode.tight) {
-				i = withChildren(i, currentNode.level, "paragraph_close", remarkableTree, function(children) {
-					Array.prototype.push.apply(out, children);
-				});
-			} else {
-				i = wrappedElement("p", i, currentNode.level, "paragraph_close", remarkableTree);
-			}
-			break;
-
-		case "heading_open":
-			i = wrappedElement("h" + currentNode.hLevel, i, currentNode.level, "heading_close", remarkableTree);
-			break;
-
-		case "bullet_list_open":
-			i = wrappedElement("ul", i, currentNode.level, "bullet_list_close", remarkableTree);
-			break;
-
-		case "ordered_list_open":
-			i = wrappedElement('ol', i, currentNode.level,'ordered_list_close', remarkableTree);
-			break;
-
-		case "list_item_open":
-			i = wrappedElement("li", i, currentNode.level, "list_item_close", remarkableTree);
-			break;
-
-		case "link_open":
-			i = withChildren(i, currentNode.level, "link_close", remarkableTree, function(children) {
-				if(currentNode.href[0] !== "#") {
-					// External link
-					var attributes = {
-						class: { type: "string", value: "tc-tiddlylink-external" },
-						href: { type: "string", value: currentNode.href },
-						rel: { type: "string", value: "noopener noreferrer" }
-					};
-					if(pluginOpts.linkNewWindow) {
-						attributes.target = { type: "string", value: "_blank" };
-					}
-					out.push({
-						type: "element",
-						tag: "a",
-						attributes: attributes,
-						children: children
+				if(currentNode.tight) {
+					i = withChildren(i, currentNode.level, "paragraph_close", remarkableTree, function(children) {
+						Array.prototype.push.apply(out, children);
 					});
 				} else {
+					i = wrappedElement("p", i, currentNode.level, "paragraph_close", remarkableTree);
+				}
+				break;
+
+			case "heading_open":
+				i = wrappedElement("h" + currentNode.hLevel, i, currentNode.level, "heading_close", remarkableTree);
+				break;
+
+			case "bullet_list_open":
+				i = wrappedElement("ul", i, currentNode.level, "bullet_list_close", remarkableTree);
+				break;
+
+			case "ordered_list_open":
+				i = wrappedElement("ol", i, currentNode.level,"ordered_list_close", remarkableTree);
+				break;
+
+			case "list_item_open":
+				i = wrappedElement("li", i, currentNode.level, "list_item_close", remarkableTree);
+				break;
+
+			case "link_open":
+				i = withChildren(i, currentNode.level, "link_close", remarkableTree, function(children) {
+					if(currentNode.href[0] !== "#") {
+					// External link
+						var attributes = {
+							class: { type: "string", value: "tc-tiddlylink-external" },
+							href: { type: "string", value: currentNode.href },
+							rel: { type: "string", value: "noopener noreferrer" }
+						};
+						if(pluginOpts.linkNewWindow) {
+							attributes.target = { type: "string", value: "_blank" };
+						}
+						out.push({
+							type: "element",
+							tag: "a",
+							attributes: attributes,
+							children: children
+						});
+					} else {
 					// Internal link
+						out.push({
+							type: "link",
+							attributes: {
+								to: { type: "string", value: $tw.utils.decodeURISafe(currentNode.href.substr(1)) }
+							},
+							children: children
+						});
+					}
+				});
+				break;
+
+			case "code":
+				out.push({
+					type: "element",
+					tag: currentNode.block ? "pre" : "code",
+					children: [{ type: "text", text: currentNode.content }]
+				});
+				break;
+
+			case "fence":
+				out.push({
+					type: "codeblock",
+					attributes: {
+						language: { type: "string", value: currentNode.params },
+						code: { type: "string", value: currentNode.content }
+					}
+				});
+				break;
+
+			case "image":
+				out.push({
+					type: "image",
+					attributes: {
+						tooltip: { type: "string", value: currentNode.alt },
+						source: { type: "string", value: $tw.utils.decodeURIComponentSafe(currentNode.src) }
+					}
+				});
+				break;
+
+			case "softbreak":
+				if(remarkableOpts.breaks) {
 					out.push({
-						type: "link",
-						attributes: {
-							to: { type: "string", value: $tw.utils.decodeURISafe(currentNode.href.substr(1)) }
-						},
-						children: children
+						type: "element",
+						tag: "br",
 					});
+				} else {
+					accumulatedText = accumulatedText + "\n";
 				}
-			});
-			break;
+				break;
 
-		case "code":
-			out.push({
-				type: "element",
-				tag: currentNode.block ? "pre" : "code",
-				children: [{ type: "text", text: currentNode.content }]
-			});
-			break;
-
-		case "fence":
-			out.push({
-				type: "codeblock",
-				attributes: {
-					language: { type: "string", value: currentNode.params },
-					code: { type: "string", value: currentNode.content }
-				}
-			});
-			break;
-
-		case "image":
-			out.push({
-				type: "image",
-				attributes: {
-					tooltip: { type: "string", value: currentNode.alt },
-					source: { type: "string", value: $tw.utils.decodeURIComponentSafe(currentNode.src) }
-				}
-			});
-			break;
-
-		case "softbreak":
-			if(remarkableOpts.breaks) {
+			case "hardbreak":
 				out.push({
 					type: "element",
 					tag: "br",
 				});
-			} else {
-				accumulatedText = accumulatedText + '\n';
-			}
-			break;
+				break;
 
-		case "hardbreak":
-			out.push({
-				type: "element",
-				tag: "br",
-			});
-			break;
+			case "th_open":
+			case "td_open":
+				var elementTag = currentNode.type.slice(0, 2);
+				i = withChildren(i, currentNode.level, elementTag + "_close", remarkableTree, function(children) {
+					var attributes = {};
+					if(currentNode.align) {
+						attributes.style = { type: "string", value: "text-align:" + currentNode.align };
+					}
+					out.push({
+						type: "element",
+						tag: elementTag,
+						attributes: attributes,
+						children: children
+					});
+				});
+				break;
 
-		case "th_open":
-		case "td_open":
-			var elementTag = currentNode.type.slice(0, 2);
-			i = withChildren(i, currentNode.level, elementTag + "_close", remarkableTree, function(children) {
-				var attributes = {};
-				if(currentNode.align) {
-					attributes.style = { type: "string", value: "text-align:" + currentNode.align };
-				}
+			case "hr":
 				out.push({
 					type: "element",
-					tag: elementTag,
-					attributes: attributes,
-					children: children
+					tag: "hr",
 				});
-			});
-			break;
+				break;
 
-		case "hr":
-			out.push({
-				type: 'element',
-				tag: 'hr',
-			});
-			break;
+			case "inline":
+				out = out.concat(convertNodes(currentNode.children, true));
+				break;
 
-		case "inline":
-			out = out.concat(convertNodes(currentNode.children, true));
-			break;
-
-		case "text":
+			case "text":
 			// We need to merge this text block with the upcoming text block and parse it all together.
-			accumulatedText = accumulatedText + currentNode.content;
-			break;
+				accumulatedText = accumulatedText + currentNode.content;
+				break;
 
-		case "katex":
+			case "katex":
 			// If rendering WikiText, convert the katex node back to text for parsing by the WikiText LaTeX parser.
-			if(pluginOpts.renderWikiText) {
+				if(pluginOpts.renderWikiText) {
 				// If this is a block, add a newline to trigger the KaTeX plugins block detection.
-				var displayModeSuffix = currentNode.block ? "\n" : "";
-				accumulatedText = accumulatedText + "$$" + currentNode.content + displayModeSuffix + "$$";
-			} else {
-				out.push({
-					type: "latex",
-					attributes: {
-						text: { type: "text", value: currentNode.content },
-						displayMode: { type: "text", value: currentNode.block ? "true" : "false" }
-					}
-				});
-			}
-			break;
+					var displayModeSuffix = currentNode.block ? "\n" : "";
+					accumulatedText = accumulatedText + "$$" + currentNode.content + displayModeSuffix + "$$";
+				} else {
+					out.push({
+						type: "latex",
+						attributes: {
+							text: { type: "text", value: currentNode.content },
+							displayMode: { type: "text", value: currentNode.block ? "true" : "false" }
+						}
+					});
+				}
+				break;
 
-		default:
-			if(currentNode.type.substr(currentNode.type.length - 5) === "_open") {
-				var tagName = currentNode.type.substr(0, currentNode.type.length - 5);
-				i = wrappedElement(tagName, i, currentNode.level, tagName + "_close", remarkableTree);
-			} else {
-				console.error("Unknown node type: " + currentNode.type, currentNode);
-				out.push({
-					type: "text",
-					text: currentNode.content
-				});
-			}
-			break;
+			default:
+				if(currentNode.type.substr(currentNode.type.length - 5) === "_open") {
+					var tagName = currentNode.type.substr(0, currentNode.type.length - 5);
+					i = wrappedElement(tagName, i, currentNode.level, tagName + "_close", remarkableTree);
+				} else {
+					console.error("Unknown node type: " + currentNode.type, currentNode);
+					out.push({
+						type: "text",
+						text: currentNode.content
+					});
+				}
+				break;
 		}
 		// We test to see if we process the block now, or if there's
 		// more to accumulate first.
@@ -317,7 +316,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				}
 				out = out.concat(rs);
 			}
-			accumulatedText = '';
+			accumulatedText = "";
 		}
 	}
 	return out;

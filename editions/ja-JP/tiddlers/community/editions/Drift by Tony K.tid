@@ -1,0 +1,20 @@
+created: 20210101161529206
+modified: 20260209105625613
+original-modified: 20230110220010665
+tags: [[Community Editions]]
+title: "Drift - Collect, Organise, Grow." by Tony K
+ja-title: Tony Kによる"Drift - 集めて, 整理して, 育てよう."
+type: text/vnd.tiddlywiki
+url: https://github.com/bmann/drift-tiddlywiki-template/tree/master/drift
+
+ノートブックシステムとして使用するのに最適なTiddlyWikiの適応版です。
+
+{{!!url}}
+
+<<<
+DriftはTiddlyWikiを改造したもので、アイデアの収集、整理、成長を支援すると同時に、アイデアがどのように相互に連携し、次から次へとスムーズに移行していくかを把握できるようにします。
+
+Driftの2つのメインコンポーネントTWCrosslinksとDailyNotesにより、アイデアを逃すことはありません
+
+DriftはTiddlyBlink / Strollからインスパイアされ、自分のニーズに合うように改良しました。
+<<<

@@ -1,9 +1,9 @@
 title: $:/changenotes/5.4.0/#9177
-description: Add Display Field to list-tagged-draggable and list-links-draggable
+description: Add Display Field to list-tagged-draggable and list-links-draggable macros
 release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
-change-category: usability
+change-category: hackability
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9177
 github-contributors: kookma
 

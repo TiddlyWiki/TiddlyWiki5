@@ -1,0 +1,38 @@
+title: Submitting a Community Card
+ja-title: コミュニティカードの提出
+tags: [[Community Cards]]
+modified: 20260207113546745
+original-modified: 20250909171928024
+created: 20250909171928024
+
+TiddlyWikiコミュニティに関係する方なら誰でもコミュニティカードを投稿できます。現在、投稿にはGitHubのプルリクエストが必要ですが、将来的にはよりユーザーフレンドリーな投稿プロセスを提供する予定です。
+
+コミュニティカードを追加または更新するためのプルリクエストは、[[TiddlyWikiリポジトリ|https://github.com/TiddlyWiki/TiddlyWiki5]]の`tiddlywiki-com`ブランチに対して`community/people`ディレクトリ内で行う必要があります。
+
+カードは、次のフィールドを持つTiddlyWiki Tiddlerである必要があります:
+
+|!フィールド |!必須|!説明 |
+|`title`|はい |カードに表示される`@`で始まるユーザー名 (例: `@Jermolene`)。カードのタイトルであり、一意である必要があります |
+|`tags`|はい |カードのタグで、`Community/Person`を含みます |
+|`fullname`|はい |カードに表示される人またはグループのフルネーム |
+|`avatar`|はい |カードに表示される人のアバター画像 (32x32のbase64表現) |
+|`first-sighting`|いいえ |カードに表示される人のコミュニティ初登場日。ISO 8601形式(YYYY-MM-DD) |
+|`talk.tiddlywiki.org`|はい |TiddlyWiki Talkフォーラムでの人またはグループのユーザー名 |
+|`github`|いいえ |GitHubでの人またはグループのユーザー名 |
+|`linkedin`|いいえ |カードに表示される人またはグループのLinkedInプロフィールのURL |
+|`flickr`|いいえ |カードに表示される人またはグループのFlickrプロフィールのURL |
+|`homepage`|いいえ |カードに表示される人またはグループのホームページのURL |
+|`email`|いいえ |カードに表示される人またはグループのメールアドレス |
+|`text`|はい |カードのテキスト。カードに表される人物またはグループの簡単な説明と、その他の関連情報を含める必要があります。 |
+
+! コミュニティカードのルール
+
+コミュニティカードでは以下のルールを守ってください。これらのルールは自動スクリプトで強制適用する予定ですが、当面は手動でチェックします。
+
+* `title`は一意で、`@`で始まる
+* `tags`は`Community/Person`を含む
+* `fullname`は必須
+* `avatar`はbase64表現の32x32の画像で、1KBまで。画像のサイズ変更と圧縮は[[Squoosh|https://squoosh.app/]]を使うことを推奨
+* `first-sighting`はISO 8601形式(YYYY-MM-DD)
+* `talk.tiddlywiki.org`は必須
+* `text`のトータルサイズは2KBまで

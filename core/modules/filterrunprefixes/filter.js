@@ -18,7 +18,7 @@ exports.filter = function(operationSubFunction,options) {
 			results.each(function(title) {
 				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
 					"currentTiddler": "" + title,
-					"..currentTiddler": widget.getVariable("currentTiddler",""),
+					"..currentTiddler": widget.getVariable("currentTiddler",{defaultValue:""}),
 					"index": "" + index,
 					"revIndex": "" +  (results.length - 1 - index),
 					"length": "" + results.length
@@ -30,5 +30,5 @@ exports.filter = function(operationSubFunction,options) {
 			});
 			results.remove(resultsToRemove);
 		}
-	}
+	};
 };

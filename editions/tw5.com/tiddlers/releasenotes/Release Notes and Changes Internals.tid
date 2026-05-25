@@ -53,3 +53,13 @@ Impact note fields:
 * `description` - a brief description of the impact
 * `impact-type` - the type of impact; see [[here|Release Notes and Changes]] for valid values
 * `text` - description of the impact if required
+
+! Summary Lists
+
+Summary sections are curated via lists stored in fields on the tiddler `$:/tw5.com/releases/info/summary-lists`.
+
+Each field is named `<section>/<release>` and contains a list of change note tiddler titles, for example:
+
+* `highlights/5.4.0`
+* `big-bug-fixes/5.4.0`
+* `clearing-the-decks/5.4.0`

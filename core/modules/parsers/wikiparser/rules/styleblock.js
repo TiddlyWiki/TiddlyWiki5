@@ -67,5 +67,5 @@ exports.parse = function() {
 	return [{
 		type: "void",
 		children: tree
-	}]
+	}];
 };

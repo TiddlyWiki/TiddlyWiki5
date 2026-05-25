@@ -1,0 +1,62 @@
+caption: 書式
+created: 20131205155959399
+modified: 20260221105526359
+original-modified: 20230303215447403
+tags: WikiText
+title: Formatting in WikiText
+ja-title: Wikiテキストでの書式
+type: text/vnd.tiddlywiki
+
+!! 概要
+
+[[Wikiテキスト|WikiText]]で利用可能な文字書式は次のとおりです:
+
+|Wikiテキスト | ボタン | ショートカット |レンダリング出力 |h
+|`''太字テキスト''`には二重シングルクォートを使用します| <kbd><<.icon $:/core/images/bold>></kbd> | <kbd><<displayshortcuts "((bold))">></kbd> |''太字テキスト''には二重シングルクォートを使用します |
+|`//斜体テキスト//`には二重スラッシュを使用します| <kbd><<.icon $:/core/images/italic>></kbd> | <kbd><<displayshortcuts "((italic))">></kbd> |//斜体テキスト//には二重スラッシュを使用します|
+|`__下線テキスト__`には二重アンダースコアを使用します| <kbd><<.icon $:/core/images/underline>></kbd> | <kbd><<displayshortcuts "((underline))">></kbd>  |__下線テキスト__には二重アンダースコアを使用します |
+|`^^上付き文字^^`テキストには二重サーカムフレックスアクセントを使用します | <kbd><<.icon $:/core/images/superscript>></kbd> | <kbd><<displayshortcuts "((superscript))">></kbd> |^^上付き文字^^テキストには二重サーカムフレックスアクセントを使用します |
+|`,,下付き文字,,`テキストには二重カンマを使用します | <kbd><<.icon $:/core/images/subscript>></kbd> | <kbd><<displayshortcuts "((subscript))">></kbd> |,,下付き文字,,テキストには二重カンマを使用します |
+|`~~取り消し線~~`テキストには二重チルダ記号を使用します | <kbd><<.icon $:/core/images/strikethrough>></kbd> | <kbd><<displayshortcuts "((strikethrough))">></kbd> |~~取り消し線~~テキストには二重チルダ記号を使用します |
+|```等幅文字` ``には単一のバッククォートを使用します | <kbd><<.icon $:/core/images/mono-line>></kbd> | <kbd><<displayshortcuts "((mono-line))">></kbd> |`等幅文字`には単一のバッククォートを使用します |
+|`@@ハイライト@@`するには2重@記号を使用します | - | - |@@ハイライト@@するには2重@記号を使用します |
+
+その他の書式オプションについては、[[WikiTextでのスタイルとクラス|Styles and Classes in WikiText]]を参照してください
+
+!! 埋め込みバッククォート
+
+|Wikiテキスト |レンダリング出力|h
+|<code>&#96;&#96;二重バッククォートで、&#96;埋め込み&#96;バッククォートが書けます&#96;&#96;</code>|``二重バッククォートで、`埋め込み`バッククォートが書けます``|
+
+!! キーボードショートカット
+
+[[キーボードショートカット|KeyboardShortcuts]]の完全なリストは、$:/ControlPanel -> ''キーボードショートカット'' タブにあります。
+
+!! セマンティック情報
+
+|Wikiテキスト | 結果のHTMLコード  |h
+|`''太字テキスト''`には二重シングルクォートを使用します|`<strong>太字テキスト</strong>`には二重シングルクォートを使用します |
+|`//斜体テキスト//`には二重スラッシュを使用します|`<em>斜体テキスト</em>`には二重スラッシュを使用します |
+|`__下線テキスト__`には二重アンダースコアを使用します|`<u>下線テキスト<u>` |
+|`^^上付き文字^^`テキストには二重サーカムフレックスアクセントを使用します |`<sup>上付き文字</sup>`テキストには二重サーカムフレックスアクセントを使用します |
+|`,,下付き文字,,`テキストには二重カンマを使用します |`<sub>下付き文字</sub>`テキストには二重カンマを使用します |
+|`~~取り消し線~~`テキストには二重チルダ記号を使用します |`<strike>取り消し線</strike>`テキストには二重チルダ記号を使用します |
+|```等幅文字` ``には単一のバッククォートを使用します |`<code>等幅文字</code>`には単一のバッククォートを使用します |
+|`@@ハイライト@@`するには二重@記号を使用します |`<span class="tc-inline-style">ハイライト</span>`するには二重@記号を使用します |
+
+!! 太字 vs 強調
+
+TWでは、ほとんどのユーザーが"強調"ではなく"太字"という用語に慣れているため、この用語を使用します。...レンダリングプロセスにより、"太字テキスト"はHTMLのSTRONG要素に変換されます。
+
+>`<strong>`要素は重要なコンテンツを示すものであり、`<b>`要素は重要であることを示すことなくテキストに注意を引くために使用されます。
+>https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong#b_vs._strong
+
+!! 下線 vs アンダースコア
+
+>文字の下に線を引くテキスト書式を指定するには、下線を使用します。アンダースコア文字( _ )を指定するには、アンダースコアを使用します。
+>https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/u/underline-vs-underscore
+
+!! 強調 vs 斜体
+
+>`<em>`要素はコンテンツの強調を表し、`<i>`要素は外国語、架空の人物の考えなど、通常の散文から区別されたテキストを表します。また、テキストが単語の意味を表すのではなく定義を参照している場合にも使用します。(書籍や映画のタイトルなど、作品のタイトルには`<cite>`を使用する必要があります。)
+>https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em#i_vs._em

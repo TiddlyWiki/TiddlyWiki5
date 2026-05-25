@@ -9,8 +9,6 @@ Commands to render tiddlers identified by a filter and save any screenshots iden
 
 "use strict";
 
-var InnerWikiWidget = require("$:/plugins/tiddlywiki/innerwiki/innerwiki.js").innerwiki;
-
 exports.info = {
 	name: "screenshot",
 	synchronous: false
@@ -67,7 +65,7 @@ Command.prototype.findInnerWikiWidgets = function(widgetNode) {
 	var self = this,
 		results = [];
 	if(widgetNode.saveScreenshot) {
-		results.push(widgetNode)
+		results.push(widgetNode);
 	}
 	$tw.utils.each(widgetNode.children,function(childWidget) {
 		Array.prototype.push.apply(results,self.findInnerWikiWidgets(childWidget));

@@ -40,7 +40,7 @@ $tw.eventBus = {
 	emit(event,data) {
 		const listeners = this.listenersMap.get(event);
 		if(listeners) {
-			listeners.forEach(fn => fn(data));
+			listeners.forEach((fn) => fn(data));
 		}
 	}
 };

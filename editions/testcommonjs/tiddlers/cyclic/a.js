@@ -8,8 +8,8 @@ Cycle require test A
 \*/
 
 exports.a = function () {
-    return b;
+	return b;
 };
-var b = require('./b');
+var b = require("./b");
 
 

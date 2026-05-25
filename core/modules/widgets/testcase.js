@@ -55,7 +55,7 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 		if(tiddler) {
 			self.testcaseWiki.addTiddler(tiddler);
 		}
-	}
+	};
 	loadTiddler("$:/core");
 	loadTiddler("$:/plugins/tiddlywiki/codemirror");
 	// Load tiddlers from child data widgets

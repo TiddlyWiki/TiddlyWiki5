@@ -31,4 +31,4 @@ exports["deserialize"] = function(source,operator,options) {
 		return [$tw.language.getString("Error/DeserializeOperator/MissingOperand")];
 	}
 	return results;
-}
+};

@@ -1,0 +1,6 @@
+title: $:/tw5.com/releases/ViewTemplate/body/changenote
+
+\whitespace trim
+<$let change=<<currentTiddler>> show-type-badge="yes" show-category-badge="yes" show-change-impacts="yes">
+	<<change-note-item>>
+</$let>

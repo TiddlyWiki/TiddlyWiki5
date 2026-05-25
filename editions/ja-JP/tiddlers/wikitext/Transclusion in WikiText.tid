@@ -1,0 +1,78 @@
+caption: トランスクルージョン
+created: 20131205160146648
+modified: 20260330113355137
+original-modified: 20240102070417483
+tags: WikiText
+title: Transclusion in WikiText
+ja-title: Wikiテキストでのトランスクルージョン
+type: text/vnd.tiddlywiki
+
+! 紹介
+
+[[トランスクルージョン|Transclusion]]表記を使用すると、あるTiddlerの内容を別のTiddlerの中に組み込むことができます:
+
+
+* `{{MyTiddler}}` 単一のTiddlerをトランスクルード
+* `{{MyTiddler||TemplateTitle}}` 指定した[[テンプレートTiddler|TemplateTiddlers]]を介してTiddlerを表示
+* `{{||TemplateTitle}}` [[現在のTiddler|Current Tiddler]]を変更せずに、指定したテンプレートTiddlerを表示
+* `{{MyTiddler|Parameter}}` 単一のパラメータを持つ単一のTiddlerをトランスクルード
+* `{{MyTiddler||TemplateTitle|Parameter|SecondParameter}}` 指定した[[テンプレートTiddler|TemplateTiddlers]]を介して、単一のTIddlerを2つのパラメータでトランスクルード
+
+!! テキスト参照のトランスクルード
+
+Tiddlerのタイトルの代わりに[[テキスト参照|TextReference]]を使用することもできます:
+
+* `{{MyTiddler!!field}}` Tiddlerの指定したフィールドをトランスクルード
+* `{{!!field}}` 現在のTiddlerの指定したフィールドをトランスクルード
+* `{{MyTiddler##index}}` [[データTiddler|DataTiddlers]]の指定したインデックスのプロパティをトランスクルード
+* `{{##index}}` 現在の[[データTiddler|DataTiddlers]]の指定したインデックスのプロパティをトランスクルード
+
+!! フィルタによるトランスクルージョン
+
+同様の構文を使用して、指定した[[フィルタ|Filters]]に一致するTiddlerのリストを生成しトランスクルードできます:
+
+```
+{{{ [tag[mechanism]] }}}
+{{{ [tag[mechanism]]||TemplateTitle }}}
+```
+
+[[フィルタリングした属性値|Filtered Attribute Values]]とは対照的に、最初の項目だけではなく、フィルタに一致するすべての項目が含まれます。
+
+!! 生成されるウィジェット
+
+[[Wikiテキスト|WikiText]]のトランスクルージョン構文は、[[Transcludeウィジェット|TranscludeWidget]]をラップした[[Tiddlerウィジェット|TiddlerWidget]]を生成します。例えば、`{{MyTiddler||TemplateTitle}}`は、次のウィジェットのペアが生成されます:
+
+```
+<$tiddler tiddler="MyTiddler">
+	<$transclude $tiddler="TemplateTitle"/>
+</$tiddler>
+```
+
+フィルタリングしたトランスクルージョン構文`{{{ [tag[mechanism]] }}}`は、以下のウィジェットを生成します。
+
+```
+<$list filter="[tag[mechanism]]">
+	<$link />
+</$list>
+```
+or, when used with a template, `{{{ [tag[mechanism]]||TemplateTitle }}}` expands to
+また、テンプレートと一緒に使用する場合、`{{{ [tag[mechanism]]||TemplateTitle }}}`は、次のように展開されます。
+
+```
+<$list filter="[tag[mechanism]]">
+	<$transclude tiddler="TemplateTitle" />
+</$list>
+```
+
+<<.tip "//Internals//プラグインをインストールすると、生成されたウィジェットツリーをエディターのプレビューペインに表示できます">>
+
+---
+
+参照:
+
+* [[トランスクルージョンの基本的な使用法|Transclusion Basic Usage]]
+* [[テンプレートを使用したトランスクルージョン|Transclusion with Templates]]
+* [[テンプレートTiddler|TemplateTiddlers]]
+* [[Transcludeウィジェット|TranscludeWidget]]
+* [[トランスクルージョンと置換|Transclusion and Substitution]]
+* [[Wikiテキストパーサモード: トランスクルージョンの例|WikiText parser mode: transclusion examples]]

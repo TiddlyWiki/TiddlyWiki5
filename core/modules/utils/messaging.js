@@ -8,10 +8,7 @@ Messaging utilities for use with window.postMessage() etc.
 This module intentionally has no dependencies so that it can be included in non-TiddlyWiki projects
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var RESPONSE_TIMEOUT = 2 * 1000;
@@ -122,5 +119,3 @@ BrowserMessagingPublisher.prototype.close = function() {
 };
 
 exports.BrowserMessagingPublisher = BrowserMessagingPublisher;
-
-})();
