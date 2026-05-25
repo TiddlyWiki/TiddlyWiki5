@@ -108,13 +108,14 @@ function buildSchema() {
 			}]
 		},
 		opaque_block: {
-			attrs: { rawText: { default: "" }, firstLine: { default: "" } },
+			attrs: { rawText: { default: "" }, firstLine: { default: "" }, parseTreeJson: { default: null } },
 			group: "block", atom: true, selectable: true, draggable: true,
 			toDOM(node) {
 				const wrapper = document.createElement("div");
 				wrapper.className = "pm-opaque-block";
 				wrapper.setAttribute("data-raw-text", node.attrs.rawText);
 				wrapper.setAttribute("data-first-line", node.attrs.firstLine);
+				if(node.attrs.parseTreeJson) wrapper.setAttribute("data-parse-tree-json", node.attrs.parseTreeJson);
 				wrapper.setAttribute("contenteditable", "false");
 				const label = document.createElement("span");
 				label.className = "pm-opaque-block-label";
@@ -127,7 +128,8 @@ function buildSchema() {
 				getAttrs(dom) {
 					return {
 						rawText: dom.getAttribute("data-raw-text") || "",
-						firstLine: dom.getAttribute("data-first-line") || ""
+						firstLine: dom.getAttribute("data-first-line") || "",
+						parseTreeJson: dom.getAttribute("data-parse-tree-json") || null
 					};
 				}
 			}]

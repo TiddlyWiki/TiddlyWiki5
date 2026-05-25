@@ -42,6 +42,7 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 
 		this.contentEl = content;
 		this.contentContainer = content;
+		this.installRenderedContentSelectionGuards();
 		this.dom = container;
 
 		this.renderViewMode();
@@ -53,6 +54,7 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		while(this.contentEl.firstChild) this.contentEl.removeChild(this.contentEl.firstChild);
 
 		const rawText = this.node.attrs.rawText || "";
+		const parseTreeJson = this.blockType === "opaque" ? this.node.attrs.parseTreeJson : null;
 		if(!rawText) {
 			const placeholder = document.createElement("div");
 			placeholder.className = "pm-nodeview-empty-placeholder";
@@ -62,12 +64,12 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		}
 
 		try {
-			const parseTree = $tw.wiki.parseText("text/vnd.tiddlywiki", rawText).tree;
+			const parseTree = parseTreeJson ? JSON.parse(parseTreeJson) : $tw.wiki.parseText("text/vnd.tiddlywiki", rawText).tree;
 			const Widget = require("$:/core/modules/widgets/widget.js").widget;
 			const renderWidget = new Widget({
 				type: "element",
 				tag: "div",
-				children: parseTree
+				children: Array.isArray(parseTree) ? parseTree : [parseTree]
 			}, {
 				wiki: $tw.wiki,
 				parentWidget: this.parentWidget || null,
@@ -117,7 +119,8 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		if(typeof pos !== "number") return;
 		const tr = this.view.state.tr.setNodeMarkup(pos, null, {
 			rawText: newRawText,
-			firstLine: newFirstLine.trim()
+			firstLine: newFirstLine.trim(),
+			parseTreeJson: null
 		});
 		this.view.dispatch(tr);
 	}

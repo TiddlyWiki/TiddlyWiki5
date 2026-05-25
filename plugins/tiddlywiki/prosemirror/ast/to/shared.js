@@ -127,11 +127,18 @@ function buildOpaqueFromNode(node, context) {
 	const sourceText = extractSourceText(node, context);
 	const rawText = sourceText || serializeNodeToRawText(node);
 	const firstLine = rawText.split("\n")[0] || rawText;
+	let parseTreeJson = null;
+	try {
+		parseTreeJson = JSON.stringify(node);
+	} catch(e) {
+		parseTreeJson = null;
+	}
 	return {
 		type: "opaque_block",
 		attrs: {
 			rawText: rawText,
-			firstLine: firstLine
+			firstLine: firstLine,
+			parseTreeJson: parseTreeJson
 		}
 	};
 }

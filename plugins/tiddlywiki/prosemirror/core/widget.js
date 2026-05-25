@@ -295,6 +295,21 @@ class ProsemirrorWidget extends Widget {
 		return true;
 	}
 
+	shouldRefreshAfterSave(wikiText) {
+		if(!this.view || !this.view.state) {
+			return false;
+		}
+		try {
+			const reparsedWikiAst = this.wiki.parseText(this.editType, wikiText, {
+				defaultType: "text/vnd.tiddlywiki"
+			}).tree;
+			const reparsedDoc = wikiAstToProseMirrorAst(reparsedWikiAst, { sourceText: wikiText });
+			return JSON.stringify(reparsedDoc) !== JSON.stringify(this.view.state.doc.toJSON());
+		} catch(e) {
+			return false;
+		}
+	}
+
 	saveEditorContent() {
 		try {
 			const content = this.view.state.doc.toJSON();
@@ -303,7 +318,7 @@ class ProsemirrorWidget extends Widget {
 			const tiddler = this.getAttribute("tiddler");
 			const currentText = this.wiki.getTiddlerText(tiddler, "");
 			if(currentText !== wikiText) {
-				this.saveLock = true;
+				this.saveLock = this.shouldRefreshAfterSave(wikiText) ? "refresh" : true;
 				try {
 					this.wiki.setText(tiddler, "text", undefined, wikiText);
 				} catch(e) {
@@ -350,8 +365,13 @@ class ProsemirrorWidget extends Widget {
 			return true;
 		} else if(changedTiddlers[this.getAttribute("tiddler")]) {
 			if(this.saveLock) {
+				const shouldRefresh = this.saveLock === "refresh";
 				this.saveLock = false;
-				return false;
+				if(!shouldRefresh) {
+					return false;
+				}
+				this.refreshSelf();
+				return true;
 			}
 			this.refreshSelf();
 			return true;

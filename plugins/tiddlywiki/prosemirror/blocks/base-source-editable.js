@@ -10,6 +10,8 @@ All subclasses share a unified bottom-right badge pattern.
 
 "use strict";
 
+const NodeSelection = require("prosemirror-state").NodeSelection;
+
 class BaseSourceEditableNodeView {
 	constructor(node, view, getPos, parentWidget) {
 		this.node = node;
@@ -26,6 +28,8 @@ class BaseSourceEditableNodeView {
 		this.selected = false;
 		this.isEditMode = false;
 		this._titleEl = null;
+		this._renderedContentMouseDownHandler = this.handleRenderedContentMouseDown.bind(this);
+		this._renderedContentSelectionGuardsInstalled = false;
 	}
 
 	static getLanguageString(suffix, fallback) {
@@ -325,6 +329,32 @@ class BaseSourceEditableNodeView {
 		);
 	}
 
+	installRenderedContentSelectionGuards() {
+		if(this._renderedContentSelectionGuardsInstalled || !this.contentContainer) {
+			return;
+		}
+		this.contentContainer.addEventListener("mousedown", this._renderedContentMouseDownHandler, true);
+		this._renderedContentSelectionGuardsInstalled = true;
+	}
+
+	selectBlockNode() {
+		if(!this.view || typeof this.getPos !== "function") {
+			return false;
+		}
+		const pos = this.getPos();
+		if(typeof pos !== "number") {
+			return false;
+		}
+		try {
+			const tr = this.view.state.tr.setSelection(NodeSelection.create(this.view.state.doc, pos)).scrollIntoView();
+			this.view.dispatch(tr);
+			this.view.focus();
+			return true;
+		} catch(e) {
+			return false;
+		}
+	}
+
 	// eslint-disable-next-line class-methods-use-this
 	usesExternalRenderedContent() {
 		return false;
@@ -338,6 +368,21 @@ class BaseSourceEditableNodeView {
 			"input, textarea, button, select, option, label, a[href], summary, details, [contenteditable='true'], [contenteditable=''], [tabindex], [role='button'], [role='checkbox'], [role='textbox'], [role='combobox'], [role='link'], [role='menuitem'], audio[controls], video[controls]"
 		);
 		return !!(interactive && this.contentContainer.contains(interactive));
+	}
+
+	handleRenderedContentMouseDown(event) {
+		if(this.isEditMode || !this.usesExternalRenderedContent() || !event || !event.target || !this.contentContainer) {
+			return;
+		}
+		if(!this.contentContainer.contains(event.target)) {
+			return;
+		}
+		if(this.isRenderedContentInteractiveTarget(event.target)) {
+			return;
+		}
+		event.preventDefault();
+		event.stopPropagation();
+		this.selectBlockNode();
 	}
 
 	shouldStopRenderedContentEvent(event) {
