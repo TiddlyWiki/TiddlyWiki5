@@ -40,6 +40,7 @@ class ProseMirrorEngine {
 
 		this.debouncedSave = debounce(() => {
 			const text = this.getText();
+			this.saveLock = this.shouldRefreshAfterSave(text) ? "refresh" : true;
 			this.widget.saveChanges(text);
 		}, 300);
 
@@ -146,8 +147,54 @@ class ProseMirrorEngine {
 		if(type) {
 			this.type = type;
 		}
-		if(this.view && !this.view.hasFocus()) {
-			this.updateDomNodeText(text);
+		if(!this.view) {
+			this.value = text;
+			return;
+		}
+		const nextText = text || "";
+		const currentText = this.getText();
+		const shouldRefresh = this.saveLock === "refresh";
+		const fromOwnSave = !!this.saveLock;
+		this.saveLock = false;
+		this.value = nextText;
+
+		if(shouldRefresh || nextText !== currentText || !this.view.hasFocus()) {
+			this.updateDomNodeText(nextText);
+			return;
+		}
+
+		if(fromOwnSave) {
+			return;
+		}
+	}
+
+	shouldRefreshAfterSave(wikiText) {
+		if(!this.view || !this.view.state) {
+			return false;
+		}
+		try {
+			const reparsedWikiAst = this.wiki.parseText(this.type, wikiText, {
+				defaultType: "text/vnd.tiddlywiki"
+			}).tree;
+			const reparsedDoc = wikiAstToProseMirrorAst(reparsedWikiAst, { sourceText: wikiText });
+			const currentDocJSON = this.view.state.doc.toJSON();
+			// Normalize by stripping trailing empty paragraphs, which don't affect wiki text
+			function normalize(doc) {
+				if(!doc || !doc.content) return doc;
+				const content = doc.content.slice();
+				while(content.length > 0) {
+					const last = content[content.length - 1];
+					if(last.type === "paragraph" && (!last.content || last.content.length === 0 || (last.content.length === 1 && last.content[0].type === "text" && !last.content[0].text))) {
+						content.pop();
+					} else {
+						break;
+					}
+				}
+				return Object.assign({},doc,{content: content});
+			}
+			return JSON.stringify(normalize(reparsedDoc)) !== JSON.stringify(normalize(currentDocJSON));
+		} catch(e) {
+			return false;
 		}
 	}
 
