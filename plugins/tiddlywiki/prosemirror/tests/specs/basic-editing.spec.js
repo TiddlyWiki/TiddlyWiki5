@@ -75,24 +75,13 @@ test.describe("ProseMirror Editor - Basic Editing", () => {
 		await expect(editor).toContainText("Second line");
 	});
 
-	test("should render strikethrough from wikitext", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, { initialText: "This is ~~struck~~ text" });
-		const strike = editor.locator("strike, s, del");
-		await expect(strike.first()).toBeVisible();
-	});
-
-	test("should render underline from wikitext", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, { initialText: "This is __underlined__ text" });
+	test("should render extended inline marks from wikitext", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "This is ~~struck~~, __underlined__, ^^super^^, and ,,sub,, text"
+		});
+		await expect(editor.locator("strike, s, del").first()).toBeVisible();
 		await expect(editor.locator("u").first()).toBeVisible();
-	});
-
-	test("should render superscript from wikitext", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, { initialText: "This is ^^super^^ text" });
 		await expect(editor.locator("sup").first()).toBeVisible();
-	});
-
-	test("should render subscript from wikitext", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, { initialText: "This is ,,sub,, text" });
 		await expect(editor.locator("sub").first()).toBeVisible();
 	});
 });

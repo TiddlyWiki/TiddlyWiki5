@@ -15,15 +15,10 @@ test.describe("ProseMirror Editor - Smoke Tests", () => {
 		await page.waitForSelector(".tc-site-title", { timeout: 10000 });
 	}
 
-	test("should load TiddlyWiki test page", async ({ page }) => {
+	test("should load TiddlyWiki and render ProseMirror editors", async ({ page }) => {
 		await loadTestPage(page);
 		await expect(page.locator(".tc-site-title")).toHaveText("TiddlyWiki5");
-	});
 
-	test("should have ProseMirror plugin loaded", async ({ page }) => {
-		await loadTestPage(page);
-		
-		// Debug: Check what widgets are available
 		const availableWidgets = await page.evaluate(() => {
 			if(typeof $tw === "undefined" || !$tw.modules || !$tw.modules.types || !$tw.modules.types.widget) {
 				return { error: "TiddlyWiki not loaded" };
@@ -36,19 +31,11 @@ test.describe("ProseMirror Editor - Smoke Tests", () => {
 				hasEditProsemirror: typeof $tw.modules.types.widget["edit-prosemirror"] !== "undefined"
 			};
 		});
-		
-		// Check if prosemirror widget loader is present
-		const hasWidget = availableWidgets.hasProsemirrorLoader || 
-		                  availableWidgets.hasProsemirror || 
-		                  availableWidgets.hasEditProsemirror;
-		
+		const hasWidget = availableWidgets.hasProsemirrorLoader ||
+			availableWidgets.hasProsemirror ||
+			availableWidgets.hasEditProsemirror;
 		expect(hasWidget).toBeTruthy();
-	});
 
-	test("should open tiddler in edit mode with ProseMirror", async ({ page }) => {
-		await loadTestPage(page);
-		
-		// Create a tiddler and open it in the story
 		await page.evaluate(() => {
 			$tw.wiki.addTiddler({
 				title: "EditTestTiddler",
@@ -63,32 +50,15 @@ test.describe("ProseMirror Editor - Smoke Tests", () => {
 			});
 			window.location.hash = "#EditTestTiddler";
 		});
-
 		const tiddlerFrame = page.locator('.tc-tiddler-frame[data-tiddler-title="EditTestTiddler"]').first();
 		await page.waitForSelector('.tc-tiddler-frame[data-tiddler-title="EditTestTiddler"]', { timeout: 10000 });
 		await expect(tiddlerFrame).toBeVisible({ timeout: 10000 });
-
-		// Enter edit mode through the real UI so the smoke test matches user behavior
 		const editButton = tiddlerFrame.locator('button[title*="Edit this tiddler"]').first();
 		await expect(editButton).toBeVisible({ timeout: 5000 });
 		await editButton.click();
-		
-		// Wait for edit frame
 		await page.waitForSelector(".tc-tiddler-edit-frame", { timeout: 5000 });
-		
-		// Check if ProseMirror editor is present
 		const editorFrame = page.locator(".tc-tiddler-edit-frame").filter({ hasText: "EditTestTiddler" });
-		const prosemirrorEditor = editorFrame.locator(".ProseMirror");
-		
-		// Either ProseMirror or regular text editor should be visible
-		const editorExists = await prosemirrorEditor.count() > 0 || 
-		                     await editorFrame.locator("textarea, iframe").count() > 0;
-		
-		expect(editorExists).toBeTruthy();
-	});
-
-	test("should render edit-prosemirror widget directly", async ({ page }) => {
-		await loadTestPage(page);
+		await expect(editorFrame.locator(".ProseMirror")).toBeVisible({ timeout: 5000 });
 
 		await page.evaluate(() => {
 			$tw.wiki.addTiddler({
@@ -103,11 +73,7 @@ test.describe("ProseMirror Editor - Smoke Tests", () => {
 				list: ["DirectWidgetTest"].concat(storyList)
 			});
 		});
-		
 		await page.waitForSelector('.tc-tiddler-frame[data-tiddler-title="DirectWidgetTest"]', { timeout: 5000 });
-		
-		// Check for ProseMirror class
-		const pm = page.locator(".ProseMirror"); // Global search, should be at least one
-		await expect(pm).toBeVisible();
+		await expect(page.locator('.tc-tiddler-frame[data-tiddler-title="DirectWidgetTest"] .ProseMirror')).toBeVisible({ timeout: 5000 });
 	});
 });
