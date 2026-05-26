@@ -37,8 +37,6 @@ test.describe("ProseMirror Editor - Smoke Tests", () => {
 			};
 		});
 		
-		console.log("Available widgets:", availableWidgets);
-		
 		// Check if prosemirror widget loader is present
 		const hasWidget = availableWidgets.hasProsemirrorLoader || 
 		                  availableWidgets.hasProsemirror || 
