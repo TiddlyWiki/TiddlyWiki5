@@ -1,7 +1,7 @@
 "use strict";
 
 const { test, expect } = require("@playwright/test");
-const { setupProseMirrorTest, clearEditor, pastePlainText } = require("../helpers.js");
+const { setupProseMirrorTest, clearEditor, pastePlainText, selectAllEditorContent } = require("../helpers.js");
 
 test.describe("ProseMirror Editor - Images", () => {
 	const imageTitle = "Motovun Jack.jpg";
@@ -34,8 +34,8 @@ test.describe("ProseMirror Editor - Images", () => {
 		await expect(img).toBeVisible({ timeout: 5000 });
 		await page.waitForTimeout(600);
 		expect(await page.evaluate((t) => $tw.wiki.getTiddlerText(t, ""), exampleTitle)).toContain("[img[Motovun Jack.jpg]]");
-		await editor.click();
-		await editor.press("Control+A");
+		const selectedAll = await selectAllEditorContent(editor);
+		expect(selectedAll).toBeTruthy();
 		await editor.press("Backspace");
 		await expect(editor.locator(`img[data-tw-source="${imageTitle}"]`)).toHaveCount(0);
 		await page.waitForTimeout(600);
