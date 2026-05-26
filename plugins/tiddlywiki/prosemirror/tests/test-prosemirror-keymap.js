@@ -50,6 +50,18 @@ describe("ProseMirror keymap commands", () => {
 		expect(result.state.selection.from).toBeGreaterThan(result.state.doc.child(0).nodeSize - 1);
 	}
 
+	function createHardLineBreaksState(text, cursorOffset) {
+		const schema = buildSchema();
+		const block = schema.nodes.hard_line_breaks_block.create(null, schema.text(text));
+		const doc = schema.nodes.doc.create(null, [block]);
+		const TextSelection = require("prosemirror-state").TextSelection;
+		return EditorState.create({
+			schema: schema,
+			doc: doc,
+			selection: TextSelection.create(doc, 1 + cursorOffset)
+		});
+	}
+
 	it("Enter inserts a paragraph after a selected rendered widget paragraph", () => {
 		const state = createSelectedWidgetParagraphState();
 		const keys = buildKeymap(state.schema);
@@ -75,6 +87,46 @@ describe("ProseMirror keymap commands", () => {
 		});
 		const keys = buildKeymap(schema);
 		expect(keys.Enter(state, null)).toBe(false);
+	});
+
+	it("Enter inside hard-line-breaks block inserts a hard_break", () => {
+		const state = createHardLineBreaksState("Line A", "Line A".length);
+		const keys = buildKeymap(state.schema);
+		const result = applyCommand(state, keys.Enter);
+		expect(result.handled).toBe(true);
+		expect(result.state.doc.child(0).type.name).toBe("hard_line_breaks_block");
+		expect(result.state.doc.child(0).childCount).toBe(2);
+		expect(result.state.doc.child(0).child(1).type.name).toBe("hard_break");
+	});
+
+	it("Shift-Enter at hard-line-breaks block start inserts a paragraph before", () => {
+		const state = createHardLineBreaksState("Line A\nLine B", 0);
+		const result = applyCommand(state, buildKeymap(state.schema)["Shift-Enter"]);
+		expect(result.handled).toBe(true);
+		expect(result.state.doc.childCount).toBe(2);
+		expect(result.state.doc.child(0).type.name).toBe("paragraph");
+		expect(result.state.doc.child(1).type.name).toBe("hard_line_breaks_block");
+	});
+
+	it("Shift-Enter at hard-line-breaks block end inserts a paragraph after", () => {
+		const text = "Line A\nLine B";
+		const state = createHardLineBreaksState(text, text.length);
+		const result = applyCommand(state, buildKeymap(state.schema)["Shift-Enter"]);
+		expect(result.handled).toBe(true);
+		expect(result.state.doc.childCount).toBe(2);
+		expect(result.state.doc.child(0).type.name).toBe("hard_line_breaks_block");
+		expect(result.state.doc.child(1).type.name).toBe("paragraph");
+	});
+
+	it("Shift-Enter in hard-line-breaks block middle splits the block with a paragraph between", () => {
+		const text = "Line A\nLine B\nLine C";
+		const state = createHardLineBreaksState(text, "Line A\nLine B".length);
+		const result = applyCommand(state, buildKeymap(state.schema)["Shift-Enter"]);
+		expect(result.handled).toBe(true);
+		expect(result.state.doc.childCount).toBe(3);
+		expect(result.state.doc.child(0).type.name).toBe("hard_line_breaks_block");
+		expect(result.state.doc.child(1).type.name).toBe("paragraph");
+		expect(result.state.doc.child(2).type.name).toBe("hard_line_breaks_block");
 	});
 
 });

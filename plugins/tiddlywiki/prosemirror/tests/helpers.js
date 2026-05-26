@@ -60,12 +60,12 @@ function selectAllEditorContent(editor) {
 		const engine = findAllEngines($tw.rootWidget).find((e) => e.view && e.view.dom === viewEl);
 		if(!engine || !engine.view) throw new Error("ProseMirror engine not found");
 		const state = engine.view.state;
-		const SelectionType = state.selection.constructor;
-		const selection = SelectionType.create(state.doc, 1, state.doc.content.size);
+		const AllSelection = $tw.modules.execute("prosemirror-state").AllSelection;
+		const selection = new AllSelection(state.doc);
 		engine.view.dispatch(state.tr.setSelection(selection));
 		engine.view.focus();
 		const nextSelection = engine.view.state.selection;
-		return nextSelection.from === 1 && nextSelection.to === engine.view.state.doc.content.size;
+		return nextSelection.from === 0 && nextSelection.to === engine.view.state.doc.content.size;
 	});
 }
 
