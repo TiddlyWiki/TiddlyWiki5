@@ -18,7 +18,7 @@ const _externalRoutesInstalled = new WeakSet();
 
 async function clearEditor(editor) {
 	await editor.click();
-	await editor.press("Control+A");
+	await selectAllEditorContent(editor);
 	await editor.press("Backspace");
 }
 
