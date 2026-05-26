@@ -32,7 +32,6 @@ test.describe("ProseMirror Editor - Source Preview Tab", () => {
 
 		await waitForLabelOccurrences(1);
 		await page.getByRole("button", { name: /edit this tiddler/i }).first().click();
-
 		await waitForLabelOccurrences(1);
 
 		const previewButton = page.getByRole("button", { name: /preview pane/i }).first();

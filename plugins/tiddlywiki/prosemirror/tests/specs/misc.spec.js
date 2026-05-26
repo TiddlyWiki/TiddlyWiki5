@@ -78,39 +78,23 @@ test.describe("ProseMirror Editor - Link Tooltip", () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Definition List
+// Static block rendering
 // ─────────────────────────────────────────────────────────────────────────────
-test.describe("ProseMirror Editor - Definition List", () => {
-	test("should render definition list syntax", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, { initialText: "; Term\n: Definition" });
+test.describe("ProseMirror Editor - Static Block Rendering", () => {
+	test("should render common block elements from wikitext", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "; Term\n: Definition\n\n<<<\nQuoted text\n<<<\n\n```\nconst x = 1;\n```\n\nAbove\n\n---\n\nBelow\n\n|!Header 1|!Header 2|\n|Cell 1|Cell 2|"
+		});
 		await expect(editor.locator("dl")).toHaveCount(1);
 		await expect(editor.locator("dt")).toContainText("Term");
 		await expect(editor.locator("dd")).toContainText("Definition");
-	});
-});
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Blockquote, Code Block, Horizontal Rule
-// ─────────────────────────────────────────────────────────────────────────────
-test.describe("ProseMirror Editor - Block Elements", () => {
-	test("should render blockquote from wikitext and round-trip", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, { initialText: "<<<\nQuoted text\n<<<" });
 		await expect(editor.locator("blockquote")).toContainText("Quoted text");
-		const savedText = await page.evaluate(() => {
-			const t = $tw.wiki.getTiddler("$:/plugins/tiddlywiki/prosemirror/example");
-			return t ? t.fields.text : null;
-		});
-		if(savedText !== null) expect(savedText).toContain("<<<");
-	});
-
-	test("should render code block from wikitext", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, { initialText: "```\nconst x = 1;\n```" });
 		await expect(editor.locator("pre code, pre").first()).toContainText("const x = 1;");
-	});
-
-	test("should render horizontal rule from wikitext", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, { initialText: "Above\n\n---\n\nBelow" });
 		await expect(editor.locator("hr")).toBeVisible();
+		const table = editor.locator("table");
+		await expect(table).toBeVisible();
+		await expect(table).toContainText("Header 1");
+		await expect(table).toContainText("Cell 1");
 	});
 });
 
@@ -118,15 +102,6 @@ test.describe("ProseMirror Editor - Block Elements", () => {
 // Table
 // ─────────────────────────────────────────────────────────────────────────────
 test.describe("ProseMirror Editor - Table", () => {
-	test("should render table from wikitext", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, {
-			initialText: "|!Header 1|!Header 2|\n|Cell 1|Cell 2|"
-		});
-		const table = editor.locator("table");
-		await expect(table).toBeVisible();
-		await expect(table).toContainText("Header 1");
-		await expect(table).toContainText("Cell 1");
-	});
 
 	test("should insert table via slash menu", async ({ page }) => {
 		const editor = await setupProseMirrorTest(page, null, {

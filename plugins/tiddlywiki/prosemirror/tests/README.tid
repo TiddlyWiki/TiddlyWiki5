@@ -3,12 +3,12 @@ type: text/vnd.tiddlywiki
 
 ! ProseMirror (WYSIWYG) Editor Tests
 
-This folder contains Playwright tests for the ProseMirror-based WYSIWYG editor.
+This folder contains Playwright and Jasmine tests for the ProseMirror-based WYSIWYG editor.
 
 !! Files
 
-* ''prosemirror.spec.js'': integration tests (UI interactions, editor behavior)
-* ''utils.spec.js'': unit tests (helpers, parsers, configuration reading)
+* ''specs/*.spec.js'': Playwright integration tests (UI interactions, editor behavior)
+* ''test-prosemirror-*.js'': Jasmine tests (AST conversion, editor mapping, helpers, menu data)
 
 !! Prerequisite (build test.html)
 
@@ -43,13 +43,13 @@ npx playwright test plugins/tiddlywiki/prosemirror/tests --project=chromium
 * Run a single file
 
 ```shell
-npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js
+npx playwright test plugins/tiddlywiki/prosemirror/tests/specs/widget-blocks.spec.js
 ```
 
 * Run a single group/test (name grep)
 
 ```shell
-npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "Widget Blocks"
+npx playwright test plugins/tiddlywiki/prosemirror/tests -g "Widget Blocks"
 ```
 
 !! Fast suites (recommended)
@@ -59,37 +59,37 @@ These are short, focused runs for day-to-day development and AI-assisted changes
 * Basic editing + formatting (typing, bold/italic, undo/redo)
 
 ```shell
-npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "ProseMirror Editor - Basic Editing" --project=chromium --workers=1
+npx playwright test plugins/tiddlywiki/prosemirror/tests/specs/basic-editing.spec.js --project=chromium --workers=1
 ```
 
 * Widget blocks (detect/render/edit/save/delete + paste)
 
 ```shell
-npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "ProseMirror Editor - Widget Blocks" --project=chromium --workers=1
+npx playwright test plugins/tiddlywiki/prosemirror/tests/specs/widget-blocks.spec.js --project=chromium --workers=1
 ```
 
 * Lists (create + indent/dedent)
 
 ```shell
-npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "ProseMirror Editor - Lists" --project=chromium --workers=1
+npx playwright test plugins/tiddlywiki/prosemirror/tests/specs/lists.spec.js --project=chromium --workers=1
 ```
 
 * Headings (H1-H6)
 
 ```shell
-npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "ProseMirror Editor - Headings" --project=chromium --workers=1
+npx playwright test plugins/tiddlywiki/prosemirror/tests/specs/basic-editing.spec.js -g "ProseMirror Editor - Headings" --project=chromium --workers=1
 ```
 
 * Configuration (shortcuts + widget-block enable/disable)
 
 ```shell
-npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "ProseMirror Editor - Configuration" --project=chromium --workers=1
+npx playwright test plugins/tiddlywiki/prosemirror/tests/specs/basic-editing.spec.js -g "ProseMirror Editor - Configuration" --project=chromium --workers=1
 ```
 
 * Integration (save/load + paste does not open import dialog)
 
 ```shell
-npx playwright test plugins/tiddlywiki/prosemirror/tests/prosemirror.spec.js -g "ProseMirror Editor - Integration" --project=chromium --workers=1
+npx playwright test plugins/tiddlywiki/prosemirror/tests/specs/basic-editing.spec.js -g "ProseMirror Editor - Integration" --project=chromium --workers=1
 ```
 
 * UI mode (interactive debugging)
