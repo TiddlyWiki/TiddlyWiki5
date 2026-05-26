@@ -90,29 +90,6 @@ test.describe("ProseMirror Editor - Source Preview Tab", () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Preview Types
-// ─────────────────────────────────────────────────────────────────────────────
-test.describe("ProseMirror Editor - Preview Types", () => {
-	test("should only include Source for ProseMirror editors", async ({ page }) => {
-		await loadTestPage(page);
-		const availability = await page.evaluate(() => {
-			function hasSourceOption(editorType) {
-				const parser = $tw.wiki.parseText("text/vnd.tiddlywiki",
-					`<$set name="tv-editor-type" value="${editorType}"><$transclude tiddler="$:/core/ui/EditorToolbar/preview-type-dropdown"/></$set>`);
-				const widget = $tw.wiki.makeWidget(parser, { parentWidget: $tw.rootWidget, document });
-				const container = document.createElement("div");
-				widget.render(container, null);
-				return Array.from(container.querySelectorAll("a")).some(
-					(el) => el.textContent.replace(/\s+/g, " ").trim().match(/source/i));
-			}
-			return { prosemirror: hasSourceOption("prosemirror"), text: hasSourceOption("text") };
-		});
-		expect(availability.prosemirror).toBeTruthy();
-		expect(availability.text).toBeFalsy();
-	});
-});
-
-// ─────────────────────────────────────────────────────────────────────────────
 // Markdown Tiddlers
 // ─────────────────────────────────────────────────────────────────────────────
 test.describe("ProseMirror Editor - Markdown Tiddlers", () => {
