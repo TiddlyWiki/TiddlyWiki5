@@ -30,14 +30,14 @@ test.describe("ProseMirror Editor - Images", () => {
 		});
 		await clearEditor(editor);
 		await pastePlainText(editor, "[img[Motovun Jack.jpg]]");
-		const img = editor.locator(`img[data-tw-source="${imageTitle}"]`).first();
-		await expect(img).toBeVisible({ timeout: 5000 });
+		const img = editor.locator(`img[data-tw-source="${imageTitle}"]`);
+		await expect(img).toHaveCount(1, { timeout: 5000 });
 		await page.waitForTimeout(600);
 		expect(await page.evaluate((t) => $tw.wiki.getTiddlerText(t, ""), exampleTitle)).toContain("[img[Motovun Jack.jpg]]");
 		const selectedAll = await selectAllEditorContent(editor);
 		expect(selectedAll).toBeTruthy();
 		await editor.press("Backspace");
-		await expect(editor.locator(`img[data-tw-source="${imageTitle}"]`)).toHaveCount(0);
+		await expect(img).toHaveCount(0);
 		await page.waitForTimeout(600);
 		expect(await page.evaluate((t) => $tw.wiki.getTiddlerText(t, ""), exampleTitle)).not.toContain("Motovun Jack.jpg");
 	});
