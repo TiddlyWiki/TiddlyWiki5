@@ -10,7 +10,7 @@ Advanced/ShadowInfo/Shadow/Hint: <$link to=<<infoTiddler>>><$text text=<<infoTid
 Advanced/ShadowInfo/Shadow/Source: 此条目定义于插件 <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
 Advanced/ShadowInfo/OverriddenShadow/Hint: 已被一般条目覆盖
 Advanced/CascadeInfo/Heading: 级联详细信息
-Advanced/CascadeInfo/Hint: 这些是使用级联筛选器的视图模板区段（标签为 <<tag "$:/tags/ViewTemplate">> ）及其为当前条目产生的模板。
+Advanced/CascadeInfo/Hint: 这些是对于每个系统视图模板级联解析的视图模板片段
 Advanced/CascadeInfo/Detail/View: 检视
 Advanced/CascadeInfo/Detail/ActiveCascadeFilter: 激活级联筛选器
 Advanced/CascadeInfo/Detail/Template: 范本
