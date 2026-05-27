@@ -1231,14 +1231,27 @@ $tw.Wiki = function(options) {
 			var reservedFields = {"title":true,"text":true,"type":true,"created":true,"creator":true,"modified":true,"modifier":true,"tags":true,"bag":true,"revision":true};
 			var parsedFields = $tw.utils.parseMultilineFields(tiddler.fields.text);
 			var extraFields = Object.create(null);
+			var newDerivedNames = Object.create(null);
 			for(var fieldName in parsedFields) {
 				var value = parsedFields[fieldName];
 				var unwrapped = (value !== null && typeof value === "object" && $tw.utils.hop(value,"value")) ? value.value : value;
-				if(fieldName === "text") {
-					// Map the "text" sub-entry to "body" to avoid overwriting the compound format
-					extraFields["body"] = unwrapped;
-				} else if(!reservedFields[fieldName]) {
-					extraFields[fieldName] = unwrapped;
+				// Map the "text" sub-entry to "body" to avoid overwriting the compound format
+				var targetName = (fieldName === "text") ? "body" : fieldName;
+				// Allow text→body mapping even though "text" is reserved; skip other reserved names
+				if(fieldName === "text" || !reservedFields[fieldName]) {
+					extraFields[targetName] = unwrapped;
+					newDerivedNames[targetName] = true;
+				}
+			}
+			// Clear previously-derived fields that are no longer present in the new compound text
+			var existingTiddler = this.getTiddler(tiddler.fields.title);
+			if(existingTiddler && existingTiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields" && existingTiddler.fields.text) {
+				var prevParsed = $tw.utils.parseMultilineFields(existingTiddler.fields.text);
+				for(var prevName in prevParsed) {
+					var prevTarget = (prevName === "text") ? "body" : prevName;
+					if((prevName === "text" || !reservedFields[prevName]) && !newDerivedNames[prevTarget]) {
+						extraFields[prevTarget] = undefined;
+					}
 				}
 			}
 			if(Object.keys(extraFields).length > 0) {
