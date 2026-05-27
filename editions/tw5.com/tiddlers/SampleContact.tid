@@ -68,12 +68,12 @@ type: date
 1990-06-15
 +
 title: category
-type: binary-personal-business
+type: option-personal-business
 
 business
 +
 title: favorite
-type: binary-yes-no
+type: option-yes-no
 
 yes
 +

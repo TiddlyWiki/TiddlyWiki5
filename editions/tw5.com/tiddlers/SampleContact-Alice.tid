@@ -51,7 +51,7 @@ type: date
 1988-11-22
 +
 title: category
-type: binary-personal-business
+type: option-personal-business
 
 business
 +

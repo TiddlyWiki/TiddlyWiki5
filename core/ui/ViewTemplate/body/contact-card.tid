@@ -26,7 +26,7 @@ title: $:/core/ui/ViewTemplate/body/contact-card
 				<%elseif [<fieldType>match[color]] %>
 					<span class="tc-contact-card-color" style={{{ [[background-color:]addsuffix<fieldValue>] }}}>&nbsp;&nbsp;&nbsp;</span>
 					&nbsp;<$text text=<<fieldValue>>/>
-				<%elseif [<fieldType>prefix[binary-]] %>
+				<%elseif [<fieldType>prefix[option-]] %>
 					<$text text=<<fieldValue>>/>
 				<%else%>
 					<$text text=<<fieldValue>>/>
@@ -56,9 +56,9 @@ title: $:/core/ui/ViewTemplate/body/contact-card
 				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="url"/>
 			<%elseif [<fieldType>match[color]] %>
 				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="color"/>
-			<%elseif [<fieldType>prefix[binary-]] %>
-				<$let binaryOptions={{{ [<fieldType>removeprefix[binary-]] }}}>
-					<$list filter="[<binaryOptions>split[-]]" variable="optionValue">
+			<%elseif [<fieldType>prefix[option-]] %>
+				<$let optionLabels={{{ [<fieldType>removeprefix[option-]] }}}>
+					<$list filter="[<optionLabels>split[-]]" variable="optionValue">
 						<$radio tiddler=<<currentTiddler>> index=<<fieldName>> value=<<optionValue>>>
 							<$text text=<<optionValue>>/>
 						</$radio>

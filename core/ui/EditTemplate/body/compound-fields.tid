@@ -110,9 +110,9 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 				</$list>
 			</$select>
 		</$let>
-	<%elseif [<fieldType>prefix[binary-]] %>
-		<$let binaryOptions={{{ [<fieldType>removeprefix[binary-]] }}}>
-			<$list filter="[<binaryOptions>split[-]]" variable="optionValue">
+	<%elseif [<fieldType>prefix[option-]] %>
+		<$let optionLabels={{{ [<fieldType>removeprefix[option-]] }}}>
+			<$list filter="[<optionLabels>split[-]]" variable="optionValue">
 				<$radio tiddler=<<currentTiddler>> index=<<fieldName>> value=<<optionValue>>>
 					<$text text=<<optionValue>>/>
 				</$radio>
@@ -144,8 +144,8 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 		<option value="phone">phone</option>
 		<option value="url">url</option>
 		<option value="color">color</option>
-		<$list filter="[<currentTiddler>compound-field-types[]prefix[binary-]] binary-yes-no +[unique[]]" variable="binaryType">
-			<option value=<<binaryType>>><$text text=<<binaryType>>/></option>
+		<$list filter="[<currentTiddler>compound-field-types[]prefix[option-]] option-yes-no +[unique[]]" variable="optionType">
+			<option value=<<optionType>>><$text text=<<optionType>>/></option>
 		</$list>
 		<$list filter="[<currentTiddler>compound-field-types[]prefix[select-]] +[unique[]]" variable="selectType">
 			<option value=<<selectType>>><$text text=<<selectType>>/></option>

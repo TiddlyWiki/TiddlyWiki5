@@ -47,12 +47,12 @@ Hauptstrasse 42
 1010 Wien, Austria
 +
 title: category
-type: binary-personal-business
+type: option-personal-business
 
 business
 +
 title: favorite
-type: binary-yes-no
+type: option-yes-no
 
 yes
 +

@@ -41,12 +41,12 @@ type: date
 1991-03-08
 +
 title: category
-type: binary-personal-business
+type: option-personal-business
 
 personal
 +
 title: favorite
-type: binary-yes-no
+type: option-yes-no
 
 no
 +

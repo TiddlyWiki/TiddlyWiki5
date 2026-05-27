@@ -52,12 +52,12 @@ type: date
 
 +
 title: category
-type: binary-personal-business
+type: option-personal-business
 
 
 +
 title: favorite
-type: binary-yes-no
+type: option-yes-no
 
 
 +
