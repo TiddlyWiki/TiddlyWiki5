@@ -1,0 +1,13 @@
+created: 20260527092558715
+modified: 20260527092558715
+title: TestLegacyText
+type: text/vnd.tiddlywiki-multiple+fields
+
+title: text
+type: multiline
+
+legacy hello
++
+title: nickname
+
+JaneT

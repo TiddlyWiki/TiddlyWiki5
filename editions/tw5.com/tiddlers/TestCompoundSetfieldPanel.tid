@@ -1,0 +1,64 @@
+title: TestCompoundSetfieldPanel
+
+\whitespace trim
+
+! Compound +fields setfield live test
+
+Target: [[TestCompoundSetfield]]
+
+!! 1. Raw `text` field (the compound source)
+
+<pre style="white-space:pre-wrap;font-size:.85em">
+<$view tiddler="TestCompoundSetfield" field="text"/>
+</pre>
+
+!! 2. Derived fields on the tiddler
+
+<table class="tc-view-field-table">
+<tbody>
+<$list filter="[[TestCompoundSetfield]fields[]sort[title]] -text -type -tags -created -modified" variable="fieldName">
+<tr><td><code><<fieldName>></code></td><td>{{{ [[TestCompoundSetfield]get<fieldName>] }}}</td></tr>
+</$list>
+</tbody>
+</table>
+
+!! 3. Sub-entry `type:` metadata (via compound-field-type)
+
+* email type → <code>{{{ [[TestCompoundSetfield]compound-field-type[email]] }}}</code>
+* nickname type → <code>{{{ [[TestCompoundSetfield]compound-field-type[nickname]] }}}</code> ''(should be empty)''
+* body type → <code>{{{ [[TestCompoundSetfield]compound-field-type[body]] }}}</code>
+
+!! 4. Tests — click each, then look back at sections 1–3
+
+<$button> a) Update plain field (nickname → "NewNick")
+<$action-setfield $tiddler="TestCompoundSetfield" $index="nickname" $value="NewNick"/>
+</$button>
+
+<$button> b) Update metadata field (email → "fresh@example.com"; `type: email` MUST stay)
+<$action-setfield $tiddler="TestCompoundSetfield" $index="email" $value="fresh@example.com"/>
+</$button>
+
+<$button> c) Add new field (city = "Vienna")
+<$action-setfield $tiddler="TestCompoundSetfield" $index="city" $value="Vienna"/>
+</$button>
+
+<$button> d1) Delete sub-entry via `$action-setfield $index=nickname` (no `$value`)
+<$action-setfield $tiddler="TestCompoundSetfield" $index="nickname"/>
+</$button>
+
+<$button> d2) Delete derived field via `$action-deletefield nickname`
+<$action-deletefield $tiddler="TestCompoundSetfield" nickname/>
+</$button>
+
+<$button> e) Set metadata via `$indexProperty` (type=date-time on email)
+<$action-setfield $tiddler="TestCompoundSetfield" $index="email" $indexProperty="type" $value="date-time"/>
+</$button>
+
+<$button> f) Remove metadata via `$indexProperty` (drop type from email; unwraps to plain string)
+<$action-setfield $tiddler="TestCompoundSetfield" $index="email" $indexProperty="type"/>
+</$button>
+
+<$button>
+<$action-setfield $tiddler="TestCompoundSetfield" $field="text" $value={{{ [[TestCompoundSetfield_initial]get[text]] }}}/>
+Reset compound text to initial (leaves stale derived fields — diagnostic)
+</$button>
