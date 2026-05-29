@@ -1,0 +1,74 @@
+name: Sync from upstream TiddlyWiki
+
+# Keeps this fork current with TiddlyWiki/TiddlyWiki5 automatically so it does
+# not need manual maintenance. Our additions (helm/, k8s/, Dockerfile, the
+# extra .github/workflows) are new files that don't conflict with upstream code,
+# so a fast-forward/clean merge is the normal case. If a merge conflict occurs,
+# the workflow pushes a branch and opens a PR for manual resolution instead of
+# failing silently.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"   # weekly, Monday 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge upstream
+        id: merge
+        run: |
+          git remote add upstream https://github.com/TiddlyWiki/TiddlyWiki5.git
+          git fetch upstream master
+          if git merge --no-edit upstream/master; then
+            echo "conflict=false" >> "$GITHUB_OUTPUT"
+          else
+            git merge --abort
+            echo "conflict=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Push merged master
+        if: steps.merge.outputs.conflict == 'false'
+        run: git push origin master
+
+      # On conflict, push a branch and open a PR for manual review.
+      - name: Prepare conflict branch
+        if: steps.merge.outputs.conflict == 'true'
+        run: |
+          BRANCH="upstream-sync/$(date +%Y%m%d)"
+          git checkout -b "$BRANCH"
+          git merge --no-commit --no-ff upstream/master || true
+          git add -A
+          git commit -m "chore: upstream sync (conflicts to resolve)" || true
+          git push origin "$BRANCH"
+          echo "BRANCH=$BRANCH" >> "$GITHUB_ENV"
+
+      - name: Open conflict PR
+        if: steps.merge.outputs.conflict == 'true'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "Upstream sync needs manual conflict resolution",
+              head: process.env.BRANCH,
+              base: "master",
+              body: "Automated upstream sync hit conflicts. Resolve and merge."
+            });

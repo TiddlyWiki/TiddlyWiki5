@@ -1,0 +1,66 @@
+name: Package & Publish Helm Chart
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "helm/**"
+      - ".github/workflows/helm-publish.yml"
+  # Also allow manual publish
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Helm Chart Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # chart-releaser needs to push to gh-pages
+      packages: write   # for the GHCR OCI chart push
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0   # chart-releaser needs full history
+
+      - name: Configure Git
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install Helm
+        uses: azure/setup-helm@b9e51907a09c216f16ebe8536097933489208112 # v4.3.0
+        with:
+          version: "3.14.x"
+
+      # chart-releaser packages charts found in ./helm/,
+      # pushes releases to GitHub Releases, and updates the
+      # index on the gh-pages branch so the repo doubles as a
+      # Helm chart repository.
+      #
+      # Usage after setup:
+      #   helm repo add mibmal https://mibmal.github.io/TiddlyWiki5
+      #   helm repo update
+      #   helm install tiddlywiki mibmal/tiddlywiki
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          charts_dir: helm
+          # Skip already-released chart versions instead of failing.
+          skip_existing: true
+        env:
+          CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Also push the chart to GHCR as an OCI artifact (uses GITHUB_TOKEN, no
+      # external secrets). Alternative install method:
+      #   helm install tiddlywiki oci://ghcr.io/mibmal/charts/tiddlywiki
+      - name: Log in to GHCR (OCI)
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Package and push chart to GHCR OCI
+        run: |
+          helm package helm/tiddlywiki --destination /tmp/charts
+          for chart in /tmp/charts/*.tgz; do
+            helm push "$chart" oci://ghcr.io/${{ github.repository_owner }}/charts
+          done

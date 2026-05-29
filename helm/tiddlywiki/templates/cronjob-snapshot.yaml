@@ -1,0 +1,126 @@
+{{- if .Values.volumeSnapshotBackup.enabled }}
+# ServiceAccount with RBAC to create/list/delete VolumeSnapshots.
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "tiddlywiki.fullname" . }}-snapshot-sa
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" . | nindent 4 }}
+    app.kubernetes.io/component: snapshot-backup
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "tiddlywiki.fullname" . }}-snapshot-role
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" . | nindent 4 }}
+rules:
+  - apiGroups: ["snapshot.storage.k8s.io"]
+    resources: ["volumesnapshots"]
+    verbs: ["create", "get", "list", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "tiddlywiki.fullname" . }}-snapshot-rolebinding
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "tiddlywiki.fullname" . }}-snapshot-role
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "tiddlywiki.fullname" . }}-snapshot-sa
+    namespace: {{ .Release.Namespace }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "tiddlywiki.fullname" . }}-snapshot
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" . | nindent 4 }}
+    app.kubernetes.io/component: snapshot-backup
+spec:
+  schedule: {{ .Values.volumeSnapshotBackup.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "tiddlywiki.selectorLabels" . | nindent 12 }}
+            app.kubernetes.io/component: snapshot-backup
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: {{ include "tiddlywiki.fullname" . }}-snapshot-sa
+
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65532
+            seccompProfile:
+              type: RuntimeDefault
+
+          containers:
+            - name: snapshot
+              image: "{{ .Values.volumeSnapshotBackup.image.repository }}:{{ .Values.volumeSnapshotBackup.image.tag }}"
+              imagePullPolicy: {{ .Values.volumeSnapshotBackup.image.pullPolicy }}
+              command:
+                - sh
+                - -c
+                - |
+                  set -e
+                  NAMESPACE="{{ .Release.Namespace }}"
+                  PVC_NAME="{{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{ else }}{{ include "tiddlywiki.fullname" . }}-data{{ end }}"
+                  TIMESTAMP=$(date -u '+%Y%m%d%H%M%S')
+                  SNAPSHOT_NAME="{{ include "tiddlywiki.fullname" . }}-${TIMESTAMP}"
+                  RETENTION={{ .Values.volumeSnapshotBackup.retentionCount }}
+
+                  echo "Creating VolumeSnapshot $SNAPSHOT_NAME for PVC $PVC_NAME..."
+
+                  cat <<EOF | kubectl apply -f -
+                  apiVersion: snapshot.storage.k8s.io/v1
+                  kind: VolumeSnapshot
+                  metadata:
+                    name: ${SNAPSHOT_NAME}
+                    namespace: ${NAMESPACE}
+                    labels:
+                      app.kubernetes.io/name: {{ include "tiddlywiki.name" . }}
+                      app.kubernetes.io/instance: {{ .Release.Name }}
+                      backup-type: scheduled
+                  spec:
+                    {{- if .Values.volumeSnapshotBackup.snapshotClass }}
+                    volumeSnapshotClassName: {{ .Values.volumeSnapshotBackup.snapshotClass }}
+                    {{- end }}
+                    source:
+                      persistentVolumeClaimName: ${PVC_NAME}
+                  EOF
+
+                  echo "Snapshot created. Pruning old snapshots (keeping $RETENTION)..."
+
+                  # List snapshots for this wiki, sorted oldest first, delete excess.
+                  kubectl get volumesnapshots -n "$NAMESPACE" \
+                    -l "app.kubernetes.io/instance={{ .Release.Name }},backup-type=scheduled" \
+                    --sort-by=.metadata.creationTimestamp \
+                    -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' \
+                  | head -n "-${RETENTION}" \
+                  | xargs -r kubectl delete volumesnapshot -n "$NAMESPACE"
+
+                  echo "Done."
+              resources:
+                {{- toYaml .Values.volumeSnapshotBackup.resources | nindent 16 }}
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 65532
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop: ["ALL"]
+{{- end }}

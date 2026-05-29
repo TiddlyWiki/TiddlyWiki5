@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tiddlywiki-data
+  labels:
+    app.kubernetes.io/name: tiddlywiki
+    app.kubernetes.io/component: wiki
+  annotations:
+    # Prevent accidental deletion via Kustomize pruning.
+    # Also schedule VolumeSnapshots for backup in production.
+    helm.sh/resource-policy: keep
+spec:
+  accessModes:
+    # ReadWriteOnce is correct for the single-pod deployment model.
+    # If you move to HA with a shared filesystem, use ReadWriteMany
+    # with an NFS or CephFS storage class.
+    - ReadWriteOnce
+  resources:
+    requests:
+      # 1Gi handles thousands of tiddlers (~1-5KB each as .tid text files).
+      # Resize in overlays as content grows.
+      storage: 1Gi
+  # storageClassName omitted to use the cluster default.
+  # Pin in overlays: storageClassName: standard-retain

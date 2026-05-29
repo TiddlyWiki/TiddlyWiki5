@@ -1,0 +1,52 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tiddlywiki
+  labels:
+    app.kubernetes.io/name: tiddlywiki
+    app.kubernetes.io/component: wiki
+    environment: prod
+  annotations:
+    # Force HTTPS — redirect HTTP → HTTPS with 308.
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+
+    # Allow large tiddler imports (PUT /recipes/default/tiddlers/:title).
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+
+    # Timeouts for wiki page rendering (synchronous, may be slow on large wikis).
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "10"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "60"
+
+    # cert-manager: automatically provision a Let's Encrypt TLS certificate.
+    # Prerequisite: install cert-manager and create a ClusterIssuer named
+    # 'letsencrypt-prod' before applying this overlay.
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+
+    # Security response headers injected by nginx.
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      add_header X-Frame-Options "SAMEORIGIN" always;
+      add_header X-Content-Type-Options "nosniff" always;
+      add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+      add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
+
+spec:
+  ingressClassName: nginx    # Adjust to your cluster's IngressClass name.
+
+  tls:
+    - hosts:
+        - wiki.example.com    # Replace with your domain.
+      secretName: tiddlywiki-tls
+
+  rules:
+    - host: wiki.example.com  # Replace with your domain.
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tiddlywiki
+                port:
+                  name: http

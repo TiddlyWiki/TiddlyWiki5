@@ -1,0 +1,80 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: tiddlywiki
+
+resources:
+  - ../../base
+
+# Build locally: docker build -t mibmal/tiddlywiki:dev .
+# Load into kind:      kind load docker-image mibmal/tiddlywiki:dev
+# Load into minikube:  minikube image load mibmal/tiddlywiki:dev
+# Or pull from DockerHub: docker pull mibmal/tiddlywiki:latest
+images:
+  - name: tiddlywiki
+    newName: mibmal/tiddlywiki
+    newTag: dev
+
+commonLabels:
+  environment: dev
+
+patches:
+  # Reduce resource requests/limits for dev clusters (kind, minikube, Docker Desktop).
+  - target:
+      kind: Deployment
+      name: tiddlywiki
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+
+  # Relax startup budget on slow dev machines.
+  - target:
+      kind: Deployment
+      name: tiddlywiki
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/startupProbe/failureThreshold
+        value: 12
+      - op: replace
+        path: /spec/template/spec/containers/0/livenessProbe/periodSeconds
+        value: 60
+
+  # NodePort for direct browser access without an Ingress controller.
+  # Access at: http://localhost:30080 (kind) or http://$(minikube ip):30080
+  - target:
+      kind: Service
+      name: tiddlywiki
+    patch: |-
+      - op: replace
+        path: /spec/type
+        value: NodePort
+      - op: add
+        path: /spec/ports/0/nodePort
+        value: 30080
+
+  # Smaller PVC for dev storage.
+  - target:
+      kind: PersistentVolumeClaim
+      name: tiddlywiki-data
+    patch: |-
+      - op: replace
+        path: /spec/resources/requests/storage
+        value: 256Mi
+
+  # Remove PSS enforce labels so dev namespace doesn't block experimentation.
+  # Warn/audit labels are kept to surface any policy violations.
+  - target:
+      kind: Namespace
+      name: tiddlywiki
+    patch: |-
+      - op: remove
+        path: /metadata/labels/pod-security.kubernetes.io~1enforce
+      - op: remove
+        path: /metadata/labels/pod-security.kubernetes.io~1enforce-version

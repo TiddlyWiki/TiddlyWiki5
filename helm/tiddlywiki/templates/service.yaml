@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "tiddlywiki.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    {{- include "tiddlywiki.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: {{ include "tiddlywiki.serviceTargetPort" . }}
+      port: {{ .Values.service.port }}
+      targetPort: {{ include "tiddlywiki.serviceTargetPort" . }}
+      protocol: TCP
+  sessionAffinity: None

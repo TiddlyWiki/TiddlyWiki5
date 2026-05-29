@@ -1,0 +1,338 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tiddlywiki.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "tiddlywiki.selectorLabels" . | nindent 6 }}
+  {{- with .Values.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  template:
+    metadata:
+      labels:
+        {{- include "tiddlywiki.selectorLabels" . | nindent 8 }}
+      annotations:
+        {{- if and .Values.otel.enabled .Values.otel.sidecar.enabled }}
+        checksum/otel-config: {{ include (print $.Template.BasePath "/configmap-otel.yaml") . | sha256sum }}
+        {{- end }}
+        {{- if .Values.plugins }}
+        checksum/plugins: {{ include (print $.Template.BasePath "/configmap-plugins.yaml") . | sha256sum }}
+        {{- end }}
+        prometheus.io/scrape: {{ if and .Values.otel.enabled .Values.otel.sidecar.enabled }}"true"{{ else }}"false"{{ end }}
+        prometheus.io/port: "8888"
+        prometheus.io/path: "/metrics"
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ include "tiddlywiki.serviceAccountName" . }}
+
+      {{- with .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      # -------------------------------------------------------
+      # Init container: seed /data/wiki with correct ownership.
+      # Distroless has no shell, so busybox does the mkdir/chown.
+      # -------------------------------------------------------
+      initContainers:
+        - name: init-wiki-dir
+          image: busybox:1.36-musl
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p {{ .Values.wiki.dataPath }}/tiddlers
+              {{- range .Values.plugins }}
+              mkdir -p {{ $.Values.wiki.dataPath }}/plugins/{{ .name }}
+              cp -r /plugins/{{ .name }}/. {{ $.Values.wiki.dataPath }}/plugins/{{ .name }}/
+              {{- end }}
+              chown -R 65532:65532 {{ .Values.wiki.dataPath }}
+          volumeMounts:
+            - name: wiki-data
+              mountPath: {{ .Values.wiki.dataPath }}
+            {{- range .Values.plugins }}
+            - name: plugin-{{ .name }}
+              mountPath: /plugins/{{ .name }}
+              readOnly: true
+            {{- end }}
+          securityContext:
+            runAsNonRoot: false
+            runAsUser: 0
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+              add: ["CHOWN", "DAC_OVERRIDE"]
+
+      containers:
+        # -------------------------------------------------------
+        # Main: TiddlyWiki server
+        # -------------------------------------------------------
+        - name: tiddlywiki
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          # ENTRYPOINT = ["/nodejs/bin/node", "tiddlywiki.js"] (Dockerfile)
+          args:
+            - {{ .Values.wiki.dataPath | quote }}
+            - "--listen"
+            {{- include "tiddlywiki.listenArgs" . | nindent 12 }}
+
+          ports:
+            - name: http
+              containerPort: {{ .Values.wiki.port }}
+              protocol: TCP
+
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: TIDDLYWIKI_PLUGIN_PATH
+              value: "{{ .Values.wiki.dataPath }}/plugins"
+            - name: TIDDLYWIKI_THEME_PATH
+              value: "{{ .Values.wiki.dataPath }}/themes"
+            - name: TIDDLYWIKI_LANGUAGE_PATH
+              value: "{{ .Values.wiki.dataPath }}/languages"
+            - name: NODE_OPTIONS
+              value: "--max-old-space-size={{ .Values.nodeHeapMb }}"
+            {{- if .Values.otel.enabled }}
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: {{ include "tiddlywiki.otelEndpoint" . | quote }}
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: {{ .Values.otel.protocol | quote }}
+            - name: OTEL_SERVICE_NAME
+              value: {{ .Values.otel.serviceName | quote }}
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: {{ join "," .Values.otel.resourceAttributes | quote }}
+            - name: OTEL_TRACES_EXPORTER
+              value: "otlp"
+            - name: OTEL_METRICS_EXPORTER
+              value: "otlp"
+            - name: OTEL_LOGS_EXPORTER
+              value: "otlp"
+            - name: OTEL_RESOURCE_ATTRIBUTES_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OTEL_RESOURCE_ATTRIBUTES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            {{- end }}
+            {{- with .Values.extraEnv }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+          {{- with .Values.startupProbe }}
+          startupProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- with .Values.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- with .Values.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          volumeMounts:
+            - name: wiki-data
+              mountPath: {{ .Values.wiki.dataPath }}
+            - name: tmp
+              mountPath: /tmp
+            {{- if .Values.auth.credentialsSecret }}
+            - name: credentials
+              mountPath: /secrets
+              readOnly: true
+            {{- end }}
+            {{- with .Values.extraVolumeMounts }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+
+        # -------------------------------------------------------
+        # Sidecar: oauth2-proxy (optional SSO)
+        # Sits in front of TiddlyWiki, handles the OAuth flow,
+        # then forwards requests with X-Auth-Request-User set.
+        # The Service/Ingress targets this port, not TiddlyWiki's.
+        # -------------------------------------------------------
+        {{- if .Values.oauth2Proxy.enabled }}
+        - name: oauth2-proxy
+          image: "{{ .Values.oauth2Proxy.image.repository }}:{{ .Values.oauth2Proxy.image.tag }}"
+          imagePullPolicy: {{ .Values.oauth2Proxy.image.pullPolicy }}
+          args:
+            - "--provider={{ .Values.oauth2Proxy.provider }}"
+            - "--upstream=http://localhost:{{ .Values.wiki.port }}"
+            - "--http-address=0.0.0.0:{{ .Values.oauth2Proxy.port }}"
+            - "--email-domain={{ .Values.oauth2Proxy.emailDomain }}"
+            - "--pass-user-headers=true"
+            - "--set-xauthrequest=true"
+            {{- if .Values.oauth2Proxy.oidcIssuerUrl }}
+            - "--oidc-issuer-url={{ .Values.oauth2Proxy.oidcIssuerUrl }}"
+            {{- end }}
+            {{- if .Values.oauth2Proxy.githubOrg }}
+            - "--github-org={{ .Values.oauth2Proxy.githubOrg }}"
+            {{- end }}
+            {{- if .Values.oauth2Proxy.githubTeam }}
+            - "--github-team={{ .Values.oauth2Proxy.githubTeam }}"
+            {{- end }}
+            {{- range .Values.oauth2Proxy.extraArgs }}
+            - {{ . | quote }}
+            {{- end }}
+          ports:
+            - name: proxy
+              containerPort: {{ .Values.oauth2Proxy.port }}
+              protocol: TCP
+          env:
+            - name: OAUTH2_PROXY_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "tiddlywiki.oauth2SecretName" . }}
+                  key: client-id
+            - name: OAUTH2_PROXY_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "tiddlywiki.oauth2SecretName" . }}
+                  key: client-secret
+            - name: OAUTH2_PROXY_COOKIE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "tiddlywiki.oauth2SecretName" . }}
+                  key: cookie-secret
+          resources:
+            {{- toYaml .Values.oauth2Proxy.resources | nindent 12 }}
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65532
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: proxy
+            periodSeconds: 30
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: proxy
+            periodSeconds: 10
+            failureThreshold: 3
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+        {{- end }}
+
+        # -------------------------------------------------------
+        # Sidecar: OTEL Collector (optional)
+        # -------------------------------------------------------
+        {{- if and .Values.otel.enabled .Values.otel.sidecar.enabled }}
+        - name: otel-collector
+          image: "{{ .Values.otel.sidecar.image.repository }}:{{ .Values.otel.sidecar.image.tag }}"
+          imagePullPolicy: {{ .Values.otel.sidecar.image.pullPolicy }}
+          args:
+            - "--config=/conf/collector.yaml"
+          ports:
+            - name: otlp-grpc
+              containerPort: 4317
+              protocol: TCP
+            - name: otlp-http
+              containerPort: 4318
+              protocol: TCP
+            - name: otel-metrics
+              containerPort: 8888
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.otel.sidecar.resources | nindent 12 }}
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65532
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: otel-collector-config
+              mountPath: /conf
+            - name: tmp
+              mountPath: /tmp
+        {{- end }}
+
+      # -------------------------------------------------------
+      # Volumes
+      # -------------------------------------------------------
+      volumes:
+        - name: wiki-data
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{ else }}{{ include "tiddlywiki.fullname" . }}-data{{ end }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+        - name: tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 64Mi
+        {{- if .Values.auth.credentialsSecret }}
+        - name: credentials
+          secret:
+            secretName: {{ .Values.auth.credentialsSecret }}
+            items:
+              - key: credentials.csv
+                path: credentials.csv
+        {{- end }}
+        {{- if and .Values.otel.enabled .Values.otel.sidecar.enabled }}
+        - name: otel-collector-config
+          configMap:
+            name: {{ include "tiddlywiki.otelCollectorName" . }}-config
+        {{- end }}
+        {{- range .Values.plugins }}
+        - name: plugin-{{ .name }}
+          configMap:
+            name: {{ if .existingConfigMap }}{{ .existingConfigMap }}{{ else }}{{ include "tiddlywiki.fullname" $ }}-plugin-{{ .name }}{{ end }}
+        {{- end }}
+        {{- with .Values.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+
+      terminationGracePeriodSeconds: 30
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

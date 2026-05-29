@@ -1,0 +1,119 @@
+# OpenTelemetry observability values override.
+# Enables a sidecar OTEL Collector that receives OTLP from the app
+# and forwards to your backend (Grafana Cloud, Jaeger, Tempo, etc.)
+#
+# Usage:
+#   helm upgrade --install tiddlywiki ./helm/tiddlywiki \
+#     -f helm/tiddlywiki/values-otel.yaml
+#
+# To add Node.js OTEL auto-instrumentation to the image, install the SDK:
+#   npm install --save @opentelemetry/api \
+#     @opentelemetry/auto-instrumentations-node \
+#     @opentelemetry/exporter-trace-otlp-grpc \
+#     @opentelemetry/exporter-metrics-otlp-grpc
+# Then set NODE_OPTIONS below to --require the initialiser.
+# See: https://opentelemetry.io/docs/languages/js/getting-started/nodejs/
+
+otel:
+  enabled: true
+  protocol: grpc
+  serviceName: tiddlywiki
+
+  resourceAttributes:
+    - "deployment.environment=production"
+    - "service.version=5.4.0"
+
+  sidecar:
+    enabled: true
+    image:
+      repository: otel/opentelemetry-collector-contrib
+      tag: "0.98.0"
+    resources:
+      requests:
+        memory: 64Mi
+        cpu: 50m
+      limits:
+        memory: 128Mi
+        cpu: 200m
+
+    # Customise the collector pipeline to match your backend.
+    config:
+      receivers:
+        otlp:
+          protocols:
+            grpc:
+              endpoint: 0.0.0.0:4317
+            http:
+              endpoint: 0.0.0.0:4318
+        # Scrape Node.js process metrics exposed by the OTEL SDK.
+        prometheus:
+          config:
+            scrape_configs:
+              - job_name: tiddlywiki
+                scrape_interval: 15s
+                static_configs:
+                  - targets: ["localhost:9464"]
+
+      processors:
+        batch:
+          timeout: 5s
+          send_batch_size: 1024
+        memory_limiter:
+          check_interval: 1s
+          limit_mib: 100
+        # Add k8s metadata to all telemetry.
+        k8sattributes:
+          auth_type: serviceAccount
+          passthrough: false
+          extract:
+            metadata:
+              - k8s.pod.name
+              - k8s.pod.uid
+              - k8s.deployment.name
+              - k8s.namespace.name
+              - k8s.node.name
+              - k8s.pod.start_time
+
+      exporters:
+        # --------------------------------------------------------
+        # Replace with your actual backend.
+        # Examples:
+        #
+        # Grafana Cloud OTLP:
+        #   otlp:
+        #     endpoint: https://otlp-gateway-prod-eu-west-0.grafana.net/otlp
+        #     headers:
+        #       authorization: Basic <base64(instanceId:apiKey)>
+        #
+        # Local Jaeger (all-in-one):
+        #   otlp:
+        #     endpoint: http://jaeger:4317
+        #     tls:
+        #       insecure: true
+        #
+        # Prometheus remote write:
+        #   prometheusremotewrite:
+        #     endpoint: http://prometheus:9090/api/v1/write
+        # --------------------------------------------------------
+        debug:
+          verbosity: detailed   # Change to 'basic' or remove in prod
+
+      service:
+        pipelines:
+          traces:
+            receivers: [otlp]
+            processors: [memory_limiter, k8sattributes, batch]
+            exporters: [debug]
+          metrics:
+            receivers: [otlp, prometheus]
+            processors: [memory_limiter, k8sattributes, batch]
+            exporters: [debug]
+          logs:
+            receivers: [otlp]
+            processors: [memory_limiter, batch]
+            exporters: [debug]
+
+# If you've added OTEL SDK instrumentation to the image, enable it here:
+# extraEnv:
+#   - name: NODE_OPTIONS
+#     value: "--require /app/otel-init.js --max-old-space-size=192"

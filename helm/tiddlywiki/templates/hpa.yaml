@@ -1,0 +1,36 @@
+{{- if .Values.autoscaling.enabled -}}
+# NOTE: HPA only makes sense with a ReadWriteMany PVC (NFS, CephFS, EFS, etc.).
+# With ReadWriteOnce storage, multiple pods cannot attach the same PVC —
+# set persistence.accessMode: ReadWriteMany before enabling this.
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "tiddlywiki.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "tiddlywiki.fullname" . }}
+  minReplicas: {{ .Values.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}

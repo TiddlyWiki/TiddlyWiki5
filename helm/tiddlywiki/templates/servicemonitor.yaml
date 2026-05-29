@@ -1,0 +1,38 @@
+{{- if .Values.serviceMonitor.enabled }}
+# Requires the Prometheus Operator CRD (kube-prometheus-stack or standalone).
+# The ServiceMonitor scrapes the OTEL Collector's /metrics endpoint (port 8888)
+# when otel.sidecar.enabled=true, or the wiki's /status as a synthetic metric
+# when the OTEL sidecar is disabled (limited utility in that case).
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "tiddlywiki.fullname" . }}
+  namespace: {{ .Values.serviceMonitor.namespace | default .Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" . | nindent 4 }}
+    {{- with .Values.serviceMonitor.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "tiddlywiki.selectorLabels" . | nindent 6 }}
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
+  endpoints:
+    {{- if and .Values.otel.enabled .Values.otel.sidecar.enabled }}
+    # Scrape OTEL Collector Prometheus exporter (pushed metrics from the app).
+    - port: otel-metrics
+      path: /metrics
+      interval: {{ .Values.serviceMonitor.interval }}
+      scrapeTimeout: {{ .Values.serviceMonitor.scrapeTimeout }}
+    {{- else }}
+    # Scrape /status as a basic up/down health metric.
+    # For richer metrics enable the OTEL sidecar.
+    - port: http
+      path: /status
+      interval: {{ .Values.serviceMonitor.interval }}
+      scrapeTimeout: {{ .Values.serviceMonitor.scrapeTimeout }}
+    {{- end }}
+{{- end }}

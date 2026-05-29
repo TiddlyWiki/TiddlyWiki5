@@ -1,0 +1,24 @@
+apiVersion: v2
+name: tiddlywiki
+description: TiddlyWiki5 personal wiki server
+type: application
+version: 0.1.0
+appVersion: "5.4.0"
+
+keywords:
+  - wiki
+  - tiddlywiki
+  - notes
+
+maintainers:
+  - name: TiddlyWiki Community
+    url: https://tiddlywiki.com
+
+dependencies:
+  # OpenTelemetry Collector sidecar (optional, enabled via values.otel.enabled).
+  # Collects Node.js metrics and traces and forwards to your OTEL backend.
+  - name: opentelemetry-collector
+    version: "0.x.x"
+    repository: "https://open-telemetry.github.io/opentelemetry-helm-charts"
+    condition: otel.collector.enabled
+    alias: otelcollector

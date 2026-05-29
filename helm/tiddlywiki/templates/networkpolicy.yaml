@@ -1,0 +1,48 @@
+{{- if .Values.networkPolicy.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "tiddlywiki.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "tiddlywiki.selectorLabels" . | nindent 6 }}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    # Allow traffic from the nginx Ingress controller namespace.
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+      ports:
+        - port: {{ .Values.wiki.port }}
+          protocol: TCP
+    {{- if and .Values.otel.enabled .Values.otel.sidecar.enabled }}
+    # Allow OTEL traffic within the pod (sidecar uses localhost; no network policy needed).
+    # If using an external collector, add its namespace/pod selector here.
+    {{- end }}
+  egress:
+    # Allow DNS resolution.
+    - ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+    # Allow HTTPS for any outbound calls (e.g. OTEL backend).
+    - ports:
+        - port: 443
+          protocol: TCP
+    {{- if and .Values.otel.enabled (not .Values.otel.sidecar.enabled) }}
+    # Allow OTLP to external collector.
+    - ports:
+        - port: 4317
+          protocol: TCP
+        - port: 4318
+          protocol: TCP
+    {{- end }}
+{{- end }}

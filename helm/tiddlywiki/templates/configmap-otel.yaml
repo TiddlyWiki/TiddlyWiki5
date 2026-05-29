@@ -1,0 +1,12 @@
+{{- if and .Values.otel.enabled .Values.otel.sidecar.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "tiddlywiki.otelCollectorName" . }}-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" . | nindent 4 }}
+data:
+  collector.yaml: |
+    {{- toYaml .Values.otel.sidecar.config | nindent 4 }}
+{{- end }}

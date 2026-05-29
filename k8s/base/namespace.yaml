@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tiddlywiki
+  labels:
+    app.kubernetes.io/name: tiddlywiki
+    # Pod Security Standards (Kubernetes 1.23+): enforce the restricted profile.
+    # This requires all pods to use non-root, no privilege escalation,
+    # dropped capabilities, and seccompProfile RuntimeDefault.
+    # The Deployment security context below satisfies all constraints.
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/enforce-version: latest
+    pod-security.kubernetes.io/warn: restricted
+    pod-security.kubernetes.io/warn-version: latest
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/audit-version: latest

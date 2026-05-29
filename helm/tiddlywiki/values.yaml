@@ -1,0 +1,455 @@
+# Default values for tiddlywiki Helm chart.
+# Override with: helm install tiddlywiki ./helm/tiddlywiki -f my-values.yaml
+
+# -- Container image settings
+image:
+  repository: ghcr.io/mibmal/tiddlywiki5
+  tag: "latest"
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+
+# -- Number of replicas.
+# NOTE: TiddlyWiki writes tiddlers directly to disk with no distributed
+# locking. With replicaCount > 1 you MUST use a ReadWriteMany storage
+# class (NFS, CephFS, AWS EFS, etc.). See values-ha.yaml.
+replicaCount: 1
+
+# =============================================================================
+# TiddlyWiki server configuration
+# =============================================================================
+wiki:
+  # -- Path inside the container to serve.
+  # /app/editions/server = bundled demo (no PVC needed, resets on upgrade).
+  # /data/wiki           = persistent user wiki (requires PVC).
+  dataPath: /data/wiki
+
+  # -- Server port (container-internal)
+  port: 8080
+
+  # -- URL path prefix if hosting under a sub-path (e.g. "/wiki")
+  pathPrefix: ""
+
+  # -- Enable gzip compression of responses
+  gzip: true
+
+  # -- Enable ETags / browser caching (reduces bandwidth on re-visits)
+  browserCache: true
+
+  # -- Extra --listen key=value args appended verbatim
+  extraListenArgs: []
+  # - "debug-level=none"
+  # - "root-tiddler=$:/core/save/all"
+
+# =============================================================================
+# Authentication & Authorization
+# =============================================================================
+auth:
+  # -- Enable authentication. When false, the wiki is fully public (no login).
+  enabled: false
+
+  # -- Single built-in user. Ignored when credentialsSecret is set.
+  username: ""
+  password: ""
+
+  # -- Reference a pre-existing Secret containing a credentials CSV file.
+  # The Secret must have a key named "credentials.csv" with columns
+  # "username" and "password" (plaintext — use oauth2-proxy for real SSO).
+  # Create it with:
+  #   kubectl create secret generic wiki-credentials \
+  #     --from-file=credentials.csv=./credentials.csv
+  credentialsSecret: ""
+
+  # -- Comma-separated list of users (or "(anon)", "(authenticated)") allowed to read.
+  readers: "(authenticated)"
+
+  # -- Comma-separated list of users allowed to write.
+  writers: "(authenticated)"
+
+  # -- Comma-separated admin users (optional).
+  admin: ""
+
+  # -- Username shown for anonymous visitors.
+  anonUsername: "anonymous"
+
+  # -- If oauth2-proxy (or another trusted reverse proxy) is in use, TiddlyWiki
+  # will read the authenticated username from this header instead of Basic Auth.
+  # oauth2-proxy emits "X-Auth-Request-User" by default.
+  # Set this when oauth2Proxy.enabled = true (done automatically).
+  trustedHeader: ""
+
+# =============================================================================
+# oauth2-proxy sidecar (SSO via Google, GitHub, Okta, any OIDC provider)
+# =============================================================================
+# Flow: browser → oauth2-proxy (port 4180) → TiddlyWiki (port 8080)
+# oauth2-proxy handles the OAuth dance, then forwards requests with
+# X-Auth-Request-User set to the authenticated user's email/login.
+# TiddlyWiki reads that header and treats the user as authenticated.
+# The Service and Ingress point at port 4180, not 8080.
+oauth2Proxy:
+  enabled: false
+
+  image:
+    repository: quay.io/oauth2-proxy/oauth2-proxy
+    tag: "v7.6.0"
+    pullPolicy: IfNotPresent
+
+  # -- OAuth provider: google, github, oidc, gitlab, azure, etc.
+  provider: github
+
+  # -- Client credentials — reference a Secret rather than putting them in values.
+  # Create with:
+  #   kubectl create secret generic wiki-oauth2 \
+  #     --from-literal=client-id=YOUR_ID \
+  #     --from-literal=client-secret=YOUR_SECRET \
+  #     --from-literal=cookie-secret=$(openssl rand -base64 32)
+  existingSecret: ""
+
+  # -- Inline credentials (less secure — prefer existingSecret in prod)
+  clientId: ""
+  clientSecret: ""
+  # -- Cookie encryption key. Generate: openssl rand -base64 32
+  cookieSecret: ""
+
+  # -- OIDC issuer URL (required when provider=oidc)
+  oidcIssuerUrl: ""
+
+  # -- Restrict login to users from this email domain (e.g. "example.com").
+  # Leave empty to allow any authenticated user.
+  emailDomain: "*"
+
+  # -- GitHub org/team restriction (provider=github only)
+  githubOrg: ""
+  githubTeam: ""
+
+  # -- Header oauth2-proxy sets on forwarded requests.
+  # Must match auth.trustedHeader in TiddlyWiki config.
+  upstreamHeader: "X-Auth-Request-User"
+
+  # -- Port oauth2-proxy listens on (becomes the Service/Ingress target port).
+  port: 4180
+
+  # -- Extra args passed to oauth2-proxy
+  extraArgs: []
+  # - "--cookie-secure=true"
+  # - "--cookie-samesite=lax"
+  # - "--reverse-proxy=true"
+
+  resources:
+    requests:
+      memory: 32Mi
+      cpu: 20m
+    limits:
+      memory: 64Mi
+      cpu: 100m
+
+# =============================================================================
+# Plugin injection via ConfigMap
+# =============================================================================
+# Mount custom TiddlyWiki plugins from a ConfigMap without rebuilding the image.
+# Each entry creates a ConfigMap (from inline data) and mounts it under
+# TIDDLYWIKI_PLUGIN_PATH so TiddlyWiki discovers it at startup.
+#
+# Alternatively, set existingConfigMap to reference a pre-created ConfigMap.
+#
+# Example — a minimal custom plugin:
+# plugins:
+#   - name: my-banner
+#     existingConfigMap: my-banner-plugin   # pre-created ConfigMap
+#   - name: dark-toolbar
+#     data:
+#       plugin.info: |
+#         {"title":"$:/plugins/custom/dark-toolbar","name":"Dark Toolbar","description":"Dark toolbar theme fix"}
+#       dark-toolbar.tid: |
+#         title: $:/plugins/custom/dark-toolbar/styles
+#         tags: $:/tags/Stylesheet
+#         .tc-topbar { background: #1a1a2e; }
+plugins: []
+
+# =============================================================================
+# Git sync backup CronJob
+# =============================================================================
+# Commits and pushes /data/wiki to a git remote on a schedule.
+# Gives you a full audit trail and off-site backup with no extra infra.
+# Requires a Secret with a deploy key or HTTPS token.
+gitSync:
+  enabled: false
+
+  # -- Cron schedule (default: every hour)
+  schedule: "0 * * * *"
+
+  # -- Git remote URL (SSH or HTTPS)
+  # SSH:   git@github.com:youruser/wiki-backup.git
+  # HTTPS: https://github.com/youruser/wiki-backup.git
+  repoUrl: ""
+
+  # -- Git branch to push to
+  branch: main
+
+  # -- Commit author identity
+  authorName: "TiddlyWiki Backup"
+  authorEmail: "backup@tiddlywiki.local"
+
+  # -- Secret containing SSH key or HTTPS credentials.
+  # For SSH:   kubectl create secret generic wiki-git-ssh --from-file=id_rsa=./deploy_key
+  # For HTTPS: kubectl create secret generic wiki-git-https \
+  #              --from-literal=GIT_USERNAME=youruser \
+  #              --from-literal=GIT_PASSWORD=ghp_token
+  existingSecret: ""
+
+  # -- Secret key holding the SSH private key (for SSH remotes)
+  sshKeySecretKey: "id_rsa"
+
+  image:
+    repository: alpine/git
+    tag: "2.43.0"
+    pullPolicy: IfNotPresent
+
+  resources:
+    requests:
+      memory: 32Mi
+      cpu: 20m
+    limits:
+      memory: 64Mi
+      cpu: 100m
+
+# =============================================================================
+# VolumeSnapshot backup CronJob
+# =============================================================================
+# Creates a CSI VolumeSnapshot of the wiki PVC on a schedule.
+# Requires a CSI driver that supports VolumeSnapshots (most cloud providers do).
+volumeSnapshotBackup:
+  enabled: false
+
+  # -- Cron schedule (default: 2am daily)
+  schedule: "0 2 * * *"
+
+  # -- VolumeSnapshotClass to use. Leave empty for the cluster default.
+  snapshotClass: ""
+
+  # -- How many snapshots to keep (older ones are deleted)
+  retentionCount: 7
+
+  image:
+    repository: bitnami/kubectl
+    tag: "latest"
+    pullPolicy: IfNotPresent
+
+  resources:
+    requests:
+      memory: 32Mi
+      cpu: 20m
+    limits:
+      memory: 64Mi
+      cpu: 100m
+
+# =============================================================================
+# Kubernetes Service
+# =============================================================================
+service:
+  type: ClusterIP
+  # -- Exposed port. When oauth2Proxy.enabled, traffic enters via proxy port.
+  port: 80
+
+# =============================================================================
+# Ingress
+# =============================================================================
+ingress:
+  enabled: false
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      add_header X-Frame-Options "SAMEORIGIN" always;
+      add_header X-Content-Type-Options "nosniff" always;
+      add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: wiki.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+  # - secretName: tiddlywiki-tls
+  #   hosts:
+  #     - wiki.example.com
+
+# =============================================================================
+# Persistent storage for wiki data
+# =============================================================================
+persistence:
+  enabled: true
+  existingClaim: ""
+  storageClass: ""
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  annotations:
+    helm.sh/resource-policy: keep
+
+# =============================================================================
+# Resources, scaling, security
+# =============================================================================
+resources:
+  requests:
+    memory: 128Mi
+    cpu: 100m
+  limits:
+    memory: 256Mi
+    cpu: 500m
+
+# -- Node.js V8 heap cap (MiB). Keep at ~75% of memory limit.
+nodeHeapMb: 192
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 65532
+  runAsGroup: 65532
+  fsGroup: 65532
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop: ["ALL"]
+  seccompProfile:
+    type: RuntimeDefault
+
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+# =============================================================================
+# Probes — using /status (JSON, cheap) instead of / (full HTML render)
+# =============================================================================
+startupProbe:
+  httpGet:
+    path: /status
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  failureThreshold: 6
+
+livenessProbe:
+  httpGet:
+    path: /status
+    port: http
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /status
+    port: http
+  periodSeconds: 10
+  timeoutSeconds: 3
+  failureThreshold: 3
+
+# =============================================================================
+# Scheduling
+# =============================================================================
+nodeSelector: {}
+tolerations: []
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - tiddlywiki
+          topologyKey: kubernetes.io/hostname
+
+# =============================================================================
+# Misc
+# =============================================================================
+extraEnv: []
+extraVolumes: []
+extraVolumeMounts: []
+
+strategy:
+  type: Recreate
+
+podAnnotations: {}
+
+serviceAccount:
+  create: true
+  name: ""
+  annotations: {}
+
+networkPolicy:
+  enabled: false
+
+# -- Prometheus Operator ServiceMonitor
+serviceMonitor:
+  enabled: false
+  # -- Namespace where the Prometheus Operator is running (if different)
+  namespace: ""
+  interval: 30s
+  scrapeTimeout: 10s
+  labels: {}
+
+# =============================================================================
+# OpenTelemetry Metrics & Tracing
+# =============================================================================
+otel:
+  enabled: false
+  endpoint: ""
+  protocol: grpc
+  serviceName: tiddlywiki
+  resourceAttributes: []
+  # - "deployment.environment=production"
+
+  sidecar:
+    enabled: false
+    image:
+      repository: otel/opentelemetry-collector-contrib
+      tag: "0.98.0"
+      pullPolicy: IfNotPresent
+    resources:
+      requests:
+        memory: 64Mi
+        cpu: 50m
+      limits:
+        memory: 128Mi
+        cpu: 200m
+    config:
+      receivers:
+        otlp:
+          protocols:
+            grpc:
+              endpoint: 0.0.0.0:4317
+            http:
+              endpoint: 0.0.0.0:4318
+      processors:
+        batch:
+          timeout: 5s
+        memory_limiter:
+          check_interval: 1s
+          limit_mib: 100
+      exporters:
+        debug:
+          verbosity: basic
+      service:
+        pipelines:
+          traces:
+            receivers: [otlp]
+            processors: [memory_limiter, batch]
+            exporters: [debug]
+          metrics:
+            receivers: [otlp]
+            processors: [memory_limiter, batch]
+            exporters: [debug]

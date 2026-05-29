@@ -1,0 +1,18 @@
+{{- range .Values.plugins }}
+{{- if and (not .existingConfigMap) .data }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "tiddlywiki.fullname" $ }}-plugin-{{ .name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: plugin
+data:
+  {{- range $filename, $content := .data }}
+  {{ $filename }}: |
+    {{- $content | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- end }}

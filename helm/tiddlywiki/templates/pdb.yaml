@@ -1,0 +1,17 @@
+{{- if .Values.podDisruptionBudget.enabled -}}
+# PodDisruptionBudget ensures at least minAvailable pods remain during
+# voluntary disruptions (node drains, rolling upgrades).
+# Only meaningful with replicaCount > 1.
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "tiddlywiki.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" . | nindent 4 }}
+spec:
+  minAvailable: {{ .Values.podDisruptionBudget.minAvailable }}
+  selector:
+    matchLabels:
+      {{- include "tiddlywiki.selectorLabels" . | nindent 6 }}
+{{- end }}

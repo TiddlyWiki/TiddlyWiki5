@@ -1,0 +1,164 @@
+{{- if .Values.gitSync.enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "tiddlywiki.fullname" . }}-git-sync
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "tiddlywiki.labels" . | nindent 4 }}
+    app.kubernetes.io/component: git-sync
+spec:
+  schedule: {{ .Values.gitSync.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "tiddlywiki.selectorLabels" . | nindent 12 }}
+            app.kubernetes.io/component: git-sync
+        spec:
+          restartPolicy: OnFailure
+
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
+            fsGroup: 65532
+            seccompProfile:
+              type: RuntimeDefault
+
+          initContainers:
+            # Fix ownership of the SSH key mount (git requires 600 perms).
+            - name: fix-ssh-perms
+              image: busybox:1.36-musl
+              command:
+                - sh
+                - -c
+                - |
+                  cp /ssh-ro/id_rsa /ssh/id_rsa
+                  chmod 600 /ssh/id_rsa
+              volumeMounts:
+                - name: ssh-key-ro
+                  mountPath: /ssh-ro
+                  readOnly: true
+                - name: ssh-key-rw
+                  mountPath: /ssh
+              securityContext:
+                runAsNonRoot: false
+                runAsUser: 0
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop: ["ALL"]
+                  add: ["CHOWN", "DAC_OVERRIDE"]
+
+          containers:
+            - name: git-sync
+              image: "{{ .Values.gitSync.image.repository }}:{{ .Values.gitSync.image.tag }}"
+              imagePullPolicy: {{ .Values.gitSync.image.pullPolicy }}
+              command:
+                - sh
+                - -c
+                - |
+                  set -e
+                  WIKI_PATH="{{ .Values.wiki.dataPath }}"
+                  REPO_URL="{{ .Values.gitSync.repoUrl }}"
+                  BRANCH="{{ .Values.gitSync.branch }}"
+
+                  # Configure git identity
+                  git config --global user.name  "{{ .Values.gitSync.authorName }}"
+                  git config --global user.email "{{ .Values.gitSync.authorEmail }}"
+                  git config --global --add safe.directory "$WIKI_PATH"
+
+                  cd "$WIKI_PATH"
+
+                  # Initialise repo if not already a git repo
+                  if [ ! -d .git ]; then
+                    git init -b "$BRANCH"
+                    git remote add origin "$REPO_URL"
+                  fi
+
+                  # Stage all changes
+                  git add -A
+
+                  # Only commit if there are changes
+                  if git diff --cached --quiet; then
+                    echo "No changes to commit."
+                    exit 0
+                  fi
+
+                  TIMESTAMP=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
+                  CHANGES=$(git diff --cached --stat | tail -1)
+                  git commit -m "backup: $TIMESTAMP — $CHANGES"
+
+                  # Push (SSH or HTTPS depending on remote URL)
+                  {{- if hasPrefix "git@" .Values.gitSync.repoUrl }}
+                  GIT_SSH_COMMAND="ssh -i /ssh/id_rsa -o StrictHostKeyChecking=no" \
+                    git push origin "$BRANCH"
+                  {{- else }}
+                  git push \
+                    "https://${GIT_USERNAME}:${GIT_PASSWORD}@$(echo "$REPO_URL" | sed 's|https://||')" \
+                    "$BRANCH"
+                  {{- end }}
+
+                  echo "Backup pushed successfully."
+              env:
+                {{- if not (hasPrefix "git@" .Values.gitSync.repoUrl) }}
+                - name: GIT_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ include "tiddlywiki.gitSyncSecretName" . }}
+                      key: GIT_USERNAME
+                - name: GIT_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ include "tiddlywiki.gitSyncSecretName" . }}
+                      key: GIT_PASSWORD
+                {{- end }}
+              resources:
+                {{- toYaml .Values.gitSync.resources | nindent 16 }}
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 65532
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: false  # git needs to write .git/
+                capabilities:
+                  drop: ["ALL"]
+              volumeMounts:
+                - name: wiki-data
+                  mountPath: {{ .Values.wiki.dataPath }}
+                {{- if hasPrefix "git@" .Values.gitSync.repoUrl }}
+                - name: ssh-key-rw
+                  mountPath: /ssh
+                - name: tmp
+                  mountPath: /tmp
+                {{- end }}
+
+          volumes:
+            - name: wiki-data
+              {{- if .Values.persistence.enabled }}
+              persistentVolumeClaim:
+                claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{ else }}{{ include "tiddlywiki.fullname" . }}-data{{ end }}
+              {{- else }}
+              emptyDir: {}
+              {{- end }}
+            {{- if hasPrefix "git@" .Values.gitSync.repoUrl }}
+            - name: ssh-key-ro
+              secret:
+                secretName: {{ include "tiddlywiki.gitSyncSecretName" . }}
+                items:
+                  - key: {{ .Values.gitSync.sshKeySecretKey }}
+                    path: id_rsa
+            - name: ssh-key-rw
+              emptyDir:
+                medium: Memory
+                sizeLimit: 8Mi
+            - name: tmp
+              emptyDir:
+                medium: Memory
+                sizeLimit: 32Mi
+            {{- end }}
+{{- end }}

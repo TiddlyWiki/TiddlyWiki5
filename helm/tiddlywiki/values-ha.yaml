@@ -1,0 +1,72 @@
+# High-availability values override.
+# Prerequisites:
+#   - A ReadWriteMany storage class (NFS, CephFS, AWS EFS, etc.)
+#   - Enough cluster nodes for pod anti-affinity to spread replicas
+#
+# Usage:
+#   helm upgrade --install tiddlywiki ./helm/tiddlywiki \
+#     -f helm/tiddlywiki/values-ha.yaml \
+#     --set image.tag=v5.4.0
+
+replicaCount: 2
+
+# Must be RWX for multiple pods to attach the same PVC simultaneously.
+persistence:
+  accessMode: ReadWriteMany
+  storageClass: nfs-client    # Replace with your RWX storage class
+  size: 10Gi
+
+# Recreate is wrong for HA — use RollingUpdate so one pod is always serving.
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 0
+    maxSurge: 1
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 200m
+  limits:
+    memory: 512Mi
+    cpu: 1000m
+
+nodeHeapMb: 384
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+# Spread replicas across zones for zone HA.
+affinity:
+  podAntiAffinity:
+    # Hard anti-affinity: never two pods on the same node.
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+                - tiddlywiki
+        topologyKey: kubernetes.io/hostname
+    # Prefer spreading across availability zones.
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - tiddlywiki
+          topologyKey: topology.kubernetes.io/zone
+
+networkPolicy:
+  enabled: true
