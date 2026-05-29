@@ -14,8 +14,10 @@ module.exports = defineConfig({
   // Prevent accidentally committed "test.only" from wrecking havoc
   forbidOnly: !!process.env.CI,
 
-  // Do not retry tests on failure
-  retries: 0,
+  // Retry on CI to absorb flaky browser-timing failures (e.g. the in-browser
+  // jasmine results bar occasionally not rendering within the timeout under
+  // Firefox); run without retries locally.
+  retries: process.env.CI ? 2 : 0,
 
   // How many parallel workers
   workers: process.env.CI ? 1 : undefined,

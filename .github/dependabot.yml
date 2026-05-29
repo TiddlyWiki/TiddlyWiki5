@@ -1,0 +1,28 @@
+version: 2
+updates:
+  # Keep GitHub Actions (incl. their Node runtime) current — auto-PRs for
+  # deprecations like the Node 20 -> 24 runner change.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # Base image used by the Dockerfile / Helm chart.
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # npm dependencies (TiddlyWiki plugins/test tooling). Grouped to reduce noise;
+  # upstream-sync handles core TiddlyWiki itself.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      npm-dev:
+        dependency-type: "development"

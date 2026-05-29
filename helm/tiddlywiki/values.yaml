@@ -407,6 +407,11 @@ serviceMonitor:
 # =============================================================================
 otel:
   enabled: false
+  # Gates the aliased opentelemetry-collector subchart (Chart.yaml condition:
+  # otel.collector.enabled). Off by default so the subchart isn't templated
+  # (and doesn't require its image.repository) unless OTel is explicitly enabled.
+  collector:
+    enabled: false
   endpoint: ""
   protocol: grpc
   serviceName: tiddlywiki

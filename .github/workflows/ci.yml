@@ -21,40 +21,10 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-  docker-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run Playwright tests
-        uses: docker/build-push-action@v5.1.0
-        with:
-          push: false
-          target: playwright-tests
-          context: .
-      - name: Run Jasmine tests
-        uses: docker/build-push-action@v5.1.0
-        with:
-          push: false
-          target: jasmine-tests
-          context: .
-  build-docker-image:
-    needs: docker-tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Log into registry
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v5.1.0
-        with:
-          push: true
-          context: .
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/tiddlywiki:latest
+  # NOTE: the former docker-tests (Playwright/Jasmine run inside a Docker build)
+  # and build-docker-image (DockerHub publish) jobs were removed. The container
+  # image is now built and published to GHCR by ghcr-publish.yml, and unit tests
+  # run in the `test` job above. This drops a flaky, slow, DockerHub-coupled path.
   build-prerelease:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'

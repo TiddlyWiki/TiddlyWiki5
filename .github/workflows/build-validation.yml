@@ -1,0 +1,80 @@
+name: Build validation
+
+# Replaces the old flaky docker-tests/build-docker-image jobs with fast,
+# deterministic checks suited to this fork's additions:
+#  1. the container image's `run` stage actually builds and the server starts
+#  2. the Helm chart lints and templates cleanly
+# (TiddlyWiki's own unit/browser tests still run in ci.yml's `test` job.)
+
+on:
+  pull_request:
+    paths:
+      - "Dockerfile"
+      - "helm/**"
+      - "package.json"
+      - ".github/workflows/build-validation.yml"
+  push:
+    branches: [master]
+    paths:
+      - "Dockerfile"
+      - "helm/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  docker-build:
+    name: Docker image builds and serves
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3.11.1
+
+      - name: Build run stage
+        uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
+        with:
+          context: .
+          target: run
+          push: false
+          load: true
+          tags: tiddlywiki5:ci
+
+      - name: Smoke test — server starts and responds
+        run: |
+          docker run -d --name tw -p 8080:8080 tiddlywiki5:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:8080/ >/dev/null 2>&1; then
+              echo "TiddlyWiki server responded"; docker rm -f tw; exit 0
+            fi
+            sleep 2
+          done
+          echo "Server did not respond in time"; docker logs tw; docker rm -f tw; exit 1
+
+  helm-lint:
+    name: Helm chart lints and templates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install Helm
+        uses: azure/setup-helm@b9e51907a09c216f16ebe8536097933489208112 # v4.3.0
+        with:
+          version: "v3.16.4"
+
+      - name: Build chart dependencies
+        run: helm dependency build helm/tiddlywiki
+
+      - name: Lint chart
+        run: helm lint helm/tiddlywiki
+
+      - name: Template chart (default + HA values)
+        run: |
+          helm template tw helm/tiddlywiki >/dev/null
+          helm template tw helm/tiddlywiki -f helm/tiddlywiki/values-ha.yaml >/dev/null
+          # NOTE: values-otel.yaml pulls the opentelemetry-collector subchart,
+          # whose recent versions changed required values. OTel is an optional,
+          # off-by-default feature, so it is not part of the gating template
+          # check. Validate it manually when changing the otel integration.

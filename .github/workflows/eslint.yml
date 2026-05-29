@@ -20,18 +20,18 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
         run: npm install --include=dev
 
       - name: Run ESLint with reviewdog (GitHub Checks)
-        uses: reviewdog/action-eslint@v1
+        uses: reviewdog/action-eslint@2fee6dd72a5419ff4113f694e2068d2a03bb35dd # v1.33.2
         with:
           eslint_flags: '.'
           reporter: github-pr-check

@@ -14,6 +14,14 @@
 # Then set NODE_OPTIONS below to --require the initialiser.
 # See: https://opentelemetry.io/docs/languages/js/getting-started/nodejs/
 
+# Values for the aliased opentelemetry-collector subchart (Chart.yaml alias:
+# otelcollector). Recent chart versions require image.repository and mode to be
+# set explicitly, otherwise templating fails.
+otelcollector:
+  mode: deployment
+  image:
+    repository: otel/opentelemetry-collector-contrib
+
 otel:
   enabled: true
   protocol: grpc
