@@ -366,7 +366,7 @@ These are significant improvements that will benefit a broad range of users, and
 	<$list filter="[enlist<release-github-contributors>sort[]]" variable="username">
 		<li>
 			<a href={{{ [[https://github.com/]addsuffix<username>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">
-				<span class="doc-github-contributor-avatar"><img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=64]] }}} width="64" height="64"/></span>
+				<span class="doc-github-contributor-avatar"><img src={{{ [[https://avatars.githubusercontent.com/]addsuffix<username>addsuffix[?size=64]] }}} width="64" height="64"/></span>
 				<span class="doc-github-contributor-username">@<$text text=<<username>>/></span>
 			</a>
 		</li>
