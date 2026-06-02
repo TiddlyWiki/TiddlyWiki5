@@ -339,6 +339,7 @@ class CodeMirrorSimpleEngine {
 		this._completionSources = [];
 		this._eventHandlers = {};
 		this._destroyed = false;
+		this._hasFocus = false;
 
 		var extensions = [];
 
@@ -850,8 +851,12 @@ class CodeMirrorSimpleEngine {
 				if(update.docChanged) {
 					self._handleInput();
 				}
-				if(update.focusChanged && update.view.hasFocus) {
-					self._handleFocus();
+				if(update.focusChanged) {
+					var nowFocused = update.view.hasFocus;
+					if(nowFocused && !self._hasFocus) {
+						self._handleFocus();
+					}
+					self._hasFocus = nowFocused;
 				}
 			})
 		);

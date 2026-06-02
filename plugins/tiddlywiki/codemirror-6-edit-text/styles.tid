@@ -347,8 +347,6 @@ html body .tc-edit-field-add > em.tc-edit {
 /* Field name wrapper has fixed width */
 html body .tc-edit-field-add > .tc-edit-field-add-name-wrapper {
 	flex: 0 0 auto;
-	display: inline-flex;
-	align-items: center;
 }
 
 /* Keyboard wrapper inside name wrapper */
