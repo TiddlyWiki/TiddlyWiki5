@@ -32,23 +32,18 @@ TagIndexer.prototype.rebuild = function() {
 };
 
 TagIndexer.prototype.update = function(updateDescriptor) {
-	var newTid = updateDescriptor.new.tiddler;
-	var oldTid = updateDescriptor.old.tiddler;
-	var newFields = newTid && newTid.fields;
-	var oldFields = oldTid && oldTid.fields;
-	var newHasNoTags = newFields && newFields.tags === undefined;
-	var oldHasNoTags = !oldTid || (oldFields && oldFields.tags === undefined);
-
-	if(newHasNoTags && oldHasNoTags) {
-		// Neither old nor new tiddler has tags, but the list field may have
-		// changed which affects sort order for tiddlers tagged with this title
-		var newList = newFields ? newFields.list : undefined;
-		var oldList = oldFields ? oldFields.list : undefined;
-		if($tw.utils.isArrayEqual(newList, oldList)) {
-			return;
-		}
+	var newFields = updateDescriptor.new.tiddler && updateDescriptor.new.tiddler.fields,
+		oldFields = updateDescriptor.old.tiddler && updateDescriptor.old.tiddler.fields,
+		tagsChanged = !$tw.utils.isArrayEqual(newFields && newFields.tags,oldFields && oldFields.tags),
+		listChanged = !$tw.utils.isArrayEqual(newFields && newFields.list,oldFields && oldFields.list);
+	// The tag index depends only on each tiddler's `tags` field (which tag
+	// buckets it belongs to) and the `list` field of tag tiddlers (the order of
+	// their tagged members). If neither changed, the index is unaffected, so we
+	// skip invalidation. This avoids a full index rebuild on every keystroke
+	// while editing a tagged tiddler.
+	if(!tagsChanged && !listChanged) {
+		return;
 	}
-
 	$tw.utils.each(this.subIndexers,function(subIndexer) {
 		subIndexer.update(updateDescriptor);
 	});
@@ -70,9 +65,6 @@ TagSubIndexer.prototype.addIndexMethod = function() {
 TagSubIndexer.prototype.rebuild = function() {
 	var self = this;
 	// Hashmap by tag of array of {isSorted:, titles:[]}
-
-const t0 = $tw.utils.timer(); // eslint-disable-line @stylistic/indent
-
 	this.index = Object.create(null);
 	// Add all the tags
 	this.indexer.wiki[this.iteratorMethod](function(tiddler,title) {
@@ -84,9 +76,6 @@ const t0 = $tw.utils.timer(); // eslint-disable-line @stylistic/indent
 			}
 		});
 	});
-
-console.log("--------------- ", $tw.utils.timer(t0), this.iteratorMethod); // eslint-disable-line @stylistic/indent
-
 };
 
 TagSubIndexer.prototype.update = function(updateDescriptor) {
