@@ -1,0 +1,16 @@
+caption: 説明リスト
+created: 20131205160424246
+modified: 20260221103246354
+original-modified: 20251229110936191
+tags: WikiText
+title: Description Lists in WikiText
+ja-title: Wikiテキストでの説明リスト
+type: text/vnd.tiddlywiki
+
+HTML説明リスト(<abbr title="またの名を">別名</abbr> 定義リスト)は次の構文で作成できます:
+
+<<wikitext-example src:"; 説明する用語
+: その用語の説明/定義
+; 別の用語
+: 別の説明/定義
+">>

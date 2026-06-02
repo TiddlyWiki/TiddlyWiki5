@@ -19,6 +19,7 @@ type: text/vnd.tiddlywiki
 !! Update Readmes and release note
 
 # Edit `package.json` to the new version number
+# Run `npm install` to update the `package-lock.json` file
 # Run `./bin/readme-bld.sh` to build the readme files
 # Commit the new readme files to ''master''
 # Restore `package.json` to the previous version number
