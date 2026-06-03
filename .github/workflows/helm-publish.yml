@@ -34,31 +34,49 @@ jobs:
         with:
           version: "v3.16.4"
 
-      # chart-releaser packages charts found in ./helm/ and updates the Helm
-      # repo index on the gh-pages branch so the repo doubles as a Helm chart
-      # repository.
+      # Publish the chart to the gh-pages branch by hand instead of using
+      # chart-releaser. chart-releaser insists on creating a GitHub Release +
+      # tag per version, which this repo blocks: immutable releases reject the
+      # asset upload ("422 Cannot upload assets to an immutable release"), and
+      # the repository ruleset restricts ref creation ("Cannot create ref due
+      # to creations being restricted"). gh-pages is not covered by the ruleset
+      # (it targets ~DEFAULT_BRANCH only), so a plain git push works.
       #
-      # packages_with_index: host the packaged .tgz IN the gh-pages branch
-      # alongside index.yaml, instead of attaching it as a GitHub Release asset.
-      # GitHub immutable releases freeze assets at creation time, so the
-      # default create-release-then-upload-asset flow fails with
-      # "422 Cannot upload assets to an immutable release". Hosting the package
-      # on gh-pages sidesteps releases entirely and keeps the install URL the same.
+      # We package the chart, host the .tgz on gh-pages next to index.yaml, and
+      # regenerate index.yaml with mibmal.github.io URLs. Idempotent: re-running
+      # the same version just re-publishes identical files.
       #
       # Usage after setup:
       #   helm repo add mibmal https://mibmal.github.io/TiddlyWiki5
       #   helm repo update
       #   helm install tiddlywiki mibmal/tiddlywiki
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
-        with:
-          charts_dir: helm
-          packages_with_index: true
-          pages_branch: gh-pages
-          # Skip already-released chart versions instead of failing.
-          skip_existing: true
+      - name: Build chart dependencies
+        run: helm dependency build helm/tiddlywiki
+
+      - name: Package chart and publish to gh-pages
         env:
-          CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAGES_URL: https://mibmal.github.io/TiddlyWiki5
+        run: |
+          set -euo pipefail
+          CHART_VERSION=$(awk '/^version:/{print $2; exit}' helm/tiddlywiki/Chart.yaml)
+          helm package helm/tiddlywiki --destination /tmp/pkg
+
+          # Work on a clean checkout of gh-pages (unprotected by the ruleset).
+          git fetch origin gh-pages
+          git worktree add /tmp/ghp origin/gh-pages
+
+          cp /tmp/pkg/*.tgz /tmp/ghp/
+          # Merge with the existing index so older versions stay installable.
+          helm repo index /tmp/ghp --url "$PAGES_URL" --merge /tmp/ghp/index.yaml
+
+          cd /tmp/ghp
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "Publish tiddlywiki chart ${CHART_VERSION} [skip ci]"
+            git push origin HEAD:gh-pages
+          else
+            echo "No changes to publish."
+          fi
 
       # Also push the chart to GHCR as an OCI artifact (uses GITHUB_TOKEN, no
       # external secrets). Alternative install method:
