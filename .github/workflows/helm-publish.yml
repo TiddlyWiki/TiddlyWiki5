@@ -34,10 +34,16 @@ jobs:
         with:
           version: "v3.16.4"
 
-      # chart-releaser packages charts found in ./helm/,
-      # pushes releases to GitHub Releases, and updates the
-      # index on the gh-pages branch so the repo doubles as a
-      # Helm chart repository.
+      # chart-releaser packages charts found in ./helm/ and updates the Helm
+      # repo index on the gh-pages branch so the repo doubles as a Helm chart
+      # repository.
+      #
+      # packages_with_index: host the packaged .tgz IN the gh-pages branch
+      # alongside index.yaml, instead of attaching it as a GitHub Release asset.
+      # GitHub immutable releases freeze assets at creation time, so the
+      # default create-release-then-upload-asset flow fails with
+      # "422 Cannot upload assets to an immutable release". Hosting the package
+      # on gh-pages sidesteps releases entirely and keeps the install URL the same.
       #
       # Usage after setup:
       #   helm repo add mibmal https://mibmal.github.io/TiddlyWiki5
@@ -47,6 +53,8 @@ jobs:
         uses: helm/chart-releaser-action@v1.6.0
         with:
           charts_dir: helm
+          packages_with_index: true
+          pages_branch: gh-pages
           # Skip already-released chart versions instead of failing.
           skip_existing: true
         env:
