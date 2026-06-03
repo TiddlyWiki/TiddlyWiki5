@@ -2,8 +2,15 @@ apiVersion: v2
 name: tiddlywiki
 description: TiddlyWiki5 personal wiki server
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "5.4.0"
+
+# 0.1.1 — Fix crash-loop ("[dumb-init] /data/wiki: Permission denied"): the
+#   image ENTRYPOINT is dumb-init and the "node ./tiddlywiki.js" invocation
+#   lived only in CMD, which Kubernetes args replace. The chart now sets an
+#   explicit command (wiki.command). Also seed a persistent server wiki on a
+#   fresh PVC via an initContainer (wiki.initOnEmpty), tolerating the ext4
+#   lost+found dir, and align initContainer chown with podSecurityContext.runAsUser.
 
 keywords:
   - wiki

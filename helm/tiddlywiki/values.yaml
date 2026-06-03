@@ -18,10 +18,26 @@ replicaCount: 1
 # TiddlyWiki server configuration
 # =============================================================================
 wiki:
+  # -- Executable + leading args, set as the pod's `command:`. The image
+  # ENTRYPOINT (dumb-init) does NOT include "node ./tiddlywiki.js" — that lives
+  # only in the image CMD, which Kubernetes args replace. Setting command here
+  # makes the chart correct regardless of the image CMD. The image WORKDIR is
+  # /usr/src/app with node on PATH. dataPath + --listen flags are appended as args.
+  command:
+    - node
+    - ./tiddlywiki.js
+
   # -- Path inside the container to serve.
-  # /app/editions/server = bundled demo (no PVC needed, resets on upgrade).
-  # /data/wiki           = persistent user wiki (requires PVC).
+  # ./editions/server = bundled demo (no PVC needed, resets on upgrade).
+  # /data/wiki        = persistent user wiki (requires PVC).
   dataPath: /data/wiki
+
+  # -- Seed a real server wiki (tiddlywiki.info + filesystem/tiddlyweb plugins)
+  # into dataPath on first start if none exists, via an initContainer. Without
+  # it, a fresh PVC serves but cannot persist writes (required plugins missing).
+  # No-op once a wiki is present, and tolerant of the lost+found dir on ext4.
+  # Set false if you pre-populate the volume yourself (e.g. git-sync restore).
+  initOnEmpty: true
 
   # -- Server port (container-internal)
   port: 8080

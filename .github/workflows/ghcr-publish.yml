@@ -15,7 +15,84 @@ permissions:
   packages: write
 
 jobs:
+  # ---------------------------------------------------------------------------
+  # Smoke test: build the run stage and start it the way the Helm chart does
+  # (explicit command + args, data dir mounted as a volume), then confirm
+  # /status answers. Guards against two regressions that crash-looped before:
+  #   1. The image ENTRYPOINT is dumb-init and the "node ./tiddlywiki.js" prefix
+  #      lives only in CMD; Kubernetes args replace CMD, so a chart without an
+  #      explicit command ran `dumb-init -- /data/wiki ...` and tried to exec
+  #      the data directory -> "[dumb-init] /data/wiki: Permission denied".
+  #   2. A fresh PVC (non-empty: contains lost+found) was not seeded, so the
+  #      server booted without the filesystem/tiddlyweb plugins and silently
+  #      dropped writes.
+  # The publish job depends on this passing.
+  # ---------------------------------------------------------------------------
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3.11.1
+
+      - name: Build run stage (loaded locally)
+        uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
+        with:
+          context: .
+          target: run
+          load: true
+          tags: tiddlywiki5:smoke
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Simulate a freshly provisioned ext4 PVC
+        run: |
+          # A real ext4 PVC is non-empty on first mount: it has lost+found.
+          mkdir -p "$PWD/pvc/lost+found"
+          # Reproduce the Deployment's initContainers: chown to the runtime user
+          # (1000 = node in this image) then seed a real server wiki so writes
+          # persist. "--init server" refuses a non-empty dir, so stage + move.
+          docker run --rm -v "$PWD/pvc:/data/wiki" busybox:1.36-musl \
+            sh -c 'chown -R 1000:1000 /data/wiki'
+          docker run --rm -u 1000 -v "$PWD/pvc:/data/wiki" --entrypoint node tiddlywiki5:smoke \
+            -e 'const fs=require("fs"),cp=require("child_process");const d="/data/wiki";if(!fs.existsSync(d+"/tiddlywiki.info")){const s=d+"/.tw-init";fs.mkdirSync(s,{recursive:true});cp.execFileSync(process.execPath,["./tiddlywiki.js",s,"--init","server"],{stdio:"inherit"});for(const f of fs.readdirSync(s))fs.renameSync(s+"/"+f,d+"/"+f);fs.rmdirSync(s);}'
+
+      - name: Start container exactly as the chart renders it
+        run: |
+          # ENTRYPOINT=dumb-init, command=wiki.command, args=dataPath + --listen.
+          docker run -d --name tw -u 1000 -p 8080:8080 \
+            -v "$PWD/pvc:/data/wiki" \
+            tiddlywiki5:smoke \
+            node ./tiddlywiki.js /data/wiki --listen host=0.0.0.0 port=8080 gzip=yes use-browser-cache=yes
+
+      - name: Wait for /status (fail fast on crash-loop)
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:8080/status >/tmp/status.json 2>/dev/null; then
+              echo "status: $(cat /tmp/status.json)"
+              if docker logs tw 2>&1 | grep -q "Plugin(s) required for client-server operation are missing"; then
+                echo "::error::server started without filesystem/tiddlyweb plugins — fresh PVC not seeded"
+                docker logs tw; exit 1
+              fi
+              exit 0
+            fi
+            if [ "$(docker inspect -f '{{.State.Running}}' tw 2>/dev/null)" != "true" ]; then
+              echo "::error::container exited before serving /status"
+              docker logs tw; exit 1
+            fi
+            sleep 2
+          done
+          echo "::error::/status never became ready"
+          docker logs tw; exit 1
+
+      - name: Dump logs on failure
+        if: failure()
+        run: docker logs tw || true
+
   build-and-push:
+    needs: smoke-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

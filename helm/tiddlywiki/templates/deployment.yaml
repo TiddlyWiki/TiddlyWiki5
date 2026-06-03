@@ -45,9 +45,16 @@ spec:
       {{- end }}
 
       # -------------------------------------------------------
-      # Init container: seed /data/wiki with correct ownership.
-      # Distroless has no shell, so busybox does the mkdir/chown.
+      # Init containers.
+      # 1. init-wiki-dir: create the data dirs and hand the volume to the
+      #    runtime user. Runs as root (busybox) so it can chown a freshly
+      #    provisioned PVC. The uid/gid track podSecurityContext.runAsUser so
+      #    the seed and main containers can write under readOnlyRootFilesystem.
+      # 2. seed-wiki (optional): lay down a real server wiki the first time so
+      #    a fresh PVC can actually persist tiddlers. See notes on the step.
       # -------------------------------------------------------
+      {{- $uid := .Values.podSecurityContext.runAsUser | default 1000 }}
+      {{- $gid := .Values.podSecurityContext.runAsGroup | default $uid }}
       initContainers:
         - name: init-wiki-dir
           image: busybox:1.36-musl
@@ -60,7 +67,7 @@ spec:
               mkdir -p {{ $.Values.wiki.dataPath }}/plugins/{{ .name }}
               cp -r /plugins/{{ .name }}/. {{ $.Values.wiki.dataPath }}/plugins/{{ .name }}/
               {{- end }}
-              chown -R 65532:65532 {{ .Values.wiki.dataPath }}
+              chown -R {{ $uid }}:{{ $gid }} {{ .Values.wiki.dataPath }}
           volumeMounts:
             - name: wiki-data
               mountPath: {{ .Values.wiki.dataPath }}
@@ -78,6 +85,40 @@ spec:
               drop: ["ALL"]
               add: ["CHOWN", "DAC_OVERRIDE"]
 
+        # Seed a real server wiki (tiddlywiki.info + filesystem/tiddlyweb
+        # plugins) on first start only. Without it a fresh PVC serves but warns
+        # the required plugins are missing and silently drops writes. A freshly
+        # provisioned ext4 PVC also contains a lost+found dir, and "--init
+        # server" refuses a non-empty folder ("Wiki folder is not empty"), so we
+        # init into a staging dir and move the result into place. Idempotent:
+        # no-op once tiddlywiki.info exists. Runs as the runtime user, after the
+        # chown above, using the app image (which has node + a shell).
+        {{- if .Values.wiki.initOnEmpty }}
+        - name: seed-wiki
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - {{ index .Values.wiki.command 0 | quote }}
+          args:
+            - "-e"
+            - |
+              const fs = require('fs'), cp = require('child_process');
+              const data = {{ .Values.wiki.dataPath | quote }};
+              if (fs.existsSync(data + '/tiddlywiki.info')) { console.log('wiki already initialised'); process.exit(0); }
+              const stage = data + '/.tw-init';
+              fs.rmSync(stage, {recursive:true, force:true});
+              fs.mkdirSync(stage, {recursive:true});
+              cp.execFileSync(process.execPath, ['./tiddlywiki.js', stage, '--init', 'server'], {stdio:'inherit'});
+              for (const f of fs.readdirSync(stage)) fs.renameSync(stage + '/' + f, data + '/' + f);
+              fs.rmdirSync(stage);
+              console.log('initialised server wiki at ' + data);
+          volumeMounts:
+            - name: wiki-data
+              mountPath: {{ .Values.wiki.dataPath }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+        {{- end }}
+
       containers:
         # -------------------------------------------------------
         # Main: TiddlyWiki server
@@ -86,7 +127,14 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 
-          # ENTRYPOINT = ["/nodejs/bin/node", "tiddlywiki.js"] (Dockerfile)
+          # The image ENTRYPOINT is ["/usr/bin/dumb-init", "--"] and the
+          # "node ./tiddlywiki.js" invocation lives only in the image CMD.
+          # Kubernetes args REPLACE CMD, so without an explicit command the
+          # container would run `dumb-init -- /data/wiki --listen ...` and try
+          # to exec the data directory -> "Permission denied" crash-loop.
+          # Set command explicitly so the chart is correct regardless of CMD.
+          command:
+            {{- toYaml .Values.wiki.command | nindent 12 }}
           args:
             - {{ .Values.wiki.dataPath | quote }}
             - "--listen"
