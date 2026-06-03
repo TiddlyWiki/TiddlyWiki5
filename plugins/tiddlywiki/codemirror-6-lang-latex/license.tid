@@ -3,10 +3,10 @@ type: text/plain
 
 MIT License
 
-Copyright (c) 2023 Fares Abawi <fares@abawi.me>
+Copyright (c) 2025 Fares Abawi <fares@abawi.me>
 Copyright (c) 2024-2026 TiddlyWiki Contributors
 
-This plugin bundles code from codemirror-lang-latex.
+This plugin bundles code from @TeXlyre/codemirror-lang-latex.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
