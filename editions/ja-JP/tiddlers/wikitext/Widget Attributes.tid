@@ -13,7 +13,6 @@ type: text/vnd.tiddlywiki
 * [[マクロ/変数のトランスクルージョン|Variable Attribute Values]]
 * [[フィルター式の結果として|Filtered Attribute Values]]
 * <<.from-version "5.3.0">> [[指定された文字列に対してフィルタと変数置換を実行した結果として|Substituted Attribute Values]]
-* <<.from-version "5.4.0">> [[複数値変数の参照として|Multi-Valued Variable Attribute Values]]
 
 |属性タイプ|構文|h
 |リテラル |スペースを含まない値には、シングルクォーテーション、ダブルクォーテーション、トリプルクォーテーション、またはクォーテーションなし |
@@ -21,9 +20,9 @@ type: text/vnd.tiddlywiki
 |変数 |マクロまたは変数呼び出しを囲む二重の山括弧 |
 |フィルタリング結果 |フィルター式を囲む三重の中括弧|
 |置換結果|置換処理を行うテキストの、単一または三重のバッククォート|
-|複数値変数 |変数名を囲む二重の丸括弧 |
 
-<$list filter="[[Literal Attribute Values]] [[Transcluded Attribute Values]] [[Variable Attribute Values]] [[Filtered Attribute Values]] [[Substituted Attribute Values]] [[Multi-Valued Variable Attribute Values]]">
+
+<$list filter="[[Literal Attribute Values]] [[Transcluded Attribute Values]] [[Variable Attribute Values]] [[Filtered Attribute Values]] [[Substituted Attribute Values]]">
 <$link><h1><$view tiddler=<<currentTiddler>> field=ja-title/></h1></$link>
 <$transclude mode="block"/>
 </$list>
