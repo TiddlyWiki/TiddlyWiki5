@@ -6,7 +6,8 @@
 		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/menubar",
 		"tiddlywiki/internals",
-		"tiddlywiki/innerwiki"
+		"tiddlywiki/innerwiki",
+		"tiddlywiki/railroad"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
