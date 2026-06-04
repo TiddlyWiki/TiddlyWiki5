@@ -23,8 +23,9 @@ Returns the new start position, after the parsed operation
 */
 function parseFilterOperation(operators,filterString,p) {
 	var nextBracketPos, operator;
-	// The opening brackets that can begin a filter operand
+	// The brackets that can begin a filter operand, as a set for single chars and a regexp for scanning
 	var operandBrackets = "[{</(";
+	var operandBracketRegExp = new RegExp("[" + operandBrackets + "]","g");
 	var isOperandBracket = function(chr) {
 		return chr !== "" && operandBrackets.indexOf(chr) !== -1;
 	};
@@ -44,20 +45,22 @@ function parseFilterOperation(operators,filterString,p) {
 		// See test-filter-field-parens.js
 		nextBracketPos = -1;
 		var scanPos = p;
-		while(nextBracketPos === -1 && scanPos < filterString.length) {
-			var chr = filterString.charAt(scanPos);
-			if(!isOperandBracket(chr)) {
-				// Still inside the operator name and its suffix
-				scanPos++;
-				continue;
+		while(nextBracketPos === -1) {
+			operandBracketRegExp.lastIndex = scanPos;
+			var bracketMatch = operandBracketRegExp.exec(filterString);
+			if(!bracketMatch) {
+				break;
 			}
-			// Skip a "(...)" group that belongs to a suffix field name; otherwise this bracket starts the operand
-			var closeParenPos = chr === "(" ? filterString.indexOf(")",scanPos) : -1;
-			if(closeParenPos !== -1 && filterString.substring(p,scanPos).indexOf(":") !== -1 && isOperandBracket(filterString.charAt(closeParenPos + 1))) {
-				scanPos = closeParenPos + 1;
-			} else {
-				nextBracketPos = scanPos;
+			// A "(...)" group followed by another operand bracket belongs to a suffix field name; skip it
+			if(bracketMatch[0] === "(" && filterString.substring(p,bracketMatch.index).indexOf(":") !== -1) {
+				var closeParenPos = filterString.indexOf(")",bracketMatch.index);
+				if(closeParenPos !== -1 && isOperandBracket(filterString.charAt(closeParenPos + 1))) {
+					scanPos = closeParenPos + 1;
+					continue;
+				}
 			}
+			// Otherwise this bracket starts the operand
+			nextBracketPos = bracketMatch.index;
 		}
 		if(nextBracketPos === -1) {
 			throw "Missing [ in filter expression";
