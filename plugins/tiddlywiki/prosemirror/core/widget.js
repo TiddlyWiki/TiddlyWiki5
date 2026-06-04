@@ -14,6 +14,7 @@ const { to: wikiAstToProseMirrorAst } = require("$:/plugins/tiddlywiki/prosemirr
 const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/core/schema.js");
 const { buildPlugins, SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
 const { computeImageSrc } = require("$:/plugins/tiddlywiki/prosemirror/blocks/image/utils.js");
+const { replaceChangedContent } = require("$:/plugins/tiddlywiki/prosemirror/core/incremental-sync.js");
 
 const { EditorState, NodeSelection, TextSelection } = require("prosemirror-state");
 const { EditorView } = require("prosemirror-view");
@@ -49,7 +50,8 @@ class ProsemirrorWidget extends Widget {
 		let doc;
 		try {
 			const initialWikiAst = this.wiki.parseText(this.editType, initialText, {
-				defaultType: "text/vnd.tiddlywiki"
+				defaultType: "text/vnd.tiddlywiki",
+				preserveBlankLines: true
 			}).tree;
 			doc = wikiAstToProseMirrorAst(initialWikiAst, { sourceText: initialText });
 		} catch(e) {
@@ -427,7 +429,8 @@ class ProsemirrorWidget extends Widget {
 			const nextText = text !== undefined ? text : this.wiki.getTiddlerText(this.getAttribute("tiddler"), "") || "";
 
 			const reparsedWikiAst = this.wiki.parseText(this.editType, nextText, {
-				defaultType: "text/vnd.tiddlywiki"
+				defaultType: "text/vnd.tiddlywiki",
+				preserveBlankLines: true
 			}).tree;
 			const reparsedDoc = wikiAstToProseMirrorAst(reparsedWikiAst, { sourceText: nextText });
 
@@ -441,10 +444,15 @@ class ProsemirrorWidget extends Widget {
 			const newDoc = this.view.state.schema.nodeFromJSON(reparsedDoc);
 			const oldDoc = this.view.state.doc;
 
-			// Use doc.replace() for a properly structured replacement
-			const slice = newDoc.slice(0, newDoc.content.size);
 			let tr = this.view.state.tr;
-			tr = tr.replace(0, oldDoc.content.size, slice);
+			const diff = replaceChangedContent(tr, oldDoc, newDoc);
+			if(!diff.changed) {
+				this.lastSavedDocJSON = newDoc.toJSON();
+				this.lastKnownText = nextText;
+				this.lastKnownType = this.editType;
+				return;
+			}
+			tr = diff.transaction;
 
 			// Map cursor through the change
 			const oldSel = this.view.state.selection;
@@ -483,7 +491,8 @@ class ProsemirrorWidget extends Widget {
 			const tiddlerRecord = tiddler ? this.wiki.getTiddler(tiddler) : null;
 			this.editType = (tiddlerRecord && tiddlerRecord.fields && tiddlerRecord.fields.type) || "text/vnd.tiddlywiki";
 			const wikiAst = this.wiki.parseText(this.editType, nextText, {
-				defaultType: "text/vnd.tiddlywiki"
+				defaultType: "text/vnd.tiddlywiki",
+				preserveBlankLines: true
 			}).tree;
 			const pmDoc = wikiAstToProseMirrorAst(wikiAst, { sourceText: nextText });
 			const newDoc = this.view.state.schema.nodeFromJSON(pmDoc);

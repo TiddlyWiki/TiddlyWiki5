@@ -123,6 +123,32 @@ test.describe("Incremental Sync — Empty Paragraph Preservation", () => {
 		expect(blockCount).toBeGreaterThanOrEqual(3); // "Hello World" + 2 empty
 	});
 
+	test("should save empty paragraphs as blankline wikitext blocks", async ({ page }) => {
+		const tiddlerTitle = "PersistedBlankLines_" + Date.now();
+		const editor = await setupProseMirrorTest(page, tiddlerTitle, {
+			useReadmeTiddler: false,
+			initialText: "Hello World"
+		});
+
+		await editor.click();
+		await page.keyboard.press("End");
+		await page.keyboard.press("Enter");
+		await page.keyboard.press("Enter");
+		await waitForSave(500);
+
+		const savedInfo = await page.evaluate((title) => {
+			const text = $tw.wiki.getTiddlerText(title, "");
+			const tree = $tw.wiki.parseText("text/vnd.tiddlywiki", text, { preserveBlankLines: true }).tree;
+			return {
+				text: text,
+				rules: tree.map((node) => node.rule)
+			};
+		}, tiddlerTitle);
+
+		expect(savedInfo.text).toBe("Hello World\n\n\n\n");
+		expect(savedInfo.rules).toEqual(["parseblock", "blankline", "blankline"]);
+	});
+
 	test("should preserve empty paragraphs after toolbar bold operation", async ({ page }) => {
 		const editor = await setupProseMirrorTest(page, null, {
 			initialText: "Hello World"
