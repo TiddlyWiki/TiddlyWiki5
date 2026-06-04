@@ -47,6 +47,8 @@ var WikiParser = function(type,text,options) {
 	this.configTrimWhiteSpace = options.configTrimWhiteSpace !== undefined ? options.configTrimWhiteSpace : false;
 	// Parser mode
 	this.parseAsInline = options.parseAsInline;
+	// Preserve extra blank lines as empty paragraph blocks when explicitly requested
+	this.preserveBlankLines = options.preserveBlankLines === true;
 	// Set current parse position
 	this.pos = 0;
 	// Start with empty output
@@ -309,6 +311,13 @@ WikiParser.prototype.parseBlocks = function(terminatorRegExpString) {
 Parse a block from the current position to the end of the text
 */
 WikiParser.prototype.parseBlocksUnterminated = function() {
+	if(!this.preserveBlankLines) {
+		var defaultTree = [];
+		while(this.pos < this.sourceLength) {
+			defaultTree.push.apply(defaultTree,this.parseBlock());
+		}
+		return defaultTree;
+	}
 	var tree = [],
 		isLeading = true;
 	while(this.pos < this.sourceLength) {
@@ -339,8 +348,12 @@ WikiParser.prototype.parseBlocksTerminatedExtended = function(terminatorRegExpSt
 		result = {
 			tree: []
 		};
-	// Skip any whitespace, preserving extra blank lines as empty paragraphs
-	result.tree.push.apply(result.tree,this.parseBlankLineBlocks({leading: true}));
+	// Skip any whitespace
+	if(this.preserveBlankLines) {
+		result.tree.push.apply(result.tree,this.parseBlankLineBlocks({leading: true}));
+	} else {
+		this.skipWhitespace();
+	}
 	//  Check if we've got the end marker
 	terminatorRegExp.lastIndex = this.pos;
 	var match = terminatorRegExp.exec(this.source);
@@ -348,8 +361,12 @@ WikiParser.prototype.parseBlocksTerminatedExtended = function(terminatorRegExpSt
 	while(this.pos < this.sourceLength && !(match && match.index === this.pos)) {
 		var blocks = this.parseBlock(terminatorRegExpString);
 		result.tree.push.apply(result.tree,blocks);
-		// Skip any whitespace, preserving extra blank lines as empty paragraphs
-		result.tree.push.apply(result.tree,this.parseBlankLineBlocks());
+		// Skip any whitespace
+		if(this.preserveBlankLines) {
+			result.tree.push.apply(result.tree,this.parseBlankLineBlocks());
+		} else {
+			this.skipWhitespace();
+		}
 		//  Check if we've got the end marker
 		terminatorRegExp.lastIndex = this.pos;
 		match = terminatorRegExp.exec(this.source);

@@ -11,7 +11,7 @@ Tests for preserving extra blank lines as empty paragraph blocks.
 
 describe("Wikitext blank line preservation", function() {
 	function parse(text) {
-		return $tw.wiki.parseText("text/vnd.tiddlywiki", text).tree;
+		return $tw.wiki.parseText("text/vnd.tiddlywiki", text, { preserveBlankLines: true }).tree;
 	}
 
 	function serialize(text) {
@@ -27,6 +27,12 @@ describe("Wikitext blank line preservation", function() {
 	it("should keep a single blank line as a paragraph separator", function() {
 		expect(paragraphCount("A\n\nB")).toBe(2);
 		expect(serialize("A\n\nB")).toBe("A\n\nB\n\n");
+	});
+
+	it("should leave extra blank lines ignored by default", function() {
+		var tree = $tw.wiki.parseText("text/vnd.tiddlywiki", "A\n\n\nB").tree;
+		expect(tree.length).toBe(2);
+		expect(tree.map(function(node) { return node.rule; })).toEqual(["parseblock", "parseblock"]);
 	});
 
 	it("should preserve extra blank lines as empty paragraphs", function() {
