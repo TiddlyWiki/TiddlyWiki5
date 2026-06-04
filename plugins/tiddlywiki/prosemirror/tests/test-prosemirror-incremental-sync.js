@@ -14,11 +14,13 @@ used by applyExternalText() in engine.js and widget.js.
 describe("ProseMirror incremental sync — diff calculation", () => {
 
 	let buildSchema;
+	let replaceChangedContent;
 	let schema;
 
 	try {
 		require("prosemirror-model");
 		buildSchema = require("$:/plugins/tiddlywiki/prosemirror/core/schema.js").buildSchema;
+		replaceChangedContent = require("$:/plugins/tiddlywiki/prosemirror/core/incremental-sync.js").replaceChangedContent;
 	} catch(e) {
 		return;
 	}
@@ -43,11 +45,14 @@ describe("ProseMirror incremental sync — diff calculation", () => {
 		});
 	}
 
-	// Helper: apply diff between two docs using doc.replace()
+	// Helper: apply the external-sync diff between two docs
 	function applyDiff(oldDoc, newDoc) {
-		const slice = newDoc.slice(0, newDoc.content.size);
-		const newContent = oldDoc.replace(0, oldDoc.content.size, slice);
-		return newContent;
+		const diff = replaceChangedContent({
+			replace(from, to, slice) {
+				return oldDoc.replace(from, to, slice);
+			}
+		}, oldDoc, newDoc);
+		return diff.changed ? diff.transaction : oldDoc;
 	}
 
 	// ─── findDiffStart / findDiffEnd ────────────────────────────────
@@ -127,9 +132,9 @@ describe("ProseMirror incremental sync — diff calculation", () => {
 		});
 	});
 
-	// ─── ReplaceStep diff application ──────────────────────────────
+	// ─── Incremental diff application ──────────────────────────────
 
-	describe("applyDiff (ReplaceStep)", () => {
+	describe("applyDiff", () => {
 
 		it("should handle no-op (identical docs)", () => {
 			const oldDoc = paraDoc("Hello World");
@@ -219,6 +224,36 @@ describe("ProseMirror incremental sync — diff calculation", () => {
 			expect(result.child(2).textContent).toBe("");
 			expect(result.child(3).textContent).toBe("World");
 		});
+
+		it("should append without creating a reversed replacement range", () => {
+			const oldDoc = paraDoc("A");
+			const newDoc = paraDoc("A", "B");
+			let capturedRange = null;
+			const diff = replaceChangedContent({
+				replace(from, to, slice) {
+					capturedRange = { from: from, to: to, size: slice.size };
+					return oldDoc.replace(from, to, slice);
+				}
+			}, oldDoc, newDoc);
+			expect(diff.changed).toBe(true);
+			expect(capturedRange.from).toBe(capturedRange.to);
+			expect(capturedRange.size).toBeGreaterThan(0);
+		});
+
+		it("should delete without creating a reversed replacement range", () => {
+			const oldDoc = paraDoc("A", "B", "C");
+			const newDoc = paraDoc("A", "C");
+			let capturedRange = null;
+			const diff = replaceChangedContent({
+				replace(from, to, slice) {
+					capturedRange = { from: from, to: to, size: slice.size };
+					return oldDoc.replace(from, to, slice);
+				}
+			}, oldDoc, newDoc);
+			expect(diff.changed).toBe(true);
+			expect(capturedRange.from).toBeLessThanOrEqual(capturedRange.to);
+			expect(capturedRange.size).toBe(0);
+		});
 	});
 
 	// ─── Serialization roundtrip comparison ────────────────────────
@@ -235,7 +270,7 @@ describe("ProseMirror incremental sync — diff calculation", () => {
 		}
 
 		function parseToPMDoc(wikitext) {
-			const wikiAst = $tw.wiki.parseText("text/vnd.tiddlywiki", wikitext).tree;
+			const wikiAst = $tw.wiki.parseText("text/vnd.tiddlywiki", wikitext, { preserveBlankLines: true }).tree;
 			const pmAst = wikiAstToProseMirrorAst(wikiAst, { sourceText: wikitext });
 			return schema.nodeFromJSON(pmAst);
 		}
@@ -246,17 +281,14 @@ describe("ProseMirror incremental sync — diff calculation", () => {
 			return $tw.utils.serializeWikitextParseTree(wikiAst);
 		}
 
-		it("should detect that roundtrip text matches lastSavedDocJSON", () => {
-			// Simulate: user has "Hello World" + empty paragraph
-			const pmDoc = parseToPMDoc("Hello World");
+		it("should preserve empty paragraphs through wiki text roundtrip", () => {
+			const pmDoc = paraDoc("Hello World", "");
 			const lastSavedJSON = pmDoc.toJSON();
 
-			// Serialize (loses empty para) and reparse
 			const serialized = serializePMDoc(pmDoc);
-			const reparsedAst = $tw.wiki.parseText("text/vnd.tiddlywiki", serialized).tree;
+			const reparsedAst = $tw.wiki.parseText("text/vnd.tiddlywiki", serialized, { preserveBlankLines: true }).tree;
 			const reparsedPMAst = wikiAstToProseMirrorAst(reparsedAst, { sourceText: serialized });
 
-			// Compare against lastSavedJSON — should match (echo detection)
 			expect(JSON.stringify(reparsedPMAst)).toEqual(JSON.stringify(lastSavedJSON));
 		});
 
@@ -268,7 +300,7 @@ describe("ProseMirror incremental sync — diff calculation", () => {
 			// External agent changes to "Hello Earth"
 			const modified = parseToPMDoc("Hello Earth");
 			const modifiedSerialized = serializePMDoc(modified);
-			const reparsedAst = $tw.wiki.parseText("text/vnd.tiddlywiki", modifiedSerialized).tree;
+			const reparsedAst = $tw.wiki.parseText("text/vnd.tiddlywiki", modifiedSerialized, { preserveBlankLines: true }).tree;
 			const reparsedPMAst = wikiAstToProseMirrorAst(reparsedAst, { sourceText: modifiedSerialized });
 
 			// Should NOT match — genuine change

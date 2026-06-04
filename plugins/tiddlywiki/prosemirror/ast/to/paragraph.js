@@ -22,10 +22,11 @@ function pushParagraphOrLiftedBlocks(result, context, children) {
 		result.push.apply(result, converted);
 		return;
 	}
-	result.push({
-		type: "paragraph",
-		content: converted
-	});
+	const paragraph = { type: "paragraph" };
+	if(converted.length > 0) {
+		paragraph.content = converted;
+	}
+	result.push(paragraph);
 }
 
 module.exports = function buildParagraph(context, node) {
@@ -63,7 +64,6 @@ module.exports = function buildParagraph(context, node) {
 		return result;
 	}
 	return {
-		type: "paragraph",
-		content: []
+		type: "paragraph"
 	};
 };

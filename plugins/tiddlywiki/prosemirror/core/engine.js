@@ -17,6 +17,7 @@ const wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/t
 const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/core/schema.js");
 const { buildPlugins, SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
 const { handleTextOperation } = require("$:/plugins/tiddlywiki/prosemirror/core/text-operations.js");
+const { replaceChangedContent } = require("$:/plugins/tiddlywiki/prosemirror/core/incremental-sync.js");
 const { EditorState, TextSelection } = require("prosemirror-state");
 const { EditorView } = require("prosemirror-view");
 const { debounce } = require("$:/plugins/tiddlywiki/prosemirror/core/debounce.js");
@@ -88,7 +89,8 @@ class ProseMirrorEngine {
 	_parseInitialDoc() {
 		try {
 			const initialWikiAst = this.wiki.parseText(this.type, this.value || "", {
-				defaultType: "text/vnd.tiddlywiki"
+				defaultType: "text/vnd.tiddlywiki",
+				preserveBlankLines: true
 			}).tree;
 			return wikiAstToProseMirrorAst(initialWikiAst, { sourceText: this.value });
 		} catch(e) {
@@ -217,7 +219,8 @@ class ProseMirrorEngine {
 		if(!this.view) return;
 		try {
 			const reparsedWikiAst = this.wiki.parseText(this.type, text, {
-				defaultType: "text/vnd.tiddlywiki"
+				defaultType: "text/vnd.tiddlywiki",
+				preserveBlankLines: true
 			}).tree;
 			const reparsedDoc = wikiAstToProseMirrorAst(reparsedWikiAst, { sourceText: text });
 
@@ -229,10 +232,13 @@ class ProseMirrorEngine {
 			const newDoc = this.schema.nodeFromJSON(reparsedDoc);
 			const oldDoc = this.view.state.doc;
 
-			// Use doc.replace() for a properly structured replacement
-			const slice = newDoc.slice(0, newDoc.content.size);
 			let tr = this.view.state.tr;
-			tr = tr.replace(0, oldDoc.content.size, slice);
+			const diff = replaceChangedContent(tr, oldDoc, newDoc);
+			if(!diff.changed) {
+				this.lastSavedDocJSON = newDoc.toJSON();
+				return;
+			}
+			tr = diff.transaction;
 
 			// Map cursor through the change
 			const oldSel = this.view.state.selection;
@@ -266,7 +272,8 @@ class ProseMirrorEngine {
 		if(!this.view) return;
 		try {
 			const wikiAst = this.wiki.parseText(this.type, text || "", {
-				defaultType: "text/vnd.tiddlywiki"
+				defaultType: "text/vnd.tiddlywiki",
+				preserveBlankLines: true
 			}).tree;
 			const pmDoc = wikiAstToProseMirrorAst(wikiAst, { sourceText: text || "" });
 			const newDoc = this.schema.nodeFromJSON(pmDoc);
