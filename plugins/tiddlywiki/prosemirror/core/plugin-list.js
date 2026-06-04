@@ -28,6 +28,7 @@ const { createHardLineBreaksNodeViewPlugin } = require("$:/plugins/tiddlywiki/pr
 const { createTypedBlockNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/blocks/typed-block/nodeview.js");
 const { createDragHandlePlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/drag-handle/plugin.js");
 const { createBlockPlaceholderPlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/block-placeholder.js");
+const { createLinkClassesPlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/link-classes.js");
 const { createLinkTooltipPlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/link-tooltip.js");
 const { getMarkdownInputRules } = require("$:/plugins/tiddlywiki/prosemirror/features/markdown-shortcuts.js");
 const { createAutocompletePlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/autocomplete.js");
@@ -74,6 +75,7 @@ function buildPlugins(schema, wiki, nodeViewHost, editorType) {
 		createDragHandlePlugin(),
 		createAutocompletePlugin(wiki),
 		createFindReplacePlugin(wiki),
+		createLinkClassesPlugin(wiki),
 		createLinkTooltipPlugin(nodeViewHost),
 		createBlockPlaceholderPlugin(wiki)
 	]
