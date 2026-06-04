@@ -16,6 +16,14 @@ try {
 }
 
 module.exports = function paragraph(builders, node) {
+	if(!node.content || node.content.length === 0) {
+		return {
+			type: "element",
+			tag: "p",
+			rule: "blankline",
+			children: []
+		};
+	}
 	if(node.content && node.content.length === 1 && node.content[0].type === "text") {
 		const text = node.content[0].text.trim();
 		const parsed = parseWidget ? parseWidget(text) : null;
