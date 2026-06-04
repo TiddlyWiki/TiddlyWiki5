@@ -15,14 +15,20 @@ const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/core/schema.j
 const { buildPlugins, SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
 const { computeImageSrc } = require("$:/plugins/tiddlywiki/prosemirror/blocks/image/utils.js");
 
-const { EditorState, NodeSelection } = require("prosemirror-state");
+const { EditorState, NodeSelection, TextSelection } = require("prosemirror-state");
 const { EditorView } = require("prosemirror-view");
 
 class ProsemirrorWidget extends Widget {
 
 	constructor(parseTreeNode, options) {
 		super(parseTreeNode, options);
-		this.saveLock = false;
+		this.pendingSavedText = null;
+		this.pendingExternalText = null;
+		this.pendingExternalType = null;
+		this.lastSavedDocJSON = null;
+		this.lastKnownText = "";
+		this.lastKnownType = "text/vnd.tiddlywiki";
+		this.applyingExternalText = false;
 		this.imagePickerOpen = false;
 		this.imagePickerInitialized = false;
 		this.debouncedSaveEditorContent = debounce(this.saveEditorContent.bind(this), 300);
@@ -37,6 +43,8 @@ class ProsemirrorWidget extends Widget {
 		const initialText = this.wiki.getTiddlerText(tiddler, "");
 		const tiddlerRecord = tiddler ? this.wiki.getTiddler(tiddler) : null;
 		this.editType = (tiddlerRecord && tiddlerRecord.fields && tiddlerRecord.fields.type) || "text/vnd.tiddlywiki";
+		this.lastKnownText = initialText || "";
+		this.lastKnownType = this.editType;
 
 		let doc;
 		try {
@@ -70,7 +78,10 @@ class ProsemirrorWidget extends Widget {
 				this.view.updateState(newState);
 				if(this.imagePickerOpen) this.updateImagePickerFromSelection();
 				if(this.slashMenuUI) this.slashMenuUI.checkState();
-				if(transaction.docChanged) this.debouncedSaveEditorContent();
+				if(transaction.docChanged && !this.applyingExternalText) {
+					this.clearPendingExternalText();
+					this.debouncedSaveEditorContent();
+				}
 			}
 		});
 
@@ -82,6 +93,9 @@ class ProsemirrorWidget extends Widget {
 			event.twEditor = true;
 			event.stopPropagation();
 		});
+		this.view.dom.addEventListener("blur", () => {
+			setTimeout(() => this.applyPendingExternalText(), 0);
+		}, true);
 		container.setAttribute("data-tw-prosemirror-keycapture", "yes");
 
 		this.slashMenuUI = new SlashMenuUI(this.view, { clickable: true });
@@ -295,21 +309,6 @@ class ProsemirrorWidget extends Widget {
 		return true;
 	}
 
-	shouldRefreshAfterSave(wikiText) {
-		if(!this.view || !this.view.state) {
-			return false;
-		}
-		try {
-			const reparsedWikiAst = this.wiki.parseText(this.editType, wikiText, {
-				defaultType: "text/vnd.tiddlywiki"
-			}).tree;
-			const reparsedDoc = wikiAstToProseMirrorAst(reparsedWikiAst, { sourceText: wikiText });
-			return JSON.stringify(reparsedDoc) !== JSON.stringify(this.view.state.doc.toJSON());
-		} catch(e) {
-			return false;
-		}
-	}
-
 	saveEditorContent() {
 		try {
 			const content = this.view.state.doc.toJSON();
@@ -317,18 +316,44 @@ class ProsemirrorWidget extends Widget {
 			const wikiText = $tw.utils.serializeWikitextParseTree(wikiast);
 			const tiddler = this.getAttribute("tiddler");
 			const currentText = this.wiki.getTiddlerText(tiddler, "");
+			this.lastSavedDocJSON = content;
 			if(currentText !== wikiText) {
-				this.saveLock = this.shouldRefreshAfterSave(wikiText) ? "refresh" : true;
+				this.clearPendingExternalText();
+				this.pendingSavedText = wikiText;
 				try {
 					this.wiki.setText(tiddler, "text", undefined, wikiText);
+					this.lastKnownText = wikiText;
+					this.lastKnownType = this.editType;
 				} catch(e) {
-					this.saveLock = false;
+					this.pendingSavedText = null;
 					throw e;
+				}
+			} else {
+				this.lastKnownText = currentText || "";
+				this.lastKnownType = this.editType;
+				if(this.pendingSavedText === wikiText) {
+					this.pendingSavedText = null;
 				}
 			}
 		} catch(e) {
 			console.error("[ProseMirror] Error saving editor content:", e);
 		}
+	}
+
+	clearPendingExternalText() {
+		this.pendingExternalText = null;
+		this.pendingExternalType = null;
+	}
+
+	applyPendingExternalText() {
+		if(this.pendingExternalText === null || (this.view && this.view.hasFocus())) {
+			return;
+		}
+		const nextText = this.pendingExternalText;
+		const nextType = this.pendingExternalType || this.editType;
+		this.clearPendingExternalText();
+		this.editType = nextType;
+		this.applyExternalText(nextText);
 	}
 
 	getPragmaPreamble() {
@@ -364,19 +389,113 @@ class ProsemirrorWidget extends Widget {
 			this.refreshSelf();
 			return true;
 		} else if(changedTiddlers[this.getAttribute("tiddler")]) {
-			if(this.saveLock) {
-				const shouldRefresh = this.saveLock === "refresh";
-				this.saveLock = false;
-				if(!shouldRefresh) {
-					return false;
-				}
-				this.refreshSelf();
-				return true;
+			const tiddler = this.getAttribute("tiddler");
+			const nextText = this.wiki.getTiddlerText(tiddler, "") || "";
+			const tiddlerRecord = tiddler ? this.wiki.getTiddler(tiddler) : null;
+			const nextType = (tiddlerRecord && tiddlerRecord.fields && tiddlerRecord.fields.type) || "text/vnd.tiddlywiki";
+			const typeChanged = nextType !== this.editType;
+			if(this.pendingSavedText !== null && nextText === this.pendingSavedText && !typeChanged) {
+				this.pendingSavedText = null;
+				this.lastKnownText = nextText;
+				this.lastKnownType = nextType;
+				return false;
 			}
-			this.refreshSelf();
-			return true;
+			this.pendingSavedText = null;
+			if(nextText === this.lastKnownText && !typeChanged) {
+				return false;
+			}
+			// External change: apply incrementally
+			if(!this.view || !this.view.hasFocus()) {
+				this.editType = nextType;
+				this.applyExternalText(nextText);
+			} else {
+				this.pendingExternalText = nextText;
+				this.pendingExternalType = nextType;
+			}
+			return false;
 		}
 		return false;
+	}
+
+	/**
+	 * Apply external tiddler text changes incrementally using ProseMirror's
+	 * doc.replace(). Preserves undo history, marks, and cursor.
+	 */
+	applyExternalText(text) {
+		if(!this.view) return;
+		try {
+			const nextText = text !== undefined ? text : this.wiki.getTiddlerText(this.getAttribute("tiddler"), "") || "";
+
+			const reparsedWikiAst = this.wiki.parseText(this.editType, nextText, {
+				defaultType: "text/vnd.tiddlywiki"
+			}).tree;
+			const reparsedDoc = wikiAstToProseMirrorAst(reparsedWikiAst, { sourceText: nextText });
+
+			// Skip if reparsed text matches what we last saved
+			if(this.lastSavedDocJSON && JSON.stringify(reparsedDoc) === JSON.stringify(this.lastSavedDocJSON)) {
+				this.lastKnownText = nextText;
+				this.lastKnownType = this.editType;
+				return;
+			}
+
+			const newDoc = this.view.state.schema.nodeFromJSON(reparsedDoc);
+			const oldDoc = this.view.state.doc;
+
+			// Use doc.replace() for a properly structured replacement
+			const slice = newDoc.slice(0, newDoc.content.size);
+			let tr = this.view.state.tr;
+			tr = tr.replace(0, oldDoc.content.size, slice);
+
+			// Map cursor through the change
+			const oldSel = this.view.state.selection;
+			const newFrom = tr.mapping.map(oldSel.from);
+			const newTo = tr.mapping.map(oldSel.to);
+			try {
+				tr = tr.setSelection(TextSelection.create(tr.doc, newFrom, newTo));
+			} catch(e) { /* leave default */ }
+
+			tr = tr.setMeta("addToHistory", false);
+
+			this.lastSavedDocJSON = newDoc.toJSON();
+			this.lastKnownText = nextText;
+			this.lastKnownType = this.editType;
+			this.applyingExternalText = true;
+			try {
+				this.view.dispatch(tr);
+			} finally{
+				this.applyingExternalText = false;
+			}
+		} catch(e) {
+			console.error("[ProseMirror] Error applying external text:", e);
+			// Fallback: full rebuild
+			this._fullRebuildFromTiddler();
+		}
+	}
+
+	/**
+	 * Full rebuild from tiddler text. Fallback only.
+	 */
+	_fullRebuildFromTiddler() {
+		if(!this.view) return;
+		try {
+			const tiddler = this.getAttribute("tiddler");
+			const nextText = this.wiki.getTiddlerText(tiddler, "");
+			const tiddlerRecord = tiddler ? this.wiki.getTiddler(tiddler) : null;
+			this.editType = (tiddlerRecord && tiddlerRecord.fields && tiddlerRecord.fields.type) || "text/vnd.tiddlywiki";
+			const wikiAst = this.wiki.parseText(this.editType, nextText, {
+				defaultType: "text/vnd.tiddlywiki"
+			}).tree;
+			const pmDoc = wikiAstToProseMirrorAst(wikiAst, { sourceText: nextText });
+			const newDoc = this.view.state.schema.nodeFromJSON(pmDoc);
+			const plugins = buildPlugins(this.view.state.schema, this.wiki, this, this.editType);
+			const state = EditorState.create({ doc: newDoc, plugins: plugins });
+			this.view.updateState(state);
+			this.lastSavedDocJSON = newDoc.toJSON();
+			this.lastKnownText = nextText || "";
+			this.lastKnownType = this.editType;
+		} catch(e) {
+			console.error("[ProseMirror] Error rebuilding content:", e);
+		}
 	}
 
 }
