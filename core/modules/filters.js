@@ -23,6 +23,11 @@ Returns the new start position, after the parsed operation
 */
 function parseFilterOperation(operators,filterString,p) {
 	var nextBracketPos, operator;
+	// The opening brackets that can begin a filter operand
+	var operandBrackets = "[{</(";
+	var isOperandBracket = function(chr) {
+		return chr !== "" && operandBrackets.indexOf(chr) !== -1;
+	};
 	// Skip the starting square bracket
 	if(filterString.charAt(p++) !== "[") {
 		throw "Missing [ in filter expression";
@@ -34,12 +39,29 @@ function parseFilterOperation(operators,filterString,p) {
 		if(filterString.charAt(p) === "!") {
 			operator.prefix = filterString.charAt(p++);
 		}
-		// Get the operator name
-		nextBracketPos = filterString.substring(p).search(/[\[\{<\/\(]/);
+		// Find the operator name, keeping a "(...)" group as part of a suffix field name
+		// e.g. "_cd-work(s)" when a ":" precedes it and the ")" is followed by another operand bracket.
+		// See test-filter-field-parens.js
+		nextBracketPos = -1;
+		var scanPos = p;
+		while(nextBracketPos === -1 && scanPos < filterString.length) {
+			var chr = filterString.charAt(scanPos);
+			if(!isOperandBracket(chr)) {
+				// Still inside the operator name and its suffix
+				scanPos++;
+				continue;
+			}
+			// Skip a "(...)" group that belongs to a suffix field name; otherwise this bracket starts the operand
+			var closeParenPos = chr === "(" ? filterString.indexOf(")",scanPos) : -1;
+			if(closeParenPos !== -1 && filterString.substring(p,scanPos).indexOf(":") !== -1 && isOperandBracket(filterString.charAt(closeParenPos + 1))) {
+				scanPos = closeParenPos + 1;
+			} else {
+				nextBracketPos = scanPos;
+			}
+		}
 		if(nextBracketPos === -1) {
 			throw "Missing [ in filter expression";
 		}
-		nextBracketPos += p;
 		var bracket = filterString.charAt(nextBracketPos);
 		operator.operator = filterString.substring(p,nextBracketPos);
 		// Any suffix?
@@ -116,7 +138,7 @@ function parseFilterOperation(operators,filterString,p) {
 		// Check for multiple operands
 		while(filterString.charAt(p) === ",") {
 			p++;
-			if(/^[\[\{<\/\(]/.test(filterString.substring(p))) {
+			if(isOperandBracket(filterString.charAt(p))) {
 				nextBracketPos = p;
 				p++;
 				parseOperand(filterString.charAt(nextBracketPos));
