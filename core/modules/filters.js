@@ -25,7 +25,7 @@ function parseFilterOperation(operators,filterString,p) {
 	var nextBracketPos, operator;
 	// The brackets that can begin a filter operand, as a set for single chars and a regexp for scanning
 	var operandBrackets = "[{</(";
-	var operandBracketRegExp = new RegExp("[" + operandBrackets + "]","g");
+	var operandBracketRegExp = new RegExp("[" + $tw.utils.escapeRegExp(operandBrackets) + "]","g");
 	var isOperandBracket = function(chr) {
 		return chr !== "" && operandBrackets.indexOf(chr) !== -1;
 	};
