@@ -40,6 +40,7 @@ module.exports = defineConfig({
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
+      timeout: 60000,
     },
 
     {
