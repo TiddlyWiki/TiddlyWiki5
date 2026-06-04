@@ -40,9 +40,8 @@ function parseFilterOperation(operators,filterString,p) {
 		if(filterString.charAt(p) === "!") {
 			operator.prefix = filterString.charAt(p++);
 		}
-		// Find the operator name, keeping a "(...)" group as part of a suffix field name
-		// e.g. "_cd-work(s)" when a ":" precedes it and the ")" is followed by another operand bracket.
-		// See test-filter-field-parens.js
+		// Find the operator name. In "[regexp:_cd-work(s)[...]]" the "(s)" is part of the suffix
+		// (a ":" precedes it, an operand bracket follows); otherwise it is an operand. See test-filter-field-parens.js
 		nextBracketPos = -1;
 		var scanPos = p;
 		while(nextBracketPos === -1) {
@@ -51,10 +50,11 @@ function parseFilterOperation(operators,filterString,p) {
 			if(!bracketMatch) {
 				break;
 			}
-			// A "(...)" group followed by another operand bracket belongs to a suffix field name; skip it
 			if(bracketMatch[0] === "(" && filterString.substring(p,bracketMatch.index).indexOf(":") !== -1) {
+				// This "(" follows a suffix, so look ahead: if another operand bracket comes after
+				// its ")", the operand is still to come and this "(...)" is suffix text to skip
 				var closeParenPos = filterString.indexOf(")",bracketMatch.index);
-				if(closeParenPos !== -1 && isOperandBracket(filterString.charAt(closeParenPos + 1))) {
+				if(closeParenPos !== -1 && filterString.substring(closeParenPos + 1).search(operandBracketRegExp) !== -1) {
 					scanPos = closeParenPos + 1;
 					continue;
 				}
