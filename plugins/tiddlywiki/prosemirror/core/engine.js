@@ -30,7 +30,11 @@ class ProseMirrorEngine {
 		this.nextSibling = options.nextSibling;
 		this.wiki = this.widget.wiki;
 		this.variables = this.widget.variables || {};
-		this.saveLock = false;
+		this.pendingSavedText = null;
+		this.pendingExternalText = null;
+		this.pendingExternalType = null;
+		this.lastSavedDocJSON = null;
+		this.applyingExternalText = false;
 		this.imagePickerOpen = false;
 
 		this._buildDOM();
@@ -40,7 +44,15 @@ class ProseMirrorEngine {
 
 		this.debouncedSave = debounce(() => {
 			const text = this.getText();
-			this.saveLock = this.shouldRefreshAfterSave(text) ? "refresh" : true;
+			this.lastSavedDocJSON = this.view.state.doc.toJSON();
+			if(text === (this.value || "")) {
+				if(this.pendingSavedText === text) {
+					this.pendingSavedText = null;
+				}
+				return;
+			}
+			this.clearPendingExternalText();
+			this.pendingSavedText = text;
 			this.widget.saveChanges(text);
 		}, 300);
 
@@ -97,7 +109,10 @@ class ProseMirrorEngine {
 				const newState = this.view.state.apply(transaction);
 				this.view.updateState(newState);
 				if(this.slashMenuUI) this.slashMenuUI.checkState();
-				if(transaction.docChanged) this.debouncedSave();
+				if(transaction.docChanged && !this.applyingExternalText) {
+					this.clearPendingExternalText();
+					this.debouncedSave();
+				}
 			}
 		});
 	}
@@ -114,6 +129,9 @@ class ProseMirrorEngine {
 			}
 			event.stopPropagation();
 		});
+		this.view.dom.addEventListener("blur", () => {
+			setTimeout(() => this.applyPendingExternalText(), 0);
+		}, true);
 		this._container.setAttribute("data-tw-prosemirror-keycapture", "yes");
 	}
 
@@ -144,59 +162,106 @@ class ProseMirrorEngine {
 	makeChildWidgets() {}
 
 	setText(text, type) {
-		if(type) {
-			this.type = type;
-		}
+		const previousType = this.type;
+		const nextType = type || this.type;
 		if(!this.view) {
 			this.value = text;
+			this.type = nextType;
 			return;
 		}
 		const nextText = text || "";
-		const shouldRefresh = this.saveLock === "refresh";
-		const fromOwnSave = !!this.saveLock;
-		this.saveLock = false;
+		const previousText = this.value || "";
+		const typeChanged = nextType !== previousType;
+		const fromOwnSave = this.pendingSavedText !== null && nextText === this.pendingSavedText;
+		this.pendingSavedText = null;
+
+		// Skip if this is an echo of our own save or a metadata-only tiddler refresh
+		if(fromOwnSave || (nextText === previousText && !typeChanged)) {
+			this.value = nextText;
+			this.type = nextType;
+			return;
+		}
 		this.value = nextText;
 
-		if(shouldRefresh || !this.view.hasFocus()) {
-			this.updateDomNodeText(nextText);
-			return;
-		}
-
-		if(fromOwnSave) {
-			return;
+		// External change: apply incrementally via diff
+		if(!this.view.hasFocus()) {
+			this.type = nextType;
+			this.applyExternalText(nextText);
+		} else {
+			this.pendingExternalText = nextText;
+			this.pendingExternalType = nextType;
 		}
 	}
 
-	shouldRefreshAfterSave(wikiText) {
-		if(!this.view || !this.view.state) {
-			return false;
+	clearPendingExternalText() {
+		this.pendingExternalText = null;
+		this.pendingExternalType = null;
+	}
+
+	applyPendingExternalText() {
+		if(this.pendingExternalText === null || (this.view && this.view.hasFocus())) {
+			return;
 		}
+		const nextText = this.pendingExternalText;
+		const nextType = this.pendingExternalType || this.type;
+		this.clearPendingExternalText();
+		this.type = nextType;
+		this.applyExternalText(nextText);
+	}
+
+	/**
+	 * Apply external text changes incrementally using ProseMirror's
+	 * doc.replace(). Preserves undo history (one step), marks, and cursor.
+	 */
+	applyExternalText(text) {
+		if(!this.view) return;
 		try {
-			const reparsedWikiAst = this.wiki.parseText(this.type, wikiText, {
+			const reparsedWikiAst = this.wiki.parseText(this.type, text, {
 				defaultType: "text/vnd.tiddlywiki"
 			}).tree;
-			const reparsedDoc = wikiAstToProseMirrorAst(reparsedWikiAst, { sourceText: wikiText });
-			const currentDocJSON = this.view.state.doc.toJSON();
-			// Normalize by stripping trailing empty paragraphs, which don't affect wiki text
-			function normalize(doc) {
-				if(!doc || !doc.content) return doc;
-				const content = doc.content.slice();
-				while(content.length > 0) {
-					const last = content[content.length - 1];
-					if(last.type === "paragraph" && (!last.content || last.content.length === 0 || (last.content.length === 1 && last.content[0].type === "text" && !last.content[0].text))) {
-						content.pop();
-					} else {
-						break;
-					}
-				}
-				return Object.assign({},doc,{content: content});
+			const reparsedDoc = wikiAstToProseMirrorAst(reparsedWikiAst, { sourceText: text });
+
+			// Skip if reparsed text matches what we last saved (roundtrip echo)
+			if(this.lastSavedDocJSON && JSON.stringify(reparsedDoc) === JSON.stringify(this.lastSavedDocJSON)) {
+				return;
 			}
-			return JSON.stringify(normalize(reparsedDoc)) !== JSON.stringify(normalize(currentDocJSON));
+
+			const newDoc = this.schema.nodeFromJSON(reparsedDoc);
+			const oldDoc = this.view.state.doc;
+
+			// Use doc.replace() for a properly structured replacement
+			const slice = newDoc.slice(0, newDoc.content.size);
+			let tr = this.view.state.tr;
+			tr = tr.replace(0, oldDoc.content.size, slice);
+
+			// Map cursor through the change
+			const oldSel = this.view.state.selection;
+			const newFrom = tr.mapping.map(oldSel.from);
+			const newTo = tr.mapping.map(oldSel.to);
+			try {
+				tr = tr.setSelection(TextSelection.create(tr.doc, newFrom, newTo));
+			} catch(e) { /* leave default selection */ }
+
+			tr = tr.setMeta("addToHistory", false);
+
+			this.lastSavedDocJSON = newDoc.toJSON();
+			this.applyingExternalText = true;
+			try {
+				this.view.dispatch(tr);
+			} finally{
+				this.applyingExternalText = false;
+			}
 		} catch(e) {
-			return false;
+			console.error("[ProseMirror] Error applying external text:", e);
+			// Fallback: full rebuild
+			this.updateDomNodeText(text);
 		}
 	}
 
+	/**
+	 * Full rebuild from text. Used as fallback only (e.g. error recovery).
+	 * WARNING: Loses undo history and empty paragraphs.
+	 */
 	updateDomNodeText(text) {
 		if(!this.view) return;
 		try {
@@ -208,6 +273,7 @@ class ProseMirrorEngine {
 			const plugins = buildPlugins(this.schema, this.widget.wiki, this, this.type);
 			const state = EditorState.create({ doc: newDoc, plugins: plugins });
 			this.view.updateState(state);
+			this.lastSavedDocJSON = newDoc.toJSON();
 		} catch(e) {
 			console.error("[ProseMirror] Error updating content:", e);
 		}
@@ -275,7 +341,13 @@ class ProseMirrorEngine {
 	}
 
 	handleTextOperationNatively(event) {
-		return handleTextOperation(this, event);
+		const result = handleTextOperation(this, event);
+		if(result && this.view && this.view.state) {
+			const text = this.getText();
+			this.lastSavedDocJSON = this.view.state.doc.toJSON();
+			this.pendingSavedText = text;
+		}
+		return result;
 	}
 
 	_serializeSlice(slice) {
