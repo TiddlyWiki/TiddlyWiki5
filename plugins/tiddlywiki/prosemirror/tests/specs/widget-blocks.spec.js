@@ -154,6 +154,14 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 			const selectionInfo = await selectFirstWidgetBlockNode(editor);
 			expect(selectionInfo).toEqual({ selectionType: "NodeSelection", selectedNodeType: "paragraph" });
 			await expect(editor.locator(".pm-nodeview-widget").first()).toHaveClass(/pm-nodeview-selected/);
+
+			const selectedWidgetStyles = await editor.evaluate((root) => {
+				const widget = root.querySelector(".pm-nodeview-widget");
+				return {
+					widgetContentEditable: widget && widget.getAttribute("contenteditable")
+				};
+			});
+			expect(selectedWidgetStyles.widgetContentEditable).toBe("false");
 		});
 	});
 
