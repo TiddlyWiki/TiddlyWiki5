@@ -117,6 +117,21 @@ class ProseMirrorEngine {
 				}
 			}
 		});
+
+		// Ensure the ProseMirror-hideselection ::selection override is always
+		// applied AFTER any bundled CSS so the browser uses inherit instead of
+		// the global highlighttext colour (which is white on most themes).
+		if(!this.constructor._hideselectionCssInjected) {
+			this.constructor._hideselectionCssInjected = true;
+			try {
+				const style = this.view.dom.ownerDocument.createElement("style");
+				style.textContent = [
+					".ProseMirror-hideselection *::selection { background: transparent; color: inherit !important; }",
+					".ProseMirror-hideselection *::-moz-selection { background: transparent; color: inherit !important; }"
+				].join("\n");
+				this.view.dom.ownerDocument.head.appendChild(style);
+			} catch(_) { /* noop — non-critical cosmetic fix */ }
+		}
 	}
 
 	_attachEventHandlers() {
