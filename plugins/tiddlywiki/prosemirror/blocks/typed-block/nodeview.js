@@ -16,7 +16,7 @@ const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/bl
 // Module-level flag: when a typed_block is inserted via slash menu,
 // set this to true before dispatching the transaction. The next
 // nodeview constructor will consume this flag and auto-enter edit mode.
-var _pendingAutoEdit = false;
+let _pendingAutoEdit = false;
 
 function scheduleNextAutoEdit() {
 	_pendingAutoEdit = true;
@@ -24,7 +24,7 @@ function scheduleNextAutoEdit() {
 
 exports.scheduleNextAutoEdit = scheduleNextAutoEdit;
 
-var COMMON_TYPES = [
+const COMMON_TYPES = [
 	{ value: "", label: "text/plain" },
 	{ value: "text/plain", label: "text/plain" },
 	{ value: "application/javascript", label: "JavaScript" },
@@ -43,7 +43,7 @@ var COMMON_TYPES = [
 	{ value: ".tid", label: ".tid" }
 ];
 
-var CODE_RENDER_TYPES = {
+const CODE_RENDER_TYPES = {
 	"application/javascript": true,
 	"text/css": true,
 	"application/json": true,

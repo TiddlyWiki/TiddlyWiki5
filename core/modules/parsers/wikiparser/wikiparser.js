@@ -269,18 +269,18 @@ needed to represent the first empty paragraph.
 */
 WikiParser.prototype.parseBlankLineBlocks = function(options) {
 	options = options || {};
-	var whitespaceRegExp = /(\s+)/mg;
+	const whitespaceRegExp = /(\s+)/mg;
 	whitespaceRegExp.lastIndex = this.pos;
-	var whitespaceMatch = whitespaceRegExp.exec(this.source),
+	const whitespaceMatch = whitespaceRegExp.exec(this.source),
 		blankLineBlocks = [];
 	if(whitespaceMatch && whitespaceMatch.index === this.pos) {
-		var start = this.pos,
+		const start = this.pos,
 			whitespace = whitespaceMatch[0],
 			newlineMatches = whitespace.match(/\r?\n/g),
 			newlineCount = newlineMatches ? newlineMatches.length : 0,
 			blankLineCount = options.leading ? Math.max(0,newlineCount - 1) : Math.max(0,newlineCount - 2);
 		this.pos = whitespaceRegExp.lastIndex;
-		for(var index = 0; index < blankLineCount; index++) {
+		for(let index = 0; index < blankLineCount; index++) {
 			blankLineBlocks.push({
 				type: "element",
 				tag: "p",
@@ -312,14 +312,14 @@ Parse a block from the current position to the end of the text
 */
 WikiParser.prototype.parseBlocksUnterminated = function() {
 	if(!this.preserveBlankLines) {
-		var defaultTree = [];
+		const defaultTree = [];
 		while(this.pos < this.sourceLength) {
 			defaultTree.push.apply(defaultTree,this.parseBlock());
 		}
 		return defaultTree;
 	}
-	var tree = [],
-		isLeading = true;
+	const tree = [];
+	let isLeading = true;
 	while(this.pos < this.sourceLength) {
 		tree.push.apply(tree,this.parseBlankLineBlocks({leading: isLeading}));
 		if(this.pos >= this.sourceLength) {

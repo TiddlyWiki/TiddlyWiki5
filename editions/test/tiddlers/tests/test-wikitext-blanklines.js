@@ -30,7 +30,7 @@ describe("Wikitext blank line preservation", function() {
 	});
 
 	it("should leave extra blank lines ignored by default", function() {
-		var tree = $tw.wiki.parseText("text/vnd.tiddlywiki", "A\n\n\nB").tree;
+		const tree = $tw.wiki.parseText("text/vnd.tiddlywiki", "A\n\n\nB").tree;
 		expect(tree.length).toBe(2);
 		expect(tree.map(function(node) { return node.rule; })).toEqual(["parseblock", "parseblock"]);
 	});
