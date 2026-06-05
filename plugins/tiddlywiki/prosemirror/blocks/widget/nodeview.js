@@ -27,6 +27,7 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 	_createDOM() {
 		const container = document.createElement("div");
 		container.className = "pm-nodeview pm-nodeview-widget";
+		container.setAttribute("contenteditable", "false");
 
 		const text = this.node.textContent.trim();
 		const widget = parseWidget(text);
