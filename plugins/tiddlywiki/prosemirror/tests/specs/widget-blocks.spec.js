@@ -157,11 +157,28 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 
 			const selectedWidgetStyles = await editor.evaluate((root) => {
 				const widget = root.querySelector(".pm-nodeview-widget");
+				const link = root.querySelector(".pm-nodeview-widget .pm-nodeview-content a");
+				// Check that the hideselection CSS rule includes color: inherit
+				// to prevent link text from turning white under native selection painting.
+				let hasSelectionColorInherit = false;
+				for (const sheet of document.styleSheets) {
+					try {
+						for (const rule of sheet.cssRules || []) {
+							if (rule.cssText && rule.cssText.includes("hideselection") &&
+								rule.cssText.includes("::selection") && rule.cssText.includes("color: inherit")) {
+								hasSelectionColorInherit = true;
+							}
+						}
+					} catch(_) { /* cross-origin sheets */ }
+				}
 				return {
-					widgetContentEditable: widget && widget.getAttribute("contenteditable")
+					widgetContentEditable: widget && widget.getAttribute("contenteditable"),
+					linkColor: link && getComputedStyle(link).color,
+					hasSelectionColorInherit
 				};
 			});
 			expect(selectedWidgetStyles.widgetContentEditable).toBe("false");
+			expect(selectedWidgetStyles.hasSelectionColorInherit).toBe(true);
 		});
 	});
 
