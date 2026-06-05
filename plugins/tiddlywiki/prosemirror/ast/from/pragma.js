@@ -42,11 +42,11 @@ function opaqueBlock(builders, node) {
 }
 
 function typedBlock(builders, node) {
-	var rawText = node.attrs && node.attrs.rawText || "";
-	var parseType = node.attrs && node.attrs.parseType || "";
-	var renderType = node.attrs && node.attrs.renderType || null;
-	var parser = $tw.wiki.parseText(parseType, rawText, { defaultType: "text/plain" });
-	var children = parser && parser.tree ? parser.tree : [];
+	const rawText = node.attrs && node.attrs.rawText || "";
+	const parseType = node.attrs && node.attrs.parseType || "";
+	const renderType = node.attrs && node.attrs.renderType || null;
+	const parser = $tw.wiki.parseText(parseType, rawText, { defaultType: "text/plain" });
+	const children = parser && parser.tree ? parser.tree : [];
 	if(!renderType) {
 		return {
 			type: "void",
@@ -57,10 +57,10 @@ function typedBlock(builders, node) {
 			text: rawText
 		};
 	}
-	var widgetNode = $tw.wiki.makeWidget(parser);
-	var container = $tw.fakeDocument.createElement("div");
+	const widgetNode = $tw.wiki.makeWidget(parser);
+	const container = $tw.fakeDocument.createElement("div");
 	widgetNode.render(container, null);
-	var renderResult = renderType === "text/html" ? container.innerHTML : container.textContent;
+	const renderResult = renderType === "text/html" ? container.innerHTML : container.textContent;
 	return {
 		type: "void",
 		rule: "typedblock",

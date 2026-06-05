@@ -23,7 +23,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 Object.defineProperty(exports, '__esModule', {
-  value: true
+	value: true
 });
 
 var prosemirrorKeymap = require('prosemirror-keymap');
@@ -35,113 +35,113 @@ var prosemirrorModel = require('prosemirror-model');
 var prosemirrorView = require('prosemirror-view');
 
 var GapCursor = function (_prosemirrorState$Sel) {
-  _inherits(GapCursor, _prosemirrorState$Sel);
+	_inherits(GapCursor, _prosemirrorState$Sel);
 
-  var _super = _createSuper(GapCursor);
+	var _super = _createSuper(GapCursor);
 
-  function GapCursor($pos) {
-    _classCallCheck(this, GapCursor);
+	function GapCursor($pos) {
+		_classCallCheck(this, GapCursor);
 
-    return _super.call(this, $pos, $pos);
-  }
+		return _super.call(this, $pos, $pos);
+	}
 
-  _createClass(GapCursor, [{
-    key: "map",
-    value: function map(doc, mapping) {
-      var $pos = doc.resolve(mapping.map(this.head));
-      return GapCursor.valid($pos) ? new GapCursor($pos) : prosemirrorState.Selection.near($pos);
-    }
-  }, {
-    key: "content",
-    value: function content() {
-      return prosemirrorModel.Slice.empty;
-    }
-  }, {
-    key: "eq",
-    value: function eq(other) {
-      return other instanceof GapCursor && other.head == this.head;
-    }
-  }, {
-    key: "toJSON",
-    value: function toJSON() {
-      return {
-        type: "gapcursor",
-        pos: this.head
-      };
-    }
-  }, {
-    key: "getBookmark",
-    value: function getBookmark() {
-      return new GapBookmark(this.anchor);
-    }
-  }], [{
-    key: "fromJSON",
-    value: function fromJSON(doc, json) {
-      if (typeof json.pos != "number") throw new RangeError("Invalid input for GapCursor.fromJSON");
-      return new GapCursor(doc.resolve(json.pos));
-    }
-  }, {
-    key: "valid",
-    value: function valid($pos) {
-      var parent = $pos.parent;
-      if (parent.isTextblock || !closedBefore($pos) || !closedAfter($pos)) return false;
-      var override = parent.type.spec.allowGapCursor;
-      if (override != null) return override;
-      var deflt = parent.contentMatchAt($pos.index()).defaultType;
-      return deflt && deflt.isTextblock;
-    }
-  }, {
-    key: "findGapCursorFrom",
-    value: function findGapCursorFrom($pos, dir) {
-      var mustMove = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+	_createClass(GapCursor, [{
+		key: "map",
+		value: function map(doc, mapping) {
+			var $pos = doc.resolve(mapping.map(this.head));
+			return GapCursor.valid($pos) ? new GapCursor($pos) : prosemirrorState.Selection.near($pos);
+		}
+	}, {
+		key: "content",
+		value: function content() {
+			return prosemirrorModel.Slice.empty;
+		}
+	}, {
+		key: "eq",
+		value: function eq(other) {
+			return other instanceof GapCursor && other.head == this.head;
+		}
+	}, {
+		key: "toJSON",
+		value: function toJSON() {
+			return {
+				type: "gapcursor",
+				pos: this.head
+			};
+		}
+	}, {
+		key: "getBookmark",
+		value: function getBookmark() {
+			return new GapBookmark(this.anchor);
+		}
+	}], [{
+		key: "fromJSON",
+		value: function fromJSON(doc, json) {
+			if (typeof json.pos != "number") throw new RangeError("Invalid input for GapCursor.fromJSON");
+			return new GapCursor(doc.resolve(json.pos));
+		}
+	}, {
+		key: "valid",
+		value: function valid($pos) {
+			var parent = $pos.parent;
+			if (parent.isTextblock || !closedBefore($pos) || !closedAfter($pos)) return false;
+			var override = parent.type.spec.allowGapCursor;
+			if (override != null) return override;
+			var deflt = parent.contentMatchAt($pos.index()).defaultType;
+			return deflt && deflt.isTextblock;
+		}
+	}, {
+		key: "findGapCursorFrom",
+		value: function findGapCursorFrom($pos, dir) {
+			var mustMove = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-      search: for (;;) {
-        if (!mustMove && GapCursor.valid($pos)) return $pos;
-        var pos = $pos.pos,
-            next = null;
+			search: for (;;) {
+				if (!mustMove && GapCursor.valid($pos)) return $pos;
+				var pos = $pos.pos,
+						next = null;
 
-        for (var d = $pos.depth;; d--) {
-          var parent = $pos.node(d);
+				for (var d = $pos.depth;; d--) {
+					var parent = $pos.node(d);
 
-          if (dir > 0 ? $pos.indexAfter(d) < parent.childCount : $pos.index(d) > 0) {
-            next = parent.child(dir > 0 ? $pos.indexAfter(d) : $pos.index(d) - 1);
-            break;
-          } else if (d == 0) {
-            return null;
-          }
+					if (dir > 0 ? $pos.indexAfter(d) < parent.childCount : $pos.index(d) > 0) {
+						next = parent.child(dir > 0 ? $pos.indexAfter(d) : $pos.index(d) - 1);
+						break;
+					} else if (d == 0) {
+						return null;
+					}
 
-          pos += dir;
-          var $cur = $pos.doc.resolve(pos);
-          if (GapCursor.valid($cur)) return $cur;
-        }
+					pos += dir;
+					var $cur = $pos.doc.resolve(pos);
+					if (GapCursor.valid($cur)) return $cur;
+				}
 
-        for (;;) {
-          var inside = dir > 0 ? next.firstChild : next.lastChild;
+				for (;;) {
+					var inside = dir > 0 ? next.firstChild : next.lastChild;
 
-          if (!inside) {
-            if (next.isAtom && !next.isText && !prosemirrorState.NodeSelection.isSelectable(next)) {
-              $pos = $pos.doc.resolve(pos + next.nodeSize * dir);
-              mustMove = false;
-              continue search;
-            }
+					if (!inside) {
+						if (next.isAtom && !next.isText && !prosemirrorState.NodeSelection.isSelectable(next)) {
+							$pos = $pos.doc.resolve(pos + next.nodeSize * dir);
+							mustMove = false;
+							continue search;
+						}
 
-            break;
-          }
+						break;
+					}
 
-          next = inside;
-          pos += dir;
+					next = inside;
+					pos += dir;
 
-          var _$cur = $pos.doc.resolve(pos);
+					var _$cur = $pos.doc.resolve(pos);
 
-          if (GapCursor.valid(_$cur)) return _$cur;
-        }
+					if (GapCursor.valid(_$cur)) return _$cur;
+				}
 
-        return null;
-      }
-    }
-  }]);
+				return null;
+			}
+		}
+	}]);
 
-  return GapCursor;
+	return GapCursor;
 }(prosemirrorState.Selection);
 
 GapCursor.prototype.visible = false;
@@ -149,146 +149,146 @@ GapCursor.findFrom = GapCursor.findGapCursorFrom;
 prosemirrorState.Selection.jsonID("gapcursor", GapCursor);
 
 var GapBookmark = function () {
-  function GapBookmark(pos) {
-    _classCallCheck(this, GapBookmark);
+	function GapBookmark(pos) {
+		_classCallCheck(this, GapBookmark);
 
-    this.pos = pos;
-  }
+		this.pos = pos;
+	}
 
-  _createClass(GapBookmark, [{
-    key: "map",
-    value: function map(mapping) {
-      return new GapBookmark(mapping.map(this.pos));
-    }
-  }, {
-    key: "resolve",
-    value: function resolve(doc) {
-      var $pos = doc.resolve(this.pos);
-      return GapCursor.valid($pos) ? new GapCursor($pos) : prosemirrorState.Selection.near($pos);
-    }
-  }]);
+	_createClass(GapBookmark, [{
+		key: "map",
+		value: function map(mapping) {
+			return new GapBookmark(mapping.map(this.pos));
+		}
+	}, {
+		key: "resolve",
+		value: function resolve(doc) {
+			var $pos = doc.resolve(this.pos);
+			return GapCursor.valid($pos) ? new GapCursor($pos) : prosemirrorState.Selection.near($pos);
+		}
+	}]);
 
-  return GapBookmark;
+	return GapBookmark;
 }();
 
 function closedBefore($pos) {
-  for (var d = $pos.depth; d >= 0; d--) {
-    var index = $pos.index(d),
-        parent = $pos.node(d);
+	for (var d = $pos.depth; d >= 0; d--) {
+		var index = $pos.index(d),
+				parent = $pos.node(d);
 
-    if (index == 0) {
-      if (parent.type.spec.isolating) return true;
-      continue;
-    }
+		if (index == 0) {
+			if (parent.type.spec.isolating) return true;
+			continue;
+		}
 
-    for (var before = parent.child(index - 1);; before = before.lastChild) {
-      if (before.childCount == 0 && !before.inlineContent || before.isAtom || before.type.spec.isolating) return true;
-      if (before.inlineContent) return false;
-    }
-  }
+		for (var before = parent.child(index - 1);; before = before.lastChild) {
+			if (before.childCount == 0 && !before.inlineContent || before.isAtom || before.type.spec.isolating) return true;
+			if (before.inlineContent) return false;
+		}
+	}
 
-  return true;
+	return true;
 }
 
 function closedAfter($pos) {
-  for (var d = $pos.depth; d >= 0; d--) {
-    var index = $pos.indexAfter(d),
-        parent = $pos.node(d);
+	for (var d = $pos.depth; d >= 0; d--) {
+		var index = $pos.indexAfter(d),
+				parent = $pos.node(d);
 
-    if (index == parent.childCount) {
-      if (parent.type.spec.isolating) return true;
-      continue;
-    }
+		if (index == parent.childCount) {
+			if (parent.type.spec.isolating) return true;
+			continue;
+		}
 
-    for (var after = parent.child(index);; after = after.firstChild) {
-      if (after.childCount == 0 && !after.inlineContent || after.isAtom || after.type.spec.isolating) return true;
-      if (after.inlineContent) return false;
-    }
-  }
+		for (var after = parent.child(index);; after = after.firstChild) {
+			if (after.childCount == 0 && !after.inlineContent || after.isAtom || after.type.spec.isolating) return true;
+			if (after.inlineContent) return false;
+		}
+	}
 
-  return true;
+	return true;
 }
 
 function gapCursor() {
-  return new prosemirrorState.Plugin({
-    props: {
-      decorations: drawGapCursor,
-      createSelectionBetween: function createSelectionBetween(_view, $anchor, $head) {
-        return $anchor.pos == $head.pos && GapCursor.valid($head) ? new GapCursor($head) : null;
-      },
-      handleClick: handleClick,
-      handleKeyDown: handleKeyDown,
-      handleDOMEvents: {
-        beforeinput: beforeinput
-      }
-    }
-  });
+	return new prosemirrorState.Plugin({
+		props: {
+			decorations: drawGapCursor,
+			createSelectionBetween: function createSelectionBetween(_view, $anchor, $head) {
+				return $anchor.pos == $head.pos && GapCursor.valid($head) ? new GapCursor($head) : null;
+			},
+			handleClick: handleClick,
+			handleKeyDown: handleKeyDown,
+			handleDOMEvents: {
+				beforeinput: beforeinput
+			}
+		}
+	});
 }
 
 var handleKeyDown = prosemirrorKeymap.keydownHandler({
-  "ArrowLeft": arrow("horiz", -1),
-  "ArrowRight": arrow("horiz", 1),
-  "ArrowUp": arrow("vert", -1),
-  "ArrowDown": arrow("vert", 1)
+	"ArrowLeft": arrow("horiz", -1),
+	"ArrowRight": arrow("horiz", 1),
+	"ArrowUp": arrow("vert", -1),
+	"ArrowDown": arrow("vert", 1)
 });
 
 function arrow(axis, dir) {
-  var dirStr = axis == "vert" ? dir > 0 ? "down" : "up" : dir > 0 ? "right" : "left";
-  return function (state, dispatch, view) {
-    var sel = state.selection;
-    var $start = dir > 0 ? sel.$to : sel.$from,
-        mustMove = sel.empty;
+	var dirStr = axis == "vert" ? dir > 0 ? "down" : "up" : dir > 0 ? "right" : "left";
+	return function (state, dispatch, view) {
+		var sel = state.selection;
+		var $start = dir > 0 ? sel.$to : sel.$from,
+				mustMove = sel.empty;
 
-    if (sel instanceof prosemirrorState.TextSelection) {
-      if (!view.endOfTextblock(dirStr) || $start.depth == 0) return false;
-      mustMove = false;
-      $start = state.doc.resolve(dir > 0 ? $start.after() : $start.before());
-    }
+		if (sel instanceof prosemirrorState.TextSelection) {
+			if (!view.endOfTextblock(dirStr) || $start.depth == 0) return false;
+			mustMove = false;
+			$start = state.doc.resolve(dir > 0 ? $start.after() : $start.before());
+		}
 
-    var $found = GapCursor.findGapCursorFrom($start, dir, mustMove);
-    if (!$found) return false;
-    if (dispatch) dispatch(state.tr.setSelection(new GapCursor($found)));
-    return true;
-  };
+		var $found = GapCursor.findGapCursorFrom($start, dir, mustMove);
+		if (!$found) return false;
+		if (dispatch) dispatch(state.tr.setSelection(new GapCursor($found)));
+		return true;
+	};
 }
 
 function handleClick(view, pos, event) {
-  if (!view || !view.editable) return false;
-  var $pos = view.state.doc.resolve(pos);
-  if (!GapCursor.valid($pos)) return false;
-  var clickPos = view.posAtCoords({
-    left: event.clientX,
-    top: event.clientY
-  });
-  if (clickPos && clickPos.inside > -1 && prosemirrorState.NodeSelection.isSelectable(view.state.doc.nodeAt(clickPos.inside))) return false;
-  view.dispatch(view.state.tr.setSelection(new GapCursor($pos)));
-  return true;
+	if (!view || !view.editable) return false;
+	var $pos = view.state.doc.resolve(pos);
+	if (!GapCursor.valid($pos)) return false;
+	var clickPos = view.posAtCoords({
+		left: event.clientX,
+		top: event.clientY
+	});
+	if (clickPos && clickPos.inside > -1 && prosemirrorState.NodeSelection.isSelectable(view.state.doc.nodeAt(clickPos.inside))) return false;
+	view.dispatch(view.state.tr.setSelection(new GapCursor($pos)));
+	return true;
 }
 
 function beforeinput(view, event) {
-  if (event.inputType != "insertCompositionText" || !(view.state.selection instanceof GapCursor)) return false;
-  var $from = view.state.selection.$from;
-  var insert = $from.parent.contentMatchAt($from.index()).findWrapping(view.state.schema.nodes.text);
-  if (!insert) return false;
-  var frag = prosemirrorModel.Fragment.empty;
+	if (event.inputType != "insertCompositionText" || !(view.state.selection instanceof GapCursor)) return false;
+	var $from = view.state.selection.$from;
+	var insert = $from.parent.contentMatchAt($from.index()).findWrapping(view.state.schema.nodes.text);
+	if (!insert) return false;
+	var frag = prosemirrorModel.Fragment.empty;
 
-  for (var i = insert.length - 1; i >= 0; i--) {
-    frag = prosemirrorModel.Fragment.from(insert[i].createAndFill(null, frag));
-  }
+	for (var i = insert.length - 1; i >= 0; i--) {
+		frag = prosemirrorModel.Fragment.from(insert[i].createAndFill(null, frag));
+	}
 
-  var tr = view.state.tr.replace($from.pos, $from.pos, new prosemirrorModel.Slice(frag, 0, 0));
-  tr.setSelection(prosemirrorState.TextSelection.near(tr.doc.resolve($from.pos + 1)));
-  view.dispatch(tr);
-  return false;
+	var tr = view.state.tr.replace($from.pos, $from.pos, new prosemirrorModel.Slice(frag, 0, 0));
+	tr.setSelection(prosemirrorState.TextSelection.near(tr.doc.resolve($from.pos + 1)));
+	view.dispatch(tr);
+	return false;
 }
 
 function drawGapCursor(state) {
-  if (!(state.selection instanceof GapCursor)) return null;
-  var node = document.createElement("div");
-  node.className = "ProseMirror-gapcursor";
-  return prosemirrorView.DecorationSet.create(state.doc, [prosemirrorView.Decoration.widget(state.selection.head, node, {
-    key: "gapcursor"
-  })]);
+	if (!(state.selection instanceof GapCursor)) return null;
+	var node = document.createElement("div");
+	node.className = "ProseMirror-gapcursor";
+	return prosemirrorView.DecorationSet.create(state.doc, [prosemirrorView.Decoration.widget(state.selection.head, node, {
+		key: "gapcursor"
+	})]);
 }
 
 exports.GapCursor = GapCursor;
