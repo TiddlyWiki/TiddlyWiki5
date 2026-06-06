@@ -281,6 +281,15 @@ describe("ProseMirror incremental sync — diff calculation", () => {
 			return $tw.utils.serializeWikitextParseTree(wikiAst);
 		}
 
+		it("should tolerate legacy parsers without blankline nodes", () => {
+			const legacyAst = $tw.wiki.parseText("text/vnd.tiddlywiki", "Hello\n\n\nWorld", { preserveBlankLines: false }).tree;
+			const pmAst = wikiAstToProseMirrorAst(legacyAst, { sourceText: "Hello\n\n\nWorld" });
+
+			expect(legacyAst.map((node) => node.rule)).toEqual(["parseblock", "parseblock"]);
+			expect(pmAst.content.map((node) => node.type)).toEqual(["paragraph", "paragraph"]);
+			expect(schema.nodeFromJSON(pmAst).childCount).toBe(2);
+		});
+
 		it("should preserve empty paragraphs through wiki text roundtrip", () => {
 			const pmDoc = paraDoc("Hello World", "");
 			const lastSavedJSON = pmDoc.toJSON();
