@@ -44,8 +44,8 @@
   position: relative;
 }
 
-.ProseMirror-hideselection *::selection { background: transparent; color: inherit !important; }
-.ProseMirror-hideselection *::-moz-selection { background: transparent; color: inherit !important; }
+.ProseMirror-hideselection *::selection { background: transparent; color: currentColor; }
+.ProseMirror-hideselection *::-moz-selection { background: transparent; color: currentColor; }
 .ProseMirror-hideselection { caret-color: transparent; }
 
 /* See https://github.com/ProseMirror/prosemirror/issues/1421#issuecomment-1759320191 */

@@ -383,12 +383,6 @@ class BaseSourceEditableNodeView {
 		event.preventDefault();
 		event.stopPropagation();
 		this.selectBlockNode();
-		// Explicitly clear any residual native selection range that the
-		// browser may have painted over the rendered content. ProseMirror's
-		// NodeSelection owns the selection state; the browser range is
-		// purely visual and causes link text to appear white when the
-		// ::selection foreground is inherited from the global theme.
-		try { window.getSelection().removeAllRanges(); } catch(_) { /* noop */ }
 	}
 
 	shouldStopRenderedContentEvent(event) {
