@@ -34,45 +34,52 @@ var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-latex/tags";
 // Cache the LanguageSupport for LaTeX with properly scoped autocompletion
 var _latexSupport = null;
 
+function isLatexType(type) {
+	return LATEX_TYPES.indexOf(type) !== -1;
+}
+
 function getLatexSupport(core) {
 	if(_latexSupport) return _latexSupport;
 
-	// Use latexLanguage directly (without latex() which includes autocompletion with override)
-	// The override option in latex() replaces ALL completion sources, breaking other languages.
-	// Instead, we register completions via languageData which scopes them to LaTeX content only.
+	// Use latexLanguage directly, without latex(), because latex() may use
+	// autocompletion override and replace other completion sources.
 	var LanguageSupport = core.language.LanguageSupport;
 	var latexLanguage = langLatex.latexLanguage;
 	var latexCompletionSource = langLatex.latexCompletionSource;
 	var autocompletion = cmAutocomplete.autocompletion;
 
 	if(LanguageSupport && latexLanguage) {
-		// Create LanguageSupport with LaTeX completions scoped to LaTeX content
 		var support = [];
 
-		// Add LaTeX-specific completions via languageData (not override)
-		// latexCompletionSource is a factory: latexCompletionSource(autoCloseTagsEnabled) => CompletionSource
+		// Add LaTeX-specific completions via languageData, not override.
+		// latexCompletionSource is a factory:
+		// latexCompletionSource(autoCloseTagsEnabled) => CompletionSource
 		if(latexCompletionSource) {
-			// Call the factory to get the actual completion source
 			var actualSource = latexCompletionSource(false);
-			support.push(latexLanguage.data.of({
-				autocomplete: actualSource
-			}));
+
+			support.push(
+				latexLanguage.data.of({
+					autocomplete: actualSource
+				})
+			);
 		}
 
-		// Add autocompletion extension - needed for pure LaTeX tiddlers where
-		// TiddlyWiki plugin isn't active. For TiddlyWiki content, the TiddlyWiki
-		// plugin provides autocompletion, but this plugin won't be active then.
+		// Needed for pure LaTeX tiddlers where the TiddlyWiki language plugin
+		// is not active.
 		if(autocompletion) {
-			support.push(autocompletion({
-				activateOnTyping: true
-			}));
+			support.push(
+				autocompletion({
+					activateOnTyping: true
+				})
+			);
 		}
 
 		_latexSupport = new LanguageSupport(latexLanguage, support);
 	} else {
-		// Fallback to full latex() if we can't create a custom version
+		// Fallback to full latex() if custom support cannot be created.
 		_latexSupport = langLatex.latex();
 	}
+
 	return _latexSupport;
 }
 
@@ -81,36 +88,91 @@ exports.plugin = {
 	description: "LaTeX syntax highlighting",
 	priority: 50,
 
+	/*
+	Expose the real content types handled by this plugin.
+
+	This lets the engine resolve a winning tag override to a real LaTeX
+	language mode.
+	*/
+	contentTypes: LATEX_TYPES,
+	types: LATEX_TYPES,
+
 	init: function(cm6Core) {
 		this._core = cm6Core;
 	},
 
 	registerCompartments: function() {
 		var Compartment = this._core.state.Compartment;
+
 		return {
 			latexLanguage: new Compartment()
 		};
 	},
 
-	condition: function(context) {
-		// If any tag override is active, only the winning plugin activates
-		if(context.hasTagOverride) {
-			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
+	getTagOverrideType: function(context) {
+		if(context.tagOverrideWinner === TAGS_CONFIG_TIDDLER) {
+			return LATEX_TYPES[0];
 		}
-		// Normal mode: tag match or type match
+
+		return null;
+	},
+
+	condition: function(context) {
+		var effectiveType = context.effectiveType || context.tiddlerType || "";
+
+		/*
+		If a tag override is active, only the winning tag/plugin may activate.
+
+		Do not use hasConfiguredTag() here. A tiddler may contain multiple
+		configured language tags, but the engine has already selected the
+		winner.
+		*/
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER ||
+				isLatexType(effectiveType);
+		}
+
+		/*
+		Normal mode:
+		- dropdown/session override
+		- codemirror-type field
+		- actual type field
+		- configured LaTeX language tag
+		*/
+		if(isLatexType(effectiveType)) return true;
 		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
-		return LATEX_TYPES.indexOf(context.tiddlerType) !== -1;
+
+		return false;
 	},
 
+	/*
+	Runtime language switching uses this.
+
+	This must return raw compartment content only.
+	Do not return latexLanguage.of(...) from here.
+	*/
 	getCompartmentContent: function(_context) {
-		return [getLatexSupport(this._core)];
+		return [
+			getLatexSupport(this._core)
+		];
 	},
 
+	/*
+	Initial editor construction uses this.
+
+	This may wrap the raw content in the plugin's compartment.
+	*/
 	getExtensions: function(context) {
 		var compartments = context.engine._compartments;
+
 		if(compartments.latexLanguage) {
-			return [compartments.latexLanguage.of(this.getCompartmentContent(context))];
+			return [
+				compartments.latexLanguage.of(
+					this.getCompartmentContent(context)
+				)
+			];
 		}
+
 		return this.getCompartmentContent(context);
 	}
 };

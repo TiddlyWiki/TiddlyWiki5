@@ -29,10 +29,23 @@ var PHP_TYPES = [
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-php/tags";
 
+function isPhpType(type) {
+	return PHP_TYPES.indexOf(type) !== -1;
+}
+
 exports.plugin = {
 	name: "lang-php",
 	description: "PHP syntax highlighting",
 	priority: 50,
+
+	/*
+	Expose the real content types handled by this plugin.
+
+	This lets the engine resolve a winning tag override to a real PHP
+	language mode.
+	*/
+	contentTypes: PHP_TYPES,
+	types: PHP_TYPES,
 
 	init: function(cm6Core) {
 		this._core = cm6Core;
@@ -40,30 +53,76 @@ exports.plugin = {
 
 	registerCompartments: function() {
 		var Compartment = this._core.state.Compartment;
+
 		return {
 			phpLanguage: new Compartment()
 		};
 	},
 
-	condition: function(context) {
-		// If any tag override is active, only the winning plugin activates
-		if(context.hasTagOverride) {
-			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
+	getTagOverrideType: function(context) {
+		if(context.tagOverrideWinner === TAGS_CONFIG_TIDDLER) {
+			return PHP_TYPES[0];
 		}
-		// Normal mode: tag match or type match
+
+		return null;
+	},
+
+	condition: function(context) {
+		var effectiveType = context.effectiveType || context.tiddlerType || "";
+
+		/*
+		If a tag override is active, only the winning tag/plugin may activate.
+
+		Do not use hasConfiguredTag() here. A tiddler may contain multiple
+		configured language tags, but the engine has already selected the
+		winner.
+		*/
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER ||
+				isPhpType(effectiveType);
+		}
+
+		/*
+		Normal mode:
+		- dropdown/session override
+		- codemirror-type field
+		- actual type field
+		- configured PHP language tag
+		*/
+		if(isPhpType(effectiveType)) return true;
 		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
-		return PHP_TYPES.indexOf(context.tiddlerType) !== -1;
+
+		return false;
 	},
 
+	/*
+	Runtime language switching uses this.
+
+	This must return raw compartment content only.
+	Do not return phpLanguage.of(...) from here.
+	*/
 	getCompartmentContent: function(_context) {
-		return [langPhp.php()];
+		return [
+			langPhp.php()
+		];
 	},
 
+	/*
+	Initial editor construction uses this.
+
+	This may wrap the raw content in the plugin's compartment.
+	*/
 	getExtensions: function(context) {
 		var compartments = context.engine._compartments;
+
 		if(compartments.phpLanguage) {
-			return [compartments.phpLanguage.of(this.getCompartmentContent(context))];
+			return [
+				compartments.phpLanguage.of(
+					this.getCompartmentContent(context)
+				)
+			];
 		}
+
 		return this.getCompartmentContent(context);
 	}
 };

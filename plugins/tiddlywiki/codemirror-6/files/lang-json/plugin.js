@@ -37,6 +37,10 @@ var JSON_TYPES = [
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-json/tags";
 var LINT_ENABLED_CONFIG = "$:/config/codemirror-6/lint/enabled";
 
+function isJsonType(type) {
+	return JSON_TYPES.indexOf(type) !== -1;
+}
+
 /**
  * Check if linting is globally enabled
  */
@@ -61,12 +65,15 @@ function isLintDisabledForTiddler(tiddlerTitle) {
  */
 function buildLintExtensions() {
 	var extensions = [];
+
 	if(lintLib && lintLib.linter && langJson.jsonParseLinter) {
 		extensions.push(lintLib.linter(langJson.jsonParseLinter()));
+
 		if(lintLib.lintGutter) {
 			extensions.push(lintLib.lintGutter());
 		}
 	}
+
 	return extensions;
 }
 
@@ -75,55 +82,112 @@ exports.plugin = {
 	description: "JSON syntax highlighting and linting",
 	priority: 50,
 
+	/*
+	Expose the real content types handled by this plugin.
+
+	This allows the engine to resolve a winning tag override to a real
+	language mode instead of treating the tag as a side condition only.
+	*/
+	contentTypes: JSON_TYPES,
+	types: JSON_TYPES,
+
 	init: function(cm6Core) {
 		this._core = cm6Core;
 	},
 
 	registerCompartments: function() {
 		var Compartment = this._core.state.Compartment;
+
 		return {
 			jsonLanguage: new Compartment(),
 			jsonLint: new Compartment()
 		};
 	},
 
-	condition: function(context) {
-		// If any tag override is active, only the winning plugin activates
-		if(context.hasTagOverride) {
-			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
+	getTagOverrideType: function(context) {
+		if(context.tagOverrideWinner === TAGS_CONFIG_TIDDLER) {
+			return JSON_TYPES[0];
 		}
-		// Normal mode: tag match or type match
+		return null;
+	},
+
+	condition: function(context) {
+		var effectiveType = context.effectiveType || context.tiddlerType || "";
+
+		/*
+		If a tag override is active, only the winning tag/plugin may activate.
+
+		Do not use hasConfiguredTag() here. A tiddler may contain multiple
+		configured language tags, but the engine has already selected the
+		winner.
+		*/
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER ||
+				isJsonType(effectiveType);
+		}
+
+		/*
+		Normal mode:
+		- dropdown/session override
+		- codemirror-type field
+		- actual type field
+		- configured JSON language tag
+		*/
+		if(isJsonType(effectiveType)) return true;
 		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
-		return JSON_TYPES.indexOf(context.tiddlerType) !== -1;
+
+		return false;
 	},
 
+	/*
+	Runtime language switching uses this.
+
+	This must return raw content for jsonLanguage only.
+	Do not return jsonLanguage.of(...) from here.
+	*/
 	getCompartmentContent: function(_context) {
-		// Language only - lint is in separate compartment
-		return [langJson.json()];
+		return [
+			langJson.json()
+		];
 	},
 
+	/*
+	Separate raw content for the lint compartment.
+	*/
 	getLintContent: function(context) {
-		// Check if lint is enabled globally and for this tiddler
 		var tiddlerTitle = context.tiddlerTitle;
+
 		if(!isLintEnabled()) return [];
 		if(tiddlerTitle && isLintDisabledForTiddler(tiddlerTitle)) return [];
+
 		return buildLintExtensions();
 	},
 
+	/*
+	Initial editor construction uses this.
+
+	This may wrap raw content in compartments.
+	*/
 	getExtensions: function(context) {
 		var compartments = context.engine._compartments;
 		var extensions = [];
 
-		// Language compartment
 		if(compartments.jsonLanguage) {
-			extensions.push(compartments.jsonLanguage.of(this.getCompartmentContent(context)));
+			extensions.push(
+				compartments.jsonLanguage.of(
+					this.getCompartmentContent(context)
+				)
+			);
 		} else {
 			extensions = extensions.concat(this.getCompartmentContent(context));
 		}
 
-		// Lint compartment (separate for toggle support)
 		if(compartments.jsonLint) {
-			extensions.push(compartments.jsonLint.of(this.getLintContent(context)));
+			extensions.push(
+				compartments.jsonLint.of(
+					this.getLintContent(context)
+				)
+			);
 		} else {
 			extensions = extensions.concat(this.getLintContent(context));
 		}
@@ -144,7 +208,6 @@ exports.plugin = {
 
 		if(!compartment) return;
 
-		// Check if lint config changed
 		var lintConfigChanged = false;
 		var perTiddlerDisableTiddler = tiddlerTitle ? "$:/temp/codemirror-6/lint-disabled/" + tiddlerTitle : null;
 
@@ -157,10 +220,9 @@ exports.plugin = {
 		}
 
 		if(lintConfigChanged) {
-			var newContent = this.getLintContent(context);
 			try {
 				engine.view.dispatch({
-					effects: compartment.reconfigure(newContent)
+					effects: compartment.reconfigure(this.getLintContent(context))
 				});
 			} catch (_e) {}
 		}
@@ -186,7 +248,6 @@ exports.plugin = {
 			var perTiddlerDisabled = isLintDisabledForTiddler(tiddlerTitle);
 			var disableTiddler = "$:/temp/codemirror-6/lint-disabled/" + tiddlerTitle;
 
-			// Toggle the per-tiddler state
 			if(perTiddlerDisabled) {
 				$tw.wiki.deleteTiddler(disableTiddler);
 			} else {
@@ -196,7 +257,6 @@ exports.plugin = {
 				});
 			}
 
-			// Calculate new state after toggle
 			var newPerTiddlerDisabled = !perTiddlerDisabled;
 			var newEnabled = isLintEnabled() && !newPerTiddlerDisabled;
 			var newContent = newEnabled ? buildLintExtensions() : [];

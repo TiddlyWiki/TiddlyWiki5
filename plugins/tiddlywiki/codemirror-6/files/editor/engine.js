@@ -586,69 +586,253 @@ function clearPluginCache() {
 	_pluginCache = null;
 }
 
+function normalizeContentType(value) {
+	if(value === undefined || value === null) return "";
+	value = String(value).trim();
+	return value;
+}
+
+function looksLikeContentType(value) {
+	value = normalizeContentType(value);
+	return /^[A-Za-z0-9.+_-]+\/[A-Za-z0-9.+_-]+$/.test(value);
+}
+
+function getContextWidget(options) {
+	return options && options.widget ? options.widget : null;
+}
+
+function getContextWiki(options) {
+	var widget = getContextWidget(options);
+	return widget && widget.wiki ? widget.wiki : null;
+}
+
+function getContextTiddlerTitle(options) {
+	var widget = getContextWidget(options);
+	if(!widget) return null;
+	if(widget.editTitle) return widget.editTitle;
+	if(widget.getAttribute) return widget.getAttribute("tiddler");
+	return null;
+}
+
+function getFirstContentTypeFromTiddler(tiddler) {
+	if(!tiddler || !tiddler.fields) return "";
+
+	var fields = tiddler.fields;
+	var fieldNames = [
+		"codemirror-type",
+		"language-type",
+		"languageType",
+		"content-type",
+		"contentType",
+		"mime-type",
+		"mimeType",
+		"mode-type",
+		"modeType",
+		"type"
+	];
+
+	for(var i = 0; i < fieldNames.length; i++) {
+		var value = normalizeContentType(fields[fieldNames[i]]);
+		if(value) return value;
+	}
+
+	var text = normalizeContentType(fields.text);
+	if(looksLikeContentType(text)) return text;
+
+	return "";
+}
+
+function getLanguageTypeFromReference(wiki, refTitle) {
+	if(!wiki || !refTitle) return "";
+
+	var tiddler = wiki.getTiddler(refTitle);
+	var value = getFirstContentTypeFromTiddler(tiddler);
+	if(value) return value;
+
+	return "";
+}
+
+function getLanguageTypeFromLanguageRegistry(wiki, winnerTitle) {
+	if(!wiki || !winnerTitle || !wiki.filterTiddlers) return "";
+
+	var languageTiddlers;
+	try {
+		languageTiddlers = wiki.filterTiddlers("[all[tiddlers+shadows]tag[$:/tags/CodeMirror/Language]]");
+	} catch(_e) {
+		languageTiddlers = [];
+	}
+
+	for(var i = 0; i < languageTiddlers.length; i++) {
+		var title = languageTiddlers[i];
+		var tiddler = wiki.getTiddler(title);
+		if(!tiddler || !tiddler.fields) continue;
+
+		if(title === winnerTitle ||
+				tiddler.fields.plugin === winnerTitle ||
+				tiddler.fields["override-plugin"] === winnerTitle ||
+				tiddler.fields["tag-override"] === winnerTitle ||
+				tiddler.fields["override"] === winnerTitle) {
+			var value = normalizeContentType(tiddler.fields.type || tiddler.fields["codemirror-type"]);
+			if(value) return value;
+		}
+	}
+
+	return "";
+}
+
+function resolveTagOverrideType(context, wiki, utils) {
+	if(!utils) return "";
+
+	var directResolvers = [
+		"getTagOverrideType",
+		"resolveTagOverrideType",
+		"getTagOverrideLanguageType",
+		"getLanguageOverrideType"
+	];
+
+	for(var i = 0; i < directResolvers.length; i++) {
+		var fnName = directResolvers[i];
+		if(isFunction(utils[fnName])) {
+			try {
+				var directValue = normalizeContentType(utils[fnName](context));
+				if(directValue) return directValue;
+			} catch(_e) {}
+		}
+	}
+
+	var winnerTitle = context.tagOverrideWinner;
+	if(!winnerTitle) return "";
+
+	// Preferred: the winner itself is a language metadata tiddler, or points to one.
+	var value = getLanguageTypeFromLanguageRegistry(wiki, winnerTitle);
+	if(value) return value;
+
+	var winner = wiki && wiki.getTiddler ? wiki.getTiddler(winnerTitle) : null;
+	if(winner && winner.fields) {
+		var referenceFields = [
+			"language",
+			"language-tiddler",
+			"languageTiddler",
+			"codemirror-language",
+			"codemirrorLanguage",
+			"target-language",
+			"targetLanguage",
+			"mode",
+			"plugin"
+		];
+
+		for(var j = 0; j < referenceFields.length; j++) {
+			var ref = normalizeContentType(winner.fields[referenceFields[j]]);
+			if(!ref) continue;
+
+			if(looksLikeContentType(ref)) return ref;
+
+			value = getLanguageTypeFromReference(wiki, ref);
+			if(value) return value;
+		}
+
+		value = getFirstContentTypeFromTiddler(winner);
+		if(value) return value;
+	}
+
+	return "";
+}
+
 function buildPluginContext(options, engine, overrideType) {
+	options = options || {};
+
+	var widget = getContextWidget(options);
+	var wiki = getContextWiki(options);
+	var tiddlerTitle = getContextTiddlerTitle(options);
+	var tiddler = tiddlerTitle && wiki && wiki.getTiddler ? wiki.getTiddler(tiddlerTitle) : null;
+	var tiddlerFields = tiddler ? tiddler.fields : null;
+	var realTiddlerType = tiddlerFields ? normalizeContentType(tiddlerFields.type) : "";
+	var fieldOverrideType = tiddlerFields ? normalizeContentType(tiddlerFields["codemirror-type"]) : "";
+	var explicitType = options.tiddlerType !== undefined ? normalizeContentType(options.tiddlerType) : "";
+	var requestedType = overrideType !== undefined ? normalizeContentType(overrideType) : "";
+	var hasRequestedType = overrideType !== undefined;
+	var sessionType = engine && engine._sessionTypeOverride !== undefined ? normalizeContentType(engine._sessionTypeOverride) : "";
+	var hasSessionType = !!(engine && engine._sessionTypeOverride !== undefined);
+
+	if(explicitType) {
+		realTiddlerType = explicitType;
+	}
+
+	var preTagType = "";
+	var preTagSource = "default";
+
+	if(hasRequestedType) {
+		preTagType = requestedType;
+		preTagSource = "requested";
+	} else if(hasSessionType) {
+		preTagType = sessionType;
+		preTagSource = "session";
+	} else if(fieldOverrideType) {
+		preTagType = fieldOverrideType;
+		preTagSource = "field";
+	} else {
+		preTagType = realTiddlerType;
+		preTagSource = realTiddlerType ? "type" : "default";
+	}
+
 	var context = {
-		tiddlerTitle: null,
-		tiddlerType: null,
-		tiddlerFields: null,
+		tiddlerTitle: tiddlerTitle,
+		tiddlerType: preTagType,
+		effectiveType: preTagType,
+		realTiddlerType: realTiddlerType,
+		fieldOverrideType: fieldOverrideType,
+		sessionOverrideType: hasSessionType ? sessionType : undefined,
+		requestedType: hasRequestedType ? requestedType : undefined,
+		typeSource: preTagSource,
+		tiddlerFields: tiddlerFields,
 		readOnly: !!options.readOnly,
 		cm6Core: getCM6Core(),
 		engine: engine,
 		options: options,
-		hasTagOverride: false // Will be set below if any tag override is active
+		hasTagOverride: false,
+		tagOverrideWinner: null,
+		tagOverrideType: ""
 	};
 
-	if(options.widget) {
-		var widget = options.widget;
-
-		if(widget.editTitle) {
-			context.tiddlerTitle = widget.editTitle;
-		} else if(widget.getAttribute) {
-			context.tiddlerTitle = widget.getAttribute("tiddler");
-		}
-
-		var wiki = widget.wiki;
-		if(context.tiddlerTitle && wiki) {
-			var tiddler = wiki.getTiddler(context.tiddlerTitle);
-			if(tiddler) {
-				context.tiddlerFields = tiddler.fields;
-				context.tiddlerType = tiddler.fields.type || "";
-
-				// Check for codemirror-type field override (persistent language switch)
-				if(tiddler.fields["codemirror-type"]) {
-					context.tiddlerType = tiddler.fields["codemirror-type"];
-				}
-			}
-		}
-
-		if(widget.editField === "text" && !context.tiddlerType) {
-			context.tiddlerType = "";
-		}
+	if(widget && widget.editField === "text" && !context.tiddlerType) {
+		context.tiddlerType = "";
+		context.effectiveType = "";
 	}
 
-	// Explicit overrides
-	if(options.tiddlerType !== undefined) {
-		context.tiddlerType = options.tiddlerType;
-	}
 	if(options.tiddlerTitle !== undefined) {
 		context.tiddlerTitle = options.tiddlerTitle;
 	}
 
-	// Runtime type override (for setType calls)
-	if(overrideType !== undefined) {
-		context.tiddlerType = overrideType;
-	}
-
-	// Check if any language plugin has a tag override for this tiddler
-	// When a tag override is active, type-based language detection is skipped
-	// tagOverrideWinner contains the config tiddler path of the winning plugin
 	try {
 		var utils = require("$:/plugins/tiddlywiki/codemirror-6/utils.js");
 		if(utils && utils.getTagOverrideWinner) {
 			context.tagOverrideWinner = utils.getTagOverrideWinner(context);
-			context.hasTagOverride = context.tagOverrideWinner !== null;
+			context.hasTagOverride = context.tagOverrideWinner !== null && context.tagOverrideWinner !== undefined;
+			if(context.hasTagOverride) {
+				context.tagOverrideType = resolveTagOverrideType(context, wiki, utils);
+			}
 		}
-	} catch (_e) {}
+	} catch(_e) {}
+
+	if(context.tagOverrideType) {
+		context.tiddlerType = context.tagOverrideType;
+		context.effectiveType = context.tagOverrideType;
+		context.typeSource = "tag";
+	} else {
+		context.tiddlerType = preTagType;
+		context.effectiveType = preTagType;
+		context.typeSource = preTagSource;
+	}
+
+	context.languageSignature = [
+		context.effectiveType || "",
+		context.typeSource || "",
+		context.tagOverrideWinner || "",
+		context.tagOverrideType || "",
+		context.sessionOverrideType === undefined ? "" : context.sessionOverrideType,
+		context.fieldOverrideType || "",
+		context.realTiddlerType || ""
+	].join("\u001f");
 
 	return context;
 }
@@ -707,6 +891,11 @@ class CodeMirrorEngine {
 
 		// Current content type (for language switching)
 		this._currentType = null;
+
+		// Runtime language override used by the language dropdown when persistence is "session".
+		// This intentionally does not write to the edited tiddler. Tag-based language
+		// overrides still win because plugin contexts are rebuilt with tag metadata.
+		this._sessionTypeOverride = undefined;
 
 		// Callbacks
 		this._onChange = isFunction(options.onChange) ? options.onChange : null;
@@ -2351,26 +2540,117 @@ class CodeMirrorEngine {
 	}
 
 	/**
-	 * Change content type and reconfigure language plugins
-	 * @param {string} newType - New content type
+	 * Build a fresh language context for the current editor.
+	 * This is the single authority for language resolution.
+	 *
+	 * Effective priority:
+	 * 1. tag override resolved to a real content type
+	 * 2. requested type passed to setType()
+	 * 3. session override from the language dropdown
+	 * 4. persistent codemirror-type field
+	 * 5. real tiddler type
+	 *
+	 * @param {string|undefined} requestedType - Optional one-shot requested type
+	 * @returns {object}
 	 */
-	setType(newType) {
-		if(this._destroyed) return;
+	_resolveLanguageContext(requestedType) {
+		return buildPluginContext(this.options, this, requestedType);
+	}
 
-		var oldType = this._currentType;
-		if(newType === oldType) return;
+	/**
+	 * Resolve the effective type only.
+	 * Kept for callers that only need the final content type string.
+	 *
+	 * @returns {string}
+	 */
+	_resolveTiddlerType() {
+		var context = this._resolveLanguageContext();
+		return context.tiddlerType || "";
+	}
 
-		this._currentType = newType;
-		if(this._pluginContext) {
-			this._pluginContext.tiddlerType = newType;
+
+	/**
+	 * Return raw compartment content for a plugin in its next active/inactive state.
+	 *
+	 * Important contract:
+	 * - getExtensions(context) is only for initial EditorState construction.
+	 * - getCompartmentContent(context) is for runtime Compartment.reconfigure().
+	 *
+	 * Never call getExtensions() here. Most language plugins return
+	 * compartment.of(...) from getExtensions(), and passing that back into the same
+	 * compartment's reconfigure() causes:
+	 *
+	 *     RangeError: Duplicate use of compartment in extensions
+	 *
+	 * @param {object} plugin - Plugin definition
+	 * @param {object} context - Fresh plugin context
+	 * @param {boolean} active - Whether the plugin should be active
+	 * @returns {Array|null} Raw content array, or null when this plugin cannot be safely reconfigured yet
+	 */
+	_getPluginReconfigurationContent(plugin, context, active) {
+		var newContent = [];
+		var compartmentName = this._findPluginCompartment(plugin);
+
+		if(active) {
+			if(isFunction(plugin.getCompartmentContent)) {
+				try {
+					newContent = plugin.getCompartmentContent(context) || [];
+					if(!isArray(newContent)) newContent = [newContent];
+				} catch(_e) {
+					newContent = [];
+				}
+			} else {
+				/*
+				This plugin is switchable because it has a compartment, but it does
+				not yet provide raw compartment content. Do not fall back to
+				getExtensions(), because that may contain compartment.of(...).
+				The corresponding language plugin must be updated to expose
+				getCompartmentContent(context).
+				*/
+				return null;
+			}
+		} else {
+			// For language compartments, use plain text to clear stale syntax trees.
+			// Empty content is fine for non-language compartments.
+			if(compartmentName && compartmentName.slice(-8) === "Language") {
+				var plainLang = getPlainTextLanguage();
+				if(plainLang) {
+					newContent = [plainLang];
+				}
+			}
 		}
 
+		return newContent;
+	}
 
-		// Build new context with updated type
-		var context = buildPluginContext(this.options, this, newType);
+	/**
+	 * Apply a freshly resolved language context to all conditional plugins.
+	 * This method is intentionally used by both dropdown/session changes and
+	 * tiddler refreshes, so tag overrides and dropdown overrides follow exactly
+	 * the same path as normal MIME type changes.
+	 *
+	 * @param {object} context - Fresh plugin context
+	 * @param {string} reason - Event reason
+	 * @param {boolean} forceRefresh - Rebuild active plugin compartments even when their condition stayed true
+	 */
+	_applyLanguageContext(context, reason, forceRefresh) {
+		if(this._destroyed || !context) return;
+
+		var oldContext = this._pluginContext || {};
+		var oldType = this._currentType || "";
+		var newType = context.tiddlerType || "";
+		var oldSignature = oldContext.languageSignature || "";
+		var newSignature = context.languageSignature || "";
+		var typeChanged = oldType !== newType;
+		var signatureChanged = oldSignature !== newSignature;
+
 		this._pluginContext = context;
+		this._currentType = newType;
 
-		// Re-evaluate all conditional plugins
+		if(!typeChanged && !signatureChanged && !forceRefresh) {
+			return;
+		}
+
 		var effects = [];
 
 		for(var i = 0; i < this._conditionalPlugins.length; i++) {
@@ -2380,81 +2660,118 @@ class CodeMirrorEngine {
 
 			try {
 				shouldBeActive = plugin.condition(context);
-			} catch (_e) {}
+			} catch(_e) {}
 
+			var activeStateChanged = wasActive !== shouldBeActive;
+			var shouldRefreshActivePlugin = !activeStateChanged && wasActive && shouldBeActive && (typeChanged || signatureChanged || forceRefresh);
 
-			if(wasActive !== shouldBeActive) {
-				// Find the compartment for this plugin
+			if(activeStateChanged || shouldRefreshActivePlugin) {
 				var compartmentName = this._findPluginCompartment(plugin);
 
 				if(compartmentName && this._compartments[compartmentName]) {
-					var newContent = [];
+					var newContent = this._getPluginReconfigurationContent(plugin, context, shouldBeActive);
 
-					if(shouldBeActive) {
-						// Plugin becoming active - get content for compartment
-						//
-						// Convention: If plugin has getCompartmentContent(), use it (returns raw content)
-						// Otherwise, we can't properly reconfigure (plugin uses compartment.of internally)
-						//
-						if(isFunction(plugin.getCompartmentContent)) {
-							try {
-								newContent = plugin.getCompartmentContent(context) || [];
-								if(!isArray(newContent)) newContent = [newContent];
-							} catch (_e) {}
-						} else {
-							// Fallback: try to use getExtensions, but warn about potential issues
-							// This works if the plugin doesn't use compartment.of() in getExtensions()
-							try {
-								newContent = plugin.getExtensions(context) || [];
-								if(!isArray(newContent)) newContent = [newContent];
-							} catch (_e) {}
-						}
-					} else {
-						// Plugin becoming inactive
-						// For language plugins, use plain text language to clear syntax highlighting
-						// Just using [] would leave the old syntax tree cached
-						if(compartmentName.slice(-8) === "Language") {
-							var plainLang = getPlainTextLanguage();
-							if(plainLang) {
-								newContent = [plainLang];
-							}
-						}
-						// Non-language plugins get empty array (already set above)
+					if(newContent !== null) {
+						effects.push(
+							this._compartments[compartmentName].reconfigure(newContent)
+						);
 					}
+				}
 
-					effects.push(
-						this._compartments[compartmentName].reconfigure(newContent)
-					);
-
-				} else {}
-
-				// Update active plugins list
-				if(shouldBeActive && !wasActive) {
-					this._activePlugins.push(plugin);
-				} else if(!shouldBeActive && wasActive) {
-					var idx = this._activePlugins.indexOf(plugin);
-					if(idx >= 0) this._activePlugins.splice(idx, 1);
-					// Unregister any completion sources owned by this plugin
-					this.unregisterCompletionSourcesForPlugin(plugin);
+				if(activeStateChanged) {
+					if(shouldBeActive && !wasActive) {
+						this._activePlugins.push(plugin);
+					} else if(!shouldBeActive && wasActive) {
+						var idx = this._activePlugins.indexOf(plugin);
+						if(idx >= 0) this._activePlugins.splice(idx, 1);
+						this.unregisterCompletionSourcesForPlugin(plugin);
+					}
 				}
 			}
 		}
 
-		// Apply all reconfiguration effects
 		if(effects.length > 0) {
 			this.view.dispatch({
 				effects: effects
 			});
 		}
 
-		this._triggerEvent("typeChanged", {
-			oldType: oldType,
-			newType: newType
-		});
+		if(typeChanged) {
+			this._triggerEvent("typeChanged", {
+				oldType: oldType,
+				newType: newType,
+				reason: reason || "language",
+				typeSource: context.typeSource,
+				tagOverrideWinner: context.tagOverrideWinner || null,
+				tagOverrideType: context.tagOverrideType || ""
+			});
+		}
+
+		if(typeChanged || signatureChanged || effects.length > 0) {
+			this._triggerEvent("languageChanged", {
+				reason: reason || "language",
+				oldType: oldType,
+				newType: newType,
+				typeSource: context.typeSource,
+				tagOverrideWinner: context.tagOverrideWinner || null,
+				tagOverrideType: context.tagOverrideType || ""
+			});
+		}
 	}
 
 	/**
-	 * Get current content type
+	 * Set a non-persistent language override for this editor instance.
+	 * Used by the language dropdown when languageSwitcherPersist = "session".
+	 * A tag override still wins because the requested/session type is resolved
+	 * through buildPluginContext() before reconfiguration.
+	 *
+	 * @param {string} newType - New content type
+	 */
+	setSessionTypeOverride(newType) {
+		if(this._destroyed) return;
+		if(newType === undefined || newType === null) newType = "";
+
+		this._sessionTypeOverride = newType;
+		this._applyLanguageContext(this._resolveLanguageContext(), "session", true);
+	}
+
+	/**
+	 * Clear the non-persistent language override and return to the resolved
+	 * tiddler language, while still allowing tag-based language overrides to win.
+	 */
+	clearSessionTypeOverride() {
+		if(this._destroyed) return;
+
+		this._sessionTypeOverride = undefined;
+		this._applyLanguageContext(this._resolveLanguageContext(), "session-clear", true);
+	}
+
+	/**
+	 * Get the current non-persistent language override.
+	 *
+	 * @returns {string|undefined}
+	 */
+	getSessionTypeOverride() {
+		return this._sessionTypeOverride;
+	}
+
+	/**
+	 * Change content type and reconfigure language plugins.
+	 * This is a request, not an unconditional final type: tag overrides are still
+	 * resolved first and can replace the requested type.
+	 *
+	 * @param {string} newType - Requested content type
+	 */
+	setType(newType) {
+		if(this._destroyed) return;
+		if(newType === undefined || newType === null) newType = "";
+
+		this._applyLanguageContext(this._resolveLanguageContext(newType), "setType", true);
+	}
+
+	/**
+	 * Get current effective content type.
+	 *
 	 * @returns {string|null}
 	 */
 	getType() {
@@ -2462,128 +2779,23 @@ class CodeMirrorEngine {
 	}
 
 	/**
-	 * Refresh language plugins based on current tiddler state (tags, fields, type)
-	 * Call this when the tiddler being edited has changed (e.g., tags added/removed, type changed)
+	 * Get the source that currently decided the effective type.
+	 * Returns one of: tag, requested, session, field, type, default.
+	 *
+	 * @returns {string}
+	 */
+	getTypeSource() {
+		return this._pluginContext && this._pluginContext.typeSource || "default";
+	}
+
+	/**
+	 * Refresh language plugins based on current tiddler state (tags, fields, type).
+	 * This uses the exact same resolver as dropdown/session changes.
 	 */
 	refreshLanguageConditions() {
 		if(this._destroyed) return;
 
-		// Re-read tiddler fields from wiki
-		var widget = this.options && this.options.widget;
-		var wiki = widget && widget.wiki;
-		var tiddlerTitle = this._pluginContext && this._pluginContext.tiddlerTitle;
-
-		if(!wiki || !tiddlerTitle) return;
-
-		var tiddler = wiki.getTiddler(tiddlerTitle);
-		if(!tiddler) return;
-
-		// Check if type has changed (check codemirror-type field first, then type field)
-		var newType = tiddler.fields["codemirror-type"] || tiddler.fields.type || "";
-		var oldType = this._currentType || "";
-
-		if(newType !== oldType) {
-			// Type changed - trigger full language switch
-			this.setType(newType);
-			// Update context fields after type change
-			this._pluginContext.tiddlerFields = tiddler.fields;
-			return;
-		}
-
-		// Check if tags have actually changed
-		var oldTags = this._pluginContext.tiddlerFields && this._pluginContext.tiddlerFields.tags;
-		var newTags = tiddler.fields.tags;
-
-		// Convert to comparable strings
-		var oldTagsStr = isArray(oldTags) ? oldTags.slice().sort().join(",") : "";
-		var newTagsStr = isArray(newTags) ? newTags.slice().sort().join(",") : "";
-
-		if(oldTagsStr === newTagsStr) {
-			return; // No tag change
-		}
-
-
-		// Update context with new tiddler fields
-		this._pluginContext.tiddlerFields = tiddler.fields;
-
-		// Update tag override state for the new tags
-		try {
-			var utils = require("$:/plugins/tiddlywiki/codemirror-6/utils.js");
-			if(utils && utils.getTagOverrideWinner) {
-				this._pluginContext.tagOverrideWinner = utils.getTagOverrideWinner(this._pluginContext);
-				this._pluginContext.hasTagOverride = this._pluginContext.tagOverrideWinner !== null;
-			}
-		} catch (_e) {}
-
-		// Re-evaluate all conditional plugins
-		var effects = [];
-		var context = this._pluginContext;
-
-		for(var i = 0; i < this._conditionalPlugins.length; i++) {
-			var plugin = this._conditionalPlugins[i];
-			var wasActive = this._activePlugins.indexOf(plugin) >= 0;
-			var shouldBeActive = false;
-
-			try {
-				shouldBeActive = plugin.condition(context);
-			} catch (_e) {}
-
-			if(wasActive !== shouldBeActive) {
-				var compartmentName = this._findPluginCompartment(plugin);
-
-				if(compartmentName && this._compartments[compartmentName]) {
-					var newContent = [];
-
-					if(shouldBeActive) {
-						if(isFunction(plugin.getCompartmentContent)) {
-							try {
-								newContent = plugin.getCompartmentContent(context) || [];
-								if(!isArray(newContent)) newContent = [newContent];
-							} catch (_e) {}
-						} else if(isFunction(plugin.getExtensions)) {
-							try {
-								newContent = plugin.getExtensions(context) || [];
-								if(!isArray(newContent)) newContent = [newContent];
-							} catch (_e) {}
-						}
-					} else {
-						// Plugin becoming inactive
-						// For language plugins, use plain text language to clear syntax highlighting
-						if(compartmentName.slice(-8) === "Language") {
-							var plainLang = getPlainTextLanguage();
-							if(plainLang) {
-								newContent = [plainLang];
-							}
-						}
-						// Non-language plugins get empty array (already set above)
-					}
-
-					effects.push(
-						this._compartments[compartmentName].reconfigure(newContent)
-					);
-
-				}
-
-				// Update active plugins list
-				if(shouldBeActive && !wasActive) {
-					this._activePlugins.push(plugin);
-				} else if(!shouldBeActive && wasActive) {
-					var idx = this._activePlugins.indexOf(plugin);
-					if(idx >= 0) this._activePlugins.splice(idx, 1);
-					// Unregister any completion sources owned by this plugin
-					this.unregisterCompletionSourcesForPlugin(plugin);
-				}
-			}
-		}
-
-		if(effects.length > 0) {
-			this.view.dispatch({
-				effects: effects
-			});
-			this._triggerEvent("languageChanged", {
-				reason: "tags"
-			});
-		}
+		this._applyLanguageContext(this._resolveLanguageContext(), "refresh", false);
 	}
 
 	focus() {

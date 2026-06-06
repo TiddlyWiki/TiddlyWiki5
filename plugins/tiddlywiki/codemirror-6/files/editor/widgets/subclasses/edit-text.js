@@ -197,27 +197,50 @@ exports.prototype.updateEditorDomNode = function(text) {
 // Language Switcher handlers
 // ============================================================================
 
+exports.prototype.applyLanguageChoice = function(newType) {
+	if(!this.engine) return;
+	if(newType === undefined || newType === null) return;
+
+	var persistMode = this.wiki.getTiddlerText("$:/config/codemirror-6/editor/languageSwitcherPersist", "session");
+
+	if(persistMode === "field" && this.editTitle) {
+		// Persistent mode: write the language choice to the tiddler field.
+		// Clear any old session override too, otherwise the session choice would
+		// keep winning over the freshly written field.
+		if(newType === "") {
+			this.wiki.setText(this.editTitle, "codemirror-type", null, undefined);
+		} else {
+			this.wiki.setText(this.editTitle, "codemirror-type", null, newType);
+		}
+
+		if(typeof this.engine.clearSessionTypeOverride === "function") {
+			this.engine.clearSessionTypeOverride();
+		} else {
+			this.engine.setType(newType);
+		}
+	} else {
+		// Session mode: do not write anything to the edited tiddler.
+		if(newType === "") {
+			if(typeof this.engine.clearSessionTypeOverride === "function") {
+				this.engine.clearSessionTypeOverride();
+			} else {
+				this.engine.setType("");
+			}
+		} else if(typeof this.engine.setSessionTypeOverride === "function") {
+			this.engine.setSessionTypeOverride(newType);
+		} else {
+			this.engine.setType(newType);
+		}
+	}
+};
+
 exports.prototype.handleSetLanguage = function(event) {
 	if(!this.engine) return false;
 
 	var newType = event.paramObject ? event.paramObject.type : null;
 	if(newType === undefined || newType === null) return false;
 
-	// Check persistence mode from config
-	var persistMode = this.wiki.getTiddlerText("$:/config/codemirror-6/editor/languageSwitcherPersist", "session");
-
-	if(persistMode === "field" && this.editTitle) {
-		// Save to tiddler field for persistence
-		if(newType === "") {
-			// Empty means "use default" - remove the override field
-			this.wiki.setText(this.editTitle, "codemirror-type", null, undefined);
-		} else {
-			this.wiki.setText(this.editTitle, "codemirror-type", null, newType);
-		}
-	}
-
-	// Switch the language in the editor
-	this.engine.setType(newType);
+	this.applyLanguageChoice(newType);
 
 	// Close the picker if open
 	this.hideLanguagePicker();
@@ -292,17 +315,8 @@ exports.prototype.showLanguagePicker = function() {
 		btn.addEventListener("click", function(e) {
 			e.preventDefault();
 			e.stopPropagation();
-			self.engine.setType(lang.type);
 
-			// Check persistence mode
-			var persistMode = self.wiki.getTiddlerText("$:/config/codemirror-6/editor/languageSwitcherPersist", "session");
-			if(persistMode === "field" && self.editTitle) {
-				if(lang.type === "") {
-					self.wiki.setText(self.editTitle, "codemirror-type", null, undefined);
-				} else {
-					self.wiki.setText(self.editTitle, "codemirror-type", null, lang.type);
-				}
-			}
+			self.applyLanguageChoice(lang.type);
 
 			self.hideLanguagePicker();
 			self.engine.focus();

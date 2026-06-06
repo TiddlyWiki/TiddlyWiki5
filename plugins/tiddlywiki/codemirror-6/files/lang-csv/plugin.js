@@ -27,10 +27,23 @@ var CSV_TYPES = [
 
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-csv/tags";
 
+function isCsvType(type) {
+	return CSV_TYPES.indexOf(type) !== -1;
+}
+
 exports.plugin = {
 	name: "lang-csv",
 	description: "CSV syntax highlighting",
 	priority: 50,
+
+	/*
+	Expose the real content types handled by this plugin.
+
+	This lets the engine resolve a winning tag override to a real language
+	type, instead of treating tag override as a separate partial mode.
+	*/
+	contentTypes: CSV_TYPES,
+	types: CSV_TYPES,
 
 	init: function(cm6Core) {
 		this._core = cm6Core;
@@ -43,31 +56,69 @@ exports.plugin = {
 		};
 	},
 
-	condition: function(context) {
-		// If any tag override is active, only the winning plugin activates
-		if(context.hasTagOverride) {
-			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
+	getTagOverrideType: function(context) {
+		if(context.tagOverrideWinner === TAGS_CONFIG_TIDDLER) {
+			return CSV_TYPES[0];
 		}
-		// Normal mode: tag match or type match
+		return null;
+	},
+
+	condition: function(context) {
+		var effectiveType = context.effectiveType || context.tiddlerType || "";
+
+		/*
+		If a tag override is active, only the winning tag/plugin may activate.
+
+		Do not use hasConfiguredTag() in this branch. A tiddler may contain
+		multiple configured language tags, but the engine has already selected
+		the winning one.
+		*/
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER ||
+				isCsvType(effectiveType);
+		}
+
+		/*
+		Normal mode:
+		- dropdown/session override
+		- codemirror-type field
+		- actual type field
+		- configured CSV language tag
+		*/
+		if(isCsvType(effectiveType)) return true;
 		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
-		return CSV_TYPES.indexOf(context.tiddlerType) !== -1;
+
+		return false;
 	},
 
+	/*
+	Runtime language switching uses this.
+
+	This must return raw compartment content only.
+	Do not return csvLanguage.of(...) from here.
+	*/
 	getCompartmentContent: function(_context) {
-		return [langCsv.csv()];
+		return [
+			langCsv.csv()
+		];
 	},
 
+	/*
+	Initial editor construction uses this.
+
+	This may wrap the raw content in the plugin's compartment.
+	*/
 	getExtensions: function(context) {
 		var compartments = context.engine._compartments;
-		var extensions = [];
 
-		// Language compartment
 		if(compartments.csvLanguage) {
-			extensions.push(compartments.csvLanguage.of(this.getCompartmentContent(context)));
-		} else {
-			extensions = extensions.concat(this.getCompartmentContent(context));
+			return [
+				compartments.csvLanguage.of(
+					this.getCompartmentContent(context)
+				)
+			];
 		}
 
-		return extensions;
+		return this.getCompartmentContent(context);
 	}
 };

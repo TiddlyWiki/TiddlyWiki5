@@ -1,6 +1,14 @@
 {
     "tiddlers": [
         {
+            "file": "codemirror-emacs.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/codemirror-6-keymap-emacs/codemirror-emacs.js",
+                "module-type": "library"
+            }
+        },
+        {
             "file": "plugin.js",
             "fields": {
                 "type": "application/javascript",

@@ -940,16 +940,31 @@ function registerLanguage(core) {
 // Plugin Export
 // ============================================================================
 
+function isWikitextType(type) {
+	return WIKITEXT_TYPES.indexOf(type) !== -1;
+}
+
 exports.plugin = {
 	name: "lang-tiddlywiki",
 	description: "TiddlyWiki wikitext syntax highlighting and completions",
 	priority: 900, // High priority - this is the main language
 
+	/*
+	Expose the real content types handled by this plugin.
+
+	This lets the engine treat TiddlyWiki wikitext like every other full
+	language mode when the effective type resolves to text/vnd.tiddlywiki.
+	*/
+	contentTypes: WIKITEXT_TYPES,
+	types: WIKITEXT_TYPES,
+
 	init: function(cm6Core) {
 		this._core = cm6Core;
 		this._support = null;
+
 		// Register the language with completions
 		registerLanguage(cm6Core);
+
 		// Export cache clear function for external use
 		if(!$tw.CodeMirror) {
 			$tw.CodeMirror = {};
@@ -959,18 +974,34 @@ exports.plugin = {
 
 	registerCompartments: function() {
 		var Compartment = this._core.state.Compartment;
+
 		return {
 			tiddlywikiLanguage: new Compartment()
 		};
 	},
 
 	condition: function(context) {
-		// If any tag override is active, TiddlyWiki language is disabled
-		// (TiddlyWiki doesn't have a tag config - it's the default language)
+		var effectiveType = context.effectiveType || context.tiddlerType || "";
+
+		/*
+		If a tag override is active, TiddlyWiki should only activate if the
+		resolved effective type is actually a TiddlyWiki type.
+
+		This matters because the engine now resolves the winning language
+		override to a real type before plugin conditions run.
+		*/
 		if(context.hasTagOverride) {
-			return false;
+			return isWikitextType(effectiveType);
 		}
-		return WIKITEXT_TYPES.indexOf(context.tiddlerType) !== -1;
+
+		/*
+		Normal mode:
+		- dropdown/session override
+		- codemirror-type field
+		- actual type field
+		- empty type fallback
+		*/
+		return isWikitextType(effectiveType);
 	},
 
 	_getLanguageSupport: function() {
@@ -978,30 +1009,60 @@ exports.plugin = {
 
 		// Find the TiddlyWiki LanguageDescription from registered languages
 		var languages = this._core.getLanguages ? this._core.getLanguages() : [];
+
 		for(var i = 0; i < languages.length; i++) {
 			var lang = languages[i];
+
 			if(lang.name === "TiddlyWiki" && lang.support) {
 				this._support = lang.support;
 				return this._support;
 			}
 		}
+
 		return null;
 	},
 
+	/*
+	Runtime language switching uses this.
+
+	This must return raw compartment content only.
+	Do not return tiddlywikiLanguage.of(...) from here.
+	*/
 	getCompartmentContent: function(_context) {
 		var support = this._getLanguageSupport();
+
 		if(support) {
-			// LanguageSupport.extension contains all the extensions including keymap
-			return [support];
+			/*
+			LanguageSupport is raw content here.
+
+			It is safe to put the LanguageSupport object inside the
+			tiddlywikiLanguage compartment. The forbidden thing would be
+			returning tiddlywikiLanguage.of(...) from this method.
+			*/
+			return [
+				support
+			];
 		}
+
 		return [];
 	},
 
+	/*
+	Initial editor construction uses this.
+
+	This may wrap the raw content in the plugin's compartment.
+	*/
 	getExtensions: function(context) {
 		var compartments = context.engine._compartments;
+
 		if(compartments.tiddlywikiLanguage) {
-			return [compartments.tiddlywikiLanguage.of(this.getCompartmentContent(context))];
+			return [
+				compartments.tiddlywikiLanguage.of(
+					this.getCompartmentContent(context)
+				)
+			];
 		}
+
 		return this.getCompartmentContent(context);
 	},
 

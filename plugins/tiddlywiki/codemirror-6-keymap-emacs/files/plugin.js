@@ -10,6 +10,8 @@ Emacs-style keybindings for CodeMirror 6
 
 if(!$tw.browser) return;
 
+var emacsModule = require("$:/plugins/tiddlywiki/codemirror-6-keymap-emacs/codemirror-emacs.js");
+
 exports.plugin = {
 	name: "keymap-emacs",
 	description: "Emacs-style keybindings",
@@ -20,16 +22,17 @@ exports.plugin = {
 		this._core = cm6Core;
 	},
 
-	getExtensions: function(_context) {
+	getExtensions: function(context) {
 		// The engine calls this only when emacs keymap is selected
-		var core = this._core;
-		var keymap = (core.view || {}).keymap;
-		var commands = core.commands || {};
-
-		if(!keymap || !commands.emacsStyleKeymap) {
+		if(!emacsModule || !emacsModule.emacs) {
 			return [];
 		}
 
-		return [keymap.of(commands.emacsStyleKeymap)];
+		var keymap = context && context.keymap || (this._core && this._core.view && this._core.view.keymap);
+		if(!keymap) {
+			return [];
+		}
+
+		return [keymap.of(emacsModule.emacs())];
 	}
 };

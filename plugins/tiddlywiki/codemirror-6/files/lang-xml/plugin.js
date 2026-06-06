@@ -31,6 +31,10 @@ var XML_TYPES = [
 var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-xml/tags";
 var SVG_COMPLETIONS_CONFIG = "$:/config/codemirror-6/lang-xml/svg-completions";
 
+function isXmlType(type) {
+	return XML_TYPES.indexOf(type) !== -1;
+}
+
 function isSvgCompletionsEnabled() {
 	var value = $tw.wiki.getTiddlerText(SVG_COMPLETIONS_CONFIG, "yes").trim().toLowerCase();
 	return value === "yes" || value === "true";
@@ -41,48 +45,105 @@ exports.plugin = {
 	description: "XML syntax highlighting",
 	priority: 50,
 
+	/*
+	Expose the real content types handled by this plugin.
+
+	This lets the engine resolve a winning tag override to a real XML/SVG
+	language mode.
+	*/
+	contentTypes: XML_TYPES,
+	types: XML_TYPES,
+
 	init: function(cm6Core) {
 		this._core = cm6Core;
 	},
 
 	registerCompartments: function() {
 		var Compartment = this._core.state.Compartment;
+
 		return {
 			xmlLanguage: new Compartment()
 		};
 	},
 
-	condition: function(context) {
-		// If any tag override is active, only the winning plugin activates
-		if(context.hasTagOverride) {
-			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER;
+	getTagOverrideType: function(context) {
+		if(context.tagOverrideWinner === TAGS_CONFIG_TIDDLER) {
+			return XML_TYPES[0];
 		}
-		// Normal mode: tag match or type match
-		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
-		return XML_TYPES.indexOf(context.tiddlerType) !== -1;
+
+		return null;
 	},
 
+	condition: function(context) {
+		var effectiveType = context.effectiveType || context.tiddlerType || "";
+
+		/*
+		If a tag override is active, only the winning tag/plugin may activate.
+
+		Do not use hasConfiguredTag() here. A tiddler may contain multiple
+		configured language tags, but the engine has already selected the
+		winner.
+		*/
+		if(context.hasTagOverride) {
+			return context.tagOverrideWinner === TAGS_CONFIG_TIDDLER ||
+				isXmlType(effectiveType);
+		}
+
+		/*
+		Normal mode:
+		- dropdown/session override
+		- codemirror-type field
+		- actual type field
+		- configured XML language tag
+		*/
+		if(isXmlType(effectiveType)) return true;
+		if(hasConfiguredTag(context, TAGS_CONFIG_TIDDLER)) return true;
+
+		return false;
+	},
+
+	/*
+	Runtime language switching uses this.
+
+	This must return raw compartment content only.
+	Do not return xmlLanguage.of(...) from here.
+	*/
 	getCompartmentContent: function(context) {
-		var type = context.tiddlerType;
-		var isSvg = type === "image/svg+xml";
+		var effectiveType = context.effectiveType || context.tiddlerType || "";
+		var isSvg = effectiveType === "image/svg+xml";
 
 		// Use SVG schema for SVG files if enabled
 		if(isSvg && isSvgCompletionsEnabled()) {
-			return [langXml.xml({
-				elements: svgSchema.svgElements,
-				attributes: svgSchema.svgAttributes
-			})];
+			return [
+				langXml.xml({
+					elements: svgSchema.svgElements,
+					attributes: svgSchema.svgAttributes
+				})
+			];
 		}
 
 		// Plain XML without schema
-		return [langXml.xml()];
+		return [
+			langXml.xml()
+		];
 	},
 
+	/*
+	Initial editor construction uses this.
+
+	This may wrap the raw content in the plugin's compartment.
+	*/
 	getExtensions: function(context) {
 		var compartments = context.engine._compartments;
+
 		if(compartments.xmlLanguage) {
-			return [compartments.xmlLanguage.of(this.getCompartmentContent(context))];
+			return [
+				compartments.xmlLanguage.of(
+					this.getCompartmentContent(context)
+				)
+			];
 		}
+
 		return this.getCompartmentContent(context);
 	}
 };
