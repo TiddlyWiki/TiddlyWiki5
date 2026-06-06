@@ -18,6 +18,7 @@
 		"tiddlywiki/codemirror-6-lang-sql",
 		"tiddlywiki/codemirror-6-lang-wast",
 		"tiddlywiki/codemirror-6-lint",
+		"tiddlywiki/codemirror-6-minimap",
 		"tiddlywiki/codemirror-6-themes"
 	],
 	"themes": [
