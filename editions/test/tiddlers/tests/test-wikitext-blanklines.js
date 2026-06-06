@@ -10,8 +10,11 @@ Tests for preserving extra blank lines as empty paragraph blocks.
 "use strict";
 
 describe("Wikitext blank line preservation", function() {
-	function parse(text) {
-		return $tw.wiki.parseText("text/vnd.tiddlywiki", text, { preserveBlankLines: true }).tree;
+	const PRESERVE_BLANK_LINES_CONFIG = "$:/config/Parser/PreserveBlankLines";
+
+	function parse(text, options) {
+		options = options || { preserveBlankLines: true };
+		return $tw.wiki.parseText("text/vnd.tiddlywiki", text, options).tree;
 	}
 
 	function serialize(text) {
@@ -29,17 +32,43 @@ describe("Wikitext blank line preservation", function() {
 		expect(serialize("A\n\nB")).toBe("A\n\nB\n\n");
 	});
 
-	it("should leave extra blank lines ignored by default", function() {
-		const tree = $tw.wiki.parseText("text/vnd.tiddlywiki", "A\n\n\nB").tree;
+	it("should leave extra blank lines ignored when disabled", function() {
+		const tree = parse("A\n\n\nB", { preserveBlankLines: false });
 		expect(tree.length).toBe(2);
 		expect(tree.map(function(node) { return node.rule; })).toEqual(["parseblock", "parseblock"]);
 	});
 
+	it("should use the parser config when no explicit option is provided", function() {
+		const previousTiddler = $tw.wiki.getTiddler(PRESERVE_BLANK_LINES_CONFIG);
+		try {
+			$tw.wiki.addTiddler({title: PRESERVE_BLANK_LINES_CONFIG, text: "no"});
+			expect(parse("A\n\n\nB", {}).map(function(node) { return node.rule; })).toEqual(["parseblock", "parseblock"]);
+			$tw.wiki.addTiddler({title: PRESERVE_BLANK_LINES_CONFIG, text: "yes"});
+			expect(parse("A\n\n\nB", {}).map(function(node) { return node.rule; })).toEqual(["parseblock", "blankline", "parseblock"]);
+		} finally{
+			if(previousTiddler) {
+				$tw.wiki.addTiddler(previousTiddler);
+			} else {
+				$tw.wiki.deleteTiddler(PRESERVE_BLANK_LINES_CONFIG);
+			}
+		}
+	});
+
 	it("should preserve extra blank lines as empty paragraphs", function() {
 		expect(paragraphCount("A\n\n\nB")).toBe(3);
+		expect(parse("A\n\n\nB")[1].attributes.class.value).toBe("tc-blankline");
 		expect(serialize("A\n\n\nB")).toBe("A\n\n\nB\n\n");
 		expect(paragraphCount("A\n\n\n\nB")).toBe(4);
 		expect(serialize("A\n\n\n\nB")).toBe("A\n\n\n\nB\n\n");
+	});
+
+	it("should preserve extra blank lines after non-paragraph blocks", function() {
+		var listThenParagraph = parse("* one\n* two\n\n\n\nB");
+		expect(listThenParagraph.map(function(node) { return node.rule; })).toEqual(["list", "blankline", "blankline", "parseblock"]);
+		expect(serialize("* one\n* two\n\n\n\nB")).toBe("* one\n* two\n\n\n\nB\n\n");
+
+		var listThenMacro = parse("* one\n* two\n\n\n\n<<now YYYY>>");
+		expect(listThenMacro.map(function(node) { return node.rule; })).toEqual(["list", "blankline", "blankline", "macrocallblock"]);
 	});
 
 	it("should preserve trailing empty paragraphs", function() {
