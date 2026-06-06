@@ -193,6 +193,7 @@ class BaseSourceEditableNodeView {
 		if(this.cancelBtn) this.cancelBtn.style.display = "none";
 
 		this.saveEdit(editValue);
+		this.renderViewMode();
 	}
 
 	createEditTextarea(initialValue, rows = 2) {
