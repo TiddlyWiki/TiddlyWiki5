@@ -158,27 +158,36 @@ test.describe("ProseMirror Editor - Widget Blocks", () => {
 			const selectedWidgetStyles = await editor.evaluate((root) => {
 				const widget = root.querySelector(".pm-nodeview-widget");
 				const link = root.querySelector(".pm-nodeview-widget .pm-nodeview-content a");
-				// Check that the hideselection CSS rule includes color: inherit
-				// to prevent link text from turning white under native selection painting.
-				let hasSelectionColorInherit = false;
-				for (const sheet of document.styleSheets) {
+				// Verify that the CSS rule includes color:currentColor so the link
+				// text does not turn white under the native selection that
+				// ProseMirror creates for a NodeSelection.
+				let hasSelectionColorCurrentColor = false;
+				for(const sheet of document.styleSheets) {
 					try {
-						for (const rule of sheet.cssRules || []) {
-							if (rule.cssText && rule.cssText.includes("hideselection") &&
-								rule.cssText.includes("::selection") && rule.cssText.includes("color: inherit")) {
-								hasSelectionColorInherit = true;
+						for(const rule of sheet.cssRules || []) {
+							if(rule.cssText && rule.cssText.includes("hideselection") && rule.cssText.includes("::selection")) {
+								if(rule.cssText.toLowerCase().includes("currentcolor")) {
+									hasSelectionColorCurrentColor = true;
+								}
 							}
 						}
 					} catch(_) { /* cross-origin sheets */ }
 				}
 				return {
 					widgetContentEditable: widget && widget.getAttribute("contenteditable"),
-					linkColor: link && getComputedStyle(link).color,
-					hasSelectionColorInherit
+					isNodeSelected: widget && widget.classList.contains("pm-nodeview-selected"),
+					linkNormalColor: link && window.getComputedStyle(link).color,
+					linkSelectionColor: link && window.getComputedStyle(link, "::selection").color,
+					hasSelectionColorCurrentColor
 				};
 			});
 			expect(selectedWidgetStyles.widgetContentEditable).toBe("false");
-			expect(selectedWidgetStyles.hasSelectionColorInherit).toBe(true);
+			expect(selectedWidgetStyles.isNodeSelected).toBe(true);
+			expect(selectedWidgetStyles.hasSelectionColorCurrentColor).toBe(true);
+			// Ensure the ::selection color is not white (the browser default
+			// highlighttext colour).  With color:currentColor it should match the
+			// link's normal colour instead.
+			expect(selectedWidgetStyles.linkSelectionColor).not.toBe("rgb(255, 255, 255)");
 		});
 	});
 
