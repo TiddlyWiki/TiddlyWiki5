@@ -1,186 +1,363 @@
-# 交接文档：ProseMirror 增量同步重构
+# 交接文档：ProseMirror 增量同步与空行保真
 
-## 概述
+更新时间：2026-06-07
 
-将 ProseMirror 编辑器的文本同步机制从**全量重建**改为**细粒度增量更新**，并新增 wikitext 空行保真语法，让 ProseMirror 空段落可以保存到 wiki text 后再解析回来。
+## 当前状态速览
+
+当前工作区分支：`feat/prosemirror-wysiwyg-editor`
+
+当前最新提交已推送到 `linonetwo/feat/prosemirror-wysiwyg-editor`：
+
+```text
+a9bd94565 fix: preserve blank lines after block rules
+```
+
+工作区应保持干净：
+
+```bash
+git status --short --branch
+```
+
+预期输出只有分支行，无 `M`/`??` 文件。
+
+独立核心空行 PR 已创建：
+
+```text
+PR: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9872
+Title: Blank line paragraph preservation
+Base: TiddlyWiki/TiddlyWiki5:master
+Head: linonetwo:feat/wikitext-blankline-paragraphs
+Commit: 63ecf97b3 feat: preserve blank lines as empty paragraphs
+Status: OPEN, mergeable
+```
+
+这个 PR 是真正对 `master` 的独立 PR，不依赖 ProseMirror 分支。
 
 ## 问题根因
 
-旧实现使用 wiki 文本序列化作为同步协议，但 wiki 文本在旧 parser/serializer 中**无法表示空段落**：
+旧实现使用 wiki text 作为 ProseMirror 与 TiddlyWiki 之间的同步协议，但旧 wikitext parser/serializer 不能表达空段落：
 
-```
+```text
 ProseMirror: [para("Hello"), para(empty), para(empty)]
-  → 序列化 → "Hello\n\n" (两个空段落变成一个空行)
-  → 解析回 → [para("Hello")] (空段落丢失)
+  -> serialize -> "Hello\n\n"
+  -> parse     -> [para("Hello")]
 ```
 
-每次经过文本往返的代码路径都会丢失空段落。现在通过 `blankline` parse tree rule 保留额外空行：普通 `A\n\nB` 仍是段落分隔，`A\n\n\nB` 表示中间有一个空 paragraph，`A\n\n\n\nB` 表示两个空 paragraph。
+因此任何经过 wikitext roundtrip 的路径都会丢失空段落，进而造成：
 
-## 改动文件
+- 用户在编辑器里打多个空行，保存或刷新后空行消失
+- 外部 agent 修改 tiddler text 后，编辑器用全量重建恢复内容，undo/selection 容易受影响
+- 保存回声和真实外部变更难以区分
 
-### 核心改动
+当前方案分两层：
 
-| 文件 | 改动行数 | 说明 |
-|------|---------|------|
-| `core/modules/parsers/wikiparser/wikiparser.js` | - | 解析额外空行为 `blankline` 空段落节点 |
-| `plugins/tiddlywiki/wikitext-serialize/utils/parsetree.js` | - | 序列化 `blankline` 为单个额外换行 |
-| `plugins/tiddlywiki/prosemirror/ast/from/*.js` | - | PM 空段落输出 `blankline`，单个空文档仍保持空文本 |
-| `plugins/tiddlywiki/prosemirror/ast/to/paragraph.js` | - | 空 paragraph JSON 规范化，稳定 echo 比较 |
-| `plugins/tiddlywiki/prosemirror/core/incremental-sync.js` | - | 共享 `findDiffStart`/`findDiffEnd` 细粒度替换 helper |
-| `plugins/tiddlywiki/prosemirror/core/engine.js` | - | 工厂 widget 引擎路径 |
-| `plugins/tiddlywiki/prosemirror/core/widget.js` | - | 独立 `$prosemirror` widget 路径 |
+- 核心空行 PR：让 wikitext 可以 opt-in 解析/序列化额外空行为 `blankline` parse tree node
+- ProseMirror 分支：使用增量同步，减少全量重建，并在 ProseMirror 插件里默认打开空行保真配置
 
-### 新增测试（2 个文件）
+## 当前提交栈重点
 
-| 文件 | 行数 | 说明 |
-|------|------|------|
-| `editions/test/tiddlers/tests/test-wikitext-blanklines.js` | - | 单元测试：额外空行 parse/serialize roundtrip |
-| `plugins/tiddlywiki/prosemirror/tests/test-prosemirror-incremental-sync.js` | - | 单元测试：diff 计算、细粒度替换、blankline roundtrip |
-| `plugins/tiddlywiki/prosemirror/tests/specs/incremental-sync.spec.js` | - | E2E 测试：空段落持久化、外部变更、undo 历史 |
+当前 ProseMirror 分支顶部附近：
 
-### 构建/配置（2 个文件）
+```text
+a9bd94565 fix: preserve blank lines after block rules
+499ba2e25 fix(prosemirror): call renderViewMode after commitEdit to hide textarea
+fb2eae5ec fix(prosemirror): use currentColor instead of inherit for ::selection in hideselection
+fcf2068ad fix(prosemirror): inject hideselection CSS from JS as final override
+aae834f31 fix(prosemirror): prevent link text turning white under NodeSelection
+72048b169 Merge branch 'master' into feat/prosemirror-wysiwyg-editor
+7bbdae8a2 feat: use fine-grained ProseMirror sync
+91c868651 fix: make blank line preservation opt-in
+6d4a6e061 feat: preserve blank lines as empty paragraphs
+```
+
+注意：`feat/wikitext-blankline-paragraphs` 已经被重建为 master 基单提交分支。不要再基于旧的 stacked 版本判断 PR 范围。
+
+## 核心空行 PR 内容
+
+PR #9872 改动文件：
 
 | 文件 | 说明 |
 |------|------|
-| `package.json` | Playwright 依赖 `@playwright/test@1.49.1` → `@1.60.0` |
-| `package-lock.json` | 锁文件更新 |
+| `core/modules/parsers/wikiparser/wikiparser.js` | opt-in 解析额外空行为 `blankline` 空段落节点 |
+| `core/modules/wiki.js` | 将 `preserveBlankLines` 从 `wiki.parseText()` 透传给 parser |
+| `plugins/tiddlywiki/wikitext-serialize/utils/parsetree.js` | 序列化 `blankline` 为额外换行 |
+| `themes/tiddlywiki/vanilla/base.tid` | 给 `p.tc-blankline` 最小高度，让阅读态空段落可见 |
+| `editions/test/tiddlers/tests/test-wikitext-blanklines.js` | 覆盖 parse/serialize/config/list/macro 场景 |
 
-## 核心设计
+语义：
 
-### 新增字段
+```text
+A\n\nB      -> parseblock, parseblock
+A\n\n\nB    -> parseblock, blankline, parseblock
+A\n\n\n\nB  -> parseblock, blankline, blankline, parseblock
+```
 
-两个文件都新增：
-- `lastSavedDocJSON` — 记录上次保存/外部同步后的 ProseMirror 文档 JSON，用于识别 wiki 文本 roundtrip echo
-- `pendingSavedText` — 记录等待 wiki refresh 确认的保存文本，替代粗粒度 `saveLock`
-- `pendingExternalText` / `pendingExternalType` — 编辑器聚焦时暂存外部变更，失焦后再应用
-- `applyingExternalText` — 标记外部同步事务，避免它再次触发 debounced save
+普通 `A\n\nB` 仍是普通段落分隔；额外空行才表示空 paragraph。
 
-### engine.js 关键改动
+兼容策略：当前仍是 opt-in：
 
-**`debouncedSave`**：不再调用 `shouldRefreshAfterSave`，保存前记录 `lastSavedDocJSON`，并用 `pendingSavedText` 绑定具体保存文本。若 ProseMirror transaction 最终序列化文本未变化，则不会留下会误吞外部变更的锁。
+- parser option：`{ preserveBlankLines: true }`
+- config tiddler：`$:/config/Parser/PreserveBlankLines` 为 `yes`
 
-**`setText`**：简化为：
-- `nextText === pendingSavedText` → 跳过（自己的保存回声）
-- 文本/type 未变化 → 跳过（metadata-only refresh）
-- 未聚焦 → 调用 `applyExternalText`（增量更新）
-- 聚焦中 → 暂存为 `pendingExternalText`，失焦后应用；如果用户继续编辑，则本地编辑胜出并清掉暂存外部变更
+默认关闭时，旧 wikitext 行为不变。
 
-**`applyExternalText`**：
-1. 解析新文本 → 新 PM doc
-2. 比较 `lastSavedDocJSON` → 相同则跳过（roundtrip echo）
-3. 用 `replaceChangedContent()` 计算 `findDiffStart`/`findDiffEnd`，并修正 append/delete 等场景的 overlap，生成合法的局部替换范围
-4. 用 `tr.mapping.map()` 映射光标
-5. 设置 `addToHistory=false`，避免外部同步污染用户 undo 栈，也避免触发二次保存
-6. 失败时 fallback 到 `updateDomNodeText`（全量重建）
+### 最近修复的关键缺口
 
-**删除**：`shouldRefreshAfterSave` 方法（不再需要归一化 hack）
+最初只覆盖了普通段落之间的额外空行，如 `A\n\n\nB`。
 
-**`updateDomNodeText`**：保留但标记为 fallback only（错误恢复）
+真实文档里常见的是列表、宏、typed block、widget block 等非段落块之间的空行。例如：
 
-**`handleTextOperationNatively`**：成功时记录 `pendingSavedText` 和 `lastSavedDocJSON`，让 toolbar 原生操作的即时 `saveChanges()` 也走同一套保存回声识别。
+```tid
+* one
+* two
 
-### widget.js 关键改动
 
-与 engine.js 对称的改动：
-- `pendingSavedText` 替代 `saveLock`/`"refresh"` 三态
-- `lastKnownText` / `lastKnownType` 用于独立 `$prosemirror` widget 判断 tiddler refresh 是否真的改变了编辑内容
-- `refresh` 不再调用 `refreshSelf()`，改用 `applyExternalText()`；聚焦时暂存外部变更，失焦后应用
-- 新增 `_fullRebuildFromTiddler()` 作为 fallback
 
-### 为什么现在可以用 `findDiffStart`/`findDiffEnd`
+<<now YYYY>>
+```
 
-`findDiffStart`/`findDiffEnd` 返回两套坐标：`end.a` 属于旧 doc，`end.b` 属于新 doc。append/delete 场景中 `start` 可能大于其中一个 end，需要按 ProseMirror 文档推荐做 overlap 修正：
+列表 rule 会在内部消费尾随空白，导致外层 parser 看不到这些换行。最新修复会从 parse tree node 的 `end` 到 parser 当前 `pos` 的源码 gap 中恢复额外 blank lines，因此现在能得到：
+
+```text
+list, blankline, blankline, macrocallblock
+```
+
+## ProseMirror 分支核心设计
+
+### 保存回声识别
+
+旧实现依赖粗粒度 `saveLock`。当前方案使用：
+
+- `pendingSavedText`：记录等待 wiki refresh 确认的具体保存文本
+- `lastSavedDocJSON`：记录上次保存/外部同步后的 ProseMirror doc JSON
+
+这样可以避免“docChanged 但序列化文本未变化”的保存尝试留下陈旧锁，从而误吞后续外部变更。
+
+### 外部变更同步
+
+`engine.js` 和独立 `$prosemirror` `widget.js` 都实现了：
+
+- 未聚焦：立即 `applyExternalText()`
+- 聚焦中：暂存到 `pendingExternalText` / `pendingExternalType`
+- 用户继续编辑：本地编辑胜出，清掉暂存外部变更
+- blur 后：应用暂存外部变更
+
+外部同步 transaction 设置：
+
+```js
+tr.setMeta("addToHistory", false);
+```
+
+并使用 `applyingExternalText` 避免外部同步再次进入 debounced save 回路。
+
+### 细粒度替换
+
+共享 helper：`plugins/tiddlywiki/prosemirror/core/incremental-sync.js`
+
+核心逻辑用 ProseMirror 的 `findDiffStart` / `findDiffEnd` 计算局部差异，然后使用官方推荐的 overlap 修正：
 
 ```js
 const overlap = start - Math.min(oldEnd, newEnd);
 if(overlap > 0) {
-  oldEnd += overlap;
-  newEnd += overlap;
+	oldEnd += overlap;
+	newEnd += overlap;
 }
 ```
 
-修正后可以用 `newDoc.slice(start, newEnd)` 和 `tr.replace(start, oldEnd, slice)` 做细粒度替换，不再需要全文替换。
+最后用：
 
-## 测试结果
-
-### 单元测试（Jasmine）
-```
-1597 specs, 0 failures, 2 pending specs
+```js
+newDoc.slice(start, newEnd)
+tr.replace(start, oldEnd, slice)
 ```
 
-### E2E 测试（Playwright + Chromium）
+做局部替换，而不是全文重建。
 
+## 旧 core / 旧 Wiki 兼容性
+
+用户会把 ProseMirror 编辑器插件和相关插件拖到尚未合并 PR #9872 的旧版 Wiki 里测试。
+
+当前结论：ProseMirror 插件不应硬依赖 core 已经支持 `blankline` AST node。
+
+已补测试：`plugins/tiddlywiki/prosemirror/tests/test-prosemirror-incremental-sync.js`
+
+测试名称：
+
+```text
+should tolerate legacy parsers without blankline nodes
 ```
-incremental-sync.spec.js: 16 passed
-basic-editing.spec.js:    12 passed (30.8s)
-smoke.spec.js:             1 passed (10.6s)
+
+它用 `{ preserveBlankLines: false }` 模拟旧 parser 不产生 `blankline` 节点的情况，确认 ProseMirror AST 转换仍然可以工作，只是空行保真降级。
+
+兼容边界要说清楚：
+
+- 旧 core 不认识 `preserveBlankLines` 时，不应该导致编辑器启动或解析崩溃
+- 旧 core parser 不产生 `blankline` 时，已有源码里的多空行会被旧 parser 吞掉，这是功能降级
+- 如果用户一并拖入更新后的 `wikitext-serialize` 插件，ProseMirror 保存产生的 `blankline` parse tree 可以被序列化
+- 但旧 core parser 仍无法在重新加载时从 wikitext 恢复这些空段落，直到 PR #9872 合并或用户也使用支持 blankline 的 core
+
+不要重新添加 ProseMirror 插件内的 `blankline` serializer shim。之前试过这个方向，但不符合边界：`wikitext-serialize` 插件随编辑器一起带入是可以的；真正不能硬依赖的是 core parser AST 支持。
+
+## 当前 ProseMirror 分支新增/相关文件
+
+| 文件 | 说明 |
+|------|------|
+| `plugins/tiddlywiki/prosemirror/core/incremental-sync.js` | 共享局部 diff 替换 helper |
+| `plugins/tiddlywiki/prosemirror/core/engine.js` | editor factory engine 的保存回声、外部同步、fallback |
+| `plugins/tiddlywiki/prosemirror/core/widget.js` | 独立 `$prosemirror` widget 的同步路径 |
+| `plugins/tiddlywiki/prosemirror/ast/from/paragraph.js` | ProseMirror 空段落输出 `blankline` parse tree node |
+| `plugins/tiddlywiki/prosemirror/ast/to/paragraph.js` | 空 paragraph JSON 规范化，稳定 echo 比较 |
+| `plugins/tiddlywiki/prosemirror/config/defaults.multids` | 当前分支默认 `Parser/PreserveBlankLines: yes` |
+| `plugins/tiddlywiki/prosemirror/styles/structure.tid` | ProseMirror 空段落最小高度 |
+| `plugins/tiddlywiki/prosemirror/tests/test-prosemirror-incremental-sync.js` | diff、roundtrip、legacy parser 降级测试 |
+| `plugins/tiddlywiki/prosemirror/tests/specs/incremental-sync.spec.js` | Playwright 增量同步 E2E |
+
+## 最新验证结果
+
+### 当前 ProseMirror 分支
+
+```bash
+node ./tiddlywiki.js ./editions/test --verbose --test
 ```
 
-E2E 覆盖场景：
-1. ✅ Enter 后空段落在 save 周期后保留
-1. ✅ 空段落保存为 `blankline` wikitext block，重新 parse 后仍是空 paragraph
-2. ✅ Select All + Bold 后空段落保留
-3. ✅ 中间空段落保留
-4. ✅ Agent 修改文本 → 编辑器增量更新
-5. ✅ Roundtrip echo → 不触发重建
-6. ✅ Agent 追加内容 → 正确显示
-7. ✅ Agent 修改已有内容 → 正确替换
-8. ✅ `applyExternalText` 方法存在
-9. ✅ `lastSavedDocJSON` 在 save 后设置
-10. ✅ Save 后 echo 被阻止（段落数不减少）
-11. ✅ 跨 save 周期保留 undo/redo
-12. ✅ 序列化文本未变化的 docChanged 不会留下陈旧锁并误吞后续外部变更
-13. ✅ 编辑器聚焦时外部变更暂存，失焦后应用
-14. ✅ 独立 `$prosemirror` widget 也走增量外部同步
-16. ✅ 外部同步 transaction 不进入 undo/save 回路
+结果：
 
-## Review 重点
+```text
+1668 specs, 0 failures, 5 pending specs
+```
 
-### 1. 细粒度替换范围的正确性
+```bash
+npm run lint
+```
 
-`applyExternalText` 使用 `Fragment.findDiffStart/findDiffEnd` 找局部变化，并通过 overlap 修正避免反向范围。Reviewer 应重点确认：
-- append/prepend/delete/middle insert 的范围是否正确
-- table、widget block、opaque block 等复杂节点是否仍能正确替换
-- selection mapping 是否符合预期
+结果：通过，无输出。
 
-### 2. 两条代码路径的一致性
+Playwright 在本轮修复中跑过：
 
-engine.js（工厂 widget）和 widget.js（独立 widget）有**重复的 `applyExternalText` 实现**。Reviewer 应确认：
-- 两条路径的行为是否一致？
-- 是否应该提取为共享函数？
+```bash
+PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright test "plugins/tiddlywiki/prosemirror/tests/specs/incremental-sync.spec.js" --project=chromium
+```
 
-### 3. 保存回声识别的时序
+结果：`16 passed`
 
-旧的 `saveLock` 是瞬态布尔/三态标志，容易在“docChanged 但序列化文本没变”的保存尝试后残留。当前方案改为 `pendingSavedText`：
-- 只有 wiki refresh 文本等于待确认保存文本时才跳过
-- 序列化文本未变化时清理 pending 状态
-- 工厂的直接 `saveChanges` 和 debounced save 共用同一套文本绑定确认
+```bash
+PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright test "plugins/tiddlywiki/prosemirror/tests/specs/basic-editing.spec.js" --project=chromium
+```
 
-### 4. 空行语法的兼容性
+结果：`12 passed`
 
-额外空行现在会产生空 paragraph。普通段落分隔 `A\n\nB` 不变，但 `A\n\n\nB` 会从“额外空白被忽略”变成“一个空 paragraph”。这项能力已单独提出讨论分支：`feat/wikitext-blankline-paragraphs`。
+```bash
+PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright test "plugins/tiddlywiki/prosemirror/tests/smoke.spec.js" --project=chromium
+```
 
-### 5. E2E 测试环境 / 依赖变更
+结果：`1 passed`
 
-E2E 测试需要 `PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64` 环境变量。当前工作区还包含 `@playwright/test` 版本更新和 `package-lock.json` 大范围刷新；这部分更像测试环境/锁文件维护，建议 reviewer 决定是否和同步修复同一个 PR 保留，或拆成单独变更。
+### 独立核心空行 PR 分支
+
+分支：`feat/wikitext-blankline-paragraphs`
+
+```bash
+node ./tiddlywiki.js ./editions/test --verbose --test
+```
+
+结果：
+
+```text
+1535 specs, 0 failures, 5 pending specs
+```
+
+changed-file ESLint 通过，检查文件：
+
+```text
+core/modules/wiki.js
+core/modules/parsers/wikiparser/wikiparser.js
+editions/test/tiddlers/tests/test-wikitext-blanklines.js
+plugins/tiddlywiki/wikitext-serialize/utils/parsetree.js
+```
+
+注意：该 master 基 worktree 上 full `npm run lint` 会被当前 `origin/master` 已存在的 `plugins/tiddlywiki/dom-to-image/startup.js` 缩进错误挡住，和 PR #9872 无关。
 
 ## 已知限制
 
-1. **空行语法需要团队确认**：额外空行从被忽略变成空 paragraph，建议单独 PR 讨论兼容性。
-2. **冲突策略简单**：编辑器聚焦时外部变更暂存；如果用户继续编辑，本地编辑胜出并清掉暂存外部变更。没有做三方 merge。
+1. **旧 core 上空行保真会降级**
 
-## 运行测试
+   编辑器不应崩，但旧 parser 不会从 wikitext 解析出 `blankline`，所以 reload 后仍可能丢空段落。
+
+2. **冲突策略仍然简单**
+
+   聚焦时外部变更暂存；如果用户继续编辑，本地编辑胜出并清掉暂存外部变更。没有三方 merge。
+
+3. **`engine.js` 和 `widget.js` 有重复同步逻辑**
+
+   两条路径都实现了 `applyExternalText()`。行为现在应一致，但后续可考虑提取共享模块。
+
+4. **复杂节点 diff 覆盖仍可加强**
+
+   目前重点覆盖文本、空段落、外部 append/modify、undo、独立 widget。table、opaque block、typed block、widget block 的局部 diff E2E 还可以补。
+
+5. **核心空行 PR 合并后需要同步当前分支**
+
+   PR #9872 合并后，ProseMirror 分支里重复的 core parser/style/test 改动需要通过 merge/rebase 消化，避免重复提交或冲突。
+
+## 建议交给后续代理的任务
+
+1. **旧版 Wiki 手工/自动兼容验证**
+
+   在未合并 PR #9872 的旧版 TiddlyWiki 中拖入 ProseMirror 编辑器相关插件，确认：
+
+   - 插件能启动
+   - 普通 tiddler 能编辑/保存
+   - 旧 parser 忽略空行时不会抛错
+   - reload 后空段落保真降级符合预期
+
+2. **复杂节点局部 diff E2E**
+
+   补 Playwright 场景：
+
+   - agent 修改 table cell
+   - agent 替换整个 widget block
+   - agent 修改 typed block / opaque block 附近内容
+   - selection mapping 在复杂块附近是否稳定
+
+3. **抽取同步共享逻辑**
+
+   评估将 `engine.js` 和 `widget.js` 中重复的 `applyExternalText()` / pending external 逻辑抽到共享模块。
+
+4. **PR #9872 合并后的清理**
+
+   如果核心空行 PR 被接受：
+
+   - 合并 master 到 ProseMirror 分支
+   - 检查 `preserveBlankLines` 默认配置是否仍需要留在插件里
+   - 若团队决定未来默认开启空行保真，按 PR #9872 描述移除 feature option 并更新测试
+
+5. **依赖变更拆分决策**
+
+   当前历史里有 Playwright 依赖更新和 lockfile 刷新。review 时仍需决定是否保留在同一 PR 栈，还是拆成独立维护提交。
+
+## 常用命令
 
 ```bash
-# 单元测试
+# 当前 ProseMirror 分支状态
+git status --short --branch
+
+# Jasmine
 node ./tiddlywiki.js ./editions/test --verbose --test
+
+# Lint
+npm run lint
 
 # 构建测试 HTML
 node ./tiddlywiki.js ./editions/test --build
 
-# E2E 测试（需要 PLAYWRIGHT_HOST_PLATFORM_OVERRIDE）
-PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright test "incremental-sync.spec.js" --project=chromium
+# 增量同步 E2E
+PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright test "plugins/tiddlywiki/prosemirror/tests/specs/incremental-sync.spec.js" --project=chromium
 
-# 全量 E2E
-PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright test --project=chromium
+# 基础编辑 E2E
+PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright test "plugins/tiddlywiki/prosemirror/tests/specs/basic-editing.spec.js" --project=chromium
+
+# Smoke E2E
+PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright test "plugins/tiddlywiki/prosemirror/tests/smoke.spec.js" --project=chromium
 ```
+
+9300 端口通常已有用户用 dev server 启动的页面，会自动重载。不要另起新 server，除非 9300 不可用。
