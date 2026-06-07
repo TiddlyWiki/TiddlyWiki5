@@ -170,6 +170,10 @@ function clamp(n, min, max) {
 	return Math.max(min, Math.min(max, n));
 }
 
+function isComposingInput(view) {
+	return !!(view && (view.composing || view.compositionStarted));
+}
+
 /**
  * Convert TiddlyWiki shortcut format to CodeMirror format
  * TW format: "ctrl-shift-Z" (lowercase modifiers)
@@ -1170,6 +1174,8 @@ class CodeMirrorEngine {
 		// MUST be before closeBrackets so it gets first chance to handle {
 		if(EditorView.inputHandler) {
 			extensions.push(EditorView.inputHandler.of(function(view, from, to, text) {
+				if(isComposingInput(view)) return false;
+
 				// Only handle single { insertion
 				if(text !== "{") return false;
 
@@ -1217,6 +1223,8 @@ class CodeMirrorEngine {
 		// MUST be before closeBrackets so it gets first chance to handle (
 		if(EditorView.inputHandler) {
 			extensions.push(EditorView.inputHandler.of(function(view, from, to, text) {
+				if(isComposingInput(view)) return false;
+
 				// Only handle ( insertion
 				if(text !== "(") return false;
 
@@ -1277,6 +1285,8 @@ class CodeMirrorEngine {
 		// BUT only when inside a \define block ($(variable)$ is NOT valid in \procedure, \function, \widget)
 		if(EditorView.inputHandler) {
 			extensions.push(EditorView.inputHandler.of(function(view, from, _to, text) {
+				if(isComposingInput(view)) return false;
+
 				// Only trigger on word characters (variable names)
 				if(!/^\w$/.test(text)) return false;
 
@@ -1348,6 +1358,9 @@ class CodeMirrorEngine {
 
 				if(startCompletion && completionStatus) {
 					setTimeout(function() {
+						if(self._destroyed || isComposingInput(view)) {
+							return;
+						}
 						if(completionStatus(view.state) === null) {
 							startCompletion(view);
 						}
@@ -1362,6 +1375,8 @@ class CodeMirrorEngine {
 		// This enables filter/img/ext completion suggestions
 		if(EditorView.inputHandler) {
 			extensions.push(EditorView.inputHandler.of(function(view, from, _to, text) {
+				if(isComposingInput(view)) return false;
+
 				// Only trigger on [ character
 				if(text !== "[") return false;
 
@@ -1387,6 +1402,9 @@ class CodeMirrorEngine {
 
 				if(startCompletion && completionStatus) {
 					setTimeout(function() {
+						if(self._destroyed || isComposingInput(view)) {
+							return;
+						}
 						if(completionStatus(view.state) === null) {
 							startCompletion(view);
 						}
@@ -1428,22 +1446,40 @@ class CodeMirrorEngine {
 			var cursorLayer = layer({
 				above: true,
 				markers: function(view) {
+					if(isComposingInput(view)) {
+						return [];
+					}
+
 					var state = view.state;
+					var docLen = state.doc.length;
 					var cursors = [];
+
 					for(var i = 0; i < state.selection.ranges.length; i++) {
 						var r = state.selection.ranges[i];
+						if(!r) continue;
+
+						var anchor = clamp(r.anchor, 0, docLen);
+						var head = clamp(r.head, 0, docLen);
 						var isPrimary = r === state.selection.main;
 						var cursorClass = isPrimary ? "cm-cursor cm-cursor-primary" : "cm-cursor cm-cursor-secondary";
-						// Draw cursor for this range
-						var cursor = r.empty ? r : EditorSelection.cursor(r.head, r.head > r.anchor ? -1 : 1);
-						var pieces = RectangleMarker.forRange(view, cursorClass, cursor);
-						for(var j = 0; j < pieces.length; j++) {
-							cursors.push(pieces[j]);
+						var cursor = EditorSelection.cursor(head, head > anchor ? -1 : 1);
+
+						try {
+							var pieces = RectangleMarker.forRange(view, cursorClass, cursor);
+							for(var j = 0; j < pieces.length; j++) {
+								cursors.push(pieces[j]);
+							}
+						} catch(_e) {
+							// IME/mobile composition can briefly make DOM selection geometry unstable.
 						}
 					}
+
 					return cursors;
 				},
 				update: function(update, _dom) {
+					if(isComposingInput(update.view)) {
+						return false;
+					}
 					return update.docChanged || update.selectionSet;
 				},
 				"class": "cm-cursorLayer"
