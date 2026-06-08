@@ -313,6 +313,7 @@ class ProseMirrorEngine {
 		if(this.widget.editAutoHeight) {
 			this.domNode.style.height = "";
 			this.domNode.style.overflow = "";
+			this.domNode.style.minHeight = this.widget.editMinHeight || "";
 		} else {
 			let fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE, "400px"), 10);
 			fixedHeight = Math.max(fixedHeight, 100);
