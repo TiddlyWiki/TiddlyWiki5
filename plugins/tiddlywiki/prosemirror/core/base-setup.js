@@ -23,7 +23,7 @@ const buildInputRules = require("$:/plugins/tiddlywiki/prosemirror/core/inputrul
 function buildBaseSetupPlugins(options) {
 	options = options || {};
 	const plugins = [
-		buildInputRules(options.schema),
+		buildInputRules(options.schema, { wiki: options.wiki, editorType: options.editorType }),
 		keymap(buildKeymap(options.schema, options.mapKeys)),
 		keymap(baseKeymap),
 		dropCursor(),
