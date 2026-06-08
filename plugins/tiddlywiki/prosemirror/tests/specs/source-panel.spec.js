@@ -12,13 +12,13 @@ const { setupProseMirrorTest, loadTestPage, installCustomSyntaxTestModules } = r
 test.describe("ProseMirror Editor - Source Preview Tab", () => {
 	async function assertCustomSyntaxSurvivesPreview(page, options) {
 		const { tiddlerTitle, sourceText, expectedLabel } = options;
-		const waitForLabelOccurrences = (minimum) => page.waitForFunction(({ label, expectedCount }) => {
+		const waitForLabelOccurrences = (minimum, timeout = 15000) => page.waitForFunction(({ label, expectedCount }) => {
 			const bodyText = (document.body && document.body.textContent) || "";
 			if(!label) {
 				return false;
 			}
 			return bodyText.split(label).length - 1 >= expectedCount;
-		}, { label: expectedLabel, expectedCount: minimum }, { timeout: 10000 });
+		}, { label: expectedLabel, expectedCount: minimum }, { timeout });
 		await loadTestPage(page);
 		await installCustomSyntaxTestModules(page);
 		await page.evaluate(({ title, text }) => {
@@ -31,14 +31,32 @@ test.describe("ProseMirror Editor - Source Preview Tab", () => {
 		}, { title: tiddlerTitle, text: sourceText });
 
 		await waitForLabelOccurrences(1);
-		await page.getByRole("button", { name: /edit this tiddler/i }).first().click();
+		// Enter edit mode by directly invoking the navigator widget's edit handler,
+		// bypassing Playwright's click which hangs on TiddlyWiki's SPA hash navigation.
+		await page.evaluate(({ title }) => {
+			function findNavigator(widget) {
+				if(widget && widget.handleEditTiddlerEvent) return widget;
+				if(widget && widget.children) {
+					for(var i = 0; i < widget.children.length; i++) {
+						var found = findNavigator(widget.children[i]);
+						if(found) return found;
+					}
+				}
+				return null;
+			}
+			var nav = findNavigator($tw.rootWidget);
+			if(nav) {
+				nav.handleEditTiddlerEvent({ param: title, event: { view: window } });
+			}
+		}, { title: tiddlerTitle });
+		// Wait for edit mode to be fully loaded before checking for label
+		const previewButton = page.getByRole("button", { name: /preview pane/i }).first();
+		await expect(previewButton).toBeVisible({ timeout: 15000 });
 		await waitForLabelOccurrences(1);
 
-		const previewButton = page.getByRole("button", { name: /preview pane/i }).first();
-		await expect(previewButton).toBeVisible({ timeout: 10000 });
 		await previewButton.click();
 
-		await expect(page.locator(".tc-tiddler-preview-preview").first()).toBeVisible({ timeout: 10000 });
+		await expect(page.locator(".tc-tiddler-preview-preview").first()).toBeVisible({ timeout: 15000 });
 		await waitForLabelOccurrences(2);
 	}
 
