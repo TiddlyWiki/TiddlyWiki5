@@ -73,6 +73,9 @@ class ProseMirrorEngine {
 		if(this.widget.editClass) {
 			this.domNode.className += " " + this.widget.editClass;
 		}
+		if(this.widget.editTabIndex) {
+			this.domNode.setAttribute("tabindex", this.widget.editTabIndex);
+		}
 
 		const container = document.createElement("div");
 		container.className = "tc-prosemirror-container";
@@ -84,6 +87,13 @@ class ProseMirrorEngine {
 
 		this.parentNode.insertBefore(this.domNode, this.nextSibling);
 		this.widget.domNodes.push(this.domNode);
+
+		// Delegate focus from the wrapper to the ProseMirror EditorView
+		this.domNode.addEventListener("focus", (event) => {
+			if(this.view && event.target === this.domNode) {
+				this.view.focus();
+			}
+		});
 	}
 
 	_parseInitialDoc() {
