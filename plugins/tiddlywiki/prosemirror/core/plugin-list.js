@@ -82,7 +82,7 @@ function buildPlugins(schema, wiki, nodeViewHost, editorType) {
 		.concat(mdPlugin)
 		.concat(listPlugins)
 		.concat(tablePlugins)
-		.concat(buildBaseSetupPlugins({ schema }));
+		.concat(buildBaseSetupPlugins({ schema, wiki, editorType }));
 }
 
 exports.buildPlugins = buildPlugins;
