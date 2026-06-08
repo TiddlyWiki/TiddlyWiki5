@@ -170,23 +170,59 @@ html body .tc-editor-codemirror6-textarea .cm-scroller {
 /* Sidebar search - inline with search button */
 html body .tc-search .tc-editor-codemirror6-input {
 	display: inline-block;
-	width: auto;
+	width: 20ch;
+	max-width: calc(100% - 3em);
+	min-width: 8ch;
+	vertical-align: middle;
+	overflow: hidden;
+	box-sizing: border-box;
 }
 
 html body .tc-search .tc-editor-codemirror6-input .cm-editor {
-	display: inline-block;
-	width: auto;
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+html body .tc-search .tc-editor-codemirror6-input .cm-scroller {
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	box-sizing: border-box;
 }
 
 /* Advanced search - 60% width */
 html body .tc-advanced-search .tc-editor-codemirror6-input {
 	display: inline-block;
 	width: 60%;
+	max-width: 100%;
+	min-width: 20ch;
+	vertical-align: middle;
+	overflow: hidden;
+	box-sizing: border-box;
 }
 
 html body .tc-advanced-search .tc-editor-codemirror6-input .cm-editor {
 	display: block;
 	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+html body .tc-advanced-search .tc-editor-codemirror6-input .cm-scroller {
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	box-sizing: border-box;
 }
 
 /* Field value column - full width within cell */
