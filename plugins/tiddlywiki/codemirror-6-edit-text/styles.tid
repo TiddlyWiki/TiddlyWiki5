@@ -14,6 +14,15 @@ html body .tc-editor-codemirror6-simple .cm-editor {
 	-webkit-appearance: none;
 }
 
+html body .tc-editor-codemirror6-simple,
+html body .tc-editor-codemirror6-simple .cm-editor,
+html body .tc-editor-codemirror6-simple .cm-scroller,
+html body .tc-editor-codemirror6-simple .cm-content,
+html body .tc-editor-codemirror6-simple .cm-line {
+	box-sizing: border-box;
+	min-width: 0;
+}
+
 /* Inset box-shadow matching snowwhite theme for native inputs */
 html body .tc-tiddler-frame .tc-editor-codemirror6-simple .cm-editor {
 	box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.15);
@@ -89,25 +98,46 @@ html body .tc-editor-codemirror6-simple .cm-editor.cm-readonly {
 
 html body .tc-editor-codemirror6-input {
 	display: inline-block;
-	width: auto;
-	min-width: 20ch; /* Match HTML default size="20" */
+	width: 20ch; /* Match HTML default size="20" */
+	max-width: 100%;
+	min-width: 0;
 	vertical-align: middle;
 	margin: 0;
+	overflow: hidden;
+	box-sizing: border-box;
 }
 
 html body .tc-editor-codemirror6-input .cm-editor {
-	display: inline-block;
-	width: auto;
-	min-width: 100%;
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	box-sizing: border-box;
 }
 
 html body .tc-editor-codemirror6-input .cm-scroller {
+	max-width: 100%;
+	min-width: 0;
 	overflow: hidden;
 	white-space: nowrap;
+	box-sizing: border-box;
 }
 
 html body .tc-editor-codemirror6-input .cm-content {
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
 	white-space: nowrap;
+	box-sizing: border-box;
+}
+
+html body .tc-editor-codemirror6-input .cm-line {
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	box-sizing: border-box;
 }
 
 /* Hide scrollbars */
@@ -416,4 +446,125 @@ html body .tc-control-panel .tc-editor-codemirror6-input {
 html body .tc-control-panel .tc-editor-codemirror6-input .cm-editor {
 	display: block;
 	width: 100%;
+}
+
+/* ============================================
+   Overflow safety for CodeMirror-backed inputs
+   ============================================ */
+
+/* Native <input> controls keep their own box size and scroll/clip their value internally.
+   CodeMirror content has intrinsic width, so these guards prevent long values from
+   enlarging flex rows, tables, sidebars, and field editors. */
+html body .tc-editor-codemirror6-input,
+html body .tc-editor-codemirror6-input .cm-editor,
+html body .tc-editor-codemirror6-input .cm-scroller,
+html body .tc-editor-codemirror6-input .cm-content,
+html body .tc-editor-codemirror6-input .cm-line {
+	max-width: 100%;
+	min-width: 0;
+}
+
+html body .tc-editor-codemirror6-input .cm-editor,
+html body .tc-editor-codemirror6-input .cm-scroller {
+	overflow: hidden;
+}
+
+html body .tc-editor-codemirror6-input .cm-content,
+html body .tc-editor-codemirror6-input .cm-line {
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+/* Allow flex/grid parents to shrink the CodeMirror input instead of being stretched by it. */
+html body .tc-editor-codemirror6-input,
+html body .tc-editor-codemirror6-input .cm-editor {
+	contain: inline-size;
+}
+
+/* ============================================
+   Existing field rows - keep field value input inside .tc-edit-field
+   ============================================ */
+
+/* A saved/existing field row is .tc-edit-field, not .tc-edit-field-add.
+   The value cell must be the flexible part, while field name and buttons keep
+   their natural size. Without min-width: 0 on the flex chain, long CodeMirror
+   content can overflow visually while the actual input box collapses. */
+html body .tc-edit-field {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	gap: 4px;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+html body .tc-edit-field > .tc-edit-field-name {
+	flex: 0 1 auto;
+	min-width: 0;
+	max-width: 40%;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+html body .tc-edit-field > .tc-edit-field-value {
+	flex: 1 1 auto;
+	min-width: 0;
+	max-width: 100%;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+html body .tc-edit-field > .tc-edit-field-remove,
+html body .tc-edit-field > .tc-edit-field-remove-button,
+html body .tc-edit-field > .tc-btn-invisible,
+html body .tc-edit-field > button {
+	flex: 0 0 auto;
+}
+
+html body .tc-edit-field-value > .tc-keyboard {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+html body .tc-edit-field-value .tc-editor-codemirror6-input {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+html body .tc-edit-field-value .tc-editor-codemirror6-input .cm-editor {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+html body .tc-edit-field-value .tc-editor-codemirror6-input .cm-scroller {
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	box-sizing: border-box;
+}
+
+html body .tc-edit-field-value .tc-editor-codemirror6-input .cm-content,
+html body .tc-edit-field-value .tc-editor-codemirror6-input .cm-line {
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	box-sizing: border-box;
 }

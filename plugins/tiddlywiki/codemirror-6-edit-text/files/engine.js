@@ -722,6 +722,7 @@ class CodeMirrorSimpleEngine {
 		// Config is checked dynamically for each source on every completion request
 		var cachedAutocompleteData = [{
 			autocomplete: function(context) {
+				if(self._destroyed) return null;
 				var sources = self.getEnabledCompletionSources();
 				for(var j = 0; j < sources.length; j++) {
 					var result = sources[j](context);
@@ -739,6 +740,7 @@ class CodeMirrorSimpleEngine {
 		var emptyData = [];
 
 		extensions.push(EditorState.languageData.of(function(state, pos, side) {
+			if(self._destroyed) return emptyData;
 			var sources = self.getEnabledCompletionSources();
 			var completeAnyWordEnabled = self._wiki &&
 				self._wiki.getTiddlerText("$:/config/codemirror-6/editor/completeAnyWord", "no") === "yes";
@@ -987,9 +989,13 @@ class CodeMirrorSimpleEngine {
 			extensions.push(
 				Prec.highest(EditorView.domEventHandlers({
 					keydown: function(event, view) {
-						if(event.key === "Enter" && !event.altKey && !event.metaKey) {
+						if(event.key === "Enter") {
+							event.preventDefault();
+							event.stopPropagation();
 							if(self.widget && typeof self.widget.handleKeydownEvent === "function") {
-								return self.widget.handleKeydownEvent(event);
+								try {
+									self.widget.handleKeydownEvent(event);
+								} catch(_e) {}
 							}
 							return true;
 						}
@@ -1020,6 +1026,14 @@ class CodeMirrorSimpleEngine {
 									}
 								}
 							}
+						}
+						return false;
+					},
+					beforeinput: function(event, view) {
+						if(event && (event.inputType === "insertParagraph" || event.inputType === "insertLineBreak")) {
+							event.preventDefault();
+							event.stopPropagation();
+							return true;
 						}
 						return false;
 					}
@@ -1297,7 +1311,13 @@ class CodeMirrorSimpleEngine {
 	updateDomNodeText(text) {
 		if(!this.view) return;
 
-		if(this.isInputMode && text) {
+		if(text === undefined || text === null) {
+			text = "";
+		} else {
+			text = String(text);
+		}
+
+		if(this.isInputMode) {
 			text = text.replace(/[\r\n]+/g, " ");
 		}
 
@@ -1384,7 +1404,7 @@ class CodeMirrorSimpleEngine {
 	 * @param {string} configTiddler - Optional config tiddler path for dynamic enable/disable
 	 */
 	registerCompletionSource(source, priority, configTiddler) {
-		if(!isFunction(source)) return;
+		if(this._destroyed || !this._completionSources || !isFunction(source)) return;
 
 		this._completionSources.push({
 			source: source,
@@ -1401,6 +1421,7 @@ class CodeMirrorSimpleEngine {
 	 * Get all registered completion sources (regardless of enabled state)
 	 */
 	getCompletionSources() {
+		if(this._destroyed || !this._completionSources) return [];
 		return this._completionSources.map(function(entry) {
 			return entry.source;
 		});
@@ -1410,6 +1431,8 @@ class CodeMirrorSimpleEngine {
 	 * Get only enabled completion sources (checks config tiddlers dynamically)
 	 */
 	getEnabledCompletionSources() {
+		if(this._destroyed || !this._completionSources) return [];
+
 		var wiki = this._wiki;
 		var enabled = [];
 
@@ -1955,7 +1978,7 @@ class CodeMirrorSimpleEngine {
 		this._eventHandlers = null;
 		this._activePlugins = null;
 		this._keymapPlugins = null;
-		this._completionSources = null;
+		this._completionSources = [];
 		this._pluginContext = null;
 	}
 
