@@ -248,10 +248,10 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 			if(titlesHaveChanged) return;
 
 			if(title === WORD_BOUNDARY_TIDDLER ||
-			   title === TITLE_TARGET_FILTER ||
-			   title === IGNORE_CASE_TIDDLER) {
-			    titlesHaveChanged = true;
-			    return;
+				title === TITLE_TARGET_FILTER ||
+				title === IGNORE_CASE_TIDDLER) {
+				titlesHaveChanged = true;
+				return;
 			}
 
 			if(title.substring(0,3) === "$:/") {
