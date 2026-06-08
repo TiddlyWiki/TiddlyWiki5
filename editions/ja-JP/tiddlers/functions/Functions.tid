@@ -20,8 +20,9 @@ type: text/vnd.tiddlywiki
 
 関数はいくつかの方法で呼び出すことができます: 
 
-* 構文 `<<myfun param:"value">>` を使用して関数を直接トランスクルードする
-* 構文 `<div class=<<myfun param:"value">>>` を使用してウィジェット属性に関数を割り当てる
+* [[Calls]]構文を使用する:
+** 構文 `<<myfun param:"value">>` を使用して関数を直接トランスクルードする
+** 構文 `<div class=<<myfun param:"value">>>` を使用してウィジェット属性に関数を割り当てる
 * 構文 `[function[myfun],[value],...]` を使用して [[関数オペレータ|function Operator]] を介して関数を呼び出す
 * 構文 `[my.fun[value]]`  または `[.myfun[value]]` で、カスタムフィルター演算子として名前にピリオドが含まれる関数を直接呼び出す
 
