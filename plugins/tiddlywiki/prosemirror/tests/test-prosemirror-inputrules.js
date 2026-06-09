@@ -59,8 +59,8 @@ describe("ProseMirror input rules", () => {
 	});
 
 	describe("wikilink regex patterns", () => {
-		const simplePattern = /(?<!\[)\[\[([^\[\]|]+)\]\]$/;
-		const pipePattern = /(?<!\[)\[\[([^\[\]|]+)\|([^\[\]|]+)\]\]$/;
+		const simplePattern = /\[\[([^\[\]|]+)\]\]$/;
+		const pipePattern = /\[\[([^\[\]|]+)\|([^\[\]|]+)\]\]$/;
 
 		it("should match [[Target]]", () => {
 			const match = simplePattern.exec("abc [[MyTiddler]]");
@@ -104,8 +104,13 @@ describe("ProseMirror input rules", () => {
 			expect(pipePattern.exec("abc [[a|b[c]]]")).toBeNull();
 		});
 
-		it("should not match more than two opening brackets", () => {
-			expect(simplePattern.exec("abc [[[MyTiddler]]")).toBeNull();
+		it("should match three opening brackets at regex level (triple-bracket protection is in the InputRule handler, not the regex)", () => {
+			// Without lookbehind the regex matches [[[Target]] from the
+			// second bracket; the handler checks doc[start-1] and rejects
+			// when it sees another "[".
+			const match = simplePattern.exec("abc [[[MyTiddler]]");
+			expect(match).not.toBeNull();
+			expect(match[1]).toBe("MyTiddler");
 		});
 	});
 
