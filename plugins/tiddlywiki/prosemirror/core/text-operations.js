@@ -36,8 +36,12 @@ function handleMakeLink(view, schema, paramObj) {
 	const linkTarget = paramObj.text || "";
 	const sel = state.selection;
 
-	if(linkTarget && !sel.empty) {
-		const linkMark = schema.marks.link.create({ href: linkTarget, title: linkTarget });
+	if(!sel.empty) {
+		// When selection exists, use explicit target if given, otherwise
+		// fall back to the selected text itself (handles the "linkify" /
+		// wrap-selection-with-[[ ]] toolbar button which sends no `text`).
+		const href = linkTarget || state.doc.textBetween(sel.from, sel.to);
+		const linkMark = schema.marks.link.create({ href: href, title: href });
 		view.dispatch(state.tr.addMark(sel.from, sel.to, linkMark));
 		view.focus();
 		return true;
