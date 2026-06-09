@@ -38,8 +38,7 @@ exports.makeDraggable = function(options) {
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
 				titles = dragTiddler ? [dragTiddler] : [],
 				startActions = options.startActions,
-				variables,
-				domNodeRect;
+				variables;
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
@@ -113,7 +112,7 @@ exports.makeDraggable = function(options) {
 						dataTransfer.setData("text/html",
 							'<a href="' + tiddlerDataURI.replace(/"/g,"&quot;") + '">' +
 							titleString.replace(/[<>&]/g,function(c){return ({"<":"&lt;",">":"&gt;","&":"&amp;"})[c];}) +
-							'</a>'
+							"</a>"
 						);
 					} catch(e) {}
 				}
@@ -164,7 +163,7 @@ exports.importDataTransfer = function(dataTransfer,fallbackTitle,callback) {
 	if($tw.log.IMPORT) {
 		console.log("Available data types:");
 		for(var type=0; type<dataTransfer.types.length; type++) {
-			console.log("type",dataTransfer.types[type],dataTransfer.getData(dataTransfer.types[type]))
+			console.log("type",dataTransfer.types[type],dataTransfer.getData(dataTransfer.types[type]));
 		}
 	}
 	for(var t=0; t<importDataTypes.length; t++) {
@@ -175,7 +174,7 @@ exports.importDataTransfer = function(dataTransfer,fallbackTitle,callback) {
 			// Import the tiddlers in the data
 			if(data !== "" && data !== null) {
 				if($tw.log.IMPORT) {
-					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'")
+					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'");
 				}
 				var tiddlerFields = dataType.toTiddlerFieldsArray(data,fallbackTitle);
 				callback(tiddlerFields);
@@ -194,7 +193,7 @@ exports.importPaste = function(item,fallbackTitle,callback) {
 
 			item.getAsString(function(data){
 				if($tw.log.IMPORT) {
-					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'")
+					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'");
 				}
 				var tiddlerFields = dataType.toTiddlerFieldsArray(data,fallbackTitle);
 				callback(tiddlerFields);
@@ -213,7 +212,7 @@ exports.itemHasValidDataType = function(item) {
 		}
 	}
 	return false;
-}
+};
 
 // Chromium on Linux delivers text/html to JS as UTF-16LE bytes interpreted as
 // Latin-1 (every other char is null). Detect that shape and decode before
@@ -229,7 +228,7 @@ function maybeDecodeUtf16Html(data) {
 		try {
 			var bytes = new Uint8Array(data.length);
 			for(var k = 0; k < data.length; k++) { bytes[k] = data.charCodeAt(k) & 0xff; }
-			return new TextDecoder("utf-16le").decode(bytes).replace(/^﻿/, "");
+			return new TextDecoder("utf-16le").decode(bytes).replace(/^\uFEFF/, "");
 		} catch(e) {}
 	}
 	// ASCII-safe fallback: take every even-indexed char
