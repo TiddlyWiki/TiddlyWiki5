@@ -38,7 +38,8 @@ exports.makeDraggable = function(options) {
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
 				titles = dragTiddler ? [dragTiddler] : [],
 				startActions = options.startActions,
-				variables;
+				variables,
+				domNodeRect;
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
@@ -63,7 +64,7 @@ exports.makeDraggable = function(options) {
 				var inner = options.widget.document.createElement("div");
 				inner.className = "tc-tiddler-dragger-inner";
 				inner.appendChild(options.widget.document.createTextNode(
-					titles.length === 1 ? 
+					titles.length === 1 ?
 						titles[0] :
 						titles.length + " tiddlers"
 				));
@@ -97,15 +98,28 @@ exports.makeDraggable = function(options) {
 				} else {
 					jsonData = options.widget.wiki.getTiddlerAsJson(titles[0]);
 				}
+				var tiddlerDataURI = "data:text/vnd.tiddler," + encodeURIComponent(jsonData);
 				// IE doesn't like these content types
 				if(!$tw.browser.isIE) {
 					dataTransfer.setData("text/vnd.tiddler",jsonData);
 					dataTransfer.setData("text/plain",titleString);
-					dataTransfer.setData("text/x-moz-url","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
+					dataTransfer.setData("text/x-moz-url",tiddlerDataURI);
+					// text/html is the only standard MIME type that reliably
+					// survives Chromium's cross-app drag-data sanitiser on
+					// Linux. Embed the data: URI inside an anchor's href so
+					// the receiver can extract it; the visible text falls
+					// back to the title for non-TW receivers.
+					try {
+						dataTransfer.setData("text/html",
+							'<a href="' + tiddlerDataURI.replace(/"/g,"&quot;") + '">' +
+							titleString.replace(/[<>&]/g,function(c){return ({"<":"&lt;",">":"&gt;","&":"&amp;"})[c];}) +
+							'</a>'
+						);
+					} catch(e) {}
 				}
 				// If browser is Chrome-like and has a touch-input device do NOT .setData
 				if(!($tw.browser.isMobileChrome)) {
-					dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
+					dataTransfer.setData("URL",tiddlerDataURI);
 				}
 				dataTransfer.setData("Text",titleString);
 				event.stopPropagation();
@@ -150,7 +164,7 @@ exports.importDataTransfer = function(dataTransfer,fallbackTitle,callback) {
 	if($tw.log.IMPORT) {
 		console.log("Available data types:");
 		for(var type=0; type<dataTransfer.types.length; type++) {
-			console.log("type",dataTransfer.types[type],dataTransfer.getData(dataTransfer.types[type]));
+			console.log("type",dataTransfer.types[type],dataTransfer.getData(dataTransfer.types[type]))
 		}
 	}
 	for(var t=0; t<importDataTypes.length; t++) {
@@ -161,7 +175,7 @@ exports.importDataTransfer = function(dataTransfer,fallbackTitle,callback) {
 			// Import the tiddlers in the data
 			if(data !== "" && data !== null) {
 				if($tw.log.IMPORT) {
-					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'");
+					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'")
 				}
 				var tiddlerFields = dataType.toTiddlerFieldsArray(data,fallbackTitle);
 				callback(tiddlerFields);
@@ -180,7 +194,7 @@ exports.importPaste = function(item,fallbackTitle,callback) {
 
 			item.getAsString(function(data){
 				if($tw.log.IMPORT) {
-					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'");
+					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'")
 				}
 				var tiddlerFields = dataType.toTiddlerFieldsArray(data,fallbackTitle);
 				callback(tiddlerFields);
@@ -199,7 +213,30 @@ exports.itemHasValidDataType = function(item) {
 		}
 	}
 	return false;
-};
+}
+
+// Chromium on Linux delivers text/html to JS as UTF-16LE bytes interpreted as
+// Latin-1 (every other char is null). Detect that shape and decode before
+// pattern matching. Used by the text/html entry in importDataTypes below.
+function maybeDecodeUtf16Html(data) {
+	if(!data || data.length < 4) { return data; }
+	var sample = Math.min(data.length, 64), nulls = 0;
+	for(var i = 1; i < sample; i += 2) {
+		if(data.charCodeAt(i) === 0) { nulls++; }
+	}
+	if(nulls < Math.floor(sample / 2) * 0.8) { return data; }
+	if(typeof TextDecoder !== "undefined") {
+		try {
+			var bytes = new Uint8Array(data.length);
+			for(var k = 0; k < data.length; k++) { bytes[k] = data.charCodeAt(k) & 0xff; }
+			return new TextDecoder("utf-16le").decode(bytes).replace(/^﻿/, "");
+		} catch(e) {}
+	}
+	// ASCII-safe fallback: take every even-indexed char
+	var stripped = "";
+	for(var j = 0; j < data.length; j += 2) { stripped += data.charAt(j); }
+	return stripped;
+}
 
 var importDataTypes = [
 	{type: "text/vnd.tiddler", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
@@ -224,6 +261,18 @@ var importDataTypes = [
 		}
 	}},
 	{type: "text/html", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
+		// Decode Chromium's Linux UTF-16LE-as-Latin-1 quirk if present
+		data = maybeDecodeUtf16Html(data);
+		// Look for an embedded data:text/vnd.tiddler URI inside any href. Match on
+		// the still-URI-encoded form so JSON %22 doesn't truncate the capture; the
+		// stop-class excludes chars that cannot legally appear in a URI-encoded
+		// payload, so they reliably bound the match.
+		var encMatch = data && data.match(/data:text\/vnd\.tiddler,([^"'<>\s)]+)/i);
+		if(encMatch) {
+			try {
+				return parseJSONTiddlers(decodeURIComponent(encMatch[1]),fallbackTitle);
+			} catch(e) {}
+		}
 		return [{title: fallbackTitle, text: data}];
 	}},
 	{type: "text/plain", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
