@@ -107,7 +107,11 @@ function headingRule(nodeType, maxLevel) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function wikilinkWithTargetRule(markType) {
-	return new InputRule(/(?<!\[)\[\[([^\[\]|]+)\|([^\[\]|]+)\]\]$/, (state, match, start, end) => {
+	return new InputRule(/\[\[([^\[\]|]+)\|([^\[\]|]+)\]\]$/, (state, match, start, end) => {
+		// Guard against triple brackets e.g. [[[text|target]] — the regex
+		// would match from the second "["; reject if the character before
+		// the match is also "["
+		if(start > 0 && state.doc.textBetween(start - 1, start) === "[") return null;
 		const displayText = match[1];
 		const target = match[2];
 		if(!displayText || !target) return null;
@@ -124,7 +128,11 @@ function wikilinkWithTargetRule(markType) {
 }
 
 function wikilinkRule(markType) {
-	return new InputRule(/(?<!\[)\[\[([^\[\]|]+)\]\]$/, (state, match, start, end) => {
+	return new InputRule(/\[\[([^\[\]|]+)\]\]$/, (state, match, start, end) => {
+		// Guard against triple brackets e.g. [[[Target]] — the regex
+		// would match from the second "["; reject if the character before
+		// the match is also "["
+		if(start > 0 && state.doc.textBetween(start - 1, start) === "[") return null;
 		const innerText = match[1];
 		if(!innerText) return null;
 		const tr = state.tr;

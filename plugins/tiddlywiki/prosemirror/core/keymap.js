@@ -156,6 +156,7 @@ function buildKeymap(schema, mapKeys) {
 	type = schema.nodes.paragraph;
 	if(type) {
 		bind("paragraph", "Shift-Ctrl-0", prosemirrorCommands.setBlockType(type));
+		bind("paragraph-plain", "Ctrl-0", prosemirrorCommands.setBlockType(type));
 	}
 
 	// ── Shift-Enter: exit / split an inline-content block ────────────────────
