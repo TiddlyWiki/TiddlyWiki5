@@ -214,6 +214,66 @@ exports.parseFilter = function(filterString) {
 	return results;
 };
 
+/*
+Find where a filter embedded in wikitext ends: the position of the first
+top-level | or }}, skipping bracketed runs and quoted strings so a | or }} inside
+an operand (e.g. [join[|]]) stays part of the filter
+*/
+exports.parseFilterStop = function(filterString,p) {
+	filterString = filterString || "";
+	var length = filterString.length,
+		// A title ends at whitespace, [, ], | or }} (a lone } stays in the title)
+		boundaryRegExp = /[\s\[\]|]|\}\}/g,
+		// Resync point after a malformed run
+		delimiterRegExp = /\||\}\}/g;
+	while(p < length) {
+		var c = filterString.charAt(p);
+		// Skip whitespace
+		if(/\s/.test(c)) {
+			p++;
+			continue;
+		}
+		// A top-level | starts the tooltip/template
+		if(c === "|") {
+			return p;
+		}
+		// A top-level }} terminates the transclusion
+		if(c === "}" && filterString.charAt(p + 1) === "}") {
+			return p;
+		}
+		// A bracketed run: let the canonical parser skip it
+		if(c === "[") {
+			try {
+				p = parseFilterOperation([],filterString,p);
+			} catch(e) {
+				// Malformed run: resync at the next | or }}
+				delimiterRegExp.lastIndex = p;
+				var delimiterMatch = delimiterRegExp.exec(filterString);
+				return delimiterMatch ? delimiterMatch.index : length;
+			}
+			continue;
+		}
+		// A quoted string; an unterminated quote is just a title character
+		if(c === "\"" || c === "'") {
+			var closeQuote = filterString.indexOf(c,p + 1);
+			if(closeQuote !== -1) {
+				p = closeQuote + 1;
+				continue;
+			}
+		}
+		// A stray ]: consume it so scanning advances
+		if(c === "]") {
+			p++;
+			continue;
+		}
+		// A run prefix or unquoted title: jump to the next boundary
+		boundaryRegExp.lastIndex = p;
+		var boundaryMatch = boundaryRegExp.exec(filterString);
+		p = boundaryMatch ? boundaryMatch.index : length;
+	}
+	return length;
+};
+
 exports.getFilterOperators = function() {
 	if(!this.filterOperators) {
 		$tw.Wiki.prototype.filterOperators = {};
