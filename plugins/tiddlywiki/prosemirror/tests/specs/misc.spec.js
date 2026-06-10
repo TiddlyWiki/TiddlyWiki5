@@ -146,6 +146,23 @@ test.describe("ProseMirror Editor - Link Tooltip", () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Initial wikilink rendering
+// ─────────────────────────────────────────────────────────────────────────────
+test.describe("ProseMirror Editor - Initial Wikilink Rendering", () => {
+	test("should render multiple initial wikilinks without freezing", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, "InitialMultipleWikilinks", {
+			useReadmeTiddler: false,
+			initialText: "!! 相关文档\n\n* [[编年史]]\n* [[古神森林]]"
+		});
+		const links = editor.locator("a[data-tw-href]");
+		await expect(links).toHaveCount(2);
+		await expect(links.first()).toHaveClass(/tc-tiddlylink/);
+		await expect(editor).toContainText("编年史");
+		await expect(editor).toContainText("古神森林");
+	});
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Static block rendering
 // ─────────────────────────────────────────────────────────────────────────────
 test.describe("ProseMirror Editor - Static Block Rendering", () => {
