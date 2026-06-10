@@ -27,6 +27,38 @@ function isExternalHref(href) {
 	return /^(?:https?|ftp|mailto):/i.test(href);
 }
 
+function getLinkClasses(wiki, rawHref) {
+	const classes = ["tc-tiddlylink"];
+	if(isExternalHref(rawHref)) {
+		classes.push("tc-tiddlylink-external");
+	} else {
+		const isShadow = wiki.isShadowTiddler(rawHref);
+		if(isShadow) {
+			classes.push("tc-tiddlylink-shadow");
+		}
+		if(wiki.tiddlerExists(rawHref)) {
+			classes.push("tc-tiddlylink-resolves");
+		} else if(!isShadow) {
+			classes.push("tc-tiddlylink-missing");
+		}
+	}
+	return classes.join(" ");
+}
+
+function withStoppedDomObserver(view, callback) {
+	const domObserver = view && view.domObserver;
+	if(domObserver && domObserver.stop && domObserver.start) {
+		domObserver.stop();
+		try {
+			callback();
+		} finally{
+			domObserver.start();
+		}
+	} else {
+		callback();
+	}
+}
+
 /**
  * Walk every <a data-tw-href> inside the ProseMirror editor DOM and apply
  * the TW link classes based on the current wiki state.
@@ -35,34 +67,50 @@ function isExternalHref(href) {
  * @param {object} wiki – $tw.wiki
  */
 function updateLinkClasses(view, wiki) {
-	const dom = view.dom;
+	const dom = view && view.dom;
 	if(!dom) return;
-	const links = dom.querySelectorAll("a[data-tw-href]");
-	for(let i = 0; i < links.length; i++) {
-		const link = links[i];
-		const rawHref = link.getAttribute("data-tw-href") || "";
-		const isExternal = isExternalHref(rawHref);
-
-		// Build the target class list the same way LinkWidget.execute() does
-		const classes = ["tc-tiddlylink"];
-		if(isExternal) {
-			classes.push("tc-tiddlylink-external");
-		} else {
-			if(wiki.isShadowTiddler(rawHref)) {
-				classes.push("tc-tiddlylink-shadow");
-			}
-			if(wiki.tiddlerExists(rawHref)) {
-				classes.push("tc-tiddlylink-resolves");
-			} else if(!wiki.isShadowTiddler(rawHref)) {
-				classes.push("tc-tiddlylink-missing");
+	withStoppedDomObserver(view, () => {
+		const links = dom.querySelectorAll("a[data-tw-href]");
+		for(let i = 0; i < links.length; i++) {
+			const link = links[i];
+			const rawHref = link.getAttribute("data-tw-href") || "";
+			const desired = getLinkClasses(wiki, rawHref);
+			if(link.className !== desired) {
+				link.className = desired;
 			}
 		}
+	});
+}
 
-		const desired = classes.join(" ");
-		if(link.className !== desired) {
-			link.className = desired;
+function collectInternalLinkTargets(doc) {
+	const linkType = doc.type.schema.marks.link;
+	const targets = Object.create(null);
+	if(!linkType) {
+		return targets;
+	}
+	doc.descendants((node) => {
+		if(!node.isText) {
+			return;
+		}
+		const linkMark = node.marks.find((mark) => mark.type === linkType);
+		if(linkMark) {
+			const rawHref = linkMark.attrs.href || "";
+			if(!isExternalHref(rawHref)) {
+				targets[rawHref] = true;
+			}
+		}
+	});
+	return targets;
+}
+
+function hasRelevantLinkChange(doc, changedTiddlers) {
+	const targets = collectInternalLinkTargets(doc);
+	for(const title in changedTiddlers) {
+		if(targets[title]) {
+			return true;
 		}
 	}
+	return false;
 }
 
 /**
@@ -75,11 +123,36 @@ function createLinkClassesPlugin(wiki) {
 	return new Plugin({
 		key: linkClassesKey,
 		view(editorView) {
-			// Apply once on init
-			updateLinkClasses(editorView, wiki);
-			return {
-				update(view) {
+			let view = editorView;
+			let destroyed = false;
+			let pendingRefresh = false;
+			updateLinkClasses(view, wiki);
+			const refreshLinkClasses = (changedTiddlers) => {
+				if(destroyed || pendingRefresh || !view || !hasRelevantLinkChange(view.state.doc, changedTiddlers)) {
+					return;
+				}
+				pendingRefresh = true;
+				setTimeout(() => {
+					pendingRefresh = false;
+					if(destroyed || !view) {
+						return;
+					}
 					updateLinkClasses(view, wiki);
+				}, 0);
+			};
+			if(wiki && wiki.addEventListener) {
+				wiki.addEventListener("change", refreshLinkClasses);
+			}
+			return {
+				update(nextView) {
+					view = nextView;
+					updateLinkClasses(view, wiki);
+				},
+				destroy() {
+					destroyed = true;
+					if(wiki && wiki.removeEventListener) {
+						wiki.removeEventListener("change", refreshLinkClasses);
+					}
 				}
 			};
 		}
@@ -87,3 +160,4 @@ function createLinkClassesPlugin(wiki) {
 }
 
 exports.createLinkClassesPlugin = createLinkClassesPlugin;
+exports.updateLinkClasses = updateLinkClasses;
