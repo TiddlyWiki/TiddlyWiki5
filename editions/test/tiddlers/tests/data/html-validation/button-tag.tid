@@ -1,0 +1,36 @@
+created: 20251030151757904
+description: Button Widget Tag
+modified: 20260127083434167
+tags: $:/tags/wiki-test-spec
+title: button-tag
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Handled by: $:/core/modules/widgets/button.js
+
+```
+var tag = "button",
+
+// snip .....
+
+// Create element
+tag = $tw.utils.makeTagNameSafe(this.buttonTag,tag)
+```
++
+title: Output
+
+<!-- The following code should create a valid button tag -->
+<$button>Click me!</$button>
+
+<!-- The following code should create an A tag -->
+<$button tag="a">Click A</$button>
+
+<!-- The following code should create an "asdf" tag withtout "!" -->
+<$button tag="!asdf">$$$</$button>
+
+
++
+title: ExpectedResult
+
+<p><button class="">Click me!</button></p><p><a class="">Click A</a></p><p><asdf class="">$$$</asdf></p>
