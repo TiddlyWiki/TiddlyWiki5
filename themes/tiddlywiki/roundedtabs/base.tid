@@ -7,6 +7,7 @@ tags: [[$:/tags/Stylesheet]]
 
 .tc-tab-buttons {
 	display: inline-flex;
+	flex-wrap: wrap;
 	gap: 2px;
 	padding: 2px;
 	background-color: <<colour tab-background>>;

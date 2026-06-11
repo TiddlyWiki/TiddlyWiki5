@@ -15,7 +15,9 @@ tags: [[$:/tags/Stylesheet]]
 
 .tc-tab-buttons {
 	display: flex;
-	gap: 0;
+	flex-wrap: wrap;
+	row-gap: 4px;
+	column-gap: 0;
 	padding: 0;
 	background: transparent;
 	border: none;
