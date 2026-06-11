@@ -4,6 +4,7 @@ caption: Editor Types
 list-after: $:/core/ui/ControlPanel/Settings/TiddlyWiki
 
 \procedure editor-types-filter() [[widget]modules[]suffix[.js]regexp[.*/edit-.+]] :map[search-replace:g:regexp[.*/edit-(.+)\.js],[$1]]
+\procedure editor-types-select-options() [subfilter<editor-types-filter>] [<mappingTiddler>get[text]] :sort:string[{!!title}]
 
 \define lingo-base() $:/language/ControlPanel/EditorTypes/
 \whitespace trim
@@ -12,25 +13,25 @@ list-after: $:/core/ui/ControlPanel/Settings/TiddlyWiki
 
 <table>
 <tbody>
-<tr>
-<th><<lingo Type/Caption>></th>
-<th><<lingo Editor/Caption>></th>
-</tr>
-<$list filter="[all[shadows+tiddlers]prefix[$:/config/EditorTypeMappings/]sort[title]]" variable="mappingTiddler">
-<tr>
-<td>
-<$link to=<<mappingTiddler>>>
-<$text text={{{ [<mappingTiddler>removeprefix[$:/config/EditorTypeMappings/]] }}}/>
-</$link>
-</td>
-<td>
-<$select tiddler=<<mappingTiddler>> class="tc-select">
-	<$list filter="[subfilter<editor-types-filter>] [<mappingTiddler>get[text]] :sort:string[{!!title}]">
-		<option><$text text=<<currentTiddler>>/></option>
+	<tr>
+		<th><<lingo Type/Caption>></th>
+		<th><<lingo Editor/Caption>></th>
+	</tr>
+	<$list filter="[all[shadows+tiddlers]prefix[$:/config/EditorTypeMappings/]sort[title]]" variable="mappingTiddler">
+		<tr>
+			<td>
+				<$link to=<<mappingTiddler>>>
+					<$text text={{{ [<mappingTiddler>removeprefix[$:/config/EditorTypeMappings/]] }}}/>
+				</$link>
+			</td>
+			<td>
+				<$select tiddler=<<mappingTiddler>> class="tc-select">
+					<$list filter=<<editor-types-select-options>>>
+						<option><$text text=<<currentTiddler>>/></option>
+					</$list>
+				</$select>
+			</td>
+		</tr>
 	</$list>
-</$select>
-</td>
-</tr>
-</$list>
 </tbody>
 </table>
