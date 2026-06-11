@@ -228,7 +228,7 @@ function maybeDecodeUtf16Html(data) {
 		try {
 			var bytes = new Uint8Array(data.length);
 			for(var k = 0; k < data.length; k++) { bytes[k] = data.charCodeAt(k) & 0xff; }
-			return new TextDecoder("utf-16le").decode(bytes).replace(/^\uFEFF/, "");
+			return new TextDecoder("utf-16le").decode(bytes).replace(/^﻿/, "");
 		} catch(e) {}
 	}
 	// ASCII-safe fallback: take every even-indexed char
@@ -263,10 +263,12 @@ var importDataTypes = [
 		// Decode Chromium's Linux UTF-16LE-as-Latin-1 quirk if present
 		data = maybeDecodeUtf16Html(data);
 		// Look for an embedded data:text/vnd.tiddler URI inside any href. Match on
-		// the still-URI-encoded form so JSON %22 doesn't truncate the capture; the
-		// stop-class excludes chars that cannot legally appear in a URI-encoded
-		// payload, so they reliably bound the match.
-		var encMatch = data && data.match(/data:text\/vnd\.tiddler,([^"'<>\s)]+)/i);
+		// the still-URI-encoded form so JSON %22 doesn't truncate the capture. The
+		// stop-class is only " < > because encodeURIComponent always percent-encodes
+		// those three (so they reliably bound the href value), while characters it
+		// leaves literal (notably ' and ) ) must NOT terminate the match or the
+		// payload would be truncated and fail to parse.
+		var encMatch = data && data.match(/data:text\/vnd\.tiddler,([^"<>]+)/i);
 		if(encMatch) {
 			try {
 				return parseJSONTiddlers(decodeURIComponent(encMatch[1]),fallbackTitle);
@@ -307,7 +309,6 @@ function dragEventContainsType(event,targetType) {
 		for(var i=0; i<event.dataTransfer.types.length; i++) {
 			if(event.dataTransfer.types[i] === targetType) {
 				return true;
-				break;
 			}
 		}
 	}
