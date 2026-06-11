@@ -40,6 +40,56 @@ tags: [[$:/tags/Stylesheet]]
 	color: <<colour foreground>>;
 }
 
+/* Vertical: stacked nav list — no enclosing pill, subtle hover/selected */
+
+.tc-tab-buttons.tc-vertical {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	padding: 0;
+	background: none;
+	background-image: none;
+	border-radius: 0;
+	max-width: 33%;
+}
+
+.tc-tab-buttons.tc-vertical button {
+	display: block;
+	width: 100%;
+	text-align: end;
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	padding: 0.382em 0.618em;
+	margin: 0;
+	color: <<colour tab-foreground>>;
+}
+
+.tc-tab-buttons.tc-vertical button.tc-tab-selected {
+	background: <<colour tab-background-selected>>;
+	color: <<colour tab-foreground-selected>>;
+	font-weight: 600;
+	border: 1px solid <<colour tab-border>>;
+	box-shadow: inset 0 0 0 1px rgba(128,128,128,0.2);
+}
+
+.tc-tab-buttons.tc-vertical button:hover:not(.tc-tab-selected) {
+	background: rgba(128,128,128,0.12);
+	color: <<colour foreground>>;
+}
+
+/* Sidebar + vertical: same recipe with sidebar-scoped palette colours */
+
+.tc-sidebar-lists .tc-tab-buttons.tc-vertical button.tc-tab-selected {
+	background: <<colour sidebar-tab-background-selected>>;
+	background-color: <<colour sidebar-tab-background-selected>>;
+	color: <<colour sidebar-tab-foreground-selected>>;
+	font-weight: 600;
+	border: 1px solid <<colour sidebar-tab-border-selected>>;
+	box-shadow: inset 0 0 0 1px rgba(128,128,128,0.2);
+	border-radius: 4px;
+}
+
 .tc-tab-divider {
 	border-top: none;
 }
