@@ -16,6 +16,7 @@ type: text/vnd.tiddlywiki
 |`-[run]` |`:except[run]` |差集合 |... AND NOT ラン |
 |`~[run]` |`:else[run]` |それ以外 |... ELSE ラン |
 |`=[run]` |`:all[run]` |重複を排除しない和集合 |... OR ラン |
+|`=>[run]` |`:let[run]` |<<.from-version "5.4.0">> 結果を変数に割りあてる |... LET ラン |
 
 ランのインプットは通常、Wiki内の[[隠し|ShadowTiddlers]]Tiddler以外のすべてのTiddlerタイトルのリストです(順不同)。<br>ただし、`+`プレフィックスによってこれを変更できます: 
 
@@ -45,3 +46,5 @@ type: text/vnd.tiddlywiki
 
 新しいフィルタランプレフィックスを作成するには、`filterrunprefix`の[[モジュールタイプ|ModuleType]]で
 [[Javascriptモジュール|Modules]]を作成します。
+
+コンパイルされたフィルタ式はパフォーマンスのためキャッシュされます。キャッシュには最大2000件のエントリが保存され、この制限を超えるとキャッシュ全体がリセットされます。
