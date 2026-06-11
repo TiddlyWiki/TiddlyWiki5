@@ -39,10 +39,15 @@ describe("Editor Types settings", function() {
 		expect(wiki.getTiddlerText("$:/config/EditorTypeMappings/text/vnd.tiddlywiki")).toBe("text");
 	});
 
+	function expectValidFilterResults(results) {
+		expect(results.length).toBeGreaterThan(0);
+		expect(results.join(",")).not.toMatch(/Filter Error/i);
+	}
+
 	it("should discover installed edit-* widget names for dropdown options", function() {
 		var widgetNode = makeEditorTypesWidget();
 		var results = wiki.filterTiddlers(getProcedureFilter(widgetNode, "editor-types-filter"));
-		expect(results[0]).not.toMatch(/Filter Error/i);
+		expectValidFilterResults(results);
 		expect(results).toContain("text");
 		expect(results).toContain("bitmap");
 	});
@@ -50,8 +55,10 @@ describe("Editor Types settings", function() {
 	it("should combine current mapping with installed editor types for select options", function() {
 		var widgetNode = makeEditorTypesWidget({mappingTiddler: "$:/config/EditorTypeMappings/image/png"});
 		var results = wiki.filterTiddlers(getProcedureFilter(widgetNode, "editor-types-select-options"), leafWidget(widgetNode));
-		expect(results[0]).not.toMatch(/Filter Error/i);
+		expectValidFilterResults(results);
 		expect(results).toContain("bitmap");
+		expect(results.filter(function(title) { return title === "bitmap"; }).length).toBe(1);
+		expect(results.join(",")).toBe(results.slice().sort().join(","));
 	});
 
 });
