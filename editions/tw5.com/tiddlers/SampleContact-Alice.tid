@@ -1,5 +1,6 @@
-created: 20260406143100000
-modified: 20260406143100000
+created: 20260612152408817
+modified: 20260612201309634
+relation-company: Company
 tags: ContactCard
 title: SampleContact-Alice
 type: text/vnd.tiddlywiki-multiple+fields
@@ -17,9 +18,10 @@ title: last-name
 
 Chen
 +
-title: company
+title: list
+type: relation-Company
 
-DesignBridge
+[[DesignBridge]]
 +
 title: role
 

@@ -1,5 +1,5 @@
 created: 20260406140000000
-modified: 20260406191015687
+modified: 20260612201323794
 tags: ContactCard
 title: SampleContact
 type: text/vnd.tiddlywiki-multiple+fields
@@ -27,9 +27,10 @@ title: last-name
 
 Doe
 +
-title: company
+title: list
+type: relation-Company
 
-ExampleCorp
+[[ExampleCorp]]
 +
 title: role
 type: select-role

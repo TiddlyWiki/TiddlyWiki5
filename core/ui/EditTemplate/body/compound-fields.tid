@@ -110,6 +110,13 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 				</$list>
 			</$select>
 		</$let>
+	<%elseif [<fieldType>prefix[relation-]] %>
+		<!-- relation-Company: current links as removable pills + tag-picker (relation-picker macro).
+			The picker writes the field; the +fields addTiddler hook routes that write into the compound
+			source, so the relation stays a normal sub-entry. -->
+		<$let relationTag={{{ [<fieldType>removeprefix[relation-]] }}}>
+			<$macrocall $name="relation-picker" fieldName=<<fieldName>> relationTag=<<relationTag>> tiddler=<<currentTiddler>>/>
+		</$let>
 	<%elseif [<fieldType>prefix[option-]] %>
 		<$let optionLabels={{{ [<fieldType>removeprefix[option-]] }}}>
 			<$list filter="[<optionLabels>split[-]]" variable="optionValue">
@@ -150,6 +157,10 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 		</$list>
 		<$list filter="[<currentTiddler>compound-field-types[]prefix[select-]] +[unique[]]" variable="selectType">
 			<option value=<<selectType>>><$text text=<<selectType>>/></option>
+		</$list>
+		<!-- Relation types: the configurable target list plus any already used here, so a relation can be applied to several fields. -->
+		<$list filter="[{$:/config/CompoundFields/RelationTargets}enlist-input[]addprefix[relation-]] [<currentTiddler>compound-field-types[]prefix[relation-]] +[unique[]]" variable="relationType">
+			<option value=<<relationType>>><$text text=<<relationType>>/></option>
 		</$list>
 	</$select>
 </$let>

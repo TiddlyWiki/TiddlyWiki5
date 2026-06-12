@@ -1,5 +1,5 @@
 created: 20260406143200000
-modified: 20260406143200000
+modified: 20260612201316531
 tags: ContactCard
 title: SampleContact-Bob
 type: text/vnd.tiddlywiki-multiple+fields
@@ -21,9 +21,10 @@ title: role
 
 Founder
 +
-title: company
+title: list
+type: relation-Company
 
-NoteGraph
+[[NoteGraph]]
 +
 title: email-personal
 type: email

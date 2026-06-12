@@ -1,5 +1,5 @@
 created: 20260406190741556
-modified: 20260527072301037
+modified: 20260612201326691
 title: ContactTemplate
 type: text/vnd.tiddlywiki-multiple+fields
 
@@ -16,7 +16,8 @@ title: last-name
 
 
 +
-title: company
+title: list
+type: relation-Company
 
 
 +

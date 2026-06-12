@@ -1,5 +1,5 @@
 created: 20260406143000000
-modified: 20260406143000000
+modified: 20260612201318436
 tags: ContactCard
 title: SampleContact-Mario
 type: text/vnd.tiddlywiki-multiple+fields
@@ -17,13 +17,14 @@ title: last-name
 
 Storti
 +
-title: company
-
-WikiLabs
-+
 title: role
 
 Developer
++
+title: list
+type: relation-Company
+
+[[WikiLabs]]
 +
 title: email-work
 type: email

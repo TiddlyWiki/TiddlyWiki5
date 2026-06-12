@@ -1229,6 +1229,37 @@ $tw.Wiki = function(options) {
 		// For text/vnd.tiddlywiki-multiple+fields tiddlers, expose sub-entry titles as fields
 		if(tiddler && tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields" && tiddler.fields.text) {
 			var reservedFields = {"title":true,"text":true,"type":true,"created":true,"creator":true,"modified":true,"modifier":true,"tags":true,"bag":true,"revision":true};
+			var existingTiddler = this.getTiddler(tiddler.fields.title);
+			// Field → source: sub-entries are exposed as fields, so they must stay API-compatible with
+			// standard fields. When the compound text is unchanged but a derived field has been edited
+			// directly (eg by a standard field-writing widget such as the tag-picker), write the new
+			// value back into the compound source so the change round-trips and serializes on save.
+			if($tw.utils.makeMultilineFieldsDictionary && existingTiddler &&
+				existingTiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields" &&
+				existingTiddler.fields.text === tiddler.fields.text) {
+				var sourceData = $tw.utils.parseMultilineFields(tiddler.fields.text);
+				var sourceChanged = false;
+				for(var sourceName in sourceData) {
+					var sourceTarget = (sourceName === "text") ? "body" : sourceName;
+					if(sourceName === "text" || !reservedFields[sourceName]) {
+						var sourceEntry = sourceData[sourceName];
+						var sourceHasMeta = sourceEntry !== null && typeof sourceEntry === "object" && $tw.utils.hop(sourceEntry,"value");
+						var sourceValue = sourceHasMeta ? sourceEntry.value : sourceEntry;
+						var fieldValue = tiddler.fields[sourceTarget];
+						if(fieldValue !== undefined && ("" + fieldValue) !== ("" + sourceValue)) {
+							if(sourceHasMeta) {
+								sourceEntry.value = fieldValue;
+							} else {
+								sourceData[sourceName] = fieldValue;
+							}
+							sourceChanged = true;
+						}
+					}
+				}
+				if(sourceChanged) {
+					tiddler = new $tw.Tiddler(tiddler,{text: $tw.utils.makeMultilineFieldsDictionary(sourceData,tiddler.fields.text)});
+				}
+			}
 			var parsedFields = $tw.utils.parseMultilineFields(tiddler.fields.text);
 			var extraFields = Object.create(null);
 			var newDerivedNames = Object.create(null);
@@ -1244,7 +1275,6 @@ $tw.Wiki = function(options) {
 				}
 			}
 			// Clear previously-derived fields that are no longer present in the new compound text
-			var existingTiddler = this.getTiddler(tiddler.fields.title);
 			if(existingTiddler && existingTiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields" && existingTiddler.fields.text) {
 				var prevParsed = $tw.utils.parseMultilineFields(existingTiddler.fields.text);
 				for(var prevName in prevParsed) {

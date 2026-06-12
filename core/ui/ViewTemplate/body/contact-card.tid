@@ -26,6 +26,10 @@ title: $:/core/ui/ViewTemplate/body/contact-card
 				<%elseif [<fieldType>match[color]] %>
 					<span class="tc-contact-card-color" style={{{ [[background-color:]addsuffix<fieldValue>] }}}>&nbsp;&nbsp;&nbsp;</span>
 					&nbsp;<$text text=<<fieldValue>>/>
+				<%elseif [<fieldType>prefix[relation-]] %>
+					<$list filter="[<fieldValue>enlist-input[]]" variable="relatedTitle">
+						<$link to=<<relatedTitle>>/><$text text=" "/>
+					</$list>
 				<%elseif [<fieldType>prefix[option-]] %>
 					<$text text=<<fieldValue>>/>
 				<%else%>
@@ -56,6 +60,10 @@ title: $:/core/ui/ViewTemplate/body/contact-card
 				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="url"/>
 			<%elseif [<fieldType>match[color]] %>
 				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="color"/>
+			<%elseif [<fieldType>prefix[relation-]] %>
+				<$let relationTag={{{ [<fieldType>removeprefix[relation-]] }}}>
+					<$macrocall $name="relation-picker" fieldName=<<fieldName>> relationTag=<<relationTag>> tiddler=<<currentTiddler>>/>
+				</$let>
 			<%elseif [<fieldType>prefix[option-]] %>
 				<$let optionLabels={{{ [<fieldType>removeprefix[option-]] }}}>
 					<$list filter="[<optionLabels>split[-]]" variable="optionValue">
