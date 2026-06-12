@@ -1,0 +1,33 @@
+created: 20260612151736700
+modified: 20260612201256923
+tags: Company
+title: NoteGraph
+type: text/vnd.tiddlywiki-multiple+fields
+
+title: body
+type: multiline
+
+A small startup building personal knowledge management tools.
++
+title: industry
+
+Software
++
+title: location
+
+Lisbon, Portugal
++
+title: website
+type: url
+
+https://notegraph.example.com
++
+title: founded
+type: date
+
+2021-06-15
++
+title: employees
+type: template-prefix
+
+ContactRollup

@@ -144,6 +144,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 		<option value="phone">phone</option>
 		<option value="url">url</option>
 		<option value="color">color</option>
+		<option value="template-prefix">template-prefix</option>
 		<$list filter="[<currentTiddler>compound-field-types[]prefix[option-]] option-yes-no +[unique[]]" variable="optionType">
 			<option value=<<optionType>>><$text text=<<optionType>>/></option>
 		</$list>
