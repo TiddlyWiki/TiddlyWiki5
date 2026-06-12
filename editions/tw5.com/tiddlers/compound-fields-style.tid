@@ -39,8 +39,9 @@ title: compound-fields-style
 }
 
 .tc-contact-card-toolbar {
-	float: right;
-	margin: -0.3em -0.3em 0 0;
+	position: absolute;
+	top: 0.7em;
+	right: 0.7em;
 }
 
 .tc-contact-card-body {
