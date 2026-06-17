@@ -1,7 +1,7 @@
 /*\
-title: $:/plugins/tiddlywiki/prosemirror/core/debounce.js
+title: $:/core/modules/utils/debounce.js
 type: application/javascript
-module-type: library
+module-type: utils
 
 Plugin-local debounce helper so ProseMirror can run without branch-specific core changes.
 
