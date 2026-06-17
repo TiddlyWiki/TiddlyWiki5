@@ -22,6 +22,7 @@ exports.startup = function() {
 	try {
 		patchEditWidget();
 		patchEditTextWidget();
+		patchWikiParseTextPreserveBlankLines();
 		patchWikiParserPreserveBlankLines();
 	} catch(e) {
 		console.error("[ProseMirror Patch] Error applying core patches:", e);
@@ -41,40 +42,44 @@ function patchEditWidget() {
 		return;
 	}
 
-	// Wrap execute() to set tv-editor-type
-	var origExecute = EditWidget.prototype.execute;
-	EditWidget.prototype.execute = function() {
-		origExecute.call(this);
-		this.setVariable("tv-editor-type",this.editorType);
-	};
+	// Wrap execute() to set tv-editor-type when core does not already do it
+	if(String(EditWidget.prototype.execute).indexOf("tv-editor-type") === -1) {
+		var origExecute = EditWidget.prototype.execute;
+		EditWidget.prototype.execute = function() {
+			origExecute.call(this);
+			this.setVariable("tv-editor-type",this.editorType);
+		};
+	}
 
 	// Replace getEditorType() to add prosemirror fallback check
-	EditWidget.prototype.getEditorType = function() {
-		var type;
-		if(this.editField === "text") {
-			var tiddler = this.wiki.getTiddler(this.editTitle);
-			if(tiddler) {
-				type = tiddler.fields.type;
+	if(String(EditWidget.prototype.getEditorType).indexOf("hasParserForType") === -1) {
+		EditWidget.prototype.getEditorType = function() {
+			var type;
+			if(this.editField === "text") {
+				var tiddler = this.wiki.getTiddler(this.editTitle);
+				if(tiddler) {
+					type = tiddler.fields.type;
+				}
 			}
-		}
-		type = type || "text/vnd.tiddlywiki";
-		var editorType = this.wiki.getTiddlerText("$:/config/EditorTypeMappings/" + type);
-		if(editorType) {
-			editorType = editorType.trim();
-		}
-		if(editorType === "prosemirror" && (!$tw.browser || !hasParserForType(type))) {
-			editorType = "text";
-		}
-		if(!editorType) {
-			var typeInfo = $tw.config.contentTypeInfo[type];
-			if(typeInfo && typeInfo.encoding === "base64") {
-				editorType = "binary";
-			} else {
+			type = type || "text/vnd.tiddlywiki";
+			var editorType = this.wiki.getTiddlerText("$:/config/EditorTypeMappings/" + type);
+			if(editorType) {
+				editorType = editorType.trim();
+			}
+			if(editorType === "prosemirror" && (!$tw.browser || !hasParserForType(type))) {
 				editorType = "text";
 			}
-		}
-		return editorType;
-	};
+			if(!editorType) {
+				var typeInfo = $tw.config.contentTypeInfo[type];
+				if(typeInfo && typeInfo.encoding === "base64") {
+					editorType = "binary";
+				} else {
+					editorType = "text";
+				}
+			}
+			return editorType;
+		};
+	}
 }
 
 function hasParserForType(type) {
@@ -90,7 +95,7 @@ function hasParserForType(type) {
 }
 
 // ---------------------------------------------------------------------------
-// Patch 2: $:/core/modules/editor/factory.js  —  handleTextOperationNatively hook
+// Patch 2: $:/core/modules/editor/factory.js - handleTextOperationNatively hook
 //   Without this, toolbar ops (bold, link, etc.) fall through to
 //   createTextOperation()/updateDomNodeText() which destroys undo history.
 // ---------------------------------------------------------------------------
@@ -103,6 +108,9 @@ function patchEditTextWidget() {
 	}
 
 	var origHandler = EditProsemirrorWidget.prototype.handleEditTextOperationMessage;
+	if(String(origHandler).indexOf("handleTextOperationNatively") !== -1) {
+		return;
+	}
 	EditProsemirrorWidget.prototype.handleEditTextOperationMessage = function(event) {
 		if(this.engine.handleTextOperationNatively && this.engine.handleTextOperationNatively(event)) {
 			this.engine.fixHeight();
@@ -114,13 +122,42 @@ function patchEditTextWidget() {
 }
 
 // ---------------------------------------------------------------------------
-// Patch 3: $:/core/modules/parsers/wikiparser/wikiparser.js
-//   + $:/core/modules/wiki.js
-//   — preserveBlankLines support for round-trip fidelity (empty paragraphs)
+// Patch 3: $:/core/modules/wiki.js
+//   - pass preserveBlankLines through parseText() options
+// ---------------------------------------------------------------------------
+function patchWikiParseTextPreserveBlankLines() {
+	if(!$tw.Wiki || !$tw.Wiki.prototype || !$tw.Wiki.prototype.parseText) {
+		return;
+	}
+	if(String($tw.Wiki.prototype.parseText).indexOf("preserveBlankLines") !== -1) {
+		return;
+	}
+	$tw.Wiki.prototype.parseText = function(type,text,options) {
+		text = text || "";
+		options = options || {};
+		var Parser = $tw.utils.getParser(type,options);
+		return new Parser(type,text,{
+			parseAsInline: options.parseAsInline,
+			wiki: this,
+			_canonical_uri: options._canonical_uri,
+			configTrimWhiteSpace: options.configTrimWhiteSpace,
+			preserveBlankLines: options.preserveBlankLines
+		});
+	};
+}
+
+// ---------------------------------------------------------------------------
+// Patch 4: $:/core/modules/parsers/wikiparser/wikiparser.js
+//   - preserveBlankLines support for round-trip fidelity (empty paragraphs)
 // ---------------------------------------------------------------------------
 function patchWikiParserPreserveBlankLines() {
 	var OrigWikiParser = $tw.Wiki.parsers["text/vnd.tiddlywiki"];
 	if(!OrigWikiParser) return;
+	if(OrigWikiParser.prototype.makeBlankLineBlocks &&
+		String(OrigWikiParser).indexOf("preserveBlankLines") !== -1 &&
+		String(OrigWikiParser.prototype.parseBlocksTerminatedExtended).indexOf("new RegExp(terminatorRegExpString") !== -1) {
+		return;
+	}
 
 	// ----- new prototype methods -----
 
@@ -203,29 +240,24 @@ function patchWikiParserPreserveBlankLines() {
 		if(!this.preserveBlankLines) {
 			return origParseBlocksTerminatedExtended.call(this,terminatorRegExpString);
 		}
-		var terminatorRegExp = /(\r?\n\r?\n)$/mg,
+		var terminatorRegExp = new RegExp(terminatorRegExpString,"mg"),
 			result = {
-				terminatorMatch: [],
 				tree: []
 			};
-		// Skip whitespace / leading blank lines
 		result.tree.push.apply(result.tree,this.parseBlankLineBlocks({leading: true}));
-		// Check if we've got the end marker
 		terminatorRegExp.lastIndex = this.pos;
 		var match = terminatorRegExp.exec(this.source);
 		while(this.pos < this.sourceLength && !(match && match.index === this.pos)) {
 			var blocks = this.parseBlock(terminatorRegExpString);
 			result.tree.push.apply(result.tree,blocks);
 			result.tree.push.apply(result.tree,this.getTrailingBlankLineBlocks(blocks));
-			// Blank lines between blocks
 			result.tree.push.apply(result.tree,this.parseBlankLineBlocks());
-			// Check if we've got the end marker
 			terminatorRegExp.lastIndex = this.pos;
 			match = terminatorRegExp.exec(this.source);
 		}
 		if(match && match.index === this.pos) {
-			result.terminatorMatch = match;
-			this.pos = terminatorRegExp.lastIndex;
+			this.pos = match.index + match[0].length;
+			result.match = match;
 		}
 		return result;
 	};
