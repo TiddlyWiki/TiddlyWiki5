@@ -483,6 +483,20 @@ html body .tc-control-panel .tc-editor-codemirror6-input .cm-editor {
 	width: 100%;
 }
 
+/* Inputs inside ControlPanel tables (e.g. Appearance > Theme Tweaks > Sizes)
+   keep their natural fixed width like native inputs instead of stretching to
+   fill the whole table cell. */
+html body .tc-control-panel td .tc-editor-codemirror6-input {
+	display: inline-block;
+	width: auto;
+}
+
+html body .tc-control-panel td .tc-editor-codemirror6-input .cm-editor {
+	display: inline-block;
+	width: auto;
+	min-width: 20ch;
+}
+
 /* ============================================
    Message box - full width inputs (e.g. _canonical_uri field)
    ============================================ */

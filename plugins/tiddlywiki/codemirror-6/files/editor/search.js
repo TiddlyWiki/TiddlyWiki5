@@ -151,6 +151,12 @@ exports.plugin = {
 	description: "Search and replace functionality",
 	priority: 700,
 
+	condition: function(context) {
+		// Don't load search (and its Ctrl-F/Cmd-F handling) in simple single-line
+		// inputs - the search panel is meant for the main/textarea editor only.
+		return !(context && context.isSimpleEditor && context.isInputMode);
+	},
+
 	init: function(cm6Core) {
 		this._core = cm6Core;
 	},
