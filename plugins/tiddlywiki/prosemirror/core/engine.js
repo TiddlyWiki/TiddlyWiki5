@@ -20,7 +20,7 @@ const { handleTextOperation } = require("$:/plugins/tiddlywiki/prosemirror/core/
 const { replaceChangedContent } = require("$:/plugins/tiddlywiki/prosemirror/core/incremental-sync.js");
 const { EditorState, TextSelection } = require("prosemirror-state");
 const { EditorView } = require("prosemirror-view");
-const { debounce } = require("$:/plugins/tiddlywiki/prosemirror/core/debounce.js");
+const { debounce } = require("$:/core/modules/utils/debounce.js");
 
 class ProseMirrorEngine {
 	constructor(options) {
