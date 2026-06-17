@@ -124,18 +124,17 @@ html body .tc-editor-codemirror6-input .cm-scroller {
 	box-sizing: border-box;
 }
 
+/* Content and lines must keep their natural (nowrap) width so they can overflow
+   the bounded cm-scroller. Capping them at max-width:100% with overflow:hidden
+   clips the text at the content level, leaving scrollWidth == clientWidth, so
+   CodeMirror can never scroll the cursor into view horizontally. */
 html body .tc-editor-codemirror6-input .cm-content {
-	max-width: 100%;
 	min-width: 0;
-	overflow: hidden;
 	white-space: nowrap;
 	box-sizing: border-box;
 }
 
 html body .tc-editor-codemirror6-input .cm-line {
-	max-width: 100%;
-	min-width: 0;
-	overflow: hidden;
 	white-space: nowrap;
 	box-sizing: border-box;
 }
@@ -485,17 +484,34 @@ html body .tc-control-panel .tc-editor-codemirror6-input .cm-editor {
 }
 
 /* ============================================
+   Message box - full width inputs (e.g. _canonical_uri field)
+   ============================================ */
+
+html body .tc-message-box .tc-editor-codemirror6-input {
+	display: block;
+	width: 100%;
+}
+
+html body .tc-message-box .tc-editor-codemirror6-input .cm-editor {
+	display: block;
+	width: 100%;
+}
+
+/* ============================================
    Overflow safety for CodeMirror-backed inputs
    ============================================ */
 
 /* Native <input> controls keep their own box size and scroll/clip their value internally.
    CodeMirror content has intrinsic width, so these guards prevent long values from
    enlarging flex rows, tables, sidebars, and field editors. */
+/* Bound the box (container, editor, scroller) - but NOT the content/line.
+   The cm-scroller is the scroll viewport; the content must keep its intrinsic
+   nowrap width so it can overflow that viewport. Capping the content at
+   max-width:100% with overflow:hidden clips the text instead, leaving
+   scrollWidth == clientWidth so CodeMirror can never scroll the cursor sideways. */
 html body .tc-editor-codemirror6-input,
 html body .tc-editor-codemirror6-input .cm-editor,
-html body .tc-editor-codemirror6-input .cm-scroller,
-html body .tc-editor-codemirror6-input .cm-content,
-html body .tc-editor-codemirror6-input .cm-line {
+html body .tc-editor-codemirror6-input .cm-scroller {
 	max-width: 100%;
 	min-width: 0;
 }
@@ -507,7 +523,7 @@ html body .tc-editor-codemirror6-input .cm-scroller {
 
 html body .tc-editor-codemirror6-input .cm-content,
 html body .tc-editor-codemirror6-input .cm-line {
-	overflow: hidden;
+	min-width: 0;
 	white-space: nowrap;
 }
 
@@ -598,9 +614,7 @@ html body .tc-edit-field-value .tc-editor-codemirror6-input .cm-scroller {
 
 html body .tc-edit-field-value .tc-editor-codemirror6-input .cm-content,
 html body .tc-edit-field-value .tc-editor-codemirror6-input .cm-line {
-	max-width: 100%;
 	min-width: 0;
-	overflow: hidden;
 	white-space: nowrap;
 	box-sizing: border-box;
 }
