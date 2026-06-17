@@ -145,6 +145,26 @@ function getParserCompatExtension(context) {
 	});
 }
 
+function getUserSelectTheme(context) {
+	var core = getCore(context);
+	var EditorView = core && core.view && core.view.EditorView;
+
+	if(!EditorView || !isFunction(EditorView.theme)) {
+		return [];
+	}
+
+	// Prevent text selection anywhere in the minimap (gutter, canvas and the
+	// draggable overlay) so clicking/dragging it never selects content.
+	return EditorView.theme({
+		".cm-minimap-gutter, .cm-minimap-inner, .cm-minimap-overlay-container, .cm-minimap-overlay, .cm-minimap-inner canvas": {
+			"user-select": "none",
+			"-webkit-user-select": "none",
+			"-moz-user-select": "none",
+			"-ms-user-select": "none"
+		}
+	});
+}
+
 function getMinimapContent(context) {
 	var core = getCore(context);
 	var ownerDocument;
@@ -155,6 +175,7 @@ function getMinimapContent(context) {
 
 	return [
 		getParserCompatExtension(context),
+		getUserSelectTheme(context),
 		showMinimap.of({
 			create: function(view) {
 				ownerDocument = view && view.dom && view.dom.ownerDocument ? view.dom.ownerDocument : document;
