@@ -226,8 +226,13 @@ exports.plugin = {
 							return;
 						}
 					}
-					// When search is opened (Ctrl+F / Cmd+F), update panel position after it's created
-					if(event.key === "f" && (event.ctrlKey || event.metaKey)) {
+					// When search is opened (Ctrl+F / Cmd+F), prevent the browser's
+					// native find dialog and open the editor's search panel instead
+					if(event.key === "f" && (event.ctrlKey || event.metaKey) && !event.altKey) {
+						event.preventDefault();
+						if(searchLibRef.openSearchPanel) {
+							searchLibRef.openSearchPanel(view);
+						}
 						setTimeout(updatePanelTopOffset, 0);
 					}
 				};
