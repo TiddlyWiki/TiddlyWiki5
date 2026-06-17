@@ -12,12 +12,16 @@ Implements the engine interface required by $:/core/modules/editor/factory.js.
 
 const HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
 
-const wikiAstFromProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js").from;
-const wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js").to;
 const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/core/schema.js");
 const { buildPlugins, SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
 const { handleTextOperation } = require("$:/plugins/tiddlywiki/prosemirror/core/text-operations.js");
-const { replaceChangedContent } = require("$:/plugins/tiddlywiki/prosemirror/core/incremental-sync.js");
+const {
+	parseWikiTextToDoc,
+	serializeDocJSON,
+	getPragmaPreamble,
+	applyExternalText: applySharedExternalText,
+	rebuildEditorState
+} = require("$:/plugins/tiddlywiki/prosemirror/core/editor-shared.js");
 const { EditorState, TextSelection } = require("prosemirror-state");
 const { EditorView } = require("prosemirror-view");
 const { debounce } = require("$:/core/modules/utils/debounce.js");
@@ -98,11 +102,7 @@ class ProseMirrorEngine {
 
 	_parseInitialDoc() {
 		try {
-			const initialWikiAst = this.wiki.parseText(this.type, this.value || "", {
-				defaultType: "text/vnd.tiddlywiki",
-				preserveBlankLines: true
-			}).tree;
-			return wikiAstToProseMirrorAst(initialWikiAst, { sourceText: this.value });
+			return parseWikiTextToDoc(this.wiki, this.type, this.value);
 		} catch(e) {
 			console.error("[ProseMirror] Error parsing initial content:", e);
 			return { type: "doc", content: [{ type: "paragraph" }] };
@@ -226,52 +226,12 @@ class ProseMirrorEngine {
 	 * doc.replace(). Preserves undo history (one step), marks, and cursor.
 	 */
 	applyExternalText(text) {
-		if(!this.view) return;
-		try {
-			const reparsedWikiAst = this.wiki.parseText(this.type, text, {
-				defaultType: "text/vnd.tiddlywiki",
-				preserveBlankLines: true
-			}).tree;
-			const reparsedDoc = wikiAstToProseMirrorAst(reparsedWikiAst, { sourceText: text });
-
-			// Skip if reparsed text matches what we last saved (roundtrip echo)
-			if(this.lastSavedDocJSON && JSON.stringify(reparsedDoc) === JSON.stringify(this.lastSavedDocJSON)) {
-				return;
+		var self = this;
+		applySharedExternalText(this, text, {
+			onError: function() {
+				self.updateDomNodeText(text);
 			}
-
-			const newDoc = this.schema.nodeFromJSON(reparsedDoc);
-			const oldDoc = this.view.state.doc;
-
-			let tr = this.view.state.tr;
-			const diff = replaceChangedContent(tr, oldDoc, newDoc);
-			if(!diff.changed) {
-				this.lastSavedDocJSON = newDoc.toJSON();
-				return;
-			}
-			tr = diff.transaction;
-
-			// Map cursor through the change
-			const oldSel = this.view.state.selection;
-			const newFrom = tr.mapping.map(oldSel.from);
-			const newTo = tr.mapping.map(oldSel.to);
-			try {
-				tr = tr.setSelection(TextSelection.create(tr.doc, newFrom, newTo));
-			} catch(e) { /* leave default selection */ }
-
-			tr = tr.setMeta("addToHistory", false);
-
-			this.lastSavedDocJSON = newDoc.toJSON();
-			this.applyingExternalText = true;
-			try {
-				this.view.dispatch(tr);
-			} finally{
-				this.applyingExternalText = false;
-			}
-		} catch(e) {
-			console.error("[ProseMirror] Error applying external text:", e);
-			// Fallback: full rebuild
-			this.updateDomNodeText(text);
-		}
+		});
 	}
 
 	/**
@@ -279,29 +239,13 @@ class ProseMirrorEngine {
 	 * WARNING: Loses undo history and empty paragraphs.
 	 */
 	updateDomNodeText(text) {
-		if(!this.view) return;
-		try {
-			const wikiAst = this.wiki.parseText(this.type, text || "", {
-				defaultType: "text/vnd.tiddlywiki",
-				preserveBlankLines: true
-			}).tree;
-			const pmDoc = wikiAstToProseMirrorAst(wikiAst, { sourceText: text || "" });
-			const newDoc = this.schema.nodeFromJSON(pmDoc);
-			const plugins = buildPlugins(this.schema, this.widget.wiki, this, this.type);
-			const state = EditorState.create({ doc: newDoc, plugins: plugins });
-			this.view.updateState(state);
-			this.lastSavedDocJSON = newDoc.toJSON();
-		} catch(e) {
-			console.error("[ProseMirror] Error updating content:", e);
-		}
+		rebuildEditorState(this, text);
 	}
 
 	getText() {
 		if(!this.view) return "";
 		try {
-			const content = this.view.state.doc.toJSON();
-			const wikiAst = wikiAstFromProseMirrorAst(content);
-			return $tw.utils.serializeWikitextParseTree(wikiAst);
+			return serializeDocJSON(this.view.state.doc.toJSON());
 		} catch(e) {
 			console.error("[ProseMirror] Error serializing content:", e);
 			return this.value || "";
@@ -372,23 +316,14 @@ class ProseMirrorEngine {
 		try {
 			const fragment = slice.content;
 			const tempDoc = this.schema.nodes.doc.create(null, fragment);
-			const json = tempDoc.toJSON();
-			const wikiAst = wikiAstFromProseMirrorAst(json);
-			return $tw.utils.serializeWikitextParseTree(wikiAst);
+			return serializeDocJSON(tempDoc.toJSON());
 		} catch(e) {
 			return "";
 		}
 	}
 
 	getPragmaPreamble() {
-		if(!this.view || !this.view.state) return "";
-		const parts = [];
-		this.view.state.doc.forEach((node) => {
-			if(node.type.name === "pragma_block" && node.attrs.rawText) {
-				parts.push(node.attrs.rawText);
-			}
-		});
-		return parts.length > 0 ? parts.join("\n") + "\n" : "";
+		return getPragmaPreamble(this.view);
 	}
 
 	handleImagePickedNodeView(event) {

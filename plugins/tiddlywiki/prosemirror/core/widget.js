@@ -9,14 +9,18 @@ module-type: library
 
 const { widget: Widget } = require("$:/core/modules/widgets/widget.js");
 const { debounce } = require("$:/core/modules/utils/debounce.js");
-const { from: wikiAstFromProseMirrorAst } = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js");
-const { to: wikiAstToProseMirrorAst } = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js");
 const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/core/schema.js");
 const { buildPlugins, SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
 const { computeImageSrc } = require("$:/plugins/tiddlywiki/prosemirror/blocks/image/utils.js");
-const { replaceChangedContent } = require("$:/plugins/tiddlywiki/prosemirror/core/incremental-sync.js");
+const {
+	parseWikiTextToDoc,
+	serializeDocJSON,
+	getPragmaPreamble,
+	applyExternalText: applySharedExternalText,
+	rebuildEditorState
+} = require("$:/plugins/tiddlywiki/prosemirror/core/editor-shared.js");
 
-const { EditorState, NodeSelection, TextSelection } = require("prosemirror-state");
+const { EditorState, NodeSelection } = require("prosemirror-state");
 const { EditorView } = require("prosemirror-view");
 
 class ProsemirrorWidget extends Widget {
@@ -49,11 +53,7 @@ class ProsemirrorWidget extends Widget {
 
 		let doc;
 		try {
-			const initialWikiAst = this.wiki.parseText(this.editType, initialText, {
-				defaultType: "text/vnd.tiddlywiki",
-				preserveBlankLines: true
-			}).tree;
-			doc = wikiAstToProseMirrorAst(initialWikiAst, { sourceText: initialText });
+			doc = parseWikiTextToDoc(this.wiki, this.editType, initialText);
 		} catch(e) {
 			console.error("[ProseMirror] Error parsing initial content:", e);
 			doc = { type: "doc", content: [{ type: "paragraph" }] };
@@ -314,8 +314,7 @@ class ProsemirrorWidget extends Widget {
 	saveEditorContent() {
 		try {
 			const content = this.view.state.doc.toJSON();
-			const wikiast = wikiAstFromProseMirrorAst(content);
-			const wikiText = $tw.utils.serializeWikitextParseTree(wikiast);
+			const wikiText = serializeDocJSON(content);
 			const tiddler = this.getAttribute("tiddler");
 			const currentText = this.wiki.getTiddlerText(tiddler, "");
 			this.lastSavedDocJSON = content;
@@ -359,14 +358,7 @@ class ProsemirrorWidget extends Widget {
 	}
 
 	getPragmaPreamble() {
-		if(!this.view || !this.view.state) return "";
-		const parts = [];
-		this.view.state.doc.forEach((node) => {
-			if(node.type.name === "pragma_block" && node.attrs.rawText) {
-				parts.push(node.attrs.rawText);
-			}
-		});
-		return parts.length > 0 ? parts.join("\n") + "\n" : "";
+		return getPragmaPreamble(this.view);
 	}
 
 	onDestroy() {
@@ -424,60 +416,22 @@ class ProsemirrorWidget extends Widget {
 	 * doc.replace(). Preserves undo history, marks, and cursor.
 	 */
 	applyExternalText(text) {
-		if(!this.view) return;
-		try {
-			const nextText = text !== undefined ? text : this.wiki.getTiddlerText(this.getAttribute("tiddler"), "") || "";
-
-			const reparsedWikiAst = this.wiki.parseText(this.editType, nextText, {
-				defaultType: "text/vnd.tiddlywiki",
-				preserveBlankLines: true
-			}).tree;
-			const reparsedDoc = wikiAstToProseMirrorAst(reparsedWikiAst, { sourceText: nextText });
-
-			// Skip if reparsed text matches what we last saved
-			if(this.lastSavedDocJSON && JSON.stringify(reparsedDoc) === JSON.stringify(this.lastSavedDocJSON)) {
-				this.lastKnownText = nextText;
-				this.lastKnownType = this.editType;
-				return;
+		var self = this;
+		applySharedExternalText(this, text, {
+			resolveText: function(owner, incomingText) {
+				return incomingText !== undefined ? incomingText : owner.wiki.getTiddlerText(owner.getAttribute("tiddler"), "") || "";
+			},
+			getType: function(owner) {
+				return owner.editType;
+			},
+			afterApply: function(owner, nextText) {
+				owner.lastKnownText = nextText;
+				owner.lastKnownType = owner.editType;
+			},
+			onError: function() {
+				self._fullRebuildFromTiddler();
 			}
-
-			const newDoc = this.view.state.schema.nodeFromJSON(reparsedDoc);
-			const oldDoc = this.view.state.doc;
-
-			let tr = this.view.state.tr;
-			const diff = replaceChangedContent(tr, oldDoc, newDoc);
-			if(!diff.changed) {
-				this.lastSavedDocJSON = newDoc.toJSON();
-				this.lastKnownText = nextText;
-				this.lastKnownType = this.editType;
-				return;
-			}
-			tr = diff.transaction;
-
-			// Map cursor through the change
-			const oldSel = this.view.state.selection;
-			const newFrom = tr.mapping.map(oldSel.from);
-			const newTo = tr.mapping.map(oldSel.to);
-			try {
-				tr = tr.setSelection(TextSelection.create(tr.doc, newFrom, newTo));
-			} catch(e) { /* leave default */ }
-
-			tr = tr.setMeta("addToHistory", false);
-
-			this.lastSavedDocJSON = newDoc.toJSON();
-			this.lastKnownText = nextText;
-			this.lastKnownType = this.editType;
-			this.applyingExternalText = true;
-			try {
-				this.view.dispatch(tr);
-			} finally{
-				this.applyingExternalText = false;
-			}
-		} catch(e) {
-			console.error("[ProseMirror] Error applying external text:", e);
-			// Fallback: full rebuild
-			this._fullRebuildFromTiddler();
-		}
+		});
 	}
 
 	/**
@@ -490,18 +444,15 @@ class ProsemirrorWidget extends Widget {
 			const nextText = this.wiki.getTiddlerText(tiddler, "");
 			const tiddlerRecord = tiddler ? this.wiki.getTiddler(tiddler) : null;
 			this.editType = (tiddlerRecord && tiddlerRecord.fields && tiddlerRecord.fields.type) || "text/vnd.tiddlywiki";
-			const wikiAst = this.wiki.parseText(this.editType, nextText, {
-				defaultType: "text/vnd.tiddlywiki",
-				preserveBlankLines: true
-			}).tree;
-			const pmDoc = wikiAstToProseMirrorAst(wikiAst, { sourceText: nextText });
-			const newDoc = this.view.state.schema.nodeFromJSON(pmDoc);
-			const plugins = buildPlugins(this.view.state.schema, this.wiki, this, this.editType);
-			const state = EditorState.create({ doc: newDoc, plugins: plugins });
-			this.view.updateState(state);
-			this.lastSavedDocJSON = newDoc.toJSON();
-			this.lastKnownText = nextText || "";
-			this.lastKnownType = this.editType;
+			rebuildEditorState(this, nextText, {
+				getType: function(owner) {
+					return owner.editType;
+				},
+				afterApply: function(owner) {
+					owner.lastKnownText = nextText || "";
+					owner.lastKnownType = owner.editType;
+				}
+			});
 		} catch(e) {
 			console.error("[ProseMirror] Error rebuilding content:", e);
 		}
