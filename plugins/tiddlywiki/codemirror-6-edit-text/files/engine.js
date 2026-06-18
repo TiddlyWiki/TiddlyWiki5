@@ -417,6 +417,28 @@ class CodeMirrorSimpleEngine {
 			extensions.push(dropCursor());
 		}
 
+		// Keep drag events from bubbling to TiddlyWiki's page drop-zone. The
+		// drop-zone steps aside for <textarea>/<input> but not for CodeMirror's
+		// contenteditable, so without this it claims the drag as a page import.
+		// Stopping propagation lets CodeMirror handle the text drop natively and
+		// show the drop cursor. File-drop handling (below) still runs.
+		extensions.push(
+			EditorView.domEventHandlers({
+				dragenter: function(event) {
+					event.stopPropagation();
+					return false;
+				},
+				dragover: function(event) {
+					event.stopPropagation();
+					return false;
+				},
+				dragleave: function(event) {
+					event.stopPropagation();
+					return false;
+				}
+			})
+		);
+
 		// Tooltips configuration - append to document.body to prevent clipping
 		var tooltips = (core.view || {}).tooltips;
 		if(tooltips) {
