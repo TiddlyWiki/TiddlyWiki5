@@ -1136,6 +1136,13 @@ class CodeMirrorEngine {
 			extensions.push(lineWrapping);
 		}
 
+		// Core: Drop cursor - shows an insertion cursor at the drop position while
+		// dragging text/content into the editor.
+		var dropCursor = core.view.dropCursor;
+		if(dropCursor) {
+			extensions.push(dropCursor());
+		}
+
 		// Core: Tooltips configuration - append to document.body to prevent clipping
 		// This affects autocomplete popups, hover tooltips, lint markers, etc.
 		var tooltips = (core.view || {}).tooltips;

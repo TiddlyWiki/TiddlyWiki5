@@ -410,6 +410,13 @@ class CodeMirrorSimpleEngine {
 			extensions.push(EditorView.lineWrapping);
 		}
 
+		// Drop cursor - shows an insertion cursor at the drop position while
+		// dragging text/content into the editor.
+		var dropCursor = (core.view || {}).dropCursor;
+		if(dropCursor) {
+			extensions.push(dropCursor());
+		}
+
 		// Tooltips configuration - append to document.body to prevent clipping
 		var tooltips = (core.view || {}).tooltips;
 		if(tooltips) {
