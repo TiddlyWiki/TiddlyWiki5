@@ -29,7 +29,10 @@ class DragHandleController {
 		this.destroyed = false;
 		this.pendingTimers = [];
 		this.dragWrapper = null;
+		this.draggingBlock = null;
+		this.isDraggingFromHandle = false;
 		this.removeDocumentMousemove = null;
+		this.removeDocumentDragEvents = null;
 
 		this._suppressNextClick = false;
 		this._touchStartX = 0;
@@ -38,6 +41,8 @@ class DragHandleController {
 		this._longPressTimer = null;
 
 		this.onDocumentMouseMove = this.onDocumentMouseMove.bind(this);
+		this.onDocumentDragOver = this.onDocumentDragOver.bind(this);
+		this.onDocumentDrop = this.onDocumentDrop.bind(this);
 		this.closeOnOutsideClick = this.closeOnOutsideClick.bind(this);
 	}
 
@@ -67,6 +72,8 @@ class DragHandleController {
 			this.showHandle(this.currentView, info);
 			return;
 		}
+		// The handle itself or the pointer-bridge around it keeps the handle
+		// visible while the user moves from a block to the handle.
 		if(this.isPointerNearHandle(event)) return;
 		if(this.handle && this.handle.matches(":hover")) return;
 		if(this.menuEl && this.menuEl.matches(":hover")) return;
@@ -77,6 +84,46 @@ class DragHandleController {
 		if(!this.removeDocumentMousemove) {
 			document.addEventListener("mousemove", this.onDocumentMouseMove, true);
 			this.removeDocumentMousemove = () => document.removeEventListener("mousemove", this.onDocumentMouseMove, true);
+		}
+		if(!this.removeDocumentDragEvents) {
+			document.addEventListener("dragover", this.onDocumentDragOver, true);
+			document.addEventListener("drop", this.onDocumentDrop, true);
+			this.removeDocumentDragEvents = () => {
+				document.removeEventListener("dragover", this.onDocumentDragOver, true);
+				document.removeEventListener("drop", this.onDocumentDrop, true);
+			};
+		}
+	}
+
+	clearDragState() {
+		if(this.dragWrapper && this.dragWrapper.parentNode) {
+			this.dragWrapper.parentNode.removeChild(this.dragWrapper);
+		}
+		this.dragWrapper = null;
+		this.draggingBlock = null;
+		this.isDraggingFromHandle = false;
+		if($tw.dragInProgress === this.handle) {
+			$tw.dragInProgress = null;
+		}
+		if(this.currentView) {
+			this.currentView.dragging = null;
+		}
+	}
+
+	onDocumentDragOver(event) {
+		if(!this.isDraggingFromHandle || !this.currentView) return;
+		if(!helpers.isCoordsInEditorHandleZone(this.currentView, { left: event.clientX, top: event.clientY })) return;
+		event.preventDefault();
+		if(event.dataTransfer) {
+			event.dataTransfer.dropEffect = "move";
+		}
+	}
+
+	onDocumentDrop(event) {
+		if(!this.isDraggingFromHandle || !this.currentView) return;
+		if(this.performDrop(this.currentView, event)) {
+			event.preventDefault();
+			event.stopPropagation();
 		}
 	}
 
@@ -184,7 +231,9 @@ class DragHandleController {
 			}
 			this.hideMenu();
 			try {
-				const slice = this.currentView.state.selection.content();
+				const sel = NodeSelection.create(this.currentView.state.doc, this.currentBlockPos);
+				this.currentView.dispatch(this.currentView.state.tr.setSelection(sel));
+				const slice = sel.content();
 				const serializer = DOMSerializer.fromSchema(this.currentView.state.schema);
 				const dragDom = serializer.serializeFragment(slice.content);
 				this.dragWrapper = document.createElement("div");
@@ -192,9 +241,15 @@ class DragHandleController {
 				this.dragWrapper.style.position = "absolute";
 				this.dragWrapper.style.left = "-9999px";
 				document.body.appendChild(this.dragWrapper);
+				if(e.dataTransfer) {
+					e.dataTransfer.setData("text/html", this.dragWrapper.innerHTML);
+					e.dataTransfer.setData("text/plain", this.currentBlockNode ? this.currentBlockNode.textContent : "");
+				}
 				e.dataTransfer.setDragImage(this.dragWrapper, 0, 0);
 				e.dataTransfer.effectAllowed = "move";
 				this.currentView.dragging = { slice: slice, move: true };
+				this.draggingBlock = { pos: this.currentBlockPos, node: this.currentBlockNode };
+				this.isDraggingFromHandle = true;
 				$tw.dragInProgress = el;
 			} catch(ex) {
 				// fallback: let PM handle naturally
@@ -202,19 +257,12 @@ class DragHandleController {
 		});
 
 		el.addEventListener("dragend", () => {
-			if(this.dragWrapper && this.dragWrapper.parentNode) {
-				this.dragWrapper.parentNode.removeChild(this.dragWrapper);
-			}
-			this.dragWrapper = null;
-			if($tw.dragInProgress === el) {
-				$tw.dragInProgress = null;
-			}
 			// Clear ProseMirror's dragging state — the view.dragging flag causes the
 			// editor to apply ProseMirror-hideselection (transparent text selection).
 			// Because our handle lives outside the editor DOM, PM's own dragend
 			// listener never fires, so we must reset it manually.
+			this.clearDragState();
 			if(this.currentView) {
-				this.currentView.dragging = null;
 				// Dispatch a no-op transaction so PM re-renders and removes the
 				// ProseMirror-hideselection class.
 				try {
@@ -256,12 +304,19 @@ class DragHandleController {
 
 		const editorBox = view.dom.getBoundingClientRect();
 		const rtl = helpers.isRTL();
+		const handleWidth = this.handle.offsetWidth || 20;
+		const handleGap = 6;
+		const editorGutter = 8;
 		if(rtl) {
-			const handleRight = Math.max(editorBox.right - 18, box.right + 18) + window.scrollX;
+			const desiredRight = box.right + handleGap + handleWidth;
+			const maxRight = editorBox.right + handleWidth + editorGutter;
+			const handleRight = Math.min(maxRight, desiredRight) + window.scrollX;
 			this.handle.style.left = "";
 			this.handle.style.right = (window.innerWidth - handleRight) + "px";
 		} else {
-			const handleLeft = Math.max(editorBox.left - 10, box.left - 18) + window.scrollX;
+			const desiredLeft = box.left - handleWidth - handleGap;
+			const minLeft = editorBox.left - handleWidth - editorGutter;
+			const handleLeft = Math.max(minLeft, desiredLeft) + window.scrollX;
 			this.handle.style.right = "";
 			this.handle.style.left = handleLeft + "px";
 		}
@@ -435,6 +490,35 @@ class DragHandleController {
 		return false;
 	}
 
+	performDrop(view, event) {
+		if(!this.isDraggingFromHandle || !this.draggingBlock) return false;
+		const source = helpers.resolveCurrentBlock(view, this.draggingBlock.pos, this.draggingBlock.node);
+		if(!source) return false;
+		const dropLogic = require("$:/plugins/tiddlywiki/prosemirror/features/drag-handle/drop-logic.js");
+		const target = dropLogic.computeDropTarget(view, { left: event.clientX, top: event.clientY }, source.node);
+		if(!target) return false;
+
+		const tr = dropLogic.buildMoveTransaction(view, source, target);
+		if(tr === null) {
+			this.clearDragState();
+			return true;
+		}
+		try {
+			view.focus();
+			view.dispatch(tr.setMeta("uiEvent", "drop").scrollIntoView());
+			this.clearDragState();
+			this.hideHandle();
+			return true;
+		} catch(ex) {
+			return false;
+		}
+	}
+
+	handleDrop(view, event, slice, move) {
+		if(!move || !this.isDraggingFromHandle) return false;
+		return this.performDrop(view, event, slice);
+	}
+
 	update(view) {
 		this.currentView = view;
 		if(this.menuVisible && this.currentBlockPos !== null && this.currentBlockNode !== null) {
@@ -466,6 +550,11 @@ class DragHandleController {
 			this.removeDocumentMousemove();
 			this.removeDocumentMousemove = null;
 		}
+		if(this.removeDocumentDragEvents) {
+			this.removeDocumentDragEvents();
+			this.removeDocumentDragEvents = null;
+		}
+		this.clearDragState();
 		this.handle = null;
 		this.menuEl = null;
 		this.currentBlockPos = null;
@@ -476,15 +565,17 @@ class DragHandleController {
 
 function createDragHandlePlugin() {
 	const controller = new DragHandleController();
-	return new Plugin({
+	const plugin = new Plugin({
 		props: {
 			handleDOMEvents: {
 				mousemove: (view, event) => controller.handleMouseMove(view, event),
 				mouseleave: (view, event) => controller.handleMouseLeave(view, event),
 				scroll: () => controller.handleScroll()
-			}
+			},
+			handleDrop: (view, event, slice, move) => controller.handleDrop(view, event, slice, move)
 		},
-		view: function() {
+		view: function(view) {
+			controller.currentView = view;
 			controller.attachDocumentMousemove();
 			return {
 				update: (view) => controller.update(view),
@@ -492,6 +583,7 @@ function createDragHandlePlugin() {
 			};
 		}
 	});
+	return plugin;
 }
 
 exports.createDragHandlePlugin = createDragHandlePlugin;
