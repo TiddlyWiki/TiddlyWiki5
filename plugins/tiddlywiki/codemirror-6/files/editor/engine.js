@@ -1143,25 +1143,26 @@ class CodeMirrorEngine {
 			extensions.push(dropCursor());
 		}
 
-		// Core: Keep drag events from bubbling to TiddlyWiki's page drop-zone.
+		// Core: Keep *text* drags from bubbling to TiddlyWiki's page drop-zone.
 		// The drop-zone steps aside for <textarea>/<input> but not for
-		// CodeMirror's contenteditable, so without this it claims the drag as a
-		// page import. Stopping propagation lets CodeMirror handle the text drop
-		// natively and show the drop cursor. The drop is still handled below.
+		// CodeMirror's contenteditable, so without this it claims a text drag as
+		// a page import. Stopping propagation for non-file drags lets CodeMirror
+		// handle the text drop natively and show the drop cursor. File drags are
+		// left to bubble so the drop-zone keeps making the editor a valid file
+		// drop target (it preventDefaults dragover) and imports the files.
+		var stopTextDragFromBubbling = function(event) {
+			var hasFiles = $tw.utils && $tw.utils.dragEventContainsFiles && $tw.utils.dragEventContainsFiles(event);
+			if(!hasFiles) {
+				event.stopPropagation();
+			}
+			return false;
+		};
 		extensions.push(
 			EditorView.domEventHandlers({
-				dragenter: function(event) {
-					event.stopPropagation();
-					return false;
-				},
-				dragover: function(event) {
-					event.stopPropagation();
-					return false;
-				},
-				dragleave: function(event) {
-					event.stopPropagation();
-					return false;
-				}
+				dragenter: stopTextDragFromBubbling,
+				dragover: stopTextDragFromBubbling,
+				dragleave: stopTextDragFromBubbling,
+				drop: stopTextDragFromBubbling
 			})
 		);
 
