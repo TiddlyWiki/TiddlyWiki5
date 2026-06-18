@@ -483,18 +483,14 @@ html body .tc-control-panel .tc-editor-codemirror6-input .cm-editor {
 	width: 100%;
 }
 
-/* Inputs inside ControlPanel tables (e.g. Appearance > Theme Tweaks > Sizes)
-   keep their natural fixed width like native inputs instead of stretching to
-   fill the whole table cell. */
-/* Inputs in ControlPanel tables (e.g. Appearance > Theme Tweaks > Sizes) live in
-   table cells, not flex/grid, so they don't need - and are broken by - the
-   inline-size containment used elsewhere (it stops them sizing). Turning it off
-   lets the ControlPanel full-width rule above apply, so they fill the cell. */
+/* Inputs in ControlPanel tables (e.g. Appearance > Theme Tweaks > Sizes) fill
+   their table cell but keep a sensible minimum so they stay usable in narrow
+   cells. */
 html body .tc-control-panel td .tc-editor-codemirror6-input,
 html body .tc-control-panel td .tc-editor-codemirror6-input .cm-editor {
 	display: block;
 	width: 100%;
-	contain: none;
+	min-width: 20ch;
 }
 
 /* ============================================
