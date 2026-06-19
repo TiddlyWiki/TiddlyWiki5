@@ -30,6 +30,17 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget,
 	ElementWidget = require("$:/core/modules/widgets/element.js").element,
 	AhoCorasick = require("$:/core/modules/utils/aho-corasick.js").AhoCorasick;
 
+(function() {
+	var pluginInfo = $tw.wiki.getPluginInfo("$:/core");
+	var shadowSource = pluginInfo.tiddlers["$:/core/modules/widgets/text.js"].text;
+	var twRequire = function(title) {
+		return $tw.modules.titles[title] && $tw.modules.titles[title].exports;
+	};
+	var coreExports = {};
+	new Function("exports", "require", shadowSource)(coreExports, twRequire);
+	exports["plain-text"] = coreExports.text;
+})();
+
 var TextNodeWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
