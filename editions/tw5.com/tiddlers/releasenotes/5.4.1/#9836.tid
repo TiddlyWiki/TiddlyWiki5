@@ -1,5 +1,5 @@
 title: $:/changenotes/5.4.0/#9836
-description: Fix mid-text link cutoff and add configurable MaxLinks cap in Freelinks
+description: Fix mid-text link cutoff, fix disabling freelinks toggle blanks view, and add configurable MaxLinks cap
 tags: $:/tags/ChangeNote
 release: 5.4.0
 change-type: bugfix
@@ -7,15 +7,20 @@ change-category: plugin
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9836
 github-contributors: s793016
 
-Fixes links silently stopping mid-text in long tiddlers, and adds a
-configurable cap on rendered links per text node.
+Fixes correctness and reliability issues in the freelinks plugin.
 
 Fixes:
+* Disabling "Enable freelinking within tiddler view templates" in plugin
+  settings caused the entire tiddler view (including the Control Panel)
+  to blank out with no way to recover through the UI.
 * Mid-text link cutoff caused by `search()` truncating results before the
-  render stage; moved the cap to `$:/config/Freelinks/MaxLinks` (default 500)
-  so text beyond the limit is preserved as plain text rather than lost.
+  render stage; the cap is moved to `$:/config/Freelinks/MaxLinks`
+  (default 500) so text beyond the limit is preserved as plain text.
+* `$:/config/Freelinks/MaxLinks` render cap was applied before
+  longest-match deduplication, silently dropping valid matches within
+  the limit; cap now applied after the final non-overlapping set is resolved.
 * Incorrect failure links for long patterns caused by a hard depth limit in
-  `buildFailureLinks()`; removed as the chain depth is naturally bounded.
+  `buildFailureLinks()`; removed as chain depth is naturally bounded.
 * Unnecessary cache rebuilds triggered by draft edits and system tiddler
   changes such as tab clicks.
 
