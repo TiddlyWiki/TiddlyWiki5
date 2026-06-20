@@ -11,12 +11,13 @@ children can be freely added and removed — exactly how the story river behaves
 
 Additionally it takes a `target-selector` attribute: a CSS selector, resolved WITHIN this widget's
 DOM node, for the elements to keep stable (e.g. the tiddler frames). Whenever the container is
-RESIZED — hiding/showing the sidebar changes the story river's width AND height — the element at
-the top of the viewport is kept fixed: the target frame straddling the reference line is chosen,
-and within it the deepest descendant straddling that line (the actual block you are reading) is
-anchored, so a width-reflow above it cannot move that block. (When no frame contains the line, the
-nearest frame's nearest edge is pinned instead.) Adding/removing children (navigation) re-baselines
-instead of fighting it.
+RESIZED — hiding/showing the sidebar changes the story river's width AND height — the target nearest
+the TOP of the viewport is kept fixed: the first target still visible at/below the reference line is
+chosen (if several are visible, the one nearest the top viewport edge wins), and its top edge is
+held at the same viewport position. When that target's own top has scrolled off above the line (it
+fills the top of the viewport), the deepest descendant — and the exact text line — at the reference
+line is pinned instead, so the element's own width-reflow can't drift the part you are reading.
+Adding/removing children (navigation) re-baselines instead of fighting it.
 
 Attributes
   target-selector  selector (within this node) for the elements to keep stable,
@@ -100,7 +101,7 @@ ScrollStableWidget.prototype.setupStability = function() {
 	if(!win || !win.ResizeObserver || !win.MutationObserver || !this.targetSelector) { return; }
 	var self = this;
 	this.stableWin = win;
-	this.anchor = null;          // {el, edge:"top"|"bottom", pos} | {node, offset, pos} (text line)
+	this.anchor = null;          // {el, edge:"top", pos} | {node, offset, pos} (text line)
 	this.recordTimer = null;
 	this.lastChildMutation = 0;
 	this.lastW = undefined;
@@ -170,90 +171,111 @@ ScrollStableWidget.prototype.refLine = function(scroller) {
 	return scroller.isDoc ? 0 : scroller.el.getBoundingClientRect().top;
 };
 
-// Pick the target frame straddling the reference line, then anchor the deepest descendant
-// straddling that line (the element actually at the viewport top) and remember its RAW viewport
-// edge position — the value restoreAnchor holds fixed. Anchoring a descendant (not the whole
-// frame) keeps the gap between line and anchor ~0, so a width-reflow above it doesn't move what
-// you're reading. When no frame contains the line, fall back to the nearest frame's nearest edge.
+// Keep stable the TOP of the target nearest the top of the viewport.
+//
+// PREFERRED — pin a target's own top: the topmost target whose top edge is VISIBLE (at or below the
+// reference line, and above the viewport bottom). That is the tiddler the reader scrolled to; in
+// document order (= visual top→bottom) the first such target is the one nearest the top viewport
+// edge. Holding its top fixed means a width-reflow of everything above it (the whole story river
+// rewrapping) cannot move it — so a tiddler you scrolled into view stays put. This is preferred over
+// the text anchor below: when a frame boundary is on screen, the boundary is the thing to keep.
+//
+// FALLBACK — pin the text line: when NO target top is visible the reference line is INSIDE a target
+// whose top has scrolled off above the viewport (a tall tiddler filling the top). Descend to the
+// deepest node at the line and, when it is a text node, pin the exact CHARACTER on the wrapped line
+// straddling the line — a character keeps its identity through a reflow (a wrapped line is not an
+// element, but a character is), so the reading position itself stays put. (Falls back to the deepest
+// element's / the tiddler's own top for a non-text block.) The pinned value is a RAW viewport
+// position; restoreAnchor holds it fixed.
 ScrollStableWidget.prototype.recordAnchor = function() {
 	this.recordTimer = null;
 	var node = this.domNode;
 	if(!node || !node.isConnected || !this.targetSelector) { this.anchor = null; return; }
+	var win = this.stableWin, doc = this.document;
 	var scroller = this.getScroller(), line = this.refLine(scroller);
+	var vpBottom = line + (scroller.isDoc ? (doc.documentElement.clientHeight || win.innerHeight) : scroller.el.clientHeight);
 	var targets;
 	try { targets = node.querySelectorAll(this.targetSelector); } catch(e) { this.anchor = null; return; }
-	
-	// Frame selection. PREFER the frame that STRADDLES the reference line (top <= line <= bottom):
-	// frames are stacked and non-overlapping, so there is at most one, and it is the frame we can
-	// descend into for a deep anchor. Only if NO frame contains the line (it sits above the first
-	// frame, or in a gap between frames) do we fall back to the frame whose nearest EDGE is closest
-	// to the line. Picking by nearest-top-edge alone was wrong: reading low in a tall tiddler, the
-	// NEXT frame's top can be nearer the line than this frame's (off-screen) top, so the straddling
-	// frame lost — and with it the deep-descendant path it was the whole point of.
-	var straddling = null, nearest = null, minDistance = Infinity;
+
+	// Walk targets top→bottom. PREFER the first whose top edge is visible at/below the reference line
+	// (pin that top). While scanning past the targets above the line, remember the one that STRADDLES
+	// it (top above, box still spanning the line) for the fallback if no visible top turns up.
+	var straddling = null;
 	for(var i = 0; i < targets.length; i++) {
-		var rect = targets[i].getBoundingClientRect();
-		if(rect.height > 0 && rect.top <= line && rect.bottom >= line) { straddling = targets[i]; break; }
-		// Nearest by whichever EDGE is closer to the line (a frame fully below → its top; fully
-		// above → its bottom), so a frame just off either side of the line can win.
-		var distance = Math.min(Math.abs(rect.top - line), Math.abs(rect.bottom - line));
-		if(distance < minDistance) { minDistance = distance; nearest = targets[i]; }
+		var r = targets[i].getBoundingClientRect();
+		if(r.height <= 0) { continue; }
+		if(r.top >= line - 0.5) {                  // top is at/below the reference line
+			if(r.top < vpBottom) {                 // …and within the viewport → pin this tiddler's top
+				this.anchor = {el: targets[i], edge: "top", pos: r.top};
+				return;
+			}
+			break;                                 // first top already below the viewport → none qualifies
+		}
+		if(r.bottom > line) { straddling = targets[i]; }   // top above the line but box still spans it
 	}
 
-	// PREFERRED: descend into the straddling frame and anchor the DEEPEST descendant whose box
-	// straddles the line — the actual block (paragraph/heading/list-item) you are reading. Its top
-	// sits at/just above the line, so the gap between line and anchored edge is ~0; a width-reflow
-	// of everything above it is therefore fully absorbed and drift → ~0. (A single FRAME edge can
-	// be up to half a frame from the line when you're mid-tiddler, leaving that distance × reflow
-	// as residual jump; a descendant cannot.)
-	if(straddling) {
-		var deep = this.deepestAtLine(straddling, line);
-		if(deep) {
-			// Innermost refinement: pin the exact TEXT line (a character offset) at the reference
-			// line. Wrapped text lines are not elements, so even the deepest element's top can be
-			// many lines above the line inside a monolithic paragraph — a Range at the character is
-			// not, so this stays pixel-stable through a reflow. Falls back to the element top when
-			// there is no text to anchor (empty/image block).
-			var ranchor = this.recordRangeAnchor(deep, line);
-			this.anchor = ranchor || {el: deep, edge: "top", pos: deep.getBoundingClientRect().top};
-			return;
+	// FALLBACK: the line is inside `straddling` (top scrolled off above). Pin the exact text character
+	// at the line; Node.TEXT_NODE === 3.
+	if(!straddling) { this.anchor = null; return; }
+	var deep = this.deepestAtLine(straddling, line);
+	if(deep && deep.nodeType === 3) {
+		var off = this.textOffsetAtLine(deep, line);
+		if(off !== null) {
+			var trect = this.rangeRectAt(deep, off);
+			if(trect) { this.anchor = {node: deep, offset: off, edge: "top", pos: trect.top}; return; }
 		}
+	} else if(deep) {
+		this.anchor = {el: deep, edge: "top", pos: deep.getBoundingClientRect().top};
+		return;
 	}
-	// FALLBACK: no frame contains the line. Pin the nearest frame's edge closest to the line —
-	// the smallest gap, hence the least drift. |top| > |bottom| means the top has scrolled
-	// off-screen and the bottom is the visible edge.
-	if(!nearest) { this.anchor = null; return; }
-	var crect = nearest.getBoundingClientRect();
-	var topRel = crect.top - line, bottomRel = crect.bottom - line;
-	if(Math.abs(topRel) > Math.abs(bottomRel)) {
-		this.anchor = {el: nearest, edge: "bottom", pos: crect.bottom};
-	} else {
-		this.anchor = {el: nearest, edge: "top", pos: crect.top};
-	}
+	this.anchor = {el: straddling, edge: "top", pos: straddling.getBoundingClientRect().top};
 };
 
-// Descend from `root` into the chain of descendants whose border box vertically contains the
-// reference line, returning the deepest one (the specific element rendered at the viewport top).
-// position:fixed/sticky elements are skipped — their position is decoupled from the reading flow,
-// so they are useless as a stable anchor (a sticky tiddler title stays put as you scroll). If no
-// child straddles the line (it lands in a margin/gap between blocks), the current element — whose
-// box does span the line — is returned. Iterative, so deep DOM trees can't blow the stack.
+// Descend from `root` through the chain of child NODES — elements AND text nodes — whose box
+// vertically contains the reference line, returning the deepest such node. The result is a TEXT
+// NODE whenever the line falls on rendered text (the strongest anchor: a character keeps its
+// identity through a width-reflow), otherwise the deepest element whose box spans the line (the
+// line landed in a gap/margin, or on an image/empty block). position:fixed/sticky elements are
+// skipped — their position is decoupled from the reading flow, so they're useless as an anchor (a
+// sticky tiddler title stays put as you scroll). Iterative, so deep DOM trees can't blow the stack.
 ScrollStableWidget.prototype.deepestAtLine = function(root, line) {
 	var win = this.stableWin, current = root, descended = true;
 	while(descended) {
 		descended = false;
-		var children = current.children;
-		for(var i = 0; i < children.length; i++) {
-			var child = children[i];
+		var kids = current.childNodes;
+		for(var i = 0; i < kids.length; i++) {
+			var child = kids[i];
+			if(child.nodeType === 3) {                       // text node — measure with a Range
+				if(this.textNodeSpansLine(child, line)) { return child; }
+				continue;
+			}
+			if(child.nodeType !== 1) { continue; }           // skip comments / processing nodes
 			var pos = win.getComputedStyle(child).position;
 			if(pos === "fixed" || pos === "sticky") { continue; }
 			var r = child.getBoundingClientRect();
 			if(r.height > 0 && r.top <= line && r.bottom >= line) {
-				current = child; descended = true; break;   // descend into the straddling child
+				current = child; descended = true; break;   // descend into the straddling element
 			}
 		}
 	}
 	return current;
+};
+
+// True when any wrapped line of the text node's rendered content vertically contains the reference
+// line. selectNodeContents + getClientRects yields one rect per line box, so an inline text node
+// that spans several lines is handled correctly.
+ScrollStableWidget.prototype.textNodeSpansLine = function(node, line) {
+	if(!node.length) { return false; }
+	try {
+		var range = this.document.createRange();
+		range.selectNodeContents(node);
+		var rects = range.getClientRects();
+		for(var i = 0; i < rects.length; i++) {
+			var r = rects[i];
+			if(r.height > 0 && r.top <= line && r.bottom >= line) { return true; }
+		}
+	} catch(e) {}
+	return false;
 };
 
 // Client rect of the character at (node, offset) — i.e. the top of the wrapped text line that
@@ -270,37 +292,30 @@ ScrollStableWidget.prototype.rangeRectAt = function(node, offset) {
 	} catch(e) { return null; }
 };
 
-// Refine an element anchor down to the exact TEXT position at the reference line: hit-test the line
-// at the element's left content edge to get the character offset there (caretRangeFromPoint, with
-// the standard caretPositionFromPoint as fallback), require that it lands on a text node INSIDE el,
-// and record {node, offset, pos = that line's top}. The character keeps its identity across a
-// width-reflow, so re-measuring it in restoreAnchor pins the line to the pixel. Returns null when
-// there is no text to anchor (empty/image block) — the caller then keeps the element anchor.
-ScrollStableWidget.prototype.recordRangeAnchor = function(el, line) {
-	var doc = this.document, win = this.stableWin, hit;
-	var r = el.getBoundingClientRect();
-	var x = Math.min(Math.max(r.left + 1, 0), win.innerWidth - 1);
-	var y = Math.min(Math.max(line, r.top), r.bottom - 1);
-	try {
-		if(doc.caretRangeFromPoint) {
-			var cr = doc.caretRangeFromPoint(x, y);
-			if(cr) { hit = {node: cr.startContainer, offset: cr.startOffset}; }
-		} else if(doc.caretPositionFromPoint) {
-			var cp = doc.caretPositionFromPoint(x, y);
-			if(cp) { hit = {node: cp.offsetNode, offset: cp.offset}; }
-		}
-	} catch(e) { return null; }
-	// Node.TEXT_NODE === 3. Require a text node actually inside el (the hit-test can land on an
-	// overlapping element from another stacking context).
-	if(!hit || !hit.node || hit.node.nodeType !== 3 || !el.contains(hit.node)) { return null; }
-	var rect = this.rangeRectAt(hit.node, hit.offset);
-	if(!rect) { return null; }
-	return {node: hit.node, offset: hit.offset, edge: "top", pos: rect.top};
+// The character offset in `node` whose wrapped line straddles the reference line: the smallest
+// offset whose character box BOTTOM is below the line (i.e. the first character on the line that
+// contains the line, or the first character below it when the line lands in a gap). Character boxes
+// advance monotonically DOWN the node, so a binary search over offsets is valid and O(log n) even
+// for a huge paragraph. This is a purely GEOMETRIC mapping — no hit-testing — so it resolves to the
+// same character every time and stays pixel-stable across a width-reflow. Returns null for an empty
+// node; clamps to the last character when the line is below all of the node's text.
+ScrollStableWidget.prototype.textOffsetAtLine = function(node, line) {
+	var len = node.length || 0;
+	if(len === 0) { return null; }
+	var lo = 0, hi = len - 1, ans = -1;
+	while(lo <= hi) {
+		var mid = (lo + hi) >> 1;
+		var rect = this.rangeRectAt(node, mid);
+		if(!rect) { lo = mid + 1; continue; }              // unmeasurable (collapsed whitespace) → skip
+		if(rect.bottom > line + 0.5) { ans = mid; hi = mid - 1; }   // at/below the straddling line
+		else { lo = mid + 1; }                                       // still above the line
+	}
+	return (ans >= 0) ? ans : (len - 1);
 };
 
-// Scroll so the anchor target's pinned edge (top or bottom, whichever recordAnchor chose) is
-// at exactly the raw viewport position it had. scrollTop arithmetic (not scrollBy) keeps the
-// fractional offset; a second pass absorbs any rounding.
+// Scroll so the anchor target's pinned TOP (or the pinned text line) is at exactly the raw viewport
+// position it had. scrollTop arithmetic (not scrollBy) keeps the fractional offset; a second pass
+// absorbs any rounding.
 ScrollStableWidget.prototype.restoreAnchor = function() {
 	var a = this.anchor;
 	if(!a) { return; }
