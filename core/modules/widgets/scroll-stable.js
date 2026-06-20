@@ -100,7 +100,7 @@ ScrollStableWidget.prototype.setupStability = function() {
 	if(!win || !win.ResizeObserver || !win.MutationObserver || !this.targetSelector) { return; }
 	var self = this;
 	this.stableWin = win;
-	this.anchor = null;          // {el, edge: "top"|"bottom", pos}
+	this.anchor = null;          // {el, edge:"top"|"bottom", pos} | {node, offset, pos} (text line)
 	this.recordTimer = null;
 	this.lastChildMutation = 0;
 	this.lastW = undefined;
@@ -209,7 +209,13 @@ ScrollStableWidget.prototype.recordAnchor = function() {
 	if(straddling) {
 		var deep = this.deepestAtLine(straddling, line);
 		if(deep) {
-			this.anchor = {el: deep, edge: "top", pos: deep.getBoundingClientRect().top};
+			// Innermost refinement: pin the exact TEXT line (a character offset) at the reference
+			// line. Wrapped text lines are not elements, so even the deepest element's top can be
+			// many lines above the line inside a monolithic paragraph — a Range at the character is
+			// not, so this stays pixel-stable through a reflow. Falls back to the element top when
+			// there is no text to anchor (empty/image block).
+			var ranchor = this.recordRangeAnchor(deep, line);
+			this.anchor = ranchor || {el: deep, edge: "top", pos: deep.getBoundingClientRect().top};
 			return;
 		}
 	}
@@ -250,13 +256,69 @@ ScrollStableWidget.prototype.deepestAtLine = function(root, line) {
 	return current;
 };
 
+// Client rect of the character at (node, offset) — i.e. the top of the wrapped text line that
+// character sits on. A ONE-character range is measured because a collapsed range often reports no
+// client rects; the end of the node is clamped to its last character. Returns null on any failure.
+ScrollStableWidget.prototype.rangeRectAt = function(node, offset) {
+	try {
+		var range = this.document.createRange(), len = node.length || 0;
+		if(len === 0) { range.selectNode(node); }
+		else if(offset < len) { range.setStart(node, offset); range.setEnd(node, offset + 1); }
+		else { range.setStart(node, len - 1); range.setEnd(node, len); }
+		var rects = range.getClientRects();
+		return (rects && rects.length) ? rects[0] : null;
+	} catch(e) { return null; }
+};
+
+// Refine an element anchor down to the exact TEXT position at the reference line: hit-test the line
+// at the element's left content edge to get the character offset there (caretRangeFromPoint, with
+// the standard caretPositionFromPoint as fallback), require that it lands on a text node INSIDE el,
+// and record {node, offset, pos = that line's top}. The character keeps its identity across a
+// width-reflow, so re-measuring it in restoreAnchor pins the line to the pixel. Returns null when
+// there is no text to anchor (empty/image block) — the caller then keeps the element anchor.
+ScrollStableWidget.prototype.recordRangeAnchor = function(el, line) {
+	var doc = this.document, win = this.stableWin, hit;
+	var r = el.getBoundingClientRect();
+	var x = Math.min(Math.max(r.left + 1, 0), win.innerWidth - 1);
+	var y = Math.min(Math.max(line, r.top), r.bottom - 1);
+	try {
+		if(doc.caretRangeFromPoint) {
+			var cr = doc.caretRangeFromPoint(x, y);
+			if(cr) { hit = {node: cr.startContainer, offset: cr.startOffset}; }
+		} else if(doc.caretPositionFromPoint) {
+			var cp = doc.caretPositionFromPoint(x, y);
+			if(cp) { hit = {node: cp.offsetNode, offset: cp.offset}; }
+		}
+	} catch(e) { return null; }
+	// Node.TEXT_NODE === 3. Require a text node actually inside el (the hit-test can land on an
+	// overlapping element from another stacking context).
+	if(!hit || !hit.node || hit.node.nodeType !== 3 || !el.contains(hit.node)) { return null; }
+	var rect = this.rangeRectAt(hit.node, hit.offset);
+	if(!rect) { return null; }
+	return {node: hit.node, offset: hit.offset, edge: "top", pos: rect.top};
+};
+
 // Scroll so the anchor target's pinned edge (top or bottom, whichever recordAnchor chose) is
 // at exactly the raw viewport position it had. scrollTop arithmetic (not scrollBy) keeps the
 // fractional offset; a second pass absorbs any rounding.
 ScrollStableWidget.prototype.restoreAnchor = function() {
 	var a = this.anchor;
-	if(!a || !a.el || !a.el.isConnected) { this.recordAnchor(); return; }
+	if(!a) { return; }
 	var scroller = this.getScroller();
+	// Range anchor (a text offset): re-measure the SAME character's line top and hold it fixed.
+	if(a.node) {
+		if(!a.node.isConnected) { this.recordAnchor(); return; }
+		for(var p = 0; p < 2; p++) {
+			var rrect = this.rangeRectAt(a.node, a.offset);
+			if(!rrect) { this.recordAnchor(); return; }   // text gone/replaced → re-baseline
+			var rdy = rrect.top - a.pos;
+			if(Math.abs(rdy) <= 0.01) { break; }
+			scroller.el.scrollTop = scroller.el.scrollTop + rdy;
+		}
+		return;
+	}
+	// Element anchor: hold the pinned edge (top|bottom).
+	if(!a.el || !a.el.isConnected) { this.recordAnchor(); return; }
 	for(var pass = 0; pass < 2; pass++) {
 		var rect = a.el.getBoundingClientRect();
 		var cur = (a.edge === "bottom") ? rect.bottom : rect.top;
