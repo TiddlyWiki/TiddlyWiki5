@@ -12,10 +12,11 @@ children can be freely added and removed — exactly how the story river behaves
 Additionally it takes a `target-selector` attribute: a CSS selector, resolved WITHIN this widget's
 DOM node, for the elements to keep stable (e.g. the tiddler frames). Whenever the container is
 RESIZED — hiding/showing the sidebar changes the story river's width AND height — the element at
-the top of the viewport is kept fixed: of the targets, the one nearest the top is chosen, and
-within it the deepest descendant straddling the reference line (the actual block you are reading)
-is anchored, so a width-reflow above it cannot move that block. Adding/removing children
-(navigation) re-baselines instead of fighting it.
+the top of the viewport is kept fixed: the target frame straddling the reference line is chosen,
+and within it the deepest descendant straddling that line (the actual block you are reading) is
+anchored, so a width-reflow above it cannot move that block. (When no frame contains the line, the
+nearest frame's nearest edge is pinned instead.) Adding/removing children (navigation) re-baselines
+instead of fighting it.
 
 Attributes
   target-selector  selector (within this node) for the elements to keep stable,
@@ -169,10 +170,11 @@ ScrollStableWidget.prototype.refLine = function(scroller) {
 	return scroller.isDoc ? 0 : scroller.el.getBoundingClientRect().top;
 };
 
-// Pick the target nearest the reference line, then anchor the deepest descendant straddling that
-// line (the element actually at the viewport top) and remember its RAW viewport edge position —
-// the value restoreAnchor holds fixed. Anchoring a descendant (not the whole frame) keeps the gap
-// between line and anchor ~0, so a width-reflow above it doesn't move what you're reading.
+// Pick the target frame straddling the reference line, then anchor the deepest descendant
+// straddling that line (the element actually at the viewport top) and remember its RAW viewport
+// edge position — the value restoreAnchor holds fixed. Anchoring a descendant (not the whole
+// frame) keeps the gap between line and anchor ~0, so a width-reflow above it doesn't move what
+// you're reading. When no frame contains the line, fall back to the nearest frame's nearest edge.
 ScrollStableWidget.prototype.recordAnchor = function() {
 	this.recordTimer = null;
 	var node = this.domNode;
@@ -181,53 +183,46 @@ ScrollStableWidget.prototype.recordAnchor = function() {
 	var targets;
 	try { targets = node.querySelectorAll(this.targetSelector); } catch(e) { this.anchor = null; return; }
 	
-	var chosen = null;
-	var minDistance = Infinity;
-
-	// Determine the height of the scroller for the bounding box test
-	var scrollerHeight = scroller.isDoc ? this.stableWin.innerHeight : scroller.el.getBoundingClientRect().height;
-
+	// Frame selection. PREFER the frame that STRADDLES the reference line (top <= line <= bottom):
+	// frames are stacked and non-overlapping, so there is at most one, and it is the frame we can
+	// descend into for a deep anchor. Only if NO frame contains the line (it sits above the first
+	// frame, or in a gap between frames) do we fall back to the frame whose nearest EDGE is closest
+	// to the line. Picking by nearest-top-edge alone was wrong: reading low in a tall tiddler, the
+	// NEXT frame's top can be nearer the line than this frame's (off-screen) top, so the straddling
+	// frame lost — and with it the deep-descendant path it was the whole point of.
+	var straddling = null, nearest = null, minDistance = Infinity;
 	for(var i = 0; i < targets.length; i++) {
 		var rect = targets[i].getBoundingClientRect();
-
-		// 1. PRIORITISATION: Does the element currently fill the viewport/scroller completely?
-		// The element starts above/on the reference line and ends below/on the visible end.
-		if(rect.top <= line && rect.bottom >= (line + scrollerHeight)) {
-			chosen = targets[i];
-			break; // Immediate termination, as this element dominates the viewport
-		}
-
-		// 2. FALLBACK: Calculate the absolute distance from the top edge to the reference line
-		var distance = Math.abs(rect.top - line);
-		if(distance < minDistance) {
-			minDistance = distance;
-			chosen = targets[i];
-		}
+		if(rect.height > 0 && rect.top <= line && rect.bottom >= line) { straddling = targets[i]; break; }
+		// Nearest by whichever EDGE is closer to the line (a frame fully below → its top; fully
+		// above → its bottom), so a frame just off either side of the line can win.
+		var distance = Math.min(Math.abs(rect.top - line), Math.abs(rect.bottom - line));
+		if(distance < minDistance) { minDistance = distance; nearest = targets[i]; }
 	}
 
-	if(!chosen) { this.anchor = null; return; }
-	var crect = chosen.getBoundingClientRect();
-	// When the reference line falls WITHIN the chosen frame, anchor the DEEPEST descendant whose
-	// box straddles the line — the actual block (paragraph/heading/list-item) you are reading.
-	// Its top sits at/just above the line, so the gap between line and anchored edge is ~0; a
-	// width-reflow of everything above it is therefore fully absorbed and drift → ~0. (A single
-	// FRAME edge can be up to half a frame from the line when you're mid-tiddler, leaving that
-	// distance × reflow as residual jump; a descendant cannot.)
-	if(crect.top <= line && crect.bottom >= line) {
-		var deep = this.deepestAtLine(chosen, line);
+	// PREFERRED: descend into the straddling frame and anchor the DEEPEST descendant whose box
+	// straddles the line — the actual block (paragraph/heading/list-item) you are reading. Its top
+	// sits at/just above the line, so the gap between line and anchored edge is ~0; a width-reflow
+	// of everything above it is therefore fully absorbed and drift → ~0. (A single FRAME edge can
+	// be up to half a frame from the line when you're mid-tiddler, leaving that distance × reflow
+	// as residual jump; a descendant cannot.)
+	if(straddling) {
+		var deep = this.deepestAtLine(straddling, line);
 		if(deep) {
 			this.anchor = {el: deep, edge: "top", pos: deep.getBoundingClientRect().top};
 			return;
 		}
 	}
-	// The line is outside the frame (it sits wholly above or below the viewport top): pin
-	// whichever frame edge is nearest the line — i.e. the smallest gap, hence the least drift.
-	// |top| > bottom means the top has scrolled off-screen and the bottom is the visible edge.
+	// FALLBACK: no frame contains the line. Pin the nearest frame's edge closest to the line —
+	// the smallest gap, hence the least drift. |top| > |bottom| means the top has scrolled
+	// off-screen and the bottom is the visible edge.
+	if(!nearest) { this.anchor = null; return; }
+	var crect = nearest.getBoundingClientRect();
 	var topRel = crect.top - line, bottomRel = crect.bottom - line;
-	if(Math.abs(topRel) > bottomRel) {
-		this.anchor = {el: chosen, edge: "bottom", pos: crect.bottom};
+	if(Math.abs(topRel) > Math.abs(bottomRel)) {
+		this.anchor = {el: nearest, edge: "bottom", pos: crect.bottom};
 	} else {
-		this.anchor = {el: chosen, edge: "top", pos: crect.top};
+		this.anchor = {el: nearest, edge: "top", pos: crect.top};
 	}
 };
 
