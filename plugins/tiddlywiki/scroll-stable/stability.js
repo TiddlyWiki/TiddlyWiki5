@@ -27,9 +27,6 @@ contract: refresh(changedTiddlers) and destroy().
 var CONFIG_TARGET_SELECTOR = "$:/config/plugins/tiddlywiki/scroll-stable/target-selector",
 	DEFAULT_TARGET_SELECTOR = ":scope > .tc-tiddler-frame";
 
-// Temporary: set false to silence the console diagnostics.
-var DEBUG = false;
-
 var ScrollStability = function(domNode,widget) {
 	this.domNode = domNode;
 	this.widget = widget;
@@ -71,6 +68,7 @@ ScrollStability.prototype.setupStability = function() {
 	this.anchor = null;          // {el, edge:"top"|"bottom", pos} | {node, offset, pos} (text line)
 	this.recordTimer = null;
 	this.suppressRecordUntil = 0;   // ignore scroll echoes from our own restore until this time
+	this.managedScroller = null;    // scroller whose overflow-anchor we have overridden
 	this.lastChildMutation = 0;
 	this.lastW = undefined;
 	this.lastH = undefined;
@@ -102,33 +100,15 @@ ScrollStability.prototype.now = function() {
 	return (win && win.performance && win.performance.now) ? win.performance.now() : Date.now();
 };
 
-// ── diagnostics ───────────────────────────────────────────────────────────────
-
-ScrollStability.prototype.dbg = function() {
-	if(!DEBUG) { return; }
-	var win = this.stableWin;
-	if(win && win.console) { win.console.log.apply(win.console,["[scroll-stable]"].concat([].slice.call(arguments))); }
-};
-
-ScrollStability.prototype.describeAnchor = function(a) {
-	if(!a) { return "null"; }
-	if(a.node) {
-		var data = a.node.data || "";
-		var snip = data.substr(Math.max(0,a.offset - 6),16).replace(/\s+/g,"·");
-		return "char@" + a.offset + " «" + snip + "» pos=" + Math.round(a.pos);
-	}
-	var el = a.el,
-		cls = (typeof el.className === "string" && el.className) ? "." + el.className.trim().replace(/\s+/g,".") : "",
-		extra = (a.edge === "frac") ? (" frac=" + Math.round(a.frac * 100) / 100) : "";
-	return a.edge + extra + " <" + el.nodeName.toLowerCase() + cls + "> pos=" + Math.round(a.pos);
-};
-
 ScrollStability.prototype.onResize = function() {
 	var node = this.domNode;
 	if(!node || !node.isConnected) { return; }
 	var rect = node.getBoundingClientRect(), w = rect.width, h = rect.height;
 	if(this.lastW === undefined) { this.lastW = w; this.lastH = h; return; }   // initial observation
 	var changed = Math.abs(w - this.lastW) > 0.01 || Math.abs(h - this.lastH) > 0.01;
+	// Only a WIDTH change reflows the river (the case we exist for). A height-only change (an image
+	// loading, fold/unfold, a transclusion growing) shifts content too, but the browser's own scroll
+	// anchoring handles those — reacting to every height change would mean fighting normal layout.
 	if(this.lastW === w) { return; }
 	this.lastW = w; this.lastH = h;
 	if(!changed) { return; }
@@ -152,6 +132,25 @@ ScrollStability.prototype.getScroller = function() {
 		el = el.parentElement;
 	}
 	return {el: se, isDoc: true};
+};
+
+// Take ownership of the scroller's scroll position by disabling the browser's native scroll anchoring
+// on it (overflow-anchor) — otherwise the browser may nudge scrollTop on its own when content above
+// reflows, fighting our corrections. Idempotent; if the resolved scroller ever changes, the previous
+// one is released first. The original inline value is remembered for teardown.
+ScrollStability.prototype.manageScroller = function(el) {
+	if(this.managedScroller === el) { return; }
+	this.releaseScroller();
+	this.managedScroller = el;
+	this.prevOverflowAnchor = el.style.overflowAnchor;
+	try { el.style.overflowAnchor = "none"; } catch(e) {}
+};
+
+ScrollStability.prototype.releaseScroller = function() {
+	var el = this.managedScroller;
+	if(el) { try { el.style.overflowAnchor = this.prevOverflowAnchor || ""; } catch(e) {} }
+	this.managedScroller = null;
+	this.prevOverflowAnchor = undefined;
 };
 
 // The reading edge — the viewport position used to PICK the anchor target. For the document this is
@@ -205,6 +204,7 @@ ScrollStability.prototype.recordAnchor = function() {
 	var node = this.domNode;
 	if(!node || !node.isConnected || !this.targetSelector) { this.anchor = null; return; }
 	var scroller = this.getScroller(), line = this.refLine(scroller), vpBottom = this.vpBottom(scroller);
+	this.manageScroller(scroller.el);
 	var targets;
 	try { targets = node.querySelectorAll(this.targetSelector); } catch(e) { this.anchor = null; return; }
 
@@ -226,16 +226,10 @@ ScrollStability.prototype.recordAnchor = function() {
 		}
 	}
 
-	var self = this;
-	function commit(tier,anchor) {
-		self.anchor = anchor;
-		self.dbg("record[" + tier + "]",self.describeAnchor(anchor),"line=" + Math.round(line),"vpBottom=" + Math.round(vpBottom));
-	}
-
 	// Tier 1 — BOUNDARY: a target top sits essentially at the line. Pin it; this outranks a sub-pixel
 	// straddle of the target above (the on-top-tiddler case).
 	if(firstVisibleTop && firstVisibleTop.pos <= line + EDGE) {
-		commit("1-boundary",{el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos});
+		this.anchor = {el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos};
 		return;
 	}
 
@@ -248,7 +242,7 @@ ScrollStability.prototype.recordAnchor = function() {
 	// or the point is over a non-text block (e.g. an image). (Node.TEXT_NODE === 3.)
 	if(straddling) {
 		var ca = this.readingCharAt(straddling, line);
-		if(ca) { commit("2-caret",ca); return; }
+		if(ca) { this.anchor = ca; return; }
 		var deep = this.deepestAtLine(straddling, line);
 		if(deep && deep.nodeType === 3) {
 			var off = this.textOffsetAtLine(deep, line);
@@ -256,7 +250,7 @@ ScrollStability.prototype.recordAnchor = function() {
 				var trect = this.rangeRectAt(deep, off);
 				// Accept only when the character's wrapped line really brackets the reading line.
 				if(trect && trect.top <= line + 2 && trect.bottom >= line - 2) {
-					commit("2-text",{node: deep, offset: off, edge: "top", pos: trect.top});
+					this.anchor = {node: deep, offset: off, edge: "top", pos: trect.top};
 					return;
 				}
 			}
@@ -270,23 +264,23 @@ ScrollStability.prototype.recordAnchor = function() {
 		var el = (deep && deep.nodeType === 1) ? deep : straddling,
 			er = el.getBoundingClientRect(),
 			frac = er.height > 0 ? Math.min(1,Math.max(0,(line - er.top) / er.height)) : 0;
-		commit("2-frac",{el: el, edge: "frac", frac: frac, pos: er.top + frac * er.height});
+		this.anchor = {el: el, edge: "frac", frac: frac, pos: er.top + frac * er.height};
 		return;
 	}
 
 	// Tier 3 — GAP: the nearest target top is below the line (line sits in a gap above it) → pin it.
 	if(firstVisibleTop) {
-		commit("3-gap",{el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos});
+		this.anchor = {el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos};
 		return;
 	}
 
 	// Tier 4 — LAST RESORT: scrolled past the end (line below the last target) → pin its bottom.
 	if(lastTarget && lastRect.bottom <= line + 0.5) {
-		commit("4-bottom",{el: lastTarget, edge: "bottom", pos: lastRect.bottom});
+		this.anchor = {el: lastTarget, edge: "bottom", pos: lastRect.bottom};
 		return;
 	}
 
-	commit("none",null);
+	this.anchor = null;
 };
 
 // The (textNode, offset) the browser would place a caret at for the viewport point (x, y), across the
@@ -429,38 +423,45 @@ ScrollStability.prototype.textOffsetAtLine = function(node, line) {
 ScrollStability.prototype.restoreAnchor = function() {
 	var a = this.anchor;
 	if(!a) { return; }
-	var scroller = this.getScroller();
+	var scroller = this.getScroller(), el = scroller.el;
 	// We are about to move scrollTop ourselves; mark a window in which the resulting scroll events must
 	// NOT be mistaken for the user scrolling (which would re-baseline and break a hide↔show round-trip).
 	// Repeated restores during an animated sidebar toggle keep pushing this forward, covering the whole
 	// transition plus the scheduleRecord debounce after it settles.
 	this.suppressRecordUntil = this.now() + 300;
-	var before = scroller.el.scrollTop;
-	this.dbg("restore",this.describeAnchor(a));
-	// Range anchor (a text offset): re-measure the SAME character's line top and hold it fixed.
-	if(a.node) {
-		if(!a.node.isConnected) { this.recordAnchor(); return; }
-		for(var p = 0; p < 2; p++) {
-			var rrect = this.rangeRectAt(a.node, a.offset);
-			if(!rrect) { this.recordAnchor(); return; }   // text gone/replaced → re-baseline
-			var rdy = rrect.top - a.pos;
-			if(Math.abs(rdy) <= 0.01) { break; }
-			scroller.el.scrollTop = scroller.el.scrollTop + rdy;
+	this.manageScroller(el);
+	// Our corrections must be INSTANT and exact. If a theme (or user CSS) set `scroll-behavior: smooth`
+	// on the scroller, a scrollTop write would animate — and we read the position straight back across a
+	// two-pass loop and across resize ticks, so the readback would see stale values and oscillate. Force
+	// `auto` for the duration, restoring the inline value afterwards.
+	var prevBehavior = el.style.scrollBehavior;
+	el.style.scrollBehavior = "auto";
+	try {
+		// Range anchor (a text offset): re-measure the SAME character's line top and hold it fixed.
+		if(a.node) {
+			if(!a.node.isConnected) { this.recordAnchor(); return; }
+			for(var p = 0; p < 2; p++) {
+				var rrect = this.rangeRectAt(a.node, a.offset);
+				if(!rrect) { this.recordAnchor(); return; }   // text gone/replaced → re-baseline
+				var rdy = rrect.top - a.pos;
+				if(Math.abs(rdy) <= 0.01) { break; }
+				el.scrollTop = el.scrollTop + rdy;
+			}
+			return;
 		}
-		this.dbg("restore applied",Math.round((scroller.el.scrollTop - before) * 100) / 100);
-		return;
+		// Element anchor: hold the pinned edge (top | bottom | fractional point).
+		if(!a.el || !a.el.isConnected) { this.recordAnchor(); return; }
+		for(var pass = 0; pass < 2; pass++) {
+			var rect = a.el.getBoundingClientRect();
+			var cur = (a.edge === "bottom") ? rect.bottom :
+				(a.edge === "frac") ? (rect.top + a.frac * rect.height) : rect.top;
+			var dy = cur - a.pos;
+			if(Math.abs(dy) <= 0.01) { break; }
+			el.scrollTop = el.scrollTop + dy;
+		}
+	} finally {
+		el.style.scrollBehavior = prevBehavior;
 	}
-	// Element anchor: hold the pinned edge (top|bottom).
-	if(!a.el || !a.el.isConnected) { this.recordAnchor(); return; }
-	for(var pass = 0; pass < 2; pass++) {
-		var rect = a.el.getBoundingClientRect();
-		var cur = (a.edge === "bottom") ? rect.bottom :
-			(a.edge === "frac") ? (rect.top + a.frac * rect.height) : rect.top;
-		var dy = cur - a.pos;
-		if(Math.abs(dy) <= 0.01) { break; }
-		scroller.el.scrollTop = scroller.el.scrollTop + dy;
-	}
-	this.dbg("restore applied",Math.round((scroller.el.scrollTop - before) * 100) / 100);
 };
 
 ScrollStability.prototype.scheduleRecord = function() {
@@ -479,6 +480,7 @@ ScrollStability.prototype.scheduleRecord = function() {
 ScrollStability.prototype._cleanupStability = function() {
 	if(this._cleaned) { return; }
 	this._cleaned = true;
+	this.releaseScroller();   // restore the scroller's native overflow-anchor
 	try { if(this.resizeObserver) { this.resizeObserver.disconnect(); } } catch(e) {}
 	try { if(this.mutationObserver) { this.mutationObserver.disconnect(); } } catch(e) {}
 	if(this.stableWin) {
