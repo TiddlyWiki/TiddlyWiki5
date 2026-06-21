@@ -15,13 +15,18 @@ const { TextSelection } = require("prosemirror-state");
 
 /**
  * Determine whether a given document position sits inside a list node.
+ * A position exactly at a list's closing token (i.e. right after the list)
+ * is treated as outside the list.
  */
 function isInsideList(doc, pos) {
 	try {
-		const $pos = doc.resolve(Math.min(pos, doc.content.size - 1));
+		const $pos = doc.resolve(Math.min(pos, doc.content.size));
 		for(let depth = $pos.depth; depth >= 1; depth--) {
 			if($pos.node(depth).type.name === "list") {
-				return true;
+				// pos must be before the list node's closing token
+				if(pos < $pos.end(depth)) {
+					return true;
+				}
 			}
 		}
 	} catch(ex) {
@@ -31,11 +36,64 @@ function isInsideList(doc, pos) {
 }
 
 /**
+ * Find the first ancestor of the resolved position that is a list node.
+ * Returns { pos, node } or null.
+ */
+function findListAncestor(doc, pos) {
+	try {
+		const $pos = doc.resolve(Math.min(pos, doc.content.size));
+		for(let depth = $pos.depth; depth >= 1; depth--) {
+			const node = $pos.node(depth);
+			if(node.type.name === "list") {
+				return { pos: $pos.before(depth), node: node };
+			}
+		}
+	} catch(ex) {
+		// ignore
+	}
+	return null;
+}
+
+/**
  * Compute where a dropped block should be inserted.
+ *
+ * Two drop zones are distinguished when the pointer is over a list item:
+ * - "inside-list": the pointer is over the content area of the list item.
+ *   A non-list block dropped here is wrapped into a new list item so it
+ *   becomes part of the list structure.
+ * - "list"/"doc": the pointer is over the marker/gutter or between items.
+ *   The block is inserted as a sibling and list items are unwrapped when
+ *   dropped outside a list.
  */
 function computeDropTarget(view, coords, sourceNode) {
 	const helpers = require("$:/plugins/tiddlywiki/prosemirror/features/drag-handle/helpers.js");
 	if(!helpers.isCoordsInEditorHandleZone(view, coords)) return null;
+
+	// First ask ProseMirror where the pointer landed. If it landed inside a
+	// list node's content (including inside a paragraph that lives within a
+	// list item), treat this as a drop "inside" that list item.
+	const posInfo = view.posAtCoords(coords);
+	if(posInfo) {
+		const probePos = posInfo.inside >= 0 ? posInfo.inside : posInfo.pos;
+		const listAncestor = findListAncestor(view.state.doc, probePos);
+		if(listAncestor) {
+			const box = view.nodeDOM(listAncestor.pos).getBoundingClientRect();
+			const contentBox = getListContentBox(view, listAncestor.pos) || box;
+			// "Inner" zone: the pointer is over the content area of the list
+			// item. The dropped block is wrapped into a new list item that
+			// becomes a sibling of this list item (before or after it).
+			if(coords.left >= contentBox.left - 2) {
+				const before = coords.top < box.top + box.height / 2;
+				const insertPos = before ? listAncestor.pos : listAncestor.pos + listAncestor.node.nodeSize;
+				return {
+					insertPos: insertPos,
+					dropContext: "inside-list",
+					unwrapList: false
+				};
+			}
+		}
+	}
+
 	const info = helpers.findBlockAtCoords(view, coords);
 	if(!info) return null;
 	const box = info.dom.getBoundingClientRect();
@@ -50,6 +108,21 @@ function computeDropTarget(view, coords, sourceNode) {
 }
 
 /**
+ * Get the bounding box of a list item's content container.
+ */
+function getListContentBox(view, listPos) {
+	try {
+		const dom = view.nodeDOM(listPos);
+		if(!dom) return null;
+		const content = dom.querySelector(".list-content");
+		if(content) return content.getBoundingClientRect();
+	} catch(ex) {
+		// ignore
+	}
+	return null;
+}
+
+/**
  * Build a transaction that moves `source` to `target`.
  */
 function buildMoveTransaction(view, source, target) {
@@ -60,14 +133,26 @@ function buildMoveTransaction(view, source, target) {
 	}
 
 	let tr = view.state.tr.delete(sourceFrom, sourceTo);
-	const insertPos = tr.mapping.map(target.insertPos, target.insertPos > sourceFrom ? -1 : 1);
+	let insertPos = tr.mapping.map(target.insertPos, target.insertPos > sourceFrom ? -1 : 1);
+	let nodesToInsert;
 	if(target.unwrapList) {
-		tr = tr.insert(insertPos, source.node.content);
+		nodesToInsert = source.node.content;
+	} else if(target.dropContext === "inside-list" && source.node.type.name !== "list") {
+		// Wrap the dropped block into a list item so it becomes part of the list.
+		const listType = view.state.schema.nodes.list;
+		if(listType) {
+			const listNode = listType.create({ kind: "bullet" }, source.node);
+			nodesToInsert = [listNode];
+		} else {
+			nodesToInsert = [source.node];
+		}
 	} else {
-		tr = tr.insert(insertPos, source.node);
+		nodesToInsert = [source.node];
 	}
+	tr = tr.insert(insertPos, nodesToInsert);
 	try {
-		if(!target.unwrapList && NodeSelection.isSelectable(source.node)) {
+		const insertedNode = nodesToInsert[0];
+		if(NodeSelection.isSelectable(insertedNode)) {
 			tr.setSelection(NodeSelection.create(tr.doc, insertPos));
 		} else {
 			tr.setSelection(TextSelection.near(tr.doc.resolve(Math.min(insertPos + 1, tr.doc.content.size)), 1));
@@ -79,5 +164,7 @@ function buildMoveTransaction(view, source, target) {
 }
 
 exports.isInsideList = isInsideList;
+exports.findListAncestor = findListAncestor;
 exports.computeDropTarget = computeDropTarget;
 exports.buildMoveTransaction = buildMoveTransaction;
+exports.getListContentBox = getListContentBox;

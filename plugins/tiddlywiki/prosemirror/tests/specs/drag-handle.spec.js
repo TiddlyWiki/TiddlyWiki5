@@ -3,6 +3,33 @@
 const { test, expect } = require("@playwright/test");
 const { setupProseMirrorTest } = require("../helpers.js");
 
+function countListNodes(node) {
+	let count = node.type === "list" ? 1 : 0;
+	if(node.content) {
+		for(const child of node.content) count += countListNodes(child);
+	}
+	return count;
+}
+
+function textInList(node) {
+	if(node.type === "list") {
+		const parts = [];
+		if(node.content) {
+			for(const child of node.content) {
+				const childText = textInList(child);
+				if(childText) parts.push(childText);
+			}
+		}
+		return parts.join(" ");
+	}
+	if(node.type === "paragraph" || node.type === "text") {
+		if(node.content) return node.content.map((c) => textInList(c)).join("");
+		return node.text || "";
+	}
+	if(node.content) return node.content.map((c) => textInList(c)).join("");
+	return "";
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Drag Handle (consolidated: basic + extended)
 // ─────────────────────────────────────────────────────────────────────────────
@@ -208,5 +235,98 @@ test.describe("ProseMirror Editor - Drag Handle", () => {
 		const paragraphs = await editor.locator("p").allTextContents();
 		expect(paragraphs.join(" ")).toContain("Item 1");
 		expect(paragraphs.join(" ")).toContain("After list");
+	});
+
+	test("drop logic should wrap a paragraph dropped inside a list item", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			useReadmeTiddler: false,
+			initialText: "Paragraph\n\n* Item 1"
+		});
+		const result = await editor.evaluate((el) => {
+			function findAllEngines(widget) {
+				const results = [];
+				if(widget && widget.engine && widget.engine.view) results.push(widget.engine);
+				if(widget && widget.children) {
+					for(const child of widget.children) results.push.apply(results, findAllEngines(child));
+				}
+				return results;
+			}
+			const viewEl = el.closest(".ProseMirror") || el;
+			const engine = findAllEngines($tw.rootWidget).find((e) => e.view && e.view.dom === viewEl);
+			if(!engine || !engine.view) return { error: "engine not found" };
+			const view = engine.view;
+			const dropLogic = $tw.modules.execute(
+				"$:/plugins/tiddlywiki/prosemirror/features/drag-handle/drop-logic.js"
+			);
+			const paraPos = 0;
+			const paraNode = view.state.doc.nodeAt(paraPos);
+			const listPos = paraNode.nodeSize;
+			const listDom = view.nodeDOM(listPos);
+			const contentDom = listDom.querySelector(".list-content");
+			if(!contentDom) return { error: "no list-content" };
+			const box = contentDom.getBoundingClientRect();
+			const coords = { left: box.left + box.width / 2, top: box.top + box.height / 2 };
+			const target = dropLogic.computeDropTarget(view, coords, paraNode);
+			if(!target) return { error: "no drop target" };
+			const tr = dropLogic.buildMoveTransaction(view, { pos: paraPos, node: paraNode }, target);
+			if(!tr) return { error: "no transaction", target: { insertPos: target.insertPos, dropContext: target.dropContext } };
+			view.dispatch(tr);
+			return {
+				target: { insertPos: target.insertPos, dropContext: target.dropContext },
+				doc: view.state.doc.toJSON()
+			};
+		});
+		expect(result.error).toBeUndefined();
+		expect(result.target.dropContext).toBe("inside-list");
+		expect(countListNodes(result.doc)).toBe(2);
+		expect(textInList(result.doc)).toContain("Paragraph");
+		expect(textInList(result.doc)).toContain("Item 1");
+	});
+
+	test("drop logic should keep a paragraph as paragraph when dropped outside a list item", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			useReadmeTiddler: false,
+			initialText: "Paragraph\n\n* Item 1"
+		});
+		const result = await editor.evaluate((el) => {
+			function findAllEngines(widget) {
+				const results = [];
+				if(widget && widget.engine && widget.engine.view) results.push(widget.engine);
+				if(widget && widget.children) {
+					for(const child of widget.children) results.push.apply(results, findAllEngines(child));
+				}
+				return results;
+			}
+			const viewEl = el.closest(".ProseMirror") || el;
+			const engine = findAllEngines($tw.rootWidget).find((e) => e.view && e.view.dom === viewEl);
+			if(!engine || !engine.view) return { error: "engine not found" };
+			const view = engine.view;
+			const dropLogic = $tw.modules.execute(
+				"$:/plugins/tiddlywiki/prosemirror/features/drag-handle/drop-logic.js"
+			);
+			const paraPos = 0;
+			const paraNode = view.state.doc.nodeAt(paraPos);
+			const listPos = paraNode.nodeSize;
+			// Drop just below the list item (outside / after the list).
+			const listDom = view.nodeDOM(listPos);
+			const box = listDom.getBoundingClientRect();
+			const coords = { left: box.left + box.width / 2, top: box.bottom + 4 };
+			const target = dropLogic.computeDropTarget(view, coords, paraNode);
+			if(!target) return { error: "no drop target" };
+			const tr = dropLogic.buildMoveTransaction(view, { pos: paraPos, node: paraNode }, target);
+			if(!tr) return { error: "no transaction", target: { insertPos: target.insertPos, dropContext: target.dropContext } };
+			view.dispatch(tr);
+			return {
+				target: { insertPos: target.insertPos, dropContext: target.dropContext },
+				doc: view.state.doc.toJSON()
+			};
+		});
+		expect(result.error).toBeUndefined();
+		expect(result.target.dropContext).toBe("doc");
+		expect(countListNodes(result.doc)).toBe(1);
+		expect(textInList(result.doc)).toContain("Item 1");
+		// Paragraph text should exist outside the list.
+		const allText = JSON.stringify(result.doc);
+		expect(allText).toContain("Paragraph");
 	});
 });
