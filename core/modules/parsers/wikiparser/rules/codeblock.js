@@ -25,7 +25,7 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var reEnd = /(\r?\n```$)/mg;
+	var reEnd = /(\r?\n)?```$/mg;
 	var languageStart = this.parser.pos + 3,
 		languageEnd = languageStart + this.match[1].length;
 	// Move past the match
