@@ -39,7 +39,7 @@ StoryWrapperWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var domNode = this.document.createElement(this.wrapperTag);
+	var domNode = this.document.createElementNS(this.namespace,this.wrapperTag);
 	this.domNode = domNode;
 	this.assignWrapperAttributes(domNode,this.attributes);
 	parent.insertBefore(domNode,nextSibling);
@@ -56,6 +56,24 @@ StoryWrapperWidget.prototype.execute = function() {
 	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) { tag = "safe-" + tag; }
 	tag = tag.replace(/[^0-9a-zA-Z\-]/mg,"");
 	this.wrapperTag = tag || "div";
+	// Select the namespace for the tag, exactly as element.js does: a known namespaced tag, else an
+	// explicit xmlns attribute, else the inherited `namespace` variable (defaulting to XHTML). Set
+	// before makeChildWidgets so descendants inherit it.
+	var XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml",
+		tagNamespaces = {
+			svg: "http://www.w3.org/2000/svg",
+			math: "http://www.w3.org/1998/Math/MathML",
+			body: XHTML_NAMESPACE
+		};
+	this.namespace = tagNamespaces[this.wrapperTag];
+	if(this.namespace) {
+		this.setVariable("namespace",this.namespace);
+	} else if(this.hasAttribute("xmlns")) {
+		this.namespace = this.getAttribute("xmlns");
+		this.setVariable("namespace",this.namespace);
+	} else {
+		this.namespace = this.getVariable("namespace",{defaultValue: XHTML_NAMESPACE});
+	}
 	this.makeChildWidgets();
 };
 
