@@ -27,6 +27,9 @@ contract: refresh(changedTiddlers) and destroy().
 var CONFIG_TARGET_SELECTOR = "$:/config/plugins/tiddlywiki/scroll-stable/target-selector",
 	DEFAULT_TARGET_SELECTOR = ":scope > .tc-tiddler-frame";
 
+// Temporary: set false to silence the console diagnostics.
+var DEBUG = false;
+
 var ScrollStability = function(domNode,widget) {
 	this.domNode = domNode;
 	this.widget = widget;
@@ -99,6 +102,27 @@ ScrollStability.prototype.now = function() {
 	return (win && win.performance && win.performance.now) ? win.performance.now() : Date.now();
 };
 
+// ── diagnostics ───────────────────────────────────────────────────────────────
+
+ScrollStability.prototype.dbg = function() {
+	if(!DEBUG) { return; }
+	var win = this.stableWin;
+	if(win && win.console) { win.console.log.apply(win.console,["[scroll-stable]"].concat([].slice.call(arguments))); }
+};
+
+ScrollStability.prototype.describeAnchor = function(a) {
+	if(!a) { return "null"; }
+	if(a.node) {
+		var data = a.node.data || "";
+		var snip = data.substr(Math.max(0,a.offset - 6),16).replace(/\s+/g,"·");
+		return "char@" + a.offset + " «" + snip + "» pos=" + Math.round(a.pos);
+	}
+	var el = a.el,
+		cls = (typeof el.className === "string" && el.className) ? "." + el.className.trim().replace(/\s+/g,".") : "",
+		extra = (a.edge === "frac") ? (" frac=" + Math.round(a.frac * 100) / 100) : "";
+	return a.edge + extra + " <" + el.nodeName.toLowerCase() + cls + "> pos=" + Math.round(a.pos);
+};
+
 ScrollStability.prototype.onResize = function() {
 	var node = this.domNode;
 	if(!node || !node.isConnected) { return; }
@@ -164,8 +188,9 @@ ScrollStability.prototype.vpBottom = function(scroller) {
 //
 // 2. INSIDE — the line is genuinely in the MIDDLE of a target whose top scrolled off above. Pin the
 //    exact TEXT CHARACTER at the line: a character keeps its identity through a width-reflow (a wrapped
-//    line is not an element, but a character is), so the reading position itself stays put. (Falls back
-//    to the deepest element's / the target's own top for a non-text block.)
+//    line is not an element, but a character is), so the reading position itself stays put. When the
+//    line falls on a non-text block instead (an image, iframe, video, embed…), pin that box's same
+//    FRACTIONAL point, so a box that resizes with the river's width keeps your place.
 //
 // 3. GAP — no straddle, and the nearest target top is BELOW the line (the line sits in a gap above it).
 //    Pin that top.
@@ -201,44 +226,119 @@ ScrollStability.prototype.recordAnchor = function() {
 		}
 	}
 
+	var self = this;
+	function commit(tier,anchor) {
+		self.anchor = anchor;
+		self.dbg("record[" + tier + "]",self.describeAnchor(anchor),"line=" + Math.round(line),"vpBottom=" + Math.round(vpBottom));
+	}
+
 	// Tier 1 — BOUNDARY: a target top sits essentially at the line. Pin it; this outranks a sub-pixel
 	// straddle of the target above (the on-top-tiddler case).
 	if(firstVisibleTop && firstVisibleTop.pos <= line + EDGE) {
-		this.anchor = {el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos};
+		commit("1-boundary",{el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos});
 		return;
 	}
 
-	// Tier 2 — INSIDE: the line is in the middle of a straddling target → pin the exact text character.
-	// (Node.TEXT_NODE === 3.)
+	// Tier 2 — INSIDE: the line is in the middle of a straddling target → pin the exact reading
+	// CHARACTER at the line. The browser's own caret hit-testing maps the reading point to the nearest
+	// text position; between the point and that caret there is no other line of text (only the same
+	// wrapped line or non-reflowing margin/padding), so holding it fixed keeps the reading edge put
+	// through any width-reflow, whatever the line lands on (text, gaps between blocks, whitespace,
+	// inline markup). The geometric search is only a fallback for when the caret APIs are unavailable
+	// or the point is over a non-text block (e.g. an image). (Node.TEXT_NODE === 3.)
 	if(straddling) {
+		var ca = this.readingCharAt(straddling, line);
+		if(ca) { commit("2-caret",ca); return; }
 		var deep = this.deepestAtLine(straddling, line);
 		if(deep && deep.nodeType === 3) {
 			var off = this.textOffsetAtLine(deep, line);
 			if(off !== null) {
 				var trect = this.rangeRectAt(deep, off);
-				if(trect) { this.anchor = {node: deep, offset: off, edge: "top", pos: trect.top}; return; }
+				// Accept only when the character's wrapped line really brackets the reading line.
+				if(trect && trect.top <= line + 2 && trect.bottom >= line - 2) {
+					commit("2-text",{node: deep, offset: off, edge: "top", pos: trect.top});
+					return;
+				}
 			}
-		} else if(deep) {
-			this.anchor = {el: deep, edge: "top", pos: deep.getBoundingClientRect().top};
-			return;
+			deep = deep.parentElement;   // text didn't bracket the line → pin its element instead
 		}
-		this.anchor = {el: straddling, edge: "top", pos: straddling.getBoundingClientRect().top};
+		// The line is on a non-text block — an image, iframe, video, embed, canvas, or a gap between
+		// blocks. Pin it PROPORTIONALLY: such a box can change height with the river's width (a responsive
+		// image/iframe grows when the sidebar hides), so holding the SAME fractional point at the reading
+		// line keeps your place, where pinning its top would let the point you're looking at drift. For a
+		// fixed-height box the fraction is constant, so this degrades to a plain pin.
+		var el = (deep && deep.nodeType === 1) ? deep : straddling,
+			er = el.getBoundingClientRect(),
+			frac = er.height > 0 ? Math.min(1,Math.max(0,(line - er.top) / er.height)) : 0;
+		commit("2-frac",{el: el, edge: "frac", frac: frac, pos: er.top + frac * er.height});
 		return;
 	}
 
 	// Tier 3 — GAP: the nearest target top is below the line (line sits in a gap above it) → pin it.
 	if(firstVisibleTop) {
-		this.anchor = {el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos};
+		commit("3-gap",{el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos});
 		return;
 	}
 
 	// Tier 4 — LAST RESORT: scrolled past the end (line below the last target) → pin its bottom.
 	if(lastTarget && lastRect.bottom <= line + 0.5) {
-		this.anchor = {el: lastTarget, edge: "bottom", pos: lastRect.bottom};
+		commit("4-bottom",{el: lastTarget, edge: "bottom", pos: lastRect.bottom});
 		return;
 	}
 
-	this.anchor = null;
+	commit("none",null);
+};
+
+// The (textNode, offset) the browser would place a caret at for the viewport point (x, y), across the
+// two API spellings (caretPositionFromPoint — standard; caretRangeFromPoint — WebKit). Null if neither
+// resolves a node.
+ScrollStability.prototype.caretAt = function(x, y) {
+	var doc = this.document;
+	try {
+		if(doc.caretPositionFromPoint) {
+			var cp = doc.caretPositionFromPoint(x, y);
+			if(cp && cp.offsetNode) { return {node: cp.offsetNode, offset: cp.offset}; }
+		} else if(doc.caretRangeFromPoint) {
+			var cr = doc.caretRangeFromPoint(x, y);
+			if(cr) { return {node: cr.startContainer, offset: cr.startOffset}; }
+		}
+	} catch(e) {}
+	return null;
+};
+
+// True when `node` sits inside a position:fixed/sticky element (up to `stop`) — content decoupled from
+// scrolling, useless as a reading anchor (e.g. a sticky tiddler title).
+ScrollStability.prototype.hasDecoupledAncestor = function(node, stop) {
+	var win = this.stableWin, el = (node.nodeType === 3) ? node.parentElement : node;
+	while(el && el !== stop) {
+		var pos = win.getComputedStyle(el).position;
+		if(pos === "fixed" || pos === "sticky") { return true; }
+		el = el.parentElement;
+	}
+	return false;
+};
+
+// Find the exact reading CHARACTER at the line inside `container` via the browser's caret hit-testing.
+// Probe a few x positions across the width (prose sits in the middle; floats/margins at the edges) and
+// take the first that lands on real, scroll-coupled text. Returns {node, offset, edge:"top", pos} or
+// null (caret APIs missing, or the point is over a non-text block such as an image).
+ScrollStability.prototype.readingCharAt = function(container, line) {
+	var rect = container.getBoundingClientRect();
+	if(rect.width <= 0) { return null; }
+	var fracs = [0.5, 0.35, 0.65, 0.2, 0.8];
+	for(var i = 0; i < fracs.length; i++) {
+		var c = this.caretAt(rect.left + rect.width * fracs[i], line);
+		if(!c || !c.node || c.node.nodeType !== 3) { continue; }
+		if(!container.contains(c.node) || this.hasDecoupledAncestor(c.node, container)) { continue; }
+		var rr = this.rangeRectAt(c.node, c.offset);
+		// Only accept a caret whose own wrapped line actually brackets the reading line. Over a non-text
+		// block (e.g. a tall image) the browser snaps the point to the NEAREST text, which can be far
+		// above/below with reflowing content in between — pinning that would drift badly.
+		if(rr && rr.top <= line + 2 && rr.bottom >= line - 2) {
+			return {node: c.node, offset: c.offset, edge: "top", pos: rr.top};
+		}
+	}
+	return null;
 };
 
 // Descend from `root` through the chain of child NODES — elements AND text nodes — whose box
@@ -335,6 +435,8 @@ ScrollStability.prototype.restoreAnchor = function() {
 	// Repeated restores during an animated sidebar toggle keep pushing this forward, covering the whole
 	// transition plus the scheduleRecord debounce after it settles.
 	this.suppressRecordUntil = this.now() + 300;
+	var before = scroller.el.scrollTop;
+	this.dbg("restore",this.describeAnchor(a));
 	// Range anchor (a text offset): re-measure the SAME character's line top and hold it fixed.
 	if(a.node) {
 		if(!a.node.isConnected) { this.recordAnchor(); return; }
@@ -345,17 +447,20 @@ ScrollStability.prototype.restoreAnchor = function() {
 			if(Math.abs(rdy) <= 0.01) { break; }
 			scroller.el.scrollTop = scroller.el.scrollTop + rdy;
 		}
+		this.dbg("restore applied",Math.round((scroller.el.scrollTop - before) * 100) / 100);
 		return;
 	}
 	// Element anchor: hold the pinned edge (top|bottom).
 	if(!a.el || !a.el.isConnected) { this.recordAnchor(); return; }
 	for(var pass = 0; pass < 2; pass++) {
 		var rect = a.el.getBoundingClientRect();
-		var cur = (a.edge === "bottom") ? rect.bottom : rect.top;
+		var cur = (a.edge === "bottom") ? rect.bottom :
+			(a.edge === "frac") ? (rect.top + a.frac * rect.height) : rect.top;
 		var dy = cur - a.pos;
 		if(Math.abs(dy) <= 0.01) { break; }
 		scroller.el.scrollTop = scroller.el.scrollTop + dy;
 	}
+	this.dbg("restore applied",Math.round((scroller.el.scrollTop - before) * 100) / 100);
 };
 
 ScrollStability.prototype.scheduleRecord = function() {
