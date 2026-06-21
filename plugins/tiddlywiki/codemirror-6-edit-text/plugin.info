@@ -1,9 +1,10 @@
 {
   "title": "$:/plugins/tiddlywiki/codemirror-6-edit-text",
-  "name": "Simple Engine",
+  "parent-plugin": "$:/plugins/tiddlywiki/codemirror-6",
+  "name": "CodeMirror 6 Simple Engine",
   "description": "Simple Edit Text Engine",
   "author": "TiddlyWiki",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "core-version": ">=5.3.0",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
