@@ -1,4 +1,5 @@
 title: $:/core/ui/SideBarSegments/page-controls
 tags: $:/tags/SideBarSegment
+hide-static: yes
 
 {{||$:/core/ui/PageTemplate/pagecontrols}}

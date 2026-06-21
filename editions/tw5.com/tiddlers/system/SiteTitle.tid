@@ -3,4 +3,11 @@ modified: 20131211131023829
 title: $:/SiteTitle
 type: text/vnd.tiddlywiki
 
-TiddlyWiki @@font-size:small; v<<version>>@@
+\whitespace trim
+
+<%if [<tv-config-static>!match[yes]] %>
+	TiddlyWiki
+<%else%>
+	[ext[TiddlyWiki|https://tiddlywiki.com/static]]
+<%endif%>
+@@font-size:small;&nbsp;v<<version>>@@

@@ -120,7 +120,7 @@ is loading
 
 <!-- Demonstrating how to embed a bitmap graphic --> 
 <div class="tc-splash-text">
-<img src="data:image/jpeg;base64,{{New Release Banner||$:/core/templates/plain-text-tiddler}}" width="100"/>
+<img src="data:image/jpeg;base64,{{Image/New Release Banner||$:/core/templates/plain-text-tiddler}}" width="100"/>
 </div>
 
 <!-- Demonstrating how to embed a wikitext SVG graphic --> 

@@ -1,0 +1,15 @@
+change-category: usability
+change-type: enhancement
+created: 202602061437
+description: Static pages have deep-links and a toc
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9339
+modified: 202602061437
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9339
+type: text/vnd.tiddlywiki
+
+* This PR adds a deep-link to dynamic tiddler at tiddlywiki.com
+* The landing page gets a 2 level toc
+* Every tiddler has a 1 level toc and a link back to the parent tiddler

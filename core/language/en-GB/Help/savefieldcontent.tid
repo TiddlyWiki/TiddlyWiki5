@@ -1,0 +1,19 @@
+title: $:/language/Help/savefieldcontent
+description: Saves the binary contents of a named field to a directory of files
+
+Saves the contents of a named field of a group of tiddlers to the specified directory. The field value is treated as base64-encoded binary data and decoded when written to disk.
+
+```
+--savefieldcontent <filter> <fieldname> <pathname> <suffix>
+```
+
+The parameters are:
+
+* ''filter'' - filter identifying the tiddlers to be processed
+* ''fieldname'' - the field whose value is to be written
+* ''pathname'' - the directory to write to, resolved relative to the `output` subdirectory of the edition directory unless redirected with the `--output` command
+* ''suffix'' - appended to the filename of each generated file (typically a file extension such as `.jpg`)
+
+Tiddlers that do not contain the specified field are skipped. Each output filename is the URL-encoded tiddler title with the suffix appended. Any missing directories in the pathname are automatically created.
+
+This command is useful for unpacking field-stored binary assets, such as embedded thumbnails or avatars, into individual files at build time.

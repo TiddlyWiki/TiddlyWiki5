@@ -4,7 +4,7 @@ tags: Definitions
 title: Tiddlyhost
 type: text/vnd.tiddlywiki
 
-<span style="float:right;">[img width=140 [Tiddlyhost Logo]]</span>
+<span style="float:right;">[img width=140 [Image/Tiddlyhost Logo]]</span>
 
 [[Tiddlyhost.com|https://tiddlyhost.com/]] is a hosting service for TiddlyWiki created by Simon Baird. Once you sign up and confirm your email you can create "sites", (i.e. ~TiddlyWikis), with support for online saving. Sites can be private or public, and you can optionally list them on the taggable and searchable [[Tiddlyhost Hub|https://tiddlyhost.com/hub]] where they'll be discoverable by others.
 
