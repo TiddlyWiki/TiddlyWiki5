@@ -2918,9 +2918,76 @@ class CodeMirrorEngine {
 		this._applyLanguageContext(this._resolveLanguageContext(), "refresh", false);
 	}
 
-	focus() {
+	focus(focusOptions) {
 		if(this._destroyed) return;
-		this.view.focus();
+		var self = this;
+		if(this._shouldPreventScroll(focusOptions)) {
+			this._focusPreservingScroll(this.view.contentDOM, function() {
+				self.view.focus();
+			});
+		} else {
+			this.view.focus();
+		}
+	}
+
+	/**
+	 * Whether a focus() call should avoid scrolling the focused element into
+	 * view. True when the caller passes {preventScroll:true}, or when the widget
+	 * carries a preventScroll="true"/"yes" attribute. Autofocus-on-creation routes
+	 * through focus() (core factory.js), so the attribute covers that case too.
+	 */
+	_shouldPreventScroll(focusOptions) {
+		if(focusOptions && focusOptions.preventScroll) return true;
+		var w = this.widget;
+		if(w && isFunction(w.getAttribute)) {
+			var v = w.getAttribute("preventScroll");
+			return v === "true" || v === "yes";
+		}
+		return false;
+	}
+
+	/**
+	 * Run doFocus() while preserving the scroll position of every scrollable
+	 * ancestor of `el` and of the window(s) above it (including a framed editor's
+	 * parent page, same-origin). CodeMirror's own focus already passes
+	 * {preventScroll:true} to the contentDOM, but a native input/textarea focus,
+	 * the parent page scrolling a focused iframe into view, or the selection being
+	 * set after focus can still scroll - so we snapshot the scroll positions and
+	 * restore them synchronously right after focusing. The restore is intentionally
+	 * synchronous-only (no deferred/rAF restore): it undoes only the scrolling the
+	 * focus caused within this same tick, so it can never interrupt or fight an
+	 * ongoing animated/smooth scroll (e.g. navigation or momentum scrolling).
+	 */
+	_focusPreservingScroll(el, doFocus) {
+		var doc = (el && el.ownerDocument) || (this.widget && this.widget.document) || document;
+		var saved = [];
+		for(var node = el && el.parentNode; node && node.nodeType === 1; node = node.parentNode) {
+			if(node.scrollHeight > node.clientHeight || node.scrollWidth > node.clientWidth) {
+				saved.push({node: node, top: node.scrollTop, left: node.scrollLeft});
+			}
+		}
+		var wins = [], win = doc.defaultView;
+		while(win) {
+			try {
+				wins.push({win: win, x: win.scrollX, y: win.scrollY});
+			} catch(e) { break; }
+			if(win === win.parent) break;
+			try {
+				void win.parent.document; // throws cross-origin -> stop climbing
+				win = win.parent;
+			} catch(e) { break; }
+		}
+		doFocus();
+		var restore = function() {
+			for(var i = 0; i < saved.length; i++) {
+				saved[i].node.scrollTop = saved[i].top;
+				saved[i].node.scrollLeft = saved[i].left;
+			}
+			for(var j = 0; j < wins.length; j++) {
+				try { wins[j].win.scrollTo(wins[j].x, wins[j].y); } catch(e) {}
+			}
+		};
+		restore();
 	}
 
 	hasFocus() {

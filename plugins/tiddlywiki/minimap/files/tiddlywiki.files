@@ -1,0 +1,68 @@
+{
+    "tiddlers": [
+        {
+            "file": "widget.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/minimap/widget.js",
+                "module-type": "widget"
+            }
+        },
+        {
+            "file": "menubar-height.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/minimap/menubar-height.js",
+                "module-type": "startup"
+            }
+        },
+        {
+            "file": "page-scrollbar.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/BurningTreeC/minimap/page-scrollbar.js",
+                "module-type": "startup"
+            }
+        },
+        {
+            "file": "styles.tid",
+            "isTiddlerFile": true
+        },
+        {
+            "file": "story-styles.tid",
+            "isTiddlerFile": true
+        },
+        {
+            "file": "sidebar-segment.tid",
+            "isTiddlerFile": true
+        },
+        {
+            "file": "page-template.tid",
+            "isTiddlerFile": true
+        },
+        {
+            "file": "config-tooltips.tid",
+            "isTiddlerFile": true
+        },
+        {
+            "file": "config-enabled.tid",
+            "isTiddlerFile": true
+        },
+        {
+            "file": "config-block-border.tid",
+            "isTiddlerFile": true
+        },
+        {
+            "file": "config-width.tid",
+            "isTiddlerFile": true
+        },
+        {
+            "file": "controlpanel.tid",
+            "isTiddlerFile": true
+        },
+        {
+            "file": "readme.tid",
+            "isTiddlerFile": true
+        }
+    ]
+}

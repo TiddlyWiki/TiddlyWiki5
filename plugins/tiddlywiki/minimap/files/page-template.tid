@@ -1,0 +1,20 @@
+title: $:/plugins/BurningTreeC/minimap/page-template
+tags: $:/tags/PageTemplate
+
+\whitespace trim
+<%if [{$:/state/sidebar}match[no]] %>
+
+<%if [{$:/config/BurningTreeC/minimap/enabled}!match[no]] %>
+
+<div class="tc-minimap-wrapper" style.position="fixed" style.top="var(--tv-menubar-height,0px)" style.bottom="0" style.right="0">
+<$minimap container=".tc-story-river" scroller="html" selector=":scope > .tc-tiddler-frame" class="tc-minimap" mode="clone" width={{$:/config/BurningTreeC/minimap/width}} tooltips={{$:/config/BurningTreeC/minimap/tooltips}} blockBorder={{$:/config/BurningTreeC/minimap/block-border}}/>
+</div>
+<$button class="tc-minimap-grip" set="$:/config/BurningTreeC/minimap/enabled" setTo="no" style.right="var(--tv-minimap-width,120px)" tooltip="Hide minimap" aria-label="Hide minimap">{{$:/core/images/chevron-right}}</$button>
+
+<% else %>
+
+<$button class="tc-minimap-grip tc-minimap-grip-edge" set="$:/config/BurningTreeC/minimap/enabled" setTo="yes" style.right="0" tooltip="Show minimap" aria-label="Show minimap">{{$:/core/images/chevron-left}}</$button>
+
+<% endif %>
+
+<% endif %>

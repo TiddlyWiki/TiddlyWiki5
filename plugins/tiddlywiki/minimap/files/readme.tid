@@ -1,0 +1,81 @@
+title: $:/plugins/BurningTreeC/minimap/readme
+
+This plugin adds a //minimap//: a vertically-scaled overview of a scroll container's content, in the style of the CodeMirror&nbsp;6 minimap, with a draggable overlay marking the visible viewport. Dragging or clicking the minimap scrolls the container; scrolling the container moves the overlay.
+
+Out of the box it shows a minimap of the story river, pinned to the right of the screen. The widget itself is generic, though — the scroll container and the elements that make up the map are both chosen with CSS selectors, so you can point a `<$minimap>` at any scrollable layout.
+
+! Using it in the wiki
+
+The story-river minimap is installed automatically and needs no configuration. There are a few things worth knowing:
+
+* ''Show / hide:'' a small grip handle is fixed to the right edge of the screen, vertically centred. Click it to show or hide the minimap. When the minimap is showing, the handle sits at its left edge; when hidden, it sits at the screen edge. You can also toggle it from the settings (see below).
+* ''Narrow screens:'' the minimap and its grip are hidden below the sidebar breakpoint ({{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}), the same width at which the sidebar collapses.
+* ''Tooltips:'' hovering a tiddler in the minimap can show its title (off by default).
+* ''Layout:'' the story river and sidebar automatically make room for the minimap, including in the vanilla theme's ''fluid-fixed'' sidebar layout. The top-right bar's buttons are shifted left by the minimap width so they stay clear of it (the menubar is left untouched).
+
+! Settings
+
+Go to $:/ControlPanel → ''Settings'' → ''Minimap'':
+
+|!Setting |!Description |
+|''Show minimap'' |Toggle the minimap on or off (same as the grip handle). |
+|''Width'' |The minimap width in pixels, from 60 to 320. The story river and sidebar make room for it automatically. |
+|''Border'' |Border drawn around each tiddler in the minimap, for visibility: None, Subtle, Distinct or Strong. |
+|''Show tooltips'' |Show each tiddler's title on hover in the minimap. |
+
+! Configuration tiddlers
+
+The settings above are stored in these tiddlers (handy if you want to set them in a configuration plugin or via filters):
+
+|!Tiddler |!Default |!Description |
+|`$:/config/BurningTreeC/minimap/enabled` |`yes` |Whether the minimap is shown. |
+|`$:/config/BurningTreeC/minimap/width` |`120` |The minimap width in pixels (bare number; the `px` is added where needed). Set it with the ''Width'' slider in the settings. Single source of truth — also published as the `--tv-minimap-width` CSS variable. |
+|`$:/config/BurningTreeC/minimap/block-border` |`1` |On-screen border width in px around each tiddler (`0` disables). |
+|`$:/config/BurningTreeC/minimap/tooltips` |`no` |Whether to show tiddler-title tooltips. |
+
+! The `<$minimap>` widget
+
+To build your own minimap of some other scrollable area, use the widget directly. Its height and placement are left to CSS — give its parent a height (e.g. place it in a fixed-height column).
+
+```
+<$minimap
+	container=".tc-story-river"
+	scroller="html"
+	selector=":scope > .tc-tiddler-frame"
+	width="120"
+	mode="clone"
+/>
+```
+
+!! Attributes
+
+|!Attribute |!Description |
+|`container` |CSS selector for the element whose content is mapped. When omitted, the nearest scrollable ancestor of the widget is used. |
+|`scroller` |CSS selector for the element that actually scrolls. Defaults to the container. Use this when the container itself does not scroll but an ancestor does (e.g. the story river scrolls with the page: `scroller="html"`). |
+|`selector` |CSS selector (resolved within the container) for the elements that make up the map. Defaults to the container's element children. |
+|`width` |Minimap width in pixels (default `120`). |
+|`mode` |`clone` (default) renders scaled clones of the matched elements; `blocks` renders lightweight coloured rectangles. |
+|`class` |Extra class name(s) added to the minimap panel. |
+|`tooltips` |`yes` to give each mapped block a native tooltip on hover (default `no`). The text is read from the attribute named by `tooltipAttribute`. |
+|`tooltipAttribute` |Attribute on the matched element to read the tooltip text from (default `data-tiddler-title`). Keeps the widget generic — any layout can expose a title this way. |
+|`blockBorder` |On-screen border width in px around each mapped block, for visibility (default `1`; `0` disables). The width is scale-compensated so it stays crisp; set the colour with the `--tv-minimap-block-border-color` CSS property. |
+|`widthVariable` |Name of the CSS custom property to publish the minimap width on `<html>` (default `--tv-minimap-width`). The leading `--` is optional. |
+|`scrollbarVariable` |Name of the CSS custom property to publish the host scroll container's scrollbar width (default `--tv-minimap-scrollbar-width`). The leading `--` is optional. |
+
+!! Behaviour
+
+* The map scales each matched element to fill the minimap width while keeping its aspect ratio, and updates live as elements are added, removed or resized (including text growing as you type in an editor).
+* Same-origin iframes (such as the framed text editor) are snapshotted into the map; cross-origin iframes show a sized placeholder.
+* Dragging the overlay or clicking the map scrolls the container; mouse, touch and pen are all supported.
+
+! Published CSS variables
+
+The plugin sets these custom properties on the document root (`<html>`) so stylesheets can size and position around the minimap:
+
+|!Property |!Description |
+|`--tv-minimap-width` |The minimap width. Always present (kept in sync with the width configuration), even when the minimap is hidden. Rename per-widget with `widthVariable`. |
+|`--tv-minimap-scrollbar-width` |The vertical scrollbar width of the scroll container the minimap is placed inside, so styles - and the grip handle - can offset just clear of that scrollbar. Kept measured at all times (even while the minimap is hidden), since that scrollbar may come and go independently of the minimap. A generic standalone `<$minimap>` with no such tracker publishes and maintains it itself. Rename per-widget with `scrollbarVariable`. |
+|`--tv-menubar-height` |The height of a fixed menubar, if present (set only if no other plugin already provides it). Used to position the minimap below the menubar. |
+|`--tv-minimap-block-border-color` |//Not set by the plugin// — define it yourself to override the colour of the per-tiddler borders. |
+
+The plugin also toggles the `tc-minimap-overlay-scrollbar` class on `<html>` when the page is scrolled by an overlay scrollbar (the page overflows and reserves no scrollbar gutter), which is used to widen the grip handle so it stays grabbable.
