@@ -65,8 +65,9 @@ ScrollStability.prototype.setupStability = function() {
 	if(!win || !win.ResizeObserver || !win.MutationObserver || !this.targetSelector) { return; }
 	var self = this;
 	this.stableWin = win;
-	this.anchor = null;          // {el, edge:"top", pos} | {node, offset, pos} (text line)
+	this.anchor = null;          // {el, edge:"top"|"bottom", pos} | {node, offset, pos} (text line)
 	this.recordTimer = null;
+	this.suppressRecordUntil = 0;   // ignore scroll echoes from our own restore until this time
 	this.lastChildMutation = 0;
 	this.lastW = undefined;
 	this.lastH = undefined;
@@ -135,22 +136,28 @@ ScrollStability.prototype.refLine = function(scroller) {
 	return scroller.isDoc ? 0 : scroller.el.getBoundingClientRect().top;
 };
 
-// Keep stable the TOP of the target nearest the top of the viewport.
+// Pin whatever is at the top of the viewport — the reading edge. The reference line is that edge, so
+// the thing it lands on is the reading position, and we choose the anchor by where the line falls, in
+// strict priority:
 //
-// PREFERRED — pin a target's own top: the topmost target whose top edge is VISIBLE (at or below the
-// reference line, and above the viewport bottom). That is the tiddler the reader scrolled to; in
-// document order (= visual top→bottom) the first such target is the one nearest the top viewport
-// edge. Holding its top fixed means a width-reflow of everything above it (the whole story river
-// rewrapping) cannot move it — so a tiddler you scrolled into view stays put. This is preferred over
-// the text anchor below: when a frame boundary is on screen, the boundary is the thing to keep.
+// 1. INSIDE a target (the line straddles it: the target's top has scrolled off above, its body spans
+//    the line) → pin the exact TEXT CHARACTER at the line. This is the true reading position and wins
+//    over everything below, because a later target whose top happens to be visible lower in the
+//    viewport is NOT what the reader is looking at. Descend to the deepest node at the line and, when
+//    it is a text node, pin the character on the wrapped line straddling the line — a character keeps
+//    its identity through a width-reflow (a wrapped line is not an element, but a character is), so the
+//    reading position itself stays put. (Falls back to the deepest element's / the target's own top for
+//    a non-text block.)
 //
-// FALLBACK — pin the text line: when NO target top is visible the reference line is INSIDE a target
-// whose top has scrolled off above the viewport (a tall tiddler filling the top). Descend to the
-// deepest node at the line and, when it is a text node, pin the exact CHARACTER on the wrapped line
-// straddling the line — a character keeps its identity through a reflow (a wrapped line is not an
-// element, but a character is), so the reading position itself stays put. (Falls back to the deepest
-// element's / the tiddler's own top for a non-text block.) The pinned value is a RAW viewport
-// position; restoreAnchor holds it fixed.
+// 2. No target straddles the line (it sits in a gap between targets, or above the first target) → pin
+//    the TOP of the first target whose top is visible at/below the line. That is the boundary the
+//    reader scrolled to; holding its top fixed keeps it put through a reflow above it.
+//
+// 3. LAST RESORT — the line is below the bottom of the last target (scrolled past the end, into the
+//    tail/below-story area) → pin the BOTTOM of the last target, so the end of the river stays put
+//    across a height change. Bottom is only ever used here.
+//
+// The pinned value is a RAW viewport position; restoreAnchor holds it fixed.
 ScrollStability.prototype.recordAnchor = function() {
 	this.recordTimer = null;
 	var node = this.domNode;
@@ -161,38 +168,52 @@ ScrollStability.prototype.recordAnchor = function() {
 	var targets;
 	try { targets = node.querySelectorAll(this.targetSelector); } catch(e) { this.anchor = null; return; }
 
-	// Walk targets top→bottom. PREFER the first whose top edge is visible at/below the reference line
-	// (pin that top). While scanning past the targets above the line, remember the one that STRADDLES
-	// it (top above, box still spanning the line) for the fallback if no visible top turns up.
-	var straddling = null;
+	// Single pass, document order (= visual top→bottom), gathering what each tier needs.
+	var straddling = null,       // a target the line falls INSIDE (top above the line, box spanning it)
+		firstVisibleTop = null,  // first target whose top is visible at/below the line and in the viewport
+		lastTarget = null, lastRect = null;   // last laid-out target, for the bottom last-resort
 	for(var i = 0; i < targets.length; i++) {
 		var r = targets[i].getBoundingClientRect();
 		if(r.height <= 0) { continue; }
-		if(r.top >= line - 0.5) {                  // top is at/below the reference line
-			if(r.top < vpBottom) {                 // …and within the viewport → pin this tiddler's top
-				this.anchor = {el: targets[i], edge: "top", pos: r.top};
-				return;
-			}
-			break;                                 // first top already below the viewport → none qualifies
+		lastTarget = targets[i]; lastRect = r;
+		if(r.top < line - 0.5) {
+			if(r.bottom > line) { straddling = targets[i]; }       // line falls inside this target
+		} else if(firstVisibleTop === null && r.top < vpBottom) {
+			firstVisibleTop = {el: targets[i], pos: r.top};        // topmost target with a visible top
 		}
-		if(r.bottom > line) { straddling = targets[i]; }   // top above the line but box still spans it
 	}
 
-	// FALLBACK: the line is inside `straddling` (top scrolled off above). Pin the exact text character
-	// at the line; Node.TEXT_NODE === 3.
-	if(!straddling) { this.anchor = null; return; }
-	var deep = this.deepestAtLine(straddling, line);
-	if(deep && deep.nodeType === 3) {
-		var off = this.textOffsetAtLine(deep, line);
-		if(off !== null) {
-			var trect = this.rangeRectAt(deep, off);
-			if(trect) { this.anchor = {node: deep, offset: off, edge: "top", pos: trect.top}; return; }
+	// Tier 1 — reading position inside a target: pin the exact text character at the line.
+	// (Node.TEXT_NODE === 3.)
+	if(straddling) {
+		var deep = this.deepestAtLine(straddling, line);
+		if(deep && deep.nodeType === 3) {
+			var off = this.textOffsetAtLine(deep, line);
+			if(off !== null) {
+				var trect = this.rangeRectAt(deep, off);
+				if(trect) { this.anchor = {node: deep, offset: off, edge: "top", pos: trect.top}; return; }
+			}
+		} else if(deep) {
+			this.anchor = {el: deep, edge: "top", pos: deep.getBoundingClientRect().top};
+			return;
 		}
-	} else if(deep) {
-		this.anchor = {el: deep, edge: "top", pos: deep.getBoundingClientRect().top};
+		this.anchor = {el: straddling, edge: "top", pos: straddling.getBoundingClientRect().top};
 		return;
 	}
-	this.anchor = {el: straddling, edge: "top", pos: straddling.getBoundingClientRect().top};
+
+	// Tier 2 — line in a gap / above the first target: pin the first visible target top.
+	if(firstVisibleTop) {
+		this.anchor = {el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos};
+		return;
+	}
+
+	// Tier 3 — last resort: scrolled past the end (line below the last target) → pin its bottom.
+	if(lastTarget && lastRect.bottom <= line + 0.5) {
+		this.anchor = {el: lastTarget, edge: "bottom", pos: lastRect.bottom};
+		return;
+	}
+
+	this.anchor = null;
 };
 
 // Descend from `root` through the chain of child NODES — elements AND text nodes — whose box
@@ -284,6 +305,11 @@ ScrollStability.prototype.restoreAnchor = function() {
 	var a = this.anchor;
 	if(!a) { return; }
 	var scroller = this.getScroller();
+	// We are about to move scrollTop ourselves; mark a window in which the resulting scroll events must
+	// NOT be mistaken for the user scrolling (which would re-baseline and break a hide↔show round-trip).
+	// Repeated restores during an animated sidebar toggle keep pushing this forward, covering the whole
+	// transition plus the scheduleRecord debounce after it settles.
+	this.suppressRecordUntil = this.now() + 300;
 	// Range anchor (a text offset): re-measure the SAME character's line top and hold it fixed.
 	if(a.node) {
 		if(!a.node.isConnected) { this.recordAnchor(); return; }
@@ -311,7 +337,12 @@ ScrollStability.prototype.scheduleRecord = function() {
 	var self = this, win = this.stableWin;
 	if(!win) { return; }
 	if(this.recordTimer) { win.clearTimeout(this.recordTimer); }
-	this.recordTimer = win.setTimeout(function() { self.recordAnchor(); },150);
+	this.recordTimer = win.setTimeout(function() {
+		self.recordTimer = null;
+		// Swallow scroll echoes from our own restore; only genuine user scrolling re-baselines.
+		if(self.now() < self.suppressRecordUntil) { return; }
+		self.recordAnchor();
+	},150);
 };
 
 // Idempotent teardown of observers and listeners.
