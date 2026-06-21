@@ -4,5 +4,5 @@
 	"description": "Keeps the story river's scroll position stable across resizes",
 	"version": "0.1.0",
 	"list": "readme",
-	"stability": "STABILITY_3_STABLE"
+	"stability": "STABILITY_2_STABLE"
 }
