@@ -2,7 +2,7 @@ title: $:/core/ui/PageTemplate/story
 tags: $:/tags/PageTemplate
 
 \whitespace trim
-<$scroll-stable tag="section" class="tc-story-river" role="main" target-selector=":scope > .tc-tiddler-frame">
+<$story-wrapper tag="section" class="tc-story-river" role="main">
 
 <section class="story-backdrop">
 
@@ -26,4 +26,4 @@ tags: $:/tags/PageTemplate
 
 </section>
 
-</$scroll-stable>
+</$story-wrapper>
