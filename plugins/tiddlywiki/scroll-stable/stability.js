@@ -130,31 +130,48 @@ ScrollStability.prototype.getScroller = function() {
 	return {el: se, isDoc: true};
 };
 
-// Top of the visible area, used only to PICK the anchor target: the top viewport edge (0) for the
-// document, or the inner scroller's own top.
+// The reading edge — the viewport position used to PICK the anchor target. For the document this is
+// the top viewport edge, pushed down by the height of any position:fixed toolbar flagged with
+// `.tc-adjust-top-of-scroll`: that is exactly the offset core subtracts when it scrolls a tiddler to
+// the "top" (utils/dom/scroller.js), so a tiddler scrolled to the top sits at this line, not at 0.
+// When no such toolbar is present the offset is 0. For an inner scroller it is the scroller's own top.
 ScrollStability.prototype.refLine = function(scroller) {
-	return scroller.isDoc ? 0 : scroller.el.getBoundingClientRect().top;
+	if(!scroller.isDoc) { return scroller.el.getBoundingClientRect().top; }
+	var toolbar = this.document.querySelector(".tc-adjust-top-of-scroll");
+	return toolbar ? toolbar.offsetHeight : 0;
+};
+
+// Bottom of the visible area, used to tell whether a target's top is on screen.
+ScrollStability.prototype.vpBottom = function(scroller) {
+	if(scroller.isDoc) {
+		var doc = this.document;
+		return doc.documentElement.clientHeight || this.stableWin.innerHeight;
+	}
+	var r = scroller.el.getBoundingClientRect();
+	return r.top + scroller.el.clientHeight;
 };
 
 // Pin whatever is at the top of the viewport — the reading edge. The reference line is that edge, so
-// the thing it lands on is the reading position, and we choose the anchor by where the line falls, in
-// strict priority:
+// the thing it lands on is the reading position. We choose the anchor by where the line falls, in
+// strict priority. The crux is that a target TOP coinciding with the line is a clean frame boundary
+// and the most stable anchor of all, so it must outrank a straddle of the target above it; but a
+// straddle must still outrank a target top that is FAR BELOW the line (a later tiddler the reader is
+// not looking at):
 //
-// 1. INSIDE a target (the line straddles it: the target's top has scrolled off above, its body spans
-//    the line) → pin the exact TEXT CHARACTER at the line. This is the true reading position and wins
-//    over everything below, because a later target whose top happens to be visible lower in the
-//    viewport is NOT what the reader is looking at. Descend to the deepest node at the line and, when
-//    it is a text node, pin the character on the wrapped line straddling the line — a character keeps
-//    its identity through a width-reflow (a wrapped line is not an element, but a character is), so the
-//    reading position itself stays put. (Falls back to the deepest element's / the target's own top for
-//    a non-text block.)
+// 1. BOUNDARY — a target's top sits essentially AT the line. Pin that top. An element edge is immune
+//    to the tiddler's own reflow, and this beats a sub-pixel straddle of the target above (otherwise a
+//    tiddler sitting on top drifts on resize).
 //
-// 2. No target straddles the line (it sits in a gap between targets, or above the first target) → pin
-//    the TOP of the first target whose top is visible at/below the line. That is the boundary the
-//    reader scrolled to; holding its top fixed keeps it put through a reflow above it.
+// 2. INSIDE — the line is genuinely in the MIDDLE of a target whose top scrolled off above. Pin the
+//    exact TEXT CHARACTER at the line: a character keeps its identity through a width-reflow (a wrapped
+//    line is not an element, but a character is), so the reading position itself stays put. (Falls back
+//    to the deepest element's / the target's own top for a non-text block.)
 //
-// 3. LAST RESORT — the line is below the bottom of the last target (scrolled past the end, into the
-//    tail/below-story area) → pin the BOTTOM of the last target, so the end of the river stays put
+// 3. GAP — no straddle, and the nearest target top is BELOW the line (the line sits in a gap above it).
+//    Pin that top.
+//
+// 4. LAST RESORT — the line is below the bottom of the last target (scrolled past the end, into the
+//    tail/below-story area). Pin the BOTTOM of the last target, so the end of the river stays put
 //    across a height change. Bottom is only ever used here.
 //
 // The pinned value is a RAW viewport position; restoreAnchor holds it fixed.
@@ -162,28 +179,36 @@ ScrollStability.prototype.recordAnchor = function() {
 	this.recordTimer = null;
 	var node = this.domNode;
 	if(!node || !node.isConnected || !this.targetSelector) { this.anchor = null; return; }
-	var win = this.stableWin, doc = this.document;
-	var scroller = this.getScroller(), line = this.refLine(scroller);
-	var vpBottom = line + (scroller.isDoc ? (doc.documentElement.clientHeight || win.innerHeight) : scroller.el.clientHeight);
+	var scroller = this.getScroller(), line = this.refLine(scroller), vpBottom = this.vpBottom(scroller);
 	var targets;
 	try { targets = node.querySelectorAll(this.targetSelector); } catch(e) { this.anchor = null; return; }
 
-	// Single pass, document order (= visual top→bottom), gathering what each tier needs.
-	var straddling = null,       // a target the line falls INSIDE (top above the line, box spanning it)
-		firstVisibleTop = null,  // first target whose top is visible at/below the line and in the viewport
+	// Single pass, document order (= visual top→bottom), gathering what each tier needs. EDGE is the
+	// tolerance (≈1px) for treating a target edge as coinciding with the reading line, so sub-pixel
+	// layout rounding at a frame boundary can't flip the decision.
+	var EDGE = 1;
+	var straddling = null,       // a target the line falls CLEARLY inside (top above, bottom well below)
+		firstVisibleTop = null,  // first target whose top is at/below the line and within the viewport
 		lastTarget = null, lastRect = null;   // last laid-out target, for the bottom last-resort
 	for(var i = 0; i < targets.length; i++) {
 		var r = targets[i].getBoundingClientRect();
 		if(r.height <= 0) { continue; }
 		lastTarget = targets[i]; lastRect = r;
 		if(r.top < line - 0.5) {
-			if(r.bottom > line) { straddling = targets[i]; }       // line falls inside this target
+			if(r.bottom > line + EDGE) { straddling = targets[i]; }   // line clearly inside this target
 		} else if(firstVisibleTop === null && r.top < vpBottom) {
-			firstVisibleTop = {el: targets[i], pos: r.top};        // topmost target with a visible top
+			firstVisibleTop = {el: targets[i], pos: r.top};           // topmost target with a visible top
 		}
 	}
 
-	// Tier 1 — reading position inside a target: pin the exact text character at the line.
+	// Tier 1 — BOUNDARY: a target top sits essentially at the line. Pin it; this outranks a sub-pixel
+	// straddle of the target above (the on-top-tiddler case).
+	if(firstVisibleTop && firstVisibleTop.pos <= line + EDGE) {
+		this.anchor = {el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos};
+		return;
+	}
+
+	// Tier 2 — INSIDE: the line is in the middle of a straddling target → pin the exact text character.
 	// (Node.TEXT_NODE === 3.)
 	if(straddling) {
 		var deep = this.deepestAtLine(straddling, line);
@@ -201,13 +226,13 @@ ScrollStability.prototype.recordAnchor = function() {
 		return;
 	}
 
-	// Tier 2 — line in a gap / above the first target: pin the first visible target top.
+	// Tier 3 — GAP: the nearest target top is below the line (line sits in a gap above it) → pin it.
 	if(firstVisibleTop) {
 		this.anchor = {el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos};
 		return;
 	}
 
-	// Tier 3 — last resort: scrolled past the end (line below the last target) → pin its bottom.
+	// Tier 4 — LAST RESORT: scrolled past the end (line below the last target) → pin its bottom.
 	if(lastTarget && lastRect.bottom <= line + 0.5) {
 		this.anchor = {el: lastTarget, edge: "bottom", pos: lastRect.bottom};
 		return;
