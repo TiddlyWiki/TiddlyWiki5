@@ -1,0 +1,35 @@
+title: $:/changenotes/5.4.1/#9836
+description: Add `<$story-wrapper>` widget and `scroll-stable` plugin
+tags: $:/tags/ChangeNote
+release: 5.4.1
+change-type: feature
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9884
+github-contributors: BurningTreeC
+
+! Stable scrolling for the story river
+
+!! New `<$story-wrapper>` widget
+
+The story river is now rendered inside a new core `<$story-wrapper>` widget. It is a generic container — it creates a DOM element, passes through `class`, `role`, `style.*` and any other attribute, and renders its children — with the same tag-safety and namespace handling as the `<$element>` widget. Its purpose is to act as an ''extension point'': other plugins can attach behaviour to the story river without modifying core.
+
+!! New "Scroll Stable" plugin ([[$:/plugins/tiddlywiki/scroll-stable]])
+
+An optional plugin that keeps your reading position fixed when the story river is resized — most noticeably when ''showing or hiding the sidebar'', which changes the river's width (and so reflows every tiddler). Previously this could jump the text you were reading off-screen; now the line at the top of the viewport stays put across the resize, and toggling the sidebar back and forth returns you exactly where you started.
+
+It handles the natural edge cases:
+
+* A tiddler scrolled to the top stays pinned to the top.
+* When you're partway through a long tiddler, the exact line you're reading is held in place.
+* If a fixed toolbar is present (anything flagged `tc-adjust-top-of-scroll`), the "top" is measured below it, matching where TiddlyWiki scrolls navigated tiddlers.
+* At the very end of the river, the end stays put.
+
+''Configuration:'' the elements kept stable are chosen by a CSS selector in [[$:/config/plugins/tiddlywiki/scroll-stable/target-selector]], defaulting to the story river's tiddler frames (`:scope > .tc-tiddler-frame`).
+
+The plugin is ''opt-in'' — install it to enable stable scrolling; without it the story river behaves exactly as before.
+
+!! For plugin developers
+
+`<$story-wrapper>` fires the `th-story-wrapper-dom` hook `(domNode, widget)` once its node is created and its children are laid in (mirroring `element.js`'s `th-dom-rendering-element`). A handler can tweak the node directly, or register a long-lived ''behaviour'' via `widget.registerBehaviour(behaviour)` — a plain object with optional `refresh(changedTiddlers)` and `destroy()` methods whose lifecycle the widget drives.
+
+Because hooks run every registered handler and the widget passes itself to the hook, ''any number of plugins can attach to the same wrapper and all keep working'', and ''each story-wrapper instance gets its own independent set of behaviours''. The Scroll Stable plugin is itself just a consumer of this hook.
