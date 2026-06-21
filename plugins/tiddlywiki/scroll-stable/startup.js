@@ -14,7 +14,9 @@ same wrapper.
 
 exports.name = "scroll-stable";
 exports.platforms = ["browser"];
-exports.after = ["render"];
+// Must register the hook BEFORE the initial page render, or the story-wrapper will already have
+// fired th-story-wrapper-dom with no handler attached (it renders once and only refreshes after).
+exports.before = ["render"];
 exports.synchronous = true;
 
 var ScrollStability = require("$:/plugins/tiddlywiki/scroll-stable/stability.js").ScrollStability;
