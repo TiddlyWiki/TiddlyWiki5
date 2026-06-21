@@ -1,0 +1,40 @@
+title: Button/ValidValues/SetTitleValidState
+description: Button validValues with setTitle — valid state highlights correct button
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Narrative
+
+This test verifies that `validValues` does not interfere with normal operation when using `setTitle`. The state tiddler text is `OptionB`, which is in `validValues`, so button ''B'' should be highlighted with a red background.
++
+title: $:/state/test-btn
+text: OptionB
++
+title: Output
+
+\whitespace trim
+
+<style>
+.selected { background-color: red; color: white; }
+</style>
+
+<$button setTitle="$:/state/test-btn"
+	setTo="OptionA"
+	default="OptionA"
+	validValues="OptionA OptionB"
+	selectedClass="selected"
+>
+	A
+</$button>
+<$button setTitle="$:/state/test-btn"
+	setTo="OptionB"
+	default="OptionA"
+	validValues="OptionA OptionB"
+	selectedClass="selected"
+>
+	B
+</$button>
++
+title: ExpectedResult
+
+<p><style>.selected { background-color: red; color: white; }</style></p><p><button aria-checked="false" class="">A</button><button aria-checked="true" class=" selected">B</button></p>

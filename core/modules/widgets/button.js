@@ -151,10 +151,30 @@ ButtonWidget.prototype.getBoundingClientRect = function() {
 };
 
 ButtonWidget.prototype.isSelected = function() {
-	return this.setTitle ? (this.setField ? this.wiki.getTiddler(this.setTitle).getFieldString(this.setField) === this.setTo :
-		(this.setIndex ? this.wiki.extractTiddlerDataItem(this.setTitle,this.setIndex) === this.setTo :
-			this.wiki.getTiddlerText(this.setTitle))) || this.defaultSetValue || this.getVariable("currentTiddler") :
-		this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler")) === this.setTo;
+	var currentValue;
+	if(this.setTitle) {
+		if(this.setField) {
+			var tiddler = this.wiki.getTiddler(this.setTitle);
+			currentValue = tiddler ? tiddler.getFieldString(this.setField) : undefined;
+		} else if(this.setIndex) {
+			currentValue = this.wiki.extractTiddlerDataItem(this.setTitle,this.setIndex);
+		} else {
+			currentValue = this.wiki.getTiddlerText(this.setTitle);
+		}
+		if(!currentValue) {
+			currentValue = this.defaultSetValue || this.getVariable("currentTiddler");
+		}
+	} else {
+		currentValue = this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler"));
+	}
+	// If validValues is specified, fall back to default when current value doesn't match any valid value
+	if(this.validValues && currentValue !== this.defaultSetValue) {
+		var validValuesList = this.wiki.filterTiddlers(this.validValues,this);
+		if(validValuesList.indexOf(currentValue) === -1) {
+			currentValue = this.defaultSetValue;
+		}
+	}
+	return currentValue === this.setTo;
 };
 
 ButtonWidget.prototype.isPoppedUp = function() {
@@ -240,6 +260,7 @@ ButtonWidget.prototype.execute = function() {
 	this.popupAbsCoords = this.getAttribute("popupAbsCoords", "no");
 	this.tabIndex = this.getAttribute("tabindex");
 	this.isDisabled = this.getAttribute("disabled","no");
+	this.validValues = this.getAttribute("validValues");
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -267,7 +288,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tooltip || changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
+	if(changedAttributes.tooltip || changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.setTitle && changedTiddlers[this.setTitle]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"] || changedAttributes.validValues) {
 		this.refreshSelf();
 		return true;
 	} else {

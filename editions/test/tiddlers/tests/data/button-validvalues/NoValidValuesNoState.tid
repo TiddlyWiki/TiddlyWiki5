@@ -1,0 +1,35 @@
+title: Button/ValidValues/NoValidValuesNoState
+description: Button without validValues and missing state — default button selected
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Narrative
+
+This test documents the baseline default behaviour without `validValues`. The state tiddler does not exist, so the button widget falls back to the `default` value (`OptionB`). Button ''B'' should be highlighted with a red background. This is existing behaviour that must not change when `validValues` is added to the widget.
++
+title: Output
+
+\whitespace trim
+
+<style>
+.selected { background-color: red; color: white; }
+</style>
+
+<$button set="$:/state/test-btn"
+	setTo="OptionA"
+	default="OptionB"
+	selectedClass="selected"
+>
+	A
+</$button>
+<$button set="$:/state/test-btn"
+	setTo="OptionB"
+	default="OptionB"
+	selectedClass="selected"
+>
+	B
+</$button>
++
+title: ExpectedResult
+
+<p><style>.selected { background-color: red; color: white; }</style></p><p><button aria-checked="false" class="">A</button><button aria-checked="true" class=" selected">B</button></p>
