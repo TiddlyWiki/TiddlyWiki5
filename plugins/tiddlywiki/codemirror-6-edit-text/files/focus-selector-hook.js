@@ -34,9 +34,11 @@ exports.startup = function() {
 				return originalHandler.call(this, event);
 			}
 
-			// If found and it's a native input, use it
+			// If found and it's a native input, use it. Forward event.paramObject
+			// to focus() so options like preventScroll="true" are honoured, matching
+			// core's tm-focus-selector handler (rootwidget.js: element.focus(event.paramObject)).
 			if(element && element.tagName === "INPUT") {
-				element.focus();
+				element.focus(event.paramObject);
 				return true;
 			}
 
@@ -47,8 +49,9 @@ exports.startup = function() {
 				try {
 					var cmElement = document.querySelector(cmSelector);
 					if(cmElement) {
-						// Focus the CodeMirror content element
-						cmElement.focus();
+						// Focus the CodeMirror content element, forwarding options
+						// (e.g. preventScroll) from the message's paramObject.
+						cmElement.focus(event.paramObject);
 						return true;
 					}
 				} catch (e) {
@@ -56,9 +59,10 @@ exports.startup = function() {
 				}
 			}
 
-			// If we found the original element (not an input), focus it
+			// If we found the original element (not an input), focus it,
+			// forwarding options (e.g. preventScroll) from the message's paramObject.
 			if(element) {
-				element.focus();
+				element.focus(event.paramObject);
 				return true;
 			}
 		}
