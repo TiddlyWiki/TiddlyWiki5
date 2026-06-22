@@ -29,6 +29,34 @@ var selfClosingWidgets = new Set([
 	"$raw", "$text"
 ]);
 
+// Find where the closing tag should go when there is already a block of text
+// following the opening tag. Returns the document position at the end of that
+// block (the run of non-blank lines, stopping before a blank line or a
+// structural closer), or -1 when there is no following body text on this block.
+function findBlockTextEnd(doc, startPos) {
+	var startLine = doc.lineAt(startPos);
+	var lastContentEnd = -1;
+	var totalLines = doc.lines;
+	for(var n = startLine.number; n <= totalLines; n++) {
+		var line = doc.line(n);
+		if(n === startLine.number) {
+			// The start line holds the opening tag and is always part of the block;
+			// only count it as body text if there is content after the cursor.
+			if(doc.sliceString(startPos, line.to).trim() !== "") {
+				lastContentEnd = line.to;
+			}
+			continue;
+		}
+		var trimmed = line.text.trim();
+		// A blank line ends the wikitext block
+		if(trimmed === "") break;
+		// A structural closer (closing tag, conditional branch/end, \end) ends the block
+		if(/^(<\/|<%\s*(?:end|else|elseif|endif)|\\end\b)/.test(trimmed)) break;
+		lastContentEnd = line.to;
+	}
+	return lastContentEnd;
+}
+
 exports.plugin = {
 	name: "auto-close-tags",
 	description: "Auto-close HTML and TiddlyWiki widget tags",
@@ -424,13 +452,29 @@ exports.plugin = {
 				}
 			});
 
-			// Insert > and optionally the closing tag (if not already balanced)
-			var insertText = hasBalancedClose ? ">" : (">" + closingTag);
-			var changes = {
-				from: from,
-				to: to,
-				insert: insertText
-			};
+			// If a matching closing tag already exists, just insert ">"
+			if(hasBalancedClose) {
+				view.dispatch({
+					changes: {from: from, to: to, insert: ">"},
+					selection: EditorSelection.cursor(from + 1), // Position after >
+					userEvent: "input.complete"
+				});
+				return true;
+			}
+
+			// If a block of text follows the opening tag, close it after that block
+			// instead of immediately at the cursor (wrap the following block).
+			var blockEnd = findBlockTextEnd(doc, to);
+			var changes;
+			if(blockEnd > to) {
+				changes = [
+					{from: from, to: to, insert: ">"},
+					{from: blockEnd, insert: closingTag}
+				];
+			} else {
+				// No following block text - insert the closing tag right at the cursor
+				changes = {from: from, to: to, insert: ">" + closingTag};
+			}
 
 			view.dispatch({
 				changes: changes,
