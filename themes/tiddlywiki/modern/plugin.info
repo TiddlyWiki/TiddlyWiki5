@@ -1,0 +1,8 @@
+{
+	"title": "$:/themes/tiddlywiki/modern",
+	"name": "Modern",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "Peps up the story river and sidebar"
+}
