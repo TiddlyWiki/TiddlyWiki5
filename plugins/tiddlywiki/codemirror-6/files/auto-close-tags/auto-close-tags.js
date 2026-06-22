@@ -265,7 +265,10 @@ exports.plugin = {
 
 					if(!hasClosingMark && widgetNameNode) {
 						tagNode = current;
-						tagName = doc.sliceString(widgetNameNode.from, widgetNameNode.to);
+						// Clamp the name to the cursor: when the opening tag is immediately
+						// followed by text (e.g. "<$widgetThis is text"), the parser glues the
+						// following text onto the name. The intended name ends at the cursor.
+						tagName = doc.sliceString(widgetNameNode.from, Math.min(widgetNameNode.to, from));
 						isWidget = true;
 						break;
 					}
@@ -293,7 +296,10 @@ exports.plugin = {
 
 					if(!hasClosingMark && tagNameNode) {
 						tagNode = current;
-						tagName = doc.sliceString(tagNameNode.from, tagNameNode.to);
+						// Clamp the name to the cursor: when the opening tag is immediately
+						// followed by text (e.g. "<divThis is text"), the parser glues the
+						// following text onto the name. The intended name ends at the cursor.
+						tagName = doc.sliceString(tagNameNode.from, Math.min(tagNameNode.to, from));
 						isWidget = false;
 						break;
 					}
@@ -467,9 +473,24 @@ exports.plugin = {
 			var blockEnd = findBlockTextEnd(doc, to);
 			var changes;
 			if(blockEnd > to) {
+				var startLine = doc.lineAt(to);
+				// Is there content right after the cursor on the opening tag's line?
+				var inlineOpener = doc.sliceString(to, startLine.to).trim() !== "";
+				var closeInsert;
+				if(inlineOpener) {
+					// Opening tag is inline with text: keep the close inline at the block end
+					// e.g. "<div>This is text</div>"
+					closeInsert = closingTag;
+				} else {
+					// Opening tag is alone on its line and the body is on following lines:
+					// put the closing tag on its own new line, aligned with the opener
+					// e.g. "<div>\nThis is text\n</div>"
+					var openerIndent = /^[ \t]*/.exec(startLine.text)[0];
+					closeInsert = state.lineBreak + openerIndent + closingTag;
+				}
 				changes = [
 					{from: from, to: to, insert: ">"},
-					{from: blockEnd, insert: closingTag}
+					{from: blockEnd, insert: closeInsert}
 				];
 			} else {
 				// No following block text - insert the closing tag right at the cursor
