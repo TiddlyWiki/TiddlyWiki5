@@ -29,30 +29,59 @@ var selfClosingWidgets = new Set([
 	"$raw", "$text"
 ]);
 
-// Find where the closing tag should go when there is already a block of text
-// following the opening tag. Returns the document position at the end of that
-// block (the run of non-blank lines, stopping before a blank line or a
-// structural closer), or -1 when there is no following body text on this block.
+// Matches an HTML/widget tag, a conditional/case marker, or a \end terminator.
+var AUTO_CLOSE_TOKEN_RE = /<\/?[$a-zA-Z][^>]*>|<%\s*(if|elseif|else|endif|end)\b[^%]*?%>|\\end\b/g;
+
+// Find where the closing tag should go when a block of text follows the opening
+// tag. Returns the document position at which to insert the closer, or -1 when
+// there is no following body text. The scan is depth-aware so the result never
+// crosses an enclosing element's closing tag (the inserted close stays
+// balanced), e.g. for "<span><div>text</span>" the close goes before </span>.
 function findBlockTextEnd(doc, startPos) {
 	var startLine = doc.lineAt(startPos);
-	var lastContentEnd = -1;
 	var totalLines = doc.lines;
+	var depth = 0;
+	var lastContentEnd = -1;
 	for(var n = startLine.number; n <= totalLines; n++) {
 		var line = doc.line(n);
-		if(n === startLine.number) {
-			// The start line holds the opening tag and is always part of the block;
-			// only count it as body text if there is content after the cursor.
-			if(doc.sliceString(startPos, line.to).trim() !== "") {
-				lastContentEnd = line.to;
-			}
-			continue;
-		}
-		var trimmed = line.text.trim();
+		var isFirst = n === startLine.number;
+		var segStart = isFirst ? startPos : line.from;
+		var text = isFirst ? doc.sliceString(startPos, line.to) : line.text;
 		// A blank line ends the wikitext block
-		if(trimmed === "") break;
-		// A structural closer (closing tag, conditional branch/end, \end) ends the block
-		if(/^(<\/|<%\s*(?:end|else|elseif|endif)|\\end\b)/.test(trimmed)) break;
-		lastContentEnd = line.to;
+		if(!isFirst && text.trim() === "") break;
+		AUTO_CLOSE_TOKEN_RE.lastIndex = 0;
+		var m;
+		while((m = AUTO_CLOSE_TOKEN_RE.exec(text))) {
+			var tok = m[0];
+			var absPos = segStart + m.index;
+			if(tok.charCodeAt(0) === 60 && tok.charCodeAt(1) === 47) {
+				// HTML/widget closing tag
+				if(depth === 0) {
+					return doc.sliceString(segStart, absPos).trim() !== "" ? absPos : lastContentEnd;
+				}
+				depth--;
+			} else if(tok.charCodeAt(0) === 60 && tok.charCodeAt(1) === 37) {
+				// Conditional/case marker
+				var kw = m[1];
+				if(kw === "if") {
+					depth++;
+				} else if(depth === 0) {
+					return doc.sliceString(segStart, absPos).trim() !== "" ? absPos : lastContentEnd;
+				} else if(kw === "endif" || kw === "end") {
+					depth--;
+				}
+			} else if(tok.charCodeAt(0) === 92) {
+				// \end pragma terminator
+				if(depth === 0) {
+					return doc.sliceString(segStart, absPos).trim() !== "" ? absPos : lastContentEnd;
+				}
+				depth--;
+			} else {
+				// HTML/widget opening tag; ignore self-closing (<tag/>)
+				if(!/\/\s*>$/.test(tok)) depth++;
+			}
+		}
+		if(text.trim() !== "") lastContentEnd = line.to;
 	}
 	return lastContentEnd;
 }
