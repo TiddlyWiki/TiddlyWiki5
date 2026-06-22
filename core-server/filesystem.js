@@ -238,6 +238,10 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 			// Save as a .tid file
 			fileInfo.type = "application/x-tiddler";
 			fileInfo.hasMetaFile = false;
+		} else if($tw.Wiki.tiddlerSerializerModules && $tw.Wiki.tiddlerSerializerModules[tiddlerType]) {
+			// A serializer is registered for this content type - save as a single self-contained file
+			fileInfo.type = tiddlerType;
+			fileInfo.hasMetaFile = false;
 		} else {
 			// Save as a text/binary file and a .meta file
 			fileInfo.type = tiddlerType;
@@ -416,7 +420,16 @@ Save a tiddler to a file described by the fileInfo:
 */
 exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
-	if(fileInfo.hasMetaFile) {
+	var serializer = $tw.Wiki.tiddlerSerializerModules && $tw.Wiki.tiddlerSerializerModules[fileInfo.type];
+	if(serializer && !fileInfo.hasMetaFile && fileInfo.type !== "application/x-tiddler" && fileInfo.type !== "application/json") {
+		var typeInfo = $tw.config.contentTypeInfo[fileInfo.type] || {encoding: "utf8"};
+		fs.writeFile(fileInfo.filepath,serializer(tiddler),typeInfo.encoding,function(err) {
+			if(err) {
+				return callback(err);
+			}
+			return callback(null,fileInfo);
+		});
+	} else if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
 		fs.writeFile(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding,function(err) {
@@ -458,7 +471,11 @@ Save a tiddler to a file described by the fileInfo:
 */
 exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
-	if(fileInfo.hasMetaFile) {
+	var serializer = $tw.Wiki.tiddlerSerializerModules && $tw.Wiki.tiddlerSerializerModules[fileInfo.type];
+	if(serializer && !fileInfo.hasMetaFile && fileInfo.type !== "application/x-tiddler" && fileInfo.type !== "application/json") {
+		var typeInfo = $tw.config.contentTypeInfo[fileInfo.type] || {encoding: "utf8"};
+		fs.writeFileSync(fileInfo.filepath,serializer(tiddler),typeInfo.encoding);
+	} else if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
 		fs.writeFileSync(fileInfo.filepath,tiddler.fields.text || "",typeInfo.encoding);
