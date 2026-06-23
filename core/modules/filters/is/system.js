@@ -13,6 +13,14 @@ Filter function for [is[system]]
 Export our filter function
 */
 exports.system = function(source,prefix,options) {
+	// Fast path: when iterating all tiddlers, use pre-partitioned arrays
+	if(source === options.wiki.each) {
+		if(prefix === "!") {
+			return options.wiki.allNonSystemTitles();
+		} else {
+			return options.wiki.allSystemTitles();
+		}
+	}
 	var results = [];
 	if(prefix === "!") {
 		source(function(tiddler,title) {

@@ -1,0 +1,10 @@
+{
+	"description": "Performance measurement edition",
+	"plugins": [
+		"tiddlywiki/performance"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	]
+}
