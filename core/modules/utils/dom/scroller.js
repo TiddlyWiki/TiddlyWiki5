@@ -115,7 +115,18 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 				bounds = getBounds(),
 				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,srcWindow.innerWidth),
 				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,srcWindow.innerHeight);
-			srcWindow.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
+			// Use behavior:"instant" so that this animation's per-frame position
+			// updates are applied immediately and are NOT re-animated by a CSS
+			// `scroll-behavior: smooth` on the scrolling element (which would make
+			// the page lag behind and stutter). The easing here (slowInSlowOut over
+			// `duration`) provides the smoothness; CSS smooth still applies to other
+			// scrolls such as in-document anchor jumps.
+			srcWindow.scrollTo({
+				left: scrollPosition.x + (endX - scrollPosition.x) * t,
+				top: scrollPosition.y + (endY - scrollPosition.y) * t,
+				behavior: "instant"
+				
+			});
 			if(t < 1) {
 				self.idRequestFrame = self.requestAnimationFrame.call(srcWindow,drawFrame);
 			}
