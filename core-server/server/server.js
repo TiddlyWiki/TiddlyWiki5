@@ -370,7 +370,9 @@ Server.prototype.listen = function(port,host,prefix) {
 	if(missing.length > 0) {
 		var error = "Warning: Plugin(s) required for client-server operation are missing.\n"+
 			"\""+ missing.join("\", \"")+"\"";
-		$tw.utils.warning(error);
+		if(this.get("suppress-server-logs") !== "yes") {
+			$tw.utils.warning(error);
+		}
 	}
 	// Create the server
 	var server;
@@ -383,8 +385,10 @@ Server.prototype.listen = function(port,host,prefix) {
 	server.on("listening",function() {
 		var address = server.address(),
 			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix;
-		$tw.utils.log("Serving on " + url,"brown/orange");
-		$tw.utils.log("(press ctrl-C to exit)","red");
+		if(self.get("suppress-server-logs") !== "yes") {
+			$tw.utils.log("Serving on " + url,"brown/orange");
+			$tw.utils.log("(press ctrl-C to exit)","red");
+		}
 	});
 	// Listen
 	return server.listen(port,host);
