@@ -1,0 +1,134 @@
+title: $:/palettes/Mediterranee
+name: Mediterranee
+description: Dark palette inspired by an Adriatic harbour at sunset
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: dark
+
+alert-background: #3a3018
+alert-border: #c8a040
+alert-highlight: #d89040
+alert-muted-foreground: #a08838
+background: #2a3038
+blockquote-bar: <<colour muted-foreground>>
+button-background: transparent
+button-background-hover: rgba(200, 180, 140, 0.1)
+button-foreground: inherit
+button-border:
+code-background: #242830
+code-border: #3a4450
+code-foreground: #c8a040
+diff-delete-background: #3a2020
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background:
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #203828
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background:
+diff-invisible-foreground: <<colour muted-foreground>>
+dirty-indicator: #d89040
+download-background: #5a7868
+download-foreground: <<colour foreground>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: #303840
+dropdown-border: #4a5460
+dropdown-tab-background-selected: <<colour dropdown-background>>
+dropdown-tab-background: #1e2428
+dropzone-background: rgba(90,120,104,0.7)
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: #a0a0b8
+external-link-foreground: #8098b8
+footnote-target-background: #303840
+foreground: #d8d0c0
+highlight-background: #504820
+highlight-foreground: #e8e0d0
+message-background: <<colour background>>
+message-border: <<colour muted-foreground>>
+message-foreground: <<colour foreground>>
+modal-backdrop: <<colour page-background>>
+modal-background: <<colour background>>
+modal-border: #4a5460
+modal-footer-background: <<colour background>>
+modal-footer-border: #3a4450
+modal-header-border: #3a4450
+muted-foreground: #788898
+network-activity-foreground: #5a7868
+notification-background: <<colour dropdown-background>>
+notification-border: <<colour dropdown-background>>
+page-background: #1a2028
+pre-background: #242830
+pre-border: #3a4450
+primary: #c8a040
+selection-background:
+selection-foreground:
+select-tag-background: <<colour background>>
+select-tag-foreground: <<colour foreground>>
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: #c8a040
+sidebar-controls-foreground: #4a5868
+sidebar-foreground-shadow: transparent
+sidebar-foreground: #8898a8
+sidebar-muted-foreground-hover: <<colour foreground>>
+sidebar-muted-foreground: #5a6878
+sidebar-tab-background-selected: <<colour page-background>>
+sidebar-tab-background: transparent
+sidebar-tab-border-selected: #4a5460
+sidebar-tab-border: transparent
+sidebar-tab-divider: #3a4450
+sidebar-tab-foreground-selected: <<colour foreground>>
+sidebar-tab-foreground: #788898
+sidebar-tiddler-link-foreground-hover: #c8a040
+sidebar-tiddler-link-foreground: #8898a8
+site-title-foreground: #c8a040
+stability-stable: #5a7868
+stability-experimental: #c8a040
+stability-deprecated: #d89040
+stability-legacy: #7878a8
+static-alert-foreground: #788898
+tab-background-selected: <<colour background>>
+tab-background: transparent
+tab-border-selected: #4a5460
+tab-border: transparent
+tab-divider: #3a4450
+tab-foreground-selected: <<colour foreground>>
+tab-foreground: #98a8b8
+table-border: #3a4450
+table-footer-background: #242830
+table-header-background: #283038
+tag-background: #5a7868
+tag-foreground: #e8e0d0
+testcase-accent-level-1: #283848
+testcase-accent-level-2: #c8a040
+testcase-accent-level-3: #5a7868
+tiddler-background: <<colour background>>
+tiddler-border: #323a44
+tiddler-controls-foreground-hover: #c8a040
+tiddler-controls-foreground-selected: #c8a040
+tiddler-controls-foreground: #3a4858
+tiddler-editor-background: transparent
+tiddler-editor-border-image:
+tiddler-editor-border: #3a4450
+tiddler-editor-fields-even: rgba(200, 180, 140, 0.05)
+tiddler-editor-fields-odd: rgba(200, 180, 140, 0.02)
+tiddler-info-background: #283038
+tiddler-info-border: #3a4450
+tiddler-info-tab-background: <<colour tiddler-editor-fields-odd>>
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: #5a6878
+tiddler-title-foreground: #e0d8c8
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
+untagged-background: #4a5868
+very-muted-foreground: #687888

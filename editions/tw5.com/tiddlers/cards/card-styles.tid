@@ -56,7 +56,7 @@ type: text/vnd.tiddlywiki
 	min-height: 0;
 	border: none;
 	border-radius: 8px;
-	box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.1);
 	transition: box-shadow 0.3s ease,transform .3s ease;
 }
 
@@ -80,7 +80,7 @@ type: text/vnd.tiddlywiki
 .tc-tiddlylink.tc-card.tc-card-quote {
 	width: 320px;
 	box-shadow: none;
-	background-color: #effdff;
+	background-color: <<colour message-background>>;
 }
 
 .tc-card-accent {
@@ -109,7 +109,7 @@ type: text/vnd.tiddlywiki
 	background: <<colour notification-background>>;
 	text-decoration: none;
 	cursor: pointer;
-	box-shadow: 0 1px 5px 0 #bcbdbd, 0 0 0 1px #d4d4d5;
+	box-shadow: 0 1px 5px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.1);
 	transform: translateY(-3px);
 }
 

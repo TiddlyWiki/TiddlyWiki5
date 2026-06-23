@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "tiddlywiki": {
+      "type": "stdio",
+      "command": "tiddlywiki",
+      "args": [
+        "./editions/tw5.com-server",
+        "--mcp",
+        "readwrite",
+        "label=tw5.com-mcp"
+      ],
+      "alwaysAllow": [
+        "mcp__tiddlywiki__get_tiddler",
+        "mcp__tiddlywiki__list_tiddlers",
+        "mcp__tiddlywiki__run_filter",
+        "mcp__tiddlywiki__render_tiddler",
+        "mcp__tiddlywiki__get_wiki_info"
+      ]
+    }
+  }
+}

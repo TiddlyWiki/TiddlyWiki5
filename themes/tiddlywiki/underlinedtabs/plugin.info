@@ -1,0 +1,10 @@
+{
+	"title": "$:/themes/tiddlywiki/underlinedtabs",
+	"name": "Underlined Tabs",
+	"author": "pmario",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "GitHub-style underlined tabs",
+	"dependents": ["$:/themes/tiddlywiki/snowwhite"],
+	"plugin-priority": "0"
+}
