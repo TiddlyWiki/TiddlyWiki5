@@ -21,20 +21,23 @@ title: RevealWidget (Popup Clamping Example)
 }
 .grid-popup .tc-drop-down {
 	padding: 1em;
-	min-width: 15em;
 }
 </style>
 
-This example demonstrates the use of <<.attr positionAllowNegative>> and <<.attr clamp>> to clamp a popup inside its parent container.
+This example demonstrates the <<.attr clamp>> attribute.
 
-<<.attr clamp>>=<$select tiddler="$:/temp/clamp-demo-active" field="text" default="none">
+`clamp="auto"` (default) keeps the popup inside its //container// by flipping direction first, then shifting to fit.
+The values `right`, `bottom`, `both` shift without flipping (useful when you want a fixed direction). Use `none` to disable all adjustment.
+
+<<.attr clamp>>=<$select tiddler="$:/temp/clamp-demo-active" field="text" default="auto">
+<option value="auto">auto (default)</option>
 <option value="none">none</option>
 <option value="right">right</option>
 <option value="bottom">bottom</option>
 <option value="both">both</option>
 </$select>
 
-<$checkbox tiddler="$:/temp/clamp-demo-allow-negative" field="text" checked="yes" unchecked="no" default="no"> <<.attr positionAllowNegative>></$checkbox>
+<$checkbox tiddler="$:/temp/clamp-demo-allow-negative" field="text" checked="yes" unchecked="no" default="no"> <<.attr positionAllowNegative>> //only applies when clamp is not auto//</$checkbox>
 
 <<.attr position>>=<$select tiddler="$:/temp/clamp-demo-position" field="text" default="below">
 <option value="left">left</option>
@@ -47,6 +50,10 @@ This example demonstrates the use of <<.attr positionAllowNegative>> and <<.attr
 <option value="below">below</option>
 </$select>
 
+tooltip width=<$range tiddler="$:/temp/clamp-demo-width" field="text" min="140" max="420" default="260" increment="10"/> {{$:/temp/clamp-demo-width}}px
+
+tooltip height=<$range tiddler="$:/temp/clamp-demo-height" field="text" min="80" max="260" default="140" increment="10"/> {{$:/temp/clamp-demo-height}}px
+
 <div class="container">
 	<$list filter="[range[25]]">
 		<div class="grid-item">
@@ -57,12 +64,17 @@ This example demonstrates the use of <<.attr positionAllowNegative>> and <<.attr
 	         position={{{ [{$:/temp/clamp-demo-position}else[below]] }}}
 			 state="$:/state/popup-clamping"
 			 class="grid-popup"
-			 clamp={{{ [{$:/temp/clamp-demo-active}else[none]] }}}
+			 clamp={{{ [{$:/temp/clamp-demo-active}else[auto]] }}}
 			 positionAllowNegative={{{ [{$:/temp/clamp-demo-allow-negative}else[no]] }}}>
 		<div class="tc-drop-down">
+		<div style.width={{{ [{$:/temp/clamp-demo-width}else[260]addsuffix[px]] }}}
+			style.height={{{ [{$:/temp/clamp-demo-height}else[140]addsuffix[px]] }}}
+			style.overflow="auto"
+		>
 
 		!! This is the popup
 		And this is some text
+		</div>
 		</div>
 	</$reveal>
 </div>
