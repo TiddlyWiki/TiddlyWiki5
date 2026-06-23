@@ -1,0 +1,112 @@
+title: $:/themes/tiddlywiki/elegant/sidebar
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Sidebar
+*/
+
+.tc-sidebar-header {
+	padding-top: 8px;
+}
+
+/* Masthead: serif title above a hairline lit by a slow, GPU-driven sheen */
+.tc-site-title {
+	font-size: clamp(1.6rem, 1.3rem + 1vw, 2rem);
+	font-weight: 620;
+	letter-spacing: -0.02em;
+	color: <<colour site-title-foreground>>;
+}
+
+.tc-site-title::after {
+	content: "";
+	display: block;
+	height: 1px;
+	width: 100%;
+	margin-top: 0.55rem;
+	background-image: linear-gradient(
+		90deg,
+		var(--e-rule) 0%,
+		var(--e-rule) 38%,
+		var(--e-accent) 50%,
+		var(--e-rule) 62%,
+		var(--e-rule) 100%
+	);
+	background-size: 280% 100%;
+	background-position: 140% 0;
+	will-change: background-position;
+	animation: e-sheen 9s ease-in-out infinite;
+}
+
+@keyframes e-sheen {
+	0%   { background-position: 140% 0; }
+	100% { background-position: -140% 0; }
+}
+
+.tc-site-subtitle {
+	font-family: var(--e-sans);
+	font-size: 0.78rem;
+	letter-spacing: 0.06em;
+	color: var(--e-faint);
+}
+
+/* Sidebar tab buttons: letter-spaced sans, an accent underline when chosen */
+.tc-sidebar-lists .tc-tab-buttons button {
+	font-family: var(--e-sans);
+	font-size: 0.82em;
+	letter-spacing: 0.04em;
+	border-radius: 0;
+	transition: color var(--e-dur) var(--e-ease), box-shadow var(--e-dur) var(--e-ease);
+}
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected {
+	box-shadow: inset 0 -2px 0 var(--e-accent);
+	color: var(--e-accent-deep);
+}
+
+/* Sidebar links: glide a hair on hover toward the accent */
+.tc-sidebar-lists a.tc-tiddlylink,
+.tc-sidebar-lists .tc-tiddlylink {
+	border-radius: var(--e-radius);
+	transition: color var(--e-dur) var(--e-ease), transform var(--e-dur) var(--e-ease-soft);
+}
+.tc-sidebar-lists a.tc-tiddlylink:hover {
+	color: var(--e-accent);
+	transform: translateX(2px);
+}
+
+/* Search: a slim field with a focus underline-glow */
+.tc-sidebar-header .tc-search input,
+.tc-search input {
+	border-radius: var(--e-radius);
+	border: 1px solid var(--e-rule);
+	background: color-mix(in srgb, <<colour foreground>> 3%, transparent);
+	transition: border-color var(--e-dur) var(--e-ease), box-shadow var(--e-dur) var(--e-ease),
+		background-color var(--e-dur) var(--e-ease);
+}
+.tc-sidebar-header .tc-search input:focus,
+.tc-search input:focus {
+	border-color: var(--e-accent);
+	box-shadow: 0 0 0 3px var(--e-wash-strong);
+	background: <<colour background>>;
+}
+
+/* Open-tiddler list rows */
+.tc-sidebar-tab-open-item {
+	border-radius: var(--e-radius);
+	transition: background-color var(--e-fast) var(--e-ease);
+}
+.tc-sidebar-tab-open-item:hover {
+	background: var(--e-wash);
+}
+
+/* Tab divider as a soft hairline */
+.tc-sidebar-lists .tc-tab-set .tc-tab-divider {
+	border: none;
+	height: 1px;
+	background: linear-gradient(to right, var(--e-rule), transparent);
+}
+
+.tc-page-controls {
+	gap: 3px;
+}

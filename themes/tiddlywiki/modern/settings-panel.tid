@@ -1,0 +1,7 @@
+title: $:/themes/tiddlywiki/modern/settings-panel
+tags: $:/tags/ControlPanel/Appearance
+caption: Modern
+
+! Modern theme
+
+<$checkbox tiddler="$:/config/themes/modern/animations" field="text" checked="yes" unchecked="no" default="yes"> Ambient animations (the top accent bar)</$checkbox>

@@ -12,6 +12,26 @@ Module that creates a $tw.utils.Scroller object prototype that manages scrolling
 /*
 Event handler for when the `tm-scroll` event hits the document body
 */
+/*
+Feature-detect (once, cached) whether scrollTo() honours an options object, so
+that the `behavior: "instant"` call below can fall back gracefully on very old
+engines that only accept the positional scrollTo(x, y) form.
+*/
+var scrollOptionsSupported;
+function supportsScrollOptions(srcWindow) {
+	if(scrollOptionsSupported === undefined) {
+		scrollOptionsSupported = false;
+		try {
+			var doc = (srcWindow && srcWindow.document) || document,
+				probe = doc.createElement("div");
+			probe.scrollTo({top: 0, left: 0, get behavior() { scrollOptionsSupported = true; return "instant"; }});
+		} catch(e) {
+			scrollOptionsSupported = false;
+		}
+	}
+	return scrollOptionsSupported;
+}
+
 var PageScroller = function() {
 	this.idRequestFrame = null;
 	this.requestAnimationFrame = window.requestAnimationFrame ||
@@ -115,7 +135,20 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 				bounds = getBounds(),
 				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,srcWindow.innerWidth),
 				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,srcWindow.innerHeight);
-			srcWindow.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
+			// Use behavior:"instant" so that this animation's per-frame position
+			// updates are applied immediately and are NOT re-animated by a CSS
+			// `scroll-behavior: smooth` on the scrolling element (which would make
+			// the page lag behind and stutter). The easing here (slowInSlowOut over
+			// `duration`) provides the smoothness; CSS smooth still applies to other
+			// scrolls such as in-document anchor jumps. Falls back to the positional
+			// form on engines that don't honour a scrollTo() options object.
+			var newX = scrollPosition.x + (endX - scrollPosition.x) * t,
+				newY = scrollPosition.y + (endY - scrollPosition.y) * t;
+			if(supportsScrollOptions(srcWindow)) {
+				srcWindow.scrollTo({left: newX, top: newY, behavior: "instant"});
+			} else {
+				srcWindow.scrollTo(newX,newY);
+			}
 			if(t < 1) {
 				self.idRequestFrame = self.requestAnimationFrame.call(srcWindow,drawFrame);
 			}

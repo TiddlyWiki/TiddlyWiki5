@@ -1,10 +1,10 @@
 {
-	"title": "$:/themes/tiddlywiki/modern",
-	"name": "Modern",
+	"title": "$:/themes/tiddlywiki/workbench",
+	"name": "Workbench",
 	"author": "TiddlyWiki",
 	"core-version": ">=5.0.0",
 	"plugin-type": "theme",
-	"description": "A peppy, springy modern look",
+	"description": "A dense, utilitarian theme for large wikis",
 	"dependents": ["$:/themes/tiddlywiki/vanilla"],
 	"plugin-priority": "0"
 }

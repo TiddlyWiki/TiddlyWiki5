@@ -1,0 +1,154 @@
+title: $:/themes/tiddlywiki/lucid/story
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Story river, tiddler panels & typography
+*/
+
+.tc-story-river { padding-top: 20px; }
+
+/* Tiddler panel — clearly bordered, well separated, generously padded */
+.tc-tiddler-frame {
+	margin-bottom: 24px;
+	padding: 32px 38px 28px;
+	background: <<colour tiddler-background>>;
+	border: 2px solid var(--l-border);
+	border-radius: var(--l-radius);
+	transition: border-color var(--l-dur) var(--l-ease);
+}
+.tc-tiddler-frame:hover { border-color: var(--l-border-strong); }
+.tc-tiddler-frame.tc-tiddler-edit-frame { border-color: var(--l-accent); }
+@media (max-width: 769px) { .tc-tiddler-frame { padding: 20px 18px 16px; } }
+
+/* Title — large, bold, high contrast, with a clear divider */
+.tc-tiddler-title {
+	margin-bottom: 0.7em;
+	padding-bottom: 0.5em;
+	border-bottom: 2px solid var(--l-border);
+}
+.tc-titlebar h2, .tc-site-title,
+.tc-tiddler-body h1, .tc-tiddler-body h2,
+.tc-tiddler-body h3, .tc-tiddler-body h4 {
+	font-family: var(--l-sans);
+	font-weight: 700;
+	line-height: 1.25;
+	color: <<colour foreground>>;
+	text-wrap: balance;
+}
+.tc-titlebar h2 { font-size: clamp(1.6rem, 1.4rem + 1vw, 2.2rem); }
+.tc-tiddler-subtitle { color: var(--l-muted); font-size: 0.85rem; }
+
+/* Reading column — larger type, generous leading, bounded measure */
+.tc-tiddler-body {
+	font-family: var(--l-sans);
+	font-size: clamp(1.05rem, 1rem + 0.25vw, 1.2rem);
+	line-height: 1.7;
+	color: <<colour foreground>>;
+	max-width: 70ch;
+	margin-top: 0.9em;
+}
+.tc-tiddler-body p { margin: 0 0 1em 0; }
+.tc-tiddler-body h1 { font-size: 1.8em; margin: 1.3em 0 0.5em; }
+.tc-tiddler-body h2 { font-size: 1.5em; margin: 1.25em 0 0.45em; }
+.tc-tiddler-body h3 { font-size: 1.25em; margin: 1.15em 0 0.4em; }
+.tc-tiddler-body h4 { font-size: 1.1em; margin: 1.1em 0 0.35em; }
+
+/*
+** Links — ALWAYS underlined (never colour alone), thick and clearly offset,
+** with a visible background highlight and heavier underline on hover/focus.
+*/
+.tc-tiddler-body a.tc-tiddlylink,
+.tc-tiddler-body a.tc-tiddlylink-resolves {
+	color: var(--l-accent-ink);
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 0.16em;
+	border-radius: 3px;
+	transition: background-color var(--l-dur) var(--l-ease);
+}
+.tc-tiddler-body a.tc-tiddlylink:not(.tc-plugin-info):hover {
+	background: var(--l-wash);
+	text-decoration-thickness: 3px;
+}
+.tc-tiddler-body a.tc-tiddlylink-missing {
+	text-decoration-style: dashed;
+	font-style: italic;
+}
+
+.tc-tiddler-body ul, .tc-tiddler-body ol { padding-left: 1.5em; }
+.tc-tiddler-body li { margin: 0.35em 0; }
+.tc-tiddler-body li::marker { color: var(--l-accent-ink); }
+
+/* Block quote — a bold bar plus italic, so it reads as a quote without colour */
+.tc-tiddler-body blockquote {
+	margin: 1.2em 0;
+	padding: 0.5em 0 0.5em 1.1em;
+	border-left: 5px solid var(--l-accent);
+	background: var(--l-wash);
+	font-style: italic;
+}
+
+.tc-tiddler-body hr { border: none; height: 2px; margin: 2em 0; background: var(--l-border); }
+
+.tc-tiddler-body code {
+	font-family: var(--l-mono);
+	font-size: 0.92em;
+	padding: 0.12em 0.4em;
+	border-radius: var(--l-radius-sm);
+	border: 1px solid var(--l-border);
+}
+.tc-tiddler-body pre {
+	border-radius: var(--l-radius);
+	border: 2px solid var(--l-border);
+}
+.tc-tiddler-body pre code { border: none; padding: 0; }
+
+/* Tables — strong, clear ruling (corner-rounded, never clip popups) */
+.tc-tiddler-body table {
+	border-collapse: separate; border-spacing: 0;
+	border: 2px solid var(--l-border);
+	border-radius: var(--l-radius);
+}
+.tc-tiddler-body table th {
+	font-weight: 700;
+	background: var(--l-wash);
+	border-bottom: 2px solid var(--l-border);
+}
+.tc-tiddler-body table th, .tc-tiddler-body table td {
+	border-color: var(--l-border);
+	padding: 0.5em 0.7em;
+}
+.tc-tiddler-body table tr:hover td { background: var(--l-wash); }
+.tc-tiddler-body table tr:first-child > *:first-child { border-top-left-radius: var(--l-radius); }
+.tc-tiddler-body table tr:first-child > *:last-child { border-top-right-radius: var(--l-radius); }
+.tc-tiddler-body table tr:last-child > *:first-child { border-bottom-left-radius: var(--l-radius); }
+.tc-tiddler-body table tr:last-child > *:last-child { border-bottom-right-radius: var(--l-radius); }
+
+.tc-tiddler-body img { border-radius: var(--l-radius-sm); }
+
+/* Fold / unfold banners — span the frame edge-to-edge INSIDE its borders via
+   left/right (so they stay correct whatever this theme's padding is, and in
+   both the static and absolute layout modes), and round their bottom corners
+   to follow the frame. */
+.tc-unfold-banner.tc-unfold-banner {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: auto;
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+	border-bottom-left-radius: calc(var(--l-radius) - 2px);
+	border-bottom-right-radius: calc(var(--l-radius) - 2px);
+}
+.tc-fold-banner.tc-fold-banner {
+	inset-inline-start: 0;
+	top: 0;
+	bottom: 0;
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+	border-start-start-radius: calc(var(--l-radius) - 2px);
+	border-end-start-radius: calc(var(--l-radius) - 2px);
+}

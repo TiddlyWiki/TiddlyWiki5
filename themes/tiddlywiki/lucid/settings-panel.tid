@@ -1,0 +1,7 @@
+title: $:/themes/tiddlywiki/lucid/settings-panel
+tags: $:/tags/ControlPanel/Appearance
+caption: Lucid
+
+! Lucid theme
+
+Reading line length: <$edit-text tiddler="$:/config/themes/lucid/measure" default="70ch" tag="input" size="10"/>

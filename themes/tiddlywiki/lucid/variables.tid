@@ -1,0 +1,87 @@
+title: $:/themes/tiddlywiki/lucid/variables
+tags: [[$:/tags/Stylesheet]]
+list-before:
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Lucid — design tokens
+**
+** Accessibility first. Clarity is the aesthetic: high-contrast text and borders,
+** a strong focus ring that is never removed, generous targets and spacing, a
+** legible typeface, links that are always underlined, and state changes that are
+** signalled by more than colour alone. Motion is deliberately minimal and is
+** switched off entirely for anyone who prefers reduced motion.
+*/
+
+:root {
+	--l-ink: <<colour foreground>>;
+	--l-bg: <<colour background>>;
+	/* Strong, visible structure — no hairlines here */
+	--l-border: color-mix(in srgb, <<colour foreground>> 42%, transparent);
+	--l-border-strong: color-mix(in srgb, <<colour foreground>> 70%, transparent);
+	--l-muted: color-mix(in srgb, <<colour foreground>> 80%, <<colour background>>);
+
+	--l-accent: <<colour primary>>;
+	--l-accent-ink: color-mix(in srgb, <<colour primary>> 50%, <<colour foreground>>);
+	--l-wash: color-mix(in srgb, <<colour primary>> 14%, transparent);
+	--l-wash-strong: color-mix(in srgb, <<colour primary>> 26%, transparent);
+	--l-on-accent: <<colour background>>;
+
+	--l-radius: 8px;
+	--l-radius-sm: 5px;
+
+	/* A legible, dyslexia-friendly stack with strong fallbacks */
+	--l-sans: "Atkinson Hyperlegible", "Inter", "Segoe UI", Verdana, system-ui, -apple-system, sans-serif;
+	--l-mono: "Atkinson Hyperlegible Mono", ui-monospace, Consolas, "Courier New", monospace;
+
+	--l-target: 44px;          /* minimum comfortable hit target */
+	--l-ease: ease;
+	--l-dur: 120ms;
+}
+
+
+/* Comfortable base sizing and rhythm */
+.tc-tiddler-body, .tc-sidebar-lists, button, input, select, textarea {
+	font-family: var(--l-sans);
+}
+
+/*
+** Focus — the cornerstone. A thick ring with an inner halo so it stays visible
+** on any background, applied to focus-visible AND kept for plain focus too.
+*/
+:where(a, button, input, textarea, select, [tabindex]):focus-visible,
+.tc-tiddler-frame button:focus-visible {
+	/* Drawn in the foreground colour (not the accent) so the ring always meets
+	   the 3:1 non-text contrast requirement regardless of the palette's primary.
+	   The inner background-coloured halo separates the ring from the control so
+	   it stays visible on any surface. */
+	outline: 3px solid var(--l-ink);
+	outline-offset: 2px;
+	box-shadow: 0 0 0 2px var(--l-bg), 0 0 0 6px var(--l-ink);
+	border-radius: var(--l-radius-sm);
+}
+
+html { scroll-behavior: smooth; }
+
+* {
+	scrollbar-width: auto;
+	scrollbar-color: var(--l-border-strong) transparent;
+}
+*::-webkit-scrollbar { width: 16px; height: 16px; }
+*::-webkit-scrollbar-thumb {
+	background: var(--l-border-strong);
+	border-radius: 8px;
+	border: 4px solid transparent;
+	background-clip: content-box;
+}
+
+::selection { background: var(--l-wash-strong); }
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+	}
+}

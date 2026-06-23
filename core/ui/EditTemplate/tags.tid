@@ -25,6 +25,11 @@ tags: $:/tags/EditTemplate
 				style.fill=<<foregroundColor>>
 			>
 				<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="-[{!!title}]"/>
+				<!-- Touch a non-draft tiddler so the change isn't caught by the draft
+				     refresh throttle ($:/config/Drafts/TypingTimeout); otherwise the
+				     pill's removal would only render after that timeout, exactly as the
+				     tag-picker's add actions do via their temp-tiddler cleanup. -->
+				<$action-setfield $tiddler="$:/temp/tags-edit-refresh" text=<<currentTiddler>>/>
 				{{$:/core/images/close-button}}
 			</$button>
 		</span>

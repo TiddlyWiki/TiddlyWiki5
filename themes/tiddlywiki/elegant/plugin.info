@@ -1,10 +1,10 @@
 {
-	"title": "$:/themes/tiddlywiki/modern",
-	"name": "Modern",
+	"title": "$:/themes/tiddlywiki/elegant",
+	"name": "Elegant",
 	"author": "TiddlyWiki",
 	"core-version": ">=5.0.0",
 	"plugin-type": "theme",
-	"description": "A peppy, springy modern look",
+	"description": "A refined, editorial theme",
 	"dependents": ["$:/themes/tiddlywiki/vanilla"],
 	"plugin-priority": "0"
 }

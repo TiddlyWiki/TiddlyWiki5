@@ -19,7 +19,14 @@
 		"tiddlywiki/tight",
 		"tiddlywiki/heavier",
 		"tiddlywiki/tight-heavier",
-		"tiddlywiki/readonly"
+		"tiddlywiki/readonly",
+		"tiddlywiki/modern",
+		"tiddlywiki/elegant",
+		"tiddlywiki/opaline",
+		"tiddlywiki/noir",
+		"tiddlywiki/lucid",
+		"tiddlywiki/workbench",
+		"tiddlywiki/quietude"
 	],
 	"languages": [
 	],

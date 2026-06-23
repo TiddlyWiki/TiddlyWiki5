@@ -1,0 +1,6 @@
+title: $:/themes/tiddlywiki/workbench/settings
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+{{{ [[$:/config/themes/workbench/density]get[text]match[comfortable]then[.tc-tiddler-frame{padding:24px 28px 22px!important;margin-bottom:18px!important;}.tc-story-river{padding-top:22px!important;}]] }}}

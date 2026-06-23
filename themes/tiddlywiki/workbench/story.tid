@@ -1,0 +1,169 @@
+title: $:/themes/tiddlywiki/workbench/story
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Story river, tiddler panels & typography — dense
+*/
+
+.tc-story-river { padding-top: 12px; }
+
+/*
+** Tiddler panel — compact, with a thin accent status-rail on the leading edge
+** (drawn with a box-shadow inset so it never becomes a containing block).
+*/
+.tc-tiddler-frame {
+	margin-bottom: 12px;
+	padding: 16px 20px 14px;
+	background: var(--w-panel);
+	border: 1px solid var(--w-grid);
+	border-radius: var(--w-radius);
+	box-shadow: inset 3px 0 0 var(--w-grid-strong);
+	transition: box-shadow var(--w-dur) var(--w-ease), border-color var(--w-dur) var(--w-ease);
+}
+.tc-tiddler-frame:hover {
+	box-shadow: inset 3px 0 0 var(--w-accent);
+	border-color: var(--w-grid-strong);
+}
+.tc-tiddler-frame.tc-tiddler-edit-frame {
+	box-shadow: inset 3px 0 0 var(--w-accent);
+	border-color: var(--w-accent);
+}
+
+/* Title — monospace, compact, with a hairline rule */
+.tc-tiddler-title {
+	margin-bottom: 0.5em;
+	padding-bottom: 0.4em;
+	border-bottom: 1px solid var(--w-grid);
+}
+.tc-titlebar h2, .tc-site-title {
+	font-family: var(--w-mono);
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+}
+.tc-titlebar h2 {
+	font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.5rem);
+	color: <<colour tiddler-title-foreground>>;
+}
+.tc-tiddler-subtitle {
+	font-family: var(--w-mono);
+	font-size: 0.72rem;
+	color: var(--w-faint);
+}
+
+/* Body — compact reading, system sans, monospace headings to match the title */
+.tc-tiddler-body {
+	font-family: var(--w-sans);
+	font-size: 0.92rem;
+	line-height: 1.52;
+	color: var(--w-ink);
+	margin-top: 0.6em;
+}
+.tc-tiddler-body p { margin: 0 0 0.7em 0; }
+.tc-tiddler-body h1, .tc-tiddler-body h2,
+.tc-tiddler-body h3, .tc-tiddler-body h4 {
+	font-family: var(--w-mono);
+	font-weight: 600;
+	line-height: 1.25;
+}
+.tc-tiddler-body h1 { font-size: 1.4em; margin: 1em 0 0.4em; }
+.tc-tiddler-body h2 { font-size: 1.22em; margin: 0.9em 0 0.35em; }
+.tc-tiddler-body h3 { font-size: 1.08em; margin: 0.8em 0 0.3em; }
+.tc-tiddler-body h4 { font-size: 1em; margin: 0.8em 0 0.3em; color: var(--w-muted); }
+
+.tc-tiddler-body a.tc-tiddlylink,
+.tc-tiddler-body a.tc-tiddlylink-resolves {
+	color: var(--w-accent-ink);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.14em;
+	transition: color var(--w-dur) var(--w-ease);
+}
+.tc-tiddler-body a.tc-tiddlylink:not(.tc-plugin-info):hover { color: var(--w-accent); }
+.tc-tiddler-body a.tc-tiddlylink-missing { text-decoration-style: dotted; }
+
+.tc-tiddler-body ul, .tc-tiddler-body ol { padding-left: 1.3em; }
+.tc-tiddler-body li { margin: 0.15em 0; }
+.tc-tiddler-body li::marker { color: var(--w-accent); }
+
+.tc-tiddler-body blockquote {
+	margin: 0.8em 0;
+	padding: 0.3em 0 0.3em 0.9em;
+	border-left: 2px solid var(--w-accent);
+	background: var(--w-wash);
+	color: var(--w-muted);
+}
+
+.tc-tiddler-body hr { border: none; height: 1px; margin: 1.2em 0; background: var(--w-grid-strong); }
+
+.tc-tiddler-body code {
+	font-family: var(--w-mono);
+	font-size: 0.86em;
+	padding: 0.08em 0.32em;
+	border-radius: var(--w-radius-sm);
+	border: 1px solid var(--w-grid);
+	background: var(--w-wash);
+}
+.tc-tiddler-body pre {
+	border-radius: var(--w-radius);
+	border: 1px solid var(--w-grid);
+}
+.tc-tiddler-body pre code { border: none; background: none; padding: 0; }
+
+/* Tables — dense data grid with zebra striping and a sticky-feeling header */
+.tc-tiddler-body table {
+	border-collapse: separate; border-spacing: 0;
+	border: 1px solid var(--w-grid-strong);
+	border-radius: var(--w-radius);
+	font-size: 0.88em;
+}
+.tc-tiddler-body table th {
+	font-family: var(--w-mono);
+	font-weight: 600;
+	font-size: 0.92em;
+	background: var(--w-wash);
+	border-bottom: 1px solid var(--w-grid-strong);
+}
+.tc-tiddler-body table th,
+.tc-tiddler-body table td {
+	border-color: var(--w-grid);
+	padding: 0.28em 0.55em;
+}
+.tc-tiddler-body table tr:nth-child(even) td { background: var(--w-zebra); }
+.tc-tiddler-body table tr:hover td { background: var(--w-wash); }
+.tc-tiddler-body table tr:first-child > *:first-child { border-top-left-radius: var(--w-radius); }
+.tc-tiddler-body table tr:first-child > *:last-child { border-top-right-radius: var(--w-radius); }
+.tc-tiddler-body table tr:last-child > *:first-child { border-bottom-left-radius: var(--w-radius); }
+.tc-tiddler-body table tr:last-child > *:last-child { border-bottom-right-radius: var(--w-radius); }
+
+/* Field tables in the editor/info read like a data sheet */
+.tc-view-field-name, .tc-edit-field-name { font-family: var(--w-mono); color: var(--w-muted); }
+
+.tc-tiddler-body img { border-radius: var(--w-radius-sm); }
+
+/* Fold / unfold banners — span the frame edge-to-edge INSIDE its borders via
+   left/right (so they stay correct whatever this theme's padding is, and in
+   both the static and absolute layout modes), and round their bottom corners
+   to follow the frame. */
+.tc-unfold-banner.tc-unfold-banner {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: auto;
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+	border-bottom-left-radius: calc(var(--w-radius) - 1px);
+	border-bottom-right-radius: calc(var(--w-radius) - 1px);
+}
+.tc-fold-banner.tc-fold-banner {
+	inset-inline-start: 0;
+	top: 0;
+	bottom: 0;
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+	border-start-start-radius: calc(var(--w-radius) - 1px);
+	border-end-start-radius: calc(var(--w-radius) - 1px);
+}

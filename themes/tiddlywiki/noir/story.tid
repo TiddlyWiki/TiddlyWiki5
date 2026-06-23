@@ -1,0 +1,184 @@
+title: $:/themes/tiddlywiki/noir/story
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Story river, tiddler panels & typography
+*/
+
+.tc-story-river { padding-top: 22px; }
+
+/*
+** Tiddler panel — a raised surface with a rim highlight and a soft cast shadow.
+** Storyview/popup-safe: no transform / filter / will-change / animation here.
+*/
+.tc-tiddler-frame {
+	margin-bottom: 26px;
+	padding: 34px 44px 30px;
+	background: var(--n-surface-1);
+	border: 1px solid var(--n-line);
+	border-radius: var(--n-radius);
+	box-shadow: var(--n-shadow-1);
+	transition: box-shadow var(--n-dur) var(--n-ease),
+		border-color var(--n-dur) var(--n-ease);
+}
+@media (min-width: 770px) {
+	.tc-tiddler-frame:hover {
+		box-shadow: var(--n-shadow-2), var(--n-shadow-glow);
+		border-color: var(--n-line-strong);
+	}
+}
+.tc-tiddler-frame.tc-tiddler-edit-frame {
+	border-color: color-mix(in srgb, <<colour primary>> 45%, var(--n-line));
+	box-shadow: var(--n-shadow-2), var(--n-shadow-glow);
+}
+@media (max-width: 769px) {
+	.tc-tiddler-frame { padding: 22px 20px 18px; }
+}
+
+/* Title — a clean grotesque with a faint accent glow, over a hairline */
+.tc-tiddler-title {
+	margin-bottom: 0.85em;
+	padding-bottom: 0.55em;
+	border-bottom: 1px solid var(--n-line);
+}
+.tc-titlebar h2,
+.tc-site-title,
+.tc-tiddler-body h1,
+.tc-tiddler-body h2,
+.tc-tiddler-body h3,
+.tc-tiddler-body h4 {
+	font-family: var(--n-display);
+	font-weight: 650;
+	letter-spacing: -0.015em;
+	line-height: 1.2;
+	text-wrap: balance;
+}
+.tc-titlebar h2 {
+	font-size: clamp(1.6rem, 1.35rem + 1.1vw, 2.25rem);
+	color: <<colour tiddler-title-foreground>>;
+	text-shadow: 0 0 22px var(--n-glow-soft);
+}
+
+.tc-tiddler-subtitle {
+	font-family: var(--n-mono);
+	font-size: 0.74rem;
+	letter-spacing: 0.02em;
+	color: var(--n-faint);
+}
+
+/* Reading column */
+.tc-tiddler-body {
+	font-family: var(--n-body);
+	font-size: clamp(1rem, 0.97rem + 0.16vw, 1.08rem);
+	line-height: 1.66;
+	color: var(--n-ink);
+	font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+	text-wrap: pretty;
+	margin-top: 0.9em;
+}
+.tc-tiddler-body p { margin: 0 0 1em 0; }
+.tc-tiddler-body h1 { font-size: 1.8em; margin: 1.3em 0 0.5em; }
+.tc-tiddler-body h2 { font-size: 1.46em; margin: 1.25em 0 0.45em; }
+.tc-tiddler-body h3 { font-size: 1.22em; margin: 1.15em 0 0.4em; }
+.tc-tiddler-body h4 { font-size: 1.06em; margin: 1.1em 0 0.35em; }
+
+/* Links glow toward the accent */
+.tc-tiddler-body a.tc-tiddlylink,
+.tc-tiddler-body a.tc-tiddlylink-resolves {
+	color: var(--n-accent-ink);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: color-mix(in srgb, <<colour primary>> 40%, transparent);
+	text-underline-offset: 0.16em;
+	transition: color var(--n-dur) var(--n-ease),
+		text-decoration-color var(--n-dur) var(--n-ease),
+		text-shadow var(--n-dur) var(--n-ease);
+}
+.tc-tiddler-body a.tc-tiddlylink:not(.tc-plugin-info):hover {
+	color: var(--n-accent-bright);
+	text-decoration-color: var(--n-accent-bright);
+	text-shadow: 0 0 16px var(--n-glow);
+}
+.tc-tiddler-body a.tc-tiddlylink-missing { text-decoration-style: dotted; opacity: 0.85; }
+
+.tc-tiddler-body li::marker { color: var(--n-accent); }
+.tc-tiddler-body ul, .tc-tiddler-body ol { padding-left: 1.4em; }
+
+/* Block quote — accent edge over a faint wash */
+.tc-tiddler-body blockquote {
+	margin: 1.2em 0;
+	padding: 0.4em 0 0.4em 1.1em;
+	border-left: 3px solid var(--n-accent);
+	background: var(--n-wash);
+	border-radius: 0 var(--n-radius-sm) var(--n-radius-sm) 0;
+	color: var(--n-muted);
+}
+
+.tc-tiddler-body hr {
+	border: none; height: 1px; margin: 2em 0;
+	background: linear-gradient(to right, transparent, var(--n-line-strong) 50%, transparent);
+}
+
+/* Code on a deeper surface */
+.tc-tiddler-body code {
+	font-family: var(--n-mono);
+	font-size: 0.86em;
+	padding: 0.12em 0.4em;
+	border-radius: var(--n-radius-sm);
+	border: 1px solid var(--n-line);
+	background: var(--n-surface-2);
+}
+.tc-tiddler-body pre {
+	border-radius: var(--n-radius);
+	border: 1px solid var(--n-line);
+	background: var(--n-surface-2);
+	box-shadow: var(--n-rim);
+}
+.tc-tiddler-body pre code { border: none; background: none; padding: 0; }
+
+/* Tables — corner-rounded (never clip popups), deeper header */
+.tc-tiddler-body table {
+	border-collapse: separate; border-spacing: 0;
+	border: 1px solid var(--n-line);
+	border-radius: var(--n-radius);
+}
+.tc-tiddler-body table th {
+	background: var(--n-surface-2);
+	font-weight: 650;
+	border-bottom: 1px solid var(--n-line-strong);
+}
+.tc-tiddler-body table th, .tc-tiddler-body table td { border-color: var(--n-line); }
+.tc-tiddler-body table tr:hover td { background: var(--n-wash); }
+.tc-tiddler-body table tr:first-child > *:first-child { border-top-left-radius: var(--n-radius); }
+.tc-tiddler-body table tr:first-child > *:last-child { border-top-right-radius: var(--n-radius); }
+.tc-tiddler-body table tr:last-child > *:first-child { border-bottom-left-radius: var(--n-radius); }
+.tc-tiddler-body table tr:last-child > *:last-child { border-bottom-right-radius: var(--n-radius); }
+
+.tc-tiddler-body img { border-radius: var(--n-radius-sm); box-shadow: var(--n-shadow-1); }
+
+/* Fold / unfold banners — span the frame edge-to-edge INSIDE its borders via
+   left/right (so they stay correct whatever this theme's padding is, and in
+   both the static and absolute layout modes), and round their bottom corners
+   to follow the frame. */
+.tc-unfold-banner.tc-unfold-banner {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: auto;
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+	border-bottom-left-radius: calc(var(--n-radius) - 1px);
+	border-bottom-right-radius: calc(var(--n-radius) - 1px);
+}
+.tc-fold-banner.tc-fold-banner {
+	inset-inline-start: 0;
+	top: 0;
+	bottom: 0;
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+	border-start-start-radius: calc(var(--n-radius) - 1px);
+	border-end-start-radius: calc(var(--n-radius) - 1px);
+}

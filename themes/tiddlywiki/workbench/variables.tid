@@ -1,0 +1,78 @@
+title: $:/themes/tiddlywiki/workbench/variables
+tags: [[$:/tags/Stylesheet]]
+list-before:
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Workbench — design tokens
+**
+** A dense, utilitarian theme for large wikis and power users: compact spacing,
+** a smaller type scale, monospace for titles, metadata and system text, tabular
+** figures, hairline grid lines and near-square corners. Information first; the
+** look is an engineer's ledger / data console. Motion is fast and functional.
+*/
+
+:root {
+	--w-ink: <<colour foreground>>;
+	--w-bg: <<colour background>>;
+	--w-panel: <<colour tiddler-background>>;
+	--w-muted: color-mix(in srgb, <<colour foreground>> 50%, <<colour background>>);
+	--w-faint: color-mix(in srgb, <<colour foreground>> 50%, <<colour background>>);
+
+	--w-grid: color-mix(in srgb, <<colour foreground>> 11%, transparent);
+	--w-grid-strong: color-mix(in srgb, <<colour foreground>> 20%, transparent);
+	--w-zebra: color-mix(in srgb, <<colour foreground>> 4%, transparent);
+
+	--w-accent: <<colour primary>>;
+	--w-accent-ink: color-mix(in srgb, <<colour primary>> 54%, <<colour foreground>>);
+	--w-wash: color-mix(in srgb, <<colour primary>> 10%, transparent);
+	--w-wash-strong: color-mix(in srgb, <<colour primary>> 20%, transparent);
+
+	--w-radius: 3px;
+	--w-radius-sm: 2px;
+
+	--w-sans: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+	--w-mono: ui-monospace, "Cascadia Code", "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+	--w-ease: cubic-bezier(0.4, 0, 0.2, 1);
+	--w-dur: 110ms;
+
+	accent-color: <<colour primary>>;
+}
+
+
+/* Tabular, monospace-leaning numerals everywhere data appears */
+.tc-tiddler-subtitle, .tc-tiddler-body table, .tc-view-field-table, .tc-edit-fields {
+	font-variant-numeric: tabular-nums;
+}
+
+html { scroll-behavior: smooth; }
+
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--w-grid-strong) transparent;
+}
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb {
+	background: var(--w-grid-strong);
+	border-radius: var(--w-radius-sm);
+	border: 2px solid transparent;
+	background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--w-accent); background-clip: content-box; }
+
+::selection { background: var(--w-wash-strong); }
+
+:where(button, input, textarea, select, a):focus-visible {
+	outline: 2px solid var(--w-accent);
+	outline-offset: 1px;
+	border-radius: var(--w-radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.001ms !important;
+		transition-duration: 0.001ms !important;
+	}
+}

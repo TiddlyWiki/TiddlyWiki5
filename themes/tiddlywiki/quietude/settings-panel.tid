@@ -1,0 +1,7 @@
+title: $:/themes/tiddlywiki/quietude/settings-panel
+tags: $:/tags/ControlPanel/Appearance
+caption: Quietude
+
+! Quietude theme
+
+Reading width: <$edit-text tiddler="$:/config/themes/quietude/measure" default="40rem" tag="input" size="10"/>

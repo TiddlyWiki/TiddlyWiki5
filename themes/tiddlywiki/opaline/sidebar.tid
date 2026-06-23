@@ -1,0 +1,90 @@
+title: $:/themes/tiddlywiki/opaline/sidebar
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Sidebar
+*/
+
+.tc-sidebar-header { padding-top: 8px; }
+
+/* Masthead: the title sits above a living band of opal light — the signature,
+   a small element animated continuously on the GPU. */
+.tc-site-title {
+	font-size: clamp(1.6rem, 1.3rem + 1vw, 2.05rem);
+	font-weight: 580;
+	letter-spacing: -0.01em;
+	color: <<colour site-title-foreground>>;
+}
+.tc-site-title::after {
+	content: "";
+	display: block;
+	height: 3px;
+	width: 100%;
+	margin-top: 0.6rem;
+	border-radius: var(--o-radius-pill);
+	background: var(--o-iris-line);
+	background-size: 200% 100%;
+	will-change: background-position;
+	animation: o-sheen 8s linear infinite;
+}
+
+.tc-site-subtitle {
+	font-family: var(--o-body);
+	font-size: 0.8rem;
+	letter-spacing: 0.01em;
+	color: var(--o-faint);
+}
+
+/* Sidebar tabs */
+.tc-sidebar-lists .tc-tab-buttons button {
+	font-family: var(--o-body);
+	border-radius: var(--o-radius-sm) var(--o-radius-sm) 0 0;
+	transition: color var(--o-dur) var(--o-ease);
+}
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected {
+	color: <<colour foreground>>;
+	font-weight: 600;
+}
+
+/* Sidebar links glide toward the light */
+.tc-sidebar-lists a.tc-tiddlylink,
+.tc-sidebar-lists .tc-tiddlylink {
+	border-radius: var(--o-radius-sm);
+	transition: color var(--o-dur) var(--o-ease), transform var(--o-dur) var(--o-ease);
+}
+.tc-sidebar-lists a.tc-tiddlylink:hover {
+	color: var(--o-iris-1);
+	transform: translateX(2px);
+}
+
+/* Search field */
+.tc-sidebar-header .tc-search input,
+.tc-search input {
+	border-radius: var(--o-radius-pill);
+	border: 1px solid var(--o-rule);
+	background: color-mix(in srgb, <<colour primary>> 4%, transparent);
+	transition: border-color var(--o-dur) var(--o-ease), box-shadow var(--o-dur) var(--o-ease),
+		background-color var(--o-dur) var(--o-ease);
+}
+.tc-sidebar-header .tc-search input:focus,
+.tc-search input:focus {
+	border-color: var(--o-iris-1);
+	box-shadow: 0 0 0 3px var(--o-wash-strong);
+	background: <<colour background>>;
+}
+
+.tc-sidebar-tab-open-item {
+	border-radius: var(--o-radius-sm);
+	transition: background-color var(--o-fast) var(--o-ease);
+}
+.tc-sidebar-tab-open-item:hover { background: var(--o-wash); }
+
+.tc-sidebar-lists .tc-tab-set .tc-tab-divider {
+	border: none;
+	height: 1px;
+	background: linear-gradient(to right, var(--o-rule), transparent);
+}
+
+.tc-page-controls { gap: 3px; }
