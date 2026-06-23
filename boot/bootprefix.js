@@ -58,7 +58,8 @@ Each moduleInfo object is stored in two hashmaps: $tw.modules.titles and $tw.mod
 */
 $tw.modules = {
 	titles: {}, // hashmap by module name of moduleInfo
-	types: {} // hashmap by module type and then name of moduleInfo
+	types: {}, // hashmap by module type and then name of moduleInfo
+	aliases: {} // hashmap by alias name to module title
 };
 
 /*
