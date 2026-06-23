@@ -1,0 +1,6 @@
+title: $:/schemas/FilterOperatorDocs/op-neg-input
+field-type: string
+required: no
+type: text/vnd.tiddlywiki
+
+Describes the input when the operator is negated with `!`.

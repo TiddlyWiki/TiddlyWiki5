@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/core-api-docs/filters/zth Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version 5.2.1>>
+<<.place Z>> is zero-based. In other words, `zth[0]` has the same effect as `nth[1]` and the <<.olink first>> operator.
+
+<<.tip "See <<.olink nth>> for an equivalent operator with a 1 based parameter">>
+
+<<.operator-examples "zth">>

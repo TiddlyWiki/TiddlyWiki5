@@ -7,11 +7,13 @@ type: text/vnd.tiddlywiki
 
 \define .operator-rows(filter)
 <$list filter="$filter$"><tr>
+<$let currentCaption={{{ [all[current]get[caption]] }}} docsTitle={{{ [[$:/docs/filter-operators/]addsuffix<currentCaption>] }}}>
 <td><$link>{{!!caption}}</$link></td>
-<td>{{!!op-purpose}}</td>
+<td><$text text={{{ [<docsTitle>get[op-purpose]] ~[all[current]get[op-purpose]] }}}/></td>
 <td align="center"><$list filter="[all[current]tag[Common Operators]]">✓</$list></td>
 <td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>
 <td align="center"><$list filter="[all[current]tag[Selection Constructors]!tag[Selection Constructors: Conditional]]">`C`</$list><$list filter="[all[current]tag[Selection Constructors]tag[Selection Constructors: Conditional]]">`C?`</$list></td>
+</$let>
 </tr></$list>
 \end
 
