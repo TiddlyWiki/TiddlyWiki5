@@ -1,0 +1,23 @@
+# Exclude everything by default and whitelist the runtime files needed for the Docker image
+*
+!.dockerignore
+!package.json
+!package-lock.json
+!tiddlywiki.js
+!boot/
+!boot/**
+!core/
+!core/**
+!languages/
+!languages/**
+!plugins/
+!plugins/**
+!themes/
+!themes/**
+!editions/
+!editions/server/
+!editions/server/**
+!editions/server-external-js/
+!editions/server-external-js/**
+!docker/
+!docker/entrypoint.sh
