@@ -4,7 +4,9 @@
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
 		"tiddlywiki/highlight",
-		"tiddlywiki/internals"
+		"tiddlywiki/internals",
+		"wikilabs/tw-mcp",
+		"wikilabs/devtools"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

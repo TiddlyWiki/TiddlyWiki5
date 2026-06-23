@@ -1,0 +1,38 @@
+title: $:/core/macros/relation-picker
+tags: $:/tags/Macro
+
+\whitespace trim
+
+<!-- When a typed-in record does not exist yet, create it and tag it with relationTag so it joins the
+	relation's candidate set [tag[relationTag]]. Mirrors the "add new tag to source" tag-picker example. -->
+\procedure relation-add-new-target()
+<%if [<tag>!is[tiddler]] %>
+	<$action-setfield $tiddler=<<tag>> tags=<<relationTag>>/>
+<%endif%>
+\end
+
+<!-- relation-picker shows the current linked records of a Title-List field as removable pills, then the
+	core tag-picker for adding more (and creating new ones). relationTag selects candidates via [tag[relationTag]].
+	The picker writes the field; the +fields addTiddler hook routes that write into the compound source. -->
+\procedure relation-picker(fieldName, relationTag, tiddler)
+<$let _relationTarget={{{ [<tiddler>is[blank]then<currentTiddler>else<tiddler>] }}}>
+	<div class="tc-edit-tags tc-relation-picker">
+		<$list filter="[<_relationTarget>get<fieldName>enlist-input[]]" variable="relatedTitle" storyview="pop">
+			<span class="tc-tag-label tc-tag-list-item tc-small-gap-right">
+				<$link to=<<relatedTitle>>><$text text=<<relatedTitle>>/></$link>
+				<$button class="tc-btn-invisible tc-remove-tag-button" tooltip="Remove">
+					<$action-listops $tiddler=<<_relationTarget>> $field=<<fieldName>> $subfilter="-[<relatedTitle>]"/>
+					{{$:/core/images/close-button}}
+				</$button>
+			</span>
+		</$list>
+		<$let tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
+			<$macrocall $name="tag-picker"
+				tagField=<<fieldName>>
+				tiddler=<<_relationTarget>>
+				tagListFilter=`[tag[$(relationTag)$]sort[]]`
+				actions=<<relation-add-new-target>>/>
+		</$let>
+	</div>
+</$let>
+\end

@@ -55,6 +55,16 @@ Get all the fields as a hashmap of strings. Options:
 exports.getFieldStrings = function(options) {
 	options = options || {};
 	var exclude = options.exclude || [];
+	// For text/vnd.tiddlywiki-multiple+fields tiddlers, exclude fields derived from the compound text
+	if(this.fields.type === "text/vnd.tiddlywiki-multiple+fields" && this.fields.text) {
+		var parsedFields = $tw.utils.parseMultilineFields(this.fields.text);
+		for(var name in parsedFields) {
+			var derivedName = (name === "text") ? "body" : name;
+			if(exclude.indexOf(derivedName) === -1) {
+				exclude.push(derivedName);
+			}
+		}
+	}
 	var fields = {};
 	for(var field in this.fields) {
 		if($tw.utils.hop(this.fields,field)) {
@@ -75,6 +85,16 @@ exports.getFieldStringBlock = function(options) {
 	var exclude = options.exclude || [],
 		fields = Object.keys(this.fields).sort(),
 		result = [];
+	// For text/vnd.tiddlywiki-multiple+fields tiddlers, exclude fields derived from the compound text
+	if(this.fields.type === "text/vnd.tiddlywiki-multiple+fields" && this.fields.text) {
+		var parsedFields = $tw.utils.parseMultilineFields(this.fields.text);
+		for(var name in parsedFields) {
+			var derivedName = (name === "text") ? "body" : name;
+			if(exclude.indexOf(derivedName) === -1) {
+				exclude.push(derivedName);
+			}
+		}
+	}
 	for(var t=0; t<fields.length; t++) {
 		var field = fields[t];
 		if(exclude.indexOf(field) === -1) {

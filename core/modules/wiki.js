@@ -74,7 +74,13 @@ exports.setText = function(title,field,index,value,options) {
 	if(index) {
 		var data = this.getTiddlerData(title,Object.create(null));
 		if(value !== undefined) {
-			data[index] = value;
+			// Preserve metadata objects (e.g. {value: "...", type: "multiline"}) when updating
+			var existingEntry = data[index];
+			if(existingEntry !== null && typeof existingEntry === "object" && $tw.utils.hop(existingEntry,"value")) {
+				existingEntry.value = value;
+			} else {
+				data[index] = value;
+			}
 		} else {
 			delete data[index];
 		}
@@ -252,12 +258,16 @@ exports.isBinaryTiddler = function(title) {
 };
 
 /*
-Like addTiddler() except it will silently reject any plugin tiddlers that are older than the currently loaded version. Returns true if the tiddler was imported
+Like addTiddler() except it will silently reject any plugin tiddlers that are older than the currently loaded version.
+Returns true if the tiddler was imported
 */
 exports.importTiddler = function(tiddler) {
 	var existingTiddler = this.getTiddler(tiddler.fields.title);
 	// Check if we're dealing with a plugin
-	if(tiddler && tiddler.hasField("plugin-type") && tiddler.hasField("version") && existingTiddler && existingTiddler.hasField("plugin-type") && existingTiddler.hasField("version")) {
+	if(tiddler && tiddler.hasField("plugin-type") && tiddler.hasField("version") &&
+		existingTiddler && existingTiddler.hasField("plugin-type") &&
+		existingTiddler.hasField("version"))
+	{
 		// Reject the incoming plugin if it is older
 		if(!$tw.utils.checkVersions(tiddler.fields.version,existingTiddler.fields.version)) {
 			return false;
@@ -346,7 +356,8 @@ exports.countTiddlers = function(excludeTag) {
 };
 
 /*
-Returns a function iterator(callback) that iterates through the specified titles, and invokes the callback with callback(tiddler,title)
+Returns a function iterator(callback) that iterates through the specified titles,
+and invokes the callback with callback(tiddler,title)
 */
 exports.makeTiddlerIterator = function(titles) {
 	var self = this;
@@ -885,7 +896,8 @@ Other types currently just return null.
 titleOrTiddler: string tiddler title or a tiddler object
 defaultData: default data to be returned if the tiddler is missing or doesn't contain data
 
-Note that the same value is returned for repeated calls for the same tiddler data. The value is frozen to prevent modification; otherwise modifications would be visible to all callers
+Note that the same value is returned for repeated calls for the same tiddler data.
+The value is frozen to prevent modification; otherwise modifications would be visible to all callers
 */
 exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 	var self = this,
@@ -920,6 +932,9 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 				return $tw.utils.parseJSONSafe(tiddler.fields.text,defaultData);
 			case "application/x-tiddler-dictionary":
 				return $tw.utils.parseFields(tiddler.fields.text);
+			case "text/vnd.tiddlywiki-multiple":
+			case "text/vnd.tiddlywiki-multiple+fields":
+				return $tw.utils.parseMultilineFields(tiddler.fields.text);
 		}
 	}
 	return defaultData;
@@ -933,6 +948,10 @@ exports.extractTiddlerDataItem = function(titleOrTiddler,index,defaultText) {
 		text;
 	if(data && $tw.utils.hop(data,index)) {
 		text = data[index];
+	}
+	// Unwrap nested object from compound tiddler metadata entries
+	if(text !== null && typeof text === "object" && $tw.utils.hop(text,"value")) {
+		text = text.value;
 	}
 	if(typeof text === "string" || typeof text === "number") {
 		return text.toString();
@@ -959,6 +978,10 @@ exports.setTiddlerData = function(title,data,fields,options) {
 		};
 	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
 		newFields.text = $tw.utils.makeTiddlerDictionary(data);
+	} else if(existingTiddler && (existingTiddler.fields.type === "text/vnd.tiddlywiki-multiple" ||
+		existingTiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields"))
+	{
+		newFields.text = $tw.utils.makeMultilineFieldsDictionary(data,existingTiddler.fields.text);
 	} else {
 		newFields.type = "application/json";
 		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
@@ -1393,7 +1416,8 @@ exports.search = function(text,options) {
 			fields.push(options.field);
 		}
 	}
-	// Use default fields if none specified and we're not excluding fields (excluding fields with an empty field array is the same as searching all fields)
+	// Use default fields if none specified and we're not excluding fields
+	// (excluding fields with an empty field array is the same as searching all fields)
 	if(fields.length === 0 && !options.excludeField) {
 		fields.push("title");
 		fields.push("tags");
@@ -1434,7 +1458,8 @@ exports.search = function(text,options) {
 				t;
 			if(str) {
 				if($tw.utils.isArray(str)) {
-					// If the field value is an array, test each regexp against each field array entry and fail if each regexp doesn't match at least one field array entry
+					// If the field value is an array, test each regexp against each field array entry and
+					// fail if each regexp doesn't match at least one field array entry
 					for(var s=0; s<str.length; s++) {
 						for(t=0; t<notYetFound.length;) {
 							if(notYetFound[t].test(str[s])) {
@@ -1445,7 +1470,8 @@ exports.search = function(text,options) {
 						}
 					}
 				} else {
-					// If the field isn't an array, force it to a string and test each regexp against it and fail if any do not match
+					// If the field isn't an array, force it to a string and
+					// test each regexp against it and fail if any do not match
 					str = tiddler.getFieldString(fieldName);
 					for(t=0; t<notYetFound.length;) {
 						if(notYetFound[t].test(str)) {
@@ -1480,7 +1506,8 @@ exports.search = function(text,options) {
 };
 
 /*
-Trigger a load for a tiddler if it is skinny. Returns the text, or undefined if the tiddler is missing, null if the tiddler is being lazily loaded.
+Trigger a load for a tiddler if it is skinny. Returns the text,
+or undefined if the tiddler is missing, null if the tiddler is being lazily loaded.
 */
 exports.getTiddlerText = function(title,defaultText) {
 	var tiddler = this.getTiddler(title);
@@ -1500,7 +1527,9 @@ exports.getTiddlerText = function(title,defaultText) {
 };
 
 /*
-Check whether the text of a tiddler matches a given value. By default, the comparison is case insensitive, and any spaces at either end of the tiddler text is trimmed
+Check whether the text of a tiddler matches a given value.
+By default, the comparison is case insensitive,
+and any spaces at either end of the tiddler text is trimmed
 */
 exports.checkTiddlerText = function(title,targetText,options) {
 	options = options || {};
@@ -1589,7 +1618,8 @@ exports.readFile = function(file,options) {
 };
 
 /*
-Lower level utility to read the content of a browser File object, invoking callback(tiddlerFieldsArray) with an array of tiddler fields objects
+Lower level utility to read the content of a browser File object,
+invoking callback(tiddlerFieldsArray) with an array of tiddler fields objects
 */
 exports.readFileContent = function(file,type,isBinary,deserializer,callback) {
 	var self = this;
@@ -1699,7 +1729,10 @@ exports.generateDraftTitle = function(title) {
 /*
 Invoke the available upgrader modules
 titles: array of tiddler titles to be processed
-tiddlers: hashmap by title of tiddler fields of pending import tiddlers. These can be modified by the upgraders. An entry with no fields indicates a tiddler that was pending import has been suppressed. When entries are added to the pending import the tiddlers hashmap may have entries that are not present in the titles array
+tiddlers: hashmap by title of tiddler fields of pending import tiddlers.
+	These can be modified by the upgraders.
+	An entry with no fields indicates a tiddler that was pending import has been suppressed.
+	When entries are added to the pending import the tiddlers hashmap may have entries that are not present in the titles array
 Returns a hashmap of messages keyed by tiddler title.
 */
 exports.invokeUpgraders = function(titles,tiddlers) {

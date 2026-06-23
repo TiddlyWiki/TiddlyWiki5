@@ -1,0 +1,16 @@
+created: 20260612160605433
+modified: 20260612201329830
+tags: 
+title: CompanyDirectory
+
+! Company Directory
+
+Companies are `text/vnd.tiddlywiki-multiple+fields` tiddlers tagged ''Company''. Each contact links to a company through its standard ''list'' field, a `relation-Company` sub-entry edited with the core tag-picker. Each company card rolls up the contacts that link to it with the parameterless `listed[]` filter operator, rendered by the `template-prefix` field `employees` (value `ContactRollup`).
+
+<$list filter="[tag[Company]sort[title]]">
+
+!! <$link/>
+
+<$transclude tiddler="$:/core/ui/ViewTemplate/body/company-card"/>
+
+</$list>

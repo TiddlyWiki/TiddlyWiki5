@@ -1,0 +1,5 @@
+title: $:/language/Docs/Types/text/vnd.tiddlywiki-multiple+fields
+description: Compound tiddler with field exposure
+name: text/vnd.tiddlywiki-multiple+fields
+group: Developer
+group-sort: 2

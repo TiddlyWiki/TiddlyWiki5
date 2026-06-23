@@ -32,9 +32,11 @@ SetFieldWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 SetFieldWidget.prototype.execute = function() {
-	this.actionTiddler = this.getAttribute("$tiddler") || (!this.hasParseTreeNodeAttribute("$tiddler") && this.getVariable("currentTiddler"));
+	this.actionTiddler = this.getAttribute("$tiddler") ||
+		(!this.hasParseTreeNodeAttribute("$tiddler") && this.getVariable("currentTiddler"));
 	this.actionField = this.getAttribute("$field");
 	this.actionIndex = this.getAttribute("$index");
+	this.actionIndexProperty = this.getAttribute("$indexProperty");
 	this.actionValue = this.getAttribute("$value");
 	this.actionTimestamp = this.getAttribute("$timestamp","yes") === "yes";
 };
@@ -55,7 +57,38 @@ SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		options = {};
 	if(this.actionTiddler) {
 		options.suppressTimestamp = !this.actionTimestamp;
-		if((typeof this.actionField == "string") || (typeof this.actionIndex == "string")  || (typeof this.actionValue == "string")) {
+		if(this.actionIndex && this.actionIndexProperty) {
+			// Set a metadata property on a data tiddler index entry
+			var data = this.wiki.getTiddlerData(this.actionTiddler,Object.create(null));
+			var entry = data[this.actionIndex];
+			var currentValue;
+			if(entry !== null && typeof entry === "object" && $tw.utils.hop(entry,"value")) {
+				currentValue = entry.value;
+			} else {
+				currentValue = (entry !== undefined && entry !== null) ? entry.toString() : "";
+			}
+			if(this.actionValue) {
+				// Set property: ensure entry is a metadata object
+				if(entry === null || typeof entry !== "object" || !$tw.utils.hop(entry,"value")) {
+					entry = {value: currentValue};
+					data[this.actionIndex] = entry;
+				}
+				entry[this.actionIndexProperty] = this.actionValue;
+			} else {
+				// Remove property
+				if(entry !== null && typeof entry === "object" && $tw.utils.hop(entry,"value")) {
+					delete entry[this.actionIndexProperty];
+					// If only "value" key remains, unwrap to plain string
+					if(Object.keys(entry).length === 1) {
+						data[this.actionIndex] = entry.value;
+					}
+				}
+			}
+			this.wiki.setTiddlerData(this.actionTiddler,data,{},options);
+		} else if((typeof this.actionField == "string") ||
+			(typeof this.actionIndex == "string")  ||
+			(typeof this.actionValue == "string"))
+		{
 			this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue,options);
 		}
 		$tw.utils.each(this.attributes,function(attribute,name) {
