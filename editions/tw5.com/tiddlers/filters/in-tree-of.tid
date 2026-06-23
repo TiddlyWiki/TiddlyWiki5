@@ -1,0 +1,46 @@
+caption: in-tree-of
+created: 20260222000000000
+modified: 20260222000000000
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: those input titles that are <<.em not>> in the tree rooted at <<.place T>>
+op-output: those input titles that are in the tree rooted at <<.place T>>
+op-parameter: the title of the root node
+op-parameter-name: T
+op-parameter2: <<.from-version "5.5.0">> optional: the name of a field whose value is treated as the list of children for each node. Defaults to the tag hierarchy when omitted.
+op-parameter2-name: F
+op-purpose: test whether tiddlers are in a tree with a specified root
+op-suffix: <<.from-version "5.5.0">> optional: `inclusive` to include the root tiddler itself in the results
+op-suffix-name: S
+tags: [[Filter Operators]] [[Tag Operators]] [[Negatable Operators]]
+title: in-tree-of Operator
+type: text/vnd.tiddlywiki
+
+The <<.olink in-tree-of>> operator tests whether tiddlers are in a tree with a specified root. It recursively collects all descendants of <<.place T>> and returns those input titles that are within that tree.
+
+Each input title is processed in turn. The results are cached globally for performance.
+
+!! Tree modes
+
+When <<.place F>> is absent, the tag hierarchy is used: a tiddler is a child of another if it has that tiddler in its `tags` field.
+
+When <<.place F>> is provided, the value of field <<.place F>> on each parent tiddler is parsed as a title list to obtain its children. For example, `,[list]` uses the `list` field.
+
+The field name <<.place F>> supports all operand forms:
+
+|Form|Example|Meaning|h
+|Literal|`,[list]`|Use the `list` field|
+|Variable|`,<myField>`|Field name from a variable|
+|Indirect|`,{Config!!treeField}`|Field name read from a tiddler field at run-time|
+
+!! Suffix
+
+The <<.place S>> suffix controls whether the root tiddler itself is included:
+
+* Without `:inclusive`, only descendants are returned
+* With `:inclusive`, the root tiddler <<.place T>> is also included if it appears in the input
+
+!! Performance
+
+The full descendant set is computed lazily and cached until the wiki changes, so it is fast to use this operator multiple times with the same root in a single filter or across filters. However, the first time a particular root is used it may be slow if the tree is very large.
+
+<<.operator-examples "in-tree-of">>
