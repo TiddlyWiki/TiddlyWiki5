@@ -3,7 +3,9 @@
 	"plugins": [
 		"tiddlywiki/jasmine",
 		"tiddlywiki/wikitext-serialize",
-		"tiddlywiki/geospatial"
+		"tiddlywiki/geospatial",
+		"tiddlywiki/markdown",
+		"tiddlywiki/prosemirror"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

@@ -47,6 +47,9 @@ var WikiParser = function(type,text,options) {
 	this.configTrimWhiteSpace = options.configTrimWhiteSpace !== undefined ? options.configTrimWhiteSpace : false;
 	// Parser mode
 	this.parseAsInline = options.parseAsInline;
+	// Preserve extra blank lines as empty paragraph blocks when explicitly requested or configured
+	this.preserveBlankLines = options.preserveBlankLines === true ||
+		(options.preserveBlankLines !== false && this.wiki && this.wiki.getTiddlerText("$:/config/Parser/PreserveBlankLines","no") === "yes");
 	// Set current parse position
 	this.pos = 0;
 	// Start with empty output
@@ -260,6 +263,70 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 };
 
 /*
+Return parse tree nodes for extra blank lines in a whitespace run.
+The first blank line separates blocks; each additional blank line represents an
+empty paragraph block. At the start of a block list, two leading newlines are
+needed to represent the first empty paragraph.
+*/
+WikiParser.prototype.makeBlankLineBlocks = function(start,whitespace,options) {
+	options = options || {};
+	var newlineMatches = whitespace.match(/\r?\n/g),
+		newlineCount = newlineMatches ? newlineMatches.length : 0,
+		blankLineCount = options.leading ? Math.max(0,newlineCount - 1) : Math.max(0,newlineCount - 2),
+		blankLineBlocks = [];
+	for(var index = 0; index < blankLineCount; index++) {
+		blankLineBlocks.push({
+			type: "element",
+			tag: "p",
+			attributes: {
+				class: {name: "class", type: "string", value: "tc-blankline"}
+			},
+			orderedAttributes: [
+				{name: "class", type: "string", value: "tc-blankline"}
+			],
+			children: [],
+			start: start,
+			end: start,
+			rule: "blankline",
+			isLeadingBlankLine: !!options.leading && index === 0
+		});
+	}
+	return blankLineBlocks;
+};
+
+/*
+Consume whitespace between blocks and return parse tree nodes for extra blank lines.
+*/
+WikiParser.prototype.parseBlankLineBlocks = function(options) {
+	var whitespaceRegExp = /(\s+)/mg;
+	whitespaceRegExp.lastIndex = this.pos;
+	var whitespaceMatch = whitespaceRegExp.exec(this.source);
+	if(whitespaceMatch && whitespaceMatch.index === this.pos) {
+		var start = this.pos,
+			whitespace = whitespaceMatch[0];
+		this.pos = whitespaceRegExp.lastIndex;
+		return this.makeBlankLineBlocks(start,whitespace,options);
+	}
+	return [];
+};
+
+/*
+Some block rules consume trailing whitespace internally. Recover extra blank lines
+from the gap between the parse tree node end and the parser position.
+*/
+WikiParser.prototype.getTrailingBlankLineBlocks = function(blocks) {
+	if(blocks.length === 0) {
+		return [];
+	}
+	var lastBlock = blocks[blocks.length - 1];
+	if(lastBlock.end === undefined || lastBlock.end >= this.pos) {
+		return [];
+	}
+	var whitespace = this.source.substring(lastBlock.end,this.pos);
+	return /^\s+$/.test(whitespace) ? this.makeBlankLineBlocks(lastBlock.end,whitespace) : [];
+};
+
+/*
 Parse a series of blocks of text until a terminating regexp is encountered or the end of the text
 	terminatorRegExpString: terminating regular expression
 */
@@ -275,9 +342,25 @@ WikiParser.prototype.parseBlocks = function(terminatorRegExpString) {
 Parse a block from the current position to the end of the text
 */
 WikiParser.prototype.parseBlocksUnterminated = function() {
-	var tree = [];
+	if(!this.preserveBlankLines) {
+		const defaultTree = [];
+		while(this.pos < this.sourceLength) {
+			defaultTree.push.apply(defaultTree,this.parseBlock());
+		}
+		return defaultTree;
+	}
+	const tree = [];
+	let isLeading = true;
 	while(this.pos < this.sourceLength) {
-		tree.push.apply(tree,this.parseBlock());
+		tree.push.apply(tree,this.parseBlankLineBlocks({leading: isLeading}));
+		if(this.pos >= this.sourceLength) {
+			break;
+		}
+		var blocks = this.parseBlock();
+		tree.push.apply(tree,blocks);
+		tree.push.apply(tree,this.getTrailingBlankLineBlocks(blocks));
+		tree.push.apply(tree,this.parseBlankLineBlocks());
+		isLeading = false;
 	}
 	return tree;
 };
@@ -299,7 +382,11 @@ WikiParser.prototype.parseBlocksTerminatedExtended = function(terminatorRegExpSt
 			tree: []
 		};
 	// Skip any whitespace
-	this.skipWhitespace();
+	if(this.preserveBlankLines) {
+		result.tree.push.apply(result.tree,this.parseBlankLineBlocks({leading: true}));
+	} else {
+		this.skipWhitespace();
+	}
 	//  Check if we've got the end marker
 	terminatorRegExp.lastIndex = this.pos;
 	var match = terminatorRegExp.exec(this.source);
@@ -307,8 +394,13 @@ WikiParser.prototype.parseBlocksTerminatedExtended = function(terminatorRegExpSt
 	while(this.pos < this.sourceLength && !(match && match.index === this.pos)) {
 		var blocks = this.parseBlock(terminatorRegExpString);
 		result.tree.push.apply(result.tree,blocks);
+		result.tree.push.apply(result.tree,this.getTrailingBlankLineBlocks(blocks));
 		// Skip any whitespace
-		this.skipWhitespace();
+		if(this.preserveBlankLines) {
+			result.tree.push.apply(result.tree,this.parseBlankLineBlocks());
+		} else {
+			this.skipWhitespace();
+		}
 		//  Check if we've got the end marker
 		terminatorRegExp.lastIndex = this.pos;
 		match = terminatorRegExp.exec(this.source);

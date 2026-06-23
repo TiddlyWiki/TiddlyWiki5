@@ -1,0 +1,41 @@
+title: $:/plugins/tiddlywiki/prosemirror/features/link-tooltip/colors
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-prosemirror-link-tooltip {
+	background: <<colour tiddler-editor-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-link-tooltip-href {
+	color: <<colour primary>>;
+}
+
+.tc-prosemirror-link-tooltip-btn {
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-link-tooltip-btn:hover {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-prosemirror-link-tooltip-btn-danger:hover {
+	background: <<colour alert-highlight>>;
+	color: <<colour background>>;
+}
+
+.tc-prosemirror-link-tooltip-btn-ok {
+	color: <<colour primary>>;
+}
+
+.tc-prosemirror-link-tooltip-input {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-link-tooltip-input:focus {
+	border-color: <<colour primary>>;
+}

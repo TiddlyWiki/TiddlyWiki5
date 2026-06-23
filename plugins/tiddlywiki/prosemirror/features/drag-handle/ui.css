@@ -1,0 +1,97 @@
+/* Drag handle structural styles — colours in ui.color.tid */
+.tc-prosemirror-drag-handle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 24px;
+	cursor: grab;
+	font-size: 14px;
+	border-radius: 3px;
+	user-select: none;
+	opacity: 0.7;
+	transition: opacity 0.15s, background 0.15s;
+}
+
+.tc-prosemirror-drag-handle:hover {
+	opacity: 1;
+}
+
+.tc-prosemirror-drag-handle:active {
+	cursor: grabbing;
+}
+
+.tc-prosemirror-block-menu {
+	border: 1px solid transparent;
+	border-radius: 6px;
+	box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+	min-width: 180px;
+	max-width: 260px;
+	max-height: 320px;
+	overflow-y: auto;
+	padding: 4px 0;
+	font-size: 0.9em;
+}
+
+.tc-prosemirror-block-menu-search {
+	display: block;
+	width: calc(100% - 16px);
+	margin: 4px 8px 6px;
+	padding: 5px 8px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	font-size: 0.9em;
+	outline: none;
+}
+
+.tc-prosemirror-block-menu-group {
+	padding: 4px 12px 2px;
+	font-size: 0.8em;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	user-select: none;
+}
+
+.tc-prosemirror-block-menu-items {
+	max-height: 240px;
+	overflow-y: auto;
+}
+
+.tc-prosemirror-block-menu-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 5px 12px;
+	cursor: pointer;
+	border-radius: 0;
+	transition: background 0.1s;
+}
+
+.tc-prosemirror-block-menu-item-icon {
+	width: 20px;
+	text-align: center;
+	flex-shrink: 0;
+	font-size: 0.95em;
+}
+
+.tc-prosemirror-block-menu-item-label {
+	flex: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tc-prosemirror-hidden {
+	display: none !important;
+}
+
+html[dir="rtl"] .tc-prosemirror-drag-handle {
+	left: auto;
+	right: -24px;
+}
+
+html[dir="rtl"] .tc-prosemirror-block-menu {
+	direction: rtl;
+	text-align: right;
+}

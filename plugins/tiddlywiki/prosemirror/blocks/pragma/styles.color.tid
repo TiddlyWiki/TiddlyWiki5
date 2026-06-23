@@ -1,0 +1,50 @@
+title: $:/plugins/tiddlywiki/prosemirror/blocks/pragma/styles/color
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.pm-nodeview.pm-nodeview-pragma .pm-nodeview-header {
+	background: <<colour muted-foreground>>;
+}
+
+.pm-nodeview.pm-nodeview-pragma {
+	border-color: transparent;
+	border-style: dashed;
+	background: <<colour page-background>>;
+}
+
+.pm-nodeview.pm-nodeview-pragma:hover,
+.pm-nodeview.pm-nodeview-pragma.pm-nodeview-selected,
+.pm-nodeview.pm-nodeview-pragma.pm-nodeview-editing {
+	border-color: <<colour muted-foreground>>;
+}
+
+.pm-nodeview.pm-nodeview-opaque .pm-nodeview-header {
+	background: <<colour tag-background>>;
+	color: <<colour tag-foreground>>;
+}
+
+.pm-nodeview.pm-nodeview-opaque {
+	border-color: transparent;
+	border-style: dashed;
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.pm-nodeview.pm-nodeview-opaque:hover,
+.pm-nodeview.pm-nodeview-opaque.pm-nodeview-selected,
+.pm-nodeview.pm-nodeview-opaque.pm-nodeview-editing {
+	border-color: <<colour tag-background>>;
+}
+
+.pm-nodeview-label {
+	color: <<colour muted-foreground>>;
+}
+
+.pm-nodeview.pm-nodeview-pragma:hover .pm-nodeview-label {
+	color: <<colour primary>>;
+}
+
+.pm-nodeview.pm-nodeview-opaque:hover .pm-nodeview-label {
+	color: <<colour tag-foreground>>;
+}

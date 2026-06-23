@@ -1,0 +1,18 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/features/block-placeholder.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+Structural styles for block-level placeholder hints.
+
+\*/
+
+.tc-prosemirror-block-placeholder {
+	position: absolute;
+	font-style: italic;
+	pointer-events: none;
+	user-select: none;
+	opacity: 0.6;
+	font-size: 0.85em;
+	white-space: nowrap;
+}
