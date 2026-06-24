@@ -32,6 +32,26 @@ function supportsScrollOptions(srcWindow) {
 	return scrollOptionsSupported;
 }
 
+/*
+Detect (once, cached) whether we're running on Firefox. Firefox's native
+`scroll-behavior: smooth` does not re-animate / fight this scroller's per-frame
+positional updates, so there we skip the `behavior: "instant"` option (which can
+itself interfere) and use the plain positional scrollTo() form instead.
+*/
+var browserIsFirefox;
+function isFirefox(srcWindow) {
+	if(browserIsFirefox === undefined) {
+		browserIsFirefox = false;
+		try {
+			var nav = (srcWindow && srcWindow.navigator) || (typeof navigator !== "undefined" ? navigator : null);
+			browserIsFirefox = !!nav && /firefox/i.test(nav.userAgent);
+		} catch(e) {
+			browserIsFirefox = false;
+		}
+	}
+	return browserIsFirefox;
+}
+
 var PageScroller = function() {
 	this.idRequestFrame = null;
 	this.requestAnimationFrame = window.requestAnimationFrame ||
@@ -141,10 +161,11 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 			// the page lag behind and stutter). The easing here (slowInSlowOut over
 			// `duration`) provides the smoothness; CSS smooth still applies to other
 			// scrolls such as in-document anchor jumps. Falls back to the positional
-			// form on engines that don't honour a scrollTo() options object.
+			// form on engines that don't honour a scrollTo() options object, and on
+			// Firefox (whose smooth scroll-behavior doesn't fight this scroller).
 			var newX = scrollPosition.x + (endX - scrollPosition.x) * t,
 				newY = scrollPosition.y + (endY - scrollPosition.y) * t;
-			if(supportsScrollOptions(srcWindow)) {
+			if(supportsScrollOptions(srcWindow) && !isFirefox(srcWindow)) {
 				srcWindow.scrollTo({left: newX, top: newY, behavior: "instant"});
 			} else {
 				srcWindow.scrollTo(newX,newY);
