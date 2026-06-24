@@ -13,9 +13,7 @@ Module that creates a $tw.utils.Scroller object prototype that manages scrolling
 Event handler for when the `tm-scroll` event hits the document body
 */
 /*
-Feature-detect (once, cached) whether scrollTo() honours an options object, so
-that the `behavior: "instant"` call below can fall back gracefully on very old
-engines that only accept the positional scrollTo(x, y) form.
+Feature-detect (once, cached) whether scrollTo() honours an options object.
 */
 var scrollOptionsSupported;
 function supportsScrollOptions(srcWindow) {
@@ -33,10 +31,7 @@ function supportsScrollOptions(srcWindow) {
 }
 
 /*
-Detect (once, cached) whether we're running on Firefox. Firefox's native
-`scroll-behavior: smooth` does not re-animate / fight this scroller's per-frame
-positional updates, so there we skip the `behavior: "instant"` option (which can
-itself interfere) and use the plain positional scrollTo() form instead.
+Detect (once, cached) whether we're running on Firefox.
 */
 var browserIsFirefox;
 function isFirefox(srcWindow) {
@@ -155,14 +150,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 				bounds = getBounds(),
 				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,srcWindow.innerWidth),
 				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,srcWindow.innerHeight);
-			// Use behavior:"instant" so that this animation's per-frame position
-			// updates are applied immediately and are NOT re-animated by a CSS
-			// `scroll-behavior: smooth` on the scrolling element (which would make
-			// the page lag behind and stutter). The easing here (slowInSlowOut over
-			// `duration`) provides the smoothness; CSS smooth still applies to other
-			// scrolls such as in-document anchor jumps. Falls back to the positional
-			// form on engines that don't honour a scrollTo() options object, and on
-			// Firefox (whose smooth scroll-behavior doesn't fight this scroller).
+			// Apply each frame's position instantly, except on Firefox or engines without scrollTo() options.
 			var newX = scrollPosition.x + (endX - scrollPosition.x) * t,
 				newY = scrollPosition.y + (endY - scrollPosition.y) * t;
 			if(supportsScrollOptions(srcWindow) && !isFirefox(srcWindow)) {
