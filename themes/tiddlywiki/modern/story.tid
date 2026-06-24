@@ -26,7 +26,8 @@ tags: [[$:/tags/Stylesheet]]
 */
 .tc-tiddler-frame {
 	margin-bottom: 28px;
-	padding: 32px 42px 28px 42px;
+	--m-frame-pad-x: 42px;
+	padding: 32px var(--m-frame-pad-x) 28px var(--m-frame-pad-x);
 	border: 1px solid var(--m-hairline);
 	border-radius: var(--m-radius-lg);
 	background: <<colour tiddler-background>>;
@@ -211,6 +212,7 @@ tags: [[$:/tags/Stylesheet]]
 	inset-inline-start: 0;
 	top: 0;
 	bottom: 0;
+	max-width: var(--m-frame-pad-x);
 	-webkit-margin-start: 0;
 	margin-inline-start: 0;
 	border-start-start-radius: calc(var(--m-radius-lg) - 1px);

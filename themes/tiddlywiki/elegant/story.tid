@@ -22,7 +22,8 @@ tags: [[$:/tags/Stylesheet]]
 */
 .tc-tiddler-frame {
 	margin-bottom: 26px;
-	padding: 40px 52px 36px;
+	--e-frame-pad-x: 52px;
+	padding: 40px var(--e-frame-pad-x) 36px;
 	background: var(--e-paper);
 	border: 1px solid var(--e-rule);
 	border-radius: var(--e-radius-lg);
@@ -109,6 +110,7 @@ tags: [[$:/tags/Stylesheet]]
 	inset-inline-start: 0;
 	top: 0;
 	bottom: 0;
+	max-width: var(--e-frame-pad-x);
 	-webkit-margin-start: 0;
 	margin-inline-start: 0;
 	border-start-start-radius: calc(var(--e-radius-lg) - 1px);

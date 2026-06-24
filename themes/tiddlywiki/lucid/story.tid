@@ -12,7 +12,8 @@ tags: [[$:/tags/Stylesheet]]
 /* Tiddler panel — clearly bordered, well separated, generously padded */
 .tc-tiddler-frame {
 	margin-bottom: 24px;
-	padding: 32px 38px 28px;
+	--l-frame-pad-x: 38px;
+	padding: 32px var(--l-frame-pad-x) 28px;
 	background: <<colour tiddler-background>>;
 	border: 2px solid var(--l-border);
 	border-radius: var(--l-radius);
@@ -147,6 +148,7 @@ tags: [[$:/tags/Stylesheet]]
 	inset-inline-start: 0;
 	top: 0;
 	bottom: 0;
+	max-width: var(--l-frame-pad-x);
 	-webkit-margin-start: 0;
 	margin-inline-start: 0;
 	border-start-start-radius: calc(var(--l-radius) - 2px);

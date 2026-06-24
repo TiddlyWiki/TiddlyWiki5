@@ -15,7 +15,8 @@ tags: [[$:/tags/Stylesheet]]
 */
 .tc-tiddler-frame {
 	margin-bottom: 12px;
-	padding: 16px 20px 14px;
+	--w-frame-pad-x: 20px;
+	padding: 16px var(--w-frame-pad-x) 14px;
 	background: var(--w-panel);
 	border: 1px solid var(--w-grid);
 	border-radius: var(--w-radius);
@@ -162,6 +163,7 @@ tags: [[$:/tags/Stylesheet]]
 	inset-inline-start: 0;
 	top: 0;
 	bottom: 0;
+	max-width: var(--w-frame-pad-x);
 	-webkit-margin-start: 0;
 	margin-inline-start: 0;
 	border-start-start-radius: calc(var(--w-radius) - 1px);
