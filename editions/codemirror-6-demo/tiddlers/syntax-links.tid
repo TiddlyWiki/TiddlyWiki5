@@ -1,0 +1,34 @@
+title: Draft of 'Syntax — Links, Transclusions & Images'
+draft.of: Syntax — Links, Transclusions & Images
+draft.title: Syntax — Links, Transclusions & Images
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+! Links
+* Wiki link: [[Some Tiddler]]
+* Pretty link with caption: [[Caption|Target Tiddler]]
+* CamelCase link: HelloThere
+* Suppressed CamelCase: ~HelloThere
+* External link: https://tiddlywiki.com
+* Pretty external: [[TW home|https://tiddlywiki.com]]
+* Link to field: [[Target Tiddler]]
+
+! Images
+[img[Motovun Jack.jpg]]
+[img width=200 class="tc-image" [Motovun Jack.jpg]]
+[img[Tooltip|Motovun Jack.jpg]]
+
+! Transclusions
+* Whole tiddler: {{MyTiddler}}
+* With template: {{MyTiddler||$:/core/ui/ViewTemplate}}
+* Field reference: {{MyTiddler!!caption}}
+* Index reference: {{MyData##key}}
+* Block transclusion alone on a line:
+
+{{MyTiddler}}
+
+! Filtered transclusions
+Inline: {{{ [tag[HelloThere]] }}}
+Block:
+
+{{{ [tag[done]sort[title]] ||$:/core/ui/ListItemTemplate }}}

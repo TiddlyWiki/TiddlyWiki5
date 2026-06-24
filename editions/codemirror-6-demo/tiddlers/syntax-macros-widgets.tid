@@ -1,0 +1,59 @@
+title: Draft of 'Syntax — Macros, Variables & Widgets'
+draft.of: Syntax — Macros, Variables & Widgets
+draft.title: Syntax — Macros, Variables & Widgets
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+! Macro & variable calls
+* Simple: <<now>>
+* Positional params: <<myMacro "first" "second">>
+* Named params (colon): <<myMacro first:"a" second:"b">>
+* Named params (equals): <<myMacro param="value" n=5 flag=yes>>
+* Dynamic params: <<myMacro ref={{SomeTiddler}} sub={{{ [tag[x]] }}}>>
+
+(The `<<__param__>>` substituted-parameter form is only valid inside a `\define`
+macro body — see the //Pragmas// demo.)
+
+! Multi-valued variables
+Display form: ((myListVariable)) and with separator ((myListVariable||, )).
+
+! Widgets
+<$link to="HelloThere">A link widget</$link>
+
+<$list filter="[tag[done]sort[title]]" variable="item">
+* <<item>>
+</$list>
+
+<$let currentColour="red" size="big">
+Inside a let widget.
+</$let>
+
+! Attribute value forms
+<$mywidget
+	plain=unquoted
+	quoted="double"
+	single='single'
+	number=42
+	macro=<<now>>
+	dynamicparam=<<myMacro p={{Ref}}>>
+	transclude={{SomeTiddler}}
+	field={{SomeTiddler!!title}}
+	filtered={{{ [tag[x]] }}}
+	mvv=((myListVariable))
+	substituted=`value is $(currentTiddler)$ and ${ [tag[x]count[]] }$`
+	filter="[tag[done]] =>doneItems +[!is[draft]]"
+/>
+
+! HTML tags
+<div class="outer" style.color="blue">
+<span data-foo="bar">Plain HTML works too</span>
+</div>
+
+! Conditionals
+<%if [{!!draft.of}] %>
+This is a draft.
+<%elseif [<currentTiddler>has[modified]] %>
+Has a modified date.
+<%else%>
+Neither.
+<%endif%>

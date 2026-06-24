@@ -1,0 +1,23 @@
+title: Draft of 'Syntax — Inline Formatting'
+draft.of: Syntax — Inline Formatting
+draft.title: Syntax — Inline Formatting
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+! Inline formatting
+
+''bold'' text, //italic// text, __underline__ text, ~~strikethrough~~ text.
+
+Super^^script^^ and sub,,script,, and ``inline code`` and @@highlighted@@.
+
+@@.tc-big-green-button a styled span with a class@@
+@@color:red;background:yellow;an inline CSS styled span@@
+
+Dashes: an en-dash -- and an em-dash --- in text.
+
+HTML entities: &amp; &copy; &mdash; &#x2192; &nbsp;.
+
+Escaped characters: \/\/ not italic, \'' not bold, literal backtick \`.
+
+A mix on one line: ''bold //and italic// together'' with ``code`` and a
+[[WikiLink]] plus a <<currentTiddler>> variable reference.

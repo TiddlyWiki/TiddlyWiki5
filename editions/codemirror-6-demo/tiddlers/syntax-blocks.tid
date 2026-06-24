@@ -1,0 +1,67 @@
+title: Draft of 'Syntax — Block Elements'
+draft.of: Syntax — Block Elements
+draft.title: Syntax — Block Elements
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+! Heading level 1
+!! Heading level 2
+!!! Heading level 3
+!!!! Heading level 4
+!!!!! Heading level 5
+!!!!!! Heading level 6
+
+A normal paragraph of text. A blank line separates blocks. Soft
+line break inside a paragraph is joined.
+
+Force a hard line break run:
+"""
+Line one
+Line two
+"""
+
+* Unordered list item
+* Second item
+** Nested item
+*** Deeper item
+# Ordered list item
+# Second ordered
+## Nested ordered
+*# Mixed unordered then ordered
+
+; Definition term
+: Definition description
+; Another term
+: Its description
+
+> Block quote (simple)
+>> Nested block quote
+
+<<<.myclass
+Block quote with class (extended form).
+Multiple lines allowed here.
+<<<
+
+|!Header A |!Header B |
+|Cell 1 |Cell 2 |
+|Cell 3 |Cell 4 |
+|caption of the table |c
+|cssclass|k
+
+---
+
+Fenced code block with a language tag:
+
+```javascript
+function add(a, b) {
+	return a + b; // highlighted as JS
+}
+```
+
+Typed block:
+
+$$$text/css
+.foo { color: red; }
+$$$
+
+A horizontal rule is three dashes on their own line (above).

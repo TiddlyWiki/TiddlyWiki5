@@ -1,0 +1,42 @@
+title: Draft of 'Syntax — Filters'
+draft.of: Syntax — Filters
+draft.title: Syntax — Filters
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+! Filter expression building blocks
+These are shown inside filtered transclusions so the filter syntax is highlighted.
+
+! Operands
+{{{ [tag[done]] }}}
+{{{ [[Literal Title]] }}}
+{{{ [field:caption[My Caption]] }}}
+{{{ [search:title,caption[term]] }}}
+{{{ [tag<currentTiddler>] }}}
+{{{ [get{!!field}] }}}
+{{{ [regexp[^foo.*$]] }}}
+{{{ [(myMultiValuedVariable)] }}}
+
+! Negation, suffixes, multiple operands
+{{{ [tag[done]!is[draft]] }}}
+{{{ [search:title:casesensitive,literal[Foo]] }}}
+{{{ [list[a],[b],<c>] }}}
+
+! Run prefixes
+{{{ [tag[a]] +[sort[title]] }}}
+{{{ [tag[a]] ~[all[shadows]] }}}
+{{{ [tag[a]] -[tag[b]] }}}
+{{{ [tag[a]] =[[ExtraTitle]] }}}
+{{{ [tag[a]] :and[!is[system]] }}}
+{{{ [tag[a]] :or[tag[b]] }}}
+{{{ [tag[a]] :filter[get[priority]match[high]] }}}
+{{{ [tag[a]] :map[get[title]] }}}
+{{{ [tag[a]] :reduce:flat[addall<accumulator>] }}}
+{{{ [tag[a]] :sort[get[modified]] }}}
+
+! Assignment shortcut (=> / :let)
+{{{ [tag[a]] =>savedTitles [<savedTitles>count[]] }}}
+{{{ [tag[a]] =>"my titles" }}}
+
+! Variables and MVV inside filters
+{{{ [tag<currentTiddler>] [(mvv)] }}}
