@@ -170,6 +170,15 @@ function clamp(n, min, max) {
 	return Math.max(min, Math.min(max, n));
 }
 
+function normalizeLineEndings(s) {
+	// CodeMirror's document model uses "\n" line breaks. EditorState.create()
+	// strips "\r", but text inserted later via transactions does NOT - so on
+	// Windows (CRLF tiddlers) the document can end up containing "\r", which
+	// throws off syntax highlighting and rendering. Normalize at the boundary
+	// so the editor document is always "\n"-only, identical across platforms.
+	return s.indexOf("\r") === -1 ? s : s.replace(/\r\n?/g, "\n");
+}
+
 function isComposingInput(view) {
 	return !!(view && (view.composing || view.compositionStarted));
 }
@@ -918,7 +927,7 @@ class CodeMirrorEngine {
 		this._pendingChange = false;
 		this._debounceMs = isNumber(options.changeDebounceMs) ? clamp(options.changeDebounceMs, 0, 2000) : 50;
 		this._debounceHandle = null;
-		this._lastEmittedText = isString(options.value) ? options.value : "";
+		this._lastEmittedText = isString(options.value) ? normalizeLineEndings(options.value) : "";
 
 		// Current content type (for language switching)
 		this._currentType = null;
@@ -2047,7 +2056,7 @@ class CodeMirrorEngine {
 		this.domNode = ownerDocument.createElement("div");
 		this.domNode.className = "tc-editor-codemirror6";
 
-		var initialText = isString(options.value) ? options.value : "";
+		var initialText = isString(options.value) ? normalizeLineEndings(options.value) : "";
 
 		this.view = new EditorView({
 			state: EditorState.create({
@@ -2599,6 +2608,7 @@ class CodeMirrorEngine {
 	setText(text, type) {
 		if(this._destroyed) return;
 		if(!isString(text)) text = String(text);
+		text = normalizeLineEndings(text);
 
 		// Check if type changed - trigger language switch
 		if(type !== undefined && type !== this._currentType) {

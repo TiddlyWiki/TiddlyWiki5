@@ -1265,6 +1265,10 @@ class CodeMirrorSimpleEngine {
 
 		if(this.isInputMode) {
 			initialText = initialText.replace(/[\r\n]+/g, " ");
+		} else {
+			// Normalize CRLF/CR to LF so the document is "\n"-only (transaction
+			// inserts, unlike EditorState.create, would otherwise keep "\r")
+			initialText = initialText.replace(/\r\n?/g, "\n");
 		}
 
 		this.view = new EditorView({
@@ -1349,6 +1353,9 @@ class CodeMirrorSimpleEngine {
 
 		if(this.isInputMode) {
 			text = text.replace(/[\r\n]+/g, " ");
+		} else {
+			// Normalize CRLF/CR to LF so the document is "\n"-only
+			text = text.replace(/\r\n?/g, "\n");
 		}
 
 		var current = this.view.state.doc.toString();
