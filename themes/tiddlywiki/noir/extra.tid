@@ -16,6 +16,12 @@ tags: [[$:/tags/Stylesheet]]
 	border-radius: var(--n-radius);
 	transition: border-color var(--n-dur) var(--n-ease), box-shadow var(--n-dur) var(--n-ease);
 }
+/* When CM6 replaces the simple title input, the wrapper carries
+   tc-edit-texteditor but its border is drawn on the inner .cm-editor —
+   drop the wrapper border so they don't double up. */
+.tc-tiddler-edit-frame .tc-edit-texteditor.tc-editor-codemirror6 {
+	border: none;
+}
 .tc-tiddler-frame input.tc-edit-texteditor:focus,
 .tc-tiddler-frame textarea.tc-edit-texteditor:focus,
 .tc-tiddler-frame .tc-edit-texteditor:focus {
