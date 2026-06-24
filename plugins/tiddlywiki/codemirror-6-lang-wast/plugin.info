@@ -3,7 +3,7 @@
   "parent-plugin": "$:/plugins/tiddlywiki/codemirror-6",
   "name": "CodeMirror 6 WebAssembly Text Language",
   "description": "WebAssembly Text (WAT/WAST) syntax highlighting for CodeMirror 6",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "plugin-type": "plugin",
   "dependents": "$:/plugins/tiddlywiki/codemirror-6",
   "list": "readme license",
