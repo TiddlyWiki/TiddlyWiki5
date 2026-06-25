@@ -1,0 +1,18 @@
+title: $:/changenotes/5.4.1/#9890
+description: Add 7 themes, from elegant to opaline
+tags: $:/tags/ChangeNote
+release: 5.4.1
+change-type: enhancement
+change-category: theme
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9890
+github-contributors: BurningTreeC
+
+Adds 7 new themes:
+
+* Elegant
+* Lucid (accessiblity first)
+* Modern
+* Noir (designed for dark palettes)
+* Opaline
+* Quietude
+* Workbench
