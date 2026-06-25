@@ -41,19 +41,49 @@ list-before:
 	accent-color: <<colour primary>>;
 }
 
+/* Fallback for browsers without color-mix(): map the grid lines, zebra striping,
+   muted text and accent washes to solid palette colours so the dense ledger
+   layout stays readable (the faint tints simply drop out). */
+@supports not (color: color-mix(in srgb, red, blue)) {
+	:root {
+		--w-muted: <<colour muted-foreground>>;
+		--w-faint: <<colour muted-foreground>>;
+		--w-grid: <<colour tiddler-border>>;
+		--w-grid-strong: <<colour tiddler-border>>;
+		--w-zebra: transparent;
+		--w-accent-ink: <<colour primary>>;
+		--w-wash: transparent;
+		--w-wash-strong: transparent;
+	}
+}
+
 
 /* Tabular, monospace-leaning numerals everywhere data appears */
 .tc-tiddler-subtitle, .tc-tiddler-body table, .tc-view-field-table, .tc-edit-fields {
 	font-variant-numeric: tabular-nums;
 }
 
-html { scroll-behavior: smooth; }
+html {
+	scroll-behavior: smooth;
+	/* Paint the root background from the palette so the page (window) scrollbar
+	   gutter follows the colour-scheme. The custom scrollbar styling below puts
+	   the page scrollbar into "custom" mode, which otherwise ignores
+	   `color-scheme: dark` and leaves the gutter light on dark palettes. */
+	background-color: <<colour page-background>>;
+}
 
 * {
 	scrollbar-width: thin;
 	scrollbar-color: var(--w-grid-strong) transparent;
 }
 *::-webkit-scrollbar { width: 10px; height: 10px; }
+/* TiddlyDesktop / Chromium: styling ::-webkit-scrollbar puts the page (root)
+   scrollbar into custom mode, where the TRACK defaults to a light colour and —
+   unlike inner elements — does NOT show the html background. Colour the root
+   scrollbar track from the palette so the page scrollbar follows dark palettes. */
+html::-webkit-scrollbar,
+html::-webkit-scrollbar-track,
+html::-webkit-scrollbar-corner { background-color: <<colour page-background>>; }
 *::-webkit-scrollbar-thumb {
 	background: var(--w-grid-strong);
 	border-radius: var(--w-radius-sm);

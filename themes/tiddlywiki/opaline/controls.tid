@@ -155,6 +155,20 @@ button.tc-btn-big-green {
 .tc-drop-down .tc-tab-divider,
 .tc-drop-down hr { border: none; height: 1px; background: var(--o-rule); }
 
+/* The more-tiddler-actions popup is anchored inside the controls row and was
+   rendering as a plain transparent panel. Re-assert the frosted-glass surface
+   (higher specificity than the generic .tc-drop-down rule, and than vanilla's
+   `.tc-tiddler-controls .tc-drop-down` font-size rule) so it blurs like every
+   other dropdown. */
+.tc-tiddler-controls .tc-drop-down {
+	background: color-mix(in srgb, <<colour dropdown-background>> 80%, transparent);
+	backdrop-filter: blur(16px) saturate(1.5);
+	-webkit-backdrop-filter: blur(16px) saturate(1.5);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+	.tc-tiddler-controls .tc-drop-down { background: <<colour dropdown-background>>; }
+}
+
 /* Modals: deep frosted glass */
 .tc-modal {
 	border-radius: var(--o-radius);

@@ -37,6 +37,8 @@ footnote-target-background: #102036
 foreground: #f2f2f2
 highlight-background: #ffd000
 highlight-foreground: #000000
+menubar-background: <<colour primary>>
+menubar-foreground: <<colour background>>
 message-background: #102036
 message-border: <<colour foreground>>
 message-foreground: <<colour foreground>>

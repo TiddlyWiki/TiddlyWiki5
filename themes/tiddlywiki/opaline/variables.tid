@@ -84,6 +84,28 @@ list-before:
 	caret-color: <<colour primary>>;
 }
 
+/* Fallback for browsers without color-mix(): map the opal triad and derived
+   tokens to solid palette colours. The play-of-colour collapses to a single
+   accent, but every surface, line and shadow stays valid and legible. */
+@supports not (color: color-mix(in srgb, red, blue)) {
+	:root {
+		--o-muted: <<colour muted-foreground>>;
+		--o-faint: <<colour muted-foreground>>;
+		--o-rule: <<colour tiddler-border>>;
+		--o-rule-strong: <<colour tiddler-border>>;
+		--o-iris-2: <<colour primary>>;
+		--o-iris-3: <<colour primary>>;
+		--o-iris-4: <<colour primary>>;
+		--o-iris-5: <<colour primary>>;
+		--o-wash: transparent;
+		--o-wash-strong: transparent;
+		--o-accent-ink: <<colour primary>>;
+		--o-shadow-1: 0 1px 2px rgba(0,0,0,0.12), 0 10px 26px rgba(0,0,0,0.10);
+		--o-shadow-2: 0 2px 8px rgba(0,0,0,0.14), 0 22px 54px rgba(0,0,0,0.16);
+		--o-shadow-3: 0 10px 36px rgba(0,0,0,0.18), 0 40px 90px rgba(0,0,0,0.22);
+	}
+}
+
 @keyframes o-spin {
 	to { --o-angle: 490deg; }
 }
@@ -95,13 +117,27 @@ list-before:
 
 
 /* A milky, iridescent scrollbar */
-html { scroll-behavior: smooth; }
+html {
+	scroll-behavior: smooth;
+	/* Paint the root background from the palette so the page (window) scrollbar
+	   gutter follows the colour-scheme. The custom scrollbar styling below puts
+	   the page scrollbar into "custom" mode, which otherwise ignores
+	   `color-scheme: dark` and leaves the gutter light on dark palettes. */
+	background-color: <<colour page-background>>;
+}
 
 * {
 	scrollbar-width: thin;
 	scrollbar-color: var(--o-rule-strong) transparent;
 }
 *::-webkit-scrollbar { width: 12px; height: 12px; }
+/* TiddlyDesktop / Chromium: styling ::-webkit-scrollbar puts the page (root)
+   scrollbar into custom mode, where the TRACK defaults to a light colour and —
+   unlike inner elements — does NOT show the html background. Colour the root
+   scrollbar track from the palette so the page scrollbar follows dark palettes. */
+html::-webkit-scrollbar,
+html::-webkit-scrollbar-track,
+html::-webkit-scrollbar-corner { background-color: <<colour page-background>>; }
 *::-webkit-scrollbar-thumb {
 	background: var(--o-rule-strong);
 	border-radius: var(--o-radius-pill);

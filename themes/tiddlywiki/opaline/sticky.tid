@@ -9,7 +9,9 @@ code-body: yes
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/stickytitles" type="match" text="yes">
 ``
 .tc-story-river .tc-tiddler-title {
-	background: color-mix(in srgb, var(--o-paper) 85%, transparent);
+	/* Fully transparent surface — the frosted look comes purely from the
+	   backdrop filter, letting the page colour glow through the stuck header. */
+	background: transparent;
 	backdrop-filter: blur(16px) saturate(1.5);
 	-webkit-backdrop-filter: blur(16px) saturate(1.5);
 }

@@ -69,9 +69,36 @@ list-before:
 	caret-color: <<colour primary>>;
 }
 
+/* Fallback for browsers without color-mix(): map the accent tints, hairlines and
+   soft shadows to solid palette colours. The washes drop out and the accent
+   ladder collapses to one tone, but the editorial structure stays intact. */
+@supports not (color: color-mix(in srgb, red, blue)) {
+	:root {
+		--e-muted: <<colour muted-foreground>>;
+		--e-faint: <<colour muted-foreground>>;
+		--e-accent-deep: <<colour primary>>;
+		--e-accent-quiet: <<colour primary>>;
+		--e-accent-light: <<colour primary>>;
+		--e-wash: transparent;
+		--e-wash-strong: transparent;
+		--e-rule: <<colour tiddler-border>>;
+		--e-rule-strong: <<colour tiddler-border>>;
+		--e-shadow-1: 0 1px 2px rgba(0,0,0,0.08), 0 1px 10px rgba(0,0,0,0.06);
+		--e-shadow-2: 0 4px 14px rgba(0,0,0,0.10), 0 18px 50px rgba(0,0,0,0.12);
+		--e-shadow-3: 0 10px 40px rgba(0,0,0,0.14), 0 30px 80px rgba(0,0,0,0.18);
+	}
+}
+
 
 /* A refined, unobtrusive scrollbar */
-html { scroll-behavior: smooth; }
+html {
+	scroll-behavior: smooth;
+	/* Paint the root background from the palette so the page (window) scrollbar
+	   gutter follows the colour-scheme. The custom scrollbar styling below puts
+	   the page scrollbar into "custom" mode, which otherwise ignores
+	   `color-scheme: dark` and leaves the gutter light on dark palettes. */
+	background-color: <<colour page-background>>;
+}
 
 * {
 	scrollbar-width: thin;
@@ -80,6 +107,15 @@ html { scroll-behavior: smooth; }
 *::-webkit-scrollbar {
 	width: 11px;
 	height: 11px;
+}
+/* TiddlyDesktop / Chromium: styling ::-webkit-scrollbar puts the page (root)
+   scrollbar into custom mode, where the TRACK defaults to a light colour and —
+   unlike inner elements — does NOT show the html background. Colour the root
+   scrollbar track from the palette so the page scrollbar follows dark palettes. */
+html::-webkit-scrollbar,
+html::-webkit-scrollbar-track,
+html::-webkit-scrollbar-corner {
+	background-color: <<colour page-background>>;
 }
 *::-webkit-scrollbar-thumb {
 	background: var(--e-rule-strong);

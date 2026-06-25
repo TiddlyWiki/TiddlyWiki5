@@ -40,6 +40,20 @@ list-before:
 	--l-dur: 120ms;
 }
 
+/* Fallback for browsers without color-mix(): map the structural borders, muted
+   text and accent washes to solid palette colours. Borders stay strong (this is
+   the high-contrast theme) and the foreground-based focus ring is unaffected. */
+@supports not (color: color-mix(in srgb, red, blue)) {
+	:root {
+		--l-border: <<colour muted-foreground>>;
+		--l-border-strong: <<colour foreground>>;
+		--l-muted: <<colour muted-foreground>>;
+		--l-accent-ink: <<colour primary>>;
+		--l-wash: transparent;
+		--l-wash-strong: transparent;
+	}
+}
+
 
 /* Comfortable base sizing and rhythm */
 .tc-tiddler-body, .tc-sidebar-lists, button, input, select, textarea {
@@ -62,13 +76,27 @@ list-before:
 	border-radius: var(--l-radius-sm);
 }
 
-html { scroll-behavior: smooth; }
+html {
+	scroll-behavior: smooth;
+	/* Paint the root background from the palette so the page (window) scrollbar
+	   gutter follows the colour-scheme. The custom scrollbar styling below puts
+	   the page scrollbar into "custom" mode, which otherwise ignores
+	   `color-scheme: dark` and leaves the gutter light on dark palettes. */
+	background-color: <<colour page-background>>;
+}
 
 * {
 	scrollbar-width: auto;
 	scrollbar-color: var(--l-border-strong) transparent;
 }
 *::-webkit-scrollbar { width: 16px; height: 16px; }
+/* TiddlyDesktop / Chromium: styling ::-webkit-scrollbar puts the page (root)
+   scrollbar into custom mode, where the TRACK defaults to a light colour and —
+   unlike inner elements — does NOT show the html background. Colour the root
+   scrollbar track from the palette so the page scrollbar follows dark palettes. */
+html::-webkit-scrollbar,
+html::-webkit-scrollbar-track,
+html::-webkit-scrollbar-corner { background-color: <<colour page-background>>; }
 *::-webkit-scrollbar-thumb {
 	background: var(--l-border-strong);
 	border-radius: 8px;

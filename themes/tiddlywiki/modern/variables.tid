@@ -58,9 +58,33 @@ list-before:
 	--m-dur-slow: 320ms;
 }
 
+/* Fallback for browsers without color-mix(): the accent system above resolves to
+   invalid values there, so map the derived tokens to solid palette colours.
+   Subtle tints/glows simply drop out; lines, text and the accent stay correct. */
+@supports not (color: color-mix(in srgb, red, blue)) {
+	:root {
+		--m-accent-strong: <<colour primary>>;
+		--m-accent-soft: <<colour primary>>;
+		--m-accent-wash: transparent;
+		--m-accent-wash-strong: transparent;
+		--m-glow: transparent;
+		--m-hairline: <<colour tiddler-border>>;
+		--m-shadow-1: 0 1px 2px rgba(0,0,0,0.12), 0 1px 8px rgba(0,0,0,0.08);
+		--m-shadow-2: 0 2px 6px rgba(0,0,0,0.14), 0 10px 24px rgba(0,0,0,0.12);
+		--m-shadow-3: 0 6px 16px rgba(0,0,0,0.18), 0 24px 48px rgba(0,0,0,0.16);
+	}
+}
+
 /* Smooth, accelerated scrolling and a tasteful custom scrollbar */
 
-html { scroll-behavior: smooth; }
+html {
+	scroll-behavior: smooth;
+	/* Paint the root background from the palette so the page (window) scrollbar
+	   gutter follows the colour-scheme. The custom scrollbar styling below puts
+	   the page scrollbar into "custom" mode, which otherwise ignores
+	   `color-scheme: dark` and leaves the gutter light on dark palettes. */
+	background-color: <<colour page-background>>;
+}
 
 * {
 	scrollbar-width: thin;
@@ -70,6 +94,16 @@ html { scroll-behavior: smooth; }
 *::-webkit-scrollbar {
 	width: 10px;
 	height: 10px;
+}
+
+/* TiddlyDesktop / Chromium: styling ::-webkit-scrollbar puts the page (root)
+   scrollbar into custom mode, where the TRACK defaults to a light colour and —
+   unlike inner elements — does NOT show the html background. Colour the root
+   scrollbar track from the palette so the page scrollbar follows dark palettes. */
+html::-webkit-scrollbar,
+html::-webkit-scrollbar-track,
+html::-webkit-scrollbar-corner {
+	background-color: <<colour page-background>>;
 }
 
 *::-webkit-scrollbar-thumb {
