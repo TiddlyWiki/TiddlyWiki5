@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.1/#9889
+description: Make tags in Edit Mode animate instantly when removing
+tags: $:/tags/ChangeNote
+release: 5.4.1
+change-type: bugfix
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9889
+github-contributors: BurningTreeC
+
+Fixes an issue where tags of Tiddlers in Edit Mode don't animate instantly when they get removed
