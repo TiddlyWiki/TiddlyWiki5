@@ -63,26 +63,20 @@ list-before:
 
 html {
 	scroll-behavior: smooth;
-	/* Paint the root background from the palette so the page (window) scrollbar
-	   gutter follows the colour-scheme. The custom scrollbar styling below puts
-	   the page scrollbar into "custom" mode, which otherwise ignores
-	   `color-scheme: dark` and leaves the gutter light on dark palettes. */
 	background-color: <<colour page-background>>;
+	/* Hand the page (viewport) scrollbar back to the browser so it follows the
+	   palette's `color-scheme` on :root. The `* { scrollbar-color }` rule below
+	   themes inner scrollbars, but applied to the root it overrides the native
+	   colour-scheme scrollbar and leaves the page scrollbar light on dark palettes
+	   (notably in TiddlyDesktop). Resetting it restores the native dark bar. */
+	scrollbar-color: initial;
 }
 
 * {
 	scrollbar-width: thin;
 	scrollbar-color: var(--q-line) transparent;
 }
-*::-webkit-scrollbar { width: 10px; height: 10px; }
-/* TiddlyDesktop / Chromium: styling ::-webkit-scrollbar puts the page (root)
-   scrollbar into custom mode, where the TRACK defaults to a light colour and —
-   unlike inner elements — does NOT show the html background. Colour the root
-   scrollbar track from the palette so the page scrollbar follows dark palettes. */
-html::-webkit-scrollbar,
-html::-webkit-scrollbar-track,
-html::-webkit-scrollbar-corner { background-color: <<colour page-background>>; }
-*::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar { width: 10px; height: 10px; }*::-webkit-scrollbar-thumb {
 	background: color-mix(in srgb, <<colour foreground>> 18%, transparent);
 	border-radius: 999px;
 	border: 3px solid transparent;
