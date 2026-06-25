@@ -200,6 +200,15 @@ type: text/vnd.tiddlywiki
   font-weight: 600;
 }
 
+/* --- Block quotes (> ... and <<< ... <<<) ---
+   Defined early so that any token class applied to the *same* span
+   (links, widgets, macros, …) overrides this muted colour and keeps its
+   own styling — only the plain quoted text and markers stay muted/italic. */
+.cm-tw-blockquote {
+  color: var(--wt-fg-muted);
+  font-style: italic;
+}
+
 /* --- Text Formatting ---
    Minimal color changes - let the formatting speak for itself */
 
@@ -332,14 +341,13 @@ type: text/vnd.tiddlywiki
   color: var(--wt-green);
 }
 
-/* --- Lists & Block Elements --- */
+/* --- Lists & Block Elements ---
+   List/definition markers carry a structural colour (the heading colour) so
+   list structure is visible, while the list *body text* keeps the default
+   editor colour. */
 .cm-tw-list {
-  color: var(--wt-fg-muted);
-}
-
-.cm-tw-blockquote {
-  color: var(--wt-fg-muted);
-  font-style: italic;
+  color: var(--wt-heading);
+  font-weight: 600;
 }
 
 .cm-tw-hr {
@@ -372,6 +380,13 @@ type: text/vnd.tiddlywiki
 
 .cm-tw-mark {
   color: var(--wt-fg-muted);
+}
+
+/* Hard line break block markers (""" ... """) — coloured like literal/
+   preformatted text since the block preserves line breaks verbatim. */
+.cm-tw-linebreak {
+  color: var(--wt-code-fg);
+  font-weight: 600;
 }
 
 .cm-tw-comment {

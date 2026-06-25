@@ -17,7 +17,7 @@ Combined: ''//bold italic//'' and //''italic bold''// and ``//literal slashes//`
 @@.tc-big-green-button A styled span with a class@@
 @@color:red;A span with an inline CSS colour@@
 @@background-color:yellow;color:black;Multiple CSS declarations@@
-@@.myclass;color:blue;Class and CSS together@@
+@@color:blue;.myclass CSS and class together (styles must come before classes)@@
 
 !! Dashes and special characters
 
