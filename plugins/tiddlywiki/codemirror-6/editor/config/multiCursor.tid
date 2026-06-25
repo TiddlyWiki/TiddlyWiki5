@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/editor/multiCursor
+caption: Multi-cursor editing
+description: Enable multiple cursors for editing multiple locations at once. Use Ctrl+Click to add cursors, Ctrl+D to select next occurrence, Ctrl+Alt+Up/Down to add cursors above/below.
+config-type: checkbox
+config-category: Editing
+default: yes
+text: yes

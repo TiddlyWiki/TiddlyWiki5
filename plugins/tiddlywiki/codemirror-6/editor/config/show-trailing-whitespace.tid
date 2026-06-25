@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/editor/showTrailingWhitespace
+caption: Show trailing whitespace
+description: Highlight trailing whitespace at end of lines
+config-type: checkbox
+config-category: Display
+default: no
+text: no

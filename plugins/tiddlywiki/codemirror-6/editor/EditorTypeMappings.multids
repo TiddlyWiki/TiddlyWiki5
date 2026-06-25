@@ -1,0 +1,19 @@
+title: $:/config/EditorTypeMappings/
+
+text/json: codemirror-6
+application/x-tiddler-dictionary: codemirror-6
+text/css: codemirror-6
+text/html: codemirror-6
+text/plain: codemirror-6
+text/vnd.tiddlywiki: codemirror-6
+text/vnd.tiddlywiki-multiple: codemirror-6
+text/x-tiddlywiki: codemirror-6
+text/x-markdown: codemirror-6
+text/markdown: codemirror-6
+text/xml: codemirror-6
+application/xml: codemirror-6
+image/svg+xml: codemirror-6
+text/x-yaml: codemirror-6
+text/yaml: codemirror-6
+application/x-yaml: codemirror-6
+application/yaml: codemirror-6
