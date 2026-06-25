@@ -36,6 +36,48 @@ var _forceLinting = lintLib ? lintLib.forceLinting : null;
 var _Compartment = null;
 
 // ============================================================================
+// Robustness helpers
+// ============================================================================
+
+// Documents larger than this are not linted, to keep the editor responsive.
+// (1,000,000 chars is far beyond any realistic tiddler.)
+var MAX_LINT_DOC_LENGTH = 1000000;
+
+/**
+ * Run a check function, swallowing (and logging once) any error so a single
+ * failing check can never throw out of the linter or abort the other checks.
+ * @param {string} label - Identifier for diagnostics/logging
+ * @param {function} fn - The function to run
+ * @param {*} fallback - Value to return if fn throws
+ * @returns {*} fn's result, or fallback on error
+ */
+function safeRun(label, fn, fallback) {
+	try {
+		return fn();
+	} catch(e) {
+		try {
+			if(typeof console !== "undefined" && console && console.warn) {
+				console.warn("[codemirror-6-lint] check '" + label + "' failed:", e);
+			}
+		} catch(_ignored) {}
+		return fallback;
+	}
+}
+
+/**
+ * Empty local-definitions structure used as a safe fallback.
+ */
+function emptyLocalDefinitions() {
+	return {
+		macros: new Set(),
+		procedures: new Set(),
+		functions: new Set(),
+		widgets: new Set(),
+		variables: new Set()
+	};
+}
+
+// ============================================================================
 // Configuration
 // ============================================================================
 
@@ -1002,6 +1044,33 @@ function getVariablesInScope(node, docText) {
 		// Check for inline conditional siblings (Conditional nodes are siblings, not parents)
 		if(isInsideInlineConditional(current, docText)) {
 			scopeVars.add("condition");
+		}
+
+		// Check for filter assignment shortcut (=>name, the :let run prefix).
+		// Variables assigned with => in a filter expression are available to
+		// subsequent runs of that same filter, e.g.
+		//   [tag[a]] =>savedTitles [<savedTitles>count[]]
+		if(typeName === "FilterExpression") {
+			var filterText = docText.slice(current.from, current.to);
+			var letRe = /=>(?:"([^"]+)"|'([^']+)'|\[\[([^\]]+)\]\]|([\w$.\-]+))/g;
+			var letMatch;
+			while((letMatch = letRe.exec(filterText)) !== null) {
+				var assignedName = letMatch[1] || letMatch[2] || letMatch[3] || letMatch[4];
+				if(assignedName) scopeVars.add(assignedName);
+			}
+			// Implicit variables provided by named filter run prefixes.
+			// Iterating runs (:map :filter :reduce :sort :some :all) expose
+			// currentTiddler/index/revIndex/length; :reduce also exposes accumulator.
+			// Added leniently if any such prefix appears in the filter.
+			if(/:(?:map|filter|reduce|sort|some|all|subfilter)\b/.test(filterText)) {
+				scopeVars.add("currentTiddler");
+				scopeVars.add("index");
+				scopeVars.add("revIndex");
+				scopeVars.add("length");
+			}
+			if(/:reduce\b/.test(filterText)) {
+				scopeVars.add("accumulator");
+			}
 		}
 
 		current = current.parent;
@@ -3218,33 +3287,97 @@ function findEmptyFilterOperators(tree, state) {
 // ============================================================================
 
 /**
+ * Produce a copy of the document text with the content of code regions
+ * (inline code, fenced code blocks and non-wikitext typed blocks) replaced by
+ * spaces. Character positions and line breaks are preserved so the masked text
+ * can be used interchangeably with the original for position/line-based checks.
+ *
+ * This prevents regex-based pragma detection from treating pragma EXAMPLES that
+ * appear inside code (e.g. `\define name() ... \end` in a documentation list)
+ * as real pragma definitions.
+ * @param {Tree} tree - The syntax tree
+ * @param {string} docText - The full document text
+ * @returns {string} The masked document text
+ */
+function maskCodeRegions(tree, docText) {
+	var chars = docText.split("");
+	function blank(from, to) {
+		for(var i = from; i < to; i++) {
+			if(chars[i] !== "\n" && chars[i] !== "\r") chars[i] = " ";
+		}
+	}
+	tree.iterate({
+		enter: function(node) {
+			var name = node.type.name;
+			// Inline code and fenced code blocks are always literal in TiddlyWiki,
+			// even when a nested language parser highlights their content (e.g. a
+			// ```latex block containing \end{document}). Mask the whole container
+			// and don't descend into any mounted sub-language tree.
+			if(name === "InlineCode" || name === "FencedCode") {
+				blank(node.from, node.to);
+				return false;
+			}
+			// Typed blocks ($$$type): only text/vnd.tiddlywiki content is real
+			// wikitext that should still be linted; everything else is literal code.
+			if(name === "TypedBlock") {
+				var typeNode = node.node.getChild("TypedBlockType");
+				var typeName = typeNode ? docText.slice(typeNode.from, typeNode.to) : "";
+				if(typeName !== "text/vnd.tiddlywiki" && typeName !== "text/x-tiddlywiki") {
+					blank(node.from, node.to);
+					return false;
+				}
+				// text/vnd.tiddlywiki content is real wikitext: leave it lintable.
+			}
+		}
+	});
+	return chars.join("");
+}
+
+/**
  * Create linter function
  * @param {EditorView} view - The CodeMirror editor view
  * @param {Set<string>} widgetScopeVars - Variables from the widget tree scope (parent widgets)
  */
 function createTiddlyWikiLinter(view, widgetScopeVars) {
-	if(!_syntaxTree) return [];
+	if(!_syntaxTree || !view || !view.state) return [];
 
 	var diagnostics = [];
 	var state = view.state;
-	var tree = _syntaxTree(state);
+	var tree = safeRun("syntaxTree", function() { return _syntaxTree(state); }, null);
+	if(!tree) return diagnostics;
 	var docText = state.doc.toString();
+	// Performance guard: do not lint extremely large documents, to keep the
+	// editor responsive. Such documents are virtually never hand-edited wikitext.
+	if(docText.length > MAX_LINT_DOC_LENGTH) return diagnostics;
+
+	// Text with code regions blanked out, for regex-based pragma detection so
+	// that pragma examples inside inline code / code blocks are not mistaken
+	// for real pragma definitions (positions are preserved).
+	var maskedDocText = safeRun("maskCodeRegions", function() {
+		return maskCodeRegions(tree, docText);
+	}, docText) || docText;
 
 	// Ensure widgetScopeVars is a Set
 	widgetScopeVars = widgetScopeVars || new Set();
 
 	// Get local definitions
-	var localDefs = extractLocalDefinitions(docText);
+	var localDefs = safeRun("extractLocalDefinitions", function() {
+		return extractLocalDefinitions(maskedDocText);
+	}, null) || emptyLocalDefinitions();
 
 	// Build call-site analysis for dynamic scope resolution
-	var callAnalysis = buildCallSiteAnalysis(tree, docText);
+	var callAnalysis = safeRun("buildCallSiteAnalysis", function() {
+		return buildCallSiteAnalysis(tree, docText);
+	}, null) || { getDefinitionAtPosition: function() { return null; } };
 
 	// ========================================
 	// Syntax Tree Based Checks
 	// ========================================
 
+	safeRun("syntaxTreeChecks", function() {
 	tree.iterate({
 		enter: function(node) {
+		  try {
 			var nodeType = node.type.name;
 			var from = node.from;
 			var to = node.to;
@@ -3339,10 +3472,18 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 				}
 			}
 
-			// Check filter variable references <varName> and (varName)
-			if((nodeType === "FilterVariable" || nodeType === "FilterMultiVariable") && isRuleEnabled("undefinedMacros")) {
-				// FilterVariable includes angle brackets, FilterMultiVariable includes parentheses - extract the name
-				var varName = text.replace(/^[<(]|[>)]$/g, "").trim();
+			// Check variable references that may be undefined / out of scope, in
+			// every form, so an undefined variable is flagged consistently:
+			//   <name>            filter variable       (FilterVariable)
+			//   (name)            MVV filter operand    (FilterMultiVariable)
+			//   ((name)) / ((name||sep))  MVV display   (MVVDisplay)
+			if((nodeType === "FilterVariable" || nodeType === "FilterMultiVariable" || nodeType === "MVVDisplay") && isRuleEnabled("undefinedMacros")) {
+				// Prefer the VariableName child for a reliable name (this also
+				// strips any ||separator from the MVV display form); fall back to
+				// stripping the surrounding < > ( ) (( )) delimiters.
+				var varNameNode = node.node.getChild("VariableName");
+				var varName = varNameNode ? docText.slice(varNameNode.from, varNameNode.to).trim()
+					: text.replace(/^\(+|\)+$|^<|>$/g, "").trim();
 				if(varName) {
 					// Check global definitions first, plus widget tree scope
 					// Note: localDefs.variables is NOT checked here because those are scoped variables
@@ -3374,7 +3515,7 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 								from: from,
 								to: to,
 								severity: "info",
-								message: "Possibly undefined or out-of-scope variable in filter: " + varName,
+								message: "Possibly undefined or out-of-scope variable: " + varName,
 								source: "tiddlywiki"
 							});
 						}
@@ -3711,15 +3852,17 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 					});
 				});
 			}
+		  } catch(_nodeErr) { /* skip this node, keep linting the rest */ }
 		}
 	});
+	}, undefined);
 
 	// ========================================
 	// Empty Filter Operators (with quick-fix)
 	// ========================================
 
 	if(isRuleEnabled("filterSyntax")) {
-		var emptyOps = findEmptyFilterOperators(tree, state);
+		var emptyOps = safeRun("emptyFilterOperators", function() { return findEmptyFilterOperators(tree, state); }, []) || [];
 		emptyOps.forEach(function(issue) {
 			diagnostics.push({
 				from: issue.from,
@@ -3747,10 +3890,11 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 	// Unknown Filter Operators/Functions
 	// ========================================
 
-	if(isRuleEnabled("filterSyntax")) {
-		var knownOperators = _getKnownFilterOperators();
+	if(isRuleEnabled("filterSyntax")) safeRun("unknownFilterOperators", function() {
+		var knownOperators = _getKnownFilterOperators() || new Set();
 		tree.iterate({
 			enter: function(node) {
+			  try {
 				if(node.type.name === "FilterOperatorName") {
 					var opName = docText.slice(node.from, node.to).trim();
 					// Skip empty names
@@ -3780,16 +3924,17 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 						source: "tiddlywiki"
 					});
 				}
+			  } catch(_nodeErr) {}
 			}
 		});
-	}
+	}, undefined);
 
 	// ========================================
 	// Unclosed Widgets (with quick-fix)
 	// ========================================
 
 	if(isRuleEnabled("unclosedWidgets")) {
-		var widgetIssues = findUnclosedWidgets(tree, state);
+		var widgetIssues = safeRun("unclosedWidgets", function() { return findUnclosedWidgets(tree, state); }, []) || [];
 		widgetIssues.forEach(function(issue) {
 			var tagName = issue.name || "";
 			var isHTML = issue.isHTML;
@@ -3968,7 +4113,7 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 	// ========================================
 
 	if(isRuleEnabled("unclosedPragmas")) {
-		var pragmaIssues = findUnclosedPragmas(docText, 0);
+		var pragmaIssues = safeRun("unclosedPragmas", function() { return findUnclosedPragmas(maskedDocText, 0); }, []) || [];
 		// Filter out issues that are inside attribute values (e.g., src='...\end...')
 		// These are wikitext strings that will be processed later, not actual pragmas
 		pragmaIssues = pragmaIssues.filter(function(issue) {
@@ -4072,7 +4217,7 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 	// ========================================
 
 	if(isRuleEnabled("misplacedPragmas")) {
-		var misplacedIssues = findMisplacedPragmas(docText, 0);
+		var misplacedIssues = safeRun("misplacedPragmas", function() { return findMisplacedPragmas(maskedDocText, 0); }, []) || [];
 		misplacedIssues.forEach(function(issue) {
 			var actionName = issue.containingPragma ?
 				"Move to top of \\" + issue.containingPragma.type + " " + issue.containingPragma.name :
@@ -4174,7 +4319,7 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 	// ========================================
 
 	if(isRuleEnabled("unclosedConditionals")) {
-		var condIssues = findUnclosedConditionals(tree, state);
+		var condIssues = safeRun("unclosedConditionals", function() { return findUnclosedConditionals(tree, state); }, []) || [];
 		// Filter out issues inside attribute values (they are isolated parsing contexts)
 		condIssues = condIssues.filter(function(issue) {
 			return !isInsideAttributeValue(tree, issue.from);
@@ -4229,7 +4374,7 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 	// ========================================
 
 	if(isRuleEnabled("unclosedCodeBlocks")) {
-		var codeIssues = findUnclosedCodeBlocks(state);
+		var codeIssues = safeRun("unclosedCodeBlocks", function() { return findUnclosedCodeBlocks(state); }, []) || [];
 		codeIssues.forEach(function(issue) {
 			var marker = issue.marker || "```";
 			var insertAt = issue.insertAt;
@@ -4272,9 +4417,10 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 	// Incomplete Tags (missing closing >)
 	// ========================================
 
-	if(isRuleEnabled("incompleteTags")) {
+	if(isRuleEnabled("incompleteTags")) safeRun("incompleteTags", function() {
 		tree.iterate({
 			enter: function(node) {
+			  try {
 				var nodeType = node.type.name;
 				if(nodeType === "IncompleteWidget" ||
 					nodeType === "IncompleteHTMLTag" ||
@@ -4393,17 +4539,18 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 						actions: actions
 					});
 				}
+			  } catch(_nodeErr) {}
 			}
 		});
-	}
+	}, undefined);
 
 	// ========================================
 	// Duplicate Definitions
 	// ========================================
 
 	if(isRuleEnabled("duplicateDefinitions")) {
-		var defsWithPos = extractLocalDefinitionsWithPositions(docText);
-		var duplicateIssues = findDuplicateDefinitions(defsWithPos);
+		var defsWithPos = safeRun("definitionsWithPositions", function() { return extractLocalDefinitionsWithPositions(maskedDocText); }, []) || [];
+		var duplicateIssues = safeRun("duplicateDefinitions", function() { return findDuplicateDefinitions(defsWithPos); }, []) || [];
 		duplicateIssues.forEach(function(issue) {
 			diagnostics.push({
 				from: issue.from,
@@ -4420,9 +4567,9 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 	// ========================================
 
 	if(isRuleEnabled("unusedDefinitions")) {
-		var defsWithPos = extractLocalDefinitionsWithPositions(docText);
-		var usages = findDefinitionUsages(docText);
-		var unusedIssues = findUnusedDefinitions(defsWithPos, usages);
+		var defsWithPos = safeRun("definitionsWithPositions", function() { return extractLocalDefinitionsWithPositions(maskedDocText); }, []) || [];
+		var usages = safeRun("definitionUsages", function() { return findDefinitionUsages(docText); }, null);
+		var unusedIssues = safeRun("unusedDefinitions", function() { return findUnusedDefinitions(defsWithPos, usages); }, []) || [];
 		unusedIssues.forEach(function(issue) {
 			// Capture values in IIFE to ensure closure works correctly
 			(function(defFrom, defTo) {
@@ -4498,7 +4645,7 @@ function createTiddlyWikiLinter(view, widgetScopeVars) {
 	// ========================================
 
 	if(isRuleEnabled("invalidTags")) {
-		var tagIssues = findInvalidTagReferences(tree, state);
+		var tagIssues = safeRun("invalidTags", function() { return findInvalidTagReferences(tree, state); }, []) || [];
 		tagIssues.forEach(function(issue) {
 			diagnostics.push({
 				from: issue.from,
@@ -4549,10 +4696,17 @@ function isLintDisabledForTiddler(tiddlerTitle, wiki) {
  */
 function createLinterWithContext(widget) {
 	// Extract widget tree variables once and cache them
-	var widgetScopeVars = extractWidgetTreeVariables(widget);
+	var widgetScopeVars = safeRun("extractWidgetTreeVariables", function() {
+		return extractWidgetTreeVariables(widget);
+	}, null) || new Set();
 
 	return function(view) {
-		return createTiddlyWikiLinter(view, widgetScopeVars);
+		// Final safety net: the linter must never throw, or CodeMirror's lint
+		// extension can break / spam errors. Any unexpected failure yields an
+		// empty diagnostic set for this pass instead.
+		return safeRun("createTiddlyWikiLinter", function() {
+			return createTiddlyWikiLinter(view, widgetScopeVars);
+		}, []) || [];
 	};
 }
 

@@ -592,6 +592,14 @@ tags: $:/tags/Stylesheet
   color: #909090;
 }
 
+.cm6-theme-greyscale-dark .cm-tw-class,
+.cm6-theme-greyscale .cm-tw-class,
+[data-cm6-theme="greyscale-dark"] .cm-tw-class,
+[data-cm6-theme="greyscale"] .cm-tw-class {
+  font-weight: 500;
+  color: #a0a0a0;
+}
+
 /* Filters */
 .cm6-theme-greyscale-dark .cm-tw-filter,
 .cm6-theme-greyscale-dark .cm-tw-filterop,
@@ -867,6 +875,12 @@ tags: $:/tags/Stylesheet
 [data-cm6-theme="greyscale-light"] .cm-tw-attribute-value {
   font-weight: 400;
   color: #606060;
+}
+
+.cm6-theme-greyscale-light .cm-tw-class,
+[data-cm6-theme="greyscale-light"] .cm-tw-class {
+  font-weight: 500;
+  color: #505050;
 }
 
 /* Filters */

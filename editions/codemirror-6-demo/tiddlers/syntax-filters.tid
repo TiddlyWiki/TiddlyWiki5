@@ -5,38 +5,63 @@ type: text/vnd.tiddlywiki
 tags: $:/tags/Demo
 
 ! Filter expression building blocks
+
 These are shown inside filtered transclusions so the filter syntax is highlighted.
 
-! Operands
-{{{ [tag[done]] }}}
-{{{ [[Literal Title]] }}}
-{{{ [field:caption[My Caption]] }}}
-{{{ [search:title,caption[term]] }}}
-{{{ [tag<currentTiddler>] }}}
-{{{ [get{!!field}] }}}
-{{{ [regexp[^foo.*$]] }}}
-{{{ [(myMultiValuedVariable)] }}}
+!! Operands
 
-! Negation, suffixes, multiple operands
-{{{ [tag[done]!is[draft]] }}}
-{{{ [search:title:casesensitive,literal[Foo]] }}}
-{{{ [list[a],[b],<c>] }}}
+* Operator with operand: {{{ [tag[done]] }}}
+* Literal title: {{{ [[Literal Title]] }}}
+* Bare word title: {{{ [title[HelloThere]] }}}
+* Field operator: {{{ [field:caption[My Caption]] }}}
+* Variable operand: {{{ [tag<currentTiddler>] }}}
+* Text reference operand: {{{ [get{!!field}] }}}
+* Regexp operand: {{{ [regexp[^foo.*$]] }}}
+* Multi-valued variable operand: {{{ [(myMultiValuedVariable)] }}}
+* Standalone variable run: {{{ [<currentTiddler>] }}}
+* Standalone transclusion run: {{{ [{!!title}] }}}
+* Standalone title run: {{{ [[Some Tiddler]] }}}
 
-! Run prefixes
-{{{ [tag[a]] +[sort[title]] }}}
-{{{ [tag[a]] ~[all[shadows]] }}}
-{{{ [tag[a]] -[tag[b]] }}}
-{{{ [tag[a]] =[[ExtraTitle]] }}}
-{{{ [tag[a]] :and[!is[system]] }}}
-{{{ [tag[a]] :or[tag[b]] }}}
-{{{ [tag[a]] :filter[get[priority]match[high]] }}}
-{{{ [tag[a]] :map[get[title]] }}}
-{{{ [tag[a]] :reduce:flat[addall<accumulator>] }}}
-{{{ [tag[a]] :sort[get[modified]] }}}
+!! Suffixes
 
-! Assignment shortcut (=> / :let)
-{{{ [tag[a]] =>savedTitles [<savedTitles>count[]] }}}
-{{{ [tag[a]] =>"my titles" }}}
+* Single suffix: {{{ [search:title[term]] }}}
+* Multiple suffix parts: {{{ [search:title,caption[term]] }}}
+* Named suffix flags: {{{ [search:title:casesensitive,literal[Foo]] }}}
 
-! Variables and MVV inside filters
-{{{ [tag<currentTiddler>] [(mvv)] }}}
+!! Negation and multiple operands
+
+* Negated operator: {{{ [tag[done]!is[draft]] }}}
+* Multiple operands: {{{ [list[a],[b],<c>] }}}
+* Empty operand: {{{ [all[]] }}}
+
+!! Run prefixes
+
+* And (default): {{{ [tag[a]] +[sort[title]] }}}
+* Optional (or): {{{ [tag[a]] ~[all[shadows]] }}}
+* Negation run: {{{ [tag[a]] -[tag[b]] }}}
+* Append literal run: {{{ [tag[a]] =[[ExtraTitle]] }}}
+* Named `:and`: {{{ [tag[a]] :and[!is[system]] }}}
+* Named `:or`: {{{ [tag[a]] :or[tag[b]] }}}
+* Named `:filter`: {{{ [tag[a]] :filter[get[priority]match[high]] }}}
+* Named `:map`: {{{ [tag[a]] :map[get[title]] }}}
+* Named `:reduce`: {{{ [tag[a]] :reduce[add<accumulator>] }}}
+* Named `:sort`: {{{ [tag[a]] :sort[get[modified]] }}}
+* Named with suffix: {{{ [tag[a]] :reduce:flat[add<accumulator>] }}}
+
+!! Assignment shortcut (=> / :let)
+
+* Assign to a named variable: {{{ [tag[a]] =>savedTitles [<savedTitles>count[]] }}}
+* Assign to a quoted name: {{{ [tag[a]] =>"my titles" }}}
+
+!! Variables and MVV inside filters
+
+* Variable and MVV together: {{{ [tag<currentTiddler>] [(mvv)] }}}
+* MVV in an operand position: {{{ [enlist<myListVariable>] }}}
+
+!! Filters in widget attributes
+
+<$list filter="[tag[done]sort[title]limit[10]]">
+* <<currentTiddler>>
+</$list>
+
+(A filter can also back a `\function` — see the //Pragmas// demo.)

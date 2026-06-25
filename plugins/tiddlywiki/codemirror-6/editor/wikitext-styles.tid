@@ -246,6 +246,13 @@ type: text/vnd.tiddlywiki
   padding: 0 3px;
 }
 
+/* Highlighted spans (@@...@@) */
+.cm-tw-highlight {
+  color: var(--wt-highlight-fg);
+  background-color: var(--wt-highlight-bg);
+  border-radius: 2px;
+}
+
 /* --- Code --- */
 .cm-tw-code {
   color: var(--wt-code-fg);
@@ -319,6 +326,10 @@ type: text/vnd.tiddlywiki
 
 .cm-tw-attribute-value {
   color: var(--wt-cyan);
+}
+
+.cm-tw-class {
+  color: var(--wt-green);
 }
 
 /* --- Lists & Block Elements --- */

@@ -1,0 +1,120 @@
+title: Draft of 'Syntax — Code & Nested Languages'
+draft.of: Syntax — Code & Nested Languages
+draft.title: Syntax — Code & Nested Languages
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+! Inline code
+
+Single backtick `let x = 1`, and double backtick to embed a literal backtick:
+``text with a ` backtick inside``.
+
+! Fenced code blocks
+
+Each fenced block is highlighted by its language plugin (when installed).
+
+```javascript
+function add(a, b) {
+	const sum = a + b;
+	return sum; // line comment
+}
+```
+
+```python
+def greet(name="World"):
+	return f"Hello, {name}!"
+```
+
+```css
+.tc-tiddler-frame {
+	color: var(--foreground);
+	padding: 0.5em 1em;
+}
+```
+
+```sass
+$primary: #c159a5
+.button
+	color: $primary
+	&:hover
+		color: darken($primary, 10%)
+```
+
+```sql
+SELECT title, modified
+FROM tiddlers
+WHERE tags LIKE '%done%'
+ORDER BY modified DESC;
+```
+
+```rust
+fn main() {
+	let nums = vec![1, 2, 3];
+	let total: i32 = nums.iter().sum();
+	println!("total = {}", total);
+}
+```
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello, TiddlyWiki")
+}
+```
+
+```java
+class Hello {
+	public static void main(String[] args) {
+		System.out.println("Hello");
+	}
+}
+```
+
+```cpp
+#include <iostream>
+int main() {
+	std::cout << "Hello" << std::endl;
+	return 0;
+}
+```
+
+```php
+<?php
+function greet($name = "World") {
+	return "Hello, " . $name;
+}
+?>
+```
+
+```latex
+\documentclass{article}
+\begin{document}
+E = mc^2
+\end{document}
+```
+
+! Fenced block without a language
+
+```
+plain preformatted text
+no language highlighting here
+```
+
+! Typed blocks
+
+Typed blocks declare their content type after `$$$`:
+
+$$$text/css
+.foo { color: red; }
+$$$
+
+$$$application/javascript
+const answer = 42;
+$$$
+
+$$$text/vnd.tiddlywiki
+This is ''wikitext'' inside a typed block, with a [[Link]] and <<currentTiddler>>.
+$$$

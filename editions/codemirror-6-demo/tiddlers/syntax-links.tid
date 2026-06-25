@@ -5,30 +5,53 @@ type: text/vnd.tiddlywiki
 tags: $:/tags/Demo
 
 ! Links
+
 * Wiki link: [[Some Tiddler]]
 * Pretty link with caption: [[Caption|Target Tiddler]]
+* Link to a system tiddler: [[$:/DefaultTiddlers]]
 * CamelCase link: HelloThere
 * Suppressed CamelCase: ~HelloThere
 * External link: https://tiddlywiki.com
-* Pretty external: [[TW home|https://tiddlywiki.com]]
-* Link to field: [[Target Tiddler]]
+* External with caption: [[TW home|https://tiddlywiki.com]]
+* Mailto link: [[Mail|mailto:nobody@example.com]]
+* Link to a tiddler with a space: [[A Tiddler Title]]
 
-! Images
+!! Images
+
 [img[Motovun Jack.jpg]]
-[img width=200 class="tc-image" [Motovun Jack.jpg]]
-[img[Tooltip|Motovun Jack.jpg]]
+[img[Tooltip text|Motovun Jack.jpg]]
+[img width=200 height=150 class="tc-image" [Motovun Jack.jpg]]
+[img width={{!!width}} [Motovun Jack.jpg]]
+[img[https://tiddlywiki.com/favicon.ico]]
 
-! Transclusions
+!! Transclusions
+
 * Whole tiddler: {{MyTiddler}}
-* With template: {{MyTiddler||$:/core/ui/ViewTemplate}}
+* With a template: {{MyTiddler||$:/core/ui/ViewTemplate}}
+* Template only (current tiddler): {{||$:/core/ui/ViewTemplate}}
 * Field reference: {{MyTiddler!!caption}}
+* Current-tiddler field: {{!!title}}
 * Index reference: {{MyData##key}}
-* Block transclusion alone on a line:
+
+Block-level transclusion alone on a line:
 
 {{MyTiddler}}
 
-! Filtered transclusions
-Inline: {{{ [tag[HelloThere]] }}}
-Block:
+{{MyTiddler||$:/core/ui/ViewTemplate}}
+
+!! Filtered transclusions
+
+* Inline: {{{ [tag[HelloThere]] }}}
+* Inline with template: {{{ [tag[done]] ||$:/core/ui/ListItemTemplate }}}
+* Inline with a custom separator: {{{ [tag[done]] +[sort[title]] :and[limit[5]] }}}
+
+Block-level filtered transclusion:
+
+{{{ [tag[done]sort[title]] }}}
 
 {{{ [tag[done]sort[title]] ||$:/core/ui/ListItemTemplate }}}
+
+!! Pretty extended links
+
+* With tooltip via widget: <$link to="HelloThere" tooltip="Go there">A widget link</$link>
+* Anchor-style external: <a href="https://tiddlywiki.com" class="tc-tiddlylink-external">raw anchor</a>
