@@ -7,4 +7,4 @@ change-category: core
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9891
 github-contributors: linonetwo
 
-Background actions with `platforms: browser` were logging "Processing background action" on the Node.js server even though the action itself was correctly skipped. The `console.log` is now moved inside the `if(doActions)` block so it only prints when the action actually executes on the matching platform.
+Background actions with `platforms: browser` were logging on the server even though execution was correctly skipped. The log now only prints when the action actually runs.
