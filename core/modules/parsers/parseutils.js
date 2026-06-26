@@ -598,3 +598,106 @@ exports.parseAttribute = function(source,pos) {
 	node.end = pos;
 	return node;
 };
+
+/*
+Build the inline/block parse tree for filtered transclusion.
+Parameters:
+	source: the source string being parsed
+	filterStart: position of the first character of the filter
+	filterEnd: position just after the last character of the filter
+	tailMatch: the result of matching the tooltip/template/style/classes that
+		follow the filter, with capture groups:
+			1 - tooltip, 2 - template, 3 - style, 4 - classes
+	isBlock: true for the block-level rule
+*/
+exports.createFilteredTranscludeNode = function(source,filterStart,filterEnd,tailMatch,isBlock) {
+	// Position of each component, advancing past a separator only when its
+	// component is present
+	var pos = filterEnd,
+		toolTipStart, toolTipEnd, templateStart, templateEnd,
+		styleStart, styleEnd, classesStart, classesEnd;
+	if(tailMatch[1] !== undefined) { // |tooltip
+		toolTipStart = pos + 1;
+		toolTipEnd = pos = toolTipStart + tailMatch[1].length;
+	}
+	if(tailMatch[2] !== undefined) { // ||template
+		templateStart = pos + 2;
+		templateEnd = pos = templateStart + tailMatch[2].length;
+	}
+	styleStart = pos + 2; // }}style
+	styleEnd = pos = styleStart + tailMatch[3].length;
+	pos += 1; // closing }
+	if(tailMatch[4] !== undefined) { // .classes
+		classesStart = pos + 1;
+		classesEnd = classesStart + tailMatch[4].length;
+	}
+	// Get the component values
+	var tooltip = tailMatch[1],
+		template = $tw.utils.trim(tailMatch[2]),
+		style = tailMatch[3],
+		classes = tailMatch[4];
+	// Build the list widget node
+	var node = {
+		type: "list",
+		attributes: {
+			filter: {type: "string", value: source.substring(filterStart,filterEnd), start: filterStart, end: filterEnd}
+		}
+	};
+	if(isBlock) {
+		node.isBlock = true;
+	}
+	if(tooltip) {
+		node.attributes.tooltip = {type: "string", value: tooltip, start: toolTipStart, end: toolTipEnd};
+	}
+	if(template) {
+		node.attributes.template = {type: "string", value: template, start: templateStart, end: templateEnd};
+	}
+	if(style) {
+		node.attributes.style = {type: "string", value: style, start: styleStart, end: styleEnd};
+	}
+	if(classes) {
+		node.attributes.itemClass = {type: "string", value: classes.split(".").join(" "), start: classesStart, end: classesEnd};
+	}
+	return node;
+};
+
+/*
+Find the next inline/block filtered transclusion at or after `pos`.
+Parameters:
+	parser: the wiki parser (provides the source and `parseFilterStop`)
+	pos: the position to search from
+	reTail: a sticky regexp matching the optional tooltip/template/style/classes
+		that follow the filter (the block rule's also matches the terminating
+		end-of-line)
+	isBlock: true for the block-level rule
+Returns null if none is found, otherwise {start:, end:, node:}.
+*/
+exports.findNextFilteredTransclude = function(parser,pos,reTail,isBlock) {
+	var source = parser.source,
+		reLookahead = /\{\{\{/g;
+	reLookahead.lastIndex = pos;
+	var match = reLookahead.exec(source);
+	while(match) {
+		var start = match.index,
+			filterStart = start + 3,
+			// Find the end of the filter
+			filterEnd = parser.wiki.parseFilterStop(source,filterStart);
+		// An empty filter is not a filtered transclusion
+		if(filterEnd !== filterStart) {
+			// Match the optional tooltip, template, style and classes that follow it
+			reTail.lastIndex = filterEnd;
+			var tailMatch = reTail.exec(source);
+			if(tailMatch) {
+				return {
+					start: start,
+					end: reTail.lastIndex,
+					node: $tw.utils.createFilteredTranscludeNode(source,filterStart,filterEnd,tailMatch,isBlock)
+				};
+			}
+		}
+		// Not a valid transclusion here; try the next `{{{`
+		reLookahead.lastIndex = start + 1;
+		match = reLookahead.exec(source);
+	}
+	return null;
+};
