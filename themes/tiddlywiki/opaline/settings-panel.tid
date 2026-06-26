@@ -1,0 +1,7 @@
+title: $:/themes/tiddlywiki/opaline/settings-panel
+tags: $:/tags/ControlPanel/Appearance
+caption: Opaline
+
+! Opaline theme
+
+<$checkbox tiddler="$:/config/themes/opaline/shimmer" field="text" checked="yes" unchecked="no" default="yes"> Masthead shimmer & selected-tab sheen</$checkbox>

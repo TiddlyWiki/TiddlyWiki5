@@ -1,0 +1,15 @@
+title: $:/themes/tiddlywiki/workbench/sticky
+tags: [[$:/tags/Stylesheet]]
+code-body: yes
+
+<!-- When sticky titles are enabled, vanilla gives the title an opaque
+     background (tiddler-background). Override it to match THIS theme's
+     panel surface so the stuck header stays consistent. Higher
+     specificity than vanilla's rule; only emitted while sticky is on. -->
+<$reveal state="$:/themes/tiddlywiki/vanilla/options/stickytitles" type="match" text="yes">
+``
+.tc-story-river .tc-tiddler-title {
+	background: var(--w-panel);
+}
+``
+</$reveal>

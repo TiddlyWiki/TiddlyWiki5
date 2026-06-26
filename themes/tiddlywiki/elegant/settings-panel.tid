@@ -1,0 +1,7 @@
+title: $:/themes/tiddlywiki/elegant/settings-panel
+tags: $:/tags/ControlPanel/Appearance
+caption: Elegant
+
+! Elegant theme
+
+<$checkbox tiddler="$:/config/themes/elegant/dropcap" field="text" checked="yes" unchecked="no" default="yes"> Drop cap on the opening paragraph</$checkbox>

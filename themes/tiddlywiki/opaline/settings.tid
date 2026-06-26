@@ -1,0 +1,6 @@
+title: $:/themes/tiddlywiki/opaline/settings
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+{{{ [[$:/config/themes/opaline/shimmer]get[text]match[no]then[.tc-site-title::after{animation:none!important;}.tc-tab-buttons button.tc-tab-selected::after{animation:none!important;}]] }}}

@@ -1,0 +1,155 @@
+title: $:/themes/tiddlywiki/modern/variables
+tags: [[$:/tags/Stylesheet]]
+list-before:
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Modern theme — design tokens
+**
+** Everything is derived from the active palette through the <<colour>> macro
+** and color-mix(), so the theme adapts automatically to light & dark palettes.
+** Animations are built on transform/opacity only, which the browser promotes to
+** the GPU compositor, keeping interactions buttery on every device.
+*/
+
+:root {
+
+	/* Accent system, built from the palette's primary colour */
+	--m-accent: <<colour primary>>;
+	--m-accent-strong: color-mix(in srgb, <<colour primary>> 82%, #000);
+	--m-accent-soft: color-mix(in srgb, <<colour primary>> 60%, #7f5cff);
+	--m-accent-contrast: <<colour background>>;
+	--m-accent-gradient: linear-gradient(135deg, var(--m-accent-soft) 0%, var(--m-accent) 55%, var(--m-accent-strong) 100%);
+
+	/* Tinted surfaces & glows that sit naturally over any background */
+	--m-accent-wash: color-mix(in srgb, <<colour primary>> 8%, transparent);
+	--m-accent-wash-strong: color-mix(in srgb, <<colour primary>> 16%, transparent);
+	--m-glow: color-mix(in srgb, <<colour primary>> 35%, transparent);
+	--m-hairline: color-mix(in srgb, <<colour foreground>> 12%, transparent);
+
+	/* Elevation — quiet, layered, modern. Restraint over drama. */
+	--m-shadow-1: 0 1px 2px color-mix(in srgb, <<colour foreground>> 8%, transparent),
+		0 1px 8px color-mix(in srgb, <<colour foreground>> 6%, transparent);
+	--m-shadow-2: 0 2px 6px color-mix(in srgb, <<colour foreground>> 9%, transparent),
+		0 10px 24px color-mix(in srgb, <<colour foreground>> 11%, transparent);
+	--m-shadow-3: 0 6px 16px color-mix(in srgb, <<colour foreground>> 13%, transparent),
+		0 24px 48px color-mix(in srgb, <<colour foreground>> 17%, transparent);
+	--m-shadow-accent: 0 4px 18px var(--m-glow);
+
+	/* Shape — tight radii read as more refined */
+	--m-radius-sm: 6px;
+	--m-radius: 10px;
+	--m-radius-lg: 14px;
+	--m-radius-pill: 999px;
+
+	/* Typography — a clean modern display stack, used with restraint for
+	   headings & titles; body text stays on the user's chosen font. */
+	--m-font-display: "Inter", "Inter var", -apple-system, BlinkMacSystemFont,
+		"Segoe UI", "Helvetica Neue", system-ui, sans-serif;
+
+	/* Motion — one springy easing curve used everywhere for a cohesive feel */
+	--m-ease: cubic-bezier(0.22, 1, 0.36, 1);
+	--m-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	/* Springy overshoot — the peppy curve used for every hover/press transform */
+	--m-bounce: cubic-bezier(0.34, 1.7, 0.5, 1);
+	--m-dur-fast: 110ms;
+	--m-dur: 190ms;
+	--m-dur-slow: 320ms;
+}
+
+/* Fallback for browsers without color-mix(): the accent system above resolves to
+   invalid values there, so map the derived tokens to solid palette colours.
+   Subtle tints/glows simply drop out; lines, text and the accent stay correct. */
+@supports not (color: color-mix(in srgb, red, blue)) {
+	:root {
+		--m-accent-strong: <<colour primary>>;
+		--m-accent-soft: <<colour primary>>;
+		--m-accent-wash: transparent;
+		--m-accent-wash-strong: transparent;
+		--m-glow: transparent;
+		--m-hairline: <<colour tiddler-border>>;
+		--m-shadow-1: 0 1px 2px rgba(0,0,0,0.12), 0 1px 8px rgba(0,0,0,0.08);
+		--m-shadow-2: 0 2px 6px rgba(0,0,0,0.14), 0 10px 24px rgba(0,0,0,0.12);
+		--m-shadow-3: 0 6px 16px rgba(0,0,0,0.18), 0 24px 48px rgba(0,0,0,0.16);
+	}
+}
+
+/* Smooth, accelerated scrolling and a tasteful custom scrollbar */
+
+html {
+	scroll-behavior: smooth;
+	background-color: <<colour page-background>>;
+	/* Hand the page (viewport) scrollbar back to the browser so it follows the
+	   palette's `color-scheme` on :root. The `* { scrollbar-color }` rule below
+	   themes inner scrollbars, but applied to the root it overrides the native
+	   colour-scheme scrollbar and leaves the page scrollbar light on dark palettes
+	   (notably in TiddlyDesktop). Resetting it restores the native dark bar. */
+	scrollbar-color: initial;
+}
+
+* {
+	scrollbar-width: thin;
+	scrollbar-color: color-mix(in srgb, <<colour muted-foreground>> 60%, transparent) transparent;
+}
+
+*::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background: color-mix(in srgb, <<colour muted-foreground>> 55%, transparent);
+	border-radius: var(--m-radius-pill);
+	border: 2px solid transparent;
+	background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background: var(--m-accent);
+	background-clip: content-box;
+}
+
+*::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+::selection {
+	background: var(--m-accent-wash-strong);
+}
+
+/*
+** Signature — a single hairline of accent gradient pinned to the top edge of
+** the window. One quiet, confident flourish that ties the whole UI together.
+*/
+html::before {
+	content: "";
+	position: fixed;
+	inset: 0 0 auto 0;
+	height: 3px;
+	background: var(--m-accent-gradient);
+	background-size: 200% auto;
+	/* Above the menubar (z-index 850) but below the modal layer
+	   (.tc-modal-wrapper is z-index 900) so backdrops still cover it */
+	z-index: 875;
+	pointer-events: none;
+	will-change: background-position;
+	animation: m-gradient-pan 9s linear infinite alternate;
+}
+
+@keyframes m-gradient-pan {
+	0% { background-position: 0% 50%; }
+	100% { background-position: 200% 50%; }
+}
+
+/* Honour users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	*, *::before, *::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+	}
+}

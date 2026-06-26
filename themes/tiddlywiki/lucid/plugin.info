@@ -1,0 +1,10 @@
+{
+	"title": "$:/themes/tiddlywiki/lucid",
+	"name": "Lucid",
+	"author": "TiddlyWiki",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "Accessibility-first: high contrast, clear focus, calm motion",
+	"dependents": ["$:/themes/tiddlywiki/vanilla"],
+	"plugin-priority": "0"
+}

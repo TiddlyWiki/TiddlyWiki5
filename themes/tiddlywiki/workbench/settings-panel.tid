@@ -1,0 +1,7 @@
+title: $:/themes/tiddlywiki/workbench/settings-panel
+tags: $:/tags/ControlPanel/Appearance
+caption: Workbench
+
+! Workbench theme
+
+Density: <$select tiddler="$:/config/themes/workbench/density" default="dense"><option value="dense">Dense</option><option value="comfortable">Comfortable</option></$select>

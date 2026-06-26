@@ -1,0 +1,6 @@
+title: $:/themes/tiddlywiki/quietude/settings
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+:root{--q-measure:{{{ [[$:/config/themes/quietude/measure]get[text]] ~[[40rem]] }}}!important;}

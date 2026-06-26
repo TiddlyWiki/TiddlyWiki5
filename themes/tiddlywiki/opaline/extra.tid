@@ -1,0 +1,212 @@
+title: $:/themes/tiddlywiki/opaline/extra
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Edit mode — toolbar, text editor, fields, tags, type selector, preview
+*/
+.tc-tiddler-edit-frame input.tc-edit-texteditor,
+.tc-tiddler-edit-frame textarea.tc-edit-texteditor,
+.tc-tiddler-edit-frame .tc-edit-texteditor,
+.tc-tiddler-frame input.tc-edit-texteditor,
+.tc-tiddler-frame textarea.tc-edit-texteditor {
+	background: <<colour tiddler-editor-background>>;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	border-radius: var(--o-radius);
+	transition: border-color var(--o-dur) var(--o-ease), box-shadow var(--o-dur) var(--o-ease);
+}
+/* When CM6 replaces the simple title input, the wrapper carries
+   tc-edit-texteditor but its border is drawn on the inner .cm-editor —
+   drop the wrapper border so they don't double up. */
+.tc-tiddler-edit-frame .tc-edit-texteditor.tc-editor-codemirror6 {
+	border: none;
+}
+.tc-tiddler-frame input.tc-edit-texteditor:focus,
+.tc-tiddler-frame textarea.tc-edit-texteditor:focus,
+.tc-tiddler-frame .tc-edit-texteditor:focus {
+	border-color: var(--o-iris-1);
+	box-shadow: 0 0 0 3px var(--o-wash-strong);
+	outline: none;
+}
+.tc-tiddler-frame textarea.tc-edit-texteditor, .tc-tiddler-frame input.tc-edit-texteditor { font-family: var(--o-mono); }
+/* Edit toolbar — vanilla fills every button with a flat grey (controls-foreground
+   used as the background); make them transparent icon buttons with muted glyphs
+   and an accent hover / active state, grouped on a faint surface. CodeMirror 6
+   styles its own svg.cm6-icon glyphs, so the glyph colour/fill below skips them. */
+.tc-editor-toolbar {
+	border-radius: var(--o-radius-sm);
+	padding: 4px 3px;
+	margin-bottom: 6px;
+	background: color-mix(in srgb, <<colour foreground>> 4%, transparent);
+}
+.tc-editor-toolbar button {
+	background-color: transparent;
+	border-radius: var(--o-radius-sm);
+	transition: background-color var(--o-dur) var(--o-ease), fill var(--o-dur) var(--o-ease);
+}
+.tc-editor-toolbar button:hover {
+	background-color: var(--o-wash-strong);
+}
+.tc-editor-toolbar button.tc-selected {
+	background-color: var(--o-wash-strong);
+	box-shadow: inset 0 0 0 1.5px var(--o-iris-1);
+}
+.tc-editor-toolbar button:not(:has(svg.cm6-icon)) {
+	color: color-mix(in srgb, <<colour foreground>> 70%, <<colour background>>);
+	fill: color-mix(in srgb, <<colour foreground>> 70%, <<colour background>>);
+}
+.tc-editor-toolbar button svg:not(.cm6-icon) {
+	fill: color-mix(in srgb, <<colour foreground>> 70%, <<colour background>>);
+}
+.tc-editor-toolbar button:not(:has(svg.cm6-icon)):hover,
+.tc-editor-toolbar button:not(:has(svg.cm6-icon)).tc-selected {
+	fill: var(--o-iris-1);
+}
+.tc-editor-toolbar button:hover svg:not(.cm6-icon),
+.tc-editor-toolbar button.tc-selected svg:not(.cm6-icon) {
+	fill: var(--o-iris-1);
+}
+/* Tag editor */
+.tc-edit-tags {
+	border-radius: var(--o-radius);
+	border: 1px solid <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+}
+.tc-edit-add-tag .tc-add-tag-name input,
+.tc-edit-tags input.tc-edit-texteditor {
+	border-radius: var(--o-radius-sm);
+}
+/* Field editor */
+.tc-edit-fields { border-radius: var(--o-radius); }
+.tc-edit-fields input,
+.tc-edit-fields select,
+.tc-edit-field-add-name-wrapper input,
+.tc-edit-field-add-value input { border-radius: var(--o-radius-sm); }
+.tc-edit-field-name { color: <<colour muted-foreground>>; }
+/* Type selector */
+.tc-type-selector .tc-edit-typeeditor,
+.tc-type-selector-dropdown-wrapper input.tc-edit-typeeditor { border-radius: var(--o-radius-sm); }
+/* Split / live preview */
+.tc-tiddler-preview-preview {
+	border-radius: var(--o-radius);
+	border: 1px solid var(--o-rule);
+}
+/* Bitmap / canvas editor */
+canvas.tc-edit-bitmapeditor { border-radius: var(--o-radius-sm); }
+
+/*
+** CodeMirror 6 editors — the CM6 plugin replaces the native input/textarea/
+** editor. The visible box is the `.cm-editor` first child, so its chrome and the
+** focus border live there; the focus RING is drawn on the OUTER wrapper so an
+** inner overflow can never clip it.
+*/
+.tc-editor-codemirror6 {
+	border: none;
+}
+.tc-editor-codemirror6-simple.tc-editor-codemirror6-input .cm-editor,
+.tc-editor-codemirror6-simple.tc-editor-codemirror6-textarea .cm-editor {
+	border-radius: var(--o-radius-sm);
+	border: 1px solid <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	transition: border-color var(--o-dur) var(--o-ease);
+}
+.tc-editor-codemirror6 .cm-editor {
+	border-radius: var(--o-radius);
+	border: 1px solid <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	transition: border-color var(--o-dur) var(--o-ease);
+}
+.tc-editor-codemirror6 .cm-editor:focus-within {
+	border-color: var(--o-iris-1);
+	outline: none;
+}
+.tc-editor-codemirror6-simple.tc-editor-codemirror6-input:focus-within,
+.tc-editor-codemirror6-simple.tc-editor-codemirror6-textarea:focus-within {
+	border-radius: var(--o-radius-sm);
+	box-shadow: 0 0 0 3px var(--o-wash-strong);
+	transition: box-shadow var(--o-dur) var(--o-ease);
+}
+.tc-editor-codemirror6:focus-within {
+	border-radius: var(--o-radius);
+	box-shadow: 0 0 0 3px var(--o-wash-strong);
+	transition: box-shadow var(--o-dur) var(--o-ease);
+}
+
+.tc-editor-codemirror6 .cm-content,
+.tc-editor-codemirror6-simple .cm-content {
+	font-size: clamp(1rem, 0.97rem + 0.18vw, 1.1rem);
+	font-family: var(--o-mono);
+}
+
+/* Title editor — the rule above sizes EVERY editor (body, title, tags, fields)
+   to the body size; restore the title to its view-mode display size so editing
+   feels continuous with reading. Higher specificity than the .cm-content rule;
+   also covers the plain (non-CM6) title input. */
+.tc-tiddler-frame input.tc-titlebar.tc-edit-texteditor,
+.tc-titlebar.tc-edit-texteditor .cm-content {
+	font-size: clamp(1.7rem, 1.45rem + 1.2vw, 2.4rem);
+}
+
+/*
+** Print — force a clean, light, ink-on-paper rendering; drop chrome & effects
+*/
+@media print {
+	html::before, .tc-topbar, .tc-page-controls, .tc-sidebar-scrollable,
+	.tc-menubar, .tc-tiddler-controls, .tc-reveal.tc-popup, .tc-drop-down {
+		display: none !important;
+	}
+	html body, .tc-page-container, .tc-story-river {
+		background: #fff !important;
+		color: #000 !important;
+	}
+	.tc-story-river { width: auto !important; max-width: none !important; margin: 0 !important; padding: 0 !important; }
+	.tc-tiddler-frame {
+		background: #fff !important;
+		color: #000 !important;
+		border: none !important;
+		border-bottom: 1pt solid #bbb !important;
+		border-radius: 0 !important;
+		box-shadow: none !important;
+		margin: 0 0 1.5em 0 !important;
+		padding: 0 0 1em 0 !important;
+		break-inside: avoid;
+	}
+	.tc-tiddler-body, .tc-titlebar h2, .tc-tiddler-title { color: #000 !important; }
+	.tc-tiddler-body a.tc-tiddlylink { color: #00008b !important; text-decoration: underline !important; }
+	.tc-tiddler-body a.tc-tiddlylink-external::after { content: " <" attr(href) ">"; font-size: 0.85em; word-break: break-all; }
+	* { text-shadow: none !important; filter: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+}
+
+/*
+** backdrop-filter fallback — without blur support, make frosted surfaces opaque
+** so their text stays readable.
+*/
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+	.tc-drop-down, .tc-block-dropdown { background: <<colour dropdown-background>> !important; }
+	.tc-modal { background: <<colour modal-background>> !important; }
+	.tc-notification { background: <<colour notification-background>> !important; }
+}
+
+/*
+** Windows High Contrast / forced-colors — keep structure visible with system
+** colours and a clear focus indicator.
+*/
+@media (forced-colors: active) {
+	.tc-tiddler-frame, .tc-drop-down, .tc-block-dropdown, .tc-modal, .tc-tiddler-info,
+	input, textarea, select, button.tc-btn-standard, .tc-btn-boxed, .tc-btn-rounded,
+	.tc-tag-label.tc-tag-label {
+		border: 1px solid CanvasText !important;
+	}
+	:focus-visible { outline: 2px solid Highlight !important; outline-offset: 2px; }
+}
+
+/*
+** prefers-contrast: more — strengthen separators and always underline links.
+*/
+@media (prefers-contrast: more) {
+	.tc-tiddler-frame, .tc-drop-down, .tc-block-dropdown, .tc-modal, .tc-tiddler-info {
+		border-color: <<colour foreground>> !important;
+	}
+	.tc-tiddler-body a.tc-tiddlylink { text-decoration: underline !important; }
+}

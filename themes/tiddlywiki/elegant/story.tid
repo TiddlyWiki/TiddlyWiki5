@@ -1,0 +1,118 @@
+title: $:/themes/tiddlywiki/elegant/story
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Story river & tiddler frame
+*/
+
+/* A paper-pale story field; the reading column floats on it like a page */
+.tc-story-river {
+	padding-top: 24px;
+}
+
+/*
+** Tiddler frame.
+**
+** The story views drive this exact node with inline transform/opacity, and
+** TiddlyWiki anchors toolbar popups through it, so it must stay free of
+** `transform`, `will-change`, `animation` and new `position` contexts. We only
+** dress the surface and cross-fade box-shadow / border on hover.
+*/
+.tc-tiddler-frame {
+	margin-bottom: 26px;
+	--e-frame-pad-x: 52px;
+	padding: 40px var(--e-frame-pad-x) 36px;
+	background: var(--e-paper);
+	border: 1px solid var(--e-rule);
+	border-radius: var(--e-radius-lg);
+	box-shadow: var(--e-shadow-1);
+	transition: box-shadow var(--e-slow) var(--e-ease),
+		border-color var(--e-slow) var(--e-ease);
+}
+
+@media (min-width: 770px) {
+	.tc-tiddler-frame:hover {
+		box-shadow: var(--e-shadow-2);
+		border-color: var(--e-rule-strong);
+	}
+}
+
+.tc-tiddler-frame.tc-tiddler-edit-frame {
+	border-color: var(--e-accent-light);
+	box-shadow: var(--e-shadow-2);
+}
+
+@media (max-width: 769px) {
+	.tc-tiddler-frame {
+		padding: 26px 22px 22px;
+	}
+}
+
+/* Title block: large serif over a single hairline that separates masthead
+   metadata from the body, warming to the accent as the tiddler is engaged */
+.tc-tiddler-title {
+	margin-bottom: 0.9em;
+	padding-bottom: 0.6em;
+	border-bottom: 1px solid var(--e-rule);
+	transition: border-color var(--e-slow) var(--e-ease);
+}
+.tc-tiddler-frame:hover .tc-tiddler-title {
+	border-color: var(--e-accent-light);
+}
+
+.tc-titlebar h2 {
+	color: <<colour tiddler-title-foreground>>;
+}
+
+/* Metadata row: letter-spaced sans small caps, quietly muted */
+.tc-tiddler-subtitle {
+	font-family: var(--e-sans);
+	font-size: 0.74rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--e-faint);
+}
+
+/* Tags as refined editorial labels rather than loud chips */
+.tc-tags-wrapper {
+	margin-top: 0.4em;
+}
+
+/* The body sits a touch below the title block */
+.tc-tiddler-body {
+	margin-top: 1em;
+}
+
+/* Missing / shadow tiddler notes, kept understated */
+.tc-tiddler-missing .tc-tiddler-body {
+	color: var(--e-muted);
+	font-style: italic;
+}
+
+/* Fold / unfold banners — span the frame edge-to-edge INSIDE its borders via
+   left/right (so they stay correct whatever this theme's padding is, and in
+   both the static and absolute layout modes), and round their bottom corners
+   to follow the frame. */
+.tc-unfold-banner.tc-unfold-banner {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: auto;
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+	border-bottom-left-radius: calc(var(--e-radius-lg) - 1px);
+	border-bottom-right-radius: calc(var(--e-radius-lg) - 1px);
+}
+.tc-fold-banner.tc-fold-banner {
+	inset-inline-start: 0;
+	top: 0;
+	bottom: 0;
+	max-width: var(--e-frame-pad-x);
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+	border-start-start-radius: calc(var(--e-radius-lg) - 1px);
+	border-end-start-radius: calc(var(--e-radius-lg) - 1px);
+}

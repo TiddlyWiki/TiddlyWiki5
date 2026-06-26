@@ -1,0 +1,142 @@
+title: $:/themes/tiddlywiki/opaline/typography
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Typography — luminous humanist
+*/
+
+.tc-tiddler-body {
+	font-family: var(--o-body);
+	font-size: clamp(1rem, 0.97rem + 0.18vw, 1.1rem);
+	line-height: 1.68;
+	color: var(--o-ink);
+	font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+	text-wrap: pretty;
+}
+
+.tc-tiddler-body p { margin: 0 0 1.05em 0; }
+
+/* Titles & headings: the humanist display face, airy and light */
+.tc-titlebar h2,
+.tc-site-title,
+.tc-tiddler-body h1,
+.tc-tiddler-body h2,
+.tc-tiddler-body h3,
+.tc-tiddler-body h4 {
+	font-family: var(--o-display);
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.004em;
+	text-wrap: balance;
+}
+
+.tc-titlebar h2 {
+	font-size: clamp(1.7rem, 1.45rem + 1.2vw, 2.4rem);
+	font-weight: 580;
+	letter-spacing: -0.005em;
+}
+
+.tc-tiddler-body h1 { font-size: 1.86em; margin: 1.3em 0 0.5em; }
+.tc-tiddler-body h2 { font-size: 1.48em; margin: 1.25em 0 0.45em; }
+.tc-tiddler-body h3 { font-size: 1.22em; margin: 1.15em 0 0.4em; }
+.tc-tiddler-body h4 { font-size: 1.06em; margin: 1.1em 0 0.35em; }
+
+/* Links: ink that warms to the accent, with a light-touch underline */
+.tc-tiddler-body a.tc-tiddlylink,
+.tc-tiddler-body a.tc-tiddlylink-resolves {
+	color: var(--o-accent-ink);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: color-mix(in srgb, <<colour primary>> 35%, transparent);
+	text-underline-offset: 0.16em;
+	transition: color var(--o-dur) var(--o-ease),
+		text-decoration-color var(--o-dur) var(--o-ease);
+}
+/* `:not(.tc-plugin-info)` keeps us clear of plugin boxes, whose vanilla hover is
+   white text on a primary fill — recolouring it to the accent kills contrast. */
+.tc-tiddler-body a.tc-tiddlylink:not(.tc-plugin-info):hover {
+	color: var(--o-iris-1);
+	text-decoration-color: var(--o-iris-1);
+}
+.tc-tiddler-body a.tc-tiddlylink-missing {
+	text-decoration-style: dotted;
+	opacity: 0.85;
+}
+
+/* Lists */
+.tc-tiddler-body ul, .tc-tiddler-body ol { padding-left: 1.4em; }
+.tc-tiddler-body li { margin: 0.28em 0; }
+.tc-tiddler-body li::marker { color: color-mix(in srgb, <<colour primary>> 60%, transparent); }
+
+/* Block quote: a softly iridescent edge */
+.tc-tiddler-body blockquote {
+	margin: 1.3em 0;
+	padding: 0.4em 0 0.4em 1.2em;
+	border-left: 3px solid transparent;
+	border-image: var(--o-iris-line) 1;
+	background: var(--o-wash);
+	border-radius: 0 var(--o-radius-sm) var(--o-radius-sm) 0;
+	color: var(--o-muted);
+	font-style: italic;
+}
+
+/* Horizontal rule: a thin band of opal light */
+.tc-tiddler-body hr {
+	border: none;
+	height: 2px;
+	margin: 2em 0;
+	border-radius: var(--o-radius-pill);
+	background: var(--o-iris-line);
+	opacity: 0.55;
+}
+
+/* Code: milky surface, mono face */
+.tc-tiddler-body code {
+	font-family: var(--o-mono);
+	font-size: 0.86em;
+	padding: 0.12em 0.4em;
+	border-radius: var(--o-radius-sm);
+	border: 1px solid var(--o-rule);
+	background: color-mix(in srgb, <<colour primary>> 5%, transparent);
+}
+.tc-tiddler-body pre {
+	border-radius: var(--o-radius);
+	border: 1px solid var(--o-rule);
+	box-shadow: var(--o-shadow-1);
+}
+.tc-tiddler-body pre code { border: none; background: none; padding: 0; }
+
+/*
+** Tables: rounded via corner-cell radii rather than `overflow: hidden`,
+** so that popups opened inside a cell are never clipped.
+*/
+.tc-tiddler-body table {
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 1px solid var(--o-rule);
+	border-radius: var(--o-radius);
+	box-shadow: var(--o-shadow-1);
+}
+.tc-tiddler-body table th {
+	font-family: var(--o-body);
+	font-weight: 600;
+	background: var(--o-wash);
+	border-bottom: 1px solid var(--o-rule-strong);
+}
+.tc-tiddler-body table th,
+.tc-tiddler-body table td { border-color: var(--o-rule); }
+.tc-tiddler-body table tr:hover td { background: var(--o-wash); }
+.tc-tiddler-body table tr:first-child > *:first-child { border-top-left-radius: var(--o-radius); }
+.tc-tiddler-body table tr:first-child > *:last-child { border-top-right-radius: var(--o-radius); }
+.tc-tiddler-body table tr:last-child > *:first-child { border-bottom-left-radius: var(--o-radius); }
+.tc-tiddler-body table tr:last-child > *:last-child { border-bottom-right-radius: var(--o-radius); }
+
+/* Images: a soft pebble with luminous shadow */
+.tc-tiddler-body img {
+	border-radius: var(--o-radius-sm);
+	box-shadow: var(--o-shadow-1);
+}
+
+.tc-tiddler-body strong { font-weight: 650; }

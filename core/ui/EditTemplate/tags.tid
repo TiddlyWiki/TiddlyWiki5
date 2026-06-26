@@ -17,13 +17,11 @@ tags: $:/tags/EditTemplate
 	<$let backgroundColor=<<colour>> >
 		<span class="tc-tag-label tc-tag-list-item tc-small-gap-right"
 			data-tag-title=<<currentTiddler>>
-			style=`color:$(foregroundColor)$; fill:$(foregroundColor)$; background-color:$(backgroundColor)$;`
+			style=`color:$(foregroundColor)$; background-color:$(backgroundColor)$;`
 		>
 			<$transclude tiddler=<<icon>>/>
 			<$view field="title" format="text"/>
-			<$button class="tc-btn-invisible tc-remove-tag-button"
-				style.fill=<<foregroundColor>>
-			>
+			<$button class="tc-btn-invisible tc-remove-tag-button">
 				<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="-[{!!title}]"/>
 				{{$:/core/images/close-button}}
 			</$button>

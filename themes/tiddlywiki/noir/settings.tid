@@ -1,0 +1,6 @@
+title: $:/themes/tiddlywiki/noir/settings
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+{{{ [[$:/config/themes/noir/glow]get[text]match[no]then[.tc-site-title::after{animation:none!important;}]] }}}

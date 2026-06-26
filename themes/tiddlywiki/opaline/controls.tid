@@ -1,0 +1,270 @@
+title: $:/themes/tiddlywiki/opaline/controls
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Buttons, tags, controls, inputs, dropdowns & modals
+*/
+
+@keyframes o-rise {
+	from { opacity: 0; transform: translate3d(0, 8px, 0) scale(0.99); }
+	to   { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+/* Toolbar icons: a gentle lift and an accent glow */
+.tc-tiddler-controls button,
+.tc-page-controls button,
+.tc-topbar button {
+	border-radius: var(--o-radius-sm);
+	transition: background-color var(--o-dur) var(--o-ease),
+		transform var(--o-dur) var(--o-ease);
+}
+.tc-tiddler-controls button svg,
+.tc-page-controls button svg,
+.tc-topbar button svg {
+	transition: fill var(--o-dur) var(--o-ease);
+}
+.tc-tiddler-controls button:hover { background: var(--o-wash); transform: scale(1.08); }
+.tc-page-controls button:hover,
+.tc-topbar button:hover { transform: scale(1.1); }
+.tc-tiddler-controls button:hover svg,
+.tc-page-controls button:hover svg,
+.tc-topbar button:hover svg { fill: var(--o-iris-1); }
+
+/* Standard buttons: pebble-soft, hairline, calm warm hover */
+button.tc-btn-standard,
+.tc-btn-boxed,
+.tc-btn-rounded {
+	border-radius: var(--o-radius-pill);
+	border: 1px solid var(--o-rule-strong);
+	transition: border-color var(--o-dur) var(--o-ease),
+		color var(--o-dur) var(--o-ease),
+		background-color var(--o-dur) var(--o-ease),
+		transform var(--o-fast) var(--o-ease);
+}
+button.tc-btn-standard:hover,
+.tc-btn-boxed:hover,
+.tc-btn-rounded:hover {
+	border-color: color-mix(in srgb, var(--o-iris-1) 60%, transparent);
+	color: var(--o-accent-ink);
+	background: var(--o-wash);
+}
+button.tc-btn-standard:active,
+.tc-btn-boxed:active { transform: scale(0.97); }
+
+/* Primary / call-to-action: a captured band of opal light */
+.tc-btn-big-green,
+.tc-primary-btn,
+button.tc-btn-big-green {
+	background: var(--o-iris-line) !important;
+	background-size: 200% 100% !important;
+	background-position: 0 0 !important;
+	color: <<colour background>> !important;
+	border: none !important;
+	border-radius: var(--o-radius-pill);
+	box-shadow: var(--o-shadow-1);
+	transition: background-position var(--o-slow) var(--o-ease),
+		box-shadow var(--o-dur) var(--o-ease),
+		transform var(--o-fast) var(--o-ease);
+}
+.tc-btn-big-green svg,
+.tc-primary-btn svg { fill: <<colour background>> !important; }
+.tc-btn-big-green:hover,
+.tc-primary-btn:hover {
+	background-position: 100% 0 !important;
+	box-shadow: var(--o-shadow-2);
+	transform: translateY(-1px);
+}
+.tc-btn-big-green:active,
+.tc-primary-btn:active { transform: translateY(0) scale(0.98); }
+
+/* Tags: milky pebbles edged with a hint of accent (doubled class beats vanilla) */
+/* TiddlyWiki sets the tag's text colour INLINE (contrastcolour vs the palette's
+   default tag-background). Since we restyle the background, we must override that
+   inline colour with !important so text always contrasts with OUR chip. The
+   background stays non-important so user-coloured tags keep their own fill. */
+.tc-tag-label.tc-tag-label:not([style*="background-color"]),
+.tc-tag-label.tc-tag-label[style*="background-color:;"],
+.tc-tag-label.tc-tag-label[style*="background-color: ;"] {
+	background-color: color-mix(in srgb, <<colour foreground>> 9%, transparent);
+	color: <<colour foreground>> !important;
+	fill: <<colour foreground>> !important;
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--o-iris-1) 38%, transparent);
+}
+.tc-tag-label.tc-tag-label:not([style*="background-color"]):hover,
+.tc-tag-label.tc-tag-label[style*="background-color:;"]:hover,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"]:hover {
+	box-shadow: inset 0 0 0 1px var(--o-iris-1);
+	transform: translateY(-1px);
+}
+.tc-tag-label.tc-tag-label:not([style*="background-color"]) svg,
+.tc-tag-label.tc-tag-label[style*="background-color:;"] svg,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"] svg { fill: <<colour foreground>> !important; }
+
+/* Themed shape + a subtle defining edge on every tag. Coloured tags
+   (#hex, rgb(), or a named colour like GreenYellow) keep their own fill
+   and contrastcolour text and gain this edge; the uncoloured chip above
+   overrides the box-shadow with its accent border. */
+.tc-tag-label.tc-tag-label {
+	border-radius: var(--o-radius-pill);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, <<colour foreground>> 22%, transparent);
+	transition: box-shadow var(--o-dur) var(--o-ease),
+		background-color var(--o-dur) var(--o-ease),
+		transform var(--o-fast) var(--o-ease);
+}
+
+.tc-untagged-label { border-radius: var(--o-radius-pill); }
+
+/* Dropdowns: frosted opal glass with a luminous rim */
+.tc-drop-down,
+.tc-block-dropdown {
+	border-radius: var(--o-radius);
+	border: 1px solid var(--o-rule);
+	background: color-mix(in srgb, <<colour dropdown-background>> 80%, transparent);
+	backdrop-filter: blur(16px) saturate(1.5);
+	-webkit-backdrop-filter: blur(16px) saturate(1.5);
+	box-shadow: var(--o-shadow-2);
+	padding: 6px;
+	animation: o-rise var(--o-dur) var(--o-ease) both;
+}
+.tc-drop-down a.tc-tiddlylink,
+.tc-drop-down button,
+.tc-drop-down .tc-dropdown-item,
+.tc-block-dropdown a.tc-tiddlylink {
+	border-radius: var(--o-radius-sm);
+	transition: background-color var(--o-fast) var(--o-ease);
+}
+/* Hover rows: vanilla pairs a primary background with near-white text; since we
+   replace the background with a light wash, we must restore a dark, contrasting
+   foreground (and icon fill) so the text never sits white-on-pale. */
+.tc-drop-down a:hover,
+.tc-drop-down button:hover,
+.tc-drop-down .tc-btn-invisible:hover,
+.tc-drop-down .tc-file-input-wrapper:hover button,
+.tc-block-dropdown a:hover,
+.tc-block-tags-dropdown .tc-btn-invisible:hover {
+	background: var(--o-wash-strong);
+	color: var(--o-ink);
+}
+.tc-drop-down button.tc-btn-invisible:hover svg,
+.tc-block-dropdown button.tc-btn-invisible:hover svg,
+.tc-block-tags-dropdown .tc-btn-invisible:hover svg {
+	fill: var(--o-ink);
+}
+.tc-drop-down .tc-tab-divider,
+.tc-drop-down hr { border: none; height: 1px; background: var(--o-rule); }
+
+/* The more-tiddler-actions popup is anchored inside the controls row and was
+   rendering as a plain transparent panel. Re-assert the frosted-glass surface
+   (higher specificity than the generic .tc-drop-down rule, and than vanilla's
+   `.tc-tiddler-controls .tc-drop-down` font-size rule) so it blurs like every
+   other dropdown. */
+.tc-tiddler-controls .tc-drop-down {
+	background: color-mix(in srgb, <<colour dropdown-background>> 80%, transparent);
+	backdrop-filter: blur(16px) saturate(1.5);
+	-webkit-backdrop-filter: blur(16px) saturate(1.5);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+	.tc-tiddler-controls .tc-drop-down { background: <<colour dropdown-background>>; }
+}
+
+/* Modals: deep frosted glass */
+.tc-modal {
+	border-radius: var(--o-radius);
+	border: 1px solid var(--o-rule);
+	background: color-mix(in srgb, <<colour modal-background>> 86%, transparent);
+	backdrop-filter: blur(24px) saturate(1.4);
+	-webkit-backdrop-filter: blur(24px) saturate(1.4);
+	box-shadow: var(--o-shadow-3);
+	overflow: hidden;
+	animation: o-rise var(--o-slow) var(--o-ease) both;
+}
+.tc-modal-header { border-bottom: 1px solid var(--o-rule); }
+.tc-modal-footer { border-top: 1px solid var(--o-rule); background: var(--o-wash); }
+.tc-modal-backdrop {
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
+}
+
+/* Notifications & alerts */
+.tc-notification {
+	border-radius: var(--o-radius);
+	border: 1px solid var(--o-rule);
+	box-shadow: var(--o-shadow-2);
+	backdrop-filter: blur(14px);
+	-webkit-backdrop-filter: blur(14px);
+	animation: o-rise var(--o-dur) var(--o-ease) both;
+}
+.tc-alert { border-radius: var(--o-radius); box-shadow: var(--o-shadow-2); }
+
+/* Tiddler info panel */
+.tc-tiddler-info {
+	/* Full-bleed to the frame edges, then re-pad so content aligns with
+	   the body — matched to THIS theme's 46px frame padding. */
+	margin-left: -46px;
+	margin-right: -46px;
+	padding-left: 46px;
+	padding-right: 46px;
+	border-radius: var(--o-radius);
+	border: 1px solid var(--o-rule);
+	animation: o-rise var(--o-dur) var(--o-ease) both;
+}
+
+/* Inputs: a milky field that gathers an accent glow on focus */
+input[type="text"],
+input[type="search"],
+input.tc-edit-texteditor,
+textarea.tc-edit-texteditor,
+.tc-edit-texteditor,
+select {
+	border-radius: var(--o-radius-sm);
+	transition: border-color var(--o-dur) var(--o-ease),
+		box-shadow var(--o-dur) var(--o-ease);
+}
+input[type="text"]:focus,
+input[type="search"]:focus,
+input.tc-edit-texteditor:focus,
+textarea.tc-edit-texteditor:focus,
+.tc-edit-texteditor:focus {
+	border-color: var(--o-iris-1);
+	box-shadow: 0 0 0 3px var(--o-wash-strong);
+	outline: none;
+}
+.tc-edit-tags { border-radius: var(--o-radius-sm); }
+
+/* Tabs: the selected tab rests on a band of opal light */
+.tc-tab-buttons button {
+	border-radius: var(--o-radius-sm) var(--o-radius-sm) 0 0;
+	transition: color var(--o-dur) var(--o-ease), background-color var(--o-dur) var(--o-ease);
+}
+.tc-tab-buttons button:hover { color: var(--o-accent-ink); }
+.tc-tab-buttons button.tc-tab-selected {
+	position: relative;
+	color: <<colour foreground>>;
+	font-weight: 600;
+}
+.tc-tab-buttons button.tc-tab-selected::after {
+	content: "";
+	position: absolute;
+	left: 8%;
+	right: 8%;
+	bottom: 0;
+	height: 2px;
+	border-radius: var(--o-radius-pill);
+	background: var(--o-iris-line);
+	background-size: 200% 100%;
+	animation: o-sheen 6s linear infinite;
+}
+
+/* Plugin chips */
+.tc-plugin-info {
+	border-radius: var(--o-radius);
+	box-shadow: var(--o-shadow-1);
+	transition: box-shadow var(--o-dur) var(--o-ease);
+}
+.tc-plugin-info:hover { box-shadow: var(--o-shadow-2); }
+
+@media (max-width: 769px) {
+	.tc-tiddler-info { margin-left: -22px; margin-right: -22px; padding-left: 22px; padding-right: 22px; }
+}

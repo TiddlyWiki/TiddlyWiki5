@@ -1,0 +1,142 @@
+title: $:/themes/tiddlywiki/elegant/variables
+tags: [[$:/tags/Stylesheet]]
+list-before:
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Elegant — design tokens
+**
+** An editorial theme: serif display type, a humanist serif reading column,
+** letter-spaced sans for metadata, hairline rules and generous whitespace.
+** The mood is calm and considered rather than energetic. Every colour is
+** derived from the active palette via <<colour>> and color-mix(), so the
+** theme stays at home in any palette, light or dark. Motion is built only on
+** transform / opacity / filter, which the browser composites on the GPU.
+*/
+
+:root {
+
+	/* Ink & paper */
+	--e-ink: <<colour foreground>>;
+	--e-paper: <<colour tiddler-background>>;
+	--e-muted: color-mix(in srgb, <<colour foreground>> 55%, <<colour background>>);
+	--e-faint: color-mix(in srgb, <<colour foreground>> 50%, <<colour background>>);
+
+	/* A single, restrained accent taken from the palette */
+	--e-accent: <<colour primary>>;
+	/* Mix toward the palette's foreground (never #000) so links keep contrast on
+	   dark palettes; foreground-heavy enough to stay readable as body text. */
+	--e-accent-deep: color-mix(in srgb, <<colour primary>> 52%, <<colour foreground>>);
+	--e-accent-quiet: color-mix(in srgb, <<colour primary>> 55%, <<colour background>>);
+	--e-accent-light: color-mix(in srgb, <<colour primary>> 32%, <<colour background>>);
+	--e-wash: color-mix(in srgb, <<colour primary>> 7%, transparent);
+	--e-wash-strong: color-mix(in srgb, <<colour primary>> 14%, transparent);
+
+	/* Hairlines — the backbone of the layout */
+	--e-rule: color-mix(in srgb, <<colour foreground>> 13%, transparent);
+	--e-rule-strong: color-mix(in srgb, <<colour foreground>> 26%, transparent);
+
+	/* Elevation — whisper-soft, never theatrical */
+	--e-shadow-1: 0 1px 2px color-mix(in srgb, <<colour foreground>> 6%, transparent),
+		0 1px 10px color-mix(in srgb, <<colour foreground>> 5%, transparent);
+	--e-shadow-2: 0 4px 14px color-mix(in srgb, <<colour foreground>> 9%, transparent),
+		0 18px 50px color-mix(in srgb, <<colour foreground>> 11%, transparent);
+	--e-shadow-3: 0 10px 40px color-mix(in srgb, <<colour foreground>> 14%, transparent),
+		0 30px 80px color-mix(in srgb, <<colour foreground>> 18%, transparent);
+
+	/* Shape — near-square corners read as crafted, not casual */
+	--e-radius: 4px;
+	--e-radius-lg: 8px;
+
+	/* Type — three deliberate roles */
+	--e-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua",
+		Cambria, Georgia, "Times New Roman", serif;
+	--e-serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia,
+		"Iowan Old Style", "Times New Roman", serif;
+	--e-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, sans-serif;
+
+	/* Motion — slow, smooth, no overshoot */
+	--e-ease: cubic-bezier(0.4, 0, 0.2, 1);
+	--e-ease-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	--e-fast: 140ms;
+	--e-dur: 260ms;
+	--e-slow: 460ms;
+
+	/* Form controls inherit the accent */
+	accent-color: <<colour primary>>;
+	caret-color: <<colour primary>>;
+}
+
+/* Fallback for browsers without color-mix(): map the accent tints, hairlines and
+   soft shadows to solid palette colours. The washes drop out and the accent
+   ladder collapses to one tone, but the editorial structure stays intact. */
+@supports not (color: color-mix(in srgb, red, blue)) {
+	:root {
+		--e-muted: <<colour muted-foreground>>;
+		--e-faint: <<colour muted-foreground>>;
+		--e-accent-deep: <<colour primary>>;
+		--e-accent-quiet: <<colour primary>>;
+		--e-accent-light: <<colour primary>>;
+		--e-wash: transparent;
+		--e-wash-strong: transparent;
+		--e-rule: <<colour tiddler-border>>;
+		--e-rule-strong: <<colour tiddler-border>>;
+		--e-shadow-1: 0 1px 2px rgba(0,0,0,0.08), 0 1px 10px rgba(0,0,0,0.06);
+		--e-shadow-2: 0 4px 14px rgba(0,0,0,0.10), 0 18px 50px rgba(0,0,0,0.12);
+		--e-shadow-3: 0 10px 40px rgba(0,0,0,0.14), 0 30px 80px rgba(0,0,0,0.18);
+	}
+}
+
+
+/* A refined, unobtrusive scrollbar */
+html {
+	scroll-behavior: smooth;
+	background-color: <<colour page-background>>;
+	/* Hand the page (viewport) scrollbar back to the browser so it follows the
+	   palette's `color-scheme` on :root. The `* { scrollbar-color }` rule below
+	   themes inner scrollbars, but applied to the root it overrides the native
+	   colour-scheme scrollbar and leaves the page scrollbar light on dark palettes
+	   (notably in TiddlyDesktop). Resetting it restores the native dark bar. */
+	scrollbar-color: initial;
+}
+
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--e-rule-strong) transparent;
+}
+*::-webkit-scrollbar {
+	width: 11px;
+	height: 11px;
+}*::-webkit-scrollbar-thumb {
+	background: var(--e-rule-strong);
+	border-radius: 999px;
+	border: 3px solid transparent;
+	background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+	background: var(--e-accent-quiet);
+	background-clip: content-box;
+}
+*::-webkit-scrollbar-corner { background: transparent; }
+
+::selection {
+	background: var(--e-wash-strong);
+	color: var(--e-accent-deep);
+}
+
+/* A calm, considered focus ring */
+:where(button, input, textarea, select, a):focus-visible {
+	outline: 2px solid var(--e-accent);
+	outline-offset: 2px;
+	border-radius: var(--e-radius);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+	}
+}
