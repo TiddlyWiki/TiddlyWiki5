@@ -12,6 +12,22 @@ code-body: yes
 	/* Fully transparent surface — the frosted look comes purely from the
 	   backdrop filter, letting the page colour glow through the stuck header. */
 	background: transparent;
+}
+/* Carry the frost on a pseudo-element rather than on the title itself.
+   The tiddler toolbar (and its more-tiddler-actions popup) is a DESCENDANT
+   of the title; if the title carried `backdrop-filter` directly it would
+   become a "backdrop root" and isolate the backdrop, leaving any nested
+   dropdown's own backdrop-filter with nothing to sample (it renders clear,
+   unblurred). Painting the frost on ::before keeps the title a plain element,
+   so the nested dropdown blurs the real page again. The stuck title is
+   position:sticky (its own stacking context), so z-index:-1 stays behind the
+   title content without slipping behind the frame. */
+.tc-story-river .tc-tiddler-title::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
 	backdrop-filter: blur(16px) saturate(1.5);
 	-webkit-backdrop-filter: blur(16px) saturate(1.5);
 }
@@ -19,6 +35,7 @@ code-body: yes
 	.tc-story-river .tc-tiddler-title {
 		background: var(--o-paper);
 	}
+	.tc-story-river .tc-tiddler-title::before { display: none; }
 }
 ``
 </$reveal>

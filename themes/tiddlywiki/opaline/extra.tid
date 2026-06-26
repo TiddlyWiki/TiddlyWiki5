@@ -139,6 +139,15 @@ canvas.tc-edit-bitmapeditor { border-radius: var(--o-radius-sm); }
 	font-family: var(--o-mono);
 }
 
+/* Title editor — the rule above sizes EVERY editor (body, title, tags, fields)
+   to the body size; restore the title to its view-mode display size so editing
+   feels continuous with reading. Higher specificity than the .cm-content rule;
+   also covers the plain (non-CM6) title input. */
+.tc-tiddler-frame input.tc-titlebar.tc-edit-texteditor,
+.tc-titlebar.tc-edit-texteditor .cm-content {
+	font-size: clamp(1.7rem, 1.45rem + 1.2vw, 2.4rem);
+}
+
 /*
 ** Print — force a clean, light, ink-on-paper rendering; drop chrome & effects
 */
