@@ -209,7 +209,22 @@ textarea.tc-edit-texteditor:focus,
 	box-shadow: var(--n-shadow-1);
 	transition: box-shadow var(--n-dur) var(--n-ease), border-color var(--n-dur) var(--n-ease);
 }
-.tc-plugin-info:hover { box-shadow: var(--n-shadow-2), var(--n-shadow-glow); }
+/* Override vanilla's flood-fill hover (0,3,1) with Noir's glow-and-rim treatment. */
+a.tc-tiddlylink.tc-plugin-info:hover {
+	background-color: var(--n-surface-1);
+	color: <<colour foreground>>;
+	fill: var(--n-accent);
+	border-color: var(--n-accent);
+	box-shadow: var(--n-shadow-2), var(--n-shadow-glow);
+	text-decoration: none;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: var(--n-accent-bright);
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	color: <<colour foreground>>;
+	border-color: var(--n-line-strong);
+}
 
 /*
 ** Sidebar

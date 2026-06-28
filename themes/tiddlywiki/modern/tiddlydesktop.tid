@@ -1,0 +1,93 @@
+title: $:/themes/tiddlywiki/modern/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Modern theme
+** Polished card-based app aesthetic with layered shadows and the accent gradient.
+** The gradient top-strip (html::before) runs site-wide in Modern so it also
+** appears in the TiddlyDesktop window without any extra markup.
+*/
+
+/* Toolbar — matches the primary-coloured menubar; lift with a subtle shadow */
+.td-toolbar {
+	box-shadow: var(--m-shadow-1);
+	font-family: var(--m-font-display);
+}
+
+/* Wiki-list items — rounded cards with layered palette-tinted shadows */
+.td-wikilist .td-wikilist-item {
+	border-radius: var(--m-radius);
+	box-shadow: var(--m-shadow-1);
+	transition: box-shadow var(--m-dur) var(--m-ease),
+	            border-left-color var(--m-dur) var(--m-ease);
+}
+.td-wikilist .td-wikilist-item:hover {
+	box-shadow: var(--m-shadow-2);
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title & info — Modern's display sans throughout */
+.td-wikilist .td-wiki-title {
+	font-family: var(--m-font-display);
+	font-weight: 600;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--m-font-display);
+}
+
+/* Buttons — pill-shaped to match Modern's playful affordances */
+button.td-button {
+	border-radius: var(--m-radius-pill);
+	font-family: var(--m-font-display);
+	font-size: 0.82em;
+	font-weight: 500;
+	transition: background-color var(--m-dur-fast) var(--m-ease);
+}
+
+/* Toolbar inputs */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--m-font-display);
+	border-radius: var(--m-radius-sm);
+}
+
+/* ── The WikiList window — soft, accent-washed app surface ───────────── */
+
+/* Search field — pill-shaped with an accent focus halo */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--m-font-display);
+	border-radius: var(--m-radius-pill);
+	border: 1px solid var(--m-hairline);
+	transition: border-color var(--m-dur) var(--m-ease),
+	            box-shadow var(--m-dur) var(--m-ease);
+}
+.td-search input.td-wikilist-search-input:focus {
+	border-color: var(--m-accent);
+	box-shadow: 0 0 0 3px var(--m-accent-wash);
+}
+.td-tags .tc-tag-label {
+	font-family: var(--m-font-display);
+}
+
+/* ── WikiList rows — rounded favicon plate that springs on hover ─────── */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--m-radius);
+	box-shadow: var(--m-shadow-1);
+	overflow: hidden;
+	transition: transform var(--m-dur) var(--m-bounce),
+	            box-shadow var(--m-dur) var(--m-ease);
+}
+.td-wikilist .td-wikilist-item:hover .td-wikilist-thumbnail button {
+	transform: scale(1.04);
+	box-shadow: var(--m-shadow-2);
+}
+.td-wikilist .td-wiki-url {
+	font-family: var(--m-font-display);
+}
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--m-font-display);
+}

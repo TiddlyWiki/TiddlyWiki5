@@ -178,7 +178,29 @@ textarea.tc-edit-texteditor:focus,
 	box-shadow: inset 0 -4px 0 var(--l-accent);
 }
 
-.tc-plugin-info { border-radius: var(--l-radius); border-width: 2px; }
+.tc-plugin-info {
+	border-radius: var(--l-radius);
+	border-width: 2px;
+	border-color: var(--l-border);
+	transition: box-shadow var(--l-dur) var(--l-ease), border-color var(--l-dur) var(--l-ease);
+}
+/* Override vanilla's flood-fill hover (0,3,1). Accessibility: hover is signalled by
+   BOTH colour (accent border) AND shape (outer ring) — not colour alone. */
+a.tc-tiddlylink.tc-plugin-info:hover {
+	background-color: <<colour tiddler-background>>;
+	color: <<colour foreground>>;
+	fill: <<colour primary>>;
+	border-color: <<colour primary>>;
+	box-shadow: 0 0 0 3px <<colour primary>>;
+	text-decoration: none;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: <<colour primary>>;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	color: <<colour foreground>>;
+	border-color: <<colour tiddler-editor-border>>;
+}
 
 /*
 ** Sidebar

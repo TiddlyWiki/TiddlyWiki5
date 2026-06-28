@@ -6,10 +6,10 @@ code-body: yes
      background (tiddler-background). Override it to match THIS theme's
      panel surface so the stuck header stays consistent. Higher
      specificity than vanilla's rule; only emitted while sticky is on. -->
-<$reveal state="$:/themes/tiddlywiki/vanilla/options/stickytitles" type="match" text="yes">
+<%if [{$:/themes/tiddlywiki/vanilla/options/stickytitles}match[yes]] %>
 ``
 .tc-story-river .tc-tiddler-title {
 	background: ``<<colour tiddler-background>>``;
 }
 ``
-</$reveal>
+<% endif %>

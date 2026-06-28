@@ -1,0 +1,82 @@
+title: $:/themes/tiddlywiki/opaline/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Opaline theme
+** Milky opal-glass aesthetic: smooth pebble shapes, accent-tinted shadows,
+** luminous toolbar. The wiki list feels like floating frosted-glass cards.
+*/
+
+/* Toolbar — primary-coloured, matching the Opaline menubar; accent-tinted shadow */
+.td-toolbar {
+	box-shadow: var(--o-shadow-1);
+	font-family: var(--o-body);
+}
+
+/* Wiki-list items — pebble-like large radius, opal-glow shadow */
+.td-wikilist .td-wikilist-item {
+	border-radius: var(--o-radius);
+	box-shadow: var(--o-shadow-1);
+	transition: box-shadow var(--o-dur) var(--o-ease),
+	            border-left-color var(--o-dur) var(--o-ease);
+}
+.td-wikilist .td-wikilist-item:hover {
+	box-shadow: var(--o-shadow-2);
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title — Opaline's luminous humanist display face */
+.td-wikilist .td-wiki-title {
+	font-family: var(--o-display);
+	font-weight: 600;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--o-body);
+}
+
+/* Buttons — pill-shaped to match Opaline's rounded, pebble-like aesthetic */
+button.td-button {
+	border-radius: var(--o-radius-pill);
+	font-family: var(--o-body);
+	font-size: 0.82em;
+	font-weight: 500;
+	transition: background-color var(--o-fast) var(--o-ease);
+}
+
+/* Toolbar inputs */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--o-body);
+	border-radius: var(--o-radius-sm);
+}
+
+/* ── The WikiList window — frosted opal surface ─────────────────────── */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--o-body);
+	border-radius: var(--o-radius-pill);
+	border: 1px solid var(--o-rule-strong);
+	transition: box-shadow var(--o-dur) var(--o-ease);
+}
+.td-search input.td-wikilist-search-input:focus {
+	box-shadow: 0 0 0 3px var(--o-wash-strong);
+}
+.td-tags .tc-tag-label {
+	font-family: var(--o-body);
+}
+
+/* ── WikiList rows — pebble-framed favicon, luminous heading ─────────── */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--o-radius-sm);
+	box-shadow: var(--o-shadow-1);
+	overflow: hidden;
+}
+.td-wikilist .td-wiki-url {
+	font-family: var(--o-body);
+}
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--o-display);
+}

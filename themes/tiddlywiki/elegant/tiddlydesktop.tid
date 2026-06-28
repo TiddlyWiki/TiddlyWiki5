@@ -1,0 +1,99 @@
+title: $:/themes/tiddlywiki/elegant/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Elegant theme
+** Editorial aesthetic: serif display titles, hairline rule below the toolbar,
+** near-square card corners, whisper-soft shadows — calm and considered.
+*/
+
+/* Toolbar — quiet bar with a hairline separator, no heavy shadow */
+.td-toolbar {
+	box-shadow: none;
+	border-bottom: 1px solid var(--e-rule-strong);
+	font-family: var(--e-sans);
+}
+
+/* Wiki-list items — near-square corners, whisper-soft shadow */
+.td-wikilist .td-wikilist-item {
+	border-radius: var(--e-radius-lg);
+	box-shadow: var(--e-shadow-1);
+	transition: box-shadow var(--e-dur) var(--e-ease),
+	            border-left-color var(--e-dur) var(--e-ease);
+}
+.td-wikilist .td-wikilist-item:hover {
+	box-shadow: var(--e-shadow-2);
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title — the editorial serif display face */
+.td-wikilist .td-wiki-title {
+	font-family: var(--e-display);
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--e-sans);
+}
+
+/* Buttons — refined near-square corners */
+button.td-button {
+	border-radius: var(--e-radius);
+	font-family: var(--e-sans);
+	font-size: 0.82em;
+	transition: background-color var(--e-fast) var(--e-ease);
+}
+
+/* Toolbar inputs */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--e-sans);
+	border-radius: var(--e-radius);
+}
+
+/* ── The WikiList window — editorial chrome ──────────────────────────── */
+
+/* Search field — near-square, hairline-ruled, quiet sans */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--e-sans);
+	border-radius: var(--e-radius);
+	border: 1px solid var(--e-rule-strong);
+	transition: border-color var(--e-fast) var(--e-ease);
+}
+.td-search input.td-wikilist-search-input:focus {
+	border-color: var(--e-accent);
+}
+
+/* Filter tag pills share the toolbar's restrained sans */
+.td-tags .tc-tag-label {
+	font-family: var(--e-sans);
+}
+
+/* ── WikiList rows — paper cards, tipped-in favicon, ruled actions ────── */
+
+/* Favicon framed like a plate tipped into the page */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--e-radius);
+	box-shadow: var(--e-shadow-1);
+}
+
+/* URL set in the muted reading serif — the title's quiet companion */
+.td-wikilist .td-wiki-url {
+	font-family: var(--e-serif);
+	font-style: italic;
+}
+
+/* A hairline rule sets the row actions apart from the heading */
+.td-wikilist .td-wikilist-item .td-wiki-toolbar {
+	border-top: 1px solid var(--e-rule);
+	padding-top: 0.6em;
+}
+
+/* Advanced-panel headings in the quiet sans, matching the toolbar */
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--e-sans);
+}

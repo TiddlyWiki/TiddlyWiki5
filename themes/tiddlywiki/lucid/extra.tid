@@ -107,12 +107,14 @@ canvas.tc-edit-bitmapeditor { border-radius: var(--l-radius-sm); }
 .tc-editor-codemirror6-simple.tc-editor-codemirror6-textarea .cm-editor {
 	border-radius: var(--l-radius-sm);
 	border: 1px solid <<colour tiddler-editor-border>>;
+	box-sizing: border-box;
 	background: <<colour tiddler-editor-background>>;
 	transition: border-color var(--l-dur) var(--l-ease);
 }
 .tc-editor-codemirror6 .cm-editor {
 	border-radius: var(--l-radius);
 	border: 1px solid <<colour tiddler-editor-border>>;
+	box-sizing: border-box;
 	background: <<colour tiddler-editor-background>>;
 	transition: border-color var(--l-dur) var(--l-ease);
 }

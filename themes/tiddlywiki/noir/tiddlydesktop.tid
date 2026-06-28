@@ -1,0 +1,88 @@
+title: $:/themes/tiddlywiki/noir/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Noir theme
+** Cinematic, dark-native aesthetic: rim-highlighted cards, layered cast shadows,
+** glow accents. The wiki list feels like a polished, moody app drawer.
+*/
+
+/* Toolbar — a raised dark surface with Noir's signature rim highlight */
+.td-toolbar {
+	box-shadow: var(--n-shadow-1);
+	font-family: var(--n-display);
+}
+
+/* Wiki-list items — large radius, rim + cast shadow depth */
+.td-wikilist .td-wikilist-item {
+	border-radius: var(--n-radius);
+	box-shadow: var(--n-shadow-1);
+	transition: box-shadow var(--n-dur) var(--n-ease),
+	            border-left-color var(--n-dur) var(--n-ease);
+}
+.td-wikilist .td-wikilist-item:hover {
+	box-shadow: var(--n-shadow-2);
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title & info — Noir's display sans */
+.td-wikilist .td-wiki-title {
+	font-family: var(--n-display);
+	font-weight: 600;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--n-body);
+}
+
+/* Buttons — pill-shaped, matching Noir's rounded controls */
+button.td-button {
+	border-radius: var(--n-radius-pill);
+	font-family: var(--n-body);
+	font-size: 0.82em;
+	font-weight: 500;
+	transition: background-color var(--n-fast) var(--n-ease);
+}
+
+/* Toolbar inputs — use the theme's raised surface colour */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--n-body);
+	border-radius: var(--n-radius-sm);
+	background: var(--n-surface-2);
+	border: 1px solid var(--n-line);
+	color: var(--n-ink);
+}
+
+/* ── The WikiList window — moody app drawer ──────────────────────────── */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--n-body);
+	border-radius: var(--n-radius-sm);
+	background: var(--n-surface-2);
+	border: 1px solid var(--n-line);
+	color: var(--n-ink);
+}
+.td-search input.td-wikilist-search-input:focus {
+	border-color: var(--n-accent);
+	box-shadow: 0 0 0 3px var(--n-glow-soft);
+}
+.td-tags .tc-tag-label {
+	font-family: var(--n-body);
+}
+
+/* ── WikiList rows — rim-lit favicon, monospace url ──────────────────── */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--n-radius-sm);
+	background: var(--n-surface-3);
+	box-shadow: var(--n-rim), 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.td-wikilist .td-wiki-url {
+	font-family: var(--n-mono);
+	font-size: 0.85em;
+}
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--n-display);
+}

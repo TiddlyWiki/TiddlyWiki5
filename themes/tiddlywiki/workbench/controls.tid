@@ -153,7 +153,27 @@ textarea.tc-edit-texteditor:focus,
 .tc-tab-buttons button:hover { background: var(--w-wash); }
 .tc-tab-buttons button.tc-tab-selected { color: <<colour foreground>>; box-shadow: inset 0 -2px 0 var(--w-accent); }
 
-.tc-plugin-info { border-radius: var(--w-radius); }
+.tc-plugin-info {
+	border-radius: var(--w-radius);
+	border-color: var(--w-grid-strong);
+	transition: border-color var(--w-dur) var(--w-ease), box-shadow var(--w-dur) var(--w-ease);
+}
+/* Override vanilla's flood-fill hover (0,3,1) with Workbench's grid-accent treatment. */
+a.tc-tiddlylink.tc-plugin-info:hover {
+	background-color: <<colour tiddler-background>>;
+	color: <<colour foreground>>;
+	fill: var(--w-accent);
+	border-color: var(--w-accent);
+	box-shadow: inset 0 0 0 1px var(--w-accent);
+	text-decoration: none;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: var(--w-accent);
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	color: <<colour foreground>>;
+	border-color: <<colour tiddler-border>>;
+}
 
 /*
 ** Sidebar — compact console

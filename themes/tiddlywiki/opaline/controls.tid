@@ -260,10 +260,26 @@ textarea.tc-edit-texteditor:focus,
 /* Plugin chips */
 .tc-plugin-info {
 	border-radius: var(--o-radius);
+	border-color: var(--o-rule-strong);
 	box-shadow: var(--o-shadow-1);
-	transition: box-shadow var(--o-dur) var(--o-ease);
+	transition: box-shadow var(--o-dur) var(--o-ease), border-color var(--o-dur) var(--o-ease);
 }
-.tc-plugin-info:hover { box-shadow: var(--o-shadow-2); }
+/* Override vanilla's flood-fill hover (0,3,1) with Opaline's opal-glow treatment. */
+a.tc-tiddlylink.tc-plugin-info:hover {
+	background-color: <<colour tiddler-background>>;
+	color: <<colour foreground>>;
+	fill: var(--o-iris-1);
+	border-color: var(--o-iris-1);
+	box-shadow: var(--o-shadow-2);
+	text-decoration: none;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: var(--o-iris-1);
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	color: <<colour foreground>>;
+	border-color: <<colour tiddler-border>>;
+}
 
 @media (max-width: 769px) {
 	.tc-tiddler-info { margin-left: -22px; margin-right: -22px; padding-left: 22px; padding-right: 22px; }

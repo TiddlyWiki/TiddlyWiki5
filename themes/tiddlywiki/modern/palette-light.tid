@@ -120,3 +120,21 @@ toolbar-done-button:
 untagged-background: #8388a0
 very-muted-foreground: #9498ac
 network-activity-foreground: <<colour primary>>
+wikilist-background: #f2f3f9
+wikilist-button-background: #eef0f8
+wikilist-button-foreground: <<colour foreground>>
+wikilist-button-open: #0f9d6b
+wikilist-button-open-hover: #0a8058
+wikilist-button-remove: #e0245e
+wikilist-button-remove-hover: #c01848
+wikilist-button-reveal: <<colour primary>>
+wikilist-button-reveal-hover: #3f4dc4
+wikilist-droplink-dragover: rgba(79,91,213,0.5)
+wikilist-info: <<colour muted-foreground>>
+wikilist-item: <<colour tiddler-background>>
+wikilist-item-border-hover: <<colour primary>>
+wikilist-title: <<colour foreground>>
+wikilist-title-svg: <<colour primary>>
+wikilist-toolbar-background: <<colour primary>>
+wikilist-toolbar-foreground: #ffffff
+wikilist-url: #6b6f82

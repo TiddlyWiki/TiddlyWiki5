@@ -1,0 +1,84 @@
+title: $:/themes/tiddlywiki/quietude/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Quietude theme
+** Calm, minimal library aesthetic: humanist sans, gentle shadows, soft sage tones.
+** The WikiList window feels like a quiet, well-organised shelf.
+*/
+
+/* Toolbar — warm, borderless, with a hairline rule instead of a heavy shadow */
+.td-toolbar {
+	box-shadow: none;
+	border-bottom: 1px solid var(--q-line);
+	font-family: var(--q-sans);
+}
+
+/* Wikilist items — gently rounded cards with a calm, layered shadow */
+.td-wikilist .td-wikilist-item {
+	border-radius: var(--q-radius);
+	box-shadow: 0 1px 3px color-mix(in srgb, <<colour foreground>> 8%, transparent),
+	            0 2px 10px color-mix(in srgb, <<colour foreground>> 5%, transparent);
+	transition: box-shadow var(--q-dur) var(--q-ease),
+	            border-left-color var(--q-dur) var(--q-ease);
+}
+.td-wikilist .td-wikilist-item:hover {
+	box-shadow: 0 2px 8px color-mix(in srgb, <<colour foreground>> 11%, transparent),
+	            0 6px 24px color-mix(in srgb, <<colour foreground>> 8%, transparent);
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title & info — Quietude's calm humanist sans throughout */
+.td-wikilist .td-wiki-title {
+	font-family: var(--q-sans);
+	font-weight: 600;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--q-sans);
+}
+
+/* Buttons — gently rounded to match the theme radius */
+button.td-button {
+	border-radius: var(--q-radius-sm);
+	font-family: var(--q-sans);
+	font-size: 0.82em;
+	font-weight: 500;
+	transition: background-color var(--q-dur) var(--q-ease);
+}
+
+/* Toolbar inputs */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--q-sans);
+	border-radius: var(--q-radius-sm);
+}
+
+/* ── The WikiList window — a quiet, well-kept shelf ──────────────────── */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--q-sans);
+	border-radius: var(--q-radius-sm);
+	border: 1px solid var(--q-line);
+	transition: border-color var(--q-dur) var(--q-ease);
+}
+.td-search input.td-wikilist-search-input:focus {
+	border-color: var(--q-accent);
+}
+.td-tags .tc-tag-label {
+	font-family: var(--q-sans);
+}
+
+/* ── WikiList rows — calm cards, softly framed favicon ──────────────── */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--q-radius-sm);
+	box-shadow: 0 1px 3px color-mix(in srgb, <<colour foreground>> 8%, transparent);
+}
+.td-wikilist .td-wiki-url {
+	font-family: var(--q-sans);
+}
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--q-sans);
+}

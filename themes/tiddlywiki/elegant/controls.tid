@@ -244,10 +244,26 @@ textarea.tc-edit-texteditor:focus,
 /* Plugin chips */
 .tc-plugin-info {
 	border-radius: var(--e-radius-lg);
+	border-color: var(--e-rule-strong);
 	box-shadow: var(--e-shadow-1);
 	transition: box-shadow var(--e-dur) var(--e-ease), border-color var(--e-dur) var(--e-ease);
 }
-.tc-plugin-info:hover { box-shadow: var(--e-shadow-2); }
+/* Override vanilla's flood-fill hover (0,3,1) with Elegant's editorial lift. */
+a.tc-tiddlylink.tc-plugin-info:hover {
+	background-color: <<colour tiddler-background>>;
+	color: <<colour foreground>>;
+	fill: var(--e-accent-quiet);
+	border-color: var(--e-accent-quiet);
+	box-shadow: var(--e-shadow-2);
+	text-decoration: none;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: var(--e-accent);
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	color: <<colour foreground>>;
+	border-color: <<colour tiddler-border>>;
+}
 
 @media (max-width: 769px) {
 	.tc-tiddler-info { margin-left: -22px; margin-right: -22px; padding-left: 22px; padding-right: 22px; }

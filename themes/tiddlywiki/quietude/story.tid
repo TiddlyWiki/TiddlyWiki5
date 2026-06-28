@@ -19,7 +19,8 @@ tags: [[$:/tags/Stylesheet]]
 .tc-tiddler-frame {
 	margin-bottom: 8px;
 	--q-frame-pad-x: 8px;
-	padding: 28px var(--q-frame-pad-x) 40px;
+	--q-fold-banner-w: 18px;
+	padding: 28px var(--q-frame-pad-x) 40px var(--q-fold-banner-w);
 	background: transparent;
 	border: none;
 	border-bottom: 1px solid var(--q-line);
@@ -171,10 +172,7 @@ tags: [[$:/tags/Stylesheet]]
 	inset-inline-start: 0;
 	top: 0;
 	bottom: 0;
-	/* gutter is only 8px here, so give the banner a usable floor (min-width
-	   wins over the smaller max-width) rather than shrinking to the padding */
-	max-width: var(--q-frame-pad-x);
-	min-width: 18px;
+	width: var(--q-fold-banner-w);
 	-webkit-margin-start: 0;
 	margin-inline-start: 0;
 }

@@ -288,11 +288,26 @@ textarea.tc-edit-texteditor:focus,
 /* Plugin info chips */
 .tc-plugin-info {
 	border-radius: var(--m-radius);
+	border-color: var(--m-hairline);
 	box-shadow: var(--m-shadow-1);
 	transition: transform var(--m-dur-fast) var(--m-ease), box-shadow var(--m-dur) var(--m-ease);
 }
-
-.tc-plugin-info:hover {
+/* Override vanilla's a.tc-tiddlylink.tc-plugin-info:hover (0,3,1) which floods the card with
+   primary colour; replace with Modern's lift-and-glow treatment. Same specificity, loads
+   later → wins. */
+a.tc-tiddlylink.tc-plugin-info:hover {
+	background-color: <<colour tiddler-background>>;
+	color: <<colour foreground>>;
+	fill: <<colour primary>>;
+	border-color: <<colour primary>>;
 	transform: translate3d(0, -1px, 0);
-	box-shadow: var(--m-shadow-2);
+	box-shadow: var(--m-shadow-2), var(--m-shadow-accent);
+	text-decoration: none;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: <<colour primary>>;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	color: <<colour foreground>>;
+	border-color: <<colour tiddler-border>>;
 }
