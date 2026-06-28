@@ -243,37 +243,40 @@ exports.slowInSlowOut = function(t) {
 };
 
 exports.copyObjectPropertiesSafe = function(object) {
-	const seen = new Set(),
-		isDOMElement = (value) => value instanceof Node || value instanceof Window;
-
-	function safeCopy(obj) {
-		// skip circular references
-		if(seen.has(obj)) {
-			return undefined;
+	const seen = new Set();
+	// True for a plain object, even one from another realm (e.g. a second browser
+	// window) where `instanceof` fails. Used to skip foreign DOM nodes and Window.
+	// See test-utils-copyObjectPropertiesSafe.js.
+	function isPlainObject(value) {
+		const proto = Object.getPrototypeOf(value);
+		return proto === null || Object.getPrototypeOf(proto) === null;
+	}
+	// Copy a value: primitives, arrays and plain objects recurse; anything else (DOM node, Window) is dropped.
+	function copyValue(value) {
+		if(value === null || typeof value !== "object") {
+			return value;
 		}
-		// primitives and null are safe
-		if(typeof obj !== "object" || obj === null) {
-			return obj;
+		if(seen.has(value)) {
+			return undefined; // break circular references
 		}
-		// skip DOM elements
-		if(isDOMElement(obj)) {
-			return undefined;
-		}
-		// copy arrays, preserving positions
-		if(Array.isArray(obj)) {
-			return obj.map((item) => {
-				const value = safeCopy(item);
-				return value === undefined ? null : value;
+		seen.add(value);
+		if(Array.isArray(value)) {
+			return value.map((item) => {
+				const copied = copyValue(item);
+				return copied === undefined ? null : copied;
 			});
 		}
-
-		seen.add(obj);
+		if(!isPlainObject(value)) {
+			return undefined;
+		}
+		return copyProperties(value);
+	}
+	// Copy an object's enumerable properties, skipping values that are not serializable.
+	function copyProperties(source) {
 		const copy = {};
-		let key,
-			value;
-		for(key in obj) {
+		for(const key in source) {
 			try {
-				value = safeCopy(obj[key]);
+				const value = copyValue(source[key]);
 				if(value !== undefined) {
 					copy[key] = value;
 				}
@@ -283,10 +286,15 @@ exports.copyObjectPropertiesSafe = function(object) {
 		}
 		return copy;
 	}
-
-	const result = safeCopy(object);
-	seen.clear();
-	return result;
+	// The argument is usually a DOM event (a host object), so walk its properties directly.
+	if(object === null || typeof object !== "object") {
+		return object;
+	}
+	if(Array.isArray(object)) {
+		return copyValue(object);
+	}
+	seen.add(object);
+	return copyProperties(object);
 };
 
 exports.formatTitleString = function(template,options) {
