@@ -9,6 +9,10 @@ Widget base class
 
 "use strict";
 
+// Opt-in flag for the resilient render boundary in renderChildren (default off → throws propagate,
+// preserving fail-loud server/CI render). An interactive edition sets this tiddler to "yes".
+var RESILIENT_RENDER_CONFIG_TITLE = "$:/config/ResilientRender";
+
 /*
 Create a widget object for a parse tree node
 	parseTreeNode: reference to the parse tree node to be rendered
@@ -686,8 +690,52 @@ Render the children of this widget into the DOM
 Widget.prototype.renderChildren = function(parent,nextSibling) {
 	var children = this.children;
 	for(var i = 0; i < children.length; i++) {
-		children[i].render(parent,nextSibling);
+		try {
+			children[i].render(parent,nextSibling);
+		} catch(error) {
+			this.containChildError(i,error,"render",parent,nextSibling);
+		}
 	};
+};
+
+/*
+Resilient render boundary (OPT-IN via $:/config/ResilientRender, default off): contain a child widget
+that threw during render/refresh so it degrades to a graded $error span instead of crashing the whole
+tree. Off by default so server/CI/static render keeps failing loudly and throw-based bug surfacing is
+preserved; an interactive edition sets the flag. The flag is read only here (the error path), so there
+is no cost on the normal path. Re-throws TranscludeRecursionError (transclude.js's recursion handler
+must still climb the tree) and re-throws when the flag is off. On degrade the failing child is
+destroyed (clearing any partial DOM and listeners) and replaced in this.children by the error widget,
+so destroy, refresh and sibling DOM positioning stay consistent.
+	index: position of the failing child in this.children
+	error: the thrown error
+	phase: "render" or "refresh" (for the message)
+	parentDomNode: the DOM node to render the error widget into
+	nextSibling: the DOM node to insert the error widget before (or null)
+*/
+Widget.prototype.containChildError = function(index,error,phase,parentDomNode,nextSibling) {
+	if(error instanceof $tw.utils.TranscludeRecursionError) {
+		throw error;
+	}
+	if(this.wiki.getTiddlerText(RESILIENT_RENDER_CONFIG_TITLE,"no") !== "yes") {
+		throw error;
+	}
+	var message = "Widget " + phase + " error: " + ((error && error.message) ? error.message : String(error));
+	$tw.utils.warning(message);
+	try {
+		this.children[index].destroy();
+	} catch(innerError) {
+		// ignore — we are already on the failure path
+	}
+	try {
+		var errorWidget = this.makeChildWidget({type: "error", attributes: {
+			"$message": {type: "string", value: message}
+		}});
+		this.children[index] = errorWidget;
+		errorWidget.render(parentDomNode,nextSibling);
+	} catch(innerError) {
+		// last resort — the boundary itself must never crash the render
+	}
 };
 
 /*
@@ -781,7 +829,15 @@ Widget.prototype.refreshChildren = function(changedTiddlers) {
 	var children = this.children,
 		refreshed = false;
 	for(var i = 0; i < children.length; i++) {
-		refreshed = children[i].refresh(changedTiddlers) || refreshed;
+		try {
+			refreshed = children[i].refresh(changedTiddlers) || refreshed;
+		} catch(error) {
+			// Capture the DOM anchor before the failing child is destroyed (refresh works in place,
+			// so unlike render there is no nextSibling argument to fall back on).
+			var nextSibling = children[i].findNextSiblingDomNode();
+			this.containChildError(i,error,"refresh",this.parentDomNode,nextSibling);
+			refreshed = true;
+		}
 	}
 	return refreshed;
 };
