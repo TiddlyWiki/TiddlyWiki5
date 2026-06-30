@@ -11,6 +11,8 @@ tags: [[$:/tags/Stylesheet]]
 
 /* Toolbar — warm, borderless, with a hairline rule instead of a heavy shadow */
 .td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
 	box-shadow: none;
 	border-bottom: 1px solid var(--q-line);
 	font-family: var(--q-sans);
@@ -44,6 +46,7 @@ tags: [[$:/tags/Stylesheet]]
 /* Buttons — gently rounded to match the theme radius */
 button.td-button {
 	border-radius: var(--q-radius-sm);
+	color: <<colour wikilist-button-foreground>>;
 	font-family: var(--q-sans);
 	font-size: 0.82em;
 	font-weight: 500;

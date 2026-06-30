@@ -105,7 +105,8 @@ button.tc-btn-big-green {
 .tc-drop-down a.tc-tiddlylink,
 .tc-drop-down button,
 .tc-drop-down .tc-dropdown-item,
-.tc-block-dropdown a.tc-tiddlylink {
+.tc-block-dropdown a.tc-tiddlylink,
+.tc-block-dropdown button {
 	border-radius: var(--l-radius-sm);
 	min-height: 2.4em;
 }
@@ -114,6 +115,8 @@ button.tc-btn-big-green {
 .tc-drop-down .tc-btn-invisible:hover,
 .tc-drop-down .tc-file-input-wrapper:hover button,
 .tc-block-dropdown a:hover,
+.tc-block-dropdown button:hover,
+.tc-block-dropdown .tc-btn-invisible:hover,
 .tc-block-tags-dropdown .tc-btn-invisible:hover {
 	background: var(--l-ink);
 	color: var(--l-bg);

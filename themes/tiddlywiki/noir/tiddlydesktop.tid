@@ -11,6 +11,8 @@ tags: [[$:/tags/Stylesheet]]
 
 /* Toolbar — a raised dark surface with Noir's signature rim highlight */
 .td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
 	box-shadow: var(--n-shadow-1);
 	font-family: var(--n-display);
 }
@@ -41,6 +43,7 @@ tags: [[$:/tags/Stylesheet]]
 /* Buttons — pill-shaped, matching Noir's rounded controls */
 button.td-button {
 	border-radius: var(--n-radius-pill);
+	color: <<colour wikilist-button-foreground>>;
 	font-family: var(--n-body);
 	font-size: 0.82em;
 	font-weight: 500;

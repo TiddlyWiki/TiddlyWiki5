@@ -12,6 +12,8 @@ tags: [[$:/tags/Stylesheet]]
 
 /* Toolbar — matches the primary-coloured menubar; lift with a subtle shadow */
 .td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
 	box-shadow: var(--m-shadow-1);
 	font-family: var(--m-font-display);
 }
@@ -42,6 +44,7 @@ tags: [[$:/tags/Stylesheet]]
 /* Buttons — pill-shaped to match Modern's playful affordances */
 button.td-button {
 	border-radius: var(--m-radius-pill);
+	color: <<colour wikilist-button-foreground>>;
 	font-family: var(--m-font-display);
 	font-size: 0.82em;
 	font-weight: 500;

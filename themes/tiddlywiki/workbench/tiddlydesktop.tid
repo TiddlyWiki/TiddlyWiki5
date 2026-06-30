@@ -11,6 +11,8 @@ tags: [[$:/tags/Stylesheet]]
 
 /* Toolbar — flat, structural grid-line separator below, no shadow */
 .td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
 	box-shadow: none;
 	border-bottom: 1px solid var(--w-grid-strong);
 	font-family: var(--w-sans);
@@ -47,6 +49,7 @@ tags: [[$:/tags/Stylesheet]]
 /* Buttons — near-square, compact */
 button.td-button {
 	border-radius: var(--w-radius);
+	color: <<colour wikilist-button-foreground>>;
 	font-family: var(--w-sans);
 	font-size: 0.82em;
 	font-weight: 500;

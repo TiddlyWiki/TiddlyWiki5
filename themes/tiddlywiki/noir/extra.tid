@@ -12,22 +12,21 @@ tags: [[$:/tags/Stylesheet]]
 .tc-tiddler-frame input.tc-edit-texteditor,
 .tc-tiddler-frame textarea.tc-edit-texteditor {
 	background: <<colour tiddler-editor-background>>;
-	border: 1px solid <<colour tiddler-editor-border>>;
+	outline: 1px solid <<colour tiddler-editor-border>>;
 	border-radius: var(--n-radius);
-	transition: border-color var(--n-dur) var(--n-ease), box-shadow var(--n-dur) var(--n-ease);
+	transition: outline-color var(--n-dur) var(--n-ease), box-shadow var(--n-dur) var(--n-ease);
 }
 /* When CM6 replaces the simple title input, the wrapper carries
-   tc-edit-texteditor but its border is drawn on the inner .cm-editor —
-   drop the wrapper border so they don't double up. */
+   tc-edit-texteditor but its outline is drawn on the inner .cm-editor —
+   drop the wrapper outline so they don't double up. */
 .tc-tiddler-edit-frame .tc-edit-texteditor.tc-editor-codemirror6 {
-	border: none;
+	outline: none;
 }
 .tc-tiddler-frame input.tc-edit-texteditor:focus,
 .tc-tiddler-frame textarea.tc-edit-texteditor:focus,
 .tc-tiddler-frame .tc-edit-texteditor:focus {
-	border-color: var(--n-accent);
+	outline-color: var(--n-accent);
 	box-shadow: 0 0 0 3px var(--n-wash-strong);
-	outline: none;
 }
 .tc-tiddler-frame textarea.tc-edit-texteditor, .tc-tiddler-frame input.tc-edit-texteditor { font-family: var(--n-mono); }
 /* Edit toolbar — vanilla fills every button with a flat grey (controls-foreground
@@ -102,7 +101,7 @@ canvas.tc-edit-bitmapeditor { border-radius: var(--n-radius-sm); }
 ** inner overflow can never clip it.
 */
 .tc-editor-codemirror6 {
-	border: none;
+	outline: none;
 }
 .tc-editor-codemirror6-simple.tc-editor-codemirror6-input .cm-editor,
 .tc-editor-codemirror6-simple.tc-editor-codemirror6-textarea .cm-editor {
@@ -110,6 +109,7 @@ canvas.tc-edit-bitmapeditor { border-radius: var(--n-radius-sm); }
 	border: 1px solid <<colour tiddler-editor-border>>;
 	box-sizing: border-box;
 	background: <<colour tiddler-editor-background>>;
+	overflow: hidden;
 	transition: border-color var(--n-dur) var(--n-ease);
 }
 .tc-editor-codemirror6 .cm-editor {

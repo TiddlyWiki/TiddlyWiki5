@@ -12,8 +12,10 @@ tags: [[$:/tags/Stylesheet]]
 
 /* Toolbar — strong structural border instead of a shadow */
 .td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
 	box-shadow: none;
-	border-bottom: 3px solid <<colour foreground>>;
+	border-bottom: 3px solid <<colour wikilist-toolbar-foreground>>;
 	font-family: var(--l-sans);
 }
 
@@ -45,6 +47,7 @@ tags: [[$:/tags/Stylesheet]]
 /* Buttons — minimum 44px touch target (WCAG 2.5.5), square-ish corners */
 button.td-button {
 	border-radius: var(--l-radius-sm);
+	color: <<colour wikilist-button-foreground>>;
 	font-family: var(--l-sans);
 	font-weight: 600;
 	min-height: var(--l-target);

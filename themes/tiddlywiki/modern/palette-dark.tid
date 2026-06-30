@@ -122,7 +122,7 @@ very-muted-foreground: #6f7588
 network-activity-foreground: <<colour primary>>
 wikilist-background: #0b0d13
 wikilist-button-background: #232838
-wikilist-button-foreground: <<colour foreground>>
+wikilist-button-foreground: <<colour background>>
 wikilist-button-open: #5cd6a0
 wikilist-button-open-hover: #40b888
 wikilist-button-remove: #ff6a8a
