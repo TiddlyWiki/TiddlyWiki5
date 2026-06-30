@@ -58,6 +58,7 @@ if(!useCodeMirror) {
 var CM_SUPPORTED_TYPES = {
 	"text": true,
 	"search": true,
+	"password": true,
 	"": true, // default/unspecified
 	undefined: true
 };

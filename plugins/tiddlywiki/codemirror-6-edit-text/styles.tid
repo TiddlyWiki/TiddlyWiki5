@@ -628,3 +628,45 @@ html body .tc-edit-field-value .tc-editor-codemirror6-input .cm-line {
 	white-space: nowrap;
 	box-sizing: border-box;
 }
+
+/* ============================================
+   Password input - masking and reveal toggle
+   ============================================ */
+
+html body .tc-editor-codemirror6-password {
+	position: relative;
+}
+
+/* Extra right padding so text does not slide under the button */
+html body .tc-editor-codemirror6-password .cm-content {
+	padding-right: 28px;
+}
+
+html body .tc-cm6-password-toggle {
+	position: absolute;
+	right: 4px;
+	top: 50%;
+	transform: translateY(-50%);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	border: none;
+	border-radius: 3px;
+	background: none;
+	cursor: pointer;
+	color: inherit;
+	opacity: 0.5;
+	line-height: 1;
+	z-index: 1;
+}
+
+html body .tc-cm6-password-toggle:hover {
+	opacity: 1;
+}
+
+html body .tc-cm6-password-toggle:focus {
+	outline: none;
+}

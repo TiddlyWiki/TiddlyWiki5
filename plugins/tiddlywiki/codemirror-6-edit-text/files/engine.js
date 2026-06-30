@@ -306,6 +306,10 @@ class CodeMirrorSimpleEngine {
 		this.nextSibling = options.nextSibling;
 		this.options = options;
 
+		this._isPasswordMode = !!(this.widget && this.widget.editType === "password");
+		this._passwordMasked = true;
+		this._passwordToggleBtn = null;
+
 		// Determine mode: input (single-line) or textarea (multi-line)
 		var tag = (this.widget && this.widget.editTag) || "input";
 		this.isInputMode = (tag !== "textarea");
@@ -330,7 +334,8 @@ class CodeMirrorSimpleEngine {
 			multiCursor: new Compartment(),
 			bidi: new Compartment(),
 			autocompletion: new Compartment(),
-			tabBehavior: new Compartment()
+			tabBehavior: new Compartment(),
+			password: new Compartment()
 		};
 		this._activePlugins = [];
 		this._keymapPlugins = {};
@@ -790,6 +795,11 @@ class CodeMirrorSimpleEngine {
 			}));
 		}
 		extensions.push(this._compartments.autocompletion.of(autocompletionExts));
+
+		// Password masking - replace each character visually with a bullet dot
+		extensions.push(this._compartments.password.of(
+			this._isPasswordMode ? this._buildPasswordMaskPlugin() : []
+		));
 
 		// ========================================================================
 		// Plugin Extensions
@@ -1283,6 +1293,10 @@ class CodeMirrorSimpleEngine {
 		this.parentNode.insertBefore(this.domNode, this.nextSibling);
 		if(this.widget && this.widget.domNodes) {
 			this.widget.domNodes.push(this.domNode);
+		}
+
+		if(this._isPasswordMode) {
+			this._initPasswordToggle(ownerDocument);
 		}
 
 		// ========================================================================
@@ -2035,6 +2049,116 @@ class CodeMirrorSimpleEngine {
 		this._triggerEvent("settingsChanged", settings);
 	}
 
+	// ============================================================================
+	// Password Mode
+	// ============================================================================
+
+	_buildPasswordMaskPlugin() {
+		var core = this.cm;
+		if(!core) return [];
+		var ViewPlugin = (core.view || {}).ViewPlugin;
+		var Decoration = (core.view || {}).Decoration;
+		var WidgetType = (core.view || {}).WidgetType;
+
+		if(!ViewPlugin || !Decoration || !WidgetType) return [];
+
+		var BULLET = "•";
+
+		class BulletWidget extends WidgetType {
+			toDOM() {
+				var span = document.createElement("span");
+				span.className = "cm-password-bullet";
+				span.textContent = BULLET;
+				span.setAttribute("aria-hidden", "true");
+				return span;
+			}
+
+			eq() {
+				return true;
+			}
+
+			ignoreEvent() {
+				return false;
+			}
+		}
+
+		var bulletDeco = Decoration.replace({ widget: new BulletWidget() });
+
+		function buildDecos(view) {
+			var text = view.state.doc.toString();
+			var decos = [];
+			var i = 0;
+			while(i < text.length) {
+				var cp = text.codePointAt(i);
+				var cpLen = cp > 0xFFFF ? 2 : 1;
+				decos.push(bulletDeco.range(i, i + cpLen));
+				i += cpLen;
+			}
+			return Decoration.set(decos);
+		}
+
+		var MaskPlugin = ViewPlugin.fromClass(class {
+			constructor(view) {
+				this.decorations = buildDecos(view);
+			}
+
+			update(update) {
+				if(update.docChanged) {
+					this.decorations = buildDecos(update.view);
+				}
+			}
+		}, {
+			decorations: function(v) { return v.decorations; }
+		});
+
+		return [MaskPlugin];
+	}
+
+	_initPasswordToggle(doc) {
+		var self = this;
+		this.domNode.classList.add("tc-editor-codemirror6-password");
+
+		var btn = doc.createElement("button");
+		btn.type = "button";
+		btn.className = "tc-cm6-password-toggle";
+		btn.setAttribute("aria-label", "Show password");
+		btn.setAttribute("tabindex", "-1");
+		btn.innerHTML = this._passwordEyeSVG(false);
+
+		// Prevent the button click from moving focus away from the editor
+		btn.addEventListener("mousedown", function(e) {
+			e.preventDefault();
+		});
+
+		btn.addEventListener("click", function(e) {
+			e.preventDefault();
+			self._togglePasswordMask();
+		});
+
+		this.domNode.appendChild(btn);
+		this._passwordToggleBtn = btn;
+	}
+
+	_togglePasswordMask() {
+		if(!this.view || !this._isPasswordMode) return;
+		this._passwordMasked = !this._passwordMasked;
+		this.reconfigure("password", this._passwordMasked ? this._buildPasswordMaskPlugin() : []);
+		if(this._passwordToggleBtn) {
+			this._passwordToggleBtn.innerHTML = this._passwordEyeSVG(!this._passwordMasked);
+			this._passwordToggleBtn.setAttribute(
+				"aria-label",
+				this._passwordMasked ? "Show password" : "Hide password"
+			);
+		}
+	}
+
+	_passwordEyeSVG(visible) {
+		if(visible) {
+			return "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg>";
+		}
+		return "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24\"/><line x1=\"1\" y1=\"1\" x2=\"23\" y2=\"23\"/></svg>";
+	}
+
 	// ========================================================================
 	// Destruction / Cleanup
 	// ========================================================================
@@ -2083,6 +2207,7 @@ class CodeMirrorSimpleEngine {
 		this._keymapPlugins = null;
 		this._completionSources = [];
 		this._pluginContext = null;
+		this._passwordToggleBtn = null;
 	}
 
 	/**
