@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lint/incompleteTags
+caption: Incomplete Tags
+description: Check for widgets and HTML tags missing the closing '>'
+text: yes

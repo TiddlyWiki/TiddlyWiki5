@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lint/unclosedWidgets
+caption: Unclosed Widgets
+description: Check for widgets without closing tags
+text: yes

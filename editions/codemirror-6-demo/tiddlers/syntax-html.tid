@@ -1,0 +1,70 @@
+title: Draft of 'Syntax — HTML'
+draft.of: Syntax — HTML
+draft.title: Syntax — HTML
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+! Raw HTML elements
+
+TiddlyWiki wikitext allows raw HTML tags alongside widgets.
+
+<div class="outer">
+<p>A paragraph inside a div.</p>
+</div>
+
+! Attributes
+
+<div
+	class="box"
+	id="main"
+	title="A tooltip"
+	data-role="container"
+	hidden
+>
+Content with several attributes, including a boolean attribute (`hidden`).
+</div>
+
+! Style attribute and style.* shortcuts
+
+<div style="color:blue;background:#eee;padding:0.5em;">
+Inline style attribute.
+</div>
+
+<div style.color="green" style.font-weight="bold">
+Per-property style shortcuts.
+</div>
+
+! Void / self-closing elements
+
+Line break:<br/>
+Horizontal rule:
+<hr/>
+An image: <img src="https://tiddlywiki.com/favicon.ico" alt="favicon" width="16"/>
+
+! Inline HTML
+
+This sentence has <strong>strong</strong>, <em>emphasis</em>, <code>code</code>
+and a <span class="tc-inline-style" style="color:purple;">styled span</span>.
+
+! Dynamic attribute values
+
+<div
+	class={{!!class}}
+	data-title=<<currentTiddler>>
+	data-count={{{ [tag[done]count[]] }}}
+	style=`color: $(currentTiddler)$;`
+>
+Attributes can take transclusions, variables, filtered values and substitutions.
+</div>
+
+! Nested HTML and widgets together
+
+<ul class="list">
+<$list filter="[tag[done]limit[3]]">
+<li><$link to=<<currentTiddler>>><$view field="title"/></$link></li>
+</$list>
+</ul>
+
+! HTML comments
+
+<!-- This is an HTML/wikitext comment; it is not rendered -->
