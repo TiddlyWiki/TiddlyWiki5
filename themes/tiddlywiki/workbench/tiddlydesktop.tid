@@ -1,0 +1,117 @@
+title: $:/themes/tiddlywiki/workbench/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Workbench theme
+** Dense, utilitarian data-console aesthetic: hairline grid borders, near-square
+** corners, monospace metadata, no decorative shadows — information first.
+*/
+
+/* Toolbar — flat, structural grid-line separator below, no shadow */
+.td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: none;
+	border-bottom: 1px solid var(--w-grid-strong);
+	font-family: var(--w-sans);
+	font-size: 0.88em;
+}
+
+/* Wiki-list items — inset grid-line ring via box-shadow, near-square corners */
+.td-wikilist .td-wikilist-item {
+	border-radius: var(--w-radius);
+	box-shadow: inset 0 0 0 1px var(--w-grid);
+}
+.td-wikilist .td-wikilist-item:hover {
+	box-shadow: inset 0 0 0 1px var(--w-accent);
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title — dense sans, URL in monospace */
+.td-wikilist .td-wiki-title {
+	font-family: var(--w-sans);
+	font-weight: 600;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--w-sans);
+}
+.td-wikilist .td-wiki-url {
+	font-family: var(--w-mono);
+	font-size: 0.82em;
+}
+
+/* ── WikiList action buttons — styled by role ────────────────────────── */
+/* Flat, compact buttons — no decorative shadow; utility roles read as console
+   controls via a grid-line ring that tightens to the accent on hover */
+button.td-button {
+	border-radius: var(--w-radius);
+	color: <<colour wikilist-button-foreground>>;
+	font-family: var(--w-sans);
+	font-size: 0.82em;
+	font-weight: 500;
+}
+/* Toolbar buttons sit on the neutral button surface, so they need the console
+   ink too — the plugin default (wikilist-button-foreground) is the page
+   background colour, which renders invisibly here */
+.td-toolbar button.td-button {
+	color: var(--w-ink);
+	fill: var(--w-ink);
+}
+/* Utility (convert / advanced / plugins / reveal-backups) — the neutral panel
+   surface needs the console ink, not the white used on the coloured buttons */
+.td-wikilist .td-wikilist-button-convert,
+.td-wikilist .td-wikilist-button-advanced,
+.td-wikilist .td-wikilist-button-plugins,
+.td-wikilist .td-wikilist-button-reveal-backups {
+	color: var(--w-ink);
+	fill: var(--w-ink);
+	box-shadow: inset 0 0 0 1px var(--w-grid-strong);
+}
+.td-wikilist .td-wikilist-button-convert:hover,
+.td-wikilist .td-wikilist-button-advanced:hover,
+.td-wikilist .td-wikilist-button-plugins:hover,
+.td-wikilist .td-wikilist-button-reveal-backups:hover {
+	color: <<colour wikilist-button-foreground>>;
+	fill: <<colour wikilist-button-foreground>>;
+	box-shadow: inset 0 0 0 1px var(--w-accent);
+}
+
+/* Toolbar inputs — hairline border matching the grid aesthetic */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--w-sans);
+	border-radius: var(--w-radius);
+	border: 1px solid var(--w-grid-strong);
+}
+
+/* ── The WikiList window — dense data console ──────────────────────── */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--w-sans);
+	border-radius: var(--w-radius);
+	border: 1px solid var(--w-grid-strong);
+	transition: border-color var(--w-dur) var(--w-ease);
+}
+.td-search input.td-wikilist-search-input:focus {
+	border-color: var(--w-accent);
+}
+.td-tags .tc-tag-label {
+	font-family: var(--w-sans);
+	border-radius: var(--w-radius);
+}
+
+/* ── WikiList rows — grid-lined favicon cell, ruled actions ─────────── */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--w-radius);
+	box-shadow: inset 0 0 0 1px var(--w-grid);
+}
+.td-wikilist .td-wikilist-item .td-wiki-toolbar {
+	border-top: 1px solid var(--w-grid);
+	padding-top: 0.5em;
+}
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--w-sans);
+}

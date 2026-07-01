@@ -1,0 +1,253 @@
+title: $:/themes/tiddlywiki/lucid/controls
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Buttons, tags, controls, overlays, inputs & sidebar
+**
+** Targets are large, borders are visible, and every interactive state changes
+** more than colour (weight, underline, border) so it reads without relying on
+** hue. Hover/active contrast is maximised by inverting to ink-on-background.
+*/
+
+/* Toolbar icons — large hit areas, clear hover fill */
+.tc-tiddler-controls button,
+.tc-page-controls button,
+.tc-topbar button {
+	border-radius: var(--l-radius-sm);
+	transition: background-color var(--l-dur) var(--l-ease);
+}
+.tc-tiddler-controls button:hover,
+.tc-page-controls button:hover,
+.tc-topbar button:hover { background: var(--l-wash-strong); }
+
+/* Standard buttons — bordered, comfortably tall, bold high-contrast hover */
+button.tc-btn-standard,
+.tc-btn-boxed,
+.tc-btn-rounded {
+	min-height: var(--l-target);
+	padding: 0.4em 1em;
+	border-radius: var(--l-radius-sm);
+	border: 2px solid var(--l-border-strong);
+	font-weight: 600;
+	transition: background-color var(--l-dur) var(--l-ease), color var(--l-dur) var(--l-ease),
+		border-color var(--l-dur) var(--l-ease);
+}
+button.tc-btn-standard:hover,
+.tc-btn-boxed:hover,
+.tc-btn-rounded:hover {
+	background: var(--l-ink);
+	color: var(--l-bg);
+	border-color: var(--l-ink);
+}
+button.tc-btn-standard:hover svg,
+.tc-btn-boxed:hover svg { fill: var(--l-bg); }
+
+/* Primary actions — solid, bold, clearly the main action */
+.tc-btn-big-green,
+.tc-primary-btn,
+button.tc-btn-big-green {
+	min-height: var(--l-target);
+	background: color-mix(in srgb, <<colour primary>> 80%, <<colour foreground>>) !important;
+	color: var(--l-on-accent) !important;
+	border: 2px solid color-mix(in srgb, <<colour primary>> 80%, <<colour foreground>>) !important;
+	border-radius: var(--l-radius-sm);
+	font-weight: 700;
+}
+.tc-btn-big-green svg, .tc-primary-btn svg { fill: var(--l-on-accent) !important; }
+.tc-btn-big-green:hover, .tc-primary-btn:hover {
+	background: var(--l-ink) !important;
+	border-color: var(--l-ink) !important;
+}
+
+/* Tags — bordered chips with readable ink (doubled class beats vanilla).
+   Geometry (radius, edge, weight, transition) applies to EVERY tag, including
+   those carrying a hardcoded colour, so coloured tags match the chip shape
+   instead of falling back to vanilla. Only the fill/ink and accent edge are
+   overridden for the uncoloured chips below. */
+.tc-tag-label.tc-tag-label {
+	border-radius: var(--l-radius-sm);
+	box-shadow: inset 0 0 0 2px color-mix(in srgb, <<colour foreground>> 22%, transparent);
+	font-weight: 600;
+	transition: background-color var(--l-dur) var(--l-ease), color var(--l-dur) var(--l-ease);
+}
+.tc-tag-label.tc-tag-label:not([style*="background-color"]),
+.tc-tag-label.tc-tag-label[style*="background-color:;"],
+.tc-tag-label.tc-tag-label[style*="background-color: ;"] {
+	background-color: color-mix(in srgb, <<colour foreground>> 9%, transparent);
+	color: <<colour foreground>> !important;
+	fill: <<colour foreground>> !important;
+	box-shadow: inset 0 0 0 2px var(--l-accent-ink);
+}
+.tc-tag-label.tc-tag-label:not([style*="background-color"]):hover,
+.tc-tag-label.tc-tag-label[style*="background-color:;"]:hover,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"]:hover {
+	background-color: var(--l-accent-ink);
+	color: var(--l-bg);
+}
+.tc-tag-label.tc-tag-label:not([style*="background-color"]):hover svg,
+.tc-tag-label.tc-tag-label[style*="background-color:;"]:hover svg,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"]:hover svg { fill: var(--l-bg); }
+.tc-tag-label.tc-tag-label:not([style*="background-color"]) svg,
+.tc-tag-label.tc-tag-label[style*="background-color:;"] svg,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"] svg { fill: <<colour foreground>> !important; }
+
+/* Dropdowns — solid, bordered, with a maximally contrasting inverted hover */
+.tc-drop-down,
+.tc-block-dropdown {
+	border-radius: var(--l-radius);
+	border: 2px solid var(--l-border-strong);
+	background: <<colour dropdown-background>>;
+	box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+	padding: 5px;
+}
+.tc-drop-down a.tc-tiddlylink,
+.tc-drop-down button,
+.tc-drop-down .tc-dropdown-item,
+.tc-block-dropdown a.tc-tiddlylink,
+.tc-block-dropdown button {
+	border-radius: var(--l-radius-sm);
+	min-height: 2.4em;
+}
+.tc-drop-down a:hover,
+.tc-drop-down button:hover,
+.tc-drop-down .tc-btn-invisible:hover,
+.tc-drop-down .tc-file-input-wrapper:hover button,
+.tc-block-dropdown a:hover,
+.tc-block-dropdown button:hover,
+.tc-block-dropdown .tc-btn-invisible:hover,
+.tc-block-tags-dropdown .tc-btn-invisible:hover {
+	background: var(--l-ink);
+	color: var(--l-bg);
+	font-weight: 600;
+}
+.tc-drop-down button.tc-btn-invisible:hover svg,
+.tc-block-dropdown button.tc-btn-invisible:hover svg,
+.tc-block-tags-dropdown .tc-btn-invisible:hover svg { fill: var(--l-bg); }
+/* Chooser items (theme / palette / layout / language switchers) render their
+   label as a .tc-tiddlylink. Vanilla base forces its hover/chosen colour to
+   <<colour foreground>> at a higher specificity than the inverted dropdown
+   hover above, so on our ink hover background it lands as ink-on-ink. Re-assert
+   the inverted text + icon; the doubled class outweighs vanilla's selector
+   regardless of stylesheet load order. The non-hovered .tc-chosen item keeps
+   the vanilla foreground colour (it sits on a light table-header background). */
+.tc-drop-down .tc-chooser-item .tc-tiddlylink.tc-tiddlylink:hover {
+	color: var(--l-bg);
+}
+.tc-drop-down .tc-chooser-item:hover .tc-tiddlylink svg {
+	fill: var(--l-bg);
+}
+.tc-drop-down .tc-tab-divider, .tc-drop-down hr { border: none; height: 2px; background: var(--l-border); }
+
+/* Modals — strong frame, dark backdrop */
+.tc-modal {
+	border-radius: var(--l-radius);
+	border: 2px solid var(--l-border-strong);
+	box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+	overflow: hidden;
+}
+.tc-modal-header { border-bottom: 2px solid var(--l-border); }
+.tc-modal-footer { border-top: 2px solid var(--l-border); }
+.tc-modal-backdrop { background: rgba(0,0,0,0.6); }
+
+.tc-notification { border-radius: var(--l-radius); border: 2px solid var(--l-border-strong); }
+.tc-alert { border-radius: var(--l-radius); border: 2px solid var(--l-border-strong); }
+.tc-tiddler-info {
+	/* Full-bleed to the frame edges, then re-pad so content aligns with
+	   the body — matched to THIS theme's 38px frame padding. */
+	margin-left: -38px;
+	margin-right: -38px;
+	padding-left: 38px;
+	padding-right: 38px; border-radius: var(--l-radius); border: 2px solid var(--l-border); }
+
+/* Inputs — tall, bordered, unmistakable focus */
+input[type="text"],
+input[type="search"],
+input.tc-edit-texteditor,
+textarea.tc-edit-texteditor,
+.tc-edit-texteditor,
+select {
+	min-height: var(--l-target);
+	border-radius: var(--l-radius-sm);
+	border: 2px solid var(--l-border-strong);
+	transition: border-color var(--l-dur) var(--l-ease);
+}
+input[type="text"]:focus,
+input[type="search"]:focus,
+input.tc-edit-texteditor:focus,
+textarea.tc-edit-texteditor:focus,
+.tc-edit-texteditor:focus {
+	border-color: var(--l-accent);
+}
+.tc-edit-tags { border-radius: var(--l-radius-sm); }
+
+/* Tabs — bold label and a thick underline (not colour alone) for the active tab */
+.tc-tab-buttons button {
+	min-height: 2.6em;
+	border-radius: var(--l-radius-sm) var(--l-radius-sm) 0 0;
+	transition: background-color var(--l-dur) var(--l-ease);
+}
+.tc-tab-buttons button:hover { background: var(--l-wash); }
+.tc-tab-buttons button.tc-tab-selected {
+	font-weight: 700;
+	box-shadow: inset 0 -4px 0 var(--l-accent);
+}
+
+.tc-plugin-info {
+	border-radius: var(--l-radius);
+	border-width: 2px;
+	border-color: var(--l-border);
+	transition: box-shadow var(--l-dur) var(--l-ease), border-color var(--l-dur) var(--l-ease);
+}
+/* Override vanilla's flood-fill hover (0,3,1). Accessibility: hover is signalled by
+   BOTH colour (accent border) AND shape (outer ring) — not colour alone. */
+a.tc-tiddlylink.tc-plugin-info:hover {
+	background-color: <<colour tiddler-background>>;
+	color: <<colour foreground>>;
+	fill: <<colour primary>>;
+	border-color: <<colour primary>>;
+	box-shadow: 0 0 0 3px <<colour primary>>;
+	text-decoration: none;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: <<colour primary>>;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	color: <<colour foreground>>;
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+/*
+** Sidebar
+*/
+.tc-site-title {
+	font-weight: 800;
+	font-size: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+	color: <<colour site-title-foreground>>;
+}
+.tc-site-subtitle { color: var(--l-muted); }
+
+.tc-sidebar-lists a.tc-tiddlylink {
+	border-radius: var(--l-radius-sm);
+	text-decoration: underline;
+	text-underline-offset: 0.14em;
+	transition: background-color var(--l-dur) var(--l-ease);
+}
+.tc-sidebar-lists a.tc-tiddlylink:hover { background: var(--l-wash-strong); }
+.tc-sidebar-tab-open-item { border-radius: var(--l-radius-sm); }
+.tc-sidebar-tab-open-item:hover { background: var(--l-wash); }
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected { font-weight: 700; }
+
+.tc-sidebar-header .tc-search input,
+.tc-search input {
+	min-height: var(--l-target);
+	border-radius: var(--l-radius-sm);
+	border: 2px solid var(--l-border-strong);
+}
+.tc-page-controls { gap: 4px; }
+.tc-page-controls button { min-width: 2.2em; min-height: 2.2em; }
+
+@media (max-width: 769px) {
+	.tc-tiddler-info { margin-left: -18px; margin-right: -18px; padding-left: 18px; padding-right: 18px; }
+}

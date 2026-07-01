@@ -1,0 +1,206 @@
+title: $:/themes/tiddlywiki/workbench/controls
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Buttons, tags, controls, overlays, inputs & sidebar — dense
+*/
+
+/* Toolbar icons — tight, quick accent feedback */
+.tc-tiddler-controls button,
+.tc-page-controls button,
+.tc-topbar button {
+	border-radius: var(--w-radius-sm);
+	transition: background-color var(--w-dur) var(--w-ease);
+}
+.tc-tiddler-controls button:hover { background: var(--w-wash); }
+.tc-tiddler-controls button:hover svg,
+.tc-page-controls button:hover svg,
+.tc-topbar button:hover svg { fill: var(--w-accent); }
+
+/* Standard buttons — compact, square-ish, monospace label */
+button.tc-btn-standard,
+.tc-btn-boxed,
+.tc-btn-rounded {
+	border-radius: var(--w-radius-sm);
+	border: 1px solid var(--w-grid-strong);
+	padding: 0.2em 0.6em;
+	font-family: var(--w-mono);
+	font-size: 0.86em;
+	transition: background-color var(--w-dur) var(--w-ease), border-color var(--w-dur) var(--w-ease);
+}
+button.tc-btn-standard:hover,
+.tc-btn-boxed:hover,
+.tc-btn-rounded:hover { background: var(--w-wash); border-color: var(--w-accent); }
+
+/* Primary — flat, solid, no frills */
+.tc-btn-big-green,
+.tc-primary-btn,
+button.tc-btn-big-green {
+	background: color-mix(in srgb, <<colour primary>> 82%, <<colour foreground>>) !important;
+	color: <<colour background>> !important;
+	border: 1px solid color-mix(in srgb, <<colour primary>> 82%, <<colour foreground>>) !important;
+	border-radius: var(--w-radius-sm);
+	transition: filter var(--w-dur) var(--w-ease);
+}
+.tc-btn-big-green svg, .tc-primary-btn svg { fill: <<colour background>> !important; }
+.tc-btn-big-green:hover, .tc-primary-btn:hover { filter: brightness(1.08); }
+
+/* Tags — compact monospace labels (doubled class beats vanilla) */
+.tc-tag-label.tc-tag-label:not([style*="background-color"]),
+.tc-tag-label.tc-tag-label[style*="background-color:;"],
+.tc-tag-label.tc-tag-label[style*="background-color: ;"] {
+	background-color: color-mix(in srgb, <<colour foreground>> 9%, transparent);
+	color: <<colour foreground>> !important;
+	fill: <<colour foreground>> !important;
+	box-shadow: inset 0 0 0 1px var(--w-grid-strong);
+}
+.tc-tag-label.tc-tag-label:not([style*="background-color"]):hover,
+.tc-tag-label.tc-tag-label[style*="background-color:;"]:hover,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"]:hover { background-color: var(--w-wash-strong); box-shadow: inset 0 0 0 1px var(--w-accent); }
+.tc-tag-label.tc-tag-label:not([style*="background-color"]) svg,
+.tc-tag-label.tc-tag-label[style*="background-color:;"] svg,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"] svg { fill: <<colour foreground>> !important; }
+
+/* Themed shape + a subtle defining edge on every tag. Coloured tags
+   (#hex, rgb(), or a named colour like GreenYellow) keep their own fill
+   and contrastcolour text and gain this edge; the uncoloured chip above
+   overrides the box-shadow with its accent border. */
+.tc-tag-label.tc-tag-label {
+	border-radius: var(--w-radius-sm);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, <<colour foreground>> 22%, transparent);
+	font-family: var(--w-mono);
+	font-size: 0.82em;
+	transition: background-color var(--w-dur) var(--w-ease), box-shadow var(--w-dur) var(--w-ease);
+}
+
+.tc-untagged-label { border-radius: var(--w-radius-sm); }
+
+/* Dropdowns — tight rows, contrast-safe hover */
+.tc-drop-down,
+.tc-block-dropdown {
+	border-radius: var(--w-radius);
+	border: 1px solid var(--w-grid-strong);
+	box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+	padding: 3px;
+}
+.tc-drop-down a.tc-tiddlylink,
+.tc-drop-down button,
+.tc-drop-down .tc-dropdown-item,
+.tc-block-dropdown a.tc-tiddlylink { border-radius: var(--w-radius-sm); }
+.tc-drop-down a:hover,
+.tc-drop-down button:hover,
+.tc-drop-down .tc-btn-invisible:hover,
+.tc-drop-down .tc-file-input-wrapper:hover button,
+.tc-block-dropdown a:hover,
+.tc-block-tags-dropdown .tc-btn-invisible:hover {
+	background: var(--w-wash-strong);
+	color: var(--w-ink);
+}
+.tc-drop-down button.tc-btn-invisible:hover svg,
+.tc-block-dropdown button.tc-btn-invisible:hover svg,
+.tc-block-tags-dropdown .tc-btn-invisible:hover svg { fill: var(--w-ink); }
+.tc-drop-down .tc-tab-divider, .tc-drop-down hr { border: none; height: 1px; background: var(--w-grid); }
+
+.tc-modal {
+	border-radius: var(--w-radius);
+	border: 1px solid var(--w-grid-strong);
+	box-shadow: 0 10px 34px rgba(0,0,0,0.3);
+	overflow: hidden;
+}
+.tc-modal-header { border-bottom: 1px solid var(--w-grid); }
+.tc-modal-footer { border-top: 1px solid var(--w-grid); }
+.tc-modal-backdrop { background: rgba(0,0,0,0.5); }
+.tc-notification { border-radius: var(--w-radius); border: 1px solid var(--w-grid-strong); }
+.tc-alert { border-radius: var(--w-radius); }
+.tc-tiddler-info {
+	/* Full-bleed to the frame edges, then re-pad so content aligns with
+	   the body — matched to THIS theme's 20px frame padding. */
+	margin-left: -20px;
+	margin-right: -20px;
+	padding-left: 20px;
+	padding-right: 20px; border-radius: var(--w-radius); border: 1px solid var(--w-grid); }
+
+/* Inputs — compact monospace fields */
+input[type="text"],
+input[type="search"],
+input.tc-edit-texteditor,
+textarea.tc-edit-texteditor,
+.tc-edit-texteditor,
+select {
+	border-radius: var(--w-radius-sm);
+	transition: border-color var(--w-dur) var(--w-ease), box-shadow var(--w-dur) var(--w-ease);
+}
+input.tc-edit-texteditor, textarea.tc-edit-texteditor, .tc-edit-texteditor { font-family: var(--w-mono); }
+input[type="text"]:focus,
+input[type="search"]:focus,
+input.tc-edit-texteditor:focus,
+textarea.tc-edit-texteditor:focus,
+.tc-edit-texteditor:focus {
+	border-color: var(--w-accent);
+	box-shadow: 0 0 0 2px var(--w-wash);
+	outline: none;
+}
+.tc-edit-tags { border-radius: var(--w-radius-sm); }
+
+/* Tabs — compact with a crisp accent underline */
+.tc-tab-buttons button {
+	border-radius: var(--w-radius-sm) var(--w-radius-sm) 0 0;
+	font-size: 0.9em;
+	transition: color var(--w-dur) var(--w-ease), background-color var(--w-dur) var(--w-ease);
+}
+.tc-tab-buttons button:hover { background: var(--w-wash); }
+.tc-tab-buttons button.tc-tab-selected { color: <<colour foreground>>; box-shadow: inset 0 -2px 0 var(--w-accent); }
+
+.tc-plugin-info {
+	border-radius: var(--w-radius);
+	border-color: var(--w-grid-strong);
+	transition: border-color var(--w-dur) var(--w-ease), box-shadow var(--w-dur) var(--w-ease);
+}
+/* Override vanilla's flood-fill hover (0,3,1) with Workbench's grid-accent treatment. */
+a.tc-tiddlylink.tc-plugin-info:hover {
+	background-color: <<colour tiddler-background>>;
+	color: <<colour foreground>>;
+	fill: var(--w-accent);
+	border-color: var(--w-accent);
+	box-shadow: inset 0 0 0 1px var(--w-accent);
+	text-decoration: none;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: var(--w-accent);
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	color: <<colour foreground>>;
+	border-color: <<colour tiddler-border>>;
+}
+
+/*
+** Sidebar — compact console
+*/
+.tc-site-title {
+	font-family: var(--w-mono);
+	font-weight: 600;
+	font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.55rem);
+	color: <<colour site-title-foreground>>;
+}
+.tc-site-subtitle { font-family: var(--w-mono); font-size: 0.72rem; color: var(--w-faint); }
+
+.tc-sidebar-lists a.tc-tiddlylink {
+	border-radius: var(--w-radius-sm);
+	transition: color var(--w-dur) var(--w-ease), background-color var(--w-dur) var(--w-ease);
+}
+.tc-sidebar-lists a.tc-tiddlylink:hover { color: var(--w-accent); background: var(--w-wash); }
+.tc-sidebar-tab-open-item { border-radius: var(--w-radius-sm); }
+.tc-sidebar-tab-open-item:hover { background: var(--w-wash); }
+.tc-sidebar-lists .tc-tab-buttons button { font-family: var(--w-mono); font-size: 0.82em; }
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected { color: <<colour foreground>>; }
+
+.tc-sidebar-header .tc-search input,
+.tc-search input {
+	border-radius: var(--w-radius-sm);
+	border: 1px solid var(--w-grid-strong);
+	font-family: var(--w-mono);
+	font-size: 0.86em;
+}
+.tc-page-controls { gap: 2px; }

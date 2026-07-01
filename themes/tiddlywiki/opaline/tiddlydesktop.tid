@@ -1,0 +1,180 @@
+title: $:/themes/tiddlywiki/opaline/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Opaline theme
+** Milky opal-glass aesthetic: smooth pebble shapes, accent-tinted shadows,
+** an opal light-field behind the list. The cards mirror the wiki's tiddler
+** frames — iris-tinted light over milky paper, wrapped in a conic opal ring.
+*/
+
+/* Toolbar — matches the theme menubar surface (set in the palette); a soft
+   accent-tinted shadow lifts it above the opal field. No backdrop-filter — it
+   would create a stacking context that traps the toolbar's own dropdowns. */
+.td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: var(--o-shadow-1);
+	font-family: var(--o-body);
+}
+
+/* Page background — the opal field: the same drifting pools of coloured light
+   the Opaline wiki paints on .tc-page-container. In a backstage window TD wraps
+   the rendered content in div.tc-page-container-wrapper (backstage-window.js) —
+   the true page container here, since <body> collapses to content height. Paint
+   the field on it, stretched to fill the window, exactly as the wiki does on
+   .tc-page-container (the page-background base shows through from the body).
+   Scoped with :has(.td-wikilist) so only the WikiList window gets it — not other
+   backstage windows, nor ordinary Opaline wikis that load this theme stylesheet. */
+.tc-page-container-wrapper:has(.td-wikilist) {
+	min-height: 100vh;
+	background-image:
+		radial-gradient(48% 40% at 12% 4%, color-mix(in srgb, var(--o-iris-2) 26%, transparent), transparent 62%),
+		radial-gradient(40% 34% at 90% 12%, color-mix(in srgb, var(--o-iris-4) 24%, transparent), transparent 60%),
+		radial-gradient(44% 40% at 86% 92%, color-mix(in srgb, var(--o-iris-3) 22%, transparent), transparent 62%),
+		radial-gradient(50% 46% at 30% 100%, color-mix(in srgb, var(--o-iris-5) 20%, transparent), transparent 64%);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+/* The base stylesheet paints the list surface opaque (.td-wikilist, same 0,1,0
+   specificity but loaded later, so it wins on source order); qualify with the
+   wrapper to outweigh it and let the field show behind and between the cards */
+.tc-page-container-wrapper .td-wikilist {
+	background: transparent;
+}
+
+/* Wiki-list items — opal-glass cards built like the wiki's tiddler frames:
+   iris-tinted light pooled in the corners over a milky paper fill, wrapped in a
+   conic opal ring. NO backdrop-filter or transform — those create a stacking
+   context that would trap the per-row tags dropdown behind the following row
+   (the wiki's frames avoid them for the same reason). The ring is kept STATIC
+   with no hover transition: --o-angle is a registered @property, so animating it
+   re-rasterises the whole conic ring every frame on every row — with a long list
+   that made hover and other interactions lag badly. */
+.td-wikilist .td-wikilist-item {
+	--o-angle: 130deg;
+	border: 2px solid transparent;
+	border-radius: var(--o-radius);
+	background:
+		radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--o-iris-2) 14%, transparent), transparent 50%) padding-box,
+		radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--o-iris-4) 12%, transparent), transparent 50%) padding-box,
+		radial-gradient(120% 95% at 100% 100%, color-mix(in srgb, var(--o-iris-3) 13%, transparent), transparent 52%) padding-box,
+		radial-gradient(120% 95% at 0% 100%, color-mix(in srgb, var(--o-iris-5) 11%, transparent), transparent 52%) padding-box,
+		linear-gradient(var(--o-paper), var(--o-paper)) padding-box,
+		var(--o-iris) border-box;
+	box-shadow: var(--o-shadow-1);
+}
+.td-wikilist .td-wikilist-item:hover {
+	box-shadow: var(--o-shadow-2);
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title — Opaline's luminous humanist display face */
+.td-wikilist .td-wiki-title {
+	font-family: var(--o-display);
+	font-weight: 600;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--o-body);
+}
+
+/* ── WikiList action buttons — styled by role ────────────────────────── */
+/* Pebble-pill buttons that lift on an accent-tinted shadow; coloured roles glow */
+button.td-button {
+	border-radius: var(--o-radius-pill);
+	color: <<colour wikilist-button-foreground>>;
+	font-family: var(--o-body);
+	font-size: 0.82em;
+	font-weight: 500;
+}
+/* Toolbar buttons sit on the neutral button surface, so they need the theme
+   ink too — the plugin default (wikilist-button-foreground) is the page
+   background colour, which renders invisibly here */
+.td-toolbar button.td-button {
+	color: var(--o-ink);
+	fill: var(--o-ink);
+}
+.td-wikilist .td-button {
+	box-shadow: var(--o-shadow-1);
+}
+.td-wikilist .td-button:hover {
+	transform: translateY(-1px);
+	box-shadow: var(--o-shadow-2);
+}
+.td-wikilist .td-button:active {
+	transform: translateY(0);
+}
+/* Open — the positive action: a green confirmation halo on hover */
+.td-wikilist .td-wikilist-button-open:hover {
+	box-shadow: var(--o-shadow-2),
+	            0 0 0 3px color-mix(in srgb, <<colour wikilist-button-open>> 28%, transparent);
+}
+/* Reveal — accent action: the opal accent wash */
+.td-wikilist .td-wikilist-button-reveal:hover {
+	box-shadow: var(--o-shadow-2), 0 0 0 3px var(--o-wash-strong);
+}
+/* Remove — destructive action: a red warning halo on hover */
+.td-wikilist .td-wikilist-button-remove:hover {
+	box-shadow: var(--o-shadow-2),
+	            0 0 0 3px color-mix(in srgb, <<colour wikilist-button-remove>> 28%, transparent);
+}
+/* Utility (convert / advanced / plugins / reveal-backups) — the neutral button
+   surface reads in the opal ink, switching to button-foreground when filled */
+.td-wikilist .td-wikilist-button-convert,
+.td-wikilist .td-wikilist-button-advanced,
+.td-wikilist .td-wikilist-button-plugins,
+.td-wikilist .td-wikilist-button-reveal-backups {
+	color: var(--o-ink);
+	fill: var(--o-ink);
+}
+.td-wikilist .td-wikilist-button-convert:hover,
+.td-wikilist .td-wikilist-button-advanced:hover,
+.td-wikilist .td-wikilist-button-plugins:hover,
+.td-wikilist .td-wikilist-button-reveal-backups:hover {
+	color: <<colour wikilist-button-foreground>>;
+	fill: <<colour wikilist-button-foreground>>;
+}
+
+/* Toolbar inputs */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--o-body);
+	border-radius: var(--o-radius-sm);
+}
+
+/* ── The WikiList window — opal surface ─────────────────────────────── */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--o-body);
+	border-radius: var(--o-radius-pill);
+	border: 1px solid var(--o-rule-strong);
+	transition: box-shadow var(--o-dur) var(--o-ease);
+}
+.td-search input.td-wikilist-search-input:focus {
+	box-shadow: 0 0 0 3px var(--o-wash-strong);
+}
+.td-tags .tc-tag-label {
+	font-family: var(--o-body);
+}
+
+/* ── WikiList rows — pebble-framed favicon, luminous heading ─────────── */
+/* Favicon plate springs forward as its card lifts on hover */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--o-radius-sm);
+	box-shadow: var(--o-shadow-1);
+	overflow: hidden;
+}
+.td-wikilist .td-wikilist-item:hover .td-wikilist-thumbnail button {
+	transform: scale(1.05);
+	box-shadow: var(--o-shadow-2);
+}
+.td-wikilist .td-wiki-url {
+	font-family: var(--o-body);
+}
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--o-display);
+}

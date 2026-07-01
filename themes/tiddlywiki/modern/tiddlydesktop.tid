@@ -1,0 +1,148 @@
+title: $:/themes/tiddlywiki/modern/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Modern theme
+** Polished card-based app aesthetic with layered shadows and the accent gradient.
+** The gradient top-strip (html::before) runs site-wide in Modern so it also
+** appears in the TiddlyDesktop window without any extra markup.
+*/
+
+/* Toolbar — matches the primary-coloured menubar; lift with a subtle shadow */
+.td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: var(--m-shadow-1);
+	font-family: var(--m-font-display);
+}
+
+/* Modern's signature top-strip (html::before) pans its gradient forever. That's
+   fine site-wide, but in the WikiList window it's a constant repaint with nothing
+   else animating — freeze it here so hovering the list stays responsive. */
+html:has(.td-wikilist)::before {
+	animation: none;
+}
+
+/* Wiki-list items — rounded cards with layered palette-tinted shadows */
+.td-wikilist .td-wikilist-item {
+	border-radius: var(--m-radius);
+	box-shadow: var(--m-shadow-1);
+}
+.td-wikilist .td-wikilist-item:hover {
+	box-shadow: var(--m-shadow-2);
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title & info — Modern's display sans throughout */
+.td-wikilist .td-wiki-title {
+	font-family: var(--m-font-display);
+	font-weight: 600;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--m-font-display);
+}
+
+/* ── WikiList action buttons — styled by role ────────────────────────── */
+/* Shared pill shape; rows lift their buttons with a soft shadow on hover */
+button.td-button {
+	border-radius: var(--m-radius-pill);
+	color: <<colour wikilist-button-foreground>>;
+	font-family: var(--m-font-display);
+	font-size: 0.82em;
+	font-weight: 500;
+}
+/* Toolbar buttons sit on the neutral button surface, so they need the theme
+   ink too — the plugin default (wikilist-button-foreground) is the page
+   background colour, which renders invisibly here */
+.td-toolbar button.td-button {
+	color: <<colour foreground>>;
+	fill: <<colour foreground>>;
+}
+.td-wikilist .td-button {
+	box-shadow: var(--m-shadow-1);
+}
+.td-wikilist .td-button:hover {
+	transform: translateY(-1px);
+	box-shadow: var(--m-shadow-2);
+}
+.td-wikilist .td-button:active {
+	transform: translateY(0);
+	box-shadow: var(--m-shadow-1);
+}
+/* Open — the primary, positive action: a green confirmation halo on hover */
+.td-wikilist .td-wikilist-button-open:hover {
+	box-shadow: var(--m-shadow-2),
+	            0 0 0 3px color-mix(in srgb, <<colour wikilist-button-open>> 30%, transparent);
+}
+/* Reveal — accent action: the theme's accent halo */
+.td-wikilist .td-wikilist-button-reveal:hover {
+	box-shadow: var(--m-shadow-2), 0 0 0 3px var(--m-accent-wash-strong);
+}
+/* Remove — destructive action: a red warning halo on hover */
+.td-wikilist .td-wikilist-button-remove:hover {
+	box-shadow: var(--m-shadow-2),
+	            0 0 0 3px color-mix(in srgb, <<colour wikilist-button-remove>> 30%, transparent);
+}
+/* Utility (convert / advanced / plugins / reveal-backups) — these sit on the
+   neutral button surface, where the white used on the coloured buttons is
+   unreadable; use the theme ink, switching to white as they fill on hover */
+.td-wikilist .td-wikilist-button-convert,
+.td-wikilist .td-wikilist-button-advanced,
+.td-wikilist .td-wikilist-button-plugins,
+.td-wikilist .td-wikilist-button-reveal-backups {
+	color: <<colour foreground>>;
+	fill: <<colour foreground>>;
+}
+.td-wikilist .td-wikilist-button-convert:hover,
+.td-wikilist .td-wikilist-button-advanced:hover,
+.td-wikilist .td-wikilist-button-plugins:hover,
+.td-wikilist .td-wikilist-button-reveal-backups:hover {
+	color: <<colour wikilist-button-foreground>>;
+	fill: <<colour wikilist-button-foreground>>;
+}
+
+/* Toolbar inputs */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--m-font-display);
+	border-radius: var(--m-radius-sm);
+}
+
+/* ── The WikiList window — soft, accent-washed app surface ───────────── */
+
+/* Search field — pill-shaped with an accent focus halo */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--m-font-display);
+	border-radius: var(--m-radius-pill);
+	border: 1px solid var(--m-hairline);
+	transition: border-color var(--m-dur) var(--m-ease),
+	            box-shadow var(--m-dur) var(--m-ease);
+}
+.td-search input.td-wikilist-search-input:focus {
+	border-color: var(--m-accent);
+	box-shadow: 0 0 0 3px var(--m-accent-wash);
+}
+.td-tags .tc-tag-label {
+	font-family: var(--m-font-display);
+}
+
+/* ── WikiList rows — rounded favicon plate that springs on hover ─────── */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--m-radius);
+	box-shadow: var(--m-shadow-1);
+	overflow: hidden;
+}
+.td-wikilist .td-wikilist-item:hover .td-wikilist-thumbnail button {
+	transform: scale(1.04);
+	box-shadow: var(--m-shadow-2);
+}
+.td-wikilist .td-wiki-url {
+	font-family: var(--m-font-display);
+}
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--m-font-display);
+}

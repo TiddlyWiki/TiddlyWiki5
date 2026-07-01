@@ -1,0 +1,219 @@
+title: $:/themes/tiddlywiki/elegant/typography
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Typography — the soul of Elegant
+*/
+
+/* The reading column: a warm humanist serif, generously set */
+.tc-tiddler-body {
+	font-family: var(--e-serif);
+	font-size: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
+	line-height: 1.72;
+	color: var(--e-ink);
+	font-variant-numeric: oldstyle-nums proportional-nums;
+	font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+	text-wrap: pretty;
+	hanging-punctuation: first allow-end last;
+}
+
+.tc-tiddler-body p {
+	margin: 0 0 1.05em 0;
+}
+
+/* Titles & headings: a high-contrast serif, tightly set and balanced */
+.tc-titlebar h2,
+.tc-site-title,
+.tc-tiddler-body h1,
+.tc-tiddler-body h2,
+.tc-tiddler-body h3,
+.tc-tiddler-body h4,
+.tc-tiddler-body h5,
+.tc-tiddler-body h6 {
+	font-family: var(--e-display);
+	font-weight: 600;
+	letter-spacing: -0.011em;
+	line-height: 1.18;
+	text-wrap: balance;
+	font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+}
+
+.tc-titlebar h2 {
+	font-size: clamp(1.7rem, 1.4rem + 1.5vw, 2.5rem);
+	font-weight: 620;
+	letter-spacing: -0.02em;
+}
+
+.tc-tiddler-body h1 { font-size: 1.92em; margin: 1.4em 0 0.5em; }
+.tc-tiddler-body h2 { font-size: 1.52em; margin: 1.3em 0 0.5em; }
+.tc-tiddler-body h3 { font-size: 1.26em; margin: 1.2em 0 0.4em; }
+.tc-tiddler-body h4 { font-size: 1.08em; margin: 1.1em 0 0.4em; letter-spacing: 0; }
+.tc-tiddler-body h5,
+.tc-tiddler-body h6 {
+	font-family: var(--e-sans);
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	font-size: 0.82em;
+	color: var(--e-muted);
+}
+
+/*
+** Signature — a drop cap on the opening paragraph. Float fallback first, then
+** the proper `initial-letter` where supported. Only fires when the body opens
+** with a paragraph, so lists and headings are never disturbed.
+*/
+.tc-tiddler-body > p:first-child::first-letter {
+	font-family: var(--e-display);
+	float: left;
+	font-size: 3.1em;
+	line-height: 0.78;
+	font-weight: 600;
+	padding: 0.02em 0.08em 0 0;
+	margin: 0.02em 0.06em 0 0;
+	color: var(--e-accent-deep);
+}
+
+@supports (initial-letter: 3) or (-webkit-initial-letter: 3) {
+	.tc-tiddler-body > p:first-child::first-letter {
+		float: none;
+		font-size: inherit;
+		-webkit-initial-letter: 3 2;
+		initial-letter: 3 2;
+		margin-right: 0.08em;
+		padding: 0;
+	}
+}
+
+/* Links: a refined underline that warms on hover — no layout shift */
+.tc-tiddler-body a.tc-tiddlylink,
+.tc-tiddler-body a.tc-tiddlylink-resolves {
+	color: var(--e-accent-deep);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: var(--e-accent-light);
+	text-underline-offset: 0.18em;
+	transition: text-decoration-color var(--e-dur) var(--e-ease),
+		color var(--e-dur) var(--e-ease);
+}
+/* `:not(.tc-plugin-info)` keeps us clear of plugin boxes, whose vanilla hover is
+   white text on a primary fill — recolouring it to the accent kills contrast. */
+.tc-tiddler-body a.tc-tiddlylink:not(.tc-plugin-info):hover {
+	text-decoration-color: var(--e-accent);
+	color: var(--e-accent);
+}
+.tc-tiddler-body a.tc-tiddlylink-missing {
+	text-decoration-style: dotted;
+	opacity: 0.85;
+}
+
+/* Lists: accented markers, comfortable indentation */
+.tc-tiddler-body ul,
+.tc-tiddler-body ol {
+	padding-left: 1.4em;
+}
+.tc-tiddler-body li {
+	margin: 0.3em 0;
+}
+.tc-tiddler-body li::marker {
+	color: var(--e-accent-quiet);
+}
+
+/* Block quotes: a quiet hairline and italic voice, with an oversized open quote */
+.tc-tiddler-body blockquote {
+	position: relative;
+	margin: 1.3em 0;
+	padding: 0.1em 0 0.1em 1.3em;
+	border-left: 2px solid var(--e-accent-light);
+	font-style: italic;
+	color: var(--e-muted);
+}
+.tc-tiddler-body blockquote .tc-big-quote {
+	font-family: var(--e-display);
+	color: var(--e-accent-light);
+}
+
+/* Horizontal rule: a centred hairline crowned with a small diamond */
+.tc-tiddler-body hr {
+	border: none;
+	height: 1px;
+	margin: 2em auto;
+	background: linear-gradient(to right, transparent, var(--e-rule-strong) 50%, transparent);
+	overflow: visible;
+}
+.tc-tiddler-body hr::after {
+	content: "";
+	position: relative;
+	top: -3px;
+	display: block;
+	width: 5px;
+	height: 5px;
+	margin: 0 auto;
+	transform: rotate(45deg);
+	background: var(--e-accent-quiet);
+}
+
+/* Inline code & pre: restrained, hairline-framed */
+.tc-tiddler-body code {
+	font-size: 0.88em;
+	padding: 0.1em 0.38em;
+	border-radius: var(--e-radius);
+	border: 1px solid var(--e-rule);
+	background: color-mix(in srgb, <<colour foreground>> 4%, transparent);
+}
+.tc-tiddler-body pre {
+	border-radius: var(--e-radius-lg);
+	border: 1px solid var(--e-rule);
+	box-shadow: var(--e-shadow-1);
+}
+.tc-tiddler-body pre code {
+	border: none;
+	background: none;
+	padding: 0;
+}
+
+/* Tables: editorial — hairline frame, small-caps header, no inner clutter.
+   Corners are rounded via the corner cells rather than `overflow: hidden`,
+   so popups opened inside a cell (e.g. ControlPanel ▸ Info) aren't clipped. */
+.tc-tiddler-body table {
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 1px solid var(--e-rule);
+	border-radius: var(--e-radius-lg);
+	box-shadow: var(--e-shadow-1);
+}
+.tc-tiddler-body table th {
+	font-family: var(--e-sans);
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	font-size: 0.78em;
+	background: var(--e-wash);
+	border-bottom: 1px solid var(--e-rule-strong);
+}
+.tc-tiddler-body table td,
+.tc-tiddler-body table th {
+	border-color: var(--e-rule);
+}
+.tc-tiddler-body table tr:hover td {
+	background: var(--e-wash);
+}
+.tc-tiddler-body table tr:first-child > *:first-child { border-top-left-radius: var(--e-radius-lg); }
+.tc-tiddler-body table tr:first-child > *:last-child { border-top-right-radius: var(--e-radius-lg); }
+.tc-tiddler-body table tr:last-child > *:first-child { border-bottom-left-radius: var(--e-radius-lg); }
+.tc-tiddler-body table tr:last-child > *:last-child { border-bottom-right-radius: var(--e-radius-lg); }
+
+/* Images: hairline mat and soft shadow, like a mounted print */
+.tc-tiddler-body img {
+	border-radius: var(--e-radius);
+	box-shadow: var(--e-shadow-1);
+}
+
+/* Emphasis & small print */
+.tc-tiddler-body strong { font-weight: 650; }
+.tc-tiddler-body small,
+.tc-tiddler-subtitle {
+	font-family: var(--e-sans);
+}

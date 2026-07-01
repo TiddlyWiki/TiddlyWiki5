@@ -1,0 +1,10 @@
+{
+	"title": "$:/themes/tiddlywiki/opaline",
+	"name": "Opaline",
+	"author": "TiddlyWiki",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "Luminous and iridescent — the play of light in opal",
+	"dependents": ["$:/themes/tiddlywiki/vanilla"],
+	"plugin-priority": "0"
+}

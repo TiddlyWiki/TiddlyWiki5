@@ -1,0 +1,6 @@
+title: $:/themes/tiddlywiki/elegant/settings
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+{{{ [[$:/config/themes/elegant/dropcap]get[text]match[no]then[.tc-tiddler-body > p:first-child::first-letter{font-size:inherit!important;float:none!important;color:inherit!important;line-height:inherit!important;padding:0!important;margin:0!important;initial-letter:normal!important;-webkit-initial-letter:normal!important;}]] }}}

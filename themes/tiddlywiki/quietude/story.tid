@@ -1,0 +1,178 @@
+title: $:/themes/tiddlywiki/quietude/story
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Story river, tiddler panels & typography — for immersive reading
+*/
+
+/* The reading column is centred WITHIN the story river (see the body/title
+   rules below) rather than by moving the river itself — moving the river would
+   slide it under the sidebar in the fluid-fixed layout. */
+.tc-story-river { padding-top: 32px; }
+
+/*
+** Tiddler panel — seamless. No card border or fill; tiddlers become a calm,
+** continuous document separated only by generous whitespace and a hairline.
+*/
+.tc-tiddler-frame {
+	margin-bottom: 8px;
+	--q-frame-pad-x: 8px;
+	--q-fold-banner-w: 18px;
+	padding: 28px var(--q-frame-pad-x) 40px var(--q-fold-banner-w);
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid var(--q-line);
+	border-radius: 0;
+	box-shadow: none;
+}
+.tc-tiddler-frame.tc-tiddler-edit-frame {
+	background: var(--q-paper);
+	border: 1px solid var(--q-line);
+	border-radius: var(--q-radius);
+	padding: 28px 28px 32px;
+}
+
+/* Title — large, light, unhurried */
+.tc-tiddler-title { margin-bottom: 0.6em; }
+.tc-titlebar h2, .tc-site-title,
+.tc-tiddler-body h1, .tc-tiddler-body h2,
+.tc-tiddler-body h3, .tc-tiddler-body h4 {
+	font-family: var(--q-sans);
+	font-weight: 600;
+	line-height: 1.25;
+	letter-spacing: -0.012em;
+	text-wrap: balance;
+}
+.tc-titlebar h2 {
+	font-size: clamp(1.8rem, 1.5rem + 1.4vw, 2.6rem);
+	font-weight: 650;
+	color: <<colour tiddler-title-foreground>>;
+}
+.tc-tiddler-subtitle {
+	font-family: var(--q-sans);
+	font-size: 0.82rem;
+	color: var(--q-faint);
+}
+
+/*
+** The chrome recedes: the per-tiddler toolbar fades to a whisper and returns
+** on hover or keyboard focus. Discoverable, never intrusive. (Opacity only —
+** GPU-friendly and leaves layout/popups untouched.)
+*/
+.tc-tiddler-controls {
+	opacity: 0.12;
+	transition: opacity var(--q-slow) var(--q-ease);
+}
+.tc-tiddler-frame:hover .tc-tiddler-controls,
+.tc-tiddler-controls:focus-within { opacity: 1; }
+
+/* Reading column — large, airy, bounded measure, centred under the title */
+.tc-tiddler-body {
+	font-family: var(--q-sans);
+	font-size: clamp(1.12rem, 1.05rem + 0.35vw, 1.3rem);
+	line-height: 1.8;
+	color: var(--q-ink);
+	max-width: var(--q-measure);
+	margin: 0.9em auto 0;
+	text-wrap: pretty;
+	font-feature-settings: "kern" 1, "liga" 1;
+}
+.tc-tiddler-body p { margin: 0 0 1.2em 0; }
+.tc-tiddler-body h1 { font-size: 1.7em; margin: 1.5em 0 0.5em; }
+.tc-tiddler-body h2 { font-size: 1.42em; margin: 1.4em 0 0.45em; }
+.tc-tiddler-body h3 { font-size: 1.2em; margin: 1.3em 0 0.4em; }
+.tc-tiddler-body h4 { font-size: 1.06em; margin: 1.2em 0 0.35em; }
+
+/* Title block & subtitle also follow the measure for a tidy centred column */
+.tc-tiddler-title .tc-titlebar,
+.tc-tiddler-subtitle,
+.tc-tags-wrapper {
+	max-width: var(--q-measure);
+	margin-inline: auto;
+}
+
+/* Links — quiet, with a soft underline that warms on hover */
+.tc-tiddler-body a.tc-tiddlylink,
+.tc-tiddler-body a.tc-tiddlylink-resolves {
+	color: var(--q-accent-ink);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: color-mix(in srgb, <<colour primary>> 30%, transparent);
+	text-underline-offset: 0.18em;
+	transition: color var(--q-dur) var(--q-ease), text-decoration-color var(--q-dur) var(--q-ease);
+}
+.tc-tiddler-body a.tc-tiddlylink:not(.tc-plugin-info):hover {
+	color: var(--q-accent);
+	text-decoration-color: var(--q-accent);
+}
+.tc-tiddler-body a.tc-tiddlylink-missing { text-decoration-style: dotted; opacity: 0.8; }
+
+.tc-tiddler-body ul, .tc-tiddler-body ol { padding-left: 1.4em; }
+.tc-tiddler-body li { margin: 0.4em 0; }
+.tc-tiddler-body li::marker { color: color-mix(in srgb, <<colour primary>> 55%, transparent); }
+
+.tc-tiddler-body blockquote {
+	margin: 1.4em 0;
+	padding: 0.3em 0 0.3em 1.2em;
+	border-left: 3px solid var(--q-accent);
+	color: var(--q-muted);
+	font-style: italic;
+}
+
+.tc-tiddler-body hr {
+	border: none; height: 1px; margin: 2.4em auto;
+	width: 40%;
+	background: var(--q-line);
+}
+
+.tc-tiddler-body code {
+	font-family: var(--q-mono);
+	font-size: 0.86em;
+	padding: 0.1em 0.38em;
+	border-radius: var(--q-radius-sm);
+	background: var(--q-wash);
+}
+.tc-tiddler-body pre {
+	border-radius: var(--q-radius);
+	border: 1px solid var(--q-line);
+}
+.tc-tiddler-body pre code { background: none; padding: 0; }
+
+/* Tables — quiet, corner-rounded (never clip popups) */
+.tc-tiddler-body table {
+	border-collapse: separate; border-spacing: 0;
+	border: 1px solid var(--q-line);
+	border-radius: var(--q-radius);
+}
+.tc-tiddler-body table th { font-weight: 600; background: var(--q-wash); border-bottom: 1px solid var(--q-line); }
+.tc-tiddler-body table th, .tc-tiddler-body table td { border-color: var(--q-line); padding: 0.45em 0.7em; }
+.tc-tiddler-body table tr:first-child > *:first-child { border-top-left-radius: var(--q-radius); }
+.tc-tiddler-body table tr:first-child > *:last-child { border-top-right-radius: var(--q-radius); }
+.tc-tiddler-body table tr:last-child > *:first-child { border-bottom-left-radius: var(--q-radius); }
+.tc-tiddler-body table tr:last-child > *:last-child { border-bottom-right-radius: var(--q-radius); }
+
+.tc-tiddler-body img { border-radius: var(--q-radius-sm); }
+
+/* Fold / unfold banners — span the frame edge-to-edge INSIDE its borders via
+   left/right (so they stay correct whatever this theme's padding is, and in
+   both the static and absolute layout modes), and round their bottom corners
+   to follow the frame. */
+.tc-unfold-banner.tc-unfold-banner {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: auto;
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+}
+.tc-fold-banner.tc-fold-banner {
+	inset-inline-start: 0;
+	top: 0;
+	bottom: 0;
+	width: var(--q-fold-banner-w);
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+}

@@ -1,0 +1,220 @@
+title: $:/themes/tiddlywiki/modern/story
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Story river & tiddlers
+*/
+
+/* A single, barely-there accent aura gives the page quiet depth */
+.tc-page-container {
+	background-image: radial-gradient(70% 55% at 100% 0%, var(--m-accent-wash) 0%, transparent 60%);
+	background-attachment: fixed;
+}
+
+/*
+** Tiddler frame.
+**
+** IMPORTANT: the story views (classic, zoomin, …) drive this exact node with
+** inline transform/opacity/transition during navigation, and TiddlyWiki anchors
+** toolbar popups to the page through it. So we must NOT give it `position`,
+** `transform`, `will-change` or a CSS `animation` — any of those would create a
+** containing block / stacking context that breaks popup placement, and a CSS
+** animation would override the story view's inline transform. We only style the
+** surface, and animate box-shadow & border (which are conflict-free) on hover.
+*/
+.tc-tiddler-frame {
+	margin-bottom: 28px;
+	--m-frame-pad-x: 42px;
+	padding: 32px var(--m-frame-pad-x) 28px var(--m-frame-pad-x);
+	border: 1px solid var(--m-hairline);
+	border-radius: var(--m-radius-lg);
+	background: <<colour tiddler-background>>;
+	box-shadow: var(--m-shadow-1);
+	transition:
+		box-shadow var(--m-dur) var(--m-ease),
+		border-color var(--m-dur) var(--m-ease);
+}
+
+@media (min-width: 770px) {
+	.tc-tiddler-frame:hover {
+		box-shadow: var(--m-shadow-2);
+		border-color: color-mix(in srgb, <<colour primary>> 30%, var(--m-hairline));
+	}
+}
+
+/* Editing state gets a clear accent frame */
+.tc-tiddler-frame.tc-tiddler-edit-frame {
+	border-color: color-mix(in srgb, <<colour primary>> 45%, var(--m-hairline));
+	box-shadow: var(--m-shadow-2), inset 0 0 0 1px var(--m-accent-wash-strong);
+}
+
+/*
+** Typography — the personality of the theme. Headings get a clean modern
+** display face, tight tracking and a confident scale; body text keeps the
+** reader's chosen font but gains comfortable rhythm.
+*/
+.tc-titlebar h2,
+.tc-site-title,
+.tc-tiddler-body h1,
+.tc-tiddler-body h2,
+.tc-tiddler-body h3,
+.tc-tiddler-body h4 {
+	font-family: var(--m-font-display);
+	font-weight: 700;
+	letter-spacing: -0.021em;
+	line-height: 1.18;
+	text-wrap: balance;
+}
+
+.tc-tiddler-title {
+	margin-bottom: 0.5em;
+}
+
+.tc-titlebar h2 {
+	font-weight: 750;
+}
+
+/* In-body heading scale & rhythm */
+.tc-tiddler-body h1 { font-size: 1.9em; margin-top: 1.1em; }
+.tc-tiddler-body h2 { font-size: 1.5em; margin-top: 1.2em; }
+.tc-tiddler-body h3 { font-size: 1.22em; letter-spacing: -0.012em; }
+.tc-tiddler-body h4 { font-size: 1.05em; letter-spacing: 0; }
+
+.tc-tiddler-body {
+	line-height: 1.62;
+}
+
+.tc-tiddler-body p {
+	text-wrap: pretty;
+}
+
+/* A single restrained accent: a hairline under the title that grows on hover */
+.tc-tiddler-title .tc-titlebar::after {
+	content: "";
+	display: block;
+	margin-top: 0.34em;
+	height: 2px;
+	width: 48px;
+	max-width: 100%;
+	border-radius: var(--m-radius-pill);
+	background: var(--m-accent-gradient);
+	transform: scaleX(0.55);
+	transform-origin: left center;
+	opacity: 0.45;
+	transition: transform var(--m-dur-slow) var(--m-ease), opacity var(--m-dur) var(--m-ease);
+}
+
+.tc-tiddler-frame:hover .tc-tiddler-title .tc-titlebar::after {
+	transform: scaleX(1);
+	opacity: 1;
+}
+
+/* Links — gradient-underline that grows on hover, GPU-friendly */
+.tc-tiddlylink {
+	text-decoration: none;
+	background-image: linear-gradient(var(--m-accent), var(--m-accent));
+	background-repeat: no-repeat;
+	background-position: 0 100%;
+	background-size: 0% 2px;
+	border-radius: 2px;
+	transition: background-size var(--m-dur) var(--m-ease), color var(--m-dur-fast) var(--m-ease);
+}
+
+.tc-tiddler-body a.tc-tiddlylink:hover {
+	background-size: 100% 2px;
+}
+
+.tc-tiddlylink-missing {
+	border-bottom: none;
+}
+
+/* Block quotes get a modern accent bar and tinted wash */
+.tc-tiddler-body blockquote {
+	border-left: 4px solid var(--m-accent);
+	border-radius: 0 var(--m-radius) var(--m-radius) 0;
+	background: var(--m-accent-wash);
+	padding: 0.6em 1.1em;
+}
+
+/* Inline code & pre — rounded, soft surface */
+.tc-tiddler-body code {
+	border-radius: var(--m-radius-sm);
+	padding: 0.12em 0.4em;
+}
+
+.tc-tiddler-body pre {
+	border-radius: var(--m-radius);
+	box-shadow: var(--m-shadow-1);
+}
+
+/* Images lift gently */
+.tc-tiddler-body img {
+	border-radius: var(--m-radius);
+}
+
+/* Horizontal rules become a soft accent gradient */
+.tc-tiddler-body hr {
+	border: none;
+	height: 2px;
+	background: linear-gradient(to right, transparent, var(--m-hairline) 20%, var(--m-hairline) 80%, transparent);
+}
+
+/* Tables — rounded, clean, hairline-framed with an accented header.
+   Corners are rounded via the corner cells rather than `overflow: hidden`,
+   so popups opened inside a cell (e.g. ControlPanel ▸ Info) aren't clipped. */
+.tc-tiddler-body table {
+	border-radius: var(--m-radius);
+	border: 1px solid var(--m-hairline);
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.tc-tiddler-body table th {
+	background: var(--m-accent-wash-strong);
+	font-weight: 600;
+	font-family: var(--m-font-display);
+	letter-spacing: -0.005em;
+}
+
+.tc-tiddler-body table tr:first-child > *:first-child { border-top-left-radius: var(--m-radius); }
+.tc-tiddler-body table tr:first-child > *:last-child { border-top-right-radius: var(--m-radius); }
+.tc-tiddler-body table tr:last-child > *:first-child { border-bottom-left-radius: var(--m-radius); }
+.tc-tiddler-body table tr:last-child > *:last-child { border-bottom-right-radius: var(--m-radius); }
+
+.tc-tiddler-body table tr:hover td {
+	background: var(--m-accent-wash);
+}
+
+/* Subtitle & tags row breathe a little more (no opacity dimming — it would
+   compound the palette's already-faint subtitle colour and hurt contrast) */
+.tc-tiddler-subtitle {
+	letter-spacing: 0.01em;
+}
+
+/* Fold / unfold banners — span the frame edge-to-edge INSIDE its borders via
+   left/right (so they stay correct whatever this theme's padding is, and in
+   both the static and absolute layout modes), and round their bottom corners
+   to follow the frame. */
+.tc-unfold-banner.tc-unfold-banner {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: auto;
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+	border-bottom-left-radius: calc(var(--m-radius-lg) - 1px);
+	border-bottom-right-radius: calc(var(--m-radius-lg) - 1px);
+}
+.tc-fold-banner.tc-fold-banner {
+	inset-inline-start: 0;
+	top: 0;
+	bottom: 0;
+	max-width: var(--m-frame-pad-x);
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+	border-start-start-radius: calc(var(--m-radius-lg) - 1px);
+	border-end-start-radius: calc(var(--m-radius-lg) - 1px);
+}

@@ -1,0 +1,164 @@
+title: $:/themes/tiddlywiki/opaline/variables
+tags: [[$:/tags/Stylesheet]]
+list-before:
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Opaline — design tokens
+**
+** The theme is built on the optics of opal: a milky, luminous body with a
+** quiet play-of-colour that lives only on edges and accents. Every hue is
+** anchored to the palette's primary and bent toward two neighbours in OKLCH,
+** so the iridescence stays coherent and palette-aware rather than rainbow.
+**
+** `--o-angle` is a registered custom property, which lets us *interpolate*
+** conic gradients — a hardware-friendly way to make light travel along an
+** edge. All motion is transform / opacity / background only (GPU-composited).
+*/
+
+@property --o-angle {
+	syntax: "<angle>";
+	inherits: false;
+	initial-value: 130deg;
+}
+
+:root {
+
+	/* Ink, paper, hush */
+	--o-ink: <<colour foreground>>;
+	--o-paper: <<colour tiddler-background>>;
+	--o-muted: color-mix(in srgb, <<colour foreground>> 52%, <<colour background>>);
+	--o-faint: color-mix(in srgb, <<colour foreground>> 50%, <<colour background>>);
+	--o-rule: color-mix(in srgb, <<colour foreground>> 12%, transparent);
+	--o-rule-strong: color-mix(in srgb, <<colour foreground>> 22%, transparent);
+
+	/* The opal triad — primary, bent strongly toward aqua, green, violet and warm
+	   gold. A lower primary share gives a wider, more vivid play-of-colour while
+	   iris-1 stays anchored to the palette so it never drifts into a rainbow. */
+	--o-iris-1: <<colour primary>>;
+	--o-iris-2: color-mix(in oklch, <<colour primary>> 46%, #00e6cf);
+	--o-iris-3: color-mix(in oklch, <<colour primary>> 50%, #57e08a);
+	--o-iris-4: color-mix(in oklch, <<colour primary>> 46%, #c074ff);
+	--o-iris-5: color-mix(in oklch, <<colour primary>> 50%, #ffcf6e);
+
+	/* The signature gradient — light caught in a curved surface */
+	--o-iris: conic-gradient(from var(--o-angle),
+		var(--o-iris-1), var(--o-iris-2), var(--o-iris-3), var(--o-iris-4), var(--o-iris-5), var(--o-iris-1));
+	--o-iris-line: linear-gradient(90deg,
+		var(--o-iris-1), var(--o-iris-2), var(--o-iris-3), var(--o-iris-4), var(--o-iris-5), var(--o-iris-1));
+
+	/* Accent washes */
+	--o-wash: color-mix(in srgb, <<colour primary>> 8%, transparent);
+	--o-wash-strong: color-mix(in srgb, <<colour primary>> 16%, transparent);
+	--o-accent-ink: color-mix(in srgb, <<colour primary>> 52%, <<colour foreground>>);
+
+	/* Coloured light — shadows carry a breath of the accent, like opal glow */
+	--o-shadow-1: 0 1px 2px color-mix(in srgb, <<colour foreground>> 7%, transparent),
+		0 10px 26px color-mix(in srgb, <<colour primary>> 9%, transparent);
+	--o-shadow-2: 0 2px 8px color-mix(in srgb, <<colour foreground>> 9%, transparent),
+		0 22px 54px color-mix(in srgb, <<colour primary>> 16%, transparent);
+	--o-shadow-3: 0 10px 36px color-mix(in srgb, <<colour foreground>> 13%, transparent),
+		0 40px 90px color-mix(in srgb, <<colour primary>> 22%, transparent);
+
+	/* Shape — smooth, pebble-like */
+	--o-radius: 16px;
+	--o-radius-sm: 10px;
+	--o-radius-pill: 999px;
+
+	/* Type — a luminous humanist sans, paired with a clean reading sans */
+	--o-display: "Optima", "Candara", "Cantarell", "Gill Sans", "Gill Sans MT",
+		"Segoe UI", system-ui, sans-serif;
+	--o-body: "Avenir Next", "Candara", "Segoe UI", system-ui, -apple-system,
+		BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+	--o-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+
+	/* Motion */
+	--o-ease: cubic-bezier(0.33, 1, 0.68, 1);
+	--o-ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+	--o-fast: 150ms;
+	--o-dur: 280ms;
+	--o-slow: 480ms;
+
+	accent-color: <<colour primary>>;
+	caret-color: <<colour primary>>;
+}
+
+/* Fallback for browsers without color-mix(): map the opal triad and derived
+   tokens to solid palette colours. The play-of-colour collapses to a single
+   accent, but every surface, line and shadow stays valid and legible. */
+@supports not (color: color-mix(in srgb, red, blue)) {
+	:root {
+		--o-muted: <<colour muted-foreground>>;
+		--o-faint: <<colour muted-foreground>>;
+		--o-rule: <<colour tiddler-border>>;
+		--o-rule-strong: <<colour tiddler-border>>;
+		--o-iris-2: <<colour primary>>;
+		--o-iris-3: <<colour primary>>;
+		--o-iris-4: <<colour primary>>;
+		--o-iris-5: <<colour primary>>;
+		--o-wash: transparent;
+		--o-wash-strong: transparent;
+		--o-accent-ink: <<colour primary>>;
+		--o-shadow-1: 0 1px 2px rgba(0,0,0,0.12), 0 10px 26px rgba(0,0,0,0.10);
+		--o-shadow-2: 0 2px 8px rgba(0,0,0,0.14), 0 22px 54px rgba(0,0,0,0.16);
+		--o-shadow-3: 0 10px 36px rgba(0,0,0,0.18), 0 40px 90px rgba(0,0,0,0.22);
+	}
+}
+
+@keyframes o-spin {
+	to { --o-angle: 490deg; }
+}
+
+@keyframes o-sheen {
+	0% { background-position: 200% 0; }
+	100% { background-position: -200% 0; }
+}
+
+
+/* A milky, iridescent scrollbar */
+html {
+	scroll-behavior: smooth;
+	background-color: <<colour page-background>>;
+	/* Hand the page (viewport) scrollbar back to the browser so it follows the
+	   palette's `color-scheme` on :root. The `* { scrollbar-color }` rule below
+	   themes inner scrollbars, but applied to the root it overrides the native
+	   colour-scheme scrollbar and leaves the page scrollbar light on dark palettes
+	   (notably in TiddlyDesktop). Resetting it restores the native dark bar. */
+	scrollbar-color: initial;
+}
+
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--o-rule-strong) transparent;
+}
+*::-webkit-scrollbar { width: 12px; height: 12px; }*::-webkit-scrollbar-thumb {
+	background: var(--o-rule-strong);
+	border-radius: var(--o-radius-pill);
+	border: 3px solid transparent;
+	background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+	background: color-mix(in srgb, <<colour primary>> 45%, transparent);
+	background-clip: content-box;
+}
+*::-webkit-scrollbar-corner { background: transparent; }
+
+::selection {
+	background: var(--o-wash-strong);
+	color: var(--o-accent-ink);
+}
+
+:where(button, input, textarea, select, a):focus-visible {
+	outline: 2px solid var(--o-iris-1);
+	outline-offset: 2px;
+	border-radius: var(--o-radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+	}
+}

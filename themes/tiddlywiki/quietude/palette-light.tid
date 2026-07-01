@@ -1,0 +1,140 @@
+title: $:/palettes/QuietudeLight
+name: Quietude (Light)
+color-scheme: light
+description: Muted sage-on-warm-paper palette tuned for the Quietude theme
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+
+alert-background: #f3e3df
+alert-border: <<colour primary>>
+alert-muted-foreground: #8a4034
+alert-highlight: <<colour foreground>>
+background: #fcfbf7
+blockquote-bar: <<colour muted-foreground>>
+button-background: <<colour background>>
+button-foreground: <<colour foreground>>
+button-border: transparent
+code-background: #f0efe7
+code-border: transparent
+code-foreground: #3f6f60
+dirty-indicator: #b1493a
+download-background: #4f7d6c
+download-foreground: #ffffff
+dragger-background: <<colour primary>>
+dragger-foreground: #ffffff
+dropdown-background: #fcfbf7
+dropdown-border: <<colour tiddler-border>>
+dropdown-tab-background-selected: <<colour background>>
+dropdown-tab-background: #eeece2
+dropzone-background: rgba(90,125,114,0.4)
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: #6a6a8a
+external-link-foreground: #4f6f88
+footnote-target-background: #eef0e9
+foreground: #2b2a26
+highlight-background: #e8dd96
+highlight-foreground: #20201a
+menubar-background: #eeece2
+menubar-foreground: <<colour foreground>>
+message-background: #eef0e9
+message-border: <<colour tiddler-border>>
+message-foreground: <<colour muted-foreground>>
+modal-backdrop: rgba(43,42,38,0.4)
+modal-background: #fcfbf7
+modal-border: <<colour tiddler-border>>
+modal-footer-background: #f4f3ec
+modal-footer-border: <<colour tiddler-border>>
+modal-header-border: <<colour tiddler-border>>
+muted-foreground: #5f5d54
+notification-background: #fcfbf7
+notification-border: <<colour tiddler-border>>
+page-background: #f1efe8
+pre-background: #f0efe7
+pre-border: transparent
+primary: #5a7d72
+select-tag-background:
+select-tag-foreground:
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: <<colour foreground>>
+sidebar-controls-foreground: #6e6c61
+sidebar-foreground-shadow: rgba(255,255,255,0.0)
+sidebar-foreground: <<colour muted-foreground>>
+sidebar-muted-foreground-hover: <<colour foreground>>
+sidebar-muted-foreground: #6e6c61
+sidebar-tab-background-selected: <<colour background>>
+sidebar-tab-background: #eeece2
+sidebar-tab-border-selected: <<colour tiddler-border>>
+sidebar-tab-border: <<colour tiddler-border>>
+sidebar-tab-divider: #e3e0d3
+sidebar-tab-foreground-selected: <<colour foreground>>
+sidebar-tab-foreground: <<colour muted-foreground>>
+sidebar-tiddler-link-foreground-hover: <<colour foreground>>
+sidebar-tiddler-link-foreground: <<colour primary>>
+site-title-foreground: <<colour tiddler-title-foreground>>
+stability-deprecated: #b1493a
+stability-experimental: #8a6a1f
+stability-legacy: #4f6f88
+stability-stable: #4f7d6c
+static-alert-foreground: #6e6c61
+tab-background-selected: <<colour background>>
+tab-background: #eeece2
+tab-border-selected: <<colour tiddler-border>>
+tab-border: <<colour tiddler-border>>
+tab-divider: #e3e0d3
+tab-foreground-selected: <<colour foreground>>
+tab-foreground: <<colour muted-foreground>>
+table-border: #ddd9ca
+table-footer-background: #eeece2
+table-header-background: #eef0e9
+tag-background: #5a7d72
+tag-foreground: #ffffff
+tiddler-background: <<colour background>>
+tiddler-border: #e5e1d3
+tiddler-controls-foreground-hover: <<colour foreground>>
+tiddler-controls-foreground-selected: <<colour primary>>
+tiddler-controls-foreground: #84816f
+tiddler-editor-background: #fdfcf9
+tiddler-editor-border-image: <<colour tiddler-border>>
+tiddler-editor-border: #ddd9ca
+tiddler-editor-fields-even: #f3f1e9
+tiddler-editor-fields-odd: #fdfcf9
+tiddler-info-background: #f4f3ec
+tiddler-info-border: <<colour tiddler-border>>
+tiddler-info-tab-background: #f4f3ec
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: #6e6c61
+tiddler-title-foreground: <<colour foreground>>
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
+untagged-background: #84816f
+very-muted-foreground: #968f7f
+network-activity-foreground: <<colour primary>>
+wikilist-background: #f1efe8
+wikilist-button-background: #eeece2
+wikilist-button-foreground: <<colour background>>
+wikilist-button-open: #4f7d6c
+wikilist-button-open-hover: #3d6455
+wikilist-button-remove: #b1493a
+wikilist-button-remove-hover: #923428
+wikilist-button-reveal: <<colour primary>>
+wikilist-button-reveal-hover: #486558
+wikilist-droplink-dragover: rgba(90,125,114,0.4)
+wikilist-info: <<colour muted-foreground>>
+wikilist-item: <<colour tiddler-background>>
+wikilist-item-border-hover: <<colour primary>>
+wikilist-title: <<colour foreground>>
+wikilist-title-svg: <<colour primary>>
+wikilist-toolbar-background: #eeece2
+wikilist-toolbar-foreground: <<colour foreground>>
+wikilist-url: #6e6c61

@@ -1,0 +1,140 @@
+title: $:/themes/tiddlywiki/noir/variables
+tags: [[$:/tags/Stylesheet]]
+list-before:
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Noir — design tokens
+**
+** A dark-native theme: pairs best with a dark palette, but adapts gracefully.
+** Elevation is built the dark-mode way — raised surfaces are MIXED TOWARD THE
+** FOREGROUND (lighter on a dark palette, deeper on a light one) and topped with
+** a faint rim highlight, as if light catches the upper edge. The accent reads
+** as a warm glow rather than a flat fill. Motion is transform/opacity/filter
+** only, composited on the GPU.
+*/
+
+:root {
+	--n-bg: <<colour background>>;
+	--n-ink: <<colour foreground>>;
+	--n-muted: color-mix(in srgb, <<colour foreground>> 58%, <<colour background>>);
+	--n-faint: color-mix(in srgb, <<colour foreground>> 52%, <<colour background>>);
+
+	/* Layered surfaces — each step mixes a little more foreground in */
+	--n-surface-1: color-mix(in srgb, <<colour background>> 95%, <<colour foreground>>);
+	--n-surface-2: color-mix(in srgb, <<colour background>> 91%, <<colour foreground>>);
+	--n-surface-3: color-mix(in srgb, <<colour background>> 87%, <<colour foreground>>);
+
+	--n-line: color-mix(in srgb, <<colour foreground>> 13%, transparent);
+	--n-line-strong: color-mix(in srgb, <<colour foreground>> 26%, transparent);
+
+	/* Warm accent + its glow */
+	--n-accent: <<colour primary>>;
+	--n-accent-bright: color-mix(in oklch, <<colour primary>> 82%, white);
+	--n-accent-ink: color-mix(in srgb, <<colour primary>> 55%, <<colour foreground>>);
+	--n-glow: color-mix(in srgb, <<colour primary>> 40%, transparent);
+	--n-glow-soft: color-mix(in srgb, <<colour primary>> 18%, transparent);
+	--n-wash: color-mix(in srgb, <<colour primary>> 14%, transparent);
+	--n-wash-strong: color-mix(in srgb, <<colour primary>> 24%, transparent);
+
+	/* Rim highlight + cast shadow give surfaces depth on dark backgrounds */
+	--n-rim: inset 0 1px 0 color-mix(in srgb, <<colour foreground>> 9%, transparent);
+	--n-shadow-1: var(--n-rim), 0 2px 6px rgba(0,0,0,0.28), 0 8px 22px rgba(0,0,0,0.22);
+	--n-shadow-2: var(--n-rim), 0 6px 18px rgba(0,0,0,0.34), 0 20px 48px rgba(0,0,0,0.3);
+	--n-shadow-3: 0 16px 50px rgba(0,0,0,0.46), 0 40px 90px rgba(0,0,0,0.4);
+	--n-shadow-glow: 0 6px 26px var(--n-glow-soft);
+
+	--n-radius: 12px;
+	--n-radius-sm: 8px;
+	--n-radius-pill: 999px;
+
+	--n-display: "Inter", "Inter var", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+	--n-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	--n-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+
+	--n-ease: cubic-bezier(0.33, 1, 0.68, 1);
+	--n-fast: 140ms;
+	--n-dur: 240ms;
+	--n-slow: 420ms;
+
+	accent-color: <<colour primary>>;
+	caret-color: var(--n-accent-bright);
+}
+
+/* Fallback for browsers without color-mix(): map the layered surfaces, lines and
+   warm-glow accent to solid palette colours. The glow/wash tints drop out and
+   the elevation flattens a little, but every surface and edge stays valid. */
+@supports not (color: color-mix(in srgb, red, blue)) {
+	:root {
+		--n-muted: <<colour muted-foreground>>;
+		--n-faint: <<colour muted-foreground>>;
+		--n-surface-1: <<colour dropdown-background>>;
+		--n-surface-2: <<colour dropdown-background>>;
+		--n-surface-3: <<colour tiddler-info-background>>;
+		--n-line: <<colour tiddler-border>>;
+		--n-line-strong: <<colour tiddler-border>>;
+		--n-accent-bright: <<colour primary>>;
+		--n-accent-ink: <<colour primary>>;
+		--n-glow: transparent;
+		--n-glow-soft: transparent;
+		--n-wash: transparent;
+		--n-wash-strong: transparent;
+		--n-rim: inset 0 1px 0 rgba(255,255,255,0.06);
+	}
+}
+
+
+/*
+** Signature — a warm overhead "lamp" glow spilling from the top of the page.
+** Painted as a FIXED BACKGROUND on the page container, so it sits behind all
+** content automatically and never enters the stacking order: no z-index, no
+** positioned wrappers, and therefore no effect on the sidebar / story river
+** layering or on popup placement.
+*/
+.tc-page-container {
+	background-image: radial-gradient(68vmax 50vmax at 50% -14vmax,
+		color-mix(in srgb, <<colour primary>> 20%, transparent), transparent 70%);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+html {
+	scroll-behavior: smooth;
+	background-color: <<colour page-background>>;
+	/* Hand the page (viewport) scrollbar back to the browser so it follows the
+	   palette's `color-scheme` on :root. The `* { scrollbar-color }` rule below
+	   themes inner scrollbars, but applied to the root it overrides the native
+	   colour-scheme scrollbar and leaves the page scrollbar light on dark palettes
+	   (notably in TiddlyDesktop). Resetting it restores the native dark bar. */
+	scrollbar-color: initial;
+}
+
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--n-line-strong) transparent;
+}
+*::-webkit-scrollbar { width: 12px; height: 12px; }*::-webkit-scrollbar-thumb {
+	background: var(--n-line-strong);
+	border-radius: var(--n-radius-pill);
+	border: 3px solid transparent;
+	background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--n-glow); background-clip: content-box; }
+*::-webkit-scrollbar-corner { background: transparent; }
+
+::selection { background: var(--n-wash-strong); }
+
+:where(button, input, textarea, select, a):focus-visible {
+	outline: 2px solid var(--n-accent-bright);
+	outline-offset: 2px;
+	border-radius: var(--n-radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+	}
+}

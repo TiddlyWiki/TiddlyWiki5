@@ -1,0 +1,213 @@
+title: $:/themes/tiddlywiki/quietude/controls
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Buttons, tags, controls, overlays, inputs & sidebar — quiet
+*/
+
+@keyframes q-rise {
+	from { opacity: 0; transform: translate3d(0, 6px, 0); }
+	to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* Toolbar icons — soft, unobtrusive */
+.tc-tiddler-controls button,
+.tc-page-controls button,
+.tc-topbar button {
+	border-radius: var(--q-radius-sm);
+	transition: background-color var(--q-dur) var(--q-ease);
+}
+.tc-tiddler-controls button:hover { background: var(--q-wash); }
+.tc-tiddler-controls button:hover svg,
+.tc-page-controls button:hover svg,
+.tc-topbar button:hover svg { fill: var(--q-accent); }
+
+/* Standard buttons — soft, calm hover */
+button.tc-btn-standard,
+.tc-btn-boxed,
+.tc-btn-rounded {
+	border-radius: var(--q-radius-sm);
+	border: 1px solid var(--q-line);
+	transition: background-color var(--q-dur) var(--q-ease), border-color var(--q-dur) var(--q-ease);
+}
+button.tc-btn-standard:hover,
+.tc-btn-boxed:hover,
+.tc-btn-rounded:hover { background: var(--q-wash); border-color: var(--q-accent-ink); }
+
+/* Primary — gentle, solid */
+.tc-btn-big-green,
+.tc-primary-btn,
+button.tc-btn-big-green {
+	background: color-mix(in srgb, <<colour primary>> 82%, <<colour foreground>>) !important;
+	color: <<colour background>> !important;
+	border: none !important;
+	border-radius: var(--q-radius-sm);
+	transition: filter var(--q-dur) var(--q-ease);
+}
+.tc-btn-big-green svg, .tc-primary-btn svg { fill: <<colour background>> !important; }
+.tc-btn-big-green:hover, .tc-primary-btn:hover { filter: brightness(1.06); }
+
+/* Tags — soft, quiet labels (doubled class beats vanilla) */
+.tc-tag-label.tc-tag-label:not([style*="background-color"]),
+.tc-tag-label.tc-tag-label[style*="background-color:;"],
+.tc-tag-label.tc-tag-label[style*="background-color: ;"] {
+	background-color: color-mix(in srgb, <<colour foreground>> 9%, transparent);
+	color: <<colour foreground>> !important;
+	fill: <<colour foreground>> !important;
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, <<colour primary>> 22%, transparent);
+}
+.tc-tag-label.tc-tag-label:not([style*="background-color"]):hover,
+.tc-tag-label.tc-tag-label[style*="background-color:;"]:hover,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"]:hover { background-color: var(--q-wash-strong); }
+.tc-tag-label.tc-tag-label:not([style*="background-color"]) svg,
+.tc-tag-label.tc-tag-label[style*="background-color:;"] svg,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"] svg { fill: <<colour foreground>> !important; }
+
+/* Themed shape + a subtle defining edge on every tag. Coloured tags
+   (#hex, rgb(), or a named colour like GreenYellow) keep their own fill
+   and contrastcolour text and gain this edge; the uncoloured chip above
+   overrides the box-shadow with its accent border. */
+.tc-tag-label.tc-tag-label {
+	border-radius: var(--q-radius-sm);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, <<colour foreground>> 22%, transparent);
+	transition: background-color var(--q-dur) var(--q-ease);
+}
+
+.tc-untagged-label { border-radius: var(--q-radius-sm); }
+
+/* Dropdowns — soft, with contrast-safe hover */
+.tc-drop-down,
+.tc-block-dropdown {
+	border-radius: var(--q-radius);
+	border: 1px solid var(--q-line);
+	box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+	padding: 6px;
+	animation: q-rise var(--q-dur) var(--q-ease) both;
+}
+.tc-drop-down a.tc-tiddlylink,
+.tc-drop-down button,
+.tc-drop-down .tc-dropdown-item,
+.tc-block-dropdown a.tc-tiddlylink { border-radius: var(--q-radius-sm); }
+.tc-drop-down a:hover,
+.tc-drop-down button:hover,
+.tc-drop-down .tc-btn-invisible:hover,
+.tc-drop-down .tc-file-input-wrapper:hover button,
+.tc-block-dropdown a:hover,
+.tc-block-tags-dropdown .tc-btn-invisible:hover {
+	background: var(--q-wash-strong);
+	color: var(--q-ink);
+}
+.tc-drop-down button.tc-btn-invisible:hover svg,
+.tc-block-dropdown button.tc-btn-invisible:hover svg,
+.tc-block-tags-dropdown .tc-btn-invisible:hover svg { fill: var(--q-ink); }
+.tc-drop-down .tc-tab-divider, .tc-drop-down hr { border: none; height: 1px; background: var(--q-line); }
+
+.tc-modal {
+	border-radius: var(--q-radius);
+	border: 1px solid var(--q-line);
+	box-shadow: 0 16px 50px rgba(0,0,0,0.2);
+	overflow: hidden;
+	animation: q-rise var(--q-slow) var(--q-ease) both;
+}
+.tc-modal-header { border-bottom: 1px solid var(--q-line); }
+.tc-modal-footer { border-top: 1px solid var(--q-line); background: var(--q-wash); }
+.tc-modal-backdrop { background: rgba(0,0,0,0.32); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
+.tc-notification { border-radius: var(--q-radius); border: 1px solid var(--q-line); animation: q-rise var(--q-dur) var(--q-ease) both; }
+.tc-alert { border-radius: var(--q-radius); }
+.tc-tiddler-info {
+	border-radius: var(--q-radius);
+	border: 1px solid var(--q-line);
+	animation: q-rise var(--q-dur) var(--q-ease) both;
+	/* Align with the centred reading column rather than full-bleed */
+	margin-left: auto;
+	margin-right: auto;
+	max-width: var(--q-measure);
+}
+
+/* Inputs — calm fields with a soft focus */
+input[type="text"],
+input[type="search"],
+input.tc-edit-texteditor,
+textarea.tc-edit-texteditor,
+.tc-edit-texteditor,
+select {
+	border-radius: var(--q-radius-sm);
+	transition: border-color var(--q-dur) var(--q-ease), box-shadow var(--q-dur) var(--q-ease);
+}
+input[type="text"]:focus,
+input[type="search"]:focus,
+input.tc-edit-texteditor:focus,
+textarea.tc-edit-texteditor:focus,
+.tc-edit-texteditor:focus {
+	border-color: var(--q-accent);
+	box-shadow: 0 0 0 3px var(--q-wash);
+	outline: none;
+}
+.tc-edit-tags { border-radius: var(--q-radius-sm); }
+
+/* Tabs */
+.tc-tab-buttons button {
+	border-radius: var(--q-radius-sm) var(--q-radius-sm) 0 0;
+	transition: color var(--q-dur) var(--q-ease);
+}
+.tc-tab-buttons button:hover { color: var(--q-accent-ink); }
+.tc-tab-buttons button.tc-tab-selected { color: <<colour foreground>>; box-shadow: inset 0 -2px 0 var(--q-accent); }
+
+.tc-plugin-info {
+	border-radius: var(--q-radius);
+	border-color: var(--q-line);
+	transition: box-shadow var(--q-dur) var(--q-ease), border-color var(--q-dur) var(--q-ease);
+}
+/* Override vanilla's flood-fill hover (0,3,1) with Quietude's calm lift treatment. */
+a.tc-tiddlylink.tc-plugin-info:hover {
+	background-color: <<colour tiddler-background>>;
+	color: <<colour foreground>>;
+	fill: var(--q-accent-ink);
+	border-color: var(--q-accent);
+	box-shadow: 0 2px 8px color-mix(in srgb, <<colour foreground>> 10%, transparent);
+	text-decoration: none;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: var(--q-accent);
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	color: <<colour foreground>>;
+	border-color: var(--q-line);
+}
+
+/*
+** Sidebar — recessive. The reading column is the star, so the sidebar is muted
+** and only comes fully forward on hover.
+*/
+.tc-sidebar-scrollable { opacity: 0.7; transition: opacity var(--q-slow) var(--q-ease); }
+.tc-sidebar-scrollable:hover,
+.tc-sidebar-scrollable:focus-within { opacity: 1; }
+
+.tc-site-title {
+	font-weight: 650;
+	letter-spacing: -0.015em;
+	font-size: clamp(1.5rem, 1.3rem + 1vw, 1.95rem);
+	color: <<colour site-title-foreground>>;
+}
+.tc-site-subtitle { font-family: var(--q-sans); color: var(--q-faint); }
+
+.tc-sidebar-lists a.tc-tiddlylink {
+	border-radius: var(--q-radius-sm);
+	transition: color var(--q-dur) var(--q-ease);
+}
+.tc-sidebar-lists a.tc-tiddlylink:hover { color: var(--q-accent); }
+.tc-sidebar-tab-open-item { border-radius: var(--q-radius-sm); transition: background-color var(--q-dur) var(--q-ease); }
+.tc-sidebar-tab-open-item:hover { background: var(--q-wash); }
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected { color: <<colour foreground>>; }
+
+.tc-sidebar-header .tc-search input,
+.tc-search input {
+	border-radius: var(--q-radius-sm);
+	border: 1px solid var(--q-line);
+	transition: border-color var(--q-dur) var(--q-ease), box-shadow var(--q-dur) var(--q-ease);
+}
+.tc-sidebar-header .tc-search input:focus,
+.tc-search input:focus { border-color: var(--q-accent); box-shadow: 0 0 0 3px var(--q-wash); }
+.tc-page-controls { gap: 3px; }
