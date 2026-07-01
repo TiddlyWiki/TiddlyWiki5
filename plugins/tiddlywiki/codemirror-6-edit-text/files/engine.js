@@ -790,7 +790,7 @@ class CodeMirrorSimpleEngine {
 		var autocompletionExts = [];
 		if(autocompletionEnabled && autocompletionFn) {
 			autocompletionExts.push(autocompletionFn({
-				activateOnTyping: true,
+				activateOnTyping: this.shouldActivateCompletionOnTyping(),
 				maxRenderedOptions: 50
 			}));
 		}
@@ -1510,6 +1510,17 @@ class CodeMirrorSimpleEngine {
 		}
 	}
 
+	/**
+	 * Whether autocompletion popups may open automatically while typing.
+	 * When the input has a focusPopup (edit-text `focusPopup` attribute), the
+	 * popup slot is owned by that widget, so we only open completions on the
+	 * explicit startCompletion command (Ctrl-Space and its OS equivalents).
+	 * @returns {boolean}
+	 */
+	shouldActivateCompletionOnTyping() {
+		return !(this.widget && this.widget.editFocusPopup);
+	}
+
 	// ============================================================================
 	// Completion Source Registry
 	// ============================================================================
@@ -1998,7 +2009,7 @@ class CodeMirrorSimpleEngine {
 			var autocompletionFn = (core.autocomplete || {}).autocompletion;
 			if(settings.autocompletion && autocompletionFn) {
 				autocompletionExts.push(autocompletionFn({
-					activateOnTyping: true,
+					activateOnTyping: this.shouldActivateCompletionOnTyping(),
 					maxRenderedOptions: 50
 				}));
 			}
