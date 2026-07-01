@@ -5,24 +5,14 @@ module-type: widget
 
 Story-wrapper container widget.
 
-A generic container: it creates a DOM node, renders its children into it (so children can be freely
-added and removed — exactly how the story river behaves), and passes `class`, `role`, `style.*` and
-any other HTML attribute through to that node. It does nothing scroll- or story-specific itself.
+Renders its children into a container element, then exposes that element through the
+`th-story-wrapper-dom` hook (domNode, widget) so plugins can attach behaviour to the story river
+without altering its markup. A handler may register a behaviour object, a plain object with optional
+refresh(changedTiddlers) and destroy() methods whose lifecycle this widget drives. Every registered
+handler runs and each wrapper instance keeps its own behaviour list, so plugins attach independently.
 
-Its purpose is to be an EXTENSION POINT. Once its DOM node exists and the children are laid in, it
-invokes the `th-story-wrapper-dom` hook, passing (domNode, widget). A plugin's handler can tweak the
-node directly (one-shot, exactly like element.js's `th-dom-rendering-element`) and/or register a
-long-lived BEHAVIOUR via `widget.registerBehaviour(behaviour)`. A behaviour is a plain object with
-optional `refresh(changedTiddlers)` and `destroy()` methods; the widget drives their lifecycle.
-
-Composition is inherent: TiddlyWiki runs EVERY handler registered for a hook, so any number of
-plugins can attach to the same wrapper and all keep working. And because the widget passes itself to
-the hook, EACH INSTANCE of the wrapper gets its own independent list of behaviours — a second
-story-wrapper elsewhere is handled the same way without interfering with the first.
-
-Attributes
-  tag                            element to create (default "div")
-  class, role, style.*, <any>    passed through to the DOM node
+Attributes: tag (element, default div); name (reflected onto the element as data-story-wrapper-name);
+class, role, style.* and any other HTML attribute are passed through to the element.
 \*/
 
 "use strict";
@@ -42,23 +32,21 @@ StoryWrapperWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElementNS(this.namespace,this.wrapperTag);
 	this.domNode = domNode;
 	this.assignWrapperAttributes(domNode,this.attributes);
+	this.assignWrapperName(domNode);
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);   // children present before behaviours attach → no spurious mutation
+	this.renderChildren(domNode,null);   // children exist before behaviours attach, so an observer sees no spurious initial mutation
 	this.domNodes.push(domNode);
-	// Extension point: plugins may tweak the node and/or register behaviours bound to it.
 	this.behaviours = [];
 	$tw.hooks.invokeHook("th-story-wrapper-dom",domNode,this);
 };
 
 StoryWrapperWidget.prototype.execute = function() {
 	var tag = this.getAttribute("tag","div");
-	// Neuter blacklisted elements and restrict to safe characters, exactly as element.js does.
+	// Match element.js: a hostile tag like "script" must not become a live element.
 	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) { tag = "safe-" + tag; }
 	tag = tag.replace(/[^0-9a-zA-Z\-]/mg,"");
 	this.wrapperTag = tag || "div";
-	// Select the namespace for the tag, exactly as element.js does: a known namespaced tag, else an
-	// explicit xmlns attribute, else the inherited `namespace` variable (defaulting to XHTML). Set
-	// before makeChildWidgets so descendants inherit it.
+	// Mirror element.js namespace selection; set before makeChildWidgets so descendants inherit it.
 	var XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml",
 		tagNamespaces = {
 			svg: "http://www.w3.org/2000/svg",
@@ -77,31 +65,35 @@ StoryWrapperWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-// Register a behaviour object whose lifecycle this widget will drive. `behaviour` may implement
-// refresh(changedTiddlers) and destroy(); both are optional.
 StoryWrapperWidget.prototype.registerBehaviour = function(behaviour) {
 	if(behaviour) { (this.behaviours || (this.behaviours = [])).push(behaviour); }
 };
 
-// Apply every attribute in `source` EXCEPT `tag` to the DOM node, reusing the base assignAttributes
-// (which handles class / role / style.* / custom properties / arbitrary attributes).
+// tag selects the element and name is reflected by assignWrapperName, so neither is a passthrough attribute.
 StoryWrapperWidget.prototype.assignWrapperAttributes = function(domNode,source) {
 	var passthrough = Object.create(null), any = false;
-	$tw.utils.each(source,function(value,name) {
-		if(name !== "tag") { passthrough[name] = value; any = true; }
+	$tw.utils.each(source,function(value,key) {
+		if(key !== "tag" && key !== "name") { passthrough[key] = value; any = true; }
 	});
 	if(any) { this.assignAttributes(domNode,{changedAttributes: passthrough}); }
+};
+
+// name is not a valid attribute on an arbitrary element, so expose it as data-story-wrapper-name for plugins to target.
+StoryWrapperWidget.prototype.assignWrapperName = function(domNode) {
+	var name = this.getAttribute("name");
+	if(name) { domNode.setAttribute("data-story-wrapper-name",name); }
+	else { domNode.removeAttribute("data-story-wrapper-name"); }
 };
 
 StoryWrapperWidget.prototype.refresh = function(changedTiddlers) {
 	var changed = this.computeAttributes();
 	if(changed.tag) {
-		// Tag name change → rebuild from scratch (rare).
+		// A tag change means a different element, so rebuild from scratch.
 		this.refreshSelf();
 		return true;
 	}
 	this.assignWrapperAttributes(this.domNode,changed);
-	// Let each behaviour react to this refresh cycle (e.g. re-baseline on a relevant tiddler change).
+	if(changed.name) { this.assignWrapperName(this.domNode); }
 	var behaviours = this.behaviours || [];
 	for(var i = 0; i < behaviours.length; i++) {
 		if(typeof behaviours[i].refresh === "function") { behaviours[i].refresh(changedTiddlers); }
@@ -109,8 +101,7 @@ StoryWrapperWidget.prototype.refresh = function(changedTiddlers) {
 	return this.refreshChildren(changedTiddlers);
 };
 
-// The base destroy() calls onDestroy() exactly once (covering both destroy and the legacy
-// removeChildDomNodes path), so behaviours are torn down here.
+// The base destroy() calls onDestroy() exactly once, so behaviours are torn down here.
 StoryWrapperWidget.prototype.onDestroy = function() {
 	var behaviours = this.behaviours || [];
 	for(var i = 0; i < behaviours.length; i++) {

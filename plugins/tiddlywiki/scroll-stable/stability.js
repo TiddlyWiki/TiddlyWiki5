@@ -5,21 +5,16 @@ module-type: library
 
 Scroll-stability controller.
 
-A plain behaviour object (NOT a widget): it attaches to a story-wrapper's DOM node and keeps the
-scroll position stable across RESIZES of that node — hiding/showing the sidebar changes the story
-river's width AND height. The target nearest the TOP of the viewport is kept fixed: the first target
-still visible at/below the reference line is chosen (if several are visible, the one nearest the top
-viewport edge wins), and its top edge is held at the same viewport position. When that target's own
-top has scrolled off above the line (it fills the top of the viewport), the deepest descendant — and
-the exact text line — at the reference line is pinned instead, so the element's own width-reflow
-can't drift the part you are reading. Adding/removing children (navigation) re-baselines instead of
-fighting it.
+A behaviour object (not a widget) attached to a story-wrapper's DOM node: when the node is resized in
+width (toggling the sidebar reflows the river) it holds the reading position fixed. It pins whatever
+sits at the reading line, either a target's top edge or the exact text character when the line falls
+inside a target, so a width-reflow cannot drift the part you are reading. Adding or removing children
+is navigation, so it re-baselines rather than fighting the change.
 
-The elements to keep stable are chosen by a CSS selector (resolved WITHIN the node), read from the
-configuration tiddler below; it defaults to the story river's tiddler frames.
+The pinnable targets are chosen by the CSS selector in the configuration tiddler below, resolved
+within the node; it defaults to the story river's tiddler frames.
 
-Construct with (domNode, widget). Lifecycle is driven by the story-wrapper widget via the behaviour
-contract: refresh(changedTiddlers) and destroy().
+Construct with (domNode, widget); the story-wrapper widget drives refresh(changedTiddlers) and destroy().
 \*/
 
 "use strict";
@@ -39,8 +34,7 @@ ScrollStability.prototype.readSelector = function() {
 	return $tw.wiki.getTiddlerText(CONFIG_TARGET_SELECTOR,DEFAULT_TARGET_SELECTOR);
 };
 
-// Behaviour contract: react to a refresh cycle. Only the target-selector configuration is relevant
-// here — when it changes, rebuild the observers against the new selector and re-baseline.
+// Only the target-selector config affects us; when it changes, rebuild observers and re-baseline.
 ScrollStability.prototype.refresh = function(changedTiddlers) {
 	if(!changedTiddlers || !changedTiddlers[CONFIG_TARGET_SELECTOR]) { return; }
 	var sel = this.readSelector();
@@ -50,40 +44,36 @@ ScrollStability.prototype.refresh = function(changedTiddlers) {
 	this.setupStability();
 };
 
-// Behaviour contract: teardown.
 ScrollStability.prototype.destroy = function() {
 	this._cleanupStability();
 };
 
-// ── scroll stability ────────────────────────────────────────────────────────
-
 ScrollStability.prototype.setupStability = function() {
 	this._cleaned = false;
 	var win = this.document.defaultView;
-	// Needs a live browser window with observers and a target selector; otherwise it's a no-op (e.g.
-	// when the container is rendered server-side).
+	// No-op without a live browser window, observers, and a selector (e.g. server-side rendering).
 	if(!win || !win.ResizeObserver || !win.MutationObserver || !this.targetSelector) { return; }
 	var self = this;
 	this.stableWin = win;
-	this.anchor = null;          // {el, edge:"top"|"bottom", pos} | {node, offset, pos} (text line)
+	this.anchor = null;          // {el,edge,pos} element edge, or {node,offset,pos} text character
 	this.recordTimer = null;
 	this.suppressRecordUntil = 0;   // ignore scroll echoes from our own restore until this time
-	this.managedScroller = null;    // scroller whose overflow-anchor we have overridden
+	this.managedScroller = null;    // scroller whose overflow-anchor we overrode
 	this.lastChildMutation = 0;
 	this.lastW = undefined;
 	this.lastH = undefined;
+	this.resizeRaf = null;          // coalesces a burst of resize ticks into one restore
 
-	// User scrolled → re-baseline (debounced; never synchronously, so a reflow's own scroll jump
-	// can't be mistaken for the reading position). Capture-phase so an inner scroller's
-	// non-bubbling scroll events are still seen.
+	// User scroll re-baselines, debounced so a reflow's own scroll jump is not read as the reading
+	// position. Capture phase catches a non-bubbling inner scroller.
 	this.onScrollHandler = function() { self.scheduleRecord(); };
 	win.addEventListener("scroll",this.onScrollHandler,{capture: true, passive: true});
 
-	// Container resized (sidebar toggle changes width AND height) → restore the anchor.
-	this.resizeObserver = new win.ResizeObserver(function() { self.onResize(); });
+	// Container resize (sidebar toggle) restores the anchor.
+	this.resizeObserver = new win.ResizeObserver(function() { self.scheduleResize(); });
 	this.resizeObserver.observe(this.domNode);
 
-	// Direct children added/removed (navigation) → re-baseline rather than fight it.
+	// Child add/remove is navigation, so re-baseline rather than fight it.
 	this.mutationObserver = new win.MutationObserver(function() {
 		self.lastChildMutation = (win.performance && win.performance.now) ? win.performance.now() : Date.now();
 		self.recordAnchor();
@@ -100,25 +90,37 @@ ScrollStability.prototype.now = function() {
 	return (win && win.performance && win.performance.now) ? win.performance.now() : Date.now();
 };
 
+// Defer to rAF: reading layout and writing scrollTop inside the ResizeObserver callback triggers the
+// "ResizeObserver loop completed with undelivered notifications" warning, and rAF also coalesces a
+// burst of ticks into one restore.
+ScrollStability.prototype.scheduleResize = function() {
+	var self = this, win = this.stableWin;
+	if(!win) { return; }
+	if(!win.requestAnimationFrame) { this.onResize(); return; }
+	if(this.resizeRaf) { return; }
+	this.resizeRaf = win.requestAnimationFrame(function() {
+		self.resizeRaf = null;
+		self.onResize();
+	});
+};
+
 ScrollStability.prototype.onResize = function() {
 	var node = this.domNode;
 	if(!node || !node.isConnected) { return; }
 	var rect = node.getBoundingClientRect(), w = rect.width, h = rect.height;
 	if(this.lastW === undefined) { this.lastW = w; this.lastH = h; return; }   // initial observation
 	var changed = Math.abs(w - this.lastW) > 0.01 || Math.abs(h - this.lastH) > 0.01;
-	// Only a WIDTH change reflows the river (the case we exist for). A height-only change (an image
-	// loading, fold/unfold, a transclusion growing) shifts content too, but the browser's own scroll
-	// anchoring handles those — reacting to every height change would mean fighting normal layout.
+	// Only a width change reflows the river; the browser's native scroll anchoring handles height-only
+	// changes (an image loading, a fold/unfold), so ignore them.
 	if(this.lastW === w) { return; }
 	this.lastW = w; this.lastH = h;
 	if(!changed) { return; }
-	// A resize that coincides with a child add/remove is navigation — re-baseline, don't fight.
+	// A resize coinciding with a child mutation is navigation, so re-baseline.
 	if(this.now() - this.lastChildMutation < 120) { this.recordAnchor(); return; }
 	this.restoreAnchor();
 };
 
-// Resolve the scroll container: prefer the document (the common case), else the nearest scrollable
-// ancestor of our node.
+// The scroll container: the document when it scrolls, else the nearest scrollable ancestor.
 ScrollStability.prototype.getScroller = function() {
 	var doc = this.document, win = this.stableWin;
 	var se = doc.scrollingElement || doc.documentElement;
@@ -134,10 +136,9 @@ ScrollStability.prototype.getScroller = function() {
 	return {el: se, isDoc: true};
 };
 
-// Take ownership of the scroller's scroll position by disabling the browser's native scroll anchoring
-// on it (overflow-anchor) — otherwise the browser may nudge scrollTop on its own when content above
-// reflows, fighting our corrections. Idempotent; if the resolved scroller ever changes, the previous
-// one is released first. The original inline value is remembered for teardown.
+// Disable the scroller's native scroll anchoring so the browser does not nudge scrollTop against our
+// corrections when content above reflows. The previous scroller is released first and the original
+// inline value restored on release.
 ScrollStability.prototype.manageScroller = function(el) {
 	if(this.managedScroller === el) { return; }
 	this.releaseScroller();
@@ -153,11 +154,9 @@ ScrollStability.prototype.releaseScroller = function() {
 	this.prevOverflowAnchor = undefined;
 };
 
-// The reading edge — the viewport position used to PICK the anchor target. For the document this is
-// the top viewport edge, pushed down by the height of any position:fixed toolbar flagged with
-// `.tc-adjust-top-of-scroll`: that is exactly the offset core subtracts when it scrolls a tiddler to
-// the "top" (utils/dom/scroller.js), so a tiddler scrolled to the top sits at this line, not at 0.
-// When no such toolbar is present the offset is 0. For an inner scroller it is the scroller's own top.
+// The reading line used to pick the anchor. For the document it is the top edge plus any fixed
+// .tc-adjust-top-of-scroll toolbar height, matching the offset core subtracts when scrolling a tiddler
+// to the top (utils/dom/scroller.js). For an inner scroller it is the scroller's own top.
 ScrollStability.prototype.refLine = function(scroller) {
 	if(!scroller.isDoc) { return scroller.el.getBoundingClientRect().top; }
 	var toolbar = this.document.querySelector(".tc-adjust-top-of-scroll");
@@ -174,31 +173,16 @@ ScrollStability.prototype.vpBottom = function(scroller) {
 	return r.top + scroller.el.clientHeight;
 };
 
-// Pin whatever is at the top of the viewport — the reading edge. The reference line is that edge, so
-// the thing it lands on is the reading position. We choose the anchor by where the line falls, in
-// strict priority. The crux is that a target TOP coinciding with the line is a clean frame boundary
-// and the most stable anchor of all, so it must outrank a straddle of the target above it; but a
-// straddle must still outrank a target top that is FAR BELOW the line (a later tiddler the reader is
-// not looking at):
-//
-// 1. BOUNDARY — a target's top sits essentially AT the line. Pin that top. An element edge is immune
-//    to the tiddler's own reflow, and this beats a sub-pixel straddle of the target above (otherwise a
-//    tiddler sitting on top drifts on resize).
-//
-// 2. INSIDE — the line is genuinely in the MIDDLE of a target whose top scrolled off above. Pin the
-//    exact TEXT CHARACTER at the line: a character keeps its identity through a width-reflow (a wrapped
-//    line is not an element, but a character is), so the reading position itself stays put. When the
-//    line falls on a non-text block instead (an image, iframe, video, embed…), pin that box's same
-//    FRACTIONAL point, so a box that resizes with the river's width keeps your place.
-//
-// 3. GAP — no straddle, and the nearest target top is BELOW the line (the line sits in a gap above it).
-//    Pin that top.
-//
-// 4. LAST RESORT — the line is below the bottom of the last target (scrolled past the end, into the
-//    tail/below-story area). Pin the BOTTOM of the last target, so the end of the river stays put
-//    across a height change. Bottom is only ever used here.
-//
-// The pinned value is a RAW viewport position; restoreAnchor holds it fixed.
+// Pin whatever is at the reading line, choosing by strict priority:
+//   1. BOUNDARY: a target's top sits at the line. Pin that top; an element edge is immune to reflow,
+//      and this beats a sub-pixel straddle of the target above (the on-top-tiddler case).
+//   2. INSIDE: the line is inside a target whose top scrolled off. Pin the exact text character at the
+//      line, since a character keeps its identity through a width-reflow where a wrapped line does not.
+//      On a non-text block (image, iframe) pin the same fractional point, so a box that resizes with
+//      the river keeps your place.
+//   3. GAP: no straddle and the nearest target top is below the line. Pin that top.
+//   4. LAST RESORT: scrolled past the last target. Pin its bottom, so the end of the river stays put.
+// The pinned value is a raw viewport position that restoreAnchor holds fixed.
 ScrollStability.prototype.recordAnchor = function() {
 	this.recordTimer = null;
 	var node = this.domNode;
@@ -208,12 +192,11 @@ ScrollStability.prototype.recordAnchor = function() {
 	var targets;
 	try { targets = node.querySelectorAll(this.targetSelector); } catch(e) { this.anchor = null; return; }
 
-	// Single pass, document order (= visual top→bottom), gathering what each tier needs. EDGE is the
-	// tolerance (≈1px) for treating a target edge as coinciding with the reading line, so sub-pixel
-	// layout rounding at a frame boundary can't flip the decision.
+	// Single pass in document order. EDGE is the ~1px tolerance for treating a target edge as on the
+	// line, so sub-pixel rounding at a frame boundary cannot flip the decision.
 	var EDGE = 1;
-	var straddling = null,       // a target the line falls CLEARLY inside (top above, bottom well below)
-		firstVisibleTop = null,  // first target whose top is at/below the line and within the viewport
+	var straddling = null,       // target the line falls clearly inside
+		firstVisibleTop = null,  // first target with a visible top at/below the line
 		lastTarget = null, lastRect = null;   // last laid-out target, for the bottom last-resort
 	for(var i = 0; i < targets.length; i++) {
 		var r = targets[i].getBoundingClientRect();
@@ -226,20 +209,14 @@ ScrollStability.prototype.recordAnchor = function() {
 		}
 	}
 
-	// Tier 1 — BOUNDARY: a target top sits essentially at the line. Pin it; this outranks a sub-pixel
-	// straddle of the target above (the on-top-tiddler case).
+	// Tier 1 BOUNDARY: a target top sits at the line; outranks a sub-pixel straddle of the target above.
 	if(firstVisibleTop && firstVisibleTop.pos <= line + EDGE) {
 		this.anchor = {el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos};
 		return;
 	}
 
-	// Tier 2 — INSIDE: the line is in the middle of a straddling target → pin the exact reading
-	// CHARACTER at the line. The browser's own caret hit-testing maps the reading point to the nearest
-	// text position; between the point and that caret there is no other line of text (only the same
-	// wrapped line or non-reflowing margin/padding), so holding it fixed keeps the reading edge put
-	// through any width-reflow, whatever the line lands on (text, gaps between blocks, whitespace,
-	// inline markup). The geometric search is only a fallback for when the caret APIs are unavailable
-	// or the point is over a non-text block (e.g. an image). (Node.TEXT_NODE === 3.)
+	// Tier 2 INSIDE: pin the exact character at the line via caret hit-testing; the geometric search is
+	// a fallback when the caret APIs are unavailable or the point is over a non-text block. (Node.TEXT_NODE === 3.)
 	if(straddling) {
 		var ca = this.readingCharAt(straddling, line);
 		if(ca) { this.anchor = ca; return; }
@@ -254,13 +231,11 @@ ScrollStability.prototype.recordAnchor = function() {
 					return;
 				}
 			}
-			deep = deep.parentElement;   // text didn't bracket the line → pin its element instead
+			deep = deep.parentElement;   // text did not bracket the line, so pin its element instead
 		}
-		// The line is on a non-text block — an image, iframe, video, embed, canvas, or a gap between
-		// blocks. Pin it PROPORTIONALLY: such a box can change height with the river's width (a responsive
-		// image/iframe grows when the sidebar hides), so holding the SAME fractional point at the reading
-		// line keeps your place, where pinning its top would let the point you're looking at drift. For a
-		// fixed-height box the fraction is constant, so this degrades to a plain pin.
+		// The line is on a non-text block. Pin the same fractional point, so a box that resizes with the
+		// river's width (e.g. a responsive image) keeps your place; for a fixed-height box the fraction is
+		// constant and this is a plain pin.
 		var el = (deep && deep.nodeType === 1) ? deep : straddling,
 			er = el.getBoundingClientRect(),
 			frac = er.height > 0 ? Math.min(1,Math.max(0,(line - er.top) / er.height)) : 0;
@@ -268,13 +243,13 @@ ScrollStability.prototype.recordAnchor = function() {
 		return;
 	}
 
-	// Tier 3 — GAP: the nearest target top is below the line (line sits in a gap above it) → pin it.
+	// Tier 3 GAP: the nearest target top is below the line, so pin it.
 	if(firstVisibleTop) {
 		this.anchor = {el: firstVisibleTop.el, edge: "top", pos: firstVisibleTop.pos};
 		return;
 	}
 
-	// Tier 4 — LAST RESORT: scrolled past the end (line below the last target) → pin its bottom.
+	// Tier 4 LAST RESORT: scrolled past the last target, so pin its bottom.
 	if(lastTarget && lastRect.bottom <= line + 0.5) {
 		this.anchor = {el: lastTarget, edge: "bottom", pos: lastRect.bottom};
 		return;
@@ -283,9 +258,8 @@ ScrollStability.prototype.recordAnchor = function() {
 	this.anchor = null;
 };
 
-// The (textNode, offset) the browser would place a caret at for the viewport point (x, y), across the
-// two API spellings (caretPositionFromPoint — standard; caretRangeFromPoint — WebKit). Null if neither
-// resolves a node.
+// The (node, offset) the browser would place a caret at for point (x, y), across the standard
+// caretPositionFromPoint and WebKit caretRangeFromPoint. Null if neither resolves.
 ScrollStability.prototype.caretAt = function(x, y) {
 	var doc = this.document;
 	try {
@@ -300,8 +274,8 @@ ScrollStability.prototype.caretAt = function(x, y) {
 	return null;
 };
 
-// True when `node` sits inside a position:fixed/sticky element (up to `stop`) — content decoupled from
-// scrolling, useless as a reading anchor (e.g. a sticky tiddler title).
+// True when node sits inside a fixed/sticky ancestor (up to stop): decoupled from scrolling, so
+// useless as a reading anchor like a sticky tiddler title.
 ScrollStability.prototype.hasDecoupledAncestor = function(node, stop) {
 	var win = this.stableWin, el = (node.nodeType === 3) ? node.parentElement : node;
 	while(el && el !== stop) {
@@ -312,10 +286,9 @@ ScrollStability.prototype.hasDecoupledAncestor = function(node, stop) {
 	return false;
 };
 
-// Find the exact reading CHARACTER at the line inside `container` via the browser's caret hit-testing.
-// Probe a few x positions across the width (prose sits in the middle; floats/margins at the edges) and
-// take the first that lands on real, scroll-coupled text. Returns {node, offset, edge:"top", pos} or
-// null (caret APIs missing, or the point is over a non-text block such as an image).
+// The character at the line inside container, via caret hit-testing. Probe a few x positions (prose in
+// the middle, floats at the edges) and take the first landing on real scroll-coupled text. Null if the
+// caret APIs are missing or the point is over a non-text block.
 ScrollStability.prototype.readingCharAt = function(container, line) {
 	var rect = container.getBoundingClientRect();
 	if(rect.width <= 0) { return null; }
@@ -325,9 +298,8 @@ ScrollStability.prototype.readingCharAt = function(container, line) {
 		if(!c || !c.node || c.node.nodeType !== 3) { continue; }
 		if(!container.contains(c.node) || this.hasDecoupledAncestor(c.node, container)) { continue; }
 		var rr = this.rangeRectAt(c.node, c.offset);
-		// Only accept a caret whose own wrapped line actually brackets the reading line. Over a non-text
-		// block (e.g. a tall image) the browser snaps the point to the NEAREST text, which can be far
-		// above/below with reflowing content in between — pinning that would drift badly.
+		// Accept only a caret whose wrapped line brackets the reading line; over a non-text block the
+		// browser snaps to the nearest text, which can be far away and drift badly.
 		if(rr && rr.top <= line + 2 && rr.bottom >= line - 2) {
 			return {node: c.node, offset: c.offset, edge: "top", pos: rr.top};
 		}
@@ -335,13 +307,9 @@ ScrollStability.prototype.readingCharAt = function(container, line) {
 	return null;
 };
 
-// Descend from `root` through the chain of child NODES — elements AND text nodes — whose box
-// vertically contains the reference line, returning the deepest such node. The result is a TEXT
-// NODE whenever the line falls on rendered text (the strongest anchor: a character keeps its
-// identity through a width-reflow), otherwise the deepest element whose box spans the line (the
-// line landed in a gap/margin, or on an image/empty block). position:fixed/sticky elements are
-// skipped — their position is decoupled from the reading flow, so they're useless as an anchor (a
-// sticky tiddler title stays put as you scroll). Iterative, so deep DOM trees can't blow the stack.
+// The deepest child node (element or text) whose box spans the reference line: a text node when the
+// line falls on rendered text, else the deepest spanning element. Fixed/sticky elements are skipped as
+// decoupled from scrolling. Iterative, so a deep DOM cannot blow the stack.
 ScrollStability.prototype.deepestAtLine = function(root, line) {
 	var win = this.stableWin, current = root, descended = true;
 	while(descended) {
@@ -349,11 +317,11 @@ ScrollStability.prototype.deepestAtLine = function(root, line) {
 		var kids = current.childNodes;
 		for(var i = 0; i < kids.length; i++) {
 			var child = kids[i];
-			if(child.nodeType === 3) {                       // text node — measure with a Range
+			if(child.nodeType === 3) {                       // text node, measure with a Range
 				if(this.textNodeSpansLine(child, line)) { return child; }
 				continue;
 			}
-			if(child.nodeType !== 1) { continue; }           // skip comments / processing nodes
+			if(child.nodeType !== 1) { continue; }           // skip comments and processing nodes
 			var pos = win.getComputedStyle(child).position;
 			if(pos === "fixed" || pos === "sticky") { continue; }
 			var r = child.getBoundingClientRect();
@@ -365,9 +333,8 @@ ScrollStability.prototype.deepestAtLine = function(root, line) {
 	return current;
 };
 
-// True when any wrapped line of the text node's rendered content vertically contains the reference
-// line. selectNodeContents + getClientRects yields one rect per line box, so an inline text node
-// that spans several lines is handled correctly.
+// True when any wrapped line of the text node contains the reference line; getClientRects yields one
+// rect per line box, so a text node spanning several lines is handled correctly.
 ScrollStability.prototype.textNodeSpansLine = function(node, line) {
 	if(!node.length) { return false; }
 	try {
@@ -382,9 +349,8 @@ ScrollStability.prototype.textNodeSpansLine = function(node, line) {
 	return false;
 };
 
-// Client rect of the character at (node, offset) — i.e. the top of the wrapped text line that
-// character sits on. A ONE-character range is measured because a collapsed range often reports no
-// client rects; the end of the node is clamped to its last character. Returns null on any failure.
+// Client rect of the character at (node, offset). A one-character range is measured because a collapsed
+// range often reports no client rects; the offset is clamped to the last character.
 ScrollStability.prototype.rangeRectAt = function(node, offset) {
 	try {
 		var range = this.document.createRange(), len = node.length || 0;
@@ -396,13 +362,9 @@ ScrollStability.prototype.rangeRectAt = function(node, offset) {
 	} catch(e) { return null; }
 };
 
-// The character offset in `node` whose wrapped line straddles the reference line: the smallest
-// offset whose character box BOTTOM is below the line (i.e. the first character on the line that
-// contains the line, or the first character below it when the line lands in a gap). Character boxes
-// advance monotonically DOWN the node, so a binary search over offsets is valid and O(log n) even
-// for a huge paragraph. This is a purely GEOMETRIC mapping — no hit-testing — so it resolves to the
-// same character every time and stays pixel-stable across a width-reflow. Returns null for an empty
-// node; clamps to the last character when the line is below all of the node's text.
+// The offset in node whose wrapped line straddles the reference line. Character boxes advance
+// monotonically down the node, so a binary search is valid and O(log n) for a huge paragraph. Purely
+// geometric, so it resolves the same character every time and stays stable across a reflow.
 ScrollStability.prototype.textOffsetAtLine = function(node, line) {
 	var len = node.length || 0;
 	if(len === 0) { return null; }
@@ -410,39 +372,35 @@ ScrollStability.prototype.textOffsetAtLine = function(node, line) {
 	while(lo <= hi) {
 		var mid = (lo + hi) >> 1;
 		var rect = this.rangeRectAt(node, mid);
-		if(!rect) { lo = mid + 1; continue; }              // unmeasurable (collapsed whitespace) → skip
-		if(rect.bottom > line + 0.5) { ans = mid; hi = mid - 1; }   // at/below the straddling line
+		if(!rect) { lo = mid + 1; continue; }              // unmeasurable (collapsed whitespace), skip
+		if(rect.bottom > line + 0.5) { ans = mid; hi = mid - 1; }   // at/below the line
 		else { lo = mid + 1; }                                       // still above the line
 	}
 	return (ans >= 0) ? ans : (len - 1);
 };
 
-// Scroll so the anchor target's pinned TOP (or the pinned text line) is at exactly the raw viewport
-// position it had. scrollTop arithmetic (not scrollBy) keeps the fractional offset; a second pass
-// absorbs any rounding.
+// Scroll so the pinned edge or character returns to its recorded viewport position. scrollTop
+// arithmetic keeps the fractional offset and a second pass absorbs rounding.
 ScrollStability.prototype.restoreAnchor = function() {
 	var a = this.anchor;
 	if(!a) { return; }
 	var scroller = this.getScroller(), el = scroller.el;
-	// We are about to move scrollTop ourselves; mark a window in which the resulting scroll events must
-	// NOT be mistaken for the user scrolling (which would re-baseline and break a hide↔show round-trip).
-	// Repeated restores during an animated sidebar toggle keep pushing this forward, covering the whole
-	// transition plus the scheduleRecord debounce after it settles.
+	// Suppress the scroll events our own scrollTop writes will fire, or they would be read as user
+	// scrolling and re-baseline (breaking a hide then show round-trip). Repeated restores during an
+	// animated toggle push the window forward across the transition plus the debounce.
 	this.suppressRecordUntil = this.now() + 300;
 	this.manageScroller(el);
-	// Our corrections must be INSTANT and exact. If a theme (or user CSS) set `scroll-behavior: smooth`
-	// on the scroller, a scrollTop write would animate — and we read the position straight back across a
-	// two-pass loop and across resize ticks, so the readback would see stale values and oscillate. Force
-	// `auto` for the duration, restoring the inline value afterwards.
+	// Force scroll-behavior auto: a theme's scroll-behavior smooth would animate our write, and the
+	// immediate readback across the two-pass loop would see stale values and oscillate.
 	var prevBehavior = el.style.scrollBehavior;
 	el.style.scrollBehavior = "auto";
 	try {
-		// Range anchor (a text offset): re-measure the SAME character's line top and hold it fixed.
+		// Text anchor: re-measure the same character's line top and hold it fixed.
 		if(a.node) {
 			if(!a.node.isConnected) { this.recordAnchor(); return; }
 			for(var p = 0; p < 2; p++) {
 				var rrect = this.rangeRectAt(a.node, a.offset);
-				if(!rrect) { this.recordAnchor(); return; }   // text gone/replaced → re-baseline
+				if(!rrect) { this.recordAnchor(); return; }   // text gone or replaced, re-baseline
 				var rdy = rrect.top - a.pos;
 				if(Math.abs(rdy) <= 0.01) { break; }
 				el.scrollTop = el.scrollTop + rdy;
@@ -488,11 +446,13 @@ ScrollStability.prototype._cleanupStability = function() {
 			try { this.stableWin.removeEventListener("scroll",this.onScrollHandler,{capture: true}); } catch(e) {}
 		}
 		if(this.recordTimer) { try { this.stableWin.clearTimeout(this.recordTimer); } catch(e) {} }
+		if(this.resizeRaf && this.stableWin.cancelAnimationFrame) { try { this.stableWin.cancelAnimationFrame(this.resizeRaf); } catch(e) {} }
 	}
 	this.resizeObserver = null;
 	this.mutationObserver = null;
 	this.onScrollHandler = null;
 	this.recordTimer = null;
+	this.resizeRaf = null;
 	this.anchor = null;
 };
 

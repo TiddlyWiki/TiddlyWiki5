@@ -4,9 +4,7 @@ type: application/javascript
 module-type: startup
 
 Registers a story-wrapper behaviour that keeps the story river's scroll position stable across
-resizes. Hooks into the core `story-wrapper` widget via its `th-story-wrapper-dom` extension point;
-because hooks run every registered handler, this composes with any other plugins that attach to the
-same wrapper.
+resizes, via the core story-wrapper widget's `th-story-wrapper-dom` hook.
 
 \*/
 
@@ -14,8 +12,7 @@ same wrapper.
 
 exports.name = "scroll-stable";
 exports.platforms = ["browser"];
-// Must register the hook BEFORE the initial page render, or the story-wrapper will already have
-// fired th-story-wrapper-dom with no handler attached (it renders once and only refreshes after).
+// Must register before the first render; the story-wrapper fires th-story-wrapper-dom once at render.
 exports.before = ["render"];
 exports.synchronous = true;
 
