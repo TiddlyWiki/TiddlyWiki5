@@ -22,8 +22,6 @@ tags: [[$:/tags/Stylesheet]]
 .td-wikilist .td-wikilist-item {
 	border-radius: var(--e-radius-lg);
 	box-shadow: var(--e-shadow-1);
-	transition: box-shadow var(--e-dur) var(--e-ease),
-	            border-left-color var(--e-dur) var(--e-ease);
 }
 .td-wikilist .td-wikilist-item:hover {
 	box-shadow: var(--e-shadow-2);
@@ -49,9 +47,6 @@ button.td-button {
 	color: <<colour wikilist-button-foreground>>;
 	font-family: var(--e-sans);
 	font-size: 0.82em;
-	transition: background-color var(--e-fast) var(--e-ease),
-	            color var(--e-fast) var(--e-ease),
-	            box-shadow var(--e-dur) var(--e-ease);
 }
 /* Toolbar buttons sit on the neutral button surface, so they need the theme
    ink too — the plugin default (wikilist-button-foreground) is the page

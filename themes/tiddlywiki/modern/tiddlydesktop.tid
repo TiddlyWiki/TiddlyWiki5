@@ -18,12 +18,17 @@ tags: [[$:/tags/Stylesheet]]
 	font-family: var(--m-font-display);
 }
 
+/* Modern's signature top-strip (html::before) pans its gradient forever. That's
+   fine site-wide, but in the WikiList window it's a constant repaint with nothing
+   else animating — freeze it here so hovering the list stays responsive. */
+html:has(.td-wikilist)::before {
+	animation: none;
+}
+
 /* Wiki-list items — rounded cards with layered palette-tinted shadows */
 .td-wikilist .td-wikilist-item {
 	border-radius: var(--m-radius);
 	box-shadow: var(--m-shadow-1);
-	transition: box-shadow var(--m-dur) var(--m-ease),
-	            border-left-color var(--m-dur) var(--m-ease);
 }
 .td-wikilist .td-wikilist-item:hover {
 	box-shadow: var(--m-shadow-2);
@@ -49,10 +54,6 @@ button.td-button {
 	font-family: var(--m-font-display);
 	font-size: 0.82em;
 	font-weight: 500;
-	transition: background-color var(--m-dur-fast) var(--m-ease),
-	            color var(--m-dur-fast) var(--m-ease),
-	            box-shadow var(--m-dur) var(--m-ease),
-	            transform var(--m-dur) var(--m-bounce);
 }
 /* Toolbar buttons sit on the neutral button surface, so they need the theme
    ink too — the plugin default (wikilist-button-foreground) is the page
@@ -134,8 +135,6 @@ button.td-button {
 	border-radius: var(--m-radius);
 	box-shadow: var(--m-shadow-1);
 	overflow: hidden;
-	transition: transform var(--m-dur) var(--m-bounce),
-	            box-shadow var(--m-dur) var(--m-ease);
 }
 .td-wikilist .td-wikilist-item:hover .td-wikilist-thumbnail button {
 	transform: scale(1.04);

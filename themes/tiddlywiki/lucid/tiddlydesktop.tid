@@ -24,8 +24,6 @@ tags: [[$:/tags/Stylesheet]]
 .td-wikilist .td-wikilist-item {
 	border-radius: var(--l-radius-sm);
 	box-shadow: 0 0 0 2px var(--l-border);
-	transition: box-shadow var(--l-dur) var(--l-ease),
-	            border-left-color var(--l-dur) var(--l-ease);
 }
 .td-wikilist .td-wikilist-item:hover {
 	/* Accent ring on hover — clearly signalled without relying on colour alone */
@@ -52,8 +50,6 @@ button.td-button {
 	font-weight: 600;
 	min-height: var(--l-target);
 	min-width: var(--l-target);
-	transition: background-color var(--l-dur) var(--l-ease),
-	            color var(--l-dur) var(--l-ease);
 }
 
 /* Toolbar buttons sit on the neutral button surface, so they need high-contrast
