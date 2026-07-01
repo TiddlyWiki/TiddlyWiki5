@@ -52,7 +52,33 @@ button.td-button {
 	font-weight: 600;
 	min-height: var(--l-target);
 	min-width: var(--l-target);
-	transition: background-color var(--l-dur) var(--l-ease);
+	transition: background-color var(--l-dur) var(--l-ease),
+	            color var(--l-dur) var(--l-ease);
+}
+
+/* Toolbar buttons sit on the neutral button surface, so they need high-contrast
+   ink too — the plugin default (wikilist-button-foreground) is the page
+   background colour, which renders invisibly here */
+.td-toolbar button.td-button {
+	color: var(--l-ink);
+	fill: var(--l-ink);
+}
+/* Utility (convert / advanced / plugins / reveal-backups) — the neutral button
+   surface needs high-contrast ink, not the white used on the coloured buttons,
+   so the labels stay legible in both light and dark palettes */
+.td-wikilist .td-wikilist-button-convert,
+.td-wikilist .td-wikilist-button-advanced,
+.td-wikilist .td-wikilist-button-plugins,
+.td-wikilist .td-wikilist-button-reveal-backups {
+	color: var(--l-ink);
+	fill: var(--l-ink);
+}
+.td-wikilist .td-wikilist-button-convert:hover,
+.td-wikilist .td-wikilist-button-advanced:hover,
+.td-wikilist .td-wikilist-button-plugins:hover,
+.td-wikilist .td-wikilist-button-reveal-backups:hover {
+	color: <<colour wikilist-button-foreground>>;
+	fill: <<colour wikilist-button-foreground>>;
 }
 
 /* Strong focus ring matching Lucid's site-wide focus pattern */

@@ -125,6 +125,19 @@ button.tc-btn-big-green {
 .tc-drop-down button.tc-btn-invisible:hover svg,
 .tc-block-dropdown button.tc-btn-invisible:hover svg,
 .tc-block-tags-dropdown .tc-btn-invisible:hover svg { fill: var(--l-bg); }
+/* Chooser items (theme / palette / layout / language switchers) render their
+   label as a .tc-tiddlylink. Vanilla base forces its hover/chosen colour to
+   <<colour foreground>> at a higher specificity than the inverted dropdown
+   hover above, so on our ink hover background it lands as ink-on-ink. Re-assert
+   the inverted text + icon; the doubled class outweighs vanilla's selector
+   regardless of stylesheet load order. The non-hovered .tc-chosen item keeps
+   the vanilla foreground colour (it sits on a light table-header background). */
+.tc-drop-down .tc-chooser-item .tc-tiddlylink.tc-tiddlylink:hover {
+	color: var(--l-bg);
+}
+.tc-drop-down .tc-chooser-item:hover .tc-tiddlylink svg {
+	fill: var(--l-bg);
+}
 .tc-drop-down .tc-tab-divider, .tc-drop-down hr { border: none; height: 2px; background: var(--l-border); }
 
 /* Modals — strong frame, dark backdrop */

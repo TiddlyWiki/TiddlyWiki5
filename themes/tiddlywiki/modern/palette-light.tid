@@ -37,8 +37,8 @@ footnote-target-background: #eef0fd
 foreground: #1b1d28
 highlight-background: #ffe066
 highlight-foreground: #1a1320
-menubar-background: <<colour primary>>
-menubar-foreground: #ffffff
+menubar-background: #e8eaf6
+menubar-foreground: <<colour foreground>>
 message-background: #eef0fd
 message-border: <<colour tiddler-border>>
 message-foreground: <<colour muted-foreground>>
@@ -135,6 +135,6 @@ wikilist-item: <<colour tiddler-background>>
 wikilist-item-border-hover: <<colour primary>>
 wikilist-title: <<colour foreground>>
 wikilist-title-svg: <<colour primary>>
-wikilist-toolbar-background: <<colour primary>>
-wikilist-toolbar-foreground: #ffffff
+wikilist-toolbar-background: <<colour menubar-background>>
+wikilist-toolbar-foreground: <<colour menubar-foreground>>
 wikilist-url: #6b6f82

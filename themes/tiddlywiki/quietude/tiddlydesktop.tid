@@ -43,14 +43,44 @@ tags: [[$:/tags/Stylesheet]]
 	font-family: var(--q-sans);
 }
 
-/* Buttons — gently rounded to match the theme radius */
+/* ── WikiList action buttons — styled by role ────────────────────────── */
+/* Gently rounded buttons that settle a soft, calm shadow on hover */
 button.td-button {
 	border-radius: var(--q-radius-sm);
 	color: <<colour wikilist-button-foreground>>;
 	font-family: var(--q-sans);
 	font-size: 0.82em;
 	font-weight: 500;
-	transition: background-color var(--q-dur) var(--q-ease);
+	transition: background-color var(--q-dur) var(--q-ease),
+	            color var(--q-dur) var(--q-ease),
+	            box-shadow var(--q-dur) var(--q-ease);
+}
+/* Toolbar buttons sit on the neutral button surface, so they need the theme
+   ink too — the plugin default (wikilist-button-foreground) is the page
+   background colour, which renders invisibly here */
+.td-toolbar button.td-button {
+	color: var(--q-ink);
+	fill: var(--q-ink);
+}
+.td-wikilist .td-button:hover {
+	box-shadow: 0 1px 3px color-mix(in srgb, <<colour foreground>> 12%, transparent),
+	            0 3px 12px color-mix(in srgb, <<colour foreground>> 8%, transparent);
+}
+/* Utility (convert / advanced / plugins / reveal-backups) — the neutral button
+   surface reads in the calm ink, switching to button-foreground when filled */
+.td-wikilist .td-wikilist-button-convert,
+.td-wikilist .td-wikilist-button-advanced,
+.td-wikilist .td-wikilist-button-plugins,
+.td-wikilist .td-wikilist-button-reveal-backups {
+	color: var(--q-ink);
+	fill: var(--q-ink);
+}
+.td-wikilist .td-wikilist-button-convert:hover,
+.td-wikilist .td-wikilist-button-advanced:hover,
+.td-wikilist .td-wikilist-button-plugins:hover,
+.td-wikilist .td-wikilist-button-reveal-backups:hover {
+	color: <<colour wikilist-button-foreground>>;
+	fill: <<colour wikilist-button-foreground>>;
 }
 
 /* Toolbar inputs */

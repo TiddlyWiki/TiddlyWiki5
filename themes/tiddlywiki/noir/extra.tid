@@ -106,22 +106,21 @@ canvas.tc-edit-bitmapeditor { border-radius: var(--n-radius-sm); }
 .tc-editor-codemirror6-simple.tc-editor-codemirror6-input .cm-editor,
 .tc-editor-codemirror6-simple.tc-editor-codemirror6-textarea .cm-editor {
 	border-radius: var(--n-radius-sm);
-	border: 1px solid <<colour tiddler-editor-border>>;
+	outline: 1px solid <<colour tiddler-editor-border>>;
 	box-sizing: border-box;
 	background: <<colour tiddler-editor-background>>;
 	overflow: hidden;
-	transition: border-color var(--n-dur) var(--n-ease);
+	transition: outline-color var(--n-dur) var(--n-ease);
 }
 .tc-editor-codemirror6 .cm-editor {
 	border-radius: var(--n-radius);
-	border: 1px solid <<colour tiddler-editor-border>>;
+	outline: 1px solid <<colour tiddler-editor-border>>;
 	box-sizing: border-box;
 	background: <<colour tiddler-editor-background>>;
-	transition: border-color var(--n-dur) var(--n-ease);
+	transition: outline-color var(--n-dur) var(--n-ease);
 }
 .tc-editor-codemirror6 .cm-editor:focus-within {
-	border-color: var(--n-accent);
-	outline: none;
+	outline-color: var(--n-accent);
 }
 .tc-editor-codemirror6-simple.tc-editor-codemirror6-input:focus-within,
 .tc-editor-codemirror6-simple.tc-editor-codemirror6-textarea:focus-within {

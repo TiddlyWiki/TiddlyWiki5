@@ -41,14 +41,67 @@ tags: [[$:/tags/Stylesheet]]
 	font-family: var(--m-font-display);
 }
 
-/* Buttons — pill-shaped to match Modern's playful affordances */
+/* ── WikiList action buttons — styled by role ────────────────────────── */
+/* Shared pill shape; rows lift their buttons with a soft shadow on hover */
 button.td-button {
 	border-radius: var(--m-radius-pill);
 	color: <<colour wikilist-button-foreground>>;
 	font-family: var(--m-font-display);
 	font-size: 0.82em;
 	font-weight: 500;
-	transition: background-color var(--m-dur-fast) var(--m-ease);
+	transition: background-color var(--m-dur-fast) var(--m-ease),
+	            color var(--m-dur-fast) var(--m-ease),
+	            box-shadow var(--m-dur) var(--m-ease),
+	            transform var(--m-dur) var(--m-bounce);
+}
+/* Toolbar buttons sit on the neutral button surface, so they need the theme
+   ink too — the plugin default (wikilist-button-foreground) is the page
+   background colour, which renders invisibly here */
+.td-toolbar button.td-button {
+	color: <<colour foreground>>;
+	fill: <<colour foreground>>;
+}
+.td-wikilist .td-button {
+	box-shadow: var(--m-shadow-1);
+}
+.td-wikilist .td-button:hover {
+	transform: translateY(-1px);
+	box-shadow: var(--m-shadow-2);
+}
+.td-wikilist .td-button:active {
+	transform: translateY(0);
+	box-shadow: var(--m-shadow-1);
+}
+/* Open — the primary, positive action: a green confirmation halo on hover */
+.td-wikilist .td-wikilist-button-open:hover {
+	box-shadow: var(--m-shadow-2),
+	            0 0 0 3px color-mix(in srgb, <<colour wikilist-button-open>> 30%, transparent);
+}
+/* Reveal — accent action: the theme's accent halo */
+.td-wikilist .td-wikilist-button-reveal:hover {
+	box-shadow: var(--m-shadow-2), 0 0 0 3px var(--m-accent-wash-strong);
+}
+/* Remove — destructive action: a red warning halo on hover */
+.td-wikilist .td-wikilist-button-remove:hover {
+	box-shadow: var(--m-shadow-2),
+	            0 0 0 3px color-mix(in srgb, <<colour wikilist-button-remove>> 30%, transparent);
+}
+/* Utility (convert / advanced / plugins / reveal-backups) — these sit on the
+   neutral button surface, where the white used on the coloured buttons is
+   unreadable; use the theme ink, switching to white as they fill on hover */
+.td-wikilist .td-wikilist-button-convert,
+.td-wikilist .td-wikilist-button-advanced,
+.td-wikilist .td-wikilist-button-plugins,
+.td-wikilist .td-wikilist-button-reveal-backups {
+	color: <<colour foreground>>;
+	fill: <<colour foreground>>;
+}
+.td-wikilist .td-wikilist-button-convert:hover,
+.td-wikilist .td-wikilist-button-advanced:hover,
+.td-wikilist .td-wikilist-button-plugins:hover,
+.td-wikilist .td-wikilist-button-reveal-backups:hover {
+	color: <<colour wikilist-button-foreground>>;
+	fill: <<colour wikilist-button-foreground>>;
 }
 
 /* Toolbar inputs */
