@@ -122,6 +122,13 @@ canvas.tc-edit-bitmapeditor { border-radius: var(--o-radius-sm); }
 .tc-editor-codemirror6 .cm-editor:focus-within {
 	outline-color: var(--o-iris-1);
 }
+/* The scroller fills the editor to the edge with square corners and would poke
+   past the rounded outline; round it to match. NB: don't use overflow:hidden on
+   .cm-editor — it clips CM6's autocomplete popup, which the plugin mounts inside
+   .cm-editor (tooltips({}) with no parent). */
+.tc-editor-codemirror6 .cm-scroller {
+	border-radius: inherit;
+}
 .tc-editor-codemirror6-simple.tc-editor-codemirror6-input:focus-within,
 .tc-editor-codemirror6-simple.tc-editor-codemirror6-textarea:focus-within {
 	border-radius: var(--o-radius-sm);
