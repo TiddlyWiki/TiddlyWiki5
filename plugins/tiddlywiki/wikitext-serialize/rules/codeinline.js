@@ -9,5 +9,8 @@ module-type: wikiruleserializer
 exports.name = "codeinline";
 
 exports.serialize = function(tree,serialize) {
-	return "`" + serialize(tree.children) + "`";
+	var text = serialize(tree.children),
+		// Backticks inside and empty text need double delimiters, eg: ``a`b``
+		delimiter = (text === "" || text.indexOf("`") !== -1) ? "``" : "`";
+	return delimiter + text + delimiter;
 };
