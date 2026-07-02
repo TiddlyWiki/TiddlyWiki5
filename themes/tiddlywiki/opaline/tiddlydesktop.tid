@@ -178,3 +178,84 @@ button.td-button {
 .td-wikilist .td-wiki-advanced-heading {
 	font-family: var(--o-display);
 }
+
+/* ══ TiddlyDesktop Android — top bar, slide-in sidebar & backdrop ═══════════
+   The Android WikiList swaps the desktop toolbar for a sticky .td-topbar (logo
+   menu-button + title) and a slide-in .td-sidebar of toolbar actions over a
+   blurred .td-backdrop. android-styles.tid lays these out palette-agnostically
+   (neutral grey chips); here we dress them in Opaline's opal-glass aesthetic.
+   This stylesheet's title sorts after android-styles, so equal-specificity
+   rules win — and the chip fills there are !important, so ours must be too. */
+
+/* Top bar — the menubar surface, lifted on a soft accent-tinted shadow */
+.td-topbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: var(--o-shadow-1);
+	font-family: var(--o-body);
+}
+.td-topbar-title {
+	font-family: var(--o-display);
+	font-weight: 600;
+}
+
+/* Form controls don't inherit font-family, so the nav buttons, the theme/palette
+   pickers and the create-wiki dropdown would fall back to the UA font. Carry the
+   theme font onto the top bar and sidebar and let every control inherit it. */
+.td-topbar,
+.td-sidebar {
+	font-family: var(--o-body);
+}
+.td-topbar button, .td-topbar input, .td-topbar select,
+.td-sidebar button, .td-sidebar input, .td-sidebar select, .td-sidebar textarea {
+	font-family: inherit;
+}
+
+/* Sidebar — a milky opal panel with a pebble-rounded outer edge */
+.td-sidebar {
+	background: var(--o-paper);
+	box-shadow: var(--o-shadow-2);
+	border-right: 1px solid var(--o-rule-strong);
+	border-radius: 0 var(--o-radius) var(--o-radius) 0;
+	font-family: var(--o-body);
+}
+.td-sidebar-head {
+	border-bottom: 1px solid var(--o-rule-strong);
+}
+
+/* Sidebar action chips — milky opal pebbles, opal ink; the neutral grey fill
+   from android-styles is !important, so match that here */
+.td-sidebar-item > .td-button,
+.td-sidebar-item > button,
+.td-sidebar-item > .td-language-switcher,
+.td-sidebar-item > span {
+	background: var(--o-paper) !important;
+	color: var(--o-ink) !important;
+	fill: var(--o-ink) !important;
+	border: 1px solid var(--o-rule-strong);
+	border-radius: var(--o-radius);
+	box-shadow: var(--o-shadow-1);
+	font-family: var(--o-body);
+}
+.td-sidebar-item > .td-button:hover,
+.td-sidebar-item > button:hover {
+	box-shadow: var(--o-shadow-2), 0 0 0 3px var(--o-wash-strong);
+}
+.td-sidebar-item > .td-picker {
+	background: var(--o-paper);
+	border: 1px solid var(--o-rule-strong);
+	border-radius: var(--o-radius);
+}
+.td-sidebar-item select,
+.td-sidebar-item input {
+	font-family: var(--o-body);
+	border-radius: var(--o-radius-sm);
+	border: 1px solid var(--o-rule-strong);
+	background: var(--o-paper);
+	color: var(--o-ink);
+}
+
+/* Backdrop — an opal iris wash behind the blur */
+.td-backdrop {
+	background: color-mix(in srgb, var(--o-iris-1) 22%, transparent);
+}

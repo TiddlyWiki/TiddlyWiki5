@@ -57,16 +57,30 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 /*
-** The chrome recedes: the per-tiddler toolbar fades to a whisper and returns
-** on hover or keyboard focus. Discoverable, never intrusive. (Opacity only —
-** GPU-friendly and leaves layout/popups untouched.)
+** The chrome recedes: the per-tiddler toolbar fades to a whisper and returns on
+** hover or keyboard focus. Discoverable, never intrusive. Two touch-safety
+** measures matter here:
+**  - Dim only the buttons, NEVER the .tc-tiddler-controls container. Opacity on
+**    the container is a *group* effect that also fades the more-actions dropdown
+**    (a .tc-reveal popup that lives, as a sibling of the buttons, inside the
+**    controls) and cannot be undone by any descendant rule — which left the menu
+**    invisible and unclickable on touch. Scoping to `> button` leaves the popup
+**    (and its menu items) at full opacity on every device.
+**  - Gate the whole flourish to a hovering, fine pointer. On touch there is no
+**    hover, so the toolbar stays fully visible and discoverable; there is
+**    nothing to reveal, and tapping the ⋯ button need not win a :focus-within
+**    race. Defaulting to visible means it stays usable even if a device
+**    misreports its pointer capabilities.
+** (Opacity only — GPU-friendly and leaves layout/popups untouched.)
 */
-.tc-tiddler-controls {
-	opacity: 0.12;
+.tc-tiddler-controls > button {
 	transition: opacity var(--q-slow) var(--q-ease);
 }
-.tc-tiddler-frame:hover .tc-tiddler-controls,
-.tc-tiddler-controls:focus-within { opacity: 1; }
+@media (hover: hover) and (pointer: fine) and (min-width: 960px) {
+	.tc-tiddler-controls > button { opacity: 0.12; }
+	.tc-tiddler-frame:hover .tc-tiddler-controls > button,
+	.tc-tiddler-controls:focus-within > button { opacity: 1; }
+}
 
 /* Reading column — large, airy, bounded measure, centred under the title */
 .tc-tiddler-body {

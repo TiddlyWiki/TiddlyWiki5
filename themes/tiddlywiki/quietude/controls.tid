@@ -181,9 +181,25 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 ** Sidebar — recessive. The reading column is the star, so the sidebar is muted
 ** and only comes fully forward on hover.
 */
-.tc-sidebar-scrollable { opacity: 0.7; transition: opacity var(--q-slow) var(--q-ease); }
-.tc-sidebar-scrollable:hover,
-.tc-sidebar-scrollable:focus-within { opacity: 1; }
+/* Default to full opacity; only recede on the WIDE, fixed-sidebar layout with a
+   hovering pointer. Two reasons for the min-width gate:
+   - On touch there's no hover, so a permanently muted sidebar would be wrong.
+   - opacity<1 makes .tc-sidebar-scrollable a STACKING CONTEXT. It is not a
+     containing block (only transform/filter are), so its dropdown popups are
+     still positioned over the story river, but they get painted trapped at the
+     sidebar's z-level — their z-index:1000 can't escape — so on the narrow
+     layout where the sidebar overlays the river, a story tiddler's title paints
+     OVER the palette dropdown. Restricting the dim to the wide layout (where the
+     sidebar sits beside the river and nothing overlaps) avoids the trap.
+   Width is used because this environment's Android WebView misreports
+   pointer/hover (it matches hover:hover) but reports width correctly; 960px is
+   vanilla's default sidebar breakpoint. */
+.tc-sidebar-scrollable { transition: opacity var(--q-slow) var(--q-ease); }
+@media (hover: hover) and (pointer: fine) and (min-width: 960px) {
+	.tc-sidebar-scrollable { opacity: 0.7; }
+	.tc-sidebar-scrollable:hover,
+	.tc-sidebar-scrollable:focus-within { opacity: 1; }
+}
 
 .tc-site-title {
 	font-weight: 650;

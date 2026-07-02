@@ -129,3 +129,90 @@ button.td-button:focus-visible,
 .td-wikilist .td-wiki-advanced-heading {
 	font-family: var(--l-sans);
 }
+
+/* ══ TiddlyDesktop Android — top bar, slide-in sidebar & backdrop ═══════════
+   The Android WikiList swaps the desktop toolbar for a sticky .td-topbar (logo
+   menu-button + title) and a slide-in .td-sidebar of toolbar actions over a
+   blurred .td-backdrop. android-styles.tid lays these out palette-agnostically
+   (neutral grey chips); here we dress them in Lucid's high-contrast, structural
+   aesthetic — strong visible borders, no decorative shadows, large hit targets.
+   This stylesheet's title sorts after android-styles, so equal-specificity
+   rules win — and the chip fills there are !important, so ours must be too. */
+
+/* Top bar — strong structural border instead of a shadow */
+.td-topbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: none;
+	border-bottom: 3px solid <<colour wikilist-toolbar-foreground>>;
+	font-family: var(--l-sans);
+}
+.td-topbar-title {
+	font-family: var(--l-sans);
+	font-weight: 700;
+}
+
+/* Form controls don't inherit font-family, so the nav buttons, the theme/palette
+   pickers and the create-wiki dropdown would fall back to the UA font. Carry the
+   theme font onto the top bar and sidebar and let every control inherit it. */
+.td-topbar,
+.td-sidebar {
+	font-family: var(--l-sans);
+}
+.td-topbar button, .td-topbar input, .td-topbar select,
+.td-sidebar button, .td-sidebar input, .td-sidebar select, .td-sidebar textarea {
+	font-family: inherit;
+}
+
+/* Sidebar — a strong structural border replaces the drop shadow */
+.td-sidebar {
+	background: var(--l-bg);
+	color: var(--l-ink);
+	box-shadow: none;
+	border-right: 3px solid var(--l-ink);
+	font-family: var(--l-sans);
+}
+.td-sidebar-head {
+	border-bottom: 3px solid var(--l-ink);
+}
+
+/* Sidebar action chips — high-contrast surfaces with a thick visible ring and a
+   comfortable hit target; the neutral grey fill from android-styles is
+   !important, so match that here. Accent ring on hover signals state without
+   relying on colour alone (the border thickness already carries the affordance). */
+.td-sidebar-item > .td-button,
+.td-sidebar-item > button,
+.td-sidebar-item > .td-language-switcher,
+.td-sidebar-item > span {
+	background: var(--l-bg) !important;
+	color: var(--l-ink) !important;
+	fill: var(--l-ink) !important;
+	border: 2px solid var(--l-border-strong);
+	border-radius: var(--l-radius-sm);
+	font-family: var(--l-sans);
+	font-weight: 600;
+	min-height: var(--l-target);
+}
+.td-sidebar-item > .td-button:hover,
+.td-sidebar-item > button:hover {
+	border-color: var(--l-accent);
+}
+.td-sidebar-item > .td-picker {
+	background: var(--l-bg);
+	border: 2px solid var(--l-border-strong);
+	border-radius: var(--l-radius-sm);
+}
+.td-sidebar-item select,
+.td-sidebar-item input {
+	font-family: var(--l-sans);
+	border-radius: var(--l-radius-sm);
+	border: 2px solid <<colour foreground>>;
+	background: var(--l-bg);
+	color: var(--l-ink);
+	min-height: var(--l-target);
+}
+
+/* Backdrop — a strong scrim behind the blur for a clear layer separation */
+.td-backdrop {
+	background: color-mix(in srgb, var(--l-ink) 45%, transparent);
+}
