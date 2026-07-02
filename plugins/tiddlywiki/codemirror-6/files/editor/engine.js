@@ -1145,6 +1145,29 @@ class CodeMirrorEngine {
 			extensions.push(lineWrapping);
 		}
 
+		// Core: Keep the selection above the on-screen (mobile) keyboard.
+		// When the soft keyboard is open the visual viewport shrinks, but CodeMirror
+		// scrolls the selection into the layout viewport - which places it behind the
+		// keyboard. Report the amount of the editor that the keyboard occludes as a
+		// bottom scroll margin so scrollIntoView keeps the selection visible above it.
+		if(EditorView.scrollMargins) {
+			extensions.push(EditorView.scrollMargins.of(function(view) {
+				var doc = self.widget && self.widget.document ? self.widget.document : document;
+				var win = doc.defaultView || window;
+				var vv = win.visualViewport;
+				if(!vv) return null;
+				var layoutHeight = win.innerHeight || (doc.documentElement && doc.documentElement.clientHeight) || 0;
+				// Height of the layout viewport hidden at the bottom (soft keyboard, etc.)
+				var keyboard = layoutHeight - (vv.offsetTop + vv.height);
+				if(keyboard < 100) return null; // No keyboard (allow for browser chrome jitter)
+				// How much of the editor's scroller the keyboard actually covers
+				var rect = view.scrollDOM.getBoundingClientRect();
+				var overlap = rect.bottom - (vv.offsetTop + vv.height);
+				var bottom = Math.max(0, Math.min(overlap, keyboard));
+				return bottom > 0 ? {bottom: bottom} : null;
+			}));
+		}
+
 		// Core: Drop cursor - shows an insertion cursor at the drop position while
 		// dragging text/content into the editor.
 		var dropCursor = core.view.dropCursor;
