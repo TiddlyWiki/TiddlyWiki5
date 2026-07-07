@@ -40,7 +40,7 @@ describe("Resilient render boundary", function() {
 		classes["throwtest"] = ThrowWidget;
 		try {
 			fn();
-		} finally {
+		} finally{
 			if(!had) { delete classes["throwtest"]; }
 		}
 	}
@@ -97,7 +97,7 @@ describe("Resilient render boundary", function() {
 		classes["refreshthrow"] = RefreshThrowWidget;
 		try {
 			fn();
-		} finally {
+		} finally{
 			if(!had) { delete classes["refreshthrow"]; }
 		}
 	}

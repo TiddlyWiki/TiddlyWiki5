@@ -699,14 +699,11 @@ Widget.prototype.renderChildren = function(parent,nextSibling) {
 };
 
 /*
-Resilient render boundary (OPT-IN via $:/config/ResilientRender, default off): contain a child widget
-that threw during render/refresh so it degrades to a graded $error span instead of crashing the whole
-tree. Off by default so server/CI/static render keeps failing loudly and throw-based bug surfacing is
-preserved; an interactive edition sets the flag. The flag is read only here (the error path), so there
-is no cost on the normal path. Re-throws TranscludeRecursionError (transclude.js's recursion handler
-must still climb the tree) and re-throws when the flag is off. On degrade the failing child is
-destroyed (clearing any partial DOM and listeners) and replaced in this.children by the error widget,
-so destroy, refresh and sibling DOM positioning stay consistent.
+Resilient render boundary (opt-in via $:/config/ResilientRender, default off): after render/refresh
+throws, the error path rethrows TranscludeRecursionError and non-enabled cases, otherwise swaps in a
+graded $error span. The fail-loud default preserves server/CI/static rendering and bug surfacing; on
+containment, destroying the failed child clears partial DOM/listeners and keeps this.children,
+refresh, and sibling DOM positioning consistent.
 	index: position of the failing child in this.children
 	error: the thrown error
 	phase: "render" or "refresh" (for the message)

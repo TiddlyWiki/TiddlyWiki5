@@ -5,6 +5,8 @@ caption: Resilient Render
 
 <<.from-version "5.4.x">> `$:/config/ResilientRender`
 
+<$checkbox tiddler="$:/config/ResilientRender" field="text" checked="yes" unchecked="no" default="no"> Enable resilient rendering (`$:/config/ResilientRender`)</$checkbox>
+
 By default, a widget that throws an exception while rendering or refreshing aborts the whole render tree — a single faulty widget can blank an entire tiddler or, in an interactive interface, the page. When this setting is `yes`, such a throw is //contained//: the failing widget degrades to a `<span class="tc-error">` message and its sibling widgets keep rendering.
 
 |!Value |!Behaviour |
