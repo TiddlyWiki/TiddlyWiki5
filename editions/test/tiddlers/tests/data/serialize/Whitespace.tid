@@ -1,0 +1,8 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Whitespace
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\whitespace notrim
+
+Some text.

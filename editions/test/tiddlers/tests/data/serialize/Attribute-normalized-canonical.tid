@@ -8,6 +8,6 @@ mode: canonical
 
 <$reveal state="$:/temp/test" text=''/>
 +
-title: ExpectedOutput
+title: ExpectedWikitext
 
 <$reveal state="$:/temp/test" text=""/>

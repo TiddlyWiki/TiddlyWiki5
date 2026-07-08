@@ -1,0 +1,17 @@
+title: Serialize/Whitespace-normalized
+description: Canonical mode normalizes token spacing
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: Input
+mode: canonical
+
+\whitespace  trim
+
+Some text.
++
+title: ExpectedWikitext
+
+\whitespace trim
+
+Some text.

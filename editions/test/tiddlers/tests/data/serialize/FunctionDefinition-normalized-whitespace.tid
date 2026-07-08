@@ -1,0 +1,39 @@
+title: Serialize/FunctionDefinition-normalized-whitespace
+description: A whitespace pragma inside a procedure body survives canonical serialization, with and without trailing blank lines
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: Input
+mode: canonical
+
+\procedure compact()
+\whitespace trim
+nothing
+\end
+
+\procedure trailing()
+\whitespace trim
+
+nothing
+
+
+\end
+
+<<compact>>
++
+title: ExpectedWikitext
+
+\procedure compact()
+\whitespace trim
+nothing
+\end
+
+\procedure trailing()
+\whitespace trim
+
+nothing
+
+
+\end
+
+<<compact>>

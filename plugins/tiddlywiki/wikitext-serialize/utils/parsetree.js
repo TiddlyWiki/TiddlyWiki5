@@ -142,6 +142,31 @@ function quoteValue(style,value) {
 }
 
 /*
+Return the exact source text of a node, or null for synthesized or mutated
+nodes.
+options.source: the wikitext the tree was parsed from.
+options.fragments: strings that must all appear in the slice, so a tree
+transform that edited the node (e.g. renamed a macro) falls back to canonical
+serialization instead of replaying stale source text.
+*/
+exports.serializeFromSource = function(node,options) {
+	options = options || {};
+	var source = options.source;
+	if(!source || typeof node.start !== "number" || typeof node.end !== "number" || node.end <= node.start) {
+		return null;
+	}
+	var slice = source.substring(node.start,node.end),
+		trusted = true;
+	$tw.utils.each(options.fragments || [],function(fragment) {
+		if(slice.indexOf(fragment) === -1) {
+			trusted = false;
+			return false;
+		}
+	});
+	return trusted ? slice : null;
+};
+
+/*
 Serialize a parsed attribute node.
 options.source: original wikitext used to preserve the original quoting style.
 */

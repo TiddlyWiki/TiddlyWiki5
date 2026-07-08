@@ -7,6 +7,6 @@ title: Input
 
 <div p = blah>some text</div>
 +
-title: ExpectedOutput
+title: ExpectedWikitext
 
 <div p=blah>some text</div>

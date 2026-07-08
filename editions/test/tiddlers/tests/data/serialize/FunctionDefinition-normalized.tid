@@ -1,4 +1,4 @@
-title: Serialize/MacroDef-normalized
+title: Serialize/FunctionDefinition-normalized
 description: Canonical mode drops trailing spaces after the end marker
 tags: $:/tags/wikitext-serialize-normalize-spec
 type: text/vnd.tiddlywiki-multiple
@@ -6,16 +6,16 @@ type: text/vnd.tiddlywiki-multiple
 title: Input
 mode: canonical
 
-\define myMacro()
+\procedure myProc()
 nothing
 \end   
 
-<<myMacro>>
+<<myProc>>
 +
 title: ExpectedWikitext
 
-\define myMacro()
+\procedure myProc()
 nothing
 \end
 
-<<myMacro>>
+<<myProc>>

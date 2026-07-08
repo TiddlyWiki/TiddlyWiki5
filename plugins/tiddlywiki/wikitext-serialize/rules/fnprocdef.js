@@ -8,17 +8,20 @@ module-type: wikiruleserializer
 
 exports.name = "fnprocdef";
 
-exports.serialize = function(tree,serialize) {
-	// Type of definition: "function", "procedure", or "widget"
+exports.serialize = function(tree,serialize,options) {
+	options = options || {};
 	var type = tree.isFunctionDefinition ? "function" : (tree.isProcedureDefinition ? "procedure" : "widget");
-	// Name of the function, procedure, or widget
 	var name = tree.attributes.name.value;
-	// Parameters with default values
+	var definition = tree.attributes.value.value;
+	// The source slice preserves named \end markers, default quoting and the
+	// single line form, none of which are recorded in the parse tree
+	var slice = $tw.utils.serializeFromSource(tree,{source: options.source, fragments: [name,definition]});
+	if(slice !== null) {
+		return slice + "\n\n" + serialize(tree.children) + "\n";
+	}
 	var params = tree.params.map(function(param) {
 		return param.name + (param.default ? ':"' + param.default + '"' : "");
 	}).join(", ");
-	// Definition text
-	var definition = tree.attributes.value.value;
-	// Construct the serialized string, concat the children because pragma rule wrap everything below it as children
+	// Concat the children because pragma rules wrap everything below them as children
 	return "\\" + type + " " + name + "(" + params + ")\n" + definition + "\n\\end\n\n" + serialize(tree.children) + "\n";
 };

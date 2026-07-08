@@ -8,12 +8,19 @@ module-type: wikiruleserializer
 
 exports.name = "macrodef";
 
-exports.serialize = function(tree,serialize) {
+exports.serialize = function(tree,serialize,options) {
+	options = options || {};
 	var name = tree.attributes.name.value;
+	var definition = tree.attributes.value.value;
+	// The source slice preserves named \end markers, default quoting and
+	// single line form; parameter nodes carry no positions of their own
+	var slice = $tw.utils.serializeFromSource(tree,{source: options.source, fragments: [name,definition]});
+	if(slice !== null) {
+		return slice + "\n\n" + serialize(tree.children);
+	}
 	var params = tree.params.map(function(param) {
 		return param.name + (param.default ? ":" + param.default : "");
 	}).join(",");
-	var definition = tree.attributes.value.value;
 	if(tree.isBlock) {
 		return "\\define " + name + "(" + params + ") " + definition + "\n\n" + serialize(tree.children);
 	}

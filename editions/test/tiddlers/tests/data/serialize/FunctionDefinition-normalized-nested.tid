@@ -1,0 +1,36 @@
+title: Serialize/FunctionDefinition-normalized-nested
+description: Canonical mode preserves indented nested definitions verbatim, normalizes the pragma gap and drops the named end marker
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: Input
+mode: canonical
+
+\whitespace trim
+\procedure alpha(x)
+    \procedure beta(y)
+    <$text text=<<y>>/>
+    \end beta
+    \procedure beta(y)
+        <$text text=<<y>>/>
+    \end beta
+<$transclude $variable="beta" y={{{ [<x>addprefix<x>] }}}/>
+\end alpha
+
+<<alpha "Elephant">>
++
+title: ExpectedWikitext
+
+\whitespace trim
+
+\procedure alpha(x)
+    \procedure beta(y)
+    <$text text=<<y>>/>
+    \end beta
+    \procedure beta(y)
+        <$text text=<<y>>/>
+    \end beta
+<$transclude $variable="beta" y={{{ [<x>addprefix<x>] }}}/>
+\end
+
+<<alpha "Elephant">>

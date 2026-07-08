@@ -10,7 +10,7 @@ title: Input
 <<john>>
 after
 +
-title: ExpectedOutput
+title: ExpectedWikitext
 
 <<john one:val1 two:'val "2"'>>
 
