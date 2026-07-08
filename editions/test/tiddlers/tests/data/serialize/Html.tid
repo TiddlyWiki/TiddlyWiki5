@@ -13,13 +13,3 @@ This is a widget invocation
 <$list filter="[tag[ExampleTag]sort[title]]"/>
 
 Plain text in next paragraph.
-
-<div>
-
-!! This heading is parsed in block mode
-
-</div>
-
-<div>
-!! This heading is parsed in inline mode
-</div>

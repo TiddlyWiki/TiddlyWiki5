@@ -1,0 +1,10 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/CommentBlock-docs
+type: text/vnd.tiddlywiki
+
+<!-- NEW: Comment that describes the macro -->
+\define test()
+some text <!-- inline comment -->
+\end
+
+<<test>>

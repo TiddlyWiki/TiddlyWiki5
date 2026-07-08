@@ -1,0 +1,23 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Table-docs
+type: text/vnd.tiddlywiki
+
+|Left aligned content |
+| Right aligned content|
+| Centred content |
+
+|^top left |^ top center |^ top right|
+|middle left | middle center | middle right|
+|,bottom left |, bottom center |, bottom right|
+
+|Cell1 |Cell2 |Cell3 |Cell4 |
+|Cell5 |Cell6 |Cell7 |<|
+|Cell5 |~|Cell7 |Cell8 |
+|>|Cell9 |Cell10 |Cell11 |
+
+|myclass anotherClass|k
+|This is a caption |c
+|Cell1 |Cell2 |
+|Cell3 |Cell3 |
+|Header|Header|h
+|Footer|Footer|f

@@ -1,0 +1,13 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Conditional-docs
+type: text/vnd.tiddlywiki
+
+<%if [<animal>match[Elephant]] %>
+  It is an elephant
+<%else%>
+  <%if [<animal>match[Giraffe]] %>
+    It is a giraffe
+  <%else%>
+    It is completely unknown
+  <%endif%>
+<%endif%>

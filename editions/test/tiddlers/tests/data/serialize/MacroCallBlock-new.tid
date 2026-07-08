@@ -1,0 +1,20 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/MacroCallBlock-new
+type: text/vnd.tiddlywiki
+
+<<john one:val1 two:'val "2"' three:"val '3'" four:"""val 4"5'""" five:[[val 5]]>>
+
+<<john pa>am>>
+
+<<john param> >>
+
+<<john var>=4>>
+
+<< carrots
+
+<<john>>
+
+<<multiline arg:"""
+
+wikitext
+""">>

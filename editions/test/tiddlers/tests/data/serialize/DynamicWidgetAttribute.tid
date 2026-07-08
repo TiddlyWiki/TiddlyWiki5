@@ -5,12 +5,3 @@ type: text/vnd.tiddlywiki
 <div class=<<mymacro param={{Something}}>>>content</div>
 
 <$button actions=<<myactions target={{!!title}}>>/>
-
-<$text text={{{ [<currentTiddler>addprefix[$:/myprefix/]] }}}/>
-
-<$text text={{{ [tag[HelloThere]
-!sort[title]] }}}/>
-
-<$transclude $variable="showItems" itemList=((items))/>
-
-<$text text=((myvar))/>

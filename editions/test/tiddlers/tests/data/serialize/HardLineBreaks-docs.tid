@@ -1,0 +1,8 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/HardLineBreaks-docs
+type: text/vnd.tiddlywiki
+
+"""
+A line with "double quotes" inside
+and ''bold'' with //italic// on another line
+"""

@@ -1,0 +1,7 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Attribute-new
+type: text/vnd.tiddlywiki
+
+<div attribute>some text</div>
+
+<div title="">Hello</div>

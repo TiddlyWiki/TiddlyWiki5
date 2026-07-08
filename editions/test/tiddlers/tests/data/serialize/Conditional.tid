@@ -19,13 +19,3 @@ Plain text in next paragraph.
 <%if [{$:/info/url/protocol}match[file:]]%>
   Hidden.
 <%endif%>
-
-<%if [<animal>match[Elephant]] %>
-  It is an elephant
-<%else%>
-  <%if [<animal>match[Giraffe]] %>
-    It is a giraffe
-  <%else%>
-    It is completely unknown
-  <%endif%>
-<%endif%>

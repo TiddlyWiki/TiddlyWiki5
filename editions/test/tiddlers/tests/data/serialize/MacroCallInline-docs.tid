@@ -1,0 +1,5 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/MacroCallInline-docs
+type: text/vnd.tiddlywiki
+
+An inline call <<film-quote """I quote "twice" inline""">> in a sentence.

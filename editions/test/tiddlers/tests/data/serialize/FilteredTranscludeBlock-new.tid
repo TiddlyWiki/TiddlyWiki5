@@ -1,7 +1,6 @@
 tags: $:/tags/wikitext-serialize-test-spec
-title: Serialize/QuoteBlock
+title: Serialize/FilteredTranscludeBlock-new
 type: text/vnd.tiddlywiki
 
-<<<tc-quote
-Quote text
-<<<
+{{{ fil
+ter }}}

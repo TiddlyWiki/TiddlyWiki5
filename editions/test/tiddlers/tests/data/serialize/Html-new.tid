@@ -1,0 +1,15 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Html-new
+type: text/vnd.tiddlywiki
+
+<div></div>
+
+<div/>
+
+</br>
+
+<div><span><span>
+
+Some text</span></span></div>
+
+<div>

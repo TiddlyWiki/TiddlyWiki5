@@ -1,0 +1,13 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Html-docs
+type: text/vnd.tiddlywiki
+
+<div>
+
+!! This heading is parsed in block mode
+
+</div>
+
+<div>
+!! This heading is parsed in inline mode
+</div>

@@ -1,0 +1,6 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Image-docs
+type: text/vnd.tiddlywiki
+
+[img width=32 class="tc-image" [Motovun Jack.jpg]]
+[img width={{!!mywidth}} class=<<image-classes>> [Motovun Jack.jpg]]

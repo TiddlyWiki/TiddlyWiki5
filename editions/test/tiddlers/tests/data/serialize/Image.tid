@@ -8,5 +8,3 @@ type: text/vnd.tiddlywiki
 [img[Description of image|https://tiddlywiki.com/fractalveg.jpg]]
 [img[TiddlerTitle]]
 [img[Description of image|TiddlerTitle]]
-[img width=32 class="tc-image" [Motovun Jack.jpg]]
-[img width={{!!mywidth}} class=<<image-classes>> [Motovun Jack.jpg]]

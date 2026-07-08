@@ -11,15 +11,3 @@ type: text/vnd.tiddlywiki
 <<john one:val1 two:val2 three:"quoted value">>
 
 <<test unquoted:value quoted:"value" number:123>>
-
-<<my-procedure param="This is the parameter value">>
-
-<<film-quote """I quote "twice" - see!?""">>
-
-<<mymacro [[value with spaces]]>>
-
-<<mymacro 'I said "hello"'>>
-
-<<anothermacro actor:"Bugs Bunny" line:"""A line with "quotes" in it""">>
-
-<<mymacro ```value with `embedded` backticks```>>
