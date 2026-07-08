@@ -22,7 +22,10 @@ var itemTags = Object.values(listTypes).map(function(type) {
 	return type.itemTag;
 });
 
-exports.serialize = function (tree,serialize) {
+exports.serialize = function (tree,serialize,options) {
+	options = options || {};
+	var rows = [];
+
 	// Helper function to find the marker for a given list container tag and item tag
 	function findMarker(listTag, itemTag) {
 		for(var key in listTypes) {
@@ -33,44 +36,72 @@ exports.serialize = function (tree,serialize) {
 		return ""; // Return empty string if no matching marker is found
 	}
 
-	// Recursive function to serialize list nodes, handling nested lists and formatting output
-	function serializeList(node, markerPrefix) {
-		var result = [];
+	// Recursive function collecting one row per list item line, with the item
+	// positions so the joiners can be recovered from the source
+	function collectRows(node, markerPrefix) {
 		if(node.type === "element" && isListNode(node)) {
 			node.children.forEach(function (child) {
 				if(itemTags.includes(child.tag)) {
-					var currentMarker = findMarker(node.tag, child.tag);
-					// Handle class attributes
-					var classAttr = child.attributes && child.attributes.class ? "." + child.attributes.class.value : "";
-					/** 
+					// The parser records the full row marker; reconstruct it
+					// from the tag nesting only for synthesized trees
+					var rowMarker = child.rowMarker || markerPrefix + findMarker(node.tag, child.tag);
+					// Each class needs its own dot, eg *.first.second
+					var classAttr = child.attributes && child.attributes.class ? "." + child.attributes.class.value.split(" ").join(".") : "";
+					/**
 					 * same level text nodes may be split into multiple children, and separated by deeper list sub-tree.
 					 * We collect same level text nodes into this list, and concat then submit them before enter deeper list.
 					 */
-					var content = [];
+					var content = [],
+						isFirstRow = true;
+					var pushRow = function() {
+						rows.push({
+							text: rowMarker + classAttr + " " + content.join("").trim(),
+							start: child.start,
+							end: child.end,
+							blankLineBefore: isFirstRow && !!child.blankLineBefore
+						});
+						content = [];
+						isFirstRow = false;
+					};
 					$tw.utils.each(child.children,function (subNode) {
 						if(isListNode(subNode)) {
 							// Recursive call for nested lists
 							if(content.length > 0) {
-								result.push(markerPrefix + currentMarker + classAttr + " " + content.join("").trim());
-								content = [];
+								pushRow();
 							}
-							result.push(serializeList(subNode, markerPrefix + currentMarker).trim());
+							collectRows(subNode, rowMarker);
 						} else {
-							content.push(serialize(subNode)) ;
+							content.push(serialize(subNode));
 						}
-						return ""; // Default return for unhandled node types
 					});
-					// prepend `#` mark to a new line, if it has content (and has or hasn't nested list), or if it has no content and also no nested list
+					// prepend the mark to a new line, if it has content (and has or hasn't nested list), or if it has no content and also no nested list
 					if(content.length > 0 || child.children.length === 0) {
-						result.push(markerPrefix + currentMarker + classAttr + " " + content.join("").trim());
-						content = [];
+						pushRow();
 					}
 				}
 			});
 		}
-		return result.join("\n");
 	}
 
-	// Begin serialization from the root node, with an empty string as the initial marker prefix
-	return serializeList(tree, "") + "\n\n";
+	collectRows(tree, "");
+	// The parser merges lists across blank lines into a single node; the
+	// blankLineBefore flag reproduces the separator, the source gap refines
+	// it to the exact bytes
+	var source = options.source,
+		result = "";
+	$tw.utils.each(rows,function(row,index) {
+		if(index > 0) {
+			var joiner = row.blankLineBefore ? "\n\n" : "\n",
+				prev = rows[index - 1];
+			if(source && typeof prev.end === "number" && typeof row.start === "number" && row.start >= prev.end) {
+				var gap = source.substring(prev.end,row.start);
+				if(gap.indexOf("\n") !== -1 && /^\s+$/.test(gap)) {
+					joiner = gap;
+				}
+			}
+			result += joiner;
+		}
+		result += row.text;
+	});
+	return result + "\n\n";
 };

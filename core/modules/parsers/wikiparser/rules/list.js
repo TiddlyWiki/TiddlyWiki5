@@ -67,6 +67,7 @@ Parse the most recent match
 exports.parse = function() {
 	// Array of parse tree nodes for the previous row of the list
 	var listStack = [];
+	var blankLineBefore = false;
 	// Cycle through the items in the list
 	while(true) {
 		// Match the list marker
@@ -133,6 +134,12 @@ exports.parse = function() {
 		var lastListChildren = listStack[listStack.length-1].children,
 			lastListItem = lastListChildren[lastListChildren.length-1],
 			classes = this.parser.parseClasses();
+		// Record what only this row knows: its marker string and whether a
+		// blank line separated it from the previous row
+		lastListItem.rowMarker = match[0];
+		if(blankLineBefore) {
+			lastListItem.blankLineBefore = true;
+		}
 		var classEnd = this.parser.pos;
 		this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 		var tree = this.parser.parseInlineRun(/(\r?\n)/mg);
@@ -145,7 +152,9 @@ exports.parse = function() {
 			lastListItem.attributes.class.end = classEnd;
 		}
 		// Consume any whitespace following the list item
+		var trailingStart = this.parser.pos;
 		this.parser.skipWhitespace();
+		blankLineBefore = /\r?\n[^\S\n\r]*\r?\n/.test(this.parser.source.substring(trailingStart,this.parser.pos));
 	}
 	// Return the root element of the list
 	return [listStack[0]];
