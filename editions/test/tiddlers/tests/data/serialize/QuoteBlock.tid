@@ -5,3 +5,19 @@ type: text/vnd.tiddlywiki
 <<<tc-quote
 Quote text
 <<<
+
+<<<
+Computers are like a bicycle for our minds
+<<< Steve Jobs
+
+<<<.myClass.another-class
+Operating systems are like a brick wall for our minds
+<<< Nobody
+
+<<< Mixing Block Quotes with Inline Wikitext
+A paragraph appears before other wikitext, which needs to end with a blank line.
+
+<<<< Deep Block Quote
+A paragraph within the nested quote.
+<<<<
+<<<

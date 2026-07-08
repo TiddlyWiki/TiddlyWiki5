@@ -27,3 +27,7 @@ type: text/vnd.tiddlywiki
 !!!!!! AAA
 
 AAA
+
+!!.myStyle This heading has the class myStyle
+
+!!!.coloured-bg Heading with a custom background class.

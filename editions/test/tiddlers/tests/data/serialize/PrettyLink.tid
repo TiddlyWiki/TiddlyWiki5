@@ -4,3 +4,6 @@ type: text/vnd.tiddlywiki
 
 [[Introduction]]
 [[Link description|TiddlerTitle]]
+[[TW5|https://tiddlywiki.com/]]
+[[Mail me|mailto:me@where.net]]
+[[Open file|file:///c:/users/me/index.html]]

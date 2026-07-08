@@ -3,3 +3,31 @@ title: Serialize/Attribute
 type: text/vnd.tiddlywiki
 
 <$macrocall $name="rpn" a=<<rpn 2 2 *>> b="pi" operation="*" decimals="4"/>
+
+<div title="""This is my "title".""">Hello</div>
+
+<div data-address="Mouse House,
+Mouse Lane,
+Rodentville,
+Ratland."/>
+
+<div data-address="""Mouse House,
+"Mouse" Lane,
+Rodentville,
+Ratland."""/>
+
+<div title='He said "hello" to me'>Hello</div>
+
+<div title="He said 'hello' to me">Hello</div>
+
+<$text text=`Hello there this is the tiddler "$(currentTiddler)$"`/>
+
+<$text text=`This tiddler is titled "$(currentTiddler)$" and was last modified on ${[{!!modified}format:date[DDth MMM YYYY]]}$`/>
+
+<$text text=```Value with `embedded` backticks```/>
+
+<div style.color="red">Hello</div>
+
+<div style.color={{!!color}}>Hello</div>
+
+<div --bg-color={{{ [[red]] }}}>Hello</div>

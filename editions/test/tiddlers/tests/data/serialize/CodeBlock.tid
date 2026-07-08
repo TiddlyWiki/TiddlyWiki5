@@ -15,3 +15,5 @@ var match = reEnd.exec(this.parser.source)
 ```
 
 end
+
+``double backticks allows `embedded` backticks``

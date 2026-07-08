@@ -4,3 +4,9 @@ type: text/vnd.tiddlywiki
 
 [ext[https://tiddlywiki.com/fractalveg.jpg]]
 [ext[Tooltip|https://tiddlywiki.com/fractalveg.jpg]]
+[ext[Open file|index.html]]
+[ext[Open file|./index.html]]
+[ext[Open file|../README.md]]
+[ext[Open file|c:\users\me\index.html]]
+[ext[Mail me|mailto:me@where.net]]
+[ext[Donate|bitcoin:1aabbdd....?amount=0.001]]

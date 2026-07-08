@@ -1,0 +1,11 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/MvvDisplayInline
+type: text/vnd.tiddlywiki
+
+((myvar))
+
+((myvar||:))
+
+((( [all[tiddlers]sort[]] )))
+
+((( [all[tiddlers]sort[]] ||: )))

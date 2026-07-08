@@ -7,3 +7,18 @@ definition text, including $param$ markers
 \end
 
 \define lingo-base() $:/language/ControlPanel/Basics/
+
+\define quoted-defaults(a:'single "quoted" default',b:"double quoted default",c:"""triple "quoted" default""",d:[[bracket default with spaces]])
+definition text
+\end
+
+\define special-button(caption:"Click me")
+\define actions()
+<$action-sendmessage $message="tm-notify" $param="HelloThere"/>
+\end actions
+<$button actions=<<actions>>>
+$caption$
+</$button>
+\end special-button
+
+<<special-button>>
