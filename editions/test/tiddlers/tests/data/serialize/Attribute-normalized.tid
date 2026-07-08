@@ -1,0 +1,12 @@
+title: Serialize/Attribute-normalized
+description: Whitespace around the attribute equals sign is dropped
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: Input
+
+<div p = blah>some text</div>
++
+title: ExpectedOutput
+
+<div p=blah>some text</div>

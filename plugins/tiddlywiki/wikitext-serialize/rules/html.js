@@ -8,10 +8,10 @@ module-type: wikiruleserializer
 
 exports.name = "html";
 
-exports.serialize = function(tree,serialize) {
+exports.serialize = function(tree,serialize,options) {
 	var tag = tree.tag;
 	var attributes = tree.orderedAttributes.map(function(attribute) {
-		return $tw.utils.serializeAttribute(attribute);
+		return $tw.utils.serializeAttribute(attribute,options);
 	}).join(" ");
 	// Children
 	var children = tree.children ? serialize(tree.children) : "";

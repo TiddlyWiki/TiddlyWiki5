@@ -1,0 +1,19 @@
+title: Serialize/MacroCallBlock-normalized
+description: Parameter spacing is dropped and block calls get a blank line separator
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: Input
+
+<<john one: val1 two: 'val "2"'>>
+
+<<john>>
+after
++
+title: ExpectedOutput
+
+<<john one:val1 two:'val "2"'>>
+
+<<john>>
+
+after

@@ -21,78 +21,194 @@ function initSerializers(Parser) {
 };
 
 /*
-Utility to get the (similarly but not 1:1 equal) original wikitext of a parse tree node or array of nodes.
-Based on `node.rule` metadata added in `wikiparser.js`.
+Serialize a parse tree node or array of nodes back to wikitext, dispatching on
+the `node.rule` metadata added in `wikiparser.js`.
+options.source: the wikitext the tree was parsed from; when present, node
+positions are used to reproduce the original formatting, e.g. quoting styles.
 */
-exports.serializeWikitextParseTree = function serializeWikitextParseTree(tree,options) {
+exports.serializeWikitextParseTree = function(tree,options) {
 	options = options || {};
-	var output = [];
-	if($tw.utils.isArray(tree)) {
-		$tw.utils.each(tree,function(node) {
-			output.push(serializeWikitextParseTree(node,options));
-		});
-	} else if(tree) {
-		if(tree.type === "text" && !tree.rule) {
-			output.push(tree.text);
-		} else {
-			var Parser = $tw.utils.getParser("text/vnd.tiddlywiki");
-			// initialize the serializers only once on first use
-			initSerializers(Parser);
-			var serializeOneRule = Parser.prototype.serializers[tree.rule];
-			if(serializeOneRule) {
-				output.push(serializeOneRule(tree,serializeWikitextParseTree));
-			} else if(tree.rule === "parseblock") {
-				output.push(serializeWikitextParseTree(tree.children,options),"\n\n");
+	var Parser = $tw.utils.getParser("text/vnd.tiddlywiki");
+	initSerializers(Parser);
+	var serializers = Parser.prototype.serializers;
+	// A single closure keeps options bound across rules that only know the (tree,serialize) signature
+	function serialize(tree) {
+		var output = [];
+		if($tw.utils.isArray(tree)) {
+			$tw.utils.each(tree,function(node) {
+				output.push(serialize(node));
+			});
+		} else if(tree) {
+			if(tree.type === "text" && !tree.rule) {
+				output.push(tree.text);
 			} else {
-				// when no rule is found, just serialize the children, for example the void nodes
-				output.push(serializeWikitextParseTree(tree.children,options));
+				var serializeOneRule = serializers[tree.rule];
+				if(serializeOneRule) {
+					output.push(serializeOneRule(tree,serialize,options));
+				} else if(tree.rule === "parseblock") {
+					output.push(serialize(tree.children),"\n\n");
+				} else {
+					// when no rule is found, just serialize the children, for example the void nodes
+					output.push(serialize(tree.children));
+				}
 			}
 		}
+		return output.join("");
 	}
-	return output.join("");
+	return serialize(tree);
 };
 
 /*
-Serialize a parsed attribute node
+Detect the quoting style of an attribute value by inspecting the original
+source text via the node's start and end positions. Positions are reliable:
+source.slice(start,end) equals the node text (see #9882).
+Returns "bare", "unquoted", "single", "double", "triple", "bracket",
+"backtick", "tripleBacktick" or null when no source information is available.
+*/
+function detectQuoteStyle(node,source) {
+	if(!source || typeof node.start !== "number" || typeof node.end !== "number" || node.end <= node.start) {
+		return null;
+	}
+	var pos = $tw.utils.skipWhiteSpace(source,node.start);
+	if(!node.isPositional) {
+		if(source.substr(pos,node.name.length) !== node.name) {
+			return null;
+		}
+		pos = $tw.utils.skipWhiteSpace(source,pos + node.name.length);
+		if(pos >= node.end) {
+			// No assignment operator in the source: a valueless attribute
+			return "bare";
+		}
+		var op = source.charAt(pos);
+		if(op !== "=" && op !== ":") {
+			return "bare";
+		}
+		pos = $tw.utils.skipWhiteSpace(source,pos + 1);
+	}
+	if(pos >= node.end) {
+		return "bare";
+	}
+	var ch = source.charAt(pos);
+	if(ch === '"') {
+		return source.substr(pos,3) === '"""' ? "triple" : "double";
+	} else if(ch === "'") {
+		return "single";
+	} else if(ch === "[" && source.charAt(pos + 1) === "[") {
+		return "bracket";
+	} else if(ch === "`") {
+		return source.substr(pos,3) === "```" ? "tripleBacktick" : "backtick";
+	}
+	return "unquoted";
+}
+
+/*
+Check whether a quoting style can hold the given value without breaking the parse
+*/
+function styleAllows(style,value,isMacroParameter) {
+	switch(style) {
+		case "bare":
+			return value === "true";
+		case "unquoted":
+			if(value === "" || /[\s"']/.test(value)) {
+				return false;
+			}
+			if(isMacroParameter) {
+				return value.indexOf(">>") === -1 && value.substring(0,2) !== "<<";
+			}
+			return !/[\/<>=`]/.test(value);
+		case "single":
+			return value.indexOf("'") === -1;
+		case "double":
+			return value.indexOf('"') === -1;
+		case "triple":
+			return value.indexOf('"""') === -1 && value.charAt(value.length - 1) !== '"';
+		case "bracket":
+			return value.indexOf("]]") === -1 && value.charAt(value.length - 1) !== "]";
+	}
+	return false;
+}
+
+/*
+Wrap a value in the given quoting style
+*/
+function quoteValue(style,value) {
+	switch(style) {
+		case "unquoted": return value;
+		case "single": return "'" + value + "'";
+		case "triple": return '"""' + value + '"""';
+		case "bracket": return "[[" + value + "]]";
+		default: return '"' + value + '"';
+	}
+}
+
+/*
+Serialize a parsed attribute node.
+options.source: original wikitext used to preserve the original quoting style.
 */
 exports.serializeAttribute = function(node,options) {
 	options = options || {};
 	if(!node || typeof node !== "object" || !node.name || !node.type) {
 		return null;
 	}
-	// If name is number, means it is a positional attribute and name is omitted
+	// A numeric name marks a positional parameter; the name is not written out
 	var positional = parseInt(node.name) >= 0,
-		// Use the original assignment operator if available, otherwise default to '='
 		assign = positional ? "" : (node.assignmentOperator || "="),
 		attributeString = positional ? "" : node.name;
 	if(node.type === "string") {
-		if(node.value === "true") {
+		var isMacroParameter = node.isPositional || node.assignmentOperator !== undefined,
+			style = detectQuoteStyle(node,options.source);
+		// A mutated value may no longer fit the original quotes, e.g. a '"' added inside "..."
+		if(style && !styleAllows(style,node.value,isMacroParameter)) {
+			style = null;
+		}
+		if(!style) {
+			// Canonical fallback: the plainest style that can hold the value
+			if(!isMacroParameter && node.value === "true") {
+				style = "bare";
+			} else if(isMacroParameter && !node.quoted && styleAllows("unquoted",node.value,true)) {
+				style = "unquoted";
+			} else if(styleAllows("double",node.value)) {
+				style = "double";
+			} else if(styleAllows("single",node.value)) {
+				style = "single";
+			} else if(styleAllows("triple",node.value)) {
+				style = "triple";
+			} else if(styleAllows("bracket",node.value)) {
+				style = "bracket";
+			} else {
+				style = "double";
+			}
+		}
+		if(style === "bare") {
 			return attributeString;
 		}
-		// For macro parameters (using ':' separator), preserve unquoted values
-		// For widget attributes (using '=' separator), always use quotes
-		if(assign === ":" && !node.quoted) {
-			attributeString += assign + node.value;
-		} else if(assign === "") {
-			// Positional parameter
-			if(!node.quoted) {
-				attributeString += node.value;
-			} else {
-				attributeString += '"' + node.value + '"';
-			}
-		} else {
-			attributeString += assign + '"' + node.value + '"';
-		}
+		attributeString += assign + quoteValue(style,node.value);
 	} else if(node.type === "filtered") {
 		attributeString += assign + "{{{" + node.filter + "}}}";
 	} else if(node.type === "indirect") {
 		attributeString += assign + "{{" + node.textReference + "}}";
 	} else if(node.type === "substituted") {
-		attributeString += assign + "`" + node.rawValue + "`";
+		var subStyle = detectQuoteStyle(node,options.source);
+		if(subStyle !== "backtick" && subStyle !== "tripleBacktick") {
+			subStyle = null;
+		}
+		if(subStyle === "backtick" && node.rawValue.indexOf("`") !== -1) {
+			subStyle = "tripleBacktick";
+		}
+		if(!subStyle) {
+			subStyle = node.rawValue.indexOf("`") === -1 ? "backtick" : "tripleBacktick";
+		}
+		if(subStyle === "tripleBacktick") {
+			attributeString += assign + "```" + node.rawValue + "```";
+		} else {
+			attributeString += assign + "`" + node.rawValue + "`";
+		}
 	} else if(node.type === "macro") {
-		if(node.value && typeof node.value === "object") {
+		if(node.isMVV && node.value && node.value.attributes && node.value.attributes["$variable"]) {
+			// Multi-valued variable reference: ((varname))
+			attributeString += assign + "((" + node.value.attributes["$variable"].value + "))";
+		} else if(node.value && typeof node.value === "object") {
 			if(node.value.type === "transclude") {
-				// Handle the transclude-based macro call structure
 				var macroName = node.value.attributes && node.value.attributes["$variable"] ? 
 					node.value.attributes["$variable"].value : "";
 				if(!macroName) {
@@ -102,7 +218,7 @@ exports.serializeAttribute = function(node,options) {
 				if(node.value.orderedAttributes) {
 					node.value.orderedAttributes.forEach(function(attr) {
 						if(attr.name !== "$variable") {
-							var paramStr = exports.serializeAttribute(attr);
+							var paramStr = exports.serializeAttribute(attr,options);
 							if(paramStr) {
 								params.push(paramStr);
 							}
@@ -111,7 +227,7 @@ exports.serializeAttribute = function(node,options) {
 				}
 				attributeString += assign + "<<" + macroName + (params.length > 0 ? " " + params.join(" ") : "") + ">>";
 			} else if(node.value.type === "macrocall") {
-				// Handle the classical macrocall structure for backwards compatibility
+				// Classical macrocall nodes kept for backwards compatibility
 				var params = node.value.params.map(function(param) {
 					return param.value;
 				}).join(" ");

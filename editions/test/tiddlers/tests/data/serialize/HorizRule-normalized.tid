@@ -1,0 +1,12 @@
+title: Serialize/HorizRule-normalized
+description: A horizontal rule of four or more dashes normalizes to three
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: Input
+
+----
++
+title: ExpectedOutput
+
+---

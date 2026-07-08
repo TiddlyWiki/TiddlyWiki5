@@ -8,9 +8,9 @@ module-type: wikiruleserializer
 
 exports.name = "image";
 
-exports.serialize = function(tree,serialize) {
-	var width = tree.attributes.width ? " " + $tw.utils.serializeAttribute(tree.attributes.width) : "";
-	var height = tree.attributes.height ? " " + $tw.utils.serializeAttribute(tree.attributes.height) : "";
+exports.serialize = function(tree,serialize,options) {
+	var width = tree.attributes.width ? " " + $tw.utils.serializeAttribute(tree.attributes.width,options) : "";
+	var height = tree.attributes.height ? " " + $tw.utils.serializeAttribute(tree.attributes.height,options) : "";
 	var padSpace = width || height ? " " : "";
 	var tooltip = tree.attributes.tooltip ? tree.attributes.tooltip.value + "|" : "";
 	var source = tree.attributes.source.value;

@@ -1,0 +1,13 @@
+title: Serialize/Attribute-normalized-canonical
+description: Canonical mode quotes empty values with double quotes
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: Input
+mode: canonical
+
+<$reveal state="$:/temp/test" text=''/>
++
+title: ExpectedOutput
+
+<$reveal state="$:/temp/test" text=""/>

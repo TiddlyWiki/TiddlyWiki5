@@ -1,0 +1,20 @@
+title: Serialize/MacroDef-normalized
+description: Trailing spaces after the end marker are dropped
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: Input
+
+\define myMacro()
+nothing
+\end   
+
+<<myMacro>>
++
+title: ExpectedOutput
+
+\define myMacro()
+nothing
+\end
+
+<<myMacro>>
