@@ -7,4 +7,10 @@ type: text/vnd.tiddlywiki
 some text <!-- inline comment -->
 \end
 
+<!-- NEW: Comment that describes the macro -->
+
+\define test()
+some text <!-- inline comment -->
+\end
+
 <<test>>
