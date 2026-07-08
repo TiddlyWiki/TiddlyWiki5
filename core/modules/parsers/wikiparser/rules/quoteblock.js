@@ -26,7 +26,8 @@ exports.parse = function() {
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse any classes, whitespace and then the optional cite itself
 	var classStart = this.parser.pos;
-	classes.push.apply(classes, this.parser.parseClasses());
+	var userClasses = this.parser.parseClasses();
+	classes.push.apply(classes, userClasses);
 	var classEnd = this.parser.pos;
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	var citeStart = this.parser.pos;
@@ -39,6 +40,7 @@ exports.parse = function() {
 		tree.unshift({
 			type: "element",
 			tag: "cite",
+			isQuoteCite: true,
 			children: cite,
 			start: citeStart,
 			end: citeEnd
@@ -54,15 +56,20 @@ exports.parse = function() {
 		tree.push({
 			type: "element",
 			tag: "cite",
+			isQuoteCite: true,
 			children: cite,
 			start: citeStart,
 			end: citeEnd
 		});
 	}
-	// Return the blockquote element
+	// Return the blockquote element; the marker depth and the raw class list
+	// are not recoverable from the class attribute, which fuses the classes
+	// with the synthesized tc-quote
 	return [{
 		type: "element",
 		tag: "blockquote",
+		marker: this.match[1],
+		userClasses: userClasses,
 		attributes: {
 			class: { type: "string", value: classes.join(" "), start: classStart, end: classEnd },
 		},
