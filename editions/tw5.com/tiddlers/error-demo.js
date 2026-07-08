@@ -18,7 +18,8 @@ var ErrorDemoWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-ErrorDemoWidget.prototype = new Widget();
+ErrorDemoWidget.prototype = Object.create(Widget.prototype);
+ErrorDemoWidget.prototype.constructor = ErrorDemoWidget;
 
 ErrorDemoWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;

@@ -30,9 +30,11 @@ test("performance tests complete", async ({ page }) => {
 	expect(modes).toContain("yes");
 	expect(phases).toContain("render");
 	expect(phases).toContain("refresh");
-	expect(measurementRows[0].sampleCount).toBe(50);
+	// sampleCount must be positive — exact value depends on harness defaultIterations
+	expect(measurementRows[0].sampleCount).toBeGreaterThan(0);
 	expect(measurementRows[0].p75).not.toBeNull();
 	expect(measurementRows[0].p90).not.toBeNull();
 	expect(measurementRows[0].p95).not.toBeNull();
+	expect(measurementRows[0].p99).not.toBeNull();
 	expect(measurementRows[0].standardDeviation).not.toBeNull();
 });

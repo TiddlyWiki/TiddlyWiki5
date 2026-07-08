@@ -293,21 +293,7 @@ function makeEnvironment(options) {
 		environment.platform = process.platform;
 		environment.arch = process.arch;
 	}
-	return {
-		schemaVersion: environment.schemaVersion,
-		defaultWarmup: environment.defaultWarmup,
-		defaultIterations: environment.defaultIterations,
-		runtime: environment.runtime,
-		twVersion: environment.twVersion,
-		userAgent: environment.userAgent,
-		timestamp: environment.timestamp,
-		command: environment.command,
-		measurementBaselineIterations: environment.measurementBaselineIterations,
-		skipMeasurementDuringWarmup: environment.skipMeasurementDuringWarmup,
-		nodeVersion: environment.nodeVersion,
-		platform: environment.platform,
-		arch: environment.arch
-	};
+	return environment;
 }
 
 function runBenchmarkIteration(benchmark,context) {

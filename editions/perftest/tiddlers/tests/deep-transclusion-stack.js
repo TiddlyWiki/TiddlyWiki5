@@ -135,11 +135,18 @@ function cleanupFixture(wiki,basePrefix,nodePrefix,itemPrefix,renderTitle,depth,
 }
 
 function makeSourceText(itemPrefix,itemCount) {
-	var text = ["<$list filter=\"[prefix[" + itemPrefix + "]] +[sort[]]\">","<div class=\"perf-deep-stack-row\"><$view field=\"text\"/></div>","</$list>"];
 	if(itemCount === 0) {
 		return "";
 	}
-	return text.join("\n");
+	// $transclude (not $view) is required so that {{node-0}} inside each item's
+	// text field is wiki-parsed and the full transclusion chain (node-0 -> ... ->
+	// node-{depth-1}) is actually traversed. $view field="text" renders raw stored
+	// text and never activates the chain.
+	return [
+		"<$list filter=\"[prefix[" + itemPrefix + "]] +[sort[]]\">",
+		"<div class=\"perf-deep-stack-row\"><$transclude tiddler=<<currentTiddler>>/></div>",
+		"</$list>"
+	].join("\n");
 }
 
 function setResilientRenderMode(wiki,mode) {
