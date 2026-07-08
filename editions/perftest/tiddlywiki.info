@@ -1,0 +1,15 @@
+{
+	"description": "TiddlyWiki performance tests",
+	"plugins": [
+		"tiddlywiki/perftest"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","perftest.html","text/plain",
+			"--perf"]
+	}
+}

@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/perftest/readme
+
+The performance test plugin runs JavaScript benchmark tiddlers tagged with `$:/tags/performance-test`.
+
+It provides the `--perf` command for Node.js and a browser startup runner for generated performance test editions.
