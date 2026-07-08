@@ -1,12 +1,13 @@
 title: Serialize/Attribute-normalized
-description: Whitespace around the attribute equals sign is dropped
+description: Canonical mode drops whitespace around the attribute equals sign
 tags: $:/tags/wikitext-serialize-normalize-spec
 type: text/vnd.tiddlywiki-multiple
 
 title: Input
+mode: canonical
 
 <div p = blah>some text</div>
 +
 title: ExpectedWikitext
 
-<div p=blah>some text</div>
+<div p="blah">some text</div>
