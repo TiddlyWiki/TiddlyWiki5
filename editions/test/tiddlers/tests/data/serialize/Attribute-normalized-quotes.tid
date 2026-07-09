@@ -1,10 +1,10 @@
-title: Serialize/Attribute-normalized-canonical
-description: Canonical mode quotes empty values with double quotes
+title: Serialize/Attribute-normalized-quotes
+description: AST-only mode quotes empty values with double quotes
 tags: $:/tags/wikitext-serialize-normalize-spec
 type: text/vnd.tiddlywiki-multiple
 
 title: Input
-mode: canonical
+mode: ast-only
 
 <$reveal state="$:/temp/test" text=''/>
 +

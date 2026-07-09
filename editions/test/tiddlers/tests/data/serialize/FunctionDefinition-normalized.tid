@@ -1,10 +1,10 @@
 title: Serialize/FunctionDefinition-normalized
-description: Canonical mode drops trailing spaces after the end marker
+description: AST-only mode drops trailing spaces after the end marker
 tags: $:/tags/wikitext-serialize-normalize-spec
 type: text/vnd.tiddlywiki-multiple
 
 title: Input
-mode: canonical
+mode: ast-only
 
 \procedure myProc()
 nothing

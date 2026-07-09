@@ -1,10 +1,10 @@
 title: Serialize/CodeBlock-normalized
-description: Canonical mode picks the minimal safe backtick delimiter
+description: AST-only mode picks the minimal safe backtick delimiter
 tags: $:/tags/wikitext-serialize-normalize-spec
 type: text/vnd.tiddlywiki-multiple
 
 title: Input
-mode: canonical
+mode: ast-only
 
 Empty ```` and ``a`b`` and `plain` and ``double`` inline runs.
 +

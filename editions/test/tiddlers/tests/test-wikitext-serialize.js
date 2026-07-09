@@ -22,7 +22,7 @@ describe("WikiAST serialization unit tests", function () {
 Normalization tests: the input cannot round-trip byte-identical because the
 AST does not record the distinguishing surface detail. Each compound tiddler
 (type text/vnd.tiddlywiki-multiple) holds an "Input" and an "ExpectedWikitext"
-subtiddler. An Input field "mode: canonical" tests the fallback serialization
+subtiddler. An Input field "mode: ast-only" tests the fallback serialization
 without source access; the default tests fidelity mode with the source.
 */
 describe("WikiAST serialization normalization tests", function () {
@@ -41,7 +41,7 @@ describe("WikiAST serialization normalization tests", function () {
 			}
 			var input = subTiddlers.Input.text || "",
 				parser = $tw.wiki.parseText("text/vnd.tiddlywiki",input),
-				options = subTiddlers.Input.mode === "canonical" ? {} : {source: input},
+				options = subTiddlers.Input.mode === "ast-only" ? {} : {source: input},
 				serialized = $tw.utils.serializeWikitextParseTree(parser.tree,options);
 			expect(serialized.trimEnd()).toBe((subTiddlers.ExpectedWikitext.text || "").trimEnd());
 		});

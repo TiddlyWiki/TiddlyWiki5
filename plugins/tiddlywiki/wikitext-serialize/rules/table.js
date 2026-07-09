@@ -74,7 +74,7 @@ function serializeStitched(tree,serialize,options) {
 	return valid ? result : null;
 }
 
-function serializeCanonical(tree,serialize) {
+function serializeFromTree(tree,serialize) {
 	var lines = [];
 	if(tree.attributes && tree.attributes.class) {
 		lines.push("|" + tree.attributes.class.value + "|k");
@@ -141,7 +141,7 @@ exports.serialize = function(tree,serialize,options) {
 	options = options || {};
 	var result = serializeStitched(tree,serialize,options);
 	if(result === null) {
-		result = serializeCanonical(tree,serialize);
+		result = serializeFromTree(tree,serialize);
 	}
 	return result.replace(/\n+$/,"") + "\n\n";
 };

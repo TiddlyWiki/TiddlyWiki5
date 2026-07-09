@@ -146,8 +146,8 @@ Return the exact source text of a node, or null for synthesized or mutated
 nodes.
 options.source: the wikitext the tree was parsed from.
 options.fragments: strings that must all appear in the slice, so a tree
-transform that edited the node (e.g. renamed a macro) falls back to canonical
-serialization instead of replaying stale source text.
+transform that edited the node (e.g. renamed a macro) falls back to
+serializing from the tree instead of replaying stale source text.
 */
 exports.serializeFromSource = function(node,options) {
 	options = options || {};
@@ -187,7 +187,7 @@ exports.serializeAttribute = function(node,options) {
 			style = null;
 		}
 		if(!style) {
-			// Canonical fallback: the plainest style that can hold the value
+			// AST-only fallback: the plainest style that can hold the value
 			if(!isMacroParameter && node.value === "true") {
 				style = "bare";
 			} else if(isMacroParameter && !node.quoted && styleAllows("unquoted",node.value,true)) {

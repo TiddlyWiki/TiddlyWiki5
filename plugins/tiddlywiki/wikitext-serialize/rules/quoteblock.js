@@ -60,7 +60,7 @@ function isQuoteCite(node) {
 	return !!(node && (node.isQuoteCite || (node.tag === "cite" && !node.rule)));
 }
 
-function serializeCanonical(tree,serialize) {
+function serializeFromTree(tree,serialize) {
 	// The first class in the class attribute is always the synthesized tc-quote
 	var marker = tree.marker || "<<<",
 		classes = tree.userClasses || (tree.attributes.class ? tree.attributes.class.value.split(" ").slice(1) : []),
@@ -85,7 +85,7 @@ exports.serialize = function(tree,serialize,options) {
 	options = options || {};
 	var result = serializeStitched(tree,serialize,options);
 	if(result === null) {
-		result = serializeCanonical(tree,serialize);
+		result = serializeFromTree(tree,serialize);
 	}
 	return result + "\n\n";
 };

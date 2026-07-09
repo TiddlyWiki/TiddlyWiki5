@@ -12,7 +12,7 @@ exports.serialize = function(tree,serialize,options) {
 	var filter = (tree.attributes.text && tree.attributes.text.filter) || "";
 	// The parser compiles ((var||sep)) to [(var)join[sep]]; the inner text
 	// survives verbatim, so decompiling reconstructs the original exactly.
-	// The default separator ", " canonicalizes to the short form.
+	// The default separator ", " collapses to the short form.
 	var match = /^\[\(([^()|]+)\)join\[([\s\S]*)\]\]$/.exec(filter);
 	if(match) {
 		return "((" + match[1] + (match[2] === ", " ? "" : "||" + match[2]) + "))";

@@ -1,10 +1,10 @@
 title: Serialize/FunctionDefinition-normalized-nested
-description: Canonical mode preserves indented nested definitions verbatim, normalizes the pragma gap and drops the named end marker
+description: AST-only mode preserves indented nested definitions verbatim, normalizes the pragma gap and drops the named end marker
 tags: $:/tags/wikitext-serialize-normalize-spec
 type: text/vnd.tiddlywiki-multiple
 
 title: Input
-mode: canonical
+mode: ast-only
 
 \whitespace trim
 \procedure alpha(x)

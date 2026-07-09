@@ -86,7 +86,7 @@ function serializeStitched(tree,serialize,options) {
 	return valid ? result : null;
 }
 
-function serializeCanonical(tree,serialize) {
+function serializeFromTree(tree,serialize) {
 	var result = "<%if " + tree.attributes.filter.value + "%>" + serialize(tree.children[0].children);
 	var node = tree;
 	while(true) {
@@ -109,7 +109,7 @@ exports.serialize = function(tree,serialize,options) {
 	options = options || {};
 	var result = serializeStitched(tree,serialize,options);
 	if(result === null) {
-		result = serializeCanonical(tree,serialize);
+		result = serializeFromTree(tree,serialize);
 	}
 	if(tree.isBlock) {
 		result += "\n\n";
