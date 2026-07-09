@@ -36,12 +36,17 @@ describe("Resilient render boundary", function() {
 		ThrowWidget.prototype = Object.create(widget.widget.prototype);
 		ThrowWidget.prototype.render = function() { throw new Error("boom"); };
 		var classes = widget.widget.prototype.widgetClasses;
-		var had = Object.prototype.hasOwnProperty.call(classes,"throwtest");
+		var had = Object.prototype.hasOwnProperty.call(classes,"throwtest"),
+			previousClass = classes["throwtest"];
 		classes["throwtest"] = ThrowWidget;
 		try {
 			fn();
 		} finally{
-			if(!had) { delete classes["throwtest"]; }
+			if(had) {
+				classes["throwtest"] = previousClass;
+			} else {
+				delete classes["throwtest"];
+			}
 		}
 	}
 
@@ -76,6 +81,35 @@ describe("Resilient render boundary", function() {
 			expect(wrapper.innerHTML).toContain("survived");
 			// ...and the throwing child was replaced + tracked in this.children (no orphan/leak).
 			expect(widgetNode.children[0].parseTreeNode.type).toBe("error");
+		});
+	});
+
+	it("warns once for repeated identical contained render failures", function() {
+		withThrowWidget(function() {
+			var wiki = new $tw.Wiki(),
+				originalWarning = $tw.utils.warning,
+				warningMessages = [],
+				widgetNode,
+				wrapper;
+			wiki.addTiddler({title: "$:/config/ResilientRender", text: "yes"});
+			widgetNode = createWidgetNode({type: "widget", children: [
+				{type: "throwtest"},
+				{type: "throwtest"},
+				{type: "text", text: "survived"}
+			]},wiki);
+			$tw.utils.warning = function(message) {
+				warningMessages.push(message);
+			};
+			try {
+				expect(function() {
+					wrapper = renderWidgetNode(widgetNode);
+				}).not.toThrow();
+				expect(warningMessages.length).toBe(1);
+				expect(wrapper.innerHTML).toContain("Widget render error");
+				expect(wrapper.innerHTML).toContain("survived");
+			} finally {
+				$tw.utils.warning = originalWarning;
+			}
 		});
 	});
 
@@ -120,12 +154,17 @@ describe("Resilient render boundary", function() {
 		};
 		RefreshThrowWidget.prototype.refresh = function() { throw new Error("refresh boom"); };
 		var classes = widget.widget.prototype.widgetClasses;
-		var had = Object.prototype.hasOwnProperty.call(classes,"refreshthrow");
+		var had = Object.prototype.hasOwnProperty.call(classes,"refreshthrow"),
+			previousClass = classes["refreshthrow"];
 		classes["refreshthrow"] = RefreshThrowWidget;
 		try {
 			fn();
 		} finally{
-			if(!had) { delete classes["refreshthrow"]; }
+			if(had) {
+				classes["refreshthrow"] = previousClass;
+			} else {
+				delete classes["refreshthrow"];
+			}
 		}
 	}
 

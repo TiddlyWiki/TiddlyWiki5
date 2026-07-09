@@ -19,6 +19,18 @@ function getResilientRenderEnabled(wiki) {
 	});
 }
 
+function warnResilientRenderError(wiki,message) {
+	var warnings = wiki.getGlobalCache("resilient-render-warnings",function() {
+		return Object.create(null);
+	});
+	if($tw.utils.hop(warnings,message)) {
+		warnings[message]++;
+	} else {
+		warnings[message] = 1;
+		$tw.utils.warning(message);
+	}
+}
+
 /*
 Create a widget object for a parse tree node
 	parseTreeNode: reference to the parse tree node to be rendered
@@ -733,7 +745,7 @@ Widget.prototype.containChildError = function(index,error,phase,parentDomNode,ne
 		throw error;
 	}
 	var message = "Widget " + phase + " error: " + ((error && error.message) ? error.message : String(error));
-	$tw.utils.warning(message);
+	warnResilientRenderError(this.wiki,message);
 	try {
 		this.children[index].destroy();
 	} catch(innerError) {

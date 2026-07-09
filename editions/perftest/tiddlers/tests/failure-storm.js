@@ -15,15 +15,12 @@ exports.run = function(context) {
 	var measurements = [],
 		wiki = context.wiki,
 		configTitle = "$:/config/ResilientRender",
-		originalConfig = wiki.getTiddler(configTitle),
-		originalWarning = $tw.utils.warning;
+		originalConfig = wiki.getTiddler(configTitle);
 	wiki.addTiddler({title: configTitle, text: "yes"});
-	$tw.utils.warning = function() {};
 	try {
 		measurements.push(runRenderStorm(context));
 		measurements.push(runRefreshStorm(context));
 	} finally {
-		$tw.utils.warning = originalWarning;
 		restoreResilientRenderMode(wiki,configTitle,originalConfig);
 		wiki.clearTiddlerEventQueue();
 	}
@@ -54,7 +51,8 @@ function runRenderStorm(context) {
 			fixtureItemCount: itemCount,
 			failureEvery: failureEvery,
 			failureCount: failureCount,
-			warningsSuppressed: true,
+			warningsSuppressed: false,
+			warningGateExpected: true,
 			petName: "failure storm render",
 			domNodeCountAfter: context.countDomNodes(rendered.wrapper)
 		};
@@ -97,7 +95,8 @@ function runRefreshStorm(context) {
 			fixtureItemCount: itemCount,
 			failureEvery: failureEvery,
 			failureCount: failureCount,
-			warningsSuppressed: true,
+			warningsSuppressed: false,
+			warningGateExpected: true,
 			petName: "failure storm refresh",
 			changedTiddlerCount: 1,
 			domNodeCountBefore: before,
@@ -115,7 +114,7 @@ function makeSourceText(throwPhase,triggerTitle,itemCount,failureEvery) {
 	var text = [];
 	for(var i = 0; i < itemCount; i++) {
 		if(i % failureEvery === 0) {
-			text.push("<$failurestorm throwPhase=\"" + throwPhase + "\" triggerTitle=\"" + triggerTitle + "\" message=\"failure storm " + throwPhase + " " + i + "\"/>");
+			text.push("<$failurestorm throwPhase=\"" + throwPhase + "\" triggerTitle=\"" + triggerTitle + "\" message=\"failure storm " + throwPhase + "\"/>");
 		} else {
 			text.push("<span class=\"tc-perf-failurestorm-row\">stable " + i + "</span>");
 		}
