@@ -23,7 +23,9 @@ exports.parse = function() {
 	// Get all the details of the match; a nested quote re-enters this rule
 	// instance and overwrites this.match, so capture the marker now
 	var marker = this.match[1];
-	var reEndString = "^\\s*" + marker + "(?!<)";
+	// Anchor from the newline, not the line start: with "^\s*" the newline
+	// before the marker stays inside the preceding paragraph text node
+	var reEndString = "(?:^|\\r?\\n)\\s*" + marker + "(?!<)";
 	// Move past the <s
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse any classes, whitespace and then the optional cite itself

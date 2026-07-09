@@ -81,7 +81,9 @@ exports.parseIfClause = function(filterCondition) {
 	var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>|\\<\\%\\s*(else)\\s*\\%\\>|\\<\\%\\s*(elseif)\\s+([\\s\\S]+?)\\%\\>",
 		ex;
 	if(hasLineBreak) {
-		ex = this.parser.parseBlocksTerminatedExtended(reEndString);
+		// Let the terminator claim the newline before the marker, or it is
+		// swallowed into the preceding paragraph text node
+		ex = this.parser.parseBlocksTerminatedExtended("(?:\\r?\\n)?(?:" + reEndString + ")");
 	} else {
 		var reEnd = new RegExp(reEndString,"mg");
 		ex = this.parser.parseInlineRunTerminatedExtended(reEnd,{eatTerminator: true});
@@ -99,7 +101,7 @@ exports.parseIfClause = function(filterCondition) {
 			var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>",
 				ex;
 			if(hasLineBreak) {
-				ex = this.parser.parseBlocksTerminatedExtended(reEndString);
+				ex = this.parser.parseBlocksTerminatedExtended("(?:\\r?\\n)?(?:" + reEndString + ")");
 			} else {
 				var reEnd = new RegExp(reEndString,"mg");
 				ex = this.parser.parseInlineRunTerminatedExtended(reEnd,{eatTerminator: true});
