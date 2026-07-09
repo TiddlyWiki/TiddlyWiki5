@@ -1,0 +1,51 @@
+title: $:/plugins/tiddlywiki/prosemirror/slash-menu-ui.colors
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tw-slash-menu-root {
+	background-color: <<colour tiddler-editor-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+	color: <<colour foreground>>;
+}
+
+.tw-slash-menu-filter-wrapper {
+	background-color: <<colour page-background>>;
+	border-bottom-color: <<colour tiddler-editor-border>>;
+}
+
+.tw-slash-menu-filter {
+	color: <<colour muted-foreground>>;
+}
+
+.tw-slash-menu-item-description {
+	color: <<colour muted-foreground>>;
+}
+
+.tw-slash-menu-item-icon svg {
+	fill: <<colour foreground>>;
+}
+
+.tw-slash-menu-item:hover,
+.tw-slash-menu-item-selected {
+	background-color: <<colour tiddler-editor-fields-even>>;
+}
+
+.tw-slash-menu-item-icon {
+	color: <<colour muted-foreground>>;
+}
+
+.tw-slash-menu-item-label {
+	color: <<colour foreground>>;
+}
+
+.tw-slash-menu-placeholder {
+	color: <<colour muted-foreground>>;
+}
+
+.tw-slash-menu-group-title {
+	color: <<colour foreground>>;
+	border-bottom-color: <<colour tiddler-editor-border>>;
+	background: <<colour page-background>>;
+}

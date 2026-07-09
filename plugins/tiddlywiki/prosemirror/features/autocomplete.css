@@ -1,0 +1,28 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/features/autocomplete.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+Structural styles for the ProseMirror autocomplete dropdown.
+
+\*/
+
+.tc-prosemirror-autocomplete {
+	border: 1px solid transparent;
+	border-radius: 4px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+	max-height: 240px;
+	overflow-y: auto;
+	min-width: 200px;
+	max-width: 400px;
+	padding: 4px 0;
+}
+
+.tc-prosemirror-autocomplete-item {
+	padding: 6px 12px;
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 0.9em;
+}

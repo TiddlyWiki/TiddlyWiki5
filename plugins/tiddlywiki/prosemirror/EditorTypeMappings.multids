@@ -1,0 +1,5 @@
+title: $:/config/EditorTypeMappings/
+
+text/markdown: prosemirror
+text/x-markdown: prosemirror
+text/vnd.tiddlywiki: prosemirror

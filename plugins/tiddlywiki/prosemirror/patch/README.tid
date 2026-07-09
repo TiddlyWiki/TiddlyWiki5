@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/prosemirror/patch/README
+
+Temporary patches for core modules that have not yet been merged upstream.
+Delete this directory once the following core changes land:
+
+- core/modules/widgets/edit.js -- hasParserForType(), setVariable("tv-editor-type"), prosemirror fallback when no parser
+- core/modules/editor/factory.js -- handleTextOperationNatively hook, engine.destroy() before re-render
+- core/modules/wiki.js -- parseText() passes preserveBlankLines option
+- core/modules/parsers/wikiparser/wikiparser.js -- preserveBlankLines support, makeBlankLineBlocks/parseBlankLineBlocks
+- core/modules/utils/debounce.js -- new $tw.utils.debounce utility
+- core/ui/EditorToolbar/preview-type-dropdown.tid -- Source preview type filtering
+
+Files to act on when merging:
+
+- startup.js -- delete (functionality merged into edit.js, factory.js, wiki.js, wikiparser.js)
+- preview-type-dropdown.tid -- delete (functionality merged into core preview-type-dropdown.tid)
+- debounce.js -- delete (shadows $:/core/modules/utils/debounce.js; require resolves to core version automatically)

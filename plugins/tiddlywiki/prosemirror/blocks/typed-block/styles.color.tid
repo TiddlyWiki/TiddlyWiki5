@@ -1,0 +1,28 @@
+title: $:/plugins/tiddlywiki/prosemirror/blocks/typed-block/styles/color
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.pm-nodeview.pm-nodeview-typedblock {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.pm-typed-block-source {
+	background: <<colour pre-background>>;
+}
+
+.pm-typed-block-type-select {
+	border: 1px solid <<colour tiddler-editor-border>>;
+	background: <<colour background>>;
+	color: <<colour foreground>>;
+}
+
+.pm-typed-block-type-select:focus {
+	border-color: <<colour primary>>;
+}
+
+.pm-typed-block-type-select option {
+	color: <<colour foreground>>;
+	background: <<colour background>>;
+}

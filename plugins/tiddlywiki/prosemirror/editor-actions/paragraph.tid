@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorAction/paragraph
+tags: $:/tags/ProseMirror/EditorAction
+caption: Turn into paragraph
+description: Convert the current block to a paragraph
+category: block-type
+
+\rules only
+
+<$action-sendmessage $message="tm-prosemirror-editor-action" actionId="paragraph"/>

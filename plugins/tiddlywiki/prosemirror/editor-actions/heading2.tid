@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorAction/heading2
+tags: $:/tags/ProseMirror/EditorAction
+caption: Heading 2
+description: Convert to heading level 2
+category: block-type
+action-id: heading2
+icon: $:/core/images/heading-2
+
