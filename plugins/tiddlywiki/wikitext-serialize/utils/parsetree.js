@@ -26,6 +26,24 @@ the `node.rule` metadata added in `wikiparser.js`.
 options.source: the wikitext the tree was parsed from; when present, node
 positions are used to reproduce the original formatting, e.g. quoting styles.
 */
+/*
+A block node needs a separator towards a following sibling. Annotated trees
+carry blockPosition; paragraphs signal it through their rule name; trees
+from an unannotated parser fall back to isBlock plus the rule name suffix.
+*/
+function isBlockNode(node) {
+	if(!node || typeof node !== "object") {
+		return false;
+	}
+	if(node.blockPosition !== undefined) {
+		return node.blockPosition;
+	}
+	if(node.rule === "parseblock") {
+		return true;
+	}
+	return node.isBlock === true || (typeof node.rule === "string" && node.rule !== "commentblock" && node.rule.slice(-5) === "block");
+}
+
 exports.serializeWikitextParseTree = function(tree,options) {
 	options = options || {};
 	var Parser = $tw.utils.getParser("text/vnd.tiddlywiki");
@@ -35,8 +53,13 @@ exports.serializeWikitextParseTree = function(tree,options) {
 	function serialize(tree) {
 		var output = [];
 		if($tw.utils.isArray(tree)) {
-			$tw.utils.each(tree,function(node) {
+			$tw.utils.each(tree,function(node,index) {
 				output.push(serialize(node));
+				// The walker owns the separator between block siblings; rule
+				// serializers emit their own syntax only
+				if(index < tree.length - 1 && isBlockNode(node)) {
+					output.push("\n\n");
+				}
 			});
 		} else if(tree) {
 			if(tree.type === "text" && !tree.rule) {
@@ -58,7 +81,7 @@ exports.serializeWikitextParseTree = function(tree,options) {
 					// Stitch restores gaps that only exist in the source,
 					// e.g. the line breaks eaten by \whitespace trim
 					var stitched = options.source ? exports.serializeStitched(tree,serialize,{source: options.source}) : null;
-					output.push(stitched !== null ? stitched : serialize(tree.children),"\n\n");
+					output.push(stitched !== null ? stitched : serialize(tree.children));
 				} else {
 					// when no rule is found, just serialize the children, for example the void nodes
 					output.push(serialize(tree.children));
@@ -75,16 +98,11 @@ exports.serializeWikitextParseTree = function(tree,options) {
 	}
 	if(result === null) {
 		result = serialize(tree);
-		// The root has no following block: drop the final block joiner so
-		// output does not grow trailing blank lines on every round trip.
-		// Keep one line end when the last block's grammar needs it, e.g. a
-		// trailing <<macro>>
-		if(result.slice(-2) === "\n\n") {
-			result = result.slice(0,-2);
-			var last = $tw.utils.isArray(tree) ? tree[tree.length - 1] : tree;
-			if(last && (last.rule === "macrocallblock" || (last.rule === "html" && last.isBlock))) {
-				result += "\n";
-			}
+		// A trailing block macro call or block widget needs its line end to
+		// stay a block on reparse
+		var last = $tw.utils.isArray(tree) ? tree[tree.length - 1] : tree;
+		if(last && (last.rule === "macrocallblock" || (last.rule === "html" && isBlockNode(last)))) {
+			result += "\n";
 		}
 	}
 	return result;
@@ -231,10 +249,6 @@ exports.serializeStitched = function(tree,serialize,options) {
 		if(!isBoundary(boundary)) {
 			valid = false;
 			return;
-		}
-		// Undo exactly one block joiner; real paragraph-final newlines must survive
-		if(result.slice(-2) === "\n\n") {
-			result = result.slice(0,-2);
 		}
 		result += boundary;
 	};

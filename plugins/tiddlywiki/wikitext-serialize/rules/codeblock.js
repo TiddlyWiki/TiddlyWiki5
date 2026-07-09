@@ -14,7 +14,7 @@ exports.serialize = function(tree,serialize,options) {
 	// the tree does not record; the slice keeps the emission span exact
 	var slice = $tw.utils.serializeFromSource(tree,{source: options.source, fragments: [tree.attributes.code.value]});
 	if(slice !== null) {
-		return slice + "\n\n";
+		return slice;
 	}
-	return "```" + tree.attributes.language.value + "\n" + tree.attributes.code.value + "\n```\n\n";
+	return "```" + tree.attributes.language.value + "\n" + tree.attributes.code.value + "\n```";
 };

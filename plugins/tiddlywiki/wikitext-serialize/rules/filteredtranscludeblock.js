@@ -14,7 +14,7 @@ exports.serialize = function(tree,serialize,options) {
 	// the tree does not record; the slice keeps the emission span exact
 	var slice = $tw.utils.serializeFromSource(tree,{source: options.source, fragments: [tree.attributes.filter.value]});
 	if(slice !== null) {
-		return slice + "\n\n";
+		return slice;
 	}
 	var serialized = "{{{" + tree.attributes.filter.value;
 	// Tooltip text
@@ -27,5 +27,5 @@ exports.serialize = function(tree,serialize,options) {
 	serialized += "}";
 	// CSS classes
 	if(tree.attributes.itemClass) serialized += "." + tree.attributes.itemClass.value.split(" ").join(".");
-	return serialized + "\n\n";
+	return serialized;
 };

@@ -14,7 +14,7 @@ exports.serialize = function(tree,serialize,options) {
 	// the tree does not record; the slice keeps the emission span exact
 	var slice = $tw.utils.serializeFromSource(tree,{source: options.source, fragments: ["{{"]});
 	if(slice !== null) {
-		return slice + "\n\n";
+		return slice;
 	}
 	var result = "{{";
 	function handleTransclude(transcludeNode) {
@@ -59,6 +59,6 @@ exports.serialize = function(tree,serialize,options) {
 	} else if(tree.type === "transclude") {
 		handleTransclude(tree);
 	}
-	result += "}}\n\n";
+	result += "}}";
 	return result;
 };

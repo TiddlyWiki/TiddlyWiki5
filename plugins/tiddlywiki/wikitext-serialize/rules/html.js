@@ -57,21 +57,21 @@ exports.serialize = function(tree,serialize,options) {
 		if(typeof tree.openTagEnd === "number" && typeof tree.closeTagStart === "number") {
 			inner = $tw.utils.serializeStitched({start: tree.openTagEnd, end: tree.closeTagStart, children: tree.children},serialize,{source: source});
 		}
+		// An implicit close tag (closeTagStart equals closeTagEnd) is not written out
+		var hasCloseTag = !(typeof tree.closeTagStart === "number" && tree.closeTagStart === tree.closeTagEnd);
 		if(inner === null) {
 			inner = serialize(tree.children || []);
 			if(tree.blockContent) {
 				// The blank line after the open tag switches the content to block mode
 				inner = "\n\n" + inner;
+				// The close tag needs its own line, or a final line-terminated
+				// child like a heading would swallow it
+				if(hasCloseTag && inner.slice(-1) !== "\n") {
+					inner += "\n";
+				}
 			}
 		}
-		// An implicit close tag (closeTagStart equals closeTagEnd) is not written out
-		var hasCloseTag = !(typeof tree.closeTagStart === "number" && tree.closeTagStart === tree.closeTagEnd);
 		result = openTag + inner + (hasCloseTag ? "</" + tag + ">" : "");
-	}
-	// Old trees without the annotation fall back to isBlock
-	var blockPosition = tree.blockPosition === undefined ? tree.isBlock : tree.blockPosition;
-	if(blockPosition) {
-		result += "\n\n";
 	}
 	return result;
 };

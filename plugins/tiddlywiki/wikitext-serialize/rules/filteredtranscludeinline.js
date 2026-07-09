@@ -10,6 +10,5 @@ exports.name = "filteredtranscludeinline";
 
 exports.serialize = function(tree,serialize,options) {
 	var filteredtranscludeblock = require("$:/plugins/tiddlywiki/wikitext-serialize/rules/filteredtranscludeblock.js");
-	var result = filteredtranscludeblock.serialize(tree,serialize,options);
-	return result.trimEnd();
+	return filteredtranscludeblock.serialize(tree,serialize,options);
 };

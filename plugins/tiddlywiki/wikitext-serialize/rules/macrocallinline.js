@@ -10,6 +10,5 @@ exports.name = "macrocallinline";
 
 exports.serialize = function (tree,serialize,options) {
 	var macrocallblock = require("$:/plugins/tiddlywiki/wikitext-serialize/rules/macrocallblock.js");
-	var result = macrocallblock.serialize(tree,serialize,options);
-	return result.replace(/\n+$/,"");
+	return macrocallblock.serialize(tree,serialize,options);
 };

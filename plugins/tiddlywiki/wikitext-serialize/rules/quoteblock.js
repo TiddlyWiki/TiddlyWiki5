@@ -26,11 +26,9 @@ function serializeFromTree(tree,serialize) {
 	if(children.length && isQuoteCite(children[children.length - 1])) {
 		closingCite = " " + serialize(children.pop().children);
 	}
-	var body = "";
-	$tw.utils.each(children,function(child) {
-		body += serialize(child);
-	});
-	return marker + classText + openingCite + "\n" + body.replace(/\n+$/,"") + "\n" + marker + closingCite;
+	// Serialize the body as one array so the walker separates the blocks
+	var body = serialize(children);
+	return marker + classText + openingCite + "\n" + body + "\n" + marker + closingCite;
 }
 
 exports.serialize = function(tree,serialize,options) {
@@ -45,5 +43,5 @@ exports.serialize = function(tree,serialize,options) {
 	if(result === null) {
 		result = serializeFromTree(tree,serialize);
 	}
-	return result + "\n\n";
+	return result;
 };

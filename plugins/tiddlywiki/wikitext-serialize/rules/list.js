@@ -106,5 +106,5 @@ exports.serialize = function (tree,serialize,options) {
 		}
 		result += row.text;
 	});
-	return result + "\n\n";
+	return result;
 };

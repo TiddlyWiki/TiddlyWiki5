@@ -110,8 +110,7 @@ exports.serialize = function(tree,serialize,options) {
 		}
 	});
 	if(result !== null) {
-		// The stitch is span exact including the line end the rule consumed
-		return result + "\n\n";
+		return result;
 	}
-	return serializeFromTree(tree,serialize).replace(/\n+$/,"") + "\n\n";
+	return serializeFromTree(tree,serialize);
 };

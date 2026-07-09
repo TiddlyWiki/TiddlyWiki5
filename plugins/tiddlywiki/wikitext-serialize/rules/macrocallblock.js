@@ -25,7 +25,7 @@ exports.serialize = function (node,serialize,options) {
 	}
 	var slice = $tw.utils.serializeFromSource(node,{source: options.source, fragments: fragments});
 	if(slice !== null) {
-		return slice + "\n\n";
+		return slice;
 	}
 	var result = "<<";
 	// Macro name
@@ -46,13 +46,5 @@ exports.serialize = function (node,serialize,options) {
 		result += " ";
 	}
 	result += ">>";
-	// The span includes the line end the block rule consumed; keep it, but
-	// the parameter spacing stays normalized by choice
-	if(options && options.source && typeof node.start === "number" && typeof node.end === "number") {
-		var match = /\s+$/.exec(options.source.substring(node.start,node.end));
-		if(match) {
-			result += match[0];
-		}
-	}
-	return result + "\n\n";
+	return result;
 };

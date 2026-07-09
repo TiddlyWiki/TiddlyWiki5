@@ -41,8 +41,13 @@ function serializeFromTree(tree,serialize) {
 	var bodyGap = function(container) {
 		return container && container.blockContent ? "\n\n" : "";
 	};
+	// A block body ends at its content; the following marker needs its line
+	var markerGap = function(container) {
+		return container && container.blockContent ? "\n" : "";
+	};
 	var result = "<%if " + tree.attributes.filter.value + "%>" + bodyGap(tree.children[0]) + serialize(tree.children[0].children);
-	var node = tree;
+	var node = tree,
+		lastContainer = tree.children[0];
 	while(true) {
 		var next = node.children[1] && node.children[1].children;
 		if(!next || !next.length) {
@@ -50,13 +55,15 @@ function serializeFromTree(tree,serialize) {
 		}
 		if(next.length === 1 && isElseIfClause(next[0])) {
 			node = next[0];
-			result += "<%elseif " + node.attributes.filter.value + "%>" + bodyGap(node.children[0]) + serialize(node.children[0].children);
+			result += markerGap(lastContainer) + "<%elseif " + node.attributes.filter.value + "%>" + bodyGap(node.children[0]) + serialize(node.children[0].children);
+			lastContainer = node.children[0];
 		} else {
-			result += "<%else%>" + bodyGap(node.children[1]) + serialize(next);
+			result += markerGap(lastContainer) + "<%else%>" + bodyGap(node.children[1]) + serialize(next);
+			lastContainer = node.children[1];
 			break;
 		}
 	}
-	return result + "<%endif%>";
+	return result + markerGap(lastContainer) + "<%endif%>";
 }
 
 exports.serialize = function(tree,serialize,options) {
@@ -73,9 +80,6 @@ exports.serialize = function(tree,serialize,options) {
 	});
 	if(result === null) {
 		result = serializeFromTree(tree,serialize);
-	}
-	if(tree.isBlock) {
-		result += "\n\n";
 	}
 	return result;
 };
