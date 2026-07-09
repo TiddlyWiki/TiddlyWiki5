@@ -13,3 +13,8 @@ type: text/vnd.tiddlywiki
 Some text</span></span></div>
 
 <div>
+
+Block content ending at the close tag
+</div>
+
+<div>

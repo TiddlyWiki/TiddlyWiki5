@@ -37,7 +37,11 @@ function collectBodies(listNode,out) {
 }
 
 function serializeFromTree(tree,serialize) {
-	var result = "<%if " + tree.attributes.filter.value + "%>" + serialize(tree.children[0].children);
+	// A blank line after a clause marker switches the body to block mode
+	var bodyGap = function(container) {
+		return container && container.blockContent ? "\n\n" : "";
+	};
+	var result = "<%if " + tree.attributes.filter.value + "%>" + bodyGap(tree.children[0]) + serialize(tree.children[0].children);
 	var node = tree;
 	while(true) {
 		var next = node.children[1] && node.children[1].children;
@@ -46,9 +50,9 @@ function serializeFromTree(tree,serialize) {
 		}
 		if(next.length === 1 && isElseIfClause(next[0])) {
 			node = next[0];
-			result += "<%elseif " + node.attributes.filter.value + "%>" + serialize(node.children[0].children);
+			result += "<%elseif " + node.attributes.filter.value + "%>" + bodyGap(node.children[0]) + serialize(node.children[0].children);
 		} else {
-			result += "<%else%>" + serialize(next);
+			result += "<%else%>" + bodyGap(node.children[1]) + serialize(next);
 			break;
 		}
 	}

@@ -1,0 +1,11 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Conditional-new
+type: text/vnd.tiddlywiki
+
+<%if [[x]]%>
+
+Block content before elseif
+<%elseif [[y]]%>
+
+Block content before endif
+<%endif%>
