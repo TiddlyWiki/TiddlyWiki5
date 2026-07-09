@@ -20,8 +20,10 @@ exports.init = function(parser) {
 
 exports.parse = function() {
 	var classes = ["tc-quote"];
-	// Get all the details of the match
-	var reEndString = "^\\s*" + this.match[1] + "(?!<)";
+	// Get all the details of the match; a nested quote re-enters this rule
+	// instance and overwrites this.match, so capture the marker now
+	var marker = this.match[1];
+	var reEndString = "^\\s*" + marker + "(?!<)";
 	// Move past the <s
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse any classes, whitespace and then the optional cite itself
@@ -68,7 +70,7 @@ exports.parse = function() {
 	return [{
 		type: "element",
 		tag: "blockquote",
-		marker: this.match[1],
+		marker: marker,
 		userClasses: userClasses,
 		attributes: {
 			class: { type: "string", value: classes.join(" "), start: classStart, end: classEnd },

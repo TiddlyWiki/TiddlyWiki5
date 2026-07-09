@@ -52,6 +52,13 @@ exports.parse = function() {
 	var hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/y);
 	// Set whether we're in block mode
 	tag.isBlock = this.is.block || hasLineBreak;
+	// isBlock fuses the parse position with the content mode; record them
+	// separately so a serializer can tell an inline <img> before a blank
+	// line from a block level element
+	tag.blockPosition = !!this.is.block;
+	if(hasLineBreak) {
+		tag.blockContent = true;
+	}
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
 		var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">";

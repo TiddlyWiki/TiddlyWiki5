@@ -55,7 +55,18 @@ exports.serializeWikitextParseTree = function(tree,options) {
 		}
 		return output.join("");
 	}
-	return serialize(tree);
+	var result = serialize(tree);
+	// The root has no following block: drop the final block joiner so output
+	// does not grow trailing blank lines on every round trip. Keep one line
+	// end when the last block's grammar needs it, e.g. a trailing <<macro>>
+	if(result.slice(-2) === "\n\n") {
+		result = result.slice(0,-2);
+		var last = $tw.utils.isArray(tree) ? tree[tree.length - 1] : tree;
+		if(last && (last.rule === "macrocallblock" || (last.rule === "html" && last.isBlock))) {
+			result += "\n";
+		}
+	}
+	return result;
 };
 
 /*
@@ -225,6 +236,29 @@ exports.recoverSourceGap = function(from,to,options) {
 	}
 	var gap = source.substring(from,to);
 	return /^\s+$/.test(gap) ? gap : null;
+};
+
+/*
+Quote a definition parameter default so the parameter regexes reparse it to
+the same value, e.g. a default with spaces. Parens are excluded from the
+plain form because ((v)) means an MVV reference.
+options.allowBrackets: the macrodef regex also accepts the [[...]] form.
+*/
+exports.quoteParameterDefault = function(value,options) {
+	options = options || {};
+	if(/^[^,"'\s()]+$/.test(value)) {
+		return value;
+	}
+	if(value.indexOf('"') === -1) {
+		return '"' + value + '"';
+	}
+	if(value.indexOf("'") === -1) {
+		return "'" + value + "'";
+	}
+	if(!options.allowBrackets || (value.indexOf('"""') === -1 && value.charAt(value.length - 1) !== '"')) {
+		return '"""' + value + '"""';
+	}
+	return "[[" + value + "]]";
 };
 
 /*

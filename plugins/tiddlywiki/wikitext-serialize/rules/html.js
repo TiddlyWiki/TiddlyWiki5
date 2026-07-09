@@ -59,12 +59,18 @@ exports.serialize = function(tree,serialize,options) {
 		}
 		if(inner === null) {
 			inner = serialize(tree.children || []);
+			if(tree.blockContent) {
+				// The blank line after the open tag switches the content to block mode
+				inner = "\n\n" + inner;
+			}
 		}
 		// An implicit close tag (closeTagStart equals closeTagEnd) is not written out
 		var hasCloseTag = !(typeof tree.closeTagStart === "number" && tree.closeTagStart === tree.closeTagEnd);
 		result = openTag + inner + (hasCloseTag ? "</" + tag + ">" : "");
 	}
-	if(tree.isBlock) {
+	// Old trees without the annotation fall back to isBlock
+	var blockPosition = tree.blockPosition === undefined ? tree.isBlock : tree.blockPosition;
+	if(blockPosition) {
 		result += "\n\n";
 	}
 	return result;

@@ -19,7 +19,7 @@ exports.serialize = function(tree,serialize,options) {
 		return slice + "\n\n" + serialize(tree.children);
 	}
 	var params = tree.params.map(function(param) {
-		return param.name + (param.default ? ":" + param.default : "");
+		return param.name + (param.default ? ":" + $tw.utils.quoteParameterDefault(param.default,{allowBrackets: true}) : "");
 	}).join(",");
 	if(tree.isBlock) {
 		return "\\define " + name + "(" + params + ") " + definition + "\n\n" + serialize(tree.children);
