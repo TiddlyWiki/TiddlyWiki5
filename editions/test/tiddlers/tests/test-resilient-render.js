@@ -84,11 +84,9 @@ describe("Resilient render boundary", function() {
 		});
 	});
 
-	it("warns once for repeated identical contained render failures", function() {
+	it("degrades repeated throwing children independently", function() {
 		withThrowWidget(function() {
 			var wiki = new $tw.Wiki(),
-				originalWarning = $tw.utils.warning,
-				warningMessages = [],
 				widgetNode,
 				wrapper;
 			wiki.addTiddler({title: "$:/config/ResilientRender", text: "yes"});
@@ -97,19 +95,11 @@ describe("Resilient render boundary", function() {
 				{type: "throwtest"},
 				{type: "text", text: "survived"}
 			]},wiki);
-			$tw.utils.warning = function(message) {
-				warningMessages.push(message);
-			};
-			try {
-				expect(function() {
-					wrapper = renderWidgetNode(widgetNode);
-				}).not.toThrow();
-				expect(warningMessages.length).toBe(1);
-				expect(wrapper.innerHTML).toContain("Widget render error");
-				expect(wrapper.innerHTML).toContain("survived");
-			} finally {
-				$tw.utils.warning = originalWarning;
-			}
+			expect(function() {
+				wrapper = renderWidgetNode(widgetNode);
+			}).not.toThrow();
+			expect(wrapper.innerHTML.split("Widget render error").length - 1).toBe(2);
+			expect(wrapper.innerHTML).toContain("survived");
 		});
 	});
 

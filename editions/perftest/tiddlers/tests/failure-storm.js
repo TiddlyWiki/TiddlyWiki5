@@ -51,8 +51,6 @@ function runRenderStorm(context) {
 			fixtureItemCount: itemCount,
 			failureEvery: failureEvery,
 			failureCount: failureCount,
-			warningsSuppressed: false,
-			warningGateExpected: true,
 			petName: "failure storm render",
 			domNodeCountAfter: context.countDomNodes(rendered.wrapper)
 		};
@@ -95,8 +93,6 @@ function runRefreshStorm(context) {
 			fixtureItemCount: itemCount,
 			failureEvery: failureEvery,
 			failureCount: failureCount,
-			warningsSuppressed: false,
-			warningGateExpected: true,
 			petName: "failure storm refresh",
 			changedTiddlerCount: 1,
 			domNodeCountBefore: before,
