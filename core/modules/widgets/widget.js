@@ -13,6 +13,12 @@ Widget base class
 // preserving fail-loud server/CI render). An interactive edition sets this tiddler to "yes".
 var RESILIENT_RENDER_CONFIG_TITLE = "$:/config/ResilientRender";
 
+function getResilientRenderEnabled(wiki) {
+	return wiki.getCacheForTiddler(RESILIENT_RENDER_CONFIG_TITLE,"resilientRenderEnabled",function() {
+		return wiki.getTiddlerText(RESILIENT_RENDER_CONFIG_TITLE,"no") === "yes";
+	});
+}
+
 /*
 Create a widget object for a parse tree node
 	parseTreeNode: reference to the parse tree node to be rendered
@@ -692,7 +698,7 @@ so the hot loop body itself is exception-handler-free, allowing V8 to apply
 loop-invariant code motion across the loop.
 */
 Widget.prototype.renderChildren = function(parent,nextSibling) {
-	var resilient = this.wiki.getTiddlerText(RESILIENT_RENDER_CONFIG_TITLE,"no") === "yes";
+	var resilient = getResilientRenderEnabled(this.wiki);
 	var children = this.children;
 	for(var i = 0; i < children.length; i++) {
 		renderOneChild(this,children,i,parent,nextSibling,resilient);
@@ -833,7 +839,7 @@ Refresh all the children of a widget.
 Same pre-walk-constant and extract-helper pattern as renderChildren.
 */
 Widget.prototype.refreshChildren = function(changedTiddlers) {
-	var resilient = this.wiki.getTiddlerText(RESILIENT_RENDER_CONFIG_TITLE,"no") === "yes";
+	var resilient = getResilientRenderEnabled(this.wiki);
 	var children = this.children,
 		refreshed = false;
 	for(var i = 0; i < children.length; i++) {

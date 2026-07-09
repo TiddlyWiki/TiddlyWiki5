@@ -79,6 +79,33 @@ describe("Resilient render boundary", function() {
 		});
 	});
 
+	it("invalidates the cached ResilientRender setting when the config tiddler changes", function() {
+		withThrowWidget(function() {
+			var wiki = new $tw.Wiki();
+			expect(function() {
+				renderWidgetNode(createWidgetNode(parseTreeNode,wiki));
+			}).toThrow();
+			wiki.addTiddler({title: "$:/config/ResilientRender", text: "yes"});
+			expect(function() {
+				renderWidgetNode(createWidgetNode(parseTreeNode,wiki));
+			}).not.toThrow();
+		});
+	});
+
+	it("invalidates the cached ResilientRender setting when the config tiddler is deleted", function() {
+		withThrowWidget(function() {
+			var wiki = new $tw.Wiki();
+			wiki.addTiddler({title: "$:/config/ResilientRender", text: "yes"});
+			expect(function() {
+				renderWidgetNode(createWidgetNode(parseTreeNode,wiki));
+			}).not.toThrow();
+			wiki.deleteTiddler("$:/config/ResilientRender");
+			expect(function() {
+				renderWidgetNode(createWidgetNode(parseTreeNode,wiki));
+			}).toThrow();
+		});
+	});
+
 	// A widget that renders fine but throws on a LATER refresh (the live-update path that
 	// island-worker → browser-DOM projection depends on).
 	function withRefreshThrowWidget(fn) {
