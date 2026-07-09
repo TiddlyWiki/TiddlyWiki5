@@ -1,0 +1,100 @@
+title: $:/themes/tiddlywiki/quietude/variables
+tags: [[$:/tags/Stylesheet]]
+list-before:
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Quietude — design tokens
+**
+** A distraction-free theme for reading and writing. Frames go seamless, the
+** measure is bounded and centred, type is large and calmly set, and the
+** interface chrome recedes until you reach for it. The accent is used sparingly.
+** Motion is gentle (opacity and smooth scrolling), and stilled for reduced
+** motion. Anything composited stays on transform/opacity for the GPU.
+*/
+
+:root {
+	--q-ink: <<colour foreground>>;
+	--q-bg: <<colour background>>;
+	--q-paper: <<colour tiddler-background>>;
+	--q-muted: color-mix(in srgb, <<colour foreground>> 52%, <<colour background>>);
+	--q-faint: color-mix(in srgb, <<colour foreground>> 50%, <<colour background>>);
+	--q-line: color-mix(in srgb, <<colour foreground>> 10%, transparent);
+
+	--q-accent: <<colour primary>>;
+	--q-accent-ink: color-mix(in srgb, <<colour primary>> 52%, <<colour foreground>>);
+	--q-wash: color-mix(in srgb, <<colour primary>> 8%, transparent);
+	--q-wash-strong: color-mix(in srgb, <<colour primary>> 15%, transparent);
+
+	--q-radius: 10px;
+	--q-radius-sm: 7px;
+
+	/* Calm humanist sans for immersive reading */
+	--q-sans: "Source Sans 3", "Source Sans Pro", Seravek, "Avenir Next", "Segoe UI",
+		system-ui, -apple-system, sans-serif;
+	--q-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+
+	/* Reading measures */
+	--q-measure: 40rem;        /* the reading column */
+
+	--q-ease: cubic-bezier(0.4, 0, 0.2, 1);
+	--q-dur: 260ms;
+	--q-slow: 500ms;
+
+	accent-color: <<colour primary>>;
+	caret-color: <<colour primary>>;
+}
+
+/* Fallback for browsers without color-mix(): map the muted tones, hairline and
+   accent washes to solid palette colours so the calm reading surface stays
+   legible (the faint accent tints simply drop out). */
+@supports not (color: color-mix(in srgb, red, blue)) {
+	:root {
+		--q-muted: <<colour muted-foreground>>;
+		--q-faint: <<colour muted-foreground>>;
+		--q-line: <<colour tiddler-border>>;
+		--q-accent-ink: <<colour primary>>;
+		--q-wash: transparent;
+		--q-wash-strong: transparent;
+	}
+}
+
+
+html {
+	scroll-behavior: smooth;
+	background-color: <<colour page-background>>;
+	/* Hand the page (viewport) scrollbar back to the browser so it follows the
+	   palette's `color-scheme` on :root. The `* { scrollbar-color }` rule below
+	   themes inner scrollbars, but applied to the root it overrides the native
+	   colour-scheme scrollbar and leaves the page scrollbar light on dark palettes
+	   (notably in TiddlyDesktop). Resetting it restores the native dark bar. */
+	scrollbar-color: initial;
+}
+
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--q-line) transparent;
+}
+*::-webkit-scrollbar { width: 10px; height: 10px; }*::-webkit-scrollbar-thumb {
+	background: color-mix(in srgb, <<colour foreground>> 18%, transparent);
+	border-radius: 999px;
+	border: 3px solid transparent;
+	background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, <<colour primary>> 40%, transparent); background-clip: content-box; }
+
+::selection { background: var(--q-wash-strong); }
+
+:where(button, input, textarea, select, a):focus-visible {
+	outline: 2px solid var(--q-accent);
+	outline-offset: 2px;
+	border-radius: var(--q-radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		animation-duration: 0.001ms !important;
+		transition-duration: 0.001ms !important;
+	}
+}

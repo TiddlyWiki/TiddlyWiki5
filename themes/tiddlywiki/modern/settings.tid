@@ -1,0 +1,6 @@
+title: $:/themes/tiddlywiki/modern/settings
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+{{{ [[$:/config/themes/modern/animations]get[text]match[no]then[html::before{animation:none!important;}]] }}}

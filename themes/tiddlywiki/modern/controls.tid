@@ -1,0 +1,313 @@
+title: $:/themes/tiddlywiki/modern/controls
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Buttons, tags, controls, inputs, dropdowns & modals
+*/
+
+/* Tiddler & page control icons — scale and accent-fill on hover */
+.tc-tiddler-controls button,
+.tc-page-controls button {
+	border-radius: var(--m-radius-sm);
+	transition:
+		background-color var(--m-dur-fast) var(--m-ease),
+		transform var(--m-dur) var(--m-bounce);
+}
+
+.tc-tiddler-controls button svg,
+.tc-page-controls button svg {
+	transition: fill var(--m-dur-fast) var(--m-ease), transform var(--m-dur) var(--m-bounce);
+}
+
+.tc-tiddler-controls button:hover {
+	background: var(--m-accent-wash-strong);
+	transform: translateZ(0) scale(1.22);
+}
+
+.tc-tiddler-controls button:hover svg {
+	fill: var(--m-accent);
+}
+
+.tc-page-controls button:hover {
+	transform: translateZ(0) scale(1.25) rotate(-8deg);
+}
+
+.tc-page-controls button:hover svg {
+	fill: var(--m-accent);
+}
+
+.tc-btn-invisible:hover svg {
+	fill: var(--m-accent);
+}
+
+/* Standard / boxed buttons — modern pill with springy press */
+.tc-btn-boxed,
+.tc-btn-rounded,
+button.tc-btn-standard,
+.tc-drop-down button.tc-btn-invisible.tc-tag-button-selected {
+	border-radius: var(--m-radius-pill);
+	transition:
+		background-color var(--m-dur) var(--m-ease),
+		box-shadow var(--m-dur) var(--m-ease),
+		transform var(--m-dur) var(--m-bounce);
+}
+
+.tc-btn-boxed:hover,
+.tc-btn-rounded:hover,
+button.tc-btn-standard:hover {
+	transform: translate3d(0, -2px, 0) scale(1.03);
+	box-shadow: var(--m-shadow-2);
+}
+
+.tc-btn-boxed:active,
+.tc-btn-rounded:active,
+button.tc-btn-standard:active {
+	transform: translate3d(0, 0, 0) scale(0.97);
+}
+
+/* Big call-to-action & primary buttons get the accent gradient */
+.tc-btn-big-green,
+.tc-primary-btn,
+button.tc-btn-big-green {
+	background: var(--m-accent-gradient) !important;
+	color: var(--m-accent-contrast) !important;
+	border: none !important;
+	border-radius: var(--m-radius-pill);
+	box-shadow: var(--m-shadow-accent);
+	transition:
+		transform var(--m-dur) var(--m-bounce),
+		box-shadow var(--m-dur) var(--m-ease),
+		filter var(--m-dur) var(--m-ease);
+}
+
+.tc-btn-big-green svg,
+.tc-primary-btn svg {
+	fill: var(--m-accent-contrast) !important;
+}
+
+.tc-btn-big-green:hover,
+.tc-primary-btn:hover {
+	transform: translate3d(0, -3px, 0) scale(1.04);
+	box-shadow: var(--m-shadow-2), var(--m-shadow-accent);
+	filter: saturate(1.18) brightness(1.05);
+}
+
+.tc-btn-big-green:active,
+.tc-primary-btn:active {
+	transform: translate3d(0, 0, 0) scale(0.98);
+}
+
+/* Tags — peppy pills that lift on hover. Un-coloured tags get a neutral themed
+   chip (foreground tint + accent hairline); tags with an assigned colour keep
+   their own fill and contrastcolour text. */
+.tc-tag-label,
+.tc-tag-list-item .tc-tag-label {
+	border-radius: var(--m-radius-pill);
+	transition:
+		transform var(--m-dur) var(--m-bounce),
+		box-shadow var(--m-dur) var(--m-ease),
+		filter var(--m-dur) var(--m-ease),
+		background-color var(--m-dur) var(--m-ease);
+}
+
+.tc-tag-label.tc-tag-label:not([style*="background-color"]),
+.tc-tag-label.tc-tag-label[style*="background-color:;"],
+.tc-tag-label.tc-tag-label[style*="background-color: ;"] {
+	background-color: color-mix(in srgb, <<colour foreground>> 9%, transparent);
+	color: <<colour foreground>> !important;
+	fill: <<colour foreground>> !important;
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, <<colour primary>> 32%, transparent);
+}
+.tc-tag-label.tc-tag-label:not([style*="background-color"]) svg,
+.tc-tag-label.tc-tag-label[style*="background-color:;"] svg,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"] svg { fill: <<colour foreground>> !important; }
+
+.tc-tag-label:hover {
+	transform: translate3d(0, -2px, 0) scale(1.06);
+	box-shadow: var(--m-shadow-2);
+	filter: saturate(1.18) brightness(1.05);
+}
+.tc-tag-label.tc-tag-label:not([style*="background-color"]):hover,
+.tc-tag-label.tc-tag-label[style*="background-color:;"]:hover,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"]:hover {
+	box-shadow: var(--m-shadow-2), inset 0 0 0 1px var(--m-accent);
+	filter: none;
+}
+
+
+/* Themed shape + a subtle defining edge on every tag. Coloured tags
+   (#hex, rgb(), or a named colour like GreenYellow) keep their own fill
+   and contrastcolour text and gain this edge; the uncoloured chip above
+   overrides the box-shadow with its accent border. */
+.tc-tag-label.tc-tag-label {
+	border-radius: var(--m-radius-pill);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, <<colour foreground>> 22%, transparent);
+}
+
+/* Untagged label keeps the pill shape */
+.tc-untagged-label {
+	border-radius: var(--m-radius-pill);
+}
+
+/* Dropdowns & popups — rounded, elevated, with a quick slide-in */
+@keyframes m-pop-in {
+	from { opacity: 0; transform: translate3d(0, -8px, 0) scale(0.94); }
+	to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+.tc-drop-down,
+.tc-block-dropdown {
+	border-radius: var(--m-radius);
+	border: 1px solid var(--m-hairline);
+	box-shadow: var(--m-shadow-2);
+	padding: 6px;
+	transform-origin: top center;
+	animation: m-pop-in var(--m-dur) var(--m-bounce) both;
+}
+
+.tc-drop-down a.tc-tiddlylink,
+.tc-drop-down button,
+.tc-drop-down .tc-dropdown-item,
+.tc-block-dropdown a.tc-tiddlylink {
+	border-radius: var(--m-radius-sm);
+	transition: background-color var(--m-dur-fast) var(--m-ease);
+}
+
+/* Hover rows: vanilla pairs a primary background with near-white text; since we
+   replace the background with a light wash, we must restore a dark, contrasting
+   foreground (and icon fill) so the text never sits white-on-pale. */
+.tc-drop-down a:hover,
+.tc-drop-down button:hover,
+.tc-drop-down .tc-btn-invisible:hover,
+.tc-drop-down .tc-file-input-wrapper:hover button,
+.tc-block-dropdown a:hover,
+.tc-block-tags-dropdown .tc-btn-invisible:hover {
+	background: var(--m-accent-wash-strong);
+	color: <<colour foreground>>;
+	background-size: 0 0;
+}
+.tc-drop-down button.tc-btn-invisible:hover svg,
+.tc-block-dropdown button.tc-btn-invisible:hover svg,
+.tc-block-tags-dropdown .tc-btn-invisible:hover svg {
+	fill: <<colour foreground>>;
+}
+
+/* Modals — rounded with a blurred backdrop and entrance animation */
+.tc-modal {
+	border-radius: var(--m-radius-lg);
+	border: 1px solid var(--m-hairline);
+	box-shadow: var(--m-shadow-3);
+	overflow: hidden;
+	animation: m-pop-in var(--m-dur-slow) var(--m-ease-out) both;
+}
+
+.tc-modal-header {
+	border-bottom: 1px solid var(--m-hairline);
+}
+
+.tc-modal-footer {
+	border-radius: 0 0 var(--m-radius-lg) var(--m-radius-lg);
+}
+
+.tc-modal-backdrop {
+	backdrop-filter: blur(3px) saturate(1.1);
+	-webkit-backdrop-filter: blur(3px) saturate(1.1);
+}
+
+/* Notifications & alerts — rounded and elevated */
+.tc-notification {
+	border-radius: var(--m-radius);
+	box-shadow: var(--m-shadow-2);
+	border: 1px solid var(--m-hairline);
+	animation: m-pop-in var(--m-dur) var(--m-bounce) both;
+}
+
+.tc-alert {
+	border-radius: var(--m-radius);
+	box-shadow: var(--m-shadow-2);
+}
+
+/* Inputs, search & editors — rounded with a focus glow */
+input[type="text"],
+input[type="search"],
+input.tc-edit-texteditor,
+textarea.tc-edit-texteditor,
+.tc-edit-texteditor,
+select {
+	border-radius: var(--m-radius-sm);
+	transition:
+		border-color var(--m-dur) var(--m-ease),
+		box-shadow var(--m-dur) var(--m-ease),
+		background-color var(--m-dur) var(--m-ease);
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus,
+input.tc-edit-texteditor:focus,
+textarea.tc-edit-texteditor:focus,
+.tc-edit-texteditor:focus {
+	border-color: var(--m-accent);
+	box-shadow: 0 0 0 3px var(--m-accent-wash-strong);
+	outline: none;
+}
+
+.tc-edit-tags {
+	border-radius: var(--m-radius-sm);
+}
+
+/* Tiddler info panel — rounded card */
+.tc-tiddler-info {
+	/* Full-bleed to the frame edges, then re-pad so content aligns with
+	   the body — matched to THIS theme's 42px frame padding. */
+	margin-left: -42px;
+	margin-right: -42px;
+	padding-left: 42px;
+	padding-right: 42px;
+	border-radius: var(--m-radius);
+	box-shadow: inset 0 1px 0 var(--m-hairline);
+	animation: m-pop-in var(--m-dur) var(--m-bounce) both;
+}
+
+/* Tabs — animated, with an accent underline on the selected tab */
+.tc-tab-buttons button {
+	border-radius: var(--m-radius-sm) var(--m-radius-sm) 0 0;
+	transition: background-color var(--m-dur-fast) var(--m-ease), color var(--m-dur-fast) var(--m-ease);
+}
+
+.tc-tab-buttons button:hover {
+	background: var(--m-accent-wash);
+}
+
+.tc-tab-buttons button.tc-tab-selected {
+	position: relative;
+	box-shadow: inset 0 -2px 0 var(--m-accent);
+}
+
+/* Plugin info chips */
+.tc-plugin-info {
+	border-radius: var(--m-radius);
+	border-color: var(--m-hairline);
+	box-shadow: var(--m-shadow-1);
+	transition: transform var(--m-dur-fast) var(--m-ease), box-shadow var(--m-dur) var(--m-ease);
+}
+/* Override vanilla's a.tc-tiddlylink.tc-plugin-info:hover (0,3,1) which floods the card with
+   primary colour; replace with Modern's lift-and-glow treatment. Same specificity, loads
+   later → wins. */
+a.tc-tiddlylink.tc-plugin-info:hover {
+	background-color: <<colour tiddler-background>>;
+	color: <<colour foreground>>;
+	fill: <<colour primary>>;
+	border-color: <<colour primary>>;
+	transform: translate3d(0, -1px, 0);
+	box-shadow: var(--m-shadow-2), var(--m-shadow-accent);
+	text-decoration: none;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: <<colour primary>>;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	color: <<colour foreground>>;
+	border-color: <<colour tiddler-border>>;
+}

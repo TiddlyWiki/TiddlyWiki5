@@ -1,0 +1,10 @@
+{
+	"title": "$:/themes/tiddlywiki/quietude",
+	"name": "Quietude",
+	"author": "TiddlyWiki",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "A distraction-free reading and writing theme",
+	"dependents": ["$:/themes/tiddlywiki/vanilla"],
+	"plugin-priority": "0"
+}

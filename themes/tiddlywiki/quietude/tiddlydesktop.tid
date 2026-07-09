@@ -1,0 +1,196 @@
+title: $:/themes/tiddlywiki/quietude/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Quietude theme
+** Calm, minimal library aesthetic: humanist sans, gentle shadows, soft sage tones.
+** The WikiList window feels like a quiet, well-organised shelf.
+*/
+
+/* Toolbar — warm, borderless, with a hairline rule instead of a heavy shadow */
+.td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: none;
+	border-bottom: 1px solid var(--q-line);
+	font-family: var(--q-sans);
+}
+
+/* Wikilist items — gently rounded cards with a calm, layered shadow */
+.td-wikilist .td-wikilist-item {
+	border-radius: var(--q-radius);
+	box-shadow: 0 1px 3px color-mix(in srgb, <<colour foreground>> 8%, transparent),
+	            0 2px 10px color-mix(in srgb, <<colour foreground>> 5%, transparent);
+}
+.td-wikilist .td-wikilist-item:hover {
+	box-shadow: 0 2px 8px color-mix(in srgb, <<colour foreground>> 11%, transparent),
+	            0 6px 24px color-mix(in srgb, <<colour foreground>> 8%, transparent);
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title & info — Quietude's calm humanist sans throughout */
+.td-wikilist .td-wiki-title {
+	font-family: var(--q-sans);
+	font-weight: 600;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--q-sans);
+}
+
+/* ── WikiList action buttons — styled by role ────────────────────────── */
+/* Gently rounded buttons that settle a soft, calm shadow on hover */
+button.td-button {
+	border-radius: var(--q-radius-sm);
+	color: <<colour wikilist-button-foreground>>;
+	font-family: var(--q-sans);
+	font-size: 0.82em;
+	font-weight: 500;
+}
+/* Toolbar buttons sit on the neutral button surface, so they need the theme
+   ink too — the plugin default (wikilist-button-foreground) is the page
+   background colour, which renders invisibly here */
+.td-toolbar button.td-button {
+	color: var(--q-ink);
+	fill: var(--q-ink);
+}
+.td-wikilist .td-button:hover {
+	box-shadow: 0 1px 3px color-mix(in srgb, <<colour foreground>> 12%, transparent),
+	            0 3px 12px color-mix(in srgb, <<colour foreground>> 8%, transparent);
+}
+/* Utility (convert / advanced / plugins / reveal-backups) — the neutral button
+   surface reads in the calm ink, switching to button-foreground when filled */
+.td-wikilist .td-wikilist-button-convert,
+.td-wikilist .td-wikilist-button-advanced,
+.td-wikilist .td-wikilist-button-plugins,
+.td-wikilist .td-wikilist-button-reveal-backups {
+	color: var(--q-ink);
+	fill: var(--q-ink);
+}
+.td-wikilist .td-wikilist-button-convert:hover,
+.td-wikilist .td-wikilist-button-advanced:hover,
+.td-wikilist .td-wikilist-button-plugins:hover,
+.td-wikilist .td-wikilist-button-reveal-backups:hover {
+	color: <<colour wikilist-button-foreground>>;
+	fill: <<colour wikilist-button-foreground>>;
+}
+
+/* Toolbar inputs */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--q-sans);
+	border-radius: var(--q-radius-sm);
+}
+
+/* ── The WikiList window — a quiet, well-kept shelf ──────────────────── */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--q-sans);
+	border-radius: var(--q-radius-sm);
+	border: 1px solid var(--q-line);
+	transition: border-color var(--q-dur) var(--q-ease);
+}
+.td-search input.td-wikilist-search-input:focus {
+	border-color: var(--q-accent);
+}
+.td-tags .tc-tag-label {
+	font-family: var(--q-sans);
+}
+
+/* ── WikiList rows — calm cards, softly framed favicon ──────────────── */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--q-radius-sm);
+	box-shadow: 0 1px 3px color-mix(in srgb, <<colour foreground>> 8%, transparent);
+}
+.td-wikilist .td-wiki-url {
+	font-family: var(--q-sans);
+}
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--q-sans);
+}
+
+/* ══ TiddlyDesktop Android — top bar, slide-in sidebar & backdrop ═══════════
+   The Android WikiList swaps the desktop toolbar for a sticky .td-topbar (logo
+   menu-button + title) and a slide-in .td-sidebar of toolbar actions over a
+   blurred .td-backdrop. android-styles.tid lays these out palette-agnostically
+   (neutral grey chips); here we dress them in Quietude's calm, quiet aesthetic.
+   This stylesheet's title sorts after android-styles, so equal-specificity
+   rules win — and the chip fills there are !important, so ours must be too. */
+
+/* Top bar — borderless and warm, with a hairline rule instead of a shadow */
+.td-topbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: none;
+	border-bottom: 1px solid var(--q-line);
+	font-family: var(--q-sans);
+}
+.td-topbar-title {
+	font-family: var(--q-sans);
+	font-weight: 600;
+}
+
+/* Form controls don't inherit font-family, so the nav buttons, the theme/palette
+   pickers and the create-wiki dropdown would fall back to the UA font. Carry the
+   theme font onto the top bar and sidebar and let every control inherit it. */
+.td-topbar,
+.td-sidebar {
+	font-family: var(--q-sans);
+}
+.td-topbar button, .td-topbar input, .td-topbar select,
+.td-sidebar button, .td-sidebar input, .td-sidebar select, .td-sidebar textarea {
+	font-family: inherit;
+}
+
+/* Sidebar — a quiet paper shelf with a gentle, layered shadow */
+.td-sidebar {
+	background: var(--q-paper);
+	box-shadow: 0 2px 8px color-mix(in srgb, <<colour foreground>> 8%, transparent),
+	            0 8px 30px color-mix(in srgb, <<colour foreground>> 8%, transparent);
+	border-right: 1px solid var(--q-line);
+	border-radius: 0 var(--q-radius) var(--q-radius) 0;
+	font-family: var(--q-sans);
+}
+.td-sidebar-head {
+	border-bottom: 1px solid var(--q-line);
+}
+
+/* Sidebar action chips — calm paper cards with a soft shadow; the neutral grey
+   fill from android-styles is !important, so match that here */
+.td-sidebar-item > .td-button,
+.td-sidebar-item > button,
+.td-sidebar-item > .td-language-switcher,
+.td-sidebar-item > span {
+	background: var(--q-paper) !important;
+	color: var(--q-ink) !important;
+	fill: var(--q-ink) !important;
+	border: 1px solid var(--q-line);
+	border-radius: var(--q-radius-sm);
+	box-shadow: 0 1px 3px color-mix(in srgb, <<colour foreground>> 8%, transparent);
+	font-family: var(--q-sans);
+}
+.td-sidebar-item > .td-button:hover,
+.td-sidebar-item > button:hover {
+	box-shadow: 0 1px 3px color-mix(in srgb, <<colour foreground>> 12%, transparent),
+	            0 3px 12px color-mix(in srgb, <<colour foreground>> 8%, transparent);
+}
+.td-sidebar-item > .td-picker {
+	background: var(--q-paper);
+	border: 1px solid var(--q-line);
+	border-radius: var(--q-radius-sm);
+}
+.td-sidebar-item select,
+.td-sidebar-item input {
+	font-family: var(--q-sans);
+	border-radius: var(--q-radius-sm);
+	border: 1px solid var(--q-line);
+	background: var(--q-paper);
+	color: var(--q-ink);
+}
+
+/* Backdrop — a soft foreground-tinted scrim behind the blur */
+.td-backdrop {
+	background: color-mix(in srgb, <<colour foreground>> 22%, transparent);
+}

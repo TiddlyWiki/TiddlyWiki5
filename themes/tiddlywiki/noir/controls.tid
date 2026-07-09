@@ -1,0 +1,278 @@
+title: $:/themes/tiddlywiki/noir/controls
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Buttons, tags, controls, overlays, inputs & sidebar
+*/
+
+@keyframes n-rise {
+	from { opacity: 0; transform: translate3d(0, 8px, 0); }
+	to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes n-pulse {
+	0%, 100% { opacity: 0.5; }
+	50%      { opacity: 1; }
+}
+
+/* Toolbar icons — warm to the accent with a soft glow */
+.tc-tiddler-controls button,
+.tc-page-controls button,
+.tc-topbar button {
+	border-radius: var(--n-radius-sm);
+	transition: background-color var(--n-dur) var(--n-ease), transform var(--n-fast) var(--n-ease);
+}
+.tc-tiddler-controls button svg,
+.tc-page-controls button svg,
+.tc-topbar button svg { transition: fill var(--n-dur) var(--n-ease); }
+.tc-tiddler-controls button:hover { background: var(--n-wash); transform: scale(1.08); }
+.tc-tiddler-controls button:hover svg,
+.tc-page-controls button:hover svg,
+.tc-topbar button:hover svg { fill: var(--n-accent-bright); }
+.tc-page-controls button:hover, .tc-topbar button:hover { transform: scale(1.1); }
+
+/* Standard buttons — raised surface, accent glow border on hover */
+button.tc-btn-standard,
+.tc-btn-boxed,
+.tc-btn-rounded {
+	border-radius: var(--n-radius-sm);
+	border: 1px solid var(--n-line-strong);
+	background: var(--n-surface-2);
+	transition: border-color var(--n-dur) var(--n-ease), box-shadow var(--n-dur) var(--n-ease),
+		color var(--n-dur) var(--n-ease), background-color var(--n-dur) var(--n-ease);
+}
+button.tc-btn-standard:hover,
+.tc-btn-boxed:hover,
+.tc-btn-rounded:hover {
+	border-color: var(--n-accent);
+	color: var(--n-accent-bright);
+	box-shadow: var(--n-shadow-glow);
+}
+
+/* Primary — luminous accent with a halo */
+.tc-btn-big-green,
+.tc-primary-btn,
+button.tc-btn-big-green {
+	background: color-mix(in srgb, <<colour primary>> 82%, <<colour foreground>>) !important;
+	color: <<colour background>> !important;
+	border: none !important;
+	border-radius: var(--n-radius-sm);
+	box-shadow: var(--n-shadow-glow);
+	transition: background-color var(--n-dur) var(--n-ease), box-shadow var(--n-dur) var(--n-ease),
+		transform var(--n-fast) var(--n-ease);
+}
+.tc-btn-big-green svg, .tc-primary-btn svg { fill: <<colour background>> !important; }
+.tc-btn-big-green:hover, .tc-primary-btn:hover {
+	background: var(--n-accent-bright) !important;
+	box-shadow: 0 6px 30px var(--n-glow);
+	transform: translateY(-1px);
+}
+
+/* Tags — glowing chips (doubled class beats vanilla) */
+.tc-tag-label.tc-tag-label:not([style*="background-color"]),
+.tc-tag-label.tc-tag-label[style*="background-color:;"],
+.tc-tag-label.tc-tag-label[style*="background-color: ;"] {
+	background-color: color-mix(in srgb, <<colour foreground>> 9%, transparent);
+	color: <<colour foreground>> !important;
+	fill: <<colour foreground>> !important;
+	box-shadow: inset 0 0 0 1px var(--n-glow);
+}
+.tc-tag-label.tc-tag-label:not([style*="background-color"]):hover,
+.tc-tag-label.tc-tag-label[style*="background-color:;"]:hover,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"]:hover {
+	box-shadow: inset 0 0 0 1px var(--n-accent), 0 0 16px var(--n-glow-soft);
+}
+.tc-tag-label.tc-tag-label:not([style*="background-color"]) svg,
+.tc-tag-label.tc-tag-label[style*="background-color:;"] svg,
+.tc-tag-label.tc-tag-label[style*="background-color: ;"] svg { fill: <<colour foreground>> !important; }
+
+/* Themed shape + a subtle defining edge on every tag. Coloured tags
+   (#hex, rgb(), or a named colour like GreenYellow) keep their own fill
+   and contrastcolour text and gain this edge; the uncoloured chip above
+   overrides the box-shadow with its accent border. */
+.tc-tag-label.tc-tag-label {
+	border-radius: var(--n-radius-pill);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, <<colour foreground>> 22%, transparent);
+	transition: box-shadow var(--n-dur) var(--n-ease), background-color var(--n-dur) var(--n-ease);
+}
+
+.tc-untagged-label { border-radius: var(--n-radius-pill); }
+
+/* Dropdowns — raised frosted glass */
+.tc-drop-down,
+.tc-block-dropdown {
+	border-radius: var(--n-radius);
+	border: 1px solid var(--n-line-strong);
+	background: color-mix(in srgb, var(--n-surface-3) 86%, transparent);
+	backdrop-filter: blur(16px) saturate(1.2);
+	-webkit-backdrop-filter: blur(16px) saturate(1.2);
+	box-shadow: var(--n-shadow-3);
+	padding: 6px;
+	animation: n-rise var(--n-dur) var(--n-ease) both;
+}
+.tc-drop-down a.tc-tiddlylink,
+.tc-drop-down button,
+.tc-drop-down .tc-dropdown-item,
+.tc-block-dropdown a.tc-tiddlylink {
+	border-radius: var(--n-radius-sm);
+	transition: background-color var(--n-fast) var(--n-ease);
+}
+/* Contrast-safe hover: replace vanilla's white-on-primary with wash + bright ink */
+.tc-drop-down a:hover,
+.tc-drop-down button:hover,
+.tc-drop-down .tc-btn-invisible:hover,
+.tc-drop-down .tc-file-input-wrapper:hover button,
+.tc-block-dropdown a:hover,
+.tc-block-tags-dropdown .tc-btn-invisible:hover {
+	background: var(--n-wash-strong);
+	color: var(--n-ink);
+}
+.tc-drop-down button.tc-btn-invisible:hover svg,
+.tc-block-dropdown button.tc-btn-invisible:hover svg,
+.tc-block-tags-dropdown .tc-btn-invisible:hover svg { fill: var(--n-ink); }
+.tc-drop-down .tc-tab-divider, .tc-drop-down hr { border: none; height: 1px; background: var(--n-line); }
+
+/* Modals */
+.tc-modal {
+	border-radius: var(--n-radius);
+	border: 1px solid var(--n-line-strong);
+	background: color-mix(in srgb, var(--n-surface-3) 90%, transparent);
+	backdrop-filter: blur(24px) saturate(1.2);
+	-webkit-backdrop-filter: blur(24px) saturate(1.2);
+	box-shadow: var(--n-shadow-3);
+	overflow: hidden;
+	animation: n-rise var(--n-slow) var(--n-ease) both;
+}
+.tc-modal-header { border-bottom: 1px solid var(--n-line); }
+.tc-modal-footer { border-top: 1px solid var(--n-line); background: var(--n-wash); }
+.tc-modal-backdrop { background: rgba(0,0,0,0.55); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+
+.tc-notification {
+	border-radius: var(--n-radius);
+	border: 1px solid var(--n-line-strong);
+	background: var(--n-surface-3);
+	box-shadow: var(--n-shadow-3);
+	animation: n-rise var(--n-dur) var(--n-ease) both;
+}
+.tc-alert { border-radius: var(--n-radius); box-shadow: var(--n-shadow-2); }
+
+.tc-tiddler-info {
+	/* Full-bleed to the frame edges, then re-pad so content aligns with
+	   the body — matched to THIS theme's 44px frame padding. */
+	margin-left: -44px;
+	margin-right: -44px;
+	padding-left: 44px;
+	padding-right: 44px;
+	border-radius: var(--n-radius);
+	border: 1px solid var(--n-line);
+	background: var(--n-surface-2);
+	animation: n-rise var(--n-dur) var(--n-ease) both;
+}
+
+/* Inputs — sunken field, accent glow on focus */
+input[type="text"],
+input[type="search"],
+input.tc-edit-texteditor,
+textarea.tc-edit-texteditor,
+.tc-edit-texteditor,
+select {
+	border-radius: var(--n-radius-sm);
+	background: var(--n-surface-2);
+	transition: border-color var(--n-dur) var(--n-ease), box-shadow var(--n-dur) var(--n-ease);
+}
+input[type="text"]:focus,
+input[type="search"]:focus,
+input.tc-edit-texteditor:focus,
+textarea.tc-edit-texteditor:focus,
+.tc-edit-texteditor:focus {
+	border-color: var(--n-accent);
+	box-shadow: 0 0 0 3px var(--n-wash), 0 0 18px var(--n-glow-soft);
+	outline: none;
+}
+.tc-edit-tags { border-radius: var(--n-radius-sm); }
+
+/* Tabs — glowing underline for the chosen tab */
+.tc-tab-buttons button {
+	border-radius: var(--n-radius-sm) var(--n-radius-sm) 0 0;
+	transition: color var(--n-dur) var(--n-ease), background-color var(--n-dur) var(--n-ease);
+}
+.tc-tab-buttons button:hover { color: var(--n-accent-bright); }
+.tc-tab-buttons button.tc-tab-selected {
+	color: <<colour foreground>>;
+	box-shadow: inset 0 -2px 0 var(--n-accent);
+}
+
+.tc-plugin-info {
+	border-radius: var(--n-radius);
+	border-color: var(--n-line);
+	box-shadow: var(--n-shadow-1);
+	transition: box-shadow var(--n-dur) var(--n-ease), border-color var(--n-dur) var(--n-ease);
+}
+/* Override vanilla's flood-fill hover (0,3,1) with Noir's glow-and-rim treatment. */
+a.tc-tiddlylink.tc-plugin-info:hover {
+	background-color: var(--n-surface-1);
+	color: <<colour foreground>>;
+	fill: var(--n-accent);
+	border-color: var(--n-accent);
+	box-shadow: var(--n-shadow-2), var(--n-shadow-glow);
+	text-decoration: none;
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	fill: var(--n-accent-bright);
+}
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	color: <<colour foreground>>;
+	border-color: var(--n-line-strong);
+}
+
+/*
+** Sidebar
+*/
+.tc-site-title {
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	font-size: clamp(1.5rem, 1.25rem + 1vw, 1.95rem);
+	color: <<colour site-title-foreground>>;
+	text-shadow: 0 0 26px var(--n-glow-soft);
+}
+/* Masthead underline — a quietly pulsing band of accent light (GPU) */
+.tc-site-title::after {
+	content: "";
+	display: block;
+	height: 2px; width: 100%;
+	margin-top: 0.55rem;
+	border-radius: var(--n-radius-pill);
+	background: linear-gradient(to right, var(--n-accent), transparent 85%);
+	will-change: opacity;
+	animation: n-pulse 5s ease-in-out infinite;
+}
+.tc-site-subtitle { font-family: var(--n-mono); font-size: 0.76rem; color: var(--n-faint); }
+
+.tc-sidebar-lists .tc-tab-buttons button { transition: color var(--n-dur) var(--n-ease); }
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected { color: <<colour foreground>>; }
+.tc-sidebar-lists a.tc-tiddlylink {
+	border-radius: var(--n-radius-sm);
+	transition: color var(--n-dur) var(--n-ease), transform var(--n-dur) var(--n-ease);
+}
+.tc-sidebar-lists a.tc-tiddlylink:hover { color: var(--n-accent-bright); transform: translateX(2px); }
+.tc-sidebar-tab-open-item { border-radius: var(--n-radius-sm); transition: background-color var(--n-fast) var(--n-ease); }
+.tc-sidebar-tab-open-item:hover { background: var(--n-wash); }
+
+.tc-sidebar-header .tc-search input,
+.tc-search input {
+	border-radius: var(--n-radius-pill);
+	border: 1px solid var(--n-line-strong);
+	background: var(--n-surface-2);
+	transition: border-color var(--n-dur) var(--n-ease), box-shadow var(--n-dur) var(--n-ease);
+}
+.tc-sidebar-header .tc-search input:focus,
+.tc-search input:focus {
+	border-color: var(--n-accent);
+	box-shadow: 0 0 0 3px var(--n-wash), 0 0 18px var(--n-glow-soft);
+}
+.tc-page-controls { gap: 3px; }
+
+@media (max-width: 769px) {
+	.tc-tiddler-info { margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px; }
+}

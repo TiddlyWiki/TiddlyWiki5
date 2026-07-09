@@ -1,0 +1,218 @@
+title: $:/themes/tiddlywiki/lucid/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Lucid theme (accessibility-first)
+** High-contrast, WCAG AAA. Legibility and clear affordances over decoration.
+** No decorative shadows. Strong visible item rings. Large touch targets.
+** Atkinson Hyperlegible throughout for maximum readability.
+*/
+
+/* Toolbar — strong structural border instead of a shadow */
+.td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: none;
+	border-bottom: 3px solid <<colour wikilist-toolbar-foreground>>;
+	font-family: var(--l-sans);
+}
+
+/* Wiki-list items — 2px visible ring via box-shadow (doesn't interfere with
+   the plugin's border-left accent stripe); no decorative cast shadow */
+.td-wikilist .td-wikilist-item {
+	border-radius: var(--l-radius-sm);
+	box-shadow: 0 0 0 2px var(--l-border);
+}
+.td-wikilist .td-wikilist-item:hover {
+	/* Accent ring on hover — clearly signalled without relying on colour alone */
+	box-shadow: 0 0 0 3px <<colour wikilist-item-border-hover>>;
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title — Atkinson Hyperlegible, heavier weight for hierarchy */
+.td-wikilist .td-wiki-title {
+	font-family: var(--l-sans);
+	font-weight: 700;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--l-sans);
+}
+
+/* Buttons — minimum 44px touch target (WCAG 2.5.5), square-ish corners */
+button.td-button {
+	border-radius: var(--l-radius-sm);
+	color: <<colour wikilist-button-foreground>>;
+	font-family: var(--l-sans);
+	font-weight: 600;
+	min-height: var(--l-target);
+	min-width: var(--l-target);
+}
+
+/* Toolbar buttons sit on the neutral button surface, so they need high-contrast
+   ink too — the plugin default (wikilist-button-foreground) is the page
+   background colour, which renders invisibly here */
+.td-toolbar button.td-button {
+	color: var(--l-ink);
+	fill: var(--l-ink);
+}
+/* Utility (convert / advanced / plugins / reveal-backups) — the neutral button
+   surface needs high-contrast ink, not the white used on the coloured buttons,
+   so the labels stay legible in both light and dark palettes */
+.td-wikilist .td-wikilist-button-convert,
+.td-wikilist .td-wikilist-button-advanced,
+.td-wikilist .td-wikilist-button-plugins,
+.td-wikilist .td-wikilist-button-reveal-backups {
+	color: var(--l-ink);
+	fill: var(--l-ink);
+}
+.td-wikilist .td-wikilist-button-convert:hover,
+.td-wikilist .td-wikilist-button-advanced:hover,
+.td-wikilist .td-wikilist-button-plugins:hover,
+.td-wikilist .td-wikilist-button-reveal-backups:hover {
+	color: <<colour wikilist-button-foreground>>;
+	fill: <<colour wikilist-button-foreground>>;
+}
+
+/* Strong focus ring matching Lucid's site-wide focus pattern */
+button.td-button:focus-visible,
+.td-toolbar button:focus-visible,
+.td-toolbar input:focus-visible,
+.td-toolbar select:focus-visible {
+	outline: 3px solid var(--l-ink);
+	outline-offset: 2px;
+	box-shadow: 0 0 0 2px var(--l-bg), 0 0 0 6px var(--l-ink);
+}
+
+/* Toolbar inputs — thick border for clarity */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--l-sans);
+	border-radius: var(--l-radius-sm);
+	border: 2px solid <<colour foreground>>;
+}
+
+/* ── The WikiList window — high-contrast, legible chrome ────────────── */
+
+/* Search field — thick border, large hit target, strong focus ring */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--l-sans);
+	border-radius: var(--l-radius-sm);
+	border: 2px solid <<colour foreground>>;
+	min-height: var(--l-target);
+}
+.td-search input.td-wikilist-search-input:focus-visible {
+	outline: 3px solid var(--l-ink);
+	outline-offset: 2px;
+	box-shadow: 0 0 0 2px var(--l-bg), 0 0 0 6px var(--l-ink);
+}
+
+/* Filter tag pills — comfortable hit target (WCAG 2.5.5) */
+.td-tags .tc-tag-label {
+	font-family: var(--l-sans);
+	min-height: var(--l-target);
+	display: inline-flex;
+	align-items: center;
+}
+
+/* ── WikiList rows — clearly framed favicon, legible metadata ───────── */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--l-radius-sm);
+	box-shadow: 0 0 0 2px var(--l-border);
+}
+.td-wikilist .td-wiki-url {
+	font-family: var(--l-sans);
+}
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--l-sans);
+}
+
+/* ══ TiddlyDesktop Android — top bar, slide-in sidebar & backdrop ═══════════
+   The Android WikiList swaps the desktop toolbar for a sticky .td-topbar (logo
+   menu-button + title) and a slide-in .td-sidebar of toolbar actions over a
+   blurred .td-backdrop. android-styles.tid lays these out palette-agnostically
+   (neutral grey chips); here we dress them in Lucid's high-contrast, structural
+   aesthetic — strong visible borders, no decorative shadows, large hit targets.
+   This stylesheet's title sorts after android-styles, so equal-specificity
+   rules win — and the chip fills there are !important, so ours must be too. */
+
+/* Top bar — strong structural border instead of a shadow */
+.td-topbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: none;
+	border-bottom: 3px solid <<colour wikilist-toolbar-foreground>>;
+	font-family: var(--l-sans);
+}
+.td-topbar-title {
+	font-family: var(--l-sans);
+	font-weight: 700;
+}
+
+/* Form controls don't inherit font-family, so the nav buttons, the theme/palette
+   pickers and the create-wiki dropdown would fall back to the UA font. Carry the
+   theme font onto the top bar and sidebar and let every control inherit it. */
+.td-topbar,
+.td-sidebar {
+	font-family: var(--l-sans);
+}
+.td-topbar button, .td-topbar input, .td-topbar select,
+.td-sidebar button, .td-sidebar input, .td-sidebar select, .td-sidebar textarea {
+	font-family: inherit;
+}
+
+/* Sidebar — a strong structural border replaces the drop shadow */
+.td-sidebar {
+	background: var(--l-bg);
+	color: var(--l-ink);
+	box-shadow: none;
+	border-right: 3px solid var(--l-ink);
+	font-family: var(--l-sans);
+}
+.td-sidebar-head {
+	border-bottom: 3px solid var(--l-ink);
+}
+
+/* Sidebar action chips — high-contrast surfaces with a thick visible ring and a
+   comfortable hit target; the neutral grey fill from android-styles is
+   !important, so match that here. Accent ring on hover signals state without
+   relying on colour alone (the border thickness already carries the affordance). */
+.td-sidebar-item > .td-button,
+.td-sidebar-item > button,
+.td-sidebar-item > .td-language-switcher,
+.td-sidebar-item > span {
+	background: var(--l-bg) !important;
+	color: var(--l-ink) !important;
+	fill: var(--l-ink) !important;
+	border: 2px solid var(--l-border-strong);
+	border-radius: var(--l-radius-sm);
+	font-family: var(--l-sans);
+	font-weight: 600;
+	min-height: var(--l-target);
+}
+.td-sidebar-item > .td-button:hover,
+.td-sidebar-item > button:hover {
+	border-color: var(--l-accent);
+}
+.td-sidebar-item > .td-picker {
+	background: var(--l-bg);
+	border: 2px solid var(--l-border-strong);
+	border-radius: var(--l-radius-sm);
+}
+.td-sidebar-item select,
+.td-sidebar-item input {
+	font-family: var(--l-sans);
+	border-radius: var(--l-radius-sm);
+	border: 2px solid <<colour foreground>>;
+	background: var(--l-bg);
+	color: var(--l-ink);
+	min-height: var(--l-target);
+}
+
+/* Backdrop — a strong scrim behind the blur for a clear layer separation */
+.td-backdrop {
+	background: color-mix(in srgb, var(--l-ink) 45%, transparent);
+}

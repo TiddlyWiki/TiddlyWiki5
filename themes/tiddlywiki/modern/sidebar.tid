@@ -1,0 +1,116 @@
+title: $:/themes/tiddlywiki/modern/sidebar
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Sidebar
+*/
+
+/* Site title — a confident accent gradient lockup (motion lives in the top bar) */
+.tc-site-title {
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	background: linear-gradient(100deg, var(--m-accent-soft), var(--m-accent) 55%, var(--m-accent-strong));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+
+.tc-site-subtitle {
+	letter-spacing: 0.01em;
+}
+
+/* Sidebar tiddler links slide a touch on hover */
+.tc-sidebar-lists .tc-tiddlylink,
+.tc-sidebar-lists a.tc-tiddlylink {
+	border-radius: var(--m-radius-sm);
+	transition: color var(--m-dur-fast) var(--m-ease), transform var(--m-dur-fast) var(--m-ease);
+	background-size: 0 0;
+}
+
+.tc-sidebar-lists .tc-tiddlylink:hover {
+	transform: translateX(3px);
+	color: var(--m-accent);
+}
+
+/* Sidebar tab buttons — pill-ish, accent on selected */
+.tc-sidebar-lists .tc-tab-buttons button {
+	border-radius: var(--m-radius-pill);
+	margin-right: 4px;
+	transition:
+		background-color var(--m-dur-fast) var(--m-ease),
+		color var(--m-dur-fast) var(--m-ease),
+		box-shadow var(--m-dur) var(--m-ease);
+}
+
+.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected {
+	background: var(--m-accent-wash-strong);
+	box-shadow: inset 0 0 0 1px var(--m-glow);
+	color: var(--m-accent);
+}
+
+/* Search box — rounded with a focus glow and accelerated icon */
+.tc-sidebar-header .tc-search input,
+.tc-search input {
+	border-radius: var(--m-radius-pill);
+	padding-left: 0.9em;
+	border: 1px solid var(--m-hairline);
+	background: var(--m-accent-wash);
+	transition:
+		box-shadow var(--m-dur) var(--m-ease),
+		border-color var(--m-dur) var(--m-ease),
+		background-color var(--m-dur) var(--m-ease);
+}
+
+.tc-sidebar-header .tc-search input:focus,
+.tc-search input:focus {
+	border-color: var(--m-accent);
+	box-shadow: 0 0 0 3px var(--m-accent-wash-strong);
+	background: <<colour background>>;
+}
+
+.tc-search .tc-search-button svg,
+.tc-search-results svg {
+	transition: fill var(--m-dur-fast) var(--m-ease);
+}
+
+/* Page controls row — give the buttons room to bounce */
+.tc-page-controls {
+	gap: 2px;
+}
+
+.tc-page-controls button {
+	border-radius: var(--m-radius-sm);
+}
+
+/* Sidebar tab content divider becomes a soft accent line */
+.tc-sidebar-lists .tc-tab-set .tc-tab-divider {
+	border: none;
+	height: 1px;
+	background: linear-gradient(to right, var(--m-hairline), transparent);
+}
+
+/* Open-tiddler list items in the sidebar */
+.tc-sidebar-tab-open-item {
+	border-radius: var(--m-radius-sm);
+	transition: background-color var(--m-dur-fast) var(--m-ease);
+}
+
+.tc-sidebar-tab-open-item:hover {
+	background: var(--m-accent-wash);
+}
+
+/* Top bar buttons (fold-all etc.) */
+.tc-topbar button {
+	transition: transform var(--m-dur-fast) var(--m-ease), fill var(--m-dur-fast) var(--m-ease);
+}
+
+.tc-topbar button:hover {
+	transform: translateZ(0) scale(1.15);
+}
+
+.tc-topbar button:hover svg {
+	fill: var(--m-accent);
+}

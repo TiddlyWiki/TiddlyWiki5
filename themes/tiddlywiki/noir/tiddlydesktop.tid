@@ -1,0 +1,219 @@
+title: $:/themes/tiddlywiki/noir/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Noir theme
+** Cinematic, dark-native aesthetic: rim-highlighted cards, layered cast shadows,
+** glow accents. The wiki list feels like a polished, moody app drawer.
+*/
+
+/* Toolbar — a raised dark surface with Noir's signature rim highlight */
+.td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: var(--n-shadow-1);
+	font-family: var(--n-display);
+}
+
+/* Wiki-list items — large radius, rim + cast shadow depth */
+.td-wikilist .td-wikilist-item {
+	border-radius: var(--n-radius);
+	box-shadow: var(--n-shadow-1);
+}
+.td-wikilist .td-wikilist-item:hover {
+	box-shadow: var(--n-shadow-2);
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title & info — Noir's display sans */
+.td-wikilist .td-wiki-title {
+	font-family: var(--n-display);
+	font-weight: 600;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--n-body);
+}
+
+/* ── WikiList action buttons — styled by role ────────────────────────── */
+/* Pill buttons that lift on a cast shadow; the coloured roles gain a glow */
+button.td-button {
+	border-radius: var(--n-radius-pill);
+	color: <<colour wikilist-button-foreground>>;
+	font-family: var(--n-body);
+	font-size: 0.82em;
+	font-weight: 500;
+}
+/* Toolbar buttons sit on the neutral button surface, so they need the theme
+   ink too — the plugin default (wikilist-button-foreground) is the page
+   background colour, which renders invisibly here */
+.td-toolbar button.td-button {
+	color: var(--n-ink);
+	fill: var(--n-ink);
+}
+.td-wikilist .td-button {
+	box-shadow: var(--n-shadow-1);
+}
+.td-wikilist .td-button:hover {
+	transform: translateY(-1px);
+	box-shadow: var(--n-shadow-2);
+}
+.td-wikilist .td-button:active {
+	transform: translateY(0);
+}
+/* Open — the positive action glows green on hover */
+.td-wikilist .td-wikilist-button-open:hover {
+	box-shadow: var(--n-shadow-2),
+	            0 0 12px color-mix(in srgb, <<colour wikilist-button-open>> 55%, transparent);
+}
+/* Reveal — accent action gains Noir's signature accent glow */
+.td-wikilist .td-wikilist-button-reveal:hover {
+	box-shadow: var(--n-shadow-2), var(--n-shadow-glow);
+}
+/* Remove — the destructive action glows red on hover */
+.td-wikilist .td-wikilist-button-remove:hover {
+	box-shadow: var(--n-shadow-2),
+	            0 0 12px color-mix(in srgb, <<colour wikilist-button-remove>> 55%, transparent);
+}
+/* Utility (convert / advanced / plugins / reveal-backups) — the neutral dark
+   surface reads in the bright ink, switching to button-foreground on hover */
+.td-wikilist .td-wikilist-button-convert,
+.td-wikilist .td-wikilist-button-advanced,
+.td-wikilist .td-wikilist-button-plugins,
+.td-wikilist .td-wikilist-button-reveal-backups {
+	color: var(--n-ink);
+	fill: var(--n-ink);
+}
+.td-wikilist .td-wikilist-button-convert:hover,
+.td-wikilist .td-wikilist-button-advanced:hover,
+.td-wikilist .td-wikilist-button-plugins:hover,
+.td-wikilist .td-wikilist-button-reveal-backups:hover {
+	color: <<colour wikilist-button-foreground>>;
+	fill: <<colour wikilist-button-foreground>>;
+}
+
+/* Toolbar inputs — use the theme's raised surface colour */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--n-body);
+	border-radius: var(--n-radius-sm);
+	background: var(--n-surface-2);
+	border: 1px solid var(--n-line);
+	color: var(--n-ink);
+}
+
+/* ── The WikiList window — moody app drawer ──────────────────────────── */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--n-body);
+	border-radius: var(--n-radius-sm);
+	background: var(--n-surface-2);
+	border: 1px solid var(--n-line);
+	color: var(--n-ink);
+}
+.td-search input.td-wikilist-search-input:focus {
+	border-color: var(--n-accent);
+	box-shadow: 0 0 0 3px var(--n-glow-soft);
+}
+.td-tags .tc-tag-label {
+	font-family: var(--n-body);
+}
+
+/* ── WikiList rows — rim-lit favicon, monospace url ──────────────────── */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--n-radius-sm);
+	background: var(--n-surface-3);
+	box-shadow: var(--n-rim), 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.td-wikilist .td-wiki-url {
+	font-family: var(--n-mono);
+	font-size: 0.85em;
+}
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--n-display);
+}
+
+/* ══ TiddlyDesktop Android — top bar, slide-in sidebar & backdrop ═══════════
+   The Android WikiList swaps the desktop toolbar for a sticky .td-topbar (logo
+   menu-button + title) and a slide-in .td-sidebar of toolbar actions over a
+   blurred .td-backdrop. android-styles.tid lays these out palette-agnostically
+   (neutral grey chips); here we dress them in Noir's cinematic aesthetic — rim-
+   lit raised surfaces. This stylesheet's title sorts after android-styles, so
+   equal-specificity rules win; the chip fills there are !important, so ours too. */
+
+/* Top bar — a raised dark surface with Noir's signature rim + cast shadow */
+.td-topbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: var(--n-shadow-1);
+	font-family: var(--n-display);
+}
+.td-topbar-title {
+	font-family: var(--n-display);
+	font-weight: 600;
+}
+
+/* Form controls don't inherit font-family, so the nav buttons, the theme/palette
+   pickers and the create-wiki dropdown would fall back to the UA font. Carry the
+   theme font onto the top bar and sidebar and let every control inherit it. */
+.td-topbar,
+.td-sidebar {
+	font-family: var(--n-body);
+}
+.td-topbar button, .td-topbar input, .td-topbar select,
+.td-sidebar button, .td-sidebar input, .td-sidebar select, .td-sidebar textarea {
+	font-family: inherit;
+}
+
+/* Sidebar — a raised drawer: layered cast shadow, rim-lit head */
+.td-sidebar {
+	background: var(--n-surface-1);
+	color: var(--n-ink);
+	box-shadow: var(--n-shadow-2);
+	border-right: 1px solid var(--n-line);
+	border-radius: 0 var(--n-radius) var(--n-radius) 0;
+	font-family: var(--n-body);
+}
+.td-sidebar-head {
+	border-bottom: 1px solid var(--n-line-strong);
+	box-shadow: var(--n-rim);
+}
+
+/* Sidebar action chips — raised dark surfaces, bright ink; the neutral grey
+   fill from android-styles is !important, so match that here */
+.td-sidebar-item > .td-button,
+.td-sidebar-item > button,
+.td-sidebar-item > .td-language-switcher,
+.td-sidebar-item > span {
+	background: var(--n-surface-2) !important;
+	color: var(--n-ink) !important;
+	fill: var(--n-ink) !important;
+	border: 1px solid var(--n-line);
+	border-radius: var(--n-radius-sm);
+	box-shadow: var(--n-shadow-1);
+	font-family: var(--n-body);
+}
+.td-sidebar-item > .td-button:hover,
+.td-sidebar-item > button:hover {
+	box-shadow: var(--n-shadow-2), var(--n-shadow-glow);
+}
+.td-sidebar-item > .td-picker {
+	background: var(--n-surface-2);
+	border: 1px solid var(--n-line);
+	border-radius: var(--n-radius-sm);
+}
+.td-sidebar-item select,
+.td-sidebar-item input {
+	font-family: var(--n-body);
+	border-radius: var(--n-radius-sm);
+	border: 1px solid var(--n-line);
+	background: var(--n-surface-2);
+	color: var(--n-ink);
+}
+
+/* Backdrop — a deep cinematic scrim behind the blur */
+.td-backdrop {
+	background: color-mix(in srgb, #000 55%, transparent);
+}

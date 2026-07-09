@@ -1,0 +1,6 @@
+title: $:/themes/tiddlywiki/lucid/settings
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.tc-tiddler-body{max-width:{{{ [[$:/config/themes/lucid/measure]get[text]] ~[[70ch]] }}}!important;}

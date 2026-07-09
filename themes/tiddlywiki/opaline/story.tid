@@ -1,0 +1,119 @@
+title: $:/themes/tiddlywiki/opaline/story
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** Story river & tiddler panels
+*/
+
+/* The opal field: pools of coloured light drifting behind the whole page */
+.tc-page-container {
+	background-image:
+		radial-gradient(48% 40% at 12% 4%, color-mix(in srgb, var(--o-iris-2) 26%, transparent), transparent 62%),
+		radial-gradient(40% 34% at 90% 12%, color-mix(in srgb, var(--o-iris-4) 24%, transparent), transparent 60%),
+		radial-gradient(44% 40% at 86% 92%, color-mix(in srgb, var(--o-iris-3) 22%, transparent), transparent 62%),
+		radial-gradient(50% 46% at 30% 100%, color-mix(in srgb, var(--o-iris-5) 20%, transparent), transparent 64%);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+.tc-story-river { padding-top: 22px; }
+
+/*
+** Tiddler panel.
+**
+** The story views drive this node with inline transform/opacity and popups are
+** anchored through it, so it carries NO transform / filter / will-change and no
+** CSS animation of transform or opacity. The milky surface sits on padding-box;
+** an opal ring is painted on border-box. On hover we transition ONLY the custom
+** property `--o-angle`, so light sweeps around the ring while the story view
+** keeps full control of position and fade.
+*/
+.tc-tiddler-frame {
+	--o-angle: 130deg;
+	margin-bottom: 30px;
+	--o-frame-pad-x: 46px;
+	padding: 38px var(--o-frame-pad-x) 34px;
+	border: 2px solid transparent;
+	border-radius: var(--o-radius);
+	background:
+		radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--o-iris-2) 14%, transparent), transparent 50%) padding-box,
+		radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--o-iris-4) 12%, transparent), transparent 50%) padding-box,
+		radial-gradient(120% 95% at 100% 100%, color-mix(in srgb, var(--o-iris-3) 13%, transparent), transparent 52%) padding-box,
+		radial-gradient(120% 95% at 0% 100%, color-mix(in srgb, var(--o-iris-5) 11%, transparent), transparent 52%) padding-box,
+		linear-gradient(var(--o-paper), var(--o-paper)) padding-box,
+		var(--o-iris) border-box;
+	box-shadow: var(--o-shadow-1);
+	transition: box-shadow var(--o-slow) var(--o-ease),
+		--o-angle 1100ms var(--o-ease);
+}
+
+@media (min-width: 770px) {
+	.tc-tiddler-frame:hover {
+		--o-angle: 490deg;
+		box-shadow: var(--o-shadow-2);
+	}
+}
+
+.tc-tiddler-frame.tc-tiddler-edit-frame {
+	--o-angle: 320deg;
+	box-shadow: var(--o-shadow-2);
+}
+
+@media (max-width: 769px) {
+	.tc-tiddler-frame { padding: 24px 22px 20px; }
+}
+
+/* Title: luminous display face above a fine rule that warms on engagement */
+.tc-tiddler-title {
+	margin-bottom: 0.85em;
+	padding-bottom: 0.55em;
+	border-bottom: 1px solid var(--o-rule);
+	transition: border-color var(--o-slow) var(--o-ease);
+}
+.tc-tiddler-frame:hover .tc-tiddler-title {
+	border-color: color-mix(in srgb, var(--o-iris-1) 40%, transparent);
+}
+.tc-titlebar h2 { color: <<colour tiddler-title-foreground>>; }
+
+/* Metadata */
+.tc-tiddler-subtitle {
+	font-family: var(--o-body);
+	font-size: 0.78rem;
+	letter-spacing: 0.02em;
+	color: var(--o-faint);
+}
+
+.tc-tiddler-body { margin-top: 0.9em; }
+
+.tc-tiddler-missing .tc-tiddler-body {
+	color: var(--o-muted);
+	font-style: italic;
+}
+
+/* Fold / unfold banners — span the frame edge-to-edge INSIDE its borders via
+   left/right (so they stay correct whatever this theme's padding is, and in
+   both the static and absolute layout modes), and round their bottom corners
+   to follow the frame. */
+.tc-unfold-banner.tc-unfold-banner {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: auto;
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+	border-bottom-left-radius: calc(var(--o-radius) - 2px);
+	border-bottom-right-radius: calc(var(--o-radius) - 2px);
+}
+.tc-fold-banner.tc-fold-banner {
+	inset-inline-start: 0;
+	top: 0;
+	bottom: 0;
+	max-width: var(--o-frame-pad-x);
+	-webkit-margin-start: 0;
+	margin-inline-start: 0;
+	border-start-start-radius: calc(var(--o-radius) - 2px);
+	border-end-start-radius: calc(var(--o-radius) - 2px);
+}

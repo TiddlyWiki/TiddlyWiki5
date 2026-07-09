@@ -1,0 +1,10 @@
+{
+	"title": "$:/themes/tiddlywiki/noir",
+	"name": "Noir",
+	"author": "TiddlyWiki",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "A warm, cinematic dark-native theme",
+	"dependents": ["$:/themes/tiddlywiki/vanilla"],
+	"plugin-priority": "0"
+}

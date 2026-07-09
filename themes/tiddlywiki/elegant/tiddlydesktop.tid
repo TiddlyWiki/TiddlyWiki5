@@ -1,0 +1,207 @@
+title: $:/themes/tiddlywiki/elegant/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Elegant theme
+** Editorial aesthetic: serif display titles, hairline rule below the toolbar,
+** near-square card corners, whisper-soft shadows — calm and considered.
+*/
+
+/* Toolbar — quiet bar with a hairline separator, no heavy shadow */
+.td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: none;
+	border-bottom: 1px solid var(--e-rule-strong);
+	font-family: var(--e-sans);
+}
+
+/* Wiki-list items — near-square corners, whisper-soft shadow */
+.td-wikilist .td-wikilist-item {
+	border-radius: var(--e-radius-lg);
+	box-shadow: var(--e-shadow-1);
+}
+.td-wikilist .td-wikilist-item:hover {
+	box-shadow: var(--e-shadow-2);
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title — the editorial serif display face */
+.td-wikilist .td-wiki-title {
+	font-family: var(--e-display);
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--e-sans);
+}
+
+/* ── WikiList action buttons — styled by role ────────────────────────── */
+/* Refined near-square buttons; a whisper-soft shadow settles in on hover */
+button.td-button {
+	border-radius: var(--e-radius);
+	color: <<colour wikilist-button-foreground>>;
+	font-family: var(--e-sans);
+	font-size: 0.82em;
+}
+/* Toolbar buttons sit on the neutral button surface, so they need the theme
+   ink too — the plugin default (wikilist-button-foreground) is the page
+   background colour, which renders invisibly here */
+.td-toolbar button.td-button {
+	color: var(--e-ink);
+	fill: var(--e-ink);
+}
+.td-wikilist .td-button:hover {
+	box-shadow: var(--e-shadow-1);
+}
+/* Utility (convert / advanced / plugins / reveal-backups) — the neutral button
+   surface needs the editorial ink, not the white used on the coloured buttons */
+.td-wikilist .td-wikilist-button-convert,
+.td-wikilist .td-wikilist-button-advanced,
+.td-wikilist .td-wikilist-button-plugins,
+.td-wikilist .td-wikilist-button-reveal-backups {
+	color: var(--e-ink);
+	fill: var(--e-ink);
+}
+.td-wikilist .td-wikilist-button-convert:hover,
+.td-wikilist .td-wikilist-button-advanced:hover,
+.td-wikilist .td-wikilist-button-plugins:hover,
+.td-wikilist .td-wikilist-button-reveal-backups:hover {
+	color: <<colour wikilist-button-foreground>>;
+	fill: <<colour wikilist-button-foreground>>;
+}
+
+/* Toolbar inputs */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--e-sans);
+	border-radius: var(--e-radius);
+}
+
+/* ── The WikiList window — editorial chrome ──────────────────────────── */
+
+/* Search field — near-square, hairline-ruled, quiet sans */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--e-sans);
+	border-radius: var(--e-radius);
+	border: 1px solid var(--e-rule-strong);
+	transition: border-color var(--e-fast) var(--e-ease);
+}
+.td-search input.td-wikilist-search-input:focus {
+	border-color: var(--e-accent);
+}
+
+/* Filter tag pills share the toolbar's restrained sans */
+.td-tags .tc-tag-label {
+	font-family: var(--e-sans);
+}
+
+/* ── WikiList rows — paper cards, tipped-in favicon, ruled actions ────── */
+
+/* Favicon framed like a plate tipped into the page */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--e-radius);
+	box-shadow: var(--e-shadow-1);
+}
+
+/* URL set in the muted reading serif — the title's quiet companion */
+.td-wikilist .td-wiki-url {
+	font-family: var(--e-serif);
+	font-style: italic;
+}
+
+/* A hairline rule sets the row actions apart from the heading */
+.td-wikilist .td-wikilist-item .td-wiki-toolbar {
+	border-top: 1px solid var(--e-rule);
+	padding-top: 0.6em;
+}
+
+/* Advanced-panel headings in the quiet sans, matching the toolbar */
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--e-sans);
+}
+
+/* ══ TiddlyDesktop Android — top bar, slide-in sidebar & backdrop ═══════════
+   The Android WikiList swaps the desktop toolbar for a sticky .td-topbar (logo
+   menu-button + title) and a slide-in .td-sidebar of toolbar actions over a
+   blurred .td-backdrop. android-styles.tid lays these out palette-agnostically
+   (neutral grey chips); here we dress them in Elegant's editorial aesthetic.
+   This stylesheet's title sorts after android-styles, so equal-specificity
+   rules win — and the chip fills there are !important, so ours must be too. */
+
+/* Top bar — a quiet bar under a hairline rule, no heavy shadow */
+.td-topbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: none;
+	border-bottom: 1px solid var(--e-rule-strong);
+}
+.td-topbar-title {
+	font-family: var(--e-display);
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+/* Form controls don't inherit font-family, so the nav buttons, the theme/palette
+   pickers and the create-wiki dropdown would fall back to the UA font. Carry the
+   theme font onto the top bar and sidebar and let every control inherit it. */
+.td-topbar,
+.td-sidebar {
+	font-family: var(--e-sans);
+}
+.td-topbar button, .td-topbar input, .td-topbar select,
+.td-sidebar button, .td-sidebar input, .td-sidebar select, .td-sidebar textarea {
+	font-family: inherit;
+}
+
+/* Sidebar — a paper panel edged with a hairline, whisper-soft shadow */
+.td-sidebar {
+	background: var(--e-paper);
+	box-shadow: var(--e-shadow-2);
+	border-right: 1px solid var(--e-rule-strong);
+	font-family: var(--e-sans);
+}
+.td-sidebar-head {
+	border-bottom: 1px solid var(--e-rule-strong);
+}
+
+/* Sidebar action chips — near-square paper cards, editorial ink; the neutral
+   grey fill from android-styles is !important, so match that here */
+.td-sidebar-item > .td-button,
+.td-sidebar-item > button,
+.td-sidebar-item > .td-language-switcher,
+.td-sidebar-item > span {
+	background: var(--e-paper) !important;
+	color: var(--e-ink) !important;
+	fill: var(--e-ink) !important;
+	border: 1px solid var(--e-rule-strong);
+	border-radius: var(--e-radius);
+	font-family: var(--e-sans);
+}
+.td-sidebar-item > .td-button:hover,
+.td-sidebar-item > button:hover {
+	border-color: var(--e-accent);
+	box-shadow: var(--e-shadow-1);
+}
+.td-sidebar-item > .td-picker {
+	background: var(--e-paper);
+	border: 1px solid var(--e-rule);
+	border-radius: var(--e-radius);
+}
+.td-sidebar-item select,
+.td-sidebar-item input {
+	font-family: var(--e-sans);
+	border-radius: var(--e-radius);
+	border: 1px solid var(--e-rule-strong);
+	background: var(--e-paper);
+	color: var(--e-ink);
+}
+
+/* Backdrop — a soft ink-tinted scrim behind the blur */
+.td-backdrop {
+	background: color-mix(in srgb, var(--e-ink) 28%, transparent);
+}

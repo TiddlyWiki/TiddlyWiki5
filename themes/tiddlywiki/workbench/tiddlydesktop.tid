@@ -1,0 +1,200 @@
+title: $:/themes/tiddlywiki/workbench/tiddlydesktop
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+** TiddlyDesktop — Workbench theme
+** Dense, utilitarian data-console aesthetic: hairline grid borders, near-square
+** corners, monospace metadata, no decorative shadows — information first.
+*/
+
+/* Toolbar — flat, structural grid-line separator below, no shadow */
+.td-toolbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: none;
+	border-bottom: 1px solid var(--w-grid-strong);
+	font-family: var(--w-sans);
+	font-size: 0.88em;
+}
+
+/* Wiki-list items — inset grid-line ring via box-shadow, near-square corners */
+.td-wikilist .td-wikilist-item {
+	border-radius: var(--w-radius);
+	box-shadow: inset 0 0 0 1px var(--w-grid);
+}
+.td-wikilist .td-wikilist-item:hover {
+	box-shadow: inset 0 0 0 1px var(--w-accent);
+}
+.td-wikilist .td-wikilist-item.tc-dragging {
+	box-shadow: none;
+}
+
+/* Title — dense sans, URL in monospace */
+.td-wikilist .td-wiki-title {
+	font-family: var(--w-sans);
+	font-weight: 600;
+}
+.td-wikilist .td-wikilist-info {
+	font-family: var(--w-sans);
+}
+.td-wikilist .td-wiki-url {
+	font-family: var(--w-mono);
+	font-size: 0.82em;
+}
+
+/* ── WikiList action buttons — styled by role ────────────────────────── */
+/* Flat, compact buttons — no decorative shadow; utility roles read as console
+   controls via a grid-line ring that tightens to the accent on hover */
+button.td-button {
+	border-radius: var(--w-radius);
+	color: <<colour wikilist-button-foreground>>;
+	font-family: var(--w-sans);
+	font-size: 0.82em;
+	font-weight: 500;
+}
+/* Toolbar buttons sit on the neutral button surface, so they need the console
+   ink too — the plugin default (wikilist-button-foreground) is the page
+   background colour, which renders invisibly here */
+.td-toolbar button.td-button {
+	color: var(--w-ink);
+	fill: var(--w-ink);
+}
+/* Utility (convert / advanced / plugins / reveal-backups) — the neutral panel
+   surface needs the console ink, not the white used on the coloured buttons */
+.td-wikilist .td-wikilist-button-convert,
+.td-wikilist .td-wikilist-button-advanced,
+.td-wikilist .td-wikilist-button-plugins,
+.td-wikilist .td-wikilist-button-reveal-backups {
+	color: var(--w-ink);
+	fill: var(--w-ink);
+	box-shadow: inset 0 0 0 1px var(--w-grid-strong);
+}
+.td-wikilist .td-wikilist-button-convert:hover,
+.td-wikilist .td-wikilist-button-advanced:hover,
+.td-wikilist .td-wikilist-button-plugins:hover,
+.td-wikilist .td-wikilist-button-reveal-backups:hover {
+	color: <<colour wikilist-button-foreground>>;
+	fill: <<colour wikilist-button-foreground>>;
+	box-shadow: inset 0 0 0 1px var(--w-accent);
+}
+
+/* Toolbar inputs — hairline border matching the grid aesthetic */
+.td-toolbar input,
+.td-toolbar select {
+	font-family: var(--w-sans);
+	border-radius: var(--w-radius);
+	border: 1px solid var(--w-grid-strong);
+}
+
+/* ── The WikiList window — dense data console ──────────────────────── */
+.td-search input.td-wikilist-search-input {
+	font-family: var(--w-sans);
+	border-radius: var(--w-radius);
+	border: 1px solid var(--w-grid-strong);
+	transition: border-color var(--w-dur) var(--w-ease);
+}
+.td-search input.td-wikilist-search-input:focus {
+	border-color: var(--w-accent);
+}
+.td-tags .tc-tag-label {
+	font-family: var(--w-sans);
+	border-radius: var(--w-radius);
+}
+
+/* ── WikiList rows — grid-lined favicon cell, ruled actions ─────────── */
+.td-wikilist .td-wikilist-item .td-wikilist-thumbnail button {
+	border-radius: var(--w-radius);
+	box-shadow: inset 0 0 0 1px var(--w-grid);
+}
+.td-wikilist .td-wikilist-item .td-wiki-toolbar {
+	border-top: 1px solid var(--w-grid);
+	padding-top: 0.5em;
+}
+.td-wikilist .td-wiki-advanced-heading {
+	font-family: var(--w-sans);
+}
+
+/* ══ TiddlyDesktop Android — top bar, slide-in sidebar & backdrop ═══════════
+   The Android WikiList swaps the desktop toolbar for a sticky .td-topbar (logo
+   menu-button + title) and a slide-in .td-sidebar of toolbar actions over a
+   blurred .td-backdrop. android-styles.tid lays these out palette-agnostically
+   (neutral grey chips); here we dress them in Workbench's flat data-console
+   aesthetic — hairline grid lines, no shadows. This stylesheet's title sorts
+   after android-styles, so equal-specificity rules win; the chip fills there
+   are !important, so ours must be too. */
+
+/* Top bar — flat, with a structural grid-line separator below */
+.td-topbar {
+	background: <<colour wikilist-toolbar-background>>;
+	color: <<colour wikilist-toolbar-foreground>>;
+	box-shadow: none;
+	border-bottom: 1px solid var(--w-grid-strong);
+	font-family: var(--w-sans);
+	font-size: 0.88em;
+}
+.td-topbar-title {
+	font-family: var(--w-sans);
+	font-weight: 600;
+}
+
+/* Form controls don't inherit font-family, so the nav buttons, the theme/palette
+   pickers and the create-wiki dropdown would fall back to the UA font. Carry the
+   theme font onto the top bar and sidebar and let every control inherit it. */
+.td-topbar,
+.td-sidebar {
+	font-family: var(--w-sans);
+}
+.td-topbar button, .td-topbar input, .td-topbar select,
+.td-sidebar button, .td-sidebar input, .td-sidebar select, .td-sidebar textarea {
+	font-family: inherit;
+}
+
+/* Sidebar — a flat panel divided from the content by a grid line */
+.td-sidebar {
+	background: var(--w-panel);
+	box-shadow: none;
+	border-right: 1px solid var(--w-grid-strong);
+	font-family: var(--w-sans);
+}
+.td-sidebar-head {
+	border-bottom: 1px solid var(--w-grid-strong);
+}
+
+/* Sidebar action chips — flat panels ringed by a grid line that tightens to the
+   accent on hover; the neutral grey fill from android-styles is !important, so
+   match that here */
+.td-sidebar-item > .td-button,
+.td-sidebar-item > button,
+.td-sidebar-item > .td-language-switcher,
+.td-sidebar-item > span {
+	background: var(--w-panel) !important;
+	color: var(--w-ink) !important;
+	fill: var(--w-ink) !important;
+	border: 1px solid var(--w-grid-strong);
+	border-radius: var(--w-radius);
+	font-family: var(--w-sans);
+}
+.td-sidebar-item > .td-button:hover,
+.td-sidebar-item > button:hover {
+	border-color: var(--w-accent);
+}
+.td-sidebar-item > .td-picker {
+	background: var(--w-panel);
+	border: 1px solid var(--w-grid-strong);
+	border-radius: var(--w-radius);
+}
+.td-sidebar-item select,
+.td-sidebar-item input {
+	font-family: var(--w-sans);
+	border-radius: var(--w-radius);
+	border: 1px solid var(--w-grid-strong);
+	background: var(--w-panel);
+	color: var(--w-ink);
+}
+
+/* Backdrop — a plain foreground-tinted scrim behind the blur */
+.td-backdrop {
+	background: color-mix(in srgb, <<colour foreground>> 24%, transparent);
+}

@@ -1,0 +1,7 @@
+title: $:/themes/tiddlywiki/noir/settings-panel
+tags: $:/tags/ControlPanel/Appearance
+caption: Noir
+
+! Noir theme
+
+<$checkbox tiddler="$:/config/themes/noir/glow" field="text" checked="yes" unchecked="no" default="yes"> Masthead glow pulse</$checkbox>
