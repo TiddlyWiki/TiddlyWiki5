@@ -359,7 +359,7 @@ describe("WikiText parser tests", function() {
 	it("should parse horizontal rules", function() {
 		expect(parse("---Not a rule\n\n----\n\nBetween\n\n---")).toEqual(
 
-			[ { type : "element", tag : "p", rule: "parseblock", start : 0, end : 13, children : [ { type : "entity", entity : "&mdash;", start: 0, end: 3, rule: "dash" }, { type : "text", text : "Not a rule", start : 3, end : 13 } ] }, { type : "element", tag : "hr", start: 15, end: 20, rule: "horizrule" }, { type : "element", tag : "p", rule: "parseblock", start : 21, end : 28, children : [ { type : "text", text : "Between", start : 21, end : 28 } ] }, { type : "element", tag : "hr", start: 30, end: 33, rule: "horizrule" } ]
+			[ { type : "element", tag : "p", rule: "parseblock", start : 0, end : 13, children : [ { type : "entity", entity : "&mdash;", start: 0, end: 3, rule: "dash" }, { type : "text", text : "Not a rule", start : 3, end : 13 } ] }, { type : "element", tag : "hr", start: 15, end: 19, rule: "horizrule" }, { type : "element", tag : "p", rule: "parseblock", start : 21, end : 28, children : [ { type : "text", text : "Between", start : 21, end : 28 } ] }, { type : "element", tag : "hr", start: 30, end: 33, rule: "horizrule" } ]
 
 		);
 
@@ -400,7 +400,7 @@ describe("WikiText parser tests", function() {
 						{ name: "class", type: "string", value: "evenRow" },
 					],
 					start: 0,
-					end: 18,
+					end: 17,
 					children: [{
 						type: "element",
 						tag: "th",

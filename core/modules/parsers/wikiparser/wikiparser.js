@@ -248,6 +248,32 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 		if(subTree.length > 0) {
 			if(subTree[0].start === undefined) subTree[0].start = start;
 			if(subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
+			// A block rule must consume its terminating line end to parse,
+			// but the separator belongs to the gap between blocks, not to
+			// the block's span. Never trim into a child's span, e.g. an
+			// unterminated quote whose last text node keeps its newline
+			var lastNode = subTree[subTree.length - 1];
+			if(typeof lastNode.start === "number" && typeof lastNode.end === "number") {
+				var floor = lastNode.start,
+					probe = lastNode;
+				while(probe.children && probe.children.length) {
+					probe = probe.children[probe.children.length - 1];
+					if(typeof probe.end === "number" && probe.end > floor) {
+						floor = probe.end;
+					}
+				}
+				var end = lastNode.end;
+				if(end > floor && this.source.charAt(end - 1) === "\n") {
+					end -= 1;
+					if(end > floor && this.source.charAt(end - 1) === "\r") {
+						end -= 1;
+					}
+					while(end > floor && (this.source.charAt(end - 1) === " " || this.source.charAt(end - 1) === "\t")) {
+						end -= 1;
+					}
+					lastNode.end = end;
+				}
+			}
 		}
 		$tw.utils.each(subTree, function (node) { node.rule = nextMatch.rule.name; });
 		return subTree;
