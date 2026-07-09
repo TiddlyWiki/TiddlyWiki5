@@ -275,7 +275,13 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 				}
 			}
 		}
-		$tw.utils.each(subTree, function (node) { node.rule = nextMatch.rule.name; });
+		$tw.utils.each(subTree, function (node) {
+			node.rule = nextMatch.rule.name;
+			// The parse position is not recoverable from the tree: a rule
+			// like macrocallblock produces the same node shape as its inline
+			// twin, but block position decides the separators around it
+			node.blockPosition = true;
+		});
 		return subTree;
 	}
 	// Treat it as a paragraph if we didn't find a block rule

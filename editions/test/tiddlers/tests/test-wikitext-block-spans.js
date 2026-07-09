@@ -64,6 +64,13 @@ describe("WikiText block span tests", function() {
 			// Fail with a readable message naming the offending span
 			expect(rule + " span " + node.start + ".." + node.end + " ends with " + JSON.stringify(lastByte)).toBe(rule + " span ends at its last syntactic byte");
 		}
+		// Block dispatched nodes carry blockPosition; paragraphs signal block
+		// position through their rule name instead, and pragmas are
+		// dispatched separately
+		var pragmaRules = ["macrodef","fnprocdef","whitespace","import","commentblock"];
+		if(rule !== "parseblock" && pragmaRules.indexOf(rule) === -1) {
+			expect(rule + " blockPosition is " + node.blockPosition).toBe(rule + " blockPosition is true");
+		}
 	}
 
 	it("should end the paragraph span at its text", function() {
