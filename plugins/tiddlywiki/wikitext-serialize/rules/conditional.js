@@ -36,56 +36,6 @@ function collectBodies(listNode,out) {
 	}
 }
 
-/*
-Fidelity path: the clause markers only exist in the source, so stitch the
-serialized clause bodies together with the source text between them. Returns
-null when there is no source or a boundary does not look like markers or
-whitespace, e.g. for a mutated tree.
-*/
-function serializeStitched(tree,serialize,options) {
-	var source = options.source;
-	if(!source || typeof tree.start !== "number" || typeof tree.end !== "number") {
-		return null;
-	}
-	var children = [];
-	collectBodies(tree,children);
-	var isBoundary = function(text) {
-		return /^\s*$/.test(text) || (text.indexOf("<%") !== -1 && text.indexOf("%>") !== -1);
-	};
-	var pos = tree.start,
-		result = "",
-		valid = true;
-	var appendBoundary = function(boundary) {
-		if(!isBoundary(boundary)) {
-			valid = false;
-			return;
-		}
-		// Undo the fixed blank line joiner of block rules; the boundary
-		// carries the true separator from the source
-		if(result.slice(-2) === "\n\n") {
-			result = result.replace(/\n+$/,"");
-		}
-		result += boundary;
-	};
-	$tw.utils.each(children,function(child) {
-		if(typeof child.start !== "number" || typeof child.end !== "number" || child.start < pos) {
-			valid = false;
-		}
-		if(valid) {
-			appendBoundary(source.substring(pos,child.start));
-		}
-		if(valid) {
-			result += serialize(child);
-			pos = child.end;
-		}
-		return valid;
-	});
-	if(valid) {
-		appendBoundary(source.substring(pos,tree.end));
-	}
-	return valid ? result : null;
-}
-
 function serializeFromTree(tree,serialize) {
 	var result = "<%if " + tree.attributes.filter.value + "%>" + serialize(tree.children[0].children);
 	var node = tree;
@@ -107,7 +57,16 @@ function serializeFromTree(tree,serialize) {
 
 exports.serialize = function(tree,serialize,options) {
 	options = options || {};
-	var result = serializeStitched(tree,serialize,options);
+	// The clause markers only exist in the source between the clause bodies
+	var children = [];
+	collectBodies(tree,children);
+	var result = $tw.utils.serializeStitched(tree,serialize,{
+		source: options.source,
+		children: children,
+		isBoundary: function(text) {
+			return /^\s*$/.test(text) || (text.indexOf("<%") !== -1 && text.indexOf("%>") !== -1);
+		}
+	});
 	if(result === null) {
 		result = serializeFromTree(tree,serialize);
 	}

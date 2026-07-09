@@ -10,10 +10,6 @@ exports.name = "table";
 
 var containerSuffixes = {caption: "c", thead: "h", tbody: "", tfoot: "f"};
 
-function isBoundary(text) {
-	return /^\s*$/.test(text) || text.indexOf("|") !== -1;
-}
-
 /*
 Collect the inline leaf nodes of every cell and of the caption in document
 order. Everything else (pipes, ! markers, merge markers, alignment spaces,
@@ -38,40 +34,6 @@ function collectInlineLeaves(table) {
 		}
 	});
 	return leaves;
-}
-
-function serializeStitched(tree,serialize,options) {
-	var source = options.source;
-	if(!source || typeof tree.start !== "number" || typeof tree.end !== "number") {
-		return null;
-	}
-	var pos = tree.start,
-		result = "",
-		valid = true;
-	var appendBoundary = function(boundary) {
-		if(!isBoundary(boundary)) {
-			valid = false;
-			return;
-		}
-		result += boundary;
-	};
-	$tw.utils.each(collectInlineLeaves(tree),function(leaf) {
-		if(typeof leaf.start !== "number" || typeof leaf.end !== "number" || leaf.start < pos) {
-			valid = false;
-		}
-		if(valid) {
-			appendBoundary(source.substring(pos,leaf.start));
-		}
-		if(valid) {
-			result += serialize(leaf);
-			pos = leaf.end;
-		}
-		return valid;
-	});
-	if(valid) {
-		appendBoundary(source.substring(pos,tree.end));
-	}
-	return valid ? result : null;
 }
 
 function serializeFromTree(tree,serialize) {
@@ -139,7 +101,14 @@ function serializeFromTree(tree,serialize) {
 
 exports.serialize = function(tree,serialize,options) {
 	options = options || {};
-	var result = serializeStitched(tree,serialize,options);
+	// Pipes, merge markers and alignment spaces live between the inline leaves
+	var result = $tw.utils.serializeStitched(tree,serialize,{
+		source: options.source,
+		children: collectInlineLeaves(tree),
+		isBoundary: function(text) {
+			return /^\s*$/.test(text) || text.indexOf("|") !== -1;
+		}
+	});
 	if(result === null) {
 		result = serializeFromTree(tree,serialize);
 	}

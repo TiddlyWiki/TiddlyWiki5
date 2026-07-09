@@ -167,6 +167,67 @@ exports.serializeFromSource = function(node,options) {
 };
 
 /*
+Stitch serialized nodes (options.children, default tree.children) with the
+source gaps between them, which hold syntax the tree does not record, e.g.
+<<< fences. Null when a gap fails options.isBoundary (default whitespace).
+*/
+exports.serializeStitched = function(tree,serialize,options) {
+	options = options || {};
+	var source = options.source;
+	if(!source || typeof tree.start !== "number" || typeof tree.end !== "number") {
+		return null;
+	}
+	var isBoundary = options.isBoundary || function(text) {
+		return /^\s*$/.test(text);
+	};
+	var pos = tree.start,
+		result = "",
+		valid = true;
+	var appendBoundary = function(boundary) {
+		if(!isBoundary(boundary)) {
+			valid = false;
+			return;
+		}
+		// Undo exactly one block joiner; real paragraph-final newlines must survive
+		if(result.slice(-2) === "\n\n") {
+			result = result.slice(0,-2);
+		}
+		result += boundary;
+	};
+	$tw.utils.each(options.children || tree.children || [],function(child) {
+		if(typeof child.start !== "number" || typeof child.end !== "number" || child.start < pos) {
+			valid = false;
+		}
+		if(valid) {
+			appendBoundary(source.substring(pos,child.start));
+		}
+		if(valid) {
+			result += serialize(child);
+			pos = child.end;
+		}
+		return valid;
+	});
+	if(valid) {
+		appendBoundary(source.substring(pos,tree.end));
+	}
+	return valid ? result : null;
+};
+
+/*
+Return the whitespace-only source text between two positions, or null, e.g.
+the single newline between chained pragmas that the tree does not record.
+*/
+exports.recoverSourceGap = function(from,to,options) {
+	options = options || {};
+	var source = options.source;
+	if(!source || typeof from !== "number" || typeof to !== "number" || to < from) {
+		return null;
+	}
+	var gap = source.substring(from,to);
+	return /^\s+$/.test(gap) ? gap : null;
+};
+
+/*
 Serialize a parsed attribute node.
 options.source: original wikitext used to preserve the original quoting style.
 */

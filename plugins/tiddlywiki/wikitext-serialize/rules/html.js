@@ -50,32 +50,16 @@ exports.serialize = function(tree,serialize,options) {
 	if(tree.isSelfClosing || isVoidElement) {
 		result = openTag;
 	} else {
-		// Serialize the children, restoring whitespace-only gaps that exist
-		// only in the source: line breaks eaten by \whitespace trim and the
-		// blank line that switches the content to block mode
-		var inner = "",
-			pos = typeof tree.openTagEnd === "number" ? tree.openTagEnd : null;
-		var restoreGap = function(to) {
-			if(source && pos !== null && typeof to === "number" && to >= pos) {
-				var gap = source.substring(pos,to);
-				if(/^\s*$/.test(gap)) {
-					// Undo the fixed blank line joiner of block rules before
-					// re-adding the true gap from the source
-					if(inner.slice(-2) === "\n\n") {
-						inner = inner.replace(/\n+$/,"");
-					}
-					if(gap && inner.slice(-gap.length) !== gap) {
-						inner += gap;
-					}
-				}
-			}
-		};
-		$tw.utils.each(tree.children || [],function(child) {
-			restoreGap(child.start);
-			inner += serialize(child);
-			pos = typeof child.end === "number" ? child.end : null;
-		});
-		restoreGap(tree.closeTagStart);
+		// Stitch the children with the whitespace-only gaps that exist only
+		// in the source: line breaks eaten by \whitespace trim and the blank
+		// line that switches the content to block mode
+		var inner = null;
+		if(typeof tree.openTagEnd === "number" && typeof tree.closeTagStart === "number") {
+			inner = $tw.utils.serializeStitched({start: tree.openTagEnd, end: tree.closeTagStart, children: tree.children},serialize,{source: source});
+		}
+		if(inner === null) {
+			inner = serialize(tree.children || []);
+		}
 		// An implicit close tag (closeTagStart equals closeTagEnd) is not written out
 		var hasCloseTag = !(typeof tree.closeTagStart === "number" && tree.closeTagStart === tree.closeTagEnd);
 		result = openTag + inner + (hasCloseTag ? "</" + tag + ">" : "");

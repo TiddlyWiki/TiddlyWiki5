@@ -17,12 +17,6 @@ exports.serialize = function(tree,serialize,options) {
 	// The separator is not in the parse tree: chained pragmas sit on adjacent
 	// lines while body content follows after a blank line, so recover the
 	// original gap from the source
-	var gap = "\n\n";
-	if(options.source && typeof tree.end === "number" && tree.children.length && typeof tree.children[0].start === "number") {
-		var sourceGap = options.source.substring(tree.end,tree.children[0].start);
-		if(/^\s+$/.test(sourceGap)) {
-			gap = sourceGap;
-		}
-	}
+	var gap = $tw.utils.recoverSourceGap(tree.end,tree.children[0] && tree.children[0].start,{source: options.source}) || "\n\n";
 	return pragma + gap + serialize(tree.children);
 };
