@@ -692,26 +692,24 @@ Widget.prototype.previousSibling = function() {
 
 /*
 Render the children of this widget into the DOM.
-The resilient-render gate is read once per walk (pre-walk constant) so it is
-not re-evaluated per child. The per-child try-catch lives in the helper below
-so the hot loop body itself is exception-handler-free, allowing V8 to apply
-loop-invariant code motion across the loop.
 */
 Widget.prototype.renderChildren = function(parent,nextSibling) {
-	var resilient = getResilientRenderEnabled(this.wiki);
-	var children = this.children;
-	for(var i = 0; i < children.length; i++) {
-		renderOneChild(this,children,i,parent,nextSibling,resilient);
+	var children = this.children,
+		resilient = getResilientRenderEnabled(this.wiki);
+	if(!resilient) {
+		for(var i = 0; i < children.length; i++) {
+			children[i].render(parent,nextSibling);
+		}
+	} else {
+		for(var t = 0; t < children.length; t++) {
+			try {
+				children[t].render(parent,nextSibling);
+			} catch(error) {
+				this.containChildError(t,error,"render",parent,nextSibling,resilient);
+			}
+		}
 	}
 };
-
-function renderOneChild(widget,children,i,parent,nextSibling,resilient) {
-	try {
-		children[i].render(parent,nextSibling);
-	} catch(error) {
-		widget.containChildError(i,error,"render",parent,nextSibling,resilient);
-	}
-}
 
 /*
 Resilient render boundary (opt-in via $:/config/ResilientRender, default off): after render/refresh
@@ -834,30 +832,31 @@ Widget.prototype.refreshSelf = function() {
 };
 
 /*
-Refresh all the children of a widget.
-Same pre-walk-constant and extract-helper pattern as renderChildren.
+Refresh all the children of a widget
 */
 Widget.prototype.refreshChildren = function(changedTiddlers) {
-	var resilient = getResilientRenderEnabled(this.wiki);
 	var children = this.children,
+		resilient = getResilientRenderEnabled(this.wiki),
 		refreshed = false;
-	for(var i = 0; i < children.length; i++) {
-		refreshed = refreshOneChild(this,children,i,changedTiddlers,resilient) || refreshed;
+	if(!resilient) {
+		for(var i = 0; i < children.length; i++) {
+			refreshed = children[i].refresh(changedTiddlers) || refreshed;
+		}
+	} else {
+		for(var t = 0; t < children.length; t++) {
+			try {
+				refreshed = children[t].refresh(changedTiddlers) || refreshed;
+			} catch(error) {
+				// Capture the DOM anchor before the failing child is destroyed (refresh works in place,
+				// so unlike render there is no nextSibling argument to fall back on).
+				var nextSibling = children[t].findNextSiblingDomNode();
+				this.containChildError(t,error,"refresh",this.parentDomNode,nextSibling,resilient);
+				refreshed = true;
+			}
+		}
 	}
 	return refreshed;
 };
-
-function refreshOneChild(widget,children,i,changedTiddlers,resilient) {
-	try {
-		return children[i].refresh(changedTiddlers);
-	} catch(error) {
-		// Capture the DOM anchor before the failing child is destroyed (refresh works in place,
-		// so unlike render there is no nextSibling argument to fall back on).
-		var nextSibling = children[i].findNextSiblingDomNode();
-		widget.containChildError(i,error,"refresh",widget.parentDomNode,nextSibling,resilient);
-		return true;
-	}
-}
 
 /*
 Find the next sibling in the DOM to this widget. This is done by scanning the widget tree through all next siblings and their descendents that share the same parent DOM node
