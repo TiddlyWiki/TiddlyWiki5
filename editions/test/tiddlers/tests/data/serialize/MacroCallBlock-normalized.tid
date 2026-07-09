@@ -1,9 +1,10 @@
 title: Serialize/MacroCallBlock-normalized
-description: Parameter spacing is dropped and block calls get a blank line separator
+description: AST-only mode drops parameter spacing and separates block calls with a blank line
 tags: $:/tags/wikitext-serialize-normalize-spec
 type: text/vnd.tiddlywiki-multiple
 
 title: Input
+mode: ast-only
 
 <<john one: val1 two: 'val "2"'>>
 

@@ -16,8 +16,11 @@ exports.serialize = function(tree,serialize,options) {
 	// The source slice preserves named \end markers, default quoting and the
 	// single line form, none of which are recorded in the parse tree
 	var slice = $tw.utils.serializeFromSource(tree,{source: options.source, fragments: [name,definition]});
+	// Pragmas chain the rest of the tiddler as children; the separator is
+	// not in the parse tree
+	var gap = $tw.utils.recoverSourceGap(tree.end,tree.children[0] && tree.children[0].start,{source: options.source}) || "\n\n";
 	if(slice !== null) {
-		return slice + "\n\n" + serialize(tree.children);
+		return slice + gap + $tw.utils.serializeChildren(tree,serialize,options);
 	}
 	var params = tree.params.map(function(param) {
 		if(param.defaultType === "multivalue-variable") {
@@ -29,5 +32,5 @@ exports.serialize = function(tree,serialize,options) {
 		return param.name + ":" + $tw.utils.quoteParameterDefault(param.default);
 	}).join(", ");
 	// Concat the children because pragma rules wrap everything below them as children
-	return "\\" + type + " " + name + "(" + params + ")\n" + definition + "\n\\end\n\n" + serialize(tree.children);
+	return "\\" + type + " " + name + "(" + params + ")\n" + definition + "\n\\end\n\n" + $tw.utils.serializeChildren(tree,serialize,options);
 };

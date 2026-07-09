@@ -8,8 +8,8 @@ module-type: wikiruleserializer
 
 exports.name = "transcludeinline";
 
-exports.serialize = function(tree,serialize) {
+exports.serialize = function(tree,serialize,options) {
 	var transcludeblock = require("$:/plugins/tiddlywiki/wikitext-serialize/rules/transcludeblock.js");
-	var result = transcludeblock.serialize(tree,serialize);
+	var result = transcludeblock.serialize(tree,serialize,options);
 	return result.trimEnd();
 };

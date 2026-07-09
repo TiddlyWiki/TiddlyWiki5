@@ -38,7 +38,7 @@ describe("WikiText parser tests", function() {
 		);
 		expect(parse("<div/>")).toEqual(
 
-			[ { type : "element", tag : "p", rule: "parseblock", start : 0, end : 6, children : [ { type : "element", tag : "div", isSelfClosing : true, isBlock : false, blockPosition : false, attributes : {  }, orderedAttributes: [ ], start : 0, end : 6, rule: "html" } ] } ]
+			[ { type : "element", tag : "p", rule: "parseblock", start : 0, end : 6, children : [ { type : "element", tag : "div", isSelfClosing : true, isBlock : false, blockPosition : false, attributes : {  }, orderedAttributes: [ ], start : 0, end : 6, openTagStart : 0, openTagEnd : 6, rule: "html" } ] } ]
 
 		);
 		expect(parse("<div></div>")).toEqual(

@@ -41,10 +41,9 @@ Parse the most recent match
 exports.parse = function() {
 	// Retrieve the most recent match so that recursive calls don't overwrite it
 	var tag = this.nextTag;
-	if(!tag.isSelfClosing) {
-		tag.openTagStart = tag.start;
-		tag.openTagEnd = tag.end;
-	}
+	// For a self-closing tag the open tag is the whole element
+	tag.openTagStart = tag.start;
+	tag.openTagEnd = tag.end;
 	this.nextTag = null;
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;

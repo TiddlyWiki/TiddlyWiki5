@@ -109,8 +109,9 @@ exports.serialize = function(tree,serialize,options) {
 			return /^\s*$/.test(text) || text.indexOf("|") !== -1;
 		}
 	});
-	if(result === null) {
-		result = serializeFromTree(tree,serialize);
+	if(result !== null) {
+		// The stitch is span exact including the line end the rule consumed
+		return result + "\n\n";
 	}
-	return result.replace(/\n+$/,"") + "\n\n";
+	return serializeFromTree(tree,serialize).replace(/\n+$/,"") + "\n\n";
 };

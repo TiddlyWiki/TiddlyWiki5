@@ -18,5 +18,5 @@ exports.serialize = function(tree,serialize,options) {
 	// lines while body content follows after a blank line, so recover the
 	// original gap from the source
 	var gap = $tw.utils.recoverSourceGap(tree.end,tree.children[0] && tree.children[0].start,{source: options.source}) || "\n\n";
-	return pragma + gap + serialize(tree.children);
+	return pragma + gap + $tw.utils.serializeChildren(tree,serialize,options);
 };

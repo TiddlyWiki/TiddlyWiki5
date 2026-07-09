@@ -8,6 +8,29 @@ Tests the wikitext inverse-rendering from Wiki AST.
 \*/
 
 /*
+Split a compound tiddler (type text/vnd.tiddlywiki-multiple) into its
+subtiddlers; same format as the jasmine plugin's run-wiki-based-tests.js:
+subtiddlers separated by a lone "+" line, fields separated from the text
+by the first blank line
+*/
+function readMultipleTiddlersTiddler(title) {
+	var rawTiddlers = $tw.wiki.getTiddlerText(title).split(/\r?\n\+\r?\n/mg);
+	var tiddlers = [];
+	$tw.utils.each(rawTiddlers,function(rawTiddler) {
+		var fields = Object.create(null),
+			split = rawTiddler.split(/\r?\n\r?\n/mg);
+		if(split.length >= 1) {
+			fields = $tw.utils.parseFields(split[0],fields);
+		}
+		if(split.length >= 2) {
+			fields.text = split.slice(1).join("\n\n");
+		}
+		tiddlers.push(fields);
+	});
+	return tiddlers;
+}
+
+/*
 Fidelity round-trip: with the original source supplied, serialization must
 reproduce every fixture byte-exact (modulo trailing whitespace).
 
@@ -65,23 +88,34 @@ describe("WikiAST serialization normalization tests", function () {
 			expect(serialized.trimEnd()).toBe((subTiddlers.ExpectedWikitext.text || "").trimEnd());
 		});
 	});
+});
 
-	function readMultipleTiddlersTiddler(title) {
-		var rawTiddlers = $tw.wiki.getTiddlerText(title).split(/\r?\n\+\r?\n/mg);
-		var tiddlers = [];
-		$tw.utils.each(rawTiddlers,function(rawTiddler) {
-			var fields = Object.create(null),
-				split = rawTiddler.split(/\r?\n\r?\n/mg);
-			if(split.length >= 1) {
-				fields = $tw.utils.parseFields(split[0],fields);
+/*
+Round-trip the Output subtiddlers of the wiki-based test specs: every piece
+of wikitext that feeds the rendering tests must also survive
+wikitext -> AST -> wikitext serialization byte-exact in fidelity mode.
+
+Reproduce in the browser F12 console: take an Output subtiddler's text as
+input, then
+
+	var parser = $tw.wiki.parseText("text/vnd.tiddlywiki",input);
+	var output = $tw.utils.serializeWikitextParseTree(parser.tree,{source: input});
+	output.trimEnd() === input.trimEnd(); // true
+*/
+describe("WikiAST serialization wiki-test-spec Output round-trips", function () {
+	var cases = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]type[text/vnd.tiddlywiki-multiple]tag[$:/tags/wiki-test-spec]]");
+	$tw.utils.each(cases, function (title) {
+		$tw.utils.each(readMultipleTiddlersTiddler(title), function (fields) {
+			if(fields.title === "Output" && (!fields.type || fields.type === "text/vnd.tiddlywiki")) {
+				it("should round-trip the Output of " + title, function () {
+					var input = fields.text || "",
+						parser = $tw.wiki.parseText("text/vnd.tiddlywiki",input),
+						serialized = $tw.utils.serializeWikitextParseTree(parser.tree,{source: input});
+					expect(serialized.trimEnd()).toBe(input.trimEnd());
+				});
 			}
-			if(split.length >= 2) {
-				fields.text = split.slice(1).join("\n\n");
-			}
-			tiddlers.push(fields);
 		});
-		return tiddlers;
-	}
+	});
 });
 
 /*

@@ -54,8 +54,11 @@ exports.serialize = function (tree,serialize,options) {
 					var content = [],
 						isFirstRow = true;
 					var pushRow = function() {
+						// The item span covers exactly its own row line, so the
+						// slice preserves marker spacing and content verbatim
+						var slice = isFirstRow ? $tw.utils.serializeFromSource(child,{source: options.source, fragments: [rowMarker]}) : null;
 						rows.push({
-							text: rowMarker + classAttr + " " + content.join("").trim(),
+							text: slice !== null && slice.indexOf(rowMarker) === 0 ? slice : rowMarker + classAttr + " " + content.join("").trim(),
 							start: child.start,
 							end: child.end,
 							blankLineBefore: isFirstRow && !!child.blankLineBefore

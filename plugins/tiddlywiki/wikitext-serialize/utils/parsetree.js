@@ -40,13 +40,25 @@ exports.serializeWikitextParseTree = function(tree,options) {
 			});
 		} else if(tree) {
 			if(tree.type === "text" && !tree.rule) {
-				output.push(tree.text);
+				var text = tree.text;
+				if(options.source && typeof tree.start === "number" && typeof tree.end === "number") {
+					// \whitespace trim eats the edges of text runs but keeps
+					// the original span; the slice restores the eaten bytes
+					var slice = options.source.substring(tree.start,tree.end);
+					if(slice !== text && slice.trim() === text) {
+						text = slice;
+					}
+				}
+				output.push(text);
 			} else {
 				var serializeOneRule = serializers[tree.rule];
 				if(serializeOneRule) {
 					output.push(serializeOneRule(tree,serialize,options));
 				} else if(tree.rule === "parseblock") {
-					output.push(serialize(tree.children),"\n\n");
+					// Stitch restores gaps that only exist in the source,
+					// e.g. the line breaks eaten by \whitespace trim
+					var stitched = options.source ? exports.serializeStitched(tree,serialize,{source: options.source}) : null;
+					output.push(stitched !== null ? stitched : serialize(tree.children),"\n\n");
 				} else {
 					// when no rule is found, just serialize the children, for example the void nodes
 					output.push(serialize(tree.children));
@@ -55,15 +67,24 @@ exports.serializeWikitextParseTree = function(tree,options) {
 		}
 		return output.join("");
 	}
-	var result = serialize(tree);
-	// The root has no following block: drop the final block joiner so output
-	// does not grow trailing blank lines on every round trip. Keep one line
-	// end when the last block's grammar needs it, e.g. a trailing <<macro>>
-	if(result.slice(-2) === "\n\n") {
-		result = result.slice(0,-2);
-		var last = $tw.utils.isArray(tree) ? tree[tree.length - 1] : tree;
-		if(last && (last.rule === "macrocallblock" || (last.rule === "html" && last.isBlock))) {
-			result += "\n";
+	var result = null;
+	if(options.source && $tw.utils.isArray(tree)) {
+		// Stitch the root blocks with the true separators from the source,
+		// including indentation before the first block and the exact tail
+		result = exports.serializeStitched({start: 0, end: options.source.length, children: tree},serialize,{source: options.source});
+	}
+	if(result === null) {
+		result = serialize(tree);
+		// The root has no following block: drop the final block joiner so
+		// output does not grow trailing blank lines on every round trip.
+		// Keep one line end when the last block's grammar needs it, e.g. a
+		// trailing <<macro>>
+		if(result.slice(-2) === "\n\n") {
+			result = result.slice(0,-2);
+			var last = $tw.utils.isArray(tree) ? tree[tree.length - 1] : tree;
+			if(last && (last.rule === "macrocallblock" || (last.rule === "html" && last.isBlock))) {
+				result += "\n";
+			}
 		}
 	}
 	return result;
@@ -191,6 +212,18 @@ exports.serializeStitched = function(tree,serialize,options) {
 	var isBoundary = options.isBoundary || function(text) {
 		return /^\s*$/.test(text);
 	};
+	// A pragma node's span ends at its own line while the chained children
+	// extend beyond it, so advance by the deepest end
+	function effectiveEnd(node) {
+		var end = typeof node.end === "number" ? node.end : null;
+		if(node.children && node.children.length) {
+			var childEnd = effectiveEnd(node.children[node.children.length - 1]);
+			if(childEnd !== null && (end === null || childEnd > end)) {
+				end = childEnd;
+			}
+		}
+		return end;
+	}
 	var pos = tree.start,
 		result = "",
 		valid = true;
@@ -214,7 +247,7 @@ exports.serializeStitched = function(tree,serialize,options) {
 		}
 		if(valid) {
 			result += serialize(child);
-			pos = child.end;
+			pos = effectiveEnd(child);
 		}
 		return valid;
 	});
@@ -222,6 +255,24 @@ exports.serializeStitched = function(tree,serialize,options) {
 		appendBoundary(source.substring(pos,tree.end));
 	}
 	return valid ? result : null;
+};
+
+/*
+Serialize the chained children of a pragma node, stitching the gaps between
+them from the source, e.g. the single newline between two \function pragmas
+that the fixed block joiner would widen to a blank line.
+*/
+exports.serializeChildren = function(tree,serialize,options) {
+	options = options || {};
+	var children = tree.children || [];
+	if(!children.length) {
+		return "";
+	}
+	var result = null;
+	if(options.source) {
+		result = exports.serializeStitched({start: children[0].start, end: children[children.length - 1].end, children: children},serialize,{source: options.source});
+	}
+	return result !== null ? result : serialize(children);
 };
 
 /*
@@ -324,6 +375,18 @@ exports.serializeAttribute = function(node,options) {
 			attributeString += assign + "`" + node.rawValue + "`";
 		}
 	} else if(node.type === "macro") {
+		if(!node.isMVV) {
+			// The slice preserves the author's layout of a nested call, e.g.
+			// d=<<d>> without the defensive space before the closing marker
+			var sliceFragments = ["<<"];
+			if(node.value && node.value.attributes && node.value.attributes["$variable"]) {
+				sliceFragments.push(node.value.attributes["$variable"].value);
+			}
+			var macroSlice = exports.serializeFromSource(node,{source: options.source, fragments: sliceFragments});
+			if(macroSlice !== null) {
+				return macroSlice;
+			}
+		}
 		if(node.isMVV && node.value && node.value.attributes && node.value.attributes["$variable"]) {
 			// Multi-valued variable reference: ((varname))
 			attributeString += assign + "((" + node.value.attributes["$variable"].value + "))";

@@ -8,7 +8,14 @@ module-type: wikiruleserializer
 
 exports.name = "styleblock";
 
-exports.serialize = function(tree,serialize) {
+exports.serialize = function(tree,serialize,options) {
+	options = options || {};
+	// The node span includes the line end the block rule consumed, which
+	// the tree does not record; the slice keeps the emission span exact
+	var slice = $tw.utils.serializeFromSource(tree,{source: options.source, fragments: ["@@"]});
+	if(slice !== null) {
+		return slice + "\n\n";
+	}
 	var lines = [];
 	var classes = [];
 	var styles = [];
