@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Parameters with and without defaults round-trip byte-exact
 title: Serialize/FunctionDefinition-new
 type: text/vnd.tiddlywiki
 

@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: An inline macro call with a triple quoted parameter stays inside its sentence
 title: Serialize/MacroCallInline-docs
 type: text/vnd.tiddlywiki
 

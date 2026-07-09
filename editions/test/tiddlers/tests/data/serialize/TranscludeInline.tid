@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Inline transclusions with and without templates round-trip byte-exact
 title: Serialize/TranscludeInline
 type: text/vnd.tiddlywiki
 

@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Pretty links to URLs, mailto and file targets round-trip byte-exact
 title: Serialize/PrettyLink-docs
 type: text/vnd.tiddlywiki
 

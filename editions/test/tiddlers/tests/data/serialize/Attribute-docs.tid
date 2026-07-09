@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Every documented attribute quoting and substitution form round-trips byte-exact
 title: Serialize/Attribute-docs
 type: text/vnd.tiddlywiki
 

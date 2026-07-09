@@ -3,6 +3,18 @@ description: A whitespace pragma inside a procedure body survives AST-only seria
 tags: $:/tags/wikitext-serialize-normalize-spec
 type: text/vnd.tiddlywiki-multiple
 
+title: info
+
+The input survives unchanged: this pair is an identity pin, not a
+normalization.
+
+Why: a `\whitespace` pragma inside a procedure body is part of the
+definition text, which the AST stores verbatim, so even tree-only
+serialization keeps it byte-exact, with and without trailing blank lines.
+
+* Covers: $:/plugins/tiddlywiki/wikitext-serialize/rules/fnprocdef.js.
+* Mode: ast-only (the Input field withholds the source from the serializer).
++
 title: Input
 mode: ast-only
 

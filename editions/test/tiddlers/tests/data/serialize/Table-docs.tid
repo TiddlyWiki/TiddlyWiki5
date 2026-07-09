@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Alignment, vertical alignment, merged cells, captions, headers and footers round-trip byte-exact
 title: Serialize/Table-docs
 type: text/vnd.tiddlywiki
 

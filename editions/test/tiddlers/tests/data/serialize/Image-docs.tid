@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Image attributes in literal, transcluded and macro form round-trip byte-exact
 title: Serialize/Image-docs
 type: text/vnd.tiddlywiki
 

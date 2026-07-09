@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Single line procedures, quoted and MVV parameter defaults and named end markers round-trip byte-exact
 title: Serialize/FunctionDefinition-docs
 type: text/vnd.tiddlywiki
 

@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Block mode and inline mode element content round-trip byte-exact
 title: Serialize/Html-docs
 type: text/vnd.tiddlywiki
 

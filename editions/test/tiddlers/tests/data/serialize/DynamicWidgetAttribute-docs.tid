@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Filtered attributes with newlines and multi-valued variable attributes round-trip byte-exact
 title: Serialize/DynamicWidgetAttribute-docs
 type: text/vnd.tiddlywiki
 

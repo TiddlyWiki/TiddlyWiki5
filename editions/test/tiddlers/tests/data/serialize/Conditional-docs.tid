@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: A nested conditional inside an else clause round-trips byte-exact
 title: Serialize/Conditional-docs
 type: text/vnd.tiddlywiki
 

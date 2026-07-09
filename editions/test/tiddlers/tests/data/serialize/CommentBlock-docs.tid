@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Comments above and inside macro definitions round-trip in pragma and block position
 title: Serialize/CommentBlock-docs
 type: text/vnd.tiddlywiki
 

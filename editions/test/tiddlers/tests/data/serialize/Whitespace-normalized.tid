@@ -3,10 +3,21 @@ description: AST-only mode normalizes token spacing
 tags: $:/tags/wikitext-serialize-normalize-spec
 type: text/vnd.tiddlywiki-multiple
 
+title: info
+
+`\\whitespace     trim` becomes `\whitespace trim`: the token spacing
+collapses to single spaces.
+
+Why: the pragma's void marker node carries the keyword list, but not the
+spacing between the tokens.
+
+* Covers: $:/plugins/tiddlywiki/wikitext-serialize/rules/whitespace.js.
+* Mode: ast-only (the Input field withholds the source from the serializer).
++
 title: Input
 mode: ast-only
 
-\whitespace  trim
+\whitespace     trim
 
 Some text.
 +

@@ -3,6 +3,18 @@ description: AST-only mode preserves indented nested definitions verbatim, norma
 tags: $:/tags/wikitext-serialize-normalize-spec
 type: text/vnd.tiddlywiki-multiple
 
+title: info
+
+`\end alpha` becomes a bare `\end`, and the pragma is followed by a blank
+line; the indented nested definitions inside the body stay verbatim.
+
+Why: the definition text is stored verbatim in the AST, nested definitions
+included, but the named end marker and the single newline after the pragma
+are not recorded.
+
+* Covers: $:/plugins/tiddlywiki/wikitext-serialize/rules/fnprocdef.js and $:/plugins/tiddlywiki/wikitext-serialize/rules/whitespace.js.
+* Mode: ast-only (the Input field withholds the source from the serializer).
++
 title: Input
 mode: ast-only
 

@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Quote lists, class items and description list nesting round-trip byte-exact
 title: Serialize/List-docs
 type: text/vnd.tiddlywiki
 

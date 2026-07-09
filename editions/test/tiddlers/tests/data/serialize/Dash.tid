@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: En-dash and em-dash round-trip byte-exact
 title: Serialize/Dash
 type: text/vnd.tiddlywiki
 

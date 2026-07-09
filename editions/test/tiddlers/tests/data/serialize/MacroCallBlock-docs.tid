@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Every documented macro parameter quoting form round-trips byte-exact
 title: Serialize/MacroCallBlock-docs
 type: text/vnd.tiddlywiki
 

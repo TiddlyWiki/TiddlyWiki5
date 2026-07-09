@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: A suppressed CamelCase link keeps its tilde
 title: Serialize/WikiLinkPrefix
 type: text/vnd.tiddlywiki
 

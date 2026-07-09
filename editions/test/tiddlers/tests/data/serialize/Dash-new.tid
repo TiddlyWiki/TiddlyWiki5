@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Three dashes followed by text are not a horizontal rule and round-trip as a dash
 title: Serialize/Dash-new
 type: text/vnd.tiddlywiki
 
