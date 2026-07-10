@@ -1,0 +1,19 @@
+created: 20161021101834041
+modified: 20260308110635203
+original-modified: 20161021102041147
+tags: [[HTML in WikiText]]
+title: HTML Links in WikiText
+ja-title: WikiテキストでのHTMLリンク
+type: text/vnd.tiddlywiki
+
+外部リソースへのHTMLリンクを作成できると便利な場合がよくあります。例えば、以下の例では`href`属性の値がMyLinkDestinationhrefというTiddlerの値に設定されます: 
+
+```
+<a href={{MyLinkDestination}}>リンク</a>
+```
+
+しかし、予期せぬセキュリティ上の問題があり、多くの場合、プライベートのTiddlyWiki(例: Dropbox上)のURLのプライバシーを保護するために、リンクは`noopener noreferrer`と設定した`rel`属性を持つ必要があります。詳しくはhttps://mathiasbynens.github.io/rel-noopener/ をご覧ください。
+
+```
+<a href={{MyLinkDestination}} rel="noopener noreferrer">リンク</a>
+```

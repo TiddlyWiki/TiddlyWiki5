@@ -5,7 +5,8 @@ Advanced/Hint: 关于此 TiddlyWiki 的内部信息
 Appearance/Caption: 外观
 Appearance/Hint: 定制您的 TiddlyWiki 外观。
 Basics/AnimDuration/Prompt: 动画持续时间
-Basics/AutoFocus/Prompt: 编辑条目时的默认自动停留字段
+Basics/AutoFocus/Prompt: 编辑新条目时，默认停留的字段
+Basics/AutoFocusEdit/Prompt: 编辑现有条目时，默认停留的字段
 Basics/Caption: 基础
 Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，或者您可用 {{保留开启中的条目顺序||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: 首页

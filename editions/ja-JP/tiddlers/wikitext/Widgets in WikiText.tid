@@ -1,0 +1,33 @@
+caption: ウィジェット
+created: 20131205160840915
+modified: 20260304114416977
+original-modified: 20220513113347606
+tags: WikiText
+title: Widgets in WikiText
+ja-title: Wikiテキストでのウィジェット
+type: text/vnd.tiddlywiki
+
+ウィジェットは[[Wikiテキスト|WikiText]]内でリッチな機能を提供します。[[HTML要素|HTML in WikiText]]と同じ構文を持ちますが、タグ名は常に`$`で始まります。例えば:
+
+<$macrocall $name=".example" n="1"
+eg="""<$button message="tm-navigate" to="HelloThere">こんにちは を開く</$button>
+"""/>
+
+ウィジェットは[[WikiテキストでのHTML|HTML in WikiText]]のすべての機能を継承することに注意してください:
+
+* ウィジェットの属性は次のように指定できます:
+** 引用符無しの文字列 (スペースを含むことはできない)
+** シングルクォートやダブルクォートで囲まれた文字列
+** 三重のダブルクォートで囲まれた文字列
+** マクロ呼び出し (例: `attr=<<myMacro>>`)
+** トランスクルージョン (例: `attr={{MyTiddler!!field}}`)
+** フィルタリングしたトランスクルージョン (例: `attr={{{ [filter[op]] }}}`)
+** <<.from-version "5.3.0">> [[置換された属性値|Substituted Attribute Values]]
+* ウィジェットの内容は、開始タグの後に2つの改行が続く場合([[ブロックモード|Block Mode WikiText]]が強制されます)を除いて、[[インラインモード|Inline Mode WikiText]]で[[パース|WikiText Parser Modes]]されます。
+** [[インラインモード|Inline Mode WikiText]]とは、見出し、表、リストなどの[[ブロックモード|Block Mode WikiText]]のパースルールが認識されないことを意味します。
+
+詳細については、[[WikiテキストでのHTML|HTML in WikiText]]を参照してください。
+
+利用できるウィジェットは下記です:
+
+<<list-links "[tag[Widgets]]" class:"multi-columns">>
