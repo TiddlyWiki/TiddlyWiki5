@@ -9,19 +9,6 @@ Widget base class
 
 "use strict";
 
-// Opt-in flag for the resilient render boundary in renderChildren (default off → throws propagate,
-// preserving fail-loud server/CI render). An interactive edition sets this tiddler to "yes".
-var RESILIENT_RENDER_CONFIG_TITLE = "$:/config/ResilientRender";
-
-function getResilientRenderEnabled(wiki) {
-	var changeCount = wiki.getChangeCount(RESILIENT_RENDER_CONFIG_TITLE);
-	if(wiki.resilientRenderConfigChangeCount !== changeCount) {
-		wiki.resilientRenderConfigChangeCount = changeCount;
-		wiki.resilientRenderEnabled = wiki.getTiddlerText(RESILIENT_RENDER_CONFIG_TITLE,"no") === "yes";
-	}
-	return wiki.resilientRenderEnabled === true;
-}
-
 /*
 Create a widget object for a parse tree node
 	parseTreeNode: reference to the parse tree node to be rendered
@@ -694,76 +681,13 @@ Widget.prototype.previousSibling = function() {
 };
 
 /*
-Render the children of this widget into the DOM.
+Render the children of this widget into the DOM
 */
 Widget.prototype.renderChildren = function(parent,nextSibling) {
-	var children = this.children,
-		resilient = getResilientRenderEnabled(this.wiki);
-	if(!resilient) {
-		for(var i = 0; i < children.length; i++) {
-			children[i].render(parent,nextSibling);
-		}
-	} else {
-		for(var t = 0; t < children.length; t++) {
-			try {
-				children[t].render(parent,nextSibling);
-			} catch(error) {
-				this.handleChildRenderError(t,error,parent,nextSibling,resilient);
-			}
-		}
-	}
-};
-
-/*
-Handle a child render failure at this widget's resilient boundary.
-*/
-Widget.prototype.handleChildRenderError = function(index,error,parentDomNode,nextSibling,resilient) {
-	this.containChildError(index,error,"render",parentDomNode,nextSibling,resilient);
-};
-
-/*
-Handle a child refresh failure at this widget's resilient boundary.
-*/
-Widget.prototype.handleChildRefreshError = function(index,error,resilient) {
-	var nextSibling = this.children[index].findNextSiblingDomNode();
-	this.containChildError(index,error,"refresh",this.parentDomNode,nextSibling,resilient);
-	return true;
-};
-
-/*
-Resilient child boundary (opt-in via $:/config/ResilientRender, default off): after render/refresh
-throws, the error path rethrows TranscludeRecursionError and non-enabled cases, otherwise swaps in a
-graded $error span. The fail-loud default preserves server/CI/static rendering and bug surfacing; on
-containment, destroying the failed child clears partial DOM/listeners and keeps this.children,
-refresh, and sibling DOM positioning consistent.
-	index: position of the failing child in this.children
-	error: the thrown error
-	phase: "render" or "refresh" (for the message)
-	parentDomNode: the DOM node to render the error widget into
-	nextSibling: the DOM node to insert the error widget before (or null)
-*/
-Widget.prototype.containChildError = function(index,error,phase,parentDomNode,nextSibling,resilient) {
-	if(error instanceof $tw.utils.TranscludeRecursionError) {
-		throw error;
-	}
-	if(!resilient) {
-		throw error;
-	}
-	var message = "Widget " + phase + " error: " + ((error && error.message) ? error.message : String(error));
-	try {
-		this.children[index].destroy();
-	} catch(innerError) {
-		// ignore — we are already on the failure path
-	}
-	try {
-		var errorWidget = this.makeChildWidget({type: "error", attributes: {
-			"$message": {type: "string", value: message}
-		}});
-		this.children[index] = errorWidget;
-		errorWidget.render(parentDomNode,nextSibling);
-	} catch(innerError) {
-		// last resort — the boundary itself must never crash the render
-	}
+	var children = this.children;
+	for(var i = 0; i < children.length; i++) {
+		children[i].render(parent,nextSibling);
+	};
 };
 
 /*
@@ -855,20 +779,9 @@ Refresh all the children of a widget
 */
 Widget.prototype.refreshChildren = function(changedTiddlers) {
 	var children = this.children,
-		resilient = getResilientRenderEnabled(this.wiki),
 		refreshed = false;
-	if(!resilient) {
-		for(var i = 0; i < children.length; i++) {
-			refreshed = children[i].refresh(changedTiddlers) || refreshed;
-		}
-	} else {
-		for(var t = 0; t < children.length; t++) {
-			try {
-				refreshed = children[t].refresh(changedTiddlers) || refreshed;
-			} catch(error) {
-				refreshed = this.handleChildRefreshError(t,error,resilient) || refreshed;
-			}
-		}
+	for(var i = 0; i < children.length; i++) {
+		refreshed = children[i].refresh(changedTiddlers) || refreshed;
 	}
 	return refreshed;
 };
