@@ -12,18 +12,11 @@ exports.name = "hot-child-walk";
 exports.platform = "both";
 
 exports.run = function(context) {
-	var modes = ["unset","no","yes"],
-		measurements = [];
-	for(var i = 0; i < modes.length; i++) {
-		measurements.push.apply(measurements,runMode(context,modes[i]));
-	}
-	return measurements;
+	return runScenario(context);
 };
 
-function runMode(context,mode) {
+function runScenario(context) {
 	var wiki = context.wiki,
-		configTitle = "$:/config/ResilientRender",
-		originalConfig = wiki.getTiddler(configTitle),
 		unrelatedTitle = "$:/temp/perftest/hot-child-walk/unrelated",
 		childCount = 1000,
 		parser = {tree: makeTextChildren(childCount)},
@@ -32,13 +25,11 @@ function runMode(context,mode) {
 		refreshMeasurement,
 		refreshCounter = 0;
 
-	setResilientRenderMode(wiki,mode);
 	wiki.clearTiddlerEventQueue();
 
 	renderMeasurement = context.measure("direct-child-render",function() {
 		rendered = renderParser(context,parser);
 		return {
-			mode: mode,
 			phase: "render",
 			taxonomy: "child-walk",
 			scenarioId: "hot-child-walk-render",
@@ -54,11 +45,10 @@ function runMode(context,mode) {
 
 	refreshMeasurement = context.measure("direct-child-refresh",function() {
 		var before = context.countDomNodes(rendered.wrapper);
-		wiki.addTiddler({title: unrelatedTitle, text: "hot-child-walk-" + mode + "-" + refreshCounter++});
+		wiki.addTiddler({title: unrelatedTitle, text: "hot-child-walk-" + refreshCounter++});
 		context.refresh(rendered.widgetNode,wiki.changedTiddlers,rendered.wrapper);
 		wiki.clearTiddlerEventQueue();
 		return {
-			mode: mode,
 			phase: "refresh",
 			taxonomy: "child-walk",
 			scenarioId: "hot-child-walk-refresh",
@@ -76,7 +66,6 @@ function runMode(context,mode) {
 
 	rendered.widgetNode.destroy();
 	wiki.deleteTiddler(unrelatedTitle);
-	restoreResilientRenderMode(wiki,configTitle,originalConfig);
 	wiki.clearTiddlerEventQueue();
 	return [renderMeasurement,refreshMeasurement];
 }
@@ -94,20 +83,4 @@ function makeTextChildren(childCount) {
 		children.push({type: "text", text: "x"});
 	}
 	return children;
-}
-
-function setResilientRenderMode(wiki,mode) {
-	if(mode === "unset") {
-		wiki.deleteTiddler("$:/config/ResilientRender");
-	} else {
-		wiki.addTiddler({title: "$:/config/ResilientRender", text: mode});
-	}
-}
-
-function restoreResilientRenderMode(wiki,configTitle,originalConfig) {
-	if(originalConfig) {
-		wiki.addTiddler(originalConfig);
-	} else {
-		wiki.deleteTiddler(configTitle);
-	}
 }

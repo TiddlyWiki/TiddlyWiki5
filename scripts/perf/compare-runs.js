@@ -201,57 +201,7 @@ function aggregateKeyStats(collected) {
   return stats;
 }
 
-function computeModeEffects(collected) {
-  const labels = new Set();
-  for (const key of collected.keys) {
-    const parts = key.split("|");
-    if (parts[1]) labels.add(parts[1]);
-  }
-
-  const outputs = [];
-  for (const label of Array.from(labels).sort()) {
-    const yesVsNo = [];
-    const yesVsUnset = [];
-
-    for (const run of collected.runs) {
-      const prefix = `resilient-render-widget-tree|${label}|`;
-      const rowNo = run.byKey.get(`${prefix}no|refresh|refresh`) || run.byKey.get(`${prefix}no|render|render`);
-      const rowYes = run.byKey.get(`${prefix}yes|refresh|refresh`) || run.byKey.get(`${prefix}yes|render|render`);
-      const rowUnset = run.byKey.get(`${prefix}unset|refresh|refresh`) || run.byKey.get(`${prefix}unset|render|render`);
-
-      const dYesNo = rowNo && rowYes ? pctDelta(rowNo.median, rowYes.median) : null;
-      const dYesUnset = rowUnset && rowYes ? pctDelta(rowUnset.median, rowYes.median) : null;
-
-      yesVsNo.push(dYesNo);
-      yesVsUnset.push(dYesUnset);
-    }
-
-    const yesVsNoNum = yesVsNo.filter(isNum);
-    const yesVsUnsetNum = yesVsUnset.filter(isNum);
-
-    outputs.push({
-      label,
-      yesVsNo: {
-        values: yesVsNo,
-        medianPct: medianOf(yesVsNoNum),
-        meanPct: mean(yesVsNoNum),
-        minPct: yesVsNoNum.length ? Math.min(...yesVsNoNum) : null,
-        maxPct: yesVsNoNum.length ? Math.max(...yesVsNoNum) : null
-      },
-      yesVsUnset: {
-        values: yesVsUnset,
-        medianPct: medianOf(yesVsUnsetNum),
-        meanPct: mean(yesVsUnsetNum),
-        minPct: yesVsUnsetNum.length ? Math.min(...yesVsUnsetNum) : null,
-        maxPct: yesVsUnsetNum.length ? Math.max(...yesVsUnsetNum) : null
-      }
-    });
-  }
-
-  return outputs;
-}
-
-function printSummary(collected, keyStats, modeEffects) {
+function printSummary(collected, keyStats) {
   console.log("=== Run Set ===");
   for (const run of collected.runs) {
     console.log(`${run.runName}\t${run.status}\t${run.timestamp || ""}`);
@@ -320,21 +270,6 @@ function printSummary(collected, keyStats, modeEffects) {
     ].join("\t"));
   }
   console.log("");
-
-  console.log("=== Mode Effects (median deltas across runs) ===");
-  for (const row of modeEffects) {
-    console.log([
-      row.label,
-      "yes-vs-no",
-      formatPct(row.yesVsNo.medianPct),
-      formatPct(row.yesVsNo.minPct),
-      formatPct(row.yesVsNo.maxPct),
-      "yes-vs-unset",
-      formatPct(row.yesVsUnset.medianPct),
-      formatPct(row.yesVsUnset.minPct),
-      formatPct(row.yesVsUnset.maxPct)
-    ].join("\t"));
-  }
 }
 
 function main() {
@@ -347,9 +282,7 @@ function main() {
   const results = files.map(readResult);
   const collected = collectMeasurementRows(results);
   const keyStats = aggregateKeyStats(collected);
-  const modeEffects = computeModeEffects(collected);
-
-  printSummary(collected, keyStats, modeEffects);
+  printSummary(collected, keyStats);
 
   if (jsonOut) {
     const payload = {
@@ -359,8 +292,7 @@ function main() {
         status: run.status,
         timestamp: run.timestamp
       })),
-      keyStats,
-      modeEffects
+      keyStats
     };
     fs.writeFileSync(jsonOut, JSON.stringify(payload, null, 2), "utf8");
   }

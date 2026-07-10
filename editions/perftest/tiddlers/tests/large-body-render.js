@@ -12,18 +12,11 @@ exports.name = "large-body-render";
 exports.platform = "both";
 
 exports.run = function(context) {
-	var modes = ["unset","no","yes"],
-		measurements = [];
-	for(var i = 0; i < modes.length; i++) {
-		measurements.push.apply(measurements,runMode(context,modes[i]));
-	}
-	return measurements;
+	return runScenario(context);
 };
 
-function runMode(context,mode) {
+function runScenario(context) {
 	var wiki = context.wiki,
-		configTitle = "$:/config/ResilientRender",
-		originalConfig = wiki.getTiddler(configTitle),
 		basePrefix = "$:/temp/perftest/large-body/",
 		sourceTitle = basePrefix + "source",
 		embeddedTitle = basePrefix + "embedded",
@@ -36,14 +29,12 @@ function runMode(context,mode) {
 		unrelatedCounter = 0,
 		relatedCounter = 0;
 
-	setResilientRenderMode(wiki,mode);
 	wiki.addTiddler({title: embeddedTitle, text: makeEmbeddedText(0)});
 	wiki.addTiddler({title: sourceTitle, text: makeSourceText(sectionCount,embeddedTitle)});
 
 	renderMeasurement = context.measure("initial-render",function() {
 		rendered = context.renderText("{{" + sourceTitle + "}}\n");
 		return {
-			mode: mode,
 			phase: "render",
 			taxonomy: "render",
 			scenarioId: "large-body-initial-render",
@@ -59,11 +50,10 @@ function runMode(context,mode) {
 
 	unrelatedMeasurement = context.measure("refresh-unrelated-change",function() {
 		var before = context.countDomNodes(rendered.wrapper);
-		wiki.addTiddler({title: unrelatedTitle, text: "unrelated-" + mode + "-" + unrelatedCounter++});
+		wiki.addTiddler({title: unrelatedTitle, text: "unrelated-" + unrelatedCounter++});
 		context.refresh(rendered.widgetNode,wiki.changedTiddlers,rendered.wrapper);
 		wiki.clearTiddlerEventQueue();
 		return {
-			mode: mode,
 			phase: "refresh",
 			taxonomy: "refresh",
 			scenarioId: "large-body-refresh-unrelated-change",
@@ -85,7 +75,6 @@ function runMode(context,mode) {
 		context.refresh(rendered.widgetNode,wiki.changedTiddlers,rendered.wrapper);
 		wiki.clearTiddlerEventQueue();
 		return {
-			mode: mode,
 			phase: "refresh",
 			taxonomy: "refresh",
 			scenarioId: "large-body-refresh-relevant-change",
@@ -105,7 +94,6 @@ function runMode(context,mode) {
 	wiki.deleteTiddler(sourceTitle);
 	wiki.deleteTiddler(embeddedTitle);
 	wiki.deleteTiddler(unrelatedTitle);
-	restoreResilientRenderMode(wiki,configTitle,originalConfig);
 	wiki.clearTiddlerEventQueue();
 	return [renderMeasurement,unrelatedMeasurement,relatedMeasurement];
 }
@@ -142,20 +130,4 @@ function makeEmbeddedText(revision) {
 		"Inline content with ''bold'', //italic//, and `code`.",
 		""
 	].join("\n");
-}
-
-function setResilientRenderMode(wiki,mode) {
-	if(mode === "unset") {
-		wiki.deleteTiddler("$:/config/ResilientRender");
-	} else {
-		wiki.addTiddler({title: "$:/config/ResilientRender", text: mode});
-	}
-}
-
-function restoreResilientRenderMode(wiki,configTitle,originalConfig) {
-	if(originalConfig) {
-		wiki.addTiddler(originalConfig);
-	} else {
-		wiki.deleteTiddler(configTitle);
-	}
 }

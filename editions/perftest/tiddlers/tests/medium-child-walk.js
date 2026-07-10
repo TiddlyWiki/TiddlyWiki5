@@ -12,18 +12,11 @@ exports.name = "medium-child-walk";
 exports.platform = "both";
 
 exports.run = function(context) {
-	var modes = ["unset","no","yes"],
-		measurements = [];
-	for(var i = 0; i < modes.length; i++) {
-		measurements.push.apply(measurements,runMode(context,modes[i]));
-	}
-	return measurements;
+	return runScenario(context);
 };
 
-function runMode(context,mode) {
+function runScenario(context) {
 	var wiki = context.wiki,
-		configTitle = "$:/config/ResilientRender",
-		originalConfig = wiki.getTiddler(configTitle),
 		basePrefix = "$:/temp/perftest/medium-child-walk/",
 		itemPrefix = basePrefix + "item-",
 		unrelatedTitle = basePrefix + "unrelated",
@@ -36,7 +29,6 @@ function runMode(context,mode) {
 		unrelatedCounter = 0,
 		relatedCounter = 0;
 
-	setResilientRenderMode(wiki,mode);
 	seedFixture(wiki,itemPrefix,childCount);
 	wiki.clearTiddlerEventQueue();
 	parser = {tree: makeMediumChildren(itemPrefix,childCount)};
@@ -44,7 +36,6 @@ function runMode(context,mode) {
 	renderMeasurement = context.measure("medium-child-render",function() {
 		rendered = renderParser(context,parser);
 		return {
-			mode: mode,
 			phase: "render",
 			taxonomy: "child-walk",
 			scenarioId: "medium-child-walk-render",
@@ -60,11 +51,10 @@ function runMode(context,mode) {
 
 	unrelatedMeasurement = context.measure("medium-child-refresh-unrelated",function() {
 		var before = context.countDomNodes(rendered.wrapper);
-		wiki.addTiddler({title: unrelatedTitle, text: "medium-child-walk-" + mode + "-" + unrelatedCounter++});
+		wiki.addTiddler({title: unrelatedTitle, text: "medium-child-walk-" + unrelatedCounter++});
 		context.refresh(rendered.widgetNode,wiki.changedTiddlers,rendered.wrapper);
 		wiki.clearTiddlerEventQueue();
 		return {
-			mode: mode,
 			phase: "refresh",
 			taxonomy: "child-walk",
 			scenarioId: "medium-child-walk-refresh-unrelated",
@@ -86,7 +76,6 @@ function runMode(context,mode) {
 		context.refresh(rendered.widgetNode,wiki.changedTiddlers,rendered.wrapper);
 		wiki.clearTiddlerEventQueue();
 		return {
-			mode: mode,
 			phase: "refresh",
 			taxonomy: "child-walk",
 			scenarioId: "medium-child-walk-refresh-relevant",
@@ -104,7 +93,6 @@ function runMode(context,mode) {
 
 	rendered.widgetNode.destroy();
 	cleanupFixture(wiki,itemPrefix,unrelatedTitle,childCount);
-	restoreResilientRenderMode(wiki,configTitle,originalConfig);
 	wiki.clearTiddlerEventQueue();
 	return [renderMeasurement,unrelatedMeasurement,relatedMeasurement];
 }
@@ -162,20 +150,4 @@ function makeMediumChildren(itemPrefix,childCount) {
 		});
 	}
 	return children;
-}
-
-function setResilientRenderMode(wiki,mode) {
-	if(mode === "unset") {
-		wiki.deleteTiddler("$:/config/ResilientRender");
-	} else {
-		wiki.addTiddler({title: "$:/config/ResilientRender", text: mode});
-	}
-}
-
-function restoreResilientRenderMode(wiki,configTitle,originalConfig) {
-	if(originalConfig) {
-		wiki.addTiddler(originalConfig);
-	} else {
-		wiki.deleteTiddler(configTitle);
-	}
 }

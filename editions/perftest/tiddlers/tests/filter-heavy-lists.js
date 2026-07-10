@@ -12,18 +12,11 @@ exports.name = "filter-heavy-lists";
 exports.platform = "both";
 
 exports.run = function(context) {
-	var modes = ["unset","no","yes"],
-		measurements = [];
-	for(var i = 0; i < modes.length; i++) {
-		measurements.push.apply(measurements,runMode(context,modes[i]));
-	}
-	return measurements;
+	return runScenario(context);
 };
 
-function runMode(context,mode) {
+function runScenario(context) {
 	var wiki = context.wiki,
-		configTitle = "$:/config/ResilientRender",
-		originalConfig = wiki.getTiddler(configTitle),
 		basePrefix = "$:/temp/perftest/filter-heavy/",
 		itemPrefix = basePrefix + "task-",
 		renderTitle = basePrefix + "source",
@@ -37,14 +30,12 @@ function runMode(context,mode) {
 		unrelatedCounter = 0,
 		relatedCounter = 0;
 
-	setResilientRenderMode(wiki,mode);
 	seedItems(wiki,itemPrefix,itemCount);
 	wiki.addTiddler({title: renderTitle, text: makeSourceText(itemPrefix)});
 
 	renderMeasurement = context.measure("initial-render",function() {
 		rendered = context.renderText("{{" + renderTitle + "}}\n");
 		return {
-			mode: mode,
 			phase: "render",
 			taxonomy: "render",
 			scenarioId: "filter-heavy-initial-render",
@@ -60,11 +51,10 @@ function runMode(context,mode) {
 
 	unrelatedMeasurement = context.measure("refresh-unrelated-change",function() {
 		var before = context.countDomNodes(rendered.wrapper);
-		wiki.addTiddler({title: unrelatedTitle, text: "background-" + mode + "-" + unrelatedCounter++});
+		wiki.addTiddler({title: unrelatedTitle, text: "background-" + unrelatedCounter++});
 		context.refresh(rendered.widgetNode,wiki.changedTiddlers,rendered.wrapper);
 		wiki.clearTiddlerEventQueue();
 		return {
-			mode: mode,
 			phase: "refresh",
 			taxonomy: "refresh",
 			scenarioId: "filter-heavy-refresh-unrelated-change",
@@ -84,13 +74,12 @@ function runMode(context,mode) {
 		var before = context.countDomNodes(rendered.wrapper);
 		wiki.addTiddler({
 			title: relevantTitle,
-			text: "Task content update " + mode + " " + relatedCounter++,
+			text: "Task content update " + relatedCounter++,
 			tags: ["project-a","status-open"]
 		});
 		context.refresh(rendered.widgetNode,wiki.changedTiddlers,rendered.wrapper);
 		wiki.clearTiddlerEventQueue();
 		return {
-			mode: mode,
 			phase: "refresh",
 			taxonomy: "refresh",
 			scenarioId: "filter-heavy-refresh-relevant-change",
@@ -108,7 +97,6 @@ function runMode(context,mode) {
 
 	rendered.widgetNode.destroy();
 	cleanupItems(wiki,basePrefix,itemPrefix,itemCount,renderTitle);
-	restoreResilientRenderMode(wiki,configTitle,originalConfig);
 	wiki.clearTiddlerEventQueue();
 	return [renderMeasurement,unrelatedMeasurement,relatedMeasurement];
 }
@@ -154,20 +142,4 @@ function pad(value,width) {
 		text = "0" + text;
 	}
 	return text;
-}
-
-function setResilientRenderMode(wiki,mode) {
-	if(mode === "unset") {
-		wiki.deleteTiddler("$:/config/ResilientRender");
-	} else {
-		wiki.addTiddler({title: "$:/config/ResilientRender", text: mode});
-	}
-}
-
-function restoreResilientRenderMode(wiki,configTitle,originalConfig) {
-	if(originalConfig) {
-		wiki.addTiddler(originalConfig);
-	} else {
-		wiki.deleteTiddler(configTitle);
-	}
 }

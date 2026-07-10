@@ -90,7 +90,7 @@ function makeContext(options) {
 		countDomNodes: countDomNodes,
 		renderText: function(text) {
 			var parser = $tw.wiki.parseText("text/vnd.tiddlywiki",text),
-				widgetNode = $tw.wiki.makeWidget(parser),
+				widgetNode = $tw.wiki.makeWidget(parser,{document: documentObject}),
 				wrapper = documentObject.createElement("div");
 			widgetNode.render(wrapper,null);
 			return {widgetNode: widgetNode, wrapper: wrapper};
@@ -99,8 +99,7 @@ function makeContext(options) {
 			return widgetNode.refresh(changes,wrapper,null);
 		},
 		measure: function(label,fn,metadata) {
-			var measurement,
-				result,
+			var result,
 				before,
 				after,
 				durationMs;
@@ -113,24 +112,42 @@ function makeContext(options) {
 				after = now();
 				durationMs = Math.max(0,(after - before) - context.measurementBaselineMs);
 			}
-			measurement = {
-				label: label,
-				durationMs: durationMs
-			};
-			if(metadata) {
-				$tw.utils.extend(measurement,metadata);
+			return makeMeasurement(label,result,durationMs,metadata);
+		},
+		measureAsync: function(label,fn,metadata) {
+			var before,
+				durationMs;
+			if(context.isWarmup && context.skipMeasurementDuringWarmup) {
+				return Promise.resolve().then(fn).then(function(result) {
+					return makeMeasurement(label,result,0,metadata);
+				});
 			}
-			if(result && typeof result === "object") {
-				$tw.utils.extend(measurement,result);
-				measurement.label = label;
-				if(measurement.durationMs === undefined) {
-					measurement.durationMs = durationMs;
-				}
-			}
-			return measurement;
+			before = now();
+			return Promise.resolve().then(fn).then(function(result) {
+				durationMs = Math.max(0,(now() - before) - context.measurementBaselineMs);
+				return makeMeasurement(label,result,durationMs,metadata);
+			});
 		}
 	};
 	return context;
+}
+
+function makeMeasurement(label,result,durationMs,metadata) {
+	var measurement = {
+		label: label,
+		durationMs: durationMs
+	};
+	if(metadata) {
+		$tw.utils.extend(measurement,metadata);
+	}
+	if(result && typeof result === "object") {
+		$tw.utils.extend(measurement,result);
+		measurement.label = label;
+		if(measurement.durationMs === undefined) {
+			measurement.durationMs = durationMs;
+		}
+	}
+	return measurement;
 }
 
 function countDomNodes(node) {

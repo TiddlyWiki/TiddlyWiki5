@@ -12,18 +12,11 @@ exports.name = "deep-transclusion-stack";
 exports.platform = "both";
 
 exports.run = function(context) {
-	var modes = ["unset","no","yes"],
-		measurements = [];
-	for(var i = 0; i < modes.length; i++) {
-		measurements.push.apply(measurements,runMode(context,modes[i]));
-	}
-	return measurements;
+	return runScenario(context);
 };
 
-function runMode(context,mode) {
+function runScenario(context) {
 	var wiki = context.wiki,
-		configTitle = "$:/config/ResilientRender",
-		originalConfig = wiki.getTiddler(configTitle),
 		basePrefix = "$:/temp/perftest/deep-transclusion/",
 		renderTitle = basePrefix + "source",
 		unrelatedTitle = basePrefix + "unrelated",
@@ -38,14 +31,12 @@ function runMode(context,mode) {
 		unrelatedCounter = 0,
 		relatedCounter = 0;
 
-	setResilientRenderMode(wiki,mode);
 	seedFixture(wiki,nodePrefix,itemPrefix,depth,itemCount);
 	wiki.addTiddler({title: renderTitle, text: makeSourceText(itemPrefix,itemCount)});
 
 	renderMeasurement = context.measure("initial-render",function() {
 		rendered = context.renderText("{{" + renderTitle + "}}\n");
 		return {
-			mode: mode,
 			phase: "render",
 			taxonomy: "render",
 			scenarioId: "deep-transclusion-initial-render",
@@ -62,11 +53,10 @@ function runMode(context,mode) {
 
 	unrelatedMeasurement = context.measure("refresh-unrelated-change",function() {
 		var before = context.countDomNodes(rendered.wrapper);
-		wiki.addTiddler({title: unrelatedTitle, text: "unrelated-" + mode + "-" + unrelatedCounter++});
+		wiki.addTiddler({title: unrelatedTitle, text: "unrelated-" + unrelatedCounter++});
 		context.refresh(rendered.widgetNode,wiki.changedTiddlers,rendered.wrapper);
 		wiki.clearTiddlerEventQueue();
 		return {
-			mode: mode,
 			phase: "refresh",
 			taxonomy: "refresh",
 			scenarioId: "deep-transclusion-refresh-unrelated-change",
@@ -85,11 +75,10 @@ function runMode(context,mode) {
 
 	relatedMeasurement = context.measure("refresh-relevant-change",function() {
 		var before = context.countDomNodes(rendered.wrapper);
-		wiki.addTiddler({title: nodePrefix + (depth - 1), text: "leaf-" + mode + "-" + relatedCounter++});
+		wiki.addTiddler({title: nodePrefix + (depth - 1), text: "leaf-" + relatedCounter++});
 		context.refresh(rendered.widgetNode,wiki.changedTiddlers,rendered.wrapper);
 		wiki.clearTiddlerEventQueue();
 		return {
-			mode: mode,
 			phase: "refresh",
 			taxonomy: "refresh",
 			scenarioId: "deep-transclusion-refresh-relevant-change",
@@ -108,7 +97,6 @@ function runMode(context,mode) {
 
 	rendered.widgetNode.destroy();
 	cleanupFixture(wiki,basePrefix,nodePrefix,itemPrefix,renderTitle,depth,itemCount);
-	restoreResilientRenderMode(wiki,configTitle,originalConfig);
 	wiki.clearTiddlerEventQueue();
 	return [renderMeasurement,unrelatedMeasurement,relatedMeasurement];
 }
@@ -147,20 +135,4 @@ function makeSourceText(itemPrefix,itemCount) {
 		"<div class=\"perf-deep-stack-row\"><$transclude tiddler=<<currentTiddler>>/></div>",
 		"</$list>"
 	].join("\n");
-}
-
-function setResilientRenderMode(wiki,mode) {
-	if(mode === "unset") {
-		wiki.deleteTiddler("$:/config/ResilientRender");
-	} else {
-		wiki.addTiddler({title: "$:/config/ResilientRender", text: mode});
-	}
-}
-
-function restoreResilientRenderMode(wiki,configTitle,originalConfig) {
-	if(originalConfig) {
-		wiki.addTiddler(originalConfig);
-	} else {
-		wiki.deleteTiddler(configTitle);
-	}
 }

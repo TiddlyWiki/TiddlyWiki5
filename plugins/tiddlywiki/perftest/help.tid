@@ -24,7 +24,7 @@ The browser path is explicit because the default Playwright configuration target
 
 ```
 tiddlywiki ./editions/perftest --build index
-npx playwright test editions/perftest/playwright.spec.js --project=chromium
+npx playwright test --config=editions/perftest/playwright.config.js --project=chromium
 ```
 
 Performance tests use this shape:
