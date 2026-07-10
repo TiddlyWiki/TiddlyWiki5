@@ -1,0 +1,22 @@
+caption: 見出し
+created: 20131205161234909
+modified: 20260223101252179
+original-modified: 20220513110830487
+tags: WikiText
+title: Headings in WikiText
+ja-title: Wikiテキストでの見出し
+type: text/vnd.tiddlywiki
+
+見出しは、1文字から6文字までの`!`文字で始めます:
+
+```
+! これはレベル1の見出しです
+
+!! これはレベル2の見出しです
+
+!!! これはレベル3の見出しです
+```
+
+次のようにして個々の見出しにCSSクラスを割り当てることができます:
+
+<<wikitext-example src:"""!!.myStyle この見出しのクラスは`myStyle`です""">>
