@@ -156,14 +156,13 @@ Fix the height of textarea to fit content
 FramedEngine.prototype.fixHeight = function() {
 	// Make sure styles are updated
 	this.copyStyles();
-	// If .editRows is initialised, it takes precedence
-	if(this.widget.editTag === "textarea" && !this.widget.editRows) {
+	if(this.widget.editTag === "textarea") {
 		if(this.widget.editAutoHeight) {
 			if(this.domNode && !this.domNode.isTiddlyWikiFakeDom) {
 				var newHeight = $tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);
 				this.iframeNode.style.height = newHeight + "px";
 			}
-		} else {
+		} else if(!this.widget.editRows) {
 			var fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
 			fixedHeight = Math.max(fixedHeight,20);
 			this.domNode.style.height = fixedHeight + "px";
