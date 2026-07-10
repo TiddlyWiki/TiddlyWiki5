@@ -40,6 +40,8 @@ exports.startup = function() {
 	// The rest of the startup process here is not strictly to do with loading modules, but are needed before other startup
 	// modules are executed. It is easier to put them here than to introduce a new startup module
 	// --------------------------
+	// Set up the performance framework
+	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
 	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
 	$tw.rootWidget = new widget.widget({
 		type: "widget",
@@ -48,8 +50,6 @@ exports.startup = function() {
 		wiki: $tw.wiki,
 		document: $tw.browser ? document : $tw.fakeDocument
 	});
-	// Set up the performance framework
-	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
 	// Kick off the filter tracker
 	$tw.filterTracker = new $tw.FilterTracker($tw.wiki);
 	$tw.wiki.addEventListener("change",function(changes) {
