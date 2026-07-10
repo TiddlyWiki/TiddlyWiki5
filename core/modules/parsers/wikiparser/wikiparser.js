@@ -51,6 +51,8 @@ var WikiParser = function(type,text,options) {
 	this.pos = 0;
 	// Start with empty output
 	this.tree = [];
+	// Collect diagnostics from any recovered block failures
+	this.diagnostics = [];
 	// Assemble the rule classes we're going to use
 	var pragmaRuleClasses, blockRuleClasses, inlineRuleClasses;
 	if(options.rules) {
@@ -243,7 +245,15 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	var nextMatch = this.findNextMatch(this.blockRules,this.pos);
 	if(nextMatch && nextMatch.matchIndex === this.pos) {
 		var start = this.pos;
-		var subTree = nextMatch.rule.parse();
+		var subTree;
+		try {
+			subTree = nextMatch.rule.parse();
+		} catch(error) {
+			if(!(error instanceof $tw.utils.RecoverableParseError)) {
+				throw error;
+			}
+			return this.recoverBlock(start,error,nextMatch.rule.name);
+		}
 		// Set the start and end positions of the first and last blocks if they're not already set
 		if(subTree.length > 0) {
 			if(subTree[0].start === undefined) subTree[0].start = start;
@@ -257,6 +267,34 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	var children = this.parseInlineRun(terminatorRegExp);
 	var end = this.pos;
 	return [{type: "element", tag: "p", children: children, start: start, end: end, rule: "parseblock" }];
+};
+
+/*
+Recover from a recoverable block rule failure: preserve the block source as a text node, record a normalised diagnostic, and resync the parse position to the next block boundary
+*/
+WikiParser.prototype.recoverBlock = function(start,error,ruleName) {
+	// Resync to the next block boundary so only the failed block degrades
+	var boundaryRegExp = /(\r?\n\r?\n)/mg;
+	boundaryRegExp.lastIndex = start;
+	var boundaryMatch = boundaryRegExp.exec(this.source),
+		end = boundaryMatch ? boundaryMatch.index + boundaryMatch[0].length : this.sourceLength;
+	// Always make forward progress
+	this.pos = Math.min(Math.max(end,start + 1),this.sourceLength);
+	// Record a diagnostic, clamping any supplied range to the source
+	var diagnostic = error.diagnostic || {},
+		from = typeof diagnostic.from === "number" && isFinite(diagnostic.from) ? diagnostic.from : start,
+		to = typeof diagnostic.to === "number" && isFinite(diagnostic.to) ? diagnostic.to : this.pos;
+	from = Math.max(0,Math.min(from,this.sourceLength));
+	to = Math.max(from,Math.min(to,this.sourceLength));
+	this.diagnostics.push({
+		from: from,
+		to: to,
+		severity: diagnostic.severity || "error",
+		source: diagnostic.source || this.type,
+		code: diagnostic.code || "parse-error",
+		message: diagnostic.message || "Unable to parse block"
+	});
+	return [{type: "text", text: this.source.substring(start,this.pos), start: start, end: this.pos, rule: ruleName}];
 };
 
 /*

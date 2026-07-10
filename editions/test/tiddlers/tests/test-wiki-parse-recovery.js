@@ -178,3 +178,76 @@ describe("Wiki.parseText recovery", function() {
 		}
 	});
 });
+
+describe("WikiParser block-level recovery", function() {
+
+	var WikiParser = $tw.Wiki.parsers["text/vnd.tiddlywiki"];
+
+	function withThrowingBlockRule(ruleName,makeError,fn) {
+		var wiki = new $tw.Wiki();
+		// Prime the lazily-created rule classes before patching one
+		wiki.parseText("text/vnd.tiddlywiki","prime");
+		var ruleClass = WikiParser.prototype.blockRuleClasses[ruleName],
+			original = ruleClass.prototype.parse;
+		ruleClass.prototype.parse = function() {
+			throw makeError();
+		};
+		try {
+			return fn(wiki);
+		} finally{
+			ruleClass.prototype.parse = original;
+		}
+	}
+
+	it("recovers a single failing block to source text and keeps surrounding blocks", function() {
+		var result = withThrowingBlockRule("heading",function() {
+			return new $tw.utils.RecoverableParseError({code: "test-block", message: "block boom"});
+		},function(wiki) {
+			return wiki.parseText("text/vnd.tiddlywiki","para one\n\n! Heading here\n\npara two");
+		});
+		expect(result.tree.length).toBe(3);
+		expect(result.tree[0].type).toBe("element");
+		expect(result.tree[0].tag).toBe("p");
+		expect(result.tree[1].type).toBe("text");
+		expect(result.tree[1].text.indexOf("! Heading here")).toBe(0);
+		expect(result.tree[2].type).toBe("element");
+		expect(result.tree[2].tag).toBe("p");
+		expect(result.diagnostics.length).toBe(1);
+		expect(result.diagnostics[0].message).toBe("block boom");
+		expect(result.diagnostics[0].code).toBe("test-block");
+	});
+
+	it("rethrows a non-recoverable block error", function() {
+		expect(function() {
+			withThrowingBlockRule("heading",function() {
+				return new Error("hard boom");
+			},function(wiki) {
+				wiki.parseText("text/vnd.tiddlywiki","! Heading");
+			});
+		}).toThrow();
+	});
+
+	it("normalizes and clamps a block diagnostic range to the source", function() {
+		var result = withThrowingBlockRule("heading",function() {
+			return new $tw.utils.RecoverableParseError({from: -3, to: 99999, severity: "warning", message: "boom"});
+		},function(wiki) {
+			return wiki.parseText("text/vnd.tiddlywiki","! Heading");
+		});
+		expect(result.diagnostics[0].from).toBe(0);
+		expect(result.diagnostics[0].to).toBe(result.source.length);
+		expect(result.diagnostics[0].severity).toBe("warning");
+	});
+
+	it("recovers the final block when there is no trailing boundary", function() {
+		var result = withThrowingBlockRule("heading",function() {
+			return new $tw.utils.RecoverableParseError({message: "boom"});
+		},function(wiki) {
+			return wiki.parseText("text/vnd.tiddlywiki","para one\n\n! Heading at end");
+		});
+		expect(result.tree[0].tag).toBe("p");
+		var last = result.tree[result.tree.length - 1];
+		expect(last.type).toBe("text");
+		expect(last.text.indexOf("! Heading at end")).toBe(0);
+		expect(result.diagnostics.length).toBe(1);
+	});
+});
