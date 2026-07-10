@@ -4,18 +4,20 @@ description: Run performance tests
 This runs performance tests in JavaScript tiddlers tagged with `$:/tags/performance-test`.
 
 ```
---perf [output=<filename>] [iterations=<number>] [baselineIterations=<number>] [warmupCapture=yes|no]
+--perf [output=<filename>] [iterations=<number>] [baselineIterations=<number>] [warmupCapture=yes|no] [filter=<filter>]
 ```
 
 ''output'' - optional filename for writing JSON results. The filename is resolved relative to the output directory.
 ''iterations'' - optional default measured iteration count for benchmarks that do not set `exports.iterations`.
 ''baselineIterations'' - optional count used to calibrate measurement-overhead baseline subtraction. Default: 20.
 ''warmupCapture'' - optional control for warmup measurement capture. Default: `no` (warmup keeps behavior but skips timing capture overhead where possible).
+''filter'' - optional filter for selecting benchmark tiddlers. The browser runner reads `$:/config/Performance/TestFilter` when no command option supplies a filter.
 
 For example:
 
 ```
 tiddlywiki ./editions/perftest --output ./output/perftest --perf output=results.json iterations=100 baselineIterations=30 warmupCapture=no
+tiddlywiki ./editions/perftest --output ./output/perftest --perf output=hot-child-walk.json filter="[[$:/perf/tests/hot-child-walk.js]]"
 ```
 
 The browser path is explicit because the default Playwright configuration targets `editions/test`:

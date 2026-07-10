@@ -39,11 +39,15 @@ Command.prototype.execute = function() {
 	if(this.params.warmupCapture !== undefined) {
 		runOptions.skipMeasurementDuringWarmup = this.params.warmupCapture !== "yes";
 	}
+	if(this.params.filter !== undefined) {
+		runOptions.testFilter = this.params.filter;
+	}
 	runOptions.command = "--perf" +
 		(runOptions.output ? " output=" + runOptions.output : "") +
 		(runOptions.defaultIterations !== undefined ? " iterations=" + runOptions.defaultIterations : "") +
 		(runOptions.measurementBaselineIterations !== undefined ? " baselineIterations=" + runOptions.measurementBaselineIterations : "") +
-		(this.params.warmupCapture !== undefined ? " warmupCapture=" + this.params.warmupCapture : "");
+		(this.params.warmupCapture !== undefined ? " warmupCapture=" + this.params.warmupCapture : "") +
+		(runOptions.testFilter !== undefined ? " filter=" + runOptions.testFilter : "");
 	perftest.run(runOptions).then(function(results) {
 		perftest.reportToConsole(results);
 		if(self.params.output) {

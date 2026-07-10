@@ -14,9 +14,12 @@ Widget base class
 var RESILIENT_RENDER_CONFIG_TITLE = "$:/config/ResilientRender";
 
 function getResilientRenderEnabled(wiki) {
-	return wiki.getCacheForTiddler(RESILIENT_RENDER_CONFIG_TITLE,"resilientRenderEnabled",function() {
-		return wiki.getTiddlerText(RESILIENT_RENDER_CONFIG_TITLE,"no") === "yes";
-	});
+	var changeCount = wiki.getChangeCount(RESILIENT_RENDER_CONFIG_TITLE);
+	if(wiki.resilientRenderConfigChangeCount !== changeCount) {
+		wiki.resilientRenderConfigChangeCount = changeCount;
+		wiki.resilientRenderEnabled = wiki.getTiddlerText(RESILIENT_RENDER_CONFIG_TITLE,"no") === "yes";
+	}
+	return wiki.resilientRenderEnabled === true;
 }
 
 /*

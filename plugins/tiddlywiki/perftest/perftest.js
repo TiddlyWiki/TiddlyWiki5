@@ -8,7 +8,8 @@ Performance test discovery, execution and reporting.
 \*/
 "use strict";
 
-var TEST_FILTER = "[all[tiddlers+shadows]type[application/javascript]tag[$:/tags/performance-test]]";
+var DEFAULT_TEST_FILTER = "[all[tiddlers+shadows]type[application/javascript]tag[$:/tags/performance-test]]";
+var TEST_FILTER_CONFIG_TITLE = "$:/config/Performance/TestFilter";
 var DEFAULT_WARMUP = 5;
 var DEFAULT_ITERATIONS = 50;
 var DEFAULT_MEASUREMENT_BASELINE_ITERATIONS = 20;
@@ -286,7 +287,8 @@ function makeEnvironment(options) {
 		timestamp: (new Date()).toISOString(),
 		command: options.command || null,
 		measurementBaselineIterations: sanitizeNonNegativeCount(options.measurementBaselineIterations,DEFAULT_MEASUREMENT_BASELINE_ITERATIONS),
-		skipMeasurementDuringWarmup: options.skipMeasurementDuringWarmup !== false
+		skipMeasurementDuringWarmup: options.skipMeasurementDuringWarmup !== false,
+		testFilter: options.testFilter || $tw.wiki.getTiddlerText(TEST_FILTER_CONFIG_TITLE,DEFAULT_TEST_FILTER)
 	};
 	if(typeof process !== "undefined") {
 		environment.nodeVersion = process.version;
@@ -339,7 +341,8 @@ function run(options) {
 		defaultIterations = parseCount(options.defaultIterations,DEFAULT_ITERATIONS),
 		measurementBaselineIterations = sanitizeNonNegativeCount(options.measurementBaselineIterations,DEFAULT_MEASUREMENT_BASELINE_ITERATIONS),
 		skipMeasurementDuringWarmup = options.skipMeasurementDuringWarmup !== false,
-		titles = $tw.wiki.filterTiddlers(TEST_FILTER).sort(),
+		testFilter = options.testFilter || $tw.wiki.getTiddlerText(TEST_FILTER_CONFIG_TITLE,DEFAULT_TEST_FILTER),
+		titles = $tw.wiki.filterTiddlers(testFilter).sort(),
 		context = makeContext({
 			runtime: runtime,
 			measurementBaselineIterations: measurementBaselineIterations,
@@ -354,7 +357,8 @@ function run(options) {
 				defaultWarmup: defaultWarmup,
 				defaultIterations: defaultIterations,
 				measurementBaselineIterations: measurementBaselineIterations,
-				skipMeasurementDuringWarmup: skipMeasurementDuringWarmup
+				skipMeasurementDuringWarmup: skipMeasurementDuringWarmup,
+				testFilter: testFilter
 			}),
 			benchmarks: []
 		},
