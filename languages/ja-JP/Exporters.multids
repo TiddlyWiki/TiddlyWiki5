@@ -1,6 +1,6 @@
 title: $:/language/Exporters/
 
-CsvFile: CSV ファイル
-JsonFile: JSON ファイル
-StaticRiver: 静的 HTML ファイルとして構成される一連の Tiddler
-TidFile: ".tid" ファイル
+CsvFile: CSVファイル
+JsonFile: JSONファイル
+StaticRiver: 静的HTML
+TidFile: TIDテキストファイル
