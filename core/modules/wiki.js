@@ -546,6 +546,10 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 	if(!backlinks) {
 		backlinks = [];
 		this.each(function(_tiddler,title) {
+			// Skip system tiddlers to match the back-indexer, which never records them as sources
+			if(self.isSystemTiddler(title)) {
+				return;
+			}
 			var links = self.getTiddlerLinks(title);
 			if(links.indexOf(targetTitle) !== -1) {
 				backlinks.push(title);
