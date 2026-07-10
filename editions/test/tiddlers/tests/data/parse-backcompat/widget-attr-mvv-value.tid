@@ -1,0 +1,14 @@
+title: Parse/BackCompat/WidgetAttrMvvValue
+description: Widget attribute value can be an MVV reference ((v))
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define d() DEFD
+\define x(d) got=$d$
+<$macrocall $name="x" d=((d)) />
++
+title: ExpectedResult
+
+<p>got=DEFD</p>
