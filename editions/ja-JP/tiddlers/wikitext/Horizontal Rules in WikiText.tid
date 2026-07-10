@@ -1,0 +1,12 @@
+caption: 水平方向の罫線
+created: 20131205160706975
+modified: 20260216114256955
+original-modified: 20220513111257531
+tags: WikiText
+title: Horizontal Rules in WikiText
+ja-title: Wikiテキストでの水平方向の罫線
+type: text/vnd.tiddlywiki
+
+1行に単独で、3つ以上のダッシュを含むと、水平方向の罫線となります: 
+
+<<wikitext-example src:"---">>

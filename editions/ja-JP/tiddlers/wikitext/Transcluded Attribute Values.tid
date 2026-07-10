@@ -1,0 +1,16 @@
+created: 20230615045327830
+modified: 20260303112704709
+original-modified: 20230615045353826
+tags: [[Widget Attributes]] WikiText
+title: Transcluded Attribute Values
+ja-title: トランスクルードされた属性値
+type: text/vnd.tiddlywiki
+
+トランスクルードされた属性値は、[[テキスト参照|TextReference]]を二重の中括弧で囲んで示します。例:
+
+```
+attr={{tiddler}}
+attr={{!!field}}
+attr={{tiddler!!field}}
+```
+<<.warning "属性値の値は、[[テキスト参照|TextReference]]から取得されたテキストそのものになります。そのテキストに含まれるWiki構文はそのまま残ります。">>
