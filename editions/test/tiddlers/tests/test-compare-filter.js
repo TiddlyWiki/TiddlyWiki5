@@ -13,7 +13,7 @@ Tests the compare filter.
 
 describe("'compare' filter tests", function() {
 
-	var wiki = new $tw.Wiki();
+	var wiki = $tw.test.wiki();
 
 	it("should compare numerical equality", function() {
 		expect(wiki.filterTiddlers("[[2]compare:number:eq[0003]]").join(",")).toBe("");
