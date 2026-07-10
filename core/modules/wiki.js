@@ -1057,14 +1057,43 @@ exports.parseText = function(type,text,options) {
 	text = text || "";
 	options = options || {};
 	var Parser = $tw.utils.getParser(type,options);
-	// Return the parser instance
-	return new Parser(type,text,{
+	var parserOptions = {
 		parseAsInline: options.parseAsInline,
 		wiki: this,
 		_canonical_uri: options._canonical_uri,
 		configTrimWhiteSpace: options.configTrimWhiteSpace
-	});
+	};
+	try {
+		// Return the parser instance
+		return new Parser(type,text,parserOptions);
+	} catch(error) {
+		if(!(error instanceof $tw.utils.RecoverableParseError)) {
+			throw error;
+		}
+		return {
+			type: type,
+			source: text,
+			tree: error.tree || [{type: "text", text: text}],
+			diagnostics: [makeParseDiagnostic(error.diagnostic,type,text)]
+		};
+	}
 };
+
+function makeParseDiagnostic(diagnostic,type,text) {
+	diagnostic = diagnostic || {};
+	var from = typeof diagnostic.from === "number" && isFinite(diagnostic.from) ? diagnostic.from : 0,
+		to = typeof diagnostic.to === "number" && isFinite(diagnostic.to) ? diagnostic.to : from;
+	from = Math.max(0,Math.min(from,text.length));
+	to = Math.max(from,Math.min(to,text.length));
+	return {
+		from: from,
+		to: to,
+		severity: diagnostic.severity || "error",
+		source: diagnostic.source || type,
+		code: diagnostic.code || "parse-error",
+		message: diagnostic.message || "Unable to parse source"
+	};
+}
 
 /*
 Parse a tiddler according to its MIME type
