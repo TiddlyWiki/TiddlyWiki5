@@ -708,14 +708,30 @@ Widget.prototype.renderChildren = function(parent,nextSibling) {
 			try {
 				children[t].render(parent,nextSibling);
 			} catch(error) {
-				this.containChildError(t,error,"render",parent,nextSibling,resilient);
+				this.handleChildRenderError(t,error,parent,nextSibling,resilient);
 			}
 		}
 	}
 };
 
 /*
-Resilient render boundary (opt-in via $:/config/ResilientRender, default off): after render/refresh
+Handle a child render failure at this widget's resilient boundary.
+*/
+Widget.prototype.handleChildRenderError = function(index,error,parentDomNode,nextSibling,resilient) {
+	this.containChildError(index,error,"render",parentDomNode,nextSibling,resilient);
+};
+
+/*
+Handle a child refresh failure at this widget's resilient boundary.
+*/
+Widget.prototype.handleChildRefreshError = function(index,error,resilient) {
+	var nextSibling = this.children[index].findNextSiblingDomNode();
+	this.containChildError(index,error,"refresh",this.parentDomNode,nextSibling,resilient);
+	return true;
+};
+
+/*
+Resilient child boundary (opt-in via $:/config/ResilientRender, default off): after render/refresh
 throws, the error path rethrows TranscludeRecursionError and non-enabled cases, otherwise swaps in a
 graded $error span. The fail-loud default preserves server/CI/static rendering and bug surfacing; on
 containment, destroying the failed child clears partial DOM/listeners and keeps this.children,
@@ -850,11 +866,7 @@ Widget.prototype.refreshChildren = function(changedTiddlers) {
 			try {
 				refreshed = children[t].refresh(changedTiddlers) || refreshed;
 			} catch(error) {
-				// Capture the DOM anchor before the failing child is destroyed (refresh works in place,
-				// so unlike render there is no nextSibling argument to fall back on).
-				var nextSibling = children[t].findNextSiblingDomNode();
-				this.containChildError(t,error,"refresh",this.parentDomNode,nextSibling,resilient);
-				refreshed = true;
+				refreshed = this.handleChildRefreshError(t,error,resilient) || refreshed;
 			}
 		}
 	}
