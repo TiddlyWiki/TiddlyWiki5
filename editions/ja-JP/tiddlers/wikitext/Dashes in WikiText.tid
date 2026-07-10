@@ -1,0 +1,14 @@
+caption: ダッシュ
+created: 20131205160641986
+modified: 20260221102356382
+original-modified: 20220513111920644
+revision: 0
+tags: WikiText
+title: Dashes in WikiText
+ja-title: Wikiテキストでのダッシュ
+type: text/vnd.tiddlywiki
+
+二重ハイフン--を使用してnダッシュを作成したり、三重ハイフン`---`を使用してmダッシュを作成したりできます。
+
+<<wikitext-example src:"""* -- nダッシュの例 
+* --- mダッシュの例 --- 楽しんでね!""">>

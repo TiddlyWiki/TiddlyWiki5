@@ -8,16 +8,16 @@ caption: タブやボタンに表示されるテキスト
 class: Tiddlerをレンダリングする際に適用されるCSSクラスです。モーダルにも使用されます
 code-body: ''yes'' に設定すると、表示テンプレートは、コードとして Tiddler を表示します
 color: Tiddler に使用される CSS カラーの値
-component: [[アラート Tiddler|AlertMechanism]] の原因となったコンポーネントの名前
+component: アラートTiddlerの原因となったコンポーネントの名前
 core-version: プラグインの場合、互換性のあるTiddlyWikiのバージョンを示します
 created: Tiddler が作成された日付
 creator: Tiddler の作成者名
-current-tiddler: [[履歴一覧|HistoryMechanism]] のトップにある Tiddler をキャッシュするために使用されます
+current-tiddler: 履歴一覧のトップにあるTiddlerをキャッシュするために使用されます
 dependents: プラグインが依存する他のプラグインのリスト
 description: プラグインなどの説明文
 draft.of: それがドラフト Tiddler であるときのタイトル
 draft.title: ドラフト Tiddler が正式版になったときに使用される予定のタイトル
-footer: ウィザードのフッタ部テキスト
+footer: モーダルのフッタ部テキスト
 hide-body: ''yes'' に設定すると表示テンプレートは、Tiddler の本文を非表示にします
 icon: 紐付けられているアイコン Tiddler のタイトル
 library: ''yes'' の場合、その Tiddler は JavaScript ライブラリとして保存する必要があります
@@ -35,7 +35,7 @@ released: TiddlyWiki のリリース日付
 revision: サーバー上の Tiddler のリビジョン
 source: その Tiddler のソース URL
 stability: プラグインの開発状況: 非推奨、実験的、安定版、またはレガシー
-subtitle: ウィザードのサブタイトル
+subtitle: モーダルのサブタイトル
 tags: その Tiddler に付けられたタグのリスト
 text: Tiddler の本文
 throttle.refresh: 存在する場合、この Tiddler の更新を抑制します

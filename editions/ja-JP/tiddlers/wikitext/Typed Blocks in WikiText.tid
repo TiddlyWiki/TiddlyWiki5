@@ -1,0 +1,69 @@
+caption: タイプ付きブロック
+created: 20131205161051792
+modified: 20260312112018113
+original-modified: 20251006150732150
+tags: WikiText
+title: Typed Blocks in WikiText
+ja-title: Wikiテキストでのタイプ付きブロック
+type: text/vnd.tiddlywiki
+
+[[Wikiテキスト|WikiText]]には、次のように、明示的な[[コンテンツタイプ|ContentType]]を使用してレンダリングするテキストブロックを含めることができます: 
+
+!! SVG画像
+
+<<wikitext-example-without-html 
+"""$$$image/svg+xml
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="green" />
+</svg>
+$$$
+""">>
+
+[[コンテンツタイプ|ContentType]]をファイル拡張子で短縮することもできます。例:
+
+<<wikitext-example-without-html
+"""$$$.svg
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg>
+$$$
+"""
+>>
+
+!! 不明なタイプ
+
+不明なタイプはプレーンテキストとしてレンダリングします
+
+<<wikitext-example-without-html 
+"""$$$text/unknown
+//フォーマット//がない、プレーンテキスト。
+$$$
+""">>
+
+!! Wikiテキストの特定タイプ
+
+レンダリングタイプを指定して、特定のテキストレンダリングで表示することもできます。例:
+
+<<wikitext-example-without-html 
+"""$$$text/vnd.tiddlywiki>text/html
+これは、''ある''Wikiテキストです
+$$$
+""">>
+
+<<wikitext-example-without-html 
+"""$$$text/vnd.tiddlywiki>text/plain
+これは''ある''Wikiテキストです
+$$$
+""">>
+
+!! CSV表
+
+<<wikitext-example-without-html 
+"""$$$text/csv
+a,b,c
+1,2,3
+4,5,6
+aye,bee,cee
+10,22,42
+$$$
+""">>
