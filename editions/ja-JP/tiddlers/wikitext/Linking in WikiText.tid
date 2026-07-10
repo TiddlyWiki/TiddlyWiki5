@@ -1,0 +1,127 @@
+caption: リンク
+created: 20131205155230596
+modified: 20260316111559503
+original-modified: 20211230145939554
+tags: WikiText
+title: Linking in WikiText
+ja-title: Wikiテキストでのリンク
+type: text/vnd.tiddlywiki
+
+[[Wikiテキスト|WikiText]]の重要な機能の一つは、他のTiddlerや外部ウェブサイトへのリンクを作成できることです。
+
+! 手動リンク
+
+タイトルでTiddlerへリンク:
+
+```
+[[Tiddlerタイトル]]
+```
+
+リンクのテキストを指定してTiddlerへリンク: 
+
+```
+[[表示されるリンクタイトル|Tiddlerタイトル]]
+```
+
+エディターのツールバーからリンクを作成することもできます。''リンク'' (<<.icon $:/core/images/link>>)をクリックし、Tiddlerを検索して選択します。
+
+! キャメルケースリンク
+
+[[キャメルケース|CamelCase]]のルールに一致するTiddlerのタイトルについては、二重角括弧を付けずにタイトルを入力するだけで、自動的にリンクが作成されます。
+
+タイトルの前に`~`を付けることで、リンクが認識されないようにすることができます。例:
+
+<<wikitext-example src:"* ~HelloThereはリンクではありません
+* ~http://google.com/ はリンクではありません">>
+
+! 外部リンク
+
+ウェブサイトやファイルなどの外部[[リソース|https://en.wikipedia.org/wiki/Web_resource]]にリンクするには、プロトコル(例: `http://`, `file://`)や`mailto`などの[[URIスキーマ|https://en.wikipedia.org/wiki/URI_scheme]]を含む//フル//[[URL|https://en.wikipedia.org/wiki/URL]]を入力します:
+
+```
+https://tiddlywiki.com/
+
+[[TW5|https://tiddlywiki.com/]]
+
+[[私へメール|mailto:me@where.net]]
+
+[[ファイルを開く|file:///c:/users/me/index.html]]
+```
+
+この構文が機能するためには、URLがURLとして認識できる必要があります。そうでない場合は、Tiddlerのタイトルとして扱われます。したがって、相対パスを使用してアクセスできるリソースにリンクする場合は、拡張構文を使用してください: 
+
+```
+[ext[ファイルを開く|index.html]]
+
+[ext[ファイルを開く|./index.html]]
+
+[ext[ファイルを開く|../README.md]]
+
+[ext[ファイルを開く|c:\users\me\index.html]]
+```
+
+拡張構文はフルURLでも機能しますが、その場合は必須ではありません:
+
+```
+[ext[https://tiddlywiki.com]]
+
+[ext[TW5|https://tiddlywiki.com]]
+
+[ext[私へメール|mailto:me@where.net]]
+
+[ext[ファイルを開く|file:///c:/users/me/index.html]]
+```
+
+拡張構文を使用して、外部リンクを強制的に作成することもできます:
+
+```
+[ext[寄付する|bitcoin:1aabbdd....?amount=0.001]]
+```
+
+! Tiddlerリンクのカスタマイズ
+
+Tiddlerリンクを実装するために使用される基盤となるウィジェットの詳細、およびその動作をカスタマイズするために使用できるマクロについては、[[Linkウィジェット|LinkWidget]]を参照してください。
+
+! 動的リンクの生成
+
+[[Wikiテキストでのリンク|Linking in WikiText]]は、動的なリンクを作成するのに適していません。その理由は、この[[Wikiテキスト|WikiText]]のリンクが次のようになっているためです:
+
+```
+[[私自身へのリンク|Linking in WikiText]]
+```
+これは、[[Linkウィジェット|LinkWidget]]と[[Textウィジェット|TextWidget]]を以下のように使用するための省略形です:
+
+```
+<$link to="Linking in WikiText">
+  <$text text="私自身へのリンク"/>
+</$link>
+```
+リンクのタイトル("私自身へのリンク")とリンク先("Linking in ~WikiText")の両方がウィジェットの属性として使用されるため、[[Wikiテキスト|WikiText]]の展開は行われません。
+
+例えば、[[参照|TextReference]]と[[変数|Variables]]を使って次のようなリンクを動的に生成しようとする試み: 
+
+<<.bad-example "`[[{{!!caption}}|<<currentTiddler>>]]`">>
+
+は、[[Linkウィジェット|LinkWidget]]と[[Textウィジェット|TextWidget]]を次のように使用しようとするのと同じです:
+
+<<.bad-example """```
+<$link to="<<currentTiddler>>">
+  <$text text="{{!!caption}}"/>
+</$link>
+```""">>
+
+これは意図したとおりには動作しません。引用符で囲まれたウィジェット属性内のコンテンツは[[リテラル値として扱われ|HTML in WikiText]]、 [[Wikiテキスト|WikiText]]の展開から保護されるため、次のように表示されます:
+
+<<.bad-example "[[{{!!caption}}|<<currentTiddler>>]]">>
+
+望んだ結果を得るには、[[Linkウィジェット|LinkWidget]]を次のように直接使用できます:
+
+<<wikitext-example-without-html src:"<$link to=<<currentTiddler>>>{{!!caption}}</$link>">>
+
+[[動的リンクの構築|Concatenating text and variables using macro substitution]]に関する別の例も参照してください。
+
+! Tiddler内のリンク - "アンカーリンク"
+
+TiddlyWikiでは、アンカーリンクを使うことで、レンダリングされたTiddler内のターゲットポイントやセクションにリンクすることができます。これにより、読者はより長いTiddlerコンテンツをスムーズに閲覧できます。
+
+詳細については、[[HTMLを使用したアンカーリンク|Anchor Links using HTML]]を参照してください。

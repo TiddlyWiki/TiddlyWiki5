@@ -13,7 +13,7 @@ Tests the JSON filters and the format:json operator
 
 describe("json filter tests", function() {
 
-	var wiki = new $tw.Wiki();
+	var wiki = $tw.test.wiki();
 	var tiddlers = [{
 		title: "First",
 		text: '{"a":"one","b":"","c":1.618,"d": {"e": "four","f": ["five","six",true,false,null]}}',
