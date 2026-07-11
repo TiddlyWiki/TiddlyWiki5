@@ -1,0 +1,12 @@
+change-category: hackability
+change-type: bugfix
+created: 20260711185128000
+description: $tw.utils.pulseElement() works again and the vanilla theme defines the pulse class
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9741
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9741
+type: text/vnd.tiddlywiki
+
+* `$tw.utils.pulseElement()` listens for the standard `animationend` event instead of the removed `$tw.browser.animationEnd`, so the pulse animation runs and cleans up its CSS class again, and the vanilla theme defines the missing `pulse` animation (fixes [[Issue #6835|https://github.com/TiddlyWiki/TiddlyWiki5/issues/6835]])
