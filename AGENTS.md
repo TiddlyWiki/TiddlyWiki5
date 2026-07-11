@@ -77,7 +77,7 @@ This repository squash merges pull requests, so the PR title and description bec
 - You SHOULD  base documentation changes that can be published "out of order" on `upstream tiddlywiki-com` branch. Change TW version specific documentation based on `master`
 - **PR title:** it becomes the permanent commit subject, so it MUST be in the imperative mood, capitalised (first word and proper nouns only), 50 characters or fewer, with no trailing period. Check the mood by completing the sentence "If applied, this pull request will ...". A subsystem prefix MAY be added, for example `Menu plugin: ...`
 - PR description: the body SHOULD be a one-sentence executive summary, then concise, imperative bullets of what changed and why. The imperative mood applies to the whole commit message, not just the title. The description MUST NOT contain AI marketing or polite filler text
-- Assume the first draft of any comment or commit text is too long. LLM writing usually carries up to 30 percent that can be cut with no loss of meaning; trim it before finalizing
+- You MUST rewrite your first draft of any comment or commit text about 30 percent shorter before showing it to anyone. Present your optimum; the author can still shorten it further. A draft presented for review counts as final: authors often approve unread, and reviewers inherit the bloat
 - The message SHOULD describe behaviour and why, not a file inventory: the diff already lists changed files. Name a file only when it is the subject of the change, and say what it does
 - You SHOULD NOT use hyphens, en-dashes, or em-dashes as stylistic punctuation in prose and code comments; prefer short sentences
 - Commit and PR text SHOULD describe what shipped to users, and SHOULD mention a bug fix only if the bug was in a released version; do not document a bug that was introduced and fixed within the same PR
@@ -89,9 +89,9 @@ This repository squash merges pull requests, so the PR title and description bec
 The aim is a short, human-reviewed message, not a wall of agent text
 
 - You MUST NOT commit until explicitly asked. Approval of a code change is not approval to commit
-- When asked to commit, draft the message into `commit-msg.md` at the repo root and let the author review and shorten it before committing. This is where the PR opening post gets trimmed
+- When asked to commit, draft the message, apply the 30 percent trim pass, and only then write it into `commit-msg.md` at the repo root for review. Review is a veto gate, not an editing pass
 - Then commit with `git commit -F commit-msg.md` and delete the file. You SHOULD NOT stage or commit `commit-msg.md` itself
-- The draft SHOULD already follow the title and description rules above, so the author is trimming, not rewriting
+- The draft MUST already be trimmed and follow the title and description rules above, so the author has nothing left to shorten
 
 Lay the message out as a subject line, a one-sentence executive summary, then imperative `*` bullets. Wrap body lines at 80 columns or fewer:
 
