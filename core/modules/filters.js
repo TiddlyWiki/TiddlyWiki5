@@ -21,10 +21,13 @@ Parses an operation (i.e. a run) within a filter string
 	p: start position within the string
 Returns the new start position, after the parsed operation
 */
-function parseFilterOperation(operators,filterString,p,operation) {
+function parseFilterOperation(operators,filterString,p,operation,options) {
+	options = options || {};
 	var nextBracketPos, operator;
 	// Record the position of the opening square bracket
-	operation.runStart = p;
+	if(options.withPositions) {
+		operation.runStart = p;
+	}
 	// Skip the starting square bracket
 	if(filterString.charAt(p++) !== "[") {
 		throw "Missing [ in filter expression";
@@ -37,7 +40,9 @@ function parseFilterOperation(operators,filterString,p,operation) {
 			operator.prefix = filterString.charAt(p++);
 		}
 		// Get the operator name
-		operator.start = p;
+		if(options.withPositions) {
+			operator.start = p;
+		}
 		nextBracketPos = filterString.substring(p).search(/[\[\{<\/\(]/);
 		if(nextBracketPos === -1) {
 			throw "Missing [ in filter expression";
@@ -47,9 +52,10 @@ function parseFilterOperation(operators,filterString,p,operation) {
 		operator.operator = filterString.substring(p,nextBracketPos);
 		// Any suffix?
 		var colon = operator.operator.indexOf(":");
-		var colon = operator.operator.indexOf(":");
 		if(colon > -1) {
-			operator.suffixStart = p + colon;
+			if(options.withPositions) {
+				operator.suffixStart = p + colon;
+			}
 			// The raw suffix for older filters
 			operator.suffix = operator.operator.substring(colon + 1);
 			operator.operator = operator.operator.substring(0,colon) || "field";
@@ -72,7 +78,9 @@ function parseFilterOperation(operators,filterString,p,operation) {
 		operator.operands = [];
 		var parseOperand = function(bracketType) {
 			var operand = {};
-			operand.start = p - 1;
+			if(options.withPositions) {
+				operand.start = p - 1;
+			}
 			switch(bracketType) {
 				case "{": // Curly brackets
 					operand.indirect = true;
@@ -135,7 +143,9 @@ function parseFilterOperation(operators,filterString,p,operation) {
 		operators.push(operator);
 	} while(filterString.charAt(p) !== "]");
 	// Record the position of the closing square bracket
-	operation.runEnd = p;
+	if(options.withPositions) {
+		operation.runEnd = p;
+	}
 	// Skip the ending square bracket
 	if(filterString.charAt(p++) !== "]") {
 		throw "Missing ] in filter expression";
@@ -147,8 +157,11 @@ function parseFilterOperation(operators,filterString,p,operation) {
 /*
 Parse a filter string
 */
-exports.parseFilter = function(filterString) {
+exports.parseFilter = function(filterString,options) {
 	filterString = filterString || "";
+	// options.withPositions: source positions (runStart, prefixStart, operand.start ...)
+	// are stamped only on request so the default parse tree shape stays unchanged
+	options = options || {};
 	var results = [], // Array of arrays of operator nodes {operator:,operand:}
 		p = 0, // Current position in the filter string
 		match;
@@ -179,7 +192,9 @@ exports.parseFilter = function(filterString) {
 			if(match && match.index === p) {
 				// If there is a filter run prefix
 				if(match[1]) {
-					operation.prefixStart = p;
+					if(options.withPositions) {
+						operation.prefixStart = p;
+					}
 					operation.prefix = match[1];
 					p = p + operation.prefix.length;
 					// Name for named prefixes
@@ -202,22 +217,23 @@ exports.parseFilter = function(filterString) {
 				}
 				// Opening square bracket
 				if(match[4]) {
-					p = parseFilterOperation(operation.operators,filterString,p,operation);
+					p = parseFilterOperation(operation.operators,filterString,p,operation,options);
 				} else {
 					p = match.index + match[0].length;
 				}
 			} else {
 				// No filter run prefix
-				p = parseFilterOperation(operation.operators,filterString,p,operation);
+				p = parseFilterOperation(operation.operators,filterString,p,operation,options);
 			}
 			// Quoted strings and unquoted title
 			if(match[5] || match[6] || match[7]) { // Double quoted string, single quoted string or unquoted title
 				var titleText = match[5] || match[6] || match[7];
-				var contentStart = match.index + (match[1] ? match[1].length : 0);
 				var titleOperand = {
-					text: titleText,
-					start: contentStart
+					text: titleText
 				};
+				if(options.withPositions) {
+					titleOperand.start = match.index + (match[1] ? match[1].length : 0);
+				}
 				operation.operators.push(
 					{operator: "title", operands: [titleOperand]}
 				);
@@ -432,7 +448,7 @@ Parse a filter string and return an HTML representation
 exports.parseFilterToHtml = function(filterString) {
 	var filterParseTree;
 	try {
-		filterParseTree = this.parseFilter(filterString);
+		filterParseTree = this.parseFilter(filterString,{withPositions: true});
 	} catch(e) {
 		return "Error parsing filter: " + e;
 	}
@@ -573,7 +589,7 @@ exports.parseFilterToDebugTable = function(filterString,options) {
 	}
 	var parseTree;
 	try {
-		parseTree = this.parseFilter(filterString);
+		parseTree = this.parseFilter(filterString,{withPositions: true});
 	} catch(e) {
 		return "Error parsing filter: " + e;
 	}
