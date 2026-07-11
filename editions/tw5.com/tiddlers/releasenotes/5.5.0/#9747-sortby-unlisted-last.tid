@@ -1,0 +1,12 @@
+change-category: filters
+change-type: bugfix
+created: 20260711015656000
+description: sortby now places titles missing from the reference list at the end instead of the beginning
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9747
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9747
+type: text/vnd.tiddlywiki
+
+* The [[sortby|sortby Operator]] filter operator now places input titles that are missing from the reference list after the listed ones, matching the documented behaviour; with a list `Alpha Beta Gamma`, the input `Delta Epsilon Alpha Beta Gamma` now sorts to `Alpha Beta Gamma Delta Epsilon` instead of leading with the unlisted titles (fixes [[Issue #8342|https://github.com/TiddlyWiki/TiddlyWiki5/issues/8342]])
