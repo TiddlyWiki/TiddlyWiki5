@@ -26,13 +26,13 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 
 <!-- Use this item template as a default -->
 \procedure toc-defaultFieldTemplate()
-<%if [<_mode>match[tagMode][toc-caption]is[variable]] %>
+<%if [<_mode>match[tagMode]then[toc-caption]is[variable]] %>
 	<$transclude $variable="toc-caption"/>
 <%else%>
 	<$let tv-wikilinks="no"
 		field={{{ [<currentTiddler>] :cascade[<_hasItemTemplate>append<_hasCaptionField>append<_hasCaption>append[title]] }}}
 	>
-		<span class=""
+		<span class="tc-toc-caption"
 			data-fieldClass=`field-$(field)$`
 			title=<<tf.toc-getTooltip>>
 		>
@@ -181,15 +181,15 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 							<<toc-level-indicator>>
 						</$let>
 						<<_itemTemplate>>
-						<!-- toc-body only calls itself, so only modified variables have to be passed on. -->
-						<!-- The rest can be reused from toc parameters -->
+						<!-- Declared parameters reset to their defaults if not passed on, so sort must be re-passed. -->
+						<!-- Undeclared variables (captionField, tagField, parentField, itemTemplate) are inherited -->
 						<$let _branchItemTemplate={{{ [<currentTiddler>get[toc-branchTemplate]] :filter[has[text]] :else[<_branchItemTemplate>] }}}>
 							<$let _level={{{ [<level>subtract[1]] }}}>
 								<%if [<_level>compare:number:gt[0]]%>
-									<$macrocall $name="toc-body" tag=<<currentTiddler>> exclude=<<_excluded>> path=<<_path>> level=<<_level>>/>
+									<$macrocall $name="toc-body" tag=<<currentTiddler>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>> level=<<_level>>/>
 								<%elseif [<_level>match[-1]]%>
 									<!-- show full toc, no level defined -->
-									<$macrocall $name="toc-body" tag=<<currentTiddler>> exclude=<<_excluded>> path=<<_path>>/>
+									<$macrocall $name="toc-body" tag=<<currentTiddler>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>/>
 								<%endif%>
 							</$let>
 						</$let>

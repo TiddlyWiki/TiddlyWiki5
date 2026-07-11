@@ -1,9 +1,24 @@
 code-body: yes
 created: 20260402120000000
-modified: 20260402120000000
-tags:
+modified: 20260711235048237
+tags: 
 title: $:/spec/Examples/TOC/advanced/tv-toc-show-new-child
 type: text/vnd.tiddlywiki-multiple
 
 title: ExpectedResult
 
+<p><div class="tc-table-of-contents">
+<ol class="tc-toc toc-selective-expandable"><li class="toc-item "><button class="tc-btn-invisible tc-tiny-gap-right"><svg class="tc-image-right-arrow tc-image-button" height="22pt" viewBox="0 0 128 128" width="22pt"><path d="M99.069 64.173c0 2.027-.77 4.054-2.316 5.6l-55.98 55.98a7.92 7.92 0 01-11.196 0c-3.085-3.086-3.092-8.105 0-11.196l50.382-50.382-50.382-50.382a7.92 7.92 0 010-11.195c3.086-3.085 8.104-3.092 11.196 0l55.98 55.98a7.892 7.892 0 012.316 5.595z"></path></svg></button><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#p1"><span class="tc-toc-caption" data-fieldClass="field-title" title="p1">p1</span><span class="tc-small-gap-left  tc-toc-new-child-parent"><button aria-label="new child here" class="tc-btn-invisible tc-toc-new-child" title="New Child -&gt; &quot;parent: p1&quot;"><svg class="tc-image-edit-button tc-image-button" height="22pt" viewBox="0 0 128 128" width="22pt">
+	<path d="M6.9 27.9a6.72 6.96 0 1 0 0 13.9h41a6.72 6.96 0 1 0 0-13.9z" transform="translate(13.6 62.5)"></path>
+	<path d="M27.3 4.57a6.72 6.96 0 0 0-6.64 7.05v46.5a6.72 6.96 0 1 0 13.4 0v-46.5a6.72 6.96 0 0 0-6.81-7.05z" transform="translate(13.6 62.5)"></path>
+	<path d="M60.5 58.1c-3.75-.055-6.82 3.08-6.82 6.96s3.07 7.01 6.82 6.96h46.1c3.75.055 6.82-3.08 6.82-6.96s-3.07-7.01-6.82-6.96zM20.5 28.4c-3.75-.055-6.82 3.08-6.82 6.96s3.07 7.01 6.82 6.96h86.1c3.75.055 6.82-3.08 6.82-6.96s-3.07-7.01-6.82-6.96z"></path>
+</svg>
+
+</button></span></a></li><li class="toc-item "><button class="tc-btn-invisible tc-tiny-gap-right" tabindex="-1"><svg class="tc-image-blank tc-image-button" height="22pt" viewBox="0 0 128 128" width="22pt"></svg></button><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#p2"><span class="tc-toc-caption" data-fieldClass="field-title" title="p2">p2</span><span class="tc-small-gap-left  tc-toc-new-child-parent"><button aria-label="new child here" class="tc-btn-invisible tc-toc-new-child" title="New Child -&gt; &quot;parent: p2&quot;"><svg class="tc-image-edit-button tc-image-button" height="22pt" viewBox="0 0 128 128" width="22pt">
+	<path d="M6.9 27.9a6.72 6.96 0 1 0 0 13.9h41a6.72 6.96 0 1 0 0-13.9z" transform="translate(13.6 62.5)"></path>
+	<path d="M27.3 4.57a6.72 6.96 0 0 0-6.64 7.05v46.5a6.72 6.96 0 1 0 13.4 0v-46.5a6.72 6.96 0 0 0-6.81-7.05z" transform="translate(13.6 62.5)"></path>
+	<path d="M60.5 58.1c-3.75-.055-6.82 3.08-6.82 6.96s3.07 7.01 6.82 6.96h46.1c3.75.055 6.82-3.08 6.82-6.96s-3.07-7.01-6.82-6.96zM20.5 28.4c-3.75-.055-6.82 3.08-6.82 6.96s3.07 7.01 6.82 6.96h86.1c3.75.055 6.82-3.08 6.82-6.96s-3.07-7.01-6.82-6.96z"></path>
+</svg>
+
+</button></span></a></li></ol>
+</div></p>
