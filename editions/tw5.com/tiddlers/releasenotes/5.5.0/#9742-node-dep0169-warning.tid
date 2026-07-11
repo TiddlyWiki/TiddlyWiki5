@@ -1,0 +1,12 @@
+change-category: nodejs
+change-type: deprecation
+created: 20260711020057000
+description: The Node.js server no longer emits the DEP0169 url.parse() deprecation warning
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9742
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9742
+type: text/vnd.tiddlywiki
+
+* The server module parses request URLs with the WHATWG `URL` API instead of the deprecated `url.parse()`, so recent Node.js versions no longer print the DEP0169 deprecation warning on startup (fixes [[Issue #9628|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9628]])
