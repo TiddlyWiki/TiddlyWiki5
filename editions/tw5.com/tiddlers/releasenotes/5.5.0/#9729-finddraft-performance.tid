@@ -1,0 +1,12 @@
+change-category: internal
+change-type: performance
+created: 20260711184505000
+description: findDraft() scans the store several times faster
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9729
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9729
+type: text/vnd.tiddlywiki
+
+* `findDraft()` iterates the store directly instead of building and sorting a full tiddler list, speeding up every draft lookup, for example when opening a tiddler in the editor or generating unused titles
