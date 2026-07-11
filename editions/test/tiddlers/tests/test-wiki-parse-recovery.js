@@ -251,3 +251,40 @@ describe("WikiParser block-level recovery", function() {
 		expect(result.diagnostics.length).toBe(1);
 	});
 });
+
+describe("WikiParser diagnostic producers", function() {
+
+	it("flags an unterminated code block without changing the recovered tree", function() {
+		var wiki = new $tw.Wiki(),
+			result = wiki.parseText("text/vnd.tiddlywiki","```\nunclosed code");
+		expect(result.tree[0].type).toBe("codeblock");
+		expect(result.tree[0].attributes.code.value).toBe("unclosed code");
+		expect(result.diagnostics.length).toBe(1);
+		expect(result.diagnostics[0].code).toBe("unterminated-codeblock");
+		expect(result.diagnostics[0].severity).toBe("warning");
+	});
+
+	it("emits no diagnostic for a terminated code block", function() {
+		var wiki = new $tw.Wiki(),
+			result = wiki.parseText("text/vnd.tiddlywiki","```\nclosed code\n```\n");
+		expect(result.tree[0].type).toBe("codeblock");
+		expect(result.diagnostics.length).toBe(0);
+	});
+
+	it("flags unterminated inline code without changing the recovered tree", function() {
+		var wiki = new $tw.Wiki(),
+			result = wiki.parseText("text/vnd.tiddlywiki","`unclosed inline",{parseAsInline: true});
+		expect(result.tree[0].type).toBe("element");
+		expect(result.tree[0].tag).toBe("code");
+		expect(result.diagnostics.length).toBe(1);
+		expect(result.diagnostics[0].code).toBe("unterminated-codeinline");
+	});
+
+	it("flags an unterminated typed block", function() {
+		var wiki = new $tw.Wiki(),
+			result = wiki.parseText("text/vnd.tiddlywiki","$$$text/plain\nunclosed typed");
+		expect(result.diagnostics.length).toBe(1);
+		expect(result.diagnostics[0].code).toBe("unterminated-typedblock");
+		expect(result.diagnostics[0].severity).toBe("warning");
+	});
+});

@@ -39,8 +39,16 @@ exports.parse = function() {
 		textEnd = match.index;
 		this.parser.pos = match.index + match[0].length;
 	} else {
+		// Surface the unterminated inline code; the recovered text stays unchanged
 		text = this.parser.source.substr(this.parser.pos);
 		textEnd = this.parser.sourceLength;
+		this.parser.addDiagnostic({
+			from: start,
+			to: this.parser.sourceLength,
+			severity: "warning",
+			code: "unterminated-codeinline",
+			message: "Unterminated inline code"
+		});
 		this.parser.pos = this.parser.sourceLength;
 	}
 	return [{

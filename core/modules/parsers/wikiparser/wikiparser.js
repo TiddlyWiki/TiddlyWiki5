@@ -280,10 +280,26 @@ WikiParser.prototype.recoverBlock = function(start,error,ruleName) {
 		end = boundaryMatch ? boundaryMatch.index + boundaryMatch[0].length : this.sourceLength;
 	// Always make forward progress
 	this.pos = Math.min(Math.max(end,start + 1),this.sourceLength);
-	// Record a diagnostic, clamping any supplied range to the source
-	var diagnostic = error.diagnostic || {},
-		from = typeof diagnostic.from === "number" && isFinite(diagnostic.from) ? diagnostic.from : start,
-		to = typeof diagnostic.to === "number" && isFinite(diagnostic.to) ? diagnostic.to : this.pos;
+	// Record a diagnostic for the degraded block
+	var diagnostic = error.diagnostic || {};
+	this.addDiagnostic({
+		from: diagnostic.from !== undefined ? diagnostic.from : start,
+		to: diagnostic.to !== undefined ? diagnostic.to : this.pos,
+		severity: diagnostic.severity,
+		source: diagnostic.source,
+		code: diagnostic.code,
+		message: diagnostic.message || "Unable to parse block"
+	});
+	return [{type: "text", text: this.source.substring(start,this.pos), start: start, end: this.pos, rule: ruleName}];
+};
+
+/*
+Record a normalised diagnostic on the parser, clamping any supplied range to the source. Rules call this to surface a silent recovery without changing their tree
+*/
+WikiParser.prototype.addDiagnostic = function(diagnostic) {
+	diagnostic = diagnostic || {};
+	var from = typeof diagnostic.from === "number" && isFinite(diagnostic.from) ? diagnostic.from : 0,
+		to = typeof diagnostic.to === "number" && isFinite(diagnostic.to) ? diagnostic.to : from;
 	from = Math.max(0,Math.min(from,this.sourceLength));
 	to = Math.max(from,Math.min(to,this.sourceLength));
 	this.diagnostics.push({
@@ -292,9 +308,9 @@ WikiParser.prototype.recoverBlock = function(start,error,ruleName) {
 		severity: diagnostic.severity || "error",
 		source: diagnostic.source || this.type,
 		code: diagnostic.code || "parse-error",
-		message: diagnostic.message || "Unable to parse block"
+		message: diagnostic.message || "Unable to parse source"
 	});
-	return [{type: "text", text: this.source.substring(start,this.pos), start: start, end: this.pos, rule: ruleName}];
+	return this.diagnostics[this.diagnostics.length - 1];
 };
 
 /*
