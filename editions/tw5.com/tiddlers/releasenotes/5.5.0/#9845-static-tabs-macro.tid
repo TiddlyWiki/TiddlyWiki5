@@ -1,0 +1,13 @@
+change-category: usability
+change-type: feature
+created: 20260711013747000
+description: New static-tabs macro renders tabs as static HTML for static site output
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9845
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9845
+type: text/vnd.tiddlywiki
+
+* New `static-tabs` macro renders a tab set as static HTML that works without JavaScript, using collapsible `details` elements by default, with `sections` and `vertical` modes
+* The standard `tabs` macro delegates to `static-tabs` automatically when `tv-config-static` is `yes`, so static site builds get working tabs without template changes
