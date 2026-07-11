@@ -206,11 +206,16 @@ describe("Compound +fields write paths", function() {
 			expect(info.wiki.getTiddler("Target").fields.email).toBeUndefined();
 			expect(info.wiki.getTiddler("Target").fields.nickname).toBeUndefined();
 		});
-		it("$field=<derived-name> is silently overridden by re-derivation (compound text wins)", function() {
+		it("$field=<derived-name> round-trips into the compound text", function() {
+			// Standard-field API compatibility: a write to a derived field persists and is
+			// written back into the compound text by the addTiddler hook.
+			// Browser console, on a -multiple+fields tiddler with an email sub-entry:
+			// invoke <$action-setfield $tiddler='Target' $field='email' $value='new@example.com'/>;
+			// expected: fields.email is "new@example.com" and the text's email entry carries it too.
 			var info = setupWiki();
-			info.invoke("<$action-setfield $tiddler='Target' $field='email' $value='leaked@x.com'/>");
-			// Re-derivation snaps email back to the text value
-			expect(info.wiki.getTiddler("Target").fields.email).toBe("old@example.com");
+			info.invoke("<$action-setfield $tiddler='Target' $field='email' $value='new@example.com'/>");
+			expect(info.wiki.getTiddler("Target").fields.email).toBe("new@example.com");
+			expect(info.wiki.getTiddler("Target").fields.text).toMatch(/title: email\ntype: email\n\nnew@example\.com/);
 		});
 		it("$field=<custom-non-derived-name> persists", function() {
 			var info = setupWiki();
@@ -247,11 +252,16 @@ describe("Compound +fields write paths", function() {
 			expect(getEntry(info.wiki,"Target","nickname")).toBe("FreshNick");
 			expect(info.wiki.getTiddler("Target").fields.text).toMatch(/title: email\ntype: email\n\nfresh@x\.com/);
 		});
-		it("$fields on derived names is overridden by re-derivation", function() {
+		it("$fields on derived names round-trips into the compound text", function() {
+			// Browser console: invoke <$action-setmultiplefields $tiddler='Target'
+			// $fields='[[email]] [[nickname]]' $values='[[multi@example.com]] [[MultiNick]]'/>;
+			// expected: both fields carry the new values and both text entries are updated.
 			var info = setupWiki();
-			info.invoke("<$action-setmultiplefields $tiddler='Target' $fields='[[email]] [[nickname]]' $values='[[leak1]] [[leak2]]'/>");
-			expect(info.wiki.getTiddler("Target").fields.email).toBe("old@example.com");
-			expect(info.wiki.getTiddler("Target").fields.nickname).toBe("OldNick");
+			info.invoke("<$action-setmultiplefields $tiddler='Target' $fields='[[email]] [[nickname]]' $values='[[multi@example.com]] [[MultiNick]]'/>");
+			expect(info.wiki.getTiddler("Target").fields.email).toBe("multi@example.com");
+			expect(info.wiki.getTiddler("Target").fields.nickname).toBe("MultiNick");
+			expect(info.wiki.getTiddler("Target").fields.text).toMatch(/title: email\ntype: email\n\nmulti@example\.com/);
+			expect(info.wiki.getTiddler("Target").fields.text).toMatch(/title: nickname\n\nMultiNick/);
 		});
 	});
 
