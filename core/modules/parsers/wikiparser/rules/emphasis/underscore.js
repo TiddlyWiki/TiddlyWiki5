@@ -30,8 +30,20 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
+	var delimiterStart = this.parser.pos;
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
+
+	if(!this.parser.hasCloser(/__/mg)) {
+		this.parser.addDiagnostic({
+			from: delimiterStart,
+			to: this.parser.pos,
+			severity: "warning",
+			code: "unterminated-underscore",
+			message: "Unmatched underscore delimiter rendered as literal text"
+		});
+		return [{type: "text", text: "__"}];
+	}
 
 	// Parse the run including the terminator
 	var tree = this.parser.parseInlineRun(/__/mg,{eatTerminator: true});

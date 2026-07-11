@@ -305,3 +305,76 @@ describe("WikiParser diagnostic producers", function() {
 		expect(result.diagnostics[0].severity).toBe("warning");
 	});
 });
+
+describe("WikiParser unclosed inline delimiters stop short of the source end", function() {
+
+	var CASES = [
+		{name: "bold", open: "''", code: "unterminated-bold"},
+		{name: "italic", open: "//", code: "unterminated-italic"},
+		{name: "underscore", open: "__", code: "unterminated-underscore"},
+		{name: "strikethrough", open: "~~", code: "unterminated-strikethrough"},
+		{name: "superscript", open: "^^", code: "unterminated-superscript"},
+		{name: "subscript", open: ",,", code: "unterminated-subscript"},
+		{name: "styleinline", open: "@@", code: "unterminated-styleinline"}
+	];
+
+	$tw.utils.each(CASES,function(testCase) {
+
+		it("stops an unclosed " + testCase.name + " delimiter from swallowing the rest of the source", function() {
+			var wiki = new $tw.Wiki(),
+				result = wiki.parseText("text/vnd.tiddlywiki","start " + testCase.open + "unclosed\n\n! A heading"),
+				lastNode = result.tree[result.tree.length - 1];
+			expect(lastNode.type).toBe("element");
+			expect(lastNode.tag).toBe("h1");
+		});
+
+		it("reports an unclosed " + testCase.name + " delimiter", function() {
+			var wiki = new $tw.Wiki(),
+				result = wiki.parseText("text/vnd.tiddlywiki","start " + testCase.open + "unclosed\n\n! A heading");
+			expect(result.diagnostics.length).toBe(1);
+			expect(result.diagnostics[0].code).toBe(testCase.code);
+			expect(result.diagnostics[0].severity).toBe("warning");
+		});
+	});
+
+	it("still renders a well formed bold span with no diagnostic", function() {
+		var wiki = new $tw.Wiki(),
+			result = wiki.parseText("text/vnd.tiddlywiki","a ''bold'' word",{parseAsInline: true}),
+			bold = result.tree.filter(function(node) {
+				return node.type === "element" && node.tag === "strong";
+			});
+		expect(bold.length).toBe(1);
+		expect(result.diagnostics.length).toBe(0);
+	});
+
+	it("keeps emphasis spanning soft line breaks inside one block", function() {
+		var wiki = new $tw.Wiki(),
+			result = wiki.parseText("text/vnd.tiddlywiki","a ''bold\nover two lines'' word",{parseAsInline: true}),
+			bold = result.tree.filter(function(node) {
+				return node.type === "element" && node.tag === "strong";
+			});
+		expect(bold.length).toBe(1);
+		expect(result.diagnostics.length).toBe(0);
+	});
+
+	function countStrong(nodes) {
+		var count = 0;
+		$tw.utils.each(nodes,function(node) {
+			if(node.type === "element" && node.tag === "strong") {
+				count++;
+			}
+			if(node.children) {
+				count += countStrong(node.children);
+			}
+		});
+		return count;
+	}
+
+	// TiddlyWiki lets an emphasis run cross a blank line to reach its closer, so the guard fires only when no closer arrives
+	it("keeps an emphasis run that crosses a blank line to reach its closer", function() {
+		var wiki = new $tw.Wiki(),
+			result = wiki.parseText("text/vnd.tiddlywiki","''<div>\n\nsome text\n\n</div>''");
+		expect(countStrong(result.tree)).toBe(1);
+		expect(result.diagnostics.length).toBe(0);
+	});
+});

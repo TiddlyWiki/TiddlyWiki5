@@ -30,8 +30,20 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
+	var delimiterStart = this.parser.pos;
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
+
+	if(!this.parser.hasCloser(/\/\//mg)) {
+		this.parser.addDiagnostic({
+			from: delimiterStart,
+			to: this.parser.pos,
+			severity: "warning",
+			code: "unterminated-italic",
+			message: "Unmatched italic delimiter rendered as literal text"
+		});
+		return [{type: "text", text: "//"}];
+	}
 
 	// Parse the run including the terminator
 	var tree = this.parser.parseInlineRun(/\/\//mg,{eatTerminator: true});

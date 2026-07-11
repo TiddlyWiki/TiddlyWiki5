@@ -30,8 +30,20 @@ exports.parse = function() {
 	// Get the styles and class
 	var stylesString = this.match[1],
 		classString = this.match[2] ? this.match[2].split(".").join(" ") : undefined;
+	var delimiterStart = this.parser.pos,
+		delimiterText = this.match[0];
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
+	if(!this.parser.hasCloser(reEnd)) {
+		this.parser.addDiagnostic({
+			from: delimiterStart,
+			to: this.parser.pos,
+			severity: "warning",
+			code: "unterminated-styleinline",
+			message: "Unmatched inline style delimiter rendered as literal text"
+		});
+		return [{type: "text", text: delimiterText}];
+	}
 	// Parse the run up to the terminator
 	var tree = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
 	// Return the classed span

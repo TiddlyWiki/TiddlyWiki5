@@ -316,6 +316,12 @@ WikiParser.prototype.addDiagnostic = function(diagnostic) {
 	return this.diagnostics[this.diagnostics.length - 1];
 };
 
+// An unmatched delimiter otherwise consumes every block to the end of the source, so a rule asks whether its closer arrives at all
+WikiParser.prototype.hasCloser = function(closerRegExp) {
+	closerRegExp.lastIndex = this.pos;
+	return !!closerRegExp.exec(this.source);
+};
+
 /*
 Parse a series of blocks of text until a terminating regexp is encountered or the end of the text
 	terminatorRegExpString: terminating regular expression
