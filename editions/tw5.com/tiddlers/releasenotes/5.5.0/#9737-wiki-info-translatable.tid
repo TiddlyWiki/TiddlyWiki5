@@ -1,0 +1,12 @@
+change-category: translation
+change-type: enhancement
+created: 20260711020729000
+description: The "Click to generate wiki info" button in the control panel is now translatable
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9737
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9737
+type: text/vnd.tiddlywiki
+
+* The "Click to generate wiki info" button on the control panel's wiki information tab uses a language string instead of hard coded English text, so translators can localise it (fixes [[Issue #9654|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9654]])
