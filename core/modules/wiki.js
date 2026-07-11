@@ -1074,29 +1074,10 @@ exports.parseText = function(type,text,options) {
 			type: type,
 			source: text,
 			tree: error.tree || [{type: "text", text: text}],
-			diagnostics: [makeParseDiagnostic(error.diagnostic,type,text)]
+			diagnostics: [$tw.utils.makeParseDiagnostic(error.diagnostic,{source: type, sourceLength: text.length})]
 		};
 	}
 };
-
-// The closed diagnostic-severity set, matching the WikiParser normaliser; a value outside it coerces to "error"
-var DIAGNOSTIC_SEVERITIES = {error: true, warning: true, info: true, hint: true};
-
-function makeParseDiagnostic(diagnostic,type,text) {
-	diagnostic = diagnostic || {};
-	var from = typeof diagnostic.from === "number" && isFinite(diagnostic.from) ? diagnostic.from : 0,
-		to = typeof diagnostic.to === "number" && isFinite(diagnostic.to) ? diagnostic.to : from;
-	from = Math.max(0,Math.min(from,text.length));
-	to = Math.max(from,Math.min(to,text.length));
-	return {
-		from: from,
-		to: to,
-		severity: DIAGNOSTIC_SEVERITIES[diagnostic.severity] ? diagnostic.severity : "error",
-		source: diagnostic.source || type,
-		code: diagnostic.code || "parse-error",
-		message: diagnostic.message || "Unable to parse source"
-	};
-}
 
 /*
 Parse a tiddler according to its MIME type

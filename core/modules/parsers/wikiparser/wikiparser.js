@@ -22,9 +22,6 @@ Attributes are stored as hashmaps of the following objects:
 
 "use strict";
 
-// The closed diagnostic-severity set; a value outside it coerces to "error" so grammars binding to the contract share one gradient
-var DIAGNOSTIC_SEVERITIES = {error: true, warning: true, info: true, hint: true};
-
 /*
 type: content type of text
 text: text to be parsed
@@ -297,22 +294,13 @@ WikiParser.prototype.recoverBlock = function(start,error,ruleName) {
 };
 
 /*
-Record a normalised diagnostic on the parser, clamping any supplied range to the source. Rules call this to surface a silent recovery without changing their tree
+Record a normalised diagnostic on the parser. Rules call this to surface a silent recovery
 */
 WikiParser.prototype.addDiagnostic = function(diagnostic) {
-	diagnostic = diagnostic || {};
-	var from = typeof diagnostic.from === "number" && isFinite(diagnostic.from) ? diagnostic.from : 0,
-		to = typeof diagnostic.to === "number" && isFinite(diagnostic.to) ? diagnostic.to : from;
-	from = Math.max(0,Math.min(from,this.sourceLength));
-	to = Math.max(from,Math.min(to,this.sourceLength));
-	this.diagnostics.push({
-		from: from,
-		to: to,
-		severity: DIAGNOSTIC_SEVERITIES[diagnostic.severity] ? diagnostic.severity : "error",
-		source: diagnostic.source || this.type,
-		code: diagnostic.code || "parse-error",
-		message: diagnostic.message || "Unable to parse source"
-	});
+	this.diagnostics.push($tw.utils.makeParseDiagnostic(diagnostic,{
+		source: this.type,
+		sourceLength: this.sourceLength
+	}));
 	return this.diagnostics[this.diagnostics.length - 1];
 };
 

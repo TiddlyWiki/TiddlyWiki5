@@ -120,6 +120,32 @@ exports.getParseTreeText = function getParseTreeText(tree) {
 	return output.join("");
 };
 
+// The closed diagnostic-severity set; a value outside it coerces to "error" so every grammar binding to the contract shares one gradient
+var DIAGNOSTIC_SEVERITIES = {error: true, warning: true, info: true, hint: true};
+
+/*
+Normalise a parse diagnostic against the contract, clamping its range to the source so any parser can populate the same array
+	diagnostic: {from, to, severity, source, code, message}, each field optional
+	options: sourceLength, source (the fallback source identifier, usually the content type)
+*/
+exports.makeParseDiagnostic = function(diagnostic,options) {
+	diagnostic = diagnostic || {};
+	options = options || {};
+	var sourceLength = options.sourceLength || 0,
+		from = typeof diagnostic.from === "number" && isFinite(diagnostic.from) ? diagnostic.from : 0,
+		to = typeof diagnostic.to === "number" && isFinite(diagnostic.to) ? diagnostic.to : from;
+	from = Math.max(0,Math.min(from,sourceLength));
+	to = Math.max(from,Math.min(to,sourceLength));
+	return {
+		from: from,
+		to: to,
+		severity: DIAGNOSTIC_SEVERITIES[diagnostic.severity] ? diagnostic.severity : "error",
+		source: diagnostic.source || options.source,
+		code: diagnostic.code || "parse-error",
+		message: diagnostic.message || "Unable to parse source"
+	};
+};
+
 exports.getParser = function(type,options) {
 	options = options || {};
 	// Select a parser
