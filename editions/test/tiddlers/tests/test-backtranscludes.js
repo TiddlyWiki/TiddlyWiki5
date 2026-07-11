@@ -10,7 +10,7 @@ Tests the backtranscludes mechanism.
 
 describe("Backtranscludes and transclude filter tests", function() {
 	describe("a tiddler with no transcludes to it", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestIncoming",
@@ -25,7 +25,7 @@ describe("Backtranscludes and transclude filter tests", function() {
 	});
 
 	describe("A tiddler added to the wiki with a transclude to it", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestIncoming",
@@ -44,7 +44,7 @@ describe("Backtranscludes and transclude filter tests", function() {
 	});
 
 	describe("A tiddler transclude with template will still use the tiddler as result.", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestIncoming",
@@ -60,7 +60,7 @@ describe("Backtranscludes and transclude filter tests", function() {
 	});
 
 	describe("A data tiddler transclude will still use the tiddler as result.", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestIncoming",
@@ -81,7 +81,7 @@ describe("Backtranscludes and transclude filter tests", function() {
 
 	describe("A tiddler that has a transclude added to it later", function() {
 		it("should have an additional backtransclude", function() {
-			var wiki = new $tw.Wiki();
+			var wiki = $tw.test.wiki();
 
 			wiki.addTiddler({
 				title: "TestIncoming",
@@ -106,7 +106,7 @@ describe("Backtranscludes and transclude filter tests", function() {
 	});
 
 	describe("A tiddler that has a transclude remove from it later", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestIncoming",
@@ -128,7 +128,7 @@ describe("Backtranscludes and transclude filter tests", function() {
 	});
 
 	describe("A tiddler transcludeing to another that gets renamed", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestIncoming",
@@ -148,7 +148,7 @@ describe("Backtranscludes and transclude filter tests", function() {
 	});
 
 	describe("A tiddler transcludeing to another that gets deleted", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestIncoming",
@@ -168,7 +168,7 @@ describe("Backtranscludes and transclude filter tests", function() {
 	});
 
 	describe("a tiddler with some transcludes on it in order", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestOutgoing",
@@ -186,7 +186,7 @@ describe("Backtranscludes and transclude filter tests", function() {
 	});
 
 	describe("include implicit self transclusion", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestOutgoing",
@@ -202,7 +202,7 @@ describe("Backtranscludes and transclude filter tests", function() {
 	});
 
 	describe("include explicit self transclusion", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestOutgoing",
@@ -218,7 +218,7 @@ describe("Backtranscludes and transclude filter tests", function() {
 	});
 
 	describe("exclude self when target tiddler is not string", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestOutgoing",
@@ -234,7 +234,7 @@ describe("Backtranscludes and transclude filter tests", function() {
 	});
 
 	describe("recognize transclusion defined by widget", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 
 		wiki.addTiddler({
 			title: "TestOutgoing",

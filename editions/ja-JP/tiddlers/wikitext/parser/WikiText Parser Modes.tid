@@ -1,0 +1,20 @@
+created: 20220110233944530
+modified: 20260307111229245
+original-modified: 20220513112653029
+tags: WikiText
+title: WikiText Parser Modes
+ja-title: Wikiテキストのパーサーモード
+type: text/vnd.tiddlywiki
+
+Tiddler(通常はテキストフィールド)を表示するために、[[Wikiテキスト|WikiText]]パーサーはコンテンツを読み込み、解釈し、[[Wikiテキスト|WikiText]]ルールを適用します。パーサーには3つのモードがあります:
+
+* ''プラグマモード'' - パーサーは[[プラグマモードのWikiテキスト|Pragmas]]識別子のみを認識します
+* ''ブロックモード'' - パーサーは[[ブロックモードのWikiテキスト|Block Mode WikiText]]識別子のみを認識します
+* ''インラインモード'' - パーサーは[[インラインモードのWikiテキスト|Inline Mode WikiText]]のみを認識します
+
+パーサーは、遭遇したテキストに基づいて、[[これらのモード間を遷移|WikiText parser mode transitions]]します。さらに、[[パーサーがWikiテキストを無視する箇所|Places where the parser ignores WikiText]]の識別子もあります。パーサーモードは、[[プラグマ: \parsermode|Pragma: \parsermode]]を使って直接設定することもできます。
+
+
+<<.tip "インライン vs ブロックの概念は、標準のHTML要素にも存在します。HTMLでは、これら[[2つのレイアウトモード|https://www.w3schools.com/html/html_blocks.asp]]によって、出力が同じ行に収まるかどうかが決まります。
+
+<p>[[ブロックモードのWikiテキスト|Block Mode WikiText]]の多くは[[ブロックレベルのHTML要素|https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements]]に対応しており、[[インラインモードのWikiテキスト|Inline Mode WikiText]]の多くは[[インラインレベルのHTML要素|https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements]]に対応します。しかし、Wikiテキストの場合、この2つのモードは、出力の流れを決定するのと同じくらい、パーサーがどの構文を認識するかを決定する上でも重要です。</p>">>
