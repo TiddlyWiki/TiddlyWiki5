@@ -1,0 +1,12 @@
+change-category: hackability
+change-type: bugfix
+created: 20260711013031000
+description: Filtered transclusion now parses filters containing pipe or brace characters correctly
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9881
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9881
+type: text/vnd.tiddlywiki
+
+* Filtered transclusions such as `{{{ [match[a|b]] }}}` no longer break when the filter run contains `|` or `}` characters; the filter is now scanned with filter syntax awareness instead of a regular expression (fixes [[Issue #9862|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9862]])
