@@ -39,17 +39,16 @@ exports.parse = function() {
 		textEnd = match.index;
 		this.parser.pos = match.index + match[0].length;
 	} else {
-		// Surface the unterminated inline code; the recovered text stays unchanged
-		text = this.parser.source.substr(this.parser.pos);
-		textEnd = this.parser.sourceLength;
+		// An unmatched delimiter renders as literal text and inline parsing resumes after it, so a stray backtick cannot swallow the rest of the source (CommonMark section 6.1)
+		var delimiterStart = start - this.match[1].length;
 		this.parser.addDiagnostic({
-			from: start,
-			to: this.parser.sourceLength,
+			from: delimiterStart,
+			to: start,
 			severity: "warning",
 			code: "unterminated-codeinline",
-			message: "Unterminated inline code"
+			message: "Unmatched inline code delimiter rendered as literal text"
 		});
-		this.parser.pos = this.parser.sourceLength;
+		return [{type: "text", text: this.match[1], start: delimiterStart, end: start}];
 	}
 	return [{
 		type: "element",

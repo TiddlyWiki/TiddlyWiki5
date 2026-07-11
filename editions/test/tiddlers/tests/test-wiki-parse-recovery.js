@@ -280,13 +280,21 @@ describe("WikiParser diagnostic producers", function() {
 		expect(result.diagnostics.length).toBe(0);
 	});
 
-	it("flags unterminated inline code without changing the recovered tree", function() {
+	it("renders an unmatched inline code delimiter as literal text", function() {
 		var wiki = new $tw.Wiki(),
 			result = wiki.parseText("text/vnd.tiddlywiki","`unclosed inline",{parseAsInline: true});
-		expect(result.tree[0].type).toBe("element");
-		expect(result.tree[0].tag).toBe("code");
+		expect(result.tree[0].type).toBe("text");
+		expect(result.tree[0].text).toBe("`");
 		expect(result.diagnostics.length).toBe(1);
 		expect(result.diagnostics[0].code).toBe("unterminated-codeinline");
+	});
+
+	it("stops an unmatched inline delimiter from swallowing later blocks", function() {
+		var wiki = new $tw.Wiki(),
+			result = wiki.parseText("text/vnd.tiddlywiki","before `unclosed\n\n! A heading"),
+			lastNode = result.tree[result.tree.length - 1];
+		expect(lastNode.type).toBe("element");
+		expect(lastNode.tag).toBe("h1");
 	});
 
 	it("flags an unterminated typed block", function() {
