@@ -132,7 +132,9 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 
 		var overlapping = false;
 		for(var j = start; j < end; j++) {
-			if(occupied[j]) { overlapping = true; break; }
+			if(occupied[j]) {
+				overlapping = true; break;
+			}
 		}
 		if(overlapping) continue;
 
@@ -146,7 +148,9 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 		return [{type: "plain-text", text: text}];
 	}
 
-	validMatches.sort(function(a,b){ return a.index - b.index; });
+	validMatches.sort(function(a,b){
+		return a.index - b.index;
+	});
 
 	var newParseTree = [];
 	var curPos = 0;
@@ -157,7 +161,7 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 		var e = s + mm.length;
 
 		if(s > curPos) {
-			newParseTree.push({ type: "plain-text", text: text.substring(curPos,s) });
+			newParseTree.push({type: "plain-text", text: text.substring(curPos,s)});
 		}
 
 		var toTitle = this.tiddlerTitleInfo.titles[mm.titleIndex];
@@ -167,7 +171,7 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 			type: "link",
 			attributes: {
 				to: {type: "string", value: toTitle},
-				"class": {type: "string", value: "tc-freelink"}
+				class: {type: "string", value: "tc-freelink"}
 			},
 			children: [{
 				type: "plain-text",
@@ -179,7 +183,7 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 	}
 
 	if(curPos < text.length) {
-		newParseTree.push({ type: "plain-text", text: text.substring(curPos) });
+		newParseTree.push({type: "plain-text", text: text.substring(curPos)});
 	}
 
 	return newParseTree;
@@ -192,7 +196,7 @@ function computeTiddlerTitleInfo(self,ignoreCase) {
 			self.wiki.allTitles();
 
 	if(!titles || titles.length === 0) {
-		return { titles: [], ac: new AhoCorasick() };
+		return {titles: [], ac: new AhoCorasick()};
 	}
 
 	var validTitles = [];
@@ -219,10 +223,10 @@ function computeTiddlerTitleInfo(self,ignoreCase) {
 	try {
 		ac.buildFailureLinks();
 	} catch(e) {
-		return { titles: [], ac: new AhoCorasick() };
+		return {titles: [], ac: new AhoCorasick()};
 	}
 
-	return { titles: validTitles, ac: ac };
+	return {titles: validTitles, ac: ac};
 }
 
 TextNodeWidget.prototype.isWithinButtonOrLink = function() {

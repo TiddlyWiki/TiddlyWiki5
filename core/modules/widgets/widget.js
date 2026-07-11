@@ -336,8 +336,8 @@ Widget.prototype.makeFakeWidgetWithVariables = function(vars = {}) {
 			if(name in vars) {
 				const value = vars[name];
 				return Array.isArray(value)
-					? { text: value[0], resultList: value }
-					: { text: value, resultList: value === undefined ? value : [value] };
+					? {text: value[0], resultList: value}
+					: {text: value, resultList: value === undefined ? value : [value]};
 			}
 			opts = opts || {};
 			opts.variables = Object.assign({}, vars, opts.variables || {});

@@ -213,7 +213,7 @@ ZoominListView.prototype.remove = function(widget) {
 	setTimeout(function() {
 		$tw.utils.removeStyles(toWidgetDomNode, ["transformOrigin", "transform", "transition", "opacity", "zIndex"]);
 		removeElement();
-	}, duration);	
+	}, duration);
 	// Now the tiddler we're going back to
 	if(toWidgetDomNode) {
 		$tw.utils.setStyle(toWidgetDomNode,[

@@ -382,7 +382,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 					titles.sort(function(a,b) {
 						return a.localeCompare(b);
 					});
-				}	
+				}
 			} else {
 				if(isDescending) {
 					titles.sort(function(a,b) {
@@ -392,7 +392,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 					titles.sort(function(a,b) {
 						return a.toLowerCase().localeCompare(b.toLowerCase());
 					});
-				}	
+				}
 			}
 		} else {
 			titles.sort(function(a,b) {

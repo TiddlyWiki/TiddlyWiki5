@@ -290,7 +290,7 @@ exports.copyObjectPropertiesSafe = function(object) {
 		if(isDOMElement(obj)) {
 			return undefined;
 		}
-		
+
 		seen.add(obj);
 		const copy = {};
 		let key,

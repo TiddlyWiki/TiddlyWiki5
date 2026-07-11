@@ -59,7 +59,7 @@ exports.stringifyNumber = function(num) {
 };
 
 // Returns the fully escaped CSS selector for a tag, e.g.
-// "$:/tags/Stylesheet" -> "tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet" 
+// "$:/tags/Stylesheet" -> "tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet"
 exports.tagToCssSelector = function(tagName) {
 	return "tc-tagged-" + encodeURIComponent(tagName).replace(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^`{\|}~,]/mg,function(c) {
 		return "\\" + c;
@@ -89,17 +89,23 @@ function splitClasses(className) {
 
 exports.addClass = function(el,className) {
 	if(!el.classList) return;
-	splitClasses(className).forEach(function(c) { el.classList.add(c); });
+	splitClasses(className).forEach(function(c) {
+		el.classList.add(c);
+	});
 };
 
 exports.removeClass = function(el,className) {
 	if(!el.classList) return;
-	splitClasses(className).forEach(function(c) { el.classList.remove(c); });
+	splitClasses(className).forEach(function(c) {
+		el.classList.remove(c);
+	});
 };
 
 exports.toggleClass = function(el,className,status) {
 	if(!el.classList) return;
-	splitClasses(className).forEach(function(c) { el.classList.toggle(c,status); });
+	splitClasses(className).forEach(function(c) {
+		el.classList.toggle(c,status);
+	});
 };
 
 exports.getLocationPath = function() {
