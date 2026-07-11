@@ -79,3 +79,14 @@ The following is a table with maximum width. It contains [[TextWidget]]s with ma
 | Cell1|<$edit-text tiddler="$:/temp/test-table-input" tag="input" field="test"/> |
 |^ [[Link to a tiddler]]<br>some more text|<$edit-text tiddler="$:/temp/test-table-input" field="text"/>  |
 """>>
+
+!! Table with Alternating Row Styles
+
+You will need to create your own stylesheet. See [[Using Stylesheets]]. The idea is to create rules using `:nth-of-type(even/odd)`. For example:
+
+```
+.myclass tbody tr:nth-of-type(even) { background-color: <<color tiddler-editor-fields-even>>; }
+.myclass tbody tr:nth-of-type(odd) { background-color: <<color tiddler-editor-fields-odd>>; }
+```
+
+<<.note """~TiddlyWiki automatically applies classes `evenRow` and `oddRow` to table rows. However, use of these classes is not recommended. Rows start as 'even' (opposite to that expected) and all the rows of the table are considered to be a single combined set of rows, regardless of if they appear in the header, footer, or body.""">>

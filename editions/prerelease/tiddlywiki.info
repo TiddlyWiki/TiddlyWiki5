@@ -13,7 +13,8 @@
 		"tiddlywiki/menubar",
 		"tiddlywiki/jszip",
 		"tiddlywiki/confetti",
-		"tiddlywiki/tour"
+		"tiddlywiki/tour",
+		"tiddlywiki/dom-to-image"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
