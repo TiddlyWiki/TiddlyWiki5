@@ -51,7 +51,15 @@ exports.parse = function() {
 		text = this.parser.source.substring(this.parser.pos,match.index);
 		this.parser.pos = match.index + match[0].length;
 	} else {
+		// Surface the unterminated typed block; the recovered text stays unchanged
 		text = this.parser.source.substr(this.parser.pos);
+		this.parser.addDiagnostic({
+			from: start,
+			to: this.parser.sourceLength,
+			severity: "warning",
+			code: "unterminated-typedblock",
+			message: "Unterminated typed block"
+		});
 		this.parser.pos = this.parser.sourceLength;
 	}
 	// Parse the block according to the specified type
