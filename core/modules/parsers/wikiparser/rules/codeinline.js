@@ -31,13 +31,16 @@ exports.parse = function() {
 	reEnd.lastIndex = this.parser.pos;
 	var match = reEnd.exec(this.parser.source),
 		text,
-		start = this.parser.pos;
+		start = this.parser.pos,
+		textEnd;
 	// Process the text
 	if(match) {
 		text = this.parser.source.substring(this.parser.pos,match.index);
+		textEnd = match.index;
 		this.parser.pos = match.index + match[0].length;
 	} else {
 		text = this.parser.source.substr(this.parser.pos);
+		textEnd = this.parser.sourceLength;
 		this.parser.pos = this.parser.sourceLength;
 	}
 	return [{
@@ -47,7 +50,7 @@ exports.parse = function() {
 			type: "text",
 			text: text,
 			start: start,
-			end: this.parser.pos
+			end: textEnd
 		}]
 	}];
 };

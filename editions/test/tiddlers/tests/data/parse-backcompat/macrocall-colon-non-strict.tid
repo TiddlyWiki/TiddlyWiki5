@@ -1,0 +1,13 @@
+title: Parse/BackCompat/MacrocallColonNonStrict
+description: Colon-separator requires a strict identifier name; otherwise value is treated as positional (fix #9788)
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define x(d) got=$d$
+<<x $:/a:"v">>
++
+title: ExpectedResult
+
+<p>got=<a class="tc-tiddlylink tc-tiddlylink-missing" href="#%24%3A%2Fa">$:/a</a>:</p>

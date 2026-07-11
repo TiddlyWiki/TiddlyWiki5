@@ -1,0 +1,14 @@
+title: Parse/BackCompat/MalformedNoTerminator
+description: Widget attribute value starting with << but with no >> ahead falls through to "true" (matches v5.3.8)
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define d() DEFD
+\define x(d) got=$d$
+<$macrocall $name="x" d=<<d> />
++
+title: ExpectedResult
+
+<p>got=true</p>

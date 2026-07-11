@@ -1,4 +1,5 @@
 title: $:/language/Docs/Types/text/vnd.tiddlywiki
-description: TiddlyWiki 5 形式
+description: TiddlyWiki 5
 name: text/vnd.tiddlywiki
 group: Text
+group-sort: 0
