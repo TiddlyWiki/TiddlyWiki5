@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/perftest",
+	"name": "Performance Test",
+	"description": "Performance test runner",
+	"list": "readme",
+	"stability": "STABILITY_1_EXPERIMENTAL"
+}

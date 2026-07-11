@@ -1,0 +1,69 @@
+title: $:/language/Help/perf
+description: Run performance tests
+
+This runs performance tests in JavaScript tiddlers tagged with `$:/tags/performance-test`.
+
+```
+--perf [output=<filename>] [iterations=<number>] [baselineIterations=<number>] [warmupCapture=yes|no] [filter=<filter>] [instrument=yes|no]
+```
+
+''output'' - optional filename for writing JSON results. The filename is resolved relative to the output directory.
+''iterations'' - optional default measured iteration count for benchmarks that do not set `exports.iterations`.
+''baselineIterations'' - optional count used to calibrate measurement-overhead baseline subtraction. Default: 20.
+''warmupCapture'' - optional control for warmup measurement capture. Default: `no` (warmup keeps behavior but skips timing capture overhead where possible).
+''filter'' - optional filter for selecting benchmark tiddlers. The browser runner reads `$:/config/Performance/TestFilter` when no command option supplies a filter.
+''instrument'' - `yes` enables TiddlyWiki's own `$tw.perf` instrumentation for the run and reports the internal operations the fixtures drove (filter compilation and any `$tw.perf.measure`-wrapped call) with time AND invocation counts. Default: `no`. Note: instrumentation adds a small per-call timing overhead, so the fixture timings in an instrumented run read slightly higher than an uninstrumented one.
+
+For example:
+
+```
+tiddlywiki ./editions/perftest --output ./output/perftest --perf output=results.json iterations=100 baselineIterations=30 warmupCapture=no
+tiddlywiki ./editions/perftest --output ./output/perftest --perf output=hot-child-walk.json filter="[[$:/perf/tests/hot-child-walk.js]]"
+```
+
+The browser path is explicit because the default Playwright configuration targets `editions/test`:
+
+```
+tiddlywiki ./editions/perftest --build index
+./node_modules/.bin/playwright test --config=editions/perftest/playwright.config.js --project=chromium
+```
+
+Performance tests use this shape:
+
+```
+exports.name = "example";
+exports.platform = "both";
+exports.warmup = 5;
+exports.iterations = 50;
+exports.run = function(context) {
+	return context.measure("example-step",function() {
+		// Work to measure
+	});
+};
+```
+
+By default, each benchmark runs 5 warmup iterations, then 50 measured iterations. Warmup runs let the JavaScript engine, parser caches and widget setup settle; they finish before measurement begins and do not count in the reported samples.
+
+The JSON results include row-level summaries and the raw measured `samples`. The main timing fields are:
+
+* `median` - the middle measured run; a useful typical value.
+* `p75` - 75% of measured runs finished at or below this time.
+* `p90` - 90% of measured runs finished at or below this time.
+* `p95` - 95% of measured runs finished at or below this time.
+* `p99` - 99% of measured runs finished at or below this time; useful for tail-risk analysis.
+* `standardDeviation` - how spread out this run's measured samples were; lower values usually mean steadier results.
+
+Benchmarks may attach metadata such as `phase`, `mode`, `taxonomy`, `fixtureName`, `fixtureItemCount` and `petName`. The runner preserves that metadata in measurement rows and adds phase aggregate rows with `rowType: "phase"`.
+
+For human interpretation of refresh benchmarks, include scenario metadata fields:
+
+* `scenarioChangeRelation` - `relevant`, `unrelated`, or `none`.
+* `scenarioDescription` - plain-language explanation of what changed from a wiki user's point of view.
+* `scenarioTags` - short tags for grouping and reporting (for example `background-edit`, `in-view-edit`).
+
+Plugin tests can be added with the normal plugin mechanisms:
+
+```
+tiddlywiki +tiddlywiki/example ./editions/perftest --build index
+tiddlywiki ++/path/to/plugin ./editions/perftest --build index
+```

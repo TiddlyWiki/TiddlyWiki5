@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/perftest/readme
+
+The performance test plugin runs JavaScript benchmark tiddlers tagged with `$:/tags/performance-test`.
+
+It provides the `--perf` command for Node.js and a browser startup runner for generated performance test editions.
+
+! Measurement honesty
+
+Benchmarks mislead more often than they inform. This harness builds the guardrails in so a result cannot quietly overstate itself:
+
+* ''Every row reports its own floor.'' Alongside the median, each measurement carries its spread (`cvPct`) and a resolvable-effect floor (`resolvableEffectPct`); the smallest change it could detect. A row whose floor swamps small effects is marked `trust: "noisy"`. A NOISY row cannot support a claim below its floor; raise `iterations` or ignore differences that small.
+
+* ''Compare paired, never snapshot.'' Between-session drift (machine load, thermal state) routinely runs ±10-40%; larger than most real changes. Comparing one whole run against another measures the weather, not the code. To compare two versions, acquire runs ''interleaved'' in one session and use `scripts/perf/compare-runs.js <before-dir> <after-dir>`, which works from the within-pair delta so drift cancels.
+
+* ''Alternate the within-pair order.'' Always running `before` then `after` lets a slow monotonic drift (the machine warming up over the session) fall entirely on the always-second version, which then reads as a systematic change the confidence interval will wrongly confirm. Alternate the order each pair; before/after, then after/before; so the drift cancels across pairs rather than accruing to one side.
+
+* ''Inconclusive is a first-class verdict.'' `compare-runs` reports a 95% confidence interval on each delta. When the interval straddles zero it reads INCONCLUSIVE; not "no change", and never a number dressed up as a win. It also reports the resolution floor: the smallest effect the run set could resolve.
+
+* ''Verify a hot function by counting, not sampling.'' A CPU sampling profiler attributes time to functions it never truly ran (stale-stack and aliasing errors). Before optimising a "hot" function, confirm it with a call count. A negative result; "already fast", "no resolvable difference"; is a real finding worth keeping.
