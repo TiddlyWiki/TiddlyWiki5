@@ -34,19 +34,23 @@ exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 
-	if(!this.parser.hasCloser(/''/mg)) {
+
+	// Parse the run including the terminator
+	var bodyStart = this.parser.pos;
+	var ex = this.parser.parseInlineRunTerminatedExtended(/''/mg,{eatTerminator: true});
+	if(!ex.match) {
+		// The run reached the end of the source without a closer, so the delimiter rewinds to literal text and parsing resumes after it
+		this.parser.pos = bodyStart;
 		this.parser.addDiagnostic({
 			from: delimiterStart,
-			to: this.parser.pos,
+			to: bodyStart,
 			severity: "warning",
 			code: "unterminated-bold",
 			message: "Unmatched bold delimiter rendered as literal text"
 		});
 		return [{type: "text", text: "''"}];
 	}
-
-	// Parse the run including the terminator
-	var tree = this.parser.parseInlineRun(/''/mg,{eatTerminator: true});
+	var tree = ex.tree;
 
 	// Return the classed span
 	return [{

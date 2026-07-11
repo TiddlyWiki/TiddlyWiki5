@@ -34,18 +34,22 @@ exports.parse = function() {
 		delimiterText = this.match[0];
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
-	if(!this.parser.hasCloser(reEnd)) {
+	// Parse the run up to the terminator
+	var bodyStart = this.parser.pos;
+	var ex = this.parser.parseInlineRunTerminatedExtended(reEnd,{eatTerminator: true});
+	if(!ex.match) {
+		// The run reached the end of the source without a closer, so the delimiter rewinds to literal text and parsing resumes after it
+		this.parser.pos = bodyStart;
 		this.parser.addDiagnostic({
 			from: delimiterStart,
-			to: this.parser.pos,
+			to: bodyStart,
 			severity: "warning",
 			code: "unterminated-styleinline",
 			message: "Unmatched inline style delimiter rendered as literal text"
 		});
 		return [{type: "text", text: delimiterText}];
 	}
-	// Parse the run up to the terminator
-	var tree = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
+	var tree = ex.tree;
 	// Return the classed span
 	var node = {
 		type: "element",
