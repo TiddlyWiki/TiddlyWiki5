@@ -1,0 +1,11 @@
+{
+	"description": "TiddlyWiki performance tests over the real tw5.com content corpus",
+	"includeWikis": ["../tw5.com"],
+	"plugins": [
+		"tiddlywiki/perftest"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	]
+}
