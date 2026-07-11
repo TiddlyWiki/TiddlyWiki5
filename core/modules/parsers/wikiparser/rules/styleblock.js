@@ -54,6 +54,16 @@ exports.parse = function() {
 		// Look for another line of classes and styles
 		this.match = this.matchRegExp.exec(this.parser.source);
 	} while(this.match && this.match.index === this.parser.pos);
+	// A missing closing @@ quietly applies the style to every remaining block, so it leaves a receipt
+	if(!this.parser.hasCloser(new RegExp(reEndString,"mg"))) {
+		this.parser.addDiagnostic({
+			from: this.parser.pos,
+			to: this.parser.pos,
+			severity: "warning",
+			code: "unterminated-styleblock",
+			message: "Missing closing @@ for the style block, so it runs to the end of the tiddler"
+		});
+	}
 	// Parse the body
 	var tree = this.parser.parseBlocks(reEndString);
 	for(var t=0; t<tree.length; t++) {

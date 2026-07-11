@@ -75,6 +75,16 @@ exports.parseIfClause = function(filterCondition) {
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"limit","1");
 	// Check for an immediately following double linebreak
 	var hasLineBreak = !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
+	// A missing endif quietly pulls the rest of the tiddler into the condition, where it may render once per item or not at all, so it leaves a receipt
+	if(!this.parser.hasCloser(/\<\%\s*endif\s*\%\>/mg)) {
+		this.parser.addDiagnostic({
+			from: this.match.index,
+			to: this.parser.pos,
+			severity: "warning",
+			code: "unterminated-conditional",
+			message: "Missing <% endif %> for the conditional, so it runs to the end of the tiddler"
+		});
+	}
 	// Parse the body looking for else or endif
 	var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>|\\<\\%\\s*(else)\\s*\\%\\>|\\<\\%\\s*(elseif)\\s+([\\s\\S]+?)\\%\\>",
 		ex;

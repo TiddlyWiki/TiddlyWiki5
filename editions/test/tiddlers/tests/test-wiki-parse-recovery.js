@@ -378,3 +378,42 @@ describe("WikiParser unclosed inline delimiters stop short of the source end", f
 		expect(result.diagnostics.length).toBe(0);
 	});
 });
+
+describe("WikiParser block constructs report a missing terminator", function() {
+
+	// Each rule keeps the tree it already builds and gains a receipt, so an author sees the fault without any wiki changing shape
+	var CASES = [
+		{name: "definition", source: "\\define aMacro()\nthe body\n\nAfter", code: "unterminated-definition"},
+		{name: "procedure", source: "\\procedure aProc()\nthe body\n\nAfter", code: "unterminated-definition"},
+		{name: "quote block", source: "<<<\nthe body\n\nAfter", code: "unterminated-quoteblock"},
+		{name: "style block", source: "@@color:red;\nthe body\n\nAfter", code: "unterminated-styleblock"},
+		{name: "conditional", source: "<% if [[yes]] %>\nthe body\n\nAfter", code: "unterminated-conditional"}
+	];
+
+	$tw.utils.each(CASES,function(testCase) {
+
+		it("reports an unterminated " + testCase.name, function() {
+			var wiki = new $tw.Wiki(),
+				result = wiki.parseText("text/vnd.tiddlywiki",testCase.source),
+				codes = result.diagnostics.map(function(diagnostic) {
+					return diagnostic.code;
+				});
+			expect(codes).toContain(testCase.code);
+			expect(result.diagnostics[0].severity).toBe("warning");
+		});
+	});
+
+	// TiddlyWiki authors deliberately leave a wrapping widget open so it scopes the rest of the tiddler, so an unclosed tag earns no receipt
+	it("reports nothing for a widget left open to scope the rest of the tiddler", function() {
+		var wiki = new $tw.Wiki(),
+			result = wiki.parseText("text/vnd.tiddlywiki","<$let colour=\"red\">\n\nthe body\n\nmore body\n");
+		expect(result.diagnostics.length).toBe(0);
+	});
+
+	it("reports nothing when every block construct closes", function() {
+		var wiki = new $tw.Wiki(),
+			source = "\\define aMacro()\nthe body\n\\end\n\n<div>\n\ntext\n\n</div>\n\n<<<\nquoted\n<<<\n\n@@color:red;\nstyled\n@@\n\n<% if [[yes]] %>\nshown\n<% endif %>\n",
+			result = wiki.parseText("text/vnd.tiddlywiki",source);
+		expect(result.diagnostics.length).toBe(0);
+	});
+});

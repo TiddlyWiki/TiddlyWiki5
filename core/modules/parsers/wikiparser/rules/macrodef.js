@@ -31,6 +31,7 @@ exports.init = function(parser) {
 Parse the most recent match
 */
 exports.parse = function() {
+	var definitionStart = this.parser.pos;
 	// Move past the macro name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the parameters
@@ -71,6 +72,14 @@ exports.parse = function() {
 		text = this.parser.source.substring(this.parser.pos,endMatch.index);
 		this.parser.pos = endMatch.index + endMatch[0].length;
 	} else {
+		// A blank body renders exactly like a working definition, so the missing \end leaves a receipt
+		this.parser.addDiagnostic({
+			from: definitionStart,
+			to: this.parser.pos,
+			severity: "warning",
+			code: "unterminated-definition",
+			message: "Missing \\end for the definition of " + this.match[1] + ", so its body reads as blank"
+		});
 		// We didn't find the end of the definition, so we'll make it blank
 		text = "";
 	}

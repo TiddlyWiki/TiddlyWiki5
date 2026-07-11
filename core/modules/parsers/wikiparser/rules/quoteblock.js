@@ -32,6 +32,16 @@ exports.parse = function() {
 	var citeStart = this.parser.pos;
 	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
 	var citeEnd = this.parser.pos;
+	// A missing closer quietly wraps the rest of the tiddler in the quote, so it leaves a receipt
+	if(!this.parser.hasCloser(new RegExp(reEndString,"mg"))) {
+		this.parser.addDiagnostic({
+			from: this.match.index,
+			to: this.parser.pos,
+			severity: "warning",
+			code: "unterminated-quoteblock",
+			message: "Missing closing " + this.match[1] + " for the quote block, so it runs to the end of the tiddler"
+		});
+	}
 	// before handling the cite, parse the body of the quote
 	var tree = this.parser.parseBlocks(reEndString);
 	// If we got a cite, put it before the text
