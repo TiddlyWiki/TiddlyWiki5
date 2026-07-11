@@ -1,0 +1,56 @@
+title: Performance Findings
+type: text/vnd.tiddlywiki
+
+! TiddlyWiki performance findings
+
+A snapshot from the performance test harness. These numbers state their own reliability plainly: each row reports a trust flag, and a row marked ''noisy'' cannot support a claim smaller than its own spread. Absolute numbers differ per machine; the shape of the findings travels.
+
+!! Environment
+
+|!Field |!Value |
+|TiddlyWiki |5.5.0-prerelease |
+|Runtime |Node.js v24.15.0, linux/x64 |
+|Iterations |40 measured, after warmup |
+|Captured |2026-07-11 |
+
+Reproduce, including TiddlyWiki's own `$tw.perf` instrumentation:
+
+```
+tiddlywiki ./editions/perftest --output ./output --perf output=results.json iterations=40 instrument=yes
+```
+
+!! The filter carries the cost, not the widgets
+
+A filter-heavy list of 2000 tiddlers renders in ''66 ms''. TiddlyWiki's own `$tw.perf` instrument shows the filter alone takes ''61 ms'' per evaluation, about ''92%'' of that render. A slow filtered list owes its cost to the filter, not the rendering. Keep the filter cheap and put indexed operators first.
+
+!! An indexed lookup beats a scan by an order of magnitude
+
+For the same 500 results, an indexed tag lookup and a full text search scan differ by roughly 15 times. Reach for `[tag[...]]` or the field indexer before `[search[...]]` on a large wiki.
+
+|!Query |!Median |!Results |!Note |
+|`[tag[...]]` indexed lookup |0.46 ms |500 |O(1) index hit |
+|`[search[...]]` scan, same set |6.75 ms |500 |O(n) scan of every tiddler |
+|`[all[tiddlers]search[word]]` |8.84 ms |3753 |typical keystroke search over 5000 |
+
+Search skips the index: every query scans every tiddler's title, tags and text, so it resists caching. This marks the per-keystroke cost users hit on large wikis.
+
+!! Render costs more than parse
+
+Parsing structured wikitext into a parse tree takes ''0.32 ms''; rendering that tree into a widget tree and DOM takes ''1.48 ms'', about ''4.6 times'' as much. The engine spends most in the render path, so widget and refresh work matters more than parse speed.
+
+|!Path |!Median |!Trust |
+|filter-heavy list render (2000 tiddlers) |66 ms |stable |
+|medium child walk render |20 ms |stable |
+|deep transclusion render (depth 16) |15 ms |noisy |
+|structured render (parse tree to widgets and DOM) |1.48 ms |noisy |
+|structured parse (text to parse tree) |0.32 ms |stable |
+
+!! Reading a row honestly
+
+Every measurement carries its spread and a resolvable-effect floor, the smallest change it could detect. The harness marks ''noisy'' any row whose floor swamps small effects. In this run 25 of 33 rows read noisy, mostly sub-millisecond operations where a few microseconds of jitter dominate. Quote the stable rows; treat the noisy ones as order-of-magnitude only.
+
+!! Comparing two versions
+
+Never read one whole run against another: between-session drift (machine load, thermal state) routinely exceeds the effect being hunted. Acquire runs interleaved in one session and use `scripts/perf/compare-runs.js <before-dir> <after-dir>`, which pairs them and reads ''inconclusive'' when the 95% confidence interval straddles zero, rather than reporting a number the data cannot support.
+
+To confirm a function genuinely runs hot before optimising it, count its calls with `scripts/perf/call-census.js`. A CPU sampling profiler mis-attributes time; an exact count catches the ghost.
