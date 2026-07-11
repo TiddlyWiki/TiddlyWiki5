@@ -642,6 +642,10 @@ exports.getMissingTitles = function() {
 	var self = this,
 		missing = Object.create(null);
 	this.each(function(tiddler,title) {
+		// Skip system tiddlers as link sources, matching the forEachTiddler scan this replaced
+		if(self.isSystemTiddler(title)) {
+			return;
+		}
 		var links = self.getTiddlerLinks(title);
 		$tw.utils.each(links,function(link) {
 			if(!self.tiddlerExists(link) && !self.isShadowTiddler(link)) {
