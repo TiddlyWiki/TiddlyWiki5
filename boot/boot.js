@@ -48,6 +48,13 @@ $tw.utils.hop = function(object,property) {
 $tw.utils.isArray = (value) => Array.isArray(value);
 
 /*
+Determine if a value is a date, even across VM boundaries
+*/
+$tw.utils.isDate = function(value) {
+	return Object.prototype.toString.call(value) === "[object Date]";
+};
+
+/*
 Check if an array is equal by value and by reference.
 */
 $tw.utils.isArrayEqual = function(array1,array2) {
@@ -123,9 +130,6 @@ $tw.utils.pushTop = function(array,value) {
 	}
 	return array;
 };
-
-/** @deprecated Use instanceof Date instead */
-$tw.utils.isDate = (value) => value instanceof Date;
 
 /** @deprecated Use array iterative methods instead */
 $tw.utils.each = function(object,callback) {

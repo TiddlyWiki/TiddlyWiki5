@@ -9,8 +9,23 @@ type: text/vnd.tiddlywiki
 	margin-top: 1rem;
 }
 
-.doc-release-summary-section {
+.doc-release-tab-search {
 	margin-bottom: 0.75em;
+}
+
+.doc-release-tab-search input {
+	width: 100%;
+	padding: 0.5em;
+	border: 1px solid #e8e8e8;
+	border-radius: 0.25em;
+	font-size: inherit;
+	font-family: inherit;
+}
+
+.doc-release-search-count {
+	font-size: 0.85em;
+	color: #888;
+	margin-bottom: 0.5em;
 }
 
 .doc-release-section {

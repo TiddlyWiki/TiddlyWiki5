@@ -125,13 +125,12 @@ SelectWidget.prototype.setSelectValue = function() {
 			values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
 		for(var i=0; i < select.children.length; i++){
 			child=select.children[i];
-			if(child.children.length === 0){
-				child.selected = values.indexOf(child.value) !== -1;
-			} else {
-				// grouped options
+			if(child.tagName && child.tagName.toUpperCase() === "OPTGROUP"){
 				for(var y=0; y < child.children.length; y++){
 					child.children[y].selected = values.indexOf(child.children[y].value) !== -1;
 				}
+			} else {
+				child.selected = values.indexOf(child.value) !== -1;
 			}
 		}
 	} else {

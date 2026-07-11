@@ -1,11 +1,9 @@
 title: $:/tw5.com/releases/info/
 
-category-order: translation usability hackability performance widget filters plugin theme nodejs developer internal
-
-summary-section-order: highlights big-bug-fixes clearing-the-decks
+category-order: translation usability hackability widget filters plugin theme nodejs developer internal
 change-type-order: feature enhancement performance bugfix deprecation security
 impact-type-order: compatibility-break deprecation pluginisation
-tab-order: [[Summary]] [[Change Types]] [[Change Categories]] [[Impacts]]
+tab-order: [[Summary]] [[By Type]] [[By Category]] [[Impacts]]
 categories/developer/singular: Developer
 categories/developer/plural: Developer
 categories/filters/singular: Filters
@@ -16,8 +14,6 @@ categories/internal/singular: Internal
 categories/internal/plural: Internal
 categories/nodejs/singular: Node.js
 categories/nodejs/plural: Node.js
-categories/performance/singular: Performance
-categories/performance/plural: Performance
 categories/plugin/singular: Plugin
 categories/plugin/plural: Plugins
 categories/theme/singular: Theme
@@ -58,10 +54,6 @@ impact-types/pluginisation/singular: Pluginisation
 impact-types/pluginisation/colour/background: #ddddff
 impact-types/pluginisation/colour/foreground: #222288
 impact-types/pluginisation/plural: Pluginisations
-summary-sections/big-bug-fixes/plural: Big Bug Fixes
-summary-sections/clearing-the-decks/plural: Clearing the Decks
-summary-sections/highlights/plural: Highlights
-summary-sections/highlights/default-state: open
 categories/translation/colour: #7ec8e3
 categories/usability/colour: #f4a261
 categories/hackability/colour: #9b8ec4

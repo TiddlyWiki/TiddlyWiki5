@@ -247,8 +247,28 @@ exports.slowInSlowOut = function(t) {
 };
 
 exports.copyObjectPropertiesSafe = function(object) {
-	const seen = new Set(),
-		isDOMElement = (value) => value instanceof Node || value instanceof Window;
+	const seen = new Set();
+
+	function isDOMElement(value) {
+		if(!value || typeof value !== "object") {
+			return false;
+		}
+
+		// Cross-realm DOM nodes
+		if(typeof value.nodeType === "number" &&
+				typeof value.nodeName === "string") {
+			return true;
+		}
+
+		// Cross-realm Window objects
+		if(value.window === value &&
+				value.document &&
+				value.location) {
+			return true;
+		}
+
+		return false;
+	}
 
 	function safeCopy(obj) {
 		// skip circular references
@@ -259,10 +279,6 @@ exports.copyObjectPropertiesSafe = function(object) {
 		if(typeof obj !== "object" || obj === null) {
 			return obj;
 		}
-		// skip DOM elements
-		if(isDOMElement(obj)) {
-			return undefined;
-		}
 		// copy arrays, preserving positions
 		if(Array.isArray(obj)) {
 			return obj.map((item) => {
@@ -270,7 +286,11 @@ exports.copyObjectPropertiesSafe = function(object) {
 				return value === undefined ? null : value;
 			});
 		}
-
+		// skip DOM elements
+		if(isDOMElement(obj)) {
+			return undefined;
+		}
+		
 		seen.add(obj);
 		const copy = {};
 		let key,
