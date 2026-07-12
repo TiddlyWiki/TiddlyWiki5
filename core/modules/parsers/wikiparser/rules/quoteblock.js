@@ -35,7 +35,6 @@ exports.parse = function() {
 	var citeStart = this.parser.pos;
 	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
 	var citeEnd = this.parser.pos;
-	// A missing closer quietly wraps the rest of the tiddler in the quote, so it leaves a receipt
 	if(!this.parser.hasCloser(new RegExp(reEndString,"mg"))) {
 		this.parser.addDiagnostic({
 			from: quoteStart,

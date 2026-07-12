@@ -51,7 +51,6 @@ var WikiParser = function(type,text,options) {
 	this.pos = 0;
 	// Start with empty output
 	this.tree = [];
-	// Collect diagnostics from any recovered block failures
 	this.diagnostics = [];
 	// Assemble the rule classes we're going to use
 	var pragmaRuleClasses, blockRuleClasses, inlineRuleClasses;
@@ -283,7 +282,6 @@ WikiParser.prototype.recoverBlock = function(start,error,ruleName) {
 	if(this.pos <= start && start < this.sourceLength) {
 		throw new Error("WikiParser.recoverBlock failed to advance the parse position at " + start);
 	}
-	// Record a diagnostic for the degraded block
 	var diagnostic = error.diagnostic || {};
 	this.addDiagnostic({
 		from: diagnostic.from !== undefined ? diagnostic.from : start,
@@ -293,7 +291,6 @@ WikiParser.prototype.recoverBlock = function(start,error,ruleName) {
 		code: diagnostic.code,
 		message: diagnostic.message || "Unable to parse block"
 	});
-	// The node carries the source it recovered and marks itself, so a consumer finds the damage in the tree rather than only in the diagnostics
 	return [{type: "text", text: this.source.substring(start,this.pos), start: start, end: this.pos, rule: ruleName, isRecovered: true}];
 };
 

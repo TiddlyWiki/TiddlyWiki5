@@ -11,7 +11,6 @@ Wiki text inline rule for assigning styles and classes to inline runs. For examp
 @@width:100px;.myClass This is some text with a class and a width@@
 ```
 
-
 \*/
 
 "use strict";
@@ -26,7 +25,6 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	// The run ends at its closing delimiter or at the end of its block, whichever arrives first
 	var reEnd = /@@|\r?\n\r?\n/g;
 	// Get the styles and class
 	var stylesString = this.match[1],
@@ -39,7 +37,6 @@ exports.parse = function() {
 	var bodyStart = this.parser.pos;
 	var ex = this.parser.parseInlineRunTerminatedExtended(reEnd,{eatTerminator: true});
 	if(!ex.match || /^\r?\n/.test(ex.match[0])) {
-		// The run reached the end of the source without a closer, so the delimiter rewinds to literal text and parsing resumes after it
 		this.parser.pos = bodyStart;
 		this.parser.addDiagnostic({
 			from: delimiterStart,

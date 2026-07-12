@@ -41,7 +41,6 @@ exports.parse = function() {
 		text = this.parser.source.substring(this.parser.pos,match.index);
 		this.parser.pos = match.index + match[0].length;
 	} else {
-		// Surface the unterminated block; the recovered text stays unchanged
 		text = this.parser.source.substr(this.parser.pos);
 		this.parser.addDiagnostic({
 			from: codeStart,

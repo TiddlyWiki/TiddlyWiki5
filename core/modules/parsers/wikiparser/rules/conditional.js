@@ -50,7 +50,6 @@ exports.parse = function() {
 		filterCondition = this.parser.source.substring(this.match.index + this.match[0].length,this.terminateIfMatch.index);
 	// Advance the parser position to past the %>
 	this.parser.pos = this.terminateIfMatch.index + this.terminateIfMatch[0].length;
-	// A missing endif quietly pulls the rest of the tiddler into the condition, where it may render once per item or not at all, so it leaves a receipt
 	if(!this.parser.hasCloser(/\<\%\s*endif\s*\%\>/mg)) {
 		this.parser.addDiagnostic({
 			from: conditionalStart,

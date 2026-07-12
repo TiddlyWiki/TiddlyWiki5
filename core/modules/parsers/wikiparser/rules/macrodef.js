@@ -72,7 +72,6 @@ exports.parse = function() {
 		text = this.parser.source.substring(this.parser.pos,endMatch.index);
 		this.parser.pos = endMatch.index + endMatch[0].length;
 	} else {
-		// A blank body renders exactly like a working definition, so the missing \end leaves a receipt
 		this.parser.addDiagnostic({
 			from: definitionStart,
 			to: this.parser.pos,

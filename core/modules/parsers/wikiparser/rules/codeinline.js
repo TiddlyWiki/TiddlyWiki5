@@ -39,7 +39,6 @@ exports.parse = function() {
 		textEnd = match.index;
 		this.parser.pos = match.index + match[0].length;
 	} else {
-		// An unmatched delimiter renders as literal text and inline parsing resumes after it, so a stray backtick cannot swallow the rest of the source (CommonMark section 6.1)
 		var delimiterStart = start - this.match[1].length;
 		this.parser.addDiagnostic({
 			from: delimiterStart,
