@@ -46,4 +46,53 @@ describe("parse-diagnostics filter operator", function() {
 		expect(wiki.filterTiddlers("[[Degraded]parse-diagnostics:grade[]]")).toEqual(["warning"]);
 		expect(wiki.filterTiddlers("[[Clean]parse-diagnostics:grade[]]")).toEqual(["clean"]);
 	});
+
+	describe("reading a grammar of its own", function() {
+
+		var CUSTOM_TYPE = "text/x-test-grammar";
+
+		function CustomParser(type,text,options) {
+			this.tree = [{type: "text", text: text}];
+			this.source = text;
+			this.diagnostics = [];
+			var index = text.indexOf("!!");
+			if(index !== -1) {
+				this.diagnostics.push($tw.utils.makeParseDiagnostic({
+					from: index,
+					to: index + 2,
+					severity: "error",
+					code: "custom-fault",
+					message: "The grammar refused this construct"
+				},{source: type, sourceLength: text.length}));
+				this.tree = [{type: "text", text: text, start: 0, end: text.length, isRecovered: true}];
+			}
+		}
+
+		beforeEach(function() {
+			$tw.Wiki.parsers[CUSTOM_TYPE] = CustomParser;
+		});
+
+		afterEach(function() {
+			delete $tw.Wiki.parsers[CUSTOM_TYPE];
+		});
+
+		it("carries diagnostics from any parser, not only from wikitext", function() {
+			var wiki = wikiWith([
+				{title: "CustomBroken", type: CUSTOM_TYPE, text: "a construct !! that fails"},
+				{title: "CustomClean", type: CUSTOM_TYPE, text: "a construct that holds"}
+			]);
+			expect(wiki.filterTiddlers("[all[tiddlers]parse-diagnostics[]]")).toEqual(["CustomBroken"]);
+			expect(wiki.filterTiddlers("[[CustomBroken]parse-diagnostics:grade[]]")).toEqual(["error"]);
+			expect(wiki.filterTiddlers("[[CustomBroken]parse-diagnostics:codes[]]")).toEqual(["custom-fault"]);
+			expect(wiki.filterTiddlers("[[CustomClean]parse-diagnostics:grade[]]")).toEqual(["clean"]);
+		});
+
+		it("grades a wikitext tiddler and a custom grammar tiddler on one scale", function() {
+			var wiki = wikiWith([
+				degraded,
+				{title: "CustomBroken", type: CUSTOM_TYPE, text: "a construct !! that fails"}
+			]);
+			expect(wiki.filterTiddlers("[all[tiddlers]parse-diagnostics:grade[]]").sort()).toEqual(["error","warning"]);
+		});
+	});
 });
