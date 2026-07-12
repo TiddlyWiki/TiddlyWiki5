@@ -231,3 +231,14 @@ describe("WikiParser block recovery", function() {
 		expect(parser.diagnostics.length).toBe(2);
 	});
 });
+
+describe("Core templates", function() {
+
+	// The external-js build renders this template to JavaScript, so a stray delimiter here emits a broken script
+	it("parses the tiddlywiki5.js build template without recovering anything", function() {
+		var text = $tw.wiki.getTiddlerText("$:/core/templates/tiddlywiki5.js");
+		expect(typeof text).toBe("string");
+		var result = new $tw.Wiki().parseText("text/vnd.tiddlywiki",text);
+		expect(result.diagnostics.length).toBe(0);
+	});
+});

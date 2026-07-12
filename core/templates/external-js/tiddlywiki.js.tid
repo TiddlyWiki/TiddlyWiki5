@@ -45,4 +45,4 @@ _load = function(window,tiddler) {
 
 /* ~~ Boot kernel ~~ */
 
-`{{ $:/boot/boot.js ||$:/core/templates/tiddlywiki.js/load-tiddler}}`
+`{{ $:/boot/boot.js ||$:/core/templates/tiddlywiki.js/load-tiddler}}
