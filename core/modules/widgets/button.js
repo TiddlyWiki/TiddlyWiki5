@@ -48,7 +48,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this.selectedClass) {
 		if((this.set || this.setTitle) && this.setTo) {
 			const selectedAria = ALLOWED_SELECTED_ARIA_ATTR.includes(this.selectedAria) ? this.selectedAria : "aria-checked";
-			if(this.isSelected()) {
+			this.lastIsSelected = this.isSelected();
+			if(this.lastIsSelected) {
 				$tw.utils.pushTop(classes, this.selectedClass.split(" "));
 				domNode.setAttribute(selectedAria, "true");
 			} else {
@@ -292,6 +293,11 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
+		// validValues results can change without any watched attribute changing, e.g. the selected tab tiddler is deleted
+		if(this.validValues && this.selectedClass && (this.set || this.setTitle) && this.setTo && this.isSelected() !== this.lastIsSelected) {
+			this.refreshSelf();
+			return true;
+		}
 		if(changedAttributes["class"]) {
 			this.updateDomNodeClasses();
 		}

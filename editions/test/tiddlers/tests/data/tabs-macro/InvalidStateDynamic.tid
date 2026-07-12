@@ -1,0 +1,39 @@
+title: TabsMacro/InvalidStateDynamic
+description: tabs macro falls back to the default tab when the currently active tab is deleted (issue #6548)
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [[$:/core/macros/tabs]]
+<<tabs "[tag[myTab]]" "TabTwo" "$:/state/tabs-test" explicitState:"$:/state/tabs-test">>
++
+title: TabOne
+caption: t 1
+tags: myTab
+
+Text tab 1
++
+title: TabTwo
+caption: t 2
+tags: myTab
+
+Text tab 2
++
+title: TabThree
+caption: t 3
+tags: myTab
+
+Text tab 3
++
+title: $:/state/tabs-test
+
+TabThree
++
+title: Actions
+
+<$action-deletetiddler $tiddler="TabThree"/>
++
+title: ExpectedResult
+
+<p><div class="tc-tab-set " role="tablist"><div class="tc-tab-buttons "><button aria-selected="false" class="" data-tab-title="TabOne" role="tab">t 1</button><button aria-selected="true" class=" tc-tab-selected" data-tab-title="TabTwo" role="tab">t 2</button></div><div class="tc-tab-divider "></div><div class="tc-tab-content " role="tabpanel"><div class="tc-reveal" hidden="true"></div><div class="tc-reveal"><p>Text tab 2</p></div></div></div></p>
