@@ -1,0 +1,13 @@
+change-category: developer
+change-type: enhancement
+created: 20260713002208000
+description: Quote blocks annotate their parse tree nodes
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/9911
+modified: 20260713002208000
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9911
+type: text/vnd.tiddlywiki
+
+Blockquote nodes produced by the `<<<` quote block rule now carry the `marker` depth and the `userClasses` list, and the synthesized cite elements carry `isQuoteCite: true`, following the `isProcedureDefinition` precedent. Consumers can reproduce nested quotes in parseable form and can distinguish user classes and cites from the fused `class` attribute and from literal `<cite>` markup. The new fields are purely additive; rendered output is unchanged.
