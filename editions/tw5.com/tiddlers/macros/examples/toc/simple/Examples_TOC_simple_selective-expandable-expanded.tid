@@ -1,5 +1,5 @@
 created: 20250924062955923
-import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/tag-selective-expandable-expanded
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/selective-expandable-expanded
 modified: 20250924105006349
 tags: $:/tags/wiki-test-spec simple
 title: Examples/TOC/simple/selective-expandable-expanded

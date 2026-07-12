@@ -1,5 +1,5 @@
 created: 20250922121811982
-import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/tag-selective-expandable-custom-icons
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/selective-expandable-icons
 modified: 20250924110134442
 tags: $:/tags/wiki-test-spec simple
 title: Examples/TOC/simple/selective-expandable-icons

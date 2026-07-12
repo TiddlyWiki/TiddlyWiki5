@@ -45,8 +45,8 @@ The `$(sort)$` text substitution is only there for backwards compatibility and s
 : Using a parent field is fundamentally different to using tags -- ''there can only be one parent''
 
 ; itemTemplate <<.from-version "5.4.0">>
-: Expects a template tiddler title. By default toc macros use the `toc-defaultItemTemplate` procedure, which is specific to toc macros
-: If <<.param itemTemplate>> is set, it uses the content of the template tiddler to display a toc node. If <<.param itemTemplate>> is used, <<.param captionField>> is set to `text`
+: Expects a template tiddler title. By default toc macros use the `toc-defaultFieldTemplate` procedure, which is specific to toc macros
+: If <<.param itemTemplate>> is set, it uses the content of the template tiddler to display a toc node and the <<.param captionField>> cascade is bypassed. If the template tiddler is missing or has no <<.field text>> field, the node falls back to the default rendering
 : ''Important:'' If the <<.field toc-itemTemplate>> field is set on a tiddler, it will take precedence over this macro parameter. See [[Table-of-Contents Macros Fields]]
 
 !! Additional Tabbed Parameters

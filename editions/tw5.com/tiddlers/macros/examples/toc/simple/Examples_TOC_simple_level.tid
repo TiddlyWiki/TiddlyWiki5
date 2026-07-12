@@ -1,5 +1,5 @@
 created: 20260402120000000
-import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/tag-level
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/level
 modified: 20260402001502844
 tags: $:/tags/wiki-test-spec simple
 title: Examples/TOC/simple/level

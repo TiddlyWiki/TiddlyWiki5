@@ -1,5 +1,5 @@
 created: 20250922121402140
-import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/tag-tabbed-internal
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/simple/tabbed-internal
 modified: 20250922125824680
 tags: $:/tags/wiki-test-spec simple
 title: Examples/TOC/simple/tabbed-internal
