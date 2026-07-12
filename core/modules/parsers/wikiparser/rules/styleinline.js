@@ -26,7 +26,8 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var reEnd = /@@/g;
+	// The run ends at its closing delimiter or at the end of its block, whichever arrives first
+	var reEnd = /@@|\r?\n\r?\n/g;
 	// Get the styles and class
 	var stylesString = this.match[1],
 		classString = this.match[2] ? this.match[2].split(".").join(" ") : undefined;
@@ -37,7 +38,7 @@ exports.parse = function() {
 	// Parse the run up to the terminator
 	var bodyStart = this.parser.pos;
 	var ex = this.parser.parseInlineRunTerminatedExtended(reEnd,{eatTerminator: true});
-	if(!ex.match) {
+	if(!ex.match || /^\r?\n/.test(ex.match[0])) {
 		// The run reached the end of the source without a closer, so the delimiter rewinds to literal text and parsing resumes after it
 		this.parser.pos = bodyStart;
 		this.parser.addDiagnostic({

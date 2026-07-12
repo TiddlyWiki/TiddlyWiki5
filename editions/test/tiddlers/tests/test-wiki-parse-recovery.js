@@ -370,12 +370,22 @@ describe("WikiParser unclosed inline delimiters stop short of the source end", f
 		return count;
 	}
 
-	// TiddlyWiki lets an emphasis run cross a blank line to reach its closer, so the guard fires only when no closer arrives
-	it("keeps an emphasis run that crosses a blank line to reach its closer", function() {
+	// A block mode element parses as one inline construct, so its own blank lines never reach the emphasis run around it
+	it("keeps an emphasis run that wraps a block mode element", function() {
 		var wiki = new $tw.Wiki(),
 			result = wiki.parseText("text/vnd.tiddlywiki","''<div>\n\nsome text\n\n</div>''");
 		expect(countStrong(result.tree)).toBe(1);
 		expect(result.diagnostics.length).toBe(0);
+	});
+
+	// An opener whose closer sits in a later block used to swallow every block in between, which wrapped 18kb of the tw5.com Alice in Wonderland tiddler in a single bold span
+	it("refuses an opener whose closer sits beyond the end of the block", function() {
+		var wiki = new $tw.Wiki(),
+			source = "''Tis so,' said the Duchess.\n\nA paragraph between.\n\n''Tis the voice of the Lobster.\n",
+			result = wiki.parseText("text/vnd.tiddlywiki",source);
+		expect(countStrong(result.tree)).toBe(0);
+		expect(result.diagnostics.length).toBe(2);
+		expect(result.diagnostics[0].code).toBe("unterminated-bold");
 	});
 });
 
