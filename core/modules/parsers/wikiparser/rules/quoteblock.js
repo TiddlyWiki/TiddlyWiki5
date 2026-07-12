@@ -21,7 +21,9 @@ exports.init = function(parser) {
 exports.parse = function() {
 	var classes = ["tc-quote"];
 	// Get all the details of the match
-	var reEndString = "^\\s*" + this.match[1] + "(?!<)";
+	// Anchor from the newline, not the line start: with "^\s*" the newline
+	// before the marker stays inside the preceding paragraph text node
+	var reEndString = "(?:^|\\r?\\n)\\s*" + this.match[1] + "(?!<)";
 	// Move past the <s
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse any classes, whitespace and then the optional cite itself

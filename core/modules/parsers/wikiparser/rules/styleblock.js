@@ -39,7 +39,9 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var reEndString = "^@@(?:\\r?\\n)?";
+	// Anchor from the newline, not the line start: with "^@@" the newline
+	// before the marker stays inside the preceding paragraph text node
+	var reEndString = "(?:^|\\r?\\n)@@(?:\\r?\\n)?";
 	var classes = [], styles = [];
 	do {
 		// Get the class and style
