@@ -1,0 +1,171 @@
+created: 20260413142327531
+modified: 20260413180029935
+tags: doc dev
+title: Wikitext EBNF
+type: text/vnd.tiddlywiki
+
+!! Wikitext EBNF Grammar
+
+This tiddler presents an EBNF-like grammar for TiddlyWiki's wikitext syntax. The grammar is derived from the parser source code in `core/modules/parsers/wikiparser/` and its `rules/` subdirectory. It is not a formal specification but a practical reference that mirrors how the parser actually works.
+
+The six companion tiddlers cover each grammar area in detail. This page provides the top-level document structure, explains the three rule types and key parsing concepts, and includes a quick-reference table of every parser rule.
+
+!! Document Structure
+
+A wikitext document is parsed in two phases. First, pragma lines at the top of the text are consumed. Then the remaining text is parsed as content.
+
+```
+Document        ::= PragmaBlock? ContentBlock
+PragmaBlock     ::= ( Pragma Newline )*
+ContentBlock    ::= ( Block | InlineRun | BlankLine )*
+InlineRun       ::= ( Inline | PlainText )+
+```
+
+The `PragmaBlock` ends as soon as the parser encounters a line that does not match any pragma rule. From that point forward only block and inline rules are tried.
+
+!! Rule Types
+
+Every parser rule declares one or more //types// that control when it is eligible to match.
+
+!!! Pragmas
+
+Pragma rules are processed first, before any content is rendered. They configure the parsing environment: defining procedures and functions (`\procedure`, `\function`, `\widget`), importing variables (`\import`), controlling whitespace handling (`\whitespace trim`), selecting parser modes (`\parsermode`), and declaring parameters (`\parameters`).
+
+Pragma lines always start at column 0. The pragma phase ends at the first non-pragma, non-blank line.
+
+Example:
+
+```
+\whitespace trim
+\procedure greeting(name)
+Hello, <<name>>!
+\end
+```
+
+!!! Block Rules
+
+Block rules match at line-start positions and produce structural elements: headings (`!`), bullet and ordered lists (`*`, `#`), tables (`|`), code blocks (triple-backtick), quote blocks (`>`/`<<<`), horizontal rules (`---`), typed blocks (`$$`), style blocks (`@@`), and block-level widgets/transclusions.
+
+Block content typically terminates at a double newline (`\n\n`), which signals the end of the current block and returns to the top-level content loop.
+
+!!! Inline Rules
+
+Inline rules match within text runs. They handle formatting (bold, italic, strikethrough, superscript, subscript, underscore), links (`[[link]]`, `[ext[url]]`, CamelCase wiki links, external URLs), inline transclusions and macro calls, images, HTML entities, code spans, hard line breaks, and inline widgets.
+
+Inline runs terminate when the parser encounters a regex pattern set by the enclosing context -- for example, a closing `''` for bold, a `|` or `\n` in a table cell, or the end-of-input.
+
+!! How the Parser Chooses Rules
+
+Several concepts are central to understanding the parser:
+
+* ''Position-based competition'' -- All eligible rules test their regex against the remaining text. The rule whose match starts closest to the current position wins. If two rules match at the same position, the first one registered wins.
+* ''Block termination at double-newline'' -- A blank line (two consecutive newlines) ends most block constructs and returns control to the top-level content loop.
+* ''Inline termination pattern'' -- Each inline-parsing context supplies a `terminatorRegExp`. The inline run ends when that pattern matches, giving control back to the enclosing block or widget.
+* ''Recursive parsing'' -- Many rules parse their body recursively. A list item, for instance, parses its content as an inline run. A `<$list>` widget parses its body as a full content block. This recursive structure means the same inline rules apply everywhere text appears.
+
+!! Child Tiddlers
+
+The grammar is split across six companion tiddlers, each covering one area:
+
+* [[EBNF - Pragmas]] -- pragma directives and their syntax
+* [[EBNF - Block Rules]] -- block-level constructs (headings, lists, tables, etc.)
+* [[EBNF - Inline Rules]] -- inline formatting, links, and text-level constructs
+* [[EBNF - Transclusion and Macros]] -- transclusion syntax, macro calls, filtered transclusions
+* [[EBNF - Widgets and Attributes]] -- widget invocation and attribute value types
+* [[EBNF - Filter Expressions]] -- filter syntax, operators, and runs
+
+!! Quick Reference: All Parser Rules
+
+The following table lists every parser rule file in `core/modules/parsers/wikiparser/rules/`.
+
+!!! Pragma Rules
+
+|!Rule |!Source File |!Description |
+|commentblock |`commentblock.js` |Block/pragma comment `<!-- ... -->` |
+|fnprocdef |`fnprocdef.js` |`\procedure`, `\function`, `\widget` definitions |
+|import |`import.js` |`\import` filter to pull in variables |
+|macrodef |`macrodef.js` |Legacy `\define` macro definition |
+|parameters |`parameters.js` |`\parameters` declaration for the current tiddler |
+|parsermode |`parsermode.js` |`\parsermode` to switch between inline/block |
+|rules |`rules.js` |`\rules` to enable/disable specific parser rules |
+|whitespace |`whitespace.js` |`\whitespace trim` / `\whitespace notrim` |
+
+!!! Block Rules
+
+|!Rule |!Source File |!Description |
+|codeblock |`codeblock.js` |Fenced code block (triple-backtick) |
+|conditional |`conditional.js` |`<%if ...%>` conditional (block and inline) |
+|filteredtranscludeblock |`filteredtranscludeblock.js` |`{{{ filter }}}` block-level filtered transclusion |
+|heading |`heading.js` |`!` through `!!!!!!` headings |
+|horizrule |`horizrule.js` |`---` horizontal rule |
+|html |`html.js` |Widget/HTML element at block level (and inline) |
+|list |`list.js` |`*`, `#`, `;`, `:` lists |
+|macrocallblock |`macrocallblock.js` |`<<macroname>>` at block level |
+|quoteblock |`quoteblock.js` |`>` and `<<<` quote blocks |
+|styleblock |`styleblock.js` |`@@` style wrapper at block level |
+|table |`table.js` |`\|` pipe-delimited tables |
+|transcludeblock |`transcludeblock.js` |`{{ }}` block-level transclusion |
+|typedblock |`typedblock.js` |`$$$` typed content block |
+
+!!! Inline Rules
+
+|!Rule |!Source File |!Description |
+|bold |`emphasis/bold.js` |`''bold''` emphasis |
+|codeinline |`codeinline.js` |Backtick inline code |
+|commentinline |`commentinline.js` |`<!-- ... -->` inline comment |
+|dash |`dash.js` |`--` en-dash, `---` em-dash |
+|entity |`entity.js` |HTML entities like `&amp;` |
+|extlink |`extlink.js` |Bare external URLs (`http://...`) |
+|filteredtranscludeinline |`filteredtranscludeinline.js` |`{{{ filter }}}` inline filtered transclusion |
+|hardlinebreaks |`hardlinebreaks.js` |`"""` hard line break mode |
+|image |`image.js` |`[img[...]]` image syntax |
+|italic |`emphasis/italic.js` |`//italic//` emphasis |
+|macrocallinline |`macrocallinline.js` |`<<macroname>>` inline macro call |
+|mvvdisplayinline |`mvvdisplayinline.js` |`((...))` / `(((...)))` variable/filter display |
+|prettyextlink |`prettyextlink.js` |`[ext[text|url]]` external link |
+|prettylink |`prettylink.js` |`[[text|target]]` wiki link |
+|strikethrough |`emphasis/strikethrough.js` |`~~strikethrough~~` emphasis |
+|styleinline |`styleinline.js` |`@@` inline style wrapper |
+|subscript |`emphasis/subscript.js` |`,,subscript,,` emphasis |
+|superscript |`emphasis/superscript.js` |`^^superscript^^` emphasis |
+|syslink |`syslink.js` |Auto-link `$:/` system tiddler titles |
+|transcludeinline |`transcludeinline.js` |`{{ }}` inline transclusion |
+|underscore |`emphasis/underscore.js` |`__underscore__` emphasis |
+|wikilink |`wikilink.js` |CamelCase automatic wiki links |
+|wikilinkprefix |`wikilinkprefix.js` |`~` prefix to suppress wiki linking |
+
+!! Shared Productions
+
+The following productions are referenced throughout the six child tiddlers. They are defined here once as a single point of reference so that the child grammars stay concise and consistent.
+
+```
+(* === Shared Terminal Productions === *)
+
+StringLiteral   ::= '"""' AnyChar* '"""'
+                  | '"' [^"]* '"'
+                  | "'" [^']* "'"
+                  | '[[' ( [^\]] | ']' [^\]] )* ']]'
+
+Classes         ::= ( '.' ClassName )*
+ClassName       ::= Letter ( Letter | Digit | '-' | '_' )*
+
+StyleDefs       ::= ( PropertyName ':' PropertyValue ';' )*
+
+(* === Shared Non-Terminal Productions === *)
+
+InlineRun       ::= ( InlineRule | PlainText )*    (* inline wikitext until terminator *)
+BlockContent    ::= ( Block | InlineRun | BlankLine )*    (* block-level wikitext until closing marker *)
+PlainText       ::= AnyChar+    (* characters not starting an inline rule *)
+
+(* === Character Classes === *)
+
+Letter          ::= [a-zA-Z]
+Digit           ::= [0-9]
+AnyChar         ::= (* any character *)
+WS              ::= [ \t]+    (* horizontal whitespace *)
+SP              ::= [ \t]+    (* alias for WS *)
+EOL             ::= '\r'? '\n' | EOF
+Newline         ::= EOL
+```
+
+`StringLiteral` covers the four quoting forms used in widget attributes and filter parameters. `Classes` appears in image syntax, transclusions, and filtered transclusions to attach CSS classes. `StyleDefs` appears in style blocks and inline styles. The non-terminal productions (`InlineRun`, `BlockContent`, `PlainText`) describe the recursive structure the parser uses when it enters a new parsing context. The character classes provide the building blocks that the terminal productions above are composed from.
