@@ -15,6 +15,8 @@ batch by batch, measuring refresh performance for each batch.
 
 "use strict";
 
+var stats = require("$:/plugins/tiddlywiki/performance/stats.js");
+
 exports.info = {
 	name: "perf-replay",
 	synchronous: false
@@ -97,10 +99,43 @@ Command.prototype.execute = function() {
 		}
 		currentBatch.events.push(event);
 	});
+	// A timeline replayed once gives one timing, which carries no way to tell a real change from the machine's drift, so it replays as many times as asked and reports the spread
+	var repeats = 1;
+	$tw.utils.each(this.params,function(param) {
+		var match = /^repeats=(\d+)$/.exec(param);
+		if(match) {
+			repeats = Math.max(1,parseInt(match[1],10));
+		}
+	});
+	// Restoring the wiki between repeats needs the state each touched tiddler started in
+	var touchedTitles = [],
+		originalTiddlers = Object.create(null);
+	$tw.utils.each(timelineData,function(event) {
+		if(touchedTitles.indexOf(event.title) === -1) {
+			touchedTitles.push(event.title);
+			originalTiddlers[event.title] = wiki.getTiddler(event.title);
+		}
+	});
+	function restoreWiki() {
+		$tw.utils.each(touchedTitles,function(title) {
+			if(originalTiddlers[title]) {
+				wiki.addTiddler(originalTiddlers[title]);
+			} else {
+				wiki.deleteTiddler(title);
+			}
+		});
+		var restored = Object.create(null);
+		$tw.utils.each(touchedTitles,function(title) {
+			restored[title] = {modified: true};
+		});
+		pageWidgetNode.refresh(restored);
+	}
 	// Replay each batch and measure refresh
 	var results = [],
 		totalRefreshTime = 0,
-		totalFilterInvocations = 0;
+		totalFilterInvocations = 0,
+		repeatTotals = [],
+		batchSamples = [];
 	self.commander.streams.output.write("\nPerformance Timeline Replay\n");
 	self.commander.streams.output.write("==========================\n");
 	self.commander.streams.output.write("Wiki: " + tiddlerCount + " tiddlers\n");
@@ -110,48 +145,64 @@ Command.prototype.execute = function() {
 		padRight("Refresh(ms)",14) + padRight("Filters",10) + "Tiddlers Changed\n");
 	self.commander.streams.output.write(padRight("-----",8) + padRight("---",6) + padRight("-------",10) +
 		padRight("-----------",14) + padRight("-------",10) + "----------------\n");
-	$tw.utils.each(batches,function(batch,index) {
+	for(var repeat = 0; repeat < repeats; repeat++) {
+		var isFinalRepeat = repeat === repeats - 1,
+			repeatTotal = 0;
+		if(repeat > 0) {
+			restoreWiki();
+			results = [];
+			totalRefreshTime = 0;
+			totalFilterInvocations = 0;
+		}
+		$tw.utils.each(batches,function(batch,index) {
 		// Apply all operations in this batch directly (bypassing the intercepted addTiddler
 		// to avoid re-recording)
-		var changedTiddlers = Object.create(null);
-		$tw.utils.each(batch.events,function(event) {
-			if(event.op === "add") {
-				wiki.addTiddler(new $tw.Tiddler(event.fields));
-				changedTiddlers[event.title] = {modified: true};
-			} else if(event.op === "delete") {
-				wiki.deleteTiddler(event.title);
-				changedTiddlers[event.title] = {deleted: true};
+			var changedTiddlers = Object.create(null);
+			$tw.utils.each(batch.events,function(event) {
+				if(event.op === "add") {
+					wiki.addTiddler(new $tw.Tiddler(event.fields));
+					changedTiddlers[event.title] = {modified: true};
+				} else if(event.op === "delete") {
+					wiki.deleteTiddler(event.title);
+					changedTiddlers[event.title] = {deleted: true};
+				}
+			});
+			// Measure refresh
+			filterInvocations = 0;
+			var refreshStart = $tw.utils.timer();
+			pageWidgetNode.refresh(changedTiddlers);
+			var refreshTime = $tw.utils.timer(refreshStart);
+			totalRefreshTime += refreshTime;
+			totalFilterInvocations += filterInvocations;
+			repeatTotal += refreshTime;
+			batchSamples[index] = batchSamples[index] || [];
+			batchSamples[index].push(refreshTime);
+			var changedTitles = Object.keys(changedTiddlers);
+			var titlesDisplay = changedTitles.slice(0,3).join(", ");
+			if(changedTitles.length > 3) {
+				titlesDisplay += " (+" + (changedTitles.length - 3) + " more)";
+			}
+			results.push({
+				batch: index + 1,
+				ops: batch.events.length,
+				changed: changedTitles.length,
+				refreshMs: refreshTime,
+				filters: filterInvocations,
+				tiddlers: changedTitles
+			});
+			if(isFinalRepeat) {
+				self.commander.streams.output.write(
+					padRight(String(index + 1),8) +
+				padRight(String(batch.events.length),6) +
+				padRight(String(changedTitles.length),10) +
+				padRight(refreshTime.toFixed(2),14) +
+				padRight(String(filterInvocations),10) +
+				titlesDisplay + "\n"
+				);
 			}
 		});
-		// Measure refresh
-		filterInvocations = 0;
-		var refreshStart = $tw.utils.timer();
-		pageWidgetNode.refresh(changedTiddlers);
-		var refreshTime = $tw.utils.timer(refreshStart);
-		totalRefreshTime += refreshTime;
-		totalFilterInvocations += filterInvocations;
-		var changedTitles = Object.keys(changedTiddlers);
-		var titlesDisplay = changedTitles.slice(0,3).join(", ");
-		if(changedTitles.length > 3) {
-			titlesDisplay += " (+" + (changedTitles.length - 3) + " more)";
-		}
-		results.push({
-			batch: index + 1,
-			ops: batch.events.length,
-			changed: changedTitles.length,
-			refreshMs: refreshTime,
-			filters: filterInvocations,
-			tiddlers: changedTitles
-		});
-		self.commander.streams.output.write(
-			padRight(String(index + 1),8) +
-			padRight(String(batch.events.length),6) +
-			padRight(String(changedTitles.length),10) +
-			padRight(refreshTime.toFixed(2),14) +
-			padRight(String(filterInvocations),10) +
-			titlesDisplay + "\n"
-		);
-	});
+		repeatTotals.push(repeatTotal);
+	}
 	// Summary statistics
 	var refreshTimes = results.map(function(r) { return r.refreshMs; }).sort(function(a,b) { return a - b; });
 	var p50 = percentile(refreshTimes,50);
@@ -169,6 +220,24 @@ Command.prototype.execute = function() {
 	self.commander.streams.output.write("P99 refresh:         " + p99.toFixed(2) + "ms\n");
 	self.commander.streams.output.write("Max refresh:         " + maxRefresh.toFixed(2) + "ms\n");
 	self.commander.streams.output.write("Total filters run:   " + totalFilterInvocations + "\n");
+	// Report what this run can resolve, so a later comparison cannot claim more than the measurement supports
+	var totalsSummary = stats.summarise(repeatTotals);
+	self.commander.streams.output.write("\nReliability\n");
+	self.commander.streams.output.write("-----------\n");
+	self.commander.streams.output.write("Repeats:             " + repeats + "\n");
+	if(repeats < 2) {
+		self.commander.streams.output.write("Spread:              unknown, since one repeat cannot report its own reliability\n");
+		self.commander.streams.output.write("  Pass repeats=5 or more to learn the smallest difference this timeline can resolve.\n");
+	} else {
+		self.commander.streams.output.write("Median total:        " + totalsSummary.median.toFixed(2) + "ms\n");
+		self.commander.streams.output.write("Spread (CV):         " + totalsSummary.cvPct.toFixed(1) + "%\n");
+		self.commander.streams.output.write("Resolvable effect:   " + (totalsSummary.resolvableEffectPct === Infinity ? "unknown" : "±" + totalsSummary.resolvableEffectPct.toFixed(1) + "%") + "\n");
+		if(totalsSummary.trust === "noisy") {
+			self.commander.streams.output.write("  ⚠ NOISY: this timeline cannot resolve a small change. Raise repeats, or quiet the machine.\n");
+		}
+	}
+	self.commander.streams.output.write("\nA run compared against a run reports the machine as often as the code. To compare two versions,\n");
+	self.commander.streams.output.write("acquire them alternately in one session and read them with --perf-compare, which cancels the drift they share.\n");
 	// Output filter breakdown
 	self.commander.streams.output.write("\nTop Filter Execution Times\n");
 	self.commander.streams.output.write("--------------------------\n");
@@ -189,9 +258,14 @@ Command.prototype.execute = function() {
 	var jsonResultPath = timelinePath.replace(/\.json$/,"") + "-results.json";
 	try {
 		fs.writeFileSync(jsonResultPath,JSON.stringify({
+			timestamp: new Date().toISOString(),
 			wiki: {tiddlerCount: tiddlerCount},
 			timeline: {operations: timelineData.length, batches: batches.length},
 			initialRender: renderTime,
+			repeats: repeats,
+			repeatTotals: repeatTotals,
+			reliability: totalsSummary,
+			batchSamples: batchSamples,
 			summary: {
 				totalRefreshTime: totalRefreshTime,
 				meanRefresh: meanRefresh,
