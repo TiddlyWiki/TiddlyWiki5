@@ -51,7 +51,7 @@ exports.parse = function() {
 			code: "unterminated-strikethrough",
 			message: "Unmatched strikethrough delimiter rendered as literal text"
 		});
-		return [{type: "text", text: "~~"}];
+		return [{type: "text", text: "~~", start: delimiterStart, end: bodyStart, isRecovered: true}];
 	}
 	var tree = ex.tree;
 

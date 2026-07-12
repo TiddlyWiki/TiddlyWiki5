@@ -51,7 +51,7 @@ exports.parse = function() {
 			code: "unterminated-underscore",
 			message: "Unmatched underscore delimiter rendered as literal text"
 		});
-		return [{type: "text", text: "__"}];
+		return [{type: "text", text: "__", start: delimiterStart, end: bodyStart, isRecovered: true}];
 	}
 	var tree = ex.tree;
 

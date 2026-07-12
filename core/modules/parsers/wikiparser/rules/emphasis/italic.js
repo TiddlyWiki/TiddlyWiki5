@@ -51,7 +51,7 @@ exports.parse = function() {
 			code: "unterminated-italic",
 			message: "Unmatched italic delimiter rendered as literal text"
 		});
-		return [{type: "text", text: "//"}];
+		return [{type: "text", text: "//", start: delimiterStart, end: bodyStart, isRecovered: true}];
 	}
 	var tree = ex.tree;
 

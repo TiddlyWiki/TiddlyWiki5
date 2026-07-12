@@ -48,7 +48,7 @@ exports.parse = function() {
 			code: "unterminated-codeinline",
 			message: "Unmatched inline code delimiter rendered as literal text"
 		});
-		return [{type: "text", text: this.match[1], start: delimiterStart, end: start}];
+		return [{type: "text", text: this.match[1], start: delimiterStart, end: start, isRecovered: true}];
 	}
 	return [{
 		type: "element",

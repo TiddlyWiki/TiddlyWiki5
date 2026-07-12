@@ -51,7 +51,7 @@ exports.parse = function() {
 			code: "unterminated-subscript",
 			message: "Unmatched subscript delimiter rendered as literal text"
 		});
-		return [{type: "text", text: ",,"}];
+		return [{type: "text", text: ",,", start: delimiterStart, end: bodyStart, isRecovered: true}];
 	}
 	var tree = ex.tree;
 

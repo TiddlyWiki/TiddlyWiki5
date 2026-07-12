@@ -20,8 +20,11 @@ exports.init = function(parser) {
 
 exports.parse = function() {
 	var classes = ["tc-quote"];
+	// Parsing the cite runs other rules against this rule instance, so the match details get read before that happens
+	var quoteStart = this.match.index,
+		quoteMarker = this.match[1];
 	// Get all the details of the match
-	var reEndString = "^\\s*" + this.match[1] + "(?!<)";
+	var reEndString = "^\\s*" + quoteMarker + "(?!<)";
 	// Move past the <s
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse any classes, whitespace and then the optional cite itself
@@ -35,11 +38,11 @@ exports.parse = function() {
 	// A missing closer quietly wraps the rest of the tiddler in the quote, so it leaves a receipt
 	if(!this.parser.hasCloser(new RegExp(reEndString,"mg"))) {
 		this.parser.addDiagnostic({
-			from: this.match.index,
+			from: quoteStart,
 			to: this.parser.pos,
 			severity: "warning",
 			code: "unterminated-quoteblock",
-			message: "Missing closing " + this.match[1] + " for the quote block, so it runs to the end of the tiddler"
+			message: "Missing closing " + quoteMarker + " for the quote block, so it runs to the end of the tiddler"
 		});
 	}
 	// before handling the cite, parse the body of the quote

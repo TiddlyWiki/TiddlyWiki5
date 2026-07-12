@@ -48,7 +48,7 @@ exports.parse = function() {
 			code: "unterminated-styleinline",
 			message: "Unmatched inline style delimiter rendered as literal text"
 		});
-		return [{type: "text", text: delimiterText}];
+		return [{type: "text", text: delimiterText, start: delimiterStart, end: bodyStart, isRecovered: true}];
 	}
 	var tree = ex.tree;
 	// Return the classed span

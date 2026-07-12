@@ -278,8 +278,11 @@ WikiParser.prototype.recoverBlock = function(start,error,ruleName) {
 	boundaryRegExp.lastIndex = start;
 	var boundaryMatch = boundaryRegExp.exec(this.source),
 		end = boundaryMatch ? boundaryMatch.index + boundaryMatch[0].length : this.sourceLength;
-	// Always make forward progress
+	// A recovery that consumed nothing would spin the parser forever, so the position always advances
 	this.pos = Math.min(Math.max(end,start + 1),this.sourceLength);
+	if(this.pos <= start && start < this.sourceLength) {
+		throw new Error("WikiParser.recoverBlock failed to advance the parse position at " + start);
+	}
 	// Record a diagnostic for the degraded block
 	var diagnostic = error.diagnostic || {};
 	this.addDiagnostic({
@@ -290,7 +293,8 @@ WikiParser.prototype.recoverBlock = function(start,error,ruleName) {
 		code: diagnostic.code,
 		message: diagnostic.message || "Unable to parse block"
 	});
-	return [{type: "text", text: this.source.substring(start,this.pos), start: start, end: this.pos, rule: ruleName}];
+	// The node carries the source it recovered and marks itself, so a consumer finds the damage in the tree rather than only in the diagnostics
+	return [{type: "text", text: this.source.substring(start,this.pos), start: start, end: this.pos, rule: ruleName, isRecovered: true}];
 };
 
 /*
