@@ -93,7 +93,7 @@ ClassicStoryView.prototype.remove = function(widget) {
 		setTimeout(removeElement,duration);
 		// Animate the closure
 		$tw.utils.setStyle(targetElement,[
-			{marginBottom:  currMarginBottom + "px"},
+			{marginBottom:  currMarginBottom + "px"}
 		]);
 		$tw.utils.removeStyles(targetElement, ["transition", "transform", "opacity"]);
 		$tw.utils.forceLayout(targetElement);

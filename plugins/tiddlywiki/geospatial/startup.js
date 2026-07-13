@@ -22,7 +22,7 @@ exports.startup = function() {
 	if($tw.browser) {
 		$tw.Leaflet = require("$:/plugins/tiddlywiki/geospatial/leaflet.js");
 		// Add Leaflet Marker Cluster Plugin
-		require("$:/plugins/tiddlywiki/geospatial/leaflet.markercluster.js");	
+		require("$:/plugins/tiddlywiki/geospatial/leaflet.markercluster.js");
 	}
 	// Install geolocation message handler
 	$tw.rootWidget.addEventListener("tm-request-geolocation",function(event) {
@@ -60,13 +60,13 @@ exports.startup = function() {
 			},function errorHandler(err) {
 				// Invoke the error actions
 				wiki.invokeActionString(actionsError,undefined,{
-					"error": "" + err.message
+					error: "" + err.message
 				},{parentWidget: $tw.rootWidget});
 			},opts);
 		} catch(ex) {
 			// Invoke the error actions
 			wiki.invokeActionString(actionsError,undefined,{
-				"error": "" + ex
+				error: "" + ex
 			},{parentWidget: $tw.rootWidget});
 		}
 	});

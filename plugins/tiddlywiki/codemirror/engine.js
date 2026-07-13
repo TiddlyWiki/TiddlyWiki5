@@ -11,7 +11,7 @@ Text editor engine based on a CodeMirror instance
 
 var HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height",
 	CONFIG_FILTER = "[all[shadows+tiddlers]prefix[$:/config/codemirror/]]";
-	
+
 // Install CodeMirror
 if($tw.browser && !window.CodeMirror) {
 
@@ -95,7 +95,7 @@ function CodeMirrorEngine(options) {
 	this.domNode.style.display = "inline-block";
 	this.parentNode.insertBefore(this.domNode,this.nextSibling);
 	this.widget.domNodes.push(this.domNode);
-	
+
 	// Set all cm-plugin defaults
 	// Get the configuration options for the CodeMirror object
 	var config = getCmConfig();
@@ -139,8 +139,11 @@ function CodeMirrorEngine(options) {
 
 				let x, y, space = display.lineSpace.getBoundingClientRect();
 				// Fails unpredictably on IE[67] when mouse is dragged around quickly.
-				try { x = e.clientX - space.left; y = e.clientY - space.top; }
-				catch (e) { return null; }
+				try {
+					x = e.clientX - space.left; y = e.clientY - space.top;
+				} catch (e) {
+					return null;
+				}
 				let coords = cm.coordsChar(cm, x, y), line;
 				if(forRect && coords.xRel > 0 && (line = cm.getLine(cm.doc, coords.line).text).length == coords.ch) {
 					let colDiff = window.CodeMirror.countColumn(line, line.length, cm.options.tabSize) - line.length;
@@ -157,7 +160,9 @@ function CodeMirrorEngine(options) {
 			if(cm.state.draggingText && cm.doc.sel.contains(pos) > -1) {
 				cm.state.draggingText(event);
 				// Ensure the editor is re-focused
-				setTimeout(function() {cm.display.input.focus();}, 20); 
+				setTimeout(function() {
+					cm.display.input.focus();
+				}, 20);
 				return;
 			}
 			try {
@@ -176,8 +181,7 @@ function CodeMirrorEngine(options) {
 					cm.replaceSelection(text, "around", "paste");
 					cm.display.input.focus();
 				}
-			}
-			catch(e){}
+			} catch(e){}
 		}
 		return false;
 	});
@@ -185,12 +189,12 @@ function CodeMirrorEngine(options) {
 		if($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
 			return true;
 		}
-	
+
 		return self.widget.handleKeydownEvent.call(self.widget,event);
 	});
 	this.cm.on("focus",function(cm,event) {
 		if(self.widget.editCancelPopups) {
-			$tw.popup.cancel(0);	
+			$tw.popup.cancel(0);
 		}
 	});
 	// Add drag and drop event listeners if fileDrop is enabled
@@ -224,7 +228,7 @@ function CodeMirrorEngine(options) {
 			event["twEditor"] = true;
 		});
 	}
-	;
+
 }
 
 /*

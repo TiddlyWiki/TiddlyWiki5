@@ -3,7 +3,7 @@ title: $:/core/modules/info/mediaquerytracker.js
 type: application/javascript
 module-type: info
 
-Initialise $:/info/ tiddlers derived from media queries via 
+Initialise $:/info/ tiddlers derived from media queries via
 
 \*/
 
@@ -30,7 +30,7 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 							tiddlers.push({title: infoTiddlerAlt, text: value});
 						}
 						return tiddlers;
-					};
+					}
 					updateInfoTiddlersCallback(getResultTiddlers());
 					result.handler = function(event) {
 						updateInfoTiddlersCallback(getResultTiddlers());

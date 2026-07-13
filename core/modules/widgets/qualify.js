@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/qualify.js
 type: application/javascript
 module-type: widget
 
-Qualify text to a variable 
+Qualify text to a variable
 
 \*/
 

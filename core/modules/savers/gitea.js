@@ -26,9 +26,9 @@ GiteaSaver.prototype.save = function(text,method,callback) {
 		branch = this.wiki.getTiddlerText("$:/Gitea/Branch") || "master",
 		endpoint = this.wiki.getTiddlerText("$:/Gitea/ServerURL") || "https://gitea",
 		headers = {
-			"Accept": "application/json",
+			Accept: "application/json",
 			"Content-Type": "application/json;charset=UTF-8",
-			"Authorization": "token " + password
+			Authorization: "token " + password
 		};
 	// Bail if we don't have everything we need
 	if(!username || !password || !repo || !filename) {

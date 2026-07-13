@@ -128,8 +128,12 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this.dragTiddler || this.dragFilter) {
 		$tw.utils.makeDraggable({
 			domNode: domNode,
-			dragTiddlerFn: function() {return self.dragTiddler;},
-			dragFilterFn: function() {return self.dragFilter;},
+			dragTiddlerFn: function() {
+				return self.dragTiddler;
+			},
+			dragFilterFn: function() {
+				return self.dragFilter;
+			},
 			widget: this
 		});
 	}
@@ -170,7 +174,7 @@ ButtonWidget.prototype.navigateTo = function(event) {
 		navigateTo: this.to,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,
-		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
+		navigateFromClientRect: {top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
 		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1),
 		event: event

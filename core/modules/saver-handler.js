@@ -160,7 +160,7 @@ SaverHandler.prototype.saveWiki = function(options) {
 		return false;
 	}
 	var	variables = options.variables || {},
-		template = (options.template || 
+		template = (options.template ||
 		           wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain",
 		text = wiki.renderTiddler(downloadType,template,options),

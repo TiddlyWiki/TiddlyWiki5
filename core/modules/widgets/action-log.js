@@ -1,4 +1,4 @@
- 
+
 /*\
 title: $:/core/modules/widgets/action-log.js
 type: application/javascript

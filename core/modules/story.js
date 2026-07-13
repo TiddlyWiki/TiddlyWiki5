@@ -20,7 +20,7 @@ function Story(options) {
 	this.wiki = options.wiki || $tw.wiki;
 	this.storyTitle = options.storyTitle || "$:/StoryList";
 	this.historyTitle = options.historyTitle || "$:/HistoryList";
-};
+}
 
 Story.prototype.navigateTiddler = function(navigateTo,navigateFromTitle,navigateFromClientRect) {
 	this.addToStory(navigateTo,navigateFromTitle);

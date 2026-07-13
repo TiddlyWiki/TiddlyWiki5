@@ -60,7 +60,7 @@ KeyboardWidget.prototype.handleChangeEvent = function(event) {
 			var variables = {
 				"event-key": event.key,
 				"event-code": event.code,
-				"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event)
+				modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event)
 			};
 			if(keyInfo.keyDescriptor) {
 				variables["event-key-descriptor"] = keyInfo.keyDescriptor;
@@ -100,7 +100,7 @@ KeyboardWidget.prototype.execute = function() {
 			$tw.utils.each($tw.keyboardManager.lookupNames,function(platformDescriptor) {
 				self.shortcutTiddlers.push("$:/config/" + platformDescriptor + "/" + name);
 			});
-		}	
+		}
 	}
 	// Make child widgets
 	this.makeChildWidgets();

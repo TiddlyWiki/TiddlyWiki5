@@ -56,7 +56,7 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 			break;
 	}
 	// Create the elements
-	var domContainer = this.document.createElement("div"), 
+	var domContainer = this.document.createElement("div"),
 		domDiff = this.createDiffDom(diffs);
 	parent.insertBefore(domContainer,nextSibling);
 	// Save our container

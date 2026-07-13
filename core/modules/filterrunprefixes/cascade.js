@@ -23,7 +23,7 @@ exports.cascade = function(operationSubFunction,options) {
 						filterFnList[index] = options.wiki.compileFilter(filter);
 					}
 					var output = filterFnList[index](options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
-						"currentTiddler": "" + title,
+						currentTiddler: "" + title,
 						"..currentTiddler": widget.getVariable("currentTiddler",{defaultValue:""})
 					}));
 					if(output.length !== 0) {

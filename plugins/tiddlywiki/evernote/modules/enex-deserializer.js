@@ -132,7 +132,6 @@ function fixAttachmentReference(contentNode, md5Hash, mimeType, name) {
 	}
 }
 
-
 function fixAttachmentReference(contentNode, md5Hash, mimeType, name) {
 	if(!contentNode) return;
 	var mediaNode = contentNode.querySelector('en-media[hash="' + md5Hash + '"]');

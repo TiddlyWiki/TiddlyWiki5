@@ -34,8 +34,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 		if(!url || url.toString().trim() === "") {
 			return false;
 		}
-	}
-	else {
+	} else {
 		// Require username and password to be present.
 		// Assume the server uses the standard UploadPlugin username/password.
 		if(!username || username.toString().trim() === "" || !password || password.toString().trim() === "") {
@@ -50,7 +49,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	var boundary = "---------------------------" + "AaB03x";
 	var head = [];
 	head.push("--" + boundary + "\r\nContent-disposition: form-data; name=\"UploadPlugin\"\r\n");
-	head.push("backupDir=" + backupDir + ";user=" + username + ";password=" + password + ";uploaddir=" + uploadDir + ";;"); 
+	head.push("backupDir=" + backupDir + ";user=" + username + ";password=" + password + ";uploaddir=" + uploadDir + ";;");
 	head.push("\r\n" + "--" + boundary);
 	head.push("Content-disposition: form-data; name=\"userfile\"; filename=\"" + uploadFilename + "\"");
 	head.push("Content-Type: text/html;charset=UTF-8");

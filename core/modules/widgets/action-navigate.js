@@ -65,7 +65,7 @@ NavigateWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		navigateTo: this.actionTo === undefined ? this.getVariable("currentTiddler") : this.actionTo,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: triggeringWidget,
-		navigateFromClientRect: bounds && { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
+		navigateFromClientRect: bounds && {top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
 		navigateFromClientTop: bounds && bounds.top,
 		navigateFromClientLeft: bounds && bounds.left,

@@ -129,7 +129,7 @@ var processRow = function(prevColumns) {
 };
 
 exports.parse = function() {
-	var rowContainerTypes = {"c":"caption", "h":"thead", "":"tbody", "f":"tfoot"},
+	var rowContainerTypes = {c:"caption", h:"thead", "":"tbody", f:"tfoot"},
 		table = {type: "element", tag: "table", children: []},
 		rowRegExp = /^\|([^\n]*)\|([fhck]?)\r?(?:\n|$)/mg,
 		rowTermRegExp = /(\|(?:[fhck]?)\r?(?:\n|$))/mg,

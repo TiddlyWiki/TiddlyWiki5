@@ -78,7 +78,7 @@ BrowserStorageUtil.prototype.saveTiddlerToLocalStorage = function(title) {
 		// In local storage, use the special value of empty string to mark the tiddler as deleted
 		// On future page loads, if the tiddler is already gone from startup then the blank entry
 		// will be removed from localstorage. Otherwise, the tiddler will be deleted.
-		console.log("browser-storage: Blanking",title); 
+		console.log("browser-storage: Blanking",title);
 		try {
 			window.localStorage.setItem(this.options.prefix + title, "");
 		} catch(e) {

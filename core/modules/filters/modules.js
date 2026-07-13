@@ -19,7 +19,7 @@ exports.modules = function(source,operator,options) {
 		source(function(tiddler,title) {
 			$tw.utils.each($tw.modules.types[title],function(moduleInfo,moduleName) {
 				if(require(moduleName)[operator.operands[0]] === operator.operands[1]) {
-					results.push(moduleName);					
+					results.push(moduleName);
 				}
 			});
 		});

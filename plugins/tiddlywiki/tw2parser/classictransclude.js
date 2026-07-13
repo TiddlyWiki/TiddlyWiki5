@@ -20,7 +20,7 @@ function getsectionname(title) {
 	}
 	return "";
 }
-function getslicename(title) { 
+function getslicename(title) {
 	if(!title)
 		return "";
 	var pos = title.indexOf(sliceSeparator);
@@ -28,7 +28,7 @@ function getslicename(title) {
 		return title.substr(pos + sliceSeparator.length);
 	}
 	return "";
-};
+}
 function gettiddlername(title) {
 	if(!title)
 		return "";
@@ -89,10 +89,10 @@ TranscludeWidget.prototype.execute = function() {
 	if(existingTiddler && !existingTiddler.hasField("type")) {
 		this.makeChildWidgets([{type: "text", text: "Tiddler not of type 'text/x-tiddlywiki'"}]);
 		return;
-	}		
+	}
 	// Set context variables for recursion detection
 	this.setVariable("transclusion",recursionMarker);
-	// Parse 
+	// Parse
 	var text = this.wiki.getTiddlerText(this.transcludeTitle);
 	if(!!this.section||!!this.slice) {
 		text =this.refineTiddlerText(text, this.section, this.slice);
@@ -128,8 +128,7 @@ TranscludeWidget.prototype.makeRecursionMarker = function() {
 
 TranscludeWidget.prototype.slicesRE = /(?:^([\'\/]{0,2})~?([\.\w]+)\:\1[\t\x20]*([^\n]*)[\t\x20]*$)|(?:^\|([\'\/]{0,2})~?([\.\w]+)\:?\4\|[\t\x20]*([^\|\n]*)[\t\x20]*\|$)/gm;
 
-TranscludeWidget.prototype.calcAllSlices = function(text)
-{
+TranscludeWidget.prototype.calcAllSlices = function(text) {
 	var slices = {};
 	this.slicesRE.lastIndex = 0;
 	var m = this.slicesRE.exec(text);
@@ -144,13 +143,11 @@ TranscludeWidget.prototype.calcAllSlices = function(text)
 };
 
 // Returns the slice of text of the given name
-TranscludeWidget.prototype.getTextSlice = function(text,sliceName)
-{
+TranscludeWidget.prototype.getTextSlice = function(text,sliceName) {
 	return (this.calcAllSlices(text))[sliceName];
 };
 
-TranscludeWidget.prototype.refineTiddlerText = function(text,section,slice)
-{
+TranscludeWidget.prototype.refineTiddlerText = function(text,section,slice) {
 	if(slice) {
 		var textslice = this.getTextSlice(text,slice);
 		if(textslice)
@@ -182,7 +179,7 @@ TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);		
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 

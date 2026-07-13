@@ -478,7 +478,7 @@ exports.parseMacroInvocation = function(source,pos) {
 exports.parseFilterVariable = function(source) {
 	var node = {
 			name: "",
-			params: [],
+			params: []
 		},
 		pos = 0,
 		reName = /([^\s"']+)/y;

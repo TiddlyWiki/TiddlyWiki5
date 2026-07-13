@@ -12,8 +12,8 @@ Wiki text inline rule for LaTeX. For example:
 This wikiparser can be modified using the rules eg:
 
 ```
-\rules except latex-parser 
-\rules only latex-parser 
+\rules except latex-parser
+\rules only latex-parser
 ```
 
 \*/

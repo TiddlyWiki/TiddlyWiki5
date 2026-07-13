@@ -29,8 +29,8 @@ var remarkableOpts = {
 	typographer: parseAsBoolean("$:/config/markdown/typographer")
 };
 var accumulatingTypes = {
-	"text": true,
-	"softbreak": true
+	text: true,
+	softbreak: true
 };
 // If rendering WikiText, we treat katex nodes as text.
 if(pluginOpts.renderWikiText) {
@@ -131,12 +131,12 @@ function convertNodes(remarkableTree, isStartOfInline) {
 					if(currentNode.href[0] !== "#") {
 					// External link
 						var attributes = {
-							class: { type: "string", value: "tc-tiddlylink-external" },
-							href: { type: "string", value: currentNode.href },
-							rel: { type: "string", value: "noopener noreferrer" }
+							class: {type: "string", value: "tc-tiddlylink-external"},
+							href: {type: "string", value: currentNode.href},
+							rel: {type: "string", value: "noopener noreferrer"}
 						};
 						if(pluginOpts.linkNewWindow) {
-							attributes.target = { type: "string", value: "_blank" };
+							attributes.target = {type: "string", value: "_blank"};
 						}
 						out.push({
 							type: "element",
@@ -149,7 +149,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 						out.push({
 							type: "link",
 							attributes: {
-								to: { type: "string", value: $tw.utils.decodeURISafe(currentNode.href.substr(1)) }
+								to: {type: "string", value: $tw.utils.decodeURISafe(currentNode.href.substr(1))}
 							},
 							children: children
 						});
@@ -161,7 +161,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				out.push({
 					type: "element",
 					tag: currentNode.block ? "pre" : "code",
-					children: [{ type: "text", text: currentNode.content }]
+					children: [{type: "text", text: currentNode.content}]
 				});
 				break;
 
@@ -169,8 +169,8 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				out.push({
 					type: "codeblock",
 					attributes: {
-						language: { type: "string", value: currentNode.params },
-						code: { type: "string", value: currentNode.content }
+						language: {type: "string", value: currentNode.params},
+						code: {type: "string", value: currentNode.content}
 					}
 				});
 				break;
@@ -179,8 +179,8 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				out.push({
 					type: "image",
 					attributes: {
-						tooltip: { type: "string", value: currentNode.alt },
-						source: { type: "string", value: $tw.utils.decodeURIComponentSafe(currentNode.src) }
+						tooltip: {type: "string", value: currentNode.alt},
+						source: {type: "string", value: $tw.utils.decodeURIComponentSafe(currentNode.src)}
 					}
 				});
 				break;
@@ -189,7 +189,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				if(remarkableOpts.breaks) {
 					out.push({
 						type: "element",
-						tag: "br",
+						tag: "br"
 					});
 				} else {
 					accumulatedText = accumulatedText + "\n";
@@ -199,7 +199,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			case "hardbreak":
 				out.push({
 					type: "element",
-					tag: "br",
+					tag: "br"
 				});
 				break;
 
@@ -209,7 +209,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				i = withChildren(i, currentNode.level, elementTag + "_close", remarkableTree, function(children) {
 					var attributes = {};
 					if(currentNode.align) {
-						attributes.style = { type: "string", value: "text-align:" + currentNode.align };
+						attributes.style = {type: "string", value: "text-align:" + currentNode.align};
 					}
 					out.push({
 						type: "element",
@@ -223,7 +223,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			case "hr":
 				out.push({
 					type: "element",
-					tag: "hr",
+					tag: "hr"
 				});
 				break;
 
@@ -246,8 +246,8 @@ function convertNodes(remarkableTree, isStartOfInline) {
 					out.push({
 						type: "latex",
 						attributes: {
-							text: { type: "text", value: currentNode.content },
-							displayMode: { type: "text", value: currentNode.block ? "true" : "false" }
+							text: {type: "text", value: currentNode.content},
+							displayMode: {type: "text", value: currentNode.block ? "true" : "false"}
 						}
 					});
 				}

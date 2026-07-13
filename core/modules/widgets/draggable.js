@@ -62,8 +62,12 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	if(this.dragEnable) {
 		$tw.utils.makeDraggable({
 			domNode: domNode,
-			dragTiddlerFn: function() {return self.getAttribute("tiddler");},
-			dragFilterFn: function() {return self.getAttribute("filter");},
+			dragTiddlerFn: function() {
+				return self.getAttribute("tiddler");
+			},
+			dragFilterFn: function() {
+				return self.getAttribute("filter");
+			},
 			startActions: self.startActions,
 			endActions: self.endActions,
 			dragImageType: self.dragImageType,
@@ -88,7 +92,6 @@ DraggableWidget.prototype.execute = function() {
 	// Make the child widgets
 	this.makeChildWidgets();
 };
-
 
 DraggableWidget.prototype.updateDomNodeClasses = function() {
 	var domNodeClasses = this.domNodes[0].className.split(" "),

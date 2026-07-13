@@ -218,7 +218,7 @@ Command.prototype.subCommands["s3-savetiddlers"] = function() {
 					type = tiddler.fields.type || "text/vnd.tiddlywiki",
 					filename = wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0],
 					saveType = wiki.filterTiddlers(saveTypeFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0];
-				awsUtils.putFile(region,bucket,filename,text,saveType || type,callback);				
+				awsUtils.putFile(region,bucket,filename,text,saveType || type,callback);
 			} else {
 				process.nextTick(callback,null);
 			}

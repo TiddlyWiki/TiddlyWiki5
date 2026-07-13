@@ -327,7 +327,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			event.preventDefault();
 			event.stopPropagation();
 			this.dispatchDOMEvent(this.cloneEvent(event,["dataTransfer"]));
-		} 
+		}
 	};
 
 	EditTextWidget.prototype.handlePasteEvent = function(event) {

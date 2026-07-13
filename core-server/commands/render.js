@@ -8,18 +8,18 @@ Render individual tiddlers and save the results to the specified files
 \*/
 
 "use strict";
-	
+
 exports.info = {
 	name: "render",
 	synchronous: true
 };
-	
+
 var Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
 };
-	
+
 Command.prototype.execute = function() {
 	if(this.params.length < 1) {
 		return "Missing tiddler filter";
@@ -59,5 +59,5 @@ Command.prototype.execute = function() {
 	});
 	return null;
 };
-	
+
 exports.Command = Command;

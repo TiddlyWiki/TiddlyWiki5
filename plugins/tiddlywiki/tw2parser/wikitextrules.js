@@ -84,7 +84,7 @@ var applyCssHelper = function(e,styles) {
 			$tw.utils.addStyleToParseTreeNode(e,$tw.utils.roundTripPropertyName(styles[t].style),styles[t].value);
 		}
 	}
-	
+
 };
 
 var enclosedTextHelper = function(w) {
@@ -121,7 +121,6 @@ var insertMacroCall = function(w,output,macroName,paramString) {
 	});
 };
 
-
 var isLinkExternal = function(to) {
 	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|obsidian|data|skype):[^\s'"]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
@@ -134,12 +133,11 @@ var rules = [
 		rowTermRegExp: /(\|(?:[fhck]?)$\n?)/mg,
 		cellRegExp: /(?:\|([^\n\|]*)\|)|(\|[fhck]?$\n?)/mg,
 		cellTermRegExp: /((?:\x20*)\|)/mg,
-		rowTypes: {"c":"caption", "h":"thead", "":"tbody", "f":"tfoot"},
-		handler: function(w)
-		{
-			var table = {type:"element",tag:"table",attributes: {"class": {type: "string", value:"table"}},
+		rowTypes: {c:"caption", h:"thead", "":"tbody", f:"tfoot"},
+		handler: function(w) {
+			var table = {type:"element",tag:"table",attributes: {class: {type: "string", value:"table"}},
 				children: []};
-		
+
 			w.output.push(table);
 			var prevColumns = [];
 			var currRowType = null;
@@ -165,16 +163,16 @@ var rules = [
 						// Move the caption to the first row if it isn't already
 						if(table.children.length !== 1) {
 							table.children.pop(); // Take rowContainer out of the children array
-							table.children.splice(0,0,rowContainer); // Insert it at the bottom						
+							table.children.splice(0,0,rowContainer); // Insert it at the bottom
 						}
 						rowContainer.attributes={};
 						rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
 						w.subWikifyTerm(rowContainer.children,this.rowTermRegExp);
 					} else {
 						var theRow = {type:"element",tag:"tr",
-							attributes: {"class": {type: "string", value:rowCount%2 ? "oddRow" : "evenRow"}},
+							attributes: {class: {type: "string", value:rowCount%2 ? "oddRow" : "evenRow"}},
 							children: []};
-					
+
 						rowContainer.children.push(theRow);
 						this.rowHandler(w,theRow.children,prevColumns);
 						rowCount++;
@@ -184,8 +182,7 @@ var rules = [
 				lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 			}
 		},
-		rowHandler: function(w,e,prevColumns)
-		{
+		rowHandler: function(w,e,prevColumns) {
 			var col = 0;
 			var colSpanCount = 1;
 			var prevCell = null;
@@ -263,8 +260,7 @@ var rules = [
 		name: "heading",
 		match: "^!{1,6}",
 		termRegExp: /(\n)/mg,
-		handler: function(w)
-		{
+		handler: function(w) {
 			var e = {type:"element",tag:"h" + w.matchLength,children: []};
 			w.output.push(e);
 			w.subWikifyTerm(e.children,this.termRegExp);
@@ -276,8 +272,7 @@ var rules = [
 		match: "^(?:[\\*#;:]+)",
 		lookaheadRegExp: /^(?:(?:(\*)|(#)|(;)|(:))+)/mg,
 		termRegExp: /(\n)/mg,
-		handler: function(w)
-		{
+		handler: function(w) {
 			var stack = [w.output];
 			var currLevel = 0, currType = null;
 			var listLevel, listType, itemType, baseType;
@@ -354,8 +349,7 @@ var rules = [
 		lookaheadRegExp: /^>+/mg,
 		termRegExp: /(\n)/mg,
 		element: "blockquote",
-		handler: function(w)
-		{
+		handler: function(w) {
 			var stack = [];
 			var currLevel = 0;
 			var newLevel = w.matchLength;
@@ -370,7 +364,7 @@ var rules = [
 							w.output.push(e);
 						} else {
 							f.children.push(e);
-						
+
 						}
 					}
 				} else if(newLevel < currLevel) {
@@ -396,8 +390,7 @@ var rules = [
 	{
 		name: "rule",
 		match: "^----+$\\n?|<hr ?/?>\\n?",
-		handler: function(w)
-		{
+		handler: function(w) {
 			w.output.push({type:"element",tag:"hr"});
 		}
 	},
@@ -406,8 +399,7 @@ var rules = [
 		name: "monospacedByLine",
 		match: "^(?:/\\*\\{\\{\\{\\*/|\\{\\{\\{|//\\{\\{\\{|<!--\\{\\{\\{-->)\\n",
 		element: "pre",
-		handler: function(w)
-		{
+		handler: function(w) {
 			switch(w.matchText) {
 				case "/*{{{*/\n": // CSS
 					this.lookaheadRegExp = /\/\*\{\{\{\*\/\n*((?:^[^\n]*\n)+?)(\n*^\f*\/\*\}\}\}\*\/$\n?)/mg;
@@ -434,8 +426,7 @@ var rules = [
 		lookaheadRegExp: /^\$\$\$([^ >\r\n]*)\n((?:^[^\n]*\r?\n)+?)(^\f*\$\$\$\r?\n?)/mg,
 		//match: "^\\$\\$\\$(?:[^ >\\r\\n]*)(?: *> *([^ \\r\\n]+))?\\r?\\n",
 		//lookaheadRegExp: /^\$\$\$([^ >\r\n]*)(?: *> *([^ \r\n]+))\n((?:^[^\n]*\n)+?)(^\f*\$\$\$$\n?)/mg,
-		handler: function(w)
-		{
+		handler: function(w) {
 			this.lookaheadRegExp.lastIndex = w.matchStart;
 			var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
@@ -464,8 +455,7 @@ var rules = [
 	{
 		name: "wikifyComment",
 		match: "^(?:/\\*\\*\\*|<!---)\\n",
-		handler: function(w)
-		{
+		handler: function(w) {
 			var termRegExp = (w.matchText == "/***\n") ? (/(^\*\*\*\/\n)/mg) : (/(^--->\n)/mg);
 			w.subWikifyTerm(w.output,termRegExp);
 		}
@@ -475,8 +465,7 @@ var rules = [
 		name: "macro",
 		match: "<<",
 		lookaheadRegExp: /<<(?:([!@£\$%\^\&\*\(\)`\~'"\|\\\/;\:\.\,\+\=\-\_\{\}])|([^>\s]+))(?:\s*)((?:[^>]|(?:>(?!>)))*)>>/mg,
-		handler: function(w)
-		{
+		handler: function(w) {
 			this.lookaheadRegExp.lastIndex = w.matchStart;
 			var lookaheadMatch = this.lookaheadRegExp.exec(w.source),
 				name;
@@ -498,13 +487,11 @@ var rules = [
 		}
 	},
 
-
 	{
 		name: "prettyLink",
 		match: "\\[\\[",
 		lookaheadRegExp: /\[\[(.*?)(?:\|(~)?(.*?))?\]\]/mg,
-		handler: function(w)
-		{
+		handler: function(w) {
 			this.lookaheadRegExp.lastIndex = w.matchStart;
 			var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
@@ -520,7 +507,7 @@ var rules = [
 						tag: "a",
 						attributes: {
 							href: {type: "string", value: link},
-							"class": {type: "string", value: "tc-tiddlylink-external"},
+							class: {type: "string", value: "tc-tiddlylink-external"},
 							target: {type: "string", value: "_blank"}
 						},
 						children: [{
@@ -546,8 +533,7 @@ var rules = [
 	{
 		name: "wikiLink",
 		match: textPrimitives.unWikiLink+"?"+textPrimitives.wikiLink,
-		handler: function(w)
-		{
+		handler: function(w) {
 			if(w.matchText.substr(0,1) == textPrimitives.unWikiLink) {
 				w.outputText(w.output,w.matchStart+1,w.nextMatch);
 				return;
@@ -572,7 +558,7 @@ var rules = [
 						text: w.source.substring(w.matchStart,w.nextMatch)
 					}]
 				});
-			} else {	
+			} else {
 				w.outputText(w.output,w.matchStart,w.nextMatch);
 			}
 		}
@@ -581,14 +567,13 @@ var rules = [
 	{
 		name: "urlLink",
 		match: textPrimitives.urlPattern,
-		handler: function(w)
-		{
+		handler: function(w) {
 			w.output.push({
 				type: "element",
 				tag: "a",
 				attributes: {
 					href: {type: "string", value: w.matchText},
-					"class": {type: "string", value: "tc-tiddlylink-external"},
+					class: {type: "string", value: "tc-tiddlylink-external"},
 					target: {type: "string", value: "_blank"}
 				},
 				children: [{
@@ -604,8 +589,7 @@ var rules = [
 		match: "\\[[<>]?[Ii][Mm][Gg]\\[",
 		// [<] sequence below is to avoid lessThan-questionMark sequence so TiddlyWikis can be included in PHP files
 		lookaheadRegExp: /\[([<]?)(>?)[Ii][Mm][Gg]\[(?:([^\|\]]+)\|)?([^\[\]\|]+)\](?:\[([^\]]*)\])?\]/mg,
-		handler: function(w)
-		{
+		handler: function(w) {
 			var node = {
 				type: "image",
 				attributes: {}
@@ -629,7 +613,7 @@ var rules = [
 							tag: "a",
 							attributes: {
 								href: {type: "string", value:lookaheadMatch[5]},
-								"class": {type: "string", value: "tc-tiddlylink-external"},
+								class: {type: "string", value: "tc-tiddlylink-external"},
 								target: {type: "string", value: "_blank"}
 							},
 							children: [node]
@@ -655,12 +639,11 @@ var rules = [
 		name: "html",
 		match: "<[Hh][Tt][Mm][Ll]>",
 		lookaheadRegExp: /<[Hh][Tt][Mm][Ll]>((?:.|\n)*?)<\/[Hh][Tt][Mm][Ll]>/mg,
-		handler: function(w)
-		{
+		handler: function(w) {
 			this.lookaheadRegExp.lastIndex = w.matchStart;
 			var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-				w.output.push({	type:"raw", html:lookaheadMatch[1]});
+				w.output.push({type:"raw", html:lookaheadMatch[1]});
 				w.nextMatch = this.lookaheadRegExp.lastIndex;
 			}
 		}
@@ -670,8 +653,7 @@ var rules = [
 		name: "commentByBlock",
 		match: "/%",
 		lookaheadRegExp: /\/%((?:.|\n)*?)%\//mg,
-		handler: function(w)
-		{
+		handler: function(w) {
 			this.lookaheadRegExp.lastIndex = w.matchStart;
 			var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart)
@@ -682,8 +664,7 @@ var rules = [
 	{
 		name: "characterFormat",
 		match: "''|//|__|\\^\\^|~~|--(?!\\s|$)|\\{\\{\\{|`",
-		handler: function(w)
-		{
+		handler: function(w) {
 			var e,lookaheadRegExp,lookaheadMatch;
 			switch(w.matchText) {
 				case "''":
@@ -742,8 +723,7 @@ var rules = [
 	{
 		name: "customFormat",
 		match: "@@|\\{\\{",
-		handler: function(w)
-		{
+		handler: function(w) {
 			switch(w.matchText) {
 				case "@@":
 					var e = {type:"element",tag:"span",children: []};
@@ -762,7 +742,7 @@ var rules = [
 					if(lookaheadMatch) {
 						w.nextMatch = lookaheadRegExp.lastIndex;
 						e = {type:"element",tag:lookaheadMatch[2] == "\n" ? "div" : "span",
-							attributes: {"class": {type: "string", value:lookaheadMatch[1]}},children: []};
+							attributes: {class: {type: "string", value:lookaheadMatch[1]}},children: []};
 						w.output.push(e);
 						w.subWikifyTerm(e.children,/(\}\}\})/mg);
 					}
@@ -774,8 +754,7 @@ var rules = [
 	{
 		name: "mdash",
 		match: "--",
-		handler: function(w)
-		{
+		handler: function(w) {
 			w.output.push({type: "entity", entity: "&mdash;"});
 		}
 	},
@@ -783,8 +762,7 @@ var rules = [
 	{
 		name: "lineBreak",
 		match: "\\n|<br ?/?>",
-		handler: function(w)
-		{
+		handler: function(w) {
 			w.output.push({type:"element",tag:"br"});
 		}
 	},
@@ -793,8 +771,7 @@ var rules = [
 		name: "rawText",
 		match: "\"{3}|<nowiki>",
 		lookaheadRegExp: /(?:\"{3}|<nowiki>)((?:.|\n)*?)(?:\"{3}|<\/nowiki>)/mg,
-		handler: function(w)
-		{
+		handler: function(w) {
 			this.lookaheadRegExp.lastIndex = w.matchStart;
 			var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
@@ -808,8 +785,7 @@ var rules = [
 	{
 		name: "htmlEntitiesEncoding",
 		match: "&#?[a-zA-Z0-9]{2,8};",
-		handler: function(w)
-		{
+		handler: function(w) {
 			w.output.push({type: "entity", entity: w.matchText});
 		}
 	}

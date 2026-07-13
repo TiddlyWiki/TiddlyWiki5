@@ -41,7 +41,7 @@ function relinkTiddler(fromTitle,toTitle,options) {
 			relinkers[name].relink(this,fromTitle,toTitle,options);
 		}
 	}
-};
+}
 
 exports.renameTiddler = renameTiddler;
 exports.relinkTiddler = relinkTiddler;

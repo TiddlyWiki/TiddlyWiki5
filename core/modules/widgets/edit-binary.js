@@ -74,7 +74,7 @@ EditBinaryWidget.prototype.execute = function() {
 	// Set the link href to internal data URI (no external)
 	if(text) {
 		link.attributes.href = {
-			type: "string", 
+			type: "string",
 			value: "data:" + type + ";base64," + text
 		};
 	}

@@ -15,7 +15,7 @@ var pluginOpts;
 var TWMarkReplacements = {
 	"{" : "&#123;",
 	"[" : "&#91;",
-	"$" : "&#36;"
+	$ : "&#36;"
 };
 
 var TWMarkRegEx = /[{[$]/g;
@@ -106,7 +106,9 @@ function render_tw_expr(tokens,idx) {
 function render_token_attrs(token) {
 	var i, l, result;
 
-	if(!token.attrs) { return ""; }
+	if(!token.attrs) {
+		return "";
+	}
 
 	result = "";
 
@@ -199,15 +201,23 @@ function tw_block(state,startLine,endLine,silent) {
 		max = state.eMarks[startLine];
 
 	// if it's indented more than 3 spaces, it should be a code block
-	if(state.sCount[startLine] - state.blkIndent >= 4) { return false; }
+	if(state.sCount[startLine] - state.blkIndent >= 4) {
+		return false;
+	}
 
-	if(!state.md.options.html) { return false; }
+	if(!state.md.options.html) {
+		return false;
+	}
 
-	if(state.src.charCodeAt(pos) !== 0x3C/* < */) { return false; }
+	if(state.src.charCodeAt(pos) !== 0x3C/* < */) {
+		return false;
+	}
 
 	lineText = state.src.slice(pos,max);
 
-	if(!WidgetTagRegEx[0].test(lineText)) { return false; }
+	if(!WidgetTagRegEx[0].test(lineText)) {
+		return false;
+	}
 
 	if(silent) {
 		// don't let widgets interrupt a paragrpah
@@ -220,14 +230,18 @@ function tw_block(state,startLine,endLine,silent) {
 	// Let's roll down till block end.
 	if(!WidgetTagRegEx[1].test(lineText)) {
 		for(; nextLine < endLine; nextLine++) {
-			if(state.sCount[nextLine] < state.blkIndent) { break; }
+			if(state.sCount[nextLine] < state.blkIndent) {
+				break;
+			}
 
 			pos = state.bMarks[nextLine] + state.tShift[nextLine];
 			max = state.eMarks[nextLine];
 			lineText = state.src.slice(pos,max);
 
 			if(WidgetTagRegEx[1].test(lineText)) {
-				if(lineText.length !== 0) { nextLine++; }
+				if(lineText.length !== 0) {
+					nextLine++;
+				}
 				break;
 			}
 		}
@@ -263,13 +277,13 @@ function tw_image(state,silent) {
 		$tw.utils.each(twNode.attributes,function(attr,id) {
 			switch(attr.type) {
 				case "filtered":
-					token.attrSet(id,{ type: "filtered", value: "{{{" + attr.filter + "}}}" });
+					token.attrSet(id,{type: "filtered", value: "{{{" + attr.filter + "}}}"});
 					break;
 				case "indirect":
-					token.attrSet(id,{ type: "indirect", value: "{{" + attr.textReference + "}}" });
+					token.attrSet(id,{type: "indirect", value: "{{" + attr.textReference + "}}"});
 					break;
 				case "macro":
-					token.attrSet(id,{ type: "macro", value: ruleinfo.rule.parser.source.substring(attr.value.start,attr.value.end) });
+					token.attrSet(id,{type: "macro", value: ruleinfo.rule.parser.source.substring(attr.value.start,attr.value.end)});
 					break;
 				default:
 					token.attrSet(id,attr.value);

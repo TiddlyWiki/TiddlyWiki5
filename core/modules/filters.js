@@ -55,13 +55,12 @@ function parseFilterOperation(operators,filterString,p) {
 				$tw.utils.each(subsuffix.split(","),function(entry) {
 					entry = $tw.utils.trim(entry);
 					if(entry) {
-						operator.suffixes[operator.suffixes.length - 1].push(entry); 
+						operator.suffixes[operator.suffixes.length - 1].push(entry);
 					}
 				});
 			});
-		}
-		// Empty operator means: title
-		else if(operator.operator === "") {
+		} else if(operator.operator === "") {
+			// Empty operator means: title
 			operator.operator = "title";
 		}
 		operator.operands = [];
@@ -91,8 +90,7 @@ function parseFilterOperation(operators,filterString,p) {
 						// DEPRECATION WARNING
 						console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
 						nextBracketPos = p + rex.lastIndex - 1;
-					}
-					else {
+					} else {
 						throw "Unterminated regular expression in filter expression";
 					}
 					break;
@@ -302,7 +300,7 @@ exports.compileFilter = function(filterString) {
 							operand.value = "";
 							operand.multiValue = [];
 						}
-						operand.isMultiValueOperand = true;	
+						operand.isMultiValueOperand = true;
 					} else {
 						operand.value = operand.text;
 						operand.multiValue = [operand.value];
@@ -360,7 +358,7 @@ exports.compileFilter = function(filterString) {
 					return filterRunPrefixes["else"](operationSubFunction, options);
 				case "=>": // This operation is applied to the main results so far, and the results are assigned to a variable
 					return filterRunPrefixes["let"](operationSubFunction, options);
-				default: 
+				default:
 					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
 						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
 					} else {

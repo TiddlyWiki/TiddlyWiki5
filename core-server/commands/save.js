@@ -8,18 +8,18 @@ Saves individual tiddlers in their raw text or binary format to the specified fi
 \*/
 
 "use strict";
-	
+
 exports.info = {
 	name: "save",
 	synchronous: true
 };
-	
+
 var Command = function(params,commander,callback) {
 	this.params = params;
 	this.commander = commander;
 	this.callback = callback;
 };
-	
+
 Command.prototype.execute = function() {
 	if(this.params.length < 1) {
 		return "Missing filename filter";
@@ -58,5 +58,5 @@ Command.prototype.execute = function() {
 	});
 	return result;
 };
-	
+
 exports.Command = Command;

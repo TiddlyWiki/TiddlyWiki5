@@ -7,7 +7,6 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 
 \*/
 
-
 "use strict";
 
 var jasmine = require("./jasmine-plugin.js");

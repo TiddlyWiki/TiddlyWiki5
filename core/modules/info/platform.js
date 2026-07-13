@@ -10,7 +10,9 @@ Initialise basic platform $:/info/ tiddlers
 "use strict";
 
 exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
-	var mapBoolean = function(value) {return value ? "yes" : "no";},
+	var mapBoolean = function(value) {
+			return value ? "yes" : "no";
+		},
 		infoTiddlerFields = [];
 	// Basics
 	infoTiddlerFields.push({title: "$:/info/browser", text: mapBoolean(!!$tw.browser)});

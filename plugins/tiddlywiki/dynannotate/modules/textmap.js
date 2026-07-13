@@ -82,7 +82,7 @@ exports.TextMap.prototype.findText = function(targetString,targetPrefix,targetSu
 				startOffset: startPos - startMetadata.start,
 				endNode: endMetadata.domNode,
 				endOffset: (startPos + targetString.length) - endMetadata.start
-			};			
+			};
 		}
 	}
 	return null;

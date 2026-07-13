@@ -28,4 +28,3 @@ exports.substitute = function(source,operator,options) {
 	});
 	return results;
 };
-

@@ -36,7 +36,6 @@ var retrieveETag = function(self) {
 	});
 };
 
-
 /*
 Select the appropriate saver module and set it up
 */

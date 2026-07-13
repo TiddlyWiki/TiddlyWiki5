@@ -63,7 +63,7 @@ exports.makeDraggable = function(options) {
 				var inner = options.widget.document.createElement("div");
 				inner.className = "tc-tiddler-dragger-inner";
 				inner.appendChild(options.widget.document.createTextNode(
-					titles.length === 1 ? 
+					titles.length === 1 ?
 						titles[0] :
 						titles.length + " tiddlers"
 				));
@@ -252,7 +252,7 @@ function parseJSONTiddlers(json,fallbackTitle) {
 		fields.title = fields.title || fallbackTitle;
 	});
 	return data;
-};
+}
 
 function dragEventContainsType(event,targetType) {
 	if(event.dataTransfer.types) {
@@ -264,7 +264,7 @@ function dragEventContainsType(event,targetType) {
 		}
 	}
 	return false;
-};
+}
 
 exports.dragEventContainsFiles = function(event) {
 	return (dragEventContainsType(event,"Files") && !dragEventContainsType(event,"text/plain"));

@@ -53,7 +53,7 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	// Create the on-screen canvas
 	this.canvasDomNode = $tw.utils.domMaker("canvas",{
 		document: this.document,
-		"class":"tc-edit-bitmapeditor",
+		class:"tc-edit-bitmapeditor",
 		eventListeners: [{
 			name: "touchstart", handlerObject: this, handlerMethod: "handleTouchStartEvent"
 		},{

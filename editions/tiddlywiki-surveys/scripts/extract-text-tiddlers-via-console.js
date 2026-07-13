@@ -13,7 +13,7 @@ function stringifyList(value) {
 	} else {
 		return value || "";
 	}
-};
+}
 
 const tiddlers=[];
 const questions = [];

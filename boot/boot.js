@@ -204,11 +204,11 @@ $tw.utils.error = function(err) {
 		// Display an error message to the user
 		var dm = $tw.utils.domMaker,
 			heading = dm("h1",{text: errHeading}),
-			prompt = dm("div",{text: promptMsg, "class": "tc-error-prompt"}),
-			message = dm("div",{text: err, "class":"tc-error-message"}),
-			closeButton = dm("div",{children: [dm("button",{text: ( $tw.language == undefined ? "close" : $tw.language.getString("Buttons/Close/Caption") )})], "class": "tc-error-prompt"}),
-			downloadButton = dm("div",{children: [dm("button",{text: ( $tw.language == undefined ? "download tiddlers" : $tw.language.getString("Buttons/EmergencyDownload/Caption") )})], "class": "tc-error-prompt"}),
-			form = dm("form",{children: [heading,prompt,downloadButton,message,closeButton], "class": "tc-error-form"});
+			prompt = dm("div",{text: promptMsg, class: "tc-error-prompt"}),
+			message = dm("div",{text: err, class:"tc-error-message"}),
+			closeButton = dm("div",{children: [dm("button",{text: ( $tw.language == undefined ? "close" : $tw.language.getString("Buttons/Close/Caption") )})], class: "tc-error-prompt"}),
+			downloadButton = dm("div",{children: [dm("button",{text: ( $tw.language == undefined ? "download tiddlers" : $tw.language.getString("Buttons/EmergencyDownload/Caption") )})], class: "tc-error-prompt"}),
+			form = dm("form",{children: [heading,prompt,downloadButton,message,closeButton], class: "tc-error-form"});
 		document.body.insertBefore(form,document.body.firstChild);
 		downloadButton.addEventListener("click",function(event) {
 			if($tw && $tw.wiki) {
@@ -336,7 +336,6 @@ $tw.utils.getLocationHash = function() {
 	}
 	return href.substring(idx);
 };
-
 
 /** @deprecated Pad a string to a given length with "0"s. Length defaults to 2 */
 $tw.utils.pad = function(value,length = 2) {
@@ -589,7 +588,7 @@ var globalCheck =[
 	"    console.log(\"Warning: Global assignment detected\",Object.keys(__temp__));",
 	"    delete Object.prototype.__temp__;",
 	"  }",
-	"  delete Object.prototype.__temp__;",
+	"  delete Object.prototype.__temp__;"
 ].join("\n");
 
 /*
@@ -645,7 +644,7 @@ $tw.utils.PasswordPrompt = function() {
 	// Store of pending password prompts
 	this.passwordPrompts = [];
 	// Create the wrapper
-	this.promptWrapper = $tw.utils.domMaker("div",{"class":"tc-password-wrapper"});
+	this.promptWrapper = $tw.utils.domMaker("div",{class:"tc-password-wrapper"});
 	document.body.appendChild(this.promptWrapper);
 	// Hide the empty wrapper
 	this.setWrapperDisplay();
@@ -1151,7 +1150,9 @@ $tw.Wiki = function(options) {
 		tiddlerTitles = null, // Array of tiddler titles
 		getTiddlerTitles = function() {
 			if(!tiddlerTitles) {
-				tiddlerTitles = Object.keys(tiddlers).sort(function(a,b) {return a.localeCompare(b);});
+				tiddlerTitles = Object.keys(tiddlers).sort(function(a,b) {
+					return a.localeCompare(b);
+				});
 			}
 			return tiddlerTitles;
 		},
@@ -1161,7 +1162,9 @@ $tw.Wiki = function(options) {
 		shadowTiddlerTitles = null,
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
-				shadowTiddlerTitles = Object.keys(shadowTiddlers).sort(function(a,b) {return a.localeCompare(b);});
+				shadowTiddlerTitles = Object.keys(shadowTiddlers).sort(function(a,b) {
+					return a.localeCompare(b);
+				});
 			}
 			return shadowTiddlerTitles;
 		},
@@ -2122,7 +2125,9 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			console.log("Warning: missing plugin.info file in " + filepath);
 			return null;
 		}
-		var pluginInfo = $tw.utils.parseJSONSafe(fs.readFileSync(infoPath,"utf8"),function() {return null;});
+		var pluginInfo = $tw.utils.parseJSONSafe(fs.readFileSync(infoPath,"utf8"),function() {
+				return null;
+			});
 		if(!pluginInfo) {
 			console.log("warning: invalid JSON in plugin.info file at " + infoPath);
 			pluginInfo = {};
@@ -2246,7 +2251,9 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		pluginFields;
 	// Bail if we don't have a wiki info file
 	if(fs.existsSync(wikiInfoPath)) {
-		wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"),function() {return null;});
+		wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"),function() {
+				return null;
+			});
 		if(!wikiInfo) {
 			console.log("warning: invalid JSON in tiddlywiki.info file at " + wikiInfoPath);
 			wikiInfo = {};
@@ -2717,7 +2724,7 @@ $tw.boot.isStartupTaskEligible = function(taskModule) {
 /*
 Global Hooks mechanism which allows plugins to modify default functionality
 */
-$tw.hooks = $tw.hooks || { names: {}};
+$tw.hooks = $tw.hooks || {names: {}};
 
 /*
 Add hooks to the  hashmap
@@ -2725,8 +2732,7 @@ Add hooks to the  hashmap
 $tw.hooks.addHook = function(hookName,definition) {
 	if($tw.utils.hop($tw.hooks.names,hookName)) {
 		$tw.hooks.names[hookName].push(definition);
-	}
-	else {
+	} else {
 		$tw.hooks.names[hookName] = [definition];
 	}
 };

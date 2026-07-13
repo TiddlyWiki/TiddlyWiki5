@@ -45,7 +45,7 @@ Put a file to an S3 bucket
 function putFile(region,bucketName,title,text,type,callback) {
 	// Log the write
 	if($tw["lambda-result"]) {
-		$tw["lambda-result"]["files-written"].push({bucket: bucketName,key: title});		
+		$tw["lambda-result"]["files-written"].push({bucket: bucketName,key: title});
 	}
 	// console.log("Writing file to S3",bucketName,title,type);
 	var AWS = require("aws-sdk"),

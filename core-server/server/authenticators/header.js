@@ -42,4 +42,3 @@ HeaderAuthenticator.prototype.authenticateRequest = function(request,response,st
 };
 
 exports.AuthenticatorClass = HeaderAuthenticator;
-

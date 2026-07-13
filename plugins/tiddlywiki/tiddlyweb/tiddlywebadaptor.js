@@ -73,7 +73,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			if(err) {
 				return callback(err);
 			}
-			//If Browser-Storage plugin is present, cache pre-loaded tiddlers and add back after sync from server completes 
+			//If Browser-Storage plugin is present, cache pre-loaded tiddlers and add back after sync from server completes
 			if($tw.browserStorage && $tw.browserStorage.isEnabled()) {
 				$tw.browserStorage.cachePreloadTiddlers();
 			}
@@ -119,7 +119,7 @@ TiddlyWebAdaptor.prototype.login = function(username,password,callback) {
 			callback(err);
 		},
 		headers: {
-			"accept": "application/json",
+			accept: "application/json",
 			"X-Requested-With": "TiddlyWiki"
 		}
 	};
@@ -142,7 +142,7 @@ TiddlyWebAdaptor.prototype.logout = function(callback) {
 				callback(err);
 			},
 			headers: {
-				"accept": "application/json",
+				accept: "application/json",
 				"X-Requested-With": "TiddlyWiki"
 			}
 		};
@@ -190,7 +190,7 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 			// Invoke the callback with the skinny tiddlers
 			callback(null,tiddlers);
 			// If Browswer Storage tiddlers were cached on reloading the wiki, add them after sync from server completes in the above callback.
-			if($tw.browserStorage && $tw.browserStorage.isEnabled()) { 
+			if($tw.browserStorage && $tw.browserStorage.isEnabled()) {
 				$tw.browserStorage.addCachedTiddlers();
 			}
 		}

@@ -17,7 +17,7 @@ exports.name = "csvtiddlers";
 
 exports.params = [
 	{name: "filter"},
-	{name: "format"},
+	{name: "format"}
 ];
 
 /*
@@ -61,7 +61,7 @@ exports.run = function(filter,format) {
 		if(tiddler) {
 			for(f=0; f<fields.length; f++) {
 				row.push(quoteAndEscape(tiddler ? tiddler.getFieldString(fields[f]) || "" : ""));
-			}	
+			}
 		}
 		output.push(row.join(","));
 	}

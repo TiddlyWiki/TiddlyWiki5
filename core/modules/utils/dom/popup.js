@@ -30,7 +30,7 @@ Objekt containing the available prefixes for coordinates build with the `buildCo
  - csOffsetParent: Uses a coordinate system based on the offset parent (no prefix).
  - csAbsolute: Use an absolute coordinate system (prefix "@").
 */
-exports.coordinatePrefix = { csOffsetParent: "", csAbsolute: "@" };
+exports.coordinatePrefix = {csOffsetParent: "", csAbsolute: "@"};
 
 /*
 Trigger a popup open or closed. Parameters are in a hashmap:

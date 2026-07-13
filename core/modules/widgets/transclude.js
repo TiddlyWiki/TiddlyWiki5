@@ -53,7 +53,7 @@ TranscludeWidget.prototype.render = function(parent,nextSibling) {
 				// rendering.
 				this.removeChildDomNodes();
 				this.children = [this.makeChildWidget({type: "error", attributes: {
-					"$message": {type: "string", value: $tw.language.getString("Error/RecursiveTransclusion")}
+					$message: {type: "string", value: $tw.language.getString("Error/RecursiveTransclusion")}
 				}})];
 				this.renderChildren(parent,nextSibling);
 				return;
@@ -432,16 +432,16 @@ Get one of the special parameters to be provided by the parameters widget
 TranscludeWidget.prototype.getTransclusionMetaParameters = function() {
 	var self = this;
 	return {
-		"parseMode": function() {
+		parseMode: function() {
 			return self.parseAsInline ? "inline" : "block";
 		},
-		"parseTreeNodes": function() {
+		parseTreeNodes: function() {
 			return JSON.stringify(self.parseTreeNode.children || []);
 		},
-		"slotFillParseTreeNodes": function() {
+		slotFillParseTreeNodes: function() {
 			return JSON.stringify(self.slotFillParseTrees);
 		},
-		"params": function() {
+		params: function() {
 			return JSON.stringify(self.stringParametersByName);
 		}
 	};

@@ -12,23 +12,33 @@ Sum/product/maxall/minall operate on the entire list, returning a single item.
 "use strict";
 
 exports.length = makeStringBinaryOperator(
-	function(a) {return ["" + ("" + a).length];}
+	function(a) {
+		return ["" + ("" + a).length];
+	}
 );
 
 exports.uppercase = makeStringBinaryOperator(
-	function(a) {return [("" + a).toUpperCase()];}
+	function(a) {
+		return [("" + a).toUpperCase()];
+	}
 );
 
 exports.lowercase = makeStringBinaryOperator(
-	function(a) {return [("" + a).toLowerCase()];}
+	function(a) {
+		return [("" + a).toLowerCase()];
+	}
 );
 
 exports.sentencecase = makeStringBinaryOperator(
-	function(a) {return [$tw.utils.toSentenceCase(a)];}
+	function(a) {
+		return [$tw.utils.toSentenceCase(a)];
+	}
 );
 
 exports.titlecase = makeStringBinaryOperator(
-	function(a) {return [$tw.utils.toTitleCase(a)];}
+	function(a) {
+		return [$tw.utils.toTitleCase(a)];
+	}
 );
 
 exports.trim = function(source,operator,options) {
@@ -37,14 +47,22 @@ exports.trim = function(source,operator,options) {
 		operand = (operator.operand || ""),
 		fnCalc;
 	if(suffix === "prefix") {
-		fnCalc = function(a,b) {return [$tw.utils.trimPrefix(a,b)];};
+		fnCalc = function(a,b) {
+			return [$tw.utils.trimPrefix(a,b)];
+		};
 	} else if(suffix === "suffix") {
-		fnCalc = function(a,b) {return [$tw.utils.trimSuffix(a,b)];};
+		fnCalc = function(a,b) {
+			return [$tw.utils.trimSuffix(a,b)];
+		};
 	} else {
 		if(operand === "") {
-			fnCalc = function(a) {return [$tw.utils.trim(a)];};
+			fnCalc = function(a) {
+				return [$tw.utils.trim(a)];
+			};
 		} else {
-			fnCalc = function(a,b) {return [$tw.utils.trimSuffix($tw.utils.trimPrefix(a,b),b)];};
+			fnCalc = function(a,b) {
+				return [$tw.utils.trimSuffix($tw.utils.trimPrefix(a,b),b)];
+			};
 		}
 	}
 	source(function(tiddler,title) {
@@ -54,11 +72,15 @@ exports.trim = function(source,operator,options) {
 };
 
 exports.split = makeStringBinaryOperator(
-	function(a,b) {return ("" + a).split(b);}
+	function(a,b) {
+		return ("" + a).split(b);
+	}
 );
 
 exports["enlist-input"] = makeStringBinaryOperator(
-	function(a,o,s) {return $tw.utils.parseStringArray("" + a,(s === "raw"));}
+	function(a,o,s) {
+		return $tw.utils.parseStringArray("" + a,(s === "raw"));
+	}
 );
 
 exports.join = makeStringReducingOperator(
@@ -94,7 +116,7 @@ function diffLineWordMode(text1,text2,mode) {
 exports.makepatches = function(source,operator,options) {
 	var suffix = operator.suffix || "",
 		result = [];
-		
+
 	source(function(tiddler,title) {
 		let diffs, patches;
 		if(suffix === "lines" || suffix === "words") {

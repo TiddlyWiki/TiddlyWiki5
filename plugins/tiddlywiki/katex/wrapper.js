@@ -26,8 +26,8 @@ katex.updateMacros = function() {
 			cmd = tid.fields["text"];
 			katex.macros[macro] = cmd;
 		} catch(ex) {// Catch the bad ones
-		};
-	};
+		}
+	}
 };
 
 var KaTeXWidget = function(parseTreeNode,options) {
@@ -85,7 +85,7 @@ KaTeXWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 

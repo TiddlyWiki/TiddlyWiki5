@@ -12,8 +12,8 @@ Wiki text inline rule for emphasis - subscript. For example:
 This wikiparser can be modified using the rules eg:
 
 ```
-\rules except subscript 
-\rules only subscript 
+\rules except subscript
+\rules only subscript
 ```
 
 \*/

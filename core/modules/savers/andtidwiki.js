@@ -7,7 +7,6 @@ Handles saving changes via the AndTidWiki Android app
 
 \*/
 
-
 "use strict";
 
 var AndTidWiki = function(wiki) {
