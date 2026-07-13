@@ -116,7 +116,7 @@ function makeSerialColourOperator(fn) {
 		var results = [];
 		source(function (tiddler, title) {
 			var c = $tw.utils.parseCSSColorObject(title);
-			if (c) {
+			if(c) {
 				c = fn(c, operator, options);
 				results.push(c);
 			} else {
