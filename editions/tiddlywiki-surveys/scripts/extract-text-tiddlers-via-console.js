@@ -39,7 +39,7 @@ for(const child of document.querySelector("#tiddlerDisplay").childNodes) {
 				text: answerHTML,
 				icon: `$:/avatars/${username}`,
 				modifier: username,
-				modified: answerDate.toISOString().slice(0, 10).replace(/-/g, '') + "000000000",
+				modified: answerDate.toISOString().slice(0, 10).replace(/-/g, "") + "000000000",
 				tags: stringifyList([titlePrefix + title,"2010 - Interview Answer"])
 			});
 		}
@@ -53,7 +53,7 @@ for(const child of document.querySelector("#tiddlerDisplay").childNodes) {
 tiddlers.push({
 	title: "2010 - Interview Question",
 	list: stringifyList(questions)
-})
+});
 copy(JSON.stringify(tiddlers,null,4));
 
 const commands = [
@@ -62,12 +62,12 @@ const commands = [
 for(const username in siteIconByUsername) {
 
 	commands.push(`cp './editions/tiddlywiki-surveys/great-interview-project-2010/The great TiddlyWiki interview project_files/${siteIconByUsername[username]}' './editions/tiddlywiki-surveys/tiddlers/2010-great-interview-project/images/${username}.jpg'`);
-const metafile = `title: $:/avatars/${username}
+	const metafile = `title: $:/avatars/${username}
 type: image/jpeg
 tags: $:/tags/Avatar
 modifier: ${username}
 `;
 
-commands.push(`echo "${metafile}" > './editions/tiddlywiki-surveys/tiddlers/2010-great-interview-project/images/${username}.jpg.meta'`);
+	commands.push(`echo "${metafile}" > './editions/tiddlywiki-surveys/tiddlers/2010-great-interview-project/images/${username}.jpg.meta'`);
 }
 console.log(commands.join(" && "));

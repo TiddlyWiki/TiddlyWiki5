@@ -1,13 +1,13 @@
 created: 20140320230543190
 modified: 20241004114128016
 original-modified: 20160602172752299
-tags: Community
+tags: Resources
 title: Articles
 ja-title: 記事
 caption: 記事
 type: text/vnd.tiddlywiki
 
-~TiddlyWikiについて書かれた最近の記事をいくつか紹介します。新しい記事は、GitHub、Twitter、または[[TiddlyWikiグループ|Forums]]に投稿して送信してください。
+~TiddlyWikiについて書かれた最近の記事をいくつか紹介します。新しい記事は、GitHub、または[[TiddlyWikiグループ|Forums]]に投稿して送信してください。
 
 <div class="tc-link-info">
 
@@ -15,7 +15,7 @@ type: text/vnd.tiddlywiki
 
 <div class="tc-link-info-item">
 
-! <$link><$view field="title"/></$link>
+! <$link><$view field="ja-title"><$view field="title"/></$view></$link>
 
 <div class="tc-subtitle"> <$view field="original-modified" format="relativedate"><$view field="modified" format="relativedate"/></$view> の投稿</div>
 

@@ -1,0 +1,8 @@
+caption: --tp-story-left
+created: 20260130065252380
+modified: 20260130065342364
+tags: [[Core CSS Variables]]
+title: --tp-story-left CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-story-left` CSS variable represents how far the left margin of the story river (tiddler area) is from the left of the page.

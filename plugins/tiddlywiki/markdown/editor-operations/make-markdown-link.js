@@ -10,7 +10,7 @@ Text editor operation to make a markdown link
 "use strict";
 
 exports["make-markdown-link"] = function(event,operation) {
-	var rx = /[()<>\\]/g, rs = '\\$&';
+	var rx = /[()<>\\]/g, rs = "\\$&";
 
 	if(operation.selection) {
 		var desc = operation.selection.replace(/[\[\]\\]/g, rs);

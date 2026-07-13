@@ -18,10 +18,10 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-load-twitter-archive",function(event) {
 		// Load tweets
 		var archiveSource = new $tw.utils.TwitterArchivistSourceBrowser({
-		}),
-		archivist = new $tw.utils.TwitterArchivist({
-			source: archiveSource
-		});
+			}),
+			archivist = new $tw.utils.TwitterArchivist({
+				source: archiveSource
+			});
 		archivist.loadArchive({
 			wiki: $tw.wiki
 		}).then(function() {

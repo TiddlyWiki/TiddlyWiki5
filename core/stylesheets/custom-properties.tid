@@ -1,0 +1,30 @@
+title: $:/core/stylesheets/custom-properties
+
+\rules only transcludeinline macrocallinline html transcludeblock
+
+/* Tiddlywiki's CSS properties */
+
+:root {
+	<$list filter="[[$:/palettes/Vanilla]indexes[]]">
+	--tpc-<<currentTiddler>>: <$transclude $variable="colour" $mode="inline" name=<<currentTiddler>>/>;
+	</$list>
+
+	/* CSS settings */
+	--tp-code-wrapping: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
+	--tp-font-family: {{$:/themes/tiddlywiki/vanilla/settings/fontfamily}};
+	--tp-code-font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+	--tp-editor-font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
+	--tp-font-size: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
+	--tp-line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
+	--tp-body-font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
+	--tp-body-line-height: {{$:/themes/tiddlywiki/vanilla/metrics/bodylineheight}};
+	--tp-story-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+	--tp-story-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+	--tp-story-right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+	--tp-story-width: {{$:/themes/tiddlywiki/vanilla/metrics/storyrwidth}};
+	--tp-tiddler-width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
+	--tp-sidebar-breakpoint: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}};
+	--tp-sidebar-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+
+	--tp-animation-duration: {{{ [{$:/config/AnimationDuration}addsuffix[ms]] }}};
+}

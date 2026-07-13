@@ -31,14 +31,14 @@ exports["application/enex+xml"] = function(text,fields) {
 	results.push({
 		title: "Evernote Import Report",
 		text: "Evernote file imported on " + enex.getAttribute("export-date") + " from " + enex.getAttribute("application") + " (" + enex.getAttribute("version") + ")"
-	})
+	});
 	// Get all the "note" nodes
 	var noteNodes = doc.querySelectorAll("note");
 	$tw.utils.each(noteNodes,function(noteNode) {
 		var noteTitle = getTextContent(noteNode,"title");
 		// get real note content node
-		var contentNode = noteNode.querySelector("content")
-		var contentText = (contentNode.textContent || "").replace(/&nbsp;/g, ' ').trim();
+		var contentNode = noteNode.querySelector("content");
+		var contentText = (contentNode.textContent || "").replace(/&nbsp;/g, " ").trim();
 		if(contentText) {
 			// The final content will be HTML instead of xml. And we will save it as wikitext, to make wiki syntax work, and remaining HTML will also work.
 			try {
@@ -64,7 +64,7 @@ exports["application/enex+xml"] = function(text,fields) {
 			var text = getTextContent(resourceNode,"data");
 			var mimeType = getTextContent(resourceNode,"mime");
 			var contentTypeInfo = $tw.config.contentTypeInfo[mimeType] || {extension:""};
-			var title = getTextContent(resourceNode,"resource-attributes>file-name")
+			var title = getTextContent(resourceNode,"resource-attributes>file-name");
 			// a few resources don't have title, use hash as fallback
 			title = title || (hash + contentTypeInfo.extension);
 			// replace all system reserved characters in title
@@ -113,7 +113,7 @@ function getTextContent(node,selector) {
 }
 
 function convertDate(isoDate) {
-	return (isoDate || "").replace("T","").replace("Z","") + "000"
+	return (isoDate || "").replace("T","").replace("Z","") + "000";
 }
 
 function fixAttachmentReference(contentNode, md5Hash, mimeType, name) {

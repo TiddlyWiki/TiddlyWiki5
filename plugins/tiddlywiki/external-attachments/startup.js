@@ -23,8 +23,8 @@ exports.startup = function() {
 	test_makePathRelative();
 	$tw.hooks.addHook("th-importing-file",function(info) {
 		if(document.location.protocol === "file:" && info.isBinary && info.file.path && $tw.wiki.getTiddlerText(ENABLE_EXTERNAL_ATTACHMENTS_TITLE,"") === "yes") {
-console.log("Wiki location",document.location.pathname)
-console.log("File location",info.file.path)
+			console.log("Wiki location",document.location.pathname);
+			console.log("File location",info.file.path);
 			info.callback([
 				{
 					title: info.file.name,

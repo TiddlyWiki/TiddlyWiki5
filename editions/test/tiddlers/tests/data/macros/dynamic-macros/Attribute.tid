@@ -1,0 +1,26 @@
+title: Macros/Dynamic/Attribute
+description: Attribute macrocall with dynamic paramters
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define mamacromamacro(param:"red")
+It is $param$
+\end
+
+<$text text=<<mamacromamacro>>/>
+-
+<$text text=<<mamacromamacro param={{{ [[a]addprefix[b]] }}}>>/>
+-
+<$text text=<<mamacromamacro param>>/>
+
++
+title: ExpectedResult
+
+<p>It is red
+-
+It is ba
+-
+It is param
+</p>

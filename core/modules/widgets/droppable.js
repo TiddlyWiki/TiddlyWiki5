@@ -24,8 +24,7 @@ DroppableWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DroppableWidget.prototype.render = function(parent,nextSibling) {
-	var self = this,
-		tag = this.parseTreeNode.isBlock ? "div" : "span",
+	var tag = this.parseTreeNode.isBlock ? "div" : "span",
 		domNode;
 	// Remember parent
 	this.parentDomNode = parent;
@@ -57,8 +56,8 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 	// Stack of outstanding enter/leave events
 	this.currentlyEntered = [];
 };

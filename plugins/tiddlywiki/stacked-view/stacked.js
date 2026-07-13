@@ -12,7 +12,6 @@ Keeps tiddlers in a stack
 var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/#easeInOutCubic
 
 var StackedListView = function(listWidget) {
-	var self = this;
 	this.listWidget = listWidget;
 	this.fanHeightConfigTitle = listWidget.getVariable("tv-stacked-storyview-fan-height-config-title");
 	this.placeTiddlers();

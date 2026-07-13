@@ -13,7 +13,7 @@ returns the value at a given index of datatiddlers
 Export our filter function
 */
 exports.getindex = function(source,operator,options) {
-	var data,title,results = [];
+	var data,results = [];
 	if(operator.operand){
 		source(function(tiddler,title) {
 			title = tiddler ? tiddler.fields.title : title;

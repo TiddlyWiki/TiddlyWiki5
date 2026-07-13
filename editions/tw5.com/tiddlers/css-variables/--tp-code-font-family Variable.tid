@@ -1,0 +1,8 @@
+caption: --tp-code-font-family
+created: 20260122110850673
+modified: 20260130045333134
+tags: [[Core CSS Variables]]
+title: --tp-code-font-family CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-code-font-family` CSS variable represents the "Code font family" setting in Theme Tweaks.

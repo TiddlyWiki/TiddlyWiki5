@@ -1,7 +1,7 @@
 created: 20210101152520906
 modified: 20241004112108104
 original-modified: 20210101152533358
-tags: Community
+tags: Resources
 title: Community Themes
 ja-title: コミュニティテーマ
 caption: テーマ
@@ -14,7 +14,7 @@ caption: テーマ
 
 <div class="tc-link-info-item">
 
-! <$link><$view field="title"/></$link>
+! <$link><$view field="ja-title"><$view field="title"/></$view></$link>
 
 <div class="tc-subtitle"> <$view field="original-modified" format="relativedate"><$view field="modified" format="relativedate"/></$view> の投稿</div>
 

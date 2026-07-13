@@ -1,0 +1,19 @@
+title: MultiValuedVariables/TranscludeParameterDirectly
+description: Multi-valued variable passed as procedure parameter via {{{filter}}} syntax
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\procedure showItems(itemList)
+<$text text={{{ [(itemList)join[-]] }}}/>
+\end
+
+<$transclude $variable="showItems" itemList={{{ [all[tiddlers]sort[]] }}}/>
++
+title: ExpectedResult
+
+<p>$:/core-ExpectedResult-Output</p>
++
+

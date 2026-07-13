@@ -1,0 +1,48 @@
+title: $:/changenotes/5.4.0/#9676
+description: Fix critical freelinks bugs: first character loss and false positive matches in v5.4.0
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9084 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9397 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9676
+github-contributors: s793016
+
+Fixes and optimizations to the Freelinks plugin's Aho-Corasick implementation following #9397.
+
+Fixes:
+* Failure Links Non-Functional (Critical): The failure link map used a plain object `{}` with trie nodes as keys. Since all JavaScript objects coerce to the same string `[object Object]`, every node resolved to the same map entry. Failure links were silently broken for all overlapping patterns. Fixed by replacing with `WeakMap`.
+* Cache Rebuilt on Every UI Interaction (Performance): Any `$:/state/...` update (e.g. clicking tabs) would trigger a full Aho-Corasick rebuild, causing severe lag on large wikis. The `refresh` logic now ignores system tiddlers, with an explicit allowlist for plugin config tiddlers.
+* Short Match Blocking Longer Match: A shorter title appearing earlier (e.g. "The New") could prevent a longer overlapping title (e.g. "New York City") from matching. Replaced left-to-right greedy selection with global length-first sorting and interval occupation tracking.
+* Unicode Index Desync in ignoreCase Mode: Calling `toLowerCase()` on the full text before searching could change string length (e.g. Turkish "İ" expands), causing `substring()` to split Emoji surrogate pairs and produce garbage output. Case conversion is now done per-character during search.
+* Removed Vestigial Regex Escaping: `escapeRegExp()` was called during trie construction but Aho-Corasick operates on literal character transitions, not regex. Removed.
+
+Impact:
+* Overlapping titles now match correctly for the first time.
+* No cache rebuilds during normal UI interactions on large wikis.
+* Correct longest-match behavior for titles sharing substrings.
+* Safe Emoji and complex Unicode handling in case-insensitive mode.
+
+
+#9397
+This note addresses two major bugs introduced in the Freelinks plugin with the v5.4.0 release:
+
+Fixes:
+* First Character Loss: The first character of a matched word would incorrectly disappear (e.g., "The" became "he"). This was fixed by correctly timing the filtering of the current tiddler's title during match validation, ensuring proper substring handling.
+* False Positive Matches: Unrelated words (like "it is" or "Choose") would incorrectly link to a tiddler title. This was resolved by fixing wrong output merging in the Aho-Corasick failure-link handling, eliminating spurious matches from intermediate nodes, and adding cycle detection.
+
+Impact:
+* Significantly improved correctness and reliability of automatic linking for all users, especially in multilingual and large wikis.
+
+
+#9084
+This change introduces a fully optimized override of the core text widget, integrating an enhanced Aho-Corasick algorithm for automatic linkification of tiddler titles within text (freelinks). The new implementation prioritizes performance for large wikis and correct support for non-Latin scripts such as Chinese.
+
+Highlights:
+- Full switch from regex-based matching to a custom, robust Aho-Corasick engine dedicated to rapid, multi-pattern title detection—drastically decreasing linkification time (tested: 1–5s reduced to 100–500ms on ~12,000 tiddlers).
+- Handles extremely large title sets gracefully, including a chunked insertion process and use of a persistent cache (`$:/config/Freelinks/PersistAhoCorasickCache`) to further accelerate subsequent linking operations in large/active wikis.
+- Improvements for CJK and non-Latin text: supports linking using long or full-width symbol titles such as  '：' (U+FF1A) with no split or mismatch.
+- Smart prioritization: longer titles are automatically matched before shorter, more ambiguous ones, preventing partial/incorrect linking.
+- Actively skips self-linking in the current tiddler and prevents overlapping matches for clean, deterministic linkification.
+- End users with large or multilingual wikis see massive performance boost and 100% accurate linking for complex, full-width, or multi-language titles.
+- New options for persistent match cache and word boundary checking (`$:/config/Freelinks/WordBoundary`), both can be tuned based on wiki size and content language needs.
+- Safe for gradual rollout: legacy behavior is preserved if the new freelinks override is not enabled.

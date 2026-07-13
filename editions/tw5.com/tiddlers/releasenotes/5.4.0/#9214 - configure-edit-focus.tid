@@ -1,0 +1,13 @@
+change-category: usability
+change-type: bugfix
+created: 20260125065754439
+description: Allow title, tags, text as initial focus for editing existing tiddlers
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9214
+modified: 20260125065921915
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9214
+type: text/vnd.tiddlywiki
+
+''ControlPanel -> Info -> Basics'' tab now contains a ''Default focus field for existing tiddlers'' setting, which allows users to select, title, text or tags to be auto-focused if the editor is opened.

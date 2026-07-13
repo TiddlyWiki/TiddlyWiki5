@@ -18,6 +18,7 @@ caption: {{$:/language/ControlPanel/Basics/Caption}}
 |<$link to="$:/config/NewTiddler/Tags"><<lingo NewTiddler/Tags/Prompt>></$link> |<$vars currentTiddler="$:/config/NewTiddler/Tags" tagField="text">{{||$:/core/ui/EditTemplate/tags}}<$list filter="[<currentTiddler>tags[]] +[limit[1]]" variable="ignore"><$button tooltip={{$:/language/ControlPanel/Basics/RemoveTags/Hint}}><<lingo RemoveTags>><$action-listops $tiddler=<<currentTiddler>> $field="text" $subfilter={{{ [<currentTiddler>get[tags]] }}}/><$action-setfield $tiddler=<<currentTiddler>> tags=""/></$button></$list></$vars> |
 |<$link to="$:/config/NewJournal/Tags"><<lingo NewJournal/Tags/Prompt>></$link> |<$vars currentTiddler="$:/config/NewJournal/Tags" tagField="text">{{||$:/core/ui/EditTemplate/tags}}<$list filter="[<currentTiddler>tags[]] +[limit[1]]" variable="ignore"><$button tooltip={{$:/language/ControlPanel/Basics/RemoveTags/Hint}}><<lingo RemoveTags>><$action-listops $tiddler=<<currentTiddler>> $field="text" $subfilter={{{ [<currentTiddler>get[tags]] }}}/><$action-setfield $tiddler=<<currentTiddler>> tags=""/></$button></$list></$vars> |
 |<$link to="$:/config/AutoFocus"><<lingo AutoFocus/Prompt>></$link> |{{$:/snippets/minifocusswitcher}} |
+|<$link to="$:/config/AutoFocusEdit"><<lingo AutoFocusEdit/Prompt>></$link> |{{$:/snippets/minifocuseditswitcher}} |
 |<<lingo Language/Prompt>> |{{$:/snippets/minilanguageswitcher}} |
 |<<lingo Tiddlers/Prompt>> |<<show-filter-count "[!is[system]sort[title]]">> |
 |<<lingo Tags/Prompt>> |<<show-filter-count "[tags[]sort[title]]">> |

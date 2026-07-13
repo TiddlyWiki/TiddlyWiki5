@@ -21,8 +21,7 @@ var Command = function(params,commander,callback) {
 };
 
 Command.prototype.execute = function() {
-	var fs = require("fs"),
-		path = require("path");
+	var path = require("path");
 	if(this.params.length < 1) {
 		return "Missing output path";
 	}

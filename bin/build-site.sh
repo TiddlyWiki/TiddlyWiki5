@@ -5,7 +5,7 @@
 # Default to the current version number for building the plugin library
 
 if [  -z "$TW5_BUILD_VERSION" ]; then
-    TW5_BUILD_VERSION=v5.4.0
+    TW5_BUILD_VERSION=v5.5.0.
 fi
 
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
@@ -120,7 +120,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 	|| exit 1
 
 # /empty.html					Empty
-# /empty.hta					For Internet Explorer
 # /empty-external-core.html		External core empty
 # /tiddlywikicore-<version>.js	Core plugin javascript
 node $TW5_BUILD_TIDDLYWIKI \

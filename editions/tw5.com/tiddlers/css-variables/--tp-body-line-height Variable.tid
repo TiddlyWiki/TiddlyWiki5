@@ -1,0 +1,8 @@
+caption: --tp-body-line-height
+created: 20260122111249446
+modified: 20260130045720240
+tags: [[Core CSS Variables]]
+title: --tp-body-line-height CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-body-line-height` CSS variable represents the "Line height for tiddler body" setting in Theme Tweaks.

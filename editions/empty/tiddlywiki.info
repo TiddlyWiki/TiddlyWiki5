@@ -10,8 +10,7 @@
 		"index": [
 			"--render","$:/core/save/all","index.html","text/plain"],
 		"empty": [
-			"--render","$:/core/save/all","empty.html","text/plain",
-			"--render","$:/core/save/all","empty.hta","text/plain"],
+			"--render","$:/core/save/all","empty.html","text/plain"],
 		"emptyexternalcore": [
 			"--render","$:/core/save/offline-external-js","empty-external-core.html","text/plain",
 			"--render","$:/core/templates/tiddlywiki5.js","[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]","text/plain"],

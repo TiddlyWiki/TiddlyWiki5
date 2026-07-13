@@ -1,0 +1,7 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/DynamicWidgetAttribute
+type: text/vnd.tiddlywiki
+
+<div class=<<mymacro param={{Something}}>>>content</div>
+
+<$button actions=<<myactions target={{!!title}}>>/>

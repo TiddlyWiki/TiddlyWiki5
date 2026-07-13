@@ -40,6 +40,7 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("style",this.style);
 	}
 	parent.insertBefore(domNode,nextSibling);
+	this.domNodes.push(domNode);
 	this.renderChildren(domNode,null);
 	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
 		this.positionPopup(domNode);
@@ -48,7 +49,6 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	if(!this.isOpen) {
 		domNode.setAttribute("hidden","true");
 	}
-	this.domNodes.push(domNode);
 };
 
 RevealWidget.prototype.positionPopup = function(domNode) {

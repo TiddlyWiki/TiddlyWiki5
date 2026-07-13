@@ -10,7 +10,7 @@ Text editor operation to excise the selection to a new tiddler
 "use strict";
 
 function isMarkdown(mediaType) {
-	return mediaType === 'text/markdown' || mediaType === 'text/x-markdown';
+	return mediaType === "text/markdown" || mediaType === "text/x-markdown";
 }
 
 exports["excise"] = function(event,operation) {

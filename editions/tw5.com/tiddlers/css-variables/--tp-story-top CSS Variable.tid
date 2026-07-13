@@ -1,0 +1,8 @@
+caption: --tp-story-top
+created: 20260130065351753
+modified: 20260130065451132
+tags: [[Core CSS Variables]]
+title: --tp-story-top CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-story-top` CSS variable represents how far the top margin of the story river is from the top of the page.

@@ -1,0 +1,48 @@
+title: Improvements to Macro Calls in v5.4.0
+tags: v5.4.0
+
+<$macrocall $name='wikitext-example-without-html'
+src="""\define testmacro(one)
+Result: $one$.
+\end testmacro
+
+<<testmacro one={{{ [[There]addprefix[Hello]] }}}>>
+"""/>
+
+<$macrocall $name='wikitext-example-without-html'
+src="""\function testfunction(one)
+[<one>addprefix[Hello]]
+\end testfunction
+
+<<testfunction one={{{ [[re]addprefix[The]] }}}>>
+"""/>
+
+<$macrocall $name='wikitext-example-without-html'
+src="""\define testmacro(one)
+Result: $one$.
+\end testmacro
+
+<$text text=<<testmacro one={{{ [[There]addprefix[Hello]] }}}>>/>
+"""/>
+
+<$macrocall $name='wikitext-example-without-html'
+src="""\function testfunction(one)
+[<one>addprefix[Hello]]
+\end testfunction
+
+<$text text=<<testfunction one={{{ [[re]addprefix[The]] }}}>>/>
+"""/>
+
+<$macrocall $name='wikitext-example'
+src="""\define innermacro(one)
+:$one$:$one$:
+\end innermacro
+
+\define mymacro(param)
+|$param$|$param$|
+\end mymacro
+
+<div class=<<mymacro param={{{ [<innermacro one={{$:/palette}}>addprefix[The palette named ]] }}}>>>
+Content
+</div>
+"""/>

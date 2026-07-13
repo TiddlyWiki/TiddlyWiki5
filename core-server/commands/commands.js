@@ -25,7 +25,7 @@ Command.prototype.execute = function() {
 	if(!filter) {
 		return "No filter specified";
 	}
-	var commands = this.commander.wiki.filterTiddlers(filter)
+	var commands = this.commander.wiki.filterTiddlers(filter);
 	if(commands.length === 0) {
 		return "No tiddlers found for filter '" + filter + "'";
 	}

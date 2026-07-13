@@ -8,6 +8,8 @@ code-body: yes
 
 <$set name="languageTitle" value={{!!name}}>
 
+<$transclude $tiddler="$:/core/stylesheets/custom-properties" $mode="block"/>
+
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
 <$transclude mode="block"/>
 </$list>

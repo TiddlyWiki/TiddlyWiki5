@@ -1,0 +1,13 @@
+change-category: widget
+change-type: enhancement
+created: 20260126112805413
+description: Allow actions to be invoked when an image is loaded
+github-contributors: saqimtiaz
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9050
+modified: 20260126113146914
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9050
+type: text/vnd.tiddlywiki
+
+Adds support to the image widget for optional actions that are invoked when an image has completed loading.

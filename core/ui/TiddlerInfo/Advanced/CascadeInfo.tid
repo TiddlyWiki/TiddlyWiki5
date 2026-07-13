@@ -1,0 +1,43 @@
+title: $:/core/ui/TiddlerInfo/Advanced/CascadeInfo
+tags: $:/tags/TiddlerInfo/Advanced
+
+\define lingo-base() $:/language/TiddlerInfo/Advanced/CascadeInfo/
+
+<$let infoTiddler=<<currentTiddler>>>
+
+''<<lingo Heading>>''
+
+<<lingo Hint>>
+
+<table class="tc-max-width">
+	<thead>
+		<$list filter="[[View]] [[ActiveCascadeFilter]] [[Template]]" variable="th">
+			<th><$transclude $variable="lingo" title=`Detail/$(th)$`/></th>
+		</$list>
+	</thead>
+	<$list filter="[[$:/tags/ViewTemplate]tagging[]]" variable="ViewTemplate">
+		<tr>
+			<$let
+				view={{{ [<ViewTemplate>]+[split[/]last[]] }}}
+				tagFilter=`$:/tags/ViewTemplate${ [<view>titlecase[]] }$Filter`
+				activeCascadeFilterTiddler={{{ [all[shadows+tiddlers]tag<tagFilter>!is[draft]]:filter[<storyTiddler>subfilter{!!text}]+[first[]] }}}
+				activeCascadeFilter={{{ [<activeCascadeFilterTiddler>get[text]] }}}
+				activeTemplateTiddler={{{ [<currentTiddler>]:cascade[all[shadows+tiddlers]tag<tagFilter>!is[draft]get[text]] }}}
+			>
+			<%if [<activeCascadeFilterTiddler>!is[blank]]%>
+				<td>
+					<$link to=<<ViewTemplate>> ><<view>></$link>
+				</td>
+				<td>
+					<$link to=<<activeCascadeFilterTiddler>> />
+				</td>
+				<td style="text-align:center;">
+					<$link class="tc-btn-invisible" to=<<activeTemplateTiddler>>>
+						<$button class="tc-btn-invisible">{{$:/core/images/file}}</$button>
+					</$link>
+				</td>
+			<%endif%>
+			</$let>
+		</tr>
+	</$list>
+</table>

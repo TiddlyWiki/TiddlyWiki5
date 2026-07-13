@@ -1,0 +1,8 @@
+caption: --tp-animation-duration
+created: 20260130075755351
+modified: 20260130075855780
+tags: [[Core CSS Variables]]
+title: --tp-animation-duration CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-animation-duration` CSS variable represents the "Animation duration" setting in the control panel. The `ms` suffix is added.

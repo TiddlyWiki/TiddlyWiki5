@@ -242,6 +242,73 @@ exports.slowInSlowOut = function(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 };
 
+exports.copyObjectPropertiesSafe = function(object) {
+	const seen = new Set();
+
+	function isDOMElement(value) {
+		if(!value || typeof value !== "object") {
+			return false;
+		}
+
+		// Cross-realm DOM nodes
+		if(typeof value.nodeType === "number" &&
+				typeof value.nodeName === "string") {
+			return true;
+		}
+
+		// Cross-realm Window objects
+		if(value.window === value &&
+				value.document &&
+				value.location) {
+			return true;
+		}
+
+		return false;
+	}
+
+	function safeCopy(obj) {
+		// skip circular references
+		if(seen.has(obj)) {
+			return undefined;
+		}
+		// primitives and null are safe
+		if(typeof obj !== "object" || obj === null) {
+			return obj;
+		}
+		// copy arrays, preserving positions
+		if(Array.isArray(obj)) {
+			return obj.map((item) => {
+				const value = safeCopy(item);
+				return value === undefined ? null : value;
+			});
+		}
+		// skip DOM elements
+		if(isDOMElement(obj)) {
+			return undefined;
+		}
+		
+		seen.add(obj);
+		const copy = {};
+		let key,
+			value;
+		for(key in obj) {
+			try {
+				value = safeCopy(obj[key]);
+				if(value !== undefined) {
+					copy[key] = value;
+				}
+			} catch(e) {
+				// silently skip unserializable properties
+			}
+		}
+		return copy;
+	}
+
+	const result = safeCopy(object);
+	seen.clear();
+	return result;
+};
+
 exports.formatTitleString = function(template,options) {
 	var base = options.base || "",
 		separator = options.separator || "",
