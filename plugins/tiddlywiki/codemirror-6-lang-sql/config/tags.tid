@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lang-sql/tags
+caption: SQL Tags
+description: Tags that trigger SQL syntax highlighting (one per line)
+
