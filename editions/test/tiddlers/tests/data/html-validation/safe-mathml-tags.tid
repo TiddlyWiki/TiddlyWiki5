@@ -1,0 +1,43 @@
+created: 20251030143723359
+description: Save MathML foreignObject sanitation
+modified: 20260127083439069
+tags: $:/tags/wiki-test-spec
+title: safe-script-tag
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Handled by: $:/core/modules/widgets/element.js
+
+```
+// Sanitize MathML foreignObject tag names if needed 
+this.tag = $tw.utils.makeTagNameSafe(this.tag, "safe-" + this.tag);
+```
++
+title: Output
+
+<math>
+	<mrow>
+		<svg>
+			<foreignObject>
+				<script>alert(1)</script>
+				<div onload="alert(1)"></div>
+			</foreignObject>
+		</svg>
+	</mrow>
+</math>
+
++
+title: ExpectedResult
+
+<p><math>
+	<mrow>
+		<svg>
+			<foreignObject>
+				<safe-script>alert(1)</safe-script>
+				<div></div>
+			</foreignObject>
+		</svg>
+	</mrow>
+</math>
+</p>
