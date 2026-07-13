@@ -1,0 +1,7 @@
+title: $:/schemas/WidgetAttributeDocs/required
+field-type: enum
+enum-values: yes no
+required: yes
+type: text/vnd.tiddlywiki
+
+Whether this attribute is required for the widget to function correctly.

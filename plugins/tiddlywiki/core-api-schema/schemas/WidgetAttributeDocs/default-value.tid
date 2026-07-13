@@ -1,0 +1,6 @@
+title: $:/schemas/WidgetAttributeDocs/default-value
+field-type: string
+required: no
+type: text/vnd.tiddlywiki
+
+The default value for this attribute if not specified.

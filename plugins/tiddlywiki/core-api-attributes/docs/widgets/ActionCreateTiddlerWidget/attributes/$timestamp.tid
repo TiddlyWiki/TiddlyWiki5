@@ -1,0 +1,8 @@
+title: $:/docs/widgets/ActionCreateTiddlerWidget/attributes/$timestamp
+schema: $:/schemas/WidgetAttributeDocs
+field-type: yes-no
+required: no
+default-value: yes
+type: text/vnd.tiddlywiki
+
+Specifies whether the timestamp(s) of the target tiddler will be updated (''modified'' and ''modifier'', plus ''created'' and ''creator'' for newly created tiddlers). Can be "yes" (the default) or "no".

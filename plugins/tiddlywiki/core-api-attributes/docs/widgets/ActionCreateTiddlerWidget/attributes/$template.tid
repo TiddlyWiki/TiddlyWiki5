@@ -1,0 +1,8 @@
+title: $:/docs/widgets/ActionCreateTiddlerWidget/attributes/$template
+schema: $:/schemas/WidgetAttributeDocs
+field-type: tiddler-title
+required: no
+from-version: 5.1.22
+type: text/vnd.tiddlywiki
+
+The title of a template tiddler, that will be used to create a new tiddler.

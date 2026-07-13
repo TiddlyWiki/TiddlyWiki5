@@ -1,0 +1,7 @@
+title: $:/docs/widgets/ActionNavigateWidget/attributes/$scroll
+schema: $:/schemas/WidgetAttributeDocs
+field-type: yes-no
+required: no
+type: text/vnd.tiddlywiki
+
+Optional parameter determining whether the navigation will also cause a scroll to the target tiddler. Can be set to "yes" to force scrolling or "no" to prevent it.

@@ -1,0 +1,11 @@
+title: $:/docs/filter-operators/zth
+schema: $:/schemas/FilterOperatorDocs
+op-purpose: select the <<.place Z>>th input title
+op-input: a [[selection of titles|Title Selection]]
+op-output: the <<.place Z>>th input title
+op-parameter: an integer, defaulting to 0
+op-parameter-name: Z
+from-version: 5.2.1
+type: text/vnd.tiddlywiki
+
+Filter operator `zth` — zero-based selection by index.

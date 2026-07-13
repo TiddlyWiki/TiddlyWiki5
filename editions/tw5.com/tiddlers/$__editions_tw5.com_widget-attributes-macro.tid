@@ -1,0 +1,36 @@
+title: $:/editions/tw5.com/widget-attributes-macro
+tags: $:/tags/Macro
+code-body: yes
+type: text/vnd.tiddlywiki
+
+\procedure .widget-attributes(widget)
+<$let
+	docsTitle={{{ [[$:/docs/widgets/]addsuffix<widget>] }}}
+	attrPrefix={{{ [<docsTitle>addsuffix[/attributes/]] }}}
+>
+<table>
+<tr>
+<th align="left">Attribute</th>
+<th align="left">Description</th>
+</tr>
+<$list filter="[<docsTitle>get[any-attributes-not-starting-with-$]match[yes]]">
+<tr>
+<td>`any attributes not starting with $`</td>
+<td>Any attribute name that does not start with `$` is accepted as a free-form widget attribute.</td>
+</tr>
+</$list>
+<$list filter="[all[shadows+tiddlers]prefix<attrPrefix>sort[]]">
+<$let attrName={{{ [all[current]removeprefix<attrPrefix>] }}}>
+<tr>
+<td>`<<attrName>>`
+<%if [{!!deprecated}match[yes]] %>
+ //deprecated//
+<%endif%>
+</td>
+<td><$transclude/></td>
+</tr>
+</$let>
+</$list>
+</table>
+</$let>
+\end
