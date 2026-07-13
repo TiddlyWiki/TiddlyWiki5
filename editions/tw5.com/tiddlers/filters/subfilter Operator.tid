@@ -28,4 +28,4 @@ The <<.op subfilter>> operator will act as a [[constructor|Selection Constructor
 
 <<.operator-examples "subfilter">>
 
-it is not propogated into further subfilters
+It is not propogated into further subfilters.
