@@ -1,5 +1,5 @@
 change-category: nodejs
-change-type: deprecation
+change-type: bugfix
 created: 20260711020057000
 description: The Node.js server no longer emits the DEP0169 url.parse() deprecation warning
 github-contributors: pmario
