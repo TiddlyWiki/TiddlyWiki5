@@ -16,7 +16,11 @@ tags: $:/tags/PageTemplate
 	<$transclude field="custom-menu-content" mode="inline"/>
 	<%else%>
 	<$set name="tv-wikilinks" value="no">
+	<%if [<currentTiddler>has[caption]] %>
 	<$transclude field="caption" mode="inline"/>
+        <%else%>
+	<$transclude field="title" mode="inline"/>
+        <%endif%>
 	</$set>
 	<%endif%>
 	<$text text=" "/>
@@ -32,7 +36,11 @@ tags: $:/tags/PageTemplate
 <%else%>
 	<$link to={{!!target}}>
 	<$set name="tv-wikilinks" value="no">
+	<%if [<currentTiddler>has[caption]] %>
 	<$transclude field="caption" mode="inline"/>
+        <%else%>
+	<$transclude field="title" mode="inline"/>
+        <%endif%>
 	</$set>
 	</$link>
 <%endif%>
