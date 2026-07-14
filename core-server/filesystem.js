@@ -267,6 +267,9 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 				}
 			}
 		}
+		if(fileInfo.hasMetaFile && fileInfo.type !== "application/x-tiddler" && fileInfo.type !== "application/json" && $tw.Wiki.tiddlerSerializerModules && $tw.Wiki.tiddlerSerializerModules[fileInfo.type]) {
+			fileInfo.hasMetaFile = false;
+		}
 	}
 	// Take the file extension from the tiddler content type or metaExt
 	var contentTypeInfo = $tw.config.contentTypeInfo[fileInfo.type] || {extension: ""};
@@ -416,6 +419,9 @@ Save a tiddler to a file described by the fileInfo:
 */
 exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
+	var serializer = $tw.Wiki.tiddlerSerializerModules && $tw.Wiki.tiddlerSerializerModules[fileInfo.type],
+		fileTypeInfo = $tw.config.contentTypeInfo[fileInfo.type || "text/plain"],
+		fileEncoding = fileInfo.encoding || (fileTypeInfo && fileTypeInfo.encoding) || "utf8";
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
@@ -433,14 +439,27 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 	} else {
 		// Save the tiddler as a self contained templated file
 		if(fileInfo.type === "application/x-tiddler") {
-			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8",function(err) {
+			fs.writeFile(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),fileEncoding,function(err) {
+				if(err) {
+					return callback(err);
+				}
+				return callback(null,fileInfo);
+			});
+		} else if(serializer) {
+			var serialized;
+			try {
+				serialized = serializer(tiddler);
+			} catch(err) {
+				return callback(err);
+			}
+			fs.writeFile(fileInfo.filepath,serialized,fileEncoding,function(err) {
 				if(err) {
 					return callback(err);
 				}
 				return callback(null,fileInfo);
 			});
 		} else {
-			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8",function(err) {
+			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),fileEncoding,function(err) {
 				if(err) {
 					return callback(err);
 				}
@@ -458,6 +477,9 @@ Save a tiddler to a file described by the fileInfo:
 */
 exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
+	var serializer = $tw.Wiki.tiddlerSerializerModules && $tw.Wiki.tiddlerSerializerModules[fileInfo.type],
+		fileTypeInfo = $tw.config.contentTypeInfo[fileInfo.type || "text/plain"],
+		fileEncoding = fileInfo.encoding || (fileTypeInfo && fileTypeInfo.encoding) || "utf8";
 	if(fileInfo.hasMetaFile) {
 		// Save the tiddler as a separate body and meta file
 		var typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/plain"] || {encoding: "utf8"};
@@ -466,9 +488,11 @@ exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 	} else {
 		// Save the tiddler as a self contained templated file
 		if(fileInfo.type === "application/x-tiddler") {
-			fs.writeFileSync(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),"utf8");
+			fs.writeFileSync(fileInfo.filepath,tiddler.getFieldStringBlock({exclude: ["text","bag"]}) + (!!tiddler.fields.text ? "\n\n" + tiddler.fields.text : ""),fileEncoding);
+		} else if(serializer) {
+			fs.writeFileSync(fileInfo.filepath,serializer(tiddler),fileEncoding);
 		} else {
-			fs.writeFileSync(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8");
+			fs.writeFileSync(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),fileEncoding);
 		}
 	}
 	return fileInfo;
@@ -525,7 +549,7 @@ exports.cleanupTiddlerFiles = function(options,callback) {
 	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
 		$tw.utils.deleteTiddlerFile(adaptorInfo,function(err) {
 			if(err) {
-				if((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
+				if((err.code === "EPERM" || err.code === "EACCES") && err.syscall === "unlink") {
 					// Error deleting the previous file on disk, should fail gracefully
 					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: \""+title+"\"",err);
 					return callback(null,bootInfo);
@@ -535,6 +559,25 @@ exports.cleanupTiddlerFiles = function(options,callback) {
 			}
 			return callback(null,bootInfo);
 		});
+	} else if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath === bootInfo.filepath && adaptorInfo.hasMetaFile && !bootInfo.hasMetaFile) {
+		var oldMetaPath = adaptorInfo.filepath + ".meta";
+		if(fs.existsSync(oldMetaPath)) {
+			fs.unlink(oldMetaPath,function(err) {
+				if(err) {
+					if(err.code === "ENOENT") {
+						return callback(null,bootInfo);
+					}
+					if((err.code === "EPERM" || err.code === "EACCES") && err.syscall === "unlink") {
+						$tw.syncer.displayError("Server desynchronized. Error cleaning up previous metafile for tiddler: \"" + title + "\"",err);
+						return callback(null,bootInfo);
+					}
+					return callback(err);
+				}
+				return callback(null,bootInfo);
+			});
+		} else {
+			return callback(null,bootInfo);
+		}
 	} else {
 		return callback(null,bootInfo);
 	}
