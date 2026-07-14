@@ -1,0 +1,49 @@
+change-category: hackability
+change-type: feature
+created: 20260226000000000
+description: Add module-alias field for require() alias resolution in JavaScript modules
+github-contributors: linonetwo
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9698
+modified: 20260227000000000
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9698
+type: text/vnd.tiddlywiki
+
+Adds a new `module-alias` tiddler field that allows JavaScript library tiddlers to declare one or more short names for use with `require()`.
+
+Plugin developers can now write:
+
+```
+module-alias: prosemirror-model
+```
+
+on a library tiddler at `$:/plugins/myplugin/lib/prosemirror-model.js`, and any JavaScript module inside that plugin can then call:
+
+```javascript
+const {Node} = require("prosemirror-model");
+```
+
+instead of the full tiddler path. This resolves the problem described in [[issue #8999|https://github.com/TiddlyWiki/TiddlyWiki5/issues/8999]].
+
+Notes:
+
+* The field value uses the same string-array format as `tags` (space-separated; use `[[double brackets]]` for names containing spaces)
+* Real module titles always take priority over aliases
+* Duplicate alias warnings are logged to the console
+
+
+Adds a new `alias` tiddler field (string array format, same as `tags`/`list`) that allows a tiddler to declare one or more alternative names.
+
+Aliases work across all layers of TiddlyWiki:
+
+* ''require()'': `require('short-name')` resolves to a library tiddler with `alias: short-name`, enabling npm-style package names for plugin libraries
+* ''Links'': `[[short-name]]` displays as a resolved (non-missing) link and navigates to the real tiddler; alias links receive a `tc-tiddlylink-alias` CSS class
+* ''Navigation'': any `tm-navigate` message with an alias as target (including from action widgets) is resolved to the real tiddler before opening in the story river
+* ''Transclude'': `{{short-name}}` and `<$transclude $tiddler="short-name"/>` transclude the content of the aliased tiddler
+* ''Backlinks'': `[backlinks[RealTitle]]` includes tiddlers that link via any declared alias
+* ''Backtranscludes'': `[backtranscludes[RealTitle]]` includes tiddlers that transclude via any declared alias
+* ''Missing titles'': links via alias are not counted as missing tiddlers
+* ''Filter operator'': `[alias[short-name]]` returns tiddlers that declare the given alias (uses the new AliasIndexer for efficient lookup)
+
+Real tiddler titles always take priority over aliases. See [[GithubLinks PR #8999|https://github.com/TiddlyWiki/TiddlyWiki5/issues/8999]] for the original request.
