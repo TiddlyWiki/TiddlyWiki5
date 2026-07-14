@@ -368,7 +368,7 @@ describe("WikiText parser tests", function() {
 	it("should parse hard linebreak areas", function() {
 		expect(parse("\"\"\"Something\nin the\nway she moves\n\"\"\"\n\n")).toEqual(
 
-			[ { type : "element", tag : "p", rule: "parseblock", children : [ { type : "text", text : "Something", start : 3, end : 12, rule: "hardlinebreaks", isRuleStart: true }, { type : "element", tag : "br", rule: "hardlinebreaks", start: 12, end: 13 }, { type : "text", text : "in the", start : 13, end : 19, rule: "hardlinebreaks" }, { type : "element", tag : "br", rule: "hardlinebreaks", start: 19, end: 20 }, { type : "text", text : "way she moves", start : 20, end : 33, rule: "hardlinebreaks" }, { type : "element", tag : "br", rule: "hardlinebreaks", start: 33, end: 34, isRuleEnd: true } ], start : 0, end : 37 } ]
+			[ { type : "element", tag : "p", rule: "parseblock", children : [ { type : "void", rule: "hardlinebreaks", start : 0, end : 37, children : [ { type : "text", text : "Something", start : 3, end : 12 }, { type : "element", tag : "br", rule: "hardlinebreaks", start: 12, end: 13 }, { type : "text", text : "in the", start : 13, end : 19 }, { type : "element", tag : "br", rule: "hardlinebreaks", start: 19, end: 20 }, { type : "text", text : "way she moves", start : 20, end : 33 }, { type : "element", tag : "br", rule: "hardlinebreaks", start: 33, end: 34 } ] } ], start : 0, end : 37 } ]
 
 		);
 
