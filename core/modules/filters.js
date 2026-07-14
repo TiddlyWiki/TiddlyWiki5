@@ -203,9 +203,16 @@ exports.parseFilter = function(filterString) {
 				p = parseFilterOperation(operation.operators,filterString,p);
 			}
 			// Quoted strings and unquoted title
-			if(match[5] || match[6] || match[7]) { // Double quoted string, single quoted string or unquoted title
+			// Preserve the original quote style as CST metadata on the operator so
+			// that a serializer can round-trip the original source without normalizing.
+			// match[5] = double-quoted, match[6] = single-quoted, match[7] = unquoted
+			// The original condition (match[5] || match[6] || match[7]) is kept so that
+			// empty quoted titles "" / '' continue to be ignored, preserving existing behaviour.
+			if(match[5] || match[6] || match[7]) {
+				var titleText = match[5] || match[6] || match[7];
+				var titleQuote = match[5] !== undefined ? "double" : (match[6] !== undefined ? "single" : "none");
 				operation.operators.push(
-					{operator: "title", operands: [{text: match[5] || match[6] || match[7]}]}
+					{operator: "title", operands: [{text: titleText}], titleQuote: titleQuote}
 				);
 			}
 			results.push(operation);
