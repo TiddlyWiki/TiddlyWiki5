@@ -1,0 +1,53 @@
+created: 20260402120000000
+import-compound: $:/spec/Examples/TOC/advanced/tv-toc-show-new-child
+modified: 20260402120000000
+tags: $:/tags/wiki-test-spec advanced
+title: Examples/TOC/advanced/tv-toc-show-new-child
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows the ''tv-toc-show-new-child'' variable
+
+* Setting it to `yes` adds a "new child" button to every node
+
+* Uses ''parentField'' mode with `exclude:"p1.1"`
+
+* `p1` has a `toc-include: p1 p2` field — it includes itself (recursion detection) and `p2` (CTRL-click testing)
+
+* The button creates a new tiddler with the parent field pre-set
+
++
+title: Description
+
+tv-toc-show-new-child with parentField
++
+title: root
+
+Root node
+
++
+title: p1
+parent: root
+toc-include: p1 p2
+
+p1 toc-includes itself for recursion detection and p2 for CTRL-click testing
+
++
+title: p1.1
+parent: p1
+
+This tiddler is excluded in the macro call
+
++
+title: p2
+parent: root
+
++
+title: Output
+
+\define tv-toc-show-new-child() yes
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"root" parentField:"parent" exclude:"p1.1">>
+</div>

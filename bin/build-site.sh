@@ -116,7 +116,25 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--version \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--build favicon static index external-js \
+	--build favicon static-base index external-js \
+	|| exit 1
+
+# alltiddlers.html and the per-tiddler static pages each accumulate ~2GB of
+# render caches; building them in one process exceeds the memory limit of CI
+# build containers (e.g. Netlify), so they get a separate process each
+
+node $TW5_BUILD_TIDDLYWIKI \
+	$TW5_BUILD_MAIN_EDITION \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT \
+	--build static-alltiddlers \
+	|| exit 1
+
+node $TW5_BUILD_TIDDLYWIKI \
+	$TW5_BUILD_MAIN_EDITION \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT \
+	--build static-tiddlers \
 	|| exit 1
 
 # /empty.html					Empty

@@ -1,0 +1,23 @@
+created: 20260402120000000
+modified: 20260402120000000
+caption: TOC Macros Customisation
+tags: [[Table-of-Contents Macros]]
+title: Table-of-Contents Macros Customisation
+type: text/vnd.tiddlywiki
+
+Customisation and developer documentation for the [[Table-of-Contents Macros]].
+
+; [[Icons and Behaviour|Table-of-Contents Macros Icons and Behaviour]]
+: CTRL-click expand/fold, custom icons, pre-expanded trees, and level indicator
+
+; [[Tooltips and Styling|Table-of-Contents Macros Tooltips and Styling]]
+: Custom tooltips, `data-fieldClass` styling, and CSS classes for node control fields
+
+; [[Templates|Table-of-Contents Macros Templates]]
+: New-child buttons, custom item templates, field cascade logic, and `toc-caption` backwards compatibility
+
+; [[CSS Reference|Table-of-Contents Macros CSS Reference]]
+: Complete CSS classes reference, breaking changes to tabbed TOC selectors, and migration guide for custom stylesheets
+
+; [[Internals|Table-of-Contents Macros Internals]]
+: State tiddlers, programmatic branch control, deprecated parameters, internal architecture, and function reference
