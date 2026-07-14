@@ -35,6 +35,8 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 		infoTiddlerFields.push({title: "$:/info/browser/screen/height", text: window.screen.height.toString()});
 		// Language
 		infoTiddlerFields.push({title: "$:/info/browser/language", text: navigator.language || ""});
+		// Secure context
+		infoTiddlerFields.push({title: "$:/info/browser/secure-context", text: window.isSecureContext ? "yes" : "no"});
 	}
 	return infoTiddlerFields;
 };
