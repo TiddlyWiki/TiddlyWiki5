@@ -82,6 +82,11 @@ var TW_Style = function(el) {
 	// Return a Proxy to handle direct access to individual style properties
 	return new Proxy(styleObject, {
 		get: function(target, property) {
+			// Real CSSStyleDeclaration returns undefined for non-string keys.
+			// Guards against crashes when consumers probe Symbol.toPrimitive etc.
+			if(typeof property !== "string") {
+				return undefined;
+			}
 			// If the property exists on styleObject, return it (get, set, setProperty methods)
 			if(property in target) {
 				return target[property];
@@ -90,6 +95,10 @@ var TW_Style = function(el) {
 			return el._style[$tw.utils.convertStyleNameToPropertyName(property)] || "";
 		},
 		set: function(target, property, value) {
+			// Mirror the get trap: ignore non-string keys instead of crashing.
+			if(typeof property !== "string") {
+				return true;
+			}
 			// Set the property in _style
 			el._style[$tw.utils.convertStyleNameToPropertyName(property)] = value;
 			return true;
@@ -106,7 +115,9 @@ var TW_Element = function(tag, namespace) {
 	this.children = [];
 	this._style = {}; // Internal style object
 	this.style = new TW_Style(this); // Proxy for style management
-	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
+	// createElementNS with empty-string or null normalises to null (no namespace) per spec.
+	// https://dom.spec.whatwg.org/#dom-document-createelementns
+	this.namespaceURI = namespace !== undefined ? (namespace || null) : "http://www.w3.org/1999/xhtml";
 };
 
 
@@ -197,7 +208,16 @@ TW_Element.prototype.addEventListener = function(type,listener,useCapture) {
 
 Object.defineProperty(TW_Element.prototype, "tagName", {
 	get: function() {
-		return this.tag || "";
+		if(!this.tag) {
+			return "";
+		}
+		// HTML elements report uppercase tagName per DOM spec. Other namespaces
+		// preserve case. Fakedom only models HTML documents.
+		// https://dom.spec.whatwg.org/#dom-element-tagname
+		if(this.namespaceURI === "http://www.w3.org/1999/xhtml") {
+			return this.tag.toUpperCase();
+		}
+		return this.tag;
 	}
 });
 
