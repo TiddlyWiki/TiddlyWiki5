@@ -1,6 +1,6 @@
-title: $:/changenotes/5.4.1/#9891
+title: $:/changenotes/5.5.0/#9891
 description: Move background action log inside platforms check to avoid spurious server-side logs
-release: 5.4.1
+release: 5.5.0
 tags: $:/tags/ChangeNote
 change-type: bugfix
 change-category: core
