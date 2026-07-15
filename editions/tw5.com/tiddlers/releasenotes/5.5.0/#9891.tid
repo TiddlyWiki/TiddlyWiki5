@@ -3,7 +3,7 @@ description: Move background action log inside platforms check to avoid spurious
 release: 5.5.0
 tags: $:/tags/ChangeNote
 change-type: bugfix
-change-category: core
+change-category: internal
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9891
 github-contributors: linonetwo
 
