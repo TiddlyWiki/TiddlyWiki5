@@ -1,0 +1,9 @@
+title: $:/changenotes/5.5.0/#9907/impacts/text-end-positions
+changenote: $:/changenotes/5.5.0/#9907
+created: 20260712232208000
+modified: 20260712232208000
+tags: $:/tags/ImpactNote
+description: Text and end positions of paragraph nodes before block terminators have changed
+impact-type: compatibility-break
+
+Paragraph text nodes inside quote, style, HTML and conditional blocks no longer end with an invisible newline; their `end` positions shrink accordingly. All block constructs now yield the same paragraph text, as the blank-line form and `codeblock`, `typedblock` and `\procedure` already did. Rendered output is unchanged.
