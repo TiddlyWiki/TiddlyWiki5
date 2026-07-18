@@ -1,0 +1,11 @@
+title: $:/changenotes/5.5.0/#8702/impacts/wikitext-palette-entries
+changenote: $:/changenotes/5.5.0/#8702
+created: 20250901000000000
+modified: 20260718000000000
+tags: $:/tags/ImpactNote
+description: Palette entries using wikitext other than the `<<colour ...>>` macro will no longer work
+impact-type: deprecation
+
+Before v5.5.0, TiddlyWiki palette entries were interpreted as WikiText. In practice this was almost always used for the familiar `<<colour ...>>` macro, but any valid wikitext could be used, including widgets and conditionals.
+
+From v5.5.0 onwards, palette entries are treated as filter expressions. Entries using the `<<colour ...>>` macro continue to work unchanged: they are automatically transformed into the equivalent filter expression `[tf.colour[...]]`. However, any other wikitext constructs are not supported and will not function correctly.

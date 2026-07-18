@@ -1,6 +1,6 @@
-title: $:/changenotes/5.4.0/#8702
-description: Colour handling improvements
-release: 5.4.0
+title: $:/changenotes/5.5.0/#8702
+description: Colour palette improvements
+release: 5.5.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: hackability
@@ -17,8 +17,8 @@ There are also new capabilities for palette authors:
 
 * Inheritance for palettes, making it easy to create chains of variants of a base palette
 * Self contained palettes that can contain both dark and light variants (or variants for any other custom scheme)
+* Automatic readability tests that palettes can use to check colour contrast, with the results shown in the palette chooser
 
-To make all of these new features possible, this PR also includes some useful new general purpose mechanisms and features:
+Palette entries are now defined as filters that are evaluated, rather than wikitext that is wikified. When switching to a new palette, its colours are compiled to raw CSS colour values in the system tiddler `$:/temp/palette-colours`, which also allows the `<<colour>>` macro to become a function that can be used as the value of a style attribute.
 
-* Several new filter operators for manipulating colour values. The underlying functionality comes from the [[color.js|https://colorjs.io/]] library
-* New `changecount` filter operator
+The general purpose mechanisms underpinning these features are described in their own change notes: the new colour manipulation filter operators, the new `changecount` filter operator, and the new `::defaultprefix` filter pragma.
