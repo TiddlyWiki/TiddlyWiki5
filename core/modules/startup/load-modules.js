@@ -50,8 +50,6 @@ exports.startup = function() {
 		wiki: $tw.wiki,
 		document: $tw.browser ? document : $tw.fakeDocument
 	});
-	// Set up the performance framework
-	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
 	// Kick off the filter tracker
 	$tw.filterTracker = new $tw.FilterTracker($tw.wiki);
 	$tw.wiki.addEventListener("change",function(changes) {
