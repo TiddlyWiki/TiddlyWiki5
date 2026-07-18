@@ -30,10 +30,13 @@ modified: 20250204130756749
 
 The following features are required for the new colour handling system, but are general purpose, and may be cherry picked for earlier merging:
 
-* [[Background Actions]]
-* [[Media Query Tracker Mechanism]]
 * [[changecount Operator]]
-* [[Apply Filter Run Prefix]]
+* New "defaultprefix" filter run prefix for specifying the default filter run prefix for subsequent filter runs in a filter expression 
+** Changed the default filter run prefix for some widget attributes from "or" to "all" where the former is error prone
+*** [[ActionSendMessageWidget]] "names" and "values" attributes
+*** [[ActionSetMultipleFields]] "fields", "indexes" and "values"  attributes
+*** [[SetMultipleVariablesWidget]] "names" and "values" attributes
+*** [[GenesisWidget]] "names" and "values" attributes
 
 ! Under the Covers
 
