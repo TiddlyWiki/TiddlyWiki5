@@ -374,7 +374,14 @@ exports.compileFilter = function(filterString,options) {
 				var options = {wiki: self, suffixes: operation.suffixes || []};
 				switch(operation.prefix || "") {
 					case "": // Use the default filter run prefix if none is specified
-						return filterRunPrefixes[defaultFilterRunPrefix](operationSubFunction, options);
+						if(filterRunPrefixes[defaultFilterRunPrefix]) {
+							return filterRunPrefixes[defaultFilterRunPrefix](operationSubFunction, options);
+						} else {
+							return function(results,source,widget) {
+								results.clear();
+								results.push($tw.language.getString("Error/FilterRunPrefix"));
+							};
+						}
 					case "=": // The results of the operation are pushed into the result without deduplication
 						return filterRunPrefixes["all"](operationSubFunction, options);
 					case "-": // The results of this operation are removed from the main result
