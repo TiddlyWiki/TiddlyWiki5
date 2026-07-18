@@ -18,7 +18,14 @@ exports.parseCSSColor = function(colourString) {
 	var c = exports.parseCSSColorObject(colourString);
 	if(c) {
 		var rgb = c.srgb;
-		return [rgb[0],rgb[1],rgb[2],c.alpha];
+		// Return components in the 0-255 range, matching the legacy csscolorparser.
+		// Clamp because Color.js can emit out-of-gamut sRGB components (e.g. from P3 inputs).
+		return [
+			Math.round(Math.max(0,Math.min(255,rgb[0] * 255))),
+			Math.round(Math.max(0,Math.min(255,rgb[1] * 255))),
+			Math.round(Math.max(0,Math.min(255,rgb[2] * 255))),
+			c.alpha
+		];
 	} else {
 		return null;
 	}
