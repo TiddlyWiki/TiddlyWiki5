@@ -49,14 +49,14 @@ exports.parseCSSColorObject = function(colourString) {
 Convert a CSS colour to an RGB string suitable for use with the <input type="color"> element
 */
 exports.convertCSSColorToRGBString = function(colourString) {
-	var c = exports.parseCSSColorObject(colourString);
-	if(c) {
-		var hex = c.toString({format: "hex"});
-		if(hex.length === 4) {
-			hex = "#" + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];
-		}
-		return hex;
+	// The <input type="color"> element only accepts six digit hex values, so we
+	// discard any alpha channel and fall back to black for unparseable input
+	var rgb = exports.parseCSSColor(colourString);
+	if(rgb) {
+		return "#" + rgb.slice(0,3).map(function(component) {
+			return ("0" + component.toString(16)).slice(-2);
+		}).join("");
 	} else {
-		return null;
+		return "#000000";
 	}
 };
