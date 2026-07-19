@@ -221,6 +221,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			this.refreshSelf();
 			return true;
 		} else if(changedAttributes["default"] || changedTiddlers[this.editRefreshTitle]) {
+			this.editDefault = this.getAttribute("default");
 			this.engine.updateDomNodeText(this.getEditInfo().value);
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
