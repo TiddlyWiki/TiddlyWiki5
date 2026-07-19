@@ -6,5 +6,5 @@ type: application/x-tiddler-dictionary
 color-scheme: [{$:/info/browser/darkmode}!match[yes]then[light]else[dark]]
 settings: $:/palettes/AutoToggle/Settings
 palette-import@light: $:/palettes/TwentyTwenties
-palette-import@dark: $:/palettes/TwentyTwentiesDark
+palette-import@dark: $:/palettes/TwentyTwenties/Dark
 category: 2026

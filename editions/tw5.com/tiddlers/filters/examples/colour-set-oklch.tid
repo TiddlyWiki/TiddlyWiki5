@@ -1,0 +1,10 @@
+created: 20260719103738000
+modified: 20260719103738000
+tags: [[colour-set-oklch Operator]] [[Operator Examples]]
+title: colour-set-oklch Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[red]colour-set-oklch:h[240]]" "changing the hue of red to 240 degrees gives a blue">>
+<<.operator-example 2 "[[red]colour-set-oklch:l[0.9]]" "raising the lightness of red to 0.9 gives a pink">>
+<<.operator-example 3 "[[red]colour-set-oklch:c[0.05]]" "lowering the chroma of red to 0.05 gives a muted grey">>
+<<.operator-example 4 "[[#79B5C4]colour-set-oklch:l[0.3]]" "setting an absolute lightness of 0.3 darkens this pale blue">>
