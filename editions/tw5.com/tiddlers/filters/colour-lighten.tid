@@ -1,0 +1,26 @@
+created: 20260718221135000
+modified: 20260718221135000
+tags: [[Filter Operators]] [[Colour Operators]]
+title: colour-lighten Operator
+caption: colour-lighten
+op-purpose: lighten colour values
+op-input: a selection of colour values
+op-parameter: the proportion by which to raise the lightness, from 0 to 1
+op-output: the lightened colours
+
+<<.from-version "5.5.0">> See ColourPalettes for background.
+
+The <<.op colour-lighten>> operator raises the lightness of each input colour by the given proportion of its current lightness. The adjustment is made in the LCh colour space, which is perceptually uniform. A parameter of 0 leaves the colour unchanged, and a parameter of 1 doubles its lightness.
+
+Input values that cannot be parsed as colours are returned as empty strings.
+
+For example, this filter expression lightens the current page background colour by 20%:
+
+```
+[function[colour],[page-background]colour-lighten[0.2]]
+```
+
+See also the following related operators:
+
+* <<.olink colour-darken>> to darken a colour value
+* <<.olink colour-set-oklch>> to set the lightness of a colour value to an absolute level

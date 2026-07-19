@@ -1,0 +1,20 @@
+created: 20260718221135000
+modified: 20260718221135000
+tags: [[Filter Operators]]
+title: changecount Operator
+caption: changecount
+op-purpose: retrieve the change count of each input title
+op-input: a selection of tiddler titles
+op-output: the change count of each title
+
+<<.from-version "5.5.0">>
+
+The <<.op changecount>> operator returns the change count of each input title. The change count is a counter that is incremented each time a tiddler is created, stored or deleted during the current ~TiddlyWiki session. It is not saved with the wiki. Titles that have not changed during the session, including missing tiddlers, have a change count of 0.
+
+The operator is useful in contexts such as the track filters of [[Background Actions]], where it provides a value that changes whenever a tiddler changes:
+
+```
+[[$:/palette]changecount[]]
+```
+
+See also the <<.mlink changecount>> macro, which returns the change count of the current tiddler.

@@ -1,0 +1,28 @@
+created: 20260718221135000
+modified: 20260718221135000
+tags: [[Filter Operators]] [[Colour Operators]]
+title: colour-contrast Operator
+caption: colour-contrast
+op-purpose: measure the contrast between pairs of colours
+op-input: a selection of two or more colour values
+op-output: the contrast between each colour and the colour before it
+
+<<.from-version "5.5.0">> See ColourPalettes for background.
+
+The <<.op colour-contrast>> operator measures the contrast between each input colour and the colour before it in the list. Given N input colours, it returns N-1 contrast values.
+
+The contrast is calculated with the Delta Phi Star algorithm, on a scale from 0 (no contrast) to approximately 100 (black on white). Input values that cannot be parsed as colours are treated as white.
+
+For example, this filter expression measures the contrast between black and white:
+
+```
+[[black]] [[white]] +[colour-contrast[]]
+```
+
+The result is <<.value 101.42135623730948>>.
+
+The [[readability tests|Palette Readability Tests]] of the core palettes use this operator via the function <<.var tf.check-colour-contrast>>.
+
+See also the following related operators:
+
+* <<.olink colour-best-contrast>> to choose the colour that contrasts best with a target colour

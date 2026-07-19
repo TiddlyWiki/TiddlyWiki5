@@ -1,31 +1,76 @@
 created: 20140216102454178
-modified: 20230803045407958
+modified: 20260719103738000
 tags: Concepts
 title: ColourPalettes
 type: text/vnd.tiddlywiki
 
-A colour palette is a [[data tiddler|DataTiddlers]] that supplies a [[CSS|Cascading Style Sheets]] colour value, such as ''yellow'' or ''#fe0'', for each of several colour names, like this:
+A colour palette is a [[data tiddler|DataTiddlers]] that supplies a colour value for each of several colour names, like this:
 
 ```
 page-background: #fe0
 table-border: #ccc
-...
+tiddler-controls-foreground-selected: [tf.interpolate-colours[tiddler-background],[foreground],[0.9]]
 ```
 
-Several palettes form part of the core. The system tiddler [[$:/palette]] always contains the title of the currently selected palette tiddler. You can change a palette using the <<.icon $:/core/images/palette>> ''palette'' button, found on the "Tools" tab in the sidebar.
+<<.from-version "5.5.0">> Each entry is a filter expression that is evaluated to produce a [[CSS|Cascading Style Sheets]] colour value. An entry that is a plain CSS colour value, such as ''yellow'' or ''#fe0'', evaluates to itself. An entry can also compute its colour from other entries, using the [[Colour Operators]] and the function <<.var tf.colour>>, which retrieves another entry by name.
 
-To retrieve the value of a named colour from the current palette, e.g. for use in a stylesheet tiddler, use the <<.mlink colour>> macro:
+For backwards compatibility, entries of the classic form `<<colour name>>` are automatically converted to the equivalent filter `[tf.colour[name]]`. Other WikiText constructs are not supported, as palette entries are no longer wikified.
 
-```
-<<colour page-background>>
-```
+The system tiddler [[$:/palette]] always contains the title of the currently selected palette tiddler. You can switch palettes with the [[Palette Chooser]].
 
-Palette tiddlers should have the following fields:
+!! Palette compilation
+
+When the wiki starts, and whenever the current palette changes, the palette is <<.def compiled>>: each entry is evaluated, and the resulting plain CSS colour values are stored in the temporary tiddler <<.tid "$:/temp/palette-colours">>. The <<.mlink colour>> function reads from the compiled palette, so that colours can be used without evaluating the palette entries again.
+
+Compilation is triggered automatically by a [[background action|Background Actions]] that tracks the palette, so custom code that changes [[$:/palette]] does not need to take any special steps.
+
+!! Palette tiddler fields
+
+Palette tiddlers have the following fields:
 
 |!Name |!Value |
-|title |Typically starting with `$:/` |
+|title |Typically starting with `$:/palettes/` |
 |type |`application/x-tiddler-dictionary` |
 |tags |`$:/tags/Palette` |
-|name |Displayed in the palette browser |
-|description |Displayed in the palette browser |
+|name |Displayed in the palette chooser |
+|description |Displayed in the palette chooser |
+|color-scheme |<<.from-version "5.5.0">> Optional filter determining the active [[colour scheme|Colour Schemes]] |
+|palette-import |<<.from-version "5.5.0">> Optional title of another palette to import; see [[Palette Inheritance]] |
+|settings |<<.from-version "5.5.0">> Optional title of a settings panel shown beneath the chooser; see [[Customising a Palette]] |
+|category |<<.from-version "5.5.0">> Optional descriptive category |
 |text |`name: value` colour definitions |
+
+Entries whose names begin with `?` are [[readability tests|Palette Readability Tests]] rather than colours.
+
+!! Palette settings
+
+<<.from-version "5.5.0">> The <<.field settings>> field gives the title of a tiddler that is transcluded beneath the [[Palette Chooser]] whenever the palette is selected. It typically contains controls that write directly to the entries of the palette tiddler, and the palette is automatically recompiled as they change.
+
+For example, this settings tiddler offers a colour picker for the `base-paper` entry:
+
+```
+title: $:/palettes/MyPalette/Settings
+
+Paper: <$edit-text tiddler={{$:/palette}} index="base-paper" type="color" tag="input" default={{{ [function[colour],[base-paper]] }}}/>
+```
+
+The core palette ~TwentyTwenties uses this technique to offer a colour picker for each of its base colours, and ~AutoToggle to offer dropdowns choosing the palettes to use in light and dark modes. Because fields are [[inherited|Palette Inheritance]], a palette that imports another palette also inherits its settings panel unless it overrides the <<.field settings>> field.
+
+!! Under the covers
+
+The compilation process is implemented in [[$:/core/macros/CSS]]. It generates two temporary tiddlers:
+
+|!Title |!Content |
+|<<.tid "$:/temp/palette-consolidated">> |The result of merging the current palette with its chain of [[imported palettes|Palette Inheritance]]. The entries are the raw filter expressions, not the computed colours |
+|<<.tid "$:/temp/palette-colours">> |The computed CSS colour value of each entry |
+
+The [[background action|Background Actions]] <<.tid "$:/core/background-actions/AutoCompilePalette">> triggers recompilation when [[$:/palette]] changes, or when the [[colour scheme|Colour Schemes]] of the current palette changes.
+
+!! Further reading
+
+;Using palettes
+: [[Palette Chooser]], [[Automatic Palette Switching]], [[Customising a Palette]], [[Palettes and Themes]]
+;Writing palettes
+: [[Palette Inheritance]], [[Colour Schemes]], [[Palette Readability Tests]], [[colour Macro]]
+;Reference
+: [[Colour Operators]], [[Colour Spaces]], [[Colour Interpolation Hues]], [[changecount Operator]], [[defaultprefix Filter Pragma]], [[Background Actions]], [[Media Query Tracker Mechanism]]

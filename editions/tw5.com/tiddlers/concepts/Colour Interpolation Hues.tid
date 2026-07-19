@@ -1,0 +1,18 @@
+created: 20260718221135000
+modified: 20260718221135000
+tags: Concepts
+title: Colour Interpolation Hues
+type: text/vnd.tiddlywiki
+
+Some [[colour spaces|Colour Spaces]] express colours using a hue angle on a circle running from 0 to 360 degrees. When interpolating between two colours in such a space, there are two ways around the circle, and the choice can produce drastically different results. The <<.def "hue adjuster">> controls which route is taken. It is used as the second suffix of the <<.olink colour-interpolate>> operator.
+
+|!Hue adjuster |!Route taken between the two hues |
+|shorter |The shorter arc around the hue circle. This is the default |
+|longer |The longer arc around the hue circle |
+|increasing |The hue angle always increases, wrapping from 360 back to 0 if necessary |
+|decreasing |The hue angle always decreases, wrapping from 0 back to 360 if necessary |
+|raw |The numeric hue values are interpolated directly, without wrapping |
+
+For example, interpolating from red to purple with the ''shorter'' adjuster passes through pink, while the ''raw'' adjuster passes through the intervening hues of the spectrum, producing a rainbow effect. The examples in [[colour-interpolate Operator]] illustrate the difference.
+
+See [[hue interpolation|https://developer.mozilla.org/en-US/docs/Web/CSS/hue-interpolation-method]] on MDN for the corresponding CSS feature.

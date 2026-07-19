@@ -1,0 +1,28 @@
+created: 20260718221135000
+modified: 20260718221135000
+tags: Concepts
+title: Palette Readability Tests
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> A palette can include tests that check its colours work well together. Failing tests are reported at the bottom of the [[Palette Chooser]], where they warn the user that the current combination of colours may be hard to read.
+
+A readability test is a palette entry whose name begins with `?`. Like any other entry, its value is a filter expression that is evaluated when the palette is [[compiled|ColourPalettes]]. The filter is expected to return the text ''ok'' if the test passes, or a message describing the problem if it fails:
+
+```
+?base-paper-ink: [tf.check-colour-contrast[base-paper],[base-ink],[45]]
+```
+
+Palettes tagged <<.tag "$:/tags/BackgroundPalette">> can supply tests that apply to every palette. The core uses this to test the contrast of the standard background, foreground, alert and code colours.
+
+!! tf.check-colour-contrast
+
+The core function <<.var tf.check-colour-contrast>> measures the contrast between two palette entries with the <<.olink colour-contrast>> operator, and compares it against a threshold.
+
+;paletteEntryA
+: The name of the first palette entry
+;paletteEntryB
+: The name of the second palette entry
+;threshold
+: The minimum acceptable contrast, on a scale from 0 (no contrast) to approximately 100 (black on white). The core palettes use a threshold of 45
+
+The function returns ''ok'' if the contrast exceeds the threshold, and otherwise an error message of the form <<.word "base-paper/base-ink contrast is too low">>.
