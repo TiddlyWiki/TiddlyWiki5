@@ -27,16 +27,16 @@ tags: $:/tags/Macro
 					<$transclude $variable="actions-compile-palette-import" inputPalette=<<inputPalette>> outputPalette=<<outputPalette>> exclusions=<<exclusions>> scheme=<<scheme>>/>
 				<%endif%>
 			</$let>
-			<!-- Copy the suffixed palette entries with the suffix stripped -->
+			<!-- Copy the unsuffixed palette entries -->
+			<$action-setmultiplefields $tiddler=<<outputPalette>> $indexes="[<inputPalette>indexes[]!regexp[@]sort[]]" $values="[<inputPalette>indexes[]!regexp[@]sort[]] :map[<inputPalette>getindex<currentTiddler>]"/>
+			<!-- Copy the suffixed palette entries with the suffix stripped, overriding any unsuffixed entries of the same name -->
 			<%if [<scheme>!is[blank]] %>
 				<$let
 					prefixed-scheme={{{ [<scheme>addprefix[@]] }}}
 				>
-					<$action-setmultiplefields $tiddler=<<outputPalette>> $indexes="[<inputPalette>indexes[]suffix<prefixed-scheme>removesuffix<prefixed-scheme>sort[]]" $values="[<inputPalette>indexes[]suffix<prefixed-scheme>sort[]] :map[<inputPalette>getindex<currentTiddler>]"/>
+					<$action-setmultiplefields $tiddler=<<outputPalette>> $indexes="[<inputPalette>indexes[]suffix<prefixed-scheme>sort[]removesuffix<prefixed-scheme>]" $values="[<inputPalette>indexes[]suffix<prefixed-scheme>sort[]] :map[<inputPalette>getindex<currentTiddler>]"/>
 				</$let>
-			<%endif%
-			<!-- Copy the unsuffixed palette entries -->
-			<$action-setmultiplefields $tiddler=<<outputPalette>> $indexes="[<inputPalette>indexes[]!regexp[@]sort[]]" $values="[<inputPalette>indexes[]!regexp[@]sort[]] :map[<inputPalette>getindex<currentTiddler>]"/>
+			<%endif%>
 			<!-- Copy the fields from the palette -->
 			<$action-setmultiplefields $tiddler=<<outputPalette>> $fields="[<inputPalette>fields[]sort[]] -title -tags -text" $values="[<inputPalette>fields[]sort[]] -title -tags -text :map[<inputPalette>get<currentTiddler>]"/>
 		</$set>
