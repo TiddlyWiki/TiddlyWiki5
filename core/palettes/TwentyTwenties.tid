@@ -178,7 +178,7 @@ toolbar-options-button:
 toolbar-save-button: 
 tour-chooser-button-foreground: <<colour very-muted-foreground>>
 tour-chooser-button-hover-background: <<colour muted-foreground>>
-tour-chooser-button-hover-foreground: : <<colour background>>
+tour-chooser-button-hover-foreground: <<colour background>>
 tour-chooser-button-selected-background: <<colour primary>>
 tour-chooser-button-selected-foreground: <<colour background>>
 tour-chooser-dropdown-foreground: <<colour very-muted-foreground>>

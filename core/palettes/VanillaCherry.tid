@@ -7,6 +7,6 @@ type: application/x-tiddler-dictionary
 color-scheme: light
 palette-import: $:/palettes/Vanilla
 
-primary:rgb(224, 32, 86);
+primary: rgb(224, 32, 86)
 menubar-foreground: #fff
 menubar-background: <<colour primary>>
