@@ -1,0 +1,39 @@
+title: Operators/Palettes/PreviewCyclicImports
+description: The palette.preview widget copes with palettes that import each other in a circular loop
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<$palette.preview paletteTitle="PaletteA">
+<<colour local>>
+<<colour inherited>>
+<<colour missing>>
+</$palette.preview>
++
+title: PaletteA
+name: Palette A
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+palette-import: PaletteB
+color-scheme: light
+
+local: #111111
++
+title: PaletteB
+name: Palette B
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+palette-import: PaletteA
+color-scheme: light
+
+inherited: #222222
++
+title: ExpectedResult
+
+<p>
+#111111
+#222222
+
+</p>

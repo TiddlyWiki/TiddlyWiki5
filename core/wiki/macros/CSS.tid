@@ -108,12 +108,18 @@ tags: $:/tags/Macro
 
 \widget $palette.preview(paletteTitle)
 	\whitespace trim
-	\function colour-inner-get-imported-palette(name,paletteTitle)
-	[[palette-import@]addsuffix<scheme>] :map[<paletteTitle>get<currentTiddler>has[title]] +[!match[]] :else[<paletteTitle>get[palette-import]has[title]] :map[function[colour-inner-get-palette-entry],<name>,<currentTiddler>] +[!match[]] 
+	<!-- The exclusions parameter guards against palettes that import each other in a loop -->
+	\function colour-inner-get-imported-palette(name,paletteTitle,exclusions)
+	[[palette-import@]addsuffix<scheme>] :map[<paletteTitle>get<currentTiddler>has[title]] +[!match[]] :else[<paletteTitle>get[palette-import]has[title]] +[!match[]] :filter[enlist<exclusions>match<currentTiddler>count[]compare:number:eq[0]] :map[function[colour-inner-descend-imported-palette],<name>,<currentTiddler>,<exclusions>,<paletteTitle>] +[!match[]] 
 	\end colour-inner-get-imported-palette
 
-	\function colour-inner-get-palette-entry(name,paletteTitle)
-	[<name>addprefix[@]addprefix<scheme>] :map[<paletteTitle>getindex<currentTiddler>] +[!match[]] :else[<paletteTitle>getindex<name>] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :else[function[colour-inner-get-imported-palette],<name>,<paletteTitle>]
+	<!-- Helper to extend the exclusions list with the parent palette before descending -->
+	\function colour-inner-descend-imported-palette(name,paletteTitle,exclusions,parentTitle)
+	[enlist<exclusions>] [<parentTitle>] +[format:titlelist[]join[ ]] :map[function[colour-inner-get-palette-entry],<name>,<paletteTitle>,<currentTiddler>]
+	\end colour-inner-descend-imported-palette
+
+	\function colour-inner-get-palette-entry(name,paletteTitle,exclusions)
+	[<name>addsuffix[@]addsuffix<scheme>] :map[<paletteTitle>getindex<currentTiddler>] +[!match[]] :else[<paletteTitle>getindex<name>] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :else[function[colour-inner-get-imported-palette],<name>,<paletteTitle>,<exclusions>]
 	\end colour-inner-get-palette-entry
 
 	<!-- Note the join, needed to cope with palette entries containing spaces -->
