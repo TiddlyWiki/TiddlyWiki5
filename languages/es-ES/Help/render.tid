@@ -11,12 +11,21 @@ También se puede especificar un nombre y valor para variables adicionales.
 --render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
 ```
 
-* ''tiddler-filter'': Un filtro que identifica los tiddlers que se procesarán
-* ''filename-filter'': Filtro opcional que transforma los títulos de tiddler en nombres de ruta. Si se omite, el valor predeterminado es `[is[tiddler]addsuffix[.html]]`, que utiliza el título del tiddler sin cambios como nombre de archivo
-* ''render-type'': Tipo de renderizado opcional: `text/html` (el predeterminado) devuelve el texto HTML completo y `text/plain` simplemente devuelve el contenido del texto (es decir, ignora las etiquetas HTML y otros elementos no imprimibles)
-* ''template'': Plantilla opcional a través de la cual se representa cada tiddler
-* ''name'': Nombre de variables opcionales
-* ''value'': Valor de variables opcionales
+```
+  tiddler-filter   Un filtro que identifica los tiddlers que se procesarán
+  filename-filter  Filtro opcional que transforma los títulos de tiddler en
+                   nombres de ruta. Si se omite, el valor predeterminado es
+                   [is[tiddler]addsuffix[.html]], que utiliza el título del
+                   tiddler sin cambios como nombre de archivo
+  render-type      Tipo de renderizado opcional: text/html (el predeterminado)
+                   devuelve el texto HTML completo y text/plain simplemente
+                   devuelve el contenido del texto (es decir, ignora las
+                   etiquetas HTML y otros elementos no imprimibles)
+  template         Plantilla opcional a través de la cual se representa cada
+                   tiddler
+  name             Nombre de variables opcionales
+  value            Valor de variables opcionales
+```
 
 De forma predeterminada, el nombre del archivo se resuelve relativo al subdirectorio `output` del directorio de edición. El comando `--output` se puede usar para dirigir la salida a otro directorio diferente.
 
@@ -31,5 +40,12 @@ Notas:
 
 Ejemplos:
 
-* `--render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'` -- renders all non-system tiddlers as files in the subdirectory "tiddlers" with URL-encoded titles and the extension HTML
-* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- renders the tiddlers tagged "HelloThere" to a JSON file named "tiddlers.json"
+```
+  Renderiza todos los tiddlers que no son del sistema como archivos en el subdirectorio "tiddlers" con títulos codificados en URL y la extensión HTML:
+
+    --render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'
+
+  Renderiza los tiddlers etiquetados "HelloThere" en un archivo JSON llamado "tiddlers.json":
+
+    --render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'
+```

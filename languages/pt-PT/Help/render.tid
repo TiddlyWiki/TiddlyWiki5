@@ -11,12 +11,20 @@ Pode ser opcionalmente definido um nome e um valor para uma variável adicional.
 --render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [<name>] [<value>]
 ```
 
-* ''tiddler-filter'': Um filtro a identificar os tiddler(s) a serem apresentados
-* ''filename-filter'': Filtro opcional que transforma títulos em caminhos de ficheiros. Se omisso, por defeito `[is[tiddler]addsuffix[.html]]`, que utiliza o título do tiddler inalterado como nome de ficheiro
-* ''render-type'': Tipo de representação opcional: `text/html` (pré definição) representa o texto HTML completo e `text/plain` apenas retorna o conteúdo de texto (ie ignora etiquetas HTML e outro conteúdo não legível)
-* ''template'': Modelo opcional a partir do qual cada tiddler é representado
-* ''name'': Nome opcional de uma variável
-* ''value'': Valor opcional de uma variável
+```
+  tiddler-filter   Um filtro a identificar os tiddler(s) a serem apresentados
+  filename-filter  Filtro opcional que transforma títulos em caminhos de
+                   ficheiros. Se omisso, por defeito
+                   `[is[tiddler]addsuffix[.html]]`, que utiliza o título do
+                   tiddler inalterado como nome de ficheiro
+  render-type      Tipo de representação opcional: `text/html` (pré definição)
+                   representa o texto HTML completo e `text/plain` apenas
+                   retorna o conteúdo de texto (ie ignora etiquetas HTML e
+                   outro conteúdo não legível)
+  template         Modelo opcional a partir do qual cada tiddler é representado
+  name             Nome opcional de uma variável
+  value            Valor opcional de uma variável
+```
 
 Por pré definição o nome de ficheiro é resolvido relativamente à sub-pasta `output` da pasta de edição. O comando `--output` pode ser utilizado para redireccionar a saída para uma pasta diferente.
 
@@ -30,5 +38,9 @@ Notas:
 
 Exemplos:
 
-* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- representa todos os tiddlers que não são de sistema, numa sub-pasta "tiddlers" com títulos codificados como URL e a extensão HTML
+```
+  Representa todos os tiddlers que não são de sistema, numa sub-pasta "tiddlers" com títulos codificados como URL e a extensão HTML:
+
+    --render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'
+```
 
