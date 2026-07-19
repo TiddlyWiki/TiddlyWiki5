@@ -69,6 +69,11 @@ tags: $:/tags/Macro
 		<$action-setfield $tiddler=<<outputPalette>> $field="color-scheme" $value=<<scheme>>/>
 		<!-- Compile the temporary palette to the output palette -->
 		<$transclude $variable="actions-compile-palette-filtered" consolidatedPalette=<<consolidatedPalette>> outputPalette=<<outputPalette>>/>
+		<!-- Blank any entries with recursive definitions, reporting them via the readability test mechanism -->
+		<$list filter="[<outputPalette>indexes[]!prefix[?]] :filter[<outputPalette>getindex<currentTiddler>regexp[Excessive filter recursion]]" variable="entry-name">
+			<$action-setfield $tiddler=<<outputPalette>> $index=<<entry-name>> $value=""/>
+			<$action-setfield $tiddler=<<outputPalette>> $index={{{ [<entry-name>addprefix[?recursion-]] }}} $value={{{ [[the definition of ']addsuffix<entry-name>addsuffix[' is recursive]] }}}/>
+		</$list>
 	</$let>
 </$let>
 \end actions-compile-palette
