@@ -25,6 +25,10 @@ exports["colour-get-oklch"] = makeSerialColourOperator(function (colour, operato
 	var prop = ((operator.suffixes || [])[0] || ["l"])[0];
 	if(["l","c","h"].indexOf(prop) !== -1) {
 		colour = colour.oklch[prop];
+		// Hue is null for achromatic colours
+		if(colour === null || colour === undefined || Number.isNaN(colour)) {
+			return "";
+		}
 	}
 	return colour.toString();
 });
@@ -63,6 +67,9 @@ exports["colour-best-contrast"] = makeParallelColourOperator(function (colours, 
 		return [];
 	}
 	var targetColour = colours[colours.length - 1];
+	if(!targetColour) {
+		return [];
+	}
 	for(var t=0; t<colours.length; t++) {
 		var colour = colours[t];
 		if(colour) {
