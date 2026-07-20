@@ -27,7 +27,7 @@ The <<.op colour-interpolate>> operator is used to interpolate colour values in 
 [colour-interpolate:<colour space>:<hue adjuster>[<colourA>],[<colourB>]]
 ```
 
-* ''colour space'': The name of the colour space to be used for the interpolation such as "LCh" (the default), "~OkLCh" or "sRGB". The full list of colour spaces that can be used for interpolation is given in [[Colour Spaces]]
+* ''colour space'': The name of the colour space to be used for the interpolation such as "sRGB" (the default), "LCh" or "~OkLCh". If an unrecognised colour space is specified then "LCh" is used. The full list of colour spaces that can be used for interpolation is given in [[Colour Spaces]]
 * ''hue adjuster'': For color spaces with a hue angle there are multiple ways to interpolate, which can produce drastically different results. The hue adjuster suffix allows the interpolation type to be controlled. It can be set to "raw", "increasing", "decreasing", "longer" or "shorter" (the default). See [[Colour Interpolation Hues]] for more details
 
 Two colour parameters are required. If there are fewer than two input colours, the operator will return an empty result. If there are more than two input colours, the operator will ignore the additional colours.
