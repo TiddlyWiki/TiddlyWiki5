@@ -1,6 +1,6 @@
 
 title: Operators/Palettes/RecursivePalettes
-description: Palettes that import each other in a circular toop
+description: Palettes that import each other in a circular loop
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
@@ -48,7 +48,7 @@ name: My Further Palette
 description: My further custom palette
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
-xpalette-import: MyPalette
+palette-import: MyPalette
 color-scheme: light
 
 foreground: green
