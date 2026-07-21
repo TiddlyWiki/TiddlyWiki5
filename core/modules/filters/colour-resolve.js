@@ -10,9 +10,16 @@ Filter operator for resolving colour palette entry reference chains
 "use strict";
 
 /*
-Get the consolidated palette dictionary
+Get a palette dictionary by name, or the consolidated palette if no name given
 */
-function getConsolidatedPalette(options) {
+function getPalette(name, options) {
+	if(name) {
+		var tiddler = options.wiki.getTiddler(name);
+		if(tiddler) {
+			return options.wiki.getTiddlerData(tiddler);
+		}
+		return null;
+	}
 	var tiddler = options.wiki.getTiddler("$:/temp/palette-consolidated");
 	if(tiddler) {
 		return options.wiki.getTiddlerData(tiddler);
@@ -78,7 +85,8 @@ Export our filter function
 exports["colour-resolve"] = function(source, operator, options) {
 	var results = [];
 	var mode = (((operator.suffixes || [])[0] || ["name"])[0] || "name").toLowerCase();
-	var palette = getConsolidatedPalette(options);
+	var paletteName = operator.operand || "";
+	var palette = getPalette(paletteName, options);
 	if(!palette) {
 		source(function(tiddler, title) {
 			results.push(title);
