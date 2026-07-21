@@ -1,0 +1,8 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Pretty links to URLs, mailto and file targets round-trip byte-exact
+title: Serialize/PrettyLink-docs
+type: text/vnd.tiddlywiki
+
+[[TW5|https://tiddlywiki.com/]]
+[[Mail me|mailto:me@where.net]]
+[[Open file|file:///c:/users/me/index.html]]

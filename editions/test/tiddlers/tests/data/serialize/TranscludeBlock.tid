@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Every documented block transclusion form round-trips byte-exact
 title: Serialize/TranscludeBlock
 type: text/vnd.tiddlywiki
 

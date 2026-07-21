@@ -1,0 +1,26 @@
+title: Serialize/CodeBlock-normalized
+description: AST-only mode picks the minimal safe backtick delimiter
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: info
+
+``double`` becomes `double`: inline code runs re-emit with the minimal
+safe backtick delimiter picked from the content.
+
+Why: the AST records only the code text, not the author's delimiter. A
+single backtick serves text without one, a double backtick text that
+contains one, and the empty run keeps a double delimiter because a single
+pair would re-parse as an opening delimiter.
+
+* Covers: $:/plugins/tiddlywiki/wikitext-serialize/rules/codeinline.js.
+* Mode: ast-only (the Input field withholds the source from the serializer).
++
+title: Input
+mode: ast-only
+
+Empty ```` and ``a`b`` and `plain` and ``double`` inline runs.
++
+title: ExpectedWikitext
+
+Empty ```` and ``a`b`` and `plain` and `double` inline runs.

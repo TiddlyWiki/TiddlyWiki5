@@ -8,7 +8,14 @@ module-type: wikiruleserializer
 
 exports.name = "transcludeblock";
 
-exports.serialize = function(tree,serialize) {
+exports.serialize = function(tree,serialize,options) {
+	options = options || {};
+	// The node span includes the line end the block rule consumed, which
+	// the tree does not record; the slice keeps the emission span exact
+	var slice = $tw.utils.serializeFromSource(tree,{source: options.source, fragments: ["{{"]});
+	if(slice !== null) {
+		return slice;
+	}
 	var result = "{{";
 	function handleTransclude(transcludeNode) {
 		// Handle field
@@ -52,6 +59,6 @@ exports.serialize = function(tree,serialize) {
 	} else if(tree.type === "transclude") {
 		handleTransclude(tree);
 	}
-	result += "}}\n\n";
+	result += "}}";
 	return result;
 };

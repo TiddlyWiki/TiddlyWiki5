@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: All documented image forms round-trip byte-exact, including descriptions and dynamic sizes
 title: Serialize/Image
 type: text/vnd.tiddlywiki
 

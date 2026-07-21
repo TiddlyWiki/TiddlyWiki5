@@ -1,0 +1,12 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Block mode clause bodies closed by a single newline round-trip byte-exact
+title: Serialize/Conditional-new
+type: text/vnd.tiddlywiki
+
+<%if [[x]]%>
+
+Block content before elseif
+<%elseif [[y]]%>
+
+Block content before endif
+<%endif%>

@@ -8,17 +8,29 @@ module-type: wikiruleserializer
 
 exports.name = "fnprocdef";
 
-exports.serialize = function(tree,serialize) {
-	// Type of definition: "function", "procedure", or "widget"
+exports.serialize = function(tree,serialize,options) {
+	options = options || {};
 	var type = tree.isFunctionDefinition ? "function" : (tree.isProcedureDefinition ? "procedure" : "widget");
-	// Name of the function, procedure, or widget
 	var name = tree.attributes.name.value;
-	// Parameters with default values
-	var params = tree.params.map(function(param) {
-		return param.name + (param.default ? ':"' + param.default + '"' : "");
-	}).join(", ");
-	// Definition text
 	var definition = tree.attributes.value.value;
-	// Construct the serialized string, concat the children because pragma rule wrap everything below it as children
-	return "\\" + type + " " + name + "(" + params + ")\n" + definition + "\n\\end\n\n" + serialize(tree.children) + "\n";
+	// The source slice preserves named \end markers, default quoting and the
+	// single line form, none of which are recorded in the parse tree
+	var slice = $tw.utils.serializeFromSource(tree,{source: options.source, fragments: [name,definition]});
+	// Pragmas chain the rest of the tiddler as children; the separator is
+	// not in the parse tree
+	var gap = $tw.utils.recoverSourceGap(tree.end,tree.children[0] && tree.children[0].start,{source: options.source}) || "\n\n";
+	if(slice !== null) {
+		return slice + gap + $tw.utils.serializeChildren(tree,serialize,options);
+	}
+	var params = tree.params.map(function(param) {
+		if(param.defaultType === "multivalue-variable") {
+			return param.name + ":((" + param.defaultVariable + "))";
+		}
+		if(param.default === undefined) {
+			return param.name;
+		}
+		return param.name + ":" + $tw.utils.quoteParameterDefault(param.default);
+	}).join(", ");
+	// Concat the children because pragma rules wrap everything below them as children
+	return "\\" + type + " " + name + "(" + params + ")\n" + definition + "\n\\end\n\n" + $tw.utils.serializeChildren(tree,serialize,options);
 };
