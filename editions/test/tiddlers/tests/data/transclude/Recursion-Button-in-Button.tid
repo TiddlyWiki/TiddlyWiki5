@@ -1,0 +1,15 @@
+title: Transclude/Recursion/ButtonInButton
+description: Button in Button
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$button>Test Button 
+<$button>Second button
+</$button>
++
+title: ExpectedResult
+
+<p><button class="">Test Button<button class="">Second button</button></button></p>
