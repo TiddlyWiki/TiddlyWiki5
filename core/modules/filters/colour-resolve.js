@@ -31,30 +31,111 @@ function getPalette(name, options) {
 Parse a palette entry value to extract a reference to another entry.
 Returns the target entry name if it's a simple reference, null otherwise.
 */
-function parseReference(value) {
+function parseReference(value,widget) {
 	if(typeof value !== "string" || value === "") {
 		return null;
 	}
-	var match;
-	// [tf.colour[name]]
+	var pos,attribute,widgetType,variableName,targetName,match,node,orderedAttributes,endPos,result;
+	// [tf.colour[name]] - literal string operand
 	match = value.match(/^\s*\[tf\.colour\[([^\]]+)\]\]\s*$/);
 	if(match) {
 		return match[1];
 	}
-	// <<colour name>> or <<color name>>
-	match = value.match(/^\s*<<colou?r\s+(\S+)\s*>>\s*$/);
+	// [tf.colour<name>] - variable reference operand
+	match = value.match(/^\s*\[tf\.colour<([^>]+)>\]\s*$/);
 	if(match) {
-		return match[1];
+		if(widget) {
+			result = widget.getVariable(match[1]);
+			if(typeof result === "string" && result !== "") {
+				return result;
+			}
+		}
+		return null;
 	}
-	// <$transclude ... $variable="colour" ... name="name" ... />
-	match = value.match(/^\s*<\$transclude[^>]*\$variable="colou?r"[^>]*name="([^"]+)"[^/]*\/>\s*$/);
+	// [tf.colour{name}] - text reference operand
+	match = value.match(/^\s*\[tf\.colour\{([^}]+)\}\]\s*$/);
 	if(match) {
-		return match[1];
+		if(widget) {
+			result = widget.wiki.getTextReference(match[1],"",widget.getVariable("currentTiddler"));
+			if(typeof result === "string" && result !== "") {
+				return result;
+			}
+		}
+		return null;
 	}
-	// <$macrocall ... $name="colour" ... name="name" ... />
-	match = value.match(/^\s*<\$macrocall[^>]*\$name="colou?r"[^>]*name="([^"]+)"[^>]*\/>\s*$/);
-	if(match) {
-		return match[1];
+	// <<colour name>> or <<colour "name">> or <<colour name=value>> or <<colour name={{{filter}}}>> etc.
+	pos = $tw.utils.skipWhiteSpace(value,0);
+	node = $tw.utils.parseMacroInvocationAsTransclusion(value,pos);
+	if(node && node.attributes.$variable && /^colou?r$/i.test(node.attributes.$variable.value)) {
+		endPos = $tw.utils.skipWhiteSpace(value,node.end);
+		if(endPos === value.length) {
+			orderedAttributes = node.orderedAttributes || [];
+			if(orderedAttributes.length > 0) {
+				// Find the parameter named "name", or the first positional parameter
+				var targetParam = null;
+				for(var i = 0; i < orderedAttributes.length; i++) {
+					if(orderedAttributes[i].name === "name") {
+						targetParam = orderedAttributes[i];
+						break;
+					}
+				}
+				if(!targetParam) {
+					for(var i = 0; i < orderedAttributes.length; i++) {
+						if(orderedAttributes[i].isPositional) {
+							targetParam = orderedAttributes[i];
+							break;
+						}
+					}
+				}
+				if(!targetParam) {
+					targetParam = orderedAttributes[0];
+				}
+				if(widget) {
+					result = widget.computeAttribute(targetParam);
+					if(typeof result === "string" && result !== "") {
+						return result;
+					}
+				} else if(targetParam.type === "string") {
+					return targetParam.value;
+				}
+			}
+		}
+	}
+	// Use the core parameter parser for widget tags
+	pos = $tw.utils.skipWhiteSpace(value,0);
+	if(value.substr(pos,11).toLowerCase() === "<$transclude") {
+		widgetType = "transclude";
+		pos += 11;
+	} else if(value.substr(pos,10).toLowerCase() === "<$macrocall") {
+		widgetType = "macrocall";
+		pos += 10;
+	} else {
+		return null;
+	}
+	// Parse attributes using the core parameter parser
+	variableName = null;
+	targetName = null;
+	attribute = $tw.utils.parseAttribute(value,pos);
+	while(attribute) {
+		if(attribute.type === "string") {
+			if(widgetType === "transclude" && attribute.name === "$variable" && /^colou?r$/i.test(attribute.value)) {
+				variableName = attribute.value;
+			} else if(widgetType === "macrocall" && attribute.name === "$name" && /^colou?r$/i.test(attribute.value)) {
+				variableName = attribute.value;
+			} else if(attribute.name === "name") {
+				targetName = attribute.value;
+			}
+		} else if(attribute.name === "name" && widget) {
+			result = widget.computeAttribute(attribute);
+			if(typeof result === "string" && result !== "") {
+				targetName = result;
+			}
+		}
+		pos = attribute.end;
+		attribute = $tw.utils.parseAttribute(value,pos);
+	}
+	if(variableName !== null && targetName !== null) {
+		return targetName;
 	}
 	return null;
 }
@@ -63,7 +144,7 @@ function parseReference(value) {
 Recursively resolve a palette entry name to its terminal entry.
 Returns the name of the terminal entry.
 */
-function resolveEntry(name, palette, visited) {
+function resolveEntry(name, palette, visited, widget) {
 	if(visited.indexOf(name) !== -1) {
 		return name;
 	}
@@ -72,9 +153,9 @@ function resolveEntry(name, palette, visited) {
 	if(value === undefined || value === null) {
 		return name;
 	}
-	var target = parseReference(value);
+	var target = parseReference(value, widget);
 	if(target) {
-		return resolveEntry(target, palette, visited);
+		return resolveEntry(target, palette, visited, widget);
 	}
 	return name;
 }
@@ -96,7 +177,7 @@ exports["colour-resolve"] = function(source, operator, options) {
 	if(operator.prefix === "!") {
 		source(function(tiddler, title) {
 			var value = palette[title];
-			if(value === undefined || value === null || parseReference(value) === null) {
+			if(value === undefined || value === null || parseReference(value, options.widget) === null) {
 				if(mode === "colour") {
 					results.push(value || "");
 				} else {
@@ -107,7 +188,7 @@ exports["colour-resolve"] = function(source, operator, options) {
 	} else {
 		source(function(tiddler, title) {
 			var visited = [];
-			var resolved = resolveEntry(title, palette, visited);
+			var resolved = resolveEntry(title, palette, visited, options.widget);
 			if(mode === "colour") {
 				results.push(palette[resolved] || "");
 			} else {
