@@ -1,5 +1,5 @@
 created: 20140216102454178
-modified: 20260719103738000
+modified: 20260720103000000
 tags: Concepts
 title: ColourPalettes
 type: text/vnd.tiddlywiki
@@ -15,6 +15,17 @@ tiddler-controls-foreground-selected: [tf.interpolate-colours[tiddler-background
 <<.from-version "5.5.0">> Each entry is a filter expression that is evaluated to produce a [[CSS|Cascading Style Sheets]] colour value. An entry that is a plain CSS colour value, such as ''yellow'' or ''#fe0'', evaluates to itself. An entry can also compute its colour from other entries, using the [[Colour Operators]] and the function <<.var tf.colour>>, which retrieves another entry by name.
 
 For backwards compatibility, entries of the classic form `<<colour name>>` are automatically converted to the equivalent filter `[tf.colour[name]]`. Other WikiText constructs are not supported, as palette entries are no longer wikified.
+
+!! Functions for palette entries
+
+Palette entries can use these core functions:
+
+;<<.var tf.colour>>
+: Returns the value of the palette entry named in its single parameter
+;<<.var tf.interpolate-colours>>
+: Blends the two palette entries named in its first two parameters, in the OKLCH colour space. The third parameter is the weight of the blend, from 0 (entirely the first entry) to 1 (entirely the second entry)
+;<<.var tf.check-colour-contrast>>
+: Used by [[readability tests|Palette Readability Tests]] to check the contrast between two entries
 
 The system tiddler [[$:/palette]] always contains the title of the currently selected palette tiddler. You can switch palettes with the [[Palette Chooser]].
 
@@ -36,7 +47,7 @@ Palette tiddlers have the following fields:
 |description |Displayed in the palette chooser |
 |color-scheme |<<.from-version "5.5.0">> Optional filter determining the active [[colour scheme|Colour Schemes]] |
 |palette-import |<<.from-version "5.5.0">> Optional title of another palette to import; see [[Palette Inheritance]] |
-|settings |<<.from-version "5.5.0">> Optional title of a settings panel shown beneath the chooser; see [[Customising a Palette]] |
+|settings |<<.from-version "5.5.0">> Optional title of a settings panel shown beneath the chooser; see [[Palette Settings]] |
 |category |<<.from-version "5.5.0">> Optional descriptive category |
 |text |`name: value` colour definitions |
 
@@ -69,7 +80,7 @@ The [[background action|Background Actions]] <<.tid "$:/core/background-actions/
 !! Further reading
 
 ;Using palettes
-: [[Palette Chooser]], [[Automatic Palette Switching]], [[Customising a Palette]], [[Palettes and Themes]]
+: [[Palette Chooser]], [[Automatic Palette Switching]], [[Palette Settings]], [[Palettes and Themes]]
 ;Writing palettes
 : [[Palette Inheritance]], [[Colour Schemes]], [[Palette Readability Tests]], [[colour Macro]]
 ;Reference

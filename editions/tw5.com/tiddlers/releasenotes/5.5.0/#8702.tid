@@ -1,4 +1,6 @@
 title: $:/changenotes/5.5.0/#8702
+created: 20250901000000000
+modified: 20260720103000000
 description: Colour palette improvements
 release: 5.5.0
 tags: $:/tags/ChangeNote
@@ -7,7 +9,7 @@ change-category: hackability
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8702
 github-contributors: Jermolene
 
-This PR brings several new features for end users:
+Colour palettes gain several new features for end users:
 
 * Automatically switching between a dark and light palette as the operating system setting changes (and to do so without making the wiki dirty)
 * Customisation options for palettes. For example, users might choose a base hue, with the colours of the palette automatically adapting to it
@@ -15,8 +17,8 @@ This PR brings several new features for end users:
 
 There are also new capabilities for palette authors:
 
-* Inheritance for palettes, making it easy to create chains of variants of a base palette
-* Self contained palettes that can contain both dark and light variants (or variants for any other custom scheme)
+* Inheritance for palettes, so that palettes can inherit be defined as a chain of changes applied in turn to a base palette
+* Self-contained palettes that can contain both dark and light variants (or variants for any other custom scheme)
 * Automatic readability tests that palettes can use to check colour contrast, with the results shown in the palette chooser
 
 Palette entries are now defined as filters that are evaluated, rather than wikitext that is wikified. When switching to a new palette, its colours are compiled to raw CSS colour values in the system tiddler `$:/temp/palette-colours`, which also allows the `<<colour>>` macro to become a function that can be used as the value of a style attribute.

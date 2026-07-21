@@ -1,5 +1,5 @@
 created: 20260718221135000
-modified: 20260718221135000
+modified: 20260720103000000
 tags: [[Filter Operators]] [[Colour Operators]]
 title: colour-darken Operator
 caption: colour-darken
@@ -24,3 +24,5 @@ See also the following related operators:
 
 * <<.olink colour-lighten>> to lighten a colour value
 * <<.olink colour-set-oklch>> to set the lightness of a colour value to an absolute level
+
+<<.operator-examples "colour-darken">>

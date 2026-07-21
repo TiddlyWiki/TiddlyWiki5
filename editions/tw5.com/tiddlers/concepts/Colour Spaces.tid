@@ -1,6 +1,10 @@
+created: 20260718221135000
+modified: 20260720103000000
+tags: Concepts
 title: Colour Spaces
+type: text/vnd.tiddlywiki
 
-The list of currently supported colour spaces is given below. See the [[color.js website|https://colorjs.io/docs/spaces]] for details.
+The [[Colour Operators]] are backed by the [[color.js|https://colorjs.io/]] library, which supports the colour spaces below. See the [[color.js website|https://colorjs.io/docs/spaces]] for details of each space.
 
 * ''a98rgb-linear''
 * ''a98rgb''

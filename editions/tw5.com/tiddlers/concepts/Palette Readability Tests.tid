@@ -1,10 +1,10 @@
 created: 20260718221135000
-modified: 20260718221135000
+modified: 20260720103000000
 tags: Concepts
 title: Palette Readability Tests
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.5.0">> A palette can include tests that check its colours work well together. Failing tests are reported at the bottom of the [[Palette Chooser]], where they warn the user that the current combination of colours may be hard to read.
+<<.from-version "5.5.0">> A palette can include tests that check its colours work well together. Failing tests are reported beneath the palette cards in the [[Palette Chooser]], where they warn the user that the current combination of colours may be hard to read.
 
 A readability test is a palette entry whose name begins with `?`. Like any other entry, its value is a filter expression that is evaluated when the palette is [[compiled|ColourPalettes]]. The filter is expected to return the text ''ok'' if the test passes, or a message describing the problem if it fails:
 
