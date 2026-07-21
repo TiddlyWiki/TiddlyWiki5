@@ -78,7 +78,6 @@ class BackgroundActionTracker {
 			fnProcess: (changes) => {
 				if(this.hasChanged) {
 					this.hasChanged = false;
-					console.log("Processing background action", this.title);
 					const tiddler = this.wiki.getTiddler(this.title);
 					let doActions = true;
 					if(tiddler && tiddler.fields.platforms) {
@@ -89,6 +88,7 @@ class BackgroundActionTracker {
 						}
 					}
 					if(doActions) {
+						console.log("Processing background action", this.title);
 						this.wiki.invokeActionString(
 							this.actions,
 							null,
