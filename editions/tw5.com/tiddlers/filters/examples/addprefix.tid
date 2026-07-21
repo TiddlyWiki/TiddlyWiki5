@@ -1,7 +1,17 @@
 created: 20150118132851000
-modified: 20150118183116000
+modified: 20250323034523441
 tags: [[addprefix Operator]] [[Operator Examples]]
 title: addprefix Operator (Examples)
 type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "Cat Garden [[Favourite Armchair]] +[addprefix[My ]]">>
+
+```
+The syntax for using the addprefix operator is as follows:
+ 
+     square brackets surround literal text value (e.g., addprefix[sometext] as shown in the example above)
+        
+     curly braces surround tiddler field references (e.g., addprefix{SomeTiddler!!somefield})
+       
+     angle brackets surround variable references (e.g., addprefix<somevariablename>)
+```
