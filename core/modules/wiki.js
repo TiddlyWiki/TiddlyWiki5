@@ -655,17 +655,20 @@ exports.getMissingTitles = function() {
 
 exports.getOrphanTitles = function() {
 	var self = this,
-		orphans = this.getTiddlers();
+		linkedTitles = Object.create(null);
 	this.forEachTiddler(function(title,tiddler) {
 		var links = self.getTiddlerLinks(title);
 		$tw.utils.each(links,function(link) {
-			var p = orphans.indexOf(link);
-			if(p !== -1) {
-				orphans.splice(p,1);
-			}
+			linkedTitles[link] = true;
 		});
 	});
-	return orphans; // Todo
+	var orphans = [];
+	this.forEachTiddler(function(title,tiddler) {
+		if(!linkedTitles[title]) {
+			orphans.push(title);
+		}
+	});
+	return orphans;
 };
 
 /*

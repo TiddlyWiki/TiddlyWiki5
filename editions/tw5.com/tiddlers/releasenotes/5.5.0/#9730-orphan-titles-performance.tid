@@ -1,0 +1,12 @@
+change-category: internal
+change-type: performance
+created: 20260711184143000
+description: getOrphanTitles() collects orphans several times faster
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9730
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9730
+type: text/vnd.tiddlywiki
+
+* `getOrphanTitles()` marks linked titles in a hashmap and collects the orphans in a second pass, instead of splicing an array for every link, making the `[is[orphan]]` filter several times faster on large wikis
