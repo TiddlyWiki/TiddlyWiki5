@@ -1,0 +1,13 @@
+change-category: developer
+change-type: enhancement
+created: 20260713002940000
+description: Lists annotate their parse tree nodes
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/9912
+modified: 20260713002940000
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9912
+type: text/vnd.tiddlywiki
+
+List items in the parse tree now carry `rowMarker` with the exact marker text that produced them, e.g. `*#` in mixed nesting or the `;`/`:` description-list forms, and the first item after two list runs merged across a blank line carries `blankLineBefore: true`. Consumers can reproduce the exact marker strings and the original list runs, which the tag nesting alone cannot. The new fields are purely additive; rendered output is unchanged.
