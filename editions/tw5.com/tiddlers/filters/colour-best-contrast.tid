@@ -1,5 +1,5 @@
 created: 20260718221135000
-modified: 20260718221135000
+modified: 20260720103000000
 tags: [[Filter Operators]] [[Colour Operators]]
 title: colour-best-contrast Operator
 caption: colour-best-contrast
@@ -24,3 +24,5 @@ The result is <<.value navy>>. A typical use is choosing a foreground colour tha
 See also the following related operators:
 
 * <<.olink colour-contrast>> to measure the contrast between pairs of colours
+
+<<.operator-examples "colour-best-contrast">>

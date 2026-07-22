@@ -1,5 +1,5 @@
 created: 20260718221135000
-modified: 20260718221135000
+modified: 20260720103000000
 tags: [[Filter Operators]] [[Colour Operators]]
 title: colour-contrast Operator
 caption: colour-contrast
@@ -26,3 +26,5 @@ The [[readability tests|Palette Readability Tests]] of the core palettes use thi
 See also the following related operators:
 
 * <<.olink colour-best-contrast>> to choose the colour that contrasts best with a target colour
+
+<<.operator-examples "colour-contrast">>

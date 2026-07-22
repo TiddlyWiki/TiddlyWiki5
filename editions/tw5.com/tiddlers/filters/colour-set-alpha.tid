@@ -1,5 +1,5 @@
 created: 20260718221135000
-modified: 20260718221135000
+modified: 20260720103000000
 tags: [[Filter Operators]] [[Colour Operators]]
 title: colour-set-alpha Operator
 caption: colour-set-alpha
@@ -23,3 +23,5 @@ For example, this filter expression makes the current foreground colour half tra
 See also the following related operators:
 
 * <<.olink colour-set-oklch>> to modify the lightness, chroma or hue of a colour value
+
+<<.operator-examples "colour-set-alpha">>

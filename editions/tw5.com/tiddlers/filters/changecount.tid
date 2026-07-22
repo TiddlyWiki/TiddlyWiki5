@@ -1,5 +1,5 @@
 created: 20260718221135000
-modified: 20260718221135000
+modified: 20260720103000000
 tags: [[Filter Operators]]
 title: changecount Operator
 caption: changecount
@@ -18,3 +18,5 @@ The operator is useful in contexts such as the track filters of [[Background Act
 ```
 
 See also the <<.mlink changecount>> macro, which returns the change count of the current tiddler.
+
+<<.operator-examples "changecount">>

@@ -1,11 +1,11 @@
 created: 20241117161528913
-modified: 20260719103738000
+modified: 20260720103000000
 tags: [[Filter Operators]] [[Colour Operators]]
 title: colour-set-oklch Operator
 caption: colour-set-oklch
 op-purpose: manipulate colour values in the OKLCH colour space
 op-input: a selection of colour values
-op-suffix: "l", "c" or "h" to indicate which component of the colour to modify
+op-suffix: "l", "c" or "h" to indicate which component of the colour to modify; defaults to "l"
 op-parameter: value of the property to modify
 op-output: the values of the modified colours
 

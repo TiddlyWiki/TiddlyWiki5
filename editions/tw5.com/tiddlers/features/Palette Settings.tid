@@ -1,7 +1,7 @@
 created: 20260718221135000
-modified: 20260718221135000
+modified: 20260720103000000
 tags: Features
-title: Customising a Palette
+title: Palette Settings
 type: text/vnd.tiddlywiki
 
 <<.from-version "5.5.0">> Some palettes offer settings that let you adjust their colours without editing the palette directly.
@@ -10,6 +10,6 @@ The core palette ''~TwentyTwenties'' is built from a small set of base colours: 
 
 Your changes are stored in the palette tiddler itself, so they are saved with the wiki like any other change.
 
-For finer control over individual palette entries, use the ''Show editor'' button beneath the chooser instead.
+For finer control over individual palette entries, use the ''show editor'' button beneath the chooser instead.
 
 Palette authors can offer settings for their own palettes with the <<.field settings>> field, described in ColourPalettes.

@@ -1,0 +1,8 @@
+created: 20260720103000000
+modified: 20260720103000000
+tags: [[colour-set-alpha Operator]] [[Operator Examples]]
+title: colour-set-alpha Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[red]colour-set-alpha[0.5]]" "making red half transparent">>
+<<.operator-example 2 "[[#5778d8]colour-set-alpha[0.25]]" "setting the alpha of a hex colour returns an eight digit hex value">>
