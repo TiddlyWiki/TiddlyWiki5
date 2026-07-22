@@ -18,9 +18,11 @@ title: $:/PaletteEditor
 <br>
 <%if [<colourName>colour-resolve:colour{$:/palette}is[colourspace]] %>
 <$edit-text index={{{ [<colourName>colour-resolve{$:/palette}] }}} type="color" tag="input" class="tc-palette-manager-colour-input"/>
-<%elseif [<colourName>!prefix[?]] %>
+<%elseif [<colourName>!prefix[?]then<currentTiddler>getindex<colourName>!match[]] %>
 <$wikify name="bgColour" text={{{ [subfilter<tf.palette.getindex>] }}}>
-<div style.background-color=<<bgColour>> style.height="2em" style.width="100%" style.border-radius="2px" style.margin="3px" class="tc-palette-manager-colour-input" />
+<%if [<bgColour>is[colourspace]] %>
+<div style.background-color=<<bgColour>> style.height="2em" style.width="100%" style.border-radius="2px" style.margin="3px 0" class="tc-palette-manager-colour-input" />
+<% endif %>
 </$wikify>
 <% endif %>
 <%if [<currentTiddler>getindex<colourName>!is[colourspace]then<colourName>colour-resolve:colour{$:/palette}is[colourspace]] %>
