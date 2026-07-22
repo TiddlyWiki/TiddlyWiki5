@@ -96,7 +96,8 @@ html button {
 	color: <<colour button-foreground>>;
 	fill: <<colour button-foreground>>;
 	background: <<colour button-background>>;
-	border-color: <<colour button-border>>;
+	border: 1px solid <<colour button-border>>;
+	border-radius: 0.25em;
 	cursor: pointer;
 }
 
@@ -681,9 +682,9 @@ html body.tc-body .tc-btn-rounded:hover svg {
 /* used for documentation "fake" buttons */
 .tc-btn-standard {
 	line-height: 1.8;
-	color: #667;
-	background-color: #e0e0e0;
-	border: 1px solid #888;
+	color: <<colour foreground>>;
+	background-color: <<colour tab-background>>;
+	border: 1px solid <<colour muted-foreground>>;
 	padding: 2px 1px 2px 1px;
 	margin: 1px 4px 1px 4px;
 }
@@ -879,7 +880,6 @@ button.tc-untagged-label {
 }
 
 button.tc-btn-invisible.tc-remove-tag-button {
-	outline: none;
 }
 
 .tc-tag-button-selected,
@@ -948,6 +948,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-sidebar-tools-item {
 	margin-top: 3px;
 	margin-bottom: 3px;
+}
+
+.tc-sidebar-tools-item button:hover {
+	background-color: <<colour button-background-hover>>;
 }
 
 .tc-sidebar-header .tc-missing-tiddler-label {
@@ -1185,7 +1189,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
-		border-radius: 2px;
+		border-radius: 8px;
 	}
 
 <<if-no-sidebar "
@@ -1252,9 +1256,9 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-subtitle {
-	font-size: 0.9em;
+	font-size: 0.8em;
 	color: <<colour tiddler-subtitle-foreground>>;
-	font-weight: normal;
+	font-weight: 300;
 }
 
 .tc-subtitle .tc-tiddlylink {
@@ -1849,6 +1853,7 @@ html body.tc-body.tc-single-tiddler-window {
 	min-width: 380px;
 	border: 1px solid <<colour dropdown-border>>;
 	background-color: <<colour dropdown-background>>;
+	color: <<colour foreground>>;
 	padding: 7px 0 7px 0;
 	margin: 4px 0 0 0;
 	white-space: nowrap;
@@ -1889,7 +1894,8 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 1em;
 }
 
-.tc-drop-down a, .tc-drop-down button {
+.tc-drop-down a, .tc-drop-down button,
+.tc-drop-down a.tc-tiddlylink {
 	display: block;
 	padding: 0 14px 0 14px;
 	width: 100%;
@@ -1960,6 +1966,7 @@ html body.tc-body.tc-single-tiddler-window {
 	min-width: 220px;
 	border: 1px solid <<colour dropdown-border>>;
 	background-color: <<colour dropdown-background>>;
+	color: <<colour foreground>>;
 	padding: 7px 0;
 	margin: 4px 0 0 0;
 	white-space: nowrap;
@@ -1971,9 +1978,11 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-left: -12px;
 }
 
-.tc-block-dropdown a {
+.tc-block-dropdown a,
+.tc-block-dropdown a.tc-tiddlylink {
 	display: block;
 	padding: 4px 14px 4px 14px;
+	color: <<colour foreground>>;
 }
 
 .tc-block-dropdown.tc-search-drop-down a {
@@ -2230,6 +2239,11 @@ html body.tc-body.tc-single-tiddler-window {
 	border-bottom-right-radius: 0;
 }
 
+.tc-tab-buttons button:hover:not(.tc-tab-selected) {
+	background-color: <<colour tab-background-selected>>;
+	color: <<colour tab-foreground-selected>>;
+}
+
 .tc-tab-buttons.tc-vertical button {
 	display: block;
 	width: 100%;
@@ -2305,7 +2319,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top: none;
 	border-left: none;
 	border-bottom: none;
-	border-right: 1px solid #ccc;
+	border-right: 1px solid <<colour sidebar-tab-border>>;
 	margin-bottom: inherit;
 }
 
@@ -2933,7 +2947,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	width: 2em;
 	height: 2em;
 	margin: 0.4em;
-	border: 1px solid #888;
+	border: 1px solid <<colour muted-foreground>>;
 }
 
 input.tc-palette-manager-colour-input {
@@ -3188,8 +3202,8 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 
 .tc-thumbnail-caption {
 	position: absolute;
-	background-color: #777;
-	color: #fff;
+	background-color: <<colour muted-foreground>>;
+	color: <<colour background>>;
 	text-align: center;
 	bottom: 0;
 	width: 100%;
@@ -3271,7 +3285,7 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 }
 
 .tc-tree button {
-	color: #acacac;
+	color: <<colour muted-foreground>>;
 }
 
 .tc-tree svg {
@@ -3285,7 +3299,7 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 }
 
 .tc-tree li span {
-	color: lightgray;
+	color: <<colour muted-foreground>>;
 }
 
 select {
