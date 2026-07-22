@@ -365,7 +365,6 @@ exports.generateTiddlerFilepath = function(title,options) {
 	// Replace any Unicode control codes
 	filepath = filepath.replace(/[\x00-\x1f\x80-\x9f]/g,"_");
 	// Replace any characters that can't be used in cross-platform filenames.
-	// path separator on Windows.
 	if(!pinFilepath) {
 		filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^|\\/g,"_"));
 	}
