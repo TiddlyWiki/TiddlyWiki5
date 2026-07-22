@@ -1,0 +1,42 @@
+title: Button/ValidValues/InvalidState
+description: Button validValues — invalid state falls back to default
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Narrative
+
+This test verifies the core fix for [[issue #6548|https://github.com/TiddlyWiki/TiddlyWiki5/issues/6548]]. The state tiddler `$:/state/test-btn` contains `InvalidValue`, which does not match any of the values listed in the `validValues` attribute (`OptionA OptionB OptionC`).
+
+Without the `validValues` attribute, no button would be highlighted because the state doesn't match any `setTo` value. With `validValues`, the button widget detects that the current state is not in the valid list and falls back to the `default` value (`OptionA`), so button ''A'' should be highlighted with a red background.
++
+title: $:/state/test-btn
+text: InvalidValue
++
+title: Output
+
+\whitespace trim
+
+<style>
+.selected { background-color: red; color: white; }
+</style>
+
+<$button set="$:/state/test-btn"
+	setTo="OptionA"
+	default="OptionA"
+	validValues="OptionA OptionB OptionC"
+	selectedClass="selected"
+>
+	A
+</$button>
+<$button set="$:/state/test-btn"
+	setTo="OptionB"
+	default="OptionA"
+	validValues="OptionA OptionB OptionC"
+	selectedClass="selected"
+>
+	B
+</$button>
++
+title: ExpectedResult
+
+<p><style>.selected { background-color: red; color: white; }</style></p><p><button aria-checked="true" class=" selected">A</button><button aria-checked="false" class="">B</button></p>

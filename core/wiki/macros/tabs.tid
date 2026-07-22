@@ -8,6 +8,7 @@ code-body: yes
 	set=<<tabsState>>
 	setTo=<<currentTab>>
 	default=<<__default__>>
+	validValues=<<__tabsList__>>
 	selectedClass="tc-tab-selected"
 	selectedAria="aria-selected"
 	tooltip={{!!tooltip}}
@@ -46,7 +47,7 @@ code-body: yes
 \define tabs-tab-body()
 \whitespace trim
 <$list filter=<<__tabsList__>> variable="currentTab">
-	<$reveal type="match" state=<<tabsState>> text=<<currentTab>> default=<<__default__>> retain=<<__retain__>> tag="div">
+	<$reveal type="match" state=<<tabsState>> text=<<currentTab>> default=<<__default__>> validValues=<<__tabsList__>> retain=<<__retain__>> tag="div">
 		<$transclude tiddler=<<__template__>> mode="block">
 			<$transclude tiddler=<<currentTab>> mode="block"/>
 		</$transclude>

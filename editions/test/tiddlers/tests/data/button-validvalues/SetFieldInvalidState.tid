@@ -1,0 +1,42 @@
+title: Button/ValidValues/SetFieldInvalidState
+description: Button validValues with setTitle+setField — invalid state falls back to default
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Narrative
+
+This test verifies that `validValues` works with `setTitle` + `setField`. The state is read from the `myfield` field of the state tiddler, which contains `InvalidValue`. Since this is not in `validValues`, the button matching `default` (`OptionA`) should be highlighted with a red background.
++
+title: $:/state/test-btn
+myfield: InvalidValue
++
+title: Output
+
+\whitespace trim
+
+<style>
+.selected { background-color: red; color: white; }
+</style>
+
+<$button setTitle="$:/state/test-btn"
+	setField="myfield"
+	setTo="OptionA"
+	default="OptionA"
+	validValues="OptionA OptionB"
+	selectedClass="selected"
+>
+	A
+</$button>
+<$button setTitle="$:/state/test-btn"
+	setField="myfield"
+	setTo="OptionB"
+	default="OptionA"
+	validValues="OptionA OptionB"
+	selectedClass="selected"
+>
+	B
+</$button>
++
+title: ExpectedResult
+
+<p><style>.selected { background-color: red; color: white; }</style></p><p><button aria-checked="true" class=" selected">A</button><button aria-checked="false" class="">B</button></p>
