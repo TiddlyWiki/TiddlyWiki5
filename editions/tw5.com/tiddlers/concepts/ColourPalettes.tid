@@ -1,5 +1,5 @@
 created: 20140216102454178
-modified: 20260720103000000
+modified: 20260722180000000
 tags: Concepts
 title: ColourPalettes
 type: text/vnd.tiddlywiki
@@ -85,3 +85,5 @@ The [[background action|Background Actions]] <<.tid "$:/core/background-actions/
 : [[Palette Inheritance]], [[Colour Schemes]], [[Palette Readability Tests]], [[colour Macro]]
 ;Reference
 : [[Colour Operators]], [[Colour Spaces]], [[Colour Interpolation Hues]], [[changecount Operator]], [[defaultprefix Filter Pragma]], [[Background Actions]], [[Media Query Tracker Mechanism]]
+;Plugins
+: [[Palettes 2026 Plugin]], [[Legacy Palettes Plugin]]
