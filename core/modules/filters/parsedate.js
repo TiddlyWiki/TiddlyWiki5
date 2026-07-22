@@ -9,11 +9,9 @@ Filter operator converting different date formats into TiddlyWiki's date format
 
 "use strict";
 
-const DEFAULT_LOCAL_OUTPUT_FORMAT = "YYYY0MM0DD0hh0mm0ss0XXX";
 const INTEGER_INPUT_REGEX = /^-?\d+$/;
 const LOOSE_DATE_CLEANUP_REGEX = /(\d+)(st|nd|rd|th)|,/gi;
 const INPUT_FORMATS = new Set(["JS","TW","UNIXTIME","NUMBER","AUTO"]);
-const NUMERIC_OUTPUT_FORMATS = new Set(["UNIXTIME","NUMBER"]);
 
 const isValidDate = (date) => date instanceof Date && !isNaN(date.valueOf());
 
@@ -56,27 +54,11 @@ const parseInputDate = (title, inputFormat) => {
 	}
 };
 
-const formatOutputDate = (date, outputFormat) => {
-	const normalizedOutputFormat = (outputFormat || "").toUpperCase();
-	if(normalizedOutputFormat === "" || normalizedOutputFormat === "UTC") {
-		return $tw.utils.stringifyDate(date);
-	}
-	if(normalizedOutputFormat === "LOCAL") {
-		return $tw.utils.formatDateString(date,DEFAULT_LOCAL_OUTPUT_FORMAT);
-	}
-	if(NUMERIC_OUTPUT_FORMATS.has(normalizedOutputFormat)) {
-		return date.getTime().toString();
-	}
-	return $tw.utils.formatDateString(date,outputFormat);
-};
-
 /*
 Export our filter function
 */
 exports.parsedate = (source, operator) => {
-	const operands = operator.operands || [];
-	const inputFormat = (operands[0] || operator.operand || "JS").toUpperCase();
-	const outputFormat = operands[1] || operator.suffix || "";
+	const inputFormat = (operator.operand || "JS").toUpperCase();
 	if(!INPUT_FORMATS.has(inputFormat)) {
 		return [$tw.language.getString("Error/ParseDateFilterOperator")];
 	}
@@ -84,7 +66,7 @@ exports.parsedate = (source, operator) => {
 	source((tiddler,title) => {
 		const date = parseInputDate(title,inputFormat);
 		if(isValidDate(date)) {
-			results.push(formatOutputDate(date,outputFormat));
+			results.push($tw.utils.stringifyDate(date));
 		}
 	});
 	return results;

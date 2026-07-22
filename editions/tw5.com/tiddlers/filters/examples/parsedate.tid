@@ -44,16 +44,12 @@ Instead of `Z` a time zone offset can be specified. This offset will be used to 
 
 <<.operator-example 8 "[[25th Dec, 2025 12:30:45 GMT]parsedate[AUTO]]">>
 
-Use suffix `LOCAL` to return a local-time 17-digit TiddlyWiki date string.
+!! Formatting the output
 
-<<.operator-example 9 "[[2025-12-25T12:30:45Z]parsedate:LOCAL[JS]]">>
+Chain `format:date[]` to display the parsed date. Use `TIMESTAMP` for unix milliseconds, omit `[UTC]` for a local-time 17-digit string, or supply any other [[DateFormat]] template.
 
-Use suffix `NUMBER` (or `UNIXTIME`) to return unix timestamp milliseconds.
+<<.operator-example 9 "[[2025-12-25T12:30:45Z]parsedate[JS]format:date[TIMESTAMP]]">>
 
-<<.operator-example 10 "[[2025-12-25T12:30:45Z]parsedate:NUMBER[JS]]">>
+<<.operator-example 10 "[[2025-12-25T12:30:45Z]parsedate[JS]format:date[YYYY0MM0DD0hh0mm0ss0XXX]]">>
 
-!! Custom output formats
-
-Use the second parameter for custom [[output formats|DateFormat]].
-
-<<.operator-example 11 "[[2025-12-25T12:30:45Z]parsedate[JS],[YYYY0MM0DD0hh0mm0ss]]">>
+<<.operator-example 11 "[[2025-12-25T12:30:45Z]parsedate[JS]format:date[YYYY0MM0DD0hh0mm0ss]]">>

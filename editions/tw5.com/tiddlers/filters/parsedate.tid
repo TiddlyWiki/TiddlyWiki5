@@ -2,9 +2,9 @@ caption: parsedate
 created: 20260222000000000
 modified: 20260222000000000
 op-input: a [[selection of titles|Title Selection]]
-op-output: the date stored within the input string converted to the selected output format <<.place C>>
-op-parameter: input format,output format
-op-parameter-name: B, C
+op-output: the date stored within the input string converted to a 17-digit UTC [[DateFormat]] string
+op-parameter: optional input format
+op-parameter-name: B
 op-purpose: parse the input string and convert it into a [[DateFormat]] compatible output string
 tags: [[Filter Operators]] [[Date Operators]]
 title: parsedate Operator
@@ -20,13 +20,7 @@ The optional parameter <<.place B>> specifies the input date format. If omitted,
 |^`UNIXTIME` or `NUMBER` |The input string is interpreted as a signed integer unix timestamp in milliseconds.|
 |^`AUTO` |Automatically first tries `JS`. If that fails and the input is a signed integer, it is interpreted as a `UNIXTIME`/`NUMBER` timestamp. Finally, it falls back to loose date parsing with ordinal suffix and comma cleanup (for example `1st`, `2nd`, `3rd`, `4th`, and embedded commas).|
 
-The optional second parameter <<.place C>> specifies the output format. If omitted, output defaults to the standard 17-digit UTC TiddlyWiki date format.
-
-|!Output |!Description |
-|^`UTC` or empty |17-digit UTC TiddlyWiki date string (`[UTC]YYYY0MM0DD0hh0mm0ss0XXX`).|
-|^`LOCAL` |17-digit local-time TiddlyWiki date string (`YYYY0MM0DD0hh0mm0ss0XXX`).|
-|^`UNIXTIME` or `NUMBER` |Signed integer unix timestamp in milliseconds.|
-|^any other value |Interpreted as a [[format string|DateFormat]] for [[formatDateString|https://tiddlywiki.com/dev/#formatDateString]].|
+The output is always a 17-digit UTC TiddlyWiki date string. To display the result in another form, chain the [[format Operator]] — for example `format:date[TIMESTAMP]` for a unix timestamp, `format:date[YYYY0MM0DD0hh0mm0ss0XXX]` for a local-time 17-digit string, or any other [[DateFormat]] template.
 
 If the input string does not contain a valid date, the output is an empty list.
 

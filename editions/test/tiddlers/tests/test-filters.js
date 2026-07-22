@@ -1102,13 +1102,12 @@ describe("Filter tests", function() {
 			expect(wiki.filterTiddlers("[[25th Dec, 2025 12:30:45 GMT]parsedate[AUTO]]").join(" ")).toBe("20251225123045000");
 			expect(wiki.filterTiddlers("[[1603188514443]parsedate[UNIXTIME]]").join(" ")).toBe("20201020100834443");
 			expect(wiki.filterTiddlers("[[1,603,188,514,443]parsedate[UNIXTIME]]").join(" ")).toBe("20201020100834443");
-			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate:UTC[JS]]").join(" ")).toBe("20251225123045000");
-			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate:LOCAL[JS]]").join(" ")).toBe($tw.utils.formatDateString(new Date("2025-12-25T12:30:45Z"),"YYYY0MM0DD0hh0mm0ss0XXX"));
-			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate:NUMBER[JS]]").join(" ")).toBe("1766665845000");
-			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate:UNIXTIME[JS]]").join(" ")).toBe("1766665845000");
-			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate[JS],[UNIXTIME]]").join(" ")).toBe("1766665845000");
-			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate[JS],[YYYY0MM0DD0hh0mm0ss]]").join(" ")).toBe($tw.utils.formatDateString(new Date("2025-12-25T12:30:45Z"),"YYYY0MM0DD0hh0mm0ss"));
-			expect(wiki.filterTiddlers("[[not-a-date]parsedate[JS],[YYYY]]").join(" ")).toBe("");
+			expect(wiki.filterTiddlers("[[not-a-date]parsedate[UNIXTIME]]").join(" ")).toBe("");
+			// Output formatting is composed with format:date[]
+			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate[JS]format:date[TIMESTAMP]]").join(" ")).toBe("1766665845000");
+			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate[JS]format:date[YYYY0MM0DD0hh0mm0ss0XXX]]").join(" ")).toBe($tw.utils.formatDateString(new Date("2025-12-25T12:30:45Z"),"YYYY0MM0DD0hh0mm0ss0XXX"));
+			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate[JS]format:date[YYYY0MM0DD0hh0mm0ss]]").join(" ")).toBe($tw.utils.formatDateString(new Date("2025-12-25T12:30:45Z"),"YYYY0MM0DD0hh0mm0ss"));
+			expect(wiki.filterTiddlers("[[not-a-date]parsedate[JS]format:date[YYYY]]").join(" ")).toBe("");
 		});
 
 		it("should handle the deserializers operator", function() {
