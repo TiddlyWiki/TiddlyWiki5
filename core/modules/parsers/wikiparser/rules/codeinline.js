@@ -39,9 +39,15 @@ exports.parse = function() {
 		textEnd = match.index;
 		this.parser.pos = match.index + match[0].length;
 	} else {
-		text = this.parser.source.substr(this.parser.pos);
-		textEnd = this.parser.sourceLength;
-		this.parser.pos = this.parser.sourceLength;
+		var delimiterStart = start - this.match[1].length;
+		this.parser.addDiagnostic({
+			from: delimiterStart,
+			to: start,
+			severity: "warning",
+			code: "unterminated-codeinline",
+			message: "Unmatched inline code delimiter rendered as literal text"
+		});
+		return [{type: "text", text: this.match[1], start: delimiterStart, end: start, isRecovered: true}];
 	}
 	return [{
 		type: "element",

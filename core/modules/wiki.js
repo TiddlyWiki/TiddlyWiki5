@@ -1057,13 +1057,26 @@ exports.parseText = function(type,text,options) {
 	text = text || "";
 	options = options || {};
 	var Parser = $tw.utils.getParser(type,options);
-	// Return the parser instance
-	return new Parser(type,text,{
+	var parserOptions = {
 		parseAsInline: options.parseAsInline,
 		wiki: this,
 		_canonical_uri: options._canonical_uri,
 		configTrimWhiteSpace: options.configTrimWhiteSpace
-	});
+	};
+	try {
+		// Return the parser instance
+		return new Parser(type,text,parserOptions);
+	} catch(error) {
+		if(!(error instanceof $tw.utils.RecoverableParseError)) {
+			throw error;
+		}
+		return {
+			type: type,
+			source: text,
+			tree: error.tree || [{type: "text", text: text}],
+			diagnostics: [$tw.utils.makeParseDiagnostic(error.diagnostic,{source: type, sourceLength: text.length})]
+		};
+	}
 };
 
 /*

@@ -45,10 +45,20 @@ exports.findNextMatch = function(startPos) {
 Parse the most recent match
 */
 exports.parse = function() {
-	// Get the filter condition
-	var filterCondition = this.parser.source.substring(this.match.index + this.match[0].length,this.terminateIfMatch.index);
+	// Parsing the body runs other rules against this rule instance, so the match details get read before that happens
+	var conditionalStart = this.match.index,
+		filterCondition = this.parser.source.substring(this.match.index + this.match[0].length,this.terminateIfMatch.index);
 	// Advance the parser position to past the %>
 	this.parser.pos = this.terminateIfMatch.index + this.terminateIfMatch[0].length;
+	if(!this.parser.hasCloser(/\<\%\s*endif\s*\%\>/mg)) {
+		this.parser.addDiagnostic({
+			from: conditionalStart,
+			to: this.parser.pos,
+			severity: "warning",
+			code: "unterminated-conditional",
+			message: "Missing <% endif %> for the conditional, so it runs to the end of the tiddler"
+		});
+	}
 	// Parse the if clause
 	return this.parseIfClause(filterCondition);
 };

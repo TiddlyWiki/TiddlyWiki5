@@ -52,6 +52,13 @@ exports.parse = function() {
 		this.parser.pos = match.index + match[0].length;
 	} else {
 		text = this.parser.source.substr(this.parser.pos);
+		this.parser.addDiagnostic({
+			from: start,
+			to: this.parser.sourceLength,
+			severity: "warning",
+			code: "unterminated-typedblock",
+			message: "Unterminated typed block"
+		});
 		this.parser.pos = this.parser.sourceLength;
 	}
 	// Parse the block according to the specified type
