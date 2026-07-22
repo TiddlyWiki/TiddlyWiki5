@@ -1,5 +1,5 @@
 created: 20140216102454178
-modified: 20260722180000000
+modified: 20260722190000000
 tags: Concepts
 title: ColourPalettes
 type: text/vnd.tiddlywiki
@@ -47,25 +47,25 @@ Palette tiddlers have the following fields:
 |description |Displayed in the palette chooser |
 |color-scheme |<<.from-version "5.5.0">> Optional filter determining the active [[colour scheme|Colour Schemes]] |
 |palette-import |<<.from-version "5.5.0">> Optional title of another palette to import; see [[Palette Inheritance]] |
-|settings |<<.from-version "5.5.0">> Optional title of a settings panel shown beneath the chooser; see [[Palette Settings]] |
+|customisations |<<.from-version "5.5.0">> Optional title of a customisations panel shown beneath the chooser; see [[Palette Customisations]] |
 |category |<<.from-version "5.5.0">> Optional descriptive category |
 |text |`name: value` colour definitions |
 
 Entries whose names begin with `?` are [[readability tests|Palette Readability Tests]] rather than colours.
 
-!! Palette settings
+!! Palette customisations
 
-<<.from-version "5.5.0">> The <<.field settings>> field gives the title of a tiddler that is transcluded beneath the [[Palette Chooser]] whenever the palette is selected. It typically contains controls that write directly to the entries of the palette tiddler, and the palette is automatically recompiled as they change.
+<<.from-version "5.5.0">> The <<.field customisations>> field gives the title of a tiddler that is transcluded beneath the [[Palette Chooser]] whenever the palette is selected. It typically contains controls that write directly to the entries of the palette tiddler, and the palette is automatically recompiled as they change.
 
-For example, this settings tiddler offers a colour picker for the `base-paper` entry:
+For example, this customisations tiddler offers a colour picker for the `base-paper` entry:
 
 ```
-title: $:/palettes/MyPalette/Settings
+title: $:/palettes/MyPalette/Customisations
 
 Paper: <$edit-text tiddler={{$:/palette}} index="base-paper" type="color" tag="input" default={{{ [function[colour],[base-paper]] }}}/>
 ```
 
-The core palette ~TwentyTwenties uses this technique to offer a colour picker for each of its base colours, and ~AutoToggle to offer dropdowns choosing the palettes to use in light and dark modes. Because fields are [[inherited|Palette Inheritance]], a palette that imports another palette also inherits its settings panel unless it overrides the <<.field settings>> field.
+The core palette ~TwentyTwenties uses this technique to offer a colour picker for each of its base colours, and ~AutoToggle to offer dropdowns choosing the palettes to use in light and dark modes. Because fields are [[inherited|Palette Inheritance]], a palette that imports another palette also inherits its customisations panel unless it overrides the <<.field customisations>> field.
 
 !! Under the covers
 
@@ -80,7 +80,7 @@ The [[background action|Background Actions]] <<.tid "$:/core/background-actions/
 !! Further reading
 
 ;Using palettes
-: [[Palette Chooser]], [[Automatic Palette Switching]], [[Palette Settings]], [[Palettes and Themes]]
+: [[Palette Chooser]], [[Automatic Palette Switching]], [[Palette Customisations]], [[Palettes and Themes]]
 ;Writing palettes
 : [[Palette Inheritance]], [[Colour Schemes]], [[Palette Readability Tests]], [[colour Macro]]
 ;Reference

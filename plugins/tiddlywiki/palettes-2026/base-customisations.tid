@@ -1,4 +1,4 @@
-title: $:/palettes/TwentyTwenties/Settings
+title: $:/palettes/2026/base/Customisations
 
 \procedure entry(name,description)
 <$text text=<<description>>/>: <$edit-text tiddler={{$:/palette}} index=<<name>> type="color" tag="input" default={{{ [function[colour],<name>] }}}/>
@@ -12,6 +12,14 @@ title: $:/palettes/TwentyTwenties/Settings
 
 <<entry name:"base-primary" description:"Primary">>
 
-<<entry name:"base-secondary" description:"Secondary">>
+<<entry name:"base-tab" description:"Tabs">>
 
-<<entry name:"base-tertiary" description:"Tertiary">>
+<<entry name:"base-link" description:"Links">>
+
+<<entry name:"base-alert" description:"Alerts">>
+
+<<entry name:"base-highlight" description:"Highlight">>
+
+<<entry name:"base-tag" description:"Tags">>
+
+<<entry name:"base-danger" description:"Danger">>

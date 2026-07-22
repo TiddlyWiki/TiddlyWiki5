@@ -4,7 +4,7 @@ description: Modern and flexible
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 color-scheme: light
-settings: $:/palettes/TwentyTwenties/Settings
+customisations: $:/palettes/TwentyTwenties/Customisations
 palette-import: $:/palettes/Vanilla
 category: 2026
 

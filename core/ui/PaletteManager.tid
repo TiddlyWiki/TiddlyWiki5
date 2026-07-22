@@ -2,7 +2,7 @@ title: $:/PaletteManager
 
 \define lingo-base() $:/language/ControlPanel/Palette/
 
-<!-- Used by the language string CustomSettings/Prompt -->
+<!-- Used by the language string Customisations/Prompt -->
 \procedure palette-link()
 <$tiddler tiddler={{$:/palette}}>
 	<$link to={{!!title}}>
@@ -18,12 +18,12 @@ title: $:/PaletteManager
 {{$:/snippets/palettetests}}
 
 <$let
-	paletteSettings={{{ [[$:/temp/palette-consolidated]get[settings]] }}}
+	paletteCustomisations={{{ [[$:/temp/palette-consolidated]get[customisations]] }}}
 >
-	<%if [<paletteSettings>!match[]] %>
+	<%if [<paletteCustomisations>!match[]] %>
 		<div>
-			<<lingo CustomSettings/Prompt>>
-			<$transclude $tiddler=<<paletteSettings>> $mode="block"/>
+			<<lingo Customisations/Prompt>>
+			<$transclude $tiddler=<<paletteCustomisations>> $mode="block"/>
 		</div>
 	<%endif%>
 </$let>

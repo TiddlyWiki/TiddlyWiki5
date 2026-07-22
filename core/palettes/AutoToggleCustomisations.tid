@@ -1,4 +1,4 @@
-title: $:/palettes/AutoToggle/Settings
+title: $:/palettes/AutoToggle/Customisations
 
 \procedure set-imported-palette(field)
 <$select field=<<field>>>

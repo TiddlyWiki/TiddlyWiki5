@@ -6,6 +6,6 @@ type: text/vnd.tiddlywiki
 
 The Palettes 2026 Plugin contains thirty three [[colour palettes|ColourPalettes]] adapted from the [[yatagarasu|https://yatagarasu.tiddlyhost.com/]] collection by [[spoon-cat|https://spoon-cat.tiddlyhost.com]].
 
-<<.from-version "5.5.0">> The palettes are built on [[Palette Inheritance]]: each palette imports a shared base palette and defines ten base colours, from which the remaining palette entries are derived using the [[Colour Operators]]. Selecting one of these palettes shows a [[settings panel|Palette Settings]] with a colour picker for each base colour.
+<<.from-version "5.5.0">> The palettes are built on [[Palette Inheritance]]: each palette imports a shared base palette and defines ten base colours, from which the remaining palette entries are derived using the [[Colour Operators]]. Selecting one of these palettes shows a [[customisations panel|Palette Customisations]] with a colour picker for each base colour.
 
 The plugin is available in the official plugin library.

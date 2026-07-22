@@ -3,7 +3,7 @@ name: 2026 base
 description: Shared base for the 2026 palettes
 type: application/x-tiddler-dictionary
 color-scheme: light
-settings: $:/palettes/2026/base/Settings
+customisations: $:/palettes/2026/base/Customisations
 
 # Base colours supplied by each palette
 base-paper: #ffffff

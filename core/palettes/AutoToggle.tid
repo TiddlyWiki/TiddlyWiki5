@@ -4,7 +4,7 @@ description: Automatically switch between dark and light modes
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 color-scheme: [{$:/info/browser/darkmode}!match[yes]then[light]else[dark]]
-settings: $:/palettes/AutoToggle/Settings
+customisations: $:/palettes/AutoToggle/Customisations
 palette-import@light: $:/palettes/TwentyTwenties
 palette-import@dark: $:/palettes/TwentyTwenties/Dark
 category: 2026
