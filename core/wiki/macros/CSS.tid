@@ -75,6 +75,9 @@ tags: $:/tags/Macro
 			<$action-setfield $tiddler=<<outputPalette>> $index={{{ [<entry-name>addprefix[?recursion-]] }}} $value={{{ [[the definition of ']addsuffix<entry-name>addsuffix[' is recursive]] }}}/>
 		</$list>
 	</$let>
+	<!-- Save the consolidated palette as a copy for reuse in the $:/PaletteEditor -->
+	<$action-setfield $tiddler={{{ [<outputPalette>addsuffix[/copy]] }}} type="application/x-tiddler-dictionary"/>
+	<$action-setfield $tiddler={{{ [<outputPalette>addsuffix[/copy]] }}} text={{{ [<consolidatedPalette>get[text]] }}}/>
 </$let>
 \end actions-compile-palette
 

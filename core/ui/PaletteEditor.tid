@@ -9,39 +9,95 @@ title: $:/PaletteEditor
 \end
 \define colour-tooltip(showhide) $showhide$ editor for $(newColourName)$ 
 
-\function tf.palette.getindex() [<currentTiddler>getindex<colourName>]
+\function tf.palette.getcolour() [<paletteColours>getindex<colourName>]
+
+\procedure tp.paletteeditor.resolved.input.actions()
+<%if [<colourEditTiddler>get[text]is[colourspace]] %>
+<$action-setfield $index=<<colourName>> $value={{{ [<colourEditTiddler>get[text]] }}}/>
+<% else %>
+<$action-setfield $index=<<colourName>> $value="transparent"/>
+<% endif %>
+\end
+
+\procedure tp.paletteeditor.input.actions()
+<%if [<colourEditTiddler>getindex<colourName>colour-resolve:colour<colourEditTiddler>is[colourspace]] %>
+<$action-setfield $index=<<colourName>> $value={{{ [<colourEditTiddler>getindex<colourName>] }}}/>
+<% else %>
+<$action-setfield $index=<<colourName>> $value="transparent"/>
+<% endif %>
+\end
+
+\procedure tp.paletteeditor.colour.input.actions()
+<$action-setfield $tiddler=<<colourEditTiddler>> text=<<actionValue>>/>
+\end
+
+\procedure tp.paletteeditor.dropdown.button.show.actions()
+<$action-setfield $tiddler=<<colourEditTiddler>> text={{{ [<colourName>colour-resolve:colour{$:/palette}] }}}/>
+<$action-setfield $tiddler=<<state>> text="show"/>
+\end
+
+\procedure tp.paletteeditor.dropdown.button.hide.actions()
+<$action-deletetiddler $tiddler=<<state>>/>
+<$action-deletetiddler $tiddler=<<colourEditTiddler>>/>
+\end
 
 \define delete-colour-index-actions() <$action-setfield $index=<<colourName>>/>
 \define palette-manager-colour-row-segment()
 \whitespace trim
-<$edit-text index=<<colourName>> tag="input" placeholder=<<edit-colour-placeholder>> default=""/>
-<br>
+<$let colourEditTiddler="$:/temp/palette-colours/copy">
+<$edit-text
+	tiddler=<<colourEditTiddler>>
+	index=<<colourName>>
+	tag="input"
+	placeholder=<<edit-colour-placeholder>>
+	default=""
+	inputActions=<<tp.paletteeditor.input.actions>>
+/>
+<br/>
+<$let rawValue={{{ [<paletteColours>getindex<colourName>] }}}>
 <%if [<colourName>colour-resolve:colour{$:/palette}is[colourspace]] %>
 <$edit-text index={{{ [<colourName>colour-resolve{$:/palette}] }}} type="color" tag="input" class="tc-palette-manager-colour-input"/>
-<%elseif [<colourName>!prefix[?]then<currentTiddler>getindex<colourName>!match[]] %>
-<$wikify name="bgColour" text={{{ [subfilter<tf.palette.getindex>] }}}>
+<%elseif [<colourName>!prefix[?]then<rawValue>!match[]] %>
+<$let bgColour={{{ [subfilter<tf.palette.getcolour>] }}} >
 <%if [<bgColour>is[colourspace]] %>
-<div style.background-color=<<bgColour>> style.height="2em" style.width="100%" style.border-radius="2px" style.margin="3px 0" class="tc-palette-manager-colour-input" />
+<div style.background-color=<<bgColour>> style.height="2em" style.width="100%" style.border-color=<<colour foreground>> style.border-width="1px" style.border-style="solid" style.border-radius="2px" style.margin="3px 0" class="tc-palette-manager-colour-input" />
 <% endif %>
-</$wikify>
+</$let>
 <% endif %>
-<%if [<currentTiddler>getindex<colourName>!is[colourspace]then<colourName>colour-resolve:colour{$:/palette}is[colourspace]] %>
-<$let state={{{ [[$:/state/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>] }}} newColourName={{{ [<colourName>colour-resolve{$:/palette}] }}} >
+<%if [<rawValue>!is[colourspace]then<colourName>colour-resolve:colour{$:/palette}is[colourspace]then<colourName>colour-resolve{$:/palette}!match<colourName>] %>
+<$let state={{{ [[$:/state/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>] }}} newColourName={{{ [<colourName>colour-resolve:colour{$:/palette}is[colourspace]then<colourName>colour-resolve{$:/palette}else<colourName>] }}} colourEditTiddler={{{ [[$:/temp/paletteeditor/input/]addsuffix<currentTiddler>addsuffix[/]addsuffix<newColourName>] }}} >
 <$reveal state=<<state>> type="nomatch" text="show">
-<$button tooltip=<<colour-tooltip show>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" set=<<state>> setTo="show">{{$:/core/images/down-arrow}}<$text text=<<newColourName>> class="tc-small-gap-left"/></$button><br>
+<$button tooltip=<<colour-tooltip show>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible tc-small-gap-right" actions=<<tp.paletteeditor.dropdown.button.show.actions>>>{{$:/core/images/down-arrow}}<$text text={{{ [<colourName>colour-resolve:colour{$:/palette}is[colourspace]then<colourName>colour-resolve{$:/palette}else<colourName>] }}}/></$button><br>
 </$reveal>
 <$reveal state=<<state>> type="match" text="show">
-<$button tooltip=<<colour-tooltip hide>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" actions="""<$action-deletetiddler $tiddler=<<state>>/>""">{{$:/core/images/up-arrow}}<$text text=<<newColourName>> class="tc-small-gap-left"/></$button><br>
+<$button tooltip=<<colour-tooltip hide>> aria-label=<<colour-tooltip hide>> class="tc-btn-invisible tc-small-gap-right" actions=<<tp.paletteeditor.dropdown.button.hide.actions>>>{{$:/core/images/up-arrow}}<$text text=<<newColourName>>/></$button><br>
 </$reveal>
 <$reveal state=<<state>> type="match" text="show">
-<$set name="colourName" value=<<newColourName>>>
-<br>
-<<palette-manager-colour-row-segment>>
-<br><br>
-</$set>
+<$let colourName=<<newColourName>> colourRefreshTitle={{{ [[$:/temp/paletteeditor/input/]addsuffix<currentTiddler>addsuffix[/]addsuffix<newColourName>addsuffix[/refresh]] }}}>
+<br/>
+<$edit-text
+	tiddler=<<colourEditTiddler>>
+	tag="input"
+	placeholder=<<edit-colour-placeholder>>
+	default=""
+	inputActions=<<tp.paletteeditor.resolved.input.actions>>
+	refreshTitle=<<colourRefreshTitle>>
+/>
+<br/>
+<$edit-text
+	index=<<newColourName>>
+	type="color"
+	tag="input"
+	class="tc-palette-manager-colour-input"
+	inputActions=<<tp.paletteeditor.colour.input.actions>>
+/>
+<br/><br/>
+</$let>
 </$reveal>
 </$let>
 <% endif %>
+</$let>
+</$let>
 \end
 
 \define palette-manager-colour-row()
@@ -73,7 +129,7 @@ title: $:/PaletteEditor
 </table>
 \end
 \whitespace trim
-<$set name="currentTiddler" value={{$:/palette}}>
+<$let currentTiddler={{$:/palette}} paletteColours="$:/temp/palette/copy">
 
 <<lingo Prompt>>&#32;<$link to={{$:/palette}}><$macrocall $name="currentTiddler" $output="text/plain"/></$link>
 
@@ -92,3 +148,5 @@ title: $:/PaletteEditor
 <$checkbox tiddler="$:/state/palettemanager/showexternal" field="text" checked="yes" unchecked="no"><span class="tc-small-gap-left"><<lingo Names/External/Show>></span></$checkbox>
 
 <<palette-manager-table>>
+
+</$let>
