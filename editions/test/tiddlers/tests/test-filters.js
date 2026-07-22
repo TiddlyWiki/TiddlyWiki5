@@ -1103,6 +1103,16 @@ describe("Filter tests", function() {
 			expect(wiki.filterTiddlers("[[1603188514443]parsedate[UNIXTIME]]").join(" ")).toBe("20201020100834443");
 			expect(wiki.filterTiddlers("[[1,603,188,514,443]parsedate[UNIXTIME]]").join(" ")).toBe("20201020100834443");
 			expect(wiki.filterTiddlers("[[not-a-date]parsedate[UNIXTIME]]").join(" ")).toBe("");
+			// TW mode round-trip and shorter TW forms
+			expect(wiki.filterTiddlers("[[20251225123045000]parsedate[TW]]").join(" ")).toBe("20251225123045000");
+			expect(wiki.filterTiddlers("[[20150101]parsedate[TW]]").join(" ")).toBe("20150101000000000");
+			expect(wiki.filterTiddlers("[[20251225123045]parsedate[TW]]").join(" ")).toBe("20251225123045000");
+			// AUTO: prefer plausible TW digit dates over unix milliseconds
+			expect(wiki.filterTiddlers("[[20150101]parsedate[AUTO]]").join(" ")).toBe("20150101000000000");
+			expect(wiki.filterTiddlers("[[20251225123045000]parsedate[AUTO]]").join(" ")).toBe("20251225123045000");
+			expect(wiki.filterTiddlers("[[20251225123045]parsedate[AUTO]]").join(" ")).toBe("20251225123045000");
+			// AUTO: 13-digit unix milliseconds still work (not a TW length)
+			expect(wiki.filterTiddlers("[[1603188514443]parsedate[AUTO]]").join(" ")).toBe("20201020100834443");
 			// Output formatting is composed with format:date[]
 			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate[JS]format:date[TIMESTAMP]]").join(" ")).toBe("1766665845000");
 			expect(wiki.filterTiddlers("[[2025-12-25T12:30:45Z]parsedate[JS]format:date[YYYY0MM0DD0hh0mm0ss0XXX]]").join(" ")).toBe($tw.utils.formatDateString(new Date("2025-12-25T12:30:45Z"),"YYYY0MM0DD0hh0mm0ss0XXX"));

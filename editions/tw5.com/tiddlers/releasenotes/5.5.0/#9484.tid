@@ -12,4 +12,4 @@ Added the `parsedate` filter operator for converting date strings into TiddlyWik
 
 The operator supports multiple input modes including ECMAScript (`JS`), native TiddlyWiki date strings (`TW`), signed integer unix timestamps (`UNIXTIME`/`NUMBER`), and automatic detection (`AUTO`).
 
-`AUTO` mode additionally handles loose date text with ordinal day suffixes (`1st`, `2nd`, `3rd`, `4th`, etc.) and embedded commas. For other display formats, chain the [[format Operator]] (for example `format:date[TIMESTAMP]` or a custom [[DateFormat]] template).
+`AUTO` mode also recognizes plausible native TiddlyWiki digit dates before treating integers as unix timestamps, and handles loose date text with ordinal day suffixes (`1st`, `2nd`, `3rd`, `4th`, etc.) and embedded commas. For other display formats, chain the [[format Operator]] (for example `format:date[TIMESTAMP]` or a custom [[DateFormat]] template).
