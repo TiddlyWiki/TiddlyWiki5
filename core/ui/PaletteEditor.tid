@@ -11,6 +11,8 @@ title: $:/PaletteEditor
 
 \function tf.palette.getcolour() [<paletteColours>getindex<colourName>]
 
+\function tf.palette.input.prefix() [[$:/temp/paletteeditor/input/]addsuffix<currentTiddler>]
+
 \procedure tp.paletteeditor.resolved.input.actions()
 <%if [<colourEditTiddler>get[text]is[colourspace]] %>
 <$action-setfield $index=<<colourName>> $value={{{ [<colourEditTiddler>get[text]] }}}/>
@@ -20,7 +22,7 @@ title: $:/PaletteEditor
 \end
 
 \procedure tp.paletteeditor.input.actions()
-<%if [<colourEditTiddler>getindex<colourName>colour-resolve:colour<colourEditTiddler>is[colourspace]] %>
+<%if [<colourName>colour-resolve:colour<colourEditTiddler>is[colourspace]] %>
 <$action-setfield $index=<<colourName>> $value={{{ [<colourEditTiddler>getindex<colourName>] }}}/>
 <% else %>
 <$action-setfield $index=<<colourName>> $value="transparent"/>
@@ -29,6 +31,7 @@ title: $:/PaletteEditor
 
 \procedure tp.paletteeditor.colour.input.actions()
 <$action-setfield $tiddler=<<colourEditTiddler>> text=<<actionValue>>/>
+<$action-setfield $tiddler=<<colourRefreshTitle>> text="yes"/>
 \end
 
 \procedure tp.paletteeditor.dropdown.button.show.actions()
@@ -54,9 +57,15 @@ title: $:/PaletteEditor
 	inputActions=<<tp.paletteeditor.input.actions>>
 />
 <br/>
-<$let rawValue={{{ [<paletteColours>getindex<colourName>] }}}>
+<$let rawValue={{{ [<paletteColours>getindex<colourName>] }}} colourEditTiddler={{{ [<colourName>colour-resolve{$:/palette}addprefix[/]addprefix<currentTiddler>addprefix[$:/temp/paletteeditor/input/]] }}} colourRefreshTitle={{{ [<colourEditTiddler>addsuffix[/refresh]] }}}>
 <%if [<colourName>colour-resolve:colour{$:/palette}is[colourspace]] %>
-<$edit-text index={{{ [<colourName>colour-resolve{$:/palette}] }}} type="color" tag="input" class="tc-palette-manager-colour-input"/>
+<$edit-text
+	index={{{ [<colourName>colour-resolve{$:/palette}] }}}
+	type="color"
+	tag="input"
+	class="tc-palette-manager-colour-input"
+	inputActions=<<tp.paletteeditor.colour.input.actions>>
+/>
 <%elseif [<colourName>!prefix[?]then<rawValue>!match[]] %>
 <$let bgColour={{{ [subfilter<tf.palette.getcolour>] }}} >
 <%if [<bgColour>is[colourspace]] %>
