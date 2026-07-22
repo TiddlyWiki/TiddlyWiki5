@@ -129,7 +129,7 @@ title: $:/PaletteEditor
 </table>
 \end
 \whitespace trim
-<$let currentTiddler={{$:/palette}} paletteColours="$:/temp/palette/copy">
+<$let currentTiddler={{$:/palette}} paletteColours="$:/temp/palette-colours/copy">
 
 <<lingo Prompt>>&#32;<$link to={{$:/palette}}><$macrocall $name="currentTiddler" $output="text/plain"/></$link>
 
