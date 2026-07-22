@@ -1,0 +1,13 @@
+change-category: nodejs
+change-type: enhancement
+created: 20260722201600000
+description: loadWikiTiddlers accepts options.wikiInfo and honors default-tiddler-location when loading
+github-contributors: linonetwo
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9937
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9937
+type: text/vnd.tiddlywiki
+
+* `$tw.loadWikiTiddlers` accepts `options.wikiInfo`, so the wiki info can be supplied in memory without a `tiddlywiki.info` file on disk
+* Loading tiddlers now uses `config["default-tiddler-location"]` (falling back to `$tw.config.wikiTiddlersSubDir`), matching the path used when saving
