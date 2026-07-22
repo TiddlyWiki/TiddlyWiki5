@@ -46,6 +46,17 @@ exports["colour-set-alpha"] = makeSerialColourOperator(function (colour, operato
 	return colour.display().toString();
 });
 
+exports["colour-composite"] = makeSerialColourOperator(function (colour, operator, options) {
+	// Composite each translucent input colour over the backdrop given in the operand
+	var backdrop = $tw.utils.parseCSSColorObject(operator.operand);
+	if(backdrop && colour.alpha < 1) {
+		var alpha = colour.alpha;
+		colour.alpha = 1;
+		colour = backdrop.mix(colour,alpha,{space: "srgb"});
+	}
+	return colour.display().toString();
+});
+
 exports["colour-contrast"] = makeParallelColourOperator(function (colours, operator, options) {
 	var colourContrasts = [];
 	$tw.utils.each(colours,function(colour,index) {

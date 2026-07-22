@@ -152,8 +152,9 @@ tags: $:/tags/Macro
 [<colour-result>prefix[<<colour ]suffix[>>]removeprefix[<<colour ]removesuffix[>>]addprefix<colour-function-prefix>addsuffix<colour-function-suffix>] :else[<colour-result>]
 \end tf.colour-inner-transform-classic-palette-entry
 
+<!-- Translucent entries are composited over the background entry before their contrast is measured -->
 \function tf.check-colour-contrast-subfunction()
-[function[colour],<paletteEntryA>] [function[colour],<paletteEntryB>] +[colour-contrast:DeltaPhi[]fixed[3]]
+[function[colour],[background]] =>backdrop [function[colour],<paletteEntryA>colour-composite<backdrop>] =>colourA [function[colour],<paletteEntryB>colour-composite<backdrop>] =>colourB [<colourA>] [<colourB>] +[colour-contrast:DeltaPhi[]fixed[3]]
 \end tf.check-colour-contrast-subfunction
 
 \function tf.check-colour-contrast(paletteEntryA,paletteEntryB,threshold)

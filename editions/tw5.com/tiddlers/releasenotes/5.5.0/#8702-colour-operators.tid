@@ -3,7 +3,7 @@ description: New filter operators for manipulating colour values
 release: 5.5.0
 tags: $:/tags/ChangeNote
 created: 20260718000000000
-modified: 20260718000000000
+modified: 20260722103000000
 change-type: feature
 change-category: filters
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8702
@@ -13,6 +13,7 @@ A suite of new filter operators for manipulating colour values, backed by the [[
 
 * <<.olink colour-lighten>> and <<.olink colour-darken>> for lightening and darkening colours
 * <<.olink colour-set-alpha>> for setting the opacity of a colour
+* <<.olink colour-composite>> for compositing translucent colours over a backdrop
 * <<.olink colour-get-oklch>> and <<.olink colour-set-oklch>> for reading and writing the lightness, chroma and hue components of a colour
 * <<.olink colour-contrast>> for measuring the contrast between colours
 * <<.olink colour-best-contrast>> for choosing the colour from a list that gives the best contrast with a target colour
