@@ -149,11 +149,17 @@ function resolveEntry(name, palette, visited, widget) {
 		return name;
 	}
 	visited.push(name);
+	// First, try to resolve the input title itself as a reference
+	var target = parseReference(name, widget);
+	if(target) {
+		return resolveEntry(target, palette, visited, widget);
+	}
+	// Otherwise, look up the palette entry value and resolve that
 	var value = palette[name];
 	if(value === undefined || value === null) {
 		return name;
 	}
-	var target = parseReference(value, widget);
+	target = parseReference(value, widget);
 	if(target) {
 		return resolveEntry(target, palette, visited, widget);
 	}
