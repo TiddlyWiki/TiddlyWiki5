@@ -35,18 +35,13 @@ exports.parseCSSColor = function(colourString) {
 /*
 Preferred way to parse a Color.js colour
 */
-var parseCSSColorObjectCache = Object.create(null);
 exports.parseCSSColorObject = function(colourString) {
-	if(colourString in parseCSSColorObjectCache) {
-		return parseCSSColorObjectCache[colourString];
-	}
 	var c = null;
 	try {
 		c = new Color(colourString);
 	} catch(e) {
 		// Return null if there is an error
 	}
-	parseCSSColorObjectCache[colourString] = c;
 	return c;
 };
 
