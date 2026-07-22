@@ -81,7 +81,7 @@ tags: $:/tags/Macro
 
 \procedure actions-recompile-current-palette()
 \procedure tv-action-refresh-policy() always
-<$transclude $variable="actions-compile-palette" inputPalette={{$:/palette}} outputPalette="$:/temp/palette-colours"/>
+<$transclude $variable="actions-compile-palette" inputPalette={{{ [{$:/palette}!is[missing]] :else[[$:/palettes/Vanilla]] }}} outputPalette="$:/temp/palette-colours"/>
 \end actions-recompile-current-palette
 
 \procedure tv-palette-name() $:/temp/palette-colours

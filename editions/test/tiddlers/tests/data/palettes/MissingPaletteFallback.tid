@@ -1,0 +1,24 @@
+title: Operators/Palettes/MissingPaletteFallback
+description: A missing current palette falls back to Vanilla
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+(<<colour background>>)
+(<<colour foreground>>)
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+$:/palettes/DoesNotExist
++
+title: ExpectedResult
+
+<p>(#ffffff)
+(#333333)</p>

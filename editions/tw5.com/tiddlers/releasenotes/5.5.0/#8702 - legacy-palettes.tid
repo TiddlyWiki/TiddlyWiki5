@@ -8,4 +8,4 @@ impact-type: compatibility-break
 
 Before v5.5.0, the following palettes shipped as shadow tiddlers in the core: Blanca, Blue, ~BrightMute, ~ContrastDark, ~ContrastLight, ~CupertinoDark, ~DarkPhotos, ~DesertSand, ~FlexokiDark, ~FlexokiLight, ~GruvBoxDark, Nord, Rocker, ~SolarFlare, ~SolarizedDark, ~SolarizedLight, ~SpartanDay, ~SpartanNight and Twilight. From v5.5.0 onwards they are provided by the Legacy Palettes plugin instead.
 
-A wiki that uses one of these palettes without having customised it will render without palette colours after upgrading. To restore the palette, install the Legacy Palettes plugin from the official plugin library, or choose a different palette in the control panel. A palette that has been customised is stored in the wiki itself, and is unaffected by the upgrade.
+A wiki that uses one of these palettes without having customised it will fall back to the default Vanilla palette after upgrading. To restore the palette, install the Legacy Palettes plugin from the official plugin library, or choose a different palette in the control panel. A palette that has been customised is stored in the wiki itself, and is unaffected by the upgrade.
