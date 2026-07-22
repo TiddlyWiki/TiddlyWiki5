@@ -1,0 +1,63 @@
+created: 20260612152408817
+modified: 20260612201309634
+relation-company: Company
+tags: ContactCard
+title: SampleContact-Alice
+type: text/vnd.tiddlywiki-multiple+fields
+
+title: body
+type: multiline
+
+UX designer with a focus on wiki interfaces. Contributed design ideas for the new field editor panes.
++
+title: first-name
+
+Alice
++
+title: last-name
+
+Chen
++
+title: list
+type: relation-Company
+
+[[DesignBridge]]
++
+title: role
+
+UX Designer
++
+title: email-work
+type: email
+
+alice.chen@designbridge.io
++
+title: email-personal
+type: email
+
+alice@chen.me
++
+title: phone-mobile
+type: phone
+
++44-7700-900123
++
+title: website
+type: url
+
+https://alicechen.design
++
+title: birthday
+type: date
+
+1988-11-22
++
+title: category
+type: option-personal-business
+
+business
++
+title: accent-color
+type: color
+
+#e74c3c

@@ -1,0 +1,98 @@
+title: $:/core/ui/ViewTemplate/body/company-card
+
+\whitespace trim
+
+\procedure company-card-field-view(fieldName)
+<$let
+	fieldType={{{ [<currentTiddler>compound-field-type<fieldName>] }}}
+	fieldValue={{{ [<currentTiddler>get<fieldName>] }}}
+>
+	<%if [<fieldType>match[template-prefix]] %>
+		<$macrocall $name="compound-template-prefix" fieldName=<<fieldName>> suffix="-ViewTemplate"/>
+	<%elseif [<fieldValue>!is[blank]] %>
+		<div class="tc-contact-card-field">
+			<div class="tc-contact-card-label"><$text text=<<fieldName>>/></div>
+			<div class="tc-contact-card-value">
+				<%if [<fieldType>match[multiline]] %>
+					<$transclude $tiddler=<<currentTiddler>> $field=<<fieldName>> $mode="block"/>
+				<%elseif [<fieldType>match[url]] %>
+					<a href=<<fieldValue>> class="tc-contact-card-link tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text=<<fieldValue>>/></a>
+				<%else%>
+					<$text text=<<fieldValue>>/>
+				<%endif%>
+			</div>
+		</div>
+	<%endif%>
+</$let>
+\end
+
+\procedure company-card-field-edit(fieldName)
+<$let fieldType={{{ [<currentTiddler>compound-field-type<fieldName>] }}}>
+	<div class="tc-contact-card-field">
+		<div class="tc-contact-card-label"><$text text=<<fieldName>>/></div>
+		<div class="tc-contact-card-value">
+			<%if [<fieldType>match[multiline]] %>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="textarea"/>
+			<%elseif [<fieldType>match[date]] %>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="date"/>
+			<%elseif [<fieldType>match[url]] %>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input" type="url"/>
+			<%elseif [<fieldType>match[template-prefix]] %>
+				<$macrocall $name="compound-template-prefix" fieldName=<<fieldName>> suffix="-EditTemplate"/>
+			<%else%>
+				<$edit-text tiddler=<<currentTiddler>> index=<<fieldName>> class="tc-edit-texteditor" tag="input"/>
+			<%endif%>
+		</div>
+	</div>
+</$let>
+\end
+
+<$let
+	editState=<<qualify "$:/state/company-card/edit">>
+>
+<div class="tc-contact-card tc-company-card">
+
+	<!-- Toolbar -->
+	<div class="tc-contact-card-toolbar">
+		<$button set=<<editState>> setTo={{{ [<editState>get[text]match[yes]then[no]else[yes]] }}} class="tc-btn-invisible tc-btn-mini">
+			<%if [<editState>get[text]match[yes]] %>
+				{{$:/core/images/done-button}} Done
+			<%else%>
+				{{$:/core/images/edit-button}} Edit
+			<%endif%>
+		</$button>
+	</div>
+
+	<%if [<editState>get[text]match[yes]] %>
+
+		<!-- Edit mode -->
+		<div class="tc-contact-card-body">
+			<div class="tc-contact-card-label">body</div>
+			<$edit-text tiddler=<<currentTiddler>> index="body" class="tc-edit-texteditor" tag="textarea"/>
+		</div>
+		<div class="tc-contact-card-fields">
+			<$list filter="[<currentTiddler>compound-field-names[]!match[body]]" variable="fieldName">
+				<$macrocall $name="company-card-field-edit" fieldName=<<fieldName>>/>
+			</$list>
+		</div>
+
+	<%else%>
+
+		<!-- View mode -->
+		<$let bodyValue={{{ [<currentTiddler>get[body]] }}}>
+			<%if [<bodyValue>!is[blank]] %>
+				<div class="tc-contact-card-body">
+					<$transclude $field="body" $mode="block"/>
+				</div>
+			<%endif%>
+		</$let>
+		<div class="tc-contact-card-fields">
+			<$list filter="[<currentTiddler>compound-field-names[]!match[body]]" variable="fieldName">
+				<$macrocall $name="company-card-field-view" fieldName=<<fieldName>>/>
+			</$list>
+		</div>
+
+	<%endif%>
+
+</div>
+</$let>

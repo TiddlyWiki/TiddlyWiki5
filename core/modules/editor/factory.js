@@ -68,7 +68,10 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Fix height
 		this.engine.fixHeight();
 		// Focus if required
-		if($tw.browser && (this.editFocus === "true" || this.editFocus === "yes") && !$tw.utils.hasClass(this.parentDomNode.ownerDocument.activeElement,"tc-keep-focus")) {
+		if($tw.browser &&
+			(this.editFocus === "true" || this.editFocus === "yes") && 
+			!$tw.utils.hasClass(this.parentDomNode.ownerDocument.activeElement,"tc-keep-focus"))
+		{
 			this.engine.focus();
 		}
 		// Add widget message listeners
@@ -90,7 +93,14 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			value = this.wiki.extractTiddlerDataItem(this.editTitle,this.editIndex,this.editDefault);
 			update = function(value) {
 				var data = self.wiki.getTiddlerData(self.editTitle,{});
-				if(data[self.editIndex] !== value) {
+				var existingEntry = data[self.editIndex];
+				// Preserve metadata objects (e.g. {value: "...", type: "multiline"})
+				if(existingEntry !== null && typeof existingEntry === "object" && $tw.utils.hop(existingEntry,"value")) {
+					if(existingEntry.value !== value) {
+						existingEntry.value = value;
+						self.wiki.setTiddlerData(self.editTitle,data);
+					}
+				} else if(data[self.editIndex] !== value) {
 					data[self.editIndex] = value;
 					self.wiki.setTiddlerData(self.editTitle,data);
 				}
@@ -208,7 +218,9 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.makeChildWidgets();
 		// Determine whether to show the toolbar
 		this.editShowToolbar = this.wiki.getTiddlerText(ENABLE_TOOLBAR_TITLE,"yes");
-		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0) && (!this.document.isTiddlyWikiFakeDom);
+		this.editShowToolbar = (this.editShowToolbar === "yes") &&
+			!!(this.children && this.children.length > 0) &&
+			(!this.document.isTiddlyWikiFakeDom);
 	};
 
 	/*
@@ -217,7 +229,18 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
+		if(changedAttributes.tiddler || changedAttributes.field ||
+			changedAttributes.index || changedAttributes["default"] ||
+			changedAttributes["class"] || changedAttributes.placeholder ||
+			changedAttributes.size || changedAttributes.autoHeight ||
+			changedAttributes.minHeight || 	changedAttributes.focusPopup ||
+			changedAttributes.rows || changedAttributes.tabindex ||
+			changedAttributes.cancelPopups || changedAttributes.inputActions ||
+			changedAttributes.refreshTitle || changedAttributes.autocomplete ||
+			changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] ||
+			changedTiddlers["$:/palette"] || changedAttributes.disabled ||
+			changedAttributes.fileDrop)
+		{
 			this.refreshSelf();
 			return true;
 		} else if(changedTiddlers[this.editRefreshTitle]) {
@@ -341,7 +364,9 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.handleDragEnterEvent = function(event) {
 		if($tw.utils.dragEventContainsFiles(event)) {
 			// Ignore excessive events fired by FF when entering and leaving text nodes in a text area.
-			if( event.relatedTarget && (event.relatedTarget.nodeType === 3 || event.target === event.relatedTarget)) {
+			if( event.relatedTarget && (event.relatedTarget.nodeType === 3 ||
+				event.target === event.relatedTarget))
+			{
 				return true;
 			}
 			event.preventDefault();
@@ -364,7 +389,9 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 
 	EditTextWidget.prototype.handleDragLeaveEvent = function(event) {
 		// Ignore excessive events fired by FF when entering and leaving text nodes in a text area.
-		if(event.relatedTarget && ((event.relatedTarget.nodeType === 3) || (event.target === event.relatedTarget))) {
+		if(event.relatedTarget && ((event.relatedTarget.nodeType === 3) ||
+			(event.target === event.relatedTarget)))
+		{
 			return true;
 		}
 		event.preventDefault();

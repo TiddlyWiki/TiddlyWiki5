@@ -70,7 +70,14 @@ SetMultipleFieldsWidget.prototype.invokeAction = function(triggeringWidget,event
 		var data = this.wiki.getTiddlerData(this.actionTiddler,Object.create(null));
 		names = this.wiki.filterTiddlers(this.actionIndexes,this);
 		$tw.utils.each(names,function(name,index) {
-			data[name] = values[index] || "";
+			var newValue = values[index] || "";
+			// Preserve metadata objects (e.g. {value: "...", type: "multiline"}) when updating
+			var existingEntry = data[name];
+			if(existingEntry !== null && typeof existingEntry === "object" && $tw.utils.hop(existingEntry,"value")) {
+				existingEntry.value = newValue;
+			} else {
+				data[name] = newValue;
+			}
 		});
 		this.wiki.setTiddlerData(this.actionTiddler,data,{},{suppressTimestamp: !this.actionTimestamp});
 	}

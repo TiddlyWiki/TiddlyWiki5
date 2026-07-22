@@ -58,7 +58,8 @@ exports.getInt = function(str,deflt) {
 };
 
 /*
-Repeatedly replaces a substring within a string. Like String.prototype.replace, but without any of the default special handling of $ sequences in the replace string
+Repeatedly replaces a substring within a string. Like String.prototype.replace,
+but without any of the default special handling of $ sequences in the replace string
 */
 exports.replaceString = function(text,search,replace) {
 	return text.replace(search,function() {
@@ -706,7 +707,8 @@ exports.isLinkExternal = function(to) {
 exports.nextTick = function(fn) {
 /*global window: false */
 	if(typeof process === "undefined") {
-		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
+		// Apparently it would be faster to use postMessage
+		// http://dbaron.org/log/20100309-faster-timeouts
 		window.setTimeout(fn,0);
 	} else {
 		process.nextTick(fn);
@@ -861,6 +863,60 @@ exports.makeTiddlerDictionary = function(data) {
 		output.push(name + ": " + data[name]);
 	}
 	return output.join("\n");
+};
+
+/*
+Convert a hashmap into compound tiddler format (text/vnd.tiddlywiki-multiple).
+Values can be plain strings or nested objects with {value: "...", ...metadata}.
+*/
+exports.makeMultilineFieldsDictionary = function(data,originalText) {
+	var entries = [];
+	// Preserve original key order if available, append new keys at the end
+	var names;
+	if(originalText) {
+		names = [];
+		var rawEntries = originalText.split(/\r?\n\+\r?\n/);
+		for(var r = 0; r < rawEntries.length; r++) {
+			var split = rawEntries[r].split(/\r?\n\r?\n/mg);
+			if(split.length >= 1) {
+				var entryFields = $tw.utils.parseFields(split[0]);
+				if(entryFields.title && names.indexOf(entryFields.title) === -1) {
+					names.push(entryFields.title);
+				}
+			}
+		}
+		// Append any new keys not in the original
+		var allKeys = Object.keys(data);
+		for(var k = 0; k < allKeys.length; k++) {
+			if(names.indexOf(allKeys[k]) === -1) {
+				names.push(allKeys[k]);
+			}
+		}
+		// Remove deleted keys
+		names = names.filter(function(n) { return $tw.utils.hop(data,n); });
+	} else {
+		names = Object.keys(data);
+	}
+	for(var t = 0; t < names.length; t++) {
+		var name = names[t];
+		var item = data[name];
+		var header, body;
+		if(item !== null && typeof item === "object" && $tw.utils.hop(item,"value")) {
+			var headerParts = ["title: " + name];
+			for(var key in item) {
+				if(key !== "value" && $tw.utils.hop(item,key)) {
+					headerParts.push(key + ": " + item[key]);
+				}
+			}
+			header = headerParts.join("\n");
+			body = item.value;
+		} else {
+			header = "title: " + name;
+			body = (item !== undefined && item !== null) ? item.toString() : "";
+		}
+		entries.push(header + "\n\n" + body);
+	}
+	return entries.join("\n+\n");
 };
 
 /*

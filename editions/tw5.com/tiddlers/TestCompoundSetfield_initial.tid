@@ -1,0 +1,15 @@
+title: TestCompoundSetfield_initial
+
+title: body
+type: multiline
+
+initial body
++
+title: email
+type: email
+
+old@example.com
++
+title: nickname
+
+OldNick

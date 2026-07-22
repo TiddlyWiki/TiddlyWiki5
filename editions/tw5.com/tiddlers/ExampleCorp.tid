@@ -1,0 +1,33 @@
+created: 20260612151738811
+modified: 20260612201258955
+tags: Company
+title: ExampleCorp
+type: text/vnd.tiddlywiki-multiple+fields
+
+title: body
+type: multiline
+
+An enterprise software company specializing in reactive systems and data pipelines.
++
+title: industry
+
+Software
++
+title: location
+
+Munich, Germany
++
+title: website
+type: url
+
+https://examplecorp.example.com
++
+title: founded
+type: date
+
+2009-01-01
++
+title: employees
+type: template-prefix
+
+ContactRollup
