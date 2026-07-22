@@ -154,7 +154,7 @@ tags: $:/tags/Macro
 
 <!-- Translucent entries are composited over the background entry before their contrast is measured -->
 \function tf.check-colour-contrast-subfunction()
-[function[colour],[background]] =>backdrop [function[colour],<paletteEntryA>colour-composite<backdrop>] =>colourA [function[colour],<paletteEntryB>colour-composite<backdrop>] =>colourB [<colourA>] [<colourB>] +[colour-contrast:DeltaPhi[]fixed[3]]
+[function[colour],[background]] =>backdrop [function[colour],<paletteEntryA>colour-composite<backdrop>] =>colourA [function[colour],<paletteEntryB>colour-composite<backdrop>] =>colourB [<colourA>] [<colourB>] +[colour-contrast[]fixed[3]]
 \end tf.check-colour-contrast-subfunction
 
 \function tf.check-colour-contrast(paletteEntryA,paletteEntryB,threshold)
