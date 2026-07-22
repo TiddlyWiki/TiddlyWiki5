@@ -1,0 +1,11 @@
+title: $:/changenotes/5.5.0/#8702/impacts/double-colon-titles
+changenote: $:/changenotes/5.5.0/#8702
+created: 20260722170000000
+modified: 20260722170000000
+tags: $:/tags/ImpactNote
+description: Filters referring to tiddler titles beginning with `::` must now quote them
+impact-type: compatibility-break
+
+Before v5.5.0, a bare word beginning with `::` in a filter was treated as a tiddler title. From v5.5.0 onwards it is parsed as a [[filter pragma|Filter Pragmas]], and an unknown pragma name causes the filter to return an error.
+
+A tiddler title beginning with `::` must now be written within double square brackets, e.g. `[[::my title]]`.

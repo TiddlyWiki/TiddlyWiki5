@@ -1,12 +1,12 @@
 created: 20260718221135000
-modified: 20260718221135000
+modified: 20260722170000000
 tags: [[Filter Syntax]]
 title: defaultprefix Filter Pragma
 type: text/vnd.tiddlywiki
 
 <<.from-version "5.5.0">>
 
-A [[filter run|Filter Run]] that has no explicit [[prefix|Filter Run Prefix]] is normally treated as if it had the prefix ''or'': its results are merged into the output with duplicates removed. The <<.def defaultprefix>> pragma changes the prefix that is applied to such runs.
+A [[filter run|Filter Run]] that has no explicit [[prefix|Filter Run Prefix]] is normally treated as if it had the prefix ''or'': its results are merged into the output with duplicates removed. The <<.def defaultprefix>> [[pragma|Filter Pragmas]] changes the prefix that is applied to such runs.
 
 The pragma is written at the start of the filter, as `::defaultprefix:` followed by the name of a [[named filter run prefix|Named Filter Run Prefix]]:
 
@@ -16,6 +16,6 @@ The pragma is written at the start of the filter, as `::defaultprefix:` followed
 
 Here the two runs are treated as if they had the prefix ''all'', so their results are concatenated without deduplication, and the output contains ''HelloThere'' twice. Without the pragma, the output would contain it once.
 
-The pragma affects the filter runs that follow it. Runs with an explicit prefix are unaffected. If the given name is not a known filter run prefix, the filter returns an error.
+The pragma affects every run in the filter. Runs with an explicit prefix are unaffected. Like all [[Filter Pragmas]], it is only allowed at the start of the filter, before the first run. If the given name is not a known filter run prefix, or the pragma appears after a filter run, the filter returns an error.
 
 The core evaluates the filter attributes of the multi-value widgets (<<.wlink GenesisWidget>>, <<.wlink SetMultipleVariablesWidget>>, <<.wlink ActionSetMultipleFieldsWidget>> and <<.wlink ActionSendMessageWidget>>) with a default prefix of ''all'', so that duplicate values are preserved and each name, field or index remains paired with the value at the same position.
