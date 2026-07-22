@@ -2,6 +2,7 @@ title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
 \procedure actions-compile-palette-filtered(consolidatedPalette,outputPalette)
+<!-- The $:/config/DefaultColourMappings/ fallback used below is unused by the core and is retained for compatibility with third party plugins -->
 <!-- Note the join, needed to cope with palette entries containing spaces -->
 \function tf.colour(name) [<consolidatedPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :map[subfilter:all<currentTiddler>join[ ]]
 \function colour(name) [tf.colour<name>]
@@ -82,12 +83,6 @@ tags: $:/tags/Macro
 \procedure tv-action-refresh-policy() always
 <$transclude $variable="actions-compile-palette" inputPalette={{$:/palette}} outputPalette="$:/temp/palette-colours"/>
 \end actions-recompile-current-palette
-
-\procedure actions-switch-colour-palette(paletteTitle)
-\procedure tv-action-refresh-policy() always
-<$action-deletetiddler $tiddler="$:/temp/palette-colours"/>
-<<actions-recompile-current-palette>>
-\end actions-switch-colour-palette
 
 \procedure tv-palette-name() $:/temp/palette-colours
 
