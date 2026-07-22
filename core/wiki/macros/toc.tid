@@ -75,19 +75,21 @@ tags: $:/tags/Macro
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
-    <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+      <div class="tc-toc-item-row">
       <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-        <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
+        <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[expand ]] }}}>
           <$transclude tiddler=<<toc-closed-icon>> />
         </$button>
       </$reveal>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
-        <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
+        <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[collapse ]] }}}>
           <$transclude tiddler=<<toc-open-icon>> />
         </$button>
       </$reveal>
-      <<toc-caption>>
-    </$link>
+      <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+        <<toc-caption>>
+      </$link>
+      </div>
     <$reveal type="match" stateTitle=<<toc-state>> text="open">
       <$macrocall $name="toc-expandable" tag=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>> path=<<__path__>>/>
     </$reveal>
@@ -103,13 +105,13 @@ tags: $:/tags/Macro
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
       <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-        <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
+        <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[expand ]] }}}>
         <$transclude tiddler=<<toc-closed-icon>> />
           <<toc-caption>>
         </$button>
       </$reveal>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
-        <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
+        <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[collapse ]] }}}>
           <$transclude tiddler=<<toc-open-icon>> />
           <<toc-caption>>
         </$button>
@@ -146,21 +148,23 @@ tags: $:/tags/Macro
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item" >
     <li class=<<toc-item-class>>>
-      <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
-          <$list filter="[all[current]tagging[]$sort$]  -[subfilter<__exclude__>] +[limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
+      <div class="tc-toc-item-row">
+        <$list filter="[all[current]tagging[]$sort$]  -[subfilter<__exclude__>] +[limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible' tabindex='-1'>{{$:/core/images/blank}}</$button>">
           <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-            <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
+            <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[expand ]] }}}>
             <$transclude tiddler=<<toc-closed-icon>> />
             </$button>
           </$reveal>
           <$reveal type="match" stateTitle=<<toc-state>> text="open">
-            <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
+            <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[collapse ]] }}}>
               <$transclude tiddler=<<toc-open-icon>> />
             </$button>
           </$reveal>
         </$list>
-        <<toc-caption>>
-      </$link>
+        <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+          <<toc-caption>>
+        </$link>
+      </div>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
         <$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>> path=<<__path__>>/>
       </$reveal>
@@ -174,15 +178,15 @@ tags: $:/tags/Macro
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
-      <$list filter="[all[current]tagging[]$sort$] -[subfilter<__exclude__>] +[limit[1]]" variable="ignore" emptyMessage="""<$button class="tc-btn-invisible">{{$:/core/images/blank}}</$button><span class="toc-item-muted"><<toc-caption>></span>""">
+      <$list filter="[all[current]tagging[]$sort$] -[subfilter<__exclude__>] +[limit[1]]" variable="ignore" emptyMessage="""<$button class="tc-btn-invisible" tabindex="-1">{{$:/core/images/blank}}</$button><span class="toc-item-muted"><<toc-caption>></span>""">
         <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-          <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
+          <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[expand ]] }}}>
             <$transclude tiddler=<<toc-closed-icon>> />
             <<toc-caption>>
           </$button>
         </$reveal>
         <$reveal type="match" stateTitle=<<toc-state>> text="open">
-          <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
+          <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[collapse ]] }}}>
             <$transclude tiddler=<<toc-open-icon>> />
             <<toc-caption>>
           </$button>

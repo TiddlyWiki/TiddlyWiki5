@@ -1,0 +1,13 @@
+change-category: usability
+change-type: enhancement
+created: 20260711015235000
+description: TOC expand/collapse buttons now have accessible names (WCAG 4.1.2)
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9797
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9797
+type: text/vnd.tiddlywiki
+
+* The expand/collapse buttons of the `toc` macros now carry `aria-label`s, so screen readers announce them instead of an empty button (fixes [[Issue #9794|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9794]])
+* TOC entries are wrapped in a `tc-toc-item-row` flex row; custom CSS that targets `.toc-item > a` for layout may need updating to the new class

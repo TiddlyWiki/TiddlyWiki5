@@ -3018,36 +3018,37 @@ input.tc-palette-manager-colour-input {
 	border-bottom: 1px solid <<colour tab-border>>;
 }
 
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a,
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a {
-	display: block;
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > .tc-toc-item-row,
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > .tc-toc-item-row {
+	display: flex;
+	align-items: center;
 	padding: 0.12em 1em 0.12em 0.25em;
 }
 
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a {
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > .tc-toc-item-row {
 	border-top: 1px solid <<colour tab-background>>;
 	border-left: 1px solid <<colour tab-background>>;
 	border-bottom: 1px solid <<colour tab-background>>;
 }
 
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a:hover {
-	text-decoration: none;
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > .tc-toc-item-row:hover {
 	border-top: 1px solid <<colour tab-border>>;
 	border-left: 1px solid <<colour tab-border>>;
 	border-bottom: 1px solid <<colour tab-border>>;
 	background: <<colour tab-border>>;
 }
 
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a {
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item a:hover,
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected a:hover {
+	text-decoration: none;
+}
+
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > .tc-toc-item-row {
 	border-top: 1px solid <<colour tab-border>>;
 	border-left: 1px solid <<colour tab-border>>;
 	border-bottom: 1px solid <<colour tab-border>>;
 	background: <<colour background>>;
 	margin-right: -1px;
-}
-
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a:hover {
-	text-decoration: none;
 }
 
 .tc-tabbed-table-of-contents .tc-tabbed-table-of-contents-content {
