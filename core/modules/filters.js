@@ -248,7 +248,8 @@ source: an iterator function for the source tiddlers, called source(iterator), w
 widget: an optional widget node for retrieving the current tiddler etc.
 */
 exports.compileFilter = function(filterString,options) {
-	var defaultFilterRunPrefix = (options || {}).defaultFilterRunPrefix || "or";
+	var defaultFilterRunPrefix = (options || {}).defaultFilterRunPrefix || "or",
+		seenNonPragmaOperation = false;
 	var cacheKey = filterString + "|" + defaultFilterRunPrefix;
 	if(!this.filterCache) {
 		this.filterCache = Object.create(null);
@@ -357,6 +358,13 @@ exports.compileFilter = function(filterString,options) {
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
 			if(operation.pragma) {
+				// Pragmas are only allowed at the start of a filter, before any runs
+				if(seenNonPragmaOperation) {
+					return function(results,source,widget) {
+						results.clear();
+						results.push($tw.language.getString("Error/FilterPragmaPosition"));
+					};
+				}
 				switch(operation.pragma) {
 					case "defaultprefix":
 						defaultFilterRunPrefix = operation.suffix || "or";
@@ -371,6 +379,7 @@ exports.compileFilter = function(filterString,options) {
 					// Dummy response
 				};
 			} else {
+				seenNonPragmaOperation = true;
 				var options = {wiki: self, suffixes: operation.suffixes || []};
 				switch(operation.prefix || "") {
 					case "": // Use the default filter run prefix if none is specified

@@ -2,6 +2,7 @@ title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
 \procedure actions-compile-palette-filtered(consolidatedPalette,outputPalette)
+<!-- The $:/config/DefaultColourMappings/ fallback used below is unused by the core and is retained for compatibility with third party plugins -->
 <!-- Note the join, needed to cope with palette entries containing spaces -->
 \function tf.colour(name) [<consolidatedPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :map[subfilter:all<currentTiddler>join[ ]]
 \function colour(name) [tf.colour<name>]
@@ -83,14 +84,8 @@ tags: $:/tags/Macro
 
 \procedure actions-recompile-current-palette()
 \procedure tv-action-refresh-policy() always
-<$transclude $variable="actions-compile-palette" inputPalette={{$:/palette}} outputPalette="$:/temp/palette-colours"/>
+<$transclude $variable="actions-compile-palette" inputPalette={{{ [{$:/palette}!is[missing]] :else[[$:/palettes/Vanilla]] }}} outputPalette="$:/temp/palette-colours"/>
 \end actions-recompile-current-palette
-
-\procedure actions-switch-colour-palette(paletteTitle)
-\procedure tv-action-refresh-policy() always
-<$action-deletetiddler $tiddler="$:/temp/palette-colours"/>
-<<actions-recompile-current-palette>>
-\end actions-switch-colour-palette
 
 \procedure tv-palette-name() $:/temp/palette-colours
 
@@ -155,8 +150,9 @@ tags: $:/tags/Macro
 [<colour-result>prefix[<<colour ]suffix[>>]removeprefix[<<colour ]removesuffix[>>]addprefix<colour-function-prefix>addsuffix<colour-function-suffix>] :else[<colour-result>]
 \end tf.colour-inner-transform-classic-palette-entry
 
+<!-- Translucent entries are composited over the background entry before their contrast is measured -->
 \function tf.check-colour-contrast-subfunction()
-[function[colour],<paletteEntryA>] [function[colour],<paletteEntryB>] +[colour-contrast:DeltaPhi[]fixed[3]]
+[function[colour],[background]] =>backdrop [function[colour],<paletteEntryA>colour-composite<backdrop>] =>colourA [function[colour],<paletteEntryB>colour-composite<backdrop>] =>colourB [<colourA>] [<colourB>] +[colour-contrast[]fixed[3]]
 \end tf.check-colour-contrast-subfunction
 
 \function tf.check-colour-contrast(paletteEntryA,paletteEntryB,threshold)

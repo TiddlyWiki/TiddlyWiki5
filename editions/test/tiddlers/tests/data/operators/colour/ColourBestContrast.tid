@@ -10,7 +10,7 @@ title: Output
 +
 title: Filter
 
-[[black]] [[gray]] [[green]] +[colour-best-contrast:DeltaPhi[]]
+[[black]] [[gray]] [[green]] +[colour-best-contrast[]]
 +
 title: ExpectedResult
 

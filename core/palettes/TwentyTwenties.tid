@@ -10,7 +10,7 @@ category: 2026
 
 # Background and foreground colours, which are interpolated as required
 base-paper: #FFFCF0
-base-background: #edcec1
+base-background: #f0d5c6
 base-ink: #333344
 ?base-paper-ink: [tf.check-colour-contrast[base-paper],[base-ink],[45]]
 ?base-background-ink: [tf.check-colour-contrast[base-background],[base-ink],[45]]

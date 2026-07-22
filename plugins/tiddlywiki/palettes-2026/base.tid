@@ -1,0 +1,129 @@
+title: $:/palettes/2026/base
+name: 2026 base
+description: Shared base for the 2026 palettes
+type: application/x-tiddler-dictionary
+color-scheme: light
+settings: $:/palettes/2026/base/Settings
+
+# Base colours supplied by each palette
+base-paper: #ffffff
+base-background: #f4f4f4
+base-ink: #333333
+base-primary: #5778d8
+base-tab: #eeeeee
+base-link: [tf.colour[base-primary]]
+base-alert: #ffe476
+base-highlight: #ffff9e
+base-tag: #c4d9b1
+base-danger: #d92527
+base-black: #000000
+base-white: #ffffff
+
+# Readability tests
+?base-paper-ink: [tf.check-colour-contrast[base-paper],[base-ink],[45]]
+?base-paper-link: [tf.check-colour-contrast[base-paper],[base-link],[30]]
+
+# Entries derived from the base colours
+alert-background: [tf.colour[base-alert]]
+alert-border: [tf.interpolate-colours[base-alert],[base-ink],[0.55]]
+alert-highlight: [tf.colour[base-danger]]
+alert-muted-foreground: [tf.interpolate-colours[base-alert],[base-ink],[0.45]]
+background: [tf.colour[base-paper]]
+code-background: [tf.colour[base-ink]colour-set-alpha[0.1]]
+dirty-indicator: [tf.colour[base-danger]]
+foreground: [tf.colour[base-ink]]
+highlight-background: [tf.colour[base-highlight]]
+message-background: [tf.interpolate-colours[base-paper],[base-black],[0.05]]
+message-border: [tf.interpolate-colours[base-paper],[base-ink],[0.15]]
+muted-foreground: [tf.interpolate-colours[base-paper],[base-ink],[0.6]]
+page-background: [tf.colour[base-background]]
+pre-background: [tf.interpolate-colours[base-paper],[base-ink],[0.1]]
+primary: [tf.colour[base-primary]]
+sidebar-foreground: [tf.interpolate-colours[base-paper],[base-ink],[0.8]]
+sidebar-muted-foreground: [tf.interpolate-colours[base-paper],[base-ink],[0.55]]
+sidebar-muted-foreground-hover: [tf.colour[base-ink]]
+tab-background: [tf.colour[base-tab]]
+tab-border: [tf.interpolate-colours[base-tab],[base-ink],[0.1]]
+table-footer-background: [tf.interpolate-colours[base-paper],[base-tab],[0.6]]
+tag-background: [tf.colour[base-tag]]
+tiddler-background: [tf.colour[base-paper]]
+tiddler-controls-foreground: [tf.interpolate-colours[base-paper],[base-ink],[0.35]]
+tiddler-controls-foreground-hover: [tf.interpolate-colours[base-paper],[base-ink],[0.55]]
+tiddler-controls-foreground-selected: [tf.interpolate-colours[base-ink],[base-primary],[0.45]]
+tiddler-editor-background: [tf.interpolate-colours[base-paper],[base-background],[0.05]]
+tiddler-editor-border: [tf.interpolate-colours[base-paper],[base-ink],[0.15]]
+tiddler-link-foreground: [tf.colour[base-link]]
+untagged-background: #bbbbbb
+very-muted-foreground: [tf.interpolate-colours[base-paper],[base-ink],[0.8]]
+
+# Shared skeleton
+blockquote-bar: [tf.colour[pre-background]]
+button-background: 
+button-border: 
+button-foreground: [tf.colour[very-muted-foreground]]
+code-border: [tf.colour[code-background]]
+code-foreground: [tf.colour[foreground]]
+download-background: [tf.colour[tiddler-link-foreground]]
+download-foreground: [tf.colour[background]]
+dragger-background: [tf.colour[foreground]]
+dragger-foreground: [tf.colour[tiddler-background]]
+dropdown-background: [tf.colour[background]]
+dropdown-border: [tf.colour[dropdown-background]]
+dropdown-tab-background: [tf.colour[tab-background]]
+dropdown-tab-background-selected: [tf.colour[dropdown-background]]
+dropzone-background: [tf.colour[sidebar-tiddler-link-foreground-hover]]
+external-link-background: inherit
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+message-foreground: [tf.colour[foreground]]
+modal-backdrop: [tf.colour[foreground]]
+modal-background: [tf.colour[tiddler-background]]
+modal-border: [tf.colour[modal-background]]
+modal-footer-background: [tf.colour[table-header-background]]
+modal-footer-border: [tf.colour[modal-header-border]]
+modal-header-border: [tf.colour[table-border]]
+notification-background: [tf.colour[tiddler-background]]
+notification-border: [tf.colour[primary]]
+pre-border: [tf.colour[pre-background]]
+select-tag-background: [tf.colour[tiddler-editor-background]]
+select-tag-foreground: [tf.colour[button-foreground]]
+selection-background: 
+selection-foreground: 
+sidebar-button-foreground: [tf.colour[button-foreground]]
+sidebar-controls-foreground: [tf.colour[tiddler-controls-foreground]]
+sidebar-controls-foreground-hover: [tf.colour[tiddler-controls-foreground-hover]]
+sidebar-foreground-shadow: transparent
+sidebar-tab-background-selected: [tf.colour[background]]
+sidebar-tab-border: [tf.colour[sidebar-tab-background]]
+sidebar-tab-border-selected: [tf.colour[sidebar-tab-background-selected]]
+sidebar-tab-divider: [tf.colour[sidebar-tab-border]]
+sidebar-tab-foreground: [tf.colour[foreground]]
+sidebar-tab-foreground-selected: [tf.colour[foreground]]
+sidebar-tiddler-link-foreground: [tf.colour[tiddler-link-foreground]]
+site-title-foreground: [tf.colour[tiddler-background]]
+static-alert-foreground: [tf.colour[muted-foreground]]
+tab-background-selected: [tf.colour[tiddler-background]]
+tab-border-selected: [tf.colour[tab-border]]
+tab-divider: [tf.colour[tab-border]]
+tab-foreground: [tf.colour[foreground]]
+tab-foreground-selected: [tf.colour[foreground]]
+table-border: [tf.colour[tab-border]]
+table-header-background: [tf.colour[tab-background]]
+tag-foreground: [tf.colour[foreground]]
+tiddler-border: [tf.colour[tiddler-background]]
+tiddler-editor-fields-odd: 
+tiddler-info-background: [tf.colour[tiddler-editor-background]]
+tiddler-info-border: [tf.colour[tiddler-info-background]]
+tiddler-info-tab-background: [tf.colour[tiddler-info-background]]
+tiddler-link-background: transparent
+tiddler-subtitle-foreground: [tf.colour[muted-foreground]]
+tiddler-title-foreground: [tf.colour[foreground]]
+toolbar-cancel-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-done-button: 
+toolbar-edit-button: 
+toolbar-info-button: 
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 

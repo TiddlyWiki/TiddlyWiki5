@@ -1,7 +1,7 @@
 title: $:/changenotes/5.5.0/#8702/impacts/wikitext-palette-entries
 changenote: $:/changenotes/5.5.0/#8702
 created: 20250901000000000
-modified: 20260720103000000
+modified: 20260722160000000
 tags: $:/tags/ImpactNote
 description: Palette entries using WikiText other than the `<<colour ...>>` macro will no longer work
 impact-type: compatibility-break
@@ -9,3 +9,5 @@ impact-type: compatibility-break
 Before v5.5.0, TiddlyWiki palette entries were interpreted as WikiText. In practice this was almost always used for the familiar `<<colour ...>>` macro, but any valid WikiText could be used, including widgets and conditionals.
 
 From v5.5.0 onwards, palette entries are treated as filter expressions. Entries using the `<<colour ...>>` macro continue to work unchanged: they are automatically transformed into the equivalent filter expression `[tf.colour[...]]`. However, any other WikiText constructs are not supported and will not function correctly.
+
+In particular, the idiom of appending a hexadecimal alpha value to the macro, as in `<<colour primary>>AA`, no longer works. The equivalent filter expression is `[tf.colour[primary]colour-set-alpha[0.667]]`.
