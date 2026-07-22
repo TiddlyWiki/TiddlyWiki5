@@ -1,0 +1,13 @@
+change-category: nodejs
+change-type: bugfix
+created: 20260711175727000
+description: Tiddler titles containing a backslash no longer break generated file paths
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9815
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9815
+type: text/vnd.tiddlywiki
+
+* Titles containing a backslash, such as `pragma: \define`, get the backslash replaced like other forbidden filename characters instead of it acting as a Windows path separator (fixes [[Issue #9814|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9814]])
+* Tiddler files declared in `tiddlywiki.files` are pinned to their original location and skip the `$:/config/FileSystemPaths` filters and filename sanitising
