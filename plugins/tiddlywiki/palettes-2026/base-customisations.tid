@@ -1,8 +1,14 @@
 title: $:/palettes/2026/base/Customisations
 
+\procedure layer-input-actions()
+<$action-setfield $tiddler=<<layerTitle>> palette-import={{$:/palette}}/>
+\end layer-input-actions
+
 \procedure entry(name,description)
-<$text text=<<description>>/>: <$edit-text tiddler={{$:/palette}} index=<<name>> type="color" tag="input" default={{{ [function[colour],<name>] }}}/>
+<$text text=<<description>>/>: <$edit-text tiddler=<<layerTitle>> index=<<name>> type="color" tag="input" default={{{ [function[colour],<name>] }}} inputActions=<<layer-input-actions>>/>
 \end entry
+
+<$let layerTitle={{{ [function[tf.palette-customisations-layer]] }}}>
 
 <<entry name:"base-paper" description:"Paper">>
 
@@ -23,3 +29,5 @@ title: $:/palettes/2026/base/Customisations
 <<entry name:"base-tag" description:"Tags">>
 
 <<entry name:"base-danger" description:"Danger">>
+
+</$let>

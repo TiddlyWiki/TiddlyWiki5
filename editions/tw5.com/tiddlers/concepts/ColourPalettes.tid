@@ -1,5 +1,5 @@
 created: 20140216102454178
-modified: 20260722190000000
+modified: 20260723100000000
 tags: Concepts
 title: ColourPalettes
 type: text/vnd.tiddlywiki
@@ -62,10 +62,12 @@ For example, this customisations tiddler offers a colour picker for the `base-pa
 ```
 title: $:/palettes/MyPalette/Customisations
 
-Paper: <$edit-text tiddler={{$:/palette}} index="base-paper" type="color" tag="input" default={{{ [function[colour],[base-paper]] }}}/>
+Paper: <$edit-text tiddler={{{ [function[tf.palette-customisations-layer]] }}} index="base-paper" type="color" tag="input" default={{{ [function[colour],[base-paper]] }}}/>
 ```
 
 The core palette ~TwentyTwenties uses this technique to offer a colour picker for each of its base colours, and ~AutoToggle to offer dropdowns choosing the palettes to use in light and dark modes. Because fields are [[inherited|Palette Inheritance]], a palette that imports another palette also inherits its customisations panel unless it overrides the <<.field customisations>> field.
+
+Customisations are stored in a layer tiddler titled <<.tid "$:/config/PaletteCustomisations/">> followed by the palette title. The layer imports the palette itself, and is compiled in its place while it exists, so the palette tiddler is not modified. Deleting the layer removes the customisations.
 
 !! Under the covers
 

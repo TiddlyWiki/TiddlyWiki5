@@ -39,7 +39,7 @@ tags: $:/tags/Macro
 				</$let>
 			<%endif%>
 			<!-- Copy the fields from the palette -->
-			<$action-setmultiplefields $tiddler=<<outputPalette>> $fields="[<inputPalette>fields[]sort[]] -title -tags -text" $values="[<inputPalette>fields[]sort[]] -title -tags -text :map[<inputPalette>get<currentTiddler>]"/>
+			<$action-setmultiplefields $tiddler=<<outputPalette>> $fields="[<inputPalette>fields[]sort[]] -title -tags -text -type" $values="[<inputPalette>fields[]sort[]] -title -tags -text -type :map[<inputPalette>get<currentTiddler>]"/>
 		</$set>
 <%endif%>
 \end actions-compile-palette-import
@@ -51,7 +51,7 @@ tags: $:/tags/Macro
 >
 	<!-- Compute the current scheme -->
 	<$let
-		color-scheme-filter={{{ [<inputPalette>get[color-scheme]] :else[[light]] }}}
+		color-scheme-filter={{{ [<inputPalette>get[color-scheme]] :else[<inputPalette>get[palette-import]get[color-scheme]] :else[[light]] }}}
 		scheme={{{ [subfilter:all<color-scheme-filter>] }}}
 	>
 		<!-- Clear the consolidated palette that stores the result of flattening the chain of imported input palettes -->
@@ -79,9 +79,19 @@ tags: $:/tags/Macro
 </$let>
 \end actions-compile-palette
 
+<!-- Customisations of the current palette are stored in a layer tiddler that imports the palette itself -->
+\function tf.palette-customisations-layer()
+[{$:/palette}is[tiddler]] [{$:/palette}is[shadow]] :else[[$:/palettes/Vanilla]] :map[addprefix[$:/config/PaletteCustomisations/]]
+\end tf.palette-customisations-layer
+
 \procedure actions-recompile-current-palette()
 \procedure tv-action-refresh-policy() always
-<$transclude $variable="actions-compile-palette" inputPalette={{{ [{$:/palette}is[tiddler]] [{$:/palette}is[shadow]] :else[[$:/palettes/Vanilla]] }}} outputPalette="$:/temp/palette-colours"/>
+<$let
+	resolvedPalette={{{ [{$:/palette}is[tiddler]] [{$:/palette}is[shadow]] :else[[$:/palettes/Vanilla]] }}}
+	inputPalette={{{ [function[tf.palette-customisations-layer]has[palette-import]] :else[<resolvedPalette>] }}}
+>
+	<$transclude $variable="actions-compile-palette" inputPalette=<<inputPalette>> outputPalette="$:/temp/palette-colours"/>
+</$let>
 \end actions-recompile-current-palette
 
 \procedure tv-palette-name() $:/temp/palette-colours

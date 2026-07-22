@@ -19,11 +19,17 @@ title: $:/PaletteManager
 
 <$let
 	paletteCustomisations={{{ [[$:/temp/palette-consolidated]get[customisations]] }}}
+	layerTitle={{{ [function[tf.palette-customisations-layer]] }}}
 >
 	<%if [<paletteCustomisations>!match[]] %>
 		<div>
 			<<lingo Customisations/Prompt>>
 			<$transclude $tiddler=<<paletteCustomisations>> $mode="block"/>
+		</div>
+	<%endif%>
+	<%if [<layerTitle>is[tiddler]] %>
+		<div>
+			<$button actions="""<$action-deletetiddler $tiddler=<<layerTitle>>/>"""><<lingo Customisations/Reset/Caption>></$button>
 		</div>
 	<%endif%>
 </$let>

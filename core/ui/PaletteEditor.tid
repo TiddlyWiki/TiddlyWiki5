@@ -54,6 +54,9 @@ title: $:/PaletteEditor
 </span>
 ''<$macrocall $name="describePaletteColour" colour=<<colourName>>/>''<br/>
 <$macrocall $name="colourName" $output="text/plain"/>
+<%if [<layerTitle>getindex<colourName>] %>
+<br/><em><<lingo Customised/Entry>></em>
+<%endif%>
 </td>
 <td>
 <<palette-manager-colour-row-segment>>
@@ -74,8 +77,15 @@ title: $:/PaletteEditor
 \end
 \whitespace trim
 <$set name="currentTiddler" value={{$:/palette}}>
+<$let layerTitle={{{ [function[tf.palette-customisations-layer]] }}}>
 
 <<lingo Prompt>>&#32;<$link to={{$:/palette}}><$macrocall $name="currentTiddler" $output="text/plain"/></$link>
+
+<$list filter="[function[tf.palette-customisations-layer]is[tiddler]]" variable="listItem">
+<<lingo Customised/Prompt>>
+&#32;
+<$button actions="""<$action-deletetiddler $tiddler=<<layerTitle>>/>""">{{$:/language/ControlPanel/Palette/Customisations/Reset/Caption}}</$button>
+</$list>
 
 <$list filter="[all[current]is[shadow]is[tiddler]]" variable="listItem">
 <<lingo Prompt/Modified>>
@@ -92,3 +102,4 @@ title: $:/PaletteEditor
 <$checkbox tiddler="$:/state/palettemanager/showexternal" field="text" checked="yes" unchecked="no"><span class="tc-small-gap-left"><<lingo Names/External/Show>></span></$checkbox>
 
 <<palette-manager-table>>
+</$let>
