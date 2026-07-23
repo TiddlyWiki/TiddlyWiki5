@@ -1,5 +1,5 @@
 created: 20140216102454178
-modified: 20260723100000000
+modified: 20260723120000000
 tags: Concepts
 title: ColourPalettes
 type: text/vnd.tiddlywiki
@@ -55,15 +55,17 @@ Entries whose names begin with `?` are [[readability tests|Palette Readability T
 
 !! Palette customisations
 
-<<.from-version "5.5.0">> The <<.field customisations>> field gives the title of a tiddler that is transcluded beneath the [[Palette Chooser]] whenever the palette is selected. It typically contains controls that write directly to the entries of the palette tiddler, and the palette is automatically recompiled as they change.
+<<.from-version "5.5.0">> The <<.field customisations>> field gives the title of a tiddler that is transcluded beneath the [[Palette Chooser]] whenever the palette is selected. It typically contains controls that write to the customisation layer described below, and the palette is automatically recompiled as they change.
 
 For example, this customisations tiddler offers a colour picker for the `base-paper` entry:
 
 ```
 title: $:/palettes/MyPalette/Customisations
 
-Paper: <$edit-text tiddler={{{ [function[tf.palette-customisations-layer]] }}} index="base-paper" type="color" tag="input" default={{{ [function[colour],[base-paper]] }}}/>
+Paper: <$edit-text tiddler={{{ [function[tf.palette-customisations-layer]] }}} index="base-paper" type="color" tag="input" default={{{ [function[colour],[base-paper]] }}} inputActions="<$action-setfield $tiddler={{{ [function[tf.palette-customisations-layer]] }}} palette-import={{$:/palette}}/>"/>
 ```
+
+The <<.attr inputActions>> attribute sets the <<.field palette-import>> field on the layer, which is required before the layer is used in compilation.
 
 The core palette ~TwentyTwenties uses this technique to offer a colour picker for each of its base colours, and ~AutoToggle to offer dropdowns choosing the palettes to use in light and dark modes. Because fields are [[inherited|Palette Inheritance]], a palette that imports another palette also inherits its customisations panel unless it overrides the <<.field customisations>> field.
 
@@ -77,7 +79,9 @@ The compilation process is implemented in [[$:/core/macros/CSS]]. It generates t
 |<<.tid "$:/temp/palette-consolidated">> |The result of merging the current palette with its chain of [[imported palettes|Palette Inheritance]]. The entries are the raw filter expressions, not the computed colours |
 |<<.tid "$:/temp/palette-colours">> |The computed CSS colour value of each entry |
 
-The [[background action|Background Actions]] <<.tid "$:/core/background-actions/AutoCompilePalette">> triggers recompilation when [[$:/palette]] changes, or when the [[colour scheme|Colour Schemes]] of the current palette changes.
+The [[background action|Background Actions]] <<.tid "$:/core/background-actions/AutoCompilePalette">> triggers recompilation when [[$:/palette]] changes, when the [[colour scheme|Colour Schemes]] of the current palette changes, or when any palette, background palette or customisation layer changes.
+
+If [[$:/palette]] names a tiddler that does not exist, the default Vanilla palette is compiled in its place.
 
 !! Further reading
 

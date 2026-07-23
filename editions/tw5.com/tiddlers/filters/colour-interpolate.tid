@@ -32,7 +32,7 @@ The <<.op colour-interpolate>> operator is used to interpolate colour values in 
 
 Two colour parameters are required. If there are fewer than two input colours, the operator will return an empty result. If there are more than two input colours, the operator will ignore the additional colours.
 
-Note that indexes outside the range 0 to 1 will extrapolate from the provided colour values.
+Indexes outside the range 0 to 1 extrapolate from the provided colour values.
 
 <<interpolate-example "0 0.333 0.666 1 +[colour-interpolate:lch[red],[purple]]" """
 For example, this filter expression will return 4 colours that smoothly blend from red to purple in the LCh colour space:

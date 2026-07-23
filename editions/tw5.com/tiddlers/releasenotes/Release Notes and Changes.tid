@@ -44,7 +44,7 @@ Valid change categories are as follows:
 * ''performance''
 * ''developer''
 
-Note that it is possible for a single PR to have more than one change note if the PR contains multiple discrete changes. In this case, the PR will be listed in each change note.
+A single PR can have more than one change note if it contains multiple discrete changes. In this case, the PR will be listed in each change note.
 
 ! Impact Notes
 
