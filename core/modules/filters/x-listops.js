@@ -165,8 +165,13 @@ exports.sortby = function (source, operator) {
 		return results;
 	}
 	var lookup = $tw.utils.parseStringArray(operator.operand, "true");
+	var maxIndex = lookup.length;
 	results.sort(function (a, b) {
-		return lookup.indexOf(a) - lookup.indexOf(b);
+		var indexA = lookup.indexOf(a);
+		var indexB = lookup.indexOf(b);
+		if(indexA === -1) { indexA = maxIndex; }
+		if(indexB === -1) { indexB = maxIndex; }
+		return indexA - indexB;
 	});
 	return results;
 };
