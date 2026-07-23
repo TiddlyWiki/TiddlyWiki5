@@ -56,6 +56,11 @@ Directory specifications in the `directories` array may take the following forms
 ** ''isEditableFile'' - <<.from-version "5.1.23">> (optional) if `true`, changes to the tiddler be saved back to the original file. The tiddler will be saved back to the original filepath as long as it does not generate a result from the $:/config/FileSystemPath filters, which will override the final filepath generated if a result is returned from a filter.
 ** ''searchSubdirectories'' - <<.from-version "5.1.23">> (optional) if `true`, all subdirectories of the //path// are searched recursively for files that match the (optional) //filesRegExp//. If no //filesRegExp// is provided, all files in all subdirectories of the //path// are loaded. Tiddler titles generated via the //source// attribute //filename// (see above) will only include the filename, not any of the subdirectories of the path. If this results in multiple files with loaded with the same tiddler title, then only the last file loaded under that tiddler title will be in memory. In order to prevent this, you can use the //filepath// attribute instead of //filename//. Alternately, you can include multiple directory objects and customise the title field with a //prefix// or //suffix// alongside the //source// attribute.
 ** ''fields'' - (required) an object containing values that override or customise the fields provided in the tiddler file (see above)
+** ''dynamicStore'' - <<.from-version "5.5.0">> (optional) an object marking the directory as a //dynamic store// that is both loaded at boot and actively watched on disk. The filesystem syncadaptor uses the watcher to pick up out-of-band changes (e.g. edits made by an external editor) and folds them into the running wiki. The object has the following properties:
+*** ''saveFilter'' - (optional) a filter evaluated against each tiddler the wiki tries to save. Tiddlers that match are saved back into this directory instead of the default tiddlers folder. The first matching dynamic store wins, so specificity matters when multiple stores are registered.
+*** ''watch'' - (optional, defaults to `true`) set to `false` to disable the chokidar watcher for this store (tiddlers are still loaded and save-routed, but external changes are not picked up live)
+*** ''debounce'' - (optional, defaults to `400`) the per-file debounce window in milliseconds. File events that occur within this window of a previous event for the same file are coalesced, which avoids duplicated reloads during atomic-rename saves performed by many editors.
+*** Changes to a file on disk are diffed against the tiddler currently in the wiki before being reported, so self-writes performed by TiddlyWiki itself do not trigger spurious reload events. JavaScript module tiddlers (tiddlers with `type: application/javascript` and a `module-type` field) are never hot-reloaded, because that would require restarting the TiddlyWiki process.
 
 Fields can also be overridden for particular files by creating a file with the same name plus the suffix `.meta` -- see TiddlerFiles.
 
@@ -134,6 +139,29 @@ This will load all text files in the `../../externalnotes/` directory into the w
 From the examples in [[Customising Tiddler File Naming]] we see that the final `[!tag[externalnote]addprefix[wiki/]]` filter in the $:/config/FileSystemPaths tiddler excludes all tiddlers tagged with `externalnotes` (that have not matched an earlier filter). These tiddlers have their filepath retrieved from the $:/config/OriginalTiddlerPaths generated upon boot startup.
 
 Then, the `[tag[.txt]then[.txt]]` filter in the $:/config/FileSystemExtensions tiddler forces all these tiddlers to be saved back to disk as *.txt and accompanying *.txt.meta files (overriding the normal tiddler-type to file-type mapping). In this case, allowing the snippets of Tiddlywiki wikitext or markdown-text to be saved back to "text" *.txt files.
+
+!! Dynamic store for markdown files
+
+<<.from-version "5.5.0">> This example treats a sibling `content/` folder as a dynamic store: every `.md` file is loaded at boot, every markdown tiddler saved by the wiki is routed back into `content/`, and external edits to those files are picked up automatically by chokidar.
+
+```
+{
+    "directories": [
+        {
+            "path": "../content",
+            "filesRegExp": "^.*\\.md$",
+            "isTiddlerFile": true,
+            "searchSubdirectories": true,
+            "dynamicStore": {
+                "saveFilter": "[type[text/x-markdown]]",
+                "watch": true,
+                "debounce": 400
+            },
+            "fields": {}
+        }
+    ]
+}
+```
 
 !! Importing and auto-tagging images
 
