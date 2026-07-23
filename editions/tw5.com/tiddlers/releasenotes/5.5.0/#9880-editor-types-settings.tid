@@ -1,0 +1,15 @@
+title: $:/changenotes/5.5.0/#9880
+created: 20260723000000000
+modified: 20260723000000000
+description: Editor Types settings tab with dropdown selectors and widget categorisation via tiddler fields
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9880
+github-contributors: linonetwo
+type: text/vnd.tiddlywiki
+
+Editor type mappings can now be configured from a dedicated ''Editor Types'' tab under Settings in the control panel, replacing the read-only table that previously lived under the Advanced tab. Each content type shows a dropdown of the editors available in the wiki, so installing an editor plugin (such as CodeMirror) is immediately selectable without manually editing the mapping tiddlers.
+
+To make the dropdown reliable, widget modules can now declare `widget-name` and `widget-category` tiddler fields in their file headers. Editor widgets use `widget-category: editor` and a `widget-name` matching the value expected by `$:/config/EditorTypeMappings/` (for example `text`, `bitmap`, `binary`, `codemirror`). Because the metadata lives in tiddler fields rather than JavaScript exports, it can be read and parsed statically without executing the module. The dropdown is populated with `[[widget]modules[]] :filter[get[widget-category]match[editor]] :map[get[widget-name]]`, so only genuine tiddler content editors appear — widgets that merely happen to share the `edit-` prefix (such as `edit-shortcut`) are no longer listed.

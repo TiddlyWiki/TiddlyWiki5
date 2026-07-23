@@ -2,6 +2,8 @@
 title: $:/plugins/tiddlywiki/codemirror/edit-codemirror.js
 type: application/javascript
 module-type: widget
+widget-name: codemirror
+widget-category: editor
 
 Edit-codemirror widget
 
