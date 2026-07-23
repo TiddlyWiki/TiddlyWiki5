@@ -2,6 +2,8 @@
 title: $:/core/modules/widgets/edit-text.js
 type: application/javascript
 module-type: widget
+widget-name: text
+widget-category: editor
 
 Edit-text widget
 

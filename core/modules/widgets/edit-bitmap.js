@@ -2,6 +2,8 @@
 title: $:/core/modules/widgets/edit-bitmap.js
 type: application/javascript
 module-type: widget
+widget-name: bitmap
+widget-category: editor
 
 Edit-bitmap widget
 
