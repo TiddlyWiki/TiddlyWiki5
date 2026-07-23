@@ -13,6 +13,7 @@ bottom-right corner with the same edit/delete affordances as pragma/widget.
 
 const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/base-source-editable.js").BaseSourceEditableNodeView;
 const createSafeNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/safe-nodeview.js").createSafeNodeView;
+const replaceNodeWithOpaqueSource = require("$:/plugins/tiddlywiki/prosemirror/blocks/source-utils.js").replaceNodeWithOpaqueSource;
 
 // Module-level flag: when a typed_block is inserted via slash menu,
 // set this to true before dispatching the transaction. The next
@@ -79,11 +80,14 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 		// Insert a type selector ahead of the buttons so it stays inside the
 		// shared bottom-right badge layout instead of floating at the top.
 		const select = this._buildTypeSelect();
+		const sourceBtn = this._buildSourceButton();
 		const buttons = header.querySelector(".pm-nodeview-buttons");
 		if(buttons) {
 			header.insertBefore(select, buttons);
+			buttons.insertBefore(sourceBtn, buttons.firstChild);
 		} else {
 			header.appendChild(select);
+			header.appendChild(sourceBtn);
 		}
 		container.appendChild(header);
 
@@ -126,6 +130,24 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 			e.stopPropagation();
 		});
 		return select;
+	}
+
+	_buildSourceButton() {
+		const button = this._createButton("$:/core/images/mono-block", "{}", this.constructor.getLanguageString("Buttons/EditAsSource", "Edit as source"));
+		button.classList.add("pm-nodeview-btn-source");
+		button.addEventListener("click", (event) => {
+			event.preventDefault();
+			event.stopPropagation();
+			event.stopImmediatePropagation();
+			replaceNodeWithOpaqueSource(this.view, this.getPos, this.node);
+			return false;
+		}, true);
+		button.addEventListener("mousedown", (event) => {
+			event.preventDefault();
+			event.stopPropagation();
+			event.stopImmediatePropagation();
+		}, true);
+		return button;
 	}
 
 	static _populateSelect(select, currentType) {

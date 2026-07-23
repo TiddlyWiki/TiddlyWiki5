@@ -143,6 +143,20 @@ function buildOpaqueFromNode(node, context) {
 	};
 }
 
+function sourceTextToParagraphs(text) {
+	const lines = (text || "").split(/\r?\n/);
+	if(lines.length === 0) {
+		return [{ type: "paragraph" }];
+	}
+	return lines.map((line) => {
+		const paragraph = { type: "paragraph" };
+		if(line) {
+			paragraph.content = [{ type: "text", text: line }];
+		}
+		return paragraph;
+	});
+}
+
 function convertNodes(context, nodes) {
 	if(nodes === undefined || nodes.length === 0) {
 		return [];
@@ -165,5 +179,7 @@ exports.buildTextWithMark = buildTextWithMark;
 exports.extractPlainText = extractPlainText;
 exports.serializeNodeToRawText = serializeNodeToRawText;
 exports.buildOpaqueFromNode = buildOpaqueFromNode;
+exports.extractSourceText = extractSourceText;
+exports.sourceTextToParagraphs = sourceTextToParagraphs;
 exports.convertNodes = convertNodes;
 exports.convertANode = convertANode;

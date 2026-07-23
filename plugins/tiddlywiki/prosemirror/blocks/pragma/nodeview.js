@@ -13,6 +13,7 @@ with widget blocks (header toolbar, edit/save/cancel/delete buttons).
 
 const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/base-source-editable.js").BaseSourceEditableNodeView;
 const createSafeNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/safe-nodeview.js").createSafeNodeView;
+const parseWikiTextToDoc = require("$:/plugins/tiddlywiki/prosemirror/core/editor-shared.js").parseWikiTextToDoc;
 
 class SourceBlockNodeView extends BaseSourceEditableNodeView {
 	constructor(node, view, getPos, blockType, parentWidget) {
@@ -43,10 +44,15 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 
 		this.contentEl = content;
 		this.contentContainer = content;
-		this.installRenderedContentSelectionGuards();
+		if(this.blockType !== "opaque") {
+			this.installRenderedContentSelectionGuards();
+		}
 		this.dom = container;
 
 		this.renderViewMode();
+		if(this.blockType === "opaque" && this.node.attrs.autoEdit) {
+			setTimeout(() => this.enterEditMode(), 0);
+		}
 	}
 
 	renderViewMode() {
@@ -118,10 +124,23 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 
 		const pos = this.getPos();
 		if(typeof pos !== "number") return;
+		if(this.blockType === "opaque") {
+			try {
+				const docJson = parseWikiTextToDoc($tw.wiki, "text/vnd.tiddlywiki", newRawText);
+				const replacement = this.view.state.schema.nodeFromJSON(docJson).content;
+				if(replacement && replacement.size > 0) {
+					this.view.dispatch(this.view.state.tr.replaceWith(pos, pos + this.node.nodeSize, replacement));
+					return;
+				}
+			} catch(e) {
+				// Keep the source in the opaque block if reparsing cannot produce a valid ProseMirror fragment.
+			}
+		}
 		const tr = this.view.state.tr.setNodeMarkup(pos, null, {
 			rawText: newRawText,
 			firstLine: newFirstLine.trim(),
-			parseTreeJson: null
+			parseTreeJson: null,
+			autoEdit: false
 		});
 		this.view.dispatch(tr);
 	}
@@ -136,6 +155,7 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 	update(node) {
 		if(node.type.name !== this.node.type.name) return false;
 		const oldRawText = this.node.attrs.rawText;
+		const shouldAutoEdit = this.blockType === "opaque" && node.attrs.autoEdit && !this.isEditMode;
 		this.node = node;
 		this.updateTitle();
 		if(!this.isEditMode) {
@@ -146,6 +166,9 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 				this.labelEl.textContent = node.attrs.firstLine || (this.blockType === "pragma" ? "(pragma)" : "(block)");
 			}
 		}
+		if(shouldAutoEdit) {
+			setTimeout(() => this.enterEditMode(), 0);
+		}
 		return true;
 	}
 
@@ -155,7 +178,14 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 	}
 
 	usesExternalRenderedContent() {
-		return !this.isEditMode;
+		return this.blockType !== "opaque" && !this.isEditMode;
+	}
+
+	stopEvent(event) {
+		if(this.blockType === "opaque" && !this.isEditMode && event && event.target && this.contentEl && this.contentEl.contains(event.target)) {
+			return true;
+		}
+		return super.stopEvent(event);
 	}
 }
 

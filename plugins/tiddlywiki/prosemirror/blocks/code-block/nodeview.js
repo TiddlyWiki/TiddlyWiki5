@@ -1,13 +1,7 @@
 /*\
-title: $:/plugins/tiddlywiki/prosemirror/blocks/hard-line-breaks/nodeview.js
+title: $:/plugins/tiddlywiki/prosemirror/blocks/code-block/nodeview.js
 type: application/javascript
 module-type: library
-
-NodeView for hard_line_breaks_block in ProseMirror.
-Renders as a block with a hover border indicator, while keeping the inner content
-directly editable (no separate edit/view modes needed).
-Uses the unified pm-nodeview badge pattern.
-
 \*/
 
 "use strict";
@@ -15,23 +9,24 @@ Uses the unified pm-nodeview badge pattern.
 const createSafeNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/safe-nodeview.js").createSafeNodeView;
 const replaceNodeWithOpaqueSource = require("$:/plugins/tiddlywiki/prosemirror/blocks/source-utils.js").replaceNodeWithOpaqueSource;
 
-class HardLineBreaksNodeView {
+class CodeBlockNodeView {
 	constructor(node, view, getPos) {
 		this.node = node;
 		this.view = view;
 		this.getPos = getPos;
 
 		const container = document.createElement("div");
-		container.className = "pm-nodeview pm-nodeview-hardbreaks";
+		container.className = "pm-nodeview pm-nodeview-codeblock";
 
-		// Label badge — shows on hover via .pm-nodeview-header
-		const label = document.createElement("span");
-		label.className = "pm-nodeview-header";
-		label.setAttribute("contenteditable", "false");
+		const header = document.createElement("span");
+		header.className = "pm-nodeview-header";
+		header.setAttribute("contenteditable", "false");
+
 		const title = document.createElement("span");
 		title.className = "pm-nodeview-title";
-		title.textContent = '"""  Hard Line Breaks  """';
-		label.appendChild(title);
+		title.textContent = "Code";
+		header.appendChild(title);
+
 		const buttons = document.createElement("span");
 		buttons.className = "pm-nodeview-buttons";
 		const sourceBtn = document.createElement("button");
@@ -46,19 +41,20 @@ class HardLineBreaksNodeView {
 			replaceNodeWithOpaqueSource(this.view, this.getPos, this.node);
 		}, true);
 		buttons.appendChild(sourceBtn);
-		label.appendChild(buttons);
-		container.appendChild(label);
+		header.appendChild(buttons);
+		container.appendChild(header);
 
-		const content = document.createElement("div");
-		content.className = "pm-nodeview-content";
-		container.appendChild(content);
+		const pre = document.createElement("pre");
+		const code = document.createElement("code");
+		pre.appendChild(code);
+		container.appendChild(pre);
 
 		this.dom = container;
-		this.contentDOM = content;
+		this.contentDOM = code;
 	}
 
 	update(node) {
-		if(node.type.name !== "hard_line_breaks_block") return false;
+		if(node.type.name !== "code_block") return false;
 		this.node = node;
 		return true;
 	}
@@ -82,19 +78,19 @@ function stopControlEvent(event) {
 	event.stopImmediatePropagation();
 }
 
-function createHardLineBreaksNodeViewPlugin() {
+function createCodeBlockNodeViewPlugin() {
 	const Plugin = require("prosemirror-state").Plugin;
 	const PluginKey = require("prosemirror-state").PluginKey;
 
 	return new Plugin({
-		key: new PluginKey("hardLineBreaksNodeView"),
+		key: new PluginKey("codeBlockNodeView"),
 		props: {
 			nodeViews: {
-				hard_line_breaks_block: createSafeNodeView((node, view, getPos) => new HardLineBreaksNodeView(node, view, getPos))
+				code_block: createSafeNodeView((node, view, getPos) => new CodeBlockNodeView(node, view, getPos))
 			}
 		}
 	});
 }
 
-exports.HardLineBreaksNodeView = HardLineBreaksNodeView;
-exports.createHardLineBreaksNodeViewPlugin = createHardLineBreaksNodeViewPlugin;
+exports.CodeBlockNodeView = CodeBlockNodeView;
+exports.createCodeBlockNodeViewPlugin = createCodeBlockNodeViewPlugin;

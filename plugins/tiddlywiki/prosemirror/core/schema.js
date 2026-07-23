@@ -108,8 +108,8 @@ function buildSchema() {
 			}]
 		},
 		opaque_block: {
-			attrs: { rawText: { default: "" }, firstLine: { default: "" }, parseTreeJson: { default: null } },
-			group: "block", atom: true, selectable: true, draggable: true,
+			attrs: { rawText: { default: "" }, firstLine: { default: "" }, parseTreeJson: { default: null }, autoEdit: { default: false } },
+			group: "block", atom: true, selectable: true, draggable: false,
 			toDOM(node) {
 				const wrapper = document.createElement("div");
 				wrapper.className = "pm-opaque-block";
@@ -129,7 +129,8 @@ function buildSchema() {
 					return {
 						rawText: dom.getAttribute("data-raw-text") || "",
 						firstLine: dom.getAttribute("data-first-line") || "",
-						parseTreeJson: dom.getAttribute("data-parse-tree-json") || null
+						parseTreeJson: dom.getAttribute("data-parse-tree-json") || null,
+						autoEdit: false
 					};
 				}
 			}]

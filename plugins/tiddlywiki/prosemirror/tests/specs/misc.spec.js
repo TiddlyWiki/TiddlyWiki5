@@ -145,6 +145,23 @@ test.describe("ProseMirror Editor - Link Tooltip", () => {
 	});
 });
 
+test.describe("ProseMirror Editor - Plain Text HTML-Like Content", () => {
+	test("should keep proxy configuration placeholders as plain editable text", async ({ page }) => {
+		const title = "ProxyPlainTextPlaceholders";
+		const proxyText = "HTTP_PROXY=\"http://127.0.0.1:<mixed 端口>\"\nHTTPS_PROXY=\"http://127.0.0.1:<mixed 端口>\"\nALL_PROXY=\"socks5h://127.0.0.1:<mixed 端口>\"\nNO_PROXY=\"localhost,127.0.0.1,::1\"";
+		const editor = await setupProseMirrorTest(page, title, {
+			useReadmeTiddler: false,
+			initialText: proxyText
+		});
+
+		await expect(editor).toContainText("HTTP_PROXY");
+		await expect(editor.locator(".pm-nodeview-opaque")).toHaveCount(0);
+		await page.waitForTimeout(500);
+		const savedText = await page.evaluate((t) => $tw.wiki.getTiddlerText(t, ""), title);
+		expect(savedText).toBe(proxyText);
+	});
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Initial wikilink rendering
 // ─────────────────────────────────────────────────────────────────────────────
@@ -199,6 +216,25 @@ test.describe("ProseMirror Editor - Static Block Rendering", () => {
 
 		expect(consoleErrors.some((message) => message.indexOf("Empty text nodes are not allowed") !== -1)).toBe(false);
 		await expect(editor).toContainText("after");
+	});
+
+	test("should dissolve code blocks to opaque source", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "```\nconst port = 8080;\n```"
+		});
+		const codeBlock = editor.locator(".pm-nodeview-codeblock").first();
+		await expect(codeBlock).toBeVisible({ timeout: 5000 });
+		await expect(codeBlock.locator(".tc-prosemirror-block-placeholder")).toHaveCount(0);
+		await codeBlock.hover();
+		await codeBlock.locator(".pm-nodeview-btn-source").click({ force: true });
+		const opaqueBlock = editor.locator(".pm-nodeview-opaque").first();
+		await expect(opaqueBlock).toBeVisible({ timeout: 5000 });
+		const textarea = opaqueBlock.locator("textarea.pm-nodeview-editor");
+		await expect(textarea).toBeVisible({ timeout: 5000 });
+		await expect(textarea).toBeFocused();
+		await expect(textarea).toHaveValue(/const port = 8080;/);
+		await page.keyboard.type("\nconst next = 9090;");
+		await expect(textarea).toHaveValue(/const next = 9090;/);
 	});
 
 	test("should isolate every block nodeview failure behind editable source fallback", async ({ page }) => {

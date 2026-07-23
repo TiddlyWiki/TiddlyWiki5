@@ -88,4 +88,26 @@ test.describe("ProseMirror Editor - Typed Block", () => {
 		await expect(page.locator(".pm-nodeview-typedblock")).toBeVisible({ timeout: 5000 });
 	});
 
+	test("should dissolve typed block to opaque source and reparse on save", async ({ page }) => {
+		await setupProseMirrorTest(page, null, {
+			initialText: '$$$application/javascript\nconsole.log("hello");\n$$$'
+		});
+		const typedBlock = page.locator(".pm-nodeview-typedblock").first();
+		await expect(typedBlock).toBeVisible({ timeout: 5000 });
+		await typedBlock.hover();
+		await typedBlock.locator(".pm-nodeview-btn-source").click({ force: true });
+
+		const opaqueBlock = page.locator(".pm-nodeview-opaque").first();
+		await expect(opaqueBlock).toBeVisible({ timeout: 5000 });
+		const textarea = opaqueBlock.locator("textarea.pm-nodeview-editor");
+		await expect(textarea).toBeVisible({ timeout: 5000 });
+		await expect(textarea).toBeFocused();
+		await expect(textarea).toHaveValue(/console\.log\("hello"\);/);
+		await textarea.fill('$$$application/javascript\nconsole.log("changed");\n$$$');
+		await opaqueBlock.locator(".pm-nodeview-btn-edit").click({ force: true });
+
+		await expect(page.locator(".pm-nodeview-typedblock").first()).toBeVisible({ timeout: 5000 });
+		await expect(page.locator(".pm-nodeview-typedblock").first()).toContainText('console.log("changed");');
+	});
+
 });

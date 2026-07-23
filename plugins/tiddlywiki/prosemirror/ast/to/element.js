@@ -18,6 +18,7 @@ const link = require("$:/plugins/tiddlywiki/prosemirror/ast/to/link.js");
 const table = require("$:/plugins/tiddlywiki/prosemirror/ast/to/table.js");
 const definitionList = require("$:/plugins/tiddlywiki/prosemirror/ast/to/definition-list.js");
 const buildOpaqueFromNode = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js").buildOpaqueFromNode;
+const sourceTextToParagraphs = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js").sourceTextToParagraphs;
 
 const elementBuilders = {
 	p: paragraph,
@@ -65,5 +66,17 @@ module.exports = function element(context, node) {
 	if(builder) {
 		return builder(context, node);
 	}
-	return buildOpaqueFromNode(node, context);
+	const opaqueNode = buildOpaqueFromNode(node, context);
+	if(!isPlausibleHtmlTagName(node.tag) || isAttributeLikeTextElement(node, opaqueNode.attrs.rawText)) {
+		return sourceTextToParagraphs(opaqueNode.attrs.rawText);
+	}
+	return opaqueNode;
 };
+
+function isPlausibleHtmlTagName(tag) {
+	return typeof tag === "string" && /^[a-z][a-z0-9-]*$/i.test(tag);
+}
+
+function isAttributeLikeTextElement(node, rawText) {
+	return !!(node && node.attributes && Object.keys(node.attributes).length > 0 && node.children && node.children.length > 0 && typeof rawText === "string" && rawText.indexOf("</") === -1);
+}
