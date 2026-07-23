@@ -13,8 +13,9 @@ title: Filter
 =[[#1919191A]colour-composite[white]]
 =[[red]colour-composite[white]]
 =[[#80808080]colour-composite[black]]
+=[[#80808080]colour-composite[nonsense]]
 +[join[,]]
 +
 title: ExpectedResult
 
-rgb(90.804% 90.804% 90.804%),rgb(100% 0% 0%),rgb(25.196% 25.196% 25.196%)
+rgb(90.804% 90.804% 90.804%),rgb(100% 0% 0%),rgb(25.196% 25.196% 25.196%),#80808080

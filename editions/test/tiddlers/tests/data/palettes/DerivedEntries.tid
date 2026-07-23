@@ -1,0 +1,34 @@
+title: Operators/Palettes/DerivedEntries
+description: Palette entries derived with tf.interpolate-colours and colour-set-alpha
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+(<<colour derived>>)
+(<<colour wash>>)
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+MyPalette
++
+title: MyPalette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+
+base-a: #000000
+base-b: #ffffff
+derived: [tf.interpolate-colours[base-a],[base-b],[0.5]]
+wash: [tf.colour[base-b]colour-set-alpha[0.5]]
++
+title: ExpectedResult
+
+<p>(oklch(50% 0 0))
+(#ffffff80)</p>

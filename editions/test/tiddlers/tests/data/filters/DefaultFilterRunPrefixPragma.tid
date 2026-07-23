@@ -15,9 +15,13 @@ title: Output
 
 (<$text text={{{ ::defaultprefix:and ::defaultprefix:all 1 1 +[join[X]] }}}/>)
 
+(<$text text={{{ ::defaultprefix:bogus [[x]] }}}/>)
+
+(<$text text={{{ ::defaultprefix 1 1 +[count[]] }}}/>)
+
 (<$text text={{{ ::nonexistent X }}}/>)
 
 +
 title: ExpectedResult
 
-<p>(1X1X1Y1)</p><p>(Filter Error: Filter pragmas are only allowed at the start of a filter)</p><p>(1X1)</p><p>(Filter Error: Unknown filter pragma)</p>
+<p>(1X1X1Y1)</p><p>(Filter Error: Filter pragmas are only allowed at the start of a filter)</p><p>(1X1)</p><p>(Filter Error: Unknown prefix for filter run)</p><p>(1)</p><p>(Filter Error: Unknown filter pragma)</p>
