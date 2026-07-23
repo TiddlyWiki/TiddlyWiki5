@@ -1,5 +1,5 @@
 created: 20260718221135000
-modified: 20260722190000000
+modified: 20260723130000000
 tags: Features
 title: Palette Chooser
 type: text/vnd.tiddlywiki
@@ -12,9 +12,9 @@ To open the palette chooser:
 # Choose the <<.controlpanel-tab Appearance>> tab
 # Choose the ''Palette'' tab within it
 
-Each available palette is shown as a card with a preview of its colours. Click a card to switch to that palette. The change takes effect immediately.
+<<.from-version "5.5.0">> Each available palette is shown as a card with a preview of its colours. Click a card to switch to that palette. The change takes effect immediately.
 
-Beneath the chooser you may also see:
+<<.from-version "5.5.0">> Beneath the chooser you may also see:
 
 * Any failures reported by the current palette's [[readability tests|Palette Readability Tests]]
 * A customisations panel, if the current palette offers customisation options -- see [[Palette Customisations]]

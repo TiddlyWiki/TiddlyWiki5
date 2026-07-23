@@ -1,10 +1,10 @@
 created: 20260718221135000
-modified: 20260718221135000
+modified: 20260723130000000
 tags: Concepts
 title: Colour Interpolation Hues
 type: text/vnd.tiddlywiki
 
-Some [[colour spaces|Colour Spaces]] express colours using a hue angle on a circle running from 0 to 360 degrees. When interpolating between two colours in such a space, there are two ways around the circle, and the choice can produce drastically different results. The <<.def "hue adjuster">> controls which route is taken. It is used as the second suffix of the <<.olink colour-interpolate>> operator.
+<<.from-version "5.5.0">> Some [[colour spaces|Colour Spaces]] express colours using a hue angle on a circle running from 0 to 360 degrees. When interpolating between two colours in such a space, there are two ways around the circle, and the choice can produce drastically different results. The <<.def "hue adjuster">> controls which route is taken. It is used as the second suffix of the <<.olink colour-interpolate>> operator.
 
 |!Hue adjuster |!Route taken between the two hues |
 |shorter |The shorter arc around the hue circle. This is the default |
