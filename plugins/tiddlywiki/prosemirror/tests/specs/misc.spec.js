@@ -181,6 +181,91 @@ test.describe("ProseMirror Editor - Static Block Rendering", () => {
 		await expect(table).toContainText("Header 1");
 		await expect(table).toContainText("Cell 1");
 	});
+
+	test("should keep empty code blocks editable", async ({ page }) => {
+		const consoleErrors = [];
+		page.on("console", (message) => {
+			if(message.type() === "error") {
+				consoleErrors.push(message.text());
+			}
+		});
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "```\n\n```"
+		});
+
+		await expect(editor).toBeVisible();
+		await editor.click();
+		await page.keyboard.type("after");
+
+		expect(consoleErrors.some((message) => message.indexOf("Empty text nodes are not allowed") !== -1)).toBe(false);
+		await expect(editor).toContainText("after");
+	});
+
+	test("should isolate every block nodeview failure behind editable source fallback", async ({ page }) => {
+		await setupProseMirrorTest(page, null, { initialText: "" });
+		const cases = [
+			{ name: "image", expectedSource: "missing.png" },
+			{ name: "pragma", expectedSource: "\\define test() broken" },
+			{ name: "opaque", expectedSource: "@@broken" },
+			{ name: "hardbreaks", expectedSource: "broken hard breaks" },
+			{ name: "typed", expectedSource: "broken typed" },
+			{ name: "widget", expectedSource: "<<now>>" }
+		];
+		const outcomes = await page.evaluate(() => {
+			const schema = $tw.modules.execute("$:/plugins/tiddlywiki/prosemirror/core/schema.js").buildSchema();
+			const createSafeNodeView = $tw.modules.execute("$:/plugins/tiddlywiki/prosemirror/blocks/safe-nodeview.js").createSafeNodeView;
+			const host = document.createElement("div");
+			document.body.appendChild(host);
+			const doc = schema.nodes.doc.create(null, schema.nodes.paragraph.create());
+			const fakeView = {
+				state: {
+					schema,
+					doc,
+					tr: {
+						replaceRangeWith: function() { return this; }
+					}
+				},
+				dispatch: function() { this.dispatched = true; },
+				dispatched: false
+			};
+			const nodeCases = [
+				{ name: "image", node: schema.nodes.image.create({ src: "missing.png", twSource: "missing.png", twKind: "shortcut" }) },
+				{ name: "pragma", node: schema.nodes.pragma_block.create({ rawText: "\\define test() broken", firstLine: "\\define test() broken" }) },
+				{ name: "opaque", node: schema.nodes.opaque_block.create({ rawText: "@@broken", firstLine: "@@broken", parseTreeJson: null }) },
+				{ name: "hardbreaks", node: schema.nodes.hard_line_breaks_block.create(null, schema.text("broken hard breaks")) },
+				{ name: "typed", node: schema.nodes.typed_block.create({ rawText: "broken typed", parseType: "text/plain", renderType: null }) },
+				{ name: "widget", node: schema.nodes.paragraph.create(null, schema.text("<<now>>")) }
+			];
+			return nodeCases.map((testCase) => {
+				fakeView.dispatched = false;
+				const nodeView = createSafeNodeView(() => { throw new Error("forced " + testCase.name); })(testCase.node, fakeView, () => 0);
+				host.appendChild(nodeView.dom);
+				const sourceText = nodeView.dom.querySelector(".pm-nodeview-error-source").textContent;
+				nodeView.enterEditMode();
+				const textarea = nodeView.dom.querySelector("textarea.pm-nodeview-editor");
+				const editableValue = textarea && textarea.value;
+				if(textarea) {
+					textarea.value = sourceText + " fixed";
+					nodeView.commitEdit();
+				}
+				return {
+					name: testCase.name,
+					sourceText,
+					editableValue,
+					dispatched: fakeView.dispatched
+				};
+			});
+		});
+
+		expect(outcomes).toHaveLength(cases.length);
+		for(const testCase of cases) {
+			const outcome = outcomes.find((item) => item.name === testCase.name);
+			expect(outcome.sourceText).toBeTruthy();
+			expect(outcome.editableValue).toBe(outcome.sourceText);
+			expect(outcome.sourceText).toBe(testCase.expectedSource);
+			expect(outcome.dispatched).toBe(true);
+		}
+	});
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

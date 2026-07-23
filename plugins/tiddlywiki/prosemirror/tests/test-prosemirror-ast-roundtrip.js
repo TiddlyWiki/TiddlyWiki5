@@ -106,6 +106,17 @@ if(!$tw.browser) {
 			expect(result).toContain("console.log(x);");
 		});
 
+		it("should convert empty code blocks without empty text nodes", () => {
+			const input = "```\n\n```";
+			const parseResult = $tw.wiki.parseText("text/vnd.tiddlywiki", input);
+			const pmAst = wikiAstToProseMirrorAst(parseResult.tree, { sourceText: input });
+			const codeBlock = pmAst.content && pmAst.content[0];
+
+			expect(codeBlock.type).toBe("code_block");
+			expect(codeBlock.content).toBeUndefined();
+			expect(roundTrip(input)).toContain("```");
+		});
+
 		// --- Block elements ---
 
 		it("should round-trip hard line breaks block", () => {

@@ -384,6 +384,8 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 	const contentType = options.contentType || "text/vnd.tiddlywiki";
 	const configTiddlers = Array.isArray(options.configTiddlers) ? options.configTiddlers : [];
 	const useReadmeTiddler = options.useReadmeTiddler !== undefined ? !!options.useReadmeTiddler : true;
+	const beforeRender = typeof options.beforeRender === "function" ? options.beforeRender : null;
+	const beforeRenderArgs = options.beforeRenderArgs || null;
 
 	page.on("pageerror", (err) => {
 		console.log(`[Browser Error] ${err.message}`);
@@ -394,15 +396,18 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 	if(useReadmeTiddler) {
 		const readmeTitle = "$:/plugins/tiddlywiki/prosemirror/readme";
 		const exampleTitle = "$:/plugins/tiddlywiki/prosemirror/example";
-		await page.evaluate(({ readmeTitle, exampleTitle, initialText, configTiddlers, contentType }) => {
+		await page.evaluate(({ readmeTitle, exampleTitle, initialText, configTiddlers, contentType, beforeRenderSource, beforeRenderArgs }) => {
 			for(const t of configTiddlers) $tw.wiki.addTiddler(t);
 			$tw.wiki.addTiddler({ title: exampleTitle, text: initialText, type: contentType });
+			if(beforeRenderSource) {
+				(new Function("return (" + beforeRenderSource + ")"))()(beforeRenderArgs);
+			}
 			const storyList = $tw.wiki.getTiddlerList("$:/StoryList");
 			if(storyList.indexOf(readmeTitle) === -1) {
 				storyList.unshift(readmeTitle);
 				$tw.wiki.addTiddler({ title: "$:/StoryList", list: storyList });
 			}
-		}, { readmeTitle, exampleTitle, initialText, configTiddlers, contentType });
+		}, { readmeTitle, exampleTitle, initialText, configTiddlers, contentType, beforeRenderSource: beforeRender && beforeRender.toString(), beforeRenderArgs });
 
 		await page.waitForSelector(`.tc-tiddler-frame[data-tiddler-title="${readmeTitle}"]`, { timeout: 10000 });
 		const editor = page.locator(`.tc-tiddler-frame[data-tiddler-title="${readmeTitle}"] .ProseMirror`).first();
@@ -412,16 +417,19 @@ async function setupProseMirrorTest(page, tiddlerTitle = null, options = {}) {
 
 	// Isolated harness tiddler
 	const harnessTitle = `Harness_${tiddlerTitle}`;
-	await page.evaluate(({ tiddlerTitle, harnessTitle, initialText, configTiddlers, contentType }) => {
+	await page.evaluate(({ tiddlerTitle, harnessTitle, initialText, configTiddlers, contentType, beforeRenderSource, beforeRenderArgs }) => {
 		for(const t of configTiddlers) $tw.wiki.addTiddler(t);
 		$tw.wiki.addTiddler({ title: tiddlerTitle, text: initialText, type: contentType });
+		if(beforeRenderSource) {
+			(new Function("return (" + beforeRenderSource + ")"))()(beforeRenderArgs);
+		}
 		$tw.wiki.addTiddler({ title: harnessTitle, text: `<$edit-prosemirror tiddler="${tiddlerTitle}"/>` });
 		const storyList = $tw.wiki.getTiddlerList("$:/StoryList");
 		if(storyList.indexOf(harnessTitle) === -1) {
 			storyList.unshift(harnessTitle);
 			$tw.wiki.addTiddler({ title: "$:/StoryList", list: storyList });
 		}
-	}, { tiddlerTitle, harnessTitle, initialText, configTiddlers, contentType });
+	}, { tiddlerTitle, harnessTitle, initialText, configTiddlers, contentType, beforeRenderSource: beforeRender && beforeRender.toString(), beforeRenderArgs });
 
 	await page.waitForSelector(`.tc-tiddler-frame[data-tiddler-title="${harnessTitle}"]`, { timeout: 10000 });
 	const editor = page.locator(`.tc-tiddler-frame[data-tiddler-title="${harnessTitle}"] .ProseMirror`).first();

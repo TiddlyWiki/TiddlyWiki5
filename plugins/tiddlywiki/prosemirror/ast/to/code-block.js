@@ -23,10 +23,7 @@ module.exports = function buildCodeBlock(context, node) {
 				textContent += codeElement.children[j].text;
 			}
 		}
-		return {
-			type: "code_block",
-			content: [{ type: "text", text: textContent }]
-		};
+		return makeCodeBlock(textContent);
 	}
 	let fallbackText = "";
 	if(node.children) {
@@ -36,8 +33,15 @@ module.exports = function buildCodeBlock(context, node) {
 			}
 		}
 	}
-	return {
-		type: "code_block",
-		content: [{ type: "text", text: fallbackText }]
-	};
+	return makeCodeBlock(fallbackText);
 };
+
+function makeCodeBlock(text) {
+	const codeBlock = {
+		type: "code_block"
+	};
+	if(text) {
+		codeBlock.content = [{ type: "text", text: text }];
+	}
+	return codeBlock;
+}

@@ -12,6 +12,7 @@ bottom-right corner with the same edit/delete affordances as pragma/widget.
 "use strict";
 
 const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/base-source-editable.js").BaseSourceEditableNodeView;
+const createSafeNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/safe-nodeview.js").createSafeNodeView;
 
 // Module-level flag: when a typed_block is inserted via slash menu,
 // set this to true before dispatching the transaction. The next
@@ -236,7 +237,7 @@ function createTypedBlockNodeViewPlugin() {
 		key: new PluginKey("typedBlockNodeView"),
 		props: {
 			nodeViews: {
-				typed_block: (node, view, getPos) => new TypedBlockNodeView(node, view, getPos)
+				typed_block: createSafeNodeView((node, view, getPos) => new TypedBlockNodeView(node, view, getPos))
 			}
 		}
 	});

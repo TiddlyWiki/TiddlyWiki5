@@ -9,9 +9,12 @@ module-type: library
 module.exports = function codeblock(context, node) {
 	const code = node.attributes && node.attributes.code ? node.attributes.code.value : "";
 	const language = node.attributes && node.attributes.language ? node.attributes.language.value : "";
-	return {
+	const codeBlock = {
 		type: "code_block",
-		attrs: language ? { language: language } : {},
-		content: [{ type: "text", text: code }]
+		attrs: language ? { language: language } : {}
 	};
+	if(code) {
+		codeBlock.content = [{ type: "text", text: code }];
+	}
+	return codeBlock;
 };
