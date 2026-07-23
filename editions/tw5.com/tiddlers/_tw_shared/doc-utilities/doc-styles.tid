@@ -193,11 +193,11 @@ tr.doc-table-subheading {
 }
 
 .doc-block-icon .tc-image-tip {
-	fill: <<colour primary>>;
+	color: <<colour primary>>;
 }
 
 .doc-block-icon .tc-image-warning {
-	fill: <<colour alert-highlight>>;
+	color: <<colour alert-highlight>>;
 }
 
 a.doc-from-version {
@@ -215,7 +215,6 @@ a.doc-from-version.doc-from-version-new {
 }
 
 a.doc-from-version svg {
-    fill: currentColor;
     vertical-align: sub;
 }
 
@@ -224,7 +223,6 @@ a.doc-deprecated-version.tc-tiddlylink {
     border-radius: 1em;
 	background: red;
 	color: <<colour background>>;
-	fill: <<colour background>>;
     padding: 0 0.4em;
     font-size: 0.7em;
     text-transform: uppercase;
