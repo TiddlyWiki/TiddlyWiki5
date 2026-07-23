@@ -1,0 +1,48 @@
+created: 20260718221135000
+modified: 20260723130000000
+tags: Concepts
+title: Colour Spaces
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> The [[Colour Operators]] are backed by the [[color.js|https://colorjs.io/]] library, which supports the colour spaces below. See the [[color.js website|https://colorjs.io/docs/spaces]] for details of each space.
+
+* ''a98rgb-linear''
+* ''a98rgb''
+* ''acescc''
+* ''acescg''
+* ''cam16-jmh''
+* ''hct''
+* ''hpluv''
+* ''hsl''
+* ''hsluv''
+* ''hsv''
+* ''hwb''
+* ''ictcp''
+* ''jzazbz''
+* ''jzczhz''
+* ''lab-d65''
+* ''lab''
+* ''lch''
+* ''lchuv''
+* ''luv''
+* ''okhsl''
+* ''okhsv''
+* ''oklab''
+* ''oklch''
+* ''oklrab''
+* ''oklrch''
+* ''p3-linear''
+* ''p3''
+* ''prophoto-linear''
+* ''prophoto''
+* ''rec2020-linear''
+* ''rec2020''
+* ''rec2100-linear''
+* ''rec2100hlg''
+* ''rec2100pq''
+* ''srgb-linear''
+* ''srgb''
+* ''xyz-abs-d65''
+* ''xyz-d50''
+* ''xyz-d65''
+* ''xyz''

@@ -1,0 +1,35 @@
+category: 2026
+color-scheme: dark
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Emerald
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/Emerald
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #547867
+base-background: #2A4F43
+base-danger: #fd7a02
+base-highlight: #219a63
+base-ink: #F0E1D8
+base-link: #9accb6
+base-paper: #343B36
+base-primary: #708672
+base-tab: #5e706a
+base-tag: #8B7D7B
+
+# Palette-specific colours and overrides
+alert-border: #FDDFA0
+alert-highlight: #8bf2ab
+external-link-foreground: #b9e0b4
+external-link-foreground-hover: #d8be6c
+external-link-foreground-visited: #d1b995
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: [tf.colour[primary]]
+sidebar-tab-divider: [tf.colour[sidebar-tab-border-selected]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+site-title-foreground: #C8BFB5
+tiddler-editor-border-image: #FFFFFF
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]
+untagged-background: #615856

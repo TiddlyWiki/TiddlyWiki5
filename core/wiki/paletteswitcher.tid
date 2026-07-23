@@ -1,19 +1,30 @@
 title: $:/snippets/paletteswitcher
 
+\parameters (thumbnails)
+
 \whitespace trim
-<$linkcatcher to="$:/palette">
-<div class="tc-chooser">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]!is[draft]sort[name]]">
-<$set name="cls" filter="[all[current]prefix{$:/palette}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
-<div class=<<cls>>>
-<$link to={{!!title}}>
-''<$view field="name" format="text"/>''
-&#32;-&#32;
-<$view field="description" format="text"/>
-{{||$:/snippets/currpalettepreview}}
-</$link>
+\procedure actions()
+<$action-setfield $tiddler="$:/palette" text=<<navigateTo>>/>
+\end actions
+
+<!-- Display palette in currentTiddler with selection logic -->
+\procedure palette-entry(thumbnails)
+<div class={{{ [<currentTiddler>match{$:/palette}then[tc-chosen]] tc-chooser-item +[join[ ]] }}}>
+	<$link to={{!!title}} aria-label=`${[[$:/language/ControlPanel/Palette/Caption]get[text]]}$ - ${[all[current]get[name]]}$. ${[all[current]get[description]]}$`>
+		<%if [<thumbnails>match[yes]] %>
+			{{||$:/snippets/currpalettepreview}}
+		<%endif%>
+		''<$view field="name" format="text"/>''
+		<br>
+		<$view field="description" format="text"/>
+	</$link>
 </div>
-</$set>
-</$list>
-</div>
+\end palette-entry
+
+<$linkcatcher actions=<<actions>>>
+	<div class={{{ tc-chooser [<thumbnails>match[yes]then[tc-chooser-cards]] +[join[ ]] }}}>
+		<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]!is[draft]sort[name]]">
+			<$transclude $variable="palette-entry" thumbnails=<<thumbnails>>/>
+		</$list>
+	</div>
 </$linkcatcher>

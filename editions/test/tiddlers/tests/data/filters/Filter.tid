@@ -1,0 +1,22 @@
+title: Filters/Filter
+description: Test filter operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+\procedure test-filter() 1 1 +[join[X]] +[!match<currentTiddler>]
+
+(<$text text={{{ [filter<test-filter>] +[join[ ]] }}}/>)
+
+(<$text text={{{ [filter:all<test-filter>] +[join[ ]] }}}/>)
+
++
+title: 1X1
+
++
+title: ExpectedResult
+
+<p>($:/core 1X1 ExpectedResult Output)</p><p>($:/core ExpectedResult Output)</p>

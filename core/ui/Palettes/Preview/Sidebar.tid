@@ -1,0 +1,7 @@
+title: $:/core/ui/Palettes/Preview/SideBar
+tags: $:/tags/Preview/Page
+
+\whitespace trim
+<div class="tc-palette-preview-thumbnail-sidebar" style.color=<<colour sidebar-foreground>>>
+	<<palette-preview-component-list "$:/tags/Preview/SideBar">>
+</div>

@@ -1,0 +1,33 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Grain Rain
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/GrainRain
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #CEDA73
+base-background: #7EAD7B
+base-danger: #cd3a29
+base-highlight: #f2a08b
+base-ink: #0E343C
+base-link: #215A63
+base-paper: #C8D8AD
+base-primary: #215A63
+base-tab: #7EAD7B
+base-tag: #9bc772
+
+# Palette-specific colours and overrides
+alert-border: #1490aa
+alert-muted-foreground: #a89b59
+code-background: #1416111A
+external-link-foreground: #0e7086
+external-link-foreground-hover: #c62f3b
+external-link-foreground-visited: #645796
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: #CEDA73
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

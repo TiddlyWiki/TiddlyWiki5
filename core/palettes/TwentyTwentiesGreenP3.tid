@@ -1,0 +1,13 @@
+title: $:/palettes/TwentyTwenties/GreenP3
+name: TwentyTwenties (Green P3)
+description: Modern and flexible, Greenish and super bright
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+palette-import: $:/palettes/TwentyTwenties
+category: 2026
+
+base-paper: color(display-p3 0.281 1 0.584 / 1)
+base-background: color(display-p3 1 1 0 / 1)
+base-primary: color(display-p3 1 0.563 1 / 1)
+

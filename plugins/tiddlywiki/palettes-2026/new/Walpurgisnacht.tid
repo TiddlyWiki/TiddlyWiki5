@@ -1,0 +1,38 @@
+category: 2026
+color-scheme: dark
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Walpurgisnacht
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/Walpurgisnacht
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #A8614F
+base-background: #1C2224
+base-danger: #d92527
+base-highlight: #6c3e58
+base-ink: #BCBFBC
+base-link: #DDA28E
+base-paper: #5B625E
+base-primary: #93A29D
+base-tab: #5D7363
+base-tag: #C1CBA5
+
+# Palette-specific colours and overrides
+alert-border: #DDA28E
+alert-highlight: #f7df0d
+alert-muted-foreground: #DDA28E
+external-link-foreground: #b5d38a
+external-link-foreground-hover: #f0d15e
+external-link-foreground-visited: #c9b57b
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: #5D7363
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+site-title-foreground: #A8614F
+tab-border: #93A29D
+tag-foreground: [tf.colour[background]]
+tiddler-controls-foreground: #3e4443
+tiddler-controls-foreground-selected: #aec17b
+tiddler-editor-border-image: #FFFFFF
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

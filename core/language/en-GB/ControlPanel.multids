@@ -58,10 +58,14 @@ LayoutSwitcher/Caption: Layout
 LoadedModules/Caption: Loaded Modules
 LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
 Palette/Caption: Palette
+Palette/Customisations/Prompt: Customisations for the current palette: <<palette-link>>
+Palette/Customisations/Reset/Caption: reset customisations
+Palette/Editor/Customised/Prompt: This palette has customisations that override the entries marked below
+Palette/Editor/Customised/Entry: overridden by a customisation
 Palette/Editor/Clone/Caption: clone
 Palette/Editor/Clone/Prompt: It is recommended that you clone this shadow palette before editing it
 Palette/Editor/Delete/Hint: delete this entry from the current palette
-Palette/Editor/Names/External/Show: Show color names that are not part of the current palette
+Palette/Editor/Names/External/Show: Show inherited palette entries
 Palette/Editor/Prompt/Modified: This shadow palette has been modified
 Palette/Editor/Prompt: Editing
 Palette/Editor/Reset/Caption: reset

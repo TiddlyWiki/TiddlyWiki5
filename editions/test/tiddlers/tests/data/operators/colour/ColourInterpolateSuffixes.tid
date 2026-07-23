@@ -1,0 +1,26 @@
+title: Operators/Colour/ColourInterpolateSuffixes
+description: colour-interpolate colour space and hue adjuster suffixes
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+<$text text={{{ [subfilter{Filter}] +[join[;]] }}}/>|<$text text={{{ [subfilter{Empties}] +[count[]] }}}/>
++
+title: Filter
+
+=[[0.5]colour-interpolate[#5778d8],[#d85757]]
+=[[0.5]colour-interpolate:bogus[#5778d8],[#d85757]]
+=[[0.5]colour-interpolate:lch[#5778d8],[#d85757]]
+=[[0.5]colour-interpolate:oklch:raw[red],[blue]]
+=[[0.5]colour-interpolate:oklch:shorter[red],[blue]]
++
+title: Empties
+
+=[[0.5]colour-interpolate[#5778d8]]
+=[[0.5]colour-interpolate[nope],[#d85757]]
++
+title: ExpectedResult
+
+rgb(59.412% 40.588% 59.412%);lch(53.15% 56.728 334.64);lch(53.15% 56.728 334.64);oklch(53.998% 0.28545 146.64);oklch(53.998% 0.28545 326.64)|0
