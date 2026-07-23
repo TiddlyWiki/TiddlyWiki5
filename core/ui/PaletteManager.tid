@@ -18,7 +18,8 @@ title: $:/PaletteManager
 {{$:/snippets/palettetests}}
 
 <$let
-	paletteCustomisations={{{ [[$:/temp/palette-consolidated]get[customisations]] }}}
+	resolvedPalette={{{ [{$:/palette}is[tiddler]] [{$:/palette}is[shadow]] :else[[$:/palettes/Vanilla]] }}}
+	paletteCustomisations={{{ [<resolvedPalette>get[customisations]] :else[[$:/temp/palette-consolidated]get[customisations]] }}}
 	layerTitle={{{ [function[tf.palette-customisations-layer]] }}}
 >
 	<%if [<paletteCustomisations>!match[]] %>

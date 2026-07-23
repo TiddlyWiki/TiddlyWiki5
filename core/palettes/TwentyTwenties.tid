@@ -117,7 +117,7 @@ sidebar-button-foreground: [tf.colour[sidebar-controls-foreground]]
 sidebar-controls-foreground-hover: [tf.interpolate-colours[base-ink],[base-background],[0.2]]
 sidebar-controls-foreground: [tf.interpolate-colours[base-ink],[base-background],[0.8]]
 sidebar-foreground-shadow: inherit
-sidebar-foreground: =[tf.colour[base-ink]] =[tf.colour[base-paper]] =[tf.colour[base-background]] +[colour-best-contrast:DeltaPhi[]]
+sidebar-foreground: =[tf.colour[base-ink]] =[tf.colour[base-paper]] =[tf.colour[base-background]] +[colour-best-contrast[]]
 sidebar-muted-foreground-hover: [tf.colour[sidebar-muted-foreground]colour-set-oklch:l[0.3]]
 sidebar-muted-foreground: [tf.interpolate-colours[foreground],[page-background],[0.6]]
 sidebar-tab-background-selected: [tf.colour[tab-background-selected]]
@@ -128,7 +128,7 @@ sidebar-tab-divider: [tf.colour[tab-divider]]
 sidebar-tab-foreground-selected: [tf.colour[tab-foreground-selected]]
 sidebar-tab-foreground: [tf.colour[tab-foreground]]
 sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-oklch:l[0.5]]
-sidebar-tiddler-link-foreground: =[tf.colour[base-primary]] =[tf.colour[base-secondary]] =[tf.colour[base-tertiary]] =[tf.colour[base-background]] +[colour-best-contrast:DeltaPhi[]]
+sidebar-tiddler-link-foreground: =[tf.colour[base-primary]] =[tf.colour[base-secondary]] =[tf.colour[base-tertiary]] =[tf.colour[base-background]] +[colour-best-contrast[]]
 site-title-foreground: [tf.colour[tiddler-title-foreground]]
 stability-deprecated: #ff0000
 stability-experimental: #c07c00

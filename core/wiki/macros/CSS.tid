@@ -146,7 +146,7 @@ tags: $:/tags/Macro
 	\end color
 
 	<$let
-		color-scheme-filter={{{ [<paletteTitle>get[color-scheme]] :else[[light]] }}}
+		color-scheme-filter={{{ [<paletteTitle>get[color-scheme]] :else[<paletteTitle>get[palette-import]get[color-scheme]] :else[[light]] }}}
 		scheme={{{ [subfilter:all<color-scheme-filter>] }}}
 	>
 		<$slot $name="ts-raw"/>
