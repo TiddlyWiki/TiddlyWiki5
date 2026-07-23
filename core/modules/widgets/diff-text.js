@@ -22,7 +22,7 @@ Inherit from the base widget class
 DiffTextWidget.prototype = new Widget();
 
 DiffTextWidget.prototype.invisibleCharacters = {
-	"\n": "↩︎\n",
+	"\n": "↲\n",
 	"\r": "⇠",
 	"\t": "⇥\t"
 };

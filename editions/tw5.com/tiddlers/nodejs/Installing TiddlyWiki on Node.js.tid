@@ -4,7 +4,7 @@ created: 20131219100608529
 delivery: DIY
 description: Flexible hosting on your own machine or in the cloud
 method: sync
-modified: 20221115230831173
+modified: 20260712162730421
 tags: Saving [[TiddlyWiki on Node.js]] Windows Mac Linux
 title: Installing TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -39,4 +39,39 @@ The `-g` flag causes TiddlyWiki to be installed globally. Without it, TiddlyWiki
 
 <<.warning "If you are using Debian or Debian-based Linux and you are receiving a `node: command not found` error though node.js package is installed, you may need to create a symbolic link between `nodejs` and `node`. Consult your distro's manual and `whereis` to correctly create a link. See github [[issue 1434|http://github.com/TiddlyWiki/TiddlyWiki5/issues/1434]]. <br><br>Example Debian v8.0: `sudo ln -s /usr/bin/nodejs /usr/bin/node`">>
 <br>
-<<.tip "You can also install prior versions like this: <br><code> npm install -g tiddlywiki@5.1.13</code>">>
+<<.tip "You can also install prior versions like this: <br><code> npm install -g tiddlywiki@5.1.13</code><br>Note: this will overwrite the installed version rather than installing it alongside.">>
+
+!! Installing multiple Node.js verions alongside
+
+There are multiple options:
+
+!!! Local install
+
+```
+mkdir -p /home/user/opt/tiddlywiki-5.1.13 && cd "$_" # works in Bash
+npm install tiddlywiki@5.1.13
+```
+
+This installs the given version in the current directory, at the expense of taking some extra disk space. The binary is in `node_modules/.bin/tiddlywiki` (relative to the current directory). For convenience, it is possible to create a symlink (in Linux) containing explicit version number in the name, like this:
+
+```
+ln -s /home/user/opt/tiddlywiki-5.1.13/node_modules/.bin/tiddlywiki /home/user/bin/tiddlywiki-5.1.13
+```
+
+Having `~/bin` in `PATH` environment variable (usually at the beginning of it), makes it possible to start this version of TiddlyWiki as simple as `tiddlywiki-5.1.13`.
+
+!!! Use `npx`
+
+To run another version without overwriting the currently installed version, use npx:
+
+```
+npx tiddlywiki@5.3.8 --version
+```
+
+<<.warning "This comes with a security risk, since it downloads and executes a package from the internet. See https://talk.tiddlywiki.org/t/tiddlywiki-docs-gettingstarted-node-js/15423/4">>
+
+!!! Run directly from the source code repository
+
+# clone https://github.com/TiddlyWiki/TiddlyWiki5/ locally
+# checkout any version (using `git checkout` or `git switch` for modern versions of Git)
+# set up a link or a shell script for it
