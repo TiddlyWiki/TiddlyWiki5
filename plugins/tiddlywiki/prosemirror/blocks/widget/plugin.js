@@ -14,6 +14,7 @@ const PluginKey = require("prosemirror-state").PluginKey;
 const Decoration = require("prosemirror-view").Decoration;
 const DecorationSet = require("prosemirror-view").DecorationSet;
 const WidgetBlockNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/widget/nodeview.js").WidgetBlockNodeView;
+const createSafeNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/safe-nodeview.js").createSafeNodeView;
 const utils = require("$:/plugins/tiddlywiki/prosemirror/blocks/widget/utils.js");
 const parseWidget = utils.parseWidget;
 
@@ -35,13 +36,13 @@ function createWidgetBlockNodeViewPlugin(parentWidget) {
 		key: new PluginKey("widgetBlockNodeView"),
 		props: {
 			nodeViews: {
-				paragraph(node, view, getPos) {
+				paragraph: createSafeNodeView(function(node, view, getPos) {
 					if(!isWidgetBlocksEnabled()) {
 						return null;
 					}
 					// Always return our custom node view (it can switch modes on update)
 					return new WidgetBlockNodeView(node, view, getPos, parentWidget);
-				}
+				})
 			}
 		}
 	});

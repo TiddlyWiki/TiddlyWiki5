@@ -12,15 +12,16 @@ ProseMirror plugin that provides a nodeView for images.
 const Plugin = require("prosemirror-state").Plugin;
 const PluginKey = require("prosemirror-state").PluginKey;
 const ImageNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/image/nodeview.js").ImageNodeView;
+const createSafeNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/safe-nodeview.js").createSafeNodeView;
 
 function createImageNodeViewPlugin(parentWidget) {
 	return new Plugin({
 		key: new PluginKey("twImageNodeView"),
 		props: {
 			nodeViews: {
-				image(node, view, getPos) {
+				image: createSafeNodeView(function(node, view, getPos) {
 					return new ImageNodeView(node, view, getPos, parentWidget);
-				}
+				})
 			}
 		}
 	});

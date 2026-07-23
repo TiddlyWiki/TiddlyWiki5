@@ -12,6 +12,8 @@ Uses the unified pm-nodeview badge pattern.
 
 "use strict";
 
+const createSafeNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/safe-nodeview.js").createSafeNodeView;
+
 class HardLineBreaksNodeView {
 	constructor(node, view, getPos) {
 		this.node = node;
@@ -59,7 +61,7 @@ function createHardLineBreaksNodeViewPlugin() {
 		key: new PluginKey("hardLineBreaksNodeView"),
 		props: {
 			nodeViews: {
-				hard_line_breaks_block: (node, view, getPos) => new HardLineBreaksNodeView(node, view, getPos)
+				hard_line_breaks_block: createSafeNodeView((node, view, getPos) => new HardLineBreaksNodeView(node, view, getPos))
 			}
 		}
 	});

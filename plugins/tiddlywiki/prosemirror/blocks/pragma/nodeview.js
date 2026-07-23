@@ -12,6 +12,7 @@ with widget blocks (header toolbar, edit/save/cancel/delete buttons).
 "use strict";
 
 const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/base-source-editable.js").BaseSourceEditableNodeView;
+const createSafeNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/safe-nodeview.js").createSafeNodeView;
 
 class SourceBlockNodeView extends BaseSourceEditableNodeView {
 	constructor(node, view, getPos, blockType, parentWidget) {
@@ -163,8 +164,8 @@ function createPragmaBlockNodeViewPlugin(hostWidget) {
 	return new Plugin({
 		props: {
 			nodeViews: {
-				pragma_block: (node, view, getPos) => new SourceBlockNodeView(node, view, getPos, "pragma", hostWidget),
-				opaque_block: (node, view, getPos) => new SourceBlockNodeView(node, view, getPos, "opaque", hostWidget)
+				pragma_block: createSafeNodeView((node, view, getPos) => new SourceBlockNodeView(node, view, getPos, "pragma", hostWidget)),
+				opaque_block: createSafeNodeView((node, view, getPos) => new SourceBlockNodeView(node, view, getPos, "opaque", hostWidget))
 			}
 		}
 	});
