@@ -22,12 +22,11 @@ exports.tag = function(source,operator,options) {
 		});
 	} else {
 		// Old semantics:
-		var tiddlers;
 		if(operator.prefix === "!") {
 			// Returns a copy of the input if operator.operand is missing
-			tiddlers = options.wiki.getTiddlersWithTag(operator.operand);
+			const excludeTagSet = new Set(options.wiki.getTiddlersWithTag(operator.operand));
 			source(function(tiddler,title) {
-				if(tiddlers.indexOf(title) === -1) {
+				if(!excludeTagSet.has(title)) {
 					results.push(title);
 				}
 			});
@@ -39,9 +38,9 @@ exports.tag = function(source,operator,options) {
 					return indexedResults;
 				}
 			} else {
-				tiddlers = options.wiki.getTiddlersWithTag(operator.operand);
+				const includeTagSet = new Set(options.wiki.getTiddlersWithTag(operator.operand));
 				source(function(tiddler,title) {
-					if(tiddlers.indexOf(title) !== -1) {
+					if(includeTagSet.has(title)) {
 						results.push(title);
 					}
 				});

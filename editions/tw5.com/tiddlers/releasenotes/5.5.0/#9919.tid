@@ -1,0 +1,13 @@
+title: $:/changenotes/5.5.0/#9919
+created: 20260712000000000
+modified: 20260712000000000
+description: Fix the CSV parser returning every cell empty
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9919
+github-contributors: joshuafontany
+type: text/vnd.tiddlywiki
+
+`getCellInfo` read its loop variable before the loop declared it, so hoisting made it undefined and the parser tested the first character of the whole text rather than the first character of the cell. Any CSV opening with a separator therefore returned every cell empty, and the table rendered blank.
