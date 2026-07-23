@@ -32,6 +32,20 @@ describe("Utility tests", function() {
 		expect(pd("-00730428204930183")).toEqual("Thu, 28 Apr -0073 20:49:30 GMT");
 	});
 
+	it("should handle parsing a date with a format argument", function() {
+		var pd = function(v, format) {
+			return $tw.utils.parseDate(v, format);
+		};
+		expect(pd("2025-12-25T12:30:45Z","JS").toISOString()).toBe("2025-12-25T12:30:45.000Z");
+		expect(pd("20150101","TW").toISOString()).toBe("2015-01-01T00:00:00.000Z");
+		expect(pd("20150101","AUTO").toISOString()).toBe("2015-01-01T00:00:00.000Z");
+		expect(pd("20251225123045000","AUTO").toISOString()).toBe("2025-12-25T12:30:45.000Z");
+		expect(pd("1603188514443","UNIXTIME").toISOString()).toBe("2020-10-20T10:08:34.443Z");
+		expect(pd("1603188514443","AUTO").toISOString()).toBe("2020-10-20T10:08:34.443Z");
+		expect(pd("not-a-date","JS")).toBe(false);
+		expect(pd("not-a-date","UNIXTIME")).toBe(null);
+	});
+
 	it("should handle base64 encoding emojis", function() {
 		var booksEmoji = "📚";
 		expect(booksEmoji).toBe(booksEmoji);
