@@ -55,7 +55,7 @@ function buildDecorations(state, placeholderText) {
 	const { selection } = state;
 
 	state.doc.descendants((node, pos) => {
-		if(node.type.name !== "hard_line_breaks_block" && node.type.name !== "code_block") {
+		if(node.type.name !== "hard_line_breaks_block") {
 			return true; // continue descending
 		}
 

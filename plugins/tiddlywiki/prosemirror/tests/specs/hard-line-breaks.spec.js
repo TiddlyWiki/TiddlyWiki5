@@ -41,4 +41,18 @@ test.describe("ProseMirror Editor - Hard Line Breaks Block", () => {
 		expect(savedText).toContain("Poem A");
 		expect(savedText).toContain("Poem B");
 	});
+
+	test("should dissolve hard line breaks block to opaque source", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, { initialText: '"""\nLine one\nLine two\n"""' });
+		const block = editor.locator(".pm-nodeview-hardbreaks").first();
+		await expect(block).toBeVisible({ timeout: 5000 });
+		await block.hover();
+		await block.locator(".pm-nodeview-btn-source").click({ force: true });
+		const opaqueBlock = editor.locator(".pm-nodeview-opaque").first();
+		await expect(opaqueBlock).toBeVisible({ timeout: 5000 });
+		const textarea = opaqueBlock.locator("textarea.pm-nodeview-editor");
+		await expect(textarea).toBeVisible({ timeout: 5000 });
+		await expect(textarea).toBeFocused();
+		await expect(textarea).toHaveValue(/Line one/);
+	});
 });

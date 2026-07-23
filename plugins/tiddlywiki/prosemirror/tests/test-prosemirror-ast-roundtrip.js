@@ -214,6 +214,16 @@ if(!$tw.browser) {
 			expect($tw.utils.serializeWikitextParseTree(restored).trimEnd()).toBe(input);
 		});
 
+		it("should keep invalid angle-bracket text as editable paragraphs", () => {
+			const input = "HTTP_PROXY=\"http://127.0.0.1:<mixed 端口>\"\nHTTPS_PROXY=\"http://127.0.0.1:<mixed 端口>\"\nALL_PROXY=\"socks5h://127.0.0.1:<mixed 端口>\"\nNO_PROXY=\"localhost,127.0.0.1,::1\"";
+			const parseResult = $tw.wiki.parseText("text/vnd.tiddlywiki", input, { preserveBlankLines: true });
+			const pmAst = wikiAstToProseMirrorAst(parseResult.tree, { sourceText: input });
+			expect(JSON.stringify(pmAst)).not.toContain("opaque_block");
+			expect(pmAst.content.length).toBe(1);
+			expect(pmAst.content[0].content[0].text).toBe(input);
+			expect(roundTrip(input)).toBe(input);
+		});
+
 		it("should preserve custom parse nodes that store source offsets in attributes", () => {
 			const input = "[@ ] Legacy task one\n[@x] Legacy task two";
 			const customNode = {

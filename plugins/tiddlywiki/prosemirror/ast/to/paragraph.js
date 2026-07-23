@@ -6,7 +6,9 @@ module-type: library
 
 "use strict";
 
-const convertNodes = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js").convertNodes;
+const shared = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js");
+const convertNodes = shared.convertNodes;
+const extractSourceText = shared.extractSourceText;
 
 function isLiftedBlockNode(node) {
 	return !!node && (
@@ -31,6 +33,13 @@ function pushParagraphOrLiftedBlocks(result, context, children) {
 
 module.exports = function buildParagraph(context, node) {
 	const children = node.children || [];
+	const sourceText = hasAttributeLikeTextElement(children, context) ? extractSourceText(node, context) : null;
+	if(sourceText !== null) {
+		return {
+			type: "paragraph",
+			content: sourceText ? [{ type: "text", text: sourceText }] : undefined
+		};
+	}
 	const result = [];
 	let currentP = [];
 	for(let i = 0; i < children.length; i++) {
@@ -67,3 +76,20 @@ module.exports = function buildParagraph(context, node) {
 		type: "paragraph"
 	};
 };
+
+function hasAttributeLikeTextElement(nodes, context) {
+	if(!nodes) return false;
+	for(let i = 0; i < nodes.length; i++) {
+		const node = nodes[i];
+		if(node && node.type === "element" && node.tag !== "a" && node.attributes && Object.keys(node.attributes).length > 0 && node.children && node.children.length > 0) {
+			const sourceText = extractSourceText(node, context);
+			if(typeof sourceText === "string" && sourceText.indexOf("</") === -1) {
+				return true;
+			}
+		}
+		if(node && node.children && hasAttributeLikeTextElement(node.children, context)) {
+			return true;
+		}
+	}
+	return false;
+}
