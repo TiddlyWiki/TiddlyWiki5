@@ -91,42 +91,36 @@ function diffLineWordMode(text1,text2,mode) {
 	return diffs;
 }
 
-exports.makepatches = function(source,operator,options) {
-const suffixes = operator.suffixes || [],
-	[modeArg = [], formatArg = []] = suffixes,
-	modeSuffix = modeArg[0] || operator.suffix || "",
-	mode = ["lines", "words"].includes(modeSuffix) ? modeSuffix : "",
-	isJson = formatArg[0] === "json";
+exports.makepatches = function(source, operator, options) {
+	const suffixes = operator.suffixes || [];
+	const [modeArg = [], formatArg = []] = suffixes;
+	const modeSuffix = modeArg[0] || operator.suffix || "";
+	const mode = ["lines", "words"].includes(modeSuffix) ? modeSuffix : "";
+	const isJson = formatArg[0] === "json";
 
-		result = [];
-		
-	source(function(tiddler,title) {
-		let diffs, patches;
-		
-		if(isJson) {
-			if(mode === "lines" || mode === "words") {
-				diffs = diffLineWordMode(title,operator.operand,mode);
-			} else {
-				diffs = dmp.diffMain(title,operator.operand);
-			}
-			
-			var jsonOutput = diffs.map(function(diff) {
-				var type = diff[0] === 1 ? "insert" : (diff[0] === -1 ? "delete" : "equal");
-				return { type: type, text: diff[1] };
-			});
-			result.push(JSON.stringify(jsonOutput));
+	const results = [];
+
+	source((tiddler, title) => {
+		if (isJson) {
+			const diffs = (mode === "lines" || mode === "words") 
+				? diffLineWordMode(title, operator.operand, mode) 
+				: dmp.diffMain(title, operator.operand);
+
+			const jsonOutput = diffs.map(([typeCode, text]) => ({
+				type: typeCode === 1 ? "insert" : (typeCode === -1 ? "delete" : "equal"),
+				text
+			}));
+			results.push(JSON.stringify(jsonOutput));
 		} else {
-			if(mode === "lines" || mode === "words") {
-				diffs = diffLineWordMode(title,operator.operand,mode);
-				patches = dmp.patchMake(title,diffs);
-			} else {
-				patches = dmp.patchMake(title,operator.operand);
-			}
-			result.push(dmp.patchToText(patches));
+			const patches = (mode === "lines" || mode === "words") 
+				? dmp.patchMake(title, diffLineWordMode(title, operator.operand, mode)) 
+				: dmp.patchMake(title, operator.operand);
+			
+			results.push(dmp.patchToText(patches));
 		}
 	});
 
-	return result;
+	return results;
 };
 
 exports.applypatches = makeStringBinaryOperator(
