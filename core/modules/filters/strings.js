@@ -92,13 +92,12 @@ function diffLineWordMode(text1,text2,mode) {
 }
 
 exports.makepatches = function(source, operator, options) {
-	const suffixes = operator.suffixes || [];
-	const [modeArg = [], formatArg = []] = suffixes;
-	const modeSuffix = modeArg[0] || operator.suffix || "";
-	const mode = ["lines", "words"].includes(modeSuffix) ? modeSuffix : "";
-	const isJson = formatArg[0] === "json";
-
-	const results = [];
+	const suffixes = operator.suffixes || [],
+			[modeArg = [], formatArg = []] = suffixes,
+			modeSuffix = modeArg[0] || operator.suffix || "",
+			mode = ["lines", "words"].includes(modeSuffix) ? modeSuffix : "",
+			isJson = formatArg[0] === "json",
+			results = [];
 
 	source((tiddler, title) => {
 		if (isJson) {
