@@ -92,21 +92,41 @@ function diffLineWordMode(text1,text2,mode) {
 }
 
 exports.makepatches = function(source,operator,options) {
-	var suffix = operator.suffix || "",
-		result = [];
-		
-	source(function(tiddler,title) {
-		let diffs, patches;
-		if(suffix === "lines" || suffix === "words") {
-			diffs = diffLineWordMode(title,operator.operand,suffix);
-			patches = dmp.patchMake(title,diffs);
-		} else {
-			patches = dmp.patchMake(title,operator.operand);
-		}
-		Array.prototype.push.apply(result,[dmp.patchToText(patches)]);
-	});
+    var suffixes = operator.suffixes || [],
+        // Suffix 0: Diff mode ("lines", "words", or empty/default).
+        modeSuffix = suffixes[0] ? (suffixes[0][0] || "") : (operator.suffix || ""),
+        mode = (modeSuffix === "lines" || modeSuffix === "words") ? modeSuffix : "",
+        // Suffix 1: Output format ("json")
+        isJson = (suffixes[1] && suffixes[1][0] === "json") ? true : false,
+        result = [];
+        
+    source(function(tiddler,title) {
+        let diffs, patches;
+        
+        if(isJson) {
+            if(mode === "lines" || mode === "words") {
+                diffs = diffLineWordMode(title,operator.operand,mode);
+            } else {
+                diffs = dmp.diffMain(title,operator.operand);
+            }
+            
+            var jsonOutput = diffs.map(function(diff) {
+                var type = diff[0] === 1 ? "insert" : (diff[0] === -1 ? "delete" : "equal");
+                return { type: type, text: diff[1] };
+            });
+            result.push(JSON.stringify(jsonOutput));
+        } else {
+            if(mode === "lines" || mode === "words") {
+                diffs = diffLineWordMode(title,operator.operand,mode);
+                patches = dmp.patchMake(title,diffs);
+            } else {
+                patches = dmp.patchMake(title,operator.operand);
+            }
+            result.push(dmp.patchToText(patches));
+        }
+    });
 
-	return result;
+    return result;
 };
 
 exports.applypatches = makeStringBinaryOperator(
