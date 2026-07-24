@@ -940,10 +940,15 @@ describe("Filter tests", function() {
 		it("should handle the sortby operator", function() {
 			expect(wiki.filterTiddlers("a b c +[sortby[d e]]").join(",")).toBe("a,b,c");
 			expect(wiki.filterTiddlers("a b c +[sortby[b c a]]").join(",")).toBe("b,c,a");
+			// By default titles missing from the reference list sort to the start
 			expect(wiki.filterTiddlers("aa a b c +[sortby[b c a cc]]").join(",")).toBe("aa,b,c,a");
 			expect(wiki.filterTiddlers("a bb b c +[sortby[b c a cc]]").join(",")).toBe("bb,b,c,a");
 			expect(wiki.filterTiddlers("a bb cc b c +[sortby[b c a cc]]").join(",")).toBe("bb,b,c,a,cc");
-	
+			// The "end" operand places missing titles after the listed ones
+			expect(wiki.filterTiddlers("aa a b c +[sortby[b c a cc],[end]]").join(",")).toBe("b,c,a,aa");
+			expect(wiki.filterTiddlers("a bb b c +[sortby[b c a cc],[end]]").join(",")).toBe("b,c,a,bb");
+			expect(wiki.filterTiddlers("a bb cc b c +[sortby[b c a cc],[end]]").join(",")).toBe("b,c,a,cc,bb");
+
 			expect(wiki.filterTiddlers("b a b c +[sortby[]]").join(",")).toBe("a,b,c");
 			expect(wiki.filterTiddlers("b a b c +[sortby[a b b c]]").join(",")).toBe("a,b,c");
 			expect(wiki.filterTiddlers("b a b c +[sortby[b a c b]]").join(",")).toBe("b,a,c");

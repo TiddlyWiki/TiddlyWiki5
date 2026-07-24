@@ -1,0 +1,22 @@
+caption: sortby
+created: 20151017145021839
+modified: 20260723215759800
+op-input: a list of items
+op-output: all items sorted by the order list, with unlisted items placed first by default or, with the `end` parameter, last
+op-parameter: the <<.op sortby>> operator accepts 1 or 2 parameters, see below for details
+op-parameter-name: order
+op-purpose: sort the current list in the order of the list referenced in the parameter
+tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
+title: sortby Operator
+type: text/vnd.tiddlywiki
+
+The <<.op sortby>> operator requires at least one parameter.
+
+```
+[sortby[<order>],[<place>]]
+```
+
+* ''order'': a title list specifying the order in which to sort the input list.
+* ''place'': <<.from-version "5.5.0">> (optional) controls where input titles that are missing from the <<.op order>> list are placed; specify `end` to place them after the listed titles;  Defaults to ''start''
+
+<<.operator-examples "sortby">>
