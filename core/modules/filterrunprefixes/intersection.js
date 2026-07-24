@@ -17,7 +17,7 @@ exports.intersection = function(operationSubFunction) {
 				secondRunSet = new Set(secondRunResults),
 				firstRunResults = results.toArray();
 			results.clear();
-			firstRunResults.forEach(title => {
+			firstRunResults.forEach((title) => {
 				if(secondRunSet.has(title)) {
 					results.push(title);
 				}

@@ -33,10 +33,8 @@ exports.sort = function(operationSubFunction,options) {
 			results.clear();
 			// Prepare an array of indexes to sort
 			let indexes = Array.from(inputTitles.keys());
-			indexes.sort((a,b) => {
-				return compareFn(sortKeys[a],sortKeys[b]);
-			});
-			indexes.forEach(index => {
+			indexes.sort((a,b) => compareFn(sortKeys[a],sortKeys[b]));
+			indexes.forEach((index) => {
 				results.push(inputTitles[index]);
 			});
 		}
