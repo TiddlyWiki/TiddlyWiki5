@@ -1,0 +1,38 @@
+services:
+  tiddlywiki:
+    build:
+      context: .
+      args:
+        NODE_LTS_VERSION: "24"
+    # Or use the published image:
+    # image: tiddlywiki/tiddlywiki:latest
+    init: true          # Docker's built-in init process for proper signal handling
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      # Named volume (default, Docker manages storage):
+      - tiddlywiki-data:/data
+      # Bind mount (map a host directory):
+      # - ./my-wiki:/data
+      # If using bind mount, the container runs as UID/GID 1000 by default.
+      # On most Linux systems this matches the first non-root user, so no extra
+      # chown is needed. If your host user has a different UID, either:
+      #   mkdir -p ./my-wiki && chown 1000:1000 ./my-wiki
+      # or override at runtime:
+      #   user: "$(id -u):$(id -g)"
+    environment:
+      TIDDLYWIKI_PORT: "8080"
+      TIDDLYWIKI_HOST: "0.0.0.0"
+      # Authentication — set these (or use a .env file)
+      TIDDLYWIKI_USERNAME: ""
+      TIDDLYWIKI_PASSWORD: ""
+      # Access control:
+      #   (anon)           — all users including anonymous
+      #   (authenticated)  — any logged-in user
+      #   (admin)          — admin users only
+      TIDDLYWIKI_READERS: "(anon)"
+      TIDDLYWIKI_WRITERS: "(authenticated)"
+    restart: unless-stopped
+
+volumes:
+  tiddlywiki-data:
