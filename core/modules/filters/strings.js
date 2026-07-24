@@ -93,11 +93,11 @@ function diffLineWordMode(text1,text2,mode) {
 
 exports.makepatches = function(source, operator, options) {
 	const suffixes = operator.suffixes || [],
-			[modeArg = [], formatArg = []] = suffixes,
-			modeSuffix = modeArg[0] || operator.suffix || "",
-			mode = ["lines", "words"].includes(modeSuffix) ? modeSuffix : "",
-			isJson = formatArg[0] === "json",
-			results = [];
+		[modeArg = [], formatArg = []] = suffixes,
+		modeSuffix = modeArg[0] || operator.suffix || "",
+		mode = ["lines", "words"].includes(modeSuffix) ? modeSuffix : "",
+		isJson = formatArg[0] === "json",
+		results = [];
 
 	source((tiddler, title) => {
 		if (isJson) {
