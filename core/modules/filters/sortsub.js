@@ -32,9 +32,7 @@ exports.sortsub = function(source,operator,options) {
 	let indexes = Array.from(inputTitles.keys());
 	// Sort the indexes
 	let compareFn = $tw.utils.makeCompareFunction(operator.suffix,{defaultType: "string",invert: operator.prefix === "!"});
-	indexes = indexes.sort((a,b) => {
-		return compareFn(sortKeys[a],sortKeys[b]);
-	});
+	indexes = indexes.sort((a,b) => compareFn(sortKeys[a],sortKeys[b]));
 	// Make the results array in order
 	let results = [];
 	$tw.utils.each(indexes,function(index) {
