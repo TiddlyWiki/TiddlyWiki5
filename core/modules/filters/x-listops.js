@@ -12,7 +12,7 @@ Extended filter operators to manipulate the current list.
 /*
 	Fetch titles from the current list
 */
-const prepare_results = source => {
+const prepare_results = (source) => {
 	const results = [];
 	source((tiddler,title) => results.push(title));
 	return results;
