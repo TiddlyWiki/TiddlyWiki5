@@ -165,12 +165,13 @@ exports.sortby = function (source, operator) {
 		return results;
 	}
 	var lookup = $tw.utils.parseStringArray(operator.operand, "true");
-	var maxIndex = lookup.length;
+	// Second operand "end" places unlisted titles last; default is first
+	var unlistedIndex = operator.operands[1] === "end" ? lookup.length : -1;
 	results.sort(function (a, b) {
 		var indexA = lookup.indexOf(a);
 		var indexB = lookup.indexOf(b);
-		if(indexA === -1) { indexA = maxIndex; }
-		if(indexB === -1) { indexB = maxIndex; }
+		if(indexA === -1) { indexA = unlistedIndex; }
+		if(indexB === -1) { indexB = unlistedIndex; }
 		return indexA - indexB;
 	});
 	return results;
