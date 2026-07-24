@@ -25,13 +25,11 @@ exports.suffix = function(source,operator,options) {
 
 	const caseInsensitive = suffixes.indexOf("caseinsensitive") !== -1,
 		negate = operator.prefix === "!",
-		operand = caseInsensitive ? operator.operand.toLowerCase() : operator.operand,
-		operandLength = operand.length;
+		operand = caseInsensitive ? operator.operand.toLowerCase() : operator.operand;
 
 	source((tiddler,title) => {
 		const value = caseInsensitive ? title.toLowerCase() : title,
-			matches = value.substr(-operandLength) === operand;
-
+			matches = value.endsWith(operand);
 		if(negate ? !matches : matches) {
 			results.push(title);
 		}

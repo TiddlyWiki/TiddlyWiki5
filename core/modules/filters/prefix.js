@@ -22,12 +22,9 @@ exports.prefix = function(source,operator,options) {
 		operator.operand.toLowerCase() :
 		operator.operand;
 
-	const operandLength = operand.length;
-
 	source((tiddler,title) => {
 		const value = caseInsensitive ? title.toLowerCase() : title,
-			matches = value.substr(0,operandLength) === operand;
-
+			matches = value.startsWith(operand);
 		if(negate ? !matches : matches) {
 			results.push(title);
 		}
