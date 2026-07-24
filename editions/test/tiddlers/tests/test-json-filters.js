@@ -174,19 +174,19 @@ describe("json filter tests", function() {
 	});
 
 	it("should support the makepatches operator with json output", function() {
-        expect(wiki.filterTiddlers("[[The quick brown fox]makepatches::json[The fast brown fox]]")).toEqual([
-            '[{"type":"equal","text":"The "},{"type":"delete","text":"quick"},{"type":"insert","text":"fast"},{"type":"equal","text":" brown fox"}]'
-        ]);
+		expect(wiki.filterTiddlers("[[The quick brown fox]makepatches::json[The fast brown fox]]")).toEqual([
+			'[{"type":"equal","text":"The "},{"type":"delete","text":"quick"},{"type":"insert","text":"fast"},{"type":"equal","text":" brown fox"}]'
+		]);
 
-        expect(wiki.filterTiddlers("[[The quick brown fox]makepatches:words:json[The fast brown fox]]")).toEqual([
-            '[{"type":"equal","text":"The "},{"type":"delete","text":"quick "},{"type":"insert","text":"fast "},{"type":"equal","text":"brown fox"}]'
-        ]);
+		expect(wiki.filterTiddlers("[[The quick brown fox]makepatches:words:json[The fast brown fox]]")).toEqual([
+			'[{"type":"equal","text":"The "},{"type":"delete","text":"quick "},{"type":"insert","text":"fast "},{"type":"equal","text":"brown fox"}]'
+		]);
 
-        // Safely ignores missing/invalid second suffix and returns a standard patch string instead of JSON
-        expect(wiki.filterTiddlers("[[The quick brown fox]makepatches:words[The fast brown fox]]")[0]).not.toContain(
-            '"type":"equal"'
-        );
-    });
+		// Safely ignores missing/invalid second suffix and returns a standard patch string instead of JSON
+		expect(wiki.filterTiddlers("[[The quick brown fox]makepatches:words[The fast brown fox]]")[0]).not.toContain(
+			'"type":"equal"'
+		);
+	});
 
 });
 
