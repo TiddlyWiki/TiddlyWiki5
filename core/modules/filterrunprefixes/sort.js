@@ -20,7 +20,7 @@ exports.sort = function(operationSubFunction,options) {
 				inputTitles = results.toArray(),
 				sortKeys = [],
 				compareFn = $tw.utils.makeCompareFunction(sortType,{defaultType: "string", invert:invert, isCaseSensitive:isCaseSensitive});
-			results.each(title => {
+			results.each((title) => {
 				const key = operationSubFunction(
 					options.wiki.makeTiddlerIterator([title]),
 					widget.makeFakeWidgetWithVariables({
