@@ -9,39 +9,143 @@ title: $:/PaletteEditor
 \end
 \define colour-tooltip(showhide) $showhide$ editor for $(newColourName)$ 
 
-\define resolve-colour(macrocall)
-\import $:/core/macros/utils
-\whitespace trim
-<$wikify name="name" text="""$macrocall$""">
-<<name>>
-</$wikify>
+\function tf.palette.get.colour(index) [{$:/palette}getindex<index>] :else[{$:/palette}get[palette-import]getindex<index>]
+
+\procedure tp-colour-widget-regexp() \bname=(?:"""([^"]*)"""|'''([^']*)'''|"([^"]*)"|'([^']*)'|([^␠/>]+))
+\procedure tp-colour-macro-regexp() <<colou?r␠(?:name(?:=|:)␠*)?(?:"""([^"]*)"""|'''([^']*)'''|"([^"]*)"|'([^']*)'|([^␠>]+))>>
+\procedure tp-colour-filter-regexp() \[tf\.colour\[([^\]]+)\]\]
+\procedure tp-colour-filters-regexp() colour-(?:best-contrast|composite|contrast|darken|get-oklch|interpolate|lighten|set-(?:alpha|oklch))(?![\w-])
+
+\function tf.palette.colours.get.colour(index) [[$:/temp/palette-colours]getindex<index>]
+
+\function tf.resolve.colour.name(name)
+[tf.extract.colour.step<name>] =>next
+[<next>match<name>then<next>]
+:else[tf.resolve.colour.name<next>]
+\end tf.resolve.colour.name
+
+\function tf.extract.colour.step(name)
+[tf.palette.get.colour<name>is[colour]then<name>] =>valueA
+[tf.palette.get.colour<name>split[ ]join[␠]] =>value
+[[value]is[variable]then{$:/palette}getindex<value>is[colour]then<value>] =>valueB
+[[value]is[variable]then{$:/palette}get[palette-import]getindex<value>is[colour]then<value>] =>valueC
+[[value]is[variable]then<value>extractregexp<tp-colour-macro-regexp>] =>valueD
+[[value]is[variable]then<value>extractregexp<tp-colour-widget-regexp>] =>valueE
+[[value]is[variable]then<value>extractregexp<tp-colour-filter-regexp>] =>valueF
+[<valueA>!is[blank]else<valueB>!is[blank]else<valueC>!is[blank]else<valueD>!is[blank]else<valueE>!is[blank]else<valueF>!is[blank]] =>value
+[<value>!is[blank]else<name>]
+\end tf.extract.colour.step
+
+\function tf.resolve.colour.name.wrapper() [tf.resolve.colour.name<colourName>]
+
+\function tf.palette.get.colour.wrapper() [tf.palette.get.colour<colourName>]
+
+\procedure tp-paletteeditor-input-actions()
+<%if [[$:/temp/palette-colours]getindex<tf.resolve.colour.name.wrapper>is[colour]] %>
+<$action-setfield $index=<<colourName>> $value={{{ [<colourEditTiddler>getindex<colourName>] }}}/>
+<% endif %>
+\end
+
+\procedure tp-paletteeditor-resolved-input-actions()
+<%if [<colourEditTiddler>get[text]is[colour]] %>
+<$action-setfield $index=<<colourName>> $value={{{ [<colourEditTiddler>get[text]] }}}/>
+<% endif %>
+\end
+
+\procedure tp-paletteeditor-colour-input-actions()
+<$action-setfield $tiddler=<<colourEditTiddler>> text=<<actionValue>>/>
+<$action-setfield $tiddler=<<colourRefreshTitle>> text="yes"/>
+\end
+
+\procedure tp-paletteeditor-dropdown-button-show-actions()
+<$action-setfield $tiddler=<<colourEditTiddler>> text={{{ [tf.palette.colours.get.colour<colourName>] }}}/>
+<$action-setfield $tiddler=<<state>> text="show"/>
+\end
+
+\procedure tp-paletteeditor-dropdown-button-hide-actions()
+<$action-deletetiddler $tiddler=<<state>>/>
+<$action-deletetiddler $tiddler=<<colourEditTiddler>>/>
 \end
 
 \define delete-colour-index-actions() <$action-setfield $index=<<colourName>>/>
 \define palette-manager-colour-row-segment()
 \whitespace trim
-<$edit-text index=<<colourName>> tag="input" placeholder=<<edit-colour-placeholder>> default=""/>
+<$let colourEditTiddler="$:/temp/palette-colours/copy">
+<$edit-text
+	tiddler=<<colourEditTiddler>>
+	index=<<colourName>>
+	tag="input"
+	placeholder=<<edit-colour-placeholder>>
+	default=""
+	inputActions=<<tp-paletteeditor-input-actions>>
+/>
 <br>
-<$edit-text index=<<colourName>> type="color" tag="input" class="tc-palette-manager-colour-input"/>
-<$list filter="[<currentTiddler>getindex<colourName>removeprefix[<<]removesuffix[>>]] [<currentTiddler>getindex<colourName>removeprefix[<$]removesuffix[/>]]" variable="ignore">
-<$set name="state" value={{{ [[$:/state/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>] }}}>
-<$wikify name="newColourName" text="""<$macrocall $name="resolve-colour" macrocall={{{ [<currentTiddler>getindex<colourName>] }}}/>""">
+<$let rawValue={{{ [[$:/temp/palette-colours/copy]getindex<colourName>] }}} colourEditTiddler={{{ [tf.resolve.colour.name<colourName>addprefix[/]addprefix<currentTiddler>addprefix[$:/temp/paletteeditor/input/]] }}} colourRefreshTitle={{{ [<colourEditTiddler>addsuffix[/refresh]] }}}>
+<%if [{$:/palette}getindex<tf.resolve.colour.name.wrapper>is[colour]] [{$:/palette}get[palette-import]getindex<tf.resolve.colour.name.wrapper>is[colour]] %>
+<$edit-text
+	tiddler={{{ [{$:/palette}getindex<colourName>then{$:/palette}] :else[{$:/palette}get[palette-import]] }}}
+	index={{{ [tf.resolve.colour.name<colourName>] }}}
+	type="color"
+	tag="input"
+	class="tc-palette-manager-colour-input"
+	inputActions=<<tp-paletteeditor-colour-input-actions>>
+/>
+<%elseif [<colourName>!prefix[?]then<rawValue>!match[]] %>
+<$let bgColour={{{ [tf.palette.colours.get.colour<colourName>] }}}>
+<%if [<bgColour>is[colour]] %>
+<span
+	style.background-color=<<bgColour>>
+	style.height="2em"
+	style.width="100%"
+	style.border-color=<<colour foreground>>
+	style.border-width="1px"
+	style.border-style="solid"
+	style.border-radius="2px"
+	style.margin="3px 0"
+	class="tc-palette-manager-colour-input"
+	style.display="flex"
+	style.justify-content="center"
+	style.line-height="1.85em"
+>
+<<lingo Preview/Hint>>
+</span>
+<% endif %>
+</$let>
+<% endif %>
+<%if [<rawValue>!is[colour]then<rawValue>!regexp<tp-colour-filters-regexp>subfilter<tf.palette.get.colour.wrapper>is[colour]tf.resolve.colour.name<colourName>!match<colourName>] %>
+<$let state={{{ [[$:/state/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>] }}} newColourName={{{ [[$:/temp/palette-colours]getindex<tf.resolve.colour.name.wrapper>is[colour]] :then[tf.resolve.colour.name<colourName>else<colourName>] }}} colourEditTiddler={{{ [[$:/temp/paletteeditor/input/]addsuffix<currentTiddler>addsuffix[/]addsuffix<newColourName>] }}}>
 <$reveal state=<<state>> type="nomatch" text="show">
-<$button tooltip=<<colour-tooltip show>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" set=<<state>> setTo="show">{{$:/core/images/down-arrow}}<$text text=<<newColourName>> class="tc-small-gap-left"/></$button><br>
+<$button tooltip=<<colour-tooltip show>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible tc-small-gap-right" actions=<<tp-paletteeditor-dropdown-button-show-actions>>>{{$:/core/images/down-arrow}}<$text text=<<newColourName>>/></$button><br>
 </$reveal>
 <$reveal state=<<state>> type="match" text="show">
-<$button tooltip=<<colour-tooltip hide>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" actions="""<$action-deletetiddler $tiddler=<<state>>/>""">{{$:/core/images/up-arrow}}<$text text=<<newColourName>> class="tc-small-gap-left"/></$button><br>
+<$button tooltip=<<colour-tooltip hide>> aria-label=<<colour-tooltip hide>> class="tc-btn-invisible tc-small-gap-right" actions=<<tp-paletteeditor-dropdown-button-hide-actions>>>{{$:/core/images/up-arrow}}<$text text=<<newColourName>>/></$button><br>
 </$reveal>
 <$reveal state=<<state>> type="match" text="show">
-<$set name="colourName" value=<<newColourName>>>
+<$let colourName=<<newColourName>> colourRefreshTitle={{{ [[$:/temp/paletteeditor/input/]addsuffix<currentTiddler>addsuffix[/]addsuffix<newColourName>addsuffix[/refresh]] }}}>
 <br>
-<<palette-manager-colour-row-segment>>
+<$edit-text
+	tiddler=<<colourEditTiddler>>
+	tag="input"
+	placeholder=<<edit-colour-placeholder>>
+	default=""
+	inputActions=<<tp-paletteeditor-resolved-input-actions>>
+	refreshTitle=<<colourRefreshTitle>>
+/>
+<br/>
+<$edit-text
+	index=<<newColourName>>
+	type="color"
+	tag="input"
+	class="tc-palette-manager-colour-input"
+	inputActions=<<tp-paletteeditor-colour-input-actions>>
+/>
 <br><br>
-</$set>
+</$let>
 </$reveal>
-</$wikify>
-</$set>
-</$list>
+</$let>
+<% endif %>
+</$let>
+</$let>
 \end
 
 \define palette-manager-colour-row()
