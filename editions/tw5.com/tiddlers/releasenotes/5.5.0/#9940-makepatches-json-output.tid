@@ -1,0 +1,12 @@
+change-category: filters
+change-type: enhancement
+created: 20260724080519370
+description: The makepatches operator can now output structured JSON
+github-contributors: DesignThinkerer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9940
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9940
+type: text/vnd.tiddlywiki
+
+* The [[makepatches|makepatches Operator]] operator now supports a `:json` suffix (e.g., `makepatches::json`) that outputs a structured JSON array of the differences, enabling easier and robust parsing with WikiText

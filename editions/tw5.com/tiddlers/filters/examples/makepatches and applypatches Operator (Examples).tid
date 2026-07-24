@@ -1,5 +1,5 @@
 created: 20230304160331362
-modified: 20230304160332927
+modified: 20260724082228670
 tags: [[makepatches Operator]] [[applypatches Operator]] [[Operator Examples]]
 title: makepatches and applypatches Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -39,5 +39,13 @@ The `lines` mode doesn't work as well in this application:
 <<.operator-example 7 "[{Hamlet##Shakespeare-old}makepatches:lines{Hamlet##Shakespeare-new}] :map[{Hamlet##Trekkie-old}applypatches<currentTiddler>]">>
 
 It is better suited as a very fast algorithm to detect line-wise incremental changes to texts and store only the changes instead of multiple versions of the whole texts.
+
+The `json` suffix outputs a structured JSON array representing the differences instead of a patch string. To use the JSON output with the default character mode, skip the first suffix with a double colon (`::`).
+
+<<.operator-example 8 "[{Hamlet##Shakespeare-old}makepatches::json{Hamlet##Shakespeare-new}]">>
+
+The `json` suffix can also be combined with the `words` or `lines` modes:
+
+<<.operator-example 9 "[{Hamlet##Shakespeare-old}makepatches:words:json{Hamlet##Shakespeare-new}]">>
 
 </div>
