@@ -14,6 +14,41 @@ var widgetClass = require("$:/core/modules/widgets/widget.js").widget;
 /* Maximum permitted filter recursion depth */
 var MAX_FILTER_DEPTH = 300;
 
+
+function parseFilterSuffixes(suffix) {
+	var suffixes = [];
+
+	$tw.utils.each(suffix.split(":"),function(subsuffix) {
+		var entries = [];
+
+		$tw.utils.each(subsuffix.split(","),function(entry) {
+			entry = $tw.utils.trim(entry);
+			if(entry) {
+				var isVariable =
+					entry.startsWith("<") &&
+					entry.endsWith(">") &&
+					entry.indexOf(">",1) === entry.length - 1;
+
+				if(isVariable) {
+					entries.push({
+						text: entry.substring(1,entry.length - 1),
+						variable: true
+					});
+				} else {
+					entries.push({
+						text: entry,
+						variable: false
+					});
+				}
+			}
+		});
+
+		suffixes.push(entries);
+	});
+
+	return suffixes;
+}
+
 /*
 Parses an operation (i.e. a run) within a filter string
 	operators: Array of array of operator nodes into which results should be inserted
@@ -34,12 +69,35 @@ function parseFilterOperation(operators,filterString,p) {
 		if(filterString.charAt(p) === "!") {
 			operator.prefix = filterString.charAt(p++);
 		}
-		// Get the operator name
-		nextBracketPos = filterString.substring(p).search(/[\[\{<\/\(]/);
-		if(nextBracketPos === -1) {
+
+		// Find the end of the operator name. A "<" only starts an operand
+		// unless it is immediately preceded by ":" or ",", in which case
+		// it is a variable within a suffix.
+		nextBracketPos = p;
+		while(nextBracketPos < filterString.length) {
+			const ch = filterString[nextBracketPos];
+
+			if(ch === "<") {
+				const prev = filterString[nextBracketPos - 1];
+				if(prev === ":" || prev === ",") {
+					nextBracketPos = filterString.indexOf(">",nextBracketPos);
+					if(nextBracketPos === -1) {
+						throw "Missing > in filter expression";
+					}
+				} else {
+					break;
+				}
+			} else if(ch === "[" || ch === "{" || ch === "(" || ch === "/") {
+				break;
+			}
+
+			nextBracketPos++;
+		}
+
+		if(nextBracketPos >= filterString.length) {
 			throw "Missing [ in filter expression";
 		}
-		nextBracketPos += p;
+
 		var bracket = filterString.charAt(nextBracketPos);
 		operator.operator = filterString.substring(p,nextBracketPos);
 		// Any suffix?
@@ -48,17 +106,13 @@ function parseFilterOperation(operators,filterString,p) {
 			// The raw suffix for older filters
 			operator.suffix = operator.operator.substring(colon + 1);
 			operator.operator = operator.operator.substring(0,colon) || "field";
+
 			// The processed suffix for newer filters
-			operator.suffixes = [];
-			$tw.utils.each(operator.suffix.split(":"),function(subsuffix) {
-				operator.suffixes.push([]);
-				$tw.utils.each(subsuffix.split(","),function(entry) {
-					entry = $tw.utils.trim(entry);
-					if(entry) {
-						operator.suffixes[operator.suffixes.length - 1].push(entry); 
-					}
-				});
-			});
+			if(operator.suffix) {
+				operator.suffixes = parseFilterSuffixes(operator.suffix);
+			} else {
+				operator.suffixes = [[]];
+			}
 		}
 		// Empty operator means: title
 		else if(operator.operator === "") {
@@ -91,8 +145,7 @@ function parseFilterOperation(operators,filterString,p) {
 						// DEPRECATION WARNING
 						console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
 						nextBracketPos = p + rex.lastIndex - 1;
-					}
-					else {
+					} else {
 						throw "Unterminated regular expression in filter expression";
 					}
 					break;
@@ -263,6 +316,41 @@ exports.compileFilter = function(filterString) {
 	var operationFunctions = [];
 	// Step through the operations
 	var self = this;
+
+	var resolveSuffixes = function(suffixes,widget,source) {
+		if(!suffixes) {
+			return undefined;
+		}
+
+		var resolved = [];
+
+		$tw.utils.each(suffixes,function(subsuffix) {
+			var entries = [];
+
+			$tw.utils.each(subsuffix,function(entry) {
+				if(entry.variable) {
+					var varTree = $tw.utils.parseFilterVariable(entry.text);
+					entries.push(
+						widgetClass.evaluateVariable(
+							widget,
+							varTree.name,
+							{
+								params: varTree.params,
+								source: source
+							}
+						)[0] || ""
+					);
+				} else {
+					entries.push(entry.text);
+				}
+			});
+
+			resolved.push(entries);
+		});
+
+		return resolved;
+	};
+
 	$tw.utils.each(filterParseTree,function(operation) {
 		// Create a function for the chain of operators in the operation
 		var operationSubFunction = function(source,widget) {
@@ -312,6 +400,15 @@ exports.compileFilter = function(filterString) {
 					isMultiValueOperand.push(!!operand.isMultiValueOperand);
 				});
 
+				let resolvedSuffixes = resolveSuffixes(operator.suffixes,widget,source);
+				let singleSuffix = operator.suffixes &&
+					(operator.suffixes.length === 1) &&
+					(operator.suffixes[0].length === 1) &&
+					operator.suffixes[0][0];
+				if(singleSuffix && singleSuffix.variable) {
+					operator.suffix = resolvedSuffixes[0][0];
+				}
+
 				// Invoke the appropriate filteroperator module
 				results = operatorFunction(accumulator,{
 					operator: operator.operator,
@@ -321,7 +418,7 @@ exports.compileFilter = function(filterString) {
 					isMultiValueOperand: isMultiValueOperand,
 					prefix: operator.prefix,
 					suffix: operator.suffix,
-					suffixes: operator.suffixes,
+					suffixes: resolvedSuffixes,
 					regexp: operator.regexp
 				},{
 					wiki: self,
