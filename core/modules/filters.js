@@ -70,9 +70,9 @@ function parseFilterOperation(operators,filterString,p) {
 			operator.prefix = filterString.charAt(p++);
 		}
 
-		// Find the end of the operator name. A "<" only starts an operand
-		// unless it is immediately preceded by ":" or ",", in which case
-		// it is a variable within a suffix.
+		// Find the end of the operator name.
+		//  A "<" starts an operand only if it is not immediately preceded by ":" or ",",
+		// otherwise it is a variable within a suffix.
 		nextBracketPos = p;
 		while(nextBracketPos < filterString.length) {
 			const ch = filterString[nextBracketPos];
