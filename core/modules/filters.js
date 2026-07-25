@@ -77,12 +77,11 @@ function parseFilterOperation(operators,filterString,p) {
 		while(nextBracketPos < filterString.length) {
 			const ch = filterString[nextBracketPos];
 
-			if(ch === "<" || ch === "{") {
+			if(ch === "<") {
 				const prev = filterString[nextBracketPos - 1];
 
 				if(prev === ":" || prev === ",") {
-					const close = ch === "<" ? ">" : "}";
-					const end = filterString.indexOf(close,nextBracketPos);
+					const end = filterString.indexOf(">",nextBracketPos);
 
 					if(end === -1) {
 						break;
@@ -90,7 +89,15 @@ function parseFilterOperation(operators,filterString,p) {
 
 					// Only treat as suffix if there is an operand after it
 					const after = filterString.charAt(end + 1);
-					if(after === "[" || after === "{" || after === "(" || after === "/" || after === "<") {
+					if(
+						after === ":" ||
+						after === "," ||
+						after === "[" ||
+						after === "{" ||
+						after === "(" ||
+						after === "/" ||
+						after === "<"
+					) {
 						nextBracketPos = end;
 					} else {
 						break;
