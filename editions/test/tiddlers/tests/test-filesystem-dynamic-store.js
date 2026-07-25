@@ -64,7 +64,9 @@ if($tw.node) {
 				id: storeDir,
 				directory: storeDir,
 				saveFilter: "[type[text/x-markdown]]",
-				watch: true,
+				// The watcher callback is exercised through scheduleFileEvent()
+				// below so the tests do not rely on platform filesystem events.
+				watch: false,
 				debounce: 40,
 				filesRegExp: ".*\\.tid$",
 				searchSubdirectories: false,
@@ -172,6 +174,90 @@ if($tw.node) {
 			adaptor.processFileEvent(store,filepath,"change");
 			adaptor.getUpdatedTiddlers({},function(err,updates) {
 				expect(updates.modifications).not.toContain("echo");
+				done();
+			});
+		});
+
+		it("suppresses a delayed self-write echo after the in-memory tiddler has changed", function(done) {
+			var store = $tw.boot.dynamicStores[0],
+				filepath = path.join(storeDir,"typing.tid");
+			fs.writeFileSync(filepath,"title: typing\ntype: text/x-markdown\n\nSaved\n");
+			adaptor.recordFileWrite({
+				filepath: filepath,
+				hasMetaFile: false
+			});
+			// This is the data-loss race: a newer keystroke reaches the wiki
+			// before the watcher reports the older version just saved to disk.
+			wiki.addTiddler(new $tw.Tiddler({
+				title: "typing",
+				type: "text/x-markdown",
+				text: "Newer unsaved edit"
+			}));
+			adaptor.scheduleFileEvent(store,filepath,"change");
+			// chokidar can deliver more than one notification for a write.
+			adaptor.scheduleFileEvent(store,filepath,"change");
+			setTimeout(function() {
+				adaptor.getUpdatedTiddlers({},function(err,updates) {
+					expect(err).toBeFalsy();
+					expect(updates.modifications).not.toContain("typing");
+					done();
+				});
+			},store.debounce + 20);
+		});
+
+		it("reloads a tiddler when its companion metadata file is deleted", function(done) {
+			var store = $tw.boot.dynamicStores[0],
+				filepath = path.join(storeDir,"sidecar.txt"),
+				metaPath = filepath + ".meta";
+			fs.writeFileSync(filepath,"body");
+			fs.writeFileSync(metaPath,"title: sidecar\ncaption: Before\n");
+			$tw.boot.files.sidecar = {
+				filepath: filepath,
+				type: "text/plain",
+				hasMetaFile: true,
+				isEditableFile: true,
+				dynamicStoreId: store.id
+			};
+			wiki.addTiddler(new $tw.Tiddler({
+				title: "sidecar",
+				caption: "Before",
+				text: "body"
+			}));
+			fs.unlinkSync(metaPath);
+			adaptor.scheduleFileEvent(store,metaPath,"unlink");
+			setTimeout(function() {
+				adaptor.getUpdatedTiddlers({},function(err,updates) {
+					expect(err).toBeFalsy();
+					expect(updates.modifications).toContain("sidecar");
+					expect(updates.deletions).not.toContain("sidecar");
+					adaptor.loadTiddler("sidecar",function(err,fields) {
+						expect(err).toBeFalsy();
+						expect(fields.title).toBe("sidecar");
+						expect(fields.caption).toBeUndefined();
+						expect(fields.text).toBe("body");
+						done();
+					});
+				});
+			},store.debounce + 20);
+		});
+
+		it("treats an unlink notification as a change when the file has been recreated", function(done) {
+			var store = $tw.boot.dynamicStores[0],
+				filepath = path.join(storeDir,"atomic.tid");
+			$tw.boot.files.atomic = {
+				filepath: filepath,
+				type: "application/x-tiddler",
+				hasMetaFile: false,
+				isEditableFile: true,
+				dynamicStoreId: store.id
+			};
+			wiki.addTiddler(new $tw.Tiddler({title: "atomic", text: "Before"}));
+			fs.writeFileSync(filepath,"title: atomic\n\nAfter\n");
+			adaptor.processFileEvent(store,filepath,"unlink");
+			adaptor.getUpdatedTiddlers({},function(err,updates) {
+				expect(err).toBeFalsy();
+				expect(updates.modifications).toContain("atomic");
+				expect(updates.deletions).not.toContain("atomic");
 				done();
 			});
 		});

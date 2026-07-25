@@ -25,6 +25,11 @@ function FileSystemAdaptor(options) {
 	this.modifications = Object.create(null);
 	this.deletions = Object.create(null);
 	this.pendingTimers = Object.create(null);
+	// Fingerprints of files written by this adaptor. Watch notifications are
+	// asynchronous, so comparing the file with the current wiki tiddler is not
+	// sufficient: the tiddler may already contain a newer edit by the time the
+	// notification arrives.
+	this.lastWriteStats = Object.create(null);
 	this.watchers = [];
 	this.setupWatchers();
 	// Only advertise getUpdatedTiddlers (and so opt into syncer polling) when
@@ -149,10 +154,70 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 				if(err) {
 					return callback(err);
 				}
+				self.recordFileWrite(fileInfo);
 				return callback(null,fileInfo);
 			});
 		});
 	});
+};
+
+/*
+Record the mtime and size of files written by the adaptor so that the
+corresponding asynchronous watcher notifications can be discarded without
+comparing them with a potentially newer in-memory tiddler.
+*/
+FileSystemAdaptor.prototype.recordFileWrite = function(fileInfo) {
+	var self = this;
+	if(!fileInfo || !fileInfo.filepath) {
+		return;
+	}
+	[fileInfo.filepath,fileInfo.hasMetaFile ? fileInfo.filepath + ".meta" : null].forEach(function(filepath) {
+		if(!filepath) {
+			return;
+		}
+		try {
+			var stat = fs.statSync(filepath);
+			self.lastWriteStats[path.resolve(filepath)] = {
+				mtime: stat.mtimeMs,
+				size: stat.size,
+				expires: Date.now() + 30000
+			};
+		} catch(e) {
+			// The companion file may have been removed while the save completed.
+		}
+	});
+};
+
+/*
+Return true when a watcher event describes the exact file version most
+recently written by this adaptor.
+*/
+FileSystemAdaptor.prototype.isSelfWriteEvent = function(filepath,eventType) {
+	if(eventType === "unlink") {
+		return false;
+	}
+	var resolvedPath = path.resolve(filepath),
+		lastWrite = this.lastWriteStats[resolvedPath];
+	if(!lastWrite) {
+		return false;
+	}
+	if(Date.now() > lastWrite.expires) {
+		delete this.lastWriteStats[resolvedPath];
+		return false;
+	}
+	try {
+		var stat = fs.statSync(resolvedPath);
+		if(stat.mtimeMs === lastWrite.mtime && stat.size === lastWrite.size) {
+			// Keep the fingerprint for duplicate notifications of the same
+			// write. It expires quickly and is replaced by the next save.
+			return true;
+		}
+		delete this.lastWriteStats[resolvedPath];
+		return false;
+	} catch(e) {
+		delete this.lastWriteStats[resolvedPath];
+		return false;
+	}
 };
 
 /*
@@ -168,7 +233,10 @@ FileSystemAdaptor.prototype.loadTiddler = function(title,callback) {
 	}
 	var loaded;
 	try {
-		loaded = $tw.loadTiddlersFromFile(fileInfo.filepath,{});
+		// The companion .meta file may have been removed since boot. Preserve
+		// the known tiddler identity while allowing all other metadata fields
+		// to be removed by the reload.
+		loaded = $tw.loadTiddlersFromFile(fileInfo.filepath,{title: title});
 	} catch(e) {
 		return callback(e);
 	}
@@ -238,6 +306,7 @@ that resolves once chokidar has fully shut down, for clean teardown in tests.
 FileSystemAdaptor.prototype.close = function() {
 	$tw.utils.each(this.pendingTimers,function(timer) { clearTimeout(timer); });
 	this.pendingTimers = Object.create(null);
+	this.lastWriteStats = Object.create(null);
 	var closes = (this.watchers || []).map(function(w) {
 		try { return w.close(); } catch(e) { return null; }
 	});
@@ -294,13 +363,18 @@ FileSystemAdaptor.prototype.setupWatcher = function(chokidar,store) {
 
 FileSystemAdaptor.prototype.scheduleFileEvent = function(store,filepath,eventType) {
 	var self = this,
-		key = filepath,
 		delay = store.debounce || 400;
+	if(this.isSelfWriteEvent(filepath,eventType)) {
+		return;
+	}
 	// A .meta change should trigger re-read of its companion file
 	var targetPath = filepath;
 	if(/\.meta$/.test(filepath)) {
 		targetPath = filepath.replace(/\.meta$/,"");
 	}
+	// Coalesce body and companion metadata notifications, as well as
+	// unlink/add pairs emitted for atomic replacement of the same file.
+	var key = targetPath;
 	if(this.pendingTimers[key]) {
 		clearTimeout(this.pendingTimers[key]);
 	}
@@ -322,7 +396,9 @@ FileSystemAdaptor.prototype.processFileEvent = function(store,filepath,eventType
 	var self = this;
 	// Deletion: look up any titles that mapped to this filepath and queue deletion.
 	// Do NOT call wiki.deleteTiddler here — the syncer's SyncFromServerTask does that.
-	if(eventType === "unlink" || !fs.existsSync(filepath)) {
+	// Test actual existence after the debounce delay. Editors and git commonly
+	// replace files with an unlink/rename followed by an add.
+	if(!fs.existsSync(filepath)) {
 		var deletedTitles = [];
 		$tw.utils.each(this.boot.files,function(info,title) {
 			if(info && info.filepath === filepath) {
@@ -340,9 +416,19 @@ FileSystemAdaptor.prototype.processFileEvent = function(store,filepath,eventType
 		return;
 	}
 	// Add/change: re-parse the file and queue modifications
-	var loaded;
+	var loaded,
+		previousTitles = [];
+	$tw.utils.each(this.boot.files,function(info,title) {
+		if(info && info.filepath === filepath) {
+			previousTitles.push(title);
+		}
+	});
 	try {
-		loaded = $tw.loadTiddlersFromFile(filepath,{});
+		// If a companion .meta file was removed, retain only the identity of the
+		// previously mapped tiddler. All other removed metadata fields should
+		// disappear when the tiddler is reloaded.
+		var fallbackFields = previousTitles.length === 1 ? {title: previousTitles[0]} : {};
+		loaded = $tw.loadTiddlersFromFile(filepath,fallbackFields);
 	} catch(e) {
 		this.logger.log("Failed to load tiddler file " + filepath,e.message);
 		return;
