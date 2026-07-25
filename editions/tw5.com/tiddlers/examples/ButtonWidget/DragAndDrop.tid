@@ -1,0 +1,34 @@
+title: ButtonWidget/Example/DragAndDrop
+description: Make a button draggable with dragTiddler or dragFilter
+modified: 20260724235815000
+tags: [[$:/tags/wiki-test-spec]]
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+`dragTiddler` makes the button draggable and sets the single tiddler it carries. `dragFilter` carries a list of tiddlers produced by a filter instead.
+
+Choose one of the two:
+
+* `dragTiddler` is a single tiddler title to drag
+* `dragFilter` is a filter whose results are dragged as a list
+
+Drag the button onto the drop area to see the title it carries. Drag and drop needs a desktop browser.
++
+title: Output
+
+\procedure recordDrop()
+<$action-setfield $tiddler="$:/state/dropped" text=<<actionTiddler>>/>
+\end
+
+<$button dragTiddler="HelloThere" class="tc-btn-invisible tc-tiddlylink">
+Drag me
+</$button>
+
+<$droppable actions=<<recordDrop>>>
+<div style="border: 1px dashed #999; padding: 0.5em; margin-top: 0.5em;">
+Drop the button here
+</div>
+</$droppable>
+
+Dropped title: <$text text={{$:/state/dropped}}/>

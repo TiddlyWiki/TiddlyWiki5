@@ -1,0 +1,41 @@
+title: ButtonWidget/Example/Presentation
+description: Change the rendered element and appearance with tag, class, style and disabled
+modified: 20260725003716000
+tags: [[$:/tags/wiki-test-spec]]
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Several attributes control how the button looks and which element it renders:
+
+* `tag` renders a different HTML element in place of `button`
+* `class` adds one or more CSS classes
+* `style` sets a full CSS style string
+* `disabled` set to `yes` disables the button
+
+Reach for `class` first and keep the rules in a stylesheet. One class restyles every button that uses it, follows the colour palette and stays under the user's control. A hardcoded `style` overrides the theme and has to be repeated at every button, so use it only when no class can do the job.
+
+`style` sets the whole style attribute and replaces anything a `style.*` attribute wrote before it, so do not mix the two.
++
+title: Output
+
+<$button tag="a" class="tc-tiddlylink">
+tag="a" renders a link element
+</$button>
+
+<$button class="tc-btn-big-green">
+class uses a rule from the stylesheet
+</$button>
+
+<$button disabled="yes">
+disabled="yes"
+</$button>
+
+<$button style.color="green">
+style is the last resort
+</$button>
+
+<$button style="font-weight: bold;">
+style is the last resort
+</$button>
+
