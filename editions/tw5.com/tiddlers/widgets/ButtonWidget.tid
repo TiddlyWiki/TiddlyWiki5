@@ -1,6 +1,6 @@
 caption: button
 created: 20131024141900000
-modified: 20251101091926820
+modified: 20260725015330000
 tags: Widgets TriggeringWidgets
 title: ButtonWidget
 type: text/vnd.tiddlywiki
@@ -66,4 +66,40 @@ Press me!
 </$button>
 ```
 
-''Tip:'' Set ''class'' to `tc-btn-invisible tc-tiddlylink` to have a button look like an internal link.
+! Order of execution
+
+The order of the attributes written in wikitext does ''not'' matter.
+
+A button can carry several of these attributes at once. They are not alternatives: every one that is present is used, and ''always in the order shown below''.
+
+# ActionWidgets in the button body
+# <<.attr to>>
+# <<.attr message>>, with <<.attr param>>
+# <<.attr popup>> or <<.attr popupTitle>>
+# <<.attr set>> or <<.attr setTitle>>, with <<.attr setTo>>, <<.attr setField>> and <<.attr setIndex>>
+# <<.attr actions>>
+
+<<.tip """When a button does more than one thing, put the whole behaviour in the `actions` attribute. It keeps the behaviour in one place and runs it last, after every other attribute above. A single `<$button to="HelloThere">Click Me</$button>` needs no action string.""">>
+
+Action widgets are refreshed before each one runs, so they see the results of the actions before them. Ordinary widgets wrapped around them are not. See [[ActionWidget Execution Modes]] when a value looks out of date.
+
+! Examples
+
+This button uses the <<.attr to>> attribute to navigate to the [[HelloThere]] tiddler, opening it in the story river. The optional <<.attr tooltip>> attribute sets the text shown on hover.
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button to="HelloThere" tooltip="Navigate to the HelloThere tiddler">
+Open ~HelloThere
+</$button>'/>
+
+<<.tip """Set ''class'' to `tc-btn-invisible tc-tiddlylink` to have a button look like an internal link.""">>
+
+! Interactive Examples
+
+<<<
+<$list filter="[prefix[ButtonWidget/Example/]]">
+
+; <$link/>
+: {{!!description}}
+</$list>
+<<<

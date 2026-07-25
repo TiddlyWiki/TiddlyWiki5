@@ -1,0 +1,30 @@
+title: ButtonWidget/Example/Message
+description: Send a widget message with the message and param attributes
+modified: 20260724235815000
+tags: [[$:/tags/wiki-test-spec]]
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+The `message` attribute sends a widget message when the button is clicked. The `param` attribute passes a single value with it.
+
+The two attributes work together:
+
+* `message` is the message type to send
+* `param` is the value delivered with the message
+
+A `messagecatcher` receives the message here and shows the parameter. Click the button to send it.
++
+title: Output
+
+\procedure receiveMessage()
+<$action-setfield $tiddler="$:/state/received" text=<<event-param>>/>
+\end
+
+<$messagecatcher $tm-sample-message=<<receiveMessage>>>
+<$button message="tm-sample-message" param="Hello from param">
+Send message
+</$button>
+</$messagecatcher>
+
+Received param: <$text text={{$:/state/received}}/>
