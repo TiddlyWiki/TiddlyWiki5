@@ -888,6 +888,12 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	color: <<colour tiddler-background>>;
 }
 
+.tc-drop-down a.tc-list-item-selected,
+.tc-drop-down a.tc-list-item-selected:hover {
+	background-color: <<colour primary>>;
+	color: <<colour tiddler-background>>;
+}
+
 /*
 ** Page layout
 */
@@ -1134,10 +1140,6 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-tiddler-info p {
 	margin-top: 3px;
 	margin-bottom: 3px;
-}
-
-.tc-tiddler-body p.tc-blankline {
-	min-height: 1.2em;
 }
 
 .tc-tiddler-info .tc-tab-buttons button.tc-tab-selected {
