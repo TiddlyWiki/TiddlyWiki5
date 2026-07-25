@@ -77,12 +77,23 @@ function parseFilterOperation(operators,filterString,p) {
 		while(nextBracketPos < filterString.length) {
 			const ch = filterString[nextBracketPos];
 
-			if(ch === "<") {
+			if(ch === "<" || ch === "{") {
 				const prev = filterString[nextBracketPos - 1];
+
 				if(prev === ":" || prev === ",") {
-					nextBracketPos = filterString.indexOf(">",nextBracketPos);
-					if(nextBracketPos === -1) {
-						throw "Missing > in filter expression";
+					const close = ch === "<" ? ">" : "}";
+					const end = filterString.indexOf(close,nextBracketPos);
+
+					if(end === -1) {
+						break;
+					}
+
+					// Only treat as suffix if there is an operand after it
+					const after = filterString.charAt(end + 1);
+					if(after === "[" || after === "{" || after === "(" || after === "/" || after === "<") {
+						nextBracketPos = end;
+					} else {
+						break;
 					}
 				} else {
 					break;
