@@ -15,4 +15,6 @@ A provider is a JavaScript module with `module-type: filesystemwatcher`. It expo
 
 Embedding applications can further customise the boundary with the `th-filesystem-watcher-event`, `th-filesystem-watcher-tiddler`, and `th-filesystem-watcher-error` hooks. Event and tiddler hooks receive an information object and may return it with `ignore: true`. This provides a policy boundary for application-specific revision or change-count checks without coupling those concepts to the core filesystem adaptor.
 
+Transient `EBUSY`, `EPERM`, `EACCES`, and `EAGAIN` save failures are retried with configurable exponential backoff. Final save failures invoke `th-filesystem-error`, allowing an embedding application to surface a native notification.
+
 [[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/filesystem]]

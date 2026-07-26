@@ -2117,6 +2117,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,filesInfo) {
 							watcherProvider: dirSpec.dynamicStore.watcherProvider || "chokidar",
 							ignoredPathRegExp: dirSpec.dynamicStore.ignoredPathRegExp || "",
 							followSymlinks: dirSpec.dynamicStore.followSymlinks !== false,
+							writeRetry: dirSpec.dynamicStore.writeRetry || {},
 							filesRegExp: dirSpec.filesRegExp || "^.*$",
 							searchSubdirectories: !!dirSpec.searchSubdirectories,
 							isTiddlerFile: !!dirSpec.isTiddlerFile,

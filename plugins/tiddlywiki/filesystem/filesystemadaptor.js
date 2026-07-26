@@ -123,6 +123,73 @@ FileSystemAdaptor.prototype.getDynamicStoreById = function(storeId) {
 	return null;
 };
 
+FileSystemAdaptor.prototype.isFileLockError = function(error) {
+	return error && ["EBUSY","EPERM","EACCES","EAGAIN"].indexOf(error.code) !== -1;
+};
+
+FileSystemAdaptor.prototype.getWriteRetryOptions = function(fileInfo) {
+	var store = fileInfo && this.getDynamicStoreById(fileInfo.dynamicStoreId),
+		storeOptions = store && store.writeRetry || {},
+		getNumber = function(value,fallback) {
+			var number = Number(value);
+			return isFinite(number) && number >= 0 ? number : fallback;
+		};
+	return {
+		attempts: Math.max(1,Math.floor(getNumber(
+			storeOptions.attempts,
+			this.wiki.getTiddlerText("$:/config/FileSystem/WriteRetryAttempts","10")
+		))),
+		initialDelay: getNumber(
+			storeOptions.initialDelay,
+			this.wiki.getTiddlerText("$:/config/FileSystem/WriteRetryInitialDelay","50")
+		),
+		maxDelay: getNumber(
+			storeOptions.maxDelay,
+			this.wiki.getTiddlerText("$:/config/FileSystem/WriteRetryMaxDelay","2000")
+		)
+	};
+};
+
+FileSystemAdaptor.prototype.notifyFileSystemError = function(operation,title,fileInfo,error,attempts) {
+	var info = {
+		adaptor: this,
+		operation: operation,
+		title: title,
+		fileInfo: fileInfo,
+		error: error,
+		attempts: attempts
+	};
+	this.logger.alert("Filesystem " + operation + " failed for \"" + title + "\" at " + (fileInfo && fileInfo.filepath || "unknown path"),error);
+	if($tw.hooks) {
+		$tw.hooks.invokeHook("th-filesystem-error",info);
+	}
+};
+
+FileSystemAdaptor.prototype.saveTiddlerToFileWithRetry = function(tiddler,fileInfo,callback) {
+	var self = this,
+		retryOptions = this.getWriteRetryOptions(fileInfo),
+		attempt = 0;
+	var save = function() {
+		attempt++;
+		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(error,savedFileInfo) {
+			if(!error) {
+				return callback(null,savedFileInfo);
+			}
+			if(self.isFileLockError(error) && attempt < retryOptions.attempts) {
+				var delay = Math.min(
+					retryOptions.initialDelay * Math.pow(2,attempt - 1),
+					retryOptions.maxDelay
+				);
+				self.logger.log("File is locked; retrying save for \"" + tiddler.fields.title + "\" (" + attempt + "/" + retryOptions.attempts + ")");
+				return setTimeout(save,delay);
+			}
+			self.notifyFileSystemError("save",tiddler.fields.title,fileInfo,error,attempt);
+			callback(error,savedFileInfo);
+		});
+	};
+	save();
+};
+
 FileSystemAdaptor.prototype.loadDynamicStoreFile = function(store,filepath,fallbackFields) {
 	var filename = path.relative(store.directory,filepath),
 		fields = $tw.utils.extend({},store.fields || {},fallbackFields || {});
@@ -209,14 +276,17 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 		if(err) {
 			return callback(err);
 		}
-		var dynamicStoreId = fileInfo && fileInfo.dynamicStoreId || null;
-		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err,fileInfo) {
+		var requestedFileInfo = fileInfo,
+			dynamicStoreId = fileInfo && fileInfo.dynamicStoreId || null;
+		self.saveTiddlerToFileWithRetry(tiddler,fileInfo,function(err,fileInfo) {
 			if(err) {
 				if((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
-					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
-					fileInfo.writeError = true;
+					fileInfo = fileInfo || requestedFileInfo || self.boot.files[tiddler.fields.title];
 					self.setTiddlerFileInfo(tiddler.fields.title,fileInfo);
-					$tw.syncer.logger.log("Sync failed for \""+tiddler.fields.title+"\" and will be retried with encoded filepath",encodeURIComponent(fileInfo.filepath));
+					// EPERM/EACCES commonly means that another Windows process
+					// temporarily holds the file. Keep the same filepath for the
+					// syncer's later retry instead of setting writeError, which
+					// would encode the path and create a second file.
 					return callback(err);
 				} else {
 					return callback(err);

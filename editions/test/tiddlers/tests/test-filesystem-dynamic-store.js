@@ -101,6 +101,65 @@ if($tw.node) {
 			});
 		});
 
+		it("retries transient file locks with configurable exponential backoff", function(done) {
+			var attempts = 0,
+				store = $tw.boot.dynamicStores[0];
+			store.writeRetry = {attempts: 3,initialDelay: 1,maxDelay: 2};
+			spyOn($tw.utils,"saveTiddlerToFile").and.callFake(function(tiddler,fileInfo,callback) {
+				attempts++;
+				if(attempts < 3) {
+					var error = new Error("locked");
+					error.code = "EBUSY";
+					return callback(error);
+				}
+				callback(null,fileInfo);
+			});
+			spyOn($tw.utils,"cleanupTiddlerFiles").and.callFake(function(options,callback) {
+				callback(null,options.bootInfo);
+			});
+			var tiddler = new $tw.Tiddler({
+				title: "locked-note",
+				type: "text/x-markdown",
+				text: "Eventually saved"
+			});
+			wiki.addTiddler(tiddler);
+			adaptor.saveTiddler(tiddler,function(error) {
+				expect(error).toBeFalsy();
+				expect(attempts).toBe(3);
+				done();
+			},{tiddlerInfo: {}});
+		});
+
+		it("keeps the same filepath after a persistent Windows-style lock", function(done) {
+			var store = $tw.boot.dynamicStores[0];
+			store.writeRetry = {attempts: 2,initialDelay: 1,maxDelay: 1};
+			spyOn($tw.utils,"saveTiddlerToFile").and.callFake(function(tiddler,fileInfo,callback) {
+				var error = new Error("locked");
+				error.code = "EPERM";
+				error.syscall = "open";
+				callback(error);
+			});
+			var tiddler = new $tw.Tiddler({
+				title: "persistently-locked",
+				type: "text/x-markdown",
+				text: "Keep my path"
+			});
+			wiki.addTiddler(tiddler);
+			adaptor.getTiddlerFileInfo(tiddler,function(error,initialFileInfo) {
+				expect(error).toBeFalsy();
+				adaptor.saveTiddler(tiddler,function(error) {
+					expect(error).toBeTruthy();
+					expect($tw.boot.files[tiddler.fields.title].writeError).not.toBe(true);
+					adaptor.getTiddlerFileInfo(tiddler,function(error,retryFileInfo) {
+						expect(error).toBeFalsy();
+						expect(retryFileInfo.filepath).toBe(initialFileInfo.filepath);
+						expect(retryFileInfo.filepath).not.toContain("_1.");
+						done();
+					});
+				},{tiddlerInfo: {}});
+			});
+		});
+
 		it("registers a dynamic store from an in-memory filesInfo specification", function() {
 			var injectedDirectory = path.join(tmpRoot,"injected"),
 				filepath = path.join(injectedDirectory,"memory.md");
@@ -214,6 +273,19 @@ if($tw.node) {
 			expect(adaptor.getTitlesForFilepath(filepath).sort()).toEqual(["one","two"]);
 			adaptor.removeTiddlerFileInfo("one");
 			expect(adaptor.getTitlesForFilepath(filepath)).toEqual(["two"]);
+		});
+
+		it("reuses an existing filepath when its stored spelling is equivalent", function() {
+			var filepath = path.join(storeDir,"stable.tid"),
+				equivalentPath = storeDir + path.sep + "." + path.sep + "stable.tid";
+			fs.writeFileSync(filepath,"title: stable\n\nStable\n");
+			var generated = $tw.utils.generateTiddlerFilepath("stable",{
+				directory: storeDir,
+				extension: ".tid",
+				fileInfo: {filepath: equivalentPath}
+			});
+			expect(generated).toBe(filepath);
+			expect(generated).not.toContain("_1.tid");
 		});
 
 		it("applies tiddlywiki.files field rules when a watched raw file changes", function(done) {
