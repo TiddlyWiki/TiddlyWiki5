@@ -2,4 +2,17 @@ title: $:/plugins/tiddlywiki/filesystem/readme
 
 The filesystem plugin is used under Node.js to synchronise tiddler changes back to the file system. It is inert when used in the browser.
 
+! Custom dynamic store watchers
+
+The default dynamic store watcher is provided by the `chokidar` module in this plugin. An embedding application can select another provider with the `watcherProvider` property of a dynamic store.
+
+A provider is a JavaScript module with `module-type: filesystemwatcher`. It exports a `name` and a `create(options)` function. The function may return a watcher immediately or return a promise for one. The watcher must provide a `close()` function. The options passed to `create()` include:
+
+* `directory`, `searchSubdirectories`, and `followSymlinks`
+* `isIgnored(filepath,stats)`, which applies the store's file and path rules
+* `onEvent(filepath,eventType)`, where `eventType` is `change` or `unlink`
+* `onError(error)`
+
+Embedding applications can further customise the boundary with the `th-filesystem-watcher-event`, `th-filesystem-watcher-tiddler`, and `th-filesystem-watcher-error` hooks. Event and tiddler hooks receive an information object and may return it with `ignore: true`. This provides a policy boundary for application-specific revision or change-count checks without coupling those concepts to the core filesystem adaptor.
+
 [[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/filesystem]]

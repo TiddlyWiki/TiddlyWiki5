@@ -101,6 +101,40 @@ if($tw.node) {
 			});
 		});
 
+		it("registers a dynamic store from an in-memory filesInfo specification", function() {
+			var injectedDirectory = path.join(tmpRoot,"injected"),
+				filepath = path.join(injectedDirectory,"memory.md");
+			fs.mkdirSync(injectedDirectory);
+			fs.writeFileSync(filepath,"In memory\n");
+			var loaded = $tw.loadTiddlersFromSpecification(tmpRoot,$tw.boot.excludeRegExp,{
+				directories: [{
+					path: "injected",
+					filesRegExp: "^.*\\.md$",
+					isTiddlerFile: false,
+					fields: {
+						title: {source: "basename"},
+						type: "text/markdown"
+					},
+					dynamicStore: {
+						saveFilter: "[type[text/markdown]]",
+						watch: false,
+						watcherProvider: "test-provider",
+						ignoredPathRegExp: "^attachments/",
+						followSymlinks: false
+					}
+				}]
+			});
+			var store = $tw.boot.dynamicStores.filter(function(candidate) {
+				return candidate.id === injectedDirectory;
+			})[0];
+			expect(fs.existsSync(path.join(tmpRoot,"tiddlywiki.files"))).toBe(false);
+			expect(loaded[0].tiddlers[0].title).toBe("memory");
+			expect(loaded[0].dynamicStoreId).toBe(injectedDirectory);
+			expect(store.watcherProvider).toBe("test-provider");
+			expect(store.ignoredPathRegExp).toBe("^attachments/");
+			expect(store.followSymlinks).toBe(false);
+		});
+
 		it("routes saves for non-matching tiddlers into the default wiki tiddlers path", function(done) {
 			wiki.addTiddler(new $tw.Tiddler({title: "note2", type: "text/vnd.tiddlywiki", text: "plain"}));
 			var tiddler = wiki.getTiddler("note2");
@@ -166,6 +200,88 @@ if($tw.node) {
 			});
 		});
 
+		it("uses an incremental reverse index for files containing multiple tiddlers", function() {
+			var filepath = path.join(storeDir,"bundle.json"),
+				fileInfo = {
+					filepath: filepath,
+					type: "application/json",
+					hasMetaFile: false,
+					isEditableFile: true,
+					dynamicStoreId: storeDir
+				};
+			adaptor.setTiddlerFileInfo("one",fileInfo);
+			adaptor.setTiddlerFileInfo("two",fileInfo);
+			expect(adaptor.getTitlesForFilepath(filepath).sort()).toEqual(["one","two"]);
+			adaptor.removeTiddlerFileInfo("one");
+			expect(adaptor.getTitlesForFilepath(filepath)).toEqual(["two"]);
+		});
+
+		it("applies tiddlywiki.files field rules when a watched raw file changes", function(done) {
+			var store = $tw.boot.dynamicStores[0],
+				filepath = path.join(storeDir,"raw-note.md");
+			store.filesRegExp = ".*\\.md$";
+			store.isTiddlerFile = false;
+			store.fields = {
+				title: {source: "basename"},
+				type: "text/markdown"
+			};
+			fs.writeFileSync(filepath,"# Raw note\n");
+			adaptor.processFileEvent(store,filepath,"change");
+			adaptor.getUpdatedTiddlers({},function(err,updates) {
+				expect(err).toBeFalsy();
+				expect(updates.modifications).toContain("raw-note");
+				adaptor.loadTiddler("raw-note",function(err,fields) {
+					expect(err).toBeFalsy();
+					expect(fields.title).toBe("raw-note");
+					expect(fields.type).toBe("text/markdown");
+					expect(fields.text).toBe("# Raw note\n");
+					done();
+				});
+			});
+		});
+
+		it("accepts an injected watcher provider", function(done) {
+			var store = $tw.boot.dynamicStores[0],
+				filepath = path.join(storeDir,"provided.tid"),
+				watcherOptions,
+				closed = false;
+			store.watcherProvider = "test-provider";
+			adaptor.watcherProviders["test-provider"] = {
+				create: function(options) {
+					watcherOptions = options;
+					return Promise.resolve({
+						close: function() {
+							closed = true;
+						}
+					});
+				}
+			};
+			adaptor.setupWatcher(store);
+			expect(watcherOptions.directory).toBe(storeDir);
+			expect(adaptor.isReady()).toBe(false);
+			fs.writeFileSync(filepath,"title: provided\n\nFrom provider\n");
+			watcherOptions.onEvent(filepath,"change");
+			setTimeout(function() {
+				adaptor.getUpdatedTiddlers({},function(err,updates) {
+					expect(err).toBeFalsy();
+					expect(updates.modifications).toContain("provided");
+					expect(adaptor.isReady()).toBe(true);
+					adaptor.close().then(function() {
+						expect(closed).toBe(true);
+						done();
+					});
+				});
+			},store.debounce + 20);
+		});
+
+		it("filters provider events with configurable path exclusions", function() {
+			var store = $tw.boot.dynamicStores[0];
+			store.ignoredPathRegExp = "(^|/)attachments/";
+			expect(adaptor.isPathIgnored(store,path.join(storeDir,"attachments","large.pdf"))).toBe(true);
+			expect(adaptor.isPathIgnored(store,path.join(storeDir,"notes","note.tid"))).toBe(false);
+			expect(adaptor.isPathIgnored(store,path.join(tmpRoot,"outside.tid"))).toBe(true);
+		});
+
 		it("suppresses echoes when the file on disk matches the current wiki tiddler", function(done) {
 			var store = $tw.boot.dynamicStores[0];
 			wiki.addTiddler(new $tw.Tiddler({title: "echo", type: "text/x-markdown", text: "same\n"}));
@@ -209,15 +325,17 @@ if($tw.node) {
 			var store = $tw.boot.dynamicStores[0],
 				filepath = path.join(storeDir,"sidecar.txt"),
 				metaPath = filepath + ".meta";
+			store.isTiddlerFile = false;
+			store.filesRegExp = ".*\\.txt$";
 			fs.writeFileSync(filepath,"body");
 			fs.writeFileSync(metaPath,"title: sidecar\ncaption: Before\n");
-			$tw.boot.files.sidecar = {
+			adaptor.setTiddlerFileInfo("sidecar",{
 				filepath: filepath,
 				type: "text/plain",
 				hasMetaFile: true,
 				isEditableFile: true,
 				dynamicStoreId: store.id
-			};
+			});
 			wiki.addTiddler(new $tw.Tiddler({
 				title: "sidecar",
 				caption: "Before",
@@ -244,13 +362,13 @@ if($tw.node) {
 		it("treats an unlink notification as a change when the file has been recreated", function(done) {
 			var store = $tw.boot.dynamicStores[0],
 				filepath = path.join(storeDir,"atomic.tid");
-			$tw.boot.files.atomic = {
+			adaptor.setTiddlerFileInfo("atomic",{
 				filepath: filepath,
 				type: "application/x-tiddler",
 				hasMetaFile: false,
 				isEditableFile: true,
 				dynamicStoreId: store.id
-			};
+			});
 			wiki.addTiddler(new $tw.Tiddler({title: "atomic", text: "Before"}));
 			fs.writeFileSync(filepath,"title: atomic\n\nAfter\n");
 			adaptor.processFileEvent(store,filepath,"unlink");

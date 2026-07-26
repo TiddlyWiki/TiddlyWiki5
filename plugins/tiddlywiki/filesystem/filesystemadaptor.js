@@ -30,7 +30,17 @@ function FileSystemAdaptor(options) {
 	// sufficient: the tiddler may already contain a newer edit by the time the
 	// notification arrives.
 	this.lastWriteStats = Object.create(null);
+	// Reverse index from an absolute filepath to the titles loaded from it.
+	// Watch events can therefore update only the affected titles without
+	// scanning every entry in boot.files.
+	this.filesByPath = Object.create(null);
+	this.ignoredPathRegExps = Object.create(null);
+	this.initialiseFileIndex();
+	this.watcherProviders = options.watcherProviders || $tw.modules.getModulesByTypeAsHashmap("filesystemwatcher");
 	this.watchers = [];
+	this.watcherSetups = [];
+	this.watchersReady = true;
+	this.closed = false;
 	this.setupWatchers();
 	// Only advertise getUpdatedTiddlers (and so opt into syncer polling) when
 	// there is actually a dynamic store to report changes from. Otherwise the
@@ -46,12 +56,85 @@ FileSystemAdaptor.prototype.name = "filesystem";
 FileSystemAdaptor.prototype.supportsLazyLoading = false;
 
 FileSystemAdaptor.prototype.isReady = function() {
-	return true;
+	return this.watchersReady;
 };
 
 FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	var title = tiddler.fields.title;
 	return this.boot.files[title];
+};
+
+FileSystemAdaptor.prototype.normaliseFilepath = function(filepath) {
+	return path.resolve(filepath);
+};
+
+FileSystemAdaptor.prototype.initialiseFileIndex = function() {
+	var self = this;
+	$tw.utils.each(this.boot.files,function(fileInfo,title) {
+		self.indexTiddlerFileInfo(title,fileInfo);
+	});
+};
+
+FileSystemAdaptor.prototype.indexTiddlerFileInfo = function(title,fileInfo) {
+	if(!fileInfo || !fileInfo.filepath) {
+		return;
+	}
+	var filepath = this.normaliseFilepath(fileInfo.filepath),
+		titles = this.filesByPath[filepath] || (this.filesByPath[filepath] = Object.create(null));
+	titles[title] = true;
+};
+
+FileSystemAdaptor.prototype.unindexTiddlerFileInfo = function(title,fileInfo) {
+	if(!fileInfo || !fileInfo.filepath) {
+		return;
+	}
+	var filepath = this.normaliseFilepath(fileInfo.filepath),
+		titles = this.filesByPath[filepath];
+	if(titles) {
+		delete titles[title];
+		if(Object.keys(titles).length === 0) {
+			delete this.filesByPath[filepath];
+		}
+	}
+};
+
+FileSystemAdaptor.prototype.setTiddlerFileInfo = function(title,fileInfo) {
+	this.unindexTiddlerFileInfo(title,this.boot.files[title]);
+	if(fileInfo) {
+		this.boot.files[title] = fileInfo;
+		this.indexTiddlerFileInfo(title,fileInfo);
+	} else {
+		delete this.boot.files[title];
+	}
+};
+
+FileSystemAdaptor.prototype.getTitlesForFilepath = function(filepath) {
+	var titles = this.filesByPath[this.normaliseFilepath(filepath)];
+	return titles ? Object.keys(titles) : [];
+};
+
+FileSystemAdaptor.prototype.getDynamicStoreById = function(storeId) {
+	var stores = this.boot.dynamicStores || [];
+	for(var i=0; i<stores.length; i++) {
+		if(stores[i].id === storeId) {
+			return stores[i];
+		}
+	}
+	return null;
+};
+
+FileSystemAdaptor.prototype.loadDynamicStoreFile = function(store,filepath,fallbackFields) {
+	var filename = path.relative(store.directory,filepath),
+		fields = $tw.utils.extend({},store.fields || {},fallbackFields || {});
+	return $tw.loadTiddlersFromFileSpecification(
+		store.directory,
+		filename,
+		store.isTiddlerFile,
+		fields,
+		true,
+		".",
+		store.id
+	);
 };
 
 /*
@@ -132,7 +215,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 				if((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
 					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
 					fileInfo.writeError = true;
-					self.boot.files[tiddler.fields.title] = fileInfo;
+					self.setTiddlerFileInfo(tiddler.fields.title,fileInfo);
 					$tw.syncer.logger.log("Sync failed for \""+tiddler.fields.title+"\" and will be retried with encoded filepath",encodeURIComponent(fileInfo.filepath));
 					return callback(err);
 				} else {
@@ -143,7 +226,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 				fileInfo.dynamicStoreId = dynamicStoreId;
 			}
 			// Store new boot info only after successful writes
-			self.boot.files[tiddler.fields.title] = fileInfo;
+			self.setTiddlerFileInfo(tiddler.fields.title,fileInfo);
 			// Cleanup duplicates if the file moved or changed extensions
 			var options = {
 				adaptorInfo: syncerInfo.adaptorInfo || {},
@@ -227,7 +310,8 @@ Most tiddlers are pre-loaded at boot, but the syncer may ask us to load
 individual tiddlers in response to watcher-driven out-of-band changes.
 */
 FileSystemAdaptor.prototype.loadTiddler = function(title,callback) {
-	var fileInfo = this.boot.files[title];
+	var fileInfo = this.boot.files[title],
+		store = fileInfo && this.getDynamicStoreById(fileInfo.dynamicStoreId);
 	if(!fileInfo || !fileInfo.dynamicStoreId || !fs.existsSync(fileInfo.filepath)) {
 		return callback(null,null);
 	}
@@ -236,7 +320,9 @@ FileSystemAdaptor.prototype.loadTiddler = function(title,callback) {
 		// The companion .meta file may have been removed since boot. Preserve
 		// the known tiddler identity while allowing all other metadata fields
 		// to be removed by the reload.
-		loaded = $tw.loadTiddlersFromFile(fileInfo.filepath,{title: title});
+		loaded = store ?
+			this.loadDynamicStoreFile(store,fileInfo.filepath,store.isTiddlerFile ? null : {title: title}) :
+			$tw.loadTiddlersFromFile(fileInfo.filepath,{title: title});
 	} catch(e) {
 		return callback(e);
 	}
@@ -279,9 +365,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 Delete a tiddler in cache, without modifying file system.
 */
 FileSystemAdaptor.prototype.removeTiddlerFileInfo = function(title) {
-	if(this.boot.files[title]) {
-		delete this.boot.files[title];
-	}
+	this.setTiddlerFileInfo(title,null);
 };
 
 /*
@@ -297,80 +381,178 @@ FileSystemAdaptor.prototype.getUpdatedTiddlers = function(syncer,callback) {
 };
 
 /*
-Set up chokidar watchers for each registered dynamic store.
-*/
-/*
 Close all watchers and clear any pending debounce timers. Returns a promise
-that resolves once chokidar has fully shut down, for clean teardown in tests.
+that resolves once every provider has fully shut down, for clean teardown in
+tests.
 */
 FileSystemAdaptor.prototype.close = function() {
+	var self = this;
+	this.closed = true;
 	$tw.utils.each(this.pendingTimers,function(timer) { clearTimeout(timer); });
 	this.pendingTimers = Object.create(null);
 	this.lastWriteStats = Object.create(null);
-	var closes = (this.watchers || []).map(function(w) {
-		try { return w.close(); } catch(e) { return null; }
+	return Promise.all(this.watcherSetups).then(function() {
+		var closes = (self.watchers || []).map(function(watcher) {
+			try {
+				return watcher.close();
+			} catch(e) {
+				return null;
+			}
+		});
+		self.watchers = [];
+		return Promise.all(closes.filter(Boolean));
 	});
-	this.watchers = [];
-	return Promise.all(closes.filter(Boolean));
 };
 
 FileSystemAdaptor.prototype.setupWatchers = function() {
 	var self = this,
 		stores = (this.boot.dynamicStores || []).filter(function(s) { return s.watch; });
-	if(stores.length === 0) {
-		return;
-	}
-	var chokidar;
-	try {
-		chokidar = require("chokidar");
-	} catch(e) {
-		this.logger.log("chokidar not available; dynamic store watching disabled",e.message);
-		return;
-	}
 	stores.forEach(function(store) {
-		self.setupWatcher(chokidar,store);
+		self.setupWatcher(store);
 	});
 };
 
-FileSystemAdaptor.prototype.setupWatcher = function(chokidar,store) {
+FileSystemAdaptor.prototype.setupWatcher = function(store) {
 	var self = this,
-		fileRegExp = new RegExp(store.filesRegExp || "^.*$");
-	var watcher = chokidar.watch(store.directory,{
-		ignoreInitial: true,
-		persistent: true,
-		depth: store.searchSubdirectories ? undefined : 0,
-		awaitWriteFinish: {stabilityThreshold: 100, pollInterval: 50},
-		ignored: function(p) {
-			// chokidar invokes `ignored` for the root too — don't ignore the root
-			if(p === store.directory) return false;
-			var base = path.basename(p);
-			if(/\.meta$/.test(base)) return false;
-			// Allow directories through so recursion works when enabled
-			try {
-				if(fs.existsSync(p) && fs.statSync(p).isDirectory()) return false;
-			} catch(e) {}
-			return !fileRegExp.test(base);
+		providerName = store.watcherProvider || "chokidar",
+		provider = this.watcherProviders[providerName];
+	if(!provider || typeof provider.create !== "function") {
+		this.handleWatcherError(store,new Error("Filesystem watcher provider \"" + providerName + "\" is not available"));
+		return;
+	}
+	var watcherOptions = {
+			directory: store.directory,
+			searchSubdirectories: !!store.searchSubdirectories,
+			followSymlinks: store.followSymlinks !== false,
+			isIgnored: function(filepath,stats) {
+				return self.isPathIgnored(store,filepath,stats);
+			},
+			onEvent: function(filepath,eventType) {
+				self.scheduleFileEvent(store,filepath,eventType);
+			},
+			onError: function(error) {
+				self.handleWatcherError(store,error);
+			}
+		},
+		watcher;
+	try {
+		watcher = provider.create(watcherOptions);
+	} catch(e) {
+		this.handleWatcherError(store,e);
+		return;
+	}
+	if(watcher && typeof watcher.then === "function") {
+		this.watchersReady = false;
+		var setup = watcher.then(function(resolvedWatcher) {
+			if(resolvedWatcher) {
+				self.watchers.push(resolvedWatcher);
+			}
+		},function(error) {
+			self.handleWatcherError(store,error);
+		}).then(function() {
+			self.watchersReady = self.watcherSetups.every(function(item) {
+				return item.settled;
+			});
+		});
+		setup.settled = false;
+		setup.then(function() {
+			setup.settled = true;
+			self.watchersReady = self.watcherSetups.every(function(item) {
+				return item.settled;
+			});
+		});
+		this.watcherSetups.push(setup);
+	} else if(watcher) {
+		this.watchers.push(watcher);
+	}
+};
+
+FileSystemAdaptor.prototype.handleWatcherError = function(store,error) {
+	var info = {
+		adaptor: this,
+		store: store,
+		error: error
+	};
+	this.logger.log("Filesystem watcher error for " + store.directory,error && error.message);
+	if($tw.hooks) {
+		$tw.hooks.invokeHook("th-filesystem-watcher-error",info);
+	}
+};
+
+FileSystemAdaptor.prototype.isPathIgnored = function(store,filepath,stats) {
+	var storePath = path.resolve(store.directory),
+		resolvedPath = path.resolve(filepath),
+		relativePath = path.relative(storePath,resolvedPath);
+	if(relativePath === "") {
+		return false;
+	}
+	if(relativePath === ".." || relativePath.indexOf(".." + path.sep) === 0 || path.isAbsolute(relativePath)) {
+		return true;
+	}
+	var ignoredRegExp = this.ignoredPathRegExps[store.id];
+	if(ignoredRegExp === undefined) {
+		try {
+			ignoredRegExp = store.ignoredPathRegExp ? new RegExp(store.ignoredPathRegExp) : null;
+		} catch(e) {
+			this.handleWatcherError(store,new Error("Invalid ignoredPathRegExp: " + e.message));
+			ignoredRegExp = null;
 		}
-	});
-	watcher.on("add",function(filepath) { self.scheduleFileEvent(store,filepath,"change"); });
-	watcher.on("change",function(filepath) { self.scheduleFileEvent(store,filepath,"change"); });
-	watcher.on("unlink",function(filepath) { self.scheduleFileEvent(store,filepath,"unlink"); });
-	watcher.on("error",function(err) {
-		self.logger.log("chokidar error for " + store.directory,err && err.message);
-	});
-	this.watchers.push(watcher);
+		this.ignoredPathRegExps[store.id] = ignoredRegExp;
+	}
+	if(ignoredRegExp) {
+		ignoredRegExp.lastIndex = 0;
+		if(ignoredRegExp.test(relativePath.split(path.sep).join("/"))) {
+			return true;
+		}
+	}
+	try {
+		stats = stats || fs.lstatSync(resolvedPath);
+		if(stats.isDirectory()) {
+			return false;
+		}
+		if(store.followSymlinks === false && stats.isSymbolicLink()) {
+			return true;
+		}
+	} catch(e) {
+		// Unlink events have no stat. Continue matching their basename.
+	}
+	var basename = path.basename(resolvedPath).replace(/\.meta$/,""),
+		filesRegExp = new RegExp(store.filesRegExp || "^.*$");
+	filesRegExp.lastIndex = 0;
+	return !filesRegExp.test(basename);
 };
 
 FileSystemAdaptor.prototype.scheduleFileEvent = function(store,filepath,eventType) {
 	var self = this,
 		delay = store.debounce || 400;
+	if(this.isPathIgnored(store,filepath)) {
+		return;
+	}
+	var eventInfo = {
+		adaptor: this,
+		store: store,
+		filepath: filepath,
+		eventType: eventType,
+		ignore: false
+	};
+	if($tw.hooks) {
+		eventInfo = $tw.hooks.invokeHook("th-filesystem-watcher-event",eventInfo) || eventInfo;
+	}
+	if(eventInfo === false || eventInfo.ignore) {
+		return;
+	}
+	filepath = eventInfo.filepath;
+	eventType = eventInfo.eventType;
+	if(this.isPathIgnored(store,filepath)) {
+		return;
+	}
 	if(this.isSelfWriteEvent(filepath,eventType)) {
 		return;
 	}
 	// A .meta change should trigger re-read of its companion file
-	var targetPath = filepath;
+	var targetPath = path.resolve(filepath);
 	if(/\.meta$/.test(filepath)) {
-		targetPath = filepath.replace(/\.meta$/,"");
+		targetPath = path.resolve(filepath.replace(/\.meta$/,""));
 	}
 	// Coalesce body and companion metadata notifications, as well as
 	// unlink/add pairs emitted for atomic replacement of the same file.
@@ -393,42 +575,31 @@ FileSystemAdaptor.prototype.scheduleFileEvent = function(store,filepath,eventTyp
 };
 
 FileSystemAdaptor.prototype.processFileEvent = function(store,filepath,eventType) {
-	var self = this;
+	var self = this,
+		previousTitles = this.getTitlesForFilepath(filepath);
 	// Deletion: look up any titles that mapped to this filepath and queue deletion.
 	// Do NOT call wiki.deleteTiddler here — the syncer's SyncFromServerTask does that.
 	// Test actual existence after the debounce delay. Editors and git commonly
 	// replace files with an unlink/rename followed by an add.
 	if(!fs.existsSync(filepath)) {
-		var deletedTitles = [];
-		$tw.utils.each(this.boot.files,function(info,title) {
-			if(info && info.filepath === filepath) {
-				deletedTitles.push(title);
-			}
-		});
-		deletedTitles.forEach(function(title) {
-			delete self.boot.files[title];
+		previousTitles.forEach(function(title) {
+			self.removeTiddlerFileInfo(title);
 			self.deletions[title] = true;
 			delete self.modifications[title];
 		});
-		if(deletedTitles.length > 0) {
-			this.logger.log("Dynamic store: detected removal of " + deletedTitles.length + " tiddler(s) at " + filepath);
+		if(previousTitles.length > 0) {
+			this.logger.log("Dynamic store: detected removal of " + previousTitles.length + " tiddler(s) at " + filepath);
 		}
 		return;
 	}
 	// Add/change: re-parse the file and queue modifications
-	var loaded,
-		previousTitles = [];
-	$tw.utils.each(this.boot.files,function(info,title) {
-		if(info && info.filepath === filepath) {
-			previousTitles.push(title);
-		}
-	});
+	var loaded;
 	try {
 		// If a companion .meta file was removed, retain only the identity of the
 		// previously mapped tiddler. All other removed metadata fields should
 		// disappear when the tiddler is reloaded.
-		var fallbackFields = previousTitles.length === 1 ? {title: previousTitles[0]} : {};
-		loaded = $tw.loadTiddlersFromFile(filepath,fallbackFields);
+		var fallbackFields = !store.isTiddlerFile && previousTitles.length === 1 ? {title: previousTitles[0]} : null;
+		loaded = this.loadDynamicStoreFile(store,filepath,fallbackFields);
 	} catch(e) {
 		this.logger.log("Failed to load tiddler file " + filepath,e.message);
 		return;
@@ -441,32 +612,54 @@ FileSystemAdaptor.prototype.processFileEvent = function(store,filepath,eventType
 		if(!fields || !fields.title) {
 			return;
 		}
+		newTitles[fields.title] = true;
 		if(fields.type === "application/javascript" && fields["module-type"]) {
 			self.logger.log("Skipping hot-reload of JS module tiddler " + fields.title + " (requires a restart)");
 			return;
 		}
+		var originalTitle = fields.title,
+			currentTiddler = self.wiki.getTiddler(originalTitle),
+			updateInfo = {
+				adaptor: self,
+				store: store,
+				filepath: filepath,
+				eventType: eventType,
+				fields: fields,
+				currentTiddler: currentTiddler,
+				ignore: false
+			};
+		if($tw.hooks) {
+			updateInfo = $tw.hooks.invokeHook("th-filesystem-watcher-tiddler",updateInfo) || updateInfo;
+		}
+		if(updateInfo === false || updateInfo.ignore) {
+			return;
+		}
+		fields = updateInfo.fields;
 		var title = fields.title;
+		if(title !== originalTitle) {
+			delete newTitles[originalTitle];
+		}
 		newTitles[title] = true;
+		currentTiddler = self.wiki.getTiddler(title);
 		// Ensure boot.files tracks the file so loadTiddler can find it on demand
-		self.boot.files[title] = {
+		self.setTiddlerFileInfo(title,{
 			filepath: loaded.filepath,
 			type: loaded.type,
 			hasMetaFile: loaded.hasMetaFile,
 			isEditableFile: true,
 			dynamicStoreId: store.id
-		};
+		});
 		// Diff against the current wiki tiddler to suppress self-write echoes
-		var existing = self.wiki.getTiddler(title);
-		if(existing && self.tiddlerFieldsEqual(existing.fields,fields)) {
+		if(currentTiddler && self.tiddlerFieldsEqual(currentTiddler.fields,fields)) {
 			return;
 		}
 		self.modifications[title] = true;
 		delete self.deletions[title];
 	});
 	// Handle tiddlers that were previously in this file but have now disappeared
-	$tw.utils.each(this.boot.files,function(info,title) {
-		if(info && info.filepath === filepath && !newTitles[title]) {
-			delete self.boot.files[title];
+	previousTitles.forEach(function(title) {
+		if(!newTitles[title]) {
+			self.removeTiddlerFileInfo(title);
 			self.deletions[title] = true;
 			delete self.modifications[title];
 		}

@@ -29,7 +29,10 @@ Dynamic stores are declared inside a `tiddlywiki.files` specification via the ne
 Notes:
 
 * File events are debounced per file (default 400ms, configurable via `debounce`) to cope with editors that save atomically via rename.
+* Watcher providers are pluggable through `filesystemwatcher` modules; chokidar remains the default.
+* `ignoredPathRegExp` and `followSymlinks` configure directory exclusions and symbolic-link traversal.
 * Each detected change is diffed against the current in-wiki tiddler before being reported, so self-writes performed by TiddlyWiki itself do not cause reload loops.
+* A reverse filepath index limits external change handling to the titles mapped to the changed file.
 * Deletions on disk propagate to the wiki via the syncer's standard server-side-deletion path.
 * JavaScript module tiddlers (those with `type: application/javascript` and a `module-type` field) are never hot-reloaded; reloading them would require restarting the TiddlyWiki process.
 
