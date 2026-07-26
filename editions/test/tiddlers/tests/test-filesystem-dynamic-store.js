@@ -337,6 +337,32 @@ if($tw.node) {
 			expect(adaptor.getTitlesForFilepath(filepath)).toEqual(["two"]);
 		});
 
+		it("ignores provider add events for directories", function() {
+			var directory = path.join(storeDir,"new-directory");
+			fs.mkdirSync(directory);
+			spyOn(adaptor,"loadDynamicStoreFile").and.callThrough();
+			adaptor.processFileEvent($tw.boot.dynamicStores[0],directory,"add");
+			expect(adaptor.loadDynamicStoreFile).not.toHaveBeenCalled();
+		});
+
+		it("uses the reverse index when a provider reports a removed directory", function() {
+			var directory = path.join(storeDir,"removed-directory"),
+				filepath = path.join(directory,"nested.tid");
+			fs.mkdirSync(directory);
+			fs.writeFileSync(filepath,"title: nested\n\nNested\n");
+			adaptor.setTiddlerFileInfo("nested",{
+				filepath: filepath,
+				type: "application/x-tiddler",
+				hasMetaFile: false,
+				isEditableFile: true,
+				dynamicStoreId: storeDir
+			});
+			fs.rmSync(directory,{recursive: true});
+			adaptor.processFileEvent($tw.boot.dynamicStores[0],directory,"unlink");
+			expect(adaptor.deletions.nested).toBe(true);
+			expect($tw.boot.files.nested).toBeUndefined();
+		});
+
 		it("reuses an existing filepath when its stored spelling is equivalent", function() {
 			var filepath = path.join(storeDir,"stable.tid"),
 				equivalentPath = storeDir + path.sep + "." + path.sep + "stable.tid";

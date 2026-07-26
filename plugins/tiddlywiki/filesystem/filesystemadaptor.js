@@ -113,6 +113,19 @@ FileSystemAdaptor.prototype.getTitlesForFilepath = function(filepath) {
 	return titles ? Object.keys(titles) : [];
 };
 
+FileSystemAdaptor.prototype.getTitlesUnderDirectory = function(directory) {
+	var prefix = this.normaliseFilepath(directory) + path.sep,
+		titles = Object.create(null);
+	$tw.utils.each(this.filesByPath,function(indexedTitles,filepath) {
+		if(filepath.indexOf(prefix) === 0) {
+			$tw.utils.each(indexedTitles,function(value,title) {
+				titles[title] = true;
+			});
+		}
+	});
+	return Object.keys(titles);
+};
+
 FileSystemAdaptor.prototype.getDynamicStoreById = function(storeId) {
 	var stores = this.boot.dynamicStores || [];
 	for(var i=0; i<stores.length; i++) {
@@ -764,6 +777,11 @@ FileSystemAdaptor.prototype.processFileEvent = function(store,filepath,eventType
 	// Test actual existence after the debounce delay. Editors and git commonly
 	// replace files with an unlink/rename followed by an add.
 	if(!fs.existsSync(filepath)) {
+		// Some providers report only the removed directory. Use the reverse
+		// index to invalidate descendants without rescanning every boot.files entry.
+		if(previousTitles.length === 0) {
+			previousTitles = this.getTitlesUnderDirectory(filepath);
+		}
 		previousTitles.forEach(function(title) {
 			self.removeTiddlerFileInfo(title);
 			self.deletions[title] = true;
@@ -773,6 +791,16 @@ FileSystemAdaptor.prototype.processFileEvent = function(store,filepath,eventType
 		if(previousTitles.length > 0) {
 			this.logger.log("Dynamic store: detected removal of " + previousTitles.length + " tiddler(s) at " + filepath);
 		}
+		return;
+	}
+	// Providers such as nsfw report directory creation as an ordinary add.
+	// Directory contents arrive as their own events and must not be parsed as files.
+	try {
+		if(fs.statSync(filepath).isDirectory()) {
+			return;
+		}
+	} catch(e) {
+		this.logger.log("Failed to stat filesystem watcher path " + filepath,e.message);
 		return;
 	}
 	// Add/change: re-parse the file and queue modifications
