@@ -17,4 +17,6 @@ Embedding applications can further customise the boundary with the `th-filesyste
 
 Transient `EBUSY`, `EPERM`, `EACCES`, and `EAGAIN` save failures are retried with configurable exponential backoff. Final save failures invoke `th-filesystem-error`, allowing an embedding application to surface a native notification.
 
+Successful saves and deletions invoke `th-filesystem-change`. Applications can use this hook for side effects such as refreshing a Git history view without replacing or subclassing the filesystem adaptor.
+
 [[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/filesystem]]

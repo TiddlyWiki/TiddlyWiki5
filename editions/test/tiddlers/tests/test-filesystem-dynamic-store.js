@@ -103,7 +103,13 @@ if($tw.node) {
 
 		it("retries transient file locks with configurable exponential backoff", function(done) {
 			var attempts = 0,
-				store = $tw.boot.dynamicStores[0];
+				store = $tw.boot.dynamicStores[0],
+				changeInfo,
+				changeHook = function(info) {
+					changeInfo = info;
+					return info;
+				};
+			$tw.hooks.addHook("th-filesystem-change",changeHook);
 			store.writeRetry = {attempts: 3,initialDelay: 1,maxDelay: 2};
 			spyOn($tw.utils,"saveTiddlerToFile").and.callFake(function(tiddler,fileInfo,callback) {
 				attempts++;
@@ -124,8 +130,11 @@ if($tw.node) {
 			});
 			wiki.addTiddler(tiddler);
 			adaptor.saveTiddler(tiddler,function(error) {
+				$tw.hooks.removeHook("th-filesystem-change",changeHook);
 				expect(error).toBeFalsy();
 				expect(attempts).toBe(3);
+				expect(changeInfo.operation).toBe("save");
+				expect(changeInfo.title).toBe("locked-note");
 				done();
 			},{tiddlerInfo: {}});
 		});

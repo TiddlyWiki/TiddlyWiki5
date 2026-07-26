@@ -165,6 +165,17 @@ FileSystemAdaptor.prototype.notifyFileSystemError = function(operation,title,fil
 	}
 };
 
+FileSystemAdaptor.prototype.notifyFileSystemChange = function(operation,title,fileInfo) {
+	if($tw.hooks) {
+		$tw.hooks.invokeHook("th-filesystem-change",{
+			adaptor: this,
+			operation: operation,
+			title: title,
+			fileInfo: fileInfo
+		});
+	}
+};
+
 FileSystemAdaptor.prototype.saveTiddlerToFileWithRetry = function(tiddler,fileInfo,callback) {
 	var self = this,
 		retryOptions = this.getWriteRetryOptions(fileInfo),
@@ -387,6 +398,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 						return callback(err);
 					}
 					self.recordFileWrite(fileInfo);
+					self.notifyFileSystemChange("save",tiddler.fields.title,fileInfo);
 					return callback(null,fileInfo);
 				});
 			});
@@ -504,6 +516,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 				}
 			}
 			self.removeTiddlerFileInfo(title);
+			self.notifyFileSystemChange("delete",title,fileInfo);
 			return callback(null,null);
 		});
 	} else {
