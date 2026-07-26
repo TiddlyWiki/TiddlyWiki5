@@ -1915,6 +1915,11 @@ html body.tc-body.tc-single-tiddler-window {
 	line-height: 1.4;
 }
 
+.tc-drop-down > p {
+	margin: 0;
+	padding: 0;
+}
+
 .tc-drop-down .tc-tab-set .tc-tab-buttons button {
 	display: inline-block;
 	width: auto;
