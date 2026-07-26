@@ -500,15 +500,13 @@ Return an array of tiddler titles that are directly linked within the given pars
  */
 exports.extractLinks = function(parseTreeRoot) {
 	// Count up the links
-	var links = [],
+	var linkSet = new Set(),
 		checkParseTree = function(parseTree) {
 			for(var t=0; t<parseTree.length; t++) {
 				var parseTreeNode = parseTree[t];
 				if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
 					var value = parseTreeNode.attributes.to.value;
-					if(links.indexOf(value) === -1) {
-						links.push(value);
-					}
+					linkSet.add(parseTreeNode.attributes.to.value);
 				}
 				if(parseTreeNode.children) {
 					checkParseTree(parseTreeNode.children);
@@ -516,7 +514,7 @@ exports.extractLinks = function(parseTreeRoot) {
 			}
 		};
 	checkParseTree(parseTreeRoot);
-	return links;
+	return Array.from(linkSet);
 };
 
 /*
@@ -561,8 +559,7 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 Return an array of tiddler titles that are directly transcluded within the given parse tree. `title` is the tiddler being parsed, we will ignore its self-referential transclusions, only return
  */
 exports.extractTranscludes = function(parseTreeRoot, title) {
-	// Count up the transcludes
-	var transcludes = [],
+	var transcludeSet = new Set(),
 		checkParseTree = function(parseTree, parentNode) {
 			for(var t=0; t<parseTree.length; t++) {
 				var parseTreeNode = parseTree[t];
@@ -590,18 +587,19 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 						// Old usage with Empty value (like `<$transclude field='created'/>`)
 						value = title;
 					}
-					// Deduplicate the result.
-					if(value && transcludes.indexOf(value) === -1) {
-						$tw.utils.pushTop(transcludes,value);
+					
+					if(value) {
+						transcludeSet.add(value);
 					}
 				}
 				if(parseTreeNode.children) {
-					checkParseTree(parseTreeNode.children,parseTreeNode);
+					checkParseTree(parseTreeNode.children, parseTreeNode);
 				}
 			}
 		};
+
 	checkParseTree(parseTreeRoot);
-	return transcludes;
+	return Array.from(transcludeSet);
 };
 
 
@@ -722,27 +720,29 @@ exports.getTagMap = function() {
 /*
 Lookup a given tiddler and return a list of all the tiddlers that include it in the specified list field
 */
-exports.findListingsOfTiddler = function(targetTitle,fieldName) {
+exports.findListingsOfTiddler = function(targetTitle, fieldName) {
 	fieldName = fieldName || "list";
 	var wiki = this;
-	var listings = this.getGlobalCache("listings-" + fieldName,function() {
+	var listings = this.getGlobalCache("listings-" + fieldName, function() {
 		var listings = Object.create(null);
-		wiki.each(function(tiddler,title) {
+		wiki.each(function(tiddler, title) {
 			var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
-			if(list) {
-				for(var i = 0; i < list.length; i++) {
-					var listItem = list[i],
-						listing = listings[listItem] || [];
-					if(listing.indexOf(title) === -1) {
-						listing.push(title);
+			if(list && list.length > 0) {
+				var uniqueList = list.length > 1 ? Array.from(new Set(list)) : list;
+				for(var i = 0; i < uniqueList.length; i++) {
+					var listItem = uniqueList[i];
+					if(!listings[listItem]) {
+						listings[listItem] = [];
 					}
-					listings[listItem] = listing;
+					listings[listItem].push(title);
 				}
 			}
 		});
 		return listings;
 	});
-	return (listings[targetTitle] || []).slice(0);
+	
+	// Return a copy so caller modifications don't mutate cached arrays
+	return listings[targetTitle] ? listings[targetTitle].slice(0) : [];
 };
 
 /*
