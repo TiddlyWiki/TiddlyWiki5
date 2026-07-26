@@ -204,6 +204,83 @@ FileSystemAdaptor.prototype.loadDynamicStoreFile = function(store,filepath,fallb
 	);
 };
 
+FileSystemAdaptor.prototype.getExternalAttachmentLocation = function(fileInfo) {
+	var store = fileInfo && fileInfo.dynamicStoreId && this.getDynamicStoreById(fileInfo.dynamicStoreId);
+	if(store) {
+		return store.externalAttachments || null;
+	}
+	if(!this.boot.wikiPath) {
+		return null;
+	}
+	return {
+		basePath: this.boot.wikiPath,
+		pathPrefix: this.wiki.getTiddlerText("$:/config/ExternalAttachments/WikiFolderToMove","files"),
+		moveOnRoute: false
+	};
+};
+
+FileSystemAdaptor.prototype.isPathWithin = function(basePath,filepath) {
+	var relativePath = path.relative(path.resolve(basePath),path.resolve(filepath));
+	return relativePath !== ".." && relativePath.indexOf(".." + path.sep) !== 0 && !path.isAbsolute(relativePath);
+};
+
+FileSystemAdaptor.prototype.moveExternalAttachment = function(tiddler,oldFileInfo,newFileInfo,callback) {
+	var self = this,
+		canonicalUri = tiddler.fields._canonical_uri;
+	if(typeof canonicalUri !== "string" || !canonicalUri || /^[a-z][a-z0-9+.-]*:\/\//i.test(canonicalUri)) {
+		return callback();
+	}
+	var decodedUri = $tw.utils.decodeURIComponentSafe(canonicalUri);
+	if(path.isAbsolute(decodedUri)) {
+		return callback();
+	}
+	var oldLocation = this.getExternalAttachmentLocation(oldFileInfo),
+		newLocation = this.getExternalAttachmentLocation(newFileInfo);
+	if(!oldLocation || !newLocation || !(oldLocation.moveOnRoute || newLocation.moveOnRoute)) {
+		return callback();
+	}
+	if(path.resolve(oldLocation.basePath) === path.resolve(newLocation.basePath)) {
+		return callback();
+	}
+	var oldPrefix = (oldLocation.pathPrefix || "files").replace(/\\/g,"/").replace(/^\/+|\/+$/g,""),
+		newPrefix = (newLocation.pathPrefix || "files").replace(/\\/g,"/").replace(/^\/+|\/+$/g,""),
+		normalisedUri = decodedUri.replace(/\\/g,"/").replace(/^\/+/,"");
+	if(oldPrefix !== newPrefix || normalisedUri.indexOf(oldPrefix + "/") !== 0) {
+		return callback();
+	}
+	var sourcePath = path.resolve(oldLocation.basePath,normalisedUri),
+		targetPath = path.resolve(newLocation.basePath,normalisedUri);
+	if(!this.isPathWithin(oldLocation.basePath,sourcePath) || !this.isPathWithin(newLocation.basePath,targetPath) || !fs.existsSync(sourcePath)) {
+		return callback();
+	}
+	if(fs.existsSync(targetPath)) {
+		this.notifyFileSystemError("move external attachment",tiddler.fields.title,newFileInfo,new Error("Target already exists: " + targetPath),1);
+		return callback();
+	}
+	$tw.utils.createDirectory(path.dirname(targetPath));
+	fs.rename(sourcePath,targetPath,function(error) {
+		if(!error) {
+			return callback();
+		}
+		if(error.code !== "EXDEV") {
+			self.notifyFileSystemError("move external attachment",tiddler.fields.title,newFileInfo,error,1);
+			return callback();
+		}
+		fs.copyFile(sourcePath,targetPath,function(copyError) {
+			if(copyError) {
+				self.notifyFileSystemError("move external attachment",tiddler.fields.title,newFileInfo,copyError,1);
+				return callback();
+			}
+			fs.unlink(sourcePath,function(unlinkError) {
+				if(unlinkError) {
+					self.notifyFileSystemError("move external attachment",tiddler.fields.title,newFileInfo,unlinkError,1);
+				}
+				callback();
+			});
+		});
+	});
+};
+
 /*
 Find the dynamic store (if any) that a tiddler should be saved into.
 Precedence: existing boot.files entry wins; otherwise first matching saveFilter.
@@ -295,20 +372,23 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			if(dynamicStoreId && fileInfo) {
 				fileInfo.dynamicStoreId = dynamicStoreId;
 			}
+			var oldFileInfo = self.boot.files[tiddler.fields.title] || syncerInfo.adaptorInfo;
 			// Store new boot info only after successful writes
 			self.setTiddlerFileInfo(tiddler.fields.title,fileInfo);
-			// Cleanup duplicates if the file moved or changed extensions
-			var options = {
-				adaptorInfo: syncerInfo.adaptorInfo || {},
-				bootInfo: fileInfo || {},
-				title: tiddler.fields.title
-			};
-			$tw.utils.cleanupTiddlerFiles(options,function(err,fileInfo) {
-				if(err) {
-					return callback(err);
-				}
-				self.recordFileWrite(fileInfo);
-				return callback(null,fileInfo);
+			self.moveExternalAttachment(tiddler,oldFileInfo,fileInfo,function() {
+				// Cleanup duplicates if the file moved or changed extensions
+				var cleanupOptions = {
+					adaptorInfo: syncerInfo.adaptorInfo || {},
+					bootInfo: fileInfo || {},
+					title: tiddler.fields.title
+				};
+				$tw.utils.cleanupTiddlerFiles(cleanupOptions,function(err,fileInfo) {
+					if(err) {
+						return callback(err);
+					}
+					self.recordFileWrite(fileInfo);
+					return callback(null,fileInfo);
+				});
 			});
 		});
 	});

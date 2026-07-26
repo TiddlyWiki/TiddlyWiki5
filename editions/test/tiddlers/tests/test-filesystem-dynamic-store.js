@@ -354,6 +354,50 @@ if($tw.node) {
 			expect(adaptor.isPathIgnored(store,path.join(tmpRoot,"outside.tid"))).toBe(true);
 		});
 
+		it("moves an opted-in external attachment when routing between stores", function(done) {
+			var oldStore = $tw.boot.dynamicStores[0],
+				oldRoot = path.join(tmpRoot,"old-wiki"),
+				newRoot = path.join(tmpRoot,"new-wiki"),
+				newStoreDirectory = path.join(newRoot,"tiddlers"),
+				sourcePath = path.join(oldRoot,"files","image.bin"),
+				targetPath = path.join(newRoot,"files","image.bin");
+			fs.mkdirSync(path.dirname(sourcePath),{recursive: true});
+			fs.mkdirSync(newStoreDirectory,{recursive: true});
+			fs.writeFileSync(sourcePath,"attachment");
+			oldStore.externalAttachments = {
+				basePath: oldRoot,
+				pathPrefix: "files",
+				moveOnRoute: true
+			};
+			$tw.boot.dynamicStores.push({
+				id: newStoreDirectory,
+				directory: newStoreDirectory,
+				saveFilter: "",
+				watch: false,
+				externalAttachments: {
+					basePath: newRoot,
+					pathPrefix: "files",
+					moveOnRoute: true
+				}
+			});
+			var tiddler = new $tw.Tiddler({
+				title: "external-image",
+				_canonical_uri: "files/image.bin",
+				text: ""
+			});
+			adaptor.moveExternalAttachment(tiddler,{
+				filepath: path.join(storeDir,"external-image.tid"),
+				dynamicStoreId: oldStore.id
+			},{
+				filepath: path.join(newStoreDirectory,"external-image.tid"),
+				dynamicStoreId: newStoreDirectory
+			},function() {
+				expect(fs.existsSync(sourcePath)).toBe(false);
+				expect(fs.readFileSync(targetPath,"utf8")).toBe("attachment");
+				done();
+			});
+		});
+
 		it("suppresses echoes when the file on disk matches the current wiki tiddler", function(done) {
 			var store = $tw.boot.dynamicStores[0];
 			wiki.addTiddler(new $tw.Tiddler({title: "echo", type: "text/x-markdown", text: "same\n"}));

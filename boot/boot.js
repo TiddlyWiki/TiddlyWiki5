@@ -2118,6 +2118,11 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,filesInfo) {
 							ignoredPathRegExp: dirSpec.dynamicStore.ignoredPathRegExp || "",
 							followSymlinks: dirSpec.dynamicStore.followSymlinks !== false,
 							writeRetry: dirSpec.dynamicStore.writeRetry || {},
+							externalAttachments: dirSpec.dynamicStore.externalAttachments ? {
+								basePath: path.resolve(filepath,dirSpec.dynamicStore.externalAttachments.basePath || dirSpec.path),
+								pathPrefix: dirSpec.dynamicStore.externalAttachments.pathPrefix || "files",
+								moveOnRoute: dirSpec.dynamicStore.externalAttachments.moveOnRoute === true
+							} : null,
 							filesRegExp: dirSpec.filesRegExp || "^.*$",
 							searchSubdirectories: !!dirSpec.searchSubdirectories,
 							isTiddlerFile: !!dirSpec.isTiddlerFile,

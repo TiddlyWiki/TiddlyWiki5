@@ -32,6 +32,7 @@ Notes:
 * Watcher providers are pluggable through `filesystemwatcher` modules; chokidar remains the default.
 * `ignoredPathRegExp` and `followSymlinks` configure directory exclusions and symbolic-link traversal.
 * Transient file-lock failures are retried with configurable exponential backoff and final failures invoke an application hook.
+* Dynamic stores can opt into moving relative external attachments when a tiddler is routed between stores.
 * Each detected change is diffed against the current in-wiki tiddler before being reported, so self-writes performed by TiddlyWiki itself do not cause reload loops.
 * A reverse filepath index limits external change handling to the titles mapped to the changed file.
 * Deletions on disk propagate to the wiki via the syncer's standard server-side-deletion path.
