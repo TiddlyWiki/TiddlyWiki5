@@ -177,6 +177,9 @@ if($tw.node) {
 			fs.mkdirSync(ignoredDirectory);
 			fs.writeFileSync(filepath,"In memory\n");
 			fs.writeFileSync(path.join(ignoredDirectory,"ignored.md"),"Attachment\n");
+			if(process.platform !== "win32") {
+				fs.symlinkSync(filepath,path.join(injectedDirectory,"linked.md"));
+			}
 			var loaded = $tw.loadTiddlersFromSpecification(tmpRoot,$tw.boot.excludeRegExp,{
 				directories: [{
 					path: "injected",
@@ -269,7 +272,13 @@ if($tw.node) {
 		// sandboxes do not propagate inotify events to chokidar).
 
 		it("processes external additions, changes and deletions", function(done) {
-			var store = $tw.boot.dynamicStores[0];
+			var store = $tw.boot.dynamicStores[0],
+				changes = [],
+				changeHook = function(info) {
+					changes.push({operation: info.operation,title: info.title});
+					return info;
+				};
+			$tw.hooks.addHook("th-filesystem-watcher-change",changeHook);
 			var filepath = path.join(storeDir,"external.tid");
 			fs.writeFileSync(filepath,"title: external\ntype: text/x-markdown\n\nInitial\n");
 			adaptor.processFileEvent(store,filepath,"change");
@@ -281,6 +290,7 @@ if($tw.node) {
 					expect(fields).toBeTruthy();
 					expect(fields.title).toBe("external");
 					expect(fields.text).toContain("Initial");
+					wiki.addTiddler(new $tw.Tiddler(fields));
 					// Edit
 					fs.writeFileSync(filepath,"title: external\ntype: text/x-markdown\n\nChanged\n");
 					adaptor.processFileEvent(store,filepath,"change");
@@ -290,7 +300,13 @@ if($tw.node) {
 						fs.unlinkSync(filepath);
 						adaptor.processFileEvent(store,filepath,"unlink");
 						adaptor.getUpdatedTiddlers({},function(err,updates) {
+							$tw.hooks.removeHook("th-filesystem-watcher-change",changeHook);
 							expect(updates.deletions).toContain("external");
+							expect(changes).toEqual([
+								{operation: "add",title: "external"},
+								{operation: "change",title: "external"},
+								{operation: "delete",title: "external"}
+							]);
 							done();
 						});
 					});

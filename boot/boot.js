@@ -2059,23 +2059,33 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,filesInfo) {
 	});
 
 	// Helper to recursively search subdirectories
-	var getAllFiles = function(dirPath, recurse, arrayOfFiles, rootPath, ignoredPathRegExp) {
+	var getAllFiles = function(dirPath, recurse, arrayOfFiles, rootPath, ignoredPathRegExp, followSymlinks, visitedPaths) {
 		recurse = recurse || false;
 		arrayOfFiles = arrayOfFiles || [];
 		rootPath = rootPath || dirPath;
+		visitedPaths = visitedPaths || Object.create(null);
+		var realDirPath = fs.realpathSync(dirPath);
+		if(visitedPaths[realDirPath]) {
+			return arrayOfFiles;
+		}
+		visitedPaths[realDirPath] = true;
 		var files = fs.readdirSync(dirPath);
 		files.forEach(function(file) {
 			var itemPath = path.join(dirPath,file),
-				itemStats = fs.statSync(itemPath),
+				itemLinkStats = fs.lstatSync(itemPath),
 				relativePath = path.relative(rootPath,itemPath).split(path.sep).join("/");
+			if(itemLinkStats.isSymbolicLink() && followSymlinks === false) {
+				return;
+			}
 			if(ignoredPathRegExp) {
 				ignoredPathRegExp.lastIndex = 0;
 				if(ignoredPathRegExp.test(relativePath)) {
 					return;
 				}
 			}
+			var itemStats = fs.statSync(itemPath);
 			if(recurse && itemStats.isDirectory()) {
-				arrayOfFiles = getAllFiles(itemPath,recurse,arrayOfFiles,rootPath,ignoredPathRegExp);
+				arrayOfFiles = getAllFiles(itemPath,recurse,arrayOfFiles,rootPath,ignoredPathRegExp,followSymlinks,visitedPaths);
 			} else if(itemStats.isFile()){
 				arrayOfFiles.push(itemPath);
 			}
@@ -2151,7 +2161,8 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,filesInfo) {
 						console.log("Warning: invalid ignoredPathRegExp in tiddlywiki.files: " + e.message);
 					}
 				}
-				var	files = getAllFiles(dirPath,dirSpec.searchSubdirectories,undefined,dirPath,ignoredPathRegExp),
+				var followSymlinks = !(dirSpec.dynamicStore && dirSpec.dynamicStore.followSymlinks === false),
+					files = getAllFiles(dirPath,dirSpec.searchSubdirectories,undefined,dirPath,ignoredPathRegExp,followSymlinks),
 					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
 					metaRegExp = /^.*\.meta$/;
 				for(var t=0; t<files.length; t++) {

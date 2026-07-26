@@ -648,6 +648,19 @@ FileSystemAdaptor.prototype.handleWatcherError = function(store,error) {
 	}
 };
 
+FileSystemAdaptor.prototype.notifyWatcherChange = function(operation,store,filepath,title,fields) {
+	if($tw.hooks) {
+		$tw.hooks.invokeHook("th-filesystem-watcher-change",{
+			adaptor: this,
+			operation: operation,
+			store: store,
+			filepath: filepath,
+			title: title,
+			fields: fields
+		});
+	}
+};
+
 FileSystemAdaptor.prototype.isPathIgnored = function(store,filepath,stats) {
 	var storePath = path.resolve(store.directory),
 		resolvedPath = path.resolve(filepath),
@@ -755,6 +768,7 @@ FileSystemAdaptor.prototype.processFileEvent = function(store,filepath,eventType
 			self.removeTiddlerFileInfo(title);
 			self.deletions[title] = true;
 			delete self.modifications[title];
+			self.notifyWatcherChange("delete",store,filepath,title);
 		});
 		if(previousTitles.length > 0) {
 			this.logger.log("Dynamic store: detected removal of " + previousTitles.length + " tiddler(s) at " + filepath);
@@ -810,6 +824,7 @@ FileSystemAdaptor.prototype.processFileEvent = function(store,filepath,eventType
 		}
 		newTitles[title] = true;
 		currentTiddler = self.wiki.getTiddler(title);
+		var operation = currentTiddler ? "change" : "add";
 		// Ensure boot.files tracks the file so loadTiddler can find it on demand
 		self.setTiddlerFileInfo(title,{
 			filepath: loaded.filepath,
@@ -824,6 +839,7 @@ FileSystemAdaptor.prototype.processFileEvent = function(store,filepath,eventType
 		}
 		self.modifications[title] = true;
 		delete self.deletions[title];
+		self.notifyWatcherChange(operation,store,filepath,title,fields);
 	});
 	// Handle tiddlers that were previously in this file but have now disappeared
 	previousTitles.forEach(function(title) {
@@ -831,6 +847,7 @@ FileSystemAdaptor.prototype.processFileEvent = function(store,filepath,eventType
 			self.removeTiddlerFileInfo(title);
 			self.deletions[title] = true;
 			delete self.modifications[title];
+			self.notifyWatcherChange("delete",store,filepath,title);
 		}
 	});
 };
