@@ -7,7 +7,7 @@ github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/9943
 modified: 20260726130207664
 release: 5.5.0
 tags: $:/tags/ChangeNote
-title: $:/changenotes/5.5.0/#9943-optimize-filterruns
+title: $:/changenotes/5.5.0/#9943
 type: text/vnd.tiddlywiki
 
 * The `intersection` and `sort` filterrun prefixes, and the `prefix`, `sortsub`, `subfilter` and `suffix` operators have been optimized using more modern JavaScript (ES2017). 
