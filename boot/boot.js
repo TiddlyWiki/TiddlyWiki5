@@ -1962,10 +1962,10 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 Load all the tiddlers defined by a `tiddlywiki.files` specification file
 filepath: pathname of the directory containing the specification file
 */
-$tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
+$tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,filesInfo) {
 	var tiddlers = [];
-	// Read the specification
-	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"), function(e) {
+	// Read the specification unless it was supplied by the caller
+	filesInfo = filesInfo || $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"), function(e) {
 		console.log("Warning: tiddlywiki.files in " + filepath + " invalid: " + e.message);
 		return {};
 	});
@@ -2262,6 +2262,9 @@ path: path of wiki directory
 options:
 	parentPaths: array of parent paths that we mustn't recurse into
 	readOnly: true if the tiddler file paths should not be retained
+	wikiInfo: optional in-memory equivalent of tiddlywiki.info
+	filesInfo: optional in-memory equivalent of tiddlywiki.files, resolved relative
+		to the configured tiddler location
 */
 $tw.loadWikiTiddlers = function(wikiPath,options) {
 	options = options || {};
@@ -2331,8 +2334,11 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	$tw.modules.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerModules);
 	// Load the wiki files, registering them as writable
-	var resolvedWikiPath = path.resolve(wikiPath,tiddlersLocation);
-	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
+	var resolvedWikiPath = path.resolve(wikiPath,tiddlersLocation),
+		tiddlerFiles = options.filesInfo ?
+			$tw.loadTiddlersFromSpecification(resolvedWikiPath,$tw.boot.excludeRegExp,options.filesInfo) :
+			$tw.loadTiddlersFromPath(resolvedWikiPath);
+	$tw.utils.each(tiddlerFiles,function(tiddlerFile) {
 		if(!options.readOnly && tiddlerFile.filepath) {
 			$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
 				$tw.boot.files[tiddler.title] = {
