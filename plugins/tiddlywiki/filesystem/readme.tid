@@ -19,4 +19,8 @@ Transient `EBUSY`, `EPERM`, `EACCES`, and `EAGAIN` save failures are retried wit
 
 Successful saves and deletions invoke `th-filesystem-change`. Applications can use this hook for side effects such as refreshing a Git history view without replacing or subclassing the filesystem adaptor.
 
+`ignoredPathRegExp` is applied both while initially loading a dynamic store and while watching it. The expression receives a `/`-separated path relative to the store directory, so applications can consistently exclude attachment, metadata, or repository-management directories.
+
+By default, a tiddler continues to save into the dynamic store from which it was loaded. Set `reselectOnSave` to `true` on a store when its `saveFilter` is a live routing rule: every save will then evaluate the ordered store filters again, allowing a field or tag change to move the tiddler between stores.
+
 [[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/filesystem]]

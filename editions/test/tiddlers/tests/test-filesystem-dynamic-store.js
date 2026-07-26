@@ -171,13 +171,17 @@ if($tw.node) {
 
 		it("registers a dynamic store from an in-memory filesInfo specification", function() {
 			var injectedDirectory = path.join(tmpRoot,"injected"),
-				filepath = path.join(injectedDirectory,"memory.md");
+				filepath = path.join(injectedDirectory,"memory.md"),
+				ignoredDirectory = path.join(injectedDirectory,"attachments");
 			fs.mkdirSync(injectedDirectory);
+			fs.mkdirSync(ignoredDirectory);
 			fs.writeFileSync(filepath,"In memory\n");
+			fs.writeFileSync(path.join(ignoredDirectory,"ignored.md"),"Attachment\n");
 			var loaded = $tw.loadTiddlersFromSpecification(tmpRoot,$tw.boot.excludeRegExp,{
 				directories: [{
 					path: "injected",
 					filesRegExp: "^.*\\.md$",
+					searchSubdirectories: true,
 					isTiddlerFile: false,
 					fields: {
 						title: {source: "basename"},
@@ -185,9 +189,10 @@ if($tw.node) {
 					},
 					dynamicStore: {
 						saveFilter: "[type[text/markdown]]",
+						reselectOnSave: true,
 						watch: false,
 						watcherProvider: "test-provider",
-						ignoredPathRegExp: "^attachments/",
+						ignoredPathRegExp: "^attachments(?:/|$)",
 						followSymlinks: false
 					}
 				}]
@@ -196,10 +201,12 @@ if($tw.node) {
 				return candidate.id === injectedDirectory;
 			})[0];
 			expect(fs.existsSync(path.join(tmpRoot,"tiddlywiki.files"))).toBe(false);
+			expect(loaded.length).toBe(1);
 			expect(loaded[0].tiddlers[0].title).toBe("memory");
 			expect(loaded[0].dynamicStoreId).toBe(injectedDirectory);
 			expect(store.watcherProvider).toBe("test-provider");
-			expect(store.ignoredPathRegExp).toBe("^attachments/");
+			expect(store.ignoredPathRegExp).toBe("^attachments(?:/|$)");
+			expect(store.reselectOnSave).toBe(true);
 			expect(store.followSymlinks).toBe(false);
 		});
 
@@ -229,6 +236,29 @@ if($tw.node) {
 				expect(err).toBeFalsy();
 				expect(fileInfo.filepath.indexOf(storeDir)).toBe(0);
 				expect(fileInfo.dynamicStoreId).toBe(storeDir);
+				done();
+			});
+		});
+
+		it("can reselect a dynamic store when a routed tiddler changes", function(done) {
+			$tw.boot.dynamicStores[0].reselectOnSave = true;
+			$tw.boot.files["movable"] = {
+				filepath: path.join(storeDir,"movable.tid"),
+				type: "application/x-tiddler",
+				hasMetaFile: false,
+				isEditableFile: true,
+				originalpath: "movable.tid",
+				dynamicStoreId: storeDir
+			};
+			wiki.addTiddler(new $tw.Tiddler({
+				title: "movable",
+				type: "text/vnd.tiddlywiki",
+				text: "Move back to the default store"
+			}));
+			adaptor.getTiddlerFileInfo(wiki.getTiddler("movable"),function(err,fileInfo) {
+				expect(err).toBeFalsy();
+				expect(fileInfo.filepath.indexOf(wikiTiddlers)).toBe(0);
+				expect(fileInfo.dynamicStoreId).toBeFalsy();
 				done();
 			});
 		});

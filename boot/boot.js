@@ -2059,15 +2059,25 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,filesInfo) {
 	});
 
 	// Helper to recursively search subdirectories
-	var getAllFiles = function(dirPath, recurse, arrayOfFiles) {
+	var getAllFiles = function(dirPath, recurse, arrayOfFiles, rootPath, ignoredPathRegExp) {
 		recurse = recurse || false;
 		arrayOfFiles = arrayOfFiles || [];
+		rootPath = rootPath || dirPath;
 		var files = fs.readdirSync(dirPath);
 		files.forEach(function(file) {
-			if(recurse && fs.statSync(dirPath + path.sep + file).isDirectory()) {
-				arrayOfFiles = getAllFiles(dirPath + path.sep + file, recurse, arrayOfFiles);
-			} else if(fs.statSync(dirPath + path.sep + file).isFile()){
-				arrayOfFiles.push(path.join(dirPath, path.sep, file));
+			var itemPath = path.join(dirPath,file),
+				itemStats = fs.statSync(itemPath),
+				relativePath = path.relative(rootPath,itemPath).split(path.sep).join("/");
+			if(ignoredPathRegExp) {
+				ignoredPathRegExp.lastIndex = 0;
+				if(ignoredPathRegExp.test(relativePath)) {
+					return;
+				}
+			}
+			if(recurse && itemStats.isDirectory()) {
+				arrayOfFiles = getAllFiles(itemPath,recurse,arrayOfFiles,rootPath,ignoredPathRegExp);
+			} else if(itemStats.isFile()){
+				arrayOfFiles.push(itemPath);
 			}
 		});
 		return arrayOfFiles;
@@ -2112,6 +2122,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,filesInfo) {
 							id: dynamicStoreId,
 							directory: dirPath,
 							saveFilter: dirSpec.dynamicStore.saveFilter || "",
+							reselectOnSave: dirSpec.dynamicStore.reselectOnSave === true,
 							watch: dirSpec.dynamicStore.watch !== false,
 							debounce: dirSpec.dynamicStore.debounce || 400,
 							watcherProvider: dirSpec.dynamicStore.watcherProvider || "chokidar",
@@ -2130,7 +2141,17 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,filesInfo) {
 						});
 					}
 				}
-				var	files = getAllFiles(dirPath, dirSpec.searchSubdirectories),
+				var ignoredPathRegExp = null,
+					ignoredPathRegExpText = dirSpec.ignoredPathRegExp ||
+						dirSpec.dynamicStore && dirSpec.dynamicStore.ignoredPathRegExp;
+				if(ignoredPathRegExpText) {
+					try {
+						ignoredPathRegExp = new RegExp(ignoredPathRegExpText);
+					} catch(e) {
+						console.log("Warning: invalid ignoredPathRegExp in tiddlywiki.files: " + e.message);
+					}
+				}
+				var	files = getAllFiles(dirPath,dirSpec.searchSubdirectories,undefined,dirPath,ignoredPathRegExp),
 					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
 					metaRegExp = /^.*\.meta$/;
 				for(var t=0; t<files.length; t++) {

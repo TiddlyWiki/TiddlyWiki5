@@ -294,7 +294,8 @@ FileSystemAdaptor.prototype.moveExternalAttachment = function(tiddler,oldFileInf
 
 /*
 Find the dynamic store (if any) that a tiddler should be saved into.
-Precedence: existing boot.files entry wins; otherwise first matching saveFilter.
+Precedence: an existing boot.files entry wins unless its store opts into
+reselectOnSave; otherwise the first matching saveFilter wins.
 */
 FileSystemAdaptor.prototype.findDynamicStoreForTiddler = function(tiddler) {
 	var stores = this.boot.dynamicStores || [];
@@ -302,12 +303,17 @@ FileSystemAdaptor.prototype.findDynamicStoreForTiddler = function(tiddler) {
 		return null;
 	}
 	var title = tiddler.fields.title,
-		existing = this.boot.files[title];
+		existing = this.boot.files[title],
+		existingStore = null;
 	if(existing && existing.dynamicStoreId) {
 		for(var i=0; i<stores.length; i++) {
 			if(stores[i].id === existing.dynamicStoreId) {
-				return stores[i];
+				existingStore = stores[i];
+				break;
 			}
+		}
+		if(existingStore && !existingStore.reselectOnSave) {
+			return existingStore;
 		}
 	}
 	for(var j=0; j<stores.length; j++) {
