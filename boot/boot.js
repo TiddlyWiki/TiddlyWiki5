@@ -1959,108 +1959,135 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 };
 
 /*
+Load one file using the field and deserialisation rules used by a
+`tiddlywiki.files` specification. `filepath` is the directory containing the
+specification and `filename` is resolved relative to it.
+*/
+$tw.loadTiddlersFromFileSpecification = function(filepath,filename,isTiddlerFile,fields,isEditableFile,rootPath,dynamicStoreId) {
+	fields = fields || {};
+	var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
+		type = (extInfo || {}).type || fields.type || "text/plain",
+		typeInfo = $tw.config.contentTypeInfo[type] || {},
+		pathname = path.resolve(filepath,filename),
+		metadata = $tw.loadMetadataForFile(pathname),
+		hasMetaFile = !!metadata,
+		fileTooLarge = false,
+		text, fileTiddlers;
+	metadata = metadata || {};
+
+	if("_canonical_uri" in fields) {
+		text = "";
+	} else if(fs.statSync(pathname).size > $tw.config.maxEditFileSize) {
+		var msg = "File " + pathname + " not loaded because it is too large";
+		console.log("Warning: " + msg);
+		fileTooLarge = true;
+		text = isTiddlerFile ? msg : "";
+	} else {
+		text = fs.readFileSync(pathname,typeInfo.encoding || "utf8");
+	}
+
+	if(isTiddlerFile) {
+		fileTiddlers = $tw.wiki.deserializeTiddlers(fileTooLarge ? ".txt" : path.extname(pathname),text,metadata) || [];
+	} else {
+		fileTiddlers =  [$tw.utils.extend({text: text},metadata)];
+	}
+	var combinedFields = $tw.utils.extend({},fields,metadata);
+	if(fileTooLarge && isTiddlerFile) {
+		delete combinedFields.type;    // type altered
+	}
+	$tw.utils.each(fileTiddlers,function(tiddler) {
+		$tw.utils.each(combinedFields,function(fieldInfo,name) {
+			if(typeof fieldInfo === "string" || $tw.utils.isArray(fieldInfo)) {
+				tiddler[name] = fieldInfo;
+			} else {
+				var value = tiddler[name];
+				switch(fieldInfo.source) {
+					case "subdirectories":
+						value = $tw.utils.stringifyList(path.relative(rootPath,filename).split(path.sep).slice(0,-1));
+						break;
+					case "filepath":
+						value = path.relative(rootPath,filename).split(path.sep).join("/");
+						break;
+					case "filename":
+						value = path.basename(filename);
+						break;
+					case "filename-uri-decoded":
+						value = $tw.utils.decodeURIComponentSafe(path.basename(filename));
+						break;
+					case "basename":
+						value = path.basename(filename,path.extname(filename));
+						break;
+					case "basename-uri-decoded":
+						value = $tw.utils.decodeURIComponentSafe(path.basename(filename,path.extname(filename)));
+						break;
+					case "extname":
+						value = path.extname(filename);
+						break;
+					case "created":
+						value = $tw.utils.stringifyDate(new Date(fs.statSync(pathname).birthtime));
+						break;
+					case "modified":
+						value = $tw.utils.stringifyDate(new Date(fs.statSync(pathname).mtime));
+						break;
+				}
+				if(fieldInfo.prefix) {
+					value = fieldInfo.prefix + value;
+				}
+				if(fieldInfo.suffix) {
+					value = value + fieldInfo.suffix;
+				}
+				tiddler[name] = value;
+			}
+		});
+	});
+	if(isEditableFile) {
+		return {filepath: pathname,type: type,hasMetaFile: hasMetaFile && !isTiddlerFile,isEditableFile: true,dynamicStoreId: dynamicStoreId,tiddlers: fileTiddlers};
+	}
+	return {dynamicStoreId: dynamicStoreId,tiddlers: fileTiddlers};
+};
+
+/*
 Load all the tiddlers defined by a `tiddlywiki.files` specification file
 filepath: pathname of the directory containing the specification file
 */
-$tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
+$tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,filesInfo) {
 	var tiddlers = [];
-	// Read the specification
-	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"), function(e) {
+	// Read the specification unless it was supplied by the caller
+	filesInfo = filesInfo || $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"), function(e) {
 		console.log("Warning: tiddlywiki.files in " + filepath + " invalid: " + e.message);
 		return {};
 	});
 
-	// Helper to process a file
-	var processFile = function(filename,isTiddlerFile,fields,isEditableFile,rootPath,dynamicStoreId) {
-		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
-			type = (extInfo || {}).type || fields.type || "text/plain",
-			typeInfo = $tw.config.contentTypeInfo[type] || {},
-			pathname = path.resolve(filepath,filename),
-			metadata = $tw.loadMetadataForFile(pathname) || {},
-			fileTooLarge = false,
-			text, fileTiddlers;
-
-		if("_canonical_uri" in fields) {
-			text = "";
-		} else if(fs.statSync(pathname).size > $tw.config.maxEditFileSize) {
-			var msg = "File " + pathname + " not loaded because it is too large";
-			console.log("Warning: " + msg);
-			fileTooLarge = true;
-			text = isTiddlerFile ? msg : "";
-		} else {
-			text = fs.readFileSync(pathname,typeInfo.encoding || "utf8");
-		}
-
-		if(isTiddlerFile) {
-			fileTiddlers = $tw.wiki.deserializeTiddlers(fileTooLarge ? ".txt" : path.extname(pathname),text,metadata) || [];
-		} else {
-			fileTiddlers =  [$tw.utils.extend({text: text},metadata)];
-		}
-		var combinedFields = $tw.utils.extend({},fields,metadata);
-		if(fileTooLarge && isTiddlerFile) {
-			delete combinedFields.type;    // type altered
-		}
-		$tw.utils.each(fileTiddlers,function(tiddler) {
-			$tw.utils.each(combinedFields,function(fieldInfo,name) {
-				if(typeof fieldInfo === "string" || $tw.utils.isArray(fieldInfo)) {
-					tiddler[name] = fieldInfo;
-				} else {
-					var value = tiddler[name];
-					switch(fieldInfo.source) {
-						case "subdirectories":
-							value = $tw.utils.stringifyList(path.relative(rootPath, filename).split(path.sep).slice(0, -1));
-							break;
-						case "filepath":
-							value = path.relative(rootPath, filename).split(path.sep).join("/");
-							break;
-						case "filename":
-							value = path.basename(filename);
-							break;
-						case "filename-uri-decoded":
-							value = $tw.utils.decodeURIComponentSafe(path.basename(filename));
-							break;
-						case "basename":
-							value = path.basename(filename,path.extname(filename));
-							break;
-						case "basename-uri-decoded":
-							value = $tw.utils.decodeURIComponentSafe(path.basename(filename,path.extname(filename)));
-							break;
-						case "extname":
-							value = path.extname(filename);
-							break;
-						case "created":
-							value = $tw.utils.stringifyDate(new Date(fs.statSync(pathname).birthtime));
-							break;
-						case "modified":
-							value = $tw.utils.stringifyDate(new Date(fs.statSync(pathname).mtime));
-							break;
-					}
-					if(fieldInfo.prefix) {
-						value = fieldInfo.prefix + value;
-					}
-					if(fieldInfo.suffix) {
-						value = value + fieldInfo.suffix;
-					}
-					tiddler[name] = value;
-				}
-			});
-		});
-		if(isEditableFile) {
-			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, isEditableFile: true, dynamicStoreId: dynamicStoreId, tiddlers: fileTiddlers});
-		} else {
-			tiddlers.push({dynamicStoreId: dynamicStoreId, tiddlers: fileTiddlers});
-		}
-	};
 	// Helper to recursively search subdirectories
-	var getAllFiles = function(dirPath, recurse, arrayOfFiles) {
+	var getAllFiles = function(dirPath, recurse, arrayOfFiles, rootPath, ignoredPathRegExp, followSymlinks, visitedPaths) {
 		recurse = recurse || false;
 		arrayOfFiles = arrayOfFiles || [];
+		rootPath = rootPath || dirPath;
+		visitedPaths = visitedPaths || Object.create(null);
+		var realDirPath = fs.realpathSync(dirPath);
+		if(visitedPaths[realDirPath]) {
+			return arrayOfFiles;
+		}
+		visitedPaths[realDirPath] = true;
 		var files = fs.readdirSync(dirPath);
 		files.forEach(function(file) {
-			if(recurse && fs.statSync(dirPath + path.sep + file).isDirectory()) {
-				arrayOfFiles = getAllFiles(dirPath + path.sep + file, recurse, arrayOfFiles);
-			} else if(fs.statSync(dirPath + path.sep + file).isFile()){
-				arrayOfFiles.push(path.join(dirPath, path.sep, file));
+			var itemPath = path.join(dirPath,file),
+				itemLinkStats = fs.lstatSync(itemPath),
+				relativePath = path.relative(rootPath,itemPath).split(path.sep).join("/");
+			if(itemLinkStats.isSymbolicLink() && followSymlinks === false) {
+				return;
+			}
+			if(ignoredPathRegExp) {
+				ignoredPathRegExp.lastIndex = 0;
+				if(ignoredPathRegExp.test(relativePath)) {
+					return;
+				}
+			}
+			var itemStats = fs.statSync(itemPath);
+			if(recurse && itemStats.isDirectory()) {
+				arrayOfFiles = getAllFiles(itemPath,recurse,arrayOfFiles,rootPath,ignoredPathRegExp,followSymlinks,visitedPaths);
+			} else if(itemStats.isFile()){
+				arrayOfFiles.push(itemPath);
 			}
 		});
 		return arrayOfFiles;
@@ -2075,7 +2102,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			tidInfo.fields.text = {suffix: tidInfo.suffix};
 		}
 		tidInfo.fields = tidInfo.fields || {};
-		processFile(tidInfo.file,tidInfo.isTiddlerFile,tidInfo.fields);
+		tiddlers.push($tw.loadTiddlersFromFileSpecification(filepath,tidInfo.file,tidInfo.isTiddlerFile,tidInfo.fields));
 	});
 	// Process any listed directories
 	$tw.utils.each(filesInfo.directories,function(dirSpec) {
@@ -2105,8 +2132,18 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 							id: dynamicStoreId,
 							directory: dirPath,
 							saveFilter: dirSpec.dynamicStore.saveFilter || "",
+							reselectOnSave: dirSpec.dynamicStore.reselectOnSave === true,
 							watch: dirSpec.dynamicStore.watch !== false,
 							debounce: dirSpec.dynamicStore.debounce || 400,
+							watcherProvider: dirSpec.dynamicStore.watcherProvider || "chokidar",
+							ignoredPathRegExp: dirSpec.dynamicStore.ignoredPathRegExp || "",
+							followSymlinks: dirSpec.dynamicStore.followSymlinks !== false,
+							writeRetry: dirSpec.dynamicStore.writeRetry || {},
+							externalAttachments: dirSpec.dynamicStore.externalAttachments ? {
+								basePath: path.resolve(filepath,dirSpec.dynamicStore.externalAttachments.basePath || dirSpec.path),
+								pathPrefix: dirSpec.dynamicStore.externalAttachments.pathPrefix || "files",
+								moveOnRoute: dirSpec.dynamicStore.externalAttachments.moveOnRoute === true
+							} : null,
 							filesRegExp: dirSpec.filesRegExp || "^.*$",
 							searchSubdirectories: !!dirSpec.searchSubdirectories,
 							isTiddlerFile: !!dirSpec.isTiddlerFile,
@@ -2114,7 +2151,18 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 						});
 					}
 				}
-				var	files = getAllFiles(dirPath, dirSpec.searchSubdirectories),
+				var ignoredPathRegExp = null,
+					ignoredPathRegExpText = dirSpec.ignoredPathRegExp ||
+						dirSpec.dynamicStore && dirSpec.dynamicStore.ignoredPathRegExp;
+				if(ignoredPathRegExpText) {
+					try {
+						ignoredPathRegExp = new RegExp(ignoredPathRegExpText);
+					} catch(e) {
+						console.log("Warning: invalid ignoredPathRegExp in tiddlywiki.files: " + e.message);
+					}
+				}
+				var followSymlinks = !(dirSpec.dynamicStore && dirSpec.dynamicStore.followSymlinks === false),
+					files = getAllFiles(dirPath,dirSpec.searchSubdirectories,undefined,dirPath,ignoredPathRegExp,followSymlinks),
 					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
 					metaRegExp = /^.*\.meta$/;
 				for(var t=0; t<files.length; t++) {
@@ -2122,7 +2170,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 					filename = path.basename(thisPath);
 					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
 						dirSpec.fields = dirSpec.fields || {};
-						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile || !!dirSpec.dynamicStore,dirSpec.path,dynamicStoreId);
+						tiddlers.push($tw.loadTiddlersFromFileSpecification(filepath,thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile || !!dirSpec.dynamicStore,dirSpec.path,dynamicStoreId));
 					}
 				}
 			} else {
@@ -2262,27 +2310,33 @@ path: path of wiki directory
 options:
 	parentPaths: array of parent paths that we mustn't recurse into
 	readOnly: true if the tiddler file paths should not be retained
+	wikiInfo: optional in-memory equivalent of tiddlywiki.info
+	filesInfo: optional in-memory equivalent of tiddlywiki.files, resolved relative
+		to the configured tiddler location
 */
 $tw.loadWikiTiddlers = function(wikiPath,options) {
 	options = options || {};
 	var parentPaths = options.parentPaths || [],
 		wikiInfoPath = path.resolve(wikiPath,$tw.config.wikiInfo),
-		wikiInfo,
+		wikiInfo = options.wikiInfo,
 		pluginFields;
-	// Bail if we don't have a wiki info file
-	if(fs.existsSync(wikiInfoPath)) {
-		wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"),function() {return null;});
-		if(!wikiInfo) {
-			console.log("warning: invalid JSON in tiddlywiki.info file at " + wikiInfoPath);
-			wikiInfo = {};
+	// Use options.wikiInfo when provided; otherwise load tiddlywiki.info from disk
+	if(!wikiInfo) {
+		if(fs.existsSync(wikiInfoPath)) {
+			wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"),function() {return null;});
+			if(!wikiInfo) {
+				console.log("warning: invalid JSON in tiddlywiki.info file at " + wikiInfoPath);
+				wikiInfo = {};
+			}
+		} else {
+			return null;
 		}
-	} else {
-		return null;
 	}
 	// Save the path to the tiddlers folder for the filesystemadaptor
 	var config = wikiInfo.config || {};
+	var tiddlersLocation = config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir;
 	if($tw.boot.wikiPath == wikiPath) {
-		$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir);
+		$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,tiddlersLocation);
 	}
 	// Load any parent wikis
 	if(wikiInfo.includeWikis) {
@@ -2328,8 +2382,11 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	$tw.modules.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerModules);
 	// Load the wiki files, registering them as writable
-	var resolvedWikiPath = path.resolve(wikiPath,$tw.config.wikiTiddlersSubDir);
-	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
+	var resolvedWikiPath = path.resolve(wikiPath,tiddlersLocation),
+		tiddlerFiles = options.filesInfo ?
+			$tw.loadTiddlersFromSpecification(resolvedWikiPath,$tw.boot.excludeRegExp,options.filesInfo) :
+			$tw.loadTiddlersFromPath(resolvedWikiPath);
+	$tw.utils.each(tiddlerFiles,function(tiddlerFile) {
 		if(!options.readOnly && tiddlerFile.filepath) {
 			$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
 				$tw.boot.files[tiddler.title] = {

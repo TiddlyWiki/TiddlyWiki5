@@ -2,4 +2,31 @@ title: $:/plugins/tiddlywiki/filesystem/readme
 
 The filesystem plugin is used under Node.js to synchronise tiddler changes back to the file system. It is inert when used in the browser.
 
+! Custom dynamic store watchers
+
+The default dynamic store watcher is provided by the `chokidar` module in this plugin. An embedding application can select another provider with the `watcherProvider` property of a dynamic store.
+
+A provider is a JavaScript module with `module-type: filesystemwatcher`. It exports a `name` and a `create(options)` function. The function may return a watcher immediately or return a promise for one. The watcher must provide a `close()` function. The options passed to `create()` include:
+
+* `directory`, `searchSubdirectories`, and `followSymlinks`
+* `isIgnored(filepath,stats)`, which applies the store's file and path rules
+* `onEvent(filepath,eventType)`, where `eventType` is `change` or `unlink`
+* `onError(error)`
+
+Embedding applications can further customise the boundary with the `th-filesystem-watcher-event`, `th-filesystem-watcher-tiddler`, and `th-filesystem-watcher-error` hooks. Event and tiddler hooks receive an information object and may return it with `ignore: true`. This provides a policy boundary for application-specific revision or change-count checks without coupling those concepts to the core filesystem adaptor.
+
+The `th-filesystem-watcher-change` hook runs after a debounced `add`, `change`, or `delete` has been confirmed and added to the sync queue. It is suitable for waking an embedding application's sync loop or emitting diagnostics without reacting prematurely to the unlink half of an atomic replacement.
+
+Transient `EBUSY`, `EPERM`, `EACCES`, and `EAGAIN` save failures are retried with configurable exponential backoff. Final save failures invoke `th-filesystem-error`, allowing an embedding application to surface a native notification.
+
+Successful saves and deletions invoke `th-filesystem-change`. Applications can use this hook for side effects such as refreshing a Git history view without replacing or subclassing the filesystem adaptor.
+
+Confirmed watcher additions, changes, and deletions invoke `th-filesystem-watcher-change` after debounce and before the syncer drains the queued change.
+
+The teardown startup module invokes `th-filesystem-adaptor-should-close` after command processing. Embedded hosts that continue serving the wiki outside the core server command can set `shouldClose` to `false` on the information object and retain responsibility for calling `adaptor.close()` during shutdown.
+
+`ignoredPathRegExp` and `followSymlinks` are applied both while initially loading a dynamic store and while watching it. The regular expression receives a `/`-separated path relative to the store directory, so applications can consistently exclude attachment, metadata, or repository-management directories. Initial recursive loading also tracks resolved directories to avoid symlink cycles.
+
+By default, a tiddler continues to save into the dynamic store from which it was loaded. Set `reselectOnSave` to `true` on a store when its `saveFilter` is a live routing rule: every save will then evaluate the ordered store filters again, allowing a field or tag change to move the tiddler between stores.
+
 [[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/filesystem]]
