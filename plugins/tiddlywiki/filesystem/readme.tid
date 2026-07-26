@@ -21,6 +21,10 @@ Transient `EBUSY`, `EPERM`, `EACCES`, and `EAGAIN` save failures are retried wit
 
 Successful saves and deletions invoke `th-filesystem-change`. Applications can use this hook for side effects such as refreshing a Git history view without replacing or subclassing the filesystem adaptor.
 
+Confirmed watcher additions, changes, and deletions invoke `th-filesystem-watcher-change` after debounce and before the syncer drains the queued change.
+
+The teardown startup module invokes `th-filesystem-adaptor-should-close` after command processing. Embedded hosts that continue serving the wiki outside the core server command can set `shouldClose` to `false` on the information object and retain responsibility for calling `adaptor.close()` during shutdown.
+
 `ignoredPathRegExp` and `followSymlinks` are applied both while initially loading a dynamic store and while watching it. The regular expression receives a `/`-separated path relative to the store directory, so applications can consistently exclude attachment, metadata, or repository-management directories. Initial recursive loading also tracks resolved directories to avoid symlink cycles.
 
 By default, a tiddler continues to save into the dynamic store from which it was loaded. Set `reselectOnSave` to `true` on a store when its `saveFilter` is a live routing rule: every save will then evaluate the ordered store filters again, allowing a field or tag change to move the tiddler between stores.
