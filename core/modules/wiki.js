@@ -748,86 +748,99 @@ exports.findListingsOfTiddler = function(targetTitle, fieldName) {
 /*
 Sorts an array of tiddler titles according to an ordered list
 */
-exports.sortByList = function(array,listTitle) {
-	var self = this,
-		replacedTitles = Object.create(null);
-	// Given a title, this function will place it in the correct location
-	// within titles.
-	function moveItemInList(title) {
-		if(!$tw.utils.hop(replacedTitles, title)) {
-			replacedTitles[title] = true;
-			var newPos = -1,
-				tiddler = self.getTiddler(title);
-			if(tiddler) {
-				var beforeTitle = tiddler.fields["list-before"],
-					afterTitle = tiddler.fields["list-after"];
-				if(beforeTitle === "") {
-					newPos = 0;
-				} else if(afterTitle === "") {
-					newPos = titles.length;
-				} else if(beforeTitle) {
-					// if this title is placed relative
-					// to another title, make sure that
-					// title is placed before we place
-					// this one.
-					moveItemInList(beforeTitle);
-					newPos = titles.indexOf(beforeTitle);
-				} else if(afterTitle) {
-					// Same deal
-					moveItemInList(afterTitle);
-					newPos = titles.indexOf(afterTitle);
-					if(newPos >= 0) {
-						++newPos;
-					}
-				}
-				// If a new position is specified, let's move it
-				if(newPos !== -1) {
-					// get its current Pos, and make sure
-					// sure that it's _actually_ in the list
-					// and that it would _actually_ move
-					// (#4275) We don't bother calling
-					//         indexOf unless we have a new
-					//         position to work with
-					var currPos = titles.indexOf(title);
-					if(currPos >= 0 && newPos !== currPos) {
-						// move it!
-						titles.splice(currPos,1);
-						if(newPos >= currPos) {
-							newPos--;
-						}
-						titles.splice(newPos,0,title);
-					}
-				}
-			}
-		}
-	}
-	var list = this.getTiddlerList(listTitle);
+exports.sortByList = function(array, listTitle) {
 	if(!array || array.length === 0) {
 		return [];
-	} else {
-		var titles = [], t, title;
-		// First place any entries that are present in the list
-		for(t=0; t<list.length; t++) {
-			title = list[t];
-			if(array.indexOf(title) !== -1) {
-				titles.push(title);
-			}
-		}
-		// Then place any remaining entries
-		for(t=0; t<array.length; t++) {
-			title = array[t];
-			if(list.indexOf(title) === -1) {
-				titles.push(title);
-			}
-		}
-		// Finally obey the list-before and list-after fields of each tiddler in turn
-		var sortedTitles = titles.slice(0);
-		for(t=0; t<sortedTitles.length; t++) {
-			title = sortedTitles[t];
-			moveItemInList(title);
-		}
-		return titles;
 	}
+
+	const list = this.getTiddlerList(listTitle) || [],
+		arraySet = new Set(array),
+		listSet = new Set(list),
+		titles = [];
+
+	// Place entries present in both list and array (in list order)
+	for(const item of list) {
+		if(arraySet.has(item)) {
+			titles.push(item);
+			// Delete to handle duplicate entries in 'array' correctly
+			arraySet.delete(item);
+		}
+	}
+
+	// Append remaining entries from 'array' that weren't in 'list'
+	for(const title of array) {
+		if(!listSet.has(title)) {
+			titles.push(title);
+		}
+	}
+
+	// Fast index tracking map to avoid `indexOf` during relative moves
+	const titleIndexMap = new Map();
+	for(let i = 0; i < titles.length; i++) {
+		titleIndexMap.set(titles[i], i);
+	}
+
+	const visited = new Set();
+	// Given a title, this function will place it in the correct location
+	// within titles.
+	const moveItemInList = (item) => {
+		if(visited.has(item)) {
+			return;
+		}
+		visited.add(item);
+
+		const tiddler = this.getTiddler(item);
+		if(!tiddler) {
+			return;
+		}
+
+		const fields = tiddler.fields,
+			beforeTitle = fields["list-before"],
+			afterTitle = fields["list-after"];
+		let newPos = -1;
+
+		if(beforeTitle === "") {
+			newPos = 0;
+		} else if(afterTitle === "") {
+			newPos = titles.length;
+		} else if(beforeTitle) {
+			moveItemInList(beforeTitle);
+			newPos = titleIndexMap.has(beforeTitle) ? titleIndexMap.get(beforeTitle) : -1;
+		} else if(afterTitle) {
+			moveItemInList(afterTitle);
+			if(titleIndexMap.has(afterTitle)) {
+				newPos = titleIndexMap.get(afterTitle) + 1;
+			}
+		}
+
+		// If a valid new position was requested and item is in list
+		if(newPos !== -1 && titleIndexMap.has(item)) {
+			const currPos = titleIndexMap.get(item);
+			if(currPos !== newPos) {
+				// Move element in titles array
+				titles.splice(currPos, 1);
+				if(newPos > currPos) {
+					newPos--;
+				}
+				titles.splice(newPos, 0, item);
+
+				// Re-index updated range in titleIndexMap to keep lookups O(1)
+				const start = Math.min(currPos, newPos),
+					end = Math.max(currPos, newPos);
+				for(let idx = start; idx <= end; idx++) {
+					titleIndexMap.set(titles[idx], idx);
+				}
+			}
+		}
+	};
+
+	//Finally obey the list-before and list-after fields of each tiddler in turn
+	const initialOrder = titles.slice(0);
+	for(const title of initialOrder) {
+		moveItemInList(title);
+	}
+
+	return titles;
 };
 
 exports.getSubTiddler = function(title,subTiddlerTitle) {
