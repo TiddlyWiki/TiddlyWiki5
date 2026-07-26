@@ -321,7 +321,7 @@ FileSystemAdaptor.prototype.findDynamicStoreForTiddler = function(tiddler) {
 		if(store.saveFilter) {
 			var source = this.wiki.makeTiddlerIterator([title]),
 				result = this.wiki.filterTiddlers(store.saveFilter,null,source);
-			if(result.length > 0) {
+			if(result.indexOf(title) !== -1) {
 				return store;
 			}
 		}

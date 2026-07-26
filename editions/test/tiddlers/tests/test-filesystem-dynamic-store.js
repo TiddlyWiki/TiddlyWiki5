@@ -224,6 +224,13 @@ if($tw.node) {
 			});
 		});
 
+		it("does not route a tiddler when a save filter returns a different title", function() {
+			$tw.boot.dynamicStores[0].saveFilter = "[tag[route-me]]";
+			wiki.addTiddler(new $tw.Tiddler({title: "routed", tags: ["route-me"], text: "other tiddler"}));
+			wiki.addTiddler(new $tw.Tiddler({title: "not-routed", text: "candidate"}));
+			expect(adaptor.findDynamicStoreForTiddler(wiki.getTiddler("not-routed"))).toBeNull();
+		});
+
 		it("keeps saving a tiddler into the store it originally came from", function(done) {
 			// Simulate a tiddler that was loaded at boot from the dynamic store
 			$tw.boot.files["frozen"] = {
