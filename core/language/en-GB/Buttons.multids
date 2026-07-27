@@ -4,6 +4,8 @@ AdvancedSearch/Caption: advanced search
 AdvancedSearch/Hint: Advanced search
 Cancel/Caption: cancel
 Cancel/Hint: Discard changes to this tiddler
+Chevron/Expand: Expand
+Chevron/Collapse: Collapse
 Clone/Caption: clone
 Clone/Hint: Clone this tiddler
 Close/Caption: close

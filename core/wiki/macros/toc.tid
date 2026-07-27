@@ -1,6 +1,9 @@
 title: $:/core/macros/toc
 tags: $:/tags/Macro
 
+\define lingo-base() $:/language/Buttons/Chevron/
+\function tf.getChevronText(action) [<lingo-base>] [<action>] +[join[]get[text]] [<currentTiddler>] +[join[ ]]
+
 \define toc-open-icon() $:/core/images/down-arrow
 \define toc-closed-icon() $:/core/images/right-arrow
 
@@ -77,12 +80,12 @@ tags: $:/tags/Macro
     <li class=<<toc-item-class>>>
       <div class="tc-toc-item-row">
       <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-        <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[expand ]] }}}>
+        <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Expand">> >
           <$transclude tiddler=<<toc-closed-icon>> />
         </$button>
       </$reveal>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
-        <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[collapse ]] }}}>
+        <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Collapse">> >
           <$transclude tiddler=<<toc-open-icon>> />
         </$button>
       </$reveal>
@@ -105,13 +108,13 @@ tags: $:/tags/Macro
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
       <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-        <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[expand ]] }}}>
+        <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Expand">> >
         <$transclude tiddler=<<toc-closed-icon>> />
           <<toc-caption>>
         </$button>
       </$reveal>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
-        <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[collapse ]] }}}>
+        <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Collapse">> >
           <$transclude tiddler=<<toc-open-icon>> />
           <<toc-caption>>
         </$button>
@@ -151,12 +154,12 @@ tags: $:/tags/Macro
       <div class="tc-toc-item-row">
         <$list filter="[all[current]tagging[]$sort$]  -[subfilter<__exclude__>] +[limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible' tabindex='-1'>{{$:/core/images/blank}}</$button>">
           <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-            <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[expand ]] }}}>
+            <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Expand">> >
             <$transclude tiddler=<<toc-closed-icon>> />
             </$button>
           </$reveal>
           <$reveal type="match" stateTitle=<<toc-state>> text="open">
-            <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[collapse ]] }}}>
+            <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Collapse">> >
               <$transclude tiddler=<<toc-open-icon>> />
             </$button>
           </$reveal>
@@ -180,13 +183,13 @@ tags: $:/tags/Macro
     <li class=<<toc-item-class>>>
       <$list filter="[all[current]tagging[]$sort$] -[subfilter<__exclude__>] +[limit[1]]" variable="ignore" emptyMessage="""<$button class="tc-btn-invisible" tabindex="-1">{{$:/core/images/blank}}</$button><span class="toc-item-muted"><<toc-caption>></span>""">
         <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-          <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[expand ]] }}}>
+          <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Expand">> >
             <$transclude tiddler=<<toc-closed-icon>> />
             <<toc-caption>>
           </$button>
         </$reveal>
         <$reveal type="match" stateTitle=<<toc-state>> text="open">
-          <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label={{{ [<currentTiddler>addprefix[collapse ]] }}}>
+          <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Collapse">> >
             <$transclude tiddler=<<toc-open-icon>> />
             <<toc-caption>>
           </$button>
