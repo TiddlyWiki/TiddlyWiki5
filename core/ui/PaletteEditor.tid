@@ -84,7 +84,7 @@ title: $:/PaletteEditor
 	style.background-color=<<bgColour>>
 	style.height="2em"
 	style.width="100%"
-	style.border-color=<<colour foreground>>
+	style.border-color=<<contrastcolour colourA=<<colour foreground>> colourB=<<colourB>> target=<<bgColour>> >>
 	style.border-width="1px"
 	style.border-style="solid"
 	style.border-radius="2px"
@@ -101,7 +101,7 @@ title: $:/PaletteEditor
 \end
 
 \define delete-colour-index-actions() <$action-setfield $index=<<colourName>>/>
-\define palette-manager-colour-row-segment()
+\procedure palette-manager-colour-row-segment()
 \whitespace trim
 <$let colourEditTiddler="$:/temp/palette-colours/copy">
 <$edit-text
@@ -127,6 +127,12 @@ title: $:/PaletteEditor
 <$let bgColour={{{ [tf.palette.colours.get.colour<colourName>] }}}>
 <%if [<bgColour>is[colour]] %>
 <<tp-colour-preview>>
+<% else %>
+<$let bgColour={{{ [tf.copy.resolve.colour.name<colourName>] :map[tf.copy.palette.colours.get.colour<currentTiddler>] }}}>
+<%if [<bgColour>is[colour]] %>
+<<tp-colour-preview>>
+<% endif %>
+</$let>
 <% endif %>
 </$let>
 <% endif %>
