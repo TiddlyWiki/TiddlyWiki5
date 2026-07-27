@@ -11,8 +11,8 @@ title: $:/PaletteEditor
 
 \function tf.palette.get.colour(index) [{$:/palette}getindex<index>] :else[{$:/palette}get[palette-import]getindex<index>]
 
-\procedure tp-colour-widget-regexp() ^\s*<\$(?:macrocall|transclude)\b[^>]*\bname=(?:"""([^"]*)"""|'''([^']*)'''|"([^"]*)"|'([^']*)'|([^␠/>]+))[^>]*/>\s*$
-\procedure tp-colour-macro-regexp() ^\s*<<colou?r␠(?:name(?:=|:)␠*)?(?:"""([^"]*)"""|'''([^']*)'''|"([^"]*)"|'([^']*)'|([^␠>]+))>>\s*$
+\procedure tp-colour-widget-regexp() ^\s*<\$(?:macrocall\b(?=[^>]*\$name\s*=\s*(?:"""colou?r"""|'''colou?r'''|"colou?r"|'colou?r'|colou?r))|transclude\b(?=[^>]*\$variable\s*=\s*(?:"""colou?r"""|'''colou?r'''|"colou?r"|'colou?r'|colou?r)))[^>]*\bname\s*(?:=|:)\s*(?:"""([^"]*)"""|'''([^']*)'''|"([^"]*)"|'([^']*)'|([^\s/>]+))[^>]*/>\s*$
+\procedure tp-colour-macro-regexp() ^\s*<<colou?r\s+(?:name(?:=|:)\s*)?(?:"""([^"]*)"""|'''([^']*)'''|"([^"]*)"|'([^']*)'|([^\s>]+))>>\s*$
 \procedure tp-colour-filter-regexp() ^\s*\[tf\.colour\[([^\]]+)\]\]\s*$
 \procedure tp-colour-filters-regexp() (?:colour-(?:best-contrast|composite|contrast|darken|get-oklch|interpolate|lighten|set-(?:alpha|oklch))|tf\.interpolate-colours)(?![\w-])
 
@@ -28,7 +28,7 @@ title: $:/PaletteEditor
 
 \function tf.extract.colour.name.step(name)
 [tf.palette.get.colour<name>is[colour]then<name>] =>valueA
-[tf.palette.get.colour<name>split[ ]join[␠]] =>value
+[tf.palette.get.colour<name>] =>value
 [[value]is[variable]then<value>extractregexp<tp-colour-macro-regexp>] =>valueB
 [[value]is[variable]then<value>extractregexp<tp-colour-widget-regexp>] =>valueC
 [[value]is[variable]then<value>extractregexp<tp-colour-filter-regexp>] =>valueD
@@ -44,7 +44,7 @@ title: $:/PaletteEditor
 
 \function tf.copy.extract.colour.name.step(name)
 [tf.copy.palette.colours.get.colour<name>is[colour]then<name>] =>valueA
-[tf.copy.palette.colours.get.colour<name>split[ ]join[␠]] =>value
+[tf.copy.palette.colours.get.colour<name>] =>value
 [[value]is[variable]then<value>extractregexp<tp-colour-macro-regexp>] =>valueB
 [[value]is[variable]then<value>extractregexp<tp-colour-widget-regexp>] =>valueC
 [[value]is[variable]then<value>extractregexp<tp-colour-filter-regexp>] =>valueD
