@@ -11,22 +11,40 @@ title: $:/PaletteEditor
 
 \function tf.palette.get.colour(index) [{$:/palette}getindex<index>] :else[{$:/palette}get[palette-import]getindex<index>]
 
-\procedure tp-colour-widget-regexp() \bname=(?:"""([^"]*)"""|'''([^']*)'''|"([^"]*)"|'([^']*)'|([^␠/>]+))
-\procedure tp-colour-macro-regexp() <<colou?r␠(?:name(?:=|:)␠*)?(?:"""([^"]*)"""|'''([^']*)'''|"([^"]*)"|'([^']*)'|([^␠>]+))>>
-\procedure tp-colour-filter-regexp() \[tf\.colour\[([^\]]+)\]\]
-\procedure tp-colour-filters-regexp() colour-(?:best-contrast|composite|contrast|darken|get-oklch|interpolate|lighten|set-(?:alpha|oklch))(?![\w-])
+\procedure tp-colour-widget-regexp() ^\s*<\$(?:macrocall|transclude)\b[^>]*\bname=(?:"""([^"]*)"""|'''([^']*)'''|"([^"]*)"|'([^']*)'|([^␠/>]+))[^>]*/>\s*$
+\procedure tp-colour-macro-regexp() ^\s*<<colou?r␠(?:name(?:=|:)␠*)?(?:"""([^"]*)"""|'''([^']*)'''|"([^"]*)"|'([^']*)'|([^␠>]+))>>\s*$
+\procedure tp-colour-filter-regexp() ^\s*\[tf\.colour\[([^\]]+)\]\]\s*$
+\procedure tp-colour-filters-regexp() (?:colour-(?:best-contrast|composite|contrast|darken|get-oklch|interpolate|lighten|set-(?:alpha|oklch))|tf\.interpolate-colours)(?![\w-])
 
 \function tf.palette.colours.get.colour(index) [[$:/temp/palette-colours]getindex<index>]
+\function tf.copy.palette.colours.get.colour(index) [[$:/temp/palette-colours/copy]getindex<index>]
+\function tf.copy.palette.colours.get.colour.wrapper() [tf.copy.palette.colours.get.colour<colourName>]
 
 \function tf.resolve.colour.name(name)
-[tf.extract.colour.step<name>] =>next
+[tf.extract.colour.name.step<name>] =>next
 [<next>match<name>then<next>]
 :else[tf.resolve.colour.name<next>]
 \end tf.resolve.colour.name
 
-\function tf.extract.colour.step(name)
+\function tf.extract.colour.name.step(name)
 [tf.palette.get.colour<name>is[colour]then<name>] =>valueA
 [tf.palette.get.colour<name>split[ ]join[␠]] =>value
+[[value]is[variable]then<value>extractregexp<tp-colour-macro-regexp>] =>valueB
+[[value]is[variable]then<value>extractregexp<tp-colour-widget-regexp>] =>valueC
+[[value]is[variable]then<value>extractregexp<tp-colour-filter-regexp>] =>valueD
+[<valueA>!is[blank]else<valueB>!is[blank]else<valueC>!is[blank]else<valueD>!is[blank]] =>value
+[<value>!is[blank]else<name>]
+\end tf.extract.colour.name.step
+
+\function tf.copy.resolve.colour.name(name)
+[tf.copy.extract.colour.name.step<name>] =>next
+[<next>match<name>then<next>]
+:else[tf.copy.resolve.colour.name<next>]
+\end tf.copy.resolve.colour.name
+
+\function tf.copy.extract.colour.name.step(name)
+[tf.copy.palette.colours.get.colour<name>is[colour]then<name>] =>valueA
+[tf.copy.palette.colours.get.colour<name>split[ ]join[␠]] =>value
 [[value]is[variable]then{$:/palette}getindex<value>is[colour]then<value>] =>valueB
 [[value]is[variable]then{$:/palette}get[palette-import]getindex<value>is[colour]then<value>] =>valueC
 [[value]is[variable]then<value>extractregexp<tp-colour-macro-regexp>] =>valueD
@@ -34,22 +52,30 @@ title: $:/PaletteEditor
 [[value]is[variable]then<value>extractregexp<tp-colour-filter-regexp>] =>valueF
 [<valueA>!is[blank]else<valueB>!is[blank]else<valueC>!is[blank]else<valueD>!is[blank]else<valueE>!is[blank]else<valueF>!is[blank]] =>value
 [<value>!is[blank]else<name>]
-\end tf.extract.colour.step
+\end tf.copy.extract.colour.name.step
 
 \function tf.resolve.colour.name.wrapper() [tf.resolve.colour.name<colourName>]
 
 \function tf.palette.get.colour.wrapper() [tf.palette.get.colour<colourName>]
 
 \procedure tp-paletteeditor-input-actions()
-<%if [[$:/temp/palette-colours]getindex<tf.resolve.colour.name.wrapper>is[colour]] %>
+<$let colourValue={{{ [tf.copy.resolve.colour.name<colourName>] :map[tf.copy.palette.colours.get.colour<currentTiddler>] }}}>
+<%if [<colourValue>is[colour]] %>
 <$action-setfield $index=<<colourName>> $value={{{ [<colourEditTiddler>getindex<colourName>] }}}/>
+<%elseif [<colourValue>is[blank]] [<colourValue>match[]] %>
+<$action-setfield $index=<<colourName>> $value=""/>
 <% endif %>
+</$let>
 \end
 
 \procedure tp-paletteeditor-resolved-input-actions()
-<%if [<colourEditTiddler>get[text]is[colour]] %>
+<$let colourValue={{{ [<colourEditTiddler>get[text]] :map:flat[tf.copy.resolve.colour.name<currentTiddler>] =>colourName [tf.copy.palette.colours.get.colour<colourName>] }}}>
+<%if [<colourValue>is[colour]] %>
 <$action-setfield $index=<<colourName>> $value={{{ [<colourEditTiddler>get[text]] }}}/>
+<%elseif [<colourValue>is[blank]] [<colourValue>match[]] %>
+<$action-setfield $index=<<colourName>> $value=""/>
 <% endif %>
+</$let>
 \end
 
 \procedure tp-paletteeditor-colour-input-actions()
@@ -58,13 +84,33 @@ title: $:/PaletteEditor
 \end
 
 \procedure tp-paletteeditor-dropdown-button-show-actions()
-<$action-setfield $tiddler=<<colourEditTiddler>> text={{{ [tf.palette.colours.get.colour<colourName>] }}}/>
+<$action-setfield $tiddler=<<colourEditTiddler>> text={{{ [tf.palette.get.colour<newColourName>] }}}/>
 <$action-setfield $tiddler=<<state>> text="show"/>
 \end
 
 \procedure tp-paletteeditor-dropdown-button-hide-actions()
 <$action-deletetiddler $tiddler=<<state>>/>
 <$action-deletetiddler $tiddler=<<colourEditTiddler>>/>
+\end
+
+\procedure tp-colour-preview()
+<span
+	style.background-color=<<bgColour>>
+	style.height="2em"
+	style.width="100%"
+	style.border-color=<<colour foreground>>
+	style.border-width="1px"
+	style.border-style="solid"
+	style.border-radius="2px"
+	style.margin="3px 0"
+	class="tc-palette-manager-colour-input"
+	style.display="flex"
+	style.justify-content="center"
+	style.line-height="1.85em"
+	style.color=<<contrastcolour colourA=<<colour foreground>> colourB=<<colour background>> target=<<bgColour>>>>
+>
+<<lingo Preview/Hint>>
+</span>
 \end
 
 \define delete-colour-index-actions() <$action-setfield $index=<<colourName>>/>
@@ -80,8 +126,8 @@ title: $:/PaletteEditor
 	inputActions=<<tp-paletteeditor-input-actions>>
 />
 <br>
-<$let rawValue={{{ [[$:/temp/palette-colours/copy]getindex<colourName>] }}} colourEditTiddler={{{ [tf.resolve.colour.name<colourName>addprefix[/]addprefix<currentTiddler>addprefix[$:/temp/paletteeditor/input/]] }}} colourRefreshTitle={{{ [<colourEditTiddler>addsuffix[/refresh]] }}}>
-<%if [{$:/palette}getindex<tf.resolve.colour.name.wrapper>is[colour]] [{$:/palette}get[palette-import]getindex<tf.resolve.colour.name.wrapper>is[colour]] %>
+<$let rawValue={{{ [{$:/palette}getindex<colourName>] :else[{$:/palette}get[palette-import]getindex<colourName>] }}} colourEditTiddler={{{ [tf.resolve.colour.name<colourName>addprefix[/]addprefix<currentTiddler>addprefix[$:/temp/paletteeditor/input/]] }}} colourRefreshTitle={{{ [<colourEditTiddler>addsuffix[/refresh]] }}}>
+<%if [<rawValue>is[colour]then<rawValue>!regexp<tp-colour-filters-regexp>] :else[<rawValue>match[]] %>
 <$edit-text
 	tiddler={{{ [{$:/palette}getindex<colourName>then{$:/palette}] :else[{$:/palette}get[palette-import]] }}}
 	index={{{ [tf.resolve.colour.name<colourName>] }}}
@@ -90,25 +136,10 @@ title: $:/PaletteEditor
 	class="tc-palette-manager-colour-input"
 	inputActions=<<tp-paletteeditor-colour-input-actions>>
 />
-<%elseif [<colourName>!prefix[?]then<rawValue>!match[]] %>
+<%elseif [<colourName>!prefix[?]] %>
 <$let bgColour={{{ [tf.palette.colours.get.colour<colourName>] }}}>
 <%if [<bgColour>is[colour]] %>
-<span
-	style.background-color=<<bgColour>>
-	style.height="2em"
-	style.width="100%"
-	style.border-color=<<colour foreground>>
-	style.border-width="1px"
-	style.border-style="solid"
-	style.border-radius="2px"
-	style.margin="3px 0"
-	class="tc-palette-manager-colour-input"
-	style.display="flex"
-	style.justify-content="center"
-	style.line-height="1.85em"
->
-<<lingo Preview/Hint>>
-</span>
+<<tp-colour-preview>>
 <% endif %>
 </$let>
 <% endif %>
@@ -132,6 +163,8 @@ title: $:/PaletteEditor
 	refreshTitle=<<colourRefreshTitle>>
 />
 <br/>
+<$let rawValue={{{ [{$:/palette}getindex<newColourName>] :else[{$:/palette}get[palette-import]getindex<newColourName>] }}}>
+<%if [<rawValue>is[colour]then<rawValue>!regexp<tp-colour-filters-regexp>] :else[<rawValue>match[]] %>
 <$edit-text
 	index=<<newColourName>>
 	type="color"
@@ -139,6 +172,14 @@ title: $:/PaletteEditor
 	class="tc-palette-manager-colour-input"
 	inputActions=<<tp-paletteeditor-colour-input-actions>>
 />
+<%elseif [<newColourName>!prefix[?]] %>
+<$let bgColour={{{ [tf.palette.colours.get.colour<newColourName>] }}}>
+<%if [<bgColour>is[colour]] %>
+<<tp-colour-preview>>
+<% endif %>
+</$let>
+<% endif %>
+</$let>
 <br><br>
 </$let>
 </$reveal>
@@ -207,3 +248,4 @@ title: $:/PaletteEditor
 
 <<palette-manager-table>>
 </$let>
+</$set>
