@@ -1,0 +1,13 @@
+change-category: widget
+change-type: feature
+created: 20260711015446000
+description: New validValues attribute for button and reveal widgets; tabs fall back to the default tab when the state is stale
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9751
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9751
+type: text/vnd.tiddlywiki
+
+* [[ButtonWidget]] and [[RevealWidget]] accept a new `validValues` attribute holding a filter expression; when the current state value is not among the filter results, the widget falls back to its `default`
+* The `tabs` macro passes its tab list as `validValues` automatically, so removing a tab whose state tiddler still names it no longer leaves a blank panel without a selected button (fixes [[Issue #6548|https://github.com/TiddlyWiki/TiddlyWiki5/issues/6548]])

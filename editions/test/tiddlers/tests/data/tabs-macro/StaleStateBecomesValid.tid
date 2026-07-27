@@ -1,0 +1,33 @@
+title: TabsMacro/StaleStateBecomesValid
+description: tabs macro switches from the default tab to the state tab as soon as that tab exists (issue #6548)
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [[$:/core/macros/tabs]]
+<<tabs "[tag[myTab]]" "TabTwo" "$:/state/tabs-test" explicitState:"$:/state/tabs-test">>
++
+title: TabOne
+caption: t 1
+tags: myTab
+
+Text tab 1
++
+title: TabTwo
+caption: t 2
+tags: myTab
+
+Text tab 2
++
+title: $:/state/tabs-test
+
+TabFour
++
+title: Actions
+
+<$action-setfield $tiddler="TabFour" text="Text tab 4" tags="myTab"/>
++
+title: ExpectedResult
+
+<p><div class="tc-tab-set " role="tablist"><div class="tc-tab-buttons "><button aria-selected="true" class=" tc-tab-selected" data-tab-title="TabFour" role="tab">TabFour</button><button aria-selected="false" class="" data-tab-title="TabOne" role="tab">t 1</button><button aria-selected="false" class="" data-tab-title="TabTwo" role="tab">t 2</button></div><div class="tc-tab-divider "></div><div class="tc-tab-content " role="tabpanel"><div class="tc-reveal"><p>Text tab 4</p></div><div class="tc-reveal" hidden="true"></div><div class="tc-reveal" hidden="true"></div></div></div></p>

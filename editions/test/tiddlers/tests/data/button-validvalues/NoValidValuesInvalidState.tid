@@ -1,0 +1,38 @@
+title: Button/ValidValues/NoValidValuesInvalidState
+description: Button without validValues and invalid state — no button selected
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Narrative
+
+This test documents the default behaviour without `validValues`. The state tiddler contains `InvalidValue`, which does not match any button's `setTo`. Since there is no `validValues` attribute, no fallback occurs — neither button should be highlighted. This is the behaviour that [[issue #6548|https://github.com/TiddlyWiki/TiddlyWiki5/issues/6548]] reports as a problem, and which the `validValues` attribute is designed to fix.
++
+title: $:/state/test-btn
+text: InvalidValue
++
+title: Output
+
+\whitespace trim
+
+<style>
+.selected { background-color: red; color: white; }
+</style>
+
+<$button set="$:/state/test-btn"
+	setTo="OptionA"
+	default="OptionA"
+	selectedClass="selected"
+>
+	A
+</$button>
+<$button set="$:/state/test-btn"
+	setTo="OptionB"
+	default="OptionA"
+	selectedClass="selected"
+>
+	B
+</$button>
++
+title: ExpectedResult
+
+<p><style>.selected { background-color: red; color: white; }</style></p><p><button aria-checked="false" class="">A</button><button aria-checked="false" class="">B</button></p>

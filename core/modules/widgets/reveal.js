@@ -149,6 +149,7 @@ RevealWidget.prototype.execute = function() {
 	this.stateTitle = this.getAttribute("stateTitle");
 	this.stateField = this.getAttribute("stateField");
 	this.stateIndex = this.getAttribute("stateIndex");
+	this.validValues = this.getAttribute("validValues");
 	this.readState();
 	// Construct the child widgets
 	var childNodes = this.isOpen ? this.parseTreeNode.children : [];
@@ -179,6 +180,13 @@ RevealWidget.prototype.readState = function() {
 	}
 	if(state === null) {
 		state = this["default"];
+	}
+	// If validValues is specified, fall back to default when state doesn't match any valid value
+	if(this.validValues && state !== defaultState) {
+		var validValuesList = this.wiki.filterTiddlers(this.validValues,this);
+		if(validValuesList.indexOf(state) === -1) {
+			state = defaultState;
+		}
 	}
 	switch(this.type) {
 		case "popup":
@@ -232,7 +240,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex || changedAttributes.validValues) {
 		this.refreshSelf();
 		return true;
 	} else {

@@ -36,6 +36,7 @@ The content of the `<$button>` widget is displayed within the button.
 |selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the tiddler specified in <<.attr set>> already has the value specified in <<.attr setTo>>  |
 |selectedAria |<<.from-version "5.4.0">> An ARIA attribute to be set to `true` or `false` when <<.attr selectedClass>> is defined. Allowed values are `aria-checked` (default), `aria-selected` and `aria-pressed`  |
 |default |Default value if <<.attr set>> tiddler is missing for testing against <<.attr setTo>> to determine <<.attr selectedClass>> |
+|validValues |<<.from-version "5.5.0">> An optional filter evaluating to the list of valid values for the state. If the current value of <<.attr set>> is not in this list, the <<.attr default>> value is used instead for determining <<.attr selectedClass>>. This is useful for falling back to a default selection when the state contains a stale or invalid value |
 |popup |Title of a state tiddler for a popup that is toggled when the button is clicked. See PopupMechanism for details |
 |popupTitle |Title of a state tiddler for a popup that is toggled when the button is clicked. In difference to the <<.attr popup>> attribute, ''no'' TextReference is used. See PopupMechanism for details |
 |popupAbsCoords |<<.from-version "5.2.4">> If set to ''yes'' writes absolute coordinates to the tiddler referenced by the <<.attr popup>>. If set to ''no'' (the default) uses relative coordinates. See [[Coordinate Systems]] for details |

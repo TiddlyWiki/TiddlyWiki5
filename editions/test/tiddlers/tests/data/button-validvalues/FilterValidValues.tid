@@ -1,0 +1,50 @@
+title: Button/ValidValues/FilterValidValues
+description: Button validValues — filter expression as validValues
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Narrative
+
+This test verifies that the `validValues` attribute accepts filter expressions, not just literal space-separated lists. The valid values are defined by the filter `[tag[options]]`, which resolves to the tiddlers `OptionA` and `OptionB` (both tagged `options`).
+
+The state tiddler contains `InvalidValue`, which is not in the filter results. The button widget falls back to `default` (`OptionA`), so button ''A'' should be highlighted with a red background.
++
+title: OptionA
+tags: options
+text: A
++
+title: OptionB
+tags: options
+text: B
++
+title: $:/state/test-btn
+text: InvalidValue
++
+title: Output
+
+\whitespace trim
+
+<style>
+.selected { background-color: red; color: white; }
+</style>
+
+<$button set="$:/state/test-btn"
+	setTo="OptionA"
+	default="OptionA"
+	validValues="[tag[options]]"
+	selectedClass="selected"
+>
+	A
+</$button>
+<$button set="$:/state/test-btn"
+	setTo="OptionB"
+	default="OptionA"
+	validValues="[tag[options]]"
+	selectedClass="selected"
+>
+	B
+</$button>
++
+title: ExpectedResult
+
+<p><style>.selected { background-color: red; color: white; }</style></p><p><button aria-checked="true" class=" selected">A</button><button aria-checked="false" class="">B</button></p>
