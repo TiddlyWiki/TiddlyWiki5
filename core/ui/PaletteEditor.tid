@@ -45,12 +45,10 @@ title: $:/PaletteEditor
 \function tf.copy.extract.colour.name.step(name)
 [tf.copy.palette.colours.get.colour<name>is[colour]then<name>] =>valueA
 [tf.copy.palette.colours.get.colour<name>split[ ]join[␠]] =>value
-[[value]is[variable]then{$:/palette}getindex<value>is[colour]then<value>] =>valueB
-[[value]is[variable]then{$:/palette}get[palette-import]getindex<value>is[colour]then<value>] =>valueC
-[[value]is[variable]then<value>extractregexp<tp-colour-macro-regexp>] =>valueD
-[[value]is[variable]then<value>extractregexp<tp-colour-widget-regexp>] =>valueE
-[[value]is[variable]then<value>extractregexp<tp-colour-filter-regexp>] =>valueF
-[<valueA>!is[blank]else<valueB>!is[blank]else<valueC>!is[blank]else<valueD>!is[blank]else<valueE>!is[blank]else<valueF>!is[blank]] =>value
+[[value]is[variable]then<value>extractregexp<tp-colour-macro-regexp>] =>valueB
+[[value]is[variable]then<value>extractregexp<tp-colour-widget-regexp>] =>valueC
+[[value]is[variable]then<value>extractregexp<tp-colour-filter-regexp>] =>valueD
+[<valueA>!is[blank]else<valueB>!is[blank]else<valueC>!is[blank]else<valueD>!is[blank]] =>value
 [<value>!is[blank]else<name>]
 \end tf.copy.extract.colour.name.step
 
