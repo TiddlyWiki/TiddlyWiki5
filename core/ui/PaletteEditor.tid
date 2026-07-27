@@ -92,6 +92,7 @@ title: $:/PaletteEditor
 \end
 
 \procedure tp-colour-preview()
+<$let colourB=<<contrastcolour colourA=<<colour background>> colourB=<<colour page-background>> target=<<bgColour>> >> >
 <span
 	style.background-color=<<bgColour>>
 	style.height="2em"
@@ -105,10 +106,11 @@ title: $:/PaletteEditor
 	style.display="flex"
 	style.justify-content="center"
 	style.line-height="1.85em"
-	style.color=<<contrastcolour colourA=<<colour foreground>> colourB=<<colour background>> target=<<bgColour>>>>
+	style.color=<<contrastcolour colourA=<<colour foreground>> colourB=<<colourB>> target=<<bgColour>> >>
 >
 <<lingo Preview/Hint>>
 </span>
+</$let>
 \end
 
 \define delete-colour-index-actions() <$action-setfield $index=<<colourName>>/>
