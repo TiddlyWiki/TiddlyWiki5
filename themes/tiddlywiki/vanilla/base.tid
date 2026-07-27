@@ -888,6 +888,12 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	color: <<colour tiddler-background>>;
 }
 
+.tc-drop-down a.tc-list-item-selected,
+.tc-drop-down a.tc-list-item-selected:hover {
+	background-color: <<colour primary>>;
+	color: <<colour tiddler-background>>;
+}
+
 /*
 ** Page layout
 */
