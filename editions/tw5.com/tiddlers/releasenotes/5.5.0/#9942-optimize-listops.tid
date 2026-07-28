@@ -1,0 +1,13 @@
+change-category: filters
+change-type: enhancement
+created: 20260726124618748
+description: Optimizes listops filter operators
+github-contributors: saqimtiaz
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/9942
+modified: 20260726125232992
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9942
+type: text/vnd.tiddlywiki
+
+* The listops filter operators have been rewritten using more modern JavaScript (ES2017). The `unique` and `remove` operators have improved performance in certain circumstances.
