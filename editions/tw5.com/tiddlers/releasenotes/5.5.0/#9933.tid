@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#9933
+description: Update Chinese translations
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: translation
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9933
+github-contributors: BramChen
+
+* Add `WikiInformation/Generate/Caption` in `ControlPanel.multids`

@@ -583,7 +583,7 @@ describe("Filter tests", function() {
 			});
 
 			it("should handle the '[is[draft]]' operator", function() {
-				var wiki = new $tw.Wiki();
+				var wiki = $tw.test.wiki();
 				wiki.addTiddlers([
 					{title: "A"},
 					{title: "Draft of 'A'", "draft.of": "A", "draft.title": "A"},

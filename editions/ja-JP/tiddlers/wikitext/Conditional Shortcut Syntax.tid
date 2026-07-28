@@ -1,0 +1,64 @@
+created: 20230901122740573
+modified: 20260220110638765
+original-modified: 20230901123102263
+tags: WikiText
+title: Conditional Shortcut Syntax
+ja-title: 条件付きショートカットの構文
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.2">> 条件付きショートカットの構文は、[[Wikiテキスト|WikiText]]内でif-then-elseロジックを表現する便利な方法を提供します。この構文は[[フィルタ式|Filter Expression]]を評価し、少なくとも1つの結果がある場合(結果の値に関係なく)に条件が真であるとみなします。
+
+"if"や"elseif"句では、変数`condition`にはフィルタ条件を評価した最初の結果の値が含まれます。
+
+簡単な例:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<%if [{$:/info/url/protocol}match[file:]] %>
+  ファイルURIから読み込まれています
+<%else%>
+  ファイルURIから読み込まれていません
+<%endif%>
+'/>
+
+`<%else%>`句の前に、一つ以上の`<%elseif%>`句を含めることができます:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<%if [{$:/info/url/protocol}match[file:]] %>
+  ファイルURIから読み込まれています
+<%elseif [{$:/info/url/protocol}match[https:]] %>
+  HTTPS URIから読み込まれています
+<%elseif [{$:/info/url/protocol}match[http:]] %>
+  HTTP URIから読み込まれています
+<%else%>
+  不明プロトコルで読み込まれています
+<%endif%>
+'/>
+
+条件付きショートカットの構文はネストできます:
+
+<$macrocall $name='wikitext-example-without-html'
+src='\procedure test(animal)
+<%if [<animal>match[Elephant]] %>
+  それはゾウです
+<%else%>
+  <%if [<animal>match[Giraffe]] %>
+    それはキリンです
+  <%else%>
+    それは全く知られていません
+  <%endif%>
+<%endif%>
+\end
+
+<<test "Giraffe">>
+
+<<test "Elephant">>
+
+<<test "Antelope">>
+'/>
+
+注意:
+
+* デフォルトでは、句はインラインモードで解析されます。ブロックモードで解析させるには、開始の`<%if %>`、 `<%elseif%>`または`<%else%>`の後に2つの改行を挿入します
+* ウィジェットとHTML要素は、単一の条件句内になければなりません。ある条件句で要素を開始し、別の条件句で終了することはできません
+* 条件付きショートカットの構文には、プロシージャーの定義などのプラグマを含めることはできません
+

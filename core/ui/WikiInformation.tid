@@ -17,6 +17,10 @@ This page summarises high level information about the configuration of this ~Tid
 Drag this link to copy this tool to another wiki
 \end intrinsic-lingo-Drag/Caption
 
+\procedure intrinsic-lingo-Generate/Caption()
+Click to generate wiki information report
+\end intrinsic-lingo-Generate/Caption
+
 \procedure lingo(title,mode:"inline")
 <%if [<title>addprefix<lingo-base>is[shadow]] %>
 	<$transclude $tiddler={{{ [<title>addprefix<lingo-base>] }}} $mode=<<mode>>/>
@@ -105,7 +109,7 @@ Drag this link to copy this tool to another wiki
 
 <$button>
 <<display-wiki-info-modal>>
-Click to generate wiki information report
+<<lingo title:"Generate/Caption">>
 </$button>
 
 <$link to="$:/core/ui/ControlPanel/WikiInformation">

@@ -1,0 +1,13 @@
+created: 20260222152853141
+modified: 20260222184916224
+tags: [[Let Filter Run Prefix]]
+title: Let Filter Run Prefix (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "3 2 1 4 :let[[myvar]] 6 7 8 [(myvar)sort[]]" "Uses the named prefix">>
+<<.operator-example 2 "3 2 1 4 =>myvar 6 7 8 [(myvar)sort[]]" "Uses the short-hand prefix">>
+<<.operator-example 3 "3 2 1 4 =>myvar 6 7 8 [<myvar>]" "Angle brackets return only the first value">>
+<<.operator-example 4 "3 2 1 4 =>mynumbers [(mynumbers)sum[]] [(mynumbers)average[]]">>
+<<.operator-example 5 '"[0-9]" =>digitsRE abc 123 de45 67fg hij :filter[regexp<digitsRE>]' "A regular expression containing square brace requires using a variable parameter">>
+<<.operator-example 6 '"[prefix[ca]then[ca]]" "[suffix[at]then[at]]" other =>myfilters cat can bat bug :cascade[(myfilters)]' "Define filters to be used with the [[Cascade Filter Run Prefix]]">>
+<<.operator-example 7 "[[⁎ ]] [[⁑ ]] [[⁂ ]] :let[[prefixList]] [tag[Learning]first[3]] :map:flat[(prefixList)addsuffix<currentTiddler>]">>

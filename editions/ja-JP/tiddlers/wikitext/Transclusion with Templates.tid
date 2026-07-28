@@ -1,0 +1,62 @@
+created: 20141129210304238
+modified: 20260403114617086
+original-modified: 20150220161405000
+tags: [[Transclusion in WikiText]]
+title: Transclusion with Templates
+ja-title: テンプレートを使用したトランスクルージョン
+caption: テンプレートの使用
+
+! 紹介
+
+[[トランスクルージョンの基本的な使用法|Transclusion Basic Usage]]では、Tiddler Aの内容をTiddler Bに含める方法を説明しました。ここでは、Tiddler Aの内容が次のようになっているとします:
+
+```
+@@background-color:yellow;
+こんにちは。タイトルは{{!!title}}です
+@@
+```
+
+この内容により、Tiddler Aのタイトルが黄色の背景で表示されます(CSSスタイルについては、[[WikiTextでのスタイルとクラス|Styles and Classes in WikiText]]を参照してください)。Tiddler Bでも同じようにタイトルを表示したいとします。しかし、後で背景色を変更したり、Tiddler間で一貫性を保ちたいので、スタイル指示をコピー＆ペーストしたくありません。これは典型的なトランスクルージョンのケースのようですので、通常の方法で``{{A}}``を使ってTiddler BにTiddler Aをトランスクルードしてみましょう。Tiddler Bには次の内容が表示されます:
+
+<<<
+@@background-color:yellow;
+こんにちは。タイトルはAです
+@@
+<<<
+
+スタイルは期待どおりに適用されますが、タイトルが間違っています。``{{!!title}}``で参照したいのはターゲットのTiddler Bであり、ソースのTiddler Aではありません。
+
+解決策は//テンプレート//を使用することです。この場合、ソースTiddler Aは[[テンプレートTiddler|TemplateTiddlers]]と呼ばれ、表記法``{{||A}}``を使用してTiddler Bに//適用され//ます。違いは、特定のTiddlerを明示的に参照しない[[テキスト参照|TextReference]]はすべて[[現在のTiddler|Current Tiddler]]、つまりターゲットTiddlerに適用されることです。結果として、Tiddler Bは期待どおりに表示されます:
+
+<<<
+@@background-color:yellow;
+こんにちは。タイトルはBです
+@@
+<<<
+
+! 使用法
+
+テンプレートを介してトランスクルードすることは、マスクを適用するようなものです。ソースのTiddlerに汎用的な参照(マスクの目の穴など)が含まれていると仮定すると、それらはターゲットのTiddlerの値(マスクを着用している人の目など)に置き換えられます。
+
+テンプレートは、現在のTiddlerだけでなく、任意のTiddlerに適用できます。これは、完全な表記法``{{<target>||<template>}}``を使用して実現します。デフォルトの``<target>``は[[現在のTiddler|Current Tiddler]]です(上記の例で使用したものです)。
+
+! 例
+
+!! タグをきれいに表示するための事前定義済みテンプレート
+
+システムテンプレート``$:/core/ui/TagTemplate``をタグに適用すると、ドロップダウンメニュー付きのタグピルとして表示できます:
+
+```
+{{Transclusion||$:/core/ui/TagTemplate}}
+```
+
+はこのようにレンダリングされます {{Transclusion||$:/core/ui/TagTemplate}}
+
+参照:
+
+* [[Wikiテキストでのトランスクルージョン|Transclusion in WikiText]]
+* [[トランスクルージョンの基本的な使用法|Transclusion Basic Usage]]
+* [[テキスト参照|TextReference]]
+* [[テンプレートTiddler|TemplateTiddlers]]
+* [[Transcludeウィジェット|TranscludeWidget]]
+* [[現在のTiddler|Current Tiddler]]

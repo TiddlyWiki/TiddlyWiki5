@@ -1,0 +1,47 @@
+created: 20141129201509859
+modified: 20260402111456035
+original-modified: 20141130194810119
+tags: [[Transclusion in WikiText]]
+title: Transclusion Basic Usage
+ja-title: トランスクルージョンの基本的な使用法
+caption: 基本的な使用法
+
+! 単純なトランスクルージョン
+
+[[TiddlerA]]のコンテンツを[[TiddlerB]]に取り込むには、後者を編集して次のテキストを含めます:
+
+```
+これはTiddlerAのコンテンツです: {{TiddlerA}}
+```
+
+その結果、[[TiddlerA]]の''text''フィールドの内容(つまりメインコンテンツ)が[[TiddlerB]]内にレンダリングされます。
+
+! 使用法
+
+表記``{{TiddlerA}}``は``{{TiddlerA!!text}}``のショートカットです。これは、トランスクルージョンのデフォルトフィールドが''text''であるためですが、他の[[フィールド|TiddlerFields]]も明示的に使用できます。たとえば、次のようにしてTiddlerAが最後に変更された時刻を表示できます: 
+
+```
+TiddlerAは{{TiddlerA!!modified}}に更新されました
+```
+
+Tiddlerのタイトルを省略することで、トランスクルージョン表記を使用して、現在のTiddlerのフィールドの内容を表示することもできます。例:
+
+```
+このTiddlerは{{!!modified}}に更新されました
+```
+
+! 再帰エラー
+
+``{{!!text}}``や``{{}}``を使用するとエラー(//Recursive transclusion error in transclude widget//)が発生することに注意してください。これは、現在のTiddlerの内容を現在のTiddlerの内容(つまり、それ自身)に含めることは無意味なためです。このエラーメッセージに遭遇した場合は、直接的または間接的に何かをそれ自身に含めようとしていることを意味します(たとえば、Tiddler A がTiddler Bをトランスクルードし、Tiddler BがTiddler Cをトランスクルードし、Tiddler CがさらにTiddler Aをトランスクルードする場合など)。
+
+! もっと詳しく知るには
+
+TiddlyWikiでは、トランスクルージョンは上記のような生コンテンツを含めることだけに限定されません。トランスクルージョンのより高度な使用方法については、[[テンプレートを使用したトランスクルージョン|Transclusion with Templates]]を参照してください。
+
+参考:
+
+* [[トランスクルージョン|Transclusion]]
+* [[テンプレートを使用したトランスクルージョン|Transclusion with Templates]]
+* [[Wikiテキストでのトランスクルージョン|Transclusion in WikiText]]
+* [[テキスト参照|TextReference]]
+* [[Tiddlerのフィールド|TiddlerFields]]

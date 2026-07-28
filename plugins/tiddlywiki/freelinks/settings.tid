@@ -9,3 +9,5 @@ Filter defining tiddlers to which freelinks are made: <$edit-text tiddler="$:/co
 <$checkbox tiddler="$:/config/Freelinks/WordBoundary" field="text" checked="yes" unchecked="no" default="yes"> <$link to="$:/config/Freelinks/WordBoundary">Word Boundary Check</$link> </$checkbox>
 
 <$checkbox tiddler="$:/config/Freelinks/IgnoreCase" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/Freelinks/IgnoreCase">Ignore case</$link> </$checkbox>
+
+Maximum rendered freelinks (higher values may slow down large tiddlers): <$edit-text tiddler="$:/config/Freelinks/MaxLinks" tag="input" placeholder="500" default="500"/>

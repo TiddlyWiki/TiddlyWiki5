@@ -189,7 +189,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 	}
 	return {
 		text: text,
-		resultList: [text]
+		resultList: text === undefined ? text : [text]
 	};
 };
 
@@ -338,7 +338,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(vars = {}) {
 				const value = vars[name];
 				return Array.isArray(value)
 					? { text: value[0], resultList: value }
-					: { text: value, resultList: [value] };
+					: { text: value, resultList: value === undefined ? value : [value] };
 			}
 			opts = opts || {};
 			opts.variables = Object.assign({}, vars, opts.variables || {});
@@ -452,9 +452,7 @@ Widget.prototype.computeAttribute = function(attribute,options) {
 	} else { // String attribute
 		value = attribute.value;
 		if(options.asList) {
-			if(value === undefined) {
-				value = [];
-			} else {
+			if(value !== undefined) {
 				value = [value];
 			}
 		}

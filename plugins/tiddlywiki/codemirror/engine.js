@@ -256,12 +256,11 @@ CodeMirrorEngine.prototype.getText = function() {
 Fix the height of textarea to fit content
 */
 CodeMirrorEngine.prototype.fixHeight = function() {
-	// rows takes precedence
-	if(this.widget.editRows) {
-		this.cm.setSize(null,this.widget.editRows + "em");
-	} else if(this.widget.editAutoHeight) {
+	if(this.widget.editAutoHeight) {
 		// Resize to fit
 		this.cm.setSize(null,null);
+	} else if(this.widget.editRows) {
+		this.cm.setSize(null,this.widget.editRows + "em");
 	} else {
 		var fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
 		fixedHeight = Math.max(fixedHeight,20);

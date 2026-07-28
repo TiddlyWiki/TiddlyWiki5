@@ -217,6 +217,11 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 		fileInfo.isEditableFile = true;
 		fileInfo.originalpath = options.fileInfo.originalpath;
 	}
+	// Propagate the pinFilepath flag (so generateTiddlerFilepath can short-circuit
+	// FileSystemPaths and write back to the original location)
+	if(options.fileInfo && !!options.fileInfo.pinFilepath) {
+		fileInfo.pinFilepath = true;
+	}
 	// Check if the tiddler has any unsafe fields that can't be expressed in a .tid or .meta file: containing control characters, or leading/trailing whitespace
 	var hasUnsafeFields = false;
 	$tw.utils.each(tiddler.getFieldStrings(),function(value,fieldName) {
@@ -319,9 +324,16 @@ exports.generateTiddlerFilepath = function(title,options) {
 		extension = options.extension || "",
 		originalpath = (options.fileInfo && options.fileInfo.originalpath) ? options.fileInfo.originalpath : "",
 		overwrite = options.fileInfo && options.fileInfo.overwrite || false,
+		pinFilepath = !!(options.fileInfo && options.fileInfo.pinFilepath),
 		filepath;
+	// If the tiddler's filepath is pinned via tiddlywiki.files, the originalpath
+	// wins and the path filters are skipped entirely.
+	if(pinFilepath && originalpath) {
+		var pinnedExt = path.extname(originalpath);
+		filepath = originalpath.substring(0,originalpath.length - pinnedExt.length);
+	}
 	// Check if any of the pathFilters applies
-	if(options.pathFilters && options.wiki) {
+	if(!filepath && options.pathFilters && options.wiki) {
 		$tw.utils.each(options.pathFilters,function(filter) {
 			if(!filepath) {
 				var source = options.wiki.makeTiddlerIterator([title]),
@@ -336,13 +348,14 @@ exports.generateTiddlerFilepath = function(title,options) {
 		//Use the originalpath without the extension
 		var ext = path.extname(originalpath);
 		filepath = originalpath.substring(0,originalpath.length - ext.length);
+		// normalise "\" to "/" so the sanitiser keeps subdirectories
+		// (it strips "\", not "/") instead of flattening them.
+		filepath = filepath.split(path.sep).join("/");
 	} else if(!filepath) {
 		filepath = title;
 		// Remove any forward or backward slashes so we don't create directories
 		filepath = filepath.replace(/\/|\\/g,"_");
 	}
-	// Replace any Windows control codes
-	filepath = filepath.replace(/^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/i,"_$1_");
 	// Replace any leading spaces with the same number of underscores
 	filepath = filepath.replace(/^ +/,function (u) { return u.replace(/ /g, "_");});
 	//If the path does not start with "." or ".." && a path seperator, then
@@ -352,8 +365,23 @@ exports.generateTiddlerFilepath = function(title,options) {
 	}
 	// Replace any Unicode control codes
 	filepath = filepath.replace(/[\x00-\x1f\x80-\x9f]/g,"_");
-	// Replace any characters that can't be used in cross-platform filenames
-	filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^/g,"_"));
+	// Replace any characters that can't be used in cross-platform filenames.
+	if(!pinFilepath) {
+		filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^|\\/g,"_"));
+	}
+	// Per segment (catches "sub/CON"), MUST be after transliterate which can create a
+	// reserved name. Reserved names are wrapped on every path incl pinned;
+	// trailing dots/spaces (Windows strips) fixed for generated names, not pinned.
+	filepath = filepath.split("/").map(function(segment) {
+		if(segment === "" || segment === "." || segment === "..") {
+			return segment;
+		}
+		segment = segment.replace(/^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/i,"_$1_");
+		if(!pinFilepath) {
+			segment = segment.replace(/[. ]+$/,function(u) { return u.replace(/[. ]/g,"_"); });
+		}
+		return segment;
+	}).join("/");
 	// Replace any dots or spaces at the end of the extension with the same number of underscores
 	extension = extension.replace(/[\. ]+$/, function (u) { return u.replace(/[\. ]/g, "_");});
 	// Truncate the extension if it is too long

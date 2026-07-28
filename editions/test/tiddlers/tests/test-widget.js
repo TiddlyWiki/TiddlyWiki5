@@ -45,7 +45,7 @@ describe("Widget module", function() {
 	}
 
 	it("should deal with text nodes and HTML elements", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Test parse tree
 		var parseTreeNode = {type: "widget", children: [
 			{type: "text", text: "A text node"},
@@ -77,7 +77,7 @@ describe("Widget module", function() {
 	});
 
 	it("should deal with transclude widgets and indirect attributes", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add a tiddler
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "the quick brown fox"}
@@ -137,7 +137,7 @@ describe("Widget module", function() {
 	});
 
 	it("should detect recursion of the transclude macro", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add a tiddler
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "<$transclude tiddler='TiddlerTwo'/>"},
@@ -158,7 +158,7 @@ describe("Widget module", function() {
 	});
 
 	it("should handle single-tiddler recursion with branching nodes", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add a tiddler
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "<$tiddler tiddler='TiddlerOne'><$transclude /> <$transclude /></$tiddler>"},
@@ -182,7 +182,7 @@ describe("Widget module", function() {
 	// end up being the same value for all iterations of the test. 
 	$tw.utils.each(["div","$button","$checkbox","$diff-text","$draggable","$droppable","dropzone","$eventcatcher","$keyboard","$link","$list filter=x variable=x","$radio","$reveal type=nomatch","$scrollable","$select","$view field=x"],function(tag) {
 		it(`${tag} cleans itself up if children rendering fails`, function() {
-			var wiki = new $tw.Wiki();
+			var wiki = $tw.test.wiki();
 			wiki.addTiddler({title: "TiddlerOne", text: `<$tiddler tiddler='TiddlerOne'><${tag}><$transclude />`});
 			var parseTreeNode = {type: "widget", children: [
 				{type: "transclude", attributes: {
@@ -204,7 +204,7 @@ describe("Widget module", function() {
 	});
 
 	it("should handle many-tiddler recursion with branching nodes", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add a tiddler
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "<$transclude tiddler='TiddlerTwo'/> <$transclude tiddler='TiddlerTwo'/>"},
@@ -225,7 +225,7 @@ describe("Widget module", function() {
 	});
 
 	it("should deal with SVG elements", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Construct the widget node
 		var text = "<svg class=\"tv-image-new-button\" viewBox=\"83 81 50 50\" width=\"22pt\" height=\"22pt\"><path d=\"M 101.25 112.5 L 101.25 127.5 C 101.25 127.5 101.25 127.5 101.25 127.5 L 101.25 127.5 C 101.25 129.156855 102.593146 130.5 104.25 130.5 L 111.75 130.5 C 113.406854 130.5 114.75 129.156854 114.75 127.5 L 114.75 112.5 L 129.75 112.5 C 131.406854 112.5 132.75 111.156854 132.75 109.5 L 132.75 102 C 132.75 100.343146 131.406854 99 129.75 99 L 114.75 99 L 114.75 84 C 114.75 82.343146 113.406854 81 111.75 81 L 104.25 81 C 104.25 81 104.25 81 104.25 81 C 102.593146 81 101.25 82.343146 101.25 84 L 101.25 99 L 86.25 99 C 86.25 99 86.25 99 86.25 99 C 84.593146 99 83.25 100.343146 83.25 102 L 83.25 109.5 C 83.25 109.5 83.25 109.5 83.25 109.5 L 83.25 109.5 C 83.25 111.156855 84.593146 112.5 86.25 112.5 Z\"/></svg>\n";
 		var widgetNode = createWidgetNode(parseText(text,wiki,{parseAsInline:true}),wiki);
@@ -237,7 +237,7 @@ describe("Widget module", function() {
 	});
 
 	it("should parse and render transclusions", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add a tiddler
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "Jolly Old World"},
@@ -254,7 +254,7 @@ describe("Widget module", function() {
 	});
 
 	it("should render the view widget", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add a tiddler
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "Jolly Old World"}
@@ -283,7 +283,7 @@ describe("Widget module", function() {
 	});
 
 	it("should deal with the set widget", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "Jolly Old World"},
@@ -313,7 +313,7 @@ describe("Widget module", function() {
 	});
 
 	it("should deal with the let widget", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "lookup"},
 			{title: "TiddlerTwo", lookup: "value", newlookup: "value", wrong: "wrong"},
@@ -347,7 +347,7 @@ describe("Widget module", function() {
 	});
 
 	it("should deal with attributes specified as macro invocations", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Construct the widget node
 		var text = "\\define myMacro(one:\"paramOne\",two,three:\"paramTwo\")\nMy something $one$, $two$ or other $three$\n\\end\n<div class=<<myMacro 'something' three:'thing'>>>Content</div>";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
@@ -358,7 +358,7 @@ describe("Widget module", function() {
 	});
 
 	it("should deal with built-in macros", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "Jolly Old World", type: "text/vnd.tiddlywiki"}
@@ -374,7 +374,7 @@ describe("Widget module", function() {
 
 	/* This test reproduces issue #4693. */
 	it("should render the entity widget", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Construct the widget node
 		var text = "\n\n<$entity entity='&nbsp;' />\n\n<$entity entity='&#x2713;' />\n";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
@@ -391,7 +391,7 @@ describe("Widget module", function() {
 	});
 
 	it("should deal with the list widget", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "Jolly Old World"},
@@ -451,7 +451,7 @@ describe("Widget module", function() {
 
 
 	it("should deal with the list widget using a counter variable", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "Jolly Old World"},
@@ -593,7 +593,7 @@ describe("Widget module", function() {
 
 	var testListJoin = function(oldList, newList) {
 		return function() {
-			var wiki = new $tw.Wiki();
+			var wiki = $tw.test.wiki();
 			// Add some tiddlers
 			wiki.addTiddler({title: "Numbers", text: "", list: oldList});
 			var text = "<$list filter='[list[Numbers]]' variable='item' join=', '><<item>></$list>";
@@ -632,7 +632,7 @@ describe("Widget module", function() {
 
 	var testCounterLast = function(oldList, newList) {
 		return function() {
-			var wiki = new $tw.Wiki();
+			var wiki = $tw.test.wiki();
 			// Add some tiddlers
 			wiki.addTiddler({title: "Numbers", text: "", list: oldList});
 			var text = "<$list filter='[list[Numbers]]' variable='item' counter='c'><<item>><$text text={{{ [<c-last>match[no]then[, ]] }}} /></$list>";
@@ -654,7 +654,7 @@ describe("Widget module", function() {
 	it("the list widget with counter-last should update correctly when first item is removed", testCounterLast("1 2 3 4", "2 3 4"));
 
 	it("should deal with the list widget followed by other widgets", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "Jolly Old World"},
@@ -727,7 +727,7 @@ describe("Widget module", function() {
 	});
 
 	it("should deal with the list widget and external templates", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
 			{title: "$:/myTemplate", text: "(<$view field='title'/>)"},
@@ -747,7 +747,7 @@ describe("Widget module", function() {
 	});
 
 	it("should deal with the list widget and empty lists", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Construct the widget node
 		var text = "<$list emptyMessage='nothing'><$view field='title'/></$list>";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
@@ -758,7 +758,7 @@ describe("Widget module", function() {
 	});
 
 	it("should refresh lists that become empty", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "Jolly Old World"},
@@ -788,7 +788,7 @@ describe("Widget module", function() {
 	 * if they use transclusion for their value. This relates to PR #4108.
 	 */
 	it("should refresh imported <$set> widgets", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
 			{title: "Raw", text: "Initial value"},
@@ -808,7 +808,7 @@ describe("Widget module", function() {
 	});
 
 	it("should support mixed setWidgets and macros when importing", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
 			{title: "A", text: "\\define A() Aval"},
@@ -824,7 +824,7 @@ describe("Widget module", function() {
 	});
 
 	it("should skip parameters widgets when importing", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
 			{title: "B", text: "<$parameters bee=nothing><$set name='B' value='Bval'>\n\ndummy text</$set></$parameters>"},
@@ -838,7 +838,7 @@ describe("Widget module", function() {
 	});
 
 	it("should use default $parameters if directly rendered", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var text = "<$parameters bee=default $$dollar=bill nothing empty=''>bee=<<bee>>, $dollar=<<$dollar>>, nothing=<<nothing>>, empty=<<empty>></$parameters>";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
@@ -848,7 +848,7 @@ describe("Widget module", function() {
 	});
 
 	it("should use default \\parameters if directly rendered", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var text = "\\parameters(bee:default $$dollar:bill nothing)\nbee=<<bee>>, $$dollar=<<$$dollar>>, nothing=<<nothing>>";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
@@ -858,7 +858,7 @@ describe("Widget module", function() {
 	});
 
 	it("can have more than one macroDef variable imported", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		wiki.addTiddlers([
 			{title: "ABC", text: "<$set name=A value=A>\n\n<$set name=B value=B>\n\n<$set name=C value=C>\n\ndummy text</$set></$set></$set>"},
 			{title: "D", text: "\\define D() D"}]);
@@ -911,7 +911,7 @@ describe("Widget module", function() {
 	 *  doesn't forget its childrenNodes.
 	 */
 	it("should work when import widget imports nothing", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var text = "\\import [prefix[XXX]]\nDon't forget me.";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
@@ -925,7 +925,7 @@ describe("Widget module", function() {
 	 *  visual difference, but may affect plugins if it doesn't.
 	 */
 	it("should work when import pragma is standalone", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var text = "\\import [prefix[XXX]]";
 		var parseTreeNode = parseText(text,wiki);
 		// Test the resulting parse tree node, since there is no
@@ -944,7 +944,7 @@ describe("Widget module", function() {
 	 * at least ONE variable.
 	 */
 	it("adding imported variables doesn't change qualifyers", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		function wikiparse(text) {
 			var tree = parseText(text,wiki);
 			var widgetNode = createWidgetNode(tree,wiki);

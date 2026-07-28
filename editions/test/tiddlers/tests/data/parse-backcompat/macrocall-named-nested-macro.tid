@@ -1,0 +1,14 @@
+title: Parse/BackCompat/MacrocallNestedMacroValue
+description: Macrocall attribute value can be a nested macro invocation
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define d() DEFD
+\define x(d) got=$d$
+<<x d=<<d>>>>
++
+title: ExpectedResult
+
+<p>got=DEFD</p>

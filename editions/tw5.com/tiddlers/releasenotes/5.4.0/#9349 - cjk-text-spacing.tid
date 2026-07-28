@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9349
+description: CJK text spacing
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: theme
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9349
+github-contributors: oeyoews
+
+Added CSS ''text-autospace'' property to specify spacing between CJK and non-CJK characters

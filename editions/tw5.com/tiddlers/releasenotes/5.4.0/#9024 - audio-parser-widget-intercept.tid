@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9024
+description: Audio parser widget intercept
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9024
+github-contributors: well-noted
+
+Allow the audio parser to be intercepted by a widget, enabling plugin authors to extend audio handling with custom attributes

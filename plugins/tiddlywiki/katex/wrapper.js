@@ -11,6 +11,7 @@ Wrapper for `katex.min.js` that provides a `<$latex>` widget. It is also availab
 
 var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),
 	Widget = require("$:/core/modules/widgets/widget.js").widget;
+require("$:/plugins/tiddlywiki/katex/mhchem.min.js");
 
 katex.macros = {};
 katex.updateMacros = function() {

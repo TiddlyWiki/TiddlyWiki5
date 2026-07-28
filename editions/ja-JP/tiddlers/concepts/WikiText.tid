@@ -1,0 +1,17 @@
+created: 20131205155227468
+modified: 20260216114242627
+original-modified: 20230303214711802
+tags: Concepts Reference
+title: WikiText
+ja-title: Wikiテキスト
+type: text/vnd.tiddlywiki
+
+WikiTextは、広範囲のテキストフォーマット、ハイパーテキスト、インタラクティブ機能を入力するための簡潔で表現力豊かな方法です。複雑なユーザーインターフェイスに邪魔されることなく、執筆に集中できます。[[マークダウン|Markdown]]のユーザーにとって使いやすいように設計されていますが、リンクとインタラクティブ機能に重点が置かれています
+
+[[エディターツールバー|Editor toolbar]]ボタンを使用して、Wikiテキストをテキストフィールドに挿入することもできます
+
+Wikiテキストの概要については、[[Wikiテキストのフォーマット|Formatting in WikiText]]と[[TiddlyWikiのテキストフォーマット|Formatting text in TiddlyWiki]]を参照してください
+
+次の要素のWikiテキスト構文がコアに組み込まれています: 
+
+<<list-links filter:"[tag[WikiText]]" class:"multi-columns">>

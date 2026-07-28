@@ -420,7 +420,7 @@ function extendInlineParse(thisArg,origFunc,twInlineRules) {
 /// post processing ///
 
 function wikify(state) {
-	var href, title, src;
+	var href, title, src, alt;
 	var tagStack = [];
 
 	state.tokens.forEach(function(blockToken) {
@@ -458,6 +458,7 @@ function wikify(state) {
 						token.tag = "$image";
 						src = token.attrGet("src");
 						alt = token.attrGet("alt");
+						token.attrSet("alt",alt);
 						title = token.attrGet("title");
 
 						token.attrs[token.attrIndex("src")][0] = "source";

@@ -1,0 +1,25 @@
+created: 20131205155836435
+modified: 20260223101955973
+original-modified: 20131214170445345
+tags: WikiText
+title: Paragraphs in WikiText
+ja-title: Wikiテキストでの段落
+type: text/vnd.tiddlywiki
+caption: 段落
+
+TiddlyWikiで段落の終わりを示すには、`enter`を2回押し、2重改行を入力する必要があります:
+
+```
+これは最初の段落です。
+
+そしてこれは二番目の段落です。
+```
+
+段落内の単一の改行は無視されます。例えば:
+
+<<wikitext-example src:"これは
+短い行で
+構成された
+段落です">>
+
+この動作が不便な場合は、[[Wikiテキストでの強制改行|Hard Linebreaks in WikiText]]を使用することもできます。

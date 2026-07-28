@@ -5,7 +5,8 @@ Advanced/Hint: Wewnętrzne informacje na temat TiddlyWiki
 Appearance/Caption: Wyświetlanie
 Appearance/Hint: Dostosowywanie wyglądu tej TiddlyWiki
 Basics/AnimDuration/Prompt: Długość animacji
-Basics/AutoFocus/Prompt: Domyślne wybrane pole do edycji przy tworzeniu nowego tiddlera
+Basics/AutoFocus/Prompt: Domyślnie zfocusowane pole przy tworzeniu nowego tiddlera
+Basics/AutoFocusEdit/Prompt: Domyślnie zfocusowane pole przy edycji istniejącego tiddlera
 Basics/Caption: Podstawowe
 Basics/DefaultTiddlers/BottomHint: Tiddlery, które mają spację w nazie otocz &#91;&#91;podwójnymi nawiasami kwadratowymi&#93;&#93;. Możesz też ustawić, by zawsze widzieć {{ostatnio otwarte tiddlery||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Domyślnie otwarte tiddlery
