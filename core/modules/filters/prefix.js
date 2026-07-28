@@ -15,7 +15,7 @@ Export our filter function
 exports.prefix = function(source,operator,options) {
 	const results = [],
 		suffixes = (operator.suffixes || [])[0] || [],
-		caseInsensitive = suffixes.indexOf("caseinsensitive") !== -1,
+		caseInsensitive = suffixes.includes("caseinsensitive"),
 		negate = operator.prefix === "!";
 
 	const operand = caseInsensitive ?
@@ -23,9 +23,8 @@ exports.prefix = function(source,operator,options) {
 		operator.operand;
 
 	source((tiddler,title) => {
-		const value = caseInsensitive ? title.toLowerCase() : title;
-		const matches = value.startsWith(operand);
-
+		const value = caseInsensitive ? title.toLowerCase() : title,
+			matches = value.startsWith(operand);
 		if(negate ? !matches : matches) {
 			results.push(title);
 		}
