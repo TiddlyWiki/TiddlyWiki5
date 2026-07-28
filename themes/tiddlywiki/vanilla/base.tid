@@ -1898,6 +1898,11 @@ html body.tc-body.tc-single-tiddler-window {
 	line-height: 1.4;
 }
 
+/* The checkmark column already indents the caption, so the entry needs less start padding */
+.tc-drop-down a.tc-preview-type-button {
+	<<padding-start 9px>>
+}
+
 .tc-drop-down .tc-tab-set .tc-tab-buttons button {
 	display: inline-block;
 	width: auto;
@@ -1945,6 +1950,12 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-drop-down-bullet {
 	display: inline-block;
 	width: 0.5em;
+}
+
+/* Fixed width column, so entries without a checkmark start at the same x position */
+.tc-drop-down-checkmark {
+	display: inline-block;
+	width: 1.1em;
 }
 
 .tc-drop-down .tc-tab-contents a {
