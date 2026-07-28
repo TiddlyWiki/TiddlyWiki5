@@ -3038,8 +3038,7 @@ input.tc-palette-manager-colour-input {
 	background: <<colour tab-border>>;
 }
 
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item a:hover,
-.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected a:hover {
+.tc-tabbed-table-of-contents .tc-table-of-contents .tc-toc-link:hover {
 	text-decoration: none;
 }
 

@@ -1,9 +1,6 @@
 title: $:/core/macros/toc
 tags: $:/tags/Macro
 
-\define lingo-base() $:/language/Buttons/Chevron/
-\function tf.getChevronText(action) [<lingo-base>] [<action>] +[join[]get[text]] [<currentTiddler>] +[join[ ]]
-
 \define toc-open-icon() $:/core/images/down-arrow
 \define toc-closed-icon() $:/core/images/right-arrow
 
@@ -29,6 +26,33 @@ tags: $:/tags/Macro
 <% endif %>
 \end
 
+\procedure toc-chevron(showCaption)
+\whitespace trim
+\function chevron-label(action) [[$:/language/Buttons/Chevron/]addsuffix<action>get[text]] [<_caption>!match[]else<currentTiddler>] +[join[ ]]
+<!-- a caption like "{{!!title}} - ^^deprecated^^" has to reach aria-label as plain text -->
+<$wikify name="_caption" text={{{ [<currentTiddler>get[caption]] }}} mode="inline">
+  <%if [<toc-state>get[text]match[open]]%>
+    <$button
+      setTitle=<<toc-state>>
+      setTo="close"
+      class="tc-btn-invisible tc-popup-keep tc-toc-chevron"
+      aria-label=<<chevron-label Collapse>> >
+      <$transclude tiddler=<<toc-open-icon>> />
+      <%if [<showCaption>match[yes]]%><<toc-caption>><%endif%>
+    </$button>
+  <%else%>
+    <$button
+      setTitle=<<toc-state>>
+      setTo="open"
+      class="tc-btn-invisible tc-popup-keep tc-toc-chevron"
+      aria-label=<<chevron-label Expand>> >
+      <$transclude tiddler=<<toc-closed-icon>> />
+      <%if [<showCaption>match[yes]]%><<toc-caption>><%endif%>
+    </$button>
+  <%endif%>
+</$wikify>
+\end
+
 \define toc-body(tag,sort:"",itemClassFilter,exclude,path,level)
 \whitespace trim
 <ol class="tc-toc">
@@ -40,7 +64,7 @@ tags: $:/tags/Macro
             <$list filter="[all[current]toc-link[no]]" >
               <$list-empty>
                 <!-- link to target-field or currentTiddler -->
-                <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+                <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}} class="tc-toc-link">
                   <<toc-level-indicator>>
                   <<toc-caption>>
                 </$link>
@@ -79,23 +103,14 @@ tags: $:/tags/Macro
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
       <div class="tc-toc-item-row">
-      <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-        <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Expand">> >
-          <$transclude tiddler=<<toc-closed-icon>> />
-        </$button>
-      </$reveal>
-      <$reveal type="match" stateTitle=<<toc-state>> text="open">
-        <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Collapse">> >
-          <$transclude tiddler=<<toc-open-icon>> />
-        </$button>
-      </$reveal>
-      <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
-        <<toc-caption>>
-      </$link>
+        <<toc-chevron>>
+        <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}} class="tc-toc-link">
+          <<toc-caption>>
+        </$link>
       </div>
-    <$reveal type="match" stateTitle=<<toc-state>> text="open">
-      <$macrocall $name="toc-expandable" tag=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>> path=<<__path__>>/>
-    </$reveal>
+      <%if [<toc-state>get[text]match[open]]%>
+        <$macrocall $name="toc-expandable" tag=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>> path=<<__path__>>/>
+      <%endif%>
     </li>
   </$set>
 </$qualify>
@@ -107,21 +122,10 @@ tags: $:/tags/Macro
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
-      <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-        <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Expand">> >
-        <$transclude tiddler=<<toc-closed-icon>> />
-          <<toc-caption>>
-        </$button>
-      </$reveal>
-      <$reveal type="match" stateTitle=<<toc-state>> text="open">
-        <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Collapse">> >
-          <$transclude tiddler=<<toc-open-icon>> />
-          <<toc-caption>>
-        </$button>
-      </$reveal>
-      <$reveal type="match" stateTitle=<<toc-state>> text="open">
+      <<toc-chevron yes>>
+      <%if [<toc-state>get[text]match[open]]%>
         <$macrocall $name="toc-expandable" tag=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>> path=<<__path__>>/>
-      </$reveal>
+      <%endif%>
     </li>
   </$set>
 </$qualify>
@@ -152,25 +156,16 @@ tags: $:/tags/Macro
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item" >
     <li class=<<toc-item-class>>>
       <div class="tc-toc-item-row">
-        <$list filter="[all[current]tagging[]$sort$]  -[subfilter<__exclude__>] +[limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible' tabindex='-1'>{{$:/core/images/blank}}</$button>">
-          <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-            <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Expand">> >
-            <$transclude tiddler=<<toc-closed-icon>> />
-            </$button>
-          </$reveal>
-          <$reveal type="match" stateTitle=<<toc-state>> text="open">
-            <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Collapse">> >
-              <$transclude tiddler=<<toc-open-icon>> />
-            </$button>
-          </$reveal>
+        <$list filter="[all[current]tagging[]$sort$]  -[subfilter<__exclude__>] +[limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible tc-toc-chevron tc-toc-chevron-blank' tabindex='-1'>{{$:/core/images/blank}}</$button>">
+          <<toc-chevron>>
         </$list>
-        <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+        <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}} class="tc-toc-link">
           <<toc-caption>>
         </$link>
       </div>
-      <$reveal type="match" stateTitle=<<toc-state>> text="open">
+      <%if [<toc-state>get[text]match[open]]%>
         <$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>> path=<<__path__>>/>
-      </$reveal>
+      <%endif%>
     </li>
   </$set>
 </$qualify>
@@ -181,23 +176,12 @@ tags: $:/tags/Macro
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
-      <$list filter="[all[current]tagging[]$sort$] -[subfilter<__exclude__>] +[limit[1]]" variable="ignore" emptyMessage="""<$button class="tc-btn-invisible" tabindex="-1">{{$:/core/images/blank}}</$button><span class="toc-item-muted"><<toc-caption>></span>""">
-        <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-          <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Expand">> >
-            <$transclude tiddler=<<toc-closed-icon>> />
-            <<toc-caption>>
-          </$button>
-        </$reveal>
-        <$reveal type="match" stateTitle=<<toc-state>> text="open">
-          <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" aria-label=<<tf.getChevronText "Collapse">> >
-            <$transclude tiddler=<<toc-open-icon>> />
-            <<toc-caption>>
-          </$button>
-        </$reveal>
+      <$list filter="[all[current]tagging[]$sort$] -[subfilter<__exclude__>] +[limit[1]]" variable="ignore" emptyMessage="""<$button class="tc-btn-invisible tc-toc-chevron tc-toc-chevron-blank" tabindex="-1">{{$:/core/images/blank}}</$button><span class="toc-item-muted"><<toc-caption>></span>""">
+        <<toc-chevron yes>>
       </$list>
-      <$reveal type="match" stateTitle=<<toc-state>> text="open">
+      <%if [<toc-state>get[text]match[open]]%>
         <$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>> path=<<__path__>>/>
-      </$reveal>
+      <%endif%>
     </li>
   </$set>
 </$qualify>

@@ -1,0 +1,32 @@
+title: $:/changenotes/5.5.0/#9797/impacts/toc-reveal-elements
+changenote: $:/changenotes/5.5.0/#9797
+created: 20260728204719154
+modified: 20260728204719154
+tags: $:/tags/ImpactNote
+description: A table of contents no longer contains `tc-reveal` elements
+impact-type: compatibility-break
+
+The `toc` macros render expand and collapse state with the `<%if%>` conditional instead of `$reveal`. Every entry loses two wrappers around the chevron button, and every expandable entry loses one more around its nested list.
+
+Before:
+
+```
+<div class="tc-toc-item-row">
+	<span class="tc-reveal"><button class="tc-btn-invisible tc-popup-keep">...</button></span>
+	<span class="tc-reveal" hidden="true"></span>
+	<a class="tc-tiddlylink">...</a>
+</div>
+```
+
+After:
+
+```
+<div class="tc-toc-item-row">
+	<button class="tc-btn-invisible tc-popup-keep tc-toc-chevron">...</button>
+	<a class="tc-tiddlylink tc-toc-link">...</a>
+</div>
+```
+
+Custom CSS that reached the chevron button through `.tc-reveal` should use the new `tc-toc-chevron` class instead. Nested lists already carry `tc-toc`, and item links now carry `tc-toc-link`, so no rule needs to name a bare `button`, `a` or `ol`.
+
+The practical risk is low. Every `$reveal` in a wiki emits `tc-reveal`, so the class identifies nothing in particular and makes a poor styling hook on its own. It was <<.deprecated-since 5.3.8>> for that reason, see [[Deprecated Core Classes]].
