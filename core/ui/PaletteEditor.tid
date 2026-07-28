@@ -182,7 +182,7 @@ title: $:/PaletteEditor
 </$let>
 \end
 
-\define palette-manager-colour-row()
+\procedure palette-manager-colour-row()
 \whitespace trim
 <tr>
 <td>
@@ -202,7 +202,7 @@ title: $:/PaletteEditor
 </tr>
 \end
 
-\define palette-manager-table()
+\procedure palette-manager-table()
 \whitespace trim
 <table>
 <tbody>
