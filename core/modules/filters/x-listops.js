@@ -11,20 +11,18 @@ Extended filter operators to manipulate the current list.
 
 /*
 	Fetch titles from the current list
-	*/
-var prepare_results = function (source) {
-	var results = [];
-	source(function (tiddler, title) {
-		results.push(title);
-	});
+*/
+const prepare_results = (source) => {
+	const results = [];
+	source((tiddler,title) => results.push(title));
 	return results;
 };
 
 /*
 	Moves a number of items from the tail of the current list before the item named in the operand
-	*/
-exports.putbefore = function (source, operator) {
-	var results = prepare_results(source),
+*/
+exports.putbefore = function(source,operator) {
+	const results = prepare_results(source),
 		index = results.indexOf(operator.operand),
 		count = $tw.utils.getInt(operator.suffix,1);
 	return (index === -1) ?
@@ -34,9 +32,9 @@ exports.putbefore = function (source, operator) {
 
 /*
 	Moves a number of items from the tail of the current list after the item named in the operand
-	*/
-exports.putafter = function (source, operator) {
-	var results = prepare_results(source),
+*/
+exports.putafter = function(source,operator) {
+	const results = prepare_results(source),
 		index = results.indexOf(operator.operand),
 		count = $tw.utils.getInt(operator.suffix,1);
 	return (index === -1) ?
@@ -46,9 +44,9 @@ exports.putafter = function (source, operator) {
 
 /*
 	Replaces the item named in the operand with a number of items from the tail of the current list
-	*/
-exports.replace = function (source, operator) {
-	var results = prepare_results(source),
+*/
+exports.replace = function(source,operator) {
+	const results = prepare_results(source),
 		index = results.indexOf(operator.operand),
 		count = $tw.utils.getInt(operator.suffix,1);
 	return (index === -1) ?
@@ -58,39 +56,39 @@ exports.replace = function (source, operator) {
 
 /*
 	Moves a number of items from the tail of the current list to the head of the list
-	*/
-exports.putfirst = function (source, operator) {
-	var results = prepare_results(source),
+*/
+exports.putfirst = function(source,operator) {
+	const results = prepare_results(source),
 		count = $tw.utils.getInt(operator.suffix,1);
-	return results.slice(-count).concat(results.slice(0, -count));
+	return [...results.slice(-count), ...results.slice(0, -count)];
 };
 
 /*
 	Moves a number of items from the head of the current list to the tail of the list
-	*/
-exports.putlast = function (source, operator) {
-	var results = prepare_results(source),
+*/
+exports.putlast = function(source,operator) {
+	const results = prepare_results(source),
 		count = $tw.utils.getInt(operator.suffix,1);
-	return results.slice(count).concat(results.slice(0, count));
+	return [...results.slice(count), ...results.slice(0, count)];
 };
 
 /*
 	Moves the item named in the operand a number of places forward or backward in the list
-	*/
-exports.move = function (source, operator) {
-	var results = prepare_results(source),
+*/
+exports.move = function(source,operator) {
+	const results = prepare_results(source),
 		index = results.indexOf(operator.operand),
 		count = $tw.utils.getInt(operator.suffix,1),
 		marker = results.splice(index, 1),
-		offset =  (index + count) > 0 ? index + count : 0;
+		offset = (index + count) > 0 ? index + count : 0;
 	return results.slice(0, offset).concat(marker).concat(results.slice(offset));
 };
 
 /*
 	Returns the items from the current list that are after the item named in the operand
-	*/
-exports.allafter = function (source, operator) {
-	var results = prepare_results(source),
+*/
+exports.allafter = function(source,operator) {
+	const results = prepare_results(source),
 		index = results.indexOf(operator.operand);
 	return (index === -1) ? [] :
 		(operator.suffix) ? results.slice(index) :
@@ -99,9 +97,9 @@ exports.allafter = function (source, operator) {
 
 /*
 	Returns the items from the current list that are before the item named in the operand
-	*/
-exports.allbefore = function (source, operator) {
-	var results = prepare_results(source),
+*/
+exports.allbefore = function(source,operator) {
+	const results = prepare_results(source),
 		index = results.indexOf(operator.operand);
 	return (index === -1) ? [] :
 		(operator.suffix) ? results.slice(0, index + 1) :
@@ -110,9 +108,9 @@ exports.allbefore = function (source, operator) {
 
 /*
 	Appends the items listed in the operand array to the tail of the current list
-	*/
-exports.append = function (source, operator) {
-	var append = $tw.utils.parseStringArray(operator.operand, "true"),
+*/
+exports.append = function(source,operator) {
+	const append = $tw.utils.parseStringArray(operator.operand,"true"),
 		results = prepare_results(source),
 		count = parseInt(operator.suffix) || append.length;
 	return (append.length === 0) ? results :
@@ -122,9 +120,9 @@ exports.append = function (source, operator) {
 
 /*
 	Prepends the items listed in the operand array to the head of the current list
-	*/
-exports.prepend = function (source, operator) {
-	var prepend = $tw.utils.parseStringArray(operator.operand, "true"),
+*/
+exports.prepend = function(source,operator) {
+	const prepend = $tw.utils.parseStringArray(operator.operand,"true"),
 		results = prepare_results(source),
 		count = $tw.utils.getInt(operator.suffix,prepend.length);
 	return (prepend.length === 0) ? results :
@@ -134,21 +132,19 @@ exports.prepend = function (source, operator) {
 
 /*
 	Returns all items from the current list except the items listed in the operand array
-	*/
-exports.remove = function (source, operator) {
-	var array = $tw.utils.parseStringArray(operator.operand, "true"),
-		results = prepare_results(source),
-		count = parseInt(operator.suffix) || array.length,
-		p,
-		len,
-		index;
-	len = array.length - 1;
-	for(p = 0; p < count; ++p) {
-		if(operator.prefix) {
-			index = results.indexOf(array[len - p]);
-		} else {
-			index = results.indexOf(array[p]);
-		}
+*/
+exports.remove = function(source, operator) {
+	const array = $tw.utils.parseStringArray(operator.operand, "true"),
+		results = prepare_results(source);
+
+	if(array.length === 0) {
+		return results;
+	}
+	const count = parseInt(operator.suffix, 10) || array.length,
+		targetItems = operator.prefix ? array.slice(-count).reverse() : array.slice(0, count);
+
+	for(const item of targetItems) {
+		const index = results.indexOf(item);
 		if(index !== -1) {
 			results.splice(index, 1);
 		}
@@ -158,40 +154,32 @@ exports.remove = function (source, operator) {
 
 /*
 	Returns all items from the current list sorted in the order of the items in the operand array
-	*/
-exports.sortby = function (source, operator) {
-	var results = prepare_results(source);
+*/
+exports.sortby = function(source,operator) {
+	const results = prepare_results(source);
 	if(!results || results.length < 2) {
 		return results;
 	}
-	var lookup = $tw.utils.parseStringArray(operator.operand, "true");
-	results.sort(function (a, b) {
-		return lookup.indexOf(a) - lookup.indexOf(b);
-	});
-	return results;
+	const lookup = $tw.utils.parseStringArray(operator.operand,"true");
+	return results.sort((a,b) => lookup.indexOf(a) - lookup.indexOf(b));
 };
+
 
 /*
 	Removes all duplicate items from the current list
-	*/
-exports.unique = function (source, operator) {
-	var results = prepare_results(source);
-	var set = results.reduce(function (a, b) {
-		if(a.indexOf(b) < 0) {
-			a.push(b);
-		}
-		return a;
-	}, []);
-	return set;
+*/
+exports.unique = function(source, operator) {
+	return Array.from(new Set(prepare_results(source)));
 };
 
-var cycleValueInArray = function(results,operands,stepSize) {
-	var resultsIndex,
+const cycleValueInArray = function(results,operands,stepSize) {
+	let resultsIndex,
 		step = stepSize || 1,
 		i = 0,
-		opLength = operands.length,
 		nextOperandIndex;
-	for(i; i < opLength; i++) {
+	const opLength = operands.length;
+
+	for(; i < opLength; i++) {
 		resultsIndex = results.indexOf(operands[i]);
 		if(resultsIndex !== -1) {
 			break;
@@ -213,15 +201,16 @@ var cycleValueInArray = function(results,operands,stepSize) {
 
 /*
 	Toggles an item in the current list.
-	*/
+*/
 exports.toggle = function(source,operator) {
 	return cycleValueInArray(prepare_results(source),operator.operands);
 };
 
 exports.cycle = function(source,operator) {
-	var results = prepare_results(source),
-		operands = (operator.operand.length ? $tw.utils.parseStringArray(operator.operand, "true") : [""]),
-		step = $tw.utils.getInt(operator.operands[1]||"",1);
+	const results = prepare_results(source),
+		operands = operator.operand.length ? $tw.utils.parseStringArray(operator.operand,"true") : [""];
+	let step = $tw.utils.getInt(operator.operands[1] || "",1);
+
 	if(step < 0) {
 		operands.reverse();
 		step = Math.abs(step);
