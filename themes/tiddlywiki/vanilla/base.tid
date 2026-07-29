@@ -1247,7 +1247,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	100% { opacity: 1; }
 }
 
-.pulse {
+.tc-pulse {
 	background: lightgreen;
 	animation: pulse 0.8s ease-out;
 	z-index: 99999;
