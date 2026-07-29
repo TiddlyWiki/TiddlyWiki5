@@ -79,7 +79,7 @@ code-body: yes
 			type="search"
 			default=""
 			placeholder={{{ [[Filter by ]addsuffix<groupLabel>] }}}
-			class="tc-tiny-gap-left tc-tiny-gap-right"
+			class="tc-tiny-gap"
 		/>
 	</label>
 

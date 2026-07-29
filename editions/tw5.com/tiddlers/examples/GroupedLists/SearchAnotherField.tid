@@ -84,7 +84,7 @@ code-body: yes
 			type="search"
 			default=""
 			placeholder={{{ [[Filter by ]addsuffix<searchLabel>] }}}
-			class="tc-tiny-gap-left tc-tiny-gap-right"
+			class="tc-tiny-gap"
 		/>
 	</label>
 

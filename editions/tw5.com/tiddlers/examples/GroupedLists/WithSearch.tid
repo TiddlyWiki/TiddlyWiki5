@@ -50,7 +50,7 @@ f.valuesFound searches the collected values as titles, f.tiddlersFor compares vi
 			type="search"
 			default=""
 			placeholder={{{ [[Filter by ]addsuffix<groupLabel>] }}}
-			class="tc-tiny-gap-left tc-tiny-gap-right"
+			class="tc-tiny-gap"
 		/>
 	</label>
 
