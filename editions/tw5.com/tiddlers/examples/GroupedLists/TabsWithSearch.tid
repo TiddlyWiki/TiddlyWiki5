@@ -1,7 +1,7 @@
 created: 20260728220400000
 description: Combine the tab strip with a search box inside the tab panel
 import-compound: [[GroupedLists/Bibliography]]
-modified: 20260729185240642
+modified: 20260729190424885
 tags: $:/tags/wiki-test-spec GroupedLists
 title: GroupedLists/Example/TabsWithSearch
 type: text/vnd.tiddlywiki-multiple
@@ -41,7 +41,7 @@ f.valuesFound searches the collected values as titles, f.tiddlersFor compares vi
 
 \function f.valuesFor(letter) [f.valuesFound[]] :filter[uppercase[]split[]first[]match<letter>]
 
-\function f.valuesShown(letter) [<letter>match[All]] :then[f.valuesFound[]] :else[f.valuesFor<letter>]
+\function f.valuesShown(letter) [f.valuesFound[]] :filter[<letter>match[All]] :else[f.valuesFor<letter>]
 
 \function f.tiddlersFor(value) [!is[system]has<groupField>] :filter[get<groupField>match<value>] +[sort[title]]
 
@@ -95,11 +95,10 @@ code-body: yes
 		</$button>
 	<%endif%>
 </div>
-<$list
-	filter="[f.valuesShown<currentTab>]"
-	variable="_value"
-	emptyMessage="//No matches in this tab//"
->
+<$list filter="[f.valuesShown<currentTab>]" variable="_value">
+	<$list-empty>
+		//No matches//
+	</$list-empty>
 	<div class="tc-menu-list-item">
 		<<_value>>
 

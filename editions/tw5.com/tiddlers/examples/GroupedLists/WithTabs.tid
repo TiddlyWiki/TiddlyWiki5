@@ -1,7 +1,7 @@
 created: 20260728220300000
 description: Bucket the groups into tabs by first character, with a count per tab
 import-compound: [[GroupedLists/Bibliography]]
-modified: 20260729185240642
+modified: 20260729190424885
 tags: $:/tags/wiki-test-spec GroupedLists
 title: GroupedLists/Example/WithTabs
 type: text/vnd.tiddlywiki-multiple
@@ -35,7 +35,7 @@ title: Output
 
 \function f.valuesFor(letter) [f.valuesAll[]] :filter[uppercase[]split[]first[]match<letter>]
 
-\function f.valuesShown(letter) [<letter>match[All]] :then[f.valuesAll[]] :else[f.valuesFor<letter>]
+\function f.valuesShown(letter) [f.valuesAll[]] :filter[<letter>match[All]] :else[f.valuesFor<letter>]
 
 \function f.tiddlersFor(value) [!is[system]has<groupField>] :filter[get<groupField>match<value>] +[sort[title]]
 
@@ -61,6 +61,9 @@ code-body: yes
 \whitespace trim
 
 <$list filter="[f.valuesShown<currentTab>]" variable="_value">
+	<$list-empty>
+		//No matches//
+	</$list-empty>
 	<div class="tc-menu-list-item">
 		<<_value>>
 

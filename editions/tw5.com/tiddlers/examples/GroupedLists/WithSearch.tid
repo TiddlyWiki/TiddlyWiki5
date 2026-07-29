@@ -66,11 +66,10 @@ f.valuesFound searches the collected values as titles, f.tiddlersFor compares vi
 		</$button>
 	<%endif%>
 </div>
-<$list
-	filter="[f.valuesFound[]]"
-	variable="_value"
-	emptyMessage="//No matches//"
->
+<$list filter="[f.valuesFound[]]" variable="_value">
+	<$list-empty>
+		//No matches//
+	</$list-empty>
 	<div class="tc-menu-list-item">
 		<<_value>>
 

@@ -1,7 +1,7 @@
 created: 20260728224000000
 description: Group by one field while the search box filters on another
 import-compound: [[GroupedLists/Bibliography]]
-modified: 20260729185240642
+modified: 20260729190424885
 tags: $:/tags/wiki-test-spec GroupedLists
 title: GroupedLists/Example/SearchAnotherField
 type: text/vnd.tiddlywiki-multiple
@@ -46,7 +46,7 @@ f.tiddlersMatching searches the extracted value as a title, which works whicheve
 
 \function f.valuesFor(letter) [f.valuesFound[]] :filter[uppercase[]split[]first[]match<letter>]
 
-\function f.valuesShown(letter) [<letter>match[All]] :then[f.valuesFound[]] :else[f.valuesFor<letter>]
+\function f.valuesShown(letter) [f.valuesFound[]] :filter[<letter>match[All]] :else[f.valuesFor<letter>]
 
 \function f.tiddlersFor(value) [f.tiddlersMatching[]] :filter[get<groupField>match<value>] +[sort[title]]
 
@@ -100,11 +100,10 @@ code-body: yes
 		</$button>
 	<%endif%>
 </div>
-<$list
-	filter="[f.valuesShown<currentTab>]"
-	variable="_value"
-	emptyMessage="//No matches in this tab//"
->
+<$list filter="[f.valuesShown<currentTab>]" variable="_value">
+	<$list-empty>
+		//No matches//
+	</$list-empty>
 	<div class="tc-menu-list-item">
 		<<_value>>
 
