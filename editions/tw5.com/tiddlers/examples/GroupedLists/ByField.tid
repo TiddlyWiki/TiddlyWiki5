@@ -1,0 +1,45 @@
+created: 20260728220100000
+description: Group tiddlers by the value of a field chosen in one place
+import-compound: [[GroupedLists/Bibliography]]
+modified: 20260729185240642
+tags: $:/tags/wiki-test-spec GroupedLists
+title: GroupedLists/Example/ByField
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+`groupField` names the field to group by. It is the only line to change when you want a different grouping.
+
+Two nested lists do the work:
+
+* `f.valuesAll` collects each distinct value of that field, sorted
+* `f.tiddlersFor` returns the tiddlers holding one of those values
+
+This test case imports 24 bibliography tiddlers from the `GroupedLists/Bibliography` payload. They came from a ~BibTeX import, so the field is `bibtex-author` rather than `author`.
+
+Barker and Shang each published twice, so their groups list two titles. Set `groupField` to `bibtex-entry-type` to regroup the same data by publication type.
++
+title: Output
+
+\whitespace trim
+
+<!-- bibtex-author<value> would make the field name the operator, which cannot be a variable, so f.tiddlersFor compares via get<groupField> -->
+
+<!-- No trailing whitespace after the field name: it becomes part of the name and the list silently renders nothing -->
+\procedure groupField() bibtex-author
+
+\function f.valuesAll() [all[tiddlers]!is[system]has<groupField>each<groupField>get<groupField>sort[]]
+
+\function f.tiddlersFor(value) [!is[system]has<groupField>] :filter[get<groupField>match<value>] +[sort[title]]
+
+<$list filter="[f.valuesAll[]]" variable="_value">
+	<div class="tc-menu-list-item">
+		<<_value>>
+
+		<$list filter="[f.tiddlersFor<_value>]">
+			<div class="tc-menu-list-subitem">
+				<$link><$text text={{{ [<currentTiddler>get[bibtex-title]] :else[<currentTiddler>] }}}/></$link>
+			</div>
+		</$list>
+	</div>
+</$list>
