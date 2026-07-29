@@ -1,0 +1,111 @@
+created: 20260728220400000
+description: Combine the tab strip with a search box inside the tab panel
+import-compound: [[GroupedLists/Bibliography]]
+modified: 20260729190424885
+tags: $:/tags/wiki-test-spec GroupedLists
+title: GroupedLists/Example/TabsWithSearch
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+`_TabContent` holds the search box as well as the list, so the search sits inside the panel and filters within the selected tab.
+
+Which values each definition reads is the whole design:
+
+* `f.letters` reads the //unfiltered// values, so tabs never disappear while you type and the selected tab cannot be stranded on an empty panel
+* `f.valuesShown` reads the //filtered// values, so the counts follow the search and a tab showing zero tells you not to look there
+
+This test case carries the same `_TabButton` and `_TabContent` payload tiddlers as the previous example, with the search box added to the panel.
+
+The input is a sibling of the list rather than a child of anything that recomputes, which is what keeps the cursor in the box while you type.
+
+Type `ba` and watch the counts change. Any tab whose count falls to zero shows the `emptyMessage` of the list instead of nothing at all.
++
+title: Output
+
+\whitespace trim
+
+<!-- Filter operator suffixes cannot be variables, so search:<groupField> and bibtex-author<value> are impossible.
+f.valuesFound searches the collected values as titles, f.tiddlersFor compares via get<groupField>. -->
+
+<!-- No trailing whitespace after the field name: it becomes part of the name and the list silently renders nothing -->
+\procedure groupField() bibtex-author
+
+\procedure groupLabel() Author
+
+\function f.valuesAll() [all[tiddlers]!is[system]has<groupField>each<groupField>get<groupField>sort[]]
+
+\function f.valuesFound() [f.valuesAll[]] :filter[search:title{$:/temp/GroupedLists/search}]
+
+\function f.letters() [f.valuesAll[]] :map[uppercase[]split[]first[]] +[unique[]sort[]]
+
+\function f.valuesFor(letter) [f.valuesFound[]] :filter[uppercase[]split[]first[]match<letter>]
+
+\function f.valuesShown(letter) [f.valuesFound[]] :filter[<letter>match[All]] :else[f.valuesFor<letter>]
+
+\function f.tiddlersFor(value) [!is[system]has<groupField>] :filter[get<groupField>match<value>] +[sort[title]]
+
+<!-- The inline style below is only for this self-contained example. For production, define styles in a tiddler tagged $:/tags/Stylesheet instead. -->
+<style>.demo-group-filter { margin-bottom: 1em; }</style>
+
+<$macrocall
+	$name="tabs"
+	tabsList="[[All]] [f.letters[]]"
+	default="All"
+	state="$:/state/GroupedLists/tab-search"
+	buttonTemplate="_TabButton"
+	template="_TabContent"
+/>
++
+title: _TabButton
+code-body: yes
+
+\whitespace trim
+
+<$text text=<<currentTab>>/><span class="tc-tiny-gap-left">(<$count filter="[f.valuesShown<currentTab>]"/>)</span>
++
+title: _TabContent
+code-body: yes
+
+\whitespace trim
+
+<!-- tm-focus-selector takes the first match in the document, so .tc-search input would hit the sidebar search. -->
+
+<div class="tc-search demo-group-filter">
+	<label>
+		<<groupLabel>>:<$edit-text
+			tiddler="$:/temp/GroupedLists/search"
+			tag="input"
+			type="search"
+			default=""
+			placeholder={{{ [[Filter by ]addsuffix<groupLabel>] }}}
+			class="tc-tiny-gap"
+		/>
+	</label>
+
+	<%if [[$:/temp/GroupedLists/search]get[text]minlength[1]] %>
+		<$button
+			class="tc-btn-invisible"
+			tooltip="Clear the filter"
+			aria-label="Clear the filter"
+		>
+			<$action-deletetiddler $tiddler="$:/temp/GroupedLists/search"/>
+			<$action-sendmessage $message="tm-focus-selector" $param=".demo-group-filter input"/>
+			{{$:/core/images/close-button}}
+		</$button>
+	<%endif%>
+</div>
+<$list filter="[f.valuesShown<currentTab>]" variable="_value">
+	<$list-empty>
+		//No matches//
+	</$list-empty>
+	<div class="tc-menu-list-item">
+		<<_value>>
+
+		<$list filter="[f.tiddlersFor<_value>]">
+			<div class="tc-menu-list-subitem">
+				<$link><$text text={{{ [<currentTiddler>get[bibtex-title]] :else[<currentTiddler>] }}}/></$link>
+			</div>
+		</$list>
+	</div>
+</$list>
