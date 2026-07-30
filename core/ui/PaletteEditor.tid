@@ -264,7 +264,7 @@ title: $:/PaletteEditor
 <% endif %>
 <%if [<palette>getindex<colourName>] %>
 <!-- no description -->
-<% else %>
+<%elseif [<resolvedPalette>!is[blank]] %>
 <br/>
 <<lingo Palette/Inheritance>>
 <% endif %>
