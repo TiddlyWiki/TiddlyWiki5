@@ -89,11 +89,15 @@ title: $:/PaletteEditor
 <% endif %>
 \end
 
-\function tf.get.resolved.colour.value() [[$:/temp/palette-colours]getindex<resolvedColourName>]
+\function tf.get.resolved.colour.value() [[$:/temp/palette-colours]getindex<tf.get.colour.name>]
 
 \function tf.resolve.colour.name.edit.tiddler.wrapper() [tf.resolve.colour.name.edit.tiddler<colourName>,<colourEditTiddler>]
 
 \function tf.get.index(tiddler,index) [<tiddler>getindex<index>else[]]
+
+\function tf.get.raw.value() [[$:/temp/palette-consolidated]getindex<colourName>]
+
+\function tf.get.colour.name() [tf.resolve.colour.name<colourName>]
 
 \procedure tp-paletteeditor-set-index-value-gated(tiddler,index,value)
 <%if [tf.get.index<tiddler>,<index>!match<value>] %>
@@ -163,7 +167,7 @@ title: $:/PaletteEditor
 \procedure tp-colour-edit-colour-input()
 <$edit-text
 	tiddler=<<colourEditTiddler>>
-	index=<<resolvedColourName>>
+	index=<<tf.get.colour.name>>
 	type="color"
 	tag="input"
 	class="tc-palette-manager-colour-input"
@@ -184,7 +188,7 @@ title: $:/PaletteEditor
 <$let colourEditTiddler="$:/temp/palette-colours/copy-1">
 	<<tp-colour-edit-text-input>>
 	<br/>
-	<%if [<rawColourValue>is[colour]then<rawColourValue>!regexp<tp-colour-filters-regexp>] :else[<rawColourValue>match[]] %>
+	<%if [<tf.get.raw.value>is[colour]then<tf.get.raw.value>!regexp<tp-colour-filters-regexp>] :else[<tf.get.raw.value>match[]] %>
 		<<tp-colour-edit-colour-input>>
 	<%elseif [<colourName>!prefix[?]] %>
 		<%if [[$:/temp/palette-colours]getindex<colourName>is[colour]] %>
@@ -193,9 +197,9 @@ title: $:/PaletteEditor
 			<$transclude $variable="tp-resolved-colour-preview" tiddler=<<colourEditTiddler>>/>
 		<% endif %>
 	<% endif %>
-	<%if [<rawColourValue>!is[colour]then<rawColourValue>!regexp<tp-colour-filters-regexp>then<tf.get.resolved.colour.value>is[colour]then<resolvedColourName>!match<colourName>] %>
+	<%if [<tf.get.raw.value>!is[colour]then<tf.get.raw.value>!regexp<tp-colour-filters-regexp>then<tf.get.resolved.colour.value>is[colour]then<tf.get.colour.name>!match<colourName>] %>
 		<$let
-			newColourName=<<resolvedColourName>>
+			newColourName=<<tf.get.colour.name>>
 			state={{{ [[$:/state/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<newColourName>] }}}
 			colourEditTiddler="$:/temp/palette-colours/copy-2"
 		>
@@ -222,12 +226,16 @@ title: $:/PaletteEditor
 				<br/>
 				<$let colourName=<<newColourName>>>
 					<<tp-colour-edit-text-input>>
-					<%if [<colourEditTiddler>getindex<resolvedColourName>is[colour]] %>
-						<<tp-colour-edit-colour-input>>
-					<% else %>
-						<$transclude $variable="tp-resolved-colour-preview" tiddler="$:/temp/palette-colours"/>
-					<% endif %>
 				</$let>
+				<%if [<colourEditTiddler>getindex<tf.get.colour.name>is[colour]] %>
+					<$let colourName=<<newColourName>>>
+						<<tp-colour-edit-colour-input>>
+					</$let>
+				<% else %>
+					<$let colourName=<<newColourName>>>
+						<$transclude $variable="tp-resolved-colour-preview" tiddler="$:/temp/palette-colours"/>
+					</$let>
+				<% endif %>
 			</$reveal>
 		</$let>
 	<% endif %>
@@ -237,6 +245,8 @@ title: $:/PaletteEditor
 \procedure delete-colour-index-actions()
 <%if [<palette>addprefix[$:/config/PaletteCustomisations/]!is[missing]getindex<colourName>] %>
 <$action-setfield $tiddler={{{ [<palette>addprefix[$:/config/PaletteCustomisations/]] }}} $index=<<colourName>>/>
+<$action-setfield $tiddler="$:/temp/palette-colours/copy-1" $index=<<colourName>>/>
+<$action-setfield $tiddler="$:/temp/palette-colours/copy-2" $index=<<colourName>>/>
 <% endif %>
 \end
 \procedure palette-manager-colour-row()
@@ -284,8 +294,6 @@ title: $:/PaletteEditor
 	emptyValue="[tf.resolve.palette.import.levels<palette>,[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import<palette>,<currentTiddler>,[0]] =>palettes [(palettes)indexes[]] [<currentTiddler>indexes[]] :and[sort[]]">
 <$list filter=<<colourList>> variable="colourName">
 <$let
-	resolvedColourName={{{ [tf.resolve.colour.name<colourName>] }}}
-	rawColourValue={{{ [[$:/temp/palette-consolidated]getindex<colourName>] }}}
 	resolvedPalette={{{ [tf.resolve.palette.import.levels<palette>,[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import<palette>,<currentTiddler>,[0]] =>palettes [(palettes)] :filter[<currentTiddler>indexes[]match<colourName>] :and[last[]] }}}
 >
 <<palette-manager-colour-row>>
