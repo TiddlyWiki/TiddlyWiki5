@@ -18,8 +18,8 @@ title: $:/PaletteEditor
 :else[tf.resolve.palette.import.levels<next>,<tf.level.add.1>]
 \end tf.resolve.palette.import.levels
 
-\function tf.resolve.palette.import.levels.step(name,level)
-[<name>get[palette-import]] =>valueA
+\function tf.resolve.palette.import.levels.step(name)
+[<name>!has[palette-import@dark]!has[palette-import@light]get[palette-import]] =>valueA
 [{$:/info/darkmode}match[yes]then<name>get[palette-import@dark]] =>valueB
 [{$:/info/darkmode}!match[yes]then<name>get[palette-import@light]] =>valueC
 [<valueC>!is[blank]else<valueB>!is[blank]else<valueA>!is[blank]]
@@ -32,7 +32,7 @@ title: $:/PaletteEditor
 \end tf.resolve.palette.import
 
 \function tf.resolve.palette.import.step(name)
-[<name>get[palette-import]] =>valueA
+[<name>!has[palette-import@dark]!has[palette-import@light]get[palette-import]] =>valueA
 [{$:/info/darkmode}match[yes]then<name>get[palette-import@dark]] =>valueB
 [{$:/info/darkmode}!match[yes]then<name>get[palette-import@light]] =>valueC
 [<valueC>!is[blank]else<valueB>!is[blank]else<valueA>!is[blank]]
@@ -284,9 +284,9 @@ title: $:/PaletteEditor
 	emptyValue="[tf.resolve.palette.import.levels<palette>,[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import<palette>,<currentTiddler>,[0]] =>palettes [(palettes)indexes[]] [<currentTiddler>indexes[]] :and[sort[]]">
 <$list filter=<<colourList>> variable="colourName">
 <$let
-	resolvedPalette={{{ [tf.resolve.palette.import.levels<palette>,[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import<palette>,<currentTiddler>,[0]] =>palettes [(palettes)] :filter[<currentTiddler>indexes[]match<colourName>last[]] }}}
 	resolvedColourName={{{ [tf.resolve.colour.name<colourName>] }}}
-	rawColourValue={{{ [<palette>getindex<colourName>] :else[<resolvedPalette>getindex<colourName>] }}}
+	rawColourValue={{{ [[$:/temp/palette-consolidated]getindex<colourName>] }}}
+	resolvedPalette={{{ [tf.resolve.palette.import.levels<palette>,[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import<palette>,<currentTiddler>,[0]] =>palettes [(palettes)] :filter[<currentTiddler>indexes[]match<colourName>] :and[last[]] }}}
 >
 <<palette-manager-colour-row>>
 </$let>
