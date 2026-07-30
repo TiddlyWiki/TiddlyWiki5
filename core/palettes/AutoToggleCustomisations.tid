@@ -1,6 +1,11 @@
 title: $:/palettes/AutoToggle/Customisations
 
 \procedure layer-input-actions()
+<%if [<layerTitle>prefix[$:/config/PaletteCustomisations/]then<field>suffix[@light]then<layerTitle>!has[palette-import@dark]] %>
+<$action-setfield $tiddler=<<layerTitle>> palette-import@dark={{{ [{$:/palette}get[palette-import@dark]] }}}/>
+<%elseif [<layerTitle>prefix[$:/config/PaletteCustomisations/]then<field>suffix[@dark]then<layerTitle>!has[palette-import@light]] %>
+<$action-setfield $tiddler=<<layerTitle>> palette-import@light={{{ [{$:/palette}get[palette-import@light]] }}}/>
+<% endif %>
 <$action-setfield $tiddler=<<layerTitle>> palette-import={{$:/palette}}/>
 \end layer-input-actions
 
