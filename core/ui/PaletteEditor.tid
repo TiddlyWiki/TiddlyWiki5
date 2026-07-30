@@ -83,12 +83,8 @@ title: $:/PaletteEditor
 <%if [<layerTitle>!type[application/x-tiddler-dictionary]] %>
 <$action-setfield $tiddler=<<layerTitle>> type="application/x-tiddler-dictionary"/>
 <% endif %>
-<%if [<layerTitle>!has[palette-import]then{$:/palette}has[palette-import]] %>
-<$action-setfield $tiddler=<<layerTitle>> $field ="palette-import" $value={{{ [{$:/palette}get[palette-import]] }}}/>
-<%elseif [<layerTitle>!has[palette-import]then{$:/info/darkmode}match[yes]then{$:/palette}has[palette-import@dark]] %>
-<$action-setfield $tiddler=<<layerTitle>> $field ="palette-import" $value={{{ [{$:/palette}get[palette-import@dark]] }}}/>
-<%elseif [<layerTitle>!has[palette-import]then{$:/info/darkmode}!match[yes]then{$:/palette}has[palette-import@light]] %>
-<$action-setfield $tiddler=<<layerTitle>> $field ="palette-import" $value={{{ [{$:/palette}get[palette-import@light]] }}}/>
+<%if [<layerTitle>!has[palette-import]] %>
+<$action-setfield $tiddler=<<layerTitle>> $field ="palette-import" $value={{$:/palette}}/>
 <% endif %>
 \end
 
@@ -244,8 +240,12 @@ title: $:/PaletteEditor
 \end
 \procedure palette-manager-colour-row()
 \whitespace trim
-<tr>
-<td style.border-color={{{ [{$:/palette}getindex<colourName>then<colour primary>] }}}>
+<tr
+	style.border-color={{{ [{$:/palette}getindex<colourName>then<colour primary>] }}}
+	style.border-style={{{ [{$:/palette}getindex<colourName>then[solid]] }}}
+	style.border-width={{{ [{$:/palette}getindex<colourName>then[3px]] }}}	
+>
+<td>
 <span style.float="right">
 <$button
 	tooltip={{$:/language/ControlPanel/Palette/Editor/Delete/Hint}}
@@ -260,7 +260,15 @@ title: $:/PaletteEditor
 <$text text=<<colourName>>/>
 <%if [<layerTitle>getindex<colourName>] %>
 <br/><em><<lingo Customised/Entry>></em>
-<%endif%>
+<% endif %>
+<%if [{$:/palette}getindex<colourName>] %>
+<!-- no description -->
+<% else %>
+<$let palette={{{ [tf.resolve.palette.import.levels{$:/palette},[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import{$:/palette},<currentTiddler>,[0]] =>palettes [(palettes)] :filter[<currentTiddler>getindex<colourName>last[]] }}}>
+<br/>
+<<lingo Palette/Inheritance>>
+</$let>
+<% endif %>
 </td>
 <td>
 <<palette-manager-colour-row-segment>>
@@ -277,7 +285,6 @@ title: $:/PaletteEditor
 	emptyValue="[tf.resolve.palette.import.levels{$:/palette},[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import{$:/palette},<currentTiddler>,[0]] =>palettes [(palettes)indexes[]] [<currentTiddler>indexes[]] :and[sort[]]">
 <$list filter=<<colourList>> variable="colourName">
 <$let
-	colourNameLingo=<<lingo Edit/ColourName/Hint>>
 	resolvedColourName={{{ [tf.resolve.colour.name<colourName>] }}}
 	rawColourValue={{{ [tf.resolve.palette.import.levels{$:/palette},[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import{$:/palette},<currentTiddler>,[0]] =>palettes [(palettes)getindex<colourName>last[]] }}}
 >
