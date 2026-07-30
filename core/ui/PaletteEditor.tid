@@ -200,7 +200,7 @@ title: $:/PaletteEditor
 	<%if [<tf.get.raw.value>!is[colour]then<tf.get.raw.value>!regexp<tp-colour-filters-regexp>then<tf.get.resolved.colour.value>is[colour]then<tf.get.colour.name>!match<colourName>] %>
 		<$let
 			newColourName=<<tf.get.colour.name>>
-			state={{{ [[$:/state/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<newColourName>] }}}
+			state={{{ [[$:/state/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/]addsuffix<newColourName>] }}}
 			colourEditTiddler="$:/temp/palette-colours/copy-2"
 		>
 			<$reveal state=<<state>> type="nomatch" text="show">
@@ -239,8 +239,8 @@ title: $:/PaletteEditor
 \end
 
 \procedure delete-colour-index-actions()
-<%if [<palette>addprefix[$:/config/PaletteCustomisations/]!is[missing]getindex<colourName>] %>
-<$action-setfield $tiddler={{{ [<palette>addprefix[$:/config/PaletteCustomisations/]] }}} $index=<<colourName>>/>
+<%if [{$:/palette}match[$:/palettes/AutoToggle]else<palette>] :map[<currentTiddler>addprefix[$:/config/PaletteCustomisations/]!is[missing]indexes[]match<colourName>] %>
+<$action-setfield $tiddler={{{ [{$:/palette}match[$:/palettes/AutoToggle]else<palette>] :map[<currentTiddler>addprefix[$:/config/PaletteCustomisations/]] }}} $index=<<colourName>>/>
 <$action-setfield $tiddler="$:/temp/palette-colours/copy-1" $index=<<colourName>>/>
 <$action-setfield $tiddler="$:/temp/palette-colours/copy-2" $index=<<colourName>>/>
 <% endif %>
