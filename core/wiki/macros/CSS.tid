@@ -44,21 +44,6 @@ tags: $:/tags/Macro
 <%endif%>
 \end actions-compile-palette-import
 
-\procedure actions-copy-consolidated-palette(num)
-<$action-setfield $tiddler={{{ [<outputPalette>addsuffix[/copy-]addsuffix<num>] }}} type="application/x-tiddler-dictionary"/>
-<$action-setfield $tiddler={{{ [<outputPalette>addsuffix[/copy-]addsuffix<num>] }}} text={{{ [<consolidatedPalette>get[text]] }}}/>
-<%if [<inputPalette>get[palette-import]get[text]] %>
-	<$list filter="[<inputPalette>get[palette-import]indexes[]]" variable="imported-palette-entry">
-		<%if [<outputPalette>addsuffix[/copy-]addsuffix<num>getindex<imported-palette-entry>is[blank]] %>
-			<$action-setfield $tiddler={{{ [<outputPalette>addsuffix[/copy-]addsuffix<num>] }}} $index=<<imported-palette-entry>> $value={{{ [<inputPalette>get[palette-import]getindex<imported-palette-entry>] }}} />
-		<% endif %>
-	</$list>
-<% endif %>
-<$list filter="[{$:/palette}indexes[]]" variable="palette-entry">
-	<$action-setfield $tiddler={{{ [<outputPalette>addsuffix[/copy-]addsuffix<num>] }}} $index=<<palette-entry>> $value={{{ [{$:/palette}getindex<palette-entry>] }}}/>
-</$list>
-\end actions-copy-consolidated-palette
-
 \procedure actions-compile-palette(inputPalette,outputPalette)
 \procedure tv-action-refresh-policy() always
 <$let
@@ -94,7 +79,13 @@ tags: $:/tags/Macro
 </$let>
 \end actions-compile-palette
 
-\procedure actions-compile-palette-copies(inputPalette,outputPalette)
+\procedure actions-copy-consolidated-palette(num)
+<$action-deletetiddler $tiddler={{{ [[$:/temp/palette-colours/copy-]addsuffix<num>] }}}/>
+<$action-setfield $tiddler={{{ [[$:/temp/palette-colours/copy-]addsuffix<num>] }}} type="application/x-tiddler-dictionary"/>
+<$action-setfield $tiddler={{{ [[$:/temp/palette-colours/copy-]addsuffix<num>] }}} text={{{ [<consolidatedPalette>get[text]] }}}/>
+\end actions-copy-consolidated-palette
+
+\procedure actions-recompile-current-palette-copies()
 \procedure tv-action-refresh-policy() always
 <$let
 	consolidatedPalette="$:/temp/palette-consolidated"
@@ -104,7 +95,7 @@ tags: $:/tags/Macro
 		<$transclude $variable="actions-copy-consolidated-palette" num=<<num>>/>
 	</$list>
 </$let>
-\end actions-compile-palette-copies
+\end actions-recompile-current-palette-copies
 
 <!-- Customisations of the current palette are stored in a layer tiddler that imports the palette itself -->
 \function tf.palette-customisations-layer()
@@ -120,16 +111,6 @@ tags: $:/tags/Macro
 	<$transclude $variable="actions-compile-palette" inputPalette=<<inputPalette>> outputPalette="$:/temp/palette-colours"/>
 </$let>
 \end actions-recompile-current-palette
-
-\procedure actions-recompile-current-palette-copies()
-\procedure tv-action-refresh-policy() always
-<$let
-	resolvedPalette={{{ [{$:/palette}is[tiddler]] [{$:/palette}is[shadow]] :else[[$:/palettes/Vanilla]] }}}
-	inputPalette={{{ [function[tf.palette-customisations-layer]has[palette-import]] :else[<resolvedPalette>] }}}
->
-	<$transclude $variable="actions-compile-palette-copies" inputPalette=<<inputPalette>> outputPalette="$:/temp/palette-colours"/>
-</$let>
-\end actions-recompile-current-palette-copies
 
 \procedure tv-palette-name() $:/temp/palette-colours
 
