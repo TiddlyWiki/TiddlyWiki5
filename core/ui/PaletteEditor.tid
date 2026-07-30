@@ -248,9 +248,9 @@ title: $:/PaletteEditor
 \procedure palette-manager-colour-row()
 \whitespace trim
 <tr
-	style.border-color={{{ [<palette>getindex<colourName>then<colour primary>] }}}
-	style.border-style={{{ [<palette>getindex<colourName>then[solid]] }}}
-	style.border-width={{{ [<palette>getindex<colourName>then[3px]] }}}	
+	style.border-color={{{ [<palette>indexes[]match<colourName>then<colour primary>] }}}
+	style.border-style={{{ [<palette>indexes[]match<colourName>then[solid]] }}}
+	style.border-width={{{ [<palette>indexes[]match<colourName>then[3px]] }}}	
 >
 <td>
 <span style.float="right">
@@ -268,7 +268,7 @@ title: $:/PaletteEditor
 <%if [<layerTitle>getindex<colourName>] %>
 <br/><em><<lingo Customised/Entry>></em>
 <% endif %>
-<%if [<palette>getindex<colourName>] %>
+<%if [<palette>indexes[]match<colourName>] %>
 <!-- no description -->
 <%elseif [<resolvedPalette>!is[blank]] %>
 <br/>
