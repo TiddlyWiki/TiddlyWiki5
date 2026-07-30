@@ -45,8 +45,8 @@ title: $:/PaletteEditor
 \end tf.resolve.colour.name
 
 \function tf.extract.colour.name.step(name)
-[tf.palette.get.colour<name>is[colour]then<name>] =>valueA
-[tf.palette.get.colour<name>] =>value
+[[$:/temp/palette-consolidated]getindex<name>is[colour]then<name>] =>valueA
+[[$:/temp/palette-consolidated]getindex<name>] =>value
 [[value]is[variable]then<value>search-replace::regexp<tp-colour-macro-regexp-search-replace>,[$1$2$3$4$5]!match<value>] =>valueB
 [[value]is[variable]then<value>search-replace::regexp<tp-colour-widget-regexp-search-replace>,[$1$2$3$4$5]!match<value>] =>valueC
 [[value]is[variable]then<value>search-replace::regexp<tp-colour-filter-regexp-search-replace>,[$1]!match<value>] =>valueD
@@ -73,11 +73,11 @@ title: $:/PaletteEditor
 \function tf.palette.get.colour.name() [tf.palette.get.colour<name>]
 
 \function tf.palette.get.colour(index)
-[tf.resolve.palette.import.levels{$:/palette},[0]]
+[tf.resolve.palette.import.levels<palette>,[0]]
 :map:flat[range<currentTiddler>,[0]]
-:map:flat[tf.resolve.palette.import{$:/palette},<currentTiddler>,[0]] =>palettes
+:map:flat[tf.resolve.palette.import<palette>,<currentTiddler>,[0]] =>palettes
 [(palettes)getindex<index>last[]]
-:else[{$:/palette}getindex<index>]
+:else[<palette>getindex<index>]
 \end tf.palette.get.colour
 
 \procedure tp-ensure-layertitle-palette-import()
@@ -85,7 +85,7 @@ title: $:/PaletteEditor
 <$action-setfield $tiddler=<<layerTitle>> type="application/x-tiddler-dictionary"/>
 <% endif %>
 <%if [<layerTitle>!has[palette-import]] %>
-<$action-setfield $tiddler=<<layerTitle>> $field ="palette-import" $value={{$:/palette}}/>
+<$action-setfield $tiddler=<<layerTitle>> $field ="palette-import" $value=<<palette>>/>
 <% endif %>
 \end
 
@@ -117,10 +117,10 @@ title: $:/PaletteEditor
 \end
 
 \procedure tp-paletteeditor-colour-input-actions()
+<<tp-ensure-layertitle-palette-import>>
 <$action-setfield $tiddler="$:/temp/palette-colours/copy-1" $index=<<colourName>> $value=<<actionValue>>/>
 <$action-setfield $tiddler="$:/temp/palette-colours/copy-2" $index=<<colourName>> $value=<<actionValue>>/>
 <$action-setfield $tiddler=<<layerTitle>> $index=<<colourName>> $value=<<actionValue>>/>
-<<tp-ensure-layertitle-palette-import>>
 \end
 
 \procedure tp-paletteeditor-dropdown-button-show-actions() <$action-setfield $tiddler=<<state>> text="show"/>
@@ -183,7 +183,9 @@ title: $:/PaletteEditor
 \whitespace trim
 <$let colourEditTiddler="$:/temp/palette-colours/copy-1">
 	<<tp-colour-edit-text-input>>
-	<br>
+	<br/>
+	<$text text=<<resolvedColourName>>/>
+	<br/>
 	<%if [<rawColourValue>is[colour]then<rawColourValue>!regexp<tp-colour-filters-regexp>] :else[<rawColourValue>match[]] %>
 		<<tp-colour-edit-colour-input>>
 	<%elseif [<colourName>!prefix[?]] %>
@@ -235,16 +237,16 @@ title: $:/PaletteEditor
 \end
 
 \procedure delete-colour-index-actions()
-<%if [{$:/palette}addprefix[$:/config/PaletteCustomisations/]!is[missing]getindex<colourName>] %>
-<$action-setfield $tiddler={{{ [{$:/palette}addprefix[$:/config/PaletteCustomisations/]] }}} $index=<<colourName>>/>
+<%if [<palette>addprefix[$:/config/PaletteCustomisations/]!is[missing]getindex<colourName>] %>
+<$action-setfield $tiddler={{{ [<palette>addprefix[$:/config/PaletteCustomisations/]] }}} $index=<<colourName>>/>
 <% endif %>
 \end
 \procedure palette-manager-colour-row()
 \whitespace trim
 <tr
-	style.border-color={{{ [{$:/palette}getindex<colourName>then<colour primary>] }}}
-	style.border-style={{{ [{$:/palette}getindex<colourName>then[solid]] }}}
-	style.border-width={{{ [{$:/palette}getindex<colourName>then[3px]] }}}	
+	style.border-color={{{ [<palette>getindex<colourName>then<colour primary>] }}}
+	style.border-style={{{ [<palette>getindex<colourName>then[solid]] }}}
+	style.border-width={{{ [<palette>getindex<colourName>then[3px]] }}}	
 >
 <td>
 <span style.float="right">
@@ -262,13 +264,11 @@ title: $:/PaletteEditor
 <%if [<layerTitle>getindex<colourName>] %>
 <br/><em><<lingo Customised/Entry>></em>
 <% endif %>
-<%if [{$:/palette}getindex<colourName>] %>
+<%if [<palette>getindex<colourName>] %>
 <!-- no description -->
 <% else %>
-<$let palette={{{ [tf.resolve.palette.import.levels{$:/palette},[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import{$:/palette},<currentTiddler>,[0]] =>palettes [(palettes)] :filter[<currentTiddler>getindex<colourName>last[]] }}}>
 <br/>
 <<lingo Palette/Inheritance>>
-</$let>
 <% endif %>
 </td>
 <td>
@@ -279,15 +279,17 @@ title: $:/PaletteEditor
 
 \procedure palette-manager-table()
 \whitespace trim
+<<palette>>
 <table>
 <tbody>
 <$set name="colourList" filter="[{$:/state/palettemanager/showexternal}match[yes]]"
 	value="[all[shadows+tiddlers]tag[$:/tags/Palette]indexes[]]"
-	emptyValue="[tf.resolve.palette.import.levels{$:/palette},[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import{$:/palette},<currentTiddler>,[0]] =>palettes [(palettes)indexes[]] [<currentTiddler>indexes[]] :and[sort[]]">
+	emptyValue="[tf.resolve.palette.import.levels<palette>,[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import<palette>,<currentTiddler>,[0]] =>palettes [(palettes)indexes[]] [<currentTiddler>indexes[]] :and[sort[]]">
 <$list filter=<<colourList>> variable="colourName">
 <$let
+	resolvedPalette={{{ [tf.resolve.palette.import.levels<palette>,[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import<palette>,<currentTiddler>,[0]] =>palettes [(palettes)] :filter[<currentTiddler>indexes[]match<colourName>last[]] }}}
 	resolvedColourName={{{ [tf.resolve.colour.name<colourName>] }}}
-	rawColourValue={{{ [tf.resolve.palette.import.levels{$:/palette},[0]] :map:flat[range<currentTiddler>,[0]] :map:flat[tf.resolve.palette.import{$:/palette},<currentTiddler>,[0]] =>palettes [(palettes)getindex<colourName>last[]] }}}
+	rawColourValue={{{ [<palette>getindex<colourName>] :else[<resolvedPalette>getindex<colourName>] }}}
 >
 <<palette-manager-colour-row>>
 </$let>
@@ -297,13 +299,25 @@ title: $:/PaletteEditor
 </table>
 \end
 
+\function tf.get.palette()
+[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}match[yes]then<layerTitle>has[palette-import@dark]get[palette-import@dark]]
+[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}match[yes]then<layerTitle>!has[palette-import@dark]then{$:/palette}get[palette-import@dark]]
+[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}!match[yes]then<layerTitle>has[palette-import@light]get[palette-import@light]]
+[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}!match[yes]then<layerTitle>!has[palette-import@light]then{$:/palette}get[palette-import@light]]
+[{$:/palette}!match[$:/palettes/AutoToggle]]
+\end tf.get.palette
+
 \procedure tp-delete-customizations()
 <$action-deletetiddler $tiddler=<<layerTitle>>/>
 \end
 \whitespace trim
-<$let currentTiddler={{$:/palette}} layerTitle={{{ [function[tf.palette-customisations-layer]] }}}>
+<$let
+	layerTitle={{{ [function[tf.palette-customisations-layer]] }}}
+	palette={{{ [function[tf.get.palette]] }}}
+	currentTiddler=<<palette>>
+>
 
-<<lingo Prompt>>&#32;<$link to={{$:/palette}}><$text text=<<currentTiddler>>/></$link>
+<<lingo Prompt>>&#32;<$link to=<<palette>>><$text text=<<currentTiddler>>/></$link>
 
 <$list filter="[<layerTitle>is[tiddler]]" variable="listItem">
 <<lingo Customised/Prompt>>
