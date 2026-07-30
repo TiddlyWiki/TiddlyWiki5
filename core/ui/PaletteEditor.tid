@@ -277,7 +277,6 @@ title: $:/PaletteEditor
 
 \procedure palette-manager-table()
 \whitespace trim
-<<palette>>
 <table>
 <tbody>
 <$set name="colourList" filter="[{$:/state/palettemanager/showexternal}match[yes]]"
