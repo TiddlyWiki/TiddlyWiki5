@@ -184,8 +184,6 @@ title: $:/PaletteEditor
 <$let colourEditTiddler="$:/temp/palette-colours/copy-1">
 	<<tp-colour-edit-text-input>>
 	<br/>
-	<$text text=<<resolvedColourName>>/>
-	<br/>
 	<%if [<rawColourValue>is[colour]then<rawColourValue>!regexp<tp-colour-filters-regexp>] :else[<rawColourValue>match[]] %>
 		<<tp-colour-edit-colour-input>>
 	<%elseif [<colourName>!prefix[?]] %>
