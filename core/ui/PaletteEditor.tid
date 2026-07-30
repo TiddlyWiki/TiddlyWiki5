@@ -109,10 +109,10 @@ title: $:/PaletteEditor
 <%if [<colourEditTiddler>getindex<tf.resolve.colour.name.edit.tiddler.wrapper>is[colour]] [<actionValue>is[colour]] %>
 <<tp-ensure-layertitle-palette-import>>
 <$transclude $variable="tp-paletteeditor-set-index-value-gated" tiddler=<<layerTitle>> index=<<colourName>> value=<<actionValue>>/>
-<%if [<colourEditTiddler>match[$:/temp/palette-colours/copy-1]] %>
-<$transclude $variable="tp-paletteeditor-set-index-value-gated" tiddler="$:/temp/palette-colours/copy-2" index=<<colourName>> value=<<actionValue>>/>
-<%elseif [<colourEditTiddler>match[$:/temp/palette-colours/copy-2]] %>
-<$transclude $variable="tp-paletteeditor-set-index-value-gated" tiddler="$:/temp/palette-colours/copy-1" index=<<colourName>> value=<<actionValue>>/>
+<%if [<colourEditTiddler>match[$:/temp/palette-consolidated/copy-1]] %>
+<$transclude $variable="tp-paletteeditor-set-index-value-gated" tiddler="$:/temp/palette-consolidated/copy-2" index=<<colourName>> value=<<actionValue>>/>
+<%elseif [<colourEditTiddler>match[$:/temp/palette-consolidated/copy-2]] %>
+<$transclude $variable="tp-paletteeditor-set-index-value-gated" tiddler="$:/temp/palette-consolidated/copy-1" index=<<colourName>> value=<<actionValue>>/>
 <% endif %>
 <%elseif [<actionValue>is[blank]] [<actionValue>match[]] %>
 <<tp-ensure-layertitle-palette-import>>
@@ -122,8 +122,8 @@ title: $:/PaletteEditor
 
 \procedure tp-paletteeditor-colour-input-actions()
 <<tp-ensure-layertitle-palette-import>>
-<$action-setfield $tiddler="$:/temp/palette-colours/copy-1" $index=<<colourName>> $value=<<actionValue>>/>
-<$action-setfield $tiddler="$:/temp/palette-colours/copy-2" $index=<<colourName>> $value=<<actionValue>>/>
+<$action-setfield $tiddler="$:/temp/palette-consolidated/copy-1" $index=<<colourName>> $value=<<actionValue>>/>
+<$action-setfield $tiddler="$:/temp/palette-consolidated/copy-2" $index=<<colourName>> $value=<<actionValue>>/>
 <$action-setfield $tiddler=<<layerTitle>> $index=<<colourName>> $value=<<actionValue>>/>
 \end
 
@@ -185,7 +185,7 @@ title: $:/PaletteEditor
 
 \procedure palette-manager-colour-row-segment()
 \whitespace trim
-<$let colourEditTiddler="$:/temp/palette-colours/copy-1">
+<$let colourEditTiddler="$:/temp/palette-consolidated/copy-1">
 	<<tp-colour-edit-text-input>>
 	<br/>
 	<%if [<tf.get.raw.value>is[colour]then<tf.get.raw.value>!regexp<tp-colour-filters-regexp>] :else[<tf.get.raw.value>match[]] %>
@@ -201,7 +201,7 @@ title: $:/PaletteEditor
 		<$let
 			newColourName=<<tf.get.colour.name>>
 			state={{{ [[$:/state/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/]addsuffix<newColourName>] }}}
-			colourEditTiddler="$:/temp/palette-colours/copy-2"
+			colourEditTiddler="$:/temp/palette-consolidated/copy-2"
 		>
 			<$reveal state=<<state>> type="nomatch" text="show">
 				<$button
@@ -241,8 +241,8 @@ title: $:/PaletteEditor
 \procedure delete-colour-index-actions()
 <%if [{$:/palette}match[$:/palettes/AutoToggle]else<palette>] :map[<currentTiddler>addprefix[$:/config/PaletteCustomisations/]!is[missing]indexes[]match<colourName>] %>
 <$action-setfield $tiddler={{{ [{$:/palette}match[$:/palettes/AutoToggle]else<palette>] :map[<currentTiddler>addprefix[$:/config/PaletteCustomisations/]] }}} $index=<<colourName>>/>
-<$action-setfield $tiddler="$:/temp/palette-colours/copy-1" $index=<<colourName>>/>
-<$action-setfield $tiddler="$:/temp/palette-colours/copy-2" $index=<<colourName>>/>
+<$action-setfield $tiddler="$:/temp/palette-consolidated/copy-1" $index=<<colourName>>/>
+<$action-setfield $tiddler="$:/temp/palette-consolidated/copy-2" $index=<<colourName>>/>
 <% endif %>
 \end
 \procedure palette-manager-colour-row()
