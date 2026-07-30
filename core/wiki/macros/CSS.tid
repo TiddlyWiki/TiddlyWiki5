@@ -80,9 +80,9 @@ tags: $:/tags/Macro
 \end actions-compile-palette
 
 \procedure actions-copy-consolidated-palette(num)
-<$action-deletetiddler $tiddler={{{ [[$:/temp/palette-colours/copy-]addsuffix<num>] }}}/>
-<$action-setfield $tiddler={{{ [[$:/temp/palette-colours/copy-]addsuffix<num>] }}} type="application/x-tiddler-dictionary"/>
-<$action-setfield $tiddler={{{ [[$:/temp/palette-colours/copy-]addsuffix<num>] }}} text={{{ [<consolidatedPalette>get[text]] }}}/>
+<$action-deletetiddler $tiddler={{{ [[$:/temp/palette-consolidated/copy-]addsuffix<num>] }}}/>
+<$action-setfield $tiddler={{{ [[$:/temp/palette-consolidated/copy-]addsuffix<num>] }}} type="application/x-tiddler-dictionary"/>
+<$action-setfield $tiddler={{{ [[$:/temp/palette-consolidated/copy-]addsuffix<num>] }}} text={{{ [<consolidatedPalette>get[text]] }}}/>
 \end actions-copy-consolidated-palette
 
 \procedure actions-recompile-current-palette-copies()
