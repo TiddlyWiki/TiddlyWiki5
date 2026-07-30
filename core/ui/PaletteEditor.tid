@@ -226,16 +226,12 @@ title: $:/PaletteEditor
 				<br/>
 				<$let colourName=<<newColourName>>>
 					<<tp-colour-edit-text-input>>
-				</$let>
-				<%if [<colourEditTiddler>getindex<tf.get.colour.name>is[colour]] %>
-					<$let colourName=<<newColourName>>>
+					<%if [<colourEditTiddler>getindex<newColourName>is[colour]] %>
 						<<tp-colour-edit-colour-input>>
-					</$let>
-				<% else %>
-					<$let colourName=<<newColourName>>>
+					<% else %>
 						<$transclude $variable="tp-resolved-colour-preview" tiddler="$:/temp/palette-colours"/>
-					</$let>
-				<% endif %>
+					<% endif %>
+				</$let>
 			</$reveal>
 		</$let>
 	<% endif %>
