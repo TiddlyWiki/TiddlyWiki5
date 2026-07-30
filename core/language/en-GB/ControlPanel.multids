@@ -69,7 +69,7 @@ Palette/Editor/Clone/Prompt: It is recommended that you clone this shadow palett
 Palette/Editor/Delete/Hint: delete this entry from the current palette
 Palette/Editor/Edit/ColourName/Hint: edit $(colourName)$
 Palette/Editor/Names/External/Show: Show inherited palette entries
-Palette/Editor/Palette/Inheritance: inherited from <<palette>>
+Palette/Editor/Palette/Inheritance: inherited from <<resolvedPalette>>
 Palette/Editor/Preview/Hint: Preview: <<targetColour>>
 Palette/Editor/Prompt/Modified: This shadow palette has been modified
 Palette/Editor/Prompt: Editing
