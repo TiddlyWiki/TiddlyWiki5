@@ -117,7 +117,7 @@ tiddler-info-background: #f8f8f8
 tiddler-info-border: #dddddd
 tiddler-info-tab-background: #f8f8f8
 tiddler-link-background: <<colour background>>
-tiddler-link-foreground: #7f96e4
+tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: #c0c0c0
 tiddler-title-foreground: #182955
 toolbar-new-button:
