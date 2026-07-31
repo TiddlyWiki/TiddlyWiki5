@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#9938
+description: Support conditional editor preview types
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: editor
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9938
+github-contributors: linonetwo
+
+Editor preview types can now specify a `condition` field to control their visibility. A new "Source" preview is added for the ProseMirror editor.
