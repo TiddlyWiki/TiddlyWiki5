@@ -115,8 +115,7 @@ title: $:/PaletteEditor
 <$transclude $variable="tp-paletteeditor-set-index-value-gated" tiddler="$:/temp/palette-consolidated/copy-1" index=<<colourName>> value=<<actionValue>>/>
 <% endif %>
 <%elseif [<actionValue>is[blank]] [<actionValue>match[]] %>
-<<tp-ensure-layertitle-palette-import>>
-<$transclude $variable="tp-paletteeditor-set-index-value-gated" tiddler=<<layerTitle>> index=<<colourName>> value="#000000"/>
+<<delete-colour-index-actions "no">>
 <% endif %>
 \end
 
@@ -238,11 +237,13 @@ title: $:/PaletteEditor
 </$let>
 \end
 
-\procedure delete-colour-index-actions()
+\procedure delete-colour-index-actions(deleteCopies:"yes")
 <%if [{$:/palette}match[$:/palettes/AutoToggle]else<palette>] :map[<currentTiddler>addprefix[$:/config/PaletteCustomisations/]!is[missing]indexes[]match<colourName>] %>
 <$action-setfield $tiddler={{{ [{$:/palette}match[$:/palettes/AutoToggle]else<palette>] :map[<currentTiddler>addprefix[$:/config/PaletteCustomisations/]] }}} $index=<<colourName>>/>
+<%if [<deleteCopies>match[yes]] %>
 <$action-setfield $tiddler="$:/temp/palette-consolidated/copy-1" $index=<<colourName>>/>
 <$action-setfield $tiddler="$:/temp/palette-consolidated/copy-2" $index=<<colourName>>/>
+<% endif %>
 <% endif %>
 \end
 \procedure palette-manager-colour-row()
