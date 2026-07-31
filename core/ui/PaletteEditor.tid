@@ -188,7 +188,7 @@ title: $:/PaletteEditor
 
 \procedure palette-manager-colour-row-segment()
 \whitespace trim
-<$let colourEditTiddler="$:/temp/palette-consolidated/copy-1" refreshTitle={{{ [[$:/temp/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/refresh]] }}}>
+<$let refreshTitle={{{ [[$:/temp/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/refresh]] }}}>
 	<<tp-colour-edit-text-input>>
 	<br/>
 	<%if [<tf.get.raw.value>is[colour]then<tf.get.raw.value>!regexp<tp-colour-filters-regexp>] :else[<tf.get.raw.value>match[]] %>
@@ -324,6 +324,7 @@ title: $:/PaletteEditor
 \end
 \whitespace trim
 <$let
+	colourEditTiddler="$:/temp/palette-consolidated/copy-1"
 	layerTitle={{{ [function[tf.palette-customisations-layer]] }}}
 	palette={{{ [function[tf.get.palette]] }}}
 	currentTiddler=<<palette>>
