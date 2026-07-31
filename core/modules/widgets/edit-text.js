@@ -2,8 +2,6 @@
 title: $:/core/modules/widgets/edit-text.js
 type: application/javascript
 module-type: widget
-widget-name: text
-widget-category: editor
 
 Edit-text widget
 
@@ -15,4 +13,5 @@ var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTex
 	FramedEngine = require("$:/core/modules/editor/engines/framed.js").FramedEngine,
 	SimpleEngine = require("$:/core/modules/editor/engines/simple.js").SimpleEngine;
 
+exports["edit-types"] = ["text"];
 exports["edit-text"] = editTextWidgetFactory(FramedEngine,SimpleEngine);

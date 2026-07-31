@@ -38,15 +38,20 @@ describe("Editor Types settings", function() {
 		expect(wiki.getTiddlerText("$:/config/EditorTypeMappings/text/vnd.tiddlywiki")).toBe("text");
 	});
 
-	it("should discover editor widgets by widget-category tiddler field for dropdown options", function() {
+	it("should discover editor types from widget module exports for dropdown options", function() {
 		var widgetNode = makeEditorTypesWidget();
 		var results = wiki.filterTiddlers(getProcedureFilter(widgetNode, "editor-types-filter"));
 		expect(results).toContain("text");
 		expect(results).toContain("bitmap");
 		expect(results).toContain("binary");
-		// edit-shortcut is a widget with an edit- prefix but is not a tiddler content editor,
-		// so it must not be categorised as "editor" and must not appear in the dropdown
 		expect(results).not.toContain("shortcut");
+	});
+
+	it("should export editor types from content editor widget modules", function() {
+		expect(require("$:/core/modules/widgets/edit-text.js")["edit-types"]).toEqual(["text"]);
+		expect(require("$:/core/modules/widgets/edit-bitmap.js")["edit-types"]).toEqual(["bitmap"]);
+		expect(require("$:/core/modules/widgets/edit-binary.js")["edit-types"]).toEqual(["binary"]);
+		expect(require("$:/core/modules/widgets/edit-shortcut.js")["edit-types"]).toBeUndefined();
 	});
 
 	it("should combine current mapping with installed editor types for select options", function() {

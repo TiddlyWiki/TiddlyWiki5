@@ -2,8 +2,6 @@
 title: $:/plugins/tiddlywiki/codemirror/edit-codemirror.js
 type: application/javascript
 module-type: widget
-widget-name: codemirror
-widget-category: editor
 
 Edit-codemirror widget
 
@@ -14,4 +12,5 @@ Edit-codemirror widget
 var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTextWidgetFactory,
 	CodeMirrorEngine = require("$:/plugins/tiddlywiki/codemirror/engine.js").CodeMirrorEngine;
 
+exports["edit-types"] = ["codemirror"];
 exports["edit-codemirror"] = editTextWidgetFactory(CodeMirrorEngine,CodeMirrorEngine);

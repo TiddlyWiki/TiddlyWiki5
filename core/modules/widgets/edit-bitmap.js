@@ -2,8 +2,6 @@
 title: $:/core/modules/widgets/edit-bitmap.js
 type: application/javascript
 module-type: widget
-widget-name: bitmap
-widget-category: editor
 
 Edit-bitmap widget
 
@@ -336,4 +334,5 @@ EditBitmapWidget.prototype.saveChanges = function() {
 	this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getModificationFields(),tiddler,update,this.wiki.getCreationFields()));
 };
 
+exports["edit-types"] = ["bitmap"];
 exports["edit-bitmap"] = EditBitmapWidget;

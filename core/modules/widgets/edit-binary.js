@@ -2,8 +2,6 @@
 title: $:/core/modules/widgets/edit-binary.js
 type: application/javascript
 module-type: widget
-widget-name: binary
-widget-category: editor
 
 Edit-binary widget; placeholder for editing binary tiddlers
 
@@ -100,4 +98,5 @@ EditBinaryWidget.prototype.refresh = function(changedTiddlers) {
 	return this.refreshChildren(changedTiddlers);
 };
 
+exports["edit-types"] = ["binary"];
 exports["edit-binary"] = EditBinaryWidget;
