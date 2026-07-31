@@ -81,11 +81,11 @@ title: $:/PaletteEditor
 \end tf.palette.get.colour
 
 \procedure tp-ensure-layertitle-palette-import()
-<%if [<autoToggleLayerTitle>!type[application/x-tiddler-dictionary]] %>
-<$action-setfield $tiddler=<<autoToggleLayerTitle>> type="application/x-tiddler-dictionary"/>
+<%if [<layerTitle>!type[application/x-tiddler-dictionary]] %>
+<$action-setfield $tiddler=<<layerTitle>> type="application/x-tiddler-dictionary"/>
 <% endif %>
-<%if [<autoToggleLayerTitle>!has[palette-import]] %>
-<$action-setfield $tiddler=<<autoToggleLayerTitle>> $field ="palette-import" $value=<<palette>>/>
+<%if [<layerTitle>!has[palette-import]] %>
+<$action-setfield $tiddler=<<layerTitle>> $field ="palette-import" $value=<<palette>>/>
 <% endif %>
 \end
 
@@ -108,7 +108,7 @@ title: $:/PaletteEditor
 \procedure tp-paletteeditor-input-actions()
 <%if [<colourEditTiddler>getindex<tf.resolve.colour.name.edit.tiddler.wrapper>is[colour]] [<actionValue>is[colour]] %>
 <<tp-ensure-layertitle-palette-import>>
-<$transclude $variable="tp-paletteeditor-set-index-value-gated" tiddler=<<autoToggleLayerTitle>> index=<<colourName>> value=<<actionValue>>/>
+<$transclude $variable="tp-paletteeditor-set-index-value-gated" tiddler=<<layerTitle>> index=<<colourName>> value=<<actionValue>>/>
 <%if [<colourEditTiddler>match[$:/temp/palette-consolidated/copy-1]] %>
 <$transclude $variable="tp-paletteeditor-set-index-value-gated" tiddler="$:/temp/palette-consolidated/copy-2" index=<<colourName>> value=<<actionValue>>/>
 <%elseif [<colourEditTiddler>match[$:/temp/palette-consolidated/copy-2]] %>
@@ -116,7 +116,7 @@ title: $:/PaletteEditor
 <% endif %>
 <%elseif [<actionValue>is[blank]] [<actionValue>match[]] %>
 <<tp-ensure-layertitle-palette-import>>
-<$transclude $variable="tp-paletteeditor-set-index-value-gated" tiddler=<<autoToggleLayerTitle>> index=<<colourName>> value="#000000"/>
+<$transclude $variable="tp-paletteeditor-set-index-value-gated" tiddler=<<layerTitle>> index=<<colourName>> value="#000000"/>
 <% endif %>
 \end
 
@@ -124,7 +124,7 @@ title: $:/PaletteEditor
 <<tp-ensure-layertitle-palette-import>>
 <$action-setfield $tiddler="$:/temp/palette-consolidated/copy-1" $index=<<colourName>> $value=<<actionValue>>/>
 <$action-setfield $tiddler="$:/temp/palette-consolidated/copy-2" $index=<<colourName>> $value=<<actionValue>>/>
-<$action-setfield $tiddler=<<autoToggleLayerTitle>> $index=<<colourName>> $value=<<actionValue>>/>
+<$action-setfield $tiddler=<<layerTitle>> $index=<<colourName>> $value=<<actionValue>>/>
 \end
 
 \procedure tp-paletteeditor-dropdown-button-show-actions() <$action-setfield $tiddler=<<state>> text="show"/>
@@ -285,7 +285,7 @@ title: $:/PaletteEditor
 </span>
 ''<$transclude $variable="describePaletteColour" colour=<<colourName>>/>''<br/>
 <$text text=<<colourName>>/>
-<%if [<autoToggleLayerTitle>getindex<colourName>] %>
+<%if [<layerTitle>getindex<colourName>] %>
 <br/><em><<lingo Customised/Entry>></em>
 <% endif %>
 <%if [<palette>indexes[]match<colourName>] %>
@@ -322,28 +322,27 @@ title: $:/PaletteEditor
 \end
 
 \function tf.get.palette()
-[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}match[yes]then<autoToggleLayerTitle>has[palette-import@dark]get[palette-import@dark]]
-[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}match[yes]then<autoToggleLayerTitle>!has[palette-import@dark]then{$:/palette}get[palette-import@dark]]
-[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}!match[yes]then<autoToggleLayerTitle>has[palette-import@light]get[palette-import@light]]
-[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}!match[yes]then<autoToggleLayerTitle>!has[palette-import@light]then{$:/palette}get[palette-import@light]]
+[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}match[yes]then<layerTitle>has[palette-import@dark]get[palette-import@dark]]
+[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}match[yes]then<layerTitle>!has[palette-import@dark]then{$:/palette}get[palette-import@dark]]
+[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}!match[yes]then<layerTitle>has[palette-import@light]get[palette-import@light]]
+[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}!match[yes]then<layerTitle>!has[palette-import@light]then{$:/palette}get[palette-import@light]]
 [{$:/palette}!match[$:/palettes/AutoToggle]]
 \end tf.get.palette
 
 \procedure tp-delete-customizations()
-<$action-deletetiddler $tiddler=<<layerTitle>>/><$action-deletetiddler $tiddler=<<autoToggleLayerTitle>>/>
+<$action-deletetiddler $tiddler=<<layerTitle>>/>
 \end
 \whitespace trim
 <$let
 	colourEditTiddler="$:/temp/palette-consolidated/copy-1"
 	layerTitle={{{ [function[tf.palette-customisations-layer]] }}}
-	autoToggleLayerTitle={{{ [function[tf.palette-customisations-layer.layer]] }}}
 	palette={{{ [function[tf.get.palette]] }}}
 	currentTiddler=<<palette>>
 >
 
 <<lingo Prompt>>&#32;<$link to=<<palette>>><$text text=<<currentTiddler>>/></$link>
 
-<$list filter="[<autoToggleLayerTitle>is[tiddler]]" variable="listItem">
+<$list filter="[<layerTitle>is[tiddler]]" variable="listItem">
 <<lingo Customised/Prompt>>
 &#32;
 <$button actions=<<tp-delete-customizations>>>{{$:/language/ControlPanel/Palette/Customisations/Reset/Caption}}</$button>
