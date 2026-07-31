@@ -97,27 +97,16 @@ tags: $:/tags/Macro
 </$let>
 \end actions-recompile-current-palette-copies
 
-\function tf.get.palette.customisations.layer()
-[{$:/info/darkmode}match[yes]then[$:/config/PaletteCustomisations/$:/palettes/AutoToggle]has[palette-import@dark]get[palette-import@dark]]
-[{$:/info/darkmode}match[yes]then[$:/config/PaletteCustomisations/$:/palettes/AutoToggle]!has[palette-import@dark]then{$:/palette}get[palette-import@dark]]
-[{$:/info/darkmode}!match[yes]then[$:/config/PaletteCustomisations/$:/palettes/AutoToggle]has[palette-import@light]get[palette-import@light]]
-[{$:/info/darkmode}!match[yes]then[$:/config/PaletteCustomisations/$:/palettes/AutoToggle]!has[palette-import@light]then{$:/palette}get[palette-import@light]]
-\end tf.get.palette.customisations.layer
-
 <!-- Customisations of the current palette are stored in a layer tiddler that imports the palette itself -->
 \function tf.palette-customisations-layer()
 [{$:/palette}is[tiddler]] [{$:/palette}is[shadow]] :else[[$:/palettes/Vanilla]] :map[addprefix[$:/config/PaletteCustomisations/]]
 \end tf.palette-customisations-layer
 
-\function tf.palette-customisations-layer.layer()
-[{$:/palette}is[tiddler]] [{$:/palette}is[shadow]] :else[[$:/palettes/Vanilla]] :map[<currentTiddler>match[$:/palettes/AutoToggle]then<tf.get.palette.customisations.layer>else<currentTiddler>addprefix[$:/config/PaletteCustomisations/]]
-\end tf.palette-customisations-layer.layer
-
 \procedure actions-recompile-current-palette()
 \procedure tv-action-refresh-policy() always
 <$let
 	resolvedPalette={{{ [{$:/palette}is[tiddler]] [{$:/palette}is[shadow]] :else[[$:/palettes/Vanilla]] }}}
-	inputPalette={{{ [function[tf.palette-customisations-layer.layer]has[palette-import]] :else[<resolvedPalette>] }}}
+	inputPalette={{{ [function[tf.palette-customisations-layer]has[palette-import]] :else[<resolvedPalette>] }}}
 >
 	<$transclude $variable="actions-compile-palette" inputPalette=<<inputPalette>> outputPalette="$:/temp/palette-colours"/>
 </$let>
