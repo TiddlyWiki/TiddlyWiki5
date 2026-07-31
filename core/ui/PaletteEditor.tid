@@ -243,8 +243,15 @@ title: $:/PaletteEditor
 \end
 
 \procedure delete-colour-index-actions()
+\procedure tv-action-refresh-policy() always
 <%if [{$:/palette}match[$:/palettes/AutoToggle]else<palette>] :map[<currentTiddler>addprefix[$:/config/PaletteCustomisations/]!is[missing]indexes[]match<colourName>] %>
-<$action-setfield $tiddler={{{ [{$:/palette}match[$:/palettes/AutoToggle]else<palette>] :map[<currentTiddler>addprefix[$:/config/PaletteCustomisations/]] }}} $index=<<colourName>>/>
+<$let resetTiddler={{{ [{$:/palette}match[$:/palettes/AutoToggle]else<palette>] :map[<currentTiddler>addprefix[$:/config/PaletteCustomisations/]] }}}>
+<%if [<resetTiddler>!is[missing]] %>
+<$action-setfield $tiddler=<<resetTiddler>> $index=<<colourName>>/>
+<%if [<resetTiddler>indexes[]count[]match[0]] %>
+<$action-deletetiddler $tiddler=<<resetTiddler>>/>
+<% endif %>
+<% endif %>
 <$action-setfield $tiddler="$:/temp/palette-consolidated/copy-1" $index=<<colourName>> $value={{{ [<palette>getindex<colourName>] }}}/>
 <$action-setfield $tiddler="$:/temp/palette-consolidated/copy-2" $index=<<colourName>> $value={{{ [<palette>getindex<colourName>] }}}/>
 <%if [<colourEditTiddler>match[$:/temp/palette-consolidated/copy-1]] %>
@@ -254,8 +261,10 @@ title: $:/PaletteEditor
 <$action-setfield $tiddler={{{ [[$:/temp/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/]addsuffix<newColourName>addsuffix[/refresh]] }}} text="yes"/>
 <$action-deletetiddler $tiddler={{{ [[$:/temp/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/]addsuffix<newColourName>addsuffix[/refresh]] }}}/>
 <% endif %>
+</$let>
 <% endif %>
-\end
+\end delete-colour-index-actions
+
 \procedure palette-manager-colour-row()
 \whitespace trim
 <tr
@@ -294,6 +303,7 @@ title: $:/PaletteEditor
 
 \procedure palette-manager-table()
 \whitespace trim
+//<<lingo Reset/Hint>>//
 <table>
 <tbody>
 <$set name="colourList" filter="[{$:/state/palettemanager/showexternal}match[yes]]"
