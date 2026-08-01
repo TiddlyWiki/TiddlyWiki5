@@ -143,6 +143,35 @@ test.describe("ProseMirror Editor - Link Tooltip", () => {
 		await expect(tooltip).toBeVisible({ timeout: 5000 });
 		expect(await tooltip.locator(".tc-prosemirror-link-tooltip-btn").count()).toBeGreaterThanOrEqual(2);
 	});
+
+	test("should edit link text from the tooltip", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, { initialText: "Visit [[Display|Target]] now" });
+		const link = editor.locator("a").first();
+		await link.click();
+		await page.waitForTimeout(500);
+		const tooltip = page.locator(".tc-prosemirror-link-tooltip");
+		await expect(tooltip).toBeVisible({ timeout: 5000 });
+		await tooltip.locator(".tc-prosemirror-link-tooltip-btn").nth(0).click();
+		const textInput = tooltip.locator('input[data-tw-link-field="text"]');
+		await expect(textInput).toBeVisible();
+		await textInput.fill("NewDisplay");
+		await tooltip.locator(".tc-prosemirror-link-tooltip-btn-ok").click();
+		await page.waitForTimeout(300);
+		await expect(editor.locator("a").first()).toContainText("NewDisplay");
+		await expect(editor.locator("a").first()).toHaveAttribute("data-tw-href", "Target");
+	});
+
+	test("should style internal and external links differently", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page, null, {
+			initialText: "Visit [[InternalLinkTarget]] and [[TiddlyWiki|https://tiddlywiki.com]]",
+			configTiddlers: [{ title: "InternalLinkTarget", text: "Example target" }]
+		});
+		const links = editor.locator("a[data-tw-href]");
+		await expect(links).toHaveCount(2);
+		await expect(links.nth(0)).toHaveClass(/tc-tiddlylink-resolves/);
+		await expect(links.nth(0)).not.toHaveClass(/tc-tiddlylink-external/);
+		await expect(links.nth(1)).toHaveClass(/tc-tiddlylink-external/);
+	});
 });
 
 test.describe("ProseMirror Editor - Plain Text HTML-Like Content", () => {

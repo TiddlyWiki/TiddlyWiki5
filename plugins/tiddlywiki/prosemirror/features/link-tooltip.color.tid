@@ -9,10 +9,6 @@ tags: $:/tags/Stylesheet
 	border-color: <<colour tiddler-editor-border>>;
 }
 
-.tc-prosemirror-link-tooltip-href {
-	color: <<colour primary>>;
-}
-
 .tc-prosemirror-link-tooltip-btn {
 	color: <<colour foreground>>;
 }
@@ -38,4 +34,8 @@ tags: $:/tags/Stylesheet
 
 .tc-prosemirror-link-tooltip-input:focus {
 	border-color: <<colour primary>>;
+}
+
+.tc-prosemirror-link-tooltip-edit-label {
+	color: <<colour foreground>>;
 }

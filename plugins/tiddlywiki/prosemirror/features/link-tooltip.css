@@ -27,7 +27,6 @@ Structural styles for the ProseMirror link tooltip.
 }
 
 .tc-prosemirror-link-tooltip-href {
-	text-decoration: underline;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	max-width: 240px;
@@ -61,16 +60,36 @@ Structural styles for the ProseMirror link tooltip.
 
 .tc-prosemirror-link-tooltip-edit {
 	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	min-width: 240px;
+}
+
+.tc-prosemirror-link-tooltip-edit-row {
+	display: flex;
 	align-items: center;
+	gap: 6px;
+}
+
+.tc-prosemirror-link-tooltip-edit-label {
+	flex-shrink: 0;
+	min-width: 56px;
+	font-size: 0.85em;
+}
+
+.tc-prosemirror-link-tooltip-edit-buttons {
+	display: flex;
+	justify-content: flex-end;
 	gap: 4px;
 }
 
 .tc-prosemirror-link-tooltip-input {
+	flex: 1;
 	border: 1px solid transparent;
 	border-radius: 4px;
 	padding: 3px 6px;
 	font-size: 0.9em;
-	min-width: 200px;
+	min-width: 140px;
 }
 
 .tc-prosemirror-link-tooltip-input:focus {

@@ -217,7 +217,8 @@ function buildSchema() {
 			return ["a", {
 				href: isExternal ? href : `#${encodeURIComponent(href)}`,
 				title,
-				"data-tw-href": href
+				"data-tw-href": href,
+				class: isExternal ? "tc-tiddlylink tc-tiddlylink-external" : "tc-tiddlylink"
 			}, 0];
 		},
 		parseDOM: [{
