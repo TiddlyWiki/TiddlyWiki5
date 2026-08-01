@@ -1,11 +1,21 @@
 title: $:/palettes/AutoToggle/Customisations
 
 \procedure layer-input-actions()
-<%if [<layerTitle>prefix[$:/config/PaletteCustomisations/]then<field>suffix[@light]then<layerTitle>!has[palette-import@dark]] %>
-<$action-setfield $tiddler=<<layerTitle>> palette-import@dark={{{ [{$:/palette}get[palette-import@dark]] }}}/>
-<%elseif [<layerTitle>prefix[$:/config/PaletteCustomisations/]then<field>suffix[@dark]then<layerTitle>!has[palette-import@light]] %>
-<$action-setfield $tiddler=<<layerTitle>> palette-import@light={{{ [{$:/palette}get[palette-import@light]] }}}/>
-<% endif %>
+<$let
+	paletteImportLight={{{ [{$:/palette}get[palette-import@light]] }}}
+	paletteImportDark={{{ [{$:/palette}get[palette-import@dark]] }}}
+>
+	<$action-setfield $tiddler=<<layerTitle>> text="" type="application/x-tiddler-dictionary"/>
+	<%if [<field>suffix[@light]] %>
+		<%if [<layerTitle>!has[palette-import@dark]] [<layerTitle>get[palette-import@dark]!match<paletteImportDark>] %>
+			<$action-setfield $tiddler=<<layerTitle>> palette-import@dark={{{ [{$:/palette}get[palette-import@dark]] }}}/>
+		<% endif %>
+	<%elseif [<field>suffix[@dark]] %>
+		<%if [<layerTitle>!has[palette-import@light]] [<layerTitle>get[palette-import@light]!match<paletteImportLight>] %>
+			<$action-setfield $tiddler=<<layerTitle>> palette-import@light={{{ [{$:/palette}get[palette-import@light]] }}}/>
+		<% endif %>
+	<% endif %>
+</$let>
 <$action-setfield $tiddler=<<layerTitle>> palette-import={{$:/palette}}/>
 \end layer-input-actions
 
