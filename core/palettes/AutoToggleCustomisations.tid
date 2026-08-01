@@ -8,11 +8,11 @@ title: $:/palettes/AutoToggle/Customisations
 	<$action-setfield $tiddler=<<layerTitle>> text="" type="application/x-tiddler-dictionary"/>
 	<%if [<field>suffix[@light]] %>
 		<%if [<layerTitle>!has[palette-import@dark]] [<layerTitle>get[palette-import@dark]!match<paletteImportDark>] %>
-			<$action-setfield $tiddler=<<layerTitle>> palette-import@dark={{{ [{$:/palette}get[palette-import@dark]] }}}/>
+			<$action-setfield $tiddler=<<layerTitle>> palette-import@dark=<<paletteImportDark>>/>
 		<% endif %>
 	<%elseif [<field>suffix[@dark]] %>
 		<%if [<layerTitle>!has[palette-import@light]] [<layerTitle>get[palette-import@light]!match<paletteImportLight>] %>
-			<$action-setfield $tiddler=<<layerTitle>> palette-import@light={{{ [{$:/palette}get[palette-import@light]] }}}/>
+			<$action-setfield $tiddler=<<layerTitle>> palette-import@light=<<paletteImportLight>>/>
 		<% endif %>
 	<% endif %>
 </$let>
