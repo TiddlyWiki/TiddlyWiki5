@@ -244,25 +244,22 @@ title: $:/PaletteEditor
 
 \procedure delete-colour-index-actions()
 \procedure tv-action-refresh-policy() always
-<%if [{$:/palette}match[$:/palettes/AutoToggle]else<palette>] :map[<currentTiddler>addprefix[$:/config/PaletteCustomisations/]!is[missing]indexes[]match<colourName>] %>
-<$let resetTiddler={{{ [{$:/palette}match[$:/palettes/AutoToggle]else<palette>] :map[<currentTiddler>addprefix[$:/config/PaletteCustomisations/]] }}}>
-<%if [<resetTiddler>!is[missing]] %>
-<$action-setfield $tiddler=<<resetTiddler>> $index=<<colourName>>/>
-<%if [<resetTiddler>indexes[]count[]match[0]] %>
-<$action-deletetiddler $tiddler=<<resetTiddler>>/>
-<% endif %>
-<% endif %>
-<$action-setfield $tiddler="$:/temp/palette-consolidated/copy-1" $index=<<colourName>> $value={{{ [<palette>getindex<colourName>] }}}/>
-<$action-setfield $tiddler="$:/temp/palette-consolidated/copy-2" $index=<<colourName>> $value={{{ [<palette>getindex<colourName>] }}}/>
-<%if [<colourEditTiddler>match[$:/temp/palette-consolidated/copy-1]] %>
-<$action-setfield $tiddler={{{ [[$:/temp/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/refresh]] }}} text="yes"/>
-<$action-deletetiddler $tiddler={{{ [[$:/temp/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/refresh]] }}}/>
-<%elseif [<colourEditTiddler>match[$:/temp/palette-consolidated/copy-2]] %>
-<$action-setfield $tiddler={{{ [[$:/temp/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/]addsuffix<newColourName>addsuffix[/refresh]] }}} text="yes"/>
-<$action-deletetiddler $tiddler={{{ [[$:/temp/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/]addsuffix<newColourName>addsuffix[/refresh]] }}}/>
-<% endif %>
+<$let resetTiddler={{{ [<basePalette>!match[$:/palettes/AutoToggle]then<palette>addprefix[$:/config/PaletteCustomisations/]] :else[[$:/config/PaletteCustomisations/$:/palettes/AutoToggle]] }}}>
+	<%if [<resetTiddler>!is[missing]indexes[]match<colourName>] %>
+		<%if [<resetTiddler>!match[$:/config/PaletteCustomisations/$:/palettes/AutoToggle]] :map[<currentTiddler>indexes[]count[]match[0]] %>
+			<$action-deletetiddler $tiddler=<<resetTiddler>>/>
+		<% endif %>
+		<$action-setfield $tiddler="$:/temp/palette-consolidated/copy-1" $index=<<colourName>> $value={{{ [<palette>getindex<colourName>] }}}/>
+		<$action-setfield $tiddler="$:/temp/palette-consolidated/copy-2" $index=<<colourName>> $value={{{ [<palette>getindex<colourName>] }}}/>
+		<%if [<colourEditTiddler>match[$:/temp/palette-consolidated/copy-1]] %>
+			<$action-setfield $tiddler={{{ [[$:/temp/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/refresh]] }}} text="yes"/>
+			<$action-deletetiddler $tiddler={{{ [[$:/temp/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/refresh]] }}}/>
+		<%elseif [<colourEditTiddler>match[$:/temp/palette-consolidated/copy-2]] %>
+			<$action-setfield $tiddler={{{ [[$:/temp/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/]addsuffix<newColourName>addsuffix[/refresh]] }}} text="yes"/>
+			<$action-deletetiddler $tiddler={{{ [[$:/temp/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>addsuffix[/]addsuffix<newColourName>addsuffix[/refresh]] }}}/>
+		<% endif %>
+	<% endif %>
 </$let>
-<% endif %>
 \end delete-colour-index-actions
 
 \procedure palette-manager-colour-row()
@@ -322,43 +319,45 @@ title: $:/PaletteEditor
 \end
 
 \function tf.get.palette()
-[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}match[yes]then<layerTitle>has[palette-import@dark]get[palette-import@dark]]
-[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}match[yes]then<layerTitle>!has[palette-import@dark]then{$:/palette}get[palette-import@dark]]
-[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}!match[yes]then<layerTitle>has[palette-import@light]get[palette-import@light]]
-[{$:/palette}match[$:/palettes/AutoToggle]then{$:/info/darkmode}!match[yes]then<layerTitle>!has[palette-import@light]then{$:/palette}get[palette-import@light]]
-[{$:/palette}!match[$:/palettes/AutoToggle]]
+[<basePalette>match[$:/palettes/AutoToggle]then{$:/info/darkmode}match[yes]then<layerTitle>has[palette-import@dark]get[palette-import@dark]]
+[<basePalette>match[$:/palettes/AutoToggle]then{$:/info/darkmode}match[yes]then<layerTitle>!has[palette-import@dark]then<basePalette>get[palette-import@dark]]
+[<basePalette>match[$:/palettes/AutoToggle]then{$:/info/darkmode}!match[yes]then<layerTitle>has[palette-import@light]get[palette-import@light]]
+[<basePalette>match[$:/palettes/AutoToggle]then{$:/info/darkmode}!match[yes]then<layerTitle>!has[palette-import@light]then<basePalette>get[palette-import@light]]
+[<basePalette>!match[$:/palettes/AutoToggle]]
 \end tf.get.palette
 
-\procedure tp-delete-customizations()
-<$action-deletetiddler $tiddler=<<layerTitle>>/>
-\end
+\procedure tp-delete-customizations() <$action-deletetiddler $tiddler={{{ [<palette>addprefix[$:/config/PaletteCustomisations/]] }}}/>
+
+\procedure tp-delete-palette-modifications() <$action-deletetiddler $tiddler=<<basePalette>>/>
+
 \whitespace trim
 <$let
+	basePalette={{$:/palette}}
 	colourEditTiddler="$:/temp/palette-consolidated/copy-1"
 	layerTitle={{{ [function[tf.palette-customisations-layer]] }}}
 	palette={{{ [function[tf.get.palette]] }}}
 	currentTiddler=<<palette>>
 >
 
-<<lingo Prompt>>&#32;<$link to=<<palette>>><$text text=<<currentTiddler>>/></$link>
+<<lingo Prompt>>&#32;<$link to=<<palette>>><$text text=<<palette>>/></$link>
 
-<$list filter="[<layerTitle>is[tiddler]]" variable="listItem">
+<$list filter="[<palette>addprefix[$:/config/PaletteCustomisations/]is[tiddler]]" variable="listItem">
 <<lingo Customised/Prompt>>
 &#32;
 <$button actions=<<tp-delete-customizations>>>{{$:/language/ControlPanel/Palette/Customisations/Reset/Caption}}</$button>
 </$list>
 
-<$list filter="[all[current]is[shadow]is[tiddler]]" variable="listItem">
+<$list filter="[<basePalette>is[shadow]is[tiddler]]" variable="listItem">
 <<lingo Prompt/Modified>>
 &#32;
 <$button actions=<<tp-delete-palette-modifications>>><<lingo Reset/Caption>></$button>
 </$list>
 
-<$list filter="[all[current]is[shadow]!is[tiddler]]" variable="listItem">
+<$list filter="[<basePalette>is[shadow]!is[tiddler]]" variable="listItem">
 <<lingo Clone/Prompt>>
 </$list>
 
-<$button message="tm-new-tiddler" param={{$:/palette}}><<lingo Clone/Caption>></$button>
+<$button message="tm-new-tiddler" param=<<basePalette>>><<lingo Clone/Caption>></$button>
 
 <$checkbox tiddler="$:/state/palettemanager/showexternal" field="text" checked="yes" unchecked="no"><span class="tc-small-gap-left"><<lingo Names/External/Show>></span></$checkbox>
 
