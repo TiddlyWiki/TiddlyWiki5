@@ -245,7 +245,8 @@ title: $:/PaletteEditor
 \procedure delete-colour-index-actions()
 \procedure tv-action-refresh-policy() always
 <$let resetTiddler={{{ [<basePalette>!match[$:/palettes/AutoToggle]then<palette>addprefix[$:/config/PaletteCustomisations/]] :else[[$:/config/PaletteCustomisations/$:/palettes/AutoToggle]] }}}>
-	<%if [<resetTiddler>!is[missing]indexes[]match<colourName>] %>
+	<%if [<resetTiddler>!is[missing]] :map[<currentTiddler>indexes[]match<colourName>] %>
+		<$action-setfield $tiddler=<<resetTiddler>> $index=<<colourName>>/>
 		<%if [<resetTiddler>!match[$:/config/PaletteCustomisations/$:/palettes/AutoToggle]] :map[<currentTiddler>indexes[]count[]match[0]] %>
 			<$action-deletetiddler $tiddler=<<resetTiddler>>/>
 		<% endif %>
@@ -326,7 +327,7 @@ title: $:/PaletteEditor
 [<basePalette>!match[$:/palettes/AutoToggle]]
 \end tf.get.palette
 
-\procedure tp-delete-customizations() <$action-deletetiddler $tiddler={{{ [<palette>addprefix[$:/config/PaletteCustomisations/]] }}}/>
+\procedure tp-delete-customizations() <$action-deletetiddler $tiddler={{{ [<basePalette>addprefix[$:/config/PaletteCustomisations/]] }}}/>
 
 \procedure tp-delete-palette-modifications() <$action-deletetiddler $tiddler=<<basePalette>>/>
 
@@ -341,7 +342,7 @@ title: $:/PaletteEditor
 
 <<lingo Prompt>>&#32;<$link to=<<palette>>><$text text=<<palette>>/></$link>
 
-<$list filter="[<palette>addprefix[$:/config/PaletteCustomisations/]is[tiddler]]" variable="listItem">
+<$list filter="[<basePalette>addprefix[$:/config/PaletteCustomisations/]is[tiddler]]" variable="listItem">
 <<lingo Customised/Prompt>>
 &#32;
 <$button actions=<<tp-delete-customizations>>>{{$:/language/ControlPanel/Palette/Customisations/Reset/Caption}}</$button>
