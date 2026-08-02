@@ -2,10 +2,12 @@ title: $:/palettes/AutoToggle/Customisations
 
 \procedure layer-input-actions()
 <$let
-	paletteImportLight={{{ [{$:/palette}get[palette-import@light]] }}}
-	paletteImportDark={{{ [{$:/palette}get[palette-import@dark]] }}}
+	paletteImportLight={{{ [<layerTitle>has[palette-import@light]get[palette-import@light]] :else[{$:/palette}get[palette-import@light]] }}}
+	paletteImportDark={{{ [<layerTitle>has[palette-import@dark]get[palette-import@dark]] :else[{$:/palette}get[palette-import@dark]] }}}
 >
-	<$action-setfield $tiddler=<<layerTitle>> text="" type="application/x-tiddler-dictionary"/>
+	<%if [<layerTitle>!type[application/x-tiddler-dictionary]] %>
+		<$action-setfield $tiddler=<<layerTitle>> type="application/x-tiddler-dictionary"/>
+	<% endif %>
 	<%if [<field>suffix[@light]] %>
 		<%if [<layerTitle>!has[palette-import@dark]] [<layerTitle>get[palette-import@dark]!match<paletteImportDark>] %>
 			<$action-setfield $tiddler=<<layerTitle>> palette-import@dark=<<paletteImportDark>>/>
