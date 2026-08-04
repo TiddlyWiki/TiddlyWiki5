@@ -13,6 +13,7 @@ alert-muted-foreground: #d33682
 background: #073642
 blockquote-bar: #d33682
 button-background: #073642
+button-background-hover: #0a4a5c
 button-border: #586e75
 button-foreground: #93a1a1
 code-background: #073642
