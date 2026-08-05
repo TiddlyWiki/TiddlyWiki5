@@ -1,0 +1,19 @@
+title: $:/language/Help/test
+description: Run all tests defined in the test edtion
+
+Run the Jasmine test suite defined in the test edition.
+
+```
+--test [spec=<spec-filter>] [seed=<seed>]
+```
+
+* ''spec'': Optional text to filter which tests to run. Only tests whose name contains the given text will be executed
+* ''seed'': Optional random seed for test ordering. If omitted, a random seed is generated automatically
+
+The test runner uses Jasmine with randomised test ordering. The seed used for each run is printed in the output, allowing a specific ordering to be reproduced.
+
+Examples:
+
+* `--test` -- run all tests with a random seed
+* `--test seed=38862` -- run all tests with a specific seed for reproducibility
+* `--test spec=Widgets` -- run only tests with "Widgets" in their name
