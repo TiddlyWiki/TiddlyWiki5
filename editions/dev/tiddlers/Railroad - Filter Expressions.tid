@@ -1,0 +1,102 @@
+created: 20260413160451989
+modified: 20260413160625207
+tags: doc dev [[Wikitext EBNF]]
+title: Railroad - Filter Expressions
+
+! Filter Expressions — Railroad Diagrams
+
+This tiddler presents the same filter expression syntax as [[EBNF - Filter Expressions]], but using railroad diagrams for visual clarity. Follow the tracks left-to-right to see valid syntax paths.
+
+!! Top-Level Structure
+
+A filter expression is a sequence of zero or more runs, separated by optional whitespace.
+
+<$railroad text=""" [{<"Run">}] """/>
+
+Each run produces a set of titles. Runs are combined according to their prefix.
+
+!! Run
+
+A run is an optional prefix followed by either one or more steps (bracket groups) or a single bare parameter (a quoted/unquoted string).
+
+<$railroad text=""" [<"RunPrefix">] ( {<"Step">} | <"BareParameter"> ) """/>
+
+Bare parameters like `"MyTiddler"` are shorthand for `[title[MyTiddler]]`.
+
+!! Run Prefixes
+
+!!! Symbol Prefixes
+
+The original prefix characters. No prefix means union (OR) with deduplication.
+
+<$railroad text=`( "+" / "filter (AND)" / | "-" / "except" / | "~" / "else" / | "=" / "all (no dedup)" / | "=>" / "let" / ) `/>
+
+!!! Named Prefixes
+
+Named prefixes use colon syntax and accept optional suffix levels.
+
+<$railroad text=`":" <"PrefixName"> [{":" <"SuffixSpec">}] `/>
+
+Known names: `:filter`, `:map`, `:reduce`, `:sort`, `:intersection`, `:cascade`, `:then`, `:or`, `:and`, `:all`, `:except`, `:else`.
+
+!! Step
+
+A step is one or more operators enclosed in square brackets. Operators within a step are chained: each receives the previous operator's output.
+
+<$railroad text=`"[" <"Operator"> [{<"Operator">}] "]" `/>
+
+!! Operator
+
+Each operator has an optional negation prefix, a name (empty defaults to `title`), optional suffixes, and one or more parameter expressions.
+
+<$railroad text=`["!" / "negate" /] <"OperatorName"> [<"Suffix">] <"ParameterExpr"> [{"," <"ParameterExpr">}] `/>
+
+!! Parameter Types (Inside Steps)
+
+Five bracket forms indicate the parameter type.
+
+<$railroad text=`( "[" <"text"> "]" / "literal" / | "{" <"textref"> "}" / "indirect" / | "<" <"varref"> ">" / "variable" / | "(" <"varref"> ")" / "multi-valued" / | "/" <"regexp"> "/" [<"flags">] / "deprecated" / ) `/>
+
+* ''Literal'' `[text]` — the text is used as-is.
+* ''Indirect'' `{textref}` — looks up a tiddler field or index at runtime.
+* ''Variable'' `<varref>` — resolves a variable, returns a single value.
+* ''Multi-valued'' `(varref)` — resolves a variable, returns a list of values.
+* ''Regexp'' `/regexp/` — deprecated; avoid in new code.
+
+!! Bare Parameters (Between Runs)
+
+Bare parameters appear between runs without square brackets. They are implicitly wrapped as `[title[...]]`.
+
+<$railroad text=`( '"' <"text"> '"' / "double-quoted" / | "'" <"text"> "'" / "single-quoted" / | <"unquoted-word"> / "no spaces or brackets" / ) `/>
+
+!! Suffix Parsing
+
+Suffixes form a 2D structure. Colons separate levels; commas separate options within a level.
+
+<$railroad text=`":" <"option"> [{"," <"option">}] [{":" <"option"> [{"," <"option">}]}] `/>
+
+Examples:
+
+* `field:title` parses as `[["title"]]`
+* `sort:number:reverse` parses as `[["number"], ["reverse"]]`
+* `search:title,body:casesensitive` parses as `[["title","body"], ["casesensitive"]]`
+
+!! Operator Categories
+
+Filter operators (defined in `$:/core/modules/filters/`) fall into these groups:
+
+* ''Selection:'' `all`, `title`, `is`, `tag`, `tags`, `list`, `listed`, `untagged`, `has`, `field`, `contains`
+* ''Navigation:'' `links`, `backlinks`, `transcludes`, `backtranscludes`, `tagging`
+* ''Ordering:'' `before`, `after`, `next`, `previous`, `insertbefore`, `insertafter`
+* ''Comparison:'' `compare`, `match`, `regexp`, `search`, `prefix`, `suffix`, `minlength`
+* ''String:'' `addprefix`, `addsuffix`, `removeprefix`, `removesuffix`, `split`, `join`, `trim`, `pad`, `uppercase`, `lowercase`, `sentencecase`, `titlecase`, `slugify`, `length`
+* ''Sorting:'' `sort`, `sortsub`, `nsort`, `sortcs`, `nsortcs`
+* ''Counting:'' `count`, `limit`, `range`, `each`, `eachday`
+* ''Higher-Order:'' `subfilter`, `filter`, `reduce`, `function`
+* ''JSON:'' `jsonget`, `jsonset`, `jsontype`, `jsonindexes`, `jsonextract`
+* ''Date:'' `days`, `sameday`, `format:date`, `format:relativedate`
+* ''Encoding:'' `encodings`, `stringify`, `jsonstringify`, `deserialize`
+* ''List Ops:'' `enlist`, `lookup`, `append`, `prepend`, `move`
+* ''Variables:'' `getvariable`, `variables`, `substitute`
+* ''Introspection:'' `fields`, `indexes`, `get`, `getindex`, `modules`, `moduletypes`, `commands`, `editions`
+* ''Patch:'' `makepatches`, `applypatches`, `levenshtein`
