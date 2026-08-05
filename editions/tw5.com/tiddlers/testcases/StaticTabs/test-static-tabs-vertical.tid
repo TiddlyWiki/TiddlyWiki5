@@ -1,0 +1,28 @@
+created: 20260429000000000
+description: vertical tabs vs static-tabs auto-delegation
+import-compound: [[TestCases/StaticTabs/Pitch]]
+modified: 20260429000000000
+tags: $:/tags/wiki-test-spec
+title: TestCases/StaticTabs/test-static-tabs-vertical
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Vertical interactive `<<tabs>>` (via `pitch-class="tc-vertical"`) compared to the static-tabs auto-delegated rendering. Static rendering ignores the vertical orientation since each tab becomes its own block-level card.
+
++
+title: Output
+
+;Interactive vertical tabs
+
+<$let pitch-class="tc-vertical">
+<$transclude $tiddler="StaticTabs" $mode="block"/>
+</$let>
+
+-----
+
+;Static-render mode (tv-config-static="yes" auto-delegates; class="tc-vertical" passes through but has no effect on stacked cards)
+
+<$let tv-config-static="yes" pitch-class="tc-vertical">
+<$transclude $tiddler="StaticTabs" $mode="block"/>
+</$let>
