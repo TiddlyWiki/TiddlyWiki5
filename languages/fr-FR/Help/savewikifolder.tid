@@ -14,10 +14,18 @@ description: Enregistre un wiki dans un nouveau dossier wiki
 
 Les options suivantes sont acceptées :
 
-* ''filter'': une expression filtre qui définit les tiddlers à inclure en sortie.
-* ''explodePlugins'': "yes" par défaut
-** ''yes'' "explosera" les plugins en fichiers séparés (un par tiddler) et les sauvegardera dans le répertoire plugin sous le dossier principal du wiki
-** ''no'' empêchera l'explosion des plugins en autant de fichiers que de tiddlers qui les constituaient. Le plugin sera sauvegardé en un seul tiddler JSON sous le dossier tiddlers/.
+```
+  filter          une expression filtre qui définit les tiddlers à inclure
+                  en sortie.
+  explodePlugins  "yes" par défaut
+                    yes  "explosera" les plugins en fichiers séparés (un par
+                         tiddler) et les sauvegardera dans le répertoire
+                         plugin sous le dossier principal du wiki
+                    no   empêchera l'explosion des plugins en autant de
+                         fichiers que de tiddlers qui les constituaient. Le
+                         plugin sera sauvegardé en un seul tiddler JSON
+                         sous le dossier tiddlers/.
+```
 
 On notera que les deux options ''explodePlugins'' produiront des dossiers wiki qui ne changeront pas le wiki original. La différence réside dans la manière dont les plugins sont représentés sous le dossier principal du wiki.
 

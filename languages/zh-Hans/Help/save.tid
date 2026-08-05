@@ -7,8 +7,12 @@ description: 将个别原始条目保存到文件
 --save <tiddler-filter> <filename-filter>
 ```
 
-* ''tiddler-filter'': 标识要保存的条目的筛选器
-* ''filename-filter'': 可选的筛选器，转换条目名称至路径名。如果省略，默认为 `[is[tiddler]]`，其使用未改变的条目名称为文件名
+```
+  tiddler-filter    标识要保存的条目的筛选器
+  filename-filter   可选的筛选器，转换条目名称至路径名。如果省略，
+                    默认为 [is[tiddler]]，
+                    其使用未改变的条目名称为文件名
+```
 
 附注：
 
@@ -20,4 +24,8 @@ description: 将个别原始条目保存到文件
 
 例子：
 
-* `--save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"` -- 保存所有非系统的图像条目为 "tiddlers" 子文件夹中的文件，文件名为 URL 编码的条目名称
+```
+  保存所有非系统的图像条目为 "tiddlers" 子文件夹中的文件，文件名为 URL 编码的条目名称:
+
+    --save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"
+```

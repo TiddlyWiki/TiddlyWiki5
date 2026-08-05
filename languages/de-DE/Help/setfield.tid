@@ -11,7 +11,11 @@ Setzt ein spezifiziertes Feld, für eine Gruppe von Tiddlern. Ein Template wird 
 
 The parameters are:
 
-* ''filter'' - Filter, der die zu modifizierenden Tiddler auswählt.
-* ''fieldname'' - Das zu verändernde Feld (Standardwert: "text").
-* ''templatetitle'' - Der zu wikifizierende Vorlagen Tiddler, dessen Ergebnis in das Feld geschrieben wird. Wenn Leer, dann wird das Feld gelöscht.
-* ''rendertype'' - Der Text Typ für den "rendering" Vorgang (Standardwert: "text/plain"; "text/html" kann verwendet werden, um "HTML tags" zu erzeugen).
+```
+  filter          Filter, der die zu modifizierenden Tiddler auswählt
+  fieldname       Das zu verändernde Feld (Standard: "text")
+  templatetitle   Der zu wikifizierende Vorlagen Tiddler; wenn leer,
+                  wird das Feld gelöscht
+  rendertype      Text Typ für das Rendering (Standard: "text/plain";
+                  "text/html" für HTML Tags)
+```

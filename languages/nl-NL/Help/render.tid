@@ -12,12 +12,18 @@ Een naam en waarde voor een additionele variabele kan optioneel gespecificeerd w
 --render <tiddler-filter> [<bestandsnaam-filter>] [<render-type>] [<template>] [<naam>] [<waarde>]
 ```
 
-* ''tiddler-filter'': Een filter dat bepaalt welke tiddler(s) getoond worden
-* ''bestandsnaam-filter'': Optioneel filter dat tiiddler titels omzet in padnamen. Standaard (geen optioneel filter) `[is[tiddler]addsuffix[.html]]`, hetgeen de onveranderde tiddler titel als bestandsnaam gebruikt
-* ''template'': Optionele template die gebruikt wordt om elke tiddler te renderen
-* ''render-type'': Optioneel render type: `text/html` (standaard) geeft de volledige HTML tekst en `text/plain` geeft de kale tekst (negeert HTML labels en ander niet te printen materiaal)
-* ''naam'': Naam van de optionele variabele
-* ''waarde'': Waarde van de optionele variabele
+```
+  tiddler-filter      Een filter dat bepaalt welke tiddler(s) getoond worden
+  bestandsnaam-filter  Optioneel filter dat tiddler titels omzet in padnamen
+                      (standaard: [is[tiddler]addsuffix[.html]])
+  template            Optionele template die gebruikt wordt om elke tiddler
+                      te renderen
+  render-type         Optioneel render type: text/html (standaard) geeft de
+                      volledige HTML tekst en text/plain geeft de kale tekst
+                      (negeert HTML labels en ander niet te printen materiaal)
+  naam                Naam van de optionele variabele
+  waarde              Waarde van de optionele variabele
+```
 
 Standaard is de bestandsnaam relatief t.o.v. de `output` subfolder van de editiefolder. Het `--output` commando kan gebruikt worden om output naar een andere folder te leiden.
 
@@ -30,4 +36,8 @@ N.B.:
 
 Voorbeelden:
 
-* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- rendert alle non-system tiddlers als bestanden in the subfolder "tiddlers" met URL-encoded titels en de extensie HTML
+```
+  Rendert alle non-system tiddlers als bestanden in de subfolder "tiddlers" met URL-encoded titels en de extensie HTML:
+
+    --render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'
+```

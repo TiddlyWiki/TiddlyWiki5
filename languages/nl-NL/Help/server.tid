@@ -12,14 +12,18 @@ De ondersteunde HTTP-functies zijn: `GET`, `PUT` en `DELETE`.
 
 De parameters zijn:
 
-* ''poort'' - poortnummer voor communicatie (standaard "8080")
-* ''roottiddler'' - de tiddler die als basistiddler gebruikt wordt (standaard "$:/core/save/all") 
-* ''rendertype'' - het inhoudstype waarmee de basistiddler getoond wordt (standaard "text/plain")
-* ''servetype'' - het inhoudstype waarmee de basistiddler uitgeleverd wordt (standaard "text/html")
-* ''gebruikersnaam'' - de standaard gebruikersnaam waarmee wijzigingen gesigneerd worden
-* ''wachtwoord'' - optioneel wachtwoord voor simpele verificatie
-* ''host'' - optionele hostnaam waarmee uitgeleverd wordt (standaard "127.0.0.1" oftewel "localhost")
-* ''padprefix'' - optioneel voorvoegsel voor paden
+```
+  poort            poortnummer voor communicatie (standaard: "8080")
+  roottiddler      basistiddler (standaard: "$:/core/save/all")
+  rendertype       inhoudstype waarmee de basistiddler getoond wordt
+                   (standaard: "text/plain")
+  servetype        inhoudstype waarmee de basistiddler uitgeleverd wordt
+                   (standaard: "text/html")
+  gebruikersnaam   standaard gebruikersnaam voor wijzigingen
+  wachtwoord       optioneel wachtwoord voor simpele verificatie
+  host             hostnaam (standaard: "127.0.0.1")
+  padprefix        optioneel voorvoegsel voor paden
+```
 
 Als een wachtwoord gegeven wordt zal de browser om gebruikersnaam en wachtwoord vragen. N.B. het wachtwoord wordt als platte tekst verzonden en dit is dus niet geschikt voor algemeen internetgebruik.
 

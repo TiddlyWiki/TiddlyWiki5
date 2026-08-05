@@ -9,15 +9,22 @@ HTTP経由でWikiを提供するためのレガシーコマンド。
 
 以下のパラメータがあります:
 
-* ''port'' - 待ち受けるポート番号。数値以外の値は、システム環境変数として解釈され、ポート番号が抽出されます。(デフォルトは "8080") 
-* ''root-tiddler'' - root 階層になる Tiddler（デフォルトは "$:/core/save/all"）
-* ''root-render-type'' - root Tiddler がレンダリングされるときの ContentType（デフォルトは "text/plain"）
-* ''root-serve-type'' - root Tiddler がリクエストされるときの ContentType（デフォルトは "text/html"）
-* ''username'' - 編集した Tiddler を保存する際のデフォルトユーザ名
-* ''password'' - オプションのベーシック認証用のパスワード
-* ''host'' - オプションのサーバーとなるホスト名（デフォルトは "127.0.0.1" つまり "localhost"）
-* ''path-prefix'' - オプションのパスのプレフィックス
-* ''debug-level'' - オプションのデバッグレベル。リクエストの詳細を表示するには"debug"に設定します(デフォルトは"none")
+```
+  port              待ち受けるポート番号。数値以外の値は、システム環境変数として
+                    解釈され、ポート番号が抽出されます。(デフォルトは "8080")
+  root-tiddler      root 階層になる Tiddler（デフォルトは "$:/core/save/all"）
+  root-render-type  root Tiddler がレンダリングされるときの ContentType
+                    （デフォルトは "text/plain"）
+  root-serve-type   root Tiddler がリクエストされるときの ContentType
+                    （デフォルトは "text/html"）
+  username          編集した Tiddler を保存する際のデフォルトユーザ名
+  password          オプションのベーシック認証用のパスワード
+  host              オプションのサーバーとなるホスト名
+                    （デフォルトは "127.0.0.1" つまり "localhost"）
+  path-prefix       オプションのパスのプレフィックス
+  debug-level       オプションのデバッグレベル。リクエストの詳細を表示するには
+                    "debug"に設定します(デフォルトは"none")
+```
 
 password パラメータが指定された場合ブラウザはユーザ名とパスワードを尋ねるようになります。なお、パスワードはネットワーク上を平文で流れるため、この実装は信頼できるネットワークやHTTPS接続でのみ使用してください。
 
