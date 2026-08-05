@@ -10,15 +10,35 @@ Sass/SCSS language support for CodeMirror 6
 "use strict";
 
 // Dependency check - exit early if core editor plugin is not available
-var langSass, hasConfiguredTag;
+var hasConfiguredTag;
 try {
-	langSass = require("$:/plugins/tiddlywiki/codemirror-6-lang-sass/lang-sass.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;
 }
 
-if(!langSass || !hasConfiguredTag) return;
+if(!hasConfiguredTag) return;
+
+/*
+The language grammar is required on first use, not at module load.
+
+Every codemirror6-plugin module is executed when the language registry runs, so a
+top-level require here pulled this grammar -- and the CodeMirror dependency graph
+behind it -- into the boot path of any wiki with this plugin installed, whether or
+not a file of this type was ever opened. require() is memoised by TiddlyWiki, so the
+work still happens exactly once, on the first editor that needs it.
+*/
+var langSass;
+function _langSass() {
+	if(langSass === undefined) {
+		try {
+			langSass = require("$:/plugins/tiddlywiki/codemirror-6-lang-sass/lang-sass.js") || null;
+		} catch (e) {
+			langSass = null;
+		}
+	}
+	return langSass;
+}
 
 // Content types that activate this plugin
 var SASS_TYPES = [
@@ -108,22 +128,22 @@ exports.plugin = {
 		var effectiveType = context.effectiveType || context.tiddlerType || "";
 
 		/*
-		If your langSass.sass() wrapper supports an option or separate mode
+		If your _langSass().sass() wrapper supports an option or separate mode
 		for indented Sass vs SCSS, this is the place to branch on:
 
 			text/x-sass
 			text/x-scss
 
-		For now we preserve your existing behavior and use langSass.sass().
+		For now we preserve your existing behavior and use _langSass().sass().
 		*/
-		if(effectiveType === "text/x-sass" && langSass.sass) {
+		if(effectiveType === "text/x-sass" && _langSass().sass) {
 			return [
-				langSass.sass()
+				_langSass().sass()
 			];
 		}
 
 		return [
-			langSass.sass()
+			_langSass().sass()
 		];
 	},
 

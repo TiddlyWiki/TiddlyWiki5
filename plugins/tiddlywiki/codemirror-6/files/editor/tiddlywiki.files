@@ -113,11 +113,11 @@
             }
         },
         {
-            "file": "language-startup.js",
+            "file": "language-registry.js",
             "fields": {
                 "type": "application/javascript",
-                "title": "$:/plugins/tiddlywiki/codemirror-6/language-startup.js",
-                "module-type": "startup"
+                "title": "$:/plugins/tiddlywiki/codemirror-6/language-registry.js",
+                "module-type": "library"
             }
         }
     ]

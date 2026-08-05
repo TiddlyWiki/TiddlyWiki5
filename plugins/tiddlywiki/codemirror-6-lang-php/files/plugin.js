@@ -10,15 +10,35 @@ PHP language support for CodeMirror 6
 "use strict";
 
 // Dependency check - exit early if core editor plugin is not available
-var langPhp, hasConfiguredTag;
+var hasConfiguredTag;
 try {
-	langPhp = require("$:/plugins/tiddlywiki/codemirror-6-lang-php/lang-php.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;
 }
 
-if(!langPhp || !hasConfiguredTag) return;
+if(!hasConfiguredTag) return;
+
+/*
+The language grammar is required on first use, not at module load.
+
+Every codemirror6-plugin module is executed when the language registry runs, so a
+top-level require here pulled this grammar -- and the CodeMirror dependency graph
+behind it -- into the boot path of any wiki with this plugin installed, whether or
+not a file of this type was ever opened. require() is memoised by TiddlyWiki, so the
+work still happens exactly once, on the first editor that needs it.
+*/
+var langPhp;
+function _langPhp() {
+	if(langPhp === undefined) {
+		try {
+			langPhp = require("$:/plugins/tiddlywiki/codemirror-6-lang-php/lang-php.js") || null;
+		} catch (e) {
+			langPhp = null;
+		}
+	}
+	return langPhp;
+}
 
 // Content types that activate this plugin
 var PHP_TYPES = [
@@ -103,7 +123,7 @@ exports.plugin = {
 	*/
 	getCompartmentContent: function(_context) {
 		return [
-			langPhp.php()
+			_langPhp().php()
 		];
 	},
 

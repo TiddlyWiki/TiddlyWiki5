@@ -10,15 +10,35 @@ JSON language support for CodeMirror 6
 "use strict";
 
 // Dependency check - exit early if core editor plugin is not available
-var langJson, hasConfiguredTag;
+var hasConfiguredTag;
 try {
-	langJson = require("$:/plugins/tiddlywiki/codemirror-6/lang-json/lang-json.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;
 }
 
-if(!langJson || !hasConfiguredTag) return;
+if(!hasConfiguredTag) return;
+
+/*
+The language grammar is required on first use, not at module load.
+
+Every codemirror6-plugin module gets executed when the language registry runs, so a
+top-level require here pulled this grammar -- and the CodeMirror dependency graph
+behind it -- in as soon as anything touched the editor, including for wikis whose
+user never opens a file of this type. require() is memoised by TiddlyWiki, so the
+work still happens exactly once, on the first editor that actually needs it.
+*/
+var langJson;
+function getLangJson() {
+	if(langJson === undefined) {
+		try {
+			langJson = require("$:/plugins/tiddlywiki/codemirror-6/lang-json/lang-json.js") || null;
+		} catch (e) {
+			langJson = null;
+		}
+	}
+	return langJson;
+}
 
 // Try to load lint library (may not be available if lint plugin not installed)
 var lintLib = null;
@@ -66,8 +86,9 @@ function isLintDisabledForTiddler(tiddlerTitle) {
 function buildLintExtensions() {
 	var extensions = [];
 
-	if(lintLib && lintLib.linter && langJson.jsonParseLinter) {
-		extensions.push(lintLib.linter(langJson.jsonParseLinter()));
+	var lang = getLangJson();
+	if(lintLib && lintLib.linter && lang && lang.jsonParseLinter) {
+		extensions.push(lintLib.linter(lang.jsonParseLinter()));
 
 		if(lintLib.lintGutter) {
 			extensions.push(lintLib.lintGutter());
@@ -146,9 +167,8 @@ exports.plugin = {
 	Do not return jsonLanguage.of(...) from here.
 	*/
 	getCompartmentContent: function(_context) {
-		return [
-			langJson.json()
-		];
+		var lang = getLangJson();
+		return lang ? [lang.json()] : [];
 	},
 
 	/*

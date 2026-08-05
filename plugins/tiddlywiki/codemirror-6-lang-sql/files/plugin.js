@@ -10,15 +10,35 @@ SQL language support for CodeMirror 6
 "use strict";
 
 // Dependency check - exit early if core editor plugin is not available
-var langSql, hasConfiguredTag;
+var hasConfiguredTag;
 try {
-	langSql = require("$:/plugins/tiddlywiki/codemirror-6-lang-sql/lang-sql.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;
 }
 
-if(!langSql || !hasConfiguredTag) return;
+if(!hasConfiguredTag) return;
+
+/*
+The language grammar is required on first use, not at module load.
+
+Every codemirror6-plugin module is executed when the language registry runs, so a
+top-level require here pulled this grammar -- and the CodeMirror dependency graph
+behind it -- into the boot path of any wiki with this plugin installed, whether or
+not a file of this type was ever opened. require() is memoised by TiddlyWiki, so the
+work still happens exactly once, on the first editor that needs it.
+*/
+var langSql;
+function _langSql() {
+	if(langSql === undefined) {
+		try {
+			langSql = require("$:/plugins/tiddlywiki/codemirror-6-lang-sql/lang-sql.js") || null;
+		} catch (e) {
+			langSql = null;
+		}
+	}
+	return langSql;
+}
 
 // Content types that activate this plugin
 var SQL_TYPES = [
@@ -30,14 +50,14 @@ var TAGS_CONFIG_TIDDLER = "$:/config/codemirror-6/lang-sql/tags";
 
 // Map config values to dialect objects
 var DIALECTS = {
-	"StandardSQL": langSql.StandardSQL,
-	"MySQL": langSql.MySQL,
-	"MariaSQL": langSql.MariaSQL,
-	"PostgreSQL": langSql.PostgreSQL,
-	"SQLite": langSql.SQLite,
-	"MSSQL": langSql.MSSQL,
-	"PLSQL": langSql.PLSQL,
-	"Cassandra": langSql.Cassandra
+	"StandardSQL": _langSql().StandardSQL,
+	"MySQL": _langSql().MySQL,
+	"MariaSQL": _langSql().MariaSQL,
+	"PostgreSQL": _langSql().PostgreSQL,
+	"SQLite": _langSql().SQLite,
+	"MSSQL": _langSql().MSSQL,
+	"PLSQL": _langSql().PLSQL,
+	"Cassandra": _langSql().Cassandra
 };
 
 function isSqlType(type) {
@@ -113,7 +133,7 @@ exports.plugin = {
 			"StandardSQL"
 		);
 
-		return DIALECTS[dialectName] || langSql.StandardSQL;
+		return DIALECTS[dialectName] || _langSql().StandardSQL;
 	},
 
 	/*
@@ -126,7 +146,7 @@ exports.plugin = {
 		var dialect = this.getDialect(context);
 
 		return [
-			langSql.sql({
+			_langSql().sql({
 				dialect: dialect
 			})
 		];

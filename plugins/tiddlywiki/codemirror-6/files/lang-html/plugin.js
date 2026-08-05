@@ -10,17 +10,37 @@ HTML language support for CodeMirror 6
 "use strict";
 
 // Dependency check - exit early if core editor plugin is not available
-var langHtml, core, hasConfiguredTag;
+var core, hasConfiguredTag;
 try {
 	// Use the HTML language from the core lib (already bundled)
-	langHtml = require("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-lang-html.js");
 	core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;
 }
 
-if(!langHtml || !core || !hasConfiguredTag) return;
+if(!core || !hasConfiguredTag) return;
+
+/*
+The language grammar is required on first use, not at module load.
+
+Every codemirror6-plugin module gets executed when the language registry runs, so a
+top-level require here pulled this grammar -- and the CodeMirror dependency graph
+behind it -- in as soon as anything touched the editor, including for wikis whose
+user never opens a file of this type. require() is memoised by TiddlyWiki, so the
+work still happens exactly once, on the first editor that actually needs it.
+*/
+var langHtml;
+function getLangHtml() {
+	if(langHtml === undefined) {
+		try {
+			langHtml = require("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-lang-html.js") || null;
+		} catch (e) {
+			langHtml = null;
+		}
+	}
+	return langHtml;
+}
 
 // Content types that activate this plugin
 var HTML_TYPES = [
@@ -101,9 +121,8 @@ exports.plugin = {
 	Do not return htmlLanguage.of(...) from here.
 	*/
 	getCompartmentContent: function(_context) {
-		var extensions = [
-			langHtml.html()
-		];
+		var lang = getLangHtml();
+		var extensions = lang ? [lang.html()] : [];
 
 		// Add HTML completions, registered by register.js at startup
 		if(core.htmlCompletionExtension) {

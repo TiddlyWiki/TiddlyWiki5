@@ -1,23 +1,20 @@
 /*\
 title: $:/plugins/tiddlywiki/codemirror-6/lang-xml/register.js
 type: application/javascript
-module-type: startup
+module-type: codemirror6-language
 
 Register XML language with CodeMirror 6 core.
 
-NAMING CONVENTION: The startup module name MUST follow the pattern "cm6-lang-*"
-(e.g., "cm6-lang-xml"). This allows the TiddlyWiki language module to
-dynamically discover and depend on all language modules, ensuring they are
-loaded before TiddlyWiki so nested code highlighting works in code blocks.
+Invoked on demand by language-registry.js rather than during boot. The grammar
+itself is loaded later still: this registers a LanguageDescription carrying a
+load() thunk, so the parser arrives only when a code block or an editor of this
+language actually needs it.
 
 \*/
 /*jslint node: true, browser: true */
 "use strict";
 
 exports.name = "cm6-lang-xml";
-exports.after = ["startup"];
-exports.before = ["render"];
-exports.synchronous = true;
 
 var SVG_COMPLETIONS_CONFIG = "$:/config/codemirror-6/lang-xml/svg-completions";
 
@@ -26,45 +23,101 @@ function isSvgCompletionsEnabled() {
 	return value === "yes" || value === "true";
 }
 
-exports.startup = function() {
-	var core, langXml, svgSchema;
+exports.register = function() {
+	var core;
 	try {
 		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-		langXml = require("$:/plugins/tiddlywiki/codemirror-6/lang-xml/lang-xml.js");
-		svgSchema = require("$:/plugins/tiddlywiki/codemirror-6/lang-xml/svg-schema.js");
 	} catch (e) {
 		return;
 	}
 
-	if(!core || !core.registerLanguage || !langXml) {
+	if(!core || !core.registerLanguage) {
 		return;
 	}
 
 	var LanguageDescription = core.language.LanguageDescription;
 
-	// Register generic XML (without SVG in extensions - SVG gets its own registration)
+	/*
+	Everything needing the grammar lives in ensure(), behind one memoised call.
+
+	The grammar, and the CodeMirror runtime behind it, are the expensive part, and
+	nothing needs them until this language is actually used. So the registration
+	at the bottom hands CodeMirror a load() thunk rather than a built
+	LanguageSupport, and anything this module publishes on core is reached through
+	an accessor that triggers the same load.
+	*/
+	var _loading = false, _loaded = false;
+	var _nested = Object.create(null), _desc = Object.create(null);
+
+	// Within ensure(), `core` is this shim. registerLanguage has already happened
+	// eagerly below, and so have the nested-completion entries, so both are
+	// captured here instead of being repeated. Everything else falls through to
+	// the real core, including property writes, which the accessors below catch.
+	var _shim = Object.create(core);
+	_shim.registerLanguage = function(desc) {
+		if(desc && desc.name) { _desc[desc.name] = desc; }
+	};
+	_shim.registerNestedLanguageCompletion = function(cfg) {
+		if(cfg && cfg.name) { _nested[cfg.name] = cfg; }
+	};
+
+	function ensure() {
+		if(_loaded || _loading) {
+			return;
+		}
+		_loading = true;
+		try {
+			var core = _shim;
+			var langXml = require("$:/plugins/tiddlywiki/codemirror-6/lang-xml/lang-xml.js");
+			var svgSchema = require("$:/plugins/tiddlywiki/codemirror-6/lang-xml/svg-schema.js");
+			// Register generic XML (without SVG in extensions - SVG gets its own registration)
+			core.registerLanguage(LanguageDescription.of({
+				name: "XML",
+				alias: ["xml"],
+				extensions: ["xml", "xsl", "xsd"],
+				support: langXml.xml()
+			}));
+
+			// Register SVG with schema-based completions if enabled
+			var svgSupport;
+			if(isSvgCompletionsEnabled()) {
+				svgSupport = langXml.xml({
+					elements: svgSchema.svgElements,
+					attributes: svgSchema.svgAttributes
+				});
+			} else {
+				svgSupport = langXml.xml();
+			}
+
+			core.registerLanguage(LanguageDescription.of({
+				name: "SVG",
+				alias: ["svg", "image/svg+xml"],
+				extensions: ["svg"],
+				support: svgSupport
+			}));
+		} catch (e) {
+			// leaves this language unregistered rather than breaking the editor
+		}
+		_loaded = true;
+		_loading = false;
+	}
+
 	core.registerLanguage(LanguageDescription.of({
 		name: "XML",
 		alias: ["xml"],
 		extensions: ["xml", "xsl", "xsd"],
-		support: langXml.xml()
+		load: function() {
+			ensure();
+			return Promise.resolve(_desc["XML"] ? _desc["XML"].support : null);
+		}
 	}));
-
-	// Register SVG with schema-based completions if enabled
-	var svgSupport;
-	if(isSvgCompletionsEnabled()) {
-		svgSupport = langXml.xml({
-			elements: svgSchema.svgElements,
-			attributes: svgSchema.svgAttributes
-		});
-	} else {
-		svgSupport = langXml.xml();
-	}
-
 	core.registerLanguage(LanguageDescription.of({
 		name: "SVG",
 		alias: ["svg", "image/svg+xml"],
 		extensions: ["svg"],
-		support: svgSupport
+		load: function() {
+			ensure();
+			return Promise.resolve(_desc["SVG"] ? _desc["SVG"].support : null);
+		}
 	}));
 };

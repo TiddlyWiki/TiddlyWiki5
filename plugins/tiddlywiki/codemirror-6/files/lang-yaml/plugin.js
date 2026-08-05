@@ -10,15 +10,35 @@ YAML language support for CodeMirror 6
 "use strict";
 
 // Dependency check - exit early if core editor plugin is not available
-var langYaml, hasConfiguredTag;
+var hasConfiguredTag;
 try {
-	langYaml = require("$:/plugins/tiddlywiki/codemirror-6/lang-yaml/lang-yaml.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;
 }
 
-if(!langYaml || !hasConfiguredTag) return;
+if(!hasConfiguredTag) return;
+
+/*
+The language grammar is required on first use, not at module load.
+
+Every codemirror6-plugin module gets executed when the language registry runs, so a
+top-level require here pulled this grammar -- and the CodeMirror dependency graph
+behind it -- in as soon as anything touched the editor, including for wikis whose
+user never opens a file of this type. require() is memoised by TiddlyWiki, so the
+work still happens exactly once, on the first editor that actually needs it.
+*/
+var langYaml;
+function getLangYaml() {
+	if(langYaml === undefined) {
+		try {
+			langYaml = require("$:/plugins/tiddlywiki/codemirror-6/lang-yaml/lang-yaml.js") || null;
+		} catch (e) {
+			langYaml = null;
+		}
+	}
+	return langYaml;
+}
 
 // Content types that activate this plugin
 var YAML_TYPES = [
@@ -103,9 +123,8 @@ exports.plugin = {
 	Do not return yamlLanguage.of(...) from here.
 	*/
 	getCompartmentContent: function(_context) {
-		return [
-			langYaml.yaml()
-		];
+		var lang = getLangYaml();
+		return lang ? [lang.yaml()] : [];
 	},
 
 	/*

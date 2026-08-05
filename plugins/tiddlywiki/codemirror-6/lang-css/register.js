@@ -1,23 +1,20 @@
 /*\
 title: $:/plugins/tiddlywiki/codemirror-6/lang-css/register.js
 type: application/javascript
-module-type: startup
+module-type: codemirror6-language
 
 Register CSS language with CodeMirror 6 core for nested code blocks.
 
-NAMING CONVENTION: The startup module name MUST follow the pattern "cm6-lang-*"
-(e.g., "cm6-lang-css"). This allows the TiddlyWiki language module to
-dynamically discover and depend on all language modules, ensuring they are
-loaded before TiddlyWiki so nested code highlighting works in code blocks.
+Invoked on demand by language-registry.js rather than during boot. The grammar
+itself is loaded later still: this registers a LanguageDescription carrying a
+load() thunk, so the parser arrives only when a code block or an editor of this
+language actually needs it.
 
 \*/
 /*jslint node: true, browser: true */
 "use strict";
 
 exports.name = "cm6-lang-css";
-exports.after = ["startup"];
-exports.before = ["render"];
-exports.synchronous = true;
 
 // Cache for page CSS classes
 var _classCache = {
@@ -131,60 +128,134 @@ function createPageClassCompletionSource(cssCompletionSource) {
 	};
 }
 
-exports.startup = function() {
-	var core, langCss;
+exports.register = function() {
+	var core;
 	try {
 		core = require("$:/plugins/tiddlywiki/codemirror-6/lib/core.js");
-		langCss = require("$:/plugins/tiddlywiki/codemirror-6/lang-css/lang-css.js");
 	} catch (e) {
 		return;
 	}
 
-	if(!core || !core.registerLanguage || !langCss) {
+	if(!core || !core.registerLanguage) {
 		return;
 	}
 
 	var LanguageDescription = core.language.LanguageDescription;
-	var LanguageSupport = core.language.LanguageSupport;
 
-	var cssLanguage = langCss.cssLanguage;
-	var cssCompletionSource = langCss.cssCompletionSource;
+	/*
+	Everything needing the grammar lives in ensure(), behind one memoised call.
 
-	// Create enhanced completion source that includes page classes
-	var enhancedCssCompletionSource = createPageClassCompletionSource(cssCompletionSource);
+	The grammar, and the CodeMirror runtime behind it, are the expensive part, and
+	nothing needs them until this language is actually used. So the registration
+	at the bottom hands CodeMirror a load() thunk rather than a built
+	LanguageSupport, and anything this module publishes on core is reached through
+	an accessor that triggers the same load.
+	*/
+	var _loading = false, _loaded = false;
+	var _nested = Object.create(null), _desc = Object.create(null);
 
-	// Create completion extension for CSS with page class support
-	var cssCompletionExt = cssLanguage.data.of({
-		autocomplete: enhancedCssCompletionSource
+	// Within ensure(), `core` is this shim. registerLanguage has already happened
+	// eagerly below, and so have the nested-completion entries, so both are
+	// captured here instead of being repeated. Everything else falls through to
+	// the real core, including property writes, which the accessors below catch.
+	var _shim = Object.create(core);
+	_shim.registerLanguage = function(desc) {
+		if(desc && desc.name) { _desc[desc.name] = desc; }
+	};
+	_shim.registerNestedLanguageCompletion = function(cfg) {
+		if(cfg && cfg.name) { _nested[cfg.name] = cfg; }
+	};
+
+	// Published lazily: reading any of these is itself a request for the language.
+	var _props = Object.create(null);
+	["cssCompletionExtension", "cssCompletionSource", "cssSupport", "getCSSProperties", "getCSSValues", "getCSSValuesForProperty", "getPageClasses"].forEach(function(prop) {
+		Object.defineProperty(core, prop, {
+			configurable: true,
+			get: function() { ensure(); return _props[prop]; },
+			set: function(value) { _props[prop] = value; }
+		});
 	});
-	cssCompletionExt._twExtId = "CSS-" + Date.now();
 
-	// Create LanguageSupport without completions (they're added separately)
-	var cssSupport = new LanguageSupport(cssLanguage);
+	function ensure() {
+		if(_loaded || _loading) {
+			return;
+		}
+		_loading = true;
+		try {
+			var core = _shim;
+			var langCss = require("$:/plugins/tiddlywiki/codemirror-6/lang-css/lang-css.js");
+			var LanguageSupport = core.language.LanguageSupport;
 
-	// Store for use by other modules
-	core.cssSupport = cssSupport;
-	core.cssCompletionExtension = cssCompletionExt;
-	core.cssCompletionSource = enhancedCssCompletionSource;
-	core.getPageClasses = getPageClasses; // Export for other modules
-	// Export CSS properties and values from the wrapper module for style.* completion
-	core.getCSSProperties = langCss.getCSSProperties;
-	core.getCSSValues = langCss.getCSSValues;
-	core.getCSSValuesForProperty = langCss.getCSSValuesForProperty;
+			var cssLanguage = langCss.cssLanguage;
+			var cssCompletionSource = langCss.cssCompletionSource;
 
-	// Register for nested language completion in TiddlyWiki
-	// Uses Language.isActiveAt() for detection
-	core.registerNestedLanguageCompletion({
-		name: "css",
-		language: cssLanguage,
-		source: enhancedCssCompletionSource
+			// Create enhanced completion source that includes page classes
+			var enhancedCssCompletionSource = createPageClassCompletionSource(cssCompletionSource);
+
+			// Create completion extension for CSS with page class support
+			var cssCompletionExt = cssLanguage.data.of({
+				autocomplete: enhancedCssCompletionSource
+			});
+			cssCompletionExt._twExtId = "CSS-" + Date.now();
+
+			// Create LanguageSupport without completions (they're added separately)
+			var cssSupport = new LanguageSupport(cssLanguage);
+
+			// Store for use by other modules
+			core.cssSupport = cssSupport;
+			core.cssCompletionExtension = cssCompletionExt;
+			core.cssCompletionSource = enhancedCssCompletionSource;
+			core.getPageClasses = getPageClasses; // Export for other modules
+			// Export CSS properties and values from the wrapper module for style.* completion
+			core.getCSSProperties = langCss.getCSSProperties;
+			core.getCSSValues = langCss.getCSSValues;
+			core.getCSSValuesForProperty = langCss.getCSSValuesForProperty;
+
+			// Register for nested language completion in TiddlyWiki
+			// Uses Language.isActiveAt() for detection
+			core.registerNestedLanguageCompletion({
+				name: "css",
+				language: cssLanguage,
+				source: enhancedCssCompletionSource
+			});
+
+			// Register CSS
+			core.registerLanguage(LanguageDescription.of({
+				name: "CSS",
+				alias: ["css"],
+				extensions: ["css"],
+				support: cssSupport
+			}));
+		} catch (e) {
+			// leaves this language unregistered rather than breaking the editor
+		}
+		_loaded = true;
+		_loading = false;
+	}
+
+	// Registered now, resolved later: lang-tiddlywiki only wires up nested
+	// completion at all when this list is non-empty as it builds its support.
+	["css"].forEach(function(nm) {
+		core.registerNestedLanguageCompletion({
+			name: nm,
+			getLanguage: function() {
+				ensure();
+				return _nested[nm] ? _nested[nm].language : null;
+			},
+			source: function(context) {
+				ensure();
+				return _nested[nm] && _nested[nm].source ? _nested[nm].source(context) : null;
+			}
+		});
 	});
 
-	// Register CSS
 	core.registerLanguage(LanguageDescription.of({
 		name: "CSS",
 		alias: ["css"],
 		extensions: ["css"],
-		support: cssSupport
+		load: function() {
+			ensure();
+			return Promise.resolve(_desc["CSS"] ? _desc["CSS"].support : null);
+		}
 	}));
 };

@@ -10,15 +10,35 @@ CSV language support for CodeMirror 6
 "use strict";
 
 // Dependency check - exit early if core editor plugin is not available
-var langCsv, hasConfiguredTag;
+var hasConfiguredTag;
 try {
-	langCsv = require("$:/plugins/tiddlywiki/codemirror-6/lang-csv/lang-csv.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;
 }
 
-if(!langCsv || !hasConfiguredTag) return;
+if(!hasConfiguredTag) return;
+
+/*
+The language grammar is required on first use, not at module load.
+
+Every codemirror6-plugin module gets executed when the language registry runs, so a
+top-level require here pulled this grammar -- and the CodeMirror dependency graph
+behind it -- in as soon as anything touched the editor, including for wikis whose
+user never opens a file of this type. require() is memoised by TiddlyWiki, so the
+work still happens exactly once, on the first editor that actually needs it.
+*/
+var langCsv;
+function getLangCsv() {
+	if(langCsv === undefined) {
+		try {
+			langCsv = require("$:/plugins/tiddlywiki/codemirror-6/lang-csv/lang-csv.js") || null;
+		} catch (e) {
+			langCsv = null;
+		}
+	}
+	return langCsv;
+}
 
 // Content types that activate this plugin
 var CSV_TYPES = [
@@ -98,9 +118,8 @@ exports.plugin = {
 	Do not return csvLanguage.of(...) from here.
 	*/
 	getCompartmentContent: function(_context) {
-		return [
-			langCsv.csv()
-		];
+		var lang = getLangCsv();
+		return lang ? [lang.csv()] : [];
 	},
 
 	/*

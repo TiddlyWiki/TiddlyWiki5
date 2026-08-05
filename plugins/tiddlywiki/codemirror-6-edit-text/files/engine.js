@@ -314,6 +314,18 @@ class CodeMirrorSimpleEngine {
 		var tag = (this.widget && this.widget.editTag) || "input";
 		this.isInputMode = (tag !== "textarea");
 
+		// Register the language plugins, if this is the first editor of the session.
+		// This engine never reads core.getLanguages() -- a simple editor has no nested
+		// code blocks -- but the language plugins discovered below publish their
+		// completion extensions (core.cssCompletionExtension and friends) as part of the
+		// same registration. That used to happen in startup modules; it now happens on
+		// demand, so an editor built only through this engine has to ask for it too.
+		try {
+			require("$:/plugins/tiddlywiki/codemirror-6/language-registry.js").ensure();
+		} catch (e) {
+			// Registry unavailable - the editor still works, without those extensions
+		}
+
 		var core = getCM6Core();
 		var EditorState = core.state.EditorState;
 		var EditorView = core.view.EditorView;

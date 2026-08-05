@@ -962,8 +962,17 @@ exports.plugin = {
 		this._core = cm6Core;
 		this._support = null;
 
-		// Register the language with completions
-		registerLanguage(cm6Core);
+		/*
+		Registration is NOT done here.
+
+		language-registry.js owns it, and every engine calls that registry before it
+		discovers plugins, so by the time init() runs the language is already registered.
+		Doing it here as well registered it a second time -- registerLanguage() builds a
+		fresh LanguageDescription on each call, and core.registerLanguage() dedupes by
+		object identity, so the duplicate was kept. That meant the whole wikitext parser
+		configuration was constructed once more per engine implementation, and every
+		engine then carried the duplicates in its codeLanguages list.
+		*/
 
 		// Export cache clear function for external use
 		if(!$tw.CodeMirror) {

@@ -10,16 +10,47 @@ XML language support for CodeMirror 6
 "use strict";
 
 // Dependency check - exit early if core editor plugin is not available
-var langXml, svgSchema, hasConfiguredTag;
+var hasConfiguredTag;
 try {
-	langXml = require("$:/plugins/tiddlywiki/codemirror-6/lang-xml/lang-xml.js");
-	svgSchema = require("$:/plugins/tiddlywiki/codemirror-6/lang-xml/svg-schema.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;
 }
 
-if(!langXml || !svgSchema || !hasConfiguredTag) return;
+if(!hasConfiguredTag) return;
+
+/*
+The language grammar is required on first use, not at module load.
+
+Every codemirror6-plugin module gets executed when the language registry runs, so a
+top-level require here pulled this grammar -- and the CodeMirror dependency graph
+behind it -- in as soon as anything touched the editor, including for wikis whose
+user never opens a file of this type. require() is memoised by TiddlyWiki, so the
+work still happens exactly once, on the first editor that actually needs it.
+*/
+var langXml;
+function getLangXml() {
+	if(langXml === undefined) {
+		try {
+			langXml = require("$:/plugins/tiddlywiki/codemirror-6/lang-xml/lang-xml.js") || null;
+		} catch (e) {
+			langXml = null;
+		}
+	}
+	return langXml;
+}
+
+var svgSchema;
+function getSvgSchema() {
+	if(svgSchema === undefined) {
+		try {
+			svgSchema = require("$:/plugins/tiddlywiki/codemirror-6/lang-xml/svg-schema.js") || null;
+		} catch (e) {
+			svgSchema = null;
+		}
+	}
+	return svgSchema;
+}
 
 // Content types that activate this plugin
 var XML_TYPES = [
@@ -113,18 +144,25 @@ exports.plugin = {
 		var isSvg = effectiveType === "image/svg+xml";
 
 		// Use SVG schema for SVG files if enabled
+		var lang = getLangXml();
+		if(!lang) {
+			return [];
+		}
 		if(isSvg && isSvgCompletionsEnabled()) {
-			return [
-				langXml.xml({
-					elements: svgSchema.svgElements,
-					attributes: svgSchema.svgAttributes
-				})
-			];
+			var schema = getSvgSchema();
+			if(schema) {
+				return [
+					lang.xml({
+						elements: schema.svgElements,
+						attributes: schema.svgAttributes
+					})
+				];
+			}
 		}
 
 		// Plain XML without schema
 		return [
-			langXml.xml()
+			lang.xml()
 		];
 	},
 

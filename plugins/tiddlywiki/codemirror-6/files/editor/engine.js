@@ -912,6 +912,16 @@ class CodeMirrorEngine {
 		this.nextSibling = options.nextSibling || null;
 		this.options = options;
 
+		// Register the language plugins, if this is the first editor of the session.
+		// This used to run in a startup module, i.e. during every wiki's boot, even
+		// though nothing observes the registrations until an editor exists. See
+		// language-registry.js.
+		try {
+			require("$:/plugins/tiddlywiki/codemirror-6/language-registry.js").ensure();
+		} catch (e) {
+			// Registry unavailable: editors still work, without nested code highlighting
+		}
+
 		// Add registered languages to options for mixed parsing in code blocks
 		var core = getCM6Core();
 		if(core.getLanguages) {

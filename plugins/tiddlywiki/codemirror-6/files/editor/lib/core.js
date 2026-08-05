@@ -34,7 +34,7 @@ var commands = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-co
 var language = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-language.js");
 var autocomplete = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-autocomplete.js");
 
-var langHtml = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-lang-html.js");
+// NOT required here: see the lazy `langHtml` export below.
 
 // Lezer
 var lezerCommon = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/lezer-common.js");
@@ -53,7 +53,25 @@ exports.view = view;
 exports.commands = commands || {};
 exports.language = language || {};
 exports.autocomplete = autocomplete || {};
-exports.langHtml = langHtml || {};
+/*
+Resolved on first access rather than at load.
+
+The HTML grammar is 164 KB and requiring it here put it in the boot path of every
+wiki that touches the editor at all. Nothing in this plugin or the language plugins
+reads core.langHtml -- lang-html requires the grammar directly, on demand -- so this
+exists for external consumers, and they can pay for it if they use it.
+*/
+var _langHtml;
+Object.defineProperty(exports, "langHtml", {
+	configurable: true,
+	enumerable: true,
+	get: function() {
+		if (_langHtml === undefined) {
+			_langHtml = safeRequire("$:/plugins/tiddlywiki/codemirror-6/lib/codemirror-lang-html.js") || {};
+		}
+		return _langHtml;
+	}
+});
 
 exports.lezerCommon = lezerCommon || {};
 exports.lezerHighlight = lezerHighlight || {};
@@ -88,9 +106,29 @@ var registeredLanguages = [];
  *   }));
  */
 exports.registerLanguage = function(langDesc) {
-	if (langDesc && registeredLanguages.indexOf(langDesc) === -1) {
-		registeredLanguages.push(langDesc);
+	if (!langDesc || registeredLanguages.indexOf(langDesc) !== -1) {
+		return;
 	}
+	/*
+	Deduped by name as well as by identity.
+
+	Call sites build a fresh LanguageDescription each time, so an identity check alone
+	does not stop the same language being registered twice -- which is what happened to
+	TiddlyWiki, registered both by the registry and from the language plugin's init().
+	Every duplicate is a second parser configuration built and retained, and every
+	engine copies the whole list into its codeLanguages.
+
+	First registration wins, so a lazy description is not replaced by an eager one that
+	arrives later with the grammar already loaded.
+	*/
+	if (langDesc.name) {
+		for (var i = 0; i < registeredLanguages.length; i++) {
+			if (registeredLanguages[i].name === langDesc.name) {
+				return;
+			}
+		}
+	}
+	registeredLanguages.push(langDesc);
 };
 
 /**
@@ -132,9 +170,49 @@ var nestedLanguageCompletions = [];
  *     language: javascriptLanguage,  // Language object with isActiveAt method
  *     source: jsCompletionSource
  *   });
+ *
+ * A language may also be supplied lazily, as getLanguage(), for languages whose
+ * grammar is only loaded on demand:
+ *
+ *   core.registerNestedLanguageCompletion({
+ *     name: "javascript",
+ *     getLanguage: function() { return loadGrammar().javascriptLanguage; },
+ *     source: function(context) { return loadGrammar().completion(context); }
+ *   });
+ *
+ * The entry is registered immediately -- which matters, because lang-tiddlywiki
+ * decides whether to wire up nested completion at all from whether this list is
+ * non-empty when it builds its language support -- while `language` is resolved
+ * on first access, i.e. when a completion is actually requested.
  */
 exports.registerNestedLanguageCompletion = function(config) {
-	if (config && config.name && config.language && config.source) {
+	if (!config || !config.name || !config.source) {
+		return;
+	}
+	// Deliberately does NOT read config.language while deciding: on a lazy entry that
+	// would resolve the getter here, at registration, which is exactly what it exists
+	// to avoid.
+	var isLazy = typeof config.getLanguage === "function" &&
+		!Object.prototype.hasOwnProperty.call(config, "language");
+	if (isLazy) {
+		var resolved = false, value = null, getLanguage = config.getLanguage;
+		Object.defineProperty(config, "language", {
+			configurable: true,
+			enumerable: true,
+			get: function() {
+				if (!resolved) {
+					resolved = true;
+					try {
+						value = getLanguage();
+					} catch (e) {
+						value = null;
+					}
+				}
+				return value;
+			}
+		});
+	}
+	if (isLazy || config.language) {
 		// Check for duplicates by name
 		for (var i = 0; i < nestedLanguageCompletions.length; i++) {
 			if (nestedLanguageCompletions[i].name === config.name) {

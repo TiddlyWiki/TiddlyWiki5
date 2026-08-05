@@ -10,15 +10,35 @@ Markdown language support for CodeMirror 6
 "use strict";
 
 // Dependency check - exit early if core editor plugin is not available
-var langMarkdown, hasConfiguredTag;
+var hasConfiguredTag;
 try {
-	langMarkdown = require("$:/plugins/tiddlywiki/codemirror-6/lang-markdown/lang-markdown.js");
 	hasConfiguredTag = require("$:/plugins/tiddlywiki/codemirror-6/utils.js").hasConfiguredTag;
 } catch (e) {
 	return;
 }
 
-if(!langMarkdown || !hasConfiguredTag) return;
+if(!hasConfiguredTag) return;
+
+/*
+The language grammar is required on first use, not at module load.
+
+Every codemirror6-plugin module gets executed when the language registry runs, so a
+top-level require here pulled this grammar -- and the CodeMirror dependency graph
+behind it -- in as soon as anything touched the editor, including for wikis whose
+user never opens a file of this type. require() is memoised by TiddlyWiki, so the
+work still happens exactly once, on the first editor that actually needs it.
+*/
+var langMarkdown;
+function getLangMarkdown() {
+	if(langMarkdown === undefined) {
+		try {
+			langMarkdown = require("$:/plugins/tiddlywiki/codemirror-6/lang-markdown/lang-markdown.js") || null;
+		} catch (e) {
+			langMarkdown = null;
+		}
+	}
+	return langMarkdown;
+}
 
 // Content types that activate this plugin
 var MARKDOWN_TYPES = [
@@ -101,9 +121,8 @@ exports.plugin = {
 	Do not return markdownLanguage.of(...) from here.
 	*/
 	getCompartmentContent: function(_context) {
-		return [
-			langMarkdown.markdown()
-		];
+		var lang = getLangMarkdown();
+		return lang ? [lang.markdown()] : [];
 	},
 
 	/*
