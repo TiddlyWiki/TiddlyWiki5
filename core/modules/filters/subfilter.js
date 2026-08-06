@@ -17,9 +17,10 @@ exports.subfilter = function(source,operator,options) {
 		defaultFilterRunPrefix = (suffixes[0] && suffixes[0][0]) || options.defaultFilterRunPrefix || "or";
 	var list = options.wiki.filterTiddlers(operator.operand,options.widget,source,{defaultFilterRunPrefix});
 	if(operator.prefix === "!") {
-		var results = [];
-		source(function(tiddler,title) {
-			if(list.indexOf(title) === -1) {
+		const results = [],
+			listSet = new Set(list);
+		source((tiddler,title) => {
+			if(!listSet.has(title)) {
 				results.push(title);
 			}
 		});

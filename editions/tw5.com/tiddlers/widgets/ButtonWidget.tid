@@ -30,12 +30,12 @@ The content of the `<$button>` widget is displayed within the button.
 |param |The optional parameter to the message |
 |set |A TextReference to which a new value will be assigned |
 |setTitle |A title to which a new value will be assigned, ''without'' TextReference. Gets preferred over <<.attr set>> |
-|setField |A ''field name'' to which the new value will be assigned, if the attribute <<.attr setTitle>> is present. Defaults to the ''text'' field |
-|setIndex |An ''index'' to which the new value will be assigned, if the attribute <<.attr setTitle>> is present |
+|setField |A ''field name'' to which the new value will be assigned, if the attribute <<.attr setTitle>> is present. Defaults to the ''text'' field. Takes preference over <<.attr setIndex>> |
+|setIndex |An ''index'' to which the new value will be assigned, if the attribute <<.attr setTitle>> is present. Ignored if <<.attr setField>> is also present |
 |setTo |The new value to assign to the TextReference identified in the `set` attribute or the text field / the field specified through <<.attr setField>> / the index specified through <<.attr setIndex>> of the title given through <<.attr setTitle>> |
-|selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the tiddler specified in <<.attr set>> already has the value specified in <<.attr setTo>>  |
+|selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the state identified by <<.attr set>> or <<.attr setTitle>> already has the value specified in <<.attr setTo>>  |
 |selectedAria |<<.from-version "5.4.0">> An ARIA attribute to be set to `true` or `false` when <<.attr selectedClass>> is defined. Allowed values are `aria-checked` (default), `aria-selected` and `aria-pressed`  |
-|default |Default value if <<.attr set>> tiddler is missing for testing against <<.attr setTo>> to determine <<.attr selectedClass>> |
+|default |Default value if the state identified by <<.attr set>> or <<.attr setTitle>> is missing for testing against <<.attr setTo>> to determine <<.attr selectedClass>> |
 |popup |Title of a state tiddler for a popup that is toggled when the button is clicked. See PopupMechanism for details |
 |popupTitle |Title of a state tiddler for a popup that is toggled when the button is clicked. In difference to the <<.attr popup>> attribute, ''no'' TextReference is used. See PopupMechanism for details |
 |popupAbsCoords |<<.from-version "5.2.4">> If set to ''yes'' writes absolute coordinates to the tiddler referenced by the <<.attr popup>>. If set to ''no'' (the default) uses relative coordinates. See [[Coordinate Systems]] for details |
