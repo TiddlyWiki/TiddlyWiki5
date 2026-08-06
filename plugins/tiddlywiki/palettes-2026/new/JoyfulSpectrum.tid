@@ -1,0 +1,34 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Joyful Spectrum
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/JoyfulSpectrum
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #d1e7e3
+base-background: #95D0D9
+base-danger: #f03927
+base-highlight: #f3c70f
+base-ink: #413832
+base-link: #6F65A9
+base-paper: #F5F6F2
+base-primary: #6F65A9
+base-tab: #c8e7e7
+base-tag: #FB61A1
+
+# Palette-specific colours and overrides
+alert-border: [tf.colour[primary]]
+external-link-foreground: #285f9f
+external-link-foreground-hover: #b82877
+external-link-foreground-visited: #a45c8d
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: #ffb7ea
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tiddler-controls-foreground: #c7e3e5
+tiddler-controls-foreground-hover: #709CA3
+tiddler-controls-foreground-selected: #395665
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

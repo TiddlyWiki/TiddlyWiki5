@@ -1,0 +1,37 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Winter Warm-Up
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/WinterWarm-Up
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #ebc8c1
+base-background: #E1D9C6
+base-danger: #e7565f
+base-highlight: #f7bf31
+base-ink: #806257
+base-link: #83382A
+base-paper: #EEE9E0
+base-primary: #83382A
+base-tab: #E3DCD2
+base-tag: #c19c95
+
+# Palette-specific colours and overrides
+alert-highlight: #ae4625
+code-background: #1817161A
+dropzone-background: #FF8C9ACC
+external-link-foreground: #577080
+external-link-foreground-hover: #B299A9
+external-link-foreground-visited: #955D69
+highlight-foreground: [tf.colour[foreground]]
+notification-border: #c19c95
+sidebar-foreground-shadow: #B4AE9E20
+sidebar-tab-background: #cac3b2
+sidebar-tiddler-link-foreground-hover: #ae7e75
+tag-foreground: [tf.colour[background]]
+tiddler-controls-foreground-selected: #5D5A54
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-editor-border]]

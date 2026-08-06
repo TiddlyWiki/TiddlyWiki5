@@ -1,0 +1,18 @@
+title: $:/core/ui/Palettes/Preview/Sidebar/Tabs
+tags: $:/tags/Preview/SideBar
+
+\whitespace trim
+
+\procedure recent-links()
+HelloThere Community Portal GettingStarted Development Download Filters Palettes Plugins Macros Templates Themes Stylesheets SystemTiddlers
+\end recent-links
+
+<<tab-set "Magna Placerat Ligula Imperdiet" "sidebar-">>
+
+<div class="tc-palette-preview-thumbnail-sidebar-list">
+	<$list filter="[enlist<recent-links>]">
+		<div>
+			<$transclude $variable="sidebar-link" text=<<currentTiddler>>/>
+		</div>
+	</$list>
+</div>

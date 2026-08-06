@@ -1,0 +1,14 @@
+title: $:/changenotes/5.5.0/#8702-defaultprefix
+description: New `::defaultprefix` filter pragma
+release: 5.5.0
+tags: $:/tags/ChangeNote
+created: 20260718000000000
+modified: 20260722170000000
+change-type: feature
+change-category: filters
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8702
+github-contributors: Jermolene
+
+New `::defaultprefix:<prefixname>` [[filter pragma|Filter Pragmas]] that sets the default filter run prefix applied to runs that do not specify their own prefix. Pragmas are only allowed at the start of a filter. For example, `::defaultprefix:all` makes unprefixed runs accumulate their results without deduplication, instead of the usual `or` behaviour.
+
+The core uses this mechanism internally so that the multi-value widgets ([[genesis|GenesisWidget]], [[setmultiplevariables|SetMultipleVariablesWidget]], [[action-setmultiplefields|ActionSetMultipleFieldsWidget]] and [[action-sendmessage|ActionSendMessageWidget]]) preserve the positional alignment between the results of their names and values filters.

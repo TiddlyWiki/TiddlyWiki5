@@ -1,0 +1,36 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Go Green
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/GoGreen
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #f0ebc1
+base-background: #9AA648
+base-danger: #c6323f
+base-highlight: #9fcb4a
+base-ink: #483D35
+base-link: #52581E
+base-paper: #F8E5AE
+base-primary: #52581E
+base-tab: #F2CC5B
+base-tag: #F2CC5B
+
+# Palette-specific colours and overrides
+alert-border: #F2B245
+external-link-foreground: #465f5a
+external-link-foreground-hover: #d85014
+external-link-foreground-visited: #856134
+highlight-foreground: [tf.colour[foreground]]
+notification-border: #F2CC5B
+sidebar-tab-background: #5F7C6A
+sidebar-tab-foreground: [tf.colour[background]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tiddler-controls-foreground: #bbc464
+tiddler-controls-foreground-hover: #696345
+tiddler-controls-foreground-selected: #5F7C6A
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

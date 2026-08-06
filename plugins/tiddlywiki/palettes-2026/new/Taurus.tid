@@ -1,0 +1,35 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Taurus
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/Taurus
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #e7ca98
+base-background: #C1A365
+base-danger: #ca294b
+base-highlight: #93d4d0
+base-ink: #484645
+base-link: #66815a
+base-paper: #F7EEDB
+base-primary: #98A784
+base-tab: #DFA863
+base-tag: #DFA863
+
+# Palette-specific colours and overrides
+alert-border: #599272
+external-link-foreground: #125e59
+external-link-foreground-hover: #d34926
+external-link-foreground-visited: #686350
+highlight-foreground: [tf.colour[foreground]]
+sidebar-foreground: #483923
+sidebar-muted-foreground: #6b4f28
+sidebar-tab-background: #98A784
+sidebar-tab-border-selected: #ADA799
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tiddler-controls-foreground-selected: #1f5558
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

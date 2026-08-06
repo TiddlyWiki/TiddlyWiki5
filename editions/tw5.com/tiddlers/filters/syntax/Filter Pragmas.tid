@@ -1,0 +1,22 @@
+created: 20260722170000000
+modified: 20260722170000000
+tags: [[Filter Syntax]]
+title: Filter Pragmas
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">>
+
+A <<.def "filter pragma">> is a directive that configures how an entire [[filter expression|Filter Expression]] is processed. A pragma is written as `::` followed by the pragma name, and optionally a colon and a parameter:
+
+```
+::defaultprefix:all [[HelloThere]] [[HelloThere]]
+```
+
+Pragmas are only allowed at the start of a filter, before the first [[filter run|Filter Run]]. A pragma appearing anywhere else causes the filter to return an error, as does a pragma with an unknown name.
+
+The available pragmas are:
+
+|!Pragma |!Purpose |
+|[[defaultprefix|defaultprefix Filter Pragma]] |sets the [[filter run prefix|Filter Run Prefix]] applied to runs that do not specify one |
+
+A tiddler title beginning with `::` must be written within double square brackets, e.g. `[[::my title]]`, to prevent it being parsed as a pragma.

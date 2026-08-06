@@ -1,0 +1,40 @@
+category: 2026
+color-scheme: dark
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Earthy Tranquility
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/EarthyTranquility
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #A18A6E
+base-background: #414141
+base-danger: #ed5123
+base-highlight: #de588d
+base-ink: #F3F3F3
+base-link: #F5EFCF
+base-paper: #595959
+base-primary: #D0B292
+base-tab: #A18A6E
+base-tag: #A18A6E
+
+# Palette-specific colours and overrides
+alert-highlight: #fcd86e
+external-link-foreground: #95d9e7
+external-link-foreground-hover: #e9d889
+external-link-foreground-visited: #a7bb77
+highlight-foreground: [tf.colour[foreground]]
+sidebar-foreground: #9a9894
+sidebar-muted-foreground-hover: #acacad
+sidebar-tab-background: [tf.colour[primary]]
+sidebar-tab-background-selected: #F3F3F3
+sidebar-tab-divider: [tf.colour[sidebar-tab-border-selected]]
+sidebar-tab-foreground: [tf.colour[page-background]]
+sidebar-tab-foreground-selected: [tf.colour[background]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+site-title-foreground: [tf.colour[foreground]]
+tiddler-controls-foreground-hover: #D0B292
+tiddler-editor-border-image: #FFFFFF
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]
+untagged-background: #8e8881

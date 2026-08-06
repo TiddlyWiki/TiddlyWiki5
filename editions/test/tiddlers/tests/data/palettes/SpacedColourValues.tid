@@ -1,0 +1,38 @@
+title: Operators/Palettes/SpacedColourValues
+description: Palette entries whose values contain spaces survive compilation and preview
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+(<<colour background>>)
+<$palette.preview paletteTitle="MyPalette">
+(<<colour background>>)
+(<<colour classic>>)
+</$palette.preview>
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+MyPalette
++
+title: MyPalette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+
+background: rgb(1, 2, 3)
+classic: <<colour background>>
++
+title: ExpectedResult
+
+<p>(rgb(1, 2, 3))
+
+(rgb(1, 2, 3))
+(rgb(1, 2, 3))
+</p>
