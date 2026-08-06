@@ -1,0 +1,19 @@
+title: $:/core/macros/compound-template-prefix
+tags: $:/tags/Macro
+
+\whitespace trim
+
+<!-- A "template-prefix" sub-entry's value names a template prefix, eg "ContactRollup". View mode
+	transcludes <prefix>-ViewTemplate, "Edit in ViewMode" transcludes <prefix>-EditTemplate. The
+	template sees the host tiddler as <<currentTiddler>>, so it can read everything it needs with
+	{{!!fieldName}} or the compound-field-* operators; extra parameters are ordinary compound fields
+	on the host. -->
+\procedure compound-template-prefix(fieldName, suffix:"-ViewTemplate")
+<$let _templateTitle={{{ [<currentTiddler>get<fieldName>trim[]addsuffix<suffix>] }}}>
+	<%if [<_templateTitle>is[tiddler]] [<_templateTitle>is[shadow]] %>
+		<$transclude $tiddler=<<_templateTitle>> $mode="block"/>
+	<%else%>
+		<em><$text text=`template-prefix: template "$(_templateTitle)$" not found. Set the field value to a template prefix, eg ContactRollup.`/></em>
+	<%endif%>
+</$let>
+\end

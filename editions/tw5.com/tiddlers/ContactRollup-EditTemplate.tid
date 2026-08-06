@@ -1,0 +1,5 @@
+created: 20260612181531930
+modified: 20260612201251802
+title: ContactRollup-EditTemplate
+
+<em>computed: contacts whose ''list'' field links to {{!!title}}</em>

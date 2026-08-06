@@ -1,0 +1,33 @@
+created: 20260612151734324
+modified: 20260612201254534
+tags: Company
+title: WikiLabs
+type: text/vnd.tiddlywiki-multiple+fields
+
+title: body
+type: multiline
+
+An open-source studio building TiddlyWiki plugins and knowledge tools.
++
+title: industry
+
+Software
++
+title: location
+
+Vienna, Austria
++
+title: website
+type: url
+
+https://wikilabs.github.io
++
+title: founded
+type: date
+
+2018-09-01
++
+title: employees
+type: template-prefix
+
+ContactRollup

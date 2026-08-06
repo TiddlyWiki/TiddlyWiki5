@@ -1,0 +1,33 @@
+created: 20260612151340624
+modified: 20260612201252378
+tags: Company
+title: DesignBridge
+type: text/vnd.tiddlywiki-multiple+fields
+
+title: body
+type: multiline
+
+A product design studio focused on wiki and knowledge-tool interfaces.
++
+title: industry
+
+Design
++
+title: location
+
+Berlin, Germany
++
+title: website
+type: url
+
+https://designbridge.example.com
++
+title: founded
+type: date
+
+2015-03-01
++
+title: employees
+type: template-prefix
+
+ContactRollup

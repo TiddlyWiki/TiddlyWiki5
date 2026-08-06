@@ -2,4 +2,5 @@ title: $:/config/EditTemplateBodyFilters/
 tags: $:/tags/EditTemplateBodyFilter
 
 canonical-uri: [has[_canonical_uri]then[$:/core/ui/EditTemplate/body/canonical-uri]]
+compound-fields: [type[text/vnd.tiddlywiki-multiple+fields]] :then[[$:/core/ui/EditTemplate/body/compound-fields]]
 default: [[$:/core/ui/EditTemplate/body/default]]

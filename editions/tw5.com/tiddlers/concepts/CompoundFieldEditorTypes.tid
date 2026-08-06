@@ -1,0 +1,81 @@
+created: 20260527000000000
+modified: 20260527000000000
+tags: Concepts
+title: CompoundFieldEditorTypes
+type: text/vnd.tiddlywiki
+
+When a tiddler has `type: text/vnd.tiddlywiki-multiple+fields`, the edit template renders one editor pane per sub-entry. The editor used for a given sub-entry is selected by the value of its `type:` header.
+
+! Built-in editor types
+
+|!`type:` value |!Editor |
+|//(absent)// |single-line text input |
+|`multiline` |full `$edit` widget with toolbar and per-pane preview |
+|`date` |HTML `<input type="date">` (`YYYY-MM-DD`) |
+|`date-time` |HTML `<input type="datetime-local">` |
+|`email` |HTML `<input type="email">` |
+|`phone` |HTML `<input type="tel">` |
+|`url` |HTML `<input type="url">` |
+|`color` |HTML `<input type="color">` |
+|`option-A-B[-C…]` |radio buttons, one per dash-separated label, plus a `none` |
+|`select-KEY` |dropdown sourced from the `KEY` metadata header (see below) |
+
+! Extending: `option-…` (N radio buttons)
+
+The string after `option-` is split on `-` and each part becomes a radio button. The widget also adds a `none` button at the end.
+
+```
+title: priority
+type: option-low-medium-high
+
+medium
+```
+
+Anything after `option-` is treated as data; no separate definition is needed. The labels become both the displayed text and the stored value. Dashes inside an option are not supported because `-` is the separator.
+
+! Extending: `select-…` (dropdown sourced from a metadata header)
+
+The `select-KEY` form looks for a metadata header named `KEY` on the //same sub-entry// (or, via [[inherit-compound|InheritCompoundField]], on the template). The header's value is split as a [[title list|Title List]] to produce the dropdown options.
+
+```
+title: role
+type: select-roles
+roles: [[Developer]] [[Designer]] [[Team Lead]] CEO
+
+Designer
+```
+
+The lookup goes through the `compound-field-meta` [[filter operator|Filter Operators]], so the option list can live on a shared template:
+
+```
+title: ContactTemplate
+type: text/vnd.tiddlywiki-multiple+fields
+
+title: role
+type: select-roles
+roles: [[Developer]] [[Designer]] [[Team Lead]] CEO
+
+```
+
+```
+title: Alice
+type: text/vnd.tiddlywiki-multiple+fields
+inherit-compound: ContactTemplate
+
+title: role
+
+Designer
+```
+
+`Alice` does not redefine `roles`. The editor reads the option list from `ContactTemplate` via the inheritance fallback.
+
+! Adding a brand-new editor type
+
+To define a wholly new editor (e.g. a slider, a tag picker, a map field):
+
+# Add a new `<%elseif [<fieldType>match[…]] %>` branch (or `prefix[…]` branch, for parameterised types) to:
+#* `$:/core/ui/EditTemplate/body/compound-fields.tid` — the edit-mode renderer
+#* `$:/core/ui/ViewTemplate/body/contact-card.tid` (or a custom view template) — the view-mode renderer, if you want a custom display
+# If the new type takes parameters in the same metadata-driven style as `select-`, follow the same pattern: read a metadata header via `compound-field-meta` so the template can carry the configuration.
+
+The edit-template's type-selector dropdown is also extensible: any `prefix[option-]` or `prefix[select-]` values the wiki already contains are added to the dropdown automatically (via `compound-field-types[]`). To surface a new prefix in the dropdown the same way, add an analogous `<$list>` clause to the `compound-type-selector` procedure.
