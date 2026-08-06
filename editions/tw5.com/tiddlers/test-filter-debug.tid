@@ -1,0 +1,7 @@
+created: 20260305230209767
+modified: 20260306005254910
+tags: 
+title: test-filter-debug
+type: text/vnd.tiddlywiki
+
+<<filter-debug """[all[shadows+tiddlers]tag[$:/tags/ClassFilters/PageTemplate]!is[draft]] :map:flat[subfilter{!!text}] tc-page-container [[tc-page-view-]addsuffix<storyviewTitle>] [[tc-language-]addsuffix<languageTitle>] :and[unique[]join[ ]]""" narrowTable:"yes">>
