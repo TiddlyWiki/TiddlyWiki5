@@ -29,6 +29,11 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 		return [];
 	}
 
+	/*
+	Pure helpers. They depend only on their arguments, so they live here rather
+	than on the class — a method that never touches instance state is not a
+	method, and eslint's class-methods-use-this rule says so.
+	*/
 	function infoTitle(config,windowId) {
 		return config.infoTiddler + "/" + windowId;
 	}
@@ -67,20 +72,20 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 				}
 				entry.nodes.set(configTitle,element);
 			}
-			var title = this.infoTitle(config,entry.windowId),
+			var title = infoTitle(config,entry.windowId),
 				fields = {title: title};
 			if(element) {
 				var rect = element.getBoundingClientRect();
 				fields.found = "yes";
-				fields.width = "" + this.round(rect.width);
-				fields.height = "" + this.round(rect.height);
-				fields.x = "" + this.round(rect.left);
-				fields.y = "" + this.round(rect.top);
-				fields.top = "" + this.round(rect.top);
-				fields.left = "" + this.round(rect.left);
-				fields.right = "" + this.round(rect.right);
-				fields.bottom = "" + this.round(rect.bottom);
-				fields.text = "" + this.round(rect.width) + " " + this.round(rect.height);
+				fields.width = "" + round(rect.width);
+				fields.height = "" + round(rect.height);
+				fields.x = "" + round(rect.left);
+				fields.y = "" + round(rect.top);
+				fields.top = "" + round(rect.top);
+				fields.left = "" + round(rect.left);
+				fields.right = "" + round(rect.right);
+				fields.bottom = "" + round(rect.bottom);
+				fields.text = "" + round(rect.width) + " " + round(rect.height);
 			} else {
 				fields.found = "no";
 				$tw.utils.each(["width","height","x","y","top","left","right","bottom"],function(name) {
@@ -179,7 +184,7 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 			var self = this,
 				deletions = [];
 			this.configs.forEach(function(config) {
-				var title = self.infoTitle(config,windowId);
+				var title = infoTitle(config,windowId);
 				deletions.push(title);
 				self.signatures.delete(title);
 			});
@@ -202,7 +207,7 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 			}
 			var deletions = [];
 			this.windows.forEach(function(entry) {
-				var title = self.infoTitle(config,entry.windowId),
+				var title = infoTitle(config,entry.windowId),
 					node = entry.nodes.get(configTitle);
 				if(node && entry.observer) {
 					entry.observer.unobserve(node);
