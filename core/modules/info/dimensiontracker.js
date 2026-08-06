@@ -29,6 +29,14 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 		return [];
 	}
 
+	function infoTitle(config,windowId) {
+		return config.infoTiddler + "/" + windowId;
+	}
+
+	function round(value) {
+		return Math.round(value * 100) / 100;
+	}
+
 	class ElementDimensionsTracker {
 		constructor(updateCallback) {
 			this.updateCallback = updateCallback;
@@ -36,14 +44,6 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 			this.configs = new Map();     // configTitle -> {selector, infoTiddler}
 			this.signatures = new Map();  // infoTitle -> last written signature
 			this.scheduled = false;
-		}
-
-		infoTitle(config,windowId) {
-			return config.infoTiddler + "/" + windowId;
-		}
-
-		round(value) {
-			return Math.round(value * 100) / 100;
 		}
 
 		measureOne(entry,configTitle,config) {
