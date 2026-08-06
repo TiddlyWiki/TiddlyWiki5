@@ -1,0 +1,54 @@
+created: 20260711120000000
+modified: 20260711120000000
+title: ParserDiagnostics
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+A parser recovers rather than throws. Meeting source it cannot fully make sense of, it renders what it can and records a diagnostic saying what it did, so a tiddler degrades on a gradient instead of collapsing, and the author hears about it.
+
+The contract belongs to the parse result rather than to the wikitext parser, so any parser may populate it.
+
+!! The diagnostic
+
+A parse result carries a `diagnostics` array. Each entry holds:
+
+|!Field |!Meaning |
+|`from` |the character offset where the fault starts |
+|`to` |the character offset where it ends |
+|`severity` |`error`, `warning`, `info` or `hint`, worst first |
+|`source` |what produced the diagnostic, by default the content type |
+|`code` |a machine readable identifier, such as `unterminated-bold` |
+|`message` |a sentence for the author |
+
+`$tw.utils.makeParseDiagnostic(diagnostic,options)` normalises an entry and clamps its range to the source. Pass `{source, sourceLength}` as the options.
+
+The [[parse-diagnostics Operator]] reads the array through the parse cache, and grades a tiddler by the worst severity it carries.
+
+!! Recovering inside a rule
+
+A wikitext rule that recovers silently reports itself by calling `this.parser.addDiagnostic(...)`, and leaves a node marked `isRecovered` carrying the exact source it stands for. A consumer therefore finds the damage in the tree as well as in the diagnostics, and the marked text always reconstructs the source it replaced.
+
+!! Recovering a whole block
+
+A block rule that cannot parse its block at all throws `$tw.utils.RecoverableParseError(diagnostic,tree)`. The parser records the diagnostic, resynchronises to the next blank line, and carries on with the rest of the tiddler. Any other error still propagates, so a genuine bug in a rule stays loud.
+
+!! Writing a parser of your own
+
+A parser for a new content type joins the contract by setting `diagnostics` on itself. It costs nothing else: the filter operator, the severity grading and the tree marking all follow.
+
+```
+function MyParser(type,text,options) {
+	this.tree = [/* ... */];
+	this.source = text;
+	this.diagnostics = [];
+	// on meeting something the grammar cannot read
+	this.diagnostics.push($tw.utils.makeParseDiagnostic({
+		from: start,
+		to: end,
+		severity: "warning",
+		code: "my-grammar-fault",
+		message: "The grammar could not read this construct"
+	},{source: type, sourceLength: text.length}));
+}
+```

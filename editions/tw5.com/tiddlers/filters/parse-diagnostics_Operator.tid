@@ -1,0 +1,35 @@
+caption: parse-diagnostics
+created: 20260711120000000
+modified: 20260711120000000
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: none
+op-suffix: `grade`, `count` or `codes`, selecting what the operator reports
+op-output: without a suffix, those input titles whose parse produced a diagnostic
+op-neg-output: those input titles whose parse produced no diagnostic
+op-purpose: find the tiddlers whose source the parser could not fully make sense of
+tags: [[Filter Operators]] [[Selection Constructors]]
+title: parse-diagnostics Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> A parser records a <<.def "diagnostic">> whenever it recovers from source it cannot fully make sense of: an emphasis delimiter that never closes, a fenced block that runs to the end of the tiddler, a definition missing its `\end`. The tiddler still renders, and the diagnostic explains what the parser did about it.
+
+Each diagnostic carries a range, a severity, a code, a source and a message. The severities run `error`, `warning`, `info` and `hint`, worst first.
+
+! Suffixes
+
+|!Suffix |!Output |
+|(none) |the input titles that carry a diagnostic |
+|`grade` |the worst severity each input title carries, or `clean` |
+|`count` |how many diagnostics each input title carries |
+|`codes` |the distinct diagnostic codes across the input titles |
+
+! Examples
+
+<<.operator-example 1 "[all[tiddlers]parse-diagnostics[]]" "the tiddlers the parser could not fully read">>
+<<.operator-example 2 "[all[tiddlers]!parse-diagnostics[]]" "the tiddlers that parse cleanly">>
+<<.operator-example 3 "[all[tiddlers]parse-diagnostics:codes[]]" "the faults present in this wiki">>
+<<.operator-example 4 "[all[tiddlers]parse-diagnostics:grade[]]" "the worst severity each tiddler carries">>
+
+! Any grammar
+
+The operator reads the diagnostics from the parse result rather than from the wikitext parser, so a plugin that registers a parser for its own content type populates the same array and grades on the same scale. See ParserDiagnostics.
