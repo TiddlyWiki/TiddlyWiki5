@@ -1,0 +1,461 @@
+title: $:/plugins/tiddlywiki/codemirror-6-themes/vanilla-notebook/styles
+tags: $:/tags/Stylesheet
+
+\rules only macrocallinline macrocallblock conditional
+
+/* ============================================================================
+   Vanilla Notebook Theme for CodeMirror 6
+   ============================================================================
+
+   Paper and ink. The two variants take their surfaces straight from the
+   Vanilla Notebook palettes that ship with the $:/themes/BurningTreeC/
+   vanilla-notebook page theme, so an editor themed this way sits on the same
+   paper as the tiddler around it instead of on a panel of its own.
+
+   The theme is self-contained and does not require that page theme. Every
+   value here is a literal, like every other theme in this collection, so
+   picking it under any palette gives the same editor.
+
+   ----------------------------------------------------------------------------
+   How the syntax colours were chosen
+   ----------------------------------------------------------------------------
+
+   One lightness, ten hues. Every token colour in a variant sits at the same
+   OKLCH lightness - 0.44 on Day, 0.84 on Night - and differs only in hue.
+
+   That is the opposite of how most syntax schemes are built, and it is
+   deliberate. Uniform lightness means the eye reads the SHAPE of the code
+   first, which is what you actually navigate by, and colour is left to say
+   what kind of thing a token is rather than competing for attention. It also
+   means every token has the same contrast against the paper, so there is no
+   role that quietly becomes unreadable: measured against the editor
+   background, Day runs 6.50:1 to 8.23:1 and Night 9.38:1 to 11.13:1.
+
+   Hues are spaced far enough apart to stay distinguishable - roughly 30 to 40
+   degrees between neighbours - and the ones that matter most for wikitext
+   (widgets, transclusions, filters, macros) sit at the well-separated ends.
+
+   Errors are the single exception: they carry extra chroma, because an error
+   is the one token that should catch the eye before you look for it.
+
+   Day paper:   #fdfcf8    Day ink:   #26241f
+   Night paper: #1b1a16    Night ink: #ddd8cb
+
+   ============================================================================ */
+
+/* ============================================================================
+   Vanilla Notebook Day
+   ============================================================================ */
+
+.cm6-theme-vanilla-notebook-day,
+[data-cm6-theme="vanilla-notebook-day"] {
+  /* Base palette - cream paper, warm ink */
+  --wt-bg: #fdfcf8;
+  --wt-bg-subtle: #f2efe6;
+  --wt-fg: #26241f;
+  --wt-fg-muted: #44423d;
+  --wt-fg-faint: #6f6d69;
+  --wt-border: #e4dfd0;
+  --wt-selection: rgba(49, 82, 125, 0.22);
+  --wt-line-highlight: rgba(49, 82, 125, 0.06);
+
+  /* Semantic colours - one lightness, ten hues */
+  --wt-teal: #006860;           /* widgets */
+  --wt-teal-dim: #2c7a73;
+  --wt-blue: #1c509a;           /* links */
+  --wt-violet: #703681;         /* transclusions */
+  --wt-cyan: #005d8b;           /* filters */
+  --wt-orange: #883600;         /* macros */
+  --wt-rose: #8a2a49;           /* conditionals */
+  --wt-amber: #774600;          /* attributes */
+  --wt-slate: #44423d;          /* code text */
+  --wt-purple: #564094;         /* pragmas */
+  --wt-green: #006522;          /* strings */
+  --wt-red: #971927;            /* errors */
+
+  /* Formatting - emphasis is carried by weight and slope, not by more hues */
+  --wt-bold: #26241f;
+  --wt-italic: #26241f;
+  --wt-strike: #878581;
+  --wt-underline: #26241f;
+  --wt-heading: #26241f;
+
+  /* Code blocks */
+  --wt-code-bg: #f2efe6;
+  --wt-code-fg: #8a3324;
+
+  /* Highlight - the margin rule's own red, which is what marks a page in this
+     theme */
+  --wt-highlight-bg: rgba(176, 58, 46, 0.16);
+  --wt-highlight-fg: #26241f;
+
+  /* Comments */
+  --wt-comment: #55544f;
+  --wt-mark: #e8e2d2;
+}
+
+/* ============================================================================
+   Vanilla Notebook Night
+   ============================================================================ */
+
+.cm6-theme-vanilla-notebook-night,
+[data-cm6-theme="vanilla-notebook-night"] {
+  /* Base palette - writing after dark, warm dark paper */
+  --wt-bg: #1b1a16;
+  --wt-bg-subtle: #26251f;
+  --wt-fg: #ddd8cb;
+  --wt-fg-muted: #c2bdb2;
+  --wt-fg-faint: #9b978d;
+  --wt-border: #35332b;
+  --wt-selection: rgba(143, 176, 221, 0.24);
+  --wt-line-highlight: rgba(143, 176, 221, 0.07);
+
+  /* Semantic colours - same hues, lifted for dark paper */
+  --wt-teal: #6fe1d7;           /* widgets */
+  --wt-teal-dim: #55b4ac;
+  --wt-blue: #a0cdff;           /* links */
+  --wt-violet: #e7b5f7;         /* transclusions */
+  --wt-cyan: #7bd8ff;           /* filters */
+  --wt-orange: #ffb78a;         /* macros */
+  --wt-rose: #ffaec1;           /* conditionals */
+  --wt-amber: #efc379;          /* attributes */
+  --wt-slate: #c2bdb2;          /* code text */
+  --wt-purple: #ccbeff;         /* pragmas */
+  --wt-green: #9bdea4;          /* strings */
+  --wt-red: #ffa7a4;            /* errors */
+
+  /* Formatting */
+  --wt-bold: #ddd8cb;
+  --wt-italic: #ddd8cb;
+  --wt-strike: #86827a;
+  --wt-underline: #ddd8cb;
+  --wt-heading: #ddd8cb;
+
+  /* Code blocks */
+  --wt-code-bg: #26251f;
+  --wt-code-fg: #d99a7e;
+
+  /* Highlight */
+  --wt-highlight-bg: rgba(212, 116, 106, 0.20);
+  --wt-highlight-fg: #ddd8cb;
+
+  /* Comments */
+  --wt-comment: #b2aea3;
+  --wt-mark: #2e2c25;
+}
+
+/* ============================================================================
+   Token Overrides - Day
+   ============================================================================ */
+
+.cm6-theme-vanilla-notebook-day .tok-string,
+.cm6-theme-vanilla-notebook-day .tok-string2,
+[data-cm6-theme="vanilla-notebook-day"] .tok-string,
+[data-cm6-theme="vanilla-notebook-day"] .tok-string2 {
+  color: #006522;
+}
+
+.cm6-theme-vanilla-notebook-day .tok-keyword,
+[data-cm6-theme="vanilla-notebook-day"] .tok-keyword {
+  color: #1c509a;
+}
+
+.cm6-theme-vanilla-notebook-day .tok-function,
+[data-cm6-theme="vanilla-notebook-day"] .tok-function {
+  color: #883600;
+}
+
+.cm6-theme-vanilla-notebook-day .tok-number,
+[data-cm6-theme="vanilla-notebook-day"] .tok-number {
+  color: #8a2a49;
+}
+
+.cm6-theme-vanilla-notebook-day .tok-typeName,
+[data-cm6-theme="vanilla-notebook-day"] .tok-typeName {
+  color: #006860;
+}
+
+.cm6-theme-vanilla-notebook-day .tok-operator,
+[data-cm6-theme="vanilla-notebook-day"] .tok-operator {
+  color: #564094;
+}
+
+.cm6-theme-vanilla-notebook-day .tok-comment,
+[data-cm6-theme="vanilla-notebook-day"] .tok-comment {
+  color: #55544f;
+  font-style: italic;
+}
+
+/* ============================================================================
+   Token Overrides - Night
+   ============================================================================ */
+
+.cm6-theme-vanilla-notebook-night .tok-string,
+.cm6-theme-vanilla-notebook-night .tok-string2,
+[data-cm6-theme="vanilla-notebook-night"] .tok-string,
+[data-cm6-theme="vanilla-notebook-night"] .tok-string2 {
+  color: #9bdea4;
+}
+
+.cm6-theme-vanilla-notebook-night .tok-keyword,
+[data-cm6-theme="vanilla-notebook-night"] .tok-keyword {
+  color: #a0cdff;
+}
+
+.cm6-theme-vanilla-notebook-night .tok-function,
+[data-cm6-theme="vanilla-notebook-night"] .tok-function {
+  color: #ffb78a;
+}
+
+.cm6-theme-vanilla-notebook-night .tok-number,
+[data-cm6-theme="vanilla-notebook-night"] .tok-number {
+  color: #ffaec1;
+}
+
+.cm6-theme-vanilla-notebook-night .tok-typeName,
+[data-cm6-theme="vanilla-notebook-night"] .tok-typeName {
+  color: #6fe1d7;
+}
+
+.cm6-theme-vanilla-notebook-night .tok-operator,
+[data-cm6-theme="vanilla-notebook-night"] .tok-operator {
+  color: #ccbeff;
+}
+
+.cm6-theme-vanilla-notebook-night .tok-comment,
+[data-cm6-theme="vanilla-notebook-night"] .tok-comment {
+  color: #b2aea3;
+  font-style: italic;
+}
+
+/* ============================================================================
+   Editor Chrome - Day
+   ============================================================================ */
+
+.cm6-theme-vanilla-notebook-day .cm-editor,
+[data-cm6-theme="vanilla-notebook-day"] .cm-editor {
+  background-color: #fdfcf8;
+  color: #26241f;
+}
+
+.cm6-theme-vanilla-notebook-day .cm-gutters,
+[data-cm6-theme="vanilla-notebook-day"] .cm-gutters {
+  background-color: #fdfcf8;
+  color: #a9a49a;
+  border-right-color: #ece7d9;
+}
+
+.cm6-theme-vanilla-notebook-day .cm-activeLine,
+[data-cm6-theme="vanilla-notebook-day"] .cm-activeLine {
+  background-color: rgba(49, 82, 125, 0.06);
+}
+
+.cm6-theme-vanilla-notebook-day .cm-activeLineGutter,
+[data-cm6-theme="vanilla-notebook-day"] .cm-activeLineGutter {
+  background-color: rgba(49, 82, 125, 0.10);
+  color: #6f6d69;
+}
+
+.cm6-theme-vanilla-notebook-day .cm-editor .cm-cursor,
+[data-cm6-theme="vanilla-notebook-day"] .cm-editor .cm-cursor {
+  border-left-color: #31527d;
+}
+
+.cm6-theme-vanilla-notebook-day .cm-selectionBackground,
+.cm6-theme-vanilla-notebook-day .cm-content ::selection,
+[data-cm6-theme="vanilla-notebook-day"] .cm-selectionBackground,
+[data-cm6-theme="vanilla-notebook-day"] .cm-content ::selection {
+  background-color: rgba(49, 82, 125, 0.22);
+}
+
+.cm6-theme-vanilla-notebook-day .cm-editor .cm-matchingBracket,
+[data-cm6-theme="vanilla-notebook-day"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(49, 82, 125, 0.16);
+  outline: 1px solid #31527d;
+}
+
+.cm6-theme-vanilla-notebook-day .cm-foldPlaceholder,
+[data-cm6-theme="vanilla-notebook-day"] .cm-foldPlaceholder {
+  background-color: #f2efe6;
+  border-color: #e4dfd0;
+  color: #6f6d69;
+}
+
+.cm6-theme-vanilla-notebook-day .cm-panels,
+[data-cm6-theme="vanilla-notebook-day"] .cm-panels {
+  background-color: #fbfaf6;
+  color: #26241f;
+  border-color: #e4dfd0;
+}
+
+.cm6-theme-vanilla-notebook-day .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="vanilla-notebook-day"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #fbfaf6;
+  border-color: #e4dfd0;
+  color: #26241f;
+}
+
+.cm6-theme-vanilla-notebook-day .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="vanilla-notebook-day"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #31527d;
+  color: #fbfaf6;
+}
+
+.cm6-theme-vanilla-notebook-day .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="vanilla-notebook-day"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(251, 250, 246, 0.8);
+}
+
+.cm6-theme-vanilla-notebook-day .cm-completionMatchedText,
+[data-cm6-theme="vanilla-notebook-day"] .cm-completionMatchedText {
+  color: #31527d;
+}
+
+/* ============================================================================
+   Editor Chrome - Night
+   ============================================================================ */
+
+.cm6-theme-vanilla-notebook-night .cm-editor,
+[data-cm6-theme="vanilla-notebook-night"] .cm-editor {
+  background-color: #1b1a16;
+  color: #ddd8cb;
+}
+
+.cm6-theme-vanilla-notebook-night .cm-gutters,
+[data-cm6-theme="vanilla-notebook-night"] .cm-gutters {
+  background-color: #1b1a16;
+  color: #5e594e;
+  border-right-color: #2e2c25;
+}
+
+.cm6-theme-vanilla-notebook-night .cm-activeLine,
+[data-cm6-theme="vanilla-notebook-night"] .cm-activeLine {
+  background-color: rgba(143, 176, 221, 0.07);
+}
+
+.cm6-theme-vanilla-notebook-night .cm-activeLineGutter,
+[data-cm6-theme="vanilla-notebook-night"] .cm-activeLineGutter {
+  background-color: rgba(143, 176, 221, 0.12);
+  color: #9b978d;
+}
+
+.cm6-theme-vanilla-notebook-night .cm-editor .cm-cursor,
+[data-cm6-theme="vanilla-notebook-night"] .cm-editor .cm-cursor {
+  border-left-color: #8fb0dd;
+}
+
+.cm6-theme-vanilla-notebook-night .cm-selectionBackground,
+.cm6-theme-vanilla-notebook-night .cm-content ::selection,
+[data-cm6-theme="vanilla-notebook-night"] .cm-selectionBackground,
+[data-cm6-theme="vanilla-notebook-night"] .cm-content ::selection {
+  background-color: rgba(143, 176, 221, 0.24);
+}
+
+.cm6-theme-vanilla-notebook-night .cm-editor .cm-matchingBracket,
+[data-cm6-theme="vanilla-notebook-night"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(143, 176, 221, 0.20);
+  outline: 1px solid #8fb0dd;
+}
+
+.cm6-theme-vanilla-notebook-night .cm-foldPlaceholder,
+[data-cm6-theme="vanilla-notebook-night"] .cm-foldPlaceholder {
+  background-color: #26251f;
+  border-color: #35332b;
+  color: #9b978d;
+}
+
+.cm6-theme-vanilla-notebook-night .cm-panels,
+[data-cm6-theme="vanilla-notebook-night"] .cm-panels {
+  background-color: #1f1e1a;
+  color: #ddd8cb;
+  border-color: #35332b;
+}
+
+.cm6-theme-vanilla-notebook-night .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="vanilla-notebook-night"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #26251f;
+  border-color: #35332b;
+  color: #ddd8cb;
+}
+
+.cm6-theme-vanilla-notebook-night .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="vanilla-notebook-night"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #8fb0dd;
+  color: #1b1a16;
+}
+
+.cm6-theme-vanilla-notebook-night .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="vanilla-notebook-night"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(27, 26, 22, 0.8);
+}
+
+.cm6-theme-vanilla-notebook-night .cm-completionMatchedText,
+[data-cm6-theme="vanilla-notebook-night"] .cm-completionMatchedText {
+  color: #8fb0dd;
+}
+
+/* ============================================================================
+   Vim Mode - Day
+
+   The block cursor covers a character, so it cannot simply be tinted: whatever
+   fills it has to have the page colour knocked out of it, or the character you
+   are sitting on becomes the one character you cannot read.
+   ============================================================================ */
+
+.cm6-theme-vanilla-notebook-day .cm-fat-cursor,
+[data-cm6-theme="vanilla-notebook-day"] .cm-fat-cursor {
+  background: #31527d !important;
+  color: #fdfcf8 !important;
+}
+
+.cm6-theme-vanilla-notebook-day .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="vanilla-notebook-day"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: transparent !important;
+  outline: 1px solid #8ba0bd;
+  color: inherit !important;
+}
+
+.cm6-theme-vanilla-notebook-day .cm-vim-panel,
+[data-cm6-theme="vanilla-notebook-day"] .cm-vim-panel {
+  background: #fbfaf6;
+  border-color: #e4dfd0;
+  color: #26241f;
+}
+
+.cm6-theme-vanilla-notebook-day .cm-vim-panel input,
+[data-cm6-theme="vanilla-notebook-day"] .cm-vim-panel input {
+  background: #fdfcf8;
+  color: #26241f;
+  border-color: #e4dfd0;
+}
+
+/* ============================================================================
+   Vim Mode - Night
+   ============================================================================ */
+
+.cm6-theme-vanilla-notebook-night .cm-fat-cursor,
+[data-cm6-theme="vanilla-notebook-night"] .cm-fat-cursor {
+  background: #8fb0dd !important;
+  color: #1b1a16 !important;
+}
+
+.cm6-theme-vanilla-notebook-night .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="vanilla-notebook-night"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: transparent !important;
+  outline: 1px solid #56637a;
+  color: inherit !important;
+}
+
+.cm6-theme-vanilla-notebook-night .cm-vim-panel,
+[data-cm6-theme="vanilla-notebook-night"] .cm-vim-panel {
+  background: #1f1e1a;
+  border-color: #35332b;
+  color: #ddd8cb;
+}
+
+.cm6-theme-vanilla-notebook-night .cm-vim-panel input,
+[data-cm6-theme="vanilla-notebook-night"] .cm-vim-panel input {
+  background: #1b1a16;
+  color: #ddd8cb;
+  border-color: #35332b;
+}
