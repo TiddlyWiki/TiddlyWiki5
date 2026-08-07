@@ -80,7 +80,7 @@ Python
 <$codeblock code=<<test>>/>
 </$let>""">>
 
-In this example, we override the <<.wlink LinkWidget>> to automatically display an icon next to the link if the target tiddler has an `icon` field. We use the `<$parameters>` widget to capture all attributes passed to the original link and forward them to the underlying widget via `<$genesis>`:
+In this example, we override the <<.wlink LinkWidget>> widget to automatically display an icon next to the link if the target tiddler has an `icon` field. We use the `<$parameters>` widget to capture all attributes passed to the original link and forward them to the underlying widget via `<$genesis>`:
 
 <<wikitext-example-without-html """\widget $link()
 \whitespace trim
