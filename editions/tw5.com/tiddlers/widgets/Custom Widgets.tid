@@ -99,7 +99,7 @@ In this example, we override the <<.wlink "LinkWidget">> widget to automatically
 	>
 		<%if [<link.icon>]%>
 			<span class="tc-tiddler-title-icon tc-titlebar" style="fill:currentColor;font-size:11pt!important">
-				<$transclude $tiddler=<<link.icon>> height="11pt"/>
+				<$transclude $tiddler=<<link.icon>> size="11pt"/>
 			</span>
 		<%endif%>
 		<$slot $name="ts-raw">
