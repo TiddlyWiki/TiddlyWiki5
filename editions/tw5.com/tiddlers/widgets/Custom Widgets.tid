@@ -1,5 +1,5 @@
 created: 20221007144237585
-modified: 20240422084734129
+modified: 20260807190532419
 tags: Concepts
 title: Custom Widgets
 type: text/vnd.tiddlywiki
@@ -79,3 +79,34 @@ Python
 <$let test="Tiger">
 <$codeblock code=<<test>>/>
 </$let>""">>
+
+In this example, we override the <<.wlink "LinkWidget">> widget to automatically display an icon next to the link if the target tiddler has an `icon` field. We use the <<.wlink "ParametersWidget">> widget to capture all attributes passed to the original link and forward them to the underlying widget via <<.wlink "GenesisWidget">>:
+
+<<wikitext-example-without-html """\widget $link()
+\function link.icon()
+[<params-var>jsonget[to]else<currentTiddler>get[icon]]
+\end link.icon
+\function link.text()
+[<params-var>jsonget[to]else<currentTiddler>]
+\end link.text
+\whitespace trim
+<$parameters $params="params-var">
+	<$genesis
+		$type="$link"
+		$remappable="no"
+		$names="[<params-var>jsonindexes[]]"
+		$values="[<params-var>jsonindexes[]] :map[<params-var>jsonget<currentTiddler>]"
+	>
+		<%if [<link.icon>]%>
+			<span class="tc-tiddler-title-icon tc-titlebar" style="fill:currentColor;font-size:11pt!important">
+				<$transclude $tiddler=<<link.icon>> size="11pt"/>
+			</span>
+		<%endif%>
+		<$slot $name="ts-raw">
+			<$text text=<<link.text>> />
+		</$slot>
+	</$genesis>
+</$parameters>
+\end
+
+<<list-links "[has[icon]]">>""">>
