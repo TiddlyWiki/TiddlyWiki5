@@ -99,4 +99,4 @@ In this example, we override the <<.wlink LinkWidget>> to automatically display 
 </$parameters>
 \end
 
-[[HelloThere]]""">>
+<<list-links "[has[icon]]">>""">>
