@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lang-json/tags
+caption: JSON Tags
+description: Tags that trigger JSON syntax highlighting (one per line)
+

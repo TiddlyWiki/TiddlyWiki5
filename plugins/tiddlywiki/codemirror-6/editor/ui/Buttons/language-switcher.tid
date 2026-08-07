@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Buttons/language-switcher
+tags: $:/tags/EditorToolbar
+caption: {{$:/plugins/tiddlywiki/codemirror-6/icons/language}} Language
+description: Switch editor language mode
+icon: $:/plugins/tiddlywiki/codemirror-6/icons/language
+condition: [<targetTiddler>]
+dropdown: $:/plugins/tiddlywiki/codemirror-6/ui/LanguageSwitcher/Dropdown
+button-classes: cm6-toolbar-btn-language

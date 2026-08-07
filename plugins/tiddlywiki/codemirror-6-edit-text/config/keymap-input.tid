@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/simple/keymap-input
+caption: Simple Editor Keymap (Input)
+description: Keymap for simple editor input fields. Leave empty to use simple-keymap, then main keymap.
+config-type: keymap-select
+config-category: Keybindings
+default:
+text:

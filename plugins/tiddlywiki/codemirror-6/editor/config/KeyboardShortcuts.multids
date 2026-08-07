@@ -1,0 +1,6 @@
+title: $:/config/shortcuts/
+
+cm6-focus-next: ctrl-.
+cm6-focus-prev: ctrl-shift-.
+cm6-add-cursor-up: ctrl-alt-Up
+cm6-add-cursor-down: ctrl-alt-Down

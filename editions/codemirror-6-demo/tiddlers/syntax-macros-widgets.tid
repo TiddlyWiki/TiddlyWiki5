@@ -1,0 +1,99 @@
+title: Draft of 'Syntax — Macros, Variables & Widgets'
+draft.of: Syntax — Macros, Variables & Widgets
+draft.title: Syntax — Macros, Variables & Widgets
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+! Macro & variable calls
+
+* Simple variable: <<now>>
+* Variable with no params: <<currentTiddler>>
+* Positional params: <<myMacro "first" "second">>
+* Positional with single quotes: <<myMacro 'first' 'second'>>
+* Triple-quoted param: <<myMacro """value with "quotes" inside""">>
+* Named params (colon): <<myMacro first:"a" second:"b">>
+* Named params (equals): <<myMacro param="value" n=5 flag=yes>>
+* Mixed named/positional: <<myMacro "pos" named:"val">>
+* Dynamic params: <<myMacro ref={{SomeTiddler}} sub={{{ [tag[x]] }}}>>
+
+(The `<<__param__>>` substituted-parameter form is only valid inside a `\define`
+macro body — see the //Pragmas// demo.)
+
+!! Multi-valued variables
+
+Display form: ((myListVariable)) and with a separator ((myListVariable||, )).
+
+!! Widgets
+
+<$link to="HelloThere">A link widget</$link>
+
+<$text text="Some plain text via a widget"/>
+
+<$list filter="[tag[done]sort[title]]" variable="item">
+* <<item>>
+</$list>
+
+<$list filter="[tag[done]]" emptyMessage="Nothing here">
+
+! Block-mode content (blank line after opening tag)
+
+* <<currentTiddler>>
+</$list>
+
+<$let currentColour="red" size="big">
+Inside a let widget: <<currentColour>> / <<size>>.
+</$let>
+
+<$set name="myVar" value="hello">
+<<myVar>>
+</$set>
+
+<$wikify name="rendered" text="<<now>>">
+Rendered: <<rendered>>
+</$wikify>
+
+!! Self-closing and nested widgets
+
+<$transclude tiddler="SomeTiddler" mode="block"/>
+
+<$list filter="[tag[done]]">
+<$link to=<<currentTiddler>>><$view field="title"/></$link>
+</$list>
+
+!! Attribute value forms
+
+<$mywidget
+	plain=unquoted
+	quoted="double"
+	single='single'
+	number=42
+	boolean=yes
+	macro=<<now>>
+	dynamicparam=<<myMacro p={{Ref}}>>
+	transclude={{SomeTiddler}}
+	field={{SomeTiddler!!title}}
+	index={{SomeData##key}}
+	filtered={{{ [tag[x]] }}}
+	mvv=((myListVariable))
+	substituted=`value is $(currentTiddler)$ and ${ [tag[x]count[]] }$`
+	tripleSubstituted=```a literal ` backtick and $(currentTiddler)$```
+	filter="[tag[done]] =>doneItems +[!is[draft]]"
+/>
+
+!! HTML tags
+
+<div class="outer" style.color="blue" data-foo="bar">
+<span class="inner">Plain HTML works too</span>
+<br/>
+<hr class="sep"/>
+</div>
+
+!! Conditionals
+
+<%if [{!!draft.of}] %>
+This is a draft.
+<%elseif [<currentTiddler>has[modified]] %>
+Has a modified date.
+<%else%>
+Neither.
+<%endif%>

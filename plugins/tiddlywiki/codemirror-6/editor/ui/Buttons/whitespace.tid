@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Buttons/whitespace
+tags: $:/tags/EditorToolbar
+caption: {{$:/plugins/tiddlywiki/codemirror-6/icons/whitespace}} Show Whitespace
+description: Toggle visibility of all whitespace characters
+icon: $:/plugins/tiddlywiki/codemirror-6/icons/whitespace
+condition: [<targetTiddler>]
+button-classes: [{$:/config/codemirror-6/editor/showWhitespace}match[yes]then[cm6-toolbar-btn-whitespace tc-selected]] :else[[cm6-toolbar-btn-whitespace]]
+
+<%if [{$:/config/codemirror-6/editor/showWhitespace}match[yes]] %>
+<$action-setfield $tiddler="$:/config/codemirror-6/editor/showWhitespace" text="no"/>
+<%else%>
+<$action-setfield $tiddler="$:/config/codemirror-6/editor/showWhitespace" text="yes"/>
+<%endif%>

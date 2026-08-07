@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/editor/completeAnyWord
+caption: Complete any word
+description: Enable word completion from the document. This acts as a fallback when no other completions match - suggesting words that appear elsewhere in the document.
+config-type: checkbox
+config-category: Autocompletion
+default: no
+text: no

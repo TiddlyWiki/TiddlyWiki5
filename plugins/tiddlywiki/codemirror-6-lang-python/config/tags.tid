@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lang-python/tags
+caption: Python Tags
+description: Tags that trigger Python syntax highlighting (one per line)
+
