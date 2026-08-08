@@ -6,6 +6,8 @@ type: text/vnd.tiddlywiki
 
 Here we focus on contributions via GitHub Pull Requests but there are many other ways that anyone can help the TiddlyWiki project, such as [[reporting bugs|ReportingBugs]] or helping to [[improve our documentation|Improving TiddlyWiki Documentation]].
 
+AI coding agents should follow the machine-readable contribution and coding rules in [[AGENTS.md|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/AGENTS.md]] in the repository root.
+
 ! Rules for Pull Requests
 
 PRs must meet these minimum requirements before they can be considered for merging:
@@ -28,17 +30,17 @@ PRs must meet these minimum requirements before they can be considered for mergi
 
 !! Imperative Mood for PR Titles
 
-The "imperative mood" means written as if giving a command or instruction. See [[this post|https://chris.beams.io/posts/git-commit/#imperative]] for more details, but the gist is that the title of the PR should make sense when used to complete the sentence "If applied, this commit will...". So for example, these are good PR titles:
+The "imperative mood" means written as if giving a command or instruction. See [[this post|https://chris.beams.io/posts/git-commit/#imperative]] for more details, but the gist is that the title of the PR should make sense when used to complete the sentence "If applied, this pull request will...". So for example, these are good PR titles:
 
-* If applied, this commit will //update the contributing guidelines//
-* If applied, this commit will //change css-escape-polyfill to a $tw.utils method//
-* If applied, this commit will //make it easier to subclass the wikitext parser with a custom rule set//
+* If applied, this pull request will //update the contributing guidelines//
+* If applied, this pull request will //change css-escape-polyfill to a $tw.utils method//
+* If applied, this pull request will //make it easier to subclass the wikitext parser with a custom rule set//
 
 These a poorly worded PR titles:
 
-* ~~If applied, this commit will //edit text widgets should use default text for missing fields//~~
-* ~~If applied, this commit will //signing the CLA//~~
-* ~~If applied, this commit will //don't crash if options.event is missing//~~
+* ~~If applied, this pull request will //edit text widgets should use default text for missing fields//~~
+* ~~If applied, this pull request will //signing the CLA//~~
+* ~~If applied, this pull request will //don't crash if options.event is missing//~~
 
 PR titles may also include a short prefix to indicate the subsystem to which they apply. For example:
 
