@@ -1,0 +1,7 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: A filter containing a newline round-trips byte-exact
+title: Serialize/FilteredTranscludeBlock-new
+type: text/vnd.tiddlywiki
+
+{{{ fil
+ter }}}

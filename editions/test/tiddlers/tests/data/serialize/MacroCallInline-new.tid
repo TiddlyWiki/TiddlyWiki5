@@ -1,0 +1,13 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Adjacent calls, a trailing greater than sign and a nested lookalike round-trip byte-exact
+title: Serialize/MacroCallInline-new
+type: text/vnd.tiddlywiki
+
+<<john>><<paul>><<george>><<ringo>>
+
+<<john param>>>
+
+Nested lookalike <<outie one:'my <<innie>>'>> in a sentence.
+
+before
+<<john>>

@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Two plain paragraphs keep their blank line separator
 title: Serialize/BlockRule
 type: text/vnd.tiddlywiki
 

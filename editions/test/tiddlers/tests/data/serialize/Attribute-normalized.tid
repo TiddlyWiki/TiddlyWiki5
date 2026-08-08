@@ -1,0 +1,24 @@
+title: Serialize/Attribute-normalized
+description: AST-only mode drops whitespace around the attribute equals sign
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: info
+
+`p = blah` becomes `p="blah"`: the whitespace around the equals sign is
+dropped and bare values are quoted.
+
+Why: the AST records attribute name and value only, so tree-only
+serialization emits the canonical form.
+
+* Covers: serializeAttribute's canonical fallback in $:/plugins/tiddlywiki/wikitext-serialize/utils/parsetree.js.
+* Mode: ast-only (the Input field withholds the source from the serializer).
++
+title: Input
+mode: ast-only
+
+<div p = blah>some text</div>
++
+title: ExpectedWikitext
+
+<div p="blah">some text</div>

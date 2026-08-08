@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Chained style and class header lines round-trip byte-exact
 title: Serialize/StyleBlock2
 type: text/vnd.tiddlywiki
 
