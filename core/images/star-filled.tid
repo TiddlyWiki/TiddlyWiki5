@@ -2,4 +2,4 @@ title: $:/core/images/star-filled
 tags: $:/tags/Image
 
 \parameters (size:"22pt")
-<svg width=<<size>> height=<<size>> class="tc-image-star-filled tc-image-button" viewBox="0 0 128 128"><path d="M61.836 96.823l37.327 27.287c2.72 1.99 6.379-.69 5.343-3.912L90.29 75.988l-1.26 3.91 37.285-27.345c2.718-1.993 1.32-6.327-2.041-6.33l-46.113-.036 3.3 2.416L67.176 4.416c-1.04-3.221-5.563-3.221-6.604 0L46.29 48.603l3.3-2.416-46.113.036c-3.362.003-4.759 4.337-2.04 6.33L38.72 79.898l-1.26-3.91-14.216 44.21c-1.036 3.223 2.622 5.901 5.343 3.912l37.326-27.287h-4.078z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>> viewBox="0 0 24 24" fill="currentColor" class="tc-image-star-filled tc-image-button icon icon-tabler icons-tabler-filled icon-tabler-star"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" /></svg>
