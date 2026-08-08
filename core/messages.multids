@@ -1,0 +1,6 @@
+title: $:/core/_temp_allowDuplicates/
+
+Heading: Important Warning
+Warning: This is a special prerelease version of TW5 for experimenting with a potentially incompatible change to the core logic of filter processing. It is only intended to be used for evaluation and testing
+StatusOff: The allow duplicates setting is currently: OFF
+StatusOn: The allow duplicates setting is currently: ON
