@@ -41,10 +41,9 @@ Parse the most recent match
 exports.parse = function() {
 	// Retrieve the most recent match so that recursive calls don't overwrite it
 	var tag = this.nextTag;
-	if(!tag.isSelfClosing) {
-		tag.openTagStart = tag.start;
-		tag.openTagEnd = tag.end;
-	}
+	// For a self-closing tag the open tag is the whole element
+	tag.openTagStart = tag.start;
+	tag.openTagEnd = tag.end;
 	this.nextTag = null;
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
@@ -52,6 +51,13 @@ exports.parse = function() {
 	var hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/y);
 	// Set whether we're in block mode
 	tag.isBlock = this.is.block || hasLineBreak;
+	// isBlock fuses the parse position with the content mode; record them
+	// separately so a serializer can tell an inline <img> before a blank
+	// line from a block level element
+	tag.blockPosition = !!this.is.block;
+	if(hasLineBreak) {
+		tag.blockContent = true;
+	}
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
 		var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">";
