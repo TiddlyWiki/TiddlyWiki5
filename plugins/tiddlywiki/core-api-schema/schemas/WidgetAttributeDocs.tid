@@ -1,0 +1,8 @@
+title: $:/schemas/WidgetAttributeDocs
+tags: $:/tags/Schema
+fields: field-type required default-value from-version deprecated
+type: text/vnd.tiddlywiki
+
+Schema for widget attribute definition tiddlers under `$:/docs/widgets/<Widget>/attributes/`.
+
+Each tiddler matching this schema defines one attribute of a widget, enabling visual editors to generate UI controls for editing widget parameters.

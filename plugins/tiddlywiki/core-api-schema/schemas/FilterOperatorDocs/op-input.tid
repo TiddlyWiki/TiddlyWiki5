@@ -1,0 +1,6 @@
+title: $:/schemas/FilterOperatorDocs/op-input
+field-type: string
+required: no
+type: text/vnd.tiddlywiki
+
+Describes the input that the filter operator receives (typically a selection of titles).

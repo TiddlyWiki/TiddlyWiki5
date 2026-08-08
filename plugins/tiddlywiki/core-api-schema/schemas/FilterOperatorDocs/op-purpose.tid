@@ -1,0 +1,6 @@
+title: $:/schemas/FilterOperatorDocs/op-purpose
+field-type: string
+required: yes
+type: text/vnd.tiddlywiki
+
+A short description of what the filter operator does. Used in documentation tables and visual editor tooltips.

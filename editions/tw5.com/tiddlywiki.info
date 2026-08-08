@@ -3,6 +3,9 @@
 	"plugins": [
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/confetti",
+		"tiddlywiki/core-api-schema",
+		"tiddlywiki/core-api-attributes",
+		"tiddlywiki/core-api-docs",
 		"tiddlywiki/dynannotate",
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",

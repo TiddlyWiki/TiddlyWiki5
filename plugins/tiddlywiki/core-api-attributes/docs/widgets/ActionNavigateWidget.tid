@@ -1,0 +1,7 @@
+title: $:/docs/widgets/ActionNavigateWidget
+schema: $:/schemas/WidgetDocs
+widget-purpose: sends a tm-navigate message to navigate to a tiddler
+widget-tag-name: $action-navigate
+type: text/vnd.tiddlywiki
+
+The `action-navigate` widget sends a [[tm-navigate|WidgetMessage: tm-navigate]] message back up the widget tree.
