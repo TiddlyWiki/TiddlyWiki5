@@ -54,11 +54,13 @@ exports.parse = function() {
 };
 
 exports.parseIfClause = function(filterCondition) {
-	// Create the list widget
+	// Create the list widget; isConditional marks it as synthesized from the
+	// conditional shortcut syntax rather than written as a $list widget
 	var listWidget = {
 		type: "list",
 		tag: "$list",
 		isBlock: this.is.block,
+		isConditional: true,
 		children: [
 			{
 				type: "list-template",
@@ -79,6 +81,9 @@ exports.parseIfClause = function(filterCondition) {
 	var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>|\\<\\%\\s*(else)\\s*\\%\\>|\\<\\%\\s*(elseif)\\s+([\\s\\S]+?)\\%\\>",
 		ex;
 	if(hasLineBreak) {
+		// A serializer cannot see the blank line that switches this body to
+		// block mode, so record it
+		listWidget.children[0].blockContent = true;
 		ex = this.parser.parseBlocksTerminatedExtended(reEndString);
 	} else {
 		var reEnd = new RegExp(reEndString,"mg");
@@ -97,6 +102,7 @@ exports.parseIfClause = function(filterCondition) {
 			var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>",
 				ex;
 			if(hasLineBreak) {
+				listWidget.children[1].blockContent = true;
 				ex = this.parser.parseBlocksTerminatedExtended(reEndString);
 			} else {
 				var reEnd = new RegExp(reEndString,"mg");
@@ -107,6 +113,9 @@ exports.parseIfClause = function(filterCondition) {
 		} else if(ex.match[3] === "elseif") {
 			// Parse the elseif clause by reusing this parser, passing the new filter condition
 			listWidget.children[1].children = this.parseIfClause(ex.match[4]);
+			// Record the clause span from its marker to the end of the construct
+			listWidget.children[1].children[0].start = ex.match.index;
+			listWidget.children[1].children[0].end = this.parser.pos;
 		}
 	}
 	// Return the parse tree node
