@@ -1,0 +1,59 @@
+title: $:/plugins/tiddlywiki/prosemirror/styles/theme
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/*
+ * ProseMirror Editor — Colour Theme Overrides
+ *
+ * This file contains ONLY colour-dependent CSS that uses the TiddlyWiki
+ * palette via <<colour …>> macros, for dark-mode compatibility.
+ * Structural / layout CSS lives in styles-structure.tid and component
+ * stylesheet tiddlers.
+ */
+
+/* === ProseMirror content area === */
+
+.ProseMirror blockquote {
+	border-left-color: <<colour blockquote-bar>>;
+}
+
+.ProseMirror pre {
+	background: <<colour pre-background>>;
+	border-color: <<colour pre-border>>;
+}
+
+.ProseMirror hr {
+	border-top-color: <<colour tiddler-editor-border>>;
+}
+
+/* === Table === */
+
+.ProseMirror th,
+.ProseMirror td {
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.ProseMirror th {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.ProseMirror .selectedCell {
+	background: <<colour selection-background>>;
+}
+
+.ProseMirror .column-resize-handle {
+	background-color: <<colour primary>>;
+}
+
+/* === Definition List === */
+
+.ProseMirror .pm-definition-list dt {
+	color: <<colour foreground>>;
+}
+
+.ProseMirror .pm-definition-list dd {
+	color: <<colour foreground>>;
+}
+

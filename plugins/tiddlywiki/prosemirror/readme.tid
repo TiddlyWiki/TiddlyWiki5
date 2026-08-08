@@ -1,0 +1,23 @@
+title: $:/plugins/tiddlywiki/prosemirror/readme
+
+Test `<$prosemirror />` widget below, see console for content JSON.
+
+<$edit-prosemirror tiddler="$:/plugins/tiddlywiki/prosemirror/example"/>
+
+<$edit-text tiddler="$:/plugins/tiddlywiki/prosemirror/example" class="tc-edit-texteditor"/>
+
+{{$:/plugins/tiddlywiki/prosemirror/example}}
+
+!! Features
+
+!!! Basic Text Formatting
+
+Syntax like ''bold'' and //italic// are supported, you could use WikiText syntax (`''` and `//`) or keyboard shortcuts (by default Ctrl/Cmd+B for bold, Ctrl/Cmd+I for italic) to apply formatting.
+
+Keyboard shortcuts are configurable via [[config|$:/plugins/tiddlywiki/prosemirror/config]].
+
+!!! Widget Block Rendering
+
+Automatic detection and rendering of widget / macro / procedure / transclude syntax (e.g., `<<list-links "[tag[task]sort[title]]">>`). They are fundamentally widget calls, so it is called widget block rendering.
+
+Whenever such syntax is typed or pasted into the editor, it is converted into a visual block representing the widget. The block includes:
