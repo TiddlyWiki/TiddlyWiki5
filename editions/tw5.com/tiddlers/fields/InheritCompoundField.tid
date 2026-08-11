@@ -1,0 +1,68 @@
+caption: inherit-compound
+created: 20260527000000000
+modified: 20260527000000000
+tags: Fields
+title: InheritCompoundField
+type: text/vnd.tiddlywiki
+
+The `inherit-compound` field on a [[compound tiddler|CompoundTiddlers]] of type `text/vnd.tiddlywiki-multiple+fields` names another such tiddler to fall back to when a sub-entry definition is not present locally.
+
+It is consulted by the four `compound-field-*` [[filter operators|Filter Operators]]:
+
+|!Operator |!Returns |!Inheritance |
+|`[<X>compound-field-names[]]` |sub-entry titles, in order |template names first, then any local-only names appended |
+|`[<X>compound-field-type[name]]` |the `type:` header of one sub-entry |falls back to the template if missing locally |
+|`[<X>compound-field-types[]]` |union of all `type:` header values |merges template + local |
+|`[<X>compound-field-meta[name::prop]]` |an arbitrary metadata header (e.g. `roles` on a `select-roles` entry) |falls back to the template if missing locally |
+
+The compound `text` field of the inheriting tiddler is //not// touched: only the lookups fall back. Sub-entry values are still stored on the local tiddler.
+
+! Example
+
+A template tiddler defines the schema (sub-entries with metadata but empty bodies):
+
+```
+title: ContactTemplate
+type: text/vnd.tiddlywiki-multiple+fields
+
+title: first-name
+
++
+title: email
+type: email
+
++
+title: role
+type: select-roles
+roles: [[Developer]] [[Designer]] [[Manager]]
+
+```
+
+A contact inherits from it and only stores values:
+
+```
+title: Alice
+type: text/vnd.tiddlywiki-multiple+fields
+inherit-compound: ContactTemplate
+
+title: first-name
+
+Alice
++
+title: email
+
+alice@example.com
++
+title: role
+
+Designer
+```
+
+`Alice` does not redefine `type: email` on her `email` sub-entry, but `[[Alice]compound-field-type[email]]` still returns `email` because the template provides it. Similarly, `[[Alice]compound-field-meta[role::roles]]` returns the roles list defined on the template. A locally-added sub-entry not present in the template appears at the end of `compound-field-names`.
+
+! Notes
+
+* The template is just another `text/vnd.tiddlywiki-multiple+fields` tiddler — no special tag or marker is required.
+* Inheritance is a single hop. The template's own `inherit-compound`, if any, is not followed.
+* The template provides //structure// (field names and metadata), not //defaults// for the values themselves: an empty or missing sub-entry on an inheriting tiddler reads as empty even if the template has a non-empty value for that sub-entry.
+* Because template values are ignored, a template tiddler can carry example values for documentation: opening the template directly shows realistic content, while inheriting tiddlers remain unaffected by those examples.

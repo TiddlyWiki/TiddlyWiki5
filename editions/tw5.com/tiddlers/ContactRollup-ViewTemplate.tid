@@ -1,0 +1,12 @@
+created: 20260612181530988
+modified: 20260612201249695
+title: ContactRollup-ViewTemplate
+
+<div class="tc-contact-card-field tc-company-card-rollup">
+	<div class="tc-contact-card-label">employees (<$text text={{{ [<currentTiddler>listed[]tag[ContactCard]!has[draft.of]count[]] }}}/>)</div>
+	<div class="tc-contact-card-value">
+		<$list filter="[<currentTiddler>listed[]tag[ContactCard]!has[draft.of]sort[title]]" variable="_contact" emptyMessage="<em>none yet</em>">
+			<div><$link to=<<_contact>>><$text text={{{ [<_contact>get[first-name]] [<_contact>get[last-name]] +[join[ ]] :else[<_contact>] }}}/></$link></div>
+		</$list>
+	</div>
+</div>

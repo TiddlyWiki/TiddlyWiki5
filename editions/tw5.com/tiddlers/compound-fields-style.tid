@@ -1,0 +1,212 @@
+created: 20260405064438235
+modified: 20260405164205491
+tags: $:/tags/Stylesheet
+title: compound-fields-style
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.tc-compound-field-pane {
+	margin-bottom: 1em;
+}
+
+.tc-compound-field-header {
+	margin-bottom: .5em;
+}
+
+.tc-compound-field-pane label {
+	margin-right: .5em;
+}
+
+.tc-compound-field-pane input[type="radio"] {
+	margin-right: .25em;
+}
+
+.tc-radio > input[type="radio"] {
+	margin-right: .4em;
+}
+
+.tc-btn-mini .tc-image-button {
+	margin-right: .25em;
+}
+
+/* Contact card view */
+.tc-contact-card {
+	border: 1px solid var(--contact-accent, <<colour primary>>);
+	border-left: 5px solid var(--contact-accent, <<colour primary>>);
+	border-radius: 4px;
+	padding: 1em;
+	position: relative;
+}
+
+.tc-contact-card-toolbar {
+	position: absolute;
+	top: 0.7em;
+	right: 0.7em;
+}
+
+.tc-contact-card-body {
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+	border-bottom: 1px solid <<colour tiddler-border>>;
+}
+
+.tc-contact-card-fields {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 0.75em;
+}
+
+.tc-contact-card-field {
+	padding: 0.4em 0.6em;
+	border-radius: 3px;
+	background: <<colour tiddler-background>>;
+}
+
+.tc-contact-card-label {
+	font-size: 0.9em;
+	font-weight: bold;
+	color: <<colour foreground>>;
+	text-transform: capitalize;
+	margin-bottom: 0.15em;
+}
+
+.tc-contact-card-value {
+	word-break: break-word;
+}
+
+.tc-contact-card-link {
+	text-decoration: none;
+	color: <<colour tiddler-link-foreground>>;
+}
+
+.tc-contact-card-link:hover {
+	text-decoration: underline;
+}
+
+.tc-contact-card-link:focus {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: 2px;
+}
+
+.tc-contact-card-color {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	border: 1px solid <<colour tiddler-border>>;
+	border-radius: 2px;
+	vertical-align: middle;
+}
+
+/* Contact list grid container */
+.tc-contact-list-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 1em;
+}
+
+/* Contact list item (compact card) */
+.tc-contact-list-item {
+	border: 1px solid var(--contact-accent, <<colour primary>>);
+	border-left: 5px solid var(--contact-accent, <<colour primary>>);
+	border-radius: 6px;
+	padding: 0.8em 1em;
+	background: <<colour tiddler-background>>;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+	transition: box-shadow 0.2s ease;
+}
+
+.tc-contact-list-item:hover {
+	box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+.tc-contact-list-header {
+	display: flex;
+	align-items: center;
+	gap: 0.75em;
+	margin-bottom: 0.6em;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid <<colour tiddler-border>>;
+}
+
+.tc-contact-list-avatar {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+.tc-contact-list-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.tc-contact-list-avatar-placeholder {
+	background: var(--contact-accent, <<colour primary>>);
+	color: <<colour tiddler-background>>;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+.tc-contact-list-name {
+	font-size: 1.15em;
+	font-weight: bold;
+}
+
+.tc-contact-list-name a.tc-tiddlylink {
+	color: <<colour tiddler-link-foreground>>;
+}
+
+.tc-contact-list-subtitle {
+	color: <<colour foreground>>;
+	font-size: 0.9em;
+}
+
+.tc-contact-list-details {
+	padding-left: 0.3em;
+}
+
+.tc-contact-list-row {
+	padding: 0.15em 0;
+	font-size: 0.9em;
+}
+
+.tc-contact-list-row a {
+	text-decoration: none;
+	color: <<colour tiddler-link-foreground>>;
+}
+
+.tc-contact-list-row a:hover {
+	text-decoration: underline;
+}
+
+.tc-contact-list-row a:focus,
+.tc-contact-list-name a:focus {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: 2px;
+}
+
+.tc-contact-list-icon {
+	display: inline-block;
+	width: 1.6em;
+	text-align: center;
+}
+
+.tc-contact-list-address {
+	padding-left: 1.6em;
+	white-space: pre-line;
+	color: <<colour foreground>>;
+}
+
+.tc-contact-list-notes {
+	padding-left: 1.6em;
+	color: <<colour foreground>>;
+	font-style: italic;
+	border-top: 1px dashed <<colour tiddler-border>>;
+	margin-top: 0.4em;
+	padding-top: 0.4em;
+}

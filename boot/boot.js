@@ -440,6 +440,44 @@ $tw.utils.parseFields = function(text,fields) {
 	return fields;
 };
 
+/*
+Parse a block of text in text/vnd.tiddlywiki-multiple+fields format into a hashmap of field values.
+Entries are separated by \n+\n. Each entry is a .tid-style block with header fields and body.
+The "title" header is the field name, the body is the field value.
+If extra headers exist beyond "title", the value is wrapped as {value: "...", ...metadata}.
+Otherwise the value is a plain string.
+*/
+$tw.utils.parseMultilineFields = function(text) {
+	var fields = Object.create(null);
+	if(!text) {
+		return fields;
+	}
+	var rawEntries = text.split(/\r?\n\+\r?\n/);
+	for(var t = 0; t < rawEntries.length; t++) {
+		var split = rawEntries[t].split(/\r?\n\r?\n/mg);
+		if(split.length >= 1) {
+			var entryFields = $tw.utils.parseFields(split[0]);
+			if(entryFields.title) {
+				var fieldName = entryFields.title;
+				var fieldValue = split.length >= 2 ? split.slice(1).join("\n\n") : "";
+				var metadataKeys = Object.keys(entryFields);
+				if(metadataKeys.length > 1) {
+					var entry = {value: fieldValue};
+					for(var m = 0; m < metadataKeys.length; m++) {
+						if(metadataKeys[m] !== "title") {
+							entry[metadataKeys[m]] = entryFields[metadataKeys[m]];
+						}
+					}
+					fields[fieldName] = entry;
+				} else {
+					fields[fieldName] = fieldValue;
+				}
+			}
+		}
+	}
+	return fields;
+};
+
 // Safely parse a string as JSON
 $tw.utils.parseJSONSafe = function(text,defaultJSON) {
 	try {
@@ -1188,6 +1226,68 @@ $tw.Wiki = function(options) {
 		if(!(tiddler instanceof $tw.Tiddler)) {
 			tiddler = new $tw.Tiddler(tiddler);
 		}
+		// For text/vnd.tiddlywiki-multiple+fields tiddlers, expose sub-entry titles as fields
+		if(tiddler && tiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields" && tiddler.fields.text) {
+			var reservedFields = {"title":true,"text":true,"type":true,"created":true,"creator":true,"modified":true,"modifier":true,"tags":true,"bag":true,"revision":true};
+			var existingTiddler = this.getTiddler(tiddler.fields.title);
+			// Field → source: sub-entries are exposed as fields, so they must stay API-compatible with
+			// standard fields. When the compound text is unchanged but a derived field has been edited
+			// directly (eg by a standard field-writing widget such as the tag-picker), write the new
+			// value back into the compound source so the change round-trips and serializes on save.
+			if($tw.utils.makeMultilineFieldsDictionary && existingTiddler &&
+				existingTiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields" &&
+				existingTiddler.fields.text === tiddler.fields.text) {
+				var sourceData = $tw.utils.parseMultilineFields(tiddler.fields.text);
+				var sourceChanged = false;
+				for(var sourceName in sourceData) {
+					var sourceTarget = (sourceName === "text") ? "body" : sourceName;
+					if(sourceName === "text" || !reservedFields[sourceName]) {
+						var sourceEntry = sourceData[sourceName];
+						var sourceHasMeta = sourceEntry !== null && typeof sourceEntry === "object" && $tw.utils.hop(sourceEntry,"value");
+						var sourceValue = sourceHasMeta ? sourceEntry.value : sourceEntry;
+						var fieldValue = tiddler.fields[sourceTarget];
+						if(fieldValue !== undefined && ("" + fieldValue) !== ("" + sourceValue)) {
+							if(sourceHasMeta) {
+								sourceEntry.value = fieldValue;
+							} else {
+								sourceData[sourceName] = fieldValue;
+							}
+							sourceChanged = true;
+						}
+					}
+				}
+				if(sourceChanged) {
+					tiddler = new $tw.Tiddler(tiddler,{text: $tw.utils.makeMultilineFieldsDictionary(sourceData,tiddler.fields.text)});
+				}
+			}
+			var parsedFields = $tw.utils.parseMultilineFields(tiddler.fields.text);
+			var extraFields = Object.create(null);
+			var newDerivedNames = Object.create(null);
+			for(var fieldName in parsedFields) {
+				var value = parsedFields[fieldName];
+				var unwrapped = (value !== null && typeof value === "object" && $tw.utils.hop(value,"value")) ? value.value : value;
+				// Map the "text" sub-entry to "body" to avoid overwriting the compound format
+				var targetName = (fieldName === "text") ? "body" : fieldName;
+				// Allow text→body mapping even though "text" is reserved; skip other reserved names
+				if(fieldName === "text" || !reservedFields[fieldName]) {
+					extraFields[targetName] = unwrapped;
+					newDerivedNames[targetName] = true;
+				}
+			}
+			// Clear previously-derived fields that are no longer present in the new compound text
+			if(existingTiddler && existingTiddler.fields.type === "text/vnd.tiddlywiki-multiple+fields" && existingTiddler.fields.text) {
+				var prevParsed = $tw.utils.parseMultilineFields(existingTiddler.fields.text);
+				for(var prevName in prevParsed) {
+					var prevTarget = (prevName === "text") ? "body" : prevName;
+					if((prevName === "text" || !reservedFields[prevName]) && !newDerivedNames[prevTarget]) {
+						extraFields[prevTarget] = undefined;
+					}
+				}
+			}
+			if(Object.keys(extraFields).length > 0) {
+				tiddler = new $tw.Tiddler(tiddler,extraFields);
+			}
+		}
 		// Save the tiddler
 		if(tiddler) {
 			var title = tiddler.fields.title;
@@ -1676,6 +1776,13 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/tids","tiddlerdeserializer",{
 			}
 		}
 		return tiddlers;
+	}
+});
+$tw.modules.define("$:/boot/tiddlerdeserializer/tiddlywiki-fields","tiddlerdeserializer",{
+	"text/vnd.tiddlywiki-multiple+fields": function(text,fields) {
+		fields.text = text;
+		fields.type = "text/vnd.tiddlywiki-multiple+fields";
+		return [fields];
 	}
 });
 $tw.modules.define("$:/boot/tiddlerdeserializer/txt","tiddlerdeserializer",{
@@ -2463,6 +2570,7 @@ $tw.boot.initStartup = function(options) {
 	}
 	// Add file extension information
 	$tw.utils.registerFileType("text/vnd.tiddlywiki","utf8",".tid");
+	$tw.utils.registerFileType("text/vnd.tiddlywiki-multiple+fields","utf8",".tids-fields");
 	$tw.utils.registerFileType("application/x-tiddler","utf8",".tid");
 	$tw.utils.registerFileType("application/x-tiddlers","utf8",".multids");
 	$tw.utils.registerFileType("application/x-tiddler-html-div","utf8",".tiddler");
