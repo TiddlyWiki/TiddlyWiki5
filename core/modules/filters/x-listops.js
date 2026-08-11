@@ -165,8 +165,8 @@ exports.sortby = function (source, operator) {
 		return results;
 	}
 	var lookup = $tw.utils.parseStringArray(operator.operand, "true");
-	// Second operand "end" places unlisted titles last; default is first
-	var unlistedIndex = operator.operands[1] === "end" ? lookup.length : -1;
+	// The "end" suffix places unlisted titles last; default is first
+	var unlistedIndex = operator.suffix === "end" ? lookup.length : -1;
 	results.sort(function (a, b) {
 		var indexA = lookup.indexOf(a);
 		var indexB = lookup.indexOf(b);

@@ -944,10 +944,10 @@ describe("Filter tests", function() {
 			expect(wiki.filterTiddlers("aa a b c +[sortby[b c a cc]]").join(",")).toBe("aa,b,c,a");
 			expect(wiki.filterTiddlers("a bb b c +[sortby[b c a cc]]").join(",")).toBe("bb,b,c,a");
 			expect(wiki.filterTiddlers("a bb cc b c +[sortby[b c a cc]]").join(",")).toBe("bb,b,c,a,cc");
-			// The "end" operand places missing titles after the listed ones
-			expect(wiki.filterTiddlers("aa a b c +[sortby[b c a cc],[end]]").join(",")).toBe("b,c,a,aa");
-			expect(wiki.filterTiddlers("a bb b c +[sortby[b c a cc],[end]]").join(",")).toBe("b,c,a,bb");
-			expect(wiki.filterTiddlers("a bb cc b c +[sortby[b c a cc],[end]]").join(",")).toBe("b,c,a,cc,bb");
+			// The "end" suffix places missing titles after the listed ones
+			expect(wiki.filterTiddlers("aa a b c +[sortby:end[b c a cc]]").join(",")).toBe("b,c,a,aa");
+			expect(wiki.filterTiddlers("a bb b c +[sortby:end[b c a cc]]").join(",")).toBe("b,c,a,bb");
+			expect(wiki.filterTiddlers("a bb cc b c +[sortby:end[b c a cc]]").join(",")).toBe("b,c,a,cc,bb");
 
 			expect(wiki.filterTiddlers("b a b c +[sortby[]]").join(",")).toBe("a,b,c");
 			expect(wiki.filterTiddlers("b a b c +[sortby[a b b c]]").join(",")).toBe("a,b,c");
