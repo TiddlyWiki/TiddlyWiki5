@@ -212,27 +212,24 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	};
 	
 	EditTextWidget.prototype.updateDomNodeClasses = function() {
-		var domNodeClasses = this.engine.domNode.className.split(/\s+/).filter(Boolean);
-		var oldClasses = this.editClass.split(/\s+/).filter(Boolean);
-		var newClasses;
+		var domNodeClasses = this.engine.domNode.className.split(/\s+/).filter(Boolean),
+			oldClasses = this.editClass.split(/\s+/).filter(Boolean),
+			newClasses;
 	
 		this.editClass = this.getAttribute("class","");
 		newClasses = this.editClass.split(/\s+/).filter(Boolean);
 	
 		// Remove classes assigned from the old value of the class attribute
-		$tw.utils.each(oldClasses,function(oldClass) {
-			var i = domNodeClasses.indexOf(oldClass);
-			if(i !== -1) {
-				domNodeClasses.splice(i,1);
-			}
+		domNodeClasses = domNodeClasses.filter(function(className) {
+			return !oldClasses.includes(className);
 		});
 	
 		// Add new classes from the updated class attribute
-		$tw.utils.each(newClasses,function(newClass) {
-			if(domNodeClasses.indexOf(newClass) === -1) {
-				domNodeClasses.push(newClass);
-			}
-		});
+		domNodeClasses = domNodeClasses.concat(
+			newClasses.filter(function(className) {
+				return !domNodeClasses.includes(className);
+			})
+		);
 	
 		this.engine.domNode.className = domNodeClasses.join(" ");
 	};
