@@ -18,10 +18,12 @@ tags: $:/tags/EditTemplate
 		<$button class="tc-btn-invisible tc-remove-tag-button"
 			style.fill=<<foregroundColor>>
 		>
-			<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="-[{!!title}]"/>
-			{{$:/core/images/close-button}}
-		</$button>
-	</span>
+      <$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="-[{!!title}]"/>
+      <!-- Touch a temp tiddler so that the tag remove animation fires instantly. Otherwise it's delayed by the typing timeout duration -->
+      <$action-setfield $tiddler="$:/temp/tags-edit-refresh" text=<<currentTiddler>>/>
+      {{$:/core/images/close-button}}
+    </$button>
+  </span>
 </$let>
 \end
 

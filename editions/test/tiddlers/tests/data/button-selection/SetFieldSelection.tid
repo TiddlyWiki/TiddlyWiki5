@@ -1,0 +1,15 @@
+title: ButtonSelection/SetFieldSelection
+description: Only the setField button whose setTo matches the state field is selected
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: $:/state/demo
+selection: Beta
++
+title: Output
+
+<$button setTitle="$:/state/demo" setField="selection" setTo="Alpha" selectedClass="sel">Alpha</$button><$button setTitle="$:/state/demo" setField="selection" setTo="Beta" selectedClass="sel">Beta</$button>
++
+title: ExpectedResult
+
+<p><button aria-checked="false" class="">Alpha</button><button aria-checked="true" class=" sel">Beta</button></p>
