@@ -1,0 +1,20 @@
+title: $:/changenotes/5.4.0/#8972/impacts/parenthesised-field-names
+changenote: $:/changenotes/5.4.0/#8972
+created: 20260609193636000
+modified: 20260609193636000
+tags: $:/tags/ImpactNote
+impact-type: compatibility-break
+description: A field name containing round brackets can no longer be used as a filter operator suffix, because `(` now starts a multi value variable operand.
+
+Two filter operators take a field name in the suffix position: `regexp` and `search`. Up to 5.3.8 such a field name could contain round brackets, for example:
+
+```
+[regexp:_cd-work(s)[(?i)suite]]
+[search:_cd-work(s)[suite]]
+```
+
+In 5.4.0 the new `(varname)` operand syntax for [[Multi-Valued Variables]] makes `(` start an operand. The parser now splits such a field name at the `(`, so the filter no longer matches.
+
+This will not be fixed. The two readings of `field(x)`, a field named `field(x)` versus the field `field` with the operand `(x)`, are genuinely ambiguous, so `(` and `)` are reserved in filter operator names and suffixes from 5.4.0 onwards.
+
+Workaround: do not use `(` or `)` in field names that are referenced as a filter operator suffix. Rename the field, for example `_cd-works`.

@@ -1,0 +1,22 @@
+title: Filters/DiffMergePatch4
+description: Tests for diff-merge-patch derived operators
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\define text1()
+The quick brown fox
+\end
+
+\define text2()
+The fast brown fox
+\end
+
+<$text text={{{ [<text1>makepatches::json<text2>] }}}/>
+
++
+title: ExpectedResult
+
+[{"type":"equal","text":"The "},{"type":"delete","text":"quick"},{"type":"insert","text":"fast"},{"type":"equal","text":" brown fox"}]

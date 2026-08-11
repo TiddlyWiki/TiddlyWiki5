@@ -1,11 +1,14 @@
-title: $:/changenotes/5.4.1/#9836
-description: Fix mid-text link cutoff, fix disabling freelinks toggle blanks view, and add configurable MaxLinks cap
-tags: $:/tags/ChangeNote
-release: 5.4.1
-change-type: bugfix
 change-category: plugin
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9836
+change-type: bugfix
+created: 20260710092644515
+description: Freelinks: Fix mid-text link cutoff, fix disabling freelinks toggle blanks view, and add configurable ~MaxLinks cap
 github-contributors: s793016
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9836
+modified: 20260710092700225
+release: 5.4.1
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.1/#9836
+type: text/vnd.tiddlywiki
 
 Fixes correctness and reliability issues in the freelinks plugin.
 
