@@ -211,13 +211,18 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0) && (!this.document.isTiddlyWikiFakeDom);
 	};
 
+EditTextWidget.prototype.assignDomNodeClasses = function() {
+	var classes = this.getAttribute("class","").split(" ");
+	this.engine.domNode.className = classes.join(" ").trim();
+};
+
 	/*
 	Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 	*/
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
 			this.refreshSelf();
 			return true;
 		} else if(changedTiddlers[this.editRefreshTitle]) {
@@ -225,6 +230,8 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
+		} else if(changedAttributes["class"]) {
+			this.assignDomNodeClasses();
 		}
 		this.engine.fixHeight();
 		if(this.editShowToolbar) {
