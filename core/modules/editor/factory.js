@@ -210,15 +210,31 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editShowToolbar = this.wiki.getTiddlerText(ENABLE_TOOLBAR_TITLE,"yes");
 		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0) && (!this.document.isTiddlyWikiFakeDom);
 	};
-
-	EditTextWidget.prototype.assignDomNodeClasses = function() {
-		var classes = this.getAttribute("class","").split(/\s+/).filter(Boolean);
-		var origClasses = this.engine.domNode.className.split(/\s+/).filter(Boolean);
-		var newClasses = classes.filter(function(className, index) {
-			return origClasses.indexOf(className) === -1 &&
-				classes.indexOf(className) === index;
+	
+	EditTextWidget.prototype.updateDomNodeClasses = function() {
+		var domNodeClasses = this.engine.domNode.className.split(/\s+/).filter(Boolean);
+		var oldClasses = this.editClass.split(/\s+/).filter(Boolean);
+		var newClasses;
+	
+		this.editClass = this.getAttribute("class","");
+		newClasses = this.editClass.split(/\s+/).filter(Boolean);
+	
+		// Remove classes assigned from the old value of the class attribute
+		$tw.utils.each(oldClasses,function(oldClass) {
+			var i = domNodeClasses.indexOf(oldClass);
+			if(i !== -1) {
+				domNodeClasses.splice(i,1);
+			}
 		});
-		this.engine.domNode.className = origClasses.concat(newClasses).join(" ");
+	
+		// Add new classes from the updated class attribute
+		$tw.utils.each(newClasses,function(newClass) {
+			if(domNodeClasses.indexOf(newClass) === -1) {
+				domNodeClasses.push(newClass);
+			}
+		});
+	
+		this.engine.domNode.className = domNodeClasses.join(" ");
 	};
 
 	/*
@@ -237,7 +253,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			this.updateEditor(editInfo.value,editInfo.type);
 		}
 		if(changedAttributes["class"]) {
-			this.assignDomNodeClasses();
+			this.updateDomNodeClasses();
 		}
 		this.engine.fixHeight();
 		if(this.editShowToolbar) {
