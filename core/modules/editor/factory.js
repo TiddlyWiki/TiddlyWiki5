@@ -211,10 +211,10 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0) && (!this.document.isTiddlyWikiFakeDom);
 	};
 
-EditTextWidget.prototype.assignDomNodeClasses = function() {
-	var classes = this.getAttribute("class","").split(" ");
-	this.engine.domNode.className = classes.join(" ").trim();
-};
+	EditTextWidget.prototype.assignDomNodeClasses = function() {
+		var classes = this.getAttribute("class","").split(" ");
+		this.engine.domNode.className = classes.join(" ").trim();
+	};
 
 	/*
 	Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
