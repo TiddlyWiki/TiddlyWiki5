@@ -1,0 +1,48 @@
+created: 20260301000418824
+description: Procedure calls with static attributes
+modified: 20260301031128810
+tags: $:/tags/wiki-test-spec
+title: TestCases/Calls/ProcedureStaticAttributes
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Positional, old style colon named parameters, and new-style equals sign named parameters support static values
++
+title: Output
+
+\procedure p(a1) <$text text=<<a1>>/>
+
+<<p foo1>> -
+<<p a1:foo2>> -
+<<p a1=foo3>>
+
+<<p "foo 4">> -
+<<p a1:"foo 5">> -
+<<p a1="foo 6">>
+
+<<p 'foo 7'>> -
+<<p a1:'foo 8'>> -
+<<p a1='foo 9'>>
+
+<<p """foo 10""">> -
+<<p a1:"""foo 11""">> -
+<<p a1="""foo 12""">>
+
+<<p [[foo 13]]>> -
+<<p a1:[[foo 14]]>> -
+<<p a1=[[foo 15]]>>
++
+title: ExpectedResult
+
+<p>foo1 -
+foo2 -
+foo3</p><p>foo 4 -
+foo 5 -
+foo 6</p><p>foo 7 -
+foo 8 -
+foo 9</p><p>foo 10 -
+foo 11 -
+foo 12</p><p>foo 13 -
+foo 14 -
+foo 15</p>

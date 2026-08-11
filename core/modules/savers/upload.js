@@ -28,7 +28,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 		uploadWithUrlOnly = this.wiki.getTextReference("$:/UploadWithUrlOnly") || "no",
 		url = this.wiki.getTextReference("$:/UploadURL");
 	// Bail out if we don't have the bits we need
-	if (uploadWithUrlOnly === "yes") {
+	if(uploadWithUrlOnly === "yes") {
 		// The url is good enough. No need for a username and password.
 		// Assume the server uses some other kind of auth mechanism.
 		if(!url || url.toString().trim() === "") {
@@ -48,7 +48,6 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	}
 	// Assemble the header
 	var boundary = "---------------------------" + "AaB03x";
-	var uploadFormName = "UploadPlugin";
 	var head = [];
 	head.push("--" + boundary + "\r\nContent-disposition: form-data; name=\"UploadPlugin\"\r\n");
 	head.push("backupDir=" + backupDir + ";user=" + username + ";password=" + password + ";uploaddir=" + uploadDir + ";;"); 

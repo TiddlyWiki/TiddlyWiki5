@@ -103,7 +103,7 @@ Commander.prototype.executeNextCommand = function() {
 					c = new command.Command(params,this);
 					err = c.execute();
 					if(err && typeof err.then === "function") {
-						err.then(e => { e ? this.callback(e) : this.executeNextCommand(); });
+						err.then((e) => { e ? this.callback(e) : this.executeNextCommand(); });
 					} else if(err) {
 						this.callback(err);
 					} else {
@@ -120,7 +120,7 @@ Commander.prototype.executeNextCommand = function() {
 					});
 					err = c.execute();
 					if(err && typeof err.then === "function") {
-						err.then(e => { if(e) this.callback(e); });
+						err.then((e) => { if(e) this.callback(e); });
 					} else if(err) {
 						this.callback(err);
 					}

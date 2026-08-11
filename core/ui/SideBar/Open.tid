@@ -6,7 +6,6 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \define lingo-base() $:/language/CloseAll/
 
 \whitespace trim
-\define lingo-base() $:/language/CloseAll/
 
 \define content()
 <div class="tc-sidebar-tab-open-item">

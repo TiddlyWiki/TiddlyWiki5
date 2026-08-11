@@ -93,7 +93,7 @@ exports.parseLink = function(source,pos) {
 		splitPos = null;
 	}
 	// Pull out the tooltip and URL
-	var tooltip, URL, urlStart;
+	var URL, urlStart;
 	textNode.start = pos;
 	if(splitPos) {
 		urlStart = splitPos + 1;

@@ -1,0 +1,18 @@
+created: 20230615045132842
+modified: 20260221103950145
+original-modified: 20230615045231048
+tags: WikiText [[Widget Attributes]]
+title: Filtered Attribute Values
+ja-title: フィルタリングした属性値
+type: text/vnd.tiddlywiki
+
+フィルタリングした属性値は、[[フィルタ式|Filter Expression]]を三重の中括弧で囲んで示します。値は結果リストの最初の項目になります。リストが空の場合は空文字列になります。
+
+<<.from-version "5.2.2">> 読みやすさを向上させるために、フィルタした属性内で空白が許可されている場所にはどこにでも改行を含めることができます。
+
+この例では、値にプレフィックスを追加する方法を示します:
+
+```
+<$text text={{{ [<currentTiddler>addprefix[$:/myprefix/]] }}} />
+```
+<<.warning "属性の値は、結果リストの最初の項目のテキストそのものになります。そのテキストに含まれるWiki構文はそのまま残ります。">>

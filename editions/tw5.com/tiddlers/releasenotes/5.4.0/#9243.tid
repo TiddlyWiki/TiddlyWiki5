@@ -4,5 +4,5 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: theme
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9243
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9243 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9625
 github-contributors: Leilei332

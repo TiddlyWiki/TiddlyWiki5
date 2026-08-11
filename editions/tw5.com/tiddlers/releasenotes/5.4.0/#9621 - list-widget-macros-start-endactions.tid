@@ -1,0 +1,16 @@
+change-category: hackability
+change-type: enhancement
+created: 20260126125300
+description: Add start- and endactions to link-widget, list-links-draggable and list-tagged-draggable macros
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9621
+modified: 20260126125300
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9621
+type: text/vnd.tiddlywiki
+
+* [[LinkWidget]] new Attributes and Action Variables section
+* [[list-links-draggable Macro]] new Attributes
+* [[list-tagged-draggable Macro]] new Attributes
+

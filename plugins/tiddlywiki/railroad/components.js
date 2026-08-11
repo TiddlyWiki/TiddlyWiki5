@@ -34,18 +34,18 @@ Component.prototype.initialiseWithChildren = function(type,content) {
 	this.type = type;
 	// Force the content to be an array
 	this.children = $tw.utils.isArray(content) ? content : [content];
-}
+};
 
 // Return an array of the SVG strings of an array of children
 Component.prototype.getSvgOfChildren = function() {
 	return this.children.map(function(child) {
 		return child.toSvg();
 	});
-}
+};
 
 Component.prototype.toSvg = function() {
 	return "";
-}
+};
 
 Component.prototype.debug = function(output,indent) {
 	output.push(indent);
@@ -75,7 +75,7 @@ Component.prototype.debug = function(output,indent) {
 	if(this.children) {
 		this.debugArray(this.children,output,contentIndent);
 	}
-  	// Add the separator if there is one
+	// Add the separator if there is one
 	if(this.separator) {
 		output.push(indent);
 		output.push("(separator)\n");
@@ -97,7 +97,7 @@ Component.prototype.debugArray = function(array,output,indent) {
 			item.debug(output,indent);
 		}
 	}
-}
+};
 
 var toSingleChild = function(content) {
 	if($tw.utils.isArray(content)) {
@@ -106,9 +106,9 @@ var toSingleChild = function(content) {
 			return content[0];
 		} else {
 			// Never allow an empty sequence
-		  	if(content.length === 0) {
-  				content.push(new Dummy());
-		  	}
+			if(content.length === 0) {
+				content.push(new Dummy());
+			}
 			// Wrap multiple children into a single sequence component
 			return new Sequence(content);
 		}
@@ -116,7 +116,7 @@ var toSingleChild = function(content) {
 		// Already single
 		return content;
 	}
-}
+};
 
 /////////////////////////// Leaf components
 
@@ -128,7 +128,7 @@ Comment.prototype = new Component();
 
 Comment.prototype.toSvg = function() {
 	return railroad.Comment(this.text);
-}
+};
 
 var Dummy = function() {
 	this.initialiseLeaf("Dummy");
@@ -138,7 +138,7 @@ Dummy.prototype = new Component();
 
 Dummy.prototype.toSvg = function() {
 	return railroad.Skip();
-}
+};
 
 var Nonterminal = function(text) {
 	this.initialiseLeaf("Nonterminal",text);
@@ -148,7 +148,7 @@ Nonterminal.prototype = new Component();
 
 Nonterminal.prototype.toSvg = function() {
 	return railroad.NonTerminal(this.text);
-}
+};
 
 var Terminal = function(text) {
 	this.initialiseLeaf("Terminal",text);
@@ -158,7 +158,7 @@ Terminal.prototype = new Component();
 
 Terminal.prototype.toSvg = function() {
 	return railroad.Terminal(this.text);
-}
+};
 
 /////////////////////////// Components with one child
 
@@ -172,7 +172,7 @@ Optional.prototype = new Component();
 Optional.prototype.toSvg = function() {
 	// Call Optional(component,"skip")
 	return railroad.Optional(this.child.toSvg(), this.normal ? undefined : "skip");
-}
+};
 
 var OptionalRepeated = function(content,separator,normal,wantArrow) {
 	this.initialiseWithChild("OptionalRepeated",content);
@@ -188,7 +188,7 @@ OptionalRepeated.prototype.toSvg = function() {
 	var separatorSvg = this.separator ? this.separator.toSvg() : null;
 	var skip = this.normal ? undefined : "skip";
 	return railroad.ZeroOrMore(this.child.toSvg(),separatorSvg,skip,this.wantArrow);
-}
+};
 
 var Repeated = function(content,separator,wantArrow) {
 	this.initialiseWithChild("Repeated",content);
@@ -202,7 +202,7 @@ Repeated.prototype.toSvg = function() {
 	// Call OneOrMore(component,separator)
 	var separatorSvg = this.separator ? this.separator.toSvg() : null;
 	return railroad.OneOrMore(this.child.toSvg(),separatorSvg,this.wantArrow);
-}
+};
 
 var Link = function(content,options) {
 	this.initialiseWithChild("Link",content);
@@ -213,7 +213,7 @@ Link.prototype = new Component();
 
 Link.prototype.toSvg = function() {
 	return railroad.Link(this.child.toSvg(),this.options);
-}
+};
 
 var Transclusion = function(content) {
 	this.initialiseWithChild("Transclusion",content);
@@ -223,7 +223,7 @@ Transclusion.prototype = new Component();
 
 Transclusion.prototype.toSvg = function() {
 	return this.child.toSvg();
-}
+};
 
 /////////////////////////// Components with an array of children
 
@@ -238,7 +238,7 @@ Root.prototype.toSvg = function(options) {
 	args.unshift(options);
 	// Call Diagram(options,component1,component2,...)
 	return railroad.Diagram.apply(null,args);
-}
+};
 
 var Sequence = function(content) {
 	this.initialiseWithChildren("Sequence",content);
@@ -249,7 +249,7 @@ Sequence.prototype = new Component();
 Sequence.prototype.toSvg = function() {
 	// Call Sequence(component1,component2,...)
 	return railroad.Sequence.apply(null,this.getSvgOfChildren());
-}
+};
 
 var Choice = function(content,normal) {
 	this.initialiseWithChildren("Choice",content.map(toSingleChild));
@@ -266,7 +266,7 @@ Choice.prototype.toSvg = function() {
 	var args = this.getSvgOfChildren();
 	args.unshift(this.normal);
 	return railroad.Choice.apply(null,args);
-}
+};
 
 /////////////////////////// Exports
 

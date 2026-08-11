@@ -1,0 +1,69 @@
+created: 20251108075645447
+modified: 20260201043953311
+title: Writing stylesheets in vanilla CSS
+type: text/vnd.tiddlywiki
+
+<<.from-version 5.4.0>> Before v5.4.0, theme developers have to mix wikitext syntax with CSS syntax when writing stylesheets to intergrate Tiddlywiki color palettes and theme settings. With the introduction of [[Core CSS Variables]] in v5.4.0, theme developers can intergrate most Tiddlywiki palettes with vanilla CSS.
+
+! Getting Tiddlywiki palette colors
+Tiddlywiki's custom properties for colors are prefixed `--tpc-`. Before v5.4.0, theme developers have to use the following wikitext to get a color value of a palette:
+
+```
+.tag {
+	background: <<colour tag-background>>;
+}
+```
+
+Since v5.4.0, theme developers can use the following CSS to get the palette color:
+
+```css
+.tag {
+	background: var(--tp-color-tag-background);
+}
+```
+
+! Getting and processing Tiddlywiki CSS settings
+See [[Core CSS Variables]] for the available CSS variables. Before v5.4.0, theme developers have to use macros with filters to get and process theme settings:
+
+```
+.tc-sidebar-header {
+	padding: 14px;
+	min-height: 32px;
+	margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+	transition:  min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
+}
+```
+
+Since v5.4.0, the theme settings are also available as the CSS variables, so theme developers can use the following code:
+
+```css
+.tc-sidebar-header {
+	padding: 14px;
+	min-height: 32px;
+	margin-top: var(--tp-story-top);
+	transition: min-height var(--tp-animation-duration) ease-in-out, padding-top var(--tp-animation-duration) ease-in-out, padding-bottom var(--tp-animation-duration) ease-in-out;
+}
+```
+
+! Limits
+CSS variables can only be used in rules, while wikitext can be used everywhere. See this example:
+
+Old way of using wikitext in media query definitions:
+
+```
+\define sidebarbreakpoint()
+<$text text={{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}/>
+\end
+
+@media (min-width: <<sidebarbreakpoint>>) {
+	/* CSS rules */
+}
+```
+
+While using CSS variables in media quert definitions doesn't work at all:
+
+```css
+@media (min-width: var(--tp-sidebar-breakpoint)) {
+	/* Doesn't work */
+}
+```

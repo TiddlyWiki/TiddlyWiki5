@@ -1,0 +1,19 @@
+created: 20140910102845245
+modified: 20260213112056600
+original-modified: 20140910102845245
+tags: Articles
+title: "Notizen mit TiddlyWiki systemübergreifend nutzen" by Michael Sonntag
+ja-title: Michael Sonntagによる"システム間でTiddlyWikiのメモを使用する"
+url: http://michaelsonntag.net/notizen-mit-tiddlywiki-systemuebergreifend-nutzen
+
+TiddlyWikiの使い方のクイックガイド(ドイツ語)
+
+{{!!url}}
+
+<<<
+異なるコンピュータプラットフォーム(たとえPCとAndroidだけであっても)を使っている人なら誰でも、アプリやサービスに頼ることなく、デバイス間でメモを同期したいという気持ちが分かるでしょう。私もまさにそう思っており、だからこそ常に完璧なソリューションを探し求めています。
+
+必要なもののほとんどはTiddlyWikiで見つかりました。名前の通り、TiddlyWikiはWikiシステムです。他のWikiとは異なり、TiddlyWikiはブラウザで動作する単一のHTMLファイルで構成されているため、すべての最新OSで使用できます。また、単一のファイルなので、一般的なクラウドサービス(Dropbox、Google Drive、ownCloud)やFTP経由で簡単に同期でき、USBドライブからもアクセスできます。
+<<<
+
+(Google翻訳によるドイツ語からの翻訳)

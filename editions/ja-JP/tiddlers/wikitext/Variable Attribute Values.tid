@@ -1,0 +1,19 @@
+created: 20230615045239825
+modified: 20260404105516691
+original-modified: 20230726151053593
+tags: [[Widget Attributes]] WikiText
+title: Variable Attribute Values
+ja-title: 変数の属性値
+type: text/vnd.tiddlywiki
+
+変数の属性値は、[[マクロ呼び出し|Macro Calls]]を二重山括弧で囲んで示します。例:
+
+```
+<div title=<<MyMacro "Brian">>>
+...
+</div>
+```
+
+ウィジェットの属性を介して呼び出される変数の動作は、[[通常のWikiテキストを介して呼び出される|Behaviour of variables invoked via normal wikitext]]場合とは異なります。さらに、その動作は変数の宣言方法によっても異なります:
+
+{{Behaviour of variables invoked via widget attributes}}

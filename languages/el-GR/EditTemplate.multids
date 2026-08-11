@@ -1,7 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: Αυτό το tiddler εμφανίζει περιεχόμενο που είναι αποθηκευμένο εκτός του κυρίου αρχείου του TiddlyWiki. Μπορείς να τροποποιήσεις τις ετικέτες και τα πεδία, αλλά δεν μπορείς να τροποποιήσεις άμεσα το ίδιο το περιεχόμενο
-Body/Placeholder: Πληκτρολόγησε το κείμενο για αυτό το tiddler
+Body/Placeholder: Γράψε το κείμενο για αυτό το tiddler
 Body/Preview/Type/DiffCurrent: διαφορές από το παρόν
 Body/Preview/Type/DiffShadow: διαφορές από σκιώδες tiddler (εάν υπάρχουν)
 Body/Preview/Type/Output: αποτέλεσμα
@@ -17,7 +17,7 @@ Fields/Add/Dropdown/User: Πεδία του χρήστη
 Fields/Add/Name/Placeholder: όνομα πεδίου
 Fields/Add/Prompt: Πρόσθεσε ένα νέο πεδίο:
 Fields/Add/Value/Placeholder: τιμή πεδίου
-Shadow/OverriddenWarning: Αυτό είναι ένα τροποποιημένο σκιώδες tiddler. Μπορείς να διαγράψεις αυτό το tiddler για να ανακαλέσεις στην προκαθορισμένη εκδοχή στο <<pluginLink>> 
+Shadow/OverriddenWarning: Αυτό είναι ένα τροποποιημένο σκιώδες tiddler. Μπορείς να διαγράψεις αυτό το tiddler για να ανακαλέσεις στην προκαθορισμένη εκδοχή στο <<pluginLink>>
 Shadow/Warning: Αυτό είναι ένα σκιώδες tiddler. Οποιεσδήποτε αλλαγές κάνετε θα παρακάμψουν την προκαθορισμένη εκδοχή του πρόσθετου <<pluginLink>>
 Tags/Add/Button: προσθήκη
 Tags/Add/Button/Hint: προσθήκη ετικέτας

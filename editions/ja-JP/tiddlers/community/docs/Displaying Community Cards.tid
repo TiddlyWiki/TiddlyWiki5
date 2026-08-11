@@ -1,0 +1,28 @@
+title: Displaying Community Cards
+ja-title: コミュニティカードの表示
+tags: [[Community Cards]]
+modified: 20260207112415265
+original-modified: 20250909171928024
+created: 20250909171928024
+
+!! 人々の情報を表すカード
+
+<<community-card-pill-person title:"@Jermolene">>や<<community-card-pill-person title:"@ericshulman">>はインラインカードです。文の途中でも使えます。
+
+これはインラインカードのスタックです:
+
+<<community-card-pill-stack-person>>
+
+フルフォーマットのカードです:
+
+<<community-card-person title:"@Jermolene">>
+
+該当する人がいない場合のカードの表示です:
+
+<<community-card-person title:"@MissingPerson">>
+
+!! チームの情報を表すカード
+
+プロジェクトチーム用のカードです:
+
+<<community-card-team title:"Project Team">>

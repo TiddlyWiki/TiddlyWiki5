@@ -24,7 +24,6 @@ KeyboardWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 KeyboardWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
@@ -45,12 +44,12 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	]);
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 };
 
 KeyboardWidget.prototype.handleChangeEvent = function(event) {
-	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+	if($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
 		return true;
 	}
 
@@ -59,10 +58,10 @@ KeyboardWidget.prototype.handleChangeEvent = function(event) {
 		var handled = this.invokeActions(this,event);
 		if(this.actions) {
 			var variables = {
-					"event-key": event.key,
-					"event-code": event.code,
-					"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event)
-				};
+				"event-key": event.key,
+				"event-code": event.code,
+				"modifier": $tw.keyboardManager.getEventModifierKeyDescriptor(event)
+			};
 			if(keyInfo.keyDescriptor) {
 				variables["event-key-descriptor"] = keyInfo.keyDescriptor;
 			}
@@ -76,7 +75,7 @@ KeyboardWidget.prototype.handleChangeEvent = function(event) {
 		return true;
 	}
 	return false;
-}
+};
 
 KeyboardWidget.prototype.dispatchMessage = function(event) {
 	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler")});

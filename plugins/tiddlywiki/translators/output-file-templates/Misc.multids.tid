@@ -4,6 +4,7 @@ title: $:/plugins/tiddlywiki/translators/templates/Misc.multids
 -[all[tiddlers]prefix[$:/language/Buttons/]]
 -[all[tiddlers]prefix[$:/language/ControlPanel/]]
 -[all[tiddlers]prefix[$:/language/Date/]]
+-[all[tiddlers]prefix[$:/language/Draft/]]
 -[all[tiddlers]prefix[$:/language/Docs/]]
 -[all[tiddlers]prefix[$:/language/EditTemplate/]]
 -[all[tiddlers]prefix[$:/language/Exporters/]]

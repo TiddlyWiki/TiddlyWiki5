@@ -10,13 +10,12 @@ Filter operators for open location code conversions
 "use strict";
 
 var openlocationcode = require("$:/plugins/tiddlywiki/geospatial/openlocationcode.js"),
-	turf = require("$:/plugins/tiddlywiki/geospatial/turf.js"),
-	geotools = require("$:/plugins/tiddlywiki/geospatial/geotools.js");
+	turf = require("$:/plugins/tiddlywiki/geospatial/turf.js");
 
 exports["olc-decode"] = function(source,operator,options) {
 	var olc;
 	try {
-		olc = openlocationcode.decode(operator.operands[0] || "")
+		olc = openlocationcode.decode(operator.operands[0] || "");
 	} catch(e) {
 		return [];
 	}
@@ -44,7 +43,7 @@ exports["olc-encode"] = function(source,operator,options) {
 	try {
 		olc = openlocationcode.encode(lat,long,codelength);
 	} catch(e) {
-		return []
+		return [];
 	}
 	return [olc];
 };

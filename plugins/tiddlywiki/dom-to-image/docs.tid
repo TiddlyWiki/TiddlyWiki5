@@ -1,0 +1,66 @@
+title: $:/plugins/tiddlywiki/dom-to-image/docs
+caption: tm-save-dom-to-image message
+
+!! `tm-save-dom-to-image` message
+
+The `tm-save-dom-to-image` message uses a [[third-party library|https://github.com/1904labs/dom-to-image-more]] to save a DOM node as an image. The image can be saved to a file or to a tiddler.
+
+Note that there are some limitations to saving content loaded from external domains due to the same-origin policy. See the documentation for more details.
+
+The following parameters are supported:
+
+|!Parameters |!Description |
+|''selector'' |CSS selector identifying the DOM node to be saved as an image (defaults to `body`). If multiple DOM nodes are returned by the selector then the first one is used |
+|''format'' |Save format: ''png'', ''jpeg'' or ''svg'' (defaults to ''png'') |
+|''quality'' |Optional quality 0 to 1 for JPEG images (note that the default quality is 1, and this default is applied even if the quality is explicitly specified as `0`. To force a low quality JPEG image it is therefore necessary to specify a small non-zero value such as `0.001`) |
+|''scale'' |Optional scale factor for the image (defaults to 1) |
+|''width'' |Optional width of the image in pixels |
+|''height'' |Optional height of the image in pixels |
+|''save-file'' |Optional filename to save the image to |
+|''save-title'' |Optional title of tiddler to save the image to |
+|''oncompletion'' |Optional action string to be invoked when the save operation has completed |
+|''var-*'' |Variables to be passed to the completion handler (without the "var-" prefix) |
+
+!! Examples
+
+<$button>
+<$action-sendmessage
+	$message="tm-save-dom-to-image"
+	selector="body.tc-body"
+	scale="2"
+	save-file="screenshot.png"
+/>
+Save the screen as an image file in PNG format
+</$button>
+
+<$button>
+<$action-sendmessage
+	$message="tm-save-dom-to-image"
+	selector="body.tc-body"
+	scale="2"
+	save-title="$:/temp/screenshot.png"
+/>
+Save the screen as an image tiddler in PNG format
+</$button> [[$:/temp/screenshot.png]]
+
+<$button>
+<$action-sendmessage
+	$message="tm-save-dom-to-image"
+	selector="body.tc-body"
+	format="jpeg"
+	scale="1"
+	quality="0.01"
+	save-title="$:/temp/screenshot.jpeg"
+/>
+Save the screen as an image tiddler in low quality JPEG format
+</$button> [[$:/temp/screenshot.jpeg]]
+
+<$button>
+<$action-sendmessage
+	$message="tm-save-dom-to-image"
+	selector="body.tc-body"
+	format="svg"
+	save-title="$:/temp/screenshot.svg"
+/>
+Save the screen as an image tiddler in SVG format
+</$button> [[$:/temp/screenshot.svg]]

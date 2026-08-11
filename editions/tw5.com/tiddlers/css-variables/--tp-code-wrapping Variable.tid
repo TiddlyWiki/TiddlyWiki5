@@ -1,0 +1,8 @@
+caption: --tp-code-wrapping
+created: 20260122110618231
+modified: 20260130045345387
+tags: [[Core CSS Variables]]
+title: --tp-code-wrapping CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-code-wrapping` CSS variable represents the "Wrap long lines in code blocks" setting in Theme Tweaks. Its value is `pre` when the setting is set to "No", and `pre-wrap` when set to "Yes".

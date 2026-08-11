@@ -94,7 +94,7 @@ PutSaver.prototype.save = function(text,method,callback) {
 				} else if(status === 403) { // permission denied
 					errorMsg = $tw.language.getString("Error/PutForbidden");
 				}
-				if (xhr.responseText) {
+				if(xhr.responseText) {
 					// treat any server response like a plain text error explanation
 					errorMsg = errorMsg + "\n\n" + xhr.responseText;
 				}

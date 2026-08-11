@@ -1,0 +1,14 @@
+title: $:/changenotes/5.4.0/#9488
+description: Refactor base64 utility functions
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9488
+github-contributors: Leilei332
+
+Refactor base64 utility functions in [[$:/core/modules/utils/utils.js]] to make it easier for maintainence.
+
+* Split base64 utility functions to two platforms
+* Use `TextEncoder` and `TextDecoder` api in Node.js
+* Do not export `base64ToBytes` and `bytesToBase64`

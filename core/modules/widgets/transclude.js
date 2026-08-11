@@ -25,23 +25,33 @@ Render this widget into the DOM
 */
 TranscludeWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
-	this.computeAttributes();
+	this.computeAttributes({asList: true});
 	this.execute();
 	try {
 		this.renderChildren(parent,nextSibling);
 	} catch(error) {
 		if(error instanceof $tw.utils.TranscludeRecursionError) {
 			// We were infinite looping.
-			// We need to try and abort as much of the loop as we can, so we will keep "throwing" upward until we find a transclusion that has a different signature.
-			// Hopefully that will land us just outside where the loop began. That's where we want to issue an error.
-			// Rendering widgets beneath this point may result in a freezing browser if they explode exponentially.
+			// We need to try and abort as much of the loop as we
+			// can, so we will keep "throwing" upward until we find
+			// a transclusion that has a different signature.
+			// Hopefully that will land us just outside where the
+			// loop began. That's where we want to issue an error.
+			// Rendering widgets beneath this point may result in a
+			// freezing browser if they explode exponentially.
 			var transcludeSignature = this.getVariable("transclusion");
 			if(this.getAncestorCount() > $tw.utils.TranscludeRecursionError.MAX_WIDGET_TREE_DEPTH - 50) {
-				// For the first fifty transcludes we climb up, we simply collect signatures.
-				// We're assuming that those first 50 will likely include all transcludes involved in the loop.
+				// For the first fifty transcludes we climb up,
+				// we simply collect signatures.
+				// We're assuming those first 50 will likely
+				// include all transcludes involved in the loop.
 				error.signatures[transcludeSignature] = true;
 			} else if(!error.signatures[transcludeSignature]) {
-				// Now that we're past the first 50, let's look for the first signature that wasn't in the loop. That'll be where we print the error and resume rendering.
+				// Now that we're past the first 50, look for
+				// the first signature that wasn't in that loop.
+				// That's where we print the error and resume
+				// rendering.
+				this.removeChildDomNodes();
 				this.children = [this.makeChildWidget({type: "error", attributes: {
 					"$message": {type: "string", value: $tw.language.getString("Error/RecursiveTransclusion")}
 				}})];
@@ -148,8 +158,10 @@ Collect string parameters
 TranscludeWidget.prototype.collectStringParameters = function() {
 	var self = this;
 	this.stringParametersByName = Object.create(null);
+	this.multiValuedParametersByName = Object.create(null);
 	if(!this.legacyMode) {
 		$tw.utils.each(this.attributes,function(value,name) {
+			var attrName = name; // Save original attribute name for MVV lookup
 			if(name.charAt(0) === "$") {
 				if(name.charAt(1) === "$") {
 					// Attributes starting $$ represent parameters starting with a single $
@@ -160,6 +172,9 @@ TranscludeWidget.prototype.collectStringParameters = function() {
 				}
 			}
 			self.stringParametersByName[name] = value;
+			if(self.multiValuedAttributes && self.multiValuedAttributes[attrName]) {
+				self.multiValuedParametersByName[name] = self.multiValuedAttributes[attrName];
+			}
 		});
 	}
 };
@@ -199,7 +214,6 @@ TranscludeWidget.prototype.collectSlotFillParameters = function() {
 Get transcluded details as an object {text:,type:}
 */
 TranscludeWidget.prototype.getTransclusionTarget = function() {
-	var self = this;
 	var text;
 	// Return the text and type of the target
 	if(this.hasAttribute("$variable")) {
@@ -217,13 +231,13 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	} else {
 		// Transcluding a text reference
 		var parserInfo = this.wiki.getTextReferenceParserInfo(
-						this.transcludeTitle,
-						this.transcludeField,
-						this.transcludeIndex,
-						{
-							subTiddler: this.transcludeSubTiddler,
-							defaultType: this.transcludeType
-						});
+			this.transcludeTitle,
+			this.transcludeField,
+			this.transcludeIndex,
+			{
+				subTiddler: this.transcludeSubTiddler,
+				defaultType: this.transcludeType
+			});
 		return {
 			text: parserInfo.text,
 			type: parserInfo.type,
@@ -236,7 +250,6 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 Get transcluded parse tree nodes as an object {text:,type:,parseTreeNodes:,parseAsInline:}
 */
 TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
-	var self = this;
 	var parser;
 	// Get the parse tree
 	if(this.hasAttribute("$variable")) {
@@ -271,7 +284,7 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 								type: "text",
 								text: this.transcludeFunctionResult
 							}]
-						}
+						};
 					}
 				} else {
 					var cacheKey = (parseAsInline ? "inlineParser" : "blockParser") + (this.transcludeType || "");
@@ -296,14 +309,23 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 							],
 							source: parser.source,
 							type: parser.type
-						}
+						};
 						$tw.utils.each(srcVariable.params,function(param) {
 							var name = param.name;
 							// Parameter names starting with dollar must be escaped to double dollars
 							if(name.charAt(0) === "$") {
 								name = "$" + name;
 							}
-							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"])
+							if(param.defaultType === "multivalue-variable") {
+								// Construct MVV attribute for the default
+								var mvvNode = {type: "transclude", isMVV: true, attributes: {}, orderedAttributes: []};
+								$tw.utils.addAttributeToParseTreeNode(mvvNode,"$variable",param.defaultVariable);
+								$tw.utils.addAttributeToParseTreeNode(parser.tree[0],{
+									name: name, type: "macro", isMVV: true, value: mvvNode
+								});
+							} else {
+								$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"]);
+							}
 						});
 					} else if(srcVariable && !srcVariable.isFunctionDefinition) {
 						// For macros and ordinary variables, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
@@ -316,9 +338,9 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 							],
 							source: parser.source,
 							type: parser.type
-						}
+						};
 						$tw.utils.each(variableInfo.params,function(param) {
-							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],"__" + param.name + "__",param.value)
+							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],"__" + param.name + "__",param.value);
 						});
 					}
 				}
@@ -327,14 +349,14 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 	} else {
 		// Transcluding a text reference
 		parser = this.wiki.parseTextReference(
-						this.transcludeTitle,
-						this.transcludeField,
-						this.transcludeIndex,
-						{
-							parseAsInline: parseAsInline,
-							subTiddler: this.transcludeSubTiddler,
-							defaultType: this.transcludeType
-						});
+			this.transcludeTitle,
+			this.transcludeField,
+			this.transcludeIndex,
+			{
+				parseAsInline: parseAsInline,
+				subTiddler: this.transcludeSubTiddler,
+				defaultType: this.transcludeType
+			});
 	}
 	// Return the parse tree
 	return {
@@ -354,7 +376,11 @@ TranscludeWidget.prototype.getOrderedTransclusionParameters = function() {
 	// Collect the parameters
 	for(var name in this.stringParametersByName) {
 		var value = this.stringParametersByName[name];
-		result.push({name: name, value: value});
+		var param = {name: name, value: value};
+		if(this.multiValuedParametersByName[name]) {
+			param.multiValue = this.multiValuedParametersByName[name];
+		}
+		result.push(param);
 	}
 	// Sort numerical parameter names first
 	result.sort(function(a,b) {
@@ -384,10 +410,16 @@ Fetch the value of a parameter
 */
 TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaultValue) {
 	if(name in this.stringParametersByName) {
+		if(this.multiValuedParametersByName[name]) {
+			return this.multiValuedParametersByName[name];
+		}
 		return this.stringParametersByName[name];
 	} else {
 		var name = "" + index;
 		if(name in this.stringParametersByName) {
+			if(this.multiValuedParametersByName[name]) {
+				return this.multiValuedParametersByName[name];
+			}
 			return this.stringParametersByName[name];
 		}
 	}
@@ -431,7 +463,7 @@ Return whether this transclusion should be visible to the slot widget
 */
 TranscludeWidget.prototype.hasVisibleSlots = function() {
 	return this.getAttribute("$fillignore","no") === "no";
-}
+};
 
 /*
 Compose a string comprising the title, field and/or index to identify this transclusion for recursion detection
@@ -466,7 +498,7 @@ TranscludeWidget.prototype.functionNeedsRefresh = function() {
 	var variableInfo = this.getVariableInfo(this.transcludeVariable,{params: this.getOrderedTransclusionParameters()});
 	var newResult = (variableInfo.resultList ? variableInfo.resultList[0] : variableInfo.text) || "";
 	return oldResult !== newResult;
-}
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering

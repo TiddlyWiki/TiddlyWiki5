@@ -1,0 +1,13 @@
+change-category: nodejs
+change-type: feature
+created: 20260120154249928
+description: Allows server routes to support multiple HTTP methods.
+github-contributors: saqimtiaz
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9207
+modified: 20260120160159661
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9207
+type: text/vnd.tiddlywiki
+
+Allows server routes to support multiple HTTP methods by introducing an `exports.methods` array.

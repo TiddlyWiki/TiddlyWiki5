@@ -14,12 +14,12 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 			this.updateCallback = updateCallback;
 			this.resizeHandlers = new Map();
 			this.dimensionsInfo = [
-				["outer/width", win => win.outerWidth],
-				["outer/height", win => win.outerHeight],
-				["inner/width", win => win.innerWidth],
-				["inner/height", win => win.innerHeight],
-				["client/width", win => win.document.documentElement.clientWidth],
-				["client/height", win => win.document.documentElement.clientHeight]
+				["outer/width", (win) => win.outerWidth],
+				["outer/height", (win) => win.outerHeight],
+				["inner/width", (win) => win.innerWidth],
+				["inner/height", (win) => win.innerHeight],
+				["client/width", (win) => win.document.documentElement.clientWidth],
+				["client/height", (win) => win.document.documentElement.clientHeight]
 			];
 		}
 

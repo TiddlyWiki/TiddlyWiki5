@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9280
+description: Fixed :reverse suffix being ignored by version sort filter
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: bugfix
+change-category: filters
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9280
+github-contributors: Flibbles
+
+When using the version suffix with the sort filter, the reverse flag had no effect. Fixed.

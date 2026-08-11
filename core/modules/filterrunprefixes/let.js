@@ -7,8 +7,6 @@ Assign a value to a variable
 
 \*/
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 /*

@@ -34,7 +34,7 @@ This setting allows a custom alert message to be displayed when an attempt to st
 
 ! Prevent browser from evicting local storage
 
-Permission for local storage persistence: ''{{$:/info/browser/storage/persisted}}''
+Permission for local storage persistence: ''{{$:/state/browser/storage/persisted}}''
 
 The first time a tiddler is saved to local storage a request will be made to prevent automatic eviction of local storage for this site. This means the data will not be cleared unless the user manually clears it.
 

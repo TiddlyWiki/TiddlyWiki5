@@ -9,8 +9,6 @@ Notifier mechanism
 
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
-
 var Notifier = function(wiki) {
 	this.wiki = wiki;
 };

@@ -22,8 +22,7 @@ var Command = function(params,commander,callback) {
 
 Command.prototype.execute = function() {
 	var self = this,
-		fs = require("fs"),
-		path = require("path");
+		fs = require("fs");
 	if(this.params.length < 2) {
 		return "Missing parameters";
 	}

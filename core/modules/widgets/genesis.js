@@ -25,7 +25,7 @@ GenesisWidget.prototype.computeAttributes = function(options) {
 	options.filterFn = function(name) {
 		// Only compute our own attributes which start with a single dollar
 		return name.charAt(0) === "$" && name.charAt(1) !== "$";
-	}
+	};
 	return Widget.prototype.computeAttributes.call(this,options);
 };
 

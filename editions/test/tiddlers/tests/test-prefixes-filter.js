@@ -14,7 +14,7 @@ Tests the reduce prefix and filter.
 
 describe("general filter prefix tests", function() {
 	it("should handle nonexistent prefixes gracefully", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var results = wiki.filterTiddlers("[tag[A]] :nonexistent[tag[B]]");
 		expect(results).toEqual(["Filter Error: Unknown prefix for filter run"]);
 	});
@@ -215,7 +215,7 @@ describe("general filter prefix tests", function() {
 
 describe("'reduce' and 'intersection' filter prefix tests", function() {
 
-	var wiki = new $tw.Wiki();
+	var wiki = $tw.test.wiki();
 
 	wiki.addTiddler({
 		title: "Brownies",
@@ -337,7 +337,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 	it("should handle the reduce operator", function() {
 		var widget = require("$:/core/modules/widgets/widget.js");
 		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
-										   { wiki:wiki, document:$tw.document});
+			{ wiki:wiki, document:$tw.document});
 		rootWidget.makeChildWidgets();
 		var anchorWidget = rootWidget.children[0];
 		rootWidget.setVariable("add-price","[get[price]multiply{!!quantity}add<accumulator>]");
@@ -392,7 +392,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 	it("should handle the :filter prefix and filter operator", function() {
 		var widget = require("$:/core/modules/widgets/widget.js");
 		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
-										   { wiki:wiki, document:$tw.document});
+			{ wiki:wiki, document:$tw.document});
 		rootWidget.makeChildWidgets();
 		var anchorWidget = rootWidget.children[0];
 		rootWidget.setVariable("larger-than-18","[get[text]length[]compare:integer:gteq[18]]");
@@ -448,7 +448,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 	it("should handle macro parameters for filter run prefixes",function() {
 		var widget = require("$:/core/modules/widgets/widget.js");
 		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
-										   { wiki:wiki, document:$tw.document});
+			{ wiki:wiki, document:$tw.document});
 		rootWidget.makeChildWidgets();
 		var anchorWidget = rootWidget.children[0];
 		rootWidget.setVariable("greet","Hello $name$",[{name:"name"}],true);

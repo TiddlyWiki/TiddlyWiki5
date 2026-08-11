@@ -4,7 +4,7 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: deprecation
 change-category: developer
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9251
-github-contributors: Leilei332
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9251 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9622
+github-contributors: Leilei332 saqimtiaz
 
 Deprecate some utility functions. Some of them are moved to [[$:/core/modules/utils/deprecated.js]].

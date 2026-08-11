@@ -10,8 +10,8 @@ exports.name = "extlink";
 
 exports.serialize = function(tree,serialize) {
 	if(tree.type === "text") {
-			return "~" + tree.text;
+		return "~" + tree.text;
 	} else if(tree.type === "element" && tree.tag === "a") {
-			return tree.attributes.href.value;
+		return tree.attributes.href.value;
 	}
 };

@@ -1,0 +1,6 @@
+title: $:/tw5.com/releases/ViewTemplateBodyFilters
+tags: $:/tags/ViewTemplateBodyFilter
+list-before:
+
+[tag[$:/tags/ChangeNote]then[$:/tw5.com/releases/ViewTemplate/body/changenote]]
+[tag[$:/tags/ImpactNote]then[$:/tw5.com/releases/ViewTemplate/body/impactnote]]

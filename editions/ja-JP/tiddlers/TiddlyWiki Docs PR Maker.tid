@@ -1,13 +1,12 @@
 created: 20240313100515958
-modified: 20241222104855231
-original-modified: 20240313103959789
+modified: 20251214111324789
+original-modified: 20251023154747366
 tags: Editions
 title: TiddlyWiki Docs PR Maker
 ja-title: TiddlyWikiドキュメントPRメーカー
 
-[[@saqimtiaz|https://github.com/saqimtiaz/]]が作成した''~TiddlyWikiドキュメントPRメーカー''は、ドキュメントへの貢献と改善を支援するために設計された、tiddlywiki.comの特別エディションです。
-
-https://saqimtiaz.github.io/tw5-docs-pr-maker/
+''~TiddlyWikiドキュメントPRメーカー''は、ドキュメントへの貢献と改善を支援するために設計された、tiddlywiki.comの特別エディションです。
+https://edit.tiddlywiki.com
 
 ドキュメントに加えられたすべての変更は、GitHubに簡単に送信できます。 -- プルリクエストは自動的に作成されるため、エディションの名前は"PRメーカー"になります。
 

@@ -26,7 +26,7 @@ exports.getSubdirectories = function(dirPath) {
 		}
 	});
 	return subdirs;
-}
+};
 
 /*
 Recursively (and synchronously) copy a directory and all its content
@@ -46,8 +46,7 @@ exports.copyDirectory = function(srcPath,dstPath) {
 	}
 	// Function to copy a folder full of files
 	var copy = function(srcPath,dstPath) {
-		var srcStats = fs.lstatSync(srcPath),
-			dstExists = fs.existsSync(dstPath);
+		var srcStats = fs.lstatSync(srcPath);
 		if(srcStats.isFile()) {
 			$tw.utils.copyFile(srcPath,dstPath);
 		} else if(srcStats.isDirectory()) {
@@ -83,7 +82,7 @@ exports.copyFile = function(srcPath,dstPath) {
 		dstFile = fs.openSync(dstPath,"w"),
 		bytesRead = 1,
 		pos = 0;
-	while (bytesRead > 0) {
+	while(bytesRead > 0) {
 		bytesRead = fs.readSync(srcFile,fileBuffer,0,FILE_BUFFER_LENGTH,pos);
 		fs.writeSync(dstFile,fileBuffer,0,bytesRead);
 		pos += bytesRead;
@@ -148,7 +147,7 @@ exports.deleteDirectory = function(dirPath) {
 				fs.unlinkSync(currPath);
 			}
 		}
-	fs.rmdirSync(dirPath);
+		fs.rmdirSync(dirPath);
 	}
 	return null;
 };
@@ -218,6 +217,11 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 		fileInfo.isEditableFile = true;
 		fileInfo.originalpath = options.fileInfo.originalpath;
 	}
+	// Propagate the pinFilepath flag (so generateTiddlerFilepath can short-circuit
+	// FileSystemPaths and write back to the original location)
+	if(options.fileInfo && !!options.fileInfo.pinFilepath) {
+		fileInfo.pinFilepath = true;
+	}
 	// Check if the tiddler has any unsafe fields that can't be expressed in a .tid or .meta file: containing control characters, or leading/trailing whitespace
 	var hasUnsafeFields = false;
 	$tw.utils.each(tiddler.getFieldStrings(),function(value,fieldName) {
@@ -255,7 +259,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 					// Overriding to the .tid extension needs special handling
 					fileInfo.type = "application/x-tiddler";
 					fileInfo.hasMetaFile = false;
-				} else if (metaExt === ".json") {
+				} else if(metaExt === ".json") {
 					// Overriding to the .json extension needs special handling
 					fileInfo.type = "application/json";
 					fileInfo.hasMetaFile = false;
@@ -320,9 +324,16 @@ exports.generateTiddlerFilepath = function(title,options) {
 		extension = options.extension || "",
 		originalpath = (options.fileInfo && options.fileInfo.originalpath) ? options.fileInfo.originalpath : "",
 		overwrite = options.fileInfo && options.fileInfo.overwrite || false,
+		pinFilepath = !!(options.fileInfo && options.fileInfo.pinFilepath),
 		filepath;
+	// If the tiddler's filepath is pinned via tiddlywiki.files, the originalpath
+	// wins and the path filters are skipped entirely.
+	if(pinFilepath && originalpath) {
+		var pinnedExt = path.extname(originalpath);
+		filepath = originalpath.substring(0,originalpath.length - pinnedExt.length);
+	}
 	// Check if any of the pathFilters applies
-	if(options.pathFilters && options.wiki) {
+	if(!filepath && options.pathFilters && options.wiki) {
 		$tw.utils.each(options.pathFilters,function(filter) {
 			if(!filepath) {
 				var source = options.wiki.makeTiddlerIterator([title]),
@@ -337,26 +348,42 @@ exports.generateTiddlerFilepath = function(title,options) {
 		//Use the originalpath without the extension
 		var ext = path.extname(originalpath);
 		filepath = originalpath.substring(0,originalpath.length - ext.length);
+		// normalise "\" to "/" so the sanitiser keeps subdirectories
+		// (it strips "\", not "/") instead of flattening them.
+		filepath = filepath.split(path.sep).join("/");
 	} else if(!filepath) {
 		filepath = title;
 		// Remove any forward or backward slashes so we don't create directories
 		filepath = filepath.replace(/\/|\\/g,"_");
 	}
-	// Replace any Windows control codes
-	filepath = filepath.replace(/^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/i,"_$1_");
 	// Replace any leading spaces with the same number of underscores
-	filepath = filepath.replace(/^ +/,function (u) { return u.replace(/ /g, "_")});
+	filepath = filepath.replace(/^ +/,function (u) { return u.replace(/ /g, "_");});
 	//If the path does not start with "." or ".." && a path seperator, then
 	if(!/^\.{1,2}[/\\]/g.test(filepath)) {
 		// Don't let the filename start with any dots because such files are invisible on *nix
-		filepath = filepath.replace(/^\.+/g,function (u) { return u.replace(/\./g, "_")});
+		filepath = filepath.replace(/^\.+/g,function (u) { return u.replace(/\./g, "_");});
 	}
 	// Replace any Unicode control codes
 	filepath = filepath.replace(/[\x00-\x1f\x80-\x9f]/g,"_");
-	// Replace any characters that can't be used in cross-platform filenames
-	filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^/g,"_"));
+	// Replace any characters that can't be used in cross-platform filenames.
+	if(!pinFilepath) {
+		filepath = $tw.utils.transliterate(filepath.replace(/<|>|~|\:|\"|\||\?|\*|\^|\\/g,"_"));
+	}
+	// Per segment (catches "sub/CON"), MUST be after transliterate which can create a
+	// reserved name. Reserved names are wrapped on every path incl pinned;
+	// trailing dots/spaces (Windows strips) fixed for generated names, not pinned.
+	filepath = filepath.split("/").map(function(segment) {
+		if(segment === "" || segment === "." || segment === "..") {
+			return segment;
+		}
+		segment = segment.replace(/^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/i,"_$1_");
+		if(!pinFilepath) {
+			segment = segment.replace(/[. ]+$/,function(u) { return u.replace(/[. ]/g,"_"); });
+		}
+		return segment;
+	}).join("/");
 	// Replace any dots or spaces at the end of the extension with the same number of underscores
-	extension = extension.replace(/[\. ]+$/, function (u) { return u.replace(/[\. ]/g, "_")});
+	extension = extension.replace(/[\. ]+$/, function (u) { return u.replace(/[\. ]/g, "_");});
 	// Truncate the extension if it is too long
 	if(extension.length > 32) {
 		extension = extension.substr(0,32);
@@ -382,9 +409,9 @@ exports.generateTiddlerFilepath = function(title,options) {
 	}
 	// Add a uniquifier if the file already exists (default)
 	var fullPath = path.resolve(directory, filepath + extension);
-	if (!overwrite) {
+	if(!overwrite) {
 		var oldPath = (options.fileInfo) ? options.fileInfo.filepath : undefined,
-		count = 0;
+			count = 0;
 		do {
 			fullPath = path.resolve(directory,filepath + (count ? "_" + count : "") + extension);
 			if(oldPath && oldPath == fullPath) break;
@@ -401,7 +428,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 			writePath.indexOf(path.resolve(directory)) == 0 ||
 			writePath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||
 			writePath.indexOf(path.resolve($tw.boot.wikiTiddlersPath,originalpath)) == 0 );
-		}
+	}
 	if(encode) {
 		writePath = path.resolve(directory,$tw.utils.encodeURIComponentExtended(fullPath));
 	}
@@ -521,12 +548,12 @@ Cleanup old files on disk, by comparing the options values:
 */
 exports.cleanupTiddlerFiles = function(options,callback) {
 	var adaptorInfo = options.adaptorInfo || {},
-	bootInfo = options.bootInfo || {},
-	title = options.title || "undefined";
+		bootInfo = options.bootInfo || {},
+		title = options.title || "undefined";
 	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
 		$tw.utils.deleteTiddlerFile(adaptorInfo,function(err) {
 			if(err) {
-				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
+				if((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the previous file on disk, should fail gracefully
 					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: \""+title+"\"",err);
 					return callback(null,bootInfo);

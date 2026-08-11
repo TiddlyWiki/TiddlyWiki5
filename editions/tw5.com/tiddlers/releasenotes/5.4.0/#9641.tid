@@ -1,0 +1,14 @@
+title: $:/changenotes/5.4.0/#9641
+description: Background actions and media query tracking
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: enhancement
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9641
+github-contributors: Jermolene
+
+Introduces [[Background Actions]] that are triggered whenever there is a change to the results of a specified filter.
+
+Building on that, it also introduces a new [[Media Query Tracker Mechanism]] that can track the results of any CSS media query (not just dark mode), storing the results in a shadow `$:/info/...` tiddler
+
+These improvements were cherrypicked from [[#8702 - Colour Handling Improvements|https://github.com/TiddlyWiki/TiddlyWiki5/pull/8702]] when it was deferred until v5.5.0.

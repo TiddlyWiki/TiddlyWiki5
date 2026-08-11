@@ -62,14 +62,27 @@ exports.serializeAttribute = function(node,options) {
 	}
 	// If name is number, means it is a positional attribute and name is omitted
 	var positional = parseInt(node.name) >= 0,
-		// `=` in a widget and might be `:` in a macro
-		assign = positional ? "" : (options.assignmentSymbol || "="),
+		// Use the original assignment operator if available, otherwise default to '='
+		assign = positional ? "" : (node.assignmentOperator || "="),
 		attributeString = positional ? "" : node.name;
 	if(node.type === "string") {
 		if(node.value === "true") {
 			return attributeString;
 		}
-		attributeString += assign + '"' + node.value + '"';
+		// For macro parameters (using ':' separator), preserve unquoted values
+		// For widget attributes (using '=' separator), always use quotes
+		if(assign === ":" && !node.quoted) {
+			attributeString += assign + node.value;
+		} else if(assign === "") {
+			// Positional parameter
+			if(!node.quoted) {
+				attributeString += node.value;
+			} else {
+				attributeString += '"' + node.value + '"';
+			}
+		} else {
+			attributeString += assign + '"' + node.value + '"';
+		}
 	} else if(node.type === "filtered") {
 		attributeString += assign + "{{{" + node.filter + "}}}";
 	} else if(node.type === "indirect") {
@@ -77,17 +90,42 @@ exports.serializeAttribute = function(node,options) {
 	} else if(node.type === "substituted") {
 		attributeString += assign + "`" + node.rawValue + "`";
 	} else if(node.type === "macro") {
-		if(node.value && typeof node.value === "object" && node.value.type === "macrocall") {
-			var params = node.value.params.map(function(param) {
-				return param.value;
-			}).join(" ");
-			attributeString += assign + "<<" + node.value.name + " " + params + ">>";
+		if(node.value && typeof node.value === "object") {
+			if(node.value.type === "transclude") {
+				// Handle the transclude-based macro call structure
+				var macroName = node.value.attributes && node.value.attributes["$variable"] ? 
+					node.value.attributes["$variable"].value : "";
+				if(!macroName) {
+					return null;
+				}
+				var params = [];
+				if(node.value.orderedAttributes) {
+					node.value.orderedAttributes.forEach(function(attr) {
+						if(attr.name !== "$variable") {
+							var paramStr = exports.serializeAttribute(attr);
+							if(paramStr) {
+								params.push(paramStr);
+							}
+						}
+					});
+				}
+				attributeString += assign + "<<" + macroName + (params.length > 0 ? " " + params.join(" ") : "") + ">>";
+			} else if(node.value.type === "macrocall") {
+				// Handle the classical macrocall structure for backwards compatibility
+				var params = node.value.params.map(function(param) {
+					return param.value;
+				}).join(" ");
+				attributeString += assign + "<<" + node.value.name + " " + params + ">>";
+			} else {
+				// Unsupported macro structure
+				return null;
+			}
 		} else {
 			// Unsupported macro structure
 			return null;
 		}
 	} else {
-		 // Unsupported type
+		// Unsupported type
 		return null;
 	}
 	return attributeString;

@@ -1,10 +1,14 @@
 created: 20130823203800000
-modified: 2020051619421803
+modified: 20260220093010752
 tags: About
 title: RoadMap
 type: text/vnd.tiddlywiki
 
-TiddlyWiki 5 is now a mature, stable project that is relied upon by many people. Simultaneously, it is rapidly evolving in many directions thanks to the broad community of developers and users. This paradoxical situation is possible because the project strictly maintains backwards compatibility, adding new features alongside the existing ones.
+TiddlyWiki was first released in 2013, 9 years after the original [[TiddlyWiki Classic]]. Since then there have been 41 releases, making TiddlyWiki steadily more flexible and reliable. We have ambitious plans for the future as well: v5.4.x, v5.5.x, and eventually TWXX.
 
-There is no formal roadmap, but quite a few areas that have yet to be fully implemented, such as search and replace, and rich text editing. Current work can be found on ~GitHub at https://github.com/TiddlyWiki/TiddlyWiki5/
+Our version numbering follows the form v5.x.0. ~TiddlyWiki is currently on v<<version>>, and so we are currently working towards v5.4.0.
 
+There is a detailed project plan on GitHub, but the major milestones are planned as follows:
+
+* TiddlyWiki v5.4.0 will be followed by further v5.4.x releases to fix bugs and incrementally improve features. If there are significant backwards compatibility concerns then those improvements will be pushed into v5.5.0, the next release to make minor backwards comatibility tweaks.
+* We'll go on to make v5.6.0, v5.7.0 etc releases until we're ready to release the next major redesign, that is not compromised by backwards compatibility. We are calling this release ~TiddlyWiki XX ("~TiddlyWiki Twenty", or TWXX).

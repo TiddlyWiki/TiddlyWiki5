@@ -19,7 +19,7 @@ describe("Widget Event Listeners", function() {
 
 	it("should call all added event listeners on dispatchEvent", function() {
 		var calls = [];
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var widget = createWidgetNode({type:"widget", text:"text"}, wiki);
 
 		// Add a function listener.
@@ -44,7 +44,7 @@ describe("Widget Event Listeners", function() {
 
 	it("should remove an event listener correctly", function() {
 		var calls = [];
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var widget = createWidgetNode({type:"widget", text:"text"}, wiki);
 
 		function listener(e) {
@@ -70,7 +70,7 @@ describe("Widget Event Listeners", function() {
 
 	it("stop further propagation by returns false won't block other listeners on the same level.", function() {
 		var calls = [];
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var widget = createWidgetNode({type:"widget", text:"text"}, wiki);
 
 		widget.addEventListener("stopEvent", function(e) {
@@ -92,7 +92,7 @@ describe("Widget Event Listeners", function() {
 
 	it("should dispatch event to parent widget if not handled on child", function() {
 		var parentCalls = [];
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var parentWidget = createWidgetNode({type:"widget", text:"text"}, wiki);
 		parentWidget.addEventListener("parentEvent", function(e) {
 			parentCalls.push("parentListener");
@@ -110,7 +110,7 @@ describe("Widget Event Listeners", function() {
 
 	it("should not dispatch event to parent if child's listener stops propagation", function() {
 		var parentCalls = [];
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var parentWidget = createWidgetNode({type:"widget", text:"text"}, wiki);
 		parentWidget.addEventListener("bubbleTest", function(e) {
 			parentCalls.push("parentListener");
@@ -128,7 +128,7 @@ describe("Widget Event Listeners", function() {
 
 	it("should call multiple listeners in proper order across child and parent", function() {
 		var calls = [];
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var parentWidget = createWidgetNode({type:"widget", text:"text"}, wiki);
 		parentWidget.addEventListener("chainEvent", function(e) {
 			calls.push("parentListener");
@@ -152,7 +152,7 @@ describe("Widget Event Listeners", function() {
 	it("should handle events of different types separately", function() {
 		var callsA = [];
 		var callsB = [];
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var widget = createWidgetNode({type:"widget", text:"text"}, wiki);
 		widget.addEventListener("eventA", function(e) {
 			callsA.push("A1");
@@ -171,7 +171,7 @@ describe("Widget Event Listeners", function() {
 	// Test using $tw.utils.each in removeEventListener internally (behavior verified via dispatch)
 	it("should remove listeners using $tw.utils.each without affecting other listeners", function() {
 		var calls = [];
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var widget = createWidgetNode({type:"widget", text:"text"}, wiki);
 		function listener1(e) {
 			calls.push("listener1");
@@ -192,7 +192,7 @@ describe("Widget Event Listeners", function() {
 
 	it("should prevent adding the same event listener multiple times", function() {
 		var calls = 0;
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var widget = createWidgetNode({type:"widget", text:"text"}, wiki);
 		
 		function listener(e) {

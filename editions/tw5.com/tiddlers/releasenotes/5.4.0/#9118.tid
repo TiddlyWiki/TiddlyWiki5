@@ -1,5 +1,5 @@
 title: $:/changenotes/5.4.0/#9118
-description: Update highlightjs plugin
+description: Update HighlightJS plugin
 release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
@@ -7,4 +7,4 @@ change-category: plugin
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9118
 github-contributors: Leilei332
 
-Update highlightjs version to 11.11.1
+Update HighlightJS version to 11.11.1

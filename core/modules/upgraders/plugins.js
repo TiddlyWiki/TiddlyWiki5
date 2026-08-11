@@ -21,8 +21,7 @@ var BLOCKED_PLUGINS = {
 };
 
 exports.upgrade = function(wiki,titles,tiddlers) {
-	var self = this,
-		messages = {},
+	var messages = {},
 		upgradeLibrary,
 		getLibraryTiddler = function(title) {
 			if(!upgradeLibrary) {

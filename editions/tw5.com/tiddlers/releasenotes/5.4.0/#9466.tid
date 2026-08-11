@@ -1,0 +1,15 @@
+title: $:/changenotes/5.4.0/#9466
+description: ViewToolbar buttons now support condition field
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: feature
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9466
+github-contributors: linonetwo
+
+ViewToolbar buttons can now be conditionally displayed based on the currentTiddler using a `condition` field. Similar to how `$:/tags/Exporter` and `$:/tags/EditorTools` already have. An example would be:
+
+```tid
+tags: $:/tags/ViewToolbar
+condition: [<currentTiddler>type[text/x-markdown]] [<currentTiddler>type[text/markdown]]
+```

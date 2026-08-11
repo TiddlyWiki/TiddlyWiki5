@@ -1,5 +1,6 @@
 title: $:/language/
 
+Alerts: 警报信息
 AboveStory/ClassicPlugin/Warning: 您似乎要加载为 ~TiddlyWiki 经典版设计的插件。请注意，[[这些插件无法运行于 TiddlyWiki 5.x.x 版|https://tiddlywiki.com/#TiddlyWikiClassic]]。检测到 ~TiddlyWiki 经典版插件：
 BinaryWarning/Prompt: 此条目包含二进制数据
 ClassicWarning/Hint: 此条目以经典版 TiddlyWiki 标记格式撰写，不完全兼容新版 TiddlyWiki 的格式，详细信息请参阅：https://tiddlywiki.com/static/Upgrading。

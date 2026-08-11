@@ -1,7 +1,7 @@
 created: 20201228143125000
-modified: 20241222103744408
-original-modified: 20201228143125000
-tags: OfficialPlugins
+modified: 20251214105341696
+original-modified: 20250302051857380
+tags: OfficialPlugins [[Plugin Editions]]
 title: Share Plugin
 ja-title: シェアプラグイン
 type: text/vnd.tiddlywiki
@@ -12,3 +12,5 @@ type: text/vnd.tiddlywiki
 
 * 起動時にブラウザのロケーションハッシュからTiddlerのグループをロードする機能
 * TiddlerのグループからURLを作成するためのウィザードとテンプレート
+
+デモは[ext[https://tiddlywiki.com/share|share]]を参照してください

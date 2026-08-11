@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9548
+description: Better infinite transclude recursion handling
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9458
+github-contributors: Flibbles
+
+Fixed issue where exceptions occurring during widget rendering could result in junk DOM nodes remaining in widget tree. This was very obvious when max recursion depth exceptions occurred.

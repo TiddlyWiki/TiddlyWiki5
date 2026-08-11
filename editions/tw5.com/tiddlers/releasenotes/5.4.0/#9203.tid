@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9203
+description: Fix not provide content-type header in GET routes
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: nodejs
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9203
+github-contributors: linonetwo
+
+Fixed an issue which prevented plugins like the sitemap plugin from setting the correct MIME types (e.g., application/xml).

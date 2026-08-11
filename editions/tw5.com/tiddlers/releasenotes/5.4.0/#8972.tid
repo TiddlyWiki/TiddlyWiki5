@@ -4,8 +4,8 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: hackability
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8972
-github-contributors: Jermolene
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8972 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9614 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9645
+github-contributors: Jermolene saqimtiaz
 
 This PR introduces a new filter run prefix `:let` that assigns the result of the filter run to a variable that is made available for the remaining filter runs of the filter expression. It solves the problem that previously it was impossible to compute values for filter operator parameters; parameters could only be a literal string, text reference or variable reference.
 

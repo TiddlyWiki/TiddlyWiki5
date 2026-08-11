@@ -14,11 +14,6 @@ exports.name = "startup";
 exports.after = ["load-modules"];
 exports.synchronous = true;
 
-// Set to `true` to enable performance instrumentation
-var PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE = "$:/config/Performance/Instrumentation";
-
-var widget = require("$:/core/modules/widgets/widget.js");
-
 exports.startup = function() {
 	// Minimal browser detection
 	if($tw.browser) {
@@ -54,16 +49,6 @@ exports.startup = function() {
 	}
 	// Initialise version
 	$tw.version = $tw.utils.extractVersionInfo();
-	// Set up the performance framework
-	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
-	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
-	$tw.rootWidget = new widget.widget({
-		type: "widget",
-		children: []
-	},{
-		wiki: $tw.wiki,
-		document: $tw.browser ? document : $tw.fakeDocument
-	});
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
 	$tw.languageSwitcher = new $tw.PluginSwitcher({
@@ -128,7 +113,7 @@ exports.startup = function() {
 		$tw.syncer = new $tw.Syncer({
 			wiki: $tw.wiki,
 			syncadaptor: $tw.syncadaptor,
-			logging: $tw.wiki.getTiddlerText('$:/config/SyncLogging', "yes") === "yes"
+			logging: $tw.wiki.getTiddlerText("$:/config/SyncLogging", "yes") === "yes"
 		});
 	}
 	// Setup the saver handler

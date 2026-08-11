@@ -1,4 +1,4 @@
-change-category: usability
+change-category: hackability
 change-type: enhancement
 created: 20251115012214040
 description: list-links-draggable defaults to currentTiddler if tiddler parameter is missing

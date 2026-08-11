@@ -9,6 +9,8 @@ Button widget
 
 "use strict";
 
+const ALLOWED_SELECTED_ARIA_ATTR = ["aria-checked", "aria-selected", "aria-pressed"];
+
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
@@ -44,9 +46,14 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	var classes = this["class"].split(" ") || [],
 		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
 	if(this.selectedClass) {
-		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
-			$tw.utils.pushTop(classes, this.selectedClass.split(" "));
-			domNode.setAttribute("aria-checked", "true");
+		if((this.set || this.setTitle) && this.setTo) {
+			const selectedAria = ALLOWED_SELECTED_ARIA_ATTR.includes(this.selectedAria) ? this.selectedAria : "aria-checked";
+			if(this.isSelected()) {
+				$tw.utils.pushTop(classes, this.selectedClass.split(" "));
+				domNode.setAttribute(selectedAria, "true");
+			} else {
+				domNode.setAttribute(selectedAria, "false");
+			}
 		}
 		if(isPoppedUp) {
 			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
@@ -72,7 +79,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this.tooltip) {
 		domNode.setAttribute("title",this.tooltip);
 	}
-	if (this.role) {
+	if(this.role) {
 		domNode.setAttribute("role", this.role);
 	}
 	if(this.popup || this.popupTitle) {
@@ -128,8 +135,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+	this.renderChildren(domNode,null);
 };
 
 /*
@@ -144,10 +151,24 @@ ButtonWidget.prototype.getBoundingClientRect = function() {
 };
 
 ButtonWidget.prototype.isSelected = function() {
-    return this.setTitle ? (this.setField ? this.wiki.getTiddler(this.setTitle).getFieldString(this.setField) === this.setTo :
-		(this.setIndex ? this.wiki.extractTiddlerDataItem(this.setTitle,this.setIndex) === this.setTo :
-			this.wiki.getTiddlerText(this.setTitle))) || this.defaultSetValue || this.getVariable("currentTiddler") :
-		this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler")) === this.setTo;
+	var currentValue;
+	if(this.setTitle) {
+		if(this.setField) {
+			// The state tiddler usually does not exist until the button is first clicked
+			var tiddler = this.wiki.getTiddler(this.setTitle);
+			currentValue = tiddler ? tiddler.getFieldString(this.setField) : undefined;
+		} else if(this.setIndex) {
+			currentValue = this.wiki.extractTiddlerDataItem(this.setTitle,this.setIndex);
+		} else {
+			currentValue = this.wiki.getTiddlerText(this.setTitle);
+		}
+		if(!currentValue) {
+			currentValue = this.defaultSetValue || this.getVariable("currentTiddler");
+		}
+	} else {
+		currentValue = this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler"));
+	}
+	return currentValue === this.setTo;
 };
 
 ButtonWidget.prototype.isPoppedUp = function() {
@@ -196,7 +217,7 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 ButtonWidget.prototype.setTiddler = function() {
 	if(this.setTitle) {
 		this.setField ? this.wiki.setText(this.setTitle,this.setField,undefined,this.setTo) :
-				(this.setIndex ? this.wiki.setText(this.setTitle,undefined,this.setIndex,this.setTo) :
+			(this.setIndex ? this.wiki.setText(this.setTitle,undefined,this.setIndex,this.setTo) :
 				this.wiki.setText(this.setTitle,"text",undefined,this.setTo));
 	} else {
 		this.wiki.setTextReference(this.set,this.setTo,this.getVariable("currentTiddler"));
@@ -221,6 +242,7 @@ ButtonWidget.prototype.execute = function() {
 	this.style = this.getAttribute("style");
 	this["class"] = this.getAttribute("class","");
 	this.selectedClass = this.getAttribute("selectedClass");
+	this.selectedAria = this.getAttribute("selectedAria");
 	this.defaultSetValue = this.getAttribute("default","");
 	this.buttonTag = this.getAttribute("tag");
 	this.dragTiddler = this.getAttribute("dragTiddler");
@@ -259,7 +281,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tooltip || changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
+	if(changedAttributes.tooltip || changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.setTitle && changedTiddlers[this.setTitle]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
 		this.refreshSelf();
 		return true;
 	} else {

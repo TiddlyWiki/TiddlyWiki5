@@ -122,15 +122,15 @@ tags: $:/tags/Macro
 \whitespace trim
 \procedure keyboard-driven-input-actions()
 <%if [<event-key-descriptor>match[((input-accept))]] %>
-<<inputAcceptActions>>
+<$transclude $variable=inputAcceptActions $fillignore=yes />
 <%elseif [<event-key-descriptor>match[((input-accept-variant))]] %>
-<<inputAcceptVariantActions>>
+<$transclude $variable=inputAcceptVariantActions $fillignore=yes />
 <%elseif [<event-key-descriptor>match[((input-up))]] %>
-<<input-next-actions-before>>
+<$transclude $variable=input-next-actions-before $fillignore=yes />
 <%elseif [<event-key-descriptor>match[((input-down))]] %>
-<<input-next-actions-after>>
+<$transclude $variable=input-next-actions-after $fillignore=yes />
 <%elseif [<event-key-descriptor>match[((input-cancel))]] %>
-<<inputCancelActions>>
+<$transclude $variable=inputCancelActions $fillignore=yes />
 <%endif%>
 \end keyboard-driven-input-actions
 

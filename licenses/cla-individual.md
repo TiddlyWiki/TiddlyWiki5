@@ -632,7 +632,23 @@ Christian Byron, @CeeBeeTree, 2025/08/05
 
 Frédéric Demers, @bepuzzled, 2025/08/17
 
+@bombur51, 2025/09/28
+
 Joseph Yi, @josephyi, 2025/10/14
 
 Rishu kumar, @rishu-7549, 2025/10/25
 
+@wiki-tutor, 2025/12/28
+
+@wiki-tutor, 2025/12/28
+
+@peteratkins, 2025/12/29
+
+@hsteve11, 2025/12/30
+
+@kjharcombe, 2026/03/16
+
+Himmel, @NotHimmel, 2026/03/19
+
+
+@vuktw, 2026/07/12

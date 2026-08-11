@@ -1,0 +1,14 @@
+change-category: hackability
+change-type: enhancement
+created: 20260124121646761
+description: The simple toc macro now supports a level parameter
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9612
+modified: 20260124131646761
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9612
+type: text/vnd.tiddlywiki
+
+* The [[toc-macro|Table-of-Contents Macros]] now supports a ''level'' parameter, that allows us to limit the [[toc-levels|Table-of-Contents Macros (Examples)]], that are listed. 
+* If the level parameter is active, levels, which have children will show a level indicator at the front. By default it uses the core "+" icon

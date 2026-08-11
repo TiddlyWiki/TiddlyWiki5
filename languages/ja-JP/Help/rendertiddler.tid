@@ -1,8 +1,24 @@
 title: $:/language/Help/rendertiddler
-description: 個々の Tiddler を指定した ContentType で出力
+description: 個々のTiddlerを指定したContentTypeで出力
 
-個々の Tiddler を指定した ContentType で出力します。デフォルトは `text/html` で、指定されたファイル名で内容を保存します。
+(注意: この`--rendertiddler`コマンドは、より柔軟な新しい`--render`コマンドに置き換えられたため、非推奨となりました。)
+
+個々のTiddlerを指定したContentTypeで出力します。デフォルトは`text/html`で、指定されたファイル名で内容を保存します。
+
+オプションとして、テンプレートTiddlerのタイトルを指定できます。その場合、テンプレートTiddlerは、レンダリング中のTiddler(最初のパラメータ値)を"currentTiddler"変数に設定した状態でレンダリングされます。
+
+追加変数の名前と値を任意で指定することもできます。
 
 ```
---rendertiddler <title> <filename> [<type>]
+--rendertiddler <title> <filename> [<type>] [<template>] [<name>] [<value>]
+```
+
+デフォルトでは、ファイル名はeditionディレクトリの`output`サブディレクトリからの相対として解決されます。`--output`コマンドを使用すると、出力先を別のディレクトリに指定できます。
+
+ファイル名へのパス中の存在しないディレクトリは自動的に作成されます。
+
+例えば、次のコマンドは、コアテンプレート`$:/core/templates/exporters/JsonFile`を使用して、フィルター`[tag[done]]`に一致するすべてのTiddlerを`output.json`というJSONファイルに保存します。
+
+```
+--rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[tag[done]]"
 ```

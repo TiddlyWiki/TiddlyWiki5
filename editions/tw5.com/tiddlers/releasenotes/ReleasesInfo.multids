@@ -1,35 +1,67 @@
 title: $:/tw5.com/releases/info/
 
-category-order: translation  plugin usability theme hackability widget filters performance nodejs internal developer 
-categories/internal/caption: Internal
-categories/translation/caption: Translation
-categories/plugin/caption: Plugin
-categories/widget/caption: Widget
-categories/usability/caption: Usability
-categories/theme/caption: Theme
-categories/hackability/caption: Hackability
-categories/nodejs/caption: Node.js
-categories/performance/caption: Performance
-categories/developer/caption: Developer
-categories/filters/caption: Filters
-change-types/bugfix/caption: Bugfix
+category-order: translation usability hackability widget filters plugin theme nodejs developer internal
+change-type-order: feature enhancement performance bugfix deprecation security
+impact-type-order: compatibility-break deprecation pluginisation
+tab-order: [[Summary]] [[By Type]] [[By Category]] [[Impacts]]
+categories/developer/singular: Developer
+categories/developer/plural: Developer
+categories/filters/singular: Filters
+categories/filters/plural: Filters
+categories/hackability/singular: Hackability
+categories/hackability/plural: Hackability
+categories/internal/singular: Internal
+categories/internal/plural: Internal
+categories/nodejs/singular: Node.js
+categories/nodejs/plural: Node.js
+categories/plugin/singular: Plugin
+categories/plugin/plural: Plugins
+categories/theme/singular: Theme
+categories/theme/plural: Theming
+categories/translation/singular: Translation
+categories/translation/plural: Translation
+categories/usability/singular: Usability
+categories/usability/plural: Usability
+categories/widget/singular: Widget
+categories/widget/plural: Widgets
+change-types/bugfix/singular: Bugfix
 change-types/bugfix/colour: #ffe246
-change-types/feature/caption: Feature
-change-types/feature/colour: #91ba66
-change-types/enhancement/caption: Enhancement
-change-types/enhancement/colour: #cba5ff
-change-types/deprecation/caption: Deprecation
+change-types/bugfix/plural: Bugfixes
+change-types/deprecation/singular: Deprecation
 change-types/deprecation/colour: #ff9d6c
-change-types/security/caption: Security
-change-types/security/colour: #ff6666
-change-types/performance/caption: Performance
+change-types/deprecation/plural: Deprecations
+change-types/enhancement/singular: Enhancement
+change-types/enhancement/colour: #cba5ff
+change-types/enhancement/plural: Enhancements
+change-types/feature/singular: Feature
+change-types/feature/colour: #91ba66
+change-types/feature/plural: Features
+change-types/performance/singular: Performance
 change-types/performance/colour: #c2c7ff
-impact-types/deprecation/caption: Deprecation
-impact-types/deprecation/colour/foreground: #882222
-impact-types/deprecation/colour/background: #ffdddd
-impact-types/compatibility-break/caption: Compatibility Break
-impact-types/compatibility-break/colour/foreground: #228822
+change-types/performance/plural: Performance
+change-types/security/singular: Security
+change-types/security/colour: #ff6666
+change-types/security/plural: Security
+impact-types/compatibility-break/singular: Compatibility Break
 impact-types/compatibility-break/colour/background: #ddffdd
-impact-types/pluginisation/caption: Pluginisation
-impact-types/pluginisation/colour/foreground: #222288
+impact-types/compatibility-break/colour/foreground: #228822
+impact-types/compatibility-break/plural: Compatibility Breaks
+impact-types/deprecation/singular: Deprecation
+impact-types/deprecation/colour/background: #ffdddd
+impact-types/deprecation/colour/foreground: #882222
+impact-types/deprecation/plural: Deprecations
+impact-types/pluginisation/singular: Pluginisation
 impact-types/pluginisation/colour/background: #ddddff
+impact-types/pluginisation/colour/foreground: #222288
+impact-types/pluginisation/plural: Pluginisations
+categories/translation/colour: #7ec8e3
+categories/usability/colour: #f4a261
+categories/hackability/colour: #9b8ec4
+categories/performance/colour: #87ceeb
+categories/widget/colour: #e78ac3
+categories/filters/colour: #8cc56d
+categories/plugin/colour: #f0c674
+categories/theme/colour: #d4a76a
+categories/nodejs/colour: #77bb66
+categories/developer/colour: #6baed6
+categories/internal/colour: #b0b0b0

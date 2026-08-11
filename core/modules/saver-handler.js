@@ -32,10 +32,10 @@ function SaverHandler(options) {
 		this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
 		// Count of changes that have not yet been saved
 		var filteredChanges = self.filterFn.call(self.wiki,function(iterator) {
-				$tw.utils.each(self.preloadDirty,function(title) {
-					var tiddler = self.wiki.getTiddler(title);
-					iterator(tiddler,title);
-				});
+			$tw.utils.each(self.preloadDirty,function(title) {
+				var tiddler = self.wiki.getTiddler(title);
+				iterator(tiddler,title);
+			});
 		});
 		this.numChanges = filteredChanges.length;
 		// Listen out for changes to tiddlers

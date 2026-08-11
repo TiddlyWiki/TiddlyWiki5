@@ -25,7 +25,7 @@ exports.lookup = function(source,operator,options) {
 		indexSuffix = (suffixes[1] && suffixes[1][0] === "index") ? true : false,
 		target;
 	if(operator.operands.length == 2) {
-		target = operator.operands[1]
+		target = operator.operands[1];
 	} else {
 		target = indexSuffix ? "0": "text";
 	}

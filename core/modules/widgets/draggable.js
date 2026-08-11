@@ -56,6 +56,7 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	});
 	// Insert the node into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
+	this.domNodes.push(domNode);
 	this.renderChildren(domNode,null);
 	this.makeDraggable(domNode);
 	this.domNodes.push(domNode);
@@ -112,8 +113,8 @@ DraggableWidget.prototype.updateDomNodeClasses = function() {
 	});
 	//Add new classes from updated class attribute.
 	$tw.utils.pushTop(domNodeClasses,this.draggableClasses);
-	this.domNodes[0].setAttribute("class",domNodeClasses.join(" "))
-}
+	this.domNodes[0].setAttribute("class",domNodeClasses.join(" "));
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering

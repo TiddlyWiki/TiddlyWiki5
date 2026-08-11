@@ -1,0 +1,18 @@
+title: $:/language/Help/commands
+description: フィルターから返されたコマンドを順に実行
+
+フィルターから返されたコマンドトークンを順に実行します
+
+```
+--commands <filter>
+```
+
+例
+
+```
+--commands "[enlist:raw{$:/build-commands-as-text}]"
+```
+
+```
+--commands "[{$:/build-commands-as-json}jsonindexes[]] :map[{$:/build-commands-as-json}jsonget<currentTiddler>]"
+```

@@ -23,27 +23,6 @@ exports.init = function(parser) {
 	this.matchRegExp = /\{\{([^\{\}\|]*)(?:\|\|([^\|\{\}]+))?(?:\|([^\{\}]+))?\}\}(?:\r?\n|$)/mg;
 };
 
-/*
-Reject the match if we don't have a template or text reference
-*/
-exports.findNextMatch = function(startPos) {
-	this.matchRegExp.lastIndex = startPos;
-	this.match = this.matchRegExp.exec(this.parser.source);
-	if(this.match) {
-		var template = $tw.utils.trim(this.match[2]),
-			textRef = $tw.utils.trim(this.match[1]);
-		// Bail if we don't have a template or text reference
-		if(!template && !textRef) {
-			return undefined;
-		} else {
-			return this.match.index;
-		}
-	} else {
-		return undefined;
-	}
-	return this.match ? this.match.index : undefined;
-};
-
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
@@ -53,17 +32,17 @@ exports.parse = function() {
 		params = this.match[3] ? this.match[3].split("|") : [];
 	// Prepare the transclude widget
 	var transcludeNode = {
-			type: "transclude",
-			attributes: {},
-			isBlock: true
-		};
+		type: "transclude",
+		attributes: {},
+		isBlock: true
+	};
 	$tw.utils.each(params,function(paramValue,index) {
 		var name = "" + index;
 		transcludeNode.attributes[name] = {
 			name: name,
 			type: "string",
 			value: paramValue
-		}
+		};
 	});
 	// Prepare the tiddler widget
 	var tr, targetTitle, targetField, targetIndex, tiddlerNode;

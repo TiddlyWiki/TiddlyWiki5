@@ -23,14 +23,14 @@ var Popup = function(options) {
 Global regular expression for parsing the location of a popup.
 This is also used by the Reveal widget.
 */
-exports.popupLocationRegExp = /^(@?)\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/
+exports.popupLocationRegExp = /^(@?)\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
 
 /*
 Objekt containing the available prefixes for coordinates build with the `buildCoordinates` function:
  - csOffsetParent: Uses a coordinate system based on the offset parent (no prefix).
  - csAbsolute: Use an absolute coordinate system (prefix "@").
 */
-exports.coordinatePrefix = { csOffsetParent: "", csAbsolute: "@" }
+exports.coordinatePrefix = { csOffsetParent: "", csAbsolute: "@" };
 
 /*
 Trigger a popup open or closed. Parameters are in a hashmap:
@@ -182,7 +182,7 @@ Popup.prototype.cancel = function(level) {
 				popup.wiki.deleteTiddler(popup.title);
 			} else {
 				popup.wiki.deleteTiddler($tw.utils.parseTextReference(popup.title).title);
-        		}
+			}
 		}
 	}
 	if(this.popups.length === 0) {
@@ -220,7 +220,7 @@ exports.parseCoordinates = function(coordinates) {
 	} else {
 		return false;
 	}
-}
+};
 
 /*
 Builds a coordinate string from a coordinate system identifier and an object
@@ -232,11 +232,11 @@ This function is safe to call, even if the popup class was not initialized.
 */
 exports.buildCoordinates = function(prefix,position) {
 	var coord = prefix + "(" + position.left + "," + position.top + "," + position.width + "," + position.height + ")";
-	if (exports.popupLocationRegExp.test(coord)) {
+	if(exports.popupLocationRegExp.test(coord)) {
 		return coord;
 	} else {
 		return "(0,0,0,0)";
 	}
-}
+};
 
 exports.Popup = Popup;

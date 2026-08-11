@@ -1,0 +1,8 @@
+title: $:/snippets/minifocuseditswitcher
+
+\whitespace trim
+<$select tiddler="$:/config/AutoFocusEdit" default={{$:/config/AutoFocus}}>
+<$list filter="title tags text">
+<option><<currentTiddler>></option>
+</$list>
+</$select>

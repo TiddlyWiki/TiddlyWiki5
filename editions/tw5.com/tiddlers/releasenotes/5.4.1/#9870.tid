@@ -1,0 +1,9 @@
+title: $:/changenotes/5.4.0/#9870
+description: Update Japanese translation
+release: 5.4.1
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: translation
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9870
+github-contributors: IchijikuIchigo
+

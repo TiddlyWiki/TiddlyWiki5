@@ -14,7 +14,7 @@ Adding new functionality will probably change the "expected" html structure.
 
 describe("Tabs-macro HTML tests", function() {
 
-// This code can be copy pasted into the browser console for easy testing
+	// This code can be copy pasted into the browser console for easy testing
 
 	// the expected tiddlers can be found at ./data/tabs-macro/
 	var expected     = $tw.wiki.getTiddler("expected-test-tabs-horizontal-a"),
@@ -34,9 +34,9 @@ describe("Tabs-macro HTML tests", function() {
 
 	// Template tiddlers
 	$tw.wiki.addTiddler(new $tw.Tiddler({title: "body-template", "code-body":"yes",
-						text: '!! <<currentTab>>\n\n<$transclude tiddler=<<currentTab>> mode="block"/>'},$tw.wiki.getModificationFields()));
+		text: '!! <<currentTab>>\n\n<$transclude tiddler=<<currentTab>> mode="block"/>'},$tw.wiki.getModificationFields()));
 	$tw.wiki.addTiddler(new $tw.Tiddler({title: "button-template", "code-body":"yes",
-						text: '<$transclude tiddler=<<currentTab>> field="description"><$transclude tiddler=<<currentTab>> field="caption"><$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/></$transclude></$transclude>'},$tw.wiki.getModificationFields()));
+		text: '<$transclude tiddler=<<currentTab>> field="description"><$transclude tiddler=<<currentTab>> field="caption"><$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/></$transclude></$transclude>'},$tw.wiki.getModificationFields()));
 	// tabs macro cloned, to be used with \\import
 	$tw.wiki.addTiddler(new $tw.Tiddler({title: "tabs-macro-definition", "code-body":"yes", text: coreTabsTiddler.fields.text},$tw.wiki.getModificationFields()));
 
@@ -58,7 +58,7 @@ describe("Tabs-macro HTML tests", function() {
 		$tw.wiki.getModificationFields())
 	);
 
-// End This code can be copy pasted into the browser console
+	// End This code can be copy pasted into the browser console
 
 	/* -----------------
 	/ Run the tests

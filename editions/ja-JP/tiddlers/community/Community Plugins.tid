@@ -1,7 +1,7 @@
 created: 20210101150806938
 modified: 20241004111247100
 original-modified: 20210101151403345
-tags: Community
+tags: Resources
 title: Community Plugins
 ja-title: コミュニティプラグイン
 caption: プラグイン
@@ -14,7 +14,7 @@ caption: プラグイン
 
 <div class="tc-link-info-item">
 
-! <$link><$view field="title"/></$link>
+! <$link><$view field="ja-title"><$view field="title"/></$view></$link>
 
 <div class="tc-subtitle"> <$view field="original-modified" format="relativedate"><$view field="modified" format="relativedate"/></$view> の投稿</div>
 

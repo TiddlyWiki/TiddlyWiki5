@@ -1,0 +1,39 @@
+title: $:/core/macros/CSS/property
+
+<!-- CSS property macros -->
+
+<!-- TODO: Deprecate the following CSS macros once 2020 baseline is supported -->
+
+\procedure margin-start(size)
+	-webkit-margin-start: <<size>>;
+	margin-inline-start: <<size>>;
+\end
+
+\procedure margin-end(size)
+	-webkit-margin-end: <<size>>;
+	margin-inline-end: <<size>>;
+\end
+
+\procedure padding-start(size)
+	-webkit-padding-start: <<size>>;
+	padding-inline-start: <<size>>;
+\end
+
+\procedure padding-end(size)
+	-webkit-padding-end: <<size>>;
+	padding-inline-end: <<size>>;
+\end
+
+\procedure margin-inline(start,end)
+	-webkit-margin-start: <<start>>;
+	margin-inline-start: <<start>>;
+	-webkit-margin-end: <<end>>;
+	margin-inline-end: <<end>>;
+\end
+
+\procedure padding-inline(start,end)
+	-webkit-padding-start: <<start>>;
+	padding-inline-start: <<start>>;
+	-webkit-padding-end: <<end>>;
+	padding-inline-end: <<end>>;
+\end

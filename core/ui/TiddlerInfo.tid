@@ -2,7 +2,7 @@ title: $:/core/ui/TiddlerInfo
 
 \whitespace trim
 <div style="position:relative;">
-<div class="tc-tiddler-controls" style="position:absolute;right:0;">
+<div class="tc-tiddler-controls tc-tiddler-info-controls">
 <$reveal state="$:/config/TiddlerInfo/Mode" type="match" text="sticky">
 <$button set=<<tiddlerInfoState>> setTo="" tooltip={{$:/language/Buttons/Info/Hint}} aria-label={{$:/language/Buttons/Info/Caption}} class="tc-btn-invisible">
 {{$:/core/images/close-button}}

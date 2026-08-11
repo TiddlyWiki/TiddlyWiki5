@@ -58,7 +58,7 @@ js.configs.recommended,
         "array-callback-return": "off",
         "@stylistic/array-element-newline": "off",
         "arrow-body-style": "error",
-        "@stylistic/arrow-parens": ["error", "as-needed"],
+        "@stylistic/arrow-parens": ["error", "always"],
         "@stylistic/arrow-spacing": ["error", {
             after: true,
             before: true,
@@ -104,7 +104,7 @@ js.configs.recommended,
         "init-declarations": "off",
         "@stylistic/jsx-quotes": "error",
         "@stylistic/key-spacing": "off",
-        "@stylistic/keyword-spacing": ["error", {
+        "@stylistic/keyword-spacing": ["warn", {
             before: true,
             after: false,
             overrides: {
@@ -114,6 +114,7 @@ js.configs.recommended,
                 return: { after: true },
                 throw: { after: true },
                 try: { after: true },
+                const: { after: true }
             },
         }],
         "@stylistic/line-comment-position": "off",
@@ -121,6 +122,9 @@ js.configs.recommended,
         "@stylistic/lines-around-comment": "off",
         "@stylistic/lines-around-directive": "off",
         "@stylistic/lines-between-class-members": "error",
+        "@stylistic/no-trailing-spaces": "error",
+        "@stylistic/no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+        "@stylistic/space-infix-ops": "error",
         "max-classes-per-file": "off",
         "max-depth": "off",
         "@stylistic/max-len": "off",
@@ -290,10 +294,12 @@ js.configs.recommended,
         "@stylistic/wrap-iife": "off",
         "@stylistic/wrap-regex": "off",
         "@stylistic/yield-star-spacing": "error",
-        yoda: "off",
-        // temporary rules
+        "yoda": "off",
         "no-useless-escape": "off",
-        "no-unused-vars": "warn",
+        "no-unused-vars": ["warn", {
+            "args": "none",
+            "caughtErrors": "none"
+        }],
         "no-empty": "off",
         "@stylistic/no-extra-semi": "off",
         "no-redeclare": "off",
@@ -308,5 +314,14 @@ js.configs.recommended,
 
 },
     es2017rules,
-    es2023rules
+    es2023rules,
+    {
+        files: ["tiddlywiki.js"],
+        plugins:  {
+		    "es-x": esx
+	    },
+        rules: {
+   	    	"es-x/no-hashbang": "off"         
+        }
+    }
 ]);

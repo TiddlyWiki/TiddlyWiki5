@@ -3,8 +3,8 @@ ja-title: HelloThumbnail - ニュースレター
 tags: HelloThumbnail
 caption: ~TiddlyWiki ニュースレター
 link: TiddlyWiki Newsletter
-image: TiddlyWiki Newsletter Badge.png
+image: TiddlyWiki Newsletter Badge
 color: #fff
-ribbon-text: NEW
+type: text/vnd.tiddlywiki
 
-~TiddlyWikiコミュニティからの最も興味深く関連性のあるニュースを隔週でまとめた~TiddlyWikiニュースレターを購読できます
+~TiddlyWikiコミュニティからの最も興味深く関連性のあるニュースをまとめた~TiddlyWikiニュースレターを購読できます

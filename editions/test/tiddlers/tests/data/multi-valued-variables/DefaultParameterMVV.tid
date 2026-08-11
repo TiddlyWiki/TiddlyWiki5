@@ -1,0 +1,19 @@
+title: MultiValuedVariables/DefaultParameterMVV
+description: Procedure default parameter value using ((var)) syntax to provide MVV default
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\procedure showItems(itemList:((defaults)))
+<$text text={{{ [(itemList)join[-]] }}}/>
+\end
+<$let defaults={{{ [all[tiddlers]sort[]] }}}>
+<<showItems>>
+</$let>
++
+title: ExpectedResult
+
+<p>$:/core-ExpectedResult-Output</p>
++

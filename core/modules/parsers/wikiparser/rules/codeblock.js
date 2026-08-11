@@ -25,7 +25,7 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var reEnd = /(\r?\n```$)/mg;
+	var reEnd = /(^|\r?\n)```$/mg;
 	var languageStart = this.parser.pos + 3,
 		languageEnd = languageStart + this.match[1].length;
 	// Move past the match
@@ -46,10 +46,10 @@ exports.parse = function() {
 	}
 	// Return the $codeblock widget
 	return [{
-			type: "codeblock",
-			attributes: {
-					code: {type: "string", value: text, start: codeStart, end: this.parser.pos},
-					language: {type: "string", value: this.match[1], start: languageStart, end: languageEnd}
-			}
+		type: "codeblock",
+		attributes: {
+			code: {type: "string", value: text, start: codeStart, end: this.parser.pos},
+			language: {type: "string", value: this.match[1], start: languageStart, end: languageEnd}
+		}
 	}];
 };

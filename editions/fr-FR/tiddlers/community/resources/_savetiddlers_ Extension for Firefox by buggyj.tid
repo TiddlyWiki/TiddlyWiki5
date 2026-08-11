@@ -1,0 +1,17 @@
+caption: savetiddlers
+color: #4DB6AC
+community-author: buggyj
+created: 20171109171935039
+delivery: Browser Extension
+description: Extension pour les navigateur Firefox
+fr-title:
+method: save
+modified: 20250809092435788
+tags: Firefox Saving [[Other Resources]] plugins
+title: savetiddlers: Extension for Firefox by buggyj
+type: text/vnd.tiddlywiki
+url: https://github.com/buggyj/savetiddlers
+
+Une extension Mozilla Firefox qui fluidifie l'utilisation de [[l'enregistreur HTML5 par défaut|Saving with the HTML5 fallback saver]] de <<tw>>, et le rend presque aussi convivial que [[TiddlyFox]] une fois configurée.
+
+{{!!url}}

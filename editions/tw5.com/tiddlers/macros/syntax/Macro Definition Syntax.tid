@@ -37,7 +37,7 @@ param-name [: [:space] ":" [:space] default ]
 
 The optional <<.place default>> value of a parameter is specified as follows:
 
-<$railroad text={{$:/editions/tw5.com/railroad/macro-parameter-value}}/>
+<$railroad text={{$:/editions/tw5.com/railroad/call-parameter-value}}/>
 
 The <<.place rest>> of the definition has the following syntax:
 

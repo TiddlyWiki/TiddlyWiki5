@@ -1,0 +1,8 @@
+caption: --tp-sidebar-width
+created: 20260130065850825
+modified: 20260130065925595
+tags: [[Core CSS Variables]]
+title: --tp-sidebar-width CSS Variable
+type: text/vnd.tiddlywiki
+
+The `--tp-sidebar-width` CSS variable represents the width of the sidebar in fluid-fixed layout.

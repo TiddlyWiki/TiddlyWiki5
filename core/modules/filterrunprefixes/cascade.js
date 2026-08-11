@@ -24,7 +24,7 @@ exports.cascade = function(operationSubFunction,options) {
 					}
 					var output = filterFnList[index](options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
 						"currentTiddler": "" + title,
-						"..currentTiddler": widget.getVariable("currentTiddler","")
+						"..currentTiddler": widget.getVariable("currentTiddler",{defaultValue:""})
 					}));
 					if(output.length !== 0) {
 						result = output[0];
@@ -34,5 +34,5 @@ exports.cascade = function(operationSubFunction,options) {
 				results.push(result);
 			});
 		}
-	}
+	};
 };

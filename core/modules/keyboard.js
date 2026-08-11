@@ -140,7 +140,7 @@ function KeyboardManager(options) {
 	this.shortcutParsedList = []; // Stores the parsed key descriptors
 	this.shortcutPriorityList = []; // Stores the parsed shortcut priority
 	this.lookupNames = ["shortcuts"];
-	this.lookupNames.push($tw.platform.isMac ? "shortcuts-mac" : "shortcuts-not-mac")
+	this.lookupNames.push($tw.platform.isMac ? "shortcuts-mac" : "shortcuts-not-mac");
 	this.lookupNames.push($tw.platform.isWindows ? "shortcuts-windows" : "shortcuts-not-windows");
 	this.lookupNames.push($tw.platform.isLinux ? "shortcuts-linux" : "shortcuts-not-linux");
 	this.updateShortcutLists(this.getShortcutTiddlerList());
@@ -161,7 +161,7 @@ KeyboardManager.prototype.getModifierKeys = function() {
 		91, // Meta (left)
 		93, // Meta (right)
 		224 // Meta (Firefox)
-	]
+	];
 };
 
 /*
@@ -187,8 +187,7 @@ KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor,options) {
 			metaKey: false
 		};
 	for(var t=0; t<components.length; t++) {
-		var s = components[t].toLowerCase(),
-			c = s.charCodeAt(0);
+		var s = components[t].toLowerCase();
 		// Look for modifier keys
 		if(s === "ctrl") {
 			info.ctrlKey = true;
@@ -266,7 +265,7 @@ KeyboardManager.prototype.getPrintableShortcuts = function(keyInfoArray) {
 		}
 	});
 	return result;
-}
+};
 
 KeyboardManager.prototype.checkKeyDescriptor = function(event,keyInfo) {
 	return keyInfo &&
@@ -293,15 +292,15 @@ KeyboardManager.prototype.getMatchingKeyDescriptor = function(event,keyInfoArray
 KeyboardManager.prototype.getEventModifierKeyDescriptor = function(event) {
 	return event.ctrlKey && !event.shiftKey	&& !event.altKey && !event.metaKey ? "ctrl" : 
 		event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey ? "shift" : 
-		event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey ? "ctrl-shift" : 
-		event.altKey && !event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt" : 
-		event.altKey && event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt-shift" : 
-		event.altKey && event.ctrlKey && !event.shiftKey && !event.metaKey ? "ctrl-alt" : 
-		event.altKey && event.shiftKey && event.ctrlKey && !event.metaKey ? "ctrl-alt-shift" : 
-		event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey ? "meta" : 
-		event.metaKey && event.ctrlKey && !event.shiftKey && !event.altKey ? "meta-ctrl" :
-		event.metaKey && event.ctrlKey && event.shiftKey && !event.altKey ? "meta-ctrl-shift" :
-		event.metaKey && event.ctrlKey && event.shiftKey && event.altKey ? "meta-ctrl-alt-shift" : "normal";
+			event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey ? "ctrl-shift" : 
+				event.altKey && !event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt" : 
+					event.altKey && event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt-shift" : 
+						event.altKey && event.ctrlKey && !event.shiftKey && !event.metaKey ? "ctrl-alt" : 
+							event.altKey && event.shiftKey && event.ctrlKey && !event.metaKey ? "ctrl-alt-shift" : 
+								event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey ? "meta" : 
+									event.metaKey && event.ctrlKey && !event.shiftKey && !event.altKey ? "meta-ctrl" :
+										event.metaKey && event.ctrlKey && event.shiftKey && !event.altKey ? "meta-ctrl-shift" :
+											event.metaKey && event.ctrlKey && event.shiftKey && event.altKey ? "meta-ctrl-alt-shift" : "normal";
 };
 
 KeyboardManager.prototype.getShortcutTiddlerList = function() {
@@ -371,8 +370,8 @@ KeyboardManager.prototype.handleShortcutChanges = function(changedTiddlers) {
 	var newList = this.getShortcutTiddlerList();
 	var hasChanged = $tw.utils.hopArray(changedTiddlers,this.shortcutTiddlers) ? true :
 		($tw.utils.hopArray(changedTiddlers,newList) ? true :
-		(this.detectNewShortcuts(changedTiddlers))
-	);
+			(this.detectNewShortcuts(changedTiddlers))
+		);
 	// Re-cache shortcuts if something changed
 	if(hasChanged) {
 		this.updateShortcutLists(newList);

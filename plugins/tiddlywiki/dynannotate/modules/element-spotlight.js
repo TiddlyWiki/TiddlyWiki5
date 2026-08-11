@@ -55,7 +55,7 @@ ElementSpotlight.prototype.querySelectorSafe = function(selector) {
 			targetNodes = [].slice.call(targetNodes, 1); 
 			didRemoveFirstEntry = true;
 		}
-	} while(didRemoveFirstEntry)
+	} while(didRemoveFirstEntry);
 	// Return the first result
 	return targetNodes[0];
 };

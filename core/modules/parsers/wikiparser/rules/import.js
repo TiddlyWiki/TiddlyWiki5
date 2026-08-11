@@ -29,13 +29,12 @@ exports.init = function(parser) {
 Parse the most recent match
 */
 exports.parse = function() {
-	var self = this;
 	// Move past the pragma invocation
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the filter terminated by a line break
 	var reMatch = /(.*)(?:$|\r?\n)/mg;
 	reMatch.lastIndex = this.parser.pos;
-	var filterStart = this.parser.source;
+	var filterStart = this.parser.pos;
 	var match = reMatch.exec(this.parser.source);
 	this.parser.pos = reMatch.lastIndex;
 	// Parse tree nodes to return

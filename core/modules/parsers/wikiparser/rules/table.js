@@ -60,7 +60,7 @@ var processRow = function(prevColumns) {
 			// End of row
 			if(prevCell && colSpanCount > 1) {
 				if(prevCell.attributes && prevCell.attributes && prevCell.attributes.colspan) {
-						colSpanCount += prevCell.attributes.colspan.value;
+					colSpanCount += prevCell.attributes.colspan.value;
 				} else {
 					colSpanCount -= 1;
 				}
@@ -163,7 +163,7 @@ exports.parse = function() {
 					table.children.splice(0,0,rowContainer); // Insert it at the bottom
 				}
 				// Set the alignment - TODO: figure out why TW did this
-//				rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
+				//				rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
 				// Parse the caption
 				rowContainer.children = this.parser.parseInlineRun(rowTermRegExp,{eatTerminator: true});
 			} else {

@@ -22,7 +22,7 @@ There is also a single line form for shorter procedures:
 \procedure <procedure-name>(<param-name>[:<param-default-value>],<param-name>[:<param-default-value>]...) <single-line-definition-text>
 ```
 
-The first line of the definition specifies the procedure name and any parameters. Each parameter has a name and, optionally, a default value that is used if no value is supplied on a particular call to the procedure. The lines that follow contain the text of the procedure text (i.e. the snippet represented by the procedure name), until `\end` appears on a line by itself:
+The first line of the definition specifies the procedure name and any parameters. Each parameter has a name and, optionally, a default value that is used if no value is supplied on a particular call to the procedure. <<.from-version "5.4.0">> The default value can also be a [[multi-valued variable reference|Multi-Valued Variables]] using the `((var))` syntax (e.g. `\procedure show(items:((defaults)))`). The lines that follow contain the text of the procedure text (i.e. the snippet represented by the procedure name), until `\end` appears on a line by itself:
 
 For example:
 

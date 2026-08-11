@@ -45,7 +45,7 @@ Performance.prototype.log = function() {
 		orderedMeasures = Object.keys(this.measures).sort(function(a,b) {
 			if(self.measures[a].time > self.measures[b].time) {
 				return -1;
-			} else if (self.measures[a].time < self.measures[b].time) {
+			} else if(self.measures[a].time < self.measures[b].time) {
 				return + 1;
 			} else {
 				return 0;
@@ -54,10 +54,10 @@ Performance.prototype.log = function() {
 	$tw.utils.each(orderedMeasures,function(name) {
 		totalTime += self.measures[name].time;
 	});
-	var results = []
+	var results = [];
 	$tw.utils.each(orderedMeasures,function(name) {
 		var measure = self.measures[name];
-		results.push({name: name,invocations: measure.invocations, avgTime: measure.time / measure.invocations, totalTime: measure.time, percentTime: (measure.time / totalTime) * 100})
+		results.push({name: name,invocations: measure.invocations, avgTime: measure.time / measure.invocations, totalTime: measure.time, percentTime: (measure.time / totalTime) * 100});
 	});
 	self.logger.table(results);
 };

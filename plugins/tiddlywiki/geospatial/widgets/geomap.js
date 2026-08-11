@@ -133,7 +133,7 @@ GeomapWidget.prototype.refreshMap = function() {
 			attribution: layerInfo.attribution
 		});
 		if(self.renderedBaseLayers.length === 0) {
-			baseLayer.addTo(self.map)
+			baseLayer.addTo(self.map);
 		}
 		var name = layerInfo.name || ("Untitled " + untitledCount++);
 		self.renderedBaseLayers.push({name: name, layer: baseLayer});
@@ -201,7 +201,7 @@ GeomapWidget.prototype.refreshMap = function() {
 				style: function(geoJsonFeature) {
 					return {
 						color: widget.getAttribute("color","yellow")
-					}
+					};
 				},
 				pointToLayer: function(geoJsonPoint,latlng) {
 					var marker = $tw.Leaflet.marker(latlng,{icon: myIcon,draggable: draggable});
@@ -220,13 +220,13 @@ GeomapWidget.prototype.refreshMap = function() {
 					if(popupTemplateTitle) {
 						layer.bindPopup(function() {
 							var widget = self.wiki.makeTranscludeWidget(popupTemplateTitle, {
-									document: self.document,
-									parentWidget: self,
-									parseAsInline: false,
-									importPageMacros: true,
-									variables: {
-										feature: JSON.stringify(feature)
-									}
+								document: self.document,
+								parentWidget: self,
+								parseAsInline: false,
+								importPageMacros: true,
+								variables: {
+									feature: JSON.stringify(feature)
+								}
 							});
 							var container = self.document.createElement("div");
 							widget.render(container,null);

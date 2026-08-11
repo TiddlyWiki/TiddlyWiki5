@@ -1,0 +1,34 @@
+title: $:/language/Help/savewikifolder
+description: Wikiを新しいWikiフォルダに保存
+
+<<.from-version "5.1.20">> Tiddler、プラグイン、設定を含む現在のWikiをWikiフォルダとして保存します: 
+
+```
+--savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]*
+```
+
+* 対象のWikiフォルダは空か存在しない必要があります
+* フィルターは、どのTiddlerを含めるかを指定します。これはオプションで、デフォルトは`[all[tiddlers]]`です
+* 公式プラグインライブラリのプラグインは、`tiddlywiki.info`ファイル内のプラグインへの参照に置き換えられます
+* カスタムプラグインは独自のフォルダに解凍されます
+
+次のオプションがサポートされています:
+
+* ''filter'': 出力に含めるTiddlerを定義するフィルター式。
+* ''explodePlugins'': デフォルトは"yes"
+** ''yes''を指定すると、プラグインは個別のTiddlerファイルに"展開"され、wikiフォルダ内のプラグインディレクトリに保存されます
+** ''no''を指定すると、プラグインを構成要素であるTiddlerファイルに展開する処理が抑制されます。プラグインは単一のJSON Tiddlerとしてtiddlersフォルダに保存されます
+
+どちらの''explodePlugins''オプションも、元のWikiと全く同じWikiフォルダを生成することに注意してください。違いは、Wikiフォルダ内でのプラグインの表現方法にあります。
+
+一般的な使用法は、TiddlyWiki HTMLファイルをwikiフォルダーに変換することです:
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder
+```
+
+プラグインを対象のwikiフォルダのTiddlersディレクトリに保存します:
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder explodePlugins=no
+```
