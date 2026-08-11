@@ -3,18 +3,18 @@ tags: $:/tags/Global
 
 \procedure draggable-droppable-bottom-drag-enter-actions()
 <$action-setfield
-	$tiddler=<<dragStateTiddler>>
-	drag-count={{{ [<dragStateTiddler>get[drag-count]add[1]] }}}
+	$tiddler=<<dragState>>
+	drag-count={{{ [<dragState>get[drag-count]add[1]] }}}
 	drag-enter-class=<<qualifiedDragEnterClass>>
 />
-<%if [<dragStateTiddler>has[drag-enter-count]] %>
+<%if [<dragState>has[drag-enter-count]] %>
 	<$action-setfield
-		$tiddler=<<dragStateTiddler>>
+		$tiddler=<<dragState>>
 		target-before=""
 		target-after={{{ [list<list>after<tiddler>] }}}
 	/>
 	<$action-setfield
-		$tiddler=<<dragStateTiddler>>
+		$tiddler=<<dragState>>
 		start-next-tiddler=""
 		copy=""
 		target=<<tiddler>>
@@ -23,11 +23,11 @@ tags: $:/tags/Global
 		next-tiddler=""
 		from-index={{{ [list<list>allbefore<tiddler>count[]add[1]] }}}
 		from-list=<<list>>
-		drag-enter-count={{{ [<dragStateTiddler>get[drag-enter-count]add[1]] }}}
+		drag-enter-count={{{ [<dragState>get[drag-enter-count]add[1]] }}}
 	/>
 <% else %>
 	<$action-setfield
-		$tiddler=<<dragStateTiddler>>
+		$tiddler=<<dragState>>
 		drag-enter-count="1"
 	/>
 <% endif %>
@@ -35,18 +35,18 @@ tags: $:/tags/Global
 
 \procedure draggable-droppable-top-drag-enter-actions()
 <$action-setfield
-	$tiddler=<<dragStateTiddler>>
-	drag-count={{{ [<dragStateTiddler>get[drag-count]add[1]] }}}
+	$tiddler=<<dragState>>
+	drag-count={{{ [<dragState>get[drag-count]add[1]] }}}
 	drag-enter-class=<<qualifiedDragEnterClass>>
 />
-<%if [<dragStateTiddler>has[drag-enter-count]] %>
+<%if [<dragState>has[drag-enter-count]] %>
 	<$action-setfield
-		$tiddler=<<dragStateTiddler>>
+		$tiddler=<<dragState>>
 		target-before={{{ [list<list>before<tiddler>] }}}
 		target-after=""
 	/>
 	<$action-setfield
-		$tiddler=<<dragStateTiddler>>
+		$tiddler=<<dragState>>
 		start-next-tiddler=""
 		copy=""
 		target=<<tiddler>>
@@ -55,11 +55,11 @@ tags: $:/tags/Global
 		next-tiddler=""
 		from-index={{{ [list<list>allbefore<tiddler>count[]] }}}
 		from-list=<<list>>
-		drag-enter-count={{{ [<dragStateTiddler>get[drag-enter-count]add[1]] }}}
+		drag-enter-count={{{ [<dragState>get[drag-enter-count]add[1]] }}}
 	/>
 <% else %>
 	<$action-setfield
-		$tiddler=<<dragStateTiddler>>
+		$tiddler=<<dragState>>
 		drag-enter-count="1"
 	/>
 <% endif %>
@@ -84,15 +84,15 @@ tags: $:/tags/Global
 			<!-- here we could set the current-tiddler field of the history to the value of the actionTiddler -->
 		<% else %>
 			<$action-deletetiddler
-				$tiddler={{{ [<dragStateTiddler>addsuffix[/drag-handled]] }}}
+				$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
 			/>
 			<$action-deletetiddler
-				$tiddler=<<dragStateTiddler>>
+				$tiddler=<<dragState>>
 			/>
 		<% endif %>
 	<% endif %>
 	<$action-deletetiddler
-		$tiddler=<<dragStateTiddler>>
+		$tiddler=<<dragState>>
 	/>
 	<<dropActions>>
 </$let>
@@ -101,7 +101,7 @@ tags: $:/tags/Global
 
 \procedure draggable-droppable-bottom-drop-actions()
 <$action-setfield
-	$tiddler={{{ [<dragStateTiddler>addsuffix[/drag-handled]] }}}
+	$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
 	text="yes"
 />
 <%if [<actionTiddler>removeprefix<prefix>removesuffix<suffix>] %>
@@ -129,21 +129,21 @@ tags: $:/tags/Global
 	<!-- here we could set the current-tiddler field of the history to the value of the actionTiddler -->
 <% else %>
 	<$action-deletetiddler
-		$tiddler={{{ [<dragStateTiddler>addsuffix[/drag-handled]] }}}
+		$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
 	/>
 	<$action-deletetiddler
-		$tiddler=<<dragStateTiddler>>
+		$tiddler=<<dragState>>
 	/>
 <% endif %>
 <$action-deletetiddler
-	$tiddler=<<dragStateTiddler>>
+	$tiddler=<<dragState>>
 />
 <!-- here we could set the current-tiddler field of the start-history to a different value -->
 \end
 
 \procedure draggable-droppable-top-drop-actions()
 <$action-setfield
-	$tiddler={{{ [<dragStateTiddler>addsuffix[/drag-handled]] }}}
+	$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
 	text="yes"
 />
 <%if [<actionTiddler>removeprefix<prefix>removesuffix<suffix>] %>
@@ -162,10 +162,10 @@ tags: $:/tags/Global
 \end
 
 \procedure draggable-droppable-drag-end-actions()
-<%if [<dragStateTiddler>addsuffix[/drag-handled]is[missing]] %>
+<%if [<dragState>addsuffix[/drag-handled]is[missing]] %>
 	<$let
-		fromList={{{ [<dragStateTiddler>get[start-from-list]] }}}
-		fromIndex={{{ [<dragStateTiddler>get[start-from-index]] }}}
+		fromList={{{ [<dragState>get[start-from-list]] }}}
+		fromIndex={{{ [<dragState>get[start-from-index]] }}}
 		listBeforeTiddler={{{ [list<fromList>zth<fromIndex>] }}}
 		actionTiddler={{{ [<actionTiddler>removeprefix<prefix>removesuffix<suffix>] :else[<actionTiddler>] }}}
 	>
@@ -181,15 +181,15 @@ tags: $:/tags/Global
 			/>
 		<% endif %>
 		<$action-deletetiddler
-			$tiddler={{{ [<dragStateTiddler>addsuffix[/drag-handled]] }}}
+			$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
 		/>
 		<$action-deletetiddler
-			$tiddler=<<dragStateTiddler>>
+			$tiddler=<<dragState>>
 		/>
 	</$let>
 <% else %>
 	<$action-deletetiddler
-		$tiddler={{{ [<dragStateTiddler>addsuffix[/drag-handled]] }}}
+		$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
 	/>
 <% endif %>
 \end
@@ -201,12 +201,12 @@ tags: $:/tags/Global
 >
 	<%if [<nth>match<listLength>] %>
 		<$action-setfield
-			$tiddler=<<dragStateTiddler>>
+			$tiddler=<<dragState>>
 			before-tiddler={{{ [list<list>before<tiddler>] }}}
 		/>
 	<% endif %>
 	<$action-setfield
-		$tiddler=<<dragStateTiddler>>
+		$tiddler=<<dragState>>
 		drag-count="0"
 		nth=<<nth>>
 		height=<<tv-selectednode-height>>
@@ -217,7 +217,7 @@ tags: $:/tags/Global
 		start-from-list=<<list>>
 	/>
 	<$action-setfield
-		$tiddler=<<dragStateTiddler>>
+		$tiddler=<<dragState>>
 		drag-tiddler=<<tiddler>>
 		next-tiddler={{{ [list<list>after<tiddler>] }}}
 		from-index={{{ [list<list>allbefore<tiddler>count[]] }}}
@@ -226,8 +226,8 @@ tags: $:/tags/Global
 		target={{{ [list<list>after<tiddler>] }}}
 	/>
 	<$action-setfield
-		$tiddler=<<dragStateTiddler>>
-		tags="$:/tags/DragStateTiddler"
+		$tiddler=<<dragState>>
+		tags="$:/tags/dragState"
 		text="yes"
 	/>
 	<%if [<modifier>!match[ctrl]] %>
@@ -237,45 +237,45 @@ tags: $:/tags/Global
 		/>
 	<% else %>
 		<$action-setfield
-			$tiddler=<<dragStateTiddler>>
+			$tiddler=<<dragState>>
 			copy="yes"
 		/>
 	<% endif %>
 </$let>
 \end
 
-\function tf.get-drag-state-tiddler-height() [<dragStateTiddler>get[height]addsuffix[px]]
-\function tf.get-drag-state-tiddler-margin-bottom() [<dragStateTiddler>get[margin-bottom]]
+\function tf.get-drag-state-tiddler-height() [<dragState>get[height]addsuffix[px]]
+\function tf.get-drag-state-tiddler-margin-bottom() [<dragState>get[margin-bottom]]
 
-\function tf.get-draggable-droppable-bottom-class() tc-draggable-droppable-drop-bottom [<dragStateTiddler>get[margin]match[bottom]then<qualifiedDragEnterClass>] :and[join[ ]]
-\function tf.get-draggable-droppable-top-class() tc-draggable-droppable-drop-top [<dragStateTiddler>get[margin]match[top]then<qualifiedDragEnterClass>] :and[join[ ]]
+\function tf.get-draggable-droppable-bottom-class() tc-draggable-droppable-drop-bottom [<dragState>get[margin]match[bottom]then<qualifiedDragEnterClass>] :and[join[ ]]
+\function tf.get-draggable-droppable-top-class() tc-draggable-droppable-drop-top [<dragState>get[margin]match[top]then<qualifiedDragEnterClass>] :and[join[ ]]
 
-\function tf.get-tiddler-before-target() [<dragStateTiddler>get[target]] :reduce[list<list>before<currentTiddler>]
-\function tf.get-tiddler-after-target() [<dragStateTiddler>get[target]] :reduce[list<list>after<currentTiddler>]
+\function tf.get-tiddler-before-target() [<dragState>get[target]] :reduce[list<list>before<currentTiddler>]
+\function tf.get-tiddler-after-target() [<dragState>get[target]] :reduce[list<list>after<currentTiddler>]
 
 \function tf.get-styleTransition()
-	[<dragStateTiddler>get[start-next-tiddler]match<tiddler>then[none]]
+	[<dragState>get[start-next-tiddler]match<tiddler>then[none]]
 	:else[[margin-top ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
 \end
 
-\function tf.get-styleTop() [<dragStateTiddler>get[start-next-tiddler]match<tiddler>then[calc(-]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[top]then[calc(-]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[[calc( ]addsuffix[-]addsuffix<styleMarginTop>addsuffix[)]]
+\function tf.get-styleTop() [<dragState>get[start-next-tiddler]match<tiddler>then[calc(-]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then[calc(-]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[[calc( ]addsuffix[-]addsuffix<styleMarginTop>addsuffix[)]]
 
 \function tf.get-styleBottom() [[calc( ]addsuffix[-]addsuffix<styleMarginBottom>addsuffix[)]]
 \function tf.get-styleLeft() [[calc( ]addsuffix[-]addsuffix<stylePaddingLeft>addsuffix[)]]
 
-\function tf.get-styleTopHeight() [<dragStateTiddler>get[start-next-tiddler]match<tiddler>then[calc(50% + ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[)]] :else[<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[top]then[calc(50% + (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[) + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[)]] :else[[calc(50% + ]addsuffix<styleMarginBottom>addsuffix[)]]
+\function tf.get-styleTopHeight() [<dragState>get[start-next-tiddler]match<tiddler>then[calc(50% + ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[)]] :else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then[calc(50% + (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[) + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[)]] :else[[calc(50% + ]addsuffix<styleMarginBottom>addsuffix[)]]
 
-\function tf.get-styleBottomHeight() [<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[bottom]then[calc(50% + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[[50%]]
+\function tf.get-styleBottomHeight() [<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[bottom]then[calc(50% + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[[50%]]
 
 \function tf.get-styleWidth() [[calc(100% + ]addsuffix<stylePaddingLeft>addsuffix[ + ]addsuffix<stylePaddingRight>addsuffix[)]]
 
-\function tf.get-styleMarginTop() [<dragStateTiddler>get[start-next-tiddler]match<tiddler>then[calc(]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[))]] :else[<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[top]then<dragStateTiddler>get[height]addsuffix[px]addprefix[calc(]addsuffix[ + (2 * ]addsuffix<styleMarginBottom>addsuffix[))]] :else[[0px]]
-\function tf.get-styleMarginBottom() [<dragStateTiddler>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragStateTiddler>get[margin]match[bottom]then<dragStateTiddler>get[height]addsuffix[px]addprefix[calc(]addsuffix[ + (2 * ]addsuffix<styleMarginBottom>addsuffix[))]] :else[[0px]]
+\function tf.get-styleMarginTop() [<dragState>get[start-next-tiddler]match<tiddler>then[calc(]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[))]] :else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then<dragState>get[height]addsuffix[px]addprefix[calc(]addsuffix[ + (2 * ]addsuffix<styleMarginBottom>addsuffix[))]] :else[[0px]]
+\function tf.get-styleMarginBottom() [<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[bottom]then<dragState>get[height]addsuffix[px]addprefix[calc(]addsuffix[ + (2 * ]addsuffix<styleMarginBottom>addsuffix[))]] :else[[0px]]
 
 \function tf.get-draggable-droppable-class() tc-draggable-droppable-qualifier [<qualifiedDragEnterClass>] :and[join[ ]]
 \function tf.get-flexDirection() [<direction>match[vertical]then[row]] [<direction>match[horizontal]then[column]]
 
-\procedure make-draggable-droppable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragStateTiddler:"$:/state/tiddlywiki/dragging",direction:"vertical",styleMarginTop:"0px",styleMarginBottom:"0px",stylePaddingLeft:"0px",stylePaddingRight:"0px",styleZIndex:"501",animationDuration:"175",animationCurve:"linear")
+\procedure make-draggable-droppable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragState:"$:/state/tiddlywiki/dragging",direction:"vertical",styleMarginTop:"0px",styleMarginBottom:"0px",stylePaddingLeft:"0px",stylePaddingRight:"0px",styleZIndex:"501",animationDuration:"175",animationCurve:"linear")
 \whitespace trim
 <$tiddler tiddler=<<tiddler>>>
 <$let
@@ -304,7 +304,7 @@ tags: $:/tags/Global
 			<$set name="tv-enable-drag-and-drop" value={{{ [<enable>match[yes]then[no]] :else[<tv-enable-drag-and-drop>] }}}>
 				<<content>>
 			</$set>
-			<%if [<dragStateTiddler>get[text]match[yes]] %>
+			<%if [<dragState>get[text]match[yes]] %>
 				<%if [<direction>match[vertical]] %>
 					<$droppable
 						class=<<tf.get-draggable-droppable-top-class>>
