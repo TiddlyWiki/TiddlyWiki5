@@ -230,7 +230,8 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
-		} else if(changedAttributes["class"]) {
+		}
+		if(changedAttributes["class"]) {
 			this.assignDomNodeClasses();
 		}
 		this.engine.fixHeight();
