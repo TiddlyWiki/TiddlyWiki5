@@ -1,0 +1,21 @@
+title: $:/themes/tiddlywiki/vanilla/masonry
+tags: $:/tags/Stylesheet
+code-body: yes
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-story-river-masonry {
+	column-count: {{$:/config/StoryRiver/masonry-columns}};
+	column-gap: 28px;
+}
+
+.tc-story-river-masonry > .tc-live-reorderable {
+	break-inside: avoid;
+	width: 100%;
+}
+
+.tc-story-river-masonry > .tc-live-reorderable > .tc-tiddler-frame {
+	width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+}

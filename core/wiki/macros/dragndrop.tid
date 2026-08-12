@@ -1,401 +1,160 @@
 title: $:/core/wiki/macros/dragndrop
 tags: $:/tags/Global
+code-body: yes
 
-\procedure draggable-droppable-bottom-drag-enter-actions()
-<$action-setfield
-	$tiddler=<<dragState>>
-	drag-count={{{ [<dragState>get[drag-count]add[1]] }}}
-	drag-enter-class=<<qualifiedDragEnterClass>>
-/>
-<%if [<dragState>has[drag-enter-count]] %>
-	<$action-setfield
-		$tiddler=<<dragState>>
-		target-before=""
-		target-after={{{ [list<list>after<tiddler>] }}}
-		direction={{{ [<dragState>get[margin]match[top]then<dragState>get[target]match<tiddler>then[down]] [<dragState>get[margin]match[top]then<dragState>get[target]!match<tiddler>then[up]] :else[[up]] }}}
-	/>
-	<$action-setfield
-		$tiddler=<<dragState>>
-		start-next-tiddler=""
-		before-tiddler=""
-		copy=""
-		target=<<tiddler>>
-		margin="bottom"
-		nth={{{ [list<list>allbefore<tiddler>count[]add[1]] }}}
-		next-tiddler=""
-		from-index={{{ [list<list>allbefore<tiddler>count[]add[1]] }}}
-		from-list=<<list>>
-		drag-enter-count={{{ [<dragState>get[drag-enter-count]add[1]] }}}
-	/>
-<% else %>
-	<$action-setfield
-		$tiddler=<<dragState>>
-		drag-enter-count="1"
-	/>
-<% endif %>
-\end
-
-\procedure draggable-droppable-top-drag-enter-actions()
-<$action-setfield
-	$tiddler=<<dragState>>
-	drag-count={{{ [<dragState>get[drag-count]add[1]] }}}
-	drag-enter-class=<<qualifiedDragEnterClass>>
-/>
-<%if [<dragState>has[drag-enter-count]] %>
-	<$action-setfield
-		$tiddler=<<dragState>>
-		target-before={{{ [list<list>before<tiddler>] }}}
-		target-after=""
-		direction={{{ [<dragState>get[margin]match[bottom]then<dragState>get[target]match<tiddler>then[up]] [<dragState>get[margin]match[bottom]then<dragState>get[target]!match<tiddler>then[down]] :else[[down]] }}}
-	/>
-	<$action-setfield
-		$tiddler=<<dragState>>
-		start-next-tiddler=""
-		before-tiddler=""
-		copy=""
-		target=<<tiddler>>
-		margin="top"
-		nth={{{ [list<list>allbefore<tiddler>count[]] }}}
-		next-tiddler=""
-		from-index={{{ [list<list>allbefore<tiddler>count[]] }}}
-		from-list=<<list>>
-		drag-enter-count={{{ [<dragState>get[drag-enter-count]add[1]] }}}
-	/>
-<% else %>
-	<$action-setfield
-		$tiddler=<<dragState>>
-		drag-enter-count="1"
-	/>
-<% endif %>
-\end
-
-\procedure draggable-droppable-bottom-drop-actions-inner()
+\procedure live-reorder-drag-start-actions()
 <$let
-	nextTiddler={{{ [list<list>after<tiddler>] }}}
+	alreadyDragging={{{ [<dragState>get[text]match[yes]then[yes]] :else[[no]] }}}
 >
-	<%if [<nextTiddler>match[]] %>
-		<$action-listops
-			$tiddler=<<list>>
-			$subfilter="[<actionTiddler>]"
+	<%if [<alreadyDragging>match[no]] %>
+		<$action-setfield
+			$tiddler=<<dragState>>
+			tags="$:/tags/dragState"
+			text="yes"
+			drag-tiddler=<<tiddler>>
+			from-list=<<list>>
+			start-index={{{ [list<list>allbefore<tiddler>count[]] }}}
 		/>
-		<!-- here we could set the current-tiddler field of the history to the value of the actionTiddler -->
-	<% else %>
-		<%if [<actionTiddler>!match<nextTiddler>] %>
+	<% endif %>
+</$let>
+\end
+
+\procedure live-reorder-before-drag-enter-actions()
+<$let
+	draggedTiddler={{{ [<dragState>get[drag-tiddler]] }}}
+	currentPrevious={{{ [list<list>before<tiddler>] }}}
+>
+	<%if [<draggedTiddler>!match<tiddler>] %>
+		<%if [<draggedTiddler>!match<currentPrevious>] %>
 			<$action-listops
 				$tiddler=<<list>>
-				$subfilter="+[insertbefore<actionTiddler>,<nextTiddler>]"
-			/>
-			<!-- here we could set the current-tiddler field of the history to the value of the actionTiddler -->
-		<% else %>
-			<$action-deletetiddler
-				$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
-			/>
-			<$action-deletetiddler
-				$tiddler=<<dragState>>
+				$subfilter="+[insertbefore<draggedTiddler>,<tiddler>]"
 			/>
 		<% endif %>
 	<% endif %>
-	<$action-deletetiddler
-		$tiddler=<<dragState>>
-	/>
 </$let>
-<!-- here we could set the current-tiddler field of the history to the value of the actionTiddler -->
 \end
 
-\procedure draggable-droppable-bottom-drop-actions()
+\procedure live-reorder-after-drag-enter-actions()
+<$let
+	draggedTiddler={{{ [<dragState>get[drag-tiddler]] }}}
+	currentNext={{{ [list<list>after<tiddler>] }}}
+>
+	<%if [<draggedTiddler>!match<tiddler>] %>
+		<%if [<draggedTiddler>!match<currentNext>] %>
+			<$action-listops
+				$tiddler=<<list>>
+				$subfilter="+[insertafter<draggedTiddler>,<tiddler>]"
+			/>
+		<% endif %>
+	<% endif %>
+</$let>
+\end
+
+\procedure live-reorder-drop-actions()
 <$action-setfield
 	$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
 	text="yes"
 />
-<%if [<actionTiddler>removeprefix<prefix>removesuffix<suffix>] %>
-	<$let
-		actionTiddler={{{ [<actionTiddler>removeprefix<prefix>removesuffix<suffix>] }}}
-	>
-		<$transclude
-			$variable="draggable-droppable-bottom-drop-actions-inner"
-		/>
-	</$let>
-<% else %>
-	<$transclude
-		$variable="draggable-droppable-bottom-drop-actions-inner"
-	/>
-<% endif %>
-<<dropActions>>
-\end
-
-\procedure draggable-droppable-top-drop-actions-inner()
-<%if [<actionTiddler>!match<tiddler>] %>
-	<$action-listops
-		$tiddler=<<list>>
-		$subfilter="+[insertbefore<actionTiddler>,<tiddler>]"
-	/>
-	<!-- here we could set the current-tiddler field of the history to the value of the actionTiddler -->
-<% else %>
-	<$action-deletetiddler
-		$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
-	/>
-	<$action-deletetiddler
-		$tiddler=<<dragState>>
-	/>
-<% endif %>
 <$action-deletetiddler
 	$tiddler=<<dragState>>
 />
-<!-- here we could set the current-tiddler field of the history to the value of the actionTiddler -->
-\end
-
-\procedure draggable-droppable-top-drop-actions()
-<$action-setfield
-	$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
-	text="yes"
-/>
-<%if [<actionTiddler>removeprefix<prefix>removesuffix<suffix>] %>
-	<$let
-		actionTiddler={{{ [<actionTiddler>removeprefix<prefix>removesuffix<suffix>] }}}
-	>
-		<$transclude
-			$variable="draggable-droppable-top-drop-actions-inner"
-		/>
-	</$let>
-<% else %>
-	<$transclude
-		$variable="draggable-droppable-top-drop-actions-inner"
-	/>
-<% endif %>
 <<dropActions>>
 \end
 
-\procedure draggable-droppable-drag-end-actions()
+\procedure live-reorder-drag-end-actions()
 <%if [<dragState>addsuffix[/drag-handled]is[missing]] %>
 	<$let
-		fromList={{{ [<dragState>get[start-from-list]] }}}
-		fromIndex={{{ [<dragState>get[start-from-index]] }}}
-		listBeforeTiddler={{{ [list<fromList>zth<fromIndex>] }}}
-		actionTiddler={{{ [<actionTiddler>removeprefix<prefix>removesuffix<suffix>] :else[<actionTiddler>] }}}
+		fromList={{{ [<dragState>get[from-list]] }}}
+		draggedTiddler={{{ [<dragState>get[drag-tiddler]] }}}
+		startIndex={{{ [<dragState>get[start-index]] }}}
+		anchorTiddler={{{ [list<fromList>!match<draggedTiddler>zth<startIndex>] }}}
 	>
-		<%if [<listBeforeTiddler>!is[blank]] %>
+		<%if [<anchorTiddler>!is[blank]] %>
 			<$action-listops
 				$tiddler=<<fromList>>
-				$subfilter="+[insertbefore<actionTiddler>,<listBeforeTiddler>]"
+				$subfilter="+[insertbefore<draggedTiddler>,<anchorTiddler>]"
 			/>
 		<% else %>
 			<$action-listops
 				$tiddler=<<fromList>>
-				$subfilter="[<actionTiddler>]"
+				$subfilter="-[<draggedTiddler>] [<draggedTiddler>]"
 			/>
 		<% endif %>
-		<$action-deletetiddler
-			$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
-		/>
-		<$action-deletetiddler
-			$tiddler=<<dragState>>
-		/>
 	</$let>
-<% else %>
-	<$action-deletetiddler
-		$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
-	/>
 <% endif %>
+<$action-deletetiddler
+	$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
+/>
+<$action-deletetiddler
+	$tiddler=<<dragState>>
+/>
 \end
 
-\procedure draggable-droppable-drag-start-actions()
-<$let
-	nth={{{ [list<list>allbefore<tiddler>count[]] }}}
-	listLength={{{ [list<list>count[]subtract[1]] }}}
->
-	<%if [<nth>match<listLength>] %>
-		<$action-setfield
-			$tiddler=<<dragState>>
-			before-tiddler={{{ [list<list>before<tiddler>] }}}
-		/>
-	<% endif %>
-	<$action-setfield
-		$tiddler=<<dragState>>
-		drag-count="0"
-		nth=<<nth>>
-		height={{{ [<tv-selectednode-exact-height>] :else[<tv-selectednode-height>] }}}
-		width={{{ [<tv-selectednode-exact-width>] :else[<tv-selectednode-width>] }}}
-		margin-bottom=<<styleMarginBottom>>
-		start-next-tiddler={{{ [list<list>after<tiddler>] }}}
-		start-from-index={{{ [list<list>allbefore<tiddler>count[]] }}}
-		start-from-list=<<list>>
-	/>
-	<$action-setfield
-		$tiddler=<<dragState>>
-		drag-tiddler=<<tiddler>>
-		next-tiddler={{{ [list<list>after<tiddler>] }}}
-		from-index={{{ [list<list>allbefore<tiddler>count[]] }}}
-		from-list=<<list>>
-		from-history=<<history>>
-		target={{{ [list<list>after<tiddler>] }}}
-	/>
-	<$action-setfield
-		$tiddler=<<dragState>>
-		tags="$:/tags/dragState"
-		text="yes"
-	/>
-	<%if [<modifier>!match[ctrl]] %>
-		<$action-listops
-			$tiddler=<<list>>
-			$subfilter="-[<tiddler>]"
-		/>
-	<% else %>
-		<$action-setfield
-			$tiddler=<<dragState>>
-			copy="yes"
-		/>
-	<% endif %>
-</$let>
-\end
+\function tf.lr.is-dragging() [<dragState>get[text]match[yes]then[yes]] :else[[no]]
+\function tf.lr.is-ghost() [<tf.lr.is-dragging>match[yes]then<dragState>get[drag-tiddler]match<tiddler>then[yes]] :else[[no]]
+\function tf.lr.get-opacity() [<tf.lr.is-ghost>match[yes]then<ghostOpacity>] :else[[]]
+\function tf.lr.is-vertical() [<direction>match[vertical]then[yes]] :else[[no]]
+\function tf.lr.get-before-top() [<tf.lr.is-vertical>match[yes]then[0]] :else[[0]]
+\function tf.lr.get-before-left() [[0]]
+\function tf.lr.get-before-width() [<tf.lr.is-vertical>match[yes]then[100%]] :else[[50%]]
+\function tf.lr.get-before-height() [<tf.lr.is-vertical>match[yes]then[50%]] :else[[100%]]
+\function tf.lr.get-after-top() [<tf.lr.is-vertical>match[yes]then[50%]] :else[[0]]
+\function tf.lr.get-after-left() [<tf.lr.is-vertical>match[yes]then[0]] :else[[50%]]
+\function tf.lr.get-after-width() [<tf.lr.is-vertical>match[yes]then[100%]] :else[[50%]]
+\function tf.lr.get-after-height() [<tf.lr.is-vertical>match[yes]then[50%]] :else[[100%]]
 
-\function tf.get-drag-state-tiddler-height() [<dragState>get[height]addsuffix[px]]
-\function tf.get-drag-state-tiddler-margin-bottom() [<dragState>get[margin-bottom]]
+\function tf.lr.get-item-class() tc-live-reorderable [<tf.lr.is-ghost>match[yes]then[tc-live-reorderable-ghost]] [<class>] :and[join[ ]]
 
-\function tf.get-draggable-droppable-bottom-class() tc-draggable-droppable-drop-bottom [<dragState>get[margin]match[bottom]then<qualifiedDragEnterClass>] :and[join[ ]]
-\function tf.get-draggable-droppable-top-class() tc-draggable-droppable-drop-top [<dragState>get[margin]match[top]then<qualifiedDragEnterClass>] :and[join[ ]]
-
-\function tf.get-tiddler-before-target() [<dragState>get[target]] :reduce[list<list>before<currentTiddler>]
-\function tf.get-tiddler-after-target() [<dragState>get[target]] :reduce[list<list>after<currentTiddler>]
-
-\function tf.get-restart-nudge() [<dragState>get[drag-count]remainder[2]divide[10]addsuffix[px]] :else[[0px]]
-
-\function tf.is-gap-holder() [<dragState>get[start-next-tiddler]match<tiddler>then[yes]] :else[<dragState>get[before-tiddler]match<tiddler>then[yes]] :else[[no]]
-
-\function tf.get-animationDuration()
-	[<dragState>get[height]divide<animationReferenceHeight>power[0.5]multiply<animationDuration>max<animationMinDuration>min<animationMaxDuration>round[]]
-	:else[<animationDuration>]
-\end
-
-\function tf.get-margin-transition-value() [[margin-top ]addsuffix<tf.get-animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom ]addsuffix<tf.get-animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
-\function tf.get-placeholder-transition-value() [[top ]addsuffix<tf.get-animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, height ]addsuffix<tf.get-animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
-
-\function tf.get-styleTransition()
-	[<tf.is-gap-holder>match[yes]then[none]]
-	:else[<dragState>get[text]match[yes]then<tf.get-margin-transition-value>]
-	:else[[none]]
-\end
-
-\function tf.get-placeholderTransition()
-	[<tf.is-gap-holder>match[yes]then[none]]
-	:else[<dragState>get[text]match[yes]then<tf.get-placeholder-transition-value>]
-	:else[[none]]
-\end
-
-\function tf.get-gap-size-top() [[calc(]addsuffix<tf.get-restart-nudge>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[))]]
-\function tf.get-gap-zero-top() [[calc(]addsuffix<tf.get-restart-nudge>addsuffix[)]]
-\function tf.get-gap-size-bottom() [[calc(0px - ]addsuffix<tf.get-restart-nudge>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[))]]
-\function tf.get-gap-zero-bottom() [[calc(0px - ]addsuffix<tf.get-restart-nudge>addsuffix[)]]
-
-\function tf.get-styleTop()
-	[<tf.is-gap-holder>match[yes]then[calc(0px - ]addsuffix<tf.get-restart-nudge>addsuffix[ - ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]]
-	:else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then[calc(0px - ]addsuffix<tf.get-restart-nudge>addsuffix[ - ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]]
-	:else[[calc(0px - ]addsuffix<tf.get-restart-nudge>addsuffix[ - ]addsuffix<styleMarginTop>addsuffix[)]]
-\end
-
-\function tf.get-styleBottom() [[calc( ]addsuffix[-]addsuffix<styleMarginBottom>addsuffix[)]]
-\function tf.get-styleLeft() [[calc( ]addsuffix[-]addsuffix<stylePaddingLeft>addsuffix[)]]
-
-\function tf.get-styleTopHeight()
-	[<tf.is-gap-holder>match[yes]then[calc(50% + ]addsuffix<tf.get-restart-nudge>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[)]]
-	:else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then[calc(50% + ]addsuffix<tf.get-restart-nudge>addsuffix[ + (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[) + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[)]]
-	:else[[calc(50% + ]addsuffix<tf.get-restart-nudge>addsuffix[ + ]addsuffix<styleMarginBottom>addsuffix[)]]
-\end
-
-\function tf.get-styleBottomHeight()
-	[<dragState>get[before-tiddler]match<tiddler>then[calc(50% + ]addsuffix<tf.get-restart-nudge>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]]
-	:else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[bottom]then[calc(50% + ]addsuffix<tf.get-restart-nudge>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]]
-	:else[[calc(50% + ]addsuffix<tf.get-restart-nudge>addsuffix[)]]
-\end
-
-\function tf.get-styleWidth() [[calc(100% + ]addsuffix<stylePaddingLeft>addsuffix[ + ]addsuffix<stylePaddingRight>addsuffix[)]]
-
-\function tf.get-styleMarginTop()
-	[<dragState>get[start-next-tiddler]match<tiddler>then<tf.get-gap-size-top>]
-	:else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then<tf.get-gap-size-top>]
-	:else[<tf.get-gap-zero-top>]
-\end
-
-\function tf.get-styleMarginBottom()
-	[<dragState>get[before-tiddler]match<tiddler>then<tf.get-gap-size-bottom>]
-	:else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[bottom]then<tf.get-gap-size-bottom>]
-	:else[<tf.get-gap-zero-bottom>]
-\end
-
-\function tf.get-draggable-droppable-class() tc-draggable-droppable-qualifier [<qualifiedDragEnterClass>] :and[join[ ]]
-\function tf.get-flexDirection() [<direction>match[vertical]then[row]] [<direction>match[horizontal]then[column]]
-
-\procedure make-draggable-droppable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragState:"$:/state/tiddlywiki/dragging",direction:"vertical",styleMarginTop:"0px",styleMarginBottom:"0px",stylePaddingLeft:"0px",stylePaddingRight:"0px",styleZIndex:"501",animationDuration:"175",animationReferenceHeight:"240",animationMinDuration:"90",animationMaxDuration:"400",animationCurve:"ease-out")
+\procedure make-live-reorderable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501")
 \whitespace trim
 <$tiddler tiddler=<<tiddler>>>
-<$let
-	prefix="[["
-	suffix="]]"
-	transclusion=<<tiddler>>
-	qualifiedDragEnterClass={{{ [<tiddler>addsuffix<qualify>sha256[64]] }}}
->
 	<$draggable
 		enable=<<enable>>
 		tiddler=<<tiddler>>
-		startactions=<<draggable-droppable-drag-start-actions>>
-		endactions=<<draggable-droppable-drag-end-actions>>
-		class=<<class>>
-		style.display="flow-root"
+		startactions=<<live-reorder-drag-start-actions>>
+		endactions=<<live-reorder-drag-end-actions>>
+		class=<<tf.lr.get-item-class>>
+		data-animate-key=<<tiddler>>
+		style.display=<<itemDisplay>>
+		style.position="relative"
+		style.opacity=<<tf.lr.get-opacity>>
 	>
-		<div
-			class=<<tf.get-draggable-droppable-class>>
-			style.display="flex"
-			style.position="relative"
-			style.flex-direction=<<tf.get-flexDirection>>
-			style.border="none"
-			style.margin-top=<<tf.get-styleMarginTop>>
-			style.margin-bottom=<<tf.get-styleMarginBottom>>
-			style.transition=<<tf.get-styleTransition>>
-		>
-			<$set name="tv-enable-drag-and-drop" value={{{ [<enable>match[yes]then[no]] :else[<tv-enable-drag-and-drop>] }}}>
-				<<content>>
-			</$set>
-			<%if [<dragState>get[text]match[yes]] %>
-				<%if [<direction>match[vertical]] %>
-					<$droppable
-						class=<<tf.get-draggable-droppable-top-class>>
-						actions=<<draggable-droppable-top-drop-actions>>
-						dragEnterActions=<<draggable-droppable-top-drag-enter-actions>>
-					>
-						<div
-							class="tc-draggable-droppable-drop-top-placeholder"
-							style.position="absolute"
-							style.border="none"
-							style.top=<<tf.get-styleTop>>
-							style.left=<<tf.get-styleLeft>>
-							style.height=<<tf.get-styleTopHeight>>
-							style.width=<<tf.get-styleWidth>>
-							style.z-index=<<styleZIndex>>
-							style.transition=<<tf.get-placeholderTransition>>
-						/>
-					</$droppable>
-					<$droppable
-						class=<<tf.get-draggable-droppable-bottom-class>>
-						actions=<<draggable-droppable-bottom-drop-actions>>
-						dragEnterActions=<<draggable-droppable-bottom-drag-enter-actions>>
-					>
-						<div
-							class="tc-draggable-droppable-drop-bottom-placeholder"
-							style.position="absolute"
-							style.border="none"
-							style.top="50%"
-							style.left=<<tf.get-styleLeft>>
-							style.height=<<tf.get-styleBottomHeight>>
-							style.width=<<tf.get-styleWidth>>
-							style.z-index=<<styleZIndex>>
-							style.transition=<<tf.get-placeholderTransition>>
-						/>
-					</$droppable>
-				<%elseif [<direction>match[horizontal]] %>
-					<!-- horizontal handling missing at the moment -->
-				<% endif %>
-			<% endif %>
-		</div>
+		<$set name="tv-enable-drag-and-drop" value={{{ [<enable>match[yes]then[no]] :else[<tv-enable-drag-and-drop>] }}}>
+			<<content>>
+		</$set>
+		<%if [<tf.lr.is-dragging>match[yes]] %>
+			<$droppable
+				class="tc-live-reorderable-drop-before"
+				actions=<<live-reorder-drop-actions>>
+				dragEnterActions=<<live-reorder-before-drag-enter-actions>>
+			>
+				<div
+					class="tc-live-reorderable-drop-placeholder"
+					style.position="absolute"
+					style.top=<<tf.lr.get-before-top>>
+					style.left=<<tf.lr.get-before-left>>
+					style.width=<<tf.lr.get-before-width>>
+					style.height=<<tf.lr.get-before-height>>
+					style.z-index=<<styleZIndex>>
+				/>
+			</$droppable>
+			<$droppable
+				class="tc-live-reorderable-drop-after"
+				actions=<<live-reorder-drop-actions>>
+				dragEnterActions=<<live-reorder-after-drag-enter-actions>>
+			>
+				<div
+					class="tc-live-reorderable-drop-placeholder"
+					style.position="absolute"
+					style.top=<<tf.lr.get-after-top>>
+					style.left=<<tf.lr.get-after-left>>
+					style.width=<<tf.lr.get-after-width>>
+					style.height=<<tf.lr.get-after-height>>
+					style.z-index=<<styleZIndex>>
+				/>
+			</$droppable>
+		<% endif %>
 	</$draggable>
-</$let>
 </$tiddler>
 \end

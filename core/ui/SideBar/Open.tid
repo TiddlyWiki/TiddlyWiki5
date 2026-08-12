@@ -16,8 +16,10 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \end
 
 <div class="tc-sidebar-tab-open" style.border-top-style="solid" style.border-top-width="1px" style.border-top-color="transparent">
+<$animatelayout duration="200" easing="ease-out">
 <$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
-<$transclude $variable="make-draggable-droppable" tiddler=<<currentTiddler>> list=<<tv-story-list>> content=<<content>> dragState=<<tf.get-open-tab-drag-state>> animationDuration="200" animationReferenceHeight="20"/>
+<$transclude $variable="make-live-reorderable" tiddler=<<currentTiddler>> list=<<tv-story-list>> content=<<content>> dragState=<<tf.get-open-tab-drag-state>>/>
 </$list>
+</$animatelayout>
 </div>
 <$button message='tm-close-all-tiddlers' class='tc-btn-invisible tc-btn-mini'><<lingo Button>></$button>

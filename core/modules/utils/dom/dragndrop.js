@@ -167,6 +167,17 @@ exports.makeDraggable = function(options) {
 		return false;
 	};
 
+	// Remove any handlers left by a previous call. makeDraggable is re-run on every
+	// refresh of the draggable widget, so without this the listeners stack up and the
+	// drag start and end actions are invoked once per accumulated pair
+	if(options.widget && domNode.removeEventListener) {
+		if(options.widget.dragStartListenerReference) {
+			domNode.removeEventListener("dragstart",options.widget.dragStartListenerReference,false);
+		}
+		if(options.widget.dragEndListenerReference) {
+			domNode.removeEventListener("dragend",options.widget.dragEndListenerReference,false);
+		}
+	}
 	// Add event handlers
 	options.widget.dragStartListenerReference = dragStartHandler;
 	options.widget.dragEndListenerReference = dragEndHandler;

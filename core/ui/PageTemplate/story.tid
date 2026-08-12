@@ -10,7 +10,7 @@ tags: $:/tags/PageTemplate
 
 \whitespace trim
 
-<section class="tc-story-river" role="main">
+<section class={{{ [all[shadows+tiddlers]tag[$:/tags/ClassFilters/StoryRiver]!is[draft]] :map:flat[subfilter{!!text}] tc-story-river :and[join[ ]] }}} role="main">
 
 <section class="story-backdrop">
 
@@ -22,11 +22,15 @@ tags: $:/tags/PageTemplate
 
 </section>
 
+<$animatelayout duration="175" easing="ease-out">
+
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}>
 
-<$transclude $variable="make-draggable-droppable" $mode="inline" tiddler=<<currentTiddler>> enable={{$:/config/story/dragndrop/enable}} list="$:/StoryList" content=<<content>> dragState=<<tf.get-story-drag-state>> stylePaddingLeft="42px" stylePaddingRight="42px"/>
+<$transclude $variable="make-live-reorderable" $mode="inline" tiddler=<<currentTiddler>> enable={{$:/config/story/dragndrop/enable}} list="$:/StoryList" content=<<content>> dragState=<<tf.get-story-drag-state>>/>
 
 </$list>
+
+</$animatelayout>
 
 <section class="story-frontdrop">
 

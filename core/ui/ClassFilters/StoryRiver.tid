@@ -1,0 +1,4 @@
+title: $:/core/ui/ClassFilters/StoryRiver
+tags: $:/tags/ClassFilters/StoryRiver
+
+[{$:/config/StoryRiver/masonry}match[yes]then[tc-story-river-masonry]]
