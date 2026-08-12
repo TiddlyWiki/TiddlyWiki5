@@ -1,0 +1,45 @@
+title: $:/core/ui/ControlPanel/DragAndDrop
+tags: $:/tags/ControlPanel/Appearance
+caption: {{$:/language/ControlPanel/DragAndDrop/Caption}}
+
+\whitespace trim
+\procedure lingo-base() $:/language/ControlPanel/DragAndDrop/
+
+<<lingo Hint>>
+
+!! <<lingo Reordering/Caption>>
+
+<$checkbox tiddler="$:/config/story/dragndrop/enable"
+	field="text" checked="yes" unchecked="no" default="no"
+	class="tc-control-panel-item"
+>
+	<$link to="$:/config/story/dragndrop/enable" class="tc-tiny-gap-left">
+		<<lingo Reordering/Description>>
+	</$link>
+</$checkbox>
+
+!! <<lingo Animation/Caption>>
+
+<<lingo Animation/Hint>>
+
+|tc-table-no-border|k
+|<$link to="$:/config/DragAndDrop/animation/duration"><<lingo Animation/Duration/Prompt>></$link> |<$edit-text tiddler="$:/config/DragAndDrop/animation/duration" tag="input" type="number" size="6"/> |
+|<$link to="$:/config/DragAndDrop/animation/easing"><<lingo Animation/Easing/Prompt>></$link> |<$select tiddler="$:/config/DragAndDrop/animation/easing" class="tc-select"><$list filter="[all[shadows+tiddlers]tag[$:/tags/DragAndDrop/Easing]!has[draft.of]]"><option value={{{ [<currentTiddler>get[text]trim[]] }}}><$transclude field="caption"><$text text=<<currentTiddler>>/></$transclude></option></$list></$select> |
+
+!! <<lingo Layout/Caption>>
+
+<$checkbox tiddler="$:/config/StoryRiver/masonry"
+	field="text" checked="yes" unchecked="no" default="no"
+	class="tc-control-panel-item"
+>
+	<$link to="$:/config/StoryRiver/masonry" class="tc-tiny-gap-left">
+		<<lingo Layout/Masonry/Description>>
+	</$link>
+</$checkbox>
+
+<$reveal type="match" state="$:/config/StoryRiver/masonry" text="yes" tag="div">
+
+|tc-table-no-border|k
+|<$link to="$:/config/StoryRiver/masonry-columns"><<lingo Layout/Columns/Prompt>></$link> |<$edit-text tiddler="$:/config/StoryRiver/masonry-columns" tag="input" type="number" size="6"/> |
+
+</$reveal>

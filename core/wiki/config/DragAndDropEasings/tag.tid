@@ -1,0 +1,2 @@
+title: $:/tags/DragAndDrop/Easing
+list: [[$:/config/DragAndDrop/Easings/emphasized-decelerate]] [[$:/config/DragAndDrop/Easings/decelerate]] [[$:/config/DragAndDrop/Easings/ease-out]] [[$:/config/DragAndDrop/Easings/ease]] [[$:/config/DragAndDrop/Easings/linear]] [[$:/config/DragAndDrop/Easings/spring]]

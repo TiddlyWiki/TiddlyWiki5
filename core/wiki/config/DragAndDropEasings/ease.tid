@@ -1,0 +1,4 @@
+title: $:/config/DragAndDrop/Easings/ease
+tags: $:/tags/DragAndDrop/Easing
+caption: {{$:/language/ControlPanel/DragAndDrop/Easings/ease}}
+text: ease
