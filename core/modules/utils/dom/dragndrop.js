@@ -9,6 +9,29 @@ Browser data transfer utilities, used with the clipboard and drag and drop
 
 "use strict";
 
+function endDragInProgress(domNode) {
+	if($tw.dragInProgress !== domNode) {
+		return;
+	}
+	$tw.utils.nextTick(function() {
+		if($tw.dragInProgress === domNode) {
+			$tw.dragInProgress = null;
+		}
+	});
+}
+
+function installDragEndBackstop(domNode) {
+	var doc = domNode.ownerDocument;
+	if(!doc || !doc.addEventListener) {
+		return;
+	}
+	var handler = function() {
+		doc.removeEventListener("pointerdown",handler,true);
+		endDragInProgress(domNode);
+	};
+	doc.addEventListener("pointerdown",handler,true);
+}
+
 /*
 Options:
 
@@ -45,6 +68,7 @@ exports.makeDraggable = function(options) {
 		if(titles.length > 0 && (options.selector && $tw.utils.domMatchesSelector(event.target,options.selector) || event.target === domNode)) {
 			// Mark the drag in progress
 			$tw.dragInProgress = domNode;
+			installDragEndBackstop(domNode);
 			// Set the dragging class on the element being dragged
 			$tw.utils.addClass(domNode,"tc-dragging");
 			// Invoke drag-start actions if given
@@ -124,7 +148,6 @@ exports.makeDraggable = function(options) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
 			var titleString = $tw.utils.stringifyList(titles);
-			$tw.dragInProgress = null;
 			// Invoke drag-end actions if given
 			if(endActions !== undefined) {
 				variables = $tw.utils.collectDOMVariables(domNode,null,event);
@@ -132,6 +155,7 @@ exports.makeDraggable = function(options) {
 				variables["actionTiddler"] = titleString;
 				options.widget.invokeActionString(endActions,options.widget,event,variables);
 			}
+			endDragInProgress(domNode);
 			// Remove the dragging class on the element being dragged
 			$tw.utils.removeClass(domNode,"tc-dragging");
 			// Delete the drag image element

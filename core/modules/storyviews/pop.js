@@ -35,6 +35,11 @@ PopStoryView.prototype.insert = function(widget) {
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
+	// Don't animate while a drag is in progress: drag and drop reserves the space for
+	// the element being moved itself, and the two would be applied on top of each other
+	if($tw.dragInProgress) {
+		return;
+	}
 	// Reset once the transition is over
 	setTimeout(function() {
 		$tw.utils.removeStyles(targetElement, ["transition", "transform"]);		
@@ -75,6 +80,11 @@ PopStoryView.prototype.remove = function(widget) {
 		};
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
+		removeElement();
+		return;
+	}
+	// Don't animate while a drag is in progress
+	if($tw.dragInProgress) {
 		removeElement();
 		return;
 	}

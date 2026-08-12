@@ -48,6 +48,8 @@ The LinkWidget incorporates the functionality of the DraggableWidget via the ''d
 |`tv-selectednode-posy` |`y` offset position of the dragged DOM node  |
 |`tv-selectednode-width` |`offsetWidth` of the dragged DOM node |
 |`tv-selectednode-height` |`offsetHeight` of the dragged DOM node |
+|`tv-selectednode-exact-width` |unrounded width of the dragged DOM node |
+|`tv-selectednode-exact-height` |unrounded height of the dragged DOM node |
 |`event-fromselected-posx` |`x` position of the event relative to the dragged DOM node |
 |`event-fromselected-posy` |`y` position of the event relative to the dragged DOM node |
 |`event-fromviewport-posx` |`x` position of the event relative to the viewport |

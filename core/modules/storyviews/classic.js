@@ -32,7 +32,9 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 
 ClassicStoryView.prototype.insert = function(widget) {
 	var duration = $tw.utils.getAnimationDuration();
-	if(duration) {
+	// Don't animate while a drag is in progress: drag and drop reserves the space for
+	// the element being moved itself, and the two would be applied on top of each other
+	if(duration && !$tw.dragInProgress) {
 		var targetElement = widget.findFirstDomNode();
 		// Abandon if the list entry isn't a DOM element (it might be a text node)
 		if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
@@ -69,7 +71,7 @@ ClassicStoryView.prototype.insert = function(widget) {
 
 ClassicStoryView.prototype.remove = function(widget) {
 	var duration = $tw.utils.getAnimationDuration();
-	if(duration) {
+	if(duration && !$tw.dragInProgress) {
 		var targetElement = widget.findFirstDomNode(),
 			removeElement = function() {
 				widget.removeChildDomNodes();

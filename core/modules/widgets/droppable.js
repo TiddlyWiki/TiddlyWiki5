@@ -189,9 +189,9 @@ Compute the internal state of the widget
 DroppableWidget.prototype.execute = function() {
 	this.droppableActions = this.getAttribute("actions");
 	this.droppableListActions = this.getAttribute("listActions");
-	this.droppableEnterActions = this.getAttribute("dragenteractions");
-	this.droppableLeaveActions = this.getAttribute("dragleaveactions");
-	this.droppableEndActions = this.getAttribute("dragendactions");
+	this.droppableEnterActions = this.getAttribute("dragEnterActions");
+	this.droppableLeaveActions = this.getAttribute("dragLeaveActions");
+	this.droppableEndActions = this.getAttribute("dragEndActions");
 	this.droppableEffect = this.getAttribute("effect","copy");
 	this.droppableTag = this.getAttribute("tag");
 	this.droppableEnable = (this.getAttribute("enable") || "yes") === "yes";

@@ -166,6 +166,12 @@ ZoominListView.prototype.remove = function(widget) {
 		removeElement();
 		return;
 	}
+	// Don't animate while a drag is in progress: drag and drop reserves the space for
+	// the element being moved itself, and the two would be applied on top of each other
+	if($tw.dragInProgress) {
+		removeElement();
+		return;
+	}
 	// Set up the tiddler that is being closed
 	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[

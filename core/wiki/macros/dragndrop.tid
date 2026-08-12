@@ -1,6 +1,5 @@
 title: $:/core/wiki/macros/dragndrop
 tags: $:/tags/Global
-code-body: yes
 
 \procedure draggable-droppable-bottom-drag-enter-actions()
 <$action-setfield
@@ -18,6 +17,7 @@ code-body: yes
 	<$action-setfield
 		$tiddler=<<dragState>>
 		start-next-tiddler=""
+		before-tiddler=""
 		copy=""
 		target=<<tiddler>>
 		margin="bottom"
@@ -51,6 +51,7 @@ code-body: yes
 	<$action-setfield
 		$tiddler=<<dragState>>
 		start-next-tiddler=""
+		before-tiddler=""
 		copy=""
 		target=<<tiddler>>
 		margin="top"
@@ -97,9 +98,8 @@ code-body: yes
 	<$action-deletetiddler
 		$tiddler=<<dragState>>
 	/>
-	<<dropActions>>
 </$let>
-<!-- here we could set the current-tiddler field of the start-history to a different value -->
+<!-- here we could set the current-tiddler field of the history to the value of the actionTiddler -->
 \end
 
 \procedure draggable-droppable-bottom-drop-actions()
@@ -141,7 +141,7 @@ code-body: yes
 <$action-deletetiddler
 	$tiddler=<<dragState>>
 />
-<!-- here we could set the current-tiddler field of the start-history to a different value -->
+<!-- here we could set the current-tiddler field of the history to the value of the actionTiddler -->
 \end
 
 \procedure draggable-droppable-top-drop-actions()
@@ -162,6 +162,7 @@ code-body: yes
 		$variable="draggable-droppable-top-drop-actions-inner"
 	/>
 <% endif %>
+<<dropActions>>
 \end
 
 \procedure draggable-droppable-drag-end-actions()
@@ -174,12 +175,12 @@ code-body: yes
 	>
 		<%if [<listBeforeTiddler>!is[blank]] %>
 			<$action-listops
-				$tiddler=<<fromStoryList>>
+				$tiddler=<<fromList>>
 				$subfilter="+[insertbefore<actionTiddler>,<listBeforeTiddler>]"
 			/>
 		<% else %>
 			<$action-listops
-				$tiddler=<<fromStoryList>>
+				$tiddler=<<fromList>>
 				$subfilter="[<actionTiddler>]"
 			/>
 		<% endif %>
@@ -212,8 +213,8 @@ code-body: yes
 		$tiddler=<<dragState>>
 		drag-count="0"
 		nth=<<nth>>
-		height=<<tv-selectednode-height>>
-		width=<<tv-selectednode-width>>
+		height={{{ [<tv-selectednode-exact-height>] :else[<tv-selectednode-height>] }}}
+		width={{{ [<tv-selectednode-exact-width>] :else[<tv-selectednode-width>] }}}
 		margin-bottom=<<styleMarginBottom>>
 		start-next-tiddler={{{ [list<list>after<tiddler>] }}}
 		start-from-index={{{ [list<list>allbefore<tiddler>count[]] }}}
@@ -256,36 +257,81 @@ code-body: yes
 \function tf.get-tiddler-before-target() [<dragState>get[target]] :reduce[list<list>before<currentTiddler>]
 \function tf.get-tiddler-after-target() [<dragState>get[target]] :reduce[list<list>after<currentTiddler>]
 
-\function tf.get-styleTransition()
-	[<dragState>get[start-next-tiddler]match<tiddler>then[none]]
-	:else[[margin-top ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
+\function tf.get-restart-nudge() [<dragState>get[drag-count]remainder[2]divide[10]addsuffix[px]] :else[[0px]]
+
+\function tf.is-gap-holder() [<dragState>get[start-next-tiddler]match<tiddler>then[yes]] :else[<dragState>get[before-tiddler]match<tiddler>then[yes]] :else[[no]]
+
+\function tf.get-animationDuration()
+	[<dragState>get[height]divide<animationReferenceHeight>power[0.5]multiply<animationDuration>max<animationMinDuration>min<animationMaxDuration>round[]]
+	:else[<animationDuration>]
 \end
 
-\function tf.get-styleTop() [<dragState>get[start-next-tiddler]match<tiddler>then[calc(-]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then[calc(-]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[[calc( ]addsuffix[-]addsuffix<styleMarginTop>addsuffix[)]]
+\function tf.get-margin-transition-value() [[margin-top ]addsuffix<tf.get-animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom ]addsuffix<tf.get-animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
+\function tf.get-placeholder-transition-value() [[top ]addsuffix<tf.get-animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, height ]addsuffix<tf.get-animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
+
+\function tf.get-styleTransition()
+	[<tf.is-gap-holder>match[yes]then[none]]
+	:else[<dragState>get[text]match[yes]then<tf.get-margin-transition-value>]
+	:else[[none]]
+\end
+
+\function tf.get-placeholderTransition()
+	[<tf.is-gap-holder>match[yes]then[none]]
+	:else[<dragState>get[text]match[yes]then<tf.get-placeholder-transition-value>]
+	:else[[none]]
+\end
+
+\function tf.get-gap-size-top() [[calc(]addsuffix<tf.get-restart-nudge>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[))]]
+\function tf.get-gap-zero-top() [[calc(]addsuffix<tf.get-restart-nudge>addsuffix[)]]
+\function tf.get-gap-size-bottom() [[calc(0px - ]addsuffix<tf.get-restart-nudge>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[))]]
+\function tf.get-gap-zero-bottom() [[calc(0px - ]addsuffix<tf.get-restart-nudge>addsuffix[)]]
+
+\function tf.get-styleTop()
+	[<tf.is-gap-holder>match[yes]then[calc(0px - ]addsuffix<tf.get-restart-nudge>addsuffix[ - ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]]
+	:else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then[calc(0px - ]addsuffix<tf.get-restart-nudge>addsuffix[ - ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]]
+	:else[[calc(0px - ]addsuffix<tf.get-restart-nudge>addsuffix[ - ]addsuffix<styleMarginTop>addsuffix[)]]
+\end
 
 \function tf.get-styleBottom() [[calc( ]addsuffix[-]addsuffix<styleMarginBottom>addsuffix[)]]
 \function tf.get-styleLeft() [[calc( ]addsuffix[-]addsuffix<stylePaddingLeft>addsuffix[)]]
 
-\function tf.get-styleTopHeight() [<dragState>get[start-next-tiddler]match<tiddler>then[calc(50% + ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[)]] :else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then[calc(50% + (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[) + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[)]] :else[[calc(50% + ]addsuffix<styleMarginBottom>addsuffix[)]]
+\function tf.get-styleTopHeight()
+	[<tf.is-gap-holder>match[yes]then[calc(50% + ]addsuffix<tf.get-restart-nudge>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[)]]
+	:else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then[calc(50% + ]addsuffix<tf.get-restart-nudge>addsuffix[ + (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[) + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[)]]
+	:else[[calc(50% + ]addsuffix<tf.get-restart-nudge>addsuffix[ + ]addsuffix<styleMarginBottom>addsuffix[)]]
+\end
 
-\function tf.get-styleBottomHeight() [<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[bottom]then[calc(50% + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[[50%]]
+\function tf.get-styleBottomHeight()
+	[<dragState>get[before-tiddler]match<tiddler>then[calc(50% + ]addsuffix<tf.get-restart-nudge>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]]
+	:else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[bottom]then[calc(50% + ]addsuffix<tf.get-restart-nudge>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]]
+	:else[[calc(50% + ]addsuffix<tf.get-restart-nudge>addsuffix[)]]
+\end
 
 \function tf.get-styleWidth() [[calc(100% + ]addsuffix<stylePaddingLeft>addsuffix[ + ]addsuffix<stylePaddingRight>addsuffix[)]]
 
-\function tf.get-styleMarginTop() [<dragState>get[start-next-tiddler]match<tiddler>then[calc(]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ + (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[))]] :else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then<dragState>get[height]addsuffix[px]addprefix[calc(]addsuffix[ + (2 * ]addsuffix<styleMarginBottom>addsuffix[))]] :else[[0px]]
-\function tf.get-styleMarginBottom() [<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[bottom]then<dragState>get[height]addsuffix[px]addprefix[calc(]addsuffix[ + (2 * ]addsuffix<styleMarginBottom>addsuffix[))]] :else[[0px]]
+\function tf.get-styleMarginTop()
+	[<dragState>get[start-next-tiddler]match<tiddler>then<tf.get-gap-size-top>]
+	:else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then<tf.get-gap-size-top>]
+	:else[<tf.get-gap-zero-top>]
+\end
+
+\function tf.get-styleMarginBottom()
+	[<dragState>get[before-tiddler]match<tiddler>then<tf.get-gap-size-bottom>]
+	:else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[bottom]then<tf.get-gap-size-bottom>]
+	:else[<tf.get-gap-zero-bottom>]
+\end
 
 \function tf.get-draggable-droppable-class() tc-draggable-droppable-qualifier [<qualifiedDragEnterClass>] :and[join[ ]]
 \function tf.get-flexDirection() [<direction>match[vertical]then[row]] [<direction>match[horizontal]then[column]]
 
-\procedure make-draggable-droppable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragState:"$:/state/tiddlywiki/dragging",direction:"vertical",styleMarginTop:"0px",styleMarginBottom:"0px",stylePaddingLeft:"0px",stylePaddingRight:"0px",styleZIndex:"501",animationDuration:"4000",animationCurve:"linear")
+\procedure make-draggable-droppable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragState:"$:/state/tiddlywiki/dragging",direction:"vertical",styleMarginTop:"0px",styleMarginBottom:"0px",stylePaddingLeft:"0px",stylePaddingRight:"0px",styleZIndex:"501",animationDuration:"175",animationReferenceHeight:"240",animationMinDuration:"90",animationMaxDuration:"400",animationCurve:"ease-out")
 \whitespace trim
 <$tiddler tiddler=<<tiddler>>>
 <$let
 	prefix="[["
 	suffix="]]"
 	transclusion=<<tiddler>>
-	qualifiedDragEnterClass={{{ [<tiddler>addsuffix<qualfiy>sha256[64]] }}}
+	qualifiedDragEnterClass={{{ [<tiddler>addsuffix<qualify>sha256[64]] }}}
 >
 	<$draggable
 		enable=<<enable>>
@@ -293,6 +339,7 @@ code-body: yes
 		startactions=<<draggable-droppable-drag-start-actions>>
 		endactions=<<draggable-droppable-drag-end-actions>>
 		class=<<class>>
+		style.display="flow-root"
 	>
 		<div
 			class=<<tf.get-draggable-droppable-class>>
@@ -312,7 +359,7 @@ code-body: yes
 					<$droppable
 						class=<<tf.get-draggable-droppable-top-class>>
 						actions=<<draggable-droppable-top-drop-actions>>
-						dragenteractions=<<draggable-droppable-top-drag-enter-actions>>
+						dragEnterActions=<<draggable-droppable-top-drag-enter-actions>>
 					>
 						<div
 							class="tc-draggable-droppable-drop-top-placeholder"
@@ -323,12 +370,13 @@ code-body: yes
 							style.height=<<tf.get-styleTopHeight>>
 							style.width=<<tf.get-styleWidth>>
 							style.z-index=<<styleZIndex>>
+							style.transition=<<tf.get-placeholderTransition>>
 						/>
 					</$droppable>
 					<$droppable
 						class=<<tf.get-draggable-droppable-bottom-class>>
 						actions=<<draggable-droppable-bottom-drop-actions>>
-						dragenteractions=<<draggable-droppable-bottom-drag-enter-actions>>
+						dragEnterActions=<<draggable-droppable-bottom-drag-enter-actions>>
 					>
 						<div
 							class="tc-draggable-droppable-drop-bottom-placeholder"
@@ -339,6 +387,7 @@ code-body: yes
 							style.height=<<tf.get-styleBottomHeight>>
 							style.width=<<tf.get-styleWidth>>
 							style.z-index=<<styleZIndex>>
+							style.transition=<<tf.get-placeholderTransition>>
 						/>
 					</$droppable>
 				<%elseif [<direction>match[horizontal]] %>
