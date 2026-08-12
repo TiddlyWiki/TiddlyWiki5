@@ -1,5 +1,6 @@
 title: $:/core/wiki/macros/dragndrop
 tags: $:/tags/Global
+code-body: yes
 
 \procedure draggable-droppable-bottom-drag-enter-actions()
 <$action-setfield
@@ -12,6 +13,7 @@ tags: $:/tags/Global
 		$tiddler=<<dragState>>
 		target-before=""
 		target-after={{{ [list<list>after<tiddler>] }}}
+		direction={{{ [<dragState>get[margin]match[top]then<dragState>get[target]match<tiddler>then[down]] [<dragState>get[margin]match[top]then<dragState>get[target]!match<tiddler>then[up]] :else[[up]] }}}
 	/>
 	<$action-setfield
 		$tiddler=<<dragState>>
@@ -44,6 +46,7 @@ tags: $:/tags/Global
 		$tiddler=<<dragState>>
 		target-before={{{ [list<list>before<tiddler>] }}}
 		target-after=""
+		direction={{{ [<dragState>get[margin]match[bottom]then<dragState>get[target]match<tiddler>then[up]] [<dragState>get[margin]match[bottom]then<dragState>get[target]!match<tiddler>then[down]] :else[[down]] }}}
 	/>
 	<$action-setfield
 		$tiddler=<<dragState>>
@@ -258,7 +261,7 @@ tags: $:/tags/Global
 	:else[[margin-top ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>addsuffix[, margin-bottom ]addsuffix<animationDuration>addsuffix[ms ]addsuffix<animationCurve>]
 \end
 
-\function tf.get-styleTop() [<dragState>get[start-next-tiddler]match<tiddler>then[calc(-]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then[calc(-]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - (2 * ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[[calc( ]addsuffix[-]addsuffix<styleMarginTop>addsuffix[)]]
+\function tf.get-styleTop() [<dragState>get[start-next-tiddler]match<tiddler>then[calc(-]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[<dragState>get[drag-enter-class]match<qualifiedDragEnterClass>then<dragState>get[margin]match[top]then[calc(-]addsuffix<tf.get-drag-state-tiddler-height>addsuffix[ - ]addsuffix<tf.get-drag-state-tiddler-margin-bottom>addsuffix[)]] :else[[calc( ]addsuffix[-]addsuffix<styleMarginTop>addsuffix[)]]
 
 \function tf.get-styleBottom() [[calc( ]addsuffix[-]addsuffix<styleMarginBottom>addsuffix[)]]
 \function tf.get-styleLeft() [[calc( ]addsuffix[-]addsuffix<stylePaddingLeft>addsuffix[)]]
@@ -275,7 +278,7 @@ tags: $:/tags/Global
 \function tf.get-draggable-droppable-class() tc-draggable-droppable-qualifier [<qualifiedDragEnterClass>] :and[join[ ]]
 \function tf.get-flexDirection() [<direction>match[vertical]then[row]] [<direction>match[horizontal]then[column]]
 
-\procedure make-draggable-droppable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragState:"$:/state/tiddlywiki/dragging",direction:"vertical",styleMarginTop:"0px",styleMarginBottom:"0px",stylePaddingLeft:"0px",stylePaddingRight:"0px",styleZIndex:"501",animationDuration:"175",animationCurve:"linear")
+\procedure make-draggable-droppable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragState:"$:/state/tiddlywiki/dragging",direction:"vertical",styleMarginTop:"0px",styleMarginBottom:"0px",stylePaddingLeft:"0px",stylePaddingRight:"0px",styleZIndex:"501",animationDuration:"4000",animationCurve:"linear")
 \whitespace trim
 <$tiddler tiddler=<<tiddler>>>
 <$let

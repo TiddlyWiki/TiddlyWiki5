@@ -24,7 +24,7 @@ code-body: yes
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]]" variable="listItem">
 
-<$transclude tiddler=<<listItem>>/>
+<$transclude $tiddler=<<listItem>> $mode="inline"/>
 
 </$list>
 
