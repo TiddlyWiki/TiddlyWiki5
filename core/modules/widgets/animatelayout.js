@@ -15,6 +15,11 @@ element is the correct size at every frame rather than being animated towards it
 Only plays while a drag is in progress. Outside a drag the storyviews are already animating
 insertions and removals, and two animations moving the same elements fight each other.
 
+The list attribute names the tiddler whose reordering is being animated. Only a change to
+that tiddler plays the animation: measuring is a forced layout of every keyed element, and
+during a drag plenty of unrelated refreshes arrive that move nothing. Left blank, any
+refresh plays, which is only useful when the ordering has no single tiddler behind it.
+
 \*/
 
 "use strict";
@@ -46,6 +51,7 @@ Compute the internal state of the widget
 */
 AnimateLayoutWidget.prototype.execute = function() {
 	this.animateKey = this.getAttribute("key","data-animate-key");
+	this.animateList = this.getAttribute("list");
 	this.animateDuration = parseInt(this.getAttribute("duration","200"),10) || 0;
 	this.animateEasing = this.getAttribute("easing","ease-out");
 	this.animateEnable = this.getAttribute("enable","yes") === "yes";
@@ -144,11 +150,15 @@ AnimateLayoutWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	}
+	this.animateList = this.getAttribute("list");
 	this.animateDuration = parseInt(this.getAttribute("duration","200"),10) || 0;
 	this.animateEasing = this.getAttribute("easing","ease-out");
 	// Only animate while dragging, so that this does not compete with the storyview
-	// animations that run when tiddlers are opened and closed normally
-	if(!this.animateEnable || !this.animateDuration || !$tw.dragInProgress || !this.parentDomNode || !this.parentDomNode.querySelectorAll) {
+	// animations that run when tiddlers are opened and closed normally, and only when the
+	// list being reordered has actually changed, so that the other refreshes arriving
+	// during a drag do not each pay for a measurement of every element
+	if(!this.animateEnable || !this.animateDuration || !$tw.dragInProgress || !this.parentDomNode || !this.parentDomNode.querySelectorAll ||
+		(this.animateList && !changedTiddlers[this.animateList])) {
 		return this.refreshChildren(changedTiddlers);
 	}
 	var previousPositions = this.measure(),
