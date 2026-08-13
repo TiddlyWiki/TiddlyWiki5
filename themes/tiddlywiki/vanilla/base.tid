@@ -576,13 +576,22 @@ a.tc-tiddlylink-external:hover {
 }
 
 /*
-** An outline rather than a border: the item is mid animation and taking part in layout,
-** and an outline takes up no space and so moves nothing
+** An absolutely positioned pseudo element rather than an outline or a border: the item is
+** mid animation and taking part in layout, so the marker must take up no space, and it
+** needs its bottom edge inset on its own because the item is a flow-root and so contains
+** the bottom margin of the content it wraps. Consumers whose content carries such a margin
+** say so with --tc-live-reorder-drop-target-bottom
 */
 
-.tc-live-reorderable-drop-target {
-	outline: 2px dashed <<colour dropzone-background>>;
-	outline-offset: 2px;
+.tc-live-reorderable-drop-target::after {
+	content: "";
+	position: absolute;
+	top: -4px;
+	left: -4px;
+	right: -4px;
+	bottom: calc(var(--tc-live-reorder-drop-target-bottom,0px) - 4px);
+	border: 2px dashed <<colour dropzone-background>>;
+	pointer-events: none;
 }
 
 .tc-tagged-draggable-list .tc-droppable-placeholder,
@@ -1141,6 +1150,15 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	border: 1px solid <<colour tiddler-border>>;
 }
 
+/*
+** The drop target marker hugs the frame rather than the gap below it. Keep this in step
+** with the margin-bottom above
+*/
+
+.tc-story-river {
+	--tc-live-reorder-drop-target-bottom: 28px;
+}
+
 {{$:/themes/tiddlywiki/vanilla/sticky}}
 
 .tc-tiddler-info {
@@ -1193,6 +1211,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	.tc-tiddler-frame {
 		padding: 14px 14px 14px 14px;
 		margin-bottom: .5em;
+	}
+
+	.tc-story-river {
+		--tc-live-reorder-drop-target-bottom: .5em;
 	}
 
 	.tc-tiddler-info {
