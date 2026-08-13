@@ -9,6 +9,9 @@ caption: {{$:/language/SideBar/Open/Caption}}
 
 \function tf.get-open-tab-animation-duration() [{$:/config/DragAndDrop/animation/duration}multiply[0.8]]
 
+\function tf.get-open-tab-preview() [<tf.get-open-tab-drag-state>get[text]match[yes]then<tf.get-open-tab-drag-state>get[preview-list]]
+\function tf.get-open-tab-animate-list() [<tf.get-open-tab-drag-state>get[text]match[yes]then<tf.get-open-tab-drag-state>] :else[<tv-story-list>]
+
 \whitespace trim
 
 \define content()
@@ -18,9 +21,9 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \end
 
 <div class="tc-sidebar-tab-open">
-<$animatelayout list=<<tv-story-list>> duration=<<tf.get-open-tab-animation-duration>> easing={{$:/config/DragAndDrop/animation/easing}}>
-<$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
-<$transclude $variable="make-live-reorderable" tiddler=<<currentTiddler>> list=<<tv-story-list>> content=<<content>> dragState=<<tf.get-open-tab-drag-state>>/>
+<$animatelayout list=<<tf.get-open-tab-animate-list>> duration=<<tf.get-open-tab-animation-duration>> easing={{$:/config/DragAndDrop/animation/easing}}>
+<$list filter="[enlist<tf.get-open-tab-preview>] :else[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
+<$transclude $variable="make-live-reorderable" tiddler=<<currentTiddler>> list=<<tv-story-list>> content=<<content>> dragState=<<tf.get-open-tab-drag-state>> commit="drop"/>
 </$list>
 </$animatelayout>
 </div>
