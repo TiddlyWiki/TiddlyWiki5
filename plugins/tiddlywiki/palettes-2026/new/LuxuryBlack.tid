@@ -1,0 +1,46 @@
+category: 2026
+color-scheme: dark
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Luxury Black
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/LuxuryBlack
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #6e3d46
+base-background: #3F3643
+base-danger: #ff3c8c
+base-highlight: #e04666
+base-ink: #FDEED7
+base-link: #C1A84A
+base-paper: #4A4147
+base-primary: #C1A84A
+base-tab: #5C5459
+base-tag: #906451
+
+# Palette-specific colours and overrides
+alert-border: #d5847080
+alert-highlight: #ba9e45
+button-foreground: [tf.colour[primary]colour-set-alpha[0.667]]
+dropzone-background: #FDEED780
+external-link-foreground: #99BEB4
+external-link-foreground-hover: #6A7E6D
+external-link-foreground-visited: #BAB3BC
+highlight-foreground: [tf.colour[foreground]]
+network-activity-foreground: #03a0df
+notification-border: [tf.colour[primary]colour-set-alpha[0.502]]
+select-tag-background: 
+sidebar-muted-foreground-hover: #2C262F
+sidebar-tab-background: [tf.colour[primary]colour-set-alpha[0.502]]
+sidebar-tab-background-selected: [tf.colour[primary]]
+sidebar-tab-border: [tf.colour[foreground]colour-set-alpha[0.502]]
+sidebar-tab-border-selected: [tf.colour[sidebar-tab-border]]
+sidebar-tab-foreground-selected: [tf.colour[page-background]]
+sidebar-tiddler-link-foreground-hover: #827C85
+site-title-foreground: [tf.colour[primary]]
+tiddler-controls-foreground-selected: #BCB9BD
+tiddler-editor-border-image: #FFFFFF
+tiddler-editor-fields-even: [tf.colour[table-header-background]]
+tiddler-title-foreground: #F2DC6D
+untagged-background: #655E63

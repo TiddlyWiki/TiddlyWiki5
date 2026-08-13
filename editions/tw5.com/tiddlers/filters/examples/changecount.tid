@@ -1,0 +1,8 @@
+created: 20260720103000000
+modified: 20260720103000000
+tags: [[changecount Operator]] [[Operator Examples]]
+title: changecount Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[HelloThere]changecount[]]" "a tiddler that has not changed during this session has a change count of 0">>
+<<.operator-example 2 "[[$:/StoryList]changecount[]]" "the story list changes each time a tiddler is opened or closed">>

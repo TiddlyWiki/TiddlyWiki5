@@ -1,0 +1,43 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Clean
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/Clean
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #FAFAFA
+base-background: #F6F6F6
+base-danger: #FF4258
+base-highlight: #FF8492
+base-ink: #2F312F
+base-link: #1FBFE0
+base-paper: #FAFAFA
+base-primary: #1FBFE0
+base-tab: #E6E6E6
+base-tag: #42C699
+
+# Palette-specific colours and overrides
+alert-border: [tf.colour[notification-border]]
+download-background: #42C699
+dropzone-background: #1FBFE080
+external-link-foreground: #1687FF
+external-link-foreground-hover: #FF5E71
+external-link-foreground-visited: #B75CFB
+highlight-foreground: [tf.colour[foreground]]
+muted-foreground: #4E504E
+network-activity-foreground: #42C699
+notification-border: [tf.colour[notification-background]]
+select-tag-background: 
+sidebar-muted-foreground: #595A59
+sidebar-tab-background: #FB9D22
+sidebar-tab-divider: [tf.colour[sidebar-tab-border-selected]]
+sidebar-tiddler-link-foreground-hover: #1AA2BE
+site-title-foreground: #42C699
+tiddler-controls-foreground-hover: #C5C5C5
+tiddler-controls-foreground-selected: #DDDDDD
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-editor-border]]
+tiddler-subtitle-foreground: #ACACAC

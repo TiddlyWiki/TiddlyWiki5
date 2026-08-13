@@ -1,0 +1,35 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Nature's Embrace
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/NaturesEmbrace
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #e1d2b8
+base-background: #C2C2AB
+base-danger: #903149
+base-highlight: #93d4c2
+base-ink: #646156
+base-link: #CC7D45
+base-paper: #E2E5DE
+base-primary: #BD9775
+base-tab: #ddbe93
+base-tag: #BD9775
+
+# Palette-specific colours and overrides
+alert-border: #CC7D45
+code-background: #1717161A
+external-link-foreground: #5497b9
+external-link-foreground-hover: #df5a5b
+external-link-foreground-visited: #728e5c
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: [tf.colour[primary]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tag-foreground: [tf.colour[background]]
+tiddler-controls-foreground: [tf.colour[primary]]
+tiddler-controls-foreground-selected: #cdbe7b
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

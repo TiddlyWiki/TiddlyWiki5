@@ -1,0 +1,25 @@
+created: 20260718221135000
+modified: 20260723130000000
+tags: Features
+title: Palette Chooser
+type: text/vnd.tiddlywiki
+
+The colours used to display a wiki are determined by the current [[colour palette|ColourPalettes]]. The palette chooser lets you switch between the available palettes and preview them before you choose.
+
+To open the palette chooser:
+
+# Click <<.icon $:/core/images/options-button>> ''control panel'' in the sidebar
+# Choose the <<.controlpanel-tab Appearance>> tab
+# Choose the ''Palette'' tab within it
+
+<<.from-version "5.5.0">> Each available palette is shown as a card with a preview of its colours. Click a card to switch to that palette. The change takes effect immediately.
+
+<<.from-version "5.5.0">> Beneath the chooser you may also see:
+
+* Any failures reported by the current palette's [[readability tests|Palette Readability Tests]]
+* A customisations panel, if the current palette offers customisation options -- see [[Palette Customisations]]
+* A ''show editor'' button that reveals the palette editor, where the individual entries of the current palette can be edited
+
+The <<.icon $:/core/images/palette>> ''palette'' button on the <<.sidebar-tab Tools>> sidebar tab provides a compact version of the same chooser.
+
+The chooser is implemented by the system tiddler <<.tid "$:/PaletteManager">>, and the editor by <<.tid "$:/PaletteEditor">>.

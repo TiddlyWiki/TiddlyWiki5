@@ -1,11 +1,13 @@
 caption: changecount
 created: 20131228162825226
-modified: 20221221174529586
+modified: 20260718221135000
 tags: Macros [[Core Macros]]
 title: changecount Macro
 type: text/vnd.tiddlywiki
 
 The <<.def changecount>> [[macro|Macros]] returns the number of times the [[current tiddler|Current Tiddler]] has been created, stored or deleted during the current ~TiddlyWiki session.
+
+<<.from-version "5.5.0">> The <<.olink changecount>> operator returns the change count of any tiddler, not just the current one.
 
 If a tiddler is deleted and subsequently recreated, its <<.var changecount>> will be increased by two.
 

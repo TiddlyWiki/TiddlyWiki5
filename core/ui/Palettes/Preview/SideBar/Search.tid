@@ -1,0 +1,8 @@
+title: $:/core/ui/Palettes/Preview/Sidebar/Search
+tags: $:/tags/Preview/SideBar
+
+\whitespace trim
+<div class="tc-palette-preview-thumbnail-sidebar-search" style.background-color=<<colour background>>>
+	<div class="tc-palette-preview-thumbnail-sidebar-search-box">
+	</div>
+</div>

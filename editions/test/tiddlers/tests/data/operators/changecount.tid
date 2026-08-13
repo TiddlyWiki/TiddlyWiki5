@@ -1,0 +1,18 @@
+title: Operators/ChangeCount
+description: changecount operator returns per-title change counts
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+(<$text text={{{ [[T]changecount[]] }}}/>)(<$text text={{{ [[U]changecount[]] }}}/>)
++
+title: Actions
+
+<$action-setfield $tiddler="T" text="first"/>
+<$action-setfield $tiddler="T" text="second"/>
++
+title: ExpectedResult
+
+(2)(0)

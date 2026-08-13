@@ -1,0 +1,9 @@
+created: 20260722180000000
+modified: 20260722180000000
+tags: OfficialPlugins
+title: Legacy Palettes Plugin
+type: text/vnd.tiddlywiki
+
+The Legacy Palettes Plugin contains the nineteen [[colour palettes|ColourPalettes]] that shipped in the core of ~TiddlyWiki prior to v5.5.0, including ~SolarizedDark, ~SolarizedLight, Nord and ~GruvBoxDark.
+
+<<.from-version "5.5.0">> Install this plugin from the official plugin library to continue using these palettes in an upgraded wiki.

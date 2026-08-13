@@ -8,6 +8,8 @@
 		"tiddlywiki/menubar",
 		"tiddlywiki/railroad",
 		"tiddlywiki/tour",
+		"tiddlywiki/palettes-legacy",
+		"tiddlywiki/palettes-2026",
 		"tiddlywiki/dom-to-image"
 	],
 	"themes": [
