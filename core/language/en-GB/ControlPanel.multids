@@ -41,6 +41,7 @@ DragAndDrop/Easings/linear: Linear
 DragAndDrop/Easings/spring: Spring
 DragAndDrop/Reordering/Caption: Reordering
 DragAndDrop/Reordering/Description: Enable drag and drop reordering
+DragAndDrop/Reordering/DropTarget/Description: Outline the place where a dragged tiddler will land
 DragAndDrop/Animation/Caption: Animation
 DragAndDrop/Animation/Hint: The easing curve decides how a tiddler moves to its new place. Because a drag retargets continuously, curves that start slowly feel sluggish here; the decelerating ones commit to the move immediately.
 DragAndDrop/Animation/Duration/Prompt: Duration (ms)

@@ -93,7 +93,8 @@ code-body: yes
 
 \function tf.lr.is-dragging() [<dragState>get[text]match[yes]then[yes]] :else[[no]]
 \function tf.lr.is-ghost() [<tf.lr.is-dragging>match[yes]then<dragState>get[drag-tiddler]match<tiddler>then[yes]] :else[[no]]
-\function tf.lr.get-opacity() [<tf.lr.is-ghost>match[yes]then<ghostOpacity>] :else[[]]
+\function tf.lr.show-drop-target() [{$:/config/DragAndDrop/show-drop-target}match[yes]then[yes]] :else[[no]]
+\function tf.lr.is-drop-target() [<tf.lr.is-ghost>match[yes]then<tf.lr.show-drop-target>] :else[[no]]
 \function tf.lr.is-vertical() [<direction>match[vertical]then[yes]] :else[[no]]
 \function tf.lr.get-before-top() [<tf.lr.is-vertical>match[yes]then[0]] :else[[0]]
 \function tf.lr.get-before-left() [[0]]
@@ -104,7 +105,7 @@ code-body: yes
 \function tf.lr.get-after-width() [<tf.lr.is-vertical>match[yes]then[100%]] :else[[50%]]
 \function tf.lr.get-after-height() [<tf.lr.is-vertical>match[yes]then[50%]] :else[[100%]]
 
-\function tf.lr.get-item-class() tc-live-reorderable [<tf.lr.is-ghost>match[yes]then[tc-live-reorderable-ghost]] [<class>] :and[join[ ]]
+\function tf.lr.get-item-class() tc-live-reorderable [<tf.lr.is-ghost>match[yes]then[tc-live-reorderable-ghost]] [<tf.lr.is-drop-target>match[yes]then[tc-live-reorderable-drop-target]] [<class>] :and[join[ ]]
 
 \procedure make-live-reorderable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501")
 \whitespace trim
@@ -118,7 +119,7 @@ code-body: yes
 		data-animate-key=<<tiddler>>
 		style.display=<<itemDisplay>>
 		style.position="relative"
-		style.opacity=<<tf.lr.get-opacity>>
+		--tc-live-reorder-ghost-opacity=<<ghostOpacity>>
 	>
 		<$set name="tv-enable-drag-and-drop" value={{{ [<enable>match[yes]then[no]] :else[<tv-enable-drag-and-drop>] }}}>
 			<<content>>

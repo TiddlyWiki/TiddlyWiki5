@@ -52,7 +52,7 @@ Compute the internal state of the widget
 AnimateLayoutWidget.prototype.execute = function() {
 	this.animateKey = this.getAttribute("key","data-animate-key");
 	this.animateList = this.getAttribute("list");
-	this.animateDuration = parseInt(this.getAttribute("duration","200"),10) || 0;
+	this.animateDuration = parseInt(this.getAttribute("duration","250"),10) || 0;
 	this.animateEasing = this.getAttribute("easing","ease-out");
 	this.animateEnable = this.getAttribute("enable","yes") === "yes";
 	this.makeChildWidgets();
@@ -151,7 +151,7 @@ AnimateLayoutWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	}
 	this.animateList = this.getAttribute("list");
-	this.animateDuration = parseInt(this.getAttribute("duration","200"),10) || 0;
+	this.animateDuration = parseInt(this.getAttribute("duration","250"),10) || 0;
 	this.animateEasing = this.getAttribute("easing","ease-out");
 	// Only animate while dragging, so that this does not compete with the storyview
 	// animations that run when tiddlers are opened and closed normally, and only when the

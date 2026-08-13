@@ -18,6 +18,15 @@ caption: {{$:/language/ControlPanel/DragAndDrop/Caption}}
 	</$link>
 </$checkbox>
 
+<$checkbox tiddler="$:/config/DragAndDrop/show-drop-target"
+	field="text" checked="yes" unchecked="no" default="no"
+	class="tc-control-panel-item"
+>
+	<$link to="$:/config/DragAndDrop/show-drop-target" class="tc-tiny-gap-left">
+		<<lingo Reordering/DropTarget/Description>>
+	</$link>
+</$checkbox>
+
 !! <<lingo Animation/Caption>>
 
 <<lingo Animation/Hint>>

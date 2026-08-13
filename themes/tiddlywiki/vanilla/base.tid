@@ -566,7 +566,26 @@ a.tc-tiddlylink-external:hover {
 	cursor: move;
 }
 
-.tc-sidebar-tab-open .tc-droppable-placeholder, .tc-tagged-draggable-list .tc-droppable-placeholder,
+/*
+** The dragged item is dimmed on its children rather than on itself, so that the drop
+** target outline drawn on the item stays at full strength
+*/
+
+.tc-live-reorderable-ghost > * {
+	opacity: var(--tc-live-reorder-ghost-opacity,0.3);
+}
+
+/*
+** An outline rather than a border: the item is mid animation and taking part in layout,
+** and an outline takes up no space and so moves nothing
+*/
+
+.tc-live-reorderable-drop-target {
+	outline: 2px dashed <<colour dropzone-background>>;
+	outline-offset: 2px;
+}
+
+.tc-tagged-draggable-list .tc-droppable-placeholder,
 .tc-links-draggable-list .tc-droppable-placeholder {
 	line-height: 2em;
 	height: 2em;
