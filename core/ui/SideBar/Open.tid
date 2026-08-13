@@ -21,7 +21,7 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \end
 
 <div class="tc-sidebar-tab-open">
-<$animatelayout list=<<tf.get-open-tab-animate-list>> duration=<<tf.get-open-tab-animation-duration>> easing={{$:/config/DragAndDrop/animation/easing}}>
+<$animatelayout list=<<tf.get-open-tab-animate-list>> enable={{{ [dragging[]] }}} duration=<<tf.get-open-tab-animation-duration>> easing={{$:/config/DragAndDrop/animation/easing}}>
 <$list filter="[enlist<tf.get-open-tab-preview>] :else[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
 <$transclude $variable="make-live-reorderable" tiddler=<<currentTiddler>> list=<<tv-story-list>> content=<<content>> dragState=<<tf.get-open-tab-drag-state>> commit="drop"/>
 </$list>

@@ -22,7 +22,7 @@ tags: $:/tags/PageTemplate
 
 </section>
 
-<$animatelayout list="$:/StoryList" duration={{$:/config/DragAndDrop/animation/duration}} easing={{$:/config/DragAndDrop/animation/easing}}>
+<$animatelayout list="$:/StoryList" enable={{{ [dragging[]] }}} duration={{$:/config/DragAndDrop/animation/duration}} easing={{$:/config/DragAndDrop/animation/easing}}>
 
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}>
 
