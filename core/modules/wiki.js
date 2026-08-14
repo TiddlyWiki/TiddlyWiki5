@@ -1630,7 +1630,7 @@ Find any existing draft of a specified tiddler
 */
 exports.findDraft = function(targetTitle) {
 	var draftTitle = undefined;
-	this.forEachTiddler({includeSystem: true},function(title,tiddler) {
+	this.each(function(tiddler,title) {
 		if(tiddler.fields["draft.title"] && tiddler.fields["draft.of"] === targetTitle) {
 			draftTitle = title;
 		}
