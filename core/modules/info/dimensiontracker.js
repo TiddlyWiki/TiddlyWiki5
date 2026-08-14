@@ -117,14 +117,6 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 			}
 		}
 
-		/*
-		Coalesce every trigger into at most one measurement.
-
-		If a specific window is supplied, use that window's animation frame
-		and timer mechanisms. This is important when tracking multiple
-		TiddlyWiki windows. Calls without a window fall back to the main
-		window.
-		*/
 		schedule(win) {
 			var self = this;
 			if(this.scheduled) {
