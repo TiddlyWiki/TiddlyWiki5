@@ -29,11 +29,6 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 		return [];
 	}
 
-	/*
-	Pure helpers. They depend only on their arguments, so they live here rather
-	than on the class — a method that never touches instance state is not a
-	method, and eslint's class-methods-use-this rule says so.
-	*/
 	function infoTitle(config,windowId) {
 		return config.infoTiddler + "/" + windowId;
 	}
