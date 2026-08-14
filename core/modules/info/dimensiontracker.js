@@ -119,13 +119,21 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 
 		/*
 		Coalesce every trigger into at most one measurement.
+
+		If a specific window is supplied, use that window's animation frame
+		and timer mechanisms. This is important when tracking multiple
+		TiddlyWiki windows. Calls without a window fall back to the main
+		window.
 		*/
-		schedule() {
+		schedule(win) {
 			var self = this;
 			if(this.scheduled) {
 				return;
 			}
 			this.scheduled = true;
+
+			var schedulingWindow = win || window;
+
 			var run = function() {
 				if(!self.scheduled) {
 					return;
@@ -133,8 +141,9 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 				self.scheduled = false;
 				self.measureAll();
 			};
-			window.requestAnimationFrame(run);
-			window.setTimeout(run,250);
+
+			schedulingWindow.requestAnimationFrame(run);
+			schedulingWindow.setTimeout(run,250);
 		}
 
 		trackWindow(win,windowId) {
@@ -143,18 +152,21 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 				return;
 			}
 			var entry = {win: win, windowId: windowId, observer: null, nodes: new Map()};
+
 			// ResizeObserver must come from the window whose nodes it watches
 			if(typeof win.ResizeObserver === "function") {
 				entry.observer = new win.ResizeObserver(function() {
-					self.schedule();
+					self.schedule(win);
 				});
 			}
+
 			entry.resizeHandler = function() {
-				self.schedule();
+				self.schedule(win);
 			};
+
 			win.addEventListener("resize",entry.resizeHandler,{passive: true});
 			this.windows.set(windowId,entry);
-			this.schedule();
+			this.schedule(win);
 		}
 
 		untrackWindow(windowId) {
