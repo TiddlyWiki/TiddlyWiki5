@@ -1,0 +1,79 @@
+created: 20260402120000000
+modified: 20260402120000000
+tags: $:/tags/wiki-test-spec combined
+title: Examples/TOC/combined/parentField-all-macros
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows ''parentField'' across all major toc macro variants
+
+* Compares: toc, toc-selective-expandable, toc-expandable, and toc-tabbed-internal-nav
+
+* Also tests a ''custom field name'' `dad` instead of the default `parent`
+
+* `p1.1` is excluded via the `exclude` parameter in the selective variant
+
++
+title: Description
+
+parentField across all macro variants
++
+title: root
+
+Root node
+
++
+title: p1
+parent: root
+dad: root
+toc-include: p1 p2 aaa
+
++
+title: p1.1
+parent: p1
+
+This tiddler is excluded in some macro calls
+
++
+title: p2
+parent: root
+dad: root
+
++
+title: Output
+
+!! toc with parentField:"parent"
+
+<div class="tc-table-of-contents">
+<<toc tag:"root" parentField:"parent">>
+</div>
+
+!! toc-selective-expandable with exclude
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"root" parentField:"parent" exclude:"p1.1">>
+</div>
+
+!! toc-expandable
+
+<div class="tc-table-of-contents">
+<<toc-expandable tag:"root" parentField:"parent">>
+</div>
+
+!! toc with parentField:"dad" (custom field name)
+
+<div class="tc-table-of-contents">
+<<toc tag:"root" parentField:dad>>
+</div>
+
+!! toc-tabbed-internal-nav with parentField
+
+<$macrocall
+	$name="toc-tabbed-internal-nav"
+	tag="root"
+	selectedTiddler="$:/temp/toc/selectedTiddler"
+	unselectedText="<p>Select a topic in the table of contents. Click the arrow to expand a topic.</p>"
+	missingText="<p>Missing tiddler.</p>"
+	parentField="parent"
+/>

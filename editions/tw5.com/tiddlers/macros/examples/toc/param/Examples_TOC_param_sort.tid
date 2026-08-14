@@ -1,0 +1,38 @@
+created: 20260712000000000
+description: TOC sort parameter
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/param/sort
+modified: 20260712000000000
+tags: $:/tags/wiki-test-spec param
+title: Examples/TOC/param/sort
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents to show the use of the `sort` parameter
+
+* The "root" elements are ''tagged Contents''
+
+* The `sort` parameter is an extra [[filter step|Filter Step]] appended to the tree filter. `!sort[title]` shows the tiddlers in reverse title order
+
+* Sorting is applied at ''every level'' of the tree. Tiddler [[aa-bb]] is added as a second child of [[aa]], so the ordering is also visible at the second level
+
+{{example-overview}}
+
++
+title: Description
+
+TOC Macro Parameter "sort"
++
+title: aa-bb
+tags: aa
+
+Link to [[aa-aa]]
+
++
+title: Output
+
+The `sort` parameter is part of the macro call.
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents" sort:"!sort[title]">>
+</div>

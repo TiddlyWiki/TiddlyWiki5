@@ -1,0 +1,55 @@
+created: 20260402120000000
+modified: 20260402120000000
+caption: TOC Macros Tooltips and Styling
+tags: [[Table-of-Contents Macros Customisation]]
+title: Table-of-Contents Macros Tooltips and Styling
+type: text/vnd.tiddlywiki
+
+Tooltip customisation and `data-fieldClass` styling for the [[Table-of-Contents Macros]].
+
+!! Custom Tooltips
+
+<<.from-version "5.4.0">>
+
+The `tf.toc-getTooltip` function controls what tooltip is shown on hover. By default it uses the <<.field toc-tooltip>> field, falling back to <<.field currentTiddler>>.
+
+You can override it to use a different field. For example, to show the <<.field description>> field:
+
+```
+\function tf.toc-getTooltip() [<currentTiddler>get[description]!is[blank]] :else[<currentTiddler>]
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>
+```
+
+!! Styling with data-fieldClass
+
+<<.from-version "5.4.0">>
+
+Each toc node has a `data-fieldClass` attribute set to `field-$(field)$`, where `$(field)$` is replaced with the field name being displayed (e.g. `field-caption`, `field-title`). This can be used for CSS styling:
+
+```css
+[data-fieldClass="field-caption"] {
+  font-style: italic;
+}
+```
+
+The `data-fieldClass` attribute is used instead of `class` because field names can use character sets that are not allowed in the HTML `class` attribute.
+
+!! CSS Classes for Node Control Fields
+
+Nodes affected by the [[node control fields|Table-of-Contents Macros Fields]] receive CSS classes for styling:
+
+|Class |Applied when |h
+|`tc-toc-filter` |Node's children come from <<.field toc-filter>> |
+|`tc-toc-include` |Node was added via <<.field toc-include>> |
+|`tc-toc-hide` |Node's parent has a <<.field toc-hide>> field |
+
+The [[TOC Node Control Styles]] stylesheet is active by default and provides visual colour-coding for these classes:
+
+* `tc-toc-filter` — darkviolet
+* `tc-toc-include` — green
+* `tc-toc-hide` — red
+
+It also styles `.toc-item-muted` and `.tc-toc-unlinked` with left margins.
