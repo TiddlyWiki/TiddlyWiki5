@@ -16,7 +16,7 @@ caption: {{$:/language/SideBar/Open/Caption}}
 
 \procedure content()
 <div class="tc-sidebar-tab-open-item">
-<$button message='tm-close-tiddler' tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class='tc-btn-invisible tc-btn-mini tc-small-gap-right'>{{$:/core/images/close-button}}</$button><$link draggable="no"/>
+<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini tc-small-gap-right">{{$:/core/images/close-button}}</$button><$link draggable="no"/>
 </div>
 \end
 
