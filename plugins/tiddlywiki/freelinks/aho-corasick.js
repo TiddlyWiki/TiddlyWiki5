@@ -4,12 +4,21 @@ title: $:/core/modules/utils/aho-corasick.js
 type: application/javascript
 module-type: utils
 
-Optimized Aho-Corasick string matching algorithm implementation with enhanced performance
-and error handling for TiddlyWiki freelinking functionality.
+Optimized Aho-Corasick string matching algorithm implementation with enhanced
+performance and error handling for TiddlyWiki freelinking functionality.
 
-- Uses WeakMap for failure links (required; plain object keys would collide).
-- search() converts case per character to avoid Unicode index desync.
-- Optional word boundary filtering: CJK always allowed; Latin requires non-word chars around.
+- Uses WeakMap for failure links. WeakMap keys are compared by object identity
+  (reference equality), which is required here because trie nodes are plain
+  objects — a regular {} map would not work because JavaScript only supports
+  string and Symbol keys, forcing object keys to be coerced to strings.
+- Outputs are merged at build time (classic AC optimization), eliminating the
+  need to walk the failure chain during search.
+- search() converts case per character to avoid Unicode index desync (e.g.
+  Turkish İ expands under toLowerCase(), shifting subsequent indices).
+- No match count cap in search(); truncation is handled at the render stage
+  by processTextWithMatches() to avoid silently dropping matches mid-text.
+- Optional word boundary filtering: CJK always allowed; Latin requires
+  non-word characters on both sides.
 
 \*/
 
@@ -18,7 +27,6 @@ and error handling for TiddlyWiki freelinking functionality.
 function AhoCorasick() {
 	this.trie = {};
 	this.failure = new WeakMap();
-	this.maxFailureDepth = 100;
 	this.patternCount = 0;
 }
 
@@ -76,18 +84,18 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 			if(!child || typeof child !== "object") continue;
 
 			var fail = self.failure.get(node) || root;
-			var depth = 0;
 
-			while(fail !== root && !fail[edge] && depth < self.maxFailureDepth) {
+			while(fail !== root && !fail[edge]) {
 				fail = self.failure.get(fail) || root;
-				depth++;
 			}
 
 			var nextFail = (fail[edge] && fail[edge] !== child) ? fail[edge] : root;
 			self.failure.set(child, nextFail);
 
 			if(nextFail.$) {
-				if(!child.$) child.$ = [];
+				if(!child.$) {
+					child.$ = [];
+				}
 				child.$ = child.$.concat(nextFail.$);
 			}
 
@@ -106,8 +114,6 @@ AhoCorasick.prototype.search = function(text, useWordBoundary, ignoreCase) {
 	var root = this.trie;
 	var textLength = text.length;
 
-	var maxMatches = Math.min(textLength * 2, 10000);
-
 	for(var i = 0; i < textLength; i++) {
 		var ch = ignoreCase ? text[i].toLowerCase() : text[i];
 
@@ -120,7 +126,7 @@ AhoCorasick.prototype.search = function(text, useWordBoundary, ignoreCase) {
 
 		if(node.$) {
 			var outputs = node.$;
-			for(var j = 0; j < outputs.length && matches.length < maxMatches; j++) {
+			for(var j = 0; j < outputs.length; j++) {
 				var out = outputs[j];
 				var matchStart = i - out.length + 1;
 				var matchEnd = i + 1;

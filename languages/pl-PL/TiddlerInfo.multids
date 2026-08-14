@@ -10,7 +10,6 @@ Advanced/ShadowInfo/Shadow/Hint: Tiddler <$link to=<<infoTiddler>>><$text text=<
 Advanced/ShadowInfo/Shadow/Source: Zdefiniiowany we wtyczce <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
 Advanced/ShadowInfo/OverriddenShadow/Hint: Nadpisany przez zwykłego tiddlera
 Advanced/CascadeInfo/Heading: Szczegóły Kaskady
-Advanced/CascadeInfo/Hint: These are the view template segments that are resolved for each of the system view template cascades
 Advanced/CascadeInfo/Hint: Lista elementów widoku, których kaskady określają szablony użyte do wyświetlenia tiddlera
 Advanced/CascadeInfo/Detail/View: Widok
 Advanced/CascadeInfo/Detail/ActiveCascadeFilter: Aktywny filtr kaskady

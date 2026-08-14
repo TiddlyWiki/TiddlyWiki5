@@ -1,0 +1,14 @@
+change-category: nodejs
+change-type: bugfix
+created: 20260711175727000
+description: Keep retained subdirectory tiddlers and sanitise file names per path segment
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9815 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9944
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9815
+type: text/vnd.tiddlywiki
+
+* A tiddler saved with `retain-original-tiddler-path` keeps its recorded subdirectory instead of being flattened to the tiddlers root on Windows
+* File names are sanitised per path segment, so a forbidden character or reserved device name is replaced at every level (for example `sub/CON`), and a title containing a backslash such as `pragma: \define` no longer acts as a Windows path separator (fixes [[Issue #9814|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9814]])
+* Tiddler files declared in `tiddlywiki.files` are pinned to their original location and skip the `$:/config/FileSystemPaths` filters and forbidden-character sanitising

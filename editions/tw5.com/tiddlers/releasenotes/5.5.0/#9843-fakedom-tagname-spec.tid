@@ -1,0 +1,13 @@
+change-category: internal
+change-type: bugfix
+created: 20260711014241000
+description: fakedom tagName is uppercase for HTML elements, matching the DOM spec
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9843
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9843
+type: text/vnd.tiddlywiki
+
+* `$tw.fakeDocument` elements now report `tagName` in uppercase for HTML elements, matching the DOM specification and real browsers; code that compares fakedom `tagName` against lowercase strings must be updated
+* Creating an element with an empty or null namespace now produces a plain element without a namespace

@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.1/#9879
+description: Fix field-name inputs re-render
+tags: $:/tags/ChangeNote
+release: 5.4.1
+change-type: bugfix
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9879
+github-contributors: BurningTreeC
+
+Fixes the field-name input re-rendering and therefor loosing focus when inserting a field-name that already exists

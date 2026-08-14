@@ -1,0 +1,13 @@
+change-category: hackability
+change-type: bugfix
+created: 20260711181412000
+description: Empty code blocks parse cleanly; a closing fence only counts alone on its line
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9739
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9739
+type: text/vnd.tiddlywiki
+
+* An empty code block such as ```` ```bash ```` directly followed by the closing fence parses as an empty codeblock instead of swallowing the rest of the tiddler (fixes [[Issue #9047|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9047]])
+* A closing fence only ends the block when it stands alone on its line, so code lines ending in three backticks stay inside the block
