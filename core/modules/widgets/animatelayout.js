@@ -6,48 +6,12 @@ module-type: widget
 Animates its children between layout positions. Where an element ends up is left entirely
 to the browser; this only makes the journey visible.
 
-The position of each keyed element is recorded before a refresh, compared with where the
-browser put it afterwards, and the difference is played back as a transform. Since
-transforms take no part in layout, the browser remains the sole authority on where things
-go: any layout works, including wrapping grids of variable sized items, and the containing
-element is the correct size at every frame rather than being animated towards it.
-
-The enable attribute is consulted afresh on every refresh, so a filtered transclusion there
-decides which changes are played and which are not. It is worth being selective: the core
-callers animate only while a drag is in progress, because outside a drag the storyviews are
-already animating insertions and removals, and two animations moving the same elements fight
-each other. The dragging operator answers that question, and stays true while a drop is
-being handled.
-
-Nothing is played to a reader whose system asks for reduced motion. Set reducedmotion to
-"ignore" where the movement carries meaning that its absence would lose.
-
-The list attribute names the tiddler whose reordering is being animated. Only a change to
-that tiddler plays the animation: measuring is a forced layout of every keyed element, and
-during a drag plenty of unrelated refreshes arrive that move nothing. Left blank, any
-refresh plays, which is only useful when the ordering has no single tiddler behind it.
-
-Only position is animated unless scale is set to "yes", which also carries an element that
-has changed size between its old size and its new one. That is worth having where size
-follows position, as it does in a layout that shares space out between its items, and worth
-leaving alone otherwise: an element is scaled as a whole, so its content is squashed or
-stretched for the length of the journey. Where an item's size does not depend on where it
-sits in the list, as in the story river and the sidebar, there is nothing for it to do.
-
-A travelling element carries the class tc-animatelayout-moving, which a stylesheet can use
-to say how something on its way somewhere should look.
-
 \*/
 
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-/*
-Whether the reader has asked their system for reduced motion. The query is made once and
-kept, because its matches property is live: a reader who changes their mind is answered
-correctly without anything having to listen for the change
-*/
 var reducedMotionQuery;
 
 function prefersReducedMotion() {
