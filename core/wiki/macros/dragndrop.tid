@@ -128,53 +128,52 @@ code-body: yes
 
 \procedure make-live-reorderable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
 \whitespace trim
-<$tiddler tiddler=<<tiddler>>>
-	<$draggable
-		enable=<<enable>>
-		tiddler=<<tiddler>>
-		startactions=<<live-reorder-drag-start-actions>>
-		endactions=<<live-reorder-drag-end-actions>>
-		class=<<tf.lr.get-item-class>>
-		data-animate-key=<<tiddler>>
-		style.display=<<itemDisplay>>
-		style.position="relative"
-		--tc-live-reorder-ghost-opacity=<<ghostOpacity>>
-	>
-		<$set name="tv-enable-drag-and-drop" value={{{ [<enable>match[yes]then[no]] :else[<tv-enable-drag-and-drop>] }}}>
-			<<content>>
-		</$set>
-		<%if [<tf.lr.is-dragging>match[yes]] %>
-			<$droppable
-				class="tc-live-reorderable-drop-before"
-				actions=<<live-reorder-drop-actions>>
-				dragEnterActions=<<live-reorder-before-drag-enter-actions>>
-			>
-				<div
-					class="tc-live-reorderable-drop-placeholder"
-					style.position="absolute"
-					style.top=<<tf.lr.get-before-top>>
-					style.left=<<tf.lr.get-before-left>>
-					style.width=<<tf.lr.get-before-width>>
-					style.height=<<tf.lr.get-before-height>>
-					style.z-index=<<styleZIndex>>
-				/>
-			</$droppable>
-			<$droppable
-				class="tc-live-reorderable-drop-after"
-				actions=<<live-reorder-drop-actions>>
-				dragEnterActions=<<live-reorder-after-drag-enter-actions>>
-			>
-				<div
-					class="tc-live-reorderable-drop-placeholder"
-					style.position="absolute"
-					style.top=<<tf.lr.get-after-top>>
-					style.left=<<tf.lr.get-after-left>>
-					style.width=<<tf.lr.get-after-width>>
-					style.height=<<tf.lr.get-after-height>>
-					style.z-index=<<styleZIndex>>
-				/>
-			</$droppable>
-		<% endif %>
-	</$draggable>
-</$tiddler>
+\rules except dash
+<$draggable
+	enable=<<enable>>
+	tiddler=<<tiddler>>
+	startactions=<<live-reorder-drag-start-actions>>
+	endactions=<<live-reorder-drag-end-actions>>
+	class=<<tf.lr.get-item-class>>
+	data-animate-key=<<tiddler>>
+	style.display=<<itemDisplay>>
+	style.position="relative"
+	--tc-live-reorder-ghost-opacity=<<ghostOpacity>>
+>
+	<$set name="tv-enable-drag-and-drop" value={{{ [<enable>match[yes]then[no]] :else[<tv-enable-drag-and-drop>] }}}>
+		<<content>>
+	</$set>
+	<%if [<tf.lr.is-dragging>match[yes]] %>
+		<$droppable
+			class="tc-live-reorderable-drop-before"
+			actions=<<live-reorder-drop-actions>>
+			dragEnterActions=<<live-reorder-before-drag-enter-actions>>
+		>
+			<div
+				class="tc-live-reorderable-drop-placeholder"
+				style.position="absolute"
+				style.top=<<tf.lr.get-before-top>>
+				style.left=<<tf.lr.get-before-left>>
+				style.width=<<tf.lr.get-before-width>>
+				style.height=<<tf.lr.get-before-height>>
+				style.z-index=<<styleZIndex>>
+			/>
+		</$droppable>
+		<$droppable
+			class="tc-live-reorderable-drop-after"
+			actions=<<live-reorder-drop-actions>>
+			dragEnterActions=<<live-reorder-after-drag-enter-actions>>
+		>
+			<div
+				class="tc-live-reorderable-drop-placeholder"
+				style.position="absolute"
+				style.top=<<tf.lr.get-after-top>>
+				style.left=<<tf.lr.get-after-left>>
+				style.width=<<tf.lr.get-after-width>>
+				style.height=<<tf.lr.get-after-height>>
+				style.z-index=<<styleZIndex>>
+			/>
+		</$droppable>
+	<% endif %>
+</$draggable>
 \end
