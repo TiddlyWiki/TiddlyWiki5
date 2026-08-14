@@ -1,0 +1,16 @@
+title: $:/changenotes/5.5.0/#9959
+created: 20260814084235746
+modified: 20260814084235746
+description: Dimension Tracker Mechanism
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9959
+github-contributors: BurningTreeC
+
+The Dimension Tracker Mechanism allows tracking the dimensions like `width` and `height` of elements specified by a `CSS selector`.
+
+This is internally used by the `menubar` plugin to track the height of the bar and to apply its height as a top offset to sticky tiddler titles.
+
+It creates info tiddlers and listens for size changes on the tracked element(s). If the size changes, the info tiddler gets updated with the new size.
