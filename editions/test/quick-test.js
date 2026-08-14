@@ -3,12 +3,12 @@ Fast test runner that boots the test edition and runs selected test specs.
 Skips the expensive --rendertiddler step from --build index.
 
 Usage:
-  node test-parser-quick.js [test-files...]
+  node quick-test.js [test-files...]
 
 Examples:
-  node test-parser-quick.js                                     # Run ALL specs
-  node test-parser-quick.js test-wikitext-parser                # Run one spec file
-  node test-parser-quick.js test-wikitext-parser test-filters   # Run multiple spec files
+  node quick-test.js                                     # Run ALL specs
+  node quick-test.js test-wikitext-parser                # Run one spec file
+  node quick-test.js test-wikitext-parser test-filters   # Run multiple spec files
 */
 
 "use strict";
