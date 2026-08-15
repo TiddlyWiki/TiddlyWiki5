@@ -31,7 +31,12 @@ exports.handler = function(request,response,state) {
 			renderType = renderType || state.server.get("tiddler-render-type");
 			renderTemplate = renderTemplate || state.server.get("tiddler-render-template");
 		}
-		var text = state.wiki.renderTiddler(renderType,renderTemplate,{parseAsInline: true, variables: {currentTiddler: title}});
+		// Merge variables: default currentTiddler, URL query parameters take precedence
+		var variables = {currentTiddler: title};
+		for(var key in state.queryParameters) {
+			variables[key] = state.queryParameters[key];
+		}
+		var text = state.wiki.renderTiddler(renderType,renderTemplate,{parseAsInline: true, variables: variables});
 
 		var headers = {"Content-Type": renderType};
 		state.sendResponse(200,headers,text,"utf8");
