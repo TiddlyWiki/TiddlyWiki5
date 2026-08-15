@@ -46,9 +46,17 @@ title: $:/core/ui/EditTemplate
 	typeSelectionTiddler=<<qualify "$:/temp/Type/selected-item">>>
 <$keyboard key="((cancel-edit-tiddler))" actions=<<cancel-delete-tiddler-actions "cancel">> tag="div">
 <$keyboard key="((save-tiddler))" actions=<<save-tiddler-actions>> tag="div">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
-<$transclude tiddler=<<listItem>>/>
-</$list>
+<%if [<currentTiddler>has:field[_is_skinny]] %>
+	<!-- Trigger lazy-loading of the draft itself (syncer will fallback to original if draft doesn't exist on server) -->
+	<div hidden>
+		{{||$:/core/ui/ViewTemplate/body/default}}
+	</div>
+	<div class="tc-tiddler-lazy-loading" />
+<%else%>
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
+		<$transclude tiddler=<<listItem>>/>
+	</$list>
+<%endif%>
 </$keyboard>
 </$keyboard>
 </$vars>
