@@ -1,0 +1,15 @@
+title: $:/changenotes/5.5.0/#9920
+created: 20260712000000000
+modified: 20260712000000000
+description: Recover from malformed wikitext and surface parse diagnostics
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9920
+github-contributors: joshuafontany
+type: text/vnd.tiddlywiki
+
+An emphasis run now ends at its closing delimiter or at the end of its block, whichever arrives first, so an unclosed delimiter no longer reaches to the end of the tiddler. An unclosed emphasis, inline style or inline code delimiter renders as the literal text the author typed.
+
+The parser records a diagnostic whenever it recovers, carrying a range, a severity, a code and a message, and the new [[parse-diagnostics Operator]] lists the tiddlers a wiki cannot fully read.

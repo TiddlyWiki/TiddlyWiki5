@@ -42,6 +42,13 @@ exports.parse = function() {
 		this.parser.pos = match.index + match[0].length;
 	} else {
 		text = this.parser.source.substr(this.parser.pos);
+		this.parser.addDiagnostic({
+			from: codeStart,
+			to: this.parser.sourceLength,
+			severity: "warning",
+			code: "unterminated-codeblock",
+			message: "Unterminated code block"
+		});
 		this.parser.pos = this.parser.sourceLength;
 	}
 	// Return the $codeblock widget
