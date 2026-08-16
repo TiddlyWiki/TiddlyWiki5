@@ -9,5 +9,6 @@ module-type: wikiruleserializer
 exports.name = "horizrule";
 
 exports.serialize = function(tree,serialize) {
-	return "---\n\n";
+	// The dash count stays normalized by choice
+	return "---";
 };

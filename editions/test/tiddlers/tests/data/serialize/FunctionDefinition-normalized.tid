@@ -1,0 +1,31 @@
+title: Serialize/FunctionDefinition-normalized
+description: AST-only mode drops trailing spaces after the end marker
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: info
+
+An `\end` marker decorated with trailing spaces becomes a bare `\end`.
+
+Why: the AST records name, parameters and definition text; the end marker
+line is reconstructed, so decoration on it disappears.
+
+* Covers: $:/plugins/tiddlywiki/wikitext-serialize/rules/fnprocdef.js.
+* Mode: ast-only (the Input field withholds the source from the serializer).
++
+title: Input
+mode: ast-only
+
+\procedure myProc()
+nothing
+\end   
+
+<<myProc>>
++
+title: ExpectedWikitext
+
+\procedure myProc()
+nothing
+\end
+
+<<myProc>>

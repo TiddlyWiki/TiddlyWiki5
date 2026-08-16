@@ -1,0 +1,22 @@
+title: Serialize/HorizRule-normalized
+description: A horizontal rule of four or more dashes normalizes to three
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: info
+
+`----` and longer rules become `---`, even in fidelity mode.
+
+Why: the parse tree records a bare `hr` element without the dash count,
+and the serializer emits three dashes by choice.
+
+* Covers: $:/plugins/tiddlywiki/wikitext-serialize/rules/horizrule.js.
+* Mode: fidelity (no mode field: this pair pins a normalization that happens even with the source available).
++
+title: Input
+
+----
++
+title: ExpectedWikitext
+
+---

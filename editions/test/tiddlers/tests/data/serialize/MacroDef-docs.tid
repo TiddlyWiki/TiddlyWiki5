@@ -1,0 +1,19 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Quoted and bracketed parameter defaults and nested named end markers round-trip byte-exact
+title: Serialize/MacroDef-docs
+type: text/vnd.tiddlywiki
+
+\define quoted-defaults(a:'single "quoted" default',b:"double quoted default",c:"""triple "quoted" default""",d:[[bracket default with spaces]])
+definition text
+\end
+
+\define special-button(caption:"Click me")
+\define actions()
+<$action-sendmessage $message="tm-notify" $param="HelloThere"/>
+\end actions
+<$button actions=<<actions>>>
+$caption$
+</$button>
+\end special-button
+
+<<special-button>>
