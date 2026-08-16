@@ -7,6 +7,8 @@ release: 5.5.0
 tags: $:/tags/ChangeNote
 title: $:/changenotes/5.5.0/#9969
 type: text/vnd.tiddlywiki
+change-category: plugin
+change-type: feature
 
 Freelinks now supports local suppression of recognised automatic links.
 
