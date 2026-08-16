@@ -1,0 +1,116 @@
+created: 20260728224000000
+description: Group by one field while the search box filters on another
+import-compound: [[GroupedLists/Bibliography]]
+modified: 20260729190424885
+tags: $:/tags/wiki-test-spec GroupedLists
+title: GroupedLists/Example/SearchAnotherField
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+`searchField` names the field the search box looks at, which no longer has to be the field the list groups by.
+
+Three definitions carry the split:
+
+* `groupField` is `bibtex-entry-type`, so the groups and the tabs are publication types
+* `searchField` is `bibtex-author`, so typing still matches people
+* `f.tiddlersMatching` narrows the tiddlers first, and the groups are derived from whatever survives
+
+Because the groups are computed after the search, a whole group disappears once none of its entries match. The tab strip is still built from the unfiltered data, so the tabs themselves stay put.
+
+This test case carries the same `_TabButton` and `_TabContent` payload tiddlers as the previous example.
+
+Type `bar` to leave only ''InProceedings'', holding Barker's two papers. The other tabs drop to zero and show the `emptyMessage` of the list.
++
+title: Output
+
+\whitespace trim
+
+<!-- Filter operator suffixes cannot be variables, so search:<searchField> is impossible.
+f.tiddlersMatching searches the extracted value as a title, which works whichever field it came from. -->
+
+<!-- No trailing whitespace after the field name: it becomes part of the name and the list silently renders nothing -->
+\procedure groupField() bibtex-entry-type
+
+\procedure searchField() bibtex-author
+
+\procedure searchLabel() Author
+
+\function f.valuesAll() [all[tiddlers]!is[system]has<groupField>each<groupField>get<groupField>sort[]]
+
+\function f.tiddlersMatching() [all[tiddlers]!is[system]has<groupField>] :filter[get<searchField>search:title{$:/temp/GroupedLists/search-other}]
+
+\function f.valuesFound() [f.tiddlersMatching[]each<groupField>get<groupField>sort[]]
+
+\function f.letters() [f.valuesAll[]] :map[uppercase[]split[]first[]] +[unique[]sort[]]
+
+\function f.valuesFor(letter) [f.valuesFound[]] :filter[uppercase[]split[]first[]match<letter>]
+
+\function f.valuesShown(letter) [f.valuesFound[]] :filter[<letter>match[All]] :else[f.valuesFor<letter>]
+
+\function f.tiddlersFor(value) [f.tiddlersMatching[]] :filter[get<groupField>match<value>] +[sort[title]]
+
+<!-- The inline style below is only for this self-contained example. For production, define styles in a tiddler tagged $:/tags/Stylesheet instead. -->
+<style>.demo-group-filter { margin-bottom: 1em; }</style>
+
+<$macrocall
+	$name="tabs"
+	tabsList="[[All]] [f.letters[]]"
+	default="All"
+	state="$:/state/GroupedLists/tab-other"
+	buttonTemplate="_TabButton"
+	template="_TabContent"
+/>
++
+title: _TabButton
+code-body: yes
+
+\whitespace trim
+
+<$text text=<<currentTab>>/><span class="tc-tiny-gap-left">(<$count filter="[f.valuesShown<currentTab>]"/>)</span>
++
+title: _TabContent
+code-body: yes
+
+\whitespace trim
+
+<!-- tm-focus-selector takes the first match in the document, so .tc-search input would hit the sidebar search. -->
+
+<div class="tc-search demo-group-filter">
+	<label>
+		<<searchLabel>>:<$edit-text
+			tiddler="$:/temp/GroupedLists/search-other"
+			tag="input"
+			type="search"
+			default=""
+			placeholder={{{ [[Filter by ]addsuffix<searchLabel>] }}}
+			class="tc-tiny-gap"
+		/>
+	</label>
+
+	<%if [[$:/temp/GroupedLists/search-other]get[text]minlength[1]] %>
+		<$button
+			class="tc-btn-invisible"
+			tooltip="Clear the filter"
+			aria-label="Clear the filter"
+		>
+			<$action-deletetiddler $tiddler="$:/temp/GroupedLists/search-other"/>
+			<$action-sendmessage $message="tm-focus-selector" $param=".demo-group-filter input"/>
+			{{$:/core/images/close-button}}
+		</$button>
+	<%endif%>
+</div>
+<$list filter="[f.valuesShown<currentTab>]" variable="_value">
+	<$list-empty>
+		//No matches//
+	</$list-empty>
+	<div class="tc-menu-list-item">
+		<<_value>>
+
+		<$list filter="[f.tiddlersFor<_value>]">
+			<div class="tc-menu-list-subitem">
+				<$link><$text text={{{ [<currentTiddler>get[bibtex-title]] :else[<currentTiddler>] }}}/></$link>
+			</div>
+		</$list>
+	</div>
+</$list>
