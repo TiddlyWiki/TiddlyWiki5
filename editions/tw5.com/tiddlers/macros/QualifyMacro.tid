@@ -5,7 +5,7 @@ title: qualify Macro
 type: text/vnd.tiddlywiki
 caption: qualify
 
-The <<.def qualify>> [[macro|Macros]] is an important part of the StateMechanism.
+The <<.def qualify>> [[macro|Macros]] is an important part of the [[StateMechanism]].
 
 It returns a unique string that encodes its position within the [[widget tree|Widgets]], as identified by the stack of transcluded tiddlers that lead to that position.
 

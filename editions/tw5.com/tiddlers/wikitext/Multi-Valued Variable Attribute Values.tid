@@ -14,7 +14,7 @@ This is the multi-valued counterpart to the [[Variable Attribute Values]] syntax
 
 ! Non-MVV-Aware Attributes
 
-When `((var))` is used on a widget attribute that does not support multi-valued variables (such as the `text` attribute of the TextWidget), only the first value is used:
+When `((var))` is used on a widget attribute that does not support multi-valued variables (such as the `text` attribute of the [[TextWidget]]), only the first value is used:
 
 ```
 <$text text=((myvar))/>

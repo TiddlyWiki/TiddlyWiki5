@@ -24,7 +24,7 @@ The integrated actions are provided as a shortcut for invoking common actions. T
 The content of the `<$button>` widget is displayed within the button.
 
 |!Attribute |!Description |
-|actions |A string containing ActionWidgets to be triggered when the key combination is detected. <<.from-version "5.1.23">> the <<.def "modifier">> variable lists the modifier keys that are pressed when the action is invoked. The possible modifiers are ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' and ''ctrl-alt-shift'' |
+|actions |A string containing [[ActionWidgets]] to be triggered when the key combination is detected. <<.from-version "5.1.23">> the <<.def "modifier">> variable lists the modifier keys that are pressed when the action is invoked. The possible modifiers are ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' and ''ctrl-alt-shift'' |
 |to |The title of the tiddler to navigate to |
 |message |The name of the [[widget message|Messages]] to send when the button is clicked |
 |param |The optional parameter to the message |
@@ -49,11 +49,11 @@ The content of the `<$button>` widget is displayed within the button.
 |style |An optional CSS style attribute to be assigned to the HTML element |
 |tag |An optional html tag to use instead of the default "button" |
 |dragTiddler |An optional tiddler title making the button draggable and identifying the payload tiddler. See DraggableWidget for details |
-|dragFilter |An optional filter making the button draggable and identifying the list of payload tiddlers. See DraggableWidget for details |
+|dragFilter |An optional filter making the button draggable and identifying the list of payload tiddlers. See [[DraggableWidget]] for details |
 |tabindex |Sets the `tabindex` attribute of the button to the given value |
 |disabled|<<.from-version "5.1.23">> Optional, disables the button if set to "yes". Defaults to "no"|
 
-''Note:'' In almost all other cases where a TextReference is used as a widget attribute, it will be placed between curly brackets, to [[transclude|Transclusion in WikiText]] the value currently stored there. However, when we use a TextReference as the value of a button widget's <<.attr set>> attribute, we are referencing //the storage location itself//, rather than the value stored there, so we do ''not'' use curly brackets there. //Example:// we could code a button widget that sets the `caption` field of TiddlerA to be the same as that of TiddlerB as:
+''Note:'' In almost all other cases where a TextReference is used as a widget attribute, it will be placed between curly brackets, to [[transclude|Transclusion in WikiText]] the value currently stored there. However, when we use a [[TextReference]] as the value of a button widget's <<.attr set>> attribute, we are referencing //the storage location itself//, rather than the value stored there, so we do ''not'' use curly brackets there. //Example:// we could code a button widget that sets the `caption` field of TiddlerA to be the same as that of TiddlerB as:
 
 <<.tip """<$macrocall $name=".from-version" version="5.1.18"/> <$macrocall $name=".attr" _="setTitle"/>, <$macrocall $name=".attr" _="setField"/> and <$macrocall $name=".attr" _="setIndex"/> attributes allow specifying Tiddler states ''directly'', without interpreting them as [[TextReferences|TextReference]].
 This is useful for edge-cases where titles may contain characters that are used to denote Tiddler fields or indices (`!!`, `##`)""">>

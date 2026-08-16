@@ -22,4 +22,4 @@ If you need to disable CamelCase for just an entire tiddler, you can use the [[\
 
 !! Turning off Camel Case globally
 
-To turn off CamelCase in all tiddlers, navigate to the [[Control Panel|$:/ControlPanel]].  Select the `Settings` tab and then scroll or read down to the ``Camel Case Wiki Links`` section and unselect ``Enable automatic CamelCase linking``.
+To turn off [[CamelCase]] in all tiddlers, navigate to the [[Control Panel|$:/ControlPanel]].  Select the `Settings` tab and then scroll or read down to the ``Camel Case Wiki Links`` section and unselect ``Enable automatic CamelCase linking``.

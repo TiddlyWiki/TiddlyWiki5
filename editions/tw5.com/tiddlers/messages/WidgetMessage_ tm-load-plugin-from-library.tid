@@ -13,7 +13,7 @@ The `tm-load-plugin-from-library` message load the specified tiddler or plugin f
 
 !Example
 
-The following snippet will install the CodeMirror plugin from the official plugin library:
+The following snippet will install the [[CodeMirror]] plugin from the official plugin library:
 
 ```
 <$button>
@@ -25,4 +25,4 @@ Install CodeMirror
 <<.tip "Usually a plugin library has to be loaded (initialized) first before it can be used. If the plugin library specified by 'url' has not been initialized yet, it will be loaded and initialized.">>
 
 
-The `tm-load-plugin-from-library` message is usually generated with the ButtonWidget and is handled by the core itself.
+The `tm-load-plugin-from-library` message is usually generated with the [[ButtonWidget]] and is handled by the core itself.

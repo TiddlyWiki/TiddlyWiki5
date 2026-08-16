@@ -4,7 +4,7 @@ tags: [[Macro Examples]]
 title: list-thumbnails Macro (Examples)
 type: text/vnd.tiddlywiki
 
-This example lists all the tiddlers which are tagged with "HelloThumbnail":
+This example lists all the tiddlers which are tagged with "[[HelloThumbnail]]":
 
 <$macrocall $name=".example" n="1" eg="""<<list-thumbnails filter:"[tag[HelloThumbnail]]" width:"168" height:"95">>"""/>
 

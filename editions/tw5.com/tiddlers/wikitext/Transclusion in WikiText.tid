@@ -17,7 +17,7 @@ You can incorporate the content of one tiddler within another using the [[Transc
 
 !! Transcluding Text References
 
-You can also use a TextReference instead of a tiddler title:
+You can also use a [[TextReference]] instead of a tiddler title:
 
 * `{{MyTiddler!!field}}` transcludes a specified field of a tiddler
 * `{{!!field}}` transcludes a specified field of the current tiddler
@@ -37,7 +37,7 @@ In contrast to [[Filtered Attribute Values]], all items matching the filter are 
 
 !! Generated Widgets
 
-The WikiText transclusion syntax generates a TiddlerWidget wrapped around a TranscludeWidget. For example, `{{MyTiddler||TemplateTitle}}` generates the following pair of widgets:
+The [[WikiText]] transclusion syntax generates a [[TiddlerWidget]] wrapped around a TranscludeWidget. For example, `{{MyTiddler||TemplateTitle}}` generates the following pair of widgets:
 
 ```
 <$tiddler tiddler="MyTiddler">
@@ -91,6 +91,6 @@ See also:
 * [[Transclusion Basic Usage]]
 * [[Transclusion with Templates]]
 * TemplateTiddlers
-* TranscludeWidget
+* [[TranscludeWidget]]
 * [[Transclusion and Substitution]]
 * [[WikiText parser mode: transclusion examples]]

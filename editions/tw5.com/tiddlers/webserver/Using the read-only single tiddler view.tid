@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 TiddlyWiki's experimental single tiddler per page, read-only view uses a simplified page layout, and implements links between tiddlers, but there are no other interactive features. Compared to a full TiddlyWiki user interface, it is very lightweight and usable even over very slow connections.
 
-Alongside serving the full interactive wiki at the path `/` (e.g. http://127.0.0.1:8080/), TiddlyWiki serves each tiddler at the path `/<url-encoded-tiddler-title>`. For example:
+Alongside serving the full interactive wiki at the path `/` (e.g. http://127.0.0.1:8080/), [[TiddlyWiki]] serves each tiddler at the path `/<url-encoded-tiddler-title>`. For example:
 
 * http://127.0.0.1:8080/HelloThere
 * http://127.0.0.1:8080/Philosophy%20of%20Tiddlers

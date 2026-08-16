@@ -25,12 +25,12 @@ The layout of files on tiddlywiki.com has been adjusted to make it more logical.
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a9f46525a0b1ecf7ce6d1bdae64e6763a247106b]] problem with digits being classified as lower case letters for wiki link matching
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8cc236b4dca96327c7b28ad45e1eb4c2dce174e5]] crash when sorting missing tiddlers by fields other than title
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/73a4747d05c6746476ccd9e8cb8255853f631d17]] problem with handling `.jpeg` file extensions
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/775482a2428d24a475e0c7df7bea215c190b5574]] problem with RadioWidget and missing tiddlers
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/775482a2428d24a475e0c7df7bea215c190b5574]] problem with [[RadioWidget]] and missing tiddlers
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/2571f534aa67c7f9d423d44d36efa32480f4c370]] problem with dragging a partially selected link
 
 !! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@BramChen|https://github.com/BramChen]]
 * [[@buggyj|https://github.com/buggyj]]

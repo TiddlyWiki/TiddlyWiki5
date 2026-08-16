@@ -23,7 +23,7 @@ After the release of v5.2.5, we found some backwards compatibility issues with t
 
 New [ext[Twitter Archivist|./editions/twitter-archivist]] plugin to import the tweets and associated media from a Twitter Archive as individual tiddlers.
 
-<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6961">> new GenesisWidget that allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6961">> new [[GenesisWidget]] that allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance
 
 <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6936">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7105">>) new operators for reading and formatting JSON data: [[jsonget Operator]], [[jsonindexes Operator]], [[jsontype Operator]], [[jsonextract Operator]] and [[format Operator]]
 
@@ -59,9 +59,9 @@ Improvements to the translation features of TiddlyWiki itself:
 
 ! Widget Improvements
 
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/127f660c91020dcbb43897d954066b31af729e74">> EditTextWidget to remove the default text "Type the text for the tiddler 'foo'"
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/127f660c91020dcbb43897d954066b31af729e74">> [[EditTextWidget]] to remove the default text "Type the text for the tiddler 'foo'"
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7081">> ''focus'' attribute to SelectWidget
-* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/commit/1df4c29d73073788ba3859668112e8bb46171a6c">> LetWidget to remove restriction of the widget being unable to create variables whose names begin with a dollar sign
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/commit/1df4c29d73073788ba3859668112e8bb46171a6c">> [[LetWidget]] to remove restriction of the widget being unable to create variables whose names begin with a dollar sign
 
 ! Filter improvements
 
@@ -89,7 +89,7 @@ Improvements to the translation features of TiddlyWiki itself:
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7099">> truncated search results on small screens
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7010">> table contents overflow on small screens
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/fb34df84ed41882c1c2a6ff54f0e908b43ef95a3">> "new image" keyboard shortcut not to assign journal tags
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6987">> SelectWidget class to update if it uses a filter
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6987">> [[SelectWidget]] class to update if it uses a filter
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7017">> issue with wikification within the advanced search filter dropdown
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7057">> the table in $:/Import to avoid creating hidden empty rows
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7008">> advanced search keyboard shortcut not navigating correctly
@@ -98,7 +98,7 @@ Improvements to the translation features of TiddlyWiki itself:
 
 ! Node.js Improvements
 
-* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7073">> new CommandsCommand to enable command tokens to be dynamically generated from a filter
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7073">> new [[CommandsCommand]] to enable command tokens to be dynamically generated from a filter
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6947">> console logging to avoid spaces and `<empty string>` message
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7014">> problem  with lazy loading deleting tiddler bodies under certain circumstances
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/344110e2890caf711ab8f3c4f4deaa7d86771231">> handling of ".mp4" file extension so that it defaults to video not audio
@@ -114,7 +114,7 @@ Improvements to the translation features of TiddlyWiki itself:
 
 ! Acknowledgements
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 <<.contributors """
 AnthonyMuscio

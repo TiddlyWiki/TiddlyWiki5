@@ -4,7 +4,7 @@ tags: Pragmas
 title: Pragma: \define
 type: text/vnd.tiddlywiki
 
-The ''\define'' [[pragma|Pragmas]] is used to [[define macros|Macro Definitions]]. It is a shortcut syntax for the SetVariableWidget.
+The ''\define'' [[pragma|Pragmas]] is used to [[define macros|Macro Definitions]]. It is a shortcut syntax for the [[SetVariableWidget]].
 
 The usual form allows macros to span multiple lines.
 

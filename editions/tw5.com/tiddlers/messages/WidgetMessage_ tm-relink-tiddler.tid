@@ -15,7 +15,7 @@ The relink tiddler message requires the following properties on the `event` obje
 |renameInTags |Optional value "no" to disable renaming in tags fields of other tiddlers (defaults to "yes") |
 |renameInLists |Optional value "no" to disable renaming in list fields of other tiddlers (defaults to "yes") |
 
-The relink tiddler message is usually generated with the ButtonWidget and is handled by the core.
+The relink tiddler message is usually generated with the [[ButtonWidget]] and is handled by the core.
 
 ! Examples
 

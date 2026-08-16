@@ -5,7 +5,7 @@ tags: WikiText
 title: Block Quotes in WikiText
 type: text/vnd.tiddlywiki
 
-There are two ways to produce HTML block quotes in TiddlyWiki5, one for content spread across multiple lines, and one for single line content.
+There are two ways to produce HTML block quotes in [[TiddlyWiki5]], one for content spread across multiple lines, and one for single line content.
 
 ! Multi-line Block Quotes
 

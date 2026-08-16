@@ -30,7 +30,7 @@ The control panel ''Saving'' tab includes the following configuration options:
 
 |!Name |!Description |
 |Server URL |The full URL to the ''store.php'' file on your server |
-|Upload filename |The filename used to save the TiddlyWiki (defaults to ''index.html'') |
+|Upload filename |The filename used to save the [[TiddlyWiki]] (defaults to ''index.html'') |
 |Upload directory |The relative path from ''store.php'' to the directory used for saving the file |
 |Backup directory |The relative path from ''store.php'' to the directory used for backups |
 

@@ -15,7 +15,7 @@ This is a minor bug fix release to improve the documentation and correct some is
 
 Certain features that were deprecated in [[Release 5.0.17-beta]] have now been removed:
 
-* [[Removed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/62edd1e8a3fddc0c11b87c87b3e5b404d8e1e395]] deprecated `title` attribute on the ButtonWidget
+* [[Removed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/62edd1e8a3fddc0c11b87c87b3e5b404d8e1e395]] deprecated `title` attribute on the [[ButtonWidget]]
 * [[Removed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d047ccdc84ab6f23779c3614712e0d6fa0ef63ec]] support for deprecated `$:/tags/stylesheet` system tag
 
 Note that the next release will also remove support for regular expression filter operands, which was also deprecated in 5.0.17-beta.
@@ -26,7 +26,7 @@ Note that the next release will also remove support for regular expression filte
 
 !! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@pmario|https://github.com/pmario]]
 * [[@TheDiveO|https://github.com/TheDiveO]]

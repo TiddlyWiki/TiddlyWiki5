@@ -4,7 +4,7 @@ tags: Community
 title: Contributing
 type: text/vnd.tiddlywiki
 
-Here we focus on contributions via GitHub Pull Requests but there are many other ways that anyone can help the TiddlyWiki project, such as [[reporting bugs|ReportingBugs]] or helping to [[improve our documentation|Improving TiddlyWiki Documentation]].
+Here we focus on contributions via [[GitHub]] Pull Requests but there are many other ways that anyone can help the TiddlyWiki project, such as [[reporting bugs|ReportingBugs]] or helping to [[improve our documentation|Improving TiddlyWiki Documentation]].
 
 ! Rules for Pull Requests
 
@@ -12,7 +12,7 @@ PRs must meet these minimum requirements before they can be considered for mergi
 
 * The material in the PR must be free of licensing restrictions. Which means that either:
 ** The author must hold the copyright in all of the material themselves
-** The material must be licensed under a license compatible with TiddlyWiki's BSD license
+** The material must be licensed under a license compatible with [[TiddlyWiki]]'s BSD license
 * The author must sign the Contributors License Agreement (see below)
 * Each PR should only make a single feature change
 * The title of the PR should be 50 characters or less

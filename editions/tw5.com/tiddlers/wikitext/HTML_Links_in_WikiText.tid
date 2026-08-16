@@ -10,7 +10,7 @@ It is often useful to be able to create HTML links to external resources. For ex
 <a href={{MyLinkDestination}}>link</a>
 ```
 
-However, there is an unexpected security issue that means that most of the time the link should have the `rel` attribute set to `noopener noreferrer` to maintain privacy of the URLs of private TiddlyWiki's (eg on Dropbox). See https://mathiasbynens.github.io/rel-noopener/ for more information.
+However, there is an unexpected security issue that means that most of the time the link should have the `rel` attribute set to `noopener noreferrer` to maintain privacy of the URLs of private [[TiddlyWiki]]'s (eg on Dropbox). See https://mathiasbynens.github.io/rel-noopener/ for more information.
 
 ```
 <a href={{MyLinkDestination}} rel="noopener noreferrer">link</a>

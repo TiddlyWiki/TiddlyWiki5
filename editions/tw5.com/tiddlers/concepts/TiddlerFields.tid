@@ -18,7 +18,7 @@ The standard fields are:
 |`creator` |<<lingo creator>> |
 |`tags` |<<lingo tags>> |
 |`type` |<<lingo type>> |
-|`list` |<<lingo list>> -- see ListField |
+|`list` |<<lingo list>> -- see [[ListField]] |
 |`caption` |<<lingo caption>> |
 
 Other fields used by the core are:
@@ -46,7 +46,7 @@ Other fields used by the core are:
 |`toc-link`|<<lingo toc-link>>|
 |`_canonical_uri`|<<lingo _canonical_uri>>|
 
-The TiddlyWebAdaptor uses a few more fields:
+The [[TiddlyWebAdaptor]] uses a few more fields:
 
 |!Field Name |!Description |
 |`bag` |<<lingo bag>> |

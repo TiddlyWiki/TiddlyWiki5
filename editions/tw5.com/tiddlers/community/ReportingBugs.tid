@@ -12,7 +12,7 @@ Unless you are already familiar with GitHub, it's usually easiest to report prob
 
 ! TiddlyWiki on GitHub
 
-We use GitHub Issues to manage bug reports and feature requests for TiddlyWiki. To maintain their effectiveness we endeavour to have as few open issues as possible.
+We use GitHub Issues to manage bug reports and feature requests for [[TiddlyWiki]]. To maintain their effectiveness we endeavour to have as few open issues as possible.
 
 !! Policies for Managing Issues
 
@@ -22,7 +22,7 @@ GitHub Issues are not very good for managing ideas that are not immediately acti
 
 !! Creating Issues
 
-Before creating a GitHub issue it is good etiquette to search through the existing issues to see whether the problem has already been reported. If a search isn't practical, don't worry too much; GitHub makes it easy to merge existing issues.
+Before creating a GitHub issue it is good etiquette to search through the existing issues to see whether the problem has already been reported. If a search isn't practical, don't worry too much; [[GitHub]] makes it easy to merge existing issues.
 
 When you do create an issue, remember that for effective debugging, we need as much information as possible. At a minimum, please try to include:
 

@@ -41,7 +41,7 @@ Properties within a JSON object are identified by a sequence of indexes. In the 
 }
 ```
 
-The <<.op jsondelete>> operator uses multiple parameters to specify the indexes of the property to delete. For object properties, the property is removed using JavaScript's `delete` operator. For array elements, the element is removed using `splice`, which shifts remaining elements.
+The <<.op jsondelete>> operator uses multiple parameters to specify the indexes of the property to delete. For object properties, the property is removed using [[JavaScript]]'s `delete` operator. For array elements, the element is removed using `splice`, which shifts remaining elements.
 
 Negative indexes into an array are counted from the end, so -1 means the last item, -2 the next-to-last item, and so on.
 

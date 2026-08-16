@@ -10,11 +10,11 @@ JSON (~JavaScript Object Notation) is a standardised text representation for dat
 
 JSON is used in several different contexts in TiddlyWiki. For example:
 
-* Tiddlers are represented as JSON data within TiddlyWiki HTML files
+* Tiddlers are represented as JSON data within [[TiddlyWiki]] HTML files
 * Groups of tiddlers can be [[exported|How to export tiddlers]] and [[imported|Importing Tiddlers]] as JSON files
 * Plugin tiddlers store their constituent shadow tiddlers as JSON data
 * The client-server configuration uses [[JSON messages|TiddlyWeb JSON tiddler format]] to communicate between the client and the server
-* Arbitrary JSON data within DataTiddlers can be processed and manipulated using a set of filter operators and action widgets
+* Arbitrary JSON data within [[DataTiddlers]] can be processed and manipulated using a set of filter operators and action widgets
 
 !! About JSON
 

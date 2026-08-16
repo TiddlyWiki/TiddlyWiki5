@@ -16,7 +16,7 @@ tiddlywiki mywiki --rendertiddler $:/core/save/all index.html text/plain
 
 In 5.0.11-beta this behaviour has changed, and now the specified filename is resolved relative to an `output` folder within the TiddlyWikiFolder. So the command above will now write the file `index.html` to `mywiki/output/index.html`.
 
-You can override this behaviour with the OutputCommand. For example, to generate the `index.html` file within the current directory:
+You can override this behaviour with the [[OutputCommand]]. For example, to generate the `index.html` file within the current directory:
 
 ```
 tiddlywiki mywiki --output . --rendertiddler $:/core/save/all index.html text/plain

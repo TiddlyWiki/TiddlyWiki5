@@ -12,4 +12,4 @@ Sometimes it's useful to re-open the same tiddlers that were open when the file 
 [list[$:/StoryList]]
 ```
 
-This filter returns the tiddlers specified in the [[$:/StoryList]] tiddler, which is the system tiddler that TiddlyWiki uses to store the sequence of tiddlers in the current story.
+This filter returns the tiddlers specified in the [[$:/StoryList]] tiddler, which is the system tiddler that [[TiddlyWiki]] uses to store the sequence of tiddlers in the current story.

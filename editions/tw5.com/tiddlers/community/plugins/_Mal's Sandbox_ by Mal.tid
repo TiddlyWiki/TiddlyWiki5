@@ -10,7 +10,7 @@ A collection of extensions by [[@malgam|https://github.com/malgam]]
 {{!!url}}
 
 <<<
-The "loadnew" plugin provides the JavaScript module $:/plugins/malgam/loadnew/loadnew.js that implements an incremental load command for Tiddlywiki 5.
+The "loadnew" plugin provides the [[JavaScript]] module $:/plugins/malgam/loadnew/loadnew.js that implements an incremental load command for Tiddlywiki 5.
 
 The javascript code is based on the built-in module $:/core/modules/commands/load.js that loads tiddlers from a Tiddlywiki file into a node.js Tiddlywiki instance. This command loads all non-system tiddlers, irrespective of whether they have been modified since last loaded. As a result, all tiddlers in the node.js tiddlers folder will end up with a new modification date.
 

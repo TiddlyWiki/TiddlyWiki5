@@ -12,7 +12,7 @@ Safe mode provides a way to disabling most customisations in TiddlyWiki. This is
 
 ! Enabling Safe Mode
 
-Safe mode is enabled in the browser by starting TiddlyWiki with the URL hash set to the string `#:safe`. For example:
+Safe mode is enabled in the browser by starting [[TiddlyWiki]] with the URL hash set to the string `#:safe`. For example:
 
 https://tiddlywiki.com/#:safe
 
@@ -23,6 +23,6 @@ Safe mode triggers two changes:
 * All plugins are temporarily disabled. You can use the [[control panel|$:/ControlPanel]] <<.icon $:/core/images/options-button>> to disable individual plugins
 * Any tiddlers that override shadow tiddlers are renamed to give them the prefix `SAFE: `, thus restoring the underlying shadow tiddler
 * Certain configuration options are ignored, and the default settings used instead:
-** WikiParserRuleConfiguration
+** [[WikiParserRuleConfiguration]]
 
 A report tiddler is displayed that allows you to inspect the tiddlers that were renamed.

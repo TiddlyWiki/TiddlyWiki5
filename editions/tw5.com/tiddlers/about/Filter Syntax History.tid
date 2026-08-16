@@ -4,15 +4,15 @@ modifier: Jeremy Ruston
 tags: [[History of TiddlyWiki]]
 title: Filter Syntax History
 
-In response to [[a discussion|https://talk.tiddlywiki.org/t/filter-syntax-history/13058]] about the filter syntax in TiddlyWiki5 I posted this brief personal history.
+In response to [[a discussion|https://talk.tiddlywiki.org/t/filter-syntax-history/13058]] about the filter syntax in [[TiddlyWiki5]] I posted this brief personal history.
 
-For context, before TiddlyWiki, I only had practical experience of a very small number of languages: machine code, assembly language, BASIC, FORTH, C, C++ and of course JavaScript. I had a smattering of Java, Pascal and one or two other ancient languages but no experience of actor based languages like Erlang, or modern functional languages.
+For context, before [[TiddlyWiki]], I only had practical experience of a very small number of languages: machine code, assembly language, BASIC, FORTH, C, C++ and of course [[JavaScript]]. I had a smattering of Java, Pascal and one or two other ancient languages but no experience of actor based languages like Erlang, or modern functional languages.
 
 The story starts with the double square bracket syntax used in wikitext for links. In 2004 this was already an established usage in wikis. However, I switched the ordering of pretty links because I thought Wikipedia's `[[link address|link text]]` was the wrong way around. It broke up sentences: `The file is [[https://site.com/thing|here]]` seems less readable than `The file is [[here|https://site.com/thing]]`. For a long time I regretted this decision, and wished that I had just gone with Wikipedia's established usage. Others have since pointed out that ~TiddlyWiki's ordering is actually consistent with [[Markdown]], which might be regarded as the winner of the markup wars.
 
-I looked at the double square bracket link syntax is that it establishes a way to quote page/tiddler titles so that they may contain spaces, and don't have to use CamelCase. Thus, right at the start of [[TiddlyWiki Classic|TiddlyWikiClassic]] when I was implementing the first iteration of the DefaultTiddlers feature it was natural to use double square brackets to quote titles containing spaces, making a list of titles to be opened at startup.
+I looked at the double square bracket link syntax is that it establishes a way to quote page/tiddler titles so that they may contain spaces, and don't have to use [[CamelCase]]. Thus, right at the start of [[TiddlyWiki Classic|TiddlyWikiClassic]] when I was implementing the first iteration of the DefaultTiddlers feature it was natural to use double square brackets to quote titles containing spaces, making a list of titles to be opened at startup.
 
-Soon, I wanted to extend the implementation of DefaultTiddlers so that it could be used to open all tiddlers with a particular tag while retaining backwards compatibility.
+Soon, I wanted to extend the implementation of [[DefaultTiddlers]] so that it could be used to open all tiddlers with a particular tag while retaining backwards compatibility.
 
 A trick that I am apt to use in such situations is to try to engineer things so that the current behaviour is re-interpreted as a shortcut syntax for a new, richer syntax that provides more flexibility. In this case, the idea was that in filters we would  interpret `[[mytiddler]]` as a shortcut for `[title[mytiddler]]`. Then we could put any keywords we like in place of "title", giving us an infinitely extensible syntax. A similar example is the way that we implemented filter run prefixes by retrospectively defining the absence of a prefix as implying a default prefix.
 

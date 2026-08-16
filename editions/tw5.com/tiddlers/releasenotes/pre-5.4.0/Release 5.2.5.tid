@@ -17,7 +17,7 @@ description: Hot fix release for v5.2.4
 
 This is a bug fix release intended to resolve backwards compatibility issues discovered in v5.2.4. See [[this GitHub ticket|https://github.com/TiddlyWiki/TiddlyWiki5/issues/7126]] for the background.
 
-The issues are entirely cosmetic stylesheet changes, and do not affect the functionality of TiddlyWiki. However, we encourage all users to upgrade to this new version for consistency.
+The issues are entirely cosmetic stylesheet changes, and do not affect the functionality of [[TiddlyWiki]]. However, we encourage all users to upgrade to this new version for consistency.
 
 Since v5.2.5 replaces v5.2.4 that was only released for a week, here is the [[release note for v5.2.4|Release 5.2.4]].
 

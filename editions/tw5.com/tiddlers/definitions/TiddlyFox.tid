@@ -4,6 +4,6 @@ tags: Definitions
 title: TiddlyFox
 type: text/vnd.tiddlywiki
 
-TiddlyFox was an extension for older versions of Firefox that allowed standalone TiddlyWiki files to save their changes directly to the file system.
+TiddlyFox was an extension for older versions of Firefox that allowed standalone [[TiddlyWiki]] files to save their changes directly to the file system.
 
-TiddlyFox is now obsolete due to its incompatibility with the latest versions of Firefox - see [[TiddlyFox Apocalypse]]. There are many alternatives to TiddlyFox, but none that work in precisely the same way -- see GettingStarted for details.
+TiddlyFox is now obsolete due to its incompatibility with the latest versions of Firefox - see [[TiddlyFox Apocalypse]]. There are many alternatives to TiddlyFox, but none that work in precisely the same way -- see [[GettingStarted]] for details.

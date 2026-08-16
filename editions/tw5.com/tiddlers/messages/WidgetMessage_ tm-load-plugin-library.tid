@@ -22,4 +22,4 @@ Load official plugin library
 </$button>
 ```
 
-The `tm-load-plugin-library` message is usually generated with the ButtonWidget and is handled by the core itself.
+The `tm-load-plugin-library` message is usually generated with the [[ButtonWidget]] and is handled by the core itself.

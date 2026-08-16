@@ -74,7 +74,7 @@ For example:
 ]
 ```
 
-The ContentType `application/json` is used internally for these files.
+The [[ContentType]] `application/json` is used internally for these files.
 
 Note that JSON files that do not conform to the tiddler structure will instead be imported as a single tiddler containing the JSON data.
 
@@ -93,7 +93,7 @@ The new format for TiddlyWiki HTML files embeds the tiddlers in JSON format with
 
 TiddlyWiki Classic and TiddlyWiki 5 prior to version v5.2.0 stored tiddlers encoded in `<DIV>` format.
 
-For TiddlyWiki to import an unencrypted DIV-based HTML file, it requires a `<div id="storeArea">` containing tiddler DIVs as explained above. For example:
+For [[TiddlyWiki]] to import an unencrypted DIV-based HTML file, it requires a `<div id="storeArea">` containing tiddler DIVs as explained above. For example:
 
 ```
 <div id="storeArea">

@@ -15,4 +15,4 @@ Unloading a plugin library deletes the following tiddlers:
 * The tiddler titled `$:/temp/ServerConnection/` + `<url>`
 * All tiddlers with the prefix `$:/temp/RemoteAssetInfo/` + `<url>` + `/`
 
-The `tm-unload-plugin-library` message is usually generated with the ButtonWidget and is handled by the core itself.
+The `tm-unload-plugin-library` message is usually generated with the [[ButtonWidget]] and is handled by the core itself.

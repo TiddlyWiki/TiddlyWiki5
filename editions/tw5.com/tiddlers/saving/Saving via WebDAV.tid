@@ -20,7 +20,7 @@ Lightweight, portable and easy to use solutions
 *   [[rclone|https://rclone.org/commands/rclone_serve_webdav/]]
 **  Running it can be as simple as: <br/>`rclone serve webdav some_directory_containing_tiddlywiki_files`
 * [[copyparty|https://github.com/9001/copyparty]]
-** Copyparty comes with a ~WebDAV server. Simply run `copyparty -v .::rwd:c,daw` to serve the current folder and visit [[http://[::1]:3923/]] to use TiddlyWiki
+** Copyparty comes with a ~WebDAV server. Simply run `copyparty -v .::rwd:c,daw` to serve the current folder and visit [[http://[::1]:3923/]] to use [[TiddlyWiki]]
 ** Note that you need to grant read, write and delete permission and add `daw` volflag to allow copyparty to overwrite existing files.
 *   [[micromata dave - the simple webdav server|https://github.com/micromata/dave]]
 * [[dav-server|https://github.com/edrex/dav-server]] is a quick way to serve up a folder of HTML ~TiddlyWikis.
@@ -59,7 +59,7 @@ Many [[NAS|https://en.wikipedia.org/wiki/NAS]] or [[Subversion|https://en.wikipe
 
 !! Free Hosting
 
-Several ~WebDAV hosting services tested (~~box.com~~, ~~swissdisk.com~~) don't support accessing HTML files via a webbrowser, so they won't work with ~TiddlyWiki. However, The GMX mediacenter (www.gmx.net) has been reported as working with WebDAV with a free account.
+Several ~WebDAV hosting services tested (~~box.com~~, ~~swissdisk.com~~) don't support accessing HTML files via a webbrowser, so they won't work with ~TiddlyWiki. However, The GMX mediacenter (www.gmx.net) has been reported as working with [[WebDAV]] with a free account.
 
 !!! Koofr
 

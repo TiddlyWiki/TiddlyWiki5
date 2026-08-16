@@ -8,6 +8,6 @@ type: text/vnd.tiddlywiki
 >
 >https://en.wikipedia.org/wiki/GitLab
 
-Both GitLab and GitHub use [[Git]] a distributed version control system, that can be used to store, view and edit TiddlyWiki wikis using [[GitLab Pages|https://docs.gitlab.com/ee/user/project/pages/]]
+Both GitLab and [[GitHub]] use [[Git]] a distributed version control system, that can be used to store, view and edit [[TiddlyWiki]] wikis using [[GitLab Pages|https://docs.gitlab.com/ee/user/project/pages/]]
 
 Learn more at:  [[Saving to a Git service]]

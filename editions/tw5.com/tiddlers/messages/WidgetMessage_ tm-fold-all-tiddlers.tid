@@ -12,4 +12,4 @@ Internally, it sets the text of all of the state tiddlers corresponding to tiddl
 |!Name |!Description |
 |foldedStatePrefix |Prefix for the state tiddler in which the fold state is stored. Defaults to `$:/state/folded` |
 
-The `tm-fold-all-tiddlers` message is usually generated with the ButtonWidget and is handled by the surrounding NavigatorWidget.
+The `tm-fold-all-tiddlers` message is usually generated with the [[ButtonWidget]] and is handled by the surrounding [[NavigatorWidget]].

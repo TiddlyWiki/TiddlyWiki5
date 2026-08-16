@@ -20,7 +20,7 @@ description: Minor bug fix release for v5.1.5
 * [[Disabled|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5b38c21a417d2e5e2b85aed8010c88af32420e24]] linking when transcluding ''caption'' field in [[Table-of-Contents Macros]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b220c19fb7b789eb6d00c9d1a71414676d87130e]] support for templates to tabbed [[Table-of-Contents Macros]]
 * [[Allow|https://github.com/TiddlyWiki/TiddlyWiki5/commit/31b5eb1578640fabe8712f0cd4edd49708bc4493]] shadow tiddlers to appear in [[Table-of-Contents Macros]]
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5154a25ab95f0cc08eb079a624be4fd3353e6dbd]] tooltip to BrowseWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5154a25ab95f0cc08eb079a624be4fd3353e6dbd]] tooltip to [[BrowseWidget]]
 * [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/42dba113ccdb18d7e76ac7a773c7dca532207007]] handling of missing tiddlers by the <<.olink has>> and <<.olink field>> operators
 
 !! Bug Fixes
@@ -34,7 +34,7 @@ description: Minor bug fix release for v5.1.5
 //These changes are only relevant to people using TiddlyWiki under Node.js//
 
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/bb74be7ac1a24eeaee10a3cb3d3633e3aa318632]] problem with "all tiddlers" static HTML export
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/51db48acc901d8fb298d9b0f7f10b47ffe90df05]] incorrect checking for an empty folder with the InitCommand
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/51db48acc901d8fb298d9b0f7f10b47ffe90df05]] incorrect checking for an empty folder with the [[InitCommand]]
 
 !! Changes affecting plugin authors
 
@@ -42,7 +42,7 @@ description: Minor bug fix release for v5.1.5
 
 !! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@anavarre|https://github.com/anavarre]]
 * [[@Drakor|https://github.com/Drakor]]

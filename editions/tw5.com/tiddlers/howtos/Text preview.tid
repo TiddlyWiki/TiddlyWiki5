@@ -3,7 +3,7 @@ modified: 20211029090145708
 tags: [[Editor toolbar]]
 title: Text preview
 
-Pressing the eye icon {{$:/core/ui/EditorToolbar/preview}} will open or close a preview window showing the results of rendering the WikiText (the icon-eye will also open or close).
+Pressing the eye icon {{$:/core/ui/EditorToolbar/preview}} will open or close a preview window showing the results of rendering the [[WikiText]] (the icon-eye will also open or close).
 
 Right to the eye there is another icon, {{$:/core/images/chevron-down}}, which when clicked, shows you a dropdown which gives you access to six different types of preview:
 

@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.23">> The <<.wid log>> widget is a [[widget|Widgets]] that can be used to output debugging information to the [[JavaScript console|Web Developer Tools]] supported by most browsers.
 
-When the widget is rendered or refreshed, the names and values of all [[attributes|Widget Attributes]] are logged to the JavaScript console.
+When the widget is rendered or refreshed, the names and values of all [[attributes|Widget Attributes]] are logged to the [[JavaScript]] console.
 
 ```
 <$log name=value />

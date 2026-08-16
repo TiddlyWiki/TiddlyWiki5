@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 MathML is a markup language for mathematical notation that can be used with HTML.
 
-If your browser supports it, MathML elements can be used in TiddlyWiki5 WikiText just like HTML.
+If your browser supports it, MathML elements can be used in [[TiddlyWiki5]] [[WikiText]] just like HTML.
 
 Here is an example MathML equation from [[the W3C|http://www.w3.org/Math/XSL/csmall2.xml]]:
 

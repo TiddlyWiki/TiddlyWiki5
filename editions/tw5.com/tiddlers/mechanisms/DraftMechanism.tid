@@ -6,8 +6,8 @@ Tiddlers that have a `draft.of` field are treated as pending drafts of the tiddl
 
 Several features work in concert to give the desired behaviour for draft tiddlers:
 
-* The ListWidget can optionally render draft tiddlers through a different template
-* The NavigatorWidget incorporates handlers for the following events:
+* The [[ListWidget]] can optionally render draft tiddlers through a different template
+* The [[NavigatorWidget]] incorporates handlers for the following events:
 ** `tm-new-tiddler` for creating a new tiddler in draft mode
 ** `tm-edit-tiddler` for moving a tiddler into edit mode 
 ** `tm-cancel-tiddler` for cancelling a tiddler out of edit mode

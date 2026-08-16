@@ -4,7 +4,7 @@ tags: Concepts
 title: CompoundTiddlers
 type: text/vnd.tiddlywiki
 
-Compound tiddlers are a special type of tiddler that can store one or more payload tiddlers. The tiddlers within a compound tiddler are only accessible via special operations, typically with the TestCaseWidget.
+Compound tiddlers are a special type of tiddler that can store one or more payload tiddlers. The tiddlers within a compound tiddler are only accessible via special operations, typically with the [[TestCaseWidget]].
 
 The compound tiddler format is extremely simple, and includes the notable flaw that it does not permit tiddlers that contain a plus sign (`+`) on a line by itself. It is not intended as a general purpose way of storing tiddler data.
 

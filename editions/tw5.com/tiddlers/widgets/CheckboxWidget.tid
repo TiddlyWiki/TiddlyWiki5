@@ -36,7 +36,7 @@ The content of the `<$checkbox>` widget is displayed within an HTML `<label>` el
 |<<.attr class>> |The class that will be assigned to the `<label>` element <$macrocall $name=".tip" _="""<<.from-version "5.2.3">> `tc-checkbox` is always applied by default, as well as `tc-checkbox-checked` when checked"""/> |
 |<<.attr actions>> |<<.from-version "5.1.14">> A string containing ActionWidgets to be triggered when the status of the checkbox changes (whether it is checked or unchecked) |
 |<<.attr uncheckactions>> |<<.from-version "5.1.16">> A string containing ActionWidgets to be triggered when the checkbox is unchecked |
-|<<.attr checkactions>> |<<.from-version "5.1.20">> A string containing ActionWidgets to be triggered when the checkbox is checked |
+|<<.attr checkactions>> |<<.from-version "5.1.20">> A string containing [[ActionWidgets]] to be triggered when the checkbox is checked |
 |<<.attr disabled>> |<<.from-version "5.1.23">> Optionally disables the checkbox if set to <<.value yes>> (defaults to <<.value no>>)|
 |<<.attr tabindex>> |<<.from-version "5.3.7">> Optional. Sets the `tabindex` attribute of the HTML select element to the given value |
 |<<.attr data-*>> |<<.from-version "5.3.2">> Optional [[data attributes|https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes]] to be assigned to the HTML `<input>` element |

@@ -4,7 +4,7 @@ tags: [[JSON in TiddlyWiki]] Learning
 title: Modifying JSON tiddlers
 type: text/vnd.tiddlywiki
 
-See [[JSON in TiddlyWiki]] for an overview of using JSON in TiddlyWiki.
+See [[JSON in TiddlyWiki]] for an overview of using JSON in [[TiddlyWiki]].
 
 Note that 
 
@@ -13,6 +13,6 @@ Note that
 The widgets ActionSetFieldWidget and ActionListopsWidget can manipulate named properties of data tiddlers by indicating the name of the property in the $index attribute.
 
 * To create or modify a named property with ActionSetFieldWidget, provide a $value attribute
-* To delete a named property with ActionSetFieldWidget, omit the $value attribute.
+* To delete a named property with [[ActionSetFieldWidget]], omit the $value attribute.
 
-ActionListopsWidget assigns the named property the list constructed through its $filter and $subfilter attributes.
+[[ActionListopsWidget]] assigns the named property the list constructed through its $filter and $subfilter attributes.

@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 |//{any other params}// |Any other parameters are made available as variables within the context of the widget message. |
 |rootwindow |<<.from-version 5.1.18>> ''yes'' or ''true'' will always display a modal in the wiki-root-window |
 
-The modal message is usually generated with the ButtonWidget. The modal message is handled by the TiddlyWiki core.
+The modal message is usually generated with the [[ButtonWidget]]. The modal message is handled by the [[TiddlyWiki]] core.
 
 [[Fields within the tiddler|Modals]] being displayed in the modal can be used to customise its appearance.
 

@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 Test case tiddlers encapsulate one or more tiddlers that can be displayed as a <<.wlink TestCaseWidget>>: an independent embedded wiki that can be used for testing or learning purposes.
 
-Test case tiddlers are formatted as CompoundTiddlers, allowing them to contain multiple tiddlers packed into one.
+Test case tiddlers are formatted as [[CompoundTiddlers]], allowing them to contain multiple tiddlers packed into one.
 
 Test case tiddlers have the following ''fields'':
 
@@ -28,4 +28,4 @@ Some ''payload ''tiddlers are set aside for special purposes:
 |''~ExpectedResult'' |HTML of expected result of rendering the ''Output'' tiddler |
 |''Description'' |Set to the text of the <<.field description>> field, if the field exists |
 
-Also see: TestCaseWidget, DataWidget
+Also see: [[TestCaseWidget]], [[DataWidget]]

@@ -11,10 +11,10 @@ This example shows how to create a sub-story within a tiddler that is independen
 # Animate the opening and closing of tiddlers. (''storyview'' attribute of the ListWidget)
 # Display the list of open tiddlers. (''filter'' and ''template'' attributes of the ListWidget)
 # Display tiddlers in [[draft mode|DraftMechanism]]. (''editTemplate'' attribute of the ListWidget)
-# Track [[navigation history|HistoryMechanism]]. (''history'' attribute of both NavigatorWidget and ListWidget)
+# Track [[navigation history|HistoryMechanism]]. (''history'' attribute of both [[NavigatorWidget]] and [[ListWidget]])
 # And more!
 
-Here is the example code (see also StateMechanism for related discussion):
+Here is the example code (see also [[StateMechanism]] for related discussion):
 
 <$macrocall $name='wikitext-example-without-html'
 src='<$navigator story="$:/temp/DemoStoryList" history="$:/temp/DemoHistoryList">

@@ -29,7 +29,7 @@ Release v5.4.0 includes major improvements in a number of areas. See the [[proje
 
 Change notes describe a discrete change within a release. Change note fields:
 
-* `title` - by convention titles are formed `$:/changenotes/<version>/<unique identifier>`. The unique identifier is typically the primary GitHub PR or issue like `#1234` or a GitHub commit ID such as `98f850609d29bc36ded83f90c0d5be231649254b`
+* `title` - by convention titles are formed `$:/changenotes/<version>/<unique identifier>`. The unique identifier is typically the primary GitHub PR or issue like `#1234` or a [[GitHub]] commit ID such as `98f850609d29bc36ded83f90c0d5be231649254b`
 * `tags` - must include `$:/tags/ChangeNote`
 * `change-type` - the type of change as a single string; see [[here|Release Notes and Changes]] for valid values
 * `change-category` - the category of the change; see [[here|Release Notes and Changes]] for valid values
@@ -48,7 +48,7 @@ Impact note fields:
 * `title` - by convention, the title of the associated change note with `/deprecations/` and a unique ID appended `$:/changenotes/5.4.0/#8702/deprecations/darkmode-info-tiddler`
 * `changenote` - the title of the associated change note
 * `created` - in DateFormat
-* `modified` - in DateFormat
+* `modified` - in [[DateFormat]]
 * `tags` - must include `$:/tags/ImpactNote`
 * `description` - a brief description of the impact
 * `impact-type` - the type of impact; see [[here|Release Notes and Changes]] for valid values

@@ -15,7 +15,7 @@ caption: 5.0.1-alpha
 ** System tiddlers are now imported as usual
 * If `$:/theme` isn't defined or refers to a missing tiddler, then fallback through ''Snow White'' to ''Vanilla''. This means that `empty.html` now defaults to ''Snow White''
 * Added support for [[Block Quotes in WikiText]]
-** Contributed by StephanHradek (@Skeeve on GitHub)
+** Contributed by StephanHradek (@Skeeve on [[GitHub]])
 
 !! Bug fixes
 

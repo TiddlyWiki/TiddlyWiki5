@@ -39,4 +39,4 @@ During development when a new release is being prepared, the pre-release label i
 
 Version numbers
 
-TiddlyWiki5 uses the version information attached to plugins for determining which of two plugins is more recent during an upgrade or import. The pre-release label is ignored when performing these comparisons.
+[[TiddlyWiki5]] uses the version information attached to plugins for determining which of two plugins is more recent during an upgrade or import. The pre-release label is ignored when performing these comparisons.

@@ -5,7 +5,7 @@ tags: WikiText
 title: Widgets in WikiText
 type: text/vnd.tiddlywiki
 
-Widgets provide rich functionality within WikiText. They have the same syntax as [[HTML elements|HTML in WikiText]], but the tag name always starts with `$`. For example:
+Widgets provide rich functionality within [[WikiText]]. They have the same syntax as [[HTML elements|HTML in WikiText]], but the tag name always starts with `$`. For example:
 
 <$macrocall $name=".example" n="1"
 eg="""<$button message="tm-navigate" to="HelloThere">Open ~HelloThere</$button>

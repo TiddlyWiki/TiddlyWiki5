@@ -9,13 +9,13 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.23">> The <<.wid action-log>> widget is an [[action widget|ActionWidgets]] that can be used to output debugging information to the [[JavaScript console|Web Developer Tools]] supported by most browsers. This can be useful to observe and debug the behavior within a sequence of actions.
 
-When the action is invoked, the names and values of all [[attributes|Widget Attributes]] are logged to the JavaScript console.
+When the action is invoked, the names and values of all [[attributes|Widget Attributes]] are logged to the [[JavaScript]] console.
 
 ```
 <$action-log name=value />
 ```
 
-ActionWidgets are used within triggering widgets such as the ButtonWidget.
+ActionWidgets are used within triggering widgets such as the [[ButtonWidget]].
 
 <<.note """ For debugging outside of actions see [[LogWidget]]""">>
 

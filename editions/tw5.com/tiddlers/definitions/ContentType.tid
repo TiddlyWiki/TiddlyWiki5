@@ -6,14 +6,14 @@ type: text/vnd.tiddlywiki
 
 Used in Internet protocols to indicate the type that should be used to interpret the content of a web resource.
 
-In TiddlyWiki, the `type` field gives the content type to apply to the main `text` field.
+In [[TiddlyWiki]], the `type` field gives the content type to apply to the main `text` field.
 
 !! List of Common Content Types
 
 |!Group |!Type |!Content of `type` field |
 |^''Developer'' |[[Data dictionary|DictionaryTiddlers]] |application/x-tiddler-dictionary|
 |~|[[Compound Tiddler|CompoundTiddlers]] |text/vnd.tiddlywiki-multiple|
-|~|JavaScript code |application/javascript|
+|~|[[JavaScript]] code |application/javascript|
 |~|[[JSON data|JSONTiddlers]] |application/json|
 |~|[[Static stylesheet|Using Stylesheets]] |text/css|
 |^''Image''|GIF image |image/gif|

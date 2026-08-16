@@ -6,6 +6,6 @@ tags: Reference
 title: Concepts
 type: text/vnd.tiddlywiki
 
-These are the concepts underlying TiddlyWiki. Understanding how these ideas fit together is the key to getting the most from TiddlyWiki.
+These are the concepts underlying TiddlyWiki. Understanding how these ideas fit together is the key to getting the most from [[TiddlyWiki]].
 
 <<list-links "[tag[Concepts]sort[title]]" class:"multi-columns">>

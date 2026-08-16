@@ -45,7 +45,7 @@ Although ~TiddlyWiki will generate these tags, to actually use them in your css,
 }
 ```
 
-A utility function is available in JavaScript to perform the conversion:
+A utility function is available in [[JavaScript]] to perform the conversion:
 
 ```
 $tw.utils.tagToCssSelector("$:/tags/Stylesheet")

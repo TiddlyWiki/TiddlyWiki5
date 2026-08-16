@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 
 *The plugins can be referenced in `tiddlywiki.info` by their name (e.g. `tiddlytools/magic`)
 
-* Place the PluginFolders containing the plugins in a `plugins` folder within the [[wiki folder|TiddlyWikiFolders]]. TiddlyWiki will attempt to include every subfolder as a plugin. Do not add the plugin names to `tiddlywiki.info`. Do not add the PluginFolders under a specific namespace:
+* Place the PluginFolders containing the plugins in a `plugins` folder within the [[wiki folder|TiddlyWikiFolders]]. [[TiddlyWiki]] will attempt to include every subfolder as a plugin. Do not add the plugin names to `tiddlywiki.info`. Do not add the PluginFolders under a specific namespace:
 
 ```
 ├── plugins/

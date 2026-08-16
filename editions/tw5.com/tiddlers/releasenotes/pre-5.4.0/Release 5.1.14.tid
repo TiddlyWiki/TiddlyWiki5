@@ -108,16 +108,16 @@ The tiddler manager will be extended in the future to increase flexibility and t
 
 !! Hackability Improvements
 
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d9f301f7556ce899840dab0ebc31c040d9c7a72b]] support for "formattedtext" output type to the WikifyWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d9f301f7556ce899840dab0ebc31c040d9c7a72b]] support for "formattedtext" output type to the [[WikifyWidget]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a20da9f5303fdd52a54d61b231450c2aa35d3804]] a saver for the peer-to-peer Beaker browser; see [[TiddlyWiki on Beaker Browser]] for details
 * [[Refactored|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f07e0f981a1cded691227146e0281f7c4f06d55c]] the tag templates and macros to make them more reusable
 * [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/87fa7f972cae859c466dea8a531d50f060e7d910]] modals and notifications so that global macros are available
-* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b35544bf4946596e60f7b0c7f0a55fa490ac2a24]] the SetWidget to allow a single result to be selected from a filtered result list
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b35544bf4946596e60f7b0c7f0a55fa490ac2a24]] the [[SetWidget]] to allow a single result to be selected from a filtered result list
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/2f590a365e5b6bfecc1170fdbeaaf398795a2feb]] new `$:/info/url/*` [[information tiddlers|InfoMechanism]] providing document location information
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3bceb98119c6f1fbbed76c977c601a930b0bcac9]] support for the ''actions'' attribute to the CheckboxWidget
 * [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2104]] CheckboxWidget to support data tiddlers via the `index` attribute
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b1a5afbf158fab9e224978c81a10aca15d30d91a]] new entry to the advanced search filtered export menu for exporting the current story river
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1b339e17bc0c67ff7eb3e8f7f299588ecf8848ee]] `tag` attribute to the KeyboardWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1b339e17bc0c67ff7eb3e8f7f299588ecf8848ee]] `tag` attribute to the [[KeyboardWidget]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2614]] overwrite protection to the ~WebDAV saver
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/202ffd9c51d71b469eff968ae63b56a985a3c6bf]] new "big block quote" style for [[Block Quotes in WikiText]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c25a44756b1a4a08a29fbe02a908ef57a6a193bf]] customisable template text for new journal tiddlers, accessible the control panel
@@ -126,12 +126,12 @@ The tiddler manager will be extended in the future to increase flexibility and t
 !! Node.js Improvements
 
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commits/master/plugins/tiddlywiki/filesystem/filesystemadaptor.js]] multiple issues the creation of new tiddler files by the filesystem adaptor
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0d0ece63777a22422ab2ddae7dee996b28f62c5e]] new FetchCommand for retrieving tiddlers over http/https
-* [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/commit/6f93ce6ea790427fe1e6e11a062d64f14449bfa3]] RenderTiddlerCommand to add support for an additional variable
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0d0ece63777a22422ab2ddae7dee996b28f62c5e]] new [[FetchCommand]] for retrieving tiddlers over http/https
+* [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/commit/6f93ce6ea790427fe1e6e11a062d64f14449bfa3]] [[RenderTiddlerCommand]] to add support for an additional variable
 
 !! Bug Fixes
 
-* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b1ecf81b0c0727db2245cfeba78cc46a33c3a814]] Node.js support for the HighlightPlugin
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b1ecf81b0c0727db2245cfeba78cc46a33c3a814]] Node.js support for the [[HighlightPlugin]]
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2650]] problem with recursion errors in the [[Table-of-Contents Macros]]
 * [[Prevented|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f97c1226aac9f3a5b563fc8d95bfeff91b8ab810]] email addresses from being mis-recognised as HTML tags
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2572]] issue with `$tw.utils.strEndsWith()`
@@ -144,24 +144,24 @@ The tiddler manager will be extended in the future to increase flexibility and t
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/issues/2579]] typo affecting created/creator fields when deleting a field
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/issues/2595]] issue with system links containing international characters not being recognised
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/issues/2076]] issue with single line macro definitions without a terminating line break
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/cf28eeb2a120fe3f263235c35fe5603013f88049]] issue with empty strings and the CheckboxWidget
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/cf28eeb2a120fe3f263235c35fe5603013f88049]] issue with empty strings and the [[CheckboxWidget]]
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b759d82f4ce2bf44da0bcce0c08550870f3216f8]] problem with calculation of week numbers
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/issues/2312]] problem with [[move Operator]] not wrapping correctly
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f0ff1f993e94d6928f0aa249b7f6f5e5624ebb69]] problem preventing customisation of textarea background colours
 
 !! Developer Bug Fixes and Improvements
 
-* [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/commit/25b2e846cea0f560b259296263a98e3287e5f311]] Stanford JavaScript Library to version v1.0.6
+* [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/commit/25b2e846cea0f560b259296263a98e3287e5f311]] Stanford [[JavaScript]] Library to version v1.0.6
 * [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c16f96626e2ff9d849563eeba7d8ef5cf8e4ed4b]] Google Analytics plugin to latest version of Google's code
 * [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3c715c5e0d1117ca32760d4da6578cd27af06172]] Common/JS compatibility by adding support for implicitly adding `/index.js` to a require target
-* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1b41b4468495bbe66f99345ee94a67346176deb7]] support for bulk loading tiddler files via [[tiddlywiki.files Files]] within TiddlyWikiFolders
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1b41b4468495bbe66f99345ee94a67346176deb7]] support for bulk loading tiddler files via [[tiddlywiki.files Files]] within [[TiddlyWikiFolders]]
 * [[Refactored|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2627]] server mechanism to make it simpler to integrate TiddlyWiki into [[ExpressJS|http://expressjs.com/]] apps
-* [[Refactored|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2626]] the TiddlyFox saver module to make it easier to use it with other saving mechanisms
+* [[Refactored|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2626]] the [[TiddlyFox]] saver module to make it easier to use it with other saving mechanisms
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/2397f0aa6f7af305807b61ccb1d435c2e6a789ab]] (and [[here|https://github.com/TiddlyWiki/TiddlyWiki5/commit/daf703b67fae0dd029eeaa4317b721fa8c284648]]) several new UI hooks, and [[improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/6b2ab9072111cb87508f83a385b0885fb196cbcf]] the hook mechanism; see <a href="./dev/index.html#:[search:title[hook]]" target="_blank">developer docs</a>
 
 ! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@beniquezsd|https://github.com/beniquezsd]]
 * [[@BramChen|https://github.com/BramChen]]

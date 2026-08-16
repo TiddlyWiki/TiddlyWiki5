@@ -35,10 +35,10 @@ The HTTP WebServer functionality has been significantly improved:
 * Better [[debugging information|WebServer Parameter: debug-level]]
 * Experimental support for a new, plain HTML [[single tiddler per page view|Using the read-only single tiddler view]]
 * Adds a simple level of [[CSRF protection|WebServer Parameter: csrf-disable]]
-* Deprecating the existing ServerCommand in favour of a new  ListenCommand using the new NamedCommandParameters support for named parameters that can be specified in any order
+* Deprecating the existing [[ServerCommand]] in favour of a new  [[ListenCommand]] using the new [[NamedCommandParameters]] support for named parameters that can be specified in any order
 * Refactoring routes as separate modules, making it easier to extend the server with new functionality
 
-See WebServer for more details, or [[see the changes on GitHub|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2679]].
+See [[WebServer]] for more details, or [[see the changes on GitHub|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2679]].
 
 !!! Special Characters in Tiddler Titles
 
@@ -56,7 +56,7 @@ Note that using certain characters in tiddler titles will still prevent some fea
 
 !! Plugin Improvements
 
-* ''KaTeX Plugin'' -- the [[KaTeX Plugin]] has been [[updated to KaTeX v0.10.0|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3600]]. The plugin [[now incorporates|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3601]] an [[extension for chemical formulae|https://github.com/mhchem/MathJax-mhchem]]
+* ''[[KaTeX]] Plugin'' -- the [[KaTeX Plugin]] has been [[updated to KaTeX v0.10.0|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3600]]. The plugin [[now incorporates|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3601]] an [[extension for chemical formulae|https://github.com/mhchem/MathJax-mhchem]]
 * ''Comment Plugin'' -- this release [[adds|https://github.com/TiddlyWiki/TiddlyWiki5/commit/acaa07a964a004759ddb8fb755484918b3322815]] a new commenting plugin -- see $:/plugins/tiddlywiki/comments
 * ''AWS Plugin'' -- support for running TiddlyWiki as a Lambda function has been [[improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d6a0b06f024e14e9c0a57df5d2b80c8a1cdbd1c2]] with support for GZip compression of the JSON payload
 
@@ -89,7 +89,7 @@ New and improved translations:
 
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3558]] a new filter prefix `~` allowing if-then-else logic within filters -- see [[Filter Expression]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/33dd367a6548824567995bb48e87eece755681e8]] a new [[subfilter Operator]] to allow nested filters to be used
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/849844be12196781017b3a517839c4721771efd7]] new ''stateTitle'', ''stateField'' and ''stateIndex'' attributes to the ButtonWidget and the RevealWidget, making it possible to use state tiddlers whose titles contain `!!` or `##`
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/849844be12196781017b3a517839c4721771efd7]] new ''stateTitle'', ''stateField'' and ''stateIndex'' attributes to the [[ButtonWidget]] and the RevealWidget, making it possible to use state tiddlers whose titles contain `!!` or `##`
 * [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d6a0b06f024e14e9c0a57df5d2b80c8a1cdbd1c2]] the [[search Operator]] to support searching arbitrary lists of fields, literal searches, whitespace-tolerant searches and regexp searches
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/763f8afaf2dc7dcaa2d4a492887a944d84c4fed2]] new [[contains Operator]] for searching within list fields
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/issues/3396]] support for a navigation scroll offset to avoid navigating to tiddlers resulting in them being obscured under a `position:fixed` top menu bar -- see [[Hidden Setting: Scroll Top Adjustment]]
@@ -101,9 +101,9 @@ New and improved translations:
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/bef3242075b6d962b7963b9c9c7042c39198fc8f]] new text editor operation ''save-selection'' -- see [[WidgetMessage: tm-edit-text-operation]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f54a0a11bce9e47542df32610fae489f4a1dba8c]] support for editor toolbar buttons to have action widgets
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/2e51f08bef8656fdca83fff6163dc67cbaefa2d4]] support for rebasing headings at render time -- see [[tv-adjust-heading-level Variable]]
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3423]] experimental support for packaging TiddlyWiki's JavaScript core into an external script [[for use with the new Web Server enhancements|Using the external JavaScript template]]
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/fe85845c3ce78ff102e411d01873912b3de8705e]] new `\import` [[Pragma]] as a more concise alternative to using the ImportVariablesWidget directly
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3530]] (and [[here|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a83cd3f984c88a1ecf5861c2c25ffb483b08f0ac	]]) new [[tv-show-missing-links Variable]] for tighter control over rendering of missing links by the LinkWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3423]] experimental support for packaging TiddlyWiki's [[JavaScript]] core into an external script [[for use with the new Web Server enhancements|Using the external JavaScript template]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/fe85845c3ce78ff102e411d01873912b3de8705e]] new `\import` [[Pragma]] as a more concise alternative to using the [[ImportVariablesWidget]] directly
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3530]] (and [[here|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a83cd3f984c88a1ecf5861c2c25ffb483b08f0ac	]]) new [[tv-show-missing-links Variable]] for tighter control over rendering of missing links by the [[LinkWidget]]
 
 !! Bug Fixes
 
@@ -117,7 +117,7 @@ New and improved translations:
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/issues/3373]] problem with malformed HTML entities
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/874318091e20293c6f141080cc4330eb7aa02273]] crash when passing illegal arguments to the [[decodeuri Operator]] and [[decodeuricomponent Operator]]
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/457f03798c69f2053894d9971d4b187521c0d9ad]] errors when a popup blocker blocks opening a new window
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3aae643e140044e440673772d90ebaf0be18ec1f]] problems using a lazily loaded tidler as a state tiddler with the RevealWidget
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3aae643e140044e440673772d90ebaf0be18ec1f]] problems using a lazily loaded tidler as a state tiddler with the [[RevealWidget]]
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/33ba69e852966d7c5449842a95636024857d7177]] problem with modals not appearing in the correct window
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/19c49ae18a48a368ca24bb1493fc9876fa7c7570]] the animations for adding and removing tags in edit mode, and a [[similar fix|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3578]] for the animations in the "Open" sidebar tab
 
@@ -127,7 +127,7 @@ New and improved translations:
 
 ! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@abesamma|https://github.com/abesamma]]
 * [[@AnthonyMuscio|https://github.com/AnthonyMuscio]]

@@ -16,4 +16,4 @@ To selectively re-enable drag and drop for an instance of the [[list-tagged-drag
 
 </$set>"""/>
 
-Note that when using the DropzoneWidget and the DroppableWidget directly the ''enable'' attribute works independently of the global setting.
+Note that when using the [[DropzoneWidget]] and the [[DroppableWidget]] directly the ''enable'' attribute works independently of the global setting.

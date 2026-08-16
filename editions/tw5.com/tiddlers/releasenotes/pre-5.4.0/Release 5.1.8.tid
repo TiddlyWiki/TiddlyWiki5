@@ -44,12 +44,12 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 !! Hackability Improvements
 
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d340277cb219ffebd212fbf409e8ea804121d105]] [[resolvepath Macro]]
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/718ce3e4aa04f7af5e9310f90d3415c0d82bee6f]] ''class'' attribute to CheckboxWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/718ce3e4aa04f7af5e9310f90d3415c0d82bee6f]] ''class'' attribute to [[CheckboxWidget]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/bb10e2b02900ece4701c44c3a7e7c03304e813b7]] support for a special message to be displayed when the main story river is empty
 * [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/6e0c7d90221771ae384d620984f08a2090c500dc]] font rendering under Mac OS X
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a2493f80a973b24ad3d3affda945c437b98c2d2e]] support for embedding ZIP files
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1808b1597e5a61379e4e5381d6d78bb73fa3a523]] support for custom elements with the RevealWidget
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/bd6472c1d10bc86eaf1b317c35b86f84086ee3c8]] ''style'' attribute to RevealWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/bd6472c1d10bc86eaf1b317c35b86f84086ee3c8]] ''style'' attribute to [[RevealWidget]]
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0b4ed3c72de16148ffe62abf1c5c06f2d2ce47f1]] text inputs to use palette colours
 * Several new [[core icons|ImageGallery Example]]: <span style="fill:#aaa;"><span title="$:/core/images/github">{{$:/core/images/github}}</span> <span title="$:/core/images/help">{{$:/core/images/help}}</span> <span title="$:/core/images/mail">{{$:/core/images/mail}}</span> <span title="$:/core/images/tip">{{$:/core/images/tip}}</span> <span title="$:/core/images/warning">{{$:/core/images/warning}}</span> <span title="$:/core/images/twitter">{{$:/core/images/twitter}}</span> <span title="$:/core/images/video">{{$:/core/images/video}}</span> <span title="$:/core/images/up-arrow">{{$:/core/images/up-arrow}}</span> <span title="$:/core/images/left-arrow">{{$:/core/images/left-arrow}}</span></span>
 
@@ -72,12 +72,12 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/cc85368fd48f1e5878018a4e00b6c17d436e67a9]] [[Highlight Plugin]] to work when generating static files under Node.js
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c296f14210545374124df5d4ae9ffb402ed73561]] problem with case-insensitive filing systems (eg Windows)
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/1354]] mobile metadata to static page templates
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/1352]] added "noclean" parameter to RenderTiddlersCommand
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/1352]] added "noclean" parameter to [[RenderTiddlersCommand]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b768dc332b2d5d7ac1f731953cafb5fd1b30dad9]] [[editions Operator]] and [[editiondescription Operator]] for enumerating available editions
 
 !! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@aelocson|https://github.com/aelocson]]
 * [[@andreasabeck|https://github.com/andreasabeck]]

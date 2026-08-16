@@ -1,8 +1,9 @@
+caption: With Templates
 created: 20141129210304238
-modified: 20150220161405000
+modified: 20260816090041661
 tags: [[Transclusion in WikiText]]
 title: Transclusion with Templates
-caption: With Templates
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
@@ -54,7 +55,7 @@ See also:
 
 * [[Transclusion in WikiText]]
 * [[Transclusion Basic Usage]]
-* TextReference
-* TemplateTiddlers
-* TranscludeWidget
+* [[TextReference]]
+* [[TemplateTiddlers]]
+* [[TranscludeWidget]]
 * [[Current Tiddler]]

@@ -4,6 +4,6 @@ tags: Editions
 title: Plugin Editions
 type: text/vnd.tiddlywiki
 
-These editions contain simple demos of the original set of TiddlyWiki plugins. They were prepared for earlier versions of TiddlyWiki that lacked the plugin library.
+These editions contain simple demos of the original set of TiddlyWiki plugins. They were prepared for earlier versions of [[TiddlyWiki]] that lacked the plugin library.
 
 <<list-links "[tag[Plugin Editions]]">>

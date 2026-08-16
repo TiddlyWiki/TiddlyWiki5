@@ -10,7 +10,7 @@ tags: Saving iOS [[Standalone App]]
 title: Saving on iPad/iPhone
 type: text/vnd.tiddlywiki
 
-The iPad/iPhone app ''Quine'' makes it possible to view, edit and then save changes to TiddlyWiki5 on iOS.
+The iPad/iPhone app ''Quine'' makes it possible to view, edit and then save changes to [[TiddlyWiki5]] on iOS.
 
 Currently in its third major version, rewritten for iOS and iPadOS 26.0.
 
@@ -26,6 +26,6 @@ Instructions for use:
 
 *Quine works natively in iOS with the local file system and the iCloud file system
 *Quine also allows you to open, edit and save TiddlyWiki files stored with other cloud file providers
-*Quine allows you to follow embedded WikiText links and canonical links to external files on cloud-like file providers which support "folder level sharing". 
+*Quine allows you to follow embedded [[WikiText]] links and canonical links to external files on cloud-like file providers which support "folder level sharing". 
 
-//Note that Quine is published independently of TiddlyWiki//
+//Note that Quine is published independently of [[TiddlyWiki]]//

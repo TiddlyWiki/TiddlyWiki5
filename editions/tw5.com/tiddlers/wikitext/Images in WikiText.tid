@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Image Formatting
 
-Images can be included in WikiText with the following syntax:
+Images can be included in [[WikiText]] with the following syntax:
 
 ```
 [img[Motovun Jack.jpg]]
@@ -37,7 +37,7 @@ Note that attributes can be specified as transclusions or variable references:
 [img width={{!!mywidth}} class=<<image-classes>> [Motovun Jack.jpg]]
 ```
 
-The image syntax is a shorthand for invoking the ImageWidget.
+The image syntax is a shorthand for invoking the [[ImageWidget]].
 
 ! Displaying Images via Transclusion
 

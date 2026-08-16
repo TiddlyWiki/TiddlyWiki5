@@ -53,14 +53,14 @@ Secondly, the new [[substitute operator|substitute Operator]] allows the same te
 
 ! HTTP Requests in WikiText
 
-<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7422">> new [[WidgetMessage: tm-http-request]] for performing HTTP requests in WikiText. This opens up some exciting new opportunities:
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7422">> new [[WidgetMessage: tm-http-request]] for performing HTTP requests in [[WikiText]]. This opens up some exciting new opportunities:
 
 * Integration with Web-based APIs. The documentation includes an [[example of using the Zotero API|WidgetMessage: tm-http-request Example - Zotero]] to retrieve academic citation data
 * Dynamic content loading: additional tiddlers can be imported dynamically after the main wiki has loaded
 
 ! Defaulting to Disabling CamelCase Links
 
-<<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7513">> CamelCase linking is now disabled by default for new wikis. (Note that this documentation wiki has CamelCase linking explicitly enabled because much of the old content was written relying on them).
+<<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7513">> CamelCase linking is now disabled by default for new wikis. (Note that this documentation wiki has [[CamelCase]] linking explicitly enabled because much of the old content was written relying on them).
 
 ! Plugin Improvements
 
@@ -114,17 +114,17 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7380">> crashes when using an invalid CSS selector for [[WidgetMessage: tm-focus-selector]] and [[WidgetMessage: tm-scroll]]
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7401">> bug whereby scrolling occurs if the linkcatcher widget triggers an action-navigate and the $scroll attribute is set to "no"
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7409">> problem switching between LTR and RTL text
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7448">> bug when the listField attribute of the CheckboxWidget was given the name of a date field (like <<.field created>> or <<.field modified>>)
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7448">> bug when the listField attribute of the [[CheckboxWidget]] was given the name of a date field (like <<.field created>> or <<.field modified>>)
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7529">> size of buttons in dropdown for editor "link" toolbar button
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/8e132948b6bec623d81d300fbe6dc3a0307bcc6d">> crash when transcluding a lazily loaded tiddler as an attribute value
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7462">> DiffTextWidget crash with missing or empty attributes
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7462">> [[DiffTextWidget]] crash with missing or empty attributes
 
 ! Node.js Improvements
 
 * <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7471">> [[WebServer Parameter: authenticated-user-header]] to require URI encoding of authenticated username header, permitting non-ASCII characters in usernames
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7253">> support for `filepath` source attribute to [[tiddlywiki.files Files]]
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/commit/48b22abdaab62c281c207127c66883b50898f9dd">> a warning message for JSON errors in [[tiddlywiki.info Files]] or [[plugin.info Files|PluginFolders]]
-* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7490">> new "explodePlugins" option to SaveWikiFolderCommand
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7490">> new "explodePlugins" option to [[SaveWikiFolderCommand]]
 
 ! Performance Improvements
 
@@ -132,7 +132,7 @@ Improvements to the following translations:
 
 ! Acknowledgements
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 <<.contributors """
 AnthonyMuscio

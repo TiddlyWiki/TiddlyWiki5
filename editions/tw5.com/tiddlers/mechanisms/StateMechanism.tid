@@ -4,7 +4,7 @@ tags: Mechanisms
 title: StateMechanism
 type: text/vnd.tiddlywiki
 
-The StateMechanism in TiddlyWiki is at the heart of how complex user interfaces can be built from WikiText.
+The StateMechanism in TiddlyWiki is at the heart of how complex user interfaces can be built from [[WikiText]].
 
 In the browser, the TiddlyWiki display is produced by dynamically rendering the tiddler [[$:/core/ui/PageTemplate]]. Through various transclusions and other widgets it renders the entire user interface. The dynamic rendering is accomplished by a mechanism called "binding": any changes to the tiddlers in the store are dynamically reflected in the browser display.
 
@@ -17,12 +17,12 @@ The stack of templates that make up the TiddlyWiki display are complex but we'll
 Breaking down the attributes applied to the list widget:
 
 * ''filter'': selects the list of tiddlers in the `list` field of the tiddler [[$:/StoryList]]. If a tiddler is added or removed from that list then it is automatically reflected in the displayed list
-* ''history'': references the tiddler to be used to store the history stack (see the HistoryMechanism)
+* ''history'': references the tiddler to be used to store the history stack (see the [[HistoryMechanism]])
 * ''template'': identifies a template tiddler to be used for rendering each tiddler in the list
 * ''editTemplate'': identifies a different template tiddler to be used for rendering tiddlers that are in [[draft mode|DraftMechanism]]
 * ''storyview'': specifies the story view to be used (eg classic, or zoomin)
 
-The [[$:/StoryList]] tiddler is an example of a StateTiddler: a tiddler that is used to hold the state of the user interface. Changes to the user interface are made indirectly, by changing the underlying state tiddlers, and letting TiddlyWiki ripple the changes through the user interface.
+The [[$:/StoryList]] tiddler is an example of a StateTiddler: a tiddler that is used to hold the state of the user interface. Changes to the user interface are made indirectly, by changing the underlying state tiddlers, and letting [[TiddlyWiki]] ripple the changes through the user interface.
 
 Note how this approach makes the ''open'' tab in the sidebar very easy to implement: it is just another list widget referencing the same state tiddler, but with a different template:
 

@@ -13,7 +13,7 @@ caption: 5.0.8-beta
 See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 
 * Changed rules for parsing content of HTML elements
-* Switched SiteTitle and SiteSubtitle to [[$:/SiteTitle]] and [[$:/SiteSubtitle]]
+* Switched [[SiteTitle]] and [[SiteSubtitle]] to [[$:/SiteTitle]] and [[$:/SiteSubtitle]]
 * Changes to commands used with [[TiddlyWiki on Node.js]]
 * Changes to naming of some editions
 ** Notably ''clientserver'' has changed to ''server''
@@ -28,37 +28,37 @@ See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a01bbd4b9c7ca284141078340c8f568b1e0561a2]] [[automatic saving|AutoSave]] on editing a tiddler and a warning when attempting to close the window with unsaved changes
 * Added confirmation dialogue when deleting tiddlers
-* Add support for switchable (and editable) ColourPalettes
-* Added TranslationMechanism and translations for:
+* Add support for switchable (and editable) [[ColourPalettes]]
+* Added [[TranslationMechanism]] and translations for:
 ** Deutsch (Österreich and Deutschland) by @pmario
 ** Français (France) by @xcazin
 ** Chinese (Simplified and Traditional) by @BramChen
 * Add error alerts when syncing to a server
 * Rejigged [[$:/ControlPanel]] to use nested tabs
 * Added [[$:/TagManager]] for easy management of tags
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e3a05625b2368b2167a2a1b30aa82369e96a7538]] experimental KeyboardWidget, including support for ''ctrl-enter'' (or ''cmd-enter'') to finish editing a tiddler
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e3a05625b2368b2167a2a1b30aa82369e96a7538]] experimental [[KeyboardWidget]], including support for ''ctrl-enter'' (or ''cmd-enter'') to finish editing a tiddler
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e6fa9b8a859867c147fb289859169b204dea003e]] number of tags to control panel ''Basics'' tab
 * Enhanced link handling so that control/command clicking a link opens the target tiddler without navigating to it
 * Importing tiddlers via drag and drop no longer opens all the tiddlers
 
 !! Scalability Improvements
 
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/fa5938221552846c255eb50004996528a09534a9]] support for LazyLoading of images
-* Extended RevealWidget to allow control over content retention
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/fa5938221552846c255eb50004996528a09534a9]] support for [[LazyLoading]] of images
+* Extended [[RevealWidget]] to allow control over content retention
 
 !! Hackability Improvements
 
-* Added HelpCommand and InitCommand for [[TiddlyWiki on Node.js]]
-* Extended ButtonWidget to allow navigating to a tiddler
+* Added [[HelpCommand]] and [[InitCommand]] for [[TiddlyWiki on Node.js]]
+* Extended [[ButtonWidget]] to allow navigating to a tiddler
 * Added experimental support for building plugins in the browser: [[How to create plugins in the browser]]
-* Extend the TranscludeWidget to display its content as a fallback if the tiddler or field is missing
-* Add logging and AlertMechanism
+* Extend the [[TranscludeWidget]] to display its content as a fallback if the tiddler or field is missing
+* Add logging and [[AlertMechanism]]
 * Added a ''Filter'' tab to [[advanced search|$:/AdvancedSearch]]
 * Add ''indexes'' [[filter operator|TiddlerFilters]]
-* Control over line width and colour for EditBitmapWidget
-* Add support for `.multids` MultiTiddlerFiles
-* Extend ViewWidget so that it works with indexes
-* Added support for Tank, a new service built on TiddlyWeb: https://tank.peermore.com
+* Control over line width and colour for [[EditBitmapWidget]]
+* Add support for `.multids` [[MultiTiddlerFiles]]
+* Extend [[ViewWidget]] so that it works with indexes
+* Added support for Tank, a new service built on [[TiddlyWeb]]: https://tank.peermore.com
 * Extend relative dates to work in the future
 
 !! Bug Fixes

@@ -5,7 +5,7 @@ The <<.def keyboard-driven-input>> [[macro|Macros]] generates an input field or 
 
 !! Parameters
 
-To create the input field or textarea, the <<.def keyboard-driven-input>> [[macro|Macros]] accepts all parameters of the EditTextWidget
+To create the input field or textarea, the <<.def keyboard-driven-input>> [[macro|Macros]] accepts all parameters of the [[EditTextWidget]]
 
 The additional parameters are:
 

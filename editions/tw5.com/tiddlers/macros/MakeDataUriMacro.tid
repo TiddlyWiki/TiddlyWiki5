@@ -14,7 +14,7 @@ The <<.def makedatauri>> [[macro|Macros]] takes a piece of text and an associate
 ;text
 : The text to be converted to a data URI
 ;type
-: The ContentType of the text
+: The [[ContentType]] of the text
 ;_canonical_uri
 : The optional ''_canonical_uri'' address of the content
 

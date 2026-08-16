@@ -31,10 +31,10 @@ To be usable in the browser, plugins just need to be included in the wiki. For w
 }
 ```
 
-Plugins names refer to plugin folders listed in TiddlyWiki5's root `plugins` folder. Plugins can also be included manually by copying them into the `plugins` subfolder of the wiki.
+Plugins names refer to plugin folders listed in [[TiddlyWiki5]]'s root `plugins` folder. Plugins can also be included manually by copying them into the `plugins` subfolder of the wiki.
 
 !! Processing of `tiddlers` folder
 
-All the TiddlerFiles in the `tiddlers` folder are read into the wiki at startup. Sub-folders are scanned recursively for TiddlerFiles. Newly created tiddlers are stored in TiddlerFiles directly beneath the `tiddlers` folder, unless [[configured otherwise|Customising Tiddler File Naming]].
+All the TiddlerFiles in the `tiddlers` folder are read into the wiki at startup. Sub-folders are scanned recursively for TiddlerFiles. Newly created tiddlers are stored in [[TiddlerFiles]] directly beneath the `tiddlers` folder, unless [[configured otherwise|Customising Tiddler File Naming]].
 
 The default processing for sub-folders within the `tiddlers` folder can  be overridden by providing a JSON file called `tiddlywiki.files` -- see [[tiddlywiki.files Files]].

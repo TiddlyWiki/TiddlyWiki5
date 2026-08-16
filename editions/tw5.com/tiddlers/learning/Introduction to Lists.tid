@@ -4,7 +4,7 @@ tags: Learning
 title: Introduction to Lists
 type: text/vnd.tiddlywiki
 
-Making lists of items plays a central role in working with TiddlyWiki. The following is a brief run-through of some of the more common techniques.
+Making lists of items plays a central role in working with [[TiddlyWiki]]. The following is a brief run-through of some of the more common techniques.
 
 ~TiddlyWiki [[uses|Extended Listops Filters]] lists [[internally|ListField]] for many purposes so the word can have several meanings. Here we are concerned with displaying sequences of items, but not necessarily presented as a conventional bullet list.
 
@@ -16,7 +16,7 @@ WikiText lists are manually typed lists that use a special character to specify 
 
 Examples include bullet lists created with asterisks (*) and numbered lists (#). Behind the scenes, ~WikiText lists are based on the standard `<ul>` and `<li>` HTML elements. For more information see [[Lists in WikiText]].
 
-An example of a typed list in WikiText:
+An example of a typed list in [[WikiText]]:
 
 <<wikitext-example-without-html """* Greatest Movies of All Time
 ** Casa Blanca
@@ -31,7 +31,7 @@ specify criteria for selecting which tiddlers are desired as output. Shortcut ma
 
 The ListWidget is the most powerful tool for creating lists. It allows the filtered output to be manipulated and styled into forms that may not seem to resemble lists at all, for example tables or complex texts. For more details, see [[ListWidget]].
 
-An example to show all tiddlers tagged with "HelloThere" might look like:
+An example to show all tiddlers tagged with "[[HelloThere]]" might look like:
 
 <<wikitext-example-without-html """<$list filter="[tag[HelloThere]]"><$view field="title"/><br/></$list>""">>
 

@@ -4,7 +4,7 @@ tags: RefreshMechanism Mechanisms
 title: RefreshThrottling
 type: text/vnd.tiddlywiki
 
-The RefreshMechanism allows the refresh cycle to be throttled (or deferred) when rapid changes occur to the same tiddler. It is used to maintain responsiveness while editing a draft tiddler, but can also be used on other tiddlers.
+The [[RefreshMechanism]] allows the refresh cycle to be throttled (or deferred) when rapid changes occur to the same tiddler. It is used to maintain responsiveness while editing a draft tiddler, but can also be used on other tiddlers.
 
 The rules governing refresh throttling are:
 

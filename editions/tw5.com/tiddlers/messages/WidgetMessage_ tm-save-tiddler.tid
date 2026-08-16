@@ -11,4 +11,4 @@ The `tm-save-tiddler` message is applied to draft tiddlers. It saves the draft o
 |param |Title of the tiddler that is being switched out of edit mode |
 |tiddlerTitle |Fallback title that is used if ''param'' isn't specified (automatically set by the ButtonWidget)  |
 
-The save tiddler message is usually generated with the ButtonWidget and is handled by the NavigatorWidget.
+The save tiddler message is usually generated with the [[ButtonWidget]] and is handled by the [[NavigatorWidget]].

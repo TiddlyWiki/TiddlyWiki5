@@ -7,4 +7,4 @@ caption: tm-close-all-tiddlers
 
 The close all tiddlers message empties the story list.
 
-The close all tiddlers message is usually generated with the ButtonWidget and is handled by the NavigatorWidget.
+The close all tiddlers message is usually generated with the [[ButtonWidget]] and is handled by the [[NavigatorWidget]].

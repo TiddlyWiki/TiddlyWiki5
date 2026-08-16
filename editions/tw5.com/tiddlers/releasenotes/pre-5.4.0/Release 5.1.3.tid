@@ -19,17 +19,17 @@ description: Journals, ActionWidgets, <<.olink addprefix>> and <<.olink addsuffi
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ef1d5310918dae088ce9361c1682ce0f99cf568a]] confirmation when clearing password
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b7bbcfa05659808c1e51a4f2f5f1d6afbc2ed3a1]] additional prompt when setting password
 * [[Increased|https://github.com/TiddlyWiki/TiddlyWiki5/commit/dc9981322aeb508d5ebac0b691b0d703f8c1995e]] size of the clear search button
-* [[Upgraded|https://github.com/TiddlyWiki/TiddlyWiki5/commit/564457de1c991df15263040d2d5526fa8ae879bb]] to [[KaTeX v0.1.1|https://github.com/Khan/KaTeX/releases/tag/v0.1.1]], with support for several additional LaTeX features
+* [[Upgraded|https://github.com/TiddlyWiki/TiddlyWiki5/commit/564457de1c991df15263040d2d5526fa8ae879bb]] to [[KaTeX v0.1.1|https://github.com/Khan/KaTeX/releases/tag/v0.1.1]], with support for several additional [[LaTeX]] features
 
 
 !! Hackability Improvements
 
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/2ffe53f1916e4b746cc6d7e74e8f4ac75c72e38a]] audio "parser" for handling [[Audio]] content
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0dcf54c3b59ed04645928f0ec4ced647e5a0da7f]] support for ActionWidgets
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0dcf54c3b59ed04645928f0ec4ced647e5a0da7f]] support for [[ActionWidgets]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/65504d5d41e45326ab1b1b6c0c21eea4c9772797]] new <<.olink addprefix>> and <<.olink addsuffix>> operators
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0c8e5380778303cdd3308bed4a15290214841f8b]] support for custom password prompts
 * [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c26bd4c5a872f56c47e9f5cfc3fada468c53ddde]] the <<.mlink list-links>> macro to display ''caption'' field if present
-* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/12e26009eef5e29140ba1a880ff033428d673630]] ImageWidget to allow percentage width and height to be specified
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/12e26009eef5e29140ba1a880ff033428d673630]] [[ImageWidget]] to allow percentage width and height to be specified
 
 !! Bug Fixes
 
@@ -53,7 +53,7 @@ description: Journals, ActionWidgets, <<.olink addprefix>> and <<.olink addsuffi
 
 !! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@andrey013|https://github.com/andrey013]]
 * [[@BramChen|https://github.com/BramChen]]

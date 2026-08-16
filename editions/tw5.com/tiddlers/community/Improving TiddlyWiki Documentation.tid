@@ -4,7 +4,7 @@ tags: Community
 title: Improving TiddlyWiki Documentation
 type: text/vnd.tiddlywiki
 
-Anyone can submit improvements to the TiddlyWiki documentation that appears on https://tiddlywiki.com. (For improvements to the core code a more complicated process must be used because of the need to test the changes both in the browser and under Node.js before submission).
+Anyone can submit improvements to the [[TiddlyWiki]] documentation that appears on https://tiddlywiki.com. (For improvements to the core code a more complicated process must be used because of the need to test the changes both in the browser and under Node.js before submission).
 
 <<.warning """If you already know GitHub, note that documentation updates must be directed to the `tiddlywiki-com` branch""">>
 

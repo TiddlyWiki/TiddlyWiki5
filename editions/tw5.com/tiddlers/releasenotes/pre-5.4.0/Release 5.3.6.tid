@@ -62,15 +62,15 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8447">> new `$compound-filter` attribute for the DataWidget that allows other compound tiddlers to be imported. There is also a companion ''import-compound'' field for the TestCaseWidget template
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8514">> the TestCaseWidget default template to make it more modular
-* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8499">> support for an ''import'' field in TestCaseTiddlers, allowing additional tiddlers to be imported
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8499">> support for an ''import'' field in [[TestCaseTiddlers]], allowing additional tiddlers to be imported
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8416">> [[TestCaseWidget]] default template to allow wikitext within the test case narrative
-* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8449">> WikiText formatting buttons when editing CompoundTiddlers
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8449">> [[WikiText]] formatting buttons when editing CompoundTiddlers
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8450">> CompoundTiddlers type `text/vnd.tiddlywiki-multiple` to the editor type dropdown
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8409">> filesystem handling so that CompoundTiddlers are saved as .tid files
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8409">> filesystem handling so that [[CompoundTiddlers]] are saved as .tid files
 
 ! Widget Improvements
 
-* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8256">> DroppableWidget to allow actions to be triggered once passing all the items in the list rather than invoking the actions separately for each item in the list
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8256">> [[DroppableWidget]] to allow actions to be triggered once passing all the items in the list rather than invoking the actions separately for each item in the list
 
 ! Usability Improvements
 
@@ -121,7 +121,7 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8382">> [[transcludes Operator]] and [[backtranscludes Operator]] minor issue with transclusions made via a filtered attribute
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/discussions/8428">> scroll top position when animation duration is zero
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8476">> importing $:/build tiddler when upgrading to avoid overwriting it
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/d9ac4a823fe0f91c615ed33fa890069f88cc8ab9">> crash with RenderCommand when filename filter returns empty result
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/d9ac4a823fe0f91c615ed33fa890069f88cc8ab9">> crash with [[RenderCommand]] when filename filter returns empty result
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8355">> display of language plugins
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8540">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8546">> and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8688">>) display of non-square plugin icons
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8517">> appearance of input elements other than type `text` and `search`
@@ -129,23 +129,23 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8413">> unwrapped oveflowed code blocks not showing scroll bars when setting "Wrap long lines in code blocks" to "No" in "Theme tweaks"
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7317">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8552">>) search input box outline in Chrome-like browsers
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8578">> problem with rapid typing in the advanced search filter tab
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8535">> crash with EditionsCommand if an edition directory does not have a [[tiddlywiki.info file|tiddlywiki.info Files]]
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/b8fb9e6b21319e790e9aa7453ca265b0ed4898db">> DataWidget to allow title fields to be overwritten
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8535">> crash with [[EditionsCommand]] if an edition directory does not have a [[tiddlywiki.info file|tiddlywiki.info Files]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/b8fb9e6b21319e790e9aa7453ca265b0ed4898db">> [[DataWidget]] to allow title fields to be overwritten
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/fa423e508ff5012423a1904bb17c9d61848732ee">> "Put Saver" to correctly interpret HTTP response codes
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8547">> invalid accept header in "Put Saver" 
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8485">> duplicated search results in advanced search when more than one tiddlers are tagged with [[SystemTag: $:/tags/SearchResults]]
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/7dfdbae812306875bac2445ca4ee505b406e3be1">> crash if the KeyboardWidget is used within a [[startup action|StartupActions]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/7dfdbae812306875bac2445ca4ee505b406e3be1">> crash if the [[KeyboardWidget]] is used within a [[startup action|StartupActions]]
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8574">> suffix in the [[encodebase64 Operator]] and [[decodebase64 Operator]]
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8557">> overflow of floated elements
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8523">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8652">> and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8682">>) tables overflowing  tiddler margins on narrow screens
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8610">> the [[colour-picker Macro]] wrongly autoclosing when selecting or typing a colour
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8593">> confusing message when the tag picker dropdown is empty
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8672">> misaligned tiddler subtitle
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/f565b5b55da29d8acb428641c4594304d462a539">> GenesisWidget so that explicit attributes take precedence
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/f565b5b55da29d8acb428641c4594304d462a539">> [[GenesisWidget]] so that explicit attributes take precedence
 
 ! Node.js Improvements
 
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/ea3cb1c58d96eefd4aca07f5fd79ff1ba01f24fe">> BuildCommand crashing when no wiki folder has been specified
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/ea3cb1c58d96eefd4aca07f5fd79ff1ba01f24fe">> [[BuildCommand]] crashing when no wiki folder has been specified
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8339">> server crash when authenticating if newlines are contained in the site title
 
 ! Developer Improvements
@@ -156,7 +156,7 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 
 ! Acknowledgements
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 <<.contributors """
 BramChen

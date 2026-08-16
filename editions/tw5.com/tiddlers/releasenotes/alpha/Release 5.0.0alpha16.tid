@@ -16,18 +16,18 @@ caption: 5.0.0-alpha.16
 * Significant updates to the structure and content of the user documentation
 * Added a new plugin for displaying corner ribbons; currently used for a version banner on tw5.com
 * Split ''Snow White'' theme into a base ''Vanilla'' theme with all the basic formatting, leaving the decorative bits to ''Snow White''
-** Existing TiddlyWikiFolders will need updating to include ''Vanilla'' as an additional theme
+** Existing [[TiddlyWikiFolders]] will need updating to include ''Vanilla'' as an additional theme
 * The page building blocks are now driven by the system tag `$:/tags/PageTemplate`
 ** [[$:/TopSideBar]] and [[$:/LeftSideBar]] are no longer specially treated; use the new tag instead
 * Fixed problem that prevented tag configured items from shadow tiddlers interleaving with items from ordinary tiddlers
 * Refactored control panel to add ''Saving'' tab that includes TiddlySpot options
 * Improved notifications when saving to TiddlySpot
 * Added backup URL to TiddlySpot control panel tab
-* Extended the ServerCommand to add primitive support for basic authentication when running under [[Node.js]]
+* Extended the [[ServerCommand]] to add primitive support for basic authentication when running under [[Node.js]]
 
 !! Bug fixes
 
-* Fixed problem with displaying tiddler titles that contain WikiText syntax
+* Fixed problem with displaying tiddler titles that contain [[WikiText]] syntax
 * No longer crashes when encountering an error in a filter string
 * Fixed a crash when dragging and dropping tiddlers within TiddlyWiki5
 * No longer update the modified date for imported tiddlers
@@ -36,9 +36,9 @@ caption: 5.0.0-alpha.16
 !! Internal changes
 
 * Added Windows-compatible build scripts
-* Changes to the SavingMechanism to allow the tiddlers that are saved to be selected
+* Changes to the [[SavingMechanism]] to allow the tiddlers that are saved to be selected
 ** This enables the wiki at http://five.tiddlywiki.com/index.html to generate an empty wiki
-* The main HTML file template used for saving TiddlyWiki5 documents has changed from `$:/core/templates/tiddlywiki5.template.html` to `$:/core/save/all`
+* The main HTML file template used for saving [[TiddlyWiki5]] documents has changed from `$:/core/templates/tiddlywiki5.template.html` to `$:/core/save/all`
 * Moved tw5.com's Google Analytics integration into a proper plugin
 
 Contributors to this release include @jermolene, @asampal and @pmario.

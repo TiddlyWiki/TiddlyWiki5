@@ -5,7 +5,7 @@ tags: [[WebServer Parameters]]
 title: WebServer Parameter: authenticated-user-header
 type: text/vnd.tiddlywiki
 
-The [[web server configuration parameter|WebServer Parameters]] ''authenticated-user-header'' activates [[header authentication|WebServer Header Authentication]] by specifying the name of the HTTP header field that will be used to pass the username to TiddlyWiki.
+The [[web server configuration parameter|WebServer Parameters]] ''authenticated-user-header'' activates [[header authentication|WebServer Header Authentication]] by specifying the name of the HTTP header field that will be used to pass the username to [[TiddlyWiki]].
 
 For example, if the ''authenticated-user-header'' is set to ''X-Authenticated-User'', then the HTTP request must include a header field ''X-Authenticated-User'' with a value that is the username:
 

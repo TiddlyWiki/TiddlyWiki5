@@ -4,7 +4,7 @@ tags: [[TiddlyWiki on Node.js]] PluginsCS
 title: Uninstalling a plugin with Node.js
 type: text/vnd.tiddlywiki
 
-Follow these instructions when using TiddlyWiki with client-server Node.js configuration:
+Follow these instructions when using [[TiddlyWiki]] with client-server Node.js configuration:
 
 # Quit the server if it is running
 

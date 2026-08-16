@@ -24,7 +24,7 @@ For example, a tiddler containing the following WikiText would render the field 
 
 The `tabindex` and `cancelPopups` attributes make sure the HTML input element behaves exactly the default elements provided by TiddlyWiki.
 
-Not only the EditTextWidget can be used. A tiddler containing the following WikiText will render the field as a drop-down-list that allows the user to select the name of a tiddler. The name of the selected tiddler will be stored in the field.
+Not only the [[EditTextWidget]] can be used. A tiddler containing the following [[WikiText]] will render the field as a drop-down-list that allows the user to select the name of a tiddler. The name of the selected tiddler will be stored in the field.
 
 ```
 <$select tiddler=<<currentTiddler>> field=<<currentField>> class="tc-edit-texteditor tc-edit-fieldeditor" cancelPopups="yes">
@@ -34,7 +34,7 @@ Not only the EditTextWidget can be used. A tiddler containing the following Wiki
 </$select>
 ```
 
-The classes `tc-edit-texteditor` and `tc-edit-fieldeditor` should be used to style the `input` and `select` elements to match the theme of the TiddlyWiki installation.
+The classes `tc-edit-texteditor` and `tc-edit-fieldeditor` should be used to style the `input` and `select` elements to match the theme of the [[TiddlyWiki]] installation.
 
 ! Persistence of values when creating fields
 

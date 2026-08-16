@@ -11,5 +11,5 @@ A plugin that allows changes to be synchronised with the IndexedDB database that
 {{!!url}}
 
 <<<
-Being quite new to TW5 development I tried my best to draft a SyncAdaptor to store tiddlers in IndexedDb. This is quite useful if an application / plugin installation is not possible (we have quite some restrictions at work...).
+Being quite new to TW5 development I tried my best to draft a SyncAdaptor to store tiddlers in [[IndexedDB]]. This is quite useful if an application / plugin installation is not possible (we have quite some restrictions at work...).
 <<<

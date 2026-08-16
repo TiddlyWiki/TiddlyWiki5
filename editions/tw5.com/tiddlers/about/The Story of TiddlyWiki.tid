@@ -18,7 +18,7 @@ I felt that this ability to manipulate multiple pages at once was central to the
 
 All of these thoughts came together when I saw GMail in April 2004, which used Ajax cleverly to blend individual emails into threaded conversations.
 
-I started experimenting with HTML and JavaScript to explore the idea further. I'd had virtually no experience of either, just having put together some static pages and simple ASP sites in previous lives. Getting my head around these client-side technologies was painful; like everyone else, I was horrified to discover how appalling were the incompatibilities and inconsistencies of web programming.
+I started experimenting with HTML and [[JavaScript]] to explore the idea further. I'd had virtually no experience of either, just having put together some static pages and simple ASP sites in previous lives. Getting my head around these client-side technologies was painful; like everyone else, I was horrified to discover how appalling were the incompatibilities and inconsistencies of web programming.
 
 ! Launch of TiddlyWiki
 
@@ -34,7 +34,7 @@ I adapted the Firefox code into the core of TiddlyWiki, and soon added a similar
 
 ! Growth of TiddlyWiki
 
-A major milestone in the growth of TiddlyWiki was the creation of "GTDTiddlyWiki" by Nathan Bowers. He took the vanilla TiddlyWiki product and adapted it for the specific application of keeping track of tasks using the popular Getting Things Done methodology. GTDTiddlyWiki was an immediate hit, being enthusiastically greeted on websites like [[LifeHacker|https://lifehacker.com/]].
+A major milestone in the growth of TiddlyWiki was the creation of "GTDTiddlyWiki" by Nathan Bowers. He took the vanilla TiddlyWiki product and adapted it for the specific application of keeping track of tasks using the popular Getting Things Done methodology. [[GTDTiddlyWiki]] was an immediate hit, being enthusiastically greeted on websites like [[LifeHacker|https://lifehacker.com/]].
 
 Over the next couple of years TiddlyWiki continued to grow in popularity, and gained new features and capabilities. Within a year I was able to support myself by performing bespoke development work on TiddlyWiki, notably working with wiki pioneer [[SocialText|https://en.wikipedia.org/wiki/Socialtext]] on the ability to synchronise changes with an online server
 
@@ -50,7 +50,7 @@ I built a team in BT under the name [[Osmosoft]]. Our purpose was to evangelise 
 
 Our approach was to focus on showing rather than telling. We worked with the TiddlyWiki community to extend the ecosystem and we built numerous internal systems for BT (some based on TiddlyWiki and some not).
 
-[[Osmosoft]]'s chief contribution to the TiddlyWiki community was the creation of TiddlyWeb and TiddlySpace. TiddlyWeb was a robust, internet scale server for tiddlers that could also compose TiddlyWiki views of those tiddlers. TiddlySpace was an attempt to package TiddlyWeb into a more directly usable form.
+[[Osmosoft]]'s chief contribution to the TiddlyWiki community was the creation of TiddlyWeb and TiddlySpace. TiddlyWeb was a robust, internet scale server for tiddlers that could also compose TiddlyWiki views of those tiddlers. [[TiddlySpace]] was an attempt to package [[TiddlyWeb]] into a more directly usable form.
 
 ! Leaving BT
 
@@ -58,7 +58,7 @@ By the end of 2011 I was increasingly feeling that I would be better placed to r
 
 ! Development of TiddlyWiki5
 
-I worked on new release of TiddlyWiki from November 2011. As a programmer, working on "version 2.0" of something that I had already written is a very attractive proposition. It means that the requirements were fully understood, allowing me to focus on evolving the architecture needed to support the desired functionality.
+I worked on new release of [[TiddlyWiki]] from November 2011. As a programmer, working on "version 2.0" of something that I had already written is a very attractive proposition. It means that the requirements were fully understood, allowing me to focus on evolving the architecture needed to support the desired functionality.
 
 ! The Future
 
@@ -66,4 +66,4 @@ Back in 2014, shortly after TiddlyWiki5 was first released, I wrote:
 
 > Now that TiddlyWiki5 has finally left "beta" status behind, my hope is that it will have a long life. Because it only uses standard features of HTML5 and Node.js, there is no reason why it cannot be fully operational for many years to come. My goal is for it to last for at least 25 years.
 
-As I write this, TiddlyWiki5 is 44% of the way to that goal. With the support and enthusiasm of the community I am confident the project will continue to thrive and evolve.
+As I write this, [[TiddlyWiki5]] is 44% of the way to that goal. With the support and enthusiasm of the community I am confident the project will continue to thrive and evolve.

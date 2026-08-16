@@ -20,7 +20,7 @@ The `tm-open-external-window` message opens an external link eg: "https://tiddly
 |windowName|If a parameter is provided it can be used to open different links in the same window eg: `_tiddlywiki`. Default is empty, so every link opens a new window.|The behaviour is influenced by user settings in the browser and the browsers default behavior! |
 |windowFeatures|This parameter needs to be provided as a single string. eg: `"height=400, width=600"`. For detailed description about possible parameters see: [[Mozilla Help|https://developer.mozilla.org/en-US/docs/Web/API/Window/open#Window_features]] ||
 
-The `tm-open-external-window` message is usually generated with the ButtonWidget or ActionSendMessageWidget and is handled by the core itself.
+The `tm-open-external-window` message is usually generated with the [[ButtonWidget]] or [[ActionSendMessageWidget]] and is handled by the core itself.
 
 ''Examples''
 

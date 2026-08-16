@@ -58,7 +58,7 @@ This installs the given version in the current directory, at the expense of taki
 ln -s /home/user/opt/tiddlywiki-5.1.13/node_modules/.bin/tiddlywiki /home/user/bin/tiddlywiki-5.1.13
 ```
 
-Having `~/bin` in `PATH` environment variable (usually at the beginning of it), makes it possible to start this version of TiddlyWiki as simple as `tiddlywiki-5.1.13`.
+Having `~/bin` in `PATH` environment variable (usually at the beginning of it), makes it possible to start this version of [[TiddlyWiki]] as simple as `tiddlywiki-5.1.13`.
 
 !!! Use `npx`
 

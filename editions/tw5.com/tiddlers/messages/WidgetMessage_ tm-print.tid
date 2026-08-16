@@ -7,4 +7,4 @@ caption: tm-print
 
 <<.from-version "5.1.14">> The `tm-print` message causes the browser to display the print dialog for the current page. It does not require any properties on the `event` object.
 
-The print message is usually generated with the ButtonWidget and is handled by the core.
+The print message is usually generated with the [[ButtonWidget]] and is handled by the core.

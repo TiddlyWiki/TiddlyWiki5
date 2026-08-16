@@ -14,7 +14,7 @@ It requires the following properties on the `event` object:
 |successNotification |<<.from-version "5.3.4">> Optional title of tiddler containing notification to be used if the operation succeeds |
 |failureNotification |<<.from-version "5.3.4">> Optional title of tiddler containing notification to be used if the operation fails |
 
-This message is usually generated with the ButtonWidget. It is handled by the TiddlyWiki core.
+This message is usually generated with the [[ButtonWidget]]. It is handled by the [[TiddlyWiki]] core.
 
 ! Example
 

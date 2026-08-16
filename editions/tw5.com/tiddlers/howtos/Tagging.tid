@@ -14,7 +14,7 @@ By tagging your tiddlers, you can view, navigate and organise your information i
 
 * The coloured tag pills on a tiddler give you quick access to all the other tiddlers with the same tag, as well as to the tiddler that represents the tag itself.
 
-* If a tiddler is serving as a tag, then the ''Tagging'' tab in its InfoPanel will show you which tiddlers are currently tagged with it.
+* If a tiddler is serving as a tag, then the ''Tagging'' tab in its [[InfoPanel]] will show you which tiddlers are currently tagged with it.
 
 * The ''More'' tab of the sidebar has a ''Tags'' tab that presents an overview of all your tags and lets you access all your tagged tiddlers.
 

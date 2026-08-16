@@ -9,7 +9,7 @@ A adaptation of TiddlyWiki perfect for using as a Notebook sysetem.
 {{!!url}}
 
 <<<
-Stroll is a TiddlyWiki adaptation imitating certain features of Roam to help users easily see connections between their notes and navigate between them. Features include:
+Stroll is a [[TiddlyWiki]] adaptation imitating certain features of Roam to help users easily see connections between their notes and navigate between them. Features include:
 
 * bi-directional links,
 * autocompletion when linking,

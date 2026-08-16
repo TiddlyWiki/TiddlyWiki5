@@ -9,7 +9,7 @@ tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving
 title: Emergency Tiddler Export
 type: text/vnd.tiddlywiki
 
-This method is useful if, for any reason, you should find your current TiddlyWiki instance is not saving (e.g. a plugin or a server has stopped working). It should work on just about any platform.
+This method is useful if, for any reason, you should find your current [[TiddlyWiki]] instance is not saving (e.g. a plugin or a server has stopped working). It should work on just about any platform.
 
 * Go to advanced search {{$:/core/ui/Buttons/advanced-search}}
 ** Goto the filter tab

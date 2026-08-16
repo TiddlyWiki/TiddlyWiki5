@@ -8,6 +8,6 @@ Tiddlers are the fundamental units of information in ~TiddlyWiki. Tiddlers work 
 
 A "tiddler" is an informal British word meaning a small fish, typically a stickleback or a minnow. Other systems have analogous concepts with generic names like "items", "entries", "entities", "nodes" or "records". ~TiddlyWiki takes the view that it is better to be confusingly distinctive than confusingly generic.
 
-Internally, tiddlers are a list of uniquely named values called fields. The only field that is required is the `title` field, but useful tiddlers also have a `text` field, and some or all of the standard fields listed in TiddlerFields.
+Internally, tiddlers are a list of uniquely named values called fields. The only field that is required is the `title` field, but useful tiddlers also have a `text` field, and some or all of the standard fields listed in [[TiddlerFields]].
 
-Tiddlers are ubiquitous in TiddlyWiki. They are used to store everything from JavaScript code modules to the settings and state associated with the user interface.
+Tiddlers are ubiquitous in [[TiddlyWiki]]. They are used to store everything from [[JavaScript]] code modules to the settings and state associated with the user interface.

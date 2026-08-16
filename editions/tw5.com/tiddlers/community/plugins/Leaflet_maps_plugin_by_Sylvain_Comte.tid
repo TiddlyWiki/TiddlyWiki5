@@ -10,7 +10,7 @@ A mapping plugin based on [[Leaflet|http://leafletjs.com/]] library. Allows you 
 {{!!url}}
 
 <<<
-The [[leaflet plugin|http://sycom.github.io/TiddlyWiki-Plugins/#Leaflet%20plugin]] is a (working) attempt to integrate the [[leaflet|http://leafletjs.com/]] library in TiddlyWiki in order to display geographical purpose tiddlers.
+The [[leaflet plugin|http://sycom.github.io/TiddlyWiki-Plugins/#Leaflet%20plugin]] is a (working) attempt to integrate the [[leaflet|http://leafletjs.com/]] library in [[TiddlyWiki]] in order to display geographical purpose tiddlers.
 
 For now `<$leafmap>` widget displays an interactive map. Select size, location and zoom, clustering distance, and background. You can display data  : geojson, point(s), polygon(s) and/or polyline(s) directly or calling //GeoTiddler//(s). Tiddler can be called individually, by list or with a [[filter|Filters]].
 

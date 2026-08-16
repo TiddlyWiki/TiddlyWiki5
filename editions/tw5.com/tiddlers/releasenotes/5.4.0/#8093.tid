@@ -7,4 +7,4 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/8093 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9616
 github-contributors: buggyj saqimtiaz
 
-Fixed SelectWidget does not work with multiple options organised into group.
+Fixed [[SelectWidget]] does not work with multiple options organised into group.

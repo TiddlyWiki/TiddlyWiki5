@@ -4,7 +4,7 @@ tags: Concepts
 title: Hard and Soft Links
 type: text/vnd.tiddlywiki
 
-A <<.def "hard link">> is a [[link|Linking in WikiText]] that can be detected by a superficial examination of WikiText.
+A <<.def "hard link">> is a [[link|Linking in WikiText]] that can be detected by a superficial examination of [[WikiText]].
 
 A link is <<.def "soft">> if it is:
 

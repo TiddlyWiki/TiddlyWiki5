@@ -30,6 +30,6 @@ The above WikiText types are only recognised in ''block mode''. However, the tex
 At the end of the terminating line, the parser will return to ''block mode''.
 <<.tip 'Note: [[Hard Linebreaks in WikiText]] require an extra blank line after the trailing `"""` before the parser will return to <strong>block mode</strong>.'>>
 
-If the punctuation for the above types of WikiText is encountered while the parser is in ''inline mode'', it will be //ignored// and output as-is.
+If the punctuation for the above types of [[WikiText]] is encountered while the parser is in ''inline mode'', it will be //ignored// and output as-is.
 
 [[Examples|Block Mode WikiText (Examples)]]

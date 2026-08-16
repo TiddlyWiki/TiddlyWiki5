@@ -34,11 +34,11 @@ Improvements to the following translations:
 
 ! Widget Improvements
 
-* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7594">> ''tabindex'' attribute to SelectWidget
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7594">> ''tabindex'' attribute to [[SelectWidget]]
 
 ! Hackability Improvements
 
-* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7611">> ImportVariablesWidget and [[Pragma: \import]] to trim whitespace when parsing tiddlers
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7611">> [[ImportVariablesWidget]] and [[Pragma: \import]] to trim whitespace when parsing tiddlers
 * <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/commit/9b2af1359614f4ad5afd05be7cf9853909334592">> [[WidgetMessage: tm-http-request]] to handle binary responses ([[demo|WidgetMessage: tm-http-request Example - Random Dog]])
 
 ! Bug Fixes
@@ -62,7 +62,7 @@ Improvements to the following translations:
 
 ! Acknowledgements
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 <<.contributors """
 AnthonyMuscio

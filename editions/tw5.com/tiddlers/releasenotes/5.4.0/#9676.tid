@@ -10,7 +10,7 @@ github-contributors: s793016
 Fixes and optimizations to the Freelinks plugin's Aho-Corasick implementation following #9397.
 
 Fixes:
-* Failure Links Non-Functional (Critical): The failure link map used a plain object `{}` with trie nodes as keys. Since all JavaScript objects coerce to the same string `[object Object]`, every node resolved to the same map entry. Failure links were silently broken for all overlapping patterns. Fixed by replacing with `WeakMap`.
+* Failure Links Non-Functional (Critical): The failure link map used a plain object `{}` with trie nodes as keys. Since all [[JavaScript]] objects coerce to the same string `[object Object]`, every node resolved to the same map entry. Failure links were silently broken for all overlapping patterns. Fixed by replacing with `WeakMap`.
 * Cache Rebuilt on Every UI Interaction (Performance): Any `$:/state/...` update (e.g. clicking tabs) would trigger a full Aho-Corasick rebuild, causing severe lag on large wikis. The `refresh` logic now ignores system tiddlers, with an explicit allowlist for plugin config tiddlers.
 * Short Match Blocking Longer Match: A shorter title appearing earlier (e.g. "The New") could prevent a longer overlapping title (e.g. "New York City") from matching. Replaced left-to-right greedy selection with global length-first sorting and interval occupation tracking.
 * Unicode Index Desync in ignoreCase Mode: Calling `toLowerCase()` on the full text before searching could change string length (e.g. Turkish "İ" expands), causing `substring()` to split Emoji surrogate pairs and produce garbage output. Case conversion is now done per-character during search.

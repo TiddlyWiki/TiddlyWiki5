@@ -4,7 +4,7 @@ tags: Concepts
 title: Current Tiddler
 type: text/vnd.tiddlywiki
 
-The <<.def "current tiddler">> provides the context in which several aspects of WikiText are interpreted.
+The <<.def "current tiddler">> provides the context in which several aspects of [[WikiText]] are interpreted.
 
 For example, `{{!!title}}` denotes the value of the <<.field title>> field of whatever the current tiddler happens to be. This technique can be used to create general-purpose [[template tiddlers|TemplateTiddlers]].
 

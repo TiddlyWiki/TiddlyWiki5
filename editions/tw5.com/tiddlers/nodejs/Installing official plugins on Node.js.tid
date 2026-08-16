@@ -4,7 +4,7 @@ tags: [[TiddlyWiki on Node.js]] PluginsCS
 title: Installing official plugins on Node.js
 type: text/vnd.tiddlywiki
 
-Follow these instructions when using TiddlyWiki with a client-server Node.js configuration:
+Follow these instructions when using [[TiddlyWiki]] with a client-server Node.js configuration:
 
 # Identify the plugins you want to install using the ''Plugins'' tab of <<controlPanel-plugin-link>> (''don't'' install the plugins from here, though)
 #* Plugins are identified by their type (ie language, theme or plugin) and their publisher and title. For example, the plugin `$:/plugins/tiddlywiki/internals` is referred to as ''tiddlywiki/internals''

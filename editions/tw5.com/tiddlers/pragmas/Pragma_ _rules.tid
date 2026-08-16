@@ -18,7 +18,7 @@ For example, in stylesheets it is typical to only use the rules associated with 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 ```
 
-Disable CamelCase for just one tiddler:
+Disable [[CamelCase]] for just one tiddler:
 
 ```
 \rules except wikilink

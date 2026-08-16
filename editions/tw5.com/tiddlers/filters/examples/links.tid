@@ -9,6 +9,6 @@ type: text/vnd.tiddlywiki
 
 Here are some hard links:
 
-* HelloThere
+* [[HelloThere]]
 * [[Filter Operators]]
 * [[links Operator]]

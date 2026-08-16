@@ -8,4 +8,4 @@ type: text/vnd.tiddlywiki
 
 It consists of a tree of elements expressed using a system of special <<.def tags>> enclosed in angle brackets.
 
-Almost the whole of HTML can be used unchanged in the WikiText of a tiddler.
+Almost the whole of HTML can be used unchanged in the [[WikiText]] of a tiddler.

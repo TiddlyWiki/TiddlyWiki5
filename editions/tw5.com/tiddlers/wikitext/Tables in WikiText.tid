@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Basics
 
-TiddlyWiki5 formats tables using vertical bar `|` characters. Exclamation marks `!` are used to indicate header cells.
+[[TiddlyWiki5]] formats tables using vertical bar `|` characters. Exclamation marks `!` are used to indicate header cells.
 
 <<wikitext-example-without-html src:"""|!Cell1 |!Cell2 |
 |Cell3 |Cell3 |

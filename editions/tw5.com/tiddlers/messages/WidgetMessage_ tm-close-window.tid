@@ -11,7 +11,7 @@ The `tm-close-window` [[message|Messages]] closes an additional //browser// wind
 |!Name |!Description |
 |param //{default param}//  |String used as <<.param windowID>> when opening the window |
 
-The `tm-close-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. It is handled by the core itself.
+The `tm-close-window` message is best generated with the [[ActionSendMessageWidget]], which in turn is triggered by a widget such as the [[ButtonWidget]]. It is handled by the core itself.
 
 <<.tip """When used with the ActionSendMessageWidget, <<.param 'param'>> becomes <<.param '$param'>> """>>
 <<.tip """To close all additional browser windows that were opened with [[tm-open-window|WidgetMessage: tm-open-window]] use [[WidgetMessage: tm-close-all-windows]]""">>

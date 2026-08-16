@@ -15,7 +15,7 @@ See the [[Lazy Loading Mechanism|https://tiddlywiki.com/dev/#LazyLoadingMechanis
 
 ! Lazy loading under Node.js
 
-To start TiddlyWiki with lazy loading for image tiddlers use this command:
+To start [[TiddlyWiki]] with lazy loading for image tiddlers use this command:
 
 
 ```

@@ -19,7 +19,7 @@ The content of the `<$setmultiplevariables>` widget is the scope for the value a
 
 ! Examples
 
-Here is an example of a convoluted way to display the values of the fields of the tiddler "HelloThere":
+Here is an example of a convoluted way to display the values of the fields of the tiddler "[[HelloThere]]":
 
 <$macrocall $name='wikitext-example-without-html'
 src="""<$setmultiplevariables $names="[[HelloThere]fields[]addprefix[demo-]]" $values="[[HelloThere]fields[]] :map[[HelloThere]get<currentTiddler>]">

@@ -62,7 +62,7 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 
 !! Usability Improvements
 
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3112]] new DiffTextWidget, and integrated it into the import listing and as a preview pane
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3112]] new [[DiffTextWidget]], and integrated it into the import listing and as a preview pane
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/9e03264ebe141a5dc4d37dcb62f3bbf2f740d983]] selectable previews to the import listing
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3155]] new editor toolbar buttons for wrapping the selection with double square and curly brackets
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3134]] new [[sortan Operator]] for sorting alphanumeric values such as "Apple 6", "Apple 7", "Apple 8", "Apple 9", "Apple 10", "Apple 20", "Apple 30", "Apple 100"
@@ -82,26 +82,26 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 
 !! Hackability Improvements
 
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/033feda02d7f5cdf27a9393b8229f22219cdab88]] support for comparison operators to the RevealWidget
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1c6942402ee7b6d938f01bad23130ebe75b109f2]] support for StartupActions to execute action widgets at startup
-* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f4fd5e76f8da8555bb9056725f11e0c0c91649f7]] ServerCommand to allow the port number to be specified as an environment variable
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/033feda02d7f5cdf27a9393b8229f22219cdab88]] support for comparison operators to the [[RevealWidget]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1c6942402ee7b6d938f01bad23130ebe75b109f2]] support for [[StartupActions]] to execute action widgets at startup
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f4fd5e76f8da8555bb9056725f11e0c0c91649f7]] [[ServerCommand]] to allow the port number to be specified as an environment variable
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/28e713caac1582e30b9ab8f7364ac8a564f4ffd7]] screen width/height to [[platform information exposed at startup|InfoMechanism]]
-* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3167]] DroppableWidget to pass modifier keys in a variable
-* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3203]] DraggableWidget with actions for drag start and drag end
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3167]] [[DroppableWidget]] to pass modifier keys in a variable
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3203]] [[DraggableWidget]] with actions for drag start and drag end
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7cb54f32c6ee2d98f3f13ddda39f92281d419afd]] a new [[TaskManagementExample (Draggable)]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/460a07ca03a501009530a57352d6bec0e3cf49cd]] new 'Stylesheets' tab to control panel
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b4c7c59d5d1bc5282fcfed58abbf087b9f65b86c]] new 'emptyMessage' parameter to [[list-links Macro]] and [[list-tagged-draggable Macro]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/de4eb5ca89132db136c8f5fb3103f289f25fe98a]] new `th-page-refreshed` hook
 * [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3063]] macro evaluation by making parameters available as variables - see "Parameters as Variables" in [[Macro Definitions in WikiText]]
-* [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3052]] LinkWidget to allow better customisation of CSS classes
+* [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3052]] [[LinkWidget]] to allow better customisation of CSS classes
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3124]] new "value" suffix for the [[each Operator]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0d354fe57f7424c1751a5c0cf5fbf1203803f3c8]] new ''subtiddler'' attribute to the SetWidget
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/47cdf5513391742c3410bb80b36107ab17b0476d]] new [[subtiddlerfields Operator]] for extracting the fields from tiddlers within plugins
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3182]] ability to trigger actions on unchecking the CheckboxWidget
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2182]] support for a checked class to the RadioWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3182]] ability to trigger actions on unchecking the [[CheckboxWidget]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2182]] support for a checked class to the [[RadioWidget]]
 * [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2982]] the [[is Operator]] to allow multiple types to be specified
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3209]] data attributes to ViewTemplate (see [[Custom data-styles]])
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2988]] new RangeWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3209]] data attributes to [[ViewTemplate]] (see [[Custom data-styles]])
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2988]] new [[RangeWidget]]
 
 !! Bug Fixes
 
@@ -109,10 +109,10 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7e71fcfab80bed9aed4389eea386fb2036cc4a85]] problem with the content area of vertical tabs sometimes overflowing their right hand margin
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3079]] problem with double quotes within the new journal template
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3070]] problem with dragging inside a textarea
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3099]] usage of "default" attribute of SelectWidget when "index" attribute is used
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3099]] usage of "default" attribute of [[SelectWidget]] when "index" attribute is used
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3093]] problem with crash when dragging over TiddlyWiki on some browsers
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3079]] issue with new journal button
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3164]] problem with ''filter'' and ''value'' attributes of SetWidget
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3164]] problem with ''filter'' and ''value'' attributes of [[SetWidget]]
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3190]] problem with numeric operands in the [[Extended Listops Filters]]
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/df1f7e9798b5f6c3d2c3fd82e438cbc9713ade04]] problem with "put" saver and 412 return codes
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3048]] problem with variable references in field values in the edit template
@@ -133,7 +133,7 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 
 ! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@alexhough|https://github.com/alexhough]]
 * [[@anavarre|https://github.com/anavarre]]

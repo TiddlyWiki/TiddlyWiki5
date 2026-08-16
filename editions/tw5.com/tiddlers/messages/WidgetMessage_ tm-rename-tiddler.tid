@@ -15,7 +15,7 @@ The `tm-rename-tiddler` message renames a tiddler by deleting it and recreating 
 
 The very similar [[WidgetMessage: tm-relink-tiddler]] message does not rename the tiddler, it just relinks the references to it.
 
-The rename tiddler message is usually generated with the ButtonWidget and is handled by the core.
+The rename tiddler message is usually generated with the [[ButtonWidget]] and is handled by the core.
 
 ! Examples
 

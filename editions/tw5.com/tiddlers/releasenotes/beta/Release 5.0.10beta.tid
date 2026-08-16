@@ -10,12 +10,12 @@ caption: 5.0.10-beta
 
 !! Highlights
 
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ad4b03506a62d7110cb30aaa3d6f8dbfc712f246]] new syntax for [[Images in WikiText]] and a new ImageWidget
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ba576d9f1b2146cec293447b2968e34f0c594a05]] support for a SafeMode that disables customisations
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ad4b03506a62d7110cb30aaa3d6f8dbfc712f246]] new syntax for [[Images in WikiText]] and a new [[ImageWidget]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ba576d9f1b2146cec293447b2968e34f0c594a05]] support for a [[SafeMode]] that disables customisations
 
 !! Documentation Improvements
 
-* Added DateFormat documentation
+* Added [[DateFormat]] documentation
 
 !! Usability Improvements
 
@@ -36,6 +36,6 @@ caption: 5.0.10-beta
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/bd4a031df8a68287475a41ad84b423ad83f735a3]] problem with corrupted upgrades from 5.0.x-prerelease to 5.0.x-beta
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/73cfd1021809e97906ecfd5dacdf2337da3abae9]] bug with `[untagged[]]` filter operator
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d336ffea02621e382f6d7135847d11e49e77bc26]] incorrect background colour for tag pills in the sidebar
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f57e04787738ad30fb05ac0e592239075b90507e]] issues with null fields under TiddlyWeb
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f57e04787738ad30fb05ac0e592239075b90507e]] issues with null fields under [[TiddlyWeb]]
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/768489128547cf54e80fc321f3f1f4f5cd191862]] problem with hamburger overlapping scrollbars
 

@@ -23,9 +23,9 @@ Tag pills are also draggable, and are equivalent to simultaneously dragging all 
 
 Some common scenarios for drag and drop tiddler manipulation are available as reusable macros:
 
-* [[list-links-draggable Macro]] for reordering the entries in a tiddler ListField
+* [[list-links-draggable Macro]] for reordering the entries in a tiddler [[ListField]]
 * [[list-tagged-draggable Macro]] for reordering the tiddlers that carry a specified tag
 
-See DragAndDropMechanism for details of how to use the low level drag and drop primitives to build more complex interactions.
+See [[DragAndDropMechanism]] for details of how to use the low level drag and drop primitives to build more complex interactions.
 
 The standard HTML 5 drag and drop APIs used by ~TiddlyWiki are not generally available on mobile browsers on smartphones or tablets. The [[Mobile Drag And Drop Shim Plugin]] adds an open source library that implements partial support on many mobile browsers, including iOS and Android.

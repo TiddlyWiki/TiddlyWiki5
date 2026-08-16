@@ -4,7 +4,7 @@ tags: OfficialPlugins [[Plugin Editions]]
 title: Geospatial Plugin
 type: text/vnd.tiddlywiki
 
-The Geospatial Plugin adds new primitives to the TiddlyWiki platform to enable non-developers to build sophisticated interactive geospatial applications.
+The Geospatial Plugin adds new primitives to the [[TiddlyWiki]] platform to enable non-developers to build sophisticated interactive geospatial applications.
 
 It incorporates a number of third party libraries and online services:
 

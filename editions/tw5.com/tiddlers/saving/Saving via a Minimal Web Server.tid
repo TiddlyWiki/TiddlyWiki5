@@ -10,12 +10,12 @@ tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving
 title: Saving via a Minimal Web Server
 type: text/vnd.tiddlywiki
 
-A local mini binary server for TiddlyWiki5 that saves and backups wikis and uploads files for TiddlyWiki, inspired by
+A local mini binary server for TiddlyWiki5 that saves and backups wikis and uploads files for [[TiddlyWiki]], inspired by
 [[tw5-server.rb | https://gist.github.com/jimfoltz/ee791c1bdd30ce137bc23cce826096da]].
 
 tw5server provides features of:
 
-* Server for TiddlyWiki5, as well as other files (e.g. images used in TW5 `[img[images/*.png]]`);
+* Server for [[TiddlyWiki5]], as well as other files (e.g. images used in TW5 `[img[images/*.png]]`);
 * Easy to save wiki via browsers;
 * Backup wiki in compress format (.gz), to save disk space;
 * Auto clean backups: keep one newest per previous month, keep all backups in current month.

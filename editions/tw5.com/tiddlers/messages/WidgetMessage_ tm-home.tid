@@ -7,4 +7,4 @@ caption: tm-home
 
 The `tm-home` message closes any open tiddlers and re-opens the default tiddlers set in [[$:/DefaultTiddlers]]. It also remove any [[permalink|PermaLinks]] from the browser address bar. It does not require any properties on the `event` object.
 
-The home message is usually generated with the ButtonWidget and is handled by the core.
+The home message is usually generated with the [[ButtonWidget]] and is handled by the core.

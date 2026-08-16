@@ -11,4 +11,4 @@ description: Hot fix release for v5.1.7
 
 This is an hot fix release with the following change over [[Release 5.1.6]]:
 
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a31aa25d0c00187ff829d74108f018e44b5cb3c5]] typo in GettingStarted
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a31aa25d0c00187ff829d74108f018e44b5cb3c5]] typo in [[GettingStarted]]

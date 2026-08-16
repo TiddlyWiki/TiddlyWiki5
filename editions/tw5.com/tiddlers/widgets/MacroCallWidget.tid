@@ -30,5 +30,5 @@ The content of the <<.wlink MacroCallWidget>> widget is ignored.
 |!Attribute |!Description |
 |$name |Name of the macro to invoke |
 |$type |ContentType with which the macro text should be parsed (defaults to `text/vnd.tiddlywiki`) |
-|$output |ContentType for the output rendering (defaults to `text/html`, can also be `text/plain` or `text/raw`) |
+|$output |[[ContentType]] for the output rendering (defaults to `text/html`, can also be `text/plain` or `text/raw`) |
 |//parameters// |Macro parameters specified as attributes |

@@ -5,7 +5,7 @@ tags: WikiText
 title: Typed Blocks in WikiText
 type: text/vnd.tiddlywiki
 
-WikiText can include blocks of text that are rendered with an explicit ContentType like this:
+[[WikiText]] can include blocks of text that are rendered with an explicit ContentType like this:
 
 !! Image SVG
 
@@ -17,7 +17,7 @@ WikiText can include blocks of text that are rendered with an explicit ContentTy
 $$$
 """>>
 
-It is also possible to abbreviate the ContentType to a file extension. For example:
+It is also possible to abbreviate the [[ContentType]] to a file extension. For example:
 
 <<wikitext-example-without-html
 """$$$.svg

@@ -79,10 +79,10 @@ The immediate prompt for starting to fix these issue now is that Chrome v100 [[i
 
 ! Widget Improvements
 
-* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/commit/66ae1d6930796a9eb062fdb64a755adab8f39294">> classes to the ImageWidget to indicate whether it is loading, loaded or has encountered an error
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6389">> RadioWidget not using default value if the field or index is missing
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6426">> issue with ImportVariablesWidget when importing block mode widgets
-* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6480">> DraggableWidget to support an optional drag handle
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/commit/66ae1d6930796a9eb062fdb64a755adab8f39294">> classes to the [[ImageWidget]] to indicate whether it is loading, loaded or has encountered an error
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6389">> [[RadioWidget]] not using default value if the field or index is missing
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6426">> issue with [[ImportVariablesWidget]] when importing block mode widgets
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6480">> [[DraggableWidget]] to support an optional drag handle
 
 ! Filter improvements
 
@@ -103,7 +103,7 @@ The immediate prompt for starting to fix these issue now is that Chrome v100 [[i
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6410">> support to [[WidgetMessage: tm-scroll]] for scrolling without animating
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/commit/1d16206188ebd5ca7481a7f565bf5fc4c08239fd">> support for [[WidgetMessage: tm-relink-tiddler]]
 * <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6470">> [[WidgetMessage: tm-open-window]] to support 'top' and 'left' parameters
-* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6523">> new ''matchSelector'' attribute to the EventCatcherWidget
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6523">> new ''matchSelector'' attribute to the [[EventCatcherWidget]]
 
 ! Developer Improvements
 
@@ -126,12 +126,12 @@ The immediate prompt for starting to fix these issue now is that Chrome v100 [[i
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6395">> processing of $:/tags/RawMarkupWikified/TopHead tiddlers
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6398">> issue whereby renaming tags could result in duplicate tags
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6440">> search results obscured on narrow screens
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6540">> ActionListopsWidget bug with input list items starting with `-`, `+`, `~`, `:` or other character with a special meaning in filters
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/28a91aafa74da04842dbff4b8d0eb7a8dad5dbaa">> (and [[here|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6531]]) refreshing of the ButtonWidget when the `default` attribute changes
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6540">> [[ActionListopsWidget]] bug with input list items starting with `-`, `+`, `~`, `:` or other character with a special meaning in filters
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/28a91aafa74da04842dbff4b8d0eb7a8dad5dbaa">> (and [[here|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6531]]) refreshing of the [[ButtonWidget]] when the `default` attribute changes
 
 ! Acknowledgements
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 <<.contributors """
 benwebber

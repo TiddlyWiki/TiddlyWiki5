@@ -24,11 +24,11 @@ The Tiddloid and Tiddloid Lite app are Android apps that makes it possible to ed
 * Fork interesting ~Tiddlywikis from internet  (Supports TW5 only)
 * TiddlyWiki detection
 * Locally stored ~Tiddlywikis are updated simultaneously on saving changes to ~TiddlyWikis imported to the app
-* Backup system that is compatible with TiddlyDesktop, the desktop TiddlyWiki saver
+* Backup system that is compatible with [[TiddlyDesktop]], the desktop [[TiddlyWiki]] saver
 * Creating shortcuts to existing ~TiddlyWiki  on Android Homepage
 * [[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]] supports cloud storages like GDrive and ~OneDrive
 
 !!! Please note
 
-* Tiddloid Lite feature better support for devices running Android Q or later. It also supports cloud storages like GDrive and ~OneDrive, while Tiddloid keeps the compatibility to TiddlyWikiClassic. To know more about differences between Tiddloid and  Tiddloid Lite, please visit [[Tiddloid's homepage|https://github.com/donmor/Tiddloid]].
+* Tiddloid Lite feature better support for devices running Android Q or later. It also supports cloud storages like GDrive and ~OneDrive, while Tiddloid keeps the compatibility to [[TiddlyWikiClassic]]. To know more about differences between Tiddloid and  Tiddloid Lite, please visit [[Tiddloid's homepage|https://github.com/donmor/Tiddloid]].
 * You should keep the `.html` or `.htm` extension of the files to be imported.

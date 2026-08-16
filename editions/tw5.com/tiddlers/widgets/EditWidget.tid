@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The edit widget provides a general purpose interface for editing a tiddler. It dynamically chooses the appropriate widget depending on the type of the tiddler (currently either the EditTextWidget or the EditBitmapWidget).
+The edit widget provides a general purpose interface for editing a tiddler. It dynamically chooses the appropriate widget depending on the type of the tiddler (currently either the [[EditTextWidget]] or the [[EditBitmapWidget]]).
 
 ! Content and Attributes
 

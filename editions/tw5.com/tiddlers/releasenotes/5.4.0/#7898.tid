@@ -7,5 +7,5 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/7898
 github-contributors: yaisog
 
-The attribute `clamp` is added to the RevealWidget to force the popup to be displayed inside its container without overflowing. The value can be `right`, `bottom` or `both`.
+The attribute `clamp` is added to the [[RevealWidget]] to force the popup to be displayed inside its container without overflowing. The value can be `right`, `bottom` or `both`.
 Clamping to left and top can be accomplished via the `positionAllowNegative` attribute.

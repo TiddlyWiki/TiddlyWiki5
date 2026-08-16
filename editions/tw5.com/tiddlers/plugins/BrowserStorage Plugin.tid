@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 The ~BrowserStorage Plugin enables TiddlyWiki to save tiddlers in [[browser local storage|https://en.wikipedia.org/wiki/Web_storage#localStorage]]. This means that changes are stored within the browser, and automatically re-applied any time the base wiki is reloaded.
 
-Browser local storage is not a panacea for TiddlyWiki:
+Browser local storage is not a panacea for [[TiddlyWiki]]:
 
 * Browsers limit the amount of local storage available to a page, typically to 5 or 10MB
 * Keeping personal data in browser local storage can lead to unexpected privacy violations

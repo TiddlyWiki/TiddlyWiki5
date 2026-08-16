@@ -73,7 +73,7 @@ Yes, it's that simple. BUT...  in ~TiddlyWiki there are some small differences f
 * Unlike standard HTML5, ~TiddlyWiki anchor links are case sensitive. In the example above #Bottom_of_tiddler works, but #bottom_of_Tiddler wouldn't.
 * Avoid using the % character in your link, as some browsers have a bug where navigation to anchors containing a % character can sometimes fail (see warning below).
 * <a id=<<qualify #note.1-return>>/>Avoid using any whitespace in your link (see <a href=<<qualify ##note.1>> title="click to go to note 1.">note 1</a> below).
-* Each link address should be unique in the TiddlyWiki.  If transclusions create multiple instances of the same <<.attr id>> attribute, navigation will take place to the first instance found that satisfies the above criteria. To avoid this, you can use the [[qualify macro|qualify Macro]] in both the <<.attr id>> and the <<.attr href>> attributes in a similar style to the example given below: <a href=<<qualify ##qualify-example>> >Avoiding duplicate IDs when transcluding</a>.
+* Each link address should be unique in the [[TiddlyWiki]].  If transclusions create multiple instances of the same <<.attr id>> attribute, navigation will take place to the first instance found that satisfies the above criteria. To avoid this, you can use the [[qualify macro|qualify Macro]] in both the <<.attr id>> and the <<.attr href>> attributes in a similar style to the example given below: <a href=<<qualify ##qualify-example>> >Avoiding duplicate IDs when transcluding</a>.
 
 ''Step 2:'' Creating the link to the target
 

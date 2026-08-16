@@ -8,7 +8,7 @@ Version 5.0.8-beta includes some changes that can break content from earlier rel
 
 ! Change to [[$:/SiteTitle]] and [[$:/SiteSubtitle]]
 
-You should rename any existing SiteTitle and SiteSubtitle tiddlers to [[$:/SiteTitle]] and [[$:/SiteSubtitle]] respectively.
+You should rename any existing [[SiteTitle]] and [[SiteSubtitle]] tiddlers to [[$:/SiteTitle]] and [[$:/SiteSubtitle]] respectively.
 
 ! Changed parsing rules for content of HTML elements
 
@@ -20,7 +20,7 @@ Version 5.0.8-beta marks a change in the way that TiddlyWiki determines whether 
 
 It's important to be able to control which type of parsing is performed for different situations.
 
-Prior to 5.0.8-beta, TiddlyWiki parsed the content of an element in inline mode unless the opening tag of the element were immediately followed by a line break. This meant that much of the time element tags would be shunted together into a long line, hindering readability.
+Prior to 5.0.8-beta, [[TiddlyWiki]] parsed the content of an element in inline mode unless the opening tag of the element were immediately followed by a line break. This meant that much of the time element tags would be shunted together into a long line, hindering readability.
 
 The new behaviour for 5.0.8-beta is to parse the content of an element in inline mode unless the opening tag is immediately followed by two line breaks.
 
@@ -54,7 +54,7 @@ And a paragraph of text.
 
 ! Changed commands for [[TiddlyWiki on Node.js]]
 
-The handling of wiki folders has changed. Previously, if the `tiddlywiki` command was run against a wiki folder that didn't have the necessary `tiddlywiki.info` file then it would be automatically created. Now, the wiki folder must be initialised with the InitCommand.
+The handling of wiki folders has changed. Previously, if the `tiddlywiki` command was run against a wiki folder that didn't have the necessary `tiddlywiki.info` file then it would be automatically created. Now, the wiki folder must be initialised with the [[InitCommand]].
 
 This is how to create and start a new server-based wiki:
 
