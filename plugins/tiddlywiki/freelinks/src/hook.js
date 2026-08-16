@@ -153,7 +153,7 @@ function titleOptions(widget,text,ignoreCase,info,linkInHeadings) {
 	var options = {
 		info: info,
 		ignoreCase: ignoreCase,
-		useWordBoundary: wiki.getTiddlerText(WORD_BOUNDARY_TIDDLER,"no") === "yes",
+		useWordBoundary: wiki.getTiddlerText(WORD_BOUNDARY_TIDDLER,"yes") === "yes",
 		maxLinks: maxLinks,
 		linkNumbers: wiki.getTiddlerText(LINK_NUMBERS_TIDDLER,"no") === "yes",
 		linkInHeadings: linkInHeadings,
