@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/freelinks/macros/view
 tags: $:/tags/Macro/View
+code-body: yes
 
 <$set name="tv-freelinks" value={{$:/config/Freelinks/Enable}} emptyValue="yes">
 <$set name="tv-freelinks-ignore-case" value={{$:/config/Freelinks/IgnoreCase}}/>
