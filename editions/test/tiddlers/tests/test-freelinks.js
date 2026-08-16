@@ -157,6 +157,30 @@ describe("Freelinks", function() {
 			.toBe("<p>🍎🍏 [[中文標題]] tail</p>");
 	});
 
+	// The matcher keeps each node's patterns under a reserved key, which used to be "$". A
+	// title containing that character overwrote the list with a child node, so creating both
+	// "US" and "US$" threw from addPattern and broke rendering, not just freelinking.
+	it("should match titles containing the matcher's reserved character", function() {
+		var wiki = makeWiki();
+		wiki.addTiddler({title: "US", text: "placeholder"});
+		wiki.addTiddler({title: "US$", text: "placeholder"});
+		expect(render(wiki,"prices in US$ today")).toBe("<p>prices in [[US$]] today</p>");
+		expect(render(wiki,"the US economy")).toBe("<p>the [[US]] economy</p>");
+	});
+
+	// PR #9676 folded the text one character at a time to stop an index desync, but kept
+	// folding patterns as one string. "İ" folds to "i" plus a combining dot, so "İstanbul"
+	// sat in a different space from its own pattern and could never match itself.
+	it("should match a title whose case folding changes its length", function() {
+		var wiki = makeWiki();
+		wiki.addTiddler({title: "İstanbul", text: "placeholder"});
+		var ignoreCase = {"tv-freelinks-ignore-case": "yes"};
+		expect(render(wiki,"İstanbul here",null,ignoreCase)).toBe("<p>[[İstanbul]] here</p>");
+		// a later match must not be shifted by the expansion that precedes it
+		expect(render(wiki,"İstanbul and Homer",null,ignoreCase))
+			.toBe("<p>[[İstanbul]] and [[Homer]]</p>");
+	});
+
 	it("should not link inside headings unless LinkInHeadings is set", function() {
 		var wiki = makeWiki();
 		expect(render(wiki,"!! The works of Homer")).toBe("<h2>The works of Homer</h2>");

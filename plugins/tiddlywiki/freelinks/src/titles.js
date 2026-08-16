@@ -10,7 +10,8 @@ text widget and by the indexer that keeps the automaton alive across tiddler wri
 
 "use strict";
 
-var AhoCorasick = require("$:/core/modules/utils/aho-corasick.js").AhoCorasick;
+var AhoCorasick = require("$:/core/modules/utils/aho-corasick.js").AhoCorasick,
+	foldCase = require("$:/core/modules/utils/aho-corasick.js").foldCase;
 
 var TITLE_TARGET_FILTER = "$:/config/Freelinks/TargetFilter";
 
@@ -77,7 +78,9 @@ exports.buildTitleInfo = function(sourceTitles,ignoreCase) {
 	var ac = new AhoCorasick();
 	for(var j = 0; j < sortedTitles.length; j++) {
 		var title = sortedTitles[j];
-		ac.addPattern(ignoreCase ? title.toLowerCase() : title,j);
+		// Must fold exactly as search does, or the pattern and the text end up in different
+		// spaces and a title such as "İstanbul" cannot match itself
+		ac.addPattern(ignoreCase ? foldCase(title) : title,j);
 	}
 
 	try {
