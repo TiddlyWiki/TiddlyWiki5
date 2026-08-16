@@ -1,0 +1,31 @@
+title: ButtonWidget/Example/Accessibility
+description: Add accessibility and metadata attributes such as aria-label, role, tabindex and data
+modified: 20260724235815000
+tags: [[$:/tags/wiki-test-spec]]
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+A button can carry accessibility and metadata attributes that pass straight through to the HTML element. They have no visible effect, so this example shows the markup rather than a result:
+
+* `aria-label` gives an accessible name when the label is only an icon
+* `role` overrides the implied ARIA role
+* `tabindex` sets the keyboard focus order
+* `data-*` attaches custom data attributes for scripts
+* `selectedAria` chooses which ARIA state `selectedClass` toggles
+
+Inspect the button in your browser to see the attributes on the element.
++
+title: Output
+
+<$wikify name="button-accessibility" mode="inline" output="html"
+text="""<$button aria-label="Close"
+	role="button"
+	tabindex="0"
+	data-action="close"
+>
+	×
+</$button>
+""">
+<$text text=<<button-accessibility>>/>
+</$wikify>
