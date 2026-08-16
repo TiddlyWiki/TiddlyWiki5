@@ -1,0 +1,106 @@
+code-body: yes
+created: 20260429000000000
+modified: 20260429012134364
+title: TestCases/StaticTabs/Pitch
+type: text/vnd.tiddlywiki-multiple
+
+title: StaticTabs
+caption: Static Tabs
+
+!! Static Tabs.
+
+A teaser ;)
+
+<$transclude $variable="tabs"
+	tabsList="[[Survive]] [[Meet]] [[TwoModes]] [[HeadingsThatNest]] [[OneVariable]]"
+	default="Survive"
+	state="$:/state/pitch/level1"
+	class=<<pitch-class>>
+/>
+
++
+title: Survive
+caption: Survive
+
+!! Tabs that survive the journey from interactive to static.
+
+If tabs are how you organise. They keep ideas tidy. They show one thing at a time. They feel right — until the moment you publish.
+
+Because the moment you build a static site, the moment you print, the moment a search engine looks at your page, only the //first// tab remains. Every other tab is gone. Hidden by ~JavaScript that isn't running. Lost.
+
+Until now.
+
++
+title: Meet
+caption: Meet
+
+!! Meet Static Tabs.
+
+A new way for `<<tabs>>` to render itself. Same macro. Same call. Same tab list. But when the moment is right — when you're publishing, not browsing — every tab unfolds into a beautiful, complete, self-contained section.
+
+You don't change a thing.
+
++
+title: TwoModes
+caption: Two modes
+
+!! Two modes. Both gorgeous.
+
+''Sections.'' Each tab becomes a card. A heading on top, the content below. Every reader sees every tab, in order, in full.
+
+''Details.'' Each tab becomes a `<details>` element. Native HTML. Native interactivity. Click to collapse, click to expand. No JavaScript required — ever.
+
+You pick. The macro adapts.
+
++
+title: HeadingsThatNest
+caption: Headings
+
+!! Headings that just nest.
+
+When a tab gets its own heading, what happens to the headings inside it? They demote. Automatically. An `h2` becomes an `h3`. An `h3` becomes an `h4`. Your document outline stays clean, all the way down.
+
+Even when tabs nest inside tabs, headings keep their place.
+
++
+title: OneVariable
+caption: One variable
+
+!! One variable. That's it.
+
+`tv-config-static="yes"` — already set during static-render. Do nothing, and your interactive tabs print themselves into beautiful static HTML. Add a single `<$let>` block, and you turn any page into a printable document.
+
+That's the whole API.
+
+<$transclude $variable="tabs"
+	tabsList="[[BuiltForTW]] [[YouKnow]] [[FinallyPublishable]]"
+	default="BuiltForTW"
+	state="$:/state/pitch/level2"
+/>
+
++
+title: BuiltForTW
+caption: Built for TW
+
+!! Built for the way TiddlyWiki actually works.
+
+It uses the colour palette. So it themes. It uses `tv-adjust-heading-level`. So it nests. It uses `<details>`. So it prints, accordions, and works without JS.
+
+It is not a plugin. It is not a workaround. It may be a part of `$:/core`.
+
++
+title: YouKnow
+caption: You know it
+
+!! You already know how to use it.
+
+If you know `<<tabs>>`, you know Static Tabs. There is nothing new to learn — only something old to discover printing the way you always hoped it would.
+
+It's here. It's in core (maybe ;). It's yours.
+
++
+title: FinallyPublishable
+caption: Publishable
+static-adjust-heading-level: -2
+
+!! Tabs, finally publishable.
