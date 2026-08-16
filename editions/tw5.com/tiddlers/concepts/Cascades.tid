@@ -31,7 +31,7 @@ The [[Story Tiddler Template Cascade]] contains the logic for determining a tidd
 
 !! Usage in the core
 
-The TiddlyWiki core uses cascades to choose the following elements:
+The [[TiddlyWiki]] core uses cascades to choose the following elements:
 
 |[[Story Tiddler Template Cascade]] |The template used to display a particular tiddler in the story river. By default, the edit template is chosen for draft tiddlers, and the view template for others |
 |[[Tiddler Icon Cascade]] |The optional icon associated with a particular tiddler (displayed alongside the title) |

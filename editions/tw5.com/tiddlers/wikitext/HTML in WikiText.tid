@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! HTML tags and comments
 
-HTML tags and comments can be used directly in WikiText. For example:
+HTML tags and comments can be used directly in [[WikiText]]. For example:
 
 ```
 <article class="hello">
@@ -86,7 +86,7 @@ The advantage of this syntax is that it simplifies assigning computed values to 
 <div style.color={{!!color}}>Hello</div>
 ```
 
-<<.from-version "5.3.6">> TiddlyWiki also supports setting [[CSS custom properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties]] as independent attributes. For example:
+<<.from-version "5.3.6">> [[TiddlyWiki]] also supports setting [[CSS custom properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties]] as independent attributes. For example:
 
 ```
 <div --bg-color={{{ [[red]] }}}>Hello</div>

@@ -17,7 +17,7 @@ Start a title with its most distinctive part. For instance, the tiddlers documen
 
 Avoid starting a title with the word <<.word the>>.
 
-In the past, many tiddlers had CamelCase titles. This is gradually being phased out of the documentation to improve readability. ~CamelCase titles should no longer be used, even for tags, except in cases like <<.tid ~JavaScript>> where that is the standard spelling.
+In the past, many tiddlers had [[CamelCase]] titles. This is gradually being phased out of the documentation to improve readability. ~CamelCase titles should no longer be used, even for tags, except in cases like <<.tid ~JavaScript>> where that is the standard spelling.
 
 [[Instruction tiddlers|Instruction Tiddlers]] often have longer titles that can be more complicated than just a noun phrase, e.g. <<.tid "Ten reasons to switch to ~TiddlyWiki">>. These titles use sentence case, i.e. only the first word (and any proper names) starts with a capital letter.
 

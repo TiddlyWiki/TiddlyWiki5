@@ -16,7 +16,7 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 
 |!Attribute |!Description |
 |<<.attr state>> |A TextReference containing the state |
-|<<.attr stateTitle>> |A title containing the state, without TextReference. Gets preferred over the <<.attr state>> attribute if both are set |
+|<<.attr stateTitle>> |A title containing the state, without [[TextReference]]. Gets preferred over the <<.attr state>> attribute if both are set |
 |<<.attr stateField>> |A field name which is used to look for the state, if the attribute <<.attr stateTitle>> is present |
 |<<.attr stateIndex>> |An index which is used to look for the state, if the attribute <<.attr stateTitle>> is present |
 |<<.attr default>> |Default value to use when the state tiddler is missing |
@@ -45,7 +45,7 @@ The <<.attr type>> of the widget determines the condition for the content being 
 
 * <<.value match>>: the content is displayed if the state tiddler matches the text attribute value
 * <<.value nomatch>>: the content is displayed if the state tiddler doesn't match the text attribute value
-* <<.value popup>>: the content is displayed as a popup as described in the PopupMechanism
+* <<.value popup>>: the content is displayed as a popup as described in the [[PopupMechanism]]
 * <<.value lt>>: the content is displayed if the state tiddler contains an integer with a value ''less than'' the text attribute value
 * <<.value gt>>: the content is displayed if the state tiddler contains an integer with a value ''greater than'' the text attribute value
 * <<.value lteq>>: the content is displayed if the state tiddler contains an integer with a value ''less than or equal to'' the text attribute value

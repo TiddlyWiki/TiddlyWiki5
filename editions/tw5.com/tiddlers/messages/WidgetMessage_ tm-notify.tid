@@ -11,4 +11,4 @@ The notify message briefly displays a specified tiddler as a small alert in the 
 |param |Title of the tiddler to be displayed |
 |//{any other params}// |Any other parameters are made available as variables to the notify message. |
 
-The notify message is handled by the TiddlyWiki core.
+The notify message is handled by the [[TiddlyWiki]] core.

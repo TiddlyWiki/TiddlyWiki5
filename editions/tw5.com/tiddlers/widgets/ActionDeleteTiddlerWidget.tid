@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The ''action-deletetiddler'' widget is an [[action widget|ActionWidgets]] that deletes tiddlers. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+The ''action-deletetiddler'' widget is an [[action widget|ActionWidgets]] that deletes tiddlers. ActionWidgets are used within triggering widgets such as the [[ButtonWidget]].
 
 There are several differences compared to the [[WidgetMessage: tm-delete-tiddler]]:
 

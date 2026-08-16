@@ -11,4 +11,4 @@ The `tm-close-tiddler` message removes a specified tiddler from the story list. 
 |param |Title of the tiddler that is to be closed |
 |tiddlerTitle |Fallback title that is used if ''param'' isn't specified (automatically set by the ButtonWidget)  |
 
-The close tiddler message is usually generated with the ButtonWidget and is handled by the NavigatorWidget.
+The close tiddler message is usually generated with the [[ButtonWidget]] and is handled by the [[NavigatorWidget]].

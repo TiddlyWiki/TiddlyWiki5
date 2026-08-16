@@ -4,7 +4,7 @@ tags: Pragmas
 title: Pragma: \function
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.3.0">> The ''\function'' [[pragma|Pragmas]] is used to [[define custom functions|Functions]]. It is a shortcut syntax for the SetVariableWidget.
+<<.from-version "5.3.0">> The ''\function'' [[pragma|Pragmas]] is used to [[define custom functions|Functions]]. It is a shortcut syntax for the [[SetVariableWidget]].
 
 The usual form allows custom functions to span multiple lines:
 

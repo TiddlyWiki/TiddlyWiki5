@@ -77,7 +77,7 @@ New and improved translations:
 * [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3832]] the [[palette manager|$:/PaletteManager]] with the ability to delete entries, and directly edit indirect entries
 * Several new palettes: "Nord", "Solarized Light", "Spartan Day", "Spartan Night" and "Twilight"
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5a37a84a54f2dc9ccf106309b739cfa693bae3e3]] the plugin library to search all plugin fields
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e5f3301c1c36e8add4ed89ab1bd53a9b68411d3f]] a warning when core JavaScript modules are overwritten via import
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e5f3301c1c36e8add4ed89ab1bd53a9b68411d3f]] a warning when core [[JavaScript]] modules are overwritten via import
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3654]] prompt for references when renaming a tiddler
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0e6855eba8945e023cc5ef19809cfb6d6025627b]] a new filter preset for advanced search for "tiddlers modified this session"
 * Added a number of animations (some of were already present but had been broken over the years) for changes in:
@@ -98,17 +98,17 @@ New and improved translations:
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/36e76429b1a1d4638374d513430393db5693b932]] new `[is[variable]]` option to the [[is Operator]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/90684f9f52809ff5df39629d3b161d7ff23002f4]] new `[is[blank]]` option to the [[is Operator]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/94f143bf643e36e817d1dd5b678515853eed6aca]] optional autofocus for the text inputs in $:/AdvancedSearch (controlled by the same [[Hidden Setting: Search AutoFocus]] as the sidebar search)
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3756]] optional ''tabindex'' attribute to simple, framed and CodeMirror text editor engines
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3756]] optional ''tabindex'' attribute to simple, framed and [[CodeMirror]] text editor engines
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3758]] ''tabindex'' attributes to edit templates
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3822]] outline colour to button, textarea, input
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/477c41f84304ed83245c87068dba3695a5053d62]] ''tooltip'' attribute to SelectWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/477c41f84304ed83245c87068dba3695a5053d62]] ''tooltip'' attribute to [[SelectWidget]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/348a0bc8bcbf5c42d9b93e5e208696d28fc95cb7]] an option for plugins to disable the initial navigation at startup
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c036c228269fc30d0df770a7c7713fd9af829df7]] $:/info/browser/language to the InfoMechanism
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f047e7cbf50edcf4775b50bdebc3f704970b8cde]] an example of using StartupActions to set the default language
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c036c228269fc30d0df770a7c7713fd9af829df7]] $:/info/browser/language to the [[InfoMechanism]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f047e7cbf50edcf4775b50bdebc3f704970b8cde]] an example of using [[StartupActions]] to set the default language
 * [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/edd3156430dd94b0ced630a1b70f2e2ef0ff6c36]] importing of JSON files to verify whether they are valid tiddler files, and import them as plain JSON if not
-* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/issues/3974]] the LinkWidget to use the title of the target tiddler as a default if it has no content
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/issues/3974]] the [[LinkWidget]] to use the title of the target tiddler as a default if it has no content
 * [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/2a4c60b23dc1436af6206fad5a56742550eac1a3]] [[WidgetMessage: tm-open-window]] to allow a window title to be specified
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8e7c0907f8cce4708a02486fc93dcea1ab115196]] ''checkActions'' attribute to the CheckboxWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8e7c0907f8cce4708a02486fc93dcea1ab115196]] ''checkActions'' attribute to the [[CheckboxWidget]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3afaa9de9aaae7654c1d03ddc22ee97724cbb159]] support for searches anchored to the start of a field
 
 !! Bug Fixes
@@ -116,7 +116,7 @@ New and improved translations:
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8b04cfd4d5142a957f2e3da80c3f079e215b9e75]] a long standing problem with the main standalone HTML file template whereby raw markup tiddlers would be included even if not selected by the save filter
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3572]] overlapping dropdowns with sticky titles enabled
 * [[Removed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3749]] apparently obsolete limitation of selection wrapping in text editor
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3745]] bug in RevealWidget when stateTitle tiddler is missing
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3745]] bug in [[RevealWidget]] when stateTitle tiddler is missing
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/72f2a9425197b013ab3664e1679c6763d92d4382]] bug with animation duration being blank
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3806]] Firefox problem with drag and drop placeholders in the "open" tab of the sidebar
 * [[Ameliorated|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3809]] Firefox problem with sticky placeholder during drag and drop operations
@@ -125,15 +125,15 @@ New and improved translations:
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3611]] framed text editor to use correct background colour
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f5b25994322e58de84cae70ab67a68b1413db27f]] problem with the class `tc-sidebar-lists` being used on two different areas of the sidebar, making it impossible to distinguish them in CSS selectors
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7f78065992baf290ae221fb12c63e52e0f8da403]] problem with unnecessary "list" field created when renaming tiddlers
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/394725f00cd8f38089d2840aa026d72c88627bff]] crash with EditBitmapWidget and missing tiddlers
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/394725f00cd8f38089d2840aa026d72c88627bff]] crash with [[EditBitmapWidget]] and missing tiddlers
 
 !! Node.js Bug Fixes and Improvements
 
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/373afd72c804b0ffa2779849ba0d278d53e65df4]] new SaveWikiFolderCommand to save a wiki as a [[wiki folder|TiddlyWikiFolders]]
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5b09881679200dc78e5962a0588c8f214ddedbbb]] new DeleteTiddlersCommand
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/373afd72c804b0ffa2779849ba0d278d53e65df4]] new [[SaveWikiFolderCommand]] to save a wiki as a [[wiki folder|TiddlyWikiFolders]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5b09881679200dc78e5962a0588c8f214ddedbbb]] new [[DeleteTiddlersCommand]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8c72a28f0c70e6a62387ccdd1431f9225a5fd2de]] (and [[also here|https://github.com/TiddlyWiki/TiddlyWiki5/commit/feab75a6d1723cd6db5912b2902f0ec33c550fb6]]) ability to specify plugins on the command line (see [[Using TiddlyWiki on Node.js]])
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3677]] support for deflate and gzip compression to the WebServer ListenCommand
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/12630d4a91b4cc7b1eb846c3afbeda16858df05a]] an option to the LoadCommand to ignore loading errors
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/3677]] support for deflate and gzip compression to the [[WebServer]] [[ListenCommand]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/12630d4a91b4cc7b1eb846c3afbeda16858df05a]] an option to the [[LoadCommand]] to ignore loading errors
 * [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7fcd2f132e91aa375a1fece501b14e991ba1bd4c]] handling of JSON files by the file system adaptor:
 ** Use `.json` files (instead of `.tid`) for any tiddler whose fields contain values that can't be stored as a .tid file
 ** Save `application/json` tiddlers as `.json` files
@@ -144,7 +144,7 @@ New and improved translations:
 
 ! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@00SS|https://github.com/00SS]]
 * [[@admls|https://github.com/admls]]

@@ -49,7 +49,7 @@ The following keyboard events invoke macros whose names are specified in paramet
 |`((input-accept-variant))` |<<allshortcuts input-accept-variant>> |<<.param inputAcceptVariantActions>> |
 |`((input-cancel))` |<<allshortcuts input-cancel>> |<<.param inputCancelActions>> |
 
-<<.var keyboard-driven-input>> can be seen in action as part of various core features in TiddlyWiki, e.g.: the [[search feature|Searching in TiddlyWiki]], the [[tag-picker Macro]], and dropdown interfaces in the [[Editor toolbar]] such as [[Insert link]].
+<<.var keyboard-driven-input>> can be seen in action as part of various core features in [[TiddlyWiki]], e.g.: the [[search feature|Searching in TiddlyWiki]], the [[tag-picker Macro]], and dropdown interfaces in the [[Editor toolbar]] such as [[Insert link]].
 
 !!Minimal ingredients for a demonstration
 

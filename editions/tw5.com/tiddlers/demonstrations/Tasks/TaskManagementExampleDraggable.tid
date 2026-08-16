@@ -4,7 +4,7 @@ tags: Learning
 title: TaskManagementExample (Draggable)
 type: text/vnd.tiddlywiki
 
-This is a version of the TaskManagementExample enhanced with the ability to drag and drop the task list to re-order them.<br>The list uses a the itemTemplate [[TaskManagementExampleDraggableTemplate]] tiddler, which you will also need to experiment yourself.
+This is a version of the [[TaskManagementExample]] enhanced with the ability to drag and drop the task list to re-order them.<br>The list uses a the itemTemplate [[TaskManagementExampleDraggableTemplate]] tiddler, which you will also need to experiment yourself.
 
 ! Outstanding tasks
 

@@ -10,4 +10,4 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.1/#9841
 type: text/vnd.tiddlywiki
 
-Fixes a regression in the SelectWidget when selecting multiple values.
+Fixes a regression in the [[SelectWidget]] when selecting multiple values.

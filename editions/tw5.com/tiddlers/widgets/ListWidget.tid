@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 The list widget displays a sequence of tiddlers that match a [[tiddler filter|Filters]]. It can be used for many purposes:
 
-* Displaying custom lists of links, like in TiddlyWiki5's sidebar
+* Displaying custom lists of links, like in [[TiddlyWiki5]]'s sidebar
 * Custom lists, such as "all tiddlers tagged 'task' that are not tagged 'done'"
 * Listing each of the tags applied to a tiddler
 * Handling the main story river
@@ -64,7 +64,7 @@ Displays as:
 
 !! Grouped Lists
 
-See GroupedLists for how to generate nested and grouped lists using the ListWidget.
+See [[GroupedLists]] for how to generate nested and grouped lists using the ListWidget.
 
 ! Content and Attributes
 
@@ -160,7 +160,7 @@ In order for the storyviews to animate correctly each entry in the list should b
 
 !! History and navigation
 
-The optional `history` attribute specifies the name of a tiddler that is used to track the current tiddler for navigation purposes. When the history tiddler changes the list view responds by telling the listview to handle navigating to the new tiddler. See HistoryMechanism for details.
+The optional `history` attribute specifies the name of a tiddler that is used to track the current tiddler for navigation purposes. When the history tiddler changes the list view responds by telling the listview to handle navigating to the new tiddler. See [[HistoryMechanism]] for details.
 
 !! Additional Notes and Edge Cases
 

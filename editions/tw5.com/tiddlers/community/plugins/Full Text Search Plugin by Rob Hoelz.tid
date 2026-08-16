@@ -5,7 +5,7 @@ title: Full Text Search Plugin by Rob Hoelz
 type: text/vnd.tiddlywiki
 url: https://hoelz.ro/files/fts.html
 
-A plugin to integrate the popular [[lunr.js|https://lunrjs.com/]] search engine, giving TiddlyWiki much more sophisticated search capabilities:
+A plugin to integrate the popular [[lunr.js|https://lunrjs.com/]] search engine, giving [[TiddlyWiki]] much more sophisticated search capabilities:
 
 {{!!url}}
 

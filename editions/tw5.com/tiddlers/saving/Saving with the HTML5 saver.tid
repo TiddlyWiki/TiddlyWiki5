@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 
 This is the default method of saving if no other method is installed. It uses your browser's built-in "download a file" handler, and has the advantage of working on almost all desktop browsers, and many mobile browsers.
 
-# [[Download]] an empty TiddlyWiki by clicking this button:
+# [[Download]] an empty [[TiddlyWiki]] by clicking this button:
 #> {{$:/editions/tw5.com/snippets/download-empty-button}}
 #> If the button doesn't work save this link: https://tiddlywiki.com/empty.html
 #> Your browser may ask you to accept the download before it begins

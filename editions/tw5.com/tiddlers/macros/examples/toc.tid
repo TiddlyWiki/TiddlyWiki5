@@ -15,6 +15,6 @@ You can explore the same structure with these clickable tag pills:
 ** {{Third||$:/core/ui/TagTemplate}}
 ** {{Fourth||$:/core/ui/TagTemplate}}
 
-The tabbed example uses the real TableOfContents of this documentation instead.
+The tabbed example uses the real [[TableOfContents]] of this documentation instead.
 
 <<tabs "[tag[table-of-contents-example]nsort[order]]" "Example Table of Contents: Simple">>

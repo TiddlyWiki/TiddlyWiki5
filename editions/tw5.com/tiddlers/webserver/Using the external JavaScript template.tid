@@ -41,14 +41,14 @@ tiddlywiki ./myNewWiki --build listen
 
 The above commands perform the following:
 
-* Create a new wiki with external JavaScript customisation included.
+* Create a new wiki with external [[JavaScript]] customisation included.
 * Start the server with external ~JavaScript enabled. The server listens on port 8080. Visit http://localhost:8080 in your browser.
 
 To customise your `--build listen` command, see [[tiddlywiki.info Files]] and [[ListenCommand]].
 
 ! Using the external ~JavaScript template with the single file configuration
 
-You can use the "external-js" template with your single file wiki, but this requires that you have ~TiddlyWiki's core ~JavaScript saved alongside your HTML file. You may prefer this configuration, for example, if you have several wikis on a ~WebDav server. (See: [[Saving via WebDAV]])
+You can use the "external-js" template with your single file wiki, but this requires that you have ~TiddlyWiki's core ~JavaScript saved alongside your HTML file. You may prefer this configuration, for example, if you have several wikis on a ~WebDAV server. (See: [[Saving via WebDAV]])
 
 <<.warning "This functionality is intended for advanced users: there are many more ways for things to go wrong than with the standard single file configuration">>
 
@@ -81,7 +81,7 @@ tiddlywiki YOUR_WIKI_FOLDER \
     'text/plain'
 ```
 
-The "server-external-js" edition has a shortcut for the BuildCommand to do the same thing:
+The "server-external-js" edition has a shortcut for the [[BuildCommand]] to do the same thing:
 
 ```
 tiddlywiki YOUR_WIKI_FOLDER --build tiddlywikicore

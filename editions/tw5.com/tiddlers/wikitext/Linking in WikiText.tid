@@ -25,7 +25,7 @@ You can also create a link from the editor toolbar. Click ''link'' (<<.icon $:/c
 
 ! ~CamelCase Links
 
-For tiddler titles that match the CamelCase rules, just typing the title without double square brackets will automatically create a link.
+For tiddler titles that match the [[CamelCase]] rules, just typing the title without double square brackets will automatically create a link.
 
 You can suppress a link from being recognised by preceding it with `~`. For example:
 
@@ -100,7 +100,7 @@ For example, an attempt to use a [[reference|TextReference]] and a [[variable|Va
 
 <<.bad-example "`[[{{!!caption}}|<<currentTiddler>>]]`">>
 
-is the same as trying to use the LinkWidget and TextWidget like this:
+is the same as trying to use the LinkWidget and [[TextWidget]] like this:
 
 <<.bad-example """```
 <$link to="<<currentTiddler>>">
@@ -108,11 +108,11 @@ is the same as trying to use the LinkWidget and TextWidget like this:
 </$link>
 ```""">>
 
-This will not work as desired. Content inside of quoted widget attributes is [[treated as a literal value|HTML in WikiText]] and protected from WikiText expansion, so it will render like this:
+This will not work as desired. Content inside of quoted widget attributes is [[treated as a literal value|HTML in WikiText]] and protected from [[WikiText]] expansion, so it will render like this:
 
 <<.bad-example "[[{{!!caption}}|<<currentTiddler>>]]">>
 
-In order to get the desired result, the LinkWidget can be used directly like this:
+In order to get the desired result, the [[LinkWidget]] can be used directly like this:
 
 <<wikitext-example-without-html src:"<$link to=<<currentTiddler>>>{{!!caption}}</$link>">>
 
@@ -120,6 +120,6 @@ See also another example of [[constructing dynamic links|Concatenating text and 
 
 ! Linking within tiddlers - "anchor links"
 
-In TiddlyWiki anchor links can help us link to target points and distinct sections within rendered tiddlers. They can help the reader navigate longer tiddler content.
+In [[TiddlyWiki]] anchor links can help us link to target points and distinct sections within rendered tiddlers. They can help the reader navigate longer tiddler content.
 
 See [[Anchor Links using HTML]] for more information.

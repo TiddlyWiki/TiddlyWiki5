@@ -4,6 +4,6 @@ tags: WebServer
 title: WebServer API
 type: text/vnd.tiddlywiki
 
-The TiddlyWiki [[WebServer]] API supports the following routes:
+The [[TiddlyWiki]] [[WebServer]] API supports the following routes:
 
 <<list-links "[tag[WebServer API]sort[]]">>

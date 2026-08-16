@@ -4,7 +4,7 @@ tags: [[TiddlyWiki on Node.js]]
 title: NamedCommandParameters
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.1.18">> Most TiddlyWiki [[Commands]] use a position-based system for their parameters where each parameter must be listed in the precise order defined by the command. Some of the more complex commands offer an alternative scheme of named command parameters. For example, here we provide two parameters named "port" and "host":
+<<.from-version "5.1.18">> Most [[TiddlyWiki]] [[Commands]] use a position-based system for their parameters where each parameter must be listed in the precise order defined by the command. Some of the more complex commands offer an alternative scheme of named command parameters. For example, here we provide two parameters named "port" and "host":
 
 ```
 --listen port=8090 host=0.0.0.0

@@ -67,7 +67,7 @@ There are also several examples of `tiddlywiki.files` files in the main [[Tiddly
 
 !! Importing a folder of PDFs
 
-This example retrieves all the files with the extension `.pdf` from a folder specified by a relative path. This path starts with "../../../" indicating 3 directory levels above the folder holding this config file. Each tiddler is set up for LazyLoading with the following fields:
+This example retrieves all the files with the extension `.pdf` from a folder specified by a relative path. This path starts with "../../../" indicating 3 directory levels above the folder holding this config file. Each tiddler is set up for [[LazyLoading]] with the following fields:
 
 * ''title'' - set to the URI decoded base filename of the PDF file. [[URI decoding|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]] allows characters like "/" to be included in titles by URI encoding them as "%2F"
 * ''created'' - set to the creation date/time of the PDF file
@@ -142,7 +142,7 @@ This example imports all the image files in the `files` directory and all its su
 * ''title'' - set to the URI decoded base filename of the text file
 * ''created'' - set to the creation date/time of the text file
 * ''modified'' - set to the modification date/time of the text file
-* ''type'' - set to `image/jpeg`. There is currently no way to infer the correct ContentType of the image tiddler from the file, but `image/jpeg` tiddlers should render correctly even with png or gif images. As an alternative, you could create separate definitions for jpg, png, and gif files with the `image/jpeg`, `image/png`, and `image/gif` types respectively.
+* ''type'' - set to `image/jpeg`. There is currently no way to infer the correct [[ContentType]] of the image tiddler from the file, but `image/jpeg` tiddlers should render correctly even with png or gif images. As an alternative, you could create separate definitions for jpg, png, and gif files with the `image/jpeg`, `image/png`, and `image/gif` types respectively.
 * ''tags'' - generated based on the path of the image relative to the parent directory (`files` in this case). Eg, images in `files/photos` will be tagged with `photos`, those in `files/photos/family` will be tagged with both `photos` and `family`, and those in the root `files` directory will have no tags.
 * ''text'' - set to an empty string
 * ''_canonical_uri'' - set to the full filepath of the image relative to the wiki root

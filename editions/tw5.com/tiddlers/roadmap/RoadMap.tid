@@ -8,7 +8,7 @@ TiddlyWiki was first released in 2013, 9 years after the original [[TiddlyWiki C
 
 Our version numbering follows the form v5.x.0. ~TiddlyWiki is currently on v<<version>>, and so we are currently working towards v5.4.0.
 
-There is a detailed project plan on GitHub, but the major milestones are planned as follows:
+There is a detailed project plan on [[GitHub]], but the major milestones are planned as follows:
 
-* TiddlyWiki v5.4.0 will be followed by further v5.4.x releases to fix bugs and incrementally improve features. If there are significant backwards compatibility concerns then those improvements will be pushed into v5.5.0, the next release to make minor backwards comatibility tweaks.
+* [[TiddlyWiki]] v5.4.0 will be followed by further v5.4.x releases to fix bugs and incrementally improve features. If there are significant backwards compatibility concerns then those improvements will be pushed into v5.5.0, the next release to make minor backwards comatibility tweaks.
 * We'll go on to make v5.6.0, v5.7.0 etc releases until we're ready to release the next major redesign, that is not compromised by backwards compatibility. We are calling this release ~TiddlyWiki XX ("~TiddlyWiki Twenty", or TWXX).

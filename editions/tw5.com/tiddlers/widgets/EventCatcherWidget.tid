@@ -10,9 +10,9 @@ type: text/vnd.tiddlywiki
 
 //This is an advanced widget intended for use by those familiar with HTML, CSS and JavaScript handling of DOM events.//
 
-The event catcher widget traps DOM-initiated Javascript events dispatched within its child content, and allows invoking a series of ActionWidgets in response to those events.
+The event catcher widget traps DOM-initiated Javascript events dispatched within its child content, and allows invoking a series of [[ActionWidgets]] in response to those events.
 
-Use of the event catcher widget is beneficial when using large numbers of other trigger widgets such as the ButtonWidget is causing performance problems. The workflow it enables is akin to what is referred to as "event delegation" in JavaScript parlance.
+Use of the event catcher widget is beneficial when using large numbers of other trigger widgets such as the [[ButtonWidget]] is causing performance problems. The workflow it enables is akin to what is referred to as "event delegation" in JavaScript parlance.
 
 In order for the events to be trapped:
 
@@ -87,10 +87,10 @@ The following variables are made available to the actions:
 |`dom-*` |All DOM attributes of the node matching the given selector are made available as variables, with the prefix `dom-` |
 |`modifier` |The [[modifier Variable]] contains the Modifier Key held during the event |
 |`event-mousebutton` |The mouse button (if any) used to trigger the event (can be "left", "right" or "middle") <<.infoBox """This property is only reliable for events caused by pressing or releasing mouse buttons. It is not reliable for mouseenter, mouseleave, mouseover, mouseout, or mousemove. More details at: https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button""">> |
-|`event-type` |The type property of the JavaScript event. <<.deprecated-since 5.4.0>> Removed in favour of `eventJSON`|
+|`event-type` |The type property of the [[JavaScript]] event. <<.deprecated-since 5.4.0>> Removed in favour of `eventJSON`|
 |`event-detail-*` |Any properties in the detail attribute of the event are made available with the prefix `event-detail-`. <<.deprecated-since 5.4.0>> Removed in favour of `eventJSON` |
 |`tv-popup-coords` |A relative coordinate string that can be used with the ActionPopupWidget |
-|`tv-popup-abs-coords` |<<.from-version "5.2.4">> An absolute coordinate string that can be used with the ActionPopupWidget |
+|`tv-popup-abs-coords` |<<.from-version "5.2.4">> An absolute coordinate string that can be used with the [[ActionPopupWidget]] |
 |`tv-widgetnode-width` |<<.from-version "5.2.3">> `offsetWidth` of the DOM node created by the eventcatcher widget |
 |`tv-widgetnode-height` |<<.from-version "5.2.3">> `offsetHeight` of the DOM node created by the eventcatcher widget |
 |`tv-selectednode-posx` |`x` offset position of the selected DOM node |

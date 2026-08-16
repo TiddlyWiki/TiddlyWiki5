@@ -10,5 +10,5 @@ System tiddlers provide a simple way to hide the internal components of TiddlyWi
 
 Many of the system tiddlers follow the convention of using further slashes to delineate the components of the title. For example: `$:/config/BitmapEditor/LineWidth`.
 
-You don't need to create your own system tiddlers, but it can be useful when customising TiddlyWiki. For example, if you create a custom palette you might call it `$:/_MyPalette` so that (a) it is hidden from searches/lists and (b) it will appear at the top of the system tiddler list for easy reference.
+You don't need to create your own system tiddlers, but it can be useful when customising [[TiddlyWiki]]. For example, if you create a custom palette you might call it `$:/_MyPalette` so that (a) it is hidden from searches/lists and (b) it will appear at the top of the system tiddler list for easy reference.
 

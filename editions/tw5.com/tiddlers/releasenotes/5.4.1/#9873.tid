@@ -10,5 +10,5 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.4.1/#9873
 type: text/vnd.tiddlywiki
 
-Restores the missing KaTeX_Caligraphic-Regular.woff2
+Restores the missing [[KaTeX]]_Caligraphic-Regular.woff2
  font in the Katex plugin

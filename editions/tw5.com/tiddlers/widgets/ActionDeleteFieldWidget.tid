@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The ''action-deletefield'' widget is an [[action widget|ActionWidgets]] that deletes specified fields of a tiddler. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+The ''action-deletefield'' widget is an [[action widget|ActionWidgets]] that deletes specified fields of a tiddler. ActionWidgets are used within triggering widgets such as the [[ButtonWidget]].
 
 ! Content and Attributes
 

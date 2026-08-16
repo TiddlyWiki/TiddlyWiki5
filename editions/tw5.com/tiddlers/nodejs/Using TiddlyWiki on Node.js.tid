@@ -4,7 +4,7 @@ tags: [[TiddlyWiki on Node.js]]
 title: Using TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
-~TiddlyWiki5 includes a set of commands for use on the command line to perform an extensive set of operations based on TiddlyWikiFolders, TiddlerFiles.
+~TiddlyWiki5 includes a set of commands for use on the command line to perform an extensive set of operations based on TiddlyWikiFolders, [[TiddlerFiles]].
 
 For example, the following command loads the tiddlers from a ~TiddlyWiki HTML file and then saves one of them in static HTML:
 
@@ -32,7 +32,7 @@ tiddlywiki +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb mywiki -
 tiddlywiki ++./mygreatplugin mywiki --listen
 ```
 
-<<.from-version "5.1.18">> Commands such as the ListenCommand that support large numbers of parameters can use NamedCommandParameters to make things less unwieldy. For example:
+<<.from-version "5.1.18">> Commands such as the [[ListenCommand]] that support large numbers of parameters can use [[NamedCommandParameters]] to make things less unwieldy. For example:
 
 ```
 tiddlywiki wikipath --listen username=jeremy port=8090

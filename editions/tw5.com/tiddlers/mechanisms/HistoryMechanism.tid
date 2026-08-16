@@ -28,7 +28,7 @@ Which renders the same as the "Open" sidebar tab, with the addition of a tick ag
 
 !! Empty Story
 
-To display content when the story is empty, create $:/config/EmptyStoryMessage and enter the desired contents. The following would show the GettingStarted tiddler when all others are closed.
+To display content when the story is empty, create $:/config/EmptyStoryMessage and enter the desired contents. The following would show the [[GettingStarted]] tiddler when all others are closed.
 
 ```
 {{GettingStarted||$:/core/ui/ViewTemplate}}

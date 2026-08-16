@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-<<.from-version "5.1.23">>The ''action-confirm'' widget is an [[action widget|ActionWidgets]] that prompts the user for confirmation and invokes other action widgets contained within it only if the user confirms. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+<<.from-version "5.1.23">>The ''action-confirm'' widget is an [[action widget|ActionWidgets]] that prompts the user for confirmation and invokes other action widgets contained within it only if the user confirms. ActionWidgets are used within triggering widgets such as the [[ButtonWidget]].
 
 ! Content and Attributes
 
@@ -29,7 +29,7 @@ Delete "caption" and "tags"
 </$action-confirm>
 </$button>'/>
 
-Here is an example of a button that uses the optional `$prompt` attribute to control whether to prompt the user before deleting the text field of the tiddler HelloThere:
+Here is an example of a button that uses the optional `$prompt` attribute to control whether to prompt the user before deleting the text field of the tiddler [[HelloThere]]:
 
 <$macrocall $name='wikitext-example-without-html'
 src='<$button>

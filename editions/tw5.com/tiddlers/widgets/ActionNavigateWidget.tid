@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The ''action-navigate'' widget is an [[action widget|ActionWidgets]] that sends a [[tm-navigate|WidgetMessage: tm-navigate]] message back up the widget tree. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+The ''action-navigate'' widget is an [[action widget|ActionWidgets]] that sends a [[tm-navigate|WidgetMessage: tm-navigate]] message back up the widget tree. ActionWidgets are used within triggering widgets such as the [[ButtonWidget]].
 
 ! Content and Attributes
 

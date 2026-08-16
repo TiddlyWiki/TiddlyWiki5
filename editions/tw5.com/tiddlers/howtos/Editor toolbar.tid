@@ -15,6 +15,6 @@ If you ''highlight'' a piece of text the markup code will automatically go aroun
 
 If you are in another mode, like [[MarkDown|Markdown Plugin]], the toolbar will change to that syntax and insert appropriate code. However It will not change previously typed text or markup.
 
-Besides the standard WikiText formatting, the Editor toolbar has the following buttons:
+Besides the standard [[WikiText]] formatting, the Editor toolbar has the following buttons:
 
 <<list-links "[tag[Editor toolbar]sort[title]]">>

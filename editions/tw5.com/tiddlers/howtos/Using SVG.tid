@@ -4,7 +4,7 @@ tags: Features
 title: Using SVG
 type: text/vnd.tiddlywiki
 
-TiddlyWiki5 allows you to use SVG to display vector graphics in two ways:
+[[TiddlyWiki5]] allows you to use SVG to display vector graphics in two ways:
 
 * Tiddlers with the type `image/svg+xml` are interpreted as SVG images, and displayed and transcluded as self-contained `<img>` elements with the SVG embedded as a data URI in the `src` attribute.
 ** For examples of SVG images see [[Motovun Jack.svg]] and [[Tiddler Fishes.svg]]
@@ -44,7 +44,7 @@ HTML or WikiText content can be included within inline SVG images using the `<fo
 
 ! Transcluding SVG elements
 
-When embedding SVG elements you can also use WikiText features like transclusion. For example, here is an SVG circle with the radius set to the value in the tiddler [[$:/SVGExampleRadius]]:
+When embedding SVG elements you can also use [[WikiText]] features like transclusion. For example, here is an SVG circle with the radius set to the value in the tiddler [[$:/SVGExampleRadius]]:
 
 <svg width="150" height="150"><circle cx="75" cy="75" r={{$:/SVGExampleRadius}} stroke="black" stroke-width="2" fill="green"/></svg>
 

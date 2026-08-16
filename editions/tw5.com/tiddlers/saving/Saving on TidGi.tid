@@ -19,7 +19,7 @@ See its [[readme|https://github.com/tiddly-gittly/TidGi-Desktop#readme]] about d
 !!! How to install
 
 # Install the latest release of TidGi Desktop from {{!!url}}
-# Run TidGi
+# Run [[TidGi]]
 # Create a new wiki, or open an existing nodejs tiddlywiki folder
 # Changes are automatically saved, you can optionally configue it to sync to the github every 30min
 

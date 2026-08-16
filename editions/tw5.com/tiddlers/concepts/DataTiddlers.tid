@@ -8,7 +8,7 @@ A data tiddler is a miniature database contained within a tiddler.
 
 There are two standard formats:
 
-* DictionaryTiddlers
+* [[DictionaryTiddlers]]
 * [[JSONTiddlers]]
 
 Other formats of tiddler can also be parsed to yield blocks of data that behave like data tiddlers.

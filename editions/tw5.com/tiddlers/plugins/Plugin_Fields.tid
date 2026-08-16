@@ -13,7 +13,7 @@ Plugins are stored as tiddlers with the following fields:
 |list |Names of exposed plugin information tiddlers (see below) |
 |name |Brief name of the plugin |
 |plugin-priority |//(optional)// Numerical priority (higher numbers install later, the core plugin has a priority of zero |
-|plugin-type |Generally ''plugin'', ''language'' or ''theme''; see PluginMechanism for details |
+|plugin-type |Generally ''plugin'', ''language'' or ''theme''; see [[PluginMechanism]] for details |
 |parent-plugin |//(optional)// <<.from-version "5.1.22">> Title of the plugin under which this plugin should be displayed as a sub-plugin in the control panel plugin chooser |
 |source |//(optional)// Source URL of plugin |
 |text |JSON encoding of the list of tiddlers comprising the plugin |

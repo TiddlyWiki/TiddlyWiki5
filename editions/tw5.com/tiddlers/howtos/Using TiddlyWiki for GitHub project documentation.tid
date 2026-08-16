@@ -8,7 +8,7 @@ TiddlyWiki5 can be used to produce documentation for GitHub projects. It lets yo
 
 ! Generating `readme.md` files
 
-When displaying the contents of a folder GitHub will look for a `readme.md` file and display it. Note that it will not display full HTML files in this way, just static MarkDown files (this is a security measure). Happily MarkDown permits a safe subset of HTML, and thus to generate a `readme.md` file that is suitable for GitHub it is just necessary for TiddlyWiki5 to generate the content of the `<body>` element of an HTML document, and give it the appropriate filename.
+When displaying the contents of a folder GitHub will look for a `readme.md` file and display it. Note that it will not display full HTML files in this way, just static Markdown files (this is a security measure). Happily [[Markdown]] permits a safe subset of HTML, and thus to generate a `readme.md` file that is suitable for [[GitHub]] it is just necessary for [[TiddlyWiki5]] to generate the content of the `<body>` element of an HTML document, and give it the appropriate filename.
 
 This is done with this command:
 
@@ -18,12 +18,12 @@ This is done with this command:
 
 It saves the tiddler ReadMe to the file `./readme.md` in the `text/html` format.
 
-By default, tiddler links will be rendered as `<a>` links to a relative URI consisting of the title of the tiddler. This behaviour can be overridden by defining the macro `tv-wikilink-template`, as is done at the top of the tiddler ReadMe:
+By default, tiddler links will be rendered as `<a>` links to a relative URI consisting of the title of the tiddler. This behaviour can be overridden by defining the macro `tv-wikilink-template`, as is done at the top of the tiddler [[ReadMe]]:
 
 ```
 \define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
 ```
 
-See the LinkWidget for more details.
+See the [[LinkWidget]] for more details.
 
 In this example, tiddler links are rendered as links to the static rendering of tw5.com.

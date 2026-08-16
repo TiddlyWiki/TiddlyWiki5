@@ -68,7 +68,7 @@ This is <<name>> demonstrates <<desc>>.
 """>>
 
 !! Caution in Using Positional Parameters
-Procedures are a shortcut syntax for the SetVariableWidget with an implicit ParametersWidget, so generally there is no reason to have multiple parameters widgets within a definition. In the below example when passing `x` to `myproc`, it will also be set to `a`:
+Procedures are a shortcut syntax for the [[SetVariableWidget]] with an implicit [[ParametersWidget]], so generally there is no reason to have multiple parameters widgets within a definition. In the below example when passing `x` to `myproc`, it will also be set to `a`:
 
 <<wikitext-example-without-html 
 src:"""\procedure myproc(x:10)

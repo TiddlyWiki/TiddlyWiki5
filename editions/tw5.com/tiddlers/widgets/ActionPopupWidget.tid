@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The ''action-popup'' widget is an [[action widget|ActionWidgets]] that triggers the display of a popup defined via a state tiddler, or clears all displayed popups. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+The ''action-popup'' widget is an [[action widget|ActionWidgets]] that triggers the display of a popup defined via a state tiddler, or clears all displayed popups. ActionWidgets are used within triggering widgets such as the [[ButtonWidget]].
 
 ! Content and Attributes
 

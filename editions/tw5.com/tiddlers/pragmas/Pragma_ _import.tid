@@ -4,7 +4,7 @@ tags: Pragmas
 title: Pragma: \import
 type: text/vnd.tiddlywiki
 
-The ''\import'' [[pragma|Pragmas]] is used to import definitions from other tiddlers that are identified with a filter. It is a shortcut syntax for the ImportVariablesWidget.
+The ''\import'' [[pragma|Pragmas]] is used to import definitions from other tiddlers that are identified with a filter. It is a shortcut syntax for the [[ImportVariablesWidget]].
 
 ```
 \import <filter>

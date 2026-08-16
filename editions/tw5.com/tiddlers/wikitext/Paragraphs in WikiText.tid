@@ -5,7 +5,7 @@ title: Paragraphs in WikiText
 type: text/vnd.tiddlywiki
 caption: Paragraphs
 
-To mark the end of a paragraph in TiddlyWiki you need to type `enter` twice to create a double line break:
+To mark the end of a paragraph in [[TiddlyWiki]] you need to type `enter` twice to create a double line break:
 
 ```
 This is the first paragraph.

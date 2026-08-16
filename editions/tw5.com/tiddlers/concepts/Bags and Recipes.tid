@@ -4,7 +4,7 @@ tags: Concepts
 title: Bags and Recipes
 type: text/vnd.tiddlywiki
 
-The bags and recipes model is a reference architecture for how tiddlers can be shared between multiple wikis. It was first introduced by TiddlyWeb in 2008.
+The bags and recipes model is a reference architecture for how tiddlers can be shared between multiple wikis. It was first introduced by [[TiddlyWeb]] in 2008.
 
 The principles of bags and recipes can be simply stated:
 
@@ -18,7 +18,7 @@ A very simple example of the recipe/bag model might be for a single user who mai
 
 * ''recipes'' - tiddlers related to cooking recipes
 * ''work'' - tiddlers related to work
-* ''app'' - common tiddlers for customising TiddlyWiki
+* ''app'' - common tiddlers for customising [[TiddlyWiki]]
 
 Those bags would be used with the following recipes:
 

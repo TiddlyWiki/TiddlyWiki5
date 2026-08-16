@@ -4,7 +4,7 @@ tags: [[JSON in TiddlyWiki]] Learning
 title: Reading data from JSON tiddlers
 type: text/vnd.tiddlywiki
 
-See [[JSON in TiddlyWiki]] for an overview of using JSON in TiddlyWiki.
+See [[JSON in TiddlyWiki]] for an overview of using JSON in [[TiddlyWiki]].
 
 !! Filter Operators for Accessing JSON Data
 

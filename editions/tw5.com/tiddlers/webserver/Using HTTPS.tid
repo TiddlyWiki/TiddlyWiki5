@@ -4,7 +4,7 @@ tags: [[WebServer Guides]]
 title: Using HTTPS
 type: text/vnd.tiddlywiki
 
-By default, TiddlyWiki's WebServer serves resources over the insecure HTTP protocol. The risk is minimal if it is only being used within a private, trusted network but in many situations it is desirable to use a secure HTTPS connection.
+By default, [[TiddlyWiki]]'s [[WebServer]] serves resources over the insecure HTTP protocol. The risk is minimal if it is only being used within a private, trusted network but in many situations it is desirable to use a secure HTTPS connection.
 
 HTTPS requires the server to be configured with a certificate via a "cert" file and a "key" file, configured via the [[tls-cert|WebServer Parameter: tls-cert]] and [[tls-key|WebServer Parameter: tls-key]] parameters.
 

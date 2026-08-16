@@ -24,7 +24,7 @@ The sidebar tools tab now shows all the available page controls, allowing them t
 
 There are two components:
 
-* A more flexible ImportMechanism that:
+* A more flexible [[ImportMechanism]] that:
 ** Presents incoming tiddlers as a pending import list that allows the user to inspect them and, if necessary, explicitly deselect them from the actual import
 ** Provides UpgraderModules with an opportunity to process each incoming tiddler
 *** The [[plugin upgrader|$:/core/modules/upgraders/plugins.js]] module handles version checking of plugins and upgrading them from a special UpgradeLibrary plugin tiddler
@@ -34,7 +34,7 @@ There are two components:
 
 !!! Improvements to CamelCase Recognition
 
-TiddlyWiki now takes a much more conservative approach to recognising CamelCase terms that should be automatically linked. Previously, the dash and underscore were treated as lower case letters, leading to a number of false positives. See the [[GitHub bug #337|https://github.com/TiddlyWiki/TiddlyWiki5/issues/337]] for details.
+TiddlyWiki now takes a much more conservative approach to recognising [[CamelCase]] terms that should be automatically linked. Previously, the dash and underscore were treated as lower case letters, leading to a number of false positives. See the [[GitHub bug #337|https://github.com/TiddlyWiki/TiddlyWiki5/issues/337]] for details.
 
 !!! Automatic Permalinking Off by Default
 
@@ -55,24 +55,24 @@ For 5.0.14-beta, the setting has been changed. Visit [[control panel|$:/ControlP
 
 !! Hackability Improvements
 
-* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c23f6af4b5c59f4d09dd8d6704e1939bb9d5b2d3]] TiddlerWidget to add a CSS class corresponding to each tag present on displayed tiddlers
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c23f6af4b5c59f4d09dd8d6704e1939bb9d5b2d3]] [[TiddlerWidget]] to add a CSS class corresponding to each tag present on displayed tiddlers
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d357e1706c91d17a72fb19fedf43e57071fc7dd6]] support for hiding specified fields in the tiddler editor
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/be040ea8a2cc8962f1a28a313e4c9ebc2d5c0e31]] support for variable operands in filters (see [[Filter Parameter]])
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1f16ef6fa88b51d2dad7c8e57fcff014950a7442]] support for widget messages [[tw-permalink|WidgetMessage: tw-permalink]] and [[tw-permaview|WidgetMessage: tw-permaview]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/tree/master/plugins/tiddlywiki/browser-sniff]] browser sniffing plugin so that tiddlywiki.com can present the correct browser-specific documentation
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/ef67cc3fd9b267a522598abccdfbb93fbfca240c]] a configuration option for specifying the default location for saving new tiddlers in the client-server configuration
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b4d47858e587c96f3a68cc28cffff181ec45f55f]] support for the InfoMechanism
-* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f08f57c5d24eb0146ac2cb77472a5fc5f135f1e9]] CheckboxWidget to allow it to toggle fields as well as tags
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b4d47858e587c96f3a68cc28cffff181ec45f55f]] support for the [[InfoMechanism]]
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f08f57c5d24eb0146ac2cb77472a5fc5f135f1e9]] [[CheckboxWidget]] to allow it to toggle fields as well as tags
 * [[Refactored|https://github.com/TiddlyWiki/TiddlyWiki5/commit/21c137a66c37f010b36697bb6bed5321138fbb9f]] [[control panel|$:/ControlPanel]] theme tweaks to be stored in individual tiddlers
 * [[Extend|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e18d8a88661a1c2caa1b722841747c75ca6af437]] the <<.mlink tabs>> macro to allow tabs to be templated
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/91acad0f7ce8637945a953dfcb122cd31292626d]] (and [[here|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8612bc4006e717e4fa3c562fa72a85650206b66f]]) SystemTags support for inserting content above and below the story river
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f793816dfa687ae7791143b33487fd5f95f3265c]] support for transcluding plugin subtiddlers with the TranscludeWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/91acad0f7ce8637945a953dfcb122cd31292626d]] (and [[here|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8612bc4006e717e4fa3c562fa72a85650206b66f]]) [[SystemTags]] support for inserting content above and below the story river
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f793816dfa687ae7791143b33487fd5f95f3265c]] support for transcluding plugin subtiddlers with the [[TranscludeWidget]]
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c73853288c5b4b0716da94fea2f2edec09345643]] (and [[here|https://github.com/TiddlyWiki/TiddlyWiki5/commit/08f775eac8cb053d08c1c561e65a5eeb87c4c6b6]]) support for importing from `*.htm` and `*.hta` files as well as the existing support for `*.html` files
 * [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/73d7e85e11c7732080ca8bc4321ebb12afbac09c]] the "sticky titles" theme so that it works when tiddlers are in edit mode
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5b3b62f93da4b7b19e24ccf72d9ce20b9edce6d5]] bug with execution order of BuildCommand targets
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5b3b62f93da4b7b19e24ccf72d9ce20b9edce6d5]] bug with execution order of [[BuildCommand]] targets
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d93da81671a704377209fc1871425c3a7c5db35a]] bug with missing hover colours for external links
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/465f4ac46903070759a572d183c498c5579cb922]] problem with refreshing modal dialogues
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3351ae7e29cbf3bed6fc1925ef33664bcc59fef5]] issue with cookies disabled on Firefox
@@ -80,7 +80,7 @@ For 5.0.14-beta, the setting has been changed. Visit [[control panel|$:/ControlP
 
 !! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@BramChen|https://github.com/BramChen]]
 * [[@pmario|https://github.com/pmario]]

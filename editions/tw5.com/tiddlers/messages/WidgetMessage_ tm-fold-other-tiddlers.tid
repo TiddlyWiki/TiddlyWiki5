@@ -15,4 +15,4 @@ The `tm-fold-other-tiddlers` message folds all tiddlers in the current story lis
 <<.warning "The state tiddlers title is computed as `foldStatePrefix + TiddlerTitle`. If the foldStatePrefix is not set, it will overwrite the text of the tiddler(s) itself, resulting in data loss. ">>
 
 
-The `tm-fold-other-tiddlers` message is usually generated with the ButtonWidget and is handled by the surrounding NavigatorWidget.
+The `tm-fold-other-tiddlers` message is usually generated with the [[ButtonWidget]] and is handled by the surrounding [[NavigatorWidget]].

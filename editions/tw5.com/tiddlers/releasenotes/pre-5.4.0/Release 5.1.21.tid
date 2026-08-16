@@ -19,11 +19,11 @@ This is a bug fix release that resolves issues introduced in the recent [[Releas
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a170210069bbec265992b365a61e0722b480ab1d]] crash with ActionDeleteFieldWidget and a missing ''tiddler'' attribute
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a170210069bbec265992b365a61e0722b480ab1d]] crash with [[ActionDeleteFieldWidget]] and a missing ''tiddler'' attribute
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/4087]] edge cases where some tiddler lists were not valid when interpreted as a filter
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/471b73158a887d2f060194741739c1da8b5d44d8]] problem with too many alerts when upgrading a wiki containing an overwritten core module
 * [[Reverted|https://github.com/TiddlyWiki/TiddlyWiki5/commit/83386f34b50a9d93171df133957d489b5de629ef]] inadvertently switching on performance instrumentation
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/issues/4218]] bug with WikiText within field names
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/issues/4218]] bug with [[WikiText]] within field names
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/dd09266b467173e45d75c172b2e82fd542f682fe]] problem with classes in the [[Table-of-Contents Macros]]
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/4203]] missing foreground colour for buttons with class `tc-btn-invisible`
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/4227]] whitespace around field editor inputs
@@ -41,7 +41,7 @@ This is a bug fix release that resolves issues introduced in the recent [[Releas
 
 ! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@bimlas|https://github.com/bimlas]]
 * [[@BurningTreeC|https://github.com/BurningTreeC]]

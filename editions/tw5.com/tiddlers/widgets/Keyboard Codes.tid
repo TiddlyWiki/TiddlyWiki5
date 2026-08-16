@@ -4,7 +4,7 @@ tags: KeyboardWidget
 title: Keyboard Codes
 type: text/vnd.tiddlywiki
 
-This is a list of all the key codes supported by the KeyboardWidget:
+This is a list of all the key codes supported by the [[KeyboardWidget]]:
 
 <kbd>cancel</kbd>, <kbd>help</kbd>, <kbd>backspace</kbd>, <kbd>tab</kbd>, <kbd>clear</kbd>, <kbd>return</kbd>, <kbd>enter</kbd>, <kbd>pause</kbd>, <kbd>escape</kbd>, <kbd>space</kbd>, 
 <kbd>page_up</kbd>, <kbd>page_down</kbd>, <kbd>end</kbd>, <kbd>home</kbd>, <kbd>left</kbd>, <kbd>up</kbd>, <kbd>right</kbd>, <kbd>down</kbd>, <kbd>printscreen</kbd>, <kbd>insert</kbd>, <kbd>delete</kbd>

@@ -8,12 +8,12 @@ type: text/vnd.tiddlywiki
 <$text text={{{ [[$:/info/url/]addsuffix<name>get[text]] }}} />
 \end
 
-System tiddlers in the namespace `$:/info/` are used to expose information about the system (including the current browser) so that WikiText applications can adapt themselves to available features.
+System tiddlers in the namespace `$:/info/` are used to expose information about the system (including the current browser) so that [[WikiText]] applications can adapt themselves to available features.
 
 ! Information Tiddlers
 
 |!Title |!Description |
-|[[$:/info/startup-timestamp]] |<<.from-version "5.1.23">> Startup timestamp in TiddlyWiki date format |
+|[[$:/info/startup-timestamp]] |<<.from-version "5.1.23">> Startup timestamp in [[TiddlyWiki]] date format |
 |[[$:/info/browser]] |Running in the browser? ("yes" or "no") |
 |[[$:/info/mobile]] |<<.from-version "5.2.3">> Is running on a mobile device? ("yes" or "no" - eg, ''<<example full>>'') |
 |[[$:/info/browser/language]] |<<.from-version "5.1.20">> Language as reported by browser (note that some browsers report two character codes such as `en` while others report full codes such as `en-GB`) |

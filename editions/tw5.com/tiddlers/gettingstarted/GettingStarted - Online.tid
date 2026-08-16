@@ -5,7 +5,7 @@ tags: GettingStarted
 title: GettingStarted - Online
 type: text/vnd.tiddlywiki
 
-TiddlyWiki can also be hosted on online services such as Dropbox and Cloudant.
+[[TiddlyWiki]] can also be hosted on online services such as Dropbox and Cloudant.
 
 ;Dropbox (syncs the entire HTML file)
 :To edit files stored in your Dropbox, go to http://tiny.cc/tw5inthesky/. This will allow you to open any HTML files found. 

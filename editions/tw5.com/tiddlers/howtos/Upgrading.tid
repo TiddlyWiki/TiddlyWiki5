@@ -56,7 +56,7 @@ The upgrade operation falls foul of a security restriction in Firefox. Until thi
 
 It is possible for a customisation applied in a previous version to break when upgraded to the latest version. There are two techniques you can use to help track down issues:
 
-* Try repeating the upgrade having selectively unchecked any tiddlers that may be applying customisations to TiddlyWiki
-* Use SafeMode to disable all customisations of shadow tiddlers
+* Try repeating the upgrade having selectively unchecked any tiddlers that may be applying customisations to [[TiddlyWiki]]
+* Use [[SafeMode]] to disable all customisations of shadow tiddlers
 
 You can see which shadow tiddlers have been overridden in the ''Filter'' tab of [[advanced search|$:/AdvancedSearch]]. Select "Overridden shadow tiddlers" from the dropdown.

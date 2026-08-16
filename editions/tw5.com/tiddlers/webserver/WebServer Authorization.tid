@@ -4,7 +4,7 @@ tags: WebServer
 title: WebServer Authorization
 type: text/vnd.tiddlywiki
 
-''Authorization'' is the process of determining which resources may be accessed by a particular user. It occurs after [[authentication|WebServer Authentication]] has determined the identity of the user. TiddlyWiki's WebServer implements a simple authorization scheme which permits independent control of who has administrator access to the server, and read and write access to a wiki.
+''Authorization'' is the process of determining which resources may be accessed by a particular user. It occurs after [[authentication|WebServer Authentication]] has determined the identity of the user. [[TiddlyWiki]]'s WebServer implements a simple authorization scheme which permits independent control of who has administrator access to the server, and read and write access to a wiki.
 
 The WebServer parameters [[admin|WebServer Parameter: admin]], [[readers|WebServer Parameter: readers]] and [[writers|WebServer Parameter: writers]] each contain a comma separated list of //principals// (which is to say, either usernames or certain special tokens) which should have read or write access respectively. 
 

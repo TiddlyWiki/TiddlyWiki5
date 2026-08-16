@@ -34,7 +34,7 @@ description: Export button, more ActionWidgets, Danish and Greek translations
 
 !! Hackability Improvements
 
-* Introduced new ActionSetFieldWidget, ActionDeleteFieldWidget and ActionDeleteTiddlerWidget for manipulating tiddler fields and values
+* Introduced new [[ActionSetFieldWidget]], [[ActionDeleteFieldWidget]] and [[ActionDeleteTiddlerWidget]] for manipulating tiddler fields and values
 * [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c7971d3da3bbef4bbc81d4462ee93590adc248f8]] [[WidgetMessage: tm-new-tiddler]] to allow a skeleton to be specified with additional fields
 * [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/commit/4a172125768e3b33c30e725e8550454a9d26c5c4]] the EditTextWidget to allow more control over the sizing of textarea editors
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/13726ef73157d9e9d65ae4027d9c32aaa7cdcc90]] new canned filter for recently modified system tiddlers in [[$:/AdvancedSearch]]
@@ -47,13 +47,13 @@ description: Export button, more ActionWidgets, Danish and Greek translations
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/853f5fd06402b16e271e8f119ef380de485aeff2]] simple logging to help track down drop/paste issues (see https://tiddlywiki.com/dev/#ImportLogging)
 * [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b520efdeb83f6ac7536a69cf5af2bab3f94cf77f]] [[WidgetMessage: tm-download-file]] and [[WidgetMessage: tm-save-wiki]] to allow variables to be specified for the rendering
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f5055c0205d24102a36b9cf3a9dd9306e148a1f0]] [[Example Table of Contents: Tabbed Internal]]
-* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/79e428757b5562bd4a925b9b0428ea4ba70ad05a]] RevealWidget so that it can be used without specifying a state tiddler
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/79e428757b5562bd4a925b9b0428ea4ba70ad05a]] [[RevealWidget]] so that it can be used without specifying a state tiddler
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/90caf5bf42523cfb6cd603b979aadb719ddcede4]] "hooks" mechanism so that plugins can modify the default tiddler list
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b882a0dff12dc2660426de53e64d8c018f3a9d84]] support for nested popups
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/90096cbd367a7a685fb5dc5b2cbaa69a00d8199f]] problem with CodeMirror editor and missing tiddlers
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/90096cbd367a7a685fb5dc5b2cbaa69a00d8199f]] problem with [[CodeMirror]] editor and missing tiddlers
 * [[Exclude|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5093cdc86047209f23b9ead5ee0f216d0414e4f2]] drafts from [[Table-of-Contents Macros]]
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5599f9f9338a5f96080143b2192214a78b961509]] problem with encoding of HTML tiddlers
 * [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/835e3a945244dd8a07f4c7fd570eb890e9fdcc2c]] problem with sticky titles being covered by vertical tabs
@@ -64,20 +64,20 @@ description: Export button, more ActionWidgets, Danish and Greek translations
 
 //These changes are only relevant to people using TiddlyWiki under Node.js//
 
-* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8e685e5150e636aed6655c6caa09c7b6cffdcea2]] ''includeWikis'' mechanism of TiddlyWikiFolders to allow read-only wikis to be included
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8e685e5150e636aed6655c6caa09c7b6cffdcea2]] ''includeWikis'' mechanism of [[TiddlyWikiFolders]] to allow read-only wikis to be included
 * [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/cea963420ca2800b86989e29d42d06ccb7ea2a00]] error handling under Node.js
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/17a594a97ad5655142c834dfd5fa68855a61d201]] UnpackPluginCommand
-* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/04d26e6fae20671a6d455e113f7b0afedabc7122]] EditionsCommand to list the available editions
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/17a594a97ad5655142c834dfd5fa68855a61d201]] [[UnpackPluginCommand]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/04d26e6fae20671a6d455e113f7b0afedabc7122]] [[EditionsCommand]] to list the available editions
 
 !! Changes affecting plugin authors
 
 * [[Disabled|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f7a2849d27bb082e4bbf6b056a800a1edb30f510]] wiki change events for shadow tiddlers
 * [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d93c19daaa126f0938048009a83796cb52690541]] structure of widget messages that have a hashmap parameter
-* The support for nested popups has necessitated a change in the way that popups are styled that affects popups that are triggered with the focusPopup attribute of the EditTextWidget: it is now necessary for the widget to be given the class `tc-popup-handle`.
+* The support for nested popups has necessitated a change in the way that popups are styled that affects popups that are triggered with the focusPopup attribute of the [[EditTextWidget]]: it is now necessary for the widget to be given the class `tc-popup-handle`.
 
 !! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@andrey013|https://github.com/andrey013]]
 * Birthe C

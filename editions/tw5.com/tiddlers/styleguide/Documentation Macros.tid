@@ -67,7 +67,7 @@ The following macros are used throughout ~TiddlyWiki's documentation. Their name
 ! Links
 
 |!Macro |Used for |Example |Renderd |h
-|.link |link containing WikiText |`<<.link "^^an^^ ~~example~~" Example>>` |<<.link "^^an^^ ~~example~~" Example>> |
+|.link |link containing [[WikiText]] |`<<.link "^^an^^ ~~example~~" Example>>` |<<.link "^^an^^ ~~example~~" Example>> |
 |.clink |code link |``<<.clink `<$list>` ListWidget>>`` |<<.clink `<$list>` ListWidget>> |
 |.dlink |definition link for a instance of a term |`<<.dlink widget Widgets>>` |<<.dlink widget Widgets>> |
 |.dlink-ex |external link to a defining instance of a term |`<<.dlink-ex Example "http://example.com/">>` |<<.dlink-ex Example "http://example.com/">> |

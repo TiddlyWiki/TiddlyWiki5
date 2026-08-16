@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 The ''~$:/core/config/TagPillDragFilter'' defines the filter string, that is used to drag & drop a tap-pill eg: <<tag HelloThere>> from 1 wiki to an other wiki. 
 
-* By default the set contains all tiddlers that are ''tagged:'' HelloThere ''without'' the HelloThere tag-tiddler itself
+* By default the set contains all tiddlers that are ''tagged:'' HelloThere ''without'' the [[HelloThere]] tag-tiddler itself
 ** Core Default: <code><$transclude $tiddler="$:/core" $subtiddler="$:/core/config/TagPillDragFilter" output="text/plain" /></code>
 * If you do want to include the tag-tiddler use the following filter:
 ** Tagged tiddlers only: `[all[current]tagging[]] [all[current]is[tiddler]] +[!is[draft]]`

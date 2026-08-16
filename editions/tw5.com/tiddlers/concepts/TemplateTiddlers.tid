@@ -10,9 +10,9 @@ Templates are a way to re-use chunks of WikiText.
 
 Transcluding through a template extends the basic functionality of [[Transclusion]] by combining two tiddlers:
 
-* A template tiddler that contains the WikiText to be displayed. It can contain transclusions that reference fields in the [[current tiddler|Current Tiddler]]
+* A template tiddler that contains the [[WikiText]] to be displayed. It can contain transclusions that reference fields in the [[current tiddler|Current Tiddler]]
 * A target tiddler that identifies which tiddler is to be treated as current when resolving references to fields
 
-The best example of templating is the main story river in TiddlyWiki. Each tiddler in the story river is rendered through a ViewTemplate that specifies how each field is to be rendered.
+The best example of templating is the main story river in [[TiddlyWiki]]. Each tiddler in the story river is rendered through a [[ViewTemplate]] that specifies how each field is to be rendered.
 
 See [[Transclusion with Templates]] for details.

@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 !! Overview
 
-Available character formatting in WikiText includes:
+Available character formatting in [[WikiText]] includes:
 
 |Wikitext | Button | Shortcut |Rendered Output |h
 |Double single quotes are used for `''bold text''`| <kbd><<.icon $:/core/images/bold>></kbd> | <kbd><<displayshortcuts "((bold))">></kbd> |Double single quotes are used for ''bold text'' |
@@ -28,7 +28,7 @@ See [[Styles and Classes in WikiText]] for more formatting options
 
 !! Keyboard Shortcuts
 
-The full list of KeyboardShortcuts can be found in the $:/ControlPanel -> ''Keyboard Shortcuts'' tab. 
+The full list of [[KeyboardShortcuts]] can be found in the $:/ControlPanel -> ''Keyboard Shortcuts'' tab. 
 
 !! Semantic Information
 

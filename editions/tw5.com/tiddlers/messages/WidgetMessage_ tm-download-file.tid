@@ -17,6 +17,6 @@ The following variable names have special behaviour:
 |filename |Filename for the downloaded file (note that this is a hint to the browser, and the actual filename used may be different) |
 |type |<<.from-version "5.3.7">> Content type for the downloaded file |
 
-The download file message is usually generated with the ButtonWidget.
+The download file message is usually generated with the [[ButtonWidget]].
 
-The download file message is handled by the TiddlyWiki core SyncMechanism which invokes the current [[SaverModule|SaverModules]].
+The download file message is handled by the [[TiddlyWiki]] core [[SyncMechanism]] which invokes the current [[SaverModule|SaverModules]].

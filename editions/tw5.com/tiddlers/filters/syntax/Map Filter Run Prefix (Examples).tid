@@ -40,7 +40,7 @@ The functionality of the `:map` filter run prefix has some overlap with the `:an
 # The `:and` filter run can modify the number of items (either increase or decrease). The `:map` run will never alter the number of items.
 # The number of items in the `:and` filter run will also decrease due to [[de-duplication|Dominant Append]]. The `:map` run will not [[de-duplicate|Dominant Append]].
 # Explicit references to the "currentTiddler" variable will behave differently
-# Implicit references to the "currentTiddler" using TextReference will behave differently.
+# Implicit references to the "currentTiddler" using [[TextReference]] will behave differently.
 
 | `:map` | `:and` |
 |!results are the same|<|

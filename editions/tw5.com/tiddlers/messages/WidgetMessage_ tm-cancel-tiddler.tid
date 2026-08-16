@@ -11,4 +11,4 @@ The `tm-cancel-tiddler` message abandons the changes in a draft tiddler. It requ
 |param |Title of the tiddler that is being cancelled out of edit mode |
 |tiddlerTitle |Fallback title that is used if ''param'' isn't specified (automatically set by the ButtonWidget)  |
 
-The cancel tiddler message is usually generated with the ButtonWidget and is handled by the NavigatorWidget.
+The cancel tiddler message is usually generated with the [[ButtonWidget]] and is handled by the [[NavigatorWidget]].

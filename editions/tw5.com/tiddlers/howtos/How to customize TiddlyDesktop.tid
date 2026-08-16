@@ -12,7 +12,7 @@ Click the `Backstage` button on the main TiddlyDesktop window to open the backst
 
 !! How do I get rid of the "Add a ~TiddlyWiki Folder" button.
 
-Within the backstage wiki, locate the tiddler `WikiListToolbar` (there’s a link in HelloThere). Click it into edit mode and you’ll see the wikitext for all the toolbar buttons. If you make modifications and click “done” then the changes will immediately be reflected in the main TiddlyDesktop window.
+Within the backstage wiki, locate the tiddler `WikiListToolbar` (there’s a link in [[HelloThere]]). Click it into edit mode and you’ll see the wikitext for all the toolbar buttons. If you make modifications and click “done” then the changes will immediately be reflected in the main [[TiddlyDesktop]] window.
 
 !! How would I change the "advanced" button to the "reveal backups" button.
 
@@ -20,7 +20,7 @@ You can copy the code for the “reveal backups” button from the tiddler `$:/T
 
 !! How do I change the colors?
 
-Just as usual in TiddlyWiki: you can use the palette, or define your own custom CSS.
+Just as usual in [[TiddlyWiki]]: you can use the palette, or define your own custom CSS.
 
 !! How do I change the order in which the tiddlers are listed (which appears to be alphabetical)?
 

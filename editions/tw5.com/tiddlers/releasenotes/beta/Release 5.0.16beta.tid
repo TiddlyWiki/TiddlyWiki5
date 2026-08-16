@@ -19,7 +19,7 @@ released: 20140902124037214
 
 !! Compatibility with TiddlyWikiClassic
 
-This release includes a preliminary version of a new plugin that provides compatibility with content created for TiddlyWikiClassic:
+This release includes a preliminary version of a new plugin that provides compatibility with content created for [[TiddlyWikiClassic]]:
 
 https://tiddlywiki.com/classicparserdemo.html
 
@@ -47,7 +47,7 @@ Many thanks to @buggyj for his work on this plugin.
 
 !! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@BramChen|https://github.com/BramChen]]
 * [[@buggyj|https://github.com/buggyj]]

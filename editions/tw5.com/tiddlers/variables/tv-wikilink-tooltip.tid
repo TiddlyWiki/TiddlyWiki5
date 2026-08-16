@@ -7,6 +7,6 @@ caption: tv-wikilink-tooltip
 
 The <<.def tv-wikilink-tooltip>> [[variable|Variables]] specifies the default value for the <<.attr tooltip>> attribute of the <<.wlink LinkWidget>> widget.
 
-It is often defined as a [[macro|Macros]], and its value parsed as inline WikiText.
+It is often defined as a [[macro|Macros]], and its value parsed as inline [[WikiText]].
 
 <<.variable-examples "tv-wikilink-tooltip">>

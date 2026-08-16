@@ -4,7 +4,7 @@ tags: [[WebServer Guides]]
 title: TiddlyWeb JSON tiddler format
 type: text/vnd.tiddlywiki
 
-The web server API uses tiddlers in a special format originally designed for TiddlyWeb:
+The web server API uses tiddlers in a special format originally designed for [[TiddlyWeb]]:
 
 * Field values are represented as strings. Lists (like the ''tags'' and ''list'' fields) use double square brackets to quote values that contain spaces
 * Tiddlers are represented as an object containing any of a fixed set of standard fields, with custom fields being relegated to a special property called ''fields''

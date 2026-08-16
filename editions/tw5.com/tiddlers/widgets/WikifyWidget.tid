@@ -16,7 +16,7 @@ The content of the <<.wid wikify>> widget is the scope for the value assigned to
 |!Attribute |!Description |
 |name |The name of the variable to assign |
 |text |The text to parse and render |
-|type |The ContentType of the text (defaults to `text/vnd.tiddlywiki`) |
+|type |The [[ContentType]] of the text (defaults to `text/vnd.tiddlywiki`) |
 |mode |The parse mode: [[block|Block Mode WikiText]] (the default) or [[inline|Inline Mode WikiText]] |
 |output |Keyword indicating the desired output type, defaulting to `text` (see below) |
 

@@ -51,7 +51,7 @@ Note that typing or navigating to a permalink will always cause the permalink to
 
 !! Technical Details
 
-When TiddlyWiki starts up it processes permalinks according to the following steps; the same steps are repeated if the permalink changes dynamically (this happens in response to the user editing the address bar, for example).
+When [[TiddlyWiki]] starts up it processes permalinks according to the following steps; the same steps are repeated if the permalink changes dynamically (this happens in response to the user editing the address bar, for example).
 
 # If the permalink contains a colon, treat the string before as the ''target'' and the string after it as the ''story filter''
 # If the permalink doesn't contain a colon, treat the entire string as the ''target'' and mark the ''story filter'' as //unspecified//

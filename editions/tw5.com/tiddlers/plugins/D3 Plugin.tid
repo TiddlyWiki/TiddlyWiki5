@@ -5,7 +5,7 @@ tags: OfficialPlugins [[Plugin Editions]] $:/deprecated
 title: D3 Plugin
 type: text/vnd.tiddlywiki
 
-<<.deprecated-since "5.3.4">> The D3 plugin integrates the D3 visualisation library with TiddlyWiki.
+<<.deprecated-since "5.3.4">> The D3 plugin integrates the D3 visualisation library with [[TiddlyWiki]].
 
 See https://tiddlywiki.com/plugins/tiddlywiki/d3/
 

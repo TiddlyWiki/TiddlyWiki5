@@ -14,6 +14,6 @@ eg="""<style>
 
 <div class="jack"/>"""/>
 
-The example has to invoke <<.var datauri>> through the <<.wid macrocall>> widget. It needs to prevent the macro's output from being parsed as WikiText, as that would transform the data URI into a <<.wlink LinkWidget>> widget and break the example. If the example was in a CSS tiddler, you could simply write:
+The example has to invoke <<.var datauri>> through the <<.wid macrocall>> widget. It needs to prevent the macro's output from being parsed as [[WikiText]], as that would transform the data URI into a <<.wlink LinkWidget>> widget and break the example. If the example was in a CSS tiddler, you could simply write:
 
 > `background: url(<<datauri "Motovun Jack.jpg">>);`

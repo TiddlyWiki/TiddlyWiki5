@@ -25,7 +25,7 @@ For example:
 * Set the `color` field to a CSS colour that is then used for icons and tag pills associated with this tiddler
 * Set the `hide-body` field to `yes` to hide the view template body for this tiddler
 
-See TiddlerFields for details of all the special fields.
+See [[TiddlerFields]] for details of all the special fields.
 
 !! Special Titles
 
@@ -49,9 +49,9 @@ For example:
 * $:/tags/Stylesheet causes the tiddler to be interpreted as a CSS stylesheet
 * $:/tags/SideBar causes the tiddler to be displayed as a sidebar tab
 
-See SystemTags for details of all the special tags.
+See [[SystemTags]] for details of all the special tags.
 
-The  entire TiddlyWiki user interface is constructed from lists formed from special system tags.
+The  entire [[TiddlyWiki]] user interface is constructed from lists formed from special system tags.
 
 The ordering of these lists is determined by the [[order of tagged tiddlers|Order of Tagged Tiddlers]] rules. Users can re-order tags using drag and drop within a tag dropdown.
 

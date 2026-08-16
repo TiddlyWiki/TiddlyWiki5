@@ -19,7 +19,7 @@ This is a small release with documentation improvements and some important bug f
 !! Hackability Improvements
 
 * [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/26e50b81e579b7f2d190ca3662cadcf82764c8a7]] additional theme tweaks for the body text size and line height
-* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1b620387dda2d16bf387a89071188762455890c4]] the ViewWidget to work with subtiddlers
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1b620387dda2d16bf387a89071188762455890c4]] the [[ViewWidget]] to work with subtiddlers
 
 !! Bug Fixes
 
@@ -34,7 +34,7 @@ This is a small release with documentation improvements and some important bug f
 
 !! Contributors
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve [[TiddlyWiki]]:
 
 * [[@danielo515|https://github.com/danielo515]]
 * [[@gernert|https://github.com/gernert]]

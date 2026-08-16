@@ -1,8 +1,9 @@
+caption: Basic Usage
 created: 20141129201509859
-modified: 20141130194810119
+modified: 20260816085933634
 tags: [[Transclusion in WikiText]]
 title: Transclusion Basic Usage
-caption: Basic Usage
+type: text/vnd.tiddlywiki
 
 ! Simple Transclusion
 
@@ -34,12 +35,12 @@ Notice that using ``{{!!text}}`` or ``{{}}`` causes an error (//Recursive transc
 
 ! Learning More
 
-In TiddlyWiki, transclusions are not limited to including raw content like the above. To learn about more advanced uses of transclusion, see [[Transclusion with Templates]].
+In [[TiddlyWiki]], transclusions are not limited to including raw content like the above. To learn about more advanced uses of transclusion, see [[Transclusion with Templates]].
 
 See also:
 
 * [[Transclusion]]
 * [[Transclusion with Templates]]
 * [[Transclusion in WikiText]]
-* TextReference
-* TiddlerFields.
+* [[TextReference]]
+* [[TiddlerFields]]

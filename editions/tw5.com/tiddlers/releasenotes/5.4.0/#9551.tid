@@ -7,7 +7,7 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9551
 github-contributors: yaisog
 
-The DiffTextWidget now supports two additional diff modes via the `mode` attribute:
+The [[DiffTextWidget]] now supports two additional diff modes via the `mode` attribute:
 
 * `mode="words"` - Performs word-level diff operations, making differences more intelligible when comparing text
 * `mode="lines"` - Performs line-level diff operations, highlighting entire lines that have changed

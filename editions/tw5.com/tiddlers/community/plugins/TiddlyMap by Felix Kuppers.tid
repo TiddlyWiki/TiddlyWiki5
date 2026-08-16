@@ -5,10 +5,10 @@ title: TiddlyMap Plugin by Felix Küppers
 type: text/vnd.tiddlywiki
 url: http://tiddlymap.org
 
-An interactive network visualisation plugin based on [[Vis.js|http://visjs.org]]. A demo that also contains installation instructions can be found here: {{!!url}}. The plugin's GitHub repository can be found [[here|https://github.com/felixhayashi/TW5-TiddlyMap]].
+An interactive network visualisation plugin based on [[Vis.js|http://visjs.org]]. A demo that also contains installation instructions can be found here: {{!!url}}. The plugin's [[GitHub]] repository can be found [[here|https://github.com/felixhayashi/TW5-TiddlyMap]].
 
 <<<
-~TiddlyMap is a TiddlyWiki plugin that allows you to link your wiki-topics (tiddlers) in order to create clickable graphs. By creating relations between your topics you can easily do the following:
+~TiddlyMap is a [[TiddlyWiki]] plugin that allows you to link your wiki-topics (tiddlers) in order to create clickable graphs. By creating relations between your topics you can easily do the following:
 
 * Create concept maps and quickly manifest your ideas in tiddlers.
 * Create task-dependency graphs to organise and describe your tasks.

@@ -3,7 +3,7 @@ modified: 20240610085613037
 tags: Concepts
 title: Hard and Soft Transclusions
 
-A <<.def "hard transclusion">> is a [[transclusion|Transclusion]] that can be detected by a superficial examination of WikiText.
+A <<.def "hard transclusion">> is a [[transclusion|Transclusion]] that can be detected by a superficial examination of [[WikiText]].
 
 A transclusion is <<.def "soft">> if it is:
 

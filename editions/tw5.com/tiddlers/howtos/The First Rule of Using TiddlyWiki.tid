@@ -12,7 +12,7 @@ Every so often, TiddlyWiki users report heart-rending tales of personal data los
 
 https://groups.google.com/d/topic/tiddlywiki/oG2L7OXhUoI/discussion
 
-> Last time I used it was last night at home on my Windows 7 desktop, hit the check mark to stop editing my last entry, it then saves via TiddlyFox and I eject my USB drive. I came to work this morning, plugged in my USB, enter my TW5 password and it doesn't want to open after several attempts. I browse to my TW5 html file and notice that my file size is no longer 3MB.. instead it is 80KB. This leads me to believe I lost everything.
+> Last time I used it was last night at home on my Windows 7 desktop, hit the check mark to stop editing my last entry, it then saves via [[TiddlyFox]] and I eject my USB drive. I came to work this morning, plugged in my USB, enter my TW5 password and it doesn't want to open after several attempts. I browse to my TW5 html file and notice that my file size is no longer 3MB.. instead it is 80KB. This leads me to believe I lost everything.
 
 https://groups.google.com/d/topic/tiddlywiki/SXStDJ0ntGI/discussion
 
@@ -29,6 +29,6 @@ TiddlyWiki is a very flexible, customisable system that puts you firmly in charg
 The best way to make sure that your data is safe is to practise a rigorous system of backups:
 
 * Consider using services like Dropbox to continuously back up your personal data to the cloud. (Dropbox [[has a neat feature|https://www.dropbox.com/help/11]] whereby they keep track of previous versions of files)
-* Retain backups before upgrading to a new version of TiddlyWiki
+* Retain backups before upgrading to a new version of [[TiddlyWiki]]
 * Figure out and protect yourself from the worst case scenarios: what if your USB stick or hard drive fails? What if your computer is hit by a ransomeware virus?
 * Be defensive and redundant: for example, take multiple backups and keep them in separate physical locations

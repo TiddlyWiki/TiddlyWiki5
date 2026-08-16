@@ -22,7 +22,7 @@ The ''quick'' brown ~~flea~~ fox //jumps// over the `lazy` dog
 
 ! Working with Tiddlers
 
-In WikiText, you can link to tiddlers using double square brackets, or by taking advantage of the automatic linking of CamelCase words:
+In WikiText, you can link to tiddlers using double square brackets, or by taking advantage of the automatic linking of [[CamelCase]] words:
 
 ```
 This is a link to HelloThere, and one to [[History of TiddlyWiki]]
@@ -30,7 +30,7 @@ This is a link to HelloThere, and one to [[History of TiddlyWiki]]
 
 … displays as:
 
-This is a link to HelloThere, and one to [[History of TiddlyWiki]]
+This is a link to [[HelloThere]], and one to [[History of TiddlyWiki]]
 
 ! Macros
 
@@ -50,7 +50,7 @@ With that definition in place, `<<youtube 1g66s7UbyuU>>` generates the URL https
 
 Advanced WikiText features allow you to produce automated lists and interactive features like dropdown menus. In fact, the entire user interface of TiddlyWiki itself is written in WikiText, so any feature that you see in TiddlyWiki can be adapted for use in your own wikis.
 
-Some of the advanced features require complex coding. TiddlyWiki includes several built-in macros that simplify common user interface tasks, like tabs, tables of content, and lists of tiddlers.
+Some of the advanced features require complex coding. [[TiddlyWiki]] includes several built-in macros that simplify common user interface tasks, like tabs, tables of content, and lists of tiddlers.
 
 ! Find out more
 

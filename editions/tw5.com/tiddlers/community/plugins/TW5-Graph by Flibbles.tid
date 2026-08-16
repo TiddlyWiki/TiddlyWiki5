@@ -5,7 +5,7 @@ title: TW5-Graph by Flibbles
 type: text/vnd.tiddlywiki
 url: https://flibbles.github.io/tw5-graph/
 
-TW5-Graph is a framework to integrate TiddlyWiki with existing graphing and visualization engines (such as [[Vis-Network|https://visjs.github.io/vis-network/docs/network/]]). The plugin allows for easy and sophisticated graphs to represent your tiddlers, or whatever else you want.
+TW5-Graph is a framework to integrate [[TiddlyWiki]] with existing graphing and visualization engines (such as [[Vis-Network|https://visjs.github.io/vis-network/docs/network/]]). The plugin allows for easy and sophisticated graphs to represent your tiddlers, or whatever else you want.
 
 It is the spiritual successor to [[TiddlyMap|TiddlyMap Plugin by Felix Küppers]].
 

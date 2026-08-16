@@ -13,4 +13,4 @@ Available Plugins :
 *QuickJump - Quick jump to tiddlers in story list
 *FlexWidth - Flexibly tweak sidebar width for TiddlyWiki 5 (Inspired by TW5 tristate Sidebar)
 *MatchFilter - returns matching text instead of a list of the tiddlers from FieldFilter
-*PopupTagger - TagBar / TagTable with popup list of tags (Inspired by MonkeyTaggerMacro for TiddlyWiki classic)
+*PopupTagger - TagBar / TagTable with popup list of tags (Inspired by MonkeyTaggerMacro for [[TiddlyWiki]] classic)

@@ -7,4 +7,4 @@ caption: tm-logout
 
 The logout message attempts to log the user out of the current serverside host. The tiddler [[$:/status/IsLoggedIn]] reflects the current login status with the values "yes" or "no", and [[$:/status/UserName]] reflects the current username.
 
-The logout message is handled by the TiddlyWiki core SyncMechanism which invokes the current [[SyncAdaptorModule|SyncAdaptorModules]] (typically the ''tiddlywiki/tiddlywebadaptor'' plugin).
+The logout message is handled by the [[TiddlyWiki]] core [[SyncMechanism]] which invokes the current [[SyncAdaptorModule|SyncAdaptorModules]] (typically the ''tiddlywiki/tiddlywebadaptor'' plugin).

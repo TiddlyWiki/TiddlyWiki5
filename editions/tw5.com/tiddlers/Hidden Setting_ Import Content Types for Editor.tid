@@ -8,4 +8,4 @@ type: text/vnd.tiddlywiki
 
 $:/config/Editor/ImportContentTypesFilter
 
-This filter determines which `contentTypes` can be imported by dragging and dropping into the editor. It used by a DropzoneWidget wrapped around the editor, for the `contentTypesFilter` attribute.
+This filter determines which `contentTypes` can be imported by dragging and dropping into the editor. It used by a [[DropzoneWidget]] wrapped around the editor, for the `contentTypesFilter` attribute.

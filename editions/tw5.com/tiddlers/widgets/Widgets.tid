@@ -12,6 +12,6 @@ Widgets are analogous to elements in an HTML document. Indeed, HTML tags in ~Wik
 
 Each class of widget contributes a specific ability to the overall functionality, such as the ability to <<.wlink2 "display an image" ImageWidget>> or <<.wlink2 "a button" ButtonWidget>>, to <<.wlink2 "call a macro" MacroCallWidget>> or <<.wlink2 "transclude text from elsewhere" TranscludeWidget>>, or to [[mark a piece of text as a heading|HTML in WikiText]].
 
-The more specialised widgets use a general-purpose [[widget syntax|Widgets in WikiText]] as their only possible WikiText representation.
+The more specialised widgets use a general-purpose [[widget syntax|Widgets in WikiText]] as their only possible [[WikiText]] representation.
 
 

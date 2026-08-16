@@ -12,7 +12,7 @@ The link catcher widget traps [[WidgetMessage: tm-navigate]] dispatched within i
 * sending a different widget message
 * setting a tiddler to the title of the navigated tiddler
 * setting a tiddler to a specified value
-* performing a series of ActionWidgets
+* performing a series of [[ActionWidgets]]
 
 ! Content and Attributes
 

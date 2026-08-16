@@ -13,15 +13,15 @@ When [[running under Node.js|TiddlyWiki on Node.js]], TiddlyWiki includes a simp
 The web server listens for requests coming over the network, and performs the following actions in turn:
 
 * [[Authentication|WebServer Authentication]] is the process of identifying the current user. TiddlyWiki supports three types of authentication: [[Anonymous|WebServer Anonymous Access]], [[Basic|WebServer Basic Authentication]] and [[Header|WebServer Header Authentication]]
-* [[Authorization|WebServer Authorization]] is the process of determining which resources may be accessed by a particular user. TiddlyWiki implements a simple scheme whereby read and write access to the wiki can be independently controlled.
+* [[Authorization|WebServer Authorization]] is the process of determining which resources may be accessed by a particular user. [[TiddlyWiki]] implements a simple scheme whereby read and write access to the wiki can be independently controlled.
 * Routing is the process of dispatching the request to the [[API handler|WebServer API]], and returning any required data.
 
 ! Usage
 
 !! Anonymous Access 
 
-The web server is started with the ListenCommand (which supersedes the older ServerCommand). All 
-the NamedCommandParameters are optional, so the simplest form is:
+The web server is started with the [[ListenCommand]] (which supersedes the older [[ServerCommand]]). All 
+the [[NamedCommandParameters]] are optional, so the simplest form is:
 
 ```
 tiddlywiki mywikifolder --listen

@@ -7,9 +7,9 @@ See [[JSON in TiddlyWiki]] for an overview of using JSON in TiddlyWiki.
 
 JSON data is just plain text, and so there are an wide variety of techniques to generate it in wikitext.
 
-At a high level, we have several ways to generate JSON data in TiddlyWiki's own tiddler format:
+At a high level, we have several ways to generate JSON data in [[TiddlyWiki]]'s own tiddler format:
 
-* JSONTiddlerWidget
+* [[JSONTiddlerWidget]]
 * [[jsontiddler Macro]]
 * [[jsontiddlers Macro]]
 

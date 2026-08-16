@@ -27,7 +27,7 @@ Microsoft's [[Internet Information Server|https://en.wikipedia.org/wiki/Internet
 # Install the IIS module ~HttpPlatformHandler from https://www.iis.net/downloads/microsoft/httpplatformhandler
 # Install [[Node.js]] from https://nodejs.org/
 # Install Git from https://git-scm.com/
-#* //optional; only required when using the latest TiddlyWiki release pulled directly from ~GitHub -- see below//
+#* //optional; only required when using the latest [[TiddlyWiki]] release pulled directly from ~GitHub -- see below//
 
 ! 3. Install TiddlyWiki and setup a new wiki
 

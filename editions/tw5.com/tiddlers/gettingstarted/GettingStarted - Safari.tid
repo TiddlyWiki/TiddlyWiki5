@@ -5,7 +5,7 @@ tags: GettingStarted
 title: GettingStarted - Safari
 type: text/vnd.tiddlywiki
 
-TiddlyWiki on Safari can only save changes using the manual HTML5-compatible fallback saver module.
+[[TiddlyWiki]] on Safari can only save changes using the manual HTML5-compatible fallback saver module.
 
 {{Saving on Safari}}
 

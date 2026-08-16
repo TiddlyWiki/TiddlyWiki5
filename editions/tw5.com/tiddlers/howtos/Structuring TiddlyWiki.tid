@@ -4,9 +4,9 @@ tags: [[Working with TiddlyWiki]]
 title: Structuring TiddlyWiki
 type: text/vnd.tiddlywiki
 
-TiddlyWiki5 provides several features to help you structure information as [[tiddlers|Tiddlers]], and model the relationships between them:
+[[TiddlyWiki5]] provides several features to help you structure information as [[tiddlers|Tiddlers]], and model the relationships between them:
 
-* TiddlerLinks
+* [[TiddlerLinks]]
 * [[Tagging]]
 * [[Title Lists|Title List]]
-* DataTiddlers
+* [[DataTiddlers]]

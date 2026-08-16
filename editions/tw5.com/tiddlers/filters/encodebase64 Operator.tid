@@ -12,7 +12,7 @@ tags: [[Filter Operators]] [[String Operators]]
 title: encodebase64 Operator
 type: text/vnd.tiddlywiki
 
-See Mozilla Developer Network for details of [[base 64 encoding|https://developer.mozilla.org/en-US/docs/Glossary/Base64]]. TiddlyWiki uses [[library code from @nijikokun|https://gist.github.com/Nijikokun/5192472]] to handle the conversion.
+See Mozilla Developer Network for details of [[base 64 encoding|https://developer.mozilla.org/en-US/docs/Glossary/Base64]]. [[TiddlyWiki]] uses [[library code from @nijikokun|https://gist.github.com/Nijikokun/5192472]] to handle the conversion.
 
 The input strings are interpreted as [[UTF-8 encoded|https://developer.mozilla.org/en-US/docs/Glossary/UTF-8]] text (or binary data instead if the `binary` suffix is present). The output strings are base64 encoded.
 

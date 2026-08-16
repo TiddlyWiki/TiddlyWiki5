@@ -27,7 +27,7 @@ That works for simple cases like `<<mymacro "HelloThere">>` but is subtly brittl
 <$codeblock code={{foo}}bar}}/>
 ```
 
-As a result of this issue, for many years  the TiddlyWiki 5 user interface failed if a variety of combinations of special characters were encountered in tiddler titles.
+As a result of this issue, for many years  the [[TiddlyWiki]] 5 user interface failed if a variety of combinations of special characters were encountered in tiddler titles.
 
 This issue has been mitigated over the years, particularly by providing access to the macro parameters as variables. However, for backwards compatibility, this was done without affecting the existing syntax, which required us to adopt the clumsy protocol of wrapping the parameter name in double underscores to get the name of the corresponding variable.
 

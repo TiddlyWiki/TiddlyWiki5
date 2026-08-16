@@ -27,7 +27,7 @@ type: text/vnd.tiddlywiki
 
 The `droppable` widget creates a DOM element onto which dragged items can be dropped by the user, triggering the specified actions. It only works on browsers that support drag and drop, which typically means desktop browsers, but [[there are workarounds|Mobile Drag And Drop Shim Plugin]].
 
-See DragAndDropMechanism for an overview.
+See [[DragAndDropMechanism]] for an overview.
 
 ! Content and Attributes
 

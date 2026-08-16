@@ -11,4 +11,4 @@ This is an internal change that will only be of direct interest to plugin develo
 
 * Programmatically manipulating wikitext content by modifying the syntax tree and deserializing it back to wikitext
 * Building WYSIWYG editors
-* Creating WikiText formatters and linters
+* Creating [[WikiText]] formatters and linters

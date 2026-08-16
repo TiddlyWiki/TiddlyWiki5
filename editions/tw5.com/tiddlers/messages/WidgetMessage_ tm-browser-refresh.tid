@@ -7,4 +7,4 @@ caption: tm-browser-refresh
 
 The `tm-browser-refresh` message refreshes the page, causing the re-initialisation of any plugin tiddlers. It does not require any properties on the `event` object.
 
-The refresh message is usually generated with the ButtonWidget and is handled by the core.
+The refresh message is usually generated with the [[ButtonWidget]] and is handled by the core.

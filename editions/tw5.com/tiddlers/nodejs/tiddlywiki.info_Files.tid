@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 * ''themes'' - an array of theme names to be included in the wiki
 * ''languages'' - an array of language names to be included in the wiki
 * ''includeWikis'' - an array of references to external wiki folders to be included in the wiki
-* ''build'' - a hashmap of named build targets, each defined by an array of command tokens (see BuildCommand)
+* ''build'' - a hashmap of named build targets, each defined by an array of command tokens (see [[BuildCommand]])
 * ''config'' - an optional hashmap of configuration options (see below)
 
 !!! ''includeWikis''

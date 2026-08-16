@@ -11,4 +11,4 @@ The `tm-close-other-tiddlers` message removes all but a specified tiddler from t
 |param |Title of the tiddler that is not to be closed |
 |tiddlerTitle |Fallback title that is used if ''param'' isn't specified (automatically set by the ButtonWidget)  |
 
-The close other tiddlers message is usually generated with the ButtonWidget and is handled by the NavigatorWidget.
+The close other tiddlers message is usually generated with the [[ButtonWidget]] and is handled by the [[NavigatorWidget]].

@@ -33,7 +33,7 @@ The width and the height can be specified as pixel values (eg "23" or "23px") or
 |!Variables |!Description |
 |`dom-*` |All DOM attributes of the image are made available as variables, with the prefix `dom-` |
 |`tv-popup-coords` |A relative co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the image|
-|`tv-popup-abs-coords` |<<.from-version "5.2.4">> An absolute co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the image (see [[Coordinate Systems]] for more information) |
+|`tv-popup-abs-coords` |<<.from-version "5.2.4">> An absolute co-ordinate string that can be used with the [[ActionPopupWidget]] to trigger a popup at the image (see [[Coordinate Systems]] for more information) |
 |`tv-selectednode-posx` |`x` offset position of the image DOM node |
 |`tv-selectednode-posy` |`y` offset position of the image DOM node  |
 |`tv-selectednode-width` |`offsetWidth` of the image DOM node |
@@ -89,4 +89,4 @@ When used to display tiddler-based images, the image widget operates in two dist
 * If the ''_canonical_uri'' field is present then it is used as the ''src'' attribute of the generated `<img>` element and the ''text'' field is ignored
 * Without the ''_canonical_uri'' field, the image widget generates an `<img>` element that embeds the image data directly using a `data:` URI.
 
-See ExternalImages for more details.
+See [[ExternalImages]] for more details.

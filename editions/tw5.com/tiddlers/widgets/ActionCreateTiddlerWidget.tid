@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The <<.wid "action-createtiddler">> widget is an [[action widget|ActionWidgets]] that creates new tiddlers. Action widgets are used within triggering widgets such as the ButtonWidget.
+The <<.wid "action-createtiddler">> widget is an [[action widget|ActionWidgets]] that creates new tiddlers. Action widgets are used within triggering widgets such as the [[ButtonWidget]].
 
 There are several //differences// from the [[tm-new-tiddler message|WidgetMessage: tm-new-tiddler]]:
 

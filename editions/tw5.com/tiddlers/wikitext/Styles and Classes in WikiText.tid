@@ -62,7 +62,7 @@ In case of block content, the styles and classes can be defined in a single line
 * With custom style and classes
 @@">>
 
-In a similar way classes, but not styles, can be applied to those block WikiText elements that are introduced through characters on the beginning of the line. The classes prefixed with `.` are specified immediately after the special characters, followed by a ` ` space.
+In a similar way classes, but not styles, can be applied to those block [[WikiText]] elements that are introduced through characters on the beginning of the line. The classes prefixed with `.` are specified immediately after the special characters, followed by a ` ` space.
 
 <<wikitext-example src:"!!!.coloured-bg Heading with a custom background class.
 

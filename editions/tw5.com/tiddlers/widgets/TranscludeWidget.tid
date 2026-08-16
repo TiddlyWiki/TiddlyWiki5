@@ -21,10 +21,10 @@ The <<.wid transclude>> widget can be used to render content of any type: wikite
 |$tiddler |tiddler |The title of the tiddler to transclude (defaults to the current tiddler) |
 |$field |field |The field name of the current tiddler (defaults to "text"; if present takes precedence over the index attribute) |
 |$index |index |The index of a property in a [[DataTiddler|DataTiddlers]] |
-|$subtiddler |subtiddler |Optional SubTiddler title when the target tiddler is a [[plugin|Plugins]] (see below) |
+|$subtiddler |subtiddler |Optional [[SubTiddler]] title when the target tiddler is a [[plugin|Plugins]] (see below) |
 |$mode |mode |Override the default parsing mode for the transcluded text to "block" or "inline" |
 |$type |– |Optional ContentType used when transcluding variables, indexes or fields other than the ''text'' field|
-|$output |- |ContentType for the output rendering (defaults to `text/html`, can also be `text/plain` or `text/raw`) |
+|$output |- |[[ContentType]] for the output rendering (defaults to `text/html`, can also be `text/plain` or `text/raw`) |
 |$recursionMarker |recursionMarker |Set to ''no'' to prevent creation of [[Legacy Transclusion Recursion Marker]] (defaults to ''yes'') |
 |$fillignore |- |Set to ''yes'' to make this transclusion invisible to the <<.attr $depth>> attribute of the <<.wlink SlotWidget>> widget (defaults to ''no'') |
 |//{attributes not starting with $}// |– |Any other attributes that do not start with a dollar are used as parameters to the transclusion |
@@ -177,7 +177,7 @@ This content is displayed if `MissingTiddler` is missing.
 
 ! Parsing modes
 
-TiddlyWiki [[parses text in two modes|WikiText Parser Modes]]:
+[[TiddlyWiki]] [[parses text in two modes|WikiText Parser Modes]]:
 
 * [[inline mode|Inline Mode WikiText]] recognises character formatting such as emphasis, links
 * [[block mode|Block Mode WikiText]] recognises all the ''inline'' formatting, and adds block formatting such as tables, headings and lists

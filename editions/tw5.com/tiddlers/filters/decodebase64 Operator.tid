@@ -12,7 +12,7 @@ tags: [[Filter Operators]] [[String Operators]]
 title: decodebase64 Operator
 type: text/vnd.tiddlywiki
 
-See Mozilla Developer Network for details of [[base 64 encoding|https://developer.mozilla.org/en-US/docs/Glossary/Base64]]. TiddlyWiki uses [[library code from @nijikokun|https://gist.github.com/Nijikokun/5192472]] to handle the conversion.
+See Mozilla Developer Network for details of [[base 64 encoding|https://developer.mozilla.org/en-US/docs/Glossary/Base64]]. [[TiddlyWiki]] uses [[library code from @nijikokun|https://gist.github.com/Nijikokun/5192472]] to handle the conversion.
 
 The input strings must be base64 encoded. The output strings are the text (or binary data) decoded from base64 format.
 

@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The ''action-listops'' widget is an [[action widget|ActionWidgets]] that manipulates user lists in any field or data index. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+The ''action-listops'' widget is an [[action widget|ActionWidgets]] that manipulates user lists in any field or data index. ActionWidgets are used within triggering widgets such as the [[ButtonWidget]].
 
 ! Content and Attributes
 

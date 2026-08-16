@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The ''action-setmultiplefields'' widget is an [[action widget|ActionWidgets]] that assigns multiple fields to a tiddler where the names and values of the fields are specified as separate filters. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+The ''action-setmultiplefields'' widget is an [[action widget|ActionWidgets]] that assigns multiple fields to a tiddler where the names and values of the fields are specified as separate filters. ActionWidgets are used within triggering widgets such as the [[ButtonWidget]].
 
 ! Content and Attributes
 
@@ -22,7 +22,7 @@ The ''action-setmultiplefields'' widget is invisible. Any content within it is i
 
 ! Examples
 
-Here is an example of button that uses the data in [[Days of the Week]] to assign fields `day-Monday`, `day-Tuesday` etc. to the tiddler "HelloThere":
+Here is an example of button that uses the data in [[Days of the Week]] to assign fields `day-Monday`, `day-Tuesday` etc. to the tiddler "[[HelloThere]]":
 
 <$macrocall $name='wikitext-example-without-html'
 src='<$button>

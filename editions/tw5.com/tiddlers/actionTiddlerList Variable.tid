@@ -6,4 +6,4 @@ type: text/vnd.tiddlywiki
 
 The variable `actionTiddlerList` is used:
 
-* Within the ''listActions'' string of the DroppableWidget, the <<.def actionTiddlerList>> [[variable|Variables]] contains a [[Title List]] of the tiddlers being dropped.
+* Within the ''listActions'' string of the [[DroppableWidget]], the <<.def actionTiddlerList>> [[variable|Variables]] contains a [[Title List]] of the tiddlers being dropped.

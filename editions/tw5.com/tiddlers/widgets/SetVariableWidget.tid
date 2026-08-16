@@ -4,4 +4,4 @@ modified: 20141025115603373
 tags: Widgets
 caption: setvariable
 
-The `<$setvariable>` widget is a synonym for `<$set/>`; see SetWidget for more details.
+The `<$setvariable>` widget is a synonym for `<$set/>`; see [[SetWidget]] for more details.

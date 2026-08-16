@@ -12,5 +12,5 @@ Way back in the mists of time (actually, January 2009) I [[wrote|http://www.netw
 Finding code that works flawlessly after just two or three years is magical enough but after seven years?! And given that ~TiddlyWiki is written as a single page Web application and considering how different browsers are now than they were in 2009, the fact that the old version of ~TiddlyWiki still works is not short of miraculous.
 <<<
 
-TiddlyWiki is designed with the long term needs of its users in mind. Because it is OpenSource and needs no infrastructure, we can be confident that all we'll need to access a ~TiddlyWiki file even in the far future is an ordinary HTML browser. If you're starting to use ~TiddlyWiki at the beginning of your career you can be confident that it will carry you through to retirement.
+[[TiddlyWiki]] is designed with the long term needs of its users in mind. Because it is [[OpenSource]] and needs no infrastructure, we can be confident that all we'll need to access a ~TiddlyWiki file even in the far future is an ordinary HTML browser. If you're starting to use ~TiddlyWiki at the beginning of your career you can be confident that it will carry you through to retirement.
 

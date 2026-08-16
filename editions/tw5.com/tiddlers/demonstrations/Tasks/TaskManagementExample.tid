@@ -4,7 +4,7 @@ tags: Learning
 title: TaskManagementExample
 type: text/vnd.tiddlywiki
 
-TiddlyWiki5 can be used as a simple task management system without further customisation.<br>The idea is that tasks be tagged `task`, with those that are completed also tagged `done`. In this way it is straightforward to generate task lists.
+[[TiddlyWiki5]] can be used as a simple task management system without further customisation.<br>The idea is that tasks be tagged `task`, with those that are completed also tagged `done`. In this way it is straightforward to generate task lists.
 
 <<.tip """There is [[an enhanced version of this demo|TaskManagementExample (Draggable)]] that adds the ability to drag and drop the tasks to re-order them.""">>
 

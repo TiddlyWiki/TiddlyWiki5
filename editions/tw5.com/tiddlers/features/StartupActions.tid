@@ -4,7 +4,7 @@ tags: Features
 title: StartupActions
 type: text/vnd.tiddlywiki
 
-TiddlyWiki executes any ActionWidgets found in tiddlers with the following system tags during startup:
+TiddlyWiki executes any [[ActionWidgets]] found in tiddlers with the following system tags during startup:
 
 * Executed during initial startup:
 ** <<tag "$:/tags/StartupAction">> (executed on all platforms)
@@ -41,4 +41,4 @@ Note that global macros are not available within initial startup action tiddlers
 
 !! Post-Render Startup Actions
 
-<<.from-version "5.1.23">> Post-render startup actions occur after the TiddlyWiki user interface has been rendered. This makes it possible to perform actions that depend on the rendered display (such as displaying modals).
+<<.from-version "5.1.23">> Post-render startup actions occur after the [[TiddlyWiki]] user interface has been rendered. This makes it possible to perform actions that depend on the rendered display (such as displaying modals).

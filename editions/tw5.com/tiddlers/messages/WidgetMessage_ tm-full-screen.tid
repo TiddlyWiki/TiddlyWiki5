@@ -10,7 +10,7 @@ The fullscreen message is used to enter, exit or toggle the "fullscreen" mode of
 |!Name |!Description |
 |param |`enter` to enter full screen mode, `exit` to exit it, otherwise toggle the full screen status |
 
-The fullscreen message is handled by the TiddlyWiki core.
+The fullscreen message is handled by the [[TiddlyWiki]] core.
 
 
 <$macrocall $name='wikitext-example-without-html'

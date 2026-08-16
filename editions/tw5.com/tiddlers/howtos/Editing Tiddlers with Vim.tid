@@ -6,4 +6,4 @@ type: text/vnd.tiddlywiki
 
 Devin Weaver has written a [[Vim|http://www.vim.org/]] plugin at https://github.com/sukima/vim-tiddlywiki
 
-It supports most of the TiddlyWiki syntax and includes a filetype plugin which will auto update the `modified` field.
+It supports most of the [[TiddlyWiki]] syntax and includes a filetype plugin which will auto update the `modified` field.

@@ -110,7 +110,7 @@ If the tiddler that contains the macro definition is known and - for example - t
 
 !!! Widgets
 
-* <<.wlink ActionNavigateWidget>> (ActionNavigateWidget)
+* <<.wlink ActionNavigateWidget>> ([[ActionNavigateWidget]])
 
 !!! Messages
 
