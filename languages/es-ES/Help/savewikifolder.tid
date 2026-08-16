@@ -14,10 +14,17 @@ description: Guarda un wiki en una nueva carpeta de wiki
 
 Se admiten las siguientes opciones:
 
-* ''filter'': una expresión de filtro que define los tiddlers que se incluirán en la salida.
-* ''explodePlugins'': por defecto "yes".
-** ''yes'' desplegará los plugins en archivos tiddler separados y los guardará en el directorio de plugins dentro de la carpeta wiki
-** ''no'' no realizará el despliegue del plugin en sus archivos tiddler constituyentes si no que guardará el plugin como un único tiddler JSON en la carpeta tiddlers.
+```
+  filter          una expresión de filtro que define los tiddlers que se
+                  incluirán en la salida
+  explodePlugins  por defecto "yes"
+                  "yes" desplegará los plugins en archivos tiddler separados
+                  y los guardará en el directorio de plugins dentro de la
+                  carpeta wiki
+                  "no" no realizará el despliegue del plugin en sus archivos
+                  tiddler constituyentes si no que guardará el plugin como
+                  un único tiddler JSON en la carpeta tiddlers
+```
 
 Ten en cuenta que ambas opciones ''explodePlugins'' producirán carpetas wiki que construirán exactamente el mismo wiki original. La diferencia radica en cómo se representan los plugins en la carpeta wiki.
 

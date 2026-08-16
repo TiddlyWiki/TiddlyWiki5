@@ -11,7 +11,13 @@ Nastavuje určené pole skupiny tiddlerov na hodnotu výsledku do wiki preveden�
 
 Parametre sú:
 
-* ''filter'' - filter špecifikujúci tiddlery, na ktoré sa má aplikovať
-* ''fieldname'' - pole, ktoré treba modifikovať (štandardne "text")
-* ''templatetitle'' - tiddler, ktorý treba vložiť vo wiki podobe do daného poľa. Ak neexistuje alebo je prázdny, tak sa špecifikované pole vymaže
-* ''rendertype'' - typ textu, ktorý treba renderovať (štandardne "text/plain"; je možné použiť "text/html" na zahrnutie  HTML štítkov)
+```
+  filter          filter špecifikujúci tiddlery, na ktoré sa má aplikovať
+  fieldname       pole, ktoré treba modifikovať (štandardne "text")
+  templatetitle   tiddler, ktorý treba vložiť vo wiki podobe do daného
+                  poľa; ak neexistuje alebo je prázdny, tak sa
+                  špecifikované pole vymaže
+  rendertype      typ textu, ktorý treba renderovať (štandardne
+                  "text/plain"; je možné použiť "text/html" na zahrnutie
+                  HTML štítkov)
+```
