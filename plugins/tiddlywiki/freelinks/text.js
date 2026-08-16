@@ -130,10 +130,6 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 		var matchedTitleToCompare = ignoreCase ? matchedTitle.toLowerCase() : matchedTitle;
 		if(titleToCompare && matchedTitleToCompare === titleToCompare) continue;
 
-		/*
-		A recognised title immediately preceded by "~" is escaped.
-		Hide only this successful escape prefix; do not remove unrelated tildes.
-		*/
 		if(start > 0 && text.charAt(start - 1) === "~") {
 			escapedTildes[start - 1] = 1;
 			continue;
