@@ -74,7 +74,11 @@ TextNodeWidget.prototype.execute = function() {
 		   this.tiddlerTitleInfo.titles.length > 0 && this.tiddlerTitleInfo.ac) {
 			var newParseTree = this.processTextWithMatches(text,currentTiddlerTitle,ignoreCase,useWordBoundary);
 			if(newParseTree && newParseTree.length > 0 &&
-				(newParseTree.length > 1 || newParseTree[0].type !== "plain-text")) {
+			(
+				newParseTree.length > 1 ||
+				newParseTree[0].type !== "plain-text" ||
+				newParseTree[0].text !== text
+			)) {
 				childParseTree = newParseTree;
 			}
 		}
