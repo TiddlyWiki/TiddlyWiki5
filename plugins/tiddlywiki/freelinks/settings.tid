@@ -10,4 +10,10 @@ Filter defining tiddlers to which freelinks are made: <$edit-text tiddler="$:/co
 
 <$checkbox tiddler="$:/config/Freelinks/IgnoreCase" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/Freelinks/IgnoreCase">Ignore case</$link> </$checkbox>
 
+<$checkbox tiddler="$:/config/Freelinks/LinkOnce" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/Freelinks/LinkOnce">Link only the first occurrence of a title in each tiddler</$link> </$checkbox>
+
+<$checkbox tiddler="$:/config/Freelinks/LinkInHeadings" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/Freelinks/LinkInHeadings">Link within headings</$link> </$checkbox>
+
+<$checkbox tiddler="$:/config/Freelinks/LinkNumbers" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/Freelinks/LinkNumbers">Link titles that are only digits, such as `1984`</$link> </$checkbox>
+
 Maximum rendered freelinks (higher values may slow down large tiddlers): <$edit-text tiddler="$:/config/Freelinks/MaxLinks" tag="input" placeholder="500" default="500"/>

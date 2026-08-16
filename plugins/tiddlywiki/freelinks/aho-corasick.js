@@ -74,7 +74,11 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 
 	while(queue.length > 0) {
 		if(processedNodes++ >= maxNodes) {
-			throw new Error("Aho-Corasick: buildFailureLinks exceeded maximum nodes (" + maxNodes + ")");
+			var err = new Error("Aho-Corasick: buildFailureLinks exceeded maximum nodes (" + maxNodes + ")");
+			// Tagged so a caller can recognise this one guard and still let real defects
+			// propagate, rather than matching on the message
+			err.code = "AHO_MAX_NODES";
+			throw err;
 		}
 		var node = queue.shift();
 
