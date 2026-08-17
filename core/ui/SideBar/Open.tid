@@ -27,4 +27,4 @@ caption: {{$:/language/SideBar/Open/Caption}}
 </$list>
 </$animatelayout>
 </div>
-<$button message='tm-close-all-tiddlers' class='tc-btn-invisible tc-btn-mini'><<lingo Button>></$button>
+<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>
