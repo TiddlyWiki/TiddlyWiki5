@@ -1,0 +1,6 @@
+title: $:/schemas/FilterOperatorDocs/op-parameter
+field-type: string
+required: no
+type: text/vnd.tiddlywiki
+
+Describes the parameter accepted by the filter operator. If the operator accepts no parameters, this field should be set to `none`.

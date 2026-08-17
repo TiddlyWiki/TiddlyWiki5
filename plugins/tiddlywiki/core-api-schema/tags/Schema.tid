@@ -1,0 +1,4 @@
+title: $:/tags/Schema
+type: text/vnd.tiddlywiki
+
+Tiddlers tagged with this tag are schema definitions that constrain the fields of other tiddlers.

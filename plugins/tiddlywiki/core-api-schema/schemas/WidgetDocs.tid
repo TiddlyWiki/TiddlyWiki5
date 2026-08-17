@@ -1,0 +1,8 @@
+title: $:/schemas/WidgetDocs
+tags: $:/tags/Schema
+fields: widget-purpose widget-tag-name from-version any-attributes-not-starting-with-$
+type: text/vnd.tiddlywiki
+
+Schema for widget documentation tiddlers under `$:/docs/widgets/`.
+
+Each tiddler matching this schema describes one widget's high-level metadata, enabling visual editors to enumerate available widgets.

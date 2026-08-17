@@ -54,10 +54,12 @@ Average length of <$text text=<<number-of-tiddlers>>/> tiddlers tagged <<tag "He
 <th align="left">Purpose</th>
 </tr>
 <$list filter="[tag[Mathematics Operators]sort[caption]]">
+<$let currentCaption={{{ [all[current]get[caption]] }}} docsTitle={{{ [[$:/docs/filter-operators/]addsuffix<currentCaption>] }}}>
 <tr>
 <td><$link>{{!!caption}}</$link></td>
-<td>{{!!op-purpose}}</td>
+<td><$text text={{{ [<docsTitle>get[op-purpose]] ~[all[current]get[op-purpose]] }}}/></td>
 </tr>
+</$let>
 </$list>
 </table>
 
