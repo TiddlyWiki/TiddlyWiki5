@@ -1,0 +1,39 @@
+title: $:/core/ui/PluginInfo/Default/tree-tab
+tags: $:/tags/PluginInfoTab
+caption: tree view
+filter: [<pluginTitle>plugintiddlers[]count[]compare::gteq[15]]]
+
+\function treePrefix() [<currentTiddler>addsuffix[/]]
+\procedure directoryContents() [<currentTiddler>plugintiddlers[]]
+\procedure nonDirectoryContents() [<currentTiddler>plugintiddlers[]!prefix<treePrefix>]
+<style>
+    .container {
+      display: flex;
+      flex-wrap: wrap; 
+    }
+
+    .box {
+      flex: 1 1 300px; /* Grow/Shrink, but not below 300px */
+      min-width: 300px;
+      box-sizing: border-box; 
+     }
+  </style>
+
+  <div class="container">
+    <div class="box">
+           ''Plugin Directory Contents''
+          <$transclude $variable="tree" prefix=<<treePrefix>> filter=<<directoryContents>> />
+     </div>
+    <div class="box tc-tree">
+          ''Other Contents''
+          <%if [subfilter<nonDirectoryContents>count[]compare::gt[10]] %>
+                <$transclude $variable="tree" prefix="" filter=<<nonDirectoryContents>> />
+          <%else%>
+              <ol>
+                 <$list filter=<<nonDirectoryContents>> >
+                     <li><span>{{$:/core/images/file}}</span>&#32;<<currentTiddler>></li>
+                 </$list>
+             </ol>
+          <%endif%>
+     </div>
+  </div>
