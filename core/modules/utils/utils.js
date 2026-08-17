@@ -699,7 +699,7 @@ exports.encodeURIComponentExtended = function(s) {
 
 // Checks whether a link target is external, i.e. not a tiddler title
 exports.isLinkExternal = function(to) {
-	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|obsidian|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
+	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|obsidian|data|skype|zotero):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 
