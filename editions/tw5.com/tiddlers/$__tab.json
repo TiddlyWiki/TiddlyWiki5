@@ -1,0 +1,32 @@
+{
+    "tiddlers": {
+        "$:/config/ShortcutInfo/tab": {
+            "text": "Insert Tab",
+            "title": "$:/config/ShortcutInfo/tab"
+        },
+        "$:/config/shortcuts-mac/tab": {
+            "text": "tab",
+            "title": "$:/config/shortcuts-mac/tab"
+        },
+        "$:/config/shortcuts-not-mac/tab": {
+            "text": "tab",
+            "title": "$:/config/shortcuts-not-mac/tab"
+        },
+        "$:/tab/icon": {
+            "text": "<svg class=\"tc-image-tab tc-image-button\" width=\"22pt\" height=\"22pt\" viewBox=\"0 0 128 128\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M122 123h-11.5V65.3H122zm-19.3-28.8L73.9 123V99.9H6.6V88.4h67.3V65.3zM6.6 65.4V7.7h11.5v57.7zm19.3-28.8L54.7 7.8v23.1H122v11.5H54.7v23.1z\"/></svg>",
+            "tags": "$:/tags/Image",
+            "title": "$:/tab/icon"
+        },
+        "$:/insert/tab": {
+            "text": "<$action-sendmessage\n\t$message=\"tm-edit-text-operation\"\n\t$param=\"insert-text\"\n\ttext={{{ [charcode[9]] }}}\n/>",
+            "title": "$:/insert/tab",
+            "tags": "$:/tags/EditorToolbar",
+            "icon": "$:/tab/icon",
+            "caption": "Tab",
+            "description": "Insert Tab",
+            "condition": "[<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]",
+            "shortcuts": "((tab))",
+            "condition-disabled": "[[$:/temp/bold/disabled]get[state-disabled]else[no]]"
+        }
+    }
+}
