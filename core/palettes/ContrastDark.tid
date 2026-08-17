@@ -12,6 +12,7 @@ alert-muted-foreground: #880000
 background: #000000
 blockquote-bar: <<colour muted-foreground>>
 button-background: <<colour background>>
+button-background-hover: #333333
 button-foreground: <<colour foreground>>
 button-border: <<colour foreground>>
 code-background: <<colour background>>

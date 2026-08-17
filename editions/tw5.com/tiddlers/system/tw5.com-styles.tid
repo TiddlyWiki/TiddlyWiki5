@@ -40,11 +40,16 @@ type: text/vnd.tiddlywiki
 
 .tc-improvement-banner {
 	font-size: 0.7em;
-	background: #fcc;
+	background: #ffeedd;
+	color: #664400;
 	padding-left: 5px;
 	margin-top: 6px;
 	margin-bottom: 12px;
-	<<box-shadow "2px 2px 2px rgba(0,0,0,0.4)">>
+	<<box-shadow "0 1px 4px rgba(0,0,0,0.12)">>
+}
+
+.tc-improvement-banner a {
+	color: #3355aa;
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
@@ -71,8 +76,8 @@ type: text/vnd.tiddlywiki
 		margin-top: -10px;
 		border-top: 5px solid transparent;
 		border-left: 5px solid transparent;
-		border-right: 5px solid #C07E7E;
-		border-bottom: 5px solid #C07E7E;
+		border-right: 5px solid #ddbb88;
+		border-bottom: 5px solid #ddbb88;
 	}
 
 }

@@ -13,6 +13,7 @@ alert-muted-foreground: rgb(224, 82, 82)
 background: rgb(38, 38, 38)
 blockquote-bar: rgba(240, 196, 117, 0.7)
 button-background: rgb(63, 63, 63)
+button-background-hover: rgb(60, 60, 60)
 button-border: rgb(127, 127, 127)
 button-foreground: rgb(179, 179, 179)
 code-background: rgba(0,0,0,0.03)
@@ -52,7 +53,7 @@ message-foreground: <<colour tag-background>>
 modal-backdrop: rgb(179, 179, 179)
 modal-background: rgb(38, 38, 38)
 modal-border: rgba(0,0,0,.5)
-modal-footer-background: #f4f4f4
+modal-footer-background: <<colour modal-background>>
 modal-footer-border: rgba(0,0,0,.1)
 modal-header-border: rgba(0,0,0,.2)
 muted-foreground: rgb(255, 255, 255)

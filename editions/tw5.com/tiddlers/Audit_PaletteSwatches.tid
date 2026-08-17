@@ -1,0 +1,24 @@
+created: 20260410152150305
+modified: 20260410152150305
+tags: 
+title: Audit: Palette Swatches
+type: text/vnd.tiddlywiki
+
+\procedure render-swatch()
+<$let val={{{ [{$:/palette}getindex<colourName>] ~[<colourName>] }}}>
+<div class={{{ [<colourName>addprefix[tc-swatch-]] }}} style="display:inline-block;width:80px;height:32px;margin:1px;border-radius:2px;border:1px solid rgba(128,128,128,0.3);position:relative;overflow:hidden;" title=<<colourName>>>
+<div style="position:absolute;bottom:0;left:0;right:0;font-size:7px;line-height:1.2;padding:1px 2px;background:rgba(0,0,0,0.55);color:#fff;white-space:nowrap;overflow:hidden;"><$text text=<<colourName>>/></div>
+</div>
+</$let>
+\end
+
+\procedure swatch-css()
+<$list filter="[{$:/palette}indexes[]]" variable="colourName"><$text text={{{ [<colourName>addprefix[.tc-swatch-]addsuffix[ {background: <<colour ]addsuffix<colourName>addsuffix[>>;}]] }}}/> </$list>
+\end
+
+<$wikify name="css" text="<<swatch-css>>">
+<style><<css>></style>
+</$wikify>
+
+<div style="font-size:10px;margin-bottom:4px;">''<$text text={{$:/palette}}/>''</div>
+<$list filter="[{$:/palette}indexes[]] +[sort[]]" variable="colourName"><<render-swatch>></$list>

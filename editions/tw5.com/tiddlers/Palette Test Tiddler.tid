@@ -1,0 +1,7 @@
+tags: test-tag
+title: Palette Test Tiddler
+type: text/vnd.tiddlywiki
+
+Test tiddler.
+
+''Bold'' and [[link|HelloThere]].
