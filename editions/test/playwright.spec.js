@@ -1,5 +1,5 @@
 const { test, expect } = require("@playwright/test");
-const {resolve} = require("path");
+const { resolve } = require("path");
 
 const indexPath = resolve(__dirname, "output", "test.html");
 const crossPlatformIndexPath = indexPath.replace(/^\/+/, "");
@@ -9,6 +9,10 @@ test("get started link", async ({ page }) => {
 	// The tests can take a while to run
 	const timeout = 1000 * 60;
 	test.setTimeout(timeout);
+
+	// Avoid long offline stalls if the generated test page references external assets.
+	await page.route("http://**/*", (route) => route.abort());
+	await page.route("https://**/*", (route) => route.abort());
 
 	// Load the generated test TW html
 	await page.goto(`file:///${crossPlatformIndexPath}`);

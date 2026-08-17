@@ -4,7 +4,11 @@ const { defineConfig, devices } = require('@playwright/test');
  * @see https://playwright.dev/docs/test-configuration
  */
 module.exports = defineConfig({
-  testDir: './editions/test/',
+  // Look for test files in multiple locations
+  testMatch: [
+    'editions/test/**/*.spec.js',
+    'plugins/**/tests/**/*.spec.js'
+  ],
 
   timeout: 60000,
 
@@ -21,10 +25,15 @@ module.exports = defineConfig({
   workers: process.env.CI ? 1 : undefined,
 
   // Reporter to use. See https://playwright.dev/docs/test-reporters
-  reporter: 'html',
+  reporter: [
+    ['list'],
+    ['html', { open: 'never' }]
+  ],
 
   // Settings shared with all the tests
   use: {
+    // Default to headless for stable automated runs; use --headed to override.
+    headless: true,
     screenshot: {
       mode: 'only-on-failure',
       fullPage: true

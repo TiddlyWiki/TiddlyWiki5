@@ -888,6 +888,12 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	color: <<colour tiddler-background>>;
 }
 
+.tc-drop-down a.tc-list-item-selected,
+.tc-drop-down a.tc-list-item-selected:hover {
+	background-color: <<colour primary>>;
+	color: <<colour tiddler-background>>;
+}
+
 /*
 ** Page layout
 */
@@ -1907,6 +1913,11 @@ html body.tc-body.tc-single-tiddler-window {
 	text-align: start;
 	color: <<colour foreground>>;
 	line-height: 1.4;
+}
+
+.tc-drop-down > p {
+	margin: 0;
+	padding: 0;
 }
 
 .tc-drop-down .tc-tab-set .tc-tab-buttons button {

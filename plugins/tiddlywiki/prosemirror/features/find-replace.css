@@ -1,0 +1,52 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/features/find-replace.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+Structural styles for the ProseMirror find and replace panel.
+
+\*/
+
+.tc-prosemirror-find-replace-panel {
+	border: 1px solid transparent;
+	border-bottom: none;
+	padding: 6px 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.tc-prosemirror-find-replace-row {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.tc-prosemirror-find-input,
+.tc-prosemirror-replace-input {
+	flex: 1;
+	padding: 4px 8px;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	font-size: 0.9em;
+	min-width: 120px;
+}
+
+.tc-prosemirror-find-count {
+	font-size: 0.85em;
+	min-width: 40px;
+	text-align: center;
+}
+
+.tc-prosemirror-find-btn {
+	padding: 2px 8px;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 0.85em;
+}
+
+.tc-prosemirror-find-current {
+	border-radius: 2px;
+	outline: 2px solid transparent;
+}
