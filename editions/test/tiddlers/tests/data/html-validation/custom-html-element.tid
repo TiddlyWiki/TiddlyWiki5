@@ -1,0 +1,35 @@
+created: 20251030161131333
+description: Custom HTML Element
+modified: 20260127083425045
+tags: $:/tags/wiki-test-spec
+title: custom-html-element
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Handled by: $:/core/modules/widgets/element.js
+
+```
+// Sanitize tag name if needed according to Custom Web-Componenets spec
+this.tag = $tw.utils.makeTagNameSafe(this.tag, "safe-" + this.tag);
+```
++
+title: Output
+
+<custom-element>custom element</custom-element>
+
+<!-- no custom element -->
+
+<Nocustomelement>no custom element but browsers allow it</Nocustomelement>
+
+<1asdf>start with 1 is not allowed </1asdf>
+
+<!-- the following element is allowed -->
+
+<as-df-1>as-df-1 is allowed</as-df-1>
+
++
+title: ExpectedResult
+
+<p><custom-element>custom element</custom-element></p><p><Nocustomelement>no custom element but browsers allow it</Nocustomelement></p><p>&lt;1asdf&gt;start with 1 is not allowed &lt;/1asdf&gt;</p><p><as-df-1>as-df-1 is allowed</as-df-1>
+</p>
