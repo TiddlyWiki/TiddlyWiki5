@@ -2,4 +2,4 @@ title: $:/core/images/erase
 tags: $:/tags/Image
 
 \parameters (size:"22pt")
-<svg width=<<size>> height=<<size>> class="tc-image-erase tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M60.087 127.996l63.015-63.015c6.535-6.535 6.528-17.115-.003-23.646L99.466 17.702c-6.539-6.538-17.117-6.532-23.646-.003L4.898 88.62c-6.535 6.534-6.528 17.115.003 23.646l15.73 15.73h39.456zm-34.95-7.313l-14.324-14.325c-3.267-3.268-3.268-8.564-.008-11.824L46.269 59.07l35.462 35.462-26.15 26.15H25.137z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>> viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tc-image-erase tc-image-button lucide lucide-eraser-icon lucide-eraser"><path d="M21 21H8a2 2 0 0 1-1.42-.587l-3.994-3.999a2 2 0 0 1 0-2.828l10-10a2 2 0 0 1 2.829 0l5.999 6a2 2 0 0 1 0 2.828L12.834 21"/><path d="m5.082 11.09 8.828 8.828"/></svg>
