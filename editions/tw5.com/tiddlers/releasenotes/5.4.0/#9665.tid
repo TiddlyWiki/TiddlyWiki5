@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9665
+description: Add diff view for overridden shadow tiddlers to the Advanced tab
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: enhancement
+change-category: usability
+github-links: https://github.com/Jermolene/TiddlyWiki5/pull/9665
+github-contributors: DesignThinkerer
+
+The Tiddler Info panel's `Advanced` tab now includes a functional diff view for overridden shadow tiddlers, allowing users to identify exactly which fields differ from the original shadow source.
