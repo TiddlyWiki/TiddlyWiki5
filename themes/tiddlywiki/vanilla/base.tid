@@ -541,6 +541,10 @@ a.tc-tiddlylink-external:hover {
 	position: relative;
 }
 
+.tc-page-drag-events {
+	min-height: inherit;
+}
+
 .tc-dropzone.tc-dragover:before {
 	z-index: 10000;
 	display: block;
@@ -566,22 +570,23 @@ a.tc-tiddlylink-external:hover {
 	cursor: move;
 }
 
-/*
-** The dragged item is dimmed on its children rather than on itself, so that the drop
-** target outline drawn on the item stays at full strength
-*/
+.tc-animatelayout-moving {
+	pointer-events: none;
+}
+
+.tc-animatelayout-moving [data-animate-hold] {
+	pointer-events: auto;
+}
 
 .tc-live-reorderable-ghost > * {
 	opacity: var(--tc-live-reorder-ghost-opacity,0.3);
 }
 
-/*
-** An absolutely positioned pseudo element rather than an outline or a border: the item is
-** mid animation and taking part in layout, so the marker must take up no space, and it
-** needs its bottom edge inset on its own because the item is a flow-root and so contains
-** the bottom margin of the content it wraps. Consumers whose content carries such a margin
-** say so with --tc-live-reorder-drop-target-bottom
-*/
+.tc-live-reorder-backstop {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+}
 
 .tc-live-reorderable-drop-target::after {
 	content: "";
@@ -598,6 +603,10 @@ a.tc-tiddlylink-external:hover {
 .tc-links-draggable-list .tc-droppable-placeholder {
 	line-height: 2em;
 	height: 2em;
+}
+
+.tc-sidebar-tab-open {
+	position: relative;
 }
 
 .tc-sidebar-tab-open-item {

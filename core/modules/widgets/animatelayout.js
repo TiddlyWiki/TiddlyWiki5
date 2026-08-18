@@ -89,6 +89,23 @@ AnimateLayoutWidget.prototype.measure = function() {
 };
 
 /*
+Collect the elements inside a travelling element that are to be left where the browser put
+them. A transform moves what an element answers to as well as where it is drawn, so a drop
+target carried along by an animation stops covering the ground it is leaving and does not
+yet cover the ground it is going to. Two elements passing each other therefore leave the
+places they came from answering to nothing at all, and a drop there is refused
+*/
+AnimateLayoutWidget.prototype.getHeldNodes = function(node) {
+	var nodes = [];
+	if(node.querySelectorAll) {
+		$tw.utils.each(node.querySelectorAll("[data-animate-hold]"),function(held) {
+			nodes.push(held);
+		});
+	}
+	return nodes;
+};
+
+/*
 Play the difference between the recorded positions and the current ones
 */
 AnimateLayoutWidget.prototype.play = function(previousPositions) {
@@ -103,6 +120,10 @@ AnimateLayoutWidget.prototype.play = function(previousPositions) {
 	$tw.utils.each(nodes,function(node) {
 		node.style.transition = "";
 		node.style.transform = "";
+	});
+	$tw.utils.each(this.getHeldNodes(this.parentDomNode),function(held) {
+		held.style.transition = "";
+		held.style.transform = "";
 	});
 	// Measure every element before moving any of them
 	$tw.utils.each(nodes,function(node) {
@@ -120,13 +141,14 @@ AnimateLayoutWidget.prototype.play = function(previousPositions) {
 			deltaY = previous.top - rect.top,
 			scaleX = 1,
 			scaleY = 1;
-		if(self.animateScale && rect.width > 0 && rect.height > 0) {
+		if(self.animateScale && rect.width > 0 && rect.height > 0 && previous.width > 0 && previous.height > 0) {
 			scaleX = previous.width / rect.width;
 			scaleY = previous.height / rect.height;
 		}
 		if(Math.abs(deltaX) >= 0.5 || Math.abs(deltaY) >= 0.5 ||
 			Math.abs(scaleX - 1) >= 0.005 || Math.abs(scaleY - 1) >= 0.005) {
-			moves.push({node: node, key: key, deltaX: deltaX, deltaY: deltaY, scaleX: scaleX, scaleY: scaleY});
+			moves.push({node: node, key: key, deltaX: deltaX, deltaY: deltaY, scaleX: scaleX, scaleY: scaleY,
+				held: self.getHeldNodes(node)});
 		}
 	});
 	if(moves.length === 0) {
@@ -139,6 +161,15 @@ AnimateLayoutWidget.prototype.play = function(previousPositions) {
 		move.node.style.transition = "none";
 		move.node.style.transformOrigin = "0 0";
 		move.node.style.transform = "translate(" + move.deltaX + "px," + move.deltaY + "px) scale(" + move.scaleX + "," + move.scaleY + ")";
+		// Give held elements the inverse of what their element is about to be given, so that
+		// the two compose to nothing. Both are released in the same frame with the same
+		// duration and easing, so a translation cancels at every step of the journey rather
+		// than only at its ends
+		$tw.utils.each(move.held,function(held) {
+			held.style.transition = "none";
+			held.style.transformOrigin = "0 0";
+			held.style.transform = "scale(" + (1 / move.scaleX) + "," + (1 / move.scaleY) + ") translate(" + (-move.deltaX) + "px," + (-move.deltaY) + "px)";
+		});
 	});
 	// Flush the inverted position so that it becomes the start of the transition
 	$tw.utils.forceLayout(moves[0].node);
@@ -146,6 +177,10 @@ AnimateLayoutWidget.prototype.play = function(previousPositions) {
 	$tw.utils.each(moves,function(move) {
 		move.node.style.transition = "transform " + self.animateDuration + "ms " + self.animateEasing;
 		move.node.style.transform = "";
+		$tw.utils.each(move.held,function(held) {
+			held.style.transition = "transform " + self.animateDuration + "ms " + self.animateEasing;
+			held.style.transform = "";
+		});
 		self.markMoving(move.node,move.key);
 	});
 };

@@ -12,6 +12,8 @@ tags: $:/tags/PageTemplate
 
 <section class={{{ [all[shadows+tiddlers]tag[$:/tags/ClassFilters/StoryRiver]!is[draft]] :map:flat[subfilter{!!text}] tc-story-river :and[join[ ]] }}} role="main">
 
+<$transclude $variable="make-live-reorder-backstop" list="$:/StoryList" dragState=<<tf.get-story-drag-state>>/>
+
 <section class="story-backdrop">
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/AboveStory]!has[draft.of]]">

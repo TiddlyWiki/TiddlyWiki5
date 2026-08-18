@@ -15,6 +15,8 @@ code-body: yes
 			from-list=<<list>>
 			start-index={{{ [list<list>allbefore<tiddler>count[]] }}}
 			preview-list={{{ [<tf.lr.is-deferred>match[yes]then<list>get[list]] }}}
+			start-list={{{ [<list>get[list]] }}}
+			commit=<<commit>>
 		/>
 	<% endif %>
 </$let>
@@ -103,6 +105,34 @@ code-body: yes
 />
 \end
 
+\procedure live-reorder-revert-actions()
+<$list filter="[all[tiddlers]tag[$:/tags/dragState]]" variable="revertState">
+	<$let
+		startList={{{ [<revertState>get[start-list]] }}}
+		fromList={{{ [<revertState>get[from-list]] }}}
+		revertDeferred={{{ [<revertState>get[commit]match[drop]then[yes]] :else[[no]] }}}
+	>
+		<%if [<revertDeferred>match[yes]] %>
+			<%if [<revertState>get[preview-list]!match<startList>] %>
+				<$action-setfield
+					$tiddler=<<revertState>>
+					$field="preview-list"
+					$value=<<startList>>
+				/>
+			<% endif %>
+		<% else %>
+			<%if [<fromList>get[list]!match<startList>] %>
+				<$action-setfield
+					$tiddler=<<fromList>>
+					$field="list"
+					$value=<<startList>>
+				/>
+			<% endif %>
+		<% endif %>
+	</$let>
+</$list>
+\end
+
 \function tf.lr.is-dragging() [<dragState>get[text]match[yes]then[yes]] :else[[no]]
 
 \function tf.lr.is-deferred() [<commit>match[drop]then[yes]] :else[[no]]
@@ -125,6 +155,17 @@ code-body: yes
 \function tf.lr.get-after-height() [<tf.lr.is-vertical>match[yes]then[50%]] :else[[100%]]
 
 \function tf.lr.get-item-class() tc-live-reorderable [<tf.lr.is-ghost>match[yes]then[tc-live-reorderable-ghost]] [<tf.lr.is-drop-target>match[yes]then[tc-live-reorderable-drop-target]] [<class>] :and[join[ ]]
+
+\procedure make-live-reorder-backstop(list:"",dragState:"$:/state/tiddlywiki/live-reorder",dropActions:"",commit:"live")
+\whitespace trim
+<%if [<tf.lr.is-dragging>match[yes]] %>
+	<$droppable
+		tag="div"
+		class="tc-live-reorder-backstop"
+		actions=<<live-reorder-drop-actions>>
+	/>
+<% endif %>
+\end
 
 \procedure make-live-reorderable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
 \whitespace trim
@@ -151,6 +192,7 @@ code-body: yes
 		>
 			<div
 				class="tc-live-reorderable-drop-placeholder"
+				data-animate-hold="yes"
 				style.position="absolute"
 				style.top=<<tf.lr.get-before-top>>
 				style.left=<<tf.lr.get-before-left>>
@@ -166,6 +208,7 @@ code-body: yes
 		>
 			<div
 				class="tc-live-reorderable-drop-placeholder"
+				data-animate-hold="yes"
 				style.position="absolute"
 				style.top=<<tf.lr.get-after-top>>
 				style.left=<<tf.lr.get-after-left>>
