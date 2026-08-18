@@ -1,6 +1,6 @@
 caption: droppable
 created: 20170406082820317
-modified: 20240612125454153
+modified: 20260818111799000
 tags: Widgets TriggeringWidgets
 title: DroppableWidget
 type: text/vnd.tiddlywiki
@@ -34,6 +34,11 @@ See DragAndDropMechanism for an overview.
 |! Attribute |! Description |
 |actions |Actions to be performed when items are dropped. It activates ''1 action per item'' |
 |listActions |<<.from-version "5.3.4">> Actions to be performed when items are dropped. It activates ''1 action for'' a the whole ''list of items'' |
+|dragEnterActions |<<.from-version "5.5.0">> Actions to be performed when a drag arrives over the droppable element. Crossing between elements inside it does not count as a new arrival |
+|dragLeaveActions |<<.from-version "5.5.0">> Actions to be performed when a drag leaves the droppable element, or finishes while still over it. A drop is an arrival rather than a departure, so these are not performed when something is dropped |
+|dragEndActions |<<.from-version "5.5.0">> Actions to be performed when a drag finishes, provided the element being dragged lies within this droppable element. The browser raises the `dragend` event on the element being dragged, so a droppable element that does not contain it never learns that the drag is over |
+|effect |Optional [[drop effect|https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect]] shown by the pointer while a drag is over the element: `copy` (the default), `move`, `link` or `none` |
+|disabledClass |<<.from-version "5.1.23">> Optional CSS classes to assign to the element when the droppable functionality has been switched off with <<.param enable>> |
 |class |Optional CSS classes to assign to the draggable element. The class `tc-droppable` is added automatically, and the class `tc-dragover` is applied while an item is being dragged over the droppable element |
 |tag |Optional tag to override the default of a "div" element when the widget is rendered in block mode, or a "span" element when it is rendered in inline mode |
 |enable |<<.from-version "5.1.22">> Optional value "no" to disable the droppable functionality (defaults to "yes") |

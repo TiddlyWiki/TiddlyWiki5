@@ -1,5 +1,5 @@
 created: 20170328143119836
-modified: 20170328173846754
+modified: 20260818111759000
 tags: Features
 title: Drag and Drop
 type: text/vnd.tiddlywiki
@@ -11,6 +11,7 @@ type: text/vnd.tiddlywiki
 
 Tiddler manipulation via drag and drop is supported by the core user interface in the following contexts:
 
+* Tiddlers in the story river can be reordered by drag and drop, once that has been switched on in the [[control panel|$:/ControlPanel]] <<.from-version "5.5.0">>
 * Entries in the "Open" tab of the sidebar can be reordered by drag and drop; new tiddlers can be opened by dragging their titles into the list
 * Entries within a tag pill dropdown can be reordered by drag and drop; new tiddlers can be assigned the tag by dragging their titles into the list
 * Entries in the [[control panel|$:/ControlPanel]] "Appearance"/"Toolbars" tab can be reordered by drag and drop. (Less usefully, new entries can be added to the toolbars by dragging their titles into the list)
@@ -25,6 +26,21 @@ Some common scenarios for drag and drop tiddler manipulation are available as re
 
 * [[list-links-draggable Macro]] for reordering the entries in a tiddler ListField
 * [[list-tagged-draggable Macro]] for reordering the tiddlers that carry a specified tag
+* <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">> <<.from-version "5.5.0">> for a list whose new order is shown while it is being chosen, as the story river and the "Open" tab do
+
+! Settings
+
+<<.from-version "5.5.0">> The way tiddlers are dragged within a ~TiddlyWiki is settled in the [[control panel|$:/ControlPanel]] under "Appearance"/"Drag & Drop":
+
+|!Setting |!Default |!Description |
+|<<.tid "$:/config/story/dragndrop/enable">> |`no` |Whether tiddlers in the story river can be reordered by dragging them |
+|<<.tid "$:/config/DragAndDrop/show-drop-target">> |`no` |Whether to outline the place where the dragged tiddler will land |
+|<<.tid "$:/config/DragAndDrop/animation/duration">> |`400` |How long, in milliseconds, a tiddler takes to settle into its new place. Zero animates nothing |
+|<<.tid "$:/config/DragAndDrop/animation/easing">> |`cubic-bezier(0.05,0.7,0.1,1)` |How that movement is paced. The choices offered are the tiddlers tagged <<.tag "$:/tags/DragAndDrop/Easing">>, and adding one of your own to that tag adds it to the list |
+|<<.tid "$:/config/StoryRiver/masonry">> |`no` |Whether to lay the story river out as a masonry grid, placing tiddlers in columns rather than one below another. Only on screens wide enough to show the sidebar |
+|<<.tid "$:/config/StoryRiver/masonry-columns">> |`2` |How many columns that grid has |
+
+<<.tip "The easing decides how hurried the movement feels rather more than the duration does. A curve that covers most of the distance at once, as the default one does, reads as a jump followed by a slow settle however long it is given, while a gentler curve spreads the movement out.">>
 
 See DragAndDropMechanism for details of how to use the low level drag and drop primitives to build more complex interactions.
 

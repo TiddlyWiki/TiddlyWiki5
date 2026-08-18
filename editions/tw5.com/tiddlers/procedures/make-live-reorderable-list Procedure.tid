@@ -1,0 +1,51 @@
+caption: make-live-reorderable-list
+created: 20260818111752000
+modified: 20260818111752000
+tags: [[Core Procedures]] [[Drag and Drop]]
+title: make-live-reorderable-list Procedure
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> The <<.def make-live-reorderable-list>> [[procedure|Procedures]] renders a list whose items the user can put in a different order by dragging them. The order is shown as it is being chosen: the other items move aside as the dragged one passes, so that what is on the screen is always what the list will look like if it is dropped there. See DragAndDropMechanism for an overview.
+
+It is used by the story river and by the "Open" tab of the sidebar.
+
+The procedure renders three things: the items themselves, an AnimateLayoutWidget so that items settle into their new places rather than jumping, and a drop target covering the whole list so that a drop between the items still lands. The two procedures it uses for those, <<.def make-live-reorderable>> and <<.def make-live-reorder-backstop>>, are described separately and are not normally used on their own.
+
+!! Parameters
+
+|!Parameter |!Description |
+|list |Title of the tiddler whose ''list'' field holds the order being shown and changed |
+|content |The markup for a single item, usually a procedure. It is rendered once per item with <<.vlink currentTiddler>> set to that item |
+|commit |When to write the new order: `live` (the default) changes the list as the drag proceeds, `drop` assembles the order in the drag state and writes it to the list only when the item is dropped |
+|dragState |Title of the tiddler holding the state of the drag (defaults to `$:/state/tiddlywiki/live-reorder`). Each list needs its own, so pass a title made with the <<.mlink qualify>> macro if the list can appear more than once |
+|enable |Optional value "no" to switch dragging off, leaving the list rendered as usual (defaults to "yes") |
+|dropActions |Optional actions to be performed after an item has been dropped |
+|class |Optional CSS classes to assign to each item |
+|history |Optional title of the history tiddler, passed to the ListWidget |
+|storyview |Optional name of the storyview module that animates changes to the list, passed to the ListWidget |
+|emptyMessage |Optional message to show when the list is empty, passed to the ListWidget |
+|duration |Optional length of the settling animation in milliseconds (defaults to {{$:/config/DragAndDrop/animation/duration}}) |
+|easing |Optional easing of the settling animation (defaults to the value of `$:/config/DragAndDrop/animation/easing`) |
+|direction |`vertical` (the default) if the items are stacked one above another, or `horizontal` if they sit side by side. It decides whether an item is split into a top and a bottom half or a left and a right one |
+|itemDisplay |Optional CSS `display` value for each item (defaults to `flow-root`) |
+|ghostOpacity |Optional opacity of the item being dragged (defaults to `0.3`) |
+|styleZIndex |Optional `z-index` for the drop targets (defaults to `501`) |
+
+!! Where it can be rendered
+
+<<.warning """Render it with `$mode="inline"`. Rendered in block mode the items are wrapped in a paragraph, which puts them in a different element from the drop target that covers the list.""">>
+
+The element the list is laid out in must be positioned, meaning it must have a CSS `position` other than `static`, because the drop target that covers the list is placed against it. Nothing else should be rendered between that element and the items, so that the items are drawn on top of that drop target rather than beneath it.
+
+!! Example
+
+```
+\procedure my-item()
+<div class="my-item"><$text text=<<currentTiddler>>/></div>
+\end
+
+<div style="position: relative;">
+<$transclude $variable="make-live-reorderable-list" $mode="inline"
+	list="$:/StoryList" content=<<my-item>> dragState=<<qualify "$:/state/my-list">>/>
+</div>
+```
