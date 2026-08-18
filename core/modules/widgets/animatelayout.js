@@ -3,8 +3,9 @@ title: $:/core/modules/widgets/animatelayout.js
 type: application/javascript
 module-type: widget
 
-Animates its children between layout positions. Where an element ends up is left entirely
-to the browser; this only makes the journey visible.
+Animates its children between layout positions. Where an element ends up is left to the
+browser; the difference between where it was and where it now is is played back as a
+transform, which takes no part in layout
 
 \*/
 
@@ -26,14 +27,8 @@ var AnimateLayoutWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-/*
-Inherit from the base widget class
-*/
 AnimateLayoutWidget.prototype = new Widget();
 
-/*
-Render this widget into the DOM
-*/
 AnimateLayoutWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -42,9 +37,6 @@ AnimateLayoutWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-Compute the internal state of the widget
-*/
 AnimateLayoutWidget.prototype.execute = function() {
 	this.animateKey = this.getAttribute("key","data-animate-key");
 	this.animateList = this.getAttribute("list");
@@ -56,9 +48,6 @@ AnimateLayoutWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-/*
-Collect the elements taking part, identified by their key attribute
-*/
 AnimateLayoutWidget.prototype.getAnimatedNodes = function() {
 	if(!this.parentDomNode || !this.parentDomNode.querySelectorAll) {
 		return [];
@@ -70,11 +59,6 @@ AnimateLayoutWidget.prototype.getAnimatedNodes = function() {
 	return nodes;
 };
 
-/*
-Record where every keyed element currently appears on screen. getBoundingClientRect
-reports the visual box, so an element part way through an earlier animation is recorded
-where it actually is, which is what makes interrupted animations continue smoothly
-*/
 AnimateLayoutWidget.prototype.measure = function() {
 	var self = this,
 		positions = Object.create(null);
@@ -88,13 +72,6 @@ AnimateLayoutWidget.prototype.measure = function() {
 	return positions;
 };
 
-/*
-Collect the elements inside a travelling element that are to be left where the browser put
-them. A transform moves what an element answers to as well as where it is drawn, so a drop
-target carried along by an animation stops covering the ground it is leaving and does not
-yet cover the ground it is going to. Two elements passing each other therefore leave the
-places they came from answering to nothing at all, and a drop there is refused
-*/
 AnimateLayoutWidget.prototype.getHeldNodes = function(node) {
 	var nodes = [];
 	if(node.querySelectorAll) {
@@ -105,9 +82,6 @@ AnimateLayoutWidget.prototype.getHeldNodes = function(node) {
 	return nodes;
 };
 
-/*
-Play the difference between the recorded positions and the current ones
-*/
 AnimateLayoutWidget.prototype.play = function(previousPositions) {
 	var self = this,
 		nodes = this.getAnimatedNodes(),
@@ -115,8 +89,6 @@ AnimateLayoutWidget.prototype.play = function(previousPositions) {
 	if(nodes.length === 0) {
 		return;
 	}
-	// Drop any transform left over from an earlier animation, so that the measurement
-	// below is of the position the browser has chosen rather than of a transformed one
 	$tw.utils.each(nodes,function(node) {
 		node.style.transition = "";
 		node.style.transform = "";
@@ -125,7 +97,6 @@ AnimateLayoutWidget.prototype.play = function(previousPositions) {
 		held.style.transition = "";
 		held.style.transform = "";
 	});
-	// Measure every element before moving any of them
 	$tw.utils.each(nodes,function(node) {
 		var key = node.getAttribute(self.animateKey);
 		if(!key) {
@@ -133,7 +104,6 @@ AnimateLayoutWidget.prototype.play = function(previousPositions) {
 		}
 		var previous = previousPositions[key];
 		if(!previous) {
-			// Newly present, so there is no previous position to travel from
 			return;
 		}
 		var rect = node.getBoundingClientRect(),
@@ -154,26 +124,17 @@ AnimateLayoutWidget.prototype.play = function(previousPositions) {
 	if(moves.length === 0) {
 		return;
 	}
-	// Put everything back where it was. The corner the deltas were measured from is the
-	// corner the transform has to grow from, or a scaled element would travel to the wrong
-	// place
 	$tw.utils.each(moves,function(move) {
 		move.node.style.transition = "none";
 		move.node.style.transformOrigin = "0 0";
 		move.node.style.transform = "translate(" + move.deltaX + "px," + move.deltaY + "px) scale(" + move.scaleX + "," + move.scaleY + ")";
-		// Give held elements the inverse of what their element is about to be given, so that
-		// the two compose to nothing. Both are released in the same frame with the same
-		// duration and easing, so a translation cancels at every step of the journey rather
-		// than only at its ends
 		$tw.utils.each(move.held,function(held) {
 			held.style.transition = "none";
 			held.style.transformOrigin = "0 0";
 			held.style.transform = "scale(" + (1 / move.scaleX) + "," + (1 / move.scaleY) + ") translate(" + (-move.deltaX) + "px," + (-move.deltaY) + "px)";
 		});
 	});
-	// Flush the inverted position so that it becomes the start of the transition
 	$tw.utils.forceLayout(moves[0].node);
-	// Release, and let the transition carry each element to where the browser put it
 	$tw.utils.each(moves,function(move) {
 		move.node.style.transition = "transform " + self.animateDuration + "ms " + self.animateEasing;
 		move.node.style.transform = "";
@@ -185,11 +146,6 @@ AnimateLayoutWidget.prototype.play = function(previousPositions) {
 	});
 };
 
-/*
-Carry a class for as long as an element is travelling, so that a stylesheet can say how a
-moving element should look. An element caught by a second change part way through its
-journey keeps the class until that later journey ends rather than the earlier one
-*/
 AnimateLayoutWidget.prototype.markMoving = function(node,key) {
 	var self = this;
 	if(!node.classList) {
@@ -206,9 +162,6 @@ AnimateLayoutWidget.prototype.markMoving = function(node,key) {
 	},this.animateDuration);
 };
 
-/*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
-*/
 AnimateLayoutWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.key) {
@@ -218,11 +171,6 @@ AnimateLayoutWidget.prototype.refresh = function(changedTiddlers) {
 	this.animateList = this.getAttribute("list");
 	this.animateDuration = parseInt(this.getAttribute("duration","400"),10) || 0;
 	this.animateEasing = this.getAttribute("easing","ease-out");
-	// Read enable here rather than rebuilding the children when it changes, so that it can
-	// be a condition that is asked on each refresh: whoever uses this widget decides which
-	// changes are worth animating. Play only when the list being reordered has actually
-	// changed, so that the other refreshes arriving during a drag do not each pay for a
-	// measurement of every element
 	this.animateEnable = this.getAttribute("enable","yes") === "yes";
 	this.animateReducedMotion = this.getAttribute("reducedmotion","respect");
 	this.animateScale = this.getAttribute("scale","no") === "yes";

@@ -12,8 +12,6 @@ tags: $:/tags/PageTemplate
 
 <section class={{{ [all[shadows+tiddlers]tag[$:/tags/ClassFilters/StoryRiver]!is[draft]] :map:flat[subfilter{!!text}] tc-story-river :and[join[ ]] }}} role="main">
 
-<$transclude $variable="make-live-reorder-backstop" list="$:/StoryList" dragState=<<tf.get-story-drag-state>>/>
-
 <section class="story-backdrop">
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/AboveStory]!has[draft.of]]">
@@ -24,15 +22,7 @@ tags: $:/tags/PageTemplate
 
 </section>
 
-<$animatelayout list="$:/StoryList" enable={{{ [dragging[]] }}} duration={{$:/config/DragAndDrop/animation/duration}} easing={{$:/config/DragAndDrop/animation/easing}}>
-
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}>
-
-<$transclude $variable="make-live-reorderable" $mode="inline" tiddler=<<currentTiddler>> enable={{$:/config/story/dragndrop/enable}} list="$:/StoryList" content=<<content>> dragState=<<tf.get-story-drag-state>>/>
-
-</$list>
-
-</$animatelayout>
+<$transclude $variable="make-live-reorderable-list" $mode="inline" list="$:/StoryList" content=<<content>> enable={{$:/config/story/dragndrop/enable}} history="$:/HistoryList" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}} dragState=<<tf.get-story-drag-state>>/>
 
 <section class="story-frontdrop">
 

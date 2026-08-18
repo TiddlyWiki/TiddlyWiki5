@@ -63,20 +63,12 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	this.currentlyEntered = [];
 };
 
-/*
-Whether the drag is over us. The second condition resolves a problem with Firefox whereby
-there is an erroneous dragenter event if the node being dragged is within the dropzone
-*/
+// The second condition is to resolve a problem with Firefox whereby there is an erroneous dragenter event if the node being dragged is within the dropzone
 DroppableWidget.prototype.isEntered = function() {
 	return !(this.currentlyEntered.length === 0 ||
 		(this.currentlyEntered.length === 1 && this.currentlyEntered[0] === $tw.dragInProgress));
 };
 
-/*
-Forget entered nodes that have since left the document. A node taken away while the drag was
-over it never raises the dragleave that would have balanced its dragenter, and without this
-we would believe the drag was still over us for the rest of the drag
-*/
 DroppableWidget.prototype.pruneEntered = function() {
 	this.currentlyEntered = this.currentlyEntered.filter(function(node) {
 		return node.isConnected !== false;
@@ -89,8 +81,6 @@ DroppableWidget.prototype.enterDrag = function(event) {
 	if(this.currentlyEntered.indexOf(event.target) === -1) {
 		this.currentlyEntered.push(event.target);
 	}
-	// Only an arrival from outside is an arrival. Crossing between our own children raises a
-	// dragenter of its own, and that is not something to tell anyone about twice
 	if(wasEntered || !this.isEntered()) {
 		return;
 	}
@@ -103,11 +93,6 @@ DroppableWidget.prototype.enterDrag = function(event) {
 	}
 };
 
-/*
-Forget any outstanding enters and drop the highlighting, without announcing that the drag
-has left. A drop is an arrival rather than a departure, so it clears the same state but must
-not tell anyone that the drag went away
-*/
 DroppableWidget.prototype.resetDrag = function() {
 	this.currentlyEntered = [];
 	if(this.domNodes[0]) {
@@ -122,8 +107,6 @@ DroppableWidget.prototype.leaveDrag = function(event) {
 	if(pos !== -1) {
 		this.currentlyEntered.splice(pos,1);
 	}
-	// Only a departure by something that had arrived is a departure, and only once we are
-	// out of children to be within
 	if(!wasEntered || this.isEntered()) {
 		return;
 	}
@@ -160,8 +143,6 @@ DroppableWidget.prototype.handleDragEndEvent = function(event) {
 	var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event),
 		wasEntered = this.isEntered();
 	this.resetDrag();
-	// A drag that ends while it is over us has also left us, so say so before saying that the
-	// drag itself is over. A drop has already reset us, so this does not follow one
 	if(wasEntered && this.droppableLeaveActions) {
 		this.invokeActionString(this.droppableLeaveActions,this,event,{modifier: modifierKey});
 	}
@@ -169,8 +150,6 @@ DroppableWidget.prototype.handleDragEndEvent = function(event) {
 	if(this.droppableEndActions) {
 		this.invokeActionString(this.droppableEndActions,this,event,{modifier: modifierKey});
 	}
-	// Neither prevented nor stopped: dragend belongs to the element being dragged, and it
-	// must reach its own handler and any handler above us
 	return false;
 };
 

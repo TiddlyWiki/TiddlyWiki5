@@ -1159,11 +1159,6 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	border: 1px solid <<colour tiddler-border>>;
 }
 
-/*
-** The drop target marker hugs the frame rather than the gap below it. Keep this in step
-** with the margin-bottom above
-*/
-
 .tc-story-river {
 	--tc-live-reorder-drop-target-bottom: 28px;
 }
