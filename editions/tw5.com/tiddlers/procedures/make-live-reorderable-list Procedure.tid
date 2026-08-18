@@ -1,9 +1,13 @@
 caption: make-live-reorderable-list
 created: 20260818111752000
-modified: 20260818111752000
+modified: 20260818120604087
 tags: [[Core Procedures]] [[Drag and Drop]]
 title: make-live-reorderable-list Procedure
 type: text/vnd.tiddlywiki
+
+\procedure kanban-card()
+<div style="padding:0.4em 0.6em;margin-bottom:0.4em;border:1px solid #888;border-radius:3px;background:#f6f6f6;color:#222;"><$text text=<<currentTiddler>>/></div>
+\end
 
 <<.from-version "5.5.0">> The <<.def make-live-reorderable-list>> [[procedure|Procedures]] renders a list whose items the user can put in a different order by dragging them. The order is shown as it is being chosen: the other items move aside as the dragged one passes, so that what is on the screen is always what the list will look like if it is dropped there. See DragAndDropMechanism for an overview.
 
@@ -19,6 +23,8 @@ The procedure renders three things: the items themselves, an AnimateLayoutWidget
 |commit |When to write the new order: `live` (the default) changes the list as the drag proceeds, `drop` assembles the order in the drag state and writes it to the list only when the item is dropped |
 |dragState |Title of the tiddler holding the state of the drag (defaults to `$:/state/tiddlywiki/live-reorder`). Each list needs its own, so pass a title made with the <<.mlink qualify>> macro if the list can appear more than once |
 |enable |Optional value "no" to switch dragging and dropping off, leaving the list rendered as usual. Left unset, the list follows the <<.var tv-enable-drag-and-drop>> variable, which carries the reader's own setting for drag and drop; giving a value here decides the matter for this list whatever that setting says |
+|group |Optional name of a group of lists that exchange items. Lists given the same group share the state of a drag, which is what lets an item dragged out of one of them be carried into another. Left blank, the list keeps its items to itself |
+|transfer |What becomes of an item carried out of this list: `move` (the default) takes it out, `copy` leaves it behind. It describes only what happens to the list the drag started in, since an item carried on from a list it was dropped into is always moved |
 |acceptDrops |Optional value "yes" to let items dragged from elsewhere be dropped into the list, which inserts them at the place they are dropped (defaults to "no"). The "Open" tab of the sidebar uses this, so that dragging a tiddler title into it opens that tiddler at that position |
 |dropActions |Optional actions to be performed after an item has been dropped |
 |class |Optional CSS classes to assign to each item |
@@ -40,7 +46,9 @@ The element the list is laid out in must be positioned, meaning it must have a C
 
 <<.warning "A list that accepts drops keeps its drop targets at all times, not only while one of its own items is being dragged. Those targets take the drop in place of anything behind them, including the DropzoneWidget that imports tiddlers dragged in from outside the window, so it is worth switching on only where the list is a small enough part of the page for that not to matter.">>
 
-!! Example
+!! Examples
+
+!!! Reordering one list
 
 ```
 \procedure my-item()
@@ -52,3 +60,30 @@ The element the list is laid out in must be positioned, meaning it must have a C
 	list="$:/StoryList" content=<<my-item>> dragState=<<qualify "$:/state/my-list">>/>
 </div>
 ```
+
+!!! Two lists that exchange items
+
+Giving two lists the same <<.param group>> lets a card be dragged out of one and into the other. Each column is positioned, as the list requires, and lays its cards out one below another:
+
+<$let board-todo="$:/temp/kanban/todo" board-doing="$:/temp/kanban/doing">
+
+<$button>
+<$action-listops $tiddler=<<board-todo>> $field="list" $filter="Sketch Spec Icons Palette Copy Layout Tests"/>
+<$action-listops $tiddler=<<board-doing>> $field="list" $filter="Header Sidebar Search Print Import Export Backup"/>
+Set up the board
+</$button>
+
+<div style="display:flex;gap:1em;align-items:flex-start;">
+<div style="flex:1;position:relative;">
+''To do''
+<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-todo>> content=<<kanban-card>> group="kanban"/>
+</div>
+<div style="flex:1;position:relative;">
+''Doing''
+<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-doing>> content=<<kanban-card>> group="kanban"/>
+</div>
+</div>
+
+</$let>
+
+<<.tip """Add `transfer="copy"` to a column and cards dragged out of it are left behind rather than taken away, which is how a column of things to pick from rather than to move is built.""">>
