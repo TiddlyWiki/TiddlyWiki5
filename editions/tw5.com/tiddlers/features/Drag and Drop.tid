@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 Tiddler manipulation via drag and drop is supported by the core user interface in the following contexts:
 
 * Tiddlers in the story river can be reordered by drag and drop, once that has been switched on in the [[control panel|$:/ControlPanel]] <<.from-version "5.5.0">>
-* Entries in the "Open" tab of the sidebar can be reordered by drag and drop; new tiddlers can be opened by dragging their titles into the list
+* Entries in the "Open" tab of the sidebar can be reordered by drag and drop; tiddlers can be opened by dragging their titles into the list, which opens up to show where they will go before they are let go of. Dragging a tag pill in brings every tiddler carrying that tag <<.from-version "5.5.0">>
 * Entries within a tag pill dropdown can be reordered by drag and drop; new tiddlers can be assigned the tag by dragging their titles into the list
 * Entries in the [[control panel|$:/ControlPanel]] "Appearance"/"Toolbars" tab can be reordered by drag and drop. (Less usefully, new entries can be added to the toolbars by dragging their titles into the list)
 

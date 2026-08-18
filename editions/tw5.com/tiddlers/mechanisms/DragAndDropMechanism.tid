@@ -38,6 +38,16 @@ The sequence of a reordering drag is as follows:
 # Dropping keeps the new order. A drag that ends anywhere else puts the order back the way it was found, as does a drag that wanders off the list, so that what is shown is always what a drop would do
 # The state tiddler is deleted, whichever way the drag ended
 
+! Showing where something dragged from elsewhere would go
+
+A list can be told to take in whatever is dragged to it, and not only its own items. Showing where such a thing would land needs to know what is being dragged, and that cannot be asked of the drag: what a drag carries is kept from the page until it is dropped, which is why it is only read in the drop handler.
+
+What is being dragged is therefore written down when the drag begins, in <<.tid "$:/state/dragging">>, whose ''list'' field holds the titles. A drag started from a tag pill carries every tiddler with that tag, so there may be many of them, and all of them are shown. Since it is a tiddler, writing it refreshes what is on screen, which is what lets a list answer the very first movement over it.
+
+The first list the drag reaches takes it on: it writes the same kind of state tiddler as it would for a drag of its own, naming itself as where the drag came from and recording the order it had before. Everything that follows is then the same as reordering its own items, and putting things back if the drag is abandoned is the same as well. Because such a drag ends on something that is not part of the list, the end of it is noticed by a handler over the whole page rather than by the item that was dragged.
+
+The document itself is marked while a drag is under way, with the class `tc-drag-in-progress` on the body element, so that a stylesheet can answer a drag. The core uses it to let a list keep its drop targets in place at all times without those targets swallowing the clicks meant for what lies beneath them.
+
 ! When the new order is written
 
 Reordering the "Open" tab changes <<.tid "$:/StoryList">>, which is also what the story river shows. Writing that list as the drag proceeds would make the story river shuffle its tiddlers about while the user is dragging a row in the sidebar, so the two are given different moments to write at, chosen with the <<.param commit>> parameter:
