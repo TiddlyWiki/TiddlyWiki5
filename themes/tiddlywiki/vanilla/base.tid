@@ -592,6 +592,14 @@ a.tc-tiddlylink-external:hover {
 	--tc-live-reorder-drop-target-bottom: 0px;
 }
 
+.tc-live-reorderable-drop-placeholder {
+	pointer-events: none;
+}
+
+body.tc-drag-in-progress .tc-live-reorderable-drop-placeholder {
+	pointer-events: auto;
+}
+
 .tc-live-reorderable-drop-target::after {
 	content: "";
 	position: absolute;

@@ -27,6 +27,7 @@ The procedure renders three things: the items themselves, an AnimateLayoutWidget
 |transfer |What becomes of an item carried out of this list: `move` (the default) takes it out, `copy` leaves it behind. It describes only what happens to the list the drag started in, since an item carried on from a list it was dropped into is always moved |
 |acceptDrops |Optional value "yes" to let items dragged from elsewhere be dropped into the list, which inserts them at the place they are dropped (defaults to "no"). The "Open" tab of the sidebar uses this, so that dragging a tiddler title into it opens that tiddler at that position |
 |dropActions |Optional actions to be performed after an item has been dropped |
+|dropTargetInset |Optional distance to hold the drop target outline clear of the bottom of an item, for content that carries a bottom margin of its own. An item contains the bottom margin of what it wraps, so without this the outline is drawn around that gap as well as around the content |
 |class |Optional CSS classes to assign to each item |
 |history |Optional title of the history tiddler, passed to the ListWidget |
 |storyview |Optional name of the storyview module that animates changes to the list, passed to the ListWidget |
@@ -79,15 +80,15 @@ Set up the board
 <div style="display:flex;gap:1em;align-items:flex-start;">
 <div style="flex:1;position:relative;">
 ''To do''
-<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-todo>> content=<<kanban-card>> group="kanban"/>
+<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-todo>> content=<<kanban-card>> group="kanban" dropTargetInset="0.4em"/>
 </div>
 <div style="flex:1;position:relative;">
 ''Doing''
-<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-doing>> content=<<kanban-card>> group="kanban"/>
+<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-doing>> content=<<kanban-card>> group="kanban" dropTargetInset="0.4em"/>
 </div>
 <div style="flex:1;position:relative;">
 ''Done''
-<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-done>> content=<<kanban-card>> group="kanban"/>
+<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-done>> content=<<kanban-card>> group="kanban" dropTargetInset="0.4em"/>
 </div>
 </div>
 </div>

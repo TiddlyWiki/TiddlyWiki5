@@ -247,19 +247,19 @@ code-body: yes
 </$let>
 \end
 
-\procedure make-live-reorderable-list(list:"",content:"",class:"",enable:"",acceptDrops:"no",group:"",transfer:"move",dropActions:"",history:"",storyview:"",emptyMessage:"",duration:"",easing:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
+\procedure make-live-reorderable-list(list:"",content:"",class:"",enable:"",acceptDrops:"no",group:"",transfer:"move",dropTargetInset:"",dropActions:"",history:"",storyview:"",emptyMessage:"",duration:"",easing:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
 \whitespace trim
 <$let dragState=<<tf.lr.get-drag-state>>>
 	<$transclude $variable="make-live-reorder-backstop" $mode="inline" list=<<list>> enable=<<enable>> group=<<group>> dragState=<<dragState>> dropActions=<<dropActions>> commit=<<commit>>/>
 	<$animatelayout list=<<tf.lr.get-animate-list>> enable={{{ [dragging[]] }}} duration=<<tf.lr.get-duration>> easing=<<tf.lr.get-easing>>>
 		<$list filter="[enlist<tf.lr.get-preview>] :else[list<list>]" history=<<history>> storyview=<<storyview>> emptyMessage=<<emptyMessage>>>
-			<$transclude $variable="make-live-reorderable" $mode="inline" tiddler=<<currentTiddler>> class=<<class>> content=<<content>> list=<<list>> enable=<<enable>> acceptDrops=<<acceptDrops>> group=<<group>> transfer=<<transfer>> dropActions=<<dropActions>> dragState=<<dragState>> direction=<<direction>> itemDisplay=<<itemDisplay>> ghostOpacity=<<ghostOpacity>> styleZIndex=<<styleZIndex>> commit=<<commit>>/>
+			<$transclude $variable="make-live-reorderable" $mode="inline" tiddler=<<currentTiddler>> class=<<class>> content=<<content>> list=<<list>> enable=<<enable>> acceptDrops=<<acceptDrops>> group=<<group>> transfer=<<transfer>> dropTargetInset=<<dropTargetInset>> dropActions=<<dropActions>> dragState=<<dragState>> direction=<<direction>> itemDisplay=<<itemDisplay>> ghostOpacity=<<ghostOpacity>> styleZIndex=<<styleZIndex>> commit=<<commit>>/>
 		</$list>
 	</$animatelayout>
 </$let>
 \end
 
-\procedure make-live-reorderable(tiddler:"",class:"",content:"",list:"",enable:"",acceptDrops:"no",group:"",transfer:"move",dropActions:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
+\procedure make-live-reorderable(tiddler:"",class:"",content:"",list:"",enable:"",acceptDrops:"no",group:"",transfer:"move",dropTargetInset:"",dropActions:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
 \whitespace trim
 \rules except dash
 <$let dragState=<<tf.lr.get-drag-state>>>
@@ -273,6 +273,7 @@ code-body: yes
 		style.display=<<itemDisplay>>
 		style.position="relative"
 		--tc-live-reorder-ghost-opacity=<<ghostOpacity>>
+		--tc-live-reorder-drop-target-bottom=<<dropTargetInset>>
 	>
 		<$set name="tv-enable-drag-and-drop" value={{{ [<tf.lr.get-enable>match[yes]then[no]] :else[<tv-enable-drag-and-drop>] }}}>
 			<<content>>

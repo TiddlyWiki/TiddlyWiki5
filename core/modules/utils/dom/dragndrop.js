@@ -9,6 +9,18 @@ Browser data transfer utilities, used with the clipboard and drag and drop
 
 "use strict";
 
+/*
+Say in the document what $tw.dragInProgress says in here, so that a stylesheet can answer a
+drag as well. Nothing is refreshed when a drag begins, so this cannot be left to the wikitext
+to notice
+*/
+function markDragInProgress(domNode,status) {
+	var doc = domNode.ownerDocument;
+	if(doc && doc.body && doc.body.classList) {
+		doc.body.classList[status ? "add" : "remove"]("tc-drag-in-progress");
+	}
+}
+
 function endDragInProgress(domNode) {
 	if($tw.dragInProgress !== domNode) {
 		return;
@@ -16,6 +28,7 @@ function endDragInProgress(domNode) {
 	$tw.utils.nextTick(function() {
 		if($tw.dragInProgress === domNode) {
 			$tw.dragInProgress = null;
+			markDragInProgress(domNode,false);
 		}
 	});
 }
@@ -68,6 +81,7 @@ exports.makeDraggable = function(options) {
 		if(titles.length > 0 && (options.selector && $tw.utils.domMatchesSelector(event.target,options.selector) || event.target === domNode)) {
 			// Mark the drag in progress
 			$tw.dragInProgress = domNode;
+			markDragInProgress(domNode,true);
 			installDragEndBackstop(domNode);
 			// Set the dragging class on the element being dragged
 			$tw.utils.addClass(domNode,"tc-dragging");
