@@ -1,0 +1,127 @@
+title: $:/core/templates/library.template.html
+type: text/html
+
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="application-name" content="TiddlyWiki Plugin Library" />
+<meta name="application-version" content="v0.0.0" />
+<meta name="copyright" content="Copyright 2015 Jeremy Ruston" />
+<link id="faviconLink" rel="shortcut icon" href="favicon.ico">
+<title>Plugin Library</title>
+<script>	
+/*
+A simple HTTP-over-window.postMessage implementation of a standard TiddlyWeb-compatible server. It uses real HTTP to load the individual tiddler JSON files.
+*/
+
+// Listen for window messages
+window.addEventListener("message",function listener(event){
+	console.log("plugin library: Received message from",event.origin);
+	console.log("plugin library: Message content",event.data);
+	switch(event.data.verb) {
+		case "GET":
+			if(event.data.url === "recipes/library/tiddlers.json") {
+				// Route for recipes/library/tiddlers.json
+				var url = "library/";
+				httpGet(url,function(err,responseText) {
+					if(err) {
+						event.source.postMessage({
+							verb: "GET-RESPONSE",
+							status: "404",
+							cookies: event.data.cookies,
+							url: event.data.url,
+							type: "text/plain",
+							body: "Not found"
+						},"*");
+					} else {
+						event.source.postMessage({
+							verb: "GET-RESPONSE",
+							status: "200",
+							cookies: event.data.cookies,
+							url: event.data.url,
+							type: "application/json",
+							body: responseText
+						},"*");
+					}
+				});
+			} else if(event.data.url.indexOf("recipes/library/tiddlers/") === 0) {
+				var url = "library/" + encodeURIComponent(removeSuffix(removePrefix(event.data.url,"recipes/library/tiddlers/"),".json"));
+				// Route for recipes/library/tiddlers/<uri-encoded-tiddler-title>.json
+				httpGet(url,function(err,responseText) {
+					if(err) {
+						event.source.postMessage({
+							verb: "GET-RESPONSE",
+							status: "404",
+							cookies: event.data.cookies,
+							url: event.data.url,
+							type: "text/plain",
+							body: "Not found"
+						},"*");
+					} else {
+						event.source.postMessage({
+							verb: "GET-RESPONSE",
+							status: "200",
+							cookies: event.data.cookies,
+							url: event.data.url,
+							type: "application/json",
+							body: responseText
+						},"*");
+					}
+				});
+			} else {
+				event.source.postMessage({
+					verb: "GET-RESPONSE",
+					status: "404",
+					cookies: event.data.cookies,
+					url: event.data.url,
+					type: "text/plain",
+					body: "Not found"
+				},"*");
+			}
+			break;
+	}
+},false);
+
+// Helper to remove string prefixes
+function removePrefix(string,prefix) {
+	if(string.indexOf(prefix) === 0) {
+		return string.substr(prefix.length);
+	} else {
+		return string;
+	}
+}
+
+// Helper to remove string suffixes
+function removeSuffix(string,suffix) {
+	if(string.indexOf(suffix) === string.length - suffix.length) {
+		return string.substr(0,string.length - suffix.length);
+	} else {
+		return string;
+	}
+}
+
+// Helper for HTTP GET
+function httpGet(url,callback) {
+	var http = new XMLHttpRequest();
+	http.open("GET",url,true);
+	http.onreadystatechange = function() {
+		if(http.readyState == 4 && http.status == 200) {
+			callback(null,http.responseText);
+		}
+	};
+	http.send();
+}
+
+</script>
+</head>
+<body>
+
+<h1>HelloThere</h1>
+
+<p>This is the TiddlyWiki plugin library. It is not intended to be opened directly in the browser.</p>
+
+<p>See <a href="https://tiddlywiki.com/" target="_blank">https://tiddlywiki.com/</a> for details of how to install plugins.</p>
+
+</body>
+</html>
