@@ -74,6 +74,34 @@ code-body: yes
 <<dropActions>>
 \end
 
+\procedure live-reorder-before-drop-actions()
+<%if [<tf.lr.is-dragging>match[yes]] %>
+	<<live-reorder-drop-actions>>
+<% else %>
+	<%if [<actionTiddler>!match<tiddler>] %>
+		<$action-listops
+			$tiddler=<<list>>
+			$subfilter="+[insertbefore<actionTiddler>,<tiddler>]"
+		/>
+		<<dropActions>>
+	<% endif %>
+<% endif %>
+\end
+
+\procedure live-reorder-after-drop-actions()
+<%if [<tf.lr.is-dragging>match[yes]] %>
+	<<live-reorder-drop-actions>>
+<% else %>
+	<%if [<actionTiddler>!match<tiddler>] %>
+		<$action-listops
+			$tiddler=<<list>>
+			$subfilter="+[insertafter<actionTiddler>,<tiddler>]"
+		/>
+		<<dropActions>>
+	<% endif %>
+<% endif %>
+\end
+
 \procedure live-reorder-drag-end-actions()
 <%if [<dragState>addsuffix[/drag-handled]is[missing]] %>
 	<%if [<tf.lr.is-deferred>match[no]] %>
@@ -144,6 +172,10 @@ code-body: yes
 \function tf.lr.is-ghost() [<tf.lr.is-dragging>match[yes]then<dragState>get[drag-tiddler]match<tiddler>then[yes]] :else[[no]]
 \function tf.lr.show-drop-target() [{$:/config/DragAndDrop/show-drop-target}match[yes]then[yes]] :else[[no]]
 \function tf.lr.is-drop-target() [<tf.lr.is-ghost>match[yes]then<tf.lr.show-drop-target>] :else[[no]]
+\function tf.lr.get-enable() [<enable>!is[blank]then<enable>] :else[<tv-enable-drag-and-drop>match[no]then[no]] :else[[yes]]
+\function tf.lr.accepts-drops() [<acceptDrops>match[yes]then[yes]] :else[[no]]
+\function tf.lr.show-targets() [<tf.lr.is-dragging>match[yes]then[yes]] :else[<tf.lr.accepts-drops>]
+
 \function tf.lr.is-vertical() [<direction>match[vertical]then[yes]] :else[[no]]
 \function tf.lr.get-before-top() [<tf.lr.is-vertical>match[yes]then[0]] :else[[0]]
 \function tf.lr.get-before-left() [[0]]
@@ -161,32 +193,33 @@ code-body: yes
 \function tf.lr.get-duration() [<duration>!is[blank]then<duration>] :else[{$:/config/DragAndDrop/animation/duration}]
 \function tf.lr.get-easing() [<easing>!is[blank]then<easing>] :else[{$:/config/DragAndDrop/animation/easing}]
 
-\procedure make-live-reorder-backstop(list:"",dragState:"$:/state/tiddlywiki/live-reorder",dropActions:"",commit:"live")
+\procedure make-live-reorder-backstop(list:"",enable:"",dragState:"$:/state/tiddlywiki/live-reorder",dropActions:"",commit:"live")
 \whitespace trim
 <%if [<tf.lr.is-dragging>match[yes]] %>
 	<$droppable
 		tag="div"
+		enable=<<tf.lr.get-enable>>
 		class="tc-live-reorder-backstop"
 		actions=<<live-reorder-drop-actions>>
 	/>
 <% endif %>
 \end
 
-\procedure make-live-reorderable-list(list:"",content:"",class:"",enable:"yes",dropActions:"",history:"",storyview:"",emptyMessage:"",duration:"",easing:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
+\procedure make-live-reorderable-list(list:"",content:"",class:"",enable:"",acceptDrops:"no",dropActions:"",history:"",storyview:"",emptyMessage:"",duration:"",easing:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
 \whitespace trim
-<$transclude $variable="make-live-reorder-backstop" $mode="inline" list=<<list>> dragState=<<dragState>> dropActions=<<dropActions>> commit=<<commit>>/>
+<$transclude $variable="make-live-reorder-backstop" $mode="inline" list=<<list>> enable=<<enable>> dragState=<<dragState>> dropActions=<<dropActions>> commit=<<commit>>/>
 <$animatelayout list=<<tf.lr.get-animate-list>> enable={{{ [dragging[]] }}} duration=<<tf.lr.get-duration>> easing=<<tf.lr.get-easing>>>
 <$list filter="[enlist<tf.lr.get-preview>] :else[list<list>]" history=<<history>> storyview=<<storyview>> emptyMessage=<<emptyMessage>>>
-<$transclude $variable="make-live-reorderable" $mode="inline" tiddler=<<currentTiddler>> class=<<class>> content=<<content>> list=<<list>> enable=<<enable>> dropActions=<<dropActions>> dragState=<<dragState>> direction=<<direction>> itemDisplay=<<itemDisplay>> ghostOpacity=<<ghostOpacity>> styleZIndex=<<styleZIndex>> commit=<<commit>>/>
+<$transclude $variable="make-live-reorderable" $mode="inline" tiddler=<<currentTiddler>> class=<<class>> content=<<content>> list=<<list>> enable=<<enable>> acceptDrops=<<acceptDrops>> dropActions=<<dropActions>> dragState=<<dragState>> direction=<<direction>> itemDisplay=<<itemDisplay>> ghostOpacity=<<ghostOpacity>> styleZIndex=<<styleZIndex>> commit=<<commit>>/>
 </$list>
 </$animatelayout>
 \end
 
-\procedure make-live-reorderable(tiddler:"",class:"",content:"",list:"",enable:"yes",dropActions:"",history:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
+\procedure make-live-reorderable(tiddler:"",class:"",content:"",list:"",enable:"",acceptDrops:"no",dropActions:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
 \whitespace trim
 \rules except dash
 <$draggable
-	enable=<<enable>>
+	enable=<<tf.lr.get-enable>>
 	tiddler=<<tiddler>>
 	startactions=<<live-reorder-drag-start-actions>>
 	endactions=<<live-reorder-drag-end-actions>>
@@ -196,13 +229,14 @@ code-body: yes
 	style.position="relative"
 	--tc-live-reorder-ghost-opacity=<<ghostOpacity>>
 >
-	<$set name="tv-enable-drag-and-drop" value={{{ [<enable>match[yes]then[no]] :else[<tv-enable-drag-and-drop>] }}}>
+	<$set name="tv-enable-drag-and-drop" value={{{ [<tf.lr.get-enable>match[yes]then[no]] :else[<tv-enable-drag-and-drop>] }}}>
 		<<content>>
 	</$set>
-	<%if [<tf.lr.is-dragging>match[yes]] %>
+	<%if [<tf.lr.show-targets>match[yes]] %>
 		<$droppable
+			enable=<<tf.lr.get-enable>>
 			class="tc-live-reorderable-drop-before"
-			actions=<<live-reorder-drop-actions>>
+			actions=<<live-reorder-before-drop-actions>>
 			dragEnterActions=<<live-reorder-before-drag-enter-actions>>
 		>
 			<div
@@ -217,8 +251,9 @@ code-body: yes
 			/>
 		</$droppable>
 		<$droppable
+			enable=<<tf.lr.get-enable>>
 			class="tc-live-reorderable-drop-after"
-			actions=<<live-reorder-drop-actions>>
+			actions=<<live-reorder-after-drop-actions>>
 			dragEnterActions=<<live-reorder-after-drag-enter-actions>>
 		>
 			<div

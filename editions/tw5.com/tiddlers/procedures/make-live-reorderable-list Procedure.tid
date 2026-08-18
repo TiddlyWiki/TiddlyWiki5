@@ -18,7 +18,8 @@ The procedure renders three things: the items themselves, an AnimateLayoutWidget
 |content |The markup for a single item, usually a procedure. It is rendered once per item with <<.vlink currentTiddler>> set to that item |
 |commit |When to write the new order: `live` (the default) changes the list as the drag proceeds, `drop` assembles the order in the drag state and writes it to the list only when the item is dropped |
 |dragState |Title of the tiddler holding the state of the drag (defaults to `$:/state/tiddlywiki/live-reorder`). Each list needs its own, so pass a title made with the <<.mlink qualify>> macro if the list can appear more than once |
-|enable |Optional value "no" to switch dragging off, leaving the list rendered as usual (defaults to "yes") |
+|enable |Optional value "no" to switch dragging and dropping off, leaving the list rendered as usual. Left unset, the list follows the <<.var tv-enable-drag-and-drop>> variable, which carries the reader's own setting for drag and drop; giving a value here decides the matter for this list whatever that setting says |
+|acceptDrops |Optional value "yes" to let items dragged from elsewhere be dropped into the list, which inserts them at the place they are dropped (defaults to "no"). The "Open" tab of the sidebar uses this, so that dragging a tiddler title into it opens that tiddler at that position |
 |dropActions |Optional actions to be performed after an item has been dropped |
 |class |Optional CSS classes to assign to each item |
 |history |Optional title of the history tiddler, passed to the ListWidget |
@@ -36,6 +37,8 @@ The procedure renders three things: the items themselves, an AnimateLayoutWidget
 <<.warning """Render it with `$mode="inline"`. Rendered in block mode the items are wrapped in a paragraph, which puts them in a different element from the drop target that covers the list.""">>
 
 The element the list is laid out in must be positioned, meaning it must have a CSS `position` other than `static`, because the drop target that covers the list is placed against it. Nothing else should be rendered between that element and the items, so that the items are drawn on top of that drop target rather than beneath it.
+
+<<.warning "A list that accepts drops keeps its drop targets at all times, not only while one of its own items is being dragged. Those targets take the drop in place of anything behind them, including the DropzoneWidget that imports tiddlers dragged in from outside the window, so it is worth switching on only where the list is a small enough part of the page for that not to matter.">>
 
 !! Example
 

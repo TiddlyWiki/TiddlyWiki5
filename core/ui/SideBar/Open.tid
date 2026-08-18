@@ -18,6 +18,6 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \end
 
 <div class="tc-sidebar-tab-open">
-<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<tv-story-list>> content=<<content>> history=<<tv-history-list>> storyview="pop" duration=<<tf.get-open-tab-animation-duration>> dragState=<<tf.get-open-tab-drag-state>> commit="drop"/>
+<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<tv-story-list>> content=<<content>> history=<<tv-history-list>> storyview="pop" acceptDrops="yes" duration=<<tf.get-open-tab-animation-duration>> dragState=<<tf.get-open-tab-drag-state>> commit="drop"/>
 </div>
 <$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>

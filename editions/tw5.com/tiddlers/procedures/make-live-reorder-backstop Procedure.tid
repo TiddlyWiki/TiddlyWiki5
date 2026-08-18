@@ -11,4 +11,6 @@ It answers only where the items themselves do not, catching what falls between t
 
 <<.tip """This is used internally by the <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">> procedure, which renders a whole list and is what you would normally use. Use this one only to build something that procedure cannot.""">>
 
+It takes <<.param list>>, <<.param enable>>, <<.param dragState>>, <<.param dropActions>> and <<.param commit>>, which mean the same as they do for <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">>.
+
 It must be rendered inside the element the list is laid out in, which must be positioned, and before the items so that they are drawn on top of it. See DragAndDropMechanism for an overview.
