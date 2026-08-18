@@ -9,4 +9,4 @@ type: text/vnd.tiddlywiki
 
 <<.tip """This is used internally by the <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">> procedure, which renders a whole list and is what you would normally use. Use this one only to build something that procedure cannot.""">>
 
-It takes the same parameters as <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">>, apart from <<.param history>>, <<.param storyview>>, <<.param emptyMessage>>, <<.param duration>> and <<.param easing>>, which belong to the list as a whole. In addition it takes a <<.param tiddler>> parameter naming the item to render. See DragAndDropMechanism for an overview.
+It takes the same parameters as <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">>, apart from <<.param history>>, <<.param storyview>>, <<.param emptyMessage>>, <<.param emptyHeight>>, <<.param duration>>, <<.param easing>> and <<.param scale>>, which belong to the list as a whole. In addition it takes a <<.param tiddler>> parameter naming the item to render. See DragAndDropMechanism for an overview.

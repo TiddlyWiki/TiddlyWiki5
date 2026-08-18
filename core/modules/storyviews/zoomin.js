@@ -166,8 +166,7 @@ ZoominListView.prototype.remove = function(widget) {
 		removeElement();
 		return;
 	}
-	// Don't animate while a drag is in progress: drag and drop reserves the space for
-	// the element being moved itself, and the two would be applied on top of each other
+	// Don't animate while a drag is in progress
 	if($tw.dragInProgress) {
 		removeElement();
 		return;

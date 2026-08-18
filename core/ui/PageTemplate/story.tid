@@ -22,7 +22,17 @@ tags: $:/tags/PageTemplate
 
 </section>
 
-<$transclude $variable="make-live-reorderable-list" $mode="inline" list="$:/StoryList" content=<<content>> enable={{$:/config/story/dragndrop/enable}} history="$:/HistoryList" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}} dragState=<<tf.get-story-drag-state>>/>
+<$transclude $variable="make-live-reorderable-list"
+	$mode="inline"
+	list="$:/StoryList"
+	content=<<content>>
+	enable={{$:/config/story/dragndrop/enable}}
+	history="$:/HistoryList"
+	storyview={{$:/view}}
+	emptyMessage={{$:/config/EmptyStoryMessage}}
+	dragState=<<tf.get-story-drag-state>>
+	emptyHeight="160px"
+/>
 
 <section class="story-frontdrop">
 

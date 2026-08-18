@@ -32,8 +32,7 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 
 ClassicStoryView.prototype.insert = function(widget) {
 	var duration = $tw.utils.getAnimationDuration();
-	// Don't animate while a drag is in progress: drag and drop reserves the space for
-	// the element being moved itself, and the two would be applied on top of each other
+	// Don't animate while a drag is in progress
 	if(duration && !$tw.dragInProgress) {
 		var targetElement = widget.findFirstDomNode();
 		// Abandon if the list entry isn't a DOM element (it might be a text node)

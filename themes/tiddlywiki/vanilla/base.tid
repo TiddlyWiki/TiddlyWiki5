@@ -590,6 +590,7 @@ a.tc-tiddlylink-external:hover {
 
 .tc-live-reorderable {
 	--tc-live-reorder-drop-target-bottom: 0px;
+	--tc-live-reorder-drop-target-offset: 4px;
 }
 
 .tc-live-reorderable-drop-placeholder {
@@ -603,12 +604,16 @@ body.tc-drag-in-progress .tc-live-reorderable-drop-placeholder {
 .tc-live-reorderable-drop-target::after {
 	content: "";
 	position: absolute;
-	top: -4px;
-	left: -4px;
-	right: -4px;
-	bottom: calc(var(--tc-live-reorder-drop-target-bottom,0px) - 4px);
+	top: calc(0px - var(--tc-live-reorder-drop-target-offset,4px));
+	left: calc(0px - var(--tc-live-reorder-drop-target-offset,4px));
+	right: calc(0px - var(--tc-live-reorder-drop-target-offset,4px));
+	bottom: calc(var(--tc-live-reorder-drop-target-bottom,0px) - var(--tc-live-reorder-drop-target-offset,4px));
 	border: 2px dashed <<colour dropzone-background>>;
 	pointer-events: none;
+}
+
+.tc-live-reorderable-drop-target + .tc-live-reorderable-drop-target::after {
+	top: calc(0px - var(--tc-live-reorder-drop-target-offset,4px) - 2px);
 }
 
 .tc-tagged-draggable-list .tc-droppable-placeholder,

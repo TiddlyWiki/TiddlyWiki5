@@ -9,6 +9,8 @@ type: text/vnd.tiddlywiki
 
 It answers only where the items themselves do not, catching what falls between them: the padding around the list and the ground beyond its ends. As well as letting a drop there land rather than be refused, this is what marks out where the list is, so that a drag crossing such ground is not taken for a drag that has left the list altogether.
 
+It is also how a list that has been emptied is dragged into again. The places an item can be put are carried by the items themselves, so a list with none of them left has nowhere to aim at; this takes the first item back. It does so only while the list is empty, since a list that still has items already offers a place against every one of them, and the ground this covers is as much beside them as below them.
+
 <<.tip """This is used internally by the <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">> procedure, which renders a whole list and is what you would normally use. Use this one only to build something that procedure cannot.""">>
 
 It takes <<.param list>>, <<.param enable>>, <<.param group>>, <<.param dragState>>, <<.param dropActions>> and <<.param commit>>, which mean the same as they do for <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">>.

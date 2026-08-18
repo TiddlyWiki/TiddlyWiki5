@@ -9,11 +9,6 @@ Browser data transfer utilities, used with the clipboard and drag and drop
 
 "use strict";
 
-/*
-Say in the document what $tw.dragInProgress says in here, so that a stylesheet can answer a
-drag as well. Nothing is refreshed when a drag begins, so this cannot be left to the wikitext
-to notice
-*/
 function markDragInProgress(domNode,status) {
 	var doc = domNode.ownerDocument;
 	if(doc && doc.body && doc.body.classList) {
@@ -21,7 +16,25 @@ function markDragInProgress(domNode,status) {
 	}
 }
 
-function endDragInProgress(domNode) {
+var DRAGGING_TITLE = "$:/state/dragging";
+
+function recordDrag(widget,titles) {
+	if(widget && widget.wiki) {
+		widget.wiki.addTiddler(new $tw.Tiddler({
+			title: DRAGGING_TITLE,
+			text: "yes",
+			list: titles
+		}));
+	}
+}
+
+function forgetDrag(widget) {
+	if(widget && widget.wiki) {
+		widget.wiki.deleteTiddler(DRAGGING_TITLE);
+	}
+}
+
+function endDragInProgress(domNode,widget) {
 	if($tw.dragInProgress !== domNode) {
 		return;
 	}
@@ -29,18 +42,19 @@ function endDragInProgress(domNode) {
 		if($tw.dragInProgress === domNode) {
 			$tw.dragInProgress = null;
 			markDragInProgress(domNode,false);
+			forgetDrag(widget);
 		}
 	});
 }
 
-function installDragEndBackstop(domNode) {
+function installDragEndBackstop(domNode,widget) {
 	var doc = domNode.ownerDocument;
 	if(!doc || !doc.addEventListener) {
 		return;
 	}
 	var handler = function() {
 		doc.removeEventListener("pointerdown",handler,true);
-		endDragInProgress(domNode);
+		endDragInProgress(domNode,widget);
 	};
 	doc.addEventListener("pointerdown",handler,true);
 }
@@ -82,7 +96,8 @@ exports.makeDraggable = function(options) {
 			// Mark the drag in progress
 			$tw.dragInProgress = domNode;
 			markDragInProgress(domNode,true);
-			installDragEndBackstop(domNode);
+			recordDrag(options.widget,titleString);
+			installDragEndBackstop(domNode,options.widget);
 			// Set the dragging class on the element being dragged
 			$tw.utils.addClass(domNode,"tc-dragging");
 			// Invoke drag-start actions if given
@@ -169,7 +184,7 @@ exports.makeDraggable = function(options) {
 				variables["actionTiddler"] = titleString;
 				options.widget.invokeActionString(endActions,options.widget,event,variables);
 			}
-			endDragInProgress(domNode);
+			endDragInProgress(domNode,options.widget);
 			// Remove the dragging class on the element being dragged
 			$tw.utils.removeClass(domNode,"tc-dragging");
 			// Delete the drag image element
@@ -181,9 +196,7 @@ exports.makeDraggable = function(options) {
 		return false;
 	};
 
-	// Remove any handlers left by a previous call. makeDraggable is re-run on every
-	// refresh of the draggable widget, so without this the listeners stack up and the
-	// drag start and end actions are invoked once per accumulated pair
+	// Remove any handlers left by a previous call
 	if(options.widget && domNode.removeEventListener) {
 		if(options.widget.dragStartListenerReference) {
 			domNode.removeEventListener("dragstart",options.widget.dragStartListenerReference,false);

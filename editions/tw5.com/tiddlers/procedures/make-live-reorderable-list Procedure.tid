@@ -9,6 +9,22 @@ type: text/vnd.tiddlywiki
 <div style="padding:0.4em 0.6em;margin-bottom:0.4em;border:1px solid #888;border-radius:3px;background:#f6f6f6;color:#222;"><$text text=<<currentTiddler>>/></div>
 \end
 
+\procedure shape-note()
+<div style="padding:0.5em 0.6em;margin-bottom:0.5em;border:1px solid #888;border-radius:3px;background:#f6f6f6;color:#222;font-size:0.9em;line-height:1.3;"><$text text=<<currentTiddler>>/></div>
+\end
+
+\procedure shape-chip()
+<div style="display:inline-block;padding:0.1em 0.7em;margin-bottom:0.3em;border:1px solid #888;border-radius:1em;background:#eee;color:#222;font-size:0.8em;"><$text text=<<currentTiddler>>/></div>
+\end
+
+\procedure shape-bar()
+<div style="padding:0.15em 0.5em;margin-bottom:0.2em;border-left:4px solid #888;background:#f0f0f0;color:#222;font-size:0.8em;"><$text text=<<currentTiddler>>/></div>
+\end
+
+\procedure shape-block()
+<div style="width:4em;height:4em;margin-bottom:0.6em;padding:0.3em;border:1px solid #888;background:#ededed;color:#222;font-size:0.75em;overflow:hidden;"><$text text=<<currentTiddler>>/></div>
+\end
+
 <<.from-version "5.5.0">> The <<.def make-live-reorderable-list>> [[procedure|Procedures]] renders a list whose items the user can put in a different order by dragging them. The order is shown as it is being chosen: the other items move aside as the dragged one passes, so that what is on the screen is always what the list will look like if it is dropped there. See DragAndDropMechanism for an overview.
 
 It is used by the story river and by the "Open" tab of the sidebar.
@@ -27,11 +43,14 @@ The procedure renders three things: the items themselves, an AnimateLayoutWidget
 |transfer |What becomes of an item carried out of this list: `move` (the default) takes it out, `copy` leaves it behind. It describes only what happens to the list the drag started in, since an item carried on from a list it was dropped into is always moved |
 |acceptDrops |Optional value "yes" to let items dragged from elsewhere be dropped into the list, which inserts them at the place they are dropped (defaults to "no"). The "Open" tab of the sidebar uses this, so that dragging a tiddler title into it opens that tiddler at that position |
 |dropActions |Optional actions to be performed after an item has been dropped |
+|emptyHeight |Optional height to keep for a list that has no items, so that an emptied list is still somewhere the pointer can be taken. About one item of that list is usually right: it then reads as the one empty place it is. The list keeps this space itself, rather than the element it is laid out in having to be given a height that would apply whether the list were empty or not |
+|dropTargetOffset |Optional distance to hold the drop target outline clear of the sides and top of an item (defaults to `4px`). Zero draws it along the edge of the item itself, which is what a list of items that sit directly one below another wants: given room, the outlines of two items next to each other reach into one another. It does not affect <<.param dropTargetInset>>, which answers a different question |
 |dropTargetInset |Optional distance to hold the drop target outline clear of the bottom of an item, for content that carries a bottom margin of its own. An item contains the bottom margin of what it wraps, so without this the outline is drawn around that gap as well as around the content |
 |class |Optional CSS classes to assign to each item |
 |history |Optional title of the history tiddler, passed to the ListWidget |
 |storyview |Optional name of the storyview module that animates changes to the list, passed to the ListWidget |
 |emptyMessage |Optional message to show when the list is empty, passed to the ListWidget |
+|scale |Optional value "yes" to have an item that has changed size settle into its new size as well as its new place (defaults to "no"). It applies to an item already in the list whose size the change alters, which is not the same as an item arriving from elsewhere: see the AnimateLayoutWidget |
 |duration |Optional length of the settling animation in milliseconds (defaults to {{$:/config/DragAndDrop/animation/duration}}) |
 |easing |Optional easing of the settling animation (defaults to the value of `$:/config/DragAndDrop/animation/easing`) |
 |direction |`vertical` (the default) if the items are stacked one above another, or `horizontal` if they sit side by side. It decides whether an item is split into a top and a bottom half or a left and a right one |
@@ -77,18 +96,18 @@ Set up the board
 
 <div style="position:relative;">
 <$transclude $variable="make-live-reorder-backstop" $mode="inline" group="kanban"/>
-<div style="display:flex;gap:1em;align-items:flex-start;">
+<div style="display:flex;gap:1em;">
 <div style="flex:1;position:relative;">
 ''To do''
-<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-todo>> content=<<kanban-card>> group="kanban" dropTargetInset="0.4em"/>
+<$transclude $variable="make-live-reorderable-list" $mode="inline" emptyHeight="2.5em" list=<<board-todo>> content=<<kanban-card>> group="kanban" dropTargetInset="0.4em"/>
 </div>
 <div style="flex:1;position:relative;">
 ''Doing''
-<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-doing>> content=<<kanban-card>> group="kanban" dropTargetInset="0.4em"/>
+<$transclude $variable="make-live-reorderable-list" $mode="inline" emptyHeight="2.5em" list=<<board-doing>> content=<<kanban-card>> group="kanban" dropTargetInset="0.4em"/>
 </div>
 <div style="flex:1;position:relative;">
 ''Done''
-<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-done>> content=<<kanban-card>> group="kanban" dropTargetInset="0.4em"/>
+<$transclude $variable="make-live-reorderable-list" $mode="inline" emptyHeight="2.5em" list=<<board-done>> content=<<kanban-card>> group="kanban" dropTargetInset="0.4em"/>
 </div>
 </div>
 </div>
@@ -100,3 +119,49 @@ Set up the board
 <<.tip """Add `transfer="copy"` to a column and cards dragged out of it are left behind rather than taken away, which is how a column of things to pick from rather than to move is built.""">>
 
 <<.warning """A group needs `commit="live"`. The order assembled for a deferred commit is kept in one field of the drag state, which has no room for the several lists a group involves.""">>
+
+!!! Columns whose items are shaped differently
+
+Nothing about the list decides how big its items are or what they look like; that is left to
+the content given to it and to the stylesheet. The four columns here are one group, so a card
+can be carried from any of them to any other, and it takes on the shape of wherever it lands.
+The tall notes, the little chips, the thin bars and the square blocks are all the same list
+procedure with different content:
+
+<$let shape-notes="$:/temp/shapes/notes" shape-chips="$:/temp/shapes/chips" shape-bars="$:/temp/shapes/bars" shape-blocks="$:/temp/shapes/blocks">
+
+<$button>
+<$action-listops $tiddler=<<shape-notes>> $field="list" $filter="[[Something rather longer to read]] [[A shorter one]] [[Middling length here]] Brief"/>
+<$action-listops $tiddler=<<shape-chips>> $field="list" $filter="red green blue amber violet"/>
+<$action-listops $tiddler=<<shape-bars>> $field="list" $filter="Monday Tuesday Wednesday Thursday Friday"/>
+<$action-listops $tiddler=<<shape-blocks>> $field="list" $filter="One Two Three Four"/>
+Set up the board
+</$button>
+
+<div style="position:relative;">
+<$transclude $variable="make-live-reorder-backstop" $mode="inline" group="shapes"/>
+<div style="display:flex;gap:1em;">
+<div style="flex:2;position:relative;">
+''Notes''
+<$transclude $variable="make-live-reorderable-list" $mode="inline" emptyHeight="2.7em" list=<<shape-notes>> content=<<shape-note>> group="shapes" dropTargetInset="0.5em"/>
+</div>
+<div style="flex:1;position:relative;">
+''Chips''
+<$transclude $variable="make-live-reorderable-list" $mode="inline" emptyHeight="1.5em" list=<<shape-chips>> content=<<shape-chip>> group="shapes" dropTargetInset="0.3em"/>
+</div>
+<div style="flex:1;position:relative;">
+''Bars''
+<$transclude $variable="make-live-reorderable-list" $mode="inline" emptyHeight="1.4em" list=<<shape-bars>> content=<<shape-bar>> group="shapes" dropTargetInset="0.2em"/>
+</div>
+<div style="flex:1;position:relative;">
+''Blocks''
+<$transclude $variable="make-live-reorderable-list" $mode="inline" emptyHeight="4em" list=<<shape-blocks>> content=<<shape-block>> group="shapes" dropTargetInset="0.6em"/>
+</div>
+</div>
+</div>
+
+</$let>
+
+<<.tip "A list that has been emptied can still be dragged into: the drop target covering it takes the first item back, so long as the element the list is laid out in still has some height of its own once its items have gone. Each column here therefore passes <<.param emptyHeight>> of about one of its own cards, so that an emptied column reads as the one empty place it is, and the columns are left to stretch to a common height rather than shrinking to their contents. The card itself is not sized by that: it takes the height its new column gives it, which is the whole point of carrying it there.">>
+
+<<.tip "Each column tells the list how far its own content is held apart, with <<.param dropTargetInset>>, since that is the one thing about the shape of an item the list has to know: an item contains the bottom margin of what it wraps, and the outline drawn around a drop target would take in that gap as well.">>

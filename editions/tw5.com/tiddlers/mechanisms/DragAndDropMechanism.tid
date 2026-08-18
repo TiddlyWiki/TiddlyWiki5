@@ -28,7 +28,7 @@ The general sequence of a drag and drop operation is as follows:
 
 <<.from-version "5.5.0">> The core can also let the user put the items of a list in a different order by dragging them, showing the new order as it is being chosen rather than only once the item is dropped. This is what the story river and the "Open" tab of the sidebar use. The <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">> procedure renders such a list, and is built out of the same primitives as above.
 
-Each item is a DraggableWidget carrying two [[DroppableWidgets|DroppableWidget]], one covering its first half and one its second, so that the dragged item can be placed on either side of it. A further DroppableWidget covers the whole list behind the items, so that a drop landing between them, or on the padding around them, is not refused.
+Each item is a DraggableWidget carrying two [[DroppableWidgets|DroppableWidget]], one covering its first half and one its second, so that the dragged item can be placed on either side of it. A further DroppableWidget covers the whole list behind the items, so that a drop landing between them, or on the padding around them, is not refused. It is also what takes the first item back into a list that has been emptied, which has no items left to offer a place against.
 
 The sequence of a reordering drag is as follows:
 
