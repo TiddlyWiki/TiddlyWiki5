@@ -144,6 +144,10 @@ code-body: yes
 		$field="list"
 		$value={{{ [<dragState>get[start-list]] }}}
 	/>
+	<$action-setfield
+		$tiddler=<<dragState>>
+		from-list=<<sourceList>>
+	/>
 </$let>
 \end
 
@@ -165,7 +169,8 @@ code-body: yes
 <$list filter="[all[tiddlers]tag[$:/tags/dragState]]" variable="revertState">
 	<$let
 		startList={{{ [<revertState>get[start-list]] }}}
-		fromList={{{ [<revertState>get[source-list]] }}}
+		sourceList={{{ [<revertState>get[source-list]] }}}
+		holdsIt={{{ [<revertState>get[from-list]] }}}
 		revertDeferred={{{ [<revertState>get[commit]match[drop]then[yes]] :else[[no]] }}}
 	>
 		<%if [<revertDeferred>match[yes]] %>
@@ -177,14 +182,14 @@ code-body: yes
 				/>
 			<% endif %>
 		<% else %>
-			<%if [<revertState>get[from-list]!match<revertState>get[source-list]] %>
+			<%if [<holdsIt>!match<sourceList>] %>
 				<$let dragState=<<revertState>>>
 					<<live-reorder-restore-actions>>
 				</$let>
 			<% else %>
-				<%if [<fromList>get[list]!match<startList>] %>
+				<%if [<sourceList>get[list]!match<startList>] %>
 					<$action-setfield
-						$tiddler=<<fromList>>
+						$tiddler=<<sourceList>>
 						$field="list"
 						$value=<<startList>>
 					/>

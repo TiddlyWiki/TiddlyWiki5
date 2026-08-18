@@ -61,18 +61,21 @@ The element the list is laid out in must be positioned, meaning it must have a C
 </div>
 ```
 
-!!! Two lists that exchange items
+!!! Several lists that exchange items
 
-Giving two lists the same <<.param group>> lets a card be dragged out of one and into the other. Each column is positioned, as the list requires, and lays its cards out one below another:
+Giving a number of lists the same <<.param group>> lets a card be dragged out of any of them and into any other. Each column is positioned, as the list requires, and lays its cards out one below another. The whole board is positioned too, and carries a drop target of its own, so that the space between the columns still counts as being on the board:
 
-<$let board-todo="$:/temp/kanban/todo" board-doing="$:/temp/kanban/doing">
+<$let board-todo="$:/temp/kanban/todo" board-doing="$:/temp/kanban/doing" board-done="$:/temp/kanban/done">
 
 <$button>
 <$action-listops $tiddler=<<board-todo>> $field="list" $filter="Sketch Spec Icons Palette Copy Layout Tests"/>
 <$action-listops $tiddler=<<board-doing>> $field="list" $filter="Header Sidebar Search Print Import Export Backup"/>
+<$action-listops $tiddler=<<board-done>> $field="list" $filter="Fonts Colours Spacing Margins"/>
 Set up the board
 </$button>
 
+<div style="position:relative;">
+<$transclude $variable="make-live-reorder-backstop" $mode="inline" group="kanban"/>
 <div style="display:flex;gap:1em;align-items:flex-start;">
 <div style="flex:1;position:relative;">
 ''To do''
@@ -82,8 +85,17 @@ Set up the board
 ''Doing''
 <$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-doing>> content=<<kanban-card>> group="kanban"/>
 </div>
+<div style="flex:1;position:relative;">
+''Done''
+<$transclude $variable="make-live-reorderable-list" $mode="inline" list=<<board-done>> content=<<kanban-card>> group="kanban"/>
+</div>
+</div>
 </div>
 
 </$let>
 
+<<.warning """A board of grouped lists needs that <<.dlink make-live-reorder-backstop "make-live-reorder-backstop Procedure">> over the whole of it. Without it the space between the columns belongs to no list, and a drag crossing that space is taken for a drag that has left the board altogether, which puts the card back where it came from in the middle of being dragged. The more columns there are, the more such space there is to cross.""">>
+
 <<.tip """Add `transfer="copy"` to a column and cards dragged out of it are left behind rather than taken away, which is how a column of things to pick from rather than to move is built.""">>
+
+<<.warning """A group needs `commit="live"`. The order assembled for a deferred commit is kept in one field of the drag state, which has no room for the several lists a group involves.""">>
