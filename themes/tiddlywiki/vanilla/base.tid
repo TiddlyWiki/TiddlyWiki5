@@ -588,6 +588,10 @@ a.tc-tiddlylink-external:hover {
 	z-index: 0;
 }
 
+.tc-live-reorderable {
+	--tc-live-reorder-drop-target-bottom: 0px;
+}
+
 .tc-live-reorderable-drop-target::after {
 	content: "";
 	position: absolute;
@@ -1159,7 +1163,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	border: 1px solid <<colour tiddler-border>>;
 }
 
-.tc-story-river {
+.tc-story-river > .tc-live-reorderable {
 	--tc-live-reorder-drop-target-bottom: 28px;
 }
 
@@ -1217,7 +1221,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		margin-bottom: .5em;
 	}
 
-	.tc-story-river {
+	.tc-story-river > .tc-live-reorderable {
 		--tc-live-reorder-drop-target-bottom: .5em;
 	}
 
