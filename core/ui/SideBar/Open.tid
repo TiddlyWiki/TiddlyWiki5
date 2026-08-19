@@ -25,6 +25,7 @@ caption: {{$:/language/SideBar/Open/Caption}}
 	history=<<tv-history-list>>
 	storyview="pop"
 	acceptDrops="yes"
+	transfer="copy"
 	duration=<<tf.get-open-tab-animation-duration>>
 	dragState=<<tf.get-open-tab-drag-state>>
 	commit="drop"
