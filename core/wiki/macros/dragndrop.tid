@@ -2,6 +2,23 @@ title: $:/core/wiki/macros/dragndrop
 tags: $:/tags/Global
 code-body: yes
 
+<!-- TEMPORARY: counts how often each step of a drag runs, so that a loop too fast to watch
+can be read off afterwards. Remove along with the calls to it, which all name lrEvent -->
+
+\procedure live-reorder-trace(lrEvent)
+<$action-setfield
+	$tiddler="$:/temp/lr-trace"
+	$field=<<lrEvent>>
+	$value={{{ [[$:/temp/lr-trace]get<lrEvent>] :else[[0]] +[add[1]] }}}
+/>
+<$action-setfield
+	$tiddler="$:/temp/lr-trace"
+	last=<<lrEvent>>
+	last-from={{{ [<dragState>get[from-list]] }}}
+	last-list=<<list>>
+/>
+\end
+
 \procedure live-reorder-seed-actions()
 <%if [<filter>!is[blank]] %>
 	<%if [<tf.lr.is-deferred>match[no]] %>
@@ -112,6 +129,7 @@ code-body: yes
 	lrTakenAway={{{ [<cameFrom>match<sourceList>then<dragState>get[transfer]!match[copy]then[yes]] :else[[no]] }}}
 >
 	<%if [<list>!match<cameFrom>] %>
+		<$transclude $variable="live-reorder-trace" lrEvent="carry"/>
 		<%if [<cameFrom>!is[blank]] %>
 			<%if [<lrTakenAway>match[yes]] %>
 				<$action-listops
@@ -147,6 +165,7 @@ code-body: yes
 >
 	<%if [enlist<tf.lr.get-titles>match<tiddler>count[]match[0]] %>
 		<%if [<lastDragged>!match<currentPrevious>] %>
+			<$transclude $variable="live-reorder-trace" lrEvent="insert"/>
 			<$list filter="[enlist<tf.lr.get-titles>]" variable="lrTitle">
 				<$action-listops
 					$tiddler=<<tf.lr.get-order-tiddler>>
@@ -169,6 +188,7 @@ code-body: yes
 >
 	<%if [enlist<tf.lr.get-titles>match<tiddler>count[]match[0]] %>
 		<%if [<firstDragged>!match<currentNext>] %>
+			<$transclude $variable="live-reorder-trace" lrEvent="insert"/>
 			<$list filter="[enlist<tf.lr.get-titles>reverse[]]" variable="lrTitle">
 				<$action-listops
 					$tiddler=<<tf.lr.get-order-tiddler>>
@@ -239,6 +259,7 @@ code-body: yes
 <<live-reorder-preview-actions>>
 <%if [<list>!is[blank]] %>
 	<%if [enlist<tf.lr.get-titles>count[]!match[0]] %>
+		<$transclude $variable="live-reorder-trace" lrEvent="append"/>
 		<<live-reorder-carry-actions>>
 		<$list filter="[enlist<tf.lr.get-titles>]" variable="lrTitle">
 			<$action-listops
@@ -262,6 +283,7 @@ code-body: yes
 \end
 
 \procedure live-reorder-restore-actions()
+<$transclude $variable="live-reorder-trace" lrEvent="restore"/>
 <$list filter="[all[tiddlers]prefix<tf.lr.get-preview-prefix>]" variable="lrPreview">
 	<$let
 		lrList={{{ [<lrPreview>removeprefix<tf.lr.get-preview-prefix>] }}}
