@@ -19,6 +19,36 @@ can be read off afterwards. Remove along with the calls to it, which all name lr
 />
 \end
 
+<!-- Each move of an item shifts what lies under the pointer by a whole item, which offers
+the item straight back to where it came from. A move is therefore only taken if it carries
+the item the way the pointer itself is travelling -->
+
+\function tf.lr.pointer-step() [<pointer-y>subtract{$:/temp/lr-pointer!!y}]
+
+\function tf.lr.going-down() [<tf.lr.pointer-step>compare:integer:gteq[2]then[yes]] :else[[no]]
+
+\function tf.lr.going-up() [<tf.lr.pointer-step>compare:integer:lteq[-2]then[yes]] :else[[no]]
+
+\function tf.lr.place-of-dragged() [enlist<tf.lr.get-order>allbefore<tf.lr.first-dragged>count[]]
+
+\function tf.lr.first-dragged() [enlist<tf.lr.get-titles>first[]]
+
+\function tf.lr.place-of-target() [enlist<tf.lr.get-order>allbefore<tiddler>count[]]
+
+\function tf.lr.target-below() [<tf.lr.place-of-target>compare:integer:gt<tf.lr.place-of-dragged>then[yes]] :else[[no]]
+
+\function tf.lr.dragged-here() [enlist<tf.lr.get-order>match<tf.lr.first-dragged>count[]!match[0]then[yes]] :else[[no]]
+
+\function tf.lr.may-move() [<pointer-y>is[blank]then[yes]] :else[<tf.lr.dragged-here>match[no]then[yes]] :else[<tf.lr.going-down>match[yes]then<tf.lr.target-below>] :else[<tf.lr.going-up>match[yes]then<tf.lr.target-below>match[no]then[yes]] :else[[no]]
+
+\procedure live-reorder-note-pointer()
+<$action-setfield
+	$tiddler="$:/temp/lr-pointer"
+	y=<<pointer-y>>
+	x=<<pointer-x>>
+/>
+\end
+
 \procedure live-reorder-seed-actions()
 <%if [<filter>!is[blank]] %>
 	<%if [<tf.lr.is-deferred>match[no]] %>
@@ -72,6 +102,9 @@ can be read off afterwards. Remove along with the calls to it, which all name lr
 \end
 
 \procedure live-reorder-begin-actions(beginFilter,beginTransfer:"move")
+<$action-deletetiddler
+	$tiddler="$:/temp/lr-pointer"
+/>
 <<live-reorder-seed-actions>>
 <<live-reorder-record-preview-actions>>
 <$action-setfield
@@ -156,6 +189,7 @@ can be read off afterwards. Remove along with the calls to it, which all name lr
 \end
 
 \procedure live-reorder-before-drag-enter-actions()
+<<live-reorder-note-pointer>>
 <<live-reorder-adopt-actions>>
 <<live-reorder-preview-actions>>
 <<live-reorder-carry-actions>>
@@ -165,6 +199,7 @@ can be read off afterwards. Remove along with the calls to it, which all name lr
 >
 	<%if [enlist<tf.lr.get-titles>match<tiddler>count[]match[0]] %>
 		<%if [<lastDragged>!match<currentPrevious>] %>
+		<%if [<tf.lr.may-move>match[yes]] %>
 			<$transclude $variable="live-reorder-trace" lrEvent="insert"/>
 			<$list filter="[enlist<tf.lr.get-titles>]" variable="lrTitle">
 				<$action-listops
@@ -174,11 +209,13 @@ can be read off afterwards. Remove along with the calls to it, which all name lr
 				/>
 			</$list>
 		<% endif %>
+		<% endif %>
 	<% endif %>
 </$let>
 \end
 
 \procedure live-reorder-after-drag-enter-actions()
+<<live-reorder-note-pointer>>
 <<live-reorder-adopt-actions>>
 <<live-reorder-preview-actions>>
 <<live-reorder-carry-actions>>
@@ -188,6 +225,7 @@ can be read off afterwards. Remove along with the calls to it, which all name lr
 >
 	<%if [enlist<tf.lr.get-titles>match<tiddler>count[]match[0]] %>
 		<%if [<firstDragged>!match<currentNext>] %>
+		<%if [<tf.lr.may-move>match[yes]] %>
 			<$transclude $variable="live-reorder-trace" lrEvent="insert"/>
 			<$list filter="[enlist<tf.lr.get-titles>reverse[]]" variable="lrTitle">
 				<$action-listops
@@ -196,6 +234,7 @@ can be read off afterwards. Remove along with the calls to it, which all name lr
 					$subfilter="+[insertafter<lrTitle>,<tiddler>]"
 				/>
 			</$list>
+		<% endif %>
 		<% endif %>
 	<% endif %>
 </$let>
@@ -280,6 +319,16 @@ can be read off afterwards. Remove along with the calls to it, which all name lr
 		<<live-reorder-append-actions>>
 	<% endif %>
 </$let>
+\end
+
+\procedure live-reorder-revert-actions()
+<%if [{$:/config/DragAndDrop/revert-outside}match[yes]] %>
+	<$list filter="[all[tiddlers]tag[$:/tags/dragState]]" variable="revertState">
+		<$let dragState=<<revertState>>>
+			<<live-reorder-restore-actions>>
+		</$let>
+	</$list>
+<% endif %>
 \end
 
 \procedure live-reorder-restore-actions()

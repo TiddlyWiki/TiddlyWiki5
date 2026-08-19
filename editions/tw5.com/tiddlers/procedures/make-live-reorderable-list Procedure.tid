@@ -61,6 +61,12 @@ The procedure renders three things: the items themselves, an AnimateLayoutWidget
 |ghostOpacity |Optional opacity of the item being dragged (defaults to `0.3`) |
 |styleZIndex |Optional `z-index` for the drop targets (defaults to `501`) |
 
+!! Which way the pointer is going
+
+Moving an item shifts everything after it by the height of that item, so what lies under the pointer changes without the pointer having moved. Whatever now lies there is as entitled to ask for the item as the last one was, and would send it back where it came from, leaving the two of them passing it to and fro for as long as the pointer stays put. It is not a slow flicker either: each exchange invites the next at once.
+
+A move is therefore only made if it carries the item the way the pointer is itself travelling. The item follows a pointer going down the list only downwards, and one going up only upwards, so the move that would send it back is refused and the exchange cannot start. An item arriving from another list is not yet anywhere in this one, so its first placing is made whichever way the pointer is going. This rests on the <<.var pointer-y>> variable that the DroppableWidget gives to its <<.param dragEnterActions>>.
+
 !! Lists whose order is worked out
 
 The items of a list are usually the ones named in the ''list'' field of a tiddler, and their order is that field. Some lists are not like that. The tiddlers carrying a tag are a set decided by the tag, and the tag's ''list'' field says only as much about their order as someone has troubled to say; the rest fall where they may, and a tiddler can push itself about with a ''list-before'' or ''list-after'' field of its own.

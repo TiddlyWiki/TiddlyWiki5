@@ -35,6 +35,7 @@ Some common scenarios for drag and drop tiddler manipulation are available as re
 |!Setting |!Default |!Description |
 |<<.tid "$:/config/story/dragndrop/enable">> |`no` |Whether tiddlers in the story river can be reordered by dragging them |
 |<<.tid "$:/config/DragAndDrop/show-drop-target">> |`no` |Whether to outline the place where the dragged tiddler will land |
+|<<.tid "$:/config/DragAndDrop/revert-outside">> |`no` |Whether a list goes back to its original order while the pointer is outside it, rather than holding what it would look like until the tiddler is dropped or the drag is abandoned |
 |<<.tid "$:/config/DragAndDrop/animation/duration">> |`400` |How long, in milliseconds, a tiddler takes to settle into its new place. Zero animates nothing |
 |<<.tid "$:/config/DragAndDrop/animation/easing">> |`cubic-bezier(0.05,0.7,0.1,1)` |How that movement is paced. The choices offered are the tiddlers tagged <<.tag "$:/tags/DragAndDrop/Easing">>, and adding one of your own to that tag adds it to the list |
 |<<.tid "$:/config/StoryRiver/masonry">> |`no` |Whether to lay the story river out as a masonry grid, placing tiddlers in columns rather than one below another. Only on screens wide enough to show the sidebar |
@@ -43,5 +44,7 @@ Some common scenarios for drag and drop tiddler manipulation are available as re
 <<.tip "The easing decides how hurried the movement feels rather more than the duration does. A curve that covers most of the distance at once, as the default one does, reads as a jump followed by a slow settle however long it is given, while a gentler curve spreads the movement out.">>
 
 See DragAndDropMechanism for details of how to use the low level drag and drop primitives to build more complex interactions, and [[Kanban]] for a board of lists that exchange cards, built from the same procedure the story river uses.
+
+Where the pointer is a finger a drag is begun by holding an item, which is a gesture a link within that item answers first. The lists whose items are links, such as the one a tag pill opens, therefore keep a strip at the left of each item to be taken hold of instead, marked with a grip. The rest of the item is left to answer a tap as it always did.
 
 The standard HTML 5 drag and drop APIs used by ~TiddlyWiki are not generally available on mobile browsers on smartphones or tablets. The [[Mobile Drag And Drop Shim Plugin]] adds an open source library that implements partial support on many mobile browsers, including iOS and Android.

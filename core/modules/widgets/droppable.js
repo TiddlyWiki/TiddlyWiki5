@@ -89,7 +89,13 @@ DroppableWidget.prototype.enterDrag = function(event) {
 	// Invoke any enter actions
 	if(this.droppableEnterActions) {
 		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
-		this.invokeActionString(this.droppableEnterActions,this,event,{modifier: modifierKey});
+		this.invokeActionString(this.droppableEnterActions,this,event,{
+			modifier: modifierKey,
+			// Where the pointer was, so that actions can tell a drag that has moved from one
+			// that is standing still while what is under it is rearranged
+			"pointer-x": (event.clientX === undefined ? "" : event.clientX.toString()),
+			"pointer-y": (event.clientY === undefined ? "" : event.clientY.toString())
+		});
 	}
 };
 

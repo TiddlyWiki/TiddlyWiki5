@@ -33,6 +33,7 @@ Cascades/Hint: These global rules are used to dynamically choose certain templat
 Cascades/TagPrompt: Filters tagged <$macrocall $name="tag" tag=<<currentTiddler>>/>
 DragAndDrop/Caption: Drag & Drop
 DragAndDrop/Hint: Settings for dragging tiddlers to reorder them, and for the layout they are dragged within.
+DragAndDrop/Reordering/RevertOutside/Description: Put a list back in its original order while the pointer is outside it
 DragAndDrop/Easings/emphasized-decelerate: Emphasized decelerate
 DragAndDrop/Easings/decelerate: Decelerate
 DragAndDrop/Easings/ease-out: Ease out

@@ -51,6 +51,8 @@ See DragAndDropMechanism for an overview.
 |`actionTiddler` |For parameter <<.param actions>>, the [[actionTiddler Variable]] contains the title of the item being dropped |
 |`actionTiddlerList` |For parameter <<.param listActions>> the [[actionTiddlerList Variable]] contains a [[Title List]] of all the items being dropped |
 |`modifier` |The [[modifier Variable]] contains the modifier key held while dragging (can be normal, ctrl, shift or ctrl-shift) |
+|`pointer-x` |<<.from-version "5.5.0">> For parameter <<.param dragEnterActions>>, how far across the window the pointer was, in pixels. Blank where the event carried no position |
+|`pointer-y` |<<.from-version "5.5.0">> For parameter <<.param dragEnterActions>>, how far down the window the pointer was, in pixels. Actions that rearrange what is under the pointer need this: without it a list cannot tell a pointer that has moved from one that is standing still while its own items shift beneath it |
 
 <<.note """Note that the <<.var actionTiddler>> variable holds a single, unquoted title. This is unlike the DraggableWidget which uses the same variable to pass a quoted [[Title List]].""">>
 

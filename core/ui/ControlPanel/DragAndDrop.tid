@@ -27,6 +27,15 @@ caption: {{$:/language/ControlPanel/DragAndDrop/Caption}}
 	</$link>
 </$checkbox>
 
+<$checkbox tiddler="$:/config/DragAndDrop/revert-outside"
+	field="text" checked="yes" unchecked="no" default="no"
+	class="tc-control-panel-item"
+>
+	<$link to="$:/config/DragAndDrop/revert-outside" class="tc-tiny-gap-left">
+		<<lingo Reordering/RevertOutside/Description>>
+	</$link>
+</$checkbox>
+
 !! <<lingo Animation/Caption>>
 
 <<lingo Animation/Hint>>
