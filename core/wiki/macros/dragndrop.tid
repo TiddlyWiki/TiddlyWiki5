@@ -339,6 +339,8 @@ code-body: yes
 \function tf.lr.get-item-class() tc-live-reorderable [<tf.lr.is-ghost>match[yes]then[tc-live-reorderable-ghost]] [<tf.lr.is-drop-target>match[yes]then[tc-live-reorderable-drop-target]] [<class>] :and[join[ ]]
 
 \function tf.lr.get-preview() [<tf.lr.is-deferred>match[yes]then<tf.lr.is-dragging>match[yes]then<tf.lr.get-preview-tiddler>get[list]]
+\function tf.lr.get-animate-enable() [<animate>!is[blank]then<animate>] :else[dragging[]]
+
 \function tf.lr.get-animate-list() [<tf.lr.get-preview>!is[blank]then<tf.lr.get-preview-tiddler>] :else[<list>]
 \function tf.lr.get-duration() [<duration>!is[blank]then<duration>] :else[{$:/config/DragAndDrop/animation/duration}]
 \function tf.lr.get-easing() [<easing>!is[blank]then<easing>] :else[{$:/config/DragAndDrop/animation/easing}]
@@ -358,7 +360,7 @@ code-body: yes
 </$let>
 \end
 
-\procedure make-live-reorderable-list(list:"",filter:"",content:"",class:"",enable:"",acceptDrops:"no",tailHeight:"",group:"",transfer:"move",dropTargetInset:"",dropTargetOffset:"",emptyHeight:"",scale:"no",dropActions:"",history:"",storyview:"",emptyMessage:"",duration:"",easing:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
+\procedure make-live-reorderable-list(list:"",filter:"",content:"",class:"",enable:"",acceptDrops:"no",tailHeight:"",group:"",transfer:"move",dropTargetInset:"",dropTargetOffset:"",emptyHeight:"",scale:"no",animate:"",dropActions:"",history:"",storyview:"",emptyMessage:"",duration:"",easing:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
 \whitespace trim
 <$let dragState=<<tf.lr.get-drag-state>>>
 	<$transclude $variable="make-live-reorder-backstop"
@@ -372,7 +374,7 @@ code-body: yes
 	/>
 	<$animatelayout
 		list=<<tf.lr.get-animate-list>>
-		enable={{{ [dragging[]] }}}
+		enable=<<tf.lr.get-animate-enable>>
 		duration=<<tf.lr.get-duration>>
 		easing=<<tf.lr.get-easing>>
 		scale=<<scale>>

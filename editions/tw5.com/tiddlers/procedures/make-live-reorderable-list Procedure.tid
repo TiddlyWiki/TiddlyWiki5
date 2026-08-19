@@ -52,6 +52,7 @@ The procedure renders three things: the items themselves, an AnimateLayoutWidget
 |history |Optional title of the history tiddler, passed to the ListWidget |
 |storyview |Optional name of the storyview module that animates changes to the list, passed to the ListWidget |
 |emptyMessage |Optional message to show when the list is empty, passed to the ListWidget |
+|animate |When the settling animation runs, as a value of "yes" or "no". It defaults to running only while a drag is under way, since that is when items move against one another. A list laid out in columns wants it at other times as well: adding or removing an item there sends the rest between the columns afresh, and the settling is what carries them, the story river asking for it whenever it is laid out as a masonry grid |
 |scale |Optional value "yes" to have an item that has changed size settle into its new size as well as its new place (defaults to "no"). It applies to an item already in the list whose size the change alters, which is not the same as an item arriving from elsewhere: see the AnimateLayoutWidget |
 |duration |Optional length of the settling animation in milliseconds (defaults to {{$:/config/DragAndDrop/animation/duration}}) |
 |easing |Optional easing of the settling animation (defaults to the value of `$:/config/DragAndDrop/animation/easing`) |

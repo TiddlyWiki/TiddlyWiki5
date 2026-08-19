@@ -87,6 +87,9 @@ PopStoryView.prototype.remove = function(widget) {
 		removeElement();
 		return;
 	}
+	if($tw.utils.isInColumnLayout(targetElement)) {
+		$tw.utils.detachFromFlow(targetElement);
+	}
 	// Remove the element at the end of the transition
 	setTimeout(removeElement,duration);
 	// Animate the closure

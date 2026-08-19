@@ -42,6 +42,6 @@ Some common scenarios for drag and drop tiddler manipulation are available as re
 
 <<.tip "The easing decides how hurried the movement feels rather more than the duration does. A curve that covers most of the distance at once, as the default one does, reads as a jump followed by a slow settle however long it is given, while a gentler curve spreads the movement out.">>
 
-See DragAndDropMechanism for details of how to use the low level drag and drop primitives to build more complex interactions.
+See DragAndDropMechanism for details of how to use the low level drag and drop primitives to build more complex interactions, and [[Kanban]] for a board of lists that exchange cards, built from the same procedure the story river uses.
 
 The standard HTML 5 drag and drop APIs used by ~TiddlyWiki are not generally available on mobile browsers on smartphones or tablets. The [[Mobile Drag And Drop Shim Plugin]] adds an open source library that implements partial support on many mobile browsers, including iOS and Android.

@@ -14,6 +14,11 @@ function markDragInProgress(domNode,status) {
 	if(doc && doc.body && doc.body.classList) {
 		doc.body.classList[status ? "add" : "remove"]("tc-drag-in-progress");
 	}
+	if(status) {
+		$tw.utils.pinColumnLayout(domNode);
+	} else {
+		$tw.utils.releaseColumnLayout(doc);
+	}
 }
 
 var DRAGGING_TITLE = "$:/state/dragging";

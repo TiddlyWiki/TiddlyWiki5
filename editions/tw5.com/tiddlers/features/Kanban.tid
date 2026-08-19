@@ -1,0 +1,81 @@
+created: 20260819120000000
+modified: 20260819120000000
+tags: Features [[Drag and Drop]]
+title: Kanban
+type: text/vnd.tiddlywiki
+
+\procedure kanban-card()
+<div style="display:flex;align-items:flex-start;gap:0.5em;margin-bottom:0.5em;padding:0.5em 0.6em;background:#ffffff;color:#172b4d;border:1px solid #dfe1e6;border-left:3px solid <<laneColour>>;border-radius:4px;box-shadow:0 1px 1px rgba(9,30,66,0.2);">
+<div style={{{ [[flex:0 0 auto;width:1.7em;height:1.7em;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75em;font-weight:600;color:#ffffff;background:]addsuffix<laneColour>] }}}><$text text={{{ [<currentTiddler>split[]first[]uppercase[]] }}}/></div>
+<div style="flex:1 1 auto;min-width:0;">
+<div style="font-size:0.95em;line-height:1.3;"><$text text=<<currentTiddler>>/></div>
+<div style={{{ [[display:inline-block;margin-top:0.35em;padding:0 0.55em;border-radius:1em;font-size:0.7em;line-height:1.6;color:#ffffff;background:]addsuffix<laneColour>] }}}><$text text=<<laneName>>/></div>
+</div>
+</div>
+\end
+
+\procedure kanban-lane(laneName,laneColour,laneList)
+<div style="flex:1 1 0;min-width:0;position:relative;padding:0.6em;background:#f4f5f7;border-radius:6px;">
+<div style="display:flex;align-items:center;gap:0.45em;margin-bottom:0.6em;">
+<span style={{{ [[width:0.6em;height:0.6em;border-radius:50%;background:]addsuffix<laneColour>] }}}/>
+<span style="font-weight:600;font-size:0.8em;letter-spacing:0.06em;text-transform:uppercase;color:#5e6c84;"><$text text=<<laneName>>/></span>
+<span style="margin-left:auto;padding:0 0.5em;border-radius:1em;font-size:0.7em;line-height:1.7;color:#5e6c84;background:#dfe1e6;"><$count filter="[list<laneList>]"/></span>
+</div>
+<$transclude $variable="make-live-reorderable-list" $mode="inline"
+	list=<<laneList>>
+	content=<<kanban-card>>
+	group="tw5-kanban"
+	emptyHeight="3.5em"
+	tailHeight="2em"
+	dropTargetInset="0.5em"
+/>
+</div>
+\end
+
+A board of several lists whose cards can be dragged from any one of them into any other, built from the <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">> procedure. Drag a card between the columns: the cards below the pointer move aside to show where it would land, and the card takes on the colour and label of the column it is over, so what is on the screen is always what dropping there would give you.
+
+<$let
+	lane-backlog="$:/temp/kanban/backlog"
+	lane-progress="$:/temp/kanban/progress"
+	lane-review="$:/temp/kanban/review"
+	lane-done="$:/temp/kanban/done"
+>
+
+<$button>
+<$action-listops $tiddler=<<lane-backlog>> $field="list" $filter="[[Dark mode palette]] [[Keyboard shortcuts]] [[Offline search]] [[Print stylesheet]] [[Import from CSV]]"/>
+<$action-listops $tiddler=<<lane-progress>> $field="list" $filter="[[Sidebar layout]] [[Drag and drop]] [[Table of contents]]"/>
+<$action-listops $tiddler=<<lane-review>> $field="list" $filter="[[Story river views]] [[Tag pill menu]]"/>
+<$action-listops $tiddler=<<lane-done>> $field="list" $filter="[[Field editor]] [[Colour picker]] [[Export button]]"/>
+Set up the board
+</$button>
+
+<div style="position:relative;margin-top:0.8em;">
+<$transclude $variable="make-live-reorder-backstop" $mode="inline" group="tw5-kanban"/>
+<div style="display:flex;gap:0.7em;align-items:stretch;min-height:22em;">
+<$transclude $variable="kanban-lane" $mode="inline" laneName="Backlog" laneColour="#6b778c" laneList=<<lane-backlog>>/>
+<$transclude $variable="kanban-lane" $mode="inline" laneName="In progress" laneColour="#0052cc" laneList=<<lane-progress>>/>
+<$transclude $variable="kanban-lane" $mode="inline" laneName="Review" laneColour="#ff8b00" laneList=<<lane-review>>/>
+<$transclude $variable="kanban-lane" $mode="inline" laneName="Done" laneColour="#00875a" laneList=<<lane-done>>/>
+</div>
+</div>
+
+</$let>
+
+!! How it is put together
+
+Each column is one <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">>, given the same <<.param group>>. Lists sharing a group share the state of a drag, which is what lets a card dragged out of one of them be carried into another; without it each column would keep its cards to itself. A card leaving its column is moved rather than copied, which is the default for <<.param transfer>>.
+
+The columns hold their order in four ordinary tiddlers, one ''list'' field each, so the board is only as complicated as the tiddlers behind it. Here they are `$:/temp/` tiddlers and are not saved; a real board would name tiddlers of its own.
+
+Four details make it behave as a board rather than as four lists that happen to sit side by side:
+
+* The whole board is positioned and carries a <<.dlink make-live-reorder-backstop "make-live-reorder-backstop Procedure">> of its own, given only the <<.param group>>. The gaps between the columns belong to no column, and without this a drag crossing one would be taken for a drag that had left the board altogether.
+* Each column is positioned too, since that is what the drop targets within it are placed against.
+* <<.param emptyHeight>> keeps a space in a column that has been emptied, so that it is still somewhere the pointer can be taken. About one card's worth reads as the one empty place it is.
+* <<.param tailHeight>> keeps a strip past the last card, so that a card can be put at the end of a column that still has cards in it. Without it the end of a column is reached by aiming at the lower half of the last card.
+
+The columns are given a height to start from and grow with what they hold, all four keeping the height of the tallest.
+
+<<.param dropTargetInset>> is given because each card carries a bottom margin of its own: an item contains the margin of what it wraps, so without it the outline of where a card would land would be drawn around that gap as well as around the card.
+
+The card takes its colour from the column it is being rendered in, rather than from anything stored with the card. The columns each put <<.var laneName>> and <<.var laneColour>> in scope, and the card reads them, so a card previewed in another column is drawn in that column's colours as the drag passes over it.

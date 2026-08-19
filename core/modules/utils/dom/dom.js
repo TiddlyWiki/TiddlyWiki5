@@ -154,6 +154,102 @@ exports.getPassword = function(name) {
 };
 
 /*
+Whether the node is laid out in columns, as the story river is when it is shown as a masonry
+grid. Anything that changes the size of a node there sends every other node between the
+columns afresh, so an animation of size costs far more than the movement is worth
+*/
+exports.getColumnLayoutItem = function(domNode) {
+	var view = domNode && domNode.ownerDocument && domNode.ownerDocument.defaultView;
+	if(!view || !view.getComputedStyle) {
+		return null;
+	}
+	for(var node = domNode; node && node.nodeType === 1; node = node.parentNode) {
+		var parent = node.parentNode;
+		if(parent && parent.nodeType === 1) {
+			var style = view.getComputedStyle(parent);
+			if(style && (style.columnCount !== "auto" || style.columnWidth !== "auto")) {
+				return node;
+			}
+		}
+	}
+	return null;
+};
+
+exports.isInColumnLayout = function(domNode) {
+	return !!exports.getColumnLayoutItem(domNode);
+};
+
+/*
+Hold every block of a column layout at the size it has now, so that content changing size
+within one of them does not send them all between the columns afresh while the user is in
+the middle of something. Sizes are read before any is written, so that the layout is
+computed once rather than once for each block
+*/
+exports.pinColumnLayout = function(domNode) {
+	var item = exports.getColumnLayoutItem(domNode),
+		container = item && item.parentNode;
+	if(!container) {
+		return;
+	}
+	var blocks = [],
+		heights = [],
+		t;
+	var view = container.ownerDocument && container.ownerDocument.defaultView;
+	for(t=0; t<container.children.length; t++) {
+		var child = container.children[t],
+			position = view && view.getComputedStyle && view.getComputedStyle(child).position;
+		// Anything taken out of the flow is not laid out by the columns and has no size to hold
+		if(child.style && position !== "absolute" && position !== "fixed") {
+			blocks.push(child);
+		}
+	}
+	for(t=0; t<blocks.length; t++) {
+		heights.push(blocks[t].offsetHeight);
+	}
+	for(t=0; t<blocks.length; t++) {
+		blocks[t].setAttribute("data-column-pinned","yes");
+		blocks[t].style.height = heights[t] + "px";
+	}
+};
+
+/*
+Let them size themselves to their content again
+*/
+exports.releaseColumnLayout = function(document) {
+	if(!document || !document.querySelectorAll) {
+		return;
+	}
+	$tw.utils.each(document.querySelectorAll("[data-column-pinned]"),function(node) {
+		node.removeAttribute("data-column-pinned");
+		node.style.height = "";
+	});
+};
+
+/*
+Take a node out of the flow where it stands, so that what surrounds it can close over the
+space at once while the node itself goes on being animated. Returns nothing if it cannot
+*/
+exports.detachFromFlow = function(domNode) {
+	if(!domNode || !domNode.style) {
+		return;
+	}
+	var left = domNode.offsetLeft,
+		top = domNode.offsetTop,
+		width = domNode.offsetWidth,
+		height = domNode.offsetHeight;
+	domNode.setAttribute("data-animate-detached","yes");
+	$tw.utils.setStyle(domNode,[
+		{width: width + "px"},
+		{height: height + "px"},
+		{left: left + "px"},
+		{top: top + "px"},
+		{margin: "0"},
+		{position: "absolute"},
+		{"z-index": "500"}
+	]);
+};
+
+/*
 Force layout of a dom node and its descendents
 */
 exports.forceLayout = function(element) {
