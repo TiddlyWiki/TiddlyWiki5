@@ -253,7 +253,7 @@ code-body: yes
 
 \procedure live-reorder-empty-drag-enter-actions()
 <$let
-	itemsHere={{{ [enlist<tf.lr.get-order>count[]] }}}
+	itemsHere={{{ [enlist<tf.lr.get-preview>] :else[subfilter<filter>] :else[list<list>] +[count[]] }}}
 >
 	<%if [<itemsHere>match[0]] %>
 		<<live-reorder-append-actions>>
