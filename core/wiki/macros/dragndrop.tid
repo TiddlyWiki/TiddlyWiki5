@@ -2,15 +2,67 @@ title: $:/core/wiki/macros/dragndrop
 tags: $:/tags/Global
 code-body: yes
 
+\procedure live-reorder-seed-actions()
+<%if [<filter>!is[blank]] %>
+	<%if [<tf.lr.is-deferred>match[no]] %>
+		<$action-listops
+			$tiddler=<<list>>
+			$field="list"
+			$filter=<<filter>>
+		/>
+		<<live-reorder-settle-actions>>
+	<% endif %>
+<% endif %>
+\end
+\procedure live-reorder-settle-actions()
+<%if [<filter>!is[blank]] %>
+	<$list filter=<<filter>> variable="lrSeeded">
+		<$action-deletefield
+			$tiddler=<<lrSeeded>>
+			list-before
+			list-after
+		/>
+	</$list>
+<% endif %>
+\end
+
+\procedure live-reorder-record-preview-actions()
+<$action-listops
+	$tiddler=<<tf.lr.get-preview-tiddler>>
+	$field="list"
+	$filter="[subfilter<filter>] :else[list<list>]"
+/>
+<$action-listops
+	$tiddler=<<tf.lr.get-preview-tiddler>>
+	$field="start"
+	$filter="[subfilter<filter>] :else[list<list>]"
+/>
+<$action-setfield
+	$tiddler=<<tf.lr.get-preview-tiddler>>
+	mode={{{ [<tf.lr.is-deferred>match[yes]then[drop]] :else[[live]] }}}
+/>
+\end
+\procedure live-reorder-preview-actions()
+<%if [<tf.lr.get-preview-tiddler>is[missing]] %>
+	<<live-reorder-record-preview-actions>>
+<% endif %>
+\end
+
+\procedure live-reorder-forget-previews()
+<$list filter="[all[tiddlers]prefix<tf.lr.get-preview-prefix>]" variable="lrPreview">
+	<$action-deletetiddler $tiddler=<<lrPreview>>/>
+</$list>
+\end
+
 \procedure live-reorder-begin-actions(beginFilter,beginTransfer:"move")
+<<live-reorder-seed-actions>>
+<<live-reorder-record-preview-actions>>
 <$action-setfield
 	$tiddler=<<dragState>>
 	tags="$:/tags/dragState"
 	text="yes"
 	source-list=<<list>>
 	from-list=<<list>>
-	preview-list={{{ [<tf.lr.is-deferred>match[yes]then<list>get[list]] }}}
-	start-list={{{ [<list>get[list]] }}}
 	commit=<<commit>>
 	transfer=<<beginTransfer>>
 />
@@ -22,21 +74,16 @@ code-body: yes
 \end
 
 \procedure live-reorder-drag-start-actions()
-<$let
-	alreadyDragging={{{ [<dragState>get[text]match[yes]then[yes]] :else[[no]] }}}
->
-	<%if [<alreadyDragging>match[no]] %>
-		<$transclude $variable="live-reorder-begin-actions" beginFilter="[<tiddler>]" beginTransfer=<<transfer>>/>
-	<% endif %>
-</$let>
+<<live-reorder-abandon-actions>>
+<$transclude $variable="live-reorder-begin-actions" beginFilter="[<tiddler>]" beginTransfer=<<transfer>>/>
 \end
 
 \procedure live-reorder-adopt-actions()
 <$let recordTitles={{{ [[$:/state/dragging]get[list]] }}}>
 	<%if [<tf.lr.accepts-drops>match[yes]] %>
-		<%if [<tf.lr.is-dragging>match[no]] %>
+		<%if [<tf.lr.no-owner>match[yes]] %>
 			<%if [<recordTitles>!is[blank]] %>
-				<$transclude $variable="live-reorder-begin-actions" beginFilter="[enlist<recordTitles>]"/>
+				<$transclude $variable="live-reorder-begin-actions" beginFilter="[enlist<recordTitles>]" beginTransfer=<<transfer>>/>
 			<% endif %>
 		<% endif %>
 	<% endif %>
@@ -46,13 +93,9 @@ code-body: yes
 \procedure live-reorder-abandon-actions()
 <$list filter="[all[tiddlers]tag[$:/tags/dragState]]" variable="abandonState">
 	<$let dragState=<<abandonState>>>
-		<%if [<abandonState>addsuffix[/drag-handled]is[missing]] %>
-			<<live-reorder-restore-actions>>
-		<% endif %>
+		<<live-reorder-restore-actions>>
+		<<live-reorder-forget-previews>>
 	</$let>
-	<$action-deletetiddler
-		$tiddler={{{ [<abandonState>addsuffix[/drag-handled]] }}}
-	/>
 	<$action-deletetiddler
 		$tiddler=<<abandonState>>
 	/>
@@ -60,18 +103,29 @@ code-body: yes
 \end
 
 \procedure live-reorder-carry-actions()
+<%if [<tf.lr.is-dragging>match[yes]] %>
 <$let
 	cameFrom={{{ [<dragState>get[from-list]] }}}
+	cameFromShows={{{ [<tf.lr.get-preview-prefix>addsuffix<cameFrom>] }}}
+	cameFromHolds={{{ [<cameFromShows>get[mode]match[drop]then<cameFromShows>] :else[<cameFrom>] }}}
 	sourceList={{{ [<dragState>get[source-list]] }}}
-	keepsIt={{{ [<dragState>get[transfer]match[copy]then<cameFrom>match<sourceList>then[yes]] :else[[no]] }}}
+	lrTakenAway={{{ [<cameFrom>match<sourceList>then<dragState>get[transfer]!match[copy]then[yes]] :else[[no]] }}}
 >
 	<%if [<list>!match<cameFrom>] %>
 		<%if [<cameFrom>!is[blank]] %>
-			<%if [<keepsIt>match[no]] %>
+			<%if [<lrTakenAway>match[yes]] %>
 				<$action-listops
-					$tiddler=<<cameFrom>>
+					$tiddler=<<cameFromHolds>>
 					$subfilter="-[enlist<tf.lr.get-titles>]"
 				/>
+			<% else %>
+				<%if [<cameFromShows>is[tiddler]] %>
+					<$action-setfield
+						$tiddler=<<cameFromHolds>>
+						$field="list"
+						$value={{{ [<cameFromShows>get[start]] }}}
+					/>
+				<% endif %>
 			<% endif %>
 		<% endif %>
 		<$action-setfield
@@ -80,16 +134,18 @@ code-body: yes
 		/>
 	<% endif %>
 </$let>
+<% endif %>
 \end
 
 \procedure live-reorder-before-drag-enter-actions()
 <<live-reorder-adopt-actions>>
+<<live-reorder-preview-actions>>
+<<live-reorder-carry-actions>>
 <$let
 	currentPrevious={{{ [enlist<tf.lr.get-order>before<tiddler>] }}}
 	lastDragged={{{ [enlist<tf.lr.get-titles>last[]] }}}
 >
 	<%if [enlist<tf.lr.get-titles>match<tiddler>count[]match[0]] %>
-		<<live-reorder-carry-actions>>
 		<%if [<lastDragged>!match<currentPrevious>] %>
 			<$list filter="[enlist<tf.lr.get-titles>]" variable="lrTitle">
 				<$action-listops
@@ -105,12 +161,13 @@ code-body: yes
 
 \procedure live-reorder-after-drag-enter-actions()
 <<live-reorder-adopt-actions>>
+<<live-reorder-preview-actions>>
+<<live-reorder-carry-actions>>
 <$let
 	currentNext={{{ [enlist<tf.lr.get-order>after<tiddler>] }}}
 	firstDragged={{{ [enlist<tf.lr.get-titles>first[]] }}}
 >
 	<%if [enlist<tf.lr.get-titles>match<tiddler>count[]match[0]] %>
-		<<live-reorder-carry-actions>>
 		<%if [<firstDragged>!match<currentNext>] %>
 			<$list filter="[enlist<tf.lr.get-titles>reverse[]]" variable="lrTitle">
 				<$action-listops
@@ -125,17 +182,24 @@ code-body: yes
 \end
 
 \procedure live-reorder-drop-actions()
-<%if [<tf.lr.is-deferred>match[yes]] %>
-	<$action-setfield
-		$tiddler=<<list>>
-		$field="list"
-		$value={{{ [<dragState>get[preview-list]] }}}
-	/>
-<% endif %>
-<$action-setfield
-	$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
-	text="yes"
-/>
+<$list filter="[all[tiddlers]prefix<tf.lr.get-preview-prefix>]" variable="lrPreview">
+	<$let
+		lrList={{{ [<lrPreview>removeprefix<tf.lr.get-preview-prefix>] }}}
+		lrShown={{{ [<lrPreview>get[list]] }}}
+	>
+		<%if [<lrPreview>get[mode]match[drop]] %>
+			<%if [<lrList>get[list]!match<lrShown>] %>
+				<$action-setfield
+					$tiddler=<<lrList>>
+					$field="list"
+					$value=<<lrShown>>
+				/>
+			<% endif %>
+		<% endif %>
+	</$let>
+</$list>
+<<live-reorder-settle-actions>>
+<<live-reorder-forget-previews>>
 <$action-deletetiddler
 	$tiddler=<<dragState>>
 />
@@ -170,60 +234,60 @@ code-body: yes
 <% endif %>
 \end
 
-\procedure live-reorder-empty-drag-enter-actions()
+\procedure live-reorder-append-actions()
 <<live-reorder-adopt-actions>>
+<<live-reorder-preview-actions>>
+<%if [<list>!is[blank]] %>
+	<%if [enlist<tf.lr.get-titles>count[]!match[0]] %>
+		<<live-reorder-carry-actions>>
+		<$list filter="[enlist<tf.lr.get-titles>]" variable="lrTitle">
+			<$action-listops
+				$tiddler=<<tf.lr.get-order-tiddler>>
+				$field=<<tf.lr.get-order-field>>
+				$subfilter="-[<lrTitle>] [<lrTitle>]"
+			/>
+		</$list>
+	<% endif %>
+<% endif %>
+\end
+
+\procedure live-reorder-empty-drag-enter-actions()
 <$let
 	itemsHere={{{ [enlist<tf.lr.get-order>count[]] }}}
 >
-	<%if [<list>!is[blank]] %>
-		<%if [enlist<tf.lr.get-titles>count[]!match[0]] %>
-			<%if [<itemsHere>match[0]] %>
-				<<live-reorder-carry-actions>>
-				<$list filter="[enlist<tf.lr.get-titles>]" variable="lrTitle">
-					<$action-listops
-						$tiddler=<<tf.lr.get-order-tiddler>>
-						$field=<<tf.lr.get-order-field>>
-						$subfilter="-[<lrTitle>] [<lrTitle>]"
-					/>
-				</$list>
-			<% endif %>
-		<% endif %>
+	<%if [<itemsHere>match[0]] %>
+		<<live-reorder-append-actions>>
 	<% endif %>
 </$let>
 \end
 
 \procedure live-reorder-restore-actions()
-<$let
-	sourceList={{{ [<dragState>get[source-list]] }}}
-	holdsIt={{{ [<dragState>get[from-list]] }}}
->
-	<%if [<holdsIt>!match<sourceList>] %>
-		<$action-listops
-			$tiddler=<<holdsIt>>
-			$subfilter="-[enlist<tf.lr.get-titles>]"
-		/>
-	<% endif %>
-	<$action-setfield
-		$tiddler=<<sourceList>>
-		$field="list"
-		$value={{{ [<dragState>get[start-list]] }}}
-	/>
-	<$action-setfield
-		$tiddler=<<dragState>>
-		from-list=<<sourceList>>
-	/>
-</$let>
+<$list filter="[all[tiddlers]prefix<tf.lr.get-preview-prefix>]" variable="lrPreview">
+	<$let
+		lrList={{{ [<lrPreview>removeprefix<tf.lr.get-preview-prefix>] }}}
+		lrStart={{{ [<lrPreview>get[start]] }}}
+	>
+		<%if [<lrList>get[list]!match<lrStart>] %>
+			<$action-setfield
+				$tiddler=<<lrList>>
+				$field="list"
+				$value=<<lrStart>>
+			/>
+		<% endif %>
+	</$let>
+</$list>
+<<live-reorder-forget-previews>>
+<$action-setfield
+	$tiddler=<<dragState>>
+	from-list={{{ [<dragState>get[source-list]] }}}
+/>
 \end
 
 \procedure live-reorder-drag-end-actions()
-<%if [<dragState>addsuffix[/drag-handled]is[missing]] %>
-	<%if [<tf.lr.is-deferred>match[no]] %>
-		<<live-reorder-restore-actions>>
-	<% endif %>
+<%if [<dragState>is[tiddler]] %>
+	<<live-reorder-restore-actions>>
 <% endif %>
-<$action-deletetiddler
-	$tiddler={{{ [<dragState>addsuffix[/drag-handled]] }}}
-/>
+<<live-reorder-forget-previews>>
 <$action-deletetiddler
 	$tiddler=<<dragState>>
 />
@@ -231,35 +295,8 @@ code-body: yes
 
 \procedure live-reorder-revert-actions()
 <$list filter="[all[tiddlers]tag[$:/tags/dragState]]" variable="revertState">
-	<$let
-		startList={{{ [<revertState>get[start-list]] }}}
-		sourceList={{{ [<revertState>get[source-list]] }}}
-		holdsIt={{{ [<revertState>get[from-list]] }}}
-		revertDeferred={{{ [<revertState>get[commit]match[drop]then[yes]] :else[[no]] }}}
-	>
-		<%if [<revertDeferred>match[yes]] %>
-			<%if [<revertState>get[preview-list]!match<startList>] %>
-				<$action-setfield
-					$tiddler=<<revertState>>
-					$field="preview-list"
-					$value=<<startList>>
-				/>
-			<% endif %>
-		<% else %>
-			<%if [<holdsIt>!match<sourceList>] %>
-				<$let dragState=<<revertState>>>
-					<<live-reorder-restore-actions>>
-				</$let>
-			<% else %>
-				<%if [<sourceList>get[list]!match<startList>] %>
-					<$action-setfield
-						$tiddler=<<sourceList>>
-						$field="list"
-						$value=<<startList>>
-					/>
-				<% endif %>
-			<% endif %>
-		<% endif %>
+	<$let dragState=<<revertState>>>
+		<<live-reorder-restore-actions>>
 	</$let>
 </$list>
 \end
@@ -268,19 +305,24 @@ code-body: yes
 
 \function tf.lr.is-deferred() [<commit>match[drop]then[yes]] :else[[no]]
 
-\function tf.lr.get-order-tiddler() [<tf.lr.is-deferred>match[yes]then<dragState>] :else[<list>]
-\function tf.lr.get-order-field() [<tf.lr.is-deferred>match[yes]then[preview-list]] :else[[list]]
-\function tf.lr.get-order() [<tf.lr.get-order-tiddler>get<tf.lr.get-order-field>]
+\function tf.lr.get-preview-prefix() [<dragState>addsuffix[/preview/]]
+\function tf.lr.get-preview-tiddler() [<tf.lr.get-preview-prefix>addsuffix<list>]
+\function tf.lr.get-order-tiddler() [<tf.lr.is-deferred>match[yes]then<tf.lr.get-preview-tiddler>] :else[<list>]
+\function tf.lr.get-order-field() [[list]]
+\function tf.lr.get-order() [<tf.lr.get-order-tiddler>get[list]]
 
-\function tf.lr.get-record-titles() [<tf.lr.accepts-drops>match[yes]then[$:/state/dragging]get[list]]
+\function tf.lr.no-owner() [all[tiddlers]tag[$:/tags/dragState]count[]match[0]then[yes]] :else[[no]]
+\function tf.lr.get-record-titles() [<tf.lr.accepts-drops>match[yes]then<tf.lr.no-owner>match[yes]then[$:/state/dragging]get[list]]
 \function tf.lr.get-titles() [<dragState>get[drag-titles]] :else[<tf.lr.get-record-titles>]
 \function tf.lr.is-multi() [enlist<tf.lr.get-titles>butfirst[]count[]!match[0]then[yes]] :else[[no]]
 \function tf.lr.get-drop-target-offset() [<tf.lr.is-multi>match[yes]then[0px]] :else[<dropTargetOffset>]
 \function tf.lr.is-ghost() [enlist<tf.lr.get-titles>match<tiddler>then[yes]] :else[[no]]
 \function tf.lr.show-drop-target() [{$:/config/DragAndDrop/show-drop-target}match[yes]then[yes]] :else[[no]]
 \function tf.lr.is-drop-target() [<tf.lr.is-ghost>match[yes]then<tf.lr.show-drop-target>] :else[[no]]
-\function tf.lr.get-enable() [<enable>!is[blank]then<enable>] :else[<tv-enable-drag-and-drop>match[no]then[no]] :else[[yes]]
-\function tf.lr.get-drag-state() [<group>!is[blank]then[$:/state/tiddlywiki/live-reorder/]addsuffix<group>] :else[<dragState>]
+\function tf.lr.get-enable() [<enable>!is[blank]then<enable>] :else[<tv-live-reorder-item>match[yes]then[yes]] :else[<tv-enable-drag-and-drop>match[no]then[no]] :else[[yes]]
+\function tf.lr.get-own-state() [<group>!is[blank]then[$:/state/tiddlywiki/live-reorder/]addsuffix<group>] :else[<dragState>]
+\function tf.lr.get-active-state() [all[tiddlers]tag[$:/tags/dragState]first[]]
+\function tf.lr.get-drag-state() [<tf.lr.accepts-drops>match[yes]then<tf.lr.get-active-state>!is[blank]] :else[<tf.lr.get-own-state>]
 \function tf.lr.accepts-drops() [<acceptDrops>match[yes]then[yes]] :else[[no]]
 \function tf.lr.show-targets() [<tf.lr.is-dragging>match[yes]then[yes]] :else[<tf.lr.accepts-drops>]
 
@@ -296,8 +338,8 @@ code-body: yes
 
 \function tf.lr.get-item-class() tc-live-reorderable [<tf.lr.is-ghost>match[yes]then[tc-live-reorderable-ghost]] [<tf.lr.is-drop-target>match[yes]then[tc-live-reorderable-drop-target]] [<class>] :and[join[ ]]
 
-\function tf.lr.get-preview() [<tf.lr.is-deferred>match[yes]then<tf.lr.is-dragging>match[yes]then<dragState>get[preview-list]]
-\function tf.lr.get-animate-list() [<tf.lr.get-preview>!is[blank]then<dragState>] :else[<list>]
+\function tf.lr.get-preview() [<tf.lr.is-deferred>match[yes]then<tf.lr.is-dragging>match[yes]then<tf.lr.get-preview-tiddler>get[list]]
+\function tf.lr.get-animate-list() [<tf.lr.get-preview>!is[blank]then<tf.lr.get-preview-tiddler>] :else[<list>]
 \function tf.lr.get-duration() [<duration>!is[blank]then<duration>] :else[{$:/config/DragAndDrop/animation/duration}]
 \function tf.lr.get-easing() [<easing>!is[blank]then<easing>] :else[{$:/config/DragAndDrop/animation/easing}]
 
@@ -316,7 +358,7 @@ code-body: yes
 </$let>
 \end
 
-\procedure make-live-reorderable-list(list:"",content:"",class:"",enable:"",acceptDrops:"no",group:"",transfer:"move",dropTargetInset:"",dropTargetOffset:"",emptyHeight:"",scale:"no",dropActions:"",history:"",storyview:"",emptyMessage:"",duration:"",easing:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
+\procedure make-live-reorderable-list(list:"",filter:"",content:"",class:"",enable:"",acceptDrops:"no",tailHeight:"",group:"",transfer:"move",dropTargetInset:"",dropTargetOffset:"",emptyHeight:"",scale:"no",dropActions:"",history:"",storyview:"",emptyMessage:"",duration:"",easing:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
 \whitespace trim
 <$let dragState=<<tf.lr.get-drag-state>>>
 	<$transclude $variable="make-live-reorder-backstop"
@@ -335,13 +377,14 @@ code-body: yes
 		easing=<<tf.lr.get-easing>>
 		scale=<<scale>>
 	>
-		<$list filter="[enlist<tf.lr.get-preview>] :else[list<list>]" history=<<history>> storyview=<<storyview>> emptyMessage=<<emptyMessage>>>
+		<$list filter="[enlist<tf.lr.get-preview>] :else[subfilter<filter>] :else[list<list>]" history=<<history>> storyview=<<storyview>> emptyMessage=<<emptyMessage>>>
 			<$transclude $variable="make-live-reorderable"
 				$mode="inline"
 				tiddler=<<currentTiddler>>
 				class=<<class>>
 				content=<<content>>
 				list=<<list>>
+				filter=<<filter>>
 				enable=<<enable>>
 				acceptDrops=<<acceptDrops>>
 				group=<<group>>
@@ -358,13 +401,25 @@ code-body: yes
 			/>
 		</$list>
 	</$animatelayout>
-	<$list filter="[enlist<tf.lr.get-preview>] :else[list<list>] +[count[]match[0]]" variable="tf.lr.empty">
+	<$list filter="[enlist<tf.lr.get-preview>] :else[subfilter<filter>] :else[list<list>] +[count[]match[0]]" variable="tf.lr.empty">
 		<div class="tc-live-reorderable-empty-slot" style.min-height=<<emptyHeight>>/>
 	</$list>
+	<%if [<tailHeight>!is[blank]] %>
+		<%if [<tf.lr.is-dragging>match[yes]] %>
+			<$droppable
+				tag="div"
+				enable=<<tf.lr.get-enable>>
+				class="tc-live-reorderable-tail"
+				style.min-height=<<tailHeight>>
+				actions=<<live-reorder-drop-actions>>
+				dragEnterActions=<<live-reorder-append-actions>>
+			/>
+		<% endif %>
+	<% endif %>
 </$let>
 \end
 
-\procedure make-live-reorderable(tiddler:"",class:"",content:"",list:"",enable:"",acceptDrops:"no",group:"",transfer:"move",dropTargetInset:"",dropTargetOffset:"",dropActions:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
+\procedure make-live-reorderable(tiddler:"",class:"",content:"",list:"",filter:"",enable:"",acceptDrops:"no",group:"",transfer:"move",dropTargetInset:"",dropTargetOffset:"",dropActions:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
 \whitespace trim
 \rules except dash
 <$let dragState=<<tf.lr.get-drag-state>>>
@@ -381,9 +436,12 @@ code-body: yes
 		--tc-live-reorder-drop-target-bottom=<<dropTargetInset>>
 		--tc-live-reorder-drop-target-offset=<<tf.lr.get-drop-target-offset>>
 	>
-		<$set name="tv-enable-drag-and-drop" value={{{ [<tf.lr.get-enable>match[yes]then[no]] :else[<tv-enable-drag-and-drop>] }}}>
+		<$let
+			tv-enable-drag-and-drop={{{ [<tf.lr.get-enable>match[yes]then[no]] :else[<tv-enable-drag-and-drop>] }}}
+			tv-live-reorder-item={{{ [<tf.lr.get-enable>match[yes]then[yes]] :else[<tv-live-reorder-item>] }}}
+		>
 			<<content>>
-		</$set>
+		</$let>
 		<%if [<tf.lr.show-targets>match[yes]] %>
 			<$droppable
 				enable=<<tf.lr.get-enable>>

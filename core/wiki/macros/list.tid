@@ -72,70 +72,57 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-\define list-tagged-draggable-drop-actions(tag)
-\whitespace trim
-<!-- Save the current ordering of the tiddlers with this tag -->
-<$set name="order" filter="[<__tag__>tagging[]]">
-	<!-- Remove any list-after or list-before fields from the tiddlers with this tag -->
-	<$list filter="[<__tag__>tagging[]]">
-		<$action-deletefield $field="list-before"/>
-		<$action-deletefield $field="list-after"/>
-	</$list>
-	<!-- Save the new order to the Tag Tiddler -->
-	<$action-listops $tiddler=<<__tag__>> $field="list" $filter="+[enlist<order>] +[insertbefore<actionTiddler>,<currentTiddler>]"/>
-	<!-- Make sure the newly added item has the right tag -->
-	<!-- Removing this line makes dragging tags within the dropdown work as intended -->
-	<!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<__tag__>>/>-->
-	<!-- Using the following 5 lines as replacement makes dragging titles from outside into the dropdown apply the tag -->
-	<$list filter="[<actionTiddler>!contains:tags<__tag__>]">
-		<$fieldmangler tiddler=<<actionTiddler>>>
-			<$action-sendmessage $message="tm-add-tag" $param=<<__tag__>>/>
-		</$fieldmangler>
-	</$list>
-</$set>
+<!-- The item of a tagged list, and what to do when something is dropped into one. Both read
+the variables that the macro below puts in scope, so that the macro can keep the parameters
+it has always taken while the list itself is rendered by make-live-reorderable-list -->
+
+\procedure list-tagged-draggable-item()
+<$transclude tiddler=<<taggedItemTemplate>>>
+	<$link to={{!!title}} draggable="no" startactions=<<taggedStartActions>> endactions=<<taggedEndActions>>>
+		<$let tv-wikilinks="no">
+			<$transclude field=<<taggedDisplayField>>>
+				<$view field="title"/>
+			</$transclude>
+		</$let>
+	</$link>
+</$transclude>
+\end
+
+\procedure list-tagged-draggable-drop-actions()
+<$list filter="[enlist<tf.lr.get-titles>!contains:tags<list>]" variable="taggedNewcomer">
+	<$fieldmangler tiddler=<<taggedNewcomer>>>
+		<$action-sendmessage $message="tm-add-tag" $param=<<list>>/>
+	</$fieldmangler>
+</$list>
 \end
 
 \define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"",displayField:"title",startactions,endactions)
 \whitespace trim
 <span class="tc-tagged-draggable-list">
-	<$set name="tag" value=<<__tag__>>>
-		<$list
-			filter="[<__tag__>tagging[]$subFilter$]"
-			emptyMessage=<<__emptyMessage__>>
-			storyview=<<__storyview__>>
-		>
-			<$genesis $type=<<__elementTag__>> class="tc-menu-list-item">
-				<$droppable
-					actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>"""
-					enable=<<tv-enable-drag-and-drop>>
-				>
-					<$genesis $type=<<__elementTag__>> class="tc-droppable-placeholder"/>
-					<$genesis $type=<<__elementTag__>>>
-						<$transclude tiddler=<<__itemTemplate__>>>
-							<$link to={{!!title}}
-								startactions=<<__startactions__>>
-								endactions=<<__endactions__>>
-							>
-								<$let tv-wikilinks="no">
-									<$transclude field=<<__displayField__>>>
-										<$view field="title"/>
-									</$transclude>
-								</$let>
-							</$link>
-						</$transclude>
-					</$genesis>
-				</$droppable>
-			</$genesis>
-		</$list>
-		<$tiddler tiddler="">
-			<$droppable
-				actions="""<$macrocall $name="list-tagged-draggable-drop-actions" tag=<<__tag__>>/>"""
-				enable=<<tv-enable-drag-and-drop>>
-			>
-				<$genesis $type=<<__elementTag__>> class="tc-droppable-placeholder"/>
-				<$genesis $type=<<__elementTag__>> style="height:0.5em;"/>
-			</$droppable>
-		</$tiddler>
-	</$set>
+<$let
+	taggedTag="""$tag$"""
+	taggedItemTemplate="""$itemTemplate$"""
+	taggedDisplayField="""$displayField$"""
+	taggedStartActions="""$startactions$"""
+	taggedEndActions="""$endactions$"""
+>
+<$transclude $variable="make-live-reorderable-list"
+	$mode="inline"
+	list="""$tag$"""
+	filter="[[$tag$]tagging[]$subFilter$]"
+	content=<<list-tagged-draggable-item>>
+	class="tc-menu-list-item"
+	itemDisplay="block"
+	acceptDrops="yes"
+	transfer="copy"
+	tailHeight="0.5em"
+	commit="drop"
+	emptyHeight="0.5em"
+	emptyMessage="""$emptyMessage$"""
+	storyview="""$storyview$"""
+	dropActions=<<list-tagged-draggable-drop-actions>>
+	dragState={{{ [[$:/state/tagged/]addsuffix<taggedTag>] }}}
+/>
+</$let>
 </span>
 \end

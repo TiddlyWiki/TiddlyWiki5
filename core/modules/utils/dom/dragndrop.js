@@ -47,13 +47,21 @@ function endDragInProgress(domNode,widget) {
 	});
 }
 
-function installDragEndBackstop(domNode,widget) {
+function installDragEndBackstop(domNode,widget,endActions,titles) {
 	var doc = domNode.ownerDocument;
 	if(!doc || !doc.addEventListener) {
 		return;
 	}
 	var handler = function() {
 		doc.removeEventListener("pointerdown",handler,true);
+		// A dragend fired at a node that was re-rendered away during the drag reaches
+		// no listener, so the drag is still marked as running here. Finish it off
+		if($tw.dragInProgress === domNode && endActions !== undefined && widget) {
+			try {
+				widget.invokeActionString(endActions,widget,null,{actionTiddler: titles});
+			} catch(e) {
+			}
+		}
 		endDragInProgress(domNode,widget);
 	};
 	doc.addEventListener("pointerdown",handler,true);
@@ -97,7 +105,7 @@ exports.makeDraggable = function(options) {
 			$tw.dragInProgress = domNode;
 			markDragInProgress(domNode,true);
 			recordDrag(options.widget,titleString);
-			installDragEndBackstop(domNode,options.widget);
+			installDragEndBackstop(domNode,options.widget,options.endActions,titleString);
 			// Set the dragging class on the element being dragged
 			$tw.utils.addClass(domNode,"tc-dragging");
 			// Invoke drag-start actions if given

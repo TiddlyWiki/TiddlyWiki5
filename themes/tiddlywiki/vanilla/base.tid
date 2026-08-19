@@ -593,6 +593,10 @@ a.tc-tiddlylink-external:hover {
 	--tc-live-reorder-drop-target-offset: 4px;
 }
 
+.tc-live-reorderable-tail {
+	position: relative;
+}
+
 .tc-live-reorderable-drop-placeholder {
 	pointer-events: none;
 }
