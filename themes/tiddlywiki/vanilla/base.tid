@@ -620,6 +620,26 @@ body.tc-drag-in-progress .tc-live-reorderable-drop-placeholder {
 	top: calc(0px - var(--tc-live-reorder-drop-target-offset,4px) - 2px);
 }
 
+.tc-tagged-draggable-list {
+	display: block;
+	position: relative;
+}
+
+@media (pointer: coarse) {
+
+	.tc-tagged-draggable-list .tc-live-reorderable {
+		padding-left: 1.6em;
+	}
+
+	.tc-tagged-draggable-list .tc-live-reorderable::before {
+		content: "\2807";
+		position: absolute;
+		left: 0.4em;
+		opacity: 0.4;
+	}
+
+}
+
 .tc-tagged-draggable-list .tc-droppable-placeholder,
 .tc-links-draggable-list .tc-droppable-placeholder {
 	line-height: 2em;
