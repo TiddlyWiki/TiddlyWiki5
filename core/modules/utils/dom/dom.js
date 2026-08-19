@@ -300,9 +300,6 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
 			variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
 			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
-			// offsetWidth and offsetHeight are rounded to whole pixels. Also expose the
-			// unrounded size, for callers that have to reserve exactly the space the node
-			// occupied and would otherwise be out by up to a pixel
 			if(selectedNode.getBoundingClientRect) {
 				var selectedNodeExactRect = selectedNode.getBoundingClientRect();
 				variables["tv-selectednode-exact-width"] = selectedNodeExactRect.width.toString();

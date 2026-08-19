@@ -72,10 +72,6 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-<!-- The item of a tagged list, and what to do when something is dropped into one. Both read
-the variables that the macro below puts in scope, so that the macro can keep the parameters
-it has always taken while the list itself is rendered by make-live-reorderable-list -->
-
 \procedure list-tagged-draggable-item()
 <$transclude tiddler=<<taggedItemTemplate>>>
 	<$link to={{!!title}} draggable="no" startactions=<<taggedStartActions>> endactions=<<taggedEndActions>>>

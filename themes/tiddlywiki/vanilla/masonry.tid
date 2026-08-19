@@ -14,6 +14,7 @@ code-body: yes
 	.tc-story-river-masonry > .tc-live-reorderable {
 		break-inside: avoid;
 		width: 100%;
+		--tc-live-reorder-drop-target-offset: 0px;
 	}
 
 	.tc-story-river-masonry > .tc-live-reorderable > .tc-tiddler-frame {
