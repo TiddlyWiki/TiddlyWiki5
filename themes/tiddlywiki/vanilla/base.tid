@@ -584,7 +584,7 @@ a.tc-tiddlylink-external:hover {
 
 .tc-live-reorder-backstop {
 	position: absolute;
-	inset: calc(0px - var(--tc-live-reorder-slack,24px));
+	inset: 0;
 	z-index: 0;
 }
 
@@ -626,10 +626,6 @@ body.tc-drag-in-progress .tc-live-reorderable-drop-placeholder {
 }
 
 @media (pointer: coarse) {
-
-	:root {
-		--tc-live-reorder-slack: 44px;
-	}
 
 	.tc-tagged-draggable-list .tc-live-reorderable,
 	.tc-sidebar-tab-open .tc-live-reorderable {

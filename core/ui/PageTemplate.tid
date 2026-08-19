@@ -22,7 +22,7 @@ code-body: yes
 
 <$dropzone enable=<<tv-enable-drag-and-drop>> class="tc-dropzone tc-page-container-inner">
 
-<$eventcatcher tag="div" class="tc-page-drag-events" stopPropagation="no" $dragenter=<<live-reorder-revert-actions>> $dragend=<<live-reorder-abandon-actions>>>
+<$eventcatcher tag="div" class="tc-page-drag-events" stopPropagation="no" $dragend=<<live-reorder-abandon-actions>>>
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]]" variable="listItem">
 

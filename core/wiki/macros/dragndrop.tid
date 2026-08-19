@@ -293,13 +293,6 @@ code-body: yes
 />
 \end
 
-\procedure live-reorder-revert-actions()
-<$list filter="[all[tiddlers]tag[$:/tags/dragState]]" variable="revertState">
-	<$let dragState=<<revertState>>>
-		<<live-reorder-restore-actions>>
-	</$let>
-</$list>
-\end
 
 \function tf.lr.is-dragging() [<dragState>get[text]match[yes]then[yes]] :else[[no]]
 
