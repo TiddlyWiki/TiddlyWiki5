@@ -308,6 +308,33 @@ var FOCUSABLE_SELECTOR = [
 ].join(", ");
 
 /**
+ * Determine the DOM root (document or shadow root) that an editor will live in.
+ *
+ * CodeMirror derives its root from the parent element passed to `EditorView`,
+ * falling back to the global `document` when that element is still detached.
+ * Since we build the editor's container before inserting it, that fallback used
+ * to pick the *main* window's document even when the editor was being rendered
+ * into a window opened by `tm-open-window`. The base theme (injected by
+ * style-mod into `view.root`) then landed in the wrong document, leaving the
+ * editor in the new window completely unstyled: `.cm-content` lost its
+ * `white-space: pre-wrap`, the scroller lost its flex layout, and the cursor
+ * was measured against a box that no longer matched the rendered text.
+ *
+ * @param {Node} node - A node that is already attached where the editor goes
+ * @param {Document} ownerDocument - Fallback document from the widget context
+ * @returns {Document|ShadowRoot} The root to hand to CodeMirror
+ */
+function getEditorRoot(node, ownerDocument) {
+	var root = node && node.getRootNode ? node.getRootNode() : null;
+	// Only documents (nodeType 9) and shadow roots (nodeType 11 with a host)
+	// are valid CodeMirror roots; a detached node yields neither
+	if(root && (root.nodeType === 9 || (root.nodeType === 11 && root.host))) {
+		return root;
+	}
+	return ownerDocument;
+}
+
+/**
  * Get all visible focusable elements sorted by tabindex (browser tab order)
  * @param {Document} doc - The document to search in
  * @returns {Element[]} Array of focusable elements in tab order
@@ -2091,20 +2118,22 @@ class CodeMirrorEngine {
 
 		var initialText = isString(options.value) ? normalizeLineEndings(options.value) : "";
 
-		this.view = new EditorView({
-			state: EditorState.create({
-				doc: initialText,
-				extensions: extensions
-			}),
-			parent: this.domNode
-		});
-
-		// Insert into DOM
+		// Insert into DOM before creating the view, so that CodeMirror measures
+		// against the real layout and can resolve the root itself
 		if(this.nextSibling && this.nextSibling.parentNode === this.parentNode) {
 			this.parentNode.insertBefore(this.domNode, this.nextSibling);
 		} else {
 			this.parentNode.appendChild(this.domNode);
 		}
+
+		this.view = new EditorView({
+			state: EditorState.create({
+				doc: initialText,
+				extensions: extensions
+			}),
+			parent: this.domNode,
+			root: getEditorRoot(this.domNode, ownerDocument)
+		});
 
 		// Register with widget
 		if(this.widget && this.widget.domNodes) {

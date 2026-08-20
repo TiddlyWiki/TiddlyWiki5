@@ -136,6 +136,26 @@ function isObject(o) {
  * TW format: "ctrl-shift-Z" (lowercase modifiers)
  * CM format: "Ctrl-Shift-Z" (PascalCase modifiers)
  */
+/**
+ * Determine the DOM root (document or shadow root) that an editor will live in.
+ *
+ * CodeMirror falls back to the global `document` when the parent element handed
+ * to `EditorView` is still detached, which put the base theme in the main
+ * window's document for editors rendered into a `tm-open-window` window. See
+ * the matching helper in the main editor engine.
+ *
+ * @param {Node} node - A node that is already attached where the editor goes
+ * @param {Document} ownerDocument - Fallback document from the widget context
+ * @returns {Document|ShadowRoot} The root to hand to CodeMirror
+ */
+function getEditorRoot(node, ownerDocument) {
+	var root = node && node.getRootNode ? node.getRootNode() : null;
+	if(root && (root.nodeType === 9 || (root.nodeType === 11 && root.host))) {
+		return root;
+	}
+	return ownerDocument;
+}
+
 function twShortcutToCM(twShortcut) {
 	if(!twShortcut) return null;
 	// Split by space for multiple shortcuts, take first one
@@ -1293,16 +1313,19 @@ class CodeMirrorSimpleEngine {
 			initialText = initialText.replace(/\r\n?/g, "\n");
 		}
 
+		// Insert into DOM before creating the view, so that CodeMirror measures
+		// against the real layout and can resolve the root itself
+		this.parentNode.insertBefore(this.domNode, this.nextSibling);
+
 		this.view = new EditorView({
 			state: EditorState.create({
 				doc: initialText,
 				extensions: extensions
 			}),
-			parent: this.domNode
+			parent: this.domNode,
+			root: getEditorRoot(this.domNode, ownerDocument)
 		});
 
-		// Insert into DOM
-		this.parentNode.insertBefore(this.domNode, this.nextSibling);
 		if(this.widget && this.widget.domNodes) {
 			this.widget.domNodes.push(this.domNode);
 		}
