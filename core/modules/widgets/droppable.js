@@ -89,11 +89,7 @@ DroppableWidget.prototype.enterDrag = function(event) {
 	// Invoke any enter actions
 	if(this.droppableEnterActions) {
 		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
-		this.invokeActionString(this.droppableEnterActions,this,event,{
-			modifier: modifierKey,
-			"pointer-x": ($tw.dragPointer ? $tw.dragPointer.x : event.clientX || "").toString(),
-			"pointer-y": ($tw.dragPointer ? $tw.dragPointer.y : event.clientY || "").toString()
-		});
+		this.invokeActionString(this.droppableEnterActions,this,event,{modifier: modifierKey});
 	}
 };
 

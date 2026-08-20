@@ -11,34 +11,11 @@ Browser data transfer utilities, used with the clipboard and drag and drop
 
 var DRAGGING_TITLE = "$:/state/dragging";
 
-var dragPointerHandler;
-
-function followDragPointer(doc,status) {
-	if(!doc || !doc.addEventListener) {
-		return;
-	}
-	if(status) {
-		if(!dragPointerHandler) {
-			dragPointerHandler = function(event) {
-				if(event.clientX || event.clientY) {
-					$tw.dragPointer = {x: event.clientX, y: event.clientY};
-				}
-			};
-			doc.addEventListener("dragover",dragPointerHandler,true);
-		}
-	} else if(dragPointerHandler) {
-		doc.removeEventListener("dragover",dragPointerHandler,true);
-		dragPointerHandler = null;
-		$tw.dragPointer = null;
-	}
-}
-
 function markDragInProgress(domNode,status) {
 	var doc = domNode.ownerDocument;
 	if(doc && doc.body && doc.body.classList) {
 		doc.body.classList[status ? "add" : "remove"]("tc-drag-in-progress");
 	}
-	followDragPointer(doc,status);
 	if(status) {
 		$tw.utils.pinColumnLayout(domNode);
 	} else {
