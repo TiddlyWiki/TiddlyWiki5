@@ -1,0 +1,12 @@
+title: $:/changenotes/5.5.0/getattribute-operator
+description: New getattribute operator for reading attributes of widget, element and macro invocations
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: filters
+
+The new [[getattribute Operator]] parses each input title as inline ~WikiText and returns the value of a named attribute of the widget, HTML element or macro invocation that it consists of.
+
+It removes the need for regular expressions when picking apart an invocation, and recognises all of the equivalent ways of writing one, so that `<<colour foreground>>`, `<<colour name:foreground>>` and `<$transclude $variable="colour" name="foreground"/>` are all handled by `getattribute[name],[0]`.
+
+The $:/PaletteEditor uses it to resolve palette entries that are defined in terms of another entry.
