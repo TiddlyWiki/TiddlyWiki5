@@ -1,9 +1,11 @@
-title: $:/changenotes/5.5.0/getattribute-operator
+title: $:/changenotes/5.5.0/#9941 - getattribute-operator
 description: New getattribute operator for reading attributes of widget, element and macro invocations
 release: 5.5.0
 tags: $:/tags/ChangeNote
 change-type: feature
 change-category: filters
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9941
+github-contributors: BurningTreeC
 
 The new [[getattribute Operator]] parses each input title as inline ~WikiText and returns the value of a named attribute of the widget, HTML element or macro invocation that it consists of.
 
