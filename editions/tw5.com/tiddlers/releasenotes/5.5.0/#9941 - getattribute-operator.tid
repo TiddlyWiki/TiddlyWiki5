@@ -1,4 +1,4 @@
-title: $:/changenotes/5.5.0/#9941 - getattribute-operator
+title: $:/changenotes/5.5.0/#9941
 description: New getattribute operator for reading attributes of widget, element and macro invocations
 release: 5.5.0
 tags: $:/tags/ChangeNote
