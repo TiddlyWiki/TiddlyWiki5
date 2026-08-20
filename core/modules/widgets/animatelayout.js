@@ -55,7 +55,7 @@ AnimateLayoutWidget.prototype.getAnimatedNodes = function() {
 	var self = this,
 		nodes = [];
 	$tw.utils.each(this.parentDomNode.querySelectorAll("[" + this.animateKey + "]"),function(node) {
-		if(node.hasAttribute("data-animate-detached")) {
+		if(node.getAttribute("data-animate-detached") === "yes") {
 			return;
 		}
 		for(var parent = node.parentNode; parent && parent !== self.parentDomNode; parent = parent.parentNode) {

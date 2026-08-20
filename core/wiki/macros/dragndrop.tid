@@ -360,6 +360,9 @@ the item the way the pointer itself is travelling -->
 \function tf.lr.get-drop-target-offset() [<tf.lr.is-multi>match[yes]then[0px]] :else[<dropTargetOffset>]
 \function tf.lr.is-ghost() [enlist<tf.lr.get-titles>match<tiddler>then[yes]] :else[[no]]
 \function tf.lr.show-drop-target() [{$:/config/DragAndDrop/show-drop-target}match[yes]then[yes]] :else[[no]]
+
+\function tf.lr.is-carried() [<tf.lr.is-ghost>match[yes]then[yes]]
+
 \function tf.lr.is-drop-target() [<tf.lr.is-ghost>match[yes]then<tf.lr.show-drop-target>] :else[[no]]
 \function tf.lr.get-enable() [<enable>!is[blank]then<enable>] :else[<tv-live-reorder-item>match[yes]then[yes]] :else[<tv-enable-drag-and-drop>match[no]then[no]] :else[[yes]]
 \function tf.lr.get-own-state() [<group>!is[blank]then[$:/state/tiddlywiki/live-reorder/]addsuffix<group>] :else[<dragState>]
@@ -474,6 +477,7 @@ the item the way the pointer itself is travelling -->
 		endactions=<<live-reorder-drag-end-actions>>
 		class=<<tf.lr.get-item-class>>
 		data-animate-key=<<tiddler>>
+		data-animate-detached=<<tf.lr.is-carried>>
 		style.display=<<itemDisplay>>
 		style.position="relative"
 		--tc-live-reorder-ghost-opacity=<<ghostOpacity>>
