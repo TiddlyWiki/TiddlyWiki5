@@ -15,6 +15,7 @@ A collection of colour themes for the CodeMirror 6 editor.
 |GitHub |Light, Dark, Dimmed |
 |Greyscale |Default, Dark, Light |
 |Gruvbox |Dark, Dark Hard, Light, Light Hard |
+|Ironworks |Nightshift, Dayshift |
 |Kanagawa |Wave, Dragon, Lotus |
 |Material |Default, Darker, Lighter, Ocean, Palenight |
 |Monokai |Classic, Pro, Light |
@@ -24,4 +25,5 @@ A collection of colour themes for the CodeMirror 6 editor.
 |Rosé Pine |Main, Moon, Dawn |
 |Solarized |Dark, Light |
 |Tokyo Night |Night, Storm, Day |
+|Vanilla Paper |Day, Night |
 |Zenburn |Default, High Contrast |
