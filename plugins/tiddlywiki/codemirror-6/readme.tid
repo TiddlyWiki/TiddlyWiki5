@@ -1,0 +1,94 @@
+title: $:/plugins/tiddlywiki/codemirror-6/readme
+
+! CodeMirror 6
+
+A modern text editor for TiddlyWiki based on [ext[CodeMirror 6|https://codemirror.net/]].
+
+!! Built-in Features
+
+* ''Syntax Highlighting'' — TiddlyWiki wikitext with nested language support
+* ''Autocompletion'' — tiddler titles, macros, widgets, variables, filters
+* ''Multiple Cursors'' — edit multiple locations simultaneously (Ctrl+Alt+Up/Down)
+* ''Search & Replace'' — regex support, case sensitivity, whole word matching
+* ''Bracket Matching'' — highlight matching brackets and auto-close
+* ''Undo/Redo'' — unlimited history
+* ''Focus Navigation'' — Ctrl+. / Ctrl+Shift+. to move between fields
+* ''Spellcheck'' — browser spellcheck integration (optional)
+
+!! Configuration
+
+Configure via ''Control Panel → Settings → CodeMirror'':
+
+* ''Editor'' — line wrapping, bracket matching, indentation, spellcheck
+* ''Theme'' — color scheme with auto palette matching
+* ''Keymap'' — VSCode (default), vim, or emacs bindings
+* ''Keyboard Shortcuts'' — customize all shortcuts
+
+!! Included Features
+
+|!Feature |!Description |
+|''auto-close-tags'' |Auto-close HTML/widget tags |
+|''click-navigate'' |Ctrl+click to navigate links |
+|''color-picker'' |Visual color picker for CSS colors |
+|''emoji-picker'' |Emoji insertion panel |
+|''fold'' |Collapse widgets, pragmas, code blocks |
+|''line-numbers'' |Show line numbers in gutter |
+|''link-preview'' |Hover preview for wiki links |
+|''snippets'' |Custom code snippets with tab stops |
+|''toolbars'' |Editor toolbar styles |
+|''word-count'' |Word and character count display |
+|''zen-mode'' |Distraction-free fullscreen writing |
+
+!! Included Languages
+
+|!Language |!Description |
+|''CSS'' |CSS syntax highlighting |
+|''CSV'' |CSV syntax highlighting |
+|''HTML'' |HTML syntax highlighting |
+|''JavaScript'' |JavaScript/TypeScript/JSX/TSX syntax highlighting |
+|''JSON'' |JSON syntax highlighting |
+|''Markdown'' |Markdown syntax highlighting |
+|''TiddlyWiki'' |TiddlyWiki wikitext parser and syntax highlighting |
+|''XML'' |XML/SVG syntax highlighting |
+|''YAML'' |YAML syntax highlighting |
+
+!! Companion Plugins
+
+|!Plugin |!Description |
+|''edit-text'' |SimpleEngine — CodeMirror for input fields and textareas |
+|''lint'' |Highlight potential issues in wikitext |
+
+!! Additional Plugins
+
+|!Plugin |!Description |
+|''keymap-vim'' |Vim keybindings with visual mode, ex commands |
+|''keymap-emacs'' |Emacs keybindings |
+|''image-preview'' |Inline image preview |
+
+Additional language plugins are available for Python, Java, C/C++, Rust, Go, SQL, LaTeX, Sass, Lezer, PHP, and WAST.
+
+!! Theme Plugins
+
+Color schemes: Ayu, Catppuccin, Dracula, Everforest, Flexoki, GitHub, Gruvbox, Kanagawa, Material, Monokai, Nord, One, Palenight, Rose Pine, Solarized, Tokyo Night, Zenburn
+
+Most themes include both light and dark variants.
+
+!! Keyboard Shortcuts
+
+|!Shortcut |!Action |
+|Ctrl+Z |Undo |
+|Ctrl+Y |Redo |
+|Ctrl+F |Find |
+|Ctrl+H |Find and Replace |
+|Ctrl+D |Select next occurrence |
+|Ctrl+/ |Toggle comment |
+|Ctrl+Alt+Up/Down |Add cursor above/below |
+|Ctrl+. |Focus next field |
+|Ctrl+Shift+. |Focus previous field |
+|Alt+Up/Down |Move line up/down |
+|Tab |Indent / accept completion |
+|Ctrl+Space |Trigger completion |
+
+Customize shortcuts in ''Control Panel → Settings → CodeMirror → Keyboard Shortcuts''.
+
+All features can be individually enabled/disabled via ''Control Panel → Settings → CodeMirror''.

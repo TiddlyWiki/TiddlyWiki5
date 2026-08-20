@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/simple/keymap
+caption: Simple Editor Keymap (All)
+description: Default keymap for all simple editors. Override with input/textarea-specific settings. Leave empty to use main editor keymap.
+config-type: keymap-select
+config-category: Keybindings
+default:
+text:

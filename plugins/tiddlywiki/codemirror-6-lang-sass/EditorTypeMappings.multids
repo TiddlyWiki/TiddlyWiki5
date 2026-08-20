@@ -1,0 +1,4 @@
+title: $:/config/EditorTypeMappings/
+
+text/x-sass: codemirror-6
+text/x-scss: codemirror-6

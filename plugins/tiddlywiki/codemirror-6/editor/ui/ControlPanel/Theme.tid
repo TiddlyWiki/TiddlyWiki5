@@ -1,0 +1,42 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/ControlPanel/Theme
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: Theme
+
+\procedure light-themes()
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/CodeMirrorTheme]color-scheme[light]get[family]unique[]sort[]]" variable="family">
+<optgroup label=<<family>>>
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/CodeMirrorTheme]color-scheme[light]family<family>sort[name]]" variable="theme">
+<option value={{{ [<theme>get[value]] }}}><$text text={{{ [<theme>get[name]] }}}/></option>
+</$list>
+</optgroup>
+</$list>
+\end
+
+\procedure dark-themes()
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/CodeMirrorTheme]color-scheme[dark]get[family]unique[]sort[]]" variable="family">
+<optgroup label=<<family>>>
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/CodeMirrorTheme]color-scheme[dark]family<family>sort[name]]" variable="theme">
+<option value={{{ [<theme>get[value]] }}}><$text text={{{ [<theme>get[name]] }}}/></option>
+</$list>
+</optgroup>
+</$list>
+\end
+
+! Editor Theme
+
+<$checkbox tiddler="$:/config/codemirror-6/editor/auto-match-palette" field="text" checked="yes" unchecked="no" default="yes"> Automatically match TiddlyWiki palette</$checkbox>
+
+<%if [{$:/config/codemirror-6/editor/auto-match-palette}match[yes]] %>
+
+When enabled, the editor theme automatically switches based on your TiddlyWiki palette's `color-scheme` field.
+
+|!Light palettes use |<$select tiddler="$:/config/codemirror-6/editor/theme-light" default="vanilla"><<light-themes>><<dark-themes>></$select> |
+|!Dark palettes use |<$select tiddler="$:/config/codemirror-6/editor/theme-dark" default="vanilla-dark"><<dark-themes>><<light-themes>></$select> |
+
+<%else%>
+
+Select a fixed theme for all editors:
+
+|!Theme |<$select tiddler="$:/config/codemirror-6/editor/theme" default="vanilla"><<light-themes>><<dark-themes>></$select> |
+
+<%endif%>
