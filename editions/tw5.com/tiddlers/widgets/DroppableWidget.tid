@@ -1,6 +1,6 @@
 caption: droppable
 created: 20170406082820317
-modified: 20260818111799000
+modified: 20260818111759000
 tags: Widgets TriggeringWidgets
 title: DroppableWidget
 type: text/vnd.tiddlywiki
@@ -33,7 +33,7 @@ See DragAndDropMechanism for an overview.
 
 |! Attribute |! Description |
 |actions |Actions to be performed when items are dropped. It activates ''1 action per item'' |
-|listActions |<<.from-version "5.3.4">> Actions to be performed when items are dropped. It activates ''1 action for'' a the whole ''list of items'' |
+|listActions |<<.from-version "5.3.4">> Actions to be performed when items are dropped. It activates ''1 action for'' the whole ''list of items'' |
 |dragEnterActions |<<.from-version "5.5.0">> Actions to be performed when a drag arrives over the droppable element. Crossing between elements inside it does not count as a new arrival |
 |dragLeaveActions |<<.from-version "5.5.0">> Actions to be performed when a drag leaves the droppable element, or finishes while still over it. A drop is an arrival rather than a departure, so these are not performed when something is dropped |
 |dragEndActions |<<.from-version "5.5.0">> Actions to be performed when a drag finishes, provided the element being dragged lies within this droppable element. The browser raises the `dragend` event on the element being dragged, so a droppable element that does not contain it never learns that the drag is over |

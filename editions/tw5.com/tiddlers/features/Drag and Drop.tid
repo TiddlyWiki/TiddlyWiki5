@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 Tiddler manipulation via drag and drop is supported by the core user interface in the following contexts:
 
 * Tiddlers in the story river can be reordered by drag and drop, once that has been switched on in the [[control panel|$:/ControlPanel]] <<.from-version "5.5.0">>
-* Entries in the "Open" tab of the sidebar can be reordered by drag and drop; tiddlers can be opened by dragging their titles into the list, which opens up to show where they will go before they are let go of. Dragging a tag pill in brings every tiddler carrying that tag <<.from-version "5.5.0">>
+* Entries in the "Open" tab of the sidebar can be reordered by drag and drop; tiddlers can be opened by dragging their titles into the list, which opens up to show where they will go before they are released. Dragging a tag pill into it brings every tiddler carrying that tag <<.from-version "5.5.0">>
 * Entries within a tag pill dropdown can be reordered by drag and drop, with the list opening up to show where they will go; tiddlers can be assigned the tag by dragging their titles into the list <<.from-version "5.5.0">>
 * Entries in the [[control panel|$:/ControlPanel]] "Appearance"/"Toolbars" tab can be reordered by drag and drop, in the same way. (Less usefully, new entries can be added to the toolbars by dragging their titles into the list)
 
@@ -30,7 +30,7 @@ Some common scenarios for drag and drop tiddler manipulation are available as re
 
 ! Settings
 
-<<.from-version "5.5.0">> The way tiddlers are dragged within a ~TiddlyWiki is settled in the [[control panel|$:/ControlPanel]] under "Appearance"/"Drag & Drop":
+<<.from-version "5.5.0">> The way tiddlers are dragged within a ~TiddlyWiki is set in the [[control panel|$:/ControlPanel]] under "Appearance"/"Drag & Drop":
 
 |!Setting |!Default |!Description |
 |<<.tid "$:/config/story/dragndrop/enable">> |`no` |Whether tiddlers in the story river can be reordered by dragging them |
@@ -45,6 +45,6 @@ Some common scenarios for drag and drop tiddler manipulation are available as re
 
 See DragAndDropMechanism for details of how to use the low level drag and drop primitives to build more complex interactions, and [[Kanban]] for a board of lists that exchange cards, built from the same procedure the story river uses.
 
-Where the pointer is a finger a drag is begun by holding an item, which is a gesture a link within that item answers first. The lists whose items are links, such as the one a tag pill opens, therefore keep a strip at the left of each item to be taken hold of instead, marked with a grip. The rest of the item is left to answer a tap as it always did.
+Where the pointer is a finger, a drag is begun by holding an item, which is a gesture a link within that item responds to first. The lists whose items are links, such as the one a tag pill opens, therefore keep a strip at the left of each item to be taken hold of instead, marked with a grip. The rest of the item is left to respond to a tap as it always did.
 
 The standard HTML 5 drag and drop APIs used by ~TiddlyWiki are not generally available on mobile browsers on smartphones or tablets. The [[Mobile Drag And Drop Shim Plugin]] adds an open source library that implements partial support on many mobile browsers, including iOS and Android.

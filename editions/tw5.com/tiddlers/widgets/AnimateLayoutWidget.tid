@@ -5,7 +5,7 @@ tags: Widgets
 title: AnimateLayoutWidget
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.5.0">> The AnimateLayoutWidget makes movement visible. When its children change places, each one slides from where it was to where it now is instead of jumping there.
+<<.from-version "5.5.0">> The AnimateLayoutWidget makes movement visible. When its children change places, each one slides from where it was to where it now sits instead of jumping there.
 
 The widget does not decide where anything goes, and it creates no element of its own. The browser lays the children out exactly as it would without the widget. All the widget does is measure where each child was before the change, look at where the browser has put it afterwards, and play the difference back as a CSS transform. A transform takes no part in layout, so nothing around the moving elements is disturbed, the containing element is the right size at every moment, and any layout can be animated, including grids and columns of items of different sizes.
 
@@ -34,9 +34,9 @@ The content of the AnimateLayoutWidget is rendered in place, without a wrapping 
 |data-animate-key |Marks an element as taking part, its value identifying that element from one change to the next. The name of this attribute can be changed with the widget's <<.param key>> attribute |
 |data-animate-hold |Marks an element inside a moving one that should stay where the browser put it rather than travel with it. It is given the opposite of the journey its element is making, so that the two cancel out |
 
-<<.tip """A moving element is drawn away from the place the layout has given it, and the pointer follows what it sees rather than what the layout says. An element that has to answer the pointer at a fixed place, such as a drop target, should therefore be marked with `data-animate-hold`.""">>
+<<.tip """A moving element is drawn away from the place the layout has given it, and the pointer follows what it sees rather than what the layout says. An element that has to respond to the pointer at a fixed place, such as a drop target, should therefore be marked with `data-animate-hold`.""">>
 
-While an element is travelling it carries the class `tc-animatelayout-moving`, which a stylesheet can use to say how something on its way somewhere should look. The core stylesheet uses it to stop a travelling element from answering the pointer, since it is not where the layout says it is; elements marked with `data-animate-hold` go on answering.
+While an element is travelling it carries the class `tc-animatelayout-moving`, which a stylesheet can use to say how something on its way somewhere should look. The core stylesheet uses it to stop a travelling element from responding to the pointer, since it is not where the layout says it is; elements marked with `data-animate-hold` go on responding.
 
 ! Notes
 

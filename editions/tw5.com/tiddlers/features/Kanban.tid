@@ -71,7 +71,7 @@ Four details make it behave as a board rather than as four lists that happen to 
 
 * The whole board is positioned and carries a <<.dlink make-live-reorder-backstop "make-live-reorder-backstop Procedure">> of its own, given only the <<.param group>>. The gaps between the columns belong to no column, and without this a drag crossing one would be taken for a drag that had left the board altogether.
 * Each column is positioned too, since that is what the drop targets within it are placed against.
-* <<.param emptyHeight>> keeps a space in a column that has been emptied, so that it is still somewhere the pointer can be taken. About one card's worth reads as the one empty place it is.
+* <<.param emptyHeight>> keeps a space in a column that has been emptied, so that it is still somewhere the pointer can be taken. About one card's worth is usually right: it then reads as the one empty place it is.
 * <<.param tailHeight>> keeps a strip past the last card, so that a card can be put at the end of a column that still has cards in it. Without it the end of a column is reached by aiming at the lower half of the last card.
 
 The columns are given a height to start from and grow with what they hold, all four keeping the height of the tallest.

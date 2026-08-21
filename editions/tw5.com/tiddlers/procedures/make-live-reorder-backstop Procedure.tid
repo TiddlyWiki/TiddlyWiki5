@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.5.0">> The <<.def make-live-reorder-backstop>> [[procedure|Procedures]] renders a drop target covering the whole of a list that is being reordered by dragging, for as long as one of its items is being dragged.
 
-It answers only where the items themselves do not, catching what falls between them: the padding around the list and the ground beyond its ends. As well as letting a drop there land rather than be refused, this is what marks out where the list is, so that a drag crossing such ground is not taken for a drag that has left the list altogether.
+It responds only where the items themselves do not, catching what falls between them: the padding around the list and the ground beyond its ends. As well as letting a drop there land rather than be refused, this is what marks out where the list is, so that a drag crossing such ground is not taken for a drag that has left the list altogether.
 
 It is also how a list that has been emptied is dragged into again. The places an item can be put are carried by the items themselves, so a list with none of them left has nowhere to aim at; this takes the first item back. It does so only while the list is empty, since a list that still has items already offers a place against every one of them, and the ground this covers is as much beside them as below them.
 
