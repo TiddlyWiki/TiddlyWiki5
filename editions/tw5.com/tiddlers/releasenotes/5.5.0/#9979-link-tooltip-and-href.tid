@@ -1,0 +1,23 @@
+change-category: widget
+change-type: bugfix
+created: 20260821202324000
+description: The link widget renders a tooltip or an href that contains a link
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9979
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9979
+type: text/vnd.tiddlywiki
+
+* A tooltip supplied by the `tv-wikilink-tooltip` variable may contain a link. A tooltip is plain text, so the link contributes its text
+* Such a tooltip used to read `Recursive transclusion error in transclude widget`, or stopped the tiddler rendering. A CamelCase word was enough to trigger it
+
+```
+<$let tv-wikilink-tooltip="See [[HelloThere]] now">
+<$link to="HelloThere">hover me</$link>
+</$let>
+```
+
+* A `tv-filter-export-link` filter that matches nothing falls back to the ordinary `#Title` href. It used to write the string `undefined`, so the link pointed at a relative path called `undefined`. A filter that returns an empty string still produces an empty href
+
+Fixed issues: [[#9976|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9976]] and [[#9977|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9977]]
