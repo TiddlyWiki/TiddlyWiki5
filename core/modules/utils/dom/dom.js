@@ -155,8 +155,7 @@ exports.getPassword = function(name) {
 
 /*
 Whether the node is laid out in columns, as the story river is when it is shown as a masonry
-grid. Anything that changes the size of a node there sends every other node between the
-columns afresh, so an animation of size costs far more than the movement is worth
+grid
 */
 exports.getColumnLayoutItem = function(domNode) {
 	var view = domNode && domNode.ownerDocument && domNode.ownerDocument.defaultView;
@@ -179,12 +178,6 @@ exports.isInColumnLayout = function(domNode) {
 	return !!exports.getColumnLayoutItem(domNode);
 };
 
-/*
-Hold every block of a column layout at the size it has now, so that content changing size
-within one of them does not send them all between the columns afresh while the user is in
-the middle of something. Sizes are read before any is written, so that the layout is
-computed once rather than once for each block
-*/
 exports.pinColumnLayout = function(domNode) {
 	var item = exports.getColumnLayoutItem(domNode),
 		container = item && item.parentNode;
