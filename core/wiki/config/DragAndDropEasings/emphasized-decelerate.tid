@@ -1,4 +1,0 @@
-title: $:/config/DragAndDrop/Easings/emphasized-decelerate
-tags: $:/tags/DragAndDrop/Easing
-caption: {{$:/language/ControlPanel/DragAndDrop/Easings/emphasized-decelerate}}
-text: cubic-bezier(0.05,0.7,0.1,1)

@@ -34,14 +34,14 @@ Cascades/TagPrompt: Filters tagged <$macrocall $name="tag" tag=<<currentTiddler>
 DragAndDrop/Caption: Drag & Drop
 DragAndDrop/Hint: Settings for dragging tiddlers to reorder them, and for the layout they are dragged within.
 DragAndDrop/Reordering/RevertOutside/Description: Put a list back in its original order while the pointer is outside it
-DragAndDrop/Easings/emphasized-decelerate: Emphasized decelerate
+DragAndDrop/Easings/emphasised-decelerate: Emphasised decelerate
 DragAndDrop/Easings/decelerate: Decelerate
 DragAndDrop/Easings/ease-out: Ease out
 DragAndDrop/Easings/ease: Ease
 DragAndDrop/Easings/linear: Linear
 DragAndDrop/Easings/spring: Spring
 DragAndDrop/Reordering/Caption: Reordering
-DragAndDrop/Reordering/Description: Enable drag and drop reordering
+DragAndDrop/Reordering/Description: Enable drag-and-drop reordering
 DragAndDrop/Reordering/DropTarget/Description: Outline the place where a dragged tiddler will land
 DragAndDrop/Animation/Caption: Animation
 DragAndDrop/Animation/Hint: The easing curve decides how a tiddler moves to its new place. Because a drag retargets continuously, curves that start slowly feel sluggish here; the decelerating ones commit to the move immediately.
