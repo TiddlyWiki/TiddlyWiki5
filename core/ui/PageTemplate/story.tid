@@ -1,8 +1,16 @@
 title: $:/core/ui/PageTemplate/story
 tags: $:/tags/PageTemplate
 
+\procedure content()
 \whitespace trim
-<section class="tc-story-river" role="main">
+{{||$:/core/ui/StoryTiddlerTemplate}}
+\end
+
+\function tf.get-story-drag-state() [<qualify "$:/state/tiddlywiki/dragging">]
+
+\whitespace trim
+
+<section class={{{ [all[shadows+tiddlers]tag[$:/tags/ClassFilters/StoryRiver]!is[draft]] :map:flat[subfilter{!!text}] tc-story-river :and[join[ ]] }}} role="main">
 
 <section class="story-backdrop">
 
@@ -14,7 +22,18 @@ tags: $:/tags/PageTemplate
 
 </section>
 
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/StoryTiddlerTemplate" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}/>
+<$transclude $variable="make-live-reorderable-list"
+	$mode="inline"
+	list="$:/StoryList"
+	content=<<content>>
+	enable={{$:/config/story/dragndrop/enable}}
+	animate={{{ [{$:/config/StoryRiver/masonry}match[yes]then[yes]] }}}
+	history="$:/HistoryList"
+	storyview={{$:/view}}
+	emptyMessage={{$:/config/EmptyStoryMessage}}
+	dragState=<<tf.get-story-drag-state>>
+	emptyHeight="160px"
+/>
 
 <section class="story-frontdrop">
 

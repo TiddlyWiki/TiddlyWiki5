@@ -1,0 +1,27 @@
+caption: dragging
+created: 20260818105449000
+from-version: 5.5.0
+modified: 20260818105449000
+op-input: ignored
+op-output: <<.value yes>> if a drag and drop operation is under way, and <<.value no>> if not
+op-parameter: none
+op-purpose: detect whether something is being dragged
+tags: [[Filter Operators]] [[Special Operators]] [[Selection Constructors]]
+title: dragging Operator
+type: text/vnd.tiddlywiki
+
+The <<.olink dragging>> operator reports whether the user is dragging something at this moment. It is true for any drag, wherever it started and whatever is being dragged. See DragAndDropMechanism for an overview.
+
+The result is the one that holds at the moment the filter is evaluated. Nothing is re-evaluated when a drag begins or ends, so this operator is meant for filters that are already being evaluated because of the drag, rather than for deciding what to show at rest.
+
+The drag is still counted as under way while a drop is being handled, because it does not end until after the drop. A condition written instead against the state tiddlers a drag keeps would go false too early, since those are usually deleted as part of handling the drop.
+
+! Examples
+
+The AnimateLayoutWidget uses it to animate a list only while it is being reordered by dragging, leaving the animations that run at other times undisturbed:
+
+```
+<$animatelayout list="$:/StoryList" enable={{{ [dragging[]] }}}>
+	<!-- the list being reordered -->
+</$animatelayout>
+```

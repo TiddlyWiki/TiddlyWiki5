@@ -49,7 +49,8 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 			{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
 			{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
 			{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
-			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"}
+			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"},
+			{name: "dragend", handlerObject: this, handlerMethod: "handleDragEndEvent"}
 		]);
 	} else {
 		$tw.utils.addClass(this.domNode,this.disabledClass);
@@ -62,25 +63,58 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	this.currentlyEntered = [];
 };
 
+// The second condition is to resolve a problem with Firefox whereby there is an erroneous dragenter event if the node being dragged is within the dropzone
+DroppableWidget.prototype.isEntered = function() {
+	return !(this.currentlyEntered.length === 0 ||
+		(this.currentlyEntered.length === 1 && this.currentlyEntered[0] === $tw.dragInProgress));
+};
+
+DroppableWidget.prototype.pruneEntered = function() {
+	this.currentlyEntered = this.currentlyEntered.filter(function(node) {
+		return node.isConnected !== false;
+	});
+};
+
 DroppableWidget.prototype.enterDrag = function(event) {
+	this.pruneEntered();
+	var wasEntered = this.isEntered();
 	if(this.currentlyEntered.indexOf(event.target) === -1) {
 		this.currentlyEntered.push(event.target);
 	}
+	if(wasEntered || !this.isEntered()) {
+		return;
+	}
 	// If we're entering for the first time we need to apply highlighting
 	$tw.utils.addClass(this.domNodes[0],"tc-dragover");
+	// Invoke any enter actions
+	if(this.droppableEnterActions) {
+		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+		this.invokeActionString(this.droppableEnterActions,this,event,{modifier: modifierKey});
+	}
+};
+
+DroppableWidget.prototype.resetDrag = function() {
+	this.currentlyEntered = [];
+	if(this.domNodes[0]) {
+		$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+	}
 };
 
 DroppableWidget.prototype.leaveDrag = function(event) {
-	var pos = this.currentlyEntered.indexOf(event.target);
+	this.pruneEntered();
+	var wasEntered = this.isEntered(),
+		pos = this.currentlyEntered.indexOf(event.target);
 	if(pos !== -1) {
 		this.currentlyEntered.splice(pos,1);
 	}
-	// Remove highlighting if we're leaving externally. The hacky second condition is to resolve a problem with Firefox whereby there is an erroneous dragenter event if the node being dragged is within the dropzone
-	if(this.currentlyEntered.length === 0 || (this.currentlyEntered.length === 1 && this.currentlyEntered[0] === $tw.dragInProgress)) {
-		this.currentlyEntered = [];
-		if(this.domNodes[0]) {
-			$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
-		}
+	if(!wasEntered || this.isEntered()) {
+		return;
+	}
+	this.resetDrag();
+	// Invoke any leave actions
+	if(this.droppableLeaveActions) {
+		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+		this.invokeActionString(this.droppableLeaveActions,this,event,{modifier: modifierKey});
 	}
 };
 
@@ -105,21 +139,33 @@ DroppableWidget.prototype.handleDragOverEvent  = function(event) {
 	return false;
 };
 
-DroppableWidget.prototype.handleDragLeaveEvent  = function(event) {
+DroppableWidget.prototype.handleDragEndEvent = function(event) {
+	var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event),
+		wasEntered = this.isEntered();
+	this.resetDrag();
+	if(wasEntered && this.droppableLeaveActions) {
+		this.invokeActionString(this.droppableLeaveActions,this,event,{modifier: modifierKey});
+	}
+	// Invoke any end actions
+	if(this.droppableEndActions) {
+		this.invokeActionString(this.droppableEndActions,this,event,{modifier: modifierKey});
+	}
+	return false;
+};
+
+DroppableWidget.prototype.handleDragLeaveEvent = function(event) {
 	this.leaveDrag(event);
 	return false;
 };
 
 DroppableWidget.prototype.handleDropEvent  = function(event) {
 	var self = this;
-	this.leaveDrag(event);
+	this.resetDrag();
 	// Check for being over a TEXTAREA or INPUT
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
 		return false;
 	}
 	var dataTransfer = event.dataTransfer;
-	// Remove highlighting
-	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 	// Try to import the various data types we understand
 	if(this.droppableActions) {
 		$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
@@ -165,6 +211,9 @@ Compute the internal state of the widget
 DroppableWidget.prototype.execute = function() {
 	this.droppableActions = this.getAttribute("actions");
 	this.droppableListActions = this.getAttribute("listActions");
+	this.droppableEnterActions = this.getAttribute("dragEnterActions");
+	this.droppableLeaveActions = this.getAttribute("dragLeaveActions");
+	this.droppableEndActions = this.getAttribute("dragEndActions");
 	this.droppableEffect = this.getAttribute("effect","copy");
 	this.droppableTag = this.getAttribute("tag");
 	this.droppableEnable = (this.getAttribute("enable") || "yes") === "yes";

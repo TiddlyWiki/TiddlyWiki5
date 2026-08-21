@@ -35,6 +35,10 @@ PopStoryView.prototype.insert = function(widget) {
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
+	// Don't animate while a drag is in progress
+	if($tw.dragInProgress) {
+		return;
+	}
 	// Reset once the transition is over
 	setTimeout(function() {
 		$tw.utils.removeStyles(targetElement, ["transition", "transform"]);		
@@ -77,6 +81,14 @@ PopStoryView.prototype.remove = function(widget) {
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		removeElement();
 		return;
+	}
+	// Don't animate while a drag is in progress
+	if($tw.dragInProgress) {
+		removeElement();
+		return;
+	}
+	if($tw.utils.isInColumnLayout(targetElement)) {
+		$tw.utils.detachFromFlow(targetElement);
 	}
 	// Remove the element at the end of the transition
 	setTimeout(removeElement,duration);

@@ -97,6 +97,8 @@ The following variables are made available to the actions:
 |`tv-selectednode-posy` |`y` offset position of the selected DOM node |
 |`tv-selectednode-width` |`offsetWidth` of the selected DOM node |
 |`tv-selectednode-height` |`offsetHeight` of the selected DOM node |
+|`tv-selectednode-exact-width` |unrounded width of the selected DOM node |
+|`tv-selectednode-exact-height` |unrounded height of the selected DOM node |
 |`event-fromselected-posx` |`x` position of the event relative to the selected DOM node |
 |`event-fromselected-posy` |`y` position of the event relative to the selected DOM node |
 |`event-fromcatcher-posx` |`x` position of the event relative to the event catcher DOM node |

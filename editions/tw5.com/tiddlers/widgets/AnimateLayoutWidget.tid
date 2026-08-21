@@ -1,0 +1,68 @@
+caption: animatelayout
+created: 20260818103749000
+modified: 20260818103749000
+tags: Widgets
+title: AnimateLayoutWidget
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> The AnimateLayoutWidget makes movement visible. When its children change places, each one slides from where it was to where it now sits instead of jumping there.
+
+The widget does not decide where anything goes, and it creates no element of its own. The browser lays the children out exactly as it would without the widget. All the widget does is measure where each child was before the change, look at where the browser has put it afterwards, and play the difference back as a CSS transform. A transform takes no part in layout, so nothing around the moving elements is disturbed, the containing element is the right size at every moment, and any layout can be animated, including grids and columns of items of different sizes.
+
+! Which elements take part
+
+An element takes part if it carries the attribute named by the <<.param key>> attribute, which is `data-animate-key` unless you choose another name. The value of that attribute is what tells the widget that an element before the change and an element after it are the same element, so the value has to stay the same across the move. A tiddler title is usually a good choice.
+
+Only elements that are present both before and after the change are animated. Something that has just appeared has nowhere to travel from, and something that has gone cannot travel at all, so arrivals and departures are left to whatever else deals with them, such as the StoryViews in the story river.
+
+! Content and Attributes
+
+The content of the AnimateLayoutWidget is rendered in place, without a wrapping element.
+
+|!Attribute |!Description |
+|key |Optional name of the attribute that marks the elements taking part, and whose value identifies each of them (defaults to `data-animate-key`) |
+|list |Optional title of the tiddler whose changes should play the animation. Left blank, every refresh plays it |
+|enable |Optional value "no" to play nothing (defaults to "yes"). It is read again on every refresh, so a filtered transclusion here can decide which changes are worth animating |
+|duration |Optional length of the animation in milliseconds (defaults to 400). A duration of zero plays nothing |
+|easing |Optional [ext[CSS easing function|https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function]] (defaults to `ease-out`) |
+|reducedmotion |Optional value "ignore" to animate even for readers whose system asks for reduced motion (defaults to "respect", which plays nothing for them) |
+|scale |Optional value "yes" to also animate elements that have changed size (defaults to "no") |
+
+! Attributes of the elements being animated
+
+|!Attribute |!Description |
+|data-animate-key |Marks an element as taking part, its value identifying that element from one change to the next. The name of this attribute can be changed with the widget's <<.param key>> attribute |
+|data-animate-hold |Marks an element inside a moving one that should stay where the browser put it rather than travel with it. It is given the opposite of the journey its element is making, so that the two cancel out |
+
+<<.tip """A moving element is drawn away from the place the layout has given it, and the pointer follows what it sees rather than what the layout says. An element that has to respond to the pointer at a fixed place, such as a drop target, should therefore be marked with `data-animate-hold`.""">>
+
+While an element is travelling it carries the class `tc-animatelayout-moving`, which a stylesheet can use to say how something on its way somewhere should look. The core stylesheet uses it to stop a travelling element from responding to the pointer, since it is not where the layout says it is; elements marked with `data-animate-hold` go on responding.
+
+! Notes
+
+Measuring means asking the browser for the position of every participating element, which forces it to work out the layout there and then. Naming a tiddler in the <<.param list>> attribute keeps that cost to the changes that actually move something, rather than paying it on every refresh that happens to arrive.
+
+The widget is used by the story river and the "Open" sidebar tab to animate tiddlers being reordered by dragging, where <<.param enable>> is set to the [[dragging Operator]] so that the animation plays only while a drag is in progress. See DragAndDropMechanism for an overview.
+
+! Examples
+
+<$let demoList="$:/temp/AnimateLayoutDemo" oneTwoThreeFourFive="One Two Three Four Five">
+
+<$button>
+<$action-listops $tiddler=<<demoList>> $field="list" $filter="One Two Three Four Five"/>
+Set the order
+</$button>
+<$button>
+<$action-listops $tiddler=<<demoList>> $field="list" $filter="Five Four Three Two One"/>
+Reverse the order
+</$button>
+
+<$animatelayout list=<<demoList>> duration="400" easing="ease-out">
+<$list filter="[list<demoList>] :else[enlist<oneTwoThreeFourFive>]">
+<div data-animate-key=<<currentTiddler>> style="padding:0.25em;margin-bottom:0.25em;border:1px solid #888;">
+<$text text=<<currentTiddler>>/>
+</div>
+</$list>
+</$animatelayout>
+
+</$let>

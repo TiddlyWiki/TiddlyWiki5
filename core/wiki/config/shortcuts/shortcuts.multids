@@ -38,5 +38,6 @@ stamp: ctrl-S
 strikethrough: ctrl-T
 subscript: ctrl-shift-B
 superscript: ctrl-shift-P
+toggle-dragndrop: alt-D
 toggle-sidebar: alt-shift-S
 transcludify: alt-shift-T
