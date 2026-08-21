@@ -13,16 +13,6 @@ transform, which takes no part in layout
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var reducedMotionQuery;
-
-function prefersReducedMotion() {
-	if(!$tw.browser || !window.matchMedia) {
-		return false;
-	}
-	reducedMotionQuery = reducedMotionQuery || window.matchMedia("(prefers-reduced-motion: reduce)");
-	return reducedMotionQuery.matches;
-}
-
 var AnimateLayoutWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -184,7 +174,7 @@ AnimateLayoutWidget.prototype.refresh = function(changedTiddlers) {
 	this.animateReducedMotion = this.getAttribute("reducedmotion","respect");
 	this.animateScale = this.getAttribute("scale","no") === "yes";
 	var suppressed = !this.animateEnable || !this.animateDuration ||
-		(this.animateReducedMotion === "respect" && prefersReducedMotion());
+		(this.animateReducedMotion === "respect" && $tw.utils.prefersReducedMotion());
 	if(suppressed || !this.parentDomNode || !this.parentDomNode.querySelectorAll ||
 		(this.animateList && !changedTiddlers[this.animateList])) {
 		return this.refreshChildren(changedTiddlers);

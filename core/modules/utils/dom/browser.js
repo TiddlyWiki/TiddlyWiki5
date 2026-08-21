@@ -146,6 +146,21 @@ exports.convertEventName = function(eventName) {
 };
 
 /*
+Whether the reader has asked their system for reduced motion. The query object is cached but
+its result is read afresh each time, so that changing the setting takes effect at once
+*/
+
+var reducedMotionQuery;
+
+exports.prefersReducedMotion = function() {
+	if(!$tw.browser || !window.matchMedia) {
+		return false;
+	}
+	reducedMotionQuery = reducedMotionQuery || window.matchMedia("(prefers-reduced-motion: reduce)");
+	return reducedMotionQuery.matches;
+};
+
+/*
 Return the names of the fullscreen APIs
 */
 exports.getFullScreenApis = function() {

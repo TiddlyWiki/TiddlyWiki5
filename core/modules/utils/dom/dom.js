@@ -219,6 +219,25 @@ exports.releaseColumnLayout = function(document) {
 };
 
 /*
+Hold the column item containing a node at its current height for the duration of an
+animation, so that the columns do not reflow around the node while it is still moving
+*/
+exports.holdColumnItemHeight = function(domNode,duration) {
+	var item = exports.getColumnLayoutItem(domNode);
+	if(!item || item === domNode) {
+		return;
+	}
+	$tw.utils.setStyle(item,[
+		{height: item.offsetHeight + "px"}
+	]);
+	setTimeout(function() {
+		$tw.utils.setStyle(item,[
+			{height: ""}
+		]);
+	},duration);
+};
+
+/*
 Take a node out of the flow where it stands, so that what surrounds it can close over the
 space at once while the node itself goes on being animated. Returns nothing if it cannot
 */
