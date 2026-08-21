@@ -4,7 +4,7 @@ type: application/javascript
 module-type: widget
 
 Animates its children between layout positions. Where an element ends up is left to the
-browser; the difference between where it was and where it now is is played back as a
+browser; the difference between where it was and where it now sits is played back as a
 transform, which takes no part in layout
 
 \*/
