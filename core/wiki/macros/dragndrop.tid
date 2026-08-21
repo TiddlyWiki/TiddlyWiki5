@@ -61,6 +61,7 @@ code-body: yes
 	$tiddler=<<dragState>>
 	tags="$:/tags/dragState"
 	text="yes"
+	drag-id=<<tf.lr.drag-id>>
 	source-list=<<list>>
 	from-list=<<list>>
 	commit=<<commit>>
@@ -74,11 +75,12 @@ code-body: yes
 \end
 
 \procedure live-reorder-drag-start-actions()
-<<live-reorder-abandon-actions>>
+<<live-reorder-discard-stale-actions>>
 <$transclude $variable="live-reorder-begin-actions" beginFilter="[<tiddler>]" beginTransfer=<<transfer>>/>
 \end
 
 \procedure live-reorder-adopt-actions()
+<<live-reorder-discard-stale-actions>>
 <$let recordTitles={{{ [[$:/state/dragging]get[list]] }}}>
 	<%if [<tf.lr.accepts-drops>match[yes]] %>
 		<%if [<tf.lr.no-owner>match[yes]] %>
@@ -98,6 +100,18 @@ code-body: yes
 	</$let>
 	<$action-deletetiddler
 		$tiddler=<<abandonState>>
+	/>
+</$list>
+\end
+
+\procedure live-reorder-discard-stale-actions()
+<$list filter="[all[tiddlers]tag[$:/tags/dragState]] -[all[tiddlers]tag[$:/tags/dragState]field:drag-id<tf.lr.drag-id>]" variable="staleState">
+	<$let dragState=<<staleState>>>
+		<<live-reorder-restore-actions>>
+		<<live-reorder-forget-previews>>
+	</$let>
+	<$action-deletetiddler
+		$tiddler=<<staleState>>
 	/>
 </$list>
 \end
@@ -304,7 +318,8 @@ code-body: yes
 \end
 
 
-\function tf.lr.is-dragging() [<dragState>get[text]match[yes]then[yes]] :else[[no]]
+\function tf.lr.drag-id() [[$:/state/dragging]get[drag-id]]
+\function tf.lr.is-dragging() [<dragState>get[drag-id]match<tf.lr.drag-id>then<dragState>get[text]match[yes]then[yes]] :else[[no]]
 
 \function tf.lr.is-deferred() [<commit>match[drop]then[yes]] :else[[no]]
 
@@ -314,7 +329,7 @@ code-body: yes
 \function tf.lr.get-order-field() [[list]]
 \function tf.lr.get-order() [<tf.lr.get-order-tiddler>get[list]]
 
-\function tf.lr.no-owner() [all[tiddlers]tag[$:/tags/dragState]count[]match[0]then[yes]] :else[[no]]
+\function tf.lr.no-owner() [all[tiddlers]tag[$:/tags/dragState]field:drag-id<tf.lr.drag-id>count[]match[0]then[yes]] :else[[no]]
 \function tf.lr.get-record-titles() [<tf.lr.accepts-drops>match[yes]then<tf.lr.no-owner>match[yes]then[$:/state/dragging]get[list]]
 \function tf.lr.get-titles() [<dragState>get[drag-titles]] :else[<tf.lr.get-record-titles>]
 \function tf.lr.is-multi() [enlist<tf.lr.get-titles>butfirst[]count[]!match[0]then[yes]] :else[[no]]
@@ -327,7 +342,7 @@ code-body: yes
 \function tf.lr.is-drop-target() [<tf.lr.is-ghost>match[yes]then<tf.lr.show-drop-target>] :else[[no]]
 \function tf.lr.get-enable() [<enable>!is[blank]then<enable>] :else[<tv-live-reorder-item>match[yes]then[yes]] :else[<tv-enable-drag-and-drop>match[no]then[no]] :else[[yes]]
 \function tf.lr.get-own-state() [<group>!is[blank]then[$:/state/tiddlywiki/live-reorder/]addsuffix<group>] :else[<dragState>]
-\function tf.lr.get-active-state() [all[tiddlers]tag[$:/tags/dragState]first[]]
+\function tf.lr.get-active-state() [all[tiddlers]tag[$:/tags/dragState]field:drag-id<tf.lr.drag-id>first[]]
 \function tf.lr.get-drag-state() [<tf.lr.accepts-drops>match[yes]then<tf.lr.get-active-state>!is[blank]] :else[<tf.lr.get-own-state>]
 \function tf.lr.accepts-drops() [<acceptDrops>match[yes]then[yes]] :else[[no]]
 \function tf.lr.show-targets() [<tf.lr.is-dragging>match[yes]then[yes]] :else[<tf.lr.accepts-drops>]

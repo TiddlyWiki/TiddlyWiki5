@@ -27,7 +27,7 @@ tags: $:/tags/PageTemplate
 	list="$:/StoryList"
 	content=<<content>>
 	enable={{$:/config/story/dragndrop/enable}}
-	animate={{{ [{$:/config/StoryRiver/masonry}match[yes]then[yes]] :else[dragging[]] }}}
+	animate={{{ [{$:/config/StoryRiver/masonry}match[yes]then[yes]] }}}
 	history="$:/HistoryList"
 	storyview={{$:/view}}
 	emptyMessage={{$:/config/EmptyStoryMessage}}

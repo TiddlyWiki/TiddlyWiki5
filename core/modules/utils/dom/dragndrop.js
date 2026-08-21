@@ -11,6 +11,10 @@ Browser data transfer utilities, used with the clipboard and drag and drop
 
 var DRAGGING_TITLE = "$:/state/dragging";
 
+// Each drag gets its own identity so that drag state left behind by an earlier drag
+// can be told apart from the state belonging to the drag that is running now
+var dragCount = 0;
+
 function markDragInProgress(domNode,status) {
 	var doc = domNode.ownerDocument;
 	if(doc && doc.body && doc.body.classList) {
@@ -28,7 +32,8 @@ function recordDrag(widget,titles) {
 		widget.wiki.addTiddler(new $tw.Tiddler({
 			title: DRAGGING_TITLE,
 			text: "yes",
-			list: titles
+			list: titles,
+			"drag-id": (++dragCount) + "-" + Date.now()
 		}));
 	}
 }
