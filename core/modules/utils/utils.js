@@ -426,7 +426,8 @@ exports.formatDateString = function(date,template) {
 			[/^TZD/, function() {
 				var tz = date.getTimezoneOffset(),
 					atz = Math.abs(tz);
-				return (tz < 0 ? "+" : "-") + $tw.utils.pad(Math.floor(atz / 60)) + ":" + $tw.utils.pad(atz % 60);
+				// ISO 8601 has no -00:00, so UTC is a plus
+				return (tz <= 0 ? "+" : "-") + $tw.utils.pad(Math.floor(atz / 60)) + ":" + $tw.utils.pad(atz % 60);
 			}],
 			[/^wYY/, function() {
 				return $tw.utils.pad($tw.utils.getYearForWeekNo(date) - 2000);

@@ -222,6 +222,8 @@ describe("Date formatting", function() {
 		expect(atOffset(-345)).toBe("+05:45"); // Asia/Kathmandu
 		expect(atOffset(210)).toBe("-03:30"); // America/St_Johns
 		expect(atOffset(-840)).toBe("+14:00"); // Pacific/Kiritimati
+		// ISO 8601 has no -00:00
+		expect(atOffset(0)).toBe("+00:00");
 		expect(fds(refDate,"TZD")).toMatch(/^[+-]\d\d:\d\d$/);
 	});
 
