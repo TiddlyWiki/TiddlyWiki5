@@ -1,0 +1,25 @@
+title: $:/changenotes/5.5.0/#TODO
+description: Fix date parsing and DateFormat tokens
+tags: $:/tags/ChangeNote
+release: 5.5.0
+change-type: bugfix
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/TODO
+github-contributors: Evolena pmario
+
+Fixes ten faults in date parsing and in the [[DateFormat]] template tokens, found by covering every token the documentation lists.
+
+* A date field holding only a year and a month, for example `202608`, formatted as January, because a truncated datestamp built an invalid date that the year was then written back into
+* `hh`, `mm`, `ss`, `XXX` and `TIMESTAMP` rendered nothing when their value was zero, and the character after the token was then read as literal text, so `mmss` at ten o'clock reported `ss`. The empty alternative of `{era:BCE||CE}` was lost the same way
+* `WW`, `0WW`, `wYYYY` and `wYY` were a week out in the hour after local midnight through the summer time months, in years whose 1 January is a Thursday. Those are the 53 week years, so the error fell where week numbers matter most
+* `ddddd` and `0ddddd` lost a day for a summer time date within an hour of midnight
+* A template starting with `[UTC]` was out by the summer time offset on either side of a transition, which also affected the `format:timestamp` filter operator
+* `TIMESTAMP` and `TZD` reported a fabricated instant inside a `[UTC]` template, and `TZD` rendered `-00:00` where the offset is zero, which ISO 8601 does not allow
+* `YY` and `wYY` rendered `-1` for 1999 and `100` for 2100
+* A datestamp written for a year before 1000 was not fixed width, so parsing it back gave a different date
+* `YYYY` rendered a short negative year as `0-14` rather than `-0014`
+* A backslash escape was taken out of the finished text rather than out of the template, so it consumed whatever the following token had substituted
+
+Week numbers stay ISO-8601, counted from the Thursday of the week as before. Two of these changes alter a format rather than correct a wrong value, and each carries a compatibility note.
+
+`$tw.utils.getDayOfYear()` is new, and returns 1 to 365, or 366 in a leap year.
