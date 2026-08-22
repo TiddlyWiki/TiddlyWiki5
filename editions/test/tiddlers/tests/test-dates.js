@@ -36,6 +36,19 @@ describe("Date parsing", function() {
 		expect(pd("-00730428204930183")).toEqual("Thu, 28 Apr -0073 20:49:30 GMT");
 	});
 
+	it("should default the components a truncated datestamp omits", function() {
+		// A field holding only a year, or only a year and a month, produced an invalid date
+		// that setUTCFullYear() then rebuilt as 1 January, silently losing the month.
+		// See https://github.com/TiddlyWiki/TiddlyWiki5/issues/9974
+		expect(pd("2015")).toEqual("Thu, 01 Jan 2015 00:00:00 GMT");
+		expect(pd("201504")).toEqual("Wed, 01 Apr 2015 00:00:00 GMT");
+		expect(pd("20150428")).toEqual("Tue, 28 Apr 2015 00:00:00 GMT");
+		expect(pd("2015042820")).toEqual("Tue, 28 Apr 2015 20:00:00 GMT");
+		expect(pd("201504282049")).toEqual("Tue, 28 Apr 2015 20:49:00 GMT");
+		expect(pd("20150428204930")).toEqual("Tue, 28 Apr 2015 20:49:30 GMT");
+		expect(pd("-201504")).toEqual("Mon, 01 Apr -2015 00:00:00 GMT");
+	});
+
 	it("should pass a Date through and reject every other type", function() {
 		var date = new Date(2015,3,28);
 		expect($tw.utils.parseDate(date)).toBe(date);

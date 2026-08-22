@@ -363,10 +363,12 @@ $tw.utils.parseDate = function(value) {
 			negative = -1;
 			value = value.substr(1);
 		}
+		// Default month and day, so "202608" parses as August rather than becoming
+		// an invalid date that setUTCFullYear() below silently rebuilds as 1 January
 		var year = parseInt(value.substr(0,4),10) * negative,
 			d = new Date(Date.UTC(year,
-				parseInt(value.substr(4,2),10)-1,
-				parseInt(value.substr(6,2),10),
+				parseInt(value.substr(4,2)||"01",10)-1,
+				parseInt(value.substr(6,2)||"01",10),
 				parseInt(value.substr(8,2)||"00",10),
 				parseInt(value.substr(10,2)||"00",10),
 				parseInt(value.substr(12,2)||"00",10),
