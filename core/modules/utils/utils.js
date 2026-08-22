@@ -400,6 +400,11 @@ function amPm(hours) {
 	return $tw.language.getString("Date/Period/" + (hours >= 12 ? "pm" : "am"));
 }
 
+// A four digit year, with the minus sign of a negative year kept outside the padding
+function padYear(year) {
+	return (year < 0 ? "-" : "") + $tw.utils.pad(Math.abs(year),4);
+}
+
 exports.formatDateString = function(date,template) {
 	var result = "",
 		t = template,
@@ -416,7 +421,7 @@ exports.formatDateString = function(date,template) {
 				return $tw.utils.pad(hours12(fields.getUTCHours()));
 			}],
 			[/^wYYYY/, function() {
-				return $tw.utils.pad(isoThursday(fields).getUTCFullYear(),4);
+				return padYear(isoThursday(fields).getUTCFullYear());
 			}],
 			[/^hh12/, function() {
 				return hours12(fields.getUTCHours());
@@ -425,7 +430,7 @@ exports.formatDateString = function(date,template) {
 				return fields.getUTCDate() + $tw.language.getString("Date/DaySuffix/" + fields.getUTCDate());
 			}],
 			[/^YYYY/, function() {
-				return $tw.utils.pad(fields.getUTCFullYear(),4);
+				return padYear(fields.getUTCFullYear());
 			}],
 			[/^aYYYY/, function() {
 				return $tw.utils.pad(Math.abs(fields.getUTCFullYear()),4);

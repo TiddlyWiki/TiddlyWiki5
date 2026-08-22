@@ -114,6 +114,19 @@ describe("Date formatting", function() {
 		expect(fds(new Date(1999,0,15,12,0,0),"wYY")).toBe("99");
 	});
 
+	it("should pad a negative year to four digits", function() {
+		// pad() left pads with zeros, so a short negative year came out as 0-14 rather
+		// than -0014. Only -2014 is wide enough to hide it
+		var smallBce = new Date(2014,10,9,12,0,0);
+		smallBce.setFullYear(-14);
+		expect(fds(smallBce,"YYYY")).toBe("-0014");
+		expect(fds(smallBce,"aYYYY")).toBe("0014");
+		var oneBce = new Date(2014,10,9,12,0,0);
+		oneBce.setFullYear(-1);
+		expect(fds(oneBce,"YYYY")).toBe("-0001");
+		expect(fds(oneBce,"aYYYY")).toBe("0001");
+	});
+
 	it("should choose the era string from the sign of the year", function() {
 		expect(fds(refDate,"{era:BCE|ZERO|CE}")).toBe("CE");
 		expect(fds(bceDate,"{era:BCE|ZERO|CE}")).toBe("BCE");
