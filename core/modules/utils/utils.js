@@ -473,16 +473,19 @@ exports.formatDateString = function(date,template) {
 		t = t.substr(5) ;
 	}
 	while(t.length){
-		var matchString = "";
+		// null means no token matched, which is not the same as a token that substitutes
+		// "0" or an empty era string. Testing the substitution itself dropped a midnight
+		// hour and then re-read the character after it as literal text
+		var matchString = null;
 		$tw.utils.each(matches, function(m) {
 			var match = m[0].exec(t);
 			if(match) {
-				matchString = m[1].call(null,match);
+				matchString = "" + m[1].call(null,match);
 				t = t.substr(match[0].length);
 				return false;
 			}
 		});
-		if(matchString) {
+		if(matchString !== null) {
 			result += matchString;
 		} else {
 			result += t.charAt(0);

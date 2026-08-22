@@ -251,4 +251,29 @@ describe("Date formatting", function() {
 		expect(fds(refDate,"DDth MMM \\M\\M\\M YYYY")).toBe("9th November MMM 2014");
 	});
 
+	// https://github.com/TiddlyWiki/TiddlyWiki5/issues/9974
+	describe("regressions from issue 9974", function() {
+
+		it("should substitute a zero valued time token", function() {
+			// The loop used to test the substituted value for truthiness rather than for a
+			// match, so hh, mm, ss and XXX disappeared when they were zero and the character
+			// after the token was re-read as literal text, which made mmss report "ss". The
+			// padded forms never showed it because they always substitute a string
+			var midnight = new Date(2014,10,9,0,0,0,0),
+				tenOClock = new Date(2014,10,9,10,0,0,0);
+			expect(fds(midnight,"0hh:0mm:0ss")).toBe("00:00:00");
+			expect(fds(midnight,"hh:mm:ss")).toBe("0:0:0");
+			expect(fds(midnight,"XXX")).toBe("0");
+			expect(fds(tenOClock,"hh:mm")).toBe("10:0");
+			expect(fds(tenOClock,"mmss")).toBe("00");
+		});
+
+		it("should substitute an empty era alternative", function() {
+			// {era:BCE||CE} is the notation DateFormat documents, and its empty middle
+			// alternative reached the same truthiness branch, taking the month with it
+			expect(fds(zeroDate,"{era:BCE||CE}MM")).toBe("11");
+		});
+
+	});
+
 });
