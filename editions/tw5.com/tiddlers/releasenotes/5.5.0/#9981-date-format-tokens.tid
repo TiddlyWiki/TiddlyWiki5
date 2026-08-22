@@ -1,10 +1,10 @@
-title: $:/changenotes/5.5.0/#TODO
+title: $:/changenotes/5.5.0/#9981
 description: Fix date parsing and DateFormat tokens
 tags: $:/tags/ChangeNote
 release: 5.5.0
 change-type: bugfix
 change-category: usability
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/TODO
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9981
 github-contributors: Evolena pmario
 
 Fixes ten faults in date parsing and in the [[DateFormat]] template tokens, found by covering every token the documentation lists.

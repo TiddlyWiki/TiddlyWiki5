@@ -1,5 +1,5 @@
-title: $:/changenotes/5.5.0/#TODO/impacts/escapes
-changenote: $:/changenotes/5.5.0/#TODO
+title: $:/changenotes/5.5.0/#9981/impacts/escapes
+changenote: $:/changenotes/5.5.0/#9981
 tags: $:/tags/ImpactNote
 impact-type: compatibility-break
 description: A backslash in a date template now escapes the next character of the template, where it used to be removed from the finished text.

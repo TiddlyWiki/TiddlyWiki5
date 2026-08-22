@@ -1,5 +1,5 @@
-title: $:/changenotes/5.5.0/#TODO/impacts/two-digit-year
-changenote: $:/changenotes/5.5.0/#TODO
+title: $:/changenotes/5.5.0/#9981/impacts/two-digit-year
+changenote: $:/changenotes/5.5.0/#9981
 tags: $:/tags/ImpactNote
 impact-type: compatibility-break
 description: The `YY` and `wYY` date format tokens now show the last two digits of the year, so years outside 2000 to 2099 render differently.
