@@ -484,7 +484,7 @@ exports.formatDateString = function(date,template) {
 				return (tz <= 0 ? "+" : "-") + $tw.utils.pad(Math.floor(atz / 60)) + ":" + $tw.utils.pad(atz % 60);
 			}],
 			[/^wYY/, function() {
-				return $tw.utils.pad(isoThursday(fields).getUTCFullYear() - 2000);
+				return $tw.utils.pad(Math.abs(isoThursday(fields).getUTCFullYear()) % 100);
 			}],
 			[/^[ap]m/, function() {
 				return amPm(fields.getUTCHours()).toLowerCase();
@@ -514,7 +514,7 @@ exports.formatDateString = function(date,template) {
 				return weekOfYear(fields);
 			}],
 			[/^YY/, function() {
-				return $tw.utils.pad(fields.getUTCFullYear() - 2000);
+				return $tw.utils.pad(Math.abs(fields.getUTCFullYear()) % 100);
 			}]
 		];
 	if(t.indexOf("[UTC]") == 0 ) {

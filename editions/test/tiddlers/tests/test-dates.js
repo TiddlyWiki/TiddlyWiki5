@@ -90,6 +90,17 @@ describe("Date formatting", function() {
 		expect(fds(zeroDate,"aYYYY")).toBe("0000");
 	});
 
+	it("should show the last two digits of the year in YY", function() {
+		// YY and wYY subtracted 2000 rather than taking the last two digits, so a year
+		// outside 2000 to 2099 did not render as two digits at all
+		expect(fds(new Date(1999,0,15,12,0,0),"YY")).toBe("99");
+		expect(fds(new Date(2100,0,15,12,0,0),"YY")).toBe("00");
+		expect(fds(new Date(2007,0,15,12,0,0),"YY")).toBe("07");
+		expect(fds(bceDate,"YY")).toBe("14");
+		// 15 January 1999 is a Friday in week 2 of 1999, so the week year is 1999 too
+		expect(fds(new Date(1999,0,15,12,0,0),"wYY")).toBe("99");
+	});
+
 	it("should choose the era string from the sign of the year", function() {
 		expect(fds(refDate,"{era:BCE|ZERO|CE}")).toBe("CE");
 		expect(fds(bceDate,"{era:BCE|ZERO|CE}")).toBe("BCE");
