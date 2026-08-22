@@ -346,7 +346,10 @@ $tw.utils.pad = function(value,length = 2) {
 
 // Convert a date into UTC YYYYMMDDHHMMSSmmm format
 $tw.utils.stringifyDate = function(value) {
-	return value.getUTCFullYear() +
+	// The year is padded and signed like the other components, so that the datestamp is
+	// fixed width and parseDate() reads the same digits back
+	var year = value.getUTCFullYear();
+	return (year < 0 ? "-" : "") + $tw.utils.pad(Math.abs(year),4) +
 			$tw.utils.pad(value.getUTCMonth() + 1) +
 			$tw.utils.pad(value.getUTCDate()) +
 			$tw.utils.pad(value.getUTCHours()) +

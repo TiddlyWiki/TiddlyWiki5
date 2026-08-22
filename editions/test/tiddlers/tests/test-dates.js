@@ -65,6 +65,19 @@ describe("Date parsing", function() {
 		expect($tw.utils.stringifyDate(new Date(2015,3,28,20,49,30,7))).toMatch(/007$/);
 	});
 
+	it("should write a fixed width year in a datestamp", function() {
+		// Every other component was padded but the year was not, so a datestamp for a year
+		// before 1000 was too short and parsing it back read the wrong digits
+		var roundTrip = function(v) {
+			return $tw.utils.stringifyDate($tw.utils.parseDate(v));
+		};
+		expect(roundTrip("00730428204930183")).toBe("00730428204930183");
+		expect(roundTrip("-00730428204930183")).toBe("-00730428204930183");
+		expect(roundTrip("09990428204930183")).toBe("09990428204930183");
+		expect(roundTrip("20150428204930183")).toBe("20150428204930183");
+		expect(roundTrip("-20150428204930183")).toBe("-20150428204930183");
+	});
+
 });
 
 describe("Date formatting", function() {
