@@ -164,6 +164,18 @@ describe("Date formatting", function() {
 		expect(fds(new Date(2010,0,3,23,59,60),"WW")).toBe("1");
 	});
 
+	it("should count the ISO week independently of summer time", function() {
+		// getWeek() measured a summer time date against a standard time 1 January, which
+		// dropped a whole week. It showed in the hour after local midnight, and only in a
+		// year whose 1 January is a Thursday, which is exactly the 53 week years: 1998,
+		// 2004, 2009, 2015, 2026. Reproducible only where summer time is observed, for
+		// example TZ=Europe/Vienna
+		expect(fds(new Date(2015,6,1,12,0,0),"WW")).toBe("27");
+		expect(fds(new Date(2015,6,1,0,30,0),"WW")).toBe("27");
+		expect(fds(new Date(2015,6,1,23,30,0),"WW")).toBe("27");
+		expect(fds(new Date(2026,6,1,0,30,0),"WW")).toBe("27");
+	});
+
 	it("should substitute the week year tokens", function() {
 		expect(fds(refDate,"wYYYY")).toBe("2014");
 		expect(fds(refDate,"wYY")).toBe("14");
@@ -237,6 +249,28 @@ describe("Date formatting", function() {
 		expect($tw.utils.stringifyDate(refDate)).toBe(stamp);
 	});
 
+	it("should shift to the same UTC instant across a summer time transition", function() {
+		// The shift took the offset of the original instant and then read the shifted one,
+		// which can sit in the other summer time period, so the result was out by the
+		// summer time delta on either side of a transition. In Europe/Vienna local
+		// 29 March 2015 03:30 rendered as 00:30 UTC rather than 01:30. The [UTC] shortcut
+		// escaped it, so the two spellings of the datestamp disagreed, and
+		// format:timestamp defaults to the 0XXX spelling that takes the generic path.
+		// Sweeps a whole year so that every timezone's transitions are covered, at
+		// quarter hours because some zones shift by 30 or 45 minutes. Every instant counts,
+		// including the ones whose UTC reading is an hour local time skips over: those are
+		// exactly the ones no shifted Date can carry
+		var wrong = [];
+		for(var t = Date.UTC(2015,0,1); t < Date.UTC(2016,0,1); t += 15 * 60 * 1000) {
+			var d = new Date(t),
+				stamp = d.toISOString().replace(/[-:.TZ]/g,"");
+			if(fds(d,"[UTC]YYYY0MM0DD0hh0mm0ss0XXX") !== stamp || fds(d,"[UTC]YYYY0MM0DD0hh0mm0ssXXX") !== stamp) {
+				wrong.push(d.toISOString());
+			}
+		}
+		expect(wrong).toEqual([]);
+	});
+
 	it("should treat [UTC] as literal text unless it starts the template", function() {
 		expect(fds(refDate,"x[UTC]0hh")).toBe("x[UTC]17");
 	});
@@ -274,6 +308,16 @@ describe("Date formatting", function() {
 			// {era:BCE||CE} is the notation DateFormat documents, and its empty middle
 			// alternative reached the same truthiness branch, taking the month with it
 			expect(fds(zeroDate,"{era:BCE||CE}MM")).toBe("11");
+		});
+
+		it("should count the day of year independently of summer time", function() {
+			// The day of year used to subtract a standard time 1 January from a summer time
+			// date, which lost a day. Only a timezone that observes summer time showed it,
+			// for example TZ=Europe/Vienna
+			var earlyMorning = new Date(2014,6,1,0,30,0),
+				noon = new Date(2014,6,1,12,0,0);
+			expect(fds(noon,"ddddd")).toBe("182");
+			expect(fds(earlyMorning,"ddddd")).toBe("182");
 		});
 
 	});
