@@ -536,6 +536,13 @@ exports.formatDateString = function(date,template) {
 	// summer time starts, which used to leave [UTC] an hour out around a transition
 	fields = utc ? date : toUtcFields(date);
 	while(t.length){
+		// An escape is taken out of the template here rather than out of the finished
+		// result, where it used to consume whatever the following token had substituted
+		if(t.charAt(0) === "\\" && t.length > 1) {
+			result += t.charAt(1);
+			t = t.substr(2);
+			continue;
+		}
 		// null means no token matched, which is not the same as a token that substitutes
 		// "0" or an empty era string. Testing the substitution itself dropped a midnight
 		// hour and then re-read the character after it as literal text
@@ -555,7 +562,6 @@ exports.formatDateString = function(date,template) {
 			t = t.substr(1);
 		}
 	}
-	result = result.replace(/\\(.)/g,"$1");
 	return result;
 };
 

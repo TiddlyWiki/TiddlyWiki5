@@ -324,6 +324,18 @@ describe("Date formatting", function() {
 		expect(fds(refDate,"DDth MMM \\M\\M\\M YYYY")).toBe("9th November MMM 2014");
 	});
 
+	it("should keep a backslash escape out of the substituted text", function() {
+		// The escapes were stripped from the finished output rather than from the template,
+		// so a backslash consumed whatever the following token had produced: \0MM lost the
+		// escaped zero and a digit of the month with it
+		expect(fds(refDate,"\\0MM")).toBe("011");
+		// the escaped M is literal, and the single M left over is not a token
+		expect(fds(refDate,"\\MM")).toBe("MM");
+		expect(fds(refDate,"0MM\\0DD")).toBe("1109");
+		// an escaped backslash is a literal backslash, and only one character is escaped
+		expect(fds(refDate,"\\\\0MM")).toBe("\\11");
+	});
+
 	// https://github.com/TiddlyWiki/TiddlyWiki5/issues/9974
 	describe("regressions from issue 9974", function() {
 
@@ -360,3 +372,145 @@ describe("Date formatting", function() {
 	});
 
 });
+
+/*
+Verification that is not in this file, and why
+
+The specs above run in whatever timezone the machine happens to use, and a Jasmine run
+cannot change it. Date faults hide in timezones, so the fixes these specs guard were found
+and then checked by brute force sweeps, run once per timezone from a shell, each in its own
+process with TZ set. Those sweeps take minutes and would be unreasonable in the suite, so
+what survives here is the small deterministic case each one pointed at.
+
+Setting the timezone
+
+	$env:TZ = 'Europe/Vienna'; node editions/test/quick-test.js test-dates
+
+Use PowerShell, and set TZ as its own statement. A TZ=Europe/Vienna prefix is dropped
+silently in Git Bash, so the run uses the machine's own zone and a matrix becomes one
+timezone repeated.
+
+The timezones, and what each one is for
+
+	UTC
+		No offset, no summer time. The control: a failure here is not a timezone fault
+	Europe/Vienna
+		Ordinary northern summer time, +1 and +2
+	America/New_York
+		Ordinary summer time west of UTC, transitioning on a different date from Europe
+	Asia/Kolkata
+		+05:30 all year. Separates having an offset from having summer time, since it
+		never shifts
+	Asia/Kathmandu
+		+05:45. A 45 minute offset is the only way to exercise the minutes half of TZD
+	America/St_Johns
+		-03:30 and -02:30. A half hour offset west of UTC, so sign and minutes are
+		exercised together
+	Pacific/Chatham
+		+12:45 and +13:45. A 45 minute offset that also shifts
+	Pacific/Kiritimati
+		+14, the largest offset in use
+	Australia/Lord_Howe
+		Shifts by 30 minutes rather than an hour, alone in doing so, and southern, so the
+		affected hour is before midnight
+	Antarctica/Troll
+		Shifts by two hours. The widest spring forward gap there is, and the case that
+		disproved an earlier version of the [UTC] fix
+	Africa/Casablanca
+		Summer time inverted: the clocks go back for Ramadan
+	Asia/Tehran
+		A half hour base offset with historic summer time on top
+	America/Santiago, America/Havana, Pacific/Apia, America/Sao_Paulo, Asia/Jerusalem,
+	America/Godthab
+		Transitions at or near local midnight, so the transition and the day boundary
+		coincide
+
+The sweeps
+
+	Several of them need the source as it was before this work. Do not reach for master,
+	which holds the fixes once this has merged. The commit that added this file is the
+	anchor, and it survives the branch being squashed into one commit:
+
+		git log --diff-filter=A --format=%H -1 -- editions/test/tiddlers/tests/test-dates.js
+
+	Call that hash ADDED. Its parent, ADDED~1, is the tree this work started from. It
+	reads the history of the current HEAD, so run it where this file is tracked. Nothing
+	printed means the history does not reach the commit that added the file, which is
+	what a shallow clone gives you: fetch the full history and try again.
+
+	1. Timezone matrix
+		This whole file in each of the 18 timezones above. Guards against a spec that
+		passes only where it was written. It caught two specs that were green in
+		Europe/Vienna and red in Antarctica/Troll, which is how the gap in sweep 2
+		surfaced.
+
+	2. UTC rendering
+		Every quarter hour from 2014-01-01 to 2017-01-01, which is 105216 instants per
+		timezone, quarter hours because some zones shift by 30 or 45 minutes. For each
+		instant, both
+
+			formatDateString(d,"[UTC]YYYY0MM0DD0hh0mm0ss0XXX")
+			formatDateString(d,"[UTC]YYYY0MM0DD0hh0mm0ssXXX")
+
+		must equal d.toISOString() with the - : . T and Z characters removed. The
+		template matters: one that does not name every component, such as
+		[UTC]YYYY-0MM-0DD, passes even against the broken code and would suggest there
+		was never a fault. Zero wrong instants in every timezone listed above.
+
+		For the record, and not reproducible from this history: an earlier attempt that
+		corrected the shift instead of removing it still left 24 wrong instants in
+		Antarctica/Troll and Africa/Casablanca, because no shifted date can express a
+		wall clock hour that local time skips over when summer time starts.
+
+	3. Week numbers
+		Every day from 1990 to 2040 at 24 times of day, which is 447072 samples per
+		timezone, comparing getWeek and getYearForWeekNo from ADDED~1 with the versions
+		here, and both against a reference that takes the year, month and day as numbers
+		and uses no Date at all: convert to a day count, take the Thursday of that ISO
+		week, and count weeks from 1 January of the year that Thursday falls in. Which
+		minute of the hour is sampled does not matter, measured at :00, :30 and :59.
+		Values changed in 1484 samples in Europe/Vienna, 1603 in
+		America/New_York, 2114 in Antarctica/Troll, and none at all in UTC, Asia/Kolkata
+		or Pacific/Kiritimati. Every changed value matched the reference and none
+		disagreed, which is what showed the change to be a fix rather than a break.
+
+		Those counts come from the timezone rules built into the runtime. A later one
+		carrying newer tzdata may differ by a few samples for zones whose historic rules
+		were revised, Africa/Casablanca and Pacific/Apia among them. A small difference
+		is the data having moved. What must still hold is that no changed value
+		disagrees with the reference, and that a zone without summer time changes none.
+
+	4. Local rendering
+		Every hour from 2013 to 2017, 43824 dates, in UTC, Europe/Vienna,
+		America/New_York, Asia/Kathmandu, Australia/Lord_Howe, Pacific/Chatham,
+		Antarctica/Troll, Africa/Casablanca, America/Santiago, Pacific/Apia,
+		America/St_Johns and Pacific/Kiritimati. For each date, YYYY-0MM-0DD 0hh:0mm:0ss.0XXX
+		must equal the same fields read off the date with getFullYear, getMonth, getDate,
+		getHours, getMinutes, getSeconds and getMilliseconds, TIMESTAMP must equal
+		getTime(), and dddd, WW, wYYYY and ddddd must match the sweep 3 reference. Zero
+		mismatches, which is what makes reading UTC components safe for templates that do
+		not ask for UTC.
+
+	5. Red before green
+		Put both changed source files back to their state before this work and run the
+		file again:
+
+			git checkout ADDED~1 -- boot core
+			node editions/test/quick-test.js test-dates
+			git checkout HEAD -- boot core
+
+		11 specs fail in Europe/Vienna and 8 in UTC. The three that fail only in
+		Europe/Vienna are the summer time ones, which cannot fail where there is no
+		summer time to get wrong. Reverting one commit at a time does not work, because
+		later commits rewrite the same lines.
+
+Check any reference you write against these before trusting a sweep that uses it:
+
+	1 January 1970 is a Thursday, ISO weekday 4
+	Monday 30 March 1998 is in ISO week 14, 1998 having begun on a Thursday
+	1 July 2015 is in ISO week 27
+	31 December 2016 is day 366 of the year, 2016 being a leap year
+
+The first reference written here had the epoch weekday off by one, failing the first of
+those, and reported about 1200 regressions per timezone that did not exist.
+*/
