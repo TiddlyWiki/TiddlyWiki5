@@ -1,5 +1,5 @@
 title: $:/changenotes/5.5.0/#9938
-description: Support conditional editor preview types
+description: Conditionally hide editor preview types
 release: 5.5.0
 tags: $:/tags/ChangeNote
 change-type: feature
