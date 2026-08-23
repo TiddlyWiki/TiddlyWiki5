@@ -387,10 +387,25 @@ exports.generateTiddlerFilepath = function(title,options) {
 	var fullPath = path.resolve(directory, filepath + extension);
 	if(!overwrite) {
 		var oldPath = (options.fileInfo) ? options.fileInfo.filepath : undefined,
+			resolvedOldPath = oldPath && path.resolve(oldPath),
 			count = 0;
 		do {
 			fullPath = path.resolve(directory,filepath + (count ? "_" + count : "") + extension);
-			if(oldPath && oldPath == fullPath) break;
+			var pathsMatch = resolvedOldPath && (
+				resolvedOldPath === fullPath ||
+				process.platform === "win32" && resolvedOldPath.toLowerCase() === fullPath.toLowerCase()
+			);
+			if(!pathsMatch && resolvedOldPath && fs.existsSync(resolvedOldPath) && fs.existsSync(fullPath)) {
+				try {
+					var oldStat = fs.statSync(resolvedOldPath),
+						newStat = fs.statSync(fullPath);
+					pathsMatch = oldStat.dev === newStat.dev && oldStat.ino === newStat.ino;
+				} catch(e) {
+					// A file lock can make stat unavailable. The normalised path
+					// comparison above still covers equivalent path spellings.
+				}
+			}
+			if(pathsMatch) break;
 			count++;
 		} while(fs.existsSync(fullPath));
 	}

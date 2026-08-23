@@ -27,7 +27,21 @@ if($tw.node) {
 
 exports.startup = function() {
 	var adaptor = $tw.syncadaptor;
-	if(serverStarted || !adaptor || adaptor.name !== "filesystem") {
+	if(!adaptor || adaptor.name !== "filesystem") {
+		return;
+	}
+	var closeInfo = {
+		adaptor: adaptor,
+		serverStarted: serverStarted,
+		shouldClose: !serverStarted
+	};
+	if($tw.hooks) {
+		closeInfo = $tw.hooks.invokeHook("th-filesystem-adaptor-should-close",closeInfo) || closeInfo;
+	}
+	// Embedded hosts may boot TiddlyWiki with a finite command and then expose
+	// it through their own server. The hook lets them retain ownership of the
+	// adaptor lifecycle without pretending that a core server command ran.
+	if(!closeInfo.shouldClose) {
 		return;
 	}
 	// Stop advertising poll support so the syncer doesn't reschedule

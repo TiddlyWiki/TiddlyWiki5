@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#9947
+description: Harden and extend filesystem dynamic stores
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: nodejs
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9947
+github-contributors: linonetwo
+
+Filesystem dynamic stores now handle watcher races, atomic file replacement, deletion deferral, path exclusions, symlinks, file-lock retries, and external attachment migration. Watcher providers and filesystem change notifications are also extensible.
