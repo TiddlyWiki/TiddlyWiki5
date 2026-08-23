@@ -1,7 +1,7 @@
-title: $:/changenotes/5.4.0/#8991
+title: $:/changenotes/5.5.0/#8991
 description: Add ProseMirror-based WYSIWYG editor plugin
 tags: $:/tags/ChangeNote
-release: 5.4.0
+release: 5.5.0
 change-type: feature
 change-category: plugin
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8991
