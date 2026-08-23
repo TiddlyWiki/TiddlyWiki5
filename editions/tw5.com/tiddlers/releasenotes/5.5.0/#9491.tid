@@ -1,6 +1,6 @@
-title: $:/changenotes/5.4.0/#9491
+title: $:/changenotes/5.5.0/#9491
 description: Show loading indicator editing a lazy-loaded tiddler
-release: 5.4.0
+release: 5.5.0
 tags: $:/tags/ChangeNote
 change-type: bugfix
 change-category: usability
