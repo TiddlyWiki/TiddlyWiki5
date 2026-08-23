@@ -3,7 +3,7 @@ description: Conditionally hide editor preview types
 release: 5.5.0
 tags: $:/tags/ChangeNote
 change-type: feature
-change-category: editor
+change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9938
 github-contributors: linonetwo
 
