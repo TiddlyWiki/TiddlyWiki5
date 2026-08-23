@@ -1,5 +1,5 @@
 title: $:/changenotes/5.5.0/#8991
-description: Add ProseMirror-based WYSIWYG editor plugin
+description: Provide a ProseMirror-based WYSIWYG editor plugin
 tags: $:/tags/ChangeNote
 release: 5.5.0
 change-type: feature
