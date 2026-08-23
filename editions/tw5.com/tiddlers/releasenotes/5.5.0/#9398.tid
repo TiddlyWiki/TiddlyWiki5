@@ -1,6 +1,6 @@
-title: $:/changenotes/5.4.0/#9398
+title: $:/changenotes/5.5.0/#9398
 description: Add server-side POST API routes for filter and action execution
-release: 5.4.0
+release: 5.5.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: nodejs
