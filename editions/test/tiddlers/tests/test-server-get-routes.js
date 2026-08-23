@@ -46,7 +46,7 @@ if($tw.node) {
 		});
 
 		// Stop server after all tests
-		afterAll(() => new Promise(resolve => {
+		afterAll(() => new Promise((resolve) => {
 			if(nodeServer) {
 				if(typeof nodeServer.closeAllConnections === "function") {
 					nodeServer.closeAllConnections();

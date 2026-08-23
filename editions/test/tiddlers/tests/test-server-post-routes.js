@@ -56,7 +56,7 @@ if($tw.node) {
 		});
 
 		// Stop server after all tests
-		afterAll(() => new Promise(resolve => {
+		afterAll(() => new Promise((resolve) => {
 			if(nodeServer) {
 				if(typeof nodeServer.closeAllConnections === "function") {
 					nodeServer.closeAllConnections();
@@ -70,7 +70,7 @@ if($tw.node) {
 		describe("POST /recipes/default/actions", () => {
 
 			// Helper function for this describe block
-			const makeRequest = async data => {
+			const makeRequest = async (data) => {
 				const response = await fetch(baseUrl + "/recipes/default/actions", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
@@ -265,7 +265,7 @@ if($tw.node) {
 		describe("POST /recipes/default/filter", () => {
 
 			// Helper function for this describe block
-			const makeRequest = async data => {
+			const makeRequest = async (data) => {
 				const response = await fetch(baseUrl + "/recipes/default/filter", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
@@ -300,103 +300,103 @@ if($tw.node) {
 				}));
 			});
 
-		it("should execute simple tag filter", async () => {
-			const result = await makeRequest({
-				filter: "[tag[FilterTest]]"
+			it("should execute simple tag filter", async () => {
+				const result = await makeRequest({
+					filter: "[tag[FilterTest]]"
+				});
+
+				expect(result.ok).toBe(true);
+				expect(result.data.results).toBeDefined();
+				expect(result.data.results.length).toBeGreaterThanOrEqual(2);
+				expect(result.data.results).toContain("FilterTest1");
+				expect(result.data.results).toContain("FilterTest2");
 			});
 
-			expect(result.ok).toBe(true);
-			expect(result.data.results).toBeDefined();
-			expect(result.data.results.length).toBeGreaterThanOrEqual(2);
-			expect(result.data.results).toContain("FilterTest1");
-			expect(result.data.results).toContain("FilterTest2");
-		});
-
-		it("should allow variables in filter", async () => {
-			const result = await makeRequest({
-				filter: "[tag<myTag>]",
-				variables: {
-					myTag: "FilterTest"
-				}
-			});
-
-			expect(result.ok).toBe(true);
-			expect(result.data.results).toBeDefined();
-			// Variables work but may return 0 results if tag doesn't match
-			// The important thing is that the request succeeds
-			expect(Array.isArray(result.data.results)).toBe(true);
-		});
-
-		it("should use custom source", async () => {
-			const result = await makeRequest({
-				filter: "[tag[FilterTest]]",
-				source: ["FilterTest1", "FilterTest2", "FilterTest3"]
-			});
-
-			expect(result.ok).toBe(true);
-			expect(result.data.results).toBeDefined();
-			expect(result.data.results.length).toBe(2);
-			expect(result.data.results).toContain("FilterTest1");
-			expect(result.data.results).toContain("FilterTest2");
-			expect(result.data.results).not.toContain("FilterTest3");
-		});
-
-		it("should return error for invalid JSON", async () => {
-			const response = await fetch(baseUrl + "/recipes/default/filter", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: "invalid json"
-			});
-
-			expect(response.status).toBe(400);
-		});
-
-		it("should return error for missing filter field", async () => {
-			const result = await makeRequest({
-				variables: {
-					test: "value"
-				}
-			});
-
-			expect(result.status).toBe(400);
-			expect(result.data.error).toContain("filter");
-		});
-
-		it("should block unauthorized filters when configured", async () => {
-			// Disable all external filters
-			$tw.wiki.addTiddler(new $tw.Tiddler({
-				title: "$:/config/Server/AllowAllExternalFilters",
-				text: "no"
-			}));
-
-			const result = await makeRequest({
-				filter: "[tag[Unauthorized]]"
-			});
-
-			expect(result.status).toBe(403);
-			expect(result.data.error).toContain("Forbidden");
-		});
-
-		it("should support URL parameter variables (URL params override body)", async () => {
-			const response = await fetch(baseUrl + "/recipes/default/filter?myTag=FilterTest", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
+			it("should allow variables in filter", async () => {
+				const result = await makeRequest({
 					filter: "[tag<myTag>]",
 					variables: {
-						myTag: "WrongTag"
+						myTag: "FilterTest"
 					}
-				})
-			});
-			const responseData = await response.json();
+				});
 
-			expect(response.ok).toBe(true);
-			expect(responseData.results).toBeDefined();
-			// URL parameter should override body variable
-			expect(responseData.results.length).toBeGreaterThanOrEqual(2);
-			expect(responseData.results).toContain("FilterTest1");
-			expect(responseData.results).toContain("FilterTest2");
-		});
+				expect(result.ok).toBe(true);
+				expect(result.data.results).toBeDefined();
+				// Variables work but may return 0 results if tag doesn't match
+				// The important thing is that the request succeeds
+				expect(Array.isArray(result.data.results)).toBe(true);
+			});
+
+			it("should use custom source", async () => {
+				const result = await makeRequest({
+					filter: "[tag[FilterTest]]",
+					source: ["FilterTest1", "FilterTest2", "FilterTest3"]
+				});
+
+				expect(result.ok).toBe(true);
+				expect(result.data.results).toBeDefined();
+				expect(result.data.results.length).toBe(2);
+				expect(result.data.results).toContain("FilterTest1");
+				expect(result.data.results).toContain("FilterTest2");
+				expect(result.data.results).not.toContain("FilterTest3");
+			});
+
+			it("should return error for invalid JSON", async () => {
+				const response = await fetch(baseUrl + "/recipes/default/filter", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: "invalid json"
+				});
+
+				expect(response.status).toBe(400);
+			});
+
+			it("should return error for missing filter field", async () => {
+				const result = await makeRequest({
+					variables: {
+						test: "value"
+					}
+				});
+
+				expect(result.status).toBe(400);
+				expect(result.data.error).toContain("filter");
+			});
+
+			it("should block unauthorized filters when configured", async () => {
+				// Disable all external filters
+				$tw.wiki.addTiddler(new $tw.Tiddler({
+					title: "$:/config/Server/AllowAllExternalFilters",
+					text: "no"
+				}));
+
+				const result = await makeRequest({
+					filter: "[tag[Unauthorized]]"
+				});
+
+				expect(result.status).toBe(403);
+				expect(result.data.error).toContain("Forbidden");
+			});
+
+			it("should support URL parameter variables (URL params override body)", async () => {
+				const response = await fetch(baseUrl + "/recipes/default/filter?myTag=FilterTest", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						filter: "[tag<myTag>]",
+						variables: {
+							myTag: "WrongTag"
+						}
+					})
+				});
+				const responseData = await response.json();
+
+				expect(response.ok).toBe(true);
+				expect(responseData.results).toBeDefined();
+				// URL parameter should override body variable
+				expect(responseData.results.length).toBeGreaterThanOrEqual(2);
+				expect(responseData.results).toContain("FilterTest1");
+				expect(responseData.results).toContain("FilterTest2");
+			});
 		});
 	});
 
