@@ -68,7 +68,7 @@ class CodeBlockNodeView {
 	}
 
 	stopEvent(event) {
-		return !!(event && event.target && event.target.closest && event.target.closest(".pm-nodeview-header, .pm-nodeview-btn"));
+		return !!(this && event && event.target && event.target.closest && event.target.closest(".pm-nodeview-header, .pm-nodeview-btn"));
 	}
 }
 
