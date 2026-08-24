@@ -34,6 +34,7 @@ module.exports = {
 	typed_block: pragma.typedBlock,
 	pragma_block: pragma.pragmaBlock,
 	opaque_block: pragma.opaqueBlock,
+	opaque_inline: pragma.opaqueInline,
 	table: table.tableNode,
 	table_row: table.tableRow,
 	table_header: table.tableCellOrHeader,

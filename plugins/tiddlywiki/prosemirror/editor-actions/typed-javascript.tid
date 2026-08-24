@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/typed-javascript
+tags: $:/tags/EditorCommand
+caption: $$$ JavaScript
+description: application/javascript
+command-id: insert-typed-block
+command-type: application/javascript
+command-category: typed-block
+command-surfaces: slash-menu
+command-editors: prosemirror

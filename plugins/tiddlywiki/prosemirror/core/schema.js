@@ -39,12 +39,28 @@ function addSourceAttrsToBlockNodes(nodes) {
 function buildSchema() {
 	let baseNodes = basicSchema.spec.nodes.append({ list: createListSpec() });
 
-	// Override blockquote to add cite attr for preserving <<<...<<<cite text
+	// Preserve WikiText quote metadata even when the quote body is edited.
 	const baseBqSpec = basicSchema.spec.nodes.get("blockquote");
 	baseNodes = baseNodes.update("blockquote", Object.assign({}, baseBqSpec, {
-		attrs: { cite: { default: null } },
-		toDOM() { return ["blockquote", 0]; },
-		parseDOM: [{ tag: "blockquote" }]
+		attrs: {
+			cite: { default: null },
+			twClasses: { default: null }
+		},
+		toDOM(node) {
+			const attrs = {};
+			if(node.attrs.cite) attrs["data-tw-cite"] = node.attrs.cite;
+			if(node.attrs.twClasses) attrs["data-tw-classes"] = node.attrs.twClasses;
+			return ["blockquote", attrs, 0];
+		},
+		parseDOM: [{
+			tag: "blockquote",
+			getAttrs(dom) {
+				return {
+					cite: dom.getAttribute("data-tw-cite") || null,
+					twClasses: dom.getAttribute("data-tw-classes") || null
+				};
+			}
+		}]
 	}));
 
 	// Extend image node with TW-specific attrs (width, height, source, kind, tooltip)
@@ -100,16 +116,12 @@ function buildSchema() {
 			attrs: { rawText: { default: "" }, firstLine: { default: "" } },
 			group: "block", atom: true, selectable: true, draggable: true,
 			toDOM(node) {
-				const wrapper = document.createElement("div");
-				wrapper.className = "pm-pragma-block";
-				wrapper.setAttribute("data-raw-text", node.attrs.rawText);
-				wrapper.setAttribute("data-first-line", node.attrs.firstLine);
-				wrapper.setAttribute("contenteditable", "false");
-				const label = document.createElement("span");
-				label.className = "pm-pragma-block-label";
-				label.textContent = node.attrs.firstLine || "(pragma)";
-				wrapper.appendChild(label);
-				return wrapper;
+				return ["div", {
+					class: "pm-pragma-block",
+					"data-raw-text": node.attrs.rawText,
+					"data-first-line": node.attrs.firstLine,
+					contenteditable: "false"
+				}, ["span", { class: "pm-pragma-block-label" }, node.attrs.firstLine || "(pragma)"]];
 			},
 			parseDOM: [{
 				tag: "div.pm-pragma-block",
@@ -125,17 +137,14 @@ function buildSchema() {
 			attrs: { rawText: { default: "" }, firstLine: { default: "" }, parseTreeJson: { default: null }, autoEdit: { default: false } },
 			group: "block", atom: true, selectable: true, draggable: false,
 			toDOM(node) {
-				const wrapper = document.createElement("div");
-				wrapper.className = "pm-opaque-block";
-				wrapper.setAttribute("data-raw-text", node.attrs.rawText);
-				wrapper.setAttribute("data-first-line", node.attrs.firstLine);
-				if(node.attrs.parseTreeJson) wrapper.setAttribute("data-parse-tree-json", node.attrs.parseTreeJson);
-				wrapper.setAttribute("contenteditable", "false");
-				const label = document.createElement("span");
-				label.className = "pm-opaque-block-label";
-				label.textContent = node.attrs.firstLine || "(unsupported block)";
-				wrapper.appendChild(label);
-				return wrapper;
+				const attrs = {
+					class: "pm-opaque-block",
+					"data-raw-text": node.attrs.rawText,
+					"data-first-line": node.attrs.firstLine,
+					contenteditable: "false"
+				};
+				if(node.attrs.parseTreeJson) attrs["data-parse-tree-json"] = node.attrs.parseTreeJson;
+				return ["div", attrs, ["span", { class: "pm-opaque-block-label" }, node.attrs.firstLine || "(unsupported block)"]];
 			},
 			parseDOM: [{
 				tag: "div.pm-opaque-block",
@@ -145,6 +154,30 @@ function buildSchema() {
 						firstLine: dom.getAttribute("data-first-line") || "",
 						parseTreeJson: dom.getAttribute("data-parse-tree-json") || null,
 						autoEdit: false
+					};
+				}
+			}]
+		},
+		opaque_inline: {
+			attrs: { rawText: { default: "" }, firstLine: { default: "" }, parseTreeJson: { default: null } },
+			group: "inline", inline: true, atom: true, selectable: true, draggable: false,
+			toDOM(node) {
+				const attrs = {
+					class: "pm-opaque-inline",
+					"data-raw-text": node.attrs.rawText,
+					contenteditable: "false"
+				};
+				if(node.attrs.parseTreeJson) attrs["data-parse-tree-json"] = node.attrs.parseTreeJson;
+				return ["span", attrs, node.attrs.rawText || "(inline source)"];
+			},
+			parseDOM: [{
+				tag: "span.pm-opaque-inline",
+				getAttrs(dom) {
+					const rawText = dom.getAttribute("data-raw-text") || "";
+					return {
+						rawText: rawText,
+						firstLine: rawText.split("\n")[0] || rawText,
+						parseTreeJson: dom.getAttribute("data-parse-tree-json") || null
 					};
 				}
 			}]
@@ -174,20 +207,17 @@ function buildSchema() {
 			parseDOM: [{ tag: "div.pm-hard-line-breaks-block-wrapper" }]
 		},
 		typed_block: {
-			attrs: { rawText: { default: "" }, parseType: { default: "" }, renderType: { default: null } },
+			attrs: { rawText: { default: "" }, parseType: { default: "" }, renderType: { default: null }, autoEdit: { default: false } },
 			group: "block", atom: true, selectable: true, draggable: true,
 			toDOM(node) {
-				const wrapper = document.createElement("div");
-				wrapper.className = "pm-typed-block";
-				wrapper.setAttribute("data-raw-text", node.attrs.rawText);
-				wrapper.setAttribute("data-parse-type", node.attrs.parseType);
-				if(node.attrs.renderType) wrapper.setAttribute("data-render-type", node.attrs.renderType);
-				wrapper.setAttribute("contenteditable", "false");
-				const label = document.createElement("span");
-				label.className = "pm-typed-block-label";
-				label.textContent = "$$$" + (node.attrs.parseType || "");
-				wrapper.appendChild(label);
-				return wrapper;
+				const attrs = {
+					class: "pm-typed-block",
+					"data-raw-text": node.attrs.rawText,
+					"data-parse-type": node.attrs.parseType,
+					contenteditable: "false"
+				};
+				if(node.attrs.renderType) attrs["data-render-type"] = node.attrs.renderType;
+				return ["div", attrs, ["span", { class: "pm-typed-block-label" }, "$$$" + (node.attrs.parseType || "")]];
 			},
 			parseDOM: [{
 				tag: "div.pm-typed-block",
@@ -195,7 +225,8 @@ function buildSchema() {
 					return {
 						rawText: dom.getAttribute("data-raw-text") || "",
 						parseType: dom.getAttribute("data-parse-type") || "",
-						renderType: dom.getAttribute("data-render-type") || null
+						renderType: dom.getAttribute("data-render-type") || null,
+						autoEdit: false
 					};
 				}
 			}]

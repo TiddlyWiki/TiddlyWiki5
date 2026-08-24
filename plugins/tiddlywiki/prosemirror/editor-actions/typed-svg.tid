@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/typed-svg
+tags: $:/tags/EditorCommand
+caption: $$$ SVG
+description: image/svg+xml
+command-id: insert-typed-block
+command-type: image/svg+xml
+command-category: typed-block
+command-surfaces: slash-menu
+command-editors: prosemirror

@@ -1,0 +1,78 @@
+title: $:/plugins/tiddlywiki/prosemirror/development
+
+! ProseMirror plugin development
+
+!! Design constraints
+
+The saved value is WikiText, but the live editing state is a ProseMirror document. They are different coordinate systems. Editor actions must operate on the ProseMirror selection and transaction model; a ProseMirror position must never be used as a character offset into the saved WikiText.
+
+The conversion layer preserves exact source for unchanged parse-tree groups. Unsupported inline and block syntax is represented by source-backed opaque nodes. New, duplicated or moved structure must have source-provenance attributes removed so serialisation reflects the new document order rather than stale input slices.
+
+Interactive opaque nodes run with a block-local temporary `currentTiddler`. Third-party rule writes are bridged back through a ProseMirror transaction; do not render a stored parse tree with document-global source offsets or allow a node view to edit the canonical tiddler directly.
+
+The standard toolbar and command menus are entry points, not mutation implementations. Toolbar messages are adapted by `core/text-operations.js`; `$:/tags/EditorCommand` descriptors used by slash and block surfaces are executed by `core/editor-commands.js`.
+
+Every editor and node view uses its instance `ownerDocument`. Features that add DOM outside the editor or register listeners must clean them up in `destroy()`.
+
+!! Vendored dependencies
+
+Runtime ProseMirror packages are checked in under `files/` because browser editions cannot depend on a Node package installation. `vendor-manifest.json` records the exact package version, source file and SHA-256 digest for every artifact; `files/THIRD-PARTY-NOTICES` contains the corresponding licences.
+
+Use:
+
+```
+node bin/prosemirror-vendor.js --verify
+```
+
+to verify checked-in hashes without network access, and:
+
+```
+node bin/prosemirror-vendor.js --check
+```
+
+to install the exact versions in an isolated temporary directory and compare them byte for byte. Maintainers can use `--write` after intentionally changing the manifest versions.
+
+Do not replace exact versions with `latest` URLs or manually edit vendored artifacts.
+
+!! Layout
+
+* `core/` — schema, engine, keymaps, toolbar adapter, semantic command execution and plugin assembly
+* `ast/` — parse-tree conversion, WikiText serialisation and source provenance
+* `blocks/` — specialised and source-backed node views
+* `features/` — autocomplete, drag handle, find/replace, link tooltip, placeholders, Markdown-style input and slash menu
+* `editor-actions/` — declarative command descriptors for command surfaces
+* `tests/` — Jasmine unit and integration specifications
+* `vendor-manifest.json` and `files/` — reproducible third-party runtime bundle
+
+The reusable descriptor registry and DOM menu are in the separate `$:/plugins/tiddlywiki/editor-command-menu` plugin so they contain no ProseMirror, slash-trigger or block-handle policy.
+
+!! Verification
+
+Run the complete Node test edition:
+
+```
+npm test
+```
+
+For a quicker focused run after the test edition has been bootstrapped:
+
+```
+node editions/test/quick-test.js prosemirror editor-command-menu
+```
+
+Build the browser test edition before Playwright tests:
+
+```
+npm test
+npx playwright test editions/test/prosemirror-playwright.spec.js --project=chromium --workers=1
+```
+
+The generated single-file test wiki is large, so using one worker also avoids loading several complete copies in parallel on development machines. The repository CI configuration already uses one worker.
+
+Run lint and reproducibility checks before submitting:
+
+```
+npm run lint
+node bin/prosemirror-vendor.js --verify
+node bin/prosemirror-vendor.js --check
+```

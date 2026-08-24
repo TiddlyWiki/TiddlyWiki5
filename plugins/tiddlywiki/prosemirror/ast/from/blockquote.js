@@ -10,6 +10,7 @@ const convertNodes = require("$:/plugins/tiddlywiki/prosemirror/ast/from/shared.
 
 module.exports = function blockquote(builders, node) {
 	const children = convertNodes(builders, node.content);
+	const customClasses = node.attrs && node.attrs.twClasses ? String(node.attrs.twClasses).split(/\s+/).filter(Boolean) : [];
 	if(node.attrs && node.attrs.cite) {
 		children.push({
 			type: "element",
@@ -22,7 +23,7 @@ module.exports = function blockquote(builders, node) {
 		tag: "blockquote",
 		rule: "quoteblock",
 		attributes: {
-			class: { type: "string", value: "tc-quote" }
+			class: { type: "string", value: ["tc-quote"].concat(customClasses).join(" ") }
 		},
 		children: children
 	};

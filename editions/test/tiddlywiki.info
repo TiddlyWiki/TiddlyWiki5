@@ -3,6 +3,8 @@
 	"plugins": [
 		"tiddlywiki/jasmine",
 		"tiddlywiki/wikitext-serialize",
+		"tiddlywiki/editor-command-menu",
+		"tiddlywiki/prosemirror",
 		"tiddlywiki/geospatial"
 	],
 	"themes": [

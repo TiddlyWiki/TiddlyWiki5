@@ -41,6 +41,10 @@ function opaqueBlock(builders, node) {
 	return { type: "text", text: rawText };
 }
 
+function opaqueInline(builders, node) {
+	return opaqueBlock(builders, node);
+}
+
 function typedBlock(builders, node) {
 	const rawText = node.attrs && node.attrs.rawText || "";
 	const parseType = node.attrs && node.attrs.parseType || "";
@@ -77,4 +81,5 @@ function typedBlock(builders, node) {
 
 exports.pragmaBlock = pragmaBlock;
 exports.opaqueBlock = opaqueBlock;
+exports.opaqueInline = opaqueInline;
 exports.typedBlock = typedBlock;

@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/paragraph
+tags: $:/tags/EditorCommand
+caption: Turn into paragraph
+description: Convert the current block to a paragraph
+command-id: set-paragraph
+command-category: block-type
+command-surfaces: slash-menu block-menu
+command-editors: prosemirror

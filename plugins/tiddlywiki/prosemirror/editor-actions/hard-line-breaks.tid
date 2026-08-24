@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/hard-line-breaks
+tags: $:/tags/EditorCommand
+caption: Hard line breaks block
+description: Insert a multiline text block (""" ... """) where each line break is preserved
+command-id: insert-hard-line-breaks
+command-category: block-insert
+command-surfaces: slash-menu
+command-editors: prosemirror

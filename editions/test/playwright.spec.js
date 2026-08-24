@@ -9,9 +9,11 @@ test("get started link", async ({ page }) => {
 	// The tests can take a while to run
 	const timeout = 1000 * 60;
 	test.setTimeout(timeout);
+	await page.route("http://**/*", (route) => route.abort());
+	await page.route("https://**/*", (route) => route.abort());
 
 	// Load the generated test TW html
-	await page.goto(`file:///${crossPlatformIndexPath}`);
+	await page.goto(`file:///${crossPlatformIndexPath}`, {waitUntil: "domcontentloaded"});
 
 	// Sanity check
 	await expect(page.locator(".tc-site-title"), "Expected correct page title to verify the test page was loaded").toHaveText("TiddlyWiki5");

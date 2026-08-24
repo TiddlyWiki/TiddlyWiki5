@@ -10,6 +10,10 @@ const shared = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js");
 
 module.exports = function buildBlockquote(context, node) {
 	let citeText = null;
+	const classValue = node.attributes && node.attributes.class && node.attributes.class.value || "";
+	const customClasses = classValue.split(/\s+/).filter(function(className) {
+		return className && className !== "tc-quote";
+	});
 	const bodyChildren = [];
 	const children = node.children || [];
 	for(let index = 0; index < children.length; index++) {
@@ -21,7 +25,10 @@ module.exports = function buildBlockquote(context, node) {
 	}
 	return {
 		type: "blockquote",
-		attrs: { cite: citeText },
+		attrs: {
+			cite: citeText,
+			twClasses: customClasses.length > 0 ? customClasses.join(" ") : null
+		},
 		content: shared.convertNodes(context, bodyChildren)
 	};
 };

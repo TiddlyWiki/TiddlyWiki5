@@ -129,14 +129,24 @@ function ensureCanonicalBoundary(output, previousNode, serializeNodes) {
 	return output + "\n".repeat(missingNewlines);
 }
 
+function segmentKeepsOwnEnding(nodes) {
+	return nodes.length > 0 && nodes.every(function(node) {
+		return node && node.type === "opaque_block";
+	});
+}
+
 function serializeWithPreservedSource(docJSON, serializeNodes) {
 	const content = docJSON && Array.isArray(docJSON.content) ? docJSON.content : [];
 	let output = "";
+	let lastSegmentPreserved = true;
+	let lastSegmentRegenerated = false;
 	for(let index = 0; index < content.length;) {
 		const groupId = getGroupId(content[index]);
 		if(groupId === null) {
 			output = ensureCanonicalBoundary(output, content[index - 1], serializeNodes);
 			output += serializeNodes([stripSourceMetadata(content[index])], { atDocumentStart: index === 0 });
+			lastSegmentPreserved = segmentKeepsOwnEnding([content[index]]);
+			lastSegmentRegenerated = true;
 			index++;
 			continue;
 		}
@@ -148,14 +158,24 @@ function serializeWithPreservedSource(docJSON, serializeNodes) {
 		}
 		const group = content.slice(index, end);
 		if(isCompleteUnchangedGroup(group)) {
+			if(lastSegmentRegenerated) {
+				output = ensureCanonicalBoundary(output, content[index - 1], serializeNodes);
+			}
 			output += group[0].attrs.twSourceText;
+			lastSegmentPreserved = true;
+			lastSegmentRegenerated = false;
 		} else {
 			output = ensureCanonicalBoundary(output, content[index - 1], serializeNodes);
 			output += serializeNodes(stripSourceMetadata(group), { atDocumentStart: index === 0 });
+			lastSegmentPreserved = segmentKeepsOwnEnding(group);
+			lastSegmentRegenerated = true;
 		}
 		index = end;
 	}
-	return output;
+	// Serializer rules emit block separators after every canonical block. They
+	// are required between blocks, but a regenerated final segment should not
+	// invent trailing newlines. Exact source groups keep their original ending.
+	return lastSegmentPreserved ? output : output.replace(/(?:\r?\n)+$/g,"");
 }
 
 exports.SOURCE_ATTR_NAMES = SOURCE_ATTR_NAMES;

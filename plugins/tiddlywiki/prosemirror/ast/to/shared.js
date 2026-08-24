@@ -134,13 +134,17 @@ function buildOpaqueFromNode(node, context) {
 		parseTreeJson = null;
 	}
 	return {
-		type: "opaque_block",
+		type: isInlineSourceNode(node) ? "opaque_inline" : "opaque_block",
 		attrs: {
 			rawText: rawText,
 			firstLine: firstLine,
 			parseTreeJson: parseTreeJson
 		}
 	};
+}
+
+function isInlineSourceNode(node) {
+	return !!node && (node.isBlock === false || /inline$/i.test(node.rule || ""));
 }
 
 function sourceTextToParagraphs(text) {
@@ -179,6 +183,7 @@ exports.buildTextWithMark = buildTextWithMark;
 exports.extractPlainText = extractPlainText;
 exports.serializeNodeToRawText = serializeNodeToRawText;
 exports.buildOpaqueFromNode = buildOpaqueFromNode;
+exports.isInlineSourceNode = isInlineSourceNode;
 exports.extractSourceText = extractSourceText;
 exports.sourceTextToParagraphs = sourceTextToParagraphs;
 exports.convertNodes = convertNodes;

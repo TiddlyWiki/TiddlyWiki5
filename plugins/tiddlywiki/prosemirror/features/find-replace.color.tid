@@ -1,0 +1,45 @@
+title: $:/plugins/tiddlywiki/prosemirror/features/find-replace/colors
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-prosemirror-find-replace-panel {
+	background: <<colour tiddler-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-prosemirror-find-input,
+.tc-prosemirror-replace-input {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-find-count {
+	color: <<colour muted-foreground>>;
+}
+
+.tc-prosemirror-find-btn {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+}
+
+.tc-prosemirror-find-btn:hover {
+	background: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-prosemirror-find-case-btn.active {
+	background: <<colour primary>>;
+	color: <<colour tiddler-background>>;
+}
+
+.tc-prosemirror-find-match {
+	background: <<colour highlight-background>>;
+}
+
+.tc-prosemirror-find-current {
+	background: <<colour selection-background>>;
+	outline-color: <<colour primary>>;
+}

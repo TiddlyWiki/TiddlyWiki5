@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/task-list
+tags: $:/tags/EditorCommand
+caption: Task list
+description: Turn the current block into a task list
+icon: $:/core/images/done-button
+command-id: toggle-list
+command-kind: task
+command-category: block-type
+command-surfaces: slash-menu block-menu
+command-editors: prosemirror

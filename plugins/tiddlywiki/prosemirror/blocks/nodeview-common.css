@@ -1,0 +1,142 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/blocks/nodeview-common.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+Shared structural styles for ProseMirror nodeviews.
+
+\*/
+
+.pm-nodeview {
+	position: relative;
+	border: 2px dashed transparent;
+	border-radius: 4px;
+	padding: 4px;
+	margin: 2px 0;
+	transition: border-color 0.15s ease;
+}
+
+.pm-nodeview-header {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 2px 6px;
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	font-size: 11px;
+	font-weight: bold;
+	user-select: none;
+	border-radius: 4px 0 0 0;
+	opacity: 0;
+	pointer-events: none;
+	white-space: nowrap;
+	z-index: 5;
+	transition: opacity 0.15s ease;
+	line-height: 1.2;
+}
+
+.pm-nodeview:hover .pm-nodeview-header,
+.pm-nodeview.pm-nodeview-selected .pm-nodeview-header,
+.pm-nodeview.pm-nodeview-editing .pm-nodeview-header {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.pm-nodeview-title {
+	font-family: monospace;
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.pm-nodeview-buttons {
+	display: flex;
+	gap: 3px;
+	align-items: center;
+}
+
+.pm-nodeview-btn {
+	padding: 2px 4px;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: background 0.2s;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	line-height: 1;
+}
+
+.pm-nodeview-btn svg {
+	width: 14px;
+	height: 14px;
+	fill: currentColor;
+}
+
+.pm-nodeview-content {
+	display: block;
+	min-height: 1.4em;
+	outline: none;
+}
+
+.pm-nodeview-empty-placeholder {
+	font-style: italic;
+	pointer-events: none;
+	user-select: none;
+}
+
+.pm-nodeview-editor {
+	width: 100%;
+	padding: 6px 8px;
+	margin-top: 4px;
+	font-family: monospace;
+	font-size: 13px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	resize: vertical;
+	box-sizing: border-box;
+	min-height: 60px;
+}
+
+.pm-nodeview-form {
+	padding: 8px;
+	margin-top: 4px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+
+.pm-nodeview-form-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 6px;
+}
+
+.pm-nodeview-form-row:last-child {
+	margin-bottom: 0;
+}
+
+.pm-nodeview-form-label {
+	font-size: 12px;
+	font-weight: bold;
+	min-width: 60px;
+}
+
+.pm-nodeview-form-input {
+	flex: 1;
+	padding: 4px 6px;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	font-size: 13px;
+	font-family: monospace;
+	box-sizing: border-box;
+}
+
+html[dir="rtl"] .pm-nodeview-header {
+	right: auto;
+	left: 0;
+	border-radius: 0 4px 0 0;
+}
