@@ -578,6 +578,37 @@ a.tc-tiddlylink-external:hover {
 	pointer-events: auto;
 }
 
+.tc-animatelayout-entering {
+	animation: tc-animatelayout-enter var(--tc-animatelayout-enter-duration,400ms) var(--tc-animatelayout-enter-easing,ease-out) both;
+}
+
+@keyframes tc-animatelayout-enter {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.tc-animatelayout-leaving {
+	animation: tc-animatelayout-exit var(--tc-animatelayout-exit-duration,400ms) var(--tc-animatelayout-exit-easing,ease-out) both;
+	pointer-events: none;
+}
+
+@keyframes tc-animatelayout-exit {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+.tc-animatelayout-travelling {
+	pointer-events: none;
+}
+
 .tc-live-reorderable-ghost > * {
 	opacity: var(--tc-live-reorder-ghost-opacity,0.3);
 }

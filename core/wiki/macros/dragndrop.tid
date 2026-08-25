@@ -357,7 +357,7 @@ code-body: yes
 \function tf.lr.get-after-width() [<tf.lr.is-vertical>match[yes]then[100%]] :else[[50%]]
 \function tf.lr.get-after-height() [<tf.lr.is-vertical>match[yes]then[50%]] :else[[100%]]
 
-\function tf.lr.get-item-class() tc-live-reorderable [<tf.lr.is-ghost>match[yes]then[tc-live-reorderable-ghost]] [<tf.lr.is-drop-target>match[yes]then[tc-live-reorderable-drop-target]] [<class>] :and[join[ ]]
+\function tf.lr.get-item-class() [all[tiddlers+shadows]tag[$:/tags/ClassFilters/LiveReorderable]!is[draft]] :map:flat[subfilter{!!text}] [<tf.lr.is-ghost>match[yes]then[tc-live-reorderable-ghost]] [<tf.lr.is-drop-target>match[yes]then[tc-live-reorderable-drop-target]] [<class>] tc-live-reorderable  :and[join[ ]]
 
 \function tf.lr.get-preview() [<tf.lr.is-deferred>match[yes]then<tf.lr.is-dragging>match[yes]then<tf.lr.get-preview-tiddler>get[list]]
 \function tf.lr.get-animate-enable() [<animate>!is[blank]then<animate>] :else[dragging[]]
@@ -381,7 +381,7 @@ code-body: yes
 </$let>
 \end
 
-\procedure make-live-reorderable-list(list:"",filter:"",content:"",class:"",enable:"",acceptDrops:"no",tailHeight:"",group:"",transfer:"move",dropTargetInset:"",dropTargetOffset:"",emptyHeight:"",scale:"no",animate:"",dropActions:"",history:"",storyview:"",emptyMessage:"",duration:"",easing:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live")
+\procedure make-live-reorderable-list(list:"",filter:"",content:"",class:"",enable:"",acceptDrops:"no",tailHeight:"",group:"",transfer:"move",dropTargetInset:"",dropTargetOffset:"",emptyHeight:"",scale:"no",animate:"",dropActions:"",history:"",storyview:"",emptyMessage:"",duration:"",easing:"",dragState:"$:/state/tiddlywiki/live-reorder",direction:"vertical",itemDisplay:"flow-root",ghostOpacity:"0.3",styleZIndex:"501",commit:"live",enter:"no",exit:"no",travel:"no")
 \whitespace trim
 <$let dragState=<<tf.lr.get-drag-state>>>
 	<$transclude $variable="make-live-reorder-backstop"
@@ -399,6 +399,9 @@ code-body: yes
 		duration=<<tf.lr.get-duration>>
 		easing=<<tf.lr.get-easing>>
 		scale=<<scale>>
+		enter=<<enter>>
+		exit=<<exit>>
+		travel=<<travel>>
 	>
 		<$list filter="[enlist<tf.lr.get-preview>] :else[subfilter<filter>] :else[list<list>]" history=<<history>> storyview=<<storyview>> emptyMessage=<<emptyMessage>>>
 			<$transclude $variable="make-live-reorderable"

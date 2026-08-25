@@ -13,7 +13,9 @@ The widget does not decide where anything goes, and it creates no element of its
 
 An element takes part if it carries the attribute named by the <<.param key>> attribute, which is `data-animate-key` unless you choose another name. The value of that attribute is what tells the widget that an element before the change and an element after it are the same element, so the value has to stay the same across the move. A tiddler title is usually a good choice.
 
-Only elements that are present both before and after the change are animated. Something that has just appeared has nowhere to travel from, and something that has gone cannot travel at all, so arrivals and departures are left to whatever else deals with them, such as the StoryViews in the story river.
+Elements that are present both before and after the change are animated as a matter of course. Something that has just appeared has nowhere to travel from, and something that has gone cannot travel at all, so arrivals and departures are only animated if the widget is asked for them: see ''Comings and goings'' below. Left unasked, they are the business of whatever else deals with them, such as the StoryViews in the story river.
+
+The widget and a StoryView in the same list share the work rather than compete for it. A StoryView goes on playing what truly arrives and what truly goes, and the widget leaves those elements alone for as long as it is doing so. What the widget takes for itself is everything that is moving rather than going: an element being reordered within the list, and an element on its way to another of these widgets. A StoryView cannot tell either of those from a departure and would play it away, hiding the movement, so for those the StoryView stands aside, as it already does for everything while a drag is under way.
 
 ! Content and Attributes
 
@@ -26,7 +28,10 @@ The content of the AnimateLayoutWidget is rendered in place, without a wrapping 
 |duration |Optional length of the animation in milliseconds (defaults to 400). A duration of zero plays nothing |
 |easing |Optional [ext[CSS easing function|https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function]] (defaults to `ease-out`) |
 |reducedmotion |Optional value "ignore" to animate even for readers whose system asks for reduced motion (defaults to "respect", which plays nothing for them) |
-|scale |Optional value "yes" to also animate elements that have changed size (defaults to "no") |
+|scale |Optional value "yes" to also animate elements in the flow that have changed size, by scaling them with a transform (defaults to "no"). It has nothing to say about a travelling element, which is given its arrival size outright |
+|enter |Optional value "yes" to animate an element that has appeared where there was nothing before (defaults to "no") |
+|exit |Optional value "yes" to animate an element that has gone (defaults to "no") |
+|travel |Optional value "yes" to follow an element that has left another AnimateLayoutWidget and arrived in this one across the page (defaults to "no") |
 
 ! Attributes of the elements being animated
 
@@ -37,6 +42,20 @@ The content of the AnimateLayoutWidget is rendered in place, without a wrapping 
 <<.tip """A moving element is drawn away from the place the layout has given it, and the pointer follows what it sees rather than what the layout says. An element that has to respond to the pointer at a fixed place, such as a drop target, should therefore be marked with `data-animate-hold`.""">>
 
 While an element is travelling it carries the class `tc-animatelayout-moving`, which a stylesheet can use to say how something on its way somewhere should look. The core stylesheet uses it to stop a travelling element from responding to the pointer, since it is not where the layout says it is; elements marked with `data-animate-hold` go on responding.
+
+! Comings and goings
+
+A change can do more than move things about. Something can appear, something can go, and something can leave one AnimateLayoutWidget and turn up in another. None of the three is a journey between two places the widget can see, so each is asked for separately.
+
+With <<.param enter>>, an element that has appeared carries the class `tc-animatelayout-entering` for the length of the animation, and the stylesheet says how it comes in. Nothing else has to be arranged: whatever the new element pushes out of its way is moved aside by the ordinary means.
+
+With <<.param exit>>, an element that has gone is put back where it stood, out of the flow, so that what surrounded it has already closed over the space, and carries the class `tc-animatelayout-leaving` until the animation is over, at which point it is taken away for good. An element that turns out not to have gone after all, because a later change brought it back, is taken away at once.
+
+With <<.param travel>>, an element that has left one of these widgets and arrived in another is followed across the page. Neither widget sees more than half of that journey, so the two halves are put together after every widget has refreshed: the element that has arrived waits its turn out of sight while the one that set out is carried by the document itself, so that neither place it belongs to can clip it, and flies to meet it. It carries the class `tc-animatelayout-travelling` while it does so. Where nothing set out that can be flown, the arrival is animated where it landed.
+
+The element that has arrived is already laid out where it is going by the time the journey is played, so the size it will have there is read rather than guessed at, and the traveller grows or shrinks into it as it goes. That size is given as a width and a height rather than as a scaling transform, so the content of the traveller is laid out afresh at every size it passes through and arrives looking exactly as it will once it is there. A transform is what an element in the flow must be scaled by, since its layout box cannot be allowed to change under everything around it, but a traveller is out of the flow, where its size is nobody else's business. Where the two sizes are the same, which is the usual case for lists of a width, nothing is said about size at all.
+
+The length and easing of the entrance and the exit are handed to the stylesheet as the custom properties `--tc-animatelayout-enter-duration`, `--tc-animatelayout-enter-easing`, `--tc-animatelayout-exit-duration` and `--tc-animatelayout-exit-easing`, so that a stylesheet of your own follows the <<.param duration>> and <<.param easing>> given to the widget without having to be told them twice.
 
 ! Notes
 
@@ -66,3 +85,63 @@ Reverse the order
 </$animatelayout>
 
 </$let>
+
+!! Travelling between lists
+
+Each list below is a widget of its own, so an item moving from one to the other is a departure as far as the one is concerned and an arrival as far as the other is concerned, and neither sees the whole of it. With <<.param travel>> set to `yes` on both, the two halves are put together once both have refreshed, and the item is flown from the place it left to the place it has arrived at. Any number of these widgets can take part; there are two here.
+
+Click an item to send it to the other list.
+
+<$let
+	leftList="$:/temp/AnimateLayoutTravelDemo/left"
+	rightList="$:/temp/AnimateLayoutTravelDemo/right"
+	leftItems="[list<leftList>] :else[<leftList>!is[tiddler]then[One Two Three]enlist-input[]]"
+	rightItems="[list<rightList>] :else[<rightList>!is[tiddler]then[Four Five]enlist-input[]]"
+	itemStyle="padding:0.25em;margin-bottom:0.25em;border:1px solid #888;"
+>
+
+<$button>
+<$action-listops $tiddler=<<leftList>> $field="list" $filter="One Two Three"/>
+<$action-listops $tiddler=<<rightList>> $field="list" $filter="Four Five"/>
+Start again
+</$button>
+
+<div style="display:flex;gap:1em;align-items:flex-start;">
+
+<div style="flex:1;min-width:0;">
+
+<$animatelayout list=<<leftList>> travel="yes" duration="600" easing="ease-in-out">
+<$list filter="[subfilter<leftItems>]">
+<div data-animate-key=<<currentTiddler>> style=<<itemStyle>>>
+<$button class="tc-btn-invisible" style="width:100%;text-align:left;">
+<$action-listops $tiddler=<<leftList>> $field="list" $filter="[subfilter<leftItems>] -[<currentTiddler>]"/>
+<$action-listops $tiddler=<<rightList>> $field="list" $filter="[subfilter<rightItems>] [<currentTiddler>]"/>
+<$text text=<<currentTiddler>>/> &rarr;
+</$button>
+</div>
+</$list>
+</$animatelayout>
+
+</div>
+
+<div style="flex:1;min-width:0;">
+
+<$animatelayout list=<<rightList>> travel="yes" duration="600" easing="ease-in-out">
+<$list filter="[subfilter<rightItems>]">
+<div data-animate-key=<<currentTiddler>> style=<<itemStyle>>>
+<$button class="tc-btn-invisible" style="width:100%;text-align:left;">
+<$action-listops $tiddler=<<rightList>> $field="list" $filter="[subfilter<rightItems>] -[<currentTiddler>]"/>
+<$action-listops $tiddler=<<leftList>> $field="list" $filter="[subfilter<leftItems>] [<currentTiddler>]"/>
+&larr; <$text text=<<currentTiddler>>/>
+</$button>
+</div>
+</$list>
+</$animatelayout>
+
+</div>
+
+</div>
+
+</$let>
+
+<<.tip "A journey can only be played if both widgets are still the ones that were there before the change. An attribute that changes above them, such as a filtered transclusion whose value differs once the change has happened, makes the widget tree below it afresh, and an element that has been made afresh has nothing to travel from. The two variables above hold the text of a filter rather than its result, so that nothing above the widgets changes when the lists do.">>

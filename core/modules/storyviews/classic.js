@@ -31,14 +31,15 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 };
 
 ClassicStoryView.prototype.insert = function(widget) {
-	var duration = $tw.utils.getAnimationDuration();
-	// Don't animate while a drag is in progress
-	if(duration && !$tw.dragInProgress) {
-		var targetElement = widget.findFirstDomNode();
+	var duration = $tw.utils.getAnimationDuration(),
+		targetElement = widget.findFirstDomNode();
+	// Don't animate a movement that is already being animated
+	if(duration && !$tw.utils.isMovementAnimated(targetElement)) {
 		// Abandon if the list entry isn't a DOM element (it might be a text node)
 		if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 			return;
 		}
+		$tw.utils.markEntering(targetElement,duration);
 		if($tw.utils.isInColumnLayout(targetElement)) {
 			setTimeout(function() {
 				$tw.utils.removeStyle(targetElement,"transition");
@@ -84,12 +85,14 @@ ClassicStoryView.prototype.insert = function(widget) {
 };
 
 ClassicStoryView.prototype.remove = function(widget) {
-	var duration = $tw.utils.getAnimationDuration();
-	if(duration && !$tw.dragInProgress) {
-		var targetElement = widget.findFirstDomNode(),
-			removeElement = function() {
+	var duration = $tw.utils.getAnimationDuration(),
+		targetElement = widget.findFirstDomNode();
+	// Don't animate a movement that is already being animated
+	if(duration && !$tw.utils.isMovementAnimated(targetElement)) {
+		var removeElement = function() {
 				widget.removeChildDomNodes();
 			};
+		$tw.utils.markLeaving(targetElement);
 		// Blur the focus if it is within the descendents of the node we are removing
 		if($tw.utils.domContains(targetElement,targetElement.ownerDocument.activeElement)) {
 			targetElement.ownerDocument.activeElement.blur();

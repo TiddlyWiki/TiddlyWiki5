@@ -166,11 +166,12 @@ ZoominListView.prototype.remove = function(widget) {
 		removeElement();
 		return;
 	}
-	// Don't animate while a drag is in progress
-	if($tw.dragInProgress) {
+	// Don't animate a movement that is already being animated
+	if($tw.utils.isMovementAnimated(targetElement)) {
 		removeElement();
 		return;
 	}
+	$tw.utils.markLeaving(targetElement);
 	// Set up the tiddler that is being closed
 	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[

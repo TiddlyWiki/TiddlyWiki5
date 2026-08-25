@@ -811,6 +811,24 @@ exports.getAnimationDuration = function() {
 };
 
 /*
+Whether the movement of a given element is already being played by something else, so that a
+storyview should let the change happen without animating it a second time. A drag plays the
+movement of everything it carries, and an AnimateLayoutWidget plays that of an element that is
+moving rather than going: one being reordered within its list, or one on its way to another of
+those widgets. A storyview cannot tell either from a departure, and would play it away
+*/
+exports.isMovementAnimated = function(domNode) {
+	if($tw.dragInProgress) {
+		return true;
+	}
+	if(domNode && domNode.getAttribute && $tw.animateLayoutMoving) {
+		var key = domNode.getAttribute("data-animate-key");
+		return !!(key && $tw.animateLayoutMoving[key]);
+	}
+	return false;
+};
+
+/*
 Hash a string to a number
 Derived from http://stackoverflow.com/a/15710692
 */

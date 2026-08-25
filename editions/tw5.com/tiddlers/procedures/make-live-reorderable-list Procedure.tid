@@ -58,6 +58,9 @@ The procedure renders three things: the items themselves, an AnimateLayoutWidget
 |emptyMessage |Optional message to show when the list is empty, passed to the ListWidget |
 |animate |When the settling animation runs, as a value of "yes" or "no". It defaults to running only while a drag is under way, since that is when items move against one another. A list laid out in columns wants it at other times as well: adding or removing an item there sends the rest between the columns afresh, and the settling is what carries them, the story river asking for it whenever it is laid out as a masonry grid |
 |scale |Optional value "yes" to have an item that has changed size settle into its new size as well as its new place (defaults to "no"). It applies to an item already in the list whose size the change alters, which is not the same as an item arriving from elsewhere: see the AnimateLayoutWidget |
+|enter |Optional value "yes" to animate an item that has appeared in the list (defaults to "no"). Passed to the AnimateLayoutWidget |
+|exit |Optional value "yes" to animate an item that has gone from the list (defaults to "no"). Passed to the AnimateLayoutWidget |
+|travel |Optional value "yes" to follow an item that has left another list and arrived in this one across the page (defaults to "no"). Passed to the AnimateLayoutWidget |
 |duration |Optional length of the settling animation in milliseconds (defaults to {{$:/config/DragAndDrop/animation/duration}}) |
 |easing |Optional easing of the settling animation (defaults to the value of `$:/config/DragAndDrop/animation/easing`) |
 |direction |`vertical` (the default) if the items are stacked one above another, or `horizontal` if they sit side by side. It decides whether an item is split into a top and a bottom half or a left and a right one |

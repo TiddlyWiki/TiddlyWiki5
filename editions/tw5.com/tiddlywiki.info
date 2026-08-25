@@ -8,7 +8,9 @@
 		"tiddlywiki/menubar",
 		"tiddlywiki/railroad",
 		"tiddlywiki/tour",
-		"tiddlywiki/dom-to-image"
+		"tiddlywiki/dom-to-image",
+		"BurningTreeC/TiddlyFlex",
+		"resizer-refactor/resizer"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

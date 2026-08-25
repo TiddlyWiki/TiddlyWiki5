@@ -239,16 +239,25 @@ exports.holdColumnItemHeight = function(domNode,duration) {
 
 /*
 Take a node out of the flow where it stands, so that what surrounds it can close over the
-space at once while the node itself goes on being animated. Returns nothing if it cannot
+space at once while the node itself goes on being animated. Returns nothing if it cannot.
+The place to pin the node is taken from the node itself unless a geometry of
+{left,top,width,height} is passed in, which a caller that has already measured the node
+can use to put back one that has since left the document
 */
-exports.detachFromFlow = function(domNode) {
+exports.detachFromFlow = function(domNode,geometry) {
 	if(!domNode || !domNode.style) {
 		return;
 	}
-	var left = domNode.offsetLeft,
-		top = domNode.offsetTop,
-		width = domNode.offsetWidth,
-		height = domNode.offsetHeight;
+	geometry = geometry || {
+		left: domNode.offsetLeft,
+		top: domNode.offsetTop,
+		width: domNode.offsetWidth,
+		height: domNode.offsetHeight
+	};
+	var left = geometry.left,
+		top = geometry.top,
+		width = geometry.width,
+		height = geometry.height;
 	domNode.setAttribute("data-animate-detached","yes");
 	$tw.utils.setStyle(domNode,[
 		{width: width + "px"},
@@ -259,6 +268,33 @@ exports.detachFromFlow = function(domNode) {
 		{position: "absolute"},
 		{"z-index": "500"}
 	]);
+};
+
+/*
+Mark a node that has gone from the widget tree but is being kept on the page for as long as it
+takes to play it away, so that anything else reading the page knows to pass over it rather than
+take it for something that is still there
+*/
+exports.markLeaving = function(domNode) {
+	if(domNode && domNode.setAttribute) {
+		domNode.setAttribute("data-animate-leaving","yes");
+	}
+};
+
+/*
+Mark a node that a storyview has just brought in and is playing, for as long as that takes, so
+that anything else reading the page leaves it where the storyview is putting it
+*/
+exports.markEntering = function(domNode,duration) {
+	if(!domNode || !domNode.setAttribute) {
+		return;
+	}
+	domNode.setAttribute("data-animate-entering","yes");
+	setTimeout(function() {
+		if(domNode.removeAttribute) {
+			domNode.removeAttribute("data-animate-entering");
+		}
+	},duration);
 };
 
 /*
