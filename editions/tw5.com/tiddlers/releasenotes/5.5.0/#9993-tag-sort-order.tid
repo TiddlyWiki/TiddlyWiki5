@@ -3,10 +3,10 @@ change-type: feature
 created: 20260825015810091
 description: The tags on a tiddler keep the order you added them in, and tag order is configurable
 github-contributors: pmario
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/#TODO
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9993
 release: 5.5.0
 tags: $:/tags/ChangeNote
-title: $:/changenotes/5.5.0/#TODO
+title: $:/changenotes/5.5.0/#9993
 type: text/vnd.tiddlywiki
 
 * The tags shown on a tiddler keep the order you added them in, rather than being sorted alphabetically. Position can carry meaning. Eg: the first tag reads as the most important, and tags placed next to each other read as belonging together
