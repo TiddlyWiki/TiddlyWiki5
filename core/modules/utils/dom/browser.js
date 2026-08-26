@@ -146,10 +146,9 @@ exports.convertEventName = function(eventName) {
 };
 
 /*
-Whether the reader has asked their system for reduced motion. The query object is cached but
-its result is read afresh each time, so that changing the setting takes effect at once
+Whether the reader has asked for reduced motion. The query is cached, but its result is read
+afresh so that a change of setting takes effect at once
 */
-
 var reducedMotionQuery;
 
 exports.prefersReducedMotion = function() {

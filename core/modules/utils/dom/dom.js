@@ -154,8 +154,7 @@ exports.getPassword = function(name) {
 };
 
 /*
-Whether the node is laid out in columns, as the story river is when it is shown as a masonry
-grid
+The ancestor of a node that a column layout, such as the masonry story river, lays out
 */
 exports.getColumnLayoutItem = function(domNode) {
 	var view = domNode && domNode.ownerDocument && domNode.ownerDocument.defaultView;
@@ -219,8 +218,8 @@ exports.releaseColumnLayout = function(document) {
 };
 
 /*
-Hold the column item containing a node at its current height for the duration of an
-animation, so that the columns do not reflow around the node while it is still moving
+Hold the column item containing a node at its height, so the columns do not reflow around it
+while it is still moving
 */
 exports.holdColumnItemHeight = function(domNode,duration) {
 	var item = exports.getColumnLayoutItem(domNode);
@@ -238,11 +237,9 @@ exports.holdColumnItemHeight = function(domNode,duration) {
 };
 
 /*
-Take a node out of the flow where it stands, so that what surrounds it can close over the
-space at once while the node itself goes on being animated. Returns nothing if it cannot.
-The place to pin the node is taken from the node itself unless a geometry of
-{left,top,width,height} is passed in, which a caller that has already measured the node
-can use to put back one that has since left the document
+Take a node out of the flow where it stands, so that what surrounds it can close over the space
+while it goes on animating. Pass a {left,top,width,height} to put back one that has since left
+the document
 */
 exports.detachFromFlow = function(domNode,geometry) {
 	if(!domNode || !domNode.style) {
@@ -271,9 +268,8 @@ exports.detachFromFlow = function(domNode,geometry) {
 };
 
 /*
-Mark a node that has gone from the widget tree but is being kept on the page for as long as it
-takes to play it away, so that anything else reading the page knows to pass over it rather than
-take it for something that is still there
+Mark a node kept on the page only long enough to be played away, so that anything else reading
+the page passes over it
 */
 exports.markLeaving = function(domNode) {
 	if(domNode && domNode.setAttribute) {
@@ -282,8 +278,7 @@ exports.markLeaving = function(domNode) {
 };
 
 /*
-Mark a node that a storyview has just brought in and is playing, for as long as that takes, so
-that anything else reading the page leaves it where the storyview is putting it
+Mark a node a storyview is playing in, so that anything else leaves it where the storyview puts it
 */
 exports.markEntering = function(domNode,duration) {
 	if(!domNode || !domNode.setAttribute) {

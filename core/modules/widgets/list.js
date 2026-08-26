@@ -306,9 +306,8 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 		if(this.counterName) {
 			var mustRefreshOldLast = false;
 			var oldLength = this.children.length;
-			// Once the list itself has changed, the counter of every item after the change is
-			// wrong, so those items have to be made afresh. An item that has merely refreshed
-			// leaves the counters alone, and what follows it can be left as it stands
+			// After a change to the list itself every later item's counter is wrong, so those
+			// items have to be made afresh
 			var hasChanged = false;
 			// Cycle through the list and remove and re-insert the first item that has changed, and all the remaining items
 			for(t=0; t<this.list.length; t++) {

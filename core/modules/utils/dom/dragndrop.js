@@ -11,8 +11,7 @@ Browser data transfer utilities, used with the clipboard and drag and drop
 
 var DRAGGING_TITLE = "$:/state/dragging";
 
-// Each drag gets its own identity so that drag state left behind by an earlier drag
-// can be told apart from the state belonging to the drag that is running now
+// Each drag gets its own identity, so that state left behind by an earlier one can be told apart
 var dragCount = 0;
 
 function markDragInProgress(domNode,status) {
@@ -64,8 +63,7 @@ function installDragEndBackstop(domNode,widget,endActions,titles) {
 	}
 	var handler = function() {
 		doc.removeEventListener("pointerdown",handler,true);
-		// A dragend fired at a node that was re-rendered away during the drag reaches
-		// no listener, so the drag is still marked as running here. Finish it off
+		// A dragend at a node re-rendered away during the drag reaches no listener, so finish it here
 		if($tw.dragInProgress === domNode && endActions !== undefined && widget) {
 			try {
 				widget.invokeActionString(endActions,widget,null,{actionTiddler: titles});

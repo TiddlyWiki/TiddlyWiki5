@@ -63,7 +63,7 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	this.currentlyEntered = [];
 };
 
-// The second condition is to resolve a problem with Firefox whereby there is an erroneous dragenter event if the node being dragged is within the dropzone
+// The second condition works around Firefox raising a dragenter for the node being dragged itself
 DroppableWidget.prototype.isEntered = function() {
 	return !(this.currentlyEntered.length === 0 ||
 		(this.currentlyEntered.length === 1 && this.currentlyEntered[0] === $tw.dragInProgress));

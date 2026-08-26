@@ -3,9 +3,8 @@ title: $:/core/modules/widgets/animatelayout.js
 type: application/javascript
 module-type: widget
 
-Animates its children between layout positions. Where an element ends up is left to the
-browser; the difference between where it was and where it now sits is played back as a
-transform, which takes no part in layout
+Animates its children between layout positions: the browser decides where an element ends
+up, and the difference from where it was is played back as a transform
 
 \*/
 
@@ -13,16 +12,11 @@ transform, which takes no part in layout
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-/*
-An element can leave one of these widgets and arrive in another, and neither end sees more
-than half of that journey. The two halves are gathered up here as each widget refreshes,
-and are put together once every widget has had its turn
-*/
+// A journey between two of these widgets is seen half by each, so both halves are put together
+// once every widget has refreshed
 var departures = Object.create(null),
 	arrivals = [],
 	handoffScheduled = false,
-	// Every widget on the page, so that one losing an element can ask the others whether any of
-	// them is about to gain it
 	liveWidgets = [];
 
 function scheduleHandoff() {
@@ -30,8 +24,7 @@ function scheduleHandoff() {
 		return;
 	}
 	handoffScheduled = true;
-	// A microtask comes after the whole refresh, so that every widget has been heard from,
-	// and before the browser paints, so that nothing is ever drawn in the wrong place first
+	// After the whole refresh, so every widget has been heard from, but before the browser paints
 	Promise.resolve().then(playHandoff);
 }
 
@@ -74,16 +67,8 @@ AnimateLayoutWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-/*
-The elements this widget is about to play the movement of, which are the ones that are not
-really leaving the page: those staying in this list, wherever in it they end up, and those going
-to another of these widgets. A storyview cannot tell any of them from a departure, and would
-play them away, which both hides the movement and animates it twice over, so the storyviews are
-asked to stand aside for these alone. Everything else, an element that has truly arrived or
-truly gone, is left to the storyview. What is coming and going is read from the wiki rather than
-from the page, so that the answer is the same whichever widget asks it and whichever of them has
-already refreshed
-*/
+// The elements not really leaving the page, which a storyview would otherwise play away as
+// departures. Read from the wiki, so every widget gets the same answer whenever it asks
 AnimateLayoutWidget.prototype.getMovingKeys = function(previousPositions,changedTiddlers) {
 	var self = this,
 		keys = [];
@@ -95,9 +80,7 @@ AnimateLayoutWidget.prototype.getMovingKeys = function(previousPositions,changed
 		staying[title] = true;
 	});
 	$tw.utils.each(Object.keys(previousPositions),function(key) {
-		// One that is still here has at most been reordered, which this widget plays itself.
-		// The list widget makes such an element afresh rather than moving the one it has, so
-		// the storyview sees it go and come back and would play both
+		// Still in the list, so at most reordered, which this widget plays itself
 		if(staying[key]) {
 			keys.push(key);
 			return;
@@ -107,8 +90,7 @@ AnimateLayoutWidget.prototype.getMovingKeys = function(previousPositions,changed
 		}
 		for(var t = 0; t < liveWidgets.length; t++) {
 			var other = liveWidgets[t];
-			// The other list has to be one that has just changed. The same tiddler can sit in
-			// two lists at once, and one of them closing it says nothing about the other
+			// Only a list that has just changed is gaining it: a tiddler can sit in two at once
 			if(other !== self && other.animateTravel && other.animateList &&
 				changedTiddlers[other.animateList] &&
 				$tw.wiki.getTiddlerList(other.animateList).indexOf(key) !== -1) {
@@ -120,9 +102,6 @@ AnimateLayoutWidget.prototype.getMovingKeys = function(previousPositions,changed
 	return keys;
 };
 
-/*
-Say, or stop saying, that this widget is playing the movement of these elements
-*/
 AnimateLayoutWidget.prototype.setMovingKeys = function(keys,moving) {
 	if(keys.length === 0) {
 		return;
@@ -184,9 +163,7 @@ AnimateLayoutWidget.prototype.measure = function() {
 			var rect = node.getBoundingClientRect();
 			positions[key] = {left: rect.left, top: rect.top, width: rect.width, height: rect.height};
 			if(remember) {
-				// A node that goes leaves nothing behind to measure, so the place it stands in is
-				// taken down here, while it still stands in one. The layout has just been worked
-				// out for the rectangle above, so asking for the offsets as well costs nothing
+				// A node that goes leaves nothing to measure, so where it stands is taken down now
 				positions[key].node = node;
 				positions[key].parent = node.parentNode;
 				positions[key].nextSibling = node.nextSibling;
@@ -208,12 +185,10 @@ AnimateLayoutWidget.prototype.getHeldNodes = function(node) {
 	return nodes;
 };
 
-/*
-Work out the journey a node has made, or nothing if it has stayed where it was
-*/
+// The journey a node has made, or nothing if it has stayed where it was
 AnimateLayoutWidget.prototype.getMove = function(node,previous) {
 	var key = node.getAttribute(this.animateKey);
-	// A node a storyview is bringing in is being played already, and is left to it
+	// A node a storyview is bringing in is being played already
 	if(!key || !previous || node.getAttribute("data-animate-entering") === "yes") {
 		return null;
 	}
@@ -234,9 +209,7 @@ AnimateLayoutWidget.prototype.getMove = function(node,previous) {
 	return null;
 };
 
-/*
-Put a node back where it came from, without the browser being any the wiser
-*/
+// Put a node back where it came from, without the browser being any the wiser
 AnimateLayoutWidget.prototype.startMove = function(move) {
 	move.node.style.transition = "none";
 	move.node.style.transformOrigin = "0 0";
@@ -248,9 +221,7 @@ AnimateLayoutWidget.prototype.startMove = function(move) {
 	});
 };
 
-/*
-Let it travel from there to where it now sits
-*/
+// Let it travel from there to where it now sits
 AnimateLayoutWidget.prototype.endMove = function(move) {
 	var self = this;
 	move.node.style.transition = "transform " + this.animateDuration + "ms " + this.animateEasing;
@@ -270,8 +241,7 @@ AnimateLayoutWidget.prototype.play = function(previousPositions) {
 		return;
 	}
 	$tw.utils.each(nodes,function(node) {
-		// Only what this widget has been animating is put back: a node that a storyview has just
-		// set going is left to it, since clearing it here would stop it before it started
+		// Only clear what this widget set going, or a storyview's animation is cut short
 		if(node.classList && node.classList.contains("tc-animatelayout-moving")) {
 			node.style.transition = "";
 			node.style.transform = "";
@@ -299,11 +269,7 @@ AnimateLayoutWidget.prototype.play = function(previousPositions) {
 	});
 };
 
-/*
-Note what has come and gone in this refresh. Where an element has gone somewhere else on the
-page, the widget losing it and the widget gaining it each see only their own half, so both
-halves are handed over to be put together once every widget has refreshed
-*/
+// Note what has come and gone, handing travellers over to be paired up after every refresh
 AnimateLayoutWidget.prototype.playComingsAndGoings = function(previousPositions) {
 	var self = this,
 		present = Object.create(null);
@@ -311,7 +277,6 @@ AnimateLayoutWidget.prototype.playComingsAndGoings = function(previousPositions)
 		var key = node.getAttribute(self.animateKey);
 		if(key) {
 			present[key] = true;
-			// Something that is back is no longer on its way out
 			self.cancelExit(key);
 			if((self.animateTravel || self.animateEnter) && !previousPositions[key]) {
 				arrivals.push({widget: self, key: key, node: node});
@@ -324,8 +289,7 @@ AnimateLayoutWidget.prototype.playComingsAndGoings = function(previousPositions)
 			return;
 		}
 		if(self.animateTravel) {
-			// Hold the departure back until every widget has had its turn, in case one of them
-			// is where this is going
+			// Held back in case another widget is where this is going
 			departures[key] = {widget: self, previous: previous};
 			scheduleHandoff();
 		} else {
@@ -334,10 +298,8 @@ AnimateLayoutWidget.prototype.playComingsAndGoings = function(previousPositions)
 	});
 };
 
-/*
-Play an element that has gone for good. It is put back where it stood, out of the flow so that
-what surrounds it has already closed over the space, and a stylesheet says how it goes
-*/
+// Play an element gone for good, put back where it stood but out of the flow, so that what
+// surrounds it has already closed over the space
 AnimateLayoutWidget.prototype.playExit = function(key,previous) {
 	var self = this,
 		node = previous.node,
@@ -346,11 +308,10 @@ AnimateLayoutWidget.prototype.playExit = function(key,previous) {
 	if(!this.animateExit || !doc || !previous.offsets || !node.setAttribute) {
 		return;
 	}
-	// A node that is still on the page has moved somewhere else rather than gone
+	// Still on the page means it has moved rather than gone
 	if(doc.contains(node)) {
 		return;
 	}
-	// The place it stood in has to still be there for it to be put back into
 	if(!parent || !doc.contains(parent)) {
 		return;
 	}
@@ -361,7 +322,7 @@ AnimateLayoutWidget.prototype.playExit = function(key,previous) {
 		node.style.setProperty("--tc-animatelayout-exit-duration",this.animateDuration + "ms");
 		node.style.setProperty("--tc-animatelayout-exit-easing",this.animateEasing);
 	}
-	// The node has only just been put back, so it needs a layout of its own to depart from
+	// It has only just been put back, so it needs a layout of its own to depart from
 	$tw.utils.forceLayout(node);
 	if(node.classList) {
 		node.classList.add("tc-animatelayout-leaving");
@@ -375,9 +336,6 @@ AnimateLayoutWidget.prototype.playExit = function(key,previous) {
 	};
 };
 
-/*
-Take away a node that was on its way out, either because it has now gone or because it is back
-*/
 AnimateLayoutWidget.prototype.cancelExit = function(key) {
 	var leaving = this.leavingNodes && this.leavingNodes[key];
 	if(!leaving) {
@@ -390,34 +348,27 @@ AnimateLayoutWidget.prototype.cancelExit = function(key) {
 	}
 };
 
-/*
-Play an element that has arrived here from another widget. The element that has arrived waits
-its turn out of sight, while the one that set out flies across the page to meet it. The
-traveller is carried by the document itself, so that neither place it belongs to can clip it
-*/
+// Play an arrival from another widget: it waits out of sight while the element that set out
+// flies to meet it, carried by the document itself so that neither list can clip it
 AnimateLayoutWidget.prototype.playTravel = function(key,node,previous) {
 	var self = this,
 		ghost = previous.node,
 		doc = node.ownerDocument;
-	// Without the element that set out there is nothing to fly, so the arrival is played out
-	// where it has landed, which is all that can be done anyway
+	// Without the element that set out there is nothing to fly, so play it where it landed
 	if(!ghost || !doc || !doc.body || doc.contains(ghost) || !ghost.style) {
 		if(!this.playArrival(node,previous)) {
 			this.playEnter(key,node);
 		}
 		return;
 	}
-	// The element that has arrived is already laid out where it is going, so the size it will
-	// have there is there to be read rather than guessed at
 	var rect = node.getBoundingClientRect(),
 		deltaX = rect.left - previous.left,
 		deltaY = rect.top - previous.top,
 		resizes = Math.abs(rect.width - previous.width) >= 0.5 || Math.abs(rect.height - previous.height) >= 0.5,
 		transition = "transform " + this.animateDuration + "ms " + this.animateEasing;
 	if(resizes) {
-		// A traveller is out of the flow, where its size is nobody else's business, so it is
-		// given the width and height it is going to have rather than being scaled into them.
-		// Its content is laid out at each size it passes through, as it will be on arrival
+		// Out of the flow, so it is given its arrival size rather than scaled into it, which lays
+		// out its content at every size it passes through
 		transition += ", width " + this.animateDuration + "ms " + this.animateEasing +
 			", height " + this.animateDuration + "ms " + this.animateEasing;
 	}
@@ -461,10 +412,7 @@ AnimateLayoutWidget.prototype.playTravel = function(key,node,previous) {
 	};
 };
 
-/*
-Play an element that has arrived here without anything to fly in with, from where it was to
-where it now sits. Returns whether there was a journey to play at all
-*/
+// Play an arrival with nothing to fly in with, returning whether there was a journey at all
 AnimateLayoutWidget.prototype.playArrival = function(node,previous) {
 	var move = this.getMove(node,previous);
 	if(!move) {
@@ -476,12 +424,7 @@ AnimateLayoutWidget.prototype.playArrival = function(node,previous) {
 	return true;
 };
 
-/*
-Play an element that has appeared here, having been nowhere before. There is no journey to make,
-so the element is only marked for as long as it is coming in, and a stylesheet says how it
-arrives. What was already here is moved aside by the ordinary means, so an entrance never has to
-concern itself with anything but the element making it
-*/
+// Play an element that was nowhere before: no journey, just a mark for a stylesheet to act on
 AnimateLayoutWidget.prototype.playEnter = function(key,node) {
 	var self = this;
 	if(!this.animateEnter || !node.classList || !node.style) {
@@ -501,9 +444,6 @@ AnimateLayoutWidget.prototype.playEnter = function(key,node) {
 	};
 };
 
-/*
-Let go of an element that has finished coming in
-*/
 AnimateLayoutWidget.prototype.cancelEnter = function(key) {
 	var entering = this.enteringNodes && this.enteringNodes[key];
 	if(!entering) {
@@ -520,9 +460,7 @@ AnimateLayoutWidget.prototype.cancelEnter = function(key) {
 	}
 };
 
-/*
-Take away a traveller that has arrived, and let what it was carrying be seen again
-*/
+// Take away a traveller that has arrived, and let what it was carrying be seen again
 AnimateLayoutWidget.prototype.finishTravel = function(key) {
 	var travelling = this.travellingNodes && this.travellingNodes[key];
 	if(!travelling) {

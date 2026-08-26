@@ -811,11 +811,8 @@ exports.getAnimationDuration = function() {
 };
 
 /*
-Whether the movement of a given element is already being played by something else, so that a
-storyview should let the change happen without animating it a second time. A drag plays the
-movement of everything it carries, and an AnimateLayoutWidget plays that of an element that is
-moving rather than going: one being reordered within its list, or one on its way to another of
-those widgets. A storyview cannot tell either from a departure, and would play it away
+Whether a drag or an AnimateLayoutWidget is already playing this element's movement, which a
+storyview cannot tell from a departure and would otherwise play away a second time
 */
 exports.isMovementAnimated = function(domNode) {
 	if($tw.dragInProgress) {
