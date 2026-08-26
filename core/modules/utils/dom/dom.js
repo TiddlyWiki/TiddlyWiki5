@@ -346,7 +346,9 @@ exports.addEventListeners = function(domNode,events) {
 Get the computed styles applied to an element as an array of strings of individual CSS properties
 */
 exports.getComputedStyles = function(domNode) {
-	var textAreaStyles = window.getComputedStyle(domNode,null),
+	// Nodes within an iframe are styled by the view of their own document
+	var view = (domNode.ownerDocument && domNode.ownerDocument.defaultView) || window,
+		textAreaStyles = view.getComputedStyle(domNode,null),
 		styleDefs = [],
 		name;
 	for(var t=0; t<textAreaStyles.length; t++) {
