@@ -1,9 +1,14 @@
 caption: animatelayout
 created: 20260818103749000
-modified: 20260818103749000
+modified: 20260826115402948
 tags: Widgets
 title: AnimateLayoutWidget
 type: text/vnd.tiddlywiki
+
+\function grid.cell() [[$:/temp/AnimateLayoutGridDemo/]addsuffix<currentTiddler>]
+\function grid.pill() [list<grid.cell>] :else[<grid.cell>!is[tiddler]then<currentTiddler>!match[36]]
+\function grid.empty() [range[1,36]] :filter[<grid.pill>is[blank]] +[first[]] :map[<grid.cell>]
+\function grid.duration() [{$:/temp/AnimateLayoutGridDemo/duration}!is[blank]] :else[[500]]
 
 <<.from-version "5.5.0">> The AnimateLayoutWidget makes movement visible. When its children change places, each one slides from where it was to where it now sits instead of jumping there.
 
@@ -145,3 +150,36 @@ Start again
 </$let>
 
 <<.tip "A journey can only be played if both widgets are still the ones that were there before the change. An attribute that changes above them, such as a filtered transclusion whose value differs once the change has happened, makes the widget tree below it afresh, and an element that has been made afresh has nothing to travel from. The two variables above hold the text of a filter rather than its result, so that nothing above the widgets changes when the lists do.">>
+
+!! A grid of places
+
+Every cell of the grid below is a widget of its own, holding a list that holds one pill or none, and one cell is empty. Clicking a pill takes it out of the cell it is in and puts it in the empty one, which is a departure as far as one cell is concerned and an arrival as far as the other is, so with <<.param travel>> given to every cell the pill is flown across the grid to the place it now belongs to.
+
+<$button>
+<$list filter="[range[1,36]] :map[<grid.cell>]">
+<$action-deletetiddler $tiddler=<<currentTiddler>>/>
+</$list>
+Start again
+</$button>
+
+The flight takes <$edit-text tiddler="$:/temp/AnimateLayoutGridDemo/duration" tag="input" type="number" default="500" size="5"/> milliseconds. The widget reads its <<.param duration>> again on every refresh, so a new one is used by the very next flight.
+
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:0.4em;max-width:26em;">
+<$list filter="[range[1,36]]">
+<$let gridCell=<<grid.cell>>>
+<div style="display:flex;align-items:center;justify-content:center;min-height:2.4em;border:1px dashed #bbb;border-radius:4px;">
+<$animatelayout list=<<gridCell>> travel="yes" duration=<<grid.duration>> easing="ease-in-out">
+<$list filter="[<grid.pill>!is[blank]]">
+<div data-animate-key=<<currentTiddler>>>
+<$button class="tc-btn-invisible" style="display:inline-block;padding:0 0.7em;line-height:1.9;border-radius:1em;color:#fff;background:#5778d8;">
+<$action-setfield $tiddler=<<grid.empty>> list=<<currentTiddler>>/>
+<$action-setfield $tiddler=<<gridCell>> list=""/>
+<$text text=<<currentTiddler>>/>
+</$button>
+</div>
+</$list>
+</$animatelayout>
+</div>
+</$let>
+</$list>
+</div>
