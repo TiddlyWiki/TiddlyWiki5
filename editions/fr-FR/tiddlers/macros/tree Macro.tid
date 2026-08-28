@@ -1,0 +1,23 @@
+caption: tree
+created: 20191001170000000
+modified: 20191001170000000
+fr-title: macro arborescence
+tags: Macros [[Core Macros]]
+title: tree Macro
+type: text/vnd.tiddlywiki
+
+~TiddlyWiki fournit deux [[macros|Macros]] qui affichent une arborescence à partir d'un préfixe et d'un séparateur à l'intérieur des titres
+
+;<<.var tree>>
+: Une arborescence simple qui sépare les //dossiers// des tiddlers.
+;<<.var tree-compact>>
+: La même que ci-dessus, sauf que si un //dossier// est aussi un tiddler, il n'apparaitra qu'une fois dans l'arborescence: Comme un dossier avec un lien vers le tiddler. On ouvre le dossier en cliquant sur l'icône et par sur le titre (qui renvoie vers le tiddler)
+
+!! Paramètres
+
+;prefix
+: Le préfixe à partir duquel on génère l'arborescence, par défaut `$:/`
+;separator
+: Le séparateur entre les différentes parties du titre, par défaut `/`
+
+<<.macro-examples "tree">>
