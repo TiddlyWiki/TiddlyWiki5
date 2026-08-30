@@ -1,0 +1,27 @@
+caption: {{$:/language/Search/Variables/Caption}}
+created: 20240215233810357
+list-before: $:/core/ui/AdvancedSearch/Filter
+modified: 20240429173634149
+tags: $:/tags/AdvancedSearch
+title: $:/core/ui/AdvancedSearch/Variables
+type: text/vnd.tiddlywiki
+
+\define set-next-input-tab(beforeafter:"after")
+<!-- TODO move stateTitle to field  -->
+<$macrocall $name="change-input-tab"
+	stateTitle="$:/state/tab--1498284803"
+	tag="$:/tags/AdvancedSearch"
+	beforeafter="$beforeafter$"
+	defaultState="$:/core/ui/AdvancedSearch/System"
+	actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
+\end
+
+{{$:/language/Search/Variables/Hint}}
+
+<div class="tc-search tc-advanced-search">
+<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
+	<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
+		<<search-variables>>
+	</$keyboard>
+</$keyboard>
+</div>
