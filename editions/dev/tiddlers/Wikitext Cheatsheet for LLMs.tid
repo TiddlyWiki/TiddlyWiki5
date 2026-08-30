@@ -1,0 +1,316 @@
+created: 20260413181856662
+modified: 20260413184331927
+tags: doc dev [[Wikitext EBNF]]
+title: Wikitext Cheatsheet for LLMs
+type: text/vnd.tiddlywiki
+
+!! TiddlyWiki Wikitext — LLM Cheatsheet
+
+This is a condensed syntax reference designed to be included in LLM system prompts or tool context. It covers the most commonly needed wikitext constructs with correct syntax and common mistakes to avoid.
+
+!! Key Differences from Markdown
+
+TiddlyWiki wikitext is ''not'' Markdown. These are the most common mistakes LLMs make:
+
+|!Want |!Wrong (Markdown) |!Correct (Wikitext) |h
+|Bold |`**bold**` |`''bold''` (two single-quotes) |
+|Italic |`*italic*` |`//italic//` |
+|Strikethrough |`~~text~~` |`~~text~~` (same!) |
+|Link |`[text](url)` |`[[text|url]]` |
+|External link |`[text](https://...)` |`[ext[text|https://...]]` |
+|Image |`![alt](src)` |`[img[alt|src]]` |
+|Heading |`# Heading` |`! Heading` |
+|Bullet list |`- item` |`* item` |
+|Numbered list |`1. item` |`# item` |
+|Code inline |`` `code` `` |`` `code` `` (same!) |
+|Code block |triple-backtick fencing |triple-backtick fencing (same!) |
+|Horizontal rule |`---` |`---` (same!) |
+
+!! Pragmas (top of tiddler only)
+
+Pragmas must appear at the very start of the tiddler, before any content.
+
+```
+\procedure name(param1, param2:"default")
+body text with <<param1>> references
+\end
+
+\function .myfilter(x) [<x>addprefix[hello ]]
+
+\widget $my.widget(content)
+<div class="wrapper"><<content>></div>
+\end
+
+\import [[$:/core/ui/PageMacros]]
+\parameters(title:"Default", color:"blue")
+\whitespace trim
+\parsermode inline
+\rules except wikilink
+```
+
+IMPORTANT: Use `\procedure` not `\define`. `\define` is deprecated.
+
+!! Text Formatting
+
+```
+''bold''                  → <strong>
+//italic//                → <em>
+~~strikethrough~~         → <s>
+^^superscript^^           → <sup>
+,,subscript,,             → <sub>
+__underscore__            → <u>
+@@color:red;styled@@      → <span style="color:red;">
+@@.myclass content@@      → <span class="myclass">
+```
+
+!! Links
+
+```
+[[Tiddler Title]]                   internal link
+[[Display Text|Tiddler Title]]      internal link with label
+[ext[https://example.com]]          external link
+[ext[Click here|https://example.com]]  external link with label
+[img[tooltip|image-source]]         image
+[img width=200 [image-source]]      image with attributes
+CamelCaseWords                      auto-link (suppress with ~CamelCase)
+$:/system/tiddler                   auto-link to system tiddler
+```
+
+!! Headings
+
+```
+! Heading 1
+!! Heading 2
+!!! Heading 3
+!!!! Heading 4
+!!!!! Heading 5
+!!!!!! Heading 6
+!.css-class Heading with class
+```
+
+!! Lists
+
+```
+* Bullet item
+** Nested bullet
+# Numbered item
+## Nested numbered
+#* Mixed nesting (numbered > bullet)
+; Definition term
+: Definition description
+> Blockquote line
+```
+
+!! Tables
+
+```
+|!Header 1|!Header 2|h
+|Cell A1|Cell A2|
+|Cell B1|Cell B2|
+|Footer|Footer|f
+|Caption text|c
+|table-class|k
+```
+
+Alignment: `| left|`, `|right |`, `| center |`. Header cells use `!` after `|`.
+
+!! Code
+
+Inline code uses single or double backticks: <code>&#96;code&#96;</code> or <code>&#96;&#96;code with &#96; inside&#96;&#96;</code>.
+
+Block code uses triple-backtick fencing with an optional language identifier on the opening line. The closing triple-backtick must be on its own line. Content inside is not parsed as wikitext.
+
+!! Transclusion
+
+```
+{{tiddler-title}}                   include tiddler content
+{{tiddler!!field}}                  include a field value
+{{tiddler##index}}                  include a data index
+{{tiddler||template}}               render through a template
+{{{[tag[docs]]}}}                   filtered transclusion
+{{{[tag[docs]]||template}}}         filtered with template
+```
+
+!! Macro/Procedure Calls
+
+```
+<<myproc>>                          no parameters
+<<myproc "value 1" param2:value2>>  positional and named params
+<<myproc param:"quoted value">>     old-style named (colon syntax)
+<<myproc param:[[bracket value]]>>  old-style bracket-quoted
+<<myproc param="text">>             new-style named (= syntax)
+<<myproc param=<<var>>>>            variable value
+<<myproc param={{tid!!field}}>>     indirect value
+<<myproc param={{{[filter]}}}>>     filtered value
+```
+
+!! Variable/Filter Display
+
+```
+((variable-name))                   display variable value
+(((filter-expression)))             display filter result
+((variable||, ))                    with custom separator
+```
+
+!! Widgets (HTML-like)
+
+```
+<$list filter="[tag[doc]]" variable="item">
+  <<item>>
+</$list>
+
+<$set name="myvar" value="hello">
+  <<myvar>>
+</$set>
+
+<$text text="literal text"/>
+
+<$reveal type="match" state="$:/state/show" text="yes">
+  Revealed content
+</$reveal>
+```
+
+!!! Attribute Value Forms (7 types)
+
+```
+attr="string value"                 string (also: 'single' [[bracket]] """triple""")
+attr={{{[filter]}}}                 filtered (runtime)
+attr={{tiddler!!field}}             indirect (runtime lookup)
+attr=<<variable>>                   variable/macro
+attr=((varname))                    MVV reference
+attr=`text with $(var)$ subst`      substituted
+attr                                boolean (true)
+```
+
+!! Conditionals
+
+```
+<%if [<myVar>match[yes]]%>
+Shown when true.
+<%elseif [<myVar>match[maybe]]%>
+Alternative.
+<%else%>
+Fallback.
+<%endif%>
+```
+
+!! Filter Expressions (mini-language)
+
+Filters appear inside `{{{ }}}`, widget attributes, and `\import`.
+
+```
+[tag[docs]]                         tiddlers tagged "docs"
+[tag[docs]sort[title]]              chained operators
+[tag[docs]] [tag[help]]             union (OR)
+[tag[docs]] +[sort[title]]          pipe through (AND)
+[tag[docs]] -[tag[draft]]           except
+[tag[docs]] ~[[FallbackTiddler]]    else (if previous empty)
+[tag[docs]] :filter[get[text]length[]compare:number:gt[100]]
+                                    named run prefix
+```
+
+!!! Operator syntax
+
+```
+[operator[literal]]                 literal parameter
+[operator{tiddler!!field}]          indirect parameter
+[operator<variable>]                variable parameter
+[!operator[literal]]                negated
+[operator:suffix[literal]]          with suffix
+```
+
+!! Quote Block
+
+```
+<<<
+Quoted text here.
+<<<
+
+<<<.citation
+With a class.
+<<< Attribution
+```
+
+!! Style Block
+
+```
+@@background-color:#ffd;color:#333;
+Styled paragraph.
+@@
+
+@@.warning
+Paragraph with CSS class.
+@@
+```
+
+!! Typed Block
+
+```
+$$$text/html
+<b>Raw HTML</b>
+$$$
+
+$$$.svg
+<svg>...</svg>
+$$$
+```
+
+!! Hard Line Breaks
+
+```
+"""
+Line one
+Line two
+Line three
+"""
+```
+
+Each newline becomes `<br>`.
+
+!! Comments
+
+```
+<!-- This comment is not rendered -->
+```
+
+!! Common Patterns
+
+!!! Conditional class on a widget
+
+```
+<div class={{{ [{!!status}match[active]then[highlight]] }}}>
+```
+
+!!! List with template
+
+```
+<$list filter="[tag[task]!has[done]]" template="TaskTemplate"/>
+```
+
+!!! Transclude with parameters
+
+```
+{{MyTemplate||$:/templates/card|param1|param2}}
+```
+
+!!! Setting and using a variable
+
+```
+<$let greeting="Hello" name=<<currentTiddler>>>
+  <<greeting>>, <<name>>!
+</$let>
+```
+
+!! Things to Never Do
+
+* For new code, never use `\define` — use `\procedure` instead
+* Never use Markdown syntax (`**bold**`, `[text](url)`, `# heading`) — it will not work
+* Never use `<script>` tags — use widgets instead
+* Never assume HTML entities work everywhere — use `&amp;` `&lt;` `&gt;` only where needed
+* Never put block-level content on the same line as an opening widget tag — use a blank line after `>`
+* Never use `\whitespace trim` for content — only for code or templates
+* In `\whitespace trim` templates, use `<$text text=" "/>` for explicit spaces, or use the built-in gap classes:
+** `tc-tiny-gap` / `tc-tiny-gap-left` / `tc-tiny-gap-right` — 0.25em
+** `tc-small-gap` / `tc-small-gap-left` / `tc-small-gap-right` — 0.5em
+** `tc-big-gap` / `tc-big-gap-left` / `tc-big-gap-right` — 1em
+** Example: `<span class="tc-small-gap-right"/>` inserts a 0.5em right margin

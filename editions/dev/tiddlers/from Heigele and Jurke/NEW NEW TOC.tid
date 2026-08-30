@@ -1,7 +1,7 @@
 caption: Table of Contents
 created: 20140715074724076
 list-before: 
-modified: 20140717182928525
+modified: 20260413152101340
 tags: $:/tags/SideBar
 title: NEW NEW TOC
 
@@ -60,6 +60,15 @@ $body$
 ####[[Selective Update]]
 ###[[Transclusion and TextReference]]
 ###[[RootWidget and Rendering Startup]]
+">>
+#[[Wikitext EBNF]]
+## <<toc-heading "Wikitext EBNF" "
+##[[EBNF - Pragmas]]
+##[[EBNF - Block Rules]]
+##[[EBNF - Inline Rules]]
+##[[EBNF - Transclusion and Macros]]
+##[[EBNF - Widgets and Attributes]]
+##[[EBNF - Filter Expressions]]
 ">>
 #[[Conclusion]]
 </div>

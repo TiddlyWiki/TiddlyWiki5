@@ -1,0 +1,249 @@
+created: 20260413142454673
+modified: 20260413142454673
+tags: doc dev [[Wikitext EBNF]]
+title: EBNF - Transclusion and Macros
+
+This tiddler documents the EBNF grammar for transclusion, filtered transclusion, macro calls, and multi-valued variable (MVV) display syntax, as derived from the parser source code.
+
+!! Transclusion
+
+Both block and inline forms exist. The block form requires the `{{...}}` to be on its own line (followed by a newline or end of input). The inline form appears within text runs.
+
+Five patterns are supported:
+
+# ''Basic transclusion'' -- `{{tiddler-title}}` includes another tiddler's content
+# ''Field transclusion'' -- `{{tiddler!!field}}` includes a specific field value
+# ''Index transclusion'' -- `{{tiddler##index}}` includes a data tiddler index
+# ''Template transclusion'' -- `{{tiddler||template}}` renders the tiddler through a template
+# ''Parameterised transclusion'' -- `{{tiddler||template|param1|param2}}` renders through a template, passing positional parameters
+
+The underlying regex from `transcludeblock.js` / `transcludeinline.js` is:
+
+```
+/\{\{([^\{\}\|]*)(?:\|\|([^\|\{\}]+))?(?:\|([^\{\}]+))?\}\}/
+```
+
+EBNF:
+
+```
+Transclusion     ::= '{{' TranscludeSpec '}}'
+TranscludeSpec   ::= TiddlerRef? ('||' TemplateRef)? ('|' ParamValue)*
+TiddlerRef       ::= Title ('!!' Field | '##' Index)?
+Title            ::= [^{}|]*
+TemplateRef      ::= [^|{}]+
+ParamValue       ::= [^{}]+           /* split on '|' at parse time */
+```
+
+Note: the tiddler reference is parsed by `$tw.utils.parseTextReference()`, which splits on `!!` for field access and `##` for index access. Parameters are split on `|` and assigned positional names `"0"`, `"1"`, etc.
+
+!! Filtered Transclusion
+
+Filtered transclusion uses triple braces and produces a `<$list>` widget. Both block and inline forms exist, with the same block-vs-inline rule (must be alone on a line for block mode).
+
+Four patterns are supported:
+
+# ''Basic'' -- `{{{[filter]}}}` transclude all filter results
+# ''With tooltip'' -- `{{{[filter]|tooltip}}}` adds a tooltip
+# ''With template'' -- `{{{[filter]||template}}}` renders each result through a template
+# ''With style/classes'' -- `{{{[filter]}}width:40;height:50;}.class1.class2` adds inline styles and CSS classes
+
+All four can be combined: `{{{[filter]|tooltip||template}}styles}.classes`
+
+The underlying regex from `filteredtranscludeblock.js` / `filteredtranscludeinline.js` is:
+
+```
+/\{\{\{([^\|]+?)(?:\|([^\|\{\}]+))?(?:\|\|([^\|\{\}]+))?\}\}([^\}]*)\}(?:\.(\S+))?/
+```
+
+EBNF:
+
+```
+FilteredTransclusion ::= '{{{' FilterExpr '}}}' StyleSuffix?
+                       | '{{{' FilterExpr '|' Tooltip '}}}' StyleSuffix?
+                       | '{{{' FilterExpr '||' TemplateRef '}}}' StyleSuffix?
+                       | '{{{' FilterExpr '|' Tooltip '||' TemplateRef '}}}' StyleSuffix?
+FilterExpr           ::= [^|]+?          /* non-greedy, no pipe chars */
+Tooltip              ::= [^|{}]+
+TemplateRef          ::= [^|{}]+
+StyleSuffix          ::= StyleDefs? ('.' ClassName)*
+StyleDefs            ::= [^}]*           /* between last }} and } */
+ClassName            ::= \S+
+```
+
+Note: the style portion sits between the closing `}}` and the final `}`. Classes are dot-separated after the closing `}`. The regex captures groups are: (1) filter, (2) tooltip, (3) template, (4) style string, (5) dot-separated classes.
+
+!! Macro Calls
+
+Both block and inline forms use `<<macroname ...>>`. The block form requires the `<<...>>` to be alone on its own line. Macro calls are parsed by `$tw.utils.parseMacroInvocationAsTransclusion()` in `parseutils.js`, which produces a `transclude` widget node with a `$variable` attribute.
+
+Patterns:
+
+# ''Basic'' -- `<<macroname>>` calls a macro with no parameters
+# ''With positional params'' -- `<<macroname param1 "param 2">>` passes unnamed parameters
+# ''With named params'' -- `<<macroname name:value>>` passes named parameters
+# ''Mixed'' -- `<<macroname positional name:value>>` positional and named can be mixed
+
+Five quoting styles are supported for parameter values:
+
+* Unquoted -- `value` (no spaces, no `>>`)
+* Double-quoted -- `"value with spaces"`
+* Single-quoted -- `'value with spaces'`
+* Bracket-quoted -- `[[value with spaces]]`
+* Triple-double-quoted -- `"""value with any content"""`
+
+The parameter regex from `parseMacroParameter()` in `parseutils.js` is:
+
+```
+/(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[((?:[^\]]|\](?!\]))*)?\]\]|((?:(?:>(?!>))|[^\s>"'])+)))/
+```
+
+EBNF:
+
+```
+MacroCall        ::= '<<' MacroName (SP MacroParam)* SP? '>>'
+MacroName        ::= [^\s>"'=:]+
+MacroParam       ::= (ParamName ':')? ParamValue
+ParamName        ::= [A-Za-z0-9_-]+
+ParamValue       ::= TripleQuoted | DoubleQuoted | SingleQuoted | BracketQuoted | Unquoted
+TripleQuoted     ::= '"""' .* '"""'
+DoubleQuoted     ::= '"' [^"]* '"'
+SingleQuoted     ::= "'" [^']* "'"
+BracketQuoted    ::= '[[' ( [^\]] | ']'(?!']') )* ']]'
+Unquoted         ::= ( '>'^('>') | [^\s>"'] )+
+SP               ::= [ \t]+
+```
+
+Note: when the `=` separator is used (new-style), additional value types are supported: filtered values `{{{filter}}}`, indirect values `{{textRef}}`, and substituted values using backticks. These extended forms are available through `parseMacroParameterAsAttribute()` which is the function used by `parseMacroInvocationAsTransclusion()`.
+
+!! Macro Definitions (pragma)
+
+Macro definitions use the `\define` pragma (deprecated; prefer `\procedure`):
+
+```
+\define macroname(param1, param2:defaultvalue)
+multiline body with $param1$ substitution markers
+\end macroname
+```
+
+Or single-line form:
+
+```
+\define macroname(param1) single line body
+```
+
+The regex from `macrodef.js` is:
+
+```
+/\\define\s+([^(\s]+)\(\s*([^)]*)\)(\s*\r?\n)?/
+```
+
+EBNF:
+
+```
+MacroDef         ::= '\define' SP MacroName '(' ParamList? ')' ( SP? EOL Body '\end' MacroName?
+                                                                | SP SingleLineBody EOL )
+ParamList        ::= ParamDecl (',' ParamDecl)*
+ParamDecl        ::= ParamName (':' DefaultValue)?
+DefaultValue     ::= TripleQuoted | DoubleQuoted | SingleQuoted | BracketQuoted | UnquotedDefault
+UnquotedDefault  ::= [^"'\s]+
+Body             ::= .*                /* terminated by \end */
+SingleLineBody   ::= [^\n]*
+```
+
+!! MVV Display (inline only)
+
+The multi-valued variable display syntax provides a concise way to display variable values or filter results inline. Unlike the other constructs documented here, MVV display is //inline only// -- there is no block form.
+
+Four patterns are supported:
+
+# ''Variable display'' -- `((varname))` displays the variable's value
+# ''Variable with separator'' -- `((varname||separator))` joins multiple values with a custom separator
+# ''Filter display'' -- `(((filter-expression)))` displays filter results
+# ''Filter with separator'' -- `(((filter-expression||separator)))` joins filter results with a custom separator
+
+The default separator is `", "` (comma followed by space).
+
+The regexes from `mvvdisplayinline.js` are:
+
+* Variable mode: `/^\(\(([^()|]+?)(?:\|\|([^)]*))\)\)/`
+* Filter mode: `/^\(\(\(([\s\S]+?)\)\)\)/` with inner `||` splitting for the separator
+
+EBNF:
+
+```
+MVVDisplay       ::= MVVVariable | MVVFilter
+MVVVariable      ::= '((' VarName ('||' Separator)? '))'
+MVVFilter        ::= '(((' FilterExpr ('||' Separator)? ')))'
+VarName          ::= [^()|]+?          /* non-greedy */
+Separator        ::= [^)]*             /* defaults to ", " if omitted */
+FilterExpr       ::= [\s\S]+?          /* non-greedy, terminated by ))) */
+```
+
+At runtime, variable display is compiled to the filter `[(<varname>)join[<sep>]]` and filter display appends `+[join[<sep>]]` to the user's filter. The result is rendered via a `<$text>` widget with a filtered `text` attribute.
+
+!! Block vs Inline Distinction
+
+Transclusion, filtered transclusion, and macro calls all have ''both'' block and inline parser rules. The distinction matters for how the output is rendered:
+
+* ''Block form'' -- The construct must appear alone on its own line: nothing before `{{`, `{{{`, or `<<` on that line, and immediately followed by a newline or end of input. Block-level nodes set `isBlock: true` on the parse tree node, which causes the widget to render in block mode (producing `<div>` wrappers rather than `<span>`).
+
+* ''Inline form'' -- The construct appears within a run of inline text. No `isBlock` flag is set, and the output is rendered inline (within `<span>` or `<p>` elements).
+
+The block regex variants append `(?:\r?\n|$)` to enforce the end-of-line requirement. The inline variants omit this.
+
+MVV display `((...))` is the exception: it exists only as an inline rule. There is no block-level variant.
+
+!! Combined EBNF
+
+```
+(* === Transclusion === *)
+Transclusion       ::= '{{' TranscludeSpec '}}'
+TranscludeSpec     ::= TiddlerRef? ('||' TemplateRef)? ('|' ParamValue)*
+TiddlerRef         ::= Title ('!!' Field | '##' Index)?
+Title              ::= [^{}|]*
+TemplateRef        ::= [^|{}]+
+
+(* === Filtered Transclusion === *)
+FilteredTransclusion ::= '{{{' FilterExpr Tooltip? Template? '}}}' StyleSuffix?
+Tooltip              ::= '|' [^|{}]+
+Template             ::= '||' [^|{}]+
+StyleSuffix          ::= StyleDefs? ('.' ClassName)*
+StyleDefs            ::= [^}]*
+ClassName            ::= \S+
+
+(* === Macro Call === *)
+MacroCall          ::= '<<' MacroName (SP MacroParam)* SP? '>>'
+MacroName          ::= [^\s>"'=:]+
+MacroParam         ::= (ParamName ':')? ParamValue
+ParamName          ::= [A-Za-z0-9_-]+
+ParamValue         ::= TripleQuoted | DoubleQuoted | SingleQuoted
+                     | BracketQuoted | Unquoted
+TripleQuoted       ::= '"""' .* '"""'
+DoubleQuoted       ::= '"' [^"]* '"'
+SingleQuoted       ::= "'" [^']* "'"
+BracketQuoted      ::= '[[' ( [^\]] | ']'(?!']') )* ']]'
+Unquoted           ::= ( '>'^('>') | [^\s>"'] )+
+
+(* === Macro Definition (pragma) === *)
+MacroDef           ::= '\define' SP MacroName '(' ParamList? ')'
+                       ( SP? EOL Body '\end' MacroName?
+                       | SP SingleLineBody EOL )
+ParamList          ::= ParamDecl (',' ParamDecl)*
+ParamDecl          ::= ParamName (':' DefaultValue)?
+DefaultValue       ::= TripleQuoted | DoubleQuoted | SingleQuoted
+                     | BracketQuoted | UnquotedDefault
+
+(* === MVV Display (inline only) === *)
+MVVDisplay         ::= MVVVariable | MVVFilter
+MVVVariable        ::= '((' VarName ('||' Separator)? '))'
+MVVFilter          ::= '(((' FilterExpr ('||' Separator)? ')))'
+VarName            ::= [^()|]+?
+Separator          ::= [^)]*
+FilterExpr         ::= [\s\S]+?
+
+(* === Block vs Inline === *)
+(* Block form: the construct must be alone on its line,
+   followed by EOL or end of input.
+   Inline form: appears within a text run.
+   MVV display is inline only. *)
+```

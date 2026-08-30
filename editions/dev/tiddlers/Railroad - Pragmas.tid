@@ -1,0 +1,181 @@
+created: 20260413160413218
+modified: 20260413160413218
+tags: doc dev [[Wikitext EBNF]]
+title: Railroad - Pragmas
+
+! Pragmas -- Railroad Diagrams
+
+This tiddler presents the same pragma syntax as [[EBNF - Pragmas]], but using railroad diagrams for visual clarity. Follow the tracks left-to-right to see valid syntax paths.
+
+Pragmas appear at the very beginning of tiddler content, before any rendered output. They configure the parser or define procedures, functions, and widgets. Once a non-pragma line is encountered, pragma parsing stops.
+
+!! Pragma Block
+
+A tiddler may begin with zero or more consecutive pragmas:
+
+<$railroad text="""
+\start none
+\end none
+[{ ("\procedure" | "\function" | "\widget" | "\define" | "\import" | "\parameters" | "\whitespace" | "\parsermode" | "\rules" | <"comment">) }]
+"""/>
+
+---
+
+!! Parameter Definitions (shared)
+
+Several pragmas share the same parameter-list syntax. A parameter list is enclosed in parentheses, with parameters separated by commas or spaces.
+
+!!! Parameter List
+
+<$railroad text="""
+\start none
+\end none
+"(" [{ <"param-def"> +("," | <"space">) }] ")"
+"""/>
+
+!!! Individual Parameter
+
+Each parameter has a name and an optional default value, separated by a colon.
+
+<$railroad text="""
+\start none
+\end none
+<"param-name"> [":" <"default-value">]
+"""/>
+
+!!! Default Value
+
+Default values may be triple-quoted, double-quoted, single-quoted, or unquoted. Unquoted values include MVV references like `((varname))`.
+
+<$railroad text=`
+\start none
+\end none
+( '"""' <"text"> '"""'
+| '"' <"text"> '"'
+| "'" <"text"> "'"
+| <"unquoted-value">
+)
+`/>
+
+---
+
+!! `\procedure` / `\function` / `\widget`
+
+The modern definition pragmas. All three share the same structure -- only the keyword differs. See [[fnprocdef.js|$:/core/modules/parsers/wikiparser/rules/fnprocdef.js]] for the implementation.
+
+* ''`\procedure`'' -- defines reusable wikitext. Parameters are accessed as variables with `<<paramName>>`.
+* ''`\function`'' -- defines a filter function. The body is a filter expression.
+* ''`\widget`'' -- defines a custom widget. The name must start with `$` (e.g. `$my.widget`).
+
+!!! Single-line form
+
+The entire definition fits on one line, terminated by a linefeed.
+
+<$railroad text="""
+"\" ("procedure" | "function" | "widget") <"space"> <"name"> <"(params)"> [:" "] <"body"> "lf"
+"""/>
+
+!!! Multiline form
+
+The body spans multiple lines. The first line ends after the closing parenthesis; `\end` terminates the body.
+
+<$railroad text="""
+"\" ("procedure" | "function" | "widget") <"space"> <"name"> <"(params)"> "lf" <"body"> "\end" [<"name">] "lf"
+"""/>
+
+* <<.place name>> is a sequence of non-whitespace characters other than `(`.
+* <<.place body>> is any wikitext (may include nested definitions).
+* <<.place params>> uses the shared parameter-list syntax above.
+
+---
+
+!! `\define` (legacy)
+
+<<.deprecated-since "5.3.0" "Use `\procedure` instead.">>
+
+The original macro definition pragma. Uses textual substitution: `$paramname$` for parameter references and `$(varname)$` for variable substitution. See [[macrodef.js|$:/core/modules/parsers/wikiparser/rules/macrodef.js]].
+
+!!! Single-line form
+
+<$railroad text="""
+"\define" <"space"> <"name"> <"(params)"> [:" "] <"body"> "lf"
+"""/>
+
+!!! Multiline form
+
+<$railroad text="""
+"\define" <"space"> <"name"> <"(params)"> "lf" <"body"> "\end" [<"name">] "lf"
+"""/>
+
+`\define` also supports `[[double bracket]]` quoting for default values, which `\procedure` does not.
+
+---
+
+!! `\import`
+
+Imports variable definitions from other tiddlers. The argument is a filter expression whose output tiddlers are imported. See [[import.js|$:/core/modules/parsers/wikiparser/rules/import.js]].
+
+<$railroad text="""
+"\import" <"space"> <"filter-expression"> "lf"
+"""/>
+
+All procedures, functions, widgets, and macros defined in the matching tiddlers become available in the current tiddler.
+
+---
+
+!! `\parameters`
+
+Declares parameters with optional defaults for the current tiddler when transcluded or used as a procedure/widget body. See [[parameters.js|$:/core/modules/parsers/wikiparser/rules/parameters.js]].
+
+<$railroad text="""
+"\parameters" [:" "] <"(params)"> "lf"
+"""/>
+
+The parameter list uses the same shared syntax described above. This pragma is useful for tiddlers that serve as templates -- it documents and provides defaults for the expected inputs.
+
+---
+
+!! `\whitespace`
+
+Controls whether the parser trims whitespace from the output. See [[whitespace.js|$:/core/modules/parsers/wikiparser/rules/whitespace.js]].
+
+<$railroad text="""
+"\whitespace" <"space"> ("trim" | :"notrim") "lf"
+"""/>
+
+`trim` removes runs of whitespace from the rendered output -- useful in templates and procedures. `notrim` (the default) preserves whitespace.
+
+---
+
+!! `\parsermode`
+
+Switches the parser between block mode and inline mode. See [[parsermode.js|$:/core/modules/parsers/wikiparser/rules/parsermode.js]].
+
+<$railroad text="""
+"\parsermode" <"space"> (:"block" | "inline") "lf"
+"""/>
+
+By default, content is parsed in block mode. Switching to `inline` prevents block-level constructs (headings, lists) and avoids unwanted `<p>` wrapping.
+
+---
+
+!! `\rules`
+
+Enables or disables specific parser rules for the remainder of the tiddler. See [[rules.js|$:/core/modules/parsers/wikiparser/rules/rules.js]].
+
+<$railroad text="""
+"\rules" <"space"> ("only" | "except") <"space"> {<"rule-name"> + <"space">}
+"""/>
+
+* ''`only`'' -- disables all rules except those listed.
+* ''`except`'' -- keeps all rules active except those listed.
+
+---
+
+!! HTML Comments
+
+HTML comments are recognised as pragmas when they appear in the pragma area. They are silently consumed, allowing annotation between pragmas. See [[commentblock.js|$:/core/modules/parsers/wikiparser/rules/commentblock.js]].
+
+<$railroad text="""
+"<!--" <"comment-text"> "-->"
+"""/>
