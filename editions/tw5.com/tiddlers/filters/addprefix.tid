@@ -1,13 +1,13 @@
+caption: addprefix
 created: 20140410103123179
-modified: 20150203181822000
+modified: 20250323034328900
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input, but with <<.place S>> added to the start of each title
+op-parameter: a string of characters
+op-parameter-name: S
+op-purpose: extend each input title with a prefix
 tags: [[Filter Operators]] [[String Operators]]
 title: addprefix Operator
 type: text/vnd.tiddlywiki
-caption: addprefix
-op-purpose: extend each input title with a prefix
-op-input: a [[selection of titles|Title Selection]]
-op-parameter: a string of characters
-op-parameter-name: S
-op-output: the input, but with <<.place S>> added to the start of each title
 
 <<.operator-examples "addprefix">>
