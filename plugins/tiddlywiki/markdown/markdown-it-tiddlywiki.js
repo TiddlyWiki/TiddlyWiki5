@@ -124,19 +124,19 @@ function render_token_attrs(token) {
 // given tw parsing rule and starting pos, returns match index or undefined
 // assumes pos >= 0
 function findNextMatch(ruleinfo,pos) {
-	// ruleinfo.matchIndex needs to be -1 at the start of inline state
-	if(ruleinfo.matchIndex < pos) {
-		ruleinfo.matchIndex = ruleinfo.rule.findNextMatch(pos);
-	}
-
+	ruleinfo.matchIndex = ruleinfo.rule.findNextMatch(pos);
 	return ruleinfo.matchIndex;
 }
 
 // Add inline rule "macrocall" to parse <<macroname ...>>
 function tw_macrocallinline(state,silent) {
 	var ruleinfo = pluginOpts.inlineRules.macrocallinline;
-
 	var pos = state.pos;
+
+	if(pos + 1 >= state.posMax) { return false; }
+
+	if(state.src.charCodeAt(pos) !== 0x3c /* < */ || state.src.charCodeAt(pos + 1) !== 0x3c) { return false; }
+
 	var matchIndex = findNextMatch(ruleinfo,pos);
 	if(matchIndex === undefined || matchIndex !== pos) {
 		return false;
@@ -153,8 +153,12 @@ function tw_macrocallinline(state,silent) {
 // parse transclusion elements
 function tw_transcludeinline(state,silent) {
 	var ruleinfo = pluginOpts.inlineRules.transcludeinline;
-
 	var pos = state.pos;
+
+	if(pos + 1 >= state.posMax) { return false; }
+
+	if(state.src.charCodeAt(pos) !== 0x7b /* { */ || state.src.charCodeAt(pos + 1) !== 0x7b) { return false; }
+
 	var matchIndex = findNextMatch(ruleinfo,pos);
 	if(matchIndex === undefined || matchIndex !== pos) {
 		return false;
@@ -171,8 +175,14 @@ function tw_transcludeinline(state,silent) {
 // parse filtered transclusion elements
 function tw_filteredtranscludeinline(state,silent) {
 	var ruleinfo = pluginOpts.inlineRules.filteredtranscludeinline;
-
 	var pos = state.pos;
+
+	if(pos + 2 >= state.posMax) { return false; }
+
+	for(let i=0; i < 3; i++) {
+		if(state.src.charCodeAt(pos + i) !== 0x7b /* { */) { return false; }
+	}
+
 	var matchIndex = findNextMatch(ruleinfo,pos);
 	if(matchIndex === undefined || matchIndex !== pos) {
 		return false;
@@ -277,7 +287,7 @@ function tw_image(state,silent) {
 		});
 		token.markup = "tw_image";
 	}
-	state.pos = ruleinfo.rule.parser.pos;
+	state.pos = ruleinfo.rule.nextImage.end;
 	return true;
 }
 
@@ -291,6 +301,11 @@ function tw_prettylink(state,silent) {
 	}
 
 	var pos = state.pos;
+
+	if(pos + 1 >= state.posMax) { return false; }
+
+	if(state.src.charCodeAt(pos) !== 0x5b /* [ */ || state.src.charCodeAt(pos + 1) !== 0x5b) { return false; }
+
 	var matchIndex = findNextMatch(ruleinfo,pos);
 	if(matchIndex === undefined || matchIndex !== pos) {
 		return false;
@@ -316,7 +331,7 @@ function tw_prettylink(state,silent) {
 		token = state.push("link_close",tag,-1);
 		token.markup = "tw_prettylink";
 	}
-	state.pos = ruleinfo.rule.parser.pos;
+	state.pos = ruleinfo.rule.matchRegExp.lastIndex;
 	return true;
 }
 
@@ -352,7 +367,7 @@ function tw_prettyextlink(state,silent) {
 		token = state.push("link_close","a",-1);
 		token.markup = "tw_prettyextlink";
 	}
-	state.pos = ruleinfo.rule.parser.pos;
+	state.pos = ruleinfo.rule.nextLink.end;
 	return true;
 }
 
@@ -411,7 +426,7 @@ function extendInlineParse(thisArg,origFunc,twInlineRules) {
 			ruleinfo.rule.parser.source = str;
 			ruleinfo.rule.parser.sourceLength = str.length;
 			ruleinfo.rule.parser.pos = 0; // not used
-			ruleinfo.matchIndex = -1;
+			ruleinfo.matchIndex = undefined;
 		}
 		origFunc.call(thisArg,str,md,env,outTokens);
 	};
