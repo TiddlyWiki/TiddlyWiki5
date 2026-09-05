@@ -61,6 +61,12 @@ BasicAuthenticator.prototype.authenticateRequest = function(request,response,sta
 		// If there's no header and anonymous access is allowed then we don't set authenticatedUsername
 		return true;
 	}
+	// Basic authentication transmits credentials in plaintext (base64 is not encryption), so refuse to process them unless the connection is secured via TLS
+	if(header && !request.socket.encrypted) {
+		response.writeHead(400,"Basic Authentication requires a secure (HTTPS) connection");
+		response.end();
+		return false;
+	}
 	var token = header.split(/\s+/).pop() || "",
 		auth = $tw.utils.base64Decode(token),
 		parts = auth.split(/:/),
