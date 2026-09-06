@@ -1,0 +1,12 @@
+change-category: internal
+change-type: feature
+created: 20260906234108933
+description: Added new $:/core/templates/plain-text core template for rendering raw variables
+github-contributors: DesignThinkerer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10017
+modified: 20260906234439533
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#10017
+
+Added a new core template at `$:/core/templates/plain-text` that renders a single `text` variable as plain text using the `<$text>` widget. This enables developers to export and download dynamic strings via messages like `tm-download-file` using the `variables` paramObject, eliminating the need to create temporary tiddlers in the wiki store.
