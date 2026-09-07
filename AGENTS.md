@@ -2,6 +2,10 @@
 
 Guidance for AI agents (and human contributors) working in this repository. This file is the **source of truth** and outranks any personal or global instructions an agent carries. Read it in full before changing code
 
+Machine-specific rules MAY sit beside this file, optional and ignored by git: `AGENTS-before.md`, read first, for facts such as tool paths or scratch locations; `AGENTS-after.md`, read last, for additions such as a commit ritual. Without an import syntax, read them by name
+
+@./AGENTS-before.md
+
 ## Golden rule: when in doubt, stop and ask
 
 If you find a contradiction (between these rules, the code, an issue, or the request you were given), or a change would introduce a security risk or break an established best practice, you MUST NOT code around it. Stop and ask the maintainer before proceeding
@@ -141,3 +145,5 @@ working in this repository
 - You SHOULD prefix any part that needs a decision from the user with a lightning icon (⚡)
 - When the user asks for something, you MUST do it immediately and not argue, unless a rule above requires stopping
 - You MUST test suggested variants before explaining why they will not work
+
+@./AGENTS-after.md
