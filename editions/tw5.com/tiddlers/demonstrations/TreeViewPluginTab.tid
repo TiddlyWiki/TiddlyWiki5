@@ -1,0 +1,18 @@
+title: $:/_tw5.com/CustomPluginInfoTabDemo/tree-tab
+code-body: yes
+tags: $:/tags/PluginInfoTab
+caption: tree view
+filter: [<pluginTitle>plugintiddlers[]count[]compare::gteq[15]]
+
+\function treePrefix() [<currentTiddler>addsuffix[/]]
+\procedure nonDirectoryContents() [<currentTiddler>plugintiddlers[]!prefix<treePrefix>]
+
+''Plugin Directory Contents''
+<$transclude $variable="tree" prefix=<<treePrefix>>  />
+
+''Other Contents''
+<ul>
+    <$list filter=<<nonDirectoryContents>> >
+        <li><<currentTiddler>></li>
+    </$list>
+</ul>
