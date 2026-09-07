@@ -31,8 +31,8 @@ title: ExpectedResult
 
 <p>This is <strong>wikitext</strong>
 -
-<pre><code>This is ''wikitext''</code></pre></p><p>This is <strong>wikitext</strong>
+</p><pre><code>This is ''wikitext''</code></pre><p>This is <strong>wikitext</strong>
 -
-<pre><code>This is ''wikitext''</code></pre></p><p>This is <strong>wikitext</strong>
+</p><pre><code>This is ''wikitext''</code></pre><p>This is <strong>wikitext</strong>
 -
-<pre><code>This is ''wikitext''</code></pre></p>
+</p><pre><code>This is ''wikitext''</code></pre>

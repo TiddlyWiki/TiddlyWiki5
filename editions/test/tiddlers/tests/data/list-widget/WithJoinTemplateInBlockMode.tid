@@ -3,7 +3,7 @@ description: List widget with join template and $list-empty in block mode
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
-+
+
 title: Output
 
 \whitespace trim
@@ -27,6 +27,5 @@ title: Output
 
 +
 title: ExpectedResult
-comment: I wish there was a good way to get rid of these extraneous paragraph elements
 
-<p>Item:1</p><p></p><p></p><br><p>Item:2</p><p></p><p></p><br><p>Item:3</p><p></p><p></p>None!
+<p>Item:1</p><br><p>Item:2</p><br><p>Item:3</p><p>None!</p>

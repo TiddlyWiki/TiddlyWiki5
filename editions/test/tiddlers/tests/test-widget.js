@@ -354,7 +354,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p><div class=\"My something something,  or other thing\">Content</div></p>");
+		expect(wrapper.innerHTML).toBe('<div class="My something something,  or other thing">Content</div>');
 	});
 
 	it("should deal with built-in macros", function() {
@@ -601,11 +601,16 @@ describe("Widget module", function() {
 			// Render the widget node to the DOM
 			var wrapper = renderWidgetNode(widgetNode);
 			// Test the rendering
-			expect(wrapper.innerHTML).toBe("<p>" + oldList.split(" ").join(", ") + "</p>");
+			// An empty list renders nothing at all, so there is no content for a paragraph
+			// to hold and none is created
+			var expected = function(list) {
+				return list ? "<p>" + list.split(" ").join(", ") + "</p>" : "";
+			};
+			expect(wrapper.innerHTML).toBe(expected(oldList));
 			// Change the list and ensure new rendering is still right
 			wiki.addTiddler({title: "Numbers", text: "", list: newList});
 			refreshWidgetNode(widgetNode,wrapper,["Numbers"]);
-			expect(wrapper.innerHTML).toBe("<p>" + newList.split(" ").join(", ") + "</p>");
+			expect(wrapper.innerHTML).toBe(expected(newList));
 		};
 	};
 

@@ -629,6 +629,12 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	}
 	// Get the widget class for this node type
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
+	// A paragraph the parser produced is provisional, so the paragraph widget decides
+	// whether it survives. Keyed on the rule that made it, which leaves the parse tree as
+	// it was
+	if(parseTreeNode.rule === "parseblock" && parseTreeNode.type === "element" && parseTreeNode.tag === "p") {
+		WidgetClass = this.widgetClasses.paragraph || WidgetClass;
+	}
 	if(!WidgetClass) {
 		WidgetClass = this.widgetClasses.text;
 		parseTreeNode = {type: "text", text: "Undefined widget '" + parseTreeNode.type + "'"};
