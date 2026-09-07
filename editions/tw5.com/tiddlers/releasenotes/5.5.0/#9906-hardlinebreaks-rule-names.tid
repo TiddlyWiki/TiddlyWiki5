@@ -1,0 +1,13 @@
+change-category: developer
+change-type: bugfix
+created: 20260712223504000
+description: Hard linebreaks regions keep the rule names of their inner nodes
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/9906
+modified: 20260712223504000
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9906
+type: text/vnd.tiddlywiki
+
+The wikitext parser stamps the name of the producing rule onto every parse tree node. The `hardlinebreaks` rule returned a flat array of foreign nodes, so every node inside a `"""` region was stamped `rule: "hardlinebreaks"`, hiding which rule actually produced it. The rule now returns a single wrapper node of type `void` spanning the region, so the inner nodes keep their own rule names. Void nodes render as a pass-through, so the rendered output is unchanged.

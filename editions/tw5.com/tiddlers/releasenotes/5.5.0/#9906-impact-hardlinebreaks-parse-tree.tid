@@ -1,0 +1,9 @@
+title: $:/changenotes/5.5.0/#9906/impacts/hardlinebreaks-parse-tree
+changenote: $:/changenotes/5.5.0/#9906
+created: 20260712223504000
+modified: 20260712223504000
+tags: $:/tags/ImpactNote
+description: The parse tree shape of `"""` hard linebreak regions has changed
+impact-type: compatibility-break
+
+Content of a `"""` region is now nested one level deeper inside a `void` wrapper node, and the `isRuleStart`/`isRuleEnd` flags (first shipped in v5.4.0) are no longer emitted. Third-party code walking these regions needs to follow the wrapper's children.
