@@ -206,4 +206,67 @@ describe("Utility tests", function() {
 		expect($tw.utils.insertSortedArray(["b","c","d"],"ccc").join(",")).toEqual("b,c,ccc,d");
 	});
 
+	// --- debounce utility ---
+
+	it("should debounce function calls", function(done) {
+		var callCount = 0;
+		var fn = $tw.utils.debounce(function() { callCount++; }, 50);
+		fn();
+		fn();
+		fn();
+		expect(callCount).toBe(0);
+		setTimeout(function() {
+			expect(callCount).toBe(1);
+			done();
+		}, 100);
+	});
+
+	it("should provide flush() to immediately execute pending debounced call", function() {
+		var callCount = 0;
+		var fn = $tw.utils.debounce(function() { callCount++; }, 5000);
+		fn();
+		expect(callCount).toBe(0);
+		fn.flush();
+		expect(callCount).toBe(1);
+		// flush again with nothing pending should be safe
+		fn.flush();
+		expect(callCount).toBe(1);
+	});
+
+	it("should provide cancel() to discard pending debounced call", function(done) {
+		var callCount = 0;
+		var fn = $tw.utils.debounce(function() { callCount++; }, 50);
+		fn();
+		fn.cancel();
+		setTimeout(function() {
+			expect(callCount).toBe(0);
+			done();
+		}, 100);
+	});
+
+	it("should isolate multiple debounce instances (no shared state)", function(done) {
+		var calls1 = 0, calls2 = 0;
+		var fn1 = $tw.utils.debounce(function() { calls1++; }, 50);
+		var fn2 = $tw.utils.debounce(function() { calls2++; }, 50);
+		fn1();
+		fn2();
+		fn1.flush();
+		// fn1 should have fired, fn2 should still be pending
+		expect(calls1).toBe(1);
+		expect(calls2).toBe(0);
+		setTimeout(function() {
+			expect(calls2).toBe(1);
+			done();
+		}, 100);
+	});
+
+	it("should not fire flush() after cancel()", function() {
+		var callCount = 0;
+		var fn = $tw.utils.debounce(function() { callCount++; }, 5000);
+		fn();
+		fn.cancel();
+		fn.flush(); // Should not fire because cancel cleared the pending call
+		expect(callCount).toBe(0);
+	});
+
 });

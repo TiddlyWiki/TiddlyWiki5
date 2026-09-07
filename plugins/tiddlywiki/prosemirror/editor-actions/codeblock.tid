@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorAction/codeblock
+tags: $:/tags/ProseMirror/EditorAction
+caption: Turn into codeblock
+description: Convert the current block to a code block
+category: block-type
+icon: $:/core/images/mono-block
+
+\rules only
+
+<$action-sendmessage $message="tm-prosemirror-editor-action" actionId="codeblock"/>

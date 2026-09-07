@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorAction/heading3
+tags: $:/tags/ProseMirror/EditorAction
+caption: Heading 3
+description: Convert to heading level 3
+category: block-type
+action-id: heading3
+icon: $:/core/images/heading-3
+

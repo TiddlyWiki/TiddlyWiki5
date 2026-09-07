@@ -100,7 +100,7 @@ exports.makepatches = function(source, operator, options) {
 		results = [];
 
 	source((tiddler, title) => {
-		if (isJson) {
+		if(isJson) {
 			const diffs = (mode === "lines" || mode === "words") 
 				? diffLineWordMode(title, operator.operand, mode) 
 				: dmp.diffMain(title, operator.operand);

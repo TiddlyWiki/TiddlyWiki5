@@ -11,6 +11,18 @@ Edit widget is a meta-widget chooses the appropriate actual editting widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
+function hasParserForType(type) {
+	var parser = $tw.Wiki.parsers[type],
+		fileExtensionInfo;
+	if(!parser) {
+		fileExtensionInfo = $tw.utils.getFileExtensionInfo(type);
+		if(fileExtensionInfo) {
+			parser = $tw.Wiki.parsers[fileExtensionInfo.type];
+		}
+	}
+	return !!parser;
+}
+
 var EditWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -42,6 +54,7 @@ EditWidget.prototype.execute = function() {
 	this.editField = this.getAttribute("field","text");
 	// Choose the appropriate edit widget
 	this.editorType = this.getEditorType();
+	this.setVariable("tv-editor-type",this.editorType);
 	// Make the child widgets
 	this.makeChildWidgets([{
 		type: "edit-" + this.editorType,
@@ -61,6 +74,12 @@ EditWidget.prototype.getEditorType = function() {
 	}
 	type = type || "text/vnd.tiddlywiki";
 	var editorType = this.wiki.getTiddlerText(EDITOR_MAPPING_PREFIX + type);
+	if(editorType) {
+		editorType = editorType.trim();
+	}
+	if(editorType === "prosemirror" && (!$tw.browser || !hasParserForType(type))) {
+		editorType = "text";
+	}
 	if(!editorType) {
 		var typeInfo = $tw.config.contentTypeInfo[type];
 		if(typeInfo && typeInfo.encoding === "base64") {

@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorAction/horizontal-rule
+tags: $:/tags/ProseMirror/EditorAction
+caption: Horizontal rule
+description: Insert a horizontal separator line
+category: block-insert
+action-id: horizontal-rule
+icon: $:/core/images/line
+

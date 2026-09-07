@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/prosemirror/blocks/image/styles/color
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.pm-image-resize-handle {
+	background: <<colour primary>>;
+	border-color: <<colour background>>;
+}
+
+.pm-image-picker-wrap {
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour page-background>>;
+}
