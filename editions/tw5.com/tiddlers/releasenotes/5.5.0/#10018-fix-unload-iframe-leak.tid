@@ -1,0 +1,11 @@
+change-category: internal
+change-type: bugfix
+created: 20260907175854854
+description: Fixed a DOM leak when closing the plugin library
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10018
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#10018
+type: text/vnd.tiddlywiki
+
+Fixed a syntax error in the `unloadIFrame` loop that permanently left a hidden `<iframe library="true">` attached to the DOM every time the plugin library modal was closed.
