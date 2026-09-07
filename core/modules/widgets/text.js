@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/text.js
 type: application/javascript
 module-type: widget
 
-Text node widget
+Text node widget, and the plain-text widget that renders a run literally
 
 \*/
 
@@ -27,6 +27,21 @@ TextNodeWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
+	// A hook returns literal runs as `plain-text` nodes, which do not re-enter it
+	var parseTreeNodes = $tw.hooks.invokeHook("th-rendering-text",null,this);
+	this.isReplaced = !!parseTreeNodes;
+	if(parseTreeNodes) {
+		this.makeChildWidgets(parseTreeNodes);
+		this.renderChildren(parent,nextSibling);
+		return;
+	}
+	this.renderText(parent,nextSibling);
+};
+
+/*
+Create the DOM text node. Shared with the plain-text widget below
+*/
+TextNodeWidget.prototype.renderText = function(parent,nextSibling) {
 	var text = this.getAttribute("text",this.parseTreeNode.text || "");
 	text = text.replace(/\r/mg,"");
 	var textNode = this.document.createTextNode(text);
@@ -42,16 +57,54 @@ TextNodeWidget.prototype.execute = function() {
 };
 
 /*
-Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
+Refresh the text itself. Shared with the plain-text widget below
 */
-TextNodeWidget.prototype.refresh = function(changedTiddlers) {
+TextNodeWidget.prototype.refreshText = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.text) {
 		this.refreshSelf();
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 };
 
+/*
+Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
+*/
+TextNodeWidget.prototype.refresh = function(changedTiddlers) {
+	if(this.refreshText(changedTiddlers)) {
+		return true;
+	}
+	// Asked even when the run was not replaced, because a change may mean the hook wants to
+	// replace it this time
+	if($tw.hooks.invokeHook("th-refreshing-text",false,this,changedTiddlers)) {
+		this.refreshSelf();
+		return true;
+	}
+	if(this.isReplaced) {
+		return this.refreshChildren(changedTiddlers);
+	}
+	return false;
+};
+
+/*
+Renders a run of text literally. A th-rendering-text hook returns these for the parts it
+wants left alone, so that its own output does not re-enter it
+*/
+var PlainTextNodeWidget = function(parseTreeNode,options) {
+	this.initialise(parseTreeNode,options);
+};
+
+PlainTextNodeWidget.prototype = new TextNodeWidget();
+
+PlainTextNodeWidget.prototype.render = function(parent,nextSibling) {
+	this.parentDomNode = parent;
+	this.computeAttributes();
+	this.execute();
+	this.renderText(parent,nextSibling);
+};
+
+PlainTextNodeWidget.prototype.refresh = TextNodeWidget.prototype.refreshText;
+
 exports.text = TextNodeWidget;
+exports["plain-text"] = PlainTextNodeWidget;

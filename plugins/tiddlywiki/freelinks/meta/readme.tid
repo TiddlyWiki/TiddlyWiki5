@@ -21,6 +21,38 @@ Tiddlers do not create links to themselves.
 
 Use `$:/config/Freelinks/TargetFilter` to define which tiddlers are eligible for auto-linking.
 
+!! Controlling where links appear
+
+The settings panel offers three switches that limit freelinking without changing which tiddlers are eligible.
+
+|!Setting |!Default |!Effect |
+|`$:/config/Freelinks/LinkOnce` |`no` |When `yes`, only the first occurrence of each title within a tiddler is linked. Later occurrences stay as plain text |
+|`$:/config/Freelinks/LinkInHeadings` |`no` |When `no`, freelinks are not created inside headings, because a heading names its section rather than pointing elsewhere |
+|`$:/config/Freelinks/LinkNumbers` |`no` |When `no`, a title consisting only of digits, such as `1984`, never creates a freelink. A longer title that contains the number, such as `Journal 1984`, still does |
+
+These are separate from `$:/config/Freelinks/TargetFilter`, which exists to bound the size of the search and should be kept as narrow as performance requires. Editorial decisions about where links belong are made with the switches above, so that narrowing the filter for speed and excluding a title for meaning do not compete for the same setting.
+
+!! Escaping a single link
+
+Prefix a title with `~` and that occurrence is not freelinked. This is the escape TiddlyWiki already uses for CamelCase links, extended to every title Freelinks recognises, including titles containing spaces:
+
+```
+~HelloThere
+~This is a test
+```
+
+The `~` is not shown in the rendered output. It applies to the whole matched title, so escaping `~The Lord of the Rings` does not leave `Lord` and `Rings` free to link on their own.
+
+A `~` is only removed where it actually suppressed a link. Ordinary text such as `~5 minutes` or `~/config` keeps its tilde, and so does a title that no tiddler matches. One consequence is worth knowing: because the escape depends on the title being recognised, a `~` that is visible today becomes invisible if a tiddler of that name is created later.
+
+Text passed as an attribute is literal and is never rewritten, so `<$text text="~HelloThere"/>` keeps its tilde.
+
+Freelinking can also be turned off for a run of text by setting the variable directly:
+
+```
+<$let tv-freelinks="no">The works of Homer</$let>
+```
+
 Within view templates, the variable `tv-freelinks` is automatically set to the content of `$:/config/Freelinks/Enable`, which can be set via the settings panel of this plugin.
 
 Use `$:/config/Freelinks/MaxLinks` to set the maximum number of links rendered per text node (default: 500). 
