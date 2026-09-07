@@ -1,0 +1,7 @@
+code-body: yes
+modified: 20260413092032887
+title: body-template
+
+!! <<currentTab>>
+
+<$transclude tiddler=<<currentTab>> mode="block"/>
