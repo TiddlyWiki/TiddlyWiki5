@@ -99,7 +99,9 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		wikiLinkText = this.wiki.filterTiddlers(wikilinkTransformFilter,this,function(iterator) {
 			iterator(self.wiki.getTiddler(self.to),self.to);
 		})[0];
-	} else {
+	}
+	// No filter result leaves the href undefined, so fall back to the template. An empty string is a deliberate empty href. See #9977
+	if(wikiLinkText === undefined) {
 		// Expand the tv-wikilink-template variable to construct the href
 		var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
 			wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$";
@@ -123,7 +125,9 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		var tooltipText = this.wiki.renderText("text/plain","text/vnd.tiddlywiki",tooltipWikiText,{
 			parseAsInline: true,
 			variables: {
-				currentTiddler: this.to
+				currentTiddler: this.to,
+				// A link in the tooltip would render the tooltip again, forever. See #9976
+				"tv-wikilinks": "no"
 			},
 			parentWidget: this
 		});
