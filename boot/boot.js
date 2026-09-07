@@ -1962,10 +1962,10 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 Load all the tiddlers defined by a `tiddlywiki.files` specification file
 filepath: pathname of the directory containing the specification file
 */
-$tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
+$tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,filesInfo) {
 	var tiddlers = [];
-	// Read the specification
-	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"), function(e) {
+	// Read the specification unless it was supplied by the caller
+	filesInfo = filesInfo || $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"), function(e) {
 		console.log("Warning: tiddlywiki.files in " + filepath + " invalid: " + e.message);
 		return {};
 	});
@@ -2237,27 +2237,33 @@ path: path of wiki directory
 options:
 	parentPaths: array of parent paths that we mustn't recurse into
 	readOnly: true if the tiddler file paths should not be retained
+	wikiInfo: optional in-memory equivalent of tiddlywiki.info
+	filesInfo: optional in-memory equivalent of tiddlywiki.files, resolved relative
+		to the configured tiddler location
 */
 $tw.loadWikiTiddlers = function(wikiPath,options) {
 	options = options || {};
 	var parentPaths = options.parentPaths || [],
 		wikiInfoPath = path.resolve(wikiPath,$tw.config.wikiInfo),
-		wikiInfo,
+		wikiInfo = options.wikiInfo,
 		pluginFields;
-	// Bail if we don't have a wiki info file
-	if(fs.existsSync(wikiInfoPath)) {
-		wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"),function() {return null;});
-		if(!wikiInfo) {
-			console.log("warning: invalid JSON in tiddlywiki.info file at " + wikiInfoPath);
-			wikiInfo = {};
+	// Use options.wikiInfo when provided; otherwise load tiddlywiki.info from disk
+	if(!wikiInfo) {
+		if(fs.existsSync(wikiInfoPath)) {
+			wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"),function() {return null;});
+			if(!wikiInfo) {
+				console.log("warning: invalid JSON in tiddlywiki.info file at " + wikiInfoPath);
+				wikiInfo = {};
+			}
+		} else {
+			return null;
 		}
-	} else {
-		return null;
 	}
 	// Save the path to the tiddlers folder for the filesystemadaptor
 	var config = wikiInfo.config || {};
+	var tiddlersLocation = config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir;
 	if($tw.boot.wikiPath == wikiPath) {
-		$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir);
+		$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,tiddlersLocation);
 	}
 	// Load any parent wikis
 	if(wikiInfo.includeWikis) {
@@ -2285,8 +2291,11 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	$tw.loadPlugins(wikiInfo.themes,$tw.config.themesPath,$tw.config.themesEnvVar);
 	$tw.loadPlugins(wikiInfo.languages,$tw.config.languagesPath,$tw.config.languagesEnvVar);
 	// Load the wiki files, registering them as writable
-	var resolvedWikiPath = path.resolve(wikiPath,$tw.config.wikiTiddlersSubDir);
-	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
+	var resolvedWikiPath = path.resolve(wikiPath,tiddlersLocation),
+		tiddlerFiles = options.filesInfo ?
+			$tw.loadTiddlersFromSpecification(resolvedWikiPath,$tw.boot.excludeRegExp,options.filesInfo) :
+			$tw.loadTiddlersFromPath(resolvedWikiPath);
+	$tw.utils.each(tiddlerFiles,function(tiddlerFile) {
 		if(!options.readOnly && tiddlerFile.filepath) {
 			$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
 				$tw.boot.files[tiddler.title] = {
