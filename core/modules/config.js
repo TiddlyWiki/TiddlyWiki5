@@ -34,3 +34,21 @@ exports.htmlVoidElements = "area,base,br,col,command,embed,hr,img,input,keygen,l
 exports.htmlBlockElements = "address,article,aside,audio,blockquote,canvas,dd,details,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,li,nav,ol,p,pre,section,summary,table,tfoot,ul,video".split(",");
 
 exports.htmlUnsafeElements = "script".split(",");
+
+exports.htmlStandardElements = "a,abbr,address,area,article,aside,audio,b,base,bdi,bdo,blockquote,body,br,button,canvas,caption,cite,code,col,colgroup,data,datalist,dd,del,details,dfn,dialog,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,head,header,hgroup,hr,html,i,iframe,img,input,ins,kbd,label,legend,li,link,main,map,mark,menu,meta,meter,nav,noscript,object,ol,optgroup,option,output,p,param,picture,pre,progress,q,rp,rt,ruby,s,samp,section,select,slot,small,source,span,strong,style,sub,summary,sup,table,tbody,td,template,textarea,tfoot,th,thead,time,title,tr,track,u,ul,var,video,wbr".split(",");
+
+// SVG 1.1 Element list without SCRIPT
+exports.SvgStandardElements = "a,altGlyph,altGlyphDef,altGlyphItem,animate,animateColor,animateMotion,animateTransform,circle,clipPath,color-profile,cursor,defs,desc,ellipse,feBlend,feColorMatrix,feComponentTransfer,feComposite,feConvolveMatrix,feDiffuseLighting,feDisplacementMap,feDistantLight,feFlood,feFuncA,feFuncB,feFuncG,feFuncR,feGaussianBlur,feImage,feMerge,feMergeNode,feMorphology,feOffset,fePointLight,feSpecularLighting,feSpotLight,feTile,feTurbulence,filter,font,font-face,font-face-format,font-face-name,font-face-src,font-face-uri,foreignObject,g,glyph,glyphRef,hkern,image,line,linearGradient,marker,mask,metadata,missing-glyph,mpath,path,pattern,polygon,polyline,radialGradient,rect,set,stop,style,svg,switch,symbol,text,textPath,title,tref,tspan,use,view,vkern".split(",");
+
+// MathML elements
+exports.MathMlElements = "annotation,annotation-xml,maction,math,menclose,merror,mfenced,mfrac,mi,mmultiscripts,mn,mo,mover,mpadded,mphantom,mprescripts,mroot,mrow,ms,mspace,msqrt,mstyle,msub,msubsup,msup,mtable,mtd,mtext,mtr,munder,munderover,semantics".split(",");
+
+// (EBNF notation) - PotentialCustomElementName ::= [a-z] (PCENChar)* '-' (PCENChar)*
+// Unicode table with ranges see: https://symbl.cc/en/unicode-table
+exports.htmlCustomPrimitives = {
+	prefix: "[a-z]",
+	validPCENChar: ".|[0-9]|_|[a-z]|\xB7|[\xC0-\xD6]|[\xD8-\xF6]|[\u00F8-\u037D]|[\u037F-\u1FFF]|[\u200C-\u200D]|[\u203F-\u2040]|[\u2070-\u218F]|[\u2C00-\u2FEF]|[\u3001-\uD7FF]|[\uF900-\uFDCF]|[\uFDF0-\uFFFD]",
+	sanitizePCENChar: "[\x00-\x2C]|\x2F|[\x3B-\x40]|[\x5B-\x60]|[\x7B-\xB6]|[\xB8-\xBF]|\xD7|\xF7|\x37E|[\u2000-\u200B]|[\u200E-\u203E]|[\u2041-\u206F]|[\u2190-\u2BFF]|[\u2FF0-\u3000]|[\uD800-\uF8FF]|[\uFDD0-\uFDEF]|[\uFFFE-\uFFFF]",
+	validLocalNameRegExp:"(?:[A-Za-z][^\0\t\n\f\r\u0020/>]*|[:_\u0080-\uFFFF][A-Za-z0-9-.:_\u0080-\uFFFF]*)"
+};
+exports.htmlCustomPrimitives.nonValidPCENChar = "[A-Z]|" + exports.htmlCustomPrimitives.sanitizePCENChar;
