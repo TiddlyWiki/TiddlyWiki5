@@ -1,0 +1,35 @@
+created: 20260825200000000
+description: A horizontal list-links-draggable is the vertical one plus a class
+modified: 20260825200000000
+tags: $:/tags/wiki-test-spec
+title: TestCases/DraggableLists/HorizontalLinks
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Passing `class:"tc-horizontal-draggable"` lays the list out as a row. The markup must not change: it is still a `ul` of `li` elements, and every droppable and placeholder stays where it was, so dragging behaves identically. Only the class attribute differs from a vertical list.
++
+title: Items
+list: Alpha Beta Gamma Delta
++
+title: Alpha
+caption: Alpha
++
+title: Beta
+caption: Beta
++
+title: Gamma
+caption: Gamma
++
+title: Delta
+caption: Delta
++
+title: Output
+
+\import [[$:/core/macros/list]]
+
+<<list-links-draggable tiddler:"Items" class:"tc-horizontal-draggable">>
++
+title: ExpectedResult
+
+<p><span class="tc-links-draggable-list"><ul class="tc-horizontal-draggable"><li class="tc-droppable"><div class="tc-droppable-placeholder"></div><div><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Alpha">Alpha</a></div></li><li class="tc-droppable"><div class="tc-droppable-placeholder"></div><div><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Beta">Beta</a></div></li><li class="tc-droppable"><div class="tc-droppable-placeholder"></div><div><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Gamma">Gamma</a></div></li><li class="tc-droppable"><div class="tc-droppable-placeholder"></div><div><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Delta">Delta</a></div></li><div class="tc-droppable"><div class="tc-droppable-placeholder"><svg class="tc-image-blank tc-image-button" height="22pt" viewBox="0 0 128 128" width="22pt"></svg></div><div style="height:0.5em;"></div></div></ul></span></p>

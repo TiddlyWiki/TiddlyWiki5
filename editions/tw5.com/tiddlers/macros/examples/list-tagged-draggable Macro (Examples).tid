@@ -1,7 +1,11 @@
 created: 20170329093300835
-modified: 20170329093346982
+modified: 20260825210000000
 tags: [[list-tagged-draggable Macro]] [[Macro Examples]]
 title: list-tagged-draggable Macro (Examples)
 type: text/vnd.tiddlywiki
 
-<$macrocall $name=".example" n="1" eg="""<<list-tagged-draggable tag:"Features">>"""/>
+Drag an item in either list to reorder it. The two calls differ only by the `class` parameter.
+
+<$list filter="[prefix[TestCases/DraggableLists/]suffix[Tagged]]">
+<$transclude $variable="testcase" tiddler=<<currentTiddler>>/>
+</$list>

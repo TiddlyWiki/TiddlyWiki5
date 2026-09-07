@@ -1,0 +1,35 @@
+created: 20260825210000000
+description: list-links-draggable with no class, the default column
+modified: 20260825210000000
+tags: $:/tags/wiki-test-spec
+title: TestCases/DraggableLists/VerticalLinks
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+The default list, a `ul` of `li` elements in a column. The horizontal version renders exactly this markup and differs only by a class.
++
+title: Items
+list: Alpha Beta Gamma Delta
++
+title: Alpha
+caption: Alpha
++
+title: Beta
+caption: Beta
++
+title: Gamma
+caption: Gamma
++
+title: Delta
+caption: Delta
++
+title: Output
+
+\import [[$:/core/macros/list]]
+
+<<list-links-draggable tiddler:"Items">>
++
+title: ExpectedResult
+
+<p><span class="tc-links-draggable-list"><ul class=""><li class="tc-droppable"><div class="tc-droppable-placeholder"></div><div><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Alpha">Alpha</a></div></li><li class="tc-droppable"><div class="tc-droppable-placeholder"></div><div><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Beta">Beta</a></div></li><li class="tc-droppable"><div class="tc-droppable-placeholder"></div><div><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Gamma">Gamma</a></div></li><li class="tc-droppable"><div class="tc-droppable-placeholder"></div><div><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Delta">Delta</a></div></li><div class="tc-droppable"><div class="tc-droppable-placeholder"><svg class="tc-image-blank tc-image-button" height="22pt" viewBox="0 0 128 128" width="22pt"></svg></div><div style="height:0.5em;"></div></div></ul></span></p>

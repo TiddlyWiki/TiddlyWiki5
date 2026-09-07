@@ -1,7 +1,11 @@
 created: 20170328211011767
-modified: 20170328211211799
+modified: 20260825210000000
 tags: [[list-links-draggable Macro]] [[Macro Examples]]
 title: list-links-draggable Macro (Examples)
 type: text/vnd.tiddlywiki
 
-<$macrocall $name=".example" n="1" eg="""<<list-links-draggable tiddler:"Days of the Week">>"""/>
+Drag an item in either list to reorder it. The two calls differ only by the `class` parameter.
+
+<$list filter="[prefix[TestCases/DraggableLists/]suffix[Links]]">
+<$transclude $variable="testcase" tiddler=<<currentTiddler>>/>
+</$list>
