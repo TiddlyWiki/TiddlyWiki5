@@ -1,0 +1,6 @@
+title: $:/schemas/FilterOperatorDocs/from-version
+field-type: string
+required: no
+type: text/vnd.tiddlywiki
+
+The TiddlyWiki version in which this filter operator was introduced (e.g. `5.2.1`).

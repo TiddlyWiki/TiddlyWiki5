@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#9690
+description: Add schema, widget and filter attribute documentation plugins
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9690
+github-contributors: linonetwo
+
+New plugins define schemas for core API fields and document widget attributes and filter operators, providing structured documentation for users, plugin authors, and tools.

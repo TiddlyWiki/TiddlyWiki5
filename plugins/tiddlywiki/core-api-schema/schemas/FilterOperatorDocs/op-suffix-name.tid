@@ -1,0 +1,6 @@
+title: $:/schemas/FilterOperatorDocs/op-suffix-name
+field-type: string
+required: no
+type: text/vnd.tiddlywiki
+
+A short placeholder name for the suffix (e.g. `F`), used in documentation templates.

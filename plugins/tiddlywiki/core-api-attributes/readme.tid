@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/core-api-attributes/readme
+
+This plugin provides structured, machine-readable metadata for core filter operators and widget attributes.
+
+Data tiddlers use the `$:/docs/` namespace following the conventions in [[GitHub Issue #8154|https://github.com/TiddlyWiki/TiddlyWiki5/issues/8154]]:
+
+* Filter operator metadata: `$:/docs/filter-operators/<name>`
+* Widget metadata: `$:/docs/widgets/<WidgetTitle>`
+* Widget attribute definitions: `$:/docs/widgets/<WidgetTitle>/attributes/<attr>`
+
+All metadata tiddlers are constrained by schemas defined in the `core-api-schema` plugin. Visual editors and other tools can enumerate available operators/widgets using `prefix[$:/docs/filter-operators/]` or `prefix[$:/docs/widgets/]` filter expressions.

@@ -1,0 +1,4 @@
+title: $:/plugins/tiddlywiki/core-api-docs/filters/contains Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "contains">>

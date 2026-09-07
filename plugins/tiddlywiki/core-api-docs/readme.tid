@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/core-api-docs/readme
+
+This plugin provides the human-readable reference documentation for core filter operators and widgets.
+
+Canonical content lives under the plugin namespace:
+
+* `$:/plugins/tiddlywiki/core-api-docs/filters/...`
+* `$:/plugins/tiddlywiki/core-api-docs/widgets/...`
+
+The tw5.com edition keeps the original document titles (e.g. ''contains Operator'', ''ActionNavigateWidget'') and transcludes these plugin tiddlers. This preserves wiki search/navigation behaviour while keeping the documentation source centralized in the plugin.
+
+Structured metadata fields (such as `op-purpose`, `op-input`, widget attributes, etc.) live in the `core-api-attributes` plugin under the `$:/docs/` namespace, and are validated by `core-api-schema`.
+
+Display templates/macros remain in the tw5.com edition. tw5.com pages consume `$:/docs/...` metadata so that site rendering and editor tooling share the same source of truth while prose content stays centralized in this plugin.

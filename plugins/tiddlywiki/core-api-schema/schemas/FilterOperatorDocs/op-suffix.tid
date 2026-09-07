@@ -1,0 +1,6 @@
+title: $:/schemas/FilterOperatorDocs/op-suffix
+field-type: string
+required: no
+type: text/vnd.tiddlywiki
+
+Describes the suffix accepted by the filter operator.

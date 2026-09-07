@@ -1,0 +1,6 @@
+title: $:/schemas/WidgetDocs/widget-tag-name
+field-type: string
+required: yes
+type: text/vnd.tiddlywiki
+
+The wikitext tag name used to invoke this widget (e.g. `$action-navigate`, `$button`).

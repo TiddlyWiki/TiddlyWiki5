@@ -1,0 +1,36 @@
+created: 20260224000000000
+modified: 20260224000000000
+list-before: $:/core/ui/ViewTemplate/body
+tags: $:/tags/ViewTemplate
+code-body: yes
+title: $:/editions/tw5.com/widget-template
+
+\whitespace trim
+
+<$list filter="[all[current]tag[Widgets]]">
+	<$let docsTitle={{{ [[$:/docs/widgets/]addsuffix{!!title}] }}}>
+		<$list filter="[<docsTitle>is[tiddler]]">
+			<table class="doc-table before-tiddler-body">
+				<$list filter="[<docsTitle>has[widget-purpose]]">
+					<tr>
+						<th align="left">purpose</th><td>{{<docsTitle>!!widget-purpose}}</td>
+					</tr>
+				</$list>
+				<$list filter="[<docsTitle>has[widget-tag-name]]">
+					<tr>
+						<th align="left">tag</th><td><code>{{<docsTitle>!!widget-tag-name}}</code></td>
+					</tr>
+				</$list>
+			</table>
+
+			<$list filter="[all[shadows+tiddlers]prefix[<docsTitle>/attributes/]]">
+				<h2>Attributes</h2>
+				<$macrocall $name=".widget-attributes" widget={{{ [<docsTitle>removeprefix[$:/docs/widgets/]] }}}/>
+			</$list>
+
+			<$list filter="[<docsTitle>has[from-version]]" variable="listItem">
+				<$macrocall $name=".from-version" version={{{ [<docsTitle>get[from-version]] }}}/>
+			</$list>
+		</$list>
+	</$let>
+</$list>

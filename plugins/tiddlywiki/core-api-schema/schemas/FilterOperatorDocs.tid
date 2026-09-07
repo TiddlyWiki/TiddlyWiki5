@@ -1,0 +1,8 @@
+title: $:/schemas/FilterOperatorDocs
+tags: $:/tags/Schema
+fields: op-purpose op-input op-output op-parameter op-parameter-name op-suffix op-suffix-name op-neg-input op-neg-output from-version
+type: text/vnd.tiddlywiki
+
+Schema for filter operator documentation tiddlers under `$:/docs/filter-operators/`.
+
+Each tiddler matching this schema describes one filter operator's structured metadata, enabling visual editors to reflect available operators and their parameters.
