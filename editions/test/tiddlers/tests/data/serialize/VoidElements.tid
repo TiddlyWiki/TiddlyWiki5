@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Void elements with and without self closing slashes round-trip byte-exact
 title: Serialize/VoidElements
 type: text/vnd.tiddlywiki
 

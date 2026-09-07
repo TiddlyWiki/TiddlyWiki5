@@ -8,8 +8,7 @@ module-type: wikiruleserializer
 
 exports.name = "macrocallinline";
 
-exports.serialize = function (tree,serialize) {
+exports.serialize = function (tree,serialize,options) {
 	var macrocallblock = require("$:/plugins/tiddlywiki/wikitext-serialize/rules/macrocallblock.js");
-	var result = macrocallblock.serialize(tree,serialize);
-	return result.trimEnd();
+	return macrocallblock.serialize(tree,serialize,options);
 };

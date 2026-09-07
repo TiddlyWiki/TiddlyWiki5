@@ -1,0 +1,8 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Valueless attributes and empty double quoted values round-trip byte-exact
+title: Serialize/Attribute-new
+type: text/vnd.tiddlywiki
+
+<div attribute>some text</div>
+
+<div title="">Hello</div>

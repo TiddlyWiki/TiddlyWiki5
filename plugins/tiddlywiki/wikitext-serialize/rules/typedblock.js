@@ -10,7 +10,7 @@ exports.name = "typedblock";
 
 exports.serialize = function (tree,serialize) {
 	if(tree.type === "void") {
-		return "$$$" + tree.parseType + (tree.renderType ? " > " + tree.renderType : "") + "\n" + tree.text + "\n$$$\n\n";
+		return "$$$" + tree.parseType + (tree.renderType ? " > " + tree.renderType : "") + "\n" + tree.text + "\n$$$";
 	}
 	return "";
 };

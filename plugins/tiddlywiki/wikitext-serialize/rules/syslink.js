@@ -9,10 +9,9 @@ module-type: wikiruleserializer
 exports.name = "syslink";
 
 exports.serialize = function(tree,serialize) {
-	// Check if the link is suppressed. Tree may only have text, no children and attributes
-	var isSuppressed = tree.children && tree.children[0].text.substr(0,1) === "~";
-	var serialized = isSuppressed ? "~" : "";
-	// Append the link text
-	serialized += tree.attributes ? tree.attributes.to.value : tree.text;
-	return serialized;
+	if(tree.attributes && tree.attributes.to) {
+		return tree.attributes.to.value;
+	}
+	// A suppressed syslink is a plain text node; its span starts after the ~
+	return "~" + tree.text;
 };

@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Inline conditionals with elseif and else clauses round-trip byte-exact
 title: Serialize/Conditional
 type: text/vnd.tiddlywiki
 

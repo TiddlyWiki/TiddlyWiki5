@@ -1,0 +1,12 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Multi-valued variable display forms with and without separators round-trip byte-exact
+title: Serialize/MvvDisplayInline
+type: text/vnd.tiddlywiki
+
+((myvar))
+
+((myvar||:))
+
+((( [all[tiddlers]sort[]] )))
+
+((( [all[tiddlers]sort[]] ||: )))

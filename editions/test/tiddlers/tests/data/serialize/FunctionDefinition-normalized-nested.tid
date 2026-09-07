@@ -1,0 +1,48 @@
+title: Serialize/FunctionDefinition-normalized-nested
+description: AST-only mode preserves indented nested definitions verbatim, normalizes the pragma gap and drops the named end marker
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: info
+
+`\end alpha` becomes a bare `\end`, and the pragma is followed by a blank
+line; the indented nested definitions inside the body stay verbatim.
+
+Why: the definition text is stored verbatim in the AST, nested definitions
+included, but the named end marker and the single newline after the pragma
+are not recorded.
+
+* Covers: $:/plugins/tiddlywiki/wikitext-serialize/rules/fnprocdef.js and $:/plugins/tiddlywiki/wikitext-serialize/rules/whitespace.js.
+* Mode: ast-only (the Input field withholds the source from the serializer).
++
+title: Input
+mode: ast-only
+
+\whitespace trim
+\procedure alpha(x)
+    \procedure beta(y)
+    <$text text=<<y>>/>
+    \end beta
+    \procedure beta(y)
+        <$text text=<<y>>/>
+    \end beta
+<$transclude $variable="beta" y={{{ [<x>addprefix<x>] }}}/>
+\end alpha
+
+<<alpha "Elephant">>
++
+title: ExpectedWikitext
+
+\whitespace trim
+
+\procedure alpha(x)
+    \procedure beta(y)
+    <$text text=<<y>>/>
+    \end beta
+    \procedure beta(y)
+        <$text text=<<y>>/>
+    \end beta
+<$transclude $variable="beta" y={{{ [<x>addprefix<x>] }}}/>
+\end
+
+<<alpha "Elephant">>

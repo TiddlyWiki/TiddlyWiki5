@@ -1,0 +1,32 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Every documented attribute quoting and substitution form round-trips byte-exact
+title: Serialize/Attribute-docs
+type: text/vnd.tiddlywiki
+
+<div title="""This is my "title".""">Hello</div>
+
+<div data-address="Mouse House,
+Mouse Lane,
+Rodentville,
+Ratland."/>
+
+<div data-address="""Mouse House,
+"Mouse" Lane,
+Rodentville,
+Ratland."""/>
+
+<div title='He said "hello" to me'>Hello</div>
+
+<div title="He said 'hello' to me">Hello</div>
+
+<$text text=`Hello there this is the tiddler "$(currentTiddler)$"`/>
+
+<$text text=`This tiddler is titled "$(currentTiddler)$" and was last modified on ${[{!!modified}format:date[DDth MMM YYYY]]}$`/>
+
+<$text text=```Value with `embedded` backticks```/>
+
+<div style.color="red">Hello</div>
+
+<div style.color={{!!color}}>Hello</div>
+
+<div --bg-color={{{ [[red]] }}}>Hello</div>

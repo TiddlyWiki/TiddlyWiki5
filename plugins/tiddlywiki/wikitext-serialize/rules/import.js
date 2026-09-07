@@ -8,8 +8,11 @@ module-type: wikiruleserializer
 
 exports.name = "import";
 
-exports.serialize = function(tree,serialize) {
+exports.serialize = function(tree,serialize,options) {
+	options = options || {};
 	var filter = tree.attributes.filter.value;
-	// Sibling below the pragma become children, so we append the serialized children to the end..
-	return "\\import " + filter + "\n" + serialize(tree.children);
+	// Siblings below the pragma become children; the separator is not in
+	// the parse tree
+	var gap = $tw.utils.recoverSourceGap(tree.end,tree.children[0] && tree.children[0].start,{source: options.source}) || "\n";
+	return "\\import " + filter + gap + $tw.utils.serializeChildren(tree,serialize,options);
 };

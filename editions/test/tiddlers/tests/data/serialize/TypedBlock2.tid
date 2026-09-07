@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Typed blocks with file extension and MIME types round-trip byte-exact
 title: Serialize/TypedBlock2
 type: text/vnd.tiddlywiki
 
