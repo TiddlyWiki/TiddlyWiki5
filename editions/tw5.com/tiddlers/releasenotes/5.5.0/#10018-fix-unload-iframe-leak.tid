@@ -7,5 +7,6 @@ release: 5.5.0
 tags: $:/tags/ChangeNote
 title: $:/changenotes/5.5.0/#10018
 type: text/vnd.tiddlywiki
+github-contributors: DesignThinkerer
 
 Fixed a syntax error in the `unloadIFrame` loop that permanently left a hidden `<iframe library="true">` attached to the DOM every time the plugin library modal was closed.
