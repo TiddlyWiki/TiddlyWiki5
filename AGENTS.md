@@ -6,7 +6,7 @@ Guidance for AI agents (and human contributors) working in this repository. This
 
 If you find a contradiction (between these rules, the code, an issue, or the request you were given), or a change would introduce a security risk or break an established best practice, you MUST NOT code around it. Stop and ask the maintainer before proceeding
 
-If you are stuck, you MUST search your memory store first, if you have one (local memory, or an MCP memory server), before you start investigating. An earlier session may already have solved it
+If you are stuck, you MUST search your memory store, if you have one (local memory, or an MCP memory server), before you start investigating. An earlier session may already have solved it
 
 ## Scope discipline
 
@@ -21,8 +21,8 @@ If you are stuck, you MUST search your memory store first, if you have one (loca
 
 - You MUST NOT install dependencies (npm packages, browser binaries, or other software) without explicit consent. Say what will be installed and ask first
 - You MUST NOT commit or push unless explicitly asked. Approval of a change is not approval to commit or push
-- You MUST NOT discard changes by directory or across the whole tree (`git checkout -- editions/`, `git restore .`). Name each file you wrote, because a path-wide discard cannot tell your work from the maintainer's uncommitted edits
-- Before discarding anything, save the tree with `git diff > <scratch>/pre-discard.patch` so it can be recovered
+- You MUST NOT discard changes by directory or across the whole tree (`git checkout -- editions/`, `git restore .`). Name each file, and read `git diff -- <file>` first, because the maintainer's uncommitted edits may sit in the same file
+- Before discarding anything, save the tracked changes with `git diff > pre-discard.patch` into the scratch location named under Tooling and shell
 - `git stash -u` can report success while leaving tracked changes in place and still deleting untracked files, so read `git status` before you drop the stash. A dropped stash keeps its untracked files in its third parent, `git show <sha>^3`
 
 ## Tooling and shell
@@ -30,7 +30,7 @@ If you are stuck, you MUST search your memory store first, if you have one (loca
 - You MUST NOT use `npx`. Use globally installed tools or npm scripts
 - If neither a global tool nor an npm script exists, STOP and ask the maintainer. You MUST NOT install anything yourself and MUST NOT work around the ban
 - You SHOULD use non-interactive flags for shell file operations (`rm -f`, `cp -f`, `mv -f`) so commands do not hang on a prompt
-- Scratch files (probes, captures, screenshots, intermediate output) MUST go in `<home>/tmp/LLMs/<project-slug>/<branch-name>/` (`<home>` is the OS home directory), never in the repository or an agent private temp directory, so every agent and the maintainer use one known location and maintainers can learn from it
+- Scratch files (probes, captures, screenshots, intermediate output) MUST go in `<home>/tmp/LLMs/<project-slug>/<branch-name>/` (`<home>` is the OS home directory, `<project-slug>` the repository name, for example `TiddlyWiki5`), never in the repository or an agent private temp directory, so every agent and the maintainer use one known location and maintainers can learn from it
 
 ## Code style
 
@@ -46,10 +46,11 @@ If you are stuck, you MUST search your memory store first, if you have one (loca
 
 This applies to everything you write: code comments, commit and pull request text, documentation, issue bodies, review replies
 
-- You MUST cut your first draft before anyone sees it. Expect to remove more than half: a percentage target can be met while the text is still twice as long as it should be
+- You MUST cut your first draft against a number before anyone sees it: a code comment is one sentence, a commit message meets the limits under Commit and PR message workflow, a review reply is at most three sentences, an issue body at most ten lines
 - Present your optimum; the author can still shorten it further. A draft presented for review counts as final, because authors often approve unread and reviewers inherit the bloat
+- You SHOULD NOT use hyphens, en-dashes, or em-dashes as stylistic punctuation in prose and code comments; prefer short sentences
 
-## Code Comments
+## Code comments
 
 - A comment MUST state the **why** of a non-obvious decision, never the **how**, in ONE sentence. A second sentence needs a reason to exist
 - Use a concrete example, not abstract placeholders. Comments SHOULD NOT contain conversational filler or explanations of standard APIs or basic language constructs
@@ -73,16 +74,16 @@ This applies to everything you write: code comments, commit and pull request tex
 - Run the suite with `npm test`. (This builds the `test` edition; it is not a `--test` flag.)
 - On Windows, or to iterate on a few specs, run `node editions/test/quick-test.js [spec-name ...]` (no argument runs all specs). It boots the test edition and skips the slow `--build index` render step, so it is much faster than `npm test`
 - You SHOULD NOT run the full suite after every small change; run it before pushing or when asked
-- Every test SHOULD either guard a specific reported regression (reference the issue) or cover a distinct code path. No one-test-per-parameter padding
+- Every test SHOULD either guard a specific reported regression (reference the GitHub issue) or cover a distinct code path. No one-test-per-parameter padding
 - A new test MUST be proven able to fail: reintroduce the defect, confirm the test catches it, restore the code. A test never seen red proves nothing
-- Write tests as expectations of what the code **should** do, not what it currently does. You MUST NOT weaken an assertion to match buggy output: fix the code, or mark the test todo and file an issue describing the defect
+- Write tests as expectations of what the code **should** do, not what it currently does. You MUST NOT weaken an assertion to match buggy output: fix the code, or mark the test todo and file a GitHub issue describing the defect
 - You MUST NOT invent an expected value. Measure it by running the code, or leave it empty for the maintainer: a guessed expectation fails for the wrong reason, or passes against a wrong value
 - When auditing your own work, you SHOULD be honest about sloppy fixes; distinguish legitimate test adjustments from weakening a test until it passes
-- When a test fails, you SHOULD find the cause before changing anything: a wrong test assumption (fix the test), a fixture missing data (inject it inside the test, do not edit the shared fixture), or a real code defect (keep the assertion, mark the test todo, file an issue)
+- When a test fails, you SHOULD find the cause before changing anything: a wrong test assumption (fix the test), a fixture missing data (inject it inside the test, do not edit the shared fixture), or a real code defect (keep the assertion, mark the test todo, file a GitHub issue)
 - You SHOULD NOT couple a fixture to one test. If a test needs specific values, set them up inside the test, not in the shared fixture
 - Each test SHOULD be reproducible by maintainers from its body and comments
 - Testcase tiddlers under `editions/tw5.com/tiddlers/testcases/` are pulled into the test edition and run by `npm test`, so treat one as a test. It runs as a spec only when it has both an `Output` and an `ExpectedResult` payload; with `Output` alone it is skipped silently
-- Three testcase format rules each cost a failing run: keep a payload's fields on consecutive lines (a blank line ends the fields and starts the text), open `Output` with `\import [[$:/core/macros/...]]` because global macros are not in scope, and end the file with no trailing newline because the comparison is byte exact
+- Three testcase format rules each cost a failing run: keep a payload's fields on consecutive lines (a blank line ends the fields and starts the text), open `Output` with `\import [subfilter{$:/core/config/GlobalImportFilter}]` because the runner imports no global macros and a call to one renders as nothing, and end the file with no trailing newline because the comparison is byte exact
 - Embed a testcase in documentation with `<<testcase "TestCases/Path/Name">>` or `{{TestCases/Path/Name||$:/core/ui/TestCaseTemplate}}`. A plain `{{TestCases/Path/Name}}` has no parser for the type and renders the raw payload
 
 ## Security
@@ -95,18 +96,17 @@ This applies to everything you write: code comments, commit and pull request tex
 This repository squash merges pull requests, so the PR title and description become the permanent commit message. Make them count
 
 - You SHOULD base feature branches on `master`
-- You SHOULD  base documentation changes that can be published "out of order" on `upstream tiddlywiki-com` branch. Change TW version specific documentation based on `master`
+- You SHOULD base documentation changes that can be published out of order on the `tiddlywiki-com` branch of the main repository, and documentation tied to a TiddlyWiki version on `master`
 - **PR title:** it becomes the permanent commit subject, so it MUST be in the imperative mood, capitalised (first word and proper nouns only), 50 characters or fewer, with no trailing period. Check the mood by completing the sentence "If applied, this pull request will ...". A subsystem prefix MAY be added, for example `Menu plugin: ...`
 - PR description: the body SHOULD be a one-sentence executive summary, then concise, imperative bullets of what changed and why. The imperative mood applies to the whole commit message, not just the title. The description MUST NOT contain AI marketing or polite filler text
 - The title and description get the trim pass like everything else
 - The message MUST NOT repeat what the reader already has. Of each sentence ask where else it is available: the linked issue or advisory, the diff, the code comments, the review thread. If it is there, cut it. The diff already lists changed files, so name a file only when it is the subject of the change, and say what it does
 - A PR description SHOULD NOT use section headings. Needing them means it is too long. You SHOULD NOT pre-empt review objections by defending decisions nobody has questioned; answer when asked
-- You SHOULD NOT use hyphens, en-dashes, or em-dashes as stylistic punctuation in prose and code comments; prefer short sentences
 - Commit and PR text SHOULD describe what shipped to users, and SHOULD mention a bug fix only if the bug was in a released version; do not document a bug that was introduced and fixed within the same PR
 - If you use an external issue tracker, its IDs MUST NOT appear in commit messages or PR text, not even on branch commits
-- A release note is needed only when a change alters the format of output that was plausible but buggy. A plainly wrong value nobody could rely on needs none
-- Release notes track the pull request, not the issue: the PR number goes in the filename, title and links, with `#TODO` until it exists
-- You SHOULD note any visual change and illustrate it with before/after screenshots.
+- Every user-visible change gets a change note. An impact note is needed only when a change alters the format of output that was plausible but buggy; a plainly wrong value nobody could rely on needs none
+- Release notes live in `editions/tw5.com/tiddlers/releasenotes/<version>/` and track the pull request, not the issue: the PR number goes in the filename (`#<PR>.tid`), title and links, with `#TODO` until it exists
+- You SHOULD note any visual change and illustrate it with before/after screenshots
 - A signed Contributor License Agreement (CLA) is REQUIRED and checked by CI. You MUST NOT sign it on the contributor's behalf: it is a legal agreement only the human author can sign. If the author is new, point them to `contributing.md` for how to sign
 
 ## Commit and PR message workflow
@@ -118,8 +118,9 @@ The aim is a short, human-reviewed message, not a wall of agent text
 - Then commit with `git commit -F commit-msg.md` and delete the file. You SHOULD NOT stage or commit `commit-msg.md` itself
 - The draft MUST already be trimmed and follow the title and description rules above, so the author has nothing left to shorten
 - A trivial change gets a subject line only. A body that restates the subject is noise
+- Measure the draft before presenting it: subject 50 characters or fewer, summary at most two lines, each bullet one line, every line 80 columns or fewer. A draft outside these numbers goes back for another cut, not to the author
 
-Lay the message out as a subject line, a one-sentence executive summary, then imperative `*` bullets. Wrap body lines at 80 columns or fewer:
+Lay the message out as a subject line, a one-sentence executive summary, then imperative `*` bullets:
 
 ```
 Add AGENTS.md as the contribution source of truth
@@ -127,20 +128,16 @@ Add AGENTS.md as the contribution source of truth
 Give AI agents and human contributors one authoritative set of rules for
 working in this repository
 
-* Capture the contribution and coding conventions in AGENTS.md, covering
-  scope discipline, code style, tests, security, and the pull request and
-  commit workflow
 * Point the Claude Code and Gemini CLI tools at AGENTS.md so each agent
-  reads the same guidance instead of a separate copy that could drift
-* Keep AGENTS.md as the single place to update when the rules change, so
-  the tool files stay thin pointers
+  reads the same guidance instead of a copy that could drift
+* Keep the tool files as thin pointers, so the rules change in one place
 ```
 
 ## Chat and response style
 
-- Reference code as clickable markdown links, for example `[file.js:42](path/to/file.js#L42)`, never bare paths or backticks
-- Use clickable links for commit hashes and pull requests, not bare hashes.
-- Give every table a unique label and a number that increments across the whole conversation
-- You SHOULD prefix any part that needs a decision from the user with a lightning icon
-- When the user asks for something, do it immediately; do not argue
-- Test suggested variants before explaining why they will not work
+- You MUST reference code as clickable markdown links, for example `[file.js:42](path/to/file.js#L42)`. When no link can resolve (a path with spaces, or outside the workspace), give the plain path in backticks
+- You MUST use clickable links for commit hashes and pull requests, not bare hashes
+- You MUST give every table a unique label and a number that increments across the whole conversation
+- You SHOULD prefix any part that needs a decision from the user with a lightning icon (⚡)
+- When the user asks for something, you MUST do it immediately and not argue, unless a rule above requires stopping
+- You MUST test suggested variants before explaining why they will not work
