@@ -1,0 +1,13 @@
+created: 20260222000000000
+modified: 20260222000000000
+tags: [[in-tree-of Operator]] [[Operator Examples]]
+title: in-tree-of Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[HelloThere]in-tree-of[TableOfContents]]" "check if ''HelloThere'' is in the tag tree rooted at ''TableOfContents''">>
+<<.operator-example 2 "[all[tiddlers]in-tree-of[Concepts]sort[title]]" "all tiddlers in the tag tree rooted at ''Concepts'', sorted by title">>
+<<.operator-example 3 "[all[tiddlers]!in-tree-of[Concepts]sort[title]]" "all tiddlers NOT in the tag tree rooted at ''Concepts''">>
+<<.operator-example 4 "[all[tiddlers]in-tree-of:inclusive[Concepts]]" "all tiddlers in the tag tree, including ''Concepts'' itself">>
+<<.operator-example 5 "[[MyNote]in-tree-of[Projects],[list]]" "check if ''MyNote'' is in the list-field tree rooted at ''Projects''">>
+<<.operator-example 6 "[all[tiddlers]in-tree-of[Projects],[list]sort[title]]" "all tiddlers in the list-field tree rooted at ''Projects''">>
+<<.operator-example 7 "[[MyNote]in-tree-of[Projects],{Config!!treeField}]" "check using a field name read dynamically from ''Config!!treeField''">>
