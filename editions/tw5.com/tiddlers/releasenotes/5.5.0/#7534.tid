@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#7534
+description: Support markdown frontmatter metadata with save-time migration from .meta files
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9694
+github-contributors: linonetwo
+
+Adds support for reading and writing standard markdown frontmatter metadata, and introduces a pluggable `tiddlerserializer` mechanism.
