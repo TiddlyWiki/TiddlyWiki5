@@ -25,8 +25,9 @@ If you are stuck, you MUST search your memory store, if you have one (local memo
 
 - You MUST NOT install dependencies (npm packages, browser binaries, or other software) without explicit consent. Say what will be installed and ask first
 - You MUST NOT commit or push unless explicitly asked. Approval of a change is not approval to commit or push
-- You MUST NOT discard changes by directory or across the whole tree (`git checkout -- editions/`, `git restore .`). Name each file, and read `git diff -- <file>` first, because the maintainer's uncommitted edits may sit in the same file
-- Before discarding anything, save the tracked changes with `git diff > pre-discard.patch` into the scratch location named under Tooling and shell
+- You MUST NOT discard changes by directory or across the whole tree (`git checkout -- editions/`, `git restore .`). Name each file
+- You MUST NOT discard an uncommitted hunk you did not make in this session, not even in a file you were asked to clean up. An earlier session of yours counts as someone else here: you cannot tell its hunks from the maintainer's. Run `git diff -- <file>`, quote the hunks in your reply, and STOP; discard only after the maintainer names the hunks to drop
+- Before discarding anything, save the tracked changes with `git diff > pre-discard.patch` in your scratch directory
 - `git stash -u` can report success while leaving tracked changes in place and still deleting untracked files, so read `git status` before you drop the stash. A dropped stash keeps its untracked files in its third parent, `git show <sha>^3`
 
 ## Tooling and shell
@@ -34,7 +35,6 @@ If you are stuck, you MUST search your memory store, if you have one (local memo
 - You MUST NOT use `npx`. Use globally installed tools or npm scripts
 - If neither a global tool nor an npm script exists, STOP and ask the maintainer. You MUST NOT install anything yourself and MUST NOT work around the ban
 - You SHOULD use non-interactive flags for shell file operations (`rm -f`, `cp -f`, `mv -f`) so commands do not hang on a prompt
-- Scratch files (probes, captures, screenshots, intermediate output) MUST go in `<home>/tmp/LLMs/<project-slug>/<branch-name>/` (`<home>` is the OS home directory, `<project-slug>` the repository name, for example `TiddlyWiki5`), never in the repository or an agent private temp directory, so every agent and the maintainer use one known location and maintainers can learn from it
 
 ## Code style
 
@@ -68,6 +68,7 @@ This applies to everything you write: code comments, commit and pull request tex
 - You SHOULD NOT use `\whitespace trim` when a template contains prose or text runs; it eats meaningful whitespace around the text. Use it only in templates that are purely widgets and markup
 - You SHOULD name derived variables (values computed from parameters) with a leading underscore, for example `_myValue`
 - For a widget with several attributes, you SHOULD put one attribute per line, and put a space before `>` when it is immediately followed by `<<variable>>`
+- Core global macros and procedures live in `core/wiki/macros/`, for example `list-links` in `core/wiki/macros/list.tid`
 
 ## Backwards compatibility
 
@@ -79,9 +80,9 @@ This applies to everything you write: code comments, commit and pull request tex
 - On Windows, or to iterate on a few specs, run `node editions/test/quick-test.js [spec-name ...]` (no argument runs all specs). It boots the test edition and skips the slow `--build index` render step, so it is much faster than `npm test`
 - You SHOULD NOT run the full suite after every small change; run it before pushing or when asked
 - Every test SHOULD either guard a specific reported regression (reference the GitHub issue) or cover a distinct code path. No one-test-per-parameter padding
-- A new test MUST be proven able to fail: reintroduce the defect, confirm the test catches it, restore the code. A test never seen red proves nothing
+- A new or changed test MUST be proven able to fail before you report it: break the code under test, run the spec, quote the failing output in your reply, restore the code, and run it green. A test never seen red proves nothing
 - Write tests as expectations of what the code **should** do, not what it currently does. You MUST NOT weaken an assertion to match buggy output: fix the code, or mark the test todo and file a GitHub issue describing the defect
-- You MUST NOT invent an expected value. Measure it by running the code, or leave it empty for the maintainer: a guessed expectation fails for the wrong reason, or passes against a wrong value
+- You MUST NOT invent an expected value. Measure it by running the code, or leave it empty for the maintainer: a guessed expectation fails for the wrong reason, or passes against a wrong value. For a testcase, run it with an empty `ExpectedResult`, copy the rendered HTML from the runner's "Expected ... to be" message into it, and rerun
 - When auditing your own work, you SHOULD be honest about sloppy fixes; distinguish legitimate test adjustments from weakening a test until it passes
 - When a test fails, you SHOULD find the cause before changing anything: a wrong test assumption (fix the test), a fixture missing data (inject it inside the test, do not edit the shared fixture), or a real code defect (keep the assertion, mark the test todo, file a GitHub issue)
 - You SHOULD NOT couple a fixture to one test. If a test needs specific values, set them up inside the test, not in the shared fixture
@@ -107,9 +108,9 @@ This repository squash merges pull requests, so the PR title and description bec
 - The message MUST NOT repeat what the reader already has. Of each sentence ask where else it is available: the linked issue or advisory, the diff, the code comments, the review thread. If it is there, cut it. The diff already lists changed files, so name a file only when it is the subject of the change, and say what it does
 - A PR description SHOULD NOT use section headings. Needing them means it is too long. You SHOULD NOT pre-empt review objections by defending decisions nobody has questioned; answer when asked
 - Commit and PR text SHOULD describe what shipped to users, and SHOULD mention a bug fix only if the bug was in a released version; do not document a bug that was introduced and fixed within the same PR
-- If you use an external issue tracker, its IDs MUST NOT appear in commit messages or PR text, not even on branch commits
+- IDs from any issue tracker other than GitHub MUST NOT appear in commit messages or PR text, not even on branch commits and even when the request names one; mention the ID in your reply instead
 - Every user-visible change gets a change note. An impact note is needed only when a change alters the format of output that was plausible but buggy; a plainly wrong value nobody could rely on needs none
-- Release notes live in `editions/tw5.com/tiddlers/releasenotes/<version>/` and track the pull request, not the issue: the PR number goes in the filename (`#<PR>.tid`), title and links, with `#TODO` until it exists
+- Both notes are tiddlers under `editions/tw5.com/tiddlers/releasenotes/<version>/`, a change note tagged `$:/tags/ChangeNote` and an impact note tagged `$:/tags/ImpactNote` that links its change note; copy the fields of an existing one. They track the pull request, not the issue: the PR number goes in the filename (`#<PR>.tid`), title and links, with `#TODO` until it exists
 - You SHOULD note any visual change and illustrate it with before/after screenshots
 - A signed Contributor License Agreement (CLA) is REQUIRED and checked by CI. You MUST NOT sign it on the contributor's behalf: it is a legal agreement only the human author can sign. If the author is new, point them to `contributing.md` for how to sign
 
@@ -119,7 +120,7 @@ The aim is a short, human-reviewed message, not a wall of agent text
 
 - You MUST NOT commit until explicitly asked. Approval of a code change is not approval to commit
 - When asked to commit, draft the message, apply the trim pass, and only then write it into `commit-msg.md` at the repo root for review. Review is a veto gate, not an editing pass
-- Then commit with `git commit -F commit-msg.md` and delete the file. You SHOULD NOT stage or commit `commit-msg.md` itself
+- Then STOP and wait for the author's approval; only after it, commit with `git commit -F commit-msg.md` and delete the file. With nobody to approve, the draft is the end of the task. You SHOULD NOT stage or commit `commit-msg.md` itself
 - The draft MUST already be trimmed and follow the title and description rules above, so the author has nothing left to shorten
 - A trivial change gets a subject line only. A body that restates the subject is noise
 - Measure the draft before presenting it: subject 50 characters or fewer, summary at most two lines, each bullet one line, every line 80 columns or fewer. A draft outside these numbers goes back for another cut, not to the author
