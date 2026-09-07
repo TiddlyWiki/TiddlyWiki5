@@ -1,0 +1,18 @@
+title: $:/changenotes/5.5.0/#9981/impacts/escapes
+changenote: $:/changenotes/5.5.0/#9981
+created: 20260822164329626
+modified: 20260822164329626
+tags: $:/tags/ImpactNote
+impact-type: compatibility-break
+description: A backslash in a date template now escapes the next character of the template, where it used to be removed from the finished text.
+
+Up to 5.4.1 the escapes were stripped from the rendered result rather than from the template, so a backslash consumed whatever the token after it had produced.
+
+|!Template |!Up to 5.4.1 |!From 5.5.0 |
+|`MM0\D\D` |`110DD` |`110DD` |
+|`DDth MMM \M\M\M YYYY` |`9th November MMM 2014` |`9th November MMM 2014` |
+|`\0MM` |`11` |`011` |
+|`\MM` |`11` |`MM` |
+|`\YYYY` |`2014` |`Y14Y` |
+
+Both examples given in [[DateFormat]] are unchanged, because in those the escaped character is not one a token begins with. A template that escapes a character which does start a token, and relied on the token still being substituted, renders differently. Remove the backslash in that case.

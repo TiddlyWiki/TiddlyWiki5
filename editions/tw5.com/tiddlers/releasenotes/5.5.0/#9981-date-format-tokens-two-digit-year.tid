@@ -1,0 +1,18 @@
+title: $:/changenotes/5.5.0/#9981/impacts/two-digit-year
+changenote: $:/changenotes/5.5.0/#9981
+created: 20260822164329626
+modified: 20260822164329626
+tags: $:/tags/ImpactNote
+impact-type: compatibility-break
+description: The `YY` and `wYY` date format tokens now show the last two digits of the year, so years outside 2000 to 2099 render differently.
+
+Up to 5.4.1 `YY` and `wYY` subtracted 2000 from the year rather than taking its last two digits. Within 2000 to 2099 the two are the same, which is why this went unnoticed.
+
+Outside that range the old result was not a two digit year at all:
+
+|!Year |!Up to 5.4.1 |!From 5.5.0 |
+|1999 |`-1` |`99` |
+|2100 |`100` |`00` |
+|-2014 |`-4014` |`14` |
+
+Anything that stored or matched the old output for a year before 2000 or after 2099 needs updating. Use `YYYY` where the full year is wanted, or `aYYYY` to show a negative year as positive.
