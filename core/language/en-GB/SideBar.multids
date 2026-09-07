@@ -16,3 +16,8 @@ Tags/Caption: Tags
 Tags/Untagged/Caption: untagged
 Tools/Caption: Tools
 Types/Caption: Types
+Folder/Caption: Folder
+Folder/Root/Clear/Hint: Clear root tag
+Folder/Setup/Hint: Set a root tag to generate a folder-style table of contents in the sidebar. All tiddlers tagged under that root (recursively) will appear as a tree.
+Folder/Setup/Placeholder: Root tag title...
+Folder/Setup/Help: Tip: You can change this at any time in the Control Panel under Settings → Folder Sidebar.
