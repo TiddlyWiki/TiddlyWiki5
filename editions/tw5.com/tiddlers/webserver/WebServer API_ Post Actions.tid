@@ -1,0 +1,91 @@
+created: 20251107000000000
+modified: 20251107000000000
+tags: [[WebServer API]]
+title: WebServer API: Post Actions
+type: text/vnd.tiddlywiki
+
+Execute action tiddlers on the server side
+
+```
+POST /recipes/default/actions
+```
+
+The body should be a JSON object with the following properties:
+
+* ''tag'' - (optional) tag name to execute all action tiddlers with this tag
+* ''title'' - (optional) title of a specific action tiddler to execute
+* ''variables'' - (optional) object containing variable name-value pairs to set in the execution context
+
+At least one of ''tag'' or ''title'' must be provided as a non-empty string. If both are provided, ''title'' takes precedence and ''tag'' is ignored.
+
+Variables can also be passed as URL query parameters. URL parameters take precedence over variables in the request body.
+
+Headers:
+
+* ''Content-Type'' - must be set to `application/json`
+* ''x-requested-with'' - must be set to `TiddlyWiki` in order for the request to succeed, unless [[WebServer Parameter: csrf-disable]] is set to `yes`
+
+Example 1 - Execute by tag:
+
+```json
+{
+	"tag": "$:/tags/Actions",
+	"variables": {
+		"currentTiddler": "MyTiddler"
+	}
+}
+```
+
+Example 2 - Execute by title:
+
+```json
+{
+	"title": "$:/core/ui/Actions/new-tiddler",
+	"variables": {
+		"currentTiddler": "MyTiddler"
+	}
+}
+```
+
+Example 3 - Title takes precedence when both provided:
+
+```json
+{
+	"tag": "$:/tags/Actions",
+	"title": "$:/my-specific-action",
+	"variables": {
+		"currentTiddler": "MyTiddler"
+	}
+}
+```
+
+''Note'': This is useful for testing individual actions from a tag group.
+
+Example 4 - Variables via URL parameters (take precedence):
+
+```
+POST /recipes/default/actions?currentTiddler=MyTiddler&status=done
+```
+
+```json
+{
+	"title": "$:/core/ui/Actions/new-tiddler",
+	"variables": {
+		"currentTiddler": "OtherTiddler"
+	}
+}
+```
+
+In this example, `currentTiddler` will be `"MyTiddler"` from the URL parameter, not `"OtherTiddler"` from the body.
+
+Response:
+
+* 200 OK
+*> `Content-Type: application/json`
+*> `{"success": true}`
+* 400 Bad Request - Invalid JSON or missing required fields
+*> `Content-Type: application/json`
+*> `{"error": "error message"}`
+* 404 Not Found - Action tiddler not found (when using title)
+*> `Content-Type: application/json`
+*> `{"error": "Tiddler not found: <title>"}`
