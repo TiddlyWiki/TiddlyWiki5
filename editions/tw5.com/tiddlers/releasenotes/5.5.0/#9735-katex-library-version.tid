@@ -1,0 +1,12 @@
+change-category: plugin
+change-type: bugfix
+created: 20260711021049000
+description: The KaTeX plugin's library-version field no longer carries a v prefix
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9735
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9735
+type: text/vnd.tiddlywiki
+
+* Remove the `v` prefix from the KaTeX plugin's `library-version` field (fixes [[Issue #9387|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9387]])
