@@ -1,0 +1,13 @@
+change-category: developer
+change-type: enhancement
+created: 20260713001110000
+description: Conditional shortcuts annotate their parse tree nodes
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/9910
+modified: 20260713001110000
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9910
+type: text/vnd.tiddlywiki
+
+The `$list` widgets synthesized by the `<%if%>` conditional shortcut now carry `isConditional: true`, following the `isProcedureDefinition` precedent; `<%elseif%>` clauses carry their exact source spans, and clause bodies that a blank line switched to block mode carry `blockContent: true`. Consumers can distinguish conditional shortcuts from hand-written `$list` widgets and reproduce the original clause layout. The new fields are purely additive; rendered output is unchanged.
