@@ -6,10 +6,13 @@ Guidance for AI agents (and human contributors) working in this repository. This
 
 If you find a contradiction (between these rules, the code, an issue, or the request you were given), or a change would introduce a security risk or break an established best practice, you MUST NOT code around it. Stop and ask the maintainer before proceeding
 
+If you are stuck, you MUST search your memory store first, if you have one (local memory, or an MCP memory server), before you start investigating. An earlier session may already have solved it
+
 ## Scope discipline
 
 - You SHOULD do exactly what was asked, and SHOULD NOT expand scope, refactor unrelated code, or "improve" things nobody requested
-- One pull request SHOULD make one logical change. Open a consultation issue before investing time in a large PR
+- One pull request SHOULD make one logical change, unless several changes touch the same file and separate pull requests would depend on or invalidate each other
+- You MUST open a consultation issue before investing time in a large PR
 - Before creating a file or tiddler, you MUST check whether it already exists. If it does, read it and get confirmation before overwriting
 - Before editing documentation tiddlers, you MUST check `git status` / `git diff` first so you do not overwrite edits made by a human
 
@@ -22,6 +25,7 @@ If you find a contradiction (between these rules, the code, an issue, or the req
 
 - You MUST NOT use `npx`. Use globally installed tools or npm scripts
 - You SHOULD use non-interactive flags for shell file operations (`rm -f`, `cp -f`, `mv -f`) so commands do not hang on a prompt
+- Scratch files (probes, captures, screenshots, intermediate output) MUST go in `<home>/tmp/LLMs/<project-slug>/<branch-name>/` (`<home>` is the OS home directory), never in the repository or an agent private temp directory, so every agent and the maintainer use one known location and maintainers can learn from it
 
 ## Code style
 
