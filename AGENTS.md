@@ -21,6 +21,9 @@ If you are stuck, you MUST search your memory store first, if you have one (loca
 
 - You MUST NOT install dependencies (npm packages, browser binaries, or other software) without explicit consent. Say what will be installed and ask first
 - You MUST NOT commit or push unless explicitly asked. Approval of a change is not approval to commit or push
+- You MUST NOT discard changes by directory or across the whole tree (`git checkout -- editions/`, `git restore .`). Name each file you wrote, because a path-wide discard cannot tell your work from the maintainer's uncommitted edits
+- Before discarding anything, save the tree with `git diff > <scratch>/pre-discard.patch` so it can be recovered
+- `git stash -u` can report success while leaving tracked changes in place and still deleting untracked files, so read `git status` before you drop the stash. A dropped stash keeps its untracked files in its third parent, `git show <sha>^3`
 
 ## Tooling and shell
 
@@ -78,6 +81,9 @@ This applies to everything you write: code comments, commit and pull request tex
 - When a test fails, you SHOULD find the cause before changing anything: a wrong test assumption (fix the test), a fixture missing data (inject it inside the test, do not edit the shared fixture), or a real code defect (keep the assertion, mark the test todo, file an issue)
 - You SHOULD NOT couple a fixture to one test. If a test needs specific values, set them up inside the test, not in the shared fixture
 - Each test SHOULD be reproducible by maintainers from its body and comments
+- Testcase tiddlers under `editions/tw5.com/tiddlers/testcases/` are pulled into the test edition and run by `npm test`, so treat one as a test. It runs as a spec only when it has both an `Output` and an `ExpectedResult` payload; with `Output` alone it is skipped silently
+- Three testcase format rules each cost a failing run: keep a payload's fields on consecutive lines (a blank line ends the fields and starts the text), open `Output` with `\import [[$:/core/macros/...]]` because global macros are not in scope, and end the file with no trailing newline because the comparison is byte exact
+- Embed a testcase in documentation with `<<testcase "TestCases/Path/Name">>` or `{{TestCases/Path/Name||$:/core/ui/TestCaseTemplate}}`. A plain `{{TestCases/Path/Name}}` has no parser for the type and renders the raw payload
 
 ## Security
 
