@@ -7,8 +7,12 @@ description: 將個別原始條目儲存到檔案
 --save <tiddler-filter> <filename-filter>
 ```
 
-* ''tiddler-filter'': 標識要儲存的條目的篩選器
-* ''filename-filter'': 可選的篩選器，轉換條目名稱至路徑名。如果省略，預設為 `[is[tiddler]]`，其使用未改變的條目名稱為檔名
+```
+  tiddler-filter   標識要儲存的條目的篩選器
+  filename-filter  可選的篩選器，轉換條目名稱至路徑名。如果省略，
+                   預設為 [is[tiddler]]，
+                   其使用未改變的條目名稱為檔名
+```
 
 附註：
 
@@ -20,4 +24,8 @@ description: 將個別原始條目儲存到檔案
 
 範例：
 
-* `--save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"` -- 儲存所有非系統的圖像條目為 "tiddlers" 子資料夾中的檔案，檔名為 URL 編碼的條目名稱
+```
+  儲存所有非系統的圖像條目為 "tiddlers" 子資料夾中的檔案，檔名為 URL 編碼的條目名稱:
+
+    --save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"
+```

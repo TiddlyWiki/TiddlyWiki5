@@ -11,12 +11,17 @@ També es pot indicar opcionalment un nom i un valor per a una altra variable.
 --render <filtre-de-tiddler> [<nom-del-filtre>] [<render-type>] [<plantilla>] [<nom>] [<valor>]
 ```
 
-* '' filtre-de-tiddler '': Filtre que indica els tiddler(s) que s'han de generar
-* '' nom-del-filtre '': Filtre opcional que transforma els títols dels tiddlers en noms de ruta. Si s'omet, el valor per omissió és `[is[tiddler]addsuffix [.html]]`, que utilitza el títol de tiddler sense modificar com a nom de fitxer
-* '' tipus-de-contingut '': tipus de contingut opcional: `text / html` (el valor per omissió) retorna el text HTML complet i ` text/plain` només retorna el contingut del text (és a dir, ignora les etiquetes HTML i altres materials no imprimibles)
-* ''plantilla'': Plantilla opcional per a generar cada tiddler
-* ''nom'': Nom de variable opcional
-* ''valor'': Valor de variable opcional
+```
+  filtre-de-tiddler   Filtre que indica els tiddler(s) que s'han de generar
+  nom-del-filtre      Filtre opcional que transforma els títols dels tiddlers
+                      en noms de ruta (per omissió: [is[tiddler]addsuffix[.html]])
+  tipus-de-contingut  tipus de contingut opcional: text/html (el valor per
+                      omissió) retorna el text HTML complet, i text/plain només
+                      retorna el contingut del text
+  plantilla           Plantilla opcional per a generar cada tiddler
+  nom                 Nom de variable opcional
+  valor               Valor de variable opcional
+```
 
 Per omissió, el nom del fitxer es resol en relació amb la subcarpeta `output ' de la carpeta d’edició. L'ordre `--output` es pot utilitzar per dirigir la sortida a una altra carpeta.
 
@@ -32,5 +37,8 @@ Notes:
 
 Exemples:
 
-* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` --
-genera tots els tiddlers que no siguin del sistema com a fitxers a la carpeta "tiddlers" amb títols codificats per URL amb l'extensió HTML
+```
+  Genera tots els tiddlers que no siguin del sistema com a fitxers a la carpeta "tiddlers" amb títols codificats per URL amb l'extensió HTML:
+
+    --render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'
+```

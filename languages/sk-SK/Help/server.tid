@@ -11,14 +11,21 @@ Na úrovni roota slúži na zobrazenie určeného tiddlera. Mimo roota poskytuje
 
 Parametre sú:
 
-* ''port'' - port number (defaults to "8080")
-* ''roottiddler'' - tiddler slúžiaci ako root (štandardne "$:/core/save/all") 
-* ''rendertype'' - typ obsahu, v ktorom sa má root tiddler zobrazovať (štandardne ako "text/plain")
-* ''servetype'' - typ obsahu, v ktorom má byť root tiddler poskytnutý (štandardne ako "text/html")
-* ''username'' - štandarne pred-definované meno používateľa na podpisovanie vykonaných zmien
-* ''password'' - voliteľné heslo pre základnú autentifikáciu
-* ''host'' - voliteľný hostname z ktorého sa poskytuje stránka (štandardne  "127.0.0.1" alebo "localhost")
-* ''pathprefix'' - voliteľný prefix pre cesty k súborom
+```
+  port              port number (defaults to "8080")
+  roottiddler       tiddler slúžiaci ako root
+                    (štandardne "$:/core/save/all")
+  rendertype        typ obsahu, v ktorom sa má root tiddler
+                    zobrazovať (štandardne ako "text/plain")
+  servetype         typ obsahu, v ktorom má byť root tiddler
+                    poskytnutý (štandardne ako "text/html")
+  username          štandarne pred-definované meno používateľa na
+                    podpisovanie vykonaných zmien
+  password          voliteľné heslo pre základnú autentifikáciu
+  host              voliteľný hostname z ktorého sa poskytuje stránka
+                    (štandardne "127.0.0.1" alebo "localhost")
+  pathprefix        voliteľný prefix pre cesty k súborom
+```
 
 Ak je špecifikovaný parameter hesla, tak browser vyzve používateľa na zadanie mena a hesla. Majte na pamäti, že heslo je posielané v nechránenej podobe, takže táto implentácia nie je vhodná na všeobecné použitie.
 

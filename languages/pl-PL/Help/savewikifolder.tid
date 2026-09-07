@@ -14,10 +14,15 @@ description: Zapisuje wiki do nowego folderu
 
 Wspierane argumenty:
 
-* ''filter'': wyrażenie filtra określające które tiddlery mają być uwzględnione w zapisanej wiki
-* ''explodePlugins'': domyślna wartość to `yes`:
-** `yes` rozdzieli wtyczki na osobne pliki tiddlerów i zapisze je do podfolderu z wtyczkami
-** `no` każda wtyczka będzie zapisana jako jeden zbiorczy plik w formacie JSON w folderze z tiddlerami
+```
+  filter            wyrażenie filtra określające które tiddlery mają być
+                    uwzględnione w zapisanej wiki
+  explodePlugins    domyślna wartość to "yes":
+                    "yes" rozdzieli wtyczki na osobne pliki tiddlerów i
+                    zapisze je do podfolderu z wtyczkami
+                    "no" każda wtyczka będzie zapisana jako jeden zbiorczy
+                    plik w formacie JSON w folderze z tiddlerami
+```
 
 Obie wartości dla `explodePlugins` stworzą taką samą wiki. Różnica będzie jedynie w sposobie rozlokowania wtyczek.
 
