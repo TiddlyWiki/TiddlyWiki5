@@ -1,0 +1,21 @@
+title: Operators/Wikify/TextMode
+description: Simple wikify operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+<$text text={{{ [subfilter{Filter}] }}}/>
++
+title: Filter
+
+[{Text}wikify[html],[inline],[text/vnd.tiddlywiki]]
++
+title: Text
+
+This is ''the text'' that is __wikified__
++
+title: ExpectedResult
+
+This is &lt;strong&gt;the text&lt;/strong&gt; that is &lt;u&gt;wikified&lt;/u&gt;
