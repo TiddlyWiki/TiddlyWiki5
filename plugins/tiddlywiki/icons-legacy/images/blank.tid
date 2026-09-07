@@ -1,0 +1,5 @@
+title: $:/core/images/blank
+tags: $:/tags/Image
+
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-blank tc-image-button" viewBox="0 0 128 128"/>
