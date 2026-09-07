@@ -1,0 +1,8 @@
+created: 20251115021424272
+list-before: $:/config/FieldEditorFilters/default
+modified: 20251115023042502
+tags: $:/tags/FieldEditorFilter
+title: $:/config/FieldEditorFilters/ReleaseNote/impact-type-selector
+type: text/vnd.tiddlywiki
+
+[suffix[impact-type]then[$:/config/EditTemplateFields/ReleaseNote/change-impact-type]]
