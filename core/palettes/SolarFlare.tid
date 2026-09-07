@@ -59,6 +59,8 @@ background: #fdf6e3
     tiddler-link-background: <<colour background>>
     tab-background-selected: <<colour background>>
         dropdown-tab-background-selected: <<colour tab-background-selected>>
+button-background:
+button-background-hover: #d6cdb8
 foreground: #657b83
     dragger-background: <<colour foreground>>
     tab-foreground: <<colour foreground>>
