@@ -1,0 +1,38 @@
+title: $:/plugins/tiddlywiki/highlight/styles-dev
+tags: [[$:/tags/Stylesheet]] [[$:/tags/Stylesheet/Highlight]]
+
+/* filter prefix */
+.hljs-property.suffix_ {
+  color: #cb4b16;
+}
+
+.hljs-operator ~ .hljs-property.suffix_ {
+  color: #0050a0;
+}
+
+.hljs-operator.filter_ {
+  font-weight: bold;
+  color: #0050a0;
+}
+
+.hljs-params.variable_ {
+  font-weight: bold;
+}
+
+.hljs-variable.filter_ {
+  font-weight: normal;
+}
+
+.hljs-function.title_ {
+  font-weight: bold;
+}
+
+.hljs-subst {
+  color: purple;
+}
+
+
+.hljs-snippet {
+  color: <<colour foreground>>;
+  -webkit-text-size-adjust:none;
+}

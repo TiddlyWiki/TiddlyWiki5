@@ -1,0 +1,36 @@
+title: Markdown/CodeSpan
+description: no tw rendering in backticks code span
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+`$:/palette`
+
+`CamelCase`
+
+`{{New Tiddler}}`
+
+`{{{ [[New Tiddler]] }}}`
+
+`&lt;&lt;version&gt;&gt;`
+
+`<<version>>`
++
+title: ExpectedResult
+
+<div class="markdown">
+<p><code class="_codified_">$:/palette</code>
+</p>
+<p><code class="_codified_">CamelCase</code>
+</p>
+<p><code class="_codified_">{{New Tiddler}}</code>
+</p>
+<p><code class="_codified_">{{{ [[New Tiddler]] }}}</code>
+</p>
+<p><code class="_codified_">&amp;lt;&amp;lt;version&amp;gt;&amp;gt;</code>
+</p>
+<p><code class="_codified_">&lt;&lt;version&gt;&gt;</code>
+</p>
+</div>
