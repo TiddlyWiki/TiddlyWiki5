@@ -1,11 +1,11 @@
 caption: Code Blocks
 created: 20131205160047557
-modified: 20220513120302826
+modified: 20260827120000000
 tags: WikiText
 title: Code Blocks in WikiText
 type: text/vnd.tiddlywiki
 
-You can use triple backticks <code>&#96;&#96;&#96;</code> to mark code blocks (<<.icon $:/core/images/mono-block>>):
+You can use three or more backticks <code>&#96;&#96;&#96;</code> to mark code blocks (<<.icon $:/core/images/mono-block>>):
 
 <pre>&#96;&#96;&#96;
 This will be monospaced
@@ -18,7 +18,23 @@ Renders as:
 This will be monospaced
 ```
 
-To be interpreted correctly, the three backticks need to be at the start of the line and immediately followed by a line-break.
+To be interpreted correctly, the backticks need to stand at the start of the line, carrying no more than three spaces of indentation, and carry a line-break immediately after.
+
+The opening fence may name the language of the code, which plugins such as the [[Highlight Plugin|$:/plugins/tiddlywiki/highlight]] use for syntax highlighting:
+
+<pre>&#96;&#96;&#96;js
+var a = b + c;
+&#96;&#96;&#96;
+</pre>
+
+A block closes only on a fence at least as long as the one that opened it, so a longer fence holds shorter runs of backticks:
+
+<pre>&#96;&#96;&#96;&#96;
+&#96;&#96;&#96;js
+var a = b + c;
+&#96;&#96;&#96;
+&#96;&#96;&#96;&#96;
+</pre>
 
 Be aware that any preceding paragraph content should be properly terminated with a double line break, too. So, this example is wrong:
 

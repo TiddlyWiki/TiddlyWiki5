@@ -32,9 +32,11 @@ exports.init = function(parser) {
 exports.parse = function() {
 	var reEnd = /(""")|(\r?\n)/mg,
 		tree = [],
-		match;
+		match,
+		delimiterStart = this.parser.pos;
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
+	var bodyStart = this.parser.pos;
 	do {
 		// Parse the run up to the terminator
 		tree.push.apply(tree,this.parser.parseInlineRun(reEnd,{eatTerminator: false}));
@@ -50,6 +52,16 @@ exports.parse = function() {
 			}
 		}
 	} while(match && !match[1]);
+	// Report a run that never met its closing delimiter
+	if(!match) {
+		this.parser.addDiagnostic({
+			from: delimiterStart,
+			to: bodyStart,
+			severity: "warning",
+			code: "unterminated-hardlinebreaks",
+			message: "Unmatched hard linebreak delimiter reaching the end of the source"
+		});
+	}
 	// Mark first and last node, and return the nodes
 	if(tree[0]) tree[0].isRuleStart = true;
 	if(tree[tree.length-1]) tree[tree.length-1].isRuleEnd = true;
