@@ -1,0 +1,20 @@
+title: Markdown/Images
+description: tw image links
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+[img[https://tiddlywiki.com/favicon.ico]]
+
+[[img[https://tiddlywiki.com/favicon.ico]]](https://tiddlywiki.com)<!-- tw image should be allowed -->
++
+title: ExpectedResult
+
+<div class="markdown">
+<p><img src="https://tiddlywiki.com/favicon.ico">
+</p>
+<p><a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank"><img src="https://tiddlywiki.com/favicon.ico"></a>
+</p>
+</div>

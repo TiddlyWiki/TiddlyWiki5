@@ -1,0 +1,39 @@
+title: Markdown/FilteredTransclusionAsLinkText
+description: filtered transclusion as link label should not generate links
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+[{{{[{$:/palette}get[color-scheme]]}}}](#New%20Tiddler)
+
+[{{{ [[A]] [[B]] [[C]] }}}](#A)<!-- as text output: only the first item is returned -->
+
+[foo {{{[[New Tiddler?]]}}} bar](#New%20Tiddler)
+
+[<$text text={{{[[New Tiddler?]]}}}/>](#New%20Tiddler)
++
+title: ExpectedResult
+
+<div class="markdown">
+<p><a class="tc-tiddlylink tc-tiddlylink-resolves _codified_" href="#New%20Tiddler">light</a>
+</p>
+<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#A">A</a>
+</p>
+<p><a class="tc-tiddlylink tc-tiddlylink-resolves _codified_" href="#New%20Tiddler">foo New Tiddler? bar</a>
+</p>
+<p><a class="tc-tiddlylink tc-tiddlylink-resolves _codified_" href="#New%20Tiddler">New Tiddler?</a>
+</p>
+</div>
++
+title: $:/palette
+
+$:/themes/tiddlywiki/vanilla
++
+title: $:/themes/tiddlywiki/vanilla
+color-scheme: light
++
+title: New Tiddler
+
+Aloha!
