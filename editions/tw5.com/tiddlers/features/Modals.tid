@@ -1,5 +1,5 @@
 created: 20160107225427489
-modified: 20211221102625141
+modified: 20260907204047567
 tags: Features
 title: Modals
 type: text/vnd.tiddlywiki
@@ -19,6 +19,29 @@ Note that the footer and subtitle fields are not limited to plain text, and wiki
 
 Modals are displayed with the [[WidgetMessage: tm-modal]].
 
-<$button message="tm-modal" param="SampleWizard">Open demo modal</$button>
-
 <<.tip """<$macrocall $name=".from-version" version="5.2.4"/> allow using "mask-closable" field""">>
+
+!! Examples
+
+<<wikitext-example-without-html """<$button message="tm-modal" param="SampleWizard">Open demo modal</$button>""">>
+
+<<.from-version "5.3.6">> you can use the template $:/core/templates/rendered-text to display a modal if you do not want to create a separate tiddler:
+
+<<wikitext-example-without-html """\procedure text()
+<style class="headless-modal">
+.tc-modal:has(.tc-modal-body .headless-modal) .tc-modal-header{display:none}
+</style>
+
+!! Motovun Jack
+
+{{Motovun Jack.jpg}}
+
+
+<$button message="tm-modal" param="SampleWizard">Open nested modal</$button>
+
+\end
+
+<$button>
+<$action-sendmessage $message="tm-modal" $param="$:/core/templates/rendered-text" text=<<text>>/>
+Click me!
+</$button>""">>

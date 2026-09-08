@@ -1,6 +1,6 @@
 caption: tm-download-file
 created: 20140811112201235
-modified: 20230723214745520
+modified: 20260907205338343
 tags: Messages
 title: WidgetMessage: tm-download-file
 type: text/vnd.tiddlywiki
@@ -20,3 +20,40 @@ The following variable names have special behaviour:
 The download file message is usually generated with the ButtonWidget.
 
 The download file message is handled by the TiddlyWiki core SyncMechanism which invokes the current [[SaverModule|SaverModules]].
+
+! Examples
+
+<<.from-version "5.3.6">> you can use the template $:/core/templates/plain-text to create a custom download configuration without creating additional tiddlers:
+
+<<wikitext-example-without-html """\function field.value() [<pluginTitle>get{!!title}]
+
+\function json.plugin()
+	[<pluginTitle>fields[]]:reduce[<accumulator>jsonset{!!title},<field.value>]=>pluginData
+	"[]"+[jsonset:json[0],<pluginData>]
+\end
+
+\define externalPlugin()
+{
+    const tw = globalThis.$tw ??= Object.create(null);
+    tw.preloadTiddlers = (tw.preloadTiddlers ?? []).concat($(json.plugin)$);
+}
+\end
+
+
+<$let pluginTitle="$:/plugins/tiddlywiki/menubar" text=<<externalPlugin>> >
+
+<$button tooltip="Export standalone plugin">{{$:/core/images/export-button}} export <<pluginTitle>> as standalone plugin
+<$action-sendmessage
+  $message="tm-download-file"
+  $param="$:/core/templates/plain-text"
+  text=<<text>>
+  filename={{{ [<pluginTitle>search-replace:g[/],[_]addsuffix[.js]] }}}
+  type="text/javascript"
+/>
+</$button>
+
+You can load the exported plugin by creating a tiddler with the tag <<tag $:/tags/RawMarkupWikified/BottomBody>> containing this:
+
+```
+`<script src="URL_OF_YOUR_PLUGIN_HERE" onerror="alert('Error: Cannot load YOUR_PLUGIN located at URL_OF_YOUR_PLUGIN_HERE');"></script>`
+```""">>
