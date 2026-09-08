@@ -4,7 +4,6 @@ type: application/javascript
 module-type: startup
 
 Browser message handling
-
 \*/
 
 "use strict";
@@ -18,6 +17,20 @@ exports.synchronous = true;
 /*
 Load a specified url as an iframe and call the callback when it is loaded. If the url is already loaded then the existing iframe instance is used
 */
+
+// Ensure the callback fires once, whether by PLUGIN-LIBRARY-READY or onload (legacy)
+
+function flushCallbacks(iframeInfo, err) {
+	if(iframeInfo.status !== "loaded") {
+		iframeInfo.status = err ? "error" : "loaded";
+		saveIFrameInfoTiddler(iframeInfo);
+		var cb;
+		while((cb = iframeInfo.callbacks.shift())) {
+			cb(err, iframeInfo);
+		}
+	}
+}
+
 function loadIFrame(url,callback) {
 	// Check if iframe already exists
 	var iframeInfo = $tw.browserMessaging.iframeInfoMap[url];
@@ -30,7 +43,8 @@ function loadIFrame(url,callback) {
 		iframeInfo = {
 			url: url,
 			status: "loading",
-			domNode: iframe
+			domNode: iframe,
+			callbacks: [callback]
 		};
 		$tw.browserMessaging.iframeInfoMap[url] = iframeInfo;
 		saveIFrameInfoTiddler(iframeInfo);
@@ -38,19 +52,18 @@ function loadIFrame(url,callback) {
 		iframe.style.display = "none";
 		iframe.setAttribute("library","true");
 		document.body.appendChild(iframe);
-		// Set up onload
+
+		// Set up onload. Legacy fallback: if PLUGIN-LIBRARY-READY never arrives, onload triggers the flush later
 		iframe.onload = function() {
-			iframeInfo.status = "loaded";
-			saveIFrameInfoTiddler(iframeInfo);
-			callback(null,iframeInfo);
+			flushCallbacks(iframeInfo);
 		};
 		iframe.onerror = function() {
-			callback("Cannot load iframe");
+			flushCallbacks(iframeInfo, "Cannot load iframe");
 		};
 		try {
 			iframe.src = url;
 		} catch(ex) {
-			callback(ex);
+			flushCallbacks(iframeInfo, ex);
 		}
 	}
 }
@@ -147,6 +160,13 @@ exports.startup = function() {
 		// console.log("browser-messaging: Received message from",event.origin);
 		// console.log("browser-messaging: Message content",event.data);
 		switch(event.data.verb) {
+			case "PLUGIN-LIBRARY-READY":
+				$tw.utils.each($tw.browserMessaging.iframeInfoMap, function(info) {
+					if(info && info.domNode && info.domNode.contentWindow === event.source) {
+						flushCallbacks(info);
+					}
+				});
+				break;
 			case "GET-RESPONSE":
 				if(event.data.status.charAt(0) === "2") {
 					if(event.data.cookies) {
