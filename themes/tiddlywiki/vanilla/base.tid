@@ -572,6 +572,19 @@ a.tc-tiddlylink-external:hover {
 	height: 2em;
 }
 
+/* The tag pills sit in a row, so the drop marker is a bar between them rather than a block */
+.tc-edit-tags .tc-droppable.tc-dragover .tc-droppable-placeholder {
+	display: inline-block;
+	width: 0;
+	height: 1.4em;
+	vertical-align: middle;
+}
+
+.tc-edit-tags-drop-end {
+	display: inline-block;
+	width: 1em;
+}
+
 .tc-sidebar-tab-open-item {
 	position: relative;
 }

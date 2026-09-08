@@ -59,8 +59,7 @@ describe("Tags Operator tests", function() {
 		// Due to the implementation of the tags[] operator with v5.3.6 we can not guarantee the order that `[tags[]]` returns
 		});
 
-		// The following test can be enabled once the core allows us to do so.
-		xit("should apply tags ordering in order of creation. TW v5.3.7+", function () {
+		it("should apply tags ordering in order of creation. TW v5.3.7+", function () {
 			var wiki = new $tw.Wiki(wikiOptions);
 
 			wiki.addTiddler({ title: "$:/config/Tags/CustomSort/subfilter", text: ""});

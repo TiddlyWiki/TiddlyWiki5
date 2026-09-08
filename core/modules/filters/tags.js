@@ -13,14 +13,15 @@ Filter operator returning all the tags of the selected tiddlers
 Export our filter function
 */
 exports.tags = function(source,operator,options) {
-	var tags = {};
+	// A Set, because object keys that look like an integer are returned first in
+	// numeric order, so a tag such as 2026 jumped ahead of the author's order
+	var tags = new Set();
 	source(function(tiddler,title) {
-		var t, length;
 		if(tiddler && tiddler.fields.tags) {
-			for(t=0, length=tiddler.fields.tags.length; t<length; t++) {
-				tags[tiddler.fields.tags[t]] = true;
-			}
+			tiddler.fields.tags.forEach(function(tag) {
+				tags.add(tag);
+			});
 		}
 	});
-	return Object.keys(tags);
+	return Array.from(tags);
 };
