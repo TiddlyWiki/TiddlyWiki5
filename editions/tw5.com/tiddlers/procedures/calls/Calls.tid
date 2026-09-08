@@ -21,7 +21,9 @@ By default, parameters are interpreted as being in the same order as in the defi
 
 If no value is specified for a parameter, the default value given for that parameter in the [[procedure definition|Procedure Definitions]], [[function definition|Function Definitions]] or [[macro definition|Macro Definitions]] is used instead. (If no default value was defined, the parameter is blank).
 
-Each parameter value can be enclosed in `'`single quotes`'`, `"`double quotes`"`, `"""`triple double quotes`"""` or `[[`double square brackets`]]`. Triple double quotes allow a value to contain almost anything. If a value contains no spaces or single or double quotes, it requires no delimiters. [[Substituted Attribute Values]] enclosed in single or triple back quotes are also supported.
+Each parameter value can be enclosed in `'`single quotes`'`, `"`double quotes`"`, `"""`triple double quotes`"""` or `[[`double square brackets`]]`. Triple double quotes allow a value to contain almost anything. If a value contains no spaces, single or double quotes, or colons, it requires no delimiters. [[Substituted Attribute Values]] enclosed in single or triple back quotes are also supported.
+
+<<.warning """A colon in an unquoted value is read as the separator of a named parameter: in `<<my-procedure https://example.com>>` the parser takes `https` as a parameter name, and the positional parameter receives nothing. Enclose such a value in quotes, or label it with a parameter name — `<<my-procedure address=https://example.com>>` — in which case no quotes are needed.""">>
 
 See the discussion about [[parser modes|WikiText parser mode: macro examples]]
 
