@@ -1,0 +1,12 @@
+change-category: internal
+change-type: feature
+created: 20260906234108933
+description: Add $tw.Tiddler toJSON method
+github-contributors: Leilei332
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9688
+modified: 20260906234439533
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9688
+
+Add $tw.Tiddler toJSON method and simplifies the code in `$:/core/modules/widgets/encrypt.js` and `$:/core/modules/macros/jsontiddler.js`

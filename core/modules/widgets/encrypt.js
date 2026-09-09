@@ -43,12 +43,8 @@ EncryptWidget.prototype.execute = function() {
 		json = {},
 		self = this;
 	$tw.utils.each(tiddlers,function(title) {
-		var tiddler = self.wiki.getTiddler(title),
-			jsonTiddler = {};
-		for(var f in tiddler.fields) {
-			jsonTiddler[f] = tiddler.getFieldString(f);
-		}
-		json[title] = jsonTiddler;
+		const tiddler = self.wiki.getTiddler(title);
+		json[title] = tiddler;
 	});
 	this.encryptedText = $tw.utils.htmlEncode($tw.crypto.encrypt(JSON.stringify(json)));
 };
