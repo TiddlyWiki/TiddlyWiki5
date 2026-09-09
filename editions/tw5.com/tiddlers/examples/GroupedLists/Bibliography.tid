@@ -1,0 +1,173 @@
+code-body: yes
+created: 20260728220000000
+description: Bibliography sample data shared by the GroupedLists examples
+modified: 20260729180306417
+title: GroupedLists/Bibliography
+type: text/vnd.tiddlywiki-multiple
+
+title: 3DWiki2011
+bibtex-entry-type: InProceedings
+bibtex-author: 3D Wiki Collective
+bibtex-title: Spatial Notes in Three Dimensions
+bibtex-date: 2011
+
++
+title: 3rdWave2014
+bibtex-entry-type: Article
+bibtex-author: 3rd Wave Research Group
+bibtex-title: Note Taking After the Desktop
+bibtex-date: 2014
+
++
+title: Aronsson2002
+bibtex-entry-type: InProceedings
+bibtex-author: Aronsson, Lars
+bibtex-title: Operation of a Large Scale, General Purpose Wiki Website
+bibtex-date: 2002
+
++
+title: Atkinson2016
+bibtex-entry-type: Article
+bibtex-author: Atkinson, Paul
+bibtex-title: Digital ethnographies
+bibtex-date: 2016
+
++
+title: Bakshi2016
+bibtex-entry-type: Article
+bibtex-author: Bakshi, Divya
+bibtex-title: Hypertext and Feminisms: Voicing the Silence
+bibtex-date: 2016
+
++
+title: Barker2008
+bibtex-entry-type: InProceedings
+bibtex-author: Barker, Philip
+bibtex-title: Using wikis and weblogs to enhance human performance
+bibtex-date: 2008
+
++
+title: Barker2008a
+bibtex-entry-type: InProceedings
+bibtex-author: Barker, Philip
+bibtex-title: Using Wikis for Knowledge Management
+bibtex-date: 2008
+
++
+title: Bernstein2016
+bibtex-entry-type: Book
+bibtex-author: Bernstein, Mark
+bibtex-title: Getting Started With Hypertext Narrative
+bibtex-date: 2016
+
++
+title: Dalgaard2001
+bibtex-entry-type: InProceedings
+bibtex-author: Dalgaard, Rune
+bibtex-title: Hypertext and the Scholarly Archive: Intertexts, Paratexts and Metatexts at Work
+bibtex-date: 2001
+
++
+title: Dickinson2008
+bibtex-entry-type: InProceedings
+bibtex-author: Dickinson, Anne
+bibtex-title: Is the e-Learning Object Create Interactive Accessible e-Learning Accessible?
+bibtex-date: 2008
+
++
+title: Finnemann2016
+bibtex-entry-type: Article
+bibtex-author: Finnemann, Niels Ole
+bibtex-title: Hypertext configurations: Genres in networked digital media
+bibtex-date: 2016
+
++
+title: Frumkin2005
+bibtex-entry-type: Article
+bibtex-author: Frumkin, Jeremy
+bibtex-title: The wiki and the digital library
+bibtex-date: 2005
+
++
+title: Maier2016
+bibtex-entry-type: InCollection
+bibtex-author: Maier, Carmen Daniela
+bibtex-title: Hypertext and Hypermedia
+bibtex-date: 2016
+
++
+title: Morris2007
+bibtex-entry-type: InProceedings
+bibtex-author: Morris, Joseph C.
+bibtex-title: DistriWiki: a distributed peer-to-peer wiki network
+bibtex-date: 2007
+
++
+title: Ruston2004
+bibtex-entry-type: Book
+bibtex-author: Ruston, Jeremy
+bibtex-title: TiddlyWiki
+bibtex-date: 2004
+
++
+title: Rutherford2009
+bibtex-entry-type: Thesis
+bibtex-author: Rutherford, Jayne
+bibtex-title: Graphical Input for TiddlyWiki
+bibtex-date: 2009
+
++
+title: Schaffert2006
+bibtex-entry-type: InProceedings
+bibtex-author: Schaffert, Sebastian
+bibtex-title: IkeWiki: A semantic wiki for collaborative knowledge management
+bibtex-date: 2006
+
++
+title: Shang2016
+bibtex-entry-type: Article
+bibtex-author: Shang, Hui-Fang
+bibtex-title: Online metacognitive strategies, hypermedia annotations, and motivation on hypertext comprehension
+bibtex-date: 2016
+
++
+title: Shang2016a
+bibtex-entry-type: Article
+bibtex-author: Shang, Hui-Fang
+bibtex-title: Exploring demographic and motivational factors associated with hypertext reading by English as a foreign language students
+bibtex-date: 2016
+
++
+title: Skiba2005
+bibtex-entry-type: Article
+bibtex-author: Skiba, Diane J.
+bibtex-title: Do your students wiki?
+bibtex-date: 2005
+
++
+title: Trentin2009
+bibtex-entry-type: Article
+bibtex-author: Trentin, Guglielmo
+bibtex-title: Using a wiki to evaluate individual contribution to a collaborative learning project
+bibtex-date: 2009
+
++
+title: Truman2016
+bibtex-entry-type: Article
+bibtex-author: Truman, Gail
+bibtex-title: Web Archiving Environmental Scan
+bibtex-date: 2016
+
++
+title: Wagner2004
+bibtex-entry-type: Article
+bibtex-author: Wagner, Christian
+bibtex-title: Wiki: A technology for conversational knowledge management and group collaboration
+bibtex-date: 2004
+
++
+title: Wilson2007
+bibtex-entry-type: Article
+bibtex-author: Wilson, Tom D.
+bibtex-title: Review of TiddlyWiki 2.1.3
+bibtex-date: 2007

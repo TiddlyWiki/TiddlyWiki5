@@ -164,15 +164,16 @@ exports.forceLayout = function(element) {
 Pulse an element for debugging purposes
 */
 exports.pulseElement = function(element) {
+	var eventName = $tw.utils.convertEventName("animationEnd");
 	// Event handler to remove the class at the end
-	element.addEventListener($tw.browser.animationEnd,function handler(event) {
-		element.removeEventListener($tw.browser.animationEnd,handler,false);
-		$tw.utils.removeClass(element,"pulse");
+	element.addEventListener(eventName,function handler(event) {
+		element.removeEventListener(eventName,handler,false);
+		$tw.utils.removeClass(element,"tc-pulse");
 	},false);
 	// Apply the pulse class
-	$tw.utils.removeClass(element,"pulse");
+	$tw.utils.removeClass(element,"tc-pulse");
 	$tw.utils.forceLayout(element);
-	$tw.utils.addClass(element,"pulse");
+	$tw.utils.addClass(element,"tc-pulse");
 };
 
 /*

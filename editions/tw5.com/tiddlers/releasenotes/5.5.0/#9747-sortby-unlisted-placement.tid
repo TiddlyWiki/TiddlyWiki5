@@ -1,0 +1,12 @@
+change-category: filters
+change-type: enhancement
+created: 20260711015656000
+description: sortby accepts an optional end suffix to place titles missing from the reference list after the listed ones
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9747
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9747
+type: text/vnd.tiddlywiki
+
+* The [[sortby|sortby Operator]] filter operator now accepts an optional `end` suffix that places input titles missing from the reference list after the listed ones. The default is unchanged, so with a list `Alpha Beta Gamma` the input `Delta Epsilon Alpha Beta Gamma` still sorts to `Delta Epsilon Alpha Beta Gamma`, while `sortby:end[...]` sorts it to `Alpha Beta Gamma Delta Epsilon` (addresses [[Issue #8342|https://github.com/TiddlyWiki/TiddlyWiki5/issues/8342]])

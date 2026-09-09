@@ -210,6 +210,29 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editShowToolbar = this.wiki.getTiddlerText(ENABLE_TOOLBAR_TITLE,"yes");
 		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0) && (!this.document.isTiddlyWikiFakeDom);
 	};
+	
+	EditTextWidget.prototype.updateDomNodeClasses = function() {
+		var domNodeClasses = this.engine.domNode.className.split(/\s+/).filter(Boolean),
+			oldClasses = this.editClass.split(/\s+/).filter(Boolean),
+			newClasses;
+	
+		this.editClass = this.getAttribute("class","");
+		newClasses = this.editClass.split(/\s+/).filter(Boolean);
+	
+		// Remove classes assigned from the old value of the class attribute
+		domNodeClasses = domNodeClasses.filter(function(className) {
+			return !oldClasses.includes(className);
+		});
+	
+		// Add new classes from the updated class attribute
+		domNodeClasses = domNodeClasses.concat(
+			newClasses.filter(function(className) {
+				return !domNodeClasses.includes(className);
+			})
+		);
+	
+		this.engine.domNode.className = domNodeClasses.join(" ");
+	};
 
 	/*
 	Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
@@ -217,7 +240,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
 			this.refreshSelf();
 			return true;
 		} else if(changedTiddlers[this.editRefreshTitle]) {
@@ -225,6 +248,9 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
+		}
+		if(changedAttributes["class"]) {
+			this.updateDomNodeClasses();
 		}
 		this.engine.fixHeight();
 		if(this.editShowToolbar) {

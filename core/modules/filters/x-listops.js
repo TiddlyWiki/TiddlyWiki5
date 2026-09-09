@@ -160,8 +160,14 @@ exports.sortby = function(source,operator) {
 	if(!results || results.length < 2) {
 		return results;
 	}
-	const lookup = $tw.utils.parseStringArray(operator.operand,"true");
-	return results.sort((a,b) => lookup.indexOf(a) - lookup.indexOf(b));
+	const lookup = $tw.utils.parseStringArray(operator.operand,"true"),
+		// The "end" suffix places unlisted titles last, the default is first
+		unlisted = operator.suffix === "end" ? lookup.length : -1,
+		position = (title) => {
+			const index = lookup.indexOf(title);
+			return index === -1 ? unlisted : index;
+		};
+	return results.sort((a,b) => position(a) - position(b));
 };
 
 

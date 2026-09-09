@@ -1,6 +1,6 @@
 title: $:/core/stylesheets/custom-properties
 
-\rules only transcludeinline macrocallinline html transcludeblock
+\rules only transcludeinline macrocallinline html transcludeblock filteredtranscludeinline
 
 /* Tiddlywiki's CSS properties */
 
@@ -21,7 +21,7 @@ title: $:/core/stylesheets/custom-properties
 	--tp-story-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
 	--tp-story-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 	--tp-story-right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
-	--tp-story-width: {{$:/themes/tiddlywiki/vanilla/metrics/storyrwidth}};
+	--tp-story-width: {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}};
 	--tp-tiddler-width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
 	--tp-sidebar-breakpoint: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}};
 	--tp-sidebar-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};

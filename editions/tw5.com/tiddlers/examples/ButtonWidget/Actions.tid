@@ -1,0 +1,33 @@
+title: ButtonWidget/Example/Actions
+description: Run one or more ActionWidgets when the button is clicked, using the preferred actions attribute
+modified: 20260725015330000
+tags: [[$:/tags/wiki-test-spec]]
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+The `actions` attribute holds one or more ActionWidgets that run when the button is clicked. This is the preferred way to give a button its behaviour, because the whole behaviour sits in one place instead of being spread over several attributes.
+
+A button runs `actions` last, after `to`, `message`, `popup` and `set`. ButtonWidget lists the full order. A single `<$button to="HelloThere">Click Me</$button>` still needs no action string.
+
+The procedure below runs //two// actions in a single click:
+
+* one sets a message
+* the other bumps a counter
+
+Click ''Greet'' a few times to watch both update.
++
+title: Output
+
+\procedure greetActions()
+<$action-setfield $tiddler="$:/state/greeting" text="Hello!"/>
+<$action-setfield $tiddler="$:/state/greeting-count"
+	text={{{ [[$:/state/greeting-count]get[text]] :else[[0]] +[add[1]] }}}
+/>
+\end
+
+<$button actions=<<greetActions>>>
+Greet
+</$button>
+
+Message: <$text text={{$:/state/greeting}}/> (clicked <$text text={{{ [[$:/state/greeting-count]get[text]] :else[[0]] }}}/> times)

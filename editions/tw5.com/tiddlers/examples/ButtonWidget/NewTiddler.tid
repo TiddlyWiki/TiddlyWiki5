@@ -1,0 +1,42 @@
+title: ButtonWidget/Example/NewTiddler
+description: Create a tiddler from a template with the tm-new-tiddler message
+modified: 20260725002340000
+tags: [[$:/tags/wiki-test-spec]]
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+`tm-new-tiddler` is a message the core already handles, so the button needs no catcher of its own.
+
+* `message` is set to `tm-new-tiddler`
+* `param` names a template tiddler, and the new tiddler starts out with that template's fields
+
+This test case carries a `TaskTemplate` payload tiddler holding `tags`, `status` and `priority`. Open the ''TaskTemplate'' tab above to see it.
+
+The message creates a draft and normally opens it for editing. A test case has no story river, so the table lists the drafts instead. Each click adds one row, and the new tiddler takes the next free title because the previous draft still exists.
++
+title: TaskTemplate
+tags: Task
+status: open
+priority: normal
+
+Describe the task here.
++
+title: Output
+
+<$button message="tm-new-tiddler" param="TaskTemplate">
+New task
+</$button>
+
+<table>
+<tr><th>Click</th><th>New tiddler</th><th>tags</th><th>status</th><th>priority</th></tr>
+<$list filter="[has[draft.title]sort[draft.title]]" counter="clickNumber">
+<tr>
+	<td><<clickNumber>></td>
+	<td><$text text={{!!draft.title}}/></td>
+	<td><$text text={{!!tags}}/></td>
+	<td><$text text={{!!status}}/></td>
+	<td><$text text={{!!priority}}/></td>
+</tr>
+</$list>
+</table>

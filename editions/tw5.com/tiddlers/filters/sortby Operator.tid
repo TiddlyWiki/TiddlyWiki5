@@ -1,11 +1,12 @@
 caption: sortby
 created: 20151017145021839
-modified: 20151108052142057
+modified: 20260811120000000
 op-input: a list of items
-op-output: all items sorted by lookup list
+op-output: all items sorted by the order list, with unlisted items placed first, or last with the `end` suffix
 op-parameter: a list specifying the order in which to sort the current list
 op-parameter-name: order
 op-purpose: sort the current list in the order of the list referenced in the parameter
+op-suffix: <<.from-version "5.5.0">> optional: `end` to place items missing from <<.place order>> after the listed ones. If omitted they are placed first
 tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
 title: sortby Operator
 type: text/vnd.tiddlywiki
