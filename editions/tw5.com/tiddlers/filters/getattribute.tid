@@ -1,0 +1,31 @@
+caption: getattribute
+created: 20260820120000000
+modified: 20260820120000000
+op-input: a [[selection of titles|Title Selection]], each interpreted as a fragment of ~WikiText
+op-output: the value of the first attribute named in <<.place A>> that is present in each input title
+op-parameter: one or more attribute names
+op-parameter-name: A
+op-purpose: retrieve attribute values from widget, HTML element or macro invocations
+tags: [[Filter Operators]] [[Special Operators]]
+title: getattribute Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> Each input title is parsed as inline ~WikiText. Unless it consists of exactly one widget, HTML element or macro invocation it is ignored; any whitespace either side of the invocation is permitted, but any other surrounding text is not.
+
+The operands are attribute names, tried in order; the value of the first one that is present is appended to the output. Input titles for which none of the named attributes is present are ignored.
+
+Because the input is parsed by ~TiddlyWiki itself, all of the equivalent ways of writing an invocation are recognised, and quoting is resolved for you:
+
+|!Input |!`getattribute[$variable],[$name]` |!`getattribute[name],[0]` |
+|`<<colour foreground>>` |`colour` |`foreground` |
+|`<<colour name:foreground>>` |`colour` |`foreground` |
+|`<<colour "tiddler-title-foreground">>` |`colour` |`tiddler-title-foreground` |
+|`<$transclude $variable="colour" name="foreground"/>` |`colour` |`foreground` |
+|`<$macrocall $name="colour" name="foreground"/>` |`colour` |`foreground` |
+
+Note that:
+
+* The parameters of a [[macro invocation|Macro Calls in WikiText]] are exposed as attributes. Positional parameters are named by their index, counting from zero, and the name of the macro itself is available as `$variable`
+* Only attributes with a literal value are returned. Attributes whose value is computed &ndash; a [[filtered attribute value|Filtered Attribute Value]] `{{{ ... }}}`, an [[indirect attribute value|Indirect Attribute Value]] `{{ ... }}` or a macro attribute value `<< ... >>` &ndash; cannot be resolved without evaluating the invocation, and so are ignored
+
+<<.operator-examples "getattribute">>

@@ -1,0 +1,8 @@
+title: $:/core/background-actions/AutoCompilePaletteColourCopies
+tags: $:/tags/BackgroundAction $:/tags/StartupAction
+list-after: $:/core/background-actions/AutoCompilePaletteColourCopiesPaletteChange
+platforms: browser
+track-filter: [[$:/temp/palette-change]changecount[]]
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette-copies>>

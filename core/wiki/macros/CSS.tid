@@ -79,6 +79,24 @@ tags: $:/tags/Macro
 </$let>
 \end actions-compile-palette
 
+\procedure actions-copy-consolidated-palette(num)
+<$action-deletetiddler $tiddler={{{ [[$:/temp/palette-consolidated/copy-]addsuffix<num>] }}}/>
+<$action-setfield $tiddler={{{ [[$:/temp/palette-consolidated/copy-]addsuffix<num>] }}} type="application/x-tiddler-dictionary"/>
+<$action-setfield $tiddler={{{ [[$:/temp/palette-consolidated/copy-]addsuffix<num>] }}} text={{{ [<consolidatedPalette>get[text]] }}}/>
+\end actions-copy-consolidated-palette
+
+\procedure actions-recompile-current-palette-copies()
+\procedure tv-action-refresh-policy() always
+<$let
+	consolidatedPalette="$:/temp/palette-consolidated"
+>
+	<!-- Save the consolidated palette as two copies for reuse in the $:/PaletteEditor -->
+	<$list filter="1 2" variable="num">
+		<$transclude $variable="actions-copy-consolidated-palette" num=<<num>>/>
+	</$list>
+</$let>
+\end actions-recompile-current-palette-copies
+
 <!-- Customisations of the current palette are stored in a layer tiddler that imports the palette itself -->
 \function tf.palette-customisations-layer()
 [{$:/palette}is[tiddler]] [{$:/palette}is[shadow]] :else[[$:/palettes/Vanilla]] :map[addprefix[$:/config/PaletteCustomisations/]]

@@ -1,0 +1,7 @@
+title: $:/core/background-actions/AutoCompilePaletteColourCopiesPaletteChange
+tags: $:/tags/BackgroundAction $:/tags/StartupAction
+list-after: $:/core/background-actions/AutoCompilePalette
+platforms: browser
+track-filter: [[$:/palette]changecount[]] =[all[tiddlers]prefix[$:/config/PaletteCustomisations/]get[palette-import]] =[all[tiddlers]prefix[$:/config/PaletteCustomisations/]get[palette-import@dark]] =[all[tiddlers]prefix[$:/config/PaletteCustomisations/]get[palette-import@light]]
+
+<$action-setfield $tiddler="$:/temp/palette-change" text={{{ [[$:/temp/palette-change]get[text]else[0]add[1]] }}}/>

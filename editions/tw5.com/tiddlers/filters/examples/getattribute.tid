@@ -1,0 +1,10 @@
+created: 20260820120000000
+modified: 20260820120000000
+tags: [[getattribute Operator]] [[Operator Examples]]
+title: getattribute Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[<<colour foreground>>]getattribute[$variable]]" "returns the name of the macro being invoked">>
+<<.operator-example 2 "[[<<colour foreground>>]getattribute[name],[0]]" "returns the ''name'' parameter, falling back to the first positional parameter">>
+<<.operator-example 3 "[[<$transclude $variable='colour' name='foreground'/>]getattribute[name],[0]]" "returns the ''name'' attribute of the widget invocation">>
+<<.operator-example 4 "[[#ff0000]getattribute[name],[0]]" "returns nothing, because the input is not an invocation">>
