@@ -1,6 +1,6 @@
 caption: tm-download-file
 created: 20140811112201235
-modified: 20260907205338343
+modified: 20260910134915210
 tags: Messages
 title: WidgetMessage: tm-download-file
 type: text/vnd.tiddlywiki
@@ -19,11 +19,11 @@ The following variable names have special behaviour:
 
 The download file message is usually generated with the ButtonWidget.
 
-The download file message is handled by the TiddlyWiki core SyncMechanism which invokes the current [[SaverModule|SaverModules]].
+The download file message is handled by the TiddlyWiki core [[SyncMechanism|https://tiddlywiki.com/dev/#SyncAdaptorModules]] which invokes the current [[SaverModule|https://tiddlywiki.com/dev/#Saver]].
 
 ! Examples
 
-<<.from-version "5.3.6">> you can use the template $:/core/templates/plain-text to create a custom download configuration without creating additional tiddlers:
+<<.from-version "5.3.6">> you can use the template <<.tid $:/core/templates/plain-text>> to create a custom download configuration without creating additional tiddlers:
 
 <<wikitext-example-without-html """\function field.value() [<pluginTitle>get{!!title}]
 
@@ -52,7 +52,7 @@ The download file message is handled by the TiddlyWiki core SyncMechanism which 
 />
 </$button>
 
-You can load the exported plugin by creating a tiddler with the tag <<tag $:/tags/RawMarkupWikified/BottomBody>> containing this:
+You can load the exported plugin by creating a tiddler with the tag <<.tag $:/tags/RawMarkupWikified/TopHead>> containing this:
 
 ```
 `<script src="URL_OF_YOUR_PLUGIN_HERE" onerror="alert('Error: Cannot load YOUR_PLUGIN located at URL_OF_YOUR_PLUGIN_HERE');"></script>`
