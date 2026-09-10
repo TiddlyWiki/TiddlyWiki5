@@ -1,0 +1,45 @@
+created: 20260712000000000
+description: TOC tabbed template parameter
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/param/template
+modified: 20260712000000000
+tags: $:/tags/wiki-test-spec param
+title: Examples/TOC/param/template
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows the `template` parameter of the tabbed toc macros
+
+* The selected tiddler is shown in the content pane using the [[myTemplate]] tiddler as a [[template|TemplateTiddlers]]
+
+* The state tiddler is preset to [[aa]], so the template rendering is visible right away
+
+{{example-overview}}
+
++
+title: Description
+
+TOC Macro Parameter "template"
++
+title: myTemplate
+
+<h2>Template: <$view field="title"/></h2>
+
+<$transclude $mode="block"/>
++
+title: $:/temp/toc/demoSelected
+
+aa
++
+title: Output
+
+The `template` parameter defines how the selected tiddler is shown in the content pane.
+
+<$macrocall
+	$name="toc-tabbed-internal-nav"
+	tag="Contents"
+	selectedTiddler="$:/temp/toc/demoSelected"
+	unselectedText="<p>Select a topic in the table of contents.</p>"
+	missingText="<p>Missing tiddler.</p>"
+	template="myTemplate"
+/>

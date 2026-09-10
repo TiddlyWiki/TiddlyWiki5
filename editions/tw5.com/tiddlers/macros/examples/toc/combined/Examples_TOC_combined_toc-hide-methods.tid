@@ -1,0 +1,85 @@
+created: 20260402120000000
+import-compound: $:/spec/Examples/TOC/combined/toc-hide-methods
+modified: 20260402145916474
+tags: $:/tags/wiki-test-spec combined
+title: Examples/TOC/combined/toc-hide-methods
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example compares ''two methods'' of hiding nodes from a TOC
+
+* Method 1: The `toc-hide: yes` field on ''toc-1.1.1-hidden'' removes it from its parent branch automatically
+
+* Method 2: The `exclude` parameter with `[toc-hide[yes]]` filter removes all matching tiddlers from every branch
+
+* Both methods are shown side-by-side with a simple toc as reference
+
+* Includes ''open/close buttons'' for programmatic branch control
+
++
+title: Description
+
+Comparing toc-hide field vs exclude parameter
++
+title: toc-1.1
+tags: Contents
+
++
+title: toc-1.1.1-hidden
+tags: toc-1.1
+toc-hide: yes
+
+This node is hidden by toc-hide: yes
+
++
+title: toc-1.1.2
+tags: toc-1.1
+
++
+title: toc-1.2
+tags: Contents
+
++
+title: toc-1.2.1
+tags: toc-1.2
+
++
+title: toc-1.2.1.a
+tags: toc-1.2.1
+
++
+title: Output
+
+\procedure openBranch()
+<<toc-openBranch path:"/" currentTiddler:"Contents" manual:yes>>
+\end
+
+\procedure closeBranch()
+<<toc-closeBranch path:"/" currentTiddler:"Contents" manual:yes>>
+\end
+
+<$button actions=<<openBranch>>>Open Tree</$button>
+<$button actions=<<closeBranch>>>Close Tree</$button>
+
+!! Method 1: toc-hide field
+
+`toc-1.1.1-hidden` has `toc-hide: yes` — removed from its branch automatically.
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"Contents">>
+</div>
+
+!! Method 2: exclude parameter
+
+Using `exclude:"[toc-hide[yes]]"` removes all matching tiddlers from every branch.
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"Contents" exclude:"[toc-hide[yes]]">>
+</div>
+
+!! Simple toc as reference
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>

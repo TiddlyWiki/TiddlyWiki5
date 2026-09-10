@@ -11,6 +11,6 @@ type: text/vnd.tiddlywiki
 <$macrocall $name=".example" n="1"
 eg="""<$let toc-open-icon="$:/core/images/fold-button" toc-closed-icon="$:/core/images/folder">
 <div class="tc-table-of-contents">
-<<toc-selective-expandable "Contents">>
+<<toc-selective-expandable tag:"Contents">>
 </div>
 </$let>"""/>

@@ -1,0 +1,72 @@
+created: 20260402120000000
+modified: 20260402120000000
+caption: TOC Macros Icons and Behaviour
+tags: [[Table-of-Contents Macros Customisation]]
+title: Table-of-Contents Macros Icons and Behaviour
+type: text/vnd.tiddlywiki
+
+Icon customisation and interactive behaviour for the [[Table-of-Contents Macros]].
+
+!! CTRL-click Expand / Fold
+
+<<.from-version "5.4.0">>
+
+In the expandable and selective-expandable variants, <kbd>CTRL</kbd>-clicking a chevron will expand the ''whole branch'' recursively. <kbd>CTRL</kbd>-clicking again will close the whole branch.
+
+''Advantage:'' If everything is expanded, a normal click only folds the current branch.
+
+!! Custom Icons
+
+<<.from-version "5.2.4">>
+
+To change the icons used by the Table-of-Contents macros, redefine the procedures `toc-open-icon` and `toc-closed-icon`. This setting works for all toc-macro variants.
+
+!!! Default Settings
+
+* <<.var toc-open-icon>>: `\procedure toc-open-icon() $:/core/images/down-arrow`
+
+* <<.var toc-closed-icon>>: `\procedure toc-closed-icon() $:/core/images/right-arrow`
+
+!!! Custom Definitions
+
+The default settings can be overwritten in your code using the define-pragma or the let-widget. The <<.wlink LetWidget>> widget can be used if you have multiple table of contents macros in one tiddler that need different icons.
+
+''Define new icons using a pragma''
+
+```
+\procedure toc-open-icon() $:/core/images/fold-button
+\procedure toc-closed-icon() $:/core/images/folder
+...
+```
+
+''Define new icons using the let-widget''
+
+```
+<$let toc-open-icon="$:/core/images/fold-button" toc-closed-icon="$:/core/images/folder">
+...
+</$let>
+```
+
+!! Pre-expanded Trees
+
+Setting the variable `tv-toc-expand` to `yes` will load the toc with all branches expanded. This is especially important for testing "ExpectedResults" in testcase tiddlers.
+
+```
+\define tv-toc-expand() yes
+
+<<toc-expandable tag:"Contents">>
+```
+
+!! Level Indicator
+
+<<.from-version "5.4.0">>
+
+When the <<.param level>> parameter is used with the <<.var toc>> macro, nodes with children show a "+" indicator icon. To change or remove it, override the `toc-level-indicator` procedure locally:
+
+```
+\define toc-level-indicator()
+<!-- remove the indicator -->
+\end
+
+<<toc tag:"Contents" level:"1">>
+```

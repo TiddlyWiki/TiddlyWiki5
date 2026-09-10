@@ -1,0 +1,62 @@
+created: 20260402120000000
+import-compound: $:/spec/Examples/TOC/combined/parentField-include-ctrl
+modified: 20260402161142088
+tags: $:/tags/wiki-test-spec combined
+title: Examples/TOC/combined/parentField-include-ctrl
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example tests ''CTRL-click'' behaviour with ''parentField'' and ''toc-include''
+
+* CTRL-clicking p1 should expand the whole path including toc-include references
+
+* `p1` has `toc-include: p1 p2 aaa` — adds extra nodes to its child list
+
+* `p1.1` is excluded via the `exclude` call parameter
+
++
+title: Description
+
+parentField + toc-include + CTRL-click
++
+title: root
+
+Root node
+
++
+title: p1
+parent: root
+toc-include: p1 p2 aaa
+
+p1 toc-includes itself for recursion detection and p2 for CTRL-click testing
+
++
+title: p1.1
+parent: p1
+
+This tiddler is excluded in the macro call
+
++
+title: p2
+parent: root
+
++
+title: aaa
+parent: p2
+
+aaa is included via toc-include on p1
+aaa parent field is: p2
+
++
+title: aaa-aa
+parent: aaa
+
+parent field is: aaa
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"root" parentField:"parent" exclude:"p1.1">>
+</div>

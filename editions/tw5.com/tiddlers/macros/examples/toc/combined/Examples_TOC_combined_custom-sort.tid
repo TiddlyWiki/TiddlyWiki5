@@ -1,0 +1,100 @@
+created: 20260402120000000
+import-compound: $:/spec/Examples/TOC/combined/custom-sort
+modified: 20260402163528013
+tags: $:/tags/wiki-test-spec combined
+title: Examples/TOC/combined/custom-sort
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example combines ''toc-include'', ''toc-filter'', ''toc-branchTemplate'', and a ''custom sort function''
+
+* "Sorted by (tiddler) Title" uses `toc-include: [tag[Person]]` to add Person tiddlers to its child list. They are sorted by title (Person/1, Person/2, ...)
+
+* "Another TOC Entry" uses `toc-filter: [tag[Person]]` to ''replace'' its child list with Person tiddlers
+
+* "Another TOC Entry" also uses `toc-branchTemplate: customTemplate` — all its children are rendered with the `customTemplate` template, which shows `last-name, first-name` using a custom `name-sort` function
+
++
+title: Description
+
+Custom sort function with name fields
++
+title: nameSorted
+
+Root tag for the sorted names example
+
++
+title: Sorted by (tiddler) Title
+tags: nameSorted
+toc-include: [tag[Person]]
+
+This node toc-includes all Person tiddlers
+
++
+title: customTemplate
+
+\function name-sort() [{!!last-name}] [{!!first-name}] +[join[, ]]
+
+<<name-sort>>
+
++
+title: Another TOC Entry
+tags: nameSorted
+toc-filter: [tag[Person]]
+toc-branchTemplate: customTemplate
+
++
+title: Person/1
+caption: Betty Rubble
+tags: Person
+first-name: Betty
+last-name: Rubble
+
++
+title: Person/2
+caption: Booboo Bear
+tags: Person
+first-name: Booboo
+last-name: Bear
+
++
+title: Person/3
+caption: Wilma Flintstone
+tags: Person
+first-name: Wilma
+last-name: Flintstone
+
++
+title: Person/4
+caption: Barney Rubble
+tags: Person
+first-name: Barney
+last-name: Rubble
+
++
+title: Person/5
+caption: Yogi Bear
+tags: Person
+first-name: Yogi
+last-name: Bear
+
++
+title: Person/6
+caption: Fred Flintstone
+tags: Person
+first-name: Fred
+last-name: Flintstone
+
++
+title: Output
+
+The `name-sort` function is defined as:
+
+```
+\function name-sort() "[{!!last-name}] [{!!first-name}] +[join[, ]]"
+```
+
+<div class="tc-table-of-contents">
+<<toc tag:"nameSorted">>
+</div>
