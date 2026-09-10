@@ -4,7 +4,7 @@ tags: [[WebServer Authentication]]
 title: WebServer Basic Authentication
 type: text/vnd.tiddlywiki
 
-[[Basic authentication|https://en.wikipedia.org/wiki/Basic_access_authentication]] is a standard [[mechanism|WebServer Authentication]] for servers to instruct browsers to prompt the user for credentials. It is recommended to use it in association with HTTPS due to the way that it passes unencrypted passwords over the network.
+[[Basic authentication|https://en.wikipedia.org/wiki/Basic_access_authentication]] is a standard [[mechanism|WebServer Authentication]] for servers to instruct browsers to prompt the user for credentials. It is recommended to use it in association with HTTPS due to the way that it passes unencrypted passwords over the network. If Basic Authentication is used over a plain HTTP connection, the server logs a warning to the console since credentials could be intercepted; consider using HTTPS or a TLS-terminating reverse proxy for deployments where network traffic cannot be trusted.
 
 Basic authentication is activated if credentials are specified via the [[username|WebServer Parameter: username]]/[[password|WebServer Parameter: password]] or [[credentials|WebServer Parameter: credentials]] parameters.
 

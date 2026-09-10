@@ -1,0 +1,11 @@
+change-category: nodejs
+change-type: bugfix
+created: 20260908000000000
+description: Warn instead of reject when HTTP Basic Authentication is used over an unencrypted connection
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10012
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#10012
+type: text/vnd.tiddlywiki
+
+* HTTP Basic Authentication continues to work over plain HTTP (needed for intranet deployments), but the server now prints a console warning when credentials are sent unencrypted, recommending HTTPS or a TLS-terminating proxy
