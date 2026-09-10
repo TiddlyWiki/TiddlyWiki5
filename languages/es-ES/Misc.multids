@@ -1,48 +1,49 @@
 title: $:/language/
 
 AboveStory/ClassicPlugin/Warning: Parece que quieres cargar un plugin diseñado para ~TiddlyWiki Classic. <br> Ten en cuenta que [[estos plugins no funcionan en TiddlyWiki version 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]<br> Plugins de ~TiddlyWiki Classic detectados
+Alerts: Alertes
 BinaryWarning/Prompt: Este tiddler contiene datos binarios
 ClassicWarning/Hint: Este tiddler está escrito en formato de texto de una versión de TiddlyWiki Classic que no es totalmente compatible con la versión 5 de TiddlyWiki<br> Visite https://tiddlywiki.com/static/Upgrading.html para más información
 ClassicWarning/Upgrade/Caption: Actualizar
 CloseAll/Button: Cerrar todo
 ColourPicker/Recent: Recientes:
+ConfirmAction: ¿Desea continuar?
 ConfirmCancelTiddler: ¿Deseas descartar los cambios efectuados en "<$text text=<<title>>/>"?
 ConfirmDeleteTiddler: ¿Deseas borrar "<$text text=<<title>>/>"?
-ConfirmDeleteTiddlers: ¿Deseas borrar <<resultCount>> tiddler(s)?
-ConfirmOverwriteTiddler: ¿Deseas sobrescribir "<$text text=<<title>>/>"?
+ConfirmDeleteTiddlers: Voleu eliminar <<resultCount>> tiddler(s)?
 ConfirmEditShadowTiddler: Estás a punto de editar un tiddler oculto<br> Todo cambio en él afectará al sistema por defecto y pondrá en riesgo futuras actualizaciones del sistema<br> ¿Estás seguro de querer editar "<$text text=<<title>>/>"?
-ConfirmAction: ¿Desea continuar?
+ConfirmOverwriteTiddler: ¿Deseas sobrescribir "<$text text=<<title>>/>"?
 Count: Número
 DefaultNewTiddlerTitle: Nuevo Tiddler
 Diffs/CountMessage: <<diff-count>> diferencias
 DropMessage: Suéltalo ahora o pulsa ''ESC'' para cancelar
 Encryption/Cancel: Cancelar
 Encryption/ConfirmClearPassword: ¿Deseas borrar la contraseña? <br> Revocarás el cifrado que se aplica para guardar este wiki
-Encryption/PromptSetPassword: Especifica nueva contraseña para este TiddlyWiki
-Encryption/Username: Usuario
 Encryption/Password: Contraseña
-Encryption/RepeatPassword: Repite la contraseña
 Encryption/PasswordNoMatch: Las contraseñas no coinciden
+Encryption/PromptSetPassword: Especifica nueva contraseña para este TiddlyWiki
+Encryption/RepeatPassword: Repite la contraseña
 Encryption/SetPassword: Establecer contraseña
+Encryption/Username: Usuario
 Error/Caption: Error
-Error/DeserializeOperator/MissingOperand: Error de filtro: Falta el operando 'deserialize
-Error/DeserializeOperator/UnknownDeserializer: Error de filtro: Deserializador desconocido proporcionado como operando para el operador 'deserialize'.
+Error/DeserializeOperator/MissingOperand: Error del filtre: Falta un operand per a l'operador 'deserialitza'
+Error/DeserializeOperator/UnknownDeserializer: Error del filtre: El deserialitzador proporcionat com a operand per a l'operador 'deserialitza' és desconegut
 Error/Filter: Error de filtro
-Error/FilterSyntax: Error de sintaxis en la expresión de filtro
 Error/FilterRunPrefix: Error en Filtro: Prefijo desconocido para la ejecución del filtro
-Error/IsFilterOperator: Error en Filtro: Parámetro desconocido para el operador de filtro 'is'
+Error/FilterSyntax: Error de sintaxis en la expresión de filtro
 Error/FormatFilterOperator: Error en Filtro: Sufijo desconocido para el operador de filtro 'format'
+Error/IsFilterOperator: Error en Filtro: Parámetro desconocido para el operador de filtro 'is'
 Error/LoadingPluginLibrary: Error al cargar la biblioteca de complementos
 Error/NetworkErrorAlert: `<h2>''Error de Red''</h2>Parece que se perdió la conexión con el servidor. Esto puede indicar un problema con tu conexión de red. Intenta restaurar la conectividad de red antes de continuar.<br><br>''Cualquier cambio no guardado se sincronizará automáticamente cuando se restaure la conectividad''.`
 Error/PutEditConflict: Archivo cambiado en el servidor
-Error/PutForbidden: Permiso denegado
-Error/PutUnauthorized: Se requiere autenticación
+Error/PutForbidden: Permís denegat
+Error/PutUnauthorized: Cal autenticació
 Error/RecursiveTransclusion: Error de transclusión recursiva en el widget de transclusión
 Error/RetrievingSkinny: Error al recuperar la lista resumida de tiddlers
 Error/SavingToTWEdit: Error al guardar en TWEdit
 Error/WhileSaving: Error al guardar
 Error/XMLHttpRequest: Código de error XMLHttpRequest
-Error/ZoominTextNode: Error de vista de historia: Parece que has intentado interactuar con un tiddler que se muestra en un contenedor personalizado. La causa más probable es el uso de `$:/tags/StoryTiddlerTemplateFilter` con una plantilla que contiene texto o espacios en blanco al principio. Utiliza el pragma `\whitespace trim` y asegúrate de que todo el contenido del tiddler está envuelto en un único elemento HTML. El texto que causó este problema:
+Error/ZoominTextNode: Error del mode de visualització: sembla que heu intentat interactuar amb un tiddler que es mostra en un contenidor personalitzat. Això és degut probablement a l'ús de `$:/tags/StoryTiddlerTemplateFilter` amb una plantilla que conté text o espais en blanc a l'inici. Utilitzeu el pragma `\whitespace trim` i assegureu-vos que tot el contingut del tiddler s'embolica en un sol element HTML. El text que va provocar aquesta qüestió:
 InternalJavaScriptError/Hint: Hay un problema. Se recomienda que reinicies TiddlyWiki
 InternalJavaScriptError/Title: Error interno de JavaScript
 LayoutSwitcher/Description: Abre el selector de diseño
@@ -59,8 +60,8 @@ Manager/Controls/Show/Prompt: Mostrar:
 Manager/Controls/Sort/Prompt: Ordenar por:
 Manager/Item/Colour: Color
 Manager/Item/Fields: Campos
-Manager/Item/Icon/None: (ninguno)
 Manager/Item/Icon: Icono
+Manager/Item/Icon/None: (ninguno)
 Manager/Item/RawText: Texto sin procesar
 Manager/Item/Tags: Etiquetas
 Manager/Item/Tools: Herramientas
@@ -73,19 +74,19 @@ PageTemplate/Description: la disposición por defecto de ~TiddlyWiki
 PageTemplate/Name: Disposición Estándar
 PluginReloadWarning: Guarda {{$:/core/ui/Buttons/save-wiki}} y recarga {{$:/core/ui/Buttons/refresh}} para que los cambios surtan efecto.
 RecentChanges/DateFormat: DD MMM YYYY
-Shortcuts/Input/AdvancedSearch/Hint: Abre el panel ~AdvancedSearch desde el campo de búsqueda de la barra lateral
 Shortcuts/Input/Accept/Hint: Acepta el elemento seleccionado
 Shortcuts/Input/AcceptVariant/Hint: Acepta el elemento seleccionado (variante)
+Shortcuts/Input/AdvancedSearch/Hint: Abre el panel ~AdvancedSearch desde el campo de búsqueda de la barra lateral
 Shortcuts/Input/Cancel/Hint: Vacía el campo de entrada
 Shortcuts/Input/Down/Hint: Selecciona el siguiente elemento
 Shortcuts/Input/Tab-Left/Hint: Selecciona la Pestaña anterior
 Shortcuts/Input/Tab-Right/Hint: Selecciona la siguiente Pestaña
 Shortcuts/Input/Up/Hint: Selecciona el elemento anterior
 Shortcuts/SidebarLayout/Hint: Cambiar disposición barra lateral
-Switcher/Subtitle/theme: Cambiar tema
-Switcher/Subtitle/layout: Cambiar disposición
 Switcher/Subtitle/language: Cambiar idioma
+Switcher/Subtitle/layout: Cambiar disposición
 Switcher/Subtitle/palette: Cambiar paleta
+Switcher/Subtitle/theme: Cambiar tema
 SystemTiddler/Tooltip: Este es un tiddler de sistema
 SystemTiddlers/Include/Prompt: Incluir tiddlers del sistema
 TagManager/Colour/Heading: Color

@@ -1,6 +1,6 @@
 caption: tm-notify
 created: 20140811112304772
-modified: 20230723220728382
+modified: 20260907202408431
 tags: Messages
 title: WidgetMessage: tm-notify
 type: text/vnd.tiddlywiki
@@ -12,3 +12,28 @@ The notify message briefly displays a specified tiddler as a small alert in the 
 |//{any other params}// |Any other parameters are made available as variables to the notify message. |
 
 The notify message is handled by the TiddlyWiki core.
+
+! Examples
+
+<<.from-version "5.3.6">> you can use the template $:/core/templates/plain-text to display simple text in a notification:
+
+<<wikitext-example-without-html """\procedure notify()
+<$action-sendmessage $message="tm-notify" $param="$:/core/templates/plain-text" text={{!!count}} />
+\end notify
+
+<$button set="!!count" setTo={{{ [{!!count}add[1]] }}} tooltip="count" actions="<<notify>>" >
+Count
+</$button>""">>
+
+You can also use the template $:/core/templates/rendered-text to display wikitext:
+
+<<wikitext-example-without-html """\procedure notify()
+\procedure template()
+Current time is <<now>>
+\end template
+<$action-sendmessage $message="tm-notify" $param="$:/core/templates/rendered-text" text=<<template>> />
+\end notify
+
+<$button actions="<<notify>>" >
+What time is it?
+</$button>""">>

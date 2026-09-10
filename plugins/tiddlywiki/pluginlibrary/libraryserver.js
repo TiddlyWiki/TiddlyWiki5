@@ -63,6 +63,11 @@ window.addEventListener("message",function listener(event){
 	}
 },false);
 
+// Signal to parent that the iframe is ready to receive messages
+window.parent.postMessage({
+	verb: "PLUGIN-LIBRARY-READY"
+},"*");
+
 // Helper to remove string prefixes
 function removePrefix(string,prefix) {
 	if(string.indexOf(prefix) === 0) {
