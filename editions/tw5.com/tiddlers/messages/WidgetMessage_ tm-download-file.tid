@@ -23,7 +23,7 @@ The download file message is handled by the TiddlyWiki core [[SyncMechanism|http
 
 ! Examples
 
-<<.from-version "5.3.6">> you can use the template <<.tid $:/core/templates/plain-text>> to create a custom download configuration without creating additional tiddlers:
+<<.from-version "5.5.0">> you can use the template <<.tid $:/core/templates/plain-text>> to create a custom download configuration without creating additional tiddlers:
 
 <<wikitext-example-without-html """\function field.value() [<pluginTitle>get{!!title}]
 
