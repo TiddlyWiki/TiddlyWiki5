@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/scroll-stable/readme
+
+This plugin keeps the story river's scroll position stable when the river is resized — for example when toggling the sidebar, which changes the river's width //and// height. Without it the reflow can shift the part you are reading off-screen.
+
+It attaches to the core `<$story-wrapper>` widget through that widget's `th-story-wrapper-dom` extension point, registering a //behaviour// that pins the tiddler (or the exact text line) nearest the top of the viewport and holds it in place across the resize. Because the widget runs every registered hook, this composes with any other plugins that extend the same wrapper, and each story-wrapper instance is handled independently.
+
+! Configuration
+
+The elements kept stable are chosen by a CSS selector, resolved within the wrapper's DOM node. Set it in:
+
+`$:/config/plugins/tiddlywiki/scroll-stable/target-selector`
+
+When unset it defaults to `:scope > .tc-tiddler-frame` (the story river's tiddler frames).
