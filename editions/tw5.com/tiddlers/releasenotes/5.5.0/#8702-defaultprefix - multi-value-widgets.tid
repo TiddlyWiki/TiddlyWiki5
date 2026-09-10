@@ -1,0 +1,11 @@
+title: $:/changenotes/5.5.0/#8702-defaultprefix/impacts/multi-value-widgets
+changenote: $:/changenotes/5.5.0/#8702-defaultprefix
+created: 20260718000000000
+modified: 20260718000000000
+tags: $:/tags/ImpactNote
+description: The names and values filters of the multi-value widgets no longer deduplicate their results
+impact-type: compatibility-break
+
+Before v5.5.0, the names and values filters of the multi-value widgets ([[genesis|GenesisWidget]], [[setmultiplevariables|SetMultipleVariablesWidget]], [[action-setmultiplefields|ActionSetMultipleFieldsWidget]] and [[action-sendmessage|ActionSendMessageWidget]]) were evaluated with the usual default filter run prefix, which deduplicates results. A duplicate value would therefore be silently dropped, misaligning the pairing between names and values.
+
+From v5.5.0 onwards, these filters are evaluated with the `all` filter run prefix, so duplicates are preserved and each name is reliably paired with the value at the same position. Filters that relied on the previous deduplication behaviour may now return additional results.

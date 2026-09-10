@@ -33,7 +33,7 @@ export default defineConfig([{
         "core/modules/utils/base64-utf8/base64-utf8.module.min.js",
         "core/modules/utils/diff-match-patch/diff_match_patch.js",
         "core/modules/utils/diff-match-patch/diff_match_patch_uncompressed.js",
-        "core/modules/utils/dom/csscolorparser.js",
+        "core/modules/utils/dom/color.js/color.global.min.v0.6.1.js",
         "plugins/tiddlywiki/*/files/",
         "eslint.config.mjs",
         "playwright.config.js",

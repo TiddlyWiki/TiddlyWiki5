@@ -1,0 +1,12 @@
+title: $:/palettes/TwentyTwenties/Green
+name: TwentyTwenties (Green)
+description: Modern and flexible, Greenish
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+palette-import: $:/palettes/TwentyTwenties
+category: 2026
+
+base-paper: rgb(188, 255, 161)
+base-background: rgb(94, 192, 145)
+base-primary: #6e803c

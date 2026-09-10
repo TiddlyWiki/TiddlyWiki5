@@ -1,0 +1,11 @@
+title: $:/core/ui/Palettes/ViewTemplateBody
+
+<div style.width="220px">
+
+{{||$:/snippets/currpalettepreview}}
+
+</div>
+
+''<$view field="name" format="text"/>''
+<br>
+<$view field="description" format="text"/>

@@ -1,0 +1,38 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Orange Juice
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/OrangeJuice
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #f3cd69
+base-background: #FAA84A
+base-danger: #e42127
+base-highlight: #f7f247
+base-ink: #3d2b2d
+base-link: #106057
+base-paper: #FEF6DF
+base-primary: #F37820
+base-tab: #ffc777
+base-tag: #FDDD4C
+
+# Palette-specific colours and overrides
+alert-border: #46A5A0
+external-link-foreground: #256e8b
+external-link-foreground-hover: #d34926
+external-link-foreground-visited: #945f75
+highlight-foreground: [tf.colour[foreground]]
+sidebar-muted-foreground-hover: #502e09
+sidebar-tab-background: #46A5A0
+sidebar-tab-background-selected: [tf.colour[page-background]]
+sidebar-tab-border: #106057
+sidebar-tab-border-selected: [tf.colour[sidebar-tab-border]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tiddler-controls-foreground: #FDDD4C
+tiddler-controls-foreground-hover: #C8863B
+tiddler-controls-foreground-selected: [tf.colour[primary]]
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

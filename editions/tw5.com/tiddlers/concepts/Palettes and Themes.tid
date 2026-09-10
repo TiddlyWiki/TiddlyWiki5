@@ -1,0 +1,20 @@
+created: 20260718221135000
+modified: 20260718221135000
+tags: Concepts
+title: Palettes and Themes
+type: text/vnd.tiddlywiki
+
+Palettes and themes both affect the appearance of a wiki, and are designed to be independent of one another.
+
+* A [[colour palette|ColourPalettes]] supplies the colour values used to display the wiki
+* A theme is a plugin containing stylesheets that control layout, typography and spacing
+
+Any theme can be combined with any palette. Both can be chosen in the <<.controlpanel-tab Appearance>> tab of the control panel.
+
+This separation only works if themes and palettes respect it:
+
+* Themes should obtain their colours from the current palette with the <<.mlink colour>> function, rather than hard coding colour values in their stylesheets
+* If a theme needs a colour that the common palettes do not define, it should provide a fallback via a [[$:/config/DefaultColourMappings/|colour Macro]] tiddler rather than assuming a particular palette is selected
+* Palettes should confine themselves to colour values, and avoid entries that encode layout or theme-specific presentation
+
+A wiki following these practices lets its users freely mix palettes and themes, including palettes with [[automatic dark and light schemes|Automatic Palette Switching]].

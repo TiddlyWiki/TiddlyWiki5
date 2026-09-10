@@ -1,0 +1,15 @@
+created: 20260718221135000
+modified: 20260723120000000
+tags: Features
+title: Palette Customisations
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> Some palettes offer customisations that let you adjust their colours without editing the palette directly.
+
+The core palette ''~TwentyTwenties'' is built from a small set of base colours: paper, page background, ink, and primary, secondary and tertiary accents. All of its other entries are computed from these base colours. When ''~TwentyTwenties'' is the current palette, a customisations panel appears beneath the [[Palette Chooser]] with a colour picker for each base colour. Changing a base colour causes the rest of the palette to adapt to it automatically.
+
+Your changes do not modify the palette itself. They are stored in a separate tiddler titled <<.tid "$:/config/PaletteCustomisations/">> followed by the title of the palette, so a palette from a plugin continues to receive updates, and each palette keeps its own customisations. A ''reset customisations'' button appears beneath the panel while any customisations exist, and removes them all.
+
+For finer control over individual palette entries, use the ''show editor'' button beneath the chooser instead. While customisations exist, the palette editor shows a warning, and marks each entry that a customisation overrides.
+
+Palette authors can offer customisations for their own palettes with the <<.field customisations>> field, described in ColourPalettes.

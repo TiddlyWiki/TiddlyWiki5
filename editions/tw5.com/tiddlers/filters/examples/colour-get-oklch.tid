@@ -1,0 +1,9 @@
+created: 20260720103000000
+modified: 20260720103000000
+tags: [[colour-get-oklch Operator]] [[Operator Examples]]
+title: colour-get-oklch Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[#5778d8]colour-get-oklch[]]" "with no suffix, the lightness is returned">>
+<<.operator-example 2 "[[#5778d8]colour-get-oklch:c[]]" "the chroma of the same blue">>
+<<.operator-example 3 "[[#5778d8]colour-get-oklch:h[]]" "the hue of the same blue">>

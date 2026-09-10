@@ -1,0 +1,20 @@
+title: Operators/Colour/ColourGetOklchAchromatic
+description: colour-get-oklch hue of achromatic colours returns empty instead of crashing
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+<$text text={{{ [subfilter{Filter}] }}}/>
++
+title: Filter
+
+=[[white]colour-get-oklch:h[]]
+=[[#808080]colour-get-oklch:h[]]
+=[[red]colour-get-oklch:h[]fixed[3]]
++[join[,]]
++
+title: ExpectedResult
+
+,,29.234

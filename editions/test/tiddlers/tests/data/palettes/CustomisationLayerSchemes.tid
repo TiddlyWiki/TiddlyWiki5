@@ -1,0 +1,36 @@
+title: Operators/Palettes/CustomisationLayerSchemes
+description: Scheme-suffixed entries in a customisation layer are applied
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+(<<colour page-background>>)
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+MyPalette
++
+title: MyPalette
+name: My Palette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: dark
+
+page-background: #d4e4f4
++
+title: $:/config/PaletteCustomisations/MyPalette
+palette-import: MyPalette
+type: application/x-tiddler-dictionary
+
+page-background@dark: #222222
++
+title: ExpectedResult
+
+<p>(#222222)</p>

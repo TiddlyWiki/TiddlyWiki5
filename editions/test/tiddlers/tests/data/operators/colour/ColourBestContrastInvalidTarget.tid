@@ -1,0 +1,17 @@
+title: Operators/Colour/ColourBestContrastInvalidTarget
+description: colour-best-contrast with an unparseable target colour returns nothing instead of crashing
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+<$text text={{{ [subfilter{Filter}] +[count[]] }}}/>
++
+title: Filter
+
+[[red]] [[blue]] [[notacolour]] +[colour-best-contrast[]]
++
+title: ExpectedResult
+
+0

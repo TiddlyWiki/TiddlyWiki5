@@ -1,0 +1,35 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Hydrangea
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/Hydrangea
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #D6DEDF
+base-background: #D5C0D5
+base-danger: #d71238
+base-highlight: #F4E985
+base-ink: #4a4a4a
+base-link: #4b6e90
+base-paper: #F5F4F2
+base-primary: #9FC3D4
+base-tab: #AFD1DB
+base-tag: #CCE1DD
+
+# Palette-specific colours and overrides
+alert-border: #9FC3D4
+code-background: #1818181A
+external-link-foreground: #286ba2
+external-link-foreground-hover: #ce306e
+external-link-foreground-visited: #754888
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: #CCE1DD
+sidebar-tab-background-selected: transparent
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tiddler-controls-foreground-hover: #C5B0CF
+tiddler-controls-foreground-selected: #806e92
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

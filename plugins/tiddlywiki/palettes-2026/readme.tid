@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/palettes-2026/readme
+
+This plugin contains thirty three colour palettes adapted from the [[yatagarasu|https://yatagarasu.tiddlyhost.com/]] collection by [[spoon-cat|https://spoon-cat.tiddlyhost.com]], with thanks.
+
+The palettes are built on palette inheritance: each palette imports the shared base palette `$:/palettes/2026/base` and defines ten base colours, from which the base palette derives the full set of palette entries. When one of these palettes is selected, a customisations panel appears beneath the palette chooser with a colour picker for each base colour.
+
+Palette authors can import `$:/palettes/2026/base` in their own palettes to use the same mechanism.

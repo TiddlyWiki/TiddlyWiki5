@@ -1,0 +1,22 @@
+title: Operators/Palettes/ShadowPaletteCompile
+description: A shadow palette from a plugin compiles as itself, not the Vanilla fallback
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+(<<colour background>>)
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+$:/palettes/TwentyTwenties
++
+title: ExpectedResult
+
+<p>(#FFFCF0)</p>

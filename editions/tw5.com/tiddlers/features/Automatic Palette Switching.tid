@@ -1,0 +1,13 @@
+created: 20260718221135000
+modified: 20260718221135000
+tags: Features
+title: Automatic Palette Switching
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> Some palettes switch their colours automatically in response to changes in their environment.
+
+The core palette ''~AutoToggle'' follows the dark mode setting of the operating system. Select it in the [[Palette Chooser]] and the wiki will use a light palette when the operating system is in light mode, and a dark palette when it is in dark mode. The switch happens as soon as the operating system setting changes, and does not mark the wiki as having unsaved changes.
+
+The light and dark palettes that ''~AutoToggle'' uses can themselves be chosen in the customisations panel beneath the palette chooser.
+
+The same mechanism lets palette authors respond to conditions other than dark mode. For example, a palette can define separate schemes for different times of day. See [[Colour Schemes]] for how such palettes are constructed.

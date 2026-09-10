@@ -1,0 +1,38 @@
+category: 2026
+color-scheme: dark
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Gothic Elegance
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/GothicElegance
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #363e43
+base-background: #5C655C
+base-danger: #fbc534
+base-highlight: #a83b4b
+base-ink: #dddfd3
+base-link: #c36d79
+base-paper: #242E2B
+base-primary: #CBC4A3
+base-tab: #333a3c
+base-tag: #d59999
+
+# Palette-specific colours and overrides
+alert-border: [tf.colour[primary]]
+external-link-foreground: #90c5e7
+external-link-foreground-hover: #ffc02a
+external-link-foreground-visited: #eba598
+highlight-foreground: [tf.colour[foreground]]
+sidebar-foreground-shadow: #4A514A
+sidebar-tab-background: [tf.colour[background]]
+sidebar-tab-background-selected: [tf.colour[primary]]
+sidebar-tab-divider: [tf.colour[sidebar-tab-border-selected]]
+sidebar-tab-foreground-selected: #A62552
+sidebar-tiddler-link-foreground: #eca7c0
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+site-title-foreground: [tf.colour[foreground]]
+tag-foreground: [tf.colour[background]]
+tiddler-editor-border-image: #FFFFFF
+tiddler-editor-fields-even: [tf.colour[table-header-background]]

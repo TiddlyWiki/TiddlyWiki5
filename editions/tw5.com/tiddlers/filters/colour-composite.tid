@@ -1,0 +1,30 @@
+created: 20260722103000000
+modified: 20260722103000000
+tags: [[Filter Operators]] [[Colour Operators]]
+title: colour-composite Operator
+caption: colour-composite
+op-purpose: composite translucent colour values over a backdrop colour
+op-input: a selection of colour values
+op-parameter: the backdrop colour
+op-output: the composited colours
+
+<<.from-version "5.5.0">> See ColourPalettes for background.
+
+The <<.op colour-composite>> operator composites each input colour over the backdrop colour given in the parameter, returning the opaque colour that results when the input is displayed on top of the backdrop colour. Opaque input colours are returned unchanged, as is any input when the backdrop cannot be parsed as a colour.
+
+Compositing is needed when measuring the contrast of translucent colours. The [[readability tests|Palette Readability Tests]] of the core palettes composite translucent entries over the palette background before measuring their contrast.
+
+For example, this filter expression composites a 10% black wash over the current page background colour:
+
+```
+[[#0000001A]colour-composite{{{ [function[colour],[page-background]] }}}]
+```
+
+Input values that cannot be parsed as colours are returned as empty strings.
+
+See also the following related operators:
+
+* <<.olink colour-set-alpha>> to set the alpha channel of a colour value
+* <<.olink colour-contrast>> to measure the contrast between pairs of colours
+
+<<.operator-examples "colour-composite">>

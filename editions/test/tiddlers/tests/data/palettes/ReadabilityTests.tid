@@ -1,0 +1,40 @@
+title: Operators/Palettes/ReadabilityTests
+description: Readability test entries report ok, failure messages, and composite translucent colours
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+(<$text text={{{ [[$:/temp/palette-colours]getindex[?pass]] }}}/>)
+(<$text text={{{ [[$:/temp/palette-colours]getindex[?fail]] }}}/>)
+(<$text text={{{ [[$:/temp/palette-colours]getindex[?wash]] }}}/>)
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+MyPalette
++
+title: MyPalette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+
+background: #000000
+foreground: #ffffff
+greya: #888888
+greyb: #999999
+wash: #ffffff19
+?pass: [tf.check-colour-contrast[background],[foreground],[45]]
+?fail: [tf.check-colour-contrast[greya],[greyb],[45]]
+?wash: [tf.check-colour-contrast[wash],[foreground],[45]]
++
+title: ExpectedResult
+
+<p>(ok)
+(0.000: greya/greyb contrast is too low)
+(ok)</p>

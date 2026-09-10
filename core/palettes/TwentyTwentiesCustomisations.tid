@@ -1,0 +1,25 @@
+title: $:/palettes/TwentyTwenties/Customisations
+
+\procedure layer-input-actions()
+<$action-setfield $tiddler=<<layerTitle>> palette-import={{$:/palette}}/>
+\end layer-input-actions
+
+\procedure entry(name,description)
+<$text text=<<description>>/>: <$edit-text tiddler=<<layerTitle>> index=<<name>> type="color" tag="input" default={{{ [function[colour],<name>] }}} inputActions=<<layer-input-actions>>/>
+\end entry
+
+<$let layerTitle={{{ [function[tf.palette-customisations-layer]] }}}>
+
+<<entry name:"base-paper" description:"Paper">>
+
+<<entry name:"base-background" description:"Page background">>
+
+<<entry name:"base-ink" description:"Ink">>
+
+<<entry name:"base-primary" description:"Primary">>
+
+<<entry name:"base-secondary" description:"Secondary">>
+
+<<entry name:"base-tertiary" description:"Tertiary">>
+
+</$let>
