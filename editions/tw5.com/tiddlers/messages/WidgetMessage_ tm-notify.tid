@@ -15,7 +15,7 @@ The notify message is handled by the TiddlyWiki core.
 
 ! Examples
 
-<<.from-version "5.3.6">> you can use the template $:/core/templates/plain-text to display simple text in a notification:
+<<.from-version "5.5.0">> you can use the template <<.tid $:/core/templates/plain-text>> to display simple text in a notification:
 
 <<wikitext-example-without-html """\procedure notify()
 <$action-sendmessage $message="tm-notify" $param="$:/core/templates/plain-text" text={{!!count}} />
