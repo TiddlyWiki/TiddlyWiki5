@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lang-markdown/tags
+caption: Markdown Tags
+description: Tags that trigger Markdown syntax highlighting (one per line)
+

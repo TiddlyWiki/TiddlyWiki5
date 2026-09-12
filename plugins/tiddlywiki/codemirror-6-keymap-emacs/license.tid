@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/codemirror-6-keymap-emacs/license
+
+This plugin bundles code from @replit/codemirror-emacs.
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/mit}}

@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/editor/bidiPerLine
+caption: Bidirectional text (per-line)
+description: Enable automatic per-line text direction detection for RTL/LTR languages (Arabic, Hebrew, etc.)
+config-type: checkbox
+config-category: Editing
+default: no
+text: no

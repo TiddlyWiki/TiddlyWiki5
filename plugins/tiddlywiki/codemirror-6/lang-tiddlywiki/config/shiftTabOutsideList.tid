@@ -1,0 +1,8 @@
+title: $:/config/codemirror-6/lang-tiddlywiki/shiftTabOutsideList
+caption: Shift-Tab key (outside lists)
+description: What the Shift-Tab key does when the cursor is not inside a list. Inside lists, Shift-Tab always removes a list level.
+config-type: select
+config-category: Keybindings
+config-options: [{"value":"indent","label":"Outdent line"},{"value":"none","label":"Do nothing"}]
+default: indent
+text: indent

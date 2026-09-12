@@ -1,0 +1,49 @@
+title: $:/plugins/tiddlywiki/codemirror-6/styles/control-panel
+tags: $:/tags/Stylesheet
+
+.cm-config-category {
+  margin-bottom: 1.5em;
+}
+
+.cm-config-category h2 {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 0 0 0.5em 0;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid <<colour tiddler-editor-border>>;
+}
+
+.cm-config-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cm-config-table td {
+  padding: 0.4em 0;
+  vertical-align: top;
+}
+
+.cm-config-table td:first-child {
+  width: 180px;
+  padding-right: 1em;
+}
+
+.cm-config-table td:last-child {
+  width: auto;
+}
+
+.cm-config-table select,
+.cm-config-table input[type="text"] {
+  width: 100%;
+  padding: 0.3em 0.5em;
+  border: 1px solid <<colour tiddler-editor-border>>;
+  border-radius: 3px;
+  background: <<colour tiddler-editor-background>>;
+  box-sizing: border-box;
+}
+
+.cm-config-description {
+  margin-top: 0.3em;
+  font-size: 0.9em;
+  color: <<colour muted-foreground>>;
+}

@@ -1,0 +1,5 @@
+title: $:/config/EditorTypeMappings/
+
+text/x-php: codemirror-6
+application/x-php: codemirror-6
+text/php: codemirror-6
