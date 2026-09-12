@@ -948,7 +948,7 @@ describe("Filter tests", function() {
 			expect(wiki.filterTiddlers("aa a b c +[sortby:end[b c a cc]]").join(",")).toBe("b,c,a,aa");
 			expect(wiki.filterTiddlers("a bb b c +[sortby:end[b c a cc]]").join(",")).toBe("b,c,a,bb");
 			expect(wiki.filterTiddlers("a bb cc b c +[sortby:end[b c a cc]]").join(",")).toBe("b,c,a,cc,bb");
-			// Missing titles keep their input order. Avoid a repeated title here, it would be moved to the end of the input
+			// Missing titles keep their input order, and a repeated title would be moved to the end
 			expect(wiki.filterTiddlers("zz a yy b +[sortby:end[b a]]").join(",")).toBe("b,a,zz,yy");
 			// Two titles are the shortest input that is sorted rather than returned untouched
 			expect(wiki.filterTiddlers("a b +[sortby[b a]]").join(",")).toBe("b,a");

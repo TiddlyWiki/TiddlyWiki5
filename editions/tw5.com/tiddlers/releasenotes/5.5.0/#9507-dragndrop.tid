@@ -1,0 +1,16 @@
+title: $:/changenotes/5.5.0/#9507
+created: 20251218204100502
+modified: 20251218204100502
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: usability
+description: Dragndrop procedures for enhanced dragndrop lists
+release: 5.5.0
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9507
+github-contributors: BurningTreeC
+type: text/vnd.tiddlywiki
+
+* Lists can be reordered by drag and drop, with the other items moving aside to show where the dragged one will land before it is dropped. The "Open" tab of the sidebar and the tag pill dropdowns use it
+* Tiddlers in the story river can be reordered by dragging, once that has been switched on in the control panel's "Appearance"/"Drag & Drop" tab
+* The [[make-live-reorderable-list Procedure]] renders such a list, and lists sharing a group can exchange items, as [[Kanban]] shows
+* The [[AnimateLayoutWidget]] and the [[dragging Operator]] are new

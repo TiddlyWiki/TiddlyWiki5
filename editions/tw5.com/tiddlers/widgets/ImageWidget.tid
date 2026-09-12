@@ -38,6 +38,8 @@ The width and the height can be specified as pixel values (eg "23" or "23px") or
 |`tv-selectednode-posy` |`y` offset position of the image DOM node  |
 |`tv-selectednode-width` |`offsetWidth` of the image DOM node |
 |`tv-selectednode-height` |`offsetHeight` of the image DOM node |
+|`tv-selectednode-exact-width` |unrounded width of the image DOM node |
+|`tv-selectednode-exact-height` |unrounded height of the image DOM node |
 |`img-natural-width` |Original intrinsic width of the image |
 |`img-natural-height` |Original intrinsic height of the image |
 

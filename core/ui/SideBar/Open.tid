@@ -5,33 +5,31 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \whitespace trim
 \define lingo-base() $:/language/CloseAll/
 
-\define drop-actions()
-<$action-listops $tiddler=<<tv-story-list>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
-\end
+\function tf.get-open-tab-drag-state() [<qualify "$:/state/tiddlywiki/dragging">]
 
-\define placeholder()
-<div class="tc-droppable-placeholder"/>
-\end
+\function tf.get-open-tab-animation-duration() [{$:/config/DragAndDrop/animation/duration}multiply[0.8]]
 
-\define droppable-item(button)
 \whitespace trim
-<$droppable actions=<<drop-actions>> enable=<<tv-enable-drag-and-drop>> tag="div">
-<<placeholder>>
-<div>
-$button$
+
+\procedure content()
+<div class="tc-sidebar-tab-open-item">
+<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini tc-small-gap-right">{{$:/core/images/close-button}}</$button><$link draggable="no"/>
 </div>
-</$droppable>
 \end
 
 <div class="tc-sidebar-tab-open">
-<$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
-<div class="tc-sidebar-tab-open-item">
-<$macrocall $name="droppable-item" button="<$button message='tm-close-tiddler' tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class='tc-btn-invisible tc-btn-mini tc-small-gap-right'>{{$:/core/images/close-button}}</$button><$link/>"/>
+<$transclude $variable="make-live-reorderable-list"
+	$mode="inline"
+	list=<<tv-story-list>>
+	content=<<content>>
+	history=<<tv-history-list>>
+	storyview="pop"
+	acceptDrops="yes"
+	transfer="copy"
+	duration=<<tf.get-open-tab-animation-duration>>
+	dragState=<<tf.get-open-tab-drag-state>>
+	commit="drop"
+	emptyHeight="2em"
+/>
 </div>
-</$list>
-<$tiddler tiddler="">
-<div>
-<$macrocall $name="droppable-item" button="<$button message='tm-close-all-tiddlers' class='tc-btn-invisible tc-btn-mini'><<lingo Button>></$button>"/>
-</div>
-</$tiddler>
-</div>
+<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>

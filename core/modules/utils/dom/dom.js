@@ -154,6 +154,145 @@ exports.getPassword = function(name) {
 };
 
 /*
+The ancestor of a node that a column layout, such as the masonry story river, lays out
+*/
+exports.getColumnLayoutItem = function(domNode) {
+	var view = domNode && domNode.ownerDocument && domNode.ownerDocument.defaultView;
+	if(!view || !view.getComputedStyle) {
+		return null;
+	}
+	for(var node = domNode; node && node.nodeType === 1; node = node.parentNode) {
+		var parent = node.parentNode;
+		if(parent && parent.nodeType === 1) {
+			var style = view.getComputedStyle(parent);
+			if(style && (style.columnCount !== "auto" || style.columnWidth !== "auto")) {
+				return node;
+			}
+		}
+	}
+	return null;
+};
+
+exports.isInColumnLayout = function(domNode) {
+	return !!exports.getColumnLayoutItem(domNode);
+};
+
+exports.pinColumnLayout = function(domNode) {
+	var item = exports.getColumnLayoutItem(domNode),
+		container = item && item.parentNode;
+	if(!container) {
+		return;
+	}
+	var blocks = [],
+		heights = [],
+		t;
+	var view = container.ownerDocument && container.ownerDocument.defaultView;
+	for(t=0; t<container.children.length; t++) {
+		var child = container.children[t],
+			position = view && view.getComputedStyle && view.getComputedStyle(child).position;
+		// Anything taken out of the flow is not laid out by the columns and has no size to hold
+		if(child.style && position !== "absolute" && position !== "fixed") {
+			blocks.push(child);
+		}
+	}
+	for(t=0; t<blocks.length; t++) {
+		heights.push(blocks[t].offsetHeight);
+	}
+	for(t=0; t<blocks.length; t++) {
+		blocks[t].setAttribute("data-column-pinned","yes");
+		blocks[t].style.height = heights[t] + "px";
+	}
+};
+
+/*
+Let them size themselves to their content again
+*/
+exports.releaseColumnLayout = function(document) {
+	if(!document || !document.querySelectorAll) {
+		return;
+	}
+	$tw.utils.each(document.querySelectorAll("[data-column-pinned]"),function(node) {
+		node.removeAttribute("data-column-pinned");
+		node.style.height = "";
+	});
+};
+
+/*
+Hold the column item containing a node at its height, so the columns do not reflow around it
+while it is still moving
+*/
+exports.holdColumnItemHeight = function(domNode,duration) {
+	var item = exports.getColumnLayoutItem(domNode);
+	if(!item || item === domNode) {
+		return;
+	}
+	$tw.utils.setStyle(item,[
+		{height: item.offsetHeight + "px"}
+	]);
+	setTimeout(function() {
+		$tw.utils.setStyle(item,[
+			{height: ""}
+		]);
+	},duration);
+};
+
+/*
+Take a node out of the flow where it stands, so that what surrounds it can close over the space
+while it goes on animating. Pass a {left,top,width,height} to put back one that has since left
+the document
+*/
+exports.detachFromFlow = function(domNode,geometry) {
+	if(!domNode || !domNode.style) {
+		return;
+	}
+	geometry = geometry || {
+		left: domNode.offsetLeft,
+		top: domNode.offsetTop,
+		width: domNode.offsetWidth,
+		height: domNode.offsetHeight
+	};
+	var left = geometry.left,
+		top = geometry.top,
+		width = geometry.width,
+		height = geometry.height;
+	domNode.setAttribute("data-animate-detached","yes");
+	$tw.utils.setStyle(domNode,[
+		{width: width + "px"},
+		{height: height + "px"},
+		{left: left + "px"},
+		{top: top + "px"},
+		{margin: "0"},
+		{position: "absolute"},
+		{"z-index": "500"}
+	]);
+};
+
+/*
+Mark a node kept on the page only long enough to be played away, so that anything else reading
+the page passes over it
+*/
+exports.markLeaving = function(domNode) {
+	if(domNode && domNode.setAttribute) {
+		domNode.setAttribute("data-animate-leaving","yes");
+	}
+};
+
+/*
+Mark a node a storyview is playing in, so that anything else leaves it where the storyview puts it
+*/
+exports.markEntering = function(domNode,duration) {
+	if(!domNode || !domNode.setAttribute) {
+		return;
+	}
+	domNode.setAttribute("data-animate-entering","yes");
+	setTimeout(function() {
+		if(domNode.removeAttribute) {
+			domNode.removeAttribute("data-animate-entering");
+		}
+	},duration);
+};
+
+/*
 Force layout of a dom node and its descendents
 */
 exports.forceLayout = function(element) {
@@ -207,7 +346,9 @@ exports.addEventListeners = function(domNode,events) {
 Get the computed styles applied to an element as an array of strings of individual CSS properties
 */
 exports.getComputedStyles = function(domNode) {
-	var textAreaStyles = window.getComputedStyle(domNode,null),
+	// Nodes within an iframe are styled by the view of their own document
+	var view = (domNode.ownerDocument && domNode.ownerDocument.defaultView) || window,
+		textAreaStyles = view.getComputedStyle(domNode,null),
 		styleDefs = [],
 		name;
 	for(var t=0; t<textAreaStyles.length; t++) {
@@ -300,6 +441,11 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
 			variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
 			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
+			if(selectedNode.getBoundingClientRect) {
+				var selectedNodeExactRect = selectedNode.getBoundingClientRect();
+				variables["tv-selectednode-exact-width"] = selectedNodeExactRect.width.toString();
+				variables["tv-selectednode-exact-height"] = selectedNodeExactRect.height.toString();
+			}
 		}
 	}
 	

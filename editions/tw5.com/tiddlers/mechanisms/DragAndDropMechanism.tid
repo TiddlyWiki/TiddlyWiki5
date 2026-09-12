@@ -1,5 +1,5 @@
 created: 20170328161210552
-modified: 20170406085836682
+modified: 20260818111758000
 tags: [[Importing Tiddlers]] [[Drag and Drop]] Mechanisms
 title: DragAndDropMechanism
 type: text/vnd.tiddlywiki
@@ -23,3 +23,38 @@ The general sequence of a drag and drop operation is as follows:
 # The draggable element moves with the mouse pointer until the click is released
 # Moving the pointer over droppable elements such as the DroppableWidget displays a highlight indicating that the item can be dropped
 # The configured actions are performed if the drag ends on a droppable element
+
+! Reordering a list by dragging
+
+<<.from-version "5.5.0">> The core can also let the user put the items of a list in a different order by dragging them, showing the new order as it is being chosen rather than only once the item is dropped. This is what the story river and the "Open" tab of the sidebar use. The <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">> procedure renders such a list, and is built out of the same primitives as above.
+
+Each item is a DraggableWidget carrying two [[DroppableWidgets|DroppableWidget]], one covering its first half and one its second, so that the dragged item can be placed on either side of it. A further DroppableWidget covers the whole list behind the items, so that a drop landing between them, or on the padding around them, is not refused. It is also what takes the first item back into a list that has been emptied, which has no items left to offer a place against.
+
+The sequence of a reordering drag is as follows:
+
+# The drag begins, and a state tiddler tagged <<tag-pill "$:/tags/dragState">> is written. It records the item being dragged, the list it came from, and the order that list started in
+# Moving over the first or second half of another item puts the dragged item before or after it, and the list is rendered again in that order
+# The AnimateLayoutWidget makes the items that have moved slide to their new places rather than jump, playing only while a drag is in progress, which it asks with the <<.olink dragging>> operator
+# Dropping keeps the new order. A drag that ends anywhere else puts the order back the way it was found, as does a drag that wanders off the list, so that what is shown is always what a drop would do
+# The state tiddler is deleted, whichever way the drag ended
+
+! Showing where something dragged from elsewhere would go
+
+A list can be told to take in whatever is dragged to it, and not only its own items. Showing where such a thing would land needs to know what is being dragged, and that cannot be asked of the drag: what a drag carries is kept from the page until it is dropped, which is why it is only read in the drop handler.
+
+What is being dragged is therefore written down when the drag begins, in <<.tid "$:/state/dragging">>, whose ''list'' field holds the titles. A drag started from a tag pill carries every tiddler with that tag, so there may be many of them, and all of them are shown. Since it is a tiddler, writing it refreshes what is on screen, which is what lets a list respond to the very first movement over it.
+
+The first list the drag reaches takes it on: it writes the same kind of state tiddler as it would for a drag of its own, naming itself as where the drag came from and recording the order it had before. Everything that follows is then the same as reordering its own items, and putting things back if the drag is abandoned is the same as well. Because such a drag ends on something that is not part of the list, the end of it is noticed by a handler over the whole page rather than by the item that was dragged.
+
+The document itself is marked while a drag is under way, with the class `tc-drag-in-progress` on the body element, so that a stylesheet can respond to a drag. The core uses it to let a list keep its drop targets in place at all times without those targets swallowing the clicks meant for what lies beneath them.
+
+! When the new order is written
+
+Reordering the "Open" tab changes <<.tid "$:/StoryList">>, which is also what the story river shows. Writing that list as the drag proceeds would make the story river shuffle its tiddlers about while the user is dragging a row in the sidebar, so the two are given different moments to write at, chosen with the <<.param commit>> parameter:
+
+* <<.value live>> changes the list itself as the drag proceeds. The story river uses this, since the list being reordered is the one being dragged in
+* <<.value drop>> assembles the order in the drag state instead, and writes it to the list only when the item is dropped. The "Open" tab uses this, so that the story river stays still until the drag is over
+
+! What a drag hides
+
+An element that is part way through one of these animations is drawn away from the place the layout has given it, and the pointer responds to what it sees rather than to what the layout says. A drop target carried along by an animation would therefore respond over the wrong ground, and two items passing each other would leave the ground between them responding to nothing at all, so that a drop there would be refused. The AnimateLayoutWidget therefore holds marked elements still while the element around them travels, and the core stylesheet stops a travelling element from responding to the pointer at all. See the AnimateLayoutWidget for the details.
