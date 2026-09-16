@@ -2,4 +2,4 @@ title: $:/core/images/refresh-button
 tags: $:/tags/Image
 
 \parameters (size:"22pt")
-<svg width=<<size>> height=<<size>> class="tc-image-refresh-button tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M106.369 39.433c10.16 20.879 6.57 46.764-10.771 64.106-21.87 21.87-57.327 21.87-79.196 0-21.87-21.87-21.87-57.326 0-79.196a8 8 0 1111.314 11.314c-15.621 15.62-15.621 40.947 0 56.568 15.62 15.621 40.947 15.621 56.568 0C97.72 78.79 99.6 58.175 89.924 42.73l-6.44 12.264a8 8 0 11-14.166-7.437L84.435 18.76a8 8 0 0110.838-3.345l28.873 15.345a8 8 0 11-7.51 14.129l-10.267-5.457zm-8.222-12.368c-.167-.19-.336-.38-.506-.57l.96-.296-.454.866z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>> viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tc-image-refresh-button tc-image-button lucide lucide-refresh-ccw-icon lucide-refresh-ccw"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
