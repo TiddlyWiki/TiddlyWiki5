@@ -1,0 +1,39 @@
+created: 20260402120000000
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/param/exclude-level
+modified: 20260402000839728
+tags: $:/tags/wiki-test-spec param
+title: Examples/TOC/param/exclude-level
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows a simple table of contents using the ''exclude'' and ''level'' parameter
+
+* The "root" elements are ''tagged Contents''
+
+* Tiddler [[aa-aa]] is excluded when the macro is called. So it is a "global" exclusion
+
+* The ''level'' parameter limits the displayed depth to ''2 levels''
+
+** `bb-bb-bb` at level 3 should ''not'' be visible
+
+{{example-overview}}
+
++
+title: Description
+
+TOC Macro Parameter "exclude" with "level"
++
+title: aa-aa
+tags: aa
+
+Link to [[bb]]
+
++
+title: Output
+
+The `exclude` parameter is part of the macro call.
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents" exclude:"aa-aa" level:"2">>
+</div>

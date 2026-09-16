@@ -1,0 +1,93 @@
+created: 20260402120000000
+import-compound: $:/spec/Examples/TOC/combined/tagField-variations
+modified: 20260402120000000
+tags: $:/tags/wiki-test-spec combined
+title: Examples/TOC/combined/tagField-variations
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows ''tagField'' across multiple toc macro variants
+
+* Uses a `tag-like` field instead of standard tags to build the tree
+
+* Compares toc-selective-expandable, with and without `exclude`, and simple toc
+
+* The `exclude` parameter removes `todo1` and `todo2`, so `bb` should not show a chevron
+
++
+title: Description
+
+tagField with selective-expandable, exclude, and simple toc
++
+title: tag-like-root
+
+Root node for tag-like hierarchy
+
++
+title: aaa
+tag-like: tag-like-root
+
++
+title: aaa.a
+tag-like: aaa
+
++
+title: aaa.b
+tag-like: aaa
+
++
+title: aaa.b.1
+tag-like: aaa.b
+
++
+title: bb
+caption: bb-caption
+tag-like: tag-like-root
+toc-include: [tag[todo]]
+
+bb has toc-include for todo items
+
++
+title: todo1
+tags: todo
+toc-link: no
+
++
+title: todo2
+tags: todo
+
++
+title: ccc
+tag-like: tag-like-root
+
++
+title: tag-like-c
+tag-like: ccc
+
++
+title: tag-like-d
+tag-like: ccc
+
++
+title: Output
+
+!! toc-selective-expandable
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"tag-like-root" tagField:"tag-like">>
+</div>
+
+!! toc-selective-expandable with exclude
+
+Excludes `todo1` and `todo2` — `bb` should not show a chevron.
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"tag-like-root" tagField:"tag-like" exclude:"todo1 todo2">>
+</div>
+
+!! Simple toc reference
+
+<div class="tc-table-of-contents">
+<<toc tag:"tag-like-root" tagField:"tag-like">>
+</div>

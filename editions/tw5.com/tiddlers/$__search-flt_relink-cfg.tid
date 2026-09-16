@@ -1,0 +1,48 @@
+caption: relink-cfg
+created: 20240208145232790
+hint: {{$:/language/Search/System/Hint}}
+icon: $:/plugins/wikilabs/advanced-search-plus/system-search.svg
+input-tiddler: $:/search-flt/inp/relink-cfg
+input-title: $:/search-flt/relink-cfg
+modified: 20240208145232790
+tags: $:/tags/AdvancedSearchPlus
+title: $:/search-flt/relink-cfg
+type: text/vnd.tiddlywiki
+
+\define lingo-base() $:/language/Search/
+
+<$tiddler tiddler=<<currentTab>>>
+<$button tooltip={{$:/language/Buttons/Delete/Caption}} >
+  <$action-deletetiddler $tiddler={{!!input-tiddler}}/>
+  <$action-deletetiddler $tiddler={{!!input-title}}/>
+  <$action-deletetiddler $tiddler="$:/state/tab--1498284803"/>
+  <$transclude tiddler="$:/core/images/delete-button" />
+</$button>
+<<lingo System/Hint>>
+
+<div class="tc-search">
+<$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
+<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
+<$edit-text tiddler={{!!input-tiddler}} type="search" tag="input" placeholder="..." default="" focus="yes"/>
+</$keyboard>
+</$keyboard>
+<$reveal state={{!!input-tiddler}} type="nomatch" text="">
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler={{!!input-tiddler}} $field="text" $value=""/>
+{{$:/core/images/close-button}}
+</$button>
+</$reveal>
+</div>
+
+<$reveal state={{!!input-tiddler}} type="nomatch" text="">
+<$set name="search-term" tiddler={{!!input-tiddler}}>
+<$set name="resultCount" value="<$count filter='[is[system]search<search-term>]'/>">
+<div class="tc-search-results">
+<<lingo System/Matches>>
+<$list filter="[is[system]search<search-term>sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+</div>
+</$set></$set>
+</$reveal>
+<$reveal state={{!!input-tiddler}} type="match" text="">
+</$reveal>
+</$tiddler>

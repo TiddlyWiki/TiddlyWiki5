@@ -1,0 +1,39 @@
+created: 20260402120000000
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/param/branchTemplate
+modified: 20260402164840715
+tags: $:/tags/wiki-test-spec param
+title: Examples/TOC/param/branchTemplate
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows the ''toc-branchTemplate'' field with a simple toc
+
+* Tiddler `bb` has `toc-branchTemplate: my-branch-template`
+
+* All children of `bb` (i.e. `bb-bb` and `bb-bb-bb`) should render with the custom template
+
+* `aa` and `cc` are ''not'' affected — they use the default rendering
+
+{{example-overview}}
+
++
+title: Description
+
+Field "toc-branchTemplate" applies template to children
++
+title: my-branch-template
+
+Branch: <$link>
+
++
+title: bb
+tags: Contents
+toc-branchTemplate: my-branch-template
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>
