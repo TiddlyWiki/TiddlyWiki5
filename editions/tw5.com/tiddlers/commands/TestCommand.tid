@@ -1,0 +1,8 @@
+caption: test
+created: 20260309032042000
+modified: 20260309032042000
+tags: Commands
+title: TestCommand
+type: text/vnd.tiddlywiki
+
+{{$:/language/Help/test}}
