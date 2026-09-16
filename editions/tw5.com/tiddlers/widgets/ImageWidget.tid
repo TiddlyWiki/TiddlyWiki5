@@ -76,7 +76,7 @@ The width and the height can be specified as pixel values (eg "23" or "23px") or
 
 ! Image Status Classes
 
-<<from-version "5.2.2">> The following CSS classes are automatically added to the `<img>` element to indicate the status of the image. Note that only one of these classes will be added at the same time.
+<<.from-version "5.2.2">> The following CSS classes are automatically added to the `<img>` element to indicate the status of the image. Note that only one of these classes will be added at the same time.
 
 |''tc-image-loading'' |When the image is being loaded |
 |''tc-image-loaded'' |The image has been loaded successfully |
