@@ -1,0 +1,31 @@
+created: 20251030143723359
+description: Save SVG annotation-xml sanitation
+modified: 20260127083439069
+tags: $:/tags/wiki-test-spec
+title: safe-script-tag
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Handled by: $:/core/modules/widgets/element.js
+
+```
+// Sanitize SVG annotation-xml tag names if needed 
+this.tag = $tw.utils.makeTagNameSafe(this.tag, "safe-" + this.tag);
+```
++
+title: Output
+
+<annotation-xml encoding="text/html">
+	<script>alert(1)</script>
+	<img src=x onerror=alert(1)>
+</annotation-xml>
+
++
+title: ExpectedResult
+
+<p><annotation-xml encoding="text/html">
+	<safe-script>alert(1)</safe-script>
+	<img src="x">
+</annotation-xml>
+</p>
