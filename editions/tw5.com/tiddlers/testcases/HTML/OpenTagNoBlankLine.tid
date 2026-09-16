@@ -23,7 +23,7 @@ This also is not a new paragraph.
 +
 title: ExpectedResult
 
-<p><div>
+<div>
 * Open tag without a blank line means
 * block mode punctuation (i.e. this list) will
 * NOT be recognised.
@@ -31,4 +31,4 @@ title: ExpectedResult
 Paragraphs are only recognised in block mode. Even with blank lines, new paragraphs are not recognised.
 
 This also is not a new paragraph.
-</div></p>
+</div>

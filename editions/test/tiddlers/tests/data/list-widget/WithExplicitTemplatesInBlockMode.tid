@@ -3,7 +3,7 @@ description: List widget with explicit templates in block mode
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
-+
+
 title: Output
 
 \whitespace trim
@@ -29,4 +29,4 @@ title: Output
 +
 title: ExpectedResult
 
-123None!
+<p>1</p><p>2</p><p>3</p><p>None!</p>

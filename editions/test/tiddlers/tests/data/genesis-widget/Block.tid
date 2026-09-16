@@ -8,17 +8,21 @@ title: Output
 \whitespace trim
 <$genesis $type="$reveal" type=nomatch>
 
-Block
+Text block - $reveal creates a DIV. This text is covered in a P tag.
+If you remove the leading line, reveal creates a SPAN, which covers this text.
+New P tag now covers the reveal SPAN
 </$genesis>
 
 <$genesis $type="$reveal" type=nomatch $mode=block>
 
-Block forced block
+Block mode forced - $reveal creates a DIV. The leading line still decides this text, so it is covered in a P tag.
+Remove the leading line and the P tag goes, but $reveal keeps its DIV because $mode says so
 </$genesis>
 
 <$genesis $type="$reveal" type=nomatch $mode=inline>
 
-Block forced inline
+Inline mode forced - $reveal creates a SPAN. The leading line still decides this text, so it is covered in a P tag inside that SPAN.
+$mode only picks the element for $reveal, it does not change how this body was parsed
 </$genesis>
 
 <$genesis $type=$reveal type=nomatch>Inline</$genesis>
@@ -27,4 +31,8 @@ Block forced inline
 +
 title: ExpectedResult
 
-<div class="tc-reveal"><p>Block</p></div><div class="tc-reveal"><p>Block forced block</p></div><span class="tc-reveal"><p>Block forced inline</p></span><p><span class="tc-reveal">Inline</span><div class="tc-reveal">Inline forced block</div><span class="tc-reveal">Inline forced inline</span></p>
+<div class="tc-reveal"><p>Text block - $reveal creates a DIV. This text is covered in a P tag.
+If you remove the leading line, reveal creates a SPAN, which covers this text.
+New P tag now covers the reveal SPAN</p></div><div class="tc-reveal"><p>Block mode forced - $reveal creates a DIV. The leading line still decides this text, so it is covered in a P tag.
+Remove the leading line and the P tag goes, but $reveal keeps its DIV because $mode says so</p></div><span class="tc-reveal"><p>Inline mode forced - $reveal creates a SPAN. The leading line still decides this text, so it is covered in a P tag inside that SPAN.
+$mode only picks the element for $reveal, it does not change how this body was parsed</p></span><p><span class="tc-reveal">Inline</span></p><div class="tc-reveal">Inline forced block</div><p><span class="tc-reveal">Inline forced inline</span></p>

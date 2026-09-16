@@ -12,4 +12,4 @@ hello
 +
 title: ExpectedResult
 
-<p><div style="background:green;color:blue;">hello</div></p>
+<div style="background:green;color:blue;">hello</div>

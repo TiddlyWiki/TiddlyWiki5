@@ -31,9 +31,9 @@ title: output-template
 +
 title: ExpectedResult
 
-<p><pre>draft.of: New Tiddler
+<pre>draft.of: New Tiddler
 draft.title: New Tiddler
 title: Draft of 'New Tiddler'
 z-field: a
 
-some text</pre></p>
+some text</pre>

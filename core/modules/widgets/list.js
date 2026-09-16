@@ -105,17 +105,24 @@ ListWidget.prototype.findExplicitTemplates = function() {
 	this.explicitEmptyTemplate = null;
 	this.explicitJoinTemplate = null;
 	this.hasTemplateInBody = false;
-	var searchChildren = function(childNodes) {
+	// A marker inside a paragraph means the parser already decided this run is a block, so
+	// keep that paragraph rather than taking the marker's children and losing the decision
+	var searchChildren = function(childNodes,enclosingParagraph) {
 		var foundInlineTemplate = false;
+		var keepParagraph = function(children) {
+			return enclosingParagraph ? [$tw.utils.extend({},enclosingParagraph,{children: children})] : children;
+		};
 		$tw.utils.each(childNodes,function(node) {
 			if(node.type === "list-template") {
-				self.explicitListTemplate = node.children;
+				self.explicitListTemplate = keepParagraph(node.children);
 			} else if(node.type === "list-empty") {
-				self.explicitEmptyTemplate = node.children;
+				self.explicitEmptyTemplate = keepParagraph(node.children);
 			} else if(node.type === "list-join") {
+				// A join sits between two items, so a paragraph of its own would break the
+				// run it is joining
 				self.explicitJoinTemplate = node.children;
 			} else if(node.type === "element" && node.tag === "p") {
-				searchChildren(node.children);
+				searchChildren(node.children,node);
 				foundInlineTemplate = true;
 			} else {
 				foundInlineTemplate = true;

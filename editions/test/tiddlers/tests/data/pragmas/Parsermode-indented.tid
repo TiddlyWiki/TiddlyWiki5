@@ -32,5 +32,4 @@ title: ExpectedResult
 
 Text with <strong>bold</strong><h1 class="">Heading</h1><p>Text with <strong>bold</strong></p><p>! Not Heading
 
-Text with <strong>bold</strong><h1 class="">Heading</h1><p>Text with <strong>bold</strong></p>
-</p>
+Text with <strong>bold</strong></p><h1 class="">Heading</h1><p>Text with <strong>bold</strong></p>

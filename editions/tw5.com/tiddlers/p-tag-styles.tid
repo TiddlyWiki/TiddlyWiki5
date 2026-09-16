@@ -1,0 +1,9 @@
+created: 20260823011221471
+modified: 20260823153117375
+tags: $:/tags/Stylesheet
+title: p-tag-styles
+type: text/vnd.tiddlywiki
+
+p {
+outline: 1px solid blue;
+}
