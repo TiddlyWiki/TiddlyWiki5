@@ -1,0 +1,14 @@
+change-category: internal
+change-type: enhancement
+created: 20260824154230790
+description: The Control Panel plugin table uses one $let instead of two nested $set widgets
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9990
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9990
+type: text/vnd.tiddlywiki
+
+* The `plugin-table` macro behind ''Control Panel'' -> ''Plugins'' sets its two variables with a single `<$let>` instead of two nested `<$set>` widgets
+* The plugin list is separated by blank lines so it keeps block position
+* Nothing changes visually
