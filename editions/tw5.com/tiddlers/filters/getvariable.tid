@@ -1,17 +1,27 @@
+caption: getvariable
 created: 20190330100101453
-modified: 20190330100101453
+modified: 20240219183835439
+op-input: a selection of variable names
+op-output: the values of each of the variables named in the input titles (or blank if the variable is not defined)
+op-parameter: <<.from-version "5.3.4">> defaults to: "text". optional: "value". Content type <<.param T>> of the varible content that should be returned
+op-purpose: select all values of variables named in the input titles
 tags: [[Filter Operators]] [[Special Operators]]
 title: getvariable Operator
-caption: getvariable
-op-purpose: select all values of variables named in the input titles
-op-input: a selection of variable names
-op-parameter: ignored
-op-output: the values of each of the variables named in the input titles (or blank if the variable is not defined)
+type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.20">> The usual way to retrieve a variable value within a filter is with the angle brackets notation. For example, `[<currentTiddler>]` will retrieve the value of the variable called `currentTiddler`. 
 
 The `getvariable` filter operator provides an alternative way to retrieve a variable. For example, `[[currentTiddler]getvariable[]]` is another way to retrieve the value of the variable `currentTiddler`.
 
 The advantage of `getvariable` is that it makes it possible to work with variables whose name is computed, and not known in advance. For example, `[<myvariable>getvariable[]]` gets the value of the variable whose name is given in the variable `myvariable`.
+
+''Content Type:'' <<.from-version "5.3.4">>
+
+The Prameter <<.param T>> by default is "text". Variables, that are defined as eg: `\function`s have two useful content types: 
+
+* ''text'' ... contains the wikified text of the filter expression
+* ''value'' ... contains the definition string
+
+For any other variable type "text" and "value" are the same thing. 
 
 <<.operator-examples "getvariable">>

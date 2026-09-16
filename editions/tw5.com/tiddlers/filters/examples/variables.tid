@@ -1,7 +1,13 @@
 created: 20190330100101453
-modified: 20190330100101453
+modified: 20240219184535837
 tags: [[variables Operator]] [[Operator Examples]]
 title: variables Operator (Examples)
 type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "[variables[]prefix[colour]]" "returns the names of any variables whose names start with ''colour''">>
+
+<<.operator-example 2 "[variables[fn]]" "returns the names of any variables which are defined as `\function`s">>
+
+<<.operator-example 3 "[variables[proc]]" "returns the names of any variables which are defined as `\procedure`s">>
+
+<<.tip """Also see the filter operator <<.olink format>> to find out about variable "title" formatting""">>

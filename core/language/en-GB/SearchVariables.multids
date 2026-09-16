@@ -1,0 +1,30 @@
+title: $:/language/Search/Variables/
+
+Caption: Variables
+Content: Variable content
+Clear/Exclude: Clear exlude
+Clear/Search: Clear search
+Exclude: Exclude:
+Exclude/Edit: Edit
+Function/Content: Function definition
+Function/Definition: Function definition
+Exclude/Hide: Hide exclude input
+Exclude/Hint: Exclude Filter eg: [prefix[.]]
+Exclude/Save: Create new exclude filter
+Exclude/Show: Show exclude input
+Exclude/Show/Config: Show saved exclude configurations
+Exclude/Description: EDIT ME - Description is shown in the dropdown
+ExpandAll: Expand all:
+FoldAll: Fold all:
+Filter: Search:
+Filter/Hint: Search Variable Name eg: .attr
+Hint: Filter global variables
+Info/Reset: Reset details search input
+Info/Toggle/Show: Show details search input
+Info/Toggle/Hide: Hide details search input
+Matches: //<small><<resultCount>> matches</small>//
+Search: Search Variables
+Search/Details: Search tiddler text, tags:
+Signature: Variable signature
+Option/Type: Type:
+Option/Sort: Sort:

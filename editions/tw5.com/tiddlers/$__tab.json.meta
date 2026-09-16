@@ -1,0 +1,7 @@
+description: Toolbar button to get a tab space character
+modified: 20230806185015211
+name: Tab character
+plugin-type: plugin
+title: $:/tab
+type: application/json
+version: 0.0.2

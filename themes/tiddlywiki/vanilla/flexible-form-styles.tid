@@ -1,0 +1,215 @@
+title: /core/template/flexible-form/styles
+tags: $:/tags/Stylesheet
+
+<!-- imported from vanilla base -->
+
+/* Labeled text input, where input is max width */
+.wltc-labeled-input-wrapper {
+	display: flex;
+	padding: 6px 0;
+}
+
+.wltc-align-right {
+	text-align: right;
+}
+
+.wltc-fixed-label {
+	flex: auto;
+}
+
+.wltc-fluid-input {
+	flex: 20;
+}
+
+.tc-advanced-search input {
+	width: 90%;
+}
+
+.tc-advanced-search .wltc-flexible-form .txt-input {
+	width: 100%;
+}
+
+.tc-block-dropdown-wrapper .tc-edit-type-dropdown,
+.tc-block-dropdown-wrapper .wltc-variables-dropdown {
+	position: relative;
+}
+
+.tc-block-dropdown-wrapper .wltc-variables-dropdown a {
+	display: inline-block;
+	width: 90%;
+}
+
+.tc-block-dropdown-wrapper .wltc-variables-dropdown svg {
+	height: .9rem;
+	width: .9rem;
+}
+
+.wltc-variables-dropdown a.tc-tiddlylink-missing {
+	font-style: normal;
+}
+
+<!-- flex form -->
+.wltc-flexible-form {
+	<!-- outline: 1px solid blue; -->
+	overflow: auto;
+	margin-bottom: 1em;
+}
+
+.tc-advanced-search-container {
+	padding: 4px 3px 3px 3px;
+	border-bottom: 1px dotted black;
+	display: grid;
+	grid-column-gap: 1em;
+	grid-row-gap: 0.2em;
+	grid-template-columns: minmax(max-content, auto) minmax(max-content, auto) 1fr;
+	grid-template-areas:
+		"tc-dv-type tc-dv-sort tc-dv-extra";
+}
+
+.tc-dv-type {
+	grid-area: tc-dv-type;
+	display: grid;
+	grid-column-gap: 0.3em;
+	grid-row-gap: 0.2em;
+	grid-template-columns: 5.3em;
+	grid-template-areas:
+		"t-txt c-all c-fn c-var c-proc c-macro c-widget";
+}
+
+.tc-dv-filterOptions {
+	<!-- border: 1px solid <<colour code-border>>; -->
+	padding: 0 .3em;
+}
+
+.tc-dv-sort {
+	grid-area: tc-dv-sort;
+	display: grid;
+	grid-column-gap: 0.3em;
+	grid-row-gap: 0.2em;
+	grid-template-columns: 6em 9em;
+	grid-template-areas:
+		"sel-txt sel-drop";
+}
+
+.tc-dv-extra {
+	grid-area: tc-dv-extra;
+	display: grid;
+	grid-column-gap: 0.3em;
+	grid-row-gap: 0.2em;
+	grid-template-columns: 1fr;
+	grid-template-areas:
+		"ex-btn";
+}
+
+<!-- TODO Try this without a media query!!! -->
+@media (max-width:
+	<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]]
+		[{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}removesuffix[px]]
+		:reduce[<currentTiddler>add<accumulator>addsuffix[px]] }}}
+	/>) {
+	.tc-dv-sort {
+		grid-template-columns: 5.3em 9em;
+	}
+
+	.tc-advanced-search-container {
+		grid-column-gap: 0.1em;
+		grid-template-areas:
+			"tc-dv-type tc-dv-type tc-dv-type"
+			"tc-dv-sort tc-dv-sort tc-dv-extra";
+	}
+}
+
+.tc-flexible-input-container {
+	padding: 4px 3px 3px 3px;
+	display: grid;
+	grid-row-gap: 0.2em;
+	grid-column-gap: 0.3em;
+	grid-template-columns: 1em 4em 1fr 1.5em 1.5em;
+	grid-template-areas:
+		"btn-fld x-txt x-inp btn-x btn-xx"
+		"btn-fld y-txt y-inp btn-y btn-yy";
+}
+
+.btn-fld-has-exluded button:hover svg,
+.btn-fld-has-exluded button svg {
+	<!-- fill: <<colour dirty-indicator>>; -->
+}
+
+.tc-variables-results button.tc-btn-details svg {
+	width: .9em;
+	height: .9em;
+}
+
+.btn-fld {
+	padding: 0 2px;
+	grid-area: btn-fld;
+}
+
+.x-inp {
+	grid-area: x-inp;
+}
+.y-inp {
+	grid-area: y-inp;
+}
+
+.t-txt,
+.x-txt,
+.y-txt {
+	text-align: right;
+}
+.t-txt {
+	grid-area: t-txt;
+}
+.x-txt {
+	grid-area: x-txt;
+}
+.y-txt {
+	grid-area: y-txt;
+}
+
+.btn-t {
+	grid-area: btn-t;
+}
+.btn-x {
+	grid-area: btn-x;
+}
+.btn-y {
+	grid-area: btn-y;
+}
+
+.btn-xx {
+	grid-area: btn-xx;
+}
+.btn-yy {
+	grid-area: btn-yy;
+}
+
+.c-all {
+	grid-area: c-all;
+}
+.c-fn {
+	grid-area: c-fn;
+}
+.c-var {
+	grid-area: c-var;
+}
+.c-proc {
+	grid-area: c-proc;
+}
+.c-macro {
+	grid-area: c-macro;
+}
+.c-widget {
+	grid-area: c-widget;
+}
+.sel-txt {
+	text-align: right;
+	grid-area: sel-txt;
+}
+.sel-drop {
+	grid-area: sel-drop;
+	border: 1px solid <<colour code-border>>;
+}
+.ex-btn {
+	grid-area: ex-btn;
+}
