@@ -95,9 +95,9 @@ tags: $:/tags/Macro
 </$set>
 \end
 
-\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"",displayField:"title",startactions,endactions)
+\define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"",displayField:"title",startactions,endactions,class:"")
 \whitespace trim
-<span class="tc-tagged-draggable-list">
+<span class={{{ [[tc-tagged-draggable-list]] [<__class__>!match[]] +[join[ ]] }}}>
 	<$set name="tag" value=<<__tag__>>>
 		<$list
 			filter="[<__tag__>tagging[]$subFilter$]"

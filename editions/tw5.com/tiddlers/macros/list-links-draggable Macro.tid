@@ -27,6 +27,7 @@ The <<.def list-links-draggable>> [[macro|Macros]] renders the ListField of a ti
 
 ; class
 : Optional space separated classes to add to the wrapper element
+: <<.from-version "5.5.0">> Add `tc-horizontal-draggable` to lay the list out as a row instead of a column. The markup is unchanged, so dragging behaves the same
 
 ; itemTemplate
 : Optional title of a tiddler to use as the template for rendering list items
