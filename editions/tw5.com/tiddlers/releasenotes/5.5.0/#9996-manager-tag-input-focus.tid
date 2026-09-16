@@ -1,0 +1,19 @@
+change-category: usability
+change-type: bugfix
+created: 20260826130119000
+description: Focussing the tag input in $:/Manager no longer closes the panel
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9996
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9996
+type: text/vnd.tiddlywiki
+
+* Clicking the tag input of an expanded tiddler in $:/Manager keeps the panel open and shows the tag dropdown. Since 5.3.4 it collapsed the panel instead
+* The tag-picker macro gained a `cancelPopups` parameter. It defaults to `yes`, which closes any open popup as the input is focussed. Set it to `no` where the tag-picker itself sits inside a popup
+
+```
+<<tag-picker cancelPopups:"no">>
+```
+
+Fixed issue: [[#9995|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9995]]

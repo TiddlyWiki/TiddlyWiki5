@@ -1,6 +1,6 @@
 caption: tag-picker
 created: 20161128191316701
-modified: 20240708175550512
+modified: 20260826124226250
 tags: Macros [[Core Macros]]
 title: tag-picker Macro
 type: text/vnd.tiddlywiki
@@ -20,7 +20,10 @@ The <<.def tag-picker>> [[macro|Macros]] generates a combination of a text box a
 
 ; tagListFilter
 : <<.from-version 5.3.4>> This parameter defaults to: `[tags[]]` which creates a list of all existing tags. If the tag list should come from a different source the filter should look similar to eg: `[<listSource>get[field-name]enlist-input[]]`. See examples.
-: <<.from-version 5.3.5>> This parameter defaults to: `[tags[]sort[]]`. This change allows a custom sort order, since `sort[]` is not hardcoded into the tag-picker macro anymore. 
+: <<.from-version 5.3.5>> This parameter defaults to: `[tags[]sort[]]`. This change allows a custom sort order, since `sort[]` is not hardcoded into the tag-picker macro anymore.
+
+; cancelPopups
+: <<.from-version 5.5.0>> Defaults to `yes`, which closes any open popup as soon as the tag input is focussed. Set it to `no` where the tag-picker is itself inside a popup, as in $:/Manager, otherwise focussing the input closes the panel around it.
 
 
 <<.macro-examples "tag-picker">>
