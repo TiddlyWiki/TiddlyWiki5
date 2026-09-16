@@ -1,0 +1,30 @@
+title: StoryWrapperWidget
+created: 20260701120000000
+modified: 20260701120000000
+tags: Widgets
+caption: story-wrapper
+
+! Introduction
+
+The story wrapper widget renders a container element, lays its children inside it, and then exposes that element as an extension point. It is used by the [[page template|$:/core/ui/PageTemplate/story]] to wrap the [[story river|StoryTiddler]], so plugins can attach behaviour to the river without altering its markup.
+
+The widget is not scroll or story specific: it creates the node, passes HTML attributes through to it, and invokes the `th-story-wrapper-dom` hook with `(domNode, widget)`. A hook handler may tweak the node directly and register a long lived behaviour via `widget.registerBehaviour(behaviour)`, where a behaviour is a plain object with optional `refresh(changedTiddlers)` and `destroy()` methods whose lifecycle the widget drives. Because every handler registered for a hook runs, several plugins can attach to the same wrapper, and each wrapper instance keeps its own list of behaviours.
+
+! Content and Attributes
+
+The content of the `<$story-wrapper>` widget is rendered into the container element.
+
+|!Attribute |!Description |
+|tag |The element to create (defaults to `div`) |
+|name |Identifier for this wrapper, reflected onto the element as `data-story-wrapper-name` |
+|class, role, style.*, //any// |Passed through to the container element |
+
+! Targeting a specific wrapper
+
+Set `name` to let a plugin single out one wrapper among several. The value is reflected as a standard `data-story-wrapper-name` attribute, so it can be matched by CSS, read from `domNode.dataset.storyWrapperName`, or read inside a `th-story-wrapper-dom` handler with `widget.getAttribute("name")`.
+
+The core story river carries `name="story"`, so it is selectable as:
+
+```
+[data-story-wrapper-name="story"] { ... }
+```
