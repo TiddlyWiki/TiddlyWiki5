@@ -1,0 +1,19 @@
+title: StaticTabs/TabsInStaticRender
+description: tabs render as static-tabs when tv-config-static is yes before the global import
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: One
+caption: First
+
+Body one
++
+title: Output
+
+\procedure tv-config-static() yes
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<tabs "[[One]]" "One">>
++
+title: ExpectedResult
+
+<p><div class="tc-static-tabs"><details class="tc-static-tab" open="open"><summary class="tc-static-tab-heading"><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#One">First</a></summary><div class="tc-static-tab-content"><p>Body one</p></div></details></div></p>
