@@ -1,0 +1,98 @@
+created: 20260413160433482
+modified: 20260413160837966
+tags: doc dev [[Wikitext EBNF]]
+title: Railroad - Widgets and Attributes
+
+! Widgets and Attributes — Railroad Diagrams
+
+This tiddler presents the same widget and attribute syntax as [[EBNF - Widgets and Attributes]], but using railroad diagrams for visual clarity. Follow the tracks left-to-right to see valid syntax paths.
+
+!! HTML Elements and Widgets
+
+The same parser rule ([[html.js|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/core/modules/parsers/wikiparser/rules/html.js]]) handles both plain HTML elements and TiddlyWiki widgets. Widgets use a `$` prefix on their tag name. If the opening tag is followed by a blank line, content is parsed in block mode; otherwise inline mode.
+
+!!! Tag Name
+
+A tag is either a `$`-prefixed widget name or a plain HTML tag name.
+
+<$railroad text=""" ("$" <"widget-name"> | <"html-tag-name">) """/>
+
+!!! Element Structure
+
+An element is an opening tag with optional attributes, then either self-closing or wrapping content.
+
+<$railroad text=""" "<" <"tag-name"> [{<"attribute">}] ("/>" | ">" <"content"> "</" <"tag-name"> ">") """/>
+
+!! The Attribute System
+
+This is the most complex part of wikitext syntax. An attribute is a name optionally followed by `=` and a value. The parser in [[parseutils.js|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/core/modules/parsers/parseutils.js]] tries each value form in order, taking the first match.
+
+!!! Attribute
+
+An attribute name alone (no `=`) means boolean `"true"`. With `=`, a value follows.
+
+<$railroad text=""" <"attr-name"> ["=" <"attr-value">] """/>
+
+!!! Attribute Value (all 7 forms)
+
+The value after `=` can take any of these forms. They are tried in the order shown (top to bottom).
+
+<$railroad text="""(
+  :<"string-literal"> / "quoted string" /
+| "{{{" <"filter-expr"> "}}}" / "filtered" /
+| "{{" <"text-reference"> "}}" / "indirect" /
+| "<<" <"macro-call"> ">>" / "macro or variable" /
+| "((" <"var-name"> "))" / "MVV" /
+| <"substituted-value"> / "backtick-quoted" /
+| <"unquoted-value"> / "bare value" /
+)"""/>
+
+!!! String Literal
+
+Four quoting styles. Triple-double-quote allows embedded double quotes and newlines.
+
+<$railroad text=`(
+  :'"""' <"any-text"> '"""' / "triple-double-quote" /
+| '"' <"text"> '"' / "double-quoted" /
+| "'" <"text"> "'" / "single-quoted" /
+| "[[" <"text"> "]]" / "double-bracket" /
+)`/>
+
+!! Substituted Attributes
+
+Inside backtick-quoted attribute values, `$(varname)$` placeholders provide text substitution at runtime. Multiple placeholders can appear in a single value.
+
+!!! Substituted Text
+
+The content between backticks is a mix of plain text and variable placeholders.
+
+<$railroad text=""" [{(<"plain-text"> | "$(" <"var-name"> ")$")}] """/>
+
+!!! Single-line vs Multi-line
+
+Single backticks for one line, triple backticks for multiline values that can contain single backticks.
+
+<$railroad text="""(
+  :<"backtick"> <"substituted-text"> <"backtick"> / "single-line" /
+| <"triple-backtick"> <"substituted-text"> <"triple-backtick"> / "multiline" /
+)"""/>
+
+!! Parse Order
+
+The `parseAttribute()` function tries value forms in this specific order after seeing `=`:
+
+# String literal (`"..."`, `'...'`, `[[...]]`, `"""..."""`) — checked first via `parseStringLiteral()`
+# Filtered value (`{{{...}}}`)
+# Indirect value (`{{...}}`)
+# Macro invocation (`<<...>>`)
+# MVV reference (`((...))`) 
+# Substituted value (backtick or triple-backtick delimited)
+# Unquoted value (any run of non-delimiter characters)
+# Fallback: value is `"true"`
+
+This ordering matters. For example, `{{{filter}}}` is checked before `{{textref}}`, so there is no ambiguity. Similarly, `<<macro>>` is checked before unquoted values, so angle brackets are never part of a bare value.
+
+!! Source References
+
+* [[html.js|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/core/modules/parsers/wikiparser/rules/html.js]] — `parseTag()` at line 93, `findNextTag()` at line 161
+* [[parseutils.js|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/core/modules/parsers/parseutils.js]] — `parseAttribute()` at line 504, `parseStringLiteral()` at line 105
