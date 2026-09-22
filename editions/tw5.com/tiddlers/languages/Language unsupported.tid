@@ -1,0 +1,5 @@
+title: Language unsupported
+
+''Sorry, the language you are using ({{$:/info/browser/language}}) does not have an official translation.''
+
+''See [[Translate TiddlyWiki into your language]] and [[this link|https://tiddlywiki.com/dev/#How%20to%20create%20a%20translation%20for%20TiddlyWiki]] to learn about how to contribute a new translation to ~TiddlyWiki''
