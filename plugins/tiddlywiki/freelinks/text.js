@@ -74,7 +74,11 @@ TextNodeWidget.prototype.execute = function() {
 		   this.tiddlerTitleInfo.titles.length > 0 && this.tiddlerTitleInfo.ac) {
 			var newParseTree = this.processTextWithMatches(text,currentTiddlerTitle,ignoreCase,useWordBoundary);
 			if(newParseTree && newParseTree.length > 0 &&
-				(newParseTree.length > 1 || newParseTree[0].type !== "plain-text")) {
+			(
+				newParseTree.length > 1 ||
+				newParseTree[0].type !== "plain-text" ||
+				newParseTree[0].text !== text
+			)) {
 				childParseTree = newParseTree;
 			}
 		}
@@ -109,6 +113,7 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 	});
 
 	var occupied = new Uint8Array(text.length);
+	var escapedTildes = new Uint8Array(text.length);
 	var validMatches = [];
 
 	var maxLinks = parseInt(this.wiki.getTiddlerText(MAX_LINKS_TIDDLER,"500"),10);
@@ -117,11 +122,10 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 	}
 
 	for(var i = 0; i < matches.length; i++) {
-		if(validMatches.length >= maxLinks) break;
-
 		var m = matches[i];
 		var start = m.index;
 		var end = start + m.length;
+
 		if(start < 0 || end > text.length) continue;
 
 		var matchedTitle = this.tiddlerTitleInfo.titles[m.titleIndex];
@@ -130,11 +134,21 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 		var matchedTitleToCompare = ignoreCase ? matchedTitle.toLowerCase() : matchedTitle;
 		if(titleToCompare && matchedTitleToCompare === titleToCompare) continue;
 
+		if(start > 0 && text.charAt(start - 1) === "~") {
+			escapedTildes[start - 1] = 1;
+			continue;
+		}
+
 		var overlapping = false;
 		for(var j = start; j < end; j++) {
-			if(occupied[j]) { overlapping = true; break; }
+			if(occupied[j]) {
+				overlapping = true;
+				break;
+			}
 		}
 		if(overlapping) continue;
+
+		if(validMatches.length >= maxLinks) break;
 
 		validMatches.push(m);
 		for(var k = start; k < end; k++) {
@@ -142,11 +156,36 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 		}
 	}
 
+	var appendPlainText = function(tree,from,to) {
+		if(to <= from) return;
+
+		var plainText = "";
+		for(var p = from; p < to; p++) {
+			if(!escapedTildes[p]) {
+				plainText += text.charAt(p);
+			}
+		}
+
+		if(plainText) {
+			tree.push({
+				type: "plain-text",
+				text: plainText
+			});
+		}
+	};
+
 	if(validMatches.length === 0) {
-		return [{type: "plain-text", text: text}];
+		var escapedOnlyTree = [];
+		appendPlainText(escapedOnlyTree,0,text.length);
+
+		return escapedOnlyTree.length > 0 ?
+			escapedOnlyTree :
+			[{type: "plain-text", text: ""}];
 	}
 
-	validMatches.sort(function(a,b){ return a.index - b.index; });
+	validMatches.sort(function(a,b) {
+		return a.index - b.index;
+	});
 
 	var newParseTree = [];
 	var curPos = 0;
@@ -156,9 +195,7 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 		var s = mm.index;
 		var e = s + mm.length;
 
-		if(s > curPos) {
-			newParseTree.push({ type: "plain-text", text: text.substring(curPos,s) });
-		}
+		appendPlainText(newParseTree,curPos,s);
 
 		var toTitle = this.tiddlerTitleInfo.titles[mm.titleIndex];
 		var matchedText = text.substring(s,e);
@@ -178,9 +215,7 @@ TextNodeWidget.prototype.processTextWithMatches = function(text,currentTiddlerTi
 		curPos = e;
 	}
 
-	if(curPos < text.length) {
-		newParseTree.push({ type: "plain-text", text: text.substring(curPos) });
-	}
+	appendPlainText(newParseTree,curPos,text.length);
 
 	return newParseTree;
 };
