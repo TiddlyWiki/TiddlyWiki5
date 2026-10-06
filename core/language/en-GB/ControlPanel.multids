@@ -159,6 +159,15 @@ Settings/InfoPanelMode/Hint: Control when the tiddler info panel closes:
 Settings/InfoPanelMode/Popup/Description: Tiddler info panel closes automatically
 Settings/InfoPanelMode/Sticky/Description: Tiddler info panel stays open until explicitly closed
 Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
+Settings/TagSorting/Caption: Tag Sorting
+Settings/TagSorting/Unsorted: Do not sort
+Settings/TagSorting/Alphabetical: Sort alphabetically
+Settings/TagSorting/Custom/Radio: Use a custom filter
+Settings/TagSorting/TiddlerTags/Caption: Tags of a tiddler
+Settings/TagSorting/TiddlerTags/Hint: Order of the tags shown on a tiddler. Unsorted keeps the order you added them in:
+Settings/TagSorting/Custom/Heading: Custom order
+Settings/TagSorting/Custom/Hint: Each box holds a filter run applied to the list of tags. It becomes editable when the matching option above is set to a custom filter.
+Settings/TagSorting/Custom/Warning: A custom filter can reorder tags and also hide them: any tag it drops is not shown. If it returns no tags at all, the unsorted order is used instead.
 Settings/NavigationAddressBar/Caption: Navigation Address Bar
 Settings/NavigationAddressBar/Hint: Behaviour of the browser address bar when navigating to a tiddler:
 Settings/NavigationAddressBar/No/Description: Do not update the address bar

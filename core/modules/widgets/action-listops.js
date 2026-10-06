@@ -73,7 +73,10 @@ ActionListopsWidget.prototype.invokeAction = function(triggeringWidget,
 			oldtags = tiddler ? (tiddler.fields.tags || []).slice(0) : [],
 			tagfilter = $tw.utils.stringifyList(oldtags) + " " + this.filtertags,
 			newtags = this.wiki.filterTiddlers(tagfilter,this);
-		if($tw.utils.stringifyList(oldtags.sort()) !== $tw.utils.stringifyList(newtags.sort())) {
+		// Compare copies, because sort() reorders in place and newtags is what gets
+		// written, so sorting it here would store the tags alphabetically and lose
+		// the order the author put them in
+		if($tw.utils.stringifyList(oldtags.slice(0).sort()) !== $tw.utils.stringifyList(newtags.slice(0).sort())) {
 			this.wiki.setText(this.target,"tags",undefined,$tw.utils.stringifyList(newtags));
 		}
 	}

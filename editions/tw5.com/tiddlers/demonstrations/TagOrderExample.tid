@@ -1,0 +1,15 @@
+created: 20260825032058705
+modified: 20260825032058705
+tags: zulu Alpha .private mike
+title: TagOrderExample
+type: text/vnd.tiddlywiki
+
+A tiddler whose tags are deliberately out of alphabetical order, so the effect of ''Control Panel'' > ''Settings'' > ''Tag Sorting'' is visible.
+
+The tags were added in this order: `zulu`, `Alpha`, `.private`, `mike`.
+
+* With ''Do not sort'' they appear in that order
+* With ''Sort alphabetically'' they appear as `.private`, `Alpha`, `mike`, `zulu`
+* With the custom filter `[!prefix[.]]` the `.private` tag disappears here, but stays visible when you edit this tiddler
+
+See [[Customising tag order]].

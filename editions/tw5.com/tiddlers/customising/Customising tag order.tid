@@ -1,0 +1,48 @@
+created: 20260825030000000
+modified: 20260825175306103
+tags: [[Customise TiddlyWiki]]
+title: Customising tag order
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> The tags shown on a tiddler keep the order you added them in, rather than being sorted alphabetically. With only a few tags the position carries meaning: the first tag reads as the most important, and tags placed next to each other read as belonging together.
+
+The order is controlled by [[$:/config/Tags/SortFilter]], under ''Control Panel'' > ''Settings'' > ''Tag Sorting''. It holds a [[filter run|Filter Run]] that is applied to the tiddler's tags, and offers three choices: do not sort, sort alphabetically, or supply your own filter.
+
+[[TagOrderExample]] is tagged out of alphabetical order on purpose, so each choice is visible as you make it.
+
+Lists that show every tag in the wiki, such as the tag manager and the sidebar ''Tags'' tab, are always alphabetical and are not affected by this setting.
+
+! Writing your own filter
+
+The filter receives the tiddler's tags and returns them in the order you want. These examples act on a tiddler tagged `zulu Alpha .private mike`:
+
+|!Filter |!Result |
+|`[sort[]]` |`.private, Alpha, mike, zulu` |
+|`[sort[]reverse[]]` |`zulu, mike, Alpha, .private` |
+|`[sort[]putlast[]]` |`Alpha, mike, zulu, .private` |
+|`[!prefix[.]]` |`zulu, Alpha, mike`, hiding the tag that starts with a dot |
+
+If the filter returns no tags at all, the unfiltered list is used instead. A filter that is empty, or that matches nothing, therefore never blanks a tag list.
+
+! Hiding tags
+
+A filter can drop tags as well as reorder them, which is a way to keep working tags out of a reader facing view. Give your private tags a common prefix and exclude them:
+
+```
+[!prefix[.]]
+```
+
+! Where hiding does not apply
+
+Two places always show every tag, whatever the filter says:
+
+* the tag list in the tiddler editor
+* the tag checkboxes in [[$:/Manager]]
+
+These are where you remove a tag, and a tag you cannot see is a tag you cannot remove. A custom filter is still honoured there when it only reorders. TiddlyWiki decides by counting: if your filter returns the same number of tags it was given it is reordering, so it is applied; if it returns a different number it is filtering, so it is ignored on those two surfaces.
+
+The dropdown for adding a tag is not affected either. It is always alphabetical, so every existing tag can always be picked.
+
+! The tags operator
+
+<<.olink tags>> returns tags in the order they appear on the tiddler. Before version 5.5.0 a tag that looked like a whole number, such as a year, was returned before the others regardless of where it was written.
