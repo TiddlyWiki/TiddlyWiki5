@@ -1539,8 +1539,8 @@ Register all the module tiddlers that have a module type
 $tw.Wiki.prototype.defineShadowModules = function() {
 	var self = this;
 	this.eachShadow(function(tiddler,title) {
-		// Don't define the module if it is overidden by an ordinary tiddler
-		if(!self.tiddlerExists(title) && tiddler.hasField("module-type")) {
+		// Don't define the module if it is overidden by an ordinary tiddler, or has already been defined
+		if(!self.tiddlerExists(title) && tiddler.hasField("module-type") && !$tw.utils.hop($tw.modules.titles,title)) {
 			if(tiddler.hasField("draft.of")) {
 				// Report a fundamental problem
 				console.warn(`TiddlyWiki: Plugins should not contain tiddlers with a 'draft.of' field: ${tiddler.fields.title}`);
@@ -1971,7 +1971,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 	});
 
 	// Helper to process a file
-	var processFile = function(filename,isTiddlerFile,fields,isEditableFile,rootPath) {
+	var processFile = function(filename,isTiddlerFile,fields,isEditableFile,rootPath,dynamicStoreId) {
 		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
 			type = (extInfo || {}).type || fields.type || "text/plain",
 			typeInfo = $tw.config.contentTypeInfo[type] || {},
@@ -2046,9 +2046,9 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			});
 		});
 		if(isEditableFile) {
-			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, isEditableFile: true, tiddlers: fileTiddlers});
+			tiddlers.push({filepath: pathname, hasMetaFile: !!metadata && !isTiddlerFile, isEditableFile: true, dynamicStoreId: dynamicStoreId, tiddlers: fileTiddlers});
 		} else {
-			tiddlers.push({tiddlers: fileTiddlers});
+			tiddlers.push({dynamicStoreId: dynamicStoreId, tiddlers: fileTiddlers});
 		}
 	};
 	// Helper to recursively search subdirectories
@@ -2089,6 +2089,31 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			// Process directory specifier
 			var dirPath = path.resolve(filepath,dirSpec.path);
 			if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
+				// Register a dynamic store if requested
+				var dynamicStoreId = null;
+				if(dirSpec.dynamicStore && $tw.boot.dynamicStores) {
+					dynamicStoreId = dirPath;
+					var existing = null;
+					for(var ds=0; ds<$tw.boot.dynamicStores.length; ds++) {
+						if($tw.boot.dynamicStores[ds].id === dynamicStoreId) {
+							existing = $tw.boot.dynamicStores[ds];
+							break;
+						}
+					}
+					if(!existing) {
+						$tw.boot.dynamicStores.push({
+							id: dynamicStoreId,
+							directory: dirPath,
+							saveFilter: dirSpec.dynamicStore.saveFilter || "",
+							watch: dirSpec.dynamicStore.watch !== false,
+							debounce: dirSpec.dynamicStore.debounce || 400,
+							filesRegExp: dirSpec.filesRegExp || "^.*$",
+							searchSubdirectories: !!dirSpec.searchSubdirectories,
+							isTiddlerFile: !!dirSpec.isTiddlerFile,
+							fields: dirSpec.fields || {}
+						});
+					}
+				}
 				var	files = getAllFiles(dirPath, dirSpec.searchSubdirectories),
 					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
 					metaRegExp = /^.*\.meta$/;
@@ -2097,7 +2122,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 					filename = path.basename(thisPath);
 					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
 						dirSpec.fields = dirSpec.fields || {};
-						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile,dirSpec.path);
+						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile || !!dirSpec.dynamicStore,dirSpec.path,dynamicStoreId);
 					}
 				}
 			} else {
@@ -2284,6 +2309,24 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	$tw.loadPlugins(wikiInfo.plugins,$tw.config.pluginsPath,$tw.config.pluginsEnvVar);
 	$tw.loadPlugins(wikiInfo.themes,$tw.config.themesPath,$tw.config.themesEnvVar);
 	$tw.loadPlugins(wikiInfo.languages,$tw.config.languagesPath,$tw.config.languagesEnvVar);
+	// Register plugin-provided tiddlerdeserializer and tiddlerserializer modules now,
+	// so they are available when the wiki tiddler files are read from disk below.
+	// We also apply the supporting `utils`, `tiddlerfield`, and `tiddlermethod`
+	// modules so deserializers can call into them (e.g. core's text/html
+	// deserializer needs $tw.utils.extractEncryptedStoreArea).
+	// (All of these steps run again later in execStartup; they are idempotent.)
+	$tw.wiki.readPluginInfo();
+	$tw.wiki.registerPluginTiddlers("plugin");
+	$tw.wiki.unpackPluginTiddlers();
+	$tw.wiki.defineShadowModules();
+	$tw.modules.applyMethods("utils",$tw.utils);
+	if($tw.node) {
+		$tw.modules.applyMethods("utils-node",$tw.utils);
+	}
+	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
+	$tw.modules.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
+	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	$tw.modules.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerModules);
 	// Load the wiki files, registering them as writable
 	var resolvedWikiPath = path.resolve(wikiPath,$tw.config.wikiTiddlersSubDir);
 	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
@@ -2293,7 +2336,8 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 					filepath: tiddlerFile.filepath,
 					type: tiddlerFile.type,
 					hasMetaFile: tiddlerFile.hasMetaFile,
-					isEditableFile: config["retain-original-tiddler-path"] || tiddlerFile.isEditableFile || tiddlerFile.filepath.indexOf($tw.boot.wikiTiddlersPath) !== 0
+					isEditableFile: config["retain-original-tiddler-path"] || tiddlerFile.isEditableFile || tiddlerFile.filepath.indexOf($tw.boot.wikiTiddlersPath) !== 0,
+					dynamicStoreId: tiddlerFile.dynamicStoreId || null
 				};
 			});
 		}
@@ -2305,7 +2349,10 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		for(var title in $tw.boot.files) {
 			fileInfo = $tw.boot.files[title];
 			if(fileInfo.isEditableFile) {
-				relativePath = path.relative($tw.boot.wikiTiddlersPath,fileInfo.filepath);
+				// For tiddlers loaded from a dynamic store, compute originalpath relative to the store's directory
+				// so that save-time path resolution against that directory yields the correct location.
+				var basePath = fileInfo.dynamicStoreId || $tw.boot.wikiTiddlersPath;
+				relativePath = path.relative(basePath,fileInfo.filepath);
 				fileInfo.originalpath = relativePath;
 				output[title] =
 					path.sep === "/" ?
@@ -2431,6 +2478,8 @@ $tw.boot.initStartup = function(options) {
 	if(!$tw.boot.tasks.readBrowserTiddlers) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
 		$tw.boot.files = Object.create(null);
+		// Array of {id, directory, saveFilter, watch, debounce} registered via tiddlywiki.files dynamicStore directives
+		$tw.boot.dynamicStores = [];
 		// System paths and filenames
 		$tw.boot.bootPath = options.bootPath || path.dirname(module.filename);
 		$tw.boot.corePath = path.resolve($tw.boot.bootPath,"../core");
@@ -2520,6 +2569,9 @@ $tw.boot.initStartup = function(options) {
 	// Install the tiddler deserializer modules
 	$tw.Wiki.tiddlerDeserializerModules = Object.create(null);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	// Install the tiddler serializer modules
+	$tw.Wiki.tiddlerSerializerModules = Object.create(null);
+	$tw.modules.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerModules);
 	// Call unload handlers in the browser
 	if($tw.browser) {
 		window.onbeforeunload = function(event) {
