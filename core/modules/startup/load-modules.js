@@ -34,6 +34,7 @@ exports.startup = function() {
 	$tw.modules.applyMethods("wikimethod",$tw.Wiki.prototype);
 	$tw.wiki.addIndexersToWiki();
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	$tw.modules.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerModules);
 	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
 	$tw.wiki.initParsers();
 	// --------------------------
