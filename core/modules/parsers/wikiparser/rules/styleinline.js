@@ -11,7 +11,6 @@ Wiki text inline rule for assigning styles and classes to inline runs. For examp
 @@width:100px;.myClass This is some text with a class and a width@@
 ```
 
-
 \*/
 
 "use strict";
@@ -26,14 +25,29 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var reEnd = /@@/g;
+	var reEnd = /@@|\r?\n\r?\n/g;
 	// Get the styles and class
 	var stylesString = this.match[1],
 		classString = this.match[2] ? this.match[2].split(".").join(" ") : undefined;
+	var delimiterStart = this.parser.pos,
+		delimiterText = this.match[0];
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the run up to the terminator
-	var tree = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
+	var bodyStart = this.parser.pos;
+	var ex = this.parser.parseInlineRunTerminatedExtended(reEnd,{eatTerminator: true});
+	if(!ex.match || /^\r?\n/.test(ex.match[0])) {
+		this.parser.pos = bodyStart;
+		this.parser.addDiagnostic({
+			from: delimiterStart,
+			to: bodyStart,
+			severity: "warning",
+			code: "unterminated-styleinline",
+			message: "Unmatched inline style delimiter rendered as literal text"
+		});
+		return [{type: "text", text: delimiterText, start: delimiterStart, end: bodyStart, isRecovered: true}];
+	}
+	var tree = ex.tree;
 	// Return the classed span
 	var node = {
 		type: "element",

@@ -55,6 +55,15 @@ exports.parse = function() {
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
 		var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">";
+		if(!this.parser.hasCloser(new RegExp(reEndString,"mg"))) {
+			this.parser.addDiagnostic({
+				from: tag.openTagStart,
+				to: tag.openTagEnd,
+				severity: "hint",
+				code: "unterminated-html",
+				message: "Missing closing </" + tag.tag + ">, so the element runs to the end of the tiddler"
+			});
+		}
 		if(hasLineBreak) {
 			tag.children = this.parser.parseBlocks(reEndString);
 		} else {
