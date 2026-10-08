@@ -32,6 +32,18 @@ TagIndexer.prototype.rebuild = function() {
 };
 
 TagIndexer.prototype.update = function(updateDescriptor) {
+	var newFields = updateDescriptor.new.tiddler && updateDescriptor.new.tiddler.fields,
+		oldFields = updateDescriptor.old.tiddler && updateDescriptor.old.tiddler.fields,
+		tagsChanged = !$tw.utils.isArrayEqual(newFields && newFields.tags,oldFields && oldFields.tags),
+		listChanged = !$tw.utils.isArrayEqual(newFields && newFields.list,oldFields && oldFields.list);
+	// The tag index depends only on each tiddler's `tags` field (which tag
+	// buckets it belongs to) and the `list` field of tag tiddlers (the order of
+	// their tagged members). If neither changed, the index is unaffected, so we
+	// skip invalidation. This avoids a full index rebuild on every keystroke
+	// while editing a tagged tiddler.
+	if(!tagsChanged && !listChanged) {
+		return;
+	}
 	$tw.utils.each(this.subIndexers,function(subIndexer) {
 		subIndexer.update(updateDescriptor);
 	});
