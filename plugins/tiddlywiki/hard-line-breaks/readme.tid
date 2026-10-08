@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/hard-line-breaks/readme
+
+This plugin adds the `ssnl` wikitext rule: two spaces, or two spaces and a backslash, before the line end make a hard line break anywhere, list items and headings included, as in CommonMark. A blank line still separates paragraphs.
+
+```
+* Roses are red
+Violets are blue
+* Sugar is sweet  \
+And so are you
+```
+
+`\rules except ssnl` switches the rule off. An editor that writes wikitext should use the backslash form, which survives tools that trim trailing whitespace. With the wikitext-serialize plugin installed, a break serializes back to the same text.

@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/hard-line-breaks",
+	"name": "Hard Line Breaks",
+	"description": "Two spaces before the line end make a hard line break, as in CommonMark",
+	"list": "readme",
+	"stability": "STABILITY_1_EXPERIMENTAL"
+}
