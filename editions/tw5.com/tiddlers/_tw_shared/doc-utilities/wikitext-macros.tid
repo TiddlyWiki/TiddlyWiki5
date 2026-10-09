@@ -1,6 +1,6 @@
 code-body: yes
 created: 20150117184156000
-modified: 20240716181836632
+modified: 20260917152313690
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/wikitext-macros
 type: text/vnd.tiddlywiki
@@ -35,11 +35,10 @@ type: text/vnd.tiddlywiki
 
 \procedure open-external-window(url)
 \whitespace notrim
-<$button actions=<<activateEditionWindow <<url>> class="tc-btn-invisible tc-tiddlylink">
+<$button actions=<<activateEditionWindow url=<<url>> >> class="tc-btn-invisible tc-tiddlylink">
 	open the ''example edition'' in a new window
 </$button>
 \end
-
 
 \procedure wikitext-example(src)
 <div class="doc-example">
