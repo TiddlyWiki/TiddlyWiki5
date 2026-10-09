@@ -1,0 +1,30 @@
+title: Operators/Palettes/PreviewSchemeLookup
+description: The palette.preview widget resolves scheme-suffixed entries
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<$palette.preview paletteTitle="MyPalette">
+<<colour page-background>>
+<<colour only-dark>>
+</$palette.preview>
++
+title: MyPalette
+name: My Palette
+description: Palette with scheme-suffixed entries
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: dark
+
+page-background: #fe0
+page-background@dark: #221
+only-dark@dark: #123
++
+title: ExpectedResult
+
+<p>
+#221
+#123
+</p>

@@ -1,0 +1,44 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Whispering Haze
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/WhisperingHaze
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #F8FEFD
+base-background: #B6CAED
+base-danger: #ee1e44
+base-highlight: #FEC8B2
+base-ink: #363837
+base-link: #ffd5cc
+base-paper: #A9B2C0
+base-primary: #F8FEFD
+base-tab: #9d9894
+base-tag: #7987b2
+
+# Palette-specific colours and overrides
+alert-border: #FEC8B2
+button-foreground: #595b5f
+download-foreground: [tf.colour[foreground]]
+external-link-foreground: #3e5790
+external-link-foreground-hover: #ae2d47
+external-link-foreground-visited: #66546f
+highlight-foreground: [tf.colour[foreground]]
+select-tag-foreground: #595b5f
+sidebar-button-foreground: #595b5f
+sidebar-tab-background: [tf.colour[primary]colour-set-alpha[0.667]]
+sidebar-tab-border: [tf.colour[primary]]
+sidebar-tab-border-selected: [tf.colour[primary]]
+sidebar-tiddler-link-foreground: #c5748b
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+site-title-foreground: [tf.colour[primary]]
+tab-border: #d9dbd9
+tiddler-controls-foreground: [tf.colour[primary]colour-set-alpha[0.5]]
+tiddler-controls-foreground-hover: [tf.colour[primary]]
+tiddler-controls-foreground-selected: #7987b2
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[primary]colour-set-alpha[0.5]]
+very-muted-foreground: #A6ABBD

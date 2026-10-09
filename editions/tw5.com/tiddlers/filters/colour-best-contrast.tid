@@ -1,0 +1,28 @@
+created: 20260718221135000
+modified: 20260720103000000
+tags: [[Filter Operators]] [[Colour Operators]]
+title: colour-best-contrast Operator
+caption: colour-best-contrast
+op-purpose: choose the colour that contrasts best with a target colour
+op-input: a selection of colour values, the last of which is the target colour
+op-output: the input colour with the highest contrast against the target
+
+<<.from-version "5.5.0">> See ColourPalettes for background.
+
+The <<.op colour-best-contrast>> operator treats the last input colour as a target, and returns whichever of the other input colours has the highest contrast against it. The contrast is calculated with the Delta Phi Star algorithm. The colour is returned exactly as it appeared in the input.
+
+If there are fewer than two input colours, the output is empty. Input values that cannot be parsed as colours are ignored.
+
+For example, this filter expression chooses whichever of navy and yellow is more readable against a white background:
+
+```
+[[navy]] [[yellow]] [[white]] +[colour-best-contrast[]]
+```
+
+The result is <<.value navy>>. A typical use is choosing a foreground colour that remains readable against a background that varies with the palette.
+
+See also the following related operators:
+
+* <<.olink colour-contrast>> to measure the contrast between pairs of colours
+
+<<.operator-examples "colour-best-contrast">>

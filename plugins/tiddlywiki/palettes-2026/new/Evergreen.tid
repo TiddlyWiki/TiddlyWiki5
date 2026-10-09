@@ -1,0 +1,36 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Evergreen
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/Evergreen
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #DADAB4
+base-background: #A9BFA4
+base-danger: #e3292a
+base-highlight: #9ace68
+base-ink: #344345
+base-link: #407774
+base-paper: #E6E9B1
+base-primary: #407774
+base-tab: #dacd66
+base-tag: #D19774
+
+# Palette-specific colours and overrides
+alert-border: #b3504d
+alert-muted-foreground: #b19e76
+code-background: #1717121A
+external-link-foreground: #155a7c
+external-link-foreground-hover: #a23132
+external-link-foreground-visited: #684352
+highlight-foreground: [tf.colour[foreground]]
+sidebar-muted-foreground: #4f5c5c
+sidebar-tab-background: [tf.colour[primary]colour-set-alpha[0.667]]
+sidebar-tab-border: [tf.colour[primary]]
+sidebar-tab-border-selected: [tf.colour[primary]colour-set-alpha[0.667]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

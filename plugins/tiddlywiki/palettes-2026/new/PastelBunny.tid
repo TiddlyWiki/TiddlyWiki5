@@ -1,0 +1,37 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Pastel Bunny
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/PastelBunny
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #CDE7DC
+base-background: #F8C9C5
+base-danger: #af0f0c
+base-highlight: #9ddee8
+base-ink: #3C3C3C
+base-link: #74a1b6
+base-paper: #F7F4E3
+base-primary: #E48D7E
+base-tab: #F9CDC5
+base-tag: #F5CF7C
+
+# Palette-specific colours and overrides
+alert-border: #126597
+alert-highlight: #cc4369
+external-link-foreground: #415d9e
+external-link-foreground-hover: #dd4e40
+external-link-foreground-visited: #9d5860
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: #CDE7DC
+sidebar-tab-background-selected: [tf.colour[page-background]]
+sidebar-tab-border: #B6ADA6
+sidebar-tab-border-selected: #ABA29C
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tiddler-controls-foreground: [tf.colour[primary]]
+tiddler-controls-foreground-hover: #C6A19E
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

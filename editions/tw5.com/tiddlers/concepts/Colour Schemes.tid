@@ -1,0 +1,32 @@
+created: 20260718221135000
+modified: 20260718221135000
+tags: Concepts
+title: Colour Schemes
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> A single palette can contain several distinct sets of colours, called <<.def "colour schemes">>, and select between them dynamically.
+
+The active scheme is determined by the palette's <<.field color-scheme>> field. Its value is a filter expression that evaluates to the name of the scheme. The simplest case is a literal name:
+
+```
+color-scheme: light
+```
+
+If the field is missing, the scheme defaults to ''light''. A filter allows the scheme to be computed. The ''~AutoToggle'' palette derives its scheme from the browser's dark mode setting:
+
+```
+color-scheme: [{$:/info/browser/darkmode}!match[yes]then[light]else[dark]]
+```
+
+The tiddler [[$:/info/browser/darkmode]] is maintained by the [[Media Query Tracker Mechanism]], using the tracker <<.tid "$:/core/wiki/config/MediaQueryTrackers/DarkLightPreferred">>. The palette is recompiled whenever the operating system setting changes.
+
+Palette entries and fields can be suffixed with `@` and a scheme name. When that scheme is active, the suffixed entry overrides the plain entry of the same name:
+
+```
+page-background: #fe0
+page-background@dark: #221
+```
+
+The same suffix works on the <<.field palette-import>> field, so a palette can import a different base palette for each scheme. See [[Palette Inheritance]].
+
+Scheme names are not limited to ''light'' and ''dark''. A palette can define any schemes it wishes, selected by any filter -- for example, schemes for different times of day.

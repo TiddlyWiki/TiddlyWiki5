@@ -1,0 +1,18 @@
+title: Operators/Colour/ColourInterpolate
+description: colour-interpolate function
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+<$text text={{{ [subfilter{Filter}] }}}/>
++
+title: Filter
+
+0.2 0.5 0.99
++[colour-interpolate:oklch[#5778d8],[#d85757]join[,]]
++
+title: ExpectedResult
+
+oklch(60.08% 0.15344 290.55),oklch(60.956% 0.15699 325.23),oklch(62.386% 0.1628 381.88)

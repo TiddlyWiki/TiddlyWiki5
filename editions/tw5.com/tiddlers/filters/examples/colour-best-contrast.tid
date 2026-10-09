@@ -1,0 +1,8 @@
+created: 20260720103000000
+modified: 20260720103000000
+tags: [[colour-best-contrast Operator]] [[Operator Examples]]
+title: colour-best-contrast Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[navy]] [[yellow]] [[white]] +[colour-best-contrast[]]" "navy is more readable than yellow against a white background">>
+<<.operator-example 2 "[[navy]] [[yellow]] [[#333333]] +[colour-best-contrast[]]" "against a dark grey background, yellow is more readable">>

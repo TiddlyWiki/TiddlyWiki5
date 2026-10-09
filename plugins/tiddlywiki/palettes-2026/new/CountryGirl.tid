@@ -1,0 +1,37 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Country Girl
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/CountryGirl
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #F0EFE9
+base-background: #F0EFE9
+base-danger: #a93537
+base-highlight: #f9eb51
+base-ink: #634942
+base-link: #f2786b
+base-paper: #DBDAD4
+base-primary: #B7B676
+base-tab: #ded99e
+base-tag: #B7B676
+
+# Palette-specific colours and overrides
+alert-border: #e25250
+button-foreground: [tf.colour[muted-foreground]]
+code-background: #1919191A
+external-link-foreground: #2c676a
+external-link-foreground-hover: #d45a3d
+external-link-foreground-visited: #675e43
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: [tf.colour[background]]
+sidebar-tab-background-selected: #F3A99E
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+site-title-foreground: [tf.colour[foreground]]
+tiddler-controls-foreground: [tf.colour[primary]]
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]
+very-muted-foreground: #ADAC9A

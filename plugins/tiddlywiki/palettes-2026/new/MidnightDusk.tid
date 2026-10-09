@@ -1,0 +1,39 @@
+category: 2026
+color-scheme: dark
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Midnight Dusk
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/MidnightDusk
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #2B292B
+base-background: #3A383A
+base-danger: #ea464b
+base-highlight: #b15e97
+base-ink: #D5D5D5
+base-link: #5CAEAE
+base-paper: #2B292B
+base-primary: #5CAEAE
+base-tab: #29455e
+base-tag: #E37073
+
+# Palette-specific colours and overrides
+alert-border: #E37073
+external-link-foreground: #15a4b2
+external-link-foreground-hover: #e47776
+external-link-foreground-visited: #966cd1
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: [tf.colour[background]]
+sidebar-tab-background-selected: transparent
+sidebar-tab-divider: [tf.colour[sidebar-tab-border-selected]]
+sidebar-tab-foreground-selected: #F6EAB6
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+site-title-foreground: #F6EAB6
+tag-foreground: [tf.colour[background]]
+tiddler-controls-foreground: #F6EAB688
+tiddler-controls-foreground-hover: #F6EAB6
+tiddler-controls-foreground-selected: #4c4e4e
+tiddler-editor-border-image: #FFFFFF
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]]

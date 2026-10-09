@@ -1,0 +1,47 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Natural
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/Natural
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #F8F8F8
+base-background: #E1E1E1
+base-danger: #945E73
+base-highlight: #FFCE67
+base-ink: #444c4d
+base-link: #945E73
+base-paper: #F8F8F8
+base-primary: #945E73
+base-tab: #DCDCDC
+base-tag: #DD9C84
+
+# Palette-specific colours and overrides
+alert-border: [tf.colour[notification-border]]
+alert-highlight: #DD9C84
+alert-muted-foreground: [tf.colour[muted-foreground]]
+dropzone-background: #DD9C84
+external-link-foreground: #945E73
+external-link-foreground-hover: #DD9C84
+external-link-foreground-visited: #635D73
+highlight-foreground: [tf.colour[foreground]]
+network-activity-foreground: 
+notification-border: #E1E1E1
+select-tag-background: 
+select-tag-foreground: 
+sidebar-muted-foreground-hover: [tf.colour[very-muted-foreground]]
+sidebar-tab-background: [tf.colour[tiddler-background]]
+sidebar-tab-background-selected: transparent
+sidebar-tab-border: [tf.colour[tab-border]]
+sidebar-tab-divider: inherit
+sidebar-tiddler-link-foreground: #635D73
+sidebar-tiddler-link-foreground-hover: [tf.colour[foreground]]
+site-title-foreground: [tf.colour[primary]]
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-editor-border]]
+tiddler-subtitle-foreground: [tf.colour[foreground]]
+tiddler-title-foreground: #635D73
+very-muted-foreground: #9c9da2

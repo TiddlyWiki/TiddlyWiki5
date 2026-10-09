@@ -1,0 +1,55 @@
+title: $:/core/ui/Palettes/Preview/Helpers
+tags: $:/tags/Preview/Helpers
+
+\whitespace trim
+
+\procedure palette-preview-component-list(tag)
+<$list filter="[all[shadows+tiddlers]tag<tag>!has[draft.of]]" variable="componentTitle">
+	<$transclude $tiddler=<<componentTitle>> title=<<title>>/>
+</$list>
+\end palette-preview-component-list
+
+\procedure tab-set(tabTitles,colourPrefix:"")
+	<div class="tc-palette-preview-thumbnail-tab-set">
+		<div class="tc-palette-preview-thumbnail-tab-buttons">
+			<$list filter="[enlist<tabTitles>]" variable="tabTitle" counter="tabIndex">
+				<%if [<tabIndex>match[1]] %>
+					<span
+						class="tc-palette-preview-thumbnail-tab-button"
+						style.border-color={{{ [<colourPrefix>addsuffix[tab-border-selected]] :map[function[colour],<currentTiddler>] }}}
+						style.color={{{ [<colourPrefix>addsuffix[tab-foreground-selected]] :map[function[colour],<currentTiddler>] }}}
+						style.background-color={{{ [<colourPrefix>addsuffix[tab-background-selected]] :map[function[colour],<currentTiddler>] }}}
+					>
+						<$text text=<<tabTitle>>/>
+					</span>
+				<%else%>
+					<span
+						class="tc-palette-preview-thumbnail-tab-button"
+						style.border-color={{{ [<colourPrefix>addsuffix[tab-border]] :map[function[colour],<currentTiddler>] }}}
+						style.color={{{ [<colourPrefix>addsuffix[tab-foreground]] :map[function[colour],<currentTiddler>] }}}
+						style.background-color={{{ [<colourPrefix>addsuffix[tab-background]] :map[function[colour],<currentTiddler>] }}}
+					>
+						<$text text=<<tabTitle>>/>
+					</span>
+				<%endif%>
+			</$list>
+		</div>
+		<div
+			class="tc-palette-preview-thumbnail-tab-divider"
+			style.border-color={{{ [<colourPrefix>addsuffix[tab-divider]] :map[function[colour],<currentTiddler>] }}}
+		>
+		</div>
+	</div>
+\end tab-set
+
+\procedure link(text)
+<span class="tc-palette-preview-thumbnail-tiddler-link" style.color=<<colour primary>>>
+	<$text text=<<text>>/>
+</span>
+\end link
+
+\procedure sidebar-link(text)
+<span class="tc-palette-preview-thumbnail-tiddler-link" style.color=<<colour sidebar-tiddler-link-foreground>>>
+	<$text text=<<text>>/>
+</span>
+\end sidebar-link

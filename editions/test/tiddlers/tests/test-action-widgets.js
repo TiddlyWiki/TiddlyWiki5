@@ -76,6 +76,19 @@ describe("Action widget tests", function() {
 		expect(info.wiki.getTiddlerText("Root")).toBe("Eagles!");
 	});
 
+	it("should preserve duplicate values in the action-sendmessage widget", function() {
+		var info = setupWiki();
+		var received = [];
+		info.widgetNode.addEventListener("test-msg",function(event) {
+			received.push(event.paramObject);
+			return true;
+		});
+		info.widgetNode.invokeActionString("<$action-sendmessage $message='test-msg' $names='[[alpha]] [[beta]]' $values='[[same]] [[same]]'/>",info.widgetNode,null,{});
+		expect(received.length).toBe(1);
+		expect(received[0].alpha).toBe("same");
+		expect(received[0].beta).toBe("same");
+	});
+
 	it("should handle the action-listops widget", function() {
 		var info = setupWiki();
 		var invokeActions = function(actions) {
