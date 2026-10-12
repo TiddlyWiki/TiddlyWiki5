@@ -3,13 +3,9 @@ title: $:/plugins/tiddlywiki/performance/perf-compare-command.js
 type: application/javascript
 module-type: command
 
-Command to compare two versions from replay results, cancelling the drift they share
+Compare paired performance replay results.
 
 Usage: --perf-compare <before-dir> <after-dir>
-
-Each directory holds results files written by --perf-replay, acquired alternately in one session: before, after, before, after. The command pairs each before run with the after run beside it and works from the within pair difference, so the machine's drift lands inside the pair and cancels rather than accruing to whichever version ran second.
-
-A difference whose confidence interval straddles zero reads INCONCLUSIVE, never a number dressed up as a win.
 
 \*/
 
@@ -43,7 +39,6 @@ Command.prototype.execute = function() {
 	out.write("\nPaired comparison (before -> after)\n");
 	out.write("==================================\n");
 	out.write("Pairs: " + Math.min(beforeRuns.length,afterRuns.length) + "\n");
-	// Runs acquired as two blocks rather than alternately share no drift to cancel, so the pairing buys nothing and the reading cannot be trusted
 	if(looksLikeSnapshot(beforeRuns,afterRuns)) {
 		out.write("\n  ⚠ WARNING: these runs do not overlap in time, so one version ran entirely before the other.\n");
 		out.write("    The drift between the two blocks stays uncancelled. Re-acquire them alternately in one session.\n");
@@ -90,7 +85,6 @@ function totalOf(run) {
 	return run.summary.totalRefreshTime;
 }
 
-// Interleaved runs overlap in time; runs taken as two blocks do not
 function looksLikeSnapshot(beforeRuns,afterRuns) {
 	var beforeTimes = beforeRuns.map(timeOf).filter(isFinite),
 		afterTimes = afterRuns.map(timeOf).filter(isFinite);

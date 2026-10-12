@@ -99,7 +99,6 @@ Command.prototype.execute = function() {
 		}
 		currentBatch.events.push(event);
 	});
-	// A timeline replayed once gives one timing, which carries no way to tell a real change from the machine's drift, so it replays as many times as asked and reports the spread
 	var repeats = 1;
 	$tw.utils.each(this.params,function(param) {
 		var match = /^repeats=(\d+)$/.exec(param);
@@ -107,7 +106,6 @@ Command.prototype.execute = function() {
 			repeats = Math.max(1,parseInt(match[1],10));
 		}
 	});
-	// Restoring the wiki between repeats needs the state each touched tiddler started in
 	var touchedTitles = [],
 		originalTiddlers = Object.create(null);
 	$tw.utils.each(timelineData,function(event) {
@@ -167,7 +165,6 @@ Command.prototype.execute = function() {
 					changedTiddlers[event.title] = {deleted: true};
 				}
 			});
-			// Measure refresh
 			filterInvocations = 0;
 			var refreshStart = $tw.utils.timer();
 			pageWidgetNode.refresh(changedTiddlers);
@@ -220,7 +217,6 @@ Command.prototype.execute = function() {
 	self.commander.streams.output.write("P99 refresh:         " + p99.toFixed(2) + "ms\n");
 	self.commander.streams.output.write("Max refresh:         " + maxRefresh.toFixed(2) + "ms\n");
 	self.commander.streams.output.write("Total filters run:   " + totalFilterInvocations + "\n");
-	// Report what this run can resolve, so a later comparison cannot claim more than the measurement supports
 	var totalsSummary = stats.summarise(repeatTotals);
 	self.commander.streams.output.write("\nReliability\n");
 	self.commander.streams.output.write("-----------\n");

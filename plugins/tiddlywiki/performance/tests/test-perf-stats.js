@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/performance/tests/test-perf-stats.js
 type: application/javascript
 tags: [[$:/tags/test-spec]]
 
-Tests the statistics that decide whether a measured difference means anything.
+Tests performance replay statistics.
 
 \*/
 
@@ -44,28 +44,26 @@ describe("Performance statistics", function() {
 		expect(result.ciLowPct).toBeGreaterThan(0);
 	});
 
-	// The failure that started this: identical code, timed as the machine drifted, read as a change
 	it("reads identical code as no change however far the machine drifts", function() {
 		var before = [],
 			after = [];
 		for(var i = 0; i < 10; i++) {
-			var drift = 10 + i * 5; // the machine slows steadily through the session
+			var drift = 10 + i * 5;
 			before.push(drift);
-			after.push(drift); // the same code, timed a moment later
+			after.push(drift);
 		}
 		var result = stats.comparePaired(before,after);
 		expect(result.verdict).toBe("inconclusive");
 		expect(result.deltaMeanPct).toBe(0);
 	});
 
-	// The pairing earns its keep here: the drift lands inside each pair and cancels
 	it("finds a small real effect underneath a large drift", function() {
 		var before = [],
 			after = [];
 		for(var i = 0; i < 10; i++) {
-			var drift = i * 5; // the machine slows steadily through the session
+			var drift = i * 5;
 			before.push(10 + drift);
-			after.push(9 + drift); // a genuine one millisecond saving, dwarfed by the drift
+			after.push(9 + drift);
 		}
 		var result = stats.comparePaired(before,after);
 		expect(result.verdict).toBe("improvement");

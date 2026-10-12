@@ -3,18 +3,15 @@ title: $:/plugins/tiddlywiki/performance/stats.js
 type: application/javascript
 module-type: library
 
-Statistics for deciding whether a measured difference means anything.
-
-A single timing carries no information about its own reliability. Machine load, thermal state and JIT warmth drift over minutes, and that drift routinely exceeds the effect a change produces, so a run compared against a run reports the weather as often as it reports the code. These functions report what a measurement can and cannot resolve, and refuse a verdict below that.
+Statistics for performance replay comparisons.
 
 \*/
 
 "use strict";
 
-// Below this spread, a row still supports a claim; above it, the row reports its own weather
 var NOISY_FLOOR_PCT = 5;
 
-// The standard error of a median runs about a quarter wider than the standard error of a mean
+// Approximate median-to-mean standard error ratio for normal samples.
 var MEDIAN_SE_FACTOR = 1.2533;
 
 exports.median = function(values) {
@@ -43,9 +40,6 @@ exports.standardDeviation = function(values) {
 	},0) / (values.length - 1));
 };
 
-/*
-Spread relative to the typical value. A high figure says the timings scatter, whatever their average
-*/
 exports.coefficientOfVariationPct = function(values) {
 	var mu = exports.mean(values);
 	if(mu === 0) {
@@ -54,9 +48,6 @@ exports.coefficientOfVariationPct = function(values) {
 	return exports.standardDeviation(values) / mu * 100;
 };
 
-/*
-The smallest difference these samples can resolve. A claimed improvement below this figure reports noise
-*/
 exports.resolvableEffectPct = function(values) {
 	var med = exports.median(values);
 	if(values.length < 2 || med === 0) {
@@ -77,11 +68,7 @@ exports.summarise = function(values) {
 	};
 };
 
-/*
-Compare two versions from runs acquired in one session, alternating between them. Each before run pairs with the after run beside it, and the comparison works from the within pair difference, so the drift both runs share cancels rather than landing on whichever version ran second.
-
-Returns a verdict of "improvement", "regression" or "inconclusive". The interval straddling zero earns "inconclusive", never a number dressed up as a win.
-*/
+// Before and after samples must be in matching acquisition order.
 exports.comparePaired = function(beforeValues,afterValues) {
 	var pairs = Math.min(beforeValues.length,afterValues.length),
 		deltas = [];
