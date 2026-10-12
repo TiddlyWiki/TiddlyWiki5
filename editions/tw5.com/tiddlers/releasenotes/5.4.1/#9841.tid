@@ -1,0 +1,13 @@
+change-category: widget
+change-type: bugfix
+created: 20260710093059614
+description: Fixes a regression in the SelectWidget when selecting multiple values.
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9841
+modified: 20260710093210171
+release: 5.4.1
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.1/#9841
+type: text/vnd.tiddlywiki
+
+Fixes a regression in the SelectWidget when selecting multiple values.

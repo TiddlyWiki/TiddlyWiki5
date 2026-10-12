@@ -144,33 +144,63 @@ All times are in milliseconds. The key fields for automated analysis:
 
 !! Example: LLM Optimisation Workflow
 
-An LLM optimising TiddlyWiki performance would follow this pattern:
+A timing carries no account of its own reliability. Machine load, thermal state and JIT warmth drift over minutes, and that drift routinely exceeds the effect a change produces, so a run read against a run reports the weather as often as it reports the code. Worse, the mistake hides: the numbers look decisive either way. Optimising against such a reading keeps noise and reverts signal, with rising confidence in both.
 
-!!! Step 1: Establish baseline
+So the loop below never compares one run against another. It acquires the two versions alternately in one session and works from the difference within each pair, where the drift they share cancels.
+
+!!! Step 1: Learn what the timeline can resolve
 
 ```
-node ./tiddlywiki.js editions/performance --load mywiki.html --perf-replay timeline.json
+node ./tiddlywiki.js editions/performance --load mywiki.html --perf-replay timeline.json repeats=10
 ```
 
-Read `timeline-results.json` and note the baseline `summary.totalRefreshTime`.
+Read the Reliability block. `Resolvable effect` names the smallest difference these repeats can tell from noise. A change smaller than that figure stays invisible to this timeline, whatever the totals say. A row marked NOISY supports no claim at all until the repeats rise or the machine quietens.
 
 !!! Step 2: Make a change
 
-Edit a source file (e.g. optimise a filter operator in `core/modules/filters/`).
+Edit a source file, for example a filter operator in `core/modules/filters/`.
 
-!!! Step 3: Measure impact
+!!! Step 3: Acquire both versions alternately
 
-Run the same `--perf-replay` command again and read the new `timeline-results.json`.
+Run the baseline and the change one after the other, several times over, writing each result into its own directory:
+
+```
+for i in 1 2 3 4 5 6 7 8; do
+  git stash                                    # the baseline
+  node ./tiddlywiki.js editions/performance --load mywiki.html --perf-replay timeline.json repeats=5
+  mv timeline-results.json before/run-$i.json
+  git stash pop                                # the change
+  node ./tiddlywiki.js editions/performance --load mywiki.html --perf-replay timeline.json repeats=5
+  mv timeline-results.json after/run-$i.json
+done
+```
+
+Alternate which version runs first in each pair. Running one version always second hands it every slice of the machine's drift, and identical code then reads as a regression.
 
 !!! Step 4: Compare
 
-Compare `summary.totalRefreshTime` and `summary.p95` between baseline and new results. If improved, keep the change. If regressed, revert and try a different approach.
+```
+node ./tiddlywiki.js editions/performance --perf-compare before after
+```
 
-!!! Step 5: Iterate
+The command pairs each before run with the after run beside it, reports the difference with a 95% confidence interval, and returns one of three verdicts:
 
-Repeat steps 2-4 until the target metric is optimised.
+* `IMPROVEMENT` — the interval sits below zero
+* `REGRESSION` — the interval sits above zero
+* `INCONCLUSIVE` — the interval straddles zero, so these runs cannot tell the change from the machine
 
-The JSON results file makes step 4 straightforward — an LLM can read two JSON files and compare numeric fields directly without parsing tabular text output.
+Treat INCONCLUSIVE as an answer rather than a failure. It says the effect, if any, sits below what the measurement resolves. Keep the change on other grounds, or measure harder, but never report it as a win.
+
+!!! Step 5: Prove the rig can see
+
+Before trusting a null result, confirm the measurement could have found an effect at all. Absence of a finding and absence of looking read identically otherwise.
+
+* A ''negative control'' compares the baseline against itself, and must read INCONCLUSIVE. A verdict here says the rig invents effects.
+* A ''positive control'' injects a slowdown of the size worth hunting, and must read REGRESSION. No verdict here says the rig cannot see the effects you are looking for, so its silence proves nothing.
+
+!!! Step 6: Iterate
+
+Repeat steps 2 to 5. Trust a call census over a sampling profiler when the two disagree: a profiler attributes time by sampling the stack and can name a function that never runs, while a count of calls cannot.
 
 !! Timeline Format
 

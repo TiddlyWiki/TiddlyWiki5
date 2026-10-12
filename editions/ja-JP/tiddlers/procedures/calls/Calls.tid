@@ -1,0 +1,66 @@
+caption: 呼び出し
+created: 20221007130006705
+modified: 20260429224543285
+original-modified: 20260301030947969
+tags: WikiText Procedures Functions Macros
+title: Calls
+ja-title: 呼び出し
+type: text/vnd.tiddlywiki
+
+!! 紹介
+
+このTiddlerでは、[[プロシージャ|Procedures]]、[[関数|Functions]]、[[マクロ|Macros]]を呼び出すさまざまな方法について説明します。構文の正式な説明については、[[呼び出し構文|Call Syntax]]を参照してください。
+
+!! トランスクルージョンショートカットでの呼び出し
+
+呼び出しを実行するには、呼び出し先の名前とパラメータ値を`<<`二重の山括弧で囲みます`>>`。
+
+```
+<<my-procedure param:"これはパラメータ値です">>
+```
+
+デフォルトでは、パラメータは定義と同じ順序で解釈されます。パラメータ値に名前と等号を付けることで、異なる順序でリストすることができます。
+
+パラメータに値が指定されていない場合は、[[プロシージャ定義|Procedure Definitions]]、[[関数定義|Function Definitions]]、[[マクロ定義|Macro Definitions]]でそのパラメータに指定されているデフォルト値が使用されます。(デフォルト値が定義されていない場合は、パラメータは空白になります。)
+
+各パラメータ値は、`'`シングルクォーテーション`'`、`"`ダブルクォーテーション`"`、`"""`三重のダブルクォーテーション`"""`、`[[`二重の角括弧`]]`で囲むことができます。三重のダブルクォーテーションを使用すると、値にほぼあらゆる文字列を含めることができます。値にスペース、シングルクォーテーション、ダブルクォーテーションが含まれていない場合は、区切り文字は不要です。シングルクォーテーション、または、三重のバッククォーテーションで囲まれた[[置換属性値|Substituted Attribute Values]]もサポートされています。
+
+[[パーサーモード|WikiText parser mode: macro examples]]に関する議論を参照してください。
+
+!!! 例
+
+<<testcase TestCases/Calls/ProcedureStaticAttributes>>
+
+<<testcase TestCases/Calls/ProcedureDynamicAttributes>>
+
+!! <<.wlink TranscludeWidget>>ウィジェットを用いた呼び出し
+
+ショートカット構文は、トランスクルードするプロシージャの名前を指定する`$variable`属性を持つ<<.wlink TranscludeWidget>>ウィジェットに展開されます。
+
+```
+<$transclude $variable="my-procedure" param="これはパラメータ値です"/>
+```
+
+ウィジェットは、ショートカット構文よりも柔軟性が高く、カスタムウィジェットで上書きすることも可能です。
+
+!! 呼び出し結果を属性値に割り当てる
+
+呼び出しから返されるテキストは、ウィジェットやHTML要素の属性に直接割り当てることができます。呼び出しの結果はWiki化されないため、[[パラメータ処理|Procedure Parameter Handling]]は行われません。
+
+```
+<div class=<<myclasses>>>
+...
+</div>
+```
+
+!! フィルタでの呼び出しの使用
+
+呼び出しはフィルタ内で使用できます。テキストはWiki化されないため、パラメータは無視されます。
+
+//現在サポートされているのはリテラル文字列パラメータのみであることに注意してください//
+
+```
+<$list filter="[<my-procedure>]">
+...
+</$list>
+```

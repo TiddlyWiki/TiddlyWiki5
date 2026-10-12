@@ -1,7 +1,7 @@
 caption: リスト
 created: 20131205160257619
-modified: 20260225114001626
-original-modified: 20160607093103220
+modified: 20260409112505342
+original-modified: 20260405094604397
 tags: WikiText Lists
 title: Lists in WikiText
 ja-title: Wikiテキストでのリスト
@@ -44,6 +44,10 @@ type: text/vnd.tiddlywiki
 #* あれ
 #** そしてもう一つ
 ">>
+
+! 説明リスト
+
+{{Description Lists in WikiText}}
 
 ! CSSクラス
 

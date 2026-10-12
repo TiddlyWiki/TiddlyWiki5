@@ -100,13 +100,12 @@ SimpleEngine.prototype.getText = function() {
 Fix the height of textarea to fit content
 */
 SimpleEngine.prototype.fixHeight = function() {
-	// If .editRows is initialised, it takes precedence
-	if((this.widget.editTag === "textarea") && !this.widget.editRows) {
+	if(this.widget.editTag === "textarea") {
 		if(this.widget.editAutoHeight) {
 			if(this.domNode && !this.domNode.isTiddlyWikiFakeDom) {
 				$tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);
 			}
-		} else {
+		} else if(!this.widget.editRows) {
 			var fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
 			fixedHeight = Math.max(fixedHeight,20);
 			this.domNode.style.height = fixedHeight + "px";

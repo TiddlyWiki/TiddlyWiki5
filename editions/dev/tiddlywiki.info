@@ -2,7 +2,6 @@
 	"description": "Developer documentation from https://tiddlywiki.com/dev/",
 	"plugins": [
 		"tiddlywiki/highlight",
-		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/menubar",
 		"tiddlywiki/internals",

@@ -1,0 +1,15 @@
+title: $:/changenotes/5.5.0/#9921
+created: 20260712000000000
+modified: 20260712000000000
+description: Refuse a performance verdict the measurement cannot support
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9921
+github-contributors: joshuafontany
+type: text/vnd.tiddlywiki
+
+A timeline replayed once yields one timing, which carries no account of its own reliability, so a run read against a run reports the machine's drift as often as the code.
+
+`--perf-replay` now takes `repeats=N` and reports the spread alongside the smallest difference the timeline can resolve, marking a timeline NOISY when its spread swamps the effects worth hunting. The new `--perf-compare` pairs runs acquired alternately in one session, so the drift both versions share cancels, and returns INCONCLUSIVE when the confidence interval straddles zero.

@@ -82,6 +82,11 @@ var TW_Style = function(el) {
 	// Return a Proxy to handle direct access to individual style properties
 	return new Proxy(styleObject, {
 		get: function(target, property) {
+			// Real CSSStyleDeclaration returns undefined for non-string keys.
+			// Guards against crashes when consumers probe Symbol.toPrimitive etc.
+			if(typeof property !== "string") {
+				return undefined;
+			}
 			// If the property exists on styleObject, return it (get, set, setProperty methods)
 			if(property in target) {
 				return target[property];
@@ -90,6 +95,10 @@ var TW_Style = function(el) {
 			return el._style[$tw.utils.convertStyleNameToPropertyName(property)] || "";
 		},
 		set: function(target, property, value) {
+			// Mirror the get trap: ignore non-string keys instead of crashing.
+			if(typeof property !== "string") {
+				return true;
+			}
 			// Set the property in _style
 			el._style[$tw.utils.convertStyleNameToPropertyName(property)] = value;
 			return true;

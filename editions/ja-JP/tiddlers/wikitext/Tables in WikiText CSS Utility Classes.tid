@@ -1,5 +1,5 @@
 created: 20220817153236691
-modified: 20260404112841923 
+modified: 20260409114243582
 original-modified: 20221010074314452
 tags: [[Tables in WikiText]]
 title: Tables in WikiText CSS Utility Classes
@@ -81,3 +81,14 @@ full-tiddler-widthである表に、左右の余白を追加するには、`tc-m
 | セル1|<$edit-text tiddler="$:/temp/test-table-input" tag="input" field="test"/> |
 |^ [[Tiddlerへのリンク|Link to a tiddler]]<br>さらに詳しい説明|<$edit-text tiddler="$:/temp/test-table-input" field="text"/>  |
 """>>
+
+!! 行スタイルを交互にした表
+
+独自のスタイルシートを作成する必要があります。[[スタイルシートの使用|Using Stylesheets]]を参照してください。考え方は、`:nth-of-type(even/odd)`を使用してルールを作成することです。例:
+
+```
+.myclass tbody tr:nth-of-type(even) { background-color: <<color tiddler-editor-fields-even>>; }
+.myclass tbody tr:nth-of-type(odd) { background-color: <<color tiddler-editor-fields-odd>>; }
+```
+
+<<.note """~TiddlyWikiは、テーブルの行に`evenRow`クラスと`oddRow`クラスを自動的に適用します。ただし、これらのクラスの使用は推奨されません。行は'even'(想定とは逆)で始まり、ヘッダー、フッター、本文のいずれに表示されるかに関わらず、テーブルのすべての行は単一の結合された行セットとして扱われます。""">>

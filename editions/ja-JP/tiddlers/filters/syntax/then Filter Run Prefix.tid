@@ -2,7 +2,7 @@ created: 20210618133745003
 from-version: 5.3.0
 modified: 20250423104147235
 original-modified: 20230710074225410
-rp-input: <<.olink すべて>>のTiddlerタイトル
+rp-input: <<.olink all>>のTiddlerタイトル (前回のランのアウトプットが空でない場合にのみ評価されます)
 rp-output: フィルタランのアウトプットは、空のリストでない限り、前回までのランのアウトプットを置き換えます(以下を参照)。
 rp-purpose: フィルタランへのインプットをそのアウトプットで置き換え、インプットがある場合にのみランを評価
 search: 

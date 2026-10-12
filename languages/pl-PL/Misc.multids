@@ -1,5 +1,6 @@
 title: $:/language/
 
+Alerts: Powiadomienia
 AboveStory/ClassicPlugin/Warning: Wygląda na to, że próbujesz wczytać wtyczkę zaprojektowaną dla ~TiddlyWiki Classic. Zwróc uwagę, że [[te wtyczki nie działają z TiddlyWiki 5|https://tiddlywiki.com/#TiddlyWikiClassic]]. Wykryte wtyczki ~TiddlyWiki Classic:
 BinaryWarning/Prompt: Ten tiddler zawiera binarne dane
 ClassicWarning/Hint: Ten tiddler został napisany w formacie dla TiddlyWiki Classic, który nie jest w pełni kompatybilny z TiddlyWiki 5. Więcej informacji dostępnych pod adresem https://tiddlywiki.com/static/Upgrading.html.
