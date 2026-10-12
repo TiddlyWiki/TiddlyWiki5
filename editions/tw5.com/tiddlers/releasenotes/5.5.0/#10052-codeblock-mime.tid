@@ -1,0 +1,13 @@
+title: $:/changenotes/5.5.0/#10052
+created: 20261012000000000
+modified: 20261012000000000
+description: Accept MIME type names in fenced code blocks
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10052
+github-contributors: joshuafontany
+type: text/vnd.tiddlywiki
+
+Fenced code blocks now accept language names containing `/`, `.`, or `+`, including the MIME types mapped by the Highlight plugin.
