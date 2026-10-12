@@ -54,6 +54,16 @@ describe("WikiText parser tests", function() {
 			expect(getText(italic[0].children)).toBe("foo lar://a bar");
 		});
 
+		it("keeps italics open across URI schemes and inner bold runs", function() {
+			var tree = parse("//foo lar://a ''one'' lar://b ''two'' end//");
+			var italic = tree[0].children.filter(function(node) {
+				return node.type === "element" && node.tag === "em";
+			});
+			expect(italic.length).toBe(1);
+			expect(countElements(tree,"strong")).toBe(2);
+			expect(getText(italic[0].children)).toBe("foo lar://a one lar://b two end");
+		});
+
 		it("leaves a standalone empty-authority lar URI as plain text", function() {
 			var tree = parse("lar:///ha.ka.ba/path");
 			expect(countElements(tree,"em")).toBe(0);

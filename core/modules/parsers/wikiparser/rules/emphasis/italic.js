@@ -46,8 +46,17 @@ Use the same URI guard for opening and closing italic delimiters. The inline
 parser calls exec() on its terminator, so keep the guard on the regexp itself.
 */
 function makeItalicRegExp() {
-	var regexp = /\/\//mg;
+	var cachedSource, cachedStart, cachedMatch,
+		regexp = /\/\//mg;
 	regexp.exec = function(source) {
+		var searchStart = this.lastIndex;
+		// The parser retries as inner rules advance. The next eligible delimiter
+		// remains valid through its start, or through EOF when none was found.
+		// Cache hits restore lastIndex as native exec does, including failure.
+		if(cachedSource === source && cachedStart <= searchStart && (!cachedMatch || searchStart <= cachedMatch.index)) {
+			this.lastIndex = cachedMatch ? cachedMatch.index + cachedMatch[0].length : 0;
+			return cachedMatch;
+		}
 		var match = RegExp.prototype.exec.call(this,source);
 		while(match && followsUriScheme(source,match.index)) {
 			// Skip the whole run so additional URI slashes cannot open italics.
@@ -56,6 +65,9 @@ function makeItalicRegExp() {
 			}
 			match = RegExp.prototype.exec.call(this,source);
 		}
+		cachedSource = source;
+		cachedStart = searchStart;
+		cachedMatch = match;
 		return match;
 	};
 	return regexp;
