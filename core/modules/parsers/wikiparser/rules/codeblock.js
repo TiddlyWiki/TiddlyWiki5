@@ -21,7 +21,7 @@ exports.types = {block: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match and get language if defined
-	this.matchRegExp = /```([\w-]*)\r?\n/mg;
+	this.matchRegExp = /```([\w./+-]*)\r?\n/mg;
 };
 
 exports.parse = function() {
