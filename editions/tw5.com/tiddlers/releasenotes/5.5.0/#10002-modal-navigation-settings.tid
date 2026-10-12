@@ -1,0 +1,13 @@
+change-category: usability
+change-type: bugfix
+created: 20260829211043243
+description: Modals honour the tiddler opening and relink settings
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10002 https://github.com/TiddlyWiki/TiddlyWiki5/issues/10001
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#10002
+type: text/vnd.tiddlywiki
+
+* Navigating from a modal now follows the tiddler opening behaviour set in the control panel (`$:/config/Navigation/openLinkFromOutsideRiver`), instead of always opening at the top of the story river
+* Renaming a tiddler from a modal now follows the "Update tags and lists" setting (`$:/config/RelinkOnRename`)
