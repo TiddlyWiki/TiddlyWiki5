@@ -1,0 +1,20 @@
+title: Markdown/PrettyLinks
+description: prettylink and linkify on
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+[[[New Tiddler]]](#New%20Tiddler)
+
+[[New Tiddler]]
++
+title: ExpectedResult
+
+<div class="markdown">
+<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#New%20Tiddler">[[New Tiddler]]</a>
+</p>
+<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#New%20Tiddler">New Tiddler</a>
+</p>
+</div>

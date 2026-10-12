@@ -1,0 +1,22 @@
+title: Markdown/WidgetBlock
+description: widget block recognition
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+hello<!-- following is a block, content is treated RAW -->
+
+<$link to="New Tiddler">
+_New_ Tiddler
+</$link>
++
+title: ExpectedResult
+
+<div class="markdown">
+<p>hello
+</p>
+<a class="tc-tiddlylink tc-tiddlylink-missing" href="#New%20Tiddler">
+_New_ Tiddler
+</a></div>

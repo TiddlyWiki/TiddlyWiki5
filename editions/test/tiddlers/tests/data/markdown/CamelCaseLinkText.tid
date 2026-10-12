@@ -1,0 +1,16 @@
+title: Markdown/CamelCaseLinkText
+description: no camelCase link in link text
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+[MarkdownDemo Source](#MarkdownDemo%20Source)
++
+title: ExpectedResult
+
+<div class="markdown">
+<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#MarkdownDemo%20Source">MarkdownDemo Source</a>
+</p>
+</div>

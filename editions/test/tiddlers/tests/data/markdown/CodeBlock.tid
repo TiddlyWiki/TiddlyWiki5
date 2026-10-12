@@ -1,0 +1,21 @@
+title: Markdown/CodeBlock
+description: test codeblock widget call
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+<$codeblock code="""var a="This needs \"escaping\"";""" language=js/>
+
+```js
+var a="This needs \"escaping\"";
+```
++
+title: ExpectedResult
+
+<div class="markdown">
+<pre><code>var a="This needs \"escaping\"";</code></pre>
+<pre><code>var a="This needs \"escaping\"";
+</code></pre>
+</div>

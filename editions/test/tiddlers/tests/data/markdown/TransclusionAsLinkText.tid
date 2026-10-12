@@ -1,0 +1,27 @@
+title: Markdown/TransclusionAsLinkText
+description: transclusion as link label should generate text only
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+[{{$:/themes/tiddlywiki/vanilla!!color-scheme}}](#New%20Tiddler)
++
+title: ExpectedResult
+
+<div class="markdown">
+<p><a class="tc-tiddlylink tc-tiddlylink-resolves _codified_" href="#New%20Tiddler">light</a>
+</p>
+</div>
++
+title: $:/palette
+
+$:/themes/tiddlywiki/vanilla
++
+title: $:/themes/tiddlywiki/vanilla
+color-scheme: light
++
+title: New Tiddler
+
+Aloha!

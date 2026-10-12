@@ -1,0 +1,24 @@
+title: Markdown/NestedLinks
+description: Nested link label
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+[foo [bar](/uri2)](/uri1)
+
+[foo [FooBar](/uri2)](/uri1)<!-- CameCase -->
+
+[foo [FooBar](/uri2)xyz](/uri1)<!-- CameCase -->
++
+title: ExpectedResult
+
+<div class="markdown">
+<p>[foo <a class="tc-tiddlylink-external _codified_" href="/uri2" rel="noopener noreferrer" target="_blank">bar</a>](/uri1)
+</p>
+<p>[foo <a class="tc-tiddlylink-external _codified_" href="/uri2" rel="noopener noreferrer" target="_blank">FooBar</a>](/uri1)
+</p>
+<p>[foo <a class="tc-tiddlylink-external _codified_" href="/uri2" rel="noopener noreferrer" target="_blank">FooBar</a>xyz](/uri1)
+</p>
+</div>
