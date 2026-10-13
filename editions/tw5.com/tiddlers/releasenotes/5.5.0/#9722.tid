@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#9722
+description: Filter serialization
+tags: $:/tags/ChangeNote
+release: 5.5.0
+change-type: enhancement
+change-category: developer
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9722
+github-contributors: linonetwo
+
+Allow filter AST serialization and inline MVV filter syntax serialization.
