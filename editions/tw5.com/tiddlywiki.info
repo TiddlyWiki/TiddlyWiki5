@@ -8,7 +8,8 @@
 		"tiddlywiki/menubar",
 		"tiddlywiki/railroad",
 		"tiddlywiki/tour",
-		"tiddlywiki/dom-to-image"
+		"tiddlywiki/dom-to-image",
+		"tiddlywiki/scroll-stable"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
