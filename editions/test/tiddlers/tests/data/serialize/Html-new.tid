@@ -1,0 +1,21 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Empty, self closing, unmatched and nested elements round-trip byte-exact
+title: Serialize/Html-new
+type: text/vnd.tiddlywiki
+
+<div></div>
+
+<div/>
+
+</br>
+
+<div><span><span>
+
+Some text</span></span></div>
+
+<div>
+
+Block content ending at the close tag
+</div>
+
+<div>

@@ -1,0 +1,40 @@
+title: Serialize/Table-normalized
+description: AST-only mode rebuilds merged cells in trailing form and orders the pseudo rows
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: info
+
+`|>|Cell9 |` becomes `|Cell9 |<|`, and the caption row moves directly below
+the class row: the grid emitter rebuilds merges in trailing form and emits
+the pseudo rows in canonical order.
+
+Why: the AST records colspan and rowspan as cell attributes and moves the
+caption container to the front for DOM validity; which side the merge
+marker sat on and where the caption row stood are not recorded, so the
+emitter re-derives the grid with trailing `<` cells, `~` rowspan markers
+and the class, caption, body, footer row order.
+
+* Covers: serializeFromTree in $:/plugins/tiddlywiki/wikitext-serialize/rules/table.js.
+* Mode: ast-only (the Input field withholds the source from the serializer).
++
+title: Input
+mode: ast-only
+
+|cls1 cls2|k
+|!Alpha |!Beta |!Gamma |!Delta |
+|Cell1 |Cell2 |Cell3 |<|
+|Cell4 |~|Cell6 |Cell7 |
+|>|Cell9 |Cell10 |Cell11 |
+|The caption |c
+|foot1|foot2|foot3|foot4|f
++
+title: ExpectedWikitext
+
+|cls1 cls2|k
+|The caption |c
+|!Alpha |!Beta |!Gamma |!Delta |
+|Cell1 |Cell2 |Cell3 |<|
+|Cell4 |~|Cell6 |Cell7 |
+|Cell9 |<|Cell10 |Cell11 |
+|foot1|foot2|foot3|foot4|f

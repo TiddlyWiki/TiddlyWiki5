@@ -8,7 +8,14 @@ module-type: wikiruleserializer
 
 exports.name = "styleblock";
 
-exports.serialize = function(tree,serialize) {
+exports.serialize = function(tree,serialize,options) {
+	options = options || {};
+	// The node span includes the line end the block rule consumed, which
+	// the tree does not record; the slice keeps the emission span exact
+	var slice = $tw.utils.serializeFromSource(tree,{source: options.source, fragments: ["@@"]});
+	if(slice !== null) {
+		return slice;
+	}
 	var lines = [];
 	var classes = [];
 	var styles = [];
@@ -46,12 +53,10 @@ exports.serialize = function(tree,serialize) {
 			lines.push("\n");
 		}
 	}
-	// Serialize each child node and add to result
-	for(var i = 0; i < tree.children.length; i++) {
-		lines.push(serialize(tree.children[i]));
-	}
+	// Serialize the children as one array so the walker separates the blocks
+	lines.push(serialize(tree.children));
 	var result = lines.join("").replace(/\s+$/, "");
 	// Add the closing @@ for the style block
-	result += "\n@@\n\n";
+	result += "\n@@";
 	return result;
 };

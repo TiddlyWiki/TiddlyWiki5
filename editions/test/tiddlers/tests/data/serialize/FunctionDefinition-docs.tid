@@ -1,0 +1,23 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Single line procedures, quoted and MVV parameter defaults and named end markers round-trip byte-exact
+title: Serialize/FunctionDefinition-docs
+type: text/vnd.tiddlywiki
+
+\procedure single-line-proc() This is a single line procedure body
+
+\function fn.quoting(a:'has "double" quotes', b:"""has "both" 'kinds'""", c:unquoted)
+definition text
+\end
+
+\procedure outer-proc(caption:"Click me")
+\procedure inner-actions()
+<$action-sendmessage $message="tm-notify" $param="HelloThere"/>
+\end inner-actions
+<$button actions=<<inner-actions>>>
+<<caption>>
+</$button>
+\end outer-proc
+
+\procedure mvv-default(items:((myvar)))
+definition text
+\end

@@ -1,0 +1,99 @@
+title: $:/plugins/tiddlywiki/wikitext-serialize/readme
+
+This plugin turns a WikiText parse tree back into WikiText: `$tw.utils.serializeWikitextParseTree(tree, options)`. With `options.source`, the text the tree was parsed from, node positions reproduce the original formatting byte for byte; without it every rule rebuilds its syntax from the tree alone.
+
+!! Building trees: `$tw.utils.wikitextParseTree`
+
+An editor that writes WikiText builds its parse tree with the factory instead of spelling rule names and tags. Every node carries exactly what the serializer needs and no positions. The test `test-wikitext-parsetree-factory.js` shows every function with the text it produces.
+
+```
+var f = $tw.utils.wikitextParseTree;
+$tw.utils.serializeWikitextParseTree([
+	f.heading(1, [f.text("Title")]),
+	f.paragraph([f.text("Some "), f.emphasis("bold", [f.text("text")]), f.htmlBreak(), f.text("next line")]),
+	f.list("ul", [f.listItem([f.text("one")]), f.listItem([f.text("two")])])
+]);
+// "! Title\n\nSome ''text''<br>next line\n\n* one\n* two"
+```
+
+|!Function |!Node |
+|`text(value)` |a text node |
+|`paragraph(children)`, `blankLine()` |a paragraph; an extra empty line |
+|`heading(level, children, {classes})` |`!` to `!!!!!!` |
+|`list(kind, items)`, `listItem(children, {classes})` |`*` or `#` lists; a nested list goes into an item's children |
+|`definitionList(children)`, `definitionTerm(children)`, `definitionDescription(children)` |`;` and `:` |
+|`codeBlock(code, language)` |a fenced code block |
+|`quoteBlock(children, {cite, classes})` |`<<<` with an optional closing citation |
+|`table(rows, {caption, classes})`, `tableRow(cells)`, `tableCell(children, {header, align, valign, colspan, rowspan})` |a table |
+|`horizontalRule()` |`---` |
+|`hardBreak()` |two spaces and a backslash before the line end; needs the hard-line-breaks plugin, without it nothing is written |
+|`htmlBreak()` |`<br>`, the only break a table cell can hold |
+|`hardLineBreaksRegion(lines)` |a `"""` region; lines are arrays of inline nodes |
+|`emphasis(kind, children)` |bold, italic, underscore, strikethrough, superscript, subscript or code |
+|`link(target, children)`, `externalLink(url, children)` |`[[...]]` and `[ext[...]]`; formatted text gives `<$link>` or `<a>` |
+|`image(source, {tooltip, width, height, classes})` |`[img[...]]` |
+|`macroCall(name, params, {block})` |`<<name ...>>`; params are strings or `{name, value, quoted}` |
+|`widget(tag, attributes, children, {block, selfClosing, blockContent})` |a widget or HTML element; `blockContent` writes the blank line after the open tag |
+|`opaque(sourceText, {block})` |text written verbatim |
+|`pragma(sourceText)` |the pragma nodes parsed from the text |
+
+Each function with the WikiText it writes:
+
+```
+var f = $tw.utils.wikitextParseTree,
+	write = $tw.utils.serializeWikitextParseTree;
+write([f.paragraph([f.text("a")]), f.blankLine(), f.paragraph([f.text("b")])]); // "a\n\n\nb"
+write([f.heading(2, [f.text("Title")], {classes: ["note"]})]); // "!!.note Title"
+write([f.list("ol", [f.listItem([f.text("one"), f.list("ul", [f.listItem([f.text("sub")])])])])]); // "# one\n#* sub"
+write([f.definitionList([f.definitionTerm([f.text("term")]), f.definitionDescription([f.text("meaning")])])]); // "; term\n: meaning"
+write([f.codeBlock("x = 1", "js")]); // "```js\nx = 1\n```"
+write([f.quoteBlock([f.paragraph([f.text("quoted")])], {cite: [f.text("who")]})]); // "<<<\nquoted\n<<< who"
+write([f.table([f.tableRow([f.tableCell([f.text("h")], {header: true}), f.tableCell([f.text("r")], {align: "right"})])], {caption: [f.text("cap")]})]); // "|cap|c\n|!h| r|"
+write([f.horizontalRule()]); // "---"
+write([f.paragraph([f.text("a"), f.htmlBreak(), f.text("b")])]); // "a<br>b"
+write([f.paragraph([f.hardLineBreaksRegion([[f.text("one")], [f.text("two")]])])]); // '"""\none\ntwo\n"""'
+write([f.paragraph([f.emphasis("bold", [f.text("b")]), f.text(" "), f.emphasis("code", [f.text("c")])])]); // "''b'' `c`"
+write([f.paragraph([f.link("Target", [f.text("caption")]), f.text(" "), f.externalLink("https://tiddlywiki.com/")])]); // "[[caption|Target]] [ext[https://tiddlywiki.com/]]"
+write([f.paragraph([f.link("Target", [f.emphasis("bold", [f.text("b")])])])]); // "<$link to=\"Target\">''b''</$link>"
+write([f.paragraph([f.image("pic.png", {tooltip: "tip", width: "10"})])]); // '[img width="10" [tip|pic.png]]'
+write([f.paragraph([f.text("at "), f.macroCall("now", [{value: "YYYY", quoted: true}, {name: "tz", value: "UTC"}])])]); // 'at <<now "YYYY" tz:UTC>>'
+write([f.macroCall("toc", ["Contents"], {block: true})]); // "<<toc Contents>>\n"
+write([f.widget("$list", {filter: "[tag[x]]"}, [f.paragraph([f.text("body")])], {block: true, blockContent: true})]); // '<$list filter="[tag[x]]">\n\nbody\n</$list>'
+write([f.paragraph([f.widget("$image", {source: "x.png"}, null, {selfClosing: true})])]); // '<$image source="x.png"/>'
+write([f.opaque("<$foo bar='1'/>", {block: true}), f.paragraph([f.text("after")])]); // "<$foo bar='1'/>\n\nafter"
+write(f.pragma("\\procedure hello() Hi").concat([f.paragraph([f.text("<<hello>>")])])); // "\\procedure hello()\nHi\n\\end\n\n<<hello>>"
+```
+
+!! Reading trees
+
+|!Function |!Result |
+|`kindOf(node)` |text, paragraph, blankLine, heading, list, listItem, definitionList, definitionTerm, definitionDescription, codeBlock, quoteBlock, quoteCite, table, tableSection, tableRow, tableCell, tableCaption, horizontalRule, hardBreak, hardLineBreaksRegion, emphasis, link, externalLink, image, macroCall, transclusion, widget, element, pragma, comment, conditional, typedBlock, opaque or unknown |
+|`emphasisKind(node)`, `headingLevel(node)`, `listKind(node)` |the kind, level or list tag, else null |
+|`regionLines(node)` |the lines of a `"""` region as arrays of inline nodes |
+|`quoteParts(node)` |`{body, openingCite, closingCite}` |
+|`listItems(node)` |`{node, children, nested, classes}` per item |
+|`tableCellOptions(node)` |the options `tableCell` takes, read back from a cell |
+|`isBlock(node)` |whether the walker writes a blank line after the node |
+|`sourceSlice(node, source)` |the exact text of a parsed node, or null |
+|`hasImplicitCloseTag(node)` |whether the end of the text closed the element, e.g. `<$let>` without `</$let>` |
+
+The helpers on a parsed tree:
+
+```
+var f = $tw.utils.wikitextParseTree,
+	source = "!! Title\n\n*.c one\n** sub\n\n|!h|^ c |\n\n<<< opener\nquoted ''text''\n<<< closer\n\n<$let a=\"x\">\n\nbody",
+	tree = $tw.wiki.parseText("text/vnd.tiddlywiki", source).tree;
+tree.map(f.kindOf); // ["heading","list","table","quoteBlock","widget"]
+f.headingLevel(tree[0]); // 2
+f.sourceSlice(tree[0], source); // "!! Title"
+f.isBlock(tree[0]); // true
+f.listKind(tree[1]); // "ul"
+f.listItems(tree[1])[0].classes; // ["c"]
+f.listItems(tree[1])[0].nested.map(f.kindOf); // ["list"]
+f.tableCellOptions(tree[2].children[0].children[0].children[1]); // {"header":false,"align":"center","valign":"top"}
+f.quoteParts(tree[3]).body.map(f.kindOf); // ["paragraph"]
+f.emphasisKind(tree[3].children[1].children[1]); // "bold"
+f.hasImplicitCloseTag(tree[4]); // true
+```
+
+The plugin is experimental: names may still change.
