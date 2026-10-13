@@ -1,0 +1,13 @@
+change-category: developer
+change-type: bugfix
+created: 20260713004843000
+description: Block node spans cover exactly their own syntax and record their parse position
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/9914
+modified: 20260713004843000
+release: 5.5.0
+tags: $:/tags/ChangeNote
+type: text/vnd.tiddlywiki
+title: $:/changenotes/5.5.0/#9914
+
+Block node spans now end at their last syntactic byte; for consistency, separators live in the gaps between spans. This shifts `start`/`end` for `transcludeblock`, `filteredtranscludeblock`, `horizrule`, `styleblock`, `typedblock` and `table` (positions first shipped in v5.4.0), and `typedblock` now starts at its opening `$$$`. Every block dispatched node also carries `blockPosition: true`, so block vs inline position is recoverable; `isBlock` is untouched. Rendered output is unchanged.
