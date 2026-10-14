@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#9872
+description: Preserve additional blank lines as paragraph nodes
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9872
+github-contributors: linonetwo
+
+WikiText can optionally preserve additional blank lines as empty paragraph nodes, including blank lines following block elements, and serialize them back to WikiText.

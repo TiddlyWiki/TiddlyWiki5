@@ -41,6 +41,8 @@ exports.serializeWikitextParseTree = function serializeWikitextParseTree(tree,op
 			var serializeOneRule = Parser.prototype.serializers[tree.rule];
 			if(serializeOneRule) {
 				output.push(serializeOneRule(tree,serializeWikitextParseTree));
+			} else if(tree.rule === "blankline") {
+				output.push(tree.isLeadingBlankLine ? "\n\n" : "\n");
 			} else if(tree.rule === "parseblock") {
 				output.push(serializeWikitextParseTree(tree.children,options),"\n\n");
 			} else {
