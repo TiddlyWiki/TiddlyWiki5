@@ -12,6 +12,8 @@ alert-highlight: #d79921
 alert-muted-foreground: #272321
 background: #3c3836
 blockquote-bar: <<colour muted-foreground>>
+button-background:
+button-background-hover: #504945
 button-foreground: <<colour foreground>>
 code-background: #504945
 code-border: #504945

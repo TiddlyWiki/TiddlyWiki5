@@ -74,6 +74,7 @@ alert-muted-foreground: <<colour flexoki-tx-2>>
 background: #FFFCF0
 blockquote-bar: <<colour flexoki-magenta-600>>
 button-background: <<colour flexoki-bg-2>>
+button-background-hover: #e6e4d9
 button-foreground: <<colour flexoki-black>>
 button-border: <<colour flexoki-500>>
 code-background: <<colour flexoki-bg>>

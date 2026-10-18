@@ -1,0 +1,5 @@
+title: Audit: PaletteTestModal
+subtitle: Test Modal Subtitle
+footer: <$button message="tm-close-tiddler">Close</$button>
+
+This is a test modal dialog. It shows modal-background, modal-border, modal-header-border, modal-footer-background, and modal-footer-border.
