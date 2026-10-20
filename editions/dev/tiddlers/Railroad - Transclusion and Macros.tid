@@ -1,0 +1,102 @@
+created: 20260413160416101
+modified: 20260413160430229
+tags: doc dev [[Wikitext EBNF]]
+title: Railroad - Transclusion and Macros
+
+! Transclusion and Macros — Railroad Diagrams
+
+This tiddler presents the same grammar as [[EBNF - Transclusion and Macros]], but using railroad diagrams for visual clarity. Follow the tracks left-to-right to see valid syntax paths.
+
+!! Transclusion
+
+Transclusion embeds the content of one tiddler inside another. Both block and inline forms exist (see [[Block vs Inline|Railroad - Transclusion and Macros##Block vs Inline]] below). Five patterns are supported, all sharing a common structure.
+
+!!! ~TiddlerRef
+
+A tiddler reference names a tiddler with an optional field (`!!`) or index (`##`) accessor.
+
+<$railroad text=""" <"title"> [("!!" <"field"> | "##" <"index">)] """/>
+
+!!! Full Transclusion
+
+Double braces wrap a transclusion spec: an optional tiddler reference, an optional template (after `||`), and zero or more positional parameters (each after `|`).
+
+<$railroad text=""" "{{" [<"TiddlerRef">] ["||" <"template">] [{:"|" <"param">}] "}}" """/>
+
+''Examples:''
+
+* `{{MyTiddler}}` — basic transclusion
+* `{{MyTiddler!!caption}}` — field transclusion
+* `{{MyTiddler##key}}` — index transclusion
+* `{{MyTiddler||$:/templates/MyTemplate}}` — template transclusion
+* `{{MyTiddler||MyTemplate|one|two}}` — parameterised transclusion
+
+!! Filtered Transclusion
+
+Filtered transclusion uses triple braces and produces a `<$list>` widget at runtime. An optional tooltip (after `|`) and/or template (after `||`) may be specified inside the braces. Style declarations and CSS classes can follow outside.
+
+<$railroad text=""" "{{{" <"filter-expr"> ["|" <"tooltip">] ["||" <"template">] "}}}" [<"style-defs">] ["." <"class-names">] """/>
+
+The style portion sits between the closing `}}}` and is terminated by `}`. Class names are dot-separated after the final `}`.
+
+''Examples:''
+
+* `{{{[tag[draft]]}}}` — basic filtered transclusion
+* `{{{[tag[draft]]|Draft items}}}` — with tooltip
+* `{{{[tag[draft]]||$:/templates/item}}}` — with template
+* `{{{[tag[draft]]|Drafts||$:/templates/item}}}` — tooltip and template
+* `{{{[tag[draft]]}}}width:100%;.myclass` — with style and classes
+
+!! Macro Call
+
+Macro calls are delimited by `<<` and `>>`. A macro name is followed by zero or more space-separated parameters.
+
+!!! ~MacroParam
+
+Each parameter has an optional name (followed by `:`) and a value. Five quoting styles are available for values.
+
+<$railroad text=`[<"name"> ":"] ('"""' <"any content"> '"""' | '"' <"no-dquote"> '"' | "'" <"no-squote"> "'" | "[[" <"bracket-content"> "]]" | <"unquoted">) `/>
+
+The first alternative is triple-double-quote (`"""`) — it accepts any content including newlines.
+
+!!! Full Macro Call
+
+<$railroad text=""" "<<" <"macro-name"> [{<"MacroParam">}] ">>" """/>
+
+''Examples:''
+
+* `<<now "DDth MMM YYYY">>` — positional parameter
+* `<<tabs tabsList:"[tag[docs]]" default:"Intro">>` — named parameters
+* `<<myMacro [[value with spaces]]>>` — bracket-quoted value
+
+!! MVV Display (inline only)
+
+The multi-valued variable display syntax provides a concise way to show variable values or filter results inline. Unlike the other constructs here, MVV display has ''no block form''.
+
+!!! Variable Display
+
+Double parentheses display a variable's value. An optional separator (after `||`) joins multiple values. The default separator is `", "`.
+
+<$railroad text=""" "((" <"var-name"> ["||" <"separator">] "))" """/>
+
+!!! Filter Display
+
+Triple parentheses display filter results. An optional separator (after `||`) joins the results.
+
+<$railroad text=""" "(((" <"filter-expr"> ["||" <"separator">] ")))" """/>
+
+''Examples:''
+
+* `((myVar))` — display variable value
+* `((myList||, ))` — display with comma separator
+* `(((  [tag[task]get[title]]  )))` — display filter results
+* `(((  [tag[task]get[title]]  ||; )))` — filter results with semicolon separator
+
+!! Block vs Inline
+
+Transclusion (`{{...}}`), filtered transclusion (`{{{...}}}`), and macro calls (`<<...>>`) each have ''both'' block and inline parser rules:
+
+* ''Block form'' — the construct must appear alone on its line, followed by a newline or end of input. The parse node gets `isBlock: true`, producing `<div>` wrappers.
+* ''Inline form'' — the construct appears within a run of text. Output is rendered inline within `<span>` or `<p>` elements.
+
+MVV display `((...))` and `(((...)))` is the exception: it exists ''only as an inline rule''.
