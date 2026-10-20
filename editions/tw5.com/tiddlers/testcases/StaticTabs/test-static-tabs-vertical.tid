@@ -1,0 +1,30 @@
+created: 20260429000000000
+description: vertical tabs vs their static render
+import-compound: [[TestCases/StaticTabs/Pitch]]
+modified: 20260429000000000
+tags: $:/tags/wiki-test-spec
+title: TestCases/StaticTabs/test-static-tabs-vertical
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Vertical interactive `<<tabs>>` (via `pitch-class="tc-vertical"`) compared to a static render, where the imported `$:/tags/Global/Static` override turns them into static tabs. Static rendering ignores the vertical orientation since each tab becomes its own block-level card.
+
++
+title: Output
+
+''Interactive vertical tabs''
+
+<$let pitch-class="tc-vertical">
+<$transclude $tiddler="StaticTabs" $mode="block"/>
+</$let>
+
+-----
+
+''Static render (the import sees tv-config-static="yes", so tabs become static-tabs; class="tc-vertical" passes through but has no effect on stacked cards)''
+
+<$let tv-config-static="yes" pitch-class="tc-vertical">
+<$importvariables filter="[subfilter{$:/core/config/GlobalImportFilter}]">
+<$transclude $tiddler="StaticTabs" $mode="block"/>
+</$importvariables>
+</$let>
