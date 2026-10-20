@@ -19,6 +19,10 @@ code-body: yes
 `.tc-story-river .tc-tiddler-frame:nth-child(100n+`<$text text=<<currentTiddler>>/>`) {
 z-index: `<$text text={{{ [[200]subtract<currentTiddler>] }}}/>`;
 }
+
+.tc-story-river .tc-live-reorderable:nth-child(100n+`<$text text=<<currentTiddler>>/>`) .tc-tiddler-frame {
+z-index: `<$text text={{{ [[200]subtract<currentTiddler>] }}}/>`;
+}
 `
 </$list>
 </$reveal>

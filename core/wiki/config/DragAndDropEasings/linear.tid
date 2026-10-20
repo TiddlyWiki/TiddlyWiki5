@@ -1,0 +1,4 @@
+title: $:/config/DragAndDrop/Easings/linear
+tags: $:/tags/DragAndDrop/Easing
+caption: {{$:/language/ControlPanel/DragAndDrop/Easings/linear}}
+text: linear
