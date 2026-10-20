@@ -1,0 +1,16 @@
+change-category: hackability
+change-type: bugfix
+created: 20260824084607440
+description: Block content is no longer wrapped in a paragraph, so rendered HTML is valid
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9986
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9986
+type: text/vnd.tiddlywiki
+
+* A block element such as `<div>` is no longer wrapped in a paragraph, so a static render and the interactive page no longer disagree about the same source. Across tiddlywiki.com this removes 75 invalid paragraphs and every empty one
+* The decision is now taken when the content renders rather than while parsing, so it is also correct for content arriving through a transclusion or a macro, which the parser could not see
+* A run mixing text and a block element is split the way a browser splits it, so text either side of the block keeps its paragraph
+* `@@.myClass` wrapped around a block now applies the class to that block
+* Custom CSS that relied on a `p` selector matching those paragraphs inside core user interface tiddlers may need updating, since the paragraphs are gone
