@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#9485
+description: Add new in-tree-of filter operator
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: filters
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9485
+github-contributors: linonetwo
+
+Added a new filter operator `in-tree-of` that checks if tiddlers are in a tree with a specified root. By default it traverses the tag hierarchy, and it can also traverse trees defined by another field (for example `list`) via a second operand.
