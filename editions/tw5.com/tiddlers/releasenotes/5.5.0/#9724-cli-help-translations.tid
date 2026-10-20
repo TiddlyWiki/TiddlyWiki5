@@ -1,0 +1,12 @@
+change-category: translation
+change-type: enhancement
+created: 20260711191559000
+description: CLI help output uses a consistent fixed-column layout in all translations
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9724
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9724
+type: text/vnd.tiddlywiki
+
+* The command line help texts shown by `tiddlywiki --help <command>` present their parameter lists in a consistent fixed-column layout across all translations, making the CLI output readable in every language

@@ -12,14 +12,21 @@ V osnovi omogoča streže prikaz določenega tiddlerja. Poleg tega pa omogoča �
 
 Parametri so:
 
-* ''port'' - številka vrat, s katerih naj se streže (privzeto je "8080")
-* ''roottiddler'' - tiddler, ki bo osnovni tiddler (privzeto "$:/core/save/all")
-* ''rendertype'' - vrsto vsebine, v kateri na bo naj bo prikazan osnovni tiddler (privzeto je "text / plain")
-* ''servetype'' - vrsto vsebine, v kateri naj bo strežen osnovni tiddler (privzeto je "text / html")
-* ''username''- privzeto uporabniško ime za podpisovanje sprememb
-* ''password'' - izbirno geslo za osnovno overjanje
-* ''gostitelj'' - neobvezno ime gostitelja, s katerega se streže (privzeto je "127.0.0.1" ali "localhost")
-* ''pathprefix'' - neobvezna predpona za poti
+```
+  port              številka vrat, s katerih naj se streže
+                    (privzeto je "8080")
+  roottiddler       tiddler, ki bo osnovni tiddler
+                    (privzeto "$:/core/save/all")
+  rendertype        vrsto vsebine, v kateri na bo naj bo prikazan
+                    osnovni tiddler (privzeto je "text/plain")
+  servetype         vrsto vsebine, v kateri naj bo strežen osnovni
+                    tiddler (privzeto je "text/html")
+  username          privzeto uporabniško ime za podpisovanje sprememb
+  password          izbirno geslo za osnovno overjanje
+  host              neobvezno ime gostitelja, s katerega se streže
+                    (privzeto je "127.0.0.1" ali "localhost")
+  pathprefix        neobvezna predpona za poti
+```
 
 Če je parameter gesla določen, bo brskalnik uporabnika pozval za uporabniško ime in geslo. Geslo se pošilja v nešifriranem besedilu, zato ta implementacija ni primerna za splošno uporabo.
 

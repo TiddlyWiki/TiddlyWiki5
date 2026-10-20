@@ -1,7 +1,8 @@
 title: $:/language/Help/rendertiddlers
 description: एक निर्दिष्ट ContentType के लिए एक फिल्टर मिलान tiddlers प्रस्तुत करना
 
-एक text / html` `default to) एक निर्दिष्ट ContentType की फ़ाइलों को अलग करने के लिए एक फिल्टर मिलान tiddlers के सेट और विस्तार के लिए प्रस्तुत करना (` default to .html`)।
+एक फिल्टर मिलान tiddlers के सेट को एक निर्दिष्ट ContentType (default `text/html`) और विस्तार (default `.html`) की अलग फ़ाइलों के लिए प्रस्तुत करना।
+
 ```
 --rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
 ```

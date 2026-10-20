@@ -11,7 +11,11 @@ Configura el campo especificado de un grupo de tiddlers como resultado de una pl
 
 Sus parámetros son:
 
-* ''filter'' - filtro que identifica los tiddlers que se verán afectados
-* ''fieldname'' - el campo que será modificado (por defecto, "text")
-* ''templatetitle'' - el tiddler a ''wikify'' en el campo especificado. Si se deja en blanco o está ausente, el campo especificado es borrado. 
-* ''rendertype'' - el tipo de texto a generar (por defecto, "text/plain"; se puede usar también "text/html" para incluir etiquetas HTML)
+```
+  filter         filtro que identifica los tiddlers que se verán afectados
+  fieldname      el campo que será modificado (por defecto, "text")
+  templatetitle  el tiddler a wikificar en el campo especificado. Si se deja
+                 en blanco o está ausente, el campo especificado es borrado
+  rendertype     el tipo de texto a generar (por defecto, "text/plain"; se
+                 puede usar también "text/html" para incluir etiquetas HTML)
+```

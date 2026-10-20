@@ -14,10 +14,15 @@ description: Wikiを新しいWikiフォルダに保存
 
 次のオプションがサポートされています:
 
-* ''filter'': 出力に含めるTiddlerを定義するフィルター式。
-* ''explodePlugins'': デフォルトは"yes"
-** ''yes''を指定すると、プラグインは個別のTiddlerファイルに"展開"され、wikiフォルダ内のプラグインディレクトリに保存されます
-** ''no''を指定すると、プラグインを構成要素であるTiddlerファイルに展開する処理が抑制されます。プラグインは単一のJSON Tiddlerとしてtiddlersフォルダに保存されます
+```
+  filter            出力に含めるTiddlerを定義するフィルター式。
+  explodePlugins    デフォルトは"yes"
+                    "yes": プラグインは個別のTiddlerファイルに"展開"され、
+                           wikiフォルダ内のプラグインディレクトリに保存されます
+                    "no":  プラグインを構成要素であるTiddlerファイルに展開する
+                           処理が抑制されます。プラグインは単一のJSON Tiddler
+                           としてtiddlersフォルダに保存されます
+```
 
 どちらの''explodePlugins''オプションも、元のWikiと全く同じWikiフォルダを生成することに注意してください。違いは、Wikiフォルダ内でのプラグインの表現方法にあります。
 

@@ -11,14 +11,20 @@ A l'arrel, serveix per a generar un tiddler concret. Fora de l'arrel, serveis el
 
 Els paràmetres són:
 
-* ''port'' - número del port que donarà el servei (per omissió "8080")
-* ''tiddler-arrel'' - el tiddler que donarà el servei arrel (per omissió "$:/core/save/all") 
-* ''tipus-de-contingut'' - el tipus de contingut al qual s'haurà de generar el tiddler arrel (per omissió "text/plain")
-* ''tipus-de-servidor'' - el tipus de contingut amb el qual s'haurà de servir el tiddler arrel (per omissió "text/html")
-* ''usuari'' - nom de l'usuari per omissió per signar les edicions
-* ''contrasenya'' - contrasenya opcional per l'autenticació bàsica
-* ''host'' - nom de host opcional que donarà el servei (per omissió "127.0.0.1" és a dir "localhost")
-* ''prefix-de-la-ruta'' - prefix opcional de les rutes
+```
+  port                número del port que donarà el servei (per omissió: "8080")
+  tiddler-arrel       el tiddler que donarà el servei arrel
+                      (per omissió: "$:/core/save/all")
+  tipus-de-contingut  el tipus de contingut al qual s'haurà de generar el
+                      tiddler arrel (per omissió: "text/plain")
+  tipus-de-servidor   el tipus de contingut amb el qual s'haurà de servir el
+                      tiddler arrel (per omissió: "text/html")
+  usuari              nom de l'usuari per omissió per signar les edicions
+  contrasenya         contrasenya opcional per l'autenticació bàsica
+  host                nom de host opcional que donarà el servei
+                      (per omissió: "127.0.0.1" és a dir "localhost")
+  prefix-de-la-ruta   prefix opcional de les rutes
+```
 
 Si s'indica el paràmetre de la contrasenya el navegador demanarà un usuari i una contrasenya. La contrasenya es transmet tal qual així que no és una bona solució d'ús general.
 
