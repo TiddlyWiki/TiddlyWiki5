@@ -104,12 +104,10 @@ test.describe("ProseMirror Editor - Wikitext Inline Input Rules", () => {
 		await expect(editor).not.toContainText("''bold text''");
 	});
 
-	// Skipped: //italic// input rule conflicts with SlashMenuPlugin which intercepts
-	// the "/" keydown. The rule itself is correct (verified in Node tests), but
-	// the slash menu opens on the first "/" and its transactions interfere with
-	// the inline mark application in the browser. TODO: resolve this interaction.
-	test.skip("should convert //italic// to em mark", async ({ page }) => {
-		const editor = await setupProseMirrorTest(page, null, { initialText: "" });
+	test("should convert //italic// to em mark without trapping input in the slash menu", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page,"ItalicSlashEscape",{
+			initialText: "", useReadmeTiddler: false
+		});
 		await clearEditor(editor);
 		await editor.click();
 		await editor.pressSequentially("Some //italic text// here");
@@ -117,6 +115,8 @@ test.describe("ProseMirror Editor - Wikitext Inline Input Rules", () => {
 		await expect(editor.locator("em")).toHaveCount(1);
 		await expect(editor.locator("em")).toContainText("italic text");
 		await expect(editor).not.toContainText("//italic text//");
+		await expect(page.locator(".tc-editor-command-menu:visible")).toHaveCount(0);
+		await expect.poll(() => page.evaluate(() => $tw.wiki.getTiddlerText("ItalicSlashEscape"))).toBe("Some //italic text// here");
 	});
 
 	test("should convert `code` to code mark", async ({ page }) => {

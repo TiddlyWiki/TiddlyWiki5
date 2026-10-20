@@ -34,6 +34,11 @@ tags: $:/tags/Stylesheet
 	outline: none;
 }
 
+.tc-editor-command-menu-search::placeholder {
+	color: <<colour foreground>>;
+	opacity: 1;
+}
+
 .tc-editor-command-menu-item:hover,
 .tc-editor-command-menu-item-selected {
 	background-color: <<colour tiddler-editor-fields-even>>;

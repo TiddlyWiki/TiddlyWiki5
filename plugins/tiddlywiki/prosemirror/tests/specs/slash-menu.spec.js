@@ -7,6 +7,17 @@ const { setupProseMirrorTest, clearEditor } = require("../helpers.js");
 // Slash Menu
 // ─────────────────────────────────────────────────────────────────────────────
 test.describe("ProseMirror Editor - Slash Menu", () => {
+	test("slashes in code blocks remain literal input", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page,"CodeSlashLiteral",{
+			initialText: "```sh\n\n```", useReadmeTiddler: false
+		});
+		await editor.locator("pre code").click();
+		await page.keyboard.type("/usr/bin");
+		await expect(editor.locator("pre code")).toHaveText("/usr/bin");
+		await expect(page.locator(".tc-editor-command-menu:visible")).toHaveCount(0);
+		await expect.poll(() => page.evaluate(() => $tw.wiki.getTiddlerText("CodeSlashLiteral"))).toBe("```sh\n/usr/bin\n```");
+	});
+
 	test("should open, filter, and execute slash menu", async ({ page }) => {
 		const editor = await setupProseMirrorTest(page);
 		await clearEditor(editor);

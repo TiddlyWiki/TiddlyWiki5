@@ -41,6 +41,8 @@ Press `/` at the start of a text block, after whitespace, or with text selected.
 
 The menu includes block types, headings, lists, insertions, typed blocks and tiddlers tagged `$:/tags/TextEditor/Snippet`. A slash typed in ordinary text remains ordinary text.
 
+Typing a second `/` before entering a search query inserts `//` into the document, so WikiText italic input remains available. Slashes inside code blocks stay literal and do not open the menu.
+
 !! Block handle
 
 Move the pointer beside a top-level block to reveal its drag handle. Drag the handle to reorder the block. Click it to open a Notion-style block menu containing the operations valid for that block, including changing its type, inserting an adjacent block, duplicating and deleting.

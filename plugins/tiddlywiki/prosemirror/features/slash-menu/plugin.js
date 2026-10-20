@@ -69,12 +69,13 @@ function getAvailableCommands(view, options) {
 }
 
 function shouldOpen(view, event) {
-	if(!event || event.key !== "/" || event.altKey || event.ctrlKey || event.metaKey) {
+	if(!event || event.key !== "/" || event.altKey || event.ctrlKey || event.metaKey ||
+		event.isComposing || event.keyCode === 229 || view.composing) {
 		return false;
 	}
 	const selection = view.state.selection;
 	const parent = selection.$from.parent;
-	if(!parent.isTextblock || selection.$from.parent !== selection.$to.parent) {
+	if(!parent.isTextblock || parent.type.spec.code || selection.$from.parent !== selection.$to.parent) {
 		return false;
 	}
 	if(!selection.empty) {
@@ -154,15 +155,19 @@ function createSlashMenuPlugin(options) {
 				}
 			}
 
-			function cancelAndInsertSlash() {
+			function insertLiteral(text) {
 				const state = SlashMenuKey.getState(editorView.state);
 				if(!state || !state.open || typeof state.from !== "number" || typeof state.to !== "number") {
 					return;
 				}
-				let transaction = editorView.state.tr.insertText("/", state.from, state.to);
+				let transaction = editorView.state.tr.insertText(text, state.from, state.to);
 				transaction = transaction.setMeta(SlashMenuKey, { type: META_CLOSE }).scrollIntoView();
 				editorView.dispatch(transaction);
 				editorView.focus();
+			}
+
+			function cancelAndInsertSlash() {
+				insertLiteral("/");
 			}
 
 			const menu = new CommandMenuView({
@@ -177,6 +182,20 @@ function createSlashMenuPlugin(options) {
 					executeEditorCommand(createContext(editorView, options), command);
 				}
 			});
+
+			function handleSearchKeyDown(event) {
+				// WikiText uses // for italic. A second slash before any query
+				// escapes the trigger into the document, without coupling the
+				// reusable menu to WikiText syntax or bypassing IME composition.
+				if(event.key === "/" && menu.searchInput.value === "" &&
+					!event.altKey && !event.ctrlKey && !event.metaKey &&
+					!event.isComposing && event.keyCode !== 229) {
+					event.preventDefault();
+					event.stopPropagation();
+					insertLiteral("//");
+				}
+			}
+			menu.searchInput.addEventListener("keydown",handleSearchKeyDown);
 
 			function closeOnOutsidePointer(event) {
 				if(menu.root && !menu.root.contains(event.target)) {
@@ -219,6 +238,7 @@ function createSlashMenuPlugin(options) {
 				destroy: function() {
 					destroyed = true;
 					editorView.dom.ownerDocument.removeEventListener("mousedown", closeOnOutsidePointer);
+					menu.searchInput.removeEventListener("keydown",handleSearchKeyDown);
 					menu.destroy();
 				}
 			};

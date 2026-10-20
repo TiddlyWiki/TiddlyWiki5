@@ -32,10 +32,11 @@ async function loadTestPage(page) {
 	await expect(page.locator(".tc-site-title")).toHaveText("TiddlyWiki5");
 }
 
-async function createEditor(page, title, initialText, toolbarMarkup) {
+async function createEditor(page, title, initialText, toolbarMarkup, palette) {
 	await loadTestPage(page);
 	const harnessTitle = "Harness/" + title;
-	await page.evaluate(({ title, harnessTitle, initialText, toolbarMarkup }) => {
+	await page.evaluate(({ title, harnessTitle, initialText, toolbarMarkup, palette }) => {
+		if(palette) $tw.wiki.setText("$:/palette","text",null,"$:/palettes/" + palette);
 		$tw.wiki.addTiddler({
 			title: title,
 			text: initialText,
@@ -52,7 +53,7 @@ async function createEditor(page, title, initialText, toolbarMarkup) {
 			title: "$:/StoryList",
 			list: [harnessTitle].concat(storyList)
 		});
-	}, { title, harnessTitle, initialText, toolbarMarkup: toolbarMarkup || "" });
+	}, { title, harnessTitle, initialText, toolbarMarkup: toolbarMarkup || "", palette: palette || "" });
 	const editor = page.locator('.tc-tiddler-frame[data-tiddler-title="' + harnessTitle + '"] .ProseMirror').first();
 	await expect(editor).toBeVisible();
 	return editor;
@@ -79,6 +80,34 @@ async function createTwoEditors(page, firstTitle, secondTitle) {
 	return { harnessTitle, editors };
 }
 
+async function moveToBlockStart(editor) {
+	await editor.press("Home");
+	// Home updates the native caret before the asynchronous selectionchange
+	// reaches ProseMirror. Context-sensitive commands need that transition.
+	await expect.poll(() => editor.evaluate((root) => {
+		let offset = null;
+		function visit(widget) {
+			if(widget.engine && widget.engine.view && widget.engine.view.dom === root) {
+				offset = widget.engine.view.state.selection.$from.parentOffset;
+			}
+			(widget.children || []).forEach(visit);
+		}
+		visit($tw.rootWidget);
+		return offset;
+	})).toBe(0);
+}
+
+async function expectReadablePlaceholder(search) {
+	await expect.poll(async () => {
+		const colours = await search.evaluate((input) => ({
+			foreground: getComputedStyle(input,"::placeholder").color,
+			background: getComputedStyle(input).backgroundColor
+		}));
+		return contrastRatio(colours.foreground,colours.background);
+	}).toBeGreaterThanOrEqual(4.5);
+	await expect.poll(() => search.evaluate((input) => getComputedStyle(input,"::placeholder").opacity)).toBe("1");
+}
+
 test.describe("ProseMirror command surfaces", () => {
 	test("slash menu filters in a real input and executes a native command", async ({ page }) => {
 		const editor = await createEditor(page, "SlashCommandTest", "");
@@ -92,6 +121,7 @@ test.describe("ProseMirror command surfaces", () => {
 		await expect(search).toHaveAttribute("role", "combobox");
 		await expect(search).toHaveAttribute("aria-expanded", "true");
 		await expect(menu.locator(".tc-editor-command-menu-content")).toHaveAttribute("role", "listbox");
+		await expectReadablePlaceholder(search);
 		await search.fill("heading 2");
 		const headingCommand = menu.locator(".tc-editor-command-menu-item", { hasText: "Heading 2" });
 		await expect(headingCommand).toBeVisible();
@@ -121,6 +151,15 @@ test.describe("ProseMirror command surfaces", () => {
 		await page.keyboard.type("Visual heading");
 		await expect(editor.locator("h2")).toHaveText("Visual heading");
 		await expect.poll(() => page.evaluate(() => $tw.wiki.getTiddlerText("SlashCommandTest"))).toContain("!! Visual heading");
+	});
+
+	test("dark menu search placeholder remains readable", async ({ page }) => {
+		const editor = await createEditor(page,"DarkMenuContrastTest","","","Twilight");
+		await editor.click();
+		await editor.press("Slash");
+		const search = page.locator(".tc-editor-command-menu:visible .tc-editor-command-menu-search");
+		await expect(search).toBeVisible();
+		await expectReadablePlaceholder(search);
 	});
 
 	test("cancelling the slash menu inserts a literal slash", async ({ page }) => {
@@ -287,7 +326,7 @@ test.describe("ProseMirror command surfaces", () => {
 		const second = editors.nth(1);
 
 		await first.locator("p").click();
-		await page.keyboard.press("Home");
+		await moveToBlockStart(first);
 		await first.press("Slash");
 		const menu = page.locator(".tc-editor-command-menu:visible");
 		await menu.locator(".tc-editor-command-menu-search").fill("heading 1");
@@ -300,7 +339,7 @@ test.describe("ProseMirror command surfaces", () => {
 		}))).toEqual({ first: "! First", second: "Second" });
 
 		await second.locator("p").click();
-		await page.keyboard.press("Home");
+		await moveToBlockStart(second);
 		await second.press("Slash");
 		await expect(page.locator(".tc-editor-command-menu:visible")).toHaveCount(1);
 		await page.evaluate((title) => {
