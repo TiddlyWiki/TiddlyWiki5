@@ -1,0 +1,12 @@
+change-category: internal
+change-type: performance
+created: 20260711021259000
+description: getTiddlerBacklinks() scans the store several times faster when no index is available
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9732
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9732
+type: text/vnd.tiddlywiki
+
+* The non-indexed fallback scan of `getTiddlerBacklinks()` iterates the store directly instead of building and sorting a full tiddler list, making `backlinks[]` several times faster on large wikis when indexers are disabled; system tiddlers stay excluded as sources, matching the indexed path
