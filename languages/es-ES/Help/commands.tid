@@ -1,13 +1,13 @@
 title: $:/language/Help/commands
-description: Ejecuta instrucciones devueltas por un filtro
+description: Executa ordres retornades d'un filtre
 
-Ejecuta secuencialmente las instrucciones devueltas por un filtro
+Executa seqüencialment els tokens d'ordres retornats d'un filtre
 
 ```
---commands <filter>
+--commands <filtre>
 ```
 
-Ejemplos
+Exemples
 
 ```
 --commands "[enlist:raw{$:/build-commands-as-text}]"

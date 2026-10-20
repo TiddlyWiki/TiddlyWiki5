@@ -23,8 +23,8 @@ tiddlerfield: Define el comportamiento de un campo individual
 tiddlermethod: Añade métodos al prototipo `$tw.Tiddler`
 upgrader: Aplica la actualización a los tiddlers durante el proceso de actualización/importación.
 utils: Añade métodos a `$tw.utils`
-utils-browser: Añade métodos específicos del navegador a `$tw.utils`.
+utils-browser: Afegeix mètodes específics del navegador a `$tw.utils`.
 utils-node: Añade métodos específicos de Node.js a `$tw.utils`
-widget: Encapsula la representación y recarga de ''DOM''
+widget: Els ginys encapsulen el renderitzat i l'actualització del DOM.
 wikimethod: Añade métodos a `$tw.Wiki`
 wikirule: Reglas individuales del intérprete principal de WikiText

@@ -1,0 +1,34 @@
+title: $:/changenotes/5.5.0/#10014
+created: 20260906223932000
+modified: 20260906223932000
+description: Variable names may contain a colon in call and multi-valued variable syntax
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10014
+github-contributors: pmario
+
+A variable name may contain a colon in the `<<...>>` call syntax: standalone, with named parameters using either separator, as a nested call, and as a widget attribute value.
+
+```
+\procedure obj:plain() Hello
+\procedure greet:person(name) Hello <<name>>
+\procedure obj:host(a) [<<a>>]
+
+<<obj:plain>>
+<<greet:person name:"world">>
+<<greet:person name="world">>
+<<obj:host a=<<obj:plain>>>>
+<div data-x=<<obj:plain>> ></div>
+```
+
+An `((...))` multi-valued variable reference used as a widget attribute value accepts the same names as the inline syntax:
+
+```
+<$let my:list={{{ [range[3]] }}}>
+<$text text=((my:list))/>
+</$let>
+```
+
+Fixed issue: [[#10013|https://github.com/TiddlyWiki/TiddlyWiki5/issues/10013]]

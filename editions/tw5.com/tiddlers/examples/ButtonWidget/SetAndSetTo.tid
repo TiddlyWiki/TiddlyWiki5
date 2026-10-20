@@ -1,0 +1,24 @@
+title: ButtonWidget/Example/SetAndSetTo
+description: Assign a value to a tiddler with the set and setTo attributes used together
+modified: 20260724235815000
+tags: [[$:/tags/wiki-test-spec]]
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+`set` and `setTo` work as a pair to assign a value when the button is clicked:
+
+* `set` names the storage location, a TextReference
+* `setTo` is the value written to it
+
+`set` points at the location //itself//, so it takes no curly brackets, unlike an ordinary transclusion.
+
+Click a colour to write it to the state tiddler shown below.
++
+title: Output
+
+<$button set="$:/state/colour" setTo="red">Red</$button>
+<$button set="$:/state/colour" setTo="green">Green</$button>
+<$button set="$:/state/colour" setTo="blue">Blue</$button>
+
+Selected colour: <$text text={{$:/state/colour}}/>

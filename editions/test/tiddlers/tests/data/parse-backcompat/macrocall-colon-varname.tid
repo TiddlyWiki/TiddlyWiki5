@@ -1,0 +1,13 @@
+title: Parse/BackCompat/MacrocallColonVarName
+description: Macro call variable name may contain a colon (#10013)
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure object:method() VAL
+<<object:method>>
++
+title: ExpectedResult
+
+<p>VAL</p>
