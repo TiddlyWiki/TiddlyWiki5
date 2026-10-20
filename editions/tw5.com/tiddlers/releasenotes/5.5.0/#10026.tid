@@ -3,10 +3,10 @@ change-type: feature
 created: 20260914140000000
 description: Added the Hard Line Breaks plugin: two spaces before the line end make a hard line break
 github-contributors: pmario
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/#TODO
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10026
 modified: 20260914140000000
 release: 5.5.0
 tags: $:/tags/ChangeNote
-title: $:/changenotes/5.5.0/#TODO
+title: $:/changenotes/5.5.0/#10026
 
 Added the [[Hard Line Breaks Plugin]]: two spaces, or two spaces and a backslash, before the line end make a hard line break anywhere, list items and headings included, as in CommonMark. The rule gives editors that write WikiText a readable form for a line break. See [[the discussion|https://github.com/TiddlyWiki/TiddlyWiki5/issues/10025]].

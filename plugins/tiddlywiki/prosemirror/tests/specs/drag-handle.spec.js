@@ -45,8 +45,12 @@ test.describe("ProseMirror Editor - Drag Handle", () => {
 		await expect(dragHandle).toBeVisible();
 		await expect(dragHandle).toHaveAttribute("draggable", "true");
 
-		// Hide on mouse leave
-		await page.mouse.move(0, 0);
+		// The leading handle gutter may include (0,0) after scrollIntoView.
+		// Move explicitly beyond the editor's trailing hit zone instead.
+		const editorBox = await editor.boundingBox();
+		const outsideX = page.viewportSize().width - 1;
+		expect(outsideX).toBeGreaterThan(editorBox.x + editorBox.width + 24);
+		await page.mouse.move(outsideX, 0);
 		await page.waitForTimeout(300);
 		await expect(dragHandle).not.toBeVisible();
 	});
@@ -70,6 +74,20 @@ test.describe("ProseMirror Editor - Drag Handle", () => {
 		await expect(dragHandle).toBeVisible();
 	});
 
+	test("an earlier mouse leave must not hide a newly shown handle", async ({ page }) => {
+		const editor = await setupProseMirrorTest(page,null,{
+			initialText: "First paragraph\n\nSecond paragraph"
+		});
+		await editor.locator("p").first().hover();
+		await editor.dispatchEvent("mouseleave", { relatedTarget: null });
+		await editor.locator("p").last().hover();
+		await page.waitForTimeout(250);
+		const handle = page.locator(".tc-prosemirror-drag-handle:visible");
+		await expect(handle).toBeVisible();
+		await handle.click();
+		await expect(page.locator(".tc-editor-command-menu:visible")).toBeVisible();
+	});
+
 	test("should show drag handle for typed block nodeviews", async ({ page }) => {
 		const editor = await setupProseMirrorTest(page, null, {
 			initialText: "$$$text/x-markdown\n# Heading\n$$$"
@@ -90,7 +108,7 @@ test.describe("ProseMirror Editor - Drag Handle", () => {
 		await expect(dragHandle).toBeVisible();
 		await dragHandle.click();
 		await page.waitForTimeout(200);
-		await expect(page.locator(".tc-prosemirror-block-menu")).toBeVisible();
+		await expect(page.locator(".tc-editor-command-menu:visible")).toBeVisible();
 	});
 
 	test("block menu should include typed-block commands", async ({ page }) => {
@@ -98,10 +116,12 @@ test.describe("ProseMirror Editor - Drag Handle", () => {
 		await editor.locator("p").first().hover();
 		await page.waitForTimeout(300);
 		await page.locator(".tc-prosemirror-drag-handle").click();
-		const blockMenu = page.locator(".tc-prosemirror-block-menu");
+		const blockMenu = page.locator(".tc-editor-command-menu:visible");
 		await expect(blockMenu).toBeVisible();
-		await blockMenu.locator(".tc-prosemirror-block-menu-search").fill("markdown");
-		await expect(blockMenu.locator(".tc-prosemirror-block-menu-item", { hasText: "$$$ Markdown" })).toBeVisible();
+		await blockMenu.locator(".tc-editor-command-menu-search").fill("markdown");
+		await expect(blockMenu.locator(".tc-editor-command-menu-item", { hasText: "$$$ Markdown" })).toBeVisible();
+		await blockMenu.locator(".tc-editor-command-menu-item", { hasText: "$$$ Markdown" }).click();
+		await expect(editor.locator(".pm-nodeview-typedblock textarea.pm-nodeview-editor")).toHaveValue("Test paragraph");
 	});
 
 	test("block menu should insert a paragraph below the current block", async ({ page }) => {
@@ -113,10 +133,10 @@ test.describe("ProseMirror Editor - Drag Handle", () => {
 		await firstParagraph.hover();
 		await page.waitForTimeout(300);
 		await page.locator(".tc-prosemirror-drag-handle").click();
-		const blockMenu = page.locator(".tc-prosemirror-block-menu");
+		const blockMenu = page.locator(".tc-editor-command-menu:visible");
 		await expect(blockMenu).toBeVisible();
 		await expect(blockMenu).toContainText("Insert block below");
-		await blockMenu.locator(".tc-prosemirror-block-menu-item", { hasText: "Insert block below" }).click();
+		await blockMenu.locator(".tc-editor-command-menu-item", { hasText: "Insert block below" }).click();
 		await page.keyboard.type("After first paragraph");
 		await expect(editor.locator("p").nth(1)).toContainText("After first paragraph");
 	});
@@ -130,10 +150,10 @@ test.describe("ProseMirror Editor - Drag Handle", () => {
 		await secondParagraph.hover();
 		await page.waitForTimeout(300);
 		await page.locator(".tc-prosemirror-drag-handle").click();
-		const blockMenu = page.locator(".tc-prosemirror-block-menu");
+		const blockMenu = page.locator(".tc-editor-command-menu:visible");
 		await expect(blockMenu).toBeVisible();
 		await expect(blockMenu).toContainText("Insert block above");
-		await blockMenu.locator(".tc-prosemirror-block-menu-item", { hasText: "Insert block above" }).click();
+		await blockMenu.locator(".tc-editor-command-menu-item", { hasText: "Insert block above" }).click();
 		await page.keyboard.type("Between first and second");
 		const paragraphs = await editor.locator("p").allTextContents();
 		expect(paragraphs[0]).toContain("First paragraph");

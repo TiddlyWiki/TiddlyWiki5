@@ -24,22 +24,22 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 	}
 
 	_createDOM() {
-		const wrap = document.createElement("span");
+		const wrap = this.document.createElement("span");
 		wrap.className = "pm-nodeview pm-nodeview-image";
 		wrap.draggable = false;
 
 		const header = this.createHeader(this.node.attrs.twSource || this.constructor.getLanguageString("ImagePicker/Title", "Image"));
-		const contentContainer = document.createElement("div");
+		const contentContainer = this.document.createElement("div");
 		contentContainer.className = "pm-nodeview-content pm-image-nodeview-content";
 
-		const img = document.createElement("img");
+		const img = this.document.createElement("img");
 		img.className = "pm-image-nodeview-img";
 		img.draggable = false;
 		this.constructor._applyImgAttrs(img, this.node.attrs);
 
 		contentContainer.appendChild(img);
 
-		const resizeHandle = document.createElement("div");
+		const resizeHandle = this.document.createElement("div");
 		resizeHandle.className = "pm-image-resize-handle";
 		resizeHandle.draggable = false;
 		resizeHandle.contentEditable = false;
@@ -92,7 +92,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		this._renderImagePicker();
 
 		const firstInput = form.querySelector(".pm-nodeview-form-input");
-		if(firstInput) setTimeout(() => { firstInput.focus(); }, 0);
+		if(firstInput) this.scheduleTimeout(() => { firstInput.focus(); });
 	}
 
 	renderViewMode() {
@@ -186,10 +186,10 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 	}
 
 	_renderImagePicker() {
-		const pickerWrap = document.createElement("div");
+		const pickerWrap = this.document.createElement("div");
 		pickerWrap.className = "pm-image-picker-wrap pm-image-nodeview-picker";
 
-		const pickerBody = document.createElement("div");
+		const pickerBody = this.document.createElement("div");
 		pickerBody.className = "pm-image-picker-body";
 		pickerWrap.appendChild(pickerBody);
 
@@ -198,7 +198,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		if(this.parentWidget) {
 			const nodeViewId = this.getNodeViewId();
 			const safeId = nodeViewId.replace(/[^a-zA-Z0-9_-]/g, "");
-			const pickerWikitext = '<<image-picker actions:"<$action-sendmessage $message=\'tm-prosemirror-image-picked-nodeview\' nodeViewId=\'' + safeId + '\' imageTitle=<<imageTitle>>/>">>'; 
+			const pickerWikitext = '<<image-picker actions:"<$action-sendmessage $message=\'tm-prosemirror-image-picked-nodeview\' nodeViewId=\'' + safeId + '\' imageTitle=<<imageTitle>>/>">>';
 
 			const pickerTree = this.parentWidget.wiki.parseText("text/vnd.tiddlywiki", pickerWikitext).tree;
 			const WidgetBase = require("$:/core/modules/widgets/widget.js").widget;
@@ -207,7 +207,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 				children: pickerTree
 			}, {
 				parentWidget: this.parentWidget,
-				document: document,
+				document: this.document,
 				wiki: this.parentWidget.wiki
 			});
 			this.imagePickerWidget.render(pickerBody, null);
@@ -215,7 +215,7 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 	}
 
 	_setupResizeHandler() {
-		
+		const ownerDocument = this.document;
 		let startX, startY, startWidth, startHeight;
 		const self = this;
 
@@ -231,29 +231,29 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		}
 
 		function onPointerUp() {
-			document.removeEventListener("mousemove", onPointerMove);
-			document.removeEventListener("mouseup", onPointerUp);
+			ownerDocument.removeEventListener("mousemove", onPointerMove);
+			ownerDocument.removeEventListener("mouseup", onPointerUp);
 			self._activeResizeListeners = null;
 			commitResize();
 		}
 
 		function onTouchEnd() {
-			document.removeEventListener("touchmove", onTouchMove);
-			document.removeEventListener("touchend", onTouchEnd);
+			ownerDocument.removeEventListener("touchmove", onTouchMove);
+			ownerDocument.removeEventListener("touchend", onTouchEnd);
 			self._activeResizeListeners = null;
 			commitResize();
 		}
 
 		// Save references so destroy() can clean up mid-drag
 		this._resizeCleanup = { onPointerMove, onPointerUp, onTouchMove, onTouchEnd };
-		
+
 		this.resizeHandle.addEventListener("mousedown", (e) => {
 			e.preventDefault();
 			e.stopPropagation();
 			startResize(e.clientX, e.clientY);
 			self._activeResizeListeners = { mouse: true };
-			document.addEventListener("mousemove", onPointerMove);
-			document.addEventListener("mouseup", onPointerUp);
+			ownerDocument.addEventListener("mousemove", onPointerMove);
+			ownerDocument.addEventListener("mouseup", onPointerUp);
 		});
 
 		// Touch support for mobile devices
@@ -263,8 +263,8 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 			const touch = e.touches[0];
 			startResize(touch.clientX, touch.clientY);
 			self._activeResizeListeners = { touch: true };
-			document.addEventListener("touchmove", onTouchMove, { passive: false });
-			document.addEventListener("touchend", onTouchEnd);
+			ownerDocument.addEventListener("touchmove", onTouchMove, { passive: false });
+			ownerDocument.addEventListener("touchend", onTouchEnd);
 		});
 
 		function startResize(x, y) {
@@ -309,10 +309,10 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 		// Clean up any active resize document listeners (handles mid-drag destroy)
 		if(this._activeResizeListeners && this._resizeCleanup) {
 			const rc = this._resizeCleanup;
-			document.removeEventListener("mousemove", rc.onPointerMove);
-			document.removeEventListener("mouseup", rc.onPointerUp);
-			document.removeEventListener("touchmove", rc.onTouchMove);
-			document.removeEventListener("touchend", rc.onTouchEnd);
+			this.document.removeEventListener("mousemove", rc.onPointerMove);
+			this.document.removeEventListener("mouseup", rc.onPointerUp);
+			this.document.removeEventListener("touchmove", rc.onTouchMove);
+			this.document.removeEventListener("touchend", rc.onTouchEnd);
 			this._activeResizeListeners = null;
 		}
 		this._resizeCleanup = null;
@@ -321,4 +321,3 @@ class ImageNodeView extends BaseSourceEditableNodeView {
 }
 
 exports.ImageNodeView = ImageNodeView;
-

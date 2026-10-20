@@ -110,13 +110,14 @@ test.describe("ProseMirror Editor - Source Preview Tab", () => {
 // Markdown Tiddlers
 // ─────────────────────────────────────────────────────────────────────────────
 test.describe("ProseMirror Editor - Markdown Tiddlers", () => {
-	test("should render markdown tiddlers through the markdown parser", async ({ page }) => {
+	test("should keep unsupported Markdown source-only", async ({ page }) => {
 		const editor = await setupProseMirrorTest(page, null, {
 			contentType: "text/markdown",
 			initialText: "# Heading\n\n**bold**",
 			useReadmeTiddler: false
 		});
-		await expect(editor.locator("h1")).toContainText("Heading");
-		await expect(editor.locator("strong")).toContainText("bold");
+		await expect(editor.locator("h1")).toHaveCount(0);
+		await expect(editor.locator("strong")).toHaveCount(0);
+		await expect(editor.locator(".pm-nodeview-opaque pre")).toHaveText("# Heading\n\n**bold**");
 	});
 });

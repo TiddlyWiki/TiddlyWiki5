@@ -139,6 +139,13 @@
 				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/prosemirror/lib/prosemirror-tables.css",
 				"tags": "[[$:/tags/Stylesheet]]"
-			}		}
+			}
+		},{
+			"file": "THIRD-PARTY-NOTICES",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/prosemirror/third-party-notices"
+			}
+		}
 	]
 }

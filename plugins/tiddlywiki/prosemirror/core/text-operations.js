@@ -11,8 +11,10 @@ and maps them to ProseMirror commands.
 
 "use strict";
 
-const pmCommands = require("prosemirror-commands");
-const flatListCommands = require("prosemirror-flat-list");
+const {
+	executeEditorCommand,
+	createCommand
+} = require("$:/plugins/tiddlywiki/prosemirror/core/editor-commands.js");
 
 const MARK_MAP = {
 	"''": "strong",
@@ -60,95 +62,88 @@ function handleTextOperation(engine, event) {
 	if(!engine.view) return false;
 	const { param, paramObject: paramObj = {} } = event;
 	const { schema, view } = engine;
-	const { state } = view;
-	const dispatch = view.dispatch.bind(view);
+	const commandContext = {
+		view: view,
+		wiki: engine.wiki,
+		engine: engine,
+		editorType: "prosemirror",
+		contentType: engine.type || "text/vnd.tiddlywiki"
+	};
 
 	if(param === "wrap-selection") {
 		const markName = wrapSelectionToMark(paramObj.prefix, paramObj.suffix);
 		if(markName && schema.marks[markName]) {
-			pmCommands.toggleMark(schema.marks[markName])(state, dispatch);
-			view.focus();
-			return true;
+			return executeEditorCommand(commandContext, createCommand("toggle-mark", { mark: markName }));
 		}
 		if(paramObj.prefix === "[[" && paramObj.suffix === "]]") {
 			return handleMakeLink(view, schema, event.paramObject || {});
 		}
-		return false;
+		if(paramObj.prefix === "{{" && paramObj.suffix === "}}") {
+			return executeEditorCommand(commandContext, createCommand("wrap-transclusion"));
+		}
+		return executeEditorCommand(commandContext, createCommand("wrap-wikitext", {
+			prefix: paramObj.prefix,
+			suffix: paramObj.suffix,
+			trimSelection: paramObj.trimSelection
+		}));
 	}
 
 	if(param === "prefix-lines" && paramObj.character === "!") {
 		const level = parseInt(paramObj.count, 10) || 1;
 		if(level >= 1 && level <= 6 && schema.nodes.heading) {
-			const currentNode = state.selection.$from.parent;
-			if(currentNode.type === schema.nodes.heading && currentNode.attrs.level === level) {
-				pmCommands.setBlockType(schema.nodes.paragraph)(state, dispatch);
-			} else {
-				pmCommands.setBlockType(schema.nodes.heading, { level })(state, dispatch);
-			}
-			view.focus();
-			return true;
+			return executeEditorCommand(commandContext, createCommand("toggle-heading", { level: level }));
 		}
 	}
 
 	if(param === "prefix-lines" && paramObj.character === "*" && schema.nodes.list) {
-		flatListCommands.createToggleListCommand({ kind: "bullet" })(state, dispatch);
-		view.focus();
-		return true;
+		return executeEditorCommand(commandContext, createCommand("toggle-list", { kind: "bullet" }));
 	}
 
 	if(param === "prefix-lines" && paramObj.character === "#" && schema.nodes.list) {
-		flatListCommands.createToggleListCommand({ kind: "ordered" })(state, dispatch);
-		view.focus();
-		return true;
+		return executeEditorCommand(commandContext, createCommand("toggle-list", { kind: "ordered" }));
+	}
+	if(param === "prefix-lines") {
+		return executeEditorCommand(commandContext, createCommand("prefix-wikitext-lines", {
+			character: paramObj.character,
+			count: paramObj.count
+		}));
 	}
 
-	if(param === "wrap-lines" && paramObj.prefix === "```" && paramObj.suffix === "```" && schema.nodes.code_block) {
-		const currentNode = state.selection.$from.parent;
-		if(currentNode.type === schema.nodes.code_block) {
-			pmCommands.setBlockType(schema.nodes.paragraph)(state, dispatch);
-		} else {
-			pmCommands.setBlockType(schema.nodes.code_block)(state, dispatch);
-		}
-		view.focus();
-		return true;
+	const linePrefix = typeof paramObj.prefix === "string" ? paramObj.prefix.replace(/^\r?\n/, "") : "";
+	if(param === "wrap-lines" && linePrefix === "```" && paramObj.suffix === "```" && schema.nodes.code_block) {
+		return executeEditorCommand(commandContext, createCommand("toggle-code-block"));
 	}
 
-	if(param === "wrap-lines" && paramObj.prefix === "<<<" && paramObj.suffix === "<<<" && schema.nodes.blockquote) {
-		const $from = state.selection.$from;
-		let insideBlockquote = false;
-		for(let d = $from.depth; d > 0; d--) {
-			if($from.node(d).type === schema.nodes.blockquote) {
-				pmCommands.lift(state, dispatch);
-				view.focus();
-				insideBlockquote = true;
-				break;
-			}
-		}
-		if(!insideBlockquote) {
-			pmCommands.wrapIn(schema.nodes.blockquote)(state, dispatch);
-			view.focus();
-		}
-		return true;
+	if(param === "wrap-lines" && linePrefix === "<<<" && paramObj.suffix === "<<<" && schema.nodes.blockquote) {
+		return executeEditorCommand(commandContext, createCommand("toggle-blockquote"));
+	}
+	if(param === "wrap-lines") {
+		return executeEditorCommand(commandContext, createCommand("wrap-wikitext-lines", {
+			prefix: paramObj.prefix,
+			suffix: paramObj.suffix
+		}));
 	}
 
 	if(param === "make-link") return handleMakeLink(view, schema, event.paramObject || {});
 
 	if(param === "insert-text" && paramObj.text !== undefined) {
-		view.dispatch(state.tr.insertText(paramObj.text));
-		view.focus();
-		return true;
+		return executeEditorCommand(commandContext, createCommand("insert-wikitext", { text: paramObj.text }));
 	}
 
 	if(param === "replace-selection" && paramObj.text !== undefined) {
-		view.dispatch(state.tr.replaceSelectionWith(schema.text(paramObj.text), false));
-		view.focus();
-		return true;
+		return executeEditorCommand(commandContext, createCommand("insert-wikitext", { text: paramObj.text }));
 	}
 
 	if(param === "replace-all" && paramObj.text !== undefined) {
-		engine.updateDomNodeText(paramObj.text);
-		view.focus();
-		return true;
+		return executeEditorCommand(commandContext, createCommand("replace-all-wikitext", { text: paramObj.text }));
+	}
+
+	if(param === "excise") {
+		return executeEditorCommand(commandContext, createCommand("excise-selection", paramObj));
+	}
+
+	if(param === "save-selection") {
+		return executeEditorCommand(commandContext, createCommand("save-selection", paramObj));
 	}
 
 	if(param === "focus-editor") {

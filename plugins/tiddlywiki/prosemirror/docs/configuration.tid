@@ -4,43 +4,33 @@ tags: $:/plugins/tiddlywiki/prosemirror/docs
 
 ! Configuration
 
-All ProseMirror settings are available under ''Control Panel > Settings > ProseMirror''.
+The user-facing settings are under ''Control Panel > Settings > ProseMirror''.
 
-!! Markdown Shortcuts
+!! Markdown-style input shortcuts
 
-When enabled, the editor recognises Markdown-style shortcuts:
+Set `$:/config/prosemirror/markdown-shortcuts` to `yes` to enable Markdown-style input rules. The default is `no`, including for Markdown-like content types. The setting changes how input is recognised; saved `text/vnd.tiddlywiki` content is still WikiText.
 
-* `**bold**` → ''bold''
-* `*italic*` → //italic//
-* `~~strike~~` → ~~strike~~
-* <code>``code``</code> → `code`
-* `# Heading` → heading
-* `---` → horizontal rule
-* <code>```</code> → code block
+Enabled rules include Markdown-style headings, blockquotes, lists, code blocks, horizontal rules and common inline marks. Definition term and description triggers are part of these optional input rules.
 
-Output is always WikiText. Global enable/disable is controlled by `$:/config/prosemirror/markdown-shortcuts`, and Markdown tiddlers can auto-enable these shortcuts by default via `$:/config/prosemirror/markdown-shortcuts/auto-for-markdown`.
+!! Visual widget blocks
 
-!! Widget Blocks
+Set `$:/config/prosemirror/enable-widget-blocks` to `yes` to render supported widget or macro paragraphs as visual blocks. The default is `yes`. Source-backed fallback nodes still protect unsupported syntax.
 
-Visual rendering of `<<macro>>` syntax can be toggled via `$:/config/prosemirror/enable-widget-blocks`.
+`$:/config/prosemirror/widget-block/auto-focus` controls whether entering a widget block's source-edit mode automatically focuses its textarea. The default is `yes`.
 
-!! Autocomplete Triggers
+!! Autocomplete triggers
 
-The characters that open the autocomplete dropdown are configurable:
+Trigger values are TiddlyWiki string arrays, so multiple prefixes and prefixes containing non-ASCII characters are supported.
 
-|!Type |!Default triggers |!Config tiddler |
+|!Type |!Default triggers |!Configuration tiddler |
 |Links |`[[` `【【` |`$:/config/prosemirror/autocomplete/link-triggers` |
 |Macros |`<<` `《《` |`$:/config/prosemirror/autocomplete/macro-triggers` |
 |Transclusions |`{{` `「『` |`$:/config/prosemirror/autocomplete/transclusion-triggers` |
+|Definition terms |`;` `；` |`$:/config/prosemirror/def-term-triggers` |
+|Definition descriptions |`:` `：` |`$:/config/prosemirror/def-desc-triggers` |
 
-!! Keyboard Shortcuts
+!! Keyboard shortcuts
 
-Each toolbar action has a configurable shortcut via its EditorAction tiddler. Set the `keyboard-shortcut` field, or use `none` to disable.
+Shortcut overrides are stored at `$:/config/prosemirror/shortcuts/<action>`. Leave an override empty to use its default or set it to `none` to disable that binding. The settings tab exposes the principal formatting, history, heading, block and list shortcuts.
 
-|!Action |!Default |
-|Bold |Mod-b |
-|Italic |Mod-i |
-|Heading 1–3 |Shift-Ctrl-1 to 3 |
-|Blockquote |Ctrl-> |
-|Code block |Shift-Ctrl-\\ |
-|Horizontal rule |Mod-_ |
+The shortcut syntax is the one accepted by `prosemirror-keymap`, for example `Mod-b`, `Shift-Ctrl-2` or `none`.

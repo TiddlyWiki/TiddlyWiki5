@@ -14,22 +14,23 @@ class CodeBlockNodeView {
 		this.node = node;
 		this.view = view;
 		this.getPos = getPos;
+		this.document = view.dom.ownerDocument;
 
-		const container = document.createElement("div");
+		const container = this.document.createElement("div");
 		container.className = "pm-nodeview pm-nodeview-codeblock";
 
-		const header = document.createElement("span");
+		const header = this.document.createElement("span");
 		header.className = "pm-nodeview-header";
 		header.setAttribute("contenteditable", "false");
 
-		const title = document.createElement("span");
+		const title = this.document.createElement("span");
 		title.className = "pm-nodeview-title";
 		title.textContent = "Code";
 		header.appendChild(title);
 
-		const buttons = document.createElement("span");
+		const buttons = this.document.createElement("span");
 		buttons.className = "pm-nodeview-buttons";
-		const sourceBtn = document.createElement("button");
+		const sourceBtn = this.document.createElement("button");
 		sourceBtn.className = "pm-nodeview-btn pm-nodeview-btn-source";
 		sourceBtn.type = "button";
 		sourceBtn.title = "Edit as source";
@@ -44,8 +45,8 @@ class CodeBlockNodeView {
 		header.appendChild(buttons);
 		container.appendChild(header);
 
-		const pre = document.createElement("pre");
-		const code = document.createElement("code");
+		const pre = this.document.createElement("pre");
+		const code = this.document.createElement("code");
 		pre.appendChild(code);
 		container.appendChild(pre);
 
@@ -68,7 +69,11 @@ class CodeBlockNodeView {
 	}
 
 	stopEvent(event) {
-		return !!(this && event && event.target && event.target.closest && event.target.closest(".pm-nodeview-header, .pm-nodeview-btn"));
+		if(!event || !event.target || !this.dom || !this.dom.contains(event.target) || typeof event.target.closest !== "function") {
+			return false;
+		}
+		const control = event.target.closest(".pm-nodeview-header, .pm-nodeview-btn");
+		return !!(control && this.dom.contains(control));
 	}
 }
 

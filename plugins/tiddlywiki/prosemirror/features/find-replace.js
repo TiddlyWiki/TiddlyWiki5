@@ -17,14 +17,14 @@ const TextSelection = require("prosemirror-state").TextSelection;
 
 const FIND_REPLACE_KEY = new PluginKey("tw-find-replace");
 
-function getSvgIcon(tiddlerTitle, size) {
+function getSvgIcon(ownerDocument, tiddlerTitle, size) {
 	size = size || "1em";
 	try {
 		const htmlStr = $tw.wiki.renderTiddler("text/html", tiddlerTitle, {
 			variables: { size: size }
 		});
 		if(!htmlStr) return null;
-		const container = document.createElement("div");
+		const container = ownerDocument.createElement("div");
 		container.innerHTML = htmlStr;
 		const svgEl = container.querySelector("svg");
 		if(svgEl) return svgEl;
@@ -165,6 +165,7 @@ class FindReplaceView {
 	constructor(editorView, wiki) {
 		this.view = editorView;
 		this.wiki = wiki;
+		this.document = editorView.dom.ownerDocument;
 		this.panel = null;
 		this.searchInput = null;
 		this.replaceInput = null;
@@ -173,15 +174,15 @@ class FindReplaceView {
 	}
 
 	buildPanel() {
-		const panel = document.createElement("div");
+		const panel = this.document.createElement("div");
 		panel.className = "tc-prosemirror-find-replace-panel";
 		panel.style.display = "none";
 
 		// Search row
-		const searchRow = document.createElement("div");
+		const searchRow = this.document.createElement("div");
 		searchRow.className = "tc-prosemirror-find-replace-row";
 
-		const searchInput = document.createElement("input");
+		const searchInput = this.document.createElement("input");
 		searchInput.type = "text";
 		searchInput.className = "tc-prosemirror-find-input";
 		searchInput.placeholder = this.wiki.getTiddlerText(
@@ -203,11 +204,11 @@ class FindReplaceView {
 		});
 		this.searchInput = searchInput;
 
-		const countLabel = document.createElement("span");
+		const countLabel = this.document.createElement("span");
 		countLabel.className = "tc-prosemirror-find-count";
 		this.countLabel = countLabel;
 
-		const prevBtn = document.createElement("button");
+		const prevBtn = this.document.createElement("button");
 		prevBtn.type = "button";
 		prevBtn.className = "tc-prosemirror-find-btn";
 		prevBtn.textContent = "▲";
@@ -215,7 +216,7 @@ class FindReplaceView {
 			"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/Previous", "Previous");
 		prevBtn.addEventListener("click", (e) => { e.preventDefault(); this.findPrev(); });
 
-		const nextBtn = document.createElement("button");
+		const nextBtn = this.document.createElement("button");
 		nextBtn.type = "button";
 		nextBtn.className = "tc-prosemirror-find-btn";
 		nextBtn.textContent = "▼";
@@ -223,7 +224,7 @@ class FindReplaceView {
 			"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/Next", "Next");
 		nextBtn.addEventListener("click", (e) => { e.preventDefault(); this.findNext(); });
 
-		const caseSensitiveBtn = document.createElement("button");
+		const caseSensitiveBtn = this.document.createElement("button");
 		caseSensitiveBtn.type = "button";
 		caseSensitiveBtn.className = "tc-prosemirror-find-btn tc-prosemirror-find-case-btn";
 		caseSensitiveBtn.textContent = "Aa";
@@ -240,12 +241,12 @@ class FindReplaceView {
 		});
 		this.caseSensitiveBtn = caseSensitiveBtn;
 
-		const closeBtn = document.createElement("button");
+		const closeBtn = this.document.createElement("button");
 		closeBtn.type = "button";
 		closeBtn.className = "tc-prosemirror-find-btn tc-prosemirror-find-close-btn";
-		const closeSvg = getSvgIcon("$:/core/images/close-button", "1em");
+		const closeSvg = getSvgIcon(this.document, "$:/core/images/close-button", "1em");
 		if(closeSvg) {
-			closeBtn.appendChild(document.importNode(closeSvg, true));
+			closeBtn.appendChild(this.document.importNode(closeSvg, true));
 		} else {
 			closeBtn.textContent = "\u00D7";
 		}
@@ -261,10 +262,10 @@ class FindReplaceView {
 		searchRow.appendChild(closeBtn);
 
 		// Replace row
-		const replaceRow = document.createElement("div");
+		const replaceRow = this.document.createElement("div");
 		replaceRow.className = "tc-prosemirror-find-replace-row";
 
-		const replaceInput = document.createElement("input");
+		const replaceInput = this.document.createElement("input");
 		replaceInput.type = "text";
 		replaceInput.className = "tc-prosemirror-replace-input";
 		replaceInput.placeholder = this.wiki.getTiddlerText(
@@ -275,14 +276,14 @@ class FindReplaceView {
 		});
 		this.replaceInput = replaceInput;
 
-		const replaceBtn = document.createElement("button");
+		const replaceBtn = this.document.createElement("button");
 		replaceBtn.type = "button";
 		replaceBtn.className = "tc-prosemirror-find-btn";
 		replaceBtn.textContent = this.wiki.getTiddlerText(
 			"$:/plugins/tiddlywiki/prosemirror/language/FindReplace/Replace", "Replace");
 		replaceBtn.addEventListener("click", (e) => { e.preventDefault(); this.replaceOne(); });
 
-		const replaceAllBtn = document.createElement("button");
+		const replaceAllBtn = this.document.createElement("button");
 		replaceAllBtn.type = "button";
 		replaceAllBtn.className = "tc-prosemirror-find-btn";
 		replaceAllBtn.textContent = this.wiki.getTiddlerText(

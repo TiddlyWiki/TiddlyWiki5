@@ -15,6 +15,10 @@ tags: $:/tags/Stylesheet
 
 /* === ProseMirror content area === */
 
+.ProseMirror.tw-prosemirror-empty::before {
+	color: <<colour muted-foreground>>;
+}
+
 .ProseMirror blockquote {
 	border-left-color: <<colour blockquote-bar>>;
 }
@@ -56,4 +60,3 @@ tags: $:/tags/Stylesheet
 .ProseMirror .pm-definition-list dd {
 	color: <<colour foreground>>;
 }
-

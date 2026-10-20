@@ -126,13 +126,15 @@ function createLinkClassesPlugin(wiki) {
 			let view = editorView;
 			let destroyed = false;
 			let pendingRefresh = false;
+			let refreshTimer = null;
 			updateLinkClasses(view, wiki);
 			const refreshLinkClasses = (changedTiddlers) => {
 				if(destroyed || pendingRefresh || !view || !hasRelevantLinkChange(view.state.doc, changedTiddlers)) {
 					return;
 				}
 				pendingRefresh = true;
-				setTimeout(() => {
+				refreshTimer = view.dom.ownerDocument.defaultView.setTimeout(() => {
+					refreshTimer = null;
 					pendingRefresh = false;
 					if(destroyed || !view) {
 						return;
@@ -150,6 +152,10 @@ function createLinkClassesPlugin(wiki) {
 				},
 				destroy() {
 					destroyed = true;
+					if(refreshTimer !== null) {
+						view.dom.ownerDocument.defaultView.clearTimeout(refreshTimer);
+						refreshTimer = null;
+					}
 					if(wiki && wiki.removeEventListener) {
 						wiki.removeEventListener("change", refreshLinkClasses);
 					}

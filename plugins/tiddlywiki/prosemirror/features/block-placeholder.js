@@ -40,8 +40,8 @@ function buildPlaceholderText(wiki) {
 }
 
 function makePlaceholderWidget(text, pos) {
-	return Decoration.widget(pos, () => {
-		const span = document.createElement("span");
+	return Decoration.widget(pos, (view) => {
+		const span = view.dom.ownerDocument.createElement("span");
 		span.className = "tc-prosemirror-block-placeholder";
 		span.textContent = text;
 		return span;

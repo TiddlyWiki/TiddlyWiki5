@@ -21,7 +21,7 @@ module.exports = function paragraph(builders, node) {
 		return factory.blankLine();
 	}
 	// A paragraph holding nothing but a macro call is the call itself at block level
-	if(node.content.length === 1 && node.content[0].type === "text") {
+	if(node.content.length === 1 && node.content[0].type === "text" && typeof node.content[0].text === "string") {
 		const parsed = parseWidget ? parseWidget(node.content[0].text.trim()) : null;
 		if(parsed) {
 			const parsedAttrs = parsed.attributes || {};

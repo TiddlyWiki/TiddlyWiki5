@@ -20,21 +20,22 @@ class HardLineBreaksNodeView {
 		this.node = node;
 		this.view = view;
 		this.getPos = getPos;
+		this.document = view.dom.ownerDocument;
 
-		const container = document.createElement("div");
+		const container = this.document.createElement("div");
 		container.className = "pm-nodeview pm-nodeview-hardbreaks";
 
 		// Label badge — shows on hover via .pm-nodeview-header
-		const label = document.createElement("span");
+		const label = this.document.createElement("span");
 		label.className = "pm-nodeview-header";
 		label.setAttribute("contenteditable", "false");
-		const title = document.createElement("span");
+		const title = this.document.createElement("span");
 		title.className = "pm-nodeview-title";
 		title.textContent = '"""  Hard Line Breaks  """';
 		label.appendChild(title);
-		const buttons = document.createElement("span");
+		const buttons = this.document.createElement("span");
 		buttons.className = "pm-nodeview-buttons";
-		const sourceBtn = document.createElement("button");
+		const sourceBtn = this.document.createElement("button");
 		sourceBtn.className = "pm-nodeview-btn pm-nodeview-btn-source";
 		sourceBtn.type = "button";
 		sourceBtn.title = "Edit as source";
@@ -49,7 +50,7 @@ class HardLineBreaksNodeView {
 		label.appendChild(buttons);
 		container.appendChild(label);
 
-		const content = document.createElement("div");
+		const content = this.document.createElement("div");
 		content.className = "pm-nodeview-content";
 		container.appendChild(content);
 
@@ -72,7 +73,11 @@ class HardLineBreaksNodeView {
 	}
 
 	stopEvent(event) {
-		return !!(this && event && event.target && event.target.closest && event.target.closest(".pm-nodeview-header, .pm-nodeview-btn"));
+		if(!event || !event.target || !this.dom || !this.dom.contains(event.target) || typeof event.target.closest !== "function") {
+			return false;
+		}
+		const control = event.target.closest(".pm-nodeview-header, .pm-nodeview-btn");
+		return !!(control && this.dom.contains(control));
 	}
 }
 

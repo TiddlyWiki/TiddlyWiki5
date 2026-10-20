@@ -260,11 +260,12 @@ describe("ProseMirror incremental sync — diff calculation", () => {
 
 	describe("roundtrip echo detection", () => {
 
-		let wikiAstToProseMirrorAst, wikiAstFromProseMirrorAst;
+		let wikiAstToProseMirrorAst, serializeDocJSON, stripSourceMetadata;
 
 		try {
 			wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js").to;
-			wikiAstFromProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js").from;
+			serializeDocJSON = require("$:/plugins/tiddlywiki/prosemirror/core/editor-shared.js").serializeDocJSON;
+			stripSourceMetadata = require("$:/plugins/tiddlywiki/prosemirror/ast/source-preservation.js").stripSourceMetadata;
 		} catch(e) {
 			return;
 		}
@@ -276,9 +277,7 @@ describe("ProseMirror incremental sync — diff calculation", () => {
 		}
 
 		function serializePMDoc(doc) {
-			const content = doc.toJSON();
-			const wikiAst = wikiAstFromProseMirrorAst(content);
-			return $tw.utils.serializeWikitextParseTree(wikiAst);
+			return serializeDocJSON(doc.toJSON());
 		}
 
 		it("should tolerate legacy parsers without blankline nodes", () => {
@@ -290,7 +289,7 @@ describe("ProseMirror incremental sync — diff calculation", () => {
 			expect(schema.nodeFromJSON(pmAst).childCount).toBe(2);
 		});
 
-		it("should preserve empty paragraphs through wiki text roundtrip", () => {
+		it("should persist a trailing visual empty paragraph as blank lines", () => {
 			const pmDoc = paraDoc("Hello World", "");
 			const lastSavedJSON = pmDoc.toJSON();
 
@@ -298,7 +297,12 @@ describe("ProseMirror incremental sync — diff calculation", () => {
 			const reparsedAst = $tw.wiki.parseText("text/vnd.tiddlywiki", serialized, { preserveBlankLines: true }).tree;
 			const reparsedPMAst = wikiAstToProseMirrorAst(reparsedAst, { sourceText: serialized });
 
-			expect(JSON.stringify(reparsedPMAst)).toEqual(JSON.stringify(lastSavedJSON));
+			// Visual empty blocks use the parser's blank-line representation, so a
+			// reload as well as our own save echo retains them.
+			expect(serialized).toBe("Hello World\n\n\n");
+			expect(stripSourceMetadata(reparsedPMAst).content.length).toBe(2);
+			expect(stripSourceMetadata(reparsedPMAst).content[0].content[0].text).toBe("Hello World");
+			expect(stripSourceMetadata(lastSavedJSON).content.length).toBe(2);
 		});
 
 		it("should detect genuine external change vs echo", () => {

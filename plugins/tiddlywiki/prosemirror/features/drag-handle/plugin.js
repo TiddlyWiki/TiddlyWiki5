@@ -16,18 +16,24 @@ const NodeSelection = require("prosemirror-state").NodeSelection;
 const DOMSerializer = require("prosemirror-model").DOMSerializer;
 
 const helpers = require("$:/plugins/tiddlywiki/prosemirror/features/drag-handle/helpers.js");
-const menu = require("$:/plugins/tiddlywiki/prosemirror/features/drag-handle/menu.js");
+const commandRegistry = require("$:/plugins/tiddlywiki/editor-command-menu/registry.js");
+const CommandMenuView = require("$:/plugins/tiddlywiki/editor-command-menu/menu-view.js").CommandMenuView;
+const editorCommands = require("$:/plugins/tiddlywiki/prosemirror/core/editor-commands.js");
 
 class DragHandleController {
-	constructor() {
+	constructor(options) {
+		this.options = options || {};
 		this.handle = null;
 		this.currentBlockPos = null;
 		this.currentBlockNode = null;
 		this.currentView = null;
+		this.ownerDocument = null;
 		this.menuEl = null;
+		this.commandMenu = null;
 		this.menuVisible = false;
 		this.destroyed = false;
 		this.pendingTimers = [];
+		this.hideTimer = null;
 		this.dragWrapper = null;
 		this.draggingBlock = null;
 		this.isDraggingFromHandle = false;
@@ -47,13 +53,23 @@ class DragHandleController {
 	}
 
 	safeTimeout(fn, delay) {
-		const id = setTimeout(() => {
+		const win = this.ownerDocument && this.ownerDocument.defaultView;
+		if(!win) return null;
+		const id = win.setTimeout(() => {
 			const idx = this.pendingTimers.indexOf(id);
 			if(idx >= 0) this.pendingTimers.splice(idx, 1);
 			if(!this.destroyed) fn();
 		}, delay);
 		this.pendingTimers.push(id);
 		return id;
+	}
+
+	clearSafeTimeout(id) {
+		if(id === null) return;
+		const win = this.ownerDocument && this.ownerDocument.defaultView;
+		if(win) win.clearTimeout(id);
+		const index = this.pendingTimers.indexOf(id);
+		if(index !== -1) this.pendingTimers.splice(index, 1);
 	}
 
 	isPointerNearHandle(event) {
@@ -81,16 +97,18 @@ class DragHandleController {
 	}
 
 	attachDocumentMousemove() {
+		const doc = this.ownerDocument || (this.currentView && this.currentView.dom.ownerDocument);
+		if(!doc) return;
 		if(!this.removeDocumentMousemove) {
-			document.addEventListener("mousemove", this.onDocumentMouseMove, true);
-			this.removeDocumentMousemove = () => document.removeEventListener("mousemove", this.onDocumentMouseMove, true);
+			doc.addEventListener("mousemove", this.onDocumentMouseMove, true);
+			this.removeDocumentMousemove = () => doc.removeEventListener("mousemove", this.onDocumentMouseMove, true);
 		}
 		if(!this.removeDocumentDragEvents) {
-			document.addEventListener("dragover", this.onDocumentDragOver, true);
-			document.addEventListener("drop", this.onDocumentDrop, true);
+			doc.addEventListener("dragover", this.onDocumentDragOver, true);
+			doc.addEventListener("drop", this.onDocumentDrop, true);
 			this.removeDocumentDragEvents = () => {
-				document.removeEventListener("dragover", this.onDocumentDragOver, true);
-				document.removeEventListener("drop", this.onDocumentDrop, true);
+				doc.removeEventListener("dragover", this.onDocumentDragOver, true);
+				doc.removeEventListener("drop", this.onDocumentDrop, true);
 			};
 		}
 	}
@@ -128,7 +146,8 @@ class DragHandleController {
 	}
 
 	createHandle() {
-		const el = document.createElement("div");
+		const doc = this.ownerDocument || this.currentView.dom.ownerDocument;
+		const el = doc.createElement("div");
 		el.className = "tc-prosemirror-drag-handle";
 		el.setAttribute("draggable", "true");
 		el.setAttribute("contenteditable", "false");
@@ -139,7 +158,7 @@ class DragHandleController {
 		el.setAttribute("aria-expanded", "false");
 		el.textContent = "\u2982";
 		el.style.display = "none";
-		document.body.appendChild(el);
+		doc.body.appendChild(el);
 
 		el.addEventListener("click", (e) => {
 			// Suppress menu open if this click was triggered by a touch (use long-press instead)
@@ -182,7 +201,7 @@ class DragHandleController {
 				if(dx > 8 || dy > 8) {
 					this._touchMoved = true;
 					if(this._longPressTimer) {
-						clearTimeout(this._longPressTimer);
+						this.clearSafeTimeout(this._longPressTimer);
 						this._longPressTimer = null;
 					}
 				}
@@ -191,7 +210,7 @@ class DragHandleController {
 
 		el.addEventListener("touchend", () => {
 			if(this._longPressTimer) {
-				clearTimeout(this._longPressTimer);
+				this.clearSafeTimeout(this._longPressTimer);
 				this._longPressTimer = null;
 			}
 			// Keep _suppressNextClick = true so the synthesised click is ignored;
@@ -236,17 +255,17 @@ class DragHandleController {
 				const slice = sel.content();
 				const serializer = DOMSerializer.fromSchema(this.currentView.state.schema);
 				const dragDom = serializer.serializeFragment(slice.content);
-				this.dragWrapper = document.createElement("div");
+				this.dragWrapper = doc.createElement("div");
 				this.dragWrapper.appendChild(dragDom);
 				this.dragWrapper.style.position = "absolute";
 				this.dragWrapper.style.left = "-9999px";
-				document.body.appendChild(this.dragWrapper);
+				doc.body.appendChild(this.dragWrapper);
 				if(e.dataTransfer) {
 					e.dataTransfer.setData("text/html", this.dragWrapper.innerHTML);
 					e.dataTransfer.setData("text/plain", this.currentBlockNode ? this.currentBlockNode.textContent : "");
+					e.dataTransfer.setDragImage(this.dragWrapper, 0, 0);
+					e.dataTransfer.effectAllowed = "move";
 				}
-				e.dataTransfer.setDragImage(this.dragWrapper, 0, 0);
-				e.dataTransfer.effectAllowed = "move";
 				this.currentView.dragging = { slice: slice, move: true };
 				this.draggingBlock = { pos: this.currentBlockPos, node: this.currentBlockNode };
 				this.isDraggingFromHandle = true;
@@ -277,7 +296,9 @@ class DragHandleController {
 			const related = e.relatedTarget;
 			if(this.currentView && this.currentView.dom && this.currentView.dom.contains(related)) return;
 			if(this.menuEl && this.menuEl.contains(related)) return;
-			this.safeTimeout(() => {
+			this.clearSafeTimeout(this.hideTimer);
+			this.hideTimer = this.safeTimeout(() => {
+				this.hideTimer = null;
 				if(this.handle && this.handle.matches(":hover")) return;
 				if(this.currentView && this.currentView.dom && this.currentView.dom.matches(":hover")) return;
 				if(this.menuEl && this.menuEl.matches(":hover")) return;
@@ -291,6 +312,10 @@ class DragHandleController {
 
 	showHandle(view, info) {
 		if(this.destroyed) return;
+		// A delayed leave from the previous block/menu must not hide a handle
+		// that has since been shown for the current pointer position.
+		this.clearSafeTimeout(this.hideTimer);
+		this.hideTimer = null;
 		if(!this.handle) this.handle = this.createHandle();
 		this.currentView = view;
 		this.currentBlockPos = info.pos;
@@ -303,27 +328,30 @@ class DragHandleController {
 		}
 
 		const editorBox = view.dom.getBoundingClientRect();
-		const rtl = helpers.isRTL();
+		const doc = view.dom.ownerDocument;
+		const win = doc.defaultView;
+		if(!win) return;
+		const rtl = helpers.isRTL(doc);
 		const handleWidth = this.handle.offsetWidth || 20;
 		const handleGap = 6;
 		const editorGutter = 8;
 		if(rtl) {
 			const desiredRight = box.right + handleGap + handleWidth;
 			const maxRight = editorBox.right + handleWidth + editorGutter;
-			const handleRight = Math.min(maxRight, desiredRight) + window.scrollX;
+			const handleRight = Math.min(maxRight, desiredRight) + (win.scrollX || 0);
 			this.handle.style.left = "";
-			this.handle.style.right = (window.innerWidth - handleRight) + "px";
+			this.handle.style.right = (win.innerWidth - handleRight) + "px";
 		} else {
 			const desiredLeft = box.left - handleWidth - handleGap;
 			const minLeft = editorBox.left - handleWidth - editorGutter;
-			const handleLeft = Math.max(minLeft, desiredLeft) + window.scrollX;
+			const handleLeft = Math.max(minLeft, desiredLeft) + (win.scrollX || 0);
 			this.handle.style.right = "";
 			this.handle.style.left = handleLeft + "px";
 		}
 
 		this.handle.style.display = "flex";
 		this.handle.style.position = "absolute";
-		this.handle.style.top = (box.top + window.scrollY) + "px";
+		this.handle.style.top = (box.top + (win.scrollY || 0)) + "px";
 		this.handle.style.zIndex = "100";
 	}
 
@@ -337,109 +365,70 @@ class DragHandleController {
 		this.currentBlockNode = null;
 	}
 
-	static createMenu() {
-		const el = document.createElement("div");
-		el.className = "tc-prosemirror-block-menu";
-		el.setAttribute("role", "menu");
-		el.style.display = "none";
-		document.body.appendChild(el);
-		el.addEventListener("mousedown", (e) => {
-			e.preventDefault();
+	getCommandContext() {
+		return {
+			view: this.currentView,
+			wiki: this.options.wiki || $tw.wiki,
+			editorType: "prosemirror",
+			contentType: this.options.contentType || "text/vnd.tiddlywiki",
+			surface: "block-menu",
+			blockPos: this.currentBlockPos,
+			blockNode: this.currentBlockNode
+		};
+	}
+
+	createCommandMenu() {
+		const view = this.currentView;
+		this.commandMenu = new CommandMenuView({
+			document: view.dom.ownerDocument,
+			wiki: this.options.wiki || $tw.wiki,
+			searchable: true,
+			ariaLabel: helpers.lang("FilterAriaLabel", "Block actions"),
+			filterPlaceholder: helpers.lang("FilterPlaceholder", "Filter actions..."),
+			onRequestClose: () => {
+				this.hideMenu();
+				if(this.currentView) {
+					this.currentView.focus();
+				}
+			},
+			onExecute: (command) => {
+				if(editorCommands.executeEditorCommand(this.getCommandContext(), command)) {
+					this.hideMenu();
+					this.hideHandle();
+				}
+			}
 		});
-		return el;
+		this.menuEl = this.commandMenu.root;
 	}
 
 	showMenu() {
 		if(!this.currentView || this.currentBlockPos === null || !this.handle) return;
-		if(!this.menuEl) this.menuEl = DragHandleController.createMenu();
+		try {
+			const selection = NodeSelection.create(this.currentView.state.doc, this.currentBlockPos);
+			this.currentView.dispatch(this.currentView.state.tr.setSelection(selection));
+		} catch(e) {
+			return;
+		}
+		if(!this.commandMenu) this.createCommandMenu();
+		const context = this.getCommandContext();
+		const commands = commandRegistry.getCommands(context.wiki, context, {
+			canExecute: function(command) {
+				return editorCommands.canExecuteEditorCommand(context, command);
+			}
+		});
+		if(commands.length === 0) {
+			return;
+		}
 		this.menuVisible = true;
 		this.handle.setAttribute("aria-expanded", "true");
-
-		while(this.menuEl.firstChild) this.menuEl.removeChild(this.menuEl.firstChild);
-
-		const view = this.currentView;
-		const schema = view.state.schema;
-		const searchInput = document.createElement("input");
-		searchInput.type = "text";
-		searchInput.className = "tc-prosemirror-block-menu-search";
-		searchInput.setAttribute("aria-label", helpers.lang("FilterAriaLabel", "Filter actions"));
-		searchInput.placeholder = helpers.lang("FilterPlaceholder", "Filter actions...");
-		this.menuEl.appendChild(searchInput);
-
-		const itemsContainer = document.createElement("div");
-		itemsContainer.className = "tc-prosemirror-block-menu-items";
-		this.menuEl.appendChild(itemsContainer);
-
-		const actions = menu.buildBlockActions({
-			view: view,
-			schema: schema,
-			origPos: this.currentBlockPos,
-			origNode: this.currentBlockNode,
-			onAfterAction: () => {
-				this.hideMenu();
-				view.focus();
-			}
-		});
-		menu.renderActions(itemsContainer, actions);
-
-		searchInput.addEventListener("input", () => {
-			const filter = searchInput.value.toLowerCase().trim();
-			menu.filterActions(itemsContainer, filter);
-		});
-
-		searchInput.addEventListener("keydown", (e) => {
-			if(e.key === "Escape") {
-				e.preventDefault();
-				this.hideMenu();
-				view.focus();
-			} else if(e.key === "Enter") {
-				e.preventDefault();
-				const focused = itemsContainer.querySelector(".tc-prosemirror-block-menu-item-focused:not(.tc-prosemirror-hidden)");
-				if(focused) {
-					focused.click();
-				} else {
-					const first = itemsContainer.querySelector(".tc-prosemirror-block-menu-item:not(.tc-prosemirror-hidden)");
-					if(first) first.click();
-				}
-			} else if(e.key === "ArrowDown" || e.key === "ArrowUp") {
-				e.preventDefault();
-				menu.navigateMenuItems(itemsContainer, e.key === "ArrowDown" ? 1 : -1);
-			}
-		});
-
 		const handleRect = this.handle.getBoundingClientRect();
-		this.menuEl.style.display = "block";
-		this.menuEl.style.position = "absolute";
-		this.menuEl.style.zIndex = "101";
-
-		const rtl = helpers.isRTL();
-		if(rtl) {
-			this.menuEl.style.left = "";
-			this.menuEl.style.right = (window.innerWidth - handleRect.right + window.scrollX) + "px";
-		} else {
-			this.menuEl.style.right = "";
-			this.menuEl.style.left = (handleRect.left + window.scrollX) + "px";
-		}
-		this.menuEl.style.top = (handleRect.bottom + 4 + window.scrollY) + "px";
-
-		requestAnimationFrame(() => {
-			if(!this.menuEl || this.destroyed) return;
-			const menuRect = this.menuEl.getBoundingClientRect();
-			if(menuRect.bottom > window.innerHeight) {
-				this.menuEl.style.top = (handleRect.top - menuRect.height - 4 + window.scrollY) + "px";
-			}
-			if(!rtl && menuRect.right > window.innerWidth) {
-				this.menuEl.style.left = Math.max(4, window.innerWidth - menuRect.width - 8 + window.scrollX) + "px";
-			}
-			if(rtl && menuRect.left < 0) {
-				this.menuEl.style.right = Math.max(4, window.innerWidth - menuRect.width - 8) + "px";
-			}
-		});
-
-		this.safeTimeout(() => { searchInput.focus(); }, 0);
-		document.removeEventListener("mousedown", this.closeOnOutsideClick);
+		this.commandMenu.setCommands(commands);
+		this.commandMenu.setFilter("");
+		this.commandMenu.show(handleRect);
+		const doc = this.ownerDocument || this.currentView.dom.ownerDocument;
+		doc.removeEventListener("mousedown", this.closeOnOutsideClick);
 		this.safeTimeout(() => {
-			document.addEventListener("mousedown", this.closeOnOutsideClick);
+			doc.addEventListener("mousedown", this.closeOnOutsideClick);
 		}, 0);
 	}
 
@@ -451,13 +440,14 @@ class DragHandleController {
 
 	hideMenu() {
 		this.menuVisible = false;
-		if(this.menuEl) {
-			this.menuEl.style.display = "none";
+		if(this.commandMenu) {
+			this.commandMenu.hide();
 		}
 		if(this.handle) {
 			this.handle.setAttribute("aria-expanded", "false");
 		}
-		document.removeEventListener("mousedown", this.closeOnOutsideClick);
+		const doc = this.ownerDocument || (this.currentView && this.currentView.dom.ownerDocument);
+		if(doc) doc.removeEventListener("mousedown", this.closeOnOutsideClick);
 	}
 
 	handleMouseMove(view, event) {
@@ -475,7 +465,9 @@ class DragHandleController {
 		const related = event.relatedTarget;
 		if(this.handle && this.handle.contains(related)) return false;
 		if(this.menuEl && this.menuEl.contains(related)) return false;
-		this.safeTimeout(() => {
+		this.clearSafeTimeout(this.hideTimer);
+		this.hideTimer = this.safeTimeout(() => {
+			this.hideTimer = null;
 			if(this.handle && this.handle.matches(":hover")) return;
 			if(this.menuEl && this.menuEl.matches(":hover")) return;
 			if(this.isPointerNearHandle(event)) return;
@@ -522,9 +514,17 @@ class DragHandleController {
 	update(view) {
 		this.currentView = view;
 		if(this.menuVisible && this.currentBlockPos !== null && this.currentBlockNode !== null) {
-			const resolved = helpers.resolveCurrentBlock(view, this.currentBlockPos, this.currentBlockNode);
+			let resolved;
+			if(view.state.selection instanceof NodeSelection && view.state.selection.node.isBlock) {
+				resolved = { pos: view.state.selection.from, node: view.state.selection.node };
+			} else {
+				resolved = helpers.resolveCurrentBlock(view, this.currentBlockPos, this.currentBlockNode);
+			}
 			if(!resolved) {
 				this.hideMenu();
+			} else {
+				this.currentBlockPos = resolved.pos;
+				this.currentBlockNode = resolved.node;
 			}
 		}
 	}
@@ -532,8 +532,9 @@ class DragHandleController {
 	destroy() {
 		this.destroyed = true;
 		this.hideMenu();
+		const win = this.ownerDocument && this.ownerDocument.defaultView;
 		for(let i = 0; i < this.pendingTimers.length; i++) {
-			clearTimeout(this.pendingTimers[i]);
+			if(win) win.clearTimeout(this.pendingTimers[i]);
 		}
 		this.pendingTimers.length = 0;
 		if(this.dragWrapper && this.dragWrapper.parentNode) {
@@ -543,8 +544,9 @@ class DragHandleController {
 		if(this.handle && this.handle.parentNode) {
 			this.handle.parentNode.removeChild(this.handle);
 		}
-		if(this.menuEl && this.menuEl.parentNode) {
-			this.menuEl.parentNode.removeChild(this.menuEl);
+		if(this.commandMenu) {
+			this.commandMenu.destroy();
+			this.commandMenu = null;
 		}
 		if(this.removeDocumentMousemove) {
 			this.removeDocumentMousemove();
@@ -560,11 +562,12 @@ class DragHandleController {
 		this.currentBlockPos = null;
 		this.currentBlockNode = null;
 		this.currentView = null;
+		this.ownerDocument = null;
 	}
 }
 
-function createDragHandlePlugin() {
-	const controller = new DragHandleController();
+function createDragHandlePlugin(options) {
+	const controller = new DragHandleController(options);
 	const plugin = new Plugin({
 		props: {
 			handleDOMEvents: {
@@ -576,6 +579,7 @@ function createDragHandlePlugin() {
 		},
 		view: function(view) {
 			controller.currentView = view;
+			controller.ownerDocument = view.dom.ownerDocument;
 			controller.attachDocumentMousemove();
 			return {
 				update: (view) => controller.update(view),

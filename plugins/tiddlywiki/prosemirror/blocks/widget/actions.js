@@ -118,7 +118,7 @@ function scheduleEnterWidgetBlockEditModeNearSelection(view, options) {
 	};
 
 	const tick = () => {
-		if(!view || !view.state) {
+		if(!view || !view.state || view.isDestroyed) {
 			return;
 		}
 		const pos = view.state.selection.from;
@@ -133,11 +133,11 @@ function scheduleEnterWidgetBlockEditModeNearSelection(view, options) {
 
 		attemptsLeft--;
 		if(attemptsLeft > 0) {
-			requestAnimationFrame(tick);
+			view.dom.ownerDocument.defaultView.requestAnimationFrame(tick);
 		}
 	};
 
-	requestAnimationFrame(tick);
+	view.dom.ownerDocument.defaultView.requestAnimationFrame(tick);
 }
 
 exports.tryEnterWidgetBlockEditModeAtPos = tryEnterWidgetBlockEditModeAtPos;

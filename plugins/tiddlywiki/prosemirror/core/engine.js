@@ -13,10 +13,11 @@ Implements the engine interface required by $:/core/modules/editor/factory.js.
 const HEIGHT_VALUE_TITLE = "$:/config/TextEditor/EditorHeight/Height";
 
 const { buildSchema } = require("$:/plugins/tiddlywiki/prosemirror/core/schema.js");
-const { buildPlugins, SlashMenuUI } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
+const { buildPlugins } = require("$:/plugins/tiddlywiki/prosemirror/core/plugin-list.js");
 const { handleTextOperation } = require("$:/plugins/tiddlywiki/prosemirror/core/text-operations.js");
 const {
 	parseWikiTextToDoc,
+	sourceTextToDoc,
 	serializeDocJSON,
 	getPragmaPreamble,
 	applyExternalText: applySharedExternalText,
@@ -24,7 +25,6 @@ const {
 } = require("$:/plugins/tiddlywiki/prosemirror/core/editor-shared.js");
 const { EditorState, TextSelection } = require("prosemirror-state");
 const { EditorView } = require("prosemirror-view");
-const { debounce } = require("$:/core/modules/utils/debounce.js");
 
 class ProseMirrorEngine {
 	constructor(options) {
@@ -33,6 +33,7 @@ class ProseMirrorEngine {
 		this.type = options.type || "text/vnd.tiddlywiki";
 		this.parentNode = options.parentNode;
 		this.nextSibling = options.nextSibling;
+		this.document = this.parentNode.ownerDocument || this.widget.document;
 		this.wiki = this.widget.wiki;
 		this.variables = this.widget.variables || {};
 		this.pendingSavedText = null;
@@ -41,38 +42,24 @@ class ProseMirrorEngine {
 		this.lastSavedDocJSON = null;
 		this.applyingExternalText = false;
 		this.imagePickerOpen = false;
+		this._pendingTimers = [];
 
 		this._buildDOM();
 		this.schema = buildSchema();
 
 		const doc = this._parseInitialDoc();
 
-		this.debouncedSave = debounce(() => {
-			const text = this.getText();
-			this.lastSavedDocJSON = this.view.state.doc.toJSON();
-			if(text === (this.value || "")) {
-				if(this.pendingSavedText === text) {
-					this.pendingSavedText = null;
-				}
-				return;
-			}
-			this.clearPendingExternalText();
-			this.pendingSavedText = text;
-			this.widget.saveChanges(text);
-		}, 300);
-
 		this._createEditorView(doc);
 		this._attachEventHandlers();
 
-		this.slashMenuUI = new SlashMenuUI(this.view, { clickable: true });
-
 		if(this.widget.addEventListener) {
-			this.widget.addEventListener("tm-prosemirror-image-picked-nodeview", (event) => this.handleImagePickedNodeView(event));
+			this._imagePickedHandler = (event) => this.handleImagePickedNodeView(event);
+			this.widget.addEventListener("tm-prosemirror-image-picked-nodeview", this._imagePickedHandler);
 		}
 	}
 
 	_buildDOM() {
-		this.domNode = document.createElement("div");
+		this.domNode = this.document.createElement("div");
 		this.domNode.className = "tc-prosemirror-wrapper";
 		if(this.widget.editClass) {
 			this.domNode.className += " " + this.widget.editClass;
@@ -81,9 +68,9 @@ class ProseMirrorEngine {
 			this.domNode.setAttribute("tabindex", this.widget.editTabIndex);
 		}
 
-		const container = document.createElement("div");
+		const container = this.document.createElement("div");
 		container.className = "tc-prosemirror-container";
-		this._mount = document.createElement("div");
+		this._mount = this.document.createElement("div");
 		this._mount.className = "tc-prosemirror-mount";
 		container.appendChild(this._mount);
 		this.domNode.appendChild(container);
@@ -93,11 +80,12 @@ class ProseMirrorEngine {
 		this.widget.domNodes.push(this.domNode);
 
 		// Delegate focus from the wrapper to the ProseMirror EditorView
-		this.domNode.addEventListener("focus", (event) => {
+		this._wrapperFocusHandler = (event) => {
 			if(this.view && event.target === this.domNode) {
 				this.view.focus();
 			}
-		});
+		};
+		this.domNode.addEventListener("focus", this._wrapperFocusHandler);
 	}
 
 	_parseInitialDoc() {
@@ -105,7 +93,7 @@ class ProseMirrorEngine {
 			return parseWikiTextToDoc(this.wiki, this.type, this.value);
 		} catch(e) {
 			console.error("[ProseMirror] Error parsing initial content:", e);
-			return { type: "doc", content: [{ type: "paragraph" }] };
+			return sourceTextToDoc(this.value || "");
 		}
 	}
 
@@ -120,31 +108,63 @@ class ProseMirrorEngine {
 			dispatchTransaction: (transaction) => {
 				const newState = this.view.state.apply(transaction);
 				this.view.updateState(newState);
-				if(this.slashMenuUI) this.slashMenuUI.checkState();
-				if(transaction.docChanged && !this.applyingExternalText) {
+				if(transaction.docChanged && !this.applyingExternalText && !this.handlingEditTextOperation) {
 					this.clearPendingExternalText();
-					this.debouncedSave();
+					this.saveCurrentText();
 				}
 			}
 		});
 	}
 
 	_attachEventHandlers() {
-		this.view.dom.addEventListener("paste", (event) => {
+		this._pasteHandler = (event) => {
 			event.twEditor = true;
 			event.stopPropagation();
-		});
-		this.view.dom.addEventListener("keydown", (event) => {
+		};
+		this._keydownHandler = (event) => {
 			event.twEditor = true;
 			if(!event.defaultPrevented && this.widget.handleKeydownEvent) {
 				this.widget.handleKeydownEvent(event);
 			}
 			event.stopPropagation();
-		});
-		this.view.dom.addEventListener("blur", () => {
-			setTimeout(() => this.applyPendingExternalText(), 0);
-		}, true);
+		};
+		this._blurHandler = () => this.scheduleApplyPendingExternalText();
+		this._compositionEndHandler = () => this.scheduleApplyPendingExternalText();
+		this.view.dom.addEventListener("paste", this._pasteHandler);
+		this.view.dom.addEventListener("keydown", this._keydownHandler);
+		this.view.dom.addEventListener("blur", this._blurHandler, true);
+		this.view.dom.addEventListener("compositionend", this._compositionEndHandler, true);
 		this._container.setAttribute("data-tw-prosemirror-keycapture", "yes");
+	}
+
+	scheduleApplyPendingExternalText() {
+		const win = this.document.defaultView;
+		if(!win) {
+			this.applyPendingExternalText();
+			return;
+		}
+		const id = win.setTimeout(() => {
+			const index = this._pendingTimers.indexOf(id);
+			if(index !== -1) {
+				this._pendingTimers.splice(index, 1);
+			}
+			if(this.view) {
+				this.applyPendingExternalText();
+			}
+		}, 0);
+		this._pendingTimers.push(id);
+	}
+
+	saveCurrentText() {
+		const text = this.getText();
+		this.lastSavedDocJSON = this.view.state.doc.toJSON();
+		if(text === (this.value || "")) {
+			return;
+		}
+		this.clearPendingExternalText();
+		this.pendingSavedText = text;
+		this.value = text;
+		this.widget.saveChanges(text);
 	}
 
 	get parentWidget() { return this.widget; }
@@ -195,8 +215,9 @@ class ProseMirrorEngine {
 		}
 		this.value = nextText;
 
-		// External change: apply incrementally via diff
-		if(!this.view.hasFocus()) {
+		// Apply external changes immediately so all editor views share the same
+		// wiki-backed document. Defer only while the browser is composing text.
+		if(!this.view.composing) {
 			this.type = nextType;
 			this.applyExternalText(nextText);
 		} else {
@@ -211,11 +232,16 @@ class ProseMirrorEngine {
 	}
 
 	applyPendingExternalText() {
-		if(this.pendingExternalText === null || (this.view && this.view.hasFocus())) {
+		if(this.pendingExternalText === null || (this.view && this.view.composing)) {
 			return;
 		}
-		const nextText = this.pendingExternalText;
-		const nextType = this.pendingExternalType || this.type;
+		let nextText = this.pendingExternalText;
+		let nextType = this.pendingExternalType || this.type;
+		if(this.widget && typeof this.widget.getEditInfo === "function") {
+			const currentEditInfo = this.widget.getEditInfo();
+			nextText = currentEditInfo.value;
+			nextType = currentEditInfo.type;
+		}
 		this.clearPendingExternalText();
 		this.type = nextType;
 		this.applyExternalText(nextText);
@@ -302,12 +328,19 @@ class ProseMirrorEngine {
 		return newText;
 	}
 
-	handleTextOperationNatively(event) {
-		const result = handleTextOperation(this, event);
+	handleEditTextOperation(event) {
+		this.handlingEditTextOperation = true;
+		let result;
+		try {
+			result = handleTextOperation(this, event);
+		} finally{
+			this.handlingEditTextOperation = false;
+		}
 		if(result && this.view && this.view.state) {
 			const text = this.getText();
 			this.lastSavedDocJSON = this.view.state.doc.toJSON();
 			this.pendingSavedText = text;
+			this.value = text;
 		}
 		return result;
 	}
@@ -344,11 +377,27 @@ class ProseMirrorEngine {
 	}
 
 	destroy() {
-		if(this.debouncedSave && this.debouncedSave.flush) this.debouncedSave.flush();
-		if(this.slashMenuUI) { this.slashMenuUI.destroy(); this.slashMenuUI = null; }
-		if(this.view) { this.view.destroy(); this.view = null; }
+		const win = this.document.defaultView;
+		if(win) {
+			this._pendingTimers.forEach((id) => win.clearTimeout(id));
+		}
+		this._pendingTimers.length = 0;
+		if(this.widget && this._imagePickedHandler && typeof this.widget.removeEventListener === "function") {
+			this.widget.removeEventListener("tm-prosemirror-image-picked-nodeview", this._imagePickedHandler);
+		}
+		if(this.domNode && this._wrapperFocusHandler) {
+			this.domNode.removeEventListener("focus", this._wrapperFocusHandler);
+		}
+		if(this.view) {
+			this.view.dom.removeEventListener("paste", this._pasteHandler);
+			this.view.dom.removeEventListener("keydown", this._keydownHandler);
+			this.view.dom.removeEventListener("blur", this._blurHandler, true);
+			this.view.dom.removeEventListener("compositionend", this._compositionEndHandler, true);
+			this.view.destroy();
+			this.view = null;
+		}
 	}
 }
 
-exports.ProseMirrorEngine = $tw.browser ? ProseMirrorEngine : require("$:/core/modules/editor/engines/simple.js").SimpleEngine;
+exports.ProseMirrorEngine = ProseMirrorEngine;
 exports.buildSchema = buildSchema;

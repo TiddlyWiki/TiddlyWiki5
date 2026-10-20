@@ -19,14 +19,15 @@ function lang(suffix, fallback) {
 		"$:/plugins/tiddlywiki/prosemirror/language/DragHandle/" + suffix, fallback);
 }
 
-function getSvgIcon(tiddlerTitle, size) {
+function getSvgIcon(tiddlerTitle, size, ownerDocument) {
 	size = size || "1em";
 	try {
 		const htmlStr = $tw.wiki.renderTiddler("text/html", tiddlerTitle, {
 			variables: { size: size }
 		});
 		if(!htmlStr) return null;
-		const container = document.createElement("div");
+		const doc = ownerDocument || document;
+		const container = doc.createElement("div");
 		container.innerHTML = htmlStr;
 		const svgEl = container.querySelector("svg");
 		if(svgEl) return svgEl;
@@ -34,8 +35,9 @@ function getSvgIcon(tiddlerTitle, size) {
 	return null;
 }
 
-function isRTL() {
-	const dir = document.documentElement.getAttribute("dir");
+function isRTL(ownerDocument) {
+	const doc = ownerDocument || document;
+	const dir = doc.documentElement.getAttribute("dir");
 	return dir === "rtl";
 }
 
@@ -46,7 +48,7 @@ function isElementNode(dom) {
 function isCoordsInEditorHandleZone(view, coords) {
 	if(!view || !view.dom || !coords) return false;
 	const box = view.dom.getBoundingClientRect();
-	const rtl = isRTL();
+	const rtl = isRTL(view.dom.ownerDocument);
 	// The handle zone covers the editor content plus a generous leading gutter.
 	// This allows the handle to appear when the pointer is in the blank area
 	// before a line, even when posAtCoords() cannot resolve the position.
@@ -88,7 +90,9 @@ function getListHitBox(dom) {
 	// regular getBoundingClientRect() misses the area users expect to hover.
 	// We expand the hit box to cover the marker gutter on the leading side.
 	const box = dom.getBoundingClientRect();
-	const listIndent = parseFloat(getComputedStyle(dom).getPropertyValue("--pm-list-indent")) || 40;
+	const win = dom.ownerDocument && dom.ownerDocument.defaultView;
+	const styles = win ? win.getComputedStyle(dom) : null;
+	const listIndent = parseFloat(styles && styles.getPropertyValue("--pm-list-indent")) || 40;
 	const markerWidth = 28; // approximate ::marker/number width
 	return {
 		top: box.top,
@@ -177,6 +181,9 @@ function findBlockFromResolvedPosition(view, posInfo) {
 }
 
 function findBlockAtCoords(view, coords) {
+	// posAtCoords may resolve to an edge node even outside the content box.
+	// Keep both resolution paths inside our explicit editor/handle hit zone.
+	if(!isCoordsInEditorHandleZone(view, coords)) return null;
 	const geometryInfo = findBlockByGeometry(view, coords);
 	if(geometryInfo) return geometryInfo;
 

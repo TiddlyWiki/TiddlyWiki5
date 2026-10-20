@@ -82,6 +82,16 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	};
 
 	/*
+	Dispose editor resources when the widget is destroyed or rerendered
+	*/
+	EditTextWidget.prototype.onDestroy = function() {
+		if(this.engine && typeof this.engine.destroy === "function") {
+			this.engine.destroy();
+		}
+		this.engine = null;
+	};
+
+	/*
 	Get the tiddler being edited and current value
 	*/
 	EditTextWidget.prototype.getEditInfo = function() {
@@ -149,12 +159,18 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Handle an edit text operation message from the toolbar
 	*/
 	EditTextWidget.prototype.handleEditTextOperationMessage = function(event) {
-		// Give the engine a chance to handle the operation natively (e.g. ProseMirror
-		// can toggle marks / set block types directly without text serialization).
-		if(this.engine.handleTextOperationNatively && this.engine.handleTextOperationNatively(event)) {
-			this.engine.fixHeight();
-			this.saveChanges(this.engine.getText());
-			return;
+		// A structured editor can handle operations without converting its
+		// selection to text offsets. `true` means handled, `false` means explicitly
+		// declined, and `undefined` delegates to the legacy text operation path.
+		if(typeof this.engine.handleEditTextOperation === "function") {
+			var handled = this.engine.handleEditTextOperation(event);
+			if(handled !== undefined) {
+				if(handled) {
+					this.engine.fixHeight();
+					this.saveChanges(this.engine.getText());
+				}
+				return;
+			}
 		}
 		// Prepare information about the operation
 		var operation = this.engine.createTextOperation();

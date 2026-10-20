@@ -1,97 +1,78 @@
 title: $:/plugins/tiddlywiki/prosemirror/development
 
-!! Dependencies
+! ProseMirror plugin development
 
-Downloaded from JsDelivr CDN (like `https://cdn.jsdelivr.net/npm/prosemirror-state@latest/dist/index.cjs` and store as `prosemirror-state.js`):
+!! Design constraints
 
-* [ext[prosemirror-state|https://cdn.jsdelivr.net/npm/prosemirror-state@latest/dist/index.cjs]]: v1.4.3
-* [ext[prosemirror-view|https://cdn.jsdelivr.net/npm/prosemirror-view@latest/dist/index.cjs]]: v1.38.1
-** [ext[prosemirror.css|https://cdn.jsdelivr.net/npm/prosemirror-view@latest/style/prosemirror.css]]
-* [ext[prosemirror-model|https://cdn.jsdelivr.net/npm/prosemirror-model@latest/dist/index.cjs]]: v1.25.0
-* [ext[prosemirror-schema-basic|https://cdn.jsdelivr.net/npm/prosemirror-schema-basic@latest/dist/index.cjs]]: v1.2.4
-* [ext[prosemirror-flat-list|https://cdn.jsdelivr.net/npm/prosemirror-flat-list@latest/dist/prosemirror-flat-list.cjs]]: v0.5.4
-** [ext[prosemirror-flat-list.css|https://cdn.jsdelivr.net/npm/prosemirror-flat-list@latest/dist/style.css]]
-** (Instead of [ext[prosemirror-schema-list|https://cdn.jsdelivr.net/npm/prosemirror-schema-list@latest/dist/index.cjs]])
-* [ext[orderedmap|https://cdn.jsdelivr.net/npm/orderedmap@latest/dist/index.cjs]]: v2.1.1
-* [ext[prosemirror-transform|https://cdn.jsdelivr.net/npm/prosemirror-transform@latest/dist/index.cjs]]: v1.10.3
-* [ext[prosemirror-keymap|https://cdn.jsdelivr.net/npm/prosemirror-keymap@latest/dist/index.cjs]]: v1.2.2
-* [ext[prosemirror-history|https://cdn.jsdelivr.net/npm/prosemirror-history@latest/dist/index.cjs]]: v1.4.1
-* [ext[prosemirror-commands|https://cdn.jsdelivr.net/npm/prosemirror-commands@latest/dist/index.cjs]]: v1.7.0
-* [ext[prosemirror-dropcursor|https://cdn.jsdelivr.net/npm/prosemirror-dropcursor@latest/dist/index.cjs]]: v1.8.1
-* [ext[prosemirror-gapcursor|https://cdn.jsdelivr.net/npm/prosemirror-gapcursor@latest/dist/index.cjs]]: v1.3.2
-* [ext[prosemirror-inputrules|https://cdn.jsdelivr.net/npm/prosemirror-inputrules@latest/dist/index.cjs]]: v1.5.0
-* [ext[w3c-keyname|https://cdn.jsdelivr.net/npm/w3c-keyname@latest/dist/index.cjs]]: v2.2.8
-* [ext[rope-sequence|https://cdn.jsdelivr.net/npm/rope-sequence@latest/dist/index.cjs]]: v1.3.4
-* [ext[prosemirror-safari-ime-span|https://cdn.jsdelivr.net/npm/prosemirror-safari-ime-span@latest/dist/index.cjs]]: v1.0.2
-!! Implementations
+The saved value is WikiText, but the live editing state is a ProseMirror document. They are different coordinate systems. Editor actions must operate on the ProseMirror selection and transaction model; a ProseMirror position must never be used as a character offset into the saved WikiText.
 
-!!! Configuration System
+The conversion layer preserves exact source for unchanged parse-tree groups. Unsupported inline and block syntax is represented by source-backed opaque nodes. New, duplicated or moved structure must have source-provenance attributes removed so serialisation reflects the new document order rather than stale input slices.
 
-ProseMirror editor settings can be customized through the [[Control Panel|$:/plugins/tiddlywiki/prosemirror/config]].
+Interactive opaque nodes run with a block-local temporary `currentTiddler`. Third-party rule writes are bridged back through a ProseMirror transaction; do not render a stored parse tree with document-global source offsets or allow a node view to edit the canonical tiddler directly.
 
-''Keyboard Shortcuts:''
+The standard toolbar and command menus are entry points, not mutation implementations. Toolbar messages are adapted by `core/text-operations.js`; `$:/tags/EditorCommand` descriptors used by slash and block surfaces are executed by `core/editor-commands.js`.
 
-* All keyboard shortcuts are configurable via `$:/config/prosemirror/shortcuts/` tiddlers
-* Each action (bold, italic, undo, etc.) has its own config tiddler
-* Set to `none` to disable a shortcut
-* Leave empty to use default
-* `core/keymap.js` reads configs via `getShortcut()` function
-* Supports both lowercase and uppercase variants (e.g., Mod-b and Mod-B for bold)
+Every editor and node view uses its instance `ownerDocument`. Features that add DOM outside the editor or register listeners must clean them up in `destroy()`.
 
-''Widget Block Settings:''
+!! Vendored dependencies
 
-* `$:/config/prosemirror/enable-widget-blocks` - Enable/disable widget block rendering
-* `$:/config/prosemirror/widget-block/auto-focus` - Auto-focus textarea in edit mode
+Runtime ProseMirror packages are checked in under `files/` because browser editions cannot depend on a Node package installation. `vendor-manifest.json` records the exact package version, source file and SHA-256 digest for every artifact; `files/THIRD-PARTY-NOTICES` contains the corresponding licences.
 
-!!! Widget Block System
+Use:
 
-The widget block system provides WYSIWYG rendering for TiddlyWiki widget syntax within the ProseMirror editor.
+```
+node bin/prosemirror-vendor.js --verify
+```
 
-''Architecture:''
+to verify checked-in hashes without network access, and:
 
-* `blocks/widget/utils.js` - Widget syntax parser and recognizer
-* `blocks/widget/nodeview.js` - Custom NodeView implementation for widget rendering
-* `blocks/widget/plugin.js` - ProseMirror plugins for decoration and node views
-* `blocks/widget/actions.js` - Widget block actions
-* `blocks/widget/styles.css` - Visual styling for widget blocks
+```
+node bin/prosemirror-vendor.js --check
+```
 
-''Features Implemented:''
+to install the exact versions in an isolated temporary directory and compare them byte for byte. Maintainers can use `--write` after intentionally changing the manifest versions.
 
-* Widget syntax detection using regex pattern `<<widgetName attributes>>`
-* Real-time conversion of typed/pasted widget syntax to visual blocks
-* Custom NodeView with editable content area
-* Edit mode with textarea for modifying widget source
-* Delete button (visible only in edit mode)
-* Visual indicators (blue border, gradient header)
-* Integration with TiddlyWiki's widget rendering system
-* Prevention of import dialog on paste events (sets `event.twEditor = true`)
+Do not replace exact versions with `latest` URLs or manually edit vendored artifacts.
 
-''AST Integration:''
+!! Layout
 
-* `ast/to-prosemirror.js` converts a WikiText parse tree into a ProseMirror document: `ast/to/registry.js` picks a converter per node type, and the converters read nodes with the `$tw.utils.wikitextParseTree` helpers, e.g. `kindOf()` and `listItems()`
-* `ast/from-prosemirror.js` converts the document back: `ast/from/registry.js` picks a builder per ProseMirror node, and the builders create every node with the factory, e.g. `paragraph()` and `hardBreak()`, so `$tw.utils.serializeWikitextParseTree` can write the WikiText
-* `ast/to/transclude.js` shows a block macro call as a paragraph with widget syntax; `ast/from/paragraph.js` recognises that syntax with `parseWidget()` from `blocks/widget/utils.js`
-* The factory and the helpers, with examples: [[WikiText Serialize Plugin readme|$:/plugins/tiddlywiki/wikitext-serialize/readme]] and [[WikiText Serialize Plugin]]
+* `core/` — schema, engine, keymaps, toolbar adapter, semantic command execution and plugin assembly
+* `ast/` — parse-tree conversion, WikiText serialisation and source provenance
+* `blocks/` — specialised and source-backed node views
+* `features/` — autocomplete, drag handle, find/replace, link tooltip, placeholders, Markdown-style input and slash menu
+* `editor-actions/` — declarative command descriptors for command surfaces
+* `tests/` — Jasmine unit and integration specifications
+* `vendor-manifest.json` and `files/` — reproducible third-party runtime bundle
 
-''Planned Enhancements:''
+The reusable descriptor registry and DOM menu are in the separate `$:/plugins/tiddlywiki/editor-command-menu` plugin so they contain no ProseMirror, slash-trigger or block-handle policy.
 
-* Support for more widget types (procedures, functions, transcludes)
-* Drag and drop reordering of widget blocks
-* Keyboard shortcuts for widget operations
-* Widget parameter autocomplete
-* Live preview updates on parameter changes
-* Widget template library
+!! Verification
 
-!! Testing
+Run the complete Node test edition:
 
-Comprehensive Playwright tests are available in `plugins/tiddlywiki/prosemirror/tests/`:
+```
+npm test
+```
 
-* `prosemirror.spec.js` - Integration tests for all editor features
-* `utils.spec.js` - Unit tests for utility functions
+For a quicker focused run after the test edition has been bootstrapped:
 
-Run tests with `pnpm test` or `npx playwright test plugins/tiddlywiki/prosemirror/tests`
+```
+node editions/test/quick-test.js prosemirror editor-command-menu
+```
 
-See `plugins/tiddlywiki/prosemirror/tests/README.md` for detailed testing documentation.
+Build the browser test edition before Playwright tests:
 
-!! Other Features
+```
+npm test
+npx playwright test editions/test/prosemirror-playwright.spec.js --project=chromium --workers=1
+```
 
+The generated single-file test wiki is large, so using one worker also avoids loading several complete copies in parallel on development machines. The repository CI configuration already uses one worker.
+
+Run lint and reproducibility checks before submitting:
+
+```
+npm run lint
+node bin/prosemirror-vendor.js --verify
+node bin/prosemirror-vendor.js --check
+```

@@ -36,7 +36,9 @@ module.exports = defineConfig({
     headless: true,
     screenshot: {
       mode: 'only-on-failure',
-      fullPage: true
+      // Jasmine produces a very tall document; capture the viewport to avoid
+      // GPU allocation failures masking the original test failure.
+      fullPage: false
     },
     // Limit individual actions (like click/type) so they don't hang indefinitely
     actionTimeout: 15000, 
@@ -65,4 +67,3 @@ module.exports = defineConfig({
     }
   ],
 });
-

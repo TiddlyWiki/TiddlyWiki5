@@ -1,8 +1,8 @@
 {
 	"title": "$:/plugins/tiddlywiki/prosemirror",
-	"name": "Prosemirror Visual Editor",
+	"name": "ProseMirror Visual Editor",
 	"description": "WYSIWYG editor (What You See Is What You Get) for TiddlyWiki",
-	"dependents": ["$:/plugins/tiddlywiki/wikitext-serialize", "$:/plugins/tiddlywiki/hard-line-breaks"],
+	"dependents": ["$:/plugins/tiddlywiki/wikitext-serialize", "$:/plugins/tiddlywiki/hard-line-breaks", "$:/plugins/tiddlywiki/editor-command-menu"],
 	"list": "readme development tree",
 	"stability": "STABILITY_1_EXPERIMENTAL"
 }

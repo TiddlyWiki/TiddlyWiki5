@@ -18,6 +18,10 @@ function opaqueBlock(builders, node) {
 	return factory.opaque(node.attrs && node.attrs.rawText || "", { block: true });
 }
 
+function opaqueInline(builders, node) {
+	return factory.opaque(node.attrs && node.attrs.rawText || "", { block: false });
+}
+
 function typedBlock(builders, node) {
 	const rawText = node.attrs && node.attrs.rawText || "";
 	const parseType = node.attrs && node.attrs.parseType || "";
@@ -54,4 +58,5 @@ function typedBlock(builders, node) {
 
 exports.pragmaBlock = pragmaBlock;
 exports.opaqueBlock = opaqueBlock;
+exports.opaqueInline = opaqueInline;
 exports.typedBlock = typedBlock;

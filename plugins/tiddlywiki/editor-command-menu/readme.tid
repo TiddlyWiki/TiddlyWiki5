@@ -1,0 +1,31 @@
+title: $:/plugins/tiddlywiki/editor-command-menu/readme
+
+! Editor command menu
+
+This experimental plugin provides two editor-independent pieces:
+
+* a registry for semantic command descriptors tagged `$:/tags/EditorCommand`;
+* an accessible, searchable DOM menu for displaying command objects supplied by an editor adapter.
+
+It does not implement an editor, keyboard or pointer triggers, document mutations, slash behaviour, block behaviour, or editor-specific content providers. An editor adapter owns those responsibilities and supplies an `ownerDocument`, execution callback and current context.
+
+!! Descriptor fields
+
+|!Field |!Meaning |
+|`command-id` |Required semantic operation name interpreted by an editor adapter |
+|`command-key` |Optional stable instance identity; defaults to the tiddler title |
+|`caption` |Plain-text-rendered label |
+|`description` |Optional plain-text-rendered description |
+|`icon` |Optional SVG tiddler title |
+|`command-category` |Grouping key; defaults to `other` |
+|`command-surfaces` |Optional allowed surface list |
+|`command-editors` |Optional allowed editor-type list |
+|`command-content-types` |Optional allowed content-type list |
+|`command-keywords` |Optional search terms |
+|other `command-*` fields |Semantic parameters, with `command-` removed |
+
+Empty context lists mean unrestricted. Draft tiddlers and descriptors without `command-id` are ignored. Duplicate command identities are removed. The registry may also receive already-normalised transient commands from an editor adapter; it does not discover editor-specific sources itself.
+
+The tag list of `$:/tags/EditorCommand` supplies explicit ordering. Remaining entries sort by label within their category. Search is case-insensitive and all whitespace-separated search terms must occur in the label, description or keywords.
+
+The menu uses a combobox/listbox interaction when searchable. It supports arrow keys, Home, End, Enter, Escape, pointer selection and IME composition. Icons are restricted to sanitised inline SVG. Every menu instance belongs to the explicitly supplied document and must be destroyed by its owner.

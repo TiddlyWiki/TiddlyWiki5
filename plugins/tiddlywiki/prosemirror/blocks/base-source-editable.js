@@ -18,6 +18,8 @@ class BaseSourceEditableNodeView {
 		this.view = view;
 		this.getPos = getPos;
 		this.parentWidget = parentWidget;
+		this.document = view.dom.ownerDocument;
+		this.window = this.document.defaultView;
 
 		this.dom = null;
 		this.header = null;
@@ -30,19 +32,23 @@ class BaseSourceEditableNodeView {
 		this._titleEl = null;
 		this._renderedContentMouseDownHandler = this.handleRenderedContentMouseDown.bind(this);
 		this._renderedContentSelectionGuardsInstalled = false;
+		this._destroyed = false;
+		this._pendingTimeouts = [];
+		this._pendingAnimationFrames = [];
 	}
 
 	static getLanguageString(suffix, fallback) {
 		return $tw.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/" + suffix, fallback);
 	}
 
-	static getSvgIcon(tiddlerTitle, size = "1em") {
+	static getSvgIcon(tiddlerTitle, ownerDocument, size = "1em") {
 		try {
 			const htmlStr = $tw.wiki.renderTiddler("text/html", tiddlerTitle, {
 				variables: { size }
 			});
 			if(!htmlStr) return null;
-			const container = document.createElement("div");
+			if(!ownerDocument) return null;
+			const container = ownerDocument.createElement("div");
 			container.innerHTML = htmlStr;
 			return container.querySelector("svg") || null;
 		} catch(e) {
@@ -51,25 +57,25 @@ class BaseSourceEditableNodeView {
 	}
 
 	setButtonIcon(button, tiddlerTitle, fallbackText) {
-		const svgEl = this.constructor.getSvgIcon(tiddlerTitle);
+		const svgEl = this.constructor.getSvgIcon(tiddlerTitle, this.document);
 		if(svgEl) {
 			button.innerHTML = "";
-			button.appendChild(document.importNode(svgEl, true));
+			button.appendChild(this.document.importNode(svgEl, true));
 		} else {
 			button.textContent = fallbackText || "\u2022";
 		}
 	}
 
 	createHeader(titleText) {
-		const header = document.createElement("span");
+		const header = this.document.createElement("span");
 		header.className = "pm-nodeview-header";
 		header.contentEditable = "false";
 
-		const title = document.createElement("span");
+		const title = this.document.createElement("span");
 		title.className = "pm-nodeview-title";
 		title.textContent = titleText;
 
-		const buttons = document.createElement("span");
+		const buttons = this.document.createElement("span");
 		buttons.className = "pm-nodeview-buttons";
 
 		const editBtn = this._createButton("$:/core/images/edit-button", "E", this.constructor.getLanguageString("Buttons/Edit", "Edit"));
@@ -142,7 +148,7 @@ class BaseSourceEditableNodeView {
 	}
 
 	_createButton(iconTiddler, fallback, tooltip) {
-		const btn = document.createElement("button");
+		const btn = this.document.createElement("button");
 		btn.className = "pm-nodeview-btn";
 		btn.title = tooltip;
 		btn.type = "button";
@@ -197,7 +203,7 @@ class BaseSourceEditableNodeView {
 	}
 
 	createEditTextarea(initialValue, rows = 2) {
-		const textarea = document.createElement("textarea");
+		const textarea = this.document.createElement("textarea");
 		textarea.className = "pm-nodeview-editor";
 		textarea.value = initialValue;
 		textarea.rows = rows;
@@ -216,18 +222,18 @@ class BaseSourceEditableNodeView {
 	}
 
 	createEditForm(fields) {
-		const form = document.createElement("div");
+		const form = this.document.createElement("div");
 		form.className = "pm-nodeview-form";
 
 		for(const field of fields) {
-			const row = document.createElement("div");
+			const row = this.document.createElement("div");
 			row.className = "pm-nodeview-form-row";
 
-			const label = document.createElement("label");
+			const label = this.document.createElement("label");
 			label.className = "pm-nodeview-form-label";
 			label.textContent = field.label;
 
-			const input = document.createElement("input");
+			const input = this.document.createElement("input");
 			input.className = "pm-nodeview-form-input";
 			input.type = field.type || "text";
 			input.value = field.value || "";
@@ -275,7 +281,7 @@ class BaseSourceEditableNodeView {
 	renderEmptyPlaceholder(text) {
 		if(!this.contentContainer) return;
 		this.clearEmptyPlaceholder();
-		const placeholder = document.createElement("div");
+		const placeholder = this.document.createElement("div");
 		placeholder.className = "pm-nodeview-empty-placeholder";
 		placeholder.textContent = text || this.getEmptyPlaceholderText();
 		this.contentContainer.appendChild(placeholder);
@@ -316,6 +322,50 @@ class BaseSourceEditableNodeView {
 
 	destroy() {
 		this._destroyed = true;
+		if(this.window) {
+			this._pendingTimeouts.forEach((id) => this.window.clearTimeout(id));
+			this._pendingAnimationFrames.forEach((id) => this.window.cancelAnimationFrame(id));
+		}
+		this._pendingTimeouts.length = 0;
+		this._pendingAnimationFrames.length = 0;
+		if(this._renderedContentSelectionGuardsInstalled && this.contentContainer) {
+			this.contentContainer.removeEventListener("mousedown", this._renderedContentMouseDownHandler, true);
+			this._renderedContentSelectionGuardsInstalled = false;
+		}
+	}
+
+	scheduleTimeout(callback, delay) {
+		if(!this.window || this._destroyed) {
+			return null;
+		}
+		const id = this.window.setTimeout(() => {
+			const index = this._pendingTimeouts.indexOf(id);
+			if(index !== -1) {
+				this._pendingTimeouts.splice(index, 1);
+			}
+			if(!this._destroyed) {
+				callback();
+			}
+		}, delay || 0);
+		this._pendingTimeouts.push(id);
+		return id;
+	}
+
+	scheduleAnimationFrame(callback) {
+		if(!this.window || this._destroyed) {
+			return null;
+		}
+		const id = this.window.requestAnimationFrame(() => {
+			const index = this._pendingAnimationFrames.indexOf(id);
+			if(index !== -1) {
+				this._pendingAnimationFrames.splice(index, 1);
+			}
+			if(!this._destroyed) {
+				callback();
+			}
+		});
+		this._pendingAnimationFrames.push(id);
+		return id;
 	}
 
 	shouldStopControlEvent(event) {

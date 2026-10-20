@@ -29,7 +29,7 @@ test.describe("ProseMirror Editor - Lists", () => {
 			}
 			const engine = findAllEngines($tw.rootWidget).find((e) => e.view && e.view.dom === viewEl);
 			if(!engine) throw new Error("ProseMirror engine not found");
-			engine.handleTextOperationNatively({ param: "prefix-lines", paramObject: { character: "*" } });
+			engine.handleEditTextOperation({ param: "prefix-lines", paramObject: { character: "*" } });
 		};
 
 		await editor.evaluate(toggleBulletList);
@@ -150,7 +150,7 @@ test.describe("ProseMirror Editor - Lists", () => {
 			const { editorX, renderedX } = metrics.textStart[key];
 			expect(editorX, `${key}: editorX`).not.toBeNull();
 			expect(renderedX, `${key}: renderedX`).not.toBeNull();
-			expect(Math.abs(editorX - renderedX), `${key}: |editorX-renderedX|`).toBeLessThanOrEqual(1);
+			expect(Math.abs(editorX - renderedX), `${key}: |editorX-renderedX| ${JSON.stringify(metrics)}`).toBeLessThanOrEqual(1);
 		}
 		expect(Math.abs(metrics.gaps.ul.editor - metrics.gaps.ul.rendered)).toBeLessThanOrEqual(1);
 		expect(Math.abs(metrics.gaps.listSwitch.editor - metrics.gaps.listSwitch.rendered)).toBeLessThanOrEqual(1);

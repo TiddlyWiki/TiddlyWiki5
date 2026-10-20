@@ -42,14 +42,14 @@ function getLinkAtPos(state) {
 	return { mark: linkMark, from: linkFrom, to: linkTo };
 }
 
-function getSvgIcon(tiddlerTitle, size) {
+function getSvgIcon(ownerDocument, tiddlerTitle, size) {
 	size = size || "1em";
 	try {
 		const htmlStr = $tw.wiki.renderTiddler("text/html", tiddlerTitle, {
 			variables: { size }
 		});
 		if(!htmlStr) return null;
-		const container = document.createElement("div");
+		const container = ownerDocument.createElement("div");
 		container.innerHTML = htmlStr;
 		return container.querySelector("svg") || null;
 	} catch(e) {
@@ -58,10 +58,10 @@ function getSvgIcon(tiddlerTitle, size) {
 }
 
 function setButtonIcon(button, tiddlerTitle, fallbackText) {
-	const svg = getSvgIcon(tiddlerTitle);
+	const svg = getSvgIcon(button.ownerDocument, tiddlerTitle);
 	if(svg) {
 		button.innerHTML = "";
-		button.appendChild(document.importNode(svg, true));
+		button.appendChild(button.ownerDocument.importNode(svg, true));
 	} else {
 		button.textContent = fallbackText || "•";
 	}
@@ -71,16 +71,19 @@ class LinkTooltip {
 	constructor(view, parentWidget) {
 		this.view = view;
 		this.parentWidget = parentWidget;
+		this.document = view.dom.ownerDocument;
+		this.window = this.document.defaultView;
 		this._destroyed = false;
 		this._editing = false;
 		this._currentLink = null;
+		this._focusTimer = null;
 		this._idSuffix = Math.random().toString(36).substr(2, 5);
 
-		this.el = document.createElement("div");
+		this.el = this.document.createElement("div");
 		this.el.className = "tc-prosemirror-link-tooltip";
 		this.el.style.display = "none";
 		this.el.setAttribute("contenteditable", "false");
-		document.body.appendChild(this.el);
+		this.document.body.appendChild(this.el);
 
 		this._linkClickHandler = (event) => {
 			// Capture clicks on links inside the editor so we can edit them
@@ -99,7 +102,7 @@ class LinkTooltip {
 			if(event.ctrlKey || event.metaKey) {
 				// Ctrl/Cmd+click navigates to the link target.
 				if(/^(?:https?|ftp|mailto):/i.test(href)) {
-					window.open(href, "_blank", "noopener,noreferrer");
+					this.window.open(href, "_blank", "noopener,noreferrer");
 				} else {
 					this._navigateToTiddler(href);
 				}
@@ -132,17 +135,17 @@ class LinkTooltip {
 		this.el.innerHTML = "";
 		this._editing = false;
 
-		const linkDisplay = document.createElement("div");
+		const linkDisplay = this.document.createElement("div");
 		linkDisplay.className = "tc-prosemirror-link-tooltip-display";
 
-		this._linkText = document.createElement("a");
+		this._linkText = this.document.createElement("a");
 		this._linkText.className = "tc-prosemirror-link-tooltip-href tc-tiddlylink";
 		linkDisplay.appendChild(this._linkText);
 
-		const btnGroup = document.createElement("span");
+		const btnGroup = this.document.createElement("span");
 		btnGroup.className = "tc-prosemirror-link-tooltip-buttons";
 
-		const editBtn = document.createElement("button");
+		const editBtn = this.document.createElement("button");
 		editBtn.type = "button";
 		editBtn.className = "tc-prosemirror-link-tooltip-btn";
 		editBtn.title = "Edit link";
@@ -153,7 +156,7 @@ class LinkTooltip {
 		});
 		btnGroup.appendChild(editBtn);
 
-		const openBtn = document.createElement("button");
+		const openBtn = this.document.createElement("button");
 		openBtn.type = "button";
 		openBtn.className = "tc-prosemirror-link-tooltip-btn";
 		openBtn.title = "Open link";
@@ -164,14 +167,14 @@ class LinkTooltip {
 			const href = this._currentLink.mark.attrs.href || "";
 			if(/^(?:https?|ftp|mailto):/i.test(href)) {
 				// Check if this is actually an internal link to the same TW instance
-				const base = window.location.origin + window.location.pathname;
+				const base = this.window.location.origin + this.window.location.pathname;
 				if(href.startsWith(base + "#") || href.startsWith(base + "/#")) {
 					// Internal wiki link stored as full URL — extract tiddler name
 					const hashIdx = href.indexOf("#");
 					const tiddler = decodeURIComponent(href.substring(hashIdx + 1));
 					this._navigateToTiddler(tiddler);
 				} else {
-					window.open(href, "_blank", "noopener,noreferrer");
+					this.window.open(href, "_blank", "noopener,noreferrer");
 				}
 			} else {
 				// Internal wiki link — dispatch through the TW widget tree
@@ -180,7 +183,7 @@ class LinkTooltip {
 		});
 		btnGroup.appendChild(openBtn);
 
-		const unlinkBtn = document.createElement("button");
+		const unlinkBtn = this.document.createElement("button");
 		unlinkBtn.type = "button";
 		unlinkBtn.className = "tc-prosemirror-link-tooltip-btn tc-prosemirror-link-tooltip-btn-danger";
 		unlinkBtn.title = "Remove link";
@@ -214,15 +217,15 @@ class LinkTooltip {
 		this._editing = true;
 		this.el.innerHTML = "";
 
-		const form = document.createElement("div");
+		const form = this.document.createElement("div");
 		form.className = "tc-prosemirror-link-tooltip-edit";
 
-		const targetRow = document.createElement("div");
+		const targetRow = this.document.createElement("div");
 		targetRow.className = "tc-prosemirror-link-tooltip-edit-row";
-		const targetLabel = document.createElement("label");
+		const targetLabel = this.document.createElement("label");
 		targetLabel.className = "tc-prosemirror-link-tooltip-edit-label";
 		targetLabel.textContent = "Target";
-		const targetInput = document.createElement("input");
+		const targetInput = this.document.createElement("input");
 		targetInput.id = "tw-prosemirror-link-target-" + this._idSuffix;
 		targetLabel.htmlFor = targetInput.id;
 		targetInput.type = "text";
@@ -234,12 +237,12 @@ class LinkTooltip {
 		targetRow.appendChild(targetInput);
 		form.appendChild(targetRow);
 
-		const textRow = document.createElement("div");
+		const textRow = this.document.createElement("div");
 		textRow.className = "tc-prosemirror-link-tooltip-edit-row";
-		const textLabel = document.createElement("label");
+		const textLabel = this.document.createElement("label");
 		textLabel.className = "tc-prosemirror-link-tooltip-edit-label";
 		textLabel.textContent = "Text";
-		const textInput = document.createElement("input");
+		const textInput = this.document.createElement("input");
 		textInput.id = "tw-prosemirror-link-text-" + this._idSuffix;
 		textLabel.htmlFor = textInput.id;
 		textInput.type = "text";
@@ -251,10 +254,10 @@ class LinkTooltip {
 		textRow.appendChild(textInput);
 		form.appendChild(textRow);
 
-		const btnRow = document.createElement("div");
+		const btnRow = this.document.createElement("div");
 		btnRow.className = "tc-prosemirror-link-tooltip-edit-buttons";
 
-		const okBtn = document.createElement("button");
+		const okBtn = this.document.createElement("button");
 		okBtn.type = "button";
 		okBtn.className = "tc-prosemirror-link-tooltip-btn tc-prosemirror-link-tooltip-btn-ok";
 		setButtonIcon(okBtn, "$:/core/images/done-button", "\u2713");
@@ -265,7 +268,7 @@ class LinkTooltip {
 		});
 		btnRow.appendChild(okBtn);
 
-		const cancelBtn = document.createElement("button");
+		const cancelBtn = this.document.createElement("button");
 		cancelBtn.type = "button";
 		cancelBtn.className = "tc-prosemirror-link-tooltip-btn";
 		setButtonIcon(cancelBtn, "$:/core/images/cancel-button", "\u00D7");
@@ -282,7 +285,13 @@ class LinkTooltip {
 		form.appendChild(btnRow);
 		this.el.appendChild(form);
 
-		setTimeout(() => { targetInput.focus(); targetInput.select(); }, 0);
+		this._focusTimer = this.window.setTimeout(() => {
+			this._focusTimer = null;
+			if(!this._destroyed) {
+				targetInput.focus();
+				targetInput.select();
+			}
+		}, 0);
 
 		const handleKeydown = (e) => {
 			if(e.key === "Enter") {
@@ -358,13 +367,17 @@ class LinkTooltip {
 		this.el.style.display = "flex";
 		const rect = this.el.getBoundingClientRect();
 		this.el.style.position = "absolute";
-		this.el.style.left = `${Math.max(4, left - rect.width / 2 + window.scrollX)}px`;
-		this.el.style.top = `${top + 4 + window.scrollY}px`;
+		this.el.style.left = `${Math.max(4, left - rect.width / 2 + this.window.scrollX)}px`;
+		this.el.style.top = `${top + 4 + this.window.scrollY}px`;
 		this.el.style.zIndex = "1002";
 	}
 
 	destroy() {
 		this._destroyed = true;
+		if(this._focusTimer !== null) {
+			this.window.clearTimeout(this._focusTimer);
+			this._focusTimer = null;
+		}
 		if(this.view && this.view.dom && this._linkClickHandler) {
 			this.view.dom.removeEventListener("click", this._linkClickHandler, true);
 		}

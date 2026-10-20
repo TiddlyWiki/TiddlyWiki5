@@ -3,92 +3,37 @@ title: test-prosemirror-editor-mapping.js
 type: application/javascript
 tags: [[$:/tags/test-spec]]
 
-Tests for editor type fallback integration with ProseMirror mapping.
+Tests the deliberately narrow editor mapping contract.
 \*/
 
 "use strict";
 
-describe("ProseMirror editor mapping fallback", function() {
-	function withBrowserFlag(value, callback) {
-		var originalBrowser = $tw.browser;
-		$tw.browser = value;
-		try {
-			callback();
-		} finally{
-			$tw.browser = originalBrowser;
-		}
-	}
+describe("ProseMirror editor mapping", function() {
+	it("maps WikiText, but not Markdown or arbitrary content types", function() {
+		expect($tw.wiki.getTiddlerText("$:/config/EditorTypeMappings/text/vnd.tiddlywiki")).toBe("prosemirror");
+		expect($tw.wiki.getTiddlerText("$:/config/EditorTypeMappings/text/markdown")).toBeUndefined();
+		expect($tw.wiki.getTiddlerText("$:/config/EditorTypeMappings/application/x-unknown")).toBeUndefined();
+	});
 
-	it("should fall back to text editor outside the browser when mapped to prosemirror", function() {
-		var EditWidget = require("$:/core/modules/widgets/edit.js").edit;
-		var wiki = new $tw.Wiki();
+	it("keeps editor selection generic and delegates environment fallback to the mapped widget", function() {
+		const EditWidget = require("$:/core/modules/widgets/edit.js").edit;
+		const wiki = new $tw.Wiki();
 		wiki.addTiddler({
 			title: "$:/config/EditorTypeMappings/text/vnd.tiddlywiki",
 			text: "prosemirror"
 		});
 		wiki.addTiddler({
-			title: "MappingFallbackTest",
+			title: "MappingTest",
 			text: "Hello world",
 			type: "text/vnd.tiddlywiki"
 		});
-
-		var widget = {
+		const widget = {
 			wiki: wiki,
-			editTitle: "MappingFallbackTest",
+			editTitle: "MappingTest",
 			editField: "text"
 		};
 
-		withBrowserFlag(false,function() {
-			expect(EditWidget.prototype.getEditorType.call(widget)).toBe("text");
-		});
-	});
-
-	it("should fall back to text editor in the browser when a mapped parser is unavailable", function() {
-		var EditWidget = require("$:/core/modules/widgets/edit.js").edit;
-		var wiki = new $tw.Wiki();
-		wiki.addTiddler({
-			title: "$:/config/EditorTypeMappings/application/x-unknown",
-			text: "prosemirror"
-		});
-		wiki.addTiddler({
-			title: "MissingParserFallbackTest",
-			text: "Hello world",
-			type: "application/x-unknown"
-		});
-
-		var widget = {
-			wiki: wiki,
-			editTitle: "MissingParserFallbackTest",
-			editField: "text"
-		};
-
-		withBrowserFlag(true,function() {
-			expect(EditWidget.prototype.getEditorType.call(widget)).toBe("text");
-		});
-	});
-
-	it("should use prosemirror in the browser for markdown when the parser is available", function() {
-		var EditWidget = require("$:/core/modules/widgets/edit.js").edit;
-		var wiki = new $tw.Wiki();
-		wiki.addTiddler({
-			title: "$:/config/EditorTypeMappings/text/markdown",
-			text: "prosemirror"
-		});
-		wiki.addTiddler({
-			title: "MarkdownMappingTest",
-			text: "# Heading",
-			type: "text/markdown"
-		});
-
-		var widget = {
-			wiki: wiki,
-			editTitle: "MarkdownMappingTest",
-			editField: "text"
-		};
-
-		withBrowserFlag(true,function() {
-			expect($tw.Wiki.parsers["text/markdown"]).toBeTruthy();
-			expect(EditWidget.prototype.getEditorType.call(widget)).toBe("prosemirror");
-		});
+		expect(EditWidget.prototype.getEditorType.call(widget)).toBe("prosemirror");
+		expect(require("$:/plugins/tiddlywiki/prosemirror/core/widget-loader.js")["edit-prosemirror"]).toBeDefined();
 	});
 });

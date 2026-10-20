@@ -42,6 +42,9 @@ function tableCellOrHeader(builders, node) {
 		for(let i = 0; i < node.content.length; i++) {
 			let child = node.content[i];
 			if(child.type === "paragraph" && child.content) {
+				if(i > 0) {
+					inlineContent.push(factory.htmlBreak());
+				}
 				const inlines = convertNodes(builders, child.content);
 				if(Array.isArray(inlines)) {
 					inlineContent = inlineContent.concat(inlines);
@@ -58,7 +61,12 @@ function tableCellOrHeader(builders, node) {
 			}
 		}
 	}
-	return factory.tableCell(keepBreakElements(inlineContent), { header: node.type === "table_header" });
+	const attrs = node.attrs || {};
+	const options = { header: node.type === "table_header" };
+	["colspan", "rowspan", "align", "valign"].forEach((name) => {
+		if(attrs[name] != null) options[name] = attrs[name];
+	});
+	return factory.tableCell(keepBreakElements(inlineContent), options);
 }
 
 // A table row is one line, so a break inside a cell becomes the html element

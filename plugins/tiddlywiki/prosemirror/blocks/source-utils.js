@@ -6,11 +6,11 @@ module-type: library
 
 "use strict";
 
-const wikiAstFromProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js").from;
+const serializeWithPreservedSource = require("$:/plugins/tiddlywiki/prosemirror/ast/source-preservation.js").serializeWithPreservedSource;
+const serializeProseMirrorNodes = require("$:/plugins/tiddlywiki/prosemirror/ast/serialize-wikitext.js").serializeProseMirrorNodes;
 
 function getNodeWikiText(node) {
-	const wikiAst = wikiAstFromProseMirrorAst(node.toJSON());
-	return $tw.utils.serializeWikitextParseTree(wikiAst).trimEnd();
+	return serializeWithPreservedSource({ type: "doc", content: [node.toJSON()] },serializeProseMirrorNodes);
 }
 
 function replaceNodeWithOpaqueSource(view, getPos, node) {

@@ -34,6 +34,26 @@ describe("ProseMirror engine operation mapping", () => {
 		return;
 	}
 
+	it("defers external changes during composition and applies them when composition ends", () => {
+		const proto = ProseMirrorEngine.prototype;
+		const owner = {
+			type: "text/vnd.tiddlywiki", value: "Original", pendingSavedText: null,
+			view: { composing: true },
+			clearPendingExternalText: proto.clearPendingExternalText,
+			applyExternalText: jasmine.createSpy("applyExternalText")
+		};
+		proto.setText.call(owner,"External",owner.type);
+		expect(owner.pendingExternalText).toBe("External");
+		expect(owner.applyExternalText).not.toHaveBeenCalled();
+		proto.applyPendingExternalText.call(owner);
+		expect(owner.applyExternalText).not.toHaveBeenCalled();
+		owner.view.composing = false;
+		proto.applyPendingExternalText.call(owner);
+		expect(owner.applyExternalText).toHaveBeenCalledTimes(1);
+		expect(owner.applyExternalText).toHaveBeenCalledWith("External");
+		expect(owner.pendingExternalText).toBeNull();
+	});
+
 	// Test buildSchema
 	describe("buildSchema", () => {
 
@@ -56,10 +76,12 @@ describe("ProseMirror engine operation mapping", () => {
 			expect(schema.nodes.list).toBeDefined();
 		});
 
-		it("should have custom block types (pragma_block, opaque_block)", () => {
+		it("should have custom source-backed block and inline types", () => {
 			const schema = buildSchema();
 			expect(schema.nodes.pragma_block).toBeDefined();
 			expect(schema.nodes.opaque_block).toBeDefined();
+			expect(schema.nodes.opaque_inline).toBeDefined();
+			expect(schema.nodes.opaque_inline.isInline).toBe(true);
 		});
 
 		it("should have extended marks (underline, strike, superscript, subscript)", () => {

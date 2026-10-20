@@ -15,17 +15,6 @@ const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/bl
 const createSafeNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/safe-nodeview.js").createSafeNodeView;
 const replaceNodeWithOpaqueSource = require("$:/plugins/tiddlywiki/prosemirror/blocks/source-utils.js").replaceNodeWithOpaqueSource;
 
-// Module-level flag: when a typed_block is inserted via slash menu,
-// set this to true before dispatching the transaction. The next
-// nodeview constructor will consume this flag and auto-enter edit mode.
-let _pendingAutoEdit = false;
-
-function scheduleNextAutoEdit() {
-	_pendingAutoEdit = true;
-}
-
-exports.scheduleNextAutoEdit = scheduleNextAutoEdit;
-
 const COMMON_TYPES = [
 	{ value: "", label: "text/plain" },
 	{ value: "text/plain", label: "text/plain" },
@@ -62,17 +51,22 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 
 		this._createDOM();
 
-		// Consume the pending auto-edit flag and enter edit mode on next frame
-		if(_pendingAutoEdit) {
-			_pendingAutoEdit = false;
-			requestAnimationFrame(() => {
-				if(!this.isEditMode) this.enterEditMode();
+		if(node.attrs.autoEdit) {
+			this.scheduleAnimationFrame(() => {
+				if(!this.isEditMode) {
+					this.enterEditMode();
+				}
+				const pos = this.getPos();
+				if(typeof pos === "number" && this.node.attrs.autoEdit) {
+					const attrs = Object.assign({}, this.node.attrs, { autoEdit: false });
+					this.view.dispatch(this.view.state.tr.setNodeMarkup(pos, null, attrs).setMeta("addToHistory", false));
+				}
 			});
 		}
 	}
 
 	_createDOM() {
-		const container = document.createElement("div");
+		const container = this.document.createElement("div");
 		container.className = "pm-nodeview pm-nodeview-typedblock";
 		container.setAttribute("contenteditable", "false");
 
@@ -91,7 +85,7 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 		}
 		container.appendChild(header);
 
-		const content = document.createElement("div");
+		const content = this.document.createElement("div");
 		content.className = "pm-nodeview-content pm-typed-block-content";
 		container.appendChild(content);
 
@@ -109,7 +103,7 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 	}
 
 	_buildTypeSelect() {
-		const select = document.createElement("select");
+		const select = this.document.createElement("select");
 		select.className = "pm-typed-block-type-select pm-nodeview-control";
 		select.setAttribute("contenteditable", "false");
 		this.constructor._populateSelect(select, this.node.attrs.parseType);
@@ -120,7 +114,8 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 			const tr = this.view.state.tr.setNodeMarkup(pos, null, {
 				rawText: this.node.attrs.rawText,
 				parseType: select.value,
-				renderType: this.node.attrs.renderType
+				renderType: this.node.attrs.renderType,
+				autoEdit: false
 			});
 			this.view.dispatch(tr);
 		});
@@ -151,10 +146,11 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 	}
 
 	static _populateSelect(select, currentType) {
+		const ownerDocument = select.ownerDocument;
 		while(select.firstChild) select.removeChild(select.firstChild);
 		let found = false;
 		for(let i = 0; i < COMMON_TYPES.length; i++) {
-			const opt = document.createElement("option");
+			const opt = ownerDocument.createElement("option");
 			opt.value = COMMON_TYPES[i].value;
 			opt.textContent = COMMON_TYPES[i].label;
 			if(COMMON_TYPES[i].value === currentType) {
@@ -164,7 +160,7 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 			select.appendChild(opt);
 		}
 		if(!found && currentType) {
-			const custom = document.createElement("option");
+			const custom = ownerDocument.createElement("option");
 			custom.value = currentType;
 			custom.textContent = currentType;
 			custom.selected = true;
@@ -191,7 +187,7 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 		const initial = this.node.attrs.rawText || "";
 		const textarea = this.createEditTextarea(initial, Math.max(3, initial.split("\n").length));
 		this.contentEl.appendChild(textarea);
-		setTimeout(() => { textarea.focus(); }, 0);
+		this.scheduleTimeout(() => { textarea.focus(); });
 	}
 
 	saveEdit(newText) {
@@ -201,7 +197,8 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 		const tr = this.view.state.tr.setNodeMarkup(pos, null, {
 			rawText: text,
 			parseType: this.node.attrs.parseType,
-			renderType: this.node.attrs.renderType
+			renderType: this.node.attrs.renderType,
+			autoEdit: false
 		});
 		this.view.dispatch(tr);
 	}
@@ -215,7 +212,7 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 		}
 		const renderType = parseType || "";
 		if(CODE_RENDER_TYPES[renderType]) {
-			const pre = document.createElement("pre");
+			const pre = this.document.createElement("pre");
 			pre.className = "pm-typed-block-source";
 			pre.textContent = rawText;
 			el.appendChild(pre);
@@ -230,7 +227,7 @@ class TypedBlockNodeView extends BaseSourceEditableNodeView {
 		} catch(e) {
 			// fall through
 		}
-		const fallback = document.createElement("pre");
+		const fallback = this.document.createElement("pre");
 		fallback.className = "pm-typed-block-source";
 		fallback.textContent = rawText;
 		el.appendChild(fallback);

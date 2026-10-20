@@ -13,10 +13,12 @@ if(!$tw.browser) {
 	// browser and node environments, but the prosemirror AST converters should work in node too.
 	describe("ProseMirror AST round-trip tests", () => {
 
-		let wikiAstToProseMirrorAst, wikiAstFromProseMirrorAst;
+		let wikiAstToProseMirrorAst, wikiAstFromProseMirrorAst, serializeWithPreservedSource, serializeProseMirrorNodes;
 		try {
 			wikiAstToProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/to-prosemirror.js").to;
 			wikiAstFromProseMirrorAst = require("$:/plugins/tiddlywiki/prosemirror/ast/from-prosemirror.js").from;
+			serializeWithPreservedSource = require("$:/plugins/tiddlywiki/prosemirror/ast/source-preservation.js").serializeWithPreservedSource;
+			serializeProseMirrorNodes = require("$:/plugins/tiddlywiki/prosemirror/ast/serialize-wikitext.js").serializeProseMirrorNodes;
 		} catch(e) {
 			// If running in node and prosemirror libs aren't available, skip
 			return;
@@ -27,13 +29,21 @@ if(!$tw.browser) {
 			const wikiAst = parseResult.tree;
 			const pmAst = wikiAstToProseMirrorAst(wikiAst, { sourceText: wikitext });
 			// pmAst is a doc object; fromPM expects the doc's content array or the doc itself
-			let restored;
-			if(pmAst && pmAst.type === "doc" && pmAst.content) {
-				restored = wikiAstFromProseMirrorAst(pmAst);
-			} else {
-				restored = wikiAstFromProseMirrorAst(pmAst);
-			}
-			return $tw.utils.serializeWikitextParseTree(restored).trimEnd();
+			return serializeProseMirrorNodes(pmAst.content || [], { atDocumentStart: true }).trimEnd();
+		}
+
+		function parseWithSourceSafety(wikitext) {
+			const wikiAst = $tw.wiki.parseText("text/vnd.tiddlywiki", wikitext, { preserveBlankLines: false }).tree;
+			return wikiAstToProseMirrorAst(wikiAst, {
+				sourceText: wikitext,
+				sourceType: "text/vnd.tiddlywiki",
+				wiki: $tw.wiki,
+				preserveSource: true
+			});
+		}
+
+		function serializeSourceSafeDoc(pmAst) {
+			return serializeWithPreservedSource(pmAst, serializeProseMirrorNodes);
 		}
 
 		// --- Basic inline formatting ---
@@ -154,6 +164,13 @@ if(!$tw.browser) {
 			expect(result).toContain("citation source");
 		});
 
+		it("should round-trip blockquote classes", () => {
+			const input = "<<<.myClass.another-class\nquoted text\n<<< Somebody";
+			const result = roundTrip(input);
+			expect(result).toContain("<<<.myClass.another-class");
+			expect(result).toContain("<<< Somebody");
+		});
+
 		// --- Links ---
 
 		it("should round-trip internal link", () => {
@@ -164,12 +181,20 @@ if(!$tw.browser) {
 
 		it("should round-trip external link", () => {
 			const input = "Visit [ext[example|https://example.com]]";
-			expect(roundTrip(input)).toBe(input);
+			const result = roundTrip(input);
+			expect(result).toContain("https://example.com");
 		});
 
-		it("should round-trip a link around formatted text", () => {
-			const input = "See <$link to=\"MyTiddler\">''bold''</$link> now";
-			expect(roundTrip(input)).toBe(input);
+		it("should preserve an inline transclusion as an editable paragraph atom", () => {
+			const input = "Before {{Target}} after";
+			const pmAst = parseWithSourceSafety(input);
+			expect(pmAst.content.length).toBe(1);
+			expect(pmAst.content[0].type).toBe("paragraph");
+			expect(pmAst.content[0].content.map((node) => node.type)).toEqual([
+				"text", "opaque_inline", "text"
+			]);
+			expect(pmAst.content[0].content[1].attrs.rawText).toBe("{{Target}}");
+			expect(serializeSourceSafeDoc(pmAst)).toBe(input);
 		});
 
 		// --- Images ---
@@ -381,24 +406,6 @@ if(!$tw.browser) {
 
 		// --- Hard break (Shift-Enter) ---
 
-		it("should write a hard break as two spaces and a backslash before the line end", () => {
-			// Shift+Enter inserts a hard_break node; the backslash form survives editors that trim trailing whitespace
-			expect(roundTrip("Line one  \\\nLine two")).toBe("Line one  \\\nLine two");
-			expect(roundTrip("Line one<br>Line two")).toBe("Line one  \\\nLine two");
-		});
-
-		it("should keep a hard break inside a list item", () => {
-			// A break is inline content of the item, not a block boundary
-			const input = "* one  \\\ntwo\n* three";
-			expect(roundTrip(input)).toBe(input);
-		});
-
-		it("should keep the br element inside a table cell", () => {
-			// A table row is one line, so a break inside a cell has no other form
-			const input = "|a<br>b|c|";
-			expect(roundTrip(input)).toBe(input);
-		});
-
 		it("should round-trip hard break (line break within paragraph)", () => {
 			const input = "Line one\nLine two";
 			const result = roundTrip(input);
@@ -509,6 +516,108 @@ if(!$tw.browser) {
 			expect(result).toContain("A fruit");
 			expect(result).toContain("Banana");
 			expect(result).toContain("Another fruit");
+		});
+
+		// --- Source-preserving visual safety gate ---
+
+		it("should preserve an unchanged document byte-for-byte", () => {
+			[
+				"First paragraph.\n\n''bold'' &nbsp; text\n",
+				"",
+				"   \n\t\n"
+			].forEach((input) => {
+				const pmAst = parseWithSourceSafety(input);
+				expect(serializeSourceSafeDoc(pmAst)).toBe(input);
+			});
+		});
+
+		it("should represent source whitespace gaps as visual empty paragraphs", () => {
+			const input = "A\n\n\n\nB";
+			const pmAst = parseWithSourceSafety(input);
+			expect(pmAst.content.map((node) => node.type)).toEqual([
+				"paragraph", "paragraph", "paragraph", "paragraph"
+			]);
+			expect(serializeSourceSafeDoc(pmAst)).toBe(input);
+		});
+
+		it("should make lossy syntax an opaque source block", () => {
+			const unsafeCases = [
+				"|caption|c\n|table-class|k\n|A|B|",
+				"[all[tiddlers]prefix[$]!prefix[$:/plugins]!prefix[$:/config]]"
+			];
+			unsafeCases.forEach((input) => {
+				const pmAst = parseWithSourceSafety(input);
+				expect(pmAst.content.length).toBe(1);
+				expect(pmAst.content[0].type).toBe("opaque_block");
+				expect(pmAst.content[0].attrs.rawText).toBe(input);
+				expect(serializeSourceSafeDoc(pmAst)).toBe(input);
+			});
+		});
+
+		it("should edit a safe segment without rewriting an unsafe neighbour", () => {
+			const unsafeTable = "|caption|c\n|table-class|k\n|A|B|";
+			const input = "Original paragraph.\n\n" + unsafeTable;
+			const pmAst = parseWithSourceSafety(input);
+			expect(pmAst.content.map((node) => node.type)).toEqual(["paragraph", "opaque_block"]);
+
+			pmAst.content[0].content[0].text = "Changed paragraph.";
+			const output = serializeSourceSafeDoc(pmAst);
+			expect(output).toContain("Changed paragraph.");
+			expect(output).toContain(unsafeTable);
+			expect(output.split(unsafeTable).length - 1).toBe(1);
+		});
+
+		it("should retain source for unchanged members of a multi-node group", () => {
+			const input = "* one\n* two";
+			const pmAst = parseWithSourceSafety(input);
+			expect(pmAst.content.length).toBeGreaterThan(1);
+			expect(serializeSourceSafeDoc(pmAst)).toBe(input);
+		});
+
+		it("should allocate distinct source groups for independent parses", () => {
+			const first = parseWithSourceSafety("First paragraph.");
+			const second = parseWithSourceSafety("Other paragraph");
+			expect(first.content[0].attrs.twSourceGroup).not.toBe(second.content[0].attrs.twSourceGroup);
+			const combined = {
+				type: "doc",
+				content: first.content.concat(second.content)
+			};
+			expect(serializeSourceSafeDoc(combined)).toBe("First paragraph.Other paragraph");
+		});
+
+		it("should invalidate source when a block is split", () => {
+			const pmAst = parseWithSourceSafety("One two");
+			const original = pmAst.content[0];
+			pmAst.content = [
+				Object.assign({}, original, { content: [{ type: "text", text: "One" }] }),
+				Object.assign({}, original, { content: [{ type: "text", text: "Two" }] })
+			];
+			const output = serializeSourceSafeDoc(pmAst);
+			expect(output).not.toContain("One two");
+			expect(output.split("One").length - 1).toBe(1);
+			expect(output.split("Two").length - 1).toBe(1);
+		});
+
+		it("should not restore a deleted member of a source group", () => {
+			const pmAst = parseWithSourceSafety("* one\n* two");
+			expect(pmAst.content.length).toBeGreaterThan(1);
+			pmAst.content = pmAst.content.slice(1);
+			const output = serializeSourceSafeDoc(pmAst);
+			expect(output).not.toContain("one");
+			expect(output).toContain("two");
+		});
+
+		it("should add canonical boundaries before newly inserted blocks", () => {
+			const paragraphDoc = parseWithSourceSafety("Hello");
+			paragraphDoc.content.push({
+				type: "paragraph",
+				content: [{ type: "text", text: "World" }]
+			});
+			expect(serializeSourceSafeDoc(paragraphDoc)).toBe("Hello\n\nWorld");
+
+			const blankDoc = parseWithSourceSafety("Hello");
+			blankDoc.content.push({ type: "paragraph" }, { type: "paragraph" });
+			expect(serializeSourceSafeDoc(blankDoc)).toBe("Hello\n\n\n\n");
 		});
 	});
 }

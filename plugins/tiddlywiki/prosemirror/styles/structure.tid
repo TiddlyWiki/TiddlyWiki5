@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/prosemirror/styles/structure
-type: text/vnd.tiddlywiki
+type: text/css
 tags: $:/tags/Stylesheet
 
 /*
@@ -16,6 +16,30 @@ tags: $:/tags/Stylesheet
 	position: relative;
 }
 
+.ProseMirror.tw-prosemirror-empty::before {
+	content: attr(data-placeholder);
+	pointer-events: none;
+	float: left;
+	height: 0;
+}
+
+.tc-prosemirror-wrapper {
+	display: block;
+	overflow: hidden;
+}
+
+/* Keep native node-selection text readable inside interactive previews.
+ * These overrides belong to the adapter rather than the vendor bundle. */
+.ProseMirror-hideselection *::selection {
+	background: transparent;
+	color: currentColor;
+}
+
+.ProseMirror-hideselection *::-moz-selection {
+	background: transparent;
+	color: currentColor;
+}
+
 .ProseMirror p {
 	margin: 0.5em 0;
 	min-height: 1.2em;
@@ -30,6 +54,40 @@ tags: $:/tags/Stylesheet
 
 .ProseMirror p:last-child {
 	margin-bottom: 0;
+}
+
+/* TiddlyWiki list geometry is an adapter, not a patch to vendored CSS.
+ * The editor's handle gutter already supplies 28px of the first indent. */
+.tc-prosemirror-container .ProseMirror .prosemirror-flat-list {
+	margin-left: 0;
+	margin-inline-start: var(--pm-list-indent,40px);
+}
+
+.tc-prosemirror-container .ProseMirror > .prosemirror-flat-list {
+	margin-inline-start: calc(var(--pm-list-indent,40px) - 28px);
+}
+
+.tc-prosemirror-container .ProseMirror .prosemirror-flat-list[data-list-kind="bullet"] + .prosemirror-flat-list[data-list-kind="ordered"],
+.tc-prosemirror-container .ProseMirror .prosemirror-flat-list[data-list-kind="ordered"] + .prosemirror-flat-list[data-list-kind="bullet"] {
+	margin-top: var(--pm-list-block-gap,15px);
+}
+
+.tc-prosemirror-container .ProseMirror .prosemirror-flat-list > .list-content > p {
+	margin: 0;
+}
+
+.tc-prosemirror-container .ProseMirror .prosemirror-flat-list .prosemirror-flat-list[data-list-kind="bullet"] {
+	list-style-type: circle;
+}
+
+.tc-prosemirror-container .ProseMirror .prosemirror-flat-list .prosemirror-flat-list .prosemirror-flat-list[data-list-kind="bullet"] {
+	list-style-type: square;
+}
+
+html[dir="rtl"] .tc-prosemirror-container .ProseMirror .prosemirror-flat-list[data-list-kind="ordered"]::before,
+html[dir="rtl"] .tc-prosemirror-container .ProseMirror .prosemirror-flat-list > .list-marker {
+	right: auto;
+	left: 100%;
 }
 
 .ProseMirror blockquote {
@@ -55,6 +113,9 @@ tags: $:/tags/Stylesheet
 .ProseMirror h1, .ProseMirror h2, .ProseMirror h3,
 .ProseMirror h4, .ProseMirror h5, .ProseMirror h6 {
 	margin: 0.8em 0 0.3em;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	max-width: 100%;
 }
 
 .ProseMirror h1:first-child, .ProseMirror h2:first-child, .ProseMirror h3:first-child,

@@ -12,6 +12,7 @@ Used by the drag-handle plugin and by tests.
 
 const { NodeSelection } = require("prosemirror-state");
 const { TextSelection } = require("prosemirror-state");
+const { stripSourceMetadata } = require("$:/plugins/tiddlywiki/prosemirror/ast/source-preservation.js");
 
 /**
  * Determine whether a given document position sits inside a list node.
@@ -135,19 +136,20 @@ function buildMoveTransaction(view, source, target) {
 	let tr = view.state.tr.delete(sourceFrom, sourceTo);
 	let insertPos = tr.mapping.map(target.insertPos, target.insertPos > sourceFrom ? -1 : 1);
 	let nodesToInsert;
+	const movedNode = view.state.schema.nodeFromJSON(stripSourceMetadata(source.node.toJSON()));
 	if(target.unwrapList) {
-		nodesToInsert = source.node.content;
+		nodesToInsert = movedNode.content;
 	} else if(target.dropContext === "inside-list" && source.node.type.name !== "list") {
 		// Wrap the dropped block into a list item so it becomes part of the list.
 		const listType = view.state.schema.nodes.list;
 		if(listType) {
-			const listNode = listType.create({ kind: "bullet" }, source.node);
+			const listNode = listType.create({ kind: "bullet" }, movedNode);
 			nodesToInsert = [listNode];
 		} else {
-			nodesToInsert = [source.node];
+			nodesToInsert = [movedNode];
 		}
 	} else {
-		nodesToInsert = [source.node];
+		nodesToInsert = [movedNode];
 	}
 	tr = tr.insert(insertPos, nodesToInsert);
 	try {

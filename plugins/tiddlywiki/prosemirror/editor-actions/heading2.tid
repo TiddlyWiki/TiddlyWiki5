@@ -1,8 +1,10 @@
-title: $:/plugins/tiddlywiki/prosemirror/EditorAction/heading2
-tags: $:/tags/ProseMirror/EditorAction
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/heading2
+tags: $:/tags/EditorCommand
 caption: Heading 2
 description: Convert to heading level 2
-category: block-type
-action-id: heading2
 icon: $:/core/images/heading-2
-
+command-id: toggle-heading
+command-level: 2
+command-category: block-type
+command-surfaces: slash-menu block-menu
+command-editors: prosemirror

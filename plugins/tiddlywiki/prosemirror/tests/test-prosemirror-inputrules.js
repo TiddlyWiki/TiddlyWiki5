@@ -176,5 +176,4 @@ describe("ProseMirror input rules", () => {
 			expect(rules.length).toBe(markRuleCount + 2);
 		});
 	});
-
 });

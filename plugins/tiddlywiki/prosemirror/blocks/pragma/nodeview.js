@@ -14,6 +14,9 @@ with widget blocks (header toolbar, edit/save/cancel/delete buttons).
 const BaseSourceEditableNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/base-source-editable.js").BaseSourceEditableNodeView;
 const createSafeNodeView = require("$:/plugins/tiddlywiki/prosemirror/blocks/safe-nodeview.js").createSafeNodeView;
 const parseWikiTextToDoc = require("$:/plugins/tiddlywiki/prosemirror/core/editor-shared.js").parseWikiTextToDoc;
+const OpaqueSourceSandbox = require("$:/plugins/tiddlywiki/prosemirror/blocks/opaque-sandbox.js").OpaqueSourceSandbox;
+const closeHistory = require("prosemirror-history").closeHistory;
+const restoreSourceBoundary = require("$:/plugins/tiddlywiki/prosemirror/ast/source-preservation.js").restoreSourceBoundary;
 
 class SourceBlockNodeView extends BaseSourceEditableNodeView {
 	constructor(node, view, getPos, blockType, parentWidget) {
@@ -23,6 +26,14 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		this.labelEl = null;
 		this.contentEl = null;
 		this.renderedWidget = null;
+		this.wiki = (parentWidget && parentWidget.wiki) || $tw.wiki;
+		const sourceTitle = parentWidget && parentWidget.widget && parentWidget.widget.editTitle;
+		this.opaqueSandbox = this.blockType === "opaque" ? new OpaqueSourceSandbox(this.wiki, (nextText) => {
+			if(!this._destroyed && this.view && !this.view.isDestroyed &&
+				nextText !== (this.node.attrs.rawText || "")) {
+				this.saveEdit(nextText, { closeHistory: true });
+			}
+		}, { sourceTitle: sourceTitle }) : null;
 
 		this._createDOM();
 	}
@@ -31,14 +42,14 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		const variant = this.blockType === "pragma" ? "pm-nodeview-pragma" : "pm-nodeview-opaque";
 		const labelText = this.blockType === "pragma" ? "Pragma" : "Block";
 
-		const container = document.createElement("div");
+		const container = this.document.createElement("div");
 		container.className = "pm-nodeview " + variant;
 		container.setAttribute("contenteditable", "false");
 
 		const header = this.createHeader(labelText + ": " + (this.node.attrs.firstLine || ""));
 		container.appendChild(header);
 
-		const content = document.createElement("div");
+		const content = this.document.createElement("div");
 		content.className = "pm-nodeview-content";
 		container.appendChild(content);
 
@@ -51,7 +62,7 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 
 		this.renderViewMode();
 		if(this.blockType === "opaque" && this.node.attrs.autoEdit) {
-			setTimeout(() => this.enterEditMode(), 0);
+			this.scheduleTimeout(() => this.enterEditMode());
 		}
 	}
 
@@ -61,9 +72,17 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		while(this.contentEl.firstChild) this.contentEl.removeChild(this.contentEl.firstChild);
 
 		const rawText = this.node.attrs.rawText || "";
-		const parseTreeJson = this.blockType === "opaque" ? this.node.attrs.parseTreeJson : null;
+		const sourceType = this.parentWidget && (this.parentWidget.type || this.parentWidget.editType);
+		if(this.blockType === "opaque" && sourceType && sourceType !== "text/vnd.tiddlywiki") {
+			// An explicitly requested, unsupported MIME type is source-only. Do not
+			// interpret its text as WikiText merely to display a misleading preview.
+			const source = this.document.createElement("pre");
+			source.textContent = rawText;
+			this.contentEl.appendChild(source);
+			return;
+		}
 		if(!rawText) {
-			const placeholder = document.createElement("div");
+			const placeholder = this.document.createElement("div");
 			placeholder.className = "pm-nodeview-empty-placeholder";
 			placeholder.textContent = "(empty)";
 			this.contentEl.appendChild(placeholder);
@@ -71,17 +90,20 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		}
 
 		try {
-			const parseTree = parseTreeJson ? JSON.parse(parseTreeJson) : $tw.wiki.parseText("text/vnd.tiddlywiki", rawText).tree;
-			const Widget = require("$:/core/modules/widgets/widget.js").widget;
-			const renderWidget = new Widget({
-				type: "element",
-				tag: "div",
-				children: Array.isArray(parseTree) ? parseTree : [parseTree]
-			}, {
-				wiki: $tw.wiki,
+			const parser = this.wiki.parseText("text/vnd.tiddlywiki", rawText);
+			const variables = {};
+			if(this.blockType === "opaque") {
+				// Unknown rules may store absolute source offsets and write directly to
+				// currentTiddler. Reparse against a block-local temporary tiddler so
+				// those offsets cannot corrupt text outside this ProseMirror node.
+				this.opaqueSandbox.ensure(rawText);
+				Object.assign(variables, this.opaqueSandbox.getVariables());
+			}
+			const renderWidget = this.wiki.makeWidget(parser, {
+				wiki: this.wiki,
 				parentWidget: this.parentWidget || null,
-				document: document,
-				variables: this.parentWidget ? this.parentWidget.variables : {}
+				document: this.document,
+				variables: variables
 			});
 			renderWidget.render(this.contentEl, null);
 			this.renderedWidget = renderWidget;
@@ -91,7 +113,7 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		}
 
 		// Fallback: show first line as plain text
-		const label = document.createElement("span");
+		const label = this.document.createElement("span");
 		label.className = "pm-nodeview-label";
 		label.textContent = this.node.attrs.firstLine || (this.blockType === "pragma" ? "(pragma)" : "(block)");
 		this.contentEl.appendChild(label);
@@ -108,7 +130,7 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		textarea.rows = Math.max(2, (this.node.attrs.rawText || "").split("\n").length);
 		this.contentEl.appendChild(textarea);
 
-		setTimeout(() => { textarea.focus(); }, 0);
+		this.scheduleTimeout(() => { textarea.focus(); });
 	}
 
 	_destroyRenderedWidget() {
@@ -118,30 +140,35 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 		}
 	}
 
-	saveEdit(newText) {
+	saveEdit(newText, options) {
+		options = options || {};
 		const newRawText = (newText != null) ? newText : (this.node.attrs.rawText || "");
 		const newFirstLine = newRawText.split("\n")[0] || newRawText;
+		const sourceType = this.parentWidget && (this.parentWidget.type || this.parentWidget.editType);
 
 		const pos = this.getPos();
 		if(typeof pos !== "number") return;
-		if(this.blockType === "opaque") {
+		if(this.blockType === "opaque" && (!sourceType || sourceType === "text/vnd.tiddlywiki")) {
 			try {
-				const docJson = parseWikiTextToDoc($tw.wiki, "text/vnd.tiddlywiki", newRawText);
+				const docJson = parseWikiTextToDoc(this.wiki, "text/vnd.tiddlywiki", restoreSourceBoundary(this.node, newRawText));
 				const replacement = this.view.state.schema.nodeFromJSON(docJson).content;
 				if(replacement && replacement.size > 0) {
-					this.view.dispatch(this.view.state.tr.replaceWith(pos, pos + this.node.nodeSize, replacement));
+					let tr = this.view.state.tr.replaceWith(pos, pos + this.node.nodeSize, replacement);
+					if(options.closeHistory) tr = closeHistory(tr);
+					this.view.dispatch(tr);
 					return;
 				}
 			} catch(e) {
 				// Keep the source in the opaque block if reparsing cannot produce a valid ProseMirror fragment.
 			}
 		}
-		const tr = this.view.state.tr.setNodeMarkup(pos, null, {
+		let tr = this.view.state.tr.setNodeMarkup(pos, null, {
 			rawText: newRawText,
 			firstLine: newFirstLine.trim(),
 			parseTreeJson: null,
 			autoEdit: false
 		});
+		if(options.closeHistory) tr = closeHistory(tr);
 		this.view.dispatch(tr);
 	}
 
@@ -167,13 +194,16 @@ class SourceBlockNodeView extends BaseSourceEditableNodeView {
 			}
 		}
 		if(shouldAutoEdit) {
-			setTimeout(() => this.enterEditMode(), 0);
+			this.scheduleTimeout(() => this.enterEditMode());
 		}
 		return true;
 	}
 
 	destroy() {
 		this._destroyRenderedWidget();
+		if(this.opaqueSandbox) {
+			this.opaqueSandbox.destroy();
+		}
 		super.destroy();
 	}
 

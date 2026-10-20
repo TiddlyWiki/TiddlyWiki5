@@ -3,429 +3,230 @@ title: $:/plugins/tiddlywiki/prosemirror/features/slash-menu/plugin.js
 type: application/javascript
 module-type: library
 
-Custom slash menu implementation inspired by prosemirror-slash-menu
+ProseMirror adapter for the editor-independent command menu plugin.
+
 \*/
 
 "use strict";
 
-const Plugin = require("prosemirror-state").Plugin;
-const PluginKey = require("prosemirror-state").PluginKey;
-const flattenMenuElementsWithGroup = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/menu-elements.js").flattenMenuElementsWithGroup;
+const { Plugin, PluginKey } = require("prosemirror-state");
+const registry = require("$:/plugins/tiddlywiki/editor-command-menu/registry.js");
+const { CommandMenuView } = require("$:/plugins/tiddlywiki/editor-command-menu/menu-view.js");
+const {
+	canExecuteEditorCommand,
+	executeEditorCommand
+} = require("$:/plugins/tiddlywiki/prosemirror/core/editor-commands.js");
 
-const SlashMenuKey = new PluginKey("slash-menu-plugin");
+const SlashMenuKey = new PluginKey("prosemirror-slash-menu");
 
-const SlashMetaTypes = {
-	open: "open",
-	close: "close",
-	execute: "execute",
-	nextItem: "nextItem",
-	prevItem: "prevItem",
-	inputChange: "inputChange"
-};
+const META_OPEN = "open";
+const META_CLOSE = "close";
+const SNIPPET_TAG = "$:/tags/TextEditor/Snippet";
 
-function createSlashMenuPlugin(menuElements, options) {
-	options = options || {};
-	const ignoredKeys = options.ignoredKeys || [];
-	const customConditions = options.customConditions;
-	const triggerKeys = options.triggerKeys || ["/"];
-	const triggerCodes = options.triggerCodes || ["Slash"];
-	let isComposing = false;
-
-	const defaultIgnoredKeys = [
-		"Unidentified", "Alt", "AltGraph", "CapsLock", "Control", "Fn", "FnLock",
-		"F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12",
-		"Hyper", "Meta", "NumLock", "Pause", "PrintScreen", "Shift", "Super",
-		"Symbol", "SymbolLock", "Enter", "Tab", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowUp",
-		"End", "Home", "PageDown", "PageUp"
-	];
-
-	const allIgnoredKeys = defaultIgnoredKeys.concat(ignoredKeys);
-
-	const getFirstSelectableId = (elements, fallback) => {
-		for(let i = 0; i < elements.length; i++) {
-			const el = elements[i];
-			if(el && el.type !== "group") {
-				return el.id;
-			}
-		}
-		return fallback != null ? fallback : null;
+function createContext(view, options) {
+	return {
+		view: view,
+		wiki: options.wiki,
+		editorType: "prosemirror",
+		contentType: options.contentType || "text/vnd.tiddlywiki",
+		surface: "slash-menu"
 	};
+}
 
-	const initialFlattened = flattenMenuElementsWithGroup(menuElements);
-	const initialState = {
-		selected: getFirstSelectableId(initialFlattened, menuElements.length > 0 ? menuElements[0].id : null),
-		open: false,
-		filter: "",
-		filteredElements: initialFlattened,
-		elements: menuElements,
-		ignoredKeys: allIgnoredKeys
-	};
-
-	function matchesTrigger(event) {
-		if(!event) {
-			return false;
+function getSnippetCommands(wiki) {
+	return wiki.getTiddlersWithTag(SNIPPET_TAG).map(function(title) {
+		const tiddler = wiki.getTiddler(title);
+		if(!tiddler || tiddler.fields["draft.of"] || !tiddler.fields.text) {
+			return null;
 		}
-		if(triggerKeys && triggerKeys.length > 0) {
-			for(let i = 0; i < triggerKeys.length; i++) {
-				if(triggerKeys[i] === event.key) {
-					return true;
-				}
-			}
-			return false;
-		}
-		for(let i = 0; i < triggerCodes.length; i++) {
-			if(triggerCodes[i] === event.code) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	function defaultConditions() {
+		const label = registry.renderPlainText(wiki, tiddler.fields.caption || title);
 		return {
-			shouldOpen: (state, event, view) => {
-				const isSlashTrigger = matchesTrigger(event);
-				if(!isSlashTrigger) return false;
-				const editorState = view.state;
-				const resolvedPos = editorState.doc.resolve(editorState.selection.from);
-				const parentNode = resolvedPos.parent;
-				const parentType = parentNode.type.name;
-				// Allow slash menu in paragraphs and headings
-				const inTextBlock = parentType === "paragraph" || parentType === "heading";
-				const inEmptyBlock = inTextBlock && parentNode.nodeSize === 2;
-				const posInLine = editorState.selection.$head.parentOffset;
-				const textContent = editorState.selection.$head.parent.textContent;
-				const prevCharacter = textContent.slice(posInLine - 1, posInLine);
-				const atLineEnd = posInLine === textContent.length;
-				const spaceBeforePos = prevCharacter === " " || prevCharacter === "" || prevCharacter === "\u3000";
-				return (
-					!state.open &&
-					inTextBlock &&
-					(inEmptyBlock || spaceBeforePos || atLineEnd || (editorState.selection.from !== editorState.selection.to))
-				);
-			},
-			shouldClose: (state, event, view) => {
-				const isTrigger = matchesTrigger(event);
-				return state.open &&
-					(isTrigger || event.key === "Escape" || event.key === "Backspace") &&
-					state.filter.length === 0;
-			}
+			id: "snippet:" + title,
+			commandId: "insert-snippet",
+			label: label,
+			description: "",
+			icon: tiddler.fields.icon ? String(tiddler.fields.icon) : null,
+			category: "snippet",
+			surfaces: ["slash-menu"],
+			editors: ["prosemirror"],
+			contentTypes: ["text/vnd.tiddlywiki"],
+			keywords: [],
+			parameters: { title: title },
+			sourceTitle: title,
+			searchText: label.toLocaleLowerCase()
 		};
-	}
+	}).filter(Boolean);
+}
 
-	function dispatchWithMeta(view, meta) {
-		view.dispatch(view.state.tr.setMeta(SlashMenuKey, meta));
-	}
-
-	function getElementById(id, state) {
-		for(let i = 0; i < state.filteredElements.length; i++) {
-			const element = state.filteredElements[i];
-			if(element.id === id && element.type !== "group") {
-				return element;
-			}
-		}
-		return undefined;
-	}
-
-	function getNextItemId(state) {
-		let currentIndex = -1;
-		for(let i = 0; i < state.filteredElements.length; i++) {
-			if(state.filteredElements[i].id === state.selected) {
-				currentIndex = i;
-				break;
-			}
-		}
-		for(let i = currentIndex + 1; i < state.filteredElements.length; i++) {
-			if(state.filteredElements[i].type !== "group") {
-				return state.filteredElements[i].id;
-			}
-		}
-		return undefined;
-	}
-
-	function getPreviousItemId(state) {
-		let currentIndex = -1;
-		for(let i = 0; i < state.filteredElements.length; i++) {
-			if(state.filteredElements[i].id === state.selected) {
-				currentIndex = i;
-				break;
-			}
-		}
-		for(let i = currentIndex - 1; i >= 0; i--) {
-			if(state.filteredElements[i].type !== "group") {
-				return state.filteredElements[i].id;
-			}
-		}
-		return undefined;
-	}
-
-	function escapeRegExp(string) {
-		return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-	}
-
-	function getFilteredItems(state, input) {
-		const allElements = flattenMenuElementsWithGroup(state.elements);
-		const regExp = new RegExp(escapeRegExp(input.toLowerCase()).replace(/\s/g, "\\s"));
-		const result = [];
-		let pendingGroup = null;
-		for(let i = 0; i < allElements.length; i++) {
-			const element = allElements[i];
-			if(element.type === "group") {
-				pendingGroup = element;
-			} else if(element.label.toLowerCase().match(regExp) !== null && !element.locked) {
-				if(pendingGroup) {
-					result.push(pendingGroup);
-					pendingGroup = null;
-				}
-				result.push(element);
-			}
-		}
-		return result;
-	}
-
-	function getCase(state, event, view) {
-		const condition = customConditions || defaultConditions();
-		if(condition.shouldOpen(state, event, view)) {
-			return "OpenMenu";
-		}
-		if(condition.shouldClose(state, event, view)) {
-			return "CloseMenu";
-		}
-		if(state.open) {
-			if((event.code === "Enter" || event.key === "Enter" || event.code === "Tab" || event.key === "Tab") &&
-				(event.isComposing || isComposing || event.key === "Process" || event.keyCode === 229)) {
-				return "Ignore";
-			}
-			if(event.code === "ArrowDown" || event.key === "ArrowDown") {
-				return "NextItem";
-			}
-			if(event.code === "ArrowUp" || event.key === "ArrowUp") {
-				return "PrevItem";
-			}
-			if(event.code === "Enter" || event.key === "Enter" || event.code === "Tab" || event.key === "Tab") {
-				return "Execute";
-			}
-			if(event.code === "Escape" || event.key === "Escape" || (event.code === "Backspace" || event.key === "Backspace") && state.filter.length === 0) {
-				return "CloseMenu";
-			}
-			if(state.filter.length > 0 && (event.code === "Backspace" || event.key === "Backspace")) {
-				return "removeChar";
-			}
-			let isIgnored = false;
-			for(let i = 0; i < allIgnoredKeys.length; i++) {
-				if(allIgnoredKeys[i] === event.key) {
-					isIgnored = true;
-					break;
-				}
-			}
-			if(!isIgnored && event.key !== "Process") {
-				return "addChar";
-			}
-			if(event.code === "ArrowLeft" || event.key === "ArrowLeft" || event.code === "ArrowRight" || event.key === "ArrowRight") {
-				return "Catch";
-			}
-		}
-		return "Ignore";
-	}
-
-	return new Plugin({
-		key: SlashMenuKey,
-		props: {
-			handleKeyDown: (view, event) => {
-				const editorState = view.state;
-				const state = SlashMenuKey.getState(editorState);
-				if(!state) return false;
-				const slashCase = getCase(state, event, view);
-				switch(slashCase) {
-					case "OpenMenu": {
-						dispatchWithMeta(view, { type: SlashMetaTypes.open });
-						return true;
-					}
-					case "CloseMenu": {
-						if(!state.open) return false;
-						dispatchWithMeta(view, { type: SlashMetaTypes.close });
-						return true;
-					}
-					case "Execute": {
-						const menuElement = getElementById(state.selected, state);
-						if(!menuElement) return false;
-						if(menuElement.type === "command") {
-							menuElement.command(view);
-							dispatchWithMeta(view, { type: SlashMetaTypes.execute });
-						}
-						return true;
-					}
-					case "NextItem": {
-						dispatchWithMeta(view, { type: SlashMetaTypes.nextItem });
-						return true;
-					}
-					case "PrevItem": {
-						dispatchWithMeta(view, { type: SlashMetaTypes.prevItem });
-						return true;
-					}
-					case "addChar": {
-						dispatchWithMeta(view, {
-							type: SlashMetaTypes.inputChange,
-							filter: state.filter + event.key
-						});
-						return true;
-					}
-					case "removeChar": {
-						const newFilter = state.filter.length === 1 ? "" : state.filter.slice(0, -1);
-						dispatchWithMeta(view, {
-							type: SlashMetaTypes.inputChange,
-							filter: newFilter
-						});
-						return true;
-					}
-					case "Catch": {
-						return true;
-					}
-					case "Ignore":
-					default:
-						return false;
-				}
-			},
-			handleDOMEvents: {
-				compositionstart: (view, event) => {
-					const state = SlashMenuKey.getState(view.state);
-					if(state && state.open) {
-						isComposing = true;
-					}
-					return false;
-				},
-				compositionupdate: (view, event) => {
-					const state = SlashMenuKey.getState(view.state);
-					if(state && state.open && isComposing) {
-						const data = event.data;
-						if(data && data !== "、" && data !== "/") {
-							dispatchWithMeta(view, {
-								type: SlashMetaTypes.inputChange,
-								filter: data
-							});
-						}
-						return true;
-					}
-					return false;
-				},
-				compositionend: (view, event) => {
-					const state = SlashMenuKey.getState(view.state);
-					if(state && state.open) {
-						const data = event.data;
-						if(data && (data === "、" || data === "/")) {
-							setTimeout(() => {
-								const currentState = view.state;
-								const from = currentState.selection.from;
-								// Clamp deletion to stay within the current parent node
-								const parentStart = currentState.selection.$from.start();
-								const deleteFrom = Math.max(parentStart, from - data.length);
-								if(deleteFrom < from) {
-									const tr = currentState.tr.delete(deleteFrom, from);
-									view.dispatch(tr);
-								}
-							}, 0);
-						} else if(isComposing && data) {
-							setTimeout(() => {
-								const currentState = view.state;
-								const from = currentState.selection.from;
-								const parentStart = currentState.selection.$from.start();
-								const deleteFrom = Math.max(parentStart, from - data.length);
-								if(deleteFrom < from) {
-									const tr = currentState.tr.delete(deleteFrom, from);
-									view.dispatch(tr);
-								}
-								dispatchWithMeta(view, {
-									type: SlashMetaTypes.inputChange,
-									filter: data
-								});
-							}, 0);
-						}
-						isComposing = false;
-					}
-					return false;
-				}
-			}
-		},
-		state: {
-			init: () => initialState,
-			apply: (tr, state) => {
-				const meta = tr.getMeta(SlashMenuKey);
-				if(!meta) return state;
-				let newState;
-				switch(meta.type) {
-					case SlashMetaTypes.open: {
-						newState = {};
-						for(const key in initialState) {
-							if(initialState.hasOwnProperty(key)) {
-								newState[key] = initialState[key];
-							}
-						}
-						newState.open = true;
-						newState.selected = getFirstSelectableId(newState.filteredElements, newState.selected);
-						return newState;
-					}
-					case SlashMetaTypes.close: {
-						return initialState;
-					}
-					case SlashMetaTypes.execute: {
-						return initialState;
-					}
-					case SlashMetaTypes.nextItem: {
-						const nextId = getNextItemId(state);
-						if(!nextId) return state;
-						newState = {};
-						for(const key in state) {
-							if(state.hasOwnProperty(key)) {
-								newState[key] = state[key];
-							}
-						}
-						newState.selected = nextId;
-						return newState;
-					}
-					case SlashMetaTypes.prevItem: {
-						const prevId = getPreviousItemId(state);
-						if(!prevId) return state;
-						newState = {};
-						for(const key in state) {
-							if(state.hasOwnProperty(key)) {
-								newState[key] = state[key];
-							}
-						}
-						newState.selected = prevId;
-						return newState;
-					}
-					case SlashMetaTypes.inputChange: {
-						const newElements = meta.filter ? getFilteredItems(state, meta.filter) : flattenMenuElementsWithGroup(initialState.elements);
-						let selectedId = getFirstSelectableId(newElements, state.selected);
-						// Allow callers (e.g. the UI hover handler) to override the
-						// selected item when the filter has not actually changed.
-						if(meta.selected != null) {
-							for(let i = 0; i < newElements.length; i++) {
-								if(newElements[i].id === meta.selected && newElements[i].type !== "group") {
-									selectedId = meta.selected;
-									break;
-								}
-							}
-						}
-						newState = {};
-						for(const key in state) {
-							if(state.hasOwnProperty(key)) {
-								newState[key] = state[key];
-							}
-						}
-						newState.selected = selectedId;
-						newState.filteredElements = newElements;
-						newState.filter = meta.filter || "";
-						return newState;
-					}
-					default:
-						return state;
-				}
-			}
+function getAvailableCommands(view, options) {
+	const context = createContext(view, options);
+	return registry.getCommands(options.wiki, context, {
+		commands: getSnippetCommands(options.wiki),
+		canExecute: function(command) {
+			return canExecuteEditorCommand(context, command);
 		}
 	});
 }
 
-exports.SlashMenuPlugin = createSlashMenuPlugin;
+function shouldOpen(view, event) {
+	if(!event || event.key !== "/" || event.altKey || event.ctrlKey || event.metaKey) {
+		return false;
+	}
+	const selection = view.state.selection;
+	const parent = selection.$from.parent;
+	if(!parent.isTextblock || selection.$from.parent !== selection.$to.parent) {
+		return false;
+	}
+	if(!selection.empty) {
+		return true;
+	}
+	const offset = selection.$from.parentOffset;
+	if(offset === 0) {
+		return true;
+	}
+	const previous = parent.textBetween(Math.max(0, offset - 1), offset, "", "");
+	return previous === " " || previous === "\t" || previous === "\u3000";
+}
+
+function createSlashMenuPlugin(options) {
+	options = options || {};
+	if(!options.wiki) {
+		throw new Error("createSlashMenuPlugin requires a wiki");
+	}
+
+	return new Plugin({
+		key: SlashMenuKey,
+		state: {
+			init: function() {
+				return { open: false, from: null, to: null };
+			},
+			apply: function(transaction, previous) {
+				const meta = transaction.getMeta(SlashMenuKey);
+				if(meta && meta.type === META_OPEN) {
+					return { open: true, from: meta.from, to: meta.to };
+				}
+				if(meta && meta.type === META_CLOSE) {
+					return { open: false, from: null, to: null };
+				}
+				if(previous.open && transaction.selectionSet) {
+					return { open: false, from: null, to: null };
+				}
+				if(previous.open && transaction.docChanged) {
+					const mappedFrom = transaction.mapping.map(previous.from, 1);
+					const mappedTo = transaction.mapping.map(previous.to, previous.from === previous.to ? 1 : -1);
+					if(mappedFrom > mappedTo) {
+						return { open: false, from: null, to: null };
+					}
+					return {
+						open: true,
+						from: mappedFrom,
+						to: mappedTo
+					};
+				}
+				return previous;
+			}
+		},
+		props: {
+			handleKeyDown: function(view, event) {
+				const state = SlashMenuKey.getState(view.state);
+				if(state && state.open) {
+					return false;
+				}
+				if(!shouldOpen(view, event) || getAvailableCommands(view, options).length === 0) {
+					return false;
+				}
+				view.dispatch(view.state.tr.setMeta(SlashMenuKey, {
+					type: META_OPEN,
+					from: view.state.selection.from,
+					to: view.state.selection.to
+				}));
+				return true;
+			}
+		},
+		view: function(editorView) {
+			let wasOpen = false;
+			let destroyed = false;
+
+			function closeWithoutInsertion() {
+				const state = SlashMenuKey.getState(editorView.state);
+				if(state && state.open) {
+					editorView.dispatch(editorView.state.tr.setMeta(SlashMenuKey, { type: META_CLOSE }));
+				}
+			}
+
+			function cancelAndInsertSlash() {
+				const state = SlashMenuKey.getState(editorView.state);
+				if(!state || !state.open || typeof state.from !== "number" || typeof state.to !== "number") {
+					return;
+				}
+				let transaction = editorView.state.tr.insertText("/", state.from, state.to);
+				transaction = transaction.setMeta(SlashMenuKey, { type: META_CLOSE }).scrollIntoView();
+				editorView.dispatch(transaction);
+				editorView.focus();
+			}
+
+			const menu = new CommandMenuView({
+				document: editorView.dom.ownerDocument,
+				wiki: options.wiki,
+				searchable: true,
+				ariaLabel: options.wiki.getTiddlerText("$:/plugins/tiddlywiki/prosemirror/language/SlashMenu/AriaLabel", "Slash menu commands"),
+				onRequestClose: cancelAndInsertSlash,
+				onExecute: function(command) {
+					closeWithoutInsertion();
+					editorView.focus();
+					executeEditorCommand(createContext(editorView, options), command);
+				}
+			});
+
+			function closeOnOutsidePointer(event) {
+				if(menu.root && !menu.root.contains(event.target)) {
+					cancelAndInsertSlash();
+				}
+			}
+
+			function update(view) {
+				if(destroyed) {
+					return;
+				}
+				const state = SlashMenuKey.getState(view.state);
+				const isOpen = !!(state && state.open);
+				if(isOpen && !wasOpen) {
+					const commands = getAvailableCommands(view, options);
+					if(commands.length === 0) {
+						closeWithoutInsertion();
+						return;
+					}
+					menu.setCommands(commands);
+					menu.setFilter("");
+					let rect;
+					try {
+						rect = view.coordsAtPos(state.to);
+					} catch(e) {
+						rect = view.dom.getBoundingClientRect();
+					}
+					menu.show(rect);
+					view.dom.ownerDocument.addEventListener("mousedown", closeOnOutsidePointer);
+				} else if(!isOpen && wasOpen) {
+					menu.hide();
+					view.dom.ownerDocument.removeEventListener("mousedown", closeOnOutsidePointer);
+				}
+				wasOpen = isOpen;
+			}
+
+			update(editorView);
+			return {
+				update: update,
+				destroy: function() {
+					destroyed = true;
+					editorView.dom.ownerDocument.removeEventListener("mousedown", closeOnOutsidePointer);
+					menu.destroy();
+				}
+			};
+		}
+	});
+}
+
 exports.SlashMenuKey = SlashMenuKey;
-exports.SlashMetaTypes = SlashMetaTypes;
+exports.createSlashMenuPlugin = createSlashMenuPlugin;
+exports.shouldOpen = shouldOpen;
+exports.getSnippetCommands = getSnippetCommands;

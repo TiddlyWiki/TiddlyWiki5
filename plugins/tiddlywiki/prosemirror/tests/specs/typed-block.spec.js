@@ -78,11 +78,11 @@ test.describe("ProseMirror Editor - Typed Block", () => {
 		await clearEditor(editor);
 		await editor.click();
 		await editor.press("Slash");
-		const menu = page.locator(".tw-slash-menu-root");
+		const menu = page.locator(".tc-editor-command-menu:visible");
 		await expect(menu).toBeVisible({ timeout: 5000 });
 		await page.keyboard.type("JavaScript");
 		await page.waitForTimeout(200);
-		await expect(menu.locator(".tw-slash-menu-item-label", { hasText: "$$$ JavaScript" })).toBeVisible();
+		await expect(menu.locator(".tc-editor-command-menu-item-label", { hasText: "$$$ JavaScript" })).toBeVisible();
 		await page.keyboard.press("Enter");
 		await expect(menu).toBeHidden({ timeout: 5000 });
 		await expect(page.locator(".pm-nodeview-typedblock")).toBeVisible({ timeout: 5000 });

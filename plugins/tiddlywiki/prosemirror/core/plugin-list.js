@@ -3,9 +3,7 @@ title: $:/plugins/tiddlywiki/prosemirror/core/plugin-list.js
 type: application/javascript
 module-type: library
 
-Shared plugin assembly for the ProseMirror editor.
-Both engine.js and widget.js delegate here to avoid duplicated require() blocks
-and plugin ordering logic.
+Shared plugin assembly for the ProseMirror editor engine.
 
 \*/
 
@@ -18,12 +16,11 @@ const { createListPlugins, listKeymap } = require("prosemirror-flat-list");
 const { buildBaseSetupPlugins } = require("$:/plugins/tiddlywiki/prosemirror/core/base-setup.js");
 const { placeholderPlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/editor-placeholder.js");
 
-const { SlashMenuPlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/plugin.js");
-const { getAllMenuElements } = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/menu-elements.js");
 const { createWidgetBlockPlugin, createWidgetBlockNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/blocks/widget/plugin.js");
 const { createImageBlockPlugin } = require("$:/plugins/tiddlywiki/prosemirror/blocks/image/block-plugin.js");
 const { createImageNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/blocks/image/plugin.js");
 const { createPragmaBlockNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/blocks/pragma/nodeview.js");
+const { createInlineSourceNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/blocks/inline-source/nodeview.js");
 const { createCodeBlockNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/blocks/code-block/nodeview.js");
 const { createHardLineBreaksNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/blocks/hard-line-breaks/nodeview.js");
 const { createTypedBlockNodeViewPlugin } = require("$:/plugins/tiddlywiki/prosemirror/blocks/typed-block/nodeview.js");
@@ -34,6 +31,7 @@ const { createLinkTooltipPlugin } = require("$:/plugins/tiddlywiki/prosemirror/f
 const { getMarkdownInputRules } = require("$:/plugins/tiddlywiki/prosemirror/features/markdown-shortcuts.js");
 const { createAutocompletePlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/autocomplete.js");
 const { createFindReplacePlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/find-replace.js");
+const { createSlashMenuPlugin } = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/plugin.js");
 
 let pmTables;
 try {
@@ -42,12 +40,11 @@ try {
 	pmTables = null;
 }
 
-function buildPlugins(schema, wiki, nodeViewHost, editorType) {
+function buildPlugins(schema, wiki, nodeViewHost, contentType) {
 	const listKeymapPlugin = keymap(listKeymap);
 	const listPlugins = createListPlugins({ schema });
-	const allMenuElements = getAllMenuElements(wiki, schema);
 
-	const mdRules = getMarkdownInputRules(wiki, schema, editorType);
+	const mdRules = getMarkdownInputRules(wiki, schema);
 	const mdPlugin = mdRules.length > 0 ? [inputRules({ rules: mdRules })] : [];
 
 	const tablePlugins = [];
@@ -61,7 +58,7 @@ function buildPlugins(schema, wiki, nodeViewHost, editorType) {
 	}
 
 	return [
-		SlashMenuPlugin(allMenuElements, { triggerKeys: ["/"] }),
+		createSlashMenuPlugin({ wiki: wiki, contentType: contentType }),
 		createImageBlockPlugin(),
 		createImageNodeViewPlugin(nodeViewHost),
 		listKeymapPlugin,
@@ -71,10 +68,11 @@ function buildPlugins(schema, wiki, nodeViewHost, editorType) {
 		createWidgetBlockPlugin(),
 		createWidgetBlockNodeViewPlugin(nodeViewHost),
 		createPragmaBlockNodeViewPlugin(nodeViewHost),
+		createInlineSourceNodeViewPlugin(nodeViewHost),
 		createCodeBlockNodeViewPlugin(),
 		createHardLineBreaksNodeViewPlugin(),
 		createTypedBlockNodeViewPlugin(),
-		createDragHandlePlugin(),
+		createDragHandlePlugin({ wiki: wiki, contentType: contentType }),
 		createAutocompletePlugin(wiki),
 		createFindReplacePlugin(wiki),
 		createLinkClassesPlugin(wiki),
@@ -84,8 +82,7 @@ function buildPlugins(schema, wiki, nodeViewHost, editorType) {
 		.concat(mdPlugin)
 		.concat(listPlugins)
 		.concat(tablePlugins)
-		.concat(buildBaseSetupPlugins({ schema, wiki, editorType }));
+		.concat(buildBaseSetupPlugins({ schema: schema, wiki: wiki }));
 }
 
 exports.buildPlugins = buildPlugins;
-exports.SlashMenuUI = require("$:/plugins/tiddlywiki/prosemirror/features/slash-menu/ui.js").SlashMenuUI;

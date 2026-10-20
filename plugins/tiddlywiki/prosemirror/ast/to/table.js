@@ -44,7 +44,7 @@ function buildTableCell(context, child) {
 	if(!cellContent || cellContent.length === 0) {
 		cellContent = [{ type: "paragraph" }];
 	} else {
-		const needsWrap = cellContent.every((node) => node.type === "text" || (node.marks && node.marks.length > 0));
+		const needsWrap = cellContent.every((node) => ["text", "hard_break", "image", "opaque_inline"].includes(node.type));
 		if(needsWrap) {
 			cellContent = [{ type: "paragraph", content: cellContent }];
 		}
@@ -57,6 +57,8 @@ function buildTableCell(context, child) {
 	if(options.rowspan) {
 		attrs.rowspan = options.rowspan;
 	}
+	if(options.align) attrs.align = options.align;
+	if(options.valign) attrs.valign = options.valign;
 	return {
 		type: options.header ? "table_header" : "table_cell",
 		attrs: attrs,

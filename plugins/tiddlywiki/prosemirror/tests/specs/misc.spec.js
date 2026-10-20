@@ -283,6 +283,7 @@ test.describe("ProseMirror Editor - Static Block Rendering", () => {
 			document.body.appendChild(host);
 			const doc = schema.nodes.doc.create(null, schema.nodes.paragraph.create());
 			const fakeView = {
+				dom: host,
 				state: {
 					schema,
 					doc,
@@ -351,11 +352,11 @@ test.describe("ProseMirror Editor - Table", () => {
 		});
 		await editor.click();
 		await editor.press("Slash");
-		const menu = page.locator(".tw-slash-menu-root");
+		const menu = page.locator(".tc-editor-command-menu:visible");
 		await expect(menu).toBeVisible({ timeout: 5000 });
 		await page.keyboard.type("table");
-		await expect(menu.locator(".tw-slash-menu-item-label", { hasText: "Insert table" }).first()).toBeVisible({ timeout: 5000 });
-		await menu.locator(".tw-slash-menu-item").filter({ hasText: "Insert table" }).first().evaluate((el) => el.click());
+		await expect(menu.locator(".tc-editor-command-menu-item-label", { hasText: "Insert table" }).first()).toBeVisible({ timeout: 5000 });
+		await menu.locator(".tc-editor-command-menu-item").filter({ hasText: "Insert table" }).first().click();
 		await expect(editor.locator("table").first()).toBeVisible({ timeout: 5000 });
 		const selectionInTable = await editor.evaluate((root) => {
 			const selection = root.ownerDocument.getSelection();
@@ -399,7 +400,7 @@ test.describe("ProseMirror Editor - Linkify toolbar wrap-selection", () => {
 	 */
 	/**
 	 * Helper: select a text range and dispatch a bold wrap-selection event
-	 * through handleTextOperationNatively (same path as the toolbar button).
+	 * through handleEditTextOperation (same path as the toolbar button).
 	 */
 	async function wrapSelectionBold(page, editor, from, to) {
 		return await page.evaluate(({ from, to }) => {
@@ -427,11 +428,11 @@ test.describe("ProseMirror Editor - Linkify toolbar wrap-selection", () => {
 			};
 			let handled;
 			try {
-				handled = engine.handleTextOperationNatively(event);
+				handled = engine.handleEditTextOperation(event);
 			} catch(e) {
-				return { handled: false, error: "handleTextOperationNatively threw: " + e.message };
+				return { handled: false, error: "handleEditTextOperation threw: " + e.message };
 			}
-			if(!handled) return { handled: false, error: "handleTextOperationNatively returned false" };
+			if(!handled) return { handled: false, error: "handleEditTextOperation returned false" };
 			const doc = engine.view.state.doc;
 			// Find all strong marks
 			const strongMarks = [];
@@ -517,11 +518,11 @@ test.describe("ProseMirror Editor - Linkify toolbar wrap-selection", () => {
 			};
 			let handled;
 			try {
-				handled = engine.handleTextOperationNatively(event);
+				handled = engine.handleEditTextOperation(event);
 			} catch(e) {
-				return { handled: false, error: "handleTextOperationNatively threw: " + e.message };
+				return { handled: false, error: "handleEditTextOperation threw: " + e.message };
 			}
-			if(!handled) return { handled: false, error: "handleTextOperationNatively returned false" };
+			if(!handled) return { handled: false, error: "handleEditTextOperation returned false" };
 			const doc = engine.view.state.doc;
 			const result = { handled: true };
 			const links = [];

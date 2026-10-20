@@ -19,12 +19,12 @@ class FallbackNodeView extends BaseSourceEditableNodeView {
 		this.contentEl = null;
 		this._sourceEl = null;
 
-		const container = document.createElement("div");
+		const container = this.document.createElement("div");
 		container.className = "pm-nodeview pm-nodeview-error-fallback";
 		container.setAttribute("contenteditable", "false");
 		container.appendChild(this.createHeader("Block source"));
 
-		const content = document.createElement("div");
+		const content = this.document.createElement("div");
 		content.className = "pm-nodeview-content";
 		container.appendChild(content);
 		this.contentEl = content;
@@ -36,11 +36,11 @@ class FallbackNodeView extends BaseSourceEditableNodeView {
 	renderViewMode() {
 		if(!this.contentEl) return;
 		while(this.contentEl.firstChild) this.contentEl.removeChild(this.contentEl.firstChild);
-		const message = document.createElement("div");
+		const message = this.document.createElement("div");
 		message.className = "pm-nodeview-error-message";
 		message.textContent = "This block could not be rendered. Edit the source below to recover it.";
 		this.contentEl.appendChild(message);
-		const source = document.createElement("pre");
+		const source = this.document.createElement("pre");
 		source.className = "pm-nodeview-error-source";
 		source.textContent = getNodeSource(this.node);
 		this.contentEl.appendChild(source);
@@ -52,7 +52,7 @@ class FallbackNodeView extends BaseSourceEditableNodeView {
 		while(this.contentEl.firstChild) this.contentEl.removeChild(this.contentEl.firstChild);
 		const textarea = this.createEditTextarea(getNodeSource(this.node), 4);
 		this.contentEl.appendChild(textarea);
-		setTimeout(() => { textarea.focus(); }, 0);
+		this.scheduleTimeout(() => { textarea.focus(); });
 	}
 
 	saveEdit(newText) {

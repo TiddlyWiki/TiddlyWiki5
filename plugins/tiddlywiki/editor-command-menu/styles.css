@@ -1,0 +1,103 @@
+.tc-editor-command-menu {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	max-height: 320px;
+	width: min(300px, calc(100vw - 16px));
+	z-index: 1000;
+	overflow: hidden;
+	border: 1px solid transparent;
+	border-radius: 6px;
+	box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+	font-size: 14px;
+}
+
+.tc-editor-command-menu-filter-wrapper {
+	flex: 0 0 auto;
+	display: flex;
+	padding: 8px;
+	border-bottom: 1px solid transparent;
+}
+
+.tc-editor-command-menu-filter,
+.tc-editor-command-menu-search {
+	width: 100%;
+}
+
+.tc-editor-command-menu-filter {
+	padding: 2px 4px;
+	font-style: italic;
+}
+
+.tc-editor-command-menu-search {
+	box-sizing: border-box;
+	padding: 6px 8px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	font: inherit;
+}
+
+.tc-editor-command-menu-content {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow-y: auto;
+	padding: 4px;
+}
+
+.tc-editor-command-menu-group {
+	padding: 8px 10px 3px;
+	font-size: 0.85em;
+	font-weight: bold;
+	letter-spacing: 0.03em;
+}
+
+.tc-editor-command-menu-item {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 7px 10px;
+	border: 0;
+	border-radius: 4px;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	text-align: start;
+	cursor: pointer;
+}
+
+.tc-editor-command-menu-item-icon {
+	display: flex;
+	flex: 0 0 20px;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	margin-inline-end: 8px;
+}
+
+.tc-editor-command-menu-item-text {
+	display: flex;
+	flex: 1 1 auto;
+	min-width: 0;
+	flex-direction: column;
+}
+
+.tc-editor-command-menu-item-label {
+	font-weight: 500;
+}
+
+.tc-editor-command-menu-item-description {
+	font-size: 0.8em;
+	line-height: 1.3;
+}
+
+.tc-editor-command-menu-empty {
+	padding: 16px 12px;
+	font-style: italic;
+	text-align: center;
+}
+
+html[dir="rtl"] .tc-editor-command-menu {
+	direction: rtl;
+	text-align: right;
+}

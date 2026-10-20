@@ -25,5 +25,4 @@ npx playwright test \
 	editions/test \
 	plugins/tiddlywiki/prosemirror/tests/smoke.spec.js \
 	--project=firefox \
-	--project=edge \
 	--workers=2

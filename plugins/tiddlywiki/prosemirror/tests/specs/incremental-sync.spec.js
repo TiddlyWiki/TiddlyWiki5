@@ -261,7 +261,7 @@ test.describe("Incremental Sync — External Changes", () => {
 		await expect(editor).toContainText("Modified by agent");
 	});
 
-	test("should queue focused external change and apply it after blur", async ({ page }) => {
+	test("should apply external changes even while focused without losing focus", async ({ page }) => {
 		const tiddlerTitle = "FocusedExternalChange_" + Date.now();
 		const editor = await setupProseMirrorTest(page, tiddlerTitle, {
 			useReadmeTiddler: false,
@@ -273,12 +273,8 @@ test.describe("Incremental Sync — External Changes", () => {
 		await modifyTiddlerExternally(page, tiddlerTitle, "Changed while focused");
 		await waitForSave(500);
 
-		await expect(editor).toContainText("Focused original");
-		await expect(editor).not.toContainText("Changed while focused");
-
-		await page.evaluate(() => document.activeElement.blur());
-		await waitForSave(500);
 		await expect(editor).toContainText("Changed while focused");
+		await expect(editor).toBeFocused();
 	});
 
 	test("should preserve editor state when external change matches roundtrip echo", async ({ page }) => {
@@ -370,8 +366,8 @@ test.describe("Incremental Sync — External Changes", () => {
 		await editor.click();
 		await modifyTiddlerExternally(page, tiddlerTitle, "Standalone focused update");
 		await waitForSave(500);
-		await expect(editor).toContainText("Standalone blurred update");
-		await expect(editor).not.toContainText("Standalone focused update");
+		await expect(editor).toContainText("Standalone focused update");
+		await expect(editor).toBeFocused();
 
 		await page.evaluate(() => document.activeElement.blur());
 		await waitForSave(500);

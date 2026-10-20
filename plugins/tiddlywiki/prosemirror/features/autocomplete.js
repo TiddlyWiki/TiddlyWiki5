@@ -11,6 +11,7 @@ ProseMirror plugin for [[ {{ << autocompletion with configurable trigger aliases
 
 const Plugin = require("prosemirror-state").Plugin;
 const PluginKey = require("prosemirror-state").PluginKey;
+const editorCommands = require("$:/plugins/tiddlywiki/prosemirror/core/editor-commands.js");
 
 const AUTOCOMPLETE_KEY = new PluginKey("tw-autocomplete");
 
@@ -190,6 +191,7 @@ function createAutocompletePlugin(wiki) {
 			handleKeyDown: function(view, event) {
 				const state = AUTOCOMPLETE_KEY.getState(view.state);
 				if(!state || !state.active) return false;
+				if(event.isComposing || event.keyCode === 229) return false;
 
 				if(event.key === "ArrowDown") {
 					event.preventDefault();
@@ -209,7 +211,7 @@ function createAutocompletePlugin(wiki) {
 				}
 				if(event.key === "Enter" || event.key === "Tab") {
 					event.preventDefault();
-					acceptCompletion(view, state);
+					acceptCompletion(view, state, wiki);
 					return true;
 				}
 				if(event.key === "Escape") {
@@ -226,7 +228,7 @@ function createAutocompletePlugin(wiki) {
 	});
 }
 
-function acceptCompletion(view, state) {
+function acceptCompletion(view, state, wiki) {
 	if(!state.items.length) {
 		view.dispatch(view.state.tr.setMeta(AUTOCOMPLETE_KEY, { active: false }));
 		return;
@@ -244,24 +246,33 @@ function acceptCompletion(view, state) {
 		insertText = "<<" + selected + ">>";
 	}
 
-	const tr = view.state.tr.replaceWith(from, to,
-		view.state.schema.text(insertText)
-	);
-	tr.setMeta(AUTOCOMPLETE_KEY, { active: false });
-	view.dispatch(tr);
-	view.focus();
+	const handled = editorCommands.executeEditorCommand({
+		view: view,
+		wiki: wiki,
+		editorType: "prosemirror",
+		contentType: "text/vnd.tiddlywiki"
+	}, editorCommands.createCommand("insert-wikitext", {
+		text: insertText,
+		from: from,
+		to: to
+	}));
+	if(handled) {
+		view.dispatch(view.state.tr.setMeta(AUTOCOMPLETE_KEY, { active: false }));
+	}
 }
 
 class AutocompleteView {
 	constructor(editorView, wiki) {
 		this.view = editorView;
 		this.wiki = wiki;
-		this.container = document.createElement("div");
+		this.document = editorView.dom.ownerDocument;
+		this.window = this.document.defaultView;
+		this.container = this.document.createElement("div");
 		this.container.className = "tc-prosemirror-autocomplete";
 		this.container.style.display = "none";
 		this.container.style.position = "absolute";
 		this.container.style.zIndex = "1100";
-		document.body.appendChild(this.container);
+		this.document.body.appendChild(this.container);
 	}
 
 	update(view) {
@@ -272,14 +283,14 @@ class AutocompleteView {
 		}
 
 		const coords = view.coordsAtPos(view.state.selection.from);
-		this.container.style.left = (coords.left + window.scrollX) + "px";
-		this.container.style.top = (coords.bottom + 4 + window.scrollY) + "px";
+		this.container.style.left = (coords.left + this.window.scrollX) + "px";
+		this.container.style.top = (coords.bottom + 4 + this.window.scrollY) + "px";
 		this.container.style.display = "block";
 
 		while(this.container.firstChild) this.container.removeChild(this.container.firstChild);
 
 		for(let idx = 0; idx < state.items.length; idx++) {
-			const item = document.createElement("div");
+			const item = this.document.createElement("div");
 			item.className = "tc-prosemirror-autocomplete-item";
 			if(idx === state.selectedIndex) {
 				item.classList.add("tc-prosemirror-autocomplete-item-selected");
@@ -291,7 +302,7 @@ class AutocompleteView {
 				if(currentState) {
 					acceptCompletion(view, Object.assign({}, currentState, {
 						selectedIndex: idx
-					}));
+					}), this.wiki);
 				}
 			});
 			this.container.appendChild(item);

@@ -15,17 +15,17 @@ const parseWidget = require("$:/plugins/tiddlywiki/prosemirror/blocks/widget/uti
 class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 	constructor(node, view, getPos, parentWidget) {
 		super(node, view, getPos, parentWidget);
-		
+
 		this.widgetContent = null;
 		this.widgetInfo = null;
 		this.renderedTWWidget = null;
-		
+
 		this._createDOM();
 		this._updateContent();
 	}
 
 	_createDOM() {
-		const container = document.createElement("div");
+		const container = this.document.createElement("div");
 		container.className = "pm-nodeview pm-nodeview-widget";
 		container.setAttribute("contenteditable", "false");
 
@@ -36,7 +36,7 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 			const header = this.createHeader("Widget: " + widget.widgetName);
 			container.appendChild(header);
 
-			const content = document.createElement("div");
+			const content = this.document.createElement("div");
 			content.className = "pm-nodeview-content";
 			content.contentEditable = "false";
 			container.appendChild(content);
@@ -46,7 +46,7 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 			this.contentContainer = content;
 			this.installRenderedContentSelectionGuards();
 		} else {
-			const p = document.createElement("p");
+			const p = this.document.createElement("p");
 			p.className = "pm-paragraph-normal";
 			this.dom = p;
 			this.contentDOM = p;
@@ -100,7 +100,7 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 			}, {
 				wiki: $tw.wiki,
 				parentWidget: this.parentWidget || null,
-				document: document,
+				document: this.document,
 				variables: this.parentWidget ? this.parentWidget.variables : {}
 			});
 
@@ -109,19 +109,19 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 
 			// If the widget rendered nothing visible, show a placeholder
 			const self = this;
-			requestAnimationFrame(() => {
+			this.scheduleAnimationFrame(() => {
 				if(!self.widgetContent || self.isEditMode) return;
 				const hasContent = self.widgetContent.offsetHeight > 4 &&
 					self.widgetContent.textContent.trim().length > 0;
 				if(!hasContent && !self.widgetContent.querySelector(".pm-widget-block-empty-placeholder")) {
-					const placeholder = document.createElement("div");
+					const placeholder = this.document.createElement("div");
 					placeholder.className = "pm-widget-block-empty-placeholder";
 					placeholder.textContent = widgetText.length > 60 ? widgetText.substring(0, 60) + "…" : widgetText;
 					self.widgetContent.appendChild(placeholder);
 				}
 			});
 		} catch(e) {
-			const errorDiv = document.createElement("div");
+			const errorDiv = this.document.createElement("div");
 			errorDiv.className = "pm-widget-block-nodeview-error";
 			errorDiv.textContent = "Error: " + e.message;
 			this.widgetContent.appendChild(errorDiv);
@@ -135,7 +135,10 @@ class WidgetBlockNodeView extends BaseSourceEditableNodeView {
 		const textarea = this.createEditTextarea(this.widgetInfo.rawText, 3);
 		this.widgetContent.appendChild(textarea);
 
-		setTimeout(() => { textarea.focus(); }, 0);
+		const wiki = this.parentWidget && this.parentWidget.wiki || $tw.wiki;
+		if(wiki.getTiddlerText("$:/config/prosemirror/widget-block/auto-focus", "yes") !== "no") {
+			this.scheduleTimeout(() => { textarea.focus(); });
+		}
 	}
 
 	saveEdit(newText) {

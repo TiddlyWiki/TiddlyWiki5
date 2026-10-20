@@ -1,58 +1,12 @@
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-	for (var name in all)
-		__defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-	if (from && typeof from === "object" || typeof from === "function") {
-		for (let key of __getOwnPropNames(from))
-			if (!__hasOwnProp.call(to, key) && key !== except)
-				__defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-	}
-	return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+let prosemirror_state = require("prosemirror-state");
+let prosemirror_model = require("prosemirror-model");
+let prosemirror_view = require("prosemirror-view");
+let prosemirror_keymap = require("prosemirror-keymap");
+let prosemirror_transform = require("prosemirror-transform");
 
-// entry.mjs
-var entry_exports = {};
-__export(entry_exports, {
-	CellSelection: () => CellSelection,
-	TableMap: () => TableMap,
-	addColumnAfter: () => addColumnAfter,
-	addColumnBefore: () => addColumnBefore,
-	addRowAfter: () => addRowAfter,
-	addRowBefore: () => addRowBefore,
-	columnResizing: () => columnResizing,
-	deleteColumn: () => deleteColumn,
-	deleteRow: () => deleteRow,
-	deleteTable: () => deleteTable,
-	fixTables: () => fixTables,
-	goToNextCell: () => goToNextCell,
-	isInTable: () => isInTable,
-	mergeCells: () => mergeCells,
-	selectedRect: () => selectedRect,
-	setCellAttr: () => setCellAttr,
-	splitCell: () => splitCell,
-	tableEditing: () => tableEditing,
-	tableNodeTypes: () => tableNodeTypes,
-	tableNodes: () => tableNodes,
-	toggleHeaderCell: () => toggleHeaderCell,
-	toggleHeaderColumn: () => toggleHeaderColumn,
-	toggleHeaderRow: () => toggleHeaderRow
-});
-module.exports = __toCommonJS(entry_exports);
-
-// node_modules/prosemirror-tables/dist/index.js
-var import_prosemirror_state = require("prosemirror-state");
-var import_prosemirror_model = require("prosemirror-model");
-var import_prosemirror_view = require("prosemirror-view");
-var import_prosemirror_keymap = require("prosemirror-keymap");
-var import_prosemirror_transform = require("prosemirror-transform");
-var readFromCache;
-var addToCache;
+//#region src/tablemap.ts
+let readFromCache;
+let addToCache;
 if (typeof WeakMap != "undefined") {
 	let cache = /* @__PURE__ */ new WeakMap();
 	readFromCache = (key) => cache.get(key);
@@ -73,6 +27,14 @@ if (typeof WeakMap != "undefined") {
 		return cache[cachePos++] = value;
 	};
 }
+/**
+* A table map describes the structure of a given table. To avoid
+* recomputing them all the time, they are cached per table node. To
+* be able to do that, positions saved in the map are relative to the
+* start of the table, rather than the start of the document.
+*
+* @public
+*/
 var TableMap = class {
 	constructor(width, height, map, problems) {
 		this.width = width;
@@ -137,7 +99,7 @@ var TableMap = class {
 		return result;
 	}
 	positionAt(row, col, table) {
-		for (let i = 0, rowStart = 0; ; i++) {
+		for (let i = 0, rowStart = 0;; i++) {
 			const rowEnd = rowStart + table.child(i).nodeSize;
 			if (i == row) {
 				let index = col + row * this.width;
@@ -163,7 +125,7 @@ function computeMap(table) {
 	for (let row = 0, pos = 0; row < height; row++) {
 		const rowNode = table.child(row);
 		pos++;
-		for (let i = 0; ; i++) {
+		for (let i = 0;; i++) {
 			while (mapPos < map.length && map[mapPos] != 0) mapPos++;
 			if (i == rowNode.childCount) break;
 			const cellNode = rowNode.child(i);
@@ -267,6 +229,9 @@ function freshColWidth(attrs) {
 	for (let i = 0; i < attrs.colspan; i++) result.push(0);
 	return result;
 }
+
+//#endregion
+//#region src/schema.ts
 function getCellAttrs(dom, extraAttrs) {
 	if (typeof dom === "string") return {};
 	const widthAttr = dom.getAttribute("data-colwidth");
@@ -300,6 +265,15 @@ function validateColwidth(value) {
 	if (!Array.isArray(value)) throw new TypeError("colwidth must be null or an array");
 	for (const item of value) if (typeof item !== "number") throw new TypeError("colwidth must be null or an array of numbers");
 }
+/**
+* This function creates a set of [node
+* specs](http://prosemirror.net/docs/ref/#model.SchemaSpec.nodes) for
+* `table`, `table_row`, and `table_cell` nodes types as used by this
+* module. The result can then be added to the set of nodes when
+* creating a schema.
+*
+* @public
+*/
 function tableNodes(options) {
 	const extraAttrs = options.cellAttributes || {};
 	const cellAttrs = {
@@ -375,6 +349,9 @@ function tableNodes(options) {
 		}
 	};
 }
+/**
+* @public
+*/
 function tableNodeTypes(schema) {
 	let result = schema.cached.tableNodeTypes;
 	if (!result) {
@@ -386,7 +363,16 @@ function tableNodeTypes(schema) {
 	}
 	return result;
 }
-var tableEditingKey = new import_prosemirror_state.PluginKey("selectingCells");
+
+//#endregion
+//#region src/util.ts
+/**
+* @public
+*/
+const tableEditingKey = new prosemirror_state.PluginKey("selectingCells");
+/**
+* @public
+*/
 function cellAround($pos) {
 	for (let d = $pos.depth - 1; d > 0; d--) if ($pos.node(d).type.spec.tableRole == "row") return $pos.node(0).resolve($pos.before(d + 1));
 	return null;
@@ -398,11 +384,17 @@ function cellWrapping($pos) {
 	}
 	return null;
 }
+/**
+* @public
+*/
 function isInTable(state) {
 	const $head = state.selection.$head;
 	for (let d = $head.depth; d > 0; d--) if ($head.node(d).type.spec.tableRole == "row") return true;
 	return false;
 }
+/**
+* @internal
+*/
 function selectionCell(state) {
 	const sel = state.selection;
 	if ("$anchorCell" in sel && sel.$anchorCell) return sel.$anchorCell.pos > sel.$headCell.pos ? sel.$anchorCell : sel.$headCell;
@@ -411,6 +403,9 @@ function selectionCell(state) {
 	if ($cell) return $cell;
 	throw new RangeError(`No cell found around position ${sel.head}`);
 }
+/**
+* @public
+*/
 function cellNear($pos) {
 	for (let after = $pos.nodeAfter, pos = $pos.pos; after; after = after.firstChild, pos++) {
 		const role = after.type.spec.tableRole;
@@ -421,15 +416,39 @@ function cellNear($pos) {
 		if (role == "cell" || role == "header_cell") return $pos.doc.resolve(pos - before.nodeSize);
 	}
 }
+/**
+* @public
+*/
 function pointsAtCell($pos) {
 	return $pos.parent.type.spec.tableRole == "row" && !!$pos.nodeAfter;
 }
+/**
+* @public
+*/
 function moveCellForward($pos) {
 	return $pos.node(0).resolve($pos.pos + $pos.nodeAfter.nodeSize);
 }
+/**
+* @internal
+*/
 function inSameTable($cellA, $cellB) {
 	return $cellA.depth == $cellB.depth && $cellA.pos >= $cellB.start(-1) && $cellA.pos <= $cellB.end(-1);
 }
+/**
+* @public
+*/
+function findCell($pos) {
+	return TableMap.get($pos.node(-1)).findCell($pos.pos - $pos.start(-1));
+}
+/**
+* @public
+*/
+function colCount($pos) {
+	return TableMap.get($pos.node(-1)).colCount($pos.pos - $pos.start(-1));
+}
+/**
+* @public
+*/
 function nextCell($pos, axis, dir) {
 	const table = $pos.node(-1);
 	const map = TableMap.get(table);
@@ -437,6 +456,9 @@ function nextCell($pos, axis, dir) {
 	const moved = map.nextCell($pos.pos - tableStart, axis, dir);
 	return moved == null ? null : $pos.node(0).resolve(tableStart + moved);
 }
+/**
+* @public
+*/
 function removeColSpan(attrs, pos, n = 1) {
 	const result = {
 		...attrs,
@@ -449,6 +471,9 @@ function removeColSpan(attrs, pos, n = 1) {
 	}
 	return result;
 }
+/**
+* @public
+*/
 function addColSpan(attrs, pos, n = 1) {
 	const result = {
 		...attrs,
@@ -460,12 +485,27 @@ function addColSpan(attrs, pos, n = 1) {
 	}
 	return result;
 }
+/**
+* @public
+*/
 function columnIsHeader(map, table, col) {
 	const headerCell = tableNodeTypes(table.type.schema).header_cell;
 	for (let row = 0; row < map.height; row++) if (table.nodeAt(map.map[col + row * map.width]).type != headerCell) return false;
 	return true;
 }
-var CellSelection = class CellSelection2 extends import_prosemirror_state.Selection {
+
+//#endregion
+//#region src/cellselection.ts
+/**
+* A [`Selection`](http://prosemirror.net/docs/ref/#state.Selection)
+* subclass that represents a cell selection spanning part of a table.
+* With the plugin enabled, these will be created when the user
+* selects across cells, and will be drawn by giving selected cells a
+* `selectedCell` CSS class.
+*
+* @public
+*/
+var CellSelection = class CellSelection extends prosemirror_state.Selection {
 	constructor($anchorCell, $headCell = $anchorCell) {
 		const table = $anchorCell.node(-1);
 		const map = TableMap.get(table);
@@ -478,7 +518,7 @@ var CellSelection = class CellSelection2 extends import_prosemirror_state.Select
 			const cell = table.nodeAt(pos);
 			if (!cell) throw new RangeError(`No cell with offset ${pos} found`);
 			const from = tableStart + pos + 1;
-			return new import_prosemirror_state.SelectionRange(doc.resolve(from), doc.resolve(from + cell.content.size));
+			return new prosemirror_state.SelectionRange(doc.resolve(from), doc.resolve(from + cell.content.size));
 		});
 		super(ranges[0].$from, ranges[0].$to, ranges);
 		this.$anchorCell = $anchorCell;
@@ -489,11 +529,11 @@ var CellSelection = class CellSelection2 extends import_prosemirror_state.Select
 		const $headCell = doc.resolve(mapping.map(this.$headCell.pos));
 		if (pointsAtCell($anchorCell) && pointsAtCell($headCell) && inSameTable($anchorCell, $headCell)) {
 			const tableChanged = this.$anchorCell.node(-1) != $anchorCell.node(-1);
-			if (tableChanged && this.isRowSelection()) return CellSelection2.rowSelection($anchorCell, $headCell);
-			else if (tableChanged && this.isColSelection()) return CellSelection2.colSelection($anchorCell, $headCell);
-			else return new CellSelection2($anchorCell, $headCell);
+			if (tableChanged && this.isRowSelection()) return CellSelection.rowSelection($anchorCell, $headCell);
+			else if (tableChanged && this.isColSelection()) return CellSelection.colSelection($anchorCell, $headCell);
+			else return new CellSelection($anchorCell, $headCell);
 		}
-		return import_prosemirror_state.TextSelection.between($anchorCell, $headCell);
+		return prosemirror_state.TextSelection.between($anchorCell, $headCell);
 	}
 	content() {
 		const table = this.$anchorCell.node(-1);
@@ -532,22 +572,22 @@ var CellSelection = class CellSelection2 extends import_prosemirror_state.Select
 				}
 				rowContent.push(cell);
 			}
-			rows.push(table.child(row).copy(import_prosemirror_model.Fragment.from(rowContent)));
+			rows.push(table.child(row).copy(prosemirror_model.Fragment.from(rowContent)));
 		}
 		const fragment = this.isColSelection() && this.isRowSelection() ? table : rows;
-		return new import_prosemirror_model.Slice(import_prosemirror_model.Fragment.from(fragment), 1, 1);
+		return new prosemirror_model.Slice(prosemirror_model.Fragment.from(fragment), 1, 1);
 	}
-	replace(tr, content = import_prosemirror_model.Slice.empty) {
+	replace(tr, content = prosemirror_model.Slice.empty) {
 		const mapFrom = tr.steps.length, ranges = this.ranges;
 		for (let i = 0; i < ranges.length; i++) {
 			const { $from, $to } = ranges[i], mapping = tr.mapping.slice(mapFrom);
-			tr.replace(mapping.map($from.pos), mapping.map($to.pos), i ? import_prosemirror_model.Slice.empty : content);
+			tr.replace(mapping.map($from.pos), mapping.map($to.pos), i ? prosemirror_model.Slice.empty : content);
 		}
-		const sel = import_prosemirror_state.Selection.findFrom(tr.doc.resolve(tr.mapping.slice(mapFrom).map(this.to)), -1);
+		const sel = prosemirror_state.Selection.findFrom(tr.doc.resolve(tr.mapping.slice(mapFrom).map(this.to)), -1);
 		if (sel) tr.setSelection(sel);
 	}
 	replaceWith(tr, node) {
-		this.replace(tr, new import_prosemirror_model.Slice(import_prosemirror_model.Fragment.from(node), 0, 0));
+		this.replace(tr, new prosemirror_model.Slice(prosemirror_model.Fragment.from(node), 0, 0));
 	}
 	forEachCell(f) {
 		const table = this.$anchorCell.node(-1);
@@ -578,7 +618,7 @@ var CellSelection = class CellSelection2 extends import_prosemirror_state.Select
 			if (headRect.top > 0) $headCell = doc.resolve(tableStart + map.map[headRect.left]);
 			if (anchorRect.bottom < map.height) $anchorCell = doc.resolve(tableStart + map.map[map.width * (map.height - 1) + anchorRect.right - 1]);
 		}
-		return new CellSelection2($anchorCell, $headCell);
+		return new CellSelection($anchorCell, $headCell);
 	}
 	isRowSelection() {
 		const table = this.$anchorCell.node(-1);
@@ -592,7 +632,7 @@ var CellSelection = class CellSelection2 extends import_prosemirror_state.Select
 		return Math.max(anchorRight, headRight) == map.width;
 	}
 	eq(other) {
-		return other instanceof CellSelection2 && other.$anchorCell.pos == this.$anchorCell.pos && other.$headCell.pos == this.$headCell.pos;
+		return other instanceof CellSelection && other.$anchorCell.pos == this.$anchorCell.pos && other.$headCell.pos == this.$headCell.pos;
 	}
 	static rowSelection($anchorCell, $headCell = $anchorCell) {
 		const table = $anchorCell.node(-1);
@@ -608,7 +648,7 @@ var CellSelection = class CellSelection2 extends import_prosemirror_state.Select
 			if (headRect.left > 0) $headCell = doc.resolve(tableStart + map.map[headRect.top * map.width]);
 			if (anchorRect.right < map.width) $anchorCell = doc.resolve(tableStart + map.map[map.width * (anchorRect.top + 1) - 1]);
 		}
-		return new CellSelection2($anchorCell, $headCell);
+		return new CellSelection($anchorCell, $headCell);
 	}
 	toJSON() {
 		return {
@@ -618,38 +658,41 @@ var CellSelection = class CellSelection2 extends import_prosemirror_state.Select
 		};
 	}
 	static fromJSON(doc, json) {
-		return new CellSelection2(doc.resolve(json.anchor), doc.resolve(json.head));
+		return new CellSelection(doc.resolve(json.anchor), doc.resolve(json.head));
 	}
 	static create(doc, anchorCell, headCell = anchorCell) {
-		return new CellSelection2(doc.resolve(anchorCell), doc.resolve(headCell));
+		return new CellSelection(doc.resolve(anchorCell), doc.resolve(headCell));
 	}
 	getBookmark() {
 		return new CellBookmark(this.$anchorCell.pos, this.$headCell.pos);
 	}
 };
 CellSelection.prototype.visible = false;
-import_prosemirror_state.Selection.jsonID("cell", CellSelection);
-var CellBookmark = class CellBookmark2 {
+prosemirror_state.Selection.jsonID("cell", CellSelection);
+/**
+* @public
+*/
+var CellBookmark = class CellBookmark {
 	constructor(anchor, head) {
 		this.anchor = anchor;
 		this.head = head;
 	}
 	map(mapping) {
-		return new CellBookmark2(mapping.map(this.anchor), mapping.map(this.head));
+		return new CellBookmark(mapping.map(this.anchor), mapping.map(this.head));
 	}
 	resolve(doc) {
 		const $anchorCell = doc.resolve(this.anchor), $headCell = doc.resolve(this.head);
 		if ($anchorCell.parent.type.spec.tableRole == "row" && $headCell.parent.type.spec.tableRole == "row" && $anchorCell.index() < $anchorCell.parent.childCount && $headCell.index() < $headCell.parent.childCount && inSameTable($anchorCell, $headCell)) return new CellSelection($anchorCell, $headCell);
-		else return import_prosemirror_state.Selection.near($headCell, 1);
+		else return prosemirror_state.Selection.near($headCell, 1);
 	}
 };
 function drawCellSelection(state) {
 	if (!(state.selection instanceof CellSelection)) return null;
 	const cells = [];
 	state.selection.forEachCell((node, pos) => {
-		cells.push(import_prosemirror_view.Decoration.node(pos, pos + node.nodeSize, { class: "selectedCell" }));
+		cells.push(prosemirror_view.Decoration.node(pos, pos + node.nodeSize, { class: "selectedCell" }));
 	});
-	return import_prosemirror_view.DecorationSet.create(state.doc, cells);
+	return prosemirror_view.DecorationSet.create(state.doc, cells);
 }
 function isCellBoundarySelection({ $from, $to }) {
 	if ($from.pos == $to.pos || $from.pos < $to.pos - 6) return false;
@@ -684,7 +727,7 @@ function normalizeSelection(state, tr, allowTableNodeSelection) {
 	const doc = (tr || state).doc;
 	let normalize;
 	let role;
-	if (sel instanceof import_prosemirror_state.NodeSelection && (role = sel.node.type.spec.tableRole)) {
+	if (sel instanceof prosemirror_state.NodeSelection && (role = sel.node.type.spec.tableRole)) {
 		if (role == "cell" || role == "header_cell") normalize = CellSelection.create(doc, sel.from);
 		else if (role == "row") {
 			const $cell = doc.resolve(sel.from + 1);
@@ -695,12 +738,25 @@ function normalizeSelection(state, tr, allowTableNodeSelection) {
 			const lastCell = start + map.map[map.width * map.height - 1];
 			normalize = CellSelection.create(doc, start + 1, lastCell);
 		}
-	} else if (sel instanceof import_prosemirror_state.TextSelection && isCellBoundarySelection(sel)) normalize = import_prosemirror_state.TextSelection.create(doc, sel.from);
-	else if (sel instanceof import_prosemirror_state.TextSelection && isTextSelectionAcrossCells(sel)) normalize = import_prosemirror_state.TextSelection.create(doc, sel.$from.start(), sel.$from.end());
+	} else if (sel instanceof prosemirror_state.TextSelection && isCellBoundarySelection(sel)) normalize = prosemirror_state.TextSelection.create(doc, sel.from);
+	else if (sel instanceof prosemirror_state.TextSelection && isTextSelectionAcrossCells(sel)) normalize = prosemirror_state.TextSelection.create(doc, sel.$from.start(), sel.$from.end());
 	if (normalize) (tr || (tr = state.tr)).setSelection(normalize);
 	return tr;
 }
-var fixTablesKey = new import_prosemirror_state.PluginKey("fix-tables");
+
+//#endregion
+//#region src/fixtables.ts
+/**
+* @public
+*/
+const fixTablesKey = new prosemirror_state.PluginKey("fix-tables");
+/**
+* Helper for iterating through the nodes in a document that changed
+* compared to the given previous document. Useful for avoiding
+* duplicate work on each transaction.
+*
+* @public
+*/
 function changedDescendants(old, cur, offset, f) {
 	const oldSize = old.childCount, curSize = cur.childCount;
 	outer: for (let i = 0, j = 0; i < curSize; i++) {
@@ -716,6 +772,15 @@ function changedDescendants(old, cur, offset, f) {
 		offset += child.nodeSize;
 	}
 }
+/**
+* Inspect all tables in the given state's document and return a
+* transaction that fixes them, if necessary. If `oldState` was
+* provided, that is assumed to hold a previous, known-good state,
+* which will be used to avoid re-scanning unchanged parts of the
+* document.
+*
+* @public
+*/
 function fixTables(state, oldState) {
 	let tr;
 	const check = (node, pos) => {
@@ -783,6 +848,458 @@ function fixTable(state, table, tablePos, tr) {
 	}
 	return tr.setMeta(fixTablesKey, { fixTables: true });
 }
+
+//#endregion
+//#region src/utils/convert.ts
+/**
+* This function will transform the table node into a matrix of rows and columns
+* respecting merged cells, for example this table:
+*
+* ```
+* ┌──────┬──────┬─────────────┐
+* │  A1  │  B1  │     C1      │
+* ├──────┼──────┴──────┬──────┤
+* │  A2  │     B2      │      │
+* ├──────┼─────────────┤  D1  │
+* │  A3  │  B3  │  C3  │      │
+* └──────┴──────┴──────┴──────┘
+* ```
+*
+* will be converted to the below:
+*
+* ```javascript
+* [
+*   [A1, B1, C1, null],
+*   [A2, B2, null, D1],
+*   [A3, B3, C3, null],
+* ]
+* ```
+* @internal
+*/
+function convertTableNodeToArrayOfRows(tableNode) {
+	const map = TableMap.get(tableNode);
+	const rows = [];
+	const rowCount = map.height;
+	const colCount$1 = map.width;
+	for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+		const row = [];
+		for (let colIndex = 0; colIndex < colCount$1; colIndex++) {
+			const cellIndex = rowIndex * colCount$1 + colIndex;
+			const cellPos = map.map[cellIndex];
+			if (rowIndex > 0) {
+				const topCellIndex = cellIndex - colCount$1;
+				if (cellPos === map.map[topCellIndex]) {
+					row.push(null);
+					continue;
+				}
+			}
+			if (colIndex > 0) {
+				const leftCellIndex = cellIndex - 1;
+				if (cellPos === map.map[leftCellIndex]) {
+					row.push(null);
+					continue;
+				}
+			}
+			row.push(tableNode.nodeAt(cellPos));
+		}
+		rows.push(row);
+	}
+	return rows;
+}
+/**
+* Convert an array of rows to a table node.
+*
+* @internal
+*/
+function convertArrayOfRowsToTableNode(tableNode, arrayOfNodes) {
+	const newRows = [];
+	const map = TableMap.get(tableNode);
+	const rowCount = map.height;
+	const colCount$1 = map.width;
+	for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+		const oldRow = tableNode.child(rowIndex);
+		const newCells = [];
+		for (let colIndex = 0; colIndex < colCount$1; colIndex++) {
+			const cell = arrayOfNodes[rowIndex][colIndex];
+			if (!cell) continue;
+			const cellPos = map.map[rowIndex * map.width + colIndex];
+			const oldCell = tableNode.nodeAt(cellPos);
+			if (!oldCell) continue;
+			const newCell = oldCell.type.createChecked(cell.attrs, cell.content, cell.marks);
+			newCells.push(newCell);
+		}
+		const newRow = oldRow.type.createChecked(oldRow.attrs, newCells, oldRow.marks);
+		newRows.push(newRow);
+	}
+	return tableNode.type.createChecked(tableNode.attrs, newRows, tableNode.marks);
+}
+
+//#endregion
+//#region src/utils/move-row-in-array-of-rows.ts
+/**
+* Move a row in an array of rows.
+*
+* @internal
+*/
+function moveRowInArrayOfRows(rows, indexesOrigin, indexesTarget, directionOverride) {
+	const direction = indexesOrigin[0] > indexesTarget[0] ? -1 : 1;
+	const rowsExtracted = rows.splice(indexesOrigin[0], indexesOrigin.length);
+	const positionOffset = rowsExtracted.length % 2 === 0 ? 1 : 0;
+	let target;
+	if (directionOverride === -1 && direction === 1) target = indexesTarget[0] - 1;
+	else if (directionOverride === 1 && direction === -1) target = indexesTarget[indexesTarget.length - 1] - positionOffset + 1;
+	else target = direction === -1 ? indexesTarget[0] : indexesTarget[indexesTarget.length - 1] - positionOffset;
+	rows.splice(target, 0, ...rowsExtracted);
+	return rows;
+}
+
+//#endregion
+//#region src/utils/query.ts
+/**
+* Checks if the given object is a `CellSelection` instance.
+*
+* @internal
+*/
+function isCellSelection(value) {
+	return value instanceof CellSelection;
+}
+/**
+* Find the closest table node for a given position.
+*
+* @public
+*/
+function findTable($pos) {
+	return findParentNode((node) => node.type.spec.tableRole === "table", $pos);
+}
+/**
+* Try to find the anchor and head cell in the same table by using the given
+* anchor and head as hit points, or fallback to the selection's anchor and
+* head.
+*
+* @public
+*/
+function findCellRange(selection, anchorHit, headHit) {
+	var _ref, _ref2;
+	if (anchorHit == null && headHit == null && isCellSelection(selection)) return [selection.$anchorCell, selection.$headCell];
+	const anchor = (_ref = anchorHit !== null && anchorHit !== void 0 ? anchorHit : headHit) !== null && _ref !== void 0 ? _ref : selection.anchor;
+	const head = (_ref2 = headHit !== null && headHit !== void 0 ? headHit : anchorHit) !== null && _ref2 !== void 0 ? _ref2 : selection.head;
+	const doc = selection.$head.doc;
+	const $anchorCell = findCellPos(doc, anchor);
+	const $headCell = findCellPos(doc, head);
+	if ($anchorCell && $headCell && inSameTable($anchorCell, $headCell)) return [$anchorCell, $headCell];
+	return null;
+}
+/**
+* Try to find a resolved pos of a cell by using the given pos as a hit point.
+*
+* @public
+*/
+function findCellPos(doc, pos) {
+	const $pos = doc.resolve(pos);
+	return cellAround($pos) || cellNear($pos);
+}
+/**
+* Find the closest parent node that satisfies the predicate.
+*
+* @internal
+*/
+function findParentNode(predicate, $pos) {
+	for (let depth = $pos.depth; depth >= 0; depth -= 1) {
+		const node = $pos.node(depth);
+		if (predicate(node)) return {
+			node,
+			pos: depth === 0 ? 0 : $pos.before(depth),
+			start: $pos.start(depth),
+			depth
+		};
+	}
+	return null;
+}
+
+//#endregion
+//#region src/utils/get-cells.ts
+/**
+* Returns an array of cells in a column at the specified column index.
+*
+* @internal
+*/
+function getCellsInColumn(columnIndex, selection) {
+	const table = findTable(selection.$from);
+	if (!table) return;
+	const map = TableMap.get(table.node);
+	if (columnIndex < 0 || columnIndex > map.width - 1) return;
+	return map.cellsInRect({
+		left: columnIndex,
+		right: columnIndex + 1,
+		top: 0,
+		bottom: map.height
+	}).map((nodePos) => {
+		const node = table.node.nodeAt(nodePos);
+		const pos = nodePos + table.start;
+		return {
+			pos,
+			start: pos + 1,
+			node,
+			depth: table.depth + 2
+		};
+	});
+}
+/**
+* Returns an array of cells in a row at the specified row index.
+*
+* @internal
+*/
+function getCellsInRow(rowIndex, selection) {
+	const table = findTable(selection.$from);
+	if (!table) return;
+	const map = TableMap.get(table.node);
+	if (rowIndex < 0 || rowIndex > map.height - 1) return;
+	return map.cellsInRect({
+		left: 0,
+		right: map.width,
+		top: rowIndex,
+		bottom: rowIndex + 1
+	}).map((nodePos) => {
+		const node = table.node.nodeAt(nodePos);
+		const pos = nodePos + table.start;
+		return {
+			pos,
+			start: pos + 1,
+			node,
+			depth: table.depth + 2
+		};
+	});
+}
+
+//#endregion
+//#region src/utils/selection-range.ts
+/**
+* Returns a range of rectangular selection spanning all merged cells around a
+* column at index `columnIndex`.
+*
+* Original implementation from Atlassian (Apache License 2.0)
+*
+* https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/5f91cb871e8248bc3bae5ddc30bb9fd9200fadbb/editor/editor-tables/src/utils/get-selection-range-in-column.ts#editor/editor-tables/src/utils/get-selection-range-in-column.ts
+*
+* @internal
+*/
+function getSelectionRangeInColumn(tr, startColIndex, endColIndex = startColIndex) {
+	let startIndex = startColIndex;
+	let endIndex = endColIndex;
+	for (let i = startColIndex; i >= 0; i--) {
+		const cells = getCellsInColumn(i, tr.selection);
+		if (cells) cells.forEach((cell) => {
+			const maybeEndIndex = cell.node.attrs.colspan + i - 1;
+			if (maybeEndIndex >= startIndex) startIndex = i;
+			if (maybeEndIndex > endIndex) endIndex = maybeEndIndex;
+		});
+	}
+	for (let i = startColIndex; i <= endIndex; i++) {
+		const cells = getCellsInColumn(i, tr.selection);
+		if (cells) cells.forEach((cell) => {
+			const maybeEndIndex = cell.node.attrs.colspan + i - 1;
+			if (cell.node.attrs.colspan > 1 && maybeEndIndex > endIndex) endIndex = maybeEndIndex;
+		});
+	}
+	const indexes = [];
+	for (let i = startIndex; i <= endIndex; i++) {
+		const maybeCells = getCellsInColumn(i, tr.selection);
+		if (maybeCells && maybeCells.length > 0) indexes.push(i);
+	}
+	startIndex = indexes[0];
+	endIndex = indexes[indexes.length - 1];
+	const firstSelectedColumnCells = getCellsInColumn(startIndex, tr.selection);
+	const firstRowCells = getCellsInRow(0, tr.selection);
+	if (!firstSelectedColumnCells || !firstRowCells) return;
+	const $anchor = tr.doc.resolve(firstSelectedColumnCells[firstSelectedColumnCells.length - 1].pos);
+	let headCell;
+	for (let i = endIndex; i >= startIndex; i--) {
+		const columnCells = getCellsInColumn(i, tr.selection);
+		if (columnCells && columnCells.length > 0) {
+			for (let j = firstRowCells.length - 1; j >= 0; j--) if (firstRowCells[j].pos === columnCells[0].pos) {
+				headCell = columnCells[0];
+				break;
+			}
+			if (headCell) break;
+		}
+	}
+	if (!headCell) return;
+	return {
+		$anchor,
+		$head: tr.doc.resolve(headCell.pos),
+		indexes
+	};
+}
+/**
+* Returns a range of rectangular selection spanning all merged cells around a
+* row at index `rowIndex`.
+*
+* Original implementation from Atlassian (Apache License 2.0)
+*
+* https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/5f91cb871e8248bc3bae5ddc30bb9fd9200fadbb/editor/editor-tables/src/utils/get-selection-range-in-row.ts#editor/editor-tables/src/utils/get-selection-range-in-row.ts
+*
+* @internal
+*/
+function getSelectionRangeInRow(tr, startRowIndex, endRowIndex = startRowIndex) {
+	let startIndex = startRowIndex;
+	let endIndex = endRowIndex;
+	for (let i = startRowIndex; i >= 0; i--) {
+		const cells = getCellsInRow(i, tr.selection);
+		if (cells) cells.forEach((cell) => {
+			const maybeEndIndex = cell.node.attrs.rowspan + i - 1;
+			if (maybeEndIndex >= startIndex) startIndex = i;
+			if (maybeEndIndex > endIndex) endIndex = maybeEndIndex;
+		});
+	}
+	for (let i = startRowIndex; i <= endIndex; i++) {
+		const cells = getCellsInRow(i, tr.selection);
+		if (cells) cells.forEach((cell) => {
+			const maybeEndIndex = cell.node.attrs.rowspan + i - 1;
+			if (cell.node.attrs.rowspan > 1 && maybeEndIndex > endIndex) endIndex = maybeEndIndex;
+		});
+	}
+	const indexes = [];
+	for (let i = startIndex; i <= endIndex; i++) {
+		const maybeCells = getCellsInRow(i, tr.selection);
+		if (maybeCells && maybeCells.length > 0) indexes.push(i);
+	}
+	startIndex = indexes[0];
+	endIndex = indexes[indexes.length - 1];
+	const firstSelectedRowCells = getCellsInRow(startIndex, tr.selection);
+	const firstColumnCells = getCellsInColumn(0, tr.selection);
+	if (!firstSelectedRowCells || !firstColumnCells) return;
+	const $anchor = tr.doc.resolve(firstSelectedRowCells[firstSelectedRowCells.length - 1].pos);
+	let headCell;
+	for (let i = endIndex; i >= startIndex; i--) {
+		const rowCells = getCellsInRow(i, tr.selection);
+		if (rowCells && rowCells.length > 0) {
+			for (let j = firstColumnCells.length - 1; j >= 0; j--) if (firstColumnCells[j].pos === rowCells[0].pos) {
+				headCell = rowCells[0];
+				break;
+			}
+			if (headCell) break;
+		}
+	}
+	if (!headCell) return;
+	return {
+		$anchor,
+		$head: tr.doc.resolve(headCell.pos),
+		indexes
+	};
+}
+
+//#endregion
+//#region src/utils/transpose.ts
+/**
+* Transposes a 2D array by flipping columns to rows.
+*
+* Transposition is a familiar algebra concept where the matrix is flipped
+* along its diagonal. For more details, see:
+* https://en.wikipedia.org/wiki/Transpose
+*
+* @example
+* ```javascript
+* const arr = [
+*   ['a1', 'a2', 'a3'],
+*   ['b1', 'b2', 'b3'],
+*   ['c1', 'c2', 'c3'],
+*   ['d1', 'd2', 'd3'],
+* ];
+*
+* const result = transpose(arr);
+* result === [
+*   ['a1', 'b1', 'c1', 'd1'],
+*   ['a2', 'b2', 'c2', 'd2'],
+*   ['a3', 'b3', 'c3', 'd3'],
+* ]
+* ```
+*/
+function transpose(array) {
+	return array[0].map((_, i) => {
+		return array.map((column) => column[i]);
+	});
+}
+
+//#endregion
+//#region src/utils/move-column.ts
+/**
+* Move a column from index `origin` to index `target`.
+*
+* @internal
+*/
+function moveColumn(moveColParams) {
+	var _getSelectionRangeInC, _getSelectionRangeInC2;
+	const { tr, originIndex, targetIndex, select, pos } = moveColParams;
+	const table = findTable(tr.doc.resolve(pos));
+	if (!table) return false;
+	const indexesOriginColumn = (_getSelectionRangeInC = getSelectionRangeInColumn(tr, originIndex)) === null || _getSelectionRangeInC === void 0 ? void 0 : _getSelectionRangeInC.indexes;
+	const indexesTargetColumn = (_getSelectionRangeInC2 = getSelectionRangeInColumn(tr, targetIndex)) === null || _getSelectionRangeInC2 === void 0 ? void 0 : _getSelectionRangeInC2.indexes;
+	if (!indexesOriginColumn || !indexesTargetColumn) return false;
+	if (indexesOriginColumn.includes(targetIndex)) return false;
+	const newTable = moveTableColumn$1(table.node, indexesOriginColumn, indexesTargetColumn, 0);
+	tr.replaceWith(table.pos, table.pos + table.node.nodeSize, newTable);
+	if (!select) return true;
+	const map = TableMap.get(newTable);
+	const start = table.start;
+	const index = targetIndex;
+	const lastCell = map.positionAt(map.height - 1, index, newTable);
+	const $lastCell = tr.doc.resolve(start + lastCell);
+	const firstCell = map.positionAt(0, index, newTable);
+	const $firstCell = tr.doc.resolve(start + firstCell);
+	tr.setSelection(CellSelection.colSelection($lastCell, $firstCell));
+	return true;
+}
+function moveTableColumn$1(table, indexesOrigin, indexesTarget, direction) {
+	let rows = transpose(convertTableNodeToArrayOfRows(table));
+	rows = moveRowInArrayOfRows(rows, indexesOrigin, indexesTarget, direction);
+	rows = transpose(rows);
+	return convertArrayOfRowsToTableNode(table, rows);
+}
+
+//#endregion
+//#region src/utils/move-row.ts
+/**
+* Move a row from index `origin` to index `target`.
+*
+* @internal
+*/
+function moveRow(moveRowParams) {
+	var _getSelectionRangeInR, _getSelectionRangeInR2;
+	const { tr, originIndex, targetIndex, select, pos } = moveRowParams;
+	const table = findTable(tr.doc.resolve(pos));
+	if (!table) return false;
+	const indexesOriginRow = (_getSelectionRangeInR = getSelectionRangeInRow(tr, originIndex)) === null || _getSelectionRangeInR === void 0 ? void 0 : _getSelectionRangeInR.indexes;
+	const indexesTargetRow = (_getSelectionRangeInR2 = getSelectionRangeInRow(tr, targetIndex)) === null || _getSelectionRangeInR2 === void 0 ? void 0 : _getSelectionRangeInR2.indexes;
+	if (!indexesOriginRow || !indexesTargetRow) return false;
+	if (indexesOriginRow.includes(targetIndex)) return false;
+	const newTable = moveTableRow$1(table.node, indexesOriginRow, indexesTargetRow, 0);
+	tr.replaceWith(table.pos, table.pos + table.node.nodeSize, newTable);
+	if (!select) return true;
+	const map = TableMap.get(newTable);
+	const start = table.start;
+	const index = targetIndex;
+	const lastCell = map.positionAt(index, map.width - 1, newTable);
+	const $lastCell = tr.doc.resolve(start + lastCell);
+	const firstCell = map.positionAt(index, 0, newTable);
+	const $firstCell = tr.doc.resolve(start + firstCell);
+	tr.setSelection(CellSelection.rowSelection($lastCell, $firstCell));
+	return true;
+}
+function moveTableRow$1(table, indexesOrigin, indexesTarget, direction) {
+	let rows = convertTableNodeToArrayOfRows(table);
+	rows = moveRowInArrayOfRows(rows, indexesOrigin, indexesTarget, direction);
+	return convertArrayOfRowsToTableNode(table, rows);
+}
+
+//#endregion
+//#region src/commands.ts
+/**
+* Helper to get the selected rectangle in a table, if any. Adds table
+* map, table node, and table start offset to the object for
+* convenience.
+*
+* @public
+*/
 function selectedRect(state) {
 	const sel = state.selection;
 	const $pos = selectionCell(state);
@@ -796,6 +1313,11 @@ function selectedRect(state) {
 		table
 	};
 }
+/**
+* Add a column at the given position in a table.
+*
+* @public
+*/
 function addColumn(tr, { map, tableStart, table }, col) {
 	let refColumn = col > 0 ? -1 : 0;
 	if (columnIsHeader(map, table, col + refColumn)) refColumn = col == 0 || col == map.width ? null : 0;
@@ -814,6 +1336,11 @@ function addColumn(tr, { map, tableStart, table }, col) {
 	}
 	return tr;
 }
+/**
+* Command to add a column before the column with the selection.
+*
+* @public
+*/
 function addColumnBefore(state, dispatch) {
 	if (!isInTable(state)) return false;
 	if (dispatch) {
@@ -822,6 +1349,11 @@ function addColumnBefore(state, dispatch) {
 	}
 	return true;
 }
+/**
+* Command to add a column after the column with the selection.
+*
+* @public
+*/
 function addColumnAfter(state, dispatch) {
 	if (!isInTable(state)) return false;
 	if (dispatch) {
@@ -830,9 +1362,12 @@ function addColumnAfter(state, dispatch) {
 	}
 	return true;
 }
+/**
+* @public
+*/
 function removeColumn(tr, { map, table, tableStart }, col) {
 	const mapStart = tr.mapping.maps.length;
-	for (let row = 0; row < map.height; ) {
+	for (let row = 0; row < map.height;) {
 		const index = row * map.width + col;
 		const pos = map.map[index];
 		const cell = table.nodeAt(pos);
@@ -845,13 +1380,18 @@ function removeColumn(tr, { map, table, tableStart }, col) {
 		row += attrs.rowspan;
 	}
 }
+/**
+* Command function that removes the selected columns from a table.
+*
+* @public
+*/
 function deleteColumn(state, dispatch) {
 	if (!isInTable(state)) return false;
 	if (dispatch) {
 		const rect = selectedRect(state);
 		const tr = state.tr;
 		if (rect.left == 0 && rect.right == rect.map.width) return false;
-		for (let i = rect.right - 1; ; i--) {
+		for (let i = rect.right - 1;; i--) {
 			removeColumn(tr, rect, i);
 			if (i == rect.left) break;
 			const table = rect.tableStart ? tr.doc.nodeAt(rect.tableStart - 1) : tr.doc;
@@ -863,12 +1403,18 @@ function deleteColumn(state, dispatch) {
 	}
 	return true;
 }
+/**
+* @public
+*/
 function rowIsHeader(map, table, row) {
 	var _table$nodeAt;
 	const headerCell = tableNodeTypes(table.type.schema).header_cell;
 	for (let col = 0; col < map.width; col++) if (((_table$nodeAt = table.nodeAt(map.map[col + row * map.width])) === null || _table$nodeAt === void 0 ? void 0 : _table$nodeAt.type) != headerCell) return false;
 	return true;
 }
+/**
+* @public
+*/
 function addRow(tr, { map, tableStart, table }, row) {
 	let rowPos = tableStart;
 	for (let i = 0; i < row; i++) rowPos += table.child(i).nodeSize;
@@ -892,6 +1438,11 @@ function addRow(tr, { map, tableStart, table }, row) {
 	tr.insert(rowPos, tableNodeTypes(table.type.schema).row.create(null, cells));
 	return tr;
 }
+/**
+* Add a table row before the selection.
+*
+* @public
+*/
 function addRowBefore(state, dispatch) {
 	if (!isInTable(state)) return false;
 	if (dispatch) {
@@ -900,6 +1451,11 @@ function addRowBefore(state, dispatch) {
 	}
 	return true;
 }
+/**
+* Add a table row after the selection.
+*
+* @public
+*/
 function addRowAfter(state, dispatch) {
 	if (!isInTable(state)) return false;
 	if (dispatch) {
@@ -908,6 +1464,9 @@ function addRowAfter(state, dispatch) {
 	}
 	return true;
 }
+/**
+* @public
+*/
 function removeRow(tr, { map, table, tableStart }, row) {
 	let rowPos = 0;
 	for (let i = 0; i < row; i++) rowPos += table.child(i).nodeSize;
@@ -939,12 +1498,17 @@ function removeRow(tr, { map, table, tableStart }, row) {
 		}
 	}
 }
+/**
+* Remove the selected rows from a table.
+*
+* @public
+*/
 function deleteRow(state, dispatch) {
 	if (!isInTable(state)) return false;
 	if (dispatch) {
 		const rect = selectedRect(state), tr = state.tr;
 		if (rect.top == 0 && rect.bottom == rect.map.height) return false;
-		for (let i = rect.bottom - 1; ; i--) {
+		for (let i = rect.bottom - 1;; i--) {
 			removeRow(tr, rect, i);
 			if (i == rect.top) break;
 			const table = rect.tableStart ? tr.doc.nodeAt(rect.tableStart - 1) : tr.doc;
@@ -975,6 +1539,12 @@ function cellsOverlapRectangle({ width, height, map }, rect) {
 	}
 	return false;
 }
+/**
+* Merge the selected cells into a single cell. Only available when
+* the selected cells' outline forms a rectangle.
+*
+* @public
+*/
 function mergeCells(state, dispatch) {
 	const sel = state.selection;
 	if (!(sel instanceof CellSelection) || sel.$anchorCell.pos == sel.$headCell.pos) return false;
@@ -983,7 +1553,7 @@ function mergeCells(state, dispatch) {
 	if (dispatch) {
 		const tr = state.tr;
 		const seen = {};
-		let content = import_prosemirror_model.Fragment.empty;
+		let content = prosemirror_model.Fragment.empty;
 		let mergedPos;
 		let mergedCell;
 		for (let row = rect.top; row < rect.bottom; row++) for (let col = rect.left; col < rect.right; col++) {
@@ -1015,12 +1585,24 @@ function mergeCells(state, dispatch) {
 	}
 	return true;
 }
+/**
+* Split a selected cell, whose rowpan or colspan is greater than one,
+* into smaller cells. Use the first cell type for the new cells.
+*
+* @public
+*/
 function splitCell(state, dispatch) {
 	const nodeTypes = tableNodeTypes(state.schema);
 	return splitCellWithType(({ node }) => {
 		return nodeTypes[node.type.spec.tableRole];
 	})(state, dispatch);
 }
+/**
+* Split a selected cell, whose rowpan or colspan is greater than one,
+* into smaller cells with the cell type (th, td) returned by getType function.
+*
+* @public
+*/
 function splitCellWithType(getCellType) {
 	return (state, dispatch) => {
 		const sel = state.selection;
@@ -1079,6 +1661,13 @@ function splitCellWithType(getCellType) {
 		return true;
 	};
 }
+/**
+* Returns a command that sets the given attribute to the given value,
+* and is only available when the currently selected cell doesn't
+* already have that attribute set to that value.
+*
+* @public
+*/
 function setCellAttr(name, value) {
 	return function(state, dispatch) {
 		if (!isInTable(state)) return false;
@@ -1139,6 +1728,12 @@ function isHeaderEnabledByType(type, rect, types) {
 	}
 	return true;
 }
+/**
+* Toggles between row/column header and normal cells (Only applies to first row/column).
+* For deprecated behavior pass `useDeprecatedLogic` in options with true.
+*
+* @public
+*/
 function toggleHeader(type, options) {
 	options = options || { useDeprecatedLogic: false };
 	if (options.useDeprecatedLogic) return deprecated_toggleHeader(type);
@@ -1172,9 +1767,24 @@ function toggleHeader(type, options) {
 		return true;
 	};
 }
-var toggleHeaderRow = toggleHeader("row", { useDeprecatedLogic: true });
-var toggleHeaderColumn = toggleHeader("column", { useDeprecatedLogic: true });
-var toggleHeaderCell = toggleHeader("cell", { useDeprecatedLogic: true });
+/**
+* Toggles whether the selected row contains header cells.
+*
+* @public
+*/
+const toggleHeaderRow = toggleHeader("row", { useDeprecatedLogic: true });
+/**
+* Toggles whether the selected column contains header cells.
+*
+* @public
+*/
+const toggleHeaderColumn = toggleHeader("column", { useDeprecatedLogic: true });
+/**
+* Toggles whether the selected cells are header cells.
+*
+* @public
+*/
+const toggleHeaderCell = toggleHeader("cell", { useDeprecatedLogic: true });
 function findNextCell($cell, dir) {
 	if (dir < 0) {
 		const before = $cell.nodeBefore;
@@ -1196,6 +1806,12 @@ function findNextCell($cell, dir) {
 	}
 	return null;
 }
+/**
+* Returns a command for selecting the next (direction=1) or previous
+* (direction=-1) cell in a table.
+*
+* @public
+*/
 function goToNextCell(direction) {
 	return function(state, dispatch) {
 		if (!isInTable(state)) return false;
@@ -1203,11 +1819,16 @@ function goToNextCell(direction) {
 		if (cell == null) return false;
 		if (dispatch) {
 			const $cell = state.doc.resolve(cell);
-			dispatch(state.tr.setSelection(import_prosemirror_state.TextSelection.between($cell, moveCellForward($cell))).scrollIntoView());
+			dispatch(state.tr.setSelection(prosemirror_state.TextSelection.between($cell, moveCellForward($cell))).scrollIntoView());
 		}
 		return true;
 	};
 }
+/**
+* Deletes the table around the selection, if any.
+*
+* @public
+*/
 function deleteTable(state, dispatch) {
 	const $pos = state.selection.$anchor;
 	for (let d = $pos.depth; d > 0; d--) if ($pos.node(d).type.spec.tableRole == "table") {
@@ -1216,6 +1837,11 @@ function deleteTable(state, dispatch) {
 	}
 	return false;
 }
+/**
+* Deletes the content of the selected cells, if they are not empty.
+*
+* @public
+*/
 function deleteCellSelection(state, dispatch) {
 	const sel = state.selection;
 	if (!(sel instanceof CellSelection)) return false;
@@ -1223,12 +1849,65 @@ function deleteCellSelection(state, dispatch) {
 		const tr = state.tr;
 		const baseContent = tableNodeTypes(state.schema).cell.createAndFill().content;
 		sel.forEachCell((cell, pos) => {
-			if (!cell.content.eq(baseContent)) tr.replace(tr.mapping.map(pos + 1), tr.mapping.map(pos + cell.nodeSize - 1), new import_prosemirror_model.Slice(baseContent, 0, 0));
+			if (!cell.content.eq(baseContent)) tr.replace(tr.mapping.map(pos + 1), tr.mapping.map(pos + cell.nodeSize - 1), new prosemirror_model.Slice(baseContent, 0, 0));
 		});
 		if (tr.docChanged) dispatch(tr);
 	}
 	return true;
 }
+/**
+* Move a table row from index `from` to index `to`.
+*
+* @public
+*/
+function moveTableRow(options) {
+	return (state, dispatch) => {
+		const { from: originIndex, to: targetIndex, select = true, pos = state.selection.from } = options;
+		const tr = state.tr;
+		if (moveRow({
+			tr,
+			originIndex,
+			targetIndex,
+			select,
+			pos
+		})) {
+			dispatch === null || dispatch === void 0 || dispatch(tr);
+			return true;
+		}
+		return false;
+	};
+}
+/**
+* Move a table column from index `from` to index `to`.
+*
+* @public
+*/
+function moveTableColumn(options) {
+	return (state, dispatch) => {
+		const { from: originIndex, to: targetIndex, select = true, pos = state.selection.from } = options;
+		const tr = state.tr;
+		if (moveColumn({
+			tr,
+			originIndex,
+			targetIndex,
+			select,
+			pos
+		})) {
+			dispatch === null || dispatch === void 0 || dispatch(tr);
+			return true;
+		}
+		return false;
+	};
+}
+
+//#endregion
+//#region src/copypaste.ts
+/**
+* Get a rectangular area of cells from a slice, or null if the outer
+* nodes of the slice aren't table cells or rows.
+*
+* @internal
+*/
 function pastedCells(slice) {
 	if (slice.size === 0) return null;
 	let { content, openStart, openEnd } = slice;
@@ -1244,10 +1923,10 @@ function pastedCells(slice) {
 		let cells = content.child(i).content;
 		const left = i ? 0 : Math.max(0, openStart - 1);
 		const right = i < content.childCount - 1 ? 0 : Math.max(0, openEnd - 1);
-		if (left || right) cells = fitSlice(tableNodeTypes(schema).row, new import_prosemirror_model.Slice(cells, left, right)).content;
+		if (left || right) cells = fitSlice(tableNodeTypes(schema).row, new prosemirror_model.Slice(cells, left, right)).content;
 		rows.push(cells);
 	}
-	else if (role == "cell" || role == "header_cell") rows.push(openStart || openEnd ? fitSlice(tableNodeTypes(schema).row, new import_prosemirror_model.Slice(content, openStart, openEnd)).content : content);
+	else if (role == "cell" || role == "header_cell") rows.push(openStart || openEnd ? fitSlice(tableNodeTypes(schema).row, new prosemirror_model.Slice(content, openStart, openEnd)).content : content);
 	else return null;
 	return ensureRectangular(schema, rows);
 }
@@ -1263,12 +1942,12 @@ function ensureRectangular(schema, rows) {
 	let width = 0;
 	for (let r = 0; r < widths.length; r++) width = Math.max(width, widths[r]);
 	for (let r = 0; r < widths.length; r++) {
-		if (r >= rows.length) rows.push(import_prosemirror_model.Fragment.empty);
+		if (r >= rows.length) rows.push(prosemirror_model.Fragment.empty);
 		if (widths[r] < width) {
 			const empty = tableNodeTypes(schema).cell.createAndFill();
 			const cells = [];
 			for (let i = widths[r]; i < width; i++) cells.push(empty);
-			rows[r] = rows[r].append(import_prosemirror_model.Fragment.from(cells));
+			rows[r] = rows[r].append(prosemirror_model.Fragment.from(cells));
 		}
 	}
 	return {
@@ -1279,8 +1958,15 @@ function ensureRectangular(schema, rows) {
 }
 function fitSlice(nodeType, slice) {
 	const node = nodeType.createAndFill();
-	return new import_prosemirror_transform.Transform(node).replace(0, node.content.size, slice).doc;
+	return new prosemirror_transform.Transform(node).replace(0, node.content.size, slice).doc;
 }
+/**
+* Clip or extend (repeat) the given set of cells to cover the given
+* width and height. Will clip rowspan/colspan cells at the edges when
+* they stick out.
+*
+* @internal
+*/
 function clipCells({ width, height, rows }, newWidth, newHeight) {
 	if (width != newWidth) {
 		const added = [];
@@ -1294,7 +1980,7 @@ function clipCells({ width, height, rows }, newWidth, newHeight) {
 				col += cell.attrs.colspan;
 				for (let j = 1; j < cell.attrs.rowspan; j++) added[row + j] = (added[row + j] || 0) + cell.attrs.colspan;
 			}
-			newRows.push(import_prosemirror_model.Fragment.from(cells));
+			newRows.push(prosemirror_model.Fragment.from(cells));
 		}
 		rows = newRows;
 		width = newWidth;
@@ -1311,7 +1997,7 @@ function clipCells({ width, height, rows }, newWidth, newHeight) {
 				}, cell.content);
 				cells.push(cell);
 			}
-			newRows.push(import_prosemirror_model.Fragment.from(cells));
+			newRows.push(prosemirror_model.Fragment.from(cells));
 		}
 		rows = newRows;
 		height = newHeight;
@@ -1343,7 +2029,7 @@ function growTable(tr, map, table, start, width, height, mapFrom) {
 			const header = i >= map.width ? false : table.nodeAt(map.map[start$1 + i]).type == types.header_cell;
 			cells.push(header ? emptyHead || (emptyHead = types.header_cell.createAndFill()) : empty || (empty = types.cell.createAndFill()));
 		}
-		const emptyRow = types.row.create(null, import_prosemirror_model.Fragment.from(cells)), rows = [];
+		const emptyRow = types.row.create(null, prosemirror_model.Fragment.from(cells)), rows = [];
 		for (let i = map.height; i < height; i++) rows.push(emptyRow);
 		tr.insert(tr.mapping.slice(mapFrom).map(start + table.nodeSize - 2), rows);
 	}
@@ -1388,6 +2074,12 @@ function isolateVertical(tr, map, table, start, top, bottom, left, mapFrom) {
 	}
 	return found;
 }
+/**
+* Insert the given set of cells (as returned by `pastedCells`) into a
+* table, at the position pointed at by rect.
+*
+* @internal
+*/
 function insertCells(state, dispatch, tableStart, rect, cells) {
 	let table = tableStart ? state.doc.nodeAt(tableStart - 1) : state.doc;
 	if (!table) throw new Error("No table found");
@@ -1409,13 +2101,16 @@ function insertCells(state, dispatch, tableStart, rect, cells) {
 	if (isolateVertical(tr, map, table, tableStart, top, bottom, right, mapFrom)) recomp();
 	for (let row = top; row < bottom; row++) {
 		const from = map.positionAt(row, left, table), to = map.positionAt(row, right, table);
-		tr.replace(tr.mapping.slice(mapFrom).map(from + tableStart), tr.mapping.slice(mapFrom).map(to + tableStart), new import_prosemirror_model.Slice(cells.rows[row - top], 0, 0));
+		tr.replace(tr.mapping.slice(mapFrom).map(from + tableStart), tr.mapping.slice(mapFrom).map(to + tableStart), new prosemirror_model.Slice(cells.rows[row - top], 0, 0));
 	}
 	recomp();
 	tr.setSelection(new CellSelection(tr.doc.resolve(tableStart + map.positionAt(top, left, table)), tr.doc.resolve(tableStart + map.positionAt(bottom - 1, right - 1, table))));
 	dispatch(tr);
 }
-var handleKeyDown = (0, import_prosemirror_keymap.keydownHandler)({
+
+//#endregion
+//#region src/input.ts
+const handleKeyDown = (0, prosemirror_keymap.keydownHandler)({
 	ArrowLeft: arrow("horiz", -1),
 	ArrowRight: arrow("horiz", 1),
 	ArrowUp: arrow("vert", -1),
@@ -1434,22 +2129,25 @@ function maybeSetSelection(state, dispatch, selection) {
 	if (dispatch) dispatch(state.tr.setSelection(selection).scrollIntoView());
 	return true;
 }
+/**
+* @internal
+*/
 function arrow(axis, dir) {
 	return (state, dispatch, view) => {
 		if (!view) return false;
 		const sel = state.selection;
-		if (sel instanceof CellSelection) return maybeSetSelection(state, dispatch, import_prosemirror_state.Selection.near(sel.$headCell, dir));
+		if (sel instanceof CellSelection) return maybeSetSelection(state, dispatch, prosemirror_state.Selection.near(sel.$headCell, dir));
 		if (axis != "horiz" && !sel.empty) return false;
 		const end = atEndOfCell(view, axis, dir);
 		if (end == null) return false;
-		if (axis == "horiz") return maybeSetSelection(state, dispatch, import_prosemirror_state.Selection.near(state.doc.resolve(sel.head + dir), dir));
+		if (axis == "horiz") return maybeSetSelection(state, dispatch, prosemirror_state.Selection.near(state.doc.resolve(sel.head + dir), dir));
 		else {
 			const $cell = state.doc.resolve(end);
 			const $next = nextCell($cell, axis, dir);
 			let newSel;
-			if ($next) newSel = import_prosemirror_state.Selection.near($next, 1);
-			else if (dir < 0) newSel = import_prosemirror_state.Selection.near(state.doc.resolve($cell.before(-1)), -1);
-			else newSel = import_prosemirror_state.Selection.near(state.doc.resolve($cell.after(-1)), 1);
+			if ($next) newSel = prosemirror_state.Selection.near($next, 1);
+			else if (dir < 0) newSel = prosemirror_state.Selection.near(state.doc.resolve($cell.before(-1)), -1);
+			else newSel = prosemirror_state.Selection.near(state.doc.resolve($cell.after(-1)), 1);
 			return maybeSetSelection(state, dispatch, newSel);
 		}
 	};
@@ -1476,6 +2174,9 @@ function handleTripleClick(view, pos) {
 	view.dispatch(view.state.tr.setSelection(new CellSelection($cell)));
 	return true;
 }
+/**
+* @public
+*/
 function handlePaste(view, _, slice) {
 	if (!isInTable(view.state)) return false;
 	let cells = pastedCells(slice);
@@ -1484,7 +2185,7 @@ function handlePaste(view, _, slice) {
 		if (!cells) cells = {
 			width: 1,
 			height: 1,
-			rows: [import_prosemirror_model.Fragment.from(fitSlice(tableNodeTypes(view.state.schema).cell, slice))]
+			rows: [prosemirror_model.Fragment.from(fitSlice(tableNodeTypes(view.state.schema).cell, slice))]
 		};
 		const table = sel.$anchorCell.node(-1);
 		const start = sel.$anchorCell.start(-1);
@@ -1546,7 +2247,7 @@ function handleMouseDown$1(view, startEvent) {
 	view.root.addEventListener("mousemove", move);
 }
 function atEndOfCell(view, axis, dir) {
-	if (!(view.state.selection instanceof import_prosemirror_state.TextSelection)) return null;
+	if (!(view.state.selection instanceof prosemirror_state.TextSelection)) return null;
 	const { $head } = view.state.selection;
 	for (let d = $head.depth - 1; d >= 0; d--) {
 		const parent = $head.node(d);
@@ -1572,6 +2273,12 @@ function cellUnderMouse(view, event) {
 	let { inside, pos } = mousePos;
 	return inside >= 0 && cellAround(view.state.doc.resolve(inside)) || cellAround(view.state.doc.resolve(pos));
 }
+
+//#endregion
+//#region src/tableview.ts
+/**
+* @public
+*/
 var TableView = class {
 	constructor(node, defaultCellMinWidth) {
 		this.node = node;
@@ -1594,6 +2301,9 @@ var TableView = class {
 		return record.type == "attributes" && (record.target == this.table || this.colgroup.contains(record.target));
 	}
 };
+/**
+* @public
+*/
 function updateColumnsOnResize(node, colgroup, table, defaultCellMinWidth, overrideCol, overrideValue) {
 	let totalWidth = 0;
 	let fixedWidth = true;
@@ -1631,9 +2341,18 @@ function updateColumnsOnResize(node, colgroup, table, defaultCellMinWidth, overr
 		table.style.minWidth = totalWidth + "px";
 	}
 }
-var columnResizingPluginKey = new import_prosemirror_state.PluginKey("tableColumnResizing");
+
+//#endregion
+//#region src/columnresizing.ts
+/**
+* @public
+*/
+const columnResizingPluginKey = new prosemirror_state.PluginKey("tableColumnResizing");
+/**
+* @public
+*/
 function columnResizing({ handleWidth = 5, cellMinWidth = 25, defaultCellMinWidth = 100, View = TableView, lastColumnResizable = true } = {}) {
-	const plugin = new import_prosemirror_state.Plugin({
+	const plugin = new prosemirror_state.Plugin({
 		key: columnResizingPluginKey,
 		state: {
 			init(_, state) {
@@ -1674,7 +2393,10 @@ function columnResizing({ handleWidth = 5, cellMinWidth = 25, defaultCellMinWidt
 	});
 	return plugin;
 }
-var ResizeState = class ResizeState2 {
+/**
+* @public
+*/
+var ResizeState = class ResizeState {
 	constructor(activeHandle, dragging) {
 		this.activeHandle = activeHandle;
 		this.dragging = dragging;
@@ -1682,12 +2404,12 @@ var ResizeState = class ResizeState2 {
 	apply(tr) {
 		const state = this;
 		const action = tr.getMeta(columnResizingPluginKey);
-		if (action && action.setHandle != null) return new ResizeState2(action.setHandle, false);
-		if (action && action.setDragging !== void 0) return new ResizeState2(state.activeHandle, action.setDragging);
+		if (action && action.setHandle != null) return new ResizeState(action.setHandle, false);
+		if (action && action.setDragging !== void 0) return new ResizeState(state.activeHandle, action.setDragging);
 		if (state.activeHandle > -1 && tr.docChanged) {
 			let handle = tr.mapping.map(state.activeHandle, -1);
 			if (!pointsAtCell(tr.doc.resolve(handle))) handle = -1;
-			return new ResizeState2(handle, state.dragging);
+			return new ResizeState(handle, state.dragging);
 		}
 		return state;
 	}
@@ -1833,7 +2555,7 @@ function handleDecorations(state, cell) {
 	const decorations = [];
 	const $cell = state.doc.resolve(cell);
 	const table = $cell.node(-1);
-	if (!table) return import_prosemirror_view.DecorationSet.empty;
+	if (!table) return prosemirror_view.DecorationSet.empty;
 	const map = TableMap.get(table);
 	const start = $cell.start(-1);
 	const col = map.colCount($cell.pos - start) + $cell.nodeAfter.attrs.colspan - 1;
@@ -1845,14 +2567,31 @@ function handleDecorations(state, cell) {
 			const pos = start + cellPos + table.nodeAt(cellPos).nodeSize - 1;
 			const dom = document.createElement("div");
 			dom.className = "column-resize-handle";
-			if ((_columnResizingPlugin = columnResizingPluginKey.getState(state)) === null || _columnResizingPlugin === void 0 ? void 0 : _columnResizingPlugin.dragging) decorations.push(import_prosemirror_view.Decoration.node(start + cellPos, start + cellPos + table.nodeAt(cellPos).nodeSize, { class: "column-resize-dragging" }));
-			decorations.push(import_prosemirror_view.Decoration.widget(pos, dom));
+			if ((_columnResizingPlugin = columnResizingPluginKey.getState(state)) === null || _columnResizingPlugin === void 0 ? void 0 : _columnResizingPlugin.dragging) decorations.push(prosemirror_view.Decoration.node(start + cellPos, start + cellPos + table.nodeAt(cellPos).nodeSize, { class: "column-resize-dragging" }));
+			decorations.push(prosemirror_view.Decoration.widget(pos, dom));
 		}
 	}
-	return import_prosemirror_view.DecorationSet.create(state.doc, decorations);
+	return prosemirror_view.DecorationSet.create(state.doc, decorations);
 }
+
+//#endregion
+//#region src/index.ts
+/**
+* Creates a [plugin](http://prosemirror.net/docs/ref/#state.Plugin)
+* that, when added to an editor, enables cell-selection, handles
+* cell-based copy/paste, and makes sure tables stay well-formed (each
+* row has the same width, and cells don't overlap).
+*
+* You should probably put this plugin near the end of your array of
+* plugins, since it handles mouse and arrow key events in tables
+* rather broadly, and other plugins, like the gap cursor or the
+* column-width dragging plugin, might want to get a turn first to
+* perform more specific behavior.
+*
+* @public
+*/
 function tableEditing({ allowTableNodeSelection = false } = {}) {
-	return new import_prosemirror_state.Plugin({
+	return new prosemirror_state.Plugin({
 		key: tableEditingKey,
 		state: {
 			init() {
@@ -1881,3 +2620,64 @@ function tableEditing({ allowTableNodeSelection = false } = {}) {
 		}
 	});
 }
+
+//#endregion
+exports.CellBookmark = CellBookmark;
+exports.CellSelection = CellSelection;
+exports.ResizeState = ResizeState;
+exports.TableMap = TableMap;
+exports.TableView = TableView;
+exports.__clipCells = clipCells;
+exports.__insertCells = insertCells;
+exports.__pastedCells = pastedCells;
+exports.addColSpan = addColSpan;
+exports.addColumn = addColumn;
+exports.addColumnAfter = addColumnAfter;
+exports.addColumnBefore = addColumnBefore;
+exports.addRow = addRow;
+exports.addRowAfter = addRowAfter;
+exports.addRowBefore = addRowBefore;
+exports.cellAround = cellAround;
+exports.cellNear = cellNear;
+exports.colCount = colCount;
+exports.columnIsHeader = columnIsHeader;
+exports.columnResizing = columnResizing;
+exports.columnResizingPluginKey = columnResizingPluginKey;
+exports.deleteCellSelection = deleteCellSelection;
+exports.deleteColumn = deleteColumn;
+exports.deleteRow = deleteRow;
+exports.deleteTable = deleteTable;
+exports.findCell = findCell;
+exports.findCellPos = findCellPos;
+exports.findCellRange = findCellRange;
+exports.findTable = findTable;
+exports.fixTables = fixTables;
+exports.fixTablesKey = fixTablesKey;
+exports.goToNextCell = goToNextCell;
+exports.handlePaste = handlePaste;
+exports.inSameTable = inSameTable;
+exports.isInTable = isInTable;
+exports.mergeCells = mergeCells;
+exports.moveCellForward = moveCellForward;
+exports.moveTableColumn = moveTableColumn;
+exports.moveTableRow = moveTableRow;
+exports.nextCell = nextCell;
+exports.pointsAtCell = pointsAtCell;
+exports.removeColSpan = removeColSpan;
+exports.removeColumn = removeColumn;
+exports.removeRow = removeRow;
+exports.rowIsHeader = rowIsHeader;
+exports.selectedRect = selectedRect;
+exports.selectionCell = selectionCell;
+exports.setCellAttr = setCellAttr;
+exports.splitCell = splitCell;
+exports.splitCellWithType = splitCellWithType;
+exports.tableEditing = tableEditing;
+exports.tableEditingKey = tableEditingKey;
+exports.tableNodeTypes = tableNodeTypes;
+exports.tableNodes = tableNodes;
+exports.toggleHeader = toggleHeader;
+exports.toggleHeaderCell = toggleHeaderCell;
+exports.toggleHeaderColumn = toggleHeaderColumn;
+exports.toggleHeaderRow = toggleHeaderRow;
+exports.updateColumnsOnResize = updateColumnsOnResize;

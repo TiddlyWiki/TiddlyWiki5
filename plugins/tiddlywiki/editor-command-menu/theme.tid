@@ -1,0 +1,44 @@
+title: $:/plugins/tiddlywiki/editor-command-menu/theme
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-editor-command-menu {
+	background-color: <<colour tiddler-editor-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+	color: <<colour foreground>>;
+}
+
+.tc-editor-command-menu-filter-wrapper,
+.tc-editor-command-menu-group {
+	background-color: <<colour page-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+}
+
+.tc-editor-command-menu-filter,
+.tc-editor-command-menu-item-description,
+.tc-editor-command-menu-item-icon,
+.tc-editor-command-menu-empty {
+	color: <<colour foreground>>;
+}
+
+.tc-editor-command-menu-search {
+	background-color: <<colour tiddler-editor-background>>;
+	border-color: <<colour tiddler-editor-border>>;
+	color: <<colour foreground>>;
+}
+
+.tc-editor-command-menu-search:focus {
+	border-color: <<colour primary>>;
+	outline: none;
+}
+
+.tc-editor-command-menu-item:hover,
+.tc-editor-command-menu-item-selected {
+	background-color: <<colour tiddler-editor-fields-even>>;
+}
+
+.tc-editor-command-menu-item-icon svg {
+	fill: <<colour foreground>>;
+}

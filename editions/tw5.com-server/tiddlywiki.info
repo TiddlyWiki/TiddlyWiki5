@@ -6,6 +6,7 @@
 		"tiddlywiki/highlight",
 		"tiddlywiki/internals",
 		"tiddlywiki/prosemirror",
+		"tiddlywiki/editor-command-menu",
 		"tiddlywiki/wikitext-serialize",
 		"tiddlywiki/hard-line-breaks"
 	],
