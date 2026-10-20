@@ -1,0 +1,43 @@
+created: 20260402120000000
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/advanced/open-close-branch-buttons
+modified: 20260402145243856
+tags: $:/tags/wiki-test-spec advanced
+title: Examples/TOC/advanced/open-close-branch-buttons
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows ''programmatic branch control'' using buttons
+
+* The `toc-openBranch` and `toc-closeBranch` procedures accept a `manual:"yes"` parameter
+
+* "Open whole Tree" recursively opens all branches from Contents
+
+* "Close branch: bb" closes only the bb branch and its children
+
+* <kbd>CTRL</kbd>-clicking a chevron has the same effect
+
+{{example-overview}}
+
++
+title: Description
+
+Programmatic Branch Open/Close Buttons
++
+title: Output
+
+\procedure closeBranch()
+<<toc-closeBranch path:"/Contents" currentTiddler:"bb" manual:yes>>
+\end
+
+\procedure openBranch()
+<<toc-openBranch path:"/" currentTiddler:"Contents" manual:yes>>
+\end
+
+<$button actions=<<openBranch>>>Open whole Tree</$button>
+
+<$button actions=<<closeBranch>>>Close branch: bb</$button>
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"Contents">>
+</div>
