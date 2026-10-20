@@ -1,0 +1,76 @@
+created: 20260728220300000
+description: Bucket the groups into tabs by first character, with a count per tab
+import-compound: [[GroupedLists/Bibliography]]
+modified: 20260729190424885
+tags: $:/tags/wiki-test-spec GroupedLists
+title: GroupedLists/Example/WithTabs
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+The `tabs` macro takes its tab list from a filter, so here the tabs come out of the data: one per distinct first character, plus an ''All'' tab.
+
+Three definitions feed it:
+
+* `f.letters` collects the distinct first characters
+* `f.valuesFor` selects the groups filed under one character
+* `f.valuesShown` returns everything for ''All'', one character otherwise
+
+This test case carries two payload tiddlers, `_TabButton` and `_TabContent`, because the `tabs` macro transcludes its caption and its panel by tiddler title and cannot take inline wikitext.
+
+Matching is case insensitive, so `de Vries` and `De Vries` would share a tab. A character that is not a letter gets its own tab, which is why the sample data produces a `3` tab. Each caption carries the number of groups behind it, so no tab is a dead end.
++
+title: Output
+
+\whitespace trim
+
+<!-- bibtex-author<value> would make the field name the operator, which cannot be a variable, so f.tiddlersFor compares via get<groupField> -->
+
+<!-- No trailing whitespace after the field name: it becomes part of the name and the list silently renders nothing -->
+\procedure groupField() bibtex-author
+
+\function f.valuesAll() [all[tiddlers]!is[system]has<groupField>each<groupField>get<groupField>sort[]]
+
+\function f.letters() [f.valuesAll[]] :map[uppercase[]split[]first[]] +[unique[]sort[]]
+
+\function f.valuesFor(letter) [f.valuesAll[]] :filter[uppercase[]split[]first[]match<letter>]
+
+\function f.valuesShown(letter) [f.valuesAll[]] :filter[<letter>match[All]] :else[f.valuesFor<letter>]
+
+\function f.tiddlersFor(value) [!is[system]has<groupField>] :filter[get<groupField>match<value>] +[sort[title]]
+
+<$macrocall
+	$name="tabs"
+	tabsList="[[All]] [f.letters[]]"
+	default="All"
+	state="$:/state/GroupedLists/tab"
+	buttonTemplate="_TabButton"
+	template="_TabContent"
+/>
++
+title: _TabButton
+code-body: yes
+
+\whitespace trim
+
+<$text text=<<currentTab>>/><span class="tc-tiny-gap-left">(<$count filter="[f.valuesShown<currentTab>]"/>)</span>
++
+title: _TabContent
+code-body: yes
+
+\whitespace trim
+
+<$list filter="[f.valuesShown<currentTab>]" variable="_value">
+	<$list-empty>
+		//No matches//
+	</$list-empty>
+	<div class="tc-menu-list-item">
+		<<_value>>
+
+		<$list filter="[f.tiddlersFor<_value>]">
+			<div class="tc-menu-list-subitem">
+				<$link><$text text={{{ [<currentTiddler>get[bibtex-title]] :else[<currentTiddler>] }}}/></$link>
+			</div>
+		</$list>
+	</div>
+</$list>

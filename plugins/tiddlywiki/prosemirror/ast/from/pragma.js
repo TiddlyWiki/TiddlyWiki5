@@ -6,39 +6,16 @@ module-type: library
 
 "use strict";
 
+const factory = $tw.utils.wikitextParseTree;
+
 function pragmaBlock(builders, node) {
 	const rawText = node.attrs && node.attrs.rawText || "";
-	let parsedNodes = [];
-	try {
-		const parseResult = $tw.wiki.parseText(null, rawText);
-		if(parseResult && parseResult.tree) {
-			parsedNodes = parseResult.tree;
-		}
-	} catch(e) {
-		return {
-			type: "element",
-			tag: "p",
-			children: [{ type: "text", text: rawText }]
-		};
-	}
-	if(parsedNodes.length > 0) {
-		return parsedNodes.map((pragmaNode) => {
-			let result = {};
-			for(const key in pragmaNode) {
-				if(pragmaNode.hasOwnProperty(key) && key !== "children") {
-					result[key] = pragmaNode[key];
-				}
-			}
-			result.children = [];
-			return result;
-		});
-	}
-	return { type: "text", text: rawText };
+	const pragmas = factory.pragma(rawText);
+	return pragmas.length > 0 ? pragmas : factory.text(rawText);
 }
 
 function opaqueBlock(builders, node) {
-	const rawText = node.attrs && node.attrs.rawText || "";
-	return { type: "text", text: rawText };
+	return factory.opaque(node.attrs && node.attrs.rawText || "", { block: true });
 }
 
 function typedBlock(builders, node) {

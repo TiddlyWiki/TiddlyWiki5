@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Style blocks with styles, classes and list content round-trip byte-exact
 title: Serialize/StyleBlock
 type: text/vnd.tiddlywiki
 

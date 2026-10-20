@@ -8,6 +8,7 @@ module-type: library
 
 const convertNodes = require("$:/plugins/tiddlywiki/prosemirror/ast/from/shared.js").convertNodes;
 const convertANode = require("$:/plugins/tiddlywiki/prosemirror/ast/from/shared.js").convertANode;
+const factory = $tw.utils.wikitextParseTree;
 
 function tableNode(builders, node) {
 	const rows = [];
@@ -19,16 +20,7 @@ function tableNode(builders, node) {
 			}
 		}
 	}
-	return {
-		type: "element",
-		tag: "table",
-		rule: "table",
-		children: [{
-			type: "element",
-			tag: "tbody",
-			children: rows
-		}]
-	};
+	return factory.table(rows);
 }
 
 function tableRow(builders, node) {
@@ -41,15 +33,10 @@ function tableRow(builders, node) {
 			}
 		}
 	}
-	return {
-		type: "element",
-		tag: "tr",
-		children: cells
-	};
+	return factory.tableRow(cells);
 }
 
 function tableCellOrHeader(builders, node) {
-	const isHeader = node.type === "table_header";
 	let inlineContent = [];
 	if(node.content) {
 		for(let i = 0; i < node.content.length; i++) {
@@ -71,11 +58,20 @@ function tableCellOrHeader(builders, node) {
 			}
 		}
 	}
-	return {
-		type: "element",
-		tag: isHeader ? "th" : "td",
-		children: inlineContent
-	};
+	return factory.tableCell(keepBreakElements(inlineContent), { header: node.type === "table_header" });
+}
+
+// A table row is one line, so a break inside a cell becomes the html element
+function keepBreakElements(nodes) {
+	return nodes.map((node) => {
+		if(factory.kindOf(node) === "hardBreak" && node.rule === "ssnl") {
+			return factory.htmlBreak();
+		}
+		if(node.children) {
+			node.children = keepBreakElements(node.children);
+		}
+		return node;
+	});
 }
 
 exports.tableNode = tableNode;

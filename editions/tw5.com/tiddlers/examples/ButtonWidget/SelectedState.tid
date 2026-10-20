@@ -1,0 +1,52 @@
+title: ButtonWidget/Example/SelectedState
+description: Highlight the active button with selectedClass, set, setTo and default used together
+modified: 20260724235815000
+tags: [[$:/tags/wiki-test-spec]]
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+This example combines four attributes so a row of buttons can show which colour is active:
+
+* `set` and `setTo` write the chosen colour to a state tiddler
+* `selectedClass` marks the button whose `setTo` matches the current value of `set`
+* `default` gives the value to compare against while the `set` tiddler does not yet exist
+
+Because `default` is `red`, the ''Red'' button starts out selected. Click another colour to move the selection.
++
+title: Output
+
+<!-- The inline <style> below is only for this self-contained test/development example.
+For production, define styles in a tiddler tagged $:/tags/Stylesheet instead. -->
+<style>
+.demo-swatch {
+	padding: 0.2em 0.7em;
+}
+.demo-selected {
+	outline: 2px solid #1a73e8;
+}
+</style>
+
+<$button set="$:/state/colour" setTo="red"
+	default="red"
+	class="demo-swatch tc-small-gap-right"
+	selectedClass="demo-selected"
+>
+	Red
+</$button>
+<$button set="$:/state/colour" setTo="green"
+	default="red"
+	class="demo-swatch tc-small-gap-right"
+	selectedClass="demo-selected"
+>
+	Green
+</$button>
+<$button set="$:/state/colour" setTo="blue"
+	default="red"
+	class="demo-swatch tc-small-gap-right"
+	selectedClass="demo-selected"
+>
+	Blue
+</$button>
+
+Selected colour: <$text text={{{ [[$:/state/colour]get[text]] :else[[red]] }}}/>

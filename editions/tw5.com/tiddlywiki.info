@@ -11,7 +11,8 @@
 		"tiddlywiki/dom-to-image",
 		"tiddlywiki/markdown",
 		"tiddlywiki/prosemirror",
-		"tiddlywiki/wikitext-serialize"
+		"tiddlywiki/wikitext-serialize",
+		"tiddlywiki/hard-line-breaks"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

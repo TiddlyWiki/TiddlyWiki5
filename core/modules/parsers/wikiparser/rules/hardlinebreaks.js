@@ -30,6 +30,7 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
+	var start = this.match.index;
 	var reEnd = /(""")|(\r?\n)/mg,
 		tree = [],
 		match;
@@ -42,16 +43,20 @@ exports.parse = function() {
 		reEnd.lastIndex = this.parser.pos;
 		match = reEnd.exec(this.parser.source);
 		if(match) {
-			var start = this.parser.pos;
+			var brStart = this.parser.pos;
 			this.parser.pos = reEnd.lastIndex;
 			// Add a line break if the terminator was a line break
 			if(match[2]) {
-				tree.push({type: "element", tag: "br", start: start, end: this.parser.pos});
+				tree.push({type: "element", tag: "br", rule: "hardlinebreaks", start: brStart, end: this.parser.pos});
 			}
 		}
 	} while(match && !match[1]);
-	// Mark first and last node, and return the nodes
-	if(tree[0]) tree[0].isRuleStart = true;
-	if(tree[tree.length-1]) tree[tree.length-1].isRuleEnd = true;
-	return tree;
+	// Return a void wrapper so the inner nodes keep their own rule names,
+	// e.g. bold inside the region stays rule "bold"
+	return [{
+		type: "void",
+		children: tree,
+		start: start,
+		end: this.parser.pos
+	}];
 };

@@ -7,21 +7,15 @@ module-type: library
 "use strict";
 
 const shared = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js");
+const factory = $tw.utils.wikitextParseTree;
 
 module.exports = function buildBlockquote(context, node) {
-	let citeText = null;
-	const bodyChildren = [];
-	const children = node.children || [];
-	for(let index = 0; index < children.length; index++) {
-		if(children[index].type === "element" && children[index].tag === "cite") {
-			citeText = shared.extractPlainText(children[index]);
-		} else {
-			bodyChildren.push(children[index]);
-		}
-	}
+	const parts = factory.quoteParts(node);
+	// The editor shows one citation; the closing one wins as it did before
+	const cite = parts.closingCite || parts.openingCite;
 	return {
 		type: "blockquote",
-		attrs: { cite: citeText },
-		content: shared.convertNodes(context, bodyChildren)
+		attrs: { cite: cite ? cite.map(shared.extractPlainText).join("") : null },
+		content: shared.convertNodes(context, parts.body)
 	};
 };

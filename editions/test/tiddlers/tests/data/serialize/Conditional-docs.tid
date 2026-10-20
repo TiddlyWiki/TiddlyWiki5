@@ -1,0 +1,14 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: A nested conditional inside an else clause round-trips byte-exact
+title: Serialize/Conditional-docs
+type: text/vnd.tiddlywiki
+
+<%if [<animal>match[Elephant]] %>
+  It is an elephant
+<%else%>
+  <%if [<animal>match[Giraffe]] %>
+    It is a giraffe
+  <%else%>
+    It is completely unknown
+  <%endif%>
+<%endif%>

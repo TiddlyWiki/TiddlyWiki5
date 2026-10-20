@@ -650,4 +650,7 @@ Rishu kumar, @rishu-7549, 2025/10/25
 
 Himmel, @NotHimmel, 2026/03/19
 
-@sean-clayton, 2026/05/16
+
+@vuktw, 2026/07/12
+
+Zaid, @Zaidzezo, 2026/09/03

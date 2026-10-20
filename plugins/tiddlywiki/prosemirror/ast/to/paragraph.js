@@ -9,6 +9,7 @@ module-type: library
 const shared = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js");
 const convertNodes = shared.convertNodes;
 const extractSourceText = shared.extractSourceText;
+const factory = $tw.utils.wikitextParseTree;
 
 function isLiftedBlockNode(node) {
 	return !!node && (
@@ -43,21 +44,14 @@ module.exports = function buildParagraph(context, node) {
 	const result = [];
 	let currentP = [];
 	for(let i = 0; i < children.length; i++) {
-		if(children[i].rule === "hardlinebreaks") {
+		if(factory.kindOf(children[i]) === "hardLineBreaksRegion") {
 			if(currentP.length > 0) {
 				pushParagraphOrLiftedBlocks(result, context, currentP);
 				currentP = [];
 			}
-			const hardBlock = [];
-			while(i < children.length && children[i].rule === "hardlinebreaks") {
-				hardBlock.push(children[i]);
-				i++;
-			}
-			i--;
-			const contentBlock = hardBlock.filter((child) => !child.isRuleEnd);
 			result.push({
 				type: "hard_line_breaks_block",
-				content: convertNodes(context, contentBlock)
+				content: regionContent(context, children[i])
 			});
 		} else {
 			currentP.push(children[i]);
@@ -76,6 +70,18 @@ module.exports = function buildParagraph(context, node) {
 		type: "paragraph"
 	};
 };
+
+// The region's lines, joined by the editor's break
+function regionContent(context, node) {
+	const content = [];
+	factory.regionLines(node).forEach((line, index) => {
+		if(index > 0) {
+			content.push({ type: "hard_break" });
+		}
+		content.push.apply(content, convertNodes(context, line));
+	});
+	return content;
+}
 
 function hasAttributeLikeTextElement(nodes, context) {
 	if(!nodes) return false;

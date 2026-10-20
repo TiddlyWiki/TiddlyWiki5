@@ -7,23 +7,12 @@ module-type: library
 "use strict";
 
 const convertNodes = require("$:/plugins/tiddlywiki/prosemirror/ast/from/shared.js").convertNodes;
+const factory = $tw.utils.wikitextParseTree;
 
 module.exports = function blockquote(builders, node) {
-	const children = convertNodes(builders, node.content);
+	const options = {};
 	if(node.attrs && node.attrs.cite) {
-		children.push({
-			type: "element",
-			tag: "cite",
-			children: [{ type: "text", text: node.attrs.cite }]
-		});
+		options.cite = [factory.text(node.attrs.cite)];
 	}
-	return {
-		type: "element",
-		tag: "blockquote",
-		rule: "quoteblock",
-		attributes: {
-			class: { type: "string", value: "tc-quote" }
-		},
-		children: children
-	};
+	return factory.quoteBlock(convertNodes(builders, node.content), options);
 };

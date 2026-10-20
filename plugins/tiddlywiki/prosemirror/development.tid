@@ -49,10 +49,11 @@ The widget block system provides WYSIWYG rendering for TiddlyWiki widget syntax 
 
 ''Architecture:''
 
-* `widget-block/utils.js` - Widget syntax parser and recognizer
-* `widget-block/nodeview.js` - Custom NodeView implementation for widget rendering
-* `widget-block/plugin.js` - ProseMirror plugins for decoration and node views
-* `widget-block/styles.css` - Visual styling for widget blocks
+* `blocks/widget/utils.js` - Widget syntax parser and recognizer
+* `blocks/widget/nodeview.js` - Custom NodeView implementation for widget rendering
+* `blocks/widget/plugin.js` - ProseMirror plugins for decoration and node views
+* `blocks/widget/actions.js` - Widget block actions
+* `blocks/widget/styles.css` - Visual styling for widget blocks
 
 ''Features Implemented:''
 
@@ -67,9 +68,10 @@ The widget block system provides WYSIWYG rendering for TiddlyWiki widget syntax 
 
 ''AST Integration:''
 
-* `ast/to-prosemirror.js` - `transclude()` function converts widget nodes to paragraphs with widget syntax
-* `ast/from-prosemirror.js` - `paragraph()` function detects widget syntax and converts to transclude nodes
-* Uses unified `parseWidget()` utility from `widget-block/utils.js`
+* `ast/to-prosemirror.js` converts a WikiText parse tree into a ProseMirror document: `ast/to/registry.js` picks a converter per node type, and the converters read nodes with the `$tw.utils.wikitextParseTree` helpers, e.g. `kindOf()` and `listItems()`
+* `ast/from-prosemirror.js` converts the document back: `ast/from/registry.js` picks a builder per ProseMirror node, and the builders create every node with the factory, e.g. `paragraph()` and `hardBreak()`, so `$tw.utils.serializeWikitextParseTree` can write the WikiText
+* `ast/to/transclude.js` shows a block macro call as a paragraph with widget syntax; `ast/from/paragraph.js` recognises that syntax with `parseWidget()` from `blocks/widget/utils.js`
+* The factory and the helpers, with examples: [[WikiText Serialize Plugin readme|$:/plugins/tiddlywiki/wikitext-serialize/readme]] and [[WikiText Serialize Plugin]]
 
 ''Planned Enhancements:''
 

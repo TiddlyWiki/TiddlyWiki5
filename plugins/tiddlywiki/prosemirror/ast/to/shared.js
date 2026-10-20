@@ -30,7 +30,8 @@ function wrapTextNodesInParagraphs(nodes) {
 		}
 	};
 	nodes.forEach((node) => {
-		if(node.type === "text") {
+		// A hard break is inline content, not a block boundary
+		if(node.type === "text" || node.type === "hard_break") {
 			currentTextNodes.push(node);
 		} else {
 			flushTextNodes();
@@ -106,8 +107,12 @@ function extractSourceSlice(sourceText, start, end) {
 function extractSourceText(node, context) {
 	if(context && context.sourceText) {
 		const sourceText = context.sourceText;
+		const slice = $tw.utils.wikitextParseTree.sourceSlice(node, sourceText);
+		if(slice !== null) {
+			return slice;
+		}
+		// Custom syntax plugins store their offsets in attributes
 		const ranges = [
-			[node.start, node.end],
 			[getAttributeOffset(node, "start"), getAttributeOffset(node, "end")],
 			[getAttributeOffset(node, "startPos"), getAttributeOffset(node, "endPos")],
 			[getAttributeOffset(node, "listStartPos"), getAttributeOffset(node, "listStopPos")],

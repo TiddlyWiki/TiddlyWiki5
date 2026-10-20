@@ -30,7 +30,7 @@ function pragmaNode(context, node) {
 }
 
 function voidNode(context, node) {
-	if(node.parseType !== undefined) {
+	if($tw.utils.wikitextParseTree.kindOf(node) === "typedBlock") {
 		const rawText = node.text || "";
 		return {
 			type: "typed_block",

@@ -7,16 +7,14 @@ module-type: library
 "use strict";
 
 const buildOpaqueFromNode = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js").buildOpaqueFromNode;
+const factory = $tw.utils.wikitextParseTree;
 
 module.exports = function transclude(context, node) {
-	const hasVariable = node.attributes && node.attributes.$variable;
-	const isMacroCall = hasVariable && (node.rule === "macrocallblock" || node.rule === "macrocall" || node.rule === "macrodef");
-	if(!isMacroCall) {
+	// Only a block level macro call becomes a text paragraph; an inline one stays opaque
+	if(factory.kindOf(node) !== "macroCall" || !factory.isBlock(node)) {
 		return buildOpaqueFromNode(node, context);
 	}
-	let widgetText = "<<";
-	const widgetName = hasVariable ? node.attributes.$variable.value : "unknown";
-	widgetText += widgetName;
+	let widgetText = "<<" + node.attributes.$variable.value;
 	if(node.orderedAttributes) {
 		for(let i = 0; i < node.orderedAttributes.length; i++) {
 			const attr = node.orderedAttributes[i];

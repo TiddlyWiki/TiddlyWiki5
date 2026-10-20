@@ -1,0 +1,38 @@
+created: 20260724134149482
+description: Toggle a popup with the popup attribute and a companion reveal widget
+modified: 20260725003054000
+tags: $:/tags/wiki-test-spec
+title: ButtonWidget/Example/Popup
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+The `popup` attribute names a state tiddler that stores the popup coordinates. A companion `reveal` widget reads that state to show or hide the content.
+
+The button uses these attributes:
+
+* `popup` is the state tiddler for the popup
+* `selectedClass` highlights the button while the popup is open
+* `popupAbsCoords` writes absolute coordinates when set to `yes`, rather than relative ones
+
+Use `popupTitle` in place of `popup` when the state title should not be read as a text reference. Click the button to toggle the popup.
+
+The `reveal` widget always creates a DOM element of its own: a `div` in block mode, a `span` in inline mode. The `tag` attribute sets that element explicitly. Wrapping the popup content in a `<div>` would add a second element, so this example sets `tag="div"` and puts the `tc-drop-down` class on the widget itself. The popup is then one element instead of two.
++
+title: Output
+
+<$button popup="$:/state/popup/demo" selectedClass="tc-selected">
+Toggle popup
+</$button>
+
+<$reveal type="popup"
+  tag="div"
+  state="$:/state/popup/demo"
+  position="belowleft"
+  animate="yes"
+  class="tc-drop-down"
+>
+
+This is the popup content.
+
+</$reveal>

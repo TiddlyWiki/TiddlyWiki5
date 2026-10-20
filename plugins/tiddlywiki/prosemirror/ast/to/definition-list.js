@@ -7,18 +7,18 @@ module-type: library
 "use strict";
 
 const shared = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js");
+const factory = $tw.utils.wikitextParseTree;
 
 function buildDefinitionList(context, node) {
 	const items = [];
-	const children = node.children || [];
-	for(let i = 0; i < children.length; i++) {
-		const child = children[i];
-		if(child.type === "element" && child.tag === "dt") {
-			items.push(buildDefinitionTerm(context, child));
-		} else if(child.type === "element" && child.tag === "dd") {
-			items.push(buildDefinitionDescription(context, child));
+	factory.listItems(node).forEach((item) => {
+		const kind = factory.kindOf(item.node);
+		if(kind === "definitionTerm") {
+			items.push(buildDefinitionTerm(context, item.node));
+		} else if(kind === "definitionDescription") {
+			items.push(buildDefinitionDescription(context, item.node));
 		}
-	}
+	});
 	if(items.length === 0) {
 		return shared.buildOpaqueFromNode(node, context);
 	}

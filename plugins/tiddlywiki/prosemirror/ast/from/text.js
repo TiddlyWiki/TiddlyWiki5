@@ -6,20 +6,13 @@ module-type: library
 
 "use strict";
 
-const markTypeMap = {
-	strong: "strong",
-	em: "em",
-	code: "code",
-	underline: "u",
-	strike: "s",
-	superscript: "sup",
-	subscript: "sub"
-};
+const factory = $tw.utils.wikitextParseTree;
 
-const markRuleMap = {
-	em: "italic",
+// ProseMirror mark type to the factory's emphasis kind
+const markKinds = {
 	strong: "bold",
-	code: "codeinline",
+	em: "italic",
+	code: "code",
 	underline: "underscore",
 	strike: "strikethrough",
 	superscript: "superscript",
@@ -30,10 +23,9 @@ const markPriority = ["code", "strong", "bold", "em", "italic", "underline", "st
 
 module.exports = function text(builders, node) {
 	if(!node.text) {
-		return { type: "text", text: "" };
+		return factory.text("");
 	}
 	if(node.marks && node.marks.length > 0) {
-		const textNode = { type: "text", text: node.text };
 		const sortedMarks = node.marks.slice().sort((a, b) => {
 			const indexA = markPriority.indexOf(a.type);
 			const indexB = markPriority.indexOf(b.type);
@@ -44,56 +36,14 @@ module.exports = function text(builders, node) {
 		return sortedMarks.reduce((wrappedNode, mark) => {
 			if(mark.type === "link") {
 				const href = mark.attrs && mark.attrs.href || "";
-				const isExternal = /^(?:https?|ftp|mailto):/i.test(href);
-				const displayText = wrappedNode.text || "";
-				if(isExternal && displayText && displayText !== href) {
-					return {
-						type: "link",
-						rule: "prettylink",
-						attributes: {
-							to: { type: "string", value: href }
-						},
-						children: [wrappedNode]
-					};
+				if(/^(?:https?|ftp|mailto):/i.test(href)) {
+					return factory.externalLink(href, [wrappedNode]);
 				}
-				if(isExternal) {
-					return {
-						type: "element",
-						tag: "a",
-						rule: "prettyextlink",
-						attributes: {
-							class: { type: "string", value: "tc-tiddlylink-external" },
-							href: { type: "string", value: href },
-							target: { type: "string", value: "_blank" },
-							rel: { type: "string", value: "noopener noreferrer" }
-						},
-						children: [wrappedNode]
-					};
-				}
-				return {
-					type: "link",
-					rule: "prettylink",
-					attributes: {
-						to: { type: "string", value: href }
-					},
-					children: [wrappedNode]
-				};
+				return factory.link(href, [wrappedNode]);
 			}
-			const tag = markTypeMap[mark.type];
-			const rule = markRuleMap[mark.type];
-			if(!tag) {
-				return wrappedNode;
-			}
-			return {
-				type: "element",
-				tag: tag,
-				rule: rule,
-				children: [wrappedNode]
-			};
-		}, textNode);
+			const kind = markKinds[mark.type];
+			return kind ? factory.emphasis(kind, [wrappedNode]) : wrappedNode;
+		}, factory.text(node.text));
 	}
-	return {
-		type: "text",
-		text: node.text
-	};
+	return factory.text(node.text);
 };

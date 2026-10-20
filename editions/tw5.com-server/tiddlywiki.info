@@ -6,7 +6,8 @@
 		"tiddlywiki/highlight",
 		"tiddlywiki/internals",
 		"tiddlywiki/prosemirror",
-		"tiddlywiki/wikitext-serialize"
+		"tiddlywiki/wikitext-serialize",
+		"tiddlywiki/hard-line-breaks"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

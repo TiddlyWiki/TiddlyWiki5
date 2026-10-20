@@ -7,51 +7,28 @@ module-type: library
 "use strict";
 
 const convertNodes = require("$:/plugins/tiddlywiki/prosemirror/ast/from/shared.js").convertNodes;
+const factory = $tw.utils.wikitextParseTree;
 
 function horizontalRule() {
-	return {
-		type: "element",
-		tag: "hr",
-		rule: "horizrule"
-	};
+	return factory.horizontalRule();
 }
 
+// Two spaces and a backslash before the line end, the ssnl rule of the hard-line-breaks plugin, see #10025
 function hardBreak() {
-	return {
-		type: "element",
-		tag: "br"
-	};
+	return factory.hardBreak();
 }
 
 function hardLineBreaksBlock(builders, node) {
-	const children = convertNodes(builders, node.content || []);
-	if(children.length === 0) {
-		return {
-			type: "element",
-			tag: "p",
-			rule: "parseblock",
-			children: [
-				{ type: "text", text: "", rule: "hardlinebreaks", isRuleStart: true },
-				{ type: "element", tag: "br", rule: "hardlinebreaks", isRuleEnd: true }
-			]
-		};
-	}
-	for(let i = 0; i < children.length; i++) {
-		children[i].rule = "hardlinebreaks";
-	}
-	children[0].isRuleStart = true;
-	children.push({
-		type: "element",
-		tag: "br",
-		rule: "hardlinebreaks",
-		isRuleEnd: true
+	// The editor's breaks split the region into its lines
+	const lines = [[]];
+	convertNodes(builders, node.content || []).forEach((child) => {
+		if(factory.kindOf(child) === "hardBreak") {
+			lines.push([]);
+		} else {
+			lines[lines.length - 1].push(child);
+		}
 	});
-	return {
-		type: "element",
-		tag: "p",
-		rule: "parseblock",
-		children: children
-	};
+	return factory.paragraph([factory.hardLineBreaksRegion(lines)]);
 }
 
 exports.horizontalRule = horizontalRule;

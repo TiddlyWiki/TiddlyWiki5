@@ -1,0 +1,16 @@
+title: Parse/BackCompat/MacrocallColonVarNameAsValue
+description: A colon-named procedure or macro may be an =-separated parameter value (#10013)
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure object:method() COLONPROC
+\define object:macro() COLONMACRO
+\procedure host(a) [a=<<a>>]
+<<host a=<<object:method>>>>
+<<host a=<<object:macro>>>>
++
+title: ExpectedResult
+
+<p>[a=COLONPROC]</p><p>[a=COLONMACRO]</p>

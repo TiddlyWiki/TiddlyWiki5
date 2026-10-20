@@ -19,18 +19,32 @@ const table = require("$:/plugins/tiddlywiki/prosemirror/ast/to/table.js");
 const definitionList = require("$:/plugins/tiddlywiki/prosemirror/ast/to/definition-list.js");
 const buildOpaqueFromNode = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js").buildOpaqueFromNode;
 const sourceTextToParagraphs = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js").sourceTextToParagraphs;
+const factory = $tw.utils.wikitextParseTree;
 
-const elementBuilders = {
-	p: paragraph,
-	h1: (context, node) => heading.level(context, node, 1),
-	h2: (context, node) => heading.level(context, node, 2),
-	h3: (context, node) => heading.level(context, node, 3),
-	h4: (context, node) => heading.level(context, node, 4),
-	h5: (context, node) => heading.level(context, node, 5),
-	h6: (context, node) => heading.level(context, node, 6),
-	ul: list.buildUnorderedList,
-	ol: list.buildOrderedList,
-	li: list.buildListItem,
+// What the parser makes of wikitext, by the kind the factory reports
+const kindBuilders = {
+	paragraph: paragraph,
+	blankLine: paragraph,
+	heading: (context, node) => heading.level(context, node, factory.headingLevel(node)),
+	list: list.buildList,
+	listItem: list.buildListItem,
+	emphasis: marks.buildEmphasis,
+	quoteBlock: blockquote,
+	quoteCite: link.buildCite,
+	horizontalRule: hardBreaks.buildHorizRule,
+	hardBreak: hardBreaks.buildBr,
+	externalLink: link.buildAnchor,
+	table: table.buildTable,
+	tableSection: (context, node) => table.buildTable(context, { children: node.children }),
+	tableRow: table.buildTableRow,
+	tableCell: table.buildTableCell,
+	definitionList: definitionList.buildDefinitionList,
+	definitionTerm: definitionList.buildDefinitionTerm,
+	definitionDescription: definitionList.buildDefinitionDescription
+};
+
+// HTML written by hand, e.g. <b> or <pre>, by tag
+const tagBuilders = {
 	strong: marks.buildStrong,
 	b: marks.buildStrong,
 	em: marks.buildEm,
@@ -43,26 +57,13 @@ const elementBuilders = {
 	sup: marks.buildSup,
 	sub: marks.buildSub,
 	pre: codeBlock,
-	blockquote: blockquote,
 	div: div,
-	hr: hardBreaks.buildHorizRule,
-	br: hardBreaks.buildBr,
 	a: link.buildAnchor,
-	cite: link.buildCite,
-	table: table.buildTable,
-	tbody: (context, node) => table.buildTable(context, { children: node.children }),
-	thead: (context, node) => table.buildTable(context, { children: node.children }),
-	tfoot: (context, node) => table.buildTable(context, { children: node.children }),
-	tr: table.buildTableRow,
-	td: (context, node) => table.buildTableCell(context, node, false),
-	th: (context, node) => table.buildTableCell(context, node, true),
-	dl: definitionList.buildDefinitionList,
-	dt: definitionList.buildDefinitionTerm,
-	dd: definitionList.buildDefinitionDescription
+	cite: link.buildCite
 };
 
 module.exports = function element(context, node) {
-	const builder = elementBuilders[node.tag];
+	const builder = kindBuilders[factory.kindOf(node)] || tagBuilders[node.tag];
 	if(builder) {
 		return builder(context, node);
 	}

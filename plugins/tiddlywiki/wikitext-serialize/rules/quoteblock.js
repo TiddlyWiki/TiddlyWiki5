@@ -8,23 +8,40 @@ module-type: wikiruleserializer
 
 exports.name = "quoteblock";
 
-exports.serialize = function (tree,serialize) {
-	var result = [];
-	if(tree.type === "element" && tree.tag === "blockquote") {
-		var classValue = tree.attributes && tree.attributes["class"] ? tree.attributes["class"].value : "tc-quote";
-		// Strip the default tc-quote class; only emit additional custom classes
-		var extraClasses = classValue.split(" ").filter(function(c) { return c !== "tc-quote" && c !== ""; }).join(" ");
-		result.push("<<<" + (extraClasses ? extraClasses : ""));
-		var citeText = "";
-		tree.children.forEach(function (child) {
-			if(child.type === "element" && child.tag === "p") {
-				result.push(serialize(child.children).trim());
-			} else if(child.type === "element" && child.tag === "cite") {
-				// Preserve cite text for the closing <<<
-				citeText = serialize(child.children).trim();
-			}
-		});
-		result.push("<<<" + (citeText ? citeText : ""));
+function isQuoteCite(node) {
+	return !!(node && (node.isQuoteCite || (node.tag === "cite" && !node.rule)));
+}
+
+function serializeFromTree(tree,serialize) {
+	// The first class in the class attribute is always the synthesized tc-quote
+	var marker = tree.marker || "<<<",
+		classes = tree.userClasses || (tree.attributes.class ? tree.attributes.class.value.split(" ").slice(1) : []),
+		classText = classes.map(function(c) { return "." + c; }).join(""),
+		children = tree.children ? tree.children.slice() : [],
+		openingCite = "",
+		closingCite = "";
+	if(isQuoteCite(children[0])) {
+		openingCite = " " + serialize(children.shift().children);
 	}
-	return result.join("\n") + "\n\n";
+	if(children.length && isQuoteCite(children[children.length - 1])) {
+		closingCite = " " + serialize(children.pop().children);
+	}
+	// Serialize the body as one array so the walker separates the blocks
+	var body = serialize(children);
+	return marker + classText + openingCite + "\n" + body + "\n" + marker + closingCite;
+}
+
+exports.serialize = function(tree,serialize,options) {
+	options = options || {};
+	// Marker depth (<<< vs <<<<) and the class list only exist in the source
+	var result = $tw.utils.serializeStitched(tree,serialize,{
+		source: options.source,
+		isBoundary: function(text) {
+			return /^\s*$/.test(text) || text.indexOf("<<<") !== -1;
+		}
+	});
+	if(result === null) {
+		result = serializeFromTree(tree,serialize);
+	}
+	return result;
 };

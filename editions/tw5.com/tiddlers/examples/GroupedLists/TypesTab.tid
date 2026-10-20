@@ -1,0 +1,60 @@
+title: GroupedLists/Example/TypesTab
+created: 20260729190000000
+modified: 20260729190000000
+description: Group tiddlers by their type, as the sidebar Types tab does
+tags: [[$:/tags/wiki-test-spec]] GroupedLists
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+`$:/core/Filters/TypedTiddlers` collects one tiddler per distinct type, and the inner list then finds every tiddler sharing that type.
+
+The two lists do different jobs:
+
+* the outer filter ends in `each[type]`, so it yields one representative tiddler per type rather than every tiddler
+* the inner filter reads `{!!type}` from that representative, so `currentTiddler` is what carries the type from the outer list to the inner one
+
+This is the code behind the ''Types'' tab in the sidebar, under ''More''. Open that tab to see it running over a real wiki.
+
+The five dummy payload tiddlers below are the only ones here with a `type` field, so they are exactly what the list finds.
++
+title: Output
+
+\whitespace trim
+
+<$list filter={{$:/core/Filters/TypedTiddlers!!filter}}>
+	<div class="tc-menu-list-item">
+		<$view field="type"/>
+
+		<$list filter="[type{!!type}!is[system]sort[title]]">
+			<div class="tc-menu-list-subitem">
+				<$link to={{!!title}}><$view field="title"/></$link>
+			</div>
+		</$list>
+	</div>
+</$list>
++
+title: Alpha
+type: image/svg+xml
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><circle cx="8" cy="8" r="7"/></svg>
++
+title: Beta
+type: image/svg+xml
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><rect x="1" y="1" width="14" height="14"/></svg>
++
+title: Gamma
+type: text/plain
+
+A plain text sample.
++
+title: Delta
+type: text/plain
+
+Another plain text sample.
++
+title: Epsilon
+type: application/json
+
+{"sample": true}

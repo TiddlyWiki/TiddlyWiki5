@@ -164,8 +164,12 @@ if(!$tw.browser) {
 
 		it("should round-trip external link", () => {
 			const input = "Visit [ext[example|https://example.com]]";
-			const result = roundTrip(input);
-			expect(result).toContain("https://example.com");
+			expect(roundTrip(input)).toBe(input);
+		});
+
+		it("should round-trip a link around formatted text", () => {
+			const input = "See <$link to=\"MyTiddler\">''bold''</$link> now";
+			expect(roundTrip(input)).toBe(input);
 		});
 
 		// --- Images ---
@@ -376,6 +380,24 @@ if(!$tw.browser) {
 		});
 
 		// --- Hard break (Shift-Enter) ---
+
+		it("should write a hard break as two spaces and a backslash before the line end", () => {
+			// Shift+Enter inserts a hard_break node; the backslash form survives editors that trim trailing whitespace
+			expect(roundTrip("Line one  \\\nLine two")).toBe("Line one  \\\nLine two");
+			expect(roundTrip("Line one<br>Line two")).toBe("Line one  \\\nLine two");
+		});
+
+		it("should keep a hard break inside a list item", () => {
+			// A break is inline content of the item, not a block boundary
+			const input = "* one  \\\ntwo\n* three";
+			expect(roundTrip(input)).toBe(input);
+		});
+
+		it("should keep the br element inside a table cell", () => {
+			// A table row is one line, so a break inside a cell has no other form
+			const input = "|a<br>b|c|";
+			expect(roundTrip(input)).toBe(input);
+		});
 
 		it("should round-trip hard break (line break within paragraph)", () => {
 			const input = "Line one\nLine two";

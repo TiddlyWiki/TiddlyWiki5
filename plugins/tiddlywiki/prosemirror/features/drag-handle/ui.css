@@ -75,6 +75,13 @@
 	font-size: 0.95em;
 }
 
+/* Core images render at their 22pt default; the text height wins and the viewBox keeps the shape */
+.tc-prosemirror-block-menu-item-icon svg {
+	height: 1.2em;
+	width: auto;
+	vertical-align: middle;
+}
+
 .tc-prosemirror-block-menu-item-label {
 	flex: 1;
 	white-space: nowrap;

@@ -1,0 +1,51 @@
+title: GroupedLists/Example/RecentTab
+created: 20260729190100000
+modified: 20260729190100000
+description: Group tiddlers by day with the timeline macro, as the sidebar Recent tab does
+tags: [[$:/tags/wiki-test-spec]] GroupedLists
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+The `timeline` macro groups tiddlers by the day found in a date field. The ''Recent'' tab in the sidebar is a single call to it, which is all the Output below is.
+
+The nesting happens inside the macro:
+
+* the outer filter uses `eachday` to yield one tiddler per distinct day
+* the inner filter uses `sameday` to collect every tiddler falling on that day
+* `dateField` chooses which field to read, so the same macro groups by `created` just as well as by `modified`
+
+The five dummy payload tiddlers below carry hand set `modified` dates. Nothing else here has a date field, so they are exactly what the timeline finds.
+
+Pass `format` to change how each day is headed, and `limit` to cap how many tiddlers are considered.
++
+title: Output
+
+\whitespace trim
+
+<$transclude $variable="timeline" format="DDth MMM YYYY"/>
++
+title: Alpha
+modified: 20260103120000000
+
+Modified on the third, later in the day.
++
+title: Beta
+modified: 20260103100000000
+
+Modified on the third, earlier in the day.
++
+title: Gamma
+modified: 20260102120000000
+
+Modified on the second, later in the day.
++
+title: Delta
+modified: 20260102100000000
+
+Modified on the second, earlier in the day.
++
+title: Epsilon
+modified: 20260101120000000
+
+Modified on the first.

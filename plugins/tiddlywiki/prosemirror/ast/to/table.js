@@ -7,29 +7,25 @@ module-type: library
 "use strict";
 
 const shared = require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js");
+const factory = $tw.utils.wikitextParseTree;
 
 function buildTable(context, node) {
 	if(!node.children || node.children.length === 0) {
 		return shared.buildOpaqueFromNode(node, context);
 	}
 	const rows = [];
-	for(let i = 0; i < node.children.length; i++) {
-		const child = node.children[i];
-		if(child.type === "element" && child.tag === "tr") {
-			const row = buildTableRow(context, child);
-			if(row) rows.push(row);
-		} else if(child.type === "element" && (child.tag === "tbody" || child.tag === "thead" || child.tag === "tfoot")) {
-			if(child.children) {
-				for(let j = 0; j < child.children.length; j++) {
-					const grandchild = child.children[j];
-					if(grandchild.type === "element" && grandchild.tag === "tr") {
-						const row2 = buildTableRow(context, grandchild);
-						if(row2) rows.push(row2);
-					}
-				}
-			}
+	const addRow = (rowNode) => {
+		const row = buildTableRow(context, rowNode);
+		if(row) rows.push(row);
+	};
+	node.children.forEach((child) => {
+		const kind = factory.kindOf(child);
+		if(kind === "tableRow") {
+			addRow(child);
+		} else if(kind === "tableSection") {
+			(child.children || []).filter((grandchild) => factory.kindOf(grandchild) === "tableRow").forEach(addRow);
 		}
-	}
+	});
 	if(rows.length === 0) {
 		return shared.buildOpaqueFromNode(node, context);
 	}
@@ -38,18 +34,12 @@ function buildTable(context, node) {
 
 function buildTableRow(context, node) {
 	if(!node.children || node.children.length === 0) return null;
-	const cells = [];
-	for(let i = 0; i < node.children.length; i++) {
-		const child = node.children[i];
-		if(child.type === "element" && (child.tag === "td" || child.tag === "th")) {
-			cells.push(buildTableCell(context, child, child.tag === "th"));
-		}
-	}
+	const cells = node.children.filter((child) => factory.kindOf(child) === "tableCell").map((child) => buildTableCell(context, child));
 	if(cells.length === 0) return null;
 	return { type: "table_row", content: cells };
 }
 
-function buildTableCell(context, child, isHeader) {
+function buildTableCell(context, child) {
 	let cellContent = shared.convertNodes(context, child.children);
 	if(!cellContent || cellContent.length === 0) {
 		cellContent = [{ type: "paragraph" }];
@@ -59,17 +49,16 @@ function buildTableCell(context, child, isHeader) {
 			cellContent = [{ type: "paragraph", content: cellContent }];
 		}
 	}
+	const options = factory.tableCellOptions(child);
 	const attrs = {};
-	if(child.attributes) {
-		if(child.attributes.colspan) {
-			attrs.colspan = parseInt(child.attributes.colspan.value, 10) || 1;
-		}
-		if(child.attributes.rowspan) {
-			attrs.rowspan = parseInt(child.attributes.rowspan.value, 10) || 1;
-		}
+	if(options.colspan) {
+		attrs.colspan = options.colspan;
+	}
+	if(options.rowspan) {
+		attrs.rowspan = options.rowspan;
 	}
 	return {
-		type: isHeader ? "table_header" : "table_cell",
+		type: options.header ? "table_header" : "table_cell",
 		attrs: attrs,
 		content: cellContent
 	};
