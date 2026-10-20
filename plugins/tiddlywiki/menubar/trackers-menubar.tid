@@ -1,0 +1,4 @@
+title: $:/plugins/tiddlywiki/menubar/trackers/menubar
+tags: $:/tags/DimensionTracker
+selector: nav.tc-menubar
+info-tiddler: $:/info/browser/menubar

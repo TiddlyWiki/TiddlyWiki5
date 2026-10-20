@@ -40,7 +40,19 @@ tags: [[$:/tags/Stylesheet]]
 </$reveal>
 \end
 
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline conditional
+
+.tc-page-container {
+	--nb-menubar-h: {{{ [<tv-window-id>!is[blank]addprefix[user/]] ~[[system/main]] +[addprefix[$:/info/browser/menubar/]get[height]] ~[[0]] +[addsuffix[px]] }}};
+}
+
+<%if [{$:/themes/tiddlywiki/vanilla/options/stickytitles}match[yes]] %>
+
+	.tc-tiddler-title {
+		inset-block-start: var(--nb-menubar-h, 0px);
+	}
+
+<% endif %>
 
 nav.tc-menubar {
 	position: fixed;
