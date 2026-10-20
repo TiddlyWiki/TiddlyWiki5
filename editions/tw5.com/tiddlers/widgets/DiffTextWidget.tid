@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 <<.from-version "5.1.16">> The diff text widget analyses the differences between a pair of source and destination text strings and displays the results as highlighted insertions and deletions (similar to the "track changes" function of a word processor).
 
 ```
-<$diff-text source="This is the original text" dest="This is the text to compare to" mode="words>
+<$diff-text source="This is the original text" dest="This is the text to compare to" mode="words">
     These are the <<diff-count>> differences:
 </$diff-text>
 ```
