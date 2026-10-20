@@ -1,0 +1,8 @@
+title: $:/docs/widgets/ActionCreateTiddlerWidget
+schema: $:/schemas/WidgetDocs
+widget-purpose: creates new tiddlers with configurable fields and titles
+widget-tag-name: $action-createtiddler
+any-attributes-not-starting-with-$: yes
+type: text/vnd.tiddlywiki
+
+The `action-createtiddler` widget creates new tiddlers. Unlike the [[tm-new-tiddler message|WidgetMessage: tm-new-tiddler]], the new tiddler is not automatically displayed in the story river, and its title is made available for subsequent operations.

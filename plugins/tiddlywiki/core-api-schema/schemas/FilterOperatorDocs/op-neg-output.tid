@@ -1,0 +1,6 @@
+title: $:/schemas/FilterOperatorDocs/op-neg-output
+field-type: string
+required: no
+type: text/vnd.tiddlywiki
+
+Describes the output when the operator is negated with `!`.

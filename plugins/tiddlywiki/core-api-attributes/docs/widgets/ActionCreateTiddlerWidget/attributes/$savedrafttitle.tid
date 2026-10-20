@@ -1,0 +1,8 @@
+title: $:/docs/widgets/ActionCreateTiddlerWidget/attributes/$savedrafttitle
+schema: $:/schemas/WidgetAttributeDocs
+field-type: textref
+required: no
+deprecated: yes
+type: text/vnd.tiddlywiki
+
+<<.deprecated-since "5.1.20" "ActionCreateTiddlerWidget Example 5">> A text reference identifying a field or index into which the draft title associated with the newly created tiddler will be stored.

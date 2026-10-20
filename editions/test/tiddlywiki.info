@@ -3,7 +3,10 @@
 	"plugins": [
 		"tiddlywiki/jasmine",
 		"tiddlywiki/wikitext-serialize",
-		"tiddlywiki/geospatial"
+		"tiddlywiki/geospatial",
+		"tiddlywiki/core-api-schema",
+		"tiddlywiki/core-api-attributes",
+		"tiddlywiki/core-api-docs"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

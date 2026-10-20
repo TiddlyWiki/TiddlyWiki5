@@ -1,0 +1,7 @@
+title: $:/docs/widgets/ActionNavigateWidget/attributes/$to
+schema: $:/schemas/WidgetAttributeDocs
+field-type: tiddler-title
+required: no
+type: text/vnd.tiddlywiki
+
+The title of the target tiddler for the navigation (if not provided defaults to the [[current tiddler|Current Tiddler]]).

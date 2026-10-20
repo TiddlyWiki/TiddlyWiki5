@@ -1,0 +1,10 @@
+title: $:/docs/filter-operators/get
+schema: $:/schemas/FilterOperatorDocs
+op-purpose: select all values of a field in the input titles
+op-input: a [[selection of titles|Title Selection]]
+op-output: the values of field <<.place F>> in each of the input titles
+op-parameter: the name of a [[field|TiddlerFields]]
+op-parameter-name: F
+type: text/vnd.tiddlywiki
+
+Filter operator `get` — retrieves field values from input titles.
