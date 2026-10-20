@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#9519
+description: Warn when pipe-mode hook functions omit a return value
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9519
+github-contributors: linonetwo
+
+The boot kernel now warns when a pipe-mode hook function does not return a value, helping plugin authors find hooks that can break subsequent processing.
