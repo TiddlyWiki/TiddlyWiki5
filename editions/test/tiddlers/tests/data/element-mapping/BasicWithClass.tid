@@ -1,0 +1,19 @@
+title: ElementMapping/BasicWithClass
+description: Mapping one element to another with an added class
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+<!-- Map <p> to <div>, adding the class my-class -->
+\define tv-map-p() div
+\define tv-map-p-class() my-class
+
+This is a paragraph
+
++
+title: ExpectedResult
+
+<div class="my-class" data-element-mapping-from="p">This is a paragraph</div>
