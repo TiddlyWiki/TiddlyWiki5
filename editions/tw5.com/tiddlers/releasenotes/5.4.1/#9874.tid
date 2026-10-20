@@ -1,0 +1,11 @@
+title: $:/changenotes/5.4.1/#9874
+description: Drag&Drop cross-app drag fix - MIME type survival on Linux under Wayland
+tags: $:/tags/ChangeNote
+release: 5.4.1
+change-type: enhancement
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9874
+github-contributors: BurningTreeC
+
+Adds a cross-app drag fix especially designed for Linux on Wayland (the display server that is replacing X11)
+Emits the tiddler data as a text/html anchor on drag-out (the only MIME type that survives the sanitiser) and on import extracts the embedded data:text/vnd.tiddler URI from the anchor's href
