@@ -1,0 +1,12 @@
+change-category: internal
+change-type: enhancement
+created: 20260711015901000
+description: Browser platform detection uses navigator.userAgentData with a navigator.platform fallback
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9744
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9744
+type: text/vnd.tiddlywiki
+
+* Browser platform detection now uses the modern `navigator.userAgentData.platform` API where available and falls back to the deprecated `navigator.platform` on Firefox and Safari; the checks are case-insensitive for both APIs, keeping `$:/info/browser/is-mac`, `is-windows`, `is-linux` and the keyboard modifier detection correct (addresses [[Issue #7621|https://github.com/TiddlyWiki/TiddlyWiki5/issues/7621]])

@@ -28,9 +28,10 @@ exports.startup = function() {
 	// Platform detection
 	$tw.platform = {};
 	if($tw.browser) {
-		$tw.platform.isMac = /Mac/.test(navigator.platform);
-		$tw.platform.isWindows = /win/i.test(navigator.platform);
-		$tw.platform.isLinux = /Linux/i.test(navigator.platform);
+		var platform = navigator.userAgentData ? navigator.userAgentData.platform : navigator.platform;
+		$tw.platform.isMac = /Mac/i.test(platform);
+		$tw.platform.isWindows = /Win/i.test(platform);
+		$tw.platform.isLinux = /Linux/i.test(platform);
 	} else {
 		switch(require("os").platform()) {
 			case "darwin":
