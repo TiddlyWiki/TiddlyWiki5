@@ -138,7 +138,8 @@ actually ended up
 function reparent(widget,oldNode,fallback) {
 	$tw.utils.each(widget.children,function(child) {
 		if(child.parentDomNode === oldNode) {
-			var ownNode = child.domNodes && child.domNodes[0];
+			// A pass through such as $let owns no node, so its descendants' nodes show where it rendered
+			var ownNode = (child.domNodes && child.domNodes[0]) || collectDomNodes(child)[0];
 			child.parentDomNode = (ownNode && ownNode.parentNode) || fallback;
 		}
 		reparent(child,oldNode,fallback);

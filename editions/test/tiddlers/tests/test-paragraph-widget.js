@@ -111,6 +111,23 @@ describe("Paragraph widget", function() {
 		}
 	});
 
+	it("should keep a pass-through's text in the paragraph a split gave it", function() {
+		// A $let owns no DOM node, so after a split its text sits in a new paragraph while it
+		// still pointed at the run's parent, and a browser threw NotFoundError on its refresh.
+		// CHECK BY HAND: make a tiddler Probe holding  one , and another holding
+		// <$let a={{Probe}}><<a>></$let> more text <div>block</div>  on one line. Edit Probe:
+		// the new text must appear in front of  more text , with no red screen
+		var wiki = $tw.test.wiki();
+		wiki.addTiddler({title: "Probe", text: "one"});
+		var rendered = render("<$let a={{Probe}}><<a>></$let> more text <div>block</div>\n",wiki);
+		expect(rendered.wrapper.innerHTML).toContain("<p>one more text </p><div>block</div>");
+		for(var pass=0; pass<3; pass++) {
+			wiki.addTiddler({title: "Probe", text: "two" + pass});
+			refresh(rendered,["Probe"]);
+			expect(rendered.wrapper.innerHTML).toContain("<p>two" + pass + " more text </p><div>block</div>");
+		}
+	});
+
 	it("should retake its decision when content changes between inline and block", function() {
 		// The decision depends on what the children rendered, so it has to be retaken when
 		// they change. A run that turns out to hold a block must be split the way a browser
