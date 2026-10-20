@@ -1,0 +1,150 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/ControlPanel/KeyboardShortcuts
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: Keyboard Shortcuts
+
+\define new-shortcut(title)
+\whitespace trim
+<div class="tc-dropdown-item-plain">
+<$edit-shortcut tiddler="$title$" placeholder="Type shortcut..." focus="true" style="width:auto;"/>
+&#32;
+<$button>
+Add
+<$action-listops
+	$tiddler="$(shortcutTitle)$"
+	$field="text"
+	$subfilter="[{$title$}]"
+/>
+<$action-deletetiddler
+	$tiddler="$title$"
+/>
+</$button>
+</div>
+\end
+
+\define shortcut-list-item(caption)
+\whitespace trim
+<td>
+</td>
+<td style="text-align:right;font-size:0.7em;">
+<<__caption__>>
+</td>
+<td>
+<div style="position:relative;">
+<$button popup=<<qualify "$:/state/dropdown/$(shortcutTitle)$">> class="tc-btn-invisible">
+{{$:/core/images/edit-button}}
+</$button>
+&#32;
+<$macrocall $name="displayshortcuts" $output="text/html" shortcuts={{$(shortcutTitle)$}} prefix="<kbd>" separator="</kbd> <kbd>" suffix="</kbd>"/>
+
+<$reveal state=<<qualify "$:/state/dropdown/$(shortcutTitle)$">> type="popup" position="below" animate="yes">
+<div class="tc-block-dropdown-wrapper">
+<div class="tc-block-dropdown tc-edit-type-dropdown tc-popup-keep">
+<$list
+	filter="[list[$(shortcutTitle)$!!text]sort[title]]"
+	variable="shortcut"
+	emptyMessage="<div class='tc-dropdown-item-plain'>//No shortcuts defined//</div>">
+<div class="tc-dropdown-item-plain">
+<$button class="tc-btn-invisible" tooltip="Remove this shortcut">
+<$action-listops
+	$tiddler="$(shortcutTitle)$"
+	$field="text"
+	$subfilter="+[remove<shortcut>]"
+/>
+<small>{{$:/core/images/close-button}}</small>
+</$button>
+&#32;
+<kbd>
+<$macrocall $name="displayshortcuts" $output="text/html" shortcuts=<<shortcut>>/>
+</kbd>
+</div>
+</$list>
+<hr/>
+<$macrocall $name="new-shortcut" title=<<qualify "$:/state/new-shortcut/$(shortcutTitle)$">>/>
+</div>
+</div>
+</$reveal>
+</div>
+</td>
+\end
+
+\define shortcut-list(caption,prefix)
+\whitespace trim
+<tr>
+<$list filter="[[$prefix$$(shortcutName)$]]" variable="shortcutTitle">
+<<shortcut-list-item "$caption$">>
+</$list>
+</tr>
+\end
+
+\define shortcut-editor()
+\whitespace trim
+<<shortcut-list "All" "$:/config/shortcuts/cm6-">>
+<<shortcut-list "Mac" "$:/config/shortcuts-mac/cm6-">>
+<<shortcut-list "NonMac" "$:/config/shortcuts-not-mac/cm6-">>
+<<shortcut-list "Linux" "$:/config/shortcuts-linux/cm6-">>
+<<shortcut-list "NonLinux" "$:/config/shortcuts-not-linux/cm6-">>
+<<shortcut-list "Windows" "$:/config/shortcuts-windows/cm6-">>
+<<shortcut-list "NonWindows" "$:/config/shortcuts-not-windows/cm6-">>
+\end
+
+\define shortcut-preview()
+<$macrocall $name="displayshortcuts" $output="text/html" shortcuts={{$(shortcutPrefix)$cm6-$(shortcutName)$}} prefix="<kbd>" separator="</kbd> <kbd>" suffix="</kbd>"/>
+\end
+
+\define shortcut-item-inner()
+\whitespace trim
+<tr>
+<td>
+<$reveal type="nomatch" state=<<dropdownStateTitle>> text="open">
+<$button class="tc-btn-invisible">
+<$action-setfield
+	$tiddler=<<dropdownStateTitle>>
+	$value="open"
+/>
+{{$:/core/images/right-arrow}}
+</$button>
+</$reveal>
+<$reveal type="match" state=<<dropdownStateTitle>> text="open">
+<$button class="tc-btn-invisible">
+<$action-setfield
+	$tiddler=<<dropdownStateTitle>>
+	$value="close"
+/>
+{{$:/core/images/down-arrow}}
+</$button>
+</$reveal>
+&#32;
+''<$text text=<<shortcutName>>/>''
+</td>
+<td>
+<$transclude tiddler={{{ [[$:/config/ShortcutInfo/cm6-]addsuffix<shortcutName>] }}}/>
+</td>
+<td>
+<$list filter="$:/config/shortcuts/cm6- $:/config/shortcuts-mac/cm6- $:/config/shortcuts-not-mac/cm6- $:/config/shortcuts-linux/cm6- $:/config/shortcuts-not-linux/cm6- $:/config/shortcuts-windows/cm6- $:/config/shortcuts-not-windows/cm6-" variable="shortcutPrefix">
+<<shortcut-preview>>
+</$list>
+</td>
+</tr>
+<$set name="dropdownState" value={{$(dropdownStateTitle)$}}>
+<$list filter="[<dropdownState>match[open]]" variable="listItem">
+<<shortcut-editor>>
+</$list>
+</$set>
+\end
+
+\define shortcut-item()
+\whitespace trim
+<$set name="dropdownStateTitle" value=<<qualify "$:/state/dropdown/keyboardshortcut/cm6-$(shortcutName)$">>>
+<<shortcut-item-inner>>
+</$set>
+\end
+
+<p>Configure keyboard shortcuts for the CodeMirror 6 editor. Click the arrow to expand and edit shortcuts.</p>
+
+<table>
+<tbody>
+<$list filter="[all[shadows+tiddlers]prefix[$:/config/ShortcutInfo/cm6-]removeprefix[$:/config/ShortcutInfo/cm6-]sort[]]" variable="shortcutName">
+<<shortcut-item>>
+</$list>
+</tbody>
+</table>

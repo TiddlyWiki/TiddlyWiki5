@@ -1,0 +1,65 @@
+title: Draft of 'Syntax — Conditionals'
+draft.of: Syntax — Conditionals
+draft.title: Syntax — Conditionals
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+! Conditional shortcut syntax
+
+The `<%if%>` family is shorthand for the `<$list>`/`<$reveal>` widgets. The
+condition is a filter — it is truthy when it returns at least one result.
+
+!! Simple if / endif
+
+<%if [{!!draft.of}] %>
+This tiddler is a draft.
+<%endif%>
+
+!! if / else
+
+<%if [<currentTiddler>has[modified]] %>
+Has a modified date.
+<%else%>
+No modified date.
+<%endif%>
+
+!! if / elseif / else
+
+<%if [<currentTiddler>tag[done]] %>
+Done.
+<%elseif [<currentTiddler>tag[doing]] %>
+In progress.
+<%elseif [<currentTiddler>tag[todo]] %>
+To do.
+<%else%>
+Untagged.
+<%endif%>
+
+!! Conditions using variables and comparisons
+
+<%if [<currentTiddler>removeprefix[$:/]] %>
+This is a system tiddler.
+<%endif%>
+
+<%if [{!!modified}compare:date:gteq[20200101]] %>
+Modified since 2020.
+<%endif%>
+
+!! Nested conditionals
+
+<%if [<currentTiddler>!is[system]] %>
+Not a system tiddler.
+<%if [<currentTiddler>has[caption]] %>
+And it has a caption.
+<%endif%>
+<%endif%>
+
+!! Inline conditional
+
+Status: <%if [<currentTiddler>tag[done]] %>✓ done<%else%>… pending<%endif%>.
+
+!! Equivalent widget form
+
+<$list filter="[{!!draft.of}]" variable="ignore">
+This is the long form of an `<%if%>` block.
+</$list>

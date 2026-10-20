@@ -1,0 +1,54 @@
+title: Draft of 'Syntax — Pragmas'
+draft.of: Syntax — Pragmas
+draft.title: Syntax — Pragmas
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+\whitespace trim
+\rules except wikilink html
+\import [[$:/some/config]] [tag[shared-macros]]
+\parsermode block
+
+\define sayHello(name:"World" punct:"!")
+Hello, $name$$punct$ — from $(currentTiddler)$.
+\end sayHello
+
+\define callMacro(macroName:"now")
+Substituted parameter (valid only in \define): <<__macroName__>>
+\end
+
+\define multiplyInline(a b) [<a>multiply<b>]
+
+\procedure myProcedure(first second:"default")
+<<first>> and <<second>>
+\end
+
+\procedure shortProc() Just a one-liner procedure body.
+
+\function .square(n) [<n>multiply<n>]
+
+\function .max(a b) [<a>compare:number:gteq<b>then<a>else<b>]
+
+\widget $my.widget(value:"x")
+<div class="mywidget">{{{ [<value>] }}}</div>
+\end
+
+\parameters (a b:"2" $custom:"z")
+
+! Pragmas
+
+This tiddler shows every TiddlyWiki pragma:
+
+* `\whitespace trim` / `\whitespace notrim`
+* `\rules only ...` / `\rules except ...`
+* `\import <filter>`
+* `\parsermode block` / `\parsermode inline`
+* `\define name(params) ... \end` (supports `$param$` text and `__param__` macro substitution)
+* `\procedure name(params) ... \end`
+* `\function .name(params) <filter>`
+* `\widget $my.widget(params) ... \end`
+* `\parameters (params)`
+
+Note: `$name$` text substitution and `<<__param__>>` macro substitution are only
+valid in `\define`. In `\procedure`, `\function` and `\widget`, parameters are
+variables — use `<<name>>` / `<name>`.

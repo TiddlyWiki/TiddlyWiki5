@@ -1,0 +1,8 @@
+title: $:/config/codemirror-6/lang-tiddlywiki/enterIndent
+caption: Enter key indentation
+description: How the Enter key handles indentation outside of lists. Lists always continue on Enter regardless of this setting. Smart mode adds indentation inside widgets/tags. Indent mode matches the previous line's indentation. None inserts a plain newline.
+config-type: select
+config-category: Keybindings
+config-options: [{"value":"smart","label":"Smart (indent in widgets/tags)"},{"value":"indent","label":"Match previous line"},{"value":"none","label":"No indentation"}]
+default: smart
+text: smart

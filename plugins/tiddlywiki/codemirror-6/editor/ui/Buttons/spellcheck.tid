@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Buttons/spellcheck
+tags: $:/tags/EditorToolbar
+caption: {{$:/plugins/tiddlywiki/codemirror-6/icons/spellcheck}} Spellcheck
+description: Toggle spellcheck and select language
+icon: $:/plugins/tiddlywiki/codemirror-6/icons/spellcheck
+condition: [<targetTiddler>]
+dropdown: $:/plugins/tiddlywiki/codemirror-6/ui/Spellcheck/Dropdown
+button-classes: [{$:/config/codemirror-6/editor/spellcheck}match[yes]then[cm6-toolbar-btn-spellcheck tc-selected]] :else[[cm6-toolbar-btn-spellcheck]]

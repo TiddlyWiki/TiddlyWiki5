@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Buttons/goto-line
+tags: $:/tags/EditorToolbar
+caption: {{$:/plugins/tiddlywiki/codemirror-6/icons/goto-line}} Go to Line
+description: Toggle go to line panel
+icon: $:/plugins/tiddlywiki/codemirror-6/icons/goto-line
+condition: [<targetTiddler>]
+
+<$action-sendmessage $message="tm-cm6-toggle-goto-line"/>

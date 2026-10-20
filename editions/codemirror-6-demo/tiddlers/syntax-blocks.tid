@@ -1,0 +1,134 @@
+title: Draft of 'Syntax — Block Elements'
+draft.of: Syntax — Block Elements
+draft.title: Syntax — Block Elements
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+! Headings
+
+! Heading level 1
+!! Heading level 2
+!!! Heading level 3
+!!!! Heading level 4
+!!!!! Heading level 5
+!!!!!! Heading level 6
+
+!! Paragraphs and line breaks
+
+A normal paragraph of text. A blank line separates blocks. A soft
+line break inside a paragraph is joined into the same paragraph.
+
+Force a hard line break run with triple quotes:
+"""
+Line one
+Line two stays on its own line
+"""
+
+!! Lists
+
+* Unordered list item
+* Second item
+** Nested item
+*** Deeper item
+# Ordered list item
+# Second ordered
+## Nested ordered
+*# Mixed: unordered then ordered
+#* Mixed: ordered then unordered
+
+Lists with classes and styled items:
+
+*.myclass Item with a class
+* Normal item
+
+!! Definition lists
+
+; Definition term
+: Definition description
+; Another term
+: Its description
+: A second description for the same term
+
+!! Block quotes
+
+> Single-line block quote
+> Continues the quote
+>> Nested block quote
+>>> Deeper nesting
+
+<<<.tc-tiddler-frame.myclass
+Block quote with one or more dot-separated CSS classes (extended form).
+Multiple lines are allowed inside.
+
+Even multiple paragraphs.
+<<<
+
+<<<
+Plain extended block quote without a class.
+<<<
+
+!! Tables
+
+|!Header A |!Header B |!Header C |
+|Cell 1 |Cell 2 |Cell 3 |
+|Left |>|Column-spanned cell |
+|~|Row-spanned |Cell |
+|Cell |Cell | |
+|caption of the table |c
+|myclass|k
+|H|Footer-ish |row |
+
+!! Horizontal rule
+
+A horizontal rule is three (or more) dashes on their own line:
+
+---
+
+!! Code
+
+Inline `code` and a fenced code block with a language tag:
+
+```javascript
+function add(a, b) {
+	return a + b; // highlighted as JS
+}
+```
+
+Fenced block without a language tag:
+
+```
+plain preformatted text
+no language highlighting
+```
+
+Typed blocks render their content as the given type:
+
+$$$text/css
+.foo { color: red; }
+$$$
+
+$$$text/vnd.tiddlywiki
+This is ''wikitext'' inside a typed block.
+$$$
+
+!! Styled / classed blocks
+
+@@color:green;
+This whole block is green via an `@@` block.
+@@
+
+@@.tc-table-no-border
+A block with a CSS class applied.
+@@
+
+!! Comments
+
+<!-- This is a wikitext comment and is not rendered -->
+
+!! Conditional blocks
+
+<%if [{!!draft.of}] %>
+Shown when this is a draft.
+<%else%>
+Shown otherwise.
+<%endif%>

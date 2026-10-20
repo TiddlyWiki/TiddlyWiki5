@@ -1,0 +1,8 @@
+title: $:/config/EditorTypeMappings/
+
+text/x-c: codemirror-6
+text/x-c++: codemirror-6
+text/x-csrc: codemirror-6
+text/x-c++src: codemirror-6
+text/x-chdr: codemirror-6
+text/x-c++hdr: codemirror-6

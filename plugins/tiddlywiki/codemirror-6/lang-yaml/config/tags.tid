@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lang-yaml/tags
+caption: YAML Tags
+description: Tags that trigger YAML syntax highlighting (one per line)
+
