@@ -239,21 +239,25 @@ test.describe("ProseMirror command surfaces", () => {
 		await expect(handle).toBeVisible();
 		await handle.evaluate((element) => {
 			const rect = element.getBoundingClientRect();
-			const touch = new Touch({
+			const touch = {
 				identifier: 1,
 				target: element,
 				clientX: rect.x + rect.width / 2,
 				clientY: rect.y + rect.height / 2
-			});
-			element.dispatchEvent(new TouchEvent("touchstart", {
+			};
+			// Desktop Firefox does not expose Touch/TouchEvent constructors.
+			// Supply the listener's touch data without requiring those globals.
+			const event = new Event("touchstart", {
 				bubbles: true,
-				cancelable: true,
-				touches: [touch],
-				targetTouches: [touch],
-				changedTouches: [touch]
-			}));
+				cancelable: true
+			});
+			Object.defineProperties(event, {
+				touches: { value: [touch] },
+				targetTouches: { value: [touch] },
+				changedTouches: { value: [touch] }
+			});
+			element.dispatchEvent(event);
 		});
-		await page.waitForTimeout(550);
 
 		const menu = page.locator(".tc-editor-command-menu:visible");
 		await expect(menu).toBeVisible();
