@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: An inline comment stays inside its sentence
 title: Serialize/CommentInline
 type: text/vnd.tiddlywiki
 

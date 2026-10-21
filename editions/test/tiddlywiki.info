@@ -3,7 +3,11 @@
 	"plugins": [
 		"tiddlywiki/jasmine",
 		"tiddlywiki/wikitext-serialize",
-		"tiddlywiki/geospatial"
+		"tiddlywiki/hard-line-breaks",
+		"tiddlywiki/editor-command-menu",
+		"tiddlywiki/geospatial",
+		"tiddlywiki/markdown",
+		"tiddlywiki/prosemirror"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

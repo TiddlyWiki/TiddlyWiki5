@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/insert-table
+tags: $:/tags/EditorCommand
+caption: Insert table
+description: Insert a 3×3 table with header row
+command-id: insert-table
+command-rows: 3
+command-columns: 3
+command-header: yes
+command-category: block-insert
+command-surfaces: slash-menu
+command-editors: prosemirror

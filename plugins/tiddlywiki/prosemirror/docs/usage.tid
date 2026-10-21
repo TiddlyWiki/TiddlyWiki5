@@ -1,0 +1,66 @@
+title: $:/plugins/tiddlywiki/prosemirror/docs/usage
+caption: Usage
+tags: $:/plugins/tiddlywiki/prosemirror/docs
+
+! Using the ProseMirror editor
+
+!! Enabling the editor
+
+Install the ProseMirror plugin together with its dependencies: WikiText Serialize, Hard Line Breaks and Editor Command Menu. Node.js editions must list all four plugins in their `tiddlywiki.info`.
+
+The plugin library's install and reinstall buttons also fetch these dependencies. After installing or updating the JavaScript plugins, save the wiki and reopen the saved file before editing; the modules already running in an open page are not replaced by installing a new plugin tiddler.
+
+This experimental editor also requires the companion core parser and editor changes. Until those changes are released, use a wiki built from the matching source branch. Installing the plugin and its dependencies into an older wiki does not upgrade that wiki's core.
+
+For a standalone demonstration from a source checkout, run `node tiddlywiki.js editions/prosemirror --build index` and open `editions/prosemirror/output/index.html` in a browser.
+
+Open ''Control Panel > Settings > ProseMirror'' and select ''ProseMirror (WYSIWYG)'' for ~WikiText, or set `$:/config/EditorTypeMappings/text/vnd.tiddlywiki` to `prosemirror`.
+
+The plugin deliberately maps only `text/vnd.tiddlywiki`. It does not claim Markdown or other content types whose complete, source-safe conversion has not been implemented.
+
+!! Formatting and blocks
+
+The standard TiddlyWiki editor toolbar remains available. Common formatting, link, transclusion, wrapping, excision and insertion operations are translated to ProseMirror transactions so they participate in the editor's selection and undo history.
+
+Default keyboard shortcuts include:
+
+|!Action |!Shortcut |
+|Bold |`Mod-b` |
+|Italic |`Mod-i` |
+|Inline code |<code>Mod-`</code> |
+|Undo |`Mod-z` |
+|Redo |`Shift-Mod-z` |
+|Find |`Mod-f` |
+|Find and replace |`Mod-h` |
+|Paragraph |`Shift-Ctrl-0` |
+|Headings 1–6 |`Shift-Ctrl-1` through `Shift-Ctrl-6` |
+|Hard break |`Mod-Enter` |
+|Indent / dedent list item |`Tab` / `Shift-Tab` |
+
+`Mod` means Ctrl on Windows and Linux and Command on macOS. See [[Configuration|$:/plugins/tiddlywiki/prosemirror/docs/configuration]] for shortcut settings.
+
+!! Slash menu
+
+Press `/` at the start of a text block, after whitespace, or with text selected. The slash menu contains only commands that can run in the current editor context. Type in its search field to filter it; use the arrow keys, Home, End and Enter to choose, or Escape to cancel and insert the literal slash.
+
+The menu includes block types, headings, lists, insertions, typed blocks and tiddlers tagged `$:/tags/TextEditor/Snippet`. A slash typed in ordinary text remains ordinary text.
+
+Typing a second `/` before entering a search query inserts `//` into the document, so WikiText italic input remains available. Slashes inside code blocks stay literal and do not open the menu.
+
+!! Block handle
+
+Move the pointer beside a top-level block to reveal its drag handle. Drag the handle to reorder the block. Click it to open a Notion-style block menu containing the operations valid for that block, including changing its type, inserting an adjacent block, duplicating and deleting.
+
+!! Links, transclusions and widgets
+
+Typing configured link, transclusion or macro prefixes opens autocomplete. Toolbar link and transclusion actions operate on the ProseMirror selection rather than treating ProseMirror positions as WikiText string offsets.
+
+WikiText constructs that cannot be safely represented as editable ProseMirror structure are retained as source-backed visual nodes. This includes inline constructs embedded in a paragraph and block constructs such as pragmas, widgets and unsupported syntax. Editing surrounding visual content must not silently rewrite those constructs.
+
+!! Tables and typed blocks
+
+Use the slash menu to insert a 3 by 3 table with a header row. Typed blocks for WikiText, Markdown, HTML, SVG, CSS, JavaScript and JSON can also be inserted from the slash menu and edited through their block controls.
+
+!! Current scope
+
+This is an experimental editor. Source preservation is preferred over pretending that unsupported WikiText is fully editable. When exact visual semantics are unavailable, the editor keeps the original source in an isolated node instead of discarding it.

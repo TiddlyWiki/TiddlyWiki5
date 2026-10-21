@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/numbered-list
+tags: $:/tags/EditorCommand
+caption: Numbered list
+description: Turn the current block into a numbered list
+icon: $:/core/images/list-number
+command-id: toggle-list
+command-kind: ordered
+command-category: block-type
+command-surfaces: slash-menu block-menu
+command-editors: prosemirror

@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/bold
+tags: $:/tags/EditorCommand
+caption: Bold
+description: Toggle bold formatting
+icon: $:/core/images/bold
+command-id: toggle-mark
+command-mark: strong
+command-category: inline-format
+command-surfaces: slash-menu
+command-editors: prosemirror

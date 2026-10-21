@@ -8,13 +8,20 @@ module-type: wikiruleserializer
 
 exports.name = "hardlinebreaks";
 
-exports.serialize = function(tree,serialize) {
-	var text = tree.tag === "br" ? "\n" : (tree.text || "");
-	if(tree.isRuleStart) {
-		return '"""\n' + text;
+exports.serialize = function(tree,serialize,options) {
+	options = options || {};
+	// A br the parser inserted for a line break inside the region
+	if(tree.tag === "br") {
+		return "\n";
 	}
-	if(tree.isRuleEnd) {
-		return text + '"""';
+	// The region can open inline ("""text) or with a line break; only the source knows which
+	var opener = '"""\n',
+		first = tree.children && tree.children[0];
+	if(options.source && typeof tree.start === "number" && first && typeof first.start === "number" && first.start > tree.start) {
+		var slice = options.source.substring(tree.start,first.start);
+		if(/^"""\s*$/.test(slice)) {
+			opener = slice;
+		}
 	}
-	return text + serialize(tree.children);
+	return opener + serialize(tree.children) + '"""';
 };
