@@ -32,6 +32,31 @@ describe("Editor preview conditions", function() {
 			{parseAsInline: true});
 	}
 
+	function makeEditWidget(wiki) {
+		const EditWidget = require("$:/core/modules/widgets/edit.js").edit;
+		const widget = new EditWidget({
+			type: "edit",
+			attributes: {tiddler: {type: "string",value: "Context source"}},
+			children: []
+		},{wiki: wiki,document: $tw.fakeDocument});
+		widget.computeAttributes();
+		widget.execute();
+		return widget;
+	}
+
+	it("provides the selected editor type to descendant toolbar widgets", function() {
+		const widget = makeEditWidget(makeWiki());
+		expect(widget.children[0].getVariable("tv-editor-type")).toBe("text");
+	});
+
+	it("updates descendant editor context when the configured mapping changes", function() {
+		const wiki = makeWiki();
+		const widget = makeEditWidget(wiki);
+		wiki.addTiddler({title: "$:/config/EditorTypeMappings/text/vnd.tiddlywiki",text: "custom"});
+		widget.execute();
+		expect(widget.children[0].getVariable("tv-editor-type")).toBe("custom");
+	});
+
 	it("keeps unconditional previews available to the default editor", function() {
 		const html = render(makeWiki(),"text");
 		expect(html).toContain("Always caption");
