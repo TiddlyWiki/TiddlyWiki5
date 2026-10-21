@@ -19,10 +19,11 @@ npx playwright install chromium firefox --with-deps
 npx playwright test --project=chromium --workers=2 || exit 1
 
 # Keep cross-browser coverage focused on the full TiddlyWiki browser test page
-# and ProseMirror smoke tests. Full Firefox/Edge runs are still available
+# and ProseMirror smoke/installation tests. Full Firefox/Edge runs are still available
 # locally with `npx playwright test --project=firefox` or `--project=edge`.
 npx playwright test \
 	editions/test \
 	plugins/tiddlywiki/prosemirror/tests/smoke.spec.js \
+	plugins/tiddlywiki/prosemirror/tests/specs/installation.spec.js \
 	--project=firefox \
 	--workers=2

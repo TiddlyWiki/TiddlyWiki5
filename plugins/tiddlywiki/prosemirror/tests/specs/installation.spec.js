@@ -79,6 +79,9 @@ test.describe("ProseMirror plugin installation", () => {
 			$tw.wiki.addTiddler({title: "Installation editor",text: '<$edit-prosemirror tiddler="Installation source"/>'});
 			$tw.wiki.setText("$:/StoryList","list",null,["Install editor"]);
 		},baseUrl + "/index.html");
+		// Fixture writes queue a story refresh; finish it before clicking a
+		// button that the refresh may otherwise replace during pointer input.
+		await expect.poll(() => page.evaluate(() => $tw.wiki.getSizeOfTiddlerEventQueue())).toBe(0);
 		await page.getByRole("button",{name: "Get more plugins",exact: true}).click();
 		const modal = page.locator(".tc-modal");
 		await modal.getByRole("button",{ name: "Open plugin library",exact: true }).click();
@@ -96,6 +99,9 @@ test.describe("ProseMirror plugin installation", () => {
 			]);
 			const savedPath = testInfo.outputPath(filename);
 			await download.saveAs(savedPath);
+			// Fully unload the previous wiki and plugin-library iframes before
+			// verifying that the downloaded modules boot in a fresh document.
+			await page.goto("about:blank");
 			await page.goto(pathToFileURL(savedPath).href + "#" + encodeURIComponent("Installation editor"),{waitUntil: "domcontentloaded"});
 			await expect(page.locator('[data-tiddler-title="Installation editor"] .ProseMirror')).toBeVisible();
 		}
@@ -120,6 +126,7 @@ test.describe("ProseMirror plugin installation", () => {
 		const savedText = await page.evaluate(() => $tw.wiki.getTiddlerText("Installation source"));
 
 		await page.evaluate(() => $tw.wiki.setText("$:/StoryList","list",null,["Install editor"]));
+		await expect.poll(() => page.evaluate(() => $tw.wiki.getSizeOfTiddlerEventQueue())).toBe(0);
 		await page.getByRole("button",{name: "Get more plugins",exact: true}).click();
 		await modal.getByRole("button",{name: "Open plugin library",exact: true}).click();
 		const pluginDownloads = pluginTitles.map((title) => page.waitForResponse((response) => response.url().endsWith("/" + encodeURIComponent(encodeURIComponent(title)) + ".json") && response.status() === 200));
