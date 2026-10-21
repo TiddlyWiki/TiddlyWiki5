@@ -7,4 +7,4 @@ change-category: widget
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9938
 github-contributors: linonetwo
 
-Editor preview types can now specify a `condition` field to control their visibility. A new "Source" preview is added for the ProseMirror editor.
+Editor preview types can now specify a `condition` filter to control their visibility. The EditWidget provides the selected editor as `tv-editor-type` for use in these filters. Preview types without a condition remain available to all editors.

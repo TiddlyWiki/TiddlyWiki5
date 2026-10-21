@@ -24,6 +24,10 @@ The content of the `<$edit>` widget is ignored.
 |inputActions |<<.from-version 5.1.23>> Optional actions that are triggered every time an input event occurs within the input field or textarea |
 |refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
 
+! Editor context
+
+<<.from-version "5.5.0">> The widget exposes the selected editor's name as the `tv-editor-type` variable to its descendants, including toolbar widgets. Editor preview types tagged `$:/tags/EditPreview` may specify an optional `condition` filter to control their visibility. For example, `[<tv-editor-type>match[custom]]` shows a preview only when the selected editor is named `custom`. Preview types without a condition remain available to every editor.
+
 ! Examples
 
 !! Edit the contents (text field) of a tiddler titled <%if [<now YYYY-0MM-0DD>is[tiddler]] %> <$tiddler tiddler=<<now YYYY-0MM-0DD>> > <$link/></$tiddler> <%else %> with today’s date <%endif%>
