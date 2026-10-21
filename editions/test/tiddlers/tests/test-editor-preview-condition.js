@@ -1,69 +1,95 @@
-/*\\
+/*\
 title: test-editor-preview-condition.js
 type: application/javascript
 tags: [[$:/tags/test-spec]]
 
-Tests that the preview-type dropdown respects the condition field on $:/tags/EditPreview tiddlers.
+The preview dropdown is shared by all text editors. Conditional entries must
+not hide the ordinary previews or introduce paragraph wrappers in the popup.
 
-\\*/
+\*/
+
 "use strict";
 
-describe("Preview type dropdown condition field", function() {
-
-	function setupWiki() {
-		var wiki = new $tw.Wiki({});
+describe("Editor preview conditions", function() {
+	function makeWiki() {
+		const wiki = new $tw.Wiki();
 		wiki.addTiddlers([
-			{ title: "AlwaysPreview", tags: "$:/tags/EditPreview", caption: "Always" },
-			{ title: "CustomEditorOnlyPreview", tags: "$:/tags/EditPreview", caption: "Custom", condition: "[<tv-editor-type>match[custom]]" }
+			{
+				title: "$:/core/ui/EditorToolbar/preview-type-dropdown",
+				text: $tw.wiki.getTiddlerText("$:/core/ui/EditorToolbar/preview-type-dropdown")
+			},
+			{title: "AlwaysPreview",tags: "$:/tags/EditPreview",caption: "Always caption"},
+			{title: "CustomPreview",tags: "$:/tags/EditPreview",caption: "Custom caption",condition: "[<tv-editor-type>match[custom]]"},
+			{title: "NeverPreview",tags: "$:/tags/EditPreview",caption: "Never caption",condition: "[<tv-editor-type>match[missing]]"},
+			{title: "DraftPreview",tags: "$:/tags/EditPreview",caption: "Draft caption","draft.of": "AnotherPreview"}
 		]);
-		wiki.addIndexersToWiki();
 		return wiki;
 	}
 
-	function renderDropdown(wiki, editorType) {
-		var parser = wiki.parseText("text/vnd.tiddlywiki",
-			"<$set name=\"tv-editor-type\" value=\"" + editorType + "\"><$transclude tiddler=\"$:/core/ui/EditorToolbar/preview-type-dropdown\"/></$set>");
-		var widget = wiki.makeWidget(parser, { document: $tw.fakeDocument });
-		var container = $tw.fakeDocument.createElement("div");
-		widget.render(container, null);
-		return container;
+	function render(wiki, editorType) {
+		return wiki.renderText("text/html","text/vnd.tiddlywiki",
+			'<$let tv-editor-type="' + editorType + '"><$transclude tiddler="$:/core/ui/EditorToolbar/preview-type-dropdown"/></$let>',
+			{parseAsInline: true});
 	}
 
-	function textContent(container) {
-		return (container.textContent || "").replace(/\s+/g, " ").trim();
+	function makeEditWidget(wiki) {
+		const EditWidget = require("$:/core/modules/widgets/edit.js").edit;
+		const widget = new EditWidget({
+			type: "edit",
+			attributes: {tiddler: {type: "string",value: "Context source"}},
+			children: []
+		},{wiki: wiki,document: $tw.fakeDocument});
+		widget.computeAttributes();
+		widget.execute();
+		return widget;
 	}
 
-	function dropdownContainer(wiki, editorType) {
-		var parser = wiki.parseText("text/vnd.tiddlywiki",
-			"<$set name=\"tv-editor-type\" value=\"" + editorType + "\"><div class=\"tc-drop-down\"><$transclude tiddler=\"$:/core/ui/EditorToolbar/preview-type-dropdown\"/></div></$set>");
-		var widget = wiki.makeWidget(parser, { document: $tw.fakeDocument });
-		var container = $tw.fakeDocument.createElement("div");
-		widget.render(container, null);
-		return container.querySelector(".tc-drop-down");
-	}
-
-	it("should show all preview types when no condition is set", function() {
-		var wiki = setupWiki();
-		var container = renderDropdown(wiki, "text");
-		var text = textContent(container);
-		expect(text).toContain("Always");
-		expect(text).not.toContain("Custom");
+	it("provides the selected editor type to descendant toolbar widgets", function() {
+		const widget = makeEditWidget(makeWiki());
+		expect(widget.children[0].getVariable("tv-editor-type")).toBe("text");
 	});
 
-	it("should show conditional preview types when the condition matches", function() {
-		var wiki = setupWiki();
-		var container = renderDropdown(wiki, "custom");
-		var text = textContent(container);
-		expect(text).toContain("Always");
-		expect(text).toContain("Custom");
+	it("updates descendant editor context when the configured mapping changes", function() {
+		const wiki = makeWiki();
+		const widget = makeEditWidget(wiki);
+		wiki.addTiddler({title: "$:/config/EditorTypeMappings/text/vnd.tiddlywiki",text: "custom"});
+		widget.execute();
+		expect(widget.children[0].getVariable("tv-editor-type")).toBe("custom");
 	});
 
-	it("should not wrap preview type entries in extra paragraph elements", function() {
-		var wiki = setupWiki();
-		var dropdown = dropdownContainer(wiki, "text");
-		expect(dropdown).toBeTruthy();
-		expect(dropdown.querySelector("p")).toBeNull();
-		expect(dropdown.firstElementChild && dropdown.firstElementChild.tagName).toBe("A");
+	it("keeps unconditional previews available to the default editor", function() {
+		const html = render(makeWiki(),"text");
+		expect(html).toContain("Always caption");
+		expect(html).not.toContain("Custom caption");
+		expect(html).not.toContain("Never caption");
+		expect(html).not.toContain("Draft caption");
 	});
 
+	it("uses editor context to show matching conditional previews", function() {
+		const html = render(makeWiki(),"custom");
+		expect(html).toContain("Always caption");
+		expect(html).toContain("Custom caption");
+		expect(html).not.toContain("Never caption");
+	});
+
+	it("keeps ordinary previews when editor context is absent", function() {
+		const html = render(makeWiki(),"");
+		expect(html).toContain("Always caption");
+		expect(html).not.toContain("Custom caption");
+	});
+
+	it("renders entries as inline anchors without paragraph wrappers", function() {
+		const html = render(makeWiki(),"custom");
+		expect((html.match(/<a\b/g) || []).length).toBe(2);
+		expect(html).not.toMatch(/<p\b/);
+	});
+
+	it("shows the selected preview checkmark without changing available entries", function() {
+		const wiki = makeWiki();
+		wiki.addTiddler({title: "$:/state/editpreviewtype",text: "CustomPreview"});
+		const html = render(wiki,"custom");
+		expect(html).toContain("Always caption");
+		expect(html).toContain("Custom caption");
+		expect((html.match(/\u2713/g) || []).length).toBe(1);
+	});
 });

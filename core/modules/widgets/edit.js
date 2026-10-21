@@ -42,6 +42,7 @@ EditWidget.prototype.execute = function() {
 	this.editField = this.getAttribute("field","text");
 	// Choose the appropriate edit widget
 	this.editorType = this.getEditorType();
+	this.setVariable("tv-editor-type",this.editorType);
 	// Make the child widgets
 	this.makeChildWidgets([{
 		type: "edit-" + this.editorType,
