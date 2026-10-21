@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#9938
+description: Conditionally hide editor preview types
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9938
+github-contributors: linonetwo
+
+Editor preview types can now specify a `condition` filter to control their visibility. The EditWidget provides the selected editor as `tv-editor-type` for use in these filters. Preview types without a condition remain available to all editors.
