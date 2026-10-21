@@ -67,7 +67,13 @@ npm test
 npx playwright test editions/test/prosemirror-playwright.spec.js --project=chromium --workers=1
 ```
 
-The generated single-file test wiki is large, so using one worker also avoids loading several complete copies in parallel on development machines. The repository CI configuration already uses one worker.
+The generated single-file test wiki is large, so using one worker also avoids loading several complete copies in parallel on development machines.
+
+The release-packaging regression builds an empty wiki and a local plugin library, installs the editor through the core dialog, and saves and reopens the result. It checks dependency downloads, both command menus and same-version reinstallation without preloading the editor from the test edition:
+
+```
+npx playwright test plugins/tiddlywiki/prosemirror/tests/specs/installation.spec.js --project=chromium --workers=1
+```
 
 Run lint and reproducibility checks before submitting:
 

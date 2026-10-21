@@ -8,6 +8,10 @@ tags: $:/plugins/tiddlywiki/prosemirror/docs
 
 Install the ProseMirror plugin together with its dependencies: WikiText Serialize, Hard Line Breaks and Editor Command Menu. Node.js editions must list all four plugins in their `tiddlywiki.info`.
 
+The plugin library's install and reinstall buttons also fetch these dependencies. After installing or updating the JavaScript plugins, save the wiki and reopen the saved file before editing; the modules already running in an open page are not replaced by installing a new plugin tiddler.
+
+This experimental editor also requires the companion core parser and editor changes. Until those changes are released, use a wiki built from the matching source branch. Installing the plugin and its dependencies into an older wiki does not upgrade that wiki's core.
+
 For a standalone demonstration from a source checkout, run `node tiddlywiki.js editions/prosemirror --build index` and open `editions/prosemirror/output/index.html` in a browser.
 
 Open ''Control Panel > Settings > ProseMirror'' and select ''ProseMirror (WYSIWYG)'' for ~WikiText, or set `$:/config/EditorTypeMappings/text/vnd.tiddlywiki` to `prosemirror`.
