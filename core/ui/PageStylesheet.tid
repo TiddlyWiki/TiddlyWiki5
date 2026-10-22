@@ -2,16 +2,38 @@ title: $:/core/ui/PageStylesheet
 code-body: yes
 
 \import [subfilter{$:/core/config/GlobalImportFilter}]
+
+\function sanitize.css.rule()
+"[^a-zA-Z0-9_.-]"=>pattern
+"\.([0-9])"=>digit-pattern
+[search-replace[$:/],[system-]search-replace:g:regexp<pattern>,[-]search-replace:g:regexp<digit-pattern>,[.n$1]addprefix[tw-]]
+\end
+
 \whitespace trim
 
 <$set name="currentTiddler" value={{$:/language}}>
 
 <$set name="languageTitle" value={{!!name}}>
 
-<$transclude $tiddler="$:/core/stylesheets/custom-properties" $mode="block"/>
+<$text text=`@layer ${
+[[$:/core/stylesheets/custom-properties]]
+[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]
++[sanitize.css.rule[]]
++[join[,]]
+}$;
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
+`/>
+
+<$list filter="
+[[$:/core/stylesheets/custom-properties]]
+[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]
+">
+<$text text=`@layer ${[<currentTiddler>sanitize.css.rule[]]}${
+`/>
 <$transclude mode="block"/>
+<$text text="
+}
+"/>
 </$list>
 
 </$set>
