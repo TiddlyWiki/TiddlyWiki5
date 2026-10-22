@@ -160,10 +160,11 @@ exports.parse = function() {
 				// Move the caption to the first row if it isn't already
 				if(table.children.length !== 1) {
 					table.children.pop(); // Take rowContainer out of the children array
-					table.children.splice(0,0,rowContainer); // Insert it at the bottom
+					table.children.unshift(rowContainer); // Insert it at the top
 				}
-				// Set the alignment - TODO: figure out why TW did this
-				//				rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
+				// If the caption WikiText is before any table rows, show it above the table
+				// Otherwise, show it below the table
+				rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
 				// Parse the caption
 				rowContainer.children = this.parser.parseInlineRun(rowTermRegExp,{eatTerminator: true});
 			} else {
