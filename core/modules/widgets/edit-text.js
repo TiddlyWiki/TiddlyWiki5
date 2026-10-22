@@ -13,4 +13,5 @@ var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTex
 	FramedEngine = require("$:/core/modules/editor/engines/framed.js").FramedEngine,
 	SimpleEngine = require("$:/core/modules/editor/engines/simple.js").SimpleEngine;
 
+exports["edit-types"] = ["text"];
 exports["edit-text"] = editTextWidgetFactory(FramedEngine,SimpleEngine);
