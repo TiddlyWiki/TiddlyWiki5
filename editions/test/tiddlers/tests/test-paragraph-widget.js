@@ -128,6 +128,27 @@ describe("Paragraph widget", function() {
 		}
 	});
 
+	it("should insert a conditional's late content where the split put its neighbours", function() {
+		// A conditional that renders nothing owns no DOM node. After a split its next sibling sat in
+		// the new paragraph while it pointed at the run's parent, so a browser threw NotFoundError
+		// once the condition turned true.
+		// CHECK BY HAND: a tiddler holding the source below; then create Flag with text  yes . Label
+		// B must appear between A and C, with no red screen
+		var wiki = $tw.test.wiki();
+		var rendered = render('<$let a="x">\n<label>A</label>\n<% if [{Flag}match[yes]] %>\n<label>B</label>\n<% endif %>\n<div>C</div>\n</$let>\n',wiki),
+			before = rendered.wrapper.innerHTML;
+		expect(before).toContain("<label>A</label>");
+		expect(before).not.toContain("<label>B</label>");
+		wiki.addTiddler({title: "Flag", text: "yes"});
+		refresh(rendered,["Flag"]);
+		var html = rendered.wrapper.innerHTML,
+			paragraph = html.slice(html.indexOf("<p>"),html.indexOf("</p>"));
+		// B joins A in the paragraph the split gave them, and C stays a block after it
+		expect(paragraph).toContain("<label>A</label>");
+		expect(paragraph).toContain("<label>B</label>");
+		expect(html.indexOf("<label>B</label>")).toBeLessThan(html.indexOf("<div>C</div>"));
+	});
+
 	it("should retake its decision when content changes between inline and block", function() {
 		// The decision depends on what the children rendered, so it has to be retaken when
 		// they change. A run that turns out to hold a block must be split the way a browser

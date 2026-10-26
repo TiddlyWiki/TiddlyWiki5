@@ -127,23 +127,39 @@ ParagraphWidget.prototype.unwrap = function(parent,domNode) {
 	// node, and pass throughs such as $vars put that node arbitrarily deep. Leaving those
 	// stale makes a later refreshSelf render into the discarded paragraph, which is how
 	// the sidebar search dropdown stopped opening: no error, just invisible output
-	reparent(this,domNode,parent);
+	reparent(this,domNode,parent,null);
 	this.wrappedInParagraph = false;
 };
 
 /*
 Repoint every widget in the subtree that rendered into oldNode at wherever its own nodes
-actually ended up
+actually ended up. A widget that drew nothing, such as a false conditional, goes where the
+node after it ended up, because whatever it renders later is inserted before that node
 */
-function reparent(widget,oldNode,fallback) {
-	$tw.utils.each(widget.children,function(child) {
+function reparent(widget,oldNode,fallback,after) {
+	var children = widget.children || [];
+	$tw.utils.each(children,function(child,index) {
+		var next = firstDomNode(children.slice(index + 1)) || after;
 		if(child.parentDomNode === oldNode) {
 			// A pass through such as $let owns no node, so its descendants' nodes show where it rendered
-			var ownNode = (child.domNodes && child.domNodes[0]) || collectDomNodes(child)[0];
-			child.parentDomNode = (ownNode && ownNode.parentNode) || fallback;
+			var placed = (child.domNodes && child.domNodes[0]) || collectDomNodes(child)[0] || next;
+			child.parentDomNode = (placed && placed.parentNode) || fallback;
 		}
-		reparent(child,oldNode,fallback);
+		reparent(child,oldNode,fallback,next);
 	});
+}
+
+/*
+The first DOM node these widgets hold, in tree order, or null
+*/
+function firstDomNode(widgets) {
+	for(var t=0; t<widgets.length; t++) {
+		var nodes = (widgets[t].domNodes && widgets[t].domNodes.length) ? widgets[t].domNodes : collectDomNodes(widgets[t]);
+		if(nodes.length) {
+			return nodes[0];
+		}
+	}
+	return null;
 }
 
 /*
