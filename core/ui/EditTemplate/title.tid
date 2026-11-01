@@ -22,7 +22,7 @@ tags: $:/tags/EditTemplate
 
 </$vars>
 
-<$reveal state="!!draft.title" type="nomatch" text={{!!draft.of}} tag="div">
+<% if [{!!draft.title}!match{!!draft.of}then[yes]] %>
 
 <$list filter="[{!!draft.title}!is[missing]]" variable="listItem">
 
@@ -71,4 +71,4 @@ tags: $:/tags/EditTemplate
 
 </$list>
 
-</$reveal>
+<% endif %>

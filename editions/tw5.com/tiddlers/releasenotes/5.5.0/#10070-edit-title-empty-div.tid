@@ -1,0 +1,12 @@
+change-category: internal
+change-type: bugfix
+created: 20261101150000000
+description: The edit template title no longer leaves an empty hidden div in edit frames
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10070
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#10070
+type: text/vnd.tiddlywiki
+
+The rename prompts in `$:/core/ui/EditTemplate/title` now use a conditional instead of `$reveal`, so an edit frame with an unchanged title no longer contains an empty `div.tc-reveal`.
