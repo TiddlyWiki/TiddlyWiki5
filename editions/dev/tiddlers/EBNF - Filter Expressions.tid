@@ -1,0 +1,248 @@
+created: 20260413142655652
+modified: 20260413142655652
+tags: doc dev [[Wikitext EBNF]]
+title: EBNF - Filter Expressions
+
+!! Overview
+
+Filter expressions are their own sub-language within TiddlyWiki. They appear inside `[...]` in many wikitext contexts (transclusion, widgets, pragmas, conditionals). The filter parser -- implemented in [[$:/core/modules/filters.js]] -- is separate from the wikitext parser.
+
+A filter expression is a sequence of ''runs'' (also called operations). Each run produces a set of tiddler titles. Runs are combined using ''run prefixes''.
+
+!! Top-Level Structure
+
+```
+FilterExpression ::= Run*
+Run              ::= RunPrefix? ( Step+ | Parameter )
+```
+
+A run is either a sequence of steps enclosed in square brackets, or a bare parameter (a quoted or unquoted string between runs). Whitespace between runs is ignored.
+
+!! Run Prefixes
+
+Run prefixes determine how a run's results are combined with the accumulated results from previous runs.
+
+!!! Symbol Prefixes
+
+These are the original prefix characters:
+
+* (none) -- union (OR): add results to output, with deduplication
+* `+` -- AND/filter: use previous results as input, replace with output
+* `-` -- EXCEPT: remove this run's results from the accumulated output
+* `~` -- ELSE: use this run's results only if previous result is empty
+* `=` -- ALL (union without dedup): like default but preserves duplicates
+* `=>` -- LET: assign accumulated results to a variable named by this run's output
+
+!!! Named Prefixes
+
+Named prefixes use the `:name` syntax and accept optional suffixes:
+
+* `:filter` -- keep items from previous results where the inner filter returns non-empty
+* `:map` -- transform each item through the inner filter (suffix: `flat`)
+* `:reduce` -- fold/accumulate through items, with `accumulator` variable
+* `:sort` -- sort previous results (suffixes: `string`/`number`/`date`; `reverse`/`casesensitive`)
+* `:intersection` -- set intersection of previous results and this run's results
+* `:cascade` -- cascade through a list of filters, returning first non-empty match per item
+* `:then` -- replace previous results with this run's output, but only if both are non-empty
+* `:or` -- union (same as no prefix, used internally)
+* `:and` -- use previous results as input (same as `+`, used internally)
+* `:all` -- union without dedup (same as `=`, used internally)
+* `:except` -- remove from results (same as `-`, used internally)
+* `:else` -- use only if previous empty (same as `~`, used internally)
+
+Named prefix syntax:
+
+```
+RunPrefix       ::= '' | '+' | '-' | '~' | '=' | '=>'
+                  | ':' PrefixName ( ':' SuffixSpec )*
+PrefixName      ::= Word
+SuffixSpec      ::= SuffixOption ( ',' SuffixOption )*
+SuffixOption    ::= Word
+```
+
+Example: `:sort:number:reverse` parses as prefix `sort` with suffixes `[["number"], ["reverse"]]`.
+
+!! Steps (Inside Square Brackets)
+
+A step is a sequence of operators inside `[` ... `]`. Multiple operators within a step are chained: each operator receives its input from the previous operator's output.
+
+```
+Step            ::= '[' Operator ( ',' Operator )* ']'
+```
+
+Note: The `,` between operators is actually between //parameters// of the same operator when used after the parameter brackets. The true chaining of operators happens implicitly -- the `]` of one step and `[` of the next, or within a step the parser reads operators sequentially until it hits `]`.
+
+!! Operator Structure
+
+Each operator within a step has the following structure:
+
+```
+Operator        ::= '!'? OperatorName Suffix? ParameterExpr ( ',' ParameterExpr )*
+OperatorName    ::= Word | ''           (* empty defaults to 'title' *)
+Suffix          ::= ':' SuffixLevel ( ':' SuffixLevel )*
+SuffixLevel     ::= SuffixOption ( ',' SuffixOption )*
+SuffixOption    ::= Word
+```
+
+* Optional `!` prefix negates the operator
+* Operator name -- if empty (i.e., the parameter bracket immediately follows `[` or a preceding parameter), defaults to `title`
+* Optional suffixes separated by `:` -- each suffix level can have `,`-separated sub-options
+* One or more parameters in bracket notation
+
+!!! Suffix Parsing Detail
+
+Suffixes form a 2D structure. The `:` separates suffix levels, and `,` separates options within a level. Both the raw suffix string and the parsed 2D array are available to operator implementations.
+
+Examples:
+
+* `field:title` -- `[["title"]]`
+* `sort:number:reverse` -- `[["number"], ["reverse"]]`
+* `search:title,body:casesensitive` -- `[["title","body"], ["casesensitive"]]`
+
+!! Parameter Types (5 Forms)
+
+Parameters inside steps use bracket notation to indicate their type:
+
+```
+ParameterExpr     ::= '[' Text ']'           (* literal string *)
+                  | '{' TextRef '}'         (* indirect -- tiddler field lookup *)
+                  | '<' VarRef '>'          (* variable reference *)
+                  | '(' VarRef ')'          (* multi-valued variable *)
+                  | '/' RegExp '/' Flags?   (* deprecated regexp *)
+```
+
+Parameters outside brackets (bare parameters between runs) use quoting:
+
+```
+Parameter         ::= '"' Text '"'           (* double-quoted string *)
+                  | "'" Text "'"           (* single-quoted string *)
+                  | UnquotedWord            (* no spaces or brackets *)
+```
+
+Bare parameters are implicitly wrapped as `title` operators: `"MyTiddler"` is equivalent to `[title[MyTiddler]]`.
+
+!! Variable References in Parameters
+
+The `<...>` and `(...)` parameter forms can reference variables with optional parameters:
+
+```
+VarRef          ::= VariableName ( SP Param )*
+```
+
+The variable name and parameters are parsed by `parseFilterVariable()` in `parseutils.js`. If there is no whitespace in the reference, the entire text is the variable name. Otherwise, the first token is the name and subsequent tokens are parameters.
+
+Examples: `<currentTiddler>`, `<myProc param1 "param 2">`
+
+The difference between `<...>` and `(...)`: angle brackets return a single value, round brackets return a list (multi-valued). Multi-valued variables allow an operator to receive multiple input values from a single parameter.
+
+!! Operator Categories
+
+The filter operators (defined in `$:/core/modules/filters/`) can be grouped into these categories:
+
+* ''Selection:'' `all`, `title`, `is`, `tag`, `tags`, `list`, `listed`, `untagged`, `has`, `field`, `contains`
+* ''Navigation:'' `links`, `backlinks`, `transcludes`, `backtranscludes`, `tagging`
+* ''Ordering:'' `before`, `after`, `next`, `previous`, `insertbefore`, `insertafter`
+* ''Comparison:'' `compare`, `match`, `regexp`, `search`, `prefix`, `suffix`, `minlength`
+* ''String Manipulation:'' `addprefix`, `addsuffix`, `removeprefix`, `removesuffix`, `split`, `splitbefore`, `splitregexp`, `join`, `trim`, `pad`, `uppercase`, `lowercase`, `sentencecase`, `titlecase`, `charcode`, `length`, `slugify`
+* ''Sorting:'' `sort`, `sortsub`, `nsort`, `sortcs`, `nsortcs` (via `sort.js`)
+* ''Counting and Limiting:'' `count`, `limit`, `range`, `each`, `eachday`
+* ''Higher-Order:'' `subfilter`, `filter`, `reduce`, `function`
+* ''JSON:'' `jsonget`, `jsonset`, `jsontype`, `jsonindexes`, `jsonextract` (via `json-ops.js`)
+* ''Date:'' `days`, `sameday`
+* ''Format:'' `format` (with sub-types: `date`, `relativedate`, `timestamp`, `json`, `titlelist`)
+* ''Encoding:'' `encodings` (base64, html, url, etc.)
+* ''Serialization:'' `stringify`, `jsonstringify`, `deserialize`
+* ''List Operations:'' `enlist`, `lookup`, `listops` (append, prepend, move, etc.)
+* ''Variables:'' `getvariable`, `variables`, `substitute`
+* ''Introspection:'' `fields`, `indexes`, `get`, `getindex`, `haschanged`, `shadowsource`, `plugintiddlers`, `modules`, `moduletypes`, `moduleproperty`, `commands`, `editions`, `editiondescription`, `storyviews`, `wikiparserrules`, `deserializers`, `duplicateslugs`
+* ''Patch:'' `makepatches`, `applypatches`, `levenshtein`
+* ''Other:'' `then`, `else`, `crypto`
+
+!! Execution Model
+
+# The filter string is parsed by `parseFilter()` into an array of ''run objects''. Each run object contains a prefix, optional named prefix and suffixes, and an array of operator nodes.
+# The parsed tree is compiled by `compileFilter()` into a chain of JavaScript functions. Results are cached for performance (cache limit: 2000 entries).
+# At execution time, for each run:
+** The operators within the run are chained sequentially -- each operator receives the output of the previous one as input.
+** The run's result is combined with the accumulated results from previous runs according to the run prefix.
+# The final accumulated result is returned as an array of titles/values.
+# A maximum recursion depth of 300 is enforced to prevent infinite loops in recursive filter evaluation.
+
+!! The Parameter RegExp
+
+The top-level parser uses a single regular expression to match run prefixes and bare parameters simultaneously. This is the key regex from `parseFilter()`:
+
+```
+/((?:\+|\-|~|(?:=>?)|\:(\w+)(?:\:([\w\:, ]*))?)?)
+(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/
+```
+
+Capture groups:
+
+# Entire run prefix (symbol or named)
+# Named prefix name (e.g., `filter`, `sort`)
+# Named prefix suffixes (raw string, e.g., `number:reverse`)
+# Opening `[` (indicates a step follows)
+# Double-quoted bare parameter
+# Single-quoted bare parameter
+# Unquoted bare parameter
+
+!! Combined EBNF
+
+```
+(* === Top Level === *)
+FilterExpression ::= ( WS? Run )* WS?
+
+(* === Runs === *)
+Run              ::= RunPrefix? ( Step+ | Parameter )
+RunPrefix        ::= SymbolPrefix | NamedPrefix
+SymbolPrefix     ::= '+' | '-' | '~' | '=' | '=>'
+NamedPrefix      ::= ':' PrefixName ( ':' SuffixSpec )*
+PrefixName       ::= Word
+
+(* === Steps === *)
+Step             ::= '[' Operator+ ']'
+Operator         ::= '!'? OperatorName Suffix? ParameterExpr ( ',' ParameterExpr )*
+OperatorName     ::= Word | ''           (* empty defaults to 'title' *)
+
+(* === Suffixes === *)
+Suffix           ::= ':' SuffixLevel ( ':' SuffixLevel )*
+SuffixLevel      ::= SuffixOption ( ',' SuffixOption )*
+SuffixOption     ::= Word
+SuffixSpec       ::= SuffixLevel ( ':' SuffixLevel )*
+
+(* === Parameters (inside steps) === *)
+ParameterExpr      ::= '[' Text ']'           (* literal *)
+                   | '{' TextRef '}'         (* indirect *)
+                   | '<' VarRef '>'          (* variable *)
+                   | '(' VarRef ')'          (* multi-valued variable *)
+                   | '/' RegExp '/' Flags?   (* deprecated regexp *)
+
+(* === Parameters (bare, between runs) === *)
+Parameter          ::= '"' Text '"'
+                   | "'" Text "'"
+                   | UnquotedWord
+
+(* === Variable References === *)
+VarRef           ::= VariableName ( SP Param )*
+
+(* === Terminals === *)
+Word             ::= [a-zA-Z0-9_-]+
+Text             ::= (* any characters except the closing bracket *)
+TextRef          ::= TiddlerTitle '!!' FieldName
+                   | TiddlerTitle '##' IndexName
+                   | TiddlerTitle
+                   | '!!' FieldName          (* current tiddler *)
+UnquotedWord     ::= [^ \t\n\[\]]+
+WS               ::= [ \t\n\r]+
+Flags            ::= '(' [mygi]+ ')'
+```
+
+!! Design Notes
+
+* Filter expressions are opaque to the wikitext parser -- it just finds the matching brackets and hands the content to the filter parser.
+* The filter sub-language has its own grammar, separate from both wikitext and HTML attribute parsing.
+* Run prefixes were extended over time: symbol prefixes (`+`, `-`, `~`) are original; `=` came later; named prefixes (`:filter`, `:map`, `:reduce`, `:sort`, etc.) are newer additions that enable higher-order operations.
+* The `=>` (LET) prefix is relatively recent and allows storing intermediate results in a variable for use by subsequent runs.
+* Unknown operators fall back to a `[unknown]` handler, which at runtime can distinguish between custom operators and falling back to the `field` operator.
+* The filter result cache is capped at 2000 entries to prevent memory leaks, and resets entirely when the limit is exceeded.

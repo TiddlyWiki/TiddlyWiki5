@@ -1,0 +1,395 @@
+created: 20260413142428016
+modified: 20260413151911811
+tags: doc dev [[Wikitext EBNF]]
+title: EBNF - Inline Rules
+
+! Inline Rules
+
+Inline rules match within text runs. The wikiparser scans for the closest matching rule at each character position. When a match is found, the rule consumes the matched text and produces a parse tree node. All inline rules can be individually enabled or disabled using the `\rules` pragma.
+
+!! Emphasis
+
+Six emphasis rules use symmetric markers -- the same character sequence opens and closes the emphasis span. Content between the markers is parsed recursively for further inline rules.
+
+!!! Bold
+
+Rule name: ''bold'' -- renders as `<strong>`.
+
+```ebnf
+Bold ::= "''" InlineContent "''" ;
+```
+
+The marker is two single-quote characters (''not'' a double-quote).
+
+''Example:'' `''bold text''` renders as ''bold text''.
+
+!!! Italic
+
+Rule name: ''italic'' -- renders as `<em>`.
+
+```ebnf
+Italic ::= "//" InlineContent "//" ;
+```
+
+''Example:'' `//italic text//` renders as //italic text//.
+
+!!! Strikethrough
+
+Rule name: ''strikethrough'' -- renders as `<s>`.
+
+```ebnf
+Strikethrough ::= "~~" InlineContent "~~" ;
+```
+
+''Example:'' `~~deleted text~~` renders as ~~deleted text~~.
+
+!!! Superscript
+
+Rule name: ''superscript'' -- renders as `<sup>`.
+
+```ebnf
+Superscript ::= "^^" InlineContent "^^" ;
+```
+
+''Example:'' `^^superscript^^` renders as ^^superscript^^.
+
+!!! Subscript
+
+Rule name: ''subscript'' -- renders as `<sub>`.
+
+```ebnf
+Subscript ::= ",," InlineContent ",," ;
+```
+
+''Example:'' `,,subscript,,` renders as ,,subscript,,.
+
+!!! Underscore
+
+Rule name: ''underscore'' -- renders as `<u>`.
+
+```ebnf
+Underscore ::= "__" InlineContent "__" ;
+```
+
+''Example:'' `__underlined text__` renders as __underlined text__.
+
+!! Code Inline
+
+Rule name: ''codeinline'' -- renders as `<code>`. Content is ''not'' parsed for further inline rules; it is captured as raw text.
+
+```ebnf
+CodeInline ::= BacktickMarker RawText BacktickMarker ;
+BacktickMarker ::= "`" | "``" ;
+```
+
+The opening marker is one or two backtick characters. The closing marker must use the same number of backticks. If no closing marker is found, the raw text extends to the end of the input.
+
+''Example:'' <code>&#96;code&#96;</code> or <code>&#96;&#96;code with &#96; inside&#96;&#96;</code>.
+
+!! Formatting
+
+!!! Dash
+
+Rule name: ''dash'' -- produces an HTML entity node.
+
+```ebnf
+Dash ::= EmDash | EnDash ;
+EmDash ::= "---" ; (* followed by a non-dash character *)
+EnDash ::= "--" ;  (* followed by a non-dash character *)
+```
+
+The regex is `/-{2,3}(?!-)/` -- it matches exactly two or three hyphens ''not'' followed by another hyphen. Four or more consecutive hyphens do not match this rule (they may match the horizontal rule block rule instead).
+
+''Example:'' `--` renders as &ndash; (en-dash), `---` renders as &mdash; (em-dash).
+
+!!! Entity
+
+Rule name: ''entity'' -- produces an HTML entity node.
+
+```ebnf
+Entity ::= "&" EntityName ";" ;
+EntityName ::= "#" ? alphanumeric{2,8} ;
+Alphanumeric ::= Letter | Digit ;
+```
+
+The regex is `/(&#?[a-zA-Z0-9]{2,8};)/` -- it matches named entities like `&amp;` and numeric entities like `&#169;` or `&#x00A9;`. The entity name is 2 to 8 alphanumeric characters, optionally preceded by `#`.
+
+''Example:'' `&copy;` renders as &copy;, `&#8212;` renders as &#8212;.
+
+!!! Style Inline
+
+Rule name: ''styleinline'' -- renders as a `<span>` with optional CSS classes and/or inline styles.
+
+```ebnf
+StyleInline ::= "@@" [ CssStyles ] [ CssClasses ] InlineContent "@@" ;
+CssStyles ::= CssDeclaration { CssDeclaration } ;
+CssDeclaration ::= property ":" value ";" ;
+CssClasses ::= "." ClassName { "." ClassName } WS ;
+```
+
+The opening `@@` may be followed by CSS property declarations (each ending with `;`) and/or dot-prefixed class names (separated by `.`, followed by a space). If neither styles nor classes are provided, the span gets the class `tc-inline-style`. The content between the opening sequence and the closing `@@` is parsed recursively.
+
+''Examples:''
+
+* `@@.myClass styled content@@` -- span with class `myClass`
+* `@@color:red;styled content@@` -- span with inline style
+* `@@width:100px;.myClass styled content@@` -- both style and class
+* `@@highlighted content@@` -- span with class `tc-inline-style`
+
+!! Links
+
+!!! ~WikiLink
+
+Rule name: ''wikilink'' -- renders as a `<$link>` widget.
+
+```ebnf
+WikiLink ::= UpperLetter+ LowerLetter+ UpperLetter AnyLetter* ;
+UpperLetter ::= "A"-"Z" | unicode-upper ;
+LowerLetter ::= "a"-"z" | unicode-lower ;
+AnyLetter ::= UpperLetter | LowerLetter | digit ;
+```
+
+A ~WikiLink is a CamelCase word: one or more uppercase letters, followed by one or more lowercase letters, followed by an uppercase letter, followed by zero or more letters or digits. The link is ''not'' created if the preceding character is a "block prefix letter" (a letter, digit, hyphen, or underscore).
+
+''Example:'' `MyTiddler` auto-links to the tiddler "~MyTiddler".
+
+!!! ~WikiLink Prefix (suppression)
+
+Rule name: ''wikilinkprefix'' -- suppresses a ~WikiLink and renders as plain text.
+
+```ebnf
+SuppressedWikiLink ::= "~" WikiLink ;
+```
+
+Preceding a CamelCase word with `~` prevents it from being recognised as a link. The `~` is consumed and the text is output without it.
+
+''Example:'' `~MyTiddler` renders as plain text "~MyTiddler".
+
+!!! Pretty Link
+
+Rule name: ''prettylink'' -- renders as a `<$link>` widget or an `<a>` element for external URLs.
+
+```ebnf
+PrettyLink ::= "[[" LinkText "]]" 
+            | "[[" DisplayText "|" LinkTarget "]]" ;
+```
+
+The regex is `/\[\[(.*?)(?:\|(.*?))?\]\]/` -- it matches `[[target]]` or `[[display|target]]`. If the target is an external URL (detected by `$tw.utils.isLinkExternal`), an `<a>` element is produced with `target="_blank"` and `rel="noopener noreferrer"`. Otherwise a `<$link>` widget is used.
+
+''Examples:''
+
+* `[[MyTiddler]]` -- links to "~MyTiddler" with display text "~MyTiddler"
+* `[[Click here|MyTiddler]]` -- links to "~MyTiddler" with display text "Click here"
+* `[[TW|https://tiddlywiki.com]]` -- external link
+
+!!! System Link
+
+Rule name: ''syslink'' -- renders as a `<$link>` widget.
+
+```ebnf
+SysLink ::= [ "~" ] "$:/" PathChars ;
+PathChars ::= ( AnyLetter | "/" | "." | "_" | "-" )+ ;
+```
+
+A system link starts with `$:/` and continues with letters, digits, `/`, `.`, `_`, or `-`. If preceded by `~`, the link is suppressed and rendered as plain text (without the `~`).
+
+''Examples:''
+
+* `$:/core/ui/ViewTemplate` auto-links to that system tiddler.
+* `~$:/core/ui/ViewTemplate` renders as plain text.
+
+!!! External Link
+
+Rule name: ''extlink'' -- renders as an `<a>` element.
+
+```ebnf
+ExtLink ::= [ "~" ] protocol ":" UrlChars ;
+Protocol ::= "file" | "http" | "https" | "mailto" | "ftp" 
+         | "irc" | "news" | "data" | "skype" ;
+UrlChars ::= ( ? any character except whitespace, <, >, {, }, [, ], `, |, ", \, ^ ? )+ ;
+```
+
+The regex from the source is:
+
+```
+/~?(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]&#96;|"\\^]+(?:\/|\b)/
+```
+
+It matches URLs starting with a recognised protocol scheme. The URL continues until whitespace or a disallowed character is encountered, and must end with `/` or a word boundary. If preceded by `~`, the link is suppressed.
+''Examples:''
+
+* `https://tiddlywiki.com` auto-links.
+* `~https://tiddlywiki.com` renders as plain text.
+* `mailto:user@example.com` auto-links.
+
+!!! Pretty External Link
+
+Rule name: ''prettyextlink'' -- renders as an `<a>` element.
+
+```ebnf
+PrettyExtLink ::= "[ext[" url "]]" 
+               | "[ext[" DisplayText "|" url "]]" ;
+```
+
+The `[ext[` prefix distinguishes this from other bracket constructs. The URL and optional display text are separated by `|`. The link always opens in a new tab (`target="_blank"`, `rel="noopener noreferrer"`).
+
+''Examples:''
+
+* `[ext[https://tiddlywiki.com]]` -- external link with URL as display text
+* `[ext[TiddlyWiki|https://tiddlywiki.com]]` -- external link with custom display text
+
+!! Images
+
+Rule name: ''image'' -- renders as a `<$image>` widget.
+
+```ebnf
+Image ::= "[img" { WS Attribute } WS "[" [ Tooltip "|" ] Source "]]" ;
+Attribute ::= AttrName "=" AttrValue ;
+AttrValue ::= QuotedString | IndirectValue | FilteredValue | UnquotedString ;
+```
+
+The `[img` prefix is followed by optional widget attributes (such as `width`, `height`, `class`), then a `[` introducing the source specification. The source can be a tiddler title or a URL. An optional tooltip is separated from the source by `|`. Attribute values can use the standard TiddlyWiki attribute syntax including indirection (`{{!!field}}`) and filters (`{{{ filter }}}`).
+
+''Examples:''
+
+* `[img[my-image.png]]` -- image from tiddler
+* `[img[A photo|my-image.png]]` -- image with tooltip
+* `[img width=200 [my-image.png]]` -- image with width attribute
+* `[img width={{!!width}} height={{!!height}} [photo.jpg]]` -- attributes via indirection
+
+!! Comments
+
+Rule name: ''commentinline'' -- produces a void node (not rendered).
+
+```ebnf
+CommentInline ::= "<!--" CommentText "-->" ;
+```
+
+The comment syntax is simplified compared to the full HTML specification: it matches an opening `<!--` followed by any content up to the next `-->`. Both the opening and closing markers must be present; if the closing `-->` is not found, the rule does not match.
+
+''Example:'' `<!-- This is a comment -->` is consumed and produces no visible output.
+
+!! Conditional (inline form)
+
+Rule name: ''conditional'' -- this rule is both block and inline (see also [[EBNF - Block Rules]]). When `<%if%>` appears within flowing text rather than at the start of a line, it is parsed as an inline conditional.
+
+```ebnf
+ConditionalInline ::= IfClause { ElseifClause } [ ElseClause ] endif ;
+IfClause     ::= "<%if" WS FilterExpr "%>" InlineContent ;
+ElseifClause ::= "<%elseif" WS FilterExpr "%>" InlineContent ;
+ElseClause   ::= "<%else%>" InlineContent ;
+Endif         ::= "<%endif%>" ;
+```
+
+The filter expression is evaluated at runtime. If the filter produces any output, the condition is true and the corresponding content is rendered. The body is parsed as an inline run (not block content).
+
+''Example:'' `<%if [<myVar>match[yes]]%>shown when yes<%else%>fallback<%endif%>`
+
+!! Hard Line Breaks
+
+Rule name: ''hardlinebreaks'' -- despite being classified as an inline rule in the source (`{inline: true}`), it controls line-level formatting. It is delimited by `"""` markers. Within this region, every newline is converted to a `<br>` element.
+
+```ebnf
+HardLineBreaks ::= '"""' [ newline ] { InlineContent newline } '"""' ;
+```
+
+Inline formatting is still parsed within the hard line breaks region.
+
+''Example:''
+
+```
+"""
+Line one
+Line two
+Line three
+"""
+```
+
+Each line break becomes an explicit `<br>` in the output.
+
+!! Combined EBNF
+
+The following grammar covers all inline rules. The parser tries each rule at every character position and picks the earliest match.
+
+```ebnf
+(* === Inline Rules === *)
+
+InlineContent ::= { InlineRule | PlainText } ;
+
+InlineRule ::= Bold | italic | strikethrough | superscript 
+            | subscript | underscore | CodeInline | dash 
+            | entity | StyleInline | WikiLink 
+            | SuppressedWikiLink | PrettyLink | SysLink 
+            | ExtLink | PrettyExtLink | image | CommentInline
+            | ConditionalInline | HardLineBreaks ;
+
+(* --- Emphasis --- *)
+Bold          ::= "''" InlineContent "''" ;
+Italic        ::= "//" InlineContent "//" ;
+Strikethrough ::= "~~" InlineContent "~~" ;
+Superscript   ::= "^^" InlineContent "^^" ;
+Subscript     ::= ",," InlineContent ",," ;
+Underscore    ::= "__" InlineContent "__" ;
+
+(* --- Code --- *)
+CodeInline     ::= BacktickMarker RawText BacktickMarker ;
+BacktickMarker ::= "`" | "``" ;
+
+(* --- Dash --- *)
+Dash    ::= EmDash | EnDash ;
+EmDash ::= "---" ;  (* not followed by "-" *)
+EnDash ::= "--" ;   (* not followed by "-" *)
+
+(* --- Entity --- *)
+Entity      ::= "&" [ "#" ] Alphanumeric{2,8} ";" ;
+Alphanumeric ::= Letter | Digit ;
+
+(* --- Style Inline --- *)
+StyleInline    ::= "@@" [ CssStyles ] [ CssClasses ] InlineContent "@@" ;
+CssStyles      ::= CssDeclaration { CssDeclaration } ;
+CssDeclaration ::= property ":" value ";" ;
+CssClasses     ::= "." ClassName { "." ClassName } WS ;
+
+(* --- WikiLink --- *)
+WikiLink            ::= UpperLetter+ LowerLetter+ UpperLetter AnyLetter* ;
+SuppressedWikiLink ::= "~" WikiLink ;
+
+(* --- Pretty Link --- *)
+PrettyLink ::= "[[" LinkText "]]" 
+            | "[[" DisplayText "|" LinkTarget "]]" ;
+
+(* --- System Link --- *)
+SysLink   ::= [ "~" ] "$:/" PathChars ;
+PathChars ::= ( AnyLetter | "/" | "." | "_" | "-" )+ ;
+
+(* --- External Link --- *)
+ExtLink ::= [ "~" ] protocol ":" UrlChars ;
+Protocol ::= "file" | "http" | "https" | "mailto" | "ftp" 
+         | "irc" | "news" | "data" | "skype" ;
+
+(* --- Pretty External Link --- *)
+PrettyExtLink ::= "[ext[" url "]]" 
+               | "[ext[" DisplayText "|" url "]]" ;
+
+(* --- Image --- *)
+Image ::= "[img" { WS Attribute } WS "[" [ Tooltip "|" ] Source "]]" ;
+
+(* --- Comment --- *)
+CommentInline ::= "<!--" CommentText "-->" ;
+
+(* --- Conditional (inline form) --- *)
+ConditionalInline ::= IfClause { ElseifClause } [ ElseClause ] endif ;
+IfClause     ::= "<%if" WS FilterExpr "%>" InlineContent ;
+ElseifClause ::= "<%elseif" WS FilterExpr "%>" InlineContent ;
+ElseClause   ::= "<%else%>" InlineContent ;
+Endif         ::= "<%endif%>" ;
+
+(* --- Hard Line Breaks --- *)
+HardLineBreaks ::= '"""' [ newline ] { InlineContent newline } '"""' ;
+
+(* --- Character Classes --- *)
+UpperLetter ::= "A"-"Z" | U+00C0-U+00D6 | U+00D8-U+00DE | U+0150 | U+0170 ;
+LowerLetter ::= "a"-"z" | U+00DF-U+00F6 | U+00F8-U+00FF | U+0151 | U+0171 ;
+AnyLetter   ::= UpperLetter | LowerLetter | digit ;
+PlainText   ::= ? any character not starting an InlineRule ? ;
+```
