@@ -3,7 +3,7 @@ title: test-bibtex.js
 type: application/javascript
 tags: [[$:/tags/test-spec]]
 
-Tests the BibTeX plugin's deserializer. Reproduce any case in the browser console of a wiki with the plugin:
+Tests the BibTeX plugin's deserializer, see https://github.com/TiddlyWiki/TiddlyWiki5/issues/10072. Reproduce any case in the browser console of a wiki with the plugin:
 $tw.wiki.deserializeTiddlers("application/x-bibtex","@book{a, title = {T}}")
 
 \*/
