@@ -14,7 +14,7 @@ Tests the reduce prefix and filter.
 
 describe("general filter prefix tests", function() {
 	it("should handle nonexistent prefixes gracefully", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		var results = wiki.filterTiddlers("[tag[A]] :nonexistent[tag[B]]");
 		expect(results).toEqual(["Filter Error: Unknown prefix for filter run"]);
 	});
@@ -215,7 +215,7 @@ describe("general filter prefix tests", function() {
 
 describe("'reduce' and 'intersection' filter prefix tests", function() {
 
-	var wiki = new $tw.Wiki();
+	var wiki = $tw.test.wiki();
 
 	wiki.addTiddler({
 		title: "Brownies",

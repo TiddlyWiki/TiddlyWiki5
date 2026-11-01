@@ -9,15 +9,14 @@ Serve tiddlers over http
 
 "use strict";
 
-let fs, url, path, querystring, crypto, zlib;
+let fs, path, crypto, zlib, URL;
 
 if($tw.node) {
 	fs = require("fs"),
-	url = require("url"),
 	path = require("path"),
-	querystring = require("querystring"),
 	crypto = require("crypto"),
 	zlib = require("zlib");
+	URL = require("url").URL;
 }
 
 /*
@@ -260,8 +259,8 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.wiki = options.wiki || self.wiki;
 	state.boot = options.boot || self.boot;
 	state.server = self;
-	state.urlInfo = url.parse(request.url);
-	state.queryParameters = querystring.parse(state.urlInfo.query);
+	state.urlInfo = new URL(request.url, "http://localhost");
+	state.queryParameters = Object.fromEntries(state.urlInfo.searchParams);
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
 	// Enable CORS
 	if(this.corsEnable) {

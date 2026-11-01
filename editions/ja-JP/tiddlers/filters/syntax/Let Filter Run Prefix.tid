@@ -1,0 +1,32 @@
+created: 20250307212252946
+from-version: 5.4.0
+modified: 20260502101033176
+original-modified: 20250307212252946
+rp-input: 前回のフィルタランからのすべてのタイトル
+rp-output: "let"フィルタランプレフィックスからはいつも空のタイトルリストが返されます
+rp-purpose: 前回のフィルタラン結果のタイトルリストを複数値変数へ代入
+tags: [[Named Filter Run Prefix]]
+title: Let Filter Run Prefix
+ja-title: letフィルタランプレフィックス
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+\end none
+( ":let" )
+[["ラン"|"Filter Run"]]
+"""/>
+
+`:let`フィルタランプレフィックスは、前回のフィルタランの結果として得られたタイトルリストを[[他数値変数|Multi-Valued Variables]]に割り当てます。この変数には、フィルタランによって返された最初の結果が名前として付けられます。
+
+この変数は、[[フィルタ式|Filter Expression]]内の残りの[[フィルタラン|Filter Run]]で使用可能になります。通常の方法で変数にアクセスすると、結果リストの最初の項目のみが返されます(結果リストが空の場合は空の文字列が返されます)。オペランドとして変数名を山括弧ではなく丸括弧で囲むと、結果リスト内のすべての項目が取得できます。
+
+このプレフィックスには、オプションの[[ショートカット構文|Shortcut Filter Run Prefix]]記号`=>run`があります。例:
+
+```
+=[<myfun1>] =[<myfun2>] =>myvar
+```
+
+`:let`フィルタランプレフィックスを指定すると、常に現在の結果リストがクリアされます。
+
+[[letフィルタランプレフィックス(例)|Let Filter Run Prefix (Examples)]]

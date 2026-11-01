@@ -15,6 +15,8 @@ Listing/Preview/TextRaw: Tekst (oryginalny)
 Listing/Preview/Fields: Pola
 Listing/Preview/Diff: Różnica
 Listing/Preview/DiffFields: Róznica (Pola)
+Listing/ImportOptions/Caption: Opcje importu
+Listing/ImportOptions/NoMatch: Żadna z opcji importu nie możę być zastosowana do tych plików.
 Listing/Rename/Tooltip: Zmień nazwę tiddlera przed importem
 Listing/Rename/Prompt: Zmień nazwę na:
 Listing/Rename/ConfirmRename: Zmień nazwę tiddlera

@@ -15,6 +15,8 @@ Listing/Preview/TextRaw: 文本 (原始)
 Listing/Preview/Fields: 字段
 Listing/Preview/Diff: 差异
 Listing/Preview/DiffFields: 差异 (字段)
+Listing/ImportOptions/Caption: 导入选项
+Listing/ImportOptions/NoMatch: 没有导入选项适用于这些文件。
 Listing/Rename/Prompt: 重新命名为：
 Listing/Rename/Tooltip: 导入前重新命名条目
 Listing/Rename/ConfirmRename: 重新命名条目

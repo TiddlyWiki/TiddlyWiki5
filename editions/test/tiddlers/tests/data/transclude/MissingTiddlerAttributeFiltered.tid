@@ -1,0 +1,20 @@
+title: Transclude/MissingTiddlerAttributeFiltered
+description: Missing Tiddler Attribute Filtered
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$transclude tiddler={{{ [[sometiddler]get[nosuchfield]] }}}/>
+-
+<$transclude tiddler="">fallback content</$transclude>
+-
+<$transclude tiddler={{{ [[sometiddler]get[nosuchfield]] }}}>fallback content</$transclude>
++
+title: ExpectedResult
+
+<p>
+-
+fallback content
+-
+fallback content</p>

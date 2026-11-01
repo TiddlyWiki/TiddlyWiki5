@@ -6,7 +6,6 @@ title: Filter Run Prefix
 ja-title: フィルタランプレフィックス
 type: text/vnd.tiddlywiki
 
-There are 2 types of filter run prefixes that are interchangeable; [[named prefixes|Named Filter Run Prefix]] and [[shortcut prefixes|Shortcut Filter Run Prefix]]. 
 交換可能なフィルタランプレフィックスには、[[名前付きプレフィックス|Named Filter Run Prefix]]と[[ショートカットプレフィックス|Shortcut Filter Run Prefix]]の2種類があります。
 
 <$railroad text="""

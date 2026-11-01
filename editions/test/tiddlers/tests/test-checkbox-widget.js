@@ -534,7 +534,7 @@ describe("Checkbox widget", function() {
 		it("checkbox widget test: " + data.testName, function() {
 			// Setup
     
-			var wiki = new $tw.Wiki();
+			var wiki = $tw.test.wiki();
 			wiki.addTiddlers(data.tiddlers);
 			var widgetNode = createWidgetNode(parseText(data.widgetText,wiki),wiki);
 			renderWidgetNode(widgetNode);

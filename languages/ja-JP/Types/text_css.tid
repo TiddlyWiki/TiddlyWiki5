@@ -1,4 +1,5 @@
 title: $:/language/Docs/Types/text/css
-description: CSS スタイルシート
+description: 静的スタイルシート
 name: text/css
-group: Image
+group: Developer
+group-sort: 2

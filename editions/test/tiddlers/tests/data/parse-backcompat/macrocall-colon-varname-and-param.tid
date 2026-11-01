@@ -1,0 +1,16 @@
+title: Parse/BackCompat/MacrocallColonVarNameAndParam
+description: A colon-named procedure or macro accepts named parameters with either separator (#10013)
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure object:method(p) COLONPROC(<<p>>)
+\define object:macro(p) COLONMACRO($p$)
+<<object:method p:"V">>
+<<object:method p="V">>
+<<object:macro p:"V">>
++
+title: ExpectedResult
+
+<p>COLONPROC(V)</p><p>COLONPROC(V)</p><p>COLONMACRO(V)</p>

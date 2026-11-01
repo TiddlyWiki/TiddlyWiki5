@@ -34,7 +34,7 @@ exports.parse = function() {
 	// Parse the filter terminated by a line break
 	var reMatch = /(.*)(?:$|\r?\n)/mg;
 	reMatch.lastIndex = this.parser.pos;
-	var filterStart = this.parser.source;
+	var filterStart = this.parser.pos;
 	var match = reMatch.exec(this.parser.source);
 	this.parser.pos = reMatch.lastIndex;
 	// Parse tree nodes to return

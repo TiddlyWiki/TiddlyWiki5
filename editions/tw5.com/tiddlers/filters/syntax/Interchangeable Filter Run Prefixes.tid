@@ -43,3 +43,5 @@ For the difference between `+` and `:intersection`, see [[Intersection Filter Ru
 !! For Developers
 
 To create a new filter run prefix, create a [[Javascript module|Modules]] with a [[module-type|ModuleType]] of `filterrunprefix`.
+
+Compiled filter expressions are cached for performance. The cache holds up to 2000 entries and is reset in its entirety when this limit is exceeded.

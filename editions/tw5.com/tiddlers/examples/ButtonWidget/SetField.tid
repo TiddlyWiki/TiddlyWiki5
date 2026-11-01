@@ -1,0 +1,37 @@
+title: ButtonWidget/Example/SetField
+description: Assign a field or index directly with setTitle, setField and setIndex
+modified: 20260724235815000
+tags: [[$:/tags/wiki-test-spec]]
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+The `set` attribute treats its value as a TextReference, which is ambiguous when a title contains `!!` or `##`. The `setTitle` group names the target directly instead.
+
+The attributes work together:
+
+* `setTitle` is the tiddler to change, with no TextReference parsing
+* `setField` is the field to write, defaulting to `text`
+* `setIndex` writes a data index instead of a field
+* `setTo` is the value to assign
+
+Click a button to set the `caption` field, then watch it update below.
++
+title: Output
+
+<$button setTitle="$:/state/demo"
+	setField="caption"
+	setTo="First"
+	class="tc-small-gap-right"
+>
+	Set caption to First
+</$button>
+<$button setTitle="$:/state/demo"
+	setField="caption"
+	setTo="Second"
+	class="tc-small-gap-right"
+>
+	Set caption to Second
+</$button>
+
+Caption is now: <$text text={{$:/state/demo!!caption}}/>

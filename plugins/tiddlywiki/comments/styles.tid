@@ -25,7 +25,7 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .tc-comment-button button svg {
-	color: <<colour download-background>>;
+	fill: <<colour download-background>>;
 	height: 2em;
 	width: 2em;
 }

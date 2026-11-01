@@ -1,0 +1,8 @@
+changenote: $:/changenotes/5.4.0/#9609
+created: 20260125202948362
+description: `event-detail*` variables have been removed in favour of the new `eventJSON` variable
+impact-type: compatibility-break
+modified: 20260428161250718
+tags: $:/tags/ImpactNote
+title: $:/changenotes/5.4.0/#9609/impacts/event detail variables in eventcatcher
+type: text/vnd.tiddlywiki

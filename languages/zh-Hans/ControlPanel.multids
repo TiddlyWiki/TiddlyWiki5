@@ -5,7 +5,8 @@ Advanced/Hint: 关于此 TiddlyWiki 的内部信息
 Appearance/Caption: 外观
 Appearance/Hint: 定制您的 TiddlyWiki 外观。
 Basics/AnimDuration/Prompt: 动画持续时间
-Basics/AutoFocus/Prompt: 编辑条目时的默认自动停留字段
+Basics/AutoFocus/Prompt: 编辑新条目时，默认停留的字段
+Basics/AutoFocusEdit/Prompt: 编辑现有条目时，默认停留的字段
 Basics/Caption: 基础
 Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，或者您可用 {{保留开启中的条目顺序||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: 首页
@@ -256,3 +257,4 @@ ViewTemplateTags/Hint: 默认的查看模板使用此规则级联，动态选择
 WikiInformation/Caption: 维基信息
 WikiInformation/Hint: 此页面总结了有关此 ~TiddlyWiki 配置的高阶信息。旨在让用户能够快速与他人共享其 ~TiddlyWiki 配置的相关信息，例如，在其中一个论坛中寻求帮助时。不包含隐私或个人信息，没有明确复制和粘贴在其他地方的情况
 WikiInformation/Drag/Caption: 拖动此链接可将此工具复制到另一个维基
+WikiInformation/Generate/Caption: 生成维基信息报告

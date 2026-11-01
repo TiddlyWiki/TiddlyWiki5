@@ -1,0 +1,82 @@
+created: 20260728220200000
+description: Narrow a grouped list with a search box
+import-compound: [[GroupedLists/Bibliography]]
+modified: 20260729185240642
+tags: $:/tags/wiki-test-spec GroupedLists
+title: GroupedLists/Example/WithSearch
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+`search:title` filters the values collected by `f.valuesAll`, so the grouped list narrows while you type without the tiddlers themselves being searched.
+
+Two definitions are added to the plain grouped list:
+
+* `groupLabel` is the human readable name shown beside the input
+* `f.valuesFound` applies the search to the collected values
+
+An empty box is a no operation, so the whole list comes back. The clear button appears only once there is something to clear, and puts the cursor back in the input.
+
+Type `ann` to match Dickinson and Finnemann, `wi` to match several at once, or `zzz` to fall through to the `emptyMessage` of the outer list.
++
+title: Output
+
+\whitespace trim
+
+<!-- Filter operator suffixes cannot be variables, so search:<groupField> and bibtex-author<value> are impossible.
+f.valuesFound searches the collected values as titles, f.tiddlersFor compares via get<groupField>. -->
+
+<!-- tm-focus-selector takes the first match in the document, so .tc-search input would hit the sidebar search. -->
+
+<!-- No trailing whitespace after the field name: it becomes part of the name and the list silently renders nothing -->
+\procedure groupField() bibtex-author
+
+\procedure groupLabel() Author
+
+\function f.valuesAll() [all[tiddlers]!is[system]has<groupField>each<groupField>get<groupField>sort[]]
+
+\function f.valuesFound() [f.valuesAll[]] :filter[search:title{$:/temp/GroupedLists/search}]
+
+\function f.tiddlersFor(value) [!is[system]has<groupField>] :filter[get<groupField>match<value>] +[sort[title]]
+
+<!-- The inline style below is only for this self-contained example. For production, define styles in a tiddler tagged $:/tags/Stylesheet instead. -->
+<style>.demo-group-filter { margin-bottom: 1em; }</style>
+
+<div class="tc-search demo-group-filter">
+	<label>
+		<<groupLabel>>:<$edit-text
+			tiddler="$:/temp/GroupedLists/search"
+			tag="input"
+			type="search"
+			default=""
+			placeholder={{{ [[Filter by ]addsuffix<groupLabel>] }}}
+			class="tc-tiny-gap"
+		/>
+	</label>
+
+	<%if [[$:/temp/GroupedLists/search]get[text]minlength[1]] %>
+		<$button
+			class="tc-btn-invisible"
+			tooltip="Clear the filter"
+			aria-label="Clear the filter"
+		>
+			<$action-deletetiddler $tiddler="$:/temp/GroupedLists/search"/>
+			<$action-sendmessage $message="tm-focus-selector" $param=".demo-group-filter input"/>
+			{{$:/core/images/close-button}}
+		</$button>
+	<%endif%>
+</div>
+<$list filter="[f.valuesFound[]]" variable="_value">
+	<$list-empty>
+		//No matches//
+	</$list-empty>
+	<div class="tc-menu-list-item">
+		<<_value>>
+
+		<$list filter="[f.tiddlersFor<_value>]">
+			<div class="tc-menu-list-subitem">
+				<$link><$text text={{{ [<currentTiddler>get[bibtex-title]] :else[<currentTiddler>] }}}/></$link>
+			</div>
+		</$list>
+	</div>
+</$list>

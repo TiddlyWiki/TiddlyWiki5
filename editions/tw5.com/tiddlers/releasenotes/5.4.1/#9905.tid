@@ -1,0 +1,13 @@
+title: $:/changenotes/5.4.1/#9905
+created: 20260709142414000
+modified: 20260709142414000
+description: Fix errors in eventcatcher while serializing event properties
+release: 5.4.1
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9905
+github-contributors: saqimtiaz
+type: text/vnd.tiddlywiki
+
+Fixes an issue in utils.copyObjectPropertiesSafe which did not correctly handle DOM objects from other windows resulting in an error.

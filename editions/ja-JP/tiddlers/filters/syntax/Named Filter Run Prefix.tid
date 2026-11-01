@@ -25,6 +25,7 @@ type: text/vnd.tiddlywiki
 [[<":or"> |"Or Filter Run Prefix"]] |
 [[<":reduce"> |"Reduce Filter Run Prefix"]] |
 [[<":sort">  /"v5.2.0"/ |"Sort Filter Run Prefix"]] |
+[[<":let">  /"v5.4.0"/ |"Let Filter Run Prefix"]] |
 [[<":then">  /"v5.3.0"/ |"Then Filter Run Prefix"]]) [[run|"Filter Run"]]
 """/>
 
@@ -34,5 +35,15 @@ type: text/vnd.tiddlywiki
 <<.tip "名前付きフィルタランプレフィックス`:reduce`を、サブフィルタを繰り返し適用してアイテムのリストを単一のアイテムに平坦化するために使用される[[reduceオペレータ|reduce Operator]]と比較します">> 
 
 <<.tip """フィルタランプレフィックス`:reduce`、`:sort`、`:map`、`:filter`内では、変数<<.var currentTiddler>>は処理中のTiddlerのタイトルに設定されます。<br>サブフィルタ外のcurrentTiddlerの値は、変数<<.var "..currentTiddler">>で使用できます <<.from-version "5.2.0">>""" >>
+
+!! サフィックス
+
+名前付きフィルタランプレフィックスは、`:`文字で区切られたサフィックスを受け入れることができ、各サフィックスにはオプションでカンマ区切りの値を含めることができます。一般的な構文は`:prefixname:suffix1:suffix2,...`です。現在、次のプレフィックスがサフィックスを受け入れます:
+
+|!プレフィックス |!サフィッス |!例 |
+|`:map` |`flat` — 項目ごとに最初の結果だけでなく、すべての結果を返す |`:map:flat[...]` |
+|`:sort` |型 (''string'', ''alphanumeric'', ''number'', ''integer'', ''version'', ''date'')とフラグ (''reverse'', ''casesensitive'', ''caseinsensitive'') |`:sort:number:reverse[...]` |
+
+その他の名前付きプレフィックス(`:all`, `:and`, `:cascade`, `:else`, `:except`, `:filter`, `:intersection`, `:let`, `:or`, `:reduce`, `:then`)は現在サフィックスを受け付けません。
 
 参照: [[交換可能なフィルターランプレフィックス|Interchangeable Filter Run Prefixes]]

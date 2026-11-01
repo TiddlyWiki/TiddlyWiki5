@@ -30,8 +30,10 @@ Remove style properties of an element
 	styleProperties: ordered array of string property names
 */
 exports.removeStyles = function(element, styleProperties) {
-	for(var i=0; i<styleProperties.length; i++) {
-		element.style.removeProperty($tw.utils.convertStyleNameToPropertyName(styleProperties[i]));
+	if(element) {
+		for(var i=0; i<styleProperties.length; i++) {
+			element.style.removeProperty($tw.utils.convertStyleNameToPropertyName(styleProperties[i]));
+		}
 	}
 };
 

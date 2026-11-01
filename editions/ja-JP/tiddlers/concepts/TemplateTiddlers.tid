@@ -1,0 +1,20 @@
+created: 20140107114355828
+modified: 20260406000640400
+original-modified: 20150220160920000
+tags: Concepts
+title: TemplateTiddlers
+ja-title: テンプレートTiddler
+type: text/vnd.tiddlywiki
+
+テンプレートTiddlerは、実際にはTiddlerの一種ではなく、Tiddlerが使用される役割の一つです。
+
+テンプレートは、[[Wikiテキスト|WikiText]]の断片を再利用する方法です。
+
+テンプレートを介したトランスクルージョンは、2つのTiddlerを組み合わせることで、[[トランスクルージョン|Transclusion]]の基本機能を拡張します:
+
+* 表示する[[Wikiテキスト|WikiText]]を含むテンプレートTiddler。[[現在のTiddler|Current Tiddler]]内のフィールドを参照するトランスクルージョンを含めることができます。
+* フィールドへの参照を解決する際に、現在のTiddlerとして扱われるターゲットTiddler
+
+テンプレートの最も優れた例は、TiddlyWikiのメインストーリーリバーです。ストーリーリバー内の各Tiddlerは、各フィールドのレンダリング方法を指定するViewTemplateを介してレンダリングされます。
+
+詳細については、[[テンプレートを使用したトランスクルージョン|Transclusion with Templates]]を参照してください。

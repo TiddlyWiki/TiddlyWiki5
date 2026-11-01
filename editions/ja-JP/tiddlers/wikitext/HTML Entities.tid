@@ -1,0 +1,68 @@
+created: 20130204165019000
+modified: 20260224110248200
+original-modified: 20240726074846436
+tags: WikiText
+title: HTML Entities
+ja-title: HTMLエンティティ
+type: text/vnd.tiddlywiki
+
+!! 要約
+
+通常のキーボードでは簡単に入力できない文字を入力するには、HTMLエンティティを使用します。HTMLエンティティは、アンパサンド(`&`)、識別文字列、および終了セミコロン(`;`)の形をとります(例： 文字&は`&amp;`）。
+
+!! マークアップ
+
+```
+Tiddlers&trade;の価値は、&pound;、&euro;や&dollar;では表すことができません。
+```
+
+''次のように表示されます:''
+
+Tiddlers&trade;の価値は、&pound;、&euro;や&dollar;では表すことができません。
+
+!! エンティティ参照
+
+HTMLエンティティの包括的なリストは以下でご覧いただけます...
+
+* [[Mozilla Developer Network -- Entities|https://developer.mozilla.org/en-US/docs/Glossary/Entity]]
+
+* [[HTML Spec official list -- Entities|https://html.spec.whatwg.org/multipage/named-characters.html#named-character-references]]
+
+
+!! 一般的で役に立つエンティティの例
+
+|>|>|>|>|>|>| ! HTMLエンティティ |
+| &amp;nbsp; | &nbsp; | ノーブレークスペース | &nbsp;&nbsp; |  |  |  |
+| &amp;~NoBreak; | &NoBreak; | ゼロ幅[[単語結合子|WordJoiner]] | &nbsp;&nbsp; | &amp;apos; | &apos; | シングルクォート, アポストロフィ |
+| &amp;ndash; | &ndash; | エンダッシュ |~| &amp;quot; | " | クォーテーションマーク |
+| &amp;mdash; | &mdash; | エムダッシュ |~| &amp;prime; | &prime; | プライム; 分; フィート |
+| &amp;hellip; | &hellip; |	水平三点リーダー |~| &amp;Prime; | &Prime; | ダブルプライム; 秒; インチ |
+| &amp;copy; | &copy; | 著作権マーク |~| &amp;lsquo; | &lsquo; | 左シングルクォート |
+| &amp;reg; | &reg; | 登録商標マーク |~| &amp;rsquo; | &rsquo; | 右シングルクォート |
+| &amp;trade; | &trade; | 商標マーク |~| &amp;ldquo; | &ldquo; | 左ダブルクォート |
+| &amp;dagger; | &dagger; | ダガー |~| &amp;rdquo; | &rdquo; | 右ダブルクォート |
+| &amp;Dagger; | &Dagger; | ダブルダガー |~| &amp;laquo; | &laquo; | 左アングルクォート |
+| &amp;para; | &para; | 段落記号 |~| &amp;raquo; | &raquo; | 右アングルクォート |
+| &amp;sect; | &sect; | セクション記号 |~| &amp;times; | &times; | 掛け算記号 |
+| &amp;uarr; | &uarr; | 上矢印 |~| &amp;darr; | &darr; | 下矢印 |
+| &amp;larr; | &larr; | 左矢印 |~| &amp;rarr; | &rarr; | 右矢印 |
+| &amp;lArr; | &lArr; | 二重左矢印 |~| &amp;rArr; | &rArr; | 二重右矢印 |
+| &amp;harr; | &harr; | 左右矢印 |~| &amp;hArr; | &hArr; | 二重左右矢印 |
+
+!! アクセント付き文字
+
+下の表は、2番目の表のアンダースコア(_)を対応する文字に//置き換える//ことで、アクセント付き文字をどのように作成できるかを示しています。例: 
+
+|コード |文字 |例 |結果 |h
+|`&Auml;` |Ä | `&Auml;pfel` |&Auml;pfel |
+
+
+|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>| ! アクセント付き文字 |
+| グレイヴアクセント | &amp;_grave; | &Agrave; | &agrave; | &Egrave; | &egrave; | &Igrave; | &igrave; | &Ograve; | &ograve; | &Ugrave; | &ugrave; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| アキュートアクセント | &amp;_acute; | &Aacute; | &aacute; | &Eacute; | &eacute; | &Iacute; | &iacute; | &Oacute; | &oacute; | &Uacute; | &uacute; | &nbsp; | &nbsp; | &Yacute; | &yacute; | &nbsp; | &nbsp; |
+| サーカムフレックスアクセント | &amp;_circ; | &Acirc; | &acirc; | &Ecirc; | &ecirc; | &Icirc; | &icirc; | &Ocirc; | &ocirc; | &Ucirc; | &ucirc; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| ウムラウト記号 | &amp;_uml; | &Auml; | &auml; |  &Euml; | &euml; | &Iuml; | &iuml; | &Ouml; | &ouml; | &Uuml; | &uuml; | &nbsp; | &nbsp; | &Yuml; | &yuml; | &nbsp; | &nbsp; |
+| チルダ | &amp;_tilde; | &Atilde; | &atilde; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &Otilde; | &otilde; | &nbsp; | &nbsp; | &Ntilde; | &ntilde; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| リング | &amp;_ring; | &Aring; | &aring; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| スラッシュ | &amp;_slash; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &Oslash; | &oslash; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| セディラ | &amp;_cedil; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &Ccedil; | &ccedil; |

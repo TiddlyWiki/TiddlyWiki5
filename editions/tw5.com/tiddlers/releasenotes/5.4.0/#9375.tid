@@ -4,7 +4,7 @@ release: 5.4.0
 tags: $:/tags/ChangeNote
 change-type: enhancement
 change-category: translation
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9375 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9576
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9375 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9576 https://github.com/TiddlyWiki/TiddlyWiki5/pull/9804
 github-contributors: BramChen
 
 * change camel-case hint text for chinese translations

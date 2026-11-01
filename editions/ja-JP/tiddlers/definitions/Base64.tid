@@ -1,0 +1,9 @@
+created: 20150221180826000
+modified: 20260406063958939
+original-modified: 20150221181700000
+tags: Definitions
+title: Base64
+ja-title: Base64
+type: text/vnd.tiddlywiki
+
+<<.dlink-ex Base64 "https://en.wikipedia.org/wiki/Base64">>は、画像などのバイナリデータをテキスト文字列として表現する方法です

@@ -92,7 +92,7 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 ! Hackability Improvements
 
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8678">> [[keyboard-driven-input Macro]] to use modern syntax
-* <<.link-badge-adds "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8699">> a shortcut syntax for setting CSS variables on [[an HTML element|HTML in WikiText]]
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8699">> a shortcut syntax for setting CSS variables on [[an HTML element|HTML in WikiText]]
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8698">> support for a control panel setting to configure the maximum number of tiddlers shown in the "recent" tab
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8291">> [[Table-of-Contents Macros]] to default to showing the table of contents for the current tiddler whenever no parameter is specified
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8431">> support for the HTML entity `&NoBreak;` which can be useful for joining HTML elements without an unwanted linebreak

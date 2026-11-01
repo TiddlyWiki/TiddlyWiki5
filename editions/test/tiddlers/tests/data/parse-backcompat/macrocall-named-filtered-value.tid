@@ -1,0 +1,13 @@
+title: Parse/BackCompat/MacrocallFilteredValue
+description: Macrocall attribute value can be a filtered value {{{...}}}
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define x(d) got=$d$
+<<x d={{{[[hi]]}}}>>
++
+title: ExpectedResult
+
+<p>got=hi</p>

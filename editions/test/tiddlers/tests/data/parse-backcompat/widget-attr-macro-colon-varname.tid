@@ -1,0 +1,13 @@
+title: Parse/BackCompat/WidgetAttrMacroColonVarName
+description: Widget attribute macro value may name a variable containing a colon (#10013)
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure object:method() VAL
+<$text text=<<object:method>>/>
++
+title: ExpectedResult
+
+<p>VAL</p>

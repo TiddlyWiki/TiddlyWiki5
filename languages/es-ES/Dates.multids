@@ -60,6 +60,9 @@ Date/Short/Day/4: Ju
 Date/Short/Day/5: Vi
 Date/Short/Day/6: Sá
 Date/Short/Month/1: Ene
+Date/Short/Month/10: Oct
+Date/Short/Month/11: Nov
+Date/Short/Month/12: Dic
 Date/Short/Month/2: Feb
 Date/Short/Month/3: Mar
 Date/Short/Month/4: Abr
@@ -68,9 +71,6 @@ Date/Short/Month/6: Jun
 Date/Short/Month/7: Jul
 Date/Short/Month/8: Ago
 Date/Short/Month/9: Sep
-Date/Short/Month/10: Oct
-Date/Short/Month/11: Nov
-Date/Short/Month/12: Dic
 RelativeDate/Future/Days: dentro de <<period>> días
 RelativeDate/Future/Hours: en <<period>> horas
 RelativeDate/Future/Minutes: en <<period>> minutos

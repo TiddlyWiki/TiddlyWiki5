@@ -18,17 +18,17 @@ In programming terms, it is akin to a function call to which the step's input is
 { [[parameter|"Filter Parameter"]] + "," }
 """/>
 
-The step's <<.def operator>> is drawn from a list of predefined keywoards which are known as [[filter operators|Filter Operators]].
+The step's <<.def operator>> is drawn from a list of predefined keywords which are known as [[filter operators|Filter Operators]].
 
 Many steps require an explicit <<.def parameter>>, that further defines what the step is to do. 
 
-The <<.def suffix>> is additional text, often the name of a [[field|TiddlerFields]], that extends the meaning of certain operators.
+The <<.def suffix>> is additional text, often the name of a [[field|TiddlerFields]], that extends the meaning of certain operators. Suffixes are separated by `:` characters, and each suffix group can contain multiple comma-separated values. For example, in `compare:number:gteq`, the first suffix is `number` and the second is `gteq`. In `:sort:string:reverse,casesensitive`, the first suffix is `string` and the second suffix group contains both `reverse` and `casesensitive`.
 
-If a step's <<.def operator>> and <<.def suffix>> are //omitted// altogether, it defaults to the [[title|title Operator]] operator.
+If a step's <<.def operator>> and <<.def suffix>> are //omitted// altogether, it defaults to the [[title|title Operator]] operator. If a suffix is present but the operator name before the colon is empty (e.g. `[:fieldname[value]]`), the operator defaults to <<.olink field>>.
 
 <<.from-version "5.1.23">> Some steps accept multiple <<.def parameter>>s which are separated by a `,` character.
 
-Any unrecognised operator is treated as if it was the suffix to the <<.olink field>> operator. 
+Any unrecognised operator is treated as if it was the suffix to the <<.olink field>> operator. <<.from-version "5.3.0">> However, unrecognised operators whose name contains a `.` (dot) character are treated as user-defined filter operators, resolved by looking up a variable or function with that name.
 
 Filter operators can be extended by plugins.
 

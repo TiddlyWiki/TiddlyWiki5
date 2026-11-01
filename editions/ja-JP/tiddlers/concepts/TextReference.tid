@@ -1,0 +1,36 @@
+created: 20130827075900000
+modified: 20260406013639263
+original-modified: 20230321130421587
+tags: Concepts
+title: TextReference
+ja-title: テキスト参照
+type: text/vnd.tiddlywiki
+
+[[テキスト参照|TextReference]]は、テキストの断片をTiddlerのフィールドや[[データTiddler|DataTiddlers]]内のインデックスとして記述するための汎用的な方法です。
+
+状況に応じて、テキスト参照を使用して値を取得したり、変更すべき値を指定したりすることができます。
+
+[[テキスト参照|TextReference]]はいくつかのパーツから構成されます: 
+
+* 対象Tiddlerのタイトル。省略した場合、デフォルトで[[現在のTiddler|Current Tiddler]]が使用されます
+* 以下のいずれか：
+** フィールド名(`!!`でマークされます)
+** [[データTiddler|DataTiddlers]]内のインデックス名(`##`でマークされます)
+* フィールドとインデックスの両方が省略された場合、textフィールドがデフォルトとして使用されます
+
+テキスト参照のほとんどのパーツは省略可能です:
+
+* `tiddlerTitle` - 指定したTiddlerのtitle[[フィールド|TiddlerFields]]
+* `tiddlerTitle!!field` - [[Tiddlerのフィールド|TiddlerFields]] (例: `modified`、`modifier`、`type` など)
+* `!!field` - 現在のTiddlerの[[フィールド|TiddlerFields]]
+* `tiddlerTitle##propertyIndex` - DataTiddlersから名前付きプロパティを抽出
+
+テキスト参照は、以下の場所で使用できます: 
+
+* [[フィルタ|Filters]]内の[[間接パラメータ|Filter Parameter]]として (例: `<$list filter="[tag{MyTag!!name}]"/>`)
+* 要素やウィジェットの[[間接属性|HTML in WikiText]]として (例: `<$widget attrib={{Title!!description}}/>`)
+* トランスクルージョンショートカットのパラメータとして (例: `{{MyTiddler!!title}}`)
+* [[Revealウィジェット|RevealWidget]]と[[LinkCatcherウィジェット|LinkCatcherWidget]]の`state`属性として
+
+<$macrocall $name=".tip" _="""`foo!!bar`のようなテキスト参照と`{{foo!!bar}}`のようなテキスト参照のトランスクルージョンの違いに注意してください"""/>
+

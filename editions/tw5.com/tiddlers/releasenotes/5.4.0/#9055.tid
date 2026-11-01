@@ -16,6 +16,8 @@ This PR extends the handling of macro/procedure/function invocationsmade via the
 <div class=<<mymacro param={{{ [<innermacro p={{Something}}>addprefix[https:] }}}>>>
 ```
 
+Note that the new syntax obviates the need for `<$transclude $variable=...>` constructions in many cases.
+
 The extended syntax allows parameter values to be passed as transclusions, filter expressions or nested invocations in three settings:
 
 * As a standalone construction

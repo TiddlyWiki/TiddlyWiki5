@@ -1,0 +1,32 @@
+created: 20230615045409162
+modified: 20260225112930690
+original-modified: 20230615045432768
+tags: [[Widget Attributes]] WikiText
+title: Literal Attribute Values
+ja-title: リテラル属性値
+type: text/vnd.tiddlywiki
+
+リテラル属性値では、いくつかの異なる引用スタイルを使用できます:
+
+* シングルクォート (例 `attr='value'`)
+* ダブルクォート (例 `attr="value"`)
+* 三重ダブルクォート (例 `attr="""value"""`)
+* スペースを含まない値には引用符は必要ありません (例 `attr=value`)
+
+リテラル属性値には改行を含めることができます。例: 
+
+```
+<div data-address="マウスハウス、
+マウスレーン、
+ローデントビル、
+ラットランド。"/>
+```
+
+三重ダブルクォートを使用することで、単一ダブルクォートを含む属性値を指定できます。例: 
+
+```
+<div data-address="""マウスハウス、
+"マウス"レーン、
+ローデントビル、
+ラットランド。"""/>
+```

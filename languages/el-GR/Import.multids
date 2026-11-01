@@ -6,9 +6,11 @@ Listing/Cancel/Caption: Άκυρο
 Listing/Cancel/Warning: Θέλεις να ακυρώσεις την εισαγωγή;
 Listing/Hint: Αυτά τα tiddlers είναι έτοιμα για εισαγωγή:
 Listing/Import/Caption: Εισαγωγή
+Listing/ImportOptions/Caption: Επιλογές εισαγωγής
+Listing/ImportOptions/NoMatch: Δεν ισχύουν επιλογές εισαγωγής για αυτά τα αρχεία.
 Listing/Preview: Προεπισκόπιση:
 Listing/Preview/Diff: Διαφορά
-Listing/Preview/DiffFields: Διαφορά (Πεδία)
+Listing/Preview/DiffFields: Διαφορά (πεδίων)
 Listing/Preview/Fields: Πεδία
 Listing/Preview/Text: Κείμενο
 Listing/Preview/TextRaw: Κείμενο (ακατέργαστο)

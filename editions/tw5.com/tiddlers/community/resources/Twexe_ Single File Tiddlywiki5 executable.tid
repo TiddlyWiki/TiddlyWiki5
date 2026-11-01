@@ -22,7 +22,7 @@ url: https://ihm4u.github.io/twexe/
 * Works on Linux and Windows
 * Single file executable, can be moved, copied, etc.
 * Wiki is compressed, occupying less space on your disk (sometimes even a third of the space!)
-* Converts //any// Tiddlywiki5 file to a single file executable  <<twexe>>, no need for special tiddlywiki plugins
+* Converts //any// Tiddlywiki5 file to a single file executable  `twexe`, no need for special tiddlywiki plugins
 * Automatically uses the saving tab in the control panel (there you can specify a backup directory if you don't like the default)
 * Easily get back the html wiki file from the executable twexe (if you  need it for some reason)
 * Opens up the possibility to run external executables from your wiki (to draw charts, etc.) - stay tuned!!

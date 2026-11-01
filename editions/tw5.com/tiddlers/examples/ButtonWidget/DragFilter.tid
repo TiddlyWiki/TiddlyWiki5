@@ -1,0 +1,54 @@
+title: ButtonWidget/Example/DragFilter
+description: Drag a list of tiddlers with dragFilter and receive it with listActions
+modified: 20260725001110000
+tags: [[$:/tags/wiki-test-spec]]
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+`dragFilter` makes the button draggable and carries every tiddler the filter returns, where `dragTiddler` carries a single title.
+
+The drop target chooses how it receives that payload:
+
+* `actions` runs once per dragged tiddler, with the title in `<<actionTiddler>>`
+* `listActions` runs once for the whole payload, with all titles in `<<actionTiddlerList>>`
+
+This test case carries four payload tiddlers tagged `Concepts`. The button drags all four, so the drop area shows the whole list at once. Drag and drop needs a desktop browser.
++
+title: Cascades
+tags: Concepts
+
+A cascade is a filter list that is evaluated in turn until one returns a result.
++
+title: ColourPalettes
+tags: Concepts
+
+A colour palette is a tiddler holding the named colours used by the user interface.
++
+title: Commands
+tags: Concepts
+
+Commands are the operations run by the Node.js server from the command line.
++
+title: Filters
+tags: Concepts
+
+A filter is an expression that selects a list of tiddler titles from the wiki.
++
+title: Output
+
+\procedure recordDropList()
+<$action-setfield $tiddler="$:/state/dropped-list" text=<<actionTiddlerList>>/>
+\end
+
+<$button dragFilter="[tag[Concepts]]" class="tc-btn-invisible tc-tiddlylink">
+Drag four tiddlers
+</$button>
+
+<$droppable listActions=<<recordDropList>>>
+<div style="border: 1px dashed #999; padding: 0.5em; margin-top: 0.5em;">
+Drop the button here
+</div>
+</$droppable>
+
+Dropped titles: <$text text={{$:/state/dropped-list}}/>

@@ -82,7 +82,7 @@ describe("Utility tests", function() {
 	});
 
 	it("stringifyList shouldn't interfere with setting variables to negative numbers", function() {
-		var wiki = new $tw.Wiki();
+		var wiki = $tw.test.wiki();
 		wiki.addTiddler({title: "test", text: "<$set name=X filter='\"-7\"'>{{{ [<X>add[2]] }}}</$set>"});
 		// X shouldn't be wrapped in brackets. If it is, math filters will treat it as zero.
 		expect(wiki.renderTiddler("text/plain","test")).toBe("-5");

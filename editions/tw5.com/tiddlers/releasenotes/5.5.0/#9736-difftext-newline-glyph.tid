@@ -1,0 +1,12 @@
+change-category: widget
+change-type: enhancement
+created: 20260711020921000
+description: The diff-text widget shows removed or added newlines with a visible ↲ glyph
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9736
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9736
+type: text/vnd.tiddlywiki
+
+* The diff-text widget marks newline characters in a diff with the visible `↲` glyph (U+21B2) instead of an invisible character, so line break changes are recognisable in the rendered diff (fixes [[Issue #9461|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9461]])

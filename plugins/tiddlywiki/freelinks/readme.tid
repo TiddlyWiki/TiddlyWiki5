@@ -23,6 +23,10 @@ Use `$:/config/Freelinks/TargetFilter` to define which tiddlers are eligible for
 
 Within view templates, the variable `tv-freelinks` is automatically set to the content of `$:/config/Freelinks/Enable`, which can be set via the settings panel of this plugin.
 
+Use `$:/config/Freelinks/MaxLinks` to set the maximum number of links rendered per text node (default: 500). 
+
+Since TiddlyWiki splits tiddler content into multiple text nodes, the effective limit per tiddler is higher than this value. Text beyond the limit remains as plain text rather than being silently dropped. This cap protects against DOM overload when a large number of tiddler titles match the text, for example in dictionary-scale wikis. Raising this value significantly increases render time.
+
 !! Notes
 
 To change within which tiddlers freelinking occurs requires customising the shadow tiddler [[$:/plugins/tiddlywiki/freelinks/macros/view]]. This tiddler is tagged `$:/tags/Macro/View` which means that it will be included as a local macro in each view template. By default, its content is:
@@ -57,7 +61,9 @@ The Aho-Corasick algorithm implementation includes:
 
 * Unicode character support for international text
 * Prevention of self-referential links within the current tiddler
-* Performance safeguards including depth protection and result limiting
+* Uses a `WeakMap` for failure links, required for correct object-keyed traversal
+* Merges pattern outputs at build time for efficient single-pass search
+* Converts case per character during search to avoid Unicode index desync (e.g. Turkish İ, German ß)
+* Runs search to completion without truncation; the `MaxLinks` cap is applied at render time so that the longest-match selection always has full information and text beyond the cap is preserved as plain text rather than silently dropped
 * Graceful fallback handling for invalid patterns
-
-Longer tiddler titles take precedence over shorter ones when multiple matches are possible.
+* Skips draft tiddlers and system tiddlers (`$:/`) during cache invalidation to avoid unnecessary rebuilds on UI interactions

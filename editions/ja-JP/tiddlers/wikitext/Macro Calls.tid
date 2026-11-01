@@ -1,0 +1,9 @@
+caption: マクロ呼び出し
+created: 20150220182252000
+modified: 20260321104805874
+original-modified: 20230419103154328
+title: Macro Calls
+ja-title: マクロ呼び出し
+type: text/vnd.tiddlywiki
+
+<<.deprecated-since "5.4.0" "Calls">>

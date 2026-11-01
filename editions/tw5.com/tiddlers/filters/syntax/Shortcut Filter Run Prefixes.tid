@@ -21,10 +21,10 @@ If a run has:
 
 * the prefix `-`, output titles are <<.em removed>> from the filter's output (if such tiddlers exist)
 
-* the prefix `~`, if the filter output so far is an empty list then the output titles of the run are [[dominantly appended|Dominant Append]] to the filter's output. If the filter output so far is not an empty list then the run is ignored. <<.from-version "5.1.18">>
+* the prefix `~`, <<.from-version "5.1.18">> if the filter output so far is an empty list then the output titles of the run are [[dominantly appended|Dominant Append]] to the filter's output. If the filter output so far is not an empty list then the run is ignored.
 
-* the prefix `=`, output titles are appended to the filter's output without de-duplication. <<.from-version "5.1.20">>
+* the prefix `=`, <<.from-version "5.1.20">> output titles are appended to the filter's output without de-duplication.
 
-* the prefix `=>`, the input is assigned to the variable named with the output title. <<.from-version "5.4.0">>
+* the prefix `=>`, <<.from-version "5.4.0">> the accumulated results from all previous runs are assigned as a [[multi-valued variable|Multi-Valued Variables]] whose name is the first result of this run. The accumulated results are then cleared.
 
 {{Interchangeable Filter Run Prefixes}}
