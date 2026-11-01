@@ -1,0 +1,25 @@
+created: 20261101120000000
+description: Collapsed and genesis SCRIPT sanitation
+modified: 20261101120000000
+tags: $:/tags/wiki-test-spec
+title: safe-script-collapse
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Handled by: $:/core/modules/widgets/element.js
+
+A tag name whose invalid characters would otherwise collapse onto `script`, and the same via the genesis widget's `$type`, must not reach the DOM as an executable element. `scr.ipt` keeps its dot (a valid custom-element character) and stays inert; `scr$ipt` and `scr_ipt` lose the invalid character and are neutered to `safe-script`.
+
++
+title: Output
+
+<scr$ipt type="text/javascript">alert("Hello")</scr$ipt>
+<scr.ipt type="text/javascript">alert("Hello")</scr.ipt>
+<$genesis $type="scr_ipt">alert("Hello")</$genesis>
++
+title: ExpectedResult
+
+<p><safe-script type="text/javascript">alert("Hello")</safe-script>
+<scr.ipt type="text/javascript">alert("Hello")</scr.ipt>
+<safe-script>alert("Hello")</safe-script></p>
