@@ -2,7 +2,7 @@ title: $:/changenotes/5.5.0/#10064
 tags: $:/tags/ChangeNote
 change-type: bugfix
 change-category: nodejs
-description: Restored browser caching for streamed static files
+description: Fixed browser cache validation for streamed static files
 release: 5.5.0
 github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/10064
 github-contributors: linonetwo
