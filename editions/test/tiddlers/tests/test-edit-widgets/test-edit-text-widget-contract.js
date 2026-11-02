@@ -85,6 +85,20 @@ describe("Edit-text widget engine contract", function() {
 		expect(rendered.wiki.getTiddlerText("T")).toBe("initial|legacy");
 	});
 
+	it("keeps legacy engines working without either optional hook", function() {
+		var rendered = renderEditor(),
+			engine = rendered.widget.engine;
+		engine.destroy = undefined;
+
+		rendered.widget.handleEditTextOperationMessage({param: "legacy"});
+
+		expect(engine.createCalls).toBe(1);
+		expect(engine.executeCalls).toBe(1);
+		expect(rendered.wiki.getTiddlerText("T")).toBe("initial|legacy");
+		expect(function() { rendered.widget.destroy(); }).not.toThrow();
+		expect(rendered.widget.engine).toBeNull();
+	});
+
 	it("saves operations handled by a structured editor without text fallback", function() {
 		var rendered = renderEditor(),
 			engine = rendered.widget.engine;
@@ -135,5 +149,15 @@ describe("Edit-text widget engine contract", function() {
 
 		expect(previousEngine.destroyCalls).toBe(1);
 		expect(rendered.widget.engine).not.toBe(previousEngine);
+	});
+
+	it("releases an engine only once when the widget is destroyed repeatedly", function() {
+		var rendered = renderEditor(),
+			engine = rendered.widget.engine;
+
+		rendered.widget.destroy();
+		rendered.widget.destroy();
+
+		expect(engine.destroyCalls).toBe(1);
 	});
 });

@@ -7,8 +7,45 @@ const { pathToFileURL } = require("url");
 test.beforeEach(async ({ page }) => {
 	await page.route("http://**/*", (route) => route.abort());
 	await page.route("https://**/*", (route) => route.abort());
-	await page.goto(pathToFileURL(resolve(__dirname,"../../../../editions/test/output/test.html")).href);
+	const url = pathToFileURL(resolve(__dirname,"../../../../editions/test/output/test.html"));
+	url.searchParams.set("spec","Editor command menu registry");
+	await page.goto(url.href,{waitUntil: "domcontentloaded"});
 	await expect(page.locator(".tc-site-title")).toBeVisible();
+	await expect(page.locator(".jasmine-overall-result.jasmine-passed")).toBeVisible({timeout: 60000});
+});
+
+test("a standalone adapter can filter, execute and close its own command menu", async ({page}, testInfo) => {
+	await page.evaluate(() => {
+		const {CommandMenuView} = $tw.modules.execute("$:/plugins/tiddlywiki/editor-command-menu/menu-view.js");
+		window.__executedMenuCommands = [];
+		const menu = new CommandMenuView({
+			document: document,
+			searchable: true,
+			onExecute: (command) => { window.__executedMenuCommands.push(command.id); menu.hide(); },
+			onRequestClose: () => menu.hide()
+		});
+		menu.setCommands([
+			{id: "heading", label: "Heading 2", category: "block", searchText: "heading 2"},
+			{id: "table", label: "Insert table", category: "insert", searchText: "insert table"}
+		]);
+		menu.show({left: 40, right: 60, top: 40, bottom: 60});
+		window.__standaloneMenu = menu;
+	});
+	const menu = page.locator(".tc-editor-command-menu:visible");
+	const search = menu.getByRole("combobox");
+	await expect(search).toBeFocused();
+	await search.pressSequentially("table");
+	await expect(menu.getByRole("option")).toHaveCount(1);
+	await expect(menu.locator(".tc-editor-command-menu-item-label")).toHaveText("Insert table");
+	await menu.screenshot({path: testInfo.outputPath("standalone-command-menu.png")});
+	await search.press("Enter");
+	await expect(menu).toHaveCount(0);
+	expect(await page.evaluate(() => window.__executedMenuCommands)).toEqual(["table"]);
+	await page.evaluate(() => window.__standaloneMenu.show({left: 40, right: 60, top: 40, bottom: 60}));
+	await menu.getByRole("combobox").press("Escape");
+	await expect(menu).toHaveCount(0);
+	await page.evaluate(() => window.__standaloneMenu.destroy());
+	await expect(page.locator(".tc-editor-command-menu")).toHaveCount(0);
 });
 
 test("command menu follows an anchor inside a scrolling container", async ({ page }) => {

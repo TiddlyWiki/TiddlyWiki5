@@ -12,9 +12,32 @@ Tests for the editor-independent command descriptor registry.
 describe("Editor command menu registry", function() {
 	const registry = require("$:/plugins/tiddlywiki/editor-command-menu/registry.js");
 	const temporaryTitle = "$:/temp/tests/editor-command";
+	let wiki;
+
+	beforeEach(function() {
+		wiki = new $tw.Wiki();
+		[
+			["mark","Bold","toggle-mark","format","slash-menu"],
+			["table","Table","insert-table","insert","slash-menu"],
+			["delete","Delete","delete-block","block","block-menu"],
+			["duplicate","Duplicate","duplicate-block","block","block-menu"],
+			["heading","Heading 2","toggle-heading","block-type","slash-menu block-menu"]
+		].forEach(function(command) {
+			wiki.addTiddler({
+				title: temporaryTitle + "/fixture/" + command[0],
+				tags: [registry.COMMAND_TAG],
+				caption: command[1],
+				"command-id": command[2],
+				"command-category": command[3],
+				"command-surfaces": command[4],
+				"command-editors": "test-editor",
+				"command-level": "2"
+			});
+		});
+	});
 
 	afterEach(function() {
-		$tw.wiki.deleteTiddler(temporaryTitle);
+		wiki.deleteTiddler(temporaryTitle);
 	});
 
 	it("keeps the generic plugin independent of ProseMirror", function() {
@@ -31,7 +54,7 @@ describe("Editor command menu registry", function() {
 	});
 
 	it("reads semantic parameters without exposing registry fields as parameters", function() {
-		$tw.wiki.addTiddler(new $tw.Tiddler({
+		wiki.addTiddler(new $tw.Tiddler({
 			title: temporaryTitle,
 			tags: [registry.COMMAND_TAG],
 			caption: "Heading",
@@ -41,7 +64,7 @@ describe("Editor command menu registry", function() {
 			"command-surfaces": "slash-menu block-menu",
 			"command-editors": "prosemirror"
 		}));
-		const command = registry.readCommandDescriptor($tw.wiki, temporaryTitle);
+		const command = registry.readCommandDescriptor(wiki, temporaryTitle);
 		expect(command.commandId).toBe("toggle-heading");
 		expect(command.parameters.level).toBe("2");
 		expect(command.parameters.category).toBeUndefined();
@@ -50,13 +73,13 @@ describe("Editor command menu registry", function() {
 
 	it("keeps slash-menu and block-menu command sets distinct", function() {
 		const canExecute = function() { return true; };
-		const slash = registry.getCommands($tw.wiki, {
-			editorType: "prosemirror",
+		const slash = registry.getCommands(wiki, {
+			editorType: "test-editor",
 			contentType: "text/vnd.tiddlywiki",
 			surface: "slash-menu"
 		}, { canExecute: canExecute });
-		const block = registry.getCommands($tw.wiki, {
-			editorType: "prosemirror",
+		const block = registry.getCommands(wiki, {
+			editorType: "test-editor",
 			contentType: "text/vnd.tiddlywiki",
 			surface: "block-menu"
 		}, { canExecute: canExecute });
@@ -72,15 +95,15 @@ describe("Editor command menu registry", function() {
 	});
 
 	it("filters descriptors by editor and executor capability", function() {
-		const wrongEditor = registry.getCommands($tw.wiki, {
+		const wrongEditor = registry.getCommands(wiki, {
 			editorType: "codemirror",
 			contentType: "text/vnd.tiddlywiki",
 			surface: "slash-menu"
 		}, { canExecute: function() { return true; } });
 		expect(wrongEditor.length).toBe(0);
 
-		const filtered = registry.getCommands($tw.wiki, {
-			editorType: "prosemirror",
+		const filtered = registry.getCommands(wiki, {
+			editorType: "test-editor",
 			contentType: "text/vnd.tiddlywiki",
 			surface: "slash-menu"
 		}, {
@@ -93,8 +116,8 @@ describe("Editor command menu registry", function() {
 	});
 
 	it("groups categories contiguously and treats search text literally", function() {
-		const commands = registry.getCommands($tw.wiki, {
-			editorType: "prosemirror",
+		const commands = registry.getCommands(wiki, {
+			editorType: "test-editor",
 			contentType: "text/vnd.tiddlywiki",
 			surface: "slash-menu"
 		}, { canExecute: function() { return true; } });
@@ -119,9 +142,9 @@ describe("Editor command menu registry", function() {
 		const firstTitle = temporaryTitle + "/zeta";
 		const secondTitle = temporaryTitle + "/alpha";
 		const tagTitle = registry.COMMAND_TAG;
-		const originalTag = $tw.wiki.getTiddler(tagTitle);
+		const originalTag = wiki.getTiddler(tagTitle);
 		try {
-			$tw.wiki.addTiddler(new $tw.Tiddler({
+			wiki.addTiddler(new $tw.Tiddler({
 				title: firstTitle,
 				tags: [tagTitle],
 				caption: "Zulu",
@@ -129,7 +152,7 @@ describe("Editor command menu registry", function() {
 				"command-category": "test",
 				"command-surfaces": "test-surface"
 			}));
-			$tw.wiki.addTiddler(new $tw.Tiddler({
+			wiki.addTiddler(new $tw.Tiddler({
 				title: secondTitle,
 				tags: [tagTitle],
 				caption: "Alpha",
@@ -137,26 +160,26 @@ describe("Editor command menu registry", function() {
 				"command-category": "test",
 				"command-surfaces": "test-surface"
 			}));
-			let commands = registry.getCommands($tw.wiki, {
+			let commands = registry.getCommands(wiki, {
 				surface: "test-surface"
 			}, { canExecute: function() { return true; } });
 			expect(commands.map(function(command) { return command.label; })).toEqual(["Alpha", "Zulu"]);
 
-			$tw.wiki.addTiddler(new $tw.Tiddler(originalTag, {
+			wiki.addTiddler(new $tw.Tiddler(originalTag, {
 				title: tagTitle,
 				list: [firstTitle, secondTitle]
 			}));
-			commands = registry.getCommands($tw.wiki, {
+			commands = registry.getCommands(wiki, {
 				surface: "test-surface"
 			}, { canExecute: function() { return true; } });
 			expect(commands.map(function(command) { return command.label; })).toEqual(["Zulu", "Alpha"]);
 		} finally{
-			$tw.wiki.deleteTiddler(firstTitle);
-			$tw.wiki.deleteTiddler(secondTitle);
+			wiki.deleteTiddler(firstTitle);
+			wiki.deleteTiddler(secondTitle);
 			if(originalTag) {
-				$tw.wiki.addTiddler(originalTag);
+				wiki.addTiddler(originalTag);
 			} else {
-				$tw.wiki.deleteTiddler(tagTitle);
+				wiki.deleteTiddler(tagTitle);
 			}
 		}
 	});
