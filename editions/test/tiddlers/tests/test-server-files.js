@@ -37,7 +37,7 @@ if($tw.node) {
 
 		function getFile(headers) {
 			return new Promise(function(resolve,reject) {
-				http.get({hostname: "127.0.0.1", port: listener.address().port, path: "/files/test.txt", headers: headers || {}},function(response) {
+				http.get({hostname: "127.0.0.1", port: listener.address().port, path: "/files/test.txt", headers: headers || {}, agent: false},function(response) {
 					var body = "";
 					response.setEncoding("utf8");
 					response.on("data",function(chunk) {body += chunk;});
@@ -49,7 +49,7 @@ if($tw.node) {
 			});
 		}
 
-		it("serves the file with cache headers",async function() {
+		it("revalidates cached files and detects size and mtime changes",async function() {
 			var response = await getFile();
 			expect(response.status).toBe(200);
 			expect(response.body).toBe("hello");
@@ -57,38 +57,29 @@ if($tw.node) {
 			expect(response.headers["cache-control"]).toBe("max-age=0, must-revalidate");
 			expect(response.headers["content-length"]).toBe("5");
 			expect(response.headers["content-type"]).toBe("text/plain");
-		});
-
-		["matching", "strong", "list", "wildcard"].forEach(function(condition) {
-			it("returns 304 for a " + condition + " If-None-Match",async function() {
-				var original = await getFile(),
-					etag = original.headers.etag || '"missing"',
-					values = {matching: etag, strong: etag.slice(2), list: '"old", ' + etag, wildcard: "*"},
-					headers = {"if-none-match": values[condition]};
-				if(condition === "list") {
-					headers.range = "bytes=1-3";
-				}
-				spyOn(fs,"createReadStream").and.callThrough();
-				var response = await getFile(headers);
-				expect(response.status).toBe(304);
-				expect(response.body).toBe("");
-				expect(response.headers.etag).toBe(etag);
-				expect(response.headers["cache-control"]).toBe("max-age=0, must-revalidate");
-				expect(fs.createReadStream.calls.count()).toBe(0);
+			var etag = response.headers.etag;
+			spyOn(fs,"createReadStream").and.callThrough();
+			var cached = await Promise.all([etag, etag.slice(2), '"old", ' + etag, "*"].map(function(value) {
+				return getFile({"if-none-match": value, range: "bytes=1-3"});
+			}));
+			cached.forEach(function(result) {
+				expect(result.status).toBe(304);
+				expect(result.body).toBe("");
+				expect(result.headers.etag).toBe(etag);
+				expect(result.headers["cache-control"]).toBe("max-age=0, must-revalidate");
 			});
-		});
-
-		["size", "mtime"].forEach(function(change) {
-			it("serves the updated file when its " + change + " changes",async function() {
-				var original = await getFile(),
-					text = change === "size" ? "hello world" : "world";
+			expect(fs.createReadStream.calls.count()).toBe(0);
+			async function checkUpdate(text,mtime) {
 				fs.writeFileSync(filename,text);
-				fs.utimesSync(filename,1000,change === "size" ? 1000 : 2000);
-				var response = await getFile({"if-none-match": original.headers.etag || '"missing"'});
-				expect(response.status).toBe(200);
-				expect(response.body).toBe(text);
-				expect(response.headers.etag).not.toBe(original.headers.etag);
-			});
+				fs.utimesSync(filename,1000,mtime);
+				var updated = await getFile({"if-none-match": response.headers.etag});
+				expect(updated.status).toBe(200);
+				expect(updated.body).toBe(text);
+				expect(updated.headers.etag).not.toBe(response.headers.etag);
+				response = updated;
+			}
+			await checkUpdate("hello world",1000);
+			await checkUpdate("hello again",2000);
 		});
 
 		it("serves the file when browser caching is disabled",async function() {
@@ -99,16 +90,13 @@ if($tw.node) {
 			expect(response.headers.etag).toBeUndefined();
 		});
 
-		it("serves a byte range for a stale ETag",async function() {
+		it("handles valid and invalid byte ranges",async function() {
 			var response = await getFile({"if-none-match": '"old"', range: "bytes=1-3"});
 			expect(response.status).toBe(206);
 			expect(response.body).toBe("ell");
 			expect(response.headers["content-range"]).toBe("bytes 1-3/5");
 			expect(response.headers["content-length"]).toBe("3");
-		});
-
-		it("returns 416 for an invalid byte range",async function() {
-			var response = await getFile({range: "bytes=5-6"});
+			response = await getFile({range: "bytes=5-6"});
 			expect(response.status).toBe(416);
 			expect(response.headers["content-range"]).toBe("bytes */5");
 		});
