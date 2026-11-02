@@ -1,0 +1,16 @@
+title: $:/changenotes/5.5.0/editor-engine-hooks
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: internal
+description: Allow editor engines to handle structured toolbar operations and release resources on destruction
+release: 5.5.0
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8991
+github-contributors: linonetwo
+type: text/vnd.tiddlywiki
+
+The text editor factory supports two optional engine methods:
+
+* `handleEditTextOperation(event)` handles `tm-edit-text-operation` using the engine's own document model. Return `true` to save the resulting text, `false` to decline the operation, or `undefined` to use the existing text-operation handlers.
+* `destroy()` releases engine resources when its widget is removed or rerendered.
+
+Engines that omit these methods retain their existing behavior.
