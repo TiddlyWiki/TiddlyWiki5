@@ -12,11 +12,11 @@ if($tw.node) {
 
 	describe("Static file browser caching",function() {
 
-		var fs = require("fs"),
+		const fs = require("fs"),
 			path = require("path"),
 			http = require("http"),
-			Server = require("$:/core/modules/server/server.js").Server,
-			directory, filename, server, listener;
+			Server = require("$:/core/modules/server/server.js").Server;
+		let directory, filename, server, listener;
 
 		beforeEach(function(done) {
 			directory = fs.mkdtempSync(path.join(require("os").tmpdir(),"tw-test-files-"));
@@ -38,7 +38,7 @@ if($tw.node) {
 		function getFile(headers) {
 			return new Promise(function(resolve,reject) {
 				http.get({hostname: "127.0.0.1", port: listener.address().port, path: "/files/test.txt", headers: headers || {}, agent: false},function(response) {
-					var body = "";
+					let body = "";
 					response.setEncoding("utf8");
 					response.on("data",function(chunk) {body += chunk;});
 					response.on("end",function() {
@@ -50,16 +50,16 @@ if($tw.node) {
 		}
 
 		it("revalidates cached files and detects size and mtime changes",async function() {
-			var response = await getFile();
+			let response = await getFile();
 			expect(response.status).toBe(200);
 			expect(response.body).toBe("hello");
 			expect(response.headers.etag).toMatch(/^W\/".+"$/);
 			expect(response.headers["cache-control"]).toBe("max-age=0, must-revalidate");
 			expect(response.headers["content-length"]).toBe("5");
 			expect(response.headers["content-type"]).toBe("text/plain");
-			var etag = response.headers.etag;
+			const etag = response.headers.etag;
 			spyOn(fs,"createReadStream").and.callThrough();
-			var cached = await Promise.all([etag, etag.slice(2), '"old", ' + etag, "*"].map(function(value) {
+			const cached = await Promise.all([etag, etag.slice(2), '"old", ' + etag, "*"].map(function(value) {
 				return getFile({"if-none-match": value, range: "bytes=1-3"});
 			}));
 			cached.forEach(function(result) {
@@ -72,7 +72,7 @@ if($tw.node) {
 			async function checkUpdate(text,mtime) {
 				fs.writeFileSync(filename,text);
 				fs.utimesSync(filename,1000,mtime);
-				var updated = await getFile({"if-none-match": response.headers.etag});
+				const updated = await getFile({"if-none-match": response.headers.etag});
 				expect(updated.status).toBe(200);
 				expect(updated.body).toBe(text);
 				expect(updated.headers.etag).not.toBe(response.headers.etag);
@@ -84,14 +84,14 @@ if($tw.node) {
 
 		it("serves the file when browser caching is disabled",async function() {
 			server.enableBrowserCache = false;
-			var response = await getFile({"if-none-match": "*"});
+			const response = await getFile({"if-none-match": "*"});
 			expect(response.status).toBe(200);
 			expect(response.body).toBe("hello");
 			expect(response.headers.etag).toBeUndefined();
 		});
 
 		it("handles valid and invalid byte ranges",async function() {
-			var response = await getFile({"if-none-match": '"old"', range: "bytes=1-3"});
+			let response = await getFile({"if-none-match": '"old"', range: "bytes=1-3"});
 			expect(response.status).toBe(206);
 			expect(response.body).toBe("ell");
 			expect(response.headers["content-range"]).toBe("bytes 1-3/5");

@@ -38,7 +38,7 @@ exports.handler = function(request,response,state) {
 				};
 			if(state.server.enableBrowserCache) {
 				// Use a weak validator based on file metadata so the file can be streamed
-				var etag = '"' + stats.size.toString(16) + "-" + stats.mtimeMs.toString(16) + '"',
+				const etag = '"' + stats.size.toString(16) + "-" + stats.mtimeMs.toString(16) + '"',
 					ifNoneMatch = request.headers["if-none-match"];
 				responseHeaders["Etag"] = "W/" + etag;
 				responseHeaders["Cache-Control"] = "max-age=0, must-revalidate";
