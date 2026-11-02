@@ -50,6 +50,8 @@ exports.handler = function(request,response,state) {
 					response.end();
 					return;
 				}
+			} else {
+				responseHeaders["Cache-Control"] = "no-store";
 			}
 			var rangeHeader = request.headers.range,
 				stream;
@@ -60,6 +62,7 @@ exports.handler = function(request,response,state) {
 					end = parts[1] ? parseInt(parts[1], 10) : stats.size - 1;
 				// Validate start and end
 				if(isNaN(start) || isNaN(end) || start < 0 || end < start || end >= stats.size) {
+					responseHeaders["Cache-Control"] = "no-store";
 					responseHeaders["Content-Range"] = "bytes */" + stats.size;
 					return response.writeHead(416, responseHeaders).end();
 				}

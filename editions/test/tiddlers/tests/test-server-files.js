@@ -59,9 +59,12 @@ if($tw.node) {
 			expect(response.headers["content-type"]).toBe("text/plain");
 			const etag = response.headers.etag;
 			spyOn(fs,"createReadStream").and.callThrough();
-			const cached = await Promise.all([etag, etag.slice(2), '"old", ' + etag, "*"].map(function(value) {
-				return getFile({"if-none-match": value, range: "bytes=1-3"});
-			}));
+			const cached = await Promise.all([
+				getFile({"if-none-match": etag}),
+				...[etag.slice(2), '"old", ' + etag, "*"].map(function(value) {
+					return getFile({"if-none-match": value, range: "bytes=1-3"});
+				})
+			]);
 			cached.forEach(function(result) {
 				expect(result.status).toBe(304);
 				expect(result.body).toBe("");
@@ -88,6 +91,7 @@ if($tw.node) {
 			expect(response.status).toBe(200);
 			expect(response.body).toBe("hello");
 			expect(response.headers.etag).toBeUndefined();
+			expect(response.headers["cache-control"]).toBe("no-store");
 		});
 
 		it("handles valid and invalid byte ranges",async function() {
@@ -96,9 +100,11 @@ if($tw.node) {
 			expect(response.body).toBe("ell");
 			expect(response.headers["content-range"]).toBe("bytes 1-3/5");
 			expect(response.headers["content-length"]).toBe("3");
+			expect(response.headers["cache-control"]).toBe("max-age=0, must-revalidate");
 			response = await getFile({range: "bytes=5-6"});
 			expect(response.status).toBe(416);
 			expect(response.headers["content-range"]).toBe("bytes */5");
+			expect(response.headers["cache-control"]).toBe("no-store");
 		});
 
 	});
