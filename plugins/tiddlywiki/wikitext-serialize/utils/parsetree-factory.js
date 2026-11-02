@@ -344,6 +344,52 @@ api.pragma = function(sourceText,options) {
 
 // Classification, read side
 
+// Read literal codeblock attributes, including the constant encoding emitted
+// when a body contains every WikiText quote form. Other dynamic attributes
+// belong to a source-backed widget and must not be interpreted by an editor.
+api.codeBlockParts = function(node) {
+	if(!node || node.type !== "codeblock" || Object.keys(node.attributes || {}).some(function(name) {
+		return name !== "code" && name !== "language";
+	})) return null;
+	var result = {};
+	for(var name of["code","language"]) {
+		var attribute = (node.attributes || {})[name];
+		if(!attribute) {
+			result[name] = "";
+		} else if(attribute.type === "string" && typeof attribute.value === "string") {
+			result[name] = attribute.value;
+		} else {
+			var encoded = attribute.type === "filtered" && /^\[\[([A-Za-z0-9+/]*={0,2})\]decodebase64\[\]\]$/.exec(attribute.filter);
+			if(!encoded) return null;
+			try {
+				result[name] = $tw.utils.base64Decode(encoded[1]);
+				if($tw.utils.base64Encode(result[name]) !== encoded[1]) return null;
+			} catch(error) {
+				return null;
+			}
+		}
+	}
+	return result;
+};
+
+// Literal children of a code element, independent of whether they were
+// written between backticks or as entity-escaped HTML. Preserve rich widgets.
+api.codeText = function(node) {
+	if(!node || node.type !== "element" || node.tag !== "code" ||
+		Object.keys(node.attributes || {}).length || !/^(?:codeinline|html)$/.test(node.rule || "")) return null;
+	var text = "";
+	for(var child of node.children || []) {
+		if(child.type === "text" && !child.tag) {
+			text += child.text;
+		} else if(child.type === "entity" && child.rule === "entity") {
+			text += $tw.utils.entityDecode(child.entity);
+		} else {
+			return null;
+		}
+	}
+	return text;
+};
+
 /*
 The walker's own test: a block node gets the blank line towards its next
 sibling. Annotated trees carry blockPosition; paragraphs say so through their
