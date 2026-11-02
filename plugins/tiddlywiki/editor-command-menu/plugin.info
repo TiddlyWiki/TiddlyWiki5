@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/editor-command-menu",
+	"name": "Editor Command Menu",
+	"description": "Reusable command registry and menu UI for text editors",
+	"list": "readme",
+	"stability": "STABILITY_1_EXPERIMENTAL"
+}
