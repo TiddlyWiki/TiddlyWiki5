@@ -130,9 +130,11 @@ function ensureCanonicalBoundary(output, previousNode, serializeNodes) {
 }
 
 function segmentKeepsOwnEnding(nodes) {
-	return nodes.length > 0 && nodes.every(function(node) {
+	// A code block may use a line-terminated codeblock widget when its body
+	// cannot fit a fence. Keep the serializer's required ending on fresh boot.
+	return nodes.length > 0 && (nodes[nodes.length - 1].type === "code_block" || nodes.every(function(node) {
 		return node && node.type === "opaque_block";
-	});
+	}));
 }
 
 function restoreSourceBoundary(node, newSource) {

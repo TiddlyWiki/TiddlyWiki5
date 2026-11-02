@@ -53,6 +53,10 @@ function canonicalParseTree(value) {
 		return value.map(canonicalParseTree);
 	}
 	if(value && typeof value === "object") {
+		const code = $tw.utils.wikitextParseTree.codeText(value);
+		if(code !== null) {
+			return {type: "element", tag: "code", rule: "codeinline", children: [{type: "text", text: code}]};
+		}
 		const result = {};
 		Object.keys(value).sort().forEach((key) => {
 			// Parser offsets describe spelling, not meaning. Keep attribute order

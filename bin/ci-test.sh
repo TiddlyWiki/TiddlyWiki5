@@ -28,5 +28,6 @@ npx playwright test \
 	plugins/tiddlywiki/prosemirror/tests/smoke.spec.js \
 	plugins/tiddlywiki/prosemirror/tests/specs/installation.spec.js \
 	plugins/tiddlywiki/prosemirror/tests/specs/clipboard.spec.js \
+	plugins/tiddlywiki/prosemirror/tests/specs/code-delimiters.spec.js \
 	--project=firefox \
 	--workers=2

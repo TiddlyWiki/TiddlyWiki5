@@ -108,6 +108,34 @@ describe("ProseMirror source safety", () => {
 		expect(shared.serializeDocJSON(json)).toBe("```js\nchanged\n```");
 	});
 
+	it("reopens code containing its own WikiText delimiters as editable code", () => {
+		const code = "before\n```\n\"double\" 'single' \"\"\"triple\"\"\" ]] end]\n中文 📝";
+		const json = {type: "doc", content: [{
+			type: "code_block", attrs: {language: "c++"}, content: [{type: "text", text: code}]
+		}]};
+		const output = shared.serializeDocJSON(json);
+		const doc = schema.nodeFromJSON(shared.parseWikiTextToDoc($tw.wiki,type,output));
+		doc.check();
+		expect(doc.firstChild.type.name).toBe("code_block");
+		expect(doc.firstChild.textContent).toBe(code);
+		expect(doc.firstChild.attrs.language).toBe("c++");
+		expect(shared.serializeDocJSON(doc.toJSON())).toBe(output);
+	});
+
+	it("reopens inline code containing double backticks with its code mark", () => {
+		const code = "``<&amp;> ''bold'' <<now>> {{X}} 中文 📝";
+		const json = {type: "doc", content: [{type: "paragraph", content: [{
+			type: "text", text: code, marks: [{type: "code"}]
+		}]}]};
+		const output = shared.serializeDocJSON(json);
+		const doc = schema.nodeFromJSON(shared.parseWikiTextToDoc($tw.wiki,type,output));
+		doc.check();
+		expect(doc.firstChild.firstChild.type.name).toBe("text");
+		expect(doc.firstChild.textContent).toBe(code);
+		expect(doc.firstChild.firstChild.marks.map((mark) => mark.type.name)).toEqual(["code"]);
+		expect(shared.serializeDocJSON(doc.toJSON())).toBe(output);
+	});
+
 	it("keeps exact source when dissolving an unchanged block", () => {
 		const getNodeWikiText = require("$:/plugins/tiddlywiki/prosemirror/blocks/source-utils.js").getNodeWikiText;
 		const input = "```js\r\noriginal  \r\n```\r\n\r\n";

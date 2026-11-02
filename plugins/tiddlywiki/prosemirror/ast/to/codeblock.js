@@ -7,8 +7,11 @@ module-type: library
 "use strict";
 
 module.exports = function codeblock(context, node) {
-	const code = node.attributes && node.attributes.code ? node.attributes.code.value : "";
-	const language = node.attributes && node.attributes.language ? node.attributes.language.value : "";
+	const parts = $tw.utils.wikitextParseTree.codeBlockParts(node);
+	if(!parts || node.isBlock === false) {
+		return require("$:/plugins/tiddlywiki/prosemirror/ast/to/shared.js").buildOpaqueFromNode(node,context);
+	}
+	const {code, language} = parts;
 	const codeBlock = {
 		type: "code_block",
 		attrs: language ? { language: language } : {}

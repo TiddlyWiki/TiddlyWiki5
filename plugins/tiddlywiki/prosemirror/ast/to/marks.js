@@ -33,6 +33,10 @@ exports.buildEm = function buildEm(context, node) {
 };
 
 exports.buildCode = function buildCode(context, node) {
+	const code = factory.codeText(node);
+	if(code !== null) {
+		return code ? {type: "text", text: code, marks: [{type: "code"}]} : [];
+	}
 	return buildTextWithMark(context, node, "code");
 };
 
