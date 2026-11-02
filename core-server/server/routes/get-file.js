@@ -36,6 +36,21 @@ exports.handler = function(request,response,state) {
 					"Content-Type": type,
 					"Accept-Ranges": "bytes"
 				};
+			if(state.server.enableBrowserCache) {
+				// Use a weak validator based on file metadata so the file can be streamed
+				var etag = '"' + stats.size.toString(16) + "-" + stats.mtimeMs.toString(16) + '"',
+					ifNoneMatch = request.headers["if-none-match"];
+				responseHeaders["Etag"] = "W/" + etag;
+				responseHeaders["Cache-Control"] = "max-age=0, must-revalidate";
+				if(ifNoneMatch && ifNoneMatch.split(",").some(function(value) {
+					value = value.trim();
+					return value === "*" || value.replace(/^W\//,"") === etag;
+				})) {
+					response.writeHead(304,responseHeaders);
+					response.end();
+					return;
+				}
+			}
 			var rangeHeader = request.headers.range,
 				stream;
 			if(rangeHeader) {
