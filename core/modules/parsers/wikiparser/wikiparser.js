@@ -204,6 +204,10 @@ WikiParser.prototype.parsePragmas = function() {
 		this.skipWhitespace();
 		// Check for the end of the text
 		if(this.pos >= this.sourceLength) {
+			// Leave a whitespace-only body for the opt-in block parser
+			if(this.preserveBlankLines && !this.parseAsInline) {
+				this.pos = savedPos;
+			}
 			break;
 		}
 		// Check if we've arrived at a pragma rule match
