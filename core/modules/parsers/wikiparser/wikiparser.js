@@ -307,11 +307,19 @@ needed to represent the first empty paragraph.
 */
 WikiParser.prototype.makeBlankLineBlocks = function(start,whitespace,options) {
 	options = options || {};
-	var newlineMatches = whitespace.match(/\r?\n/g),
-		newlineCount = newlineMatches ? newlineMatches.length : 0,
-		blankLineCount = options.leading ? Math.max(0,newlineCount - 1) : Math.max(0,newlineCount - 2),
-		blankLineBlocks = [];
-	for(var index = 0; index < blankLineCount; index++) {
+	var blankLineBlocks = [],
+		separatorLines = options.leading ? 1 : 2,
+		newlineCount = 0,
+		lineEnd = whitespace.indexOf("\n");
+	while(lineEnd !== -1) {
+		newlineCount++;
+		if(newlineCount <= separatorLines) {
+			lineEnd = whitespace.indexOf("\n",lineEnd + 1);
+			continue;
+		}
+		// Empty paragraphs are synthetic: keep newline bytes in the source
+		// gap, but give each paragraph its own anchor, before its LF or CRLF.
+		var anchor = start + lineEnd - (whitespace.charAt(lineEnd - 1) === "\r" ? 1 : 0);
 		blankLineBlocks.push({
 			type: "element",
 			tag: "p",
@@ -322,11 +330,12 @@ WikiParser.prototype.makeBlankLineBlocks = function(start,whitespace,options) {
 				{name: "class", type: "string", value: "tc-blankline"}
 			],
 			children: [],
-			start: start,
-			end: start,
+			start: anchor,
+			end: anchor,
 			rule: "blankline",
-			isLeadingBlankLine: !!options.root && index === 0
+			isLeadingBlankLine: !!options.root && blankLineBlocks.length === 0
 		});
+		lineEnd = whitespace.indexOf("\n",lineEnd + 1);
 	}
 	return blankLineBlocks;
 };

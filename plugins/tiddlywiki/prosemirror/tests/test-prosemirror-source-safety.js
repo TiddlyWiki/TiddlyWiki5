@@ -42,6 +42,35 @@ describe("ProseMirror source safety", () => {
 		return doc;
 	}
 
+	it("preserves distinct empty paragraphs when source anchors move between lines", () => {
+		["\n", "\r\n"].forEach((lineEnd) => {
+			["\n\n\nA", "A\n\n\n\nB", "A\n\n\n\n", "\n\n\n", "|a|\n\n\n\nB", "<div>\n\n\n\nInside\n</div>"].forEach((text) => {
+				const input = text.replace(/\n/g,lineEnd);
+				const tree = $tw.wiki.parseText(type,input,{preserveBlankLines: true}).tree;
+				expect($tw.utils.serializeWikitextParseTree(tree,{source: input})).toBe(input);
+				checkSource(input);
+				const doc = schema.nodeFromJSON(to(tree,{
+					wiki: $tw.wiki,sourceType: type,sourceText: input,preserveSource: true
+				}));
+				doc.check();
+				expect(shared.serializeDocJSON(doc.toJSON())).toBe(input);
+				doc.forEach((node,offset,index) => {
+					if(node.type.name !== "paragraph" || node.content.size !== 0) return;
+					const edited = doc.toJSON();
+					edited.content[index].content = [{type: "text",text: "Inserted"}];
+					const output = shared.serializeDocJSON(edited);
+					const reparsed = schema.nodeFromJSON(shared.parseWikiTextToDoc($tw.wiki,type,output));
+					reparsed.check();
+					expect(reparsed.childCount).toBe(doc.childCount);
+					doc.forEach((original,originalOffset,originalIndex) => {
+						expect(reparsed.child(originalIndex).type.name).toBe(original.type.name);
+						expect(reparsed.child(originalIndex).textContent).toBe(originalIndex === index ? "Inserted" : original.textContent);
+					});
+				});
+			});
+		});
+	});
+
 	[
 		"; Term\n: Definition",
 		"Before <$text text=\"hello\"/> after",
