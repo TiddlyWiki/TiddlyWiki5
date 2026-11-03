@@ -43,7 +43,10 @@ Modal.prototype.display = function(title,options) {
 	var variables = $tw.utils.extend({
 		currentTiddler: title,
 		"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
-		"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "")
+		"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : ""),
+		"tv-config-toolbar-icons": (options.event && options.event.widget ? options.event.widget.getVariable("tv-config-toolbar-icons") : ""),
+		"tv-config-toolbar-text": (options.event && options.event.widget ? options.event.widget.getVariable("tv-config-toolbar-text") : ""),
+		"tv-config-toolbar-class": (options.event && options.event.widget ? options.event.widget.getVariable("tv-config-toolbar-class") : "")
 	},options.variables);
 
 	// Create the wrapper divs
