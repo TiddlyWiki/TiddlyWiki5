@@ -27,6 +27,7 @@ npx playwright test \
 	plugins/tiddlywiki/editor-command-menu/tests/menu-view.spec.js \
 	plugins/tiddlywiki/prosemirror/tests/smoke.spec.js \
 	plugins/tiddlywiki/prosemirror/tests/specs/installation.spec.js \
+	plugins/tiddlywiki/prosemirror/tests/specs/core-compatibility.spec.js \
 	plugins/tiddlywiki/prosemirror/tests/specs/clipboard.spec.js \
 	plugins/tiddlywiki/prosemirror/tests/specs/code-delimiters.spec.js \
 	--project=firefox \

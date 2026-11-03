@@ -12,6 +12,8 @@ The plugin library's install and reinstall buttons also fetch these dependencies
 
 This experimental editor also requires the companion core parser and editor changes. Until those changes are released, use a wiki built from the matching source branch. Installing the plugin and its dependencies into an older wiki does not upgrade that wiki's core.
 
+The core editor hooks in #10075 are required for structured toolbar operations and editor cleanup. When those hooks are unavailable, the field displays an upgrade notice and uses the standard source editor to keep toolbar actions on WikiText character offsets. The check uses the actual operation and cleanup contract because different prerelease cores can have the same version number. The visual editor, slash menu and block handle remain available on the matching core.
+
 For a standalone demonstration from a source checkout, run `node tiddlywiki.js editions/prosemirror --build index` and open `editions/prosemirror/output/index.html` in a browser.
 
 Open ''Control Panel > Settings > ProseMirror'' and select ''ProseMirror (WYSIWYG)'' for ~WikiText, or set `$:/config/EditorTypeMappings/text/vnd.tiddlywiki` to `prosemirror`.

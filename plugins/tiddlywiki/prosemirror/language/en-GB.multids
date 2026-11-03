@@ -42,6 +42,7 @@ DragHandle/NumberedList: Numbered list
 DragHandle/Paragraph: Paragraph
 DragHandle/TaskList: Task list
 DragHandle/TurnInto: Turn into
+Compatibility/Core: ProseMirror requires the core structured-editor operation and cleanup hooks (#10075). Use a wiki built from the matching source branch. This field uses the standard source editor until the core is upgraded.
 FindReplace/CaseSensitive: Case sensitive
 FindReplace/Next: Next
 FindReplace/Previous: Previous
