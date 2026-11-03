@@ -86,6 +86,36 @@ describe("Wikitext blank line preservation", function() {
 				return parse(source(text)).map(function(node) { return node.rule; });
 			}
 
+			it("anchors separate empty paragraphs to their own source lines", function() {
+				[
+					["\n\n\nA", [1,2]],
+					["A\n\n\n\nB", [3,4]],
+					["A\n\n\n\n", [3,4]],
+					["\n\n\n", [1,2]],
+					["|a|\n \t\n\t\nB", [8]],
+					["|a|\n\n\n\nB", [5,6]]
+				].forEach(function(testCase) {
+					var input = source(testCase[0]),
+						blanks = parse(input).filter(function(node) { return node.rule === "blankline"; }),
+						expected = testCase[1].map(function(offset) { return source(testCase[0].slice(0,offset)).length; });
+					expect(blanks.map(function(node) { return node.start; })).toEqual(expected);
+					expect(blanks.map(function(node) { return node.end; })).toEqual(expected);
+				});
+			});
+
+			it("keeps nested empty paragraph anchors inside their own block body", function() {
+				["<div>\n\n\n\nInside\n</div>", "<<<\n\n\nInside\n<<<"].forEach(function(text) {
+					var input = source(text),
+						blanks = parse(input)[0].children.filter(function(node) { return node.rule === "blankline"; }),
+						bodyStart = input.indexOf(lineEnd) + lineEnd.length;
+					expect(blanks.length).toBe(2);
+					blanks.forEach(function(node,index) {
+						expect(node.start).toBe(bodyStart + (text.slice(0,4) === "<div" ? index + 1 : index) * lineEnd.length);
+						expect(node.end).toBe(node.start);
+					});
+				});
+			});
+
 			it("counts the entire whitespace run after a block only once", function() {
 				["|a|", "---", "{{X}}", "* one", "<<now YYYY>>"].forEach(function(block) {
 					var tree = parse(source(block + "\n\n\nB"));
