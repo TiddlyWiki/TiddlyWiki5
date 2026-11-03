@@ -1,10 +1,10 @@
-title: $:/changenotes/5.5.0/#10057
+title: $:/changenotes/5.5.0/#10077
 description: Fixed toolbar buttons in modals showing neither icons nor text
 release: 5.5.0
 tags: $:/tags/ChangeNote
 change-type: bugfix
 change-category: usability
-github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/10057
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10077
 github-contributors: Davien21
 type: text/vnd.tiddlywiki
 
