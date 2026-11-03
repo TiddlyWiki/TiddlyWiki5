@@ -10,17 +10,23 @@ exports.name = "hardlinebreaks";
 
 exports.serialize = function(tree,serialize,options) {
 	options = options || {};
-	// A br the parser inserted for a line break inside the region
-	if(tree.tag === "br") {
-		return "\n";
+	if(tree.type !== "void") {
+		// Accept the old flat tree too, including a single node carrying both flags
+		var text = tree.tag === "br" ? "\n" : (tree.text || "") + serialize(tree.children || []);
+		if(tree.tag === "br" && options.source && typeof tree.start === "number" && typeof tree.end === "number") {
+			var lineEnd = options.source.substring(tree.start,tree.end);
+			if(/^\r?\n$/.test(lineEnd)) {
+				text = lineEnd;
+			}
+		}
+		return (tree.isRuleStart ? '"""\n' : "") + text + (tree.isRuleEnd ? '"""' : "");
 	}
-	// The region can open inline ("""text) or with a line break; only the source knows which
-	var opener = '"""\n',
-		first = tree.children && tree.children[0];
-	if(options.source && typeof tree.start === "number" && first && typeof first.start === "number" && first.start > tree.start) {
-		var slice = options.source.substring(tree.start,first.start);
-		if(/^"""\s*$/.test(slice)) {
-			opener = slice;
+	// The source distinguishes inline, LF, CRLF and empty region openers
+	var opener = '"""\n';
+	if(options.source && typeof tree.start === "number") {
+		var match = /^"""(?:\r?\n)?/.exec(options.source.substring(tree.start));
+		if(match) {
+			opener = match[0];
 		}
 	}
 	return opener + serialize(tree.children) + '"""';
