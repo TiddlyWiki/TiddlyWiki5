@@ -99,7 +99,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		wikiLinkText = this.wiki.filterTiddlers(wikilinkTransformFilter,this,function(iterator) {
 			iterator(self.wiki.getTiddler(self.to),self.to);
 		})[0];
-	} else {
+	}
+	if(!wikiLinkText) {
 		// Expand the tv-wikilink-template variable to construct the href
 		var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
 			wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$";

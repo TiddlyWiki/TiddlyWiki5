@@ -15,7 +15,8 @@ var getCellInfo = function(text, start, length, SEPARATOR) {
 	var isCellQuoted = text.charAt(start) === QUOTE;
 	var cellStart = isCellQuoted ? start + 1 : start;
 	
-	if(text.charAt(i) === SEPARATOR) {
+	// A quote licenses a separator inside the cell, so only an unquoted cell reads an immediate separator as empty
+	if(!isCellQuoted && text.charAt(cellStart) === SEPARATOR) {
 		return [cellStart, cellStart, false];
 	}
 	

@@ -9,25 +9,25 @@ blockquote-bar: Barra de cita
 button-background: Fondo del botón predeterminado
 button-border: Borde del botón predeterminado
 button-foreground: Primario del botón predeterminado
-dirty-indicator: Indicador de cambios no guardados
 code-background: Fondo del código
 code-border: Borde del código
 code-foreground: Primario del código
+dirty-indicator: Indicador de cambios no guardados
 download-background: Fondo botón de descarga
 download-foreground: Primario botón de descarga
 dragger-background: Fondo de arrastre
 dragger-foreground: Primario de arrastre
 dropdown-background: Fondo desplegable
 dropdown-border: Borde desplegable
-dropdown-tab-background-selected: Fondo de la pestaña desplegable de pestañas seleccionadas
 dropdown-tab-background: Fondo de la pestaña desplegable
+dropdown-tab-background-selected: Fondo de la pestaña desplegable de pestañas seleccionadas
 dropzone-background: Fondo arrastre ficheros
+external-link-background: Fondo de enlace externo
 external-link-background-hover: Fondo de enlace externo al pasar por encima
 external-link-background-visited: Fondo de enlace externo visitado
-external-link-background: Fondo de enlace externo
+external-link-foreground: Primario de enlace externo
 external-link-foreground-hover: Primario de enlace externo al pasar por encima
 external-link-foreground-visited: Primario de enlace externo visitado
-external-link-foreground: Primario de enlace externo
 foreground: Primario general
 menubar-background: Fondo de la barra de menú
 menubar-foreground: Primario de la barra de menú
@@ -50,50 +50,50 @@ primary: Primario general
 select-tag-background: Fondo `<select>`
 select-tag-foreground: Primario `<select>`
 sidebar-button-foreground: Primario del botón de la barra lateral
-sidebar-controls-foreground-hover: Primario de controles de la barra lateral al pasar por encima
 sidebar-controls-foreground: Primario de controles de la barra lateral
-sidebar-foreground-shadow: Sombra de la barra lateral
+sidebar-controls-foreground-hover: Primario de controles de la barra lateral al pasar por encima
 sidebar-foreground: Primario de la barra lateral
-sidebar-muted-foreground-hover: Primario de controles silenciados de la barra lateral al pasar por encima
+sidebar-foreground-shadow: Sombra de la barra lateral
 sidebar-muted-foreground: Primario de controles silenciados de la barra lateral
-sidebar-tab-background-selected: Fondo de la pestaña de la barra lateral para las pestañas seleccionadas
+sidebar-muted-foreground-hover: Primario de controles silenciados de la barra lateral al pasar por encima
 sidebar-tab-background: Fondo de la pestaña de la barra lateral
-sidebar-tab-border-selected: Borde de la pestaña de la barra lateral para las pestañas seleccionadas
+sidebar-tab-background-selected: Fondo de la pestaña de la barra lateral para las pestañas seleccionadas
 sidebar-tab-border: Borde de la pestaña de la barra lateral
+sidebar-tab-border-selected: Borde de la pestaña de la barra lateral para las pestañas seleccionadas
 sidebar-tab-divider: Divisor de pestañas de la barra lateral
-sidebar-tab-foreground-selected: Divisor de pestañas de la barra lateral para las pestañas seleccionadas
 sidebar-tab-foreground: Primario de la pestaña de la barra lateral
-sidebar-tiddler-link-foreground-hover: Primario enlace tiddler en la barra lateral al pasar por encima
+sidebar-tab-foreground-selected: Divisor de pestañas de la barra lateral para las pestañas seleccionadas
 sidebar-tiddler-link-foreground: Primario enlace tiddler en la barra lateral
-stability-stable: Distintivo para el nivel de estabilidad "estable"
-stability-experimental: Distintivo para el nivel de estabilidad "experimental"
-stability-deprecated: Distintivo para el nivel de estabilidad "obsoleto"
-stability-legacy: Distintivo para el nivel de estabilidad "heredado"
-testcase-accent-level-1: Color de énfasis del caso de prueba sin anidación
-testcase-accent-level-2: Color de énfasis del caso de prueba con anidación de segundo nivel
-testcase-accent-level-3: Color de énfasis del caso de prueba con anidación de tercer nivel o superior
+sidebar-tiddler-link-foreground-hover: Primario enlace tiddler en la barra lateral al pasar por encima
 site-title-foreground: Primario título sitio
+stability-deprecated: Distintivo para el nivel de estabilidad "obsoleto"
+stability-experimental: Distintivo para el nivel de estabilidad "experimental"
+stability-legacy: Distintivo para el nivel de estabilidad "heredado"
+stability-stable: Distintivo para el nivel de estabilidad "estable"
 static-alert-foreground: Primario de alerta estática
-tab-background-selected: Fondo de pestaña para pestañas seleccionadas
 tab-background: Fondo de pestaña
-tab-border-selected: Borde de pestaña para pestañas seleccionadas
+tab-background-selected: Fondo de pestaña para pestañas seleccionadas
 tab-border: Borde de pestañas
+tab-border-selected: Borde de pestaña para pestañas seleccionadas
 tab-divider: Divisor de pestañas
-tab-foreground-selected: Primario de pestaña para pestañas seleccionadas
 tab-foreground: Primario de pestaña
+tab-foreground-selected: Primario de pestaña para pestañas seleccionadas
 table-border: Borde Tabla
 table-footer-background: Fondo pie tabla
 table-header-background: Fondo cabecera tabla
 tag-background: Fondo etiqueta
 tag-foreground: Primario etiqueta
+testcase-accent-level-1: Color de énfasis del caso de prueba sin anidación
+testcase-accent-level-2: Color de énfasis del caso de prueba con anidación de segundo nivel
+testcase-accent-level-3: Color de énfasis del caso de prueba con anidación de tercer nivel o superior
 tiddler-background: Fondo Tiddler
 tiddler-border: Borde Tiddler
+tiddler-controls-foreground: Primario controles Tiddler
 tiddler-controls-foreground-hover: Primario controles Tiddler al pasar por encima
 tiddler-controls-foreground-selected: Primario controles seleccionados en Tiddler
-tiddler-controls-foreground: Primario controles Tiddler
 tiddler-editor-background: Fondo editor Tiddler
-tiddler-editor-border-image: Borde imagen en editor Tiddler
 tiddler-editor-border: Borde editor Tiddler
+tiddler-editor-border-image: Borde imagen en editor Tiddler
 tiddler-editor-fields-even: Fondo editor Tiddler para campos pares
 tiddler-editor-fields-odd: Fondo editor Tiddler para campos impares
 tiddler-info-background: Fondo panel información en Tiddler
@@ -103,14 +103,14 @@ tiddler-link-background: Fondo enlace Tiddler
 tiddler-link-foreground: Primario enlace Tiddler
 tiddler-subtitle-foreground: Primario subtítulo Tiddler
 tiddler-title-foreground: Primario título Tiddler
+toolbar-cancel-button: Primario botón 'cancelar'
+toolbar-close-button: Primario botón 'cerrar'
+toolbar-delete-button: Primario botón 'eliminar'
+toolbar-done-button: Primario botón 'hecho'
+toolbar-edit-button: Primario botón 'editar'
+toolbar-info-button: Primario botón 'información'
 toolbar-new-button: Primario botón 'nuevo tiddler'
 toolbar-options-button: Primario botón 'opciones'
 toolbar-save-button: Primario botón 'guardar'
-toolbar-info-button: Primario botón 'información'
-toolbar-edit-button: Primario botón 'editar'
-toolbar-close-button: Primario botón 'cerrar'
-toolbar-delete-button: Primario botón 'eliminar'
-toolbar-cancel-button: Primario botón 'cancelar'
-toolbar-done-button: Primario botón 'hecho'
 untagged-background: Fondo de píldora sin etiquetar
 very-muted-foreground: Primario muy silenciado

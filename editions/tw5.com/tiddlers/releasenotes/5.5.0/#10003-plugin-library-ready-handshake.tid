@@ -1,0 +1,22 @@
+title: $:/changenotes/5.5.0/#10003
+description: Fix race condition in plugin library iframe message handling
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: plugin
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10003
+github-contributors: DesignThinkerer
+
+Introduce a ''PLUGIN-LIBRARY-READY'' handshake verb for plugin library iframes. 
+This ensures that postMessage commands are not prematurely dropped before the iframe's 
+internal script has fully bound its message listeners.
+
+Retains iframe.onload as a backward-compatible fallback for legacy or external libraries 
+that do not emit the ready signal.
+
+Previously, the browser-messaging.js relied entirely on iframe.onload to trigger the initial 
+postMessage call to a plugin library. However, if the iframe's connection or load is aborted 
+after its internal script has already run and bound window.addEventListener("message"), onload 
+never fires at all, so the initial postMessage call is never sent and the request is silently 
+lost with no error. The new handshake eliminates this by having the iframe actively confirm 
+readiness as soon as its listener is bound, independent of whether onload ever fires.

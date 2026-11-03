@@ -32,7 +32,8 @@ exports.parse = function() {
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Create the link unless it is suppressed
 	if(this.match[0].substr(0,1) === "~") {
-		return [{type: "text", text: this.match[0].substr(1), start: start, end: this.parser.pos}];
+		// Start after the suppressing "~" so the span matches the plain text
+		return [{type: "text", text: this.match[0].substr(1), start: start + 1, end: this.parser.pos}];
 	} else {
 		return [{
 			type: "element",

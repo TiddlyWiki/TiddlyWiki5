@@ -1,0 +1,21 @@
+title: $:/changenotes/5.4.1/#9882
+created: 20260701142414000
+modified: 20260701142414000
+description: Fix invalid source positions in parse tree nodes
+release: 5.4.1
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9882
+github-contributors: pmario
+type: text/vnd.tiddlywiki
+
+Several wikitext parser rules emitted parse tree nodes with missing or incorrect `start` and `end` source positions. Accurate positions are needed by tooling that maps rendered output back to the source text.
+
+* ''Inline code'' (`` `code` ``): the text node `end` no longer runs past the closing backtick, so the span covers only the code text.
+
+* ''Suppressed external links'' (`~https://example.com`): the text node now starts after the suppressing `~`, matching the plain text that is emitted.
+
+* ''Suppressed wikilinks'' (`~SuppressedLink`): the text node now carries `start` and `end` positions. Previously it had none.
+
+* ''Import filter'' (`\import`): the filter start position was set to the whole source string instead of the current parse position. It now uses the correct offset.

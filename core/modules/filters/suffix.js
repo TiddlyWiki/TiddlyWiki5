@@ -13,41 +13,27 @@ Filter operator for checking if a title ends with a suffix
 Export our filter function
 */
 exports.suffix = function(source,operator,options) {
-	var results = [],
+	const results = [],
 		suffixes = (operator.suffixes || [])[0] || [];
+
 	if(!operator.operand) {
-		source(function(tiddler,title) {
+		source((tiddler,title) => {
 			results.push(title);
 		});
-	} else if(suffixes.indexOf("caseinsensitive") !== -1) {
-		var operand = operator.operand.toLowerCase();
-		if(operator.prefix === "!") {
-			source(function(tiddler,title) {
-				if(title.toLowerCase().substr(-operand.length) !== operand) {
-					results.push(title);
-				}
-			});
-		} else {
-			source(function(tiddler,title) {
-				if(title.toLowerCase().substr(-operand.length) === operand) {
-					results.push(title);
-				}
-			});
-		}
-	} else {
-		if(operator.prefix === "!") {
-			source(function(tiddler,title) {
-				if(title.substr(-operator.operand.length) !== operator.operand) {
-					results.push(title);
-				}
-			});
-		} else {
-			source(function(tiddler,title) {
-				if(title.substr(-operator.operand.length) === operator.operand) {
-					results.push(title);
-				}
-			});
-		}
+		return results;
 	}
+
+	const caseInsensitive = suffixes.indexOf("caseinsensitive") !== -1,
+		negate = operator.prefix === "!",
+		operand = caseInsensitive ? operator.operand.toLowerCase() : operator.operand;
+
+	source((tiddler,title) => {
+		const value = caseInsensitive ? title.toLowerCase() : title,
+			matches = value.endsWith(operand);
+		if(negate ? !matches : matches) {
+			results.push(title);
+		}
+	});
+
 	return results;
 };

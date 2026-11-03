@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 !! Basic syntax
 
-HTML description lists (<abbr title="also known as">AKA</abbr> definition lists) are created with this syntax: 
+HTML description lists (<abbr title="also known as">AKA</abbr> definition lists) are created with this syntax:
 
 <<wikitext-example src:"; Term being described
 : Description / Definition of that term
@@ -17,7 +17,7 @@ HTML description lists (<abbr title="also known as">AKA</abbr> definition lists)
 
 !! Multiple terms and descriptions
 
-You can create multiple descriptions for a term, or multiple terms for a single description:
+You can create multiple descriptions for a term, or multiple terms with a single description:
 
 <<wikitext-example src:"; Mouse
 : A rodent with a small body and a long tail

@@ -1,0 +1,12 @@
+title: ButtonSelection/DefaultSelection
+description: The default attribute selects a setTitle button while the state tiddler is missing
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$button setTitle="$:/state/demo" setTo="Alpha" default="Beta" selectedClass="sel">Alpha</$button><$button setTitle="$:/state/demo" setTo="Beta" default="Beta" selectedClass="sel">Beta</$button>
++
+title: ExpectedResult
+
+<p><button aria-checked="false" class="">Alpha</button><button aria-checked="true" class=" sel">Beta</button></p>

@@ -1,0 +1,26 @@
+change-category: widget
+change-type: bugfix
+created: 20260727171657000
+description: The button widget applies selectedClass when the state is addressed with setTitle
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9951
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9951
+type: text/vnd.tiddlywiki
+
+* Buttons sharing a state tiddler through `setTitle` highlight the selected one. Only the button whose `setTo` matches the state gets the `selectedClass`
+* The highlight follows the state as it changes
+* `default` picks the highlighted button while the state tiddler is still missing
+* The state is the tiddler text. Use `setField` or `setIndex` to address a field or an index instead
+
+```
+<div class="tc-tab-buttons">
+<$button setTitle="$:/state/tab" setTo="Alpha" default="Alpha" selectedClass="tc-tab-selected">Alpha</$button>
+<$button setTitle="$:/state/tab" setTo="Beta" default="Alpha" selectedClass="tc-tab-selected">Beta</$button>
+</div>
+```
+
+The ButtonWidget documentation gained two missing rules. `setField` takes preference over `setIndex`. `selectedClass` and `default` apply to `setTitle`, not only to `set`.
+
+Fixed issues: [[#9949|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9949]] and [[#9950|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9950]]

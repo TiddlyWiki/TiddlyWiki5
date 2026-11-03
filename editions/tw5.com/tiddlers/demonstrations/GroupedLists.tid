@@ -1,18 +1,22 @@
 created: 20150106180000000
-modified: 20241204085601176
+list: GroupedLists/Example/TypesTab GroupedLists/Example/ByField GroupedLists/Example/WithSearch GroupedLists/Example/WithTabs GroupedLists/Example/TabsWithSearch GroupedLists/Example/SearchAnotherField GroupedLists/Example/RecentTab
+modified: 20260729194941115
 tags: ListWidget Lists
 title: GroupedLists
+type: text/vnd.tiddlywiki
 
-The following sidebar tabs give examples of grouped lists created by nesting.
+A grouped list is made by nesting one list inside another. The outer list collects each distinct value of a field, and the inner list finds the tiddlers holding that value.
 
-!! [[Types Tab|$:/core/ui/MoreSideBar/Types]]
+TiddlyWiki uses the pattern in two of its sidebar tabs. The [[Types Tab|$:/core/ui/MoreSideBar/Types]] groups tiddlers by their `type` field, and sits under ''More'' in the sidebar. The [[Recent Tab|$:/core/ui/SideBar/Recent]] groups them by day, through the <<.mlink timeline>> macro. Both are reproduced as examples below.
 
-For the "Types Tab", the outer list filter as shown below selects each discrete value found in the `type` field. The inner list filter selects all the (non-system) tiddlers with that type.
+!! Interactive Examples
 
-<<tw-code "$:/core/ui/MoreSideBar/Types">>
+Each example is a runnable test case carrying its own sample data. Where a field is grouped on, it is named once in <<.def groupField>>, so the grouping can be changed without touching anything else.
 
-!! [[Recent Tab|$:/core/ui/SideBar/Recent]]
+<<<
+<$list filter="[tag[GroupedLists]]">
 
-The list in the "Recent Tab" is generated using the <<.mlink timeline>> macro. Here, the outer list filter selects each discrete day found in the `modified` field, while the inner list filter selects all the tiddlers dated the same day in the `modified` field.
-
-<<tw-code "$:/core/macros/timeline">>
+; <$link/>
+: {{!!description}}
+</$list>
+<<<

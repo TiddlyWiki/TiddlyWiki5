@@ -88,10 +88,11 @@ BackSubIndexer.prototype.update = function(updateDescriptor) {
 	var newTargets = [],
 		oldTargets = [],
 		self = this;
-	if(updateDescriptor.old.exists) {
+	// System tiddlers are never indexed as sources, matching the _init() scan
+	if(updateDescriptor.old.exists && !this.wiki.isSystemTiddler(updateDescriptor.old.tiddler.fields.title)) {
 		oldTargets = this._getTarget(updateDescriptor.old.tiddler);
 	}
-	if(updateDescriptor.new.exists) {
+	if(updateDescriptor.new.exists && !this.wiki.isSystemTiddler(updateDescriptor.new.tiddler.fields.title)) {
 		newTargets = this._getTarget(updateDescriptor.new.tiddler);
 	}
 

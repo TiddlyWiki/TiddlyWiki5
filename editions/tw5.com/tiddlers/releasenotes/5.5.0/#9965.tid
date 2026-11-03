@@ -1,0 +1,14 @@
+title: $:/changenotes/5.5.0/#9965
+created: 20260812171534862
+modified: 20260812171534862
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: usability
+description: Change of the class attribute of editors does no more completely refresh the widget
+release: 5.5.0
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9965
+github-contributors: BurningTreeC
+type: text/vnd.tiddlywiki
+
+This pull request changes the way editors refresh when their `class` attribute changes.
+They did refresh the widget completely. Now they just assign the new classes.

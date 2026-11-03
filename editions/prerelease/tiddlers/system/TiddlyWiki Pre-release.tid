@@ -13,6 +13,8 @@ The pre-release is also available as an [[empty wiki|https://tiddlywiki.com/prer
 
 </div>
 
+{{ TiddlyWiki Pre-release Size Comparison }}
+
 <$list filter="[tag[ReleaseNotes]!has[released]!sort[created]]">
 <div class="tc-titlebar">
 <h2 class="tc-title"><$text text=<<currentTiddler>>/></h2>
