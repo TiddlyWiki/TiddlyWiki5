@@ -1,0 +1,11 @@
+title: $:/changenotes/5.5.0/#10077
+description: Fixed toolbar buttons in modals showing neither icons nor text
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10077
+github-contributors: Davien21
+type: text/vnd.tiddlywiki
+
+A modal is rendered outside of the page template, so `tv-config-toolbar-icons`, `tv-config-toolbar-text` and `tv-config-toolbar-class` were undefined inside it. Modals now take them from the widget that sent `tm-modal`.
