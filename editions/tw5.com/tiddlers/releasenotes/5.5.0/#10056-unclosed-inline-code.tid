@@ -1,0 +1,11 @@
+change-category: hackability
+change-type: bugfix
+description: Unclosed inline code delimiters no longer consume the rest of a tiddler
+github-contributors: joshuafontany
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10056
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#10056
+type: text/vnd.tiddlywiki
+
+An unmatched single or double backtick is rendered as text. A matching delimiter can still close an inline code span across blank lines.

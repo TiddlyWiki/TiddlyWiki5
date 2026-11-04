@@ -29,6 +29,16 @@ describe("WikiText tests", function() {
 		// The paragraphs are lost in the conversion to plain text
 		expect(wiki.renderTiddler("text/plain","TiddlerThree")).toBe("The speed of soundThe light of speed");
 	});
+	it("keeps unmatched inline code delimiters as text", function() {
+		expect(wiki.renderText("text/html","text/vnd.tiddlywiki","before `unfinished\n\n! Heading")).toBe('<p>before `unfinished</p><h1 class="">Heading</h1>');
+		expect(wiki.renderText("text/html","text/vnd.tiddlywiki","before ``unfinished\n\n! Heading")).toBe('<p>before ``unfinished</p><h1 class="">Heading</h1>');
+	});
+	it("allows inline code to cross blank lines when closed", function() {
+		expect(wiki.renderText("text/html","text/vnd.tiddlywiki","before `one\n\ntwo` after")).toBe("<p>before <code>one\n\ntwo</code> after</p>");
+	});
+	it("renders the external JavaScript template without a trailing backtick", function() {
+		expect($tw.wiki.renderTiddler("text/plain","$:/core/templates/tiddlywiki5.js").slice(-4)).toBe("});\n");
+	});
 
 	it("should render plain text tiddlers as a paragraph", function() {
 		expect(wiki.renderTiddler("text/html","TiddlerOne")).toBe("<p>The quick brown fox</p>");
