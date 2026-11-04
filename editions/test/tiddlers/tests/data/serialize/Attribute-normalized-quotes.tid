@@ -1,0 +1,23 @@
+title: Serialize/Attribute-normalized-quotes
+description: AST-only mode quotes empty values with double quotes
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: info
+
+`text=''` becomes `text=""`: empty values re-emit with double quotes.
+
+Why: the AST records the value without its quote style, and the canonical
+quoting chain tries double quotes first.
+
+* Covers: serializeAttribute in $:/plugins/tiddlywiki/wikitext-serialize/utils/parsetree.js.
+* Mode: ast-only (the Input field withholds the source from the serializer).
++
+title: Input
+mode: ast-only
+
+<$reveal state="$:/temp/test" text=''/>
++
+title: ExpectedWikitext
+
+<$reveal state="$:/temp/test" text=""/>

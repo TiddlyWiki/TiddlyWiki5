@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: The parsermode pragmas round-trip byte-exact
 title: Serialize/ParserMode
 type: text/vnd.tiddlywiki
 

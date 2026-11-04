@@ -1062,7 +1062,8 @@ exports.parseText = function(type,text,options) {
 		parseAsInline: options.parseAsInline,
 		wiki: this,
 		_canonical_uri: options._canonical_uri,
-		configTrimWhiteSpace: options.configTrimWhiteSpace
+		configTrimWhiteSpace: options.configTrimWhiteSpace,
+		preserveBlankLines: options.preserveBlankLines
 	});
 };
 

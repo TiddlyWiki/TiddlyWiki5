@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: The rules pragma round-trips byte-exact
 title: Serialize/RulesPragma
 type: text/vnd.tiddlywiki
 

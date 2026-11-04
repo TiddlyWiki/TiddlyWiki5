@@ -128,6 +128,20 @@ var processRow = function(prevColumns) {
 	return tree;
 };
 
+/*
+The row regexps consume the terminating line end, which belongs to the gap
+between blocks, not to the node spans
+*/
+function trimLineEnd(source,pos,floor) {
+	if(pos > floor && source.charAt(pos - 1) === "\n") {
+		pos -= 1;
+	}
+	if(pos > floor && source.charAt(pos - 1) === "\r") {
+		pos -= 1;
+	}
+	return pos;
+}
+
 exports.parse = function() {
 	var rowContainerTypes = {"c":"caption", "h":"thead", "":"tbody", "f":"tfoot"},
 		table = {type: "element", tag: "table", children: []},
@@ -174,11 +188,11 @@ exports.parse = function() {
 				// Process the row
 				theRow.children = processRow.call(this,prevColumns);
 				this.parser.pos = rowMatch.index + rowMatch[0].length;
-				theRow.end = this.parser.pos;
+				theRow.end = trimLineEnd(this.parser.source,this.parser.pos,rowMatch.index);
 				// Increment the row count
 				rowCount++;
 			}
-			rowContainer.end = this.parser.pos;
+			rowContainer.end = trimLineEnd(this.parser.source,this.parser.pos,rowContainer.start);
 		}
 		rowMatch = rowRegExp.exec(this.parser.source);
 	}

@@ -1,0 +1,8 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: The documented backtick delimiter forms round-trip, including embedded backticks and the empty run
+title: Serialize/CodeBlock-docs
+type: text/vnd.tiddlywiki
+
+``double backticks allows `embedded` backticks``
+
+Simple `code` and ``a`b`` and ``a `quoted` b`` and ```leading`` and empty ```` end
