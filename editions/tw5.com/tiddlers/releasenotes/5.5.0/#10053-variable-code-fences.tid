@@ -1,0 +1,13 @@
+title: $:/changenotes/5.5.0/#10053
+created: 20261012000000000
+modified: 20261012000000000
+description: Allow longer code fences to contain shorter fences
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10053
+github-contributors: joshuafontany
+type: text/vnd.tiddlywiki
+
+A code block can now open with three or more backticks and close with a fence at least as long. The closing fence cannot be indented farther than the opener.
