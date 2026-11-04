@@ -1,7 +1,7 @@
 created: 20260728220400000
 description: Combine the tab strip with a search box inside the tab panel
 import-compound: [[GroupedLists/Bibliography]]
-modified: 20260729190424885
+modified: 20260929161733909
 tags: $:/tags/wiki-test-spec GroupedLists
 title: GroupedLists/Example/TabsWithSearch
 type: text/vnd.tiddlywiki-multiple
@@ -20,6 +20,12 @@ This test case carries the same `_TabButton` and `_TabContent` payload tiddlers 
 The input is a sibling of the list rather than a child of anything that recomputes, which is what keeps the cursor in the box while you type.
 
 Type `ba` and watch the counts change. Any tab whose count falls to zero shows the `emptyMessage` of the list instead of nothing at all.
+
+''Important:''
+
+If you want to modify the example make sure to copy all three tiddlers: `Output`, `_TabButton` and `_TabContent`.
+
+
 +
 title: Output
 
