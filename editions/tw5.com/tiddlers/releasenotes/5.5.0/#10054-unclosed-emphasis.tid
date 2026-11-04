@@ -1,0 +1,13 @@
+title: $:/changenotes/5.5.0/#10054
+created: 20261012000000000
+modified: 20261012000000000
+description: Keep unclosed emphasis from consuming later blocks
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10054
+github-contributors: joshuafontany
+type: text/vnd.tiddlywiki
+
+An unclosed emphasis delimiter renders as literal text, leaving later blocks to parse normally.
