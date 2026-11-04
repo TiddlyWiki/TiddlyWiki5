@@ -20,6 +20,71 @@ describe("WikiText parser tests", function() {
 		return tree;
 	};
 
+	var countElements = function(nodes,tag) {
+		var count = 0;
+		$tw.utils.each(nodes,function(node) {
+			if(node.type === "element" && node.tag === tag) {
+				count++;
+			}
+			if(node.children) {
+				count += countElements(node.children,tag);
+			}
+		});
+		return count;
+	};
+
+	var getText = function(nodes) {
+		return nodes.map(function(node) {
+			return node.type === "text" ? node.text : getText(node.children || []);
+		}).join("");
+	};
+
+	describe("italic markup around URI schemes", function() {
+		it("does not pair the slashes of two lar URIs as italics", function() {
+			var tree = parse("lar://a lar://b");
+			expect(countElements(tree,"em")).toBe(0);
+			expect(getText(tree)).toBe("lar://a lar://b");
+		});
+
+		it("does not treat the slashes in a lar URI as an italic closer", function() {
+			var italic = parse("//foo lar://a bar//")[0].children.filter(function(node) {
+				return node.type === "element" && node.tag === "em";
+			});
+			expect(italic.length).toBe(1);
+			expect(getText(italic[0].children)).toBe("foo lar://a bar");
+		});
+
+		it("keeps italics open across URI schemes and inner bold runs", function() {
+			var tree = parse("//foo lar://a ''one'' lar://b ''two'' end//");
+			var italic = tree[0].children.filter(function(node) {
+				return node.type === "element" && node.tag === "em";
+			});
+			expect(italic.length).toBe(1);
+			expect(countElements(tree,"strong")).toBe(2);
+			expect(getText(italic[0].children)).toBe("foo lar://a one lar://b two end");
+		});
+
+		it("leaves a standalone empty-authority lar URI as plain text", function() {
+			var tree = parse("lar:///ha.ka.ba/path");
+			expect(countElements(tree,"em")).toBe(0);
+			expect(getText(tree)).toBe("lar:///ha.ka.ba/path");
+		});
+
+		it("keeps a following heading separate from a lar URI in a heading", function() {
+			var tree = parse("! lar://a\n\n! Later heading");
+			expect(countElements(tree,"h1")).toBe(2);
+			expect(getText(tree)).toBe("lar://aLater heading");
+		});
+
+		it("continues to parse ordinary italic markup", function() {
+			expect(countElements(parse("//italic//"),"em")).toBe(1);
+		});
+
+		it("handles lar URIs when only the italic rule is enabled", function() {
+			expect(countElements(parse("\\rules only italic\nlar://a lar://b"),"em")).toBe(0);
+		});
+	});
+
 	it("should parse tags", function() {
 		expect(parse("<br>")).toEqual(
 
