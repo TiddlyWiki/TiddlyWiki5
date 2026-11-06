@@ -56,6 +56,8 @@ exports.parse = function() {
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
 		var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">";
 		if(hasLineBreak) {
+			// The tag's own line end is syntax, not a blank line of the body
+			this.parser.skipLineEnd();
 			tag.children = this.parser.parseBlocks(reEndString);
 		} else {
 			var reEnd = new RegExp("(" + reEndString + ")","mg");
