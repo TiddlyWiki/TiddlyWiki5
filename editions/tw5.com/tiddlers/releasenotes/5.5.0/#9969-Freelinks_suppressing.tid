@@ -1,0 +1,29 @@
+created: 20260816103900000
+description: Freelinks: Allow locally suppressing recognised links with `~`
+github-contributors: s793016
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9969
+modified: 20260816103900000
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9969
+type: text/vnd.tiddlywiki
+change-category: plugin
+change-type: feature
+
+Freelinks now supports local suppression of recognised automatic links.
+
+Prefix a recognised Freelink title with `~` to render it as plain text without
+displaying the `~` character:
+
+```text
+~Homer → Homer
+~1984 → 1984
+~中文標題 → 中文標題
+```
+
+This applies when Freelinks is enabled and the `~` prefix remains available to
+the Freelinks text widget. It supports non-CamelCase titles, including titles
+with spaces, numbers, and non-Latin characters.
+
+Unrecognised text is unchanged; for example, `~UnknownTitle` remains visible as
+written.
