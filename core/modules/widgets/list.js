@@ -109,7 +109,8 @@ ListWidget.prototype.findExplicitTemplates = function() {
 		var foundInlineTemplate = false;
 		$tw.utils.each(childNodes,function(node) {
 			if(node.type === "list-template") {
-				self.explicitListTemplate = node.children;
+				// Self-closing <$list-template/> has children === undefined; treat as empty
+				self.explicitListTemplate = node.children || [];
 			} else if(node.type === "list-empty") {
 				self.explicitEmptyTemplate = node.children;
 			} else if(node.type === "list-join") {
@@ -203,7 +204,8 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 				templateTree = this.parseTreeNode.children;
 			}
 		}
-		if(!templateTree || templateTree.length === 0) {
+		// Only use the default link template when no explicit <$list-template> was declared
+		if((!templateTree || templateTree.length === 0) && !this.explicitListTemplate) {
 			// Default template is a link to the title
 			templateTree = [{type: "element", tag: this.parseTreeNode.isBlock ? "div" : "span", children: [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
 				{type: "text", text: title}

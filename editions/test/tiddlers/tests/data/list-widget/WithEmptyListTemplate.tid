@@ -1,0 +1,27 @@
+title: ListWidget/WithEmptyListTemplate
+description: Empty self-closing $list-template renders nothing, not the default link
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
++
+title: Output
+
+\whitespace trim
+
+\procedure test(filter)
+<$list filter=<<filter>>>
+	<$list-template/>
+	<$list-empty>
+		None!
+	</$list-empty>
+</$list>
+\end
+
+<<test "yes">>
+
+<<test "">>
+
++
+title: ExpectedResult
+
+<p></p><p>None!</p>
