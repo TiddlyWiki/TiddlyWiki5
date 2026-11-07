@@ -1,0 +1,12 @@
+change-category: theme
+change-type: enhancement
+created: 20260711020514000
+description: Selected sidebar tabs get a visible border in the Vanilla theme and themes based on it
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9738
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9738
+type: text/vnd.tiddlywiki
+
+* The selected tab button in the sidebar, including the More tab's All and Plugin buttons, now shows a visible border in the Vanilla theme, which also improves selected tab visibility in Snow White and the other bundled themes (fixes [[Issue #9138|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9138]])
