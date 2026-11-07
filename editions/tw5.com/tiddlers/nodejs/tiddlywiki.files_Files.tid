@@ -8,6 +8,8 @@ type: text/vnd.tiddlywiki
 
 A `tiddlywiki.files` JSON file in a sub-folder within [[a TiddlyWiki folder|TiddlyWikiFolders]] overrides the usual logic for recursively scanning the folder for tiddler files. Instead, the `tiddlywiki.files` file specifies instructions for loading tiddlers from specific files and folders.
 
+Embedding applications can provide the same specification in memory with the `filesInfo` option of `$tw.loadWikiTiddlers()`. The paths in an in-memory specification are resolved in exactly the same way as an on-disk `tiddlywiki.files` file. This allows applications to manage a flat wiki folder without creating either configuration file on disk.
+
 The format of the file is an object with two optional properties:
 
 * ''tiddlers'' - an array of objects describing external files with the ability to override or modify any of the fields read from the file
