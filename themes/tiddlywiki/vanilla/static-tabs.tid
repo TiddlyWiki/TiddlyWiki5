@@ -1,0 +1,67 @@
+title: $:/themes/tiddlywiki/vanilla/static-tabs
+tags: [[$:/tags/Stylesheet]]
+code-body: yes
+
+/*
+** Static Tabs (sections / details modes)
+*/
+
+.tc-static-tabs {
+	margin: 1.5em 0;
+}
+
+.tc-static-tab {
+	margin: 0.75em 0;
+	border: 1px solid <<colour tab-border>>;
+	border-radius: 6px;
+	background-color: <<colour tab-background-selected>>;
+	color: <<colour tab-foreground-selected>>;
+	overflow: hidden;
+}
+
+.tc-static-tab-heading {
+	margin: 0;
+	padding: 0.5em 0.875em;
+	background-color: <<colour tab-background>>;
+	color: <<colour tab-foreground>>;
+	border-bottom: 1px solid <<colour tab-border>>;
+	font-size: 0.95em;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+}
+
+.tc-static-tab-heading > a {
+	color: inherit;
+	text-decoration: none;
+}
+
+details.tc-static-tab summary.tc-static-tab-heading {
+	cursor: pointer;
+	user-select: none;
+	transition: background-color 0.15s ease;
+}
+
+details.tc-static-tab summary.tc-static-tab-heading:hover {
+	background-color: <<colour tab-background-selected>>;
+}
+
+details.tc-static-tab:not([open]) summary.tc-static-tab-heading {
+	border-bottom: none;
+}
+
+.tc-static-tab-content {
+	padding: 0.75em 0.875em;
+}
+
+.tc-static-tab-content > :first-child {
+	margin-top: 0;
+}
+
+.tc-static-tab-content > :last-child {
+	margin-bottom: 0;
+}
+
+/* Tighten spacing for nested static-tabs */
+.tc-static-tab-content .tc-static-tabs {
+	margin: 0.5em 0;
+}
