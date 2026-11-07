@@ -12,7 +12,7 @@ title: $:/core/templates/server/static.tiddler.wikitext
 </$link> <$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/>
 </div>
 <div class="tc-tags-wrapper" tc-clearfix>
-<$list filter="[all[current]tags[]sort[title]]">
+<$list filter="[all[current]tags[]] +[subfilter{$:/config/Tags/SortFilter}] :else[all[current]tags[]]">
 <a href={{{ [<currentTiddler>encodeuricomponent[]] }}}>
 <$macrocall $name="tag-pill" tag=<<currentTiddler>>/>
 </a>

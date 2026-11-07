@@ -47,6 +47,15 @@ Click to generate wiki information report
 
 \function get.shadow.source() [shadowsource[]]
 
+<!-- Report only whether a custom tag sort filter is in use. The filter itself is never captured, because a custom one can name a user's own tags -->
+\procedure sorted-preset() [sort[]]
+
+\function get.tag.sort.custom()
+[[$:/config/Tags/SortMode]get[text]match[custom]then[yes]]
+:else[[$:/config/Tags/SortFilter]get[text]!match[]!match<sorted-preset>then[yes]]
+:else[[no]]
+\end
+
 \procedure capture-wiki-info(tempWikiInfo)
 <$transclude $variable="capture-item-wikified" label="TiddlyWiki Version" value="<<version>>"/>
 <$transclude $variable="capture-item" label="Current palette" value={{$:/palette}}/>
@@ -67,6 +76,7 @@ Click to generate wiki information report
 <$transclude $variable="capture-item" label="Tiddler opening behaviour setting for navigations from outside the story river" value={{$:/config/Navigation/openLinkFromOutsideRiver}}/>
 <$transclude $variable="capture-item" label="Tiddler opening behaviour setting for navigations from within the story river" value={{$:/config/Navigation/openLinkFromInsideRiver}}/>
 <$transclude $variable="capture-item" label="CamelCase linking setting" value={{$:/config/WikiParserRules/Inline/wikilink}}/>
+<$transclude $variable="capture-item" label="Custom tag sort filter in use" value={{{ [function[get.tag.sort.custom]] }}}/>
 <$transclude $variable="capture-item" label="Keyboard shortcuts that have been customised" value={{{ [all[tiddlers]prefix[$:/config/shortcuts]] +[join[,]] }}}/>
 <$transclude $variable="capture-item" label="Disabled plugins" value={{{ [all[tiddlers]prefix[$:/config/Plugins/Disabled/]] :filter[{!!text}match[yes]] :map[<currentTiddler>removeprefix[$:/config/Plugins/Disabled/]] +[join[,]] }}}/>
 <$transclude $variable="capture-item" label="Plugins" value={{{ [has[plugin-type]sort[]] :filter[<currentTiddler>addprefix[$:/config/Plugins/Disabled/]get[text]else[no]!match[yes]] :map[{!!version}addprefix[ - ]addprefix<currentTiddler>] +[addprefix[  ]addprefix<crlf>join[]] }}}/>
