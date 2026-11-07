@@ -1,0 +1,17 @@
+title: Operators/Colour/ColourSetOklch
+description: colour-set-oklch function
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+<$text text={{{ [subfilter{Filter}] }}}/>
++
+title: Filter
+
+=[[#5778d8]colour-set-oklch[0.5]] =[[#5778d8]colour-set-oklch:l[0.5]] +[join[,]]
++
+title: ExpectedResult
+
+#3d5bb8,#3d5bb8

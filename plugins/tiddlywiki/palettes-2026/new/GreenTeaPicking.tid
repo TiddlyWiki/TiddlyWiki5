@@ -1,0 +1,34 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Green Tea Picking
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/GreenTeaPicking
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #f7f2a5
+base-background: #D5E9A4
+base-danger: #ff3d38
+base-highlight: #ebd414
+base-ink: #484919
+base-link: #438E00
+base-paper: #ECF8C8
+base-primary: #99AC30
+base-tab: #BEE021
+base-tag: #BEE021
+
+# Palette-specific colours and overrides
+alert-border: #438E00
+code-background: #1819141A
+external-link-foreground: #186e77
+external-link-foreground-hover: #ca542a
+external-link-foreground-visited: #875a60
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: [tf.colour[tab-background]]
+sidebar-tab-border-selected: [tf.colour[sidebar-tab-border]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+site-title-foreground: [tf.colour[primary]]
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

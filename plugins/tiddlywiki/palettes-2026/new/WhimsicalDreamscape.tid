@@ -1,0 +1,36 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Whimsical Dreamscape
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/WhimsicalDreamscape
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #eee6c8
+base-background: #CDDDD8
+base-danger: #dc3838
+base-highlight: #f9d53f
+base-ink: #423929
+base-link: #8b5f92
+base-paper: #F1F1F1
+base-primary: #97C7CB
+base-tab: #bae0d5
+base-tag: #D1CA53
+
+# Palette-specific colours and overrides
+alert-border: #896987
+external-link-foreground: #1b6885
+external-link-foreground-hover: #b06b10
+external-link-foreground-visited: #705a74
+highlight-foreground: [tf.colour[foreground]]
+sidebar-foreground: #7d817e
+sidebar-foreground-shadow: #D7E4E0
+sidebar-tab-background: #97C7CB
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tiddler-controls-foreground: [tf.colour[primary]]
+tiddler-controls-foreground-hover: #96a6b0
+tiddler-controls-foreground-selected: #4a6f90
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

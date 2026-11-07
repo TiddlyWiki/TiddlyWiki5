@@ -1,0 +1,39 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Naporitan
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/Naporitan
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #FFDE2D
+base-background: #FFC05B
+base-danger: #990402
+base-highlight: #7fe0b4
+base-ink: #272323
+base-link: #32A24D
+base-paper: #F4FCCD
+base-primary: #E95E09
+base-tab: #ffe575
+base-tag: #FFDE2D
+
+# Palette-specific colours and overrides
+alert-border: #E95E09
+alert-muted-foreground: #B39B1F
+external-link-foreground: #227841
+external-link-foreground-hover: #dd3e2e
+external-link-foreground-visited: #5d6124
+highlight-foreground: [tf.colour[foreground]]
+sidebar-foreground: #653406
+sidebar-muted-foreground: #7a5728
+sidebar-muted-foreground-hover: #512f07
+sidebar-tab-background: #FFDE2D
+sidebar-tab-foreground-selected: #990402
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tiddler-controls-foreground: #FFDE2D
+tiddler-controls-foreground-hover: #CC9A49
+tiddler-controls-foreground-selected: [tf.colour[primary]]
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

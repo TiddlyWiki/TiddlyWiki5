@@ -1,0 +1,25 @@
+created: 20260718221135000
+modified: 20260718221135000
+tags: Concepts
+title: Palette Inheritance
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> A palette can import the entries of another palette with the <<.field palette-import>> field, whose value is the title of the palette to import.
+
+When the palette is [[compiled|ColourPalettes]], the imported palette is processed first, and then the importing palette's own entries are applied on top. An entry defined in the importing palette therefore overrides the entry of the same name in the imported palette. The imported palette can itself import a further palette, allowing chains of variants to be built from a base palette. Fields other than <<.field title>>, <<.field tags>> and <<.field text>> are inherited in the same way.
+
+For example, the core palette ''~TwentyTwenties Dark'' consists of the ''~TwentyTwenties'' palette plus a handful of overridden base colours:
+
+```
+title: $:/palettes/TwentyTwenties/Dark
+palette-import: $:/palettes/TwentyTwenties
+```
+
+The variant <<.field palette-import@scheme>> selects a different palette to import for each [[colour scheme|Colour Schemes]]. The ''~AutoToggle'' palette uses this to switch between palettes as the operating system moves between light and dark modes:
+
+```
+palette-import@light: $:/palettes/TwentyTwenties
+palette-import@dark: $:/palettes/TwentyTwenties/Dark
+```
+
+Palettes tagged <<.tag "$:/tags/BackgroundPalette">> are imported into every palette before its own import chain is processed. The core uses this to apply its standard [[readability tests|Palette Readability Tests]] to all palettes.

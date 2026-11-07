@@ -1,0 +1,38 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Sea Foam Calm
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/SeaFoamCalm
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #fcfed2
+base-background: #DAEEED
+base-danger: #db3d27
+base-highlight: #EEBCD5
+base-ink: #3f4042
+base-link: #508790
+base-paper: #E7F7FB
+base-primary: #79B5C4
+base-tab: #FFE841
+base-tag: #FBC403
+
+# Palette-specific colours and overrides
+alert-border: #F2B04E
+external-link-foreground: #065286
+external-link-foreground-hover: #d95384
+external-link-foreground-visited: #ad606e
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: #FFE841
+sidebar-tab-border: #79B5C4
+sidebar-tab-border-selected: [tf.colour[sidebar-tab-border]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+site-title-foreground: [tf.colour[primary]]
+tab-border: #F2B04E
+table-footer-background: #F2DC3E
+tiddler-controls-foreground: [tf.colour[primary]colour-set-alpha[0.5]]
+tiddler-controls-foreground-hover: [tf.colour[primary]]
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[primary]colour-set-alpha[0.5]]

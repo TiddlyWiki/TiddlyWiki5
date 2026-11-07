@@ -1,0 +1,12 @@
+title: Macros/ContrastColour/ContrastColourBasic
+description: Basic usage of contrastcolour macro
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+Colour: <<contrastcolour target:#1e90ff fallbackTarget:#eecc66 colourA:#333333 colourB:#ffffff>>
++
+title: ExpectedResult
+
+<p>Colour: #ffffff</p>

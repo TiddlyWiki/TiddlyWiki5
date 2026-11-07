@@ -1,0 +1,37 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Beginning of Summer
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/BeginningOfSummer
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #7dd1c4
+base-background: #45DCD3
+base-danger: #d6372a
+base-highlight: #f1bd40
+base-ink: #143e50
+base-link: #005586
+base-paper: #D2F7F0
+base-primary: #177775
+base-tab: #71bf9e
+base-tag: #3EAB78
+
+# Palette-specific colours and overrides
+alert-border: #005586
+alert-muted-foreground: #7b8185
+code-background: #1519181A
+external-link-foreground: #016cb6
+external-link-foreground-hover: #bd4b52
+external-link-foreground-visited: #63508c
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: #3EAB78
+sidebar-tab-foreground: [tf.colour[background]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+site-title-foreground: [tf.colour[primary]]
+tiddler-controls-foreground: #3EAB78
+tiddler-controls-foreground-hover: #97eae1
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

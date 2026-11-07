@@ -26,25 +26,26 @@ exports.params = [
 Run the macro
 */
 exports.run = function(target,fallbackTarget,colourA,colourB) {
-	var rgbTarget = $tw.utils.parseCSSColor(target) || $tw.utils.parseCSSColor(fallbackTarget);
+	var rgbTarget = $tw.utils.parseCSSColorObject(target) || $tw.utils.parseCSSColorObject(fallbackTarget);
 	if(!rgbTarget) {
 		return colourA;
 	}
-	var rgbColourA = $tw.utils.parseCSSColor(colourA),
-		rgbColourB = $tw.utils.parseCSSColor(colourB);
+	var rgbColourA = $tw.utils.parseCSSColorObject(colourA),
+		rgbColourB = $tw.utils.parseCSSColorObject(colourB);
 	if(rgbColourA && !rgbColourB) {
-		return rgbColourA;
+		return colourA;
 	}
 	if(rgbColourB && !rgbColourA) {
-		return rgbColourB;
+		return colourB;
 	}
 	if(!rgbColourA && !rgbColourB) {
 		// If neither colour is readable, return a crude inverse of the target
-		return [255 - rgbTarget[0],255 - rgbTarget[1],255 - rgbTarget[2],rgbTarget[3]];
+		rgbTarget.srgb.r = 1 - rgbTarget.srgb.r;
+		rgbTarget.srgb.g = 1 - rgbTarget.srgb.g;
+		rgbTarget.srgb.b = 1 - rgbTarget.srgb.b;
+		return rgbTarget.display();
 	}
-	// Colour brightness formula derived from http://www.w3.org/WAI/ER/WD-AERT/#color-contrast
-	var brightnessTarget = rgbTarget[0] * 0.299 + rgbTarget[1] * 0.587 + rgbTarget[2] * 0.114,
-		brightnessA = rgbColourA[0] * 0.299 + rgbColourA[1] * 0.587 + rgbColourA[2] * 0.114,
-		brightnessB = rgbColourB[0] * 0.299 + rgbColourB[1] * 0.587 + rgbColourB[2] * 0.114;
-	return Math.abs(brightnessTarget - brightnessA) > Math.abs(brightnessTarget - brightnessB) ? colourA : colourB;
+	var aContrast = rgbColourA.contrast(rgbTarget,"DeltaPhi"),
+		bContrast = rgbColourB.contrast(rgbTarget,"DeltaPhi");
+	return aContrast > bContrast ? colourA : colourB;
 };

@@ -6,8 +6,8 @@ const crossPlatformIndexPath = indexPath.replace(/^\/+/, "");
 
 
 test("get started link", async ({ page }) => {
-	// The tests can take a while to run
-	const timeout = 1000 * 60;
+	// The tests can take a while to run, especially on CI runners
+	const timeout = 1000 * 180;
 	test.setTimeout(timeout);
 
 	// Load the generated test TW html

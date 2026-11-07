@@ -6,5 +6,5 @@ $:/language/
 \end
 
 \define lingo(title)
-{{$(lingo-base)$$title$}}
+{{||$(lingo-base)$$title$}}
 \end

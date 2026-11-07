@@ -1,0 +1,17 @@
+title: Operators/Colour/ColourLighten
+description: Lighten colour function
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+<$text text={{{ [subfilter{Filter}] }}}/>
++
+title: Filter
+
+[[#5778d8]colour-lighten[0.5]]
++
+title: ExpectedResult
+
+#c6dbff

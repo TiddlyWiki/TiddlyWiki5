@@ -1,0 +1,12 @@
+title: $:/changenotes/5.5.0/#8702-changecount
+description: New `changecount` filter operator
+release: 5.5.0
+tags: $:/tags/ChangeNote
+created: 20260718000000000
+modified: 20260718000000000
+change-type: feature
+change-category: filters
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8702
+github-contributors: Jermolene
+
+New <<.olink changecount>> filter operator that returns the change count for each tiddler title in the input list. The change count is a counter maintained by the core that is incremented each time a tiddler is modified, making the operator useful for detecting and reacting to changes.

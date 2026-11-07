@@ -1,0 +1,38 @@
+title: Operators/Palettes/SchemeOverrides
+description: Scheme-suffixed palette entries override plain entries and are zipped to the correct values
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<colour page-background>>
+<<colour only-dark>>
+<<colour tab>>
+<<colour tab-border>>
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+MyPalette
++
+title: MyPalette
+name: My Palette
+description: Palette with scheme-suffixed entries
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: dark
+
+page-background: #fe0
+page-background@dark: #221
+only-dark@dark: #123
+tab@dark: #aaa
+tab-border@dark: #bbb
++
+title: ExpectedResult
+
+<p>#221</p><p>#123</p><p>#aaa</p><p>#bbb</p>

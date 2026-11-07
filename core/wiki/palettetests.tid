@@ -1,0 +1,19 @@
+title: $:/snippets/palettetests
+
+<$let failureCount={{{ [[$:/temp/palette-colours]indexes[]prefix[?]] :filter[[$:/temp/palette-colours]getindex<currentTiddler>!match[ok]] +[count[]] }}}>
+
+<%if [<failureCount>compare:number:gt[0]] %>
+
+Palette test failures: <$text text=<<failureCount>>/>
+
+<$list filter="[[$:/temp/palette-colours]indexes[]prefix[?]sort[]]" variable="name">
+	<%if [[$:/temp/palette-colours]getindex<name>!match[ok]] %>
+		<div>
+			''<$text text={{{ [<name>removeprefix[?]] }}}/>'': <$text text={{{ [[$:/temp/palette-colours]getindex<name>] }}}/>
+		</div>
+	<%endif%>
+</$list>
+
+<%endif%>
+
+</$let>

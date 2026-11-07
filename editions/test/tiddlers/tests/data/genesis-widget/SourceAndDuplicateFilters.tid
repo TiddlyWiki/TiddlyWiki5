@@ -1,0 +1,24 @@
+title: Genesis/SourceAndDuplicateFilters
+description: Attribute name/value filters that depend on the source tiddlers, and duplicate values that must not be deduplicated
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Apple
+tags: GenesisTag
+
++
+title: banana
+tags: GenesisTag
+
++
+title: Output
+
+\whitespace trim
+<$genesis $type="span" $names="[tag[GenesisTag]addprefix[data-]]" $values="same same"/>
+<$setmultiplevariables $names="[[x]] [[y]]" $values="[[same]] [[same]]">
+<<x>>-<<y>>
+</$setmultiplevariables>
++
+title: ExpectedResult
+
+<p><span data-Apple="same" data-banana="same"></span>same-same</p>

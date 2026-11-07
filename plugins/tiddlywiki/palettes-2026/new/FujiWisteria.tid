@@ -1,0 +1,40 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Fuji Wisteria
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/FujiWisteria
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #DBE4AD
+base-background: #B9C4E2
+base-danger: #ed3b2f
+base-highlight: #fdb1a8
+base-ink: #6a688f
+base-link: #7A78B5
+base-paper: #F6F2E6
+base-primary: #9C94C4
+base-tab: #DBE4AD
+base-tag: #DBE4AD
+
+# Palette-specific colours and overrides
+alert-border: #7A78B5
+alert-muted-foreground: #888677
+code-background: #1918171A
+external-link-foreground: #6f65a9
+external-link-foreground-hover: #dd4665
+external-link-foreground-visited: #966589
+highlight-foreground: [tf.colour[foreground]]
+sidebar-muted-foreground: #85799b
+sidebar-tab-background: #9C94C4
+sidebar-tab-background-selected: [tf.colour[page-background]]
+sidebar-tab-border-selected: [tf.colour[sidebar-tab-border]]
+sidebar-tab-foreground: [tf.colour[background]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tab-border: #9C94C4
+tiddler-controls-foreground: #aba7d1
+tiddler-controls-foreground-hover: #82899E
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

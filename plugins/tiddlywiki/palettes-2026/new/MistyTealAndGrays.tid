@@ -1,0 +1,38 @@
+category: 2026
+color-scheme: dark
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Misty Teal & Grays
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/MistyTealAndGrays
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #737D8C
+base-background: #819298
+base-danger: #a92531
+base-highlight: #1d91bf
+base-ink: #E6E6DE
+base-link: #ADABAC
+base-paper: #214959
+base-primary: #ADABAC
+base-tab: #737D8C
+base-tag: #737D8C
+
+# Palette-specific colours and overrides
+alert-highlight: #f3b404
+external-link-foreground: #b6d5e2
+external-link-foreground-hover: #dcd289
+external-link-foreground-visited: #d5c0a4
+highlight-foreground: [tf.colour[foreground]]
+sidebar-muted-foreground: #cac6b4
+sidebar-tab-background: #CCCBC7
+sidebar-tab-background-selected: #E6E6DE
+sidebar-tab-foreground: [tf.colour[background]]
+sidebar-tab-foreground-selected: [tf.colour[background]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+tab-border: #C0C0C2
+tag-foreground: [tf.colour[background]]
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]
+tiddler-title-foreground: [tf.colour[page-background]]

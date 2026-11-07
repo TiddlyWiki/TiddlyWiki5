@@ -1,0 +1,52 @@
+title: Operators/Palettes/SchemeImports
+description: Scheme-suffixed palette imports follow the scheme chosen by a filter-valued color-scheme field
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+(<<colour background>>)
+(<$text text={{{ [[$:/temp/palette-colours]get[color-scheme]] }}}/>)
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+TogglePalette
++
+title: SchemeSwitch
+
+dark
++
+title: TogglePalette
+name: Toggle Palette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: [{SchemeSwitch}] :else[[light]]
+palette-import@light: LightPalette
+palette-import@dark: DarkPalette
+
+marker: #123456
++
+title: LightPalette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+
+background: #eeeeee
++
+title: DarkPalette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: dark
+
+background: #111111
++
+title: ExpectedResult
+
+<p>(#111111)
+(dark)</p>
