@@ -1491,6 +1491,64 @@ $tw.Wiki = function(options) {
 		});
 	};
 
+	// Update individual tiddlers of a registered plugin that owns those titles, without the indexer rebuild of unpackPluginTiddlers. additions is an array of tiddler field objects, removals an array of titles, and entries that would not change the plugin are ignored. see: #10066
+	this.updatePluginTiddlers = function(pluginTitle,additions,removals) {
+		var self = this,
+			info = pluginInfo[pluginTitle],
+			hasChanged = false,
+			applyChange = function(title,fields) {
+				var updateDescriptor = {
+					old: {
+						tiddler: self.getTiddler(title),
+						shadow: self.isShadowTiddler(title),
+						exists: self.tiddlerExists(title)
+					}
+				};
+				hasChanged = true;
+				if(fields) {
+					if(!shadowTiddlers[title]) {
+						shadowTiddlerTitles = null;
+					}
+					info.tiddlers[title] = fields;
+					shadowTiddlers[title] = {
+						source: pluginTitle,
+						tiddler: new $tw.Tiddler(fields,{title: title})
+					};
+				} else {
+					delete info.tiddlers[title];
+					delete shadowTiddlers[title];
+					shadowTiddlerTitles = null;
+				}
+				updateDescriptor["new"] = {
+					tiddler: self.getTiddler(title),
+					shadow: self.isShadowTiddler(title),
+					exists: self.tiddlerExists(title)
+				};
+				self.clearCache(title);
+				self.clearGlobalCache();
+				// This is the point of the whole code
+				$tw.utils.each(indexers,function(indexer) {
+					indexer.update(updateDescriptor);
+				});
+				self.enqueueTiddlerEvent(title,!fields,true);
+			};
+		$tw.utils.each(removals,function(title) {
+			if($tw.utils.hop(info.tiddlers,title)) {
+				applyChange(title);
+			}
+		});
+		$tw.utils.each(additions,function(fields) {
+			if(fields && fields.title && JSON.stringify(info.tiddlers[fields.title]) !== JSON.stringify(fields)) {
+				applyChange(fields.title,fields);
+			}
+		});
+		// The plugin tiddler stays current without a change event, which would make startup/plugins.js reload the plugin
+		if(hasChanged && tiddlers[pluginTitle]) {
+			tiddlers[pluginTitle] = new $tw.Tiddler(tiddlers[pluginTitle],{text: JSON.stringify(info,null,$tw.config.preferences.jsonSpaces)});
+			this.clearCache(pluginTitle);
+		}
+	};
+
 	if(this.addIndexersToWiki) {
 		this.addIndexersToWiki();
 	}
