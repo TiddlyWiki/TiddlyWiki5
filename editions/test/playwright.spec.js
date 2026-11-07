@@ -10,6 +10,9 @@ test("get started link", async ({ page }) => {
 	const timeout = 1000 * 60;
 	test.setTimeout(timeout);
 
+	// Keep the local browser test independent of external example assets.
+	await page.route(/^https?:/,(route) => route.abort());
+
 	// Load the generated test TW html
 	await page.goto(`file:///${crossPlatformIndexPath}`);
 

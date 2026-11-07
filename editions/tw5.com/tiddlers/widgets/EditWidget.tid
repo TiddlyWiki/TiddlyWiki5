@@ -24,6 +24,25 @@ The content of the `<$edit>` widget is ignored.
 |inputActions |<<.from-version 5.1.23>> Optional actions that are triggered every time an input event occurs within the input field or textarea |
 |refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
 
+! Editor context
+
+<<.from-version "5.5.0">> The widget exposes the selected editor's name as the `tv-editor-type` variable to its descendants, including toolbar widgets. Editor preview types tagged `$:/tags/EditPreview` may specify an optional `condition` filter to control their visibility. For example, `[<tv-editor-type>match[custom]]` shows a preview only when the selected editor is named `custom`. Preview types without a condition remain available to every editor.
+
+The editor name is not the content type. A tiddler of type `text/custom` uses the default `text` editor unless `$:/config/EditorTypeMappings/text/custom` names a different installed editor. Leading and trailing whitespace in the mapping is ignored. Setting a mapping to `custom` does not install an `<$edit-custom>` widget.
+
+The preview-type dropdown is inside the editor toolbar, so it inherits `tv-editor-type`. The preview pane itself is outside the edit widget and does not inherit that variable. The toolbar also provides `targetTiddler`, the title of the tiddler being edited (the draft when editing through the normal edit template).
+
+!! Testing a preview for a custom content type
+
+This example uses the built-in text editor; no custom editor plugin is needed:
+
+# Create a tiddler with `type` set to `text/custom`.
+# Optionally create `$:/config/EditorTypeMappings/text/custom` with text `text`. Omitting the mapping also selects the text editor.
+# Create a preview tiddler with tag `$:/tags/EditPreview`, caption `text/custom preview`, condition `[<targetTiddler>type[text/custom]]`, and some text to display in the preview pane.
+# Edit the first tiddler and open the toolbar's ''Choose preview type'' dropdown. The custom preview appears. Select it and enable the preview pane to see its content.
+
+To restrict a preview to an editor plugin instead of a content type, match its editor name with `tv-editor-type`, for example `[<tv-editor-type>match[codemirror]]` for the CodeMirror editor. A filter matching `custom` will not match the built-in `text` editor, even when the tiddler's content type is `text/custom`.
+
 ! Examples
 
 !! Edit the contents (text field) of a tiddler titled <%if [<now YYYY-0MM-0DD>is[tiddler]] %> <$tiddler tiddler=<<now YYYY-0MM-0DD>> > <$link/></$tiddler> <%else %> with today’s date <%endif%>
