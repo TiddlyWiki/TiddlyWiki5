@@ -1,0 +1,26 @@
+title: Markdown/RefLinks
+description: reference links
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+[Foo][foo]
+
+[[Foo Bar]][foo]<!-- markdown link has higher precedence -->
+
+[ext[readme|readme.html]][foo]<!-- markdown link has higher precedence -->
+
+[foo]: #FooTiddler
++
+title: ExpectedResult
+
+<div class="markdown">
+<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#FooTiddler">Foo</a>
+</p>
+<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#FooTiddler">[Foo Bar]</a>
+</p>
+<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#FooTiddler">ext[readme|readme.html]</a>
+</p>
+</div>

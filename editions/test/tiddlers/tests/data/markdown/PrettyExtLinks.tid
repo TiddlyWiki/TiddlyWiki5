@@ -1,0 +1,28 @@
+title: Markdown/PrettyExtLnks
+description: prettyext link and linkify on
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+see https://tiddlywiki.com.
+
+[ext[https://tiddlywiki.com]]
+
+[[ext[https://tiddlywiki.com]]](https://tiddlywiki.com)
+
+[ext[TW5|https://tiddlywiki.com]](https://tiddlywiki.com)<!-- markdown link has higher precedence -->
++
+title: ExpectedResult
+
+<div class="markdown">
+<p>see <a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">https://tiddlywiki.com</a>.
+</p>
+<p><a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">https://tiddlywiki.com</a>
+</p>
+<p><a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">[ext[https://tiddlywiki.com]]</a>
+</p>
+<p><a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">ext[TW5|https://tiddlywiki.com]</a>
+</p>
+</div>

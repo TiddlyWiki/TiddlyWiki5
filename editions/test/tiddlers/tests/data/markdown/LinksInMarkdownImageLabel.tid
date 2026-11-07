@@ -1,0 +1,24 @@
+title: Markdown/LinksInMarkdownImageLabel
+description: md image labels are text only
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+![[[foo](uri1)](uri2)](url3)
+
+![[[New Tiddler]]](url3)
+
+![[ext[hello|http://google.com]]](url3)
++
+title: ExpectedResult
+
+<div class="markdown">
+<p><img alt="[foo](uri2)" src="url3">
+</p>
+<p><img alt="New Tiddler" src="url3">
+</p>
+<p><img alt="hello" src="url3">
+</p>
+</div>
