@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#9673
+description: Use focused tiddler state when opening tag trees
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9673
+github-contributors: linonetwo
+
+Tag tree navigation can use the focused tiddler to open the relevant branches automatically.
