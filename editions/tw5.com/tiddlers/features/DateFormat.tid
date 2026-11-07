@@ -53,6 +53,10 @@ The date string is processed with the following substitutions:
 
 Note that other text is passed through unchanged, allowing commas, colons or other separators to be used.
 
+A backslash escapes the character that follows it, which is then never read as the start of a token. Escaping a character that no token begins with, as in `\M\M\M`, leaves that text alone; escaping one that a token does begin with, as in `\0MM`, keeps the escaped character literal and lets the rest of the template be read as usual.
+
+The template `[UTC]YYYY0MM0DD0hh0mm0ssXXX`, as a whole and with nothing else in it, is a shortcut that returns the stored datestamp, and pads the milliseconds to three digits. That is the form the NowMacro documents for producing a value in the same format as the <<.field created>> and <<.field modified>> fields. Anywhere else, `XXX` is not padded, so use `0XXX` when a fixed width is wanted.
+
 The `{era:BCE||CE}` notation can specify different strings for years that are negative, zero or positive. For example `{era:BC|Z|AD}` would display <<.value BC>> for negative years, <<.value AD>> for positive years, and <<.value Z>> for year zero.
 
 ! Examples
