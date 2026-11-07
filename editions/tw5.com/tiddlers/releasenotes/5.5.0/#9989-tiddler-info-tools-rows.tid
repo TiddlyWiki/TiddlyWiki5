@@ -1,0 +1,15 @@
+change-category: hackability
+change-type: enhancement
+created: 20260824145034442
+description: Each row of the tiddler info Tools tab is its own element and can be styled
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9989
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9989
+type: text/vnd.tiddlywiki
+
+* Each row of the ''Tools'' tab in the tiddler info panel is now a `<div class="tc-info-list-item tc-tiny-v-gap-bottom">` instead of a paragraph produced by the blank lines between rows. Row spacing is unchanged
+* `tc-info-list-item` carries no styling of its own. It is there so a row can be targeted from a custom stylesheet
+
+Fixed issues: [[#9988|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9988]]
