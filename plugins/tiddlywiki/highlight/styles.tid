@@ -1,87 +1,167 @@
-title: $:/plugins/tiddlywiki/highlight/styles
+title: $:/plugins/tiddlywiki/highlight/tiddlywiki.css
 tags: [[$:/tags/Stylesheet]] [[$:/tags/Stylesheet/Highlight]]
 
-pre.hljs {
-  padding: 0;
+\rules only filteredtranscludeinline transcludeinline macrocallinline
+
+/*
+  Theme: TiddlyWiki
+*/
+
+:root {
+	--hljs-base-muted: #808080;
+	--hljs-base-red: #dc3130;
+	--hljs-base-orange : #cb4b16;
+	--hljs-base-yellow : #b58900;
+	--hljs-base-green: #859900;
+	--hljs-base-cyan : #2aa198;
+	--hljs-base-blue : #268ad3;
+	--hljs-base-violet : #6c71c4;
+	--hljs-base-magenta : #d3368a;
 }
 
 pre code.hljs {
-  padding: 0.5em;
+	background: inherit;
+	display: block;
+	overflow-x: auto;
 }
 
 .hljs {
-  background: <<colour tiddler-editor-background>>;
-  color: <<colour foreground>>;
-  -webkit-text-size-adjust:none;
+	background: <<colour tiddler-editor-background>>;
+	color: <<colour foreground>>;
+	-webkit-text-size-adjust:none;
 }
 
 .hljs-comment,
-.hljs-quote {
-  color: #93a1a1;
+.hljs-code,
+.hljs-quote,
+.hljs-formula {
+	color: var(--hljs-base-muted);
 }
 
-/* Solarized Green */
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-addition {
-  color: #859900;
-}
-
-/* Solarized Cyan */
-.hljs-number,
-.hljs-string,
-.hljs-meta .hljs-string,
-.hljs-literal,
-.hljs-doctag,
-.hljs-regexp {
-  color: #2aa198;
-}
-
-/* Solarized Blue */
-.hljs-title,
-.hljs-section,
-.hljs-name,
-.hljs-selector-id,
-.hljs-selector-class {
-  color: #268bd2;
-}
-
-/* Solarized Yellow */
-.hljs-attribute,
-.hljs-attr,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-class .hljs-title,
-.hljs-type {
-  color: #b58900;
-}
-
-/* Solarized Orange */
 .hljs-symbol,
+.hljs-operator,
+.hljs-deletion,
+.hljs-section {
+	color: var(--hljs-base-red);
+}
+
+.hljs-punctuation,
 .hljs-bullet,
-.hljs-subst,
+.hljs-built_in,
+.hljs-keyword,
 .hljs-meta,
 .hljs-meta .hljs-keyword,
 .hljs-selector-attr,
-.hljs-selector-pseudo,
-.hljs-link {
-  color: #cb4b16;
+.hljs-selector-pseudo {
+	color: var(--hljs-base-orange);
 }
 
-/* Solarized Red */
-.hljs-built_in,
-.hljs-deletion {
-  color: #dc322f;
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-attribute,
+.hljs-title.class_ {
+	color: var(--hljs-base-yellow);
 }
 
-.hljs-formula {
-  background: #eee8d5;
+.hljs-string,
+.hljs-meta .hljs-string,
+.hljs-number,
+.hljs-literal,
+.hljs-addition {
+	color: var(--hljs-base-green);
+}
+
+.hljs-doctag,
+.hljs-regexp {
+	color: var(--hljs-base-cyan);
+}
+
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-link,
+.hljs-title {
+	color: var(--hljs-base-blue);
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-attr,
+.hljs-property {
+	color: var(--hljs-base-violet);
+}
+
+.hljs-subst {
+	color: var(--hljs-base-magenta);
 }
 
 .hljs-emphasis {
-  font-style: italic;
+	font-style: italic;
 }
 
-.hljs-strong {
-  font-weight: bold;
+.hljs-strong,
+.hljs-section {
+	font-weight: bold;
+}
+
+/*** TiddlylWiki Specific Styling ***/
+
+.hljs-title.call_ {
+	color: var(--hljs-base-yellow);
+}
+
+.hljs-punctuation.filter-run_,
+.hljs-title.filter-op_ {
+	color: var(--hljs-base-blue);
+}
+
+.hljs-property.filter-suffix_,
+.hljs-property.filter-op-suffix_ {
+	color: var(--hljs-base-yellow);
+}
+
+.hljs-attr.cite_ {
+	font-style: italic;
+}
+
+.hljs-string.indirect_ {
+	color: var(--hljs-base-violet);
+}
+
+.hljs-meta.error_ {
+	text-decoration: var(--hljs-base-red) wavy underline 1px;;
+}
+
+.hljs-punctuation.param_ {
+	color: var(--hljs-base-yellow);
+}
+
+/* custom markups */
+
+.hljs-link,
+.hljs-underline {
+	text-decoration-line: underline;
+	text-underline-offset: 3px;
+}
+
+.hljs-superscript {
+	vertical-align: super;
+	font-size: 75%;        /* Shrinks the text appropriately */
+	line-height: 0;        /* Prevents the superscript from adding extra height to the paragraph line */
+}
+
+.hljs-subscript {
+	vertical-align: sub;
+	font-size: 75%;        /* Shrinks the text appropriately */
+	line-height: 0;        /* Prevents the superscript from adding extra height to the paragraph line */
+}
+
+.hljs-strikethrough {
+	text-decoration-line: line-through;
+	text-decoration-thickness: 1px;
+}
+
+.hljs-highlight {
+	background: <<colour highlight-background>>;
 }

@@ -10,11 +10,19 @@
 			"suffix": "\nexports.hljs = hljs;\n"
 		},
 		{
+			"file": "tiddlywiki.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/highlight/tiddlywiki-syntax.js",
+				"module-type": "highlight"
+			}
+		},
+		{
 			"file": "default.min.css",
 			"fields": {
 				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/highlight/highlight.css",
-				"tags": "[[$:/tags/Stylesheet]] [[$:/tags/Stylesheet/Highlight]]"
+				"tags": "[[$:/tags/Stylesheet/Highlight]]"
 			}
 		}
 	]

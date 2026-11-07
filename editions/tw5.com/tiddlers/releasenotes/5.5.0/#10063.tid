@@ -1,0 +1,11 @@
+change-category: plugin
+change-type: enhancement
+description: Add WikiText Syntax Highlighting to highlight.js
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10063
+github-contributors: cdruan
+release: 5.5.0
+title: $:/changenotes/5.5.0/#10063
+tags: $:/tags/ChangeNote
+type: text/vnd.tiddlywiki
+
+Add TiddlyWiki language support to the highlight.js plugin for WikiText syntax highlighting.

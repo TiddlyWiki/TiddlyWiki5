@@ -7,3 +7,4 @@ text/html: html
 image/svg+xml: xml
 text/x-markdown: markdown
 text/markdown: markdown
+text/vnd.tiddlywiki: tiddlywiki
