@@ -1,0 +1,11 @@
+title: $:/changenotes/5.5.0/#10064
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: nodejs
+description: Fixed browser cache validation for streamed static files
+release: 5.5.0
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/10064
+github-contributors: linonetwo
+type: text/vnd.tiddlywiki
+
+Static files served with `use-browser-cache=yes` include cache headers and return HTTP 304 when the browser has the current version.
