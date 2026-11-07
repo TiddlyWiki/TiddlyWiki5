@@ -1,0 +1,8 @@
+title: $:/schemas/WidgetDocs/any-attributes-not-starting-with-$
+field-type: enum
+enum-values: yes no
+required: no
+type: text/vnd.tiddlywiki
+
+Whether this widget accepts arbitrary attributes whose names do not start with `$`.
+This supports widgets like `$action-createtiddler` where plain attributes are mapped to created tiddler fields.

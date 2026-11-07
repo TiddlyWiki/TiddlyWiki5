@@ -1,0 +1,6 @@
+title: $:/schemas/WidgetAttributeDocs/from-version
+field-type: string
+required: no
+type: text/vnd.tiddlywiki
+
+The TiddlyWiki version in which this attribute was introduced.

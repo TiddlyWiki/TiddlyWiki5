@@ -1,0 +1,6 @@
+title: $:/schemas/FilterOperatorDocs/op-parameter-name
+field-type: string
+required: no
+type: text/vnd.tiddlywiki
+
+A short placeholder name for the parameter (e.g. `S`, `F`, `N`), used in documentation templates.

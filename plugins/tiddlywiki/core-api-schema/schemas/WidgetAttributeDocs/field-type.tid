@@ -1,0 +1,7 @@
+title: $:/schemas/WidgetAttributeDocs/field-type
+field-type: enum
+enum-values: string boolean number filter actionstring textref list tiddler-title yes-no
+required: yes
+type: text/vnd.tiddlywiki
+
+The type of value this widget attribute accepts. Used by visual editors to generate the appropriate input control.

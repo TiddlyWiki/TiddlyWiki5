@@ -1,0 +1,6 @@
+title: $:/schemas/FilterOperatorDocs/op-output
+field-type: string
+required: no
+type: text/vnd.tiddlywiki
+
+Describes the output produced by the filter operator.

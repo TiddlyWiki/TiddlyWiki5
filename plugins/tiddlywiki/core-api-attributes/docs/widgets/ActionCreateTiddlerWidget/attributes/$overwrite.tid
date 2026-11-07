@@ -1,0 +1,9 @@
+title: $:/docs/widgets/ActionCreateTiddlerWidget/attributes/$overwrite
+schema: $:/schemas/WidgetAttributeDocs
+field-type: yes-no
+required: no
+default-value: no
+from-version: 5.1.22
+type: text/vnd.tiddlywiki
+
+If set to "yes", it will overwrite existing tiddlers. ''Be careful!''
