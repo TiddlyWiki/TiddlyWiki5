@@ -24,6 +24,23 @@ describe("Wiki-based tests", function() {
 			if(coreTiddler) {
 				wiki.addTiddler(coreTiddler);
 			}
+			// Payload from the import and import-compound fields, like $:/core/ui/TestCaseTemplate;
+			// the test tiddler's own payload is added last so that it can override imported tiddlers
+			if(tiddler.fields["import"]) {
+				$tw.utils.each($tw.wiki.filterTiddlers(tiddler.fields["import"]),function(importTitle) {
+					var importTiddler = $tw.wiki.getTiddler(importTitle);
+					if(importTiddler) {
+						wiki.addTiddler(importTiddler);
+					}
+				});
+			}
+			if(tiddler.fields["import-compound"]) {
+				$tw.utils.each($tw.wiki.filterTiddlers(tiddler.fields["import-compound"]),function(importTitle) {
+					if($tw.wiki.getTiddler(importTitle)) {
+						wiki.addTiddlers(readMultipleTiddlersTiddler(importTitle));
+					}
+				});
+			}
 			wiki.addTiddlers(readMultipleTiddlersTiddler(title));
 			// Unpack plugin tiddlers
 			wiki.readPluginInfo();
@@ -37,8 +54,9 @@ describe("Wiki-based tests", function() {
 				throw "Missing 'Output' tiddler";
 			}
 			if(wiki.tiddlerExists("ExpectedResult")) {
-				// Construct the widget node
-				var text = "{{Output}}\n\n";
+				// Construct the widget node; global macros must be imported explicitly because,
+				// unlike the testcase widget in the browser, this render has no page scope
+				var text = "\\import [subfilter{$:/core/config/GlobalImportFilter}]\n\n{{Output}}\n\n";
 				var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 				// Render the widget node to the DOM
 				var wrapper = renderWidgetNode(widgetNode);

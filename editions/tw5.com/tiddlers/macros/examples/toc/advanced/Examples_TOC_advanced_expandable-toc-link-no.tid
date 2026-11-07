@@ -1,0 +1,33 @@
+created: 20250924105041954
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/advanced/expandable-toc-link-no
+modified: 20250924105453027
+tags: $:/tags/wiki-test-spec advanced
+title: Examples/TOC/advanced/expandable-toc-link-no
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows an expandable TOC where ''every'' element has a chevron
+
+* All paths are expanded as long as `tv-toc-expand() yes` is defined
+
+* The ''bb-bb'' tiddler contains a field: `toc-link: no`, so clicking its caption toggles the branch instead of navigating
+
++
+title: Description
+
+Advanced TOC Expandable "toc-link: no"
++
+title: bb-bb
+tags: bb
+toc-link: no
+
++
+title: Output
+
+\define tv-toc-expand() yes
+
+<div class="tc-table-of-contents">
+<<toc-expandable tag:"Contents">>
+</div>
+
