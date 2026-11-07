@@ -1,5 +1,4 @@
 /*\
-
 title: $:/core/modules/utils/aho-corasick.js
 type: application/javascript
 module-type: utils
@@ -13,8 +12,10 @@ performance and error handling for TiddlyWiki freelinking functionality.
   string and Symbol keys, forcing object keys to be coerced to strings.
 - Outputs are merged at build time (classic AC optimization), eliminating the
   need to walk the failure chain during search.
-- search() converts case per character to avoid Unicode index desync (e.g.
-  Turkish İ expands under toLowerCase(), shifting subsequent indices).
+- Patterns and text are folded the same way, one character at a time, and the
+  automaton is walked in folded space while reported indices stay in the
+  text's own space. Turkish İ folds to two characters, so the two spaces are
+  not the same length.
 - No match count cap in search(); truncation is handled at the render stage
   by processTextWithMatches() to avoid silently dropping matches mid-text.
 - Optional word boundary filtering: CJK always allowed; Latin requires
@@ -23,6 +24,30 @@ performance and error handling for TiddlyWiki freelinking functionality.
 \*/
 
 "use strict";
+
+/*
+Key under which a node keeps the patterns ending at it. Edges are added one character at a
+time, so no edge key can be longer than one character and this cannot collide with one: a
+pattern containing "$$" walks two separate "$" edges. The key was "$" until a pattern
+containing that character overwrote the output list with a child node.
+*/
+var OUTPUTS = "$$";
+
+/*
+Lower case one character at a time, and use this for patterns as well as for text.
+
+Whole string toLowerCase is context sensitive and can change length: Greek "ΑΣ" folds to
+"ας" with a final sigma while its characters fold to "ασ", and Turkish "İ" folds to "i" plus
+a combining dot. Folding the two sides differently put them in different spaces, so
+"İstanbul" could never match itself.
+*/
+function foldCase(str) {
+	var folded = "";
+	for(var i = 0; i < str.length; i++) {
+		folded += str[i].toLowerCase();
+	}
+	return folded;
+}
 
 function AhoCorasick() {
 	this.trie = {};
@@ -42,10 +67,10 @@ AhoCorasick.prototype.addPattern = function(pattern, index) {
 		}
 		node = node[ch];
 	}
-	if(!node.$) {
-		node.$ = [];
+	if(!node[OUTPUTS]) {
+		node[OUTPUTS] = [];
 	}
-	node.$.push({
+	node[OUTPUTS].push({
 		pattern: pattern,
 		index: index,
 		length: pattern.length
@@ -62,7 +87,7 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 	this.failure.set(root, root);
 
 	for(var ch in root) {
-		if(ch === "$") continue;
+		if(ch === OUTPUTS) continue;
 		if(root[ch] && typeof root[ch] === "object") {
 			this.failure.set(root[ch], root);
 			queue.push(root[ch]);
@@ -74,12 +99,16 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 
 	while(queue.length > 0) {
 		if(processedNodes++ >= maxNodes) {
-			throw new Error("Aho-Corasick: buildFailureLinks exceeded maximum nodes (" + maxNodes + ")");
+			var err = new Error("Aho-Corasick: buildFailureLinks exceeded maximum nodes (" + maxNodes + ")");
+			// Tagged so a caller can recognise this one guard and still let real defects
+			// propagate, rather than matching on the message
+			err.code = "AHO_MAX_NODES";
+			throw err;
 		}
 		var node = queue.shift();
 
 		for(var edge in node) {
-			if(edge === "$") continue;
+			if(edge === OUTPUTS) continue;
 			var child = node[edge];
 			if(!child || typeof child !== "object") continue;
 
@@ -92,11 +121,11 @@ AhoCorasick.prototype.buildFailureLinks = function() {
 			var nextFail = (fail[edge] && fail[edge] !== child) ? fail[edge] : root;
 			self.failure.set(child, nextFail);
 
-			if(nextFail.$) {
-				if(!child.$) {
-					child.$ = [];
+			if(nextFail[OUTPUTS]) {
+				if(!child[OUTPUTS]) {
+					child[OUTPUTS] = [];
 				}
-				child.$ = child.$.concat(nextFail.$);
+				child[OUTPUTS] = child[OUTPUTS].concat(nextFail[OUTPUTS]);
 			}
 
 			queue.push(child);
@@ -114,35 +143,49 @@ AhoCorasick.prototype.search = function(text, useWordBoundary, ignoreCase) {
 	var root = this.trie;
 	var textLength = text.length;
 
+	// Folding can turn one character into several, so the automaton is walked in folded
+	// space while every reported index stays in the text's own space
+	var origin = [];
+	var foldedPos = 0;
+
 	for(var i = 0; i < textLength; i++) {
-		var ch = ignoreCase ? text[i].toLowerCase() : text[i];
+		var folded = ignoreCase ? text[i].toLowerCase() : text[i];
 
-		while(node !== root && !node[ch]) {
-			node = this.failure.get(node) || root;
-		}
-		if(node[ch]) {
-			node = node[ch];
-		}
+		for(var f = 0; f < folded.length; f++) {
+			var ch = folded[f];
+			origin[foldedPos] = i;
 
-		if(node.$) {
-			var outputs = node.$;
-			for(var j = 0; j < outputs.length; j++) {
-				var out = outputs[j];
-				var matchStart = i - out.length + 1;
-				var matchEnd = i + 1;
-				if(matchStart < 0) continue;
-
-				if(useWordBoundary && !this.isWordBoundaryMatch(text, matchStart, matchEnd)) {
-					continue;
-				}
-
-				matches.push({
-					pattern: out.pattern,
-					index: matchStart,
-					length: out.length,
-					titleIndex: out.index
-				});
+			while(node !== root && !node[ch]) {
+				node = this.failure.get(node) || root;
 			}
+			if(node[ch]) {
+				node = node[ch];
+			}
+
+			if(node[OUTPUTS]) {
+				var outputs = node[OUTPUTS];
+				for(var j = 0; j < outputs.length; j++) {
+					var out = outputs[j];
+					var foldedStart = foldedPos - out.length + 1;
+					if(foldedStart < 0) continue;
+
+					var matchStart = origin[foldedStart];
+					var matchEnd = i + 1;
+
+					if(useWordBoundary && !this.isWordBoundaryMatch(text, matchStart, matchEnd)) {
+						continue;
+					}
+
+					matches.push({
+						pattern: out.pattern,
+						index: matchStart,
+						length: matchEnd - matchStart,
+						titleIndex: out.index
+					});
+				}
+			}
+
+			foldedPos++;
 		}
 	}
 
@@ -178,7 +221,7 @@ AhoCorasick.prototype.getStats = function() {
 		if(!node) return;
 		nodeCount++;
 		for(var key in node) {
-			if(key === "$") continue;
+			if(key === OUTPUTS) continue;
 			if(node[key] && typeof node[key] === "object") {
 				countNodes(node[key]);
 			}
@@ -194,3 +237,4 @@ AhoCorasick.prototype.getStats = function() {
 };
 
 exports.AhoCorasick = AhoCorasick;
+exports.foldCase = foldCase;
