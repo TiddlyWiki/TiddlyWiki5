@@ -40,7 +40,9 @@ exports.serializeWikitextParseTree = function serializeWikitextParseTree(tree,op
 			initSerializers(Parser);
 			var serializeOneRule = Parser.prototype.serializers[tree.rule];
 			if(serializeOneRule) {
-				output.push(serializeOneRule(tree,serializeWikitextParseTree));
+				output.push(serializeOneRule(tree,function(children,childOptions) {
+					return serializeWikitextParseTree(children,childOptions || options);
+				},options));
 			} else if(tree.rule === "parseblock") {
 				output.push(serializeWikitextParseTree(tree.children,options),"\n\n");
 			} else {

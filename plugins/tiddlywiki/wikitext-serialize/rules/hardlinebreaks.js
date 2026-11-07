@@ -8,13 +8,26 @@ module-type: wikiruleserializer
 
 exports.name = "hardlinebreaks";
 
-exports.serialize = function(tree,serialize) {
-	var text = tree.tag === "br" ? "\n" : (tree.text || "");
-	if(tree.isRuleStart) {
-		return '"""\n' + text;
+exports.serialize = function(tree,serialize,options) {
+	options = options || {};
+	if(tree.type !== "void") {
+		// Accept the old flat tree too, including a single node carrying both flags
+		var text = tree.tag === "br" ? "\n" : (tree.text || "") + serialize(tree.children || []);
+		if(tree.tag === "br" && options.source && typeof tree.start === "number" && typeof tree.end === "number") {
+			var lineEnd = options.source.substring(tree.start,tree.end);
+			if(/^\r?\n$/.test(lineEnd)) {
+				text = lineEnd;
+			}
+		}
+		return (tree.isRuleStart ? '"""\n' : "") + text + (tree.isRuleEnd ? '"""' : "");
 	}
-	if(tree.isRuleEnd) {
-		return text + '"""';
+	// The source distinguishes inline, LF, CRLF and empty region openers
+	var opener = '"""\n';
+	if(options.source && typeof tree.start === "number") {
+		var match = /^"""(?:\r?\n)?/.exec(options.source.substring(tree.start));
+		if(match) {
+			opener = match[0];
+		}
 	}
-	return text + serialize(tree.children);
+	return opener + serialize(tree.children) + '"""';
 };
