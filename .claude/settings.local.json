@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs grep -l \"filterparser\\\\|parse.*filter\")",
+      "Bash(xargs grep -l \"function.*parseFilter\\\\|exports.parse\")",
+      "Bash(node -e \":*)"
+    ]
+  }
+}

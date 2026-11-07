@@ -1,0 +1,104 @@
+title: $:/core/css/filter-html
+type: text/css
+tags: $:/tags/Stylesheet
+
+.tc-filter-run {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin: 0 2px;
+    background-color: #f0f0f0;
+}
+
+.tc-filter-prefix {
+    font-weight: bold;
+    color: #c00;
+}
+
+.tc-filter-operator-name {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.tc-filter-suffix-group {
+    color: #5a6268;
+    font-style: italic;
+    margin-left: 1px;
+}
+
+.tc-filter-suffix-entry {
+    background-color: #e9ecef;
+    padding: 0 3px;
+    border-radius: 3px;
+    font-style: normal;
+}
+
+.tc-filter-operand {
+    color: #28a745;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+.tc-filter-operand-indirect {
+    background-color: #fff3cd;
+}
+
+.tc-filter-operand-variable {
+    background-color: #d4edda;
+}
+
+.tc-filter-small-element {
+    display: inline-block;
+    padding: 2px 4px;
+    border-radius: 3px;
+    line-height: 1;
+}
+
+.tc-filter-punctuation {
+    color: #999;
+}
+
+/* --- Hover Effects --- */
+
+.tc-filter-prefix:hover,
+.tc-filter-operator-name:hover,
+.tc-filter-suffix-entry:hover,
+.tc-filter-operand:hover,
+.tc-filter-punctuation:hover {
+    background-color: #007bff;
+    color: #fff !important;
+    cursor: default;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+
+.tc-filter-operand-indirect:hover,
+.tc-filter-operand-variable:hover {
+    background-color: #0069d9;
+}
+
+/* --- Filter debug table --- */
+
+.tc-filter-debug-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.tc-filter-debug-table td,
+.tc-filter-debug-table th {
+    padding: 2px 4px 5px;
+}
+
+.tc-filter-debug-sticky > td,
+.tc-filter-debug-sticky > th {
+    position: sticky;
+    top: 3em;
+    background-color: var(--tpc-page-background);
+    z-index: 1000;
+    box-shadow: inset 0 2px 0 var(--tpc-primary), inset 0 -2px 0 var(--tpc-primary);
+}
+
+.tc-filter-debug-sticky > td:first-child,
+.tc-filter-debug-sticky > th:first-child {
+    box-shadow: inset 0 2px 0 var(--tpc-primary), inset 0 -2px 0 var(--tpc-primary), inset 2px 0 0 var(--tpc-primary);
+}
+
