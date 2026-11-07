@@ -1,0 +1,8 @@
+title: $:/config/codemirror-6/editor/indentUnit
+caption: Indent with
+description: Choose whether to use tabs or spaces for indentation
+config-type: select
+config-category: Indentation
+config-options: [{"value":"tab","label":"Tabs"},{"value":"spaces","label":"Spaces"}]
+default: tab
+text: tab

@@ -1,0 +1,487 @@
+title: $:/plugins/tiddlywiki/codemirror-6-themes/ironworks/styles
+tags: $:/tags/Stylesheet
+
+\rules only macrocallinline macrocallblock conditional
+
+/* ============================================================================
+   Ironworks Theme for CodeMirror 6
+   ============================================================================
+
+   A machine shop, not a museum of one. The two variants take their surfaces
+   straight from the Ironworks palettes that ship with the
+   $:/themes/BurningTreeC/vanilla-ironworks page theme, so an editor themed
+   this way sits on the same drafting stock as the plate around it instead of
+   on a panel of its own.
+
+   The theme is self-contained and does not require that page theme. Every
+   value here is a literal, like every other theme in this collection, so
+   picking it under any palette gives the same editor.
+
+   Nightshift is listed first because it is the shop's own default: this is a
+   theme about worked metal, and metal is read by the light you bring to it.
+
+   ----------------------------------------------------------------------------
+   Where the colours come from
+   ----------------------------------------------------------------------------
+
+   Every hue in here is a material that is actually in the shop, and each one
+   keeps the job it does in the page theme:
+
+     ember       the forge, and the accent - cursor, selection, the one warm
+                 thing in a cold room. Macros take it.
+     brass       fittings and the code face. Attributes and code text.
+     verdigris   what bronze does with time. Widgets.
+     patina      the same reaction further along. Strings.
+     cyanotype   the blueprint blue the page theme uses for anything that
+                 leaves the wiki. Links.
+     steel       cold, unoxidised. Filters.
+     aniline     the violet in a marking dye. Transclusions.
+     manganese   the other bottle on the shelf. Pragmas.
+     oxide       rust, in two strengths: a bloom for conditionals and a
+                 harder, more saturated one for errors.
+
+   ----------------------------------------------------------------------------
+   How the syntax colours were built
+   ----------------------------------------------------------------------------
+
+   One lightness, ten hues - the same discipline the Vanilla Paper theme in
+   this collection uses, and for the same reason. Every token colour in a
+   variant sits at one OKLCH lightness and differs only in hue, so the eye
+   reads the SHAPE of the code first and colour is left to say what kind of
+   thing a token is.
+
+   The lightnesses are NOT the ones Vanilla Paper uses, and that is the point
+   of computing them rather than copying them. Ironworks writes on darker
+   stock in both variants - drafting canvas rather than cream paper by day,
+   soot rather than warm dark paper by night - so the same lightness would
+   give a different contrast. They were solved against these two grounds:
+
+     Dayshift    L 0.40 on #ded7c9   ->  6.14:1 to 6.89:1
+     Nightshift  L 0.82 on #171412   -> 10.07:1 to 11.10:1
+
+   Errors are the single exception and break the rule deliberately. On
+   Nightshift the lightness drops to 0.74 to buy the chroma the gamut will not
+   give at 0.82: at one lightness the error red comes out no more saturated
+   than the conditional rose beside it, which is precisely the token that must
+   not blend in. It still clears 7.4:1.
+
+   Dayshift stock:  #ded7c9   Dayshift graphite:  #25231f
+   Nightshift soot: #171412   Nightshift ink:     #d9d0c4
+
+   ============================================================================ */
+
+/* ============================================================================
+   Ironworks Nightshift
+   ============================================================================ */
+
+.cm6-theme-ironworks-nightshift,
+[data-cm6-theme="ironworks-nightshift"] {
+  /* Base palette - soot ground, cold iron ink */
+  --wt-bg: #171412;
+  --wt-bg-subtle: #1f1b18;
+  --wt-fg: #d9d0c4;
+  --wt-fg-muted: #b3a99c;
+  --wt-fg-faint: #8d8377;
+  --wt-border: #2e2823;
+  --wt-selection: rgba(224, 124, 63, 0.22);
+  --wt-line-highlight: rgba(224, 124, 63, 0.07);
+
+  /* Semantic colours - one lightness, ten hues */
+  --wt-teal: #3adfd7;           /* widgets       verdigris */
+  --wt-teal-dim: #9bd0cc;
+  --wt-blue: #95c9ff;           /* links         cyanotype */
+  --wt-violet: #dcaeff;         /* transclusions aniline */
+  --wt-cyan: #5ed4ff;           /* filters       steel */
+  --wt-orange: #ffae81;         /* macros        ember */
+  --wt-rose: #ffaaa9;           /* conditionals  oxide bloom */
+  --wt-amber: #f0ba59;          /* attributes    brass */
+  --wt-slate: #c9c3bc;          /* code text     graphite */
+  --wt-purple: #bdbcff;         /* pragmas       manganese */
+  --wt-green: #83dc97;          /* strings       patina */
+  --wt-red: #ff7f71;            /* errors        hard oxide */
+
+  /* Formatting - emphasis is carried by weight and slope, not by more hues */
+  --wt-bold: #d9d0c4;
+  --wt-italic: #d9d0c4;
+  --wt-strike: #8d8377;
+  --wt-underline: #d9d0c4;
+  --wt-heading: #d9d0c4;
+
+  /* Code blocks - the brass the page theme sets code in */
+  --wt-code-bg: #1f1b18;
+  --wt-code-fg: #d3a84e;
+
+  /* Highlight - a brass marker run over the line */
+  --wt-highlight-bg: rgba(211, 168, 78, 0.20);
+  --wt-highlight-fg: #d9d0c4;
+
+  /* Comments */
+  --wt-comment: #a29e98;
+  --wt-mark: #2a2620;
+}
+
+/* ============================================================================
+   Ironworks Dayshift
+   ============================================================================ */
+
+.cm6-theme-ironworks-dayshift,
+[data-cm6-theme="ironworks-dayshift"] {
+  /* Base palette - drafting canvas, graphite */
+  --wt-bg: #ded7c9;
+  --wt-bg-subtle: #d4cbba;
+  --wt-fg: #25231f;
+  --wt-fg-muted: #4a463f;
+  --wt-fg-faint: #756e63;
+  --wt-border: #cec5b3;
+  --wt-selection: rgba(157, 74, 34, 0.20);
+  --wt-line-highlight: rgba(157, 74, 34, 0.07);
+
+  /* Semantic colours - same hues, driven into lighter stock */
+  --wt-teal: #005350;           /* widgets       verdigris */
+  --wt-teal-dim: #354d4b;
+  --wt-blue: #004981;           /* links         cyanotype */
+  --wt-violet: #5d2e7b;         /* transclusions aniline */
+  --wt-cyan: #005066;           /* filters       steel */
+  --wt-orange: #733200;         /* macros        ember */
+  --wt-rose: #7f1f29;           /* conditionals  oxide bloom */
+  --wt-amber: #5f4200;          /* attributes    brass */
+  --wt-slate: #4c4741;          /* code text     graphite */
+  --wt-purple: #433889;         /* pragmas       manganese */
+  --wt-green: #005725;          /* strings       patina */
+  --wt-red: #8b0006;            /* errors        hard oxide */
+
+  /* Formatting */
+  --wt-bold: #25231f;
+  --wt-italic: #25231f;
+  --wt-strike: #756e63;
+  --wt-underline: #25231f;
+  --wt-heading: #25231f;
+
+  /* Code blocks */
+  --wt-code-bg: #d4cbba;
+  --wt-code-fg: #7a5615;
+
+  /* Highlight */
+  --wt-highlight-bg: rgba(122, 86, 21, 0.22);
+  --wt-highlight-fg: #25231f;
+
+  /* Comments */
+  --wt-comment: #5b5752;
+  --wt-mark: #d0c7b5;
+}
+
+/* ============================================================================
+   Token Overrides - Nightshift
+   ============================================================================ */
+
+.cm6-theme-ironworks-nightshift .tok-string,
+.cm6-theme-ironworks-nightshift .tok-string2,
+[data-cm6-theme="ironworks-nightshift"] .tok-string,
+[data-cm6-theme="ironworks-nightshift"] .tok-string2 {
+  color: #83dc97;
+}
+
+.cm6-theme-ironworks-nightshift .tok-keyword,
+[data-cm6-theme="ironworks-nightshift"] .tok-keyword {
+  color: #95c9ff;
+}
+
+.cm6-theme-ironworks-nightshift .tok-function,
+[data-cm6-theme="ironworks-nightshift"] .tok-function {
+  color: #ffae81;
+}
+
+.cm6-theme-ironworks-nightshift .tok-number,
+[data-cm6-theme="ironworks-nightshift"] .tok-number {
+  color: #ffaaa9;
+}
+
+.cm6-theme-ironworks-nightshift .tok-typeName,
+[data-cm6-theme="ironworks-nightshift"] .tok-typeName {
+  color: #3adfd7;
+}
+
+.cm6-theme-ironworks-nightshift .tok-operator,
+[data-cm6-theme="ironworks-nightshift"] .tok-operator {
+  color: #bdbcff;
+}
+
+.cm6-theme-ironworks-nightshift .tok-comment,
+[data-cm6-theme="ironworks-nightshift"] .tok-comment {
+  color: #a29e98;
+  font-style: italic;
+}
+
+/* ============================================================================
+   Token Overrides - Dayshift
+   ============================================================================ */
+
+.cm6-theme-ironworks-dayshift .tok-string,
+.cm6-theme-ironworks-dayshift .tok-string2,
+[data-cm6-theme="ironworks-dayshift"] .tok-string,
+[data-cm6-theme="ironworks-dayshift"] .tok-string2 {
+  color: #005725;
+}
+
+.cm6-theme-ironworks-dayshift .tok-keyword,
+[data-cm6-theme="ironworks-dayshift"] .tok-keyword {
+  color: #004981;
+}
+
+.cm6-theme-ironworks-dayshift .tok-function,
+[data-cm6-theme="ironworks-dayshift"] .tok-function {
+  color: #733200;
+}
+
+.cm6-theme-ironworks-dayshift .tok-number,
+[data-cm6-theme="ironworks-dayshift"] .tok-number {
+  color: #7f1f29;
+}
+
+.cm6-theme-ironworks-dayshift .tok-typeName,
+[data-cm6-theme="ironworks-dayshift"] .tok-typeName {
+  color: #005350;
+}
+
+.cm6-theme-ironworks-dayshift .tok-operator,
+[data-cm6-theme="ironworks-dayshift"] .tok-operator {
+  color: #433889;
+}
+
+.cm6-theme-ironworks-dayshift .tok-comment,
+[data-cm6-theme="ironworks-dayshift"] .tok-comment {
+  color: #5b5752;
+  font-style: italic;
+}
+
+/* ============================================================================
+   Editor Chrome - Nightshift
+   ============================================================================ */
+
+.cm6-theme-ironworks-nightshift .cm-editor,
+[data-cm6-theme="ironworks-nightshift"] .cm-editor {
+  background-color: #171412;
+  color: #d9d0c4;
+}
+
+.cm6-theme-ironworks-nightshift .cm-gutters,
+[data-cm6-theme="ironworks-nightshift"] .cm-gutters {
+  background-color: #171412;
+  color: #6b6259;
+  border-right-color: #26211d;
+}
+
+.cm6-theme-ironworks-nightshift .cm-activeLine,
+[data-cm6-theme="ironworks-nightshift"] .cm-activeLine {
+  background-color: rgba(224, 124, 63, 0.07);
+}
+
+.cm6-theme-ironworks-nightshift .cm-activeLineGutter,
+[data-cm6-theme="ironworks-nightshift"] .cm-activeLineGutter {
+  background-color: rgba(224, 124, 63, 0.12);
+  color: #8d8377;
+}
+
+.cm6-theme-ironworks-nightshift .cm-editor .cm-cursor,
+[data-cm6-theme="ironworks-nightshift"] .cm-editor .cm-cursor {
+  border-left-color: #e07c3f;
+}
+
+.cm6-theme-ironworks-nightshift .cm-selectionBackground,
+.cm6-theme-ironworks-nightshift .cm-content ::selection,
+[data-cm6-theme="ironworks-nightshift"] .cm-selectionBackground,
+[data-cm6-theme="ironworks-nightshift"] .cm-content ::selection {
+  background-color: rgba(224, 124, 63, 0.22);
+}
+
+.cm6-theme-ironworks-nightshift .cm-editor .cm-matchingBracket,
+[data-cm6-theme="ironworks-nightshift"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(224, 124, 63, 0.18);
+  outline: 1px solid #e07c3f;
+}
+
+.cm6-theme-ironworks-nightshift .cm-foldPlaceholder,
+[data-cm6-theme="ironworks-nightshift"] .cm-foldPlaceholder {
+  background-color: #1f1b18;
+  border-color: #2e2823;
+  color: #8d8377;
+}
+
+.cm6-theme-ironworks-nightshift .cm-panels,
+[data-cm6-theme="ironworks-nightshift"] .cm-panels {
+  background-color: #1f1b18;
+  color: #d9d0c4;
+  border-color: #2e2823;
+}
+
+.cm6-theme-ironworks-nightshift .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="ironworks-nightshift"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #1f1b18;
+  border-color: #2e2823;
+  color: #d9d0c4;
+}
+
+.cm6-theme-ironworks-nightshift .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="ironworks-nightshift"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #e07c3f;
+  color: #171412;
+}
+
+.cm6-theme-ironworks-nightshift .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="ironworks-nightshift"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(23, 20, 18, 0.8);
+}
+
+.cm6-theme-ironworks-nightshift .cm-completionMatchedText,
+[data-cm6-theme="ironworks-nightshift"] .cm-completionMatchedText {
+  color: #e07c3f;
+}
+
+/* ============================================================================
+   Editor Chrome - Dayshift
+   ============================================================================ */
+
+.cm6-theme-ironworks-dayshift .cm-editor,
+[data-cm6-theme="ironworks-dayshift"] .cm-editor {
+  background-color: #ded7c9;
+  color: #25231f;
+}
+
+.cm6-theme-ironworks-dayshift .cm-gutters,
+[data-cm6-theme="ironworks-dayshift"] .cm-gutters {
+  background-color: #ded7c9;
+  color: #857d70;
+  border-right-color: #d2c9b8;
+}
+
+.cm6-theme-ironworks-dayshift .cm-activeLine,
+[data-cm6-theme="ironworks-dayshift"] .cm-activeLine {
+  background-color: rgba(157, 74, 34, 0.07);
+}
+
+.cm6-theme-ironworks-dayshift .cm-activeLineGutter,
+[data-cm6-theme="ironworks-dayshift"] .cm-activeLineGutter {
+  background-color: rgba(157, 74, 34, 0.12);
+  color: #756e63;
+}
+
+.cm6-theme-ironworks-dayshift .cm-editor .cm-cursor,
+[data-cm6-theme="ironworks-dayshift"] .cm-editor .cm-cursor {
+  border-left-color: #9d4a22;
+}
+
+.cm6-theme-ironworks-dayshift .cm-selectionBackground,
+.cm6-theme-ironworks-dayshift .cm-content ::selection,
+[data-cm6-theme="ironworks-dayshift"] .cm-selectionBackground,
+[data-cm6-theme="ironworks-dayshift"] .cm-content ::selection {
+  background-color: rgba(157, 74, 34, 0.20);
+}
+
+.cm6-theme-ironworks-dayshift .cm-editor .cm-matchingBracket,
+[data-cm6-theme="ironworks-dayshift"] .cm-editor .cm-matchingBracket {
+  background-color: rgba(157, 74, 34, 0.16);
+  outline: 1px solid #9d4a22;
+}
+
+.cm6-theme-ironworks-dayshift .cm-foldPlaceholder,
+[data-cm6-theme="ironworks-dayshift"] .cm-foldPlaceholder {
+  background-color: #d4cbba;
+  border-color: #cec5b3;
+  color: #756e63;
+}
+
+.cm6-theme-ironworks-dayshift .cm-panels,
+[data-cm6-theme="ironworks-dayshift"] .cm-panels {
+  background-color: #d9d2c3;
+  color: #25231f;
+  border-color: #cec5b3;
+}
+
+.cm6-theme-ironworks-dayshift .cm-tooltip.cm-tooltip-autocomplete,
+[data-cm6-theme="ironworks-dayshift"] .cm-tooltip.cm-tooltip-autocomplete {
+  background-color: #d9d2c3;
+  border-color: #cec5b3;
+  color: #25231f;
+}
+
+.cm6-theme-ironworks-dayshift .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected],
+[data-cm6-theme="ironworks-dayshift"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] {
+  background-color: #9d4a22;
+  color: #ded7c9;
+}
+
+.cm6-theme-ironworks-dayshift .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail,
+[data-cm6-theme="ironworks-dayshift"] .cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected] .cm-completionDetail {
+  color: rgba(222, 215, 201, 0.8);
+}
+
+.cm6-theme-ironworks-dayshift .cm-completionMatchedText,
+[data-cm6-theme="ironworks-dayshift"] .cm-completionMatchedText {
+  color: #9d4a22;
+}
+
+/* ============================================================================
+   Vim Mode - Nightshift
+
+   The block cursor covers a character, so it cannot simply be tinted: whatever
+   fills it has to have the ground knocked out of it, or the character you are
+   sitting on becomes the one character you cannot read.
+   ============================================================================ */
+
+.cm6-theme-ironworks-nightshift .cm-fat-cursor,
+[data-cm6-theme="ironworks-nightshift"] .cm-fat-cursor {
+  background: #e07c3f !important;
+  color: #171412 !important;
+}
+
+.cm6-theme-ironworks-nightshift .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="ironworks-nightshift"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: transparent !important;
+  outline: 1px solid #7a5a44;
+  color: inherit !important;
+}
+
+.cm6-theme-ironworks-nightshift .cm-vim-panel,
+[data-cm6-theme="ironworks-nightshift"] .cm-vim-panel {
+  background: #1f1b18;
+  border-color: #2e2823;
+  color: #d9d0c4;
+}
+
+.cm6-theme-ironworks-nightshift .cm-vim-panel input,
+[data-cm6-theme="ironworks-nightshift"] .cm-vim-panel input {
+  background: #171412;
+  color: #d9d0c4;
+  border-color: #2e2823;
+}
+
+/* ============================================================================
+   Vim Mode - Dayshift
+   ============================================================================ */
+
+.cm6-theme-ironworks-dayshift .cm-fat-cursor,
+[data-cm6-theme="ironworks-dayshift"] .cm-fat-cursor {
+  background: #9d4a22 !important;
+  color: #ded7c9 !important;
+}
+
+.cm6-theme-ironworks-dayshift .cm-editor:not(.cm-focused) .cm-fat-cursor,
+[data-cm6-theme="ironworks-dayshift"] .cm-editor:not(.cm-focused) .cm-fat-cursor {
+  background: transparent !important;
+  outline: 1px solid #b08d75;
+  color: inherit !important;
+}
+
+.cm6-theme-ironworks-dayshift .cm-vim-panel,
+[data-cm6-theme="ironworks-dayshift"] .cm-vim-panel {
+  background: #d9d2c3;
+  border-color: #cec5b3;
+  color: #25231f;
+}
+
+.cm6-theme-ironworks-dayshift .cm-vim-panel input,
+[data-cm6-theme="ironworks-dayshift"] .cm-vim-panel input {
+  background: #ded7c9;
+  color: #25231f;
+  border-color: #cec5b3;
+}

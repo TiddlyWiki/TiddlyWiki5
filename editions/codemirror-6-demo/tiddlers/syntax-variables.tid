@@ -1,0 +1,66 @@
+title: Draft of 'Syntax — Variables, Text References & Substitution'
+draft.of: Syntax — Variables, Text References & Substitution
+draft.title: Syntax — Variables, Text References & Substitution
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+! Variable references
+
+* Simple variable: <<currentTiddler>>
+* Built-in: <<now "YYYY-0MM-0DD">>
+* In a filter: {{{ [<currentTiddler>] }}}
+* As an attribute value: <$text text=<<currentTiddler>>/>
+
+! Text references
+
+Text references address a tiddler field, index or property.
+
+* Field of current tiddler: {{!!title}}
+* Field of another tiddler: {{HelloThere!!caption}}
+* Index of a data tiddler: {{MyData##key}}
+* In a filter operand: {{{ [get{!!modified}] }}}
+* As a widget attribute: <$text text={{!!title}}/>
+
+! Multi-valued variables
+
+* Display form: ((myListVariable))
+* With a separator: ((myListVariable||, ))
+* In a filter: {{{ [(myListVariable)] }}}
+
+! Substituted attribute values (backticks)
+
+Backtick-quoted attribute values allow embedded substitution. This is distinct
+from inline code.
+
+* Single backtick: <$text text=`Hello $(currentTiddler)$`/>
+* With a filter substitution: <$text text=`There are ${ [tag[done]count[]] }$ done items`/>
+* Triple backtick (allows literal backticks):
+<$text text=```a literal ` backtick, and $(currentTiddler)$```/>
+
+Within a substituted value:
+* `$(varname)$` substitutes a variable's value
+* `${ filter }$` substitutes the result of a filter
+
+! Setting variables
+
+<$let
+	colour="red"
+	size="big"
+	greeting=`Hello from $(currentTiddler)$`
+>
+Inside the let: <<colour>>, <<size>>, <<greeting>>.
+</$let>
+
+<$set name="answer" value="42">
+The answer is <<answer>>.
+</$set>
+
+<$vars name="Jane" role="admin">
+<<name>> is an <<role>>.
+</$vars>
+
+! Parameters via the parameters widget
+
+<$parameters first="a" second="b">
+<<first>> and <<second>>
+</$parameters>

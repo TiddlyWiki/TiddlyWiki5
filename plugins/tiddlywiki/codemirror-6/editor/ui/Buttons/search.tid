@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Buttons/search
+tags: $:/tags/EditorToolbar
+caption: {{$:/plugins/tiddlywiki/codemirror-6/icons/search}} Search
+description: Toggle search panel
+icon: $:/plugins/tiddlywiki/codemirror-6/icons/search
+condition: [<targetTiddler>]
+
+<$action-sendmessage $message="tm-cm6-toggle-search"/>

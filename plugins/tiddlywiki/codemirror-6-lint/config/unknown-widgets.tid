@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lint/unknownWidgets
+caption: Unknown Widgets
+description: Highlight unrecognized widget names
+text: yes

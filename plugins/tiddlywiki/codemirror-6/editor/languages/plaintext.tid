@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/plaintext
+tags: $:/tags/CodeMirror/Language
+name: Plain Text
+type: text/plain
+category: Other
+sort-order: 999

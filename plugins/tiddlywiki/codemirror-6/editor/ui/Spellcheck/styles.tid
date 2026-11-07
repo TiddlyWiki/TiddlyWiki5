@@ -1,0 +1,55 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Spellcheck/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.cm6-spellcheck-dropdown {
+  min-width: 180px;
+  padding: 4px 0;
+}
+
+.cm6-spellcheck-section {
+  padding: 4px 0;
+}
+
+.cm6-spellcheck-section:not(:last-child) {
+  border-bottom: 1px solid <<colour tiddler-editor-border>>;
+}
+
+.cm6-spellcheck-section-title {
+  padding: 4px 12px 2px;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: <<colour muted-foreground>>;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cm6-spellcheck-toggle {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  text-align: left;
+  border-radius: 0;
+}
+
+.cm6-spellcheck-toggle:hover {
+  background: <<colour tiddler-editor-background>>;
+}
+
+.cm6-spellcheck-lang-option {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  text-align: left;
+  border-radius: 0;
+}
+
+.cm6-spellcheck-lang-option:hover {
+  background: <<colour tiddler-editor-background>>;
+}
+
+.cm6-spellcheck-lang-option.cm6-selected {
+  background: <<colour primary>>;
+  color: <<colour background>>;
+}

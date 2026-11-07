@@ -1,0 +1,49 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/Spellcheck/Dropdown
+
+\define lang-option(code, label)
+<$button class={{{ [{$:/config/codemirror-6/editor/spellcheck-lang}match[$code$]then[tc-btn-invisible cm6-spellcheck-lang-option cm6-selected]else[tc-btn-invisible cm6-spellcheck-lang-option]] }}}>
+<$action-setfield $tiddler="$:/config/codemirror-6/editor/spellcheck-lang" text="$code$"/>
+<$action-setfield $tiddler="$:/config/codemirror-6/editor/spellcheck" text="yes"/>
+<$action-deletetiddler $tiddler=<<dropdown-state>>/>
+$label$
+</$button>
+\end
+
+<div class="cm6-spellcheck-dropdown">
+
+<div class="cm6-spellcheck-section">
+<div class="cm6-spellcheck-section-title">Spellcheck</div>
+<$button class="tc-btn-invisible cm6-spellcheck-toggle">
+<%if [{$:/config/codemirror-6/editor/spellcheck}match[yes]] %>
+<$action-setfield $tiddler="$:/config/codemirror-6/editor/spellcheck" text="no"/>
+Disable spellcheck
+<%else%>
+<$action-setfield $tiddler="$:/config/codemirror-6/editor/spellcheck" text="yes"/>
+Enable spellcheck
+<%endif%>
+<$action-deletetiddler $tiddler=<<dropdown-state>>/>
+</$button>
+</div>
+
+<div class="cm6-spellcheck-section">
+<div class="cm6-spellcheck-section-title">Language</div>
+<<lang-option "en" "English">>
+<<lang-option "en-US" "English (US)">>
+<<lang-option "en-GB" "English (UK)">>
+<<lang-option "de" "Deutsch">>
+<<lang-option "de-DE" "Deutsch (DE)">>
+<<lang-option "de-AT" "Deutsch (AT)">>
+<<lang-option "de-CH" "Deutsch (CH)">>
+<<lang-option "fr" "Francais">>
+<<lang-option "es" "Espanol">>
+<<lang-option "it" "Italiano">>
+<<lang-option "pt" "Portugues">>
+<<lang-option "nl" "Nederlands">>
+<<lang-option "pl" "Polski">>
+<<lang-option "ru" "Russkiy">>
+<<lang-option "zh" "Zhongwen">>
+<<lang-option "ja" "Nihongo">>
+<<lang-option "ko" "Hangugeo">>
+</div>
+
+</div>

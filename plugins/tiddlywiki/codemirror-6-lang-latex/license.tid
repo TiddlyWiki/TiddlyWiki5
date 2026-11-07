@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/codemirror-6-lang-latex/license
+type: text/plain
+
+MIT License
+
+Copyright (c) 2025 Fares Abawi <fares@abawi.me>
+Copyright (c) 2024-2026 TiddlyWiki Contributors
+
+This plugin bundles code from @TeXlyre/codemirror-lang-latex.
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/mit}}

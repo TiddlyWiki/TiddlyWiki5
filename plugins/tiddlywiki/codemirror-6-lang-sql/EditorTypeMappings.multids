@@ -1,0 +1,4 @@
+title: $:/config/EditorTypeMappings/
+
+application/sql: codemirror-6
+text/x-sql: codemirror-6

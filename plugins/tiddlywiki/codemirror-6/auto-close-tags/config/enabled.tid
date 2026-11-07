@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/auto-close-tags/enabled
+caption: Auto-close tags
+description: Automatically insert closing tags when typing > after an opening HTML or widget tag
+config-type: checkbox
+config-category: Tags
+default: yes
+text: yes

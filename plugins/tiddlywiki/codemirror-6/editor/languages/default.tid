@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/codemirror-6/languages/default
+tags: $:/tags/CodeMirror/Language
+name: Default (from type)
+type:
+category: Wiki
+sort-order: 0

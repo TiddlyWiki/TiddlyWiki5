@@ -1,0 +1,8 @@
+title: $:/config/codemirror-6/lang-sql/dialect
+caption: SQL Dialect
+description: SQL dialect for syntax highlighting and completion
+config-type: select
+config-category: Languages
+config-options: [{"value":"StandardSQL","label":"Standard SQL"},{"value":"MySQL","label":"MySQL"},{"value":"MariaSQL","label":"MariaDB"},{"value":"PostgreSQL","label":"PostgreSQL"},{"value":"SQLite","label":"SQLite"},{"value":"MSSQL","label":"Microsoft SQL Server"},{"value":"PLSQL","label":"Oracle PL/SQL"},{"value":"Cassandra","label":"Cassandra CQL"}]
+default: StandardSQL
+text: StandardSQL

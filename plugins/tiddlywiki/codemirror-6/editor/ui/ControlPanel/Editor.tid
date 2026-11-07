@@ -1,0 +1,128 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/ControlPanel/Editor
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: Editor
+
+\define render-checkbox(configTiddler)
+\whitespace trim
+<tr>
+<td colspan="2"><$checkbox tiddler=<<__configTiddler__>> field="text" checked="yes" unchecked="no" default={{{ [<__configTiddler__>get[default]] }}}> <$transclude tiddler=<<__configTiddler__>> field="caption"/></$checkbox><$list filter="[<__configTiddler__>has[description]]" variable="ignore"><div class="cm-config-description"><em><$transclude tiddler=<<__configTiddler__>> field="description"/></em></div></$list></td>
+</tr>
+\end
+
+\define render-select(configTiddler)
+\whitespace trim
+<tr>
+<td><$transclude tiddler=<<__configTiddler__>> field="caption"/></td>
+<td><$select tiddler=<<__configTiddler__>> default={{{ [<__configTiddler__>get[default]] }}}><$list filter="[<__configTiddler__>get[config-options]jsonindexes[]]" variable="idx"><$let optionData={{{ [<__configTiddler__>get[config-options]jsonextract<idx>] }}} optionValue={{{ [<optionData>jsonget[value]] }}} optionLabel={{{ [<optionData>jsonget[label]] }}}><option value=<<optionValue>>><$text text=<<optionLabel>>/></option></$let></$list></$select><$list filter="[<__configTiddler__>has[description]]" variable="ignore"><div class="cm-config-description"><em><$transclude tiddler=<<__configTiddler__>> field="description"/></em></div></$list></td>
+</tr>
+\end
+
+\define render-input(configTiddler)
+\whitespace trim
+<tr>
+<td><$transclude tiddler=<<__configTiddler__>> field="caption"/></td>
+<td><$edit-text tiddler=<<__configTiddler__>> tag="input" default={{{ [<__configTiddler__>get[default]] }}}/><$list filter="[<__configTiddler__>has[description]]" variable="ignore"><div class="cm-config-description"><em><$transclude tiddler=<<__configTiddler__>> field="description"/></em></div></$list></td>
+</tr>
+\end
+
+\define render-keymap-select(configTiddler)
+\whitespace trim
+<tr>
+<td><$transclude tiddler=<<__configTiddler__>> field="caption"/></td>
+<td><$select tiddler=<<__configTiddler__>> default={{{ [<__configTiddler__>get[default]] }}}><option value="default">Default (VS Code / Sublime)</option><$list filter="[all[tiddlers+shadows]tag[$:/tags/Config/CodeMirror/Keymap]sort[caption]]" variable="keymapTiddler"><option value={{{ [<keymapTiddler>get[keymap-id]] }}}><$transclude tiddler=<<keymapTiddler>> field="caption"/></option></$list></$select><$list filter="[<__configTiddler__>has[description]]" variable="ignore"><div class="cm-config-description"><em><$transclude tiddler=<<__configTiddler__>> field="description"/></em></div></$list></td>
+</tr>
+\end
+
+\define render-config(configTiddler)
+\whitespace trim
+<$list filter="[<__configTiddler__>get[config-type]match[checkbox]]" variable="ignore">
+<$macrocall $name="render-checkbox" configTiddler=<<__configTiddler__>>/>
+</$list>
+<$list filter="[<__configTiddler__>get[config-type]match[select]]" variable="ignore">
+<$macrocall $name="render-select" configTiddler=<<__configTiddler__>>/>
+</$list>
+<$list filter="[<__configTiddler__>get[config-type]match[input]]" variable="ignore">
+<$macrocall $name="render-input" configTiddler=<<__configTiddler__>>/>
+</$list>
+<$list filter="[<__configTiddler__>get[config-type]match[keymap-select]]" variable="ignore">
+<$macrocall $name="render-keymap-select" configTiddler=<<__configTiddler__>>/>
+</$list>
+\end
+
+\define render-category(category,prefix)
+\whitespace trim
+<div class="cm-config-category">
+<h2><<__category__>></h2>
+<table class="cm-config-table">
+<tbody>
+<$list filter="[all[tiddlers+shadows]prefix<__prefix__>config-category<__category__>sort[caption]]" variable="configTiddler">
+<$macrocall $name="render-config" configTiddler=<<configTiddler>>/>
+</$list>
+</tbody>
+</table>
+</div>
+\end
+
+\procedure render-lang-tag-pill()
+\whitespace trim
+<span class="tc-tag-label tc-tag-list-item tc-small-gap-right">
+<$view field="title" format="text"/>
+<$button class="tc-btn-invisible tc-remove-tag-button">
+<$action-listops $tiddler=<<saveTiddler>> $field="text" $subfilter="-[{!!title}]"/>
+{{$:/core/images/close-button}}
+</$button>
+</span>
+\end
+
+\procedure render-lang-tags-editor()
+\whitespace trim
+<div class="tc-edit-tags">
+<$list filter="[<saveTiddler>get[text]enlist-input[]sort[title]]" storyview="pop">
+<<render-lang-tag-pill>>
+</$list>
+<$let tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
+<$macrocall $name="tag-picker" tiddler=<<saveTiddler>> tagField="text"/>
+</$let>
+</div>
+\end
+
+! Editor Settings
+
+<$list filter="[all[tiddlers+shadows]prefix[$:/config/codemirror-6/editor/]each[config-category]get[config-category]sort[]]" variable="category">
+<$macrocall $name="render-category" category=<<category>> prefix="$:/config/codemirror-6/editor/"/>
+</$list>
+
+! SimpleEngine Settings
+
+//Settings for the simplified CodeMirror engine used in input fields and textareas.//
+
+<$list filter="[all[tiddlers+shadows]prefix[$:/config/codemirror-6/simple/]each[config-category]get[config-category]sort[]]" variable="category">
+<$macrocall $name="render-category" category=<<category>> prefix="$:/config/codemirror-6/simple/"/>
+</$list>
+
+! TiddlyWiki Syntax
+
+//Settings for the TiddlyWiki language parser.//
+
+<$list filter="[all[tiddlers+shadows]prefix[$:/config/codemirror-6/lang-tiddlywiki/]each[config-category]get[config-category]sort[]]" variable="category">
+<$macrocall $name="render-category" category=<<category>> prefix="$:/config/codemirror-6/lang-tiddlywiki/"/>
+</$list>
+
+<div class="cm-config-category">
+<h2>Language Tags</h2>
+<p class="cm-config-description"><em>Tiddlers with these tags will use the corresponding syntax highlighting, regardless of their content type.</em></p>
+<table class="cm-config-table">
+<tbody>
+<$list filter="[all[tiddlers+shadows]prefix[$:/config/codemirror-6/lang-]suffix[/tags]sort[caption]]" variable="langTagsTiddler">
+<tr>
+<td><$transclude tiddler=<<langTagsTiddler>> field="caption"/></td>
+<td>
+<$let saveTiddler=<<langTagsTiddler>> transclusion=<<langTagsTiddler>>>
+<<render-lang-tags-editor>>
+</$let>
+</td>
+</tr>
+</$list>
+</tbody>
+</table>
+</div>

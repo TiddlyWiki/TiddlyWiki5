@@ -1,0 +1,8 @@
+title: $:/config/codemirror-6/editor/indentUnitMultiplier
+caption: Indent size
+description: The visual width of tabs and number of spaces for indentation
+config-type: select
+config-category: Indentation
+config-options: [{"value":"2","label":"2"},{"value":"4","label":"4"},{"value":"8","label":"8"}]
+default: 4
+text: 4
