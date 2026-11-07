@@ -1,0 +1,12 @@
+change-category: usability
+change-type: bugfix
+created: 20260711020312000
+description: Auto-linked URLs keep balanced closing parentheses, fixing Wikipedia style links
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9740
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9740
+type: text/vnd.tiddlywiki
+
+* Bare URLs in wikitext now include closing parentheses when they balance an opening one inside the URL, so `https://en.wikipedia.org/wiki/Specials_(Unicode_block)` links completely; a URL wrapped in prose parentheses like `(see https://example.com/)` still excludes the wrapping `)` (fixes [[Issue #9298|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9298]])
