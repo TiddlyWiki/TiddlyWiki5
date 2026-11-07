@@ -1,0 +1,11 @@
+title: citeAPA
+description: Template for an APA in-text citation of a BibTeX entry: {{Dalgaard2001||citeAPA}}
+
+\whitespace trim
+\procedure .cite.surname() ^(?:([^,]+),[\s\S]*|(?:[\s\S]*\s)?(\S+))$
+\function .cite.names() :all[<currentTiddler>get[bibtex-author]else{!!bibtex-editor}splitregexp[\s+and\s+]search-replace:g:regexp<.cite.surname>,[$1$2]minlength[1]]
+\function .cite.who() [function[.cite.names]count[]compare:number:gteq[3]] [function[.cite.names]match[others]] :then[function[.cite.names]first[]addsuffix[ et al.]] :else[function[.cite.names]join[ & ]] :else[<currentTiddler>get[bibtex-shorttitle]] :else[<currentTiddler>get[bibtex-title]] :else[<currentTiddler>]
+\function .cite.year() [<currentTiddler>get[bibtex-year]] :else[<currentTiddler>get[bibtex-date]split[-]first[]] :else[[n.d.]]
+<$link to=<<currentTiddler>> tooltip="<$text text={{!!bibtex-title}}/>">
+<$text text=`(${ [function[.cite.who]] }$, ${ [function[.cite.year]] }$)`/>
+</$link>

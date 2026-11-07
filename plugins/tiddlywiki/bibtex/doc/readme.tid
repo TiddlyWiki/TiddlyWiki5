@@ -9,5 +9,47 @@ The conversion is as follows:
 * `title` comes from citationKey
 * `bibtex-entry-type` comes from entryType
 * all `entryTags` are assigned to fields with the prefix `bibtex-`
+* `@string` macros are expanded, ignoring case. An undefined macro keeps its name
 
-The BibTeX plugin is based on the library [[bibtexParseJs by Henrik Muehe and Mikola Lysenko|https://github.com/ORCID/bibtexParseJs]].
+A bad entry does not stop the import. The other entries are imported, and the tiddler "BibTeX import error" lists the line and problem of each bad one.
+
+<$checkbox tiddler="$:/config/BibTeX/Standard" field="text" checked="yes" unchecked="no" default="no"> Follow BibTeX's own rules and convert field values to plain text</$checkbox>
+
+This option is off by default, and applies to later imports only. When it is on:
+
+* braces are removed, so `The {TeX}book` becomes `The TeXbook`
+* accents and special letters are decoded, so `M{\"u}ller` becomes `Müller` and `Stra{\ss}e` becomes `Straße`
+* `\&`, `\%`, `\_`, `\#` and `\$` become the plain character
+* runs of spaces and line breaks become one space
+* unknown commands and math between `$` signs are kept as written
+* `url`, `doi` and `eprint` are kept as written
+* `bibtex-entry-type` and the title are cleaned up, so `@BOOK` gives `book`
+* braces count as they do in BibTeX, so a quote inside braces belongs to the value in `"x {"}y"`, and `\}` closes a value in `{x\}}`
+
+The plugin adds a "BibTeX" tab to the search results, which searches every field of the imported entries except `created`, `modified`, `creator` and `modifier`. The tab appears whenever the plugin is installed, even if the wiki has no entries.
+
+The `citeAPA` template cites an entry in running text, as a link to its tiddler with the title as tooltip: `{{Dalgaard2001||citeAPA}}` shows `(Dalgaard, 2001)`.
+
+! Other uses
+
+An entry is a tiddler with `bibtex-` fields, and any entry type and field name can be imported, so a `.bib` file can hold more than publications:
+
+|!Use |!Entry type |!Useful fields |
+|Bookmarks and read-later lists |`@online` |`url`, `urldate`, `keywords` |
+|Software and datasets |`@software`, `@dataset` |`version`, `url`, `doi` |
+|Standards, RFCs and datasheets |`@manual`, `@techreport` |`number`, `institution`, `url` |
+|Personal library of books, films and music |`@book`, `@movie`, `@audio` |`publisher`, `year`, `keywords` |
+|Patents and legal sources |`@patent`, `@legislation` |`number`, `date` |
+|Letters and archive material |`@letter`, `@misc` |`author`, `date`, `location` |
+|Course reading lists |any |`keywords`, `note` |
+|Your own record types, such as recipes or contacts |`@recipe`, `@contact` |any field name |
+
+The text of an imported entry is empty, so it has room for your own notes. Importing the same citation key again replaces the tiddler, including those notes.
+
+Without `author` and `year`, `citeAPA` shows the title and `n.d.`
+
+! Library
+
+The BibTeX plugin is based on the library [[bibtexParseJs by Henrik Muehe and Mikola Lysenko|https://github.com/ORCID/bibtexParseJs]]. Its copy in this plugin adds support for `@string` macros, parentheses around entries, entries without fields, missing commas and `@` signs in text between entries, reports bad entries instead of failing, and has an option for BibTeX's own rules, so it differs from the original.
+
+See also: [[BibTeXing by Oren Patashnik|https://mirrors.ctan.org/biblio/bibtex/base/btxdoc.pdf]] and [[the BibTeX format at bibtex.org|https://www.bibtex.org/Format/]].
