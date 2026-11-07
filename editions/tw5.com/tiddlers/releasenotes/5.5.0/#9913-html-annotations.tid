@@ -1,0 +1,13 @@
+change-category: developer
+change-type: enhancement
+created: 20260713003945000
+description: HTML element nodes record parse position and content mode separately
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/9913
+modified: 20260713003945000
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9913
+type: text/vnd.tiddlywiki
+
+HTML element nodes in the parse tree now carry `blockPosition` for where the element was parsed and `blockContent: true` when a blank line after the open tag switched its content to block mode; `isBlock`, which fuses the two facts, stays unchanged for compatibility. Self-closing tags now record `openTagStart`/`openTagEnd` too, since their open tag is the whole element. Consumers can tell an inline `<img>` before a blank line from a block level element and reproduce the content mode. The new fields are purely additive; rendered output is unchanged.
