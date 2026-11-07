@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Function, procedure and widget definitions round-trip byte-exact
 title: Serialize/FunctionDefinition
 type: text/vnd.tiddlywiki
 

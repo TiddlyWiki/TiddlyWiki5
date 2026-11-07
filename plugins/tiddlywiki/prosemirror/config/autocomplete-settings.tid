@@ -1,0 +1,29 @@
+title: $:/plugins/tiddlywiki/prosemirror/config/autocomplete-settings
+tags: $:/tags/ProseMirrorSettings
+caption: {{$:/plugins/tiddlywiki/prosemirror/language/Settings/Autocomplete/Caption}}
+
+\define lingo-base() $:/plugins/tiddlywiki/prosemirror/language/Settings/Autocomplete/
+
+<$link to="$:/plugins/tiddlywiki/prosemirror/language/Settings/Autocomplete/Description">
+{{$:/plugins/tiddlywiki/prosemirror/language/Settings/Autocomplete/Description}}
+</$link>
+
+;<<lingo LinkTriggers>>
+:<$edit-text tiddler="$:/config/prosemirror/autocomplete/link-triggers" tag="textarea" class="tc-edit-texteditor" rows="3"/>
+:<small><<lingo LinkTriggersHint>></small>
+
+;<<lingo TransclusionTriggers>>
+:<$edit-text tiddler="$:/config/prosemirror/autocomplete/transclusion-triggers" tag="textarea" class="tc-edit-texteditor" rows="3"/>
+:<small><<lingo TransclusionTriggersHint>></small>
+
+;<<lingo MacroTriggers>>
+:<$edit-text tiddler="$:/config/prosemirror/autocomplete/macro-triggers" tag="textarea" class="tc-edit-texteditor" rows="3"/>
+:<small><<lingo MacroTriggersHint>></small>
+
+;<<lingo DefTermTriggers>>
+:<$edit-text tiddler="$:/config/prosemirror/def-term-triggers" tag="textarea" class="tc-edit-texteditor" rows="2"/>
+:<small><<lingo DefTermTriggersHint>></small>
+
+;<<lingo DefDescTriggers>>
+:<$edit-text tiddler="$:/config/prosemirror/def-desc-triggers" tag="textarea" class="tc-edit-texteditor" rows="2"/>
+:<small><<lingo DefDescTriggersHint>></small>

@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/codeblock
+tags: $:/tags/EditorCommand
+caption: Turn into codeblock
+description: Convert the current block to a code block
+icon: $:/core/images/mono-block
+command-id: toggle-code-block
+command-category: block-type
+command-surfaces: slash-menu block-menu
+command-editors: prosemirror

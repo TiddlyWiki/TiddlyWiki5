@@ -4,7 +4,11 @@
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
 		"tiddlywiki/highlight",
-		"tiddlywiki/internals"
+		"tiddlywiki/internals",
+		"tiddlywiki/prosemirror",
+		"tiddlywiki/editor-command-menu",
+		"tiddlywiki/wikitext-serialize",
+		"tiddlywiki/hard-line-breaks"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

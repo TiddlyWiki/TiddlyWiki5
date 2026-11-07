@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/prosemirror/blocks/widget/styles/color
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.pm-widget-block-nodeview-error {
+	color: <<colour alert-highlight>>;
+	background-color: <<colour alert-muted-foreground>>;
+}
+
+.pm-widget-block-empty-placeholder {
+	color: <<colour muted-foreground>>;
+	border-color: <<colour tiddler-editor-border>>;
+	background: <<colour tiddler-editor-fields-even>>;
+}

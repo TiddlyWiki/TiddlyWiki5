@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/inline-code
+tags: $:/tags/EditorCommand
+caption: Inline code
+description: Toggle inline code formatting
+icon: $:/core/images/mono-line
+command-id: toggle-mark
+command-mark: code
+command-category: inline-format
+command-surfaces: slash-menu
+command-editors: prosemirror

@@ -1,0 +1,10 @@
+title: $:/changenotes/5.5.0/#9872
+description: Preserve additional blank lines as paragraph nodes
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: feature
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9872
+github-contributors: linonetwo
+
+WikiText can optionally preserve additional blank lines as empty paragraph nodes, including leading and trailing blank lines and blank lines following block elements or inside containers. Each empty paragraph has a distinct source anchor, with support for LF and CRLF line endings. Enable this with the `preserveBlankLines` parser option or `$:/config/Parser/PreserveBlankLines`; the default parsing behaviour is unchanged. Vanilla gives the empty paragraphs visible height. Serializer support is maintained in the WikiText Serialize plugin.

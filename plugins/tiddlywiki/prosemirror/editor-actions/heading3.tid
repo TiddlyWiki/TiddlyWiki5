@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/heading3
+tags: $:/tags/EditorCommand
+caption: Heading 3
+description: Convert to heading level 3
+icon: $:/core/images/heading-3
+command-id: toggle-heading
+command-level: 3
+command-category: block-type
+command-surfaces: slash-menu block-menu
+command-editors: prosemirror

@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/dedent-list
+tags: $:/tags/EditorCommand
+caption: Dedent
+description: Dedent this list item
+command-id: dedent-list
+command-category: list
+command-surfaces: block-menu
+command-editors: prosemirror

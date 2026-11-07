@@ -96,7 +96,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 ><$transclude
 
   tiddler={{!!dropdown}}
-  mode="block"
+  mode="inline"
 
 /></div></$reveal></$set></$list></$wikify></$list>
 \end

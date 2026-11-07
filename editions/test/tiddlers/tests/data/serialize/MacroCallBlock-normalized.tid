@@ -1,0 +1,32 @@
+title: Serialize/MacroCallBlock-normalized
+description: AST-only mode drops parameter spacing and separates block calls with a blank line
+tags: $:/tags/wikitext-serialize-normalize-spec
+type: text/vnd.tiddlywiki-multiple
+
+title: info
+
+`one: val1` becomes `one:val1`, and consecutive block calls are separated
+by one blank line.
+
+Why: the AST records parameters as name and value pairs without the
+whitespace around the colon, and block nodes carry no separators, so
+tree-only serialization normalizes both.
+
+* Covers: $:/plugins/tiddlywiki/wikitext-serialize/rules/macrocallblock.js and serializeAttribute in $:/plugins/tiddlywiki/wikitext-serialize/utils/parsetree.js.
+* Mode: ast-only (the Input field withholds the source from the serializer).
++
+title: Input
+mode: ast-only
+
+<<john one: val1 two: 'val "2"'>>
+
+<<john>>
+after
++
+title: ExpectedWikitext
+
+<<john one:val1 two:'val "2"'>>
+
+<<john>>
+
+after

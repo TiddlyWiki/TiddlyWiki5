@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/insert-above
+tags: $:/tags/EditorCommand
+caption: Insert block above
+description: Insert an empty paragraph before this block
+command-id: insert-block-adjacent
+command-direction: before
+command-category: block-action
+command-surfaces: block-menu
+command-editors: prosemirror

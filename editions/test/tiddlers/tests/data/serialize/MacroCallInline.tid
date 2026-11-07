@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Inline macro calls stay inside their sentences
 title: Serialize/MacroCallInline
 type: text/vnd.tiddlywiki
 

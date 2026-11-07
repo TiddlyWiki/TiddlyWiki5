@@ -1,0 +1,20 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/blocks/inline-source/styles.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+\*/
+
+.pm-opaque-inline {
+	display: inline-block;
+	max-width: 100%;
+	padding: 0 0.16em;
+	border: 1px solid currentColor;
+	border-radius: 0.25em;
+	vertical-align: baseline;
+}
+
+.pm-opaque-inline.ProseMirror-selectednode {
+	outline: 2px solid currentColor;
+	outline-offset: 1px;
+}

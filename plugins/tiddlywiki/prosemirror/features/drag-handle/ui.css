@@ -1,0 +1,27 @@
+/* Drag handle structural styles — colours in ui.color.tid */
+.tc-prosemirror-drag-handle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 24px;
+	cursor: grab;
+	font-size: 14px;
+	border-radius: 3px;
+	user-select: none;
+	opacity: 0.7;
+	transition: opacity 0.15s, background 0.15s;
+}
+
+.tc-prosemirror-drag-handle:hover {
+	opacity: 1;
+}
+
+.tc-prosemirror-drag-handle:active {
+	cursor: grabbing;
+}
+
+html[dir="rtl"] .tc-prosemirror-drag-handle {
+	left: auto;
+	right: -24px;
+}

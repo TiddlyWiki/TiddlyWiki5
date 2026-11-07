@@ -1,0 +1,8 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Headings with class syntax round-trip byte-exact
+title: Serialize/Heading-docs
+type: text/vnd.tiddlywiki
+
+!!.myStyle This heading has the class myStyle
+
+!!!.coloured-bg Heading with a custom background class.
