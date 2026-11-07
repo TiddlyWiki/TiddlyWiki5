@@ -1,9 +1,8 @@
 title: $:/language/Help/savetiddler
-description: 
-Did you mean: Saves a raw toddler to a file
-एक फाइल करने के लिए एक raw tiddler बचाता है
+description: एक फाइल करने के लिए एक raw tiddler बचाता है
 
 निर्दिष्ट फ़ाइल नाम के लिए उसके कच्चे टेक्स्ट या बाइनरी स्वरूप में एक individual tiddler बचाता है।
+
 ```
 --savetiddler <title> <filename>
 ```

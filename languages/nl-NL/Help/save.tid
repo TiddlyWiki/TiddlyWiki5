@@ -7,8 +7,12 @@ Slaat gefilterde individuele tiddlers op in gespecificeerde bestanden als ruwe t
 --save <tiddler-filter> <bestandsnaam-filter>
 ```
 
-* ''tiddler-filter'': Een filter dat bepaalt welke tiddler(s) opgeslagen moeten worden
-* ''bestandsnaam-filter'': Optioneel filter dat tiddler titels omzet in padnamen. Standaard (geen optioneel filter) `[is[tiddler]]`, hetgeen de onveranderde tiddler titel als bestandsnaam gebruikt
+```
+  tiddler-filter      Een filter dat bepaalt welke tiddler(s) opgeslagen
+                      moeten worden
+  bestandsnaam-filter  Optioneel filter dat tiddler titels omzet in padnamen
+                      (standaard: [is[tiddler]])
+```
 
 Standaard is de bestandsnaam relatief t.o.v. de `output` subfolder van de editiefolder. Het `--output` commando kan gebruikt worden om output naar een andere folder te leiden.
 
@@ -21,4 +25,8 @@ N.B.:
 
 Voorbeelden:
 
- * `--save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"` -- slaat alle non-system afbeeldingstiddlers als bestanden op in the subfolder "tiddlers" met URL-encoded titels
+```
+  Slaat alle non-system afbeeldingstiddlers als bestanden op in de subfolder "tiddlers" met URL-encoded titels:
+
+    --save '[!is[system]is[image]]' '[encodeuricomponent[]addprefix[tiddlers/]]'
+```

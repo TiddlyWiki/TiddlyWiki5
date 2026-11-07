@@ -11,14 +11,21 @@ Na sua forma mais elementar serve a representação de um tiddler específico. C
 
 Os parâmetros são:
 
-* ''port'' - número da porta pela qual servir (por defeito "8080")
-* ''roottiddler'' - o tiddler a ser servido na raiz (por defeito "$:/core/save/all") 
-* ''rendertype'' - o tipo de conteúdo para o qual o tiddler deve ser representado (por defeito "text/plain")
-* ''servetype'' - o tipo de conteúdo para o qual o tiddler deve ser servido (por defeito "text/html")
-* ''username'' - o nome de utilizador pré definido com o qual se assinam as edições
-* ''password'' - palavra passe opcional para autenticação básica
-* ''host'' - endereço opcional do servidor de onde servir (por defeito  "127.0.0.1" conhecido como "localhost")
-* ''pathprefix'' - prefixo opcional para caminhos
+```
+  port          número da porta pela qual servir (por defeito "8080")
+  roottiddler   o tiddler a ser servido na raiz
+                (por defeito "$:/core/save/all")
+  rendertype    o tipo de conteúdo para o qual o tiddler deve ser representado
+                (por defeito "text/plain")
+  servetype     o tipo de conteúdo para o qual o tiddler deve ser servido
+                (por defeito "text/html")
+  username      o nome de utilizador pré definido com o qual se assinam as
+                edições
+  password      palavra passe opcional para autenticação básica
+  host          endereço opcional do servidor de onde servir
+                (por defeito "127.0.0.1" conhecido como "localhost")
+  pathprefix    prefixo opcional para caminhos
+```
 
 Se o parâmetro palavra passe for especificado o navegador irá pedir ao utilizador um nome e palavra passe. Tenha em atenção que a palavra passe é transmitida em texto simples tornando esta implementação imprópria para utilização geral
 

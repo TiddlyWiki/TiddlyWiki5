@@ -9,15 +9,24 @@ Dawna komenda do stawiania serwera wystawiającego wiki.
 
 The parameters are:
 
-* ''port'' - port na którym nasłuchuje serwer; nie-numeryczne wartości sa interpretowane jakby to były zmienne środowiskowe z których należy pobrać numer portu (domyślnie to "8080")
-* ''root-tiddler'' - tiddler, który będzie stroną główną (domyślnie to "$:/core/save/all")
-* ''root-render-type'' - typ treści w którym główny tiddler bedzie wyświetlony (domyślnie to "text/plain")
-* ''root-serve-type'' - typ treści w którym główny tiddler ma być wysłany (domyślnie to "text/html")
-* ''username'' - opcjonalna nazwa użytkownika do autoryzacji basic
-* ''password'' - opcjonalne hasło do autoryzacji basic
-* ''host'' - opcjonalna nazwa hosta (domyślnie to "127.0.0.1", czyli "localhost")
-* ''path-prefix'' - opcjonalny przedrostek dodawany do ścieżek
-* ''debug-level'' - opcjonalny poziom logowania; ustaw na "debug" by wyświetlać zapytania (domyślnie to "none")
+```
+  port              port na którym nasłuchuje serwer; nie-numeryczne wartości
+                    sa interpretowane jakby to były zmienne środowiskowe z
+                    których należy pobrać numer portu (domyślnie to "8080")
+  root-tiddler      tiddler, który będzie stroną główną
+                    (domyślnie to "$:/core/save/all")
+  root-render-type  typ treści w którym główny tiddler bedzie wyświetlony
+                    (domyślnie to "text/plain")
+  root-serve-type   typ treści w którym główny tiddler ma być wysłany
+                    (domyślnie to "text/html")
+  username          opcjonalna nazwa użytkownika do autoryzacji basic
+  password          opcjonalne hasło do autoryzacji basic
+  host              opcjonalna nazwa hosta
+                    (domyślnie to "127.0.0.1", czyli "localhost")
+  path-prefix       opcjonalny przedrostek dodawany do ścieżek
+  debug-level       opcjonalny poziom logowania; ustaw na "debug" by
+                    wyświetlać zapytania (domyślnie to "none")
+```
 
 Jeżeli argument ''password'' jest podany to przeglądarka poprosi o login i hasło. Zwróć uwagę, że hasło przesyłane jest jako niezaszyfrowany tekst, więc tej implementacji należy używać tylko w zaufanej sieci lub poprzez HTTPS.
 

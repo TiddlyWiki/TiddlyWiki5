@@ -7,8 +7,15 @@ Enregistre des tiddlers individuels identifiés par un filtre, soit tels quels, 
 --save <filtre-des-tiddlers> <filtre-des-noms-de-fichiers>
 ```
 
-* ''filtre-des-tiddlers'': Un filtre identifiant les tiddlers à enregistrer
-* ''filtre-des-noms-de-fichiers'': Filtre optionnel pour transformer les titres de tiddlers en chemins de fichiers. À défaut, le filtre utilisé est `[is[tiddler]]`, qui utilise le titre inchangé du tiddler comme nom de fichier
+```
+  filtre-des-tiddlers          Un filtre identifiant les tiddlers à
+                               enregistrer
+  filtre-des-noms-de-fichiers  Filtre optionnel pour transformer les titres
+                               de tiddlers en chemins de fichiers. À défaut,
+                               le filtre utilisé est [is[tiddler]], qui
+                               utilise le titre inchangé du tiddler comme
+                               nom de fichier
+```
 
 Par défaut, le nom de fichier est résolu relativement au sous-répertoire `output` du réepertoire de l'édition. La commande `--output` peut servir à diriger les sorties vers un répertoire différent.
 
@@ -22,4 +29,8 @@ Notes :
 
 Exemples :
 
-* `--save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"` -- enregistre tous les tiddlers images non-système comme des fichiers du sous-répertoire "tiddlers" nommés après encodage URL des titres.
+```
+  Enregistre tous les tiddlers images non-système comme des fichiers du sous-répertoire "tiddlers" nommés après encodage URL des titres :
+
+    --save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"
+```

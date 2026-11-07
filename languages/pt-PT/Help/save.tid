@@ -7,8 +7,13 @@ Guarda tiddlers individuais identificados por um filtro no seu formato bruto de 
 --save <tiddler-filter> <filename-filter>
 ```
 
-* ''tiddler-filter'': Um filtro a identificar os tiddler(s) a serem gravados
-* ''filename-filter'': Filtro opcional que transforma títulos em caminhos de ficheiros. Se omisso, por defeito `[is[tiddler]]`, que utiliza o título do tiddler inalterado como nome de ficheiro.
+```
+  tiddler-filter   Um filtro a identificar os tiddler(s) a serem gravados
+  filename-filter  Filtro opcional que transforma títulos em caminhos de
+                   ficheiros. Se omisso, por defeito `[is[tiddler]]`, que
+                   utiliza o título do tiddler inalterado como nome de
+                   ficheiro.
+```
 
 Por pré definição o nome de ficheiro é resolvido relativamente à sub-pasta `output` da pasta de edição. O comando `--output` pode ser utilizado para redireccionar a saída para uma pasta diferente.
 
@@ -22,4 +27,8 @@ Notas:
 
 Exemplos:
 
-* `--save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"` -- guarda todos os tiddlers imagem que não são de sistema como ficheiros numa sub-pasta "tiddlers" com títulos codificados como URL
+```
+  Guarda todos os tiddlers imagem que não são de sistema como ficheiros numa sub-pasta "tiddlers" com títulos codificados como URL:
+
+    --save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"
+```
