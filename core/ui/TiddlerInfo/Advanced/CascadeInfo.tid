@@ -1,11 +1,10 @@
 title: $:/core/ui/TiddlerInfo/Advanced/CascadeInfo
 tags: $:/tags/TiddlerInfo/Advanced
+caption: {{$:/language/TiddlerInfo/Advanced/CascadeInfo/Heading}}
 
 \define lingo-base() $:/language/TiddlerInfo/Advanced/CascadeInfo/
 
 <$let infoTiddler=<<currentTiddler>>>
-
-''<<lingo Heading>>''
 
 <<lingo Hint>>
 
