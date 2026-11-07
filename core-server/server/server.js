@@ -262,6 +262,12 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.urlInfo = new URL(request.url, "http://localhost");
 	state.queryParameters = Object.fromEntries(state.urlInfo.searchParams);
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
+	// Respond to health check request (authentication not needed)
+	if(state.urlInfo.pathname === "/healthz") {
+		response.writeHead(200,{"Content-Type": "text/plain"});
+		response.end("OK");
+		return;
+	}
 	// Enable CORS
 	if(this.corsEnable) {
 		response.setHeader("Access-Control-Allow-Origin", "*");
