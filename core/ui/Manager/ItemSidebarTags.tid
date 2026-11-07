@@ -25,6 +25,7 @@ caption: {{$:/language/Manager/Item/Tags}}
 </p>
 <p>
 <$fieldmangler>
-<$macrocall $name="tag-picker" actions=<<tag-picker-actions>>/>
+<!-- cancelPopups must stay off here: focussing the input would cancel the popup that reveals this whole panel -->
+<$macrocall $name="tag-picker" actions=<<tag-picker-actions>> cancelPopups="no"/>
 </$fieldmangler>
 </p>

@@ -157,7 +157,7 @@ The second ESC tries to close the "draft tiddler"
 \end
 
 <!-- prepare all variables for tag-picker keyboard handling -->
-\procedure tag-picker(actions, tagField:"tags", tiddler, tagListFilter:"[tags[]sort[]]")
+\procedure tag-picker(actions, tagField:"tags", tiddler, tagListFilter:"[tags[]sort[]]", cancelPopups:"yes")
 
 \function _tf.getUserInput() [<storeTitle>get[text]]
 \function _tf.getTag() [<newTagNameTiddler>get[text]]
@@ -184,8 +184,6 @@ The second ESC tries to close the "draft tiddler"
 
 	nonSystemTagsFilter="[subfilter<tagListFilter>!is[system]search:title<userInput>]"
 	systemTagsFilter="[subfilter<tagListFilter>is[system]search:title<userInput>]"
-
-	cancelPopups="yes"
 >
 	<$transclude $variable="tag-picker-inner"/>
 </$let>
