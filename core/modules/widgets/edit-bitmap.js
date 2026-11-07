@@ -334,4 +334,5 @@ EditBitmapWidget.prototype.saveChanges = function() {
 	this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getModificationFields(),tiddler,update,this.wiki.getCreationFields()));
 };
 
+exports["edit-types"] = ["bitmap"];
 exports["edit-bitmap"] = EditBitmapWidget;

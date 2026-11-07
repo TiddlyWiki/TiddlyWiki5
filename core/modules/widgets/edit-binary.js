@@ -98,4 +98,5 @@ EditBinaryWidget.prototype.refresh = function(changedTiddlers) {
 	return this.refreshChildren(changedTiddlers);
 };
 
+exports["edit-types"] = ["binary"];
 exports["edit-binary"] = EditBinaryWidget;
