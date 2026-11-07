@@ -1,0 +1,13 @@
+change-category: developer
+change-type: bugfix
+created: 20260712232208000
+description: Paragraph text before a block closing marker no longer carries a trailing newline
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/9907
+modified: 20260712232208000
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9907
+type: text/vnd.tiddlywiki
+
+Block terminators now claim the single newline before their closing marker, so the preceding paragraph text node ends without it, exactly as it does with a blank line before the marker. For consistency, `quoteblock`, `styleblock`, HTML block bodies and conditional block clauses now behave like `codeblock`, `typedblock` and `\procedure` definitions. Rendered output is unchanged.
