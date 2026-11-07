@@ -1,0 +1,14 @@
+change-category: hackability
+change-type: feature
+created: 20260825210000000
+description: The draggable list macros can be laid out as a row
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9992
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9992
+type: text/vnd.tiddlywiki
+
+* Passing `class:"tc-horizontal-draggable"` to <<.mlink list-links-draggable>> or <<.mlink list-tagged-draggable>> lays the list out as a row instead of a column
+* The markup is unchanged, so dragging, drop targets and item templates behave the same in both orientations
+* <<.mlink list-tagged-draggable>> gains a `class` parameter, which it had no way of accepting before
