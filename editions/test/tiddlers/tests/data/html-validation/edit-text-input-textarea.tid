@@ -1,0 +1,32 @@
+created: 20251030150308059
+description: Save SCRIPT sanitation
+modified: 20260127083421239
+tags: $:/tags/wiki-test-spec
+title: edit-text-input-textarea
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Handled by: $:/core/modules/editor/engines/framed.js
+
+```
+// Construct the textarea or input node
+var tag = $tw.utils.makeTagNameSafe(this.widget.editTag,"input");
+```
++
+title: Output
+
+<!-- The following 2 should create a valid input and a textarea tag -->
+<$edit-text tiddler="$:/status/UserName" tag="input"/>
+<$edit-text tiddler="$:/status/UserName" />
+
+<!-- The following should create a "test" tag, which is OK but no-functional -->
+<$edit-text tiddler="$:/status/UserName" tag="test"/>
+
+<!-- The following should create an INPUT tag because $asdf is invalid and should assign the defaultTAG API function input -->
+<$edit-text tiddler="$:/status/UserName" tag="$asdf"/>
++
+title: ExpectedResult
+
+<p><input value="">
+<textarea></textarea></p><test value=""></test><p><asdf value=""></asdf></p>
