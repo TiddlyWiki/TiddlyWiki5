@@ -1,9 +1,8 @@
 title: ListWidget/WithExplicitTemplatesOverriddenByAttributes
-description: List widget with explicit templates
+description: List widget with explicit templates overridden by attributes
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
-+
 title: Output
 
 \whitespace trim

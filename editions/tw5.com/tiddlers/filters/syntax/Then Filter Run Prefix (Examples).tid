@@ -35,7 +35,8 @@ src="""<$checkbox tiddler="$:/temp/searchSort"
       field="text"
       checked="title" unchecked="default" default="title">
   Search <<.field title>> only
-</$checkbox><p/>
+</$checkbox>
+
 <$let searchSubfilter="[{$:/temp/searchFields}match[default]] :then[search[prefix]] :else[search:title[prefix]]"
       sortSubfilter="[{$:/temp/searchSort}match[chrono]] :then[!nsort[modified]] :else[sort[title]]"
       limit=10 >
