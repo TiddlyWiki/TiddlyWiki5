@@ -219,12 +219,10 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editClass = this.getAttribute("class","");
 		newClasses = this.editClass.split(/\s+/).filter(Boolean);
 	
-		// Remove classes assigned from the old value of the class attribute
 		domNodeClasses = domNodeClasses.filter(function(className) {
 			return !oldClasses.includes(className);
 		});
 	
-		// Add new classes from the updated class attribute
 		domNodeClasses = domNodeClasses.concat(
 			newClasses.filter(function(className) {
 				return !domNodeClasses.includes(className);

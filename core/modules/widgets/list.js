@@ -306,16 +306,20 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 		if(this.counterName) {
 			var mustRefreshOldLast = false;
 			var oldLength = this.children.length;
+			// After a change to the list itself every later item's counter is wrong, so those
+			// items have to be made afresh
+			var hasChanged = false;
 			// Cycle through the list and remove and re-insert the first item that has changed, and all the remaining items
 			for(t=0; t<this.list.length; t++) {
-				if(hasRefreshed || !this.children[t] || this.children[t].parseTreeNode.itemTitle !== this.list[t]) {
+				if(hasChanged || !this.children[t] || this.children[t].parseTreeNode.itemTitle !== this.list[t]) {
 					if(this.children[t]) {
 						this.removeListItem(t);
 					}
 					this.insertListItem(t,this.list[t]);
-					if(!hasRefreshed && t === oldLength) {
+					if(!hasChanged && t === oldLength) {
 						mustRefreshOldLast = true;
 					}
+					hasChanged = true;
 					hasRefreshed = true;
 				} else {
 					// Refresh the item we're reusing
@@ -329,8 +333,8 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 				this.removeListItem(oldLastIdx);
 				this.insertListItem(oldLastIdx,this.list[oldLastIdx]);
 			}
-			// If there are items to remove and we have not refreshed then recreate the item that will now be at the last position
-			if(!hasRefreshed && this.children.length > this.list.length) {
+			// If there are items to remove and the list has not changed yet then recreate the item that will now be at the last position
+			if(!hasChanged && this.children.length > this.list.length) {
 				this.removeListItem(this.list.length-1);
 				this.insertListItem(this.list.length-1,this.list[this.list.length-1]);
 			}
