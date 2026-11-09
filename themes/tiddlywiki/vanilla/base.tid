@@ -1054,6 +1054,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		overflow-y: auto;
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
 		margin: 0 0 0 -42px;
 		padding: 71px 0 28px 42px;
 	}

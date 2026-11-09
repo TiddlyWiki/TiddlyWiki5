@@ -106,6 +106,9 @@ tags: [[$:/tags/Stylesheet]]
 	background-color: transparent;
 	border: 1px solid transparent;
 	color: <<colour tab-foreground>>;
+	/* Keeps 5 English tabs on one line in Noto Sans (KDE) next to the sidebar scrollbar */
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 }
 
 .tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected {
