@@ -1,0 +1,151 @@
+title: $:/palettes/Pool
+name: Poolside
+description: Fresh light palette inspired by a Mediterranean poolside terrace
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+
+alert-background: #fff4d8
+alert-border: #c0a040
+alert-highlight: #c04020
+alert-muted-foreground: #908050
+background: #fdfdf8
+blockquote-bar: <<colour muted-foreground>>
+button-background:
+button-background-hover: #dce8e4
+button-foreground:
+button-border:
+code-background: #f0f6f4
+code-border: #c8dcd4
+code-foreground: #1878a0
+diff-delete-background: #ffd0c8
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background:
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #c0ecc0
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background:
+diff-invisible-foreground: <<colour muted-foreground>>
+dirty-indicator: #c04020
+download-background: #48984c
+download-foreground: #ffffff
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: <<colour background>>
+dropdown-border: <<colour muted-foreground>>
+dropdown-tab-background-selected: <<colour background>>
+dropdown-tab-background: #e4f0ec
+dropzone-background: rgba(72,152,76,0.7)
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: #206888
+external-link-foreground: #1878a0
+footnote-target-background: #eef6f4
+foreground: #1a3028
+highlight-background: #fff4a0
+highlight-foreground: #1a3028
+message-background: #f0f6f4
+message-border: #c8dcd4
+message-foreground: #2a4840
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour background>>
+modal-border: #90b0a8
+modal-footer-background: #f0f6f4
+modal-footer-border: #c8dcd4
+modal-header-border: #c8dcd4
+muted-foreground: #80a098
+network-activity-foreground: #48984c
+notification-background: #f4faf8
+notification-border: #90b0a8
+page-background: #e0ece4
+pre-background: #f0f6f4
+pre-border: #c8dcd4
+primary: #1878a0
+selection-background:
+selection-foreground:
+select-tag-background:
+select-tag-foreground:
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: #1a3028
+sidebar-controls-foreground: #98b8b0
+sidebar-foreground-shadow: #ffffff
+sidebar-foreground: #587870
+sidebar-muted-foreground-hover: #1a3028
+sidebar-muted-foreground: #88a8a0
+sidebar-tab-background-selected: <<colour page-background>>
+sidebar-tab-background: #ccdcd4
+sidebar-tab-border-selected: <<colour tab-border-selected>>
+sidebar-tab-border: <<colour tab-border>>
+sidebar-tab-divider: #c0d4c8
+sidebar-tab-foreground-selected:
+sidebar-tab-foreground: <<colour tab-foreground>>
+sidebar-tiddler-link-foreground-hover: #105870
+sidebar-tiddler-link-foreground: #587870
+site-title-foreground: <<colour tiddler-title-foreground>>
+stability-stable: #48984c
+stability-experimental: #c0a040
+stability-deprecated: #c04020
+stability-legacy: #5870a8
+static-alert-foreground: #80a098
+tab-background-selected: <<colour background>>
+tab-background: #ccdcd4
+tab-border-selected: #a8c4b8
+tab-border: #a8c4b8
+tab-divider: #a8c4b8
+tab-foreground-selected: <<colour tab-foreground>>
+tab-foreground: #2a4840
+table-border: #c0d4c8
+table-footer-background: #98b8a8
+table-header-background: #e4f0ec
+tag-background: #1878a0
+tag-foreground: #ffffff
+testcase-accent-level-1: #d0e8f8
+testcase-accent-level-2: #c0a040
+testcase-accent-level-3: #48984c
+tiddler-background: <<colour background>>
+tiddler-border: <<colour background>>
+tiddler-controls-foreground-hover: #1878a0
+tiddler-controls-foreground-selected: #105870
+tiddler-controls-foreground: #b8d0c8
+tiddler-editor-background: #f8fcfa
+tiddler-editor-border-image: <<colour background>>
+tiddler-editor-border: #c0d4c8
+tiddler-editor-fields-even: #e4f0ec
+tiddler-editor-fields-odd: #f0f6f4
+tiddler-info-background: #f0f6f4
+tiddler-info-border: #c8dcd4
+tiddler-info-tab-background: #f0f6f4
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: #88a8a0
+tiddler-title-foreground: #1a3028
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
+untagged-background: #80a098
+very-muted-foreground: #a8c4b8
+wikilist-background: #ccdcd4
+wikilist-item: <<colour background>>
+wikilist-info: #1a3028
+wikilist-title: #2a4840
+wikilist-title-svg: <<colour wikilist-title>>
+wikilist-url: #80a098
+wikilist-button-open: #48984c
+wikilist-button-open-hover: #307830
+wikilist-button-reveal: #1878a0
+wikilist-button-reveal-hover: #105870
+wikilist-button-remove: #c04020
+wikilist-button-remove-hover: #a02010
+wikilist-toolbar-background: #a8c4b8
+wikilist-toolbar-foreground: #2a4840
+wikilist-droplink-dragover: #ffc0c0
+wikilist-button-background: #98b8b0
+wikilist-button-foreground: #1a3028

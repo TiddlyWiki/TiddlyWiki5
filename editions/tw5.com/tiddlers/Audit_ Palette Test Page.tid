@@ -1,0 +1,190 @@
+created: 20260410152202117
+modified: 20260410152555533
+tags: 
+title: Audit: Palette Test Page
+type: text/vnd.tiddlywiki
+
+\procedure colour-swatch(name)
+\whitespace trim
+<div style="display:inline-block;width:130px;margin:2px;font-size:0.65em;overflow:hidden;border-radius:3px;border:1px solid rgba(128,128,128,0.3);">
+<div class={{{ [<name>addprefix[tc-palette-swatch-]] }}} style="padding:6px 4px;color:white;text-shadow:0 0 2px black;"><<name>></div>
+</div>
+\end
+
+\procedure swatch-styles()
+\whitespace trim
+<$list filter="[{$:/palette}indexes[]]" variable="colourName">
+<$let colourValue={{{ [{$:/palette}getindex<colourName>] }}}>
+<$text text={{{ [<colourName>addprefix[.tc-palette-swatch-]addsuffix[ { background-color: ]addsuffix<colourValue>addsuffix[; }]] }}}/><$text text="
+"/>
+</$let>
+</$list>
+\end
+
+<style>
+<$wikify name="styles" text="<<swatch-styles>>"><<styles>></$wikify>
+</style>
+
+Current palette: ''<$text text={{$:/palette}}/>''
+
+<div style="margin:8px 0;">
+Switch palette:
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]]">
+<$button set="$:/palette" setTo=<<currentTiddler>> class="tc-btn-invisible" style="margin:0 4px;">
+<$text text={{{ [<currentTiddler>get[name]] }}}/>
+</$button>
+</$list>
+</div>
+
+---
+
+!! 1. Tiddler Title & Subtitle
+
+The title and subtitle below use the real CSS classes.
+
+<div class="tc-tiddler-frame" style="padding:14px 20px;margin-bottom:12px;">
+<h2 class="tc-title">Example Tiddler Title</h2>
+<div class="tc-subtitle">10th April 2026 at 3:00pm</div>
+<p>Body text in the tiddler frame. This is normal foreground text on tiddler-background.</p>
+<p class="tc-muted">This paragraph uses tc-muted class.</p>
+</div>
+
+!! 2. Tags
+
+Real tag buttons using the tag macro:
+
+<$macrocall $name="tag" tag="TableOfContents"/>
+<$macrocall $name="tag" tag="$:/tags/Stylesheet"/>
+<span class="tc-untagged-label tc-untagged-label tc-tag-label">untagged</span>
+
+!! 3. Links
+
+<$link to="HelloThere">Tiddler Link</$link> |
+<a href="https://example.com" class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">External Link</a> |
+<$link to="NonExistentTiddler99">Missing tiddler link</$link>
+
+!! 4. Tabs
+
+<$macrocall $name="tabs" tabsList="[[Audit: PaletteTestTab1]] [[Audit: PaletteTestTab2]] [[Audit: PaletteTestTab3]]" default="Audit: PaletteTestTab1" state="$:/state/palette-test-tabs"/>
+
+!! 5. Buttons
+
+<div style="margin:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+<button>Standard Button</button>
+<button disabled>Disabled</button>
+<$button class="tc-btn-invisible">Invisible Button</$button>
+<$button class="tc-btn-big-green">Download</$button>
+</div>
+
+!! 6. Tiddler Controls
+
+<div class="tc-tiddler-controls" style="font-size:1.2em;">
+<$button class="tc-btn-invisible">{{$:/core/images/close-button}}</$button>
+<$button class="tc-btn-invisible">{{$:/core/images/edit-button}}</$button>
+<$button class="tc-btn-invisible tc-selected">{{$:/core/images/info-button}}</$button>
+<$button class="tc-btn-invisible">{{$:/core/images/down-arrow}}</$button>
+</div>
+
+!! 7. Code
+
+Inline code: `var x = 42;`
+
+```
+// Code block
+function hello() {
+    return "world";
+}
+```
+
+!! 8. Blockquote
+
+> This is a blockquote. The left bar colour comes from the blockquote-bar palette entry.
+
+!! 9. Table
+
+|!Header 1 |!Header 2 |!Header 3 |
+|Cell 1 |Cell 2 |Cell 3 |
+|Cell 4 |Cell 5 |Cell 6 |
+|Footer A |Footer B |Footer C |f
+
+!! 10. Alerts & Notifications
+
+<div class="tc-alert">
+<div class="tc-alert-body">This is a real alert using tc-alert class.</div>
+</div>
+
+<$button message="tm-notify" param="Audit: PaletteTestNotification">Show notification</$button>
+
+!! 11. Message Box
+
+<div class="tc-message-box">
+{{$:/core/images/warning}} This is a message box using the tc-message-box class.
+</div>
+
+!! 12. Edit Template Preview
+
+<$edit-text tiddler="Audit: PaletteTestPage" field="test-field" class="tc-edit-texteditor" placeholder="Editor text input" tag="input"/>
+
+<$edit-text tiddler="Audit: PaletteTestPage" field="test-area" class="tc-edit-texteditor" placeholder="Editor textarea" rows="3"/>
+
+!! 13. Editor Fields Preview
+
+<div class="tc-tiddler-frame" style="padding:8px;">
+<table class="tc-edit-fields">
+<tbody>
+<tr class="tc-edit-field-odd"><td>field-name</td><td>field value (odd row)</td></tr>
+<tr class="tc-edit-field-even"><td>another-field</td><td>field value (even row)</td></tr>
+<tr class="tc-edit-field-odd"><td>third-field</td><td>field value (odd row)</td></tr>
+</tbody>
+</table>
+</div>
+
+!! 14. Tiddler Info
+
+<div class="tc-tiddler-info" style="padding:8px;margin:8px 0;">
+This is the tiddler info panel (tc-tiddler-info class).
+</div>
+
+!! 15. Dropdown
+
+<$button popup="$:/state/palette-test-dropdown" class="tc-btn-invisible tc-popup-keep">
+Click for dropdown &#x25bc;
+</$button>
+<$reveal type="popup" state="$:/state/palette-test-dropdown" animate="yes">
+<div class="tc-drop-down">
+<a href="#">Dropdown Item 1</a>
+<a href="#">Dropdown Item 2</a>
+<a href="#">Dropdown Item 3</a>
+</div>
+</$reveal>
+
+!! 16. Modal
+
+<$button message="tm-modal" param="Audit: PaletteTestModal">Open Modal</$button>
+
+!! 17. Diff View
+
+<div class="tc-diff-equal">Equal context line</div>
+<div class="tc-diff-insert">+ Inserted line</div>
+<div class="tc-diff-delete">- Deleted line</div>
+<div class="tc-diff-invisible">Invisible context</div>
+
+!! 18. Stability Badges
+
+<span class="tc-stability tc-stability-stable">Stable</span>
+<span class="tc-stability tc-stability-experimental">Experimental</span>
+<span class="tc-stability tc-stability-deprecated">Deprecated</span>
+<span class="tc-stability tc-stability-legacy">Legacy</span>
+
+!! 19. Dirty & Network
+
+<span class="tc-dirty-indicator">&#x25cf; Dirty indicator</span> |
+<span class="tc-network-activity">&#x25cf; Network activity</span>
+
+!! 20. Colour Swatch Grid
+
+<div style="display:flex;flex-wrap:wrap;gap:2px;margin:8px 0;">
+<$list filter="[{$:/palette}indexes[]] +[sort[]]" variable="colourName">
+<$macrocall $name="colour-swatch" name=<<colourName>>/>
+</$list>
+</div>
