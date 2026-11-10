@@ -35,7 +35,7 @@ Click me!
 </$button>'/>
 
 
-<<.tip """<$macrocall $name=".from-version" version="5.1.18"/> if triggered from within a ''new window'', the above examples will be displayed within that window. The <$macrocall $name=".attr" _="rootwindow"/> attribute can be set to ''yes'' or ''true'' to inherit this behavior and to display the Modal within the ''root'' window""">>
+<<.tip """<$macrocall $name=".from-version" version="5.1.18"/> if triggered from within a ''new window'', the above examples will be displayed within that window. The <$macrocall $name=".attr" _="rootwindow"/> attribute can be set to ''yes'' or ''true'' to override this behavior and to display the Modal within the ''root'' window""">>
 
 <<.tip """<$macrocall $name=".from-version" version="5.1.23"/> Links to tiddlers within a modal will open in the same story as the widget that sent the `tm-modal` message. You can override this by specifying values for the variables `tv-story-list` and `tv-history-list` when sending the `tm-modal` message.
 
