@@ -806,7 +806,9 @@ Widget.prototype.findNextSiblingDomNode = function(startIndex) {
 	while(++index < parent.children.length) {
 		var domNode = parent.children[index].findFirstDomNode();
 		if(domNode) {
-			return domNode;
+			// A sibling's node under another parent, as after a paragraph split, is no place to
+			// insert before: this widget's nodes then end its own parent
+			return domNode.parentNode === this.parentDomNode ? domNode : null;
 		}
 	}
 	// Go back and look for later siblings of our parent if it has the same parent dom node

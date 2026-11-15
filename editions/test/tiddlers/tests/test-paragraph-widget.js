@@ -149,6 +149,52 @@ describe("Paragraph widget", function() {
 		expect(html.indexOf("<label>B</label>")).toBeLessThan(html.indexOf("<div>C</div>"));
 	});
 
+	it("should refresh a block run after a literal paragraph as a fresh render draws it", function() {
+		// A $let whose attribute changes re-renders a literal <p> line followed by a conditional
+		// whose branches swap a button for a button and a block. A browser threw insertBefore
+		// errors on that refresh; the test document builds the wrong markup instead.
+		// CHECK BY HAND: a tiddler holding the source below; create Data with text  on , then
+		// change it to  two  and back to  on . Load must give way to Refresh and list, and
+		// back, with no red screen
+		var source = `<$let V={{Data}}>
+<p>
+The versions.
+</p>
+<% if [<V>match[on]] [<V>match[two]] %>
+<$button>refresh</$button>
+<div class="list"><$text text=<<V>>/></div>
+<% else %>
+<$button>load</$button>
+<% endif %>
+</$let>
+`,
+			wiki = $tw.test.wiki(),
+			rendered = render(source,wiki),
+			fresh = function() { return render(source,wiki).wrapper.innerHTML; },
+			// A browser throws where the test document appends: an insert before a node that
+			// is not a child of the parent. Count those, as a browser would fail them
+			proto = Object.getPrototypeOf($tw.fakeDocument.createElement("div")),
+			insertBefore = proto.insertBefore,
+			strayInserts = 0;
+		proto.insertBefore = function(node,nextSibling) {
+			if(nextSibling && !this.children.includes(nextSibling)) {
+				strayInserts++;
+			}
+			return insertBefore.call(this,node,nextSibling);
+		};
+		try {
+			expect(rendered.wrapper.innerHTML).toBe(fresh());
+			["on","two","","on"].forEach(function(value) {
+				wiki.addTiddler({title: "Data", text: value});
+				refresh(rendered,["Data"]);
+				expect(rendered.wrapper.innerHTML).toBe(fresh());
+			});
+		} finally{
+			proto.insertBefore = insertBefore;
+		}
+		expect(strayInserts).toBe(0);
+	});
+
 	it("should retake its decision when content changes between inline and block", function() {
 		// The decision depends on what the children rendered, so it has to be retaken when
 		// they change. A run that turns out to hold a block must be split the way a browser

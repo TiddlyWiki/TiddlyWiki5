@@ -209,6 +209,22 @@ function isBlockNode(node) {
 	return !!(node.childNodes && node.childNodes.length && containsBlockElement(node.childNodes));
 }
 
+/*
+The children remove their own nodes, since a child that rendered again holds nodes this
+widget's list never saw; then the paragraphs this widget made go
+*/
+ParagraphWidget.prototype.removeChildDomNodes = function() {
+	$tw.utils.each(this.children,function(child) {
+		child.removeChildDomNodes();
+	});
+	$tw.utils.each(this.domNodes,function(node) {
+		if(node.parentNode) {
+			node.parentNode.removeChild(node);
+		}
+	});
+	this.domNodes = [];
+};
+
 ParagraphWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
@@ -224,7 +240,7 @@ ParagraphWidget.prototype.refresh = function(changedTiddlers) {
 		// of them re-renders
 		var nodes = this.wrappedInParagraph ? this.domNodes[0].childNodes : collectDomNodes(this),
 			shouldWrap = !containsBlockElement(nodes) && hasContent(nodes);
-		if(shouldWrap !== this.wrappedInParagraph) {
+		if(shouldWrap !== this.wrappedInParagraph || (!this.wrappedInParagraph && !splitHolds(this,nodes))) {
 			this.refreshSelf();
 		} else if(!this.wrappedInParagraph) {
 			// A node lifted out of the paragraph belongs to the child that rendered it, and
@@ -241,6 +257,30 @@ ParagraphWidget.prototype.refresh = function(changedTiddlers) {
 	}
 	return false;
 };
+
+/*
+Whether a split run still stands as unwrap left it. A child that rendered again put its new
+nodes where its old ones were, which leaves inline content outside the split's paragraphs or
+one of them empty, so the split has to be made again
+*/
+function splitHolds(widget,nodes) {
+	var paragraphs = widget.domNodes.filter(function(node) {
+		return !nodes.includes(node) && node.parentNode === widget.parentDomNode && (node.tagName || "").toLowerCase() === "p";
+	});
+	for(var p=0; p<paragraphs.length; p++) {
+		if(!hasContent(paragraphs[p].childNodes)) {
+			return false;
+		}
+	}
+	for(var t=0; t<nodes.length; t++) {
+		var node = nodes[t],
+			placed = isBlockNode(node) ? node.parentNode === widget.parentDomNode : (!hasContent([node]) || paragraphs.includes(node.parentNode));
+		if(!placed) {
+			return false;
+		}
+	}
+	return true;
+}
 
 /*
 Whether any of these nodes, at any depth, is an element whose start tag would close an
