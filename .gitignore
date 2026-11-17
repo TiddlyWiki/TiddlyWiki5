@@ -19,3 +19,5 @@ test-output.txt
 .playwright-mcp
 # TiddlyWiki MPC
 .tw-mcp
+AGENTS-before.md
+AGENTS-after.md
