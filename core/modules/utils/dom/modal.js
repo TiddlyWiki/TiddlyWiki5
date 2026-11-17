@@ -9,7 +9,8 @@ Modal message mechanism
 
 "use strict";
 
-var navigator = require("$:/core/modules/widgets/navigator.js");
+var navigator = require("$:/core/modules/widgets/navigator.js"),
+	Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var Modal = function(wiki) {
 	this.wiki = wiki;
@@ -43,11 +44,14 @@ Modal.prototype.display = function(title,options) {
 	var variables = $tw.utils.extend({
 		currentTiddler: title,
 		"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
-		"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : ""),
-		"tv-config-toolbar-icons": (options.event && options.event.widget ? options.event.widget.getVariable("tv-config-toolbar-icons") : ""),
-		"tv-config-toolbar-text": (options.event && options.event.widget ? options.event.widget.getVariable("tv-config-toolbar-text") : ""),
-		"tv-config-toolbar-class": (options.event && options.event.widget ? options.event.widget.getVariable("tv-config-toolbar-class") : "")
+		"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "")
 	},options.variables);
+	var parentWidget = $tw.rootWidget;
+	if(options.event && options.event.widget && (variables.inheritvariables === "yes" || variables.inheritvariables === "true")) {
+		// Messages from the modal still go straight to the root widget, not up through the caller's ancestors
+		parentWidget = new Widget({},{wiki: this.wiki, document: this.srcDocument, parentWidget: $tw.rootWidget});
+		parentWidget.variables = Object.create(options.event.widget.variables);
+	}
 
 	// Create the wrapper divs
 	var wrapper = this.srcDocument.createElement("div"),
@@ -103,7 +107,7 @@ Modal.prototype.display = function(title,options) {
 	var navigatorWidgetNode = new navigator.navigator(navigatorTree, {
 		wiki: this.wiki,
 		document : this.srcDocument,
-		parentWidget: $tw.rootWidget
+		parentWidget: parentWidget
 	});
 	navigatorWidgetNode.render(modalBody,null);
 

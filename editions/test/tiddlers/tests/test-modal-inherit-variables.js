@@ -1,16 +1,16 @@
 /*\
-title: test-modal-toolbar-variables.js
+title: test-modal-inherit-variables.js
 type: application/javascript
 tags: [[$:/tags/test-spec]]
 
-Tests that a modal inherits the toolbar variables of the widget that opened it.
-A modal is rendered outside of the page template, which is where they are set.
+Tests the inheritvariables parameter of tm-modal, which gives the modal the
+variables of the widget that sent the message.
 
 \*/
 
 "use strict";
 
-describe("Modal toolbar variables", function() {
+describe("Modal inheritvariables", function() {
 
 	var modal = require("$:/core/modules/utils/dom/modal.js"),
 		widget = require("$:/core/modules/widgets/widget.js");
@@ -28,6 +28,7 @@ describe("Modal toolbar variables", function() {
 		$tw.utils.each(variables,function(value,name) {
 			pageWidget.setVariable(name,value);
 		});
+		pageWidget.setVariable("myProc","from a procedure <<myVar>>",[],false,{isProcedureDefinition: true});
 		return new widget.widget({type: "widget"},{wiki: wiki, document: document, parentWidget: pageWidget});
 	}
 
@@ -45,28 +46,20 @@ describe("Modal toolbar variables", function() {
 		return document.body.textContent;
 	}
 
-	var body = "<<tv-config-toolbar-icons>>/<<tv-config-toolbar-text>>/<<tv-config-toolbar-class>>";
+	var body = "<<tv-config-toolbar-icons>>/<<myVar>>/<<myProc>>/<<currentTiddler>>";
 
-	it("should pass the toolbar variables of the opening widget to the modal", function() {
-		expect(displayModal(body,{
-			"tv-config-toolbar-icons": "yes",
-			"tv-config-toolbar-text": "no",
-			"tv-config-toolbar-class": "tc-btn-invisible"
-		})).toContain("yes/no/tc-btn-invisible");
+	var pageVariables = {"tv-config-toolbar-icons": "yes", myVar: "outer", currentTiddler: "Caller"};
+
+	it("should not see the caller's variables by default", function() {
+		expect(displayModal(body,pageVariables)).toContain("///SampleModal");
 	});
 
-	it("should let variables on the tm-modal message override them", function() {
-		expect(displayModal(body,{
-			"tv-config-toolbar-icons": "yes",
-			"tv-config-toolbar-text": "no",
-			"tv-config-toolbar-class": "tc-btn-invisible"
-		},{
-			"tv-config-toolbar-text": "yes"
-		})).toContain("yes/yes/tc-btn-invisible");
+	it("should inherit the caller's variables when asked to", function() {
+		expect(displayModal(body,pageVariables,{inheritvariables: "yes"})).toContain("yes/outer/from a procedure outer/SampleModal");
 	});
 
-	it("should render when the opening widget has no toolbar variables", function() {
-		expect(displayModal("Some text",{})).toContain("Some text");
+	it("should let variables on the tm-modal message override inherited ones", function() {
+		expect(displayModal(body,pageVariables,{inheritvariables: "true", myVar: "message"})).toContain("yes/message/from a procedure message/SampleModal");
 	});
 
 });
