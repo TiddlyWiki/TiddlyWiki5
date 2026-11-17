@@ -9,5 +9,5 @@ tags: $:/tags/ChangeNote
 title: $:/changenotes/5.5.0/#9739
 type: text/vnd.tiddlywiki
 
-* An empty code block such as ```` ```bash ```` directly followed by the closing fence parses as an empty codeblock instead of swallowing the rest of the tiddler (fixes [[Issue #9047|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9047]])
+* An empty code block such as <code>```bash</code> directly followed by the closing fence parses as an empty codeblock instead of swallowing the rest of the tiddler (fixes [[Issue #9047|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9047]])
 * A closing fence only ends the block when it stands alone on its line, so code lines ending in three backticks stay inside the block
