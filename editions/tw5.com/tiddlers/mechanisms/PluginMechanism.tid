@@ -1,5 +1,5 @@
 created: 20130826122000000
-modified: 20240520162828577
+modified: 20260917165016124
 tags: Mechanisms
 title: PluginMechanism
 type: text/vnd.tiddlywiki
@@ -35,6 +35,10 @@ When [[running TiddlyWiki under Node.js|TiddlyWiki on Node.js]], plugins can als
 ! Plugin Fields
 
 {{Plugin Fields}}
+
+! Creating a plugin
+
+{{Creating a plugin}}
 
 ! More information
 
