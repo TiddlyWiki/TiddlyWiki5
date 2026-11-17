@@ -66,4 +66,14 @@ describe("codeblock parser tests (#9047)", function() {
 		expect(tree[0].type).toBe("codeblock");
 		expect(tree[0].attributes.code.value).toBe("foo");
 	});
+
+	it("accepts MIME types as code block languages", function() {
+		["application/javascript","image/svg+xml","text/vnd.tiddlywiki"].forEach(function(language) {
+			var tree = parse("```" + language + "\ncontent\n```");
+			expect(tree.length).toBe(1);
+			expect(tree[0].type).toBe("codeblock");
+			expect(tree[0].attributes.language.value).toBe(language);
+			expect(tree[0].attributes.code.value).toBe("content");
+		});
+	});
 });
