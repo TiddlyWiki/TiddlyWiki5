@@ -45,6 +45,7 @@ Modal.prototype.display = function(title,options) {
 		"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
 		"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "")
 	},options.variables);
+	var embedded = options.event && options.event.widget && (variables.embedded === "yes" || variables.embedded === "true");
 
 	// Create the wrapper divs
 	var wrapper = this.srcDocument.createElement("div"),
@@ -100,7 +101,7 @@ Modal.prototype.display = function(title,options) {
 	var navigatorWidgetNode = new navigator.navigator(navigatorTree, {
 		wiki: this.wiki,
 		document : this.srcDocument,
-		parentWidget: $tw.rootWidget
+		parentWidget: embedded ? options.event.widget : $tw.rootWidget
 	});
 	navigatorWidgetNode.render(modalBody,null);
 
