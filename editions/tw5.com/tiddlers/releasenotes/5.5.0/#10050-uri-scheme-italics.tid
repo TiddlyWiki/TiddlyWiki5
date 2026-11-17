@@ -1,0 +1,12 @@
+title: $:/changenotes/5.5.0/#10050
+created: 20261012000000000
+modified: 20261012000000000
+description: Keep URI scheme slashes from starting or ending italics
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10050
+github-contributors: joshuafontany
+
+The `//` in a URI scheme such as `lar://` no longer starts or ends italic formatting.
