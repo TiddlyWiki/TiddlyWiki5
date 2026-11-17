@@ -9,8 +9,7 @@ Modal message mechanism
 
 "use strict";
 
-var navigator = require("$:/core/modules/widgets/navigator.js"),
-	Widget = require("$:/core/modules/widgets/widget.js").widget;
+var navigator = require("$:/core/modules/widgets/navigator.js");
 
 var Modal = function(wiki) {
 	this.wiki = wiki;
@@ -46,12 +45,7 @@ Modal.prototype.display = function(title,options) {
 		"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
 		"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "")
 	},options.variables);
-	var parentWidget = $tw.rootWidget;
-	if(options.event && options.event.widget && (variables.inheritvariables === "yes" || variables.inheritvariables === "true")) {
-		// Messages from the modal still go straight to the root widget, not up through the caller's ancestors
-		parentWidget = new Widget({},{wiki: this.wiki, document: this.srcDocument, parentWidget: $tw.rootWidget});
-		parentWidget.variables = Object.create(options.event.widget.variables);
-	}
+	var embedded = options.event && options.event.widget && (variables.embedded === "yes" || variables.embedded === "true");
 
 	// Create the wrapper divs
 	var wrapper = this.srcDocument.createElement("div"),
@@ -107,7 +101,7 @@ Modal.prototype.display = function(title,options) {
 	var navigatorWidgetNode = new navigator.navigator(navigatorTree, {
 		wiki: this.wiki,
 		document : this.srcDocument,
-		parentWidget: parentWidget
+		parentWidget: embedded ? options.event.widget : $tw.rootWidget
 	});
 	navigatorWidgetNode.render(modalBody,null);
 

@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 |param |Title of the tiddler to be displayed |
 |//{any other params}// |Any other parameters are made available as variables within the context of the widget message. |
 |rootwindow |<<.from-version 5.1.18>> ''yes'' or ''true'' will always display a modal in the wiki-root-window |
-|inheritvariables |<<.from-version 5.5.0>> ''yes'' or ''true'' gives the modal every variable that the widget sending the message can see, including procedures and functions |
+|embedded |<<.from-version 5.5.0>> ''yes'' or ''true'' places the modal under the widget that sent the message, so it sees the same variables, including procedures and functions, and messages from the modal that its own navigator does not handle go up through that widget's ancestors |
 
 The modal message is usually generated with the ButtonWidget. The modal message is handled by the TiddlyWiki core.
 
