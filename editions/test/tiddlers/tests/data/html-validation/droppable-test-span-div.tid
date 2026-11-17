@@ -1,0 +1,35 @@
+created: 20251030154027875
+description: Draggable Widget Tag
+modified: 20260127100540415
+tags: $:/tags/wiki-test-spec
+title: droppable-test-span-div
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Handled by: $:/core/modules/widgets/droppable.js
+
+```
+var tag = this.parseTreeNode.isBlock ? "div" : "span",
+// snip code 
+tag = $tw.utils.makeTagNameSafe(this.droppableTag,tag);
+```
++
+title: Output
+
+<!-- The following 3 tests should create a "span" a "div" and a DIV element -->
+<$droppable>drop span here</$droppable>
+<$droppable>
+
+drop div here
+</$droppable>
+
+<$droppable tag="DIV">drop DIV here</$droppable>
+
++
+title: ExpectedResult
+
+<p><span class="tc-droppable">drop span here</span>
+<div class="tc-droppable"><p>drop div here
+</p></div></p><p><DIV class="tc-droppable">drop DIV here</DIV>
+</p>

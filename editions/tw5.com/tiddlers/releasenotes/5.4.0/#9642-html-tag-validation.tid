@@ -1,0 +1,16 @@
+change-category: internal
+change-type: bugfix
+created: 20260206160822000
+description: Html element validation
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9642
+modified: 20260206160840000
+release: 5.4.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.0/#9642
+type: text/vnd.tiddlywiki
+
+It adds a new function to `$tw.utils.makeTagNameSafe(tag, defaultTag)`
+
+* It checks for the existence of the tag and if it is a safe tag
+* If defaultTag is undefined it uses SPAN as default
