@@ -1,0 +1,24 @@
+title: $:/changenotes/5.5.0/#9724/impacts/formatted-text
+changenote: $:/changenotes/5.5.0/#9724
+created: 20261117120000000
+modified: 20261117120000000
+tags: $:/tags/ImpactNote
+description: Formatted plain text keeps the lines of code blocks and renders lists without blank lines
+impact-type: compatibility-break
+
+Formatted plain text output used to collapse a multi-line code block onto one line and separate list items with blank lines. Code blocks now keep their line breaks, and each list item is a line starting with `  - ` instead of `* `.
+
+The command line help is the first to benefit. The same readable output comes without any change to:
+
+* `<$wikify output="formattedtext">` in wikitext
+* `wiki.renderTiddler("text/plain-formatted", ...)` in JavaScript
+* server-side plugins that read `formattedTextContent` of fakedom nodes
+
+Text and HTML output are unchanged.
+
+Code that parses formatted list output needs a small update:
+
+* Match the item prefix `  - ` instead of `* `. For example, a filter step `removeprefix[* ]` becomes `removeprefix[  - ]`, and a JavaScript pattern `/^\* /` becomes `/^  - /`
+* Split items on single newlines, since there are no longer blank lines between them
+
+Workarounds that rebuilt collapsed code blocks can be removed.

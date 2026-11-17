@@ -2,6 +2,7 @@ title: $:/language/Help/savetiddlers
 description: एक निर्देशिका के लिए raw tiddlers के एक समूह सेव करता है
 
 निर्दिष्ट निर्देशिका के लिए उनके raw टेक्स्ट या बाइनरी स्वरूप में tiddlers के एक समूह की बचत होती है।
+
 ```
 --savetiddlers <filter> <pathname>
 ```
