@@ -1,0 +1,10 @@
+created: 20261101042222000
+modified: 20261101042222000
+tags: [[Community Plugins]]
+title: Tearoff Panes by mMerlin
+type: text/vnd.tiddlywiki
+url: https://github.com/mMerlin/tw5-tearoff-panes
+
+Open any tiddler in a draggable, resizable pane that floats over the main story river, without leaving the current browser window.
+
+{{!!url}}
