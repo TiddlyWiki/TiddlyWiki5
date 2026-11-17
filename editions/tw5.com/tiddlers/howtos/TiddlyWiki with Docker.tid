@@ -1,0 +1,132 @@
+title: TiddlyWiki with Docker
+tags: [[TiddlyWiki on Node.js]] Docker
+type: text/vnd.tiddlywiki
+
+This page describes how to run [[TiddlyWiki on Node.js]] using Docker.
+
+!! Quick Start
+
+The simplest way to run TiddlyWiki in Docker is with `docker run`:
+
+```
+docker run --init -p 127.0.0.1:8080:8080 \
+  -v "$(pwd)/data:/data" \
+  tiddlywiki/tiddlywiki
+```
+
+Then open http://localhost:8080 in your browser. Wiki data is persisted in a `data` folder in the current directory.
+
+!! Mapping a Host Directory
+
+By default Docker uses a named volume to store wiki data. To use a host directory (bind mount) instead:
+
+```
+mkdir -p ./my-wiki
+docker run --init -p 127.0.0.1:8080:8080 \
+  -v "$(pwd)/my-wiki:/data" \
+  --user "$(id -u):$(id -g)" \
+  tiddlywiki/tiddlywiki
+```
+
+The container runs as UID/GID `1000` by default, which matches the first non-root user on most Linux systems. If your host user has a different UID, pass `--user "$(id -u):$(id -g)"` to override.
+
+With Docker Compose, replace the named volume with a bind mount:
+
+```yaml
+    volumes:
+      - ./my-wiki:/data
+    # Only needed if your host UID is not 1000:
+    # user: "${UID}:${GID}"
+```
+
+!!! macOS
+
+On macOS the first user has UID `501`, not `1000`. Always pass `--user` explicitly:
+
+```
+mkdir -p ./my-wiki
+docker run --init -p 127.0.0.1:8080:8080 \
+  -v "$(pwd)/my-wiki:/data" \
+  --user "$(id -u):$(id -g)" \
+  tiddlywiki/tiddlywiki
+```
+
+Or in `docker-compose.yml`:
+
+```yaml
+    volumes:
+      - ./my-wiki:/data
+    user: "${UID}:${GID}"
+```
+
+Note: Docker Desktop on macOS handles volume permissions through a file-sharing layer (gRPC FUSE or VirtioFS). If you encounter permission errors despite setting `--user`, check that the host directory is included in Docker Desktop → Settings → Resources → File Sharing.
+
+!! Authentication
+
+For internet-facing instances, always set a username and password:
+
+```
+docker run --init -p 127.0.0.1:8080:8080 \
+  -v "$(pwd)/data:/data" \
+  -e TIDDLYWIKI_USERNAME=admin \
+  -e TIDDLYWIKI_PASSWORD=changeme \
+  tiddlywiki/tiddlywiki
+```
+
+!! Using Docker Compose
+
+Save the following as `docker-compose.yml` and run `docker compose up -d`:
+
+```yaml
+services:
+  tiddlywiki:
+    image: tiddlywiki/tiddlywiki:latest
+    init: true
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - tiddlywiki-data:/data
+    environment:
+      TIDDLYWIKI_USERNAME: admin
+      TIDDLYWIKI_PASSWORD: changeme
+      TIDDLYWIKI_READERS: "(anon)"
+      TIDDLYWIKI_WRITERS: "(authenticated)"
+    restart: unless-stopped
+
+volumes:
+  tiddlywiki-data:
+```
+
+!! Environment Variables
+
+|!Variable |!Default |!Description |
+|`TIDDLYWIKI_DATA_DIR` |`/data` |Path inside the container where wiki files are stored |
+|`TIDDLYWIKI_HOST` |`0.0.0.0` |Host address to bind to |
+|`TIDDLYWIKI_PORT` |`8080` |Port to listen on |
+|`TIDDLYWIKI_USERNAME` |''(empty)'' |HTTP Basic Auth username |
+|`TIDDLYWIKI_PASSWORD` |''(empty)'' |HTTP Basic Auth password |
+|`TIDDLYWIKI_READERS` |`(anon)` |Who can read: `(anon)`, `(authenticated)`, or a specific username |
+|`TIDDLYWIKI_WRITERS` |`(authenticated)` |Who can write: `(anon)`, `(authenticated)`, or a specific username |
+
+!! Building from Source
+
+To build the image yourself from the TiddlyWiki5 source:
+
+```
+git clone https://github.com/TiddlyWiki/TiddlyWiki5.git
+cd TiddlyWiki5
+docker build --build-arg NODE_LTS_VERSION=22 -t tiddlywiki .
+```
+
+!! Security Notes
+
+* The container runs as an unprivileged `tiddlywiki` user (not root).
+* Bind the host port to `127.0.0.1` (as shown above) unless you intend to expose TiddlyWiki directly to a network.
+* For production use, place a reverse proxy (e.g. nginx or Caddy) with TLS in front of the container.
+
+!! See Also
+
+* [[TiddlyWiki on Node.js]]
+* [[WebServer API: Authenticating with the WebServer]]
+* [[WebServer Parameter: readers]]
+* [[WebServer Parameter: writers]]
