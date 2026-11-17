@@ -26,14 +26,22 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var reEnd = /@@/g;
+	var reEnd = /@@|\r?\n\r?\n/g;
 	// Get the styles and class
 	var stylesString = this.match[1],
-		classString = this.match[2] ? this.match[2].split(".").join(" ") : undefined;
+		classString = this.match[2] ? this.match[2].split(".").join(" ") : undefined,
+		delimiterStart = this.parser.pos,
+		delimiterText = this.match[0];
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the run up to the terminator
-	var tree = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
+	var bodyStart = this.parser.pos,
+		ex = this.parser.parseInlineRunTerminatedExtended(reEnd);
+	if(!ex.match || ex.match[0] !== "@@") {
+		return [{type: "text", text: delimiterText, start: delimiterStart, end: bodyStart}].concat(ex.tree);
+	}
+	this.parser.pos += 2;
+	var tree = ex.tree;
 	// Return the classed span
 	var node = {
 		type: "element",

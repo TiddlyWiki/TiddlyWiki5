@@ -66,5 +66,11 @@ describe("WikiText tests", function() {
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
 			"some @@background:red;color:white;.myClass 2 style and 1 class@@ text")).toBe('<p>some <span class=" myClass " style="background:red;color:white;">2 style and 1 class</span> text</p>');
 	});
+	it("leaves unclosed inline styles as text and parses the next block", function() {
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
+			"before @@color:red;unfinished\n\n! Next heading")).toBe("<p>before @@color:red;unfinished</p><h1 class=\"\">Next heading</h1>");
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
+			"before @@.myClass ''bold''")).toBe("<p>before @@.myClass <strong>bold</strong></p>");
+	});
 });
 
