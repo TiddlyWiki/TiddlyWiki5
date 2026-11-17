@@ -130,16 +130,10 @@ Object.defineProperty(TW_Element.prototype, "nodeType", {
 });
 
 TW_Element.prototype.getAttribute = function(name) {
-	if(this.isRaw) {
-		throw "Cannot getAttribute on a raw TW_Element";
-	}
 	return this.attributes[name];
 };
 
 TW_Element.prototype.setAttribute = function(name,value) {
-	if(this.isRaw) {
-		throw "Cannot setAttribute on a raw TW_Element";
-	}
 	if(name === "style") {
 		this.style.set(value);
 	} else {
@@ -152,9 +146,6 @@ TW_Element.prototype.setAttributeNS = function(namespace,name,value) {
 };
 
 TW_Element.prototype.removeAttribute = function(name) {
-	if(this.isRaw) {
-		throw "Cannot removeAttribute on a raw TW_Element";
-	}
 	if($tw.utils.hop(this.attributes,name)) {
 		delete this.attributes[name];
 	}
