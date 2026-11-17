@@ -1,9 +1,8 @@
 title: ListWidget/WithMissingTemplate
-description: List widget with explicit templates
+description: List widget with $list-empty but no item template
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
-+
 title: Output
 
 \whitespace trim

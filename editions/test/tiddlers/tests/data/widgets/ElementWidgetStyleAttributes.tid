@@ -12,4 +12,4 @@ TiddlyWiki
 +
 title: ExpectedResult
 
-<p><div class="hello" style="color:red;background:yellow;">TiddlyWiki</div></p>
+<div class="hello" style="color:red;background:yellow;">TiddlyWiki</div>

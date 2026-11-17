@@ -629,6 +629,12 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	}
 	// Get the widget class for this node type
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
+	// A paragraph the parser produced is provisional, so the paragraph widget decides
+	// whether it survives. Keyed on the rule that made it, which leaves the parse tree as
+	// it was
+	if(parseTreeNode.rule === "parseblock" && parseTreeNode.type === "element" && parseTreeNode.tag === "p") {
+		WidgetClass = this.widgetClasses.paragraph || WidgetClass;
+	}
 	if(!WidgetClass) {
 		WidgetClass = this.widgetClasses.text;
 		parseTreeNode = {type: "text", text: "Undefined widget '" + parseTreeNode.type + "'"};
@@ -800,7 +806,9 @@ Widget.prototype.findNextSiblingDomNode = function(startIndex) {
 	while(++index < parent.children.length) {
 		var domNode = parent.children[index].findFirstDomNode();
 		if(domNode) {
-			return domNode;
+			// A sibling's node under another parent, as after a paragraph split, is no place to
+			// insert before: this widget's nodes then end its own parent
+			return domNode.parentNode === this.parentDomNode ? domNode : null;
 		}
 	}
 	// Go back and look for later siblings of our parent if it has the same parent dom node
