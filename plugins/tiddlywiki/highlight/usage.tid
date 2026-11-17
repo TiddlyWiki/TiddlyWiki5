@@ -4,13 +4,13 @@ title: $:/plugins/tiddlywiki/highlight/usage
 
 ! Usage
 
-Syntax highlighting is triggered when you add language information to code blocks defined with triple backticks or with the `<$codeblock>` widget. For fenced code blocks, specify the code's language immediately after the first set of backticks:
+Syntax highlighting is triggered when you add language information to code blocks defined with three or more backticks or with the `<$codeblock>` widget. For fenced code blocks, specify the code's language immediately after the first set of backticks:
 
+````
+```js
+var a = b + c; // Highlighted as JavaScript
 ```
- ```js
- var a = b + c; // Highlighted as JavaScript
- ```
-```
+````
 
 ! Adding Themes
 

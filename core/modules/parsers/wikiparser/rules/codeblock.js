@@ -21,13 +21,16 @@ exports.types = {block: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match and get language if defined
-	this.matchRegExp = /```([\w-]*)\r?\n/mg;
+	this.matchRegExp = /(`{3,})([\w-]*)\r?\n/mg;
 };
 
 exports.parse = function() {
-	var reEnd = /(^|\r?\n)```$/mg;
-	var languageStart = this.parser.pos + 3,
-		languageEnd = languageStart + this.match[1].length;
+	var fenceLength = this.match[1].length,
+		lineStart = this.parser.source.lastIndexOf("\n",this.match.index - 1) + 1,
+		openingIndentation = this.parser.source.substring(lineStart,this.match.index).match(/[ \t]*$/)[0].length,
+		reEnd = new RegExp("(^|\\r?\\n)[ \\t]{0," + openingIndentation + "}`{" + fenceLength + ",}(?=\\r?\\n|$)","mg"),
+		languageStart = this.parser.pos + fenceLength,
+		languageEnd = languageStart + this.match[2].length;
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 
@@ -49,7 +52,7 @@ exports.parse = function() {
 		type: "codeblock",
 		attributes: {
 			code: {type: "string", value: text, start: codeStart, end: this.parser.pos},
-			language: {type: "string", value: this.match[1], start: languageStart, end: languageEnd}
+			language: {type: "string", value: this.match[2], start: languageStart, end: languageEnd}
 		}
 	}];
 };
