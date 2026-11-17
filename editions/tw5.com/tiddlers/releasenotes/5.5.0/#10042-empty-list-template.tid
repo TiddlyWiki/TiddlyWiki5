@@ -1,0 +1,12 @@
+change-category: widget
+change-type: bugfix
+created: 20261009081500000
+description: An empty list-template no longer falls back to the default link template
+github-contributors: Wahaj18
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10042
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#10042
+type: text/vnd.tiddlywiki
+
+* An explicit but empty `<$list-template>` (including the self-closing `<$list-template/>`) now renders nothing for each item instead of falling back to the default link to the title (fixes [[Issue #9901|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9901]])
