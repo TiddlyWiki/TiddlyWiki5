@@ -21,6 +21,11 @@ Because the groups are computed after the search, a whole group disappears once 
 This test case carries the same `_TabButton` and `_TabContent` payload tiddlers as the previous example.
 
 Type `bar` to leave only ''InProceedings'', holding Barker's two papers. The other tabs drop to zero and show the `emptyMessage` of the list.
+
+''Important:''
+
+If you want to modify the example make sure to copy all three tiddlers: `Output`, `_TabButton` and `_TabContent`.
+
 +
 title: Output
 

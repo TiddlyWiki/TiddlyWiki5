@@ -15,7 +15,11 @@
 	],
 	"build": {
 		"index": [
-			"--rendertiddler","$:/core/save/all","test.html","text/plain",
-			"--test"]
+			"--rendertiddler",
+			"$:/core/save/all",
+			"test.html",
+			"text/plain",
+			"--test"
+		]
 	}
 }
