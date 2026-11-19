@@ -1,0 +1,23 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/blocks/hard-line-breaks/styles.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+Styles for hard line breaks blocks in the ProseMirror editor.
+The """ ... """ syntax displays as a distinct editable block with a hover border.
+Uses the unified pm-nodeview pattern from blocks/nodeview-common.
+
+\*/
+
+/* Hard-line-breaks variant */
+.pm-nodeview.pm-nodeview-hardbreaks .pm-nodeview-header {
+	font-family: monospace;
+	font-size: 11px;
+	padding: 1px 6px;
+	/* No buttons, just a label */
+}
+
+.pm-nodeview.pm-nodeview-hardbreaks .pm-nodeview-content {
+	min-height: 1.4em;
+	outline: none;
+}

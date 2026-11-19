@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/typed-html
+tags: $:/tags/EditorCommand
+caption: $$$ HTML
+description: text/html
+command-id: insert-typed-block
+command-type: text/html
+command-category: typed-block
+command-surfaces: slash-menu block-menu
+command-editors: prosemirror

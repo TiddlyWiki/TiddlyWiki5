@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/indent-list
+tags: $:/tags/EditorCommand
+caption: Indent
+description: Indent this list item
+command-id: indent-list
+command-category: list
+command-surfaces: block-menu
+command-editors: prosemirror

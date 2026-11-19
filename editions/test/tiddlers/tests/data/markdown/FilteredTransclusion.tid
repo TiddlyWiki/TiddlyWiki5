@@ -14,10 +14,8 @@ block above
 title: ExpectedResult
 
 <div class="markdown">
-<p><div><a class="tc-tiddlylink tc-tiddlylink-missing" href="#hello%2520world">hello%20world</a></div><div><a class="tc-tiddlylink tc-tiddlylink-missing" href="#foo%2520bar">foo%20bar</a></div><p>block above
-</p></p>
-<p><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#hello%2520world">hello%20world</a></span><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#foo%2520bar">foo%20bar</a></span> inline
-</p>
+<p><div><a class="tc-tiddlylink tc-tiddlylink-missing" href="#hello%2520world">hello%20world</a></div><div><a class="tc-tiddlylink tc-tiddlylink-missing" href="#foo%2520bar">foo%20bar</a></div><p>block above</p></p>
+<p><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#hello%2520world">hello%20world</a></span><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#foo%2520bar">foo%20bar</a></span> inline</p>
 </div>
 +
 title: $:/palette

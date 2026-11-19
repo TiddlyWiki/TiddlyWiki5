@@ -42,6 +42,7 @@ EditWidget.prototype.execute = function() {
 	this.editField = this.getAttribute("field","text");
 	// Choose the appropriate edit widget
 	this.editorType = this.getEditorType();
+	this.setVariable("tv-editor-type",this.editorType);
 	// Make the child widgets
 	this.makeChildWidgets([{
 		type: "edit-" + this.editorType,
@@ -61,6 +62,9 @@ EditWidget.prototype.getEditorType = function() {
 	}
 	type = type || "text/vnd.tiddlywiki";
 	var editorType = this.wiki.getTiddlerText(EDITOR_MAPPING_PREFIX + type);
+	if(editorType) {
+		editorType = editorType.trim();
+	}
 	if(!editorType) {
 		var typeInfo = $tw.config.contentTypeInfo[type];
 		if(typeInfo && typeInfo.encoding === "base64") {

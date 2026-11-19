@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/editor-command-menu/language/
+
+AriaLabel: Editor commands
+FilterAriaLabel: Filter commands
+FilterPlaceholder: Filter commands...
+ListAriaLabel: Available commands
+NoMatches: No matching commands
+Category/block-type: Turn into
+Category/block-insert: Insert
+Category/inline-format: Formatting
+Category/list: List
+Category/block-action: Actions
+Category/typed-block: Typed blocks
+Category/snippet: Snippets
+Category/other: Other

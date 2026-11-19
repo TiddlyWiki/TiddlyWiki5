@@ -1,0 +1,111 @@
+title: $:/plugins/tiddlywiki/prosemirror/docs/extending
+caption: Extending
+tags: $:/plugins/tiddlywiki/prosemirror/docs
+
+! Extending the editor
+
+!! Toolbar and command menus are different layers
+
+The standard editor toolbar remains the TiddlyWiki presentation and configuration layer. Its `tm-edit-text-operation` messages are adapted to semantic ProseMirror commands in `core/text-operations.js`.
+
+Slash and block menus need a different catalogue: they expose only appropriate toolbar-like actions and also contain structural actions that do not belong in the toolbar. These commands are described by `$:/tags/EditorCommand` tiddlers. The editor-independent `$:/plugins/tiddlywiki/editor-command-menu` plugin discovers, filters and displays descriptors, but never mutates an editor document.
+
+Both paths meet at `core/editor-commands.js`. It executes document changes as ProseMirror transactions, preserving selection, history and WikiText source ownership. A command descriptor is configuration, not executable code.
+
+The toolbar adapter covers the core `texteditoroperation` contract as follows:
+
+|!Operation |!Structured behaviour |
+|`wrap-selection` |Native marks, links and transclusions; arbitrary wrappers around an existing selection become an exact source-backed inline node |
+|`prefix-lines` |Native headings and lists; other prefixes transform complete selected top-level blocks through source-backed WikiText |
+|`wrap-lines` |Native code blocks and blockquotes; other wrappers transform complete selected top-level blocks through source-backed WikiText |
+|`make-link` |Creates or updates a ProseMirror link mark |
+|`insert-text`, `replace-selection` |Parses complete WikiText and inserts structured or source-backed nodes |
+|`replace-all` |Parses the replacement and replaces the document through a transaction |
+|`excise` |Creates the new tiddler and replaces the structural selection with a link, transclusion or macro |
+|`save-selection` |Serialises the structural selection into the requested tiddler field |
+|`focus-editor` |Focuses the editor instance |
+
+An unknown operation or an operation that cannot be represented safely is explicitly declined. It must not fall through to the legacy text-offset implementation. In particular, an arbitrary prefix/suffix pair with an empty selection cannot provide a cursor inside unparsed WikiText in visual mode; such a toolbar extension should insert a complete snippet or provide an editor-specific semantic command.
+
+!! Command descriptors
+
+Create a tiddler tagged `$:/tags/EditorCommand` and give it a semantic `command-id`:
+
+|!Field |!Meaning |
+|`command-id` |Required semantic operation handled by the editor adapter |
+|`command-key` |Optional stable instance identity; defaults to the descriptor title |
+|`caption` |Label, rendered to plain text |
+|`description` |Optional secondary text, rendered to plain text |
+|`icon` |Optional tiddler containing an SVG icon |
+|`command-category` |Grouping key; defaults to `other` |
+|`command-surfaces` |Optional list of surfaces such as `slash-menu` or `block-menu` |
+|`command-editors` |Optional editor-type list, for example `prosemirror` |
+|`command-content-types` |Optional content-type list, for example `text/vnd.tiddlywiki` |
+|`command-keywords` |Optional extra search terms |
+|other `command-*` fields |Parameters passed to the semantic handler with the prefix removed |
+
+An omitted context-list field is unrestricted. A descriptor that should appear only in this editor should therefore say `command-editors: prosemirror`. Menu ordering first follows the list field of `$:/tags/EditorCommand`, then labels are sorted within each category.
+
+For example:
+
+```
+title: $:/Example/EditorCommand/notice
+tags: $:/tags/EditorCommand
+caption: Insert notice
+command-id: insert-notice
+command-kind: warning
+command-category: block-insert
+command-surfaces: slash-menu
+command-editors: prosemirror
+command-content-types: text/vnd.tiddlywiki
+```
+
+!! Implementing a semantic command
+
+Built-in commands live in `core/editor-commands.js`. Plugins can add handlers with a `prosemirroreditorcommand` module. Export a function under the same name as `command-id`:
+
+```
+/*\
+title: $:/plugins/example/insert-notice.js
+type: application/javascript
+module-type: prosemirroreditorcommand
+
+\*/
+
+"use strict";
+
+exports["insert-notice"] = function(context, command, execute) {
+	var view = context.view;
+	if(!view || !view.state.schema.nodes.paragraph) {
+		return false;
+	}
+	if(execute) {
+		view.dispatch(view.state.tr.insertText("Notice: ").scrollIntoView());
+	}
+	return true;
+};
+```
+
+The third argument is `false` while testing availability and `true` while executing. A handler should return `false` when the current selection or schema cannot support the operation and must not mutate anything during the availability call. Parameters such as `command-kind` are available as `command.parameters.kind`.
+
+Do not convert ProseMirror positions to offsets in the saved WikiText and do not replace the whole editor document merely to run an action. Use a transaction, or return `false` if the operation cannot be expressed safely. New content derived from moved, duplicated or newly constructed nodes must not inherit source-provenance metadata.
+
+!! Snippets
+
+Tiddlers tagged `$:/tags/TextEditor/Snippet` are adapted by the ProseMirror slash-menu plugin into transient `insert-snippet` commands. This compatibility rule is deliberately not part of the generic command registry.
+
+!! Source-safe AST conversion
+
+`ast/` converts between the TiddlyWiki parse tree and the ProseMirror document. Exact original source is attached as provenance to unchanged groups. Unsupported inline and block constructs become `opaque_inline` and `opaque_block` nodes that retain their raw WikiText. Serialisation reuses exact source only while the owning group remains unchanged; structurally edited content is serialised from the current ProseMirror nodes.
+
+An opaque node is reparsed against its own temporary `$:/temp/ProseMirror/RenderedBlock...` tiddler before its preview is rendered. This is important for third-party WikiText rules that record source offsets and later write to `currentTiddler`: their offsets stay local to the opaque node, and a write is converted back into a ProseMirror transaction with normal undo and multi-editor synchronisation. The temporary tiddler copies the source tiddler's fields for rendering context, is removed with the node view and is excluded by the standard saver and sync filters. `currentTiddler` deliberately names the sandbox; the original edited title is available as `prosemirrorSourceTiddler`. A rendered widget must not bypass this bridge to mutate the original tiddler text.
+
+Node views and menu views must create DOM through the owning editor's `ownerDocument`. They must remove listeners, TiddlyWiki widgets, timers and appended menu roots in `destroy()`, so multiple editors and non-global documents remain isolated.
+
+!! Architecture
+
+* `core/` owns the schema, editor engine, shared plugins, keymaps, toolbar adaptation and semantic commands.
+* `ast/` owns bidirectional WikiText conversion and source provenance.
+* `blocks/` owns source-backed and specialised node views.
+* `features/` owns editor interactions such as autocomplete, find/replace, slash menu and drag handle.
+* `$:/plugins/tiddlywiki/editor-command-menu` owns only reusable descriptor discovery and accessible menu DOM.

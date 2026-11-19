@@ -1,0 +1,149 @@
+{
+	"schemaVersion": 1,
+	"artifacts": [
+		{
+			"package": "orderedmap",
+			"version": "2.1.1",
+			"source": "dist/index.cjs",
+			"destination": "files/orderedmap.cjs",
+			"sha256": "20dd8b5b53dbf713cedeef60171f80f08ea3725888a8176073a22af0c00cbe91"
+		},
+		{
+			"package": "prosemirror-commands",
+			"version": "1.7.0",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-commands.cjs",
+			"sha256": "e15df96ba74f287e50d7082dbd43af19371a3df77beefd1f8ad4758fd05bda2d"
+		},
+		{
+			"package": "prosemirror-dropcursor",
+			"version": "1.8.1",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-dropcursor.cjs",
+			"sha256": "adfbda8c9f320642408b60ec44d482abbd7d9ee2e0c1e7c8ca7e2c9bea3e03c4"
+		},
+		{
+			"package": "prosemirror-flat-list",
+			"version": "0.5.4",
+			"source": "dist/prosemirror-flat-list.cjs",
+			"destination": "files/prosemirror-flat-list.cjs",
+			"sha256": "7170868c5fcfab9da37c1fe8499ea4ef2b1cd3f35e733e25c23f3825f82559c5"
+		},
+		{
+			"package": "prosemirror-flat-list",
+			"version": "0.5.4",
+			"source": "dist/style.css",
+			"destination": "files/prosemirror-flat-list.css",
+			"sha256": "e9f3c8408f0fd4c18a04079ce5f258e6301fe98b556c7465b814c9d20f02e080"
+		},
+		{
+			"package": "prosemirror-gapcursor",
+			"version": "1.3.2",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-gapcursor.cjs",
+			"sha256": "ef18acd333fd2c96df03ee144f5513dd5b77ffc78ba576879cfd6f6bddbbd968"
+		},
+		{
+			"package": "prosemirror-history",
+			"version": "1.4.1",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-history.cjs",
+			"sha256": "d922990288ceba5a3606a6046a964acb62b6605d4355c5c700a6c37efd7bbd69"
+		},
+		{
+			"package": "prosemirror-inputrules",
+			"version": "1.5.0",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-inputrules.cjs",
+			"sha256": "e869b295b372b25abbc5db7e88446f587b0ab2760d8f34d26ee90841dc9e6a6a"
+		},
+		{
+			"package": "prosemirror-keymap",
+			"version": "1.2.2",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-keymap.cjs",
+			"sha256": "bacc619a8b19d769c6901a6d2d0684436d3f181466235cfc5d6da69b62984cea"
+		},
+		{
+			"package": "prosemirror-model",
+			"version": "1.25.0",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-model.cjs",
+			"sha256": "3ddf34a650d93463d845e648c742fc8c22b1c369cbc4575cd34460794ad494b5"
+		},
+		{
+			"package": "prosemirror-safari-ime-span",
+			"version": "1.0.2",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-safari-ime-span.cjs",
+			"sha256": "36d61aaeffbff933a6b641192b2af0e4a2907e4356dc62b2bc8d64ff35b90151"
+		},
+		{
+			"package": "prosemirror-schema-basic",
+			"version": "1.2.4",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-schema-basic.cjs",
+			"sha256": "e5cf2a083d3dff228b5f355e78c608dc7c191523bb3cc966793bc03695b02c02"
+		},
+		{
+			"package": "prosemirror-state",
+			"version": "1.4.3",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-state.cjs",
+			"sha256": "0bcf83d69350801248032b113f2170b0b346d9a635d80740a64828d3d3ece167"
+		},
+		{
+			"package": "prosemirror-tables",
+			"version": "1.8.5",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-tables.cjs",
+			"sha256": "5585e5bbdc0ac587242249e624194f3ebbfcc71fc93d102197341124c8b9f8cd"
+		},
+		{
+			"package": "prosemirror-tables",
+			"version": "1.8.5",
+			"source": "style/tables.css",
+			"destination": "files/prosemirror-tables.css",
+			"sha256": "3fec20590b901e5ecf7d17691df2b053e836ed052894632a199d07081d3019a9"
+		},
+		{
+			"package": "prosemirror-transform",
+			"version": "1.10.3",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-transform.cjs",
+			"sha256": "73d68bc1b826aebeffa1be5c5c6e02b4ad6c4e4883b349abfafc398a01425769"
+		},
+		{
+			"package": "prosemirror-view",
+			"version": "1.38.1",
+			"source": "dist/index.cjs",
+			"destination": "files/prosemirror-view.cjs",
+			"sha256": "8d9ce3476515456cd023175a0244baf76b03346d22a983db384e5592a6da7406"
+		},
+		{
+			"package": "prosemirror-view",
+			"version": "1.38.1",
+			"source": "style/prosemirror.css",
+			"destination": "files/prosemirror.css",
+			"sha256": "0fab11b82dc31c0a60eef41f7dc1d182073d3d4da4c756f4e58e7344f977f36a"
+		},
+		{
+			"package": "rope-sequence",
+			"version": "1.3.4",
+			"source": "dist/index.cjs",
+			"destination": "files/rope-sequence.cjs",
+			"sha256": "05be586b697d7efe18552ccb647550d8f200b7d078fade26dfe2d6c7b956d5cc"
+		},
+		{
+			"package": "w3c-keyname",
+			"version": "2.2.8",
+			"source": "index.cjs",
+			"destination": "files/w3c-keyname.cjs",
+			"sha256": "4da1f0a238777b0066e5a76b7940b3034107e2834cf2c73d29676530d1b936ae"
+		}
+	],
+	"notice": {
+		"destination": "files/THIRD-PARTY-NOTICES",
+		"sha256": "964e2c8484d8612836b5f45fb68b8518873c523d9d5854fdb0e8d384d9838fce"
+	}
+}

@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/bullet-list
+tags: $:/tags/EditorCommand
+caption: Bullet list
+description: Turn the current block into a bullet list
+icon: $:/core/images/list-bullet
+command-id: toggle-list
+command-kind: bullet
+command-category: block-type
+command-surfaces: slash-menu block-menu
+command-editors: prosemirror

@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/delete-block
+tags: $:/tags/EditorCommand
+caption: Delete
+description: Delete this block
+icon: $:/core/images/delete-button
+command-id: delete-block
+command-category: block-action
+command-surfaces: block-menu
+command-editors: prosemirror

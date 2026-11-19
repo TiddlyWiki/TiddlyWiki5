@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/prosemirror/readme
+
+! ProseMirror visual editor
+
+This experimental plugin provides a visual editor for `text/vnd.tiddlywiki` tiddlers. Its document model is ProseMirror, while saved content remains WikiText.
+
+{{$:/plugins/tiddlywiki/prosemirror/docs/usage}}
+
+{{$:/plugins/tiddlywiki/prosemirror/docs/configuration}}
+
+{{$:/plugins/tiddlywiki/prosemirror/docs/extending}}
+
+!! Try it
+
+The two editors below edit the same example tiddler. They are useful for comparing the visual model with the saved WikiText.
+
+<$edit-prosemirror tiddler="$:/plugins/tiddlywiki/prosemirror/example"/>
+
+<$edit-text tiddler="$:/plugins/tiddlywiki/prosemirror/example" class="tc-edit-texteditor"/>
+
+{{$:/plugins/tiddlywiki/prosemirror/example}}

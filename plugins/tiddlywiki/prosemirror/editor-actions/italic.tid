@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/italic
+tags: $:/tags/EditorCommand
+caption: Italic
+description: Toggle italic formatting
+icon: $:/core/images/italic
+command-id: toggle-mark
+command-mark: em
+command-category: inline-format
+command-surfaces: slash-menu
+command-editors: prosemirror

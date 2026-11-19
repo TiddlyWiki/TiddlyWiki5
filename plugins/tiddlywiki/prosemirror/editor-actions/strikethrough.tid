@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/strikethrough
+tags: $:/tags/EditorCommand
+caption: Strikethrough
+description: Toggle strikethrough formatting
+icon: $:/core/images/strikethrough
+command-id: toggle-mark
+command-mark: strike
+command-category: inline-format
+command-surfaces: slash-menu
+command-editors: prosemirror

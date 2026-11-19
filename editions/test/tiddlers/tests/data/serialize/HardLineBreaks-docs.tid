@@ -1,0 +1,9 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Inline formatting inside a hard line break region round-trips byte-exact
+title: Serialize/HardLineBreaks-docs
+type: text/vnd.tiddlywiki
+
+"""
+A line with "double quotes" inside
+and ''bold'' with //italic// on another line
+"""

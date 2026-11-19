@@ -8,11 +8,18 @@ module-type: wikiruleserializer
 
 exports.name = "image";
 
-exports.serialize = function(tree,serialize) {
-	var width = tree.attributes.width ? " " + $tw.utils.serializeAttribute(tree.attributes.width) : "";
-	var height = tree.attributes.height ? " " + $tw.utils.serializeAttribute(tree.attributes.height) : "";
-	var padSpace = width || height ? " " : "";
+exports.serialize = function(tree,serialize,options) {
+	var result = "[img";
+	// Image nodes carry plain attributes in insertion order, so any attribute
+	// such as class survives, not just width and height
+	$tw.utils.each(tree.attributes,function(attribute,name) {
+		if(name !== "source" && name !== "tooltip") {
+			result += " " + $tw.utils.serializeAttribute(attribute,options);
+		}
+	});
+	if(result !== "[img") {
+		result += " ";
+	}
 	var tooltip = tree.attributes.tooltip ? tree.attributes.tooltip.value + "|" : "";
-	var source = tree.attributes.source.value;
-	return "[img" + width + height + padSpace + "[" + tooltip + source + "]]";
+	return result + "[" + tooltip + tree.attributes.source.value + "]]";
 };

@@ -13,8 +13,6 @@ type: text/markdown
 title: ExpectedResult
 
 <div class="markdown">
-<p><img src="https://tiddlywiki.com/favicon.ico">
-</p>
-<p><a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank"><img src="https://tiddlywiki.com/favicon.ico"></a>
-</p>
+<p><img src="https://tiddlywiki.com/favicon.ico"></p>
+<p><a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank"><img src="https://tiddlywiki.com/favicon.ico"></a></p>
 </div>

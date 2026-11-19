@@ -13,8 +13,6 @@ testing <<makedatauri 'hi' 'test/plain'>>
 title: ExpectedResult
 
 <div class="markdown">
-<p>inline text follows <b>2026</b> ...the end
-</p>
-<p>testing <a class="tc-tiddlylink-external" href="data:test/plain,hi" rel="noopener noreferrer" target="_blank">data:test/plain,hi</a>
-</p>
+<p>inline text follows <b>2026</b> ...the end</p>
+<p>testing <a class="tc-tiddlylink-external" href="data:test/plain,hi" rel="noopener noreferrer" target="_blank">data:test/plain,hi</a></p>
 </div>

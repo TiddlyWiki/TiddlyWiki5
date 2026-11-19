@@ -1,0 +1,16 @@
+created: 20260914140000000
+modified: 20260914140000000
+tags: OfficialPlugins
+title: Hard Line Breaks Plugin
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> The Hard Line Breaks plugin adds a hard line break syntax to WikiText: two spaces, or two spaces and a backslash, before the line end make a break anywhere, list items and headings included, as in [[CommonMark|https://spec.commonmark.org/0.31.2/#hard-line-breaks]]. A blank line still separates paragraphs.
+
+See [ext[https://tiddlywiki.com/plugins/tiddlywiki/hard-line-breaks|plugins/tiddlywiki/hard-line-breaks]]
+
+<<wikitext-example-without-html src:"""* Roses are red
+Violets are blue
+* Sugar is sweet  \
+And so are you""">>
+
+`\rules except ssnl` switches the rule off. The backslash form survives editors that trim trailing whitespace, so an editor that writes WikiText should prefer it.

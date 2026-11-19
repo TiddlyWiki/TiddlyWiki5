@@ -1,0 +1,44 @@
+/*\
+title: $:/plugins/tiddlywiki/prosemirror/blocks/typed-block/styles.css
+type: text/css
+tags: $:/tags/Stylesheet
+
+Variant styles for typed_block ($$$). Header layout, hover behaviour and
+buttons all come from blocks/nodeview-common — only the type select and the
+content rendering area are customised here.
+
+\*/
+
+.pm-nodeview.pm-nodeview-typedblock .pm-typed-block-content {
+	margin: 0;
+	min-height: 1.4em;
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.pm-typed-block-source {
+	margin: 0;
+	padding: 4px 6px;
+	border-radius: 3px;
+	font-family: monospace;
+	font-size: 12px;
+	white-space: pre-wrap;
+	word-break: break-all;
+	max-height: 320px;
+	overflow-y: auto;
+}
+
+.pm-typed-block-type-select {
+	font-family: monospace;
+	font-size: 11px;
+	padding: 0 4px;
+	min-width: 7rem;
+	height: 18px;
+	line-height: 18px;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.pm-typed-block-type-select:focus {
+	outline: none;
+}

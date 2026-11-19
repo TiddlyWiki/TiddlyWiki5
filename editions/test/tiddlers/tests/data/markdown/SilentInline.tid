@@ -22,16 +22,10 @@ type: text/markdown
 title: ExpectedResult
 
 <div class="markdown">
-<p>~$1.00 <img src="https://tiddlywiki.com/favicon.ico"> OK
-</p>
-<p>~$1.00 <a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#abc">abc</a> xyz <a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#foo%20bar">foo bar</a> OK
-</p>
-<p>~$1.00 Output Output OK
-</p>
-<p>~$1.00 <span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#hello%2520world">hello%20world</a></span><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#foo%2520bar">foo%20bar</a></span> OK
-</p>
-<p>~$1.00 New Tiddler | Output OK
-</p>
-<p>~$1.00 <a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">https://tiddlywiki.com</a> | <a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">https://tiddlywiki.com</a> OK
-</p>
+<p>~$1.00 <img src="https://tiddlywiki.com/favicon.ico"> OK</p>
+<p>~$1.00 <a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#abc">abc</a> xyz <a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#foo%20bar">foo bar</a> OK</p>
+<p>~$1.00 Output Output OK</p>
+<p>~$1.00 <span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#hello%2520world">hello%20world</a></span><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#foo%2520bar">foo%20bar</a></span> OK</p>
+<p>~$1.00 New Tiddler | Output OK</p>
+<p>~$1.00 <a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">https://tiddlywiki.com</a> | <a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">https://tiddlywiki.com</a> OK</p>
 </div>

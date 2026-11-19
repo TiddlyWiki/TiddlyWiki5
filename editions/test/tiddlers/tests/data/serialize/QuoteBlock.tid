@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: A quote block whose cite looks like a class round-trips byte-exact
 title: Serialize/QuoteBlock
 type: text/vnd.tiddlywiki
 

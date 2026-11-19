@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/underline
+tags: $:/tags/EditorCommand
+caption: Underline
+description: Toggle underline formatting
+icon: $:/core/images/underline
+command-id: toggle-mark
+command-mark: underline
+command-category: inline-format
+command-surfaces: slash-menu
+command-editors: prosemirror

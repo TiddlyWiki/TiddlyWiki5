@@ -8,35 +8,78 @@ module-type: wikiruleserializer
 
 exports.name = "conditional";
 
-exports.serialize = function(tree,serialize) {
-	// We always have "if" at the beginning
-	var filterCondition = tree.attributes.filter.value;
-	var ifClauseText = serialize(tree.children[0].children);
-	var result = "<%if " + filterCondition + "%>" + ifClauseText;
-	function serializeElseIf(listNode) {
-		// We receive the only list node inside list-template node
-		if(!listNode || listNode.type !== "list") {
-			return "<%else%>" + serialize(listNode);
+/*
+An elseif clause is a list widget synthesized by parseIfClause: it carries
+the isConditional flag but no rule name, unlike a real nested conditional
+or a $list widget in an else body
+*/
+function isElseIfClause(node) {
+	return !!(node && node.isConditional && !node.rule);
+}
+
+/*
+Collect the body children of every clause in document order
+*/
+function collectBodies(listNode,out) {
+	$tw.utils.each(listNode.children[0].children || [],function(child) {
+		out.push(child);
+	});
+	var next = listNode.children[1] && listNode.children[1].children;
+	if(next && next.length) {
+		if(next.length === 1 && isElseIfClause(next[0])) {
+			collectBodies(next[0],out);
+		} else {
+			$tw.utils.each(next,function(child) {
+				out.push(child);
+			});
 		}
-		var filter = listNode.attributes.filter.value || "";
-		var bodyText = serialize(listNode.children[0].children);
-		var nextConditionResult = "";
-		// May has an only any node inside list-empty node
-		if(listNode.children[1] && listNode.children[1].children[0]) {
-			if(listNode.children[1].children[0].type === "list") {
-				nextConditionResult = serializeElseIf(listNode.children[1].children[0]);
-			} else {
-				nextConditionResult = "<%else%>" + serialize(listNode.children[1]);
-			}
+	}
+}
+
+function serializeFromTree(tree,serialize) {
+	// A blank line after a clause marker switches the body to block mode
+	var bodyGap = function(container) {
+		return container && container.blockContent ? "\n\n" : "";
+	};
+	// A block body ends at its content; the following marker needs its line
+	var markerGap = function(container) {
+		return container && container.blockContent ? "\n" : "";
+	};
+	var result = "<%if " + tree.attributes.filter.value + "%>" + bodyGap(tree.children[0]) + serialize(tree.children[0].children);
+	var node = tree,
+		lastContainer = tree.children[0];
+	while(true) {
+		var next = node.children[1] && node.children[1].children;
+		if(!next || !next.length) {
+			break;
 		}
-		return "<%elseif " + filter + "%>" + bodyText + nextConditionResult;
+		if(next.length === 1 && isElseIfClause(next[0])) {
+			node = next[0];
+			result += markerGap(lastContainer) + "<%elseif " + node.attributes.filter.value + "%>" + bodyGap(node.children[0]) + serialize(node.children[0].children);
+			lastContainer = node.children[0];
+		} else {
+			result += markerGap(lastContainer) + "<%else%>" + bodyGap(node.children[1]) + serialize(next);
+			lastContainer = node.children[1];
+			break;
+		}
 	}
-	if(tree.children[1] && tree.children[1].children) {
-		result += serializeElseIf(tree.children[1].children[0]);
-	}
-	result += "<%endif%>";
-	if(tree.isBlock) {
-		result += "\n\n";
+	return result + markerGap(lastContainer) + "<%endif%>";
+}
+
+exports.serialize = function(tree,serialize,options) {
+	options = options || {};
+	// The clause markers only exist in the source between the clause bodies
+	var children = [];
+	collectBodies(tree,children);
+	var result = $tw.utils.serializeStitched(tree,serialize,{
+		source: options.source,
+		children: children,
+		isBoundary: function(text) {
+			return /^\s*$/.test(text) || (text.indexOf("<%") !== -1 && text.indexOf("%>") !== -1);
+		}
+	});
+	if(result === null) {
+		result = serializeFromTree(tree,serialize);
 	}
 	return result;
 };

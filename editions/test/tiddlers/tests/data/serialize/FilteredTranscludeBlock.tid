@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Filtered block transclusions with tooltip, template, style and classes round-trip byte-exact
 title: Serialize/FilteredTranscludeBlock
 type: text/vnd.tiddlywiki
 

@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/duplicate-block
+tags: $:/tags/EditorCommand
+caption: Duplicate
+description: Duplicate this block
+icon: $:/core/images/clone-button
+command-id: duplicate-block
+command-category: block-action
+command-surfaces: block-menu
+command-editors: prosemirror

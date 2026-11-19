@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Transcluded and filtered macro parameters and nested macro values round-trip byte-exact
 title: Serialize/DynamicMacroParams
 type: text/vnd.tiddlywiki
 

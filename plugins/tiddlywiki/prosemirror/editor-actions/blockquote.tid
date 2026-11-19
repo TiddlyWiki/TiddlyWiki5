@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/prosemirror/EditorCommand/blockquote
+tags: $:/tags/EditorCommand
+caption: Turn into quote
+description: Convert the current block to a blockquote
+icon: $:/core/images/quote
+command-id: toggle-blockquote
+command-category: block-type
+command-surfaces: slash-menu block-menu
+command-editors: prosemirror

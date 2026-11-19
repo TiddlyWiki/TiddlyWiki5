@@ -1,0 +1,16 @@
+{
+	"description": "Standalone demonstration of the experimental ProseMirror editor",
+	"plugins": [
+		"tiddlywiki/prosemirror",
+		"tiddlywiki/editor-command-menu",
+		"tiddlywiki/wikitext-serialize",
+		"tiddlywiki/hard-line-breaks"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": ["--render", "$:/core/save/all", "index.html", "text/plain"]
+	}
+}

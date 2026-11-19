@@ -17,10 +17,7 @@ type: text/markdown
 title: ExpectedResult
 
 <div class="markdown">
-<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#FooTiddler">Foo</a>
-</p>
-<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#FooTiddler">[Foo Bar]</a>
-</p>
-<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#FooTiddler">ext[readme|readme.html]</a>
-</p>
+<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#FooTiddler">Foo</a></p>
+<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#FooTiddler">[Foo Bar]</a></p>
+<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#FooTiddler">ext[readme|readme.html]</a></p>
 </div>

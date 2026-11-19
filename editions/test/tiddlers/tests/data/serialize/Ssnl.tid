@@ -1,0 +1,15 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Breaks from two trailing spaces, with and without the backslash, round-trip byte-exact
+title: Serialize/Ssnl
+type: text/vnd.tiddlywiki
+
+Roses are red  
+Violets are blue  \
+Sugar is sweet
+
+* one  
+two
+* three
+
+! heading  
+continued

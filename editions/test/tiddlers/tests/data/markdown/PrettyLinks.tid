@@ -13,8 +13,6 @@ type: text/markdown
 title: ExpectedResult
 
 <div class="markdown">
-<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#New%20Tiddler">[[New Tiddler]]</a>
-</p>
-<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#New%20Tiddler">New Tiddler</a>
-</p>
+<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#New%20Tiddler">[[New Tiddler]]</a></p>
+<p><a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#New%20Tiddler">New Tiddler</a></p>
 </div>

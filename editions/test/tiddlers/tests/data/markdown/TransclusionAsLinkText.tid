@@ -11,8 +11,7 @@ type: text/markdown
 title: ExpectedResult
 
 <div class="markdown">
-<p><a class="tc-tiddlylink tc-tiddlylink-resolves _codified_" href="#New%20Tiddler">light</a>
-</p>
+<p><a class="tc-tiddlylink tc-tiddlylink-resolves _codified_" href="#New%20Tiddler">light</a></p>
 </div>
 +
 title: $:/palette
