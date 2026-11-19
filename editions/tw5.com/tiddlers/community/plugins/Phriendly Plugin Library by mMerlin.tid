@@ -1,0 +1,10 @@
+created: 20261119212214000
+modified: 20261119212214000
+tags: [[Community Plugins]]
+title: Phriendly Plugin Library by mMerlin
+type: text/vnd.tiddlywiki
+url: https://mmerlin.github.io/tw-phriendly-library/index.html
+
+A self-hosted plugin library for plugins published under the `phriendly` namespace by [[mMerlin|https://github.com/mMerlin]], installable directly from the Control Panel's "Get more plugins" picker. Currently includes [[Tearoff Panes|Tearoff Panes by mMerlin]].
+
+{{!!url}}
