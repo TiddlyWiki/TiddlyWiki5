@@ -26,9 +26,9 @@ describe("Editor preview conditions", function() {
 		return wiki;
 	}
 
-	function render(wiki, editorType) {
+	function render(wiki, editorType, mode) {
 		return wiki.renderText("text/html","text/vnd.tiddlywiki",
-			'<$let tv-editor-type="' + editorType + '"><$transclude tiddler="$:/core/ui/EditorToolbar/preview-type-dropdown"/></$let>',
+			'<$let tv-editor-type="' + editorType + '"><$transclude tiddler="$:/core/ui/EditorToolbar/preview-type-dropdown" mode="' + (mode || "inline") + '"/></$let>',
 			{parseAsInline: true});
 	}
 
@@ -96,6 +96,15 @@ describe("Editor preview conditions", function() {
 	it("renders entries as inline anchors without paragraph wrappers", function() {
 		const html = render(makeWiki(),"custom");
 		expect((html.match(/<a\b/g) || []).length).toBe(2);
+		expect(html).not.toMatch(/<p\b/);
+	});
+
+	it("keeps entries unwrapped when the toolbar transcludes the menu as a block", function() {
+		const html = render(makeWiki(),"custom","block");
+		expect((html.match(/<a\b/g) || []).length).toBe(2);
+		expect(html).toContain("Always caption");
+		expect(html).toContain("Custom caption");
+		expect(html).not.toContain("Never caption");
 		expect(html).not.toMatch(/<p\b/);
 	});
 
