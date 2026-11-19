@@ -17,12 +17,8 @@ see https://tiddlywiki.com.
 title: ExpectedResult
 
 <div class="markdown">
-<p>see <a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">https://tiddlywiki.com</a>.
-</p>
-<p><a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">https://tiddlywiki.com</a>
-</p>
-<p><a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">[ext[https://tiddlywiki.com]]</a>
-</p>
-<p><a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">ext[TW5|https://tiddlywiki.com]</a>
-</p>
+<p>see <a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">https://tiddlywiki.com</a>.</p>
+<p><a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">https://tiddlywiki.com</a></p>
+<p><a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">[ext[https://tiddlywiki.com]]</a></p>
+<p><a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">ext[TW5|https://tiddlywiki.com]</a></p>
 </div>

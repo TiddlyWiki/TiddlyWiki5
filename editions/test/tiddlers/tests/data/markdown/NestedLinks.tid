@@ -15,10 +15,7 @@ type: text/markdown
 title: ExpectedResult
 
 <div class="markdown">
-<p>[foo <a class="tc-tiddlylink-external _codified_" href="/uri2" rel="noopener noreferrer" target="_blank">bar</a>](/uri1)
-</p>
-<p>[foo <a class="tc-tiddlylink-external _codified_" href="/uri2" rel="noopener noreferrer" target="_blank">FooBar</a>](/uri1)
-</p>
-<p>[foo <a class="tc-tiddlylink-external _codified_" href="/uri2" rel="noopener noreferrer" target="_blank">FooBar</a>xyz](/uri1)
-</p>
+<p>[foo <a class="tc-tiddlylink-external _codified_" href="/uri2" rel="noopener noreferrer" target="_blank">bar</a>](/uri1)</p>
+<p>[foo <a class="tc-tiddlylink-external _codified_" href="/uri2" rel="noopener noreferrer" target="_blank">FooBar</a>](/uri1)</p>
+<p>[foo <a class="tc-tiddlylink-external _codified_" href="/uri2" rel="noopener noreferrer" target="_blank">FooBar</a>xyz](/uri1)</p>
 </div>
