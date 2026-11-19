@@ -109,4 +109,110 @@ test.describe("Editor preview dropdown in the edit template", () => {
 			.toHaveValue("Keep this edit when changing editor.");
 		await frame.screenshot({path: testInfo.outputPath("switched-text-editor-preview.png")});
 	});
+
+	test("preserves block syntax in Stamp and extension dropdowns alongside the preview menu", async ({ page }, testInfo) => {
+		const errors = [];
+		page.on("pageerror",(error) => errors.push(error.message));
+		const frame = await openEditor(page,null);
+		await page.evaluate(() => {
+			$tw.wiki.addTiddlers([
+				{title: "Review snippet",tags: ["$:/tags/TextEditor/Snippet"],caption: "Review snippet",text: "Inserted snippet"},
+				{title: "Review dropdown",text: "! Review heading\n\nReview paragraph\n\n* First item\n* Second item\n\n----"},
+				{title: "Review toolbar",tags: ["$:/tags/EditorToolbar"],caption: "Review blocks",description: "Review block dropdown",
+					condition: "[<targetTiddler>]",icon: "$:/core/images/more-button",dropdown: "Review dropdown",text: ""},
+				{title: "$:/config/EditorToolbarButtons/Visibility/Review toolbar",text: "show"},
+				{title: "$:/config/EditorToolbarButtons/Visibility/$:/core/ui/EditorToolbar/stamp",text: "show"}
+			]);
+		});
+		const popup = frame.locator(".tc-drop-down:visible");
+		await frame.getByRole("button",{name: "Review block dropdown",exact: true}).click();
+		await expect(popup.getByRole("heading",{name: "Review heading",exact: true})).toBeVisible();
+		await expect(popup.locator("ul > li")).toHaveText(["First item","Second item"]);
+		await expect(popup.getByRole("separator")).toHaveCount(1);
+		await frame.screenshot({path: testInfo.outputPath("block-dropdown.png")});
+		await frame.getByRole("button",{name: "Review block dropdown",exact: true}).click();
+
+		await frame.getByRole("button",{name: "Insert a preconfigured snippet of text",exact: false}).click();
+		await expect(popup.getByRole("separator")).toHaveCount(1);
+		await popup.getByRole("link",{name: "Review snippet",exact: true}).click();
+		await expect(popup).toHaveCount(0);
+		const draftTitle = await frame.getAttribute("data-tiddler-title");
+		await expect.poll(() => page.evaluate((title) => $tw.wiki.getTiddlerText(title),draftTitle))
+			.toContain("Inserted snippet");
+
+		const preview = await openDropdown(frame);
+		await expect(preview.locator("p")).toHaveCount(0);
+		await expect(preview.getByText("Always caption",{exact: true})).toBeVisible();
+		await preview.getByText("text/custom content preview",{exact: true}).click();
+		await frame.getByRole("button",{name: "Show preview pane",exact: false}).click();
+		await expect(frame.locator(".tc-tiddler-preview-preview")).toHaveText("Custom content-type preview content");
+		await expect((await openDropdown(frame)).locator(".tc-preview-type-button")
+			.filter({hasText: "text/custom content preview"}).locator(".tc-drop-down-checkmark")).toHaveText("✓");
+		await frame.getByRole("button",{name: "Choose preview type",exact: true}).click();
+		await frame.getByRole("button",{name: "Confirm changes to this tiddler",exact: true}).click();
+		const downloading = page.waitForEvent("download");
+		await page.getByRole("button",{name: /save changes/i}).first().click();
+		const saved = testInfo.outputPath("saved-dropdowns.html");
+		await (await downloading).saveAs(saved);
+		await page.goto("about:blank");
+		await page.goto(pathToFileURL(saved).href + "#Preview%20review",{waitUntil: "domcontentloaded"});
+		await page.locator('.tc-tiddler-frame[data-tiddler-title="Preview review"]')
+			.getByRole("button",{name: "Edit this tiddler",exact: true}).click();
+		await expect(frame.frameLocator("iframe.tc-edit-texteditor-body").getByRole("textbox"))
+			.toHaveValue(/Inserted snippet/);
+		// Saved popup state may reopen with the draft; open it only if closed.
+		const restoredPreview = frame.locator(".tc-drop-down").filter({has: page.locator(".tc-preview-type-button")});
+		if(!await restoredPreview.isVisible()) {
+			await frame.getByRole("button",{name: "Choose preview type",exact: true}).click();
+		}
+		const restoredOption = restoredPreview.locator(".tc-preview-type-button").filter({hasText: "text/custom content preview"});
+		await expect(restoredOption).toBeVisible();
+		await restoredOption.click();
+		await frame.getByRole("button",{name: "Review block dropdown",exact: true}).click();
+		await expect(popup.getByRole("heading",{name: "Review heading",exact: true})).toBeVisible();
+		expect(errors).toEqual([]);
+	});
+
+	test("keeps the core Link, More and bitmap dropdowns usable", async ({ page }, testInfo) => {
+		const frame = await openEditor(page,null);
+		const draftTitle = await frame.getAttribute("data-tiddler-title");
+		await page.evaluate((title) => $tw.wiki.setText(title,"type",null,"text/vnd.tiddlywiki"),draftTitle);
+		await page.evaluate(() => {
+			["link","more"].forEach((name) => $tw.wiki.addTiddler({
+				title: "$:/config/EditorToolbarButtons/Visibility/$:/core/ui/EditorToolbar/" + name,text: "show"
+			}));
+			$tw.wiki.addTiddler({title: "$:/config/EditorToolbarButtons/Visibility/$:/core/ui/EditorToolbar/bold",text: "hide"});
+		});
+		await frame.getByRole("button",{name: "Create wikitext link",exact: false}).click();
+		const popup = frame.locator(".tc-drop-down:visible");
+		await expect(popup.locator('input[type="search"]')).toBeVisible();
+		await popup.locator('input[type="search"]').pressSequentially("Preview review");
+		await expect(popup.getByRole("link",{name: "Preview review",exact: true}).first()).toBeVisible();
+		await frame.getByRole("button",{name: "Create wikitext link",exact: false}).click();
+		await frame.locator(".tc-editor-toolbar").getByRole("button",{name: "More actions",exact: true}).click();
+		await expect(popup.getByRole("button",{name: /Apply bold formatting/})).toBeVisible();
+		await frame.locator(".tc-editor-toolbar").getByRole("button",{name: "More actions",exact: true}).click();
+		await page.evaluate(() => {
+			$tw.wiki.addTiddler({title: "Review bitmap",type: "image/png",
+				text: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl6sV8AAAAASUVORK5CYII="});
+			["paint","size","opacity","line-width"].forEach((name) => $tw.wiki.addTiddler({
+				title: "$:/config/EditorToolbarButtons/Visibility/$:/core/ui/EditorToolbar/" + name,text: "show"
+			}));
+			$tw.wiki.setText("$:/StoryList","list",null,["Review bitmap"]);
+		});
+		await page.locator('.tc-tiddler-frame[data-tiddler-title="Review bitmap"]').getByRole("button",{name: "Edit this tiddler",exact: true}).click();
+		const bitmap = page.locator(".tc-tiddler-frame").filter({has: page.locator("canvas")});
+		async function checkBitmapDropdown(name) {
+			const button = bitmap.getByRole("button",{name,exact: false});
+			await button.click();
+			await expect(bitmap.locator(".tc-drop-down:visible").first()).toBeVisible();
+			if(name === "Set image size") {
+				await expect(bitmap.locator(".tc-drop-down:visible input")).toHaveCount(2);
+			}
+			await bitmap.screenshot({path: testInfo.outputPath(name.replace(/ /g,"-") + ".png")});
+			await button.click();
+		}
+		await checkBitmapDropdown("Set painting colour");
+		await checkBitmapDropdown("Set image size");
+	});
 });
