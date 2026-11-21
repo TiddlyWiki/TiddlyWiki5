@@ -1,0 +1,13 @@
+title: Dimension Tracker Mechanism
+tags: Mechanisms
+created: 20260814084235646
+modified: 20260814084235646
+
+
+<<.from-version "5.5.0">> The dimension tracker mechanism allows you to define elements by [ext[CSS selectors|https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Selectors]] to be bound to a specified [[info|InfoMechanism]] tiddler. The info tiddler will be dynamically update to reflect the current dimensions of the selected element.
+
+Adding or modifying a tiddler tagged $:/tags/DimensionTracker takes effect immediately.
+
+The dimension queries are always applied by window. Therefore the info tiddlers get a suffix by window-id. The main window has the suffix `system/main`. Other windows have the suffix `user/<window-id>`. See [[WidgetMessage: tm-open-window]] for informations about the `window ID`.
+
+The menubar plugin includes a dimension tracker that is used for tracking the menubar height and applying that height to the top offset of sticky tiddler titles. See $:/plugins/tiddlywiki/menubar/trackers/menubar for details.
