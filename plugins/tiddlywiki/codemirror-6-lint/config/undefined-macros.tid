@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lint/undefinedMacros
+caption: Undefined Macros
+description: Highlight possibly undefined variables / macros / procedures / functions
+text: yes

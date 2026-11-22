@@ -1,0 +1,43 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/LanguageSwitcher/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.cm6-language-dropdown {
+  min-width: 180px;
+  padding: 4px 0;
+}
+
+.cm6-language-section {
+  padding: 4px 0;
+}
+
+.cm6-language-section:not(:last-child) {
+  border-bottom: 1px solid <<colour tiddler-editor-border>>;
+}
+
+.cm6-language-section-title {
+  padding: 4px 12px 2px;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: <<colour muted-foreground>>;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cm6-language-option {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  text-align: left;
+  border-radius: 0;
+}
+
+.cm6-language-option:hover {
+  background: <<colour tiddler-editor-background>>;
+}
+
+.cm6-language-option.cm6-selected {
+  background: <<colour primary>>;
+  color: <<colour background>>;
+}

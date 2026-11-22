@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lint/enabled
+caption: Lint
+description: Highlight potential issues in TiddlyWiki content
+text: yes

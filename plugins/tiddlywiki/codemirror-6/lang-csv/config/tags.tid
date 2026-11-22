@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lang-csv/tags
+caption: CSV Tags
+description: Tags that trigger CSV syntax highlighting (one per line)
+

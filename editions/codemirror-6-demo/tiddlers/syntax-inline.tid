@@ -1,0 +1,47 @@
+title: Draft of 'Syntax — Inline Formatting'
+draft.of: Syntax — Inline Formatting
+draft.title: Syntax — Inline Formatting
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+! Inline formatting
+
+''bold'' text, //italic// text, __underline__ text, ~~strikethrough~~ text.
+
+Super^^script^^ and sub,,script,, and ``inline code`` and @@highlighted@@.
+
+Combined: ''//bold italic//'' and //''italic bold''// and ``//literal slashes//``.
+
+!! Styled inline spans
+
+@@.tc-big-green-button A styled span with a class@@
+@@color:red;A span with an inline CSS colour@@
+@@background-color:yellow;color:black;Multiple CSS declarations@@
+@@color:blue;.myclass CSS and class together (styles must come before classes)@@
+
+!! Dashes and special characters
+
+Dashes: an en-dash -- and an em-dash --- in text.
+
+HTML entities: &amp; &copy; &mdash; &rarr; &#x2192; &#160; &nbsp;.
+
+!! Showing literal characters
+
+TiddlyWiki has no backslash-escape: a `\` is a literal character, so `\''`
+still starts bold and `` \` `` still starts inline code. To show wiki characters
+literally, use inline code or HTML entities instead:
+
+* Literal markup via inline code: `''not bold''` and `//not italic//`.
+* Literal characters via entities: &#47;&#47; (two slashes), &#38; (ampersand),
+  &lbrace;&lbrace; (two braces).
+
+!! Inline code variants
+
+Single backtick `code`, and double backtick to embed a literal backtick:
+``code with ` backtick inside``
+
+!! Mixed line
+
+A mix on one line: ''bold //and italic// together'' with `code`, a
+[[WikiLink]], an external https://tiddlywiki.com link, a <<currentTiddler>>
+variable, a {{SomeTiddler}} transclusion and a `<$text text="widget"/>`.

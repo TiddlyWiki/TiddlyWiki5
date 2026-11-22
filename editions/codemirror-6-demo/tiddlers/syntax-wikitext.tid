@@ -1,0 +1,216 @@
+title: Draft of 'Syntax — WikiText Markup'
+draft.of: Syntax — WikiText Markup
+draft.title: Syntax — WikiText Markup
+type: text/vnd.tiddlywiki
+tags: $:/tags/Demo
+
+This tiddler collects all of the //simple// WikiText markup — the structural and
+inline formatting — leaving out widgets, macros, variables, filters, pragmas and
+other programmatic constructs (those have their own demo tiddlers).
+
+! Headings
+
+! Heading level 1
+!! Heading level 2
+!!! Heading level 3
+!!!! Heading level 4
+!!!!! Heading level 5
+!!!!!! Heading level 6
+
+A heading can carry one or more CSS classes:
+
+!.myclass.another Heading with classes
+
+! Paragraphs and line breaks
+
+A normal paragraph is one or more lines of text. A blank line separates one
+block from the next. A soft line break inside a paragraph is joined into the
+same paragraph when rendered.
+
+Force a run of hard line breaks with triple double-quotes:
+
+"""
+Line one
+Line two stays on its own line
+Line three too
+"""
+
+! Horizontal rule
+
+Three or more dashes alone on a line draw a horizontal rule:
+
+---
+
+! Inline formatting
+
+''Bold'' text, //italic// text, __underline__ text, ~~strikethrough~~ text.
+
+Super^^script^^ and sub,,script,, text.
+
+``Inline code`` and @@highlighted@@ text.
+
+Combinations nest: ''//bold italic//'', //''italic bold''//, __//underlined
+italic//__ and ~~//struck italic//~~.
+
+! Inline code variants
+
+A single backtick pair for `inline code`, and a double backtick pair when the
+code itself must contain a literal backtick:
+
+``code with a ` backtick inside``
+
+Inline code is literal — markup inside it is not interpreted: `''not bold''` and
+`//not italic//`.
+
+! Styled and classed inline spans
+
+@@.tc-big-green-button A span with a CSS class@@
+@@color:red;A span with an inline CSS colour@@
+@@background-color:yellow;color:black;Multiple CSS declarations@@
+@@color:blue;.myclass CSS and class together (styles must precede classes)@@
+
+! Dashes and special characters
+
+Dashes: an en-dash -- and an em-dash --- written inline.
+
+HTML entities: &amp; &copy; &mdash; &rarr; &hellip; &#x2192; &#160; &nbsp;.
+
+There is no backslash-escape in WikiText: a `\` is a literal character. To show
+wiki characters literally, use inline code or HTML entities, e.g. &#47;&#47; for
+two slashes or &lbrace;&lbrace; for two braces.
+
+! Lists
+
+!! Unordered and ordered
+
+* Unordered item
+* Second item
+** Nested item
+*** Deeper item
+# Ordered item
+# Second ordered
+## Nested ordered
+
+!! Mixed list types
+
+* Unordered parent
+*# Ordered child
+*# Another ordered child
+# Ordered parent
+#* Unordered child
+
+!! Lists with classes
+
+*.myclass Item with a CSS class
+* Normal item
+
+! Definition lists
+
+; Definition term
+: Definition description
+; Another term
+: Its description
+: A second description for the same term
+
+! Block quotes
+
+Single-line form with `>`; repeat the marker to nest:
+
+> Single-line block quote
+> Continues the quote
+>> Nested block quote
+>>> Deeper nesting
+
+Extended form with `<<<`, optionally carrying one or more CSS classes, and able
+to contain several paragraphs:
+
+<<<.tc-tiddler-frame.myclass
+Extended block quote with dot-separated CSS classes.
+
+It can span multiple paragraphs.
+<<<
+
+<<<
+Plain extended block quote without a class.
+<<<
+
+! Tables
+
+|!Header A |!Header B |!Header C |
+|Cell 1 |Cell 2 |Cell 3 |
+|Left |>|Column-spanned cell |
+|~|Row-spanned |Cell |
+|Cell |Cell | |
+|This is the table caption |c
+|myclass|k
+|H|This row is a footer |row |
+
+Cell alignment is set with leading/trailing spaces:
+
+|Left aligned |  Right aligned|  Centred  |
+
+! Styled and classed blocks
+
+@@color:green;
+This whole block is rendered green via an `@@` block.
+@@
+
+@@.tc-table-no-border
+A block with a CSS class applied to it.
+@@
+
+! Code blocks
+
+A fenced code block with a language tag is highlighted for that language:
+
+```javascript
+function add(a, b) {
+	return a + b; // highlighted as JavaScript
+}
+```
+
+A fenced block without a language tag is plain preformatted text:
+
+```
+plain preformatted text
+no language highlighting
+```
+
+Typed blocks render their content as the given content type:
+
+$$$text/css
+.foo { color: red; }
+$$$
+
+$$$text/vnd.tiddlywiki
+This is ''wikitext'' rendered inside a typed block.
+$$$
+
+! Links
+
+* CamelCase auto-link: HelloThere
+* Suppress a CamelCase link with a tilde: ~HelloThere
+* Pretty link: [[Some Tiddler]]
+* Pretty link with display text: [[Display text|Some Tiddler]]
+* External link: https://tiddlywiki.com
+* External pretty link: [[TiddlyWiki|https://tiddlywiki.com]]
+* Mail link: mailto:someone@example.com
+* System link: [[$:/SiteTitle]]
+
+! Images
+
+An [img[Motovun Jack.jpg]] image, and one with attributes:
+[img width=64 class="tc-image" [Motovun Jack.jpg]].
+
+! Transclusions
+
+* Whole tiddler: {{HelloThere}}
+* With a template: {{HelloThere||$:/core/ui/ViewTemplate}}
+* A field of the current tiddler: {{!!title}}
+* A field of another tiddler: {{HelloThere!!modified}}
+
+! Comments
+
+A WikiText comment is not rendered:
+
+<!-- This is a comment -->

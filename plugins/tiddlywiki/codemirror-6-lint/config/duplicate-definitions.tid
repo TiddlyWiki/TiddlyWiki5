@@ -1,0 +1,4 @@
+title: $:/config/codemirror-6/lint/duplicateDefinitions
+caption: Duplicate Definitions
+description: Check for same name defined multiple times
+text: yes

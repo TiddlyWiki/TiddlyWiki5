@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/codemirror-6-keymap-vim/license
+type: text/plain
+
+MIT License
+
+Copyright (c) 2020-2024 Yunchi Luo <mightyguava@gmail.com>
+Copyright (c) 2024-2026 TiddlyWiki Contributors
+
+This plugin bundles code from @replit/codemirror-vim.
+
+{{$:/plugins/tiddlywiki/codemirror-6/licenses/mit}}

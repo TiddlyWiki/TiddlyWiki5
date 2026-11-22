@@ -1,0 +1,7 @@
+title: $:/config/ShortcutInfo/
+
+cm6-focus-next: Move focus to the next element after the editor
+cm6-focus-prev: Move focus to the previous element before the editor
+cm6-add-cursor-up: Add a cursor on the line above (multi-cursor)
+cm6-add-cursor-down: Add a cursor on the line below (multi-cursor)
+cm6-language-switcher: Open the language/syntax switcher popup

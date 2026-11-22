@@ -1,0 +1,4 @@
+title: $:/config/EditorTypeMappings/
+
+text/x-python: codemirror-6
+application/x-python: codemirror-6

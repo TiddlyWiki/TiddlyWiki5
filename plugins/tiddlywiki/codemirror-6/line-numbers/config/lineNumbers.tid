@@ -1,0 +1,7 @@
+title: $:/config/codemirror-6/editor/lineNumbers
+caption: Show line numbers
+description: Displays line numbers in the left gutter
+config-type: checkbox
+config-category: Gutter
+default: yes
+text: yes

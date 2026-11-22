@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/codemirror-6/ui/ControlPanel
+tags: $:/tags/ControlPanel/SettingsTab
+caption: CodeMirror 6
+
+<$transclude $variable="tabs" tabsList="[all[tiddlers+shadows]tag[$:/tags/ControlPanel/Settings/CodeMirror]]" default="$:/plugins/tiddlywiki/codemirror-6/ui/ControlPanel/Editor"/>

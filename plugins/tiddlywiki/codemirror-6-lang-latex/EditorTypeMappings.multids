@@ -1,0 +1,6 @@
+title: $:/config/EditorTypeMappings/
+
+text/x-latex: codemirror-6
+text/x-tex: codemirror-6
+application/x-latex: codemirror-6
+application/x-tex: codemirror-6
