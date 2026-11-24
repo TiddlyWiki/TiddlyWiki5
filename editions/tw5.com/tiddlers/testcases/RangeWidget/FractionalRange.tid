@@ -1,0 +1,12 @@
+description: Range widget: FractionalRange
+tags: $:/tags/wiki-test-spec
+title: TestCases/RangeWidget/FractionalRange
+type: text/vnd.tiddlywiki-multiple
+
+title: Output
+
+<$range tiddler="$:/_RangeDemo/2" min="0" max="1" default=".01" increment=".01"/> {{$:/_RangeDemo/2}}
++
+title: ExpectedResult
+
+<p><input class="" max="1" min="0" step=".01" type="range" value=".01"> </p>

@@ -1,0 +1,12 @@
+description: Range widget: IntegerRange
+tags: $:/tags/wiki-test-spec
+title: TestCases/RangeWidget/IntegerRange
+type: text/vnd.tiddlywiki-multiple
+
+title: Output
+
+<$range tiddler="$:/_RangeDemo/1" min="-1" max="10" default="1" increment="1"/> {{$:/_RangeDemo/1}}
++
+title: ExpectedResult
+
+<p><input class="" max="10" min="-1" step="1" type="range" value="1"> </p>
