@@ -5,7 +5,7 @@ type: text/vnd.tiddlywiki-multiple
 
 title: Narrative
 
-Move either slider to see its value change. Enable "Show log" to inspect the actions fired when dragging starts, the value changes, and dragging stops. Each log entry includes the action value and whether it changed. Use "Clear Log" to reset the log.
+Move either slider to see its value change. Enable "Show log" to inspect the actions fired when dragging starts, the value changes, and dragging stops. Each log entry includes the action value and the actionValueHasChanged variable supplied by the widget. Entries are numbered so that events fired within the same millisecond do not overwrite each other. Use "Clear Log" to reset the log.
 +
 title: Output
 
@@ -13,7 +13,7 @@ title: Output
 
 \define range-log(text:"", value:"", tiddler:"$:/temp/range/log")
 <$vars text="""$text$""" value="""$value$""" >
-<$action-setfield $tiddler="""$tiddler$""" $index=<<now "0hh-0mm-0ss:0XXX">> $value=<<getText>>/>
+<$action-setfield $tiddler="""$tiddler$""" $index={{{ [[$tiddler$]indexes[]count[]add[1]] }}} $value=<<getText>>/>
 </$vars>
 \end
 
