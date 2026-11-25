@@ -42,3 +42,7 @@ The content of the `<$range>` widget is ignored.
 
 
 {{RangeWidget Example}}
+
+!! JSON data indexes
+
+<<testcase "TestCases/RangeWidget/DataIndex">>

@@ -1,0 +1,27 @@
+description: Bind a range widget to a JSON property
+tags: $:/tags/wiki-test-spec
+title: TestCases/RangeWidget/DataIndex
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+The index attribute stores the slider value in a JSON property. Move the slider to update volume, or use the button to update the property and watch the slider follow. The label property is preserved.
++
+title: Output
+
+<$range tiddler="Settings" index="volume" min="0" max="1" increment="0.1"/>
+
+Volume: {{Settings##volume}}
+
+Other property: {{Settings##label}}
+
+<$button><$action-setfield $tiddler="Settings" $index="volume" $value="0.8"/>Set volume to 0.8</$button>
++
+title: Settings
+type: application/json
+
+{"volume":"0.5","label":"Speaker"}
++
+title: ExpectedResult
+
+<input class="" max="1" min="0" step="0.1" type="range" value="0.5"><p>Volume: 0.5</p><p>Other property: Speaker</p><p><button class="">Set volume to 0.8</button></p>
