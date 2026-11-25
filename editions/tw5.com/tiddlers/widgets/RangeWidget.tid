@@ -1,6 +1,6 @@
 caption: range
 created: 20171102134825376
-modified: 20261125184633700
+modified: 20261125190643859
 tags: Widgets TriggeringWidgets
 title: RangeWidget
 type: text/vnd.tiddlywiki
@@ -40,8 +40,9 @@ The content of the `<$range>` widget is ignored.
 
 <<testcase "TestCases/RangeWidget/FractionalRange">>
 
+!! Using Actions
 
-{{RangeWidget Example}}
+<<testcase "TestCases/RangeWidget/Actions">>
 
 !! JSON data indexes
 
