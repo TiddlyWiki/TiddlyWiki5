@@ -28,7 +28,7 @@ Note that the build targets of included wikis are merged if a target of that nam
 
 Configuration options include:
 
-* ''default-tiddler-location'' - a string path to the default location for the filesystem adaptor to save new tiddlers (resolved relative to the wiki folder)
+* ''default-tiddler-location'' - a string path to the default location used both when loading tiddlers from the wiki folder and when the filesystem adaptor saves new tiddlers (resolved relative to the wiki folder). Defaults to the wiki folder's `tiddlers/` directory.
 
 * ''retain-original-tiddler-path'' - If true, the server will generate a tiddler [[$:/config/OriginalTiddlerPaths]] containing the original file paths of each tiddler in the wiki
 
