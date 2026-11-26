@@ -811,6 +811,21 @@ exports.getAnimationDuration = function() {
 };
 
 /*
+Whether a drag or an AnimateLayoutWidget is already playing this element's movement, which a
+storyview cannot tell from a departure and would otherwise play away a second time
+*/
+exports.isMovementAnimated = function(domNode) {
+	if($tw.dragInProgress) {
+		return true;
+	}
+	if(domNode && domNode.getAttribute && $tw.animateLayoutMoving) {
+		var key = domNode.getAttribute("data-animate-key");
+		return !!(key && $tw.animateLayoutMoving[key]);
+	}
+	return false;
+};
+
+/*
 Hash a string to a number
 Derived from http://stackoverflow.com/a/15710692
 */

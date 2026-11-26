@@ -31,11 +31,28 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 };
 
 ClassicStoryView.prototype.insert = function(widget) {
-	var duration = $tw.utils.getAnimationDuration();
-	if(duration) {
-		var targetElement = widget.findFirstDomNode();
+	var duration = $tw.utils.getAnimationDuration(),
+		targetElement = widget.findFirstDomNode();
+	// Don't animate a movement that is already being animated
+	if(duration && !$tw.utils.isMovementAnimated(targetElement)) {
 		// Abandon if the list entry isn't a DOM element (it might be a text node)
 		if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
+			return;
+		}
+		$tw.utils.markEntering(targetElement,duration);
+		if($tw.utils.isInColumnLayout(targetElement)) {
+			setTimeout(function() {
+				$tw.utils.removeStyle(targetElement,"transition");
+			},duration);
+			$tw.utils.setStyle(targetElement,[
+				{opacity: "0.0"}
+			]);
+			$tw.utils.removeStyle(targetElement,"transition");
+			$tw.utils.forceLayout(targetElement);
+			$tw.utils.setStyle(targetElement,[
+				{transition: "opacity " + duration + "ms " + easing},
+				{opacity: "1.0"}
+			]);
 			return;
 		}
 		// Get the current height of the tiddler
@@ -68,12 +85,14 @@ ClassicStoryView.prototype.insert = function(widget) {
 };
 
 ClassicStoryView.prototype.remove = function(widget) {
-	var duration = $tw.utils.getAnimationDuration();
-	if(duration) {
-		var targetElement = widget.findFirstDomNode(),
-			removeElement = function() {
+	var duration = $tw.utils.getAnimationDuration(),
+		targetElement = widget.findFirstDomNode();
+	// Don't animate a movement that is already being animated
+	if(duration && !$tw.utils.isMovementAnimated(targetElement)) {
+		var removeElement = function() {
 				widget.removeChildDomNodes();
 			};
+		$tw.utils.markLeaving(targetElement);
 		// Blur the focus if it is within the descendents of the node we are removing
 		if($tw.utils.domContains(targetElement,targetElement.ownerDocument.activeElement)) {
 			targetElement.ownerDocument.activeElement.blur();
@@ -81,6 +100,20 @@ ClassicStoryView.prototype.remove = function(widget) {
 		// Abandon if the list entry isn't a DOM element (it might be a text node)
 		if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 			removeElement();
+			return;
+		}
+		if($tw.utils.isInColumnLayout(targetElement)) {
+			var exitWidth = targetElement.offsetWidth;
+			$tw.utils.detachFromFlow(targetElement);
+			setTimeout(removeElement,duration);
+			$tw.utils.removeStyles(targetElement,["transition","transform","opacity"]);
+			$tw.utils.forceLayout(targetElement);
+			$tw.utils.setStyle(targetElement,[
+				{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", " +
+							"opacity " + duration + "ms " + easing},
+				{transform: "translateX(-" + exitWidth + "px)"},
+				{opacity: "0.0"}
+			]);
 			return;
 		}
 		// Get the current height of the tiddler

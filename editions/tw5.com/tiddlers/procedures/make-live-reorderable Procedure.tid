@@ -1,0 +1,12 @@
+caption: make-live-reorderable
+created: 20260818111812000
+modified: 20260818111812000
+tags: [[Core Procedures]] [[Drag and Drop]]
+title: make-live-reorderable Procedure
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> The <<.def make-live-reorderable>> [[procedure|Procedures]] renders a single item of a list that the user can reorder by dragging. It makes the item draggable and gives it two drop targets, one over its first half and one over its second, so that the item being dragged can be placed either side of it.
+
+<<.tip """This is used internally by the <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">> procedure, which renders a whole list and is what you would normally use. Use this one only to build something that procedure cannot.""">>
+
+It takes the same parameters as <<.dlink make-live-reorderable-list "make-live-reorderable-list Procedure">>, apart from <<.param history>>, <<.param storyview>>, <<.param emptyMessage>>, <<.param emptyHeight>>, <<.param duration>>, <<.param easing>> and <<.param scale>>, which belong to the list as a whole. In addition it takes a <<.param tiddler>> parameter naming the item to render. See DragAndDropMechanism for an overview.

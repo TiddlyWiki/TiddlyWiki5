@@ -1,0 +1,4 @@
+title: $:/config/DragAndDrop/Easings/spring
+tags: $:/tags/DragAndDrop/Easing
+caption: {{$:/language/ControlPanel/DragAndDrop/Easings/spring}}
+text: linear(0,0.246,0.702,0.94,1.02,1.03,1.014,1.002,0.998,1)
