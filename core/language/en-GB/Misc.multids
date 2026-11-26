@@ -16,6 +16,7 @@ ConfirmAction: Do you wish to proceed?
 Count: count
 DefaultNewTiddlerTitle: New Tiddler
 Diffs/CountMessage: <<diff-count>> differences
+DontShowAgain: Don't show this again
 DropMessage: Drop now (or use the 'Escape' key to cancel)
 Encryption/Cancel: Cancel
 Encryption/ConfirmClearPassword: Do you wish to clear the password? This will remove the encryption applied when saving this wiki
@@ -44,6 +45,7 @@ Error/SavingToTWEdit: Error saving to TWEdit
 Error/WhileSaving: Error while saving
 Error/XMLHttpRequest: XMLHttpRequest error code
 Error/ZoominTextNode: Story View Error: It appears you tried to interact with a tiddler that displays in a custom container. This is most likely caused by using `$:/tags/StoryTiddlerTemplateFilter` with a template that contains text or whitespace at the start. Please use the pragma `\whitespace trim` and ensure the whole contents of the tiddler is wrapped in a single HTML element. The text that caused this issue:
+InsecureContext: ''Warning:'' Your TiddlyWiki is running in an [[insecure context|https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Secure_Contexts]]. Some native JavaScript features may be unavailable.
 InternalJavaScriptError/Title: Internal JavaScript Error
 InternalJavaScriptError/Hint: Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser
 LayoutSwitcher/Description: Open the layout switcher
