@@ -1,0 +1,12 @@
+change-category: internal
+change-type: performance
+created: 20260711183618000
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9731
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9731
+type: text/vnd.tiddlywiki
+description: getMissingTitles() collects missing links several times faster
+
+* `getMissingTitles()` collects missing link targets in a hashmap while iterating the store directly, instead of scanning an array per link, making the `missing[]` filter several times faster on large wikis; system tiddlers stay excluded as sources
