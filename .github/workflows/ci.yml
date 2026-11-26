@@ -25,6 +25,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     needs: test
+    # Both build jobs push to the same GitHub Pages repository, so they must not overlap
+    concurrency:
+      group: gh-pages-deploy
+      cancel-in-progress: false
     env:
       TW5_BUILD_TIDDLYWIKI: "./tiddlywiki.js"
       TW5_BUILD_MAIN_EDITION: "./editions/prerelease"
@@ -56,6 +60,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/tiddlywiki-com'
     needs: test
+    # Both build jobs push to the same GitHub Pages repository, so they must not overlap
+    concurrency:
+      group: gh-pages-deploy
+      cancel-in-progress: false
     env:
       TW5_BUILD_TIDDLYWIKI: "./node_modules/tiddlywiki/tiddlywiki.js"
       TW5_BUILD_MAIN_EDITION: "./editions/tw5.com"
