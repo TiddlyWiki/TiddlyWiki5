@@ -1,0 +1,27 @@
+created: 20251030143723359
+description: Save SCRIPT sanitation
+modified: 20260127083439069
+tags: $:/tags/wiki-test-spec
+title: safe-script-tag
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Handled by: $:/core/modules/widgets/element.js
+
+```
+// Sanitize tag name if needed according to Custom Web-Componenets spec
+this.tag = $tw.utils.makeTagNameSafe(this.tag, "safe-" + this.tag);
+```
++
+title: Output
+
+<script type="text/javascript">alert("Hello")</script>
+<SCRIPT type="text/javascript">alert("Hello")</SCRIPT>
+<SCriPT type="text/javascript">alert("Hello")</SCriPT>
++
+title: ExpectedResult
+
+<p><safe-script type="text/javascript">alert("Hello")</safe-script>
+<safe-SCRIPT type="text/javascript">alert("Hello")</safe-SCRIPT>
+<safe-SCriPT type="text/javascript">alert("Hello")</safe-SCriPT></p>
