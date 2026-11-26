@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.1/#9888
+description: Make PageScroller scroll instantly
+tags: $:/tags/ChangeNote
+release: 5.4.1
+change-type: enhancement
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9888
+github-contributors: BurningTreeC
+
+Fixes a scrolling issue where `scroll-behavior` is set to `smooth` on the `<html>` element in Chromium browsers (Chromium/Chrome/Edge...)
