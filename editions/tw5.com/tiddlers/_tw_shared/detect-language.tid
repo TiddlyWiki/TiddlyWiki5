@@ -1,0 +1,16 @@
+title: $:/editions/tw5.com/detect-language
+tags: $:/tags/StartupAction/Browser
+
+\function lang.match(lang) [{$:/info/browser/language}match<lang>]
+
+<%if [{$:/info/browser/language}match[zh-CN]] :or[{$:/info/browser/language}match[zh-Hans]] %>
+<$action-setfield $tiddler="$:/temp/language" text="zh-Hans"/>
+<%elseif [{$:/info/browser/language}match[zh-TW]] :or[{$:/info/browser/language}match[zh-Hant]] %>
+<$action-setfield $tiddler="$:/temp/language" text="zh-Hant"/>
+<%elseif [{$:/info/browser/language}perfix[es-]] %>
+<$action-setfield $tiddler="$:/temp/language" text="es-ES"/>
+<%elseif [lang.match[de-DE]] [lang.match[de-AT]] [lang.match[pl-PL]] [lang.match[el-GR]] [lang.match[fr-FR]] [lang.match[ja-JP]] [lang.match[ko-KR]] [lang.match[en-GB]] [lang.match[en-US]] [lang.match[en-PH]] %>
+<$action-setfield $tiddler="$:/temp/language" text=<<condition>>/>
+<%else%>
+<$action-setfield $tiddler="$:/temp/language" text="unsupported"/>
+<%endif%>
