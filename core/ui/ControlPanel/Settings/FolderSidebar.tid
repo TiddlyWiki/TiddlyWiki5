@@ -1,0 +1,14 @@
+title: $:/core/ui/ControlPanel/Settings/FolderSidebar
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/FolderSidebar/Caption}}
+
+\whitespace trim
+\procedure lingo-base() $:/language/ControlPanel/Settings/FolderSidebar/
+
+<<lingo Hint>>
+
+|tc-table-no-border|k
+|<$link to="$:/config/SideBar/Folder/RootTag"><<lingo RootTag/Caption>></$link> |<$edit-text tiddler="$:/config/SideBar/Folder/RootTag" tag="input" placeholder={{$:/language/ControlPanel/Settings/FolderSidebar/RootTag/Placeholder}}/> |
+|<$link to="$:/config/FocussedTiddler/TopOffset"><<lingo TopOffset/Caption>></$link> |<$edit-text tiddler="$:/config/FocussedTiddler/TopOffset" tag="input" type="number" default="100"/> |
+
+<<lingo TopOffset/Hint>>
