@@ -1,0 +1,23 @@
+code-body: yes
+created: 20260712000000000
+modified: 20260712000000000
+tags:
+title: $:/spec/Examples/TOC/advanced/custom-level-indicator
+type: text/vnd.tiddlywiki-multiple
+
+title: ExpectedResult
+
+<p>The <code>toc-level-indicator</code> procedure is overridden locally in this example.</p><p><div class="tc-table-of-contents">
+<ol class="tc-toc"><li class="toc-item ">
+	
+		<sup class="tc-tiny-gap-left">more</sup>
+	
+<a class="tc-tiddlylink tc-tiddlylink-resolves" href="#aa"><span class="tc-toc-caption" data-fieldClass="field-title" title="aa">aa</span></a></li><li class="toc-item ">
+	
+		<sup class="tc-tiny-gap-left">more</sup>
+	
+<a class="tc-tiddlylink tc-tiddlylink-resolves" href="#bb"><span class="tc-toc-caption" data-fieldClass="field-title" title="bb">bb</span></a></li><li class="toc-item ">
+	
+<a class="tc-tiddlylink tc-tiddlylink-resolves" href="#cc"><span class="tc-toc-caption" data-fieldClass="field-title" title="cc">cc</span></a></li></ol>
+</div>
+</p>

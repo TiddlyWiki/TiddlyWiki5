@@ -1,0 +1,38 @@
+created: 20260712000000000
+description: TOC custom level indicator
+import-compound: Examples/TOC/simple/tag $:/spec/Examples/TOC/advanced/custom-level-indicator
+modified: 20260712000000000
+tags: $:/tags/wiki-test-spec advanced
+title: Examples/TOC/advanced/custom-level-indicator
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This example shows how to customise the level indicator, which is shown when the `level` parameter limits the tree depth
+
+* The `toc-level-indicator` procedure is overridden locally: instead of the default icon, nodes with hidden children show a superscript ''more'' marker
+
+* With `level:"1"` only the first level is shown. [[aa]] and [[bb]] have children, so they get the marker. [[cc]] has none
+
+{{example-overview}}
+
++
+title: Description
+
+TOC custom level indicator
++
+title: Output
+
+\procedure toc-level-indicator()
+<%if [<level>compare:number:gt[0]]%>
+	<%if [subfilter<tf.toc-filterString>] -[<tag>] +[limit[1]] %>
+		<sup class="tc-tiny-gap-left">more</sup>
+	<%endif%>
+<%endif%>
+\end
+
+The `toc-level-indicator` procedure is overridden locally in this example.
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents" level:"1">>
+</div>
