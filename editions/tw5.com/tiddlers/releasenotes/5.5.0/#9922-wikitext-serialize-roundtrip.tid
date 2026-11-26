@@ -1,0 +1,14 @@
+change-category: plugin
+change-type: feature
+created: 20260914160000000
+description: The WikiText Serialize plugin keeps the source formatting and offers a node factory for editors
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9922
+modified: 20260914160000000
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9922
+
+* Given the source text, the [[WikiText Serialize Plugin]] reproduces the original formatting byte for byte; without it every rule rebuilds its syntax from the parse tree
+* Added `$tw.utils.wikitextParseTree`, a node factory and classification helpers, so an editor that writes or reads WikiText never spells a rule name or tag itself
+* A link around formatted text now serializes as `<$link>` or `<a>` instead of `[[undefined|...]]`

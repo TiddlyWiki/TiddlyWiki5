@@ -1136,6 +1136,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	margin-bottom: 3px;
 }
 
+.tc-tiddler-body p.tc-blankline {
+	min-height: 1.2em;
+}
+
 .tc-tiddler-info .tc-tab-buttons button.tc-tab-selected {
 	background-color: <<colour tiddler-info-tab-background>>;
 	border-bottom: 1px solid <<colour tiddler-info-tab-background>>;

@@ -1,0 +1,14 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Horizontal rules keep their dash count when the source is available
+title: Serialize/HorizRule
+type: text/vnd.tiddlywiki
+
+Above
+
+-----
+
+Between
+
+----
+
+Below

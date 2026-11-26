@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Multiline and single line define pragmas round-trip byte-exact
 title: Serialize/MacroDef
 type: text/vnd.tiddlywiki
 

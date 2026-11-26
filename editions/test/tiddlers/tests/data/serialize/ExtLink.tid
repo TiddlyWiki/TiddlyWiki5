@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: External links and the tilde suppressed form round-trip byte-exact
 title: Serialize/ExtLink
 type: text/vnd.tiddlywiki
 

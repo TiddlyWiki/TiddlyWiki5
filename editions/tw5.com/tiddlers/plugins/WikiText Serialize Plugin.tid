@@ -1,0 +1,9 @@
+created: 20260914150000000
+modified: 20260914150000000
+tags: OfficialPlugins
+title: WikiText Serialize Plugin
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.4.0">> The ~WikiText Serialize plugin turns a WikiText parse tree back into WikiText, byte for byte when the source text is available. <<.from-version "5.5.0">> It also offers editors that write or read WikiText a node factory and classification helpers, `$tw.utils.wikitextParseTree`, so they never spell a rule name or tag themselves.
+
+See [ext[https://tiddlywiki.com/plugins/tiddlywiki/wikitext-serialize|plugins/tiddlywiki/wikitext-serialize]]

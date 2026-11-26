@@ -1,0 +1,18 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Every documented macro parameter quoting form round-trips byte-exact
+title: Serialize/MacroCallBlock-docs
+type: text/vnd.tiddlywiki
+
+<<my-procedure param="This is the parameter value">>
+
+<<film-quote """I quote "twice" - see!?""">>
+
+<<mymacro [[value with spaces]]>>
+
+<<mymacro 'I said "hello"'>>
+
+<<mymacro "I said 'hello'">>
+
+<<anothermacro actor:"Bugs Bunny" line:"""A line with "quotes" in it""">>
+
+<<mymacro ```value with `embedded` backticks```>>

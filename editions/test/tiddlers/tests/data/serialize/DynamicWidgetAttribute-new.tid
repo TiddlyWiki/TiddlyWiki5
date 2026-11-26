@@ -1,0 +1,8 @@
+tags: $:/tags/wikitext-serialize-test-spec
+description: Text references with spaces and filtered attributes round-trip byte-exact
+title: Serialize/DynamicWidgetAttribute-new
+type: text/vnd.tiddlywiki
+
+<div attribute={{Tiddler Title!!field}}>some text</div>
+
+<$text text={{{ [{$:/layout}] }}}/>

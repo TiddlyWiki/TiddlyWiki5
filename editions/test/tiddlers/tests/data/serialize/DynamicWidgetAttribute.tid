@@ -1,4 +1,5 @@
 tags: $:/tags/wikitext-serialize-test-spec
+description: Macro valued attributes with their own parameters round-trip byte-exact
 title: Serialize/DynamicWidgetAttribute
 type: text/vnd.tiddlywiki
 

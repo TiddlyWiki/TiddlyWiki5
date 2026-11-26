@@ -31,11 +31,13 @@ Parse the most recent match
 */
 exports.parse = function() {
 	var self = this;
+	var start = this.match.index;
 	// Move past the pragma invocation
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse whitespace delimited tokens terminated by a line break
 	var reMatch = /[^\S\n]*(\S+)|(\r?\n)/mg,
-		tokens = [];
+		tokens = [],
+		end = this.parser.pos;
 	reMatch.lastIndex = this.parser.pos;
 	var match = reMatch.exec(this.parser.source);
 	while(match && match.index === this.parser.pos) {
@@ -47,6 +49,7 @@ exports.parse = function() {
 		// Process the token
 		if(match[1]) {
 			tokens.push(match[1]);
+			end = reMatch.lastIndex;
 		}
 		// Match the next token
 		match = reMatch.exec(this.parser.source);
@@ -62,6 +65,14 @@ exports.parse = function() {
 				break;
 		}
 	});
-	// No parse tree nodes to return
-	return [];
+	// No widget to render, return a void node so the pragma survives in the parse tree
+	return [{
+		type: "void",
+		attributes: {
+			values: {type: "string", value: tokens.join(" ")}
+		},
+		children: [],
+		start: start,
+		end: end
+	}];
 };
