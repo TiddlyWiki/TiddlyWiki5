@@ -24,7 +24,8 @@ var Command = function(params,commander,callback) {
 
 Command.prototype.execute = function() {
 	var specFilter = this.params.spec;
-	jasmine.runTests(this.callback,specFilter);
+	var seed = this.params.seed;
+	jasmine.runTests(this.callback,specFilter,seed);
 };
 
 exports.Command = Command;
