@@ -16,10 +16,10 @@ describe("Range widget",function() {
 			start = startActions === undefined ? actionString("Start") : startActions;
 		wiki.addTiddler({title: "State",value: "5"});
 		var parser = wiki.parseText("text/vnd.tiddlywiki",
-			'<$range tiddler="State" field="value" min="0" max="10" ' +
-			'actionsStart="""' + start + '""" ' +
-			'actionsStop="""' + actionString("Stop") + '""" ' +
-			'actions="""' + actionString("Input") + '"""/>'),
+				'<$range tiddler="State" field="value" min="0" max="10" ' +
+				'actionsStart="""' + start + '""" ' +
+				'actionsStop="""' + actionString("Stop") + '""" ' +
+				'actions="""' + actionString("Input") + '"""/>'),
 			widget = wiki.makeWidget(parser,{document: $tw.fakeDocument});
 		widget.render($tw.fakeDocument.createElement("div"),null);
 		return {wiki: wiki,range: findRangeWidget(widget)};
