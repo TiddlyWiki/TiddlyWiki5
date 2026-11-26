@@ -1,0 +1,37 @@
+title: $:/core/ui/SafeLayout
+tags: $:/tags/Layout
+name: Safe Mode Layout
+description: Safe Mode Layout
+icon: $:/core/images/list
+
+\whitespace trim
+
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+
+\define tv-config-toolbar-class() tc-btn-invisible
+\define tv-config-toolbar-icons() yes
+\define tv-config-toolbar-text() no
+
+<div style="margin: 1em;">
+
+<$navigator story="$:/StoryList" history="$:/HistoryList">
+
+<h2>Layout</h2>
+
+{{$:/snippets/LayoutSwitcher}}
+
+<h2>Controls</h2>
+
+<div class="tc-page-controls">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]">
+<$transclude mode="inline"/>
+</$list>
+</div>
+
+<h2>Tiddlers</h2>
+
+<$transclude tiddler="$:/Manager" mode="block"/>
+
+</$navigator>
+
+</div>
