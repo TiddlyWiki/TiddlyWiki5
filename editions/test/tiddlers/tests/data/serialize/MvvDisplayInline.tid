@@ -1,0 +1,8 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/MvvDisplayInline
+type: text/vnd.tiddlywiki
+
+((myVar))
+((myVar||; ))
+((([tag[foo]])))
+((([tag[foo]]||; )))
