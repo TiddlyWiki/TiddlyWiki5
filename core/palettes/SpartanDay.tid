@@ -12,8 +12,9 @@ alert-muted-foreground: <<colour muted-foreground>>
 background: #FAFAFA
 blockquote-bar: <<colour page-background>>
 button-background: transparent
+button-background-hover: rgba(0, 0, 0, 0.12)
 button-foreground: inherit
-button-border: <<colour tag-background>>
+button-border:
 code-background: #ececec
 code-border: #ececec
 code-foreground: 
@@ -79,7 +80,7 @@ tab-border-selected: <<colour table-border>>
 tab-border: transparent
 tab-divider: <<colour table-border>>
 tab-foreground-selected: rgba(0, 0, 0, 0.87)
-tab-foreground: rgba(0, 0, 0, 0.54)
+tab-foreground: rgba(0, 0, 0, 0.62)
 table-border: #d8d8d8
 table-footer-background: <<colour tiddler-editor-fields-odd>>
 table-header-background: <<colour tiddler-editor-fields-even>>
@@ -112,4 +113,4 @@ toolbar-delete-button:
 toolbar-cancel-button: 
 toolbar-done-button: 
 untagged-background: <<colour very-muted-foreground>>
-very-muted-foreground: rgba(0, 0, 0, 0.12)
+very-muted-foreground: rgba(0, 0, 0, 0.42)

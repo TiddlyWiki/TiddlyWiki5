@@ -1,0 +1,151 @@
+title: $:/palettes/IndianMehndi
+name: Indian Mehndi
+description: Warm palette inspired by Indian ceremony colours
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+
+alert-background: #fff3cd
+alert-border: #c49a2a
+alert-highlight: #b8292f
+alert-muted-foreground: #a08040
+background: #fffdf8
+blockquote-bar: <<colour muted-foreground>>
+button-background:
+button-background-hover: #e8dcc8
+button-foreground:
+button-border:
+code-background: #faf5ee
+code-border: #e8dcc8
+code-foreground: #b8292f
+diff-delete-background: #ffc9c9
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background:
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #d4e8b0
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background:
+diff-invisible-foreground: <<colour muted-foreground>>
+dirty-indicator: #b8292f
+download-background: #8aaa28
+download-foreground: #ffffff
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: <<colour background>>
+dropdown-border: <<colour muted-foreground>>
+dropdown-tab-background-selected: <<colour background>>
+dropdown-tab-background: #f0e8d8
+dropzone-background: rgba(138,170,40,0.7)
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: #4a1528
+external-link-foreground: #b8292f
+footnote-target-background: #faf0e0
+foreground: #3d2b1a
+highlight-background: #ffe89a
+highlight-foreground: #3d2b1a
+message-background: #faf5ee
+message-border: #e8dcc8
+message-foreground: #5c4a32
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour background>>
+modal-border: #c4a870
+modal-footer-background: #faf5ee
+modal-footer-border: #e8dcc8
+modal-header-border: #e8dcc8
+muted-foreground: #a09080
+network-activity-foreground: #8aaa28
+notification-background: #fff8ee
+notification-border: #c49a2a
+page-background: #f5efe5
+pre-background: #faf5ee
+pre-border: #e8dcc8
+primary: #b8292f
+selection-background:
+selection-foreground:
+select-tag-background:
+select-tag-foreground:
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: #3d2b1a
+sidebar-controls-foreground: #b8a898
+sidebar-foreground-shadow: #ffffff
+sidebar-foreground: #706050
+sidebar-muted-foreground-hover: #3d2b1a
+sidebar-muted-foreground: #a09888
+sidebar-tab-background-selected: <<colour page-background>>
+sidebar-tab-background: #e8dcc8
+sidebar-tab-border-selected: <<colour tab-border-selected>>
+sidebar-tab-border: <<colour tab-border>>
+sidebar-tab-divider: #e0d4c0
+sidebar-tab-foreground-selected:
+sidebar-tab-foreground: <<colour tab-foreground>>
+sidebar-tiddler-link-foreground-hover: #4a1528
+sidebar-tiddler-link-foreground: #806858
+site-title-foreground: <<colour tiddler-title-foreground>>
+stability-stable: #8aaa28
+stability-experimental: #c49a2a
+stability-deprecated: #b8292f
+stability-legacy: #6a5acd
+static-alert-foreground: #a09080
+tab-background-selected: <<colour background>>
+tab-background: #e8dcc8
+tab-border-selected: #d4c4a8
+tab-border: #d4c4a8
+tab-divider: #d4c4a8
+tab-foreground-selected: <<colour tab-foreground>>
+tab-foreground: #5c4a32
+table-border: #e0d4c0
+table-footer-background: #c4b498
+table-header-background: #f0e8d8
+tag-background: #bb8625ff
+tag-foreground: #ffffff
+testcase-accent-level-1: #d4e8f0
+testcase-accent-level-2: #c49a2a
+testcase-accent-level-3: #8aaa28
+tiddler-background: <<colour background>>
+tiddler-border: <<colour background>>
+tiddler-controls-foreground-hover: #b8292f
+tiddler-controls-foreground-selected: #4a1528
+tiddler-controls-foreground: #d4c4a8
+tiddler-editor-background: #faf8f2
+tiddler-editor-border-image: <<colour background>>
+tiddler-editor-border: #e0d4c0
+tiddler-editor-fields-even: #f0e8d8
+tiddler-editor-fields-odd: #faf5ee
+tiddler-info-background: #faf5ee
+tiddler-info-border: #e8dcc8
+tiddler-info-tab-background: #faf5ee
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: #a09080
+tiddler-title-foreground: #4a1528
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
+untagged-background: #c5bfb8ff
+very-muted-foreground: #c4b498
+wikilist-background: #e8dcc8
+wikilist-item: <<colour background>>
+wikilist-info: #3d2b1a
+wikilist-title: #5c4a32
+wikilist-title-svg: <<colour wikilist-title>>
+wikilist-url: #a09080
+wikilist-button-open: #8aaa28
+wikilist-button-open-hover: #6a8a18
+wikilist-button-reveal: #b8292f
+wikilist-button-reveal-hover: #981828
+wikilist-button-remove: #b8292f
+wikilist-button-remove-hover: #981828
+wikilist-toolbar-background: #d4c4a8
+wikilist-toolbar-foreground: #5c4a32
+wikilist-droplink-dragover: #ffc0c0
+wikilist-button-background: #b8a898
+wikilist-button-foreground: #3d2b1a
