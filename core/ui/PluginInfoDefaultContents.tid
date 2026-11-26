@@ -1,4 +1,8 @@
 title: $:/core/ui/PluginInfo/Default/contents
+tags: $:/tags/PluginInfoTab
+caption: contents
+filter: [[yes]]
+list-after: 
 
 \define lingo-base() $:/language/TiddlerInfo/Advanced/PluginInfo/
 \whitespace trim
