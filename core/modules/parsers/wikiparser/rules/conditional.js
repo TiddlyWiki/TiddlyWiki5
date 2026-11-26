@@ -79,6 +79,8 @@ exports.parseIfClause = function(filterCondition) {
 	var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>|\\<\\%\\s*(else)\\s*\\%\\>|\\<\\%\\s*(elseif)\\s+([\\s\\S]+?)\\%\\>",
 		ex;
 	if(hasLineBreak) {
+		// The marker's own line end is syntax, not a blank line of the body
+		this.parser.skipLineEnd();
 		ex = this.parser.parseBlocksTerminatedExtended(reEndString);
 	} else {
 		var reEnd = new RegExp(reEndString,"mg");
@@ -97,6 +99,7 @@ exports.parseIfClause = function(filterCondition) {
 			var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>",
 				ex;
 			if(hasLineBreak) {
+				this.parser.skipLineEnd();
 				ex = this.parser.parseBlocksTerminatedExtended(reEndString);
 			} else {
 				var reEnd = new RegExp(reEndString,"mg");
