@@ -22,6 +22,155 @@ Inherit from the base widget class
 */
 RevealWidget.prototype = new Widget();
 
+var POPUP_POSITION_OPPOSITES = {
+	left: "right",
+	right: "left",
+	above: "below",
+	below: "above",
+	aboveleft: "belowleft",
+	aboveright: "belowright",
+	belowleft: "aboveleft",
+	belowright: "aboveright"
+};
+
+const POPUP_AUTO_POSITION_PADDING = 5;
+
+function getViewportMetrics() {
+	const win = typeof window !== "undefined" ? window
+		: (typeof global !== "undefined" ? global.window : undefined);
+	return {
+		innerWidth: (win && typeof win.innerWidth === "number") ? win.innerWidth : 1024,
+		innerHeight: (win && typeof win.innerHeight === "number") ? win.innerHeight : 768,
+		pageXOffset: (win && typeof win.pageXOffset === "number") ? win.pageXOffset : 0,
+		pageYOffset: (win && typeof win.pageYOffset === "number") ? win.pageYOffset : 0
+	};
+}
+
+// Returns the bounding box that popup coordinates must stay inside.
+// For relative (non-absolute) popups, coordinates are relative to offsetParent,
+// so the bound is simply [0, offsetParent.offsetWidth] x [0, offsetParent.offsetHeight].
+// For absolute popups, coordinates are page-absolute, so we use the viewport rect.
+function getContainerBounds(domNode,popup) {
+	const padding = POPUP_AUTO_POSITION_PADDING;
+	if(popup.absolute) {
+		const {pageXOffset,pageYOffset,innerWidth,innerHeight} = getViewportMetrics();
+		return {
+			minX: pageXOffset + padding,
+			minY: pageYOffset + padding,
+			maxX: pageXOffset + innerWidth - padding,
+			maxY: pageYOffset + innerHeight - padding
+		};
+	}
+	const offsetParent = domNode.offsetParent;
+	if(!offsetParent) {
+		return {minX: padding, minY: padding, maxX: 9999, maxY: 9999};
+	}
+	return {
+		minX: padding,
+		minY: padding,
+		maxX: offsetParent.offsetWidth - padding,
+		maxY: offsetParent.offsetHeight - padding
+	};
+}
+
+function computePopupCoordinates(popup,position,popupWidth,popupHeight) {
+	let left,top;
+	switch(position) {
+		case "left":
+			left = popup.left - popupWidth;
+			top = popup.top;
+			break;
+		case "above":
+			left = popup.left;
+			top = popup.top - popupHeight;
+			break;
+		case "aboveright":
+			left = popup.left + popup.width;
+			top = popup.top + popup.height - popupHeight;
+			break;
+		case "belowright":
+			left = popup.left + popup.width;
+			top = popup.top + popup.height;
+			break;
+		case "right":
+			left = popup.left + popup.width;
+			top = popup.top;
+			break;
+		case "belowleft":
+			left = popup.left + popup.width - popupWidth;
+			top = popup.top + popup.height;
+			break;
+		case "aboveleft":
+			left = popup.left - popupWidth;
+			top = popup.top - popupHeight;
+			break;
+		default:
+			left = popup.left;
+			top = popup.top + popup.height;
+			position = "below";
+			break;
+	}
+	return {position,left,top};
+}
+
+// Compute overflow of a popup rect (in container coordinates) against the container bounds.
+// Returns {total, top, left, right, bottom} where each is pixels of overflow (0 = no overflow).
+function getContainerOverflow(bounds,left,top,popupWidth,popupHeight) {
+	const overflowLeft = Math.max(0,bounds.minX - left),
+		overflowTop = Math.max(0,bounds.minY - top),
+		overflowRight = Math.max(0,(left + popupWidth) - bounds.maxX),
+		overflowBottom = Math.max(0,(top + popupHeight) - bounds.maxY);
+	return {
+		total: overflowLeft + overflowTop + overflowRight + overflowBottom,
+		top: overflowTop,
+		left: overflowLeft,
+		right: overflowRight,
+		bottom: overflowBottom
+	};
+}
+
+function getAutoPositionCandidates(position) {
+	const preferred = position || "below",
+		opposite = POPUP_POSITION_OPPOSITES[preferred] || "above",
+		candidates = [preferred];
+	if(opposite !== preferred) {
+		candidates.push(opposite);
+	}
+	return candidates;
+}
+
+// Choose the best direction (preferred vs opposite) by comparing overflow inside the container.
+function chooseBestPopupCoordinates(domNode,popup,position,popupWidth,popupHeight) {
+	const bounds = getContainerBounds(domNode,popup),
+		candidates = getAutoPositionCandidates(position);
+	let best = null;
+	for(const candidatePosition of candidates) {
+		const candidate = computePopupCoordinates(popup,candidatePosition,popupWidth,popupHeight),
+			{total: score} = getContainerOverflow(bounds,candidate.left,candidate.top,popupWidth,popupHeight);
+		if(!best || score < best.score) {
+			best = {candidate,score};
+		}
+	}
+	return best ? best.candidate : computePopupCoordinates(popup,position,popupWidth,popupHeight);
+}
+
+// After choosing the best direction, shift the popup to fit inside the container.
+function shiftPopupIntoContainer(domNode,popup,left,top,popupWidth,popupHeight) {
+	const bounds = getContainerBounds(domNode,popup);
+	let deltaX = 0,deltaY = 0;
+	if(left < bounds.minX) {
+		deltaX = bounds.minX - left;
+	} else if(left + popupWidth > bounds.maxX) {
+		deltaX = bounds.maxX - (left + popupWidth);
+	}
+	if(top < bounds.minY) {
+		deltaY = bounds.minY - top;
+	} else if(top + popupHeight > bounds.maxY) {
+		deltaY = bounds.maxY - (top + popupHeight);
+	}
+	return {left: left + deltaX,top: top + deltaY};
+}
+
 /*
 Render this widget into the DOM
 */
@@ -54,52 +203,31 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 RevealWidget.prototype.positionPopup = function(domNode) {
 	domNode.style.position = "absolute";
 	domNode.style.zIndex = "1000";
-	var left,top;
-	switch(this.position) {
-		case "left":
-			left = this.popup.left - domNode.offsetWidth;
-			top = this.popup.top;
-			break;
-		case "above":
-			left = this.popup.left;
-			top = this.popup.top - domNode.offsetHeight;
-			break;
-		case "aboveright":
-			left = this.popup.left + this.popup.width;
-			top = this.popup.top + this.popup.height - domNode.offsetHeight;
-			break;
-		case "belowright":
-			left = this.popup.left + this.popup.width;
-			top = this.popup.top + this.popup.height;
-			break;
-		case "right":
-			left = this.popup.left + this.popup.width;
-			top = this.popup.top;
-			break;
-		case "belowleft":
-			left = this.popup.left + this.popup.width - domNode.offsetWidth;
-			top = this.popup.top + this.popup.height;
-			break;
-		case "aboveleft":
-			left = this.popup.left - domNode.offsetWidth;
-			top = this.popup.top - domNode.offsetHeight;
-			break;
-		default: // Below
-			left = this.popup.left;
-			top = this.popup.top + this.popup.height;
-			break;
-	}
-	// if requested, clamp the popup so that it will always be fully inside its parent (the first upstream element with position:relative), as long as the popup is smaller than its parent
-	// if position is absolute then clamping is done to the canvas boundary, since there is no "parent"
-	if(this.clampToParent !== "none") {
+	const popupWidth = domNode.offsetWidth,
+		popupHeight = domNode.offsetHeight;
+	let computedCoordinates = computePopupCoordinates(this.popup,this.position,popupWidth,popupHeight),
+		left = computedCoordinates.left,
+		top = computedCoordinates.top;
+	if(this.clampToParent === "auto") {
+		// Smart mode (default): flip to the opposite direction when needed, then shift to fit.
+		computedCoordinates = chooseBestPopupCoordinates(domNode,this.popup,computedCoordinates.position,popupWidth,popupHeight);
+		left = computedCoordinates.left;
+		top = computedCoordinates.top;
+		const shiftedCoordinates = shiftPopupIntoContainer(domNode,this.popup,left,top,popupWidth,popupHeight);
+		left = shiftedCoordinates.left;
+		top = shiftedCoordinates.top;
+	} else if(this.clampToParent !== "none") {
+		// Hard-clamp mode: shift coordinates without flipping direction.
+		let parentWidth,parentHeight;
 		if(this.popup.absolute) {
-			var parentWidth = window.innerWidth,
-				parentHeight = window.innerHeight;
+			const {innerWidth,innerHeight} = getViewportMetrics();
+			parentWidth = innerWidth;
+			parentHeight = innerHeight;
 		} else {
-			var parentWidth = domNode.offsetParent.offsetWidth,
-				parentHeight = domNode.offsetParent.offsetHeight;
+			parentWidth = domNode.offsetParent.offsetWidth;
+			parentHeight = domNode.offsetParent.offsetHeight;
 		}
-		var right = left + domNode.offsetWidth,
+		const right = left + domNode.offsetWidth,
 			bottom = top + domNode.offsetHeight;
 		if((this.clampToParent === "both" || this.clampToParent === "right") && right > parentWidth) {
 			left = parentWidth - domNode.offsetWidth;
@@ -115,7 +243,7 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 	}
 	if(this.popup.absolute) {
 		// Traverse the offsetParent chain and correct the offset to make it relative to the parent node.
-		for(var offsetParentDomNode = domNode.offsetParent; offsetParentDomNode; offsetParentDomNode = offsetParentDomNode.offsetParent) {
+		for(let offsetParentDomNode = domNode.offsetParent; offsetParentDomNode; offsetParentDomNode = offsetParentDomNode.offsetParent) {
 			left -= offsetParentDomNode.offsetLeft;
 			top -= offsetParentDomNode.offsetTop;
 		}
@@ -143,7 +271,10 @@ RevealWidget.prototype.execute = function() {
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
-	this.clampToParent = this.getAttribute("clamp","none");
+	// clamp="auto" (default) flips direction then shifts to fit the container.
+	// clamp="none" disables all adjustment.
+	// clamp="right"/"bottom"/"both" hard-clamp without flipping.
+	this.clampToParent = this.getAttribute("clamp","auto");
 	// Compute the title of the state tiddler and read it
 	this.stateTiddlerTitle = this.state;
 	this.stateTitle = this.getAttribute("stateTitle");
@@ -232,7 +363,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.clamp || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
 		this.refreshSelf();
 		return true;
 	} else {

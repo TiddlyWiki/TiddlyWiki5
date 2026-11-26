@@ -26,8 +26,8 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |<<.attr class>> |An optional CSS class name to be assigned to the HTML element|
 |<<.attr style>> |An optional CSS style attribute to be assigned to the HTML element |
 |<<.attr position>> |The position used for the popup when the type is <<.value popup>>.<br> Can be <<.value left>>, <<.value above>>, <<.value aboveleft>>, <<.value aboveright>>, <<.value right>>, <<.value belowleft>>, <<.value belowright>> or <<.value below>>. Also see [[Popup Clamping Example|RevealWidget (Popup Clamping Example)]] |
-|<<.attr positionAllowNegative>> |Set to <<.value yes>> to allow computed popup positions to be negative relative to their container or the document window (for absolutely positioned popups). Defaults to <<.value no>> |
-|<<.attr clamp>> |Set to <<.value right>>, <<.value bottom>> or <<.value both>> to prevent a popup to overflow its container, see below |
+|<<.attr positionAllowNegative>> |Set to <<.value yes>> to allow computed popup positions to be negative relative to their container or the document window (for absolutely positioned popups). Defaults to <<.value no>>. Only applies when <<.attr clamp>> is not <<.value auto>> |
+|<<.attr clamp>> |<<.from-version "5.5.0">>Controls how the popup is kept inside its container. <<.value auto>> (default): flip direction then shift to fit. <<.value none>>: no adjustment. <<.value right>>, <<.value bottom>>, <<.value both>>: hard-clamp without flipping |
 |<<.attr animate>> |Set to <<.value yes>> to animate opening and closing. Defaults to <<.value no>> |
 |<<.attr retain>> |Set to <<.value yes>> to force the content to be retained even when hidden. Defaults to <<.value no>> |
 |<<.attr updatePopupPosition>> |<<.from-version "5.1.23">>Set to <<.value yes>> to update the popup position when the state tiddler is updated. Defaults to <<.value no>> |
@@ -51,13 +51,17 @@ The <<.attr type>> of the widget determines the condition for the content being 
 * <<.value lteq>>: the content is displayed if the state tiddler contains an integer with a value ''less than or equal to'' the text attribute value
 * <<.value gteq>>: the content is displayed if the state tiddler contains an integer with a value ''greater than or equal to'' the text attribute value
 
-!! Popup Clamping
+!! Popup Positioning
 
-Popups can be forced not to overflow their container (when relatively positioned) or the document window (when absolutely positioned). The popup's ''container'' is the nearest ancestor element with CSS positioning (<<.attr position>>: <<.value relative>>, <<.value absolute>>, <<.value fixed>>, or <<.value sticky>>).
+The <<.attr clamp>> attribute controls whether and how the popup is kept within its //container// (the nearest ancestor with CSS `position` set, i.e. the `offsetParent`). For absolutely-positioned popups the boundary is the visible viewport.
 
-Overflow to the left or top is prevented by setting <<.attr positionAllowNegative>> to <<.value no>> (the default). Clamping to the right and bottom is achieved by setting <<.attr clamp>> to <<.value right>>, <<.value bottom>> or <<.value both>>.
+* `clamp="auto"` (default, new in 5.5.0): first flips to the opposite direction (e.g. `below` → `above`) to minimise overflow, then shifts the popup along the axis until it fits entirely inside the container.
+* `clamp="none"`: no adjustment — the popup is placed exactly where the <<.attr position>> attribute says.
+* `clamp="right"`, `clamp="bottom"`, `clamp="both"`: hard-clamp — shifts coordinates without flipping direction (pre-5.5.0 behaviour).
 
-See [[Popup Clamping Example|RevealWidget (Popup Clamping Example)]]
+<<.tip """When `clamp="auto"` the <<.attr positionAllowNegative>> attribute has no effect since coordinates are already clamped from all four sides.""">>
+
+See [[Popup Clamping Example|RevealWidget (Popup Clamping Example)]] for an interactive playground.
 
 
 <<.tip """Refer to [[ButtonWidget]] and [[Coordinate Systems]] for information on relative and absolute positioning""">>
