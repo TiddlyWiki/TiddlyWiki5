@@ -1,0 +1,309 @@
+created: 20260413142356937
+modified: 20260413142356937
+tags: doc dev [[Wikitext EBNF]]
+title: EBNF - Pragmas
+
+! Pragmas
+
+Pragmas are special directives that appear at the very beginning of tiddler content, before any rendered output. They configure the parser or define variables, procedures, functions, and widgets. The parser collects all consecutive pragmas from the start of the text; once a non-pragma line is encountered, pragma parsing stops.
+
+HTML comments (`<!-- ... -->`) are treated as pragmas when they appear in the pragma area, allowing comments to be interspersed with other pragmas without breaking the pragma sequence.
+
+!! `\procedure` / `\function` / `\widget`
+
+These are the modern definition pragmas, implemented in [[fnprocdef.js|$:/core/modules/parsers/wikiparser/rules/fnprocdef.js]]. They define procedures, functions, and custom widgets respectively. All three share the same syntax structure.
+
+!!! EBNF
+
+```
+FnProcDef    ::= '\' DefType S+ Name '(' ParamDefs? ')' ( S* EOL Body '\end' Name? | S+ InlineBody ) EOL
+DefType      ::= 'function' | 'procedure' | 'widget'
+Name         ::= [^(\s]+                       /* widget names start with '$' */
+ParamDefs    ::= ParamDef ( ( ',' | S ) ParamDef )*
+ParamDef     ::= ParamName ( ':' DefaultValue )?
+ParamName    ::= [^:),\s]+
+DefaultValue ::= '"""' .*? '"""'              /* triple-quoted string */
+               | '"' [^"]* '"'                /* double-quoted string */
+               | "'" [^']* "'"                 /* single-quoted string */
+               | [^,"'\s]+                     /* unquoted value or ((mvv)) */
+Body         ::= <any text until \end>
+InlineBody   ::= <text to end of line>
+S            ::= [ \t]                          /* horizontal whitespace */
+EOL          ::= '\r'? '\n' | EOF
+```
+
+!!! Single-line form
+
+When the body fits on one line, place it immediately after the closing parenthesis:
+
+```
+\procedure greet(name:"World") Hello, <<name>>!
+\function .double(n) [<n>multiply[2]]
+\widget $my.badge(label) <span class="badge"><<label>></span>
+```
+
+!!! Multiline form
+
+When the body spans multiple lines, end the first line after the closing parenthesis and terminate the body with `\end`:
+
+```
+\procedure list-items(filter, emptyMsg:"No items found")
+<$list filter=<<filter>> emptyMessage=<<emptyMsg>>>
+  <li><<currentTiddler>></li>
+</$list>
+\end
+```
+
+The `\end` marker can optionally repeat the name (e.g. `\end list-items`) for clarity.
+
+!!! Parameter defaults and MVV references
+
+Default values can be plain strings or multi-value variable (MVV) references using `((varname))` syntax:
+
+```
+\procedure show(item, colour:((my-default-colour)))
+...
+\end
+```
+
+When an MVV reference is used, the default value is read from the named variable at the time of invocation.
+
+!!! Differences between the three types
+
+* ''`\procedure`'' -- defines a procedure. Parameters are accessed as variables within the body using `<<paramName>>`. This is the standard way to define reusable wikitext.
+* ''`\function`'' -- defines a filter function. The body is a filter expression. Parameters are available as variables within the filter.
+* ''`\widget`'' -- defines a custom widget. The name must start with `$` (e.g. `$my.widget`). The body is wikitext that becomes the widget's template.
+
+!! `\define` (legacy)
+
+<<.deprecated-since "5.3.0" "Use `\procedure` instead.">>
+
+The original macro definition pragma, implemented in [[macrodef.js|$:/core/modules/parsers/wikiparser/rules/macrodef.js]]. It uses textual substitution rather than variable scoping: parameter references use `$paramname$` placeholders in the body, and `$(varname)$` for variable substitution.
+
+!!! EBNF
+
+```
+MacroDef     ::= '\define' S+ Name '(' MacroParams? ')' ( S* EOL Body '\end' Name? | S+ InlineBody ) EOL
+MacroParams  ::= MacroParam ( ( ',' | S ) MacroParam )*
+MacroParam   ::= ParamName ( ':' MacroDefault )?
+ParamName    ::= [A-Za-z0-9\-_]+
+MacroDefault ::= '"""' .*? '"""'
+               | '"' [^"]* '"'
+               | "'" [^']* "'"
+               | '[[' ( [^\]] | ']'(?!']') )* ']]'
+               | [^"'\s]+
+```
+
+Note: `\define` also supports `[[double bracket]]` quoting for defaults, which `\procedure` does not.
+
+!!! Example
+
+```
+\define my-macro(name:"World")
+Hello, $name$! The current tiddler is $(currentTiddler)$.
+\end
+```
+
+Because `\define` uses textual substitution, the parameters are spliced into the body text before parsing. This can lead to unexpected results with complex wikitext. Prefer `\procedure` for new code.
+
+!! `\import`
+
+Imports variable definitions (procedures, functions, widgets, macros) from other tiddlers, implemented in [[import.js|$:/core/modules/parsers/wikiparser/rules/import.js]]. The argument is a filter expression whose output tiddlers are imported.
+
+!!! EBNF
+
+```
+Import       ::= '\import' S+ FilterExpression EOL
+```
+
+!!! Example
+
+```
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+```
+
+All procedures, functions, widgets, and macros defined in the matching tiddlers become available in the current tiddler.
+
+!! `\parameters`
+
+Declares parameters with optional default values for the current tiddler when it is transcluded or used as a procedure/widget body. Implemented in [[parameters.js|$:/core/modules/parsers/wikiparser/rules/parameters.js]].
+
+!!! EBNF
+
+```
+Parameters   ::= '\parameters' S* '(' ParamDefs ')' EOL
+ParamDefs    ::= ParamDef ( ( ',' | S ) ParamDef )*
+ParamDef     ::= ParamName ( ':' DefaultValue )?
+```
+
+The `DefaultValue` alternatives are the same as for `\procedure` (see above), including MVV references.
+
+!!! Example
+
+```
+\parameters(title:"DefaultTitle", color:((theme-colour)), limit:"10")
+
+! <<title>>
+Showing up to <<limit>> items in <<color>>.
+```
+
+This is particularly useful for tiddlers that serve as templates -- the parameters pragma documents and provides defaults for the expected inputs.
+
+!! `\whitespace`
+
+Controls whether the parser trims whitespace from the output. Implemented in [[whitespace.js|$:/core/modules/parsers/wikiparser/rules/whitespace.js]].
+
+!!! EBNF
+
+```
+Whitespace   ::= '\whitespace' S+ ( 'trim' | 'notrim' ) EOL
+```
+
+!!! Example
+
+```
+\whitespace trim
+
+This text will have   insignificant whitespace   trimmed.
+```
+
+`trim` removes runs of whitespace from the rendered output, which is useful in templates and procedures where indentation is used for readability but should not appear in the output. `notrim` restores the default behaviour.
+
+!! `\parsermode`
+
+Switches the parser between block mode and inline mode. Implemented in [[parsermode.js|$:/core/modules/parsers/wikiparser/rules/parsermode.js]].
+
+!!! EBNF
+
+```
+ParserMode   ::= '\parsermode' S+ ( 'block' | 'inline' ) EOL
+```
+
+!!! Example
+
+```
+\parsermode inline
+
+This content is parsed as inline wikitext, so block-level
+constructs like headings and lists are not recognised.
+```
+
+By default, tiddler content is parsed in block mode. Switching to `inline` mode is useful for tiddlers that are transcluded inline, preventing unwanted `<p>` wrapping.
+
+!! `\rules`
+
+Enables or disables specific parser rules for the remainder of the tiddler. Implemented in [[rules.js|$:/core/modules/parsers/wikiparser/rules/rules.js]].
+
+!!! EBNF
+
+```
+Rules        ::= '\rules' S+ RuleAction S+ RuleName ( S+ RuleName )* EOL
+RuleAction   ::= 'only' | 'except'
+RuleName     ::= \S+
+```
+
+!!! Example
+
+```
+\rules only html image prettylink
+
+Only the HTML, image, and pretty-link rules are active here.
+Headings, bold, italic, and other rules are disabled.
+```
+
+```
+\rules except macrocallblock macrocallinline
+
+All rules are active except macro calls.
+```
+
+* ''`only`'' -- disables all rules except those listed.
+* ''`except`'' -- keeps all rules active except those listed.
+
+!! HTML Comments as Pragmas
+
+HTML comments (`<!-- ... -->`) are recognised both as block-level constructs and as pragmas. Implemented in [[commentblock.js|$:/core/modules/parsers/wikiparser/rules/commentblock.js]]. When placed in the pragma area, they are silently consumed, allowing you to annotate your pragmas:
+
+```
+<!-- Template for rendering a card component -->
+\procedure card(title, description:"No description")
+<!-- Card markup follows -->
+<div class="card">
+  <h3><<title>></h3>
+  <p><<description>></p>
+</div>
+\end
+```
+
+!!! EBNF
+
+```
+Comment      ::= '<!--' CommentBody '-->'
+CommentBody  ::= ( [^-] | '-'(?!'-'(?!'>')) )*    /* any text not containing --> */
+```
+
+!! Combined EBNF
+
+The following grammar summarises all pragma productions. Pragmas are parsed sequentially from the start of the tiddler text; parsing stops at the first non-pragma line.
+
+```
+PragmaBlock  ::= ( Pragma )*
+
+Pragma       ::= FnProcDef
+               | MacroDef
+               | Import
+               | Parameters
+               | Whitespace
+               | ParserMode
+               | Rules
+               | Comment
+
+/* --- Definitions --- */
+
+FnProcDef    ::= '\' DefType S+ Name '(' ParamDefs? ')' ( S* EOL Body '\end' Name? | S+ InlineBody ) EOL
+DefType      ::= 'function' | 'procedure' | 'widget'
+
+MacroDef     ::= '\define' S+ Name '(' MacroParams? ')' ( S* EOL Body '\end' Name? | S+ InlineBody ) EOL
+
+Import       ::= '\import' S+ FilterExpression EOL
+
+Parameters   ::= '\parameters' S* '(' ParamDefs ')' EOL
+
+Whitespace   ::= '\whitespace' S+ ( 'trim' | 'notrim' ) EOL
+
+ParserMode   ::= '\parsermode' S+ ( 'block' | 'inline' ) EOL
+
+Rules        ::= '\rules' S+ RuleAction S+ RuleName ( S+ RuleName )* EOL
+RuleAction   ::= 'only' | 'except'
+RuleName     ::= \S+
+
+Comment      ::= '<!--' CommentBody '-->'
+
+/* --- Shared productions --- */
+
+Name         ::= [^(\s]+
+ParamDefs    ::= ParamDef ( ( ',' | S ) ParamDef )*
+ParamDef     ::= ParamName ( ':' DefaultValue )?
+ParamName    ::= [^:),\s]+
+DefaultValue ::= '"""' .*? '"""'
+               | '"' [^"]* '"'
+               | "'" [^']* "'"
+               | [^,"'\s]+                        /* includes ((mvv)) refs */
+
+MacroParams  ::= MacroParam ( ( ',' | S ) MacroParam )*
+MacroParam   ::= MacroParamName ( ':' MacroDefault )?
+MacroParamName ::= [A-Za-z0-9\-_]+
+MacroDefault ::= '"""' .*? '"""'
+               | '"' [^"]* '"'
+               | "'" [^']* "'"
+               | '[[' ( [^\]] | ']'(?!']') )* ']]'
+               | [^"'\s]+
+
+Body         ::= <any text until matching \end>
+InlineBody   ::= <text to end of line>
+FilterExpression ::= <a TiddlyWiki filter expression>
+CommentBody  ::= <any text not containing '-->'>
+
+S            ::= [ \t]
+EOL          ::= '\r'? '\n' | EOF
+```

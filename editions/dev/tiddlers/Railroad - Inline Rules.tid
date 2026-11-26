@@ -1,0 +1,131 @@
+created: 20260413155313582
+modified: 20260413155942961
+tags: doc dev [[Wikitext EBNF]]
+title: Railroad - Inline Rules
+type: text/vnd.tiddlywiki
+
+! Inline Rules — Railroad Diagrams
+
+This tiddler presents the same inline wikitext syntax as [[EBNF - Inline Rules]], but using railroad diagrams for visual clarity. Follow the tracks left-to-right to see valid syntax paths.
+
+!! Emphasis
+
+Six emphasis rules use symmetric markers. Content between the markers is parsed recursively.
+
+!!! Bold
+
+Two single-quote characters wrap content to produce `<strong>`.
+
+<$railroad text=""" "''" <"inline-content"> "''" """/>
+
+!!! Italic
+
+Two forward slashes wrap content to produce `<em>`.
+
+<$railroad text=""" "//" <"inline-content"> "//" """/>
+
+!!! Strikethrough
+
+Two tildes wrap content to produce `<s>`.
+
+<$railroad text=""" "~~" <"inline-content"> "~~" """/>
+
+!!! Superscript
+
+Two carets wrap content to produce `<sup>`.
+
+<$railroad text=""" "^^" <"inline-content"> "^^" """/>
+
+!!! Subscript
+
+Two commas wrap content to produce `<sub>`.
+
+<$railroad text=""" ",," <"inline-content"> ",," """/>
+
+!!! Underscore
+
+Two underscores wrap content to produce `<u>`.
+
+<$railroad text=""" "__" <"inline-content"> "__" """/>
+
+!! Code Inline
+
+Backtick-delimited code. Content is ''not'' parsed — it is raw text. The closing marker must match the opening (single or double backtick).
+
+<$railroad text=""" ("`" <"raw-text"> "`" | "``" <"raw-text"> "``") """/>
+
+!! Formatting
+
+!!! Dash
+
+Two or three hyphens (not followed by another hyphen) produce an en-dash or em-dash.
+
+<$railroad text=""" ("---" / "em-dash" / | "--" / "en-dash" /) """/>
+
+!!! Entity
+
+HTML entities — named (`&copy;`) or numeric (`&#169;`).
+
+<$railroad text=""" "&" ["#"] <"name 2-8 chars"> ";" """/>
+
+!!! Style Inline
+
+Inline styling with `@@`. Optional CSS declarations and/or dot-prefixed class names, then content, closed by `@@`.
+
+<$railroad text=""" "@@" [{:"property:value;"}] [{:"." <"class-name">}] <"inline-content"> "@@" """/>
+
+!! Links
+
+!!! ~WikiLink
+
+CamelCase words auto-link. Prefix with `~` to suppress.
+
+<$railroad text=""" ["~" / "suppresses link" /] <"CamelCaseWord"> """/>
+
+!!! Pretty Link
+
+Double square brackets with optional display text.
+
+<$railroad text=""" "[[" <"display-text"> ["|"] <"target"> "]]" """/>
+
+!!! System Link
+
+System tiddler references starting with `$:/` auto-link. Prefix with `~` to suppress.
+
+<$railroad text=""" ["~"] "$:/" <"path-chars"> """/>
+
+!!! External Link
+
+Bare URLs with recognised protocols auto-link. Prefix with `~` to suppress.
+
+<$railroad text=""" ["~"] ("http" | "https" | "file" | "mailto" | "ftp" | "irc" | "news" | "data" | "skype") ":" <"url-chars"> """/>
+
+!!! Pretty External Link
+
+Explicit external link with optional display text.
+
+<$railroad text=""" "[ext[" <"display-text"> ["|"] <"url"> "]]" """/>
+
+!! Images
+
+The `[img` prefix, optional attributes, then the source in brackets. An optional tooltip is separated by `|`.
+
+<$railroad text=""" "[img" [{<"attribute">}] "[" [<"tooltip"> "|"] <"source"> "]]" """/>
+
+!! Comments
+
+HTML comment syntax. Everything between `<!--` and `-->` is consumed and not rendered.
+
+<$railroad text=""" "<!--" <"comment-text"> "-->" """/>
+
+!! Conditional (inline form)
+
+Filter-based conditional branching within inline text. The filter is evaluated at runtime — any output means true.
+
+<$railroad text=""" "<%if" <"filter-expr"> "%>" <"inline-content"> [{"<%elseif" <"filter-expr"> "%>" <"inline-content">}] ["<%else%>" <"inline-content">] "<%endif%>" """/>
+
+!! Hard Line Breaks
+
+Within `"""` delimiters, every newline becomes a `<br>`. Inline formatting is still parsed.
+
+<$railroad text=` '"""' {<"inline-content"> / "newline becomes br" /} '"""' `/>

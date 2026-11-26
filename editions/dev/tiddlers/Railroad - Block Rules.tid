@@ -1,0 +1,102 @@
+created: 20260413160420359
+modified: 20260413160935317
+tags: doc dev [[Wikitext EBNF]]
+title: Railroad - Block Rules
+
+! Block Rules — Railroad Diagrams
+
+This tiddler presents the same block wikitext syntax as [[EBNF - Block Rules]], but using railroad diagrams for visual clarity. Follow the tracks left-to-right to see valid syntax paths.
+
+Block rules match at //line-start positions//. They consume one or more complete lines and typically terminate at a blank line or a closing marker.
+
+!! Heading
+
+One to six `!` characters at the start of a line, optional CSS classes, then the heading text. The count of `!` determines the level (`<h1>` through `<h6>`).
+
+<$railroad text=""" "!" [{:"!"}] [{:"." <"class-name">}] [" "] <"inline-content"> """/>
+
+!! Horizontal Rule
+
+Three or more `-` characters on a line by themselves. Produces an `<hr>` element.
+
+<$railroad text=""" "-" "-" "-" [{:"-"}] """/>
+
+!! List
+
+A sequence of lines, each starting with one or more marker characters. Markers determine the list type: `*` unordered, `#` ordered, `;` definition term, `:` definition description, `>` blockquote. Nesting is achieved by repeating markers.
+
+!!! ~ListItem
+
+<$railroad text=""" {("*"|"#"|";"|":"|">")} [{:"." <"class-name">}] [" "] <"inline-content"> """/>
+
+!!! List
+
+<$railroad text=""" {<"ListItem">} """/>
+
+A list continues as long as consecutive lines begin with marker characters. A blank line or a non-marker line ends the list.
+
+!! Code Block
+
+Triple-backtick fencing with an optional language identifier. Content is ''not'' wikified — it is rendered as literal preformatted text.
+
+<$railroad text=""" '```' [<"language">] / "newline" / {<"code-line">} / "newline" / '```' """/>
+
+The language identifier consists of word characters and hyphens (e.g. `javascript`, `text/html`, `css`).
+
+!! Quote Block
+
+Delimited by `<<<` (three or more `<` characters). The opening line can carry CSS classes and an opening cite. The closing line can carry a closing cite. Content between the markers is parsed as full block-level wikitext.
+
+<$railroad text=""" "<<<" [{:"<"}] [{:"." <"class-name">}] [" " <"opening-cite">] / "newline" / <"block-content"> / "newline" / "<<<" [{:"<"}] [" " <"closing-cite">] """/>
+
+The number of `<` characters in the closing marker must match the opening.
+
+!! Style Block
+
+Wraps content in CSS styles and/or classes. Opens with `@@` plus optional style declarations and class names. Closes with `@@` on a line by itself. Multiple opener lines can be stacked.
+
+!!! ~StyleOpener
+
+<$railroad text=""" "@@" [{<"property"> ":" <"value"> ";"}] [{:"." <"class-name">}] """/>
+
+!!! ~StyleBlock
+
+<$railroad text=""" {<"StyleOpener"> / "newline" /} <"block-content"> / "newline" / "@@" """/>
+
+Styles must precede classes on the same opener line.
+
+!! Table
+
+A sequence of rows. Each row starts and ends with `|`. Cells are separated by `|`. A suffix character after the final `|` indicates the row's role.
+
+!!! ~TableRow
+
+<$railroad text=""" "|" {<"Cell"> +"|"} "|" [("h" / "header" / |"f" / "footer" / |"c" / "caption" / |"k" / "class" /)] """/>
+
+!!! Cell
+
+Cell content can be regular inline content (optionally preceded by `!` to make it a header cell), or a merge marker.
+
+<$railroad text=""" ([( "^" / "top" / | "," / "bottom" / | - )] [" "] ["!"] <"inline-content"> | "~" / "rowspan" / | ">" / "colspan right" / | "<" / "colspan left" /) """/>
+
+Alignment: a leading space means right-aligned, a trailing space means left-aligned, both means centered. `^` at the start means top-aligned, `,` means bottom-aligned.
+
+!! Typed Block
+
+Passes content through a specified parser (MIME type or file extension). Optionally a render type transforms the output further. Opens and closes with `$$$`.
+
+<$railroad text=""" "$$$" [<"parse-type">] [" > " <"render-type">] / "newline" / <"raw-content"> / "newline" / "$$$" """/>
+
+When no render type is given, the parsed content is inserted directly. When a render type is specified, the content is rendered to that type and wrapped in `<pre>`.
+
+!! Comment Block
+
+Standard HTML comment syntax. Everything between `<!--` and `-->` is ignored during rendering.
+
+<$railroad text=""" "<!--" <"comment-text"> "-->" """/>
+
+!! Conditional Block
+
+Filter-based `if` / `elseif` / `else` branching. If the filter produces any output, the condition is true. A double newline after `%>` causes block-mode parsing; otherwise content is parsed as an inline run.
+
+<$railroad text=""" "<%if" <"filter-expr"> "%>" <"body"> [{"<%elseif" <"filter-expr"> "%>" <"body">}] ["<%else%>" <"body">] "<%endif%>" """/>
