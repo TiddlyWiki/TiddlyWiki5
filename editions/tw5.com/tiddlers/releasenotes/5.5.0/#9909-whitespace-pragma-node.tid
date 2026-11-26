@@ -1,0 +1,13 @@
+change-category: developer
+change-type: enhancement
+created: 20260712235154000
+description: The \whitespace pragma leaves a void marker node in the parse tree
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/9909
+modified: 20260712235154000
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9909
+type: text/vnd.tiddlywiki
+
+The `\whitespace` pragma now leaves a void marker node in the parse tree, carrying its keyword list in a `values` attribute and exact source positions. For consistency, it behaves like `\rules` and pragma comments, which already leave marker nodes; it was the only pragma that vanished from the tree. Void nodes render as a pass-through, so rendered output is unchanged.
