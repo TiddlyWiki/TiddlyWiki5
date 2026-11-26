@@ -94,6 +94,7 @@ RangeWidget.prototype.getActionVariables = function(options) {
 
 // actionsStart
 RangeWidget.prototype.handleMouseDownEvent = function(event) {
+	this.startValue = this.inputDomNode.value;
 	this.handleEvent(event);
 	// Trigger actions
 	if(this.actionsMouseDown) {
