@@ -1,0 +1,22 @@
+title: Markdown/WidgetInline
+description: widget block recognition
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+The following content is inline, `_New_` interpreted:<br/>
+<$link to="New Tiddler">
+_New_ Tiddler
+</$link>
++
+title: ExpectedResult
+
+<div class="markdown">
+<p>The following content is inline, <code class="_codified_">_New_</code> interpreted:<br>
+<a class="tc-tiddlylink tc-tiddlylink-missing" href="#New%20Tiddler">
+<em>New</em> Tiddler
+</a>
+</p>
+</div>

@@ -36,6 +36,23 @@ exports.handler = function(request,response,state) {
 					"Content-Type": type,
 					"Accept-Ranges": "bytes"
 				};
+			if(state.server.enableBrowserCache) {
+				// Use a weak validator based on file metadata so the file can be streamed
+				const etag = '"' + stats.size.toString(16) + "-" + stats.mtimeMs.toString(16) + '"',
+					ifNoneMatch = request.headers["if-none-match"];
+				responseHeaders["Etag"] = "W/" + etag;
+				responseHeaders["Cache-Control"] = "max-age=0, must-revalidate";
+				if(ifNoneMatch && ifNoneMatch.split(",").some(function(value) {
+					value = value.trim();
+					return value === "*" || value.replace(/^W\//,"") === etag;
+				})) {
+					response.writeHead(304,responseHeaders);
+					response.end();
+					return;
+				}
+			} else {
+				responseHeaders["Cache-Control"] = "no-store";
+			}
 			var rangeHeader = request.headers.range,
 				stream;
 			if(rangeHeader) {
@@ -45,6 +62,7 @@ exports.handler = function(request,response,state) {
 					end = parts[1] ? parseInt(parts[1], 10) : stats.size - 1;
 				// Validate start and end
 				if(isNaN(start) || isNaN(end) || start < 0 || end < start || end >= stats.size) {
+					responseHeaders["Cache-Control"] = "no-store";
 					responseHeaders["Content-Range"] = "bytes */" + stats.size;
 					return response.writeHead(416, responseHeaders).end();
 				}

@@ -11,10 +11,15 @@ Each spec has a "manual:" comment with a by-hand recipe so a reviewer
 can sanity-check the test against a live wiki.
 
 NOT covered (need a real browser — Playwright territory):
-* `focus`, `focusSelectFromStart`/`End`, `focusPopup`, `cancelPopups` — real DOM focus + selection APIs
+* `focus`, `focusSelectFromStart`/`End` — real DOM focus + selection APIs
 * `inputActions`, `fileDrop` — synthetic events not dispatched by fakedom
 * Pixel measurement / growth of auto-height textareas — `$tw.utils.resizeTextAreaToFit` needs real layout
 * FramedEngine — requires a real iframe document
+
+`focusPopup` and `cancelPopups` are covered in [[test-tag-picker.js]]
+(editions/test/tiddlers/tests/test-tag-picker.js) instead: $tw.popup is
+undefined under Node, so a stub records what a focus would do without a
+real focus event.
 
 \*/
 

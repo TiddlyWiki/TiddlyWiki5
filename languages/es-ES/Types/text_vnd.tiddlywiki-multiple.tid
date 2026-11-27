@@ -1,5 +1,4 @@
 title: $:/language/Docs/Types/text/vnd.tiddlywiki-multiple
-description: Tiddler compuesto
+description: Tiddler compost
 name: text/vnd.tiddlywiki-multiple
-group: Developer
-group-sort: 2
+group: Desenvolupador

@@ -86,8 +86,9 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 	}
 	// Set its height to auto so that it snaps to the correct height
 	domNode.style.height = "auto";
-	// Calculate the revised height
-	var newHeight = Math.max(domNode.scrollHeight + domNode.offsetHeight - domNode.clientHeight,measuredHeight);
+	// Calculate the revised height. The +1 covers the subpixel shortfall from
+	// scrollHeight, offsetHeight and clientHeight all being rounded to integers
+	var newHeight = Math.max(domNode.scrollHeight + domNode.offsetHeight - domNode.clientHeight + 1,measuredHeight);
 	// Restore the original rows attribute state
 	if(!hadRowsAttr) {
 		domNode.removeAttribute("rows");

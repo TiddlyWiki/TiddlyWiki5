@@ -9,30 +9,41 @@
 //
 //Port to Browser lib by ORCID / RCPETERS
 //
+//Modified for TiddlyWiki: @string macros, parenthesised entries, stray @ signs,
+//entries without fields, optional commas, parse() that reports a bad entry and
+//carries on, and a standard option for BibTeX's own brace and whitespace rules
+//
 //Issues:
 //no comment handling within strings
-//no string concatenation
-//no variable values yet
 //Grammar implemented here:
 //bibtex -> (string | preamble | comment | entry)*;
 //string -> '@STRING' '{' key_equals_value '}';
 //preamble -> '@PREAMBLE' '{' value '}';
 //comment -> '@COMMENT' '{' value '}';
-//entry -> '@' key '{' key ',' key_value_list '}';
-//key_value_list -> key_equals_value (',' key_equals_value)*;
+//entry -> '@' key '{' key [',' [key_value_list]] '}';
+//any '{' '}' delimiting one of the above may instead be '(' ')'
+//key_value_list -> key_equals_value (','* key_equals_value)* ','*;
 //key_equals_value -> key '=' value;
-//value -> value_quotes | value_braces | key;
+//value -> single_value ('#' single_value)*;
+//single_value -> value_quotes | value_braces | identifier;
 //value_quotes -> '"' .*? '"'; // not quite
 //value_braces -> '{' .*? '"'; // not quite
 (function(exports) {
 
-    function BibtexParser() {
+	class BibtexSyntaxError extends Error {}
+
+	function BibtexParser(options) {
 
         this.months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
         this.notKey = [',','{','}',' ','='];
         this.pos = 0;
         this.input = "";
         this.entries = new Array();
+		this.errors = [];
+		this.standard = !!(options && options.standard);
+		this.strings = Object.create(null);
+		this.opener = "{";
+		this.closer = "}";
 
         this.currentEntry = "";
 
@@ -48,6 +59,10 @@
             return (s == ' ' || s == '\r' || s == '\t' || s == '\n');
         };
 
+		this.fail = function(message) {
+			throw new BibtexSyntaxError(message);
+		};
+
         this.match = function(s, canCommentOut) {
             if (canCommentOut == undefined || canCommentOut == null)
                 canCommentOut = true;
@@ -55,8 +70,7 @@
             if (this.input.substring(this.pos, this.pos + s.length) == s) {
                 this.pos += s.length;
             } else {
-                throw TypeError("Token mismatch: match", "expected " + s + ", found "
-                        + this.input.substring(this.pos));
+				this.fail("expected " + s + " but found " + JSON.stringify(this.input.substr(this.pos, 20)));
             };
             this.skipWhitespace(canCommentOut);
         };
@@ -86,20 +100,24 @@
         };
 
         this.skipWhitespace = function(canCommentOut) {
-            while (this.isWhitespace(this.input[this.pos])) {
-                this.pos++;
-            };
-            if (this.input[this.pos] == "%" && canCommentOut == true) {
-                while (this.input[this.pos] != "\n") {
-                    this.pos++;
-                };
-                this.skipWhitespace(canCommentOut);
-            };
+			// A loop, not recursion, so a long run of % lines cannot overflow the stack
+			while (true) {
+				while (this.isWhitespace(this.input[this.pos])) {
+					this.pos++;
+				};
+				if (this.input[this.pos] != "%" || canCommentOut != true) {
+					return;
+				}
+				while (this.pos < this.input.length && this.input[this.pos] != "\n") {
+					this.pos++;
+				};
+			}
         };
 
         this.value_braces = function() {
             var bracecount = 0;
-            this.match("{", false);
+			// Not match(), which would skip the leading space of acm # { b}
+			this.pos++;
             var start = this.pos;
             var escaped = false;
             while (true) {
@@ -115,10 +133,11 @@
                     } else if (this.input[this.pos] == '{') {
                         bracecount++;
                     } else if (this.pos >= this.input.length - 1) {
-                        throw TypeError("Unterminated value: value_braces");
+						this.fail("unterminated value");
                     };
                 };
-                if (this.input[this.pos] == '\\' && escaped == false)
+				// BibTeX counts every brace, so in standard mode the \} in {x\}} closes the value
+				if (this.input[this.pos] == '\\' && escaped == false && !this.standard)
                     escaped = true;
                 else
                     escaped = false;
@@ -129,14 +148,14 @@
         this.value_comment = function() {
             var str = '';
             var brcktCnt = 0;
-            while (!(this.tryMatch("}", false) && brcktCnt == 0)) {
+			while (!(this.tryMatch(this.closer, false) && brcktCnt == 0)) {
                 str = str + this.input[this.pos];
-                if (this.input[this.pos] == '{')
+				if (this.input[this.pos] == this.opener)
                     brcktCnt++;
-                if (this.input[this.pos] == '}')
+				if (this.input[this.pos] == this.closer)
                     brcktCnt--;
                 if (this.pos >= this.input.length - 1) {
-                    throw TypeError("Unterminated value: value_comment", + this.input.substring(start));
+					this.fail("unterminated value");
                 };
                 this.pos++;
             };
@@ -144,17 +163,24 @@
         };
 
         this.value_quotes = function() {
-            this.match('"', false);
+			// Not match(), which would skip the leading space of acm # " b"
+			this.pos++;
             var start = this.pos;
             var escaped = false;
+			var bracecount = 0;
             while (true) {
                 if (!escaped) {
-                    if (this.input[this.pos] == '"') {
+					// In standard mode a quote inside braces belongs to the value: "x {"}y"
+					if (this.input[this.pos] == '"' && bracecount == 0) {
                         var end = this.pos;
                         this.match('"', false);
                         return this.input.substring(start, end);
+					} else if (this.standard && this.input[this.pos] == '{') {
+						bracecount++;
+					} else if (this.standard && this.input[this.pos] == '}' && bracecount > 0) {
+						bracecount--;
                     } else if (this.pos >= this.input.length - 1) {
-                        throw TypeError("Unterminated value: value_quotes", this.input.substring(start));
+						this.fail("unterminated value");
                     };
                 }
                 if (this.input[this.pos] == '\\' && escaped == false)
@@ -166,46 +192,70 @@
         };
 
         this.single_value = function() {
-            var start = this.pos;
             if (this.tryMatch("{")) {
                 return this.value_braces();
             } else if (this.tryMatch('"')) {
                 return this.value_quotes();
             } else {
-                var k = this.key();
-                if (k.match("^[0-9]+$"))
-                    return k;
-                else if (this.months.indexOf(k.toLowerCase()) >= 0)
-                    return k.toLowerCase();
-                else
-                    throw "Value expected: single_value" + this.input.substring(start) + ' for key: ' + k;
+				var k = this.identifier();
+				if (k.match("^[0-9]+$"))
+					return k;
+				else if (k.toLowerCase() in this.strings) {
+					this.usedMacro = true;
+					return this.strings[k.toLowerCase()];
+				} else if (this.months.includes(k.toLowerCase()))
+					return k.toLowerCase();
+				else if (k) {
+					// An undefined macro keeps its name, so one bad value does not lose the file
+					this.usedMacro = true;
+					return k;
+				} else
+					this.fail("value expected but found " + JSON.stringify(this.input.substr(this.pos, 20)));
 
             };
         };
 
-        this.value = function() {
+		// raw keeps every space, because "Proc. of " in a macro needs its own
+		this.value = function(raw) {
             var values = [];
+			this.usedMacro = false;
             values.push(this.single_value());
             while (this.tryMatch("#")) {
                 this.match("#");
                 values.push(this.single_value());
             };
-            return values.join("");
+			if (raw) {
+				return values.join("");
+			}
+			if (this.standard || this.usedMacro) {
+				return values.join("").trim();
+			}
+			// Values that parsed before macros existed keep their exact form: { a } becomes "a "
+			return values.map(function(value) {
+				return value.replace(/^[ \r\t\n]+/, "");
+			}).join("");
         };
 
         this.key = function(optional) {
             var start = this.pos;
             while (true) {
                 if (this.pos >= this.input.length) {
-                    throw TypeError("Runaway key: key");
+					this.fail("unexpected end of file in a key");
                 };
                                 // а-яА-Я is Cyrillic
                 //console.log(this.input[this.pos]);
-                if (this.notKey.indexOf(this.input[this.pos]) >= 0) {
-                    if (optional && this.input[this.pos] != ',') {
-                        this.pos = start;
-                        return null;
-                    };
+				if (this.notKey.includes(this.input[this.pos]) || this.input[this.pos] == this.closer) {
+					if (optional) {
+						// Whitespace may precede the comma: @book{a , title = {T}}
+						var next = this.pos;
+						while (this.isWhitespace(this.input[next])) {
+							next++;
+						}
+						if (this.input[next] != ',' && this.input[next] != this.closer) {
+							this.pos = start;
+							return null;
+						}
+					}
                     return this.input.substring(start, this.pos);
                 } else {
                     this.pos++;
@@ -214,50 +264,79 @@
             };
         };
 
-        this.key_equals_value = function() {
+		// Unlike key(), stops at the delimiters that end a macro name or an entry type
+		this.identifier = function() {
+			var start = this.pos;
+			while (this.pos < this.input.length && !/[\s,{}()=#"%]/.test(this.input[this.pos])) {
+				this.pos++;
+			}
+			return this.input.substring(start, this.pos);
+		};
+
+		this.key_equals_value = function(raw) {
             var key = this.key();
             if (this.tryMatch("=")) {
                 this.match("=");
-                var val = this.value();
+				var val = this.value(raw);
                 key = key.trim()
                 return [ key, val ];
             } else {
-                throw TypeError("Value expected, equals sign missing: key_equals_value",
-                     this.input.substring(this.pos));
+				this.fail("expected = after " + JSON.stringify(key.trim().substr(0, 20)));
             };
         };
 
         this.key_value_list = function() {
-            var kv = this.key_equals_value();
-            this.currentEntry['entryTags'] = {};
-            this.currentEntry['entryTags'][kv[0]] = kv[1];
-            while (this.tryMatch(",")) {
-                this.match(",");
-                // fixes problems with commas at the end of a list
-                if (this.tryMatch("}")) {
-                    break;
-                }
-                ;
-                kv = this.key_equals_value();
-                this.currentEntry['entryTags'][kv[0]] = kv[1];
-            };
+			this.currentEntry['entryTags'] = {};
+			while (true) {
+				// Commas are optional, so a forgotten one does not lose the entry
+				while (this.tryMatch(",")) {
+					this.match(",");
+				}
+				if (this.pos >= this.input.length || this.tryMatch(this.closer)) {
+					return;
+				}
+				var kv = this.key_equals_value();
+				this.currentEntry['entryTags'][kv[0]] = kv[1];
+			}
         };
 
         this.entry_body = function(d) {
             this.currentEntry = {};
-            this.currentEntry['citationKey'] = this.key(true);
+			var key = this.key(true);
+			this.currentEntry['citationKey'] = key !== null && this.standard ? key.trim() : key;
             this.currentEntry['entryType'] = d.substring(1);
-            if (this.currentEntry['citationKey'] != null) {
+			if (key !== null && !this.tryMatch(this.closer)) {
                 this.match(",");
             }
+			// Pushed first, so the fields read before a syntax error are kept
+			this.entries.push(this.currentEntry);
             this.key_value_list();
-            this.entries.push(this.currentEntry);
+			if (!key && Object.keys(this.currentEntry['entryTags']).length == 0) {
+				this.fail("entry has neither a citation key nor fields");
+			}
         };
 
         this.directive = function() {
             this.match("@");
-            return "@" + this.key();
+			var start = this.pos;
+			if (!this.standard) {
+				// Anything key() read up to a "{" stays the entry type, such as "book#1"
+				while (this.pos < this.input.length && !this.notKey.includes(this.input[this.pos])) {
+					this.pos++;
+				}
+				var end = this.pos;
+				if (this.tryMatch("{")) {
+					return "@" + this.input.substring(start, end);
+				}
+				this.pos = start;
+			}
+			return "@" + this.identifier();
         };
+
+		this.string = function() {
+			var kv = this.key_equals_value(true);
+			this.strings[kv[0].toLowerCase()] = kv[1];
+		};
 
         this.preamble = function() {
             this.currentEntry = {};
@@ -289,31 +368,74 @@
             });
         }
 
+		this.block = function() {
+			var d = this.directive();
+			if (this.tryMatch("(")) {
+				this.opener = "(";
+				this.closer = ")";
+			} else if (this.tryMatch("{")) {
+				this.opener = "{";
+				this.closer = "}";
+			} else {
+				// An @ in free text, such as an email address between entries
+				return;
+			}
+			this.match(this.opener);
+			if (d.toUpperCase() == "@STRING") {
+				this.string();
+			} else if (d.toUpperCase() == "@PREAMBLE") {
+				this.preamble();
+			} else if (d.toUpperCase() == "@COMMENT") {
+				this.comment();
+			} else {
+				this.entry(d);
+			}
+			this.match(this.closer);
+		};
+
+		// Reports the error, drops an entry that has no fields yet and moves to the next line starting with @
+		this.recover = function(start, count, error) {
+			this.errors.push({
+				line: this.input.substring(0, start).split("\n").length,
+				message: error.message
+			});
+			var last = this.entries[this.entries.length - 1];
+			if (this.entries.length > count && Object.keys(last.entryTags || {}).length == 0) {
+				this.entries.pop();
+			}
+			var nextEntry = /\n[ \t]*@/g;
+			nextEntry.lastIndex = start + 1;
+			this.pos = nextEntry.exec(this.input) ? nextEntry.lastIndex - 1 : this.input.length;
+		};
+
         this.bibtex = function() {
             while (this.matchAt()) {
-                var d = this.directive();
-                this.match("{");
-                if (d.toUpperCase() == "@STRING") {
-                    this.string();
-                } else if (d.toUpperCase() == "@PREAMBLE") {
-                    this.preamble();
-                } else if (d.toUpperCase() == "@COMMENT") {
-                    this.comment();
-                } else {
-                    this.entry(d);
-                }
-                this.match("}");
+				var start = this.pos,
+					count = this.entries.length;
+				try {
+					this.block();
+				} catch (error) {
+					if (!(error instanceof BibtexSyntaxError)) {
+						throw error;
+					}
+					this.recover(start, count, error);
+				}
             };
 
             this.alernativeCitationKey();
         };
     };
 
-    exports.toJSON = function(bibtex) {
-        var b = new BibtexParser();
-        b.setInput(bibtex);
-        b.bibtex();
-        return b.entries;
+	// Returns {entries, errors}, where each error is {line, message}, and never fails on bad input
+	exports.parse = function(bibtex, options) {
+		var b = new BibtexParser(options);
+		b.setInput(bibtex);
+		b.bibtex();
+		return {entries: b.entries, errors: b.errors};
+	};
+
+	exports.toJSON = function(bibtex, options) {
+		return exports.parse(bibtex, options).entries;
     };
 
     /* added during hackathon don't hate on me */
