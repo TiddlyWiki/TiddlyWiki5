@@ -22,6 +22,10 @@ exports.startup = function() {
 	// additions: array of tiddler field objects
 	// removals: array of titles to remove
 	var updateInfoPlugin = function(additions = [], removals = []) {
+		if($tw.wiki.getPluginInfo(TITLE_INFO_PLUGIN)) {
+			$tw.wiki.updatePluginTiddlers(TITLE_INFO_PLUGIN,additions,removals);
+			return;
+		}
 		// Get the existing tiddlers
 		var json = $tw.wiki.getTiddlerData(TITLE_INFO_PLUGIN,{tiddlers: {}});
 		$tw.utils.each(removals,function(title) {
