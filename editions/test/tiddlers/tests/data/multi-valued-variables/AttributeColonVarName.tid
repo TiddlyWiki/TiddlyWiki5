@@ -1,0 +1,15 @@
+title: MultiValuedVariables/AttributeColonVarName
+description: ((var)) on a widget attribute may name a variable containing a colon (#10013)
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$let my:list={{{ [range[2]] }}}>
+<$text text=((my:list))/>
+</$let>
++
+title: ExpectedResult
+
+<p>1</p>

@@ -1,7 +1,7 @@
 title: $:/language/Snippets/FunctionDefinition
 tags: $:/tags/TextEditor/Snippet
-caption: Definición Función
+caption: Function definition
 
-\function f.name(param1,param2:"valor defecto") [<param1>!is[blank]else<param2>]
+\function f.nom(param1,param2:"valorPerOmissio") [<param1>!is[blank]else<param2>]
 
-<<f.name>>
+<<f.nom>>
