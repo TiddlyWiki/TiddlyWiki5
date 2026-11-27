@@ -100,7 +100,6 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			iterator(self.wiki.getTiddler(self.to),self.to);
 		})[0];
 	}
-	// No filter result leaves the href undefined, so fall back to the template. An empty string is a deliberate empty href. See #9977
 	if(wikiLinkText === undefined) {
 		// Expand the tv-wikilink-template variable to construct the href
 		var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
