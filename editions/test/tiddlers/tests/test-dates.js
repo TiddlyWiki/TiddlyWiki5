@@ -216,7 +216,8 @@ describe("Date formatting", function() {
 	it("should substitute the week year tokens", function() {
 		expect(fds(refDate,"wYYYY")).toBe("2014");
 		expect(fds(refDate,"wYY")).toBe("14");
-		// 29 December 2014 falls in week 1 of 2015
+		// 29 December 2014 falls in week 1 of 2015, because ISO 8601 gives a week to the year
+		// that holds its Thursday
 		var lastWeek = new Date(2014,11,29,23,59,59);
 		expect(fds(lastWeek,"WW")).toBe("1");
 		expect(fds(lastWeek,"wYYYY")).toBe("2015");
@@ -255,6 +256,8 @@ describe("Date formatting", function() {
 
 	it("should substitute the timestamp token", function() {
 		expect(fds(refDate,"TIMESTAMP")).toBe(refDate.getTime().toString());
+		// milliseconds since the epoch do not depend on the display template
+		expect(fds(refDate,"[UTC]TIMESTAMP")).toBe(refDate.getTime().toString());
 	});
 
 	it("should substitute the timezone offset token", function() {
@@ -274,6 +277,10 @@ describe("Date formatting", function() {
 		// ISO 8601 has no -00:00
 		expect(atOffset(0)).toBe("+00:00");
 		expect(fds(refDate,"TZD")).toMatch(/^[+-]\d\d:\d\d$/);
+		// a template rendering UTC is at UTC, whatever the reader's timezone
+		var vienna = new Date(2014,10,9,17,41,28,542);
+		vienna.getTimezoneOffset = function() { return -60; };
+		expect(fds(vienna,"[UTC]TZD")).toBe("+00:00");
 	});
 
 	it("should shift the date to UTC when the template starts with [UTC]", function() {

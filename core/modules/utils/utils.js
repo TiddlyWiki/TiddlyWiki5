@@ -352,11 +352,6 @@ exports.formatTitleString = function(template,options) {
 	return result;
 };
 
-/*
-A date whose UTC components are the local calendar fields of the given date. Date formatting
-reads UTC components throughout, so that rendering the local reading and rendering the UTC
-one differ only in which date is read, never in a shift along the timeline
-*/
 function toUtcFields(date) {
 	var year = date.getFullYear(),
 		fields = new Date(Date.UTC(year,date.getMonth(),date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds(),date.getMilliseconds()));
@@ -364,11 +359,6 @@ function toUtcFields(date) {
 	return fields;
 }
 
-/*
-The Thursday of the ISO-8601 week holding the UTC components of the given date. ISO-8601
-assigns a week to whichever year contains its Thursday, so both the week number and the week
-year follow from this one date
-*/
 function isoThursday(fields) {
 	var thursday = new Date(fields.getTime());
 	thursday.setUTCHours(0,0,0,0);
@@ -400,7 +390,6 @@ function amPm(hours) {
 	return $tw.language.getString("Date/Period/" + (hours >= 12 ? "pm" : "am"));
 }
 
-// A four digit year, with the minus sign of a negative year kept outside the padding
 function padYear(year) {
 	return (year < 0 ? "-" : "") + $tw.utils.pad(Math.abs(year),4);
 }
@@ -408,13 +397,10 @@ function padYear(year) {
 exports.formatDateString = function(date,template) {
 	var result = "",
 		t = template,
-		// Whether the template opened with [UTC], and the date whose UTC components hold
-		// the calendar fields to render. Both are set once the prefix has been read
 		utc = false,
 		fields,
 		matches = [
 			[/^TIMESTAMP/, function() {
-				// Milliseconds since the epoch cannot depend on the display template
 				return date.getTime();
 			}],
 			[/^0hh12/, function() {
@@ -482,10 +468,8 @@ exports.formatDateString = function(date,template) {
 				return $tw.language.getString("Date/Long/Month/" + (fields.getUTCMonth() + 1));
 			}],
 			[/^TZD/, function() {
-				// A template rendering UTC is at UTC, whatever the reader's timezone
 				var tz = utc ? 0 : date.getTimezoneOffset(),
 					atz = Math.abs(tz);
-				// ISO 8601 has no -00:00, so UTC is a plus
 				return (tz <= 0 ? "+" : "-") + $tw.utils.pad(Math.floor(atz / 60)) + ":" + $tw.utils.pad(atz % 60);
 			}],
 			[/^wYY/, function() {
@@ -530,22 +514,13 @@ exports.formatDateString = function(date,template) {
 		utc = true;
 		t = t.substr(5) ;
 	}
-	// The UTC components of a date are already the UTC reading, so only a local template
-	// needs its calendar fields moved across. Nothing is shifted along the timeline: a
-	// shifted date cannot express a wall clock hour that local time skips over when
-	// summer time starts, which used to leave [UTC] an hour out around a transition
-	fields = utc ? date : toUtcFields(date);
+	fields =utc ? date : toUtcFields(date);
 	while(t.length){
-		// An escape is taken out of the template here rather than out of the finished
-		// result, where it used to consume whatever the following token had substituted
 		if(t.charAt(0) === "\\" && t.length > 1) {
 			result += t.charAt(1);
 			t = t.substr(2);
 			continue;
 		}
-		// null means no token matched, which is not the same as a token that substitutes
-		// "0" or an empty era string. Testing the substitution itself dropped a midnight
-		// hour and then re-read the character after it as literal text
 		var matchString = null;
 		$tw.utils.each(matches, function(m) {
 			var match = m[0].exec(t);
@@ -565,9 +540,6 @@ exports.formatDateString = function(date,template) {
 	return result;
 };
 
-// Each of these reads the local calendar fields of the date, as it always has. The work is
-// done on UTC components so that summer time cannot enter the arithmetic
-
 exports.getAmPm = function(date) {
 	return amPm(date.getHours());
 };
@@ -576,7 +548,6 @@ exports.getDaySuffix = function(date) {
 	return $tw.language.getString("Date/DaySuffix/" + date.getDate());
 };
 
-// Day of the year, 1 to 365, or 366 in a leap year
 exports.getDayOfYear = function(date) {
 	return dayOfYear(toUtcFields(date));
 };
