@@ -22,7 +22,6 @@ exports.startup = function() {
 	// additions: array of tiddler field objects
 	// removals: array of titles to remove
 	var updateInfoPlugin = function(additions = [], removals = []) {
-		// Rewriting a plugin that is already read would reload it and rebuild every indexer, on each resize frame for the window dimensions. issue: #10066
 		if($tw.wiki.getPluginInfo(TITLE_INFO_PLUGIN)) {
 			$tw.wiki.updatePluginTiddlers(TITLE_INFO_PLUGIN,additions,removals);
 			return;
