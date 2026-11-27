@@ -1491,7 +1491,6 @@ $tw.Wiki = function(options) {
 		});
 	};
 
-	// Update individual tiddlers of a registered plugin that owns those titles, without the indexer rebuild of unpackPluginTiddlers. additions is an array of tiddler field objects, removals an array of titles, and entries that would not change the plugin are ignored. see: #10066
 	this.updatePluginTiddlers = function(pluginTitle,additions,removals) {
 		var self = this,
 			info = pluginInfo[pluginTitle],
