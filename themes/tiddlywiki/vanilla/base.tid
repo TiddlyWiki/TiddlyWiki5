@@ -572,6 +572,38 @@ a.tc-tiddlylink-external:hover {
 	height: 2em;
 }
 
+/* Pass as the class parameter of a list macro to lay it out as a row. Markup unchanged */
+.tc-horizontal-draggable {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+}
+
+.tc-horizontal-draggable .tc-droppable {
+	display: flex;
+	align-items: center;
+}
+
+/* flex gap is too new for the CSS baseline */
+.tc-horizontal-draggable > * {
+	<<margin-end ".25em">>
+}
+
+/* The drop marker is a bar between items, not a band above one */
+.tc-horizontal-draggable .tc-droppable-placeholder {
+	line-height: normal;
+	height: 1.4em;
+	width: 0;
+}
+
+/* The end zone has no item to sit against, so it needs its own width */
+.tc-horizontal-draggable > .tc-droppable:last-child {
+	min-width: 1em;
+}
+
 .tc-sidebar-tab-open-item {
 	position: relative;
 }

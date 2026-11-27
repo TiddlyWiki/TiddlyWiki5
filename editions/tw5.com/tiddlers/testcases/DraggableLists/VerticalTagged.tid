@@ -1,0 +1,32 @@
+created: 20260825210000000
+description: list-tagged-draggable with no class, the default column
+modified: 20260825210000000
+tags: $:/tags/wiki-test-spec
+title: TestCases/DraggableLists/VerticalTagged
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+The macro gained a `class` parameter. Passing none must leave the wrapper exactly as it was, reading `tc-tagged-draggable-list` with no trailing space.
++
+title: Alpha
+tags: Subject
++
+title: Beta
+tags: Subject
++
+title: Gamma
+tags: Subject
++
+title: Delta
+tags: Subject
++
+title: Output
+
+\import [[$:/core/macros/list]]
+
+<<list-tagged-draggable tag:"Subject">>
++
+title: ExpectedResult
+
+<p><span class="tc-tagged-draggable-list"><div class="tc-menu-list-item"><span class="tc-droppable"><div class="tc-droppable-placeholder"></div><div><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Alpha">Alpha</a></div></span></div><div class="tc-menu-list-item"><span class="tc-droppable"><div class="tc-droppable-placeholder"></div><div><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Beta">Beta</a></div></span></div><div class="tc-menu-list-item"><span class="tc-droppable"><div class="tc-droppable-placeholder"></div><div><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Delta">Delta</a></div></span></div><div class="tc-menu-list-item"><span class="tc-droppable"><div class="tc-droppable-placeholder"></div><div><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Gamma">Gamma</a></div></span></div><span class="tc-droppable"><div class="tc-droppable-placeholder"></div><div style="height:0.5em;"></div></span></span></p>
