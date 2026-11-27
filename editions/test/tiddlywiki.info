@@ -4,6 +4,7 @@
 		"tiddlywiki/jasmine",
 		"tiddlywiki/wikitext-serialize",
 		"tiddlywiki/geospatial",
+		"tiddlywiki/bibtex",
 		"tiddlywiki/markdown"
 	],
 	"themes": [

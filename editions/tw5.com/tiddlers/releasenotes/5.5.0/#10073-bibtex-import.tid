@@ -1,0 +1,20 @@
+change-category: plugin
+change-type: enhancement
+created: 20261101165706256
+description: BibTeX plugin survives bad input, supports more syntax, and adds plain text conversion, a search tab and a citation template
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10073
+modified: 20261101225530137
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#10073
+
+A bad entry no longer turns a whole file into one error tiddler: the other entries are imported, and "BibTeX import error" lists the line and problem of each bad one. A file ending in a `%` line without a final newline no longer hangs the import.
+
+The importer also accepts `@string` macros, parentheses around an entry, entries without fields, missing commas, whitespace before the comma after a citation key, and `@` signs in text between entries. Files that imported before give the same result as before.
+
+New additions:
+
+* With `$:/config/BibTeX/Standard` set to `yes`, the importer follows BibTeX's own brace rules and converts field values to plain text, so `{ACM}` becomes `ACM` and `M{\"u}ller` becomes `Müller`. It is off by default
+* A "BibTeX" tab in the search results searches all fields of imported entries. It appears whenever the plugin is installed
+* `{{Dalgaard2001||citeAPA}}` shows `(Dalgaard, 2001)` as a link to the entry
