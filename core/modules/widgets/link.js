@@ -125,7 +125,6 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			parseAsInline: true,
 			variables: {
 				currentTiddler: this.to,
-				// A link in the tooltip would render the tooltip again, forever. See #9976
 				"tv-wikilinks": "no"
 			},
 			parentWidget: this
