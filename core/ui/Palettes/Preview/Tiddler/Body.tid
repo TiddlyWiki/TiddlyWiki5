@@ -1,0 +1,15 @@
+title: $:/core/ui/Palettes/Preview/Tiddler/Body
+tags: $:/tags/Preview/Tiddler
+
+\whitespace trim
+
+<div class="tc-palette-preview-thumbnail-tiddler-body" style.color=<<colour foreground>>>
+	<%if [<title>match[HelloThere]] %>
+		Lorem ipsum dolor sit amet, <<link "consectetur adipiscing elit">>. Cras non arcu ultricies, egestas odio tempus, vestibulum ipsum. Praesent diam lorem, elementum in venenatis eget, tincidunt quis lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam efficitur velit tortor, sit amet tristique felis viverra sit amet. <<link "Nullam posuere facilisis purus sed">> consectetur. Integer vel elit euismod, posuere ligula et, dictum tellus. Donec in odio diam. Sed metus magna, placerat at ligula et, imperdiet sagittis ex.
+	<%else%>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+		<<tab-set "Sed Metus Magna Placerat Ligula Imperdiet">>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non arcu ultricies, egestas odio tempus, vestibulum ipsum. Praesent diam lorem, elementum in venenatis eget, tincidunt quis lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+	<%endif%>
+</div>
+

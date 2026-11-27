@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/menubar/background-palette
+type: application/x-tiddler-dictionary
+tags: $:/tags/BackgroundPalette
+
+menubar-foreground: #fff
+menubar-background: #5778d8

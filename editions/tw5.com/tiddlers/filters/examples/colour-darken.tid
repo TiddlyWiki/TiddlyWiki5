@@ -1,0 +1,8 @@
+created: 20260720103000000
+modified: 20260720103000000
+tags: [[colour-darken Operator]] [[Operator Examples]]
+title: colour-darken Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[yellow]colour-darken[0.3]]" "lowering the lightness of yellow by 30% gives an olive">>
+<<.operator-example 2 "[[white]colour-darken[0.5]]" "darkening white by half gives a mid grey">>

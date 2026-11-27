@@ -1,0 +1,42 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Timeless Harmony
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/TimelessHarmony
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #D5CF95
+base-background: #F6F3E2
+base-danger: #b62f1e
+base-highlight: #fce158
+base-ink: #3e2c40
+base-link: #BB8587
+base-paper: #F6F3E2
+base-primary: #7F575A
+base-tab: #D5CF95
+base-tag: #D7A48F
+
+# Palette-specific colours and overrides
+alert-muted-foreground: #A3A381
+code-background: #1918171A
+external-link-foreground: #59669d
+external-link-foreground-hover: #D7A48F
+external-link-foreground-visited: #7e5d83
+highlight-foreground: [tf.colour[foreground]]
+message-background: [tf.colour[tab-background]colour-set-alpha[0.8]]
+muted-foreground: #bfa993
+sidebar-foreground: #ae9888
+sidebar-muted-foreground: #d1ba9e
+sidebar-tab-background: [tf.colour[tab-background]]
+sidebar-tab-border-selected: [tf.colour[tab-border]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.8]]
+site-title-foreground: [tf.colour[primary]]
+tiddler-controls-foreground: #D5CF95
+tiddler-controls-foreground-hover: #96723a
+tiddler-controls-foreground-selected: #6d5128
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-editor-border]]
+tiddler-title-foreground: [tf.colour[primary]]

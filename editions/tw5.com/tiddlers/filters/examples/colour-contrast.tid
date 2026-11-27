@@ -1,0 +1,9 @@
+created: 20260720103000000
+modified: 20260720103000000
+tags: [[colour-contrast Operator]] [[Operator Examples]]
+title: colour-contrast Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[black]] [[white]] +[colour-contrast[]]" "black on white has the maximum contrast of approximately 100">>
+<<.operator-example 2 "[[navy]] [[yellow]] +[colour-contrast[]]" "navy and yellow contrast strongly">>
+<<.operator-example 3 "[[black]] [[silver]] [[white]] +[colour-contrast[]]" "three input colours give two contrast values">>

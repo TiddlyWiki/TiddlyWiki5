@@ -1,0 +1,9 @@
+created: 20260722103000000
+modified: 20260722103000000
+tags: [[colour-composite Operator]] [[Operator Examples]]
+title: colour-composite Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[#1919191A]colour-composite[white]]" "a 10% near-black wash over white gives a light grey">>
+<<.operator-example 2 "[[#EFEFEF1A]colour-composite[#333333]]" "the same idiom in a dark palette gives a slightly lightened grey">>
+<<.operator-example 3 "[[red]colour-composite[white]]" "opaque colours are returned unchanged">>

@@ -1,0 +1,8 @@
+created: 20260720103000000
+modified: 20260720103000000
+tags: [[colour-lighten Operator]] [[Operator Examples]]
+title: colour-lighten Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[navy]colour-lighten[0.5]]" "raising the lightness of navy by half gives a brighter blue">>
+<<.operator-example 2 "[[#404040]colour-lighten[1]]" "a parameter of 1 doubles the lightness of this dark grey">>

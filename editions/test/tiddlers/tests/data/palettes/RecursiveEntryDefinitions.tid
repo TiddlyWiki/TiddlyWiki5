@@ -1,0 +1,35 @@
+title: Operators/Palettes/RecursiveEntryDefinitions
+description: Palette entries with recursive definitions are blanked and reported as test failures
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+(<<colour self-ref>>)
+(<<colour background>>)
+(<$text text={{{ [[$:/temp/palette-colours]getindex[?recursion-self-ref]] }}}/>)
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+MyPalette
++
+title: MyPalette
+name: My Palette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+
+self-ref: [function[colour],[self-ref]]
+background: #fff
++
+title: ExpectedResult
+
+<p>()
+(#fff)
+(the definition of 'self-ref' is recursive)</p>

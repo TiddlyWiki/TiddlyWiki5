@@ -1,0 +1,45 @@
+title: Operators/Palettes/CustomisationLayer
+description: A customisation layer overrides the palette it imports, and dormant layers are ignored
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+(<<colour page-background>>)
+(<<colour background>>)
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+MyPalette
++
+title: MyPalette
+name: My Palette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+
+page-background: #d4e4f4
+background: #ffffff
++
+title: $:/config/PaletteCustomisations/MyPalette
+palette-import: MyPalette
+type: application/x-tiddler-dictionary
+
+page-background: #123456
++
+title: $:/config/PaletteCustomisations/OtherPalette
+palette-import: OtherPalette
+type: application/x-tiddler-dictionary
+
+background: #999999
++
+title: ExpectedResult
+
+<p>(#123456)
+(#ffffff)</p>

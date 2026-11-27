@@ -1,0 +1,34 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Sweet Serenade
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/SweetSerenade
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #FFEBD3
+base-background: #D2E9F3
+base-danger: #ed3443
+base-highlight: #ffd253
+base-ink: #3b3b3b
+base-link: #da5e87
+base-paper: #FFFFFF
+base-primary: #88C9DF
+base-tab: #FFEBD3
+base-tag: #88C9DF
+
+# Palette-specific colours and overrides
+alert-border: #d6638f
+external-link-foreground: #3c89b8
+external-link-foreground-hover: #ca5770
+external-link-foreground-visited: #9c6396
+highlight-foreground: [tf.colour[foreground]]
+sidebar-tab-background: #88C9DF
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+site-title-foreground: #1E81B9
+tiddler-controls-foreground: [tf.colour[primary]]
+tiddler-controls-foreground-hover: #216695
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

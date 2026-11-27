@@ -1,0 +1,19 @@
+title: $:/core/ui/Palettes/Preview/Alert
+tags: $:/tags/Preview/Page
+
+\whitespace trim
+<div class="tc-palette-preview-thumbnail-alert" style.background-color=<<colour alert-background>>>
+	<div class="tc-palette-preview-thumbnail-alert-border" style.border-color=<<colour alert-border>>>
+		<div style.color=<<colour foreground>>>
+			<div class="tc-palette-preview-thumbnail-alert-subtitle" style.color=<<colour alert-muted-foreground>>>
+				Lorem Ipsum
+				<div class="tc-palette-preview-thumbnail-alert-highlight" style.color=<<colour alert-highlight>>>
+					(Count: 1)
+				</div>
+			</div>
+			<div class="tc-palette-preview-thumbnail-alert-body">
+				Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do Eiusmod Tempor Incididunt.
+			</div>
+		</div>
+	</div>
+</div>

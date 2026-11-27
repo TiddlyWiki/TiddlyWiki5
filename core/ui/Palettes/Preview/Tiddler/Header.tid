@@ -1,0 +1,14 @@
+title: $:/core/ui/Palettes/Preview/Tiddler/Header
+tags: $:/tags/Preview/Tiddler
+
+\whitespace trim
+<div class="tc-palette-preview-thumbnail-tiddler-header">
+	<div class="tc-palette-preview-thumbnail-tiddler-title" style.color=<<colour tiddler-title-foreground>>>
+		<$text text=<<title>>/>
+	</div>
+	<div class="tc-palette-preview-thumbnail-tiddler-toolbar" style.fill=<<colour tiddler-controls-foreground>>>
+		{{$:/core/images/down-arrow}}
+		{{$:/core/images/edit-button}}
+		{{$:/core/images/close-button}}
+	</div>
+</div>

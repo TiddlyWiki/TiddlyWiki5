@@ -5,7 +5,7 @@ title: $:/core/stylesheets/custom-properties
 /* Tiddlywiki's CSS properties */
 
 :root {
-	<$list filter="[[$:/palettes/Vanilla]indexes[]]">
+	<$list filter="[[$:/temp/palette-colours]indexes[]!prefix[?]]">
 	--tpc-<<currentTiddler>>: <$transclude $variable="colour" $mode="inline" name=<<currentTiddler>>/>;
 	</$list>
 

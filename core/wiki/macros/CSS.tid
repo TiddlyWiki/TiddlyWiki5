@@ -1,17 +1,174 @@
 title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
-<!-- Needs to stay that way for backwards compatibility. See GH issue: #8326 -->
-\define colour(name)
-\whitespace trim
-<$transclude tiddler={{$:/palette}} index="$name$">
-	<$transclude tiddler="$:/palettes/Vanilla" index="$name$">
-		<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
-	</$transclude>
-</$transclude>
-\end
+\procedure actions-compile-palette-filtered(consolidatedPalette,outputPalette)
+<!-- The $:/config/DefaultColourMappings/ fallback used below is unused by the core and is retained for compatibility with third party plugins -->
+<!-- Note the join, needed to cope with palette entries containing spaces -->
+\function tf.colour(name) [<consolidatedPalette>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :map[subfilter:all<currentTiddler>join[ ]]
+\function colour(name) [tf.colour<name>]
+\function color(name) [tf.colour<name>]
+<!-- Make the colour function use the input palette -->
+<$list filter="[<consolidatedPalette>indexes[]sort[]]" variable="colour-name">
+	<$let filter-text={{{ [<consolidatedPalette>getindex<colour-name>] :else[[$:/config/DefaultColourMappings/]addsuffix<colour-name>get[text]] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] }}}>
+		<!-- Note the join, needed to cope with palette entries containing spaces -->
+		<$action-setfield $tiddler=<<outputPalette>> $index=<<colour-name>> $value={{{ [subfilter:all<filter-text>join[ ]] +[join[ ]] }}}/>
+	</$let>
+</$list>
+\end actions-compile-palette-filtered
 
-\define color(name) <<colour $name$>>
+\procedure actions-compile-palette-import(inputPalette,outputPalette,exclusions:"",scheme)
+<%if [enlist<exclusions>!match<inputPalette>count[]] :map[enlist<exclusions>count[]compare:number:eq<currentTiddler>] +[!match[]] %>
+		<$set name="exclusions" filter="[enlist<exclusions>] [<inputPalette>]">
+			<!-- Recursively import any imported palette -->
+			<$let
+				prefixed-palette-import={{{ [[palette-import@]addsuffix<scheme>] }}}
+				inputPalette={{{ [<inputPalette>get<prefixed-palette-import>has[title]] :else[<inputPalette>get[palette-import]] }}}
+			>
+				<%if [<inputPalette>has[title]] %>
+					<$transclude $variable="actions-compile-palette-import" inputPalette=<<inputPalette>> outputPalette=<<outputPalette>> exclusions=<<exclusions>> scheme=<<scheme>>/>
+				<%endif%>
+			</$let>
+			<!-- Copy the unsuffixed palette entries -->
+			<$action-setmultiplefields $tiddler=<<outputPalette>> $indexes="[<inputPalette>indexes[]!regexp[@]sort[]]" $values="[<inputPalette>indexes[]!regexp[@]sort[]] :map[<inputPalette>getindex<currentTiddler>]"/>
+			<!-- Copy the suffixed palette entries with the suffix stripped, overriding any unsuffixed entries of the same name -->
+			<%if [<scheme>!is[blank]] %>
+				<$let
+					prefixed-scheme={{{ [<scheme>addprefix[@]] }}}
+				>
+					<$action-setmultiplefields $tiddler=<<outputPalette>> $indexes="[<inputPalette>indexes[]suffix<prefixed-scheme>sort[]removesuffix<prefixed-scheme>]" $values="[<inputPalette>indexes[]suffix<prefixed-scheme>sort[]] :map[<inputPalette>getindex<currentTiddler>]"/>
+				</$let>
+			<%endif%>
+			<!-- Copy the fields from the palette -->
+			<$action-setmultiplefields $tiddler=<<outputPalette>> $fields="[<inputPalette>fields[]sort[]] -title -tags -text -type" $values="[<inputPalette>fields[]sort[]] -title -tags -text -type :map[<inputPalette>get<currentTiddler>]"/>
+		</$set>
+<%endif%>
+\end actions-compile-palette-import
+
+\procedure actions-compile-palette(inputPalette,outputPalette)
+\procedure tv-action-refresh-policy() always
+<$let
+	consolidatedPalette="$:/temp/palette-consolidated"
+>
+	<!-- Compute the current scheme -->
+	<$let
+		color-scheme-filter={{{ [<inputPalette>get[color-scheme]] :else[<inputPalette>get[palette-import]get[color-scheme]] :else[[light]] }}}
+		scheme={{{ [subfilter:all<color-scheme-filter>] }}}
+	>
+		<!-- Clear the consolidated palette that stores the result of flattening the chain of imported input palettes -->
+		<$action-deletetiddler $tiddler=<<consolidatedPalette>>/>
+		<$action-setfield $tiddler=<<consolidatedPalette>> type="application/x-tiddler-dictionary"/>
+		<!-- Clear the output palette that stores the plain CSS values of palette entries -->
+		<$action-deletetiddler $tiddler=<<outputPalette>>/>
+		<$action-setfield $tiddler=<<outputPalette>> type="application/x-tiddler-dictionary"/>
+		<!-- Import the background palettes -->
+		<$list filter="[all[shadows+tiddlers]tag[$:/tags/BackgroundPalette]sort[]]" variable="palette-name">
+			<$transclude $variable="actions-compile-palette-import" inputPalette=<<palette-name>> outputPalette=<<consolidatedPalette>> scheme=<<scheme>>/>
+		</$list>
+		<!-- Consolidate the chain of palettes -->
+		<$transclude $variable="actions-compile-palette-import" inputPalette=<<inputPalette>> outputPalette=<<consolidatedPalette>> scheme=<<scheme>>/>
+		<!-- Save the current scheme in the output tiddler -->
+		<$action-setfield $tiddler=<<outputPalette>> $field="color-scheme" $value=<<scheme>>/>
+		<!-- Compile the temporary palette to the output palette -->
+		<$transclude $variable="actions-compile-palette-filtered" consolidatedPalette=<<consolidatedPalette>> outputPalette=<<outputPalette>>/>
+		<!-- Blank any entries with recursive definitions, reporting them via the readability test mechanism -->
+		<$list filter="[<outputPalette>indexes[]!prefix[?]] :filter[<outputPalette>getindex<currentTiddler>regexp[Excessive filter recursion]]" variable="entry-name">
+			<$action-setfield $tiddler=<<outputPalette>> $index=<<entry-name>> $value=""/>
+			<$action-setfield $tiddler=<<outputPalette>> $index={{{ [<entry-name>addprefix[?recursion-]] }}} $value={{{ [[the definition of ']addsuffix<entry-name>addsuffix[' is recursive]] }}}/>
+		</$list>
+	</$let>
+</$let>
+\end actions-compile-palette
+
+<!-- Customisations of the current palette are stored in a layer tiddler that imports the palette itself -->
+\function tf.palette-customisations-layer()
+[{$:/palette}is[tiddler]] [{$:/palette}is[shadow]] :else[[$:/palettes/Vanilla]] :map[addprefix[$:/config/PaletteCustomisations/]]
+\end tf.palette-customisations-layer
+
+\procedure actions-recompile-current-palette()
+\procedure tv-action-refresh-policy() always
+<$let
+	resolvedPalette={{{ [{$:/palette}is[tiddler]] [{$:/palette}is[shadow]] :else[[$:/palettes/Vanilla]] }}}
+	inputPalette={{{ [function[tf.palette-customisations-layer]has[palette-import]] :else[<resolvedPalette>] }}}
+>
+	<$transclude $variable="actions-compile-palette" inputPalette=<<inputPalette>> outputPalette="$:/temp/palette-colours"/>
+</$let>
+\end actions-recompile-current-palette
+
+\procedure tv-palette-name() $:/temp/palette-colours
+
+\function tf.colour(name)
+[<tv-palette-name>getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]]
+\end tf.colour
+
+\function colour(name)
+[tf.colour<name>]
+\end colour
+
+\function color(name)
+[tf.colour<name>]
+\end color
+
+\procedure colour-function-prefix()
+[tf.colour[
+\end colour-function-prefix
+
+\procedure colour-function-suffix()
+]]
+\end colour-function-suffix
+
+\widget $palette.preview(paletteTitle)
+	\whitespace trim
+	<!-- The exclusions parameter guards against palettes that import each other in a loop -->
+	\function colour-inner-get-imported-palette(name,paletteTitle,exclusions)
+	[[palette-import@]addsuffix<scheme>] :map[<paletteTitle>get<currentTiddler>has[title]] +[!match[]] :else[<paletteTitle>get[palette-import]has[title]] +[!match[]] :filter[enlist<exclusions>match<currentTiddler>count[]compare:number:eq[0]] :map[function[colour-inner-descend-imported-palette],<name>,<currentTiddler>,<exclusions>,<paletteTitle>] +[!match[]] 
+	\end colour-inner-get-imported-palette
+
+	<!-- Helper to extend the exclusions list with the parent palette before descending -->
+	\function colour-inner-descend-imported-palette(name,paletteTitle,exclusions,parentTitle)
+	[enlist<exclusions>] [<parentTitle>] +[format:titlelist[]join[ ]] :map[function[colour-inner-get-palette-entry],<name>,<paletteTitle>,<currentTiddler>]
+	\end colour-inner-descend-imported-palette
+
+	\function colour-inner-get-palette-entry(name,paletteTitle,exclusions)
+	[<name>addsuffix[@]addsuffix<scheme>] :map[<paletteTitle>getindex<currentTiddler>] +[!match[]] :else[<paletteTitle>getindex<name>] :map[tf.colour-inner-transform-classic-palette-entry<currentTiddler>] :else[function[colour-inner-get-imported-palette],<name>,<paletteTitle>,<exclusions>]
+	\end colour-inner-get-palette-entry
+
+	<!-- Note the join, needed to cope with palette entries containing spaces -->
+	\function tf.colour(name)
+	[function[colour-inner-get-palette-entry],<name>,<paletteTitle>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :map[subfilter:all<currentTiddler>join[ ]]
+	\end tf.colour
+
+	\function colour(name)
+	[tf.colour<name>]
+	\end colour
+
+	\function color(name)
+	[tf.colour<name>]
+	\end color
+
+	<$let
+		color-scheme-filter={{{ [<paletteTitle>get[color-scheme]] :else[<paletteTitle>get[palette-import]get[color-scheme]] :else[[light]] }}}
+		scheme={{{ [subfilter:all<color-scheme-filter>] }}}
+	>
+		<$slot $name="ts-raw"/>
+	</$let>
+\end $palette.preview
+
+\function tf.colour-inner-transform-classic-palette-entry(colour-result)
+[<colour-result>prefix[<<colour ]suffix[>>]removeprefix[<<colour ]removesuffix[>>]addprefix<colour-function-prefix>addsuffix<colour-function-suffix>] :else[<colour-result>]
+\end tf.colour-inner-transform-classic-palette-entry
+
+<!-- Translucent entries are composited over the background entry before their contrast is measured -->
+\function tf.check-colour-contrast-subfunction()
+[function[colour],[background]] =>backdrop [function[colour],<paletteEntryA>colour-composite<backdrop>] =>colourA [function[colour],<paletteEntryB>colour-composite<backdrop>] =>colourB [<colourA>] [<colourB>] +[colour-contrast[]fixed[3]]
+\end tf.check-colour-contrast-subfunction
+
+\function tf.check-colour-contrast(paletteEntryA,paletteEntryB,threshold)
+[function[tf.check-colour-contrast-subfunction]compare:number:gt<threshold>then[ok]] :else[function[tf.check-colour-contrast-subfunction]addsuffix[: ]addsuffix<paletteEntryA>addsuffix[/]addsuffix<paletteEntryB>addsuffix[ contrast is too low]]
+\end tf.check-colour-contrast
+
+\function tf.interpolate-colours(paletteEntryA,paletteEntryB,weight)
+[function[colour],<paletteEntryA>] =>colourA [function[colour],<paletteEntryB>] =>colourB [<weight>colour-interpolate:oklch<colourA>,<colourB>]
+\end tf.interpolate-colours
 
 \procedure datauri(title)
 <$macrocall $name="makedatauri" type={{{ [<title>get[type]] }}} text={{{ [<title>get[text]] }}} _canonical_uri={{{ [<title>get[_canonical_uri]] }}}/>

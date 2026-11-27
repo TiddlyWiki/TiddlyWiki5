@@ -1,0 +1,36 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: Flowers & Dreams
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/FlowersAndDreams
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #fbf4f0
+base-background: #F5C9DE
+base-danger: #e73414
+base-highlight: #efca4e
+base-ink: #67608b
+base-link: #cf6794
+base-paper: #EDE2DF
+base-primary: #EC97BA
+base-tab: #C9B8E2
+base-tag: #BACCBF
+
+# Palette-specific colours and overrides
+alert-highlight: #e7407f
+code-background: #1817161A
+external-link-foreground: #684f99
+external-link-foreground-hover: #c63c6e
+external-link-foreground-visited: #836077
+highlight-foreground: [tf.colour[foreground]]
+sidebar-muted-foreground: #74668a
+sidebar-tab-background: [tf.colour[tab-background]]
+sidebar-tab-border-selected: [tf.colour[sidebar-tab-border]]
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.5]]
+site-title-foreground: [tf.colour[foreground]]
+tiddler-controls-foreground-selected: #703074
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]

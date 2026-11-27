@@ -167,7 +167,7 @@ The second ESC tries to close the "draft tiddler"
 <!-- keep those variables because they may "bleed" into macros using old syntax -->
 <!-- "nonSystemTagsFilter", "systemTagsFilter" __need to be the same__ as fields: "first-search-filter", "second-search-filter" -->
 <$let
-	palette={{$:/palette}}
+	palette="$:/temp/palette-colours"
 	colourA={{{ [<palette>getindex[foreground]] }}}
 	colourB={{{ [<palette>getindex[background]] }}}
 	fallbackTarget={{{ [<palette>getindex[tag-background]] }}}

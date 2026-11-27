@@ -1,0 +1,21 @@
+{
+	"tiddlers": [
+		{
+			"file": "color.global.min.v0.6.1.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/core/modules/utils/dom/color.js",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ";\nexports.Color = Color;"
+		},
+		{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/core/modules/utils/dom/color.js/license"
+			}
+		}
+	]
+}

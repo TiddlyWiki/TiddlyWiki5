@@ -1,0 +1,38 @@
+category: 2026
+color-scheme: light
+credits: with thanks to https://yatagarasu.tiddlyhost.com/ by https://spoon-cat.tiddlyhost.com
+name: I am Creative
+palette-import: $:/palettes/2026/base
+tags: $:/tags/Palette
+title: $:/palettes/IamCreative
+type: application/x-tiddler-dictionary
+
+# Base colours
+base-alert: #DCD8D0
+base-background: #788D60
+base-danger: #f8c619
+base-highlight: #95cecd
+base-ink: #323132
+base-link: #427584
+base-paper: #EEEFEA
+base-primary: #427584
+base-tab: #C2CCC4
+base-tag: #C48919
+
+# Palette-specific colours and overrides
+alert-border: #AC6B53
+alert-highlight: #d85158
+external-link-foreground: #1a4564
+external-link-foreground-hover: #a54431
+external-link-foreground-visited: #7a5568
+highlight-foreground: [tf.colour[foreground]]
+sidebar-foreground: #c6c5be
+sidebar-muted-foreground: #B2ADA4
+sidebar-muted-foreground-hover: #DCD8D0
+sidebar-tab-background: #946644
+sidebar-tab-foreground: [tf.colour[background]]
+sidebar-tiddler-link-foreground: #204652
+sidebar-tiddler-link-foreground-hover: [tf.colour[sidebar-tiddler-link-foreground]colour-set-alpha[0.667]]
+tiddler-editor-border-image: #ffffff
+tiddler-editor-fields-even: [tf.colour[tiddler-controls-foreground]colour-set-alpha[0.5]]
+tiddler-title-foreground: #AC6B53

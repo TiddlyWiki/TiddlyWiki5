@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/palettes-legacy/readme
+
+This plugin contains nineteen colour palettes that shipped in the core of TiddlyWiki prior to v5.5.0: Blanca, Blue, ~BrightMute, ~ContrastDark, ~ContrastLight, ~CupertinoDark, ~DarkPhotos, ~DesertSand, ~FlexokiDark, ~FlexokiLight, ~GruvBoxDark, Nord, Rocker, ~SolarFlare, ~SolarizedDark, ~SolarizedLight, ~SpartanDay, ~SpartanNight and Twilight.
+
+Install this plugin to continue using any of these palettes in a wiki upgraded to v5.5.0 or later.

@@ -1,0 +1,9 @@
+created: 20260718221135000
+modified: 20260718221135000
+tags: Filters [[Filter Operators]]
+title: Colour Operators
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.5.0">> Colour operators are [[filter operators|Filter Operators]] that manipulate CSS colour values. They are backed by the [[color.js|https://colorjs.io/]] library, and support wide gamut colours such as Display P3. See ColourPalettes for background.
+
+<<list-links "[tag[Colour Operators]]" class:"multi-columns">>

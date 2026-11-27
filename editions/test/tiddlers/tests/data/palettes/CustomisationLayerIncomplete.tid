@@ -1,0 +1,35 @@
+title: Operators/Palettes/CustomisationLayerIncomplete
+description: A customisation layer without a palette-import field is ignored
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+(<<colour page-background>>)
++
+title: Actions
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<actions-recompile-current-palette>>
++
+title: $:/palette
+
+MyPalette
++
+title: MyPalette
+name: My Palette
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+
+page-background: #d4e4f4
++
+title: $:/config/PaletteCustomisations/MyPalette
+type: application/x-tiddler-dictionary
+
+page-background: #123456
++
+title: ExpectedResult
+
+<p>(#d4e4f4)</p>
