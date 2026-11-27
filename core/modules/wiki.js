@@ -500,15 +500,13 @@ Return an array of tiddler titles that are directly linked within the given pars
  */
 exports.extractLinks = function(parseTreeRoot) {
 	// Count up the links
-	var links = [],
+	var linkSet = new Set(),
 		checkParseTree = function(parseTree) {
 			for(var t=0; t<parseTree.length; t++) {
 				var parseTreeNode = parseTree[t];
 				if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
 					var value = parseTreeNode.attributes.to.value;
-					if(links.indexOf(value) === -1) {
-						links.push(value);
-					}
+					linkSet.add(parseTreeNode.attributes.to.value);
 				}
 				if(parseTreeNode.children) {
 					checkParseTree(parseTreeNode.children);
@@ -516,7 +514,7 @@ exports.extractLinks = function(parseTreeRoot) {
 			}
 		};
 	checkParseTree(parseTreeRoot);
-	return links;
+	return Array.from(linkSet);
 };
 
 /*
@@ -561,8 +559,7 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 Return an array of tiddler titles that are directly transcluded within the given parse tree. `title` is the tiddler being parsed, we will ignore its self-referential transclusions, only return
  */
 exports.extractTranscludes = function(parseTreeRoot, title) {
-	// Count up the transcludes
-	var transcludes = [],
+	var transcludeSet = new Set(),
 		checkParseTree = function(parseTree, parentNode) {
 			for(var t=0; t<parseTree.length; t++) {
 				var parseTreeNode = parseTree[t];
@@ -590,18 +587,19 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 						// Old usage with Empty value (like `<$transclude field='created'/>`)
 						value = title;
 					}
-					// Deduplicate the result.
-					if(value && transcludes.indexOf(value) === -1) {
-						$tw.utils.pushTop(transcludes,value);
+					
+					if(value) {
+						transcludeSet.add(value);
 					}
 				}
 				if(parseTreeNode.children) {
-					checkParseTree(parseTreeNode.children,parseTreeNode);
+					checkParseTree(parseTreeNode.children, parseTreeNode);
 				}
 			}
 		};
+
 	checkParseTree(parseTreeRoot);
-	return transcludes;
+	return Array.from(transcludeSet);
 };
 
 
@@ -722,112 +720,142 @@ exports.getTagMap = function() {
 /*
 Lookup a given tiddler and return a list of all the tiddlers that include it in the specified list field
 */
-exports.findListingsOfTiddler = function(targetTitle,fieldName) {
+exports.findListingsOfTiddler = function(targetTitle, fieldName) {
 	fieldName = fieldName || "list";
 	var wiki = this;
-	var listings = this.getGlobalCache("listings-" + fieldName,function() {
+	var listings = this.getGlobalCache("listings-" + fieldName, function() {
 		var listings = Object.create(null);
-		wiki.each(function(tiddler,title) {
+		wiki.each(function(tiddler, title) {
 			var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
-			if(list) {
-				for(var i = 0; i < list.length; i++) {
-					var listItem = list[i],
-						listing = listings[listItem] || [];
-					if(listing.indexOf(title) === -1) {
-						listing.push(title);
+			if(list && list.length > 0) {
+				var uniqueList = list.length > 1 ? Array.from(new Set(list)) : list;
+				for(var i = 0; i < uniqueList.length; i++) {
+					var listItem = uniqueList[i];
+					if(!listings[listItem]) {
+						listings[listItem] = [];
 					}
-					listings[listItem] = listing;
+					listings[listItem].push(title);
 				}
 			}
 		});
 		return listings;
 	});
-	return (listings[targetTitle] || []).slice(0);
+	
+	// Return a copy so caller modifications don't mutate cached arrays
+	return listings[targetTitle] ? listings[targetTitle].slice(0) : [];
 };
 
 /*
 Sorts an array of tiddler titles according to an ordered list
 */
-exports.sortByList = function(array,listTitle) {
-	var self = this,
-		replacedTitles = Object.create(null);
-	// Given a title, this function will place it in the correct location
-	// within titles.
-	function moveItemInList(title) {
-		if(!$tw.utils.hop(replacedTitles, title)) {
-			replacedTitles[title] = true;
-			var newPos = -1,
-				tiddler = self.getTiddler(title);
-			if(tiddler) {
-				var beforeTitle = tiddler.fields["list-before"],
-					afterTitle = tiddler.fields["list-after"];
-				if(beforeTitle === "") {
-					newPos = 0;
-				} else if(afterTitle === "") {
-					newPos = titles.length;
-				} else if(beforeTitle) {
-					// if this title is placed relative
-					// to another title, make sure that
-					// title is placed before we place
-					// this one.
-					moveItemInList(beforeTitle);
-					newPos = titles.indexOf(beforeTitle);
-				} else if(afterTitle) {
-					// Same deal
-					moveItemInList(afterTitle);
-					newPos = titles.indexOf(afterTitle);
-					if(newPos >= 0) {
-						++newPos;
-					}
-				}
-				// If a new position is specified, let's move it
-				if(newPos !== -1) {
-					// get its current Pos, and make sure
-					// sure that it's _actually_ in the list
-					// and that it would _actually_ move
-					// (#4275) We don't bother calling
-					//         indexOf unless we have a new
-					//         position to work with
-					var currPos = titles.indexOf(title);
-					if(currPos >= 0 && newPos !== currPos) {
-						// move it!
-						titles.splice(currPos,1);
-						if(newPos >= currPos) {
-							newPos--;
-						}
-						titles.splice(newPos,0,title);
-					}
-				}
-			}
-		}
-	}
-	var list = this.getTiddlerList(listTitle);
+exports.sortByList = function(array, listTitle) {
 	if(!array || array.length === 0) {
 		return [];
-	} else {
-		var titles = [], t, title;
-		// First place any entries that are present in the list
-		for(t=0; t<list.length; t++) {
-			title = list[t];
-			if(array.indexOf(title) !== -1) {
-				titles.push(title);
-			}
-		}
-		// Then place any remaining entries
-		for(t=0; t<array.length; t++) {
-			title = array[t];
-			if(list.indexOf(title) === -1) {
-				titles.push(title);
-			}
-		}
-		// Finally obey the list-before and list-after fields of each tiddler in turn
-		var sortedTitles = titles.slice(0);
-		for(t=0; t<sortedTitles.length; t++) {
-			title = sortedTitles[t];
-			moveItemInList(title);
-		}
-		return titles;
 	}
+
+	const list = this.getTiddlerList(listTitle) || [],
+		arraySet = new Set(array),
+		listSet = new Set(list),
+		titles = [];
+
+	// Place entries present in both list and array (in list order)
+	for(const item of list) {
+		if(arraySet.has(item)) {
+			titles.push(item);
+			arraySet.delete(item);
+		}
+	}
+
+	// Append remaining entries from array that weren't in list
+	for(const title of array) {
+		if(!listSet.has(title)) {
+			titles.push(title);
+		}
+	}
+
+	// Fast index tracking map to avoid indexOf during relative moves
+	const titleIndexMap = new Map();
+	for(let i = 0; i < titles.length; i++) {
+		titleIndexMap.set(titles[i], i);
+	}
+
+	const visited = new Set();
+
+	// Given a title, this function will place it in the correct location
+	// within titles.
+	const moveItemInList = (item) => {
+		if(visited.has(item)) {
+			return;
+		}
+		visited.add(item);
+
+		const tiddler = this.getTiddler(item);
+		if(!tiddler) {
+			return;
+		}
+
+		const fields = tiddler.fields,
+			beforeTitle = fields["list-before"],
+			afterTitle = fields["list-after"];
+
+		let newPos = -1;
+
+		if(beforeTitle === "") {
+			newPos = 0;
+		} else if(afterTitle === "") {
+			newPos = titles.length;
+		} else if(beforeTitle) {
+			// Ensure the referenced title is positioned first
+			moveItemInList(beforeTitle);
+
+			const beforePos = titleIndexMap.get(beforeTitle);
+			if(beforePos !== undefined) {
+				newPos = beforePos;
+			}
+		} else if(afterTitle) {
+			// Ensure the referenced title is positioned first
+			moveItemInList(afterTitle);
+
+			const afterPos = titleIndexMap.get(afterTitle);
+			if(afterPos !== undefined) {
+				newPos = afterPos + 1;
+			}
+		}
+
+		const currPos = titleIndexMap.get(item);
+
+		// Item isn't in the list or no valid destination was found
+		if(currPos === undefined || newPos === -1) {
+			return;
+		}
+
+		// No movement required
+		if(currPos === newPos || newPos === currPos + 1) {
+			return;
+		}
+
+		// Move the item
+		titles.splice(currPos, 1);
+		if(newPos > currPos) {
+			newPos--;
+		}
+		titles.splice(newPos, 0, item);
+
+		// Re-index only the affected range
+		const start = Math.min(currPos, newPos),
+			end = Math.max(currPos, newPos);
+		for(let idx = start; idx <= end; idx++) {
+			titleIndexMap.set(titles[idx], idx);
+		}
+	};
+
+	// Finally obey the list-before and list-after fields of each tiddler in turn
+	const initialOrder = titles.slice(0);
+	for(const title of initialOrder) {
+		moveItemInList(title);
+	}
+
+	return titles;
 };
 
 exports.getSubTiddler = function(title,subTiddlerTitle) {
