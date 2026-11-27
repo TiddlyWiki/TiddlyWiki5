@@ -1,25 +1,32 @@
 title: $:/language/Help/server
-description: TiddlyWiki に HTTP サーバのインターフェースを提供
+description: (非推奨: 'listen'コマンドを参照) TiddlyWikiにHTTPサーバのインターフェースを提供
 
-TiddlyWiki5 に組み込まれているサーバー機能は非常にシンプルなものです。TiddlyWeb との互換性はありますが、インターネット上で安定して公開するために必要となるいくつもの機能がサポートされていません。
-
-root 階層では指定された Tiddler のレンダリングを行います。root 階層以外では JSON エンコードされた個々の Tiddler や、一般的な HTTP 操作（`GET`, `PUT`, `DELETE`）をサポートします。
+HTTP経由でWikiを提供するためのレガシーコマンド。
 
 ```
---server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host>
+--server <port> <root-tiddler> <root-render-type> <root-serve-type> <username> <password> <host> <path-prefix> <debug-level>
 ```
 
 以下のパラメータがあります:
 
-* ''port'' - 待ち受けるポート番号（デフォルトは "8080"）
-* ''roottiddler'' - root 階層になる Tiddler（デフォルトは "$:/core/save/all"）
-* ''rendertype'' - root Tiddler がレンダリングされるときの ContentType（デフォルトは "text/plain"）
-* ''servetype'' - root Tiddler がリクエストされるときの ContentType（デフォルトは "text/html"）
-* ''username'' - 編集した Tiddler を保存する際のデフォルトユーザ名
-* ''password'' - ベーシック認証用のパスワード
-* ''host'' - サーバーとなるホスト名（デフォルトは "127.0.0.1" つまり "localhost"）
+```
+  port              待ち受けるポート番号。数値以外の値は、システム環境変数として
+                    解釈され、ポート番号が抽出されます。(デフォルトは "8080")
+  root-tiddler      root 階層になる Tiddler（デフォルトは "$:/core/save/all"）
+  root-render-type  root Tiddler がレンダリングされるときの ContentType
+                    （デフォルトは "text/plain"）
+  root-serve-type   root Tiddler がリクエストされるときの ContentType
+                    （デフォルトは "text/html"）
+  username          編集した Tiddler を保存する際のデフォルトユーザ名
+  password          オプションのベーシック認証用のパスワード
+  host              オプションのサーバーとなるホスト名
+                    （デフォルトは "127.0.0.1" つまり "localhost"）
+  path-prefix       オプションのパスのプレフィックス
+  debug-level       オプションのデバッグレベル。リクエストの詳細を表示するには
+                    "debug"に設定します(デフォルトは"none")
+```
 
-password パラメータが指定された場合ブラウザはユーザ名とパスワードを尋ねるようになります。なお、このパスワードはネットワーク上を平文で流れるため、この実装はインターネット上に公開するような一般的な使用には適していないことに注意してください。
+password パラメータが指定された場合ブラウザはユーザ名とパスワードを尋ねるようになります。なお、パスワードはネットワーク上を平文で流れるため、この実装は信頼できるネットワークやHTTPS接続でのみ使用してください。
 
 使用例:
 
@@ -27,5 +34,16 @@ password パラメータが指定された場合ブラウザはユーザ名と�
 --server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
 ```
 
-同時に複数の TiddlyWiki サーバーを起動したい場合は、それぞれに別々のポート番号を割り当てる必要があります。
+ホスト名またはパスのプレフィックスを設定し、パスワードを必須にしたくない場合は、ユーザ名とパスワードを空の文字列として指定できます。
 
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+このようなアドレスを使用すると、システムがローカルネットワークに公開されます。インスタンスをローカルネットワーク全体に公開する方法や、考えられるセキュリティ上の懸念事項については、TiddlyWiki.comのWebServer Tiddlerを参照してください。
+
+同時に複数の TiddlyWiki サーバーを起動したい場合は、それぞれに別々のポート番号を割り当てる必要があります。ポート番号をNode.jsプロセスに渡すためには、環境変数を使用すると便利です。この例では、"MY_PORT_NUMBER"という環境変数を参照しています: 
+
+```
+--server MY_PORT_NUMBER $:/core/save/all text/plain text/html MyUserName passw0rd
+```

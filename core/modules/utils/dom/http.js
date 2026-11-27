@@ -61,7 +61,6 @@ HttpClient.prototype.initiateHttpRequest = function(options) {
 };
 
 HttpClient.prototype.cancelAllHttpRequests = function() {
-	var self = this;
 	if(this.requests.length > 0) {
 		for(var t=this.requests.length - 1; t--; t>=0) {
 			var requestInfo = this.requests[t];
@@ -106,7 +105,7 @@ bearerAuthTokenFromStore: name of password store entry contain bear authorizatio
 */
 function HttpClientRequest(options) {
 	var self = this;
-	console.log("Initiating an HTTP request",options)
+	console.log("Initiating an HTTP request",options);
 	this.wiki = options.wiki;
 	this.completionActions = options.oncompletion;
 	this.progressActions = options.onprogress;
@@ -193,11 +192,11 @@ HttpClientRequest.prototype.send = function(callback) {
 					headers: JSON.stringify(headers)
 				};
 				/* Convert data from binary to base64 */
-				if (xhr.responseType === "arraybuffer") {
+				if(xhr.responseType === "arraybuffer") {
 					var binary = "",
 						bytes = new Uint8Array(data),
 						len = bytes.byteLength;
-					for (var i=0; i<len; i++) {
+					for(var i=0; i<len; i++) {
 						binary += String.fromCharCode(bytes[i]);
 					}
 					resultVariables.data = $tw.utils.base64Encode(binary,true);
@@ -211,7 +210,7 @@ HttpClientRequest.prototype.send = function(callback) {
 			},
 			progress: function(lengthComputable,loaded,total) {
 				if(lengthComputable) {
-					setBinding(self.bindProgress,"" + Math.floor((loaded/total) * 100))
+					setBinding(self.bindProgress,"" + Math.floor((loaded/total) * 100));
 				}
 				self.wiki.invokeActionString(self.progressActions,undefined,$tw.utils.extend({},self.variables,{
 					lengthComputable: lengthComputable ? "yes" : "no",
@@ -276,7 +275,7 @@ exports.httpRequest = function(options) {
 		returnProp = options.returnProp || "responseText",
 		request = new XMLHttpRequest(),
 		data = "",
-		f,results;
+		results;
 	// Massage the data hashmap into a string
 	if(options.data) {
 		if(typeof options.data === "string") { // Already a string
@@ -302,14 +301,14 @@ exports.httpRequest = function(options) {
 				options.callback(null,this[returnProp],this);
 				return;
 			}
-		// Something went wrong
-		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,this[returnProp],this);
+			// Something went wrong
+			options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,this[returnProp],this);
 		}
 	};
 	// Handle progress
 	if(options.progress) {
 		request.onprogress = function(event) {
-			console.log("Progress event",event)
+			console.log("Progress event",event);
 			options.progress(event.lengthComputable,event.loaded,event.total);
 		};
 	}

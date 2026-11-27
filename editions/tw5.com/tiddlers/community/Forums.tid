@@ -4,29 +4,23 @@ tags: Community
 title: Forums
 type: text/vnd.tiddlywiki
 
-!!! Users
+! User forums
 
-The official TiddlyWiki forum is a place to talk about ~TiddlyWiki: requests for help, [[announcements|https://talk.tiddlywiki.org/c/announcements/20]] of new releases and plugins, debating new features, or just sharing experiences. You can participate via the associated website, or subscribe via email.
+!! Talk ~TiddlyWiki
+
+As the official ~TiddlyWiki forum, Talk ~TiddlyWiki is a place to talk about ~TiddlyWiki: requests for help, [[announcements|https://talk.tiddlywiki.org/c/announcements/20]] of new releases and plugins, debating new features, or just sharing experiences. You can participate via the associated website, or subscribe via email.
 
 https://talk.tiddlywiki.org/
 
-Other Forums:
+!! Google Groups
 
-!!! Google Groups
-
-<<<
 For the convenience of existing users, we also continue to operate the original ~TiddlyWiki group (hosted on Google Groups since 2005): https://groups.google.com/group/TiddlyWiki
-<<<
 
-! Developer Forums
+! Developer forums
 
 {{Developers}}
 
-! Other Forums
+! Other forums
 
-* [[TiddlyWiki Subreddit|https://www.reddit.com/r/TiddlyWiki5/]]
+* TiddlyWiki Subreddit: [[/r/TiddlyWiki5|https://www.reddit.com/r/TiddlyWiki5/]]
 * Chat on Discord at https://discord.gg/HFFZVQ8
-
-!! Developers
-
-{{Developers}}

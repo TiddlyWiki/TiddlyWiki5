@@ -34,7 +34,6 @@ EditBitmapWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 EditBitmapWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	// Initialise the editor operations if they've not been done already
 	if(!this.editorOperations) {
 		EditBitmapWidget.prototype.editorOperations = {};

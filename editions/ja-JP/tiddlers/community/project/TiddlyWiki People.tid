@@ -1,0 +1,13 @@
+title: TiddlyWiki People
+ja-title: TiddlyWikiの人々
+caption: TiddlyWikiの人々
+modified: 20260207110400714
+original-modified: 20250909171928024
+created: 20250909171928024
+tags: Community About
+
+TiddlyWikiの開発とプロジェクト運営に携わるTiddlyWikiコミュニティのメンバーは、[[コミュニティカードを作成|Submitting a Community Card]]して、プロジェクト計画や組織図に組み込むことができます。コミュニティカードは、TiddlyWikiコミュニティにおけるメンバーの関心や活動を示すこともできます。
+
+{{Community Cards Caveats}}
+
+<<community-card-pill-stack-person personFilter:"[tag[Community/Person]sort[title]]">>

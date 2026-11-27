@@ -1,0 +1,12 @@
+title: ButtonSelection/MissingStateTiddler
+description: A setField button renders when its state tiddler does not exist
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$button setTitle="$:/state/demo" setField="selection" setTo="Alpha" selectedClass="sel">Alpha</$button>
++
+title: ExpectedResult
+
+<p><button aria-checked="false" class="">Alpha</button></p>

@@ -1,0 +1,24 @@
+caption: 強制改行
+created: 20131214165710101
+modified: 20260223103342876
+original-modified: 20240512001649319
+tags: WikiText
+title: Hard Linebreaks in WikiText
+ja-title: Wikiテキストでの強制改行
+type: text/vnd.tiddlywiki
+
+[[Wikiテキストでの段落|Paragraphs in WikiText]]の通常処理では、単一の改行は無視され、二重の改行は段落の終わりとして解釈されます。
+
+この動作は、例えばポエムなど、強制改行を含むコンテンツを扱う場合には不便です。コンテンツブロックに強制改行が含まれていることを示すには、次のようにします:
+
+<<wikitext-example src:'"""
+これは行です
+そしてこれは新しい行です
+一方、これは別の行です
+そしてこの行とは別の
+これは最後の行です
+"""
+
+'>>
+
+<<.tip '注: <strong>Wikiテキストの強制改行</strong>では、パーサーが[[ブロックモード|Block Mode WikiText]]に戻る前の、末尾の`"""`の後に、追加の空行が必要です。'>>

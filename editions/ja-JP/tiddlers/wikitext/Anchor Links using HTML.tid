@@ -1,0 +1,202 @@
+created: 20190311094603013
+modified: 20260308111654603
+original-modified: 20201130064330388
+tags: [[HTML in WikiText]]
+title: Anchor Links using HTML
+ja-title: HTMLを使用したアンカーリンク
+
+<a id=<<qualify "#Top">>></a>
+
+<h2 id="#Introduction:Anchor-Links-using-HTML">''TiddlersでのHTMLアンカーリンク''</h2>
+
+
+
+* <a href=<<qualify "##Introduction">>>何をするものか?</a>
+* <a href=<<qualify "##How-do-I-make-them">>>どうやって作るか?</a>
+* <a href=<<qualify "##Anchor-link-limitations">>>制限と注意すべき点</a>
+* <a href=<<qualify "##More_examples">>>More examples</a>
+* <a href=<<qualify "##Suggestions-for-elements">>>使用するHTML要素の提案</a>
+* <a href=<<qualify "##Suggestions-for-ids">>>使用するターゲット名の提案</a>
+* <a href=<<qualify "##qualify-example">>>トランスクルードによるID重複の回避</a>
+* <a href=<<qualify ##Style_Hints>>>スタイルのヒント</a>
+
+<a id=<<qualify "#Introduction">>></a>
+
+!! 何をするものか?
+
+TiddlyWikiでは、アンカーリンクを使って、レンダリングしたTiddler内のターゲットポイントや個別のセクションにリンクすることができます。これにより、読者は長いTiddlerコンテンツ内を移動しやすくなります。
+
+例えば、このリンク<a href=<<qualify "##Bottom_of_tiddler">>>末尾</a>は、このTiddlerの一番下に移動します。その下の"先頭に戻る"リンクは、このTiddlerの一番上に戻ります。
+
+<a href=<<qualify "##Top">>>先頭に戻る</a>
+
+<a id=<<qualify "#How-do-I-make-them">>></a>
+
+!! どうやって作るか?
+
+アンカーリンクを作成する手順は2ステップだけです。
+
+* まず、希望する場所にターゲットポイント('アンカー'と呼ぶ)を作成します。
+* 次に、読者が必要とする可能性のある場所にリンクを追加します。
+
+それで終わりです。
+
+
+''ステップ1: 'アンカー'(リンクのターゲット)を作成する''
+
+```
+<a id="#Bottom_of_tiddler"></a>
+```
+
+* 任意のHTML5タグに<<.attr id>>属性を追加し、'アドレス'値の前に`#`を1つ配置します。<a href=<<qualify "##Suggestions-for-elements">>>使用できるタグの提案を紹介します。</a>
+* このコードをターゲットの場所に配置します。例: Tiddlerの末尾。
+
+''ステップ2: ターゲットのアンカーへのリンクを作成する''
+
+```
+<a href="##Bottom_of_tiddler">末尾</a>
+```
+* ターゲットとまったく同じ'アドレス'値を使用して`<a href>`リンクを作成しますが、その前に二重の`##`文字が付きます。
+* このコードを、読者にとって最も役立つ場所に配置します。
+
+上記の例は、このTiddlerの上部にある目次など、~TiddlyWikiのさまざまな状況に合わせて調整できます。
+
+''本当にそんなに簡単なのでしょうか? ''
+
+はい、とても簡単です。ただし... ~TiddlyWikiには、標準のHTML5アンカーリンクとは若干異なる点があり、~TiddlyWiki特有の制限もあります。
+
+<a href=<<qualify "##Top">>>先頭に戻る</a>
+
+<h2 id=<<qualify "#Anchor-link-limitations">>>制限と注意すべき点</h2>
+
+''ステップ1:'' ターゲットアンカーの作成
+
+* 標準HTML5 とは異なり、~TiddlyWikiでは、<<.attr id>>属性に続くターゲットアドレス値の前に1文字の`#`を書く必要があります。(例.1の#Bottom_of_tiddlerで使用されている1文字の`#`に注意してください。)
+* 標準のHTML5とは異なり、~TiddlyWikiのアンカーリンクは大文字と小文字を区別します。上記の例では、#Bottom_of_tiddlerは機能しますが、#bottom_of_Tiddlerは機能しません。
+* 一部のブラウザでは、%文字を含むアンカーへのナビゲーションが失敗するバグがあるため、リンクでは%文字を使用しないでください(以下の警告を参照)。
+* <a id=<<qualify #note.1-return>>/>リンク内に空白を使用しないでください(下記の<a href=<<qualify ##note.1>> title="クリックすると注.1に進む">注.1</a>を参照)。
+* 各リンクアドレスはTiddlyWiki内で一意である必要があります。トランスクルージョンによって同じ<<.attr id>>属性のインスタンスが複数作成された場合、上記の条件を満たす最初のインスタンスにナビゲーションが行われます。これを回避するには、次の例と同様のスタイルで、<<.attr id>>属性と<<.attr href>>属性の両方に[[qualifyマクロ|qualify Macro]]を使用します: <a href=<<qualify ##qualify-example>> >トランスクルージョン時にIDの重複を回避する</a>
+
+''ステップ2:'' ターゲットへのリンクの作成
+
+* <<.attr href>>の値は、ターゲットアンカーの<<.attr id>>の値より1文字多い''2文字''の`#`で始まる必要があることに注意してください。 
+* ~TiddlyWikiのアンカーリンクは大文字と小文字が区別されることに注意してください
+
+''ステップ3:'' ターゲットへの移動
+
+通常、リンクをクリックすると、~TiddlyWikiはウィンドウをスクロールして、ターゲットのアンカーがウィンドウの上部に表示されるようになりますが、いくつかの制限があります: 
+
+* ~TiddlyWikiのアンカーリンクは、Tiddlerがストーリーリバー内にない場合、またはサイドバーに表示されていない場合は機能しません。
+* ~TiddlyWikiのアンカーリンクは、Tiddlerがストーリーリバーやサイドバーにあるものの、アンカーでマークされたターゲットポイントがページ上に表示されていない場合(例: Tiddlerが折りたたまれている、または、アンカーが非表示の$revealウィジェット内にある、など)には機能しません。このようなアンカーリンクをCtrl+クリックすると、新しいブラウザウィンドウ/タブが開き、ベースのウェブページが読み込まれ、期待されるTiddlerには移動しません。
+* コントロールパネル > 外観 > 表示スタイルがzoomin(単一ページビュー)に設定されており、Tiddlerがストーリーリバーの先頭にない場合(つまり、表示されていない場合)、Tiddlywikiのアンカーリンクは機能しません。
+* アンカーリンクをクリックすると、ブラウザのナビゲーション履歴が更新され、リンクのhref値がウェブページのURLに追加されます。これは、コントロールパネル > 設定 > 操作履歴の値が"履歴を残さない"に設定されている場合でも発生します。
+
+<$macrocall $name=.note _="""<span id=<<qualify #note.1>>><a href=<<qualify ##note.1-return>> title="click to return">1.</a></span> [ext[HTML5の仕様|https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id]]では、<<.attr id>>属性の値に空白文字を含めてはならないとされています。現在 ^^(2020年12月)^^では、空白文字を含む<<.attr id>>値でも動作する場合があります。ただし、すべてのブラウザで動作するとは限らず、将来的にも動作が保証されるものではありません。"""  />
+
+<<.warning "一部のブラウザでは、 ''id''値に`%`文字と2桁の数字が含まれるアンカーターゲットへの移動に失敗する場合があります。これはブラウザのバグであり、~TiddlyWikiでは修正できません。安全のため、`%`文字の使用は避けてください。">>
+
+<a href=<<qualify "##Top">>>先頭に戻る</a>
+
+<h2 id=<<qualify "#More_examples">>>その他の例</h2>
+いずれの場合も、ターゲットコードは読者が移動する先に配置され、リンクコードは読者の移動元となる場所に配置されます。
+
+```
+<h2 id="#heading-01"> ターゲットの見出し</h2>
+
+<a href="##heading-01">ターゲットの見出しへのリンク</a>
+
+```
+
+次のようになります:
+
+<hr>
+<h2 id="#heading-01">ターゲットの見出し</h2>
+
+<a href="##heading-01">ターゲットの見出しへのリンク</a>
+<hr>
+
+```
+<section id="#unique001">
+
+!! ターゲットのセクション
+
+HTMLタグ`<section>`は通常、章、ヘッダー、フッター、ドキュメントのその他のセクションなど、HTMLドキュメント内のセクションを定義するために使用されます。
+</section>
+
+このアンカーリンクをクリックすると、<a href="##unique001">ターゲットのセクションへのリンク</a>に移動します。
+```
+
+次のようになります:
+
+<hr>
+<section id="#unique001">
+
+!! ターゲットのセクション
+
+HTMLタグ`<section>`は通常、章、ヘッダー、フッター、ドキュメントのその他のセクションなど、HTMLドキュメント内のセクションを定義するために使用されます。
+</section>
+
+このアンカーリンクをクリックすると、<a href="##unique001">ターゲットのセクションへのリンク</a>に移動します。
+<hr>
+
+<a href=<<qualify "##Top">>>先頭に戻る</a>
+
+<h2 id=<<qualify "#Suggestions-for-elements">>>''使用するHTML要素の提案''</h2>
+
+<<.attr id>>属性を使用して位置をマークするHTML要素の提案:
+
+| ! 要素 | ! サンプルコード | ! 備考 |
+|<<.def anchor>> |<$text text="""<a id="#part001-of-TiddlerName"></a>"""/> |どこでも完璧に動作するはず|
+|<<.def heading>> |<$text text="""<h2 id="#a-new-heading">新しい見出し</h2>"""/>|見出しにも<<.attr id>>属性を持たせることができる|
+|<<.def section>> |<$text text="""<section id="#sect001-of-TiddlerName">これは新しいセクションです</section>"""/>|`section`要素を使用する場合、独自の<<.attr id>>を持つべき|
+|<<.def span>> |<$text text="""<span id="#007">ここにマーカー007があります</span>"""/>|`span`要素を使用して段落の途中に<<.attr id>>を挿入することができる|
+
+<a href=<<qualify "##Top">>>先頭に戻る</a>
+
+<h2 id=<<qualify "#Suggestions-for-ids">>>使用するターゲット名の提案</h2>
+
+| ! | ! サンプルコード | ! 備考 |
+|<<.def 推奨>> |<$text text="""<a id="#part001-of-TiddlerName"></a>"""/> |Tiddler名を含めてると、一意の<<.attr id>>が簡単にできます|
+|<<.def "回避: 空白">> |<$text text="""<h2 id="#0 0 1">新しい見出し</h2>"""/>|空白はすべてのブラウザで機能するとは保証されません|
+|<<.def "回避: %">> |<$text text="""<section id="#sect001%20of%20TiddlerName">これは新しいセクションです</section>"""/>|URIエンコード(スペースを%20に変換する等)は一部のブラウザで機能しない可能性があります|
+|<<.def "回避: 重複ID">> |<$text text="""<span id="#007">ここにマーカー007があります</span>"""/>|<<.attr id>>値はWiki全体で一意である必要があります|
+|<<.def "回避: 重複ID">> |<$text text="""<a id="#007"></a>"""/>別のマーカー007です|<<.attr id>>値が重複している場合、一方が無視されます|
+
+<a href=<<qualify "##Top">>>先頭に戻る</a>
+
+<h2 id=<<qualify "#qualify-example">>> ''トランスクルードによるID重複の回避''</h2>
+<<.attr id>>とこのヘッダーへのアンカーリンクは次のように作成されています:
+
+```
+<a href=<<qualify "##qualify-example">>>トランスクルードによるID重複の回避</a>
+
+<h2 id=<<qualify "#qualify-example">>>トランスクルードによるID重複の回避</h2>
+```
+;これが機能するために:
+
+* <<.attr href>>と<<.attr id>>の値は、[[属性のマクロ呼び出し構文|HTML in WikiText]]が使用され、[[qualifyマクロ|qualify Macro]]を使用して一意の<<.attr id>>値が作成されます。
+* <<.attr id>>とアンカーリンクは両方とも同じTiddler内にある必要があります。
+* `=`と`<<`の間には引用符を入れないでください。
+* ターゲット名を囲む二重引用符はオプションですが、推奨されます。
+* ターゲット名の後には、`<<qualify`マクロを閉じる2つの`>>`文字と、`<a`タグを閉じる1つの`>`文字、全部で3つの`>`文字が必要です。
+
+<a href=<<qualify "##Top">>>先頭に戻る</a>
+
+<h2 id=<<qualify #Style_Hints>>>''スタイルのヒント'' </h2>
+
+リンクを外部リンクのように見せたくない場合は、`<a>`要素の<<.attr class>>属性に値<<.def tc-tiddlylink>>を指定します。また、リンクを斜体と太字にしたい場合は、以下のように追加のクラス<<.def "tc-tiddlylink-missing tc-tiddlylink-shadow">>を指定します。
+
+```
+<a class="tc-tiddlylink" href="##Introduction:Anchor-Links-using-HTML">先頭に戻る</a> または、<a class="tc-tiddlylink tc-tiddlylink-missing tc-tiddlylink-shadow" href=<<qualify ##Hints>>ヒント</a>に戻る.
+```
+<a class="tc-tiddlylink" href="##Introduction:Anchor-Links-using-HTML">先頭に戻る</a> または、<a class="tc-tiddlylink tc-tiddlylink-missing tc-tiddlylink-shadow" href=<<qualify ##Style_Hints>>>スタイルのヒント</a>に戻る.
+
+サイドバーの目次のリンクに<<.attr id>>属性を含める場合は、以下に示す方法と同様に、リストされたTiddlerの<<.field caption>>フィールドに属性を含めることができます:
+
+```
+<span id=#some-value>キャプション</span>
+```
+
+<a id=<<qualify "#Bottom_of_tiddler">>></a>
+
+<a href=<<qualify "##Top">>>先頭に戻る</a>

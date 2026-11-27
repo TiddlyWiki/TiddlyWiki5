@@ -122,6 +122,9 @@ js.configs.recommended,
         "@stylistic/lines-around-comment": "off",
         "@stylistic/lines-around-directive": "off",
         "@stylistic/lines-between-class-members": "error",
+        "@stylistic/no-trailing-spaces": "error",
+        "@stylistic/no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+        "@stylistic/space-infix-ops": "error",
         "max-classes-per-file": "off",
         "max-depth": "off",
         "@stylistic/max-len": "off",
@@ -311,5 +314,14 @@ js.configs.recommended,
 
 },
     es2017rules,
-    es2023rules
+    es2023rules,
+    {
+        files: ["tiddlywiki.js"],
+        plugins:  {
+		    "es-x": esx
+	    },
+        rules: {
+   	    	"es-x/no-hashbang": "off"         
+        }
+    }
 ]);

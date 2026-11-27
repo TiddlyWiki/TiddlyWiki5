@@ -1,0 +1,15 @@
+created: 20251021142729667
+modified: 20260327113434425
+original-modified: 20251021142729667
+tags: 
+title: Concatenating a text reference to create a URL
+ja-title: テキスト参照を連結してURL作成
+type: text/vnd.tiddlywiki
+
+!! 変数とテキスト参照を連結してURLを作成する
+
+<$macrocall $name=wikitext-example src="""<$let hash={{{ [<currentTiddler>encodeuricomponent[]] }}}>
+<a href=`${ [{!!base-url}] }$#$(hash)$`>これはtiddlywiki.comのTiddlerです</a>
+</$let>"""/>
+
+参照: [[置換属性値|Substituted Attribute Values]]

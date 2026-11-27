@@ -22,7 +22,7 @@ var findSaver = function(window) {
 		console.log({ msg: "custom saver is disabled", reason: err });
 		return null;
 	}
-}
+};
 var saver = findSaver(window) || findSaver(window.parent) || {};
 
 var CustomSaver = function(wiki) {

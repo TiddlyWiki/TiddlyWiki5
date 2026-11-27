@@ -17,35 +17,35 @@ Note that strings are converted to numbers automatically. Trailing non-digits ar
 "use strict";
 
 exports.negate = makeNumericBinaryOperator(
-	function(a) {return -a}
+	function(a) {return -a;}
 );
 
 exports.abs = makeNumericBinaryOperator(
-	function(a) {return Math.abs(a)}
+	function(a) {return Math.abs(a);}
 );
 
 exports.ceil = makeNumericBinaryOperator(
-	function(a) {return Math.ceil(a)}
+	function(a) {return Math.ceil(a);}
 );
 
 exports.floor = makeNumericBinaryOperator(
-	function(a) {return Math.floor(a)}
+	function(a) {return Math.floor(a);}
 );
 
 exports.round = makeNumericBinaryOperator(
-	function(a) {return Math.round(a)}
+	function(a) {return Math.round(a);}
 );
 
 exports.trunc = makeNumericBinaryOperator(
-	function(a) {return Math.trunc(a)}
+	function(a) {return Math.trunc(a);}
 );
 
 exports.untrunc = makeNumericBinaryOperator(
-	function(a) {return Math.ceil(Math.abs(a)) * Math.sign(a)}
+	function(a) {return Math.ceil(Math.abs(a)) * Math.sign(a);}
 );
 
 exports.sign = makeNumericBinaryOperator(
-	function(a) {return Math.sign(a)}
+	function(a) {return Math.sign(a);}
 );
 
 exports.add = makeNumericBinaryOperator(
@@ -103,29 +103,29 @@ exports.log = makeNumericBinaryOperator(
 );
 
 exports.sum = makeNumericReducingOperator(
-	function(accumulator,value) {return accumulator + value},
+	function(accumulator,value) {return accumulator + value;},
 	0 // Initial value
 );
 
 exports.product = makeNumericReducingOperator(
-	function(accumulator,value) {return accumulator * value},
+	function(accumulator,value) {return accumulator * value;},
 	1 // Initial value
 );
 
 exports.maxall = makeNumericReducingOperator(
-	function(accumulator,value) {return Math.max(accumulator,value)},
+	function(accumulator,value) {return Math.max(accumulator,value);},
 	-Infinity // Initial value
 );
 
 exports.minall = makeNumericReducingOperator(
-	function(accumulator,value) {return Math.min(accumulator,value)},
+	function(accumulator,value) {return Math.min(accumulator,value);},
 	Infinity // Initial value
 );
 
 exports.median = makeNumericArrayOperator(
 	function(values) {
 		var len = values.length, median;
-		values.sort(function(a,b) {return a-b});
+		values.sort(function(a,b) {return a-b;});
 		if(len % 2) { 
 			// Odd, return the middle number
 			median = values[(len - 1) / 2];
@@ -138,7 +138,7 @@ exports.median = makeNumericArrayOperator(
 );
 
 exports.average = makeNumericReducingOperator(
-	function(accumulator,value) {return accumulator + value},
+	function(accumulator,value) {return accumulator + value;},
 	0, // Initial value
 	function(finalValue,numberOfValues) {
 		return finalValue/numberOfValues;
@@ -146,7 +146,7 @@ exports.average = makeNumericReducingOperator(
 );
 
 exports.variance = makeNumericReducingOperator(
-	function(accumulator,value) {return accumulator + value},
+	function(accumulator,value) {return accumulator + value;},
 	0,
 	function(finalValue,numberOfValues,originalValues) {
 		return getVarianceFromArray(originalValues,finalValue/numberOfValues);
@@ -154,7 +154,7 @@ exports.variance = makeNumericReducingOperator(
 );
 
 exports["standard-deviation"] = makeNumericReducingOperator(
-	function(accumulator,value) {return accumulator + value},
+	function(accumulator,value) {return accumulator + value;},
 	0,
 	function(finalValue,numberOfValues,originalValues) {
 		var variance = getVarianceFromArray(originalValues,finalValue/numberOfValues);
@@ -164,31 +164,31 @@ exports["standard-deviation"] = makeNumericReducingOperator(
 
 //trigonometry
 exports.cos = makeNumericBinaryOperator(
-	function(a) {return Math.cos(a)}
+	function(a) {return Math.cos(a);}
 );
 
 exports.sin = makeNumericBinaryOperator(
-	function(a) {return Math.sin(a)}
+	function(a) {return Math.sin(a);}
 );
 
 exports.tan = makeNumericBinaryOperator(
-	function(a) {return Math.tan(a)}
+	function(a) {return Math.tan(a);}
 );
 
 exports.acos = makeNumericBinaryOperator(
-	function(a) {return Math.acos(a)}
+	function(a) {return Math.acos(a);}
 );
 
 exports.asin = makeNumericBinaryOperator(
-	function(a) {return Math.asin(a)}
+	function(a) {return Math.asin(a);}
 );
 
 exports.atan = makeNumericBinaryOperator(
-	function(a) {return Math.atan(a)}
+	function(a) {return Math.atan(a);}
 );
 
 exports.atan2 = makeNumericBinaryOperator(
-	function(a,b) {return Math.atan2(a,b)}
+	function(a,b) {return Math.atan2(a,b);}
 );
 
 //Calculate the variance of a population of numbers in an array given its mean
@@ -222,8 +222,8 @@ function makeNumericReducingOperator(fnCalc,initialValue,fnFinal) {
 			return [];
 		}
 		var value = result.reduce(function(accumulator,currentValue) {
-				return fnCalc(accumulator,currentValue);
-			},initialValue);
+			return fnCalc(accumulator,currentValue);
+		},initialValue);
 		if(fnFinal) {
 			value = fnFinal(value,result.length,result);
 		}

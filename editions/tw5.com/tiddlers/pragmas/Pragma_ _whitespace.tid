@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 
 Note that the processing only applies to the printable text, and not to other text, such as the values of attributes.
 
-The whitespace setting only applies to the parsed content in which it appears. The setting is inherited by embedded [[Procedure Definitions]] and [[Custom Widgets]] definitions, but is not inherited by [[Macro definitions]].
+The whitespace setting only applies to the parsed content in which it appears. The setting is inherited by embedded [[Procedure Definitions]] and [[Custom Widgets]] definitions, but is not inherited by [[Macro Definitions]].
 
 ```
 \whitespace trim|notrim

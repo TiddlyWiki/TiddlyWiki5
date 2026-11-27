@@ -44,7 +44,7 @@ exports["wrap-selection"] = function(event,operation) {
 				break;
 		}
 		return result;
-	}
+	};
 
 	function togglePrefixSuffix() {
 		if(o.text.substring(o.selStart - prefix.length, o.selStart + suffix.length) === prefix + suffix) {

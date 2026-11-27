@@ -152,7 +152,7 @@ XLSXImporter.prototype.processField = function(fieldImportSpecTitle) {
 				}
 				break;
 			case "constant":
-				value = fieldImportSpec.fields["import-field-value"]
+				value = fieldImportSpec.fields["import-field-value"];
 				break;
 		}
 		value = (value || "").trim();
@@ -176,12 +176,12 @@ XLSXImporter.prototype.processField = function(fieldImportSpecTitle) {
 				break;
 			case "append":
 				var list = $tw.utils.parseStringArray(this.tiddlerFields[fieldName] || "");
-				$tw.utils.pushTop(list,value)
+				$tw.utils.pushTop(list,value);
 				this.tiddlerFields[fieldName] = list;
 				break;
 		}
 	}
-}
+};
 
 XLSXImporter.prototype.measureSheet = function(sheet) {
 	var sheetRange = XLSX.utils.decode_range(sheet["!ref"]);
@@ -190,7 +190,7 @@ XLSXImporter.prototype.measureSheet = function(sheet) {
 		endRow: Math.max(sheetRange.s.r,sheetRange.e.r),
 		startCol: Math.min(sheetRange.s.c,sheetRange.e.c),
 		endCol: Math.max(sheetRange.s.c,sheetRange.e.c)
-	}
+	};
 };
 
 XLSXImporter.prototype.findColumns = function(sheet,sheetSize,skipRowsTop) {

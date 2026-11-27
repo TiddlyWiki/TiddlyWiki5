@@ -9,7 +9,7 @@ ExactExports test A
 
 
 exports.program = function () {
-    return require('./program');
+	return require("./program");
 };
 
 

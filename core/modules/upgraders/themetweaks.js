@@ -34,8 +34,7 @@ var MAPPINGS = {
 };
 
 exports.upgrade = function(wiki,titles,tiddlers) {
-	var self = this,
-		messages = {};
+	var messages = {};
 	// Check for tiddlers on our list
 	$tw.utils.each(titles,function(title) {
 		var mapping = MAPPINGS[title];

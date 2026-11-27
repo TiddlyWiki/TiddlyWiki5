@@ -21,7 +21,7 @@ exports.range = function(source,operator,options) {
 	}
 	// Process the parts
 	var beg, end, inc, i, fixed = 0;
-	for (i=0; i<parts.length; i++) {
+	for(i=0; i<parts.length; i++) {
 		// Validate real number
 		if(!/^\s*[+-]?((\d+(\.\d*)?)|(\.\d+))\s*$/.test(parts[i])) {
 			return ["range: bad number \"" + parts[i] + "\""];
@@ -36,10 +36,10 @@ exports.range = function(source,operator,options) {
 	switch(parts.length) {
 		case 1:
 			end = parts[0];
-			if (end >= 1) {
+			if(end >= 1) {
 				beg = 1;
 			}
-			else if (end <= -1) {
+			else if(end <= -1) {
 				beg = -1;
 			}
 			else {
@@ -72,7 +72,7 @@ exports.range = function(source,operator,options) {
 	end += direction * 0.5 * Math.pow(0.1,fixed);
 	var safety = 10010;
 	// Enumerate the range
-	if (end<beg) {
+	if(end<beg) {
 		for(i=beg; i>end; i+=inc) {
 			results.push(i.toFixed(fixed));
 			if(--safety<0) {

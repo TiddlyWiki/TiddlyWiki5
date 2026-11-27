@@ -26,7 +26,6 @@ DropZoneWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DropZoneWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
@@ -215,7 +214,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 						if(tiddlerFields && tiddlerFields.length) {
 							readFileCallback(tiddlerFields);
 						}
-					})
+					});
 				}
 			}
 		} else {
@@ -231,30 +230,30 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 	var self = this;
 	var	readFileCallback = function(tiddlerFieldsArray) {
-			self.readFileCallback(tiddlerFieldsArray);
-		};
+		self.readFileCallback(tiddlerFieldsArray);
+	};
 	var getItem = function(type) {
-			type = type || "text/plain";
-			return function(str) {
-				// Use the deserializer specified if any
-				if(self.dropzoneDeserializer) {
-					tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: self.wiki.generateNewTitle("Untitled " + type)},{deserializer:self.dropzoneDeserializer});
-					if(tiddlerFields && tiddlerFields.length) {
-						readFileCallback(tiddlerFields);
-					}
-				} else {
-					tiddlerFields = {
-						title: self.wiki.generateNewTitle("Untitled " + type),
-						text: str,
-						type: type
-					};
-					if($tw.log.IMPORT) {
-						console.log("Importing string '" + str + "', type: '" + type + "'");
-					}
-					readFileCallback([tiddlerFields]);
+		type = type || "text/plain";
+		return function(str) {
+			// Use the deserializer specified if any
+			if(self.dropzoneDeserializer) {
+				tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: self.wiki.generateNewTitle("Untitled " + type)},{deserializer:self.dropzoneDeserializer});
+				if(tiddlerFields && tiddlerFields.length) {
+					readFileCallback(tiddlerFields);
 				}
+			} else {
+				tiddlerFields = {
+					title: self.wiki.generateNewTitle("Untitled " + type),
+					text: str,
+					type: type
+				};
+				if($tw.log.IMPORT) {
+					console.log("Importing string '" + str + "', type: '" + type + "'");
+				}
+				readFileCallback([tiddlerFields]);
 			}
 		};
+	};
 	// Let the browser handle it if we're in a textarea or input box
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1 && !event.target.isContentEditable && !event.twEditor) {
 		var self = this,

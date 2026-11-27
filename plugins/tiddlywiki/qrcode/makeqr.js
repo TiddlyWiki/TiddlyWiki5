@@ -16,7 +16,7 @@ Information about this macro
 var qrcode = require("$:/plugins/tiddlywiki/qrcode/qrcode/qrcode.js");
 
 var QRCODE_GENERATION_ERROR_PREFIX = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><text x="0" y="30" fill="red" font-family="Helvetica, sans-serif" font-size="18">',
-	QRCODE_GENERATION_ERROR_SUFFIX = '</text></svg>';
+	QRCODE_GENERATION_ERROR_SUFFIX = "</text></svg>";
 
 exports.name = "makeqr";
 

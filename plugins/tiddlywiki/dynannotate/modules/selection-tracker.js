@@ -31,7 +31,7 @@ SelectionTracker.prototype.handleSelectionChange = function() {
 		// Helper to get the tiddler title corresponding to a chunk container
 		var getIdOfContainer = function(domNode) {
 			return domNode.id;
-		}
+		};
 		// Get information about the selection anchor and focus
 		var getSelectionInfo = function(targetDomNode,targetOffset) {
 			// Find the chunk container node
@@ -83,9 +83,9 @@ SelectionTracker.prototype.handleSelectionChange = function() {
 				childNodeIndex: childNodeIndex,
 				beforeText: beforeText.join(""),
 				afterText: afterText.join("")
-			}
+			};
 
-		}
+		};
 		var anchor = getSelectionInfo(selection.anchorNode,selection.anchorOffset),
 			focus = getSelectionInfo(selection.focusNode,selection.focusOffset);
 		// Check that the containers share a parent
@@ -155,7 +155,7 @@ SelectionTracker.prototype.handleSelectionChange = function() {
 SelectionTracker.prototype.performSelectionActions = function(chunks,variables,actionsTiddler) {
 	// Invoke the actions, passing the extract tiddler title as a variable
 	if(actionsTiddler) {
-		var actions = $tw.wiki.getTiddlerText(actionsTiddler)
+		var actions = $tw.wiki.getTiddlerText(actionsTiddler);
 		if(actions) {
 			var selection = JSON.stringify({chunks: chunks,variables: variables});
 			$tw.rootWidget.invokeActionString(actions,undefined,undefined,$tw.utils.extend({},variables,{selection: selection}));

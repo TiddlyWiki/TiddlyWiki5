@@ -54,13 +54,17 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Create our element
 		var editInfo = this.getEditInfo(),
 			Engine = this.editShowToolbar ? toolbarEngine : nonToolbarEngine;
+		// Destroy previous engine if re-rendering (e.g. during refreshSelf)
+		if(this.engine && typeof this.engine.destroy === "function") {
+			this.engine.destroy();
+		}
 		this.engine = new Engine({
-				widget: this,
-				value: editInfo.value,
-				type: editInfo.type,
-				parentNode: parent,
-				nextSibling: nextSibling
-			});
+			widget: this,
+			value: editInfo.value,
+			type: editInfo.type,
+			parentNode: parent,
+			nextSibling: nextSibling
+		});
 		// Call the postRender hook
 		if(this.postRender) {
 			this.postRender();
@@ -75,6 +79,16 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.addEventListeners([
 			{type: "tm-edit-text-operation", handler: "handleEditTextOperationMessage"}
 		]);
+	};
+
+	/*
+	Dispose editor resources when the widget is destroyed or rerendered
+	*/
+	EditTextWidget.prototype.onDestroy = function() {
+		if(this.engine && typeof this.engine.destroy === "function") {
+			this.engine.destroy();
+		}
+		this.engine = null;
 	};
 
 	/*
@@ -145,6 +159,19 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Handle an edit text operation message from the toolbar
 	*/
 	EditTextWidget.prototype.handleEditTextOperationMessage = function(event) {
+		// A structured editor can handle operations without converting its
+		// selection to text offsets. `true` means handled, `false` means explicitly
+		// declined, and `undefined` delegates to the legacy text operation path.
+		if(typeof this.engine.handleEditTextOperation === "function") {
+			var handled = this.engine.handleEditTextOperation(event);
+			if(handled !== undefined) {
+				if(handled) {
+					this.engine.fixHeight();
+					this.saveChanges(this.engine.getText());
+				}
+				return;
+			}
+		}
 		// Prepare information about the operation
 		var operation = this.engine.createTextOperation();
 		// Invoke the handler for the selected operation
@@ -210,6 +237,29 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editShowToolbar = this.wiki.getTiddlerText(ENABLE_TOOLBAR_TITLE,"yes");
 		this.editShowToolbar = (this.editShowToolbar === "yes") && !!(this.children && this.children.length > 0) && (!this.document.isTiddlyWikiFakeDom);
 	};
+	
+	EditTextWidget.prototype.updateDomNodeClasses = function() {
+		var domNodeClasses = this.engine.domNode.className.split(/\s+/).filter(Boolean),
+			oldClasses = this.editClass.split(/\s+/).filter(Boolean),
+			newClasses;
+	
+		this.editClass = this.getAttribute("class","");
+		newClasses = this.editClass.split(/\s+/).filter(Boolean);
+	
+		// Remove classes assigned from the old value of the class attribute
+		domNodeClasses = domNodeClasses.filter(function(className) {
+			return !oldClasses.includes(className);
+		});
+	
+		// Add new classes from the updated class attribute
+		domNodeClasses = domNodeClasses.concat(
+			newClasses.filter(function(className) {
+				return !domNodeClasses.includes(className);
+			})
+		);
+	
+		this.engine.domNode.className = domNodeClasses.join(" ");
+	};
 
 	/*
 	Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
@@ -217,14 +267,17 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
 			this.refreshSelf();
 			return true;
-		} else if (changedTiddlers[this.editRefreshTitle]) {
+		} else if(changedTiddlers[this.editRefreshTitle]) {
 			this.engine.updateDomNodeText(this.getEditInfo().value);
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
+		}
+		if(changedAttributes["class"]) {
+			this.updateDomNodeClasses();
 		}
 		this.engine.fixHeight();
 		if(this.editShowToolbar) {
@@ -274,8 +327,8 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 					});
 				if($tw.keyboardManager.checkKeyDescriptors(event,keyInfoArray)) {
 					var clickEvent = this.document.createEvent("Events");
-				    clickEvent.initEvent("click",true,false);
-				    el.dispatchEvent(clickEvent);
+					clickEvent.initEvent("click",true,false);
+					el.dispatchEvent(clickEvent);
 					event.preventDefault();
 					event.stopPropagation();
 					return true;

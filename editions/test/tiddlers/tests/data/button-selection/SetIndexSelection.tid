@@ -1,0 +1,17 @@
+title: ButtonSelection/SetIndexSelection
+description: Only the setIndex button whose setTo matches the state index is selected
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: $:/state/demo
+type: application/json
+
+{"selection": "Beta"}
++
+title: Output
+
+<$button setTitle="$:/state/demo" setIndex="selection" setTo="Alpha" selectedClass="sel">Alpha</$button><$button setTitle="$:/state/demo" setIndex="selection" setTo="Beta" selectedClass="sel">Beta</$button>
++
+title: ExpectedResult
+
+<p><button aria-checked="false" class="">Alpha</button><button aria-checked="true" class=" sel">Beta</button></p>

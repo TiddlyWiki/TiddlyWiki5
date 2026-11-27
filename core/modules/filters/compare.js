@@ -32,4 +32,4 @@ var modes = {
 	"gt": function(value) {return value > 0;},
 	"lteq": function(value) {return value <= 0;},
 	"lt": function(value) {return value < 0;}
-}
+};

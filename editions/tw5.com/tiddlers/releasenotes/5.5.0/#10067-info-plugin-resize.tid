@@ -1,0 +1,12 @@
+change-category: internal
+change-type: bugfix
+created: 20261031022741057
+description: Window resize no longer reloads the info plugin on every frame
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10067
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#10067
+type: text/vnd.tiddlywiki
+
+* Resizing the window no longer rebuilds every indexer, and refreshes the page once per frame instead of twice. The `$:/info/browser/window/...` tiddlers now update individually through the new `$tw.wiki.updatePluginTiddlers()` method, so only the values that changed are reported

@@ -47,10 +47,10 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 	});
 	// Retrieve and bump the version number
 	var pluginVersion = $tw.utils.parseVersion(pluginTiddler.getFieldString("version") || "0.0.0") || {
-			major: "0",
-			minor: "0",
-			patch: "0"
-		};
+		major: "0",
+		minor: "0",
+		patch: "0"
+	};
 	pluginVersion.patch++;
 	var version = pluginVersion.major + "." + pluginVersion.minor + "." + pluginVersion.patch;
 	if(pluginVersion.prerelease) {

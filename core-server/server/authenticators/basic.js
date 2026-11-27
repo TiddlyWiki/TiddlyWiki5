@@ -10,9 +10,7 @@ Authenticator for WWW basic authentication
 "use strict";
 
 if($tw.node) {
-	var util = require("util"),
-		fs = require("fs"),
-		url = require("url"),
+	var fs = require("fs"),
 		path = require("path");
 }
 

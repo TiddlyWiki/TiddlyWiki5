@@ -25,7 +25,7 @@ Render this widget into the DOM
 */
 TranscludeWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
-	this.computeAttributes();
+	this.computeAttributes({asList: true});
 	this.execute();
 	try {
 		this.renderChildren(parent,nextSibling);
@@ -214,7 +214,6 @@ TranscludeWidget.prototype.collectSlotFillParameters = function() {
 Get transcluded details as an object {text:,type:}
 */
 TranscludeWidget.prototype.getTransclusionTarget = function() {
-	var self = this;
 	var text;
 	// Return the text and type of the target
 	if(this.hasAttribute("$variable")) {
@@ -232,13 +231,13 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	} else {
 		// Transcluding a text reference
 		var parserInfo = this.wiki.getTextReferenceParserInfo(
-						this.transcludeTitle,
-						this.transcludeField,
-						this.transcludeIndex,
-						{
-							subTiddler: this.transcludeSubTiddler,
-							defaultType: this.transcludeType
-						});
+			this.transcludeTitle,
+			this.transcludeField,
+			this.transcludeIndex,
+			{
+				subTiddler: this.transcludeSubTiddler,
+				defaultType: this.transcludeType
+			});
 		return {
 			text: parserInfo.text,
 			type: parserInfo.type,
@@ -251,7 +250,6 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 Get transcluded parse tree nodes as an object {text:,type:,parseTreeNodes:,parseAsInline:}
 */
 TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
-	var self = this;
 	var parser;
 	// Get the parse tree
 	if(this.hasAttribute("$variable")) {
@@ -286,7 +284,7 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 								type: "text",
 								text: this.transcludeFunctionResult
 							}]
-						}
+						};
 					}
 				} else {
 					var cacheKey = (parseAsInline ? "inlineParser" : "blockParser") + (this.transcludeType || "");
@@ -311,7 +309,7 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 							],
 							source: parser.source,
 							type: parser.type
-						}
+						};
 						$tw.utils.each(srcVariable.params,function(param) {
 							var name = param.name;
 							// Parameter names starting with dollar must be escaped to double dollars
@@ -340,9 +338,9 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 							],
 							source: parser.source,
 							type: parser.type
-						}
+						};
 						$tw.utils.each(variableInfo.params,function(param) {
-							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],"__" + param.name + "__",param.value)
+							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],"__" + param.name + "__",param.value);
 						});
 					}
 				}
@@ -351,14 +349,14 @@ TranscludeWidget.prototype.parseTransclusionTarget = function(parseAsInline) {
 	} else {
 		// Transcluding a text reference
 		parser = this.wiki.parseTextReference(
-						this.transcludeTitle,
-						this.transcludeField,
-						this.transcludeIndex,
-						{
-							parseAsInline: parseAsInline,
-							subTiddler: this.transcludeSubTiddler,
-							defaultType: this.transcludeType
-						});
+			this.transcludeTitle,
+			this.transcludeField,
+			this.transcludeIndex,
+			{
+				parseAsInline: parseAsInline,
+				subTiddler: this.transcludeSubTiddler,
+				defaultType: this.transcludeType
+			});
 	}
 	// Return the parse tree
 	return {
@@ -465,7 +463,7 @@ Return whether this transclusion should be visible to the slot widget
 */
 TranscludeWidget.prototype.hasVisibleSlots = function() {
 	return this.getAttribute("$fillignore","no") === "no";
-}
+};
 
 /*
 Compose a string comprising the title, field and/or index to identify this transclusion for recursion detection
@@ -500,7 +498,7 @@ TranscludeWidget.prototype.functionNeedsRefresh = function() {
 	var variableInfo = this.getVariableInfo(this.transcludeVariable,{params: this.getOrderedTransclusionParameters()});
 	var newResult = (variableInfo.resultList ? variableInfo.resultList[0] : variableInfo.text) || "";
 	return oldResult !== newResult;
-}
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering

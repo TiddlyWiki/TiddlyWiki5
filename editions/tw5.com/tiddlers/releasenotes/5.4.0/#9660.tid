@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9660
+description: Fix info panel overflow
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: enhancement
+change-category: theme
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9660
+github-contributors: DesignThinkerer
+
+Remove `overflow: hidden` from the `.tc-tiddler-info` style definition. This allows popups and dropdowns triggered from within the tiddler info panel to extend beyond its boundaries rather than being clipped.

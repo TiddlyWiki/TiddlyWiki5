@@ -14,11 +14,14 @@ description: Speichert ein Wiki in einen neues Verzeichnis
 
 Folgende Optionen werden unterstützt:
 
-* ''filter'': Ein "Filter-Run" der die Tiddler definiert, die ausgegeben werden sollen.
-
-* ''explodePlugins'': Standard ist: "yes"
-** "yes": wird Plugins "aufspalten" und einzelne "Shadow Tiddler" in ein  "tiddlers/<plugin>" Verzeichnis speichern.
-** "no": Wird das "aufspalten" von Plugins in einzelne "Shadow Tiddler" unterbinden. Das plugin selbst wird als 1 JSON Tiddler gespeichert.
+```
+  filter           Filter-Run der die Tiddler definiert, die ausgegeben
+                   werden sollen
+  explodePlugins   (Standard: "yes")
+                     yes - Plugins "aufspalten" und einzelne Shadow Tiddler
+                           in ein tiddlers/<plugin> Verzeichnis speichern
+                     no  - Plugins als einzelne JSON Tiddler speichern
+```
 
 Diese Funktionen werden vor allem dazu verwendet, eine Wiki-Datei in einzelne Tiddler in einem Wiki-Verzeichnis umzuwandeln:
 

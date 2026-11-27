@@ -1,0 +1,13 @@
+title: TiddlyWiki Project
+ja-title: TiddlyWikiプロジェクト
+caption: TiddlyWikiプロジェクト
+modified: 20260207104229346
+original-modified: 20250909171928024
+created: 20250909171928024
+tags: Community About
+
+TiddlyWikiプロジェクトは、TiddlyWikiをメンテナンス・改善し、TiddlyWikiコミュニティをサポートするための、統制された継続的な取り組みです。
+
+{{Community Cards Caveats}}
+
+<$list filter="[tag[Community/Team]]" template="$:/tiddlywiki/community/cards/ViewTemplateBodyTemplateTeam"/>

@@ -15,27 +15,27 @@ var AndTidWiki = function(wiki) {
 
 AndTidWiki.prototype.save = function(text,method,callback,options) {
 	var filename = options && options.variables ? options.variables.filename : null;
-	if (method === "download") {
+	if(method === "download") {
 		// Support download
-		if (window.twi.saveDownload) {
+		if(window.twi.saveDownload) {
 			try {
 				window.twi.saveDownload(text,filename);
 			} catch(err) {
-				if (err.message === "Method not found") {
+				if(err.message === "Method not found") {
 					window.twi.saveDownload(text);
 				}
 			}
 		} else {
 			var link = document.createElement("a");
 			link.setAttribute("href","data:text/plain," + encodeURIComponent(text));
-			if (filename) {
-			    link.setAttribute("download",filename);
+			if(filename) {
+				link.setAttribute("download",filename);
 			}
 			document.body.appendChild(link);
 			link.click();
 			document.body.removeChild(link);
 		}
-	} else if (window.twi.saveWiki) {
+	} else if(window.twi.saveWiki) {
 		// Direct save in Tiddloid
 		window.twi.saveWiki(text);
 	} else {

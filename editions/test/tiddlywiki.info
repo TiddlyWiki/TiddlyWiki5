@@ -3,7 +3,9 @@
 	"plugins": [
 		"tiddlywiki/jasmine",
 		"tiddlywiki/wikitext-serialize",
-		"tiddlywiki/geospatial"
+		"tiddlywiki/geospatial",
+		"tiddlywiki/bibtex",
+		"tiddlywiki/markdown"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -11,7 +13,11 @@
 	],
 	"build": {
 		"index": [
-			"--rendertiddler","$:/core/save/all","test.html","text/plain",
-			"--test"]
+			"--rendertiddler",
+			"$:/core/save/all",
+			"test.html",
+			"text/plain",
+			"--test"
+		]
 	}
 }

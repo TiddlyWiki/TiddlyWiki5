@@ -68,7 +68,7 @@ exports.startup = function() {
 		$tw.utils.addClass($tw.pageContainer,"tc-page-container-wrapper");
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
 		$tw.pageWidgetNode.render($tw.pageContainer,null);
-   		$tw.hooks.invokeHook("th-page-refreshed");
+		$tw.hooks.invokeHook("th-page-refreshed");
 	})();
 	// Remove any splash screen elements
 	var removeList = document.querySelectorAll(".tc-remove-when-wiki-loaded");

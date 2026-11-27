@@ -1,0 +1,20 @@
+title: ButtonSelection/SetTitleRefresh
+description: The setTitle selection follows the state tiddler when it changes
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: $:/state/demo
+
+Alpha
++
+title: Output
+
+<$button setTitle="$:/state/demo" setTo="Alpha" selectedClass="sel">Alpha</$button><$button setTitle="$:/state/demo" setTo="Beta" selectedClass="sel">Beta</$button>
++
+title: Actions
+
+<$action-setfield $tiddler="$:/state/demo" text="Beta"/>
++
+title: ExpectedResult
+
+<p><button aria-checked="false" class="">Alpha</button><button aria-checked="true" class=" sel">Beta</button></p>

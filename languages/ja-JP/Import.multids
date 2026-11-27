@@ -12,6 +12,8 @@ Listing/Preview/DiffFields: 差分 (項目)
 Listing/Preview/Fields: 項目
 Listing/Preview/Text: テキスト
 Listing/Preview/TextRaw: テキスト (Raw)
+Listing/ImportOptions/Caption: インポートオプション
+Listing/ImportOptions/NoMatch: これらのファイルにはインポートオプションを適用しません。
 Listing/Rename/CancelRename: キャンセル
 Listing/Rename/ConfirmRename: Tiddler の名前を変更
 Listing/Rename/OverwriteWarning: このタイトルの Tiddler はすでに存在しています。

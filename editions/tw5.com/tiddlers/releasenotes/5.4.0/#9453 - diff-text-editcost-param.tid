@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9453
+description: Add new editcost parameter to diff-text widget
+tags: $:/tags/ChangeNote
+release: 5.4.0
+change-type: feature
+change-category: widget
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9453
+github-contributors: pmario
+
+The diff-text widget now supports an `editcost` parameter that allows you to specify the cost of edits when calculating the diff. This can be used to give more weight to certain types of edits, such as insertions or deletions, when generating the diff output. See [[DiffTextWidget]] -> Attributes and Examples

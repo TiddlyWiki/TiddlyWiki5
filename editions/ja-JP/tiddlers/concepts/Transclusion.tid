@@ -1,0 +1,31 @@
+created: 20141129194651420
+modified: 20260406001216888
+original-modified: 20240621074019077
+tags: Concepts Definitions
+title: Transclusion
+ja-title: トランスクルージョン
+
+! 定義
+
+<<< Wikipedia: [[トランスクルージョン|https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B9%E3%82%AF%E3%83%AB%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3]]
+コンピュータ科学において、トランスクルージョンとは、ハイパーテキストを介した参照によって、電子文書の一部または全部を他の1つまたは複数の文書に組み込むことを指します。
+<<<
+
+~TiddlyWikiでは、''トランスクルージョン''とは、あるTiddler "A"を別のTiddler "B"から参照するプロセスであり、"A"の内容が"B"の一部であるかのように見せかけるものです。
+
+コンテンツをコピー＆ペーストすると、同じコンテンツが複数の場所に複製されてしまいます。一方、トランスクルージョンでは、単一のコピーと、Tiddler "A"からコンテンツを挿入する位置を示す特別な指示が"B"に記述されるだけで済みます。
+
+"A"の内容が変更されると、"B"にも自動的に変更内容が反映されることに注意してください。これにより、コンテンツを1か所に記述し、複数の場所から閲覧できるため、繰り返し使用するコンテンツの管理が容易になります。
+
+トランスクルージョンの概念は、小さなコンテンツを組み合わせる主要な方法であるため、[[Tiddlerの哲学|Philosophy of Tiddlers]]において重要な役割を果たしています。
+
+詳細はこちらをご覧ください:
+
+* [[Wikiテキストでのトランスクルージョン|Transclusion in WikiText]]
+* [[トランスクルージョンの基本的な使用法|Transclusion Basic Usage]]
+* [[テンプレートを使用したトランスクルージョン|Transclusion with Templates]]
+* [[トランスクルージョンと置換|Transclusion and Substitution]]
+* [[テキスト参照|TextReference]]
+* [[テンプレートTiddler|TemplateTiddlers]]
+* [[Transcludeウィジェット|TranscludeWidget]]
+* [[ハードトランスクルージョンとソフトトランスクルージョン|Hard and Soft Transclusions]]

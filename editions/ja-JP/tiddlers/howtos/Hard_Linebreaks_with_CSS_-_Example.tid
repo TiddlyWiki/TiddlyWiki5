@@ -1,0 +1,16 @@
+created: 20170126161803543
+modified: 20260223105159019
+original-modified: 20170126211025840
+tags: example-hardlinebreaks [[Hard Linebreaks in WikiText]]
+title: Hard Linebreaks with CSS - Example
+ja-title: CSSを使用した強制改行 - 例
+type: text/vnd.tiddlywiki
+
+
+次のテキストは、特別な[[Wikiテキスト|WikiText]]構文を使用せずに改行されます。したがって、Wikiテキストのほとんどの機能にアクセスできます
+
+これは行です
+そして、これは新しい行です
+一方で、これはさらに別の行です
+そして、これは最後の行です
+この行は別の行です

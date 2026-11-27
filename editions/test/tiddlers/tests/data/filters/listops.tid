@@ -1,0 +1,14 @@
+title: Filters/ListOps
+description: Test listops operators
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+(<$text text={{{ =[[E]] =[[A]] =[[B]] =[[C]] =[[C]] =[[D]] =[[C]] +[unique[]join[]] }}}/>)
+
++
+title: ExpectedResult
+
+<p>(EABCD)</p>

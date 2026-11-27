@@ -108,10 +108,10 @@ tags: $:/tags/EditTemplate
 			storeTitle=<<newFieldNameInputTiddler>>
 			searchListState=<<newFieldNameSelectionTiddler>>
 		>
-			<div class="tc-edit-field-add-name-wrapper">
+			<div class=`tc-edit-field-add-name-wrapper ${ [<newFieldNameTiddler>get[text]] :intersection[<storyTiddler>fields[]] :then[[tc-edit-field-exists]] }$`>
 				<$transclude $variable="keyboard-driven-input"
 					cancelPopups="yes"
-					class=`tc-edit-texteditor tc-popup-handle ${ [<newFieldNameTiddler>get[text]] :intersection[<storyTiddler>fields[]] :then[[tc-edit-field-exists]] }$`
+					class="tc-edit-texteditor tc-popup-handle"
 					configTiddlerFilter="[[$:/config/EditMode/fieldname-filter]]"
 					default=""
 					focus={{{ [{!!draft.of}is[tiddler]then{$:/config/AutoFocusEdit}match[fields]then[true]] :else[{$:/config/AutoFocus}match[fields]then[true]] :else[[false]] }}}

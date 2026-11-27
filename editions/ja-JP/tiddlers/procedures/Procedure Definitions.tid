@@ -1,0 +1,47 @@
+created: 20221007125701001
+modified: 20260329104617037
+original-modified: 20230921180332436
+tags: WikiText Procedures
+title: Procedure Definitions
+ja-title: プロシージャ定義
+type: text/vnd.tiddlywiki
+
+!! 紹介
+
+このTiddlerでは、[[プロシージャ|Procedures]]を定義するさまざまな方法について説明します。
+
+!! プロシージャ定義プラグマ
+
+プロシージャは、Tiddlerの先頭に[[プラグマ: \procedure|Pragma: \procedure]]を記述することで作成できます。定義は、そのプロシージャを定義したTiddlerの残りの部分、およびそのTiddlerをトランスクルードするすべてのTiddlerで使用できます。
+
+```
+\procedure my-procedure(param)
+これはプロシージャのテキストです (param=<<param>>)
+\end
+```
+
+[[プラグマ: \whitespace|Pragma: \whitespace]]の設定は、プロシージャ定義が行われるパースコンテキストから継承されることに注意してください。つまり、複数のプロシージャ定義を含むTiddlerの場合、Tiddlerの先頭に1つのwhitespaceプラグマを記述するだけでよく、プラグマを繰り返す必要なく、設定はプロシージャ定義に自動的に継承されます。
+
+!! Setウィジェットを使用したプロシージャ定義
+
+プロシージャは特殊な種類の[[変数|Variables]]として実装されているため、内部的には<<.wlink SetWidget>>ウィジェットによって定義されます。
+
+```
+<$set name="my-procedure" value="これはプロシージャのテキストです">
+...
+</$set>
+```
+
+<<.note """<<.wlink SetWidget>>ウィジェットを使用してプロシージャを定義する際に、現時点ではパラメータを指定することはできません。""">>
+
+!! プロシージャ定義のインポート
+
+[[プラグマ: \import|Pragma: \import]]や<<.wlink ImportVariablesWidget>>ウィジェットを使用すると、別のTiddlerからプロシージャ定義をコピーできます。
+
+!! `$:/tags/Global`タグ
+
+グローバルプロシージャは、[[システムタグ: $:/tags/Global|SystemTag: $:/tags/Global]]を使用して定義できます。
+
+[[システムタグ: $:/tags/Global/View|SystemTag: $:/tags/Global/View]]は、メインビューテンプレートとプレビューパネル内でのみ使用可能なプロシージャを定義するために使用します。
+
+[[システムタグ: $:/tags/Global/View/Body|SystemTag: $:/tags/Global/View/Body]]は、メインビューテンプレートの本文とプレビューパネル内でのみ使用可能なプロシージャを定義するために使用します。

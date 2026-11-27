@@ -27,7 +27,7 @@ exports.startup = function() {
 			faviconLink.setAttribute("href",dataURI);
 			$tw.faviconPublisher.send({verb: "FAVICON",body: dataURI});
 		}
-	}
+	};
 	$tw.faviconPublisher = new $tw.utils.BrowserMessagingPublisher({type: "FAVICON", onsubscribe: setFavicon});
 	// Set up the favicon
 	setFavicon();

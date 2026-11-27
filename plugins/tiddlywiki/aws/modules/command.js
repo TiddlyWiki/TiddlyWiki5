@@ -26,12 +26,10 @@ var Command = function(params,commander,callback) {
 };
 
 Command.prototype.execute = function() {
-	var self = this,
-		wiki = this.commander.wiki,
-		subCommand = this.params[0],
+	var subCommand = this.params[0],
 		fn = this.subCommands[subCommand];
 	if(!fn) {
-		return this.callback("AWS: Unknown subcommand")
+		return this.callback("AWS: Unknown subcommand");
 	}
 	fn.bind(this)();
 	return null;
@@ -51,7 +49,6 @@ Command.prototype.subCommands["profile"] = function() {
 // Load tiddlers from files in an S3 bucket
 Command.prototype.subCommands["s3-load"] = function() {
 	var self = this,
-		wiki = this.commander.wiki,
 		region = this.params[1],
 		bucket = this.params[2],
 		filepaths = this.params.slice(3);
@@ -84,7 +81,6 @@ Command.prototype.subCommands["s3-load"] = function() {
 // Render a tiddler to an S3 bucket
 Command.prototype.subCommands["s3-rendertiddler"] = function() {
 	var self = this,
-		wiki = this.commander.wiki,
 		title = this.params[1],
 		region = this.params[2],
 		bucket = this.params[3],

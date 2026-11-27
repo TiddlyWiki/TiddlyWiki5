@@ -35,7 +35,7 @@ The content of the `<$edit-text>` widget is ignored.
 |size |The size of the input field (in characters). This exact result depends on browser and font. Use the `class` attribute to style width for precise control |
 |autoHeight |Either "yes" or "no" to specify whether to automatically resize `textarea` editors to fit their content (''defaults'' to "yes"). This setting can be changed globally with an editor toolbar button|
 |minHeight |Minimum height for automatically resized `textarea` editors, specified in CSS length units such as "px", "em" or "%". Has no effect if the [[CodeMirror Plugin]] is active |
-|rows|Sets the rows attribute of a generated textarea. `rows` ''takes precedence'' over `autoHeight`, so text areas can be defined individually |
+|rows|Sets the `rows` attribute of a generated textarea. When combined with `autoHeight="yes"` (the default), it sets the ''initial'' rendered height; the textarea still grows to fit content. To force a fixed number of rows, pair `rows` with `autoHeight="no"`. |
 |cancelPopups |<<.from-version "5.1.23">> if set to "yes", cancels all popups when the input gets focus |
 |inputActions |<<.from-version 5.1.23>> Optional actions that are triggered every time an input event occurs within the input field or textarea.<br><<.from-version "5.2.1">> The variable `actionValue` is available to the `inputActions` and contains the value of the input field. |
 |refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |

@@ -31,8 +31,8 @@ exports.run = function(shortcuts,prefix,separator,suffix) {
 	}));
 	if(shortcutArray.length > 0) {
 		shortcutArray.sort(function(a,b) {
-		    return a.toLowerCase().localeCompare(b.toLowerCase());
-		})
+			return a.toLowerCase().localeCompare(b.toLowerCase());
+		});
 		return prefix + shortcutArray.join(separator) + suffix;
 	} else {
 		return "";

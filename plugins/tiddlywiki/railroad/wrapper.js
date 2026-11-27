@@ -101,7 +101,7 @@ RailroadWidget.prototype.patchLinks = function(node) {
 							child.onclick = function(event) {
 								self.dispatchLink(myTarget,event);
 								return false;
-							}
+							};
 						})(target);
 						target = "#" + target;
 					}

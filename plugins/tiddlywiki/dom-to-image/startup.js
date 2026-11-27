@@ -39,7 +39,7 @@ exports.startup = function() {
 			var method = "toPng";
 			switch(params.format) {
 				case "jpeg":
-					// Intentional fallthrough
+				// Intentional fallthrough
 				case "jpg":
 					method = "toJpeg";
 					break;
@@ -53,37 +53,37 @@ exports.startup = function() {
 				quality: $tw.utils.parseNumber(params.quality),
 				scale: $tw.utils.parseNumber(params.scale) || 1
 			})
-			.then(function(dataUrl) {
-				// Save the image
-				if(params["save-file"]) {
-					var link = document.createElement("a");
-					link.download = params["save-file"];
-					link.href = dataUrl;
-					link.click();
-				}
-				// Save the tiddler
-				if(params["save-title"]) {
-					if(dataUrl.indexOf("data:image/svg+xml;") === 0) {
-						var commaIndex = dataUrl.indexOf(",");
-						$tw.wiki.addTiddler(new $tw.Tiddler({
-							title: params["save-title"],
-							type: "image/svg+xml",
-							"text": decodeURIComponent(dataUrl.substring(commaIndex + 1))
-						}));	
-					} else {
-						var parts = dataUrl.split(";base64,");
-						$tw.wiki.addTiddler(new $tw.Tiddler({
-							title: params["save-title"],
-							type: parts[0].split(":")[1],
-							"text": parts[1]
-						}));	
+				.then(function(dataUrl) {
+					// Save the image
+					if(params["save-file"]) {
+						var link = document.createElement("a");
+						link.download = params["save-file"];
+						link.href = dataUrl;
+						link.click();
 					}
-				}
-				self.wiki.invokeActionString(oncompletion,self,variables,{parentWidget: $tw.rootWidget});
-			})
-			.catch(function(error) {
-				console.error('oops, something went wrong!', error);
-			});
+					// Save the tiddler
+					if(params["save-title"]) {
+						if(dataUrl.indexOf("data:image/svg+xml;") === 0) {
+							var commaIndex = dataUrl.indexOf(",");
+							$tw.wiki.addTiddler(new $tw.Tiddler({
+								title: params["save-title"],
+								type: "image/svg+xml",
+								"text": decodeURIComponent(dataUrl.substring(commaIndex + 1))
+							}));	
+						} else {
+							var parts = dataUrl.split(";base64,");
+							$tw.wiki.addTiddler(new $tw.Tiddler({
+								title: params["save-title"],
+								type: parts[0].split(":")[1],
+								"text": parts[1]
+							}));	
+						}
+					}
+					self.wiki.invokeActionString(oncompletion,self,variables,{parentWidget: $tw.rootWidget});
+				})
+				.catch(function(error) {
+					console.error("oops, something went wrong!", error);
+				});
 		}
 	});
 };

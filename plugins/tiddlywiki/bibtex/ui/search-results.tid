@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/bibtex/ui/search-results
+tags: $:/tags/SearchResults
+caption: BibTeX
+first-search-filter: [has:field[bibtex-entry-type]search:-created,modified,creator,modifier<userInput>sort[title]limit[250]]
+
+\whitespace trim
+//<small>{{$:/language/Search/Matches/All}}</small>//
+
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}} emptyMessage={{$:/language/Search/Matches/NoResult}}>
+<span class={{{ [<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>

@@ -1,0 +1,18 @@
+created: 20141126153016142
+modified: 20260208121508427
+original-modified: 20180701185730340
+tags: Community
+title: Translate TiddlyWiki into your language
+ja-title: TiddlyWikiを母国語に翻訳する
+type: text/vnd.tiddlywiki
+
+翻訳の作成と維持を簡素化するTiddlyWikiの特別バージョンがあります:
+
+* ~TiddlyWikiの現在のバージョンを翻訳する用 https://tiddlywiki.com/editions/translators/ 
+* ~TiddlyWikiの最新プレリリースバージョンを翻訳する用 https://tiddlywiki.com/prerelease/editions/translators/ 
+
+Node.jsやGitHubの知識は必要ないことに注意してください
+
+Node.jsで~TiddlyWikiを翻訳するには、`tiddlywiki editions/translators --listen`を実行し、ブラウザで http://127.0.0.1:8080/ にアクセスします
+
+翻訳の作成と維持に関する技術的な詳細については、 https://tiddlywiki.com/dev を参照してください

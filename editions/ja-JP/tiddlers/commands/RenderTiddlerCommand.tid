@@ -1,0 +1,9 @@
+caption: rendertiddler
+tags: Commands $:/deprecated
+title: RenderTiddlerCommand
+ja-title: RenderTiddlerコマンド
+type: text/vnd.tiddlywiki
+
+<<.deprecated-since "5.1.15" "RenderCommand">>.
+
+{{$:/language/Help/rendertiddler}}

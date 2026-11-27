@@ -1,0 +1,11 @@
+title: $:/changenotes/5.5.0/#9980
+description: Auto-height editor textareas no longer show a spurious scrollbar
+tags: $:/tags/ChangeNote
+release: 5.5.0
+change-type: bugfix
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9980
+github-contributors: pmario
+type: text/vnd.tiddlywiki
+
+Auto-height textareas add a pixel to the height they measure, so the editor no longer shows a vertical scrollbar at some combinations of line count and browser zoom (fixes [[Issue #9972|https://github.com/TiddlyWiki/TiddlyWiki5/issues/9972]])

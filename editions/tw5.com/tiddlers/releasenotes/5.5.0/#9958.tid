@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.1/#9958
+description: Fix typo in CSS custom properties
+tags: $:/tags/ChangeNote
+release: 5.5.0
+change-type: bugfix
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9958
+github-contributors: BurningTreeC
+
+Fixes a typo in the CSS custom properties

@@ -24,7 +24,6 @@ JSONTiddlerWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 JSONTiddlerWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();

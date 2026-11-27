@@ -1,6 +1,7 @@
 title: $:/language/
 
 AboveStory/ClassicPlugin/Warning: Φαίνεται πως προσπαθείς να φορτώσεις ένα πρόσθετο που έχει σχεδιαστεί για το ~TiddlyWiki Classic. Σημειώνουμε ότι [[αυτά τα πρόσθετα δεν λειτουργούν με την έκδοση 5.χ.χ του TiddlyWiki|https://tiddlywiki.com/#TiddlyWikiClassic]]. Πρόσθετα ~TiddlyWiki Classic που εντοπίστηκαν:
+Alerts: Προειδοποιήσεις
 BinaryWarning/Prompt: Αυτό το tiddler περιέχει δυαδικά δεδομένα
 ClassicWarning/Hint: Αυτό το tiddler έχει γραφτεί με την wiki-γραφή του TiddlyWiki Classic, που δεν είναι πλήρως συμβατή με τη γραφή της 5ης έκδοσης του TiddlyWiki. Δες το https://tiddlywiki.com/static/Upgrading.html για περισσότερες λεπτομέρειες.
 ClassicWarning/Upgrade/Caption: αναβάθμιση
@@ -15,6 +16,8 @@ ConfirmOverwriteTiddler: Θέλετε να αντικαταστήσετε το t
 Count: απαρίθμηση
 DefaultNewTiddlerTitle: Νέο tiddler
 Diffs/CountMessage: <<diff-count>> διαφορές
+Draft/Attribution: Πρόχειρο του «<<draft-title>>» από {{$:/status/UserName}}
+Draft/Title: Πρόχειρο του «<<draft-title>>»
 DropMessage: Άφησε εδώ (ή πάτησε το πλήκτρο Esc για να ακύρωσεις)
 Encryption/Cancel: Άκυρο
 Encryption/ConfirmClearPassword: Θέλεις να αφαιρέσεις τον κωδικό; Αυτό θα έχει ως συνέπεια να μην κρυπτογραφείται το wiki όταν αποθηκεύεται
@@ -43,7 +46,7 @@ Error/SavingToTWEdit: Σφάλμα κατά την αποθήκευση στο T
 Error/WhileSaving: Σφάλμα κατά την αποθήκευση
 Error/XMLHttpRequest: Κωδικός σφάλματος XMLHttpRequest
 Error/ZoominTextNode: Σφάλμα Προβολής Ιστορίας: Φαίνεται ότι προσπάθησες να αλληλεπιδράσεις με ένα tiddler που εμφανίζεται σε προσαρμοσμένο δοχείο. Αυτό πιθανότατα προκαλείται από τη χρήση του φίλτρου `$:/tags/StoryTiddlerTemplateFilter` με ένα πρότυπο που περιέχει κείμενο ή κενό/α στην αρχή. Παρακαλούμε χρησιμοποίησε το pragma `\whitespace trim` και βεβαίωσε ότι όλο το περιεχόμενο του tiddler περιλαμβάνεται σε μόνο ένα στοιχείο HTML. Το κείμενο που προκάλεσε αυτό το πρόβλημα:
-InternalJavaScriptError/Hint:  Λοιπόν, αυτό είναι ντροπιαστικό. Συνιστάμε να επανεκκινήσεις το TiddlyWiki, πατώντας ανανέωση στον περιηγητή σου
+InternalJavaScriptError/Hint: Λοιπόν, αυτό είναι ντροπιαστικό. Συνιστάμε να επανεκκινήσεις το TiddlyWiki, πατώντας ανανέωση στον περιηγητή σου
 InternalJavaScriptError/Title: Εσωτερικό Σφάλμα JavaScript
 LayoutSwitcher/Description: Άνοιξε τον εναλλάκτη διατάξεων
 LazyLoadingWarning: <p>Γίνεται φόρτωση εξωτερικού περιεχόμενο από ''<$text text={{!!_canonical_uri}}/>''</p><p>Αν αυτό το μήνυμα δεν εξαφανιστεί, ενδέχεται ότι ο τύπος tiddler δεν ταιριάζει με τον τύπο του εξωτερικού περιεχομένου, ή πως το πρόγραμμα περιήγησης που χρησιμοποιείς δεν υποστηρίζει εξωτερικό περιεχόμενο για wiki που φορτώθηκαν ως αυτοτελή Δες σχετικά στο https://tiddlywiki.com/#ExternalText</p>
@@ -69,7 +72,7 @@ No: Όχι
 OfficialPluginLibrary: Επίσημη Βιβλιοθήκη Πρόσθετων ~TiddlyWiki
 OfficialPluginLibrary/Hint: Η επίσημη βιβλιοθήκη πρόσθετων του ~TiddlyWiki στο tiddlywiki.com. Τα πρόσθετα, τα θέματα και τα πακέτα γλωσσών συντηρούνται από την κεντρική ομάδα.
 PageTemplate/Description: η προκαθορισμένη διάταξη του ~TiddlyWiki
-PageTemplate/Name: Τυπική Διάταξη
+PageTemplate/Name: Τυπική διάταξη
 PluginReloadWarning: Παρακαλούμε αποθήκευσε {{$:/core/ui/Buttons/save-wiki}} και επαναφόρτωσε {{$:/core/ui/Buttons/refresh}} προκειμένου να ενεργοποιηθούν οι αλλαγές στα πρόσθετα
 RecentChanges/DateFormat: DDth MMM YYYY
 Shortcuts/Input/Accept/Hint: Αποδέξου το επιλεγμένο στοιχείο
@@ -81,10 +84,10 @@ Shortcuts/Input/Tab-Left/Hint: Επέλεξε την προηγούμενη κα
 Shortcuts/Input/Tab-Right/Hint: Επέλεξε την επόμενη καρτέλα
 Shortcuts/Input/Up/Hint: Επέλεξε το προηγούμενο αντικείμενο
 Shortcuts/SidebarLayout/Hint: Άλλαξε τη διάταξη της πλευρικής εργαλειοθήκης
-Switcher/Subtitle/language: Άλλαξε Γλώσσα
-Switcher/Subtitle/layout: Άλλαξε Διάταξη
-Switcher/Subtitle/palette: Άλλαξε Παλέτα
-Switcher/Subtitle/theme: Άλλαξε Θέμα
+Switcher/Subtitle/language: Άλλαξε γλώσσα
+Switcher/Subtitle/layout: Άλλαξε διάταξη
+Switcher/Subtitle/palette: Άλλαξε παλέτα
+Switcher/Subtitle/theme: Άλλαξε θέμα
 SystemTiddler/Tooltip: Αυτό είναι ένα tiddler συστήματος
 SystemTiddlers/Include/Prompt: Συμπεριέλαβε συστεμικά tiddlers
 TagManager/Colour/Heading: Χρώμα

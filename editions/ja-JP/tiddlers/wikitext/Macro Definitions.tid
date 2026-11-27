@@ -1,0 +1,69 @@
+created: 20150220181617000
+modified: 20260321112056546
+original-modified: 20230419103154328
+tags: WikiText Macros
+title: Macro Definitions
+ja-title: マクロ定義
+type: text/vnd.tiddlywiki
+
+!! 紹介
+
+このTiddlerの説明では、[[マクロ|Macros]]を定義するさまざまな方法について説明します。
+
+!! マクロ定義プラグマ
+
+マクロは、Tiddlerの先頭に[[プラグマ: \define|Pragma: \define]]を使用することで作成します。定義されたマクロは、そのマクロを定義したTiddler内、およびそれをトランスクルードするすべてのTiddlerで使用できます。
+
+```
+\define mymacro(param)
+これはマクロのテキストです (param=$param$)
+\end
+```
+
+!! ネストしたマクロ定義
+
+マクロ定義は、`\end`マーカーでマクロ名を指定することで、必要なレベルまでネストできます。ネストしたマクロ定義は、それを含む定義の先頭に記述する必要があります。例:
+
+<<wikitext-example-without-html src:"""\define special-button(caption:"クリック")
+\define actions()
+<$action-sendmessage $message="tm-notify" $param="HelloThere"/>
+\end actions
+<$button actions=<<actions>>>
+$caption$
+</$button>
+\end special-button
+
+<<special-button>>
+""">>
+
+外側のマクロがレンダリングされる際に発生するマクロパラメータのテキスト置換は、ネストした定義にも適用されることに注意してください。つまり、一般的に、ネストしたマクロ内ではマクロパラメータのテキスト置換を使用すべきではありません。
+
+ネストしたマクロのパラメータにも、`<<__変数名__>>`構文を介してアクセスできます。通常の変数と同様に、これらのパラメータはネストした子マクロ(および孫マクロなど)内でも使用可能です。
+
+!! Setウィジェットを用いたマクロ定義
+
+マクロは[[変数|Variables]]の特別な型として実装しているため、内部的には<<.wlink SetWidget>>ウィジェットによって定義されます。
+
+```
+<$set name="mymacro" value="これはマクロのテキストです">
+...
+</$set>
+```
+
+<<.note """<<.wlink SetWidget>>ウィジェットを使用してマクロを定義する際、現時点ではパラメータを指定することはできません。""">>
+
+!! マクロ定義のインポート
+
+[[プラグマ: \import|Pragma: \import]]や<<.wlink ImportVariablesWidget>>ウィジェットを使用すると、別のTiddlerからマクロ定義をコピーできます。
+
+!! `$:/tags/Macro`タグ
+
+グローバルマクロは、[[システムタグ: $:/tags/Macro|SystemTag: $:/tags/Macro]]を使用して定義できます。
+
+[[システムタグ: $:/tags/Macro/View|SystemTag: $:/tags/Macro/View]]は、メインビューテンプレートとプレビューパネル内でのみ使用可能なマクロを定義するために使用します。
+
+[[システムタグ: $:/tags/Macro/View/Body|SystemTag: $:/tags/Macro/View/Body]]は、メインビューテンプレートの本体とプレビューパネル内でのみ使用可能なマクロを定義するために使用します。
+
+!! JavaScriptマクロ
+
+マクロは<<.js-macro-link "JavaScriptモジュールとして記述">>することもできます。

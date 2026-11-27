@@ -14,6 +14,8 @@ type: text/vnd.tiddlywiki
   "{" [: <-"間接"-> /"}以外"/] "}"
   |
   "<" [: <-"変数"-> /">以外"/] ">"
+  |
+  "(" [: <-"複数値変数"-> /")以外"/  ] ")" /"v5.4.0"/
 )
 """/>
 
@@ -22,6 +24,7 @@ type: text/vnd.tiddlywiki
 ;<<.def ハード>>
 : `[パラメータ例]`
 : パラメータは、角括弧内のテキストそのものです。
+
 ;<<.def ソフト>>
 : <<.def 間接>>
 :: `{パラメータ例}`
@@ -30,6 +33,9 @@ type: text/vnd.tiddlywiki
 :: `<パラメータ例>`
 :: パラメータは、山括弧内の[[変数|Variables]]の現在値です。マクロパラメータは、v5.2.0まではサポートされて<<.em いません>>。
 ::<<.from-version "5.2.0">> リテラルマクロパラメータがサポートされています。例: `[<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>]`。
+: <<.def "複数値変数">>
+:: `(パラメータ例)`
+:: <<.from-version "5.4.0">> このパラメータは、丸括弧で囲まれた名前の[[複数値変数|Multi-Valued Variables]]に格納されている値のリスト全体に展開されます。このようにアクセスすると、フィルタ演算子は最初の値だけでなく、すべての値を受け取ります。詳細については、[[複数値変数|Multi-Valued Variables]]を参照してください。
 
 <<.note """すべての[[フィルタオペレータ|filter Operator]]の後にはパラメータ式が続く必要があります。[[パラメータの無いオペレータ|Operators without parameters]]の場合、その式は空になります(`[<currentTiddler>links[]]`のフィルタオペレータ<<.olink links>>と同様)。""">>
 
@@ -37,4 +43,8 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.23">>  [[フィルタステップ|Filter Step]]では、`,`文字で区切られた複数のパラメータがサポートされます。
 
-例えば: `[param1],[param2]`や`<param1>,{param2}`
+例えば: `[param1],[param2]`や`<param1>,{param2}`、 `[param1],(param2)`
+
+---
+
+<<.warning """`/regexp/(flags)`オペランド構文は非推奨であり、ブラウザのコンソールに警告が表示されます。代わりに<<.olink regexp>>演算子を使用してください。""">>

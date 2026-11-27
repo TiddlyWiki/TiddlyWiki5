@@ -32,16 +32,16 @@ exports.parse = function() {
 		params = this.match[3] ? this.match[3].split("|") : [];
 	// Prepare the transclude widget
 	var transcludeNode = {
-			type: "transclude",
-			attributes: {}
-		};
+		type: "transclude",
+		attributes: {}
+	};
 	$tw.utils.each(params,function(paramValue,index) {
 		var name = "" + index;
 		transcludeNode.attributes[name] = {
 			name: name,
 			type: "string",
 			value: paramValue
-		}
+		};
 	});
 	// Prepare the tiddler widget
 	var tr, targetTitle, targetField, targetIndex, tiddlerNode;

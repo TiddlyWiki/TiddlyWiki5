@@ -11,7 +11,11 @@ Estableix el camp d'un grup de tiddlers al resultat de wikificar un tiddler plan
 
 Els paràmetres són:
 
-* ''filtre'' - filtre que identifica els tiddlers afectats
-* ''nom-del-camp'' - el camp a modificar (per omissió "text")
-* ''plantilla-del-títol'' - el tiddler a wikificar del camp indicat. Si està en blanc o no hi és llavors el camp indicat es suprimirà
-* ''tipus-de-text'' - el tipus de text que cal generar (per omissió "text/plain"; es possible utilitzar "text/html" per incloure etiquetes HTML)
+```
+  filtre              filtre que identifica els tiddlers afectats
+  nom-del-camp        el camp a modificar (per omissió: "text")
+  plantilla-del-títol el tiddler a wikificar del camp indicat; si està en blanc
+                      o no hi és llavors el camp indicat es suprimirà
+  tipus-de-text       el tipus de text que cal generar (per omissió: "text/plain";
+                      es possible utilitzar "text/html" per incloure etiquetes HTML)
+```

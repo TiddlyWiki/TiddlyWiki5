@@ -1,0 +1,19 @@
+caption: 5.4.1
+created: 20260508181012812
+description: Release v5.4.1 addresses regressions and bugs introduced in the v5.4.0 release.
+modified: 20260710091945414
+released: 20260710090509444
+tags: ReleaseNotes
+title: Release 5.4.1
+type: text/vnd.tiddlywiki
+
+\procedure release-introduction()
+Release v5.4.1 addresses regressions and bugs introduced in the v5.4.0 release.
+\end release-introduction
+
+\define banner-credit-user-name() Peter
+\define banner-credit-user-link() https://talk.tiddlywiki.org/u/peter
+\define banner-credit-discussion-link() https://talk.tiddlywiki.org/t/vote-for-the-banner-tiddlywiki-v5-4-0/15016
+\define banner-credit-permalink() https://raw.githubusercontent.com/TiddlyWiki/TiddlyWiki5/92caa7312ebc51c59cd345cc81b4a326661a0650/editions/tw5.com/tiddlers/images/New%20Release%20Banner.webp
+
+<<releasenote 5.4.1>>

@@ -1,4 +1,5 @@
 title: $:/language/Docs/Types/text/html
-description: HTML
+description: HTMLマークアップ
 name: text/html
 group: Text
+group-sort: 0

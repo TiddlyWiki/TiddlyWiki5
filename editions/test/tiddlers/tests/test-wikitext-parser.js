@@ -12,7 +12,7 @@ Tests for wikitext parser
 describe("WikiText parser tests", function() {
 
 	// Create a wiki
-	var wiki = new $tw.Wiki();
+	var wiki = $tw.test.wiki();
 
 	// Define a parsing shortcut
 	var parse = function(text) {
@@ -374,7 +374,7 @@ describe("WikiText parser tests", function() {
 
 	});
 
-        it("should parse tables", function() {
+	it("should parse tables", function() {
 		let wikitext = `
 |!Cell1 |!Cell2 |
 |Cell3 |Cell4 |`.trim();
@@ -467,6 +467,10 @@ describe("WikiText parser tests", function() {
 		}];
 
 		expect(parse(wikitext)).toEqual(expectedParseTree);
-        });
-});
+	});
 
+	it("should reject unquoted macro parameter values that start with <<", function() {
+		var attribute = $tw.utils.parseMacroParameterAsAttribute("d=<<d> />",0);
+		expect(attribute).toBeNull();
+	});
+});

@@ -113,7 +113,7 @@ exports.startup = function() {
 		$tw.syncer = new $tw.Syncer({
 			wiki: $tw.wiki,
 			syncadaptor: $tw.syncadaptor,
-			logging: $tw.wiki.getTiddlerText('$:/config/SyncLogging', "yes") === "yes"
+			logging: $tw.wiki.getTiddlerText("$:/config/SyncLogging", "yes") === "yes"
 		});
 	}
 	// Setup the saver handler

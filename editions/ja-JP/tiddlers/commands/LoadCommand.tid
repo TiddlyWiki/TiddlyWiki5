@@ -1,0 +1,10 @@
+created: 20140119201439976
+modified: 20260114113547774
+original-modified: 20140119201554602
+tags: Commands
+title: LoadCommand
+ja-title: Loadコマンド
+type: text/vnd.tiddlywiki
+caption: load
+
+{{$:/language/Help/load}}

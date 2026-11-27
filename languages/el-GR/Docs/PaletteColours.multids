@@ -45,7 +45,7 @@ notification-background: Υπόβαθρο ειδοποίησης
 notification-border: Περίγραμμα ειδοποίησης
 page-background: Υπόβαθρο σελίδας
 pre-background: Υπόβαθρο προδιαμορφωμένου κώδικα
-pre-border: Περίγραμμα προδιαμορφωμένου κώδικα 
+pre-border: Περίγραμμα προδιαμορφωμένου κώδικα
 primary: Γενικό κύριο χρώμα
 select-tag-background: Προσκήνιο στοιχείων `<select>`
 select-tag-foreground: Προσκήνιο κειμένου σε στοιχεία `<select>`

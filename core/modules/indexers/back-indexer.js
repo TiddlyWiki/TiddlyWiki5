@@ -46,7 +46,7 @@ function BackSubIndexer(indexer,extractor) {
 BackSubIndexer.prototype.init = function() {
 	// lazy init until first lookup
 	this.index = null;
-}
+};
 
 BackSubIndexer.prototype._init = function() {
 	this.index = Object.create(null);
@@ -60,11 +60,11 @@ BackSubIndexer.prototype._init = function() {
 			self.index[target][sourceTitle] = true;
 		});
 	});
-}
+};
 
 BackSubIndexer.prototype.rebuild = function() {
 	this.index = null;
-}
+};
 
 /*
 * Get things that is being referenced in the text, e.g. tiddler names in the link syntax.
@@ -78,7 +78,7 @@ BackSubIndexer.prototype._getTarget = function(tiddler) {
 		return this.wiki[this.extractor](parser.tree, tiddler.fields.title);
 	}
 	return [];
-}
+};
 
 BackSubIndexer.prototype.update = function(updateDescriptor) {
 	// lazy init/update until first lookup
@@ -86,12 +86,13 @@ BackSubIndexer.prototype.update = function(updateDescriptor) {
 		return;
 	}
 	var newTargets = [],
-	    oldTargets = [],
-	    self = this;
-	if(updateDescriptor.old.exists) {
+		oldTargets = [],
+		self = this;
+	// System tiddlers are never indexed as sources, matching the _init() scan
+	if(updateDescriptor.old.exists && !this.wiki.isSystemTiddler(updateDescriptor.old.tiddler.fields.title)) {
 		oldTargets = this._getTarget(updateDescriptor.old.tiddler);
 	}
-	if(updateDescriptor.new.exists) {
+	if(updateDescriptor.new.exists && !this.wiki.isSystemTiddler(updateDescriptor.new.tiddler.fields.title)) {
 		newTargets = this._getTarget(updateDescriptor.new.tiddler);
 	}
 
@@ -106,7 +107,7 @@ BackSubIndexer.prototype.update = function(updateDescriptor) {
 		}
 		self.index[target][updateDescriptor.new.tiddler.fields.title] = true;
 	});
-}
+};
 
 BackSubIndexer.prototype.lookup = function(title) {
 	if(!this.index) {
@@ -117,6 +118,6 @@ BackSubIndexer.prototype.lookup = function(title) {
 	} else {
 		return [];
 	}
-}
+};
 
 exports.BackIndexer = BackIndexer;

@@ -1,0 +1,28 @@
+created: 20210101162308245
+modified: 20260211104401035 
+original-modified: 20230110220417543
+tags: [[Community Editions]]
+title: "TiddlyStudy" by Kebi
+ja-title: Kebiによる"TiddlyStudy"
+type: text/vnd.tiddlywiki
+url: https://postkevone.github.io/tiddlystudy/
+
+ノートブックシステムとして使用するのに最適なTiddlyWikiの適応版です。
+
+{{!!url}}
+
+<<<
+Tiddly Researchは、 TiddlyWikiをベースにした無料のローカルメモ環境です
+
+主機能:
+
+* 複数レベルでの双方向ノートリンク
+* タグ
+* リンクされたリファレンス
+* リンクされていないリファレンス
+* トランスクルージョン
+* 階層的ノート作成構造に基づく箇条書き
+* 間隔をあけた反復練習のフラッシュカードツールAnkiとの統合
+* ToDo
+* その他
+<<<

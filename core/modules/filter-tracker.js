@@ -69,17 +69,17 @@ class FilterTracker {
 		if(!tracker) return;
 		const results = [];
 		// Evaluate the filter and remove duplicate results
-		$tw.utils.each(this.wiki.filterTiddlers(tracker.filterString), title => {
+		$tw.utils.each(this.wiki.filterTiddlers(tracker.filterString), (title) => {
 			$tw.utils.pushTop(results, title);
 		});
 		// Process the newly entered results
-		results.forEach(title => {
+		results.forEach((title) => {
 			if(!tracker.previousResults.includes(title) && !tracker.resultValues[title] && tracker.fnEnter) {
 				tracker.resultValues[title] = tracker.fnEnter(title) || true;
 			}
 		});
 		// Process the results that have just left
-		tracker.previousResults.forEach(title => {
+		tracker.previousResults.forEach((title) => {
 			if(!results.includes(title) && tracker.resultValues[title] && tracker.fnLeave) {
 				tracker.fnLeave(title, tracker.resultValues[title]);
 				delete tracker.resultValues[title];
@@ -91,7 +91,7 @@ class FilterTracker {
 
 	processChanges(changes) {
 		for(const tracker of this.trackers.values()) {
-			Object.keys(changes).forEach(title => {
+			Object.keys(changes).forEach((title) => {
 				if(title && tracker.previousResults.includes(title) && tracker.fnChange) {
 					tracker.resultValues[title] = tracker.fnChange(title, tracker.resultValues[title]) || tracker.resultValues[title];
 				}

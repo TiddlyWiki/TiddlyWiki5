@@ -7,19 +7,17 @@ The audio parser parses an audio tiddler into an embeddable HTML element
 
 \*/
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
 "use strict";
 
 var AudioParser = function(type,text,options) {
 	var element = {
-			type: "element",
-			tag: "$audio", // Using $audio to enable widget interception
-			attributes: {
-				controls: {type: "string", value: "controls"},
-				style: {type: "string", value: "width: 100%; object-fit: contain"}
-			}
-		};
+		type: "element",
+		tag: "$audio", // Using $audio to enable widget interception
+		attributes: {
+			controls: {type: "string", value: "controls"},
+			style: {type: "string", value: "width: 100%; object-fit: contain"}
+		}
+	};
 		
 	// Pass through source information
 	if(options._canonical_uri) {

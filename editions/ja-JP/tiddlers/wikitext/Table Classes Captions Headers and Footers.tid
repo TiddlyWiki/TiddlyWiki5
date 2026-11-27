@@ -1,0 +1,22 @@
+created: 20220819100636227
+modified: 20260302113247123
+original-modified: 20220819101309072
+tags: [[Tables in WikiText]]
+title: Table Classes, Captions, Headers and Footers
+ja-title: 表クラス、キャプション、ヘッダー、フッター
+type: text/vnd.tiddlywiki
+
+表のCSSクラス、キャプション、ヘッダー、フッターは、特別な擬似行として指定できます。次の例をご覧ください:
+
+* `|myclass anotherClass|k` は、表にCSSクラス"myclass"と"anotherClass"を割りあてます
+* `|これはキャプションです |c` は、表にキャプション"これはキャプションです"を付与します
+* `|ヘッダー|ヘッダー|h` は、テキスト"ヘッダー"を含むセルのヘッダー行を追加します
+* `|フッター|フッター|f` は、テキスト"フッター"を含むセルのフッター行を追加します
+
+<<wikitext-example-without-html src:"""|myclass anotherClass|k
+|これはキャプションです |c
+|セル1 |セル2 |
+|セル3 |セル3 |
+|ヘッダー|ヘッダー|h
+|フッター|フッター|f
+""">>

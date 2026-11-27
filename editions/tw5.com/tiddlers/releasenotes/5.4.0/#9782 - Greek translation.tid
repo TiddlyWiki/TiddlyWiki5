@@ -1,0 +1,13 @@
+title: $:/changenotes/5.4.0/#9782
+description: Update Greek translation
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: translation
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9782
+github-contributors: superuser-does
+
+* Translated all new text introduced in 5.4.0
+* Changed tab captions which weren't proper nouns from __T__itle __C__ase to __S__entence __c__ase
+* Lowercased export dialog options to match that section of the UI, like in the original English version
+* Other minor changes and corrections

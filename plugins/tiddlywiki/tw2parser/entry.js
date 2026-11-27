@@ -23,4 +23,4 @@ exports.run = function(key,map) {
 	} catch(e) {
 		return "";
 	}
-}
+};

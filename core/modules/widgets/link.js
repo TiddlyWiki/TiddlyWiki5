@@ -99,7 +99,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		wikiLinkText = this.wiki.filterTiddlers(wikilinkTransformFilter,this,function(iterator) {
 			iterator(self.wiki.getTiddler(self.to),self.to);
 		})[0];
-	} else {
+	}
+	if(wikiLinkText === undefined) {
 		// Expand the tv-wikilink-template variable to construct the href
 		var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
 			wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$";
@@ -123,7 +124,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		var tooltipText = this.wiki.renderText("text/plain","text/vnd.tiddlywiki",tooltipWikiText,{
 			parseAsInline: true,
 			variables: {
-				currentTiddler: this.to
+				currentTiddler: this.to,
+				"tv-wikilinks": "no"
 			},
 			parentWidget: this
 		});

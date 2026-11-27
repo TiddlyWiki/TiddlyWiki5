@@ -256,3 +256,4 @@ ViewTemplateTags/Hint: This rule cascade is used by the default view template to
 WikiInformation/Caption: Wiki Information
 WikiInformation/Hint: This page summarises high level information about the configuration of this ~TiddlyWiki. It is designed to enable users to quickly share relevant aspects of the configuration of their ~TiddlyWiki with others, for example when seeking help in one of the forums. No private or personal information is included, and nothing is shared without being explicitly copied and pasted elsewhere
 WikiInformation/Drag/Caption: Drag this link to copy this tool to another wiki
+WikiInformation/Generate/Caption: Click to generate wiki information report

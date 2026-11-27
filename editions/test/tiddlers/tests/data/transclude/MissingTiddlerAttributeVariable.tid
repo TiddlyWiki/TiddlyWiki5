@@ -1,0 +1,13 @@
+title: Transclude/MissingTiddlerAttributeVariable
+description: Missing Tiddler Attribute Variable
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+description: hello
+
+<$transclude tiddler=<<nonExistentVariable>> field="description"/>
++
+title: ExpectedResult
+
+<p>hello</p>

@@ -18,13 +18,13 @@ class BackgroundActionDispatcher {
 		// Track the filter for the background actions
 		this.filterTracker.track({
 			filterString: "[all[tiddlers+shadows]tag[$:/tags/BackgroundAction]!is[draft]]",
-			fnEnter: title => this.trackFilter(title),
+			fnEnter: (title) => this.trackFilter(title),
 			fnLeave: (title, enterValue) => this.untrackFilter(enterValue),
 			fnChange: (title, enterValue) => {
 				this.untrackFilter(enterValue);
 				return this.trackFilter(title);
 			},
-			fnProcess: changes => this.process(changes)
+			fnProcess: (changes) => this.process(changes)
 		});
 	}
 
@@ -75,10 +75,9 @@ class BackgroundActionTracker {
 			filterString: this.trackFilter,
 			fnEnter: () => { this.hasChanged = true; },
 			fnLeave: () => { this.hasChanged = true; },
-			fnProcess: changes => {
+			fnProcess: (changes) => {
 				if(this.hasChanged) {
 					this.hasChanged = false;
-					console.log("Processing background action", this.title);
 					const tiddler = this.wiki.getTiddler(this.title);
 					let doActions = true;
 					if(tiddler && tiddler.fields.platforms) {
@@ -89,6 +88,7 @@ class BackgroundActionTracker {
 						}
 					}
 					if(doActions) {
+						console.log("Processing background action", this.title);
 						this.wiki.invokeActionString(
 							this.actions,
 							null,

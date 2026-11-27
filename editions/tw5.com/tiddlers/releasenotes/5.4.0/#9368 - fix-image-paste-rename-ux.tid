@@ -1,0 +1,10 @@
+title: $:/changenotes/5.4.0/#9368
+description: Fix image paste rename UX
+release: 5.4.0
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9368
+github-contributors: rishu-7549
+
+Recognise user-entered rename input when pasting an image even if the checkmark is not clicked before pressing ''Import''

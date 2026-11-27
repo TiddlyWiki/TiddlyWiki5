@@ -7,16 +7,13 @@ Tests the JSON filters and the format:json operator
 
 \*/
 
-
-/* jslint node: true, browser: true */
 /* eslint-env node, browser, jasmine */
 /* eslint no-mixed-spaces-and-tabs: ["error", "smart-tabs"]*/
-/* global $tw, require */
 "use strict";
 
 describe("json filter tests", function() {
 
-	var wiki = new $tw.Wiki();
+	var wiki = $tw.test.wiki();
 	var tiddlers = [{
 		title: "First",
 		text: '{"a":"one","b":"","c":1.618,"d": {"e": "four","f": ["five","six",true,false,null]}}',
@@ -127,7 +124,7 @@ describe("json filter tests", function() {
 		expect(wiki.filterTiddlers("[jsonset[a],[aa]]")).toEqual(['"First"','"Second"','"Third"']);
 		expect(wiki.filterTiddlers("[{First}jsonset[]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
 		expect(wiki.filterTiddlers("[{First}jsonset[],[Antelope]]")).toEqual(['"Antelope"']);
-		expect(wiki.filterTiddlers("[{First}jsonset:number[],[not a number]]")).toEqual(['0']);
+		expect(wiki.filterTiddlers("[{First}jsonset:number[],[not a number]]")).toEqual(["0"]);
 		expect(wiki.filterTiddlers("[{First}jsonset[id],[Antelope]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":"Antelope"}']);
 		expect(wiki.filterTiddlers("[{First}jsonset:notatype[id],[Antelope]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":"Antelope"}']);
 		expect(wiki.filterTiddlers("[{First}jsonset:boolean[id],[false]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":false}']);
@@ -174,6 +171,21 @@ describe("json filter tests", function() {
 		expect(wiki.filterTiddlers("[{First}format:json[]]")).toEqual(["{\"a\":\"one\",\"b\":\"\",\"c\":1.618,\"d\":{\"e\":\"four\",\"f\":[\"five\",\"six\",true,false,null]}}"]);
 		expect(wiki.filterTiddlers("[{First}format:json[4]]")).toEqual(["{\n    \"a\": \"one\",\n    \"b\": \"\",\n    \"c\": 1.618,\n    \"d\": {\n        \"e\": \"four\",\n        \"f\": [\n            \"five\",\n            \"six\",\n            true,\n            false,\n            null\n        ]\n    }\n}"]);
 		expect(wiki.filterTiddlers("[{First}format:json[  ]]")).toEqual(["{\n  \"a\": \"one\",\n  \"b\": \"\",\n  \"c\": 1.618,\n  \"d\": {\n    \"e\": \"four\",\n    \"f\": [\n      \"five\",\n      \"six\",\n      true,\n      false,\n      null\n    ]\n  }\n}"]);
+	});
+
+	it("should support the makepatches operator with json output", function() {
+		expect(wiki.filterTiddlers("[[The quick brown fox]makepatches::json[The fast brown fox]]")).toEqual([
+			'[{"type":"equal","text":"The "},{"type":"delete","text":"quick"},{"type":"insert","text":"fast"},{"type":"equal","text":" brown fox"}]'
+		]);
+
+		expect(wiki.filterTiddlers("[[The quick brown fox]makepatches:words:json[The fast brown fox]]")).toEqual([
+			'[{"type":"equal","text":"The "},{"type":"delete","text":"quick "},{"type":"insert","text":"fast "},{"type":"equal","text":"brown fox"}]'
+		]);
+
+		// Safely ignores missing/invalid second suffix and returns a standard patch string instead of JSON
+		expect(wiki.filterTiddlers("[[The quick brown fox]makepatches:words[The fast brown fox]]")[0]).not.toContain(
+			'"type":"equal"'
+		);
 	});
 
 });

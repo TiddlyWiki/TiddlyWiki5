@@ -24,7 +24,7 @@ exports.fields = function(source,operator,options) {
 				for(fieldName in tiddler.fields) {
 					(operand.indexOf(fieldName) !== -1) ? $tw.utils.pushTop(results,fieldName) : "";
 				}
-			} else if (suffixes.indexOf("exclude") !== -1) {
+			} else if(suffixes.indexOf("exclude") !== -1) {
 				for(fieldName in tiddler.fields) {
 					(operand.indexOf(fieldName) !== -1) ? "" : $tw.utils.pushTop(results,fieldName);
 				}

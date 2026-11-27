@@ -15,6 +15,8 @@ Listing/Preview/TextRaw: Text - roh
 Listing/Preview/Fields: Felder
 Listing/Preview/Diff: Diff - Text
 Listing/Preview/DiffFields: Diff - Felder
+Listing/ImportOptions/Caption: Import Optionen
+Listing/ImportOptions/NoMatch: Keine Optionen aktiv für diese Files.
 Listing/Rename/Tooltip: Tiddler vorm Importieren umbenennen
 Listing/Rename/Prompt: Umbenennen in:
 Listing/Rename/ConfirmRename : Tiddler umbenennen

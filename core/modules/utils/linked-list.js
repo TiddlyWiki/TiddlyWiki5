@@ -59,7 +59,7 @@ LinkedList.prototype.push = function(/* values */) {
 LinkedList.prototype.pushTop = function(value) {
 	var t;
 	if($tw.utils.isArray(value)) {
-		for (t=0; t<value.length; t++) {
+		for(t=0; t<value.length; t++) {
 			_assertString(value[t]);
 		}
 		for(t=0; t<value.length; t++) {

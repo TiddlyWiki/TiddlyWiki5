@@ -19,7 +19,7 @@ exports.filter = function(source,operator,options) {
 	source(function(tiddler,title) {
 		var list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),options.widget.makeFakeWidgetWithVariables({
 			"currentTiddler": "" + title,
-			"..currentTiddler": options.widget.getVariable("currentTiddler","")
+			"..currentTiddler": options.widget.getVariable("currentTiddler",{defaultValue:""})
 		}));
 		if((list.length > 0) === target) {
 			results.push(title);

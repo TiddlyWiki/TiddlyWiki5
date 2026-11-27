@@ -1,0 +1,13 @@
+change-category: internal
+change-type: bugfix
+created: 20260710092852681
+description: Fixes an issue with the minheight of textareas.
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9828
+modified: 20260710093223971
+release: 5.4.1
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.4.1/#9828
+type: text/vnd.tiddlywiki
+
+Fixes an issue with the minheight of textareas.

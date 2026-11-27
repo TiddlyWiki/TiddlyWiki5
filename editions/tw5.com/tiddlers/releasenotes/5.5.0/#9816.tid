@@ -1,0 +1,10 @@
+ title: $:/changenotes/5.5.0/#9816
+description: Replaces some wikify widget with call dynamic syntax
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: internal
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9816
+github-contributors: Leilei332
+
+Replaces unnecessary wikify widget usage with call dynamic attribute syntax.

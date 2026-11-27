@@ -45,7 +45,7 @@ var CsvParser = function(type,text,options) {
 			row.children.push({
 				"type": "element", "tag": tag, "children": [{
 					"type": "text",
-					"text": columns[column] || ''
+					"text": columns[column] || ""
 				}]
 			});
 		}
