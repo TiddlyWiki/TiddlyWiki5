@@ -11,14 +11,21 @@ I roden, serverer den rendering af en angivet tiddler. Væk fra roden, serverer 
 
 Parametrene er:
 
-* ''port'' - port nummeret til at servere fra (standard til "8080")
-* ''roottiddler'' - tiddler som serveres i  roden (standard til "$:/core/save/all") 
-* ''rendertype'' - den indholdstype rod tiddleren skal renderes til (standard til "text/plain")
-* ''servetype'' - den indholdstype rod tiddleren skal serveres (standard til "text/html")
-* ''username'' - standard brugernavn til signerering af redigeringer
-* ''password'' - valgfrit password til basis autentificering
-* ''host'' - valgfrit værtnavn at servere fra (standard til "127.0.0.1" også kendt som  "localhost")
-* ''pathprefix'' - valgfrit prefix til stier
+```
+  port              port nummeret til at servere fra
+                    (standard til "8080")
+  roottiddler       tiddler som serveres i roden
+                    (standard til "$:/core/save/all")
+  rendertype        den indholdstype rod tiddleren skal renderes til
+                    (standard til "text/plain")
+  servetype         den indholdstype rod tiddleren skal serveres
+                    (standard til "text/html")
+  username          standard brugernavn til signerering af redigeringer
+  password          valgfrit password til basis autentificering
+  host              valgfrit værtnavn at servere fra
+                    (standard til "127.0.0.1" også kendt som "localhost")
+  pathprefix        valgfrit prefix til stier
+```
 
 Hvis password parameteren er angivet, vil browseren bede brugeren om brugernavn og password. Bemærk at password sendes i ren tekst så denne implementering er ikke egnet til generel brug.
 

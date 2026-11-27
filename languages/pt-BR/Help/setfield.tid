@@ -11,7 +11,13 @@ Define um determinado campo de um grupo de tiddlers para o resultado de interpre
 
 Os parâmetros são:
 
-* ''filter'' - filtro que selecciona os tiddlers a ser afectados
-* ''fieldname'' - nome do campo a modificar (por padrão "texto")
-* ''templatetitle'' - o tiddler a interpretar para o campo especificado. Se for deixado em branco ou estiver em falta o campo especificado será eliminado
-* ''rendertype'' - O tipo de texto a interpretar (por padrão "text/plain"; "text/html" pode ser utilizado para incluir assuntos HTML)
+```
+  filter          filtro que selecciona os tiddlers a ser afectados
+  fieldname       nome do campo a modificar (por padrão "texto")
+  templatetitle   o tiddler a interpretar para o campo especificado; se
+                  for deixado em branco ou estiver em falta o campo
+                  especificado será eliminado
+  rendertype      o tipo de texto a interpretar (por padrão "text/plain";
+                  "text/html" pode ser utilizado para incluir assuntos
+                  HTML)
+```
