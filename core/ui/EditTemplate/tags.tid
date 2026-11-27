@@ -38,16 +38,47 @@ tags: $:/tags/EditTemplate
 />
 \end
 
+<!-- Ignore a title dragged in from elsewhere, because this reorders tags rather than adding them -->
+\procedure tag-reorder-actions()
+<%if [<saveTiddler>get<tagField>enlist-input[]match<actionTiddler>] %>
+<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
+<%endif%>
+\end
+
 \procedure edit-tags-template(tagField:"tags")
 <div class="tc-edit-tags">
-	<$list filter="[<currentTiddler>get<tagField>enlist-input[]sort[title]]" storyview="pop">
+	<!-- Editing must never hide a tag, so the setting is applied only when it returns the same number of tags -->
+	<!-- _dragEnabled is no once a sort filter is set, because the filter would put a dropped tag straight back where it was -->
+	<$let
+		source="[<currentTiddler>get<tagField>enlist-input[]]"
+		filteredExpr="[(filtered)]"
+		total={{{ [subfilter<source>count[]] }}}
+		filtered={{{ [subfilter<source>] +[subfilter{$:/config/Tags/SortFilter}] }}}
+		useFiltered={{{ [(filtered)count[]match<total>then[yes]] }}}
+		listFilter={{{ [<useFiltered>match[yes]then<filteredExpr>] :else[<source>] }}}
+		_dragEnabled={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[[$:/config/Tags/SortFilter]has:field[text]then[no]] :else[[yes]] }}}
+	>
+	<$list filter=<<listFilter>> storyview="pop">
+		<$droppable tag="span" enable=<<_dragEnabled>> actions=<<tag-reorder-actions>> >
+		<span class="tc-droppable-placeholder"/>
+		<$draggable tiddler=<<currentTiddler>> tag="span" enable=<<_dragEnabled>> >
 		<$macrocall $name="tag-body"
 			colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
 			palette={{$:/palette}}
 			icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
 			tagField=<<tagField>>
 		/>
+		</$draggable>
+		</$droppable>
 	</$list>
+	<!-- A drop zone past the last pill, so a tag can be moved to the end -->
+	<$tiddler tiddler="">
+		<$droppable tag="span" enable=<<_dragEnabled>> actions=<<tag-reorder-actions>> >
+		<span class="tc-droppable-placeholder"/>
+		<span class="tc-edit-tags-drop-end"/>
+		</$droppable>
+	</$tiddler>
+	</$let>
 	<$let tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
 		<$macrocall $name="tag-picker" tagField=<<tagField>>/>
 	</$let>

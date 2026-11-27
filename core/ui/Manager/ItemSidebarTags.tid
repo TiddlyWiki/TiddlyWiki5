@@ -15,13 +15,23 @@ caption: {{$:/language/Manager/Item/Tags}}
 \end
 
 <p>
-<$list filter="[all[current]tags[]] [list[$:/config/Manager/RecentTags]] +[sort[title]] " variable="tag" storyview="pop">
+<!-- These checkboxes toggle tags, so this is an editing surface: the setting is applied only when it returns the same number of tags, which means it reorders rather than hides -->
+<$let
+	source="[all[current]tags[]] [list[$:/config/Manager/RecentTags]]"
+	filteredExpr="[(filtered)]"
+	total={{{ [subfilter<source>count[]] }}}
+	filtered={{{ [subfilter<source>] +[subfilter{$:/config/Tags/SortFilter}] }}}
+	useFiltered={{{ [(filtered)count[]match<total>then[yes]] }}}
+	listFilter={{{ [<useFiltered>match[yes]then<filteredExpr>] :else[<source>] }}}
+>
+<$list filter=<<listFilter>> variable="tag" storyview="pop">
 <div>
 <$checkbox tiddler=<<currentTiddler>> tag=<<tag>> actions=<<tag-checkbox-actions>>>
 <$macrocall $name="tag-pill" tag=<<tag>>/>
 </$checkbox>
 </div>
 </$list>
+</$let>
 </p>
 <p>
 <$fieldmangler>

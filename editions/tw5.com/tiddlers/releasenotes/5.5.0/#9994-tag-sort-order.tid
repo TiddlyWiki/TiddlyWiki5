@@ -1,0 +1,18 @@
+change-category: usability
+change-type: feature
+created: 20260825015810091
+description: The tags on a tiddler keep the order you added them in, and tag order is configurable
+github-contributors: pmario
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9994
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#9994
+type: text/vnd.tiddlywiki
+
+* The tags shown on a tiddler keep the order you added them in, rather than being sorted alphabetically. Position can carry meaning. Eg: the first tag reads as the most important, and tags placed next to each other read as belonging together
+* Lists showing every tag in the wiki, such as the $:/TagManager and the sidebar ''More > Tags'' tab, stay sorted alphabetically and are unaffected
+* The order is configurable under ''Control Panel'' > ''Settings'' > ''Tag Sorting'': do not sort, sort alphabetically, or supply your own filter
+* While the order is unsorted, a tag in the tiddler editor can be dragged to a new position
+* A custom filter can also hide tags. `[!prefix[.]]` on a tiddler's tags hides every tag whose name begins with a dot, which keeps working tags out of a reader facing view
+* `[tags[]]` returns tags in the order they appear on the tiddler. Previously a tag that looks like a whole number, such as a year, jumped to the front of the result
+* `<$action-listops>` no longer rewrites the whole `tags` field in alphabetical order when it adds or removes a tag

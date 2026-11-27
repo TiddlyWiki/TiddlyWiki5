@@ -1,0 +1,87 @@
+title: $:/core/ui/ControlPanel/Settings/TagSorting
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/TagSorting/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Settings/TagSorting/
+
+<!-- A filter operand cannot contain square brackets, so the preset lives in a variable -->
+\procedure sorted-preset() [sort[]]
+
+<!-- The filter tiddler alone defines the mode. Empty text counts as custom, so choosing custom with nothing backed up still opens the box -->
+\function tf.tagSortMode(filter)
+[<filter>get[text]match<sorted-preset>then[alphabetical]]
+:else[<filter>has:field[text]then[custom]]
+:else[[unsorted]]
+\end
+
+<!-- The $list runs no action when the current value is a preset, so a good backup is never replaced by an empty one -->
+\procedure keep-custom-filter()
+<$list filter="[<filter>get[text]!match[]!match<sorted-preset>]" variable="customValue">
+<$action-setfield $tiddler=<<backup>> text=<<customValue>>/>
+</$list>
+\end
+
+<!-- $radio writes its value before running its actions, so it writes a scratch "mode" field and leaves the text field for the actions to preserve. Each action deletes the field again -->
+\procedure tag-sort-radios(filter)
+<$let
+	effective={{{ [function[tf.tagSortMode],<filter>] }}}
+	backup={{{ [<filter>addsuffix[/backup]] }}}
+>
+
+<$radio tiddler=<<filter>>
+	field="mode"
+	value="unsorted"
+	default=<<effective>>
+	actions="""<<keep-custom-filter>><$action-deletetiddler $tiddler=<<filter>>/>"""
+>
+<span class="tc-tiny-gap-left"><<lingo Unsorted>></span>
+</$radio><br>
+<$radio tiddler=<<filter>>
+	field="mode"
+	value="alphabetical"
+	default=<<effective>>
+	actions="""<<keep-custom-filter>><$action-setfield $tiddler=<<filter>> text=<<sorted-preset>>/><$action-deletefield $tiddler=<<filter>> $field="mode"/>"""
+>
+<span class="tc-tiny-gap-left"><<lingo Alphabetical>></span>
+</$radio><br>
+<$radio tiddler=<<filter>>
+	field="mode"
+	value="custom"
+	default=<<effective>>
+	actions="""<$action-setfield $tiddler=<<filter>> text={{{ [<backup>get[text]] }}}/><$action-deletefield $tiddler=<<filter>> $field="mode"/>"""
+>
+<span class="tc-tiny-gap-left"><<lingo Custom/Radio>></span>
+</$radio>
+</$let>
+\end
+
+\procedure tag-sort-input(filter)
+<$edit-text tiddler=<<filter>>
+	tag="input"
+	class="tc-edit-texteditor"
+	disabled={{{ [function[tf.tagSortMode],<filter>match[custom]then[no]] :else[[yes]] }}}
+/>
+\end
+
+<$link to="$:/config/Tags/SortFilter" class="tc-control-panel-item">
+<<lingo TiddlerTags/Hint>>
+</$link>
+
+><<tag-sort-radios "$:/config/Tags/SortFilter">>
+
+!! <<lingo Custom/Heading>>
+
+<<<
+
+<%if [function[tf.tagSortMode],[$:/config/Tags/SortFilter]match[custom]] %>
+<div class="tc-message-box">
+
+<<lingo Custom/Warning>></div>
+
+<%endif%>
+
+<<lingo Custom/Hint>>
+
+|<<lingo TiddlerTags/Caption>> |<<tag-sort-input "$:/config/Tags/SortFilter">> |
+
+<<<
