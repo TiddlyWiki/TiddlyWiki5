@@ -1,0 +1,28 @@
+created: 20260429000000000
+description: static-tabs details mode vs interactive tabs
+import-compound: [[TestCases/StaticTabs/Pitch]]
+modified: 20260429000000000
+tags: $:/tags/wiki-test-spec
+title: TestCases/StaticTabs/test-static-tabs-details
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Compares the standard interactive <<.def "tabs">> macro with `<<.def "static-tabs">>` in `details` mode. Each tab becomes a `<details open>` block with its caption inside `<summary>`.
+
++
+title: Output
+
+''Interactive tabs (default)''
+
+<$transclude $tiddler="StaticTabs" $mode="block"/>
+
+-----
+
+''Static render (the import sees tv-config-static="yes", so tabs become static-tabs; tv-static-tabs-mode forces details)''
+
+<$let tv-config-static="yes" tv-static-tabs-mode="details">
+<$importvariables filter="[subfilter{$:/core/config/GlobalImportFilter}]">
+<$transclude $tiddler="StaticTabs" $mode="block"/>
+</$importvariables>
+</$let>

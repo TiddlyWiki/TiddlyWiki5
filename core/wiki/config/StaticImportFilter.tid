@@ -1,0 +1,2 @@
+title: $:/core/config/StaticImportFilter
+text: [<tv-config-static>match[yes]] :then[all[shadows+tiddlers]tag[$:/tags/Global/Static]!is[draft]]

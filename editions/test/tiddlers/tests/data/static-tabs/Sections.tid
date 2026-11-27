@@ -1,0 +1,20 @@
+title: StaticTabs/Sections
+description: static-tabs sections use a valid heading level and nest content headings below it
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: One
+caption: First
+
+! Inner heading
++
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<static-tabs "[[One]]" headingLevel:"h3" mode:"sections">>
+
+<<static-tabs "[[One]]" headingLevel:"h7" mode:"sections">>
++
+title: ExpectedResult
+
+<p><div class="tc-static-tabs"><section class="tc-static-tab"><h3 class="tc-static-tab-heading"><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#One">First</a></h3><div class="tc-static-tab-content"><h4 class="">Inner heading</h4></div></section></div></p><p><div class="tc-static-tabs"><section class="tc-static-tab"><h2 class="tc-static-tab-heading"><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#One">First</a></h2><div class="tc-static-tab-content"><h3 class="">Inner heading</h3></div></section></div></p>

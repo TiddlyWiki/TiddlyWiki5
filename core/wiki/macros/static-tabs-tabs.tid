@@ -1,0 +1,13 @@
+title: $:/core/macros/static-tabs/tabs
+tags: $:/tags/Global/Static
+code-body: yes
+
+\whitespace trim
+
+\procedure tabs(tabsList,default,state:"$:/state/tab",class,template,buttonTemplate,retain,actions,explicitState)
+<$transclude $variable="static-tabs"
+	tabsList=<<tabsList>>
+	template=<<template>>
+	class=<<class>>
+/>
+\end

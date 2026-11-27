@@ -1,0 +1,22 @@
+title: StaticTabs/Details
+description: static-tabs writes open details elements with anchors by default
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: One
+caption: First
+
+Body one
++
+title: Two words
+
+!! Inner heading
++
+title: Output
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<<static-tabs "[[One]] [[Two words]]" anchorPrefix:"tab">>
++
+title: ExpectedResult
+
+<p><div class="tc-static-tabs"><details class="tc-static-tab" id="tab-one" open="open"><summary class="tc-static-tab-heading"><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#One">First</a></summary><div class="tc-static-tab-content"><p>Body one</p></div></details><details class="tc-static-tab" id="tab-two-words" open="open"><summary class="tc-static-tab-heading"><a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Two%20words">Two words</a></summary><div class="tc-static-tab-content"><h4 class="">Inner heading</h4></div></details></div></p>
