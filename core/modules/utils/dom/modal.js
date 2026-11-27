@@ -91,6 +91,22 @@ Modal.prototype.display = function(title,options) {
 				"name": "history",
 				"type": "string",
 				"value": variables["tv-history-list"]
+			},
+			// Repeated from the page navigator, which never sees a modal's messages
+			"openLinkFromInsideRiver": {
+				"name": "openLinkFromInsideRiver",
+				"type": "string",
+				"value": this.wiki.getTiddlerText("$:/config/Navigation/openLinkFromInsideRiver","")
+			},
+			"openLinkFromOutsideRiver": {
+				"name": "openLinkFromOutsideRiver",
+				"type": "string",
+				"value": this.wiki.getTiddlerText("$:/config/Navigation/openLinkFromOutsideRiver","")
+			},
+			"relinkOnRename": {
+				"name": "relinkOnRename",
+				"type": "string",
+				"value": this.wiki.getTiddlerText("$:/config/RelinkOnRename","")
 			}
 		},
 		"tag": "$navigator",

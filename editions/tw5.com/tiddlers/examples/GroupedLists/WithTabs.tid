@@ -19,6 +19,10 @@ Three definitions feed it:
 This test case carries two payload tiddlers, `_TabButton` and `_TabContent`, because the `tabs` macro transcludes its caption and its panel by tiddler title and cannot take inline wikitext.
 
 Matching is case insensitive, so `de Vries` and `De Vries` would share a tab. A character that is not a letter gets its own tab, which is why the sample data produces a `3` tab. Each caption carries the number of groups behind it, so no tab is a dead end.
+
+''Important:''
+
+If you want to modify the example make sure to copy all three tiddlers: `Output`, `_TabButton` and `_TabContent`.
 +
 title: Output
 

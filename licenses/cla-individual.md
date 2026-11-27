@@ -655,3 +655,11 @@ Himmel, @NotHimmel, 2026/03/19
 Zaid, @Zaidzezo, 2026/09/03
 
 @lamnatos, 2026/10/05
+
+@Wahaj18, 2026/10/09
+
+@ThrownWolfCon, 2026/10/22
+
+Chidiebere Ekennia, @Davien21, 2026/11/01
+
+H. Phil Duby, @mMerlin, 2026/11/01

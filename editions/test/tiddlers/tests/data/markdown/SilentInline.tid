@@ -1,0 +1,37 @@
+title: Markdown/SilentInline
+description: silent look-ahead should not crash
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+type: text/markdown
+
+~$1.00 [img[https://tiddlywiki.com/favicon.ico]] OK
+
+~$1.00 [[abc]] xyz [[foo bar]] OK
+
+~$1.00 <<currentTiddler>> <<currentTiddler>> OK
+
+~$1.00 {{{ [[hello world]] [[foo bar]] +[encodeuri[]] }}} OK
+
+~$1.00 {{New Tiddler!!title}} | {{!!title}} OK
+
+~$1.00 [ext[https://tiddlywiki.com]] | [ext[https://tiddlywiki.com]] OK
+
++
+title: ExpectedResult
+
+<div class="markdown">
+<p>~$1.00 <img src="https://tiddlywiki.com/favicon.ico"> OK
+</p>
+<p>~$1.00 <a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#abc">abc</a> xyz <a class="tc-tiddlylink tc-tiddlylink-missing _codified_" href="#foo%20bar">foo bar</a> OK
+</p>
+<p>~$1.00 Output Output OK
+</p>
+<p>~$1.00 <span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#hello%2520world">hello%20world</a></span><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#foo%2520bar">foo%20bar</a></span> OK
+</p>
+<p>~$1.00 New Tiddler | Output OK
+</p>
+<p>~$1.00 <a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">https://tiddlywiki.com</a> | <a class="tc-tiddlylink-external _codified_" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">https://tiddlywiki.com</a> OK
+</p>
+</div>

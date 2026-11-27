@@ -1,0 +1,13 @@
+change-category: widget
+change-type: bugfix
+created: 20261126145148455
+description: Fix actionValueHasChanged for range widget start and stop actions
+github-contributors: btheado
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/issues/10085
+modified: 20261126145148455
+release: 5.5.0
+tags: $:/tags/ChangeNote
+title: $:/changenotes/5.5.0/#10085
+type: text/vnd.tiddlywiki
+
+Restored the RangeWidget's starting-value tracking, fixing a regression introduced in v5.4.0. The `actionValueHasChanged` variable is now `no` for `actionsStart`, and is `yes` for `actionsStop` only when the final value differs from the value at the start of the drag.

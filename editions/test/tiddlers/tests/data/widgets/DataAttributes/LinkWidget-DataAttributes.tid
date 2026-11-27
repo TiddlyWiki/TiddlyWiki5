@@ -1,5 +1,6 @@
 title: Widgets/DataAttributes/LinkWidget
 description: Data Attributes for LinkWidget
+related: test-link-widget.js lists every place the link widget is tested
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 

@@ -1,0 +1,11 @@
+title: $:/changenotes/5.5.0/#10007
+tags: $:/tags/ChangeNote
+change-type: bugfix
+change-category: plugin
+description: Fix crash in Markdown inline look-ahead parsing
+release: 5.5.0
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10007
+github-contributors: cdruan
+type: text/vnd.tiddlywiki
+
+Fix improper state.pos updates in some TW inline rules during silent mode. The error was exposed by updated markdown-it.
