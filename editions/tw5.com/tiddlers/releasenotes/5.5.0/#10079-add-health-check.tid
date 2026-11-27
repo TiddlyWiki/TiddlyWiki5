@@ -1,0 +1,17 @@
+title: $:/changenotes/5.5.0/#10079
+description: Add health check URL for load balancers
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: usability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10079
+github-contributors: proski
+
+Add a health check URL for load balancers. An HTTP GET request to /healthz will
+return HTTP code 200 even if the client is not authenticated.
+
+The health check URL allows load balancers such as ALB and nginx to verify that
+the server is running and healthy.
+
+The '/healthz' URL is a widely adopted convention for load balancer health
+checks.
