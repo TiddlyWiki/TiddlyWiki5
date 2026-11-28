@@ -1,0 +1,11 @@
+title: $:/changenotes/5.5.0/#10077
+description: tm-modal can place the modal under the widget that sent it
+release: 5.5.0
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: hackability
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/10077
+github-contributors: Davien21
+type: text/vnd.tiddlywiki
+
+* A `tm-modal` message with `embedded` set to ''yes'' or ''true'' places the modal under the widget that sent it. The modal sees every variable that widget sees, including procedures, functions and the toolbar settings from the page template, so toolbar buttons in a modal can show their icons and text, and messages from the modal reach that widget's ancestors (fixes [[Issue #10057|https://github.com/TiddlyWiki/TiddlyWiki5/issues/10057]])
