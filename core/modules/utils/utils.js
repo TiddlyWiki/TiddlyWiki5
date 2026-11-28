@@ -352,180 +352,216 @@ exports.formatTitleString = function(template,options) {
 	return result;
 };
 
+function toUtcFields(date) {
+	var year = date.getFullYear(),
+		fields = new Date(Date.UTC(year,date.getMonth(),date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds(),date.getMilliseconds()));
+	fields.setUTCFullYear(year); // Date.UTC maps years 0 to 99 onto 1900 to 1999
+	return fields;
+}
+
+function isoThursday(fields) {
+	var thursday = new Date(fields.getTime());
+	thursday.setUTCHours(0,0,0,0);
+	thursday.setUTCDate(thursday.getUTCDate() + 4 - (thursday.getUTCDay() || 7)); // JavaScript Sun=0, ISO Sun=7
+	return thursday;
+}
+
+function weekOfYear(fields) {
+	var thursday = isoThursday(fields),
+		yearStart = new Date(thursday.getTime());
+	yearStart.setUTCMonth(0,1);
+	return Math.floor((thursday.getTime() - yearStart.getTime()) / 604800000) + 1;
+}
+
+function dayOfYear(fields) {
+	var day = new Date(fields.getTime()),
+		yearStart = new Date(fields.getTime());
+	day.setUTCHours(0,0,0,0);
+	yearStart.setUTCHours(0,0,0,0);
+	yearStart.setUTCMonth(0,0); // day zero of January is 31 December of the year before
+	return Math.round((day.getTime() - yearStart.getTime()) / 86400000);
+}
+
+function hours12(hours) {
+	return hours > 12 ? hours - 12 : (hours > 0 ? hours : 12);
+}
+
+function amPm(hours) {
+	return $tw.language.getString("Date/Period/" + (hours >= 12 ? "pm" : "am"));
+}
+
+function padYear(year) {
+	return (year < 0 ? "-" : "") + $tw.utils.pad(Math.abs(year),4);
+}
+
 exports.formatDateString = function(date,template) {
 	var result = "",
 		t = template,
+		utc = false,
+		fields,
 		matches = [
 			[/^TIMESTAMP/, function() {
 				return date.getTime();
 			}],
 			[/^0hh12/, function() {
-				return $tw.utils.pad($tw.utils.getHours12(date));
+				return $tw.utils.pad(hours12(fields.getUTCHours()));
 			}],
 			[/^wYYYY/, function() {
-				return $tw.utils.pad($tw.utils.getYearForWeekNo(date),4);
+				return padYear(isoThursday(fields).getUTCFullYear());
 			}],
 			[/^hh12/, function() {
-				return $tw.utils.getHours12(date);
+				return hours12(fields.getUTCHours());
 			}],
 			[/^DDth/, function() {
-				return date.getDate() + $tw.utils.getDaySuffix(date);
+				return fields.getUTCDate() + $tw.language.getString("Date/DaySuffix/" + fields.getUTCDate());
 			}],
 			[/^YYYY/, function() {
-				return $tw.utils.pad(date.getFullYear(),4);
+				return padYear(fields.getUTCFullYear());
 			}],
 			[/^aYYYY/, function() {
-				return $tw.utils.pad(Math.abs(date.getFullYear()),4);
+				return $tw.utils.pad(Math.abs(fields.getUTCFullYear()),4);
 			}],
 			[/^\{era:([^,\|}]*)\|([^}\|]*)\|([^}]*)\}/, function(match) {
-				var year = date.getFullYear();
+				var year = fields.getUTCFullYear();
 				return year === 0 ? match[2] : (year < 0 ? match[1] : match[3]);
 			}],
 			[/^0hh/, function() {
-				return $tw.utils.pad(date.getHours());
+				return $tw.utils.pad(fields.getUTCHours());
 			}],
 			[/^0mm/, function() {
-				return $tw.utils.pad(date.getMinutes());
+				return $tw.utils.pad(fields.getUTCMinutes());
 			}],
 			[/^0ss/, function() {
-				return $tw.utils.pad(date.getSeconds());
+				return $tw.utils.pad(fields.getUTCSeconds());
 			}],
 			[/^0XXX/, function() {
-				return $tw.utils.pad(date.getMilliseconds(),3);
+				return $tw.utils.pad(fields.getUTCMilliseconds(),3);
 			}],
 			[/^0DD/, function() {
-				return $tw.utils.pad(date.getDate());
+				return $tw.utils.pad(fields.getUTCDate());
 			}],
 			[/^0MM/, function() {
-				return $tw.utils.pad(date.getMonth()+1);
+				return $tw.utils.pad(fields.getUTCMonth()+1);
 			}],
 			[/^0WW/, function() {
-				return $tw.utils.pad($tw.utils.getWeek(date));
+				return $tw.utils.pad(weekOfYear(fields));
 			}],
 			[/^0ddddd/, function() {
-				return $tw.utils.pad(Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24),3);
+				return $tw.utils.pad(dayOfYear(fields),3);
 			}],
 			[/^ddddd/, function() {
-				return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+				return dayOfYear(fields);
 			}],
 			[/^dddd/, function() {
-				return [7,1,2,3,4,5,6][date.getDay()];
+				return [7,1,2,3,4,5,6][fields.getUTCDay()];
 			}],
 			[/^ddd/, function() {
-				return $tw.language.getString("Date/Short/Day/" + date.getDay());
+				return $tw.language.getString("Date/Short/Day/" + fields.getUTCDay());
 			}],
 			[/^mmm/, function() {
-				return $tw.language.getString("Date/Short/Month/" + (date.getMonth() + 1));
+				return $tw.language.getString("Date/Short/Month/" + (fields.getUTCMonth() + 1));
 			}],
 			[/^DDD/, function() {
-				return $tw.language.getString("Date/Long/Day/" + date.getDay());
+				return $tw.language.getString("Date/Long/Day/" + fields.getUTCDay());
 			}],
 			[/^MMM/, function() {
-				return $tw.language.getString("Date/Long/Month/" + (date.getMonth() + 1));
+				return $tw.language.getString("Date/Long/Month/" + (fields.getUTCMonth() + 1));
 			}],
 			[/^TZD/, function() {
-				var tz = date.getTimezoneOffset(),
+				var tz = utc ? 0 : date.getTimezoneOffset(),
 					atz = Math.abs(tz);
-				return (tz < 0 ? "+" : "-") + $tw.utils.pad(Math.floor(atz / 60)) + ":" + $tw.utils.pad(atz % 60);
+				return (tz <= 0 ? "+" : "-") + $tw.utils.pad(Math.floor(atz / 60)) + ":" + $tw.utils.pad(atz % 60);
 			}],
 			[/^wYY/, function() {
-				return $tw.utils.pad($tw.utils.getYearForWeekNo(date) - 2000);
+				return $tw.utils.pad(Math.abs(isoThursday(fields).getUTCFullYear()) % 100);
 			}],
 			[/^[ap]m/, function() {
-				return $tw.utils.getAmPm(date).toLowerCase();
+				return amPm(fields.getUTCHours()).toLowerCase();
 			}],
 			[/^hh/, function() {
-				return date.getHours();
+				return fields.getUTCHours();
 			}],
 			[/^mm/, function() {
-				return date.getMinutes();
+				return fields.getUTCMinutes();
 			}],
 			[/^ss/, function() {
-				return date.getSeconds();
+				return fields.getUTCSeconds();
 			}],
 			[/^XXX/, function() {
-				return date.getMilliseconds();
+				return fields.getUTCMilliseconds();
 			}],
 			[/^[AP]M/, function() {
-				return $tw.utils.getAmPm(date).toUpperCase();
+				return amPm(fields.getUTCHours()).toUpperCase();
 			}],
 			[/^DD/, function() {
-				return date.getDate();
+				return fields.getUTCDate();
 			}],
 			[/^MM/, function() {
-				return date.getMonth() + 1;
+				return fields.getUTCMonth() + 1;
 			}],
 			[/^WW/, function() {
-				return $tw.utils.getWeek(date);
+				return weekOfYear(fields);
 			}],
 			[/^YY/, function() {
-				return $tw.utils.pad(date.getFullYear() - 2000);
+				return $tw.utils.pad(Math.abs(fields.getUTCFullYear()) % 100);
 			}]
 		];
-	// If the user wants everything in UTC, shift the datestamp
-	// Optimize for format string that essentially means
-	// 'return raw UTC (tiddlywiki style) date string.'
 	if(t.indexOf("[UTC]") == 0 ) {
+		// Optimize for format string that essentially means
+		// 'return raw UTC (tiddlywiki style) date string.'
 		if(t == "[UTC]YYYY0MM0DD0hh0mm0ssXXX")
 			return $tw.utils.stringifyDate(date || new Date());
-		var offset = date.getTimezoneOffset() ; // in minutes
-		date = new Date(date.getTime()+offset*60*1000) ;
+		utc = true;
 		t = t.substr(5) ;
 	}
+	fields =utc ? date : toUtcFields(date);
 	while(t.length){
-		var matchString = "";
+		if(t.charAt(0) === "\\" && t.length > 1) {
+			result += t.charAt(1);
+			t = t.substr(2);
+			continue;
+		}
+		var matchString = null;
 		$tw.utils.each(matches, function(m) {
 			var match = m[0].exec(t);
 			if(match) {
-				matchString = m[1].call(null,match);
+				matchString = "" + m[1].call(null,match);
 				t = t.substr(match[0].length);
 				return false;
 			}
 		});
-		if(matchString) {
+		if(matchString !== null) {
 			result += matchString;
 		} else {
 			result += t.charAt(0);
 			t = t.substr(1);
 		}
 	}
-	result = result.replace(/\\(.)/g,"$1");
 	return result;
 };
 
 exports.getAmPm = function(date) {
-	return $tw.language.getString("Date/Period/" + (date.getHours() >= 12 ? "pm" : "am"));
+	return amPm(date.getHours());
 };
 
 exports.getDaySuffix = function(date) {
 	return $tw.language.getString("Date/DaySuffix/" + date.getDate());
 };
 
+exports.getDayOfYear = function(date) {
+	return dayOfYear(toUtcFields(date));
+};
+
 exports.getWeek = function(date) {
-	var dt = new Date(date.getTime());
-	var d = dt.getDay();
-	if(d === 0) {
-		d = 7; // JavaScript Sun=0, ISO Sun=7
-	}
-	dt.setTime(dt.getTime() + (4 - d) * 86400000);// shift day to Thurs of same week to calculate weekNo
-	var x = new Date(dt.getFullYear(),0,1);
-	var n = Math.floor((dt.getTime() - x.getTime()) / 86400000);
-	return Math.floor(n / 7) + 1;
+	return weekOfYear(toUtcFields(date));
 };
 
 exports.getYearForWeekNo = function(date) {
-	var dt = new Date(date.getTime());
-	var d = dt.getDay();
-	if(d === 0) {
-		d = 7; // JavaScript Sun=0, ISO Sun=7
-	}
-	dt.setTime(dt.getTime() + (4 - d) * 86400000);// shift day to Thurs of same week
-	return dt.getFullYear();
+	return isoThursday(toUtcFields(date)).getUTCFullYear();
 };
 
 exports.getHours12 = function(date) {
-	var h = date.getHours();
-	return h > 12 ? h-12 : ( h > 0 ? h : 12 );
+	return hours12(date.getHours());
 };
 
 /*
