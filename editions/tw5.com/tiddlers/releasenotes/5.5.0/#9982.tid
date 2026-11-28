@@ -1,0 +1,16 @@
+title: $:/changenotes/5.5.0/#9982
+created: 20260822184413345
+modified: 20260822184413345
+tags: $:/tags/ChangeNote
+change-type: enhancement
+change-category: hackability
+description: Add each stylesheet to its own css layer for easier styling and debugging
+release: 5.5.0
+github-links: https://github.com/TiddlyWiki/TiddlyWiki5/pull/9982
+github-contributors: DesignThinkerer
+type: text/vnd.tiddlywiki
+
+This pull request wraps each TiddlyWiki stylesheet tiddler in a dedicated CSS `@layer`, directly mapping the wiki's load order to absolute CSS precedence.
+By prioritizing source order over standard selector specificity, users can override complex core styles without ever needing to use `!important`.
+As an added benefit, the dynamically generated layer names act as self-documenting labels in the browser developer tools, 
+making it effortless to trace any active style back to its exact source tiddler.
