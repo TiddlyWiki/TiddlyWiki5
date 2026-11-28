@@ -1,0 +1,10 @@
+created: 20261128123900000
+modified: 20261128123900000
+tags: [[Community Plugins]]
+title: SaaSCity Launch Checklist by SaaSCity
+type: text/vnd.tiddlywiki
+url: https://github.com/nyyhao/tw5-saascity-launch-checklist
+
+An interactive SaaS launch readiness checklist and live completion score plugin for ~TiddlyWiki5 by [[SaaSCity|https://saascity.io]], with 16 launch checks across technical SEO, Open Graph metadata, conversion readiness, and directory distribution.
+
+{{!!url}}
